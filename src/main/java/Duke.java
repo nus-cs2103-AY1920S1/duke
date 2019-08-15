@@ -25,10 +25,18 @@ public class Duke {
                 markAsDone(num);
 
             } else if (command.split(" ")[0].equals("todo")){
+                int spaceIndex = command.indexOf(" ");
+                addToDo(command.substring(spaceIndex+1));
 
-                addToDo(command.split(" ")[1]);
+            } else if (command.split(" ")[0].equals("deadline")) {
 
-
+                int spaceIndex = command.indexOf(" ");
+                int backslashIndex = command.indexOf("/");
+                addDeadline(command.substring(spaceIndex+1, backslashIndex-1), command.substring(backslashIndex+4));
+            } else if (command.split(" ")[0].equals("event")) {
+                int spaceIndex = command.indexOf(" ");
+                int backslashIndex = command.indexOf("/");
+                addEvent(command.substring(spaceIndex+1, backslashIndex-1), command.substring(backslashIndex+4));
             }
 
             command = sc.nextLine();
@@ -68,5 +76,21 @@ public class Duke {
         System.out.println("Got it. I've added this task: ");
         System.out.println(String.format("    %s", arr.get(arr.size()-1).toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
+   }
+
+   public static void addDeadline(String taskName, String datetime) {
+        Deadline deadline = new Deadline(taskName,datetime);
+
+        arr.add(deadline);
+
+        printAddedTask();
+   }
+
+   public static void addEvent(String taskName, String datetime) {
+        Event e = new Event(taskName, datetime);
+
+        arr.add(e);
+
+        printAddedTask();
    }
 }

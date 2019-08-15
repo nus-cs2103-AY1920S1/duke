@@ -19,4 +19,11 @@ public class Event extends Task{
 	public void setDatetime(String datetime) {
 		this.datetime = datetime;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("[%s][%s] %s (at: %s)",
+				this.getType() ,isDone ? "\u2713": "\u2718",
+				this.taskName, this.datetime);
+	}
 }

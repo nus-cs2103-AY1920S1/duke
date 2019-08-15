@@ -4,6 +4,15 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
 
+        System.out.println("Hello I'm Duke! \nWhat can I do for you?");
+        Scanner sc = new Scanner(System.in);
+
+        String command = sc.nextLine();
+        while (! command.toLowerCase().equals("bye")) {
+            System.out.println(command);
+            command = sc.nextLine();
+        }
+        /*
         ArrayList<String> arr = new ArrayList<>();
 
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
@@ -25,7 +34,7 @@ public class Duke {
 
             command = sc.nextLine();
         }
-
+        */
         System.out.println("Bye. Hope to see you again!");
 
    }

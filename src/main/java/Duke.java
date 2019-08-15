@@ -26,5 +26,7 @@ public class Duke {
             command = sc.nextLine();
         }
 
+        System.out.println("Bye. Hope to see you again!");
+
    }
 }

@@ -30,4 +30,8 @@ public class Task {
     public String getStatusWithDescription() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
+
+    public String toString() {
+        return getStatusWithDescription();
+    }
 }

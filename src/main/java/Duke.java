@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    //enum TaskType { TODO, DEADLINE, EVENT; }
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -26,7 +27,7 @@ public class Duke {
                     for (int i = 0; i < taskList.size(); i++) {
                         StringBuilder sb = new StringBuilder();
                         Task t = taskList.get(i);
-                        sb.append(i+1).append(". ").append(t.getStatusWithDescription());
+                        sb.append(i+1).append(". ").append(t);
                         System.out.println(sb);
                     }
                     break;
@@ -42,6 +43,12 @@ public class Duke {
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             System.out.println(e);
                         }
+                    } else if (s.indexOf("todo ") == 0) {
+                        insertNewTask(taskList, new Todo(s));
+                    } else if (s.indexOf("event ") == 0) {
+                        insertNewTask(taskList, new Event(s));
+                    } else if (s.indexOf("deadline ") == 0) {
+                        insertNewTask(taskList, new Deadline(s));
                     } else {//Add item
                         taskList.add(new Task(s));
                         System.out.println("added: " + s);
@@ -50,5 +57,12 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void insertNewTask(List<Task> taskList, Task taskToInsert) {
+        System.out.println("Got it. I've added this task: ");
+        taskList.add(taskToInsert);
+        System.out.println("  " + taskToInsert.toString());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 }

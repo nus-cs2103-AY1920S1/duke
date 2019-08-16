@@ -6,7 +6,7 @@ public class Duke {
         String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(welcomeMessage);
         Scanner reader = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         while (true) {
             String currentLine = reader.nextLine();
@@ -15,13 +15,20 @@ public class Duke {
                 break;
             } else if (currentLine.equals("list")) {
                 int count = 1;
-                for (String s: list) {
-                    System.out.println("" + count + ". " + s);
+                System.out.println("Here are the tasks in your list:");
+                for (Task task: list) {
+                    System.out.println("" + count + ". " + task);
                     count++;
                 }
             } else {
-                list.add(currentLine);
-                System.out.println("added: " + currentLine);
+                if (currentLine.startsWith("done")) {
+                    int index = Integer.parseInt(currentLine.split(" ")[1]);
+                    list.get(index - 1).setDone();
+                } else {
+                    Task current = new Task(currentLine);
+                    list.add(current);
+                    System.out.println("added: " + currentLine);
+                }
             }
         }
     }

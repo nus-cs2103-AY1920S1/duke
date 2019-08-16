@@ -35,9 +35,20 @@ public class Duke {
                 printPrompt("Nice! I've marked this task as done:");
                 printPrompt("  " + currTask);
             } else {
-                Task t = new Task(cmd);
+                Task t = null;
+                if (cmd.startsWith("deadline")) {
+                    t = Deadline.parse(cmd);
+                } else if (cmd.startsWith("event")) {
+                    t = Event.parse(cmd);
+                } else if (cmd.startsWith("todo")) {
+                    t = Todo.parse(cmd);
+                }
                 tasks.add(t);
-                printPrompt("added: " + t);
+                int numTasks = tasks.size();
+                printPrompt("Got it. I've added this task:");
+                printPrompt("  " + t);
+                printPrompt("Now you have " + numTasks + " task" + 
+                            (numTasks == 1 ? "" : "s") + " in the list.");
             }
         }
         

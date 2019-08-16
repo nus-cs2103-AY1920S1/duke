@@ -48,6 +48,18 @@ public class Duke {
                     successMessage.add("  " + formatTask(t));
 
                     ui.printBlock(successMessage.toString());
+                } else if (input.startsWith("delete ")) {
+                    final String[] command = input.split(" ");
+                    final int taskIndex = Integer.parseInt(command[1]);
+
+                    Task t = tasks.get(taskIndex - 1);
+                    tasks.remove(taskIndex - 1);
+
+                    StringJoiner successMessage = UserInterface.createStringJoiner("Noted. I've removed this task:");
+                    successMessage.add("  " + formatTask(t));
+                    successMessage.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+
+                    ui.printBlock(successMessage.toString());
                 } else {
                     try{
                         Task t = null;

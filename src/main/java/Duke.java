@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,19 +13,31 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
+        //intialize an arraylist to store strings
+        List<String> store = new ArrayList<>();
         Scanner myScanner = new Scanner(System.in);
         String argument = myScanner.nextLine();
-
+        //when user input is not bye
         while (!argument.equals("bye") && !argument.equals("Bye")) {
-            System.out.println(" " + argument);
-            argument = myScanner.nextLine();
-
+            if (argument.equals("list")) {
+                int num = 1;
+                System.out.println("Here are the tasks in your lists:");
+                for (String i : store) {
+                    System.out.println( " " + num + ": " + i);
+                    num++;
+                }
+                argument = myScanner.nextLine();
+            } else {
+                System.out.println(" added: " + argument);
+                store.add(argument);
+                argument = myScanner.nextLine();
+            }
         }
+
+        //exiting program
         System.out.println(" Bye. Hope to see you again soon!");
         myScanner.close();
     }
 
-    static void printLine() {
-        System.out.println("_________)
-    }
+
 }

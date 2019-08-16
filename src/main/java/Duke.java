@@ -49,37 +49,48 @@ public class Duke {
 
                     ui.printBlock(successMessage.toString());
                 } else {
-                    Task t = null;
+                    try{
+                        Task t = null;
 
-                    final String COMMAND_TOKEN_TODO = "todo ";
-                    final String COMMAND_TOKEN_DEADLINE = "deadline ";
-                    final String COMMAND_TOKEN_EVENT = "event ";
+                        final String COMMAND_TOKEN_TODO = "todo ";
+                        final String COMMAND_TOKEN_DEADLINE = "deadline ";
+                        final String COMMAND_TOKEN_EVENT = "event ";
 
-                    if (input.startsWith(COMMAND_TOKEN_TODO)) {
-                        String todoDescription = input.substring(COMMAND_TOKEN_TODO.length());
+                        if (input.startsWith(COMMAND_TOKEN_TODO)) {
+                            String todoDescription = input.substring(COMMAND_TOKEN_TODO.length());
 
-                        t = new Todo(todoDescription);
-                    } else if (input.startsWith(COMMAND_TOKEN_DEADLINE)) {
-                        final String[] deadlineArgs = input.substring(COMMAND_TOKEN_DEADLINE.length()).split(" /by ");
-                        final String deadlineDescription = deadlineArgs[0];
-                        final String deadlineDue = deadlineArgs[1];
+                            if(todoDescription.isEmpty()){
+                                throw new EmptyTaskDescriptionException("The description of a todo cannot be empty.");
+                            }
 
-                        t = new Deadline(deadlineDescription, deadlineDue);
-                    } else if (input.startsWith(COMMAND_TOKEN_EVENT)) {
-                        final String[] eventArgs = input.substring(COMMAND_TOKEN_EVENT.length()).split(" /at ");
-                        final String eventDescription = eventArgs[0];
-                        final String eventDateTime = eventArgs[1];
+                            t = new Todo(todoDescription);
+                        } else if (input.startsWith(COMMAND_TOKEN_DEADLINE)) {
+                            final String[] deadlineArgs = input.substring(COMMAND_TOKEN_DEADLINE.length()).split(" /by ");
+                            final String deadlineDescription = deadlineArgs[0];
+                            final String deadlineDue = deadlineArgs[1];
 
-                        t = new Event(eventDescription, eventDateTime);
+                            t = new Deadline(deadlineDescription, deadlineDue);
+                        } else if (input.startsWith(COMMAND_TOKEN_EVENT)) {
+                            final String[] eventArgs = input.substring(COMMAND_TOKEN_EVENT.length()).split(" /at ");
+                            final String eventDescription = eventArgs[0];
+                            final String eventDateTime = eventArgs[1];
+
+                            t = new Event(eventDescription, eventDateTime);
+                        } else {
+                            throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
+                        }
+
+                        tasks.add(t);
+
+                        StringJoiner successMessage = UserInterface.createStringJoiner("Got it. I've added this task: ");
+                        successMessage.add("  " + formatTask(t));
+                        successMessage.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        ui.printBlock(successMessage.toString());
+                        ui.println();
+                    } catch (DukeException exc){
+                        ui.printBlock(" ☹ OOPS!!! " + exc.getMessage());
+                        ui.println();
                     }
-
-                    tasks.add(t);
-
-                    StringJoiner successMessage = UserInterface.createStringJoiner("Got it. I've added this task: ");
-                    successMessage.add("  " + formatTask(t));
-                    successMessage.add(String.format("Now you have %d tasks in the list.", tasks.size()));
-                    ui.printBlock(successMessage.toString());
-                    ui.println();
                 }
             }
         }

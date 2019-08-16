@@ -22,10 +22,9 @@ public class Duke {
                 ui.printBlock("Bye. Hope to see you again soon!");
                 break;
             case "list":
-                StringJoiner taskListDisplay = new StringJoiner(System.lineSeparator());
                 int listIdx = 1;
 
-                taskListDisplay.add("Here are the tasks in your list:");
+                StringJoiner taskListDisplay = UserInterface.createStringJoiner("Here are the tasks in your list:");
                 for (Task task : tasks) {
                     final String formattedTask = String.format("%d.[%s] %s", listIdx, task.getStatusIcon(), task.getDescription());
                     taskListDisplay.add(formattedTask);
@@ -45,8 +44,7 @@ public class Duke {
                     Task t = tasks.get(taskIndex - 1);
                     t.markAsDone();
 
-                    StringJoiner successMessage = new StringJoiner(System.lineSeparator());
-                    successMessage.add("Nice! I've marked this task as done:");
+                    StringJoiner successMessage = UserInterface.createStringJoiner("Nice! I've marked this task as done:");
                     final String formattedTask = String.format("  [%s] %s", t.getStatusIcon(), t.getDescription());
                     successMessage.add(formattedTask);
 

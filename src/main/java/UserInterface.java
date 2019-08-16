@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
 public class UserInterface {
@@ -57,5 +58,26 @@ public class UserInterface {
         printHorizontalLine();
         println(content);
         printHorizontalLine();
+    }
+
+    /**
+     * A convenience method to create a {@code StringJoiner} using the system's newline separator.
+     *
+     * @return A new instance of {@code StringJoiner}.
+     */
+    public static StringJoiner createStringJoiner() {
+        return new StringJoiner(System.lineSeparator());
+    }
+
+    /**
+     * A convenience method to create a {@code StringJoiner} using the system's
+     * newline separator initialized with the contents of the specified string.
+     *
+     * @return A new instance of {@code StringJoiner} with the contents of the specified string.
+     */
+    public static StringJoiner createStringJoiner(String str) {
+        StringJoiner instance = createStringJoiner();
+        instance.add(str);
+        return instance;
     }
 }

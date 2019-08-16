@@ -52,7 +52,7 @@ public class Duke {
         items.add(item);
 
         printSeparator();
-        System.out.println("added: " + item);
+        System.out.println(" added: " + item);
         printSeparator();
         System.out.println();
     }
@@ -60,7 +60,7 @@ public class Duke {
     public static void printItems() {
         printSeparator();
         for (int i = 0; i < items.size(); i++) {
-            String output = String.format("%d. %s", i + 1, items.get(i));
+            String output = String.format(" %d. %s", i + 1, items.get(i));
             System.out.println(output);
         }
         printSeparator();

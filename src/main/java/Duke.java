@@ -27,7 +27,7 @@ public class Duke {
                     for (int i = 0; i < taskList.size(); i++) {
                         StringBuilder sb = new StringBuilder();
                         Task t = taskList.get(i);
-                        sb.append(i+1).append(". ").append(t);
+                        sb.append(i+1).append(" ").append(t);
                         System.out.println(sb);
                     }
                     break;
@@ -39,7 +39,7 @@ public class Duke {
                             Task t = taskList.get(index);
                             t.markAsDone(true);
                             System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println(t.getStatusWithDescription());
+                            System.out.println("  " + t);
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             System.out.println(e);
                         }

@@ -1,0 +1,7 @@
+todo something
+event dinner /at mondays
+deadline project /by thursdays
+list
+done 2
+list
+bye

@@ -45,7 +45,7 @@ public class Duke {
                             break;
                         case "event":
                             String[] event = deadlineEventString(strArr, false);
-                            t = new Deadlines(event[0], event[1]);
+                            t = new Event(event[0], event[1]);
                             list.add(t);
                             System.out.println("Got it. I've added this task: ");
                             System.out.println("  " + t);

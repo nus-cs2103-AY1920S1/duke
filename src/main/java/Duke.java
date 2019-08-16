@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    static List<String> items = new ArrayList<>();
+    static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -17,11 +17,20 @@ public class Duke {
                 printExitMessage();
                 break;
             } else if (command.equals("list")) {
-                printItems();
-                continue;
-            }
+                printTasks();
+            } else if (command.startsWith("done")) {
+                String[] subArgs = command.split("\\s+");
+                if (subArgs.length > 0) {
+                    int index = Integer.parseInt(subArgs[1]);
 
-            addItem(command);
+                    if (index >= 1) {
+                        index--;
+                        markAndPrintTaskAsDone(index);
+                    }
+                }
+            } else {
+                addTask(command);
+            }
         }
     }
 
@@ -44,25 +53,29 @@ public class Duke {
         System.out.println();
     }
 
-    public static void addItem(String item) {
-        if (item.isEmpty()) {
+    public static void addTask(String task) {
+        if (task.isEmpty()) {
             return;
         }
 
-        items.add(item);
+        taskManager.addTask(new Task(task));
 
         printSeparator();
-        System.out.println(" added: " + item);
+        System.out.println(" added: " + task);
         printSeparator();
         System.out.println();
     }
 
-    public static void printItems() {
+    public static void printTasks() {
         printSeparator();
-        for (int i = 0; i < items.size(); i++) {
-            String output = String.format(" %d. %s", i + 1, items.get(i));
-            System.out.println(output);
-        }
+        taskManager.printTasks();
+        printSeparator();
+        System.out.println();
+    }
+
+    public static void markAndPrintTaskAsDone(int index) {
+        printSeparator();
+        taskManager.markAsDone(index);
         printSeparator();
         System.out.println();
     }

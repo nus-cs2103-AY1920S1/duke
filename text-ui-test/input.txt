@@ -13,6 +13,6 @@ list
 done 2
 list
 done 3
-done 1
+delete 1
 list
 bye

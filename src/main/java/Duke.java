@@ -3,7 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    enum TaskType {todo, deadline, event; }
+    enum TaskType { todo, deadline, event }
+    enum CommandType { done, delete }
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -37,16 +38,9 @@ public class Duke {
                     break;
                 default:
                     if (s.indexOf("done") == 0) {//Set task to done
-                        try {
-                            int index = Integer.parseInt(s.replace("done", "").trim());
-                            index--;//0 Bounded
-                            Task t = taskList.get(index);
-                            t.markAsDone(true);
-                            System.out.println("Nice! I've marked this task as done: ");
-                            System.out.println("  " + t);
-                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                            System.out.println("☹ OOPS!!! The index is invalid.");
-                        }
+                        indexBasedCommand(taskList, CommandType.done, s);
+                    } else if (s.indexOf("delete") == 0) {
+                    indexBasedCommand(taskList, CommandType.delete, s);
                     } else if (s.indexOf("todo") == 0) {
                         insertByCommand(taskList, TaskType.todo, s);
                     } else if (s.indexOf("event") == 0) {
@@ -62,6 +56,27 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void indexBasedCommand(List<Task> taskList, CommandType commandType, String command) {
+        try {
+            int index = -1;//0 Bounded
+            if (commandType.equals(CommandType.done)) {
+                index += Integer.parseInt(command.replace("done", "").trim());
+                Task t = taskList.get(index);
+                t.markAsDone(true);
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("  " + t);
+            } else if (commandType.equals(CommandType.delete)) {
+                index += Integer.parseInt(command.replace("delete", "").trim());
+                Task t = taskList.remove(index);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println("  " + t.toString());
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            System.out.println("☹ OOPS!!! The index is invalid.");
+        }
     }
 
     public static void insertByCommand(List<Task> taskList, TaskType taskType, String line) {

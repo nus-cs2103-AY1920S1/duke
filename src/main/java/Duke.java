@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    public static Task[] tasks = new Task[100];
+    public static int counter = 0;
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -22,9 +26,13 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 hasTerminated = true;
+            } else if (input.equals("list")) {
+                sendLine();
+                sendTasks();
+                sendLine();
             } else {
                 sendLine();
-                sendMessage(input);
+                addTask(input);
                 sendLine();
             }
         }
@@ -33,6 +41,23 @@ public class Duke {
         sendFarewell();;
         sendLine();
 
+    }
+
+    public static void addTask(String todo) {
+        if (counter >= 100) {
+            sendMessage("You only can add up to 100 tasks!");
+        } else {
+            tasks[counter] = new Task(todo);
+            counter ++;
+            sendMessage("added: " + todo);
+        }
+    }
+
+    public static void sendTasks() {
+        for (int tasknum = 0; tasknum < counter; tasknum ++) {
+            String todo = tasks[tasknum].toString();
+            sendMessage((tasknum + 1) + ". " + todo);
+        }
     }
 
     public static void sendLine() {

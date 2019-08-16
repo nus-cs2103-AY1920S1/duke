@@ -24,6 +24,7 @@ public class Duke {
                 String[] strArr = currentLine.split(" ");
                 String command = strArr[0];
                 Task t;
+                int index;
                 try {
                     switch (command) {
                         case "todo":
@@ -51,8 +52,15 @@ public class Duke {
                             System.out.println("Now you have " + list.size() + " tasks in the list.");
                             break;
                         case "done":
-                            int index = Integer.parseInt(strArr[1]);
+                            index = Integer.parseInt(strArr[1]);
                             list.get(index - 1).setDone();
+                            break;
+                        case "delete":
+                            index = Integer.parseInt(strArr[1]);
+                            Task deleted = list.remove(index - 1);
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println("  " + deleted);
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
                             break;
                         default:
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

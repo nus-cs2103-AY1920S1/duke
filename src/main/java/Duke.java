@@ -23,23 +23,38 @@ public class Duke {
                 int num = 1;
                 System.out.println("Here are the tasks in your list:");
                 for (Task i : store) {
-                    System.out.println(+ num + ". " + i);
+                    System.out.println(+num + ". " + i);
                     num++;
                 }
                 argument = myScanner.nextLine();
             } else {
                 String[] argumentArray = argument.split(" ");
                 if (argumentArray[0].equals("done")) {
-                    int index = Integer.valueOf(argumentArray[1]) - 1;
-                    Task taskToModify = store.get(index);
-                    taskToModify.markAsDone();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(taskToModify);
-                    argument = myScanner.nextLine();
-                } else if (argumentArray[0].equals("todo")) {
                     try {
                         if (argumentArray.length == 1) {
-                            throw new DukeException( "☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a done command cannot be empty.");
+                        }
+
+                        int index = Integer.valueOf(argumentArray[1]) - 1;
+                        //catch task number not in list error
+                        if (index >= store.size() || index < 0) {
+                            throw new DukeException("Task number inputted is not in current list");
+                        }
+                        Task taskToModify = store.get(index);
+                        taskToModify.markAsDone();
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println(taskToModify);
+                        //argument = myScanner.nextLine();
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    } finally {
+                        argument = myScanner.nextLine();
+                    }
+                } else if (argumentArray[0].equals("todo")) {
+                    try {
+                        //catch empty desc error
+                        if (argumentArray.length == 1) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         //form back string
                         String toDoTaskString = "";
@@ -54,66 +69,94 @@ public class Duke {
                         printGotIt();
                         System.out.println(" " + toDoTask.toString());
                         printNow(store.size());
-                        argument = myScanner.nextLine();
-                    } catch(DukeException e) {
+                        //argument = myScanner.nextLine();
+                    } catch (DukeException e) {
                         System.out.println(e);
                     } finally {
                         argument = myScanner.nextLine();
                     }
                 } else if (argumentArray[0].equals("deadline")) {
-                    //form back string , description stops at /by
-                    //date time starts from /by
-                    String deadlineTaskDescriptionString = "";
-                    String deadlineTaskDateAndTimeString = "";
-                    boolean createDesc = true;
-                    for (int i = 1; i < argumentArray.length; i++) {
-                        if (argumentArray[i].equals("/by")) {
-                            createDesc = false;
-                        } else if (createDesc) {
-                            deadlineTaskDescriptionString += argumentArray[i];
-                            deadlineTaskDescriptionString += " ";
-                        } else {
-                            deadlineTaskDateAndTimeString += argumentArray[i];
-                            deadlineTaskDateAndTimeString += " ";
-
+                    try {
+                        //catch empty desc error
+                        if (argumentArray.length == 1) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
-                    }
+                        //form back string , description stops at /by
+                        //date time starts from /by
+                        String deadlineTaskDescriptionString = "";
+                        String deadlineTaskDateAndTimeString = "";
+                        boolean createDesc = true;
+                        //catch error of no specific date time after /by
+                        if (argumentArray[argumentArray.length -1].matches("/by")) {
+                            throw new DukeException("Oops, no specific date/time supplied");
+                        }
 
-                    //use .trim() method to eliminate trailing white space
-                    Task deadlineTask = new Deadline(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
-                    store.add(deadlineTask);
-                    printGotIt();
-                    System.out.println(" " + deadlineTask.toString());
-                    printNow(store.size());
-                    argument = myScanner.nextLine();
+                        for (int i = 1; i < argumentArray.length; i++) {
+                            if (argumentArray[i].equals("/by")) {
+                                createDesc = false;
+                            } else if (createDesc) {
+                                deadlineTaskDescriptionString += argumentArray[i];
+                                deadlineTaskDescriptionString += " ";
+                            } else {
+                                deadlineTaskDateAndTimeString += argumentArray[i];
+                                deadlineTaskDateAndTimeString += " ";
+
+                            }
+                        }
+
+                        //use .trim() method to eliminate trailing white space
+                        Task deadlineTask = new Deadline(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
+                        store.add(deadlineTask);
+                        printGotIt();
+                        System.out.println(" " + deadlineTask.toString());
+                        printNow(store.size());
+                        //argument = myScanner.nextLine();
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    } finally {
+                        argument = myScanner.nextLine();
+                    }
                 } else if (argumentArray[0].equals("event")) {
-                    //form back string , description stops at /at
-                    //date time starts from /at
-                    String eventTaskDescriptionString = "";
-                    String eventTaskDateAndTimeString = "";
-                    boolean createDesc = true;
-                    for (int i = 1; i < argumentArray.length; i++) {
-                        if (argumentArray[i].equals("/at")) {
-                            createDesc = false;
-                        } else if (createDesc) {
-                            eventTaskDescriptionString += argumentArray[i];
-                            eventTaskDescriptionString += " ";
-                        } else {
-                            eventTaskDateAndTimeString += argumentArray[i];
-                            eventTaskDateAndTimeString += " ";
-
+                    try {
+                        //catch empty desc error
+                        if (argumentArray.length == 1) {
+                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                         }
-                    }
-                    //use of .trim() to avoid trailing whitespace
-                    Task eventTask = new Event(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
-                    store.add(eventTask);
-                    printGotIt();
-                    System.out.println(" " + eventTask.toString());
-                    printNow(store.size());
-                    argument = myScanner.nextLine();
-                }
+                        //form back string , description stops at /at
+                        //date time starts from /at
+                        String eventTaskDescriptionString = "";
+                        String eventTaskDateAndTimeString = "";
+                        boolean createDesc = true;
+                        //catch error of no specific date time after /at
+                        if (argumentArray[argumentArray.length -1].matches("/at")) {
+                            throw new DukeException("Oops, no specific duration supplied");
+                        }
 
-                else {
+                        for (int i = 1; i < argumentArray.length; i++) {
+                            if (argumentArray[i].equals("/at")) {
+                                createDesc = false;
+                            } else if (createDesc) {
+                                eventTaskDescriptionString += argumentArray[i];
+                                eventTaskDescriptionString += " ";
+                            } else {
+                                eventTaskDateAndTimeString += argumentArray[i];
+                                eventTaskDateAndTimeString += " ";
+
+                            }
+                        }
+                        //use of .trim() to avoid trailing whitespace
+                        Task eventTask = new Event(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
+                        store.add(eventTask);
+                        printGotIt();
+                        System.out.println(" " + eventTask.toString());
+                        printNow(store.size());
+                        //argument = myScanner.nextLine();
+                    } catch (DukeException e) {
+                        System.out.println(e);
+                    } finally {
+                        argument = myScanner.nextLine();
+                    }
+                } else {
                     /*Task incomingTask = new Task(argument);
                     store.add(incomingTask);
                     System.out.println("added: " + argument);
@@ -121,7 +164,7 @@ public class Duke {
                     try {
                         //handles error for not recognized command
                         throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }catch(DukeException e) {
+                    } catch (DukeException e) {
                         System.out.println(e);
                     } finally {
                         argument = myScanner.nextLine();

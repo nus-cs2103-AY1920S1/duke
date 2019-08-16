@@ -37,20 +37,29 @@ public class Duke {
                     System.out.println(taskToModify);
                     argument = myScanner.nextLine();
                 } else if (argumentArray[0].equals("todo")) {
-                    //form back string
-                    String toDoTaskString = "";
-                    for (int i = 1; i < argumentArray.length; i++) {
-                        toDoTaskString += argumentArray[i];
-                        toDoTaskString += " ";
+                    try {
+                        if (argumentArray.length == 1) {
+                            throw new DukeException( "☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        //form back string
+                        String toDoTaskString = "";
+                        for (int i = 1; i < argumentArray.length; i++) {
+                            toDoTaskString += argumentArray[i];
+                            toDoTaskString += " ";
 
+                        }
+                        //.trim() to remove trailing space
+                        Task toDoTask = new ToDo(toDoTaskString.trim());
+                        store.add(toDoTask);
+                        printGotIt();
+                        System.out.println(" " + toDoTask.toString());
+                        printNow(store.size());
+                        argument = myScanner.nextLine();
+                    } catch(DukeException e) {
+                        System.out.println(e);
+                    } finally {
+                        argument = myScanner.nextLine();
                     }
-                    //.trim() to remove trailing space
-                    Task toDoTask = new ToDo(toDoTaskString.trim());
-                    store.add(toDoTask);
-                    printGotIt();
-                    System.out.println(" " + toDoTask.toString());
-                    printNow(store.size());
-                    argument = myScanner.nextLine();
                 } else if (argumentArray[0].equals("deadline")) {
                     //form back string , description stops at /by
                     //date time starts from /by
@@ -105,10 +114,18 @@ public class Duke {
                 }
 
                 else {
-                    Task incomingTask = new Task(argument);
+                    /*Task incomingTask = new Task(argument);
                     store.add(incomingTask);
                     System.out.println("added: " + argument);
-                    argument = myScanner.nextLine();
+                    argument = myScanner.nextLine();*/
+                    try {
+                        //handles error for not recognized command
+                        throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }catch(DukeException e) {
+                        System.out.println(e);
+                    } finally {
+                        argument = myScanner.nextLine();
+                    }
                 }
             }
         }

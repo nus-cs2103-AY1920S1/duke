@@ -17,6 +17,7 @@ public class Duke {
             printSeparator();
             System.out.println(" " + command);
             printSeparator();
+            System.out.println();
         }
     }
 
@@ -29,11 +30,13 @@ public class Duke {
         System.out.println(" Hello! I'm Duke");
         System.out.println(" What can I do for you?");
         printSeparator();
+        System.out.println();
     }
 
     public static void printExitMessage() {
         printSeparator();
         System.out.println(" Bye. Hope to see you again soon!");
         printSeparator();
+        System.out.println();
     }
 }

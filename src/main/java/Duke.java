@@ -21,41 +21,50 @@ public class Duke {
                     count++;
                 }
             } else {
-                System.out.println("Got it. I've added this task: ");
                 String[] strArr = currentLine.split(" ");
                 String command = strArr[0];
                 Task t;
-                switch (command) {
-                    case "todo":
-                        String todo = toDoString(strArr);
-                        t = new ToDo(todo);
-                        list.add(t);
-                        System.out.println("  " + t);
-                        break;
-                    case "deadline":
-                        String[] deadline = deadlineEventString(strArr, true);
-                        t = new Deadlines(deadline[0], deadline[1]);
-                        list.add(t);
-                        System.out.println("  " + t);
-                        break;
-                    case "event":
-                        String[] event = deadlineEventString(strArr, false);
-                        t = new Deadlines(event[0], event[1]);
-                        list.add(t);
-                        System.out.println("  " + t);
-                        break;
-                    case "done":
-                        int index = Integer.parseInt(strArr[1]);
-                        list.get(index - 1).setDone();
-                        break;
-                    default:
+                try {
+                    switch (command) {
+                        case "todo":
+                            String todo = toDoString(strArr);
+                            t = new ToDo(todo);
+                            list.add(t);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println("  " + t);
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                            break;
+                        case "deadline":
+                            String[] deadline = deadlineEventString(strArr, true);
+                            t = new Deadlines(deadline[0], deadline[1]);
+                            list.add(t);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println("  " + t);
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                            break;
+                        case "event":
+                            String[] event = deadlineEventString(strArr, false);
+                            t = new Deadlines(event[0], event[1]);
+                            list.add(t);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println("  " + t);
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                            break;
+                        case "done":
+                            int index = Integer.parseInt(strArr[1]);
+                            list.get(index - 1).setDone();
+                            break;
+                        default:
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e);
                 }
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
     }
 
-    private static String[] deadlineEventString(String[] arr, boolean deadline) {
+    private static String[] deadlineEventString(String[] arr, boolean deadline) throws DukeException {
         String[] res = new String[2];
         StringBuilder sb = new StringBuilder();
         int divide = 0;
@@ -68,6 +77,8 @@ public class Duke {
             sb.append(" ");
         }
         res[0] = sb.toString().trim();
+        if (res[0].isEmpty())
+            throw new DukeException("☹ OOPS!!! The description of a " + (deadline ? "deadline" : "event") + " cannot be empty.");
         sb = new StringBuilder();
         for (int i = divide + 1; i < arr.length; i++) {
             sb.append(arr[i]);
@@ -77,12 +88,15 @@ public class Duke {
         return res;
     }
 
-    private static String toDoString(String[] arr) {
+    private static String toDoString(String[] arr) throws DukeException {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < arr.length; i++) {
             sb.append(arr[i]);
             sb.append(" ");
         }
-        return sb.toString().trim();
+        String res = sb.toString().trim();
+        if (res.isEmpty())
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        return res;
     }
 }

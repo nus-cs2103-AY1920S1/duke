@@ -1,8 +1,7 @@
 public class Deadline extends TaskWithDate {
 
-    public Deadline(String line) {
-        super(line);
-        rebuild(extractDataFromLine(description, " /by "));
+    public Deadline(String description, String date) {
+        super(description, date);
     }
 
     @Override

@@ -1,7 +1,18 @@
+todo
+event
+deadline
+done
+done -1
+done 1
+list
+todo1
 todo something
 event dinner /at mondays
 deadline project /by thursdays
 list
 done 2
+list
+done 3
+done 1
 list
 bye

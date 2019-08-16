@@ -31,6 +31,15 @@ public class Task {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 
+    public static boolean validateData(String description, String taskName) {
+        if (description.length() <= 0) {
+            System.out.println("☹ OOPS!!! The description of a " + taskName + " cannot be empty.");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         return getStatusWithDescription();
     }

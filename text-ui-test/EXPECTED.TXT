@@ -1,5 +1,13 @@
 Hello! I'm Duke
 What can I do for you?
+â˜¹ OOPS!!! The description of a todo cannot be empty.
+â˜¹ OOPS!!! The description of a event cannot be empty.
+â˜¹ OOPS!!! The description of a deadline cannot be empty.
+â˜¹ OOPS!!! The index is invalid.
+â˜¹ OOPS!!! The index is invalid.
+â˜¹ OOPS!!! The index is invalid.
+There are no tasks in your list.
+â˜¹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Got it. I've added this task: 
   [T][✘] something
 Now you have 1 tasks in the list.
@@ -19,4 +27,12 @@ Here are the tasks in your list:
 1 [T][✘] something
 2 [E][✓] dinner (at: mondays)
 3 [D][✘] project (by: thursdays)
+Nice! I've marked this task as done: 
+  [D][✓] project (by: thursdays)
+Nice! I've marked this task as done: 
+  [T][✓] something
+Here are the tasks in your list:
+1 [T][✓] something
+2 [E][✓] dinner (at: mondays)
+3 [D][✓] project (by: thursdays)
 Bye. Hope to see you again soon!

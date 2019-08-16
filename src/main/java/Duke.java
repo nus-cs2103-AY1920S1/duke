@@ -1,10 +1,21 @@
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        UserInterface ui = new UserInterface();
+
+        ui.printBlock("Hello! I'm Duke\n" +
+                "What can I do for you?");
+        ui.println();
+
+        while (true) {
+            final String input = ui.nextLine();
+
+            if (input.equals("bye")) {
+                ui.printBlock("Bye. Hope to see you again soon!");
+                break;
+            } else {
+                ui.printBlock(input);
+                ui.println();
+            }
+        }
     }
 }

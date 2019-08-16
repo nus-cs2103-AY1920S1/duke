@@ -17,19 +17,72 @@ public class Duke {
                 int count = 1;
                 System.out.println("Here are the tasks in your list:");
                 for (Task task: list) {
-                    System.out.println("" + count + ". " + task);
+                    System.out.println("" + count + "." + task);
                     count++;
                 }
             } else {
-                if (currentLine.startsWith("done")) {
-                    int index = Integer.parseInt(currentLine.split(" ")[1]);
-                    list.get(index - 1).setDone();
-                } else {
-                    Task current = new Task(currentLine);
-                    list.add(current);
-                    System.out.println("added: " + currentLine);
+                System.out.println("Got it. I've added this task: ");
+                String[] strArr = currentLine.split(" ");
+                String command = strArr[0];
+                Task t;
+                switch (command) {
+                    case "todo":
+                        String todo = toDoString(strArr);
+                        t = new ToDo(todo);
+                        list.add(t);
+                        System.out.println("  " + t);
+                        break;
+                    case "deadline":
+                        String[] deadline = deadlineEventString(strArr, true);
+                        t = new Deadlines(deadline[0], deadline[1]);
+                        list.add(t);
+                        System.out.println("  " + t);
+                        break;
+                    case "event":
+                        String[] event = deadlineEventString(strArr, false);
+                        t = new Deadlines(event[0], event[1]);
+                        list.add(t);
+                        System.out.println("  " + t);
+                        break;
+                    case "done":
+                        int index = Integer.parseInt(strArr[1]);
+                        list.get(index - 1).setDone();
+                        break;
+                    default:
                 }
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
+    }
+
+    private static String[] deadlineEventString(String[] arr, boolean deadline) {
+        String[] res = new String[2];
+        StringBuilder sb = new StringBuilder();
+        int divide = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (deadline && arr[i].equals("/by") || !deadline && arr[i].equals("/at")) {
+                divide = i;
+                break;
+            }
+            sb.append(arr[i]);
+            sb.append(" ");
+        }
+        res[0] = sb.toString().trim();
+        sb = new StringBuilder();
+        for (int i = divide + 1; i < arr.length; i++) {
+            sb.append(arr[i]);
+            sb.append(" ");
+        }
+        res[1] = sb.toString().trim();
+        return res;
+    }
+
+    private static String toDoString(String[] arr) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < arr.length; i++) {
+            sb.append(arr[i]);
+            sb.append(" ");
+        }
+        return sb.toString().trim();
     }
 }

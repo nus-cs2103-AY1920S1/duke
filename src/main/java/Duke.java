@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         //intialize an arraylist to store strings
-        List<Task> store = new ArrayList<>();
+        List<Task> store = new ArrayList<Task>();
         Scanner myScanner = new Scanner(System.in);
         String argument = myScanner.nextLine();
         //when user input is not bye

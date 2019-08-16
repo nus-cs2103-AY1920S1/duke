@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,7 +18,7 @@ public class Duke {
     }
 
     public Duke() {
-        this.list = new ArrayList<String>();
+        this.list = new ArrayList<Task>();
     }
 
     public void runDuke() {
@@ -31,24 +31,25 @@ public class Duke {
                 isDone = true;
             } else if (input.equals("list")) {
                 printList();
+            } else if (input.startsWith("done ")) {
+                int oneBasedIndex = Integer.parseInt(input.replace("done ", ""));
+                markAsDone(oneBasedIndex);
             } else {
-                addToList(input);
+                addTaskToList(input);
             }
         }
 
         printExitMessage();
     }
 
-    public void printGreetingMessage() {
-        printMessage("Hello, I'm Duke\n\tWhat can I do for you?");
+    public void markAsDone(int oneBasedIndex) {
+        int zeroBasedIndex = oneBasedIndex - 1;
+        list.get(zeroBasedIndex).markAsDone();
+        printMessage("Nice! I've marked this task as done:\n\t\t" + list.get(zeroBasedIndex));
     }
 
-    public void printExitMessage() {
-        printMessage("Bye. Hope to see you again soon!");
-    }
-
-    public void addToList(String input) {
-        list.add(input);
+    public void addTaskToList(String input) {
+        list.add(new Task(input));
         printMessage("added: " + input);
     }
 
@@ -59,6 +60,14 @@ public class Duke {
             System.out.printf("\t%d. %s\n", oneBasedIndex, list.get(i));
         }
         printLine();
+    }
+
+    public void printGreetingMessage() {
+        printMessage("Hello, I'm Duke\n\tWhat can I do for you?");
+    }
+
+    public void printExitMessage() {
+        printMessage("Bye. Hope to see you again soon!");
     }
 
     public void printMessage(String message) {

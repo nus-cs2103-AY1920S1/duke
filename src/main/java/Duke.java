@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,9 +15,23 @@ public class Duke {
         */
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
+        List<String> list = new ArrayList<>();
         String s;
-        while (!(s = sc.nextLine()).equals("bye")) {
-            System.out.println(s);
+        whileloop: while (true) {
+            s = sc.nextLine();
+            switch (s) {
+                case "bye"://exit
+                    break whileloop;
+                case "list"://list
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println((i+1) + ". " + list.get(i));
+                    }
+                    break;
+                default://Add item
+                    list.add(s);
+                    System.out.println("added: " + s);
+                    break;
+            }
         }
         System.out.println("Bye. Hope to see you again soon!");
     }

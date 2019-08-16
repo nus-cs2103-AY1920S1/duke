@@ -2,6 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+    /**
+     * This is the main method and entry point for the Duke program.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> store = new ArrayList<>();

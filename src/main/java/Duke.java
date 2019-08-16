@@ -1,11 +1,30 @@
 import java.util.*;
 
+class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public String getStatus() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
+}
+
 public class Duke {
-    private static ArrayList<String> list =  new ArrayList<String>();
+
+    private static ArrayList<Task> list =  new ArrayList<Task>();
     public static void showList() {
         int counter = 0;
-        for (String item : list) {
-            System.out.println(++counter + ". " + item);
+        for (Task item : list) {
+            System.out.println(++counter + "." + item.getStatus());
         }
     }
 
@@ -26,8 +45,10 @@ public class Duke {
             
             while (active && scanner.hasNextLine()) {
                 String input = scanner.nextLine();
+                String[] input_split = input.split(" ");
+                String command = input_split[0];
 
-                switch (input) {
+                switch (command) {
                     case "bye":
                     active = false;
                     System.out.println("Bye. Hope to see you again soon!");
@@ -35,8 +56,18 @@ public class Duke {
                     case "list":
                     showList();
                     break;
+                    case "done":
+                    if (input_split.length < 2) {
+                        System.out.println("What have you done?");
+                        break;
+                    }
+                    Task removedTask = list.remove(Integer.valueOf(input_split[1]) - 1);
+                    System.out.println("Nice! I've marked this task as done: \n" + 
+                        "  " + removedTask.getStatus());
+                    break;
                     default:
-                    list.add(input);
+                    Task task = new Task(input);
+                    list.add(task);
                     System.out.println("added: " + input);
                 }
             }

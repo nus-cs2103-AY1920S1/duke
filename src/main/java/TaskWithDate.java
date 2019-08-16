@@ -1,4 +1,4 @@
-public class TaskWithDate extends TaskWithPrefix {
+public class TaskWithDate extends Task {
     protected String date;
 
     public TaskWithDate(String line) {

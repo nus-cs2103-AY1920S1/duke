@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    //enum TaskType { TODO, DEADLINE, EVENT; }
+    enum TaskType { TODO, DEADLINE, EVENT; }
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -44,11 +44,11 @@ public class Duke {
                             System.out.println(e);
                         }
                     } else if (s.indexOf("todo ") == 0) {
-                        insertNewTask(taskList, new Todo(s));
+                        insertByCommand(taskList, TaskType.TODO, s);
                     } else if (s.indexOf("event ") == 0) {
-                        insertNewTask(taskList, new Event(s));
+                        insertByCommand(taskList, TaskType.EVENT, s);
                     } else if (s.indexOf("deadline ") == 0) {
-                        insertNewTask(taskList, new Deadline(s));
+                        insertByCommand(taskList, TaskType.DEADLINE, s);
                     } else {//Add item
                         taskList.add(new Task(s));
                         System.out.println("added: " + s);
@@ -57,6 +57,21 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void insertByCommand(List<Task> taskList, TaskType taskType, String line) {
+        String data = line.replaceFirst("^.*?\\s","");
+        switch (taskType) {
+            case TODO:
+                insertNewTask(taskList, new Todo(data));
+                break;
+            case EVENT:
+                insertNewTask(taskList, new Event(data));
+                break;
+            case DEADLINE:
+                insertNewTask(taskList, new Deadline(data));
+                break;
+        }
     }
 
     public static void insertNewTask(List<Task> taskList, Task taskToInsert) {

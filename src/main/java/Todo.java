@@ -1,4 +1,4 @@
-public class Todo extends TaskWithPrefix {
+public class Todo extends Task {
 
     public Todo(String description) {
         super(description);

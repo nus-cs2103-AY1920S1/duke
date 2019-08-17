@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 class Task {
     protected String description;
@@ -57,7 +58,6 @@ class Event extends Task {
 }
 
 public class Duke {
-
     private static ArrayList<Task> list =  new ArrayList<Task>();
     public static void showList() {
         int counter = 0;
@@ -114,19 +114,22 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        boolean active = true;
+        
+        try(Scanner scanner = new Scanner(System.in);
+            PrintStream out = new PrintStream(System.out, true, "UTF-8");
+            ) {
+            System.setOut(out);
+            boolean active = true;
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
 
-        String intro = "Hello! I'm Duke What can I do for you?";
-        System.out.println(intro);
-
-        try(Scanner scanner = new Scanner(System.in)) {
+            String intro = "Hello! I'm Duke What can I do for you?";
+            System.out.println(intro);
             
             while (active && scanner.hasNextLine()) {
                 String input = scanner.nextLine();
@@ -150,6 +153,7 @@ public class Duke {
                         break;
                     }
                     Task removedTask = list.remove(Integer.valueOf(input_split[1]) - 1);
+                    removedTask.isDone = true;
                     System.out.println("Nice! I've marked this task as done: \n" + 
                         "  " + removedTask.getStatus());
                     break;
@@ -178,6 +182,8 @@ public class Duke {
                     System.out.println("added: " + input);
                 }
             }
+        } catch (UnsupportedEncodingException e) {
+            System.out.println("whoops unsupported encoding: " + e.getMessage());
         };
         
     }

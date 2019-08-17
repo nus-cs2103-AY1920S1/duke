@@ -1,7 +1,7 @@
 package task;
 
+//@@author Parcly-Taxel
 public class Todo extends Task {
-    //@@author Parcly-Taxel
     /**
      * Initialises a Todo from its description.
      */
@@ -14,8 +14,7 @@ public class Todo extends Task {
      */
     public static Todo parse(String line) throws IllegalArgumentException {
         if (line.isEmpty()) {
-            throw new IllegalArgumentException("\u2639 OOPS!!! " +
-                    "The description of a todo cannot be empty.");
+            throw new IllegalArgumentException("The description of a todo cannot be empty.");
         }
         return new Todo(line);
     }

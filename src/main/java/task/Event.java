@@ -3,11 +3,11 @@ package task;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+//@@author Parcly-Taxel
 public class Event extends Task {
     private final String by;
     private static final Pattern PAT = Pattern.compile("(.*) /at (.*)");
-    
-    //@@author Parcly-Taxel
+
     /**
      * Initialises an Event from its description and its time.
      */
@@ -21,14 +21,14 @@ public class Event extends Task {
      */
     public static Event parse(String line) throws IllegalArgumentException {
         if (line.isEmpty()) {
-            throw new IllegalArgumentException("\u2639 OOPS!!! " +
-                    "The description of an event cannot be empty.");
+            throw new IllegalArgumentException("The description " +
+                    "of an event cannot be empty.");
         }
         
         Matcher m = PAT.matcher(line);
         if (!m.matches()) {
-            throw new IllegalArgumentException("\u2639 OOPS!!! " +
-                    "Event description must include /at surrounded by spaces.");
+            throw new IllegalArgumentException("Event description " +
+                    "must include /at surrounded by spaces.");
         }
         return new Event(m.group(1), m.group(2));
     }

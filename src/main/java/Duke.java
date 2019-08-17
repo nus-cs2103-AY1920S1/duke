@@ -58,34 +58,37 @@ public class Duke {
                     System.exit(0);
                 case "list":
                     printTaskList();
-                    break;
+                    continue;
                 case "done":
                     int i = Integer.parseInt(data) - 1;
                     Task currTask = tasks.get(i);
                     currTask.markDone();
                     printDoneTask(currTask);
-                    break;
+                    continue;
                 default:
                     break;
             }
             
-            Task t = null;
-            switch (cmd) {
-                case "todo":
-                    t = Todo.parse(data);
-                    break;
-                case "event":
-                    t = Event.parse(data);
-                    break;
-                case "deadline":
-                    t = Deadline.parse(data);
-                    break;
-                default: // will print an error here (not throw one)
-                    break;
-            }
-            if (t != null) {
+            try {
+                Task t = null;
+                switch (cmd) {
+                    case "todo":
+                        t = Todo.parse(data);
+                        break;
+                    case "event":
+                        t = Event.parse(data);
+                        break;
+                    case "deadline":
+                        t = Deadline.parse(data);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("\u2639 OOPS!!! " +
+                                "I'm sorry, but I don't know what that means :-(");
+                }
                 tasks.add(t);
                 printAddedTask(t);
+            } catch (IllegalArgumentException e) {
+                printPrompt(e.getMessage());
             }
         }
     }

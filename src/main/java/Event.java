@@ -17,10 +17,16 @@ public class Event extends Task {
     /**
      * Parses the given line and returns an Event constructed from it.
      */
-    public static Event parse(String line) {
+    public static Event parse(String line) throws IllegalArgumentException {
+        if (line.isEmpty()) {
+            throw new IllegalArgumentException("\u2639 OOPS!!! " +
+                    "The description of an event cannot be empty.");
+        }
+        
         Matcher m = PAT.matcher(line);
         if (!m.matches()) {
-            return null;
+            throw new IllegalArgumentException("\u2639 OOPS!!! " +
+                    "Event description must include /at surrounded by spaces.");
         }
         return new Event(m.group(1), m.group(2));
     }

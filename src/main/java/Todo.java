@@ -1,9 +1,4 @@
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
 public class Todo extends Task {
-    private static Pattern PAT = Pattern.compile("(.*)");
-    
     //@@author Parcly-Taxel
     /**
      * Initialises a Todo from its description.
@@ -15,12 +10,12 @@ public class Todo extends Task {
     /**
      * Parses the given line and returns a Todo constructed from it.
      */
-    public static Todo parse(String line) {
-        Matcher m = PAT.matcher(line);
-        if (!m.matches()) {
-            return null;
+    public static Todo parse(String line) throws IllegalArgumentException {
+        if (line.isEmpty()) {
+            throw new IllegalArgumentException("\u2639 OOPS!!! " +
+                    "The description of a todo cannot be empty.");
         }
-        return new Todo(m.group(1));
+        return new Todo(line);
     }
     
     /**

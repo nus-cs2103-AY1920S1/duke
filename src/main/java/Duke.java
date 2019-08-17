@@ -10,7 +10,7 @@ public class Duke {
 
     private static ArrayList<Task> tasks;
 
-    private static void addTask(Task task) throws Exception {
+    private static void addTask(Task task) throws DukeException {
         if (!task.isValid()) {
             throw new DukeException(task.invalidMessage());
         }
@@ -52,11 +52,17 @@ public class Duke {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
                 } else if (cmdKeyword.equals("done")) {
-                    int position = Integer.parseInt(cmdArgs) - 1;
-                    Task task = tasks.get(position);
-                    task.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  " + task);
+                    try {
+                        int position = Integer.parseInt(cmdArgs) - 1;
+                        Task task = tasks.get(position);
+                        task.markAsDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("  " + task);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Your input should be a number.");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("There is no task at the given position.");
+                    }
                 } else if (cmdKeyword.equals("todo")) {
                     addTask(new Todo(cmdArgs));
                 } else if (cmdKeyword.equals("event")) {
@@ -66,7 +72,7 @@ public class Duke {
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! " + e.getMessage());
             }
         }

@@ -24,6 +24,17 @@ public class Duke {
     }
     
     /**
+     * Prints a message confirming the removal of a task.
+     */
+    public static void printRemovedTask(Task t) {
+        printPrompt("Noted. I've removed this task:");
+        printPrompt("  " + t);
+        int numTasks = tasks.size();
+        printPrompt("Now you have " + numTasks + " task" +
+                (numTasks == 1 ? "" : "s") + " in the list.");
+    }
+    
+    /**
      * Prints a message congratulating the user on a task done.
      */
     public static void printDoneTask(Task t) {
@@ -60,11 +71,19 @@ public class Duke {
                     printTaskList();
                     continue;
                 case "done":
-                    int i = Integer.parseInt(data);
                     try {
-                        Task currTask = tasks.get(i - 1);
+                        Task currTask = tasks.get(Integer.parseInt(data) - 1);
                         currTask.markDone();
                         printDoneTask(currTask);
+                    } catch (IndexOutOfBoundsException e) {
+                        printPrompt("\u2639 OOPS!!! Task index must be " +
+                                "between 1 and " + tasks.size() + ".");
+                    }
+                    continue;
+                case "delete":
+                    try {
+                        Task remTask = tasks.remove(Integer.parseInt(data) - 1);
+                        printRemovedTask(remTask);
                     } catch (IndexOutOfBoundsException e) {
                         printPrompt("\u2639 OOPS!!! Task index must be " +
                                 "between 1 and " + tasks.size() + ".");

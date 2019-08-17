@@ -29,7 +29,7 @@ public class Duke {
     }
 
     private static boolean runCommand(String s) {
-        String[] arr = s.split(" ");
+        String[] arr = s.split(" ", 2);
         String result = "";
         switch (arr[0]) {
             case "bye":
@@ -48,9 +48,25 @@ public class Duke {
                 result = "Nice! I've marked this task as done:\n  ";
                 dukePrint(result + tasks.get(idx));
                 break;
-            default:
-                dukePrint("added: " + s);
-                tasks.add(new Task(s));
+            case "todo":
+            case "deadline":
+            case "event":
+                Task t = new Task(arr[1]);;
+                if (arr[0].equals("todo")) {
+                    t = new Todo(arr[1]);
+                } else if (arr[0].equals("deadline")) {
+                    String[] temp = arr[1].split(" /by ", 2);
+                    t = new Deadline(temp[0], temp[1]);
+                } else if (arr[0].equals("event")) {
+                    String[] temp = arr[1].split(" /at ", 2);
+                    t = new Event(temp[0], temp[1]);
+                }
+                tasks.add(t);
+                result = "Got it. I've added this task:\n";
+                result += "  " + t + "\n";
+                result += "Now you have " + tasks.size() + " tasks in the list.";
+                dukePrint(result);
+                break;
         }
         return true;
     }

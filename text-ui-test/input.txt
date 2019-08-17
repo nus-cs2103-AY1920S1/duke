@@ -1,0 +1,8 @@
+todo test todo
+deadline buy books /by 20th August
+list
+event project meeting /at 21st August
+list
+done 2
+list 
+bye

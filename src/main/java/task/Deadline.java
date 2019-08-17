@@ -1,14 +1,20 @@
 package task;
 
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * Class representing a deadline, a task to be completed by a certain time.
+ */
 public class Deadline extends Task {
     private final String by;
-    private static final Pattern PAT = Pattern.compile("(.*) /by (.*)");
+    private static final Pattern PAT = Pattern.compile("(.+) /by (.+)");
 
     /**
      * Initialises a Deadline from its description and its time.
+     *
+     * @param desc A description of the task which is under deadline.
+     * @param by The time by which this task must be done.
      */
     private Deadline(String desc, String by) {
         super(desc);
@@ -17,6 +23,8 @@ public class Deadline extends Task {
     
     /**
      * Parses the given line and returns a Deadline constructed from it.
+     *
+     * @param line The parsed line, which should contain "/by" in its middle.
      */
     public static Deadline parse(String line) throws IllegalArgumentException {
         if (line.isEmpty()) {
@@ -34,6 +42,8 @@ public class Deadline extends Task {
     
     /**
      * Returns a string representation of this Deadline.
+     *
+     * @return The desired string representation.
      */
     @Override
     public String toString() {

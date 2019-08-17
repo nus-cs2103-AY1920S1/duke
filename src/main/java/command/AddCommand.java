@@ -8,15 +8,23 @@ import textual.Ui;
  * Class representing a command to add a new task.
  */
 public class AddCommand extends Command {
-    /**
-     * The task that will be added to the task list.
-     */
     private final Task t;
-    
+
+    /**
+     * Creates a new AddCommand with the given task.
+     *
+     * @param t The task to add.
+     */
     public AddCommand(Task t) {
         this.t = t;
     }
-    
+
+    /**
+     * Executes this command on the given task list and user interface.
+     *
+     * @param tl The task list.
+     * @param ui The user interface displaying events on the task list.
+     */
     public void execute(TaskList tl, Ui ui) {
         tl.add(t);
         ui.printMessage("Got it. I've added this task:");

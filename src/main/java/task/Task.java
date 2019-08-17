@@ -1,11 +1,16 @@
 package task;
 
+/**
+ * A generic task, which can be marked as done.
+ */
 public class Task {
     private final String desc;
     private boolean done;
 
     /**
      * Initialises a Task not yet done with the given description.
+     *
+     * @param desc A description of this task.
      */
     Task(String desc) {
         this.desc = desc;
@@ -15,7 +20,7 @@ public class Task {
     /**
      * Marks this Task as done.
      */
-    public void markDone() {
+    void markDone() {
         done = true;
     }
     
@@ -29,6 +34,8 @@ public class Task {
     
     /**
      * Returns a string representation of this Task.
+     *
+     * @return The desired string representation.
      */
     @Override
     public String toString() {

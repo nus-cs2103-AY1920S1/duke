@@ -8,14 +8,20 @@ import textual.Ui;
  */
 public abstract class Command {
     boolean exit = false;
-    
+
+    /**
+     * Determines whether this command is exiting, i.e. whether the program should exit
+     * after executing this command.
+     *
+     * @return Whether this command is exiting.
+     */
     public boolean isExit() {
         return exit;
     }
     
     /**
-     * Executes this command on the given task list, using the user interface
-     * to display follow-up prompts to the user.
+     * Executes this command on the given task list and user interface.
+     *
      * @param tl The task list.
      * @param ui The user interface displaying events on the task list.
      */

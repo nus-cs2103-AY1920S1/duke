@@ -1,15 +1,18 @@
 import command.Command;
+import task.TaskList;
 import textual.Parser;
 import textual.Ui;
-import task.TaskList;
 
+/**
+ * The main class.
+ */
 class Duke {
     private final TaskList tl;
     private final Ui ui;
     private final Parser ps;
 
     /**
-     * Initialises a new Duke session.
+     * Initializes a new Duke session.
      */
     private Duke() {
         ui = new Ui();
@@ -18,7 +21,7 @@ class Duke {
     }
 
     /**
-     * Starts up the initialised Duke session.
+     * Starts up the initialized Duke session.
      */
     private void run() {
         boolean hasExited = false;

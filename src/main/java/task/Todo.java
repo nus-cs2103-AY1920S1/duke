@@ -1,8 +1,13 @@
 package task;
 
+/**
+ * Class representing a task to be done, but not at any particular time.
+ */
 public class Todo extends Task {
     /**
-     * Initialises a Todo from its description.
+     * Creates a Todo from its description.
+     *
+     * @param desc What is to be done.
      */
     private Todo(String desc) {
         super(desc);
@@ -10,6 +15,8 @@ public class Todo extends Task {
     
     /**
      * Parses the given line and returns a Todo constructed from it.
+     *
+     * @param line The parsed line.
      */
     public static Todo parse(String line) throws IllegalArgumentException {
         if (line.isEmpty()) {
@@ -20,6 +27,8 @@ public class Todo extends Task {
     
     /**
      * Returns a string representation of this Todo.
+     *
+     * @return The desired string representation.
      */
     @Override
     public String toString() {

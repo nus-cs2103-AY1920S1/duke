@@ -11,6 +11,7 @@ public class Ui {
     /**
      * Prints a message line to the user, indented four spaces to distinguish
      * it from input commands.
+     *
      * @param msg The message to print.
      */
     public void printMessage(String msg) {
@@ -27,6 +28,7 @@ public class Ui {
     
     /**
      * Prints an error message with the given content.
+     *
      * @param msg The specifics of the error.
      */
     public void printError(String msg) {
@@ -35,10 +37,11 @@ public class Ui {
     
     /**
      * Prints the number of tasks in the given task list.
+     *
+     * @param tl The list whose tasks are to be counted.
      */
     public void printNumTasks(TaskList tl) {
         int n = tl.size();
-        printMessage("Now you have " + n + " task" +
-                (n == 1 ? "" : "s") + " in the list.");
+        printMessage(String.format("Now you have %d task%s in the list.", n, n == 1 ? "" : "s"));
     }
 }

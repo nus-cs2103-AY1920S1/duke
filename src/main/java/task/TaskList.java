@@ -34,7 +34,8 @@ public class TaskList {
      * Gets the task at one-indexed position i in the list.
      *
      * <code>get()</code>, <code>markDone()</code> and <code>removeTask()</code>
-     * all take an index i starting from 1, raising an exception if it is invalid.
+     * all take an index i starting from 1, raising an exception if that index is invalid.
+     *
      * @param i The index of the task to be retrieved, starting from 1.
      * @return The task at position i.
      * @throws IndexOutOfBoundsException If position i is not in the list.
@@ -45,6 +46,7 @@ public class TaskList {
     
     /**
      * Marks the task at index i as done.
+     *
      * @see #get(int)
      */
     public void markDone(int i) throws IndexOutOfBoundsException {
@@ -53,6 +55,7 @@ public class TaskList {
     
     /**
      * Removes the task at index i and returns it.
+     *
      * @see #get(int)
      */
     public Task delete(int i) throws IndexOutOfBoundsException {

@@ -1,3 +1,4 @@
+import java.util.Iterator;
 class FridayController implements ControllerInterface {
     private TaskModelInterface model;
     private Display display;
@@ -23,6 +24,9 @@ class FridayController implements ControllerInterface {
     }
 
     public void listTasks() {
-        this.display.printAllTasks();
+        Iterator<TaskInterface> iter = 
+            this.model.getTaskListIterator();
+
+        this.display.printAllTasks(iter);
     }
 }

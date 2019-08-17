@@ -83,12 +83,12 @@ class Display implements TaskObserver {
         Display.printSection(outputMsg);
     }        
 
-    public void printAllTasks() {
+    public static void 
+        printAllTasks(Iterator<TaskInterface> iter) {
+
         ArrayList<String> printxs = new ArrayList<>();
 
         int counter = 1;
-        Iterator<TaskInterface> iter = 
-            this.model.getTaskListIterator();
 
         while (iter.hasNext()) {
             String taskLine = "" + counter + "." 

@@ -13,6 +13,7 @@ public class Duke {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_BYE = "bye";
 
     private static final String PARAMETER_AT = "/at";
@@ -162,15 +163,49 @@ public class Duke {
 
                     // Get task from tasks
                     task = this.tasks.get(i);
+
+                    // Set task to done
+                    task.setDone(true);
                 } catch (NumberFormatException e) {
-                    throw new InvalidParameterException("That is not a valid number.");
+                    throw new InvalidParameterException("The index is not a valid number.");
                 } catch (IndexOutOfBoundsException e) {
                     throw new InvalidParameterException("That is not a valid index of a task.");
                 }
 
-                task.setDone(true);
-
                 say("Nice! I've marked this task as done:", task.toString());
+            }
+            break;
+
+            // Delete a task from tasks.
+            case COMMAND_DELETE: {
+                Task task;
+                String index;
+                HashMap<String, String> parameters = parser.nextParameters();
+
+                if (parameters.containsKey(PARAMETER_DEFAULT)) {
+                    index = parameters.get(PARAMETER_DEFAULT);
+                } else {
+                    throw new InvalidParameterException("The index cannot be empty.");
+                }
+
+                try {
+                    // Get index of task
+                    int i = Integer.parseInt(index) - 1;
+
+                    // Get task from tasks
+                    task = this.tasks.get(i);
+
+                    // Remove task
+                    this.tasks.remove(i);
+                } catch (NumberFormatException e) {
+                    throw new InvalidParameterException("The index is not a valid number.");
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidParameterException("That is not a valid index of a task.");
+                }
+
+                say("Noted. I've removed this task:",
+                        task.toString(),
+                        String.format("Now you have %d task(s) in the list.", this.tasks.size()));
             }
             break;
 

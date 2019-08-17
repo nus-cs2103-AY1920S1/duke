@@ -13,10 +13,14 @@ public class DeleteCommand extends Command {
     /**
      * Creates a new DeleteCommand with the specified index.
      *
-     * @param i The index of the task to delete, where the first task is 1.
+     * @param s The index of the task to delete, where the first task is 1.
      */
-    public DeleteCommand(int i) {
-        this.i = i;
+    public DeleteCommand(String s) {
+        try {
+            this.i = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Task index for the delete command must be an integer.");
+        }
     }
 
     /**

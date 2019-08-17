@@ -12,10 +12,14 @@ public class DoneCommand extends Command {
     /**
      * Creates a new DoneCommand with the specified index.
      *
-     * @param i The index of the task to mark as done, where the first task is 1.
+     * @param s The index of the task to mark as done, where the first task is 1.
      */
-    public DoneCommand(int i) {
-        this.i = i;
+    public DoneCommand(String s) {
+        try {
+            this.i = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Task index for the done command must be an integer.");
+        }
     }
 
     /**

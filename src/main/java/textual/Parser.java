@@ -32,12 +32,10 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
-        // TODO return a proper error message for non-integer input
         case "done":
-            return new DoneCommand(Integer.parseInt(data));
-        // TODO same here
+            return new DoneCommand(data);
         case "delete":
-            return new DeleteCommand(Integer.parseInt(data));
+            return new DeleteCommand(data);
         case "todo":
             return new AddCommand(Todo.parse(data));
         case "event":

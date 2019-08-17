@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Duke",
+            "request": "launch",
+            "mainClass": "Duke",
+            "projectName": "duke"
+        }
+    ]
+}

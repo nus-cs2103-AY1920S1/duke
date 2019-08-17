@@ -4,6 +4,7 @@ import java.io.*;
 class DukeException extends Exception {}
 class InputUnknownException extends DukeException {}
 class EmptyDescriptionException extends DukeException {}
+class EmptyListIndexException extends DukeException {}
 // class EmptyPrepositionException extends DukeException {}
 class EmptyTimeDueException extends DukeException {}
 
@@ -157,13 +158,12 @@ public class Duke {
                         
                         case "done":
                         if (input_split.length < 2) {
-                            System.out.println("What have you done?");
-                            break;
+                            throw new EmptyListIndexException();
                         }
-                        Task removedTask = list.remove(Integer.valueOf(input_split[1]) - 1);
-                        removedTask.isDone = true;
+                        Task theTask = list.get(Integer.valueOf(input_split[1]) - 1);
+                        theTask.isDone = true;
                         System.out.println("Nice! I've marked this task as done: \n" + 
-                            "  " + removedTask.getStatus());
+                            "  " + theTask.getStatus());
                         break;
 
                         case "todo":
@@ -183,6 +183,16 @@ public class Duke {
                         construct(command, input_split);
                         break;
 
+                        case "delete": 
+                        if (input_split.length < 2) {
+                            throw new EmptyListIndexException();
+                        }
+                        System.out.println("Noted. I've removed this task: ");
+                        Task removedTask = list.remove(Integer.valueOf(input_split[1]) - 1);
+                        System.out.println("  " + removedTask.getStatus());
+                        countList();
+                        break;
+
                         default:
                         throw new InputUnknownException();
                     }
@@ -192,6 +202,8 @@ public class Duke {
                     System.out.println("What's the description of the item?");
                 } catch (EmptyTimeDueException e) {
                     System.out.println("When is it due? eg. /by 2359 sunday");
+                } catch (EmptyListIndexException e) {
+                    System.out.println(command + " which one? (input an integer)");
                 }
 
             }

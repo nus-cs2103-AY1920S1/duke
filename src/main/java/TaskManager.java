@@ -20,17 +20,6 @@ public class TaskManager {
         return taskList.get(index);
     }
 
-    public void markAsDone(int taskIndex) {
-        Task task = getTask(taskIndex);
-
-        if (task != null) {
-            task.markAsDone();
-
-            System.out.println(" Nice! I've marked this task as done: ");
-            System.out.println(" " + task);
-        }
-    }
-
     public void printTasks() {
         System.out.println(" Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {

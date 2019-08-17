@@ -1,9 +1,16 @@
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String FRONTSPACES = "   "; // 3 spaces
-    private static final String LINE = "   __________________________________________________\n"; // line width = 50 space, with 3 spaces in front
+    private static final String FRONTSPACES = "     "; // 5 spaces
+    private static final String LINE = "    ____________________________________________________________\n";
+
+    private List<Task> taskList;
+
+    public Duke() {
+        taskList = new LinkedList<>();
+    }
 
     public static void main(String[] args) {
         new Duke().start();
@@ -18,11 +25,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine();
-            if ("bye".equals(command)) {
+
+            if ("list".equals(command)) {
+                echo(taskList);
+            } else if ("bye".equals(command)) {
                 echo("Bye. Hope to see you again!");
                 break;
             } else {
-                echo(command);
+                taskList.add(new Task(taskList.size() + 1, command));
+                echo("added: " + command);
             }
         }
     }
@@ -31,16 +42,16 @@ public class Duke {
         echo(null, strings);
     }
 
-    public void echo(List<String> stringsList) {
-        echo(stringsList, null); // Cannot remove the null behind or else lead to infinite loop!
+    public void echo(List<?> list) {
+        echo(list, new String[1]);
     }
 
-    private void echo(List<String> stringsList, String... strings) {
+    private void echo(List<?> list, String... strings) {
         printLine();
 
-        if (stringsList != null) {
-            stringsList.forEach(string -> {
-                System.out.print(FRONTSPACES + string + "\n");
+        if (list != null) {
+            list.forEach(thing -> {
+                System.out.print(String.format("%s%s\n", FRONTSPACES, thing));
             });
         } else {
             for (String string : strings) {

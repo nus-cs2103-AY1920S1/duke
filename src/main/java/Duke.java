@@ -18,11 +18,11 @@ public class Duke {
         printBreakLine();
 
         Scanner sc = new Scanner(System.in);
-        Logic logic = new Logic();
+        Logic logic = new Logic(sc);
         int response;
         do {
             System.out.println();
-            String command = sc.nextLine();
+            String command = sc.next();
             printBreakLine();
             response = logic.process(command);
             if (response == -1) {

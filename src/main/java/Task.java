@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -6,6 +6,9 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    abstract String getInitial();
+    abstract String getAdditionalMessage();
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -17,6 +20,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getInitial() + "]" + "[" + getStatusIcon() + "] " + description + " " + getAdditionalMessage();
     }
 }

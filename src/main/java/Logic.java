@@ -1,46 +1,54 @@
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 public class Logic {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
+
     private static final String INDENT = "     ";
-    private static final String ADDED_MSG = "added: ";
+    private static final String ADDED_MSG = "Got it. I've added this task: ";
     private static final String TASK_DONE_MSG = "Nice! I've marked this task as done:";
     private static final String LIST_MSG = "Here are the tasks in your list:";
+
     private static final String NEED_INDEX_ERROR = "Which task have you done?";
     private static final String ARG_MUST_BE_NUM_ERROR = "Argument must be a number.";
     private static final String TASK_DOESNT_EXIST_ERROR = "Task does not exist.";
 
+    private Scanner sc;
     private List<Task> taskList;
 
-    Logic() {
+    Logic(Scanner sc) {
+        this.sc = sc;
         taskList = new ArrayList<>();
     }
 
-    int process(String str) {
-        if (str.length() == 0) {
+    int process(String command) {
+        if (command.length() == 0) {
             return 0;
         }
-        String[] strings = str.split(" ");
-        String command = strings[0];
+
         switch (command) {
+            case TODO_COMMAND:
+                addTodo(sc.nextLine());
+                break;
+            case DEADLINE_COMMAND:
+                addDeadline(sc.nextLine());
+                break;
+            case EVENT_COMMAND:
+                addEvent(sc.nextLine());
+                break;
             case BYE_COMMAND:
                 return -1;
             case LIST_COMMAND:
                 list();
                 break;
             case DONE_COMMAND:
-                if (strings.length < 2) {
-                    print(NEED_INDEX_ERROR);
-                    return 0;
-                }
-                done(strings[1]);
+                done(sc.nextLine().trim());
                 break;
             default:
-                add(str);
         }
         return 0;
     }
@@ -50,8 +58,8 @@ public class Logic {
             int i = Integer.parseInt(s) - 1;
             Task task = taskList.get(i);
             task.markAsDone();
-            print("  " + TASK_DONE_MSG);
-            print(task.toString());
+            print(TASK_DONE_MSG);
+            print("  " + task.toString());
         } catch (NumberFormatException e) {
             print(ARG_MUST_BE_NUM_ERROR);
         } catch (IndexOutOfBoundsException e) {
@@ -66,12 +74,38 @@ public class Logic {
         }
     }
 
-    private void add(String s) {
-        taskList.add(new Task(s));
-        print(ADDED_MSG + s);
+    private void addTodo(String s) {
+        Task task = new Todo(s);
+        taskList.add(task);
+        printAdded(task);
+
+    }
+
+    private void addDeadline(String s) {
+        String[] strs = s.split(Deadline.REGEX);
+        Task task = new Deadline(strs[0], strs[1]);
+        taskList.add(task);
+        printAdded(task);
+    }
+
+    private void addEvent(String s) {
+        String[] strs = s.split(Event.REGEX);
+        Task task = new Event(strs[0], strs[1]);
+        taskList.add(task);
+        printAdded(task);
+    }
+
+    private void printAdded(Task task) {
+        print(ADDED_MSG);
+        print("  " + task);
+        printListSize();
     }
 
     private void print(String s) {
         System.out.println(INDENT + s);
+    }
+
+    private void printListSize() {
+        print("Now you have " + taskList.size() + " tasks in the list.");
     }
 }

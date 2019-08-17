@@ -43,7 +43,7 @@ public class Client {
 
     private void addTask(String description) {
         Task task = new Task(description);
-        this.storage.add(new Task(description));
+        this.storage.add(task);
         this.echoer.echo("added: " + task.getDescription());
     }
 

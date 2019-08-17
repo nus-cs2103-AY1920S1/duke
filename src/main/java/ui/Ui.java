@@ -2,7 +2,6 @@ package ui;
 
 import task.TaskList;
 
-//@@author Parcly-Taxel
 /**
  * Class that handles messages shown to the user of this application.
  * It does not need to be instantiated with any tasks; these are passed

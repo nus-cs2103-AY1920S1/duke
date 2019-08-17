@@ -3,7 +3,6 @@ package task;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-//@@author Parcly-Taxel
 public class Event extends Task {
     private final String by;
     private static final Pattern PAT = Pattern.compile("(.*) /at (.*)");

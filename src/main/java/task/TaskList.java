@@ -2,7 +2,6 @@ package task;
 
 import java.util.ArrayList;
 
-//@@author Parcly-Taxel
 /**
  * A class that holds a list of tasks that may be added to, removed or
  * marked as done. This list is indexed starting from 1.

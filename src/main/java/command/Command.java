@@ -3,7 +3,6 @@ package command;
 import task.TaskList;
 import ui.Ui;
 
-//@@author Parcly-Taxel
 /**
  * Abstract class representing individual commands.
  */

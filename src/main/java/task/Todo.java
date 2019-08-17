@@ -1,6 +1,5 @@
 package task;
 
-//@@author Parcly-Taxel
 public class Todo extends Task {
     /**
      * Initialises a Todo from its description.

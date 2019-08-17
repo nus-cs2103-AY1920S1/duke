@@ -3,7 +3,6 @@ package command;
 import task.TaskList;
 import ui.Ui;
 
-//@@author Parcly-Taxel
 /**
  * Class representing a command to list items in a task list.
  */

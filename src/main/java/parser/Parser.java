@@ -6,7 +6,6 @@ import task.Deadline;
 import task.Event;
 import task.Todo;
 
-//@@author Parcly-Taxel
 public class Parser {
     private final Scanner sc = new Scanner(System.in);
 

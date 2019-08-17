@@ -1,9 +1,9 @@
 package command;
 
+import task.Task;
 import task.TaskList;
 import ui.Ui;
 
-//@@author Parcly-Taxel
 /**
  * Class representing a command to delete an item from the task list.
  */
@@ -16,8 +16,9 @@ public class DeleteCommand extends Command {
     
     public void execute(TaskList tl, Ui ui) {
         try {
+            Task t = tl.delete(i);
             ui.printMessage("Noted. I've removed this task:");
-            ui.printMessage("  " + tl.delete(i));
+            ui.printMessage("  " + t);
             ui.printNumTasks(tl);
         } catch (IndexOutOfBoundsException e) {
             ui.printMessage("\u2639 OOPS!!! Task index must be " +

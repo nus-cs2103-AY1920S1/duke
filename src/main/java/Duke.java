@@ -3,7 +3,6 @@ import parser.Parser;
 import task.TaskList;
 import ui.Ui;
 
-//@@author Parcly-Taxel
 class Duke {
     private final TaskList tl;
     private final Ui ui;

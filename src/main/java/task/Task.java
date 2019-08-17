@@ -3,8 +3,7 @@ package task;
 public class Task {
     private final String desc;
     private boolean done;
-    
-    //@@author Parcly-Taxel
+
     /**
      * Initialises a Task not yet done with the given description.
      */

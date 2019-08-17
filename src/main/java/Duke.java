@@ -36,7 +36,7 @@ public class Duke {
 			Command command = null;
 			String[] inputParameters = null;
 			try {
-				inputParameters = inputSplit[1].split("/by|/at", 2);
+				inputParameters = inputSplit[1].split(" /by | /at ", 2);
 			} catch (Exception e) {
 				// inputSplit[1] may not exist, ignore for now
 			}
@@ -75,7 +75,7 @@ public class Duke {
 							+ "     Here are the tasks in your list:\n");
 					for (Task task : taskList) {
 						count++;
-						System.out.println("     " + count + ". " + task);
+						System.out.println("     " + count + "." + task);
 					}
 					System.out.println(lineBreak);
 					break;

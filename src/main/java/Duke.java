@@ -10,6 +10,10 @@ public class Duke {
         greet();
     }
 
+    public int getSize(){
+        return size;
+    }
+
     public void add(Task newTask) {
         myList[size] = newTask;
         size++;
@@ -64,33 +68,54 @@ public class Duke {
         int index = 0;
         String date = "";
         while(!query.equals("bye")) {
-            switch(parts[0]) {
-                case "list":
-                    duke.list();
-                    break;
-                case "done":
-                    duke.markDone(Integer.parseInt(parts[1]));
-                    break;
-                case "todo":
-                    des = query.substring("todo".length()+1);
-                    duke.add(new Todo(des));
-                    break;
-                case "deadline":
-                    index = query.lastIndexOf("/");
-                    des = query.substring("deadline".length()+1, index-1);
-                    date = query.substring(index+4);
-                    duke.add(new Deadline(des, date));
-                    break;
-                case "event":
-                    index = query.lastIndexOf("/");
-                    des = query.substring("event".length()+1, index-1);
-                    date = query.substring(index+4);
-                    duke.add(new Event(des, date));
-                    break;
-
+            try{
+                if(parts.length == 0) throw new DukeException("Your input cannot be empty.");
+                switch(parts[0]) {
+                    case "list":
+                        duke.list();
+                        break;
+                    case "done":
+                        if(parts.length == 1) throw new DukeException("The description of a done cannot be empty.");
+                        int number = Integer.parseInt(parts[1]);
+                        if(number > duke.getSize() || duke.getSize() == 0) {
+                            throw new DukeException("It's an invalid task");
+                        }
+                        duke.markDone(number);
+                        break;
+                    case "todo":
+                        if(parts.length == 1) throw new DukeException("The description of a todo cannot be empty.");
+                        des = query.substring("todo".length()+1);
+                        duke.add(new Todo(des));
+                        break;
+                    case "deadline":
+                        if(parts.length == 1) throw new DukeException("The description of a deadline cannot be empty.");
+                        index = query.lastIndexOf("/");
+                        if(index == -1 || index+4 >= query.length()) throw new DukeException("Please provide a time for your deadline task");
+                        if("deadline".length()+1 >= index-1) throw new DukeException("Please provide a proper name for your deadline task");
+                        des = query.substring("deadline".length()+1, index-1);
+                        date = query.substring(index+4);
+                        duke.add(new Deadline(des, date));
+                        break;
+                    case "event":
+                        if(parts.length == 1) throw new DukeException("The description of a event cannot be empty.");
+                        index = query.lastIndexOf("/");
+                        if(index == -1 || index+4 >= query.length()) throw new DukeException("Please provide a time for your event task");
+                        if("event".length()+1 >= index-1) throw new DukeException("Please provide a proper name for your event task");
+                        des = query.substring("event".length()+1, index-1);
+                        date = query.substring(index+4);
+                        duke.add(new Event(des, date));
+                        break;
+                    default:
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            }catch(DukeException ex){
+                duke.print(ex.toString());
+                continue;
+            }finally {
+                query = sc.nextLine();
+                parts = query.split(" ");
             }
-            query = sc.nextLine();
-            parts = query.split(" ");
+
         }
         duke.exit();
     }

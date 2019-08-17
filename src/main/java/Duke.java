@@ -24,8 +24,25 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(tasks.get(index - 1).toString());
             } else {
-                tasks.add(new Task(command));
-                System.out.println("added: " + command);
+                String type = command.split(" ", 2)[0];
+                String description = command.split(" ", 2)[1];
+                Task task;
+
+                if (type.equals("todo")) {
+                    task = new Todo(description);
+                } else if (command.startsWith("event")) {
+                    String at = description.split(" /at ", 2)[1];
+                    description = description.split(" /at ", 2)[0];
+                    task = new Event(description, at);
+                } else {
+                    String by = description.split(" /by ", 2)[1];
+                    description = description.split(" /by ", 2)[0];
+                    task = new Deadline(description, by);
+                }
+
+                tasks.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(task.toString());
             }
 
             System.out.println();

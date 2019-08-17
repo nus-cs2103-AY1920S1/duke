@@ -16,12 +16,24 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    @Override
     public String getTaskInitial() {
         return "D";
     }
 
+    @Override
     public boolean isValid() {
-        return this.description != null && this.slashKeyword.equals("by") && this.deadline != null;
+        return this.description != null && this.slashKeyword != null && this.slashKeyword.equals("by")
+            && this.deadline != null;
+    }
+
+    @Override
+    public String invalidMessage() {
+        if (this.description == null) {
+            return "The description of a deadline cannot be empty.";
+        } else {
+            return "A deadline must have a due date or time.";
+        }
     }
 
     @Override

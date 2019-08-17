@@ -21,6 +21,8 @@ public abstract class Task {
 
     public abstract boolean isValid();
 
+    public abstract String invalidMessage();
+
     // Override this function to provide extra text at the end of the task's string representation
     public String extraText() {
         return "";

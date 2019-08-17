@@ -16,12 +16,24 @@ public class Event extends Task {
         this.time = time;
     }
 
+    @Override
     public String getTaskInitial() {
         return "E";
     }
 
+    @Override
     public boolean isValid() {
-        return this.description != null && this.slashKeyword.equals("at") && this.time != null;
+        return this.description != null && this.slashKeyword != null && this.slashKeyword.equals("at")
+            && this.time != null;
+    }
+
+    @Override
+    public String invalidMessage() {
+        if (this.description == null) {
+            return "The description of an event cannot be empty.";
+        } else {
+            return "An event must have a date or time.";
+        }
     }
 
     @Override

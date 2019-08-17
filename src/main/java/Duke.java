@@ -12,7 +12,7 @@ public class Duke {
 
     private static void addTask(Task task) throws Exception {
         if (!task.isValid()) {
-            throw new Exception();
+            throw new DukeException(task.invalidMessage());
         }
         tasks.add(task);
         System.out.println("Got it. I've added this task:");
@@ -64,10 +64,10 @@ public class Duke {
                 } else if (cmdKeyword.equals("deadline")) {
                     addTask(new Deadline(cmdBeforeSlashArgs, cmdSlashKeyword, cmdSlashArgs));
                 } else {
-                    throw new Exception();
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (Exception e) {
-                System.out.println("Your command is invalid, please try again.");
+                System.out.println("☹ OOPS!!! " + e.getMessage());
             }
         }
     }

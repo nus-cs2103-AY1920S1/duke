@@ -59,4 +59,6 @@ Here are the tasks in your list:
 5.[D][✓] bar (by: baz)
 6.[E][✘] project meeting (at: Mon 2-4pm)
 7.[E][✘] asd/ (at: /sOmE-Time/)
+☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Bye. Hope to see you again soon!

@@ -24,43 +24,85 @@ public class Duke {
     public void receiveCommand() {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.nextLine();
+            String command = sc.nextLine().trim();
 
-            if ("list".equals(command)) {
-                echo(taskList);
+            if (command.startsWith("todo")) {
+                String topic = command.substring(4).trim();
+                addTask(new ToDo(taskList.size() + 1, topic));
+            } else if (command.startsWith("deadline")) {
+                String[] details = command.substring(8).trim().split("/by");
+                String topic = details[0].stripTrailing();
+                String deadline = details[1].stripLeading();
+                addTask(new Deadline(taskList.size() + 1, topic, deadline));
+            } else if (command.startsWith("event")) {
+                String[] details = command.substring(5).trim().split("/at");
+                String topic = details[0].stripTrailing();
+                String date = details[1].stripLeading();
+                addTask(new Event(taskList.size() + 1, topic, date));
+            } else if ("list".equals(command)) {
+                echo(taskList, "Here are the tasks in your list:");
             } else if (command.startsWith("done")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
-                Task task = taskList.get(index - 1);
-                task.markAsDone();
-                echo("Nice! I've marked this task as done:",
-                        String.format("  [\u2713] %s", task.getDetails()));
-            } else if ("bye".equals(command)) {
+                markTaskAsDone(index);
+           } else if ("bye".equals(command)) {
                 echo("Bye. Hope to see you again!");
                 break;
             } else {
-                taskList.add(new Task(taskList.size() + 1, command));
-                echo("added: " + command);
+
             }
         }
     }
 
+    public void addTask(Task task) {
+        taskList.add(task);
+        List<String> middle = new LinkedList<>();
+        middle.add(String.format("  %s", task.getDescription()));
+        echo(new String[]{"Got it. I've added this task:"},
+                middle,
+                new String[]{String.format("Now you have %d tasks in the list.", taskList.size())});
+    }
+
+    public void markTaskAsDone(int index) {
+        Task task = taskList.get(index - 1);
+        task.markAsDone();
+        echo("Nice! I've marked this task as done:",
+                String.format("  [\u2713] %s", task.getTitle()));
+    }
+
+    /**
+     * print the strings provided line by line, enclosed within two lines.
+     */
     public void echo(String... strings) {
-        echo(null, strings);
+        echo(strings, null, null);
     }
 
-    public void echo(List<?> list) {
-        echo(list, new String[1]);
+    /**
+     * print the strings provided followed by the list provided line by line, enclosed within two lines.
+     * if list is null, then print strings only (and vice versa).
+     * @param list list of items to be printed.
+     * @param strings strings to be printed.
+     */
+    public void echo(List<?> list, String... strings) {
+        echo(strings, list, null);
     }
 
-    private void echo(List<?> list, String... strings) {
+    private void echo(String[] beginning, List<?> list, String[] ending) {
         System.out.print(LINE);
+
+        if (beginning != null) {
+            for (String string : beginning) {
+                System.out.print(FRONTSPACES + string + "\n");
+            }
+        }
 
         if (list != null) {
             list.forEach(thing -> {
                 System.out.print(String.format("%s%s\n", FRONTSPACES, thing));
             });
-        } else {
-            for (String string : strings) {
+        }
+
+        if (ending != null) {
+            for (String string : ending) {
                 System.out.print(FRONTSPACES + string + "\n");
             }
         }

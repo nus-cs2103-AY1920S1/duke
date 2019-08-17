@@ -1,25 +1,27 @@
-public class Task {
+public abstract class Task {
     private int index;
-    private String details;
+    private String title;
+    protected String type;
     private boolean done;
     private String status;
+    // varies according to the actual type, definitely includes topic, other optional included fields are date.
+    protected String details;
 
     public Task(int i, String s) {
         index  = i;
-        details = s;
+        title = s;
         status = "\u2717";
     }
 
-    public int getIndex() {
-        return index;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public boolean isDone() {
-        return done;
+    /**
+     * @return detailed description of the task, including the title, type, done status, etc.
+     */
+    public String getDescription() {
+        return String.format("[%s][%s] %s", type, status, details);
     }
 
     public void markAsDone() {
@@ -29,6 +31,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%d.[%s] %s", index, status, details);
+        return String.format("%d.%s", index, getDescription());
     }
 }

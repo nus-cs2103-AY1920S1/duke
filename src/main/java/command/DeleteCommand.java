@@ -1,12 +1,14 @@
+package command;
+
+import task.TaskList;
+import ui.Ui;
+
 //@@author Parcly-Taxel
 /**
  * Class representing a command to delete an item from the task list.
  */
 public class DeleteCommand extends Command {
-    /**
-     * @see DoneCommand#i
-     */
-    int i;
+    private final int i;
     
     public DeleteCommand(int i) {
         this.i = i;

@@ -1,9 +1,11 @@
+package task;
+
 public class Todo extends Task {
     //@@author Parcly-Taxel
     /**
      * Initialises a Todo from its description.
      */
-    public Todo(String desc) {
+    private Todo(String desc) {
         super(desc);
     }
     

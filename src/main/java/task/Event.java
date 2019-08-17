@@ -1,15 +1,17 @@
+package task;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Event extends Task {
-    protected String by;
-    private static Pattern PAT = Pattern.compile("(.*) /at (.*)");
+    private final String by;
+    private static final Pattern PAT = Pattern.compile("(.*) /at (.*)");
     
     //@@author Parcly-Taxel
     /**
      * Initialises an Event from its description and its time.
      */
-    public Event(String desc, String by) {
+    private Event(String desc, String by) {
         super(desc);
         this.by = by;
     }

@@ -1,15 +1,17 @@
+package task;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Deadline extends Task {
-    protected String by;
-    private static Pattern PAT = Pattern.compile("(.*) /by (.*)");
+    private final String by;
+    private static final Pattern PAT = Pattern.compile("(.*) /by (.*)");
     
     //@@author Parcly-Taxel
     /**
      * Initialises a Deadline from its description and its time.
      */
-    public Deadline(String desc, String by) {
+    private Deadline(String desc, String by) {
         super(desc);
         this.by = by;
     }

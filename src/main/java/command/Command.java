@@ -1,9 +1,14 @@
+package command;
+
+import task.TaskList;
+import ui.Ui;
+
 //@@author Parcly-Taxel
 /**
  * Abstract class representing individual commands.
  */
 public abstract class Command {
-    protected boolean exit = false;
+    boolean exit = false;
     
     public boolean isExit() {
         return exit;

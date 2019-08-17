@@ -1,9 +1,22 @@
 import java.util.Scanner;
 
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.ListCommand;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+import ui.Ui;
+
 //@@author Parcly-Taxel
-public class Duke {
-    private static TaskList tl = new TaskList();
-    private static Ui ui = new Ui();
+class Duke {
+    private static final TaskList tl = new TaskList();
+    private static final Ui ui = new Ui();
         
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -17,8 +30,9 @@ public class Duke {
             // Read the command and data separately, together comprising a line
             String cmd = sc.next();
             String data = sc.nextLine().trim();
-            Task t = null;
             
+            Task t;
+
             try {
                 switch (cmd) {
                     case "bye":

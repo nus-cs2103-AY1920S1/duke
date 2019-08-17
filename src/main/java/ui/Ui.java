@@ -1,3 +1,7 @@
+package ui;
+
+import task.TaskList;
+
 //@@author Parcly-Taxel
 /**
  * Class that handles messages shown to the user of this application.

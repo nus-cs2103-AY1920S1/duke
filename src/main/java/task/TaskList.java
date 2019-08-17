@@ -1,3 +1,5 @@
+package task;
+
 import java.util.ArrayList;
 
 //@@author Parcly-Taxel
@@ -6,13 +8,13 @@ import java.util.ArrayList;
  * marked as done. This list is indexed starting from 1.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
     
     /**
      * Initialises an empty task list.
      */
     public TaskList() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
     
     /**
@@ -35,7 +37,7 @@ public class TaskList {
      * <code>get()</code>, <code>markDone()</code> and <code>removeTask()</code>
      * all take an index i starting from 1, raising an exception if it is invalid.
      * @param i The index of the task to be retrieved, starting from 1.
-     * @returns The task at position i.
+     * @return The task at position i.
      * @throws IndexOutOfBoundsException If position i is not in the list.
      */
     public Task get(int i) throws IndexOutOfBoundsException {

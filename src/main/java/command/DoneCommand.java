@@ -1,3 +1,8 @@
+package command;
+
+import task.TaskList;
+import ui.Ui;
+
 //@@author Parcly-Taxel
 /**
  * Class representing a command to mark an item in the task list as done.
@@ -6,7 +11,7 @@ public class DoneCommand extends Command {
     /**
      * Index of this command in the task list, where the first task is 1.
      */
-    int i;
+    private final int i;
     
     public DoneCommand(int i) {
         this.i = i;

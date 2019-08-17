@@ -1,12 +1,14 @@
+package task;
+
 public class Task {
-    protected String desc;
-    protected boolean done;
+    private final String desc;
+    private boolean done;
     
     //@@author Parcly-Taxel
     /**
      * Initialises a Task not yet done with the given description.
      */
-    public Task(String desc) {
+    Task(String desc) {
         this.desc = desc;
         this.done = false;
     }
@@ -22,8 +24,8 @@ public class Task {
      * Gets a Unicode character representing whether this Task is done
      * (tick for yes, cross for no).
      */
-    public String getDoneChar() {
-        return (done ? "\u2713" : "\u2718");
+    private String getDoneChar() {
+        return done ? "\u2713" : "\u2718";
     }
     
     /**

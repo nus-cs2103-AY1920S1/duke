@@ -1,3 +1,9 @@
+package command;
+
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
 //@@author Parcly-Taxel
 /**
  * Class representing a command to add a new task.
@@ -6,7 +12,7 @@ public class AddCommand extends Command {
     /**
      * The task that will be added to the task list.
      */
-    Task t;
+    private final Task t;
     
     public AddCommand(Task t) {
         this.t = t;

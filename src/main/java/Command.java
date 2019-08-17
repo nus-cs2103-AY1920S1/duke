@@ -1,4 +1,5 @@
 public class Command {
+    protected final String input;
     protected final String keyword;
     protected final String args;
     protected final String beforeSlashArgs;
@@ -12,6 +13,7 @@ public class Command {
      */
     public Command(String input) {
         input = input.trim();
+        this.input = input;
 
         this.keyword = input.split("\\s+", 2)[0];
         this.args = input.split("\\s+").length >= 2 ? input.split("\\s+", 2)[1] : null;
@@ -28,6 +30,10 @@ public class Command {
             this.slashKeyword = inputAfterSlash.split("\\s+", 2)[0];
             this.slashArgs = inputAfterSlash.split("\\s+").length >= 2 ? inputAfterSlash.split("\\s+", 2)[1] : null;
         }
+    }
+
+    public String getInput() {
+        return this.input;
     }
 
     public String getKeyword() {

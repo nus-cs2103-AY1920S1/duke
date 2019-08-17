@@ -2,7 +2,7 @@ Hello! I'm Duke
 What can I do for you?
 Got it. I've added this task:
   [T][✘] A
-Now you have 1 tasks in the list.
+Now you have 1 task in the list.
 Got it. I've added this task:
   [T][✘] B C
 Now you have 2 tasks in the list.
@@ -61,4 +61,16 @@ Here are the tasks in your list:
 7.[E][✘] asd/ (at: /sOmE-Time/)
 ☹ OOPS!!! The description of a todo cannot be empty.
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Noted. I've removed this task:
+  [T][✓] D  E  F  /at G
+Now you have 6 tasks in the list.
+Noted. I've removed this task:
+  [E][✘] project meeting (at: Mon 2-4pm)
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] A
+2.[T][✓] B C
+3.[D][✘] foo (by: Sunday)
+4.[D][✓] bar (by: baz)
+5.[E][✘] asd/ (at: /sOmE-Time/)
 Bye. Hope to see you again soon!

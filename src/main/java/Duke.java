@@ -10,6 +10,11 @@ public class Duke {
 
     private static ArrayList<Task> tasks;
 
+    private static void printNumberTasks() {
+        String s = tasks.size() == 1 ? "" : "s";
+        System.out.println("Now you have " + tasks.size() + " task" + s + " in the list.");
+    }
+
     private static void addTask(Task task) throws DukeException {
         if (!task.isValid()) {
             throw new DukeException(task.invalidMessage());
@@ -17,7 +22,7 @@ public class Duke {
         tasks.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        printNumberTasks();
     }
 
     /**
@@ -58,6 +63,19 @@ public class Duke {
                         task.markAsDone();
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println("  " + task);
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("Your input should be a number.");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("There is no task at the given position.");
+                    }
+                } else if (cmdKeyword.equals("delete")) {
+                    try {
+                        int position = Integer.parseInt(cmdArgs) - 1;
+                        Task oldTask = tasks.get(position);
+                        tasks.remove(position);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("  " + oldTask);
+                        printNumberTasks();
                     } catch (NumberFormatException e) {
                         throw new DukeException("Your input should be a number.");
                     } catch (IndexOutOfBoundsException e) {

@@ -21,27 +21,49 @@ public class Duke {
 
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> command_list = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
-        while (sc.hasNextLine()) {
-            String command = sc.nextLine();
-            if (command.equals("bye")) {
+        while (sc.hasNext()) {
+            String command = sc.next();
+
+            if (command.equals("done")) {
+                int index = Integer.valueOf(sc.next()) - 1;
+                Task t = taskList.get(index);
+                t.markAsDone();
+                System.out.println(indent + line);
+                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.println("       [" + t.getStatusIcon() + "] " + t.getDescription());
+                System.out.println(indent + line + "\n");
+            } else if (command.equals("bye")) {
                 System.out.println(bye);
             } else if (command.equals("list")) {
                 int counter = 1;
                 System.out.println(indent + line);
-                for (String item: command_list) {
-                    System.out.println(indent + " " + counter + ". " + item);
+                System.out.println("     Here are the tasks in your list:");
+                for (Task t: taskList) {
+                    System.out.println(indent + " " + counter + "." + t) ;
                     counter++;
                 }
                 System.out.println(indent + line + "\n");
             } else {
-                System.out.println(
-                        indent + line + "\n" +
-                                indent + " " + "added: " + command + "\n" +
-                                indent + line + "\n"
-                );
-                command_list.add(command);
+                Task t;
+                String words = sc.nextLine();
+
+                if (command.equals("todo")) {
+                    t = new Todo(words.trim());
+                } else if (command.equals("event")) {
+                    String[] details = words.split(" /at ");
+                    t = new Event(details[0].trim(), details[1].trim());
+                } else {
+                    String[] details = words.split(" /by ");
+                    t = new Deadline(details[0].trim(), details[1].trim());
+                }
+                taskList.add(t);
+                System.out.println(indent + line);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println(indent + "  " + t);
+                System.out.println(indent + " Now you have "  + taskList.size() + " tasks in the list.");
+                System.out.println(indent + line + "\n");
             }
         }
         sc.close();

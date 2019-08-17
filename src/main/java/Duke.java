@@ -88,9 +88,9 @@ public class Duke {
         StringBuilder myStringBuilder = new StringBuilder();
         for (int i = 0; i < commandHistoryList.size(); i++) {
             if (i < commandHistoryList.size() - 1) {
-                myStringBuilder.append(i + 1).append(": ").append(commandHistoryList.get(i)).append("\n").append(COMMAND_INDENTATION);
+                myStringBuilder.append(i + 1).append(". ").append(commandHistoryList.get(i)).append("\n").append(COMMAND_INDENTATION);
             } else if (i == commandHistoryList.size() - 1) {
-                myStringBuilder.append(i + 1).append(": ").append(commandHistoryList.get(i));
+                myStringBuilder.append(i + 1).append(". ").append(commandHistoryList.get(i));
             }
         }
         return myStringBuilder.toString();

@@ -1,29 +1,34 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private String[] mylist;
+    private Task[] myList;
     private int size;
 
     public Duke() {
-        mylist = new String[100];
+        myList = new Task[100];
         size = 0;
         greet();
     }
 
-    public void add(String str) {
-        mylist[size] = str;
+    public void add(Task newTask) {
+        myList[size] = newTask;
         size++;
-        print("\tadded: "+str);
+        print("\tadded: "+newTask.getDescription());
     }
 
     public void list() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("\tHere are the tasks in your list:");
         for(int i = 0; i < size; i++) {
-            if(i != 0) sb.append("\n");
-            sb.append("\t"+(i+1)+". "+mylist[i]);
+            sb.append("\n\t"+(i+1)+". ["+ myList[i].getStatusIcon()+"] " + myList[i].getDescription());
         }
+        print(sb.toString());
+    }
+
+    public void markDone(int number) {
+        StringBuilder sb = new StringBuilder("\tNice! I've marked this task as done: ");
+        Task doneTask = myList[number-1];
+        doneTask.changeStatus();
+        sb.append("\n\t["+doneTask.getStatusIcon()+"] "+doneTask.getDescription());
         print(sb.toString());
     }
 
@@ -50,14 +55,19 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
-        String query = sc.next();
+        String query = sc.nextLine();
+        String[] splited = query.split(" ");
         while(!query.equals("bye")) {
             if(query.equals("list")) {
                 duke.list();
-            }else {
-                duke.add(query);
+            }else if(splited[0].equals("done")) {
+                duke.markDone(Integer.parseInt(splited[1]));
+            }else{
+                Task task = new Task(query);
+                duke.add(task);
             }
-            query = sc.next();
+            query = sc.nextLine();
+            splited = query.split(" ");
         }
         duke.exit();
     }

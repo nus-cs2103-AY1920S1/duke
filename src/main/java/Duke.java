@@ -1,9 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    public static Task[] tasks = new Task[100];
-    public static int counter = 0;
+    public static ArrayList<Task> tasks = new ArrayList<>(); // changed data structure
 
     public static void main(String[] args) {
 
@@ -23,117 +23,123 @@ public class Duke {
         boolean hasTerminated = false;
 
         while (!hasTerminated) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                hasTerminated = true;
-            } else if (input.equals("list")) {
-                sendLine();
-                sendTasks();
-                sendLine();
-            } else if (input.startsWith("done")) {
-                String[] parsedData = input.split(" ");
-                if (parsedData.length < 2) {
+            try {
+                String input = sc.nextLine();
+                if (input.equals("bye")) {
+                    hasTerminated = true;
+                } else if (input.equals("list")) {
                     sendLine();
-                    sendMessage("Error: Please key in the index of the task!");
+                    sendTasks();
                     sendLine();
+                } else if (input.startsWith("done")) {
+                    String[] parsedData = input.split(" ");
+                    if (parsedData.length < 2) {
+                        throw new InvalidTaskIndexException();
+                    } else {
+                        String todoIndex = parsedData[1];
+                        completeTask(todoIndex);
+                    }
                 } else {
-                    String todoIndex = parsedData[1];
-                    sendLine();
-                    completeTask(todoIndex);
-                    sendLine();
+                    if (input.startsWith("todo")) {
+                        if (tasks.size() >= 100) {
+                            throw new TooManyTasksException();
+                        }
+                        addTodoTask(input.substring(4));
+                    } else if (input.startsWith("deadline")) {
+                        if (tasks.size() >= 100) {
+                            throw new TooManyTasksException();
+                        }
+                        addDeadlineTask(input.substring(8));
+                    } else if (input.startsWith("event")) {
+                        if (tasks.size() >= 100) {
+                            throw new TooManyTasksException();
+                        }
+                        addEventTask(input.substring(5));
+                    } else {
+                        throw new UnknownCommandException();
+                    }
                 }
-            } else {
-                if (input.startsWith("todo")) {
-                    sendLine();
-                    addTodoTask(input.substring(5));
-                    sendLine();
-                } else if (input.startsWith("deadline")) {
-                    sendLine();
-                    addDeadlineTask(input.substring(9));
-                    sendLine();
-                } else if (input.startsWith("event")) {
-                    sendLine();
-                    addEventTask(input.substring(6));
-                    sendLine();
-                }
+            } catch (Exception error) {
+                sendLine();
+                sendMessage(error.toString());
+                sendLine();
             }
         }
 
         sendLine();
         sendFarewell();;
         sendLine();
-
     }
 
-    public static void addTask(String todo) {
-        if (counter >= 100) {
-            sendMessage("You only can add up to 100 tasks!");
-        } else {
-            tasks[counter] = new Task(todo);
-            counter ++;
-            sendMessage("Got it. I've added this task: ");
-            sendMessage("  " + todo);
-            sendMessage("Now you have " + counter + " tasks in the list");
+    public static void addTodoTask(String todo) throws InvalidToDoException {
+        if (todo.trim().equals("")) {
+            throw new InvalidToDoException();
         }
+        ToDoTask newTask = new ToDoTask(todo.trim());
+        tasks.add(newTask);
+        sendLine();
+        sendMessage("Got it. I've added this task: ");
+        sendMessage("  " + newTask);
+        sendMessage("Now you have " + tasks.size() + " tasks in the list");
+        sendLine();
     }
 
-    public static void addTodoTask(String todo) {
-        if (counter >= 100) {
-            sendMessage("You only can add up to 100 tasks!");
-        } else {
-            ToDoTask newTask = new ToDoTask(todo);
-            tasks[counter] = newTask;
-            counter ++;
-            sendMessage("Got it. I've added this task: ");
-            sendMessage("  " + newTask);
-            sendMessage("Now you have " + counter + " tasks in the list");
+    public static void addDeadlineTask(String todo) throws InvalidDeadlineException {
+        if (todo.trim().equals("")) {
+            throw new InvalidDeadlineException("The description of a deadline cannot be empty.");
+        } else if (!todo.trim().contains("/by")) {
+            throw new InvalidDeadlineException("Please include the time of a deadline.");
         }
-    }
-
-    public static void addDeadlineTask(String todo) {
-        if (counter >= 100) {
-            sendMessage("You only can add up to 100 tasks!");
-        } else {
-            String[] taskData = todo.split(" /by ");
-            DeadlineTask newTask = new DeadlineTask(taskData[0], taskData[1]);
-            tasks[counter] = newTask;
-            counter ++;
-            sendMessage("Got it. I've added this task: ");
-            sendMessage("  " + newTask);
-            sendMessage("Now you have " + counter + " tasks in the list");
+        String[] taskData = todo.trim().split(" /by ");
+        if (taskData.length == 1) {
+            throw new InvalidDeadlineException("The time of a deadline cannot be empty.");
         }
+        DeadlineTask newTask = new DeadlineTask(taskData[0], taskData[1]);
+        tasks.add(newTask);
+        sendLine();
+        sendMessage("Got it. I've added this task: ");
+        sendMessage("  " + newTask);
+        sendMessage("Now you have " + tasks.size() + " tasks in the list");
+        sendLine();
     }
 
-    public static void addEventTask(String todo) {
-        if (counter >= 100) {
-            sendMessage("You only can add up to 100 tasks!");
-        } else {
-            String[] taskData = todo.split(" /at ");
-            EventTask newTask = new EventTask(taskData[0], taskData[1]);
-            tasks[counter] = newTask;
-            counter ++;
-            sendMessage("Got it. I've added this task: ");
-            sendMessage("  " + newTask);
-            sendMessage("Now you have " + counter + " tasks in the list");
+    public static void addEventTask(String todo)throws InvalidEventException {
+        if (todo.trim().equals("")) {
+            throw new InvalidEventException("The description of an event cannot be empty.");
+        } else if (!todo.trim().contains("/at")) {
+            throw new InvalidEventException("Please include the time of an event.");
         }
+        String[] taskData = todo.trim().split(" /at ");
+        if (taskData.length == 1) {
+            throw new InvalidEventException("The time of an event cannot be empty.");
+        }
+        EventTask newTask = new EventTask(taskData[0], taskData[1]);
+        tasks.add(newTask);
+        sendLine();
+        sendMessage("Got it. I've added this task: ");
+        sendMessage("  " + newTask);
+        sendMessage("Now you have " + tasks.size() + " tasks in the list");
+        sendLine();
     }
 
-    public static void completeTask(String todoIndex) {
+    public static void completeTask(String todoIndex) throws InvalidTaskIndexException {
         int index = Integer.parseInt(todoIndex) - 1;
-        if (index < 0 || index >= counter) {
-            sendMessage("Error: Please key in a valid index!");
+        if (index < 0 || index >= tasks.size()) {
+            throw new InvalidTaskIndexException();
         } else {
-            Task task = tasks[index];
+            Task task = tasks.get(index);
             task.completed = true;
+            sendLine();
             sendMessage("Nice! I've marked this task as done:");
             sendMessage("  " + task.toString());
+            sendLine();
         }
     }
 
     public static void sendTasks() {
         sendMessage("Here are the tasks in your list:");
-        for (int tasknum = 0; tasknum < counter; tasknum ++) {
-            Task task = tasks[tasknum];
+        for (int tasknum = 0; tasknum < tasks.size(); tasknum ++) {
+            Task task = tasks.get(tasknum);
             String todo = task.toString();
             if (task.completed) {
                 sendMessage((tasknum + 1) + "." + todo);

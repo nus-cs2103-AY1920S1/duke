@@ -60,10 +60,15 @@ public class Duke {
                     printTaskList();
                     continue;
                 case "done":
-                    int i = Integer.parseInt(data) - 1;
-                    Task currTask = tasks.get(i);
-                    currTask.markDone();
-                    printDoneTask(currTask);
+                    int i = Integer.parseInt(data);
+                    try {
+                        Task currTask = tasks.get(i - 1);
+                        currTask.markDone();
+                        printDoneTask(currTask);
+                    } catch (IndexOutOfBoundsException e) {
+                        printPrompt("\u2639 OOPS!!! Task index must be " +
+                                "between 1 and " + tasks.size() + ".");
+                    }
                     continue;
                 default:
                     break;

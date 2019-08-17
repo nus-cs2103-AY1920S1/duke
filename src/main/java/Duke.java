@@ -8,17 +8,23 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println();
 
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + tasks.get(i));
+                    System.out.println((i + 1) + ". " + tasks.get(i).toString());
                 }
+            } else if (command.startsWith("done")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                tasks.get(index - 1).markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(tasks.get(index - 1).toString());
             } else {
-                tasks.add(command);
+                tasks.add(new Task(command));
                 System.out.println("added: " + command);
             }
 

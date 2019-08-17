@@ -29,45 +29,73 @@ public class Duke {
     }
 
     private static boolean runCommand(String s) {
-        String[] arr = s.split(" ", 2);
+        String[] arg = s.split(" ", 2);
         String result = "";
-        switch (arr[0]) {
-            case "bye":
-                dukePrint("Bye. Hope to see you again soon!");
-                return false;
-            case "list":
-                result = "Here are the tasks in your list:";
-                for (int i = 0; i < tasks.size(); i++) {
-                    result += "\n" + (i + 1) + ". " + tasks.get(i);
-                }
-                dukePrint(result);
-                break;
-            case "done":
-                int idx = Integer.parseInt(arr[1]) - 1;
-                tasks.get(idx).markAsDone();
-                result = "Nice! I've marked this task as done:\n  ";
-                dukePrint(result + tasks.get(idx));
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                Task t = new Task(arr[1]);;
-                if (arr[0].equals("todo")) {
-                    t = new Todo(arr[1]);
-                } else if (arr[0].equals("deadline")) {
-                    String[] temp = arr[1].split(" /by ", 2);
-                    t = new Deadline(temp[0], temp[1]);
-                } else if (arr[0].equals("event")) {
-                    String[] temp = arr[1].split(" /at ", 2);
-                    t = new Event(temp[0], temp[1]);
-                }
-                tasks.add(t);
-                result = "Got it. I've added this task:\n";
-                result += "  " + t + "\n";
-                result += "Now you have " + tasks.size() + " tasks in the list.";
-                dukePrint(result);
-                break;
+        try {
+            switch (arg[0]) {
+                case "bye":
+                    dukePrint("Bye. Hope to see you again soon!");
+                    return false;
+                case "list":
+                    result = "Here are the tasks in your list:";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        result += "\n" + (i + 1) + ". " + tasks.get(i);
+                    }
+                    dukePrint(result);
+                    break;
+                case "done":
+                    if (arg.length < 2 || arg[1].trim().length() < 1) {
+                        throw new DukeEmptyDescException(arg[0]);
+                    }
+                    int idx;
+                    try {
+
+                        idx = Integer.parseInt(arg[1]) - 1;
+                    } catch (NumberFormatException e) {
+                        throw new DukeInvalidTaskException(arg[1]);
+                    }
+                    if (idx < 0 || idx >= tasks.size()) {
+                        throw new DukeInvalidTaskException(arg[1]);
+                    }
+                    tasks.get(idx).markAsDone();
+                    result = "Nice! I've marked this task as done:\n  ";
+                    dukePrint(result + tasks.get(idx));
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    if (arg.length < 2 || arg[1].trim().length() < 1) {
+                        throw new DukeEmptyDescException(arg[0]);
+                    }
+                    Task t = new Task(arg[1]);
+                    if (arg[0].equals("todo")) {
+                        t = new Todo(arg[1]);
+                    } else if (arg[0].equals("deadline")) {
+                        String[] temp = arg[1].split(" /by ", 2);
+                        if (temp.length < 2 || temp[1].trim().length() < 1) {
+                            throw new DukeEmptyDateException(arg[0]);
+                        }
+                        t = new Deadline(temp[0], temp[1]);
+                    } else if (arg[0].equals("event")) {
+                        String[] temp = arg[1].split(" /at ", 2);
+                        if (temp.length < 2 || temp[1].trim().length() < 1) {
+                            throw new DukeEmptyDateException(arg[0]);
+                        }
+                        t = new Event(temp[0], temp[1]);
+                    }
+                    tasks.add(t);
+                    result = "Got it. I've added this task:\n";
+                    result += "  " + t + "\n";
+                    result += "Now you have " + tasks.size() + " tasks in the list.";
+                    dukePrint(result);
+                    break;
+                default:
+                    throw new DukeException();
+            }
+        } catch (DukeException e) {
+            dukePrint(e.toString());
+        } finally {
+            return true;
         }
-        return true;
     }
 }

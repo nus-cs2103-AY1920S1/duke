@@ -3,17 +3,9 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Echoer echoer = new Echoer();
-        String command;
+        Client client = Client.initialise();
 
-        echoer.greet();
+        while (client.read(scanner.nextLine()));
 
-        command = scanner.nextLine();
-        while (!command.equals("bye")) {
-            echoer.echo(command);
-            command = scanner.nextLine();
-        }
-
-        echoer.exit();
     }
 }

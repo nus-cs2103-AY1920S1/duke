@@ -8,7 +8,7 @@ public class Storage {
         this.list = new ArrayList<>();
     }
 
-    List getList() {
+    List<String> getList() {
         return this.list;
     }
 

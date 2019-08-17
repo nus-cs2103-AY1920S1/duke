@@ -12,10 +12,40 @@ public class Client {
     static Client initialise() {
         if (client != null) {
             System.out.println("Client has already been initialised");
-        }
-        else {
+        } else {
             client = new Client();
         }
         return client;
     }
+
+    boolean read(String message) {
+        boolean shouldContinue = true;
+        switch (message) {
+        case "list":
+            this.listItems();
+            break;
+        case "bye":
+            this.echoer.exit();
+            shouldContinue = false;
+            break;
+        default:
+            this.addItem(message);
+        }
+        return shouldContinue;
+    }
+
+    private void addItem(String item) {
+        this.storage.add(item);
+        this.echoer.echo("added: " + item);
+    }
+
+    private void listItems() {
+        String[] items = this.storage.getList().toArray(new String[0]);
+        for (int ordering = 1; ordering <= items.length; ordering++) {
+            items[ordering - 1] = ordering + ". " + items[ordering - 1];
+        }
+        this.echoer.echo(items);
+    }
+
+
 }

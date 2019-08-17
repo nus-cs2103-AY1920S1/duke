@@ -15,22 +15,25 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input;
         String check = "dummy";
-        ArrayList<String> taskStorage = new ArrayList<>();
+        ArrayList<Task> taskStorage = new ArrayList<>();
 
         while (check.equals("bye") == false) {
             input = sc.nextLine();
             check = input.toLowerCase();
             if (check.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= taskStorage.size(); i++) {
-                    System.out.println(i + ". " + taskStorage.get(i - 1));
+                    Task evaluatingTask = taskStorage.get(i - 1);
+                    System.out.println(i + ". [" + evaluatingTask.getStatusIcon() + "] " + evaluatingTask.getDescription());
                 }
                 System.out.println();
                 continue;
             }
 
             if (check.equals("bye") == false) {
-                taskStorage.add(input);
-                System.out.println("added: " + input + "\n");
+                Task t = new Task(input);
+                taskStorage.add(t);
+                System.out.println("added: " + t.getDescription() + "\n");
             }
         }
 

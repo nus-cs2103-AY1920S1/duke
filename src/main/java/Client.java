@@ -75,9 +75,10 @@ public class Client {
         }
 
         this.storage.add(task);
+        int numOfTasks = this.storage.getSize();
         this.echoer.echo("Got it. I've added this task:"
                 , "  " + task.toString()
-                , String.format("Now you have %d tasks in the list.", this.storage.getSize()));
+                , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }
 
     private void listTasks() {

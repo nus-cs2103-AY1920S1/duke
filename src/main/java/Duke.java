@@ -32,7 +32,12 @@ public class Duke {
 
                 index++;
                 System.out.println(commandMsg);
-                String statusOfList = "Now you have " + index + " tasks in the list.\n";
+                String statusOfList;
+                if (index == 1) {
+                    statusOfList = "Now you have " + index + " task in the list.\n";
+                } else {
+                    statusOfList = "Now you have " + index + " tasks in the list.\n";
+                }
                 System.out.println(statusOfList);
             } else if (command.substring(0, 4).equals("done")) { //for marking task as done
                 int curr = Integer.parseInt(command.substring(5));

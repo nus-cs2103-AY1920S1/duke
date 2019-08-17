@@ -25,7 +25,7 @@ public class Duke {
                     tasks[index] = new Deadline(arr[0].substring(9), arr[1]);
                 } else {
                     String[] arr = command.split(" /at ", 2);
-                    tasks[index] = new Event(arr[0].substring(9), arr[1]);
+                    tasks[index] = new Event(arr[0].substring(7), arr[1]);
                 }
                 String commandMsg = "Got it. I've added this task:\n"
                         + tasks[index] + "\n";

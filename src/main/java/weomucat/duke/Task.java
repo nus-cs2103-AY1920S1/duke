@@ -15,6 +15,6 @@ public class Task {
     @Override
     public String toString() {
         String done_icon = this.done ? "[\u2713]" : "[\u2718]";
-        return done_icon + " " + this.description;
+        return String.format("%s %s", done_icon, this.description);
     }
 }

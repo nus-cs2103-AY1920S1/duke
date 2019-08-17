@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final String line = "\t____________________________________________________________";
-    private static ArrayList<String> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -34,18 +34,15 @@ public class Duke {
                 dukePrint("Bye. Hope to see you again soon!");
                 return false;
             case "list":
-                String result = "";
+                String result = "Here are the tasks in your list:";
                 for (int i = 0; i < tasks.size(); i++) {
-                    if (i > 0) {
-                        result += "\n";
-                    }
-                    result += (i + 1) + ". " + tasks.get(i);
+                    result += "\n" + (i + 1) + ". " + tasks.get(i);
                 }
                 dukePrint(result);
                 return true;
             default:
                 dukePrint("added: " + s);
-                tasks.add(s);
+                tasks.add(new Task(s));
                 return true;
         }
     }

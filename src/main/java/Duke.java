@@ -39,6 +39,14 @@ public class Duke {
                         String todoIndex = parsedData[1];
                         completeTask(todoIndex);
                     }
+                } else if (input.startsWith("delete")) {
+                    String[] parsedData = input.split(" ");
+                    if (parsedData.length < 2) {
+                        throw new InvalidTaskIndexException();
+                    } else {
+                        String todoIndex = parsedData[1];
+                        deleteTask(todoIndex);
+                    }
                 } else {
                     if (input.startsWith("todo")) {
                         if (tasks.size() >= 100) {
@@ -132,6 +140,21 @@ public class Duke {
             sendLine();
             sendMessage("Nice! I've marked this task as done:");
             sendMessage("  " + task.toString());
+            sendLine();
+        }
+    }
+
+    public static void deleteTask(String todoIndex) throws InvalidTaskIndexException {
+        int index = Integer.parseInt(todoIndex) - 1;
+        if (index < 0 || index >= tasks.size()) {
+            throw new InvalidTaskIndexException();
+        } else {
+            Task task = tasks.get(index);
+            tasks.remove(index);
+            sendLine();
+            sendMessage("Noted. I've removed this task: ");
+            sendMessage("  " + task.toString());
+            sendMessage("Now you have " +  tasks.size() + " tasks in the list.");
             sendLine();
         }
     }

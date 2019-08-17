@@ -28,6 +28,12 @@ public class Duke {
 
             if ("list".equals(command)) {
                 echo(taskList);
+            } else if (command.startsWith("done")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                Task task = taskList.get(index - 1);
+                task.markAsDone();
+                echo("Nice! I've marked this task as done:",
+                        String.format("  [\u2713] %s", task.getDetails()));
             } else if ("bye".equals(command)) {
                 echo("Bye. Hope to see you again!");
                 break;
@@ -47,7 +53,7 @@ public class Duke {
     }
 
     private void echo(List<?> list, String... strings) {
-        printLine();
+        System.out.print(LINE);
 
         if (list != null) {
             list.forEach(thing -> {
@@ -59,21 +65,17 @@ public class Duke {
             }
         }
 
-        printLine();
+        System.out.print(LINE);
+        System.out.print("\n");
     }
 
     private void printWelcomeMessage() {
         String logo = " ____        _        \n"
-                + "   |  _ \\ _   _| | _____ \n"
-                + "   | | | | | | | |/ / _ \\\n"
-                + "   | |_| | |_| |   <  __/\n"
-                + "   |____/ \\__,_|_|\\_\\___|\n";
+                + "     |  _ \\ _   _| | _____ \n"
+                + "     | | | | | | | |/ / _ \\\n"
+                + "     | |_| | |_| |   <  __/\n"
+                + "     |____/ \\__,_|_|\\_\\___|\n";
 
         echo(logo, "Hello! I'm Duke", "What can I do for you?");
-    }
-
-    // Print a line made up of underscore _ characters
-    private void printLine() {
-        System.out.print(LINE);
     }
 }

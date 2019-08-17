@@ -2,17 +2,29 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    
     //@@author Parcly-Taxel
     /**
-      * Pretty-prints a line of prompt to the user.
+      * Prints a line of prompt to the user.
       */
     public static void printPrompt(String prompt) {
         System.out.println("    " + prompt);
     }
     
+    /**
+     * Prints a message saying that a task has been successfully added.
+     */
+    public static void printAddedTask(Task t) {
+        printPrompt("Got it. I've added this task:");
+        printPrompt("  " + t);
+        int numTasks = tasks.size();
+        printPrompt("Now you have " + numTasks + " task" +
+                (numTasks == 1 ? "" : "s") + " in the list.");
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<Task>();
         
         printPrompt("Hello! I'm Duke");
         printPrompt("What can I do for you?");
@@ -20,7 +32,7 @@ public class Duke {
         while (true) {
             // Read a whole line at once, then parse it
             String cmd = sc.nextLine();
-
+            
             if (cmd.equals("bye")) {
                 break;
             } else if (cmd.equals("list")) {
@@ -44,11 +56,7 @@ public class Duke {
                     t = Todo.parse(cmd);
                 }
                 tasks.add(t);
-                int numTasks = tasks.size();
-                printPrompt("Got it. I've added this task:");
-                printPrompt("  " + t);
-                printPrompt("Now you have " + numTasks + " task" + 
-                            (numTasks == 1 ? "" : "s") + " in the list.");
+                printAddedTask(t);
             }
         }
         

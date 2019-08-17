@@ -4,6 +4,7 @@ public class DukeTextFormatter {
     public static final String fivespace = "     ";
 
     public static String makeFormattedText(String inputString) {
+        //returns the input String, but looking nicer.
         String [] splitString = inputString.split("\n");
         StringBuilder sb = new StringBuilder();
 

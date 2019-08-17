@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Client {
     private Storage storage;
     private Echoer echoer;
@@ -18,9 +21,10 @@ public class Client {
         return client;
     }
 
-    boolean read(String message) {
+    boolean read(String command, String message) {
         boolean shouldContinue = true;
-        switch (message) {
+
+        switch (command) {
         case "list":
             this.listTasks();
             break;
@@ -28,29 +32,37 @@ public class Client {
             this.echoer.exit();
             shouldContinue = false;
             break;
+        case "done":
+            this.completeTask(Integer.parseInt(message.trim()));
+            break;
         default:
-            this.addTask(message);
+            this.addTask(command + message);
         }
         return shouldContinue;
     }
 
     private void addTask(String description) {
-        Task task = new Task()
+        Task task = new Task(description);
         this.storage.add(new Task(description));
         this.echoer.echo("added: " + task.getDescription());
     }
 
     private void listTasks() {
-        String[] tasks = this.storage
+        List<String> tasks = this.storage
                 .getList()
                 .stream()
                 .map(Task::toString)
-                .toArray(String[]::new);
-        for (int ordering = 1; ordering <= tasks.length; ordering++) {
-            tasks[ordering - 1] = ordering + ". " + tasks[ordering - 1];
+                .collect(Collectors.toList());
+        for (int ordering = 1; ordering <= tasks.size(); ordering++) {
+            tasks.set(ordering - 1, ordering + "." + tasks.get(ordering - 1));
         }
-        this.echoer.echo(tasks);
+        tasks.add(0, "Here are the tasks in your list:");
+        this.echoer.echo(tasks.toArray(new String[0]));
     }
 
-
+    private void completeTask(int ordering) {
+        Task task = this.storage.getList().get(ordering-1);
+        task.markAsDone();
+        this.echoer.echo("Nice! I've marked this task as done:", "  " + task.toString());
+    }
 }

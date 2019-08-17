@@ -29,21 +29,29 @@ public class Duke {
     }
 
     private static boolean runCommand(String s) {
-        switch (s) {
+        String[] arr = s.split(" ");
+        String result = "";
+        switch (arr[0]) {
             case "bye":
                 dukePrint("Bye. Hope to see you again soon!");
                 return false;
             case "list":
-                String result = "Here are the tasks in your list:";
+                result = "Here are the tasks in your list:";
                 for (int i = 0; i < tasks.size(); i++) {
                     result += "\n" + (i + 1) + ". " + tasks.get(i);
                 }
                 dukePrint(result);
-                return true;
+                break;
+            case "done":
+                int idx = Integer.parseInt(arr[1]) - 1;
+                tasks.get(idx).markAsDone();
+                result = "Nice! I've marked this task as done:\n  ";
+                dukePrint(result + tasks.get(idx));
+                break;
             default:
                 dukePrint("added: " + s);
                 tasks.add(new Task(s));
-                return true;
         }
+        return true;
     }
 }

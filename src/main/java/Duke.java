@@ -1,41 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private Task[] myList;
-    private int size;
+    private List<Task> myList;
 
     public Duke() {
-        myList = new Task[100];
-        size = 0;
+        myList = new ArrayList<>();
         greet();
     }
 
     public int getSize(){
-        return size;
+        return myList.size();
     }
 
     public void add(Task newTask) {
-        myList[size] = newTask;
-        size++;
+        myList.add(newTask);
         StringBuilder sb = new StringBuilder("\tGot it. I've added this task: ");
         sb.append("\n\t\t"+newTask);
-        sb.append("\n\tNow you have "+size+" tasks in the list.");
+        sb.append("\n\tNow you have "+getSize()+" tasks in the list.");
         print(sb.toString());
     }
 
     public void list() {
         StringBuilder sb = new StringBuilder("\tHere are the tasks in your list:");
-        for(int i = 0; i < size; i++) {
-            sb.append("\n\t"+(i+1)+". "+myList[i]);
+        for(int i = 0; i < getSize(); i++) {
+            sb.append("\n\t"+(i+1)+". "+myList.get(i));
         }
         print(sb.toString());
     }
 
     public void markDone(int number) {
         StringBuilder sb = new StringBuilder("\tNice! I've marked this task as done: ");
-        Task doneTask = myList[number-1];
+        Task doneTask = myList.get(number-1);
         doneTask.changeStatus();
         sb.append("\n\t\t"+doneTask);
+        print(sb.toString());
+    }
+
+    public void delete(int number){
+        StringBuilder sb = new StringBuilder("\tNoted. I've removed this task: ");
+        Task deletedTask = myList.get(number-1);
+        sb.append("\n\t\t"+deletedTask);
+        myList.remove(number-1);
         print(sb.toString());
     }
 
@@ -64,9 +71,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String query = sc.nextLine();
         String[] parts = query.split(" ");
-        String des = "";
-        int index = 0;
-        String date = "";
+        String des = "", date = "";
+        int index = 0, number = 0;
         while(!query.equals("bye")) {
             try{
                 if(parts.length == 0) throw new DukeException("Your input cannot be empty.");
@@ -76,11 +82,19 @@ public class Duke {
                         break;
                     case "done":
                         if(parts.length == 1) throw new DukeException("The description of a done cannot be empty.");
-                        int number = Integer.parseInt(parts[1]);
+                        number = Integer.parseInt(parts[1]);
                         if(number > duke.getSize() || duke.getSize() == 0) {
                             throw new DukeException("It's an invalid task");
                         }
                         duke.markDone(number);
+                        break;
+                    case "delete":
+                        if(parts.length == 1) throw new DukeException("The description of a delete cannot be empty.");
+                        number = Integer.parseInt(parts[1]);
+                        if(number > duke.getSize() || duke.getSize() == 0) {
+                            throw new DukeException("It's an invalid task");
+                        }
+                        duke.delete(number);
                         break;
                     case "todo":
                         if(parts.length == 1) throw new DukeException("The description of a todo cannot be empty.");

@@ -10,15 +10,20 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        //Boolean check = false;
+        ArrayList<String> array = new ArrayList<>();
 
         while (sc.hasNext()) {
-            String word = sc.next();
+            String word = sc.nextLine();
             if (word.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.exit(0);
+            } else if (word.equals("list")) {
+                for(String s : array) {
+                    System.out.println(s);
+                }
             } else {
-                System.out.println(word);
+                array.add("1. " + word);
+                System.out.println("added: " + word);
             }
         }
     }

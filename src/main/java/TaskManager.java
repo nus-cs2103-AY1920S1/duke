@@ -12,6 +12,10 @@ public class TaskManager {
         taskList.add(task);
     }
 
+    public void deleteTask(int index) {
+        taskList.remove(index);
+    }
+
     public Task getTask(int index) {
         if (index < 0 || index >= taskList.size()) {
             return null;

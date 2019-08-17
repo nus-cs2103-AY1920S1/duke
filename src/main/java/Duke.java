@@ -14,7 +14,7 @@ public class Duke {
 
             try {
                 if (command.isEmpty()) {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    throw new UnknownCommandDukeException();
                 } else if (command.equals("bye")) {
                     printExitMessage();
                     break;
@@ -22,6 +22,8 @@ public class Duke {
                     printTasks();
                 } else if (command.startsWith("done")) {
                     handleTaskDoneCommand(command);
+                } else if (command.startsWith("delete")) {
+                    handleDeleteTaskCommand(command);
                 } else {
                     handleAddTaskCommand(command);
                 }
@@ -64,7 +66,7 @@ public class Duke {
         switch (subArgs[0]) {
         case "todo":
             if (taskDescription.isEmpty()) {
-                throw new DukeException("The description of a todo cannot be empty.");
+                throw new InvalidInputDukeException("The description of a todo cannot be empty.");
             }
 
             task = new Todo(taskDescription);
@@ -91,11 +93,11 @@ public class Duke {
             by = stringBuilder.toString();
 
             if (taskDescription.isEmpty()) {
-                throw new DukeException("The task description of a deadline cannot be empty.");
+                throw new InvalidInputDukeException("The task description of a deadline cannot be empty.");
             }
 
             if (!enteredBy || by.isEmpty()) {
-                throw new DukeException("A deadline must have a 'by' date.");
+                throw new InvalidInputDukeException("A deadline must have a 'by' date.");
             }
 
             task = new Deadline(taskDescription, by);
@@ -122,18 +124,18 @@ public class Duke {
             at = stringBuilder.toString();
 
             if (taskDescription.isEmpty()) {
-                throw new DukeException("The task description of an event cannot be empty.");
+                throw new InvalidInputDukeException("The task description of an event cannot be empty.");
             }
 
             if (!enteredAt || at.isEmpty()) {
-                throw new DukeException("An event must have an 'at' date.");
+                throw new InvalidInputDukeException("An event must have an 'at' date.");
             }
 
             task = new Event(taskDescription, at);
             break;
 
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandDukeException();
         }
 
         taskManager.addTask(task);
@@ -141,8 +143,9 @@ public class Duke {
         printSeparator();
         System.out.println(" Got it. I've added this task: ");
         System.out.println("  " + task);
-        System.out.println(
-                " Now you have " + taskManager.getTaskList().size() + " tasks in the list.");
+        System.out.println(" Now you have "
+                + taskManager.getTaskList().size()
+                + " tasks in the list.");
         printSeparator();
         System.out.println();
     }
@@ -156,25 +159,34 @@ public class Duke {
 
     public static void handleTaskDoneCommand(String command) throws DukeException {
         String[] subArgs = command.split("\\s+");
-        if (subArgs.length == 0) {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+
+        if (!subArgs[0].equals("done")) {
+            throw new UnknownCommandDukeException();
         }
 
-        int index = Integer.parseInt(subArgs[1]);
-
-        if (index <= 0) {
-            throw new DukeException("Invalid task number entered.");
+        if (subArgs.length < 2) {
+            throw new InvalidInputDukeException("A task number is required for the done command");
         }
 
-        index--;
-        markAndPrintTaskAsDone(index);
+        try {
+            int index = Integer.parseInt(subArgs[1]);
+
+            if (index <= 0) {
+                throw new InvalidInputDukeException("Task number cannot be zero or a negative number.");
+            }
+
+            index--;
+            markTaskAsDone(index);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputDukeException("Invalid task number entered.");
+        }
     }
 
-    public static void markAndPrintTaskAsDone(int index) throws DukeException {
+    public static void markTaskAsDone(int index) throws InvalidTaskDukeException {
         Task task = taskManager.getTask(index);
 
         if (task == null) {
-            throw new DukeException("The task does not exist.");
+            throw new InvalidTaskDukeException("The task does not exist.");
         }
 
         task.markAsDone();
@@ -182,6 +194,49 @@ public class Duke {
         printSeparator();
         System.out.println(" Nice! I've marked this task as done: ");
         System.out.println("  " + task);
+        printSeparator();
+        System.out.println();
+    }
+
+    public static void handleDeleteTaskCommand(String command) throws DukeException {
+        String[] subArgs = command.split("\\s+");
+        if (!subArgs[0].equals("delete")) {
+            throw new UnknownCommandDukeException("I'm sorry, but I don't know what that means :-(");
+        }
+
+        if (subArgs.length < 2) {
+            throw new InvalidInputDukeException("A task number is required for the delete command");
+        }
+
+        try {
+            int index = Integer.parseInt(subArgs[1]);
+
+            if (index <= 0) {
+                throw new InvalidInputDukeException("Task number cannot be zero or a negative number.");
+            }
+
+            index--;
+            deleteTask(index);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputDukeException("Invalid task number entered.");
+        }
+    }
+
+    public static void deleteTask(int index) throws InvalidTaskDukeException {
+        Task task = taskManager.getTask(index);
+
+        if (task == null) {
+            throw new InvalidTaskDukeException("The task does not exist.");
+        }
+
+        taskManager.deleteTask(index);
+
+        printSeparator();
+        System.out.println(" Noted. I've removed this task: ");
+        System.out.println("  " + task);
+        System.out.println(" Now you have "
+                + taskManager.getTaskList().size()
+                + " tasks in the list.");
         printSeparator();
         System.out.println();
     }

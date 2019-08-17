@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String line = "\t____________________________________________________________";
+    private static ArrayList<String> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -31,8 +33,19 @@ public class Duke {
             case "bye":
                 dukePrint("Bye. Hope to see you again soon!");
                 return false;
+            case "list":
+                String result = "";
+                for (int i = 0; i < tasks.size(); i++) {
+                    if (i > 0) {
+                        result += "\n";
+                    }
+                    result += (i + 1) + ". " + tasks.get(i);
+                }
+                dukePrint(result);
+                return true;
             default:
-                dukePrint(s);
+                dukePrint("added: " + s);
+                tasks.add(s);
                 return true;
         }
     }

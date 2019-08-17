@@ -22,29 +22,34 @@ public class Client {
         boolean shouldContinue = true;
         switch (message) {
         case "list":
-            this.listItems();
+            this.listTasks();
             break;
         case "bye":
             this.echoer.exit();
             shouldContinue = false;
             break;
         default:
-            this.addItem(message);
+            this.addTask(message);
         }
         return shouldContinue;
     }
 
-    private void addItem(String item) {
-        this.storage.add(item);
-        this.echoer.echo("added: " + item);
+    private void addTask(String description) {
+        Task task = new Task()
+        this.storage.add(new Task(description));
+        this.echoer.echo("added: " + task.getDescription());
     }
 
-    private void listItems() {
-        String[] items = this.storage.getList().toArray(new String[0]);
-        for (int ordering = 1; ordering <= items.length; ordering++) {
-            items[ordering - 1] = ordering + ". " + items[ordering - 1];
+    private void listTasks() {
+        String[] tasks = this.storage
+                .getList()
+                .stream()
+                .map(Task::toString)
+                .toArray(String[]::new);
+        for (int ordering = 1; ordering <= tasks.length; ordering++) {
+            tasks[ordering - 1] = ordering + ". " + tasks[ordering - 1];
         }
-        this.echoer.echo(items);
+        this.echoer.echo(tasks);
     }
 
 

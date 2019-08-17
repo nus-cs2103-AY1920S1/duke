@@ -1,13 +1,16 @@
+import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String input;
+        String inputln;
+        String[] inputs;
         int index;
+        Task task;
         Scanner sc = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
 
         System.out.println("    " + "____________________________________________________________");
         System.out.println("    " + "Hello! I'm Duke");
@@ -15,23 +18,39 @@ public class Duke {
         System.out.println("    " + "____________________________________________________________\n");
 
         while (true) {
-            input = sc.nextLine();
-            if (input.equals("bye")) {
+            inputln = sc.nextLine();
+            inputs = inputln.split(" ");
+            if (inputs[0].equals("bye")) {
                 System.out.println("    " + "____________________________________________________________");
                 System.out.println("    " + "Bye. Hope to see you again soon!");
                 System.out.println("    " + "____________________________________________________________\n");
                 break;
             }
-            else if (input.equals("list")) {
+            else if (inputs[0].equals("list")) {
                 System.out.println("    " + "____________________________________________________________");
+                System.out.println("    " + "Here are the tasks in your list:");
                 index = 1;
-                for (String s : list) System.out.println("    " + (index++) + ". " + s);
+                for (Task t: list) System.out.println("    " + (list.indexOf(t) + 1) + ". " + t);
+                System.out.println("    " + "____________________________________________________________\n");
+            }
+            else if (inputs[0].equals("done")) {
+                int i = Integer.parseInt(inputs[1]);
+                System.out.println("    " + "____________________________________________________________");
+                try {
+                    task = list.get(i - 1);
+                    task.setDone();
+                    System.out.println("    " + "Nice! I've marked this task as done: ");
+                    System.out.println("      " + task);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("    " + "Invalid index, please try again");
+                }
                 System.out.println("    " + "____________________________________________________________\n");
             }
             else {
-                list.add(input);
+                task = new Task(inputln);
+                list.add(task);
                 System.out.println("    " + "____________________________________________________________");
-                System.out.println("    " + "Added: " + input);
+                System.out.println("    " + "Added: " + task);
                 System.out.println("    " + "____________________________________________________________\n");
             }
         }

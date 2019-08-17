@@ -13,7 +13,26 @@ class Display{
         System.out.println(greeting);
     }
 
+    public static void printExitMessage(){
+        String farewell = "Bye. Hope to see you "
+            + "again soon!";
+        System.out.println(farewell);
+    }
+
+    public static boolean isEndCommand(String cmd){
+        return cmd.toUpperCase().equals("BYE");
+    }
+
+
     public void instance(){
         this.printGreeting();
+        String command = this._sc.nextLine();
+
+        while(! isEndCommand(command)){
+            System.out.println("echo: " + command);
+
+            command = this._sc.nextLine();
+        }
+        this.printExitMessage();
     }
 }

@@ -1,18 +1,25 @@
 class FridayController implements ControllerInterface {
     private TaskModelInterface model;
-    private Display view;
+    private Display display;
 
-    public FridayController(TaskModelInterface model){
+    public FridayController(TaskModelInterface model) {
         this.model = model;
-        view = new Display(this, model);
+        display = new Display(this, model);
     }
 
-    public void start(){
-        this.view.instance();
+    public void start() {
+        this.display.instance();
     }
 
-    public void stop(){
-        //this.view.
+    public void stop() {
+        //this.display.
     }
-       
+
+    public void addTask(String command) {
+        // L2: task only has name
+        TaskInterface task = new TaskImplementation(command);
+        this.model.addTask(task);
+        this.display.printAddTaskSection(task.toString());
+    }
+
 }

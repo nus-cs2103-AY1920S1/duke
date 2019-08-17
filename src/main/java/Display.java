@@ -77,6 +77,11 @@ class Display implements TaskObserver {
         Display.printSection(printxs);
     }
 
+    public static void printAddTaskSection(String taskDetails) {
+        String outputMsg = "added: " + taskDetails;
+        Display.printSection(outputMsg);
+    }        
+
     public void update(TaskModelInterface model){
     /* TaskModel's most recent change here */
     /* model.getUpdate */
@@ -94,6 +99,7 @@ class Display implements TaskObserver {
             if (commandlist[0].toUpperCase().equals("LIST")) {
                 /* TODO controller.list */
             } else {
+                this.controller.addTask(command);
                 /* TODO controller add task */     
             }
 

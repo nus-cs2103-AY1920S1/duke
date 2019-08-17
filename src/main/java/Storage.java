@@ -15,4 +15,8 @@ public class Storage {
     void add(Task task) {
         this.list.add(task);
     }
+
+    int getSize() {
+        return this.list.size();
+    }
 }

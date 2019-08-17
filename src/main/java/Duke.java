@@ -5,7 +5,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         Client client = Client.initialise();
 
-        while (client.read(scanner.next(), scanner.nextLine()));
+        while (client.read(scanner.next(), scanner.nextLine().trim()));
 
     }
 }

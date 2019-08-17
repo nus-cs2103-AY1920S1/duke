@@ -72,17 +72,18 @@ public class Duke {
 
                 // List all tasks.
                 case COMMAND_LIST:
-                    String[] out = new String[tasks.size()];
+                    ArrayList<String> out = new ArrayList<>();
+                    out.add("Here are the tasks in your list:");
 
                     for (int i = 0; i < tasks.size(); i++) {
                         // Get task from tasks
                         Task task = tasks.get(i);
 
                         // Format task with no. in front
-                        out[i] = String.format("%d. %s", i + 1, task);
+                        out.add(String.format("%d. %s", i + 1, task));
                     }
 
-                    say(out);
+                    say(out.toArray(new String[0]));
                     break;
 
                 // Mark a task as done.

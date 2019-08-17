@@ -12,10 +12,10 @@ public class Duke {
 
         reply(greeting);
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
+        String input = sc.nextLine();
         while (!input.equalsIgnoreCase("bye")) {
             reply("\t" + input);
-            input = sc.next();
+            input = sc.nextLine();
         }
         reply(bye);
     }

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 //@@author Parcly-Taxel
 /**
  * Class that handles messages shown to the user of this application.
@@ -35,7 +33,7 @@ public class Ui {
      * Prints the tasks in a task list.
      * @param tasks The task list whose tasks are to be printed out.
      */
-    public void printTaskList(ArrayList<Task> tasks) {
+    public void printTaskList(TaskList tasks) {
         printMessage("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             printMessage((i + 1) + "." + tasks.get(i));
@@ -46,7 +44,7 @@ public class Ui {
      * Prints the number of tasks in the given task list.
      * @param tasks The task list whose size is to be displayed.
      */
-    public void printNumTasks(ArrayList<Task> tasks) {
+    public void printNumTasks(TaskList tasks) {
         int numTasks = tasks.size();
         printMessage("Now you have " + numTasks + " task" +
                 (numTasks == 1 ? "" : "s") + " in the list.");

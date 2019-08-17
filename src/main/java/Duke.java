@@ -2,12 +2,43 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> tasks = new ArrayList<Task>();
+    private static TaskList tl = new TaskList();
+    private static Ui ui = new Ui();
     
     //@@author Parcly-Taxel
+    /**
+     * Marks the task at one-based position i of tl as done.
+     * Handles the error itself if this cannot be met.
+     */
+    public static void markTaskDone(int i) {
+        try {
+            Task doneTask = tl.markDone(i);
+            ui.printDoneTask(doneTask);
+        } catch (IndexOutOfBoundsException e) {
+            ui.printMessage("\u2639 OOPS!!! Task index must be " +
+                    "between 1 and " + tl.size() + ".");
+        }
+    }
+    
+    /**
+     * Removes the task at one-based position i of tl.
+     * Handles the error itself if this cannot be met.
+     */
+    public static void deleteTask(int i) {
+        try {
+            Task remTask = tl.removeTask(i);
+            ui.printRemovedTask(remTask);
+            ui.printNumTasks(tl);
+        } catch (IndexOutOfBoundsException e) {
+            ui.printMessage("\u2639 OOPS!!! Task index must be " +
+                    "between 1 and " + tl.size() + ".");
+        }
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Ui ui = new Ui();
+        int i;
+        
         ui.printWelcome();
         
         while (true) {
@@ -20,27 +51,15 @@ public class Duke {
                     ui.printGoodbye();
                     System.exit(0);
                 case "list":
-                    ui.printTaskList(tasks);
+                    ui.printTaskList(tl);
                     continue;
                 case "done":
-                    try {
-                        Task currTask = tasks.get(Integer.parseInt(data) - 1);
-                        currTask.markDone();
-                        ui.printDoneTask(currTask);
-                    } catch (IndexOutOfBoundsException e) {
-                        ui.printMessage("\u2639 OOPS!!! Task index must be " +
-                                "between 1 and " + tasks.size() + ".");
-                    }
+                    i = Integer.parseInt(data);
+                    markTaskDone(i);
                     continue;
                 case "delete":
-                    try {
-                        Task remTask = tasks.remove(Integer.parseInt(data) - 1);
-                        ui.printRemovedTask(remTask);
-                        ui.printNumTasks(tasks);
-                    } catch (IndexOutOfBoundsException e) {
-                        ui.printMessage("\u2639 OOPS!!! Task index must be " +
-                                "between 1 and " + tasks.size() + ".");
-                    }
+                    i = Integer.parseInt(data);
+                    deleteTask(i);
                     continue;
                 default:
                     break;
@@ -62,9 +81,9 @@ public class Duke {
                         throw new IllegalArgumentException("\u2639 OOPS!!! " +
                                 "I'm sorry, but I don't know what that means :-(");
                 }
-                tasks.add(t);
+                tl.addTask(t);
                 ui.printAddedTask(t);
-                ui.printNumTasks(tasks);
+                ui.printNumTasks(tl);
             } catch (IllegalArgumentException e) {
                 ui.printMessage(e.getMessage());
             }

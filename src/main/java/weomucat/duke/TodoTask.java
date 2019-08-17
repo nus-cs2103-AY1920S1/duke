@@ -1,7 +1,7 @@
 package weomucat.duke;
 
-public class ToDo extends Task {
-    public ToDo(String description) {
+public class TodoTask extends Task {
+    public TodoTask(String description) {
         super(description);
     }
 

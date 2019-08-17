@@ -51,7 +51,7 @@ public class Duke {
                     HashMap<String, String> parameters = parser.nextParameters();
                     String description = parameters.get(PARAMETER_DEFAULT);
 
-                    addTask(new ToDo(description));
+                    addTask(new TodoTask(description));
                     break;
 
                 case COMMAND_EVENT:
@@ -59,7 +59,7 @@ public class Duke {
                     description = parameters.get(PARAMETER_DEFAULT);
                     String at = parameters.get(PARAMETER_AT);
 
-                    addTask(new Event(description, at));
+                    addTask(new EventTask(description, at));
                     break;
 
                 case COMMAND_DEADLINE:
@@ -67,7 +67,7 @@ public class Duke {
                     description = parameters.get(PARAMETER_DEFAULT);
                     String by = parameters.get(PARAMETER_BY);
 
-                    addTask(new Deadline(description, by));
+                    addTask(new DeadlineTask(description, by));
                     break;
 
                 // List all tasks.

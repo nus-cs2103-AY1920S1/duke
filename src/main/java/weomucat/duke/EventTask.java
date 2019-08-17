@@ -1,9 +1,9 @@
 package weomucat.duke;
 
-public class Event extends Task {
+public class EventTask extends Task {
     private String at;
 
-    public Event(String description, String at) {
+    public EventTask(String description, String at) {
         super(description);
         this.at = at;
     }

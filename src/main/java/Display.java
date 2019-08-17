@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 class Display implements TaskObserver {
     private ControllerInterface controller; 
@@ -82,6 +83,23 @@ class Display implements TaskObserver {
         Display.printSection(outputMsg);
     }        
 
+    public void printAllTasks() {
+        ArrayList<String> printxs = new ArrayList<>();
+
+        int counter = 1;
+        Iterator<TaskInterface> iter = 
+            this.model.getTaskListIterator();
+
+        while (iter.hasNext()) {
+            String taskLine = "" + counter + "." 
+                + iter.next();
+            printxs.add(taskLine);
+
+            ++counter;
+        }
+        Display.printSection(printxs);
+    }
+
     public void update(TaskModelInterface model){
     /* TaskModel's most recent change here */
     /* model.getUpdate */
@@ -98,16 +116,11 @@ class Display implements TaskObserver {
             String[] commandlist = command.split(" ");
             if (commandlist[0].toUpperCase().equals("LIST")) {
                 /* TODO controller.list */
+                this.controller.listTasks();
             } else {
                 this.controller.addTask(command);
                 /* TODO controller add task */     
             }
-
-            String output = "echo: " + command;
-            ArrayList<String> printxs = new ArrayList<>();
-            printxs.add(output);
-            Display.printSection(printxs);
-
 
             command = this.sc.nextLine();
         }

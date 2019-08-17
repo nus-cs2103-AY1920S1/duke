@@ -22,4 +22,7 @@ class FridayController implements ControllerInterface {
         this.display.printAddTaskSection(task.toString());
     }
 
+    public void listTasks() {
+        this.display.printAllTasks();
+    }
 }

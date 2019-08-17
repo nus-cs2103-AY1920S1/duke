@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class TaskManager {
     private List<Task> taskList;
@@ -51,7 +53,8 @@ public class TaskManager {
             for (Task task : taskList) {
                 String output = String.format("%s|%b|%s", task.getType(), task.getDoneStatus(), task.getDescription());
                 if (task instanceof Deadline) {
-                    output += "|" + ((Deadline)task).getBy();
+                    SimpleDateFormat formatter = new SimpleDateFormat("d/M/yyyy HHmm");
+                    output += "|" + formatter.format(((Deadline)task).getBy());
                 } else if (task instanceof Event) {
                     output += "|" + ((Event)task).getAt();
                 }
@@ -76,7 +79,7 @@ public class TaskManager {
 
             String line = null;
             while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split("|");
+                String[] tokens = line.split("\\|");
                 if (tokens.length < 3) {
                     throw new IODukeException("The task file is corrupted");
                 }
@@ -84,13 +87,15 @@ public class TaskManager {
                 Task task = null;
                 boolean done = Boolean.parseBoolean(tokens[1]);
                 String description = tokens[2];
+                SimpleDateFormat formatter = new SimpleDateFormat("d/M/yyyy HHmm");
 
                 switch (tokens[0]) {
                 case "T":
                     task = new Todo(description, done);
                     break;
                 case "D":
-                    task = new Deadline(description, tokens[3]);
+                    String date = tokens[3];
+                    task = new Deadline(description, formatter.parse(date));
                     break;
                 case "E":
                     task = new Event(description, tokens[3]);
@@ -107,6 +112,8 @@ public class TaskManager {
             throw new IODukeException("Task file does not exist for reading");
         } catch (IOException e) {
             throw new IODukeException("Error opening task file for reading");
+        } catch (ParseException e) {
+            throw new IODukeException("Error parsing date in task file");
         }
     }
 

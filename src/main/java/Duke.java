@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,14 +13,27 @@ public class Duke {
 
         //Echo
         Scanner sc = new Scanner(System.in);
-        String input = "nil";
-        while (input.equals("bye") == false) {
+        String input;
+        String check = "dummy";
+        ArrayList<String> wordStorage = new ArrayList<>();
+
+        while (check.equals("bye") == false) {
             input = sc.nextLine();
-            System.out.println(input + "\n");
-            input = input.toLowerCase();
+            check = input.toLowerCase();
+            if (check.equals("list")) {
+                for (int i = 1; i <= wordStorage.size(); i++) {
+                    System.out.println(i + ". " + wordStorage.get(i - 1));
+                }
+                System.out.println();
+                continue;
+            }
+
+            if (check.equals("bye") == false) {
+                wordStorage.add(input);
+                System.out.println("added: " + input + "\n");
+            }
         }
 
         System.out.println("Bye. Hope to see you again soon!");
-
     }
 }

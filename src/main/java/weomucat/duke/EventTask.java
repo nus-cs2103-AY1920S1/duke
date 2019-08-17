@@ -1,15 +1,15 @@
 package weomucat.duke;
 
 public class EventTask extends Task {
-    private String at;
+	private String at;
 
-    public EventTask(String description, String at) {
-        super(description);
-        this.at = at;
-    }
+	public EventTask(String description, String at) {
+		super(description);
+		this.at = at;
+	}
 
-    @Override
-    public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
-    }
+	@Override
+	public String toString() {
+		return String.format("[E]%s (at: %s)", super.toString(), this.at);
+	}
 }

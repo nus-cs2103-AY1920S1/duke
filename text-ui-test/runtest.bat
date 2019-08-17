@@ -9,8 +9,8 @@ del ACTUAL.TXT
 REM compile the code into the bin folder
 javac  -cp ..\src\main\java -Xlint:none -d ..\build\text-ui-test ..\src\main\java\weomucat\duke\Duke.java
 IF ERRORLEVEL 1 (
-    echo ********** BUILD FAILURE **********
-    exit /b 1
+	echo ********** BUILD FAILURE **********
+	exit /b 1
 )
 REM no error here, errorlevel == 0
 

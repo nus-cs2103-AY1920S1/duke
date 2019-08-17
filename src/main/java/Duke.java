@@ -44,12 +44,12 @@ public class Duke {
                     dukePrint(result);
                     break;
                 case "done":
+                case "delete":
                     if (arg.length < 2 || arg[1].trim().length() < 1) {
                         throw new DukeEmptyDescException(arg[0]);
                     }
                     int idx;
                     try {
-
                         idx = Integer.parseInt(arg[1]) - 1;
                     } catch (NumberFormatException e) {
                         throw new DukeInvalidTaskException(arg[1]);
@@ -57,9 +57,16 @@ public class Duke {
                     if (idx < 0 || idx >= tasks.size()) {
                         throw new DukeInvalidTaskException(arg[1]);
                     }
-                    tasks.get(idx).markAsDone();
-                    result = "Nice! I've marked this task as done:\n  ";
-                    dukePrint(result + tasks.get(idx));
+                    if (arg[0].equals("done")) {
+                        tasks.get(idx).markAsDone();
+                        result = "Nice! I've marked this task as done:\n  ";
+                        dukePrint(result + tasks.get(idx));
+                    } else if (arg[0].equals("delete")) {
+                        result = "Noted. I've removed this task:\n";
+                        result += "  " + tasks.remove(idx) + "\n";
+                        result += "Now you have " + tasks.size() + " tasks in the list.";
+                        dukePrint(result);
+                    }
                     break;
                 case "todo":
                 case "deadline":

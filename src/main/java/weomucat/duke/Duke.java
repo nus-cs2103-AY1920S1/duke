@@ -1,8 +1,10 @@
 package weomucat.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String COMMAND_LIST = "list";
     private static final String COMMAND_BYE = "bye";
 
     private static final String SAY_INDENTATION = "\t";
@@ -17,22 +19,34 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> tasks = new ArrayList<>();
 
         // Greet user
         say("Hello! I'm Duke", "What can I do for you?");
 
         while (true) {
-            String command = scanner.nextLine();
-            String[] command_args = command.split(" ");
+            // Read user input from stdin.
+            String user_input = scanner.nextLine();
+            String[] user_input_split = user_input.split(" ");
 
             // Determine which command the user entered.
-            switch (command_args[0]) {
-                case COMMAND_BYE:
+            switch (user_input_split[0]) {
+
+                case COMMAND_LIST: // List all tasks.
+                    String[] t = new String[tasks.size()];
+                    for (int i = 0; i < tasks.size(); i++) {
+                        t[i] = String.format("%d. %s", i + 1, tasks.get(i));
+                    }
+                    say(t);
+                    break;
+
+                case COMMAND_BYE: // Terminate the program.
                     say("Bye. Hope to see you again soon!");
                     return;
 
-                default: // Echo the command by default.
-                    say(command);
+                default: // By default, add to tasks.
+                    tasks.add(user_input);
+                    say("added: " + user_input);
                     break;
             }
         }

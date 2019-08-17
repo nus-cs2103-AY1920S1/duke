@@ -8,16 +8,13 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isDone() {
-        return done;
-    }
-
     public void setDone(boolean done) {
         this.done = done;
     }
 
     @Override
     public String toString() {
-        return this.description;
+        String done_icon = this.done ? "[\u2713]" : "[\u2718]";
+        return done_icon + " " + this.description;
     }
 }

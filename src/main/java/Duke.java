@@ -25,13 +25,15 @@ public class Duke {
                     tasks[index] = new Deadline(arr[0].substring(9), arr[1]);
                 } else {
                     String[] arr = command.split(" /at ", 2);
-                    tasks[index] = new Event(arr[0].substring(7), arr[1]);
+                    tasks[index] = new Event(arr[0].substring(6), arr[1]);
                 }
                 String commandMsg = "Got it. I've added this task:\n"
-                        + tasks[index] + "\n";
+                        + tasks[index];
 
                 index++;
                 System.out.println(commandMsg);
+                String statusOfList = "Now you have " + index + " tasks in the list.\n";
+                System.out.println(statusOfList);
             } else if (command.substring(0, 4).equals("done")) { //for marking task as done
                 int curr = Integer.parseInt(command.substring(5));
                 tasks[curr - 1].markAsDone();

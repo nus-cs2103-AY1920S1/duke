@@ -1,38 +1,87 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
-class Display{
-    private Scanner _sc;
+class Display {
+    private Scanner sc;
 
-    public Display(){
-        this._sc = new Scanner(System.in);
+    public Display() {
+        this.sc = new Scanner(System.in);
     }
 
-    public static void printGreeting(){
-        String greeting = "Hello! I'm Duke\n"
-            + "What can I do for you?\n";
-        System.out.println(greeting);
+    private static void printGreeting() {
+        String greeting1 = "Hello! I'm Duke";
+        String greeting2 = "What can I do for you?";
+        ArrayList<String> printxs = new ArrayList<>();
+        printxs.add(greeting1);
+        printxs.add(greeting2);
+        Display.printSection(printxs);
     }
 
-    public static void printExitMessage(){
+    private static void printExitMessage() {
         String farewell = "Bye. Hope to see you "
             + "again soon!";
-        System.out.println(farewell);
+
+        Display.printSection(farewell);
     }
 
-    public static boolean isEndCommand(String cmd){
+    private static void printLineBreak() {
+        String line = "     "
+            + "________________________________"
+            + "____________________________";
+        System.out.println(line);
+    }
+
+    private static void printHeader() {
+        System.out.println();
+        Display.printLineBreak();
+    }
+
+    private static void printFooter() {
+        Display.printLineBreak();
+        System.out.println();
+        System.out.println();
+    }
+
+    private static boolean isEndCommand(String cmd) {
         return cmd.toUpperCase().equals("BYE");
     }
 
+    private static void printList(List<String> printJobs) {
+        /* TODO:  Delimit by \n */
 
-    public void instance(){
-        this.printGreeting();
-        String command = this._sc.nextLine();
-
-        while(! isEndCommand(command)){
-            System.out.println("echo: " + command);
-
-            command = this._sc.nextLine();
+        for (String printJob : printJobs) {
+            System.out.print("      ");
+            System.out.print(printJob);
+            System.out.println();
         }
-        this.printExitMessage();
+    }
+
+    private static void printSection(List<String> printJobs){
+            Display.printHeader();
+            Display.printList(printJobs);
+            Display.printFooter();
+    }
+
+    private static void printSection(String job) {
+        ArrayList<String> printxs = new ArrayList<>();
+        printxs.add(job);
+        Display.printSection(printxs);
+    }
+
+    public void instance() {
+        Display.printGreeting();
+        String command = this.sc.nextLine();
+
+        while (! isEndCommand(command)) {
+            String output = "echo: " + command;
+            ArrayList<String> printxs = new ArrayList<>();
+            printxs.add(output);
+            Display.printSection(printxs);
+
+
+            command = this.sc.nextLine();
+        }
+        Display.printExitMessage();
     }
 }

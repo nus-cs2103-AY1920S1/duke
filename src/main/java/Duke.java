@@ -18,5 +18,8 @@ public class Duke {
             System.out.println(command);
             command = sc.nextLine();
         }
+
+        String exitMsg = "Bye. Hope to see you again soon!\n";
+        System.out.println(exitMsg);
     }
 }

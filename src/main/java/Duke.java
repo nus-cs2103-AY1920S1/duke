@@ -30,7 +30,13 @@ public class Duke {
                 continue;
             }
 
-            if (check.equals("bye") == false) {
+            String[] doneMarkers = check.split(" ");
+            if(doneMarkers[0].equals("done")) {
+                Task taskDone = taskStorage.get(Integer.valueOf(doneMarkers[1]) - 1);
+                taskDone.markAsDone();
+                System.out.println("Nice! I've marked this task as done: " + "\n"
+                        + "  [" + taskDone.getStatusIcon() + "] " + taskDone.getDescription() + "\n");
+            } else if (check.equals("bye") == false) {
                 Task t = new Task(input);
                 taskStorage.add(t);
                 System.out.println("added: " + t.getDescription() + "\n");

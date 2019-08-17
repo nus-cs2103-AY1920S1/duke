@@ -2,7 +2,7 @@ package command;
 
 import task.Task;
 import task.TaskList;
-import ui.Ui;
+import textual.Ui;
 
 /**
  * Class representing a command to add a new task.

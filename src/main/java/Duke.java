@@ -1,7 +1,7 @@
 import command.Command;
-import parser.Parser;
+import textual.Parser;
+import textual.Ui;
 import task.TaskList;
-import ui.Ui;
 
 class Duke {
     private final TaskList tl;

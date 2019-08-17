@@ -1,4 +1,4 @@
-package parser;
+package textual;
 
 import java.util.Scanner;
 import command.*;

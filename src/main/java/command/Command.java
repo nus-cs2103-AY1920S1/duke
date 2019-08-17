@@ -1,7 +1,7 @@
 package command;
 
 import task.TaskList;
-import ui.Ui;
+import textual.Ui;
 
 /**
  * Abstract class representing individual commands.

@@ -1,9 +1,18 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.*;
 
 public class Duke {
 
     private static final String MESSAGE_PADDING  = "     ";
     private static final String MESSAGE_BOUNDARY = "    ____________________________________________________________";
+
+    private List<String> myList;
+
+    public Duke() {
+        myList = new ArrayList<String>();
+    }
 
     private void printResponse(String response) {
         System.out.println(MESSAGE_BOUNDARY);
@@ -20,9 +29,15 @@ public class Duke {
     private String findResponse(String query, boolean continueChat) {
         if (!continueChat) {
             return "Bye. Hope to see you again soon!";
+        } else if (query.equals("list")) {
+            return IntStream
+                .range(0, myList.size())
+                .mapToObj(index -> String.format("%d. %s", index + 1, myList.get(index)))
+                .collect(Collectors.joining("\n" + MESSAGE_PADDING));
+        } else {
+            myList.add(query);
+            return String.format("added: %s", query);
         }
-
-        return query;
     }
 
 

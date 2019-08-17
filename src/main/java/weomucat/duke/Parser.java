@@ -13,11 +13,11 @@ public class Parser {
     }
 
     public String nextCommand() {
-        return this.scanner.next();
-    }
-
-    public int nextInt() {
-        return this.scanner.nextInt();
+        if (this.scanner.hasNext()) {
+            return this.scanner.next();
+        } else {
+            return "";
+        }
     }
 
     public HashMap<String, String> nextParameters(String... parameters) {
@@ -25,14 +25,22 @@ public class Parser {
         HashSet<String> in = new HashSet<>(Arrays.asList(parameters));
         HashMap<String, String> out = new HashMap<>();
 
+        // Current parameter
         String param = PARAMETER_DEFAULT;
         ArrayList<String> line = new ArrayList<>();
+
         while (this.scanner.hasNext()) {
             String token = this.scanner.next();
 
-            // Put (param, line) to out if current token is a parameter
+            // Put (param, line) into out, if current token is a parameter
             if (in.contains(token)) {
-                out.put(param, String.join(" ", line));
+
+                // Ensure line has at least one word.
+                if (line.size() != 0) {
+                    out.put(param, String.join(" ", line));
+                }
+
+                // Set to next parameter.
                 param = token;
                 line.clear();
             } else {
@@ -40,7 +48,12 @@ public class Parser {
             }
         }
 
-        out.put(param, String.join(" ", line));
+        // Put last (param, line) into out.
+        // Ensure line has at least one word.
+        if (line.size() != 0) {
+            out.put(param, String.join(" ", line));
+        }
+
         return out;
     }
 }

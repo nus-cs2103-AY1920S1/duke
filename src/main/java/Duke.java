@@ -1,44 +1,107 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.*;
 
 public class Duke {
 
+    //Constants
     private static final String MESSAGE_PADDING  = "     ";
     private static final String MESSAGE_BOUNDARY = "    ____________________________________________________________";
 
-    private List<String> myList;
+    //Class Variables
+    private List<Task> taskList;
 
+    //Constructor
     public Duke() {
-        myList = new ArrayList<String>();
+        this.taskList = new ArrayList<Task>();
     }
 
-    private void printResponse(String response) {
+    //#region [Print Response Helper Functions]
+    private void printResponse(String responseHeader) {
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
-        System.out.println(response);
+        System.out.println(responseHeader);
         System.out.println(MESSAGE_BOUNDARY);
         System.out.println("");
+    }
+
+    private void printResponse(String responseHeader, List<Task> listofTasks) {
+        System.out.println(MESSAGE_BOUNDARY);
+        System.out.print(MESSAGE_PADDING);
+        System.out.println(responseHeader);
+
+        if (listofTasks != null) {
+            int indexofTask = 0;
+            for (Task mytask : listofTasks) {
+
+                indexofTask += 1;
+                System.out.print(MESSAGE_PADDING);
+                System.out.print(String.format("%d.", indexofTask));
+                System.out.println(mytask);
+            }
+        }
+
+        System.out.println(MESSAGE_BOUNDARY);
+        System.out.println("");
+    }
+
+    private void printResponseSingleTask(String responseHeader, Task refTask) {
+        System.out.println(MESSAGE_BOUNDARY);
+        System.out.print(MESSAGE_PADDING);
+        System.out.println(responseHeader);
+
+        System.out.print(MESSAGE_PADDING);
+        System.out.print("  ");
+        System.out.println(refTask);
+
+        System.out.println(MESSAGE_BOUNDARY);
+        System.out.println("");
+    }
+    //#endregion [Print Response Helper Functions]
+
+    //#region [Business Logic]
+    private Task tryMarkTaskAsDone(String query) {
+        Scanner in = new Scanner(query);
+        String command = in.next();
+        int taskIndexRef = in.nextInt();
+        in.close();
+
+        if (command.equals("done") && 0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
+            this.taskList.get(taskIndexRef - 1).markAsDone();
+            return this.taskList.get(taskIndexRef - 1);
+        }
+
+        return null;
     }
 
     private boolean shouldContinueChat(String query) {
         return !query.equals("bye");
     }
 
-    private String findResponse(String query, boolean continueChat) {
-        if (!continueChat) {
-            return "Bye. Hope to see you again soon!";
+    private boolean giveResponse(String query) {
+        if (!shouldContinueChat(query)) {
+            printResponse("Bye. Hope to see you again soon!");
+            return false;
+
         } else if (query.equals("list")) {
-            return IntStream
-                .range(0, myList.size())
-                .mapToObj(index -> String.format("%d. %s", index + 1, myList.get(index)))
-                .collect(Collectors.joining("\n" + MESSAGE_PADDING));
+            printResponse("Here are the tasks in your list:", this.taskList);
+
+        } else if (query.startsWith("done ")) {
+            Task taskRef = tryMarkTaskAsDone(query);
+            if (taskRef == null) {
+                printResponse("Invalid Query");
+            } else {
+                printResponseSingleTask("Nice! I've marked this task as done:", taskRef);
+            }
+
         } else {
-            myList.add(query);
-            return String.format("added: %s", query);
+            Task newTask = new Task(query);
+            this.taskList.add(newTask);
+            printResponseSingleTask("added: ", newTask);
         }
+        return true;
     }
+    //#endregion [Business Logic]
 
 
     public void spin() {
@@ -51,12 +114,8 @@ public class Duke {
             //Get query from user
             String userQuery = myscanner.nextLine();
 
-            //Find Response
-            continueChat = shouldContinueChat(userQuery);
-            String dukeResponse = findResponse(userQuery, continueChat);
-
-            //Print Response
-            printResponse(dukeResponse);
+            //Find and give Response
+            continueChat = giveResponse(userQuery);
 
         } while (continueChat);
         myscanner.close();

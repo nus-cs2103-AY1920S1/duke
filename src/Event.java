@@ -1,8 +1,8 @@
-public class Events extends Task {
+public class Event extends Task {
 
     private String additionalInfo;
 
-    Events(String name, String additionalInfo) {
+    Event(String name, String additionalInfo) {
         super(name);
         this.additionalInfo = additionalInfo;
     }
@@ -14,6 +14,6 @@ public class Events extends Task {
 
     @Override
     protected String getAdditionalInfo() {
-        return String.format("(by: %s", additionalInfo);
+        return String.format("(by: %s)", additionalInfo);
     }
 }

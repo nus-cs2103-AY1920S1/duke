@@ -1,11 +1,16 @@
-public class Todos extends Task {
+public class Todo extends Task {
 
-    Todos(String name) {
+    Todo(String name) {
         super(name);
     }
 
     @Override
     protected String getTypeSymbol() {
         return "[T]";
+    }
+
+    @Override
+    protected String getAdditionalInfo() {
+        return "";
     }
 }

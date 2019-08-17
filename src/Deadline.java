@@ -1,8 +1,8 @@
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
     private String additionalInfo;
 
-    Deadlines(String name, String additionalInfo) {
+    Deadline(String name, String additionalInfo) {
         super(name);
         this.additionalInfo = additionalInfo;
     }
@@ -14,7 +14,7 @@ public class Deadlines extends Task {
 
     @Override
     protected String getAdditionalInfo() {
-        return String.format("(by: %s", additionalInfo);
+        return String.format("(by: %s)", additionalInfo);
     }
 
 }

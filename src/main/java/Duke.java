@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static ArrayList<Task> arr;
+    private static ArrayList<Task> arr;
 
     public static void main(String[] args) throws DukeException {
 
@@ -51,7 +51,7 @@ public class Duke {
 
    }
 
-   public static void list(String command) {
+   private static void list(String command) {
        System.out.println("Here are the tasks in your list:");
 
        int index  = 1;
@@ -61,15 +61,17 @@ public class Duke {
        }
    }
 
-   public static void markAsDone(int num) {
+   private static void markAsDone(int num) throws DukeException{
        if (num <= 0 || num > arr.size() ) {
-           System.out.println("Number is out of range");
+           throw new DukeException("OOPS!!! Number is out of range");
        } else {
            arr.get(num - 1).done();
+
+           printDoneTask(arr.get(num-1));
        }
    }
 
-   public static void addToDo(String taskName) {
+   private static void addToDo(String taskName) {
        ToDo newToDo = new ToDo(taskName);
 
        arr.add(newToDo);
@@ -77,19 +79,24 @@ public class Duke {
        printAddedTask();
    }
 
-   public static void printAddedTask() {
+   private static void printDoneTask(Task t) {
+        System.out.println("Nice! I've marked this task as done");
+        System.out.println(String.format("    %s", t));
+   }
+
+   private static void printAddedTask() {
         System.out.println("Got it. I've added this task: ");
         System.out.println(String.format("    %s", arr.get(arr.size()-1).toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
    }
 
-   public static void printDeletedTask(Task t) {
+   private static void printDeletedTask(Task t) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(String.format("    %s",t));
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
    }
 
-   public static void addDeadline(String taskName, String datetime) {
+   private static void addDeadline(String taskName, String datetime) {
         Deadline deadline = new Deadline(taskName,datetime);
 
         arr.add(deadline);
@@ -97,7 +104,7 @@ public class Duke {
         printAddedTask();
    }
 
-   public static void addEvent(String taskName, String datetime) {
+   private static void addEvent(String taskName, String datetime) {
         Event e = new Event(taskName, datetime);
 
         arr.add(e);
@@ -105,21 +112,22 @@ public class Duke {
         printAddedTask();
    }
 
-   public static void deleteTask(int index) {
+   private static void deleteTask(int index) {
 
         Task t = arr.remove(index);
 
         printDeletedTask(t);
    }
 
-   public static boolean isCommandValid(String str) throws DukeException{
+   private static boolean isCommandValid(String str) throws DukeException{
 
 
         if (! (str.split(" ")[0].equals("list") ||
             str.split(" ")[0].equals("todo") ||
             str.split(" ")[0].equals("deadline") ||
             str.split(" ")[0].equals("event") ||
-            str.split(" ")[0].equals("delete")
+            str.split(" ")[0].equals("delete") ||
+            str.split(" ")[0].equals("done")
         )
         ) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -151,7 +159,7 @@ public class Duke {
         return true;
    }
 
-    public static boolean isNumeric(String strNum) {
+    private static boolean isNumeric(String strNum) {
         return strNum.matches("-?\\d+(\\.\\d+)?");
     }
 }

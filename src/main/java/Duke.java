@@ -2,10 +2,18 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    static TaskManager taskManager = new TaskManager();
+    final static String SAVE_FILE = System.getProperty("user.dir") + "/data/duke.txt";
+    static TaskManager taskManager;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        try {
+            taskManager = new TaskManager(SAVE_FILE);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         printGreeting();
 
@@ -182,7 +190,7 @@ public class Duke {
         }
     }
 
-    public static void markTaskAsDone(int index) throws InvalidTaskDukeException {
+    public static void markTaskAsDone(int index) throws DukeException {
         Task task = taskManager.getTask(index);
 
         if (task == null) {
@@ -190,6 +198,7 @@ public class Duke {
         }
 
         task.markAsDone();
+        taskManager.saveTasks();
 
         printSeparator();
         System.out.println(" Nice! I've marked this task as done: ");
@@ -222,7 +231,7 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(int index) throws InvalidTaskDukeException {
+    public static void deleteTask(int index) throws DukeException {
         Task task = taskManager.getTask(index);
 
         if (task == null) {

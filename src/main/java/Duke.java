@@ -25,11 +25,12 @@ public class Duke {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        tasks = new ArrayList<>();
-
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
+
+        tasks = new ArrayList<>();
+
+        Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -58,6 +59,8 @@ public class Duke {
                     System.out.println("  " + task);
                 } else if (cmdKeyword.equals("todo")) {
                     addTask(new Todo(cmdArgs));
+                } else if (cmdKeyword.equals("event")) {
+                    addTask(new Event(cmdBeforeSlashArgs, cmdSlashKeyword, cmdSlashArgs));
                 } else if (cmdKeyword.equals("deadline")) {
                     addTask(new Deadline(cmdBeforeSlashArgs, cmdSlashKeyword, cmdSlashArgs));
                 } else {

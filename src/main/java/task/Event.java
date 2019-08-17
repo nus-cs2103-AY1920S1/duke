@@ -4,6 +4,12 @@ public class Event extends Task {
     protected String slashKeyword;
     protected String time;
 
+    /**
+     * Creates a new event task.
+     * @param description Description of the task
+     * @param slashKeyword Keyword right after the slash, which should equal 'at'
+     * @param time Time of the event
+     */
     public Event(String description, String slashKeyword, String time) {
         super(description);
         this.slashKeyword = slashKeyword;

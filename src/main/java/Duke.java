@@ -1,6 +1,12 @@
 import java.util.*;
 import java.io.*;
 
+class DukeException extends Exception {}
+class InputUnknownException extends DukeException {}
+class EmptyDescriptionException extends DukeException {}
+// class EmptyPrepositionException extends DukeException {}
+class EmptyTimeDueException extends DukeException {}
+
 class Task {
     protected String description;
     protected boolean isDone;
@@ -68,10 +74,11 @@ public class Duke {
     public static void countList() {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
-    public static void construct(String type, String[] input_split) {
+    public static void construct(String type, String[] input_split) 
+        throws EmptyDescriptionException, EmptyTimeDueException {
         if (input_split.length < 2) {
-            System.out.println("what's the " + type);
-            return;
+            // System.out.println("what's the " + type);
+            throw new EmptyDescriptionException();
         }
         Task task;
         String description = "";
@@ -86,8 +93,8 @@ public class Duke {
             };
         }
         if (prepAt == 0) {
-            System.out.println("what's the date due?");
-            return;
+            // System.out.println("what's the date due?");
+            throw new EmptyTimeDueException();
         } 
         for (int k = 1; k < prepAt; k++) {
             description += " " + input_split[k];
@@ -136,51 +143,57 @@ public class Duke {
                 String[] input_split = input.split(" ");
                 String command = input_split[0];
 
-                switch (command) {
-                    case "bye":
-                    active = false;
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-
-                    case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    showList();
-                    break;
-                    
-                    case "done":
-                    if (input_split.length < 2) {
-                        System.out.println("What have you done?");
+                try {
+                    switch (command) {
+                        case "bye":
+                        active = false;
+                        System.out.println("Bye. Hope to see you again soon!");
                         break;
-                    }
-                    Task removedTask = list.remove(Integer.valueOf(input_split[1]) - 1);
-                    removedTask.isDone = true;
-                    System.out.println("Nice! I've marked this task as done: \n" + 
-                        "  " + removedTask.getStatus());
-                    break;
 
-                    case "todo":
-                    if (input_split.length < 2) {
-                        System.out.println("What to do?");
+                        case "list":
+                        System.out.println("Here are the tasks in your list:");
+                        showList();
                         break;
+                        
+                        case "done":
+                        if (input_split.length < 2) {
+                            System.out.println("What have you done?");
+                            break;
+                        }
+                        Task removedTask = list.remove(Integer.valueOf(input_split[1]) - 1);
+                        removedTask.isDone = true;
+                        System.out.println("Nice! I've marked this task as done: \n" + 
+                            "  " + removedTask.getStatus());
+                        break;
+
+                        case "todo":
+                        if (input_split.length < 2) {
+                            throw new EmptyDescriptionException();
+                        }
+                        String description = input.substring(5);
+                        ToDo todo = new ToDo(description);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("  " + todo.getStatus());
+                        list.add(todo);
+                        countList();
+                        break;
+
+                        case "deadline":
+                        case "event":
+                        construct(command, input_split);
+                        break;
+
+                        default:
+                        throw new InputUnknownException();
                     }
-                    String description = input.substring(5);
-                    ToDo todo = new ToDo(description);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + todo.getStatus());
-                    list.add(todo);
-                    countList();
-                    break;
-
-                    case "deadline":
-                    case "event":
-                    construct(command, input_split);
-                    break;
-
-                    default:
-                    Task task = new Task(input);
-                    list.add(task);
-                    System.out.println("added: " + input);
+                } catch (InputUnknownException e) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
+                } catch (EmptyDescriptionException e) {
+                    System.out.println("What's the description of the item?");
+                } catch (EmptyTimeDueException e) {
+                    System.out.println("When is it due? eg. /by 2359 sunday");
                 }
+
             }
         } catch (UnsupportedEncodingException e) {
             System.out.println("whoops unsupported encoding: " + e.getMessage());

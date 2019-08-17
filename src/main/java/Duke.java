@@ -1,5 +1,8 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class Duke {
     final static String SAVE_FILE = System.getProperty("user.dir") + "/data/duke.txt";
@@ -108,7 +111,15 @@ public class Duke {
                 throw new InvalidInputDukeException("A deadline must have a 'by' date.");
             }
 
-            task = new Deadline(taskDescription, by);
+            SimpleDateFormat formatter = new SimpleDateFormat("d/M/yyyy HHmm");
+            Date byDate;
+            try {
+                byDate = formatter.parse(by);
+            } catch (ParseException e) {
+                throw new InvalidInputDukeException("Date format must be as follows: d/m/y HHmm");
+            }
+
+            task = new Deadline(taskDescription, byDate);
             break;
 
         case "event":

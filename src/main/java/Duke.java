@@ -28,11 +28,14 @@ public class Duke {
                 String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
                         "[" + tasks[curr - 1].getStatusIcon() + "] " + tasks[curr - 1].getDescription() + "\n";
                 System.out.println(markAsDoneMsg);
-            } else {
+            } else { //for listing tasks out
+                String listMsg = "Here are the tasks in your list:";
+                System.out.println(listMsg);
                 for (int i = 0; i < index; i++) {
-                    String listMsg = (i + 1) + ". " + tasks[i];
-                    System.out.println(listMsg);
+                    String taskMsg = (i + 1) + ". [" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription();
+                    System.out.println(taskMsg);
                 }
+                System.out.println();
             }
             command = sc.nextLine();
         }

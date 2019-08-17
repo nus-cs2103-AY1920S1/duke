@@ -3,14 +3,18 @@ public class Echoer {
         return "     " + message + "\n";
     }
 
-    void echo(String message) {
+    void echo(String... message) {
         String border = "    ____________________________________________________________\n";
-        String toEcho = border + this.formatMessage(message) + border;
+        String toEcho = border;
+        for (String string : message) {
+            toEcho += this.formatMessage(string);
+        }
+        toEcho += border;
         System.out.print(toEcho);
     }
 
     void greet() {
-        this.echo("Hello! I'm Duke\n     What can I do for you?");
+        this.echo("Hello! I'm Duke", "What can I do for you?");
     }
 
     void exit() {

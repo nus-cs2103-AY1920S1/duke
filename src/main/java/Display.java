@@ -49,7 +49,8 @@ class Display implements TaskObserver {
     }
 
     private static boolean isEndCommand(String cmd) {
-        return cmd.toUpperCase().equals("BYE");
+        String[] cmdlist = cmd.split(" ");
+        return cmdlist[0].toUpperCase().equals("BYE");
     }
 
     private static void printList(List<String> printJobs) {
@@ -75,6 +76,9 @@ class Display implements TaskObserver {
     }
 
     public void update(TaskModelInterface model){
+        /* TaskModel's most recent change here */
+        /* model.getUpdate */
+        /* display in section */
 
     }
 
@@ -83,6 +87,14 @@ class Display implements TaskObserver {
         String command = this.sc.nextLine();
 
         while (! isEndCommand(command)) {
+
+            String[] commandlist = command.split(" ");
+            if (commandlist[0].toUpperCase().equals("LIST")) {
+                /* TODO controller.list */
+            } else {
+                /* TODO controller add task */     
+            }
+
             String output = "echo: " + command;
             ArrayList<String> printxs = new ArrayList<>();
             printxs.add(output);

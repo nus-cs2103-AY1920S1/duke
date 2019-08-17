@@ -15,21 +15,21 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input;
         String check = "dummy";
-        ArrayList<String> wordStorage = new ArrayList<>();
+        ArrayList<String> taskStorage = new ArrayList<>();
 
         while (check.equals("bye") == false) {
             input = sc.nextLine();
             check = input.toLowerCase();
             if (check.equals("list")) {
-                for (int i = 1; i <= wordStorage.size(); i++) {
-                    System.out.println(i + ". " + wordStorage.get(i - 1));
+                for (int i = 1; i <= taskStorage.size(); i++) {
+                    System.out.println(i + ". " + taskStorage.get(i - 1));
                 }
                 System.out.println();
                 continue;
             }
 
             if (check.equals("bye") == false) {
-                wordStorage.add(input);
+                taskStorage.add(input);
                 System.out.println("added: " + input + "\n");
             }
         }

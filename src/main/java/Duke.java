@@ -201,7 +201,7 @@ public class Duke {
     public static void handleDeleteTaskCommand(String command) throws DukeException {
         String[] subArgs = command.split("\\s+");
         if (!subArgs[0].equals("delete")) {
-            throw new UnknownCommandDukeException("I'm sorry, but I don't know what that means :-(");
+            throw new UnknownCommandDukeException();
         }
 
         if (subArgs.length < 2) {

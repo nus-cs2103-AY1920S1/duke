@@ -30,70 +30,101 @@ public class Duke {
             String[] tokens = command.split(" ");
             String toAdd = "";
             Task newTask;
-            switch (tokens[0])
-            {
-                case "list":
-                    //"list" logic
-                    int size = listOfTasks.size();
-                    System.out.println("Here are your tasks in your list:");
-                    for(int i = 0; i < size; i++){
-                        Task curr = listOfTasks.get(i);
-                        System.out.println(i+1 + "." + curr.toString());
-                    }
-                    break;
-                case "done":
-                    //done logic
-                    int toComplete = Integer.parseInt(command.split(" ")[1]) - 1;
-                    Task curr = listOfTasks.get(toComplete);
-                    listOfTasks.get(toComplete).completeTask();
-                    System.out.println(niceAdded);
-                    System.out.println(curr.toString());
-                    break;
-                case "todo":
-                    for(int j = 1; j < tokens.length; j++){
-                        toAdd = toAdd + tokens[j] + " ";
-                    }
-                    newTask = new Todo(toAdd.trim());
-                    System.out.println(gotIt);
-                    System.out.println(" " + newTask.toString());
-                    listOfTasks.add(newTask);
-                    System.out.println(printNumTasks());
-                    break;
-                case "deadline":
-                    String date = "";
-                    boolean dateFlag = false;
-                    for(int m = 1; m < tokens.length; m++) {
-                        if (tokens[m].equals("/by")) {
-                            dateFlag = true;
-                        } else {
-                            if (dateFlag == false) toAdd = toAdd + tokens[m] + " ";
-                            else date = date + tokens[m] + " ";
+            try {
+                switch (tokens[0]) {
+                    case "list":
+                        //"list" logic
+                        int size = listOfTasks.size();
+                        System.out.println("Here are your tasks in your list:");
+                        for (int i = 0; i < size; i++) {
+                            Task curr = listOfTasks.get(i);
+                            System.out.println(i + 1 + "." + curr.toString());
                         }
-                    }
-                    newTask = new Deadline(toAdd.trim(), date.trim());
-                    System.out.println(gotIt);
-                    System.out.println(" " + newTask.toString());
-                    listOfTasks.add(newTask);
-                    System.out.println(printNumTasks());
-                    break;
-                case "event":
-                    String timing = " ";
-                    boolean timeFlag = false;
-                    for(int z = 1; z < tokens.length; z++){
-                        if(tokens[z].equals("/at")) timeFlag = true;
-                        else {
-                            if(timeFlag == false) toAdd = toAdd + tokens[z] + " ";
-                            else timing = timing + tokens[z] + " ";
+                        break;
+                    case "done":
+                        try {
+                            //done logic
+                            int toComplete = Integer.parseInt(command.split(" ")[1]) - 1;
+                            if(toComplete >= listOfTasks.size() || toComplete < 0){
+                                throw new DukeException("OOPS! Task " + (toComplete + 1) + " doesn't exist!");
+                            }
+                            Task curr = listOfTasks.get(toComplete);
+                            listOfTasks.get(toComplete).completeTask();
+                            System.out.println(niceAdded);
+                            System.out.println(curr.toString());
+                        } catch (DukeException de){
+                            System.err.println(de.getMessage());
                         }
-                    }
-                    newTask = new Event(toAdd.trim(), timing.trim());
-                    System.out.println(gotIt);
-                    System.out.println(" " + newTask.toString());
-                    listOfTasks.add(newTask);
-                    System.out.println(printNumTasks());
-                    break;
-                default:
-                    break;
+                        break;
+                    case "todo":
+                        try {
+                            if (tokens.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            for (int j = 1; j < tokens.length; j++) {
+                                toAdd = toAdd + tokens[j] + " ";
+                            }
+                            newTask = new Todo(toAdd.trim());
+                            System.out.println(gotIt);
+                            System.out.println(" " + newTask.toString());
+                            listOfTasks.add(newTask);
+                            System.out.println(printNumTasks());
+                        } catch (DukeException de) {
+                            System.err.println(de.getMessage());
+                        }
+                        break;
+                    case "deadline":
+                        try {
+                            if (tokens.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            }
+                            String date = "";
+                            boolean dateFlag = false;
+                            for (int m = 1; m < tokens.length; m++) {
+                                if (tokens[m].equals("/by")) {
+                                    dateFlag = true;
+                                } else {
+                                    if (dateFlag == false) toAdd = toAdd + tokens[m] + " ";
+                                    else date = date + tokens[m] + " ";
+                                }
+                            }
+                            newTask = new Deadline(toAdd.trim(), date.trim());
+                            System.out.println(gotIt);
+                            System.out.println(" " + newTask.toString());
+                            listOfTasks.add(newTask);
+                            System.out.println(printNumTasks());
+                        } catch (DukeException de){
+                            System.err.println(de.getMessage());
+                        }
+                        break;
+                    case "event":
+                        try {
+                            if(tokens.length == 1){
+                                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                            }
+                            String timing = " ";
+                            boolean timeFlag = false;
+                            for (int z = 1; z < tokens.length; z++) {
+                                if (tokens[z].equals("/at")) timeFlag = true;
+                                else {
+                                    if (timeFlag == false) toAdd = toAdd + tokens[z] + " ";
+                                    else timing = timing + tokens[z] + " ";
+                                }
+                            }
+                            newTask = new Event(toAdd.trim(), timing.trim());
+                            System.out.println(gotIt);
+                            System.out.println(" " + newTask.toString());
+                            listOfTasks.add(newTask);
+                            System.out.println(printNumTasks());
+                        } catch (DukeException de){
+                            System.err.println(de.getMessage());
+                        }
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException de){
+                System.err.println(de.getMessage());
             }
             command = input.readLine();
         }

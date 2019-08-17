@@ -18,14 +18,9 @@ public class AddCommand extends Command {
     }
     
     public void execute(TaskList tl, Ui ui) {
-        try {
-            tl.add(t);
-            ui.printMessage("Got it. I've added this task:");
-            ui.printMessage("  " + t);
-            ui.printNumTasks(tl);
-        } catch (IndexOutOfBoundsException e) {
-            ui.printMessage("\u2639 OOPS!!! Task index must be " +
-                    "between 1 and " + tl.size() + ".");
-        }
+        tl.add(t);
+        ui.printMessage("Got it. I've added this task:");
+        ui.printMessage("  " + t);
+        ui.printNumTasks(tl);
     }
 }

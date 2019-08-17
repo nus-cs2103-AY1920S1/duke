@@ -6,7 +6,7 @@ public class Duke {
 
     public static ArrayList<Task> arr;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         arr = new ArrayList<>();
 
@@ -16,6 +16,7 @@ public class Duke {
         String command = sc.nextLine();
         while (! command.toLowerCase().equals("bye")) {
 
+            isCommandValid(command);
             if (command.equals("list")) {
                 list(command);
             } else if (command.split(" ")[0].equals("done")) {
@@ -24,20 +25,21 @@ public class Duke {
 
                 markAsDone(num);
 
-            } else if (command.split(" ")[0].equals("todo")){
+            } else if (command.split(" ")[0].equals("todo")) {
                 int spaceIndex = command.indexOf(" ");
-                addToDo(command.substring(spaceIndex+1));
+                addToDo(command.substring(spaceIndex + 1));
 
             } else if (command.split(" ")[0].equals("deadline")) {
 
                 int spaceIndex = command.indexOf(" ");
-                int backslashIndex = command.indexOf("/");
-                addDeadline(command.substring(spaceIndex+1, backslashIndex-1), command.substring(backslashIndex+4));
+                int slashIndex = command.indexOf("/");
+                addDeadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
             } else if (command.split(" ")[0].equals("event")) {
                 int spaceIndex = command.indexOf(" ");
-                int backslashIndex = command.indexOf("/");
-                addEvent(command.substring(spaceIndex+1, backslashIndex-1), command.substring(backslashIndex+4));
+                int slashIndex = command.indexOf("/");
+                addEvent(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
             }
+
 
             command = sc.nextLine();
         }
@@ -92,5 +94,29 @@ public class Duke {
         arr.add(e);
 
         printAddedTask();
+   }
+
+   public static boolean isCommandValid(String str) throws DukeException{
+
+
+        if (! (str.split(" ")[0].equals("list") ||
+            str.split(" ")[0].equals("todo") ||
+            str.split(" ")[0].equals("deadline") ||
+            str.split(" ")[0].equals("event"))
+        ) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (! str.split(" ")[0].equals("list") && str.split(" ").length == 1) {
+            throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", str.split(" ")[0]));
+        } else if (str.split(" ")[0].equals("deadline") && ! str.contains("/by")) {
+            throw new DukeException("OOPS!!! The description of a deadline has to be followed by '/by'.");
+        } else if (str.split(" ")[0].equals("event") && ! str.contains("/at")) {
+            throw new DukeException("OOPS!!! The description of an event has to be followed by '/at'.");
+        } else if (str.split(" ")[0].equals("deadline") && str.split(" ")[1].equals("/by")) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if (str.split(" ")[0].equals("event") && str.split(" ")[1].equals("/at")) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        }
+
+        return true;
    }
 }

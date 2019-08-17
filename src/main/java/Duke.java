@@ -10,7 +10,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         String greeting = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
+                + "What can I do for you?";
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
@@ -20,13 +20,18 @@ public class Duke {
             if (!command.equals("list")) {
                 tasks[index] = command;
                 index++;
-                String commandMsg = "added: " + command + "\n";
+                String commandMsg = "added: " + command;
                 System.out.println(commandMsg);
+            } else {
+                for (int i = 0; i < index; i++) {
+                    String listMsg = (i + 1) + ". " + tasks[i];
+                    System.out.println(listMsg);
+                }
             }
             command = sc.nextLine();
         }
 
-        String exitMsg = "Bye. Hope to see you again soon!\n";
+        String exitMsg = "Bye. Hope to see you again soon!";
         System.out.println(exitMsg);
     }
 }

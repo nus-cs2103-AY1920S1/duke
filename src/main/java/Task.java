@@ -8,6 +8,10 @@ public class Task {
     }
 
     public String toString() {
-        return this.todo;
+        if (completed) {
+            return "[✓] " + this.todo;
+        } else {
+            return "[✗] " + this.todo;
+        }
     }
 }

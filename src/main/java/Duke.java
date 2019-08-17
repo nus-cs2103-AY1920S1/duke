@@ -43,9 +43,19 @@ public class Duke {
                     sendLine();
                 }
             } else {
-                sendLine();
-                addTask(input);
-                sendLine();
+                if (input.startsWith("todo")) {
+                    sendLine();
+                    addTodoTask(input.substring(5));
+                    sendLine();
+                } else if (input.startsWith("deadline")) {
+                    sendLine();
+                    addDeadlineTask(input.substring(9));
+                    sendLine();
+                } else if (input.startsWith("event")) {
+                    sendLine();
+                    addEventTask(input.substring(6));
+                    sendLine();
+                }
             }
         }
 
@@ -61,7 +71,50 @@ public class Duke {
         } else {
             tasks[counter] = new Task(todo);
             counter ++;
-            sendMessage("added: " + todo);
+            sendMessage("Got it. I've added this task: ");
+            sendMessage("  " + todo);
+            sendMessage("Now you have " + counter + " tasks in the list");
+        }
+    }
+
+    public static void addTodoTask(String todo) {
+        if (counter >= 100) {
+            sendMessage("You only can add up to 100 tasks!");
+        } else {
+            ToDoTask newTask = new ToDoTask(todo);
+            tasks[counter] = newTask;
+            counter ++;
+            sendMessage("Got it. I've added this task: ");
+            sendMessage("  " + newTask);
+            sendMessage("Now you have " + counter + " tasks in the list");
+        }
+    }
+
+    public static void addDeadlineTask(String todo) {
+        if (counter >= 100) {
+            sendMessage("You only can add up to 100 tasks!");
+        } else {
+            String[] taskData = todo.split(" /by ");
+            DeadlineTask newTask = new DeadlineTask(taskData[0], taskData[1]);
+            tasks[counter] = newTask;
+            counter ++;
+            sendMessage("Got it. I've added this task: ");
+            sendMessage("  " + newTask);
+            sendMessage("Now you have " + counter + " tasks in the list");
+        }
+    }
+
+    public static void addEventTask(String todo) {
+        if (counter >= 100) {
+            sendMessage("You only can add up to 100 tasks!");
+        } else {
+            String[] taskData = todo.split(" /at ");
+            EventTask newTask = new EventTask(taskData[0], taskData[1]);
+            tasks[counter] = newTask;
+            counter ++;
+            sendMessage("Got it. I've added this task: ");
+            sendMessage("  " + newTask);
+            sendMessage("Now you have " + counter + " tasks in the list");
         }
     }
 
@@ -73,18 +126,19 @@ public class Duke {
             Task task = tasks[index];
             task.completed = true;
             sendMessage("Nice! I've marked this task as done:");
-            sendMessage("  [✓] " + task.toString());
+            sendMessage("  " + task.toString());
         }
     }
 
     public static void sendTasks() {
+        sendMessage("Here are the tasks in your list:");
         for (int tasknum = 0; tasknum < counter; tasknum ++) {
             Task task = tasks[tasknum];
             String todo = task.toString();
             if (task.completed) {
-                sendMessage((tasknum + 1) + ".[✓] " + todo);
+                sendMessage((tasknum + 1) + "." + todo);
             } else {
-                sendMessage((tasknum + 1) + ".[✗] " + todo);
+                sendMessage((tasknum + 1) + "." + todo);
             }
         }
     }

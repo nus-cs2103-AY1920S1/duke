@@ -38,6 +38,9 @@ public class Duke {
                 int spaceIndex = command.indexOf(" ");
                 int slashIndex = command.indexOf("/");
                 addEvent(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+            } else if (command.split(" ")[0].equals("delete")) {
+
+                deleteTask(Integer.parseInt(command.split(" ")[1]));
             }
 
 
@@ -80,6 +83,12 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
    }
 
+   public static void printDeletedTask(Task t) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(String.format("    %s",t));
+        System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
+   }
+
    public static void addDeadline(String taskName, String datetime) {
         Deadline deadline = new Deadline(taskName,datetime);
 
@@ -96,27 +105,53 @@ public class Duke {
         printAddedTask();
    }
 
+   public static void deleteTask(int index) {
+
+        Task t = arr.remove(index);
+
+        printDeletedTask(t);
+   }
+
    public static boolean isCommandValid(String str) throws DukeException{
 
 
         if (! (str.split(" ")[0].equals("list") ||
             str.split(" ")[0].equals("todo") ||
             str.split(" ")[0].equals("deadline") ||
-            str.split(" ")[0].equals("event"))
+            str.split(" ")[0].equals("event") ||
+            str.split(" ")[0].equals("delete")
+        )
         ) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (! str.split(" ")[0].equals("list") && str.split(" ").length == 1) {
             throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", str.split(" ")[0]));
+
         } else if (str.split(" ")[0].equals("deadline") && ! str.contains("/by")) {
             throw new DukeException("OOPS!!! The description of a deadline has to be followed by '/by'.");
+
         } else if (str.split(" ")[0].equals("event") && ! str.contains("/at")) {
             throw new DukeException("OOPS!!! The description of an event has to be followed by '/at'.");
+
         } else if (str.split(" ")[0].equals("deadline") && str.split(" ")[1].equals("/by")) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+
         } else if (str.split(" ")[0].equals("event") && str.split(" ")[1].equals("/at")) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-        }
+
+        } else if (str.split(" ")[0].equals("delete") &&  ! isNumeric(str.split(" ")[1])) {
+            throw new DukeException("OOPS!!! The index of the array has to be specified.");
+        } else if (str.split(" ")[0].equals("delete") && isNumeric(str.split(" ")[1])
+                && (Integer.parseInt(str.split(" ")[1]) < 0 ||
+                Integer.parseInt(str.split(" ")[1]) >= arr.size())) {
+            throw new DukeException("OOPS!!! Index out of bounds. It is larger or smaller than size of list.");
+       } else if (str.split(" ")[0].equals("delete") && str.split(" ").length > 2) {
+            throw new DukeException("OOPS!!! Please key in 'delete x', where x is the index that you want to delete!");
+       }
 
         return true;
    }
+
+    public static boolean isNumeric(String strNum) {
+        return strNum.matches("-?\\d+(\\.\\d+)?");
+    }
 }

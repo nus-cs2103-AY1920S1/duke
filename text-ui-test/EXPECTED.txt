@@ -1,0 +1,62 @@
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] A
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] B C
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+  [T][✘] D  E  F  /at G
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+  [D][✘] foo (by: Sunday)
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+  [D][✘] bar (by: baz)
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] A
+2.[T][✘] B C
+3.[T][✘] D  E  F  /at G
+4.[D][✘] foo (by: Sunday)
+5.[D][✘] bar (by: baz)
+Got it. I've added this task:
+  [E][✘] project meeting (at: Mon 2-4pm)
+Now you have 6 tasks in the list.
+Got it. I've added this task:
+  [E][✘] asd/ (at: /sOmE-Time/)
+Now you have 7 tasks in the list.
+Here are the tasks in your list:
+1.[T][✘] A
+2.[T][✘] B C
+3.[T][✘] D  E  F  /at G
+4.[D][✘] foo (by: Sunday)
+5.[D][✘] bar (by: baz)
+6.[E][✘] project meeting (at: Mon 2-4pm)
+7.[E][✘] asd/ (at: /sOmE-Time/)
+Nice! I've marked this task as done:
+  [T][✓] B C
+Nice! I've marked this task as done:
+  [T][✓] B C
+Here are the tasks in your list:
+1.[T][✘] A
+2.[T][✓] B C
+3.[T][✘] D  E  F  /at G
+4.[D][✘] foo (by: Sunday)
+5.[D][✘] bar (by: baz)
+6.[E][✘] project meeting (at: Mon 2-4pm)
+7.[E][✘] asd/ (at: /sOmE-Time/)
+Nice! I've marked this task as done:
+  [T][✓] D  E  F  /at G
+Nice! I've marked this task as done:
+  [D][✓] bar (by: baz)
+Here are the tasks in your list:
+1.[T][✘] A
+2.[T][✓] B C
+3.[T][✓] D  E  F  /at G
+4.[D][✘] foo (by: Sunday)
+5.[D][✓] bar (by: baz)
+6.[E][✘] project meeting (at: Mon 2-4pm)
+7.[E][✘] asd/ (at: /sOmE-Time/)
+Bye. Hope to see you again soon!

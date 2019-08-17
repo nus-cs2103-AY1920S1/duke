@@ -1,0 +1,16 @@
+todo A
+todo B C
+  todo   D  E  F  /at G
+deadline foo /by Sunday
+deadline bar /by baz
+list
+event project meeting /at Mon 2-4pm
+event asd/  /at /sOmE-Time/
+list
+done 2
+done 2
+list
+done 3
+done 5
+list
+bye

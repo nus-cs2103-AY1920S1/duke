@@ -25,13 +25,11 @@ public class Duke {
             String command = sc.nextLine();
             printBreakLine();
             response = logic.process(command);
-            if (response != -1) {
-                printBreakLine();
+            if (response == -1) {
+                goodbye();
             }
+            printBreakLine();
         } while (response != -1);
-
-        goodbye();
-        printBreakLine();
     }
 
     private static void printBreakLine() {

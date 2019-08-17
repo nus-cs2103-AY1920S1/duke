@@ -8,7 +8,9 @@ public class Duke {
     final static String goodbye = "Bye. Hope to see you again!";
     final static String niceAdded = "Nice! I've marked this task as done:";
     final static String gotIt = "Got it. I've added this task:";
+    final static String deleted = "Noted. I've removed this task:";
 
+    //helper function to print total number of tasks
     private static String printNumTasks(){
         return "Now you have " + Task.totalTasks + " tasks in the list.";
     }
@@ -26,6 +28,7 @@ public class Duke {
 
         String command = input.readLine();
 
+        //main program logic
         while(!command.equals("bye")){
             String[] tokens = command.split(" ");
             String toAdd = "";
@@ -42,8 +45,11 @@ public class Duke {
                         }
                         break;
                     case "done":
+                        //"done" logic
                         try {
-                            //done logic
+                            if(tokens.length < 2){
+                                throw new DukeException("☹ OOPS!!! Please specify task to complete");
+                            }
                             int toComplete = Integer.parseInt(command.split(" ")[1]) - 1;
                             if(toComplete >= listOfTasks.size() || toComplete < 0){
                                 throw new DukeException("OOPS! Task " + (toComplete + 1) + " doesn't exist!");
@@ -56,7 +62,29 @@ public class Duke {
                             System.err.println(de.getMessage());
                         }
                         break;
+                    case "delete":
+                        //"delete" logic
+                        try{
+                            if(tokens.length < 2){
+                                throw new DukeException("☹ OOPS!!! Please specify task to delete");
+                            }
+                            int toDelete = Integer.parseInt(command.split(" ")[1]) - 1;
+                            if(toDelete >= listOfTasks.size() || toDelete < 0){
+                                throw new DukeException("☹ OOPS! Task " + (toDelete + 1) + " doesn't exist!");
+                            } else {
+                                Task curr = listOfTasks.get(toDelete);
+                                System.out.println(deleted);
+                                System.out.println(curr.toString());
+                                listOfTasks.remove(toDelete);
+                                Task.totalTasks--;
+                                System.out.println(printNumTasks());
+                            }
+                        } catch (DukeException de){
+                            System.err.println(de.getMessage());
+                        }
+                        break;
                     case "todo":
+                        //toodo logic
                         try {
                             if (tokens.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -74,6 +102,7 @@ public class Duke {
                         }
                         break;
                     case "deadline":
+                        //"deadline" logic
                         try {
                             if (tokens.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -98,6 +127,7 @@ public class Duke {
                         }
                         break;
                     case "event":
+                        //"event" logic
                         try {
                             if(tokens.length == 1){
                                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -121,13 +151,16 @@ public class Duke {
                         }
                         break;
                     default:
+                        //unrecognized command
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException de){
                 System.err.println(de.getMessage());
             }
+            //read next command
             command = input.readLine();
         }
+        //exit program
         System.out.println(goodbye);
     }
 }

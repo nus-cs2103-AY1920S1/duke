@@ -10,18 +10,24 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         String greeting = "Hello! I'm Duke\n"
-                + "What can I do for you?";
+                + "What can I do for you?\n";
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int index = 0;
         while (!command.equals("bye")) {
-            if (!command.equals("list")) {
-                tasks[index] = command;
+            if (!command.equals("list") && !command.substring(0,4).equals("done")) { //for adding new task
+                tasks[index] = new Task(command);
                 index++;
-                String commandMsg = "added: " + command;
+                String commandMsg = "added: " + command + "\n";
                 System.out.println(commandMsg);
+            } else if (command.substring(0,4).equals("done")) { //for marking task as done
+                int curr = Integer.parseInt(command.substring(5));
+                tasks[curr - 1].markAsDone();
+                String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
+                        "[" + tasks[curr - 1].getStatusIcon() + "] " + tasks[curr - 1].getDescription() + "\n";
+                System.out.println(markAsDoneMsg);
             } else {
                 for (int i = 0; i < index; i++) {
                     String listMsg = (i + 1) + ". " + tasks[i];
@@ -31,7 +37,7 @@ public class Duke {
             command = sc.nextLine();
         }
 
-        String exitMsg = "Bye. Hope to see you again soon!";
+        String exitMsg = "Bye. Hope to see you again soon!\n";
         System.out.println(exitMsg);
     }
 }

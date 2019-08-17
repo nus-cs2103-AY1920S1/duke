@@ -6,12 +6,14 @@ class Display implements TaskObserver {
     private ControllerInterface controller; 
     private TaskModelInterface model;
     private Scanner sc;
+    private int totalTasks;
 
     public Display(ControllerInterface controller, TaskModelInterface model) {
         this.controller = controller;
         this.model = model;
         this.model.registerObserver(this);
         this.sc = new Scanner(System.in);
+        this.totalTasks = 0;
     }
 
     private static void printGreeting() {
@@ -20,7 +22,7 @@ class Display implements TaskObserver {
         ArrayList<String> printxs = new ArrayList<>();
         printxs.add(greeting1);
         printxs.add(greeting2);
-        Display.printSection(printxs);
+            Display.printSection(printxs);
     }
 
     private static void printExitMessage() {
@@ -64,9 +66,9 @@ class Display implements TaskObserver {
     }
 
     private static void printSection(List<String> printJobs){
-            Display.printHeader();
-            Display.printList(printJobs);
-            Display.printFooter();
+        Display.printHeader();
+        Display.printList(printJobs);
+        Display.printFooter();
     }
 
     private static void printSection(String job) {
@@ -76,10 +78,10 @@ class Display implements TaskObserver {
     }
 
     public void update(TaskModelInterface model){
-        /* TaskModel's most recent change here */
-        /* model.getUpdate */
-        /* display in section */
-
+    /* TaskModel's most recent change here */
+    /* model.getUpdate */
+    /* display in section */
+        this.totalTasks = model.getTotalTasks();
     }
 
     public void instance() {

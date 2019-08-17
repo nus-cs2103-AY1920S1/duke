@@ -3,9 +3,11 @@ import java.util.ArrayList;
 
 class BasicTaskModel implements TaskModelInterface {
     private List<TaskObserver> observers;
+    private List<TaskInterface> taskList;
 
     public BasicTaskModel() {
         this.observers = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     public void registerObserver(TaskObserver observer) {
@@ -22,7 +24,19 @@ class BasicTaskModel implements TaskModelInterface {
 
     public int getTotalTasks(){
         /* TODO arraylist.size()*/
-        return 0;
+        return this.taskList.size();
+    }
+
+    public void addTask(TaskInterface task) {
+        this.taskList.add(task);
+        this.notifyObservers();
+    }
+
+    /* when do we notify the task again? */
+    public void notifyObservers(){
+        for (TaskObserver observer : observers) {
+            observer.update(this);
+        }    
     }
         
 

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static final String LINE = "    ____________________________________________________________";
@@ -22,14 +23,32 @@ public class Duke {
         formatDisplayedMessages(greeting);
         Scanner sc = new Scanner(System.in); //gets commands from user
         String userCommand = sc.nextLine();
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
-        //if command is not bye, echo userCommand
-        while (!userCommand.equals("bye")) {
-            formatDisplayedMessages(userCommand);
+        //while loop that takes in user inputs
+        while (true) {
+            //program runs this command when userCommand is bye
+            if (userCommand.equals("bye")) {
+                formatDisplayedMessages("Bye. Hope to see you again soon!");
+                break;
+            } else if (userCommand.equals("list")) {
+                //program displays all Tasks in taskList
+                String displayedMessage = "";
+                Integer index = 1;
+                for (Task taskItem : taskList) {
+                    displayedMessage += index.toString() + ". " + taskItem.toString() + "\n";
+                    index++;
+                }
+                formatDisplayedMessages(displayedMessage);
+            } else {
+                //program creates new Task and adds Task to taskList
+                Task userTask = new Task(userCommand);
+                taskList.add(userTask);
+                formatDisplayedMessages("added: " + userCommand);
+            }
             userCommand = sc.nextLine();
         }
 
-        //program runs this command when userCommand is bye
-        formatDisplayedMessages("Bye. Hope to see you again soon!");
+
     }
 }

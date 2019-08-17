@@ -2,15 +2,20 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-class Display {
+class Display implements TaskObserver {
+    private ControllerInterface controller; 
+    private TaskModelInterface model;
     private Scanner sc;
 
-    public Display() {
+    public Display(ControllerInterface controller, TaskModelInterface model) {
+        this.controller = controller;
+        this.model = model;
+        this.model.registerObserver(this);
         this.sc = new Scanner(System.in);
     }
 
     private static void printGreeting() {
-        String greeting1 = "Hello! I'm Duke";
+        String greeting1 = "Hewwo! I'm OwO";
         String greeting2 = "What can I do for you?";
         ArrayList<String> printxs = new ArrayList<>();
         printxs.add(greeting1);
@@ -67,6 +72,10 @@ class Display {
         ArrayList<String> printxs = new ArrayList<>();
         printxs.add(job);
         Display.printSection(printxs);
+    }
+
+    public void update(TaskModelInterface model){
+
     }
 
     public void instance() {

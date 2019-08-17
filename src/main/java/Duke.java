@@ -16,28 +16,42 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
+            Command cmd = new Command(input);
+            String cmdKeyword = cmd.getKeyword();
+            String cmdArgs = cmd.getArgs();
+
+            String errorMessage = "Your command is invalid, please try again.";
+
+            if (cmdKeyword.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) {
+            } else if (cmdKeyword.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println((i + 1) + "." + tasks.get(i));
                 }
-            } else if (input.split(" ")[0].equals("done")) {
+            } else if (cmdKeyword.equals("done")) {
                 try {
-                    int position = Integer.parseInt(input.split(" ")[1]) - 1;
+                    int position = Integer.parseInt(cmdArgs) - 1;
                     Task task = tasks.get(position);
                     task.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + task);
                 } catch (Exception e) {
-                    System.out.println("Your input was invalid, please try again.");
+                    System.out.println(errorMessage);
+                }
+            } else if (cmdKeyword.equals("todo")) {
+                try {
+                    Task task = new Task(cmdArgs);
+                    tasks.add(task);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + task);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                } catch (Exception e) {
+                    System.out.println(errorMessage);
                 }
             } else {
-                Task task = new Task(input);
-                tasks.add(task);
-                System.out.println("added: " + input);
+                System.out.println(errorMessage);
             }
         }
     }

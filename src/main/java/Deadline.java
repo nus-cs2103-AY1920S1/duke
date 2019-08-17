@@ -3,8 +3,7 @@ import java.util.regex.Matcher;
 
 public class Deadline extends Task {
     protected String by;
-    private static Pattern PAT = Pattern.compile(
-            "deadline (.*) /by (.*)");
+    private static Pattern PAT = Pattern.compile("(.*) /by (.*)");
     
     //@@author Parcly-Taxel
     /**

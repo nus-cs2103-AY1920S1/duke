@@ -2,7 +2,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Todo extends Task {
-    private static Pattern PAT = Pattern.compile("todo (.*)");
+    private static Pattern PAT = Pattern.compile("(.*)");
     
     //@@author Parcly-Taxel
     /**

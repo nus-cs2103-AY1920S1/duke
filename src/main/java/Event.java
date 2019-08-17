@@ -3,8 +3,7 @@ import java.util.regex.Matcher;
 
 public class Event extends Task {
     protected String by;
-    private static Pattern PAT = Pattern.compile(
-            "event (.*) /at (.*)");
+    private static Pattern PAT = Pattern.compile("(.*) /at (.*)");
     
     //@@author Parcly-Taxel
     /**

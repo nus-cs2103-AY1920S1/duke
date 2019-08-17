@@ -23,6 +23,24 @@ public class Duke {
                 (numTasks == 1 ? "" : "s") + " in the list.");
     }
     
+    /**
+     * Prints a message congratulating the user on a task done.
+     */
+    public static void printDoneTask(Task t) {
+        printPrompt("Nice! I've marked this task as done:");
+        printPrompt("  " + t);
+    }
+    
+    /**
+     * Prints the current task list without changing it.
+     */
+    public static void printTaskList() {
+        printPrompt("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            printPrompt((i + 1) + "." + tasks.get(i));
+        }
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
@@ -30,36 +48,45 @@ public class Duke {
         printPrompt("What can I do for you?");
         
         while (true) {
-            // Read a whole line at once, then parse it
-            String cmd = sc.nextLine();
+            // Read the command and data separately, together comprising a line
+            String cmd = sc.next();
+            String data = sc.nextLine().trim();
             
-            if (cmd.equals("bye")) {
-                break;
-            } else if (cmd.equals("list")) {
-                printPrompt("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    printPrompt((i + 1) + "." + tasks.get(i));
-                }
-            } else if (cmd.startsWith("done")) {
-                int i = Integer.parseInt(cmd.substring(5)) - 1;
-                Task currTask = tasks.get(i);
-                currTask.markDone();
-                printPrompt("Nice! I've marked this task as done:");
-                printPrompt("  " + currTask);
-            } else {
-                Task t = null;
-                if (cmd.startsWith("deadline")) {
-                    t = Deadline.parse(cmd);
-                } else if (cmd.startsWith("event")) {
-                    t = Event.parse(cmd);
-                } else if (cmd.startsWith("todo")) {
-                    t = Todo.parse(cmd);
-                }
+            switch (cmd) {
+                case "bye":
+                    printPrompt("Bye. Hope to see you again soon!");
+                    System.exit(0);
+                case "list":
+                    printTaskList();
+                    break;
+                case "done":
+                    int i = Integer.parseInt(data) - 1;
+                    Task currTask = tasks.get(i);
+                    currTask.markDone();
+                    printDoneTask(currTask);
+                    break;
+                default:
+                    break;
+            }
+            
+            Task t = null;
+            switch (cmd) {
+                case "todo":
+                    t = Todo.parse(data);
+                    break;
+                case "event":
+                    t = Event.parse(data);
+                    break;
+                case "deadline":
+                    t = Deadline.parse(data);
+                    break;
+                default: // will print an error here (not throw one)
+                    break;
+            }
+            if (t != null) {
                 tasks.add(t);
                 printAddedTask(t);
             }
         }
-        
-        printPrompt("Bye. Hope to see you again soon!");
     }
 }

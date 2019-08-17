@@ -22,7 +22,7 @@ class BasicTaskModel implements TaskModelInterface {
         /* TODO another arraylist to keep track of tasks */
     }
 
-    public int getTotalTasks(){
+    public int getTotalTasks() {
         /* TODO arraylist.size()*/
         return this.taskList.size();
     }
@@ -33,7 +33,7 @@ class BasicTaskModel implements TaskModelInterface {
     }
 
     /* when do we notify the task again? */
-    public void notifyObservers(){
+    public void notifyObservers() {
         for (TaskObserver observer : observers) {
             observer.update(this);
         }    

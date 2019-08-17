@@ -17,4 +17,5 @@ application {
 
 run {
     standardInput = System.in
+    systemProperty "file.encoding", "UTF-8"
 }

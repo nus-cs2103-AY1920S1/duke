@@ -1,15 +1,26 @@
 package weomucat.duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import static weomucat.duke.Parser.PARAMETER_DEFAULT;
+
 public class Duke {
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_BYE = "bye";
 
+    private static final String PARAMETER_AT = "/at";
+    private static final String PARAMETER_BY = "/by";
+
     private static final String SAY_INDENTATION = "\t";
     private static final String SAY_HORIZONTAL_LINE = "============================================================";
+
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -19,45 +30,77 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        // Scanner to read stdin
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
 
         // Greet user
         say("Hello! I'm Duke", "What can I do for you?");
 
         while (true) {
-            // Read user input from stdin.
-            String user_input = scanner.nextLine();
-            String[] user_input_split = user_input.split(" ");
+            // Initialize Parser for new line (user input)
+            Parser parser = new Parser(scanner.nextLine());
 
-            // Determine which command the user entered.
-            switch (user_input_split[0]) {
+            // Get command of user input
+            String command = parser.nextCommand();
 
-                case COMMAND_LIST: // List all tasks.
+            // Run actions based on which command the user entered.
+            switch (command) {
+
+                // Add tasks
+                case COMMAND_TODO:
+                    HashMap<String, String> parameters = parser.nextParameters();
+                    String description = parameters.get(PARAMETER_DEFAULT);
+
+                    addTask(new ToDo(description));
+                    break;
+
+                case COMMAND_EVENT:
+                    parameters = parser.nextParameters(PARAMETER_AT);
+                    description = parameters.get(PARAMETER_DEFAULT);
+                    String at = parameters.get(PARAMETER_AT);
+
+                    addTask(new Event(description, at));
+                    break;
+
+                case COMMAND_DEADLINE:
+                    parameters = parser.nextParameters(PARAMETER_BY);
+                    description = parameters.get(PARAMETER_DEFAULT);
+                    String by = parameters.get(PARAMETER_BY);
+
+                    addTask(new Deadline(description, by));
+                    break;
+
+                // List all tasks.
+                case COMMAND_LIST:
                     String[] out = new String[tasks.size()];
+
                     for (int i = 0; i < tasks.size(); i++) {
+                        // Get task from tasks
                         Task task = tasks.get(i);
+
+                        // Format task with no. in front
                         out[i] = String.format("%d. %s", i + 1, task);
                     }
+
                     say(out);
                     break;
 
-                case COMMAND_DONE: // Mark a task as done.
-                    int i = Integer.parseInt(user_input_split[1]) - 1;
+                // Mark a task as done.
+                case COMMAND_DONE:
+                    // Get index of task
+                    int i = parser.nextInt() - 1;
+
+                    // Get task from tasks
                     Task task = tasks.get(i);
                     task.setDone(true);
+
                     say("Nice! I've marked this task as done:", task.toString());
                     break;
 
-                case COMMAND_BYE: // Terminate the program.
+                // Terminate the program.
+                case COMMAND_BYE:
                     say("Bye. Hope to see you again soon!");
                     return;
-
-                default: // By default, add to tasks.
-                    task = new Task(user_input);
-                    tasks.add(task);
-                    say("added: " + task);
-                    break;
             }
         }
     }
@@ -68,5 +111,12 @@ public class Duke {
             System.out.println(SAY_INDENTATION + line);
         }
         System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
+    }
+
+    private static void addTask(Task task) {
+        tasks.add(task);
+        say("Got it. I've added this task:",
+                task.toString(),
+                String.format("Now you have %d task(s) in the list.", tasks.size()));
     }
 }

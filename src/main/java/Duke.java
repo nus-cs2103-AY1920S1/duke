@@ -17,7 +17,7 @@ public class Duke {
     }
     private void printLine() {
         /*
-        description: Prints line of dashes with \n at end.
+        Prints line of dashes with \n at end.
         looks nice tee hee
         expects: No input
         outputs: returns nothing
@@ -26,7 +26,7 @@ public class Duke {
     }
     private String list() {
         /*
-        description: stores all tasks in printable format
+        stores all tasks in printable format
         then returns it.
         expects: nothing, but taskArr must exist
         outputs: printable string that is all tasks.
@@ -49,6 +49,36 @@ public class Duke {
         taskArr.add(newToDo);
         System.out.println("Got it. I've added this task:");
         System.out.print(" " + newToDo.printTask() + "\n");
+        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
+    }
+    private void deadline(String taskInfo) {
+        /*
+
+         */
+        int sep = taskInfo.indexOf('/');
+        // use sep to split string
+        String actualTask = taskInfo.substring(0,sep);
+        sep += 4; // put sep at space after /by
+        String time = taskInfo.substring(sep);
+        Deadline newTing = new Deadline(actualTask,"D",time);
+        taskArr.add(newTing);
+        System.out.println("Got it. I've added this task:");
+        System.out.print(" " + newTing.printTask() + "\n");
+        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
+    }
+    private void event(String taskInfo) {
+        /*
+
+         */
+        int sep = taskInfo.indexOf('/');
+        // use sep to split string
+        String actualTask = taskInfo.substring(0,sep);
+        sep += 4; // put sep at space after /by
+        String time = taskInfo.substring(sep);
+        Event newTing = new Event(actualTask,"E",time);
+        taskArr.add(newTing);
+        System.out.println("Got it. I've added this task:");
+        System.out.print(" " + newTing.printTask() + "\n");
         System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
     private void run() {
@@ -75,10 +105,15 @@ public class Duke {
                 todo(info);
                 printLine();
             } else if (input.equals("deadline")) {
-                continue;
+                String info = sc.nextLine();
+                printLine();
+                deadline(info);
+                printLine();
             } else if (input.equals("event")) {   // list command
-
-                continue;
+                String info = sc.nextLine();
+                printLine();
+                event(info);
+                printLine();
             } else if (input.equals("done")) {   // list command
                 int taskNum = sc.nextInt();
                 printLine();

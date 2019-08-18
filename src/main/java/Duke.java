@@ -111,7 +111,7 @@ public class Duke {
             listOfTasks.add(event);
             echoTaskAdded(event);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
+            throw new DukeException("Oops! Event task description or start time cannot be blank.");
         } catch (Exception e) {
             throw new DukeException("Oops! Please write in this format: event <description> /at <datetime>");
         }

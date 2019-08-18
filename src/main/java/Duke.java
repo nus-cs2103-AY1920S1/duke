@@ -9,12 +9,9 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
-        while (sc.hasNext()) {
+        boolean isRunning = true;
+        while (isRunning && sc.hasNext()) {
             String input = sc.next();
-
-            if (input.equals("bye")) {
-                break;
-            }
 
             try {
                 switch (input) {
@@ -32,6 +29,9 @@ public class Duke {
                     break;
                 case "done":
                     handleDone(sc.nextInt());
+                    break;
+                case "bye":
+                    isRunning = false;
                     break;
                 default:
                     break;

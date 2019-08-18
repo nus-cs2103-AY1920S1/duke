@@ -4,10 +4,12 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String FRONTSPACES = "     "; // 5 spaces
-    private static final String LINE = "    ___________________________________________________________________________\n";
-
+    private static final String IDENTATION_LVL1 = "     "; // 5 spaces, for first level indentation.
+    private static final String IDENTATION_LVL2 = "  "; // 2 spaces, for second level indentation (i.e. more inner).
     private List<Task> taskList;
+
+    // 79 characters, excluding \n. Line is of length 75 characters.
+    private static final String LINE = "    ___________________________________________________________________________\n";
 
     public Duke() {
         taskList = new LinkedList<>();
@@ -17,12 +19,22 @@ public class Duke {
         new Duke().start();
     }
 
-    private void start() {
+    public void start() {
         printWelcomeMessage();
         receiveCommand();
     }
 
-    public void receiveCommand() {
+    private void printWelcomeMessage() {
+        String logo = " ____        _        \n"
+                + "     |  _ \\ _   _| | _____ \n"
+                + "     | | | | | | | |/ / _ \\\n"
+                + "     | |_| | |_| |   <  __/\n"
+                + "     |____/ \\__,_|_|\\_\\___|\n";
+
+        echo(logo, "Hello! I'm Duke", "What can I do for you?");
+    }
+
+    private void receiveCommand() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String command = sc.nextLine().trim();
@@ -36,10 +48,10 @@ public class Duke {
                     addEvent(command);
                 } else if ("list".equals(command)) {
                     list();
-                } else if (command.startsWith("delete")) {
-                    deleteTask(command);
                 } else if (command.startsWith("done")) {
                     markTaskAsDone(command);
+                } else if (command.startsWith("delete")) {
+                    deleteTask(command);
                 } else if ("bye".equals(command)) {
                     echo("Bye. Hope to see you again!");
                     break;
@@ -55,7 +67,7 @@ public class Duke {
     private void addToDo(String command) throws DukeException {
         String topic = command.substring(4).trim();
 
-        if (topic.equals("")) {
+        if ("".equals(topic)) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
@@ -65,7 +77,7 @@ public class Duke {
     private void addDeadline(String command) throws DukeException {
         String[] details = command.substring(8).trim().split("/by");
 
-        if (details.length == 1 || "".equals(details[0].trim()) || "".equals(details[1].trim() == "")) {
+        if (details.length == 1 || "".equals(details[0].trim()) || "".equals(details[1].trim())) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
 
@@ -88,11 +100,9 @@ public class Duke {
 
     private void addTask(Task task) {
         taskList.add(task);
-        List<String> middle = new LinkedList<>();
-        middle.add(String.format("  %s", task.toString()));
-        echo(new String[]{"Got it. I've added this task:"},
-                middle,
-                new String[]{String.format("Now you have %d tasks in the list.", taskList.size())});
+        echo("Got it. I've added this task:",
+                String.format("%s%s", IDENTATION_LVL2, task.toString()),
+                String.format("Now you have %s in the list.", getTaskWord()));
     }
 
     private void deleteTask(String command) throws DukeException {
@@ -106,8 +116,8 @@ public class Duke {
             Task task = taskList.remove(index - 1);
 
             echo("Noted. I've removed this task:",
-                    String.format("  %s", task.toString()),
-                    String.format("Noted you have %d tasks in the list.", taskList.size()));
+                    String.format("%s%s", IDENTATION_LVL2, task.toString()),
+                    String.format("Now you have %s in the list.", getTaskWord()));
         } catch (NumberFormatException e) {
             echo(String.format("%s There can only be an integer after the word \"delete\"", DukeException.PREFIX ));
         }
@@ -124,7 +134,7 @@ public class Duke {
             Task task = taskList.get(index - 1);
             task.markAsDone();
             echo("Nice! I've marked this task as done:",
-                    String.format("  [\u2713] %s", task.getTitle()));
+                    String.format("%s%s", IDENTATION_LVL2, task.toString()));
         } catch (NumberFormatException e) {
             echo(String.format("%s There can only be an integer after the word \"done\"", DukeException.PREFIX ));
         }
@@ -132,11 +142,11 @@ public class Duke {
 
     private void list() {
         System.out.print(LINE);
-        System.out.print(FRONTSPACES + "Here are the tasks in your list:\n");
+        System.out.print(IDENTATION_LVL1 + "Here are the tasks in your list:\n");
         ListIterator<Task> iterator = taskList.listIterator();
 
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%s%d.%s\n", FRONTSPACES, i + 1, iterator.next());
+            System.out.printf("%s%d.%s\n", IDENTATION_LVL1, i + 1, iterator.next());
         }
 
         System.out.print(LINE);
@@ -145,57 +155,25 @@ public class Duke {
 
     /**
      * print the strings provided line by line, enclosed within two lines.
+     * @param strings Strings to be printed.
      */
     public void echo(String... strings) {
-        echo(strings, null, null);
-    }
-
-    /**
-     * print the strings provided followed by the list provided line by line, enclosed within two lines.
-     * if list is null, then print strings only (and vice versa).
-     * @param list list of items to be printed.
-     * @param strings strings to be printed.
-     */
-    public void echo(List<?> list, String... strings) {
-        echo(strings, list, null);
-    }
-
-    private void echo(String[] beginning, List<?> list, String[] ending) {
         System.out.print(LINE);
 
-        if (beginning != null) {
-            for (String string : beginning) {
-                System.out.print(FRONTSPACES + string + "\n");
-            }
-        }
-
-        if (list != null) {
-            list.forEach(thing -> {
-                System.out.print(String.format("%s%s\n", FRONTSPACES, thing));
-            });
-        }
-
-        if (ending != null) {
-            for (String string : ending) {
-                System.out.print(FRONTSPACES + string + "\n");
-            }
+        for (String string : strings) {
+            System.out.print(IDENTATION_LVL1 + string + "\n");
         }
 
         System.out.print(LINE);
         System.out.print("\n");
     }
 
-    private void printWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "     |  _ \\ _   _| | _____ \n"
-                + "     | | | | | | | |/ / _ \\\n"
-                + "     | |_| | |_| |   <  __/\n"
-                + "     |____/ \\__,_|_|\\_\\___|\n";
-
-        echo(logo, "Hello! I'm Duke", "What can I do for you?");
-    }
-
     private boolean indexIsValid(int index) {
         return index > 0 && index <= taskList.size();
+    }
+
+    private String getTaskWord() {
+        int size = taskList.size();
+        return size > 1 ? size + " tasks" : size + " task";
     }
 }

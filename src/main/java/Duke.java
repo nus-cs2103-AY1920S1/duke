@@ -16,27 +16,39 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         Scanner scanner = new Scanner(System.in);
+
         while (scanner.hasNextLine()) {
-            String command = scanner.nextLine();
-            if (command.equals("bye")) {
-                exit();
-                scanner.close();
-                break;
-            } else if (command.equals("list")) {
-                list(tasks);
-            } else if (command.startsWith("done")) {
-                int index = Integer.parseInt(command.split(" ")[1]);
-                done(index, tasks);
-            } else {
-                try {
+            try {
+                String command = scanner.nextLine();
+                if (command.equals("bye")) {
+                    exit();
+                    scanner.close();
+                    break;
+                } else if (command.equals("list")) {
+                    list(tasks);
+                } else if (command.startsWith("delete")) {
+                    String[] commandSplit = command.split(" ");
+                    if (commandSplit.length < 2) {
+                        throw new DukeException("\u2639 OOPS!!! Please specify a task to delete.");
+                    }
+                    int index = Integer.parseInt(commandSplit[1]);
+                    delete(index, tasks);
+                } else if (command.startsWith("done")) {
+                    String[] commandSplit = command.split(" ");
+                    if (commandSplit.length < 2) {
+                        throw new DukeException("\u2639 OOPS!!! Please specify the task that has been done.");
+                    }
+                    int index = Integer.parseInt(commandSplit[1]);
+                    done(index, tasks);
+                } else {
                     addTask(command, tasks);
-                } catch (DukeException exception){
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("\t ---------------------------------------------------------- \n");
-                    sb.append("\t " + exception.getMessage() + "\n");
-                    sb.append("\t ---------------------------------------------------------- \n");
-                    System.out.print(sb.toString());
                 }
+            } catch (DukeException exception) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("\t ---------------------------------------------------------- \n");
+                sb.append("\t " + exception.getMessage() + "\n");
+                sb.append("\t ---------------------------------------------------------- \n");
+                System.out.print(sb.toString());
             }
         }
     }
@@ -54,6 +66,18 @@ public class Duke {
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println("\t " + i + ". " + tasks.get(i - 1));
         }
+        printLine();
+    }
+
+    public static void delete(int index, ArrayList<Task> tasks) {
+        Task deletedTask = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        printLine();
+        System.out.println("\t Noted. I've removed this task:");
+        System.out.print("\t \t");
+        System.out.println(deletedTask);
+        System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the " +
+                "list.");
         printLine();
     }
 

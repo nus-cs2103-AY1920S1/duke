@@ -17,6 +17,15 @@ public class Duke {
             }
 
             switch (input) {
+            case "todo":
+                handleTodo(sc.nextLine());
+                break;
+            case "deadline":
+                handleDeadline(sc.nextLine());
+                break;
+            case "event":
+                handleEvent(sc.nextLine());
+                break;
             case "list":
                 handleList();
                 break;
@@ -24,7 +33,6 @@ public class Duke {
                 handleDone(sc.nextInt());
                 break;
             default:
-                handleInput(input);
                 break;
             }
         }
@@ -42,12 +50,36 @@ public class Duke {
         }
     }
 
-    private static void handleInput(String input) {
-        listOfTasks.add(new Task(input));
-        System.out.println(input);
+    private static void handleTodo(String input) {
+        Task todo = new Todo(input);
+        listOfTasks.add(todo);
+        echoTaskAdded(todo);
+    }
+
+    private static void handleDeadline(String input) {
+        String[] strings = input.split(" /by ");
+        Task deadline = new Deadline(strings[0], strings[1]);
+        listOfTasks.add(deadline);
+        echoTaskAdded(deadline);
+    }
+
+    private static void handleEvent(String input) {
+        String[] strings = input.split(" /at ");
+        Task event = new Event(strings[0], strings[1]);
+        listOfTasks.add(event);
+        echoTaskAdded(event);
+    }
+
+    private static void echoTaskAdded(Task output) {
+        System.out.println("Got it. I've added this task:");
+        System.out.printf("%s\n", output);
+        System.out.printf("Now you have %d tasks in the list.\n", listOfTasks.size());
     }
 
     private static void handleDone(int input) {
-        listOfTasks.get(input - 1).markAsDone();
+        Task taskDone = listOfTasks.get(input - 1);
+        taskDone.markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.printf("%s\n", taskDone);
     }
 }

@@ -5,27 +5,26 @@ public class Duke {
     public static final String LINE = "    ____________________________________________________________";
     public static final String TABS = "     ";
 
-    /*
-    public static void formatDisplayedMessages(String command) {
-        System.out.println(LINE);
-        String[] parsedCommands = command.split("\n");
-        for (String line : parsedCommands) {
-            System.out.println(TABS + line);
-        }
-        System.out.println(LINE);
-    }
-*/
+    static ArrayList<Task> taskList = new ArrayList<Task>();
+
     public static void welcomeMessage() {
         System.out.println(LINE);
         System.out.println(TABS + "Hello! I'm Duke\n"+ TABS +"What can I do for you?");
         System.out.println(LINE);
     }
 
+    private static void displayNumberOfTasks() {
+        if (taskList.size() == 1) {
+            System.out.printf("%sNow you have %d task in the list.\n", TABS, taskList.size());
+        } else {
+            System.out.printf("%sNow you have %d tasks in the list.\n", TABS, taskList.size());
+        }
+    }
+
     public static void main(String[] args) {
         welcomeMessage();
         Scanner sc = new Scanner(System.in); //gets commands from user
         String userCommand = sc.nextLine();
-        ArrayList<Task> taskList = new ArrayList<Task>();
 
         //while loop that takes in user inputs
         while (true) {
@@ -53,6 +52,13 @@ public class Duke {
                     Task taskCompleted = taskList.get(taskNumber - 1);
                     taskCompleted.markAsDone();
                     System.out.println(TABS + "  " + taskCompleted.toString());
+                } else if (userCommand.startsWith("delete")){
+                    //program deletes a Task from taskList
+                    int taskNumber = Character.getNumericValue(userCommand.charAt(7));
+                    Task taskToDelete = taskList.remove(taskNumber);
+                    System.out.println(TABS + "Noted. I've removed this task: ");
+                    System.out.println(TABS + "  " + taskToDelete.toString());
+                    displayNumberOfTasks();
                 } else {
                     //program checks what type of task it is
                     Task userTask;
@@ -80,11 +86,7 @@ public class Duke {
                     System.out.println(TABS + "Got it. I've added this task: ");
                     System.out.println(TABS + "  " + userTask.toString());
 
-                    if (taskList.size() == 1) {
-                        System.out.printf("%sNow you have %d task in the list.\n", TABS, taskList.size());
-                    } else {
-                        System.out.printf("%sNow you have %d tasks in the list.\n", TABS, taskList.size());
-                    }
+                    displayNumberOfTasks();
                 }
             } catch (DukeException ex) {
                 System.out.println(TABS + "☹ OOPS!!! " + ex.getMessage());

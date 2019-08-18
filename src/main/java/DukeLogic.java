@@ -17,6 +17,7 @@ public class DukeLogic {
     private final String SEPARATOR = "____________________________________________________________";
     private final String DUKE_EXIT_COMMAND = "bye";
     private final String DUKE_LIST_COMMAND = "list";
+    private final String DUKE_DONE_COMMAND = "done";
     private final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private final int DUKE_MAXIMUM_TASKS = 100;
 
@@ -26,7 +27,7 @@ public class DukeLogic {
 
     private StringBuilder sb;
     private Scanner scanner;
-    private List<String> userInputs;
+    private List<DukeTask> userDukeTasks;
 
     /*===============================
     ||  Private Auxiliary Methods  ||
@@ -59,22 +60,25 @@ public class DukeLogic {
     private void initializeResources() {
         sb = new StringBuilder();
         scanner = new Scanner(System.in);
-        userInputs = new ArrayList<>(DUKE_MAXIMUM_TASKS);
+        userDukeTasks = new ArrayList<>(DUKE_MAXIMUM_TASKS);
     }
 
     /**
      * Reads in user-input as a String before checking the input. If the command is to terminate the program,
-     * {@link #terminateProgram()} will be called. If the command is to list the tasks, {@link #displayUserInputs()}
-     * will be called. Otherwise, the user-input will be added to the list of input via {@link #addToUserInputs(String)}
+     * {@link #terminateProgram()} will be called. If the command is to list the tasks, {@link #displayDukeTasks()}
+     * will be called. Otherwise, the user-input will be added to the list of input via {@link #addToDukeTasks(String)}
      */
     private void handleUserInput() {
         String input = scanner.nextLine();
+        String[] inputTokens = input.split(" ");
         if (input.equals(DUKE_EXIT_COMMAND)) {
             terminateProgram();
         } else if (input.equals(DUKE_LIST_COMMAND)) {
-            displayUserInputs();
+            displayDukeTasks();
+        } else if (inputTokens[0].equals(DUKE_DONE_COMMAND) && inputTokens.length > 1) {
+            markDukeTaskComplete(Integer.parseInt(inputTokens[1]));
         } else {
-            addToUserInputs(input);
+            addToDukeTasks(input);
         }
     }
 
@@ -83,11 +87,12 @@ public class DukeLogic {
      * through the List of tasks and printing each task with its index. Then it will call {@link #displayToUser(String)}
      * to display the final formatted list.
      */
-    private void displayUserInputs() {
+    private void displayDukeTasks() {
         sb.setLength(0);
-        for (int index = 0; index < userInputs.size(); index++) {
-            sb.append((index + 1) + ". " + userInputs.get(index));
-            if (index != (userInputs.size() - 1)) {
+        sb.append("Here are the tasks in your list:\n\t ");
+        for (int index = 0; index < userDukeTasks.size(); index++) {
+            sb.append((index + 1) + "." + userDukeTasks.get(index).toString());
+            if (index != (userDukeTasks.size() - 1)) {
                 sb.append("\n\t ");
             }
         }
@@ -95,11 +100,30 @@ public class DukeLogic {
     }
 
     /**
-     * Adds the specified input into the current list of user input. The specified input is also mirrored to the user.
-     * @param input User specified input that will be added to the current list of user input.
+     * Checks if the specified task index has already been marked as complete. If it is not then mark the task as
+     * complete and print out the name of this task.
+     * @param taskIndex Index of the task following the printed list from running the "list" command.
      */
-    private void addToUserInputs(String input) {
-        userInputs.add(input);
+    private void markDukeTaskComplete(int taskIndex) {
+        DukeTask completedTask =  userDukeTasks.get(taskIndex - 1);
+        sb.setLength(0);
+        if (completedTask.getTaskIsComplete()) {
+            sb.append("This task has already been marked as done!");
+        } else {
+            completedTask.setTaskComplete();
+            sb.append("Nice! I've marked this task as done:\n\t   " + completedTask.toString());
+        }
+        displayToUser(sb.toString());
+    }
+
+    /**
+     * Creates a new DukeTask and adds it into the current list of user DukeTask. The specified input is also mirrored
+     * to the user.
+     * @param input User specified input that will be the name of the DukeTask to be added to the current list of
+     *              DukeTask.
+     */
+    private void addToDukeTasks(String input) {
+        userDukeTasks.add(new DukeTask(input));
         displayToUser("added: " + input);
     }
 

@@ -33,6 +33,14 @@ class BasicTaskModel implements TaskModelInterface {
         this.notifyObservers();
     }
 
+    public TaskInterface doneTask(int refNum) {
+        int indexNum = refNum - 1;
+        TaskInterface pendingTask = this.taskList.get(indexNum);
+        TaskInterface doneTask = pendingTask.completeTask();
+        this.taskList.set(indexNum, doneTask);
+        return doneTask;
+    }
+
     public Iterator<TaskInterface> getTaskListIterator(){
         return this.taskList.listIterator();
     }

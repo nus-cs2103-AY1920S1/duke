@@ -1,0 +1,3 @@
+interface TaskFormatInterface {
+    String formatText();
+}

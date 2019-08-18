@@ -83,10 +83,21 @@ class Display implements TaskObserver {
         Display.printSection(outputMsg);
     }        
 
+    public static void printDoneTaskSection(String taskDetails) {
+        ArrayList<String> printxs = new ArrayList<>();
+        String headermsg = "Nice! I've marked this task as done:";
+        printxs.add(headermsg);
+        printxs.add(taskDetails);
+        Display.printSection(printxs);
+
+    }
+
     public static void 
         printAllTasks(Iterator<TaskInterface> iter) {
 
         ArrayList<String> printxs = new ArrayList<>();
+        String headermsg = "Here are the tasks in your list:";
+        printxs.add(headermsg);
 
         int counter = 1;
 
@@ -115,11 +126,12 @@ class Display implements TaskObserver {
 
             String[] commandlist = command.split(" ");
             if (commandlist[0].toUpperCase().equals("LIST")) {
-                /* TODO controller.list */
                 this.controller.listTasks();
+            } else if 
+                (commandlist[0].toUpperCase().equals("DONE")) {
+                this.controller.doneTask(command);
             } else {
                 this.controller.addTask(command);
-                /* TODO controller add task */     
             }
 
             command = this.sc.nextLine();

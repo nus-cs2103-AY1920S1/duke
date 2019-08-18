@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
@@ -34,7 +35,9 @@ public class Duke {
                 } else if (command.startsWith("event")) {
                     addEvent(command);
                 } else if ("list".equals(command)) {
-                    echo(taskList, "Here are the tasks in your list:");
+                    list();
+                } else if (command.startsWith("delete")) {
+                    deleteTask(command);
                 } else if (command.startsWith("done")) {
                     markTaskAsDone(command);
                 } else if ("bye".equals(command)) {
@@ -56,7 +59,7 @@ public class Duke {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
-        addTask(new ToDo(taskList.size() + 1, topic));
+        addTask(new ToDo(topic));
     }
 
     private void addDeadline(String command) throws DukeException {
@@ -68,7 +71,7 @@ public class Duke {
 
         String topic = details[0].stripTrailing();
         String deadline = details[1].stripLeading();
-        addTask(new Deadline(taskList.size() + 1, topic, deadline));
+        addTask(new Deadline(topic, deadline));
     }
 
     private void addEvent(String command) throws DukeException {
@@ -80,28 +83,64 @@ public class Duke {
 
         String topic = details[0].stripTrailing();
         String date = details[1].stripLeading();
-        addTask(new Event(taskList.size() + 1, topic, date));
+        addTask(new Event(topic, date));
     }
 
     private void addTask(Task task) {
         taskList.add(task);
         List<String> middle = new LinkedList<>();
-        middle.add(String.format("  %s", task.getDescription()));
+        middle.add(String.format("  %s", task.toString()));
         echo(new String[]{"Got it. I've added this task:"},
                 middle,
                 new String[]{String.format("Now you have %d tasks in the list.", taskList.size())});
     }
 
+    private void deleteTask(String command) throws DukeException {
+        try {
+            int index = Integer.parseInt(command.substring(6).trim());
+
+            if (!indexIsValid(index)) {
+                throw new DukeException("Index must be between 1 and the number of task added!");
+            }
+
+            Task task = taskList.remove(index - 1);
+
+            echo("Noted. I've removed this task:",
+                    String.format("  %s", task.toString()),
+                    String.format("Noted you have %d tasks in the list.", taskList.size()));
+        } catch (NumberFormatException e) {
+            echo(String.format("%s There can only be an integer after the word \"delete\"", DukeException.PREFIX ));
+        }
+    }
+
     private void markTaskAsDone(String command) throws DukeException {
-        int index = Integer.parseInt(command.split(" ")[1]);
-        if (index < 0 || index > taskList.size()) {
-            throw new DukeException("Index cannot be less than 0 or greater than the number of tasks recorded!");
+        try {
+            int index = Integer.parseInt(command.substring(4).trim());
+
+            if (!indexIsValid(index)) {
+                throw new DukeException("Index must be between 1 and the number of task added!");
+            }
+
+            Task task = taskList.get(index - 1);
+            task.markAsDone();
+            echo("Nice! I've marked this task as done:",
+                    String.format("  [\u2713] %s", task.getTitle()));
+        } catch (NumberFormatException e) {
+            echo(String.format("%s There can only be an integer after the word \"done\"", DukeException.PREFIX ));
+        }
+    }
+
+    private void list() {
+        System.out.print(LINE);
+        System.out.print(FRONTSPACES + "Here are the tasks in your list:\n");
+        ListIterator<Task> iterator = taskList.listIterator();
+
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.printf("%s%d.%s\n", FRONTSPACES, i + 1, iterator.next());
         }
 
-        Task task = taskList.get(index - 1);
-        task.markAsDone();
-        echo("Nice! I've marked this task as done:",
-                String.format("  [\u2713] %s", task.getTitle()));
+        System.out.print(LINE);
+        System.out.print('\n');
     }
 
     /**
@@ -154,5 +193,9 @@ public class Duke {
                 + "     |____/ \\__,_|_|\\_\\___|\n";
 
         echo(logo, "Hello! I'm Duke", "What can I do for you?");
+    }
+
+    private boolean indexIsValid(int index) {
+        return index > 0 && index <= taskList.size();
     }
 }

@@ -1,6 +1,6 @@
 public class ToDo extends Task {
-    public ToDo(int index, String topic) {
-        super(index, topic);
+    public ToDo(String topic) {
+        super(topic);
         this.type = "T";
         this.details = topic;
     }

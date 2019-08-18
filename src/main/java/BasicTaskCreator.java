@@ -16,20 +16,23 @@ class BasicTaskCreator implements TaskCreator {
     }
 
     private TaskInterface createDeadLine(String command) {
-        // removes "DeadLine" keyword
-        String[] cmdList = command.split(" ");
-        List<String> xs = 
-            new LinkedList<String>(Arrays.asList(cmdList));
-        xs.remove(0);
-
-        // split remaining command delimited by "/by"
-        String subcmd = listToString(xs);
-        String[] subcmdList = subcmd.split(" /by ");
+        String[] subcmdList = removeFirstAndDelimit(command, 
+                " /by ");
 
         String taskName = subcmdList[0];
         String date = subcmdList[1];
 
         return new DeadLinesImplementation(taskName, date,false);
+    }
+
+    private TaskInterface createEvent(String command) {
+        String[] subcmdList = removeFirstAndDelimit(command, 
+                " /at ");
+
+        String taskName = subcmdList[0];
+        String date = subcmdList[1];
+
+        return new EventsImplementation(taskName, date,false);
     }
 
     public TaskInterface createTask(String command) {
@@ -40,15 +43,16 @@ class BasicTaskCreator implements TaskCreator {
         } else if 
             (cmdList[0].toUpperCase().equals("DEADLINE")) {
             return createDeadLine(command);
-        } /*else if 
+        } else if 
             (cmdList[0].toUpperCase().equals("EVENT")) {
-            this.controller.doneTask(command);
+            return createEvent(command);
         } else {
-            this.controller.addTask(command);
-        } */
+            
+        } 
         return new ToDosImplementation("ERROR",false);
     }
 
+    /* converts a str.split(" ") back into a string */
     public static String listToString(List<String> xs) {
         String output = "";
         boolean isFirst = true;
@@ -61,6 +65,20 @@ class BasicTaskCreator implements TaskCreator {
             output += x;
         }
         return output;
+    }
+
+    public static String[] removeFirstAndDelimit(String command, 
+            String delimit) {
+        // removes "DeadLine" keyword
+        String[] cmdList = command.split(" ");
+        List<String> xs = 
+            new LinkedList<String>(Arrays.asList(cmdList));
+        xs.remove(0);
+
+        // split remaining command delimited by "/at"
+        String subcmd = listToString(xs);
+        String[] subcmdList = subcmd.split(delimit);
+        return subcmdList;
     }
 
 }

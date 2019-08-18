@@ -32,7 +32,7 @@ public class DeadlineTask implements Task {
         sb.append(Task.getStatusIcon(isDone));
         sb.append("] ");
         sb.append(this.description);
-        sb.append("(by: ");
+        sb.append(" (by: ");
         sb.append(doByString);
         sb.append(")");
         return sb.toString();

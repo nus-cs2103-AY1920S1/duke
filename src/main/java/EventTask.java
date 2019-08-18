@@ -32,7 +32,7 @@ public class EventTask implements Task {
         sb.append(Task.getStatusIcon(isDone));
         sb.append("] ");
         sb.append(this.description);
-        sb.append("(at: ");
+        sb.append(" (at: ");
         sb.append(timingString);
         sb.append(")");
         return sb.toString();

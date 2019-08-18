@@ -1,0 +1,11 @@
+read book
+return book
+buy bread
+list
+done 2
+list
+done 1
+list
+done 3
+list
+bye

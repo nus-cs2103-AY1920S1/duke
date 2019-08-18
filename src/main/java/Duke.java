@@ -74,7 +74,7 @@ public class Duke {
                         String input = "";
                         int marker = 0;
                         for (int i = 1; i < inputMessage.length; i++)  {
-                            if (i >= inputMessage.length) {
+                            if (i + 1 >= inputMessage.length) {
                                 throw new DukeException("     Please provide more information");
                             }
                             if (inputMessage[i + 1].equals("/by") || inputMessage[i + 1].equals("/at")) {

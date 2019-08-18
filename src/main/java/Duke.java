@@ -31,6 +31,9 @@ public class Duke {
                 case "done":
                     handleDone();
                     break;
+                case "delete":
+                    handleDelete();
+                    break;
                 case "bye":
                     isRunning = false;
                     break;
@@ -134,6 +137,20 @@ public class Duke {
             throw new DukeException("Oops! Your task cannot be found!");
         } catch (Exception e) {
             throw new DukeException("Oops! Please write in this format: done <number>");
+        }
+    }
+
+    private static void handleDelete() throws DukeException {
+        try {
+            int input = Integer.parseInt(sc.nextLine().trim());
+            Task taskRemoved = listOfTasks.remove(input - 1);
+            System.out.println("Got it. I've removed this task:");
+            System.out.printf("%s\n", taskRemoved);
+            System.out.printf("Now you have %d tasks in the list.\n", listOfTasks.size());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Your task cannot be found!");
+        } catch (Exception e) {
+            throw new DukeException("Oops! Please write in this format: delete <number>");
         }
     }
 }

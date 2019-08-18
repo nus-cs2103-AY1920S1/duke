@@ -6,6 +6,7 @@ public class Duke {
     List<Task> l;
     String doneMessage = "Nice! I've marked this task as done:";
     String addedMessage = "Got it. I've added this task:";
+    String deleteMessage = "Noted. I've removed this task: ";
 
     public void list() {
         System.out.println("____________________________________________________________");
@@ -21,6 +22,14 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println(doneMessage);
         System.out.println(l.get(i - 1));
+        System.out.println("____________________________________________________________");
+    }
+
+    public void delete(int i){
+        System.out.println("____________________________________________________________");
+        System.out.println(deleteMessage);
+        System.out.println(l.get(i - 1));
+        System.out.println(String.format("Now you have %d tasks in the list.", l.size()));
         System.out.println("____________________________________________________________");
     }
 
@@ -80,11 +89,14 @@ public class Duke {
             case "list":
                 this.list();
                 break;
-            case "bye":
-                exit = true;
-                break;
             case "done":
                 this.done(sc.nextInt());
+                break;
+            case "delete":
+                this.delete(sc.nextInt());
+                break;
+            case "bye":
+                exit = true;
                 break;
             default:
                 System.out.println("____________________________________________________________");

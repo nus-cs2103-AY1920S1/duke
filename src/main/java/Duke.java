@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/*
+ TO DO:
+ ADD FUNC DESCRIPS
+ ADD EXCEPTION SUPPORT
+ */
 public class Duke {
     private ArrayList<Task> taskArr = new ArrayList<Task>();
 
@@ -86,6 +90,21 @@ public class Duke {
         System.out.print(" " + newTing.printTask() + "\n");
         System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
+    private void done(int t) {
+        Task doneTask = taskArr.get(t-1);
+        doneTask.markDone();
+        System.out.print("Nice! I've marked this task as done:\n");
+        System.out.println(doneTask.printTask());
+
+    }
+    private void delete(int taskNum) {
+        Task doneTask = taskArr.get(taskNum-1);
+
+        System.out.print("Noted. I've removed this task: \n");
+        System.out.println(" " + doneTask.printTask());
+        taskArr.remove(taskNum-1);
+        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
+    }
     private void run() {
         /*
         Main method for duke, will run until
@@ -127,7 +146,7 @@ public class Duke {
             } else if (input.equals("delete")) {
                 int taskNum = sc.nextInt();
                 printLine();
-                done(taskNum);
+                delete(taskNum);
                 printLine();
             } else {
                 // handle all other cases
@@ -140,13 +159,6 @@ public class Duke {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
-    }
-    private void done(int t) {
-        Task doneTask = taskArr.get(t-1);
-        doneTask.markDone();
-        System.out.print("Nice! I've marked this task as done:\n");
-        System.out.println(doneTask.printTask());
-
     }
     public static void main(String[] args) {
         Duke d = new Duke();

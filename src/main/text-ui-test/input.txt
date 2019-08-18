@@ -1,0 +1,9 @@
+todo eat food
+todo wash clothes
+deadline get money /by tomorrow
+deadline get item /by sunday
+list
+done 2
+event breakinus welcome tea /at tuesday 2pm
+list
+bye

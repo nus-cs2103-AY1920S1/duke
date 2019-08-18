@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
-    private static  LinkedList<String> tasks = new LinkedList<String>();
+    private static  LinkedList<Task> tasks = new LinkedList<Task>();
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -29,12 +29,19 @@ public class Duke {
     private static void execute(String command) {
         if (command.equals("list")) {
             int i = 1;
-            for (String s: tasks) {
-                System.out.println(i + ". " + s);
+            System.out.println("Here are the tasks in your list:");
+            for (Task t : tasks) {
+                System.out.println(i + ". " + t);
                 i++;
             }
+        } else if (command.startsWith("done ")) {
+                int id = Integer.parseInt(command.substring(5));
+                Task finished_task = tasks.get(id-1);
+                finished_task.markAsDone();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(finished_task);
         } else {
-            tasks.add(command);
+            tasks.add(new Task(command));
             System.out.println("added: " + command);
         }
     }

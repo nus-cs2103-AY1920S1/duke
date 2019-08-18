@@ -33,14 +33,12 @@ public class Event extends Task {
      */
     public static Event parse(String line) throws IllegalArgumentException {
         if (line.isEmpty()) {
-            throw new IllegalArgumentException("The description " +
-                    "of an event cannot be empty.");
+            throw new IllegalArgumentException("The description of an event cannot be empty.");
         }
         
         Matcher m = PAT.matcher(line);
         if (!m.matches()) {
-            throw new IllegalArgumentException("Event description " +
-                    "must include /at surrounded by spaces.");
+            throw new IllegalArgumentException("Event description must include /at surrounded by spaces.");
         }
 
         try {

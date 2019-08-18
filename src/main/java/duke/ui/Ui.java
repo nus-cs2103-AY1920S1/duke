@@ -30,6 +30,6 @@ public class Ui {
      * @param msg The specifics of the error.
      */
     public void printError(String msg) {
-        printMessage("\u2639 OOPS!!! " + msg);
+        printMessage("☹ OOPS!!! " + msg);
     }
 }

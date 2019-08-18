@@ -30,7 +30,7 @@ public class Task {
      * @return U+2713 (tick) if this task is done, U+2718 (cross) otherwise.
      */
     private String getDoneChar() {
-        return done ? "\u2713" : "\u2718";
+        return done ? "✓" : "✘";
     }
     
     /**
@@ -49,7 +49,7 @@ public class Task {
      * with other applications or just viewing bare.
      *
      * @return A string representation of this task containing its done status (0 or 1)
-     * and its description.
+     *     and its description.
      */
     public String export() {
         return (done ? "1|" : "0|") + desc;

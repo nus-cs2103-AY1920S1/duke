@@ -33,14 +33,12 @@ public class Deadline extends Task {
      */
     public static Deadline parse(String line) throws IllegalArgumentException {
         if (line.isEmpty()) {
-            throw new IllegalArgumentException("The description " +
-                    "of a deadline cannot be empty.");
+            throw new IllegalArgumentException("The description of a deadline cannot be empty.");
         }
         
         Matcher m = PAT.matcher(line);
         if (!m.matches()) {
-            throw new IllegalArgumentException("Deadline description " +
-                    "must include /by surrounded by spaces.");
+            throw new IllegalArgumentException("Deadline description must include /by surrounded by spaces.");
         }
 
         try {

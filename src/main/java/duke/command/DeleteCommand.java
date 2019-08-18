@@ -10,7 +10,7 @@ import java.io.IOException;
  * Class representing a command to delete an item from the task list.
  */
 public class DeleteCommand extends Command {
-    private final int i;
+    private final int ind;
 
     /**
      * Creates a new DeleteCommand with the specified index.
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String s) {
         try {
-            this.i = Integer.parseInt(s);
+            this.ind = Integer.parseInt(s);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Task index for the delete command must be an integer.");
         }
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList tl, Ui ui, Storage storage) {
         try {
-            Task t = tl.delete(i);
+            Task t = tl.delete(ind);
             ui.printMessage("Noted. I've removed this task:");
             ui.printMessage("  " + t);
             int n = tl.size();

@@ -10,15 +10,15 @@ import java.io.IOException;
  * Class representing a command to add a new task.
  */
 public class AddCommand extends Command {
-    private final Task t;
+    private final Task task;
 
     /**
      * Creates a new AddCommand with the given task.
      *
-     * @param t The task to add.
+     * @param task The task to add.
      */
-    public AddCommand(Task t) {
-        this.t = t;
+    public AddCommand(Task task) {
+        this.task = task;
     }
 
     /**
@@ -29,9 +29,9 @@ public class AddCommand extends Command {
      * @param storage The place where tasks will be stored.
      */
     public void execute(TaskList tl, Ui ui, Storage storage) {
-        tl.add(t);
+        tl.add(task);
         ui.printMessage("Got it. I've added this task:");
-        ui.printMessage("  " + t);
+        ui.printMessage("  " + task);
         int n = tl.size();
         ui.printMessage(String.format("Now you have %d task%s in the list.", n, n == 1 ? "" : "s"));
         

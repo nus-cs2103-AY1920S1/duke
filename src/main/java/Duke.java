@@ -52,6 +52,11 @@ public class Duke {
 					new Output("Nice! I've marked this task as done:",
 							"  " + taskList.complete(parameter.get(0))).print();
 					break;
+				case DELETE:
+					new Output("Alright. I've removed this task from your list:",
+							"  " + taskList.delete(parameter.get(0)),
+							"Now you have " + taskList.size() + " tasks in the list.").print();
+					break;
 				case TODO:
 					new Output("Got it! I've added this task to the list:",
 								"  " + taskList.addTask(new ToDo(parameter.get(0))),

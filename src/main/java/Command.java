@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public enum Command {
     EXIT(0),
     LIST(0),
+    DELETE(1, "task number"),
     DONE(1, "task number"),
     TODO(1, "description"),
     DEADLINE(2, "description", "time", " /by "),
@@ -32,6 +33,8 @@ public enum Command {
                 return EXIT;
             case "list":
                 return LIST;
+            case "delete":
+                return DELETE;
             case "done":
                 return DONE;
             case "todo":

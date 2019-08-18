@@ -8,7 +8,7 @@ public class Task {
     private boolean done;
 
     /**
-     * Initialises a task not yet done with the given description.
+     * Initializes a task not yet done with the given description.
      *
      * @param desc A description of this task.
      */
@@ -18,7 +18,7 @@ public class Task {
     }
     
     /**
-     * Marks this Task as done.
+     * Marks this task as done.
      */
     void markDone() {
         done = true;

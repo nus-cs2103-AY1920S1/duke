@@ -18,6 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Executes this command on the given task list and user interface.
+     *
      * @param tl The task list.
      * @param ui The user interface displaying events on the task list.
      * @param storage The place where tasks will be stored.

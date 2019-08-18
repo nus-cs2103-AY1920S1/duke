@@ -1,11 +1,16 @@
 package seedu.duke;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Represents the Duke application object.
  */
 public class Duke {
+    // Class Variables
+    protected static List<String> entries = new ArrayList<>(100); // Specification said numTasks < 100.
+
     /**
      * Runs the Duke application.
      * @param args Stdin.
@@ -26,16 +31,29 @@ public class Duke {
         System.out.println(greetingText);
 
         while (sc.hasNext()) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println(farewellText);
                 break;
+            } else if (input.equals("list")) {
+                listEntries();
             } else {
-                // Echos commands entered by the user.
-                System.out.println(input);
+                entries.add(input);
+                System.out.println("added: " + input);
             }
-        } // end while loop
+        } // End while loop.
 
         sc.close();
-    }
+    } // End of main.
+
+    /**
+     * List all entries recorded by Duke; print nothing if no entries are present.
+     */
+    protected static void listEntries() {
+        int numEntry = 1;
+        for (String entry : Duke.entries) {
+            System.out.printf("%d. %s\n", numEntry, entry);
+            numEntry++;
+        } // End for loop.
+    } // End method.
 }

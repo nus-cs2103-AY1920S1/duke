@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Class representing a deadline, a duke.task to be completed by a certain time.
+ * Class representing a deadline, a task to be completed by a certain time.
  */
 public class Deadline extends Task {
     private final String by;
@@ -13,10 +13,10 @@ public class Deadline extends Task {
     /**
      * Initialises a Deadline from its description and its time.
      *
-     * @param desc A description of the duke.task which is under deadline.
-     * @param by The time by which this duke.task must be done.
+     * @param desc A description of the task which is under deadline.
+     * @param by The time by which this task must be done.
      */
-    private Deadline(String desc, String by) {
+    Deadline(String desc, String by) {
         super(desc);
         this.by = by;
     }
@@ -48,5 +48,15 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    /**
+     * Exports this Deadline for saving to disk.
+     *
+     * @return A string representation of this task containing the type marker E and a time.
+     */
+    @Override
+    public String export() {
+        return "D|" + super.export() + "|" + by;
     }
 }

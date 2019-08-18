@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param desc A description of the event.
      * @param at The time at which this event happens.
      */
-    private Event(String desc, String at) {
+    Event(String desc, String at) {
         super(desc);
         this.at = at;
     }
@@ -48,5 +48,15 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    /**
+     * Exports this Event for saving to disk.
+     *
+     * @return A string representation of this task containing the type marker E and a time.
+     */
+    @Override
+    public String export() {
+        return "E|" + super.export() + "|" + at;
     }
 }

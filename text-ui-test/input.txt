@@ -1,8 +1,0 @@
-todo A
-event B /at 26 August 7pm
-deadline C /by August 27 2019
-list
-done 1
-done 3
-list
-bye

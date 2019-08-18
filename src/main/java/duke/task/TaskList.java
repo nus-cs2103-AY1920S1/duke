@@ -109,4 +109,20 @@ public class TaskList {
         }
         return out;
     }
+
+    /**
+     * Filters this instance's list for those tasks matching a given keyword.
+     *
+     * @param keyword The keyword being searched for.
+     * @return A smaller or same-size ArrayList containing those tasks with the given keyword.
+     */
+    public ArrayList<Task> filter(String keyword) {
+        ArrayList<Task> out = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.getDesc().contains(keyword)) {
+                out.add(task);
+            }
+        }
+        return out;
+    }
 }

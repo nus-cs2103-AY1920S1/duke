@@ -16,7 +16,16 @@ public class Task {
         this.desc = desc;
         this.done = false;
     }
-    
+
+    /**
+     * Returns the description associated with this task.
+     *
+     * @return This task's description.
+     */
+    public String getDesc() {
+        return desc;
+    }
+
     /**
      * Marks this task as done.
      */

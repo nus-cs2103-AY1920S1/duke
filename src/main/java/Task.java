@@ -12,13 +12,13 @@ public class Task {
         return this.taskName;
     }
 
-    public void completed(){
+    public boolean completed(){
         this.isDone = true;
+        return true;
     }
 
     public boolean isDone(){
         return this.isDone;
     }
-
 
 }

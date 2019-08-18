@@ -10,14 +10,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if(input.equals("list")) {
+            if (input.equals("list")) {
                 listTasks(taskArray);
-            } else if(input.contains("done")) {
+            } else if (input.contains("done")) {
                 String[] splitInputs = input.split(" ");
                 int index = Integer.parseInt(splitInputs[1]) - 1;
                 taskArray[index].markAsDone();
             } else if (!input.equals("bye")) {
-                handleTask(input);
+                try {
+                    handleTask(input);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 exit();
                 break;
@@ -47,44 +51,52 @@ public class Duke {
         }
     }
 
-    public static void handleTask(String task) {
-        System.out.println("Got it. I've added this task:");
+    public static void handleTask(String task) throws EmptyDescriptionException, InvalidInputException {
         Task t = null;
         String[] detailsArray = task.split(" ");
-        if(detailsArray[0].equals("todo")) {
-            String description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, detailsArray.length));
-            t = new Todo(description);
-            taskArray[totalTasks] = t;
-            totalTasks++;
-        } else if(detailsArray[0].equals("deadline")) {
-            String by = "";
-            String description = "";
-            for(int i = 0; i < detailsArray.length; i++) {
-                if(detailsArray[i].equals("/by")) {
-                    by = String.join(" ", Arrays.copyOfRange(detailsArray, i+1, detailsArray.length));
-                    description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, i));
-                    break;
+        if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline") ||
+                detailsArray[0].equals("event"))) {
+            throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + detailsArray[0] + " cannot be empty.");
+        } else if (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline") ||
+                detailsArray[0].equals("event")) {
+            System.out.println("Got it. I've added this task:");
+            if (detailsArray[0].equals("todo")) {
+                String description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, detailsArray.length));
+                t = new Todo(description);
+                taskArray[totalTasks] = t;
+                totalTasks++;
+            } else if (detailsArray[0].equals("deadline")) {
+                String by = "";
+                String description = "";
+                for (int i = 0; i < detailsArray.length; i++) {
+                    if (detailsArray[i].equals("/by")) {
+                        by = String.join(" ", Arrays.copyOfRange(detailsArray, i + 1, detailsArray.length));
+                        description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, i));
+                        break;
+                    }
                 }
-            }
-            t = new Deadline(description, by);
-            taskArray[totalTasks] = t;
-            totalTasks++;
-        } else if(detailsArray[0].equals("event")) {
-            String at = "";
-            String description = "";
-            for(int i = 0; i < detailsArray.length; i++) {
-                if(detailsArray[i].equals("/at")) {
-                    at = String.join(" ", Arrays.copyOfRange(detailsArray, i+1, detailsArray.length));
-                    description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, i));
-                    break;
+                t = new Deadline(description, by);
+                taskArray[totalTasks] = t;
+                totalTasks++;
+            } else if (detailsArray[0].equals("event")) {
+                String at = "";
+                String description = "";
+                for (int i = 0; i < detailsArray.length; i++) {
+                    if (detailsArray[i].equals("/at")) {
+                        at = String.join(" ", Arrays.copyOfRange(detailsArray, i + 1, detailsArray.length));
+                        description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, i));
+                        break;
+                    }
                 }
+                t = new Event(description, at);
+                taskArray[totalTasks] = t;
+                totalTasks++;
             }
-            t = new Event(description, at);
-            taskArray[totalTasks] = t;
-            totalTasks++;
+            System.out.println("  " + t);
+            System.out.println("Now you have " + totalTasks + " tasks in the list.");
+        } else {
+                throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        System.out.println("  " + t);
-        System.out.println("Now you have " + totalTasks + " tasks in the list.");
     }
 }
 

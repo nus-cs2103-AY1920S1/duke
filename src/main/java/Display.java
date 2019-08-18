@@ -19,7 +19,7 @@ class Display implements TaskObserver {
 
     private static void printGreeting() {
         String greeting1 = "Hewwo! I'm OwO";
-        String greeting2 = "What can I do for you?";
+        String greeting2 = "What can I do fow you?";
         ArrayList<String> printxs = new ArrayList<>();
         printxs.add(greeting1);
         printxs.add(greeting2);
@@ -85,7 +85,9 @@ class Display implements TaskObserver {
 
     public static void printDoneTaskSection(String taskDetails) {
         ArrayList<String> printxs = new ArrayList<>();
-        String headermsg = "Nice! I've marked this task as done:";
+        String headermsg = "Nyice ;;w;;  "
+            + "I've mawked this task as donye";
+        //String headermsg = "Nice! I've marked this task as done:";
         printxs.add(headermsg);
         printxs.add(taskDetails);
         Display.printSection(printxs);
@@ -96,7 +98,8 @@ class Display implements TaskObserver {
         printAllTasks(Iterator<TaskInterface> iter) {
 
         ArrayList<String> printxs = new ArrayList<>();
-        String headermsg = "Here are the tasks in your list:";
+//        String headermsg = "Here are the tasks in your list:";
+        String headermsg = "Hewe awe the tasks in youw wist:";
         printxs.add(headermsg);
 
         int counter = 1;

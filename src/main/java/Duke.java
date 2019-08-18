@@ -34,9 +34,6 @@ public class Duke {
         System.out.println("\t " + input);
         drawLine();
     }
-    public static void printHeading(String heading) {
-        System.out.println("\n" + heading);
-    }
 
     public static void drawLine() {
         System.out.println("\t---------------------------------------");

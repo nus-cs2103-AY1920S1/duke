@@ -13,26 +13,34 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> stringList = new ArrayList<>();
+        ArrayList<Task> tasksList = new ArrayList<>();
         while(sc.hasNextLine()){
-            String nextLine = sc.nextLine();
-            if(nextLine.equals("list")){
-                printList(stringList);
-            } else if (nextLine.equals("bye")){
+            String nextItem = sc.next();
+            if(nextItem.equals("list")){
+                printList(tasksList);
+            } else if (nextItem.equals("bye")){
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
+            } else if (nextItem.equals("done")){
+                int taskID = sc.nextInt();
+                Task doneTask = tasksList.get(taskID - 1);
+                doneTask.setDone(true);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(doneTask);
             } else {
-                stringList.add(nextLine);
-                System.out.println("added: " + nextLine);
+                String currLine = nextItem + sc.nextLine();
+                Task newTask = new Task(currLine, false);
+                tasksList.add(newTask);
+                System.out.println("added: " + newTask);
             }
         }
     }
 
-    static void printList(ArrayList<String> stringList){
-        int length = stringList.size();
+    static void printList(ArrayList<Task> tasksList){
+        int length = tasksList.size();
         for (int i = 0; i < length; i++) {
             int toPrint = i + 1;
-            System.out.println(toPrint + ". " + stringList.get(i));
+            System.out.println(toPrint + ". " + tasksList.get(i));
         }
     }
 }

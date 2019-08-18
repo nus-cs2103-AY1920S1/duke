@@ -26,6 +26,9 @@ public class Duke {
                         System.out.println(i + "." + task.get(i - 1));
                     }
                 } else if (textInput.startsWith("done")) {
+                    if (textInput.equals("done") || textInput.equals("done ")) {
+                        throw new DukeException("OOPS!!! Index required.");
+                    }
                     int completedIndex = Integer.parseInt(textInput.replaceFirst("done ", "")) - 1;
                     Task markAsDoneTask = task.get(completedIndex);
                     markAsDoneTask.markAsDone();

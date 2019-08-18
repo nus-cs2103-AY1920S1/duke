@@ -24,12 +24,11 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 list(tasks);
-            } else if (command.contains("done")) {
+            } else if (command.startsWith("done")) {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 done(index, tasks);
             } else {
-                Task newTask = new Task(command);
-                add(newTask, tasks);
+                addTask(command, tasks);
             }
         }
     }
@@ -45,8 +44,7 @@ public class Duke {
         printLine();
         System.out.println("\t Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.print("\t " + i + ". ");
-            tasks.get(i - 1).printTask();
+            System.out.println("\t " + i + ". " + tasks.get(i - 1));
         }
         printLine();
     }
@@ -57,14 +55,37 @@ public class Duke {
         printLine();
         System.out.println("\t Nice! I've marked this task as done:");
         System.out.print("\t \t");
-        doneTask.printTask();
+        System.out.println(doneTask);
         printLine();
     }
 
-    public static void add(Task task, ArrayList<Task> tasks) {
+    public static void addTask(String command, ArrayList<Task> tasks) {
         printLine();
-        System.out.println("\t added: " + task.getDescription());
-        tasks.add(task);
+        Task newTask;
+        if (command.startsWith("todo")) {
+            String taskDetailsString = command.replaceFirst("todo", "").trim();
+            newTask = new ToDo(taskDetailsString);
+        } else {
+            String[] taskDetails;
+            if (command.startsWith("deadline")) {
+                String taskDetailsString = command.replaceFirst("deadline", "");
+                taskDetails = taskDetailsString.split("/by");
+                String taskDescription = taskDetails[0].trim();
+                String taskSpecifics = taskDetails[1].trim();
+                newTask = new Deadline(taskDescription, taskSpecifics);
+            } else {
+                String taskDetailsString = command.replaceFirst("event", "");
+                taskDetails = taskDetailsString.split("/at");
+                String taskDescription = taskDetails[0].trim();
+                String taskSpecifics = taskDetails[1].trim();
+                newTask = new Event(taskDescription, taskSpecifics);
+            }
+        }
+        tasks.add(newTask);
+        System.out.println("\t Got it. I've added this task:");
+        System.out.println("\t \t " + newTask);
+        System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the " +
+                "list.");
         printLine();
     }
 

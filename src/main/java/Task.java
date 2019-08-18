@@ -20,8 +20,9 @@ public class Task {
         return description;
     }
 
-    public void printTask() {
-        System.out.println("[" + getStatusIcon() + "] " + description);
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 
 }

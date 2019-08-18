@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Duke {
-    String[] taskArr = new String[102]; // c keeps track of current empty space
-    int c = 1; // reason: print from 1
+    private ArrayList<Task> taskArr = new ArrayList<Task>();
 
     public Duke() {
         /*
@@ -32,24 +33,29 @@ public class Duke {
          */
         String s = new String();
 
-        for (int i = 1; i < c; i++) {
-            s += i+". "+taskArr[i]+"\n";
+        for (int i = 0; i < taskArr.size(); i++) {
+            // printInt to put number for printing
+            int printInt = i + 1;
+            Task currTask = taskArr.get(i);
+            String taskStatus = "[" + currTask.getStatus() + "] ";
+            s += printInt + "." + taskStatus + currTask.getTaskInfo() + "\n";
         }
         return s;
     }
-    private void add(String task) {
+    private void add(String taskInfo) {
         /*
-        description: will store task to taskArr,
+        description: creates task, then
+        will store task to taskArr
         then increment c
         then print added:....
         expects: String that is task
         outputs: returns nothing
          */
-        taskArr[c] = task;
-        c++;
-        System.out.println("added: "+task);
+        Task newTask = new Task(taskInfo);
+        taskArr.add(newTask);
+        System.out.println("added: "+taskInfo);
     }
-    private void  run() {
+    private void run() {
         /*
         description: Main method for duke, will run until
         bye is read, then will exit
@@ -68,7 +74,15 @@ public class Duke {
                 input = sc.nextLine();
                 continue;
             }
-
+            if (input.substring(0,4).equals("done")) {   // list command
+                int numIndex = input.length() - 1;
+                int taskNum = Character.getNumericValue(input.charAt(numIndex));
+                printLine();
+                done(taskNum);
+                printLine();
+                input = sc.nextLine();
+                continue;
+            }
             printLine();   // if no default is add command
             add(input);
             printLine();
@@ -77,6 +91,13 @@ public class Duke {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
+    }
+    private void done(int t) {
+        Task doneTask = taskArr.get(t-1);
+        doneTask.markDone();
+        System.out.print("Nice! I've marked this task as done:\n");
+        System.out.println("[" + doneTask.getStatus() + "] " + doneTask.getTaskInfo());
+
     }
     public static void main(String[] args) {
         Duke d = new Duke();

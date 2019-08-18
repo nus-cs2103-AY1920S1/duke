@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,8 +9,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        Task[] tasks = new Task[100];
-        int numTasks = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         String input;
         String command;
@@ -26,11 +26,11 @@ public class Duke {
                     String task;
                     // print all tasks in list
                     System.out.println("Here are the task(s) in your list:");
-                    for (int i = 0; i < numTasks; i++) {
-                        task = String.format("%d.%s", (i + 1), tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        task = String.format("%d.%s", (i + 1), tasks.get(i));
                         System.out.println(task);
                     }
-                    if (numTasks == 0) {
+                    if (tasks.size() == 0) {
                         System.out.println("There are no tasks in your list right now.");
                     }
                     break;
@@ -43,13 +43,13 @@ public class Duke {
                         continue;
                     }
                     try {
-                        tasks[taskNumber - 1].markDone();
+                        tasks.get(taskNumber - 1).markDone();
                     } catch (Exception e) {
                         System.out.println("Error: Task number invalid.");
                         continue;
                     }
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(String.format("  %s", tasks[taskNumber - 1]));
+                    System.out.println(String.format("  %s", tasks.get(taskNumber - 1)));
                     break;
                 case "todo":
                 case "deadline":
@@ -62,12 +62,11 @@ public class Duke {
                         continue;
                     }
                     try {
-                        AddTask(command, taskDescription, tasks, numTasks);
+                        AddTask(command, taskDescription, tasks);
                     } catch (Exception e) {
                         System.out.println(e);
                         continue;
                     }
-                    numTasks++;
                     break;
                 default:
                     System.out.println("I'm sorry, but I don't know what that means :(");
@@ -78,7 +77,7 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void AddTask(String type, String description, Task[] tasks, int numTasks) throws DukeException {
+    private static void AddTask(String type, String description, ArrayList<Task> tasks) throws DukeException {
         Task newTask = null;
 
         switch (type) {
@@ -101,10 +100,10 @@ public class Duke {
                 break;
         }
 
-        tasks[numTasks] = newTask;
+        tasks.add(newTask);
         String message = String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
-                newTask, numTasks + 1
+                newTask, tasks.size()
         );
         System.out.println(message);
     }

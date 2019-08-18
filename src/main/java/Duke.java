@@ -56,7 +56,14 @@ public class Duke {
             String command = sc.next();
             switch (command) {
             case "todo":
-                this.addToDo(sc.nextLine().trim());
+                String task = sc.nextLine().trim();
+                if (!task.isEmpty()) {
+                    this.addToDo(sc.nextLine().trim());
+                } else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("____________________________________________________________");
+                }
                 break;
             case "deadline":
                 String[] arrDeadLine = sc.nextLine().split("/by");
@@ -80,7 +87,9 @@ public class Duke {
                 this.done(sc.nextInt());
                 break;
             default:
-                System.err.println("Unrecognised command!");
+                System.out.println("____________________________________________________________");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("____________________________________________________________");
             }
         }
         System.out.println("____________________________________________________________");

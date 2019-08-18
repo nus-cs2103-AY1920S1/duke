@@ -1,4 +1,4 @@
-public class Task {
+class Task {
     boolean done;
     String task;
 
@@ -15,5 +15,18 @@ public class Task {
     public String toString() {
         String iconForDone = done ? "v" : "x";
         return String.format("[%s] %s", iconForDone, this.task);
+    }
+}
+
+class ToDo extends Task {
+
+    ToDo(String task) {
+        super(task);
+    }
+
+    @Override
+    public String toString() {
+        String iconForDone = done ? "v" : "x";
+        return String.format("[T][%s] %s", iconForDone, this.task);
     }
 }

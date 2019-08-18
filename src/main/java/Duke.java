@@ -19,6 +19,14 @@ public class Duke {
         System.out.println(l.get(i - 1));
     }
 
+    public void addToDo(String task) {
+        ToDo toDo = new ToDo(task);
+        l.add(toDo);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(toDo);
+        System.out.println(String.format("Now you have %d tasks in the list.", l.size()));
+    }
+
     public void add(String task) {
         l.add(new Task(task));
         System.out.println("added: " + task);
@@ -30,8 +38,11 @@ public class Duke {
         String exitMessage = "Bye. Hope to see you again soon!";
         l = new ArrayList<>();
         while (!exit) {
-            String input = sc.next();
-            switch (input) {
+            String command = sc.next();
+            switch (command) {
+            case "todo":
+                this.addToDo(sc.nextLine().trim());
+                break;
             case "list":
                 this.list();
                 break;
@@ -42,7 +53,7 @@ public class Duke {
                 this.done(sc.nextInt());
                 break;
             default:
-                this.add(input + sc.nextLine());
+                System.err.println("Unrecognised command!");
             }
         }
         System.out.println(exitMessage);

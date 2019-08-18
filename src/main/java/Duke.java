@@ -1,5 +1,7 @@
+import java.io.UnsupportedEncodingException;
+
 public class Duke {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws UnsupportedEncodingException{
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

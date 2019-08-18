@@ -62,21 +62,6 @@ public class Duke {
                     System.out.println(statusOfList);
                 } else if (!command.equals("list") && !command.substring(0, 4).equals("done")) {
                     //adding new task of 1 of 3 types
-                    if (command.length() >= 8 && !command.substring(0, 4).equals("todo")
-                            && !command.substring(0, 5).equals("event") && !command.substring(0, 8).equals("deadline")) {
-                        //throw exception if command is not one of the 3 types
-                        String error = "\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n";
-                        throw new DukeException(error);
-                    } else if (command.length() >= 5 && command.length() < 8 && !command.substring(0, 4).equals("todo")
-                            && !command.substring(0, 5).equals("event")) {
-                        //throw exception if command is not one of 3 types
-                        String error = "\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n";
-                        throw new DukeException(error);
-                    } else if (command.length() < 5 && !command.substring(0, 4).equals("todo")) {
-                        //throw exception if not any of the task type
-                        String error = "\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n";
-                        throw new DukeException(error);
-                    }
                     if (command.length() >= 4 && command.substring(0, 4).equals("todo")) {
                         if (command.length() == 4) {
                             //throw exception for no description

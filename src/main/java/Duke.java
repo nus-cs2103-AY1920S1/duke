@@ -45,6 +45,11 @@ public class Duke {
         /*
 
          */
+        if (taskInfo.equals("")) {
+            // error handling
+            System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            return;
+        }
         ToDo newToDo = new ToDo(taskInfo,"T");
         taskArr.add(newToDo);
         System.out.println("Got it. I've added this task:");
@@ -120,8 +125,10 @@ public class Duke {
                 done(taskNum);
                 printLine();
             } else if (input.equals("delete")) {
-                // add skeleton, for now just skips
-                continue;
+                int taskNum = sc.nextInt();
+                printLine();
+                done(taskNum);
+                printLine();
             } else {
                 // handle all other cases
                 printLine();

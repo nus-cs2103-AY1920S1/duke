@@ -1,6 +1,8 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
+    private static  LinkedList<String> tasks = new LinkedList<String>();
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -18,9 +20,24 @@ public class Duke {
                System.out.println("Bye. Hope to see you again soon!");
                break;
             } else {
-                System.out.println(curr);
+                execute(curr);
             }
         }
 
     }
+
+    private static void execute(String command) {
+        if (command.equals("list")) {
+            int i = 1;
+            for (String s: tasks) {
+                System.out.println(i + ". " + s);
+                i++;
+            }
+        } else {
+            tasks.add(command);
+            System.out.println("added: " + command);
+        }
+    }
+
+
 }

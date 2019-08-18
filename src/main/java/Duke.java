@@ -2,48 +2,59 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private ArrayList<String> ls = new ArrayList<>();
+    private ArrayList<Task> ls = new ArrayList<>();
 
-    public Duke(){
-        this.ls.add("");
+    public Duke() {
+        this.ls.add(null);
     }
 
-    private void cout(String str){
-        System.out.println("    ____________________________________________________________\n     " +
-                str.replaceAll("\n", "\n     ") +
-                "\n    ____________________________________________________________\n");
-    }
-
-    private void run(Scanner in){
-        while(true){
-            String instr = in.nextLine().trim();
-            switch(instr) {
-                case "bye":
-                    return;
-                case "list":
-                    StringBuilder sb = new StringBuilder();
-                    for(int i = 1; i < this.ls.size(); i++){
-                        sb.append(i)
-                                .append(". ")
-                                .append(this.ls.get(i))
-                                .append('\n');
-                    }
-                    sb.setLength(sb.length() - 1);
-                    cout(sb.toString());
-                    break;
-                default:
-                    this.ls.add(instr);
-                    cout("added: " + instr);
-                    break;
-            }
-        }
-    }
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Duke d = new Duke();
         d.cout("Hello! I'm Duke\nWhat can I do for you?");
         d.run(in);
         d.cout("Bye. Hope to see you again soon!");
+    }
+
+    private void cout(String str) {
+        if(!str.endsWith("\n"))
+            str += '\n';
+        System.out.println("    ____________________________________________________________\n     " +
+                str.replaceAll("\n(?!$)", "\n     ") +
+                "    ____________________________________________________________\n");
+    }
+
+    private void run(Scanner in) {
+        while (true) {
+            String instr = in.nextLine().trim();
+            switch (instr) {
+                case "bye":
+                    return;
+                case "list":
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Here are the tasks in your list:\n");
+                    for (int i = 1; i < this.ls.size(); i++) {
+                        sb.append(i)
+                                .append(".")
+                                .append(this.ls.get(i));
+                    }
+                    sb.setLength(sb.length() - 1);
+                    this.cout(sb.toString());
+                    break;
+                default:
+                    if (instr.startsWith("done")) {
+                        Task t = this.ls.get(Integer.parseInt(instr.substring(5)));
+                        t.setDone();
+                        this.cout("Nice! I've marked this task as done:\n" + t);
+                    } else {
+                        Task t = new Task(instr);
+                        this.ls.add(t);
+                        this.cout("Got it. I've added this task:\n  " +
+                                t +
+                                "Now you have " + (this.ls.size() - 1) + " tasks in the list.");
+                    }
+                    break;
+            }
+        }
     }
 }

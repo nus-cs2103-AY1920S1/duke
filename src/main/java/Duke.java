@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static ArrayList<String> messages = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         chat();
@@ -34,9 +34,12 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equalsIgnoreCase("bye")) {
             if (input.equalsIgnoreCase("list")) {
-                displayList();
+                listTasks();
+            } else if (input.startsWith("done ")) {
+                int taskIndex = Integer.parseInt(input.split(" ")[1]);
+                doneTask(taskIndex);
             } else {
-                addToList(input);
+                addTask(input);
             }
             input = sc.nextLine();
         }
@@ -44,21 +47,33 @@ public class Duke {
         reply(bye);
     }
 
-    /** Add input to list of messages */
-    private static void addToList(String input) {
-        messages.add(input);
+    /** Add a new task */
+    private static void addTask(String input) {
+        tasks.add(new Task(input));
         reply("added: " + input);
     }
 
-    /** Display list of messages */
-    private static void displayList() {
-        StringBuilder listStringBuilder = new StringBuilder();
+    /** Mark a task as done */
+    private static void doneTask(int taskIndex) {
+        StringBuilder messageBuilder = new StringBuilder("Nice! I've marked this task as done:\n\t");
 
-        for (int i = 0; i < messages.size(); i++) {
-            listStringBuilder.append((i+1) + ". " + messages.get(i) + "\n\t");
+        Task task = tasks.get(taskIndex-1);
+        task.setDone(true);
+
+        messageBuilder.append("  " + task);
+
+        reply(messageBuilder.toString());
+    }
+
+    /** Display list of tasks */
+    private static void listTasks() {
+        StringBuilder messageBuilder = new StringBuilder("Here are the tasks in your list:\n\t");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            messageBuilder.append((i+1) + ". " + tasks.get(i) + "\n\t");
         }
 
-        reply(listStringBuilder.toString());
+        reply(messageBuilder.toString());
     }
 
     /**

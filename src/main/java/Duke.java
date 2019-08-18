@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -14,18 +14,29 @@ public class Duke {
         System.out.println("     What can I do for you?");
         System.out.println(lines);
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> inputList = new ArrayList<String>();
         while(sc.hasNext()) {
             String inputMessage = sc.nextLine();
             System.out.println(lines);
-            if (!inputMessage.equals("bye")) {
-                System.out.println("     " + inputMessage);
-                System.out.println(lines);
-                System.out.println();
-                continue;
+            switch (inputMessage) {
+                case "list" :
+                    for (int i = 1; i <= inputList.size(); i ++) {
+                        System.out.println("     " + i + ". " + inputList.get(i - 1));
+                    }
+                    System.out.println(lines);
+                    System.out.println();
+                    break;
+                case "bye" :
+                    System.out.println("     Bye. Hope to see you again soon!");
+                    System.out.println(lines);
+                    System.exit(0);
+                    break;
+                default :
+                    inputList.add(inputMessage);
+                    System.out.println("     added: " + inputMessage);
+                    System.out.println(lines);
+                    System.out.println();
             }
-            System.out.println("     Bye. Hope to see you again soon!");
-            System.out.println(lines);
-            System.exit(0);
         }
     }
 }

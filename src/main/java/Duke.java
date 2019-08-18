@@ -16,24 +16,28 @@ public class Duke {
                 break;
             }
 
-            switch (input) {
-            case "todo":
-                handleTodo(sc.nextLine());
-                break;
-            case "deadline":
-                handleDeadline(sc.nextLine());
-                break;
-            case "event":
-                handleEvent(sc.nextLine());
-                break;
-            case "list":
-                handleList();
-                break;
-            case "done":
-                handleDone(sc.nextInt());
-                break;
-            default:
-                break;
+            try {
+                switch (input) {
+                case "todo":
+                    handleTodo(sc.nextLine());
+                    break;
+                case "deadline":
+                    handleDeadline(sc.nextLine());
+                    break;
+                case "event":
+                    handleEvent(sc.nextLine());
+                    break;
+                case "list":
+                    handleList();
+                    break;
+                case "done":
+                    handleDone(sc.nextInt());
+                    break;
+                default:
+                    break;
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -56,18 +60,26 @@ public class Duke {
         echoTaskAdded(todo);
     }
 
-    private static void handleDeadline(String input) {
-        String[] strings = input.split(" /by ");
-        Task deadline = new Deadline(strings[0], strings[1]);
-        listOfTasks.add(deadline);
-        echoTaskAdded(deadline);
+    private static void handleDeadline(String input) throws DukeException {
+        try {
+            String[] strings = input.split(" /by ");
+            Task deadline = new Deadline(strings[0], strings[1]);
+            listOfTasks.add(deadline);
+            echoTaskAdded(deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Please write in this format: deadline <description> /by <datetime>");
+        }
     }
 
-    private static void handleEvent(String input) {
-        String[] strings = input.split(" /at ");
-        Task event = new Event(strings[0], strings[1]);
-        listOfTasks.add(event);
-        echoTaskAdded(event);
+    private static void handleEvent(String input) throws DukeException {
+        try {
+            String[] strings = input.split(" /at ");
+            Task event = new Event(strings[0], strings[1]);
+            listOfTasks.add(event);
+            echoTaskAdded(event);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Please write in this format: event <description> /at <datetime>");
+        }
     }
 
     private static void echoTaskAdded(Task output) {
@@ -76,10 +88,14 @@ public class Duke {
         System.out.printf("Now you have %d tasks in the list.\n", listOfTasks.size());
     }
 
-    private static void handleDone(int input) {
-        Task taskDone = listOfTasks.get(input - 1);
-        taskDone.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("%s\n", taskDone);
+    private static void handleDone(int input) throws DukeException {
+        try {
+            Task taskDone = listOfTasks.get(input - 1);
+            taskDone.markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.printf("%s\n", taskDone);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops! Your task cannot be found!");
+        }
     }
 }

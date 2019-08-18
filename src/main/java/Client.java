@@ -3,19 +3,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Client {
+    private static Client client = null;
     private Storage storage;
     private Echoer echoer;
-    private static Client client = null;
+    private ExceptionHandler exceptionHandler;
+
 
     private Client() {
         this.storage = new Storage();
         this.echoer = new Echoer();
+        this.exceptionHandler = new ExceptionHandler(this.echoer);
         this.echoer.greet();
     }
 
     static Client initialise() {
         if (client != null) {
-            System.out.println("Client has already been initialised");
+            System.err.println("Client has already been initialised");
         } else {
             client = new Client();
         }
@@ -24,40 +27,48 @@ public class Client {
 
     boolean read(String command, String description) {
         boolean shouldContinue = true;
-
-        switch (command) {
-        case "todo":
-        case "deadline":
-        case "event":
-            this.addTask(command, description);
-            break;
-        case "list":
-            this.listTasks();
-            break;
-        case "bye":
-            this.echoer.exit();
-            shouldContinue = false;
-            break;
-        case "done":
-            this.completeTask(Integer.parseInt(description));
-            break;
-        default:
-            System.err.println("Command is not valid");
+        try {
+            switch (command) {
+            case "todo":
+            case "deadline":
+            case "event":
+                this.addTask(command, description);
+                break;
+            case "list":
+                this.listTasks();
+                break;
+            case "bye":
+                this.echoer.exit();
+                shouldContinue = false;
+                break;
+            case "done":
+                this.completeTask(Integer.parseInt(description));
+                break;
+            default:
+                throw new InvalidCommandException();
+            }
+        } catch (InvalidCommandException | EmptyDescriptionException e) {
+            this.exceptionHandler.handleKnownException(e);
+        } catch (Exception e) {
+            this.exceptionHandler.handleUnknownException(e);
+        } finally {
+            return shouldContinue;
         }
-        return shouldContinue;
     }
 
     private String[] getActivityAndDatetime(String description) {
+        if (description.isEmpty()) {
+            return new String[]{"", ""};
+        }
         String[] toEdit = description.split("/");
         String activity = toEdit[0].trim();
         toEdit = toEdit[1].split(" ");
         toEdit[0] = "";
         String datetime = Arrays.stream(toEdit).reduce("", (x, y) -> x + " " + y).trim();
-        String[] activityAndDatetime = {activity, datetime};
-        return activityAndDatetime;
+        return new String[]{activity, datetime};
     }
 
-    private void addTask(String command, String description) {
+    private void addTask(String command, String description) throws EmptyDescriptionException {
         Task task;
 
         if (command.equals("todo")) {

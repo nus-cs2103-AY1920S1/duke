@@ -14,4 +14,4 @@ src/main/resources/docs/
 bin/
 
 # Java class files created while testing
-src/main/java/Duke.class
+src/main/java/*.class

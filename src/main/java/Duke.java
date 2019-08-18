@@ -1,6 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    private static boolean is_bye = false;
+    private  static  ArrayList<String> tasks = new ArrayList<String>() ;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,16 +16,25 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner scan = new Scanner(System.in);
 
-        while(true){
+        while(!is_bye){
             System.out.print("input command here: ");
             String input = scan.nextLine();
             if (input.equals("bye")){
                 System.out.println("Bye. Hope to " +
                                 "see you again soon!");
-                break;
+                is_bye = true;
+
+            }else if(input.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++){
+                    String task = tasks.get(i);
+                    int count = i + 1;
+                    System.out.println(count + ". " + task);
+                }
             } else{
-                System.out.println(input);
+                tasks.add(input);
+                System.out.println("added: " + input);
             }
         }
+
     }
 }

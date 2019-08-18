@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Class representing a duke.task to be done, but not at any particular time.
+ * Class representing a task to be done, but not at any particular time.
  */
 public class Todo extends Task {
     /**
@@ -9,7 +9,7 @@ public class Todo extends Task {
      *
      * @param desc What is to be done.
      */
-    private Todo(String desc) {
+    Todo(String desc) {
         super(desc);
     }
     
@@ -33,5 +33,15 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    /**
+     * Exports this Todo for saving to disk.
+     *
+     * @return A string representation of this task containing the type marker T.
+     */
+    @Override
+    public String export() {
+        return "T|" + super.export() + "|";
     }
 }

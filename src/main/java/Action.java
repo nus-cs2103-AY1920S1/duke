@@ -1,0 +1,3 @@
+enum Action {
+    LIST, BYE, TODO, DEADLINE, EVENT, DONE, DELETE;
+}

@@ -1,34 +1,33 @@
 class Task {
-  private String task;
-  private boolean completed;
+    private static final String TICK = "\u2713";
+    private static final String CROSS = "\u2717";
 
-  public Task(String task) {
-    this.task = task;
-    this.completed = false;
-  }
+    private String task;
+    private boolean isCompleted;
 
-  public String getTask() {
-    return this.task;
-  }
-
-  public boolean isComplete() {
-    return this.completed;
-  }
-
-  public void complete() {
-    this.completed = true;
-  }
-
-  private String tickOrCross() {
-    if(this.completed) {
-      return TaskManager.TICK;
-    } else {
-      return TaskManager.CROSS;
+    public Task(String task) {
+        this.task = task;
+        this.isCompleted = false;
     }
-  }
 
-  @Override
-  public String toString() {
-    return "[" + tickOrCross() + "] " + this.task;
-  }
+    public String getTask() {
+        return this.task;
+    }
+
+    public boolean isComplete() {
+        return this.isCompleted;
+    }
+
+    public void setComplete(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+
+    @Override
+    public String toString() {
+        if (this.isCompleted) {
+            return "[" + TICK + "] " + this.task;
+        } else {
+            return "[" + CROSS + "] " + this.task;
+        }
+    }
 }

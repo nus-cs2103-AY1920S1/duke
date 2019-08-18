@@ -1,3 +1,5 @@
+import exceptions.*;
+
 import java.util.*;
 
 public class Logic {
@@ -51,10 +53,10 @@ public class Logic {
                     delete(sc.nextLine().trim());
                     break;
                 default:
-                    throw DukeException.UNKNOWN_COMMAND;
+                    throw new UnknownCommandException();
             }
         } catch (DukeException e) {
-            print(e.getDesc());
+            print(e.toString());
         }
         return 0;
     }
@@ -62,7 +64,7 @@ public class Logic {
     private void done(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
-                throw DukeException.TASK_NOT_SPECIFIED;
+                throw new TaskNotSpecifiedException();
             }
             int i = Integer.parseInt(s) - 1;
             Task task = taskList.get(i);
@@ -70,16 +72,16 @@ public class Logic {
             print(TASK_DONE_MSG);
             print("  " + task.toString());
         } catch (NumberFormatException e) {
-            throw DukeException.ARG_MUST_BE_NUM;
+            throw new ArgumentNotNumberException();
         } catch (IndexOutOfBoundsException e) {
-            throw DukeException.TASK_NOT_EXIST;
+            throw new TaskDoesNotExistException();
         }
     }
 
     private void delete(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
-                throw DukeException.TASK_NOT_SPECIFIED;
+                throw new TaskNotSpecifiedException();
             }
             int i = Integer.parseInt(s) - 1;
             Task task = taskList.get(i);
@@ -88,9 +90,9 @@ public class Logic {
             print("  " + task.toString());
             printListSize();
         } catch (NumberFormatException e) {
-            throw DukeException.ARG_MUST_BE_NUM;
+            throw new ArgumentNotNumberException();
         } catch (IndexOutOfBoundsException e) {
-            throw DukeException.TASK_NOT_EXIST;
+            throw new TaskDoesNotExistException();
         }
     }
 
@@ -101,9 +103,9 @@ public class Logic {
         }
     }
 
-    private void addTodo(String s) throws DukeException{
+    private void addTodo(String s) throws DukeException {
         if (s.isEmpty()) {
-            throw DukeException.TODO_EMPTY_DESC;
+            throw new EmptyTodoDescException();
         }
         Task task = new Todo(s);
         taskList.add(task);
@@ -114,28 +116,28 @@ public class Logic {
     private void addDeadline(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
-                throw DukeException.DEADLINE_EMPTY_DESC;
+                throw new EmptyDeadlineDescException();
             }
             String[] strs = s.split(Deadline.REGEX);
             Task task = new Deadline(strs[0], strs[1]);
             taskList.add(task);
             printAdded(task);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw DukeException.DEADLINE_EMPTY_ARG;
+            throw new EmptyDeadlineArgException();
         }
     }
 
     private void addEvent(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
-                throw DukeException.EVENT_EMPTY_DESC;
+                throw new EmptyEventDescException();
             }
             String[] strs = s.split(Event.REGEX);
             Task task = new Event(strs[0], strs[1]);
             taskList.add(task);
             printAdded(task);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw DukeException.EVENT_EMPTY_ARG;
+            throw new EmptyEventArgException();
         }
     }
 

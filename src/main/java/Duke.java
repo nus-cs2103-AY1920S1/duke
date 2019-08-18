@@ -53,7 +53,8 @@ public class Duke {
 
     /** Add a new to-do */
     private static void addTodo(String input) {
-        String description = input.substring(5); //get description
+        //get description from input string
+        String description = input.substring(5).trim();
 
         Task task = new Todo(description);
         tasks.add(task);
@@ -63,8 +64,9 @@ public class Duke {
 
     /** Add a new deadline */
     private static void addDeadline(String input) {
-        String description = input.substring(9, input.indexOf("/by")); //get description
-        String by = input.substring(input.indexOf("/by") + 4); //get by
+        // get description and by from input string
+        String description = input.substring(9, input.indexOf("/by")).trim();
+        String by = input.substring(input.indexOf("/by") + 4).trim();
 
         Task task = new Deadline(description, by);
         tasks.add(task);
@@ -74,8 +76,9 @@ public class Duke {
 
     /** Add a new event */
     private static void addEvent(String input) {
-        String description = input.substring(6, input.indexOf("/at")); //get description
-        String at = input.substring(input.indexOf("/at") + 4); //get at
+        // get description and at from input string
+        String description = input.substring(6, input.indexOf("/at")).trim();
+        String at = input.substring(input.indexOf("/at") + 4).trim();
 
         Task task = new Event(description, at);
         tasks.add(task);
@@ -90,8 +93,8 @@ public class Duke {
      */
     private static void replyAddTask(Task task) {
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("Got it. I've added this task:: " + task);
-        messageBuilder.append("Now you have " + tasks.size() + " tasks in the list.");
+        messageBuilder.append("Got it. I've added this task:\n\t" + task + "\n\t");
+        messageBuilder.append("Now you have " + tasks.size() + " tasks in the list.\n\t");
         reply(messageBuilder.toString());
     }
 

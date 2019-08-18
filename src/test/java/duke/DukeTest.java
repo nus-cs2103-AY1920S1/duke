@@ -15,17 +15,18 @@ class DukeTest {
     @Test
     void testTask() {
         Todo t1 = Todo.parse("dig a trench from the fence to lunchtime");
+        assertEquals(t1.toString(), "[T][✘] dig a trench from the fence to lunchtime");
+
         Event t2 = Event.parse("Beijing Olympics Opening Ceremony /at 8/8/2008 2000");
-        Deadline t3 = Deadline.parse("my birth /by 4/12/1998 1251");
-        Todo t4 = Todo.parse("nothing");
-
         t2.markDone();
-        t4.markDone();
-
-        assertEquals(t1.toString(), "[T][\u2718] dig a trench from the fence to lunchtime");
-        assertEquals(t2.toString(), "[E][\u2713] Beijing Olympics Opening Ceremony "
+        assertEquals(t2.toString(), "[E][✓] Beijing Olympics Opening Ceremony "
                 + "(at: 8 August 2008 20:00)");
+
+        Deadline t3 = Deadline.parse("my birth /by 4/12/1998 1251");
         assertEquals(t3.export(), "D|0|my birth|4/12/1998 1251");
+
+        Todo t4 = Todo.parse("nothing");
+        t4.markDone();
         assertEquals(t4.export(), "T|1|nothing|");
 
         assertThrows(IllegalArgumentException.class, () -> Deadline.parse("heat death /by eternity"));

@@ -9,7 +9,7 @@ import java.io.IOException;
  * Class representing a command to mark an item in the task list as done.
  */
 public class DoneCommand extends Command {
-    private final int i;
+    private final int ind;
 
     /**
      * Creates a new DoneCommand with the specified index.
@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String s) {
         try {
-            this.i = Integer.parseInt(s);
+            this.ind = Integer.parseInt(s);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Task index for the done command must be an integer.");
         }
@@ -33,9 +33,9 @@ public class DoneCommand extends Command {
      */
     public void execute(TaskList tl, Ui ui, Storage storage) {
         try {
-            tl.markDone(i);
+            tl.markDone(ind);
             ui.printMessage("Nice! I've marked this task as done:");
-            ui.printMessage("  " + tl.get(i));
+            ui.printMessage("  " + tl.get(ind));
         } catch (IndexOutOfBoundsException e) {
             ui.printError("Task index must be between 1 and " + tl.size() + ".");
         }

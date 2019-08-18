@@ -13,7 +13,8 @@ public class Duke {
         String input = "";
 
         //Create array of tasks
-        String[] list = new String[100];
+//        String[] list = new String[100];
+        Task list[]= new Task[100];
 
         //Set index of number of task
         int n = 0;
@@ -37,16 +38,34 @@ public class Duke {
             //Store whatever text entered, except "bye", exit loop
             if (input.equals("bye")) break;
 
+            System.out.println("    ____________________________________________________________");
+
             if (input.equals("list")) {
-                System.out.println("    ____________________________________________________________");
+                System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < n; i++) {
-                    System.out.println("     " + (i+1) + ". " + list[i]);
+                    System.out.print("     " + (i+1) + ".");
+                    Task.printTask(list[i].getStatusIcon(), list[i].description);
                 }
             }
-            else {
-                //Store text in array
-                list[n] = input;
-                System.out.println("    ____________________________________________________________");
+            else if (input.contains("done")) {
+                //Assumption: fixed format - remove first 5 characters to get index. i.e. "done_"
+                String value = input.substring(5);
+
+                //Get integer found in user input
+                int index = Integer.parseInt(value);
+
+                //Mark task as done
+                list[index-1].isDone = true;
+
+                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.print("       ");
+                Task.printTask(list[index-1].getStatusIcon(), list[index-1].description);
+
+            } else {
+                //Create task as a object and store in array
+                Task t = new Task(input);
+                list[n] = t;
+
                 System.out.println("     added: " + input);
 
                 //After storing user input into array, increment index
@@ -60,5 +79,24 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
+    }
+}
+
+class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    //Print specific task with its status
+    public static void printTask(String status, String description) {
+        System.out.println("[" + status + "] " + description);
     }
 }

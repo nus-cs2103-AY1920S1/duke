@@ -59,6 +59,19 @@ public class Duke {
                     String[] taskSplit = removeTaskWord.split(" /at ");
                     task.add(new Event(taskSplit[0], taskSplit[1]));
                     counter = (new Duke()).printAddedTask(task, counter);
+                } else if (textInput.startsWith("delete")) {
+                    if (textInput.equals("delete") || textInput.equals("delete ")) {
+                        throw new DukeException("OOPS!!! Index required.");
+                    }
+
+                    int deletedIndex = Integer.parseInt(textInput.replaceFirst("delete ", "")) - 1;
+                    Task deletedTask = task.remove(deletedIndex);
+                    counter--;
+
+                    String taskIfPlural = counter <= 1 ? "task" : "tasks";
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(deletedTask);
+                    System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

@@ -6,7 +6,8 @@ class ToDosImplementation implements TaskInterface {
     public ToDosImplementation(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
-        this.formatter = new BasicTaskFormatter(name, isDone);
+        //this.formatter = new BasicTaskFormatter(name, isDone);
+        this.formatter = new TypedTaskFormatter(name, isDone, "T");
     }
 
     public TaskInterface completeTask(){

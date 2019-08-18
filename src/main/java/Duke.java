@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
@@ -19,7 +18,7 @@ public class Duke {
         while (!textInput.equals("bye")) {
             if (textInput.equals("list")) {
                 for (int i = 1; i <= counter; i++) {
-                    System.out.println(i + ".[" + task[i - 1].getStatusIcon() + "] " + task[i - 1].getDescription());
+                    System.out.println(i + "." + task[i - 1]);
                 }
             } else {
                 String[] textInputSplit = textInput.split(" ");
@@ -29,7 +28,7 @@ public class Duke {
                     markAsDoneTask.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[" + markAsDoneTask.getStatusIcon() + "] " + markAsDoneTask.getDescription());
+                    System.out.println(markAsDoneTask);
                 } else {
                     System.out.println("added: " + textInput);
                     task[counter] = new Task(textInput);

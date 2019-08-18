@@ -1,0 +1,12 @@
+Hello I'm Duke
+What can I do for you?
+Got it. I've added this task:
+[T][X] sleep
+Now you have 1 task in the list.
+Got it. I've added this task:
+[T][X] eat
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][X] sleep
+2.[T][X] eat
+Bye. Hope to see you again soon!

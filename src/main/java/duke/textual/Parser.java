@@ -1,11 +1,13 @@
 package duke.textual;
 
 import java.util.Scanner;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -42,6 +44,8 @@ public class Parser {
             return new AddCommand(Event.parse(data));
         case "deadline":
             return new AddCommand(Deadline.parse(data));
+        case "find":
+            return new FindCommand(data);
         default:
             throw new IllegalArgumentException("I'm sorry, but I don't know what that means :-(");
         }

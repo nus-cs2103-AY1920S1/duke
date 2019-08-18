@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    protected static ArrayList<String> listOfInputs = new ArrayList<>();
+    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
+        while (sc.hasNext()) {
+            String input = sc.next();
 
             if (input.equals("bye")) {
                 break;
@@ -19,6 +19,9 @@ public class Duke {
             switch (input) {
             case "list":
                 handleList();
+                break;
+            case "done":
+                handleDone(sc.nextInt());
                 break;
             default:
                 handleInput(input);
@@ -33,14 +36,18 @@ public class Duke {
 
     private static void handleList() {
         int index = 1;
-        for (String i : listOfInputs) {
-            System.out.printf("%d. %s\n", index, i);
+        for (Task task : listOfTasks) {
+            System.out.printf("%d.[%s] %s\n", index, task.getStatusIcon(), task.getDescription());
             index++;
         }
     }
 
     private static void handleInput(String input) {
-        listOfInputs.add(input);
+        listOfTasks.add(new Task(input));
         System.out.println(input);
+    }
+
+    private static void handleDone(int input) {
+        listOfTasks.get(input - 1).markAsDone();
     }
 }

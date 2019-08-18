@@ -38,10 +38,24 @@ public class Duke {
                 System.out.println("      " + t);
                 System.out.println(lines);
             } else {
-                Task t = new Task(str);
-                arr.add(t);
+                Task t;
+                if (strArr[0].equals("todo")) { //todo
+                    t = new Todo(str.substring(5));
+                    arr.add(t);
+                } else if (strArr[0].equals("deadline")) { //deadline
+                    int indexOfSlash = str.indexOf(47);
+                    t = new Deadline(str.substring(9, indexOfSlash - 1), str.substring(indexOfSlash + 4));
+                    arr.add(t);
+                } else { //event
+                    int indexOfSlash = str.indexOf(47);
+                    t = new Event(str.substring(6, indexOfSlash - 1), str.substring(indexOfSlash + 4));
+                    arr.add(t);
+                }
+
                 System.out.println(lines);
-                System.out.println("    added: " + t);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("      " + t);
+                System.out.println("    Now you have " + arr.size() + " tasks in the list.");
                 System.out.println(lines);
             }
             str = sc.nextLine();

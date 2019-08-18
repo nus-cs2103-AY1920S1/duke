@@ -1,6 +1,5 @@
 import DukeTask.*;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -80,17 +79,17 @@ public class Duke {
                             break;
 
                         case todo:
-                            task = new TodoTask(concatStrings(inputs, " ", 1, inputs.length - 1));
+                            task = new TodoTask(DukeUtil.concatStrings(inputs, " ", 1, inputs.length - 1));
                             addAndPrintTask(tasks, nextTaskIndex++, task);
                             break;
 
                         case deadline:
                             //more invalid inputs will be handled in level 5, likewise for eventtask
-                            int byIndex = getIndexOf(inputs, "/by");
+                            int byIndex = DukeUtil.getIndexOf(inputs, "/by");
                             if (byIndex >= 0) {
                                 task = new DeadlineTask(
-                                        concatStrings(inputs, " ", 1, byIndex - 1),
-                                        concatStrings(inputs, " ", byIndex + 1, inputs.length - 1));
+                                        DukeUtil.concatStrings(inputs, " ", 1, byIndex - 1),
+                                        DukeUtil.concatStrings(inputs, " ", byIndex + 1, inputs.length - 1));
                                 addAndPrintTask(tasks, nextTaskIndex++, task);
                             } else {
                                 System.out.println("No time specified!");
@@ -99,11 +98,11 @@ public class Duke {
                             break;
 
                         case event:
-                            int atIndex = getIndexOf(inputs, "/at");
+                            int atIndex = DukeUtil.getIndexOf(inputs, "/at");
                             if (atIndex >= 0) {
                                 task = new DeadlineTask(
-                                        concatStrings(inputs, " ", 1, atIndex - 1),
-                                        concatStrings(inputs, " ", atIndex + 1, inputs.length - 1));
+                                        DukeUtil.concatStrings(inputs, " ", 1, atIndex - 1),
+                                        DukeUtil.concatStrings(inputs, " ", atIndex + 1, inputs.length - 1));
                                 addAndPrintTask(tasks, nextTaskIndex++, task);
                             } else {
                                 System.out.println("No time specified!");
@@ -197,29 +196,6 @@ public class Duke {
         System.out.printf(" Now you have %d tasks in the list.\n", nextTaskIndex + 1);
         System.out.println(Duke.horizontalLine);
     }
-
-    private static String concatStrings(String[] strings, String delimiter, int from, int to) {
-        StringBuilder output = new StringBuilder();
-
-        for (int i = from; i < to; i++) {
-            output.append(strings[i]);
-            output.append(delimiter);
-        }
-        output.append(strings[to]);
-
-        return output.toString();
-    }
-
-    private static int getIndexOf(String[] strings, String pattern) {
-        for (int i = 0; i < strings.length; i++) {
-            if (strings[i].equals(pattern)) {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
 
     private static void printTaskArray(Task[] tasks) {
         System.out.println(" Here are the tasks in your list:");

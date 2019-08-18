@@ -18,85 +18,110 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<Task> inputList = new ArrayList<Task>();
         boolean programRunning = true;
-        while(programRunning) {
+        while (programRunning) {
             String[] inputMessage = br.readLine().split(" ");
             System.out.println(lines);
-            switch (inputMessage[0]) {
-                case "list" :
-                    for (int i = 1; i <= inputList.size(); i ++) {
-                        System.out.println("     " + i + ". " + inputList.get(i - 1));
-                    }
-                    System.out.println(lines);
-                    System.out.println();
-                    break;
-                case "bye" :
-                    System.out.println("     Bye. Hope to see you again soon!");
-                    System.out.println(lines);
-                    System.exit(0);
-                    break;
-                case "done" :
-                    System.out.println("     Nice! I've marked this task as done:");
-                    int index = Integer.parseInt(inputMessage[1]);
-                    inputList.get(index - 1).completeTask();
-                    System.out.println("       " + inputList.get(index - 1));
-                    System.out.println(lines);
-                    System.out.println();
-                    break;
-                case "todo" :
-                    System.out.println("     Got it. I've added this task:");
-                    String item = "";
-                    for (int i = 1; i < inputMessage.length; i ++) {
-                        if (i == inputMessage.length - 1) {
-                            item += inputMessage[i];
-                        } else {
-                            item += inputMessage[i];
-                            item += " ";
+            try {
+                switch (inputMessage[0]) {
+                    case "list":
+                        if (inputList.size() == 0) {
+                            throw new DukeException("     The list is empty!");
                         }
-                    }
-                    inputList.add(new Todo(item));
-                    System.out.println("       " + inputList.get(inputList.size() - 1));
-                    System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
-                    System.out.println(lines);
-                    System.out.println();
-                    break;
-                case "deadline" :
-                case "event" :
-                    System.out.println("     Got it. I've added this task:");
-                    String input = "";
-                    int marker = 0;
-                    for (int i = 1; i < inputMessage.length; i ++) {
-                        if (inputMessage[i + 1].equals("/by") || inputMessage[i + 1].equals("/at")) {
-                            input += inputMessage[i];
-                            marker = i + 1;
-                            break;
-                        } else {
-                            input += inputMessage[i];
-                            input += " ";
+                        for (int i = 1; i <= inputList.size(); i++) {
+                            System.out.println("     " + i + ". " + inputList.get(i - 1));
                         }
-                    }
-                    String extraInfo = "";
-                    for (int i = marker + 1; i < inputMessage.length; i ++) {
-                        if (i == inputMessage.length - 1) {
-                            extraInfo += inputMessage[i];
-                        } else {
-                            extraInfo += inputMessage[i];
-                            extraInfo += " ";
+                        System.out.println(lines);
+                        System.out.println();
+                        break;
+                    case "bye":
+                        System.out.println("     Bye. Hope to see you again soon!");
+                        System.out.println(lines);
+                        System.exit(0);
+                        break;
+                    case "done":
+                        int index = Integer.parseInt(inputMessage[1]);
+                        if (index > inputList.size() || index <= 0) {
+                            throw new DukeException("     Such task does not exist!");
                         }
-                    }
-                    if (inputMessage[0].equals("deadline")) {
-                        inputList.add(new Deadline(input, extraInfo));
-                    } else if (inputMessage[0].equals("event")) {
-                        inputList.add(new Event(input, extraInfo));
-                    }
-                    System.out.println("       " + inputList.get(inputList.size() - 1));
-                    System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
-                    System.out.println(lines);
-                    System.out.println();
-                    break;
-                default :
-                    System.out.println("Invalid input");
-                    System.out.println(lines);
-                    System.out.println();
+                        inputList.get(index - 1).completeTask();
+                        System.out.println("     Nice! I've marked this task as done:");
+                        System.out.println("       " + inputList.get(index - 1));
+                        System.out.println(lines);
+                        System.out.println();
+                        break;
+                    case "todo":
+                        if (inputMessage.length == 1) {
+                            throw new DukeException("     OOPS!! The description of a todo cannot be empty");
+                        }
+                        System.out.println("     Got it. I've added this task:");
+                        String item = "";
+                        for (int i = 1; i < inputMessage.length; i++) {
+                            if (i == inputMessage.length - 1) {
+                                item += inputMessage[i];
+                            } else {
+                                item += inputMessage[i];
+                                item += " ";
+                            }
+                        }
+                        inputList.add(new Todo(item));
+                        System.out.println("       " + inputList.get(inputList.size() - 1));
+                        System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
+                        System.out.println(lines);
+                        System.out.println();
+                        break;
+                    case "deadline":
+                    case "event":
+                        String input = "";
+                        int marker = 0;
+                        for (int i = 1; i < inputMessage.length; i++)  {
+                            if (i >= inputMessage.length) {
+                                throw new DukeException("     Please provide more information");
+                            }
+                            if (inputMessage[i + 1].equals("/by") || inputMessage[i + 1].equals("/at")) {
+                                input += inputMessage[i];
+                                marker = i + 1;
+                                break;
+                            } else {
+                                input += inputMessage[i];
+                                input += " ";
+                            }
+                        }
+                        String extraInfo = "";
+                        for (int i = marker + 1; i < inputMessage.length; i++) {
+                            if (i == inputMessage.length - 1) {
+                                extraInfo += inputMessage[i];
+                            } else {
+                                extraInfo += inputMessage[i];
+                                extraInfo += " ";
+                            }
+                        }
+                        if (extraInfo.equals("")) {
+                            throw new DukeException("     Please provide more information");
+                        }
+                        if (inputMessage[0].equals("deadline")) {
+                            if (!inputMessage[marker].equals("/by")) {
+                                throw new DukeException("     Wrong syntax, should be using /by for deadline");
+                            }
+                            inputList.add(new Deadline(input, extraInfo));
+                        } else if (inputMessage[0].equals("event")) {
+                            if (!inputMessage[marker].equals("/at")) {
+                                throw new DukeException("     Wrong syntax, should be using /at for event");
+                            }
+                            inputList.add(new Event(input, extraInfo));
+                        }
+                        System.out.println("     Got it. I've added this task:");
+                        System.out.println("       " + inputList.get(inputList.size() - 1));
+                        System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
+                        System.out.println(lines);
+                        System.out.println();
+                        break;
+                    default:
+                        throw new DukeException("     OOPS!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException error) {
+                System.out.println(error);
+                System.out.println(lines);
+                System.out.println();
             }
         }
     }

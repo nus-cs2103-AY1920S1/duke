@@ -109,7 +109,7 @@ public class TaskManager {
 
             reader.close();
         } catch (FileNotFoundException e) {
-            throw new IODukeException("Task file does not exist for reading");
+            // We may ignore this exception and create the file later.
         } catch (IOException e) {
             throw new IODukeException("Error opening task file for reading");
         } catch (ParseException e) {

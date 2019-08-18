@@ -6,7 +6,7 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        printOutput("Hello! I'm Duke\nWhat can i do for you?", false);
+        printOutput("Hello! I'm Duke\nWhat can i do for you?");
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -32,7 +32,7 @@ public class Duke {
                         case "todo":
                             Todo todo = new Todo(remaining);
                             storage.add(todo);
-                            printOutput("  " + todo, true);
+                            printOutput("  " + todo, "Got it. I've added this task: ");
                             break;
                         case "deadline":
                             //Check input is valid
@@ -46,7 +46,7 @@ public class Duke {
 
                             Deadline deadline = new Deadline(item, date);
                             storage.add(deadline);
-                            printOutput("  " + deadline, true);
+                            printOutput("  " + deadline, "Got it. I've added this task: ");
                             break;
                         case "event":
                             //Check input is valid
@@ -60,7 +60,7 @@ public class Duke {
 
                             Event event = new Event(item, date);
                             storage.add(event);
-                            printOutput("  " + event, true);
+                            printOutput("  " + event, "Got it. I've added this task: ");
                             break;
                         default:
                             ;
@@ -85,7 +85,29 @@ public class Duke {
                         task.markAsDone();
                     }
 
-                    printOutput("Nice! I've marked this task as done: \n  " + task, false);
+                    printOutput("Nice! I've marked this task as done: \n  " + task);
+                } catch(DukeException de){
+
+                } catch(NumberFormatException nfe) {
+                    new DukeException("Only numbers are allowed.");
+                } catch(IndexOutOfBoundsException ioobe){
+                    new DukeException("There is no such item in the list.");
+                }
+            }
+            else if(input.contains("delete")){ //DONE
+                try {
+                    int taskNo = Integer.parseInt(
+                            input.replace("delete", "")
+                                    .replace(" ", "")); //Removing 'delete' and empty spaces
+
+                    if(storage.size() > 0){
+                        Task task = storage.remove(taskNo - 1);  //Minus 1 because the displayed list starts at 1
+                        printOutput("  " + task, "Noted. I've removed this task: ");
+                    }
+                    else{
+                        throw new DukeException("There are no items in the list.");
+                    }
+
                 } catch(DukeException de){
 
                 } catch(NumberFormatException nfe) {
@@ -95,7 +117,7 @@ public class Duke {
                 }
             }
             else if (input.equals("list")) { //LIST ITEMS
-                String listOutput = "";
+                String listOutput = "Here are the tasks in your list:\n";
                 for (int i = 0; i < storage.size(); i++) {
                     //Get tasks
                     Task task = storage.get(i);
@@ -106,22 +128,26 @@ public class Duke {
                         listOutput += "\n";
                     }
                 }
-                printOutput(listOutput, false);
+                printOutput(listOutput);
             } else { //Invalid Command
                 new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             input = sc.nextLine();
         }
-        printOutput("Bye. Hope to see you again soon!", false);
+        printOutput("Bye. Hope to see you again soon!");
     }
 
-    private static void printOutput(String s, boolean isTask){
+    private static void printOutput(String s){
         System.out.println("    ____________________________________________________________");
-        if(isTask)
-            System.out.println("    " + "Got it. I've added this task: ");
         System.out.println("    " + s.replace("\n","\n    "));
-        if(isTask)
-            System.out.println("    " + "Now you have " + storage.size() + " tasks in the list.");
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private static void printOutput(String s, String taskMessage){
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    " + taskMessage);
+        System.out.println("    " + s.replace("\n","\n    "));
+        System.out.println("    " + "Now you have " + storage.size() + " tasks in the list.");
         System.out.println("    ____________________________________________________________");
     }
 }

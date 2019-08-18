@@ -1,22 +1,49 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    private static void cout(String str){
+    private ArrayList<String> ls = new ArrayList<>();
+
+    public Duke(){
+        this.ls.add("");
+    }
+
+    private void cout(String str){
         System.out.println("    ____________________________________________________________\n     " +
                 str.replaceAll("\n", "\n     ") +
                 "\n    ____________________________________________________________\n");
     }
-    public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
-        cout("Hello! I'm Duke\nWhat can I do for you?");
 
+    private void run(Scanner in){
         while(true){
             String instr = in.nextLine().trim();
-            if(instr.equals("bye"))
-                break;
-            cout(instr);
+            switch(instr) {
+                case "bye":
+                    return;
+                case "list":
+                    StringBuilder sb = new StringBuilder();
+                    for(int i = 1; i < this.ls.size(); i++){
+                        sb.append(i)
+                                .append(". ")
+                                .append(this.ls.get(i))
+                                .append('\n');
+                    }
+                    sb.setLength(sb.length() - 1);
+                    cout(sb.toString());
+                    break;
+                default:
+                    this.ls.add(instr);
+                    cout("added: " + instr);
+                    break;
+            }
         }
+    }
 
-        cout("Bye. Hope to see you again soon!");
+    public static void main(String[] args){
+        Scanner in = new Scanner(System.in);
+        Duke d = new Duke();
+        d.cout("Hello! I'm Duke\nWhat can I do for you?");
+        d.run(in);
+        d.cout("Bye. Hope to see you again soon!");
     }
 }

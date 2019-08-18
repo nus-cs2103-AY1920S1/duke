@@ -68,7 +68,7 @@ public class Duke {
                     userTask = new Event(taskInformation[0], taskInformation[1]);
                 }
                 taskList.add(userTask);
-                System.out.println(TABS + "Got it. I've added this task:");
+                System.out.println(TABS + "Got it. I've added this task: ");
                 System.out.println(TABS + "  " + userTask.toString());
 
                 if (taskList.size() == 1) {

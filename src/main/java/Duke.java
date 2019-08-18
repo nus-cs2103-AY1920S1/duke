@@ -15,26 +15,36 @@ public class Duke {
         drawLine();
         Scanner input = new Scanner(System.in);
         while (input.hasNext()) {
-            String userInput = input.nextLine();
-            if (userInput.equals("bye")) {
-                sayBye();
-                input.close();
-                break;
-            } else if (userInput.equals("list")) {
-                printList();
-            } else if (userInput.startsWith("todo")) {
-                String details = userInput.replaceFirst("todo ", "");
-                addToDo(details);
-            } else if (userInput.startsWith("deadline")) {
-                String details = userInput.replaceFirst("deadline ", "");
-                addDeadline(details);
-            } else if (userInput.startsWith("event")) {
-                String details = userInput.replaceFirst("event ", "");
-                addEvent(details);
-            } else if (userInput.contains("done")) {
-                String listActionIndex = (userInput.split(" "))[1];
-                int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
-                markAsDone(arrayActionIndex);
+            try {
+                String userInput = input.nextLine();
+                if (userInput.equals("bye")) {
+                    sayBye();
+                    input.close();
+                    break;
+                } else if (userInput.equals("list")) {
+                    printList();
+                } else if (userInput.startsWith("todo")) {
+                    String details = userInput.replaceFirst("todo", "");
+                    addToDo(details);
+                } else if (userInput.startsWith("deadline")) {
+                    String details = userInput.replaceFirst("deadline", "");
+                    addDeadline(details);
+                } else if (userInput.startsWith("event")) {
+                    String details = userInput.replaceFirst("event", "");
+                    addEvent(details);
+                } else if (userInput.contains("done")) {
+                    String listActionIndex = (userInput.split(" "))[1];
+                    int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
+                    markAsDone(arrayActionIndex);
+                } else {
+                    throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            }
+            catch (DukeException exception) {
+                String message = exception.getMessage();
+                drawLine();
+                System.out.println("\t " + message);
+                drawLine();
             }
         }
     }
@@ -48,25 +58,40 @@ public class Duke {
         drawLine();
     }
 
-    public static void addToDo(String details) {
-        Task _todo = new Todo(details);
+    public static void addToDo(String details) throws DukeException{
+        if (details.length() == 0) {
+            throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+        }
+        Task _todo = new Todo(details.trim());
         actions.add(_todo);
         printAddedTask(_todo);
     }
 
-    public static void addDeadline(String details) {
+    public static void addDeadline(String details) throws DukeException {
         String[] detailSplit = details.split(" /by ");
-        String action = detailSplit[0];
-        String deadline = detailSplit[1];
+        if (detailSplit.length == 0) {
+            throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (detailSplit.length == 1) {
+            throw new DukeException("\u2639 OOPS!!! The description of a deadline requires a due date.");
+        }
+        String action = detailSplit[0].trim();
+        String deadline = detailSplit[1].trim();
         Task _deadline = new Deadline(action, deadline);
         actions.add(_deadline);
         printAddedTask(_deadline);
     }
 
-    public static void addEvent(String details) {
+    public static void addEvent(String details) throws DukeException{
         String[] detailSplit = details.split( " /at ");
-        String event = detailSplit[0];
-        String timing = detailSplit[1];
+        if (detailSplit.length == 0) {
+            throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
+        }
+        if (detailSplit.length == 1) {
+            throw new DukeException("\u2639 OOPS!!! The description of an event requires a timing.");
+        }
+        String event = detailSplit[0].trim();
+        String timing = detailSplit[1].trim();
         Task _event = new Event(event, timing);
         actions.add(_event);
         printAddedTask(_event);
@@ -96,7 +121,7 @@ public class Duke {
     }
 
     public static void drawLine() {
-        System.out.println("\t---------------------------------------");
+        System.out.println("\t-----------------------------------------------------------------------------");
     }
 
     public static void greetUser() {

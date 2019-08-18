@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     private static int totalTasks = 0;
-    private static Task[] taskArray = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         greet();
@@ -11,11 +12,11 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if (input.equals("list")) {
-                listTasks(taskArray);
+                listTasks(taskList);
             } else if (input.contains("done")) {
                 String[] splitInputs = input.split(" ");
                 int index = Integer.parseInt(splitInputs[1]) - 1;
-                taskArray[index].markAsDone();
+                taskList.get(index).markAsDone();
             } else if (!input.equals("bye")) {
                 try {
                     handleTask(input);
@@ -44,10 +45,10 @@ public class Duke {
         System.out.println(byeMessage);
     }
 
-    public static void listTasks(Task[] arr) {
+    public static void listTasks(ArrayList<Task> list) {
         System.out.println("Here are the tasks in your list:");
-        for (int j = 0; (j < arr.length) && arr[j] != null; j++) {
-            System.out.println(j + 1 + "." + arr[j]);
+        for (int j = 0; (j < list.size()) && list.get(j) != null; j++) {
+            System.out.println(j + 1 + "." + list.get(j));
         }
     }
 
@@ -63,7 +64,7 @@ public class Duke {
             if (detailsArray[0].equals("todo")) {
                 String description = String.join(" ", Arrays.copyOfRange(detailsArray, 1, detailsArray.length));
                 t = new Todo(description);
-                taskArray[totalTasks] = t;
+                taskList.add(t);
                 totalTasks++;
             } else if (detailsArray[0].equals("deadline")) {
                 String by = "";
@@ -76,7 +77,7 @@ public class Duke {
                     }
                 }
                 t = new Deadline(description, by);
-                taskArray[totalTasks] = t;
+                taskList.add(t);
                 totalTasks++;
             } else if (detailsArray[0].equals("event")) {
                 String at = "";
@@ -89,11 +90,18 @@ public class Duke {
                     }
                 }
                 t = new Event(description, at);
-                taskArray[totalTasks] = t;
+                taskList.add(t);
                 totalTasks++;
             }
             System.out.println("  " + t);
             System.out.println("Now you have " + totalTasks + " tasks in the list.");
+        } else if(detailsArray[0].equals("delete")) {
+            Task toDelete = taskList.get(Integer.parseInt(detailsArray[1]) - 1);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + toDelete);
+            taskList.remove(toDelete);
+            totalTasks--;
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } else {
                 throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

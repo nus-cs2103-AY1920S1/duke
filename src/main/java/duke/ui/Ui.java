@@ -1,4 +1,4 @@
-package textual;
+package duke.ui;
 
 /**
  * Class that handles messages shown to the user of this application.

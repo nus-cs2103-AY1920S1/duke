@@ -1,10 +1,10 @@
-package task;
+package duke.task;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Class representing a deadline, a task to be completed by a certain time.
+ * Class representing a deadline, a duke.task to be completed by a certain time.
  */
 public class Deadline extends Task {
     private final String by;
@@ -13,8 +13,8 @@ public class Deadline extends Task {
     /**
      * Initialises a Deadline from its description and its time.
      *
-     * @param desc A description of the task which is under deadline.
-     * @param by The time by which this task must be done.
+     * @param desc A description of the duke.task which is under deadline.
+     * @param by The time by which this duke.task must be done.
      */
     private Deadline(String desc, String by) {
         super(desc);

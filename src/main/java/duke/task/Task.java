@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
 /**
- * A generic task, which can be marked as done.
+ * A generic duke.task, which can be marked as done.
  */
 public class Task {
     private final String desc;
@@ -10,7 +10,7 @@ public class Task {
     /**
      * Initialises a Task not yet done with the given description.
      *
-     * @param desc A description of this task.
+     * @param desc A description of this duke.task.
      */
     Task(String desc) {
         this.desc = desc;

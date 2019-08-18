@@ -1,15 +1,15 @@
-package textual;
+package duke.textual;
 
 import java.util.Scanner;
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Parser for commands entered by the Duke user. It reads from standard input and
@@ -19,11 +19,11 @@ public class Parser {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Parses a command from its two parts and returns a Command object.
+     * Parses a duke.command from its two parts and returns a Command object.
      *
-     * @param cmd The command's first word, which dictates the rest of the
-     *            command's structure.
-     * @param data The data associated with the command, which may be the empty string.
+     * @param cmd The duke.command's first word, which dictates the rest of the
+     *            duke.command's structure.
+     * @param data The data associated with the duke.command, which may be the empty string.
      * @return The corresponding Command object.
      */
     private Command parse(String cmd, String data) {

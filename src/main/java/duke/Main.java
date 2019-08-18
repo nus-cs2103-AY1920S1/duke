@@ -1,12 +1,14 @@
-import command.Command;
-import task.TaskList;
-import textual.Parser;
-import textual.Ui;
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.textual.Parser;
+import duke.ui.Ui;
 
 /**
  * The main class.
  */
-class Duke {
+class Main {
     private final TaskList tl;
     private final Ui ui;
     private final Parser ps;
@@ -14,7 +16,7 @@ class Duke {
     /**
      * Initializes a new Duke session.
      */
-    private Duke() {
+    private Main() {
         ui = new Ui();
         tl = new TaskList();
         ps = new Parser();
@@ -38,6 +40,6 @@ class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Main().run();
     }
 }

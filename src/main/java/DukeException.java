@@ -6,6 +6,6 @@ public class DukeException extends Exception {
     }
 
     public String toString() {
-        return "\t☹ OOPS!!! " + this.message;
+        return "\tOOPS!!! " + this.message;
     }
 }

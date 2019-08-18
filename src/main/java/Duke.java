@@ -16,44 +16,48 @@ public class Duke {
 
     public void add(Task newTask) {
         myList.add(newTask);
-        StringBuilder sb = new StringBuilder("\tGot it. I've added this task: ");
-        sb.append("\n\t\t"+newTask);
-        sb.append("\n\tNow you have "+getSize()+" tasks in the list.");
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:");
+        sb.append("\n  "+newTask);
+        sb.append("\nNow you have "+getSize()+" tasks in the list.");
         print(sb.toString());
     }
 
     public void list() {
-        StringBuilder sb = new StringBuilder("\tHere are the tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
         for(int i = 0; i < getSize(); i++) {
-            sb.append("\n\t"+(i+1)+". "+myList.get(i));
+            sb.append("\n"+(i+1)+"."+myList.get(i));
         }
         print(sb.toString());
     }
 
     public void markDone(int number) {
-        StringBuilder sb = new StringBuilder("\tNice! I've marked this task as done: ");
+        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:");
         Task doneTask = myList.get(number-1);
         doneTask.changeStatus();
-        sb.append("\n\t\t"+doneTask);
+        sb.append("\n"+doneTask);
         print(sb.toString());
     }
 
     public void delete(int number){
-        StringBuilder sb = new StringBuilder("\tNoted. I've removed this task: ");
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:");
         Task deletedTask = myList.get(number-1);
-        sb.append("\n\t\t"+deletedTask);
+        sb.append("\n"+deletedTask);
         myList.remove(number-1);
         print(sb.toString());
     }
 
     public void exit() {
-        print("\tBye. Hope to see you again soon!");
+        print("Bye. Hope to see you again soon!");
     }
 
     private void print(String str) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println(str);
-        System.out.println("\t____________________________________________________________");
+        String[] lines = str.split("\n");
+        StringBuilder sb = new StringBuilder("    ____________________________________________________________");
+        for(String line:lines) {
+            sb.append("\n     "+line);
+        }
+        sb.append("\n    ____________________________________________________________");
+        System.out.println(sb.toString());
     }
 
     private void greet() {
@@ -62,8 +66,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        print("\tHello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println(logo);
+        print("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     public static void main(String[] args) {
@@ -129,7 +133,6 @@ public class Duke {
                 query = sc.nextLine();
                 parts = query.split(" ");
             }
-
         }
         duke.exit();
     }

@@ -1,36 +1,11 @@
-public class Task {
-    public final String description;
-    public final boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+public interface Task {
+    static final char tickUnicode = (char) 0x2713;
+    static final char crossUnicode = (char) 0x2718;
+    
+    static char getStatusIcon(boolean isDone) {
+        return isDone ? tickUnicode : crossUnicode;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
-    public Task getTaskMarkedAsDone() {
-        return new Task(description, true);
-    }
-
-    public Task getTaskMarkedUndone() {
-        return new Task(description, false);
-    }
-
-    private char getStatusIcon() {
-        return (char) (isDone ? 0x2713 : 0x2718);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        sb.append(this.getStatusIcon());
-        sb.append("] ");
-        sb.append(this.description);
-        return sb.toString();
-    }
+    public Task getTaskMarkedAsDone();
+    public Task getTaskMarkedUndone();
 }

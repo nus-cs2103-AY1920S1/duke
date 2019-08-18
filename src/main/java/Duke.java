@@ -1,5 +1,3 @@
-package seedu.duke;
-
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Duke {
     // Class Variables
-    protected static List<Task> entries = new ArrayList<>(100); // Specification said numTasks < 100.
+    private static List<Task> tasks = new ArrayList<>(100); // Specification said numTasks < 100.
 
     /**
      * Runs the Duke application.
@@ -17,30 +15,40 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        */
 
         String greetingText = "Hello! I'm Duke\nWhat can I do for you?";
+        String listText = "Here are the tasks in your list:";
+        String doneText = "Nice! I've marked this task as done: ";
         String farewellText = "Bye. Hope to see you again soon!";
 
         System.out.println(greetingText);
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) {
+            String[] inputArr = input.split(" ");
+
+            switch (inputArr[0]) {
+            case "bye":
                 System.out.println(farewellText);
-                break;
-            } else if (input.equals("list")) {
+                return;
+            case "list":
+                System.out.println(listText);
                 listEntries();
-            } else {
-                entries.add(input);
+                break;
+            case "done":
+                // Will cause error if user did not give entry number.
+                int entry = Integer.parseInt(inputArr[1]) - 1;
+                Task task = tasks.get(entry);
+                task.markAsDone();
+                System.out.println(doneText);
+                System.out.println("  " + task.printStatus());
+                break;
+            default:
+                tasks.add(new Task(input));
                 System.out.println("added: " + input);
-            }
+                break;
+            } // End switch
+
         } // End while loop.
 
         sc.close();
@@ -51,8 +59,8 @@ public class Duke {
      */
     protected static void listEntries() {
         int numEntry = 1;
-        for (String entry : Duke.entries) {
-            System.out.printf("%d. %s\n", numEntry, entry);
+        for (Task task : Duke.tasks) {
+            System.out.printf("%d. %s\n", numEntry, task.printStatus());
             numEntry++;
         } // End for loop.
     } // End method.

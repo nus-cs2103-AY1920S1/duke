@@ -11,6 +11,11 @@ public class Duke {
     public static final String BYE_CMD = "bye";
     public static final String DONE_CMD = "done";
     public static final String LIST_CMD = "list";
+    public static final String TODO_CMD = "todo";
+    public static final String EVENT_CMD = "event";
+    public static final String DEADLINE_CMD = "deadline";
+    public static final String BY_DELIM = "/by";
+    public static final String AT_DELIM = "/at";
 
     private static Task[] taskList = new Task[MAX_TASKS];
     private static int taskCount = 0;
@@ -38,10 +43,35 @@ public class Duke {
         case DONE_CMD:
             markTaskAsDone(taskList[Integer.parseInt(command.split(" ")[1]) - 1]);
             break;
+        case DEADLINE_CMD:
+            addDeadline(command);
+            break;
+        case EVENT_CMD:
+            addEvent(command);
+            break;
+        case TODO_CMD:
+            addTodo(command);
+            break;
         default:
-            addTask(command);
             break;
         }
+    }
+
+    public static void addDeadline(String command) {
+        String[] deadlineArgs = command.split(DEADLINE_CMD)[1].split(BY_DELIM);
+        Task newDeadline = new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim());
+        addTask(newDeadline);
+    }
+
+    public static void addEvent(String command) {
+        String[] eventArgs = command.split(EVENT_CMD)[1].split(AT_DELIM);
+        Task newEvent = new Event(eventArgs[0].trim(), eventArgs[1].trim());
+        addTask(newEvent);
+    }
+    public static void addTodo(String command) {
+        String todoArg = command.split(TODO_CMD)[1];
+        Task newTodo = new Todo(todoArg); 
+        addTask(newTodo);
     }
 
     public static void markTaskAsDone(Task doneTask) {
@@ -69,12 +99,15 @@ public class Duke {
         printWithLongLines(wholeList);
     }
 
-    public static void addTask(String desc) {
-        taskList[taskCount] = new Task(desc);
+    public static void addTask(Task newTask) {
+        taskList[taskCount] = newTask;
         taskCount++;
         printWithLongLines(
-            "added: "
-            + desc
+            "Got it. I've added this task:\n"
+            + newTask
+            + "\nNow you have " 
+            + taskCount
+            + " tasks in the list."
         );
     }
 

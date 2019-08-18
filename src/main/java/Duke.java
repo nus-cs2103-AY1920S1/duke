@@ -21,12 +21,19 @@ public class Duke {
         while (programRunning) {
             String[] inputMessage = br.readLine().split(" ");
             System.out.println(lines);
+            String taskCount = "";
+            if (inputList.size() > 1) {
+                taskCount = "tasks";
+            } else {
+                taskCount = "task";
+            }
             try {
                 switch (inputMessage[0]) {
                     case "list":
                         if (inputList.size() == 0) {
                             throw new DukeException("     The list is empty!");
                         }
+                        System.out.println("     Here are the tasks in your list:");
                         for (int i = 1; i <= inputList.size(); i++) {
                             System.out.println("     " + i + ". " + inputList.get(i - 1));
                         }
@@ -65,7 +72,7 @@ public class Duke {
                         }
                         inputList.add(new Todo(item));
                         System.out.println("       " + inputList.get(inputList.size() - 1));
-                        System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
+                        System.out.println("     Now you have " + inputList.size() + " " + taskCount + " in the list.");
                         System.out.println(lines);
                         System.out.println();
                         break;
@@ -111,7 +118,25 @@ public class Duke {
                         }
                         System.out.println("     Got it. I've added this task:");
                         System.out.println("       " + inputList.get(inputList.size() - 1));
-                        System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
+                        System.out.println("     Now you have " + inputList.size() + " " + taskCount + " in the list.");
+                        System.out.println(lines);
+                        System.out.println();
+                        break;
+                    case "delete" :
+                        int indexToDelete = Integer.parseInt(inputMessage[1]);
+                        if(indexToDelete > inputList.size() || indexToDelete <= 0) {
+                            throw new DukeException("     Such task does not exist!");
+                        }
+                        Task toBeDeleted = inputList.get(indexToDelete - 1);
+                        inputList.remove(indexToDelete - 1);
+                        System.out.println("     Noted. I've removed this task:");
+                        System.out.println("       " + toBeDeleted);
+                        if (inputList.size() == 1) {
+                            taskCount = "task";
+                        } else {
+                            taskCount = "tasks";
+                        }
+                        System.out.println("     Now you have " + inputList.size() + " " + taskCount + " in the list.");
                         System.out.println(lines);
                         System.out.println();
                         break;

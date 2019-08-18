@@ -17,25 +17,25 @@ public class Duke {
             try {
                 switch (input) {
                 case "todo":
-                    handleTodo(sc.nextLine());
+                    handleTodo();
                     break;
                 case "deadline":
-                    handleDeadline(sc.nextLine());
+                    handleDeadline();
                     break;
                 case "event":
-                    handleEvent(sc.nextLine());
+                    handleEvent();
                     break;
                 case "list":
                     handleList();
                     break;
                 case "done":
-                    handleDone(sc.nextInt());
+                    handleDone();
                     break;
                 case "bye":
                     isRunning = false;
                     break;
                 default:
-                    break;
+                    throw new DukeException("Oops! You entered an invalid command.");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -47,7 +47,10 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void handleList() {
+    private static void handleList() throws DukeException {
+        if (listOfTasks.isEmpty()) {
+            throw new DukeException("Oops! You have no tasks yet.");
+        }
         int index = 1;
         for (Task task : listOfTasks) {
             System.out.printf("%d.%s\n", index, task);
@@ -55,30 +58,61 @@ public class Duke {
         }
     }
 
-    private static void handleTodo(String input) {
-        Task todo = new Todo(input);
-        listOfTasks.add(todo);
-        echoTaskAdded(todo);
+    private static void handleTodo() throws DukeException {
+        try {
+            String input = sc.nextLine();
+            if (input.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+            Task todo = new Todo(input);
+            listOfTasks.add(todo);
+            echoTaskAdded(todo);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Oops! Todo task description cannot be blank.");
+        } catch (Exception e) {
+            throw new DukeException("Oops! Please write in this format: todo <description>");
+        }
     }
 
-    private static void handleDeadline(String input) throws DukeException {
+    private static void handleDeadline() throws DukeException {
         try {
+            String input = sc.nextLine();
             String[] strings = input.split(" /by ");
-            Task deadline = new Deadline(strings[0], strings[1]);
+            String desc = strings[0];
+            String by = strings[1];
+
+            if (desc.isBlank() || by.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+            Task deadline = new Deadline(desc, by);
             listOfTasks.add(deadline);
             echoTaskAdded(deadline);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
+        } catch (Exception e) {
             throw new DukeException("Oops! Please write in this format: deadline <description> /by <datetime>");
         }
     }
 
-    private static void handleEvent(String input) throws DukeException {
+    private static void handleEvent() throws DukeException {
         try {
+            String input = sc.nextLine();
             String[] strings = input.split(" /at ");
-            Task event = new Event(strings[0], strings[1]);
+            String desc = strings[0];
+            String at = strings[1];
+
+            if (desc.isBlank() || at.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+            Task event = new Event(desc, at);
             listOfTasks.add(event);
             echoTaskAdded(event);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
+        } catch (Exception e) {
             throw new DukeException("Oops! Please write in this format: event <description> /at <datetime>");
         }
     }
@@ -89,14 +123,17 @@ public class Duke {
         System.out.printf("Now you have %d tasks in the list.\n", listOfTasks.size());
     }
 
-    private static void handleDone(int input) throws DukeException {
+    private static void handleDone() throws DukeException {
         try {
+            int input = Integer.parseInt(sc.nextLine().trim());
             Task taskDone = listOfTasks.get(input - 1);
             taskDone.markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.printf("%s\n", taskDone);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Oops! Your task cannot be found!");
+        } catch (Exception e) {
+            throw new DukeException("Oops! Please write in this format: done <number>");
         }
     }
 }

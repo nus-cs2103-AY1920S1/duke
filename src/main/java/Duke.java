@@ -33,10 +33,22 @@ public class Duke {
                     String details = userInput.replaceFirst("event", "");
                     addEvent(details);
                 } else if (userInput.contains("done")) {
-                    String listActionIndex = (userInput.split(" "))[1];
+                    String[] doneDetails = userInput.split(" ");
+                    if (doneDetails.length == 1) {
+                        throw new DukeException("\u2639 OOPS!!! The description of done cannot be empty.");
+                    }
+                    String listActionIndex = doneDetails[1];
                     int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
                     markAsDone(arrayActionIndex);
-                } else {
+                } else if (userInput.contains("delete")) {
+                    String[] deleteDetails = userInput.split(" ");
+                    if (deleteDetails.length == 1) {
+                        throw new DukeException("\u2639 OOPS!!! The description of delete cannot be empty.");
+                    }
+                    String listActionIndex = deleteDetails[1];
+                    int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
+                    deleteFromList(arrayActionIndex);
+                }else {
                     throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
@@ -47,6 +59,16 @@ public class Duke {
                 drawLine();
             }
         }
+    }
+
+    public static void deleteFromList(int index) {
+        Task action = actions.remove(index);
+        drawLine();
+        System.out.println("\t Noted. I've removed this task: ");
+        System.out.println("\t\t " + action);
+        int numberOfTasks = actions.size();
+        System.out.println("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task": " tasks") + " in the list.");
+        drawLine();
     }
 
     public static void printAddedTask(Task task) {

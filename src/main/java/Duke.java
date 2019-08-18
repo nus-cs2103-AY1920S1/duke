@@ -60,7 +60,7 @@ public class Duke {
 
     private static void handleTodo() throws DukeException {
         try {
-            String input = sc.nextLine();
+            String input = sc.nextLine().trim();
             if (input.isBlank()) {
                 throw new IllegalArgumentException();
             }
@@ -78,9 +78,9 @@ public class Duke {
     private static void handleDeadline() throws DukeException {
         try {
             String input = sc.nextLine();
-            String[] strings = input.split(" /by ");
-            String desc = strings[0];
-            String by = strings[1];
+            String[] strings = input.split("/by");
+            String desc = strings[0].trim();
+            String by = strings[1].trim();
 
             if (desc.isBlank() || by.isBlank()) {
                 throw new IllegalArgumentException();
@@ -99,9 +99,9 @@ public class Duke {
     private static void handleEvent() throws DukeException {
         try {
             String input = sc.nextLine();
-            String[] strings = input.split(" /at ");
-            String desc = strings[0];
-            String at = strings[1];
+            String[] strings = input.split("/at");
+            String desc = strings[0].trim();
+            String at = strings[1].trim();
 
             if (desc.isBlank() || at.isBlank()) {
                 throw new IllegalArgumentException();

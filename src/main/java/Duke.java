@@ -1,6 +1,7 @@
 import DukeTask.*;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static String horizontalLine = "____________________________________________________________\n";
@@ -23,10 +24,9 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<Task>();
         String[] inputs;
         String input;
-        int nextTaskIndex = 0;
 
         mainLoop:
             while (true) {
@@ -82,7 +82,7 @@ public class Duke {
                                 String description = DukeUtil.concatStrings(inputs, " ", 1, inputs.length - 1);
                                 validateTaskDescription(description);
 
-                                addAndPrintTask(tasks, nextTaskIndex++, new TodoTask(description));
+                                addAndPrintTask(tasks, new TodoTask(description));
                             } catch (DukeInvalidArgumentException ex) {
                                 displayDukeException(ex);
                             }
@@ -98,7 +98,7 @@ public class Duke {
                                     validateTaskDescription(description);
                                     validateTaskTiming(timing);
 
-                                    addAndPrintTask(tasks, nextTaskIndex++, new DeadlineTask(description, timing));
+                                    addAndPrintTask(tasks, new DeadlineTask(description, timing));
                                 } else {
                                     throw new DukeInvalidArgumentException(
                                         "Missing /by delimiter for deadline command",
@@ -122,7 +122,7 @@ public class Duke {
                                     validateTaskDescription(description);
                                     validateTaskTiming(timing);
 
-                                    addAndPrintTask(tasks, nextTaskIndex++, new EventTask(description, timing));
+                                    addAndPrintTask(tasks, new EventTask(description, timing));
                                 } else {
                                     throw new DukeInvalidArgumentException(
                                             "Missing /at delimiter for event command",
@@ -159,7 +159,9 @@ public class Duke {
         System.out.println(Duke.horizontalLine);
     }
 
-    private static void handleList(Task[] tasks, String[] inputs) throws DukeInvalidArgumentException {
+    private static void handleList(ArrayList<Task> tasks, String[] inputs)
+        throws DukeInvalidArgumentException {
+
         if (inputs.length > 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after list command",
@@ -171,7 +173,7 @@ public class Duke {
         printTaskArray(tasks);
     }
 
-    private static void printTaskArray(Task[] tasks) {
+    private static void printTaskArray(ArrayList<Task> tasks) {
         System.out.println(" Here are the tasks in your list:");
 
         int taskIndex = 1;
@@ -188,7 +190,7 @@ public class Duke {
         System.out.println(Duke.horizontalLine);
     }
 
-    private static void setTaskDone(Task[] tasks, String[] inputs) throws DukeInvalidArgumentException {
+    private static void setTaskDone(ArrayList<Task> tasks, String[] inputs) throws DukeInvalidArgumentException {
         try {
             if (inputs.length > 2) {
                 throw new DukeInvalidArgumentException(
@@ -198,7 +200,7 @@ public class Duke {
             }
 
             int taskIndex = Integer.parseInt(inputs[1]);
-            Task task = tasks[--taskIndex];
+            Task task = tasks.get(--taskIndex);
 
             if (task.isDone()) {
                 throw new DukeInvalidArgumentException(
@@ -254,14 +256,14 @@ public class Duke {
         }
     }
 
-    private static void addAndPrintTask(Task[] tasks, int nextTaskIndex, Task task)
+    private static void addAndPrintTask(ArrayList<Task> tasks, Task task)
         throws DukeInvalidArgumentException {
 
-        tasks[nextTaskIndex] = task;
+        tasks.add(task);
 
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + task.getStatusText());
-        System.out.printf(" Now you have %d tasks in the list.\n", nextTaskIndex + 1);
+        System.out.printf(" Now you have %d tasks in the list.\n", tasks.size());
         System.out.println(Duke.horizontalLine);
     }
 

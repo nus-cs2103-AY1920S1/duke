@@ -13,7 +13,7 @@ public class Duke {
 
         greetUser();
 
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
@@ -24,8 +24,12 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 list(tasks);
+            } else if (command.contains("done")) {
+                int index = Integer.parseInt(command.split(" ")[1]);
+                done(index, tasks);
             } else {
-                echo(command, tasks);
+                Task newTask = new Task(command);
+                add(newTask, tasks);
             }
         }
     }
@@ -37,18 +41,30 @@ public class Duke {
         printLine();
     }
 
-    public static void list(ArrayList<String> tasks) {
+    public static void list(ArrayList<Task> tasks) {
         printLine();
+        System.out.println("\t Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println("\t " + i + ". " + tasks.get(i - 1));
+            System.out.print("\t " + i + ". ");
+            tasks.get(i - 1).printTask();
         }
         printLine();
     }
 
-    public static void echo(String command, ArrayList<String> tasks) {
+    public static void done(int index, ArrayList<Task> tasks) {
+        Task doneTask = tasks.get(index - 1);
+        doneTask.markAsDone();
         printLine();
-        System.out.println("\t added: " + command);
-        tasks.add(command);
+        System.out.println("\t Nice! I've marked this task as done:");
+        System.out.print("\t \t");
+        doneTask.printTask();
+        printLine();
+    }
+
+    public static void add(Task task, ArrayList<Task> tasks) {
+        printLine();
+        System.out.println("\t added: " + task.getDescription());
+        tasks.add(task);
         printLine();
     }
 

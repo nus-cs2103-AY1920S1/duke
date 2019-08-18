@@ -37,7 +37,7 @@ public class Duke {
     private static void handleList() {
         int index = 1;
         for (Task task : listOfTasks) {
-            System.out.printf("%d.[%s] %s\n", index, task.getStatusIcon(), task.getDescription());
+            System.out.printf("%d.%s\n", index, task);
             index++;
         }
     }

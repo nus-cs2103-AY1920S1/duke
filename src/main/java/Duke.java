@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Duke {
     // Class Variables
-    protected static List<String> entries = new ArrayList<>(100); // Specification said numTasks < 100.
+    protected static List<Task> entries = new ArrayList<>(100); // Specification said numTasks < 100.
 
     /**
      * Runs the Duke application.

@@ -19,6 +19,7 @@ public class Duke {
     public static final String LIST_MESSAGE = COMMAND_INDENTATION + "Here are the tasks in your list:";
     public static final String DONE_MESSAGE = COMMAND_INDENTATION + "Nice! I've marked this task as done:";
     public static final String ADDED_TASK_MESSAGE = COMMAND_INDENTATION + "Got it. I've added this task:";
+    public static final String DELETE_TASK_MESSAGE = COMMAND_INDENTATION + "Noted. I've removed this task:";
 
     public final String LIST_SIZE_FORMAT = COMMAND_INDENTATION + "Now you have %d tasks in the list.";
 
@@ -95,6 +96,7 @@ public class Duke {
     /**
      * Runs the commands entered by the user.
      * @param commands is the last command entered by the user
+     * @throws DukeException If user inputted an invalid command
      */
     public void executeCommand(String[] commands) throws DukeException {
         if (commands[0].equals("bye")) {
@@ -140,16 +142,46 @@ public class Duke {
             } else if (commands.length == 1) {
                 throw new DukeException(String.format(DESCRIPTION_MISSING_EXCEPTION, "event"));
             }
+        } else if (commands[0].equals("delete")) {
+            try {
+                if (commands.length == 2) {
+                    performsDeleteCommand(Integer.parseInt(commands[1]));
+                } else if (commands.length == 1) {
+                    throw new DukeException(String.format(DESCRIPTION_MISSING_EXCEPTION, "delete"));
+                } else {
+                    throw new DukeException(UNKNOWN_COMMAND_EXCEPTION);
+                }
+            } catch (NumberFormatException e) {
+                printLines(START_HORIZONTAL_LINE, String.format(DESCRIPTION_FORMAT_EXCEPTION, "delete", "number"),
+                        END_HORIZONTAL_LINE);
+            }
         } else {
             throw new DukeException(UNKNOWN_COMMAND_EXCEPTION);
         }
     }
 
     /**
+     * Performs delete command
+     * @param itemNum is the index of the list which user wants to delete the task
+     * @throws DukeException throws exception if the itemNum is invalid
+     */
+    public void performsDeleteCommand(int itemNum) throws DukeException {
+        if (itemNum > taskList.size() || itemNum < 1) {
+            throw new DukeException(INVALID_SIZE_EXCEPTION);
+        }
+        Task removedTask = taskList.remove(itemNum - 1);
+        printLines(START_HORIZONTAL_LINE, DELETE_TASK_MESSAGE,
+                COMMAND_INDENTATION + COMPLETION_INDENTATION + removedTask.toString(),
+                String.format(LIST_SIZE_FORMAT, taskList.size()),
+                END_HORIZONTAL_LINE);
+    }
+
+    /**
      * Retrieves two args from an arrays
      * @param delimiter is the string that determine the 2 arguments
      * @param commands is the latest command inputted by the user
-     * @return
+     * @return an array of 2 item, command description and sub-command(e.g. /at) description
+     * @throws DukeException if user does not provide the sub-command / the sub-command does not have any description
      */
     public String[] getTwoCommandArgs(String delimiter, String[] commands) throws DukeException {
         String[] args = new String[2];
@@ -170,6 +202,7 @@ public class Duke {
     /**
      * Performs event command
      * @param commands is the latest command inputted by the user
+     * @throws DukeException the exception thrown by getTwoCommandArgs().
      */
     public void performsEventsCommand(String[] commands) throws DukeException {
         String[] args = getTwoCommandArgs("/at", commands);
@@ -183,6 +216,7 @@ public class Duke {
     /**
      * Performs deadline command.
      * @param commands is the latest command inputted by the user
+     * @throws DukeException the exception thrown by getTwoCommandArgs()
      */
     public void performsDeadlineCommand(String[] commands) throws DukeException {
         String[] args = getTwoCommandArgs("/by", commands);
@@ -222,7 +256,8 @@ public class Duke {
 
     /**
      * Performs the command "done".
-     * @param itemNum is the index of the task list
+     * @param itemNum is the index of the task list which user wants to change the status of the task
+     * @throws DukeException throws exception if user provides an invalid itemNum.
      */
     public void performsDoneCommand(int itemNum) throws DukeException {
         if (itemNum > taskList.size() || itemNum < 1) {

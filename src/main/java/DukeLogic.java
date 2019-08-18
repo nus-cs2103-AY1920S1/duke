@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DukeLogic {
@@ -7,15 +9,24 @@ public class DukeLogic {
     =================================*/
 
     private final String DUKE_ASCII_LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                                        + "|  _ \\ _   _| | _____ \n"
+                                        + "| | | | | | | |/ / _ \\\n"
+                                        + "| |_| | |_| |   <  __/\n"
+                                        + "|____/ \\__,_|_|\\_\\___|\n";
     private final String DUKE_WELCOME_MESSAGE = "Hello! I'm Duke\n\t What can I do for you?";
     private final String SEPARATOR = "____________________________________________________________";
     private final String DUKE_EXIT_COMMAND = "bye";
+    private final String DUKE_LIST_COMMAND = "list";
     private final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private final int DUKE_MAXIMUM_TASKS = 100;
+
+    /*===============================
+    ||    Private Class Variables  ||
+    =================================*/
+
+    private StringBuilder sb;
     private Scanner scanner;
+    private List<String> userInputs;
 
     /*===============================
     ||  Private Auxiliary Methods  ||
@@ -23,7 +34,8 @@ public class DukeLogic {
 
     /**
      * Prints supplied input wrapped with "______" separator.
-     * @param input String to display to user.
+     * The input is first formatted through {@link #encapsulateOutputWithSeparator(String)}.
+     * @param input String to be displayed to the user.
      */
     private void displayToUser(String input) {
         System.out.println(encapsulateOutputWithSeparator(input));
@@ -35,7 +47,7 @@ public class DukeLogic {
      * @return String that is wrapped around the separators.
      */
     private String encapsulateOutputWithSeparator(String input) {
-        StringBuilder sb = new StringBuilder();
+        sb.setLength(0);
         sb.append("\t" + SEPARATOR + "\n").append("\t " + input + "\n").append("\t" + SEPARATOR + "\n");
         return sb.toString();
     }
@@ -45,20 +57,50 @@ public class DukeLogic {
      * as it will be ran before accepting user-input for commands.
      */
     private void initializeResources() {
+        sb = new StringBuilder();
         scanner = new Scanner(System.in);
+        userInputs = new ArrayList<>(DUKE_MAXIMUM_TASKS);
     }
 
     /**
-     * Reads in user-input as a String before checking the input. If the command is to terminate the program, the
-     * exit method will be called. Otherwise, the user-input will be mirrored back to the user in a formatted style.
+     * Reads in user-input as a String before checking the input. If the command is to terminate the program,
+     * {@link #terminateProgram()} will be called. If the command is to list the tasks, {@link #displayUserInputs()}
+     * will be called. Otherwise, the user-input will be added to the list of input via {@link #addToUserInputs(String)}
      */
     private void handleUserInput() {
         String input = scanner.nextLine();
         if (input.equals(DUKE_EXIT_COMMAND)) {
             terminateProgram();
+        } else if (input.equals(DUKE_LIST_COMMAND)) {
+            displayUserInputs();
         } else {
-            displayToUser(input);
+            addToUserInputs(input);
         }
+    }
+
+    /**
+     * Displays the user-supplied list of tasks in a formatted style. This method will prepare the list by looping
+     * through the List of tasks and printing each task with its index. Then it will call {@link #displayToUser(String)}
+     * to display the final formatted list.
+     */
+    private void displayUserInputs() {
+        sb.setLength(0);
+        for (int index = 0; index < userInputs.size(); index++) {
+            sb.append((index + 1) + ". " + userInputs.get(index));
+            if (index != (userInputs.size() - 1)) {
+                sb.append("\n\t ");
+            }
+        }
+        displayToUser(sb.toString());
+    }
+
+    /**
+     * Adds the specified input into the current list of user input. The specified input is also mirrored to the user.
+     * @param input User specified input that will be added to the current list of user input.
+     */
+    private void addToUserInputs(String input) {
+        userInputs.add(input);
+        displayToUser("added: " + input);
     }
 
     /**
@@ -74,19 +116,19 @@ public class DukeLogic {
     =================================*/
 
     /**
-     * Displays the Duke ASCII logo followed by the welcome message to the user.
+     * Method first initializes the resources needed for this class before displaying the Duke ASCII logo and the
+     * welcome message to the user through {@link #displayToUser(String)}.
      */
     public void displayWelcomeMessage() {
+        initializeResources();
         System.out.println(DUKE_ASCII_LOGO);
         displayToUser(DUKE_WELCOME_MESSAGE);
     }
 
     /**
-     * Method first initializes the resources needed for this class before continuously reading user-input.
+     *  Method will continuously read user-input with {@Link #handleUserInput()} until the terminating command is read.
      */
-    public void run() {
-        initializeResources();
-
+    public void runUntilBye() {
         while (true) {
             handleUserInput();
         }

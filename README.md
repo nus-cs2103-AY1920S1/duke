@@ -1,4 +1,9 @@
-# Setting up
+# CS2103T Individual Component - Duke, The Handsome Bot
+![OH MAI GAWD](https://i.kym-cdn.com/photos/images/newsfeed/000/972/842/1aa.gif)
+
+***Save me plz, Bell Curve God***
+
+## Setting up
 
 **Prerequisites**
 
@@ -20,7 +25,7 @@
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
 
-# Tutorials 
+##Tutorials 
 
 Duke Increment | Tutorial
 ---------------|---------------

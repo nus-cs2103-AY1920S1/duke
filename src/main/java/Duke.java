@@ -61,6 +61,8 @@ public class Duke {
 
             if (index >= arr.size()) {
                 throw new DukeException("OOPS!!! The number is too large.");
+            } else if (index < 0) {
+                throw new DukeException("OOPS!!! The number is too small.");
             }
 
             Task t = arr.get(index);
@@ -141,6 +143,28 @@ public class Duke {
             System.out.println(lines);
             System.out.println("    Got it. I've added this task:");
             System.out.println("      " + t);
+            System.out.println("    Now you have " + arr.size() + " tasks in the list.");
+            System.out.println(lines);
+
+        }  else if (strArr[0].equals("delete")) { //delete
+
+            if (strArr.length == 1) {
+                throw new DukeException("OOPS!!! Please state the task number you want to delete.");
+            }
+
+            int index = Integer.parseInt(strArr[1]) - 1;
+
+            if (index >= arr.size()) {
+                throw new DukeException("OOPS!!! The number is too large.");
+            } else if (index < 0) {
+                throw new DukeException("OOPS!!! The number is too small.");
+            }
+
+            Task t = arr.remove(index);
+
+            System.out.println(lines);
+            System.out.println("    Noted! I've removed this task:");
+            System.out.println("    " + t);
             System.out.println("    Now you have " + arr.size() + " tasks in the list.");
             System.out.println(lines);
 

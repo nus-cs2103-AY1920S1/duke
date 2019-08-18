@@ -10,6 +10,7 @@ public class Duke {
         list,
         bye,
         done,
+        delete,
         todo,
         deadline,
         event
@@ -72,6 +73,14 @@ public class Duke {
                         case done:
                             try {
                                 setTaskDone(tasks, inputs);
+                            } catch (DukeInvalidArgumentException ex) {
+                                displayDukeException(ex);
+                            }
+                            break;
+
+                        case delete:
+                            try {
+                                deleteTask(tasks, inputs);
                             } catch (DukeInvalidArgumentException ex) {
                                 displayDukeException(ex);
                             }
@@ -215,7 +224,7 @@ public class Duke {
             throw new DukeInvalidArgumentException(
                 "Could not parse argument supplied into a list index",
                 " \u2639 OOPS!!! The task number you gave me wasn't a valid number,\n"
-                + " or you didn't give me one at all!"
+                    + " or you didn't give me one at all!"
                 );
         } catch (IndexOutOfBoundsException | NullPointerException ex) {
             throw new DukeInvalidArgumentException(
@@ -231,6 +240,42 @@ public class Duke {
             System.out.printf("   %s\n", task.getStatusText());
             System.out.println(Duke.horizontalLine);
         }
+    }
+
+    private static void deleteTask(ArrayList<Task> tasks, String[] inputs)
+        throws DukeInvalidArgumentException {
+
+        try {
+            if (inputs.length > 2) {
+                throw new DukeInvalidArgumentException(
+                        "Encountered extraneous arguments after delete command",
+                        " \u2639 OOPS!!! There shouldn't be so many arguments!"
+                );
+            }
+
+            int taskIndex = Integer.parseInt(inputs[1]);
+            Task task = tasks.remove(--taskIndex);
+
+            printTaskDeleted(task, tasks.size());
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException(
+                "Could not parse argument supplied into a list index",
+                " \u2639 OOPS!!! The task number you gave me wasn't a valid number,\n"
+                    + " or you didn't give me one at all!"
+                );
+        } catch (IndexOutOfBoundsException | NullPointerException ex) {
+            throw new DukeInvalidArgumentException(
+                    "User number supplied was out of list bounds",
+                    " \u2639 OOPS!!! The task number you gave me wasn't within your\n" + " current list!"
+            );
+        }
+    }
+
+    private static void printTaskDeleted(Task task, int finalSize) {
+        System.out.println(" Noted. I've removed this task:");
+        System.out.printf("   %s\n", task.getStatusText());
+        System.out.printf(" Now you have %d tasks in the list.\n", finalSize);
+        System.out.println(Duke.horizontalLine);
     }
 
     private static void validateTaskDescription(String description)

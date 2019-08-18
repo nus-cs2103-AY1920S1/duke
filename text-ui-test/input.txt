@@ -12,9 +12,15 @@ todo
 todo just a todo
 list
 done 2
+todo another todo
+event cs2103 lecture /at Fri 4-6pm
 list
 done 100
 list
 done 1
+delete 2
+list
+delete 4
+delete 10
 list
 bye

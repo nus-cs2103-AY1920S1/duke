@@ -19,5 +19,10 @@ public class Task {
         return description;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s", this.getStatusIcon(), this.getDescription());
+    }
+
     //...
 }

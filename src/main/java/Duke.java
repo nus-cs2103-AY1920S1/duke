@@ -42,18 +42,59 @@ public class Duke {
                     System.out.println(lines);
                     System.out.println();
                     break;
-                default :
-                    String input = "";
-                    for (int i = 0; i < inputMessage.length; i ++) {
+                case "todo" :
+                    System.out.println("     Got it. I've added this task:");
+                    String item = "";
+                    for (int i = 1; i < inputMessage.length; i ++) {
                         if (i == inputMessage.length - 1) {
+                            item += inputMessage[i];
+                        } else {
+                            item += inputMessage[i];
+                            item += " ";
+                        }
+                    }
+                    inputList.add(new Todo(item));
+                    System.out.println("       " + inputList.get(inputList.size() - 1));
+                    System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
+                    System.out.println(lines);
+                    System.out.println();
+                    break;
+                case "deadline" :
+                case "event" :
+                    System.out.println("     Got it. I've added this task:");
+                    String input = "";
+                    int marker = 0;
+                    for (int i = 1; i < inputMessage.length; i ++) {
+                        if (inputMessage[i + 1].equals("/by") || inputMessage[i + 1].equals("/at")) {
                             input += inputMessage[i];
+                            marker = i + 1;
+                            break;
                         } else {
                             input += inputMessage[i];
                             input += " ";
                         }
                     }
-                    inputList.add(new Task(input));
-                    System.out.println("     added: " + input);
+                    String extraInfo = "";
+                    for (int i = marker + 1; i < inputMessage.length; i ++) {
+                        if (i == inputMessage.length - 1) {
+                            extraInfo += inputMessage[i];
+                        } else {
+                            extraInfo += inputMessage[i];
+                            extraInfo += " ";
+                        }
+                    }
+                    if (inputMessage[0].equals("deadline")) {
+                        inputList.add(new Deadline(input, extraInfo));
+                    } else if (inputMessage[0].equals("event")) {
+                        inputList.add(new Event(input, extraInfo));
+                    }
+                    System.out.println("       " + inputList.get(inputList.size() - 1));
+                    System.out.println("     Now you have " + inputList.size() + " tasks in the list.");
+                    System.out.println(lines);
+                    System.out.println();
+                    break;
+                default :
+                    System.out.println("Invalid input");
                     System.out.println(lines);
                     System.out.println();
             }

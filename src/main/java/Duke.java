@@ -38,8 +38,12 @@ public class Duke {
             } else if (input.startsWith("done ")) {
                 int taskIndex = Integer.parseInt(input.split(" ")[1]);
                 doneTask(taskIndex);
-            } else {
-                addTask(input);
+            } else if (input.startsWith("todo ")) {
+                addTodo(input);
+            } else if (input.startsWith("deadline ")){
+                addDeadline(input);
+            } else if (input.startsWith("event ")){
+                addEvent(input);
             }
             input = sc.nextLine();
         }
@@ -47,11 +51,32 @@ public class Duke {
         reply(bye);
     }
 
-    /** Add a new task */
-    private static void addTask(String input) {
-        tasks.add(new Task(input));
-        reply("added: " + input);
+    /** Add a new to-do */
+    private static void addTodo(String input) {
+        String description = input.substring(5); //get description
+        Task task = new Todo(description);
+        tasks.add(task);
+        reply("added: " + task);
     }
+
+    /** Add a new deadline */
+    private static void addDeadline(String input) {
+        String description = input.substring(9, input.indexOf("/by")); //get description
+        String by = input.substring(input.indexOf("/by") + 4); //get by
+        Task task = new Deadline(description, by);
+        tasks.add(task);
+        reply("added: " + task);
+    }
+
+    /** Add a new event */
+    private static void addEvent(String input) {
+        String description = input.substring(6, input.indexOf("/at")); //get description
+        String at = input.substring(input.indexOf("/at") + 4); //get at
+        Task task = new Event(description, at);
+        tasks.add(task);
+        reply("added: " + task);
+    }
+
 
     /** Mark a task as done */
     private static void doneTask(int taskIndex) {
@@ -67,10 +92,16 @@ public class Duke {
 
     /** Display list of tasks */
     private static void listTasks() {
-        StringBuilder messageBuilder = new StringBuilder("Here are the tasks in your list:\n\t");
+        StringBuilder messageBuilder = new StringBuilder();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            messageBuilder.append((i+1) + ". " + tasks.get(i) + "\n\t");
+        if (tasks.size() > 0) {
+            messageBuilder.append("Here are the tasks in your list:\n\t");
+
+            for (int i = 0; i < tasks.size(); i++) {
+                messageBuilder.append((i+1) + ". " + tasks.get(i) + "\n\t");
+            }
+        } else {
+            messageBuilder.append("No tasks in your list. Add some tasks now!\n\t");
         }
 
         reply(messageBuilder.toString());

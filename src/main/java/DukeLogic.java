@@ -17,13 +17,11 @@ public class DukeLogic {
     private final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private final String DUKE_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     private final String SEPARATOR = "____________________________________________________________";
-    private final String DUKE_EXIT_COMMAND = "bye";
-    private final String DUKE_LIST_COMMAND = "list";
-    private final String DUKE_DONE_COMMAND = "done";
     private final int DUKE_MAXIMUM_TASKS = 100;
     private enum DukeCommand {
         TODO, DEADLINE, EVENT, LIST, DONE, BYE
     }
+
     /*===============================
     ||    Private Class Variables  ||
     =================================*/
@@ -102,8 +100,8 @@ public class DukeLogic {
     /**
      * Reads in user-input as a String before checking the input. If the command is to terminate the program,
      * {@link #terminateProgram()} will be called. If the command is to list the tasks, {@link #displayDukeTasks()}
-     * will be called. Otherwise, the user-input will be added to the list of input via {@link #addToDukeTasks(DukeTask
-     * inputTask)}
+     * will be called. Otherwise, if the user-input wishes to add to the task list with "todo", "deadline" or "event",
+     * it will be added to the list of input via {@link #addToDukeTasks(DukeTask inputTask)}
      */
     private void handleUserInput() {
         String input = scanner.nextLine();

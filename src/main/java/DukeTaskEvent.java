@@ -13,6 +13,6 @@ public class DukeTaskEvent extends DukeTask {
     @Override
     public String toString() {
         String symbol = getTaskIsComplete() ? "\u2713" : "\u2718";
-        return "[E][" + symbol + "] " + getTaskName() + " (by: " + this.taskLocation + ")";
+        return "[E][" + symbol + "] " + getTaskName() + " (at: " + this.taskLocation + ")";
     }
 }

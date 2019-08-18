@@ -31,62 +31,69 @@ public class Duke {
         expects: nothing, but taskArr must exist
         outputs: printable string that is all tasks.
          */
-        String s = new String();
+        String s = "Here are the tasks in your list:\n";
 
         for (int i = 0; i < taskArr.size(); i++) {
             // printInt to put number for printing
             int printInt = i + 1;
             Task currTask = taskArr.get(i);
-            String taskStatus = "[" + currTask.getStatus() + "] ";
-            s += printInt + "." + taskStatus + currTask.getTaskInfo() + "\n";
+            s += currTask.printTask() + "\n";
         }
         return s;
     }
-    private void add(String taskInfo) {
+    private void todo(String taskInfo) {
         /*
-        description: creates task, then
-        will store task to taskArr
-        then increment c
-        then print added:....
-        expects: String that is task
-        outputs: returns nothing
+
          */
-        Task newTask = new Task(taskInfo);
-        taskArr.add(newTask);
-        System.out.println("added: "+taskInfo);
+        ToDo newToDo = new ToDo(taskInfo,"T");
+        taskArr.add(newToDo);
+        System.out.println("Got it. I've added this task:");
+        System.out.print(" " + newToDo.printTask() + "\n");
+        System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
     private void run() {
         /*
-        description: Main method for duke, will run until
+        Main method for duke, will run until
         bye is read, then will exit
         expects: No input
         outputs: returns nothing
          */
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = sc.next();
 
         while (!input.equals("bye")) {
 
-            if (input.equals("list")) {   // list command
+            if (input.equals("list")) {
+                // list all tasks
                 printLine();
                 System.out.print(list());
                 printLine();
-                input = sc.nextLine();
+            } else if (input.equals("todo")) {
+                // basic
+                String info = sc.nextLine();
+                printLine();
+                todo(info);
+                printLine();
+            } else if (input.equals("deadline")) {
                 continue;
-            }
-            if (input.substring(0,4).equals("done")) {   // list command
-                int numIndex = input.length() - 1;
-                int taskNum = Character.getNumericValue(input.charAt(numIndex));
+            } else if (input.equals("event")) {   // list command
+
+                continue;
+            } else if (input.equals("done")) {   // list command
+                int taskNum = sc.nextInt();
                 printLine();
                 done(taskNum);
                 printLine();
-                input = sc.nextLine();
+            } else if (input.equals("delete")) {
+                // add skeleton, for now just skips
                 continue;
+            } else {
+                // handle all other cases
+                printLine();
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                printLine();
             }
-            printLine();   // if no default is add command
-            add(input);
-            printLine();
-            input = sc.nextLine();
+            input = sc.next();
         }
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
@@ -96,7 +103,7 @@ public class Duke {
         Task doneTask = taskArr.get(t-1);
         doneTask.markDone();
         System.out.print("Nice! I've marked this task as done:\n");
-        System.out.println("[" + doneTask.getStatus() + "] " + doneTask.getTaskInfo());
+        System.out.println(doneTask.printTask());
 
     }
     public static void main(String[] args) {

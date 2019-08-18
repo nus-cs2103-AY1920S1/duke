@@ -22,6 +22,19 @@ public class Duke {
 
     public final String LIST_SIZE_FORMAT = COMMAND_INDENTATION + "Now you have %d tasks in the list.";
 
+    public final String DESCRIPTION_MISSING_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0FOOPS!!! The description of a %s cannot be empty.";
+    public final String UNKNOWN_COMMAND_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0FOOPS!!! I'm sorry, but I don't know what that means :-(";
+    public final String DESCRIPTION_FORMAT_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0FOOPS!!! The description of %s need to be %s.";
+    public final String SUBDESCRIPTION_MISSING_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0FOOPS!!! The description of a %s cannot be empty.";
+    public final String NO_SUBDESCRIPTION_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0FOOPS!!! \"%s\" cannot be found in the command";
+    public final String INVALID_SIZE_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0FOOPS!!! Invalid task number";
+
 
     public static void main(String[] args) {
         Duke myDuke = new Duke();
@@ -37,7 +50,11 @@ public class Duke {
         displayGreetingMessage();
         while (myScanner.hasNextLine()) {
             String[] userInput = readCommand();
-            executeCommand(userInput);
+            try {
+                executeCommand(userInput);
+            } catch (DukeException e) {
+                printLines(START_HORIZONTAL_LINE, e.getMessage(), END_HORIZONTAL_LINE);
+            }
         }
     }
 
@@ -79,21 +96,52 @@ public class Duke {
      * Runs the commands entered by the user.
      * @param commands is the last command entered by the user
      */
-    public void executeCommand(String[] commands) {
-        if (commands[0].equals("bye") && commands.length == 1) {
-            performsByeCommand();
-        } else if (commands[0].equals("list") && commands.length == 1) {
-            performsListCommand();
-        } else if (commands[0].equals("done") && commands.length == 2) {
-            performsDoneCommand(Integer.parseInt(commands[1]));
-        } else if (commands[0].equals("todo") && commands.length > 1) {
-            performsTodoCommand(commands);
+    public void executeCommand(String[] commands) throws DukeException {
+        if (commands[0].equals("bye")) {
+            if (commands.length == 1) {
+                performsByeCommand();
+            } else {
+                throw new DukeException(UNKNOWN_COMMAND_EXCEPTION);
+            }
+        } else if (commands[0].equals("list")) {
+            if (commands.length == 1) {
+                performsListCommand();
+            } else {
+                throw new DukeException(UNKNOWN_COMMAND_EXCEPTION);
+            }
+        } else if (commands[0].equals("done")) {
+            try {
+                if (commands.length == 2) {
+                    performsDoneCommand(Integer.parseInt(commands[1]));
+                } else if (commands.length == 1) {
+                    throw new DukeException(String.format(DESCRIPTION_MISSING_EXCEPTION, "done"));
+                } else {
+                    throw new DukeException(UNKNOWN_COMMAND_EXCEPTION);
+                }
+            } catch (NumberFormatException e) {
+                printLines(START_HORIZONTAL_LINE, String.format(DESCRIPTION_FORMAT_EXCEPTION, "done", "number"),
+                        END_HORIZONTAL_LINE);
+            }
+        } else if (commands[0].equals("todo")) {
+            if (commands.length > 1) {
+                performsTodoCommand(commands);
+            } else if (commands.length == 1){
+                throw new DukeException(String.format(DESCRIPTION_MISSING_EXCEPTION, "todo"));
+            }
         } else if (commands[0].equals("deadline")) {
-            performsDeadlineCommand(commands);
+            if (commands.length > 1) {
+                performsDeadlineCommand(commands);
+            } else if (commands.length == 1) {
+                throw new DukeException(String.format(DESCRIPTION_MISSING_EXCEPTION, "deadline"));
+            }
         } else if (commands[0].equals("event")) {
-            performsEventsCommand(commands);
+            if (commands.length > 1) {
+                performsEventsCommand(commands);
+            } else if (commands.length == 1) {
+                throw new DukeException(String.format(DESCRIPTION_MISSING_EXCEPTION, "event"));
+            }
         } else {
-            performsOthersCommand(String.join(" ", commands));
+            throw new DukeException(UNKNOWN_COMMAND_EXCEPTION);
         }
     }
 
@@ -103,11 +151,15 @@ public class Duke {
      * @param commands is the latest command inputted by the user
      * @return
      */
-    public String[] getTwoCommandArgs(String delimiter, String[] commands) {
+    public String[] getTwoCommandArgs(String delimiter, String[] commands) throws DukeException {
         String[] args = new String[2];
         List<String> commandList = Arrays.asList(commands);
         int indexOfSeparator = commandList.indexOf(delimiter);
-        if (indexOfSeparator != 1) {
+        if (indexOfSeparator == commandList.size() - 1) {
+            throw new DukeException(String.format(SUBDESCRIPTION_MISSING_EXCEPTION, delimiter));
+        } else if (indexOfSeparator == -1) {
+            throw new DukeException(String.format(NO_SUBDESCRIPTION_EXCEPTION, delimiter));
+        } else {
             args[0] = concatStrings(commandList.subList(1, indexOfSeparator).toArray(new String[indexOfSeparator - 1]));
             args[1] = concatStrings(commandList.subList(indexOfSeparator + 1, commandList.size()).toArray(new String[commandList.size() - (indexOfSeparator + 1)]));
         }
@@ -119,7 +171,7 @@ public class Duke {
      * Performs event command
      * @param commands is the latest command inputted by the user
      */
-    public void performsEventsCommand(String[] commands) {
+    public void performsEventsCommand(String[] commands) throws DukeException {
         String[] args = getTwoCommandArgs("/at", commands);
         Task eventTask = new Event(args[0], args[1]);
         taskList.add(eventTask);
@@ -132,7 +184,7 @@ public class Duke {
      * Performs deadline command.
      * @param commands is the latest command inputted by the user
      */
-    public void performsDeadlineCommand(String[] commands) {
+    public void performsDeadlineCommand(String[] commands) throws DukeException {
         String[] args = getTwoCommandArgs("/by", commands);
         Task deadlineTask = new Deadline(args[0], args[1]);
         taskList.add(deadlineTask);
@@ -169,19 +221,13 @@ public class Duke {
     }
 
     /**
-     * Performs others command.
-     * @param command is the last command entered by the user
-     */
-    public void performsOthersCommand(String command) {
-        addCommandsEntered(command);
-        printLines(START_HORIZONTAL_LINE, ADDED_MESSAGE + command, END_HORIZONTAL_LINE);
-    }
-
-    /**
      * Performs the command "done".
      * @param itemNum is the index of the task list
      */
-    public void performsDoneCommand(int itemNum) {
+    public void performsDoneCommand(int itemNum) throws DukeException {
+        if (itemNum > taskList.size() || itemNum < 1) {
+            throw new DukeException(INVALID_SIZE_EXCEPTION);
+        }
         taskList.get(itemNum - 1).completeTask();
         printLines(START_HORIZONTAL_LINE, DONE_MESSAGE,
                 COMMAND_INDENTATION + COMPLETION_INDENTATION + taskList.get(itemNum - 1).toString(), END_HORIZONTAL_LINE);

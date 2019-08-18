@@ -2,6 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+    /**
+     * Main method.
+     * 
+     * @param args arguments passed into main
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> list = new ArrayList<>();

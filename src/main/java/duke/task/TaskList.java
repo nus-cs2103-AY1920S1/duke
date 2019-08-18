@@ -10,7 +10,7 @@ public class TaskList {
     private final ArrayList<Task> tasks;
     
     /**
-     * Initialises an empty duke.task list.
+     * Initialises an empty task list.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -24,20 +24,20 @@ public class TaskList {
     }
     
     /**
-     * Adds an undone duke.task to the end of the list.
+     * Adds an undone task to the end of the list.
      */
     public void add(Task t) {
         tasks.add(t);
     }
     
     /**
-     * Gets the duke.task at one-indexed position i in the list.
+     * Gets the task at one-indexed position i in the list.
      *
      * <code>get()</code>, <code>markDone()</code> and <code>removeTask()</code>
      * all take an index i starting from 1, raising an exception if that index is invalid.
      *
-     * @param i The index of the duke.task to be retrieved, starting from 1.
-     * @return The duke.task at position i.
+     * @param i The index of the task to be retrieved, starting from 1.
+     * @return The task at position i.
      * @throws IndexOutOfBoundsException If position i is not in the list.
      */
     public Task get(int i) throws IndexOutOfBoundsException {
@@ -45,7 +45,7 @@ public class TaskList {
     }
     
     /**
-     * Marks the duke.task at index i as done.
+     * Marks the task at index i as done.
      *
      * @see #get(int)
      */
@@ -54,7 +54,7 @@ public class TaskList {
     }
     
     /**
-     * Removes the duke.task at index i and returns it.
+     * Removes the task at index i and returns it.
      *
      * @see #get(int)
      */

@@ -1,16 +1,16 @@
 package duke.task;
 
 /**
- * A generic duke.task, which can be marked as done.
+ * A generic task, which can be marked as done.
  */
 public class Task {
     private final String desc;
     private boolean done;
 
     /**
-     * Initialises a Task not yet done with the given description.
+     * Initialises a task not yet done with the given description.
      *
-     * @param desc A description of this duke.task.
+     * @param desc A description of this task.
      */
     Task(String desc) {
         this.desc = desc;
@@ -18,14 +18,14 @@ public class Task {
     }
     
     /**
-     * Marks this Task as done.
+     * Marks this task as done.
      */
     void markDone() {
         done = true;
     }
     
     /**
-     * Gets a Unicode character representing whether this Task is done
+     * Gets a Unicode character representing whether this task is done
      * (tick for yes, cross for no).
      */
     private String getDoneChar() {
@@ -33,7 +33,7 @@ public class Task {
     }
     
     /**
-     * Returns a string representation of this Task.
+     * Returns a string representation of this task.
      *
      * @return The desired string representation.
      */

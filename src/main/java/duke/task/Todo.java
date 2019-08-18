@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Class representing a duke.task to be done, but not at any particular time.
+ * Class representing a task to be done, but not at any particular time.
  */
 public class Todo extends Task {
     /**

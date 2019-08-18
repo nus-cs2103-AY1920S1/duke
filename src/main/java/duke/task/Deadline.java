@@ -1,22 +1,27 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Class representing a deadline, a duke.task to be completed by a certain time.
+ * Class representing a deadline, a task to be completed by a certain time.
  */
 public class Deadline extends Task {
-    private final String by;
+    private final LocalDateTime by;
     private static final Pattern PAT = Pattern.compile("(.+) /by (.+)");
+    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy HH:mm");
 
     /**
      * Initialises a Deadline from its description and its time.
      *
-     * @param desc A description of the duke.task which is under deadline.
-     * @param by The time by which this duke.task must be done.
+     * @param desc A description of the task which is under deadline.
+     * @param by The time by which this task must be done.
      */
-    private Deadline(String desc, String by) {
+    private Deadline(String desc, LocalDateTime by) {
         super(desc);
         this.by = by;
     }
@@ -37,7 +42,12 @@ public class Deadline extends Task {
             throw new IllegalArgumentException("Deadline description " +
                     "must include /by surrounded by spaces.");
         }
-        return new Deadline(m.group(1), m.group(2));
+
+        try {
+            return new Deadline(m.group(1), LocalDateTime.parse(m.group(2), inputFormatter));
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Time must be in the format day#/month#/yyyy hhmm.");
+        }
     }
     
     /**
@@ -47,6 +57,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(displayFormatter) + ")";
     }
 }

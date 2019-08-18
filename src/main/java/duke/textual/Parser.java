@@ -19,11 +19,11 @@ public class Parser {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Parses a duke.command from its two parts and returns a Command object.
+     * Parses a command from its two parts and returns a Command object.
      *
-     * @param cmd The duke.command's first word, which dictates the rest of the
-     *            duke.command's structure.
-     * @param data The data associated with the duke.command, which may be the empty string.
+     * @param cmd The command's first word, which dictates the rest of the
+     *            command's structure.
+     * @param data The data associated with the command, which may be the empty string.
      * @return The corresponding Command object.
      */
     private Command parse(String cmd, String data) {

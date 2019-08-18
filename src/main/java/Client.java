@@ -44,6 +44,9 @@ public class Client {
             case "done":
                 this.completeTask(Integer.parseInt(description));
                 break;
+            case "delete":
+                this.deleteTask(Integer.parseInt(description));
+                break;
             default:
                 throw new InvalidCommandException();
             }
@@ -88,7 +91,7 @@ public class Client {
         this.storage.add(task);
         int numOfTasks = this.storage.getSize();
         this.echoer.echo("Got it. I've added this task:"
-                , "  " + task.toString()
+                , "  " + task
                 , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }
 
@@ -106,8 +109,18 @@ public class Client {
     }
 
     private void completeTask(int ordering) {
-        Task task = this.storage.getList().get(ordering-1);
+        Task task = this.storage.getList().get(ordering - 1);
         task.markAsDone();
-        this.echoer.echo("Nice! I've marked this task as done:", "  " + task.toString());
+        this.echoer.echo("Nice! I've marked this task as done:", "  " + task);
+    }
+
+    private void deleteTask(int ordering) {
+        List<Task> taskList = this.storage.getList();
+        Task task = taskList.get(ordering - 1);
+        taskList.remove(ordering - 1);
+        int numOfTasks = this.storage.getSize();
+        this.echoer.echo("Noted. I've removed this task:"
+                , "  " + task
+                , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }
 }

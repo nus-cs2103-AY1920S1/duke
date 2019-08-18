@@ -13,7 +13,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String doneSymbol = isDone ? /* "[\u2713]" : "[\u2718]"; */ "[tick]" : "[cross]";
+        String doneSymbol = isDone ? "[\u2713]" : "[\u2718]"; /* "[tick]" : "[cross]"; */
         return doneSymbol + " " + description;
     }
 }

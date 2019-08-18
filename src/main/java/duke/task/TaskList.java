@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -8,6 +10,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
+    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     
     /**
      * Initializes an empty task list.
@@ -31,10 +34,10 @@ public class TaskList {
                 t = new Todo(fields[2]);
                 break;
             case "E":
-                t = new Event(fields[2], fields[3]);
+                t = new Event(fields[2], LocalDateTime.parse(fields[3], inputFormatter));
                 break;
             case "D":
-                t = new Deadline(fields[2], fields[3]);
+                t = new Deadline(fields[2], LocalDateTime.parse(fields[3], inputFormatter));
                 break;
             default:
                 t = new Todo("nothing");

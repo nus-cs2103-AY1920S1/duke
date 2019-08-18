@@ -63,10 +63,10 @@ public class Deadline extends Task {
     /**
      * Exports this Deadline for saving to disk.
      *
-     * @return A string representation of this task containing the type marker E and a time.
+     * @return A string representation of this task containing the type marker D and a time.
      */
     @Override
     public String export() {
-        return "D|" + super.export() + "|" + by;
+        return "D|" + super.export() + "|" + by.format(inputFormatter);
     }
 }

@@ -67,6 +67,6 @@ public class Event extends Task {
      */
     @Override
     public String export() {
-        return "E|" + super.export() + "|" + at;
+        return "E|" + super.export() + "|" + at.format(inputFormatter);
     }
 }

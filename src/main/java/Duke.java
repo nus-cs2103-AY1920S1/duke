@@ -6,10 +6,13 @@ public class Duke {
     public static final String LONG_LINE = "____________________________________________________________";
     public static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String BYE_STR = "Bye. Hope to see you again soon!";
+    public static final String LIST_STR = "Here are the tasks in your list:";
+    public static final String DONE_STR = "Nice! I've marked this task as done:";
     public static final String BYE_CMD = "bye";
+    public static final String DONE_CMD = "done";
     public static final String LIST_CMD = "list";
 
-    private static String[] taskList = new String[MAX_TASKS];
+    private static Task[] taskList = new Task[MAX_TASKS];
     private static int taskCount = 0;
 
     public static void main(String[] args) {
@@ -28,9 +31,12 @@ public class Duke {
     }
 
     public static void processCommand(String command) {
-        switch (command) {
+        switch (command.split(" ")[0]) {
         case LIST_CMD:
             printList();
+            break;
+        case DONE_CMD:
+            markTaskAsDone(taskList[Integer.parseInt(command.split(" ")[1]) - 1]);
             break;
         default:
             addTask(command);
@@ -38,12 +44,21 @@ public class Duke {
         }
     }
 
+    public static void markTaskAsDone(Task doneTask) {
+        doneTask.markAsDone();
+        printWithLongLines(
+            DONE_STR
+            + "\n"
+            + doneTask
+        );
+    }
+
     public static void printList() {
-        String wholeList = "";
+        String wholeList = LIST_STR + "\n";
         
         for (int i = 0; i < taskCount; i++) {
             wholeList += String.valueOf(i + 1)
-                + ". "
+                + "."
                 + taskList[i];
             
             if (i < taskCount - 1) {
@@ -55,7 +70,7 @@ public class Duke {
     }
 
     public static void addTask(String desc) {
-        taskList[taskCount] = desc;
+        taskList[taskCount] = new Task(desc);
         taskCount++;
         printWithLongLines(
             "added: "

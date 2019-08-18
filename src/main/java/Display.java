@@ -78,9 +78,18 @@ class Display implements TaskObserver {
         Display.printSection(printxs);
     }
 
-    public static void printAddTaskSection(String taskDetails) {
-        String outputMsg = "added: " + taskDetails;
-        Display.printSection(outputMsg);
+    public static void printAddTaskSection(String taskDetails,
+            int totalTasks) {
+        ArrayList<String> printxs = new ArrayList<>();
+        String headerMsg = "Got it. I've added this task:";
+        String outputMsg = "  " + taskDetails;
+        String footerMsg = "Nyow you have "
+           + totalTasks + " tasks in the wist.";
+
+        printxs.add(headerMsg);
+        printxs.add(outputMsg);
+        printxs.add(footerMsg);
+        Display.printSection(printxs);
     }        
 
     public static void printDoneTaskSection(String taskDetails) {

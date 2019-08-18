@@ -2,10 +2,12 @@ import java.util.Iterator;
 class FridayController implements ControllerInterface {
     private TaskModelInterface model;
     private Display display;
+    private TaskCreator taskCreator;
 
     public FridayController(TaskModelInterface model) {
         this.model = model;
-        display = new Display(this, model);
+        this.display = new Display(this, model);
+        this.taskCreator = new BasicTaskCreator();
     }
 
     public void start() {
@@ -17,12 +19,13 @@ class FridayController implements ControllerInterface {
     }
 
     public void addTask(String command) {
-        // L2: task only has name
-        // L2.2: simple factory to get task
 //        TaskInterface task = new TaskImplementation(command);
-        TaskInterface task = TaskImplementation.makeTask(command);
+       // TaskInterface task = TaskImplementation.makeTask(command);
+        TaskInterface task = taskCreator.createTask(command);
         this.model.addTask(task);
-        this.display.printAddTaskSection(task.toString());
+        this.display
+            .printAddTaskSection(task.toString(),this.model.getTotalTasks());
+                
     }
 
     public void doneTask(String command) {

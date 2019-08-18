@@ -3,9 +3,10 @@ import java.util.Scanner;
 
 public class Duke {
     protected static ArrayList<Task> listOfTasks = new ArrayList<>();
+    protected static Scanner sc;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 

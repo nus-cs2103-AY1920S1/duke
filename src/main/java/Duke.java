@@ -12,6 +12,12 @@ public class Duke {
         //Store command-line input as String
         String input = "";
 
+        //Create array of tasks
+        String[] list = new String[100];
+
+        //Set index of number of task
+        int n = 0;
+
         //Read command-line input with Scanner
         Scanner scanner = new Scanner(System.in);
 
@@ -28,12 +34,27 @@ public class Duke {
             // Get entire line of input from command-line
             input = scanner.nextLine();
 
-            //Echo all commands entered by user, except "bye", exit loop
+            //Store whatever text entered, except "bye", exit loop
             if (input.equals("bye")) break;
-            System.out.println("    ____________________________________________________________");
-            System.out.println("     " + input);
+
+            if (input.equals("list")) {
+                System.out.println("    ____________________________________________________________");
+                for (int i = 0; i < n; i++) {
+                    System.out.println("     " + (i+1) + ". " + list[i]);
+                }
+            }
+            else {
+                //Store text in array
+                list[n] = input;
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     added: " + input);
+
+                //After storing user input into array, increment index
+                n += 1;
+            }
             System.out.println("    ____________________________________________________________");
             System.out.println("");
+
         }
         //Closing statement
         System.out.println("    ____________________________________________________________");

@@ -1,6 +1,13 @@
-package java;
+package duke;
 
-public interface Command {
-    String getName();
-    String execute(String[] args);
+abstract public class Command {
+    protected String name;
+    protected Duke duke;
+    public Command(Duke duke) {
+        this.duke = duke;
+    }
+    public String getName() {
+        return name;
+    };
+    abstract public void execute(String[] args);
 }

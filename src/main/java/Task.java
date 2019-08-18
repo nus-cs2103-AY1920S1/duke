@@ -1,14 +1,14 @@
 class Task {
-  private String event;
+  private String task;
   private boolean completed;
 
-  public Task(String event) {
-    this.event = event;
+  public Task(String task) {
+    this.task = task;
     this.completed = false;
   }
 
-  public String getEvent() {
-    return this.event;
+  public String getTask() {
+    return this.task;
   }
 
   public boolean isComplete() {
@@ -19,8 +19,16 @@ class Task {
     this.completed = true;
   }
 
+  private String tickOrCross() {
+    if(this.completed) {
+      return TaskManager.TICK;
+    } else {
+      return TaskManager.CROSS;
+    }
+  }
+
   @Override
   public String toString() {
-    return this.event;
+    return "[" + tickOrCross() + "] " + this.task;
   }
 }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.io.UnsupportedEncodingException;
 
 class TaskManager {
-  private static final String TICK = "\u2713";
-  private static final String CROSS = "\u2717";
+  public static final String TICK = "\u2713";
+  public static final String CROSS = "\u2717";
+
   private Scanner sc;
   private PrintStream ps;
   private ArrayList<Task> list;
@@ -20,55 +21,121 @@ class TaskManager {
   public void initializeTasks() {
     while(sc.hasNextLine()) {
       String input = sc.nextLine();
-      switch(input) {
-        case "list" :                                         
-          printList();
-          break;
-        case "bye" :
-          System.out.println("Bye. Hope to see you again soon!");
-          return;
-        default :
-          // Splits the string to check if the inital string is a "done" event
-          // If it is done, then we check if the done event is valid, otherwise we treat
-          // it as a "add" event
-          String[] arr = input.split(" ", 2);
-          if(arr[0].equals("done")) {
-            Integer index;
+      String[] inputArr = input.split(" ", 2);
+      if(inputArr.length == 1) {
+        switch(inputArr[0]) {
+          case "list" :
+            printList();
+            break;
+          case "bye" :
+            System.out.println("Bye. Hope to see you again soon!");
+            return;
+          default :
+            checkInputError(inputArr[0]);
+            break;
+        }
+      } else {
+        String givenTask = inputArr[1];
+        String[] taskArr;
+        switch(inputArr[0]) {
+          case "todo" :
+            Todo todo = new Todo(givenTask);
+            list.add(todo);
+            printTask(todo);
+            break;
+          case "deadline" :
+            taskArr = givenTask.split(" /by ", 2);
+            if(taskArr.length == 1) {
+              throwTaskError(inputArr[0]);
+              break;
+            }
+            Deadline deadline = new Deadline(taskArr[0], taskArr[1]);
+            list.add(deadline);
+            printTask(deadline);
+            break;
+          case "event" :
+            taskArr = givenTask.split(" /at ", 2);
+            if(taskArr.length == 1) {
+              throwTaskError(inputArr[0]);
+              break;
+            }
+            Event event = new Event(taskArr[0], taskArr[1]);
+            list.add(event);
+            printTask(event);
+            break;
+          case "done" :
             try {
-              index = Integer.parseInt(arr[1]);
-            } catch(Exception e) {
-              index = null;
+              Integer.parseInt(givenTask);
+            } catch (Exception e) {
+              System.out.println("Oof. Done requires a number behind");
+              break;
             }
-            if(index != null) {
-              try {
-                list.get(index - 1);
-              } catch(Exception e) {
-                throw new java.lang.Error("Input index is out of bound");
-              }
-              Task currTask = list.get(index - 1);
-              currTask.complete();
-              System.out.println("Nice! I've marked this task as done: ");
-              ps.println("  " + "[" + TICK + "] " + currTask);
-              continue;
+            Integer taskNum = Integer.parseInt(givenTask);
+            try {
+              list.get(taskNum - 1);
+            } catch (Exception e) {
+              System.out.println("Oof. The given task number is not found");
+              break;
             }
-          }
-          Task task = new Task(input);
-          list.add(task);
-          System.out.println("Added: " + task);
-          break;
+            Task task = list.get(taskNum - 1);
+            task.complete();
+            System.out.println("Nice! I've marked this task as done: ");
+            ps.println("  " + task.toString());
+        }
+      }
+      System.out.println();
+    }
+  }
+
+  private void printTask(Task task) {
+    System.out.println("Got it. I've added this task: ");
+    ps.println("  " + task.toString());
+    System.out.println("Now you have " + this.list.size() +  " tasks in the list.");
+  }
+
+  // Prints the stored data given by the user.
+  private void printList() {
+    System.out.println("Here are the tasks in your list:");
+    for(int i = 0; i < this.list.size(); i++) {
+      if(this.list.get(i).isComplete()) {
+        ps.println((i + 1) + ". " + this.list.get(i));
+      } else {
+        ps.println((i + 1) + ". " + this.list.get(i));
       }
     }
   }
 
-  // Prints the stored data given by the user.
-  public void printList() {
-    System.out.println("Here are the tasks in your list:");
-    for(int i = 0; i < this.list.size(); i++) {
-      if(this.list.get(i).isComplete()) {
-        ps.println((i + 1) + ". " + "[" + TICK + "] " + this.list.get(i));
-      } else {
-        ps.println((i + 1) + ". " + "[" + CROSS + "] " + this.list.get(i));
-      }
+  private void checkInputError(String input) {
+    switch(input) {
+      case "todo" :
+        System.out.println("OOPS!!! The description of a todo cannot be empty.");
+        break;
+      case "deadline" :
+        System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+        break;
+      case "event" :
+        System.out.println("OOPS!!! The description of a event cannot be empty.");
+        break;
+      case "done" :
+        System.out.println("Oof. Done requires a number behind");
+        break;
+      default :
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        break;
+    }
+  }
+
+  private void throwTaskError(String type) {
+    switch(type) {
+      case "deadline" :
+        System.out.println("Deadline requires a specific time using \'/\'");
+        break;
+      case "event" :
+        System.out.println("Event requires a specific time using \'/\'");
+        break;
+      default :
+        // Not supposed to happen
+        throw new java.lang.Error("Task Error thrown was of: " + type + " type");
     }
   }
 

@@ -18,7 +18,6 @@ public class Duke {
                     System.out.printf("%d. %s\n", index, i);
                     index++;
                 }
-                listOfInputs.add(input);
             } else {
                 listOfInputs.add(input);
                 System.out.println(input);

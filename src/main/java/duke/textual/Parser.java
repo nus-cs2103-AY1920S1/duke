@@ -48,7 +48,8 @@ public class Parser {
     }
 
     /**
-     * Scans the next line from standard input, returning a Command.
+     * Scans the next line from standard input, returning a Command. This removes the dependency
+     * on the Scanner class from other classes using this class.
      *
      * @return The Command object corresponding to the scanned line.
      */

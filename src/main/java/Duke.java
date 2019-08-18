@@ -18,13 +18,15 @@ public class Duke {
                 int counter = 0;
                 for (Task item : listOfInputs) {
                     counter++;
-                    System.out.println(counter + ".[" + item.getStatusIcon() + "] " + item);
+                    System.out.println(counter + "." + item.printWithStatus());
                 }
             } else {
                 String[] task = userInput.split(" ");
                 if (task[0].equals("done")) {
                     int taskNumber = Integer.parseInt(task[1]);
                     listOfInputs.get(taskNumber - 1).markedAsDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println(listOfInputs.get(taskNumber - 1).printWithStatus());
                 } else {
                     Task userTask = new Task(userInput);
                     System.out.println("added: " + userTask);

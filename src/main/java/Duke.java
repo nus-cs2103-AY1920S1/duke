@@ -5,6 +5,8 @@ public class Duke {
 
     private static final Scanner sc = new Scanner(System.in);
 
+    private static final ArrayList<String> userList = new ArrayList<String>();
+
     private static final String indentLine = "---------------------------------------------";
     private static final String introMessage = "Hello! I'm Duke\n" + "What can I do for you?\n";
     private static final String goodbyeMessage = "Bye. Hope to see you again soon!\n";
@@ -22,7 +24,12 @@ public class Duke {
                 break;
             }
 
-            printInput(input);
+            if(isList(input)) {
+                printList();
+            } else {
+                addToList(input);
+                printInputConfirmation(input);
+            }
 
         }
 
@@ -50,20 +57,49 @@ public class Duke {
         System.out.println(indentLine);
     }
 
-    private static void printInput(String input) {
+    private static void printInputConfirmation(String input) {
         System.out.println();
 
         System.out.println(indentLine);
 
-        System.out.println(input);
+        System.out.println("added: " + input);
 
         System.out.println();
 
         System.out.println(indentLine);
+
+        System.out.println();
+    }
+
+    private static void printList() {
+
+        int size = userList.size();
+
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        for(int i = 0; i < size; i++) {
+            System.out.println(i + 1 + ". " + userList.get(i));
+        }
+
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println();
+    }
+
+    private static void addToList(String input) {
+        userList.add(input);
     }
 
     private static boolean isBye(String input) {
         return input.equals("bye") || input.equals("Bye");
+    }
+
+    private static boolean isList(String input) {
+        return input.equals("list");
     }
 }
 

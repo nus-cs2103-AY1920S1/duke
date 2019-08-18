@@ -52,6 +52,11 @@ public class Duke {
                     listOfInputs.get(taskNumber - 1).markedAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(listOfInputs.get(taskNumber - 1));
+                } else if (instruction.equals("delete")) {
+                    int taskNumber = Integer.parseInt(task[1]);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(listOfInputs.remove(taskNumber - 1));
+                    System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                 } else {
                     try {
                         switch(instruction) {

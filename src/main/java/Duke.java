@@ -70,6 +70,13 @@ public class Duke {
                     System.out.println(newEvent.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     response = sc.next();
+                } else if (response.equals("delete")) {
+                    int index = Integer.parseInt(sc.nextLine().trim()) - 1;
+                    Task removedTask = tasks.remove(index);
+                    System.out.println("Got it. I've removed this task:");
+                    System.out.println(removedTask.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    response = sc.next();
                 } else {
                     throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

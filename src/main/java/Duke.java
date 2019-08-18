@@ -30,9 +30,33 @@ public class Duke {
                     System.out.println(separationLine + "\n     Nice! I've marked this task as done:\n       "
                             + doneTask + "\n" + separationLine);
                     break;
+                case "todo":
+                    ToDo todo = new ToDo(userInput.replace("todo ", ""));
+                    taskStore.add(todo);
+                    System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + todo
+                            + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                            + separationLine + "\n");
+                    break;
+                case "deadline":
+                    String[] splitStringD = userInput.split(" /by ");
+                    Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""),
+                            splitStringD[1]);
+                    taskStore.add(deadline);
+                    System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + deadline
+                            + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                            + separationLine + "\n");
+                    break;
+                case "event":
+                    String[] splitStringE = userInput.split(" /at ");
+                    Event event = new Event(splitStringE[0].replace("event ", ""), splitStringE[1]);
+                    taskStore.add(event);
+                    System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + event
+                            + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                            + separationLine + "\n");
+                    break;
                 default:
-                    taskStore.add(new Task(userInput));
-                    System.out.println(separationLine + "\n     added: " + userInput + "\n" + separationLine + "\n");
+//                    taskStore.add(new Task(userInput));
+//                    System.out.println(separationLine + "\n     added: " + userInput + "\n" + separationLine + "\n");
                     break;
             }
             userInput = scan.nextLine();

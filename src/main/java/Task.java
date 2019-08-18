@@ -1,6 +1,6 @@
 public class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -13,7 +13,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String doneSymbol = isDone ? "[\u2713]" : "[\u2718]";
+        String doneSymbol = isDone ? /* "[\u2713]" : "[\u2718]"; */ "[tick]" : "[cross]";
         return doneSymbol + " " + description;
     }
 }

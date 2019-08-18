@@ -23,32 +23,22 @@ public class Duke {
     }
 
     public static void processCommand(String command) {
-        System.out.println(
-            LONG_LINE
-            + "\n"
-            + command
-            + "\n"
-            + LONG_LINE
-            + "\n"
-        );
+        printWithLongLines(command);
     }
 
     public static void printGoodbye() {
-        System.out.println(
-            LONG_LINE
-            + "\n"
-            + BYE_STR
-            + "\n"
-            + LONG_LINE
-            + "\n"
-        );
+        printWithLongLines(BYE_STR);
     }
 
     public static void printGreeting() {
+        printWithLongLines(GREETING);
+    }
+
+    public static void printWithLongLines(String stringToPrint) {
         System.out.println(
             LONG_LINE
             + "\n"
-            + GREETING
+            + stringToPrint
             + "\n"
             + LONG_LINE
             + "\n"

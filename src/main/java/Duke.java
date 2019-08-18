@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
-    static final ArrayList<Task> listOfInputs = new ArrayList<>(100);
+    static List<Task> listOfInputs = new ArrayList<>(100);
 
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
@@ -18,19 +19,38 @@ public class Duke {
                 int counter = 0;
                 for (Task item : listOfInputs) {
                     counter++;
-                    System.out.println(counter + "." + item.printWithStatus());
+                    System.out.println(counter + "." + item.toString());
                 }
             } else {
                 String[] task = userInput.split(" ");
-                if (task[0].equals("done")) {
+                String instruction = task[0];
+                if(instruction.equals("done")) {
                     int taskNumber = Integer.parseInt(task[1]);
                     listOfInputs.get(taskNumber - 1).markedAsDone();
                     System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(listOfInputs.get(taskNumber - 1).printWithStatus());
+                    System.out.println(listOfInputs.get(taskNumber - 1));
+                } else if(instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")){
+                    System.out.println("Got it. I've added this task:");
+                    switch(instruction) {
+                        case "todo": {
+                            Task todo = new Todo(userInput.substring(5));
+                            listOfInputs.add(todo);
+                            System.out.println(todo);
+                            break;
+                        }
+                        case "deadline": {
+                            Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by")), userInput.substring(userInput.indexOf("/by") + 4));
+                            listOfInputs.add(deadline);
+                            System.out.println(deadline);
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
+                    }
+                    System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                 } else {
-                    Task userTask = new Task(userInput);
-                    System.out.println("added: " + userTask);
-                    listOfInputs.add(userTask);
+                    // ignore
                 }
             }
         }

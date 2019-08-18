@@ -5,17 +5,10 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static String stringFormatter(String s, String line) {
-        String newString = line
-                + String.format("\t %s\n", s)
-                + line;
-        return newString;
-    }
-
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
         String line = "\t____________________________________________________________\n";
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Task> list = new ArrayList<>();
         String greeting = line
                 + "\t Hello! I'm Duke\n"
                 + "\t What can I do for you?\n"
@@ -23,13 +16,26 @@ public class Duke {
         System.out.println(greeting);
         while (!sc.hasNext("bye")) {
             String s = sc.nextLine();
-            switch (s) {
+            String arr[] = s.split(" ");
+            String cmd = arr[0];
+            switch (cmd) {
+                case "done":
+                    int index = Integer.valueOf(arr[1]);
+                    Task task = list.get(index - 1);
+                    task.markAsDone();
+                    System.out.println(String.format(line
+                            + "\t Nice! I've marked this task as done:\n"
+                            + String.format("\t   %s %s\n", task.getStatusIcon(), task.getDescription())
+                            + line
+                    ));
+                    break;
                 case "list":
                     String stringlist = line
                             + IntStream
                             .range(0, list.size())
                             .mapToObj(i -> {
-                                return "\t " + String.format("%d. %s", i + 1, list.get(i)) + "\n";
+                                Task t = list.get(i);
+                                return "\t " + String.format("%d.%s %s", i + 1, t.getStatusIcon(), t.getDescription()) + "\n";
                             })
                             .reduce((x,y) -> x + y)
                             .get()
@@ -37,11 +43,13 @@ public class Duke {
                     System.out.println(stringlist);
                     break;
                 default:
-                    list.add(s);
-                    System.out.println(stringFormatter("added: " + s, line));
+                    //Task t = new Task("Hey");
+                    //t.markAsDone();
+                    list.add(new Task(s));
+                    System.out.println(String.format(line + String.format("\t added: %s\n", s) + line));
 
             }
         }
-        System.out.println(stringFormatter("Bye. Hope to see you again soon!", line));
+        System.out.println(line + "\t Bye. Hope to see you again soon!\n" + line);
     }
 }

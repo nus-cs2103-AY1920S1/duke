@@ -15,11 +15,15 @@ public class DukeLogic {
                                         + "|____/ \\__,_|_|\\_\\___|\n";
     private final String DUKE_WELCOME_MESSAGE = "Hello! I'm Duke\n\t What can I do for you?";
     private final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private final String DUKE_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task cannot be empty.";
+    private final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
+    private final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task index.";
+    private final String DUKE_ERR_MISSING_INDEX = "☹ OOPS!!! The index of the completed task is missing.";
     private final String SEPARATOR = "____________________________________________________________";
     private final int DUKE_MAXIMUM_TASKS = 100;
     private enum DukeCommand {
-        TODO, DEADLINE, EVENT, LIST, DONE, BYE
+        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
     }
 
     /*===============================
@@ -50,7 +54,9 @@ public class DukeLogic {
      */
     private String encapsulateOutputWithSeparator(String input) {
         sb.setLength(0);
-        sb.append("\t" + SEPARATOR + "\n").append("\t " + input + "\n").append("\t" + SEPARATOR + "\n");
+        sb.append("\t" + SEPARATOR + "\n");
+        sb.append("\t " + input + "\n");
+        sb.append("\t" + SEPARATOR + "\n");
         return sb.toString();
     }
 
@@ -115,7 +121,7 @@ public class DukeLogic {
 
                 case TODO:
                     if (inputTokens.length == 1) {
-                        displayToUser("☹ OOPS!!! The description of a todo cannot be empty.");
+                        displayToUser(DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE);
                     } else {
                         String todoTaskName = concatStringTokens(inputTokens, 1, (inputTokens.length - 1));
                         DukeTaskToDo dukeToDo = new DukeTaskToDo(todoTaskName);
@@ -125,7 +131,7 @@ public class DukeLogic {
 
                 case DEADLINE:
                     if (inputTokens.length == 1) {
-                        displayToUser("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        displayToUser(DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE);
                     } else {
                         int deadlineParameterIndex = getInputFlagParameterStartingIndex(inputTokens, "/by");
                         if (deadlineParameterIndex == -1) {
@@ -144,7 +150,7 @@ public class DukeLogic {
 
                 case EVENT:
                     if (inputTokens.length == 1) {
-                        displayToUser("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        displayToUser(DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE);
                     } else {
                         int eventParameterIndex = getInputFlagParameterStartingIndex(inputTokens, "/at");
                         if (eventParameterIndex == -1) {
@@ -169,20 +175,34 @@ public class DukeLogic {
                         try {
                             int taskIndex = Integer.parseInt(inputTokens[1]);
                             if (taskIndex < 1 || taskIndex >= userDukeTasks.size()) {
-                                displayToUser("☹ OOPS!!! Please enter a valid task index value.");
+                                displayToUser(DUKE_ERR_INDEX_OUT_OF_BOUNDS);
                             } else {
                                 markDukeTaskComplete(taskIndex);
                             }
                         } catch (NumberFormatException ex) {
-                            displayToUser("☹ OOPS!!! Please only enter numeric values for the task index.");
+                            displayToUser(DUKE_ERR_INVALID_INDEX);
                         }
                     } else {
-                        displayToUser("☹ OOPS!!! The index of the completed task is missing.");
+                        displayToUser(DUKE_ERR_MISSING_INDEX);
                     }
                     break;
+
+                case DELETE:
+                    if (inputTokens.length == 2) {
+                        try {
+                            int taskIndex = Integer.parseInt(inputTokens[1]);
+                            if (taskIndex < 1 || taskIndex > userDukeTasks.size()) {
+                                displayToUser(DUKE_ERR_INDEX_OUT_OF_BOUNDS);
+                            } else {
+                                deleteDukeTask(taskIndex);
+                            }
+                        } catch (NumberFormatException ex) {
+                            displayToUser(DUKE_ERR_INVALID_INDEX);
+                        }
+                }
             }
         } catch (IllegalArgumentException ex) {
-            displayToUser(DUKE_UNKNOWN_COMMAND_MESSAGE);
+            displayToUser(DUKE_ERR_UNKNOWN_COMMAND_MESSAGE);
         }
     }
 
@@ -195,8 +215,9 @@ public class DukeLogic {
     private void addToDukeTasks(DukeTask inputTask) {
         userDukeTasks.add(inputTask);
         sb.setLength(0);
-        sb.append("Got it. I've added this task:\n\t   " + inputTask.toString() + "\n\t Now you have " +
-                userDukeTasks.size() + " tasks in the list.");
+        sb.append("Got it. I've added this task:\n\t   ");
+        sb.append(inputTask.toString());
+        sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
         displayToUser(sb.toString());
     }
 
@@ -231,6 +252,20 @@ public class DukeLogic {
             completedTask.setTaskComplete();
             sb.append("Nice! I've marked this task as done:\n\t   " + completedTask.toString());
         }
+        displayToUser(sb.toString());
+    }
+
+    /**
+     * Deletes the specified task index.
+     * @param taskIndex Index of the task to be deleted, following the printed list index from the "list" command.
+     */
+    private void deleteDukeTask(int taskIndex) {
+        DukeTask deletedTask = userDukeTasks.get(taskIndex - 1);
+        userDukeTasks.remove(taskIndex - 1);
+        sb.setLength(0);
+        sb.append("Noted. I've removed this task:\n\t   ");
+        sb.append(deletedTask.toString());
+        sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
         displayToUser(sb.toString());
     }
 

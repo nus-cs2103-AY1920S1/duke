@@ -16,6 +16,18 @@ public class Duke {
         System.out.println(indentation + horizontalLine + "\n");
     }
 
+    /**
+     * Adds a task to the list and prints information.
+     * @param task the new task to be added
+     * @param list a list of tasks
+     */
+    private static void addTask(Task task, ArrayList<Task> list) {
+        list.add(task);
+        printBlock("Got it. I've added this task:", "  " + task,
+                String.format("Now you have %d task%s in the list.",
+                        list.size(), list.size() > 1 ? "s" : ""));
+    }
+
     public static void main(String[] args) {
         String greeting = "Hello! I'm Duke";
         String question = "What can I do for you?";
@@ -36,17 +48,26 @@ public class Duke {
                 }
                 printBlock(text);
             } else {
-                String[] words = command.split(" ");
-                if (words[0].equals("done")) {
-                    int index = Integer.valueOf(words[1]) - 1;
+                String type = command.substring(0, command.indexOf(" "));
+                String description = command.substring(command.indexOf(" ") + 1);
+                if (type.equals("done")) {
+                    int index = Integer.valueOf(description) - 1;
                     list.get(index).setDone();
                     printBlock("Nice! I've marked this task as done:", "  " + list.get(index));
-                } else {
-                    list.add(new Task(command));
-                    printBlock("added: " + command);
+                } else if (type.equals("todo")) {
+                    addTask(new ToDo(description), list);
+                } else if (type.equals("deadline")) {
+                    int sep = description.indexOf(" /by ");
+                    addTask(new Deadline(description.substring(0, sep),
+                            description.substring(sep + 5)),
+                            list);
+                } else if (type.equals("event")) {
+                    int sep = description.indexOf(" /at ");
+                    addTask(new Event(description.substring(0, sep),
+                                    description.substring(sep + 5)),
+                            list);
                 }
             }
         }
     }
-
 }

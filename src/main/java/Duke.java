@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Duke {
 
+    public static ArrayList<String> storage = new ArrayList<>();
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -17,7 +18,20 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while(!input.equals("bye")) {
-            printOutput(input);
+            if(input.equals("list")){
+                String listOutput = "";
+                for(int i = 0; i < storage.size(); i++){
+                    listOutput += (i+1) + ". " + storage.get(i);
+                    if(i+1 != storage.size()){
+                        listOutput += "\n";
+                    }
+                }
+                printOutput(listOutput);
+            }
+            else {
+                storage.add(input);
+                printOutput("added: " + input);
+            }
             input = sc.nextLine();
         }
         printOutput("Bye. Hope to see you again soon!");

@@ -25,8 +25,9 @@ public class Task {
     }
     
     /**
-     * Gets a Unicode character representing whether this task is done
-     * (tick for yes, cross for no).
+     * Gets a Unicode character representing whether this task is done.
+     *
+     * @return U+2713 (tick) if this task is done, U+2718 (cross) otherwise.
      */
     private String getDoneChar() {
         return done ? "\u2713" : "\u2718";

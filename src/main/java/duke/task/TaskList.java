@@ -52,6 +52,9 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in this list.
+     *
+     * @returns The size of this instance's list, which is zero if and only if
+     * said list is empty.
      */
     public int size() {
         return tasks.size();
@@ -59,6 +62,8 @@ public class TaskList {
     
     /**
      * Adds an undone task to the end of the list.
+     *
+     * @param t The task to be added.
      */
     public void add(Task t) {
         tasks.add(t);

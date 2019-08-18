@@ -29,6 +29,7 @@ public class AddCommand extends Command {
         tl.add(t);
         ui.printMessage("Got it. I've added this task:");
         ui.printMessage("  " + t);
-        ui.printNumTasks(tl);
+        int n = tl.size();
+        ui.printMessage(String.format("Now you have %d task%s in the list.", n, n == 1 ? "" : "s"));
     }
 }

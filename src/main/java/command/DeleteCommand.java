@@ -34,7 +34,8 @@ public class DeleteCommand extends Command {
             Task t = tl.delete(i);
             ui.printMessage("Noted. I've removed this task:");
             ui.printMessage("  " + t);
-            ui.printNumTasks(tl);
+            int n = tl.size();
+            ui.printMessage(String.format("Now you have %d task%s in the list.", n, n == 1 ? "" : "s"));
         } catch (IndexOutOfBoundsException e) {
             ui.printError("Task index must be between 1 and " + tl.size() + ".");
         }

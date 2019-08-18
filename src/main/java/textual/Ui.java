@@ -1,7 +1,5 @@
 package textual;
 
-import task.TaskList;
-
 /**
  * Class that handles messages shown to the user of this application.
  * It does not need to be instantiated with any tasks; these are passed
@@ -33,15 +31,5 @@ public class Ui {
      */
     public void printError(String msg) {
         printMessage("\u2639 OOPS!!! " + msg);
-    }
-    
-    /**
-     * Prints the number of tasks in the given task list.
-     *
-     * @param tl The list whose tasks are to be counted.
-     */
-    public void printNumTasks(TaskList tl) {
-        int n = tl.size();
-        printMessage(String.format("Now you have %d task%s in the list.", n, n == 1 ? "" : "s"));
     }
 }

@@ -1,6 +1,7 @@
 public class Task {
-    String description = "";
+    String description;
     boolean isDone;
+    String typeOfTask = "";
 
     public Task(String description) {
         this.description = description;
@@ -17,6 +18,6 @@ public class Task {
     @Override
     public String toString() {
         String statusIcon = isDone ? "[\u2713]" : "[\u2718]";
-        return statusIcon + " " + description;
+        return String.format("%s%s %s", typeOfTask, statusIcon, description);
     }
 }

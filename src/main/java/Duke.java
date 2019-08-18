@@ -46,16 +46,36 @@ public class Duke {
                 }
                 System.out.print(displayedMessage);
             } else if (userCommand.startsWith("done")) {
+                //program marks a Task as done
                 System.out.println(TABS + "Nice! I've marked this task as done: ");
                 int taskNumber = Character.getNumericValue(userCommand.charAt(5));
                 Task taskCompleted = taskList.get(taskNumber - 1);
                 taskCompleted.markAsDone();
                 System.out.println(TABS + "  " + taskCompleted.toString());
             } else {
-                //program creates new Task and adds Task to taskList
-                Task userTask = new Task(userCommand);
+                //program checks what type of task it is
+                Task userTask;
+                if (userCommand.startsWith("todo")) {
+                    String task = userCommand.substring(5);
+                    userTask = new ToDo(task);
+                } else if (userCommand.startsWith("deadline")) {
+                    String task = userCommand.replaceFirst("deadline ", "");
+                    String[] taskInformation = task.split(" /by ");
+                    userTask = new Deadline(taskInformation[0], taskInformation[1]);
+                } else {
+                    String task = userCommand.replaceFirst("event ", "");
+                    String[] taskInformation = task.split(" /at ");
+                    userTask = new Event(taskInformation[0], taskInformation[1]);
+                }
                 taskList.add(userTask);
-                System.out.println(TABS + "added: " + userCommand);
+                System.out.println(TABS + "Got it. I've added this task:");
+                System.out.println(TABS + "  " + userTask.toString());
+
+                if (taskList.size() == 1) {
+                    System.out.printf("%sNow you have %d task in the list.\n", TABS, taskList.size());
+                } else {
+                    System.out.printf("%sNow you have %d tasks in the list.\n", TABS, taskList.size());
+                }
             }
             System.out.println(LINE);
             userCommand = sc.nextLine();

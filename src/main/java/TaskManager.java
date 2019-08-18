@@ -78,9 +78,16 @@ class TaskManager {
               break;
             }
             Task task = list.get(taskNum - 1);
+            if(task.isComplete()) {
+              System.out.println("Task is already completed!");
+              break;
+            }
             task.complete();
             System.out.println("Nice! I've marked this task as done: ");
             ps.println("  " + task.toString());
+            break;
+          default :
+            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
       }
       System.out.println();
@@ -117,7 +124,7 @@ class TaskManager {
         System.out.println("OOPS!!! The description of a event cannot be empty.");
         break;
       case "done" :
-        System.out.println("Oof. Done requires a number behind");
+        System.out.println("OOPS!!! The description of a done cannot be empty.");
         break;
       default :
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -128,10 +135,10 @@ class TaskManager {
   private void throwTaskError(String type) {
     switch(type) {
       case "deadline" :
-        System.out.println("Deadline requires a specific time using \'/\'");
+        System.out.println("Deadline requires a specified time. E.g. \'/by Sunday\'");
         break;
       case "event" :
-        System.out.println("Event requires a specific time using \'/\'");
+        System.out.println("Event requires a specified time. E.g. \'/at Mon 2-4pm\'");
         break;
       default :
         // Not supposed to happen

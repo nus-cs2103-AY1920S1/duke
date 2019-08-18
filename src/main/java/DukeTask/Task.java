@@ -1,4 +1,4 @@
-package Task;
+package DukeTask;
 
 abstract public class Task {
     String description, timing;

@@ -1,4 +1,4 @@
-package Task;
+package DukeTask;
 
 public class TodoTask extends Task {
     public TodoTask(String description) {

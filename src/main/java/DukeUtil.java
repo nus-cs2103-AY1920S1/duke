@@ -6,7 +6,10 @@ public class DukeUtil {
             output.append(strings[i]);
             output.append(delimiter);
         }
-        output.append(strings[to]);
+
+        if (to >= from) {
+            output.append(strings[to]);
+        }
 
         return output.toString();
     }

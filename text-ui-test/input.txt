@@ -1,10 +1,19 @@
-list
-todo buy some apples
-event tutorial /at thurs 11am to 12pm
-an invalid command
+list list list
+a very invalid command
+bye bye
+done 1
+event /at 2359
+deadline /by sunday 2359
+deadline submit report /by
+event tutorial /at
+event tutorial /at Mon 2-4pm
+deadline submit report /by Fri 2359
+todo
+todo just a todo
 list
 done 2
-deadline programming assignment /by thurs 2359
+list
+done 100
 list
 done 1
 list

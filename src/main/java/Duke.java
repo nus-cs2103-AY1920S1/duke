@@ -39,7 +39,7 @@ public class Duke {
                             String error = "\u2639 OOPS!!! The description of todo cannot be empty.\n";
                             throw new DukeException(error);
                         }
-                        tasks[index] = new Todo(command);
+                        tasks[index] = new Todo(command.substring(5));
                     } else if (command.substring(0, 5).equals("event")) {
                        if (command.length() == 5) { //check to throw for no description
                            String error = "\u2639 OOPS!!! The description of event cannot be empty.\n";

@@ -28,7 +28,15 @@ public class Duke {
                 int index = Integer.parseInt(command.split(" ")[1]);
                 done(index, tasks);
             } else {
-                addTask(command, tasks);
+                try {
+                    addTask(command, tasks);
+                } catch (DukeException exception){
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("\t ---------------------------------------------------------- \n");
+                    sb.append("\t " + exception.getMessage() + "\n");
+                    sb.append("\t ---------------------------------------------------------- \n");
+                    System.out.print(sb.toString());
+                }
             }
         }
     }
@@ -59,26 +67,43 @@ public class Duke {
         printLine();
     }
 
-    public static void addTask(String command, ArrayList<Task> tasks) {
+    public static void addTask(String command, ArrayList<Task> tasks) throws DukeException {
         printLine();
         Task newTask;
         if (command.startsWith("todo")) {
             String taskDetailsString = command.replaceFirst("todo", "").trim();
+            if (taskDetailsString.length() == 0) {
+                throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+            }
             newTask = new ToDo(taskDetailsString);
         } else {
             String[] taskDetails;
             if (command.startsWith("deadline")) {
                 String taskDetailsString = command.replaceFirst("deadline", "");
+                if (taskDetailsString.length() == 0) {
+                    throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                }
                 taskDetails = taskDetailsString.split("/by");
+                if (taskDetails.length < 2) {
+                    throw new DukeException("\u2639 OOPS!!! The date/time of a deadline cannot be empty.");
+                }
                 String taskDescription = taskDetails[0].trim();
                 String taskSpecifics = taskDetails[1].trim();
                 newTask = new Deadline(taskDescription, taskSpecifics);
-            } else {
+            } else if (command.startsWith("event")){
                 String taskDetailsString = command.replaceFirst("event", "");
+                if (taskDetailsString.length() == 0) {
+                    throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
+                }
                 taskDetails = taskDetailsString.split("/at");
                 String taskDescription = taskDetails[0].trim();
                 String taskSpecifics = taskDetails[1].trim();
+                if (taskDetails.length < 2) {
+                    throw new DukeException("\u2639 OOPS!!! The date/time of an event cannot be empty.");
+                }
                 newTask = new Event(taskDescription, taskSpecifics);
+            } else {
+                throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         tasks.add(newTask);
@@ -96,7 +121,7 @@ public class Duke {
     }
 
     public static void printLine() {
-        System.out.println("\t -------------------------------------");
+        System.out.println("\t ----------------------------------------------------------");
     }
 
 }

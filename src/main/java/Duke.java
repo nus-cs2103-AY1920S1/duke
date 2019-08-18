@@ -13,45 +13,86 @@ public class Duke {
         while(!input.equals("bye")) { //Read input until 'bye' command is entered
             //ADD TODO, DEADLINE, EVENT TASKS
             if(input.contains("todo") || input.contains("deadline") || input.contains("event")){
-                String command = input.substring(0, input.indexOf(" "));
-                String remaining = input.substring(input.indexOf(" ") + 1);
-                String item;
-                String date;
+                try {
+                    String command;
+                    String remaining;
+                    String item;
+                    String date;
 
-                switch(command){
-                    case "todo":
-                        Todo todo = new Todo(remaining);
-                        storage.add(todo);
-                        printOutput("  " + todo, true);
-                    break;
-                    case "deadline":
-                        item = remaining.substring(0, remaining.indexOf("/by") - 1);
-                        date = remaining.substring(remaining.indexOf("/by") + 4, remaining.length());
+                    //Check input is valid
+                    if(input.indexOf(" ") == -1 || (input.indexOf(" ") + 1) == -1){
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+                    else{
+                        command = input.substring(0, input.indexOf(" "));
+                        remaining = input.substring(input.indexOf(" ") + 1);
+                    }
 
-                        Deadline deadline = new Deadline(item, date);
-                        storage.add(deadline);
-                        printOutput("  " + deadline, true);
-                    break;
-                    case "event":
-                        item = remaining.substring(0, remaining.indexOf("/at") - 1);
-                        date = remaining.substring(remaining.indexOf("/at") + 4, remaining.length());
+                    switch (command) {
+                        case "todo":
+                            Todo todo = new Todo(remaining);
+                            storage.add(todo);
+                            printOutput("  " + todo, true);
+                            break;
+                        case "deadline":
+                            //Check input is valid
+                            if(remaining.indexOf("/by") == -1 || (input.indexOf("/by") + 4) == -1){
+                                throw new DukeException("Please ensure that /by and the date is included");
+                            }
+                            else{
+                                item = remaining.substring(0, remaining.indexOf("/by") - 1);
+                                date = remaining.substring(remaining.indexOf("/by") + 4, remaining.length());
+                            }
 
-                        Event event = new Event(item, date);
-                        storage.add(event);
-                        printOutput("  " + event, true);
-                    break;
-                    default:;
-                    break;
+                            Deadline deadline = new Deadline(item, date);
+                            storage.add(deadline);
+                            printOutput("  " + deadline, true);
+                            break;
+                        case "event":
+                            //Check input is valid
+                            if(remaining.indexOf("/at") == -1 || (input.indexOf("/at") + 4) == -1){
+                                throw new DukeException("Please ensure that /at and the date is included");
+                            }
+                            else{
+                                item = remaining.substring(0, remaining.indexOf("/at") - 1);
+                                date = remaining.substring(remaining.indexOf("/at") + 4, remaining.length());
+                            }
+
+                            Event event = new Event(item, date);
+                            storage.add(event);
+                            printOutput("  " + event, true);
+                            break;
+                        default:
+                            ;
+                            break;
+                    }
+                } catch(DukeException de){
+
+                } catch(Exception e){
+                    new DukeException("Something went wrong. Please try again.");
                 }
             }
             else if(input.contains("done")){ //DONE
-                int taskNo = Integer.parseInt(
-                                input.replace("done", "")
-                                .replace(" ", "")); //Removing 'done' and empty spaces
-                Task task = storage.get(taskNo - 1); //Minus 1 because the displayed list starts at 1
-                task.markAsDone();
+                try {
+                    int taskNo = Integer.parseInt(
+                            input.replace("done", "")
+                                    .replace(" ", "")); //Removing 'done' and empty spaces
+                    Task task = storage.get(taskNo - 1); //Minus 1 because the displayed list starts at 1
+                    if(task.isDone){
+                        throw new DukeException("This item has already been checked.");
+                    }
+                    else {
+                        task.markAsDone();
+                    }
 
-                printOutput("Nice! I've marked this task as done: \n  " + task, false);
+                    printOutput("Nice! I've marked this task as done: \n  " + task, false);
+                } catch(DukeException de){
+
+                } catch(NumberFormatException nfe) {
+                    new DukeException("Only numbers are allowed.");
+                } catch(IndexOutOfBoundsException ioobe){
+                    new DukeException("There is no such item in the list.");
+                }
             }
             else if (input.equals("list")) { //LIST ITEMS
                 String listOutput = "";
@@ -66,10 +107,8 @@ public class Duke {
                     }
                 }
                 printOutput(listOutput, false);
-            } else { //ADD DEFAULT TASK
-                Task newTask = new Task(input);
-                storage.add(newTask);
-                printOutput("added: " + input, false);
+            } else { //Invalid Command
+                new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             input = sc.nextLine();
         }

@@ -17,22 +17,46 @@ public class Duke {
         String textInput = sc.nextLine();
         while (!textInput.equals("bye")) {
             if (textInput.equals("list")) {
+                String isPlural = counter == 1 ? "is" : "are";
+                String taskIfPlural = counter == 1 ? "task" : "tasks";
+                System.out.println("Here " + isPlural + " the " + taskIfPlural + " in your list:");
                 for (int i = 1; i <= counter; i++) {
                     System.out.println(i + "." + task[i - 1]);
                 }
             } else {
-                String[] textInputSplit = textInput.split(" ");
-                if (textInputSplit[0].equals("done")) {
-                    int completedIndex = Integer.parseInt(textInputSplit[1]) - 1;
+                if (textInput.startsWith("done")) {
+                    int completedIndex = Integer.parseInt(textInput.replaceFirst("done ", "")) - 1;
                     Task markAsDoneTask = task[completedIndex];
                     markAsDoneTask.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(markAsDoneTask);
-                } else {
-                    System.out.println("added: " + textInput);
-                    task[counter] = new Task(textInput);
+                } else if (textInput.startsWith("todo")) {
+                    String description = textInput.replaceFirst("todo ", "");
+                    task[counter] = new Todo(description);
+
+                    System.out.println("Got it. I've added this task:\n" + task[counter]);
                     counter++;
+                    String taskIfPlural = counter == 1 ? "task" : "tasks";
+                    System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
+                } else if (textInput.startsWith("deadline")) {
+                    String removeTaskWord = textInput.replaceFirst("deadline ", "");
+                    String[] taskSplit = removeTaskWord.split(" /by ");
+                    task[counter] = new Deadline(taskSplit[0], taskSplit[1]);
+
+                    System.out.println("Got it. I've added this task:\n" + task[counter]);
+                    counter++;
+                    String taskIfPlural = counter == 1 ? "task" : "tasks";
+                    System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
+                } else if (textInput.startsWith("event")) {
+                    String removeTaskWord = textInput.replaceFirst("event ", "");
+                    String[] taskSplit = removeTaskWord.split(" /at ");
+                    task[counter] = new Event(taskSplit[0], taskSplit[1]);
+
+                    System.out.println("Got it. I've added this task:\n" + task[counter]);
+                    counter++;
+                    String taskIfPlural = counter == 1 ? "task" : "tasks";
+                    System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
                 }
             }
 

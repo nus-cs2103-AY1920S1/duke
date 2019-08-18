@@ -13,16 +13,19 @@ public class ToDoTask implements Task {
     }
 
     @Override
+    //Returns a copy of this task but with its completion status marked as done
     public Task getTaskMarkedAsDone() {
         return new ToDoTask(description, true);
     }
 
     @Override
+    //Returns a copy of this task but with its completion status marked as undone
     public Task getTaskMarkedUndone() {
         return new ToDoTask(description, false);
     }
 
     @Override
+    //Returns a string representation of the Task, including its type, completion status and description
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[T][");

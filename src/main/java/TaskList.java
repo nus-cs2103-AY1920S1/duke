@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
+    //Adds a task to the end of the TaskList
     public void add(Task task) {
         tasks.add(task);
     }
 
+    //Deletes the task at the specified index by decreasing the index of all subsequent entries by 1.
     public Task deleteAt(int index) {
         int realIndex = index - 1;
         Task deletedTask = tasks.get(realIndex);
@@ -14,23 +16,26 @@ public class TaskList {
         return deletedTask;
     }
     
+    //Replaces the task at the specified index with a clone marked as done
     public Task markAsDone(int index) {
         int realIndex = index - 1;
         tasks.set(index, tasks.get(index).getTaskMarkedAsDone());
         return tasks.get(index);
     }
 
+    //Returns whether or not the TaskList is empty
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
+    //Returns the number of elements in the TaskList
     public int size() {
         return tasks.size();
     }
 
     @Override
+    //Converts the TaskList into a readable String
     public String toString() {
-        //Convert the taskList into a readable String
         StringBuilder sb = new StringBuilder();
 
         int iterator = 1;

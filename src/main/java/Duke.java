@@ -10,9 +10,9 @@ public class Duke {
     private static String taskDoneMessage = "Good job! I've marked this task as done:\n  %s";
     private static String taskDeletedMessage = "No problem! I've deleted the task:\n %s\nYou've got %d tasks in your list.";
 
-    //private static ArrayList<Task> taskList = new ArrayList<>();
     private static TaskList tasks = new TaskList();
 
+    //Main method. Contains the interaction loop between Duke and the User.
     public static void main(String[] args) throws UnsupportedEncodingException{
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
@@ -39,10 +39,12 @@ public class Duke {
         sc.close();
     }
 
+    //returns Duke's helloMessage
     public String sayHi() {
         return DukeTextFormatter.makeFormattedText(helloMessage);
     }
 
+    //returns a DukeReply to be printed out, or a throws an error if input cannot be parsed by Duke
     public DukeReply processUserInput(String userInputString) throws DukeException {
         switch(identifyUserInputType(userInputString)){
         case Bye: //Duke will close down
@@ -79,7 +81,7 @@ public class Duke {
         }
     }
 
-    //Exists to make processUserInput a lot neater
+    //Exists to make processUserInput a lot neater, by identifying the type of command the User issued.
     private userInputType identifyUserInputType(String userInputString) {
         if(userInputString.toLowerCase().startsWith("bye")) {
             return userInputType.Bye;
@@ -100,6 +102,7 @@ public class Duke {
         }
     }
 
+    //Processes the Done case. Returns a Reply stating that this has been successful, and throws an Exception otherwise.
     private DukeReply processDoneCase(String userInputString) throws IndexNotInRangeException, NoTaskDescriptionException, IndexNotANumberException {
         String [] splitString = userInputString.split(" ");
         boolean indexExists = splitString.length > 1;
@@ -123,6 +126,7 @@ public class Duke {
         }
     }
 
+    //Processes the Delete case. Returns a Reply stating that this has been successful, and throws an Exception otherwise.
     private DukeReply processDeleteCase(String userInputString) throws IndexNotInRangeException, NoTaskDescriptionException, IndexNotANumberException {
         String [] splitString = userInputString.split(" ");
         boolean indexExists = splitString.length > 1;
@@ -146,6 +150,7 @@ public class Duke {
         }
     }
 
+    //Processes the Todo case. Returns a Reply stating that this has been successful, and throws an Exception otherwise.
     private DukeReply processTodoCase(String userInputString) throws NoTaskDescriptionException {
         //Retrieve relevant data from user input
         String taskDescription = userInputString.substring(4).trim();
@@ -162,6 +167,7 @@ public class Duke {
         }
     }
 
+    //Processes the Deadline case. Returns a Reply stating that this has been successful, and throws an Exception otherwise.
     private DukeReply processDeadlineCase(String userInputString) throws IncompleteInputException {
         //Retrieve relevant data from user input
         //Input is considered incomplete when there is no '/by'
@@ -182,6 +188,7 @@ public class Duke {
         }
     }
 
+    //Processes the Event case. Returns a Reply stating that this has been successful, and throws an Exception otherwise.
     private DukeReply processEventCase(String userInputString) throws IncompleteInputException {
         //Retrieve relevant data from user input
         //Input is considered incomplete when there is no '/at'
@@ -202,6 +209,7 @@ public class Duke {
         }
     }
 
+    //Used to identify the type of command issued by the User
     private enum userInputType {
         Bye, List, Done, Delete, ToDo, Deadline, Event, Invalid
     };

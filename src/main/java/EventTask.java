@@ -17,15 +17,18 @@ public class EventTask implements Task {
 
     @Override
     public Task getTaskMarkedAsDone() {
+        //Returns a copy of this task but with its completion status marked as done
         return new EventTask(description, timingString, true);
     }
 
     @Override
     public Task getTaskMarkedUndone() {
+        //Returns a copy of this task but with its completion status marked as undone
         return new EventTask(description, timingString, false);
     }
 
     @Override
+    //Returns a string representation of the Task, including its type, completion status, description and duration
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[E][");

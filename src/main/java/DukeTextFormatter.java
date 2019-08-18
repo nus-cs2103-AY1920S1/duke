@@ -3,6 +3,7 @@ public class DukeTextFormatter {
     private static final String FOUR_SPACE = "    ";
     private static final String FIVE_SPACE = "     ";
 
+    //Formats a given String to appear neater when printed.
     public static String makeFormattedText(String inputString) {
         //Splits the string into separate lines
         String [] splitString = inputString.split("\n");

@@ -12,6 +12,7 @@ public class Duke {
     private static final String goodbyeMessage = "Bye. Hope to see you again soon!";
     private static final String doneMessage = "Nice! I've marked this task as done:";
     private static final String addMessage = "Got it. I've added this task:";
+    private static final String deleteMessage = "Noted. I've removed this task:";
 
     public static void main(String[] args) {
 
@@ -30,11 +31,15 @@ public class Duke {
                 printList();
             } else if (input.startsWith("done")) {
                 processDoneTask(input);
-            } else {
+            } else if (input.startsWith("delete")) {
+                processDeletedTask(input);
+            }
+            else {
                 try {
                     processInputTask(input);
                 } catch(InvalidInputException e) {
                     System.out.println("InvalidInputException occurred: " + e);
+                    System.out.println();
                 }
             }
 
@@ -118,6 +123,30 @@ public class Duke {
         System.out.println();
     }
 
+    private static void printDeleteMessage(Task task) {
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println(deleteMessage);
+
+        System.out.println("    " + task);
+
+        int numTasks = taskList.size();
+
+        if (numTasks == 1) {
+            System.out.println("Now you have " + numTasks + " task in the list.");
+        } else {
+            System.out.println("Now you have " + numTasks + " tasks in the list.");
+        }
+
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println();
+    }
+
     private static void printList() {
 
         int size = taskList.size();
@@ -179,6 +208,18 @@ public class Duke {
                 printAddMessage(event);
             }
 
+    }
+
+    private static void processDeletedTask(String input) {
+        String[] stringArray = input.split(" ");
+
+        int taskNum = Integer.parseInt(stringArray[1]);
+
+        Task task = taskList.get(taskNum - 1);
+
+        taskList.remove(taskNum - 1);
+
+        printDeleteMessage(task);
     }
 
     private static String processInputDescription(String input) {

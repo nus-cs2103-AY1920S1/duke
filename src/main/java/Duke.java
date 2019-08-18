@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private static boolean is_bye = false;
-    private  static  ArrayList<String> tasks = new ArrayList<String>() ;
+    private  static  ArrayList<Task> tasks = new ArrayList<Task>() ;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -24,15 +24,35 @@ public class Duke {
                                 "see you again soon!");
                 is_bye = true;
 
-            }else if(input.equals("list")) {
+            } else if(input.equals("list")) {
+
                 for (int i = 0; i < tasks.size(); i++){
-                    String task = tasks.get(i);
+                    Task task = tasks.get(i);
                     int count = i + 1;
-                    System.out.println(count + ". " + task);
+                    String box;
+
+                    if(task.isDone() == true) {
+                        box = "[✓]";
+                    }else{
+                        box = "[✗]";
+                    }
+                    System.out.println(count + "." + box + " " + task.getTask());
                 }
+
+            } else if(input.indexOf("done") != -1){
+
+                String[] words = input.split(" ");
+                int index =Integer.parseInt(words[1]);
+                Task t = tasks.get(index-1);
+                t.completed();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("   [✓] "+ t.getTask());
+
             } else{
-                tasks.add(input);
+
+                tasks.add(new Task(input));
                 System.out.println("added: " + input);
+
             }
         }
 

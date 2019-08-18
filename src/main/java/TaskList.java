@@ -1,22 +1,41 @@
 import java.util.ArrayList;
 
-public class TaskList extends ArrayList<Task> {
+public class TaskList {
 	private ArrayList<Task> taskList;
 	
 	public TaskList() {
 		taskList = new ArrayList<Task>();
 	}
 
-	public void addTask(Task t) {
+	public Task addTask(Task t) {
 		taskList.add(t);
+		return t;
 	}
 
-	public void complete(int id) {
-		taskList.get(id - 1).complete();
+	public ArrayList<Task> list() {
+		return new ArrayList<Task>(taskList);
 	}
 
-	public Task remove(int id) {
-		return taskList.remove(id);
+	public int size() {
+		return taskList.size();
+	}
+
+	public Task complete(int id) throws DukeException {
+		try {
+			return taskList.get(id - 1).complete();
+		} catch (IndexOutOfBoundsException ex) {
+			//task id does not correspond to task in the list
+			throw new DukeNoCorrespondingTaskException(id);
+		}
+	}
+
+	public Task complete(String id) throws DukeException {
+		try {
+			return complete(Integer.parseInt(id));
+		} catch (NumberFormatException ex) {
+			throw new DukeIncorrectParameterTypeException(
+					"\"" + id + "\" cannot be converted to an integer. Please enter a valid integer as a parameter.");
+		}
 	}
 
 }

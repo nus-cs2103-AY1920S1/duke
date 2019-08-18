@@ -1,122 +1,81 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-	public enum Command {
-		TODO, DEADLINE, EVENT, DONE, LIST, BYE;
-		
-	}
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		TaskList taskList = new TaskList();
-		String logo = " ____        _        \n"
+	static Scanner scanner = new Scanner(System.in);
+	static Parser inputParser = new Parser();
+	static TaskList taskList = new TaskList();
+	static String logo = " ____        _        \n"
 			+ "|  _ \\ _   _| | _____ \n"
 			+ "| | | | | | | |/ / _ \\\n"
 			+ "| |_| | |_| |   <  __/\n"
 			+ "|____/ \\__,_|_|\\_\\___|\n";
-		String lineBreak = "    ___________________________________________________________\n";
-		String greetingMessage = logo 
-			+ lineBreak
-			+ "     Hello! I'm Duke\n"
-			+ "     What can I do for you?\n"
-			+ lineBreak;
-		String exitMessage = lineBreak
-			+ "     Bye. Hope to see you again soon!\n"
-			+ lineBreak;
-		boolean takingInput = true;
-
-		// print greeting message
-		System.out.println(greetingMessage);
-
-		// store console input as string
-		String input = scanner.nextLine();
-
-		// if input is not the exit command ("bye") process the input
+	static String lineBreak = "___________________________________________________________";
+	static boolean takingInput = true;
+	
+	public static void run() {
+		new Output(logo).print();
+		Output.setHeader(lineBreak);
+		Output.setFooter(lineBreak);
+		Output.setLeftBorder("    ");
+		Output.setLeftIndent(1);
+		new Output("Hello! I'm Duke :)", "What can I do for you?").print();
 		while (takingInput) {
-			String[] inputSplit = input.split(" ", 2);
-			Command command = null;
-			String[] inputParameters = null;
-			try {
-				inputParameters = inputSplit[1].split(" /by | /at ", 2);
-			} catch (Exception e) {
-				// inputSplit[1] may not exist, ignore for now
-			}
+			executeCommand(inputParser, getUserInput());
+		}
+		new Output("Bye. Hope to see you again soon!").print();
+	}
 
-			switch(inputSplit[0]) {
-				case "todo":
-					command = Command.TODO; 
-					break;
-				case "deadline":
-					command = Command.DEADLINE;
-					break;
-				case "event":
-					command = Command.EVENT;
-					break;
-				case "list":
-					command = Command.LIST;
-					break;
-				case "bye":
-					command = Command.BYE;
-					break;
-				case "done":
-					command = Command.DONE;
-					break;
-				default:
-					break;
-			}
+	public static String getUserInput() {
+		return scanner.nextLine();
+	}
 
+	public static void executeCommand(Parser parser, String userInput) {
+		try {
+			Pair<Command, ArrayList<String>> pair = parser.parse(userInput);
+			Command command = pair.left;
+			ArrayList<String> parameter = pair.right;
 			switch(command) {
-				case BYE:
-					System.out.println(exitMessage);
+				case EXIT:
 					takingInput = false;
 					break;
 				case LIST:
+					Output listOutput = new Output("Here are the tasks in your list:");
 					int count = 0;
-					System.out.print(lineBreak
-							+ "     Here are the tasks in your list:\n");
-					for (Task task : taskList) {
+					for (Task task : taskList.list()) {
 						count++;
-						System.out.println("     " + count + "." + task);
+						listOutput.addLines(count + "." + task.toString());
 					}
-					System.out.println(lineBreak);
+					listOutput.print();
 					break;
 				case DONE:
-					Task currentTask = taskList.get(Integer.parseInt(inputParameters[0]) - 1);
-					currentTask.complete();
-					System.out.println(lineBreak
-							+ "     Nice! I've marked this task as done:\n"
-							+ "       " + currentTask + "\n"
-							+ lineBreak);
+					new Output("Nice! I've marked this task as done:",
+							"  " + taskList.complete(parameter.get(0))).print();
 					break;
 				case TODO:
-					taskList.add(new ToDo(inputParameters[0]));
-					System.out.println(lineBreak
-							+ "     Got it. I've added this task:\n"
-							+ "       " + taskList.get(taskList.size() - 1) + "\n"
-							+ "     Now you have " + taskList.size() + " tasks in the list.\n"
-							+ lineBreak);
+					new Output("Got it! I've added this task to the list:",
+								"  " + taskList.addTask(new ToDo(parameter.get(0))),
+								"Now you have " + taskList.size() + " tasks in the list.").print();
 					break;
-				case DEADLINE:
-					taskList.add(new Deadline(inputParameters[0], inputParameters[1]));
-					System.out.println(lineBreak
-							+ "     Got it. I've added this task:\n"
-							+ "       " + taskList.get(taskList.size() - 1) + "\n"
-							+ "     Now you have " + taskList.size() + " tasks in the list.\n"
-							+ lineBreak);
+				case DEADLINE:;
+					new Output("Got it! I've added this task to the list:",
+							"  " + taskList.addTask(new Deadline(parameter.get(0), parameter.get(1))),
+							"Now you have " + taskList.size() + " tasks in the list.").print();
 					break;
 				case EVENT:
-					taskList.add(new Event(inputParameters[0], inputParameters[1]));
-					System.out.println(lineBreak
-							+ "     Got it. I've added this task:\n"
-							+ "       " + taskList.get(taskList.size() - 1) + "\n"
-							+ "     Now you have " + taskList.size() + " tasks in the list.\n"
-							+ lineBreak);
+					new Output("Got it! I've added this task to the list:",
+							"  " + taskList.addTask(new Event(parameter.get(0), parameter.get(1))),
+							"Now you have " + taskList.size() + " tasks in the list.").print();
 					break;
 				default:
 					break;
 			}
-			if (takingInput) {
-				input = scanner.nextLine();
-			}
+		} catch (DukeException except) {
+			new Output("☹ OOPS!!! " + except.getMessage()).print();
 		}
+	}
+
+	public static void main(String[] args) {
+		run();
 	}
 }

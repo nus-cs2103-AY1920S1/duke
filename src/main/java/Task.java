@@ -1,14 +1,15 @@
 public class Task {
-	protected boolean taskCompletionStatus;
-	protected String taskDescription;
+	private boolean taskCompletionStatus;
+	private String taskDescription;
 
 	public Task(String description) {
 		taskCompletionStatus = false;
-		taskDescription = description;
+		taskDescription = description; 
 	}
 
-	public void complete() {
+	public Task complete() {
 		taskCompletionStatus = true;
+		return this;
 	}
 
 	@Override

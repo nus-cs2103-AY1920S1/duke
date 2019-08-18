@@ -18,9 +18,9 @@ public class Duke {
 
     public static void main(String[] args) {
         String greetingMsg = Duke.horizontalLine
-                + " Hello! I'm Duke\n"
-                + " What can I do for you?\n"
-                + Duke.horizontalLine;
+            + " Hello! I'm Duke\n"
+            + " What can I do for you?\n"
+            + Duke.horizontalLine;
         System.out.println(greetingMsg);
 
         Scanner scanner = new Scanner(System.in);
@@ -160,7 +160,7 @@ public class Duke {
             throw new DukeInvalidArgumentException(
                 "Encountered extraneous arguments after bye command",
                 " \u2639 OOPS!!! There shouldn't be anything following 'bye',\n"
-                + " are you sure you wanted to exit?"
+                    + " are you sure you wanted to exit?"
                 );
         }
 
@@ -175,7 +175,7 @@ public class Duke {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after list command",
                     " \u2639 OOPS!!! There shouldn't be anything following 'list',\n"
-                            + " did you meant to do something else?"
+                        + " did you meant to do something else?"
             );
         }
 
@@ -187,12 +187,7 @@ public class Duke {
 
         int taskIndex = 1;
         for (Task task : tasks) {
-            if (task == null) {
-                break;
-            }
-            System.out.printf(" %d.%s\n",
-                    taskIndex,
-                    task.getStatusText());
+            System.out.printf(" %d.%s\n", taskIndex, task.getStatusText());
             taskIndex++;
         }
 
@@ -248,9 +243,9 @@ public class Duke {
         try {
             if (inputs.length > 2) {
                 throw new DukeInvalidArgumentException(
-                        "Encountered extraneous arguments after delete command",
-                        " \u2639 OOPS!!! There shouldn't be so many arguments!"
-                );
+                    "Encountered extraneous arguments after delete command",
+                    " \u2639 OOPS!!! There shouldn't be so many arguments!"
+                    );
             }
 
             int taskIndex = Integer.parseInt(inputs[1]);
@@ -265,9 +260,9 @@ public class Duke {
                 );
         } catch (IndexOutOfBoundsException | NullPointerException ex) {
             throw new DukeInvalidArgumentException(
-                    "User number supplied was out of list bounds",
-                    " \u2639 OOPS!!! The task number you gave me wasn't within your\n" + " current list!"
-            );
+                "User number supplied was out of list bounds",
+                " \u2639 OOPS!!! The task number you gave me wasn't within your\n" + " current list!"
+                );
         }
     }
 
@@ -295,9 +290,9 @@ public class Duke {
         throws DukeInvalidArgumentException {
         if (timing.length() == 0) {
             throw new DukeInvalidArgumentException(
-                    "User specified timing of task is empty",
-                    " \u2639 OOPS!!! The timing cannot be empty."
-            );
+                "User specified timing of task is empty",
+                " \u2639 OOPS!!! The timing cannot be empty."
+                );
         }
     }
 

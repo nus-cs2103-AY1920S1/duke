@@ -1,27 +1,33 @@
 import java.util.Scanner;
 
 public class Duke {
-    private void draw_line() {
-        for (int i = 0; i < 100; i++) {
-            System.out.print("_");
-        }
+
+    private static void draw_line() {
+        System.out.print("    ");
+        for (int i = 0; i < 70; i++) System.out.print("_");
         System.out.print("\n");
     }
 
-    private void repeat() {
-        Scanner sc = new Scanner(System.in);
-        String next_string = sc.next();
+    private static void repeat(String message) {
         draw_line();
-        System.out.println(next_string);
+        System.out.println("     " + message);
         draw_line();
     }
 
+    //The main method will be used to recognize inputs and call relative methods
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        draw_line();
+        System.out.println("     Hello, I'm Duke.");
+        System.out.println("     What can I do for you?");
+        draw_line();
+        while(true){
+            Scanner sc = new Scanner(System.in);
+            String input = sc.next();
+            if (input.equals("bye")) break;
+            repeat(input);
+        }
+        draw_line();
+        System.out.println("     Bye. Hope to see you again soon!");
+        draw_line();
     }
 }

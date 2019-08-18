@@ -13,7 +13,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String doneIcon = done ? "✓" : "✗";
+        String doneIcon = done ? "+" : " ";
         return String.format("[%s] %s", doneIcon, description);
     }
 }

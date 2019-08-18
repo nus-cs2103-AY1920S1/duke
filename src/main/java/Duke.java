@@ -33,6 +33,13 @@ public class Duke {
                         System.out.println("" + e);
                     }
                     break;
+                case "delete":
+                    try {
+                        DeleteTask(tasks, input);
+                    } catch (Exception e) {
+                        System.out.println("" + e);
+                    }
+                    break;
                 case "todo":
                 case "deadline":
                 case "event":
@@ -72,10 +79,24 @@ public class Duke {
             taskNumber = Integer.parseInt(input.split(" ")[1]);
             tasks.get(taskNumber - 1).markDone();
         } catch (Exception e) {
-            throw new DukeException("Invalid task number, should be e.g. done 1");
+            throw new DukeException("Invalid task number.");
         }
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(String.format("  %s", tasks.get(taskNumber - 1)));
+    }
+
+    private static void DeleteTask(ArrayList<Task> tasks, String input) throws DukeException {
+        int taskNumber;
+        Task deletedTask;
+        try {
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
+            deletedTask = tasks.remove(taskNumber - 1);
+        } catch (Exception e) {
+            throw new DukeException("Invalid task number.");
+        }
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(String.format("  %s", deletedTask));
+        System.out.println(String.format("Now you have %d task(s) in the list.", tasks.size()));
     }
 
     private static void AddTask(ArrayList<Task> tasks, String input, String type) throws DukeException {

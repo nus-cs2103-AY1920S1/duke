@@ -16,55 +16,30 @@ public class Duke {
 
         while (true) {
             input = sc.nextLine();
-            command = input.split(" ")[0];
+            command = input.split(" ")[0].toLowerCase();
+
             if (command.equalsIgnoreCase("bye")) {
                 break;
             }
 
             switch (command) {
                 case "list":
-                    String task;
-                    // print all tasks in list
-                    System.out.println("Here are the task(s) in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        task = String.format("%d.%s", (i + 1), tasks.get(i));
-                        System.out.println(task);
-                    }
-                    if (tasks.size() == 0) {
-                        System.out.println("There are no tasks in your list right now.");
-                    }
+                    PrintTasks(tasks);
                     break;
                 case "done":
-                    int taskNumber;
                     try {
-                        taskNumber = Integer.parseInt(input.split(" ")[1]);
+                        MarkTaskDone(tasks, input);
                     } catch (Exception e) {
-                        System.out.println("Error: Please indicate the task's number to mark as done. e.g. 'done 1'");
-                        continue;
+                        System.out.println("" + e);
                     }
-                    try {
-                        tasks.get(taskNumber - 1).markDone();
-                    } catch (Exception e) {
-                        System.out.println("Error: Task number invalid.");
-                        continue;
-                    }
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(String.format("  %s", tasks.get(taskNumber - 1)));
                     break;
                 case "todo":
                 case "deadline":
                 case "event":
-                    String taskDescription;
                     try {
-                        taskDescription = input.split(" ", 2)[1];
+                        AddTask(tasks, input, command);
                     } catch (Exception e) {
-                        System.out.println("Error: The description of a " + command + " cannot be empty.");
-                        continue;
-                    }
-                    try {
-                        AddTask(command, taskDescription, tasks);
-                    } catch (Exception e) {
-                        System.out.println(e);
+                        System.out.println("" + e);
                         continue;
                     }
                     break;
@@ -77,9 +52,44 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void AddTask(String type, String description, ArrayList<Task> tasks) throws DukeException {
+    private static void PrintTasks(ArrayList<Task> tasks) {
+        System.out.println("Here are the task(s) in your list:");
+
+        String task;
+        for (int i = 0; i < tasks.size(); i++) {
+            task = String.format("%d.%s", (i + 1), tasks.get(i));
+            System.out.println(task);
+        }
+
+        if (tasks.size() == 0) {
+            System.out.println("There are no tasks in your list right now.");
+        }
+    }
+
+    private static void MarkTaskDone(ArrayList<Task> tasks, String input) throws DukeException {
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(input.split(" ")[1]);
+            tasks.get(taskNumber - 1).markDone();
+        } catch (Exception e) {
+            throw new DukeException("Invalid task number, should be e.g. done 1");
+        }
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(String.format("  %s", tasks.get(taskNumber - 1)));
+    }
+
+    private static void AddTask(ArrayList<Task> tasks, String input, String type) throws DukeException {
+        // get task description
+        String description;
+        try {
+            description = input.split(" ", 2)[1];
+        } catch (Exception e) {
+            throw new DukeException("Description of " + type + " cannot be empty.");
+        }
+
         Task newTask = null;
 
+        // create new task of specified type
         switch (type) {
             case "todo":
                 newTask = new ToDo(description);
@@ -87,20 +97,21 @@ public class Duke {
             case "deadline":
                 String[] descriptionDeadline = description.split(" /by ", 2);
                 if (descriptionDeadline.length < 2) {
-                    throw new DukeException("Deadline format incorrect, should be e.g. do /by time");
+                    throw new DukeException("Deadline format incorrect, should be e.g. deadline task /by time");
                 }
                 newTask = new Deadline(descriptionDeadline[0], descriptionDeadline[1]);
                 break;
             case "event":
                 String[] descriptionTime = description.split(" /at ", 2);
                 if (descriptionTime.length < 2) {
-                    throw new DukeException("Event format incorrect, should be e.g. event /at time");
+                    throw new DukeException("Event format incorrect, should be e.g. event task /at time");
                 }
                 newTask = new Event(descriptionTime[0], descriptionTime[1]);
                 break;
         }
 
         tasks.add(newTask);
+
         String message = String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
                 newTask, tasks.size()

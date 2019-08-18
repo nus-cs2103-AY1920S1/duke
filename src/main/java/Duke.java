@@ -35,15 +35,36 @@ public class Duke {
                 i++;
             }
         } else if (command.startsWith("done ")) {
-                int id = Integer.parseInt(command.substring(5));
-                Task finished_task = tasks.get(id-1);
-                finished_task.markAsDone();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println(finished_task);
+            int id = Integer.parseInt(command.substring(5));
+            Task finished_task = tasks.get(id - 1);
+            finished_task.markAsDone();
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(finished_task);
         } else {
-            tasks.add(new Task(command));
-            System.out.println("added: " + command);
+            addTask(command);
         }
+    }
+
+    public static void addTask(String command) {
+        System.out.println("Got it. I've added this task: ");
+        Task curr;
+        if (command.startsWith("todo ")) {
+            curr = new Todo(command);
+            tasks.add(curr);
+
+        } else if (command.startsWith("deadline ")) {
+            curr = new Deadline(command);
+            tasks.add(curr);
+        } else if (command.startsWith("event ")) {
+            curr = new Event(command);
+            tasks.add(curr);
+        } else {
+            curr = new Task(command);
+            tasks.add(curr);
+        }
+        System.out.println(curr);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
     }
 
 

@@ -44,13 +44,19 @@ public class Duke {
                             System.out.println(deadline);
                             break;
                         }
+                        case "event": {
+                            Task event = new Event(userInput.substring(6, userInput.indexOf("/at")), userInput.substring(userInput.indexOf("/at") + 4));
+                            listOfInputs.add(event);
+                            System.out.println(event);
+                            break;
+                        }
                         default: {
                             break;
                         }
                     }
                     System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                 } else {
-                    // ignore
+                    break;
                 }
             }
         }

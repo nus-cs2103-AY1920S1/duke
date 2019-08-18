@@ -10,10 +10,18 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:5.5.1"
+}
+
 application {
     mainClassName = "duke.Main"
 }
 
 run {
     standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
 }

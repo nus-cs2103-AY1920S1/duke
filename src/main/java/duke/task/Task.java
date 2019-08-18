@@ -5,14 +5,14 @@ package duke.task;
  */
 public class Task {
     private final String desc;
-    private boolean done;
+    protected boolean done;
 
     /**
      * Initializes a task not yet done with the given description.
      *
      * @param desc A description of this task.
      */
-    Task(String desc) {
+    public Task(String desc) {
         this.desc = desc;
         this.done = false;
     }
@@ -20,7 +20,7 @@ public class Task {
     /**
      * Marks this task as done.
      */
-    void markDone() {
+    public void markDone() {
         done = true;
     }
     

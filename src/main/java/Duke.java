@@ -22,15 +22,54 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 printList();
+            } else if (userInput.startsWith("todo")) {
+                String details = userInput.replaceFirst("todo ", "");
+                addToDo(details);
+            } else if (userInput.startsWith("deadline")) {
+                String details = userInput.replaceFirst("deadline ", "");
+                addDeadline(details);
+            } else if (userInput.startsWith("event")) {
+                String details = userInput.replaceFirst("event ", "");
+                addEvent(details);
             } else if (userInput.contains("done")) {
                 String listActionIndex = (userInput.split(" "))[1];
                 int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
                 markAsDone(arrayActionIndex);
-
-            }else {
-                addToList(userInput);
             }
         }
+    }
+
+    public static void printAddedTask(Task task) {
+        drawLine();
+        System.out.println("\t Got it. I've added this task: ");
+        System.out.println("\t\t " + task);
+        int numberOfTasks = actions.size();
+        System.out.println("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task": " tasks") + " in the list.");
+        drawLine();
+    }
+
+    public static void addToDo(String details) {
+        Task _todo = new Todo(details);
+        actions.add(_todo);
+        printAddedTask(_todo);
+    }
+
+    public static void addDeadline(String details) {
+        String[] detailSplit = details.split(" /by ");
+        String action = detailSplit[0];
+        String deadline = detailSplit[1];
+        Task _deadline = new Deadline(action, deadline);
+        actions.add(_deadline);
+        printAddedTask(_deadline);
+    }
+
+    public static void addEvent(String details) {
+        String[] detailSplit = details.split( " /at ");
+        String event = detailSplit[0];
+        String timing = detailSplit[1];
+        Task _event = new Event(event, timing);
+        actions.add(_event);
+        printAddedTask(_event);
     }
 
     public static void markAsDone(int index) {
@@ -53,12 +92,6 @@ public class Duke {
         for (int i = 0; i < actions.size(); i++) {
             System.out.println("\t " + (i + 1) + ". " + actions.get(i));
         }
-        drawLine();
-    }
-    public static void addToList(String input) {
-        drawLine();
-        actions.add(new Task(input));
-        System.out.println("\t added: " + input);
         drawLine();
     }
 

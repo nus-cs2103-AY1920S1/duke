@@ -11,6 +11,7 @@ public class Duke {
     private static final String introMessage = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String goodbyeMessage = "Bye. Hope to see you again soon!";
     private static final String doneMessage = "Nice! I've marked this task as done:";
+    private static final String addMessage = "Got it. I've added this task:";
 
     public static void main(String[] args) {
 
@@ -28,19 +29,10 @@ public class Duke {
             if(isList(input)) {
                 printList();
             } else if(input.startsWith("done")) {
-                String[] stringArray = input.split(" ");
-
-                int taskNum = Integer.parseInt(stringArray[1]);
-
-                Task task = taskList.get(taskNum - 1);
-
-                task.setDone();
-
-                printDoneMessage(task);
-            }
-            else {
-                addToList(input);
-                printInputConfirmation(input);
+                processDoneTask(input);
+            } else {
+                processInputTask(input);
+                //printInputConfirmation(input);
             }
 
         }
@@ -85,6 +77,18 @@ public class Duke {
         System.out.println();
     }
 
+    private static void processDoneTask(String input) {
+        String[] stringArray = input.split(" ");
+
+        int taskNum = Integer.parseInt(stringArray[1]);
+
+        Task task = taskList.get(taskNum - 1);
+
+        task.setDone();
+
+        printDoneMessage(task);
+    }
+
     private static void printDoneMessage(Task task) {
         System.out.println();
 
@@ -101,6 +105,30 @@ public class Duke {
         System.out.println();
     }
 
+    private static void printAddMessage(Task task) {
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println(addMessage);
+
+        System.out.println("    " + task);
+
+        int numTasks = taskList.size();
+
+        if(numTasks == 1) {
+            System.out.println("Now you have " + numTasks + " task in the list.");
+        } else {
+            System.out.println("Now you have " + numTasks + " tasks in the list.");
+        }
+
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println();
+    }
+
     private static void printList() {
 
         int size = taskList.size();
@@ -108,6 +136,8 @@ public class Duke {
         System.out.println();
 
         System.out.println(indentLine);
+
+        System.out.println("Here are the tasks in your list:");
 
         for(int i = 0; i < size; i++) {
             System.out.println(i + 1 + ". " + taskList.get(i));
@@ -120,9 +150,45 @@ public class Duke {
         System.out.println();
     }
 
-    private static void addToList(String input) {
-        Task task = new Task(input);
-        taskList.add(task);
+    private static void processInputTask(String input) {
+
+        if(input.startsWith("todo")) {
+            String inputDescription = processInputDescription(input);
+            ToDo toDo = new ToDo(inputDescription);
+            taskList.add(toDo);
+
+            printAddMessage(toDo);
+        } else if(input.startsWith("deadline")) {
+            String[] splitBySlash = input.split("/");
+            String inputDateTime = splitBySlash[1];
+            String inputDescription = processInputDescription(splitBySlash[0]);
+            Deadline deadline = new Deadline(inputDescription, inputDateTime);
+            taskList.add(deadline);
+
+            printAddMessage(deadline);
+        } else {
+            String[] splitBySlash = input.split("/");
+            String inputDateTime = splitBySlash[1];
+            String inputDescription = processInputDescription(splitBySlash[0]);
+            Event event = new Event(inputDescription, inputDateTime);
+            taskList.add(event);
+
+            printAddMessage(event);
+        }
+
+    }
+
+    private static String processInputDescription(String input) {
+        String[] splitInput = input.split(" ");
+        int arrSize = splitInput.length;
+
+        String returnString = splitInput[1];
+
+        for(int i = 2; i < arrSize; i++) {
+            returnString += " " + splitInput[i];
+        }
+
+        return returnString;
     }
 
     private static boolean isBye(String input) {

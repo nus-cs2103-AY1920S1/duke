@@ -5,7 +5,16 @@ import java.util.Scanner;
 
 public class Duke {
     public static String horizontalLine = "____________________________________________________________\n";
-    
+
+    private enum Input {
+        list,
+        bye,
+        done,
+        todo,
+        deadline,
+        event
+    }
+
     public static void main(String[] args) {
         String greetingMsg = Duke.horizontalLine
                 + " Hello! I'm Duke\n"
@@ -29,27 +38,36 @@ public class Duke {
 
                 if (inputs.length >= 1) {
                     Task task = null;
+                    Input firstWord;
 
-                    switch (inputs[0]) {
-                        case "list":
-                            printTaskArray(tasks);
-                            break;
+                    try {
+                        firstWord = Input.valueOf(inputs[0]);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid user command");
+                        System.out.println(Duke.horizontalLine);
+                        continue;
+                    }
 
-                        case "bye":
+                    switch (firstWord) {
+                        case bye:
                             System.out.println(" Bye. Hope to see you again soon!");
                             System.out.println(Duke.horizontalLine);
                             break mainLoop;
 
-                        case "done":
+                        case list:
+                            printTaskArray(tasks);
+                            break;
+
+                        case done:
                             setTaskDone(tasks, inputs);
                             break;
 
-                        case "todo":
+                        case todo:
                             task = new TodoTask(concatStrings(inputs, " ", 1, inputs.length - 1));
                             addAndPrintTask(tasks, nextTaskIndex++, task);
                             break;
 
-                        case "deadline":
+                        case deadline:
                             //more invalid inputs will be handled in level 5, likewise for eventtask
                             int byIndex = getIndexOf(inputs, "/by");
                             if (byIndex >= 0) {
@@ -63,7 +81,7 @@ public class Duke {
                             }
                             break;
 
-                        case "event":
+                        case event:
                             int atIndex = getIndexOf(inputs, "/at");
                             if (atIndex >= 0) {
                                 task = new DeadlineTask(
@@ -77,9 +95,7 @@ public class Duke {
                             break;
 
                         default:
-                            System.out.println("Invalid user command");
-                            System.out.println(Duke.horizontalLine);
-                            break;
+                            //covered in try catch above with enums
                     }
 
                 }

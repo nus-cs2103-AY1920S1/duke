@@ -1,8 +1,11 @@
-aaa
-^*/)1!
-done 1
 list
-qwerty
-done 3
+todo buy some apples
+event tutorial /at thurs 11am to 12pm
+an invalid command
+list
+done 2
+deadline programming assignment /by thurs 2359
+list
+done 1
 list
 bye

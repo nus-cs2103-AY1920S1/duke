@@ -44,6 +44,9 @@ public class Duke {
                        if (command.length() == 5) { //check to throw for no description
                            String error = "\u2639 OOPS!!! The description of event cannot be empty.\n";
                            throw new DukeException(error);
+                       } else if (!command.substring(5,6).equals(" ")) {
+                           String error = "\u2639 OOPS!!! Please input a whitespace between the command 'event' and your task description for me to keep track of it correctly :-)\n";
+                           throw new DukeException(error);
                        } else if (command.contains(" ")) {
                            String res = command.replaceAll(" ", "");
                            if (res.length() == 5) {
@@ -51,8 +54,11 @@ public class Duke {
                                throw new DukeException(error);
                            }
                        }
-                       if (!command.contains(" /at ")) {//check to throw for no at
-                           String error = "\u2639 OOPS!!! You would need to schedule a date and time duration for this event.\n";
+                        if (!command.contains(" /at ") && command.contains("/at")) {
+                            String error = "\u2639 OOPS!!! Please input a whitespace before and after '/at' for me to keep track of the date/time correctly :-)\n";
+                            throw new DukeException(error);
+                        } else if (!command.contains(" /at ")) {//check to throw for no at
+                           String error = "\u2639 OOPS!!! You would need to schedule a date and time duration for this event using '/at'.\n";
                            throw new DukeException(error);
                        }
                         //check to throw for no time range???
@@ -62,15 +68,21 @@ public class Duke {
                         if (command.length() == 8) { //check to throw for no description
                             String error = "\u2639 OOPS!!! The description of deadline cannot be empty.\n";
                             throw new DukeException(error);
+                        } else if (!command.substring(8, 9).equals(" ")) {
+                            String error = "\u2639 OOPS!!! Please input a whitespace between the command 'deadline' and your task description for me to keep track of it correctly :-)\n";
+                            throw new DukeException(error);
                         } else if (command.contains(" ")) {
                             String res = command.replaceAll(" ", "");
                             if (res.length() == 8) {
-                                String error = "\u2639 OOPS!!! The description of event cannot be empty.\n";
+                                String error = "\u2639 OOPS!!! The description of deadline cannot be empty.\n";
                                 throw new DukeException(error);
                             }
                         }
-                        if (!command.contains(" /by ")) {//check to throw for no by
-                            String error = "\u2639 OOPS!!! You would need to schedule a date/time for this deadline.\n";
+                        if (!command.contains(" /by ") && command.contains("/by")) {
+                            String error = "\u2639 OOPS!!! Please input a whitespace before and after '/by' for me to keep track of the date/time correctly :-)\n";
+                            throw new DukeException(error);
+                        } else if (!command.contains(" /by ")) {//check to throw for no by
+                            String error = "\u2639 OOPS!!! You would need to schedule a date/time for this deadline using '/by'.\n";
                             throw new DukeException(error);
                         }
                         String[] arr = command.split(" /by ", 2);

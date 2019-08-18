@@ -1,9 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
 public class Duke {
-    static final ArrayList<String> listOfInputs = new ArrayList<>(100);
+    static final ArrayList<Task> listOfInputs = new ArrayList<>(100);
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -14,14 +13,16 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (userInput.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int counter = 0;
-                for(String item : listOfInputs) {
+                for(Task item : listOfInputs) {
                     counter++;
-                    System.out.println(counter + ". " + item);
+                    System.out.println(counter + ".[" + item.getStatusIcon() + "] " + item);
                 }
             } else {
-                System.out.println("added: " + userInput);
-                listOfInputs.add(userInput);
+                Task userTask = new Task(userInput);
+                System.out.println("added: " + userTask);
+                listOfInputs.add(userTask);
             }
         }
 

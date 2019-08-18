@@ -4,32 +4,47 @@ import java.util.ArrayList;
 
 public class Duke {
     List<Task> l;
+    String doneMessage = "Nice! I've marked this task as done:";
+    String addedMessage = "Got it. I've added this task:";
 
     public void list() {
+        System.out.println("____________________________________________________________");
         for (int i = 0; i < l.size(); i++) {
             Task t = l.get(i);
             System.out.println(String.format("%d.%s", i + 1, t));
         }
+        System.out.println("____________________________________________________________");
     }
 
     public void done(int i) {
-        String doneMessage = "Nice! I've marked this task as done:";
         l.get(i - 1).setDone(true);
+        System.out.println("____________________________________________________________");
         System.out.println(doneMessage);
         System.out.println(l.get(i - 1));
+        System.out.println("____________________________________________________________");
     }
 
     public void addToDo(String task) {
-        ToDo toDo = new ToDo(task);
-        l.add(toDo);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(toDo);
-        System.out.println(String.format("Now you have %d tasks in the list.", l.size()));
+        l.add(new ToDo(task));
+        this.printAddedMessage();
     }
 
-    public void add(String task) {
-        l.add(new Task(task));
-        System.out.println("added: " + task);
+    public void addDeadline(String task, String date) {
+        l.add(new Deadline(task, date));
+        this.printAddedMessage();
+    }
+
+    public void addEvent(String task, String date) {
+        l.add(new Event(task, date));
+        this.printAddedMessage();
+    }
+
+    public void printAddedMessage() {
+        System.out.println("____________________________________________________________");
+        System.out.println(addedMessage);
+        System.out.println(l.get(l.size() - 1));
+        System.out.println(String.format("Now you have %d tasks in the list.", l.size()));
+        System.out.println("____________________________________________________________");
     }
 
     public void run() {
@@ -42,6 +57,18 @@ public class Duke {
             switch (command) {
             case "todo":
                 this.addToDo(sc.nextLine().trim());
+                break;
+            case "deadline":
+                String[] arrDeadLine = sc.nextLine().split("/by");
+                String taskDeadLine = arrDeadLine[0].trim();
+                String dateDeadLine = arrDeadLine[1].trim();
+                this.addDeadline(taskDeadLine, dateDeadLine);
+                break;
+            case "event":
+                String[] arrEvent = sc.nextLine().split("/at");
+                String taskEvent = arrEvent[0].trim();
+                String dateEvent = arrEvent[1].trim();
+                this.addEvent(taskEvent, dateEvent);
                 break;
             case "list":
                 this.list();
@@ -56,7 +83,9 @@ public class Duke {
                 System.err.println("Unrecognised command!");
             }
         }
+        System.out.println("____________________________________________________________");
         System.out.println(exitMessage);
+        System.out.println("____________________________________________________________");
         sc.close();
     }
 

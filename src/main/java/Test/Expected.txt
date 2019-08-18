@@ -6,12 +6,49 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
-added: read book
-added: return book
-1.[x] read book
-2.[x] return book
+____________________________________________________________
+Got it. I've added this task:
+[T][x] read book
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[T][x] borrow book
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[D][x] return book (by: Sunday)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[D][x] do homework (by: no idea :-p)
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+[E][x] project meeting (at: Mon 2-4pm)
+Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+1.[T][x] read book
+2.[T][x] borrow book
+3.[D][x] return book (by: Sunday)
+4.[D][x] do homework (by: no idea :-p)
+5.[E][x] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
 Nice! I've marked this task as done:
-[v] return book
-1.[x] read book
-2.[v] return book
+[T][v] borrow book
+____________________________________________________________
+____________________________________________________________
+1.[T][x] read book
+2.[T][v] borrow book
+3.[D][x] return book (by: Sunday)
+4.[D][x] do homework (by: no idea :-p)
+5.[E][x] project meeting (at: Mon 2-4pm)
+____________________________________________________________
+____________________________________________________________
 Bye. Hope to see you again soon!
+____________________________________________________________

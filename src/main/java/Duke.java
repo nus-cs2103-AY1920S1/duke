@@ -40,7 +40,7 @@ public class Duke {
                     throw new DukeException("Event tasks require an deadline time. Did you remember to use \"/by\"?");
                 }
                 String time = temp[1].trim();
-                Task task = new Event(taskDesc, time);
+                Task task = new Deadline(taskDesc, time);
                 tasks.add(task);
                 printAddTask(task);
             } else if (token[0].equals("event")) {
@@ -64,8 +64,12 @@ public class Duke {
     }
 
     private void doneTask(String tokenString, String[] token) {
-        int taskDone = Integer.parseInt(token[1]) - 1;
         try {
+            if(tokenString.length() == 4) {
+                throw new DukeException("Give me a goddamn numbered task to do.");
+            }
+            int taskDone = Integer.parseInt(token[1]) - 1;
+
             if(tasks.size() == 0) {
                 throw new DukeException("You have no tasks to be done.");
             } else if(taskDone >= tasks.size() || taskDone < 0) {
@@ -86,6 +90,26 @@ public class Duke {
         System.out.print(underline);
     }
 
+    private void deleteTask(String tokenString, String[] token) {
+        try {
+            if(tokenString.length() == 6) {
+                throw new DukeException("Give me a goddamn numbered task to delete.");
+            }
+            int taskDeleted = Integer.parseInt(token[1]) - 1;
+            if(tasks.size() == 0 ) {
+                throw new DukeException("You have no tasks to be deleted.");
+            } else if (taskDeleted < 0 || taskDeleted >= tasks.size()) {
+                throw new DukeException("Invalid task deleted. Insert a number from 1 to " + tasks.size() + ".");
+            } else {
+                Task task = tasks.get(taskDeleted);
+                tasks.remove(taskDeleted);
+                System.out.println(underline + "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + underline);
+            }
+        } catch (DukeException e) {
+            System.out.print(doubleLine(e.getMessage()));
+        }
+    }
+
     private void run() throws IOException {
         System.out.println(underline + "Hello from\n" + logo + "\nWhat can i do for you?\n" + underline);
 
@@ -98,6 +122,8 @@ public class Duke {
                 doneTask(tokenString, token);
             } else if ( token[0].equals("todo") || token[0].equals("deadline") || token[0].equals("event")  ) {
                 addTask(tokenString, token);
+            } else if (token[0].equals("delete")){
+                deleteTask(tokenString, token);
             } else {
                 try {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -1,12 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private Scanner scanner;
     private boolean running;
+    private ArrayList<String> tasks;
 
     public Duke() {
         scanner = new Scanner(System.in);
         running = true;
+        tasks = new ArrayList<>();
     }
 
     public void start() {
@@ -14,11 +17,47 @@ public class Duke {
         say("Hello! I'm Duke\nWhat can I do for you?");
         while (running) {
             input = scanner.next();
-            if (input.equals("bye")) {
-                exit();
-            } else {
-                say(input);
+            switch(input) {
+                case "bye":
+                    exit();
+                    break;
+                case "list":
+                    listTasks();
+                    break;
+                default:
+                    addTask(input);
+                    break;
             }
+        }
+    }
+
+    private void addTask(String task) {
+        tasks.add(task);
+        say("added: " + task);
+    }
+
+    private void listTasks() {
+        int size = tasks.size();
+        if(size == 0) {
+            say("Empty list: no tasks added");
+        } else {
+            int index = 1;
+            StringBuilder listOfTasks = new StringBuilder();
+            for(String task : tasks) {
+                if(index == 1) {
+                    listOfTasks.append(index);
+                    listOfTasks.append(": ");
+                    listOfTasks.append(task);
+                    index++;
+                } else {
+                    listOfTasks.append("\n");
+                    listOfTasks.append(index);
+                    listOfTasks.append(": ");
+                    listOfTasks.append(task);
+                    index++;
+                }
+            }
+            say(listOfTasks.toString());
         }
     }
 

@@ -1,23 +1,26 @@
 public class Task {
-    private static int total = 1;
-    private int id;
-    private String description;
+    protected String description;
+    protected boolean isDone;
 
     Task(String description) {
-        this.id = total++;
         this.description = description;
-    }
-
-    public int getId() {
-        return id;
+        this.isDone = false;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public void markDone() {
+        isDone = true;
+    }
+
     @Override
     public String toString() {
-        return id + ". " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

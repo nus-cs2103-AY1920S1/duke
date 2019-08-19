@@ -25,6 +25,10 @@ public class Duke {
         while (!description.equals("bye")) {
             if (description.equals("list")) {
                 System.out.println(showFormattedList(tasks));
+            } else if (description.substring(0, 4).equals("done")) {
+                Task removedTask = tasks.remove(Integer.parseInt(description.substring(5)) - 1);
+                removedTask.markDone();
+                System.out.println(showFormattedStr("Nice! I've marked this task as done:\n" + "  " + removedTask));
             } else {
                 tasks.add(new Task(description));
                 System.out.println(showFormattedStr("added: " + description));
@@ -40,8 +44,9 @@ public class Duke {
 
     private static String showFormattedList(List<Task> list) {
         String formattedList = separator;
-        for (Task task : list) {
-            formattedList = formattedList + indentation + task.toString() + "\n";
+        formattedList = formattedList + indentation + "Here are the tasks in your list:\n";
+        for (int i = 1; i <= list.size(); i++) {
+            formattedList = formattedList + indentation + i + ". " + list.get(i-1) + "\n";
         }
         formattedList = formattedList + separator;
         return formattedList;

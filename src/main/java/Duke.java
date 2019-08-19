@@ -63,6 +63,7 @@ public class Duke {
         tasks.add(event);
         event.printAddedEvent(tasks.size());
     }
+
     public static void todo(String input){
         Todo td = new Todo(input);
         tasks.add(td);
@@ -99,7 +100,11 @@ public class Duke {
                 break;
 
             case "event":
+                try{
                 event(words[1]);
+                } catch (IndexOutOfBoundsException ex){
+                    System.out.println("Either event description or event specific timing is missing.");
+                }
                 break;
 
             case "todo":

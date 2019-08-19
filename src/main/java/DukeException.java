@@ -13,6 +13,13 @@ class InvalidKeywordException extends DukeException {
     }
 }
 
+// This exception is used when the user mention a task number that does not exist.
+class TaskNumberTooBigException extends DukeException {
+    public TaskNumberTooBigException(String message) {
+        super(message);
+    }
+}
+
 // This exception is used mainly by checked exceptions happened in todo command.
 class TodoException extends DukeException {
     public TodoException(String message) {

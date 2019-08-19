@@ -55,6 +55,17 @@ public class Duke {
         draw_line();
     }
 
+    // This method removes task from the list
+    private static void delete_task(int todelete) {
+        Task.reduce_total_number();
+        draw_line();
+        System.out.println("     Noted, Noted. I've removed this task: ");
+        System.out.println("       " + tasklist.get(todelete - 1).task_info());
+        System.out.println("     Now you have " + Task.get_total_number() + " tasks in the list");
+        draw_line();
+        tasklist.remove(todelete - 1);
+    }
+
     //This method will recognize the user input and call corresponding methods.
     //Except bye is recognized directly through the main method.
     private static void recognizer(String input) throws DukeException {
@@ -66,6 +77,9 @@ public class Duke {
         // When the user has finished a task.
         else if (split_input[0].equals("done")) {
             int just_done = Integer.parseInt(split_input[1]);
+            if (just_done > tasklist.size()) {
+                throw new TaskNumberTooBigException("The task index is too big.");
+            }
             finish_task(just_done);
         }
 
@@ -138,6 +152,14 @@ public class Duke {
             add_task("Deadline", task_name, task_time);
         }
 
+        else if (split_input[0].equals("delete")) {
+            int todelete = Integer.parseInt(split_input[1]);
+            if (todelete > tasklist.size()) {
+                throw new TaskNumberTooBigException("The number is too big");
+            }
+            delete_task(todelete);
+        }
+
         // When input is invalid
         else {
             throw new InvalidKeywordException("The keyword cannot be understood by the recognizer.");
@@ -185,6 +207,10 @@ public class Duke {
                 } catch (DeadlineTimeException e) {
                     draw_line();
                     System.out.println("     OOPS!!! The deadline must have a specific deadline.");
+                    draw_line();
+                } catch(TaskNumberTooBigException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! You are doing things with a task that does not exist.");
                     draw_line();
                 } catch (DukeException e) {
                     draw_line();

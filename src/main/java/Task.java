@@ -20,6 +20,10 @@ public abstract class Task {
         return task_numbers;
     }
 
+    public static void reduce_total_number() {
+        task_numbers--;
+    }
+
     public void set_as_finish() {
         this.finished = true;
     }

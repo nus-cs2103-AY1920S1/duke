@@ -1,86 +1,114 @@
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import java.util.ArrayList;
 
 public class Duke {
+    private String line;
 
-    public static void main(String[] args) {
-        String line = "\t____________________________________________________________\n";
+    private void printDukeException(DukeException e) {
+        System.out.println(this.line + String.format("\t %s\n", e) + this.line);
+    }
+
+    private void printStatement(String... args) {
+        String content = String.format("%s", Stream.of(args).map(s -> "\t " + s + "\n")
+        .reduce((x,y) -> x + y).orElse(""));
+        System.out.println(this.line + content + this.line);
+    }
+
+    private void run() {
+        this.line = "\t____________________________________________________________\n";
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        String greeting = line
-                + "\t Hello! I'm Duke\n"
-                + "\t What can I do for you?\n"
-                + line;
-        System.out.println(greeting);
+        printStatement("Hello! I'm Duke", "What can I do for you?");
         while (!sc.hasNext("bye")) {
             String s = sc.nextLine();
             String arr[] = s.split(" ", 2);
             String cmd = arr[0];
             switch (cmd) {
                 case "todo":
-                    String todo_content = arr[1];
-                    Task todo = new Todo(todo_content);
-                    list.add(todo);
-                    System.out.println(String.format(line
-                            + "\t Got it. I've added this task:\n"
-                            + String.format("\t   %s\n", todo)
-                            + String.format("\t Now you have %d tasks in the list.\n", list.size())
-                            + line
-                    ));
+                    try {
+                        if (arr.length < 2) {
+                            throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        String todo_content = arr[1];
+                        Task todo = new Todo(todo_content);
+                        list.add(todo);
+                        printStatement("Got it. I've added this task:",
+                                String.format("  %s", todo),
+                                String.format("Now you have %d tasks in the list.", list.size()));
+                    } catch (DukeException e) {
+                        printDukeException(e);
+                    }
                     break;
                 case "deadline":
-                    String deadline_content[] = arr[1].split(" /by ", 2);
-                    Task deadline = new Deadline(deadline_content[0], deadline_content[1]);
-                    list.add(deadline);
-                    System.out.println(String.format(line
-                            + "\t Got it. I've added this task:\n"
-                            + String.format("\t   %s\n", deadline)
-                            + String.format("\t Now you have %d tasks in the list.\n", list.size())
-                            + line
-                    ));
+                    try {
+                        if (arr.length < 2) {
+                            throw new DukeException("Invalid format for Deadline Task.");
+                        }
+                        String deadline_content[] = arr[1].split(" /by ", 2);
+                        if (deadline_content.length < 2) {
+                            throw new DukeException("Invalid format for Deadline Task.");
+                        }
+                        Task deadline = new Deadline(deadline_content[0], deadline_content[1]);
+                        list.add(deadline);
+                        printStatement("got it. i've added this task:",
+                                String.format("  %s", deadline),
+                                String.format("Now you have %d tasks in the list.", list.size()));
+                    } catch (DukeException e) {
+                        printDukeException(e);
+                    }
                     break;
                 case "event":
-                    String event_content[] = arr[1].split(" /at ", 2);
-                    Task event = new Event(event_content[0], event_content[1]);
-                    list.add(event);
-                    System.out.println(String.format(line
-                            + "\t Got it. I've added this task:\n"
-                            + String.format("\t   %s\n", event)
-                            + String.format("\t Now you have %d tasks in the list.\n", list.size())
-                            + line
-                    ));
+                    try {
+                        String event_content[] = arr[1].split(" /at ", 2);
+                        if (event_content.length < 2) {
+                            throw new DukeException("Invalid format for Event Task.");
+                        }
+                        Task event = new Event(event_content[0], event_content[1]);
+                        list.add(event);
+                        printStatement("got it. i've added this task:",
+                                String.format("  %s", event),
+                                String.format("Now you have %d tasks in the list.", list.size()));
+                    } catch (DukeException e) {
+                        printDukeException(e);
+                    }
                     break;
                 case "done":
-                    int index = Integer.valueOf(arr[1]);
-                    Task task = list.get(index - 1);
-                    task.markAsDone();
-                    System.out.println(String.format(line
-                            + "\t Nice! I've marked this task as done:\n"
-                            + String.format("\t   %s\n", task.toString())
-                            + line
-                    ));
+                    try {
+                        if (arr.length < 2) {
+                            throw new DukeException("An Integer is required to choose the task.");
+                        }
+                        int index = Integer.valueOf(arr[1]);
+                        Task task = list.get(index - 1);
+                        task.markAsDone();
+                        printStatement("Nice! I've marked this task as done:",
+                                String.format("\t   %s\n", task.toString()));
+                    } catch (DukeException e) {
+                        printDukeException(e);
+                    }
                     break;
                 case "list":
-                    String stringlist = line
-                            + "\t Here are the tasks in your list:\n"
-                            + IntStream
+                    Stream<String> taskstream = IntStream
                             .range(0, list.size())
                             .mapToObj(i -> {
                                 Task t = list.get(i);
-                                return "\t " + String.format("%d.%s", i + 1, t.toString()) + "\n";
-                            })
-                            .reduce((x,y) -> x + y)
-                            .orElse("")
-                            + line;
-                    System.out.println(stringlist);
+                                return String.format("%d.%s", i + 1, t.toString());
+                            });
+                    Stream<String> combined = Stream.concat(Stream.of("Here are the tasks in your list:"), taskstream);
+                    String combinedString[] = combined.toArray(String[]::new);
+                    printStatement(combinedString);
                     break;
                 default:
-                    System.err.println("Invalid Command");
-
+                    printStatement(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
-        System.out.println(line + "\t Bye. Hope to see you again soon!\n" + line);
+        printStatement("Bye. Hope to see you again soon!");
+    }
+
+    public static void main(String[] args) {
+        Duke d = new Duke();
+        d.run();
     }
 }

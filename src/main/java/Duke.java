@@ -1,8 +1,9 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
     public Duke(){}
     private void Greet(){
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
@@ -20,20 +21,29 @@ public class Duke {
         d.Greet();
         d.list = new ArrayList<>();
         while(scan.hasNextLine()){
-            String a = scan.nextLine();
+            String a = scan.next();
             if(a.equals("bye")){
                 d.Exit();
                 break;
             }
             else if(a.equals("list")){
-                for(int i = 0; i < d.list.size(); i+=1){
-                    int j = i+1;
-                    System.out.println(j + ". " + d.list.get(i));
+                System.out.println("Here are the tasks in your list:");
+                for(int i = 1; i <= d.list.size(); i+=1){
+                    System.out.println(i + ".[" + d.list.get(i-1).getStatusIcon() + "] " + d.list.get(i-1).description);
                 }
+
+            }
+            else if(a.equals("done")){
+                int num = scan.nextInt();
+                d.list.get(num-1).markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + d.list.get(num-1).getStatusIcon() + "] " + d.list.get(num-1).description);
+                String c = scan.nextLine();
             }
             else{
-               d.list.add(a);
-               System.out.println("added: " + a);
+               String b = a + scan.nextLine();
+                d.list.add(new Task(b));
+               System.out.println("added: " + b);
             }
 
         }

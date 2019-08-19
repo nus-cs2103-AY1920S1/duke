@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    static Task[] memory = new Task[100];
-    static int index = 1;
+    static ArrayList<Task> memory = new ArrayList<>();
+    static int index;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -35,7 +36,6 @@ public class Duke {
                         throw new DukeException("Oops! The description of a todo cannot be empty.");
                     } else {
                         toDoTask(TodoTask);
-                        index++;
                     }
                 } catch (Exception e) {
                     System.out.println("Oops! The description of a todo cannot be empty.");
@@ -47,7 +47,6 @@ public class Duke {
                         throw new DukeException("Oops! The description of an event cannot be empty.");
                     } else {
                         eventTask(EventTask);
-                        index++;
                     }
                 } catch (Exception e) {
                     System.out.println("Oops! The description of an event cannot be empty.");
@@ -59,11 +58,13 @@ public class Duke {
                         throw new DukeException("Oops! The description of a deadline cannot be empty.");
                     } else {
                         deadlineTask(DeadlineTask);
-                        index++;
                     }
                 } catch (Exception e) {
                     System.out.println("Oops! The description of a deadline cannot be empty.");
                 }
+            } else if (input.equals("delete")) {
+                int deleteNum = sc.nextInt();
+                deleteTask(deleteNum);
             } else {
                 System.out.println("Oops! I'm sorry, but I don't know what that means :(");
             }
@@ -78,10 +79,19 @@ public class Duke {
     This method marks the targeted task as done and provides confirmation to the user through output.
      */
     public static void doneTask(int taskNum) {
-        Task target = memory[taskNum - 1];
-        target.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + target.getStatusIcon() + "] " + target.description);
+        index = memory.size();
+        try {
+            if (taskNum > index) {
+                throw new DukeException("Oops! This task number does not exist.");
+            } else {
+                Task target = memory.get(taskNum - 1);
+                target.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(target);
+            }
+        } catch (Exception e) {
+            System.out.println("Oops! This task number does not exist.");
+        }
     }
 
     /*
@@ -89,10 +99,10 @@ public class Duke {
      */
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < index - 1; i++) {
-            int id = i + 1;
-            Task current = memory[i];
+        int id = 1;
+        for (Task current : memory) {
             System.out.println(id + "." + current.toString());
+            id++;
         }
     }
 
@@ -101,7 +111,7 @@ public class Duke {
      */
     public static void toDoTask(String a) {
         ToDo newTodo = new ToDo(a);
-        memory[index - 1] = newTodo;
+        memory.add(newTodo);
         printTask(newTodo);
     }
 
@@ -113,11 +123,10 @@ public class Duke {
         String[] details = b.split("/at");
         try {
             if (details.length < 2) {
-                index--;
                 throw new DukeException("Oops! Please include the event timing and resubmit that command.");
             } else {
                 Event newEvent = new Event(details[0], details[1]);
-                memory[index - 1] = newEvent;
+                memory.add(newEvent);
                 printTask(newEvent);
             }
         } catch (Exception e) {
@@ -132,11 +141,10 @@ public class Duke {
         String[] details = c.split("/by");
         try {
             if (details.length < 2) {
-                index--;
                 throw new DukeException("Oops! Please include the deadline and resubmit that command.");
             } else {
                 Deadline newDeadline = new Deadline(details[0], details[1]);
-                memory[index - 1] = newDeadline;
+                memory.add(newDeadline);
                 printTask(newDeadline);
             }
         } catch (Exception e) {
@@ -144,7 +152,25 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(int deleteNum) {
+        index = memory.size();
+        try {
+            if (deleteNum > index) {
+                throw new DukeException("Oops! This task number does not exist.");
+            } else {
+                Task removed = memory.remove(deleteNum - 1);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(removed);
+                index = memory.size();
+                System.out.println("Now you have " + index + " tasks in the list.");
+            }
+        } catch (Exception e) {
+            System.out.println("Oops! This task number does not exist.");
+        }
+    }
+
     public static void printTask(Task task) {
+        index = memory.size();
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + index + " tasks in the list.");

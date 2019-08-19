@@ -1,22 +1,35 @@
 public class Task {
-    private String name;
-    private boolean done;
+    protected String name;
+    protected boolean done;
+
     public Task(String name) {
         this.name = name;
         this.done = false;
     }
 
-    public boolean isDone() {
-        return done;
+    protected Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
     }
 
     public String getName() {
         return name;
     }
 
+    public Task isDone() {
+        return new Task(this.name, true);
+    }
+
     @Override
     public String toString() {
-        return name;
+        String s = "";
+        if(done) {
+            s = s + "[✓]";
+        } else {
+            s = s + "[✗]";
+        }
+
+        return s + " " + name;
     }
 }
 

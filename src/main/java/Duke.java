@@ -156,7 +156,7 @@ public class Duke {
                     } finally {
                         argument = myScanner.nextLine();
                     }
-                }/* else if (argumentArray[0].equals("delete")) {
+                }else if (argumentArray[0].equals("delete")) {
                         try{
                             if (argumentArray.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
@@ -178,7 +178,7 @@ public class Duke {
                             argument = myScanner.nextLine();
                         }
 
-                }*/ else {
+                } else {
                     /*Task incomingTask = new Task(argument);
                     store.add(incomingTask);
                     System.out.println("added: " + argument);

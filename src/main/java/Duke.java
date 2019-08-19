@@ -68,6 +68,36 @@ public class Duke {
                     input = sc.nextLine();
                 }
 
+            } else if (input.toLowerCase().contains("delete")){
+                //getting the number for item
+                try {
+                    int itemNum = Integer.parseInt(input.substring(input.length() - 1));
+                    Task curr = items.get(itemNum - 1);
+                    items.remove(itemNum - 1);
+
+                    //forming the message
+                    sb.append(border + "\n");
+                    sb.append("Noted! I've removed this task:\n");
+                    sb.append(curr + "\n");
+                    sb.append(border + "\n");
+                    System.out.println(sb.toString());
+                    sb.setLength(0);
+                    input = sc.nextLine();
+                } catch(IndexOutOfBoundsException e) {
+                    sb.append(border + "\n");
+                    sb.append("Invalid number. Number not listed. \n");
+                    sb.append(border + "\n");
+                    System.out.println(sb.toString());
+                    sb.setLength(0);
+                    input = sc.nextLine();
+                } catch (NumberFormatException e) {
+                    sb.append(border + "\n");
+                    sb.append("No input detected. Please enter a number. \n");
+                    sb.append(border + "\n");
+                    System.out.println(sb.toString());
+                    sb.setLength(0);
+                    input = sc.nextLine();
+                }
             } else if (input.toLowerCase().equals("list")) {
                 sb.append(border + "\n");
                 //list out all items in arraylist items

@@ -17,12 +17,20 @@ public class Duke {
         printline();
     }
 
-    static void printList(LinkedList<String> li){
+    static void printList(LinkedList<Task> li){
         printline();
+        System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < li.size(); i++){
             int j = i+1;
-            System.out.println("\t" + j + ". " + li.get(i));
+            System.out.println("\t" + j + ". " + li.get(i).taskCompletion());
         }
+        printline();
+    }
+
+    static void printDone(Task task){
+        printline();
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t\t" + task.taskCompletion());
         printline();
     }
     public static void main(String[] args) {
@@ -40,20 +48,32 @@ public class Duke {
         printline();
 
         //LinkedList used to store all the String given by the user;
-        LinkedList<String> li = new LinkedList<String>();
+        LinkedList<Task> li = new LinkedList<Task>();
         while(true){
             printnewline();
-            String echo = scan.nextLine();
+            String echo = scan.next();
+
             if(echo.equals("bye")){
                 printline();
                 System.out.println("\tBye. Hope to see you again soon!");
                 printline();
                 break;
             } else if(echo.equals("list")){
+                scan.nextLine();
                 printList(li);
-            }else {
-                li.add(echo);
-                takeInput(echo);
+            } else if(echo.equals("done")){
+                int taskNum = scan.nextInt();
+                //scan.nextLine();
+                System.out.println(taskNum);
+                int taskNumb = taskNum - 1;
+                Task change = li.get(taskNumb);
+                change.completed();
+                printDone(change);
+            } else {
+                String fullEcho = echo + scan.nextLine();
+                Task newTask = new Task(fullEcho);
+                li.add(newTask);
+                takeInput(fullEcho);
             }
         }
 

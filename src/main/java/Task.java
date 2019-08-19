@@ -8,7 +8,7 @@ public class Task {
     }
 
     protected String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
     public void markAsDone() {

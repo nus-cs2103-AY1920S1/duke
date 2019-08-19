@@ -30,16 +30,42 @@ public class Duke {
                 doneTask(taskNum);
             } else if (input.equals("todo")) {
                 String TodoTask = sc.nextLine();
-                toDoTask(TodoTask);
-                index++;
+                try {
+                    if (TodoTask.equals("")) {
+                        throw new DukeException("Oops! The description of a todo cannot be empty.");
+                    } else {
+                        toDoTask(TodoTask);
+                        index++;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Oops! The description of a todo cannot be empty.");
+                }
             } else if (input.equals("event")) {
                 String EventTask = sc.nextLine();
-                eventTask(EventTask);
-                index++;
+                try {
+                    if (EventTask.equals("")) {
+                        throw new DukeException("Oops! The description of an event cannot be empty.");
+                    } else {
+                        eventTask(EventTask);
+                        index++;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Oops! The description of an event cannot be empty.");
+                }
             } else if (input.equals("deadline")) {
                 String DeadlineTask = sc.nextLine();
-                deadlineTask(DeadlineTask);
-                index++;
+                try {
+                    if (DeadlineTask.equals("")) {
+                        throw new DukeException("Oops! The description of a deadline cannot be empty.");
+                    } else {
+                        deadlineTask(DeadlineTask);
+                        index++;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Oops! The description of a deadline cannot be empty.");
+                }
+            } else {
+                System.out.println("Oops! I'm sorry, but I don't know what that means :(");
             }
             input = sc.next();
         }
@@ -81,12 +107,22 @@ public class Duke {
 
     /*
     This method creates an Event object and adds it into memory.
+    If command does not include a timing, then user is prompted to enter the command again.
      */
     public static void eventTask(String b) {
         String[] details = b.split("/at");
-        Event newEvent = new Event(details[0], details[1]);
-        memory[index - 1] = newEvent;
-        printTask(newEvent);
+        try {
+            if (details.length < 2) {
+                index--;
+                throw new DukeException("Oops! Please include the event timing and resubmit that command.");
+            } else {
+                Event newEvent = new Event(details[0], details[1]);
+                memory[index - 1] = newEvent;
+                printTask(newEvent);
+            }
+        } catch (Exception e) {
+            System.out.println("Oops! Please include the event timing and resubmit that command.");
+        }
     }
 
     /*
@@ -94,9 +130,18 @@ public class Duke {
      */
     public static void deadlineTask(String c) {
         String[] details = c.split("/by");
-        Deadline newDeadline = new Deadline(details[0], details[1]);
-        memory[index - 1] = newDeadline;
-        printTask(newDeadline);
+        try {
+            if (details.length < 2) {
+                index--;
+                throw new DukeException("Oops! Please include the deadline and resubmit that command.");
+            } else {
+                Deadline newDeadline = new Deadline(details[0], details[1]);
+                memory[index - 1] = newDeadline;
+                printTask(newDeadline);
+            }
+        } catch (Exception e) {
+            System.out.println("Oops! Please include the deadline and resubmit that command.");
+        }
     }
 
     public static void printTask(Task task) {

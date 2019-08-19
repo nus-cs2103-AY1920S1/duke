@@ -1,6 +1,3 @@
-//level 2
-import java.util.Scanner;
-
 import java.util.Scanner;
 
 public class Duke {
@@ -48,6 +45,9 @@ public class Duke {
         }
     }
 
+    /*
+    This method iterates through the data collected and prints them out in the desired format.
+     */
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < index - 1; i++) {
@@ -58,6 +58,9 @@ public class Duke {
     }
 }
 
+/*
+A child class of Object which contains the description of the Task and whether the Task has been done.
+ */
 class Task {
     protected String description;
     protected boolean isDone;

@@ -11,11 +11,23 @@ public class Duke {
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 taskList.printAllTasks();
                 command = input.nextLine();
+            } else if (command.contains("done")) {
+                // Check if the first word is done
+                String[] sentence = command.split(" ");
+                if (sentence[0].equals("done")) {
+                    int completedTaskIndex = Integer.parseInt(sentence[1]);
+                    taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
+                }
+                command = input.nextLine();
             } else {
-                taskList.addTask(command);
-                System.out.println("added: " + command);
+                if (!command.isEmpty()) {
+                    Task newTask = new Task(command);
+                    taskList.addTask(newTask);
+                    System.out.println("added: " + command);
+                }
                 command = input.nextLine();
             }
         }

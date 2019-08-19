@@ -1,22 +1,29 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<String> allTasks;
     public static int numTasks = 0;
+    private ArrayList<Task> allTasks;
 
     public TaskList() {
         allTasks = new ArrayList<>();
     }
 
-    public void addTask(String newTask) {
+    public void addTask(Task newTask) {
         numTasks++;
-        allTasks.add(numTasks + ". " + newTask);
+        allTasks.add(newTask);
         //System.out.println(tasks.get(numTasks-1));
     }
 
     public void printAllTasks() {
-        for (String task : allTasks) {
-            System.out.println(task);
+        for (int i = 1; i <= numTasks; i++) {
+            System.out.println(i + "." + allTasks.get(i-1));
+        }
+    }
+
+    public void markAsDone(int index) {
+        Task completedTask = allTasks.get(index - 1);
+        if (!completedTask.isDone()) {
+            completedTask.markAsDone();
         }
     }
 

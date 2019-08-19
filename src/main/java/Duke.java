@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        // test
         Scanner scanner = new Scanner(System.in);
 
         Task[] itemsLst = new Task[100];

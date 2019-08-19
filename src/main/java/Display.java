@@ -28,8 +28,9 @@ class Display implements TaskObserver {
     }
 
     private static void printExitMessage() {
-        String farewell = "Bye. Hope to see you "
-            + "again soon!";
+//        String farewell = "Bye. Hope to see you "
+//           + "again soon!";
+        String farewell = "NyOO >w< owo dont goo iww miss youu!!";
 
         Display.printSection(farewell);
     }

@@ -29,7 +29,12 @@ public class Duke {
                     if (textInput.equals("done") || textInput.equals("done ")) {
                         throw new DukeException("OOPS!!! Index required.");
                     }
+
                     int completedIndex = Integer.parseInt(textInput.replaceFirst("done ", "")) - 1;
+                    if (completedIndex < 0 || completedIndex >= counter) {
+                        throw new DukeException("OOPS!!! Index not found.");
+                    }
+
                     Task markAsDoneTask = task.get(completedIndex);
                     markAsDoneTask.markAsDone();
 
@@ -65,6 +70,9 @@ public class Duke {
                     }
 
                     int deletedIndex = Integer.parseInt(textInput.replaceFirst("delete ", "")) - 1;
+                    if (deletedIndex < 0 || deletedIndex >= counter) {
+                        throw new DukeException("OOPS!!! Index not found.");
+                    }
                     Task deletedTask = task.remove(deletedIndex);
                     counter--;
 
@@ -77,8 +85,9 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.err.println(e);
+            } finally {
+                textInput = sc.nextLine();
             }
-            textInput = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
 

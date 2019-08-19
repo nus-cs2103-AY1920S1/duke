@@ -1,5 +1,8 @@
 public enum Command {
+    TODO,
+    DEADLINE,
+    EVENT,
     LIST,
-    BLAH,
+    DONE,
     BYE
 }

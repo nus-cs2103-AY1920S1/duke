@@ -46,6 +46,8 @@ public class Duke {
                     addDeadline(command);
                 } else if (command.startsWith("event")) {
                     addEvent(command);
+                } else if (command.startsWith("delete")) {
+                    deleteTask(command);
                 } else {
                     throw new UnknownCommandException("OOPS!!! Sorry mate, I don't geddit.");
                 }
@@ -160,6 +162,24 @@ public class Duke {
 
             messageBuilder.append("Nice one mate! I've marked this task as done:\n\t");
             messageBuilder.append("  " + task);
+
+            reply(messageBuilder.toString());
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidIndexException("OOPS!!! I can't do that, please gimme a valid task ID mate.");
+        }
+    }
+
+    /** Permanently delete a task from the list */
+    private static void deleteTask(String command) throws InvalidIndexException {
+        try {
+            StringBuilder messageBuilder = new StringBuilder();
+
+            int taskIndex = Integer.parseInt(command.split(" ")[1]);
+            Task task = tasks.remove(taskIndex - 1);
+
+            messageBuilder.append("Noted mate! I've removed this task:\n\t");
+            messageBuilder.append("  " + task + "\n\t");
+            messageBuilder.append("Now you have " + tasks.size() + " tasks in the list mate.");
 
             reply(messageBuilder.toString());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {

@@ -1,22 +1,24 @@
 public class OutputHandler {
 
-    public static void echo(String cmd) {
-        prettify(cmd);
-    }
+
 
     public static void sayBye() {
-        prettify("Bye. Hope to see you again soon!");
+        printLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        printLine();
     }
 
    public static void sayHi() {
-       System.out.println("\t_______________________________\n" +
+        printLine();
+        System.out.println(
                "\tHello! I'm Duke\n" +
-               "\tWhat can I do for you?\n" +
-               "\t_______________________________");
+               "\tWhat can I do for you?\n");
+        printLine();
+
    }
-    private static void prettify(String text) {
-        System.out.println("\t_______________________________");
-        System.out.println("\t" + text);
+    public static void printLine() {
         System.out.println("\t_______________________________");
     }
+
+
 }

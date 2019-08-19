@@ -28,7 +28,7 @@ public class Duke {
     }
 
     private static String format(String s) {
-        return "      " + s;
+        return "     " + s;
     }
 
     // echos with input string
@@ -67,9 +67,25 @@ public class Duke {
                 String[] print_list = {"Nice! I've marked this task as done: ", tasks[num - 1].done()};
                 format_print(print_list);
             } else { // add new task
-                Task newTask = new Task(s);
+                String type = s.substring(0, s.indexOf(" "));
+                String description = s.substring(s.indexOf(" ") + 1);
+                Task newTask;
+                if (type.equals("todo")) {
+                    newTask = new Todo(description);
+                } else if (type.equals("event")) {
+                    newTask = new Event(description);
+                } else {
+                    newTask = new Deadline(description);
+                }
                 tasks[Task.count - 1] = newTask;
-                format_print("added: " + newTask.description);
+                System.out.println(line);
+                System.out.println(format("Got it. I've added this task: "));
+                System.out.println(format(newTask.toString()));
+                if (Task.count == 1) {
+                    System.out.println(format("Now you have 1 task in the list."));
+                } else {
+                    System.out.println(format("Now you have "  + Task.count + " tasks in the list."));}
+                System.out.println(line);
             }
         }
     }

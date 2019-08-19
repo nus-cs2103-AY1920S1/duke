@@ -13,13 +13,13 @@ public class Deadline extends Task {
         String delimiter = "/by ";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of a deadline cannot be empty.");
         }
         String description = in.next().trim();
 
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeException("The end date of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The end date of a deadline cannot be empty.");
         }
         String by = in.next().substring(delimiter.length()).trim();
 

@@ -8,7 +8,7 @@ public class ToDo extends Task {
     public static Task parse(Scanner in) throws DukeException {
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeException("The description of a task cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of a task cannot be empty.");
         }
 
         return new ToDo(in.next().trim());

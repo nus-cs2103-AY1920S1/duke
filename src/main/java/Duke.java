@@ -99,13 +99,13 @@ public class Duke {
     private Task tryMarkTaskAsDone(Scanner in) throws DukeException{
 
         if (!in.hasNextInt()) {
-            throw new DukeException("Task reference number needs to be an integer");
+            throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
         }
 
         int taskIndexRef = in.nextInt();
 
         if (in.hasNext()) {
-            throw new DukeException("Too many arguments for the 'mark as done' command");
+            throw new DukeIllegalArgumentException("Too many arguments for the 'mark as done' command");
         }
 
         if (0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
@@ -113,7 +113,7 @@ public class Duke {
             return this.taskList.get(taskIndexRef - 1);
         }
 
-        throw new DukeException("No such task was found");
+        throw new DukeInvalidCommandException("No such task was found");
     }
 
     /**
@@ -161,7 +161,7 @@ public class Duke {
                     break;
 
                 default:
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException ex) {
             //Info user that an error occurred

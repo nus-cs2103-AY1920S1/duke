@@ -13,13 +13,13 @@ public class Event extends Task {
         String delimiter = "/at ";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
-            throw new DukeException("The description of an event cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of an event cannot be empty.");
         }
         String description = in.next().trim();
 
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeException("The duration of a event cannot be empty.");
+            throw new DukeEmptyDescriptionException("The duration of a event cannot be empty.");
         }
         String at = in.next().substring(delimiter.length()).trim();
 

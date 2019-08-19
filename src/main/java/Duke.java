@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import task.Task;
+import task.Event;
+import task.Deadline;
+import task.ToDo;
 
 public class Duke {
     private List<Task> list;
@@ -63,12 +67,27 @@ public class Duke {
         case "done":
             this.handleDoneCommand(command);
             break;
+        case "todo":
+            this.handleTodoCommand(command);
+            break;
+        case "deadline":
+            this.handleDeadlineCommand(command);
+            break;
+        case "event":
+            this.handleEventCommand(command);
+            break;
         default:
-            Task taskToAdd = new Task(command);
-            this.list.add(taskToAdd);
-            this.printStream.printf("    added: %s\n", taskToAdd);
         }
         return false;
+    }
+
+    /**
+     * Send addTask acknowledgement.
+     */
+    void sendAddTaskAck() {
+        System.out.println("    Got it. I've added this task:");
+        this.printStream.printf("      %s\n", this.list.get(this.list.size() - 1));
+        System.out.printf("    Now you have %d tasks in the list.\n", this.list.size());
     }
 
     /**
@@ -93,5 +112,37 @@ public class Duke {
         task.markDone();
         System.out.printf("    Nice! I've marked this task as done:\n");
         this.printStream.printf("      %s\n", task); 
+    }
+
+    /**
+     * Handle Deadline command.
+     * @param command String
+     */
+    void handleDeadlineCommand(String command) {
+        String[] commandArr = command.replace("deadline ", "").split("/by ");
+        Task taskToAdd = new Deadline(commandArr[0], commandArr[1]);
+        this.list.add(taskToAdd);
+        this.sendAddTaskAck();        
+    }
+
+    /**
+     * Handle Event command.
+     * @param command String
+     */
+    void handleEventCommand(String command) {
+        String[] commandArr = command.replace("event ", "").split("/at ");
+        Task taskToAdd = new Event(commandArr[0], commandArr[1]);
+        this.list.add(taskToAdd);
+        this.sendAddTaskAck();        
+    }
+
+    /**
+     * Handle ToDo command.
+     * @param command String
+     */
+    void handleTodoCommand(String command) {
+        String name = command.replace("todo ", "");
+        this.list.add(new ToDo(name));
+        this.sendAddTaskAck();
     }
 }

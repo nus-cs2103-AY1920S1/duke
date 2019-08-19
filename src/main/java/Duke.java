@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
@@ -44,32 +43,36 @@ public class Duke {
                 Task selectedTask = taskList.get(taskNumber - 1);
                 selectedTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done: \n" + selectedTask);
-                userInput = input.nextLine();
-            } else {
-                if (userInput.startsWith("todo")) {
-                    String description = userInput.substring(5);
-                    addTaskToTaskList(taskList, new ToDo(description));
-                } else if (userInput.startsWith("deadline")) {
-                    String description = userInput.substring(9, userInput.indexOf('/') - 1);
-                    String by = userInput.substring(14 + description.length());
-                    try {
-                        handleInput("by", by);
-                    } catch (DukeException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                    addTaskToTaskList(taskList, new Deadline(description, by));
-                } else if (userInput.startsWith("event")) {
-                    String description = userInput.substring(6, userInput.indexOf('/') - 1);
-                    String at = userInput.substring(11 + description.length());
-                    try {
-                        handleInput("at", at);
-                    } catch (DukeException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                    addTaskToTaskList(taskList, new Event(description, at));
+            } else if (userInput.startsWith("delete")) {
+                int taskNumber = Integer.parseInt(userInput.substring(7));
+                delTaskInTaskList(taskList, taskNumber);
+            } else if (userInput.startsWith("todo")) {
+                String description = userInput.substring(5);
+                addTaskToTaskList(taskList, new ToDo(description));
+            } else if (userInput.startsWith("deadline")) {
+                String description = userInput.substring(9, userInput.indexOf('/') - 1);
+                String by = userInput.substring(13 + description.length());
+                try {
+                    handleInput("by", by);
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
+                    userInput = input.nextLine();
+                    continue;
                 }
-                userInput = input.nextLine();
+                addTaskToTaskList(taskList, new Deadline(description, by.trim()));
+            } else if (userInput.startsWith("event")) {
+                String description = userInput.substring(6, userInput.indexOf('/') - 1);
+                String at = userInput.substring(10 + description.length());
+                try {
+                    handleInput("at", at);
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
+                    userInput = input.nextLine();
+                    continue;
+                }
+                addTaskToTaskList(taskList, new Event(description, at.trim()));
             }
+            userInput = input.nextLine();
         }
     }
 
@@ -77,8 +80,22 @@ public class Duke {
         if (type.equals("done")) {
             if (userInput.substring(4).isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! The task number cannot be empty.");
-            } else if (Integer.parseInt(userInput.substring(5)) > taskList.size()) {
-                throw new InvalidInputException("☹ OOPS!!! You do not have that many tasks yet.");
+            }
+            int taskNum = Integer.parseInt(userInput.substring(5));
+            if (taskNum > taskList.size()) {
+                throw new InvalidInputException("☹ OOPS!!! You do not have that many tasks.");
+            } else if (taskNum <= 0) {
+                throw new InvalidInputException("☹ OOPS!!! Your task number is invalid.");
+            }
+        } else if (type.equals("delete")) {
+            if (userInput.substring(6).isBlank()) {
+                throw new EmptyFieldException("☹ OOPS!!! The task number cannot be empty.");
+            }
+            int taskNum = Integer.parseInt(userInput.substring(7));
+            if (taskNum > taskList.size()) {
+                throw new InvalidInputException("☹ OOPS!!! You do not have that many tasks.");
+            } else if (taskNum <= 0) {
+                throw new InvalidInputException("☹ OOPS!!! Your task number is invalid.");
             }
         } else if (type.equals("todo")) {
             if (userInput.substring(4).isBlank()) {
@@ -134,6 +151,14 @@ public class Duke {
         tasklist.add(task);
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
+        System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
+    }
+
+    public static void delTaskInTaskList(ArrayList<Task> tasklist, int taskNum) {
+        Task taskToRemove = taskList.get(taskNum - 1);
+        taskList.remove(taskNum - 1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(taskToRemove);
         System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
     }
 }

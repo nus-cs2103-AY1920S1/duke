@@ -13,8 +13,9 @@ public class Duke {
     }
      */
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<String>();
+
         Scanner sc = new Scanner(System.in);
+        ArrayList<Task> list = new ArrayList<>();
         boolean flag = true;
         drawline();
         System.out.println("     Hello! I'm Duke\n" +
@@ -22,7 +23,8 @@ public class Duke {
         drawline();
         while(flag){
             String s = sc.nextLine();
-            switch (s) {
+            String [] a = s.split(" ");
+            switch (a[0]) {
                 case "bye" :
                     bye();
                     flag = false;
@@ -30,14 +32,16 @@ public class Duke {
                 case "list" :
                     list(list);
                     break;
+                case "done":
+                    done(list, a[1].charAt(0));
+                    break;
                 default:
-                    echo(list, s);
+                    Task task = new Task(s);
+                    echo(list, task);
                     break;
 
             }
         }
-
-
     }
 
     public static void drawline(){
@@ -49,18 +53,28 @@ public class Duke {
         drawline();
 
     }
-    public static void list(ArrayList<String>list){
+    public static void list(ArrayList<Task>list){
         drawline();
         for(int n=0; n<list.size();n++) {
             int m = n+1;
-            System.out.println("     " + m + ". " + list.get(n));
+            if(list.get(n).isDone()== true)
+            System.out.println("     [✓]" + m + ". " + list.get(n).getName());
+            else
+                System.out.println("     [✗]" + m + ". " + list.get(n).getName());
         }
         drawline();
     }
-    public static void echo(ArrayList<String>list,String s){
-        list.add(s);
+    public static void echo(ArrayList<Task>list,Task t){
+        list.add(t);
         drawline();
-        System.out.println("     added: "+s);
+        System.out.println("     added: "+t.getName());
+        drawline();
+    }
+    public static void done(ArrayList<Task>list,int k){
+        drawline();
+        list.get(k-49).setDone(true);
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("     [✓]"+list.get(k-49).getName());
         drawline();
     }
 

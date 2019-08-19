@@ -12,6 +12,6 @@ public class Event extends Task{
         String indicator;
         if (isFinished()) indicator = "[\u2713] ";
         else indicator = "[\u2715]";
-        return "[E]" + indicator + get_name() + " at: " + event_time;
+        return "[E]" + indicator + get_name() + " (at: " + event_time + ")";
     }
 }

@@ -12,6 +12,6 @@ public class Deadline extends Task {
         String indicator;
         if (isFinished()) indicator = "[\u2713] ";
         else indicator = "[\u2715]";
-        return "[D]" + indicator + get_name() + " by: " + death_data;
+        return "[D]" + indicator + get_name() + " (by: " + death_data + ")";
     }
 }

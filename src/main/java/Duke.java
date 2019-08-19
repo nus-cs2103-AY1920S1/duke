@@ -21,7 +21,7 @@ public class Duke {
             String input = sc.nextLine();
 
             if(input.equals("bye")) {
-                printMessage(" Bye. Hope to see you again soon!");
+                printMessage("Bye. Hope to see you again soon!");
                 return;
             } else if(input.equals("list")) {
                 printTaskList(taskList);

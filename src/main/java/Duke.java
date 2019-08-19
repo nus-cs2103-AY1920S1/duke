@@ -57,7 +57,7 @@ public class Duke {
 
     //This method will recognize the user input and call corresponding methods.
     //Except bye is recognized directly through the main method.
-    private static void recognizer(String input)  {
+    private static void recognizer(String input) throws DukeException {
         String[] split_input = input.split(" ");
 
         // When the user want to see the task list.
@@ -76,6 +76,9 @@ public class Duke {
                 task_name = task_name + split_input[i];
                 if (i != split_input.length - 1) task_name = task_name + " ";
             }
+            if (task_name.equals("")) {
+                throw new TodoNotSpecifiedException("The todo has an empty description");
+            }
             add_task("Todo", task_name, null);
         }
 
@@ -92,9 +95,17 @@ public class Duke {
                 if (i != 1) task_name = task_name + " ";
                 task_name = task_name + split_input[i];
             }
-            for (int i = time_start_from; i < split_input.length; i++) {
-                task_time = task_time + split_input[i];
-                if (i != split_input.length - 1) task_time = task_time + " ";
+            if (time_start_from != 0) {
+                for (int i = time_start_from; i < split_input.length; i++) {
+                    task_time = task_time + split_input[i];
+                    if (i != split_input.length - 1) task_time = task_time + " ";
+                }
+            }
+            if (task_name.equals("")) {
+                throw new EventNameException("The event has no description");
+            }
+            if (task_time.equals("")) {
+                throw new EventTimeException("The event has no time");
             }
             add_task("Event", task_name, task_time);
         }
@@ -112,18 +123,24 @@ public class Duke {
                 if (i != 1) task_name = task_name + " ";
                 task_name = task_name + split_input[i];
             }
-            for (int i = time_start_from; i < split_input.length; i++) {
-                task_time = task_time + split_input[i];
-                if (i != split_input.length - 1) task_time = task_time + " ";
+            if (time_start_from != 0) {
+                for (int i = time_start_from; i < split_input.length; i++) {
+                    task_time = task_time + split_input[i];
+                    if (i != split_input.length - 1) task_time = task_time + " ";
+                }
+            }
+            if (task_name.equals("")) {
+                throw new DeadlineNameException("Deadline has no description.");
+            }
+            if (task_time.equals("")) {
+                throw new DeadlineTimeException("Deadline has no deadline.");
             }
             add_task("Deadline", task_name, task_time);
         }
 
         // When input is invalid
         else {
-            draw_line();
-            System.out.println("I do not know what you are talking about");
-            draw_line();
+            throw new InvalidKeywordException("The keyword cannot be understood by the recognizer.");
         }
     }
 
@@ -140,8 +157,41 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) break;
 
-            // The pot will be thrown to the recognizer
-            else recognizer(input);
+            // The pot will be thrown to the recognizer.
+            // main method will also inspect what kind of exception is thrown by recognizer.
+            else {
+                try{
+                    recognizer(input);
+                } catch (InvalidKeywordException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    draw_line();
+                } catch (TodoNotSpecifiedException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! The description of a todo cannot be empty.");
+                    draw_line();
+                } catch (EventNameException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! The description of an event cannot be empty.");
+                    draw_line();
+                } catch (EventTimeException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! The event must have a specific time");
+                    draw_line();
+                } catch (DeadlineNameException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! The description of a deadline cannot be empty.");
+                    draw_line();
+                } catch (DeadlineTimeException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! The deadline must have a specific deadline.");
+                    draw_line();
+                } catch (DukeException e) {
+                    draw_line();
+                    System.out.println("     OOPS!!! An unexpected error just happened.");
+                    draw_line();
+                }
+            }
         }
 
         //The exit page

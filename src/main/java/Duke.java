@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Scanner;
 
 public class Duke {
-    static String[] memory = new String[100];
+    static Task[] memory = new Task[100];
     static int index = 1;
 
     public static void main(String[] args) {
@@ -26,10 +26,18 @@ public class Duke {
 
         String input = sc.nextLine();
         while (!input.equals("bye")) {
+            String[] splitInput = input.split(" ");
             if (input.equals("list")) {
                 printList();
+            } else if (splitInput[0].equals("done")) {
+                int taskNum = Integer.parseInt(splitInput[1]);
+                Task target = memory[taskNum - 1];
+                target.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + target.getStatusIcon() + "] " + target.description);
             } else {
-                memory[index - 1] = input;
+                Task a = new Task(input);
+                memory[index - 1] = a;
                 System.out.println("added: " + input);
                 index++;
             }
@@ -41,9 +49,29 @@ public class Duke {
     }
 
     public static void printList() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < index - 1; i++) {
             int id = i + 1;
-            System.out.println(id + ". " + memory[i]);
+            Task current = memory[i];
+            System.out.println(id + ".[" + current.getStatusIcon() + "] " + current.description);
         }
+    }
+}
+
+class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
     }
 }

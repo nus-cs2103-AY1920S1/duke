@@ -12,24 +12,15 @@ public class Task {
         this.done = done;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public Task isDone() {
         return new Task(this.name, true);
     }
 
-    @Override
-    public String toString() {
-        String s = "";
-        if(done) {
-            s = s + "[✓]";
-        } else {
-            s = s + "[✗]";
-        }
+    public String getName() {
+        return name;
+    }
 
-        return s + " " + name;
+    public void setDone() {
+        this.done = true;
     }
 }
-

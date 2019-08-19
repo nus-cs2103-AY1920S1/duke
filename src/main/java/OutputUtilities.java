@@ -1,6 +1,4 @@
-public class OutputHandler {
-
-
+public class OutputUtilities {
 
     public static void sayBye() {
         printLine();
@@ -12,13 +10,12 @@ public class OutputHandler {
         printLine();
         System.out.println(
                "\tHello! I'm Duke\n" +
-               "\tWhat can I do for you?\n");
+               "\tWhat can I do for you?");
         printLine();
 
    }
     public static void printLine() {
         System.out.println("\t_______________________________");
     }
-
 
 }

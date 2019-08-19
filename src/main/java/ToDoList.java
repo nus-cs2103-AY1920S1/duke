@@ -8,6 +8,7 @@ public class ToDoList {
         int counter = 0;
 
         String input = sc.nextLine();
+
         while (!input.equals("bye")){ //first check for bye command
             if(input.equals("list")){ //check if list command
                 System.out.println(border);

@@ -40,17 +40,20 @@ public class Duke {
                     done(tasks, (int)command[1].charAt(0));
                     break;
                 case "todo":
+                    taskName = taskName.substring(5);
                     task = new Todo (taskName);
                     addTaskIn(task,tasks);
                     break;
 
                 case "deadline":
+                    taskName = taskName.substring(9);
                     date = taskName.split("/");
                     task = new Deadline (taskName,date[1]);
                     addTaskIn(task,tasks);
                     break;
 
                 case "event":
+                    taskName = taskName.substring(6);
                     date = taskName.split("/");
                     task = new Event (taskName, date[1]);
                     addTaskIn(task,tasks);

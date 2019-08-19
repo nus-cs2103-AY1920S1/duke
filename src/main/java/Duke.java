@@ -1,14 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
         //dukeSayHello();
         greetings();
-
-        //level 1
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String input = sc.next();
+        while(sc.hasNext()) {
+            String input = sc.nextLine();
             if (!input.equals("bye")) {
                 System.out.println(input);
             }

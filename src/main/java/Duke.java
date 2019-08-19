@@ -136,6 +136,7 @@ public class Duke {
 
     /*
     This method creates a deadlineTask and adds it into memory.
+    If command does not include a deadline, then user is prompted to enter the command again.
      */
     public static void deadlineTask(String c) {
         String[] details = c.split("/by");
@@ -152,6 +153,10 @@ public class Duke {
         }
     }
 
+    /*
+    This method removes the target task from the list and prompts the user the number of remaining tasks saved.
+    @param int deleteNum the index of the task to be deleted
+     */
     public static void deleteTask(int deleteNum) {
         index = memory.size();
         try {

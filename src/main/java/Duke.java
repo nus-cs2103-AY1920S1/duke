@@ -18,13 +18,14 @@ public class Duke {
                 for (int i = 0; i < items.size(); i++) {
                     System.out.println(i + 1 + ". " + items.get(i));
                 }
-            }
-            else if (input.equals("bye")) {
+            } else if (input.equals("bye")) {
                 System.out.println("Bye! Hope to see you again!");
                 return;
+            } else {
+                items.add(input);
+                System.out.println("added: " + input);
+        
             }
-            items.add(input);
-            System.out.println("added: " + input);
         }
     }
 }

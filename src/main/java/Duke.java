@@ -34,6 +34,7 @@ public class Duke {
                                 }
                             }
                             break;
+
                         case "delete":
                             if (commandSplit.length == 1) {
                                 throw new DukeException("☹ OOPS!!! Please indicate which task you would like to delete.");
@@ -49,15 +50,17 @@ public class Duke {
                                 }
                             }
                             break;
+
                         case "todo":
                         case "deadline":
                         case "event":
                             if (commandSplit.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
                             }
+                            Type enumType = Type.valueOf(firstInput.toUpperCase());
 
-                            switch (firstInput) {
-                                case "todo": {
+                            switch (enumType) {
+                                case TODO: {
                                     Task newTask = new Todo(command.substring(5));
                                     taskList.add(newTask);
                                     int numTasks = taskList.size();
@@ -66,7 +69,7 @@ public class Duke {
                                 }
                                     break;
 
-                                case "deadline": {
+                                case DEADLINE: {
                                     String[] timeSplit = command.split("/");
                                     if (timeSplit.length == 1) {
                                         throw new DukeException(" ☹ OOPS!!! Please enter a deadline for your task.");
@@ -79,7 +82,8 @@ public class Duke {
                                     }
                                 }
                                     break;
-                                case "event":
+
+                                case EVENT:
                                     String[] timeSplit = command.split("/");
                                     if (timeSplit.length == 1) {
                                         throw new DukeException(" ☹ OOPS!!! Please enter a time for your task.");
@@ -93,6 +97,7 @@ public class Duke {
                                     break;
                             }
                             break;
+
                         default:
                             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }

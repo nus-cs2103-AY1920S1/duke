@@ -22,7 +22,7 @@ public class Duke {
 
                 case "todo":
                     if (words.length <= 1) {
-                        System.out.println(new DukeException());
+                        System.out.println(new DukeException("todo"));
                         break;
                     }
                     for (int i = 1; i < words.length; i++) {
@@ -37,7 +37,7 @@ public class Duke {
 
                 case "event":
                     if (words.length <= 1) {
-                        System.out.println(new DukeException());
+                        System.out.println(new DukeException("event"));
                         break;
                     }
                     StringBuilder at = new StringBuilder();
@@ -60,7 +60,7 @@ public class Duke {
 
                 case "deadline":
                     if (words.length <= 1) {
-                        System.out.println(new DukeException());
+                        System.out.println(new DukeException("deadline"));
                         break;
                     }
                     StringBuilder by = new StringBuilder();
@@ -102,7 +102,7 @@ public class Duke {
                     break;
 
                 default:
-                    System.out.println(new DukeException());
+                    System.out.println(new DukeException("instruction"));
                     break;
             }
             System.out.println("____________________________________________________________");

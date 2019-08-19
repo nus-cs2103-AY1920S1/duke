@@ -1,11 +1,24 @@
 public class DukeException {
 
-    public DukeException() {
+    String error;
 
+    public DukeException(String error) {
+        this.error = error;
     }
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! The description of a todo cannot be empty.";
+        switch(error) {
+            case "deadline":
+                return "☹ OOPS!!! The description of a deadline cannot be empty.";
+            case "event":
+                return "☹ OOPS!!! The description of an event cannot be empty.";
+            case "todo":
+                return "☹ OOPS!!! The description of a todo cannot be empty.";
+            case "instruction":
+                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            default:
+        }
+        return "";
     }
 }

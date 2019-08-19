@@ -4,7 +4,7 @@ import java.util.LinkedList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LinkedList<String> list = new LinkedList<>();
+        LinkedList<Task> list = new LinkedList<>();
         String command;
         printHello();
 
@@ -13,11 +13,18 @@ public class Duke {
                 System.out.println("    _____________________________________");
                 for (int i = 0; i < list.size(); i++) {
                     int number = i + 1;
-                    System.out.println("     " + number + ". " + list.get(i));
+                    System.out.println("     " + number + "." + list.get(i));
                 }
+                System.out.println("    _____________________________________\n");
+            } else if (command.contains("done")) {
+                int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+                list.get(taskNumber).setDone();
                 System.out.println("    _____________________________________");
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("       " + list.get(taskNumber));
+                System.out.println("    _____________________________________\n");
             } else {
-                list.add(command);
+                list.add(new Task(command));
                 printAddItem(command);
             }
         }

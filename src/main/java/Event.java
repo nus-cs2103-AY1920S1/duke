@@ -1,33 +1,22 @@
 public class Event extends Task {
-    private String date;
-    private String time;
-
+    private String dateTime;
     // Constructor
-    public Deadline(String description, String date, String time) {
+    protected Event(String description, String dateTime) {
         super(description);
-        this.date = date;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     // Getters & Setters
-    public String getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + " " + time + by + ")";
+        return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 }

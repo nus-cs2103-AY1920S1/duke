@@ -26,6 +26,10 @@ public class Duke {
             else if (command.equals("todo") || command.equals("deadline") || command.equals("event")){ // new item
                 addNewItem(command, sc, itemsList);
             }
+            else if (command.equals("delete")) {
+                int itemIndex = sc.nextInt();
+                itemsList.deleteTask(itemIndex);
+            }
             else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 sc.nextLine();

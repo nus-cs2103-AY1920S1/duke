@@ -22,6 +22,13 @@ public class ItemsList {
         }
     }
 
+    public void deleteTask(int position) {
+        Task task = itemsList.remove(position - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("\t" + task);
+        System.out.printf("Now you have %d tasks in the list.\n", itemsList.size());
+    }
+
     public Task getTaskAtIndex(int position) {
         return itemsList.get(position);
     }

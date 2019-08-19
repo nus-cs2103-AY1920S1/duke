@@ -39,7 +39,7 @@ public class Duke {
                             Task.itemsLst.get(doneInt).markAsDone();
                             System.out.printf("     Nice! I've marked this task as done:\n       %s\n"
                                     , Task.itemsLst.get(doneInt));
-                        } else if (s.equals("delete")) {
+                        } else if (s.equals("delete")) { // if command is delete
                             int delInt = tempSc.nextInt() - 1;
                             Task delTask = Task.itemsLst.remove(delInt);
                             System.out.printf("     Noted. I've removed this task:\n" +

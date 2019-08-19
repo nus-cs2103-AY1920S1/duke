@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    ArrayList<String> tasks = new ArrayList<>();
+    ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Setup Duke.
@@ -25,20 +25,23 @@ public class Duke {
      */
     public void run() {
         sayGreeting();
-        String command;
+        String input;
         Scanner sc = new Scanner(System.in);
         do {
-            command = sc.nextLine();
+            input = sc.nextLine();
+            String command = input.split(" ")[0];
             switch (command) {
             case "list":
                 printTasks();
                 break;
+            case "done":
+                doneTask(Integer.parseInt(input.split(" ")[1]));
             case "bye":
                 break;
             default:
-                addTask(command);
+                addTask(input);
             }
-        } while (!command.equals("bye"));
+        } while (!input.equals("bye"));
         sayBye();
     }
 
@@ -63,17 +66,24 @@ public class Duke {
     }
 
     private void addTask(String text) {
-        this.tasks.add(text);
+        this.tasks.add(new Task(text));
         printFormatted("added: " + text);
     }
 
     private void printTasks() {
         StringBuilder lines = new StringBuilder();
         int counter = 0;
-        for (String task : this.tasks) {
+        lines.append("Here are the tasks in your list:\n");
+        for (Task task : this.tasks) {
             counter++;
-            lines.append(String.format("%d. %s\n", counter, task));
+            lines.append(String.format("%d. %s\n", counter, task.toString()));
         }
         printFormatted(lines.toString());
+    }
+
+    private void doneTask(int id) {
+        Task task = this.tasks.get(id - 1);
+        task.markAsDone();
+        printFormatted(String.format("Nice! I've marked this task as done:\n  %s", task));
     }
 }

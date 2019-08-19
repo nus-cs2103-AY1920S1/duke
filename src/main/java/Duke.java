@@ -68,6 +68,9 @@ public class Duke {
                     task = new Event(detailsArr[0], detailsArr[1]);
                     handleAddTask(task);
                     break;
+                case "delete":
+                    handleDelete(Integer.parseInt(inputArr[1]) - 1);
+                    break;
                 default:
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
@@ -121,6 +124,21 @@ public class Duke {
         System.out.println(horizontalLine);
         System.out.println();
     }
+
+    private static void handleDelete(int taskIndex) throws DukeException {
+        if (taskIndex >= tasks.size()) {
+            throw new DukeException("Task not found!");
+        }
+
+        Task task = tasks.remove(taskIndex);
+
+        System.out.println(horizontalLine);
+        System.out.println("     Noted. I've removed this task:");
+        System.out.println("       " + task);
+        System.out.println(horizontalLine);
+        System.out.println();
+    }
+
 
     private static void handleAddTask(Task task) {
         tasks.add(task);

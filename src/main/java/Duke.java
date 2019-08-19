@@ -4,7 +4,7 @@ import java.util.LinkedList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LinkedList<String> allItems = new LinkedList<>();
+        LinkedList<Task> allItems = new LinkedList<>();
         String line = "____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,20 +15,25 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + line);
 
         // Reads in input
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
+        Task t = new Task(sc.nextLine());
+        while (!t.description.equals("bye")) {
             System.out.println(line + "\n");
-            if (!input.equals("list")) {
-                allItems.add(input);
-                //Prints "added: Item"
-                System.out.println("added: " + input);
+            if (t.description.equals("list")) {
+                System.out.println("Here are the tasks in your list:\n");
+
+                // Prints Each Item in the format "1. Item"
+                allItems.forEach(x -> System.out.println((allItems.indexOf(x) + 1) + x.toString()));
+            } else if (t.description.contains("done")) {
+                t.markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n");
             } else {
-                // Prints "1. Item"
-                allItems.forEach(x -> System.out.println(allItems.indexOf(x) + 1 + ". " + x));
+                allItems.add(t);
+                //Prints "added: Item"
+                System.out.println("added: " + t.description);
             }
             System.out.println("\n" + line);
-            input = sc.nextLine();
-
+            t = new Task(sc.nextLine());
+            System.out.println(allItems.size());
         }
         System.out.println(line + "\n Bye. Hope to see you again soon! \n" + line);
     }

@@ -26,7 +26,7 @@ class BasicTaskCreator implements TaskCreator {
         boolean isValid = checkCommand(command, "deadline");
 
         String taskName = subcmdList[0];
-        String date = subcmdList[1];
+        String date = subcmdList.length > 1 ? subcmdList[1] : "";
 
         return new DeadLinesImplementation(taskName, date,false);
     }
@@ -39,7 +39,7 @@ class BasicTaskCreator implements TaskCreator {
         boolean isValid = checkCommand(command, "event");
 
         String taskName = subcmdList[0];
-        String date = subcmdList[1];
+        String date = subcmdList.length > 1 ? subcmdList[1] : "";
 
         return new EventsImplementation(taskName, date,false);
     }

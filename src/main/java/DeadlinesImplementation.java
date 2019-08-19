@@ -1,4 +1,5 @@
-class DeadLinesImplementation implements TaskInterface {
+class DeadLinesImplementation implements TaskInterface,
+    TypedTaskInterface {
     private final String name;
     private final String date;
     private final boolean isDone;
@@ -12,12 +13,31 @@ class DeadLinesImplementation implements TaskInterface {
         this.isDone = isDone;
         String outputText = String.format("%s (by: %s)", 
                 name, date);
-        this.formatter = new TypedTaskFormatter(outputText, 
-                isDone, sym);
+        this.formatter = new TypedTaskFormatter(this);
     }
 
     public TaskInterface completeTask(){
         return new ToDosImplementation(this.name, true);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getSymbol() {
+        return this.sym;
+    }
+
+    public String getDate() {
+        if (this.date.length() > 0) {
+            return "by: " + this.date;
+        } else {
+            return "";
+        }
     }
 
     // Override

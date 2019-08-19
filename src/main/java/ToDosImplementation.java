@@ -1,4 +1,6 @@
-class ToDosImplementation implements TaskInterface {
+class ToDosImplementation implements TaskInterface, 
+      TypedTaskInterface {
+
     private final String name;
     private final boolean isDone;
     private final TaskFormatInterface formatter;
@@ -8,11 +10,27 @@ class ToDosImplementation implements TaskInterface {
         this.name = name;
         this.isDone = isDone;
         //this.formatter = new BasicTaskFormatter(name, isDone);
-        this.formatter = new TypedTaskFormatter(name, isDone, sym);
+        this.formatter = new TypedTaskFormatter(this);
     }
 
     public TaskInterface completeTask(){
         return new ToDosImplementation(this.name, true);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getSymbol() {
+        return this.sym;
+    }
+
+    public String getDate() {
+        return "";
     }
 
     // Override

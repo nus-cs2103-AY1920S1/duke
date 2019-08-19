@@ -7,8 +7,11 @@ public class Event extends Task {
      * @param description the description of the event.
      * @param time the time at which the event starts.
      */
-    public Event(String description, String time) {
+    public Event(String description, String time) throws IllegalDescriptionException {
         super(description);
+        if (time.isEmpty()) {
+            throw new IllegalDescriptionException("The time cannot be empty.");
+        }
         this.time = time;
     }
 

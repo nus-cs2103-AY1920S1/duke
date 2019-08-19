@@ -7,7 +7,11 @@ public class Task {
      * Constructor for Task Object.
      * @param description task description
      */
-    public Task(String description) {
+    public Task(String description) throws IllegalDescriptionException {
+        if (description.isEmpty()) {
+            throw new IllegalDescriptionException("The description of a "
+                    + getClass().getName().toLowerCase() + " cannot be empty.");
+        }
         this.description = description;
         this.isDone = false;
     }

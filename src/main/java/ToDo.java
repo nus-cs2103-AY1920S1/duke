@@ -4,7 +4,7 @@ public class ToDo extends Task {
      * Constructor of the toDo task.
      * @param description description of the task.
      */
-    public ToDo(String description) {
+    public ToDo(String description) throws IllegalDescriptionException {
         super(description);
     }
 

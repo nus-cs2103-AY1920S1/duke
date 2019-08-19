@@ -7,8 +7,11 @@ public class Deadline extends Task {
      * @param description the description of the task.
      * @param by the deadline of the task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws IllegalDescriptionException {
         super(description);
+        if (by.isEmpty()) {
+            throw new IllegalDescriptionException("The deadline cannot be empty.");
+        }
         this.by = by;
     }
 

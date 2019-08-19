@@ -28,6 +28,69 @@ public class Duke {
                         list.size(), list.size() > 1 ? "s" : ""));
     }
 
+    /**
+     * Parses the command that typed by the user.
+     * @param command the command typed by the user
+     * @param list a list stores all the tasks
+     * @throws IllegalIndexOfTaskException if the index provided in the done command is illegal
+     * @throws IllegalDescriptionException if the description of the task is illegal
+     * @throws IllegalCommandException is the command is illegal
+     */
+    private static void parseCommand(String command, ArrayList<Task> list)
+            throws IllegalIndexOfTaskException, IllegalDescriptionException,
+                    IllegalCommandException {
+        if (command.equals("list")) {
+            String[] text = new String[list.size() + 1];
+            text[0] = "Here are the tasks in your list:";
+            for (int i = 0; i < list.size(); i++) {
+                text[i + 1] = (i + 1) + "." + list.get(i);
+            }
+            printBlock(text);
+        } else {
+            int indexOfSpace = command.indexOf(' ');
+            //if there is no space, assume that the string is a command type
+            if (indexOfSpace == -1) {
+                indexOfSpace = command.length();
+            }
+            //seperate command and description of the task
+            String type = command.substring(0, indexOfSpace);
+            String description = command.substring(indexOfSpace).strip();
+
+            if (type.equals("done")) {
+                try {
+                    int index = Integer.valueOf(description) - 1;
+                    list.get(index).setDone();
+                    printBlock("Nice! I've marked this task as done:", "  " + list.get(index));
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    throw new IllegalIndexOfTaskException(
+                            "Please provide an valid index of the task.");
+                }
+            } else if (type.equals("todo")) {
+                addTask(new ToDo(description.strip()), list);
+            } else if (type.equals("deadline")) {
+                int sep = description.indexOf("/by");
+                if (sep == -1) {
+                    throw new IllegalDescriptionException("The format of deadline task is wrong.");
+                }
+                addTask(new Deadline(description.substring(0, sep).strip(),
+                                description.substring(sep + 3).strip()),
+                        list);
+            } else if (type.equals("event")) {
+                int sep = description.indexOf("/at");
+                if (sep == -1) {
+                    throw new IllegalDescriptionException("The format of event task is wrong.");
+                }
+                addTask(new Event(description.substring(0, sep).strip(),
+                                description.substring(sep + 3).strip()),
+                        list);
+            } else {
+                throw new IllegalCommandException(
+                        "I'm sorry, but I don't know what that means :-(");
+            }
+        }
+    }
+
+    /** main method*/
     public static void main(String[] args) {
         String greeting = "Hello! I'm Duke";
         String question = "What can I do for you?";
@@ -40,33 +103,11 @@ public class Duke {
             if (command.equals("bye")) {
                 printBlock("Bye. Hope to see you again soon!");
                 break;
-            } else if (command.equals("list")) {
-                String[] text = new String[list.size() + 1];
-                text[0] = "Here are the tasks in your list:";
-                for (int i = 0; i < list.size(); i++) {
-                    text[i + 1] = (i + 1) + "." + list.get(i);
-                }
-                printBlock(text);
-            } else {
-                String type = command.substring(0, command.indexOf(" "));
-                String description = command.substring(command.indexOf(" ") + 1);
-                if (type.equals("done")) {
-                    int index = Integer.valueOf(description) - 1;
-                    list.get(index).setDone();
-                    printBlock("Nice! I've marked this task as done:", "  " + list.get(index));
-                } else if (type.equals("todo")) {
-                    addTask(new ToDo(description), list);
-                } else if (type.equals("deadline")) {
-                    int sep = description.indexOf(" /by ");
-                    addTask(new Deadline(description.substring(0, sep),
-                            description.substring(sep + 5)),
-                            list);
-                } else if (type.equals("event")) {
-                    int sep = description.indexOf(" /at ");
-                    addTask(new Event(description.substring(0, sep),
-                                    description.substring(sep + 5)),
-                            list);
-                }
+            }
+            try {
+                parseCommand(command, list);
+            } catch (Exception e) {
+                printBlock("OPPS!!! " + e.getMessage());
             }
         }
     }

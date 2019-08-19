@@ -31,25 +31,23 @@ public class Duke {
                 case "bye":
                     return;
                 case "list":
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Here are the tasks in your list:\n");
+                    StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
                     for (int i = 1; i < this.ls.size(); i++) {
                         sb.append(i)
                                 .append(".")
                                 .append(this.ls.get(i));
                     }
-                    sb.setLength(sb.length() - 1);
                     this.cout(sb.toString());
                     break;
                 default:
                     Task t = null;
                     if (instr.startsWith("deadline ")) {
                         String[] temp = instr.substring(9).split(" /by ");
-                        if(temp.length == 2)
+                        if (temp.length == 2)
                             t = new Deadline(temp[0], temp[1]);
                     } else if (instr.startsWith("event ")) {
                         String[] temp = instr.substring(6).split(" /at ");
-                        if(temp.length == 2)
+                        if (temp.length == 2)
                             t = new Event(temp[0], temp[1]);
                     } else if (instr.startsWith("todo ")) {
                         t = new Todo(instr.substring(5));
@@ -60,7 +58,6 @@ public class Duke {
                                 t +
                                 "Now you have " + (this.ls.size() - 1) + " tasks in the list.");
                     }
-
                     if (instr.startsWith("done ")) {
                         t = this.ls.get(Integer.parseInt(instr.substring(5)));
                         t.setDone();

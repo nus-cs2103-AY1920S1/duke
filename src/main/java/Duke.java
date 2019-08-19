@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -94,6 +93,26 @@ public class Duke {
                     printMessage("Got it. I've added this task: " +
                             "\n\t   " + newTask.toString()
                             + "\n\t Now you have " + taskList.size() + " tasks in the list.");
+                } else if(inputs[0].equals("delete")) {
+                    if(inputs.length < 2) {
+                        throw new DukeException("The task Number cannot be empty.");
+                    }
+
+                    int index = Integer.parseInt(inputs[1]) - 1;
+
+                    if(index >= taskList.size() || index < 0) {
+                        throw new DukeException("Invalid task number!");
+                    }
+
+                    Task deletedTask = taskList.remove(index);
+
+                    printMessage("Noted. I've removed this task:"
+                                            + "\n\t   " + deletedTask.toString()
+                                                + "\n\t Now you have "
+                                                    + taskList.size()
+                                                        + " tasks in the list.");
+
+
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }

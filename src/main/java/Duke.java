@@ -46,6 +46,20 @@ public class Duke {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! No such task exist!");
             }
+        } else if (command.startsWith("delete ")){
+            try {
+                int id = Integer.parseInt(command.substring(7));
+                Task deleted_task = tasks.get(id - 1);
+                tasks.remove(id - 1);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(deleted_task);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("☹ OOPS!!! Invalid index provided!");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("☹ OOPS!!! No such task exist!");
+            }
         } else {
             addTask(command);
         }

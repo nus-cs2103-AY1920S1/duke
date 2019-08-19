@@ -1,4 +1,5 @@
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,9 +9,23 @@ public class Duke {
     private void Greet(){
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
-
+    private void Add(Task t, ArrayList<Task> l){
+        l.add(t);
+        System.out.println("added: " + t.getDescription());
+    }
     private void Echo(String a){
         System.out.println(a);
+    }
+    private void MarkAsDone(int x, ArrayList<Task> li){
+        li.get(x).markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[" + li.get(x).getStatusIcon() + "] " + li.get(x).description);
+    }
+    private void getList(ArrayList<Task> lis){
+        System.out.println("Here are the tasks in your list:");
+        for(int i = 1; i <= lis.size(); i+=1){
+            System.out.println(i + ".[" + lis.get(i-1).getStatusIcon() + "] " + lis.get(i-1).description);
+        }
     }
     private void Exit(){
         System.out.println("Bye. Hope to see you again soon!");
@@ -27,23 +42,18 @@ public class Duke {
                 break;
             }
             else if(a.equals("list")){
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 1; i <= d.list.size(); i+=1){
-                    System.out.println(i + ".[" + d.list.get(i-1).getStatusIcon() + "] " + d.list.get(i-1).description);
-                }
-
+                d.getList(d.list);
             }
             else if(a.equals("done")){
                 int num = scan.nextInt();
-                d.list.get(num-1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + d.list.get(num-1).getStatusIcon() + "] " + d.list.get(num-1).description);
+                d.MarkAsDone(num-1,d.list);
                 String c = scan.nextLine();
             }
             else{
                String b = a + scan.nextLine();
-                d.list.add(new Task(b));
-               System.out.println("added: " + b);
+                Task t = new Task(b);
+                d.Add(t,d.list);
+
             }
 
         }

@@ -2,19 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    private static Scanner sc;
+    private static ArrayList<Task> tasks = new ArrayList<>();
     private static String horizontalLine =
             "    ____________________________________________________________";
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         String input;
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
 
         printGreeting();
 
@@ -26,15 +21,10 @@ public class Duke {
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
-                printTasks(tasks);
+                printTasks();
             } else if (command.equals("done")) {
                 Task task = tasks.get(Integer.parseInt(inputArr[1]) - 1);
-                task.markAsDone();
-                System.out.println(horizontalLine);
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + task);
-                System.out.println(horizontalLine);
-                System.out.println();
+                handleDone(task);
             } else {
                 Task task;
                 if (command.equals("todo")) {
@@ -46,15 +36,8 @@ public class Duke {
                     String[] detailsArr = inputArr[1].split(" /at ");
                     task = new Event(detailsArr[0], detailsArr[1]);
                 }
-                tasks.add(task);
 
-                System.out.println(horizontalLine);
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("       " + task);
-                System.out.println("     Now you have " + tasks.size()
-                        + " tasks in the list.");
-                System.out.println(horizontalLine);
-                System.out.println();
+                handleAddTask(task);
             }
         }
 
@@ -70,7 +53,7 @@ public class Duke {
         System.out.println();
     }
 
-    private static void printTasks(ArrayList<Task> tasks) {
+    private static void printTasks() {
         System.out.println(horizontalLine);
         System.out.println("     Here are the tasks in your list:");
 
@@ -89,5 +72,27 @@ public class Duke {
         System.out.println(horizontalLine);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(horizontalLine);
+    }
+
+    private static void handleDone(Task task) {
+        task.markAsDone();
+
+        System.out.println(horizontalLine);
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       " + task);
+        System.out.println(horizontalLine);
+        System.out.println();
+    }
+
+    private static void handleAddTask(Task task) {
+        tasks.add(task);
+
+        System.out.println(horizontalLine);
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + task);
+        System.out.println("     Now you have " + tasks.size()
+                + " tasks in the list.");
+        System.out.println(horizontalLine);
+        System.out.println();
     }
 }

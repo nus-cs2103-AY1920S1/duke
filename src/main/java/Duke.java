@@ -29,11 +29,9 @@ public class Duke {
             input = sc.nextLine();
             if (input.equals("list")) {
                 listTasks();
-            }
-            else if (input.matches("todo\\s.*")) {
+            } else if (input.matches("todo\\s.*")) {
                 addTodo(input.substring(5));
-            }
-            else if (input.matches("done\\s\\d+")) {
+            } else if (input.matches("done\\s\\d+")) {
                doDoneTask(input);
             } else if (input.equals("bye")) {
                 exitApp();

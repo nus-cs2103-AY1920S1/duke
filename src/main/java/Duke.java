@@ -47,7 +47,7 @@ public class Duke {
 
     private void addToRecord(Task t){
         this.textEntered.add(t);
-        System.out.printf("Got it. I've added this task: \n %s\nNow you have %d tasks in the list.%n", t.toString(), textEntered.size());
+        System.out.printf("Got it. I've added this task: \n%s\nNow you have %d tasks in the list.%n", t.toString(), textEntered.size());
         System.out.println();
     }
 

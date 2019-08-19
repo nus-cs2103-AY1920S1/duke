@@ -5,7 +5,7 @@
  *
  * @author Marcus Ong
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -18,12 +18,17 @@ public class Task {
         return description;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "+" : "x"); //return + or x symbols
-    }
-
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    /**
+     * Get a status symbol for the task.
+     *
+     * @return + for a done task or x for an undone task.
+     */
+    public String getStatusIcon() {
+        return (isDone ? "+" : "x"); //return + or x symbols
     }
 
     public String toString() {

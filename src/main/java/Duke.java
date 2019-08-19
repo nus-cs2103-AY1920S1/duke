@@ -27,6 +27,10 @@ public class Duke {
         System.out.println(line);
     }
 
+    private static String format(String s) {
+        return "      " + s;
+    }
+
     // echos with input string
     private static void echo(String s) {
         format_print(s);
@@ -35,26 +39,37 @@ public class Duke {
     public static void main(String[] args) {
         // initialize objects
         Scanner sc = new Scanner(System.in);
-        String[] list = new String[100];
+        // String[] list = new String[100];
+        Task[] tasks = new Task[100];
+        Task.count = 0;
 
         // greetings
         String[] greetings = {"Hello! I'm Duke", "What can I do for you?"};
         format_print(greetings);
 
         // interacts until the input is "bye"
-        int count = 0;
         while (true) {
+            // read input line
             String s = sc.nextLine();
-            if (s.equals("bye")) {
+            if (s.equals("bye")) { // exit
                 format_print("Bye. Hope to see you again soon!");
                 break;
-            } else if (s.equals("list")) {
-                String[] print_list = Arrays.copyOfRange(list, 0, count);
+            } else if (s.equals("list")) { // show all tasks
+                System.out.println(line);
+                System.out.println(format("Here are the tasks in your list:"));
+                for (Task t : Arrays.copyOfRange(tasks, 0, Task.count)) {
+                    System.out.println(format(t.toString()));
+                }
+                System.out.println(line);
+            } else if (s.split(" ")[0].equals("done")) { // mark as done
+                int num = Integer.parseInt(s.split(" ")[1]);
+                tasks[num - 1].isDone = true;
+                String[] print_list = {"Nice! I've marked this task as done: ", tasks[num - 1].done()};
                 format_print(print_list);
-            } else {
-                count++;
-                format_print("added: " + s);
-                list[count - 1] = count + ". " + s;
+            } else { // add new task
+                Task newTask = new Task(s);
+                tasks[Task.count - 1] = newTask;
+                format_print("added: " + newTask.description);
             }
         }
     }

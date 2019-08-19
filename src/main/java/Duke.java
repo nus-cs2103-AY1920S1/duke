@@ -5,15 +5,21 @@ public class Duke {
     public static void main(String[] args) {
         //dukeSayHello();
         greetings();
+
+        //level 2
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNext()) {
+        ItemsList itemsList = new ItemsList();
+        while (sc.hasNext()) {
             String input = sc.nextLine();
-            if (!input.equals("bye")) {
-                System.out.println(input);
+            if (input.equals("list")) {
+                itemsList.printList();
             }
-            else {
+            else if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            }
+            else {
+                itemsList.addItem(input);
             }
         }
     }

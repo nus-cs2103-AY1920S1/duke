@@ -1,5 +1,5 @@
 //import java.util.Scanner;
-//import java.util.LinkedList;
+//
 //LinkedList<String> allItems = new LinkedList<>();
 //
 //public class Example {

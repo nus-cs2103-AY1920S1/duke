@@ -14,10 +14,7 @@ public class Task {
 
     @Override
     public String toString(){
-        if(isDone){
-            return "[" + "\u2713" + "] " + taskName;
-        } else {
-            return "[" + "\u2718" + "] " + taskName;
-        }
+        String mark = isDone ? "✓" : "✗";
+        return "[" + mark + "] " + taskName;
     }
 }

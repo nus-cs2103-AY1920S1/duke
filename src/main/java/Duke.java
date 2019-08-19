@@ -1,9 +1,133 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
 public class Duke {
-    private static boolean is_bye = false;
-    private  static  ArrayList<Task> tasks = new ArrayList<Task>() ;
+    private static boolean isBye = false;
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
+
+    public static void printList(){
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++){
+            Task task = tasks.get(i);
+            int count = i + 1;
+            System.out.println(count + "." + task.toString());
+        }
+    }
+
+    public static void done(int taskIndex){
+        try{
+            Task t = tasks.get(taskIndex);
+            t.completed();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("   [✓] " + t.getTask());
+        } catch (IndexOutOfBoundsException ex){
+            if (tasks.size() == 0){
+                System.out.println("No tasks to be done.");
+            } else {
+                taskIndex += 1;
+                System.out.println("Task " + taskIndex + " does not exist.");
+            }
+        }
+    }
+
+    public static void delete(int taskIndex){
+        try{
+            Task deleted_task = tasks.remove(taskIndex);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(" " + deleted_task.toString());
+
+            if (tasks.size() <= 1){
+                System.out.println("Now you have " + tasks.size() + " task in the list.");
+            } else {
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
+        } catch (IndexOutOfBoundsException ex){
+            if (tasks.size() == 0) {
+                System.out.println("Nothing to delete.");
+            } else {
+                taskIndex += 1;
+                System.out.println("Task " + taskIndex + " does not exist.");
+            }
+        }
+    }
+
+    public static void deadline(String input){
+        String[] words = input.split(" /by ");
+        Deadline dl = new Deadline(words[0], words[1]);
+        tasks.add(dl);
+        dl.printAddedDeadline(tasks.size());
+    }
+
+    public static void event(String input){
+        String[] words = input.split(" /at ");
+        Events event = new Events(words[0], words[1]);
+        tasks.add(event);
+        event.printAddedEvent(tasks.size());
+    }
+    public static void todo(String input){
+        Todo td = new Todo(input);
+        tasks.add(td);
+        td.printAddedTodo(tasks.size());
+    }
+
+    public static void checkCommand(String input) throws NoValidCommandException{
+        String[] words = input.split(" ", 2);
+        String command = words[0];
+
+            switch (command) {
+            case "bye":
+                isBye = true;
+                System.out.println("Bye. Hope to " +
+                    "see you again soon!");
+                break;
+
+            case "list":
+                printList();
+                break;
+
+            case "done":
+                int doneIndex = Integer.parseInt(words[1]) - 1;
+                done(doneIndex);
+                break;
+
+            case "delete":
+                int delIndex = Integer.parseInt(words[1]) - 1;
+                delete(delIndex);
+                break;
+
+            case "deadline":
+                deadline(words[1]);
+                break;
+
+            case "event":
+                event(words[1]);
+                break;
+
+            case "todo":
+                try {
+                    todo(words[1]);
+                } catch (IndexOutOfBoundsException ex){
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                break;
+
+            default:
+                throw new NoValidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+    }
+
+    public static void runInterface(){
+        Scanner scan = new Scanner(System.in);
+        while(!isBye){
+            System.out.print("input command here: ");
+            String input = scan.nextLine();
+            try{
+                checkCommand(input);
+            } catch (NoValidCommandException ex){
+                ex.printErrorMessage();
+            }
+        }
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -14,64 +138,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        Scanner scan = new Scanner(System.in);
-
-        while(!is_bye){
-            System.out.print("input command here: ");
-            String input = scan.nextLine();
-            if (input.equals("bye")){
-                System.out.println("Bye. Hope to " +
-                                "see you again soon!");
-                is_bye = true;
-
-            } else if(input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++){
-                    Task task = tasks.get(i);
-                    int count = i + 1;
-                    System.out.println(count + "." + task.toString());
-                }
-
-            } else if(input.indexOf("done") != -1){
-
-                String[] words = input.split(" ");
-                int index =Integer.parseInt(words[1]);
-                Task t = tasks.get(index-1);
-                t.completed();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("   [✓] "+ t.getTask());
-
-            } else if(input.indexOf("deadline") != -1){
-                String new_str = input.replace("deadline"," ");
-                String[] words = new_str.split("/");
-                String taskName = words[0].replace("  ", "");
-                String deadLine = words[1].replace("by ", "");
-                Deadline dl = new Deadline(deadLine, taskName);
-                tasks.add(dl);
-                dl.printAddedDeadline(tasks.size());
-
-            } else if(input.indexOf("event") != -1){
-                String new_str = input.replace("event"," ");
-                String[] words = new_str.split("/");
-                String taskName = words[0].replace("  ", "");
-                String timeDate = words[1].replace("at ", "");
-                Events event = new Events(taskName, timeDate);
-                tasks.add(event);
-                event.printAddedEvent(tasks.size());
-            }else if(input.indexOf("todo") != -1){
-                String new_str = input.replace("todo", "");
-                String taskName = new_str;
-                System.out.println(taskName);
-                Todo td = new Todo(taskName);
-                tasks.add(td);
-                td.printAddedTodo(tasks.size());
-            }
-            else{
-                tasks.add(new Task(input));
-                System.out.println("added: " + input);
-
-            }
-        }
+        runInterface();
 
     }
+
 }

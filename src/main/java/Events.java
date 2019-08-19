@@ -6,19 +6,19 @@ public class Events extends Task {
         this.timeDate = timeDate;
     }
     public String toString(){
-        String box = "";
+        String box;
         String msg = "[E]";
         if (!this.isDone()){
             box = "[✗]";
         } else{
             box = "[✓]";
         }
-        return msg + box + " " + this.getTask() + "(at: " + timeDate + ")";
+        return msg + box + " " + this.getTask() + " (at: " + timeDate + ")";
     }
 
     public void printAddedEvent (int size) {
         System.out.println("Got it. I've added this task:");
-        System.out.println("  "+this.toString());
+        System.out.println("  " + this.toString());
         String end = " tasks in the list.";
         if (size == 1){
             end = " task in the list.";

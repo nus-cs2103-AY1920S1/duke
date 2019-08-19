@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Drives the Duke bot
+ * This is the main driver class and entry point.
+ */
 public class Duke {
     static final String welcomeMsg = "Hello! I'm Duke\n" +
             "What can I do for you?";
@@ -50,7 +54,7 @@ public class Duke {
         Task chosenTask = taskList.get(chosenTaskNo - 1);
         chosenTask.setDone(true);
         CmdInterface.printHBars("Nice! I've marked this task as done: \n" +
-                "  [✓] " +chosenTask.getTaskName());
+                "  [✓] " + chosenTask.getTaskName());
     }
 
     public static void listTasks() {

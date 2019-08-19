@@ -1,4 +1,10 @@
+/**
+ * Provides Command Line Interface elements
+ * Makes printing easier
+ */
+
 public class CmdInterface {
+
     public static void printHBars(String str) {
         String horizontalBar = "    ____________________________________________________________";
         String[] strSplit = str.split("\n");
@@ -8,4 +14,5 @@ public class CmdInterface {
         }
         System.out.println(horizontalBar);
     }
+
 }

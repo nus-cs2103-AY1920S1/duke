@@ -1,3 +1,7 @@
+/**
+ * Represents the Task object
+ * One Task object per task.
+ */
 public class Task {
     private String taskName;
     private boolean isDone;

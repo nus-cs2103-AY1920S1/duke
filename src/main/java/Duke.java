@@ -6,7 +6,7 @@ public class Duke {
         //dukeSayHello();
         greetings();
 
-        //level 2
+        //level 3
         Scanner sc = new Scanner(System.in);
         ItemsList itemsList = new ItemsList();
         while (sc.hasNext()) {
@@ -18,8 +18,14 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
+            else if (input.contains("done")) {
+                String inputArr[] = input.split(" ");
+                int itemIndex = Integer.valueOf(inputArr[1]);
+                Task task = itemsList.getTaskAtIndex(itemIndex - 1);
+                task.markAsDone();
+            }
             else {
-                itemsList.addItem(input);
+                itemsList.addItem(new Task(input));
             }
         }
     }

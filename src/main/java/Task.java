@@ -5,7 +5,7 @@ public abstract class Task {
     public Task(String description) throws DukeException{
         this.description = description.trim();
         if(this.description.isBlank())
-            throw new DukeException("description", this.childClass());
+            throw new EmptyFieldDukeException("description", this.childClass());
         this.isDone = false;
     }
 
@@ -29,17 +29,17 @@ public abstract class Task {
         if (str.startsWith("deadline")) {
             String[] temp = str.substring(8).split(" /by ");
             if (temp.length < 1 || temp[0].isBlank())
-                throw new DukeException("description", "deadline");
+                throw new EmptyFieldDukeException("description", "deadline");
             if (temp.length < 2 || temp[1].isBlank())
-                throw new DukeException("time", "deadline");
+                throw new EmptyFieldDukeException("time", "deadline");
             return new Deadline(temp[0], temp[1]);
         }
         if (str.startsWith("event")) {
             String[] temp = str.substring(5).split(" /at ");
             if (temp.length < 1 || temp[0].isBlank())
-                throw new DukeException("description", "event");
+                throw new EmptyFieldDukeException("description", "event");
             if (temp.length < 2 || temp[1].isBlank())
-                throw new DukeException("time", "event");
+                throw new EmptyFieldDukeException("time", "event");
             return new Event(temp[0], temp[1]);
         }
         if (str.startsWith("todo")) {
@@ -57,7 +57,7 @@ class Deadline extends Task{
         super(description);
         this.by = by.trim();
         if(this.by.isBlank())
-            throw new DukeException("time", this.childClass());
+            throw new EmptyFieldDukeException("time", this.childClass());
     }
 
     @Override
@@ -78,7 +78,7 @@ class Event extends Task {
         super(description);
         this.at = at.trim();
         if(this.at.isBlank())
-            throw new DukeException("time", this.childClass());
+            throw new EmptyFieldDukeException("time", this.childClass());
     }
 
     @Override

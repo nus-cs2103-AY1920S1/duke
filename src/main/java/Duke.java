@@ -90,6 +90,7 @@ public class Duke {
             taskList.get(idx).setDone();
             System.out.print("     Nice! I've marked this task as done:\n");
             System.out.printf("       %s\n", taskList.get(idx));
+            
         } catch (IndexOutOfBoundsException e) {
             if (taskList.isEmpty()) {
                 System.out.printf("     ☹ OOPS!!! You have no task at the moment.\n", 1, taskList.size());
@@ -110,6 +111,7 @@ public class Duke {
             Task newTask = new Todo(taskName);
             taskList.add(newTask);
             printAddTaskMessage(newTask);
+
         } catch (EmptyDescriptionException e) {
             System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", "todo");
         }
@@ -129,6 +131,7 @@ public class Duke {
 
         } catch (EmptyDescriptionException e) {
             System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", "deadline");
+
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n" +
                     "     one argument after the keyword %s.\n", "/by");
@@ -146,8 +149,10 @@ public class Duke {
             Task newTask = new Event(taskInfo[0], taskInfo[1]);
             taskList.add(newTask);
             printAddTaskMessage(newTask);
+
         } catch (EmptyDescriptionException e) {
             System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", "event");
+
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n" +
                     "     one argument after the keyword %s.\n", "/at");

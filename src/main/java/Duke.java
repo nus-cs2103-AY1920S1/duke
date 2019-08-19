@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+    static final String welcomeMsg = "Hello! I'm Duke\n" +
+            "What can I do for you?";
+    static final String exitMsg = "Bye. Hope to see you again soon!";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -11,10 +15,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        CmdInterface.printHBars(
-                "Hello! I'm Duke\n" +
-                "What can I do for you?"
-        );
+        CmdInterface.printHBars(welcomeMsg);
 
         boolean isGoodbye = false;
         while (!isGoodbye) {
@@ -22,7 +23,7 @@ public class Duke {
             input = sc.nextLine();
             switch (input) {
                 case "bye":
-                    CmdInterface.printHBars("Bye. Hope to see you again soon!");
+                    CmdInterface.printHBars(exitMsg);
                     isGoodbye = true;
                     break;
                 default:

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
 
@@ -34,19 +35,26 @@ public class Duke {
     public static void main(String[] args) {
         // initialize objects
         Scanner sc = new Scanner(System.in);
+        String[] list = new String[100];
 
         // greetings
         String[] greetings = {"Hello! I'm Duke", "What can I do for you?"};
         format_print(greetings);
 
-        // echos until the input is bye
+        // interacts until the input is "bye"
+        int count = 0;
         while (true) {
             String s = sc.nextLine();
             if (s.equals("bye")) {
                 format_print("Bye. Hope to see you again soon!");
                 break;
+            } else if (s.equals("list")) {
+                String[] print_list = Arrays.copyOfRange(list, 0, count);
+                format_print(print_list);
             } else {
-                echo(s);
+                count++;
+                format_print("added: " + s);
+                list[count - 1] = count + ". " + s;
             }
         }
     }

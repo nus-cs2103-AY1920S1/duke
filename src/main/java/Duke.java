@@ -11,41 +11,62 @@ public class Duke {
     //Class Variables
     private List<Task> taskList;
 
+    /**
+     * Constructor for the class Duke
+     */
     //Constructor
     public Duke() {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * @param responseHeader A message to the user.
+     */
     //#region [Print Response Helper Functions]
     private void printResponse(String responseHeader) {
+        //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
+
         System.out.println(responseHeader);
+
+        //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.println("");
     }
 
+    /**
+     * @param responseHeader A message to the user.
+     * @param listofTasks The list of tasks to be displayed to the user.
+     */
     private void printResponse(String responseHeader, List<Task> listofTasks) {
+        //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
         System.out.println(responseHeader);
 
         if (listofTasks != null) {
             int indexofTask = 0;
-            for (Task mytask : listofTasks) {
+            for (Task currentTask : listofTasks) {
 
                 indexofTask += 1;
                 System.out.print(MESSAGE_PADDING);
                 System.out.print(String.format("%d.", indexofTask));
-                System.out.println(mytask);
+                System.out.println(currentTask);
             }
         }
 
+        //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
-        System.out.println("");
+        System.out.println();
     }
 
+    /**
+     * @param responseHeader A message to the user.
+     * @param refTask The task to be displayed to the user.
+     */
     private void printResponseSingleTask(String responseHeader, Task refTask) {
+        //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
         System.out.println(responseHeader);
@@ -54,58 +75,115 @@ public class Duke {
         System.out.print("  ");
         System.out.println(refTask);
 
+        System.out.print(MESSAGE_PADDING);
+        System.out.println(String.format(
+            "Now you have %d task%s in the list.",
+            this.taskList.size(),
+            (this.taskList.size() > 1) ? "s" : ""));
+
+        //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
-        System.out.println("");
+        System.out.println();
     }
     //#endregion [Print Response Helper Functions]
 
+    /**
+     * @param in The query to process.
+     * @return The task that was marked as done.
+     * @throws DukeException
+     */
     //#region [Business Logic]
-    private Task tryMarkTaskAsDone(String query) {
-        Scanner in = new Scanner(query);
-        String command = in.next();
-        int taskIndexRef = in.nextInt();
-        in.close();
+    private Task tryMarkTaskAsDone(Scanner in) throws DukeException{
 
-        if (command.equals("done") && 0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
+        if (!in.hasNextInt()) {
+            throw new DukeException("Task reference number needs to be an integer");
+        }
+
+        int taskIndexRef = in.nextInt();
+
+        if (in.hasNext()) {
+            throw new DukeException("Too many arguments for the 'mark as done' command");
+        }
+
+        if (0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
             this.taskList.get(taskIndexRef - 1).markAsDone();
             return this.taskList.get(taskIndexRef - 1);
         }
 
-        return null;
+        throw new DukeException("No such task was found");
     }
 
-    private boolean shouldContinueChat(String query) {
-        return !query.equals("bye");
-    }
-
+    /**
+     * @param query A query from the user.
+     * @return A boolean representing whether Duke should continue the chat.
+     */
     private boolean giveResponse(String query) {
-        if (!shouldContinueChat(query)) {
-            printResponse("Bye. Hope to see you again soon!");
-            return false;
 
-        } else if (query.equals("list")) {
-            printResponse("Here are the tasks in your list:", this.taskList);
+        boolean shouldContinueChat = true;
+        Scanner in = new Scanner(query);
 
-        } else if (query.startsWith("done ")) {
-            Task taskRef = tryMarkTaskAsDone(query);
-            if (taskRef == null) {
-                printResponse("Invalid Query");
-            } else {
-                printResponseSingleTask("Nice! I've marked this task as done:", taskRef);
+        Task newTask = null;
+        try {
+            if (!in.hasNext()) {
+                throw new DukeException("Query should not be empty");
             }
 
-        } else {
-            Task newTask = new Task(query);
-            this.taskList.add(newTask);
-            printResponseSingleTask("added: ", newTask);
+            //Try to parse User's query
+            String command = in.next();
+            switch(command) {
+                case "todo":
+                    newTask = ToDo.parse(in);
+                    break;
+
+                case "deadline":
+                    newTask = Deadline.parse(in);
+                    break;
+
+                case "event":
+                    newTask = Event.parse(in);
+                    break;
+
+                case "list":
+                    printResponse("Here are the tasks in your list:", this.taskList);
+                    break;
+
+                case "done":
+                    Task completedtask = tryMarkTaskAsDone(in);
+                    printResponseSingleTask("Nice! I've marked this task as done:", completedtask);
+                    break;
+
+                case "bye":
+                    shouldContinueChat = false;
+                    printResponse("Bye. Hope to see you again soon!");
+                    break;
+
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (DukeException ex) {
+            //Info user that an error occurred
+            printResponse("\u2639 OOPS!!! " + ex.getMessage());
+        } finally {
+            //Clean up
+            in.close();
         }
-        return true;
+
+        //If a new Task is created, handle it here
+        if (newTask != null) {
+            taskList.add(newTask);
+            printResponseSingleTask("Got it. I've added this task:", newTask);
+        }
+
+        return shouldContinueChat;
     }
     //#endregion [Business Logic]
 
 
+    /**
+     * To run Duke's program
+     */
     public void spin() {
-        boolean continueChat = true;
+        boolean continueChat;
         Scanner myscanner = new Scanner(System.in);  // Create a Scanner object
 
         printResponse("Hello! I'm Duke\n" + MESSAGE_PADDING + "What can I do for you?");

@@ -32,7 +32,7 @@ public class Duke {
      * Parses the command that typed by the user.
      * @param command the command typed by the user
      * @param list a list stores all the tasks
-     * @throws IllegalIndexOfTaskException if the index provided in the done command is illegal
+     * @throws IllegalIndexOfTaskException if the index provided is illegal
      * @throws IllegalDescriptionException if the description of the task is illegal
      * @throws IllegalCommandException is the command is illegal
      */
@@ -61,6 +61,17 @@ public class Duke {
                     int index = Integer.valueOf(description) - 1;
                     list.get(index).setDone();
                     printBlock("Nice! I've marked this task as done:", "  " + list.get(index));
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    throw new IllegalIndexOfTaskException(
+                            "Please provide an valid index of the task.");
+                }
+            } else if (type.equals("delete")) {
+                try {
+                    int index = Integer.valueOf(description) - 1;
+                    Task removedTask = list.remove(index);
+                    printBlock("Noted. I've removed this task:", "  " + removedTask,
+                            String.format("Now you have %d task%s in the list.",
+                                    list.size(), list.size() > 1 ? "s" : ""));
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new IllegalIndexOfTaskException(
                             "Please provide an valid index of the task.");

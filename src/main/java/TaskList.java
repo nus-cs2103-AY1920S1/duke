@@ -10,7 +10,7 @@ public class TaskList {
     /**
      * Constructor.
      */
-    TaskList() {
+    public TaskList() {
         list = new ArrayList<>();
     }
 

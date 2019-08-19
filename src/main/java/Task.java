@@ -11,7 +11,7 @@ public class Task {
      * Constructor.
      * @param description String of the task.
      */
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
     }
 

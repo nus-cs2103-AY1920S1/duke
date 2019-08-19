@@ -6,11 +6,11 @@ public class Duke {
         System.out.println(greetings);
 
         Scanner input = new Scanner(System.in);
-        String command = input.next();
+        String command = input.nextLine();
 
         while (!command.equals("bye")) {
             System.out.println(command);
-            command = input.next();
+            command = input.nextLine();
         }
 
         String farewell = "Bye. Hope to see you again soon!";

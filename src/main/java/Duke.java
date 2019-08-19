@@ -49,43 +49,78 @@ public class Duke {
 
         // interacts until the input is "bye"
         while (true) {
-            // read input line
-            String s = sc.nextLine();
-            if (s.equals("bye")) { // exit
-                format_print("Bye. Hope to see you again soon!");
-                break;
-            } else if (s.equals("list")) { // show all tasks
-                System.out.println(line);
-                System.out.println(format("Here are the tasks in your list:"));
-                for (Task t : Arrays.copyOfRange(tasks, 0, Task.count)) {
-                    System.out.println(format(t.toString()));
+            try {
+                // read input line
+                String s = sc.nextLine();
+                if (s.equals("bye")) { // exit
+                    format_print("Bye. Hope to see you again soon!");
+                    break;
+                } else if (s.equals("list")) { // show all tasks
+                    System.out.println(line);
+                    System.out.println(format("Here are the tasks in your list:"));
+                    for (Task t : Arrays.copyOfRange(tasks, 0, Task.count)) {
+                        System.out.println(format(t.toString()));
+                    }
+                    System.out.println(line);
+                } else if (s.split(" ")[0].equals("done")) { // mark as done
+                    try {
+                        int num = Integer.parseInt(s.split(" ")[1]);
+                        if (num >= Task.count) {
+                            throw new DukeException("Task number out of range.");
+                        }
+                        tasks[num - 1].isDone = true;
+                        String[] print_list = {"Nice! I've marked this task as done: ", tasks[num - 1].done()};
+                        format_print(print_list);
+                    } catch (NumberFormatException ex) {
+                        throw new DukeException("Task number should be integer.");
+                    }
+                } else { // add new task
+                    if (s.split(" ").length == 1) {
+                        String type = s.split(" ")[0];
+                        switch (type) {
+                            case "todo":
+                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            case "event":
+                                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                            case "deadline":
+                                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            default:
+                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        }
+                    }
+                    String type = s.substring(0, s.indexOf(" "));
+                    String description = s.substring(s.indexOf(" ") + 1);
+                    Task newTask;
+                    switch (type) {
+                        case "todo":
+                            newTask = new Todo(description);
+                            break;
+                        case "event":
+                            newTask = new Event(description);
+                            break;
+                        case "deadline":
+                            newTask = new Deadline(description);
+                            break;
+                        default:
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    try {
+                        String str = format(newTask.toString());
+                        tasks[Task.count - 1] = newTask;
+                        System.out.println(line);
+                        System.out.println(format("Got it. I've added this task: "));
+                        System.out.println(str);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        throw new DukeException("Task description should be of format \"context /prep date time\"");
+                    }
+                    if (Task.count == 1) {
+                        System.out.println(format("Now you have 1 task in the list."));
+                    } else {
+                        System.out.println(format("Now you have "  + Task.count + " tasks in the list."));}
+                    System.out.println(line);
                 }
-                System.out.println(line);
-            } else if (s.split(" ")[0].equals("done")) { // mark as done
-                int num = Integer.parseInt(s.split(" ")[1]);
-                tasks[num - 1].isDone = true;
-                String[] print_list = {"Nice! I've marked this task as done: ", tasks[num - 1].done()};
-                format_print(print_list);
-            } else { // add new task
-                String type = s.substring(0, s.indexOf(" "));
-                String description = s.substring(s.indexOf(" ") + 1);
-                Task newTask;
-                if (type.equals("todo")) {
-                    newTask = new Todo(description);
-                } else if (type.equals("event")) {
-                    newTask = new Event(description);
-                } else {
-                    newTask = new Deadline(description);
-                }
-                tasks[Task.count - 1] = newTask;
-                System.out.println(line);
-                System.out.println(format("Got it. I've added this task: "));
-                System.out.println(format(newTask.toString()));
-                if (Task.count == 1) {
-                    System.out.println(format("Now you have 1 task in the list."));
-                } else {
-                    System.out.println(format("Now you have "  + Task.count + " tasks in the list."));}
-                System.out.println(line);
+            } catch (DukeException ex) {
+                format_print(ex.getMessage());
             }
         }
     }

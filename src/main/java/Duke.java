@@ -17,7 +17,7 @@ public class Duke {
         while(ok){
             Scanner input = new Scanner(System.in);
             String command = input.nextLine();
-            String arr[] = command.split(" ");
+            String arr[] = command.split(" ", 2);
             switch(arr[0]) {
                 case "list":
                     if(arr.length > 1) {continue;};
@@ -25,7 +25,7 @@ public class Duke {
                     int counter = 0;
                     for(Task t : tasks) {
                         counter ++;
-                        System.out.println(counter + ". [" + t.getSymbol() + "] " + t.getTask());
+                        System.out.println(counter + ". " + t.toString());
                     }
                     break;
                 case "blah":
@@ -42,13 +42,30 @@ public class Duke {
                     int index = Integer.parseInt(arr[1]) - 1;
                     tasks.get(index).markDone();
                     String prompt = "Nice! I've marked this task as done:\n" +
-                            "    [\u2713] " + tasks.get(index).getTask();
+                            "    " + tasks.get(index).toString();
                     System.out.println(prompt);
                     break;
                 default:
-                    Task t = new Task(command);
+                    Task t = new Task("");
+                    switch(arr[0]) {
+                        case "todo":
+                            t = new Todo(arr[1]);
+                            break;
+                        case "deadline":
+                            String ddl[] = arr[1].split("/by ", 2);
+                            t = new Deadline(ddl[0], ddl[1]);
+                            break;
+                        case "event":
+                            String evt[] = arr[1].split("/at ", 2);
+                            t = new Event(evt[0], evt[1]);
+                            break;
+                        default:
+                    }
                     tasks.add(t);
-                    System.out.println("added: " + command);
+                    String output = "Got it. I've added this task: \n" +
+                                    "    " + t.toString() + "\n" +
+                                    "Now you have " + tasks.size() + " tasks in the list.";
+                    System.out.println(output);
             }
         }
     }

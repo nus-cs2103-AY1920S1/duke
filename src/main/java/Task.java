@@ -2,7 +2,7 @@ public class Task {
     private boolean done_ = false;
     private String task_ = "";
 
-    Task(String task) {
+    public Task(String task) {
         task_ = task;
     }
 
@@ -24,5 +24,10 @@ public class Task {
         } else {
             return "\u2718";
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getSymbol() + "] " + task_;
     }
 }

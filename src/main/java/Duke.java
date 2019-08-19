@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -9,6 +9,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
@@ -19,10 +20,16 @@ public class Duke {
 
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
+            String[] commandArr = command.split(" ");
 
-            switch(command.toLowerCase()) {
+            switch(commandArr[0].toLowerCase()) {
                 case "list":
                     printList(counter);
+                    break;
+
+                case "done":
+                    int taskId = Integer.parseInt(commandArr[1]);
+                    handleDone(taskId);
                     break;
 
                 case "bye":
@@ -51,9 +58,19 @@ public class Duke {
     }
 
     public static void addTask(int index, String input) {
-        tasks[index] = input;
+        tasks[index] = new Task(input);
         String str = "added: " + input;
         addBorder(str);
+    }
+
+    public static void handleDone(int taskId) {
+        Task doneTask = tasks[taskId - 1];
+        doneTask.markAsDone();
+        String str = "Nice! I've marked this task as done:\n" 
+            + " " + doneTask.toString();
+
+        addBorder(str);
+        
     }
 
     public static void handleExit() {
@@ -61,13 +78,13 @@ public class Duke {
     }
 
     public static void printList(int index) {
-        String str = "";
+        String str = "Here are the tasks in your list\n";
 
         for (int i = 1; i < index + 1; i++) {
             if (i == index) {
-                str += i + ". " + tasks[i-1];
+                str += i + "." + tasks[i-1];
             } else {
-                str += i + ". " + tasks[i-1] + "\n";
+                str += i + "." + tasks[i-1] + "\n";
             }
         }
 

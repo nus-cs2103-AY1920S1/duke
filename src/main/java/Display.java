@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Arrays;
 
 class Display implements TaskObserver {
     private ControllerInterface controller; 
@@ -56,6 +57,13 @@ class Display implements TaskObserver {
         return cmdlist[0].toUpperCase().equals("BYE");
     }
 
+    private static List<String> stringToList(String text) {
+        String[] textArr = text.split("\n");
+        List<String> textList = 
+            new ArrayList(Arrays.asList(textArr));
+        return textList;
+    }        
+
     private static void printList(List<String> printJobs) {
         /* TODO:  Delimit by \n */
 
@@ -73,8 +81,9 @@ class Display implements TaskObserver {
     }
 
     private static void printSection(String job) {
-        ArrayList<String> printxs = new ArrayList<>();
-        printxs.add(job);
+//        ArrayList<String> printxs = new ArrayList<>();
+//        printxs.add(job);
+        List<String> printxs = Display.stringToList(job);
         Display.printSection(printxs);
     }
 
@@ -102,6 +111,10 @@ class Display implements TaskObserver {
         Display.printSection(printxs);
 
     }
+
+    public static void printErrorSection(String message) {
+        Display.printSection(message);
+    }        
 
     public static void 
         printAllTasks(Iterator<TaskInterface> iter) {

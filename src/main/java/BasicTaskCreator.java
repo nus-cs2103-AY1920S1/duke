@@ -6,8 +6,11 @@ class BasicTaskCreator implements TaskCreator {
     public BasicTaskCreator() {
     }
 
-    private TaskInterface createToDo(String command) {
+    private TaskInterface createToDo(String command) 
+        throws OWOException {
+
         String[] cmdList = command.split(" ");
+        boolean isValid = checkCommand(command, "todo");
         List<String> xs = 
             new LinkedList<String>(Arrays.asList(cmdList));
         xs.remove(0);
@@ -15,9 +18,12 @@ class BasicTaskCreator implements TaskCreator {
         return new ToDosImplementation(taskName ,false);
     }
 
-    private TaskInterface createDeadLine(String command) {
+    private TaskInterface createDeadLine(String command)
+        throws OWOException {
+
         String[] subcmdList = removeFirstAndDelimit(command, 
                 " /by ");
+        boolean isValid = checkCommand(command, "deadline");
 
         String taskName = subcmdList[0];
         String date = subcmdList[1];
@@ -25,9 +31,12 @@ class BasicTaskCreator implements TaskCreator {
         return new DeadLinesImplementation(taskName, date,false);
     }
 
-    private TaskInterface createEvent(String command) {
+    private TaskInterface createEvent(String command)
+        throws OWOException {
+
         String[] subcmdList = removeFirstAndDelimit(command, 
                 " /at ");
+        boolean isValid = checkCommand(command, "event");
 
         String taskName = subcmdList[0];
         String date = subcmdList[1];
@@ -35,7 +44,8 @@ class BasicTaskCreator implements TaskCreator {
         return new EventsImplementation(taskName, date,false);
     }
 
-    public TaskInterface createTask(String command) {
+    public TaskInterface createTask(String command) 
+        throws OWOException {
         String[] cmdList = command.split(" ");
 
         if (cmdList[0].toUpperCase().equals("TODO")) {
@@ -47,9 +57,26 @@ class BasicTaskCreator implements TaskCreator {
             (cmdList[0].toUpperCase().equals("EVENT")) {
             return createEvent(command);
         } else {
-            
+            throw new OWOException("OOPS >w<  UwU  UwU  "
+                + "i'm sowwy,\n"
+                + "but i don't knyow what that means");
         } 
-        return new ToDosImplementation("ERROR",false);
+//        return new ToDosImplementation("ERROR",false);
+    }
+
+    public static boolean checkCommand(String cmd, String task) 
+        throws OWOException {
+
+        String[] cmdArr = cmd.split(" ");
+        if (cmdArr.length < 2) {
+            String errMsg = "OOPS UwU ^w^ " 
+                + "(\u30fb\u0060\u03c9\u00b4\u30fb)\n"
+                + "the descwiption of a " 
+                + task 
+                + " cannyot be empty!";
+            throw new OWOException(errMsg);
+        }            
+        return true;
     }
 
     /* converts a str.split(" ") back into a string */

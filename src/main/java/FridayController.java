@@ -1,3 +1,4 @@
+// java -Dfile.encoding=UTF8 classname
 import java.util.Iterator;
 class FridayController implements ControllerInterface {
     private TaskModelInterface model;
@@ -19,12 +20,16 @@ class FridayController implements ControllerInterface {
     }
 
     public void addTask(String command) {
-//        TaskInterface task = new TaskImplementation(command);
-       // TaskInterface task = TaskImplementation.makeTask(command);
-        TaskInterface task = taskCreator.createTask(command);
-        this.model.addTask(task);
-        this.display
-            .printAddTaskSection(task.toString(),this.model.getTotalTasks());
+
+        try {
+            TaskInterface task = taskCreator.createTask(command);
+            this.model.addTask(task);
+            this.display.printAddTaskSection(task.toString(), 
+                    this.model.getTotalTasks());
+                        
+        } catch (OWOException ex) {
+            this.display.printErrorSection(ex.getMessage());
+        }            
                 
     }
 

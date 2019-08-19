@@ -28,11 +28,36 @@ public class ToDoList {
                     System.out.println(border);
 
                 } else { //command to add task to list
-                    System.out.println(border + "\n" + "     added: " + input + "\n" + border);
-                    arr[counter] = new Task(input);
+
+                    String date;
+                    String message;
+
+                    switch (temp[0]){
+                        case "deadline":
+                            date = input.substring(input.indexOf("/") + 4);
+                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                            arr[counter] = new Deadlines(message, date);
+                            break;
+                        case "event":
+                            date = input.substring(input.indexOf("/") + 4);
+                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                            arr[counter] = new Events(message, date);
+                            break;
+                        case "todo":
+                            message = input.substring(input.indexOf(' ') + 1);
+                            arr[counter] = new ToDos(message);
+                            break;
+                    }
+
                     counter ++;
+                    System.out.println(border);
+                    System.out.println("     Got it. I've added this task: ");
+                    System.out.println("       " + arr[counter - 1]);
+                    System.out.printf("     Now you have %s tasks in the list.\n", counter);
+                    System.out.println(border);
                 }
             }
+
             input = sc.nextLine();
         }
         if (input.equals("bye")){

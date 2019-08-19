@@ -12,28 +12,42 @@ public class Duke {
                           "What can I do for you?";
         System.out.println(greeting);
 
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         boolean ok = true;
         while(ok){
             Scanner input = new Scanner(System.in);
             String command = input.nextLine();
-            switch(command) {
+            String arr[] = command.split(" ");
+            switch(arr[0]) {
                 case "list":
+                    if(arr.length > 1) {continue;};
+                    System.out.println("Here are the tasks in your list:");
                     int counter = 0;
-                    for(String s : tasks) {
+                    for(Task t : tasks) {
                         counter ++;
-                        System.out.println(counter + ". " + s);
+                        System.out.println(counter + ". [" + t.getSymbol() + "] " + t.getTask());
                     }
                     break;
                 case "blah":
+                    if(arr.length > 1) {continue;};
                     System.out.println("blah");
                     break;
                 case "bye":
+                    if(arr.length > 1) {continue;};
                     System.out.println("Bye. Hope to see you again soon!");
                     ok = false;
                     break;
+                case "done":
+                    if(arr.length > 2) {continue;};
+                    int index = Integer.parseInt(arr[1]) - 1;
+                    tasks.get(index).markDone();
+                    String prompt = "Nice! I've marked this task as done:\n" +
+                            "    [\u2713] " + tasks.get(index).getTask();
+                    System.out.println(prompt);
+                    break;
                 default:
-                    tasks.add(command);
+                    Task t = new Task(command);
+                    tasks.add(t);
                     System.out.println("added: " + command);
             }
         }

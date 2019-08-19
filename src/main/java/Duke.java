@@ -56,6 +56,13 @@ public class Duke {
                                 + separationLine + "\n");
                         break;
                     case "deadline":
+                        if (!userInput.contains(" /by ")) {
+                            // Exception for invalid deadline format
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! For deadline please use the format\n" +
+                                    "               \"deadline description /by end time\"\n"
+                                    + separationLine + "\n");
+                        }
                         String[] splitStringD = userInput.split(" /by ");
                         Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""),
                                 splitStringD[1]);
@@ -65,6 +72,13 @@ public class Duke {
                                 + separationLine + "\n");
                         break;
                     case "event":
+                        if (!userInput.contains(" /at ")) {
+                            // Exception for invalid deadline format
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! For event please use the format\n" +
+                                    "               \"event description /at period\"\n"
+                                    + separationLine + "\n");
+                        }
                         String[] splitStringE = userInput.split(" /at ");
                         Event event = new Event(splitStringE[0].replace("event ", ""), splitStringE[1]);
                         taskStore.add(event);
@@ -82,7 +96,7 @@ public class Duke {
                 System.err.println(de.getMessage());
             } catch (NumberFormatException ne) {
                 System.err.println(separationLine +
-                        "\n     \u2639 OOPS!!! Please specify task number as one integer only\n"
+                        "\n     \u2639 OOPS!!! Please specify task number as one integer only.\n"
                         + separationLine + "\n");
             }
             userInput = scan.nextLine();

@@ -11,7 +11,6 @@ public class Duke {
         System.out.println("Hello I am\n" + logo);
         System.out.println("What can I do for you?");
 
-        //Echo
         Scanner sc = new Scanner(System.in);
         String input;
         String check = "dummy";
@@ -24,7 +23,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= taskStorage.size(); i++) {
                     Task evaluatingTask = taskStorage.get(i - 1);
-                    System.out.println(i + ". [" + evaluatingTask.getStatusIcon() + "] " + evaluatingTask.getDescription());
+                    System.out.println(i + "." + evaluatingTask.toString());
                 }
                 System.out.println();
                 continue;
@@ -36,7 +35,7 @@ public class Duke {
                 taskDone.markAsDone();
                 System.out.println("Nice! I've marked this task as done: " + "\n"
                         + "  [" + taskDone.getStatusIcon() + "] " + taskDone.getDescription() + "\n");
-            } else if (check.equals("bye") == false) {
+            } else {
                 Task t = new Task(input);
                 taskStorage.add(t);
                 System.out.println("added: " + t.getDescription() + "\n");

@@ -3,10 +3,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import task.Task;
-import task.Event;
-import task.Deadline;
-import task.ToDo;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.ToDo;
+import duke.error.DukeException;
+import duke.error.InvalidCommandException;
+import duke.error.InvalidTaskArgumentException;
+import duke.error.InvalidDoneCommandException;
 
 public class Duke {
     private List<Task> list;
@@ -54,31 +58,36 @@ public class Duke {
      * @param command String
      * @return boolean
      */
-    boolean handleCommand(String command) {
-
-        String keyword = command.split(" ")[0];
-        switch (keyword) {
-        case "bye":
-            System.out.println("Bye. Hope to see you again soon!");
-            return true;
-        case "list":
-            this.handleListCommand();
-            break;
-        case "done":
-            this.handleDoneCommand(command);
-            break;
-        case "todo":
-            this.handleTodoCommand(command);
-            break;
-        case "deadline":
-            this.handleDeadlineCommand(command);
-            break;
-        case "event":
-            this.handleEventCommand(command);
-            break;
-        default:
+    boolean handleCommand(String command) { 
+        try {
+            String keyword = command.split(" ")[0];
+            switch (keyword) {
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                return true;
+            case "list":
+                this.handleListCommand();
+                break;
+            case "done":
+                this.handleDoneCommand(command);
+                break;
+            case "todo":
+                this.handleTodoCommand(command);
+                break;
+            case "deadline":
+                this.handleDeadlineCommand(command);
+                break;
+            case "event":
+                this.handleEventCommand(command);
+                break;
+            default:
+                throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            return false;
+        } catch (DukeException e) {
+            this.printStream.println(e);
+            return false;
         }
-        return false;
     }
 
     /**
@@ -104,10 +113,14 @@ public class Duke {
     /**
      * Handle Done command.
      * @param command String
+     * @throws InvalidDoneCommandException if the task to modify is invalid
      */
-    void handleDoneCommand(String command) {
+    void handleDoneCommand(String command) throws InvalidDoneCommandException {
         String[] doneArr = command.split(" ");
         int indexToEdit = Integer.parseInt(doneArr[1]);
+        if (indexToEdit > this.list.size() || indexToEdit < 1) {
+            throw new InvalidDoneCommandException("☹ OOPS!!! Trying to modify invalid task");
+        }
         Task task = this.list.get(indexToEdit - 1);
         task.markDone();
         System.out.printf("    Nice! I've marked this task as done:\n");
@@ -117,9 +130,13 @@ public class Duke {
     /**
      * Handle Deadline command.
      * @param command String
+     * @throws InvalidTaskArgumentException if Deadline arguments are invalid
      */
-    void handleDeadlineCommand(String command) {
-        String[] commandArr = command.replace("deadline ", "").split("/by ");
+    void handleDeadlineCommand(String command) throws InvalidTaskArgumentException {
+        String[] commandArr = command.replace("deadline", "").trim().split("/by ");
+        if (commandArr.length != 2) {
+            throw new InvalidTaskArgumentException("☹ OOPS!!! Deadline must have a description and date");
+        }
         Task taskToAdd = new Deadline(commandArr[0], commandArr[1]);
         this.list.add(taskToAdd);
         this.sendAddTaskAck();        
@@ -128,9 +145,13 @@ public class Duke {
     /**
      * Handle Event command.
      * @param command String
+     * @throws InvalidTaskArgumentException if Event arguments are invalid
      */
-    void handleEventCommand(String command) {
-        String[] commandArr = command.replace("event ", "").split("/at ");
+    void handleEventCommand(String command) throws InvalidTaskArgumentException {
+        String[] commandArr = command.replace("event", "").trim().split("/at ");
+        if (commandArr.length != 2) {
+            throw new InvalidTaskArgumentException("☹ OOPS!!! Event must have a description and date");
+        }
         Task taskToAdd = new Event(commandArr[0], commandArr[1]);
         this.list.add(taskToAdd);
         this.sendAddTaskAck();        
@@ -139,9 +160,13 @@ public class Duke {
     /**
      * Handle ToDo command.
      * @param command String
+     * @throws InvalidTaskArgumentException if ToDo arguments are invalid
      */
-    void handleTodoCommand(String command) {
-        String name = command.replace("todo ", "");
+    void handleTodoCommand(String command) throws InvalidTaskArgumentException {
+        String name = command.replace("todo", "").trim();
+        if ("".equals(name)) {
+            throw new InvalidTaskArgumentException("☹ OOPS!!! The description of a todo cannot be empty."); 
+        }
         this.list.add(new ToDo(name));
         this.sendAddTaskAck();
     }

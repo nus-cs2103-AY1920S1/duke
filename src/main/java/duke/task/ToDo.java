@@ -1,14 +1,11 @@
-package task;
+package duke.task;
 
-public class Deadline extends Task {
-    String time;
-
+public class ToDo extends Task {
     /**
      * Constructor.
      */
-    public Deadline(String name, String time) {
+    public ToDo(String name) {
         super(name);
-        this.time = time;
     }
 
     @Override
@@ -23,6 +20,6 @@ public class Deadline extends Task {
         } else {
             status = "[✗]";
         }
-        return String.format("[D]%s %s (by: %s)", status, this.name, this.time);
+        return String.format("[T]%s %s", status, this.name);
     }
 }

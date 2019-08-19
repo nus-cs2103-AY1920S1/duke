@@ -37,15 +37,15 @@ public class Duke {
 
                         int index = Integer.valueOf(argumentArray[1]) - 1;
                         //catch task number not in list error
-                        if (index >= store.size() || index < 0) {
-                            throw new DukeException("Task number inputted is not in current list");
-                        }
                         Task taskToModify = store.get(index);
                         taskToModify.markAsDone();
                         System.out.println("Nice! I've marked this task as done: ");
                         System.out.println(taskToModify);
                         //argument = myScanner.nextLine();
-                    } catch (DukeException e) {
+                    } catch(IndexOutOfBoundsException e) {
+                        System.out.println("invalid number not in current list");
+
+                    }catch (DukeException e) {
                         System.out.println(e);
                     } finally {
                         argument = myScanner.nextLine();
@@ -156,20 +156,21 @@ public class Duke {
                     } finally {
                         argument = myScanner.nextLine();
                     }
-                } else if (argumentArray[0].equals("delete")) {
+                }/* else if (argumentArray[0].equals("delete")) {
                         try{
                             if (argumentArray.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description for delete command cannot be empty.");
                             }
                             int index = Integer.valueOf(argumentArray[1]) - 1;
                             //catch task number not in list error
-                            if (index >= store.size() || index < 0) {
-                                throw new DukeException("delete number inputted is not in current list");
-                            }
+
                             Task removed = store.remove(index);
                             printNoted();
                             System.out.println(removed);
                             printNow(store.size());
+
+                        }catch(IndexOutOfBoundsException e) {
+                            System.out.println("invalid number not in current list");
 
                         }catch (DukeException e) {
                             System.out.println(e);
@@ -177,7 +178,7 @@ public class Duke {
                             argument = myScanner.nextLine();
                         }
 
-                } else {
+                }*/ else {
                     /*Task incomingTask = new Task(argument);
                     store.add(incomingTask);
                     System.out.println("added: " + argument);

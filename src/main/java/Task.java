@@ -15,6 +15,6 @@ public class Task {
     @Override
     public String toString(){
         String mark = isDone ? "✓" : "✗";
-        return "[" + mark + "] " + taskName;
+        return "[T][" + mark + "] " + taskName;
     }
 }

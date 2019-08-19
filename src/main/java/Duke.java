@@ -31,27 +31,43 @@ public class Duke {
         sb.setLength(0);
         //Scanner obj for input
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> items = new ArrayList<String>();
+        ArrayList<Task> items = new ArrayList<Task>();
 
         //Loop till user input 'bye'
         String input = sc.nextLine();
         while (!input.toLowerCase().equals("bye")) {
 
             //adding items to arraylist for listing purpose
-            if (!input.toLowerCase().equals("list")) {
-                items.add(input);
+            if (input.toLowerCase().contains("done")) {
+                //getting the number for item
+                int itemNum = Integer.parseInt(input.substring(input.length() - 1));
+                Task curr = items.get(itemNum - 1);
+                curr.markAsDone();
+                //forming the message
                 sb.append(border + "\n");
-                sb.append("added: " + input + "\n");
+                sb.append("Nice! I've marked this task as done:\n");
+                sb.append("[" + curr.getStatusIcon() + "]" + curr.getDescription() + "\n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+                input = sc.nextLine();
+            } else if (input.toLowerCase().equals("list")) {
+                sb.append(border + "\n");
+                //list out all items in arraylist items
+                for (int i = 1; i <= items.size(); i++) {
+                    Task curr = items.get(i - 1);
+                    sb.append(i + "." + "[" + curr.getStatusIcon() + "]" + " " + curr.getDescription() + "\n");
+                }
                 sb.append(border + "\n");
                 System.out.println(sb.toString());
                 sb.setLength(0);
                 input = sc.nextLine();
             } else {
+                //adding an item
+                Task newTask = new Task(input);
+                items.add(newTask);
                 sb.append(border + "\n");
-                //list out all items in arraylist items
-                for (int i = 1; i <= items.size(); i++) {
-                    sb.append(i + ". " + items.get(i - 1) + "\n");
-                }
+                sb.append("added: " + input + "\n");
                 sb.append(border + "\n");
                 System.out.println(sb.toString());
                 sb.setLength(0);

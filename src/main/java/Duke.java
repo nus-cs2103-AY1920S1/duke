@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class Duke {
     static void printline(){
@@ -12,7 +13,16 @@ public class Duke {
 
     static void takeInput(String echo){
         printline();
-        System.out.println("\t" + echo);
+        System.out.println("\tadded:" + echo);
+        printline();
+    }
+
+    static void printList(LinkedList<String> li){
+        printline();
+        for(int i = 0; i < li.size(); i++){
+            int j = i+1;
+            System.out.println("\t" + j + ". " + li.get(i));
+        }
         printline();
     }
     public static void main(String[] args) {
@@ -29,6 +39,8 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         printline();
 
+        //LinkedList used to store all the String given by the user;
+        LinkedList<String> li = new LinkedList<String>();
         while(true){
             printnewline();
             String echo = scan.nextLine();
@@ -37,7 +49,10 @@ public class Duke {
                 System.out.println("\tBye. Hope to see you again soon!");
                 printline();
                 break;
-            } else {
+            } else if(echo.equals("list")){
+                printList(li);
+            }else {
+                li.add(echo);
                 takeInput(echo);
             }
         }

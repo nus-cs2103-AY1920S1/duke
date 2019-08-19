@@ -12,7 +12,7 @@ public class Duke { // handles all input and output
 
     final static String line = "____________________________________________________________";
 
-    final static ArrayList _todo = new ArrayList<String>();
+    final static ArrayList<Task> _todo = new ArrayList<Task>();
 
     public static String intro() {
         String intro = String.format("%s%n%s%n Hello! I'm Duke%n What can I do for you?%n%s%n",
@@ -22,10 +22,14 @@ public class Duke { // handles all input and output
 
     public static String list() {
         StringBuilder s = new StringBuilder(line);
+        s.append(System.getProperty("line.separator"));
+        s.append(" Here are the tasks in your list:");
         for (int i = 1; i <= _todo.size(); i++) {
             s.append(System.getProperty("line.separator"));
-            s.append(" ").append(i).append(". ");
-            s.append(_todo.get(i - 1));
+            s.append(" ").append(i).append(".[");
+            Task t = _todo.get(i - 1);
+            s.append(t.getStatusIcon()).append("] ");
+            s.append(t.getDesc());
         }
         s.append(System.getProperty("line.separator"));
         s.append(line);
@@ -46,10 +50,18 @@ public class Duke { // handles all input and output
     }
 
     public static String addToList(String task) {
-        _todo.add(task);
+        _todo.add(new Task(task));
         String added = String.format("%s%n added: %s%n%s%n",
                         line, task, line);
         return added;
+    }
+
+    public static String done(int n) {
+        Task t = _todo.get(n - 1);
+        t.markAsDone();
+        String done = String.format("%s%n Nice! I've marked this task as done:%n [%s] %s%n",
+                        line, t.getStatusIcon(), t.getDesc(), line);
+        return done;
     }
 
     public static void main(String[] args) { // handles all input and output
@@ -58,11 +70,6 @@ public class Duke { // handles all input and output
 
         while (sc.hasNext()) {
             String cmd = sc.nextLine();
-//            if (sc.hasNext("list") || sc.hasNext("blah") || sc.hasNext("bye")) {
-//                cmd = sc.next();
-//            } else {
-//                cmd = sc.nextLine();
-//            }
 
             switch(cmd) {
                 case "list":
@@ -75,7 +82,12 @@ public class Duke { // handles all input and output
                     System.out.println(bye());
                     break;
                 default:
-                    System.out.println(addToList(cmd));
+                    if (cmd.contains("done")) {
+                        int taskNo = Integer.parseInt(cmd.substring(cmd.length() - 1));
+                        System.out.println(done(taskNo));
+                    } else {
+                        System.out.println(addToList(cmd));
+                    }
                     break;
             }
         }

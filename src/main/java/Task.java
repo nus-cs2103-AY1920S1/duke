@@ -11,8 +11,9 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
-    public void markAsDone() {
+    public Task markAsDone() {
         isDone = true;
+        return this;
     }
 
     @Override

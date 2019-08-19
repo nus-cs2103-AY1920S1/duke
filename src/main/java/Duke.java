@@ -26,6 +26,8 @@ public class Duke {
                 printList();
             } else if (strArr[0].equals("done")) {
                 done(s, strArr);
+            } else if (strArr[0].equals("delete")) {
+                delete(s, strArr);
             } else {
                 addTask(s, strArr);
             }
@@ -35,13 +37,17 @@ public class Duke {
     }
 
     private void printList() {
-        System.out.print(LINES);
-        System.out.println("Here are the task in your list:");
-        for (int i = 0; i < list.size() - 1; i++) {
-            System.out.println(i + 1 + "." + list.get(i));
+        try {
+            System.out.print(LINES);
+            System.out.println("Here are the task in your list:");
+            for (int i = 0; i < list.size() - 1; i++) {
+                System.out.println(i + 1 + "." + list.get(i));
+            }
+            System.out.print(list.size() + "." + list.get(list.size() - 1));
+            System.out.println(LINES);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(display("Your list is empty."));
         }
-        System.out.print(list.size() + "." + list.get(list.size() - 1));
-        System.out.println(LINES);
     }
 
     private void done(String s, String[] strArr) {
@@ -49,12 +55,29 @@ public class Duke {
             if (s.length() < 6) {
                 throw new DukeException("Please write in this format: done X\nWhere X is a number in the list");
             }
-            ((Task) list.get(Integer.parseInt(strArr[1]) - 1)).markAsDone();
-            System.out.println(display(
-                    "Nice! I've marked this task as done:\n"
-                            + ((Task) list.get(Integer.parseInt(strArr[1]) - 1))
+            int pos = Integer.parseInt(strArr[1]) - 1;
+            Task doneTask = ((Task) list.get(pos)).markAsDone();
+            System.out.println(display("Nice! I've marked this task as done:\n"
+                            + doneTask));
 
-            ));
+        } catch (DukeException e) {
+            System.out.print(display(e.getMessage()));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.print(display("Please input a number that is within the list"));
+        }
+    }
+
+    private void delete(String s, String[] strArr) {
+        try {
+            if (s.length() < 7) {
+                throw new DukeException("Please write in this format: delete X\nWhere X is a number in the list");
+            }
+            int pos = Integer.parseInt(strArr[1]) - 1;
+            Task removedTask = (Task) list.remove(pos);
+            System.out.println(display("Noted. I've removed this task:\n  "
+                            + removedTask
+                            + "\nNow you have " + list.size() + " tasks in the list."));
+
         } catch (DukeException e) {
             System.out.print(display(e.getMessage()));
         } catch (IndexOutOfBoundsException e) {

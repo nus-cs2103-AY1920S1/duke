@@ -47,6 +47,7 @@ public class Duke {
             System.out.println("\t" + " " + (i + 1) + ". " + taskList.get(i));
         }
         System.out.println("\t____________________________________________________________");
+        System.out.println();
     }
 }
 

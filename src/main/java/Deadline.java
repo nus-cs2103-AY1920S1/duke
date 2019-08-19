@@ -5,10 +5,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return num + ".[D][" + getStatusIcon() + "] " + super.format_description();
+        return "[D][" + getStatusIcon() + "] " + super.format_description();
     }
 
-    public String done() {
-        return "  [D][✓] " + super.format_description();
-    }
 }

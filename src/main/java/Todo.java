@@ -5,7 +5,7 @@ public class Todo extends Task {
     }
 
     public String toString() {
-        return num + ".[T][" + super.getStatusIcon() + "] " + description;
+        return "[T][" + super.getStatusIcon() + "] " + description;
     }
 
     public String done() {

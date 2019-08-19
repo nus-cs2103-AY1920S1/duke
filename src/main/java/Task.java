@@ -1,13 +1,9 @@
 public class Task {
 
-    public static int count;
-
-    protected int num;
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
-        this.num = ++count;
         this.description = description;
         this.isDone = false;
     }
@@ -25,10 +21,6 @@ public class Task {
     }
 
     public String toString() {
-        return num + ".[" + getStatusIcon() + "] " + description;
-    }
-
-    public String done() {
-        return "  [✓] " + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

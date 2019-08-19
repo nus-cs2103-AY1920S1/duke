@@ -40,8 +40,7 @@ public class Duke {
         // initialize objects
         Scanner sc = new Scanner(System.in);
         // String[] list = new String[100];
-        Task[] tasks = new Task[100];
-        Task.count = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
 
         // greetings
         String[] greetings = {"Hello! I'm Duke", "What can I do for you?"};
@@ -57,20 +56,50 @@ public class Duke {
                     break;
                 } else if (s.equals("list")) { // show all tasks
                     System.out.println(line);
+                    if (tasks.size() == 0) {
+                        throw new DukeException("There is no task in the list.");
+                    }
                     System.out.println(format("Here are the tasks in your list:"));
-                    for (Task t : Arrays.copyOfRange(tasks, 0, Task.count)) {
-                        System.out.println(format(t.toString()));
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task t = tasks.get(i);
+                        System.out.println("  " + format(i + 1 + "." + t.toString()));
                     }
                     System.out.println(line);
                 } else if (s.split(" ")[0].equals("done")) { // mark as done
                     try {
                         int num = Integer.parseInt(s.split(" ")[1]);
-                        if (num >= Task.count) {
+                        if (num >= tasks.size() || num < 1) {
                             throw new DukeException("Task number out of range.");
                         }
-                        tasks[num - 1].isDone = true;
-                        String[] print_list = {"Nice! I've marked this task as done: ", tasks[num - 1].done()};
+                        tasks.get(num - 1).isDone = true;
+                        String[] print_list = {"Nice! I've marked this task as done: ", "  " + tasks.get(num - 1).toString()};
                         format_print(print_list);
+                    } catch (NumberFormatException ex) {
+                        throw new DukeException("Task number should be integer.");
+                    }
+                } else if (s.split(" ")[0].equals("delete")) { // delete a specific task
+                    try {
+                        int num = Integer.parseInt(s.split(" ")[1]);
+                        if (num >= tasks.size() || num < 1) {
+                            throw new DukeException("Task number out of range.");
+                        }
+                        Task t = tasks.get(num - 1);
+                        System.out.println(line);
+                        System.out.println(format("Noted. I've removed this task: "));
+                        System.out.println("  " + format(t.toString()));
+                        tasks.remove(num - 1);
+                        switch (tasks.size()) {
+                            case 0:
+                                System.out.println(format("Now you have no task in the list."));
+                                break;
+                            case 1:
+                                System.out.println(format("Now you have 1 task in the list."));
+                                break;
+                            default:
+                                System.out.println(format("Now you have "  + tasks.size() + " tasks in the list."));
+                                break;
+                        }
+                        System.out.println(line);
                     } catch (NumberFormatException ex) {
                         throw new DukeException("Task number should be integer.");
                     }
@@ -106,17 +135,17 @@ public class Duke {
                     }
                     try {
                         String str = format(newTask.toString());
-                        tasks[Task.count - 1] = newTask;
+                        tasks.add(newTask);
                         System.out.println(line);
                         System.out.println(format("Got it. I've added this task: "));
-                        System.out.println(str);
+                        System.out.println("  " + str);
                     } catch (ArrayIndexOutOfBoundsException ex) {
                         throw new DukeException("Task description should be of format \"context /prep date time\"");
                     }
-                    if (Task.count == 1) {
+                    if (tasks.size() == 1) {
                         System.out.println(format("Now you have 1 task in the list."));
                     } else {
-                        System.out.println(format("Now you have "  + Task.count + " tasks in the list."));}
+                        System.out.println(format("Now you have "  + tasks.size() + " tasks in the list."));}
                     System.out.println(line);
                 }
             } catch (DukeException ex) {

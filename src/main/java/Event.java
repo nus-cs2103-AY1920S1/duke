@@ -5,10 +5,7 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return num + ".[E][" + getStatusIcon() + "] " + format_description();
+        return "[E][" + getStatusIcon() + "] " + format_description();
     }
 
-    public String done() {
-        return "  [E][✓] " + format_description();
-    }
 }

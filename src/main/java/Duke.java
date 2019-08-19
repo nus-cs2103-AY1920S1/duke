@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     private static Scanner sc;
     private static ArrayList<Task> tasks = new ArrayList<>();
-    private static String horizontalLine =
+    public static String horizontalLine =
             "    ____________________________________________________________";
 
     public static void main(String[] args) {
@@ -15,33 +15,66 @@ public class Duke {
 
         while (sc.hasNext()) {
             input = sc.nextLine();
-            String[] inputArr = input.split(" ", 2);
-            String command = inputArr[0];
 
             if (input.equals("bye")) {
+                printExit();
                 break;
-            } else if (input.equals("list")) {
-                printTasks();
-            } else if (command.equals("done")) {
-                Task task = tasks.get(Integer.parseInt(inputArr[1]) - 1);
-                handleDone(task);
-            } else {
-                Task task;
-                if (command.equals("todo")) {
-                    task = new Todo(inputArr[1]);
-                } else if (command.equals("deadline")) {
-                    String[] detailsArr = inputArr[1].split(" /by ");
-                    task = new Deadline(detailsArr[0], detailsArr[1]);
-                } else { // command is "event"
-                    String[] detailsArr = inputArr[1].split(" /at ");
-                    task = new Event(detailsArr[0], detailsArr[1]);
-                }
+            }
 
-                handleAddTask(task);
+            String[] inputArr = input.split(" ", 2);
+            String command = inputArr[0];
+            Task task;
+            String[] detailsArr;
+
+            try {
+                switch (command) {
+                case "list":
+                    printTasks();
+                    break;
+                case "done":
+                    handleDone(Integer.parseInt(inputArr[1]) - 1);
+                    break;
+                case "todo":
+                    if (inputArr.length <= 1) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
+
+                    task = new Todo(inputArr[1]);
+                    handleAddTask(task);
+                    break;
+                case "deadline":
+                    if (inputArr.length <= 1) {
+                        throw new DukeException("The description of a deadline cannot be empty.");
+                    }
+
+                    detailsArr = inputArr[1].split(" /by ");
+                    if (detailsArr.length <= 1) {
+                        throw new DukeException("Please specify the deadline with /by.");
+                    }
+
+                    task = new Deadline(detailsArr[0], detailsArr[1]);
+                    handleAddTask(task);
+                    break;
+                case "event":
+                    if (inputArr.length <= 1) {
+                        throw new DukeException("The description of a event cannot be empty.");
+                    }
+
+                    detailsArr = inputArr[1].split(" /at ");
+                    if (detailsArr.length <= 1) {
+                        throw new DukeException("Please specify when the event is on with /at.");
+                    }
+
+                    task = new Event(detailsArr[0], detailsArr[1]);
+                    handleAddTask(task);
+                    break;
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.err.println(e);
             }
         }
-
-        printExit();
     }
 
     private static void printGreeting() {
@@ -74,7 +107,12 @@ public class Duke {
         System.out.println(horizontalLine);
     }
 
-    private static void handleDone(Task task) {
+    private static void handleDone(int taskIndex) throws DukeException {
+        if (taskIndex >= tasks.size()) {
+            throw new DukeException("Task not found!");
+        }
+
+        Task task = tasks.get(taskIndex);
         task.markAsDone();
 
         System.out.println(horizontalLine);

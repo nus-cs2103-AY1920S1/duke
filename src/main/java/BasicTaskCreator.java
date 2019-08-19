@@ -66,8 +66,8 @@ class BasicTaskCreator implements TaskCreator {
             return createEvent(command);
         } else {
             throw new OWOException("OOPS >w<  UwU  UwU  "
-                + "i'm sowwy,\n"
-                + "but i don't knyow what that means");
+                + "OwO is sowwy,\n"
+                + "but OwO doesn't knyow what that means");
         } 
 //        return new ToDosImplementation("ERROR",false);
     }

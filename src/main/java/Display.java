@@ -19,18 +19,24 @@ class Display implements TaskObserver {
     }
 
     private static void printGreeting() {
-        String greeting1 = "Hewwo! I'm OwO";
-        String greeting2 = "What can I do fow you?";
-        ArrayList<String> printxs = new ArrayList<>();
-        printxs.add(greeting1);
-        printxs.add(greeting2);
-            Display.printSection(printxs);
+        String greeting1 = "hewwo! i'm OwO\n"
+            + "Mistew Stawk's augmented weawity gwocewy wist\n"
+            + "OwO stands fow \"Owways With Owws\"\n"
+            + "its a wowk in pwogwess, wike me\n"
+        //    + "Mistew Stawk wuvd his acwonyms.\n"
+            + "what can OwO do fow you today?";
+        //ArrayList<String> printxs = new ArrayList<>();
+        //printxs.add(greeting1);
+        //printxs.add(greeting2);
+            //Display.printSection(printxs);
+            Display.printSection(greeting1);
     }
 
     private static void printExitMessage() {
         //String farewell = "Bye. Hope to see you "
         //     + "again soon!";
-        String farewell = "NyOO >w< owo dont goo iww miss youu!!";
+        String farewell = "NyOO >w< owo dont goo OwO wiww "
+            + "miss youu!!";
 
         Display.printSection(farewell);
     }
@@ -91,10 +97,11 @@ class Display implements TaskObserver {
     public static void printAddTaskSection(String taskDetails,
             int totalTasks) {
         ArrayList<String> printxs = new ArrayList<>();
-        String headerMsg = "Got it. I've added this task:";
+        String headerMsg = "got it boss. "
+            + "OwO has added this task:";
         String outputMsg = "  " + taskDetails;
         String footerMsg = "Nyow you have "
-           + totalTasks + " tasks in the wist.";
+           + totalTasks + " tasks in the wist";
 
         printxs.add(headerMsg);
         printxs.add(outputMsg);
@@ -105,7 +112,7 @@ class Display implements TaskObserver {
     public static void printDoneTaskSection(String taskDetails) {
         ArrayList<String> printxs = new ArrayList<>();
         String headermsg = "Nyice ;;w;;  "
-            + "I've mawked this task as donye";
+            + "OwO has mawked this task as donye";
         //String headermsg = "Nice! I've marked this task as done:";
         printxs.add(headermsg);
         printxs.add(taskDetails);
@@ -115,9 +122,9 @@ class Display implements TaskObserver {
 
     public static void printDeleteTaskSection(String 
             taskDetails, int totalTasks) {
-        String header = "Nyoted. I've wemuvd this task:\n";
-        String footer = "Nyow you have "
-           + totalTasks + " tasks in the wist.";
+        String header = "nyoted. OwO has wemuvd this task:\n";
+        String footer = "nyow you have "
+           + totalTasks + " tasks in the wist";
         Display.printSection(header + footer);
     }
 
@@ -131,7 +138,7 @@ class Display implements TaskObserver {
 
         ArrayList<String> printxs = new ArrayList<>();
         //  String headermsg = "Here are the tasks in your list:";
-        String headermsg = "Hewe awe the tasks in youw wist:";
+        String headermsg = "hewe awe the tasks in youw wist:";
         printxs.add(headermsg);
 
         int counter = 1;

@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,8 +38,7 @@ public class Duke {
 
             } else if (action.equals("done")) {
                 System.out.print(divider);
-                int idx = sc.nextInt() - 1;
-                markTaskAsDone(idx);
+                markTaskAsDone(sc);
                 System.out.print(divider);
 
 
@@ -58,6 +58,11 @@ public class Duke {
                 System.out.print(divider);
                 String taskName = sc.nextLine().trim();
                 addNewEvent(taskName);
+                System.out.print(divider);
+
+            } else if (action.equals("delete")) {
+                System.out.print(divider);
+                deleteTask(sc);
                 System.out.print(divider);
 
             } else {
@@ -85,12 +90,37 @@ public class Duke {
         }
     }
 
-    private static void markTaskAsDone(int idx) {
+    private static void markTaskAsDone(Scanner sc) {
         try {
+            int idx = sc.nextInt() - 1;
             taskList.get(idx).setDone();
             System.out.print("     Nice! I've marked this task as done:\n");
             System.out.printf("       %s\n", taskList.get(idx));
-            
+
+        } catch (IndexOutOfBoundsException e) {
+            if (taskList.isEmpty()) {
+                System.out.printf("     ☹ OOPS!!! You have no task at the moment.\n", 1, taskList.size());
+            } else {
+                System.out.printf("     ☹ OOPS!!! Task index number must be a number from %d to %d.\n",
+                        1,
+                        taskList.size());
+            }
+        } catch (InputMismatchException e) {
+            System.out.printf("     ☹ OOPS!!! Task index number must be a number from %d to %d.\n",
+                    1,
+                    taskList.size());
+            sc.nextLine();
+        }
+    }
+
+    private static void deleteTask(Scanner sc) {
+        try {
+            int idx = sc.nextInt() - 1;
+            Task task = taskList.remove(idx);
+            System.out.print("     Noted. I've removed this task:\n");
+            System.out.printf("       %s\n", task);
+            System.out.printf("     Now you have %d tasks in the list.\n", taskList.size());
+
         } catch (IndexOutOfBoundsException e) {
             if (taskList.isEmpty()) {
                 System.out.printf("     ☹ OOPS!!! You have no task at the moment.\n", 1, taskList.size());
@@ -100,6 +130,11 @@ public class Duke {
                         taskList.size());
             }
 
+        } catch (InputMismatchException e) {
+            System.out.printf("     ☹ OOPS!!! Task index number must be a number from %d to %d.\n",
+                    1,
+                    taskList.size());
+            sc.nextLine();
         }
     }
 

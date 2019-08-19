@@ -18,20 +18,28 @@ public class Duke {
                     if(command.split(" ").length == 1) {
                         throw new DukeException("☹ OOPS!!! Please indicate which task you have completed.");
                     } else {
-                        int numChange = Integer.parseInt(command.split(" ")[1]) - 1;
-                        taskList.get(numChange).markAsDone();
-                        System.out.println("Nice! I've marked this task as done:" + "\n" +
-                                taskList.get(numChange).toString());
+                        int numChange = Integer.parseInt(command.split(" ")[1]);
+                        if(numChange > taskList.size()) {
+                            throw new DukeException("☹ OOPS!!! Task " + numChange + " does not exist.");
+                        } else {
+                            taskList.get(numChange-1).markAsDone();
+                            System.out.println("Nice! I've marked this task as done:" + "\n" +
+                                    taskList.get(numChange-1).toString());
+                        }
                     }
                 } else if((command.split(" ")[0]).equals("delete")) {
                     if(command.split(" ").length == 1) {
                         throw new DukeException("☹ OOPS!!! Please indicate which task you would like to delete.");
                     } else {
-                        int numChange = Integer.parseInt(command.split(" ")[1]) - 1;
-                        Task toRemove = taskList.get(numChange);
-                        taskList.remove(numChange);
-                        System.out.println("Noted. I've removed this task:" + "\n" + toRemove.toString()
-                                            + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+                        int numChange = Integer.parseInt(command.split(" ")[1]);
+                        if(numChange > taskList.size()) {
+                            throw new DukeException("☹ OOPS!!! Task " + numChange + " does not exist.");
+                        } else {
+                            Task toRemove = taskList.get(numChange - 1);
+                            taskList.remove(numChange - 1);
+                            System.out.println("Noted. I've removed this task:" + "\n" + toRemove.toString()
+                                    + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+                        }
                     }
                 } else if((command.split(" ")[0]).equals("todo")||(command.split(" ")[0]).equals("deadline")||(command.split(" ")[0]).equals("event")) {
                     String type = command.split(" ")[0];

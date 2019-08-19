@@ -9,7 +9,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "+" : "-"); //return tick or X symbols
+        return (isDone ? "+" : "-"); //return tick or X symbols as + and - respectively
     }
 
     public void markAsDone() {

@@ -18,7 +18,7 @@ public class ItemsList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < itemsList.size(); i++) {
             Task task = itemsList.get(i);
-            System.out.printf("%d.[%s] %s\n", (i + 1), task.getStatusIcon(), task.description);
+            System.out.printf("%d. %s\n", (i + 1), task);
         }
     }
 

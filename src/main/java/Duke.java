@@ -19,9 +19,8 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-            else if (command.contains("done")) {
-                String inputArr[] = command.split(" ");
-                int itemIndex = Integer.valueOf(inputArr[1]);
+            else if (command.equals("done")) {
+                int itemIndex = sc.nextInt();
                 Task task = itemsList.getTaskAtIndex(itemIndex - 1);
                 task.markAsDone();
             }
@@ -35,20 +34,19 @@ public class Duke {
         String item = sc.nextLine().trim();
         Task task;
         if (command.equals("todo")) {
-            itemsList.addItem(new ToDo(item));
+            task = new ToDo(item);
         }
         else if (command.equals("deadline")) {
             String[] itemSlashDeadline = item.split("/");
             String deadline = itemSlashDeadline[1].substring(3);
             task = new Deadline(itemSlashDeadline[0].trim(), deadline);
-            itemsList.addItem(task);
         }
         else { //command.equals("event")
             String[] itemsSlashTiming = item.split("/");
             String timing = itemsSlashTiming[1].substring(3);
             task = new Event(itemsSlashTiming[0].trim(), timing);
-            itemsList.addItem(task);
         }
+        itemsList.addItem(task);
     }
 
     private static void greetings() {

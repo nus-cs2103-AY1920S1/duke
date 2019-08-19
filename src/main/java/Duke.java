@@ -20,24 +20,39 @@ public class Duke {
 
         while (sc.hasNext()) {
             input = sc.nextLine();
-            String[] inputWordArr = input.split(" ");
+            String[] inputArr = input.split(" ", 2);
+            String command = inputArr[0];
 
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
                 printTasks(tasks);
-            } else if (inputWordArr[0].equals("done")) {
-                Task task = tasks.get(Integer.parseInt(inputWordArr[1]) - 1);
+            } else if (command.equals("done")) {
+                Task task = tasks.get(Integer.parseInt(inputArr[1]) - 1);
                 task.markAsDone();
                 System.out.println(horizontalLine);
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + task);
                 System.out.println(horizontalLine);
+                System.out.println();
             } else {
-                tasks.add(new Task(input));
+                Task task;
+                if (command.equals("todo")) {
+                    task = new Todo(inputArr[1]);
+                } else if (command.equals("deadline")) {
+                    String[] detailsArr = inputArr[1].split(" /by ");
+                    task = new Deadline(detailsArr[0], detailsArr[1]);
+                } else { // command is "event"
+                    String[] detailsArr = inputArr[1].split(" /at ");
+                    task = new Event(detailsArr[0], detailsArr[1]);
+                }
+                tasks.add(task);
 
                 System.out.println(horizontalLine);
-                System.out.println("     added: " + input);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("       " + task);
+                System.out.println("     Now you have " + tasks.size()
+                        + " tasks in the list.");
                 System.out.println(horizontalLine);
                 System.out.println();
             }
@@ -57,6 +72,7 @@ public class Duke {
 
     private static void printTasks(ArrayList<Task> tasks) {
         System.out.println(horizontalLine);
+        System.out.println("     Here are the tasks in your list:");
 
         int id = 1;
         for (Task task : tasks) {
@@ -65,6 +81,7 @@ public class Duke {
         }
 
         System.out.println(horizontalLine);
+        System.out.println();
     }
 
     private static void printExit() {

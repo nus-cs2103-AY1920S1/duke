@@ -1,16 +1,14 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Task[] itemsLst = new Task[100];
-        int currentIndex = 0;
-
         String hLine = "    ____________________________________________________________";
 
         System.out.println(hLine);
-        System.out.println("    Hello! I'm Duke\n    What can I do for you?");
+        System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         System.out.printf("%s\n\n", hLine);
 
         while(true) {
@@ -20,25 +18,33 @@ public class Duke {
             try {
                 if (command.equals("bye")) {
                     System.out.println(hLine);
-                    System.out.println("    Bye. Hope to see you again soon!");
+                    System.out.println("     Bye. Hope to see you again soon!");
                     System.out.printf("%s\n\n", hLine);
                     break;
                 } else {
                     System.out.println(hLine);
                     if (command.equals("list")) {
-                        System.out.println("    Here are the tasks in your list:");
-                        for (int i = 0; i < currentIndex; i++) {
-                            System.out.printf("    %d.%s\n",
-                                    i + 1, itemsLst[i]);
+                        System.out.println("     Here are the tasks in your list:");
+                        for (int i = 0; i < Task.itemsLst.size(); i++) {
+                            System.out.printf("     %d.%s\n",
+                                    i + 1, Task.itemsLst.get(i));
                         }
-                    } else { // if command is neither list nor bye
+                    } else { // if command is not neither list nor bye
                         Scanner tempSc = new Scanner(command);
-                        // if command is done
-                        if (tempSc.hasNext() && tempSc.next().equals("done")) {
-                            int tempInt = tempSc.nextInt() - 1;
-                            itemsLst[tempInt].markAsDone();
-                            System.out.printf("    Nice! I've marked this task as done:\n      %s\n"
-                                    , itemsLst[tempInt]);
+                        String s = "";
+                        if (tempSc.hasNext())
+                            s = tempSc.next();
+                        if (s.equals("done")) { // if command is done
+                            int doneInt = tempSc.nextInt() - 1;
+                            Task.itemsLst.get(doneInt).markAsDone();
+                            System.out.printf("     Nice! I've marked this task as done:\n       %s\n"
+                                    , Task.itemsLst.get(doneInt));
+                        } else if (s.equals("delete")) {
+                            int delInt = tempSc.nextInt() - 1;
+                            Task delTask = Task.itemsLst.remove(delInt);
+                            System.out.printf("     Noted. I've removed this task:\n" +
+                                    "       %s\n     Now you have %d tasks in the list.\n"
+                                    , delTask, Task.itemsLst.size());
                         } else { // add a new task
                             if (command.startsWith("todo")) {
                                 Scanner taskSc = new Scanner(command);
@@ -47,7 +53,7 @@ public class Duke {
                                     throw new DukeException("     \u2639 OOPS!!! " +
                                             "The description of a todo cannot be empty.");
                                 }
-                                itemsLst[currentIndex] = new ToDo(taskSc.nextLine().substring(1));
+                                Task.itemsLst.add(new ToDo(taskSc.nextLine().substring(1)));
                             } else if (command.startsWith("deadline")) {
                                 Scanner taskSc = new Scanner(command);
                                 taskSc.next();
@@ -63,7 +69,7 @@ public class Duke {
                                         break;
                                     }
                                 }
-                                itemsLst[currentIndex] = new Deadline(desc, by);
+                                Task.itemsLst.add(new Deadline(desc, by));
                             } else if (command.startsWith("event")) { // assume that task is an event
                                 Scanner taskSc = new Scanner(command);
                                 taskSc.next();
@@ -79,12 +85,13 @@ public class Duke {
                                         break;
                                     }
                                 }
-                                itemsLst[currentIndex] = new Event(desc, at);
+                                Task.itemsLst.add(new Event(desc, at));
                             } else {
                                 throw new DukeException("     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                             }
-                            System.out.printf("    Got it. I've added this task:\n      %s\n" +
-                                    "    Now you have %d tasks in the list.\n", itemsLst[currentIndex], ++currentIndex);
+                            System.out.printf("     Got it. I've added this task:\n       %s\n" +
+                                    "     Now you have %d tasks in the list.\n",
+                                        Task.itemsLst.get(Task.itemsLst.size() - 1), Task.itemsLst.size());
                         }
                     }
                 }

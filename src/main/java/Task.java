@@ -1,3 +1,5 @@
+package main.java;
+
 public abstract class Task {
     private static int NOT_DONE = 0;
     private static int DONE = 1;

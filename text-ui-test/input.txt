@@ -1,0 +1,11 @@
+todo lalala
+event happy /at sad
+deadline today /by tmr
+list
+todo dododo
+event 456 /at 789
+list
+done 2
+done 3
+list
+bye

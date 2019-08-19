@@ -1,20 +1,21 @@
-public class Deadline extends Task {
+package main.java;
+
+public class Event extends Task {
 
     private String additionalInfo;
 
-    Deadline(String name, String additionalInfo) {
+    Event(String name, String additionalInfo) {
         super(name);
         this.additionalInfo = additionalInfo;
     }
 
     @Override
     protected String getTypeSymbol() {
-        return "[D]";
+        return "[E]";
     }
 
     @Override
     protected String getAdditionalInfo() {
-        return String.format("(by: %s)", additionalInfo);
+        return String.format("(at: %s)", additionalInfo);
     }
-
 }

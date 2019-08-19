@@ -81,10 +81,13 @@ public class Duke {
                             throw new DukeException("An Integer is required to choose the task.");
                         }
                         int index = Integer.valueOf(arr[1]);
+                        if (index < 1 || index > list.size()) {
+                            throw new DukeException("Index out of range.");
+                        }
                         Task task = list.get(index - 1);
                         task.markAsDone();
                         printStatement("Nice! I've marked this task as done:",
-                                String.format("\t   %s\n", task.toString()));
+                                String.format("  %s", task.toString()));
                     } catch (DukeException e) {
                         printDukeException(e);
                     }
@@ -99,6 +102,23 @@ public class Duke {
                     Stream<String> combined = Stream.concat(Stream.of("Here are the tasks in your list:"), taskstream);
                     String combinedString[] = combined.toArray(String[]::new);
                     printStatement(combinedString);
+                    break;
+                case "delete":
+                    try {
+                        if (arr.length < 2) {
+                            throw new DukeException("An Integer is required to delete the task.");
+                        }
+                        int index = Integer.valueOf(arr[1]);
+                        if (index < 1 || index > list.size()) {
+                            throw new DukeException("Index out of range.");
+                        }
+                        Task task = list.remove(index - 1);
+                        printStatement("Noted. I've removed this task:",
+                                String.format("  %s", task.toString()),
+                                String.format("Now you have %d tasks in the list.", list.size()));
+                    } catch (DukeException e) {
+                        printDukeException(e);
+                    }
                     break;
                 default:
                     printStatement(":( OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -46,7 +46,12 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public String printStatus() {
+    /**
+     * Returns a string representation of the object.
+     * @return  a string representation of the object.
+     */
+    @Override
+    public String toString() {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
     }
 }

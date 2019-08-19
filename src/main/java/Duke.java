@@ -41,7 +41,7 @@ public class Duke {
                 Task task = tasks.get(entry);
                 task.markAsDone();
                 System.out.println(doneText);
-                System.out.println("  " + task.printStatus());
+                System.out.println("  " + task.toString());
                 break;
             default:
                 tasks.add(new Task(input));
@@ -57,10 +57,10 @@ public class Duke {
     /**
      * List all entries recorded by Duke; print nothing if no entries are present.
      */
-    protected static void listEntries() {
+    private static void listEntries() {
         int numEntry = 1;
         for (Task task : Duke.tasks) {
-            System.out.printf("%d. %s\n", numEntry, task.printStatus());
+            System.out.printf("%d. %s\n", numEntry, task.toString());
             numEntry++;
         } // End for loop.
     } // End method.

@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
-    private ArrayList<String> textEntered;
+    private ArrayList<Task> textEntered;
 
     public Duke(){
-        textEntered = new ArrayList<String>(100);
+        textEntered = new ArrayList<Task>(100);
     }
 
     public static void main(String[] args) {
@@ -21,8 +21,12 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while(!input.equalsIgnoreCase("Bye")){
-            if(input.equalsIgnoreCase("list")) {
+            String[] inputsplit = input.split(" ", 2);
+            if(inputsplit[0].equalsIgnoreCase("list")) {
                 printRecord();
+            } else if(inputsplit[0].equalsIgnoreCase("done")){
+                int num = Integer.parseInt(inputsplit[1]);
+                markTaskDone(num);
             } else{
                 addToRecord(input);
             }
@@ -32,13 +36,23 @@ public class Duke {
     }
 
     private void addToRecord(String recordEntry){
-        this.textEntered.add(recordEntry);
+        Task t = new Task(recordEntry);
+        this.textEntered.add(t);
         System.out.println("added: " + recordEntry + "\n");
     }
 
+    private void markTaskDone(int num){
+        Task t =  textEntered.get(num - 1);
+        t.markIsDone();
+        System.out.println(" Nice! I've marked this task as done: ");
+        System.out.println("  [" + t.getStatusIcon() + "] " +  t.getDescription() + "\n");
+    }
+
     private void printRecord(){
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < textEntered.size(); i++){
-            System.out.print((i + 1) + ". " + textEntered.get(i) + "\n");
+            System.out.print((i + 1) + ".[" + textEntered.get(i).getStatusIcon()
+                    + "] " + textEntered.get(i).getDescription() + "\n");
         }
         System.out.println();
     }

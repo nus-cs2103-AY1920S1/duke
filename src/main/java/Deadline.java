@@ -10,7 +10,7 @@ public class Deadline extends Task {
     @Override
     public String toString(){
         String mark = isDone ? "✓" : "✗";
-        return "[D][" + mark + "] " + taskName +
+        return "[D][" + mark + "]" + taskName +
                 " (by:" + deadline + ")";
     }
 

@@ -26,39 +26,41 @@ public class Duke {
                 Task doneTask = tasksList.get(taskID - 1);
                 doneTask.setDone(true);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(doneTask);
+                System.out.println("  " + doneTask);
             } else if (nextItem.equals("todo")) {
-                String currLine = nextItem + sc.nextLine();
+                String currLine = sc.nextLine();
                 Task newTask = new Task(currLine, false);
                 tasksList.add(newTask);
                 System.out.println("Got it. I've added this task:");
-                System.out.println(newTask);
+                System.out.println("  " + newTask);
                 System.out.println("Now you have " + tasksList.size() +
                         " tasks in the list.");
             } else if (nextItem.equals("deadline")) {
                 String nextSegment = sc.next();
+                String deadlineName = "";
                 while (!nextSegment.equals("/by")) {
-                    nextItem = nextItem + " " + nextSegment;
+                    deadlineName = deadlineName + " " + nextSegment;
                     nextSegment = sc.next();
                 }
                 String deadline = sc.nextLine();
-                Deadline newDeadline = new Deadline(nextItem, false, deadline);
+                Deadline newDeadline = new Deadline(deadlineName, false, deadline);
                 tasksList.add(newDeadline);
                 System.out.println("Got it. I've added this task:");
-                System.out.println(newDeadline);
+                System.out.println("  " + newDeadline);
                 System.out.println("Now you have " + tasksList.size() +
                         " tasks in the list.");
             } else if (nextItem.equals("event")) {
                 String nextSegment = sc.next();
+                String eventName = "";
                 while (!nextSegment.equals("/at")) {
-                    nextItem = nextItem + " " + nextSegment;
+                    eventName = eventName + " " + nextSegment;
                     nextSegment = sc.next();
                 }
                 String duration = sc.nextLine();
-                Event newEvent = new Event(nextItem, false, duration);
+                Event newEvent = new Event(eventName, false, duration);
                 tasksList.add(newEvent);
                 System.out.println("Got it. I've added this task:");
-                System.out.println(newEvent);
+                System.out.println("  " + newEvent);
                 System.out.println("Now you have " + tasksList.size() +
                         " tasks in the list.");
             }

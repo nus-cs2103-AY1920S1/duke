@@ -10,7 +10,7 @@ public class Event extends Task {
     @Override
     public String toString(){
         String mark = isDone ? "✓" : "✗";
-        return "[E][" + mark + "] " + taskName +
+        return "[E][" + mark + "]" + taskName +
                 " (at:" + duration + ")";
     }
 }

@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,11 +15,16 @@ import java.util.Scanner;
  * @author Marcus Ong
  */
 public class Duke {
-
+    private static final Path DATA_FILE_PATH = Paths.get(System.getProperty("user.dir") + "/data/duke.txt");
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        chat();
+        try {
+            loadTasks();
+            chat();
+        } catch (DukeIOException e) {
+            reply(e.getMessage());
+        }
     }
 
     /** Handles user chat interaction */
@@ -38,35 +49,36 @@ public class Duke {
                 command = sc.nextLine();
                 if (command.equalsIgnoreCase("list")) {
                     listTasks();
-                } else if (command.startsWith("done")) {
+                } else if (command.toLowerCase().startsWith("done")) {
                     doneTask(command);
-                } else if (command.startsWith("todo")) {
+                } else if (command.toLowerCase().startsWith("todo")) {
                     addTodo(command);
-                } else if (command.startsWith("deadline")) {
+                } else if (command.toLowerCase().startsWith("deadline")) {
                     addDeadline(command);
-                } else if (command.startsWith("event")) {
+                } else if (command.toLowerCase().startsWith("event")) {
                     addEvent(command);
-                } else if (command.startsWith("delete")) {
+                } else if (command.toLowerCase().startsWith("delete")) {
                     deleteTask(command);
+                } else if (command.equalsIgnoreCase("bye")) {
+                    reply(bye); //say goodbye
                 } else {
                     throw new UnknownCommandException("OOPS!!! Sorry mate, I don't geddit.");
                 }
+                saveTasks(); // gracefully save tasks after every command, invalid or not.
             } catch (DukeException e) {
                 reply(e.getMessage());
             }
         } while (!command.equalsIgnoreCase("bye"));
-
-        reply(bye); //say goodbye
     }
 
     /** Add a new to-do */
-    private static void addTodo(String command) throws EmptyFieldException, InvalidCommandFormatException {
+    private static void addTodo(String command) throws DukeIOException, InvalidCommandFormatException {
         try {
             //parse description from command string
             int commandLength = "todo ".length();
             String description = command.substring(commandLength).trim();
             if (description.isEmpty()) {
-                throw new EmptyFieldException("OOPS!!! The description of a task cannot be empty mate.");
+                throw new DukeIOException("OOPS!!! The description of a task cannot be empty mate.");
             }
 
             // add task and reply user
@@ -80,7 +92,7 @@ public class Duke {
     }
 
     /** Add a new deadline */
-    private static void addDeadline(String command) throws EmptyFieldException, InvalidCommandFormatException {
+    private static void addDeadline(String command) throws DukeIOException, InvalidCommandFormatException {
         try {
             int byLength = "/by".length();
             int commandLength = "deadline ".length();
@@ -89,13 +101,13 @@ public class Duke {
             // parse description from command
             String description = command.substring(commandLength, byIndex).trim();
             if (description.isEmpty()) {
-                throw new EmptyFieldException("OOPS!!! The description of a deadline cannot be empty mate.");
+                throw new DukeIOException("OOPS!!! The description of a deadline cannot be empty mate.");
             }
 
             // parse by-date from command
             String by = command.substring(byIndex + byLength).trim();
             if (by.isEmpty()) {
-                throw new EmptyFieldException("OOPS!!! The date of a deadline cannot be empty mate.");
+                throw new DukeIOException("OOPS!!! The date of a deadline cannot be empty mate.");
             }
 
             // add task and reply user
@@ -110,7 +122,7 @@ public class Duke {
     }
 
     /** Add a new event */
-    private static void addEvent(String command) throws EmptyFieldException, InvalidCommandFormatException {
+    private static void addEvent(String command) throws DukeIOException, InvalidCommandFormatException {
         try {
             int atLength = "/at".length();
             int commandLength = "event ".length();
@@ -119,13 +131,13 @@ public class Duke {
             // parse description from command
             String description = command.substring(commandLength, atIndex).trim();
             if (description.isEmpty()) {
-                throw new EmptyFieldException("OOPS!!! The description of an event cannot be empty mate.");
+                throw new DukeIOException("OOPS!!! The description of an event cannot be empty mate.");
             }
 
             // parse at-date from command
             String at = command.substring(atIndex + atLength).trim();
             if (at.isEmpty()) {
-                throw new EmptyFieldException("OOPS!!! The start & end dates of an event cannot be empty mate.");
+                throw new DukeIOException("OOPS!!! The start & end dates of an event cannot be empty mate.");
             }
 
             // add task and reply user
@@ -177,9 +189,9 @@ public class Duke {
             int taskIndex = Integer.parseInt(command.split(" ")[1]);
             Task task = tasks.remove(taskIndex - 1);
 
-            messageBuilder.append("Noted mate! I've removed this task:\n\t");
-            messageBuilder.append("  " + task + "\n\t");
-            messageBuilder.append("Now you have " + tasks.size() + " tasks in the list mate.");
+            messageBuilder.append("Noted mate! I've removed this task:\n\t")
+                .append("  " + task + "\n\t")
+                .append("Now you have " + tasks.size() + " tasks in the list mate.");
 
             reply(messageBuilder.toString());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -202,6 +214,74 @@ public class Duke {
         }
 
         reply(messageBuilder.toString());
+    }
+
+    /** Save tasks to hard disk */
+    private static void saveTasks() throws DukeIOException {
+        try {
+            if (!Files.exists(DATA_FILE_PATH)) {
+                Files.createFile(DATA_FILE_PATH);
+            }
+
+            BufferedWriter writer = Files.newBufferedWriter(DATA_FILE_PATH);
+            StringBuilder sb = new StringBuilder();
+
+            // write tasks into file
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+
+                StringBuilder rowBuilder = new StringBuilder(
+                        String.format("%s|%s|%s", task.type, task.isDone ? "1" : "0", task.description));
+
+                if (task instanceof Deadline) {
+                    rowBuilder.append(String.format("|%s", ((Deadline) task).by));
+                } else if (task instanceof Event) {
+                    rowBuilder.append(String.format("|%s", ((Event) task).at));
+                }
+
+                rowBuilder.append("\n");
+                sb.append(rowBuilder);
+            }
+            writer.write(sb.toString());
+
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeIOException("OOPS!!! Error trying to save data to file.");
+        }
+    }
+
+    /** Load tasks from hard disk */
+    private static void loadTasks() throws DukeIOException {
+        try {
+            if (Files.exists(DATA_FILE_PATH)) {
+                BufferedReader reader = Files.newBufferedReader(DATA_FILE_PATH);
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    String type = parts[0];
+                    boolean isDone = "1".equals(parts[1]);
+                    String description = parts[2];
+
+                    switch(type) {
+                        case "T":
+                            tasks.add(new Todo(description, isDone));
+                            break;
+                        case "D":
+                            String by = parts[3];
+                            tasks.add(new Deadline(description, isDone, by));
+                            break;
+                        case "E":
+                            String at = parts[3];
+                            tasks.add(new Event(description, isDone, at));
+                    }
+                }
+
+                reader.close();
+            }
+        } catch (IOException e) {
+            throw new DukeIOException("OOPS!!! Error trying to load data from file.");
+        }
     }
 
     /**

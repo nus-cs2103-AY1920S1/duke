@@ -10,8 +10,12 @@ public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description, String by) {
-        super(description);
+        super(description, "D");
         this.by = by;
+    }
+
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone, "D");
     }
 
     @Override

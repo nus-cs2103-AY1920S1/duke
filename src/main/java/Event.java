@@ -10,8 +10,12 @@ public class Event extends Task {
     protected String at;
 
     public Event(String description, String at) {
-        super(description);
+        super(description, "E");
         this.at = at;
+    }
+
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone, "E");
     }
 
     @Override

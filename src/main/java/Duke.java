@@ -7,10 +7,17 @@ public class Duke {
 
         Scanner input = new Scanner(System.in);
         String command = input.nextLine();
+        TaskList taskList = new TaskList();
 
         while (!command.equals("bye")) {
-            System.out.println(command);
-            command = input.nextLine();
+            if (command.equals("list")) {
+                taskList.printAllTasks();
+                command = input.nextLine();
+            } else {
+                taskList.addTask(command);
+                System.out.println("added: " + command);
+                command = input.nextLine();
+            }
         }
 
         String farewell = "Bye. Hope to see you again soon!";

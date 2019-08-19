@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -21,8 +22,7 @@ public class Duke {
     public static final String BY_DELIM = "/by";
     public static final String AT_DELIM = "/at";
 
-    private static Task[] taskList = new Task[MAX_TASKS];
-    private static int taskCount = 0;
+    private static ArrayList<Task> taskList = new ArrayList<Task>(MAX_TASKS);
 
     public static void main(String[] args) {
         printGreeting();
@@ -52,7 +52,7 @@ public class Duke {
             printList();
             break;
         case DONE_CMD:
-            markTaskAsDone(taskList[Integer.parseInt(command.split(" ")[1]) - 1]);
+            markTaskAsDone(taskList.get(Integer.parseInt(command.split(" ")[1]) - 1));
             break;
         case DEADLINE_CMD:
             addDeadline(command);
@@ -131,12 +131,12 @@ public class Duke {
     public static void printList() {
         String wholeList = LIST_STR + "\n";
         
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             wholeList += String.valueOf(i + 1)
                 + "."
-                + taskList[i];
+                + taskList.get(i);
             
-            if (i < taskCount - 1) {
+            if (i < taskList.size() - 1) {
                 wholeList += "\n";
             }
         }
@@ -145,13 +145,12 @@ public class Duke {
     }
 
     public static void addTask(Task newTask) {
-        taskList[taskCount] = newTask;
-        taskCount++;
+        taskList.add(newTask);
         printWithLongLines(
             "Got it. I've added this task:\n"
             + newTask
             + "\nNow you have " 
-            + taskCount
+            + taskList.size()
             + " tasks in the list."
         );
     }

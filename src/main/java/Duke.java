@@ -19,6 +19,7 @@ public class Duke {
     public static final String TODO_CMD = "todo";
     public static final String EVENT_CMD = "event";
     public static final String DEADLINE_CMD = "deadline";
+    public static final String DELETE_CMD = "delete";
     public static final String BY_DELIM = "/by";
     public static final String AT_DELIM = "/at";
 
@@ -63,9 +64,24 @@ public class Duke {
         case TODO_CMD:
             addTodo(command);
             break;
+        case DELETE_CMD:
+            deleteTask(command);
+            break;
         default:
             throw new InvalidCommandException(OOPS_STR + INVALID_COMMAND_STR);
         }
+    }
+
+    public static void deleteTask(String command) {
+        Task taskToDelete = taskList.get(Integer.parseInt(command.split(" ")[1]) - 1); 
+        taskList.remove(taskToDelete);
+        printWithLongLines(
+            "Noted. I've removed this task:\n"
+            + taskToDelete
+            + "\nNow you have " 
+            + taskList.size()
+            + " tasks in the list."
+        );
     }
 
     public static void addDeadline(String command) throws EmptyDescriptionException {

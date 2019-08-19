@@ -52,9 +52,14 @@ public class Duke {
                         if (instr.startsWith("done")) {
                             try {
                                 t = this.ls.get(Integer.parseInt(instr.substring(4).trim()));
+                                if(t == null)
+                                    throw new IndexOutOfBoundsException();
                             } catch (NumberFormatException e) {
                                 throw new DukeException(
                                         "List index not provided or in wrong format.\nExample Correct Usage: done 2");
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new DukeException(
+                                        "Index given is out of bound.\nUse from 1 to last index of list only.");
                             }
                             t.setDone();
                             this.cout("Nice! I've marked this task as done:\n" + t);

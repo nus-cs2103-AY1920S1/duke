@@ -64,8 +64,9 @@ public class Duke {
     /**
      * @param responseHeader A message to the user.
      * @param refTask The task to be displayed to the user.
+     * @param displayNumofTasks Display number of task(s) in task list
      */
-    private void printResponseSingleTask(String responseHeader, Task refTask) {
+    private void printResponseSingleTask(String responseHeader, Task refTask, boolean displayNumofTasks) {
         //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
@@ -75,11 +76,13 @@ public class Duke {
         System.out.print("  ");
         System.out.println(refTask);
 
-        System.out.print(MESSAGE_PADDING);
-        System.out.println(String.format(
-            "Now you have %d task%s in the list.",
-            this.taskList.size(),
-            (this.taskList.size() > 1) ? "s" : ""));
+        if (displayNumofTasks) {
+            System.out.print(MESSAGE_PADDING);
+            System.out.println(String.format(
+                    "Now you have %d task%s in the list.",
+                    this.taskList.size(),
+                    (this.taskList.size() > 1) ? "s" : ""));
+        }
 
         //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
@@ -149,7 +152,7 @@ public class Duke {
 
                 case "done":
                     Task completedtask = tryMarkTaskAsDone(in);
-                    printResponseSingleTask("Nice! I've marked this task as done:", completedtask);
+                    printResponseSingleTask("Nice! I've marked this task as done:", completedtask, false);
                     break;
 
                 case "bye":
@@ -171,7 +174,7 @@ public class Duke {
         //If a new Task is created, handle it here
         if (newTask != null) {
             taskList.add(newTask);
-            printResponseSingleTask("Got it. I've added this task:", newTask);
+            printResponseSingleTask("Got it. I've added this task:", newTask, true);
         }
 
         return shouldContinueChat;

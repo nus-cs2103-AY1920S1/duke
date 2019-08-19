@@ -55,7 +55,7 @@ public class Duke {
                 } else if (userCommand.startsWith("delete")){
                     //program deletes a Task from taskList
                     int taskNumber = Character.getNumericValue(userCommand.charAt(7));
-                    Task taskToDelete = taskList.remove(taskNumber);
+                    Task taskToDelete = taskList.remove(taskNumber - 1);
                     System.out.println(TABS + "Noted. I've removed this task: ");
                     System.out.println(TABS + "  " + taskToDelete.toString());
                     displayNumberOfTasks();

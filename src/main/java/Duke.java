@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -26,19 +27,37 @@ public class Duke {
         String greetings = sb.toString();
         System.out.println(greetings);
 
+        //reset Stringbuilder for next message
         sb.setLength(0);
         //Scanner obj for input
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> items = new ArrayList<String>();
 
         //Loop till user input 'bye'
         String input = sc.nextLine();
-        while(!input.toLowerCase().equals("bye")){
-            sb.append(border + "\n");
-            sb.append(input + "\n");
-            sb.append(border + "\n");
-            System.out.println(sb.toString());
-            sb.setLength(0);
-            input = sc.nextLine();
+        while (!input.toLowerCase().equals("bye")) {
+
+            //adding items to arraylist for listing purpose
+            if (!input.toLowerCase().equals("list")) {
+                items.add(input);
+                sb.append(border + "\n");
+                sb.append("added: " + input + "\n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+                input = sc.nextLine();
+            } else {
+                sb.append(border + "\n");
+                //list out all items in arraylist items
+                for (int i = 1; i <= items.size(); i++) {
+                    sb.append(i + ". " + items.get(i - 1) + "\n");
+                }
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+                input = sc.nextLine();
+            }
+
         }
 
         //Concluding Message

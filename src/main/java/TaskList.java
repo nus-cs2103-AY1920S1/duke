@@ -7,6 +7,9 @@ public class TaskList {
         listItems = new String[100];
     }
 
+    /**
+     * Prints the list of items in the order as stored by the program.
+     */
     public void printList() {
         for (int i = 1; i <= noOfItems; i++) {
             String item = listItems[i - 1];
@@ -14,6 +17,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an item to the list.
+     * @param item The item to be stored in the list.
+     */
     public void add(String item) {
         listItems[noOfItems] = item;
         noOfItems++;

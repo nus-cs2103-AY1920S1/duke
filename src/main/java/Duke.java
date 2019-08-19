@@ -5,6 +5,10 @@ public class Duke {
     static TaskList taskList = new TaskList();
     static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Main program loop of the program.
+     * @param args Unused args.
+     */
     public static void main(String[] args) {
         welcomeMessage();
 
@@ -18,6 +22,10 @@ public class Duke {
         System.exit(1);
     }
 
+    /**
+     * Processes the user input and outputs a response.
+     * @param command The user's input.
+     */
     public static void processCommand(String command) {
         System.out.println("\t____________________________________________________________");
         if (command.equals("bye")) {
@@ -31,6 +39,9 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Displays the welcome message when the user starts the program.
+     */
     public static void welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

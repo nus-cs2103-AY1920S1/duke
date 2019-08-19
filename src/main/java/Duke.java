@@ -27,16 +27,24 @@ public class Duke {
             if (userInput.equals("list")) {
                 printTaskList(taskList);
                 userInput = input.nextLine();
-            } else if (userInput.contains("done")) {
+            } else if (userInput.startsWith("done")) {
                 int taskNumber = Integer.parseInt(userInput.substring(5));
                 Task selectedTask = taskList.get(taskNumber - 1);
                 selectedTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done: \n" + selectedTask);
                 userInput = input.nextLine();
             } else {
-                Task inputTask = new Task(userInput);
-                taskList.add(inputTask);
-                System.out.println("added: " + inputTask);
+                if (userInput.startsWith("todo")) {
+                    addTaskToTaskList(taskList, new ToDo(userInput.substring(5)));
+                } else if (userInput.startsWith("deadline")) {
+                    String description = userInput.substring(9, userInput.indexOf('/') - 1);
+                    String by = userInput.substring(14 + description.length());
+                    addTaskToTaskList(taskList, new Deadline(description, by));
+                } else if (userInput.startsWith("event")) {
+                    String description = userInput.substring(6, userInput.indexOf('/') - 1);
+                    String at = userInput.substring(11 + description.length());
+                    addTaskToTaskList(taskList, new Event(description, at));
+                }
                 userInput = input.nextLine();
             }
         }
@@ -51,5 +59,12 @@ public class Duke {
                 System.out.println((i + 1) + "." + taskList.get(i));
             }
         }
+    }
+
+    public static void addTaskToTaskList(ArrayList<Task> tasklist, Task task) {
+        tasklist.add(task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task);
+        System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
     }
 }

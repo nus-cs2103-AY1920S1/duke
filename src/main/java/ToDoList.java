@@ -35,6 +35,22 @@ public class ToDoList {
                         System.out.println(border);
                     }
 
+                } else if (temp[0].equals("delete")){ //command to delete task
+                    try {
+                        Task toRemove = arr.get(Integer.parseInt(temp[1]) - 1);
+                        counter--;
+                        System.out.println(border);
+                        System.out.println("     Noted. I've removed this task:");
+                        System.out.println("       " + toRemove);
+                        System.out.printf("     Now you have %s tasks in the list.\n", counter);
+                        System.out.println(border);
+                        arr.remove(Integer.parseInt(temp[1]) - 1);
+
+                    } catch (NullPointerException e) {
+                        System.out.println(border);
+                        System.out.println("     Please input a valid task number to delete.");
+                        System.out.println(border);
+                    }
                 } else { //command to add task to list
 
                     String date;

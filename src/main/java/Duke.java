@@ -41,20 +41,19 @@ public class Duke {
         greeting();
         String input = br.readLine();
         while (input != null && !input.equals("bye")) {
-            String[] tokens = input.split(" ");
-            switch (tokens[0]) {
-                case "list":
-                    printList();
-                    break;
-                case "done":
+            if (input.equals("list")) {
+                printList();
+            } else {
+                String[] tokens = input.split(" ");
+                if (tokens[0].equals("done")) {
                     try {
                         doTask(Integer.parseInt(tokens[1]));
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                         addTask(input);
                     }
-                    break;
-                default:
+                } else {
                     addTask(input);
+                }
             }
             input = br.readLine();
         }

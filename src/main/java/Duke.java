@@ -1,10 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+
+    static TaskList taskList = new TaskList();
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         welcomeMessage();
 
-        Scanner scanner = new Scanner(System.in);
         String command = "";
 
         while (!command.equals("bye")) {
@@ -19,8 +22,11 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
         if (command.equals("bye")) {
             System.out.println("\tBye. Hope to see you again soon!");
+        } else if (command.equals("list")) {
+            taskList.printList();
         } else {
-            System.out.println("\t" + command);
+            System.out.println("\t" + "added: " + command);
+            taskList.add(command);
         }
         System.out.println("\t____________________________________________________________");
     }

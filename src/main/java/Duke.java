@@ -11,14 +11,24 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
+        ArrayList<String> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        while (sc.hasNext()) {
-            String next = sc.next();
-            if (next.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-            } else {
-                System.out.println(next);
+        while (true) {
+            String next = sc.nextLine();
+            switch (next) {
+                case ("bye"):
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                case ("list"):
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(i + 1 + ". " + tasks.get(i));
+                    }
+                    break;
+                default:
+                    tasks.add(next);
+                    System.out.println("added: " + next);
+
             }
         }
     }

@@ -6,11 +6,15 @@ plugins {
 group 'seedu.duke'
 version '0.1.0'
 
+run{
+    standardInput = System.in
+}
+
 repositories {
     mavenCentral()
 }
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Duke";
 }

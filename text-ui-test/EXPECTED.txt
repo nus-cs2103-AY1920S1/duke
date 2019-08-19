@@ -20,6 +20,7 @@ Hello from
 	Now you have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
+	Here are the tasks in your list:
 	1. [T][?] test todo
 	2. [D][?] buy books (by: 20th August)
 	____________________________________________________________
@@ -29,6 +30,7 @@ Hello from
 	Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
+	Here are the tasks in your list:
 	1. [T][?] test todo
 	2. [D][?] buy books (by: 20th August)
 	3. [E][?] project meeting (at: 21st August)
@@ -36,6 +38,91 @@ Hello from
 	____________________________________________________________
 	Nice! I've marked this task as done:
 		[D][?] buy books (by: 20th August)
+	____________________________________________________________
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][?] test todo
+	2. [D][?] buy books (by: 20th August)
+	3. [E][?] project meeting (at: 21st August)
+	____________________________________________________________
+	____________________________________________________________
+	Nice! I've marked this task as done:
+		[T][?] test todo
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be blank or not an integer.
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I'm sorry, but I don't know what that means :-(
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The description of a todo cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! I had trouble processing that input.
+	Please make sure that the task description and dates are not empty!
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be less than 0 or greater than the length of the list.
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be less than 0 or greater than the length of the list.
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be blank or not an integer.
+	____________________________________________________________
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][?] test todo
+	2. [D][?] buy books (by: 20th August)
+	3. [E][?] project meeting (at: 21st August)
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be less than 0 or greater than the length of the list.
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be less than 0 or greater than the length of the list.
+	____________________________________________________________
+	____________________________________________________________
+	? OOPS!!! The index to remove cannot be blank or not an integer.
+	____________________________________________________________
+	____________________________________________________________
+	Noted. I've removed this task:
+		[D][?] buy books (by: 20th August)
+	Now you have 2 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][?] test todo
+	2. [E][?] project meeting (at: 21st August)
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!

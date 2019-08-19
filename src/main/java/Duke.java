@@ -35,7 +35,7 @@ public class Duke {
                     printList();
                 } else if (isDoneCommand(input)) {
                     String newInput = input.replaceFirst("done", "").trim();
-                    int oneBasedIndex = validateDoneInput(newInput);
+                    int oneBasedIndex = validateDoneOrDeleteIndex(newInput);
                     markTaskAsDone(oneBasedIndex);
                 } else if (isAddTodoCommand(input)) {
                     String todo = input.replaceFirst("todo", "").trim();
@@ -47,6 +47,10 @@ public class Duke {
                 } else if (isAddEventCommand(input)) {
                     String[] event = validateEventOrDeadline(input, "event", "/at");
                     addEventToList(event[0], event[1]);
+                } else if (isDeleteCommand(input)) {
+                    String newInput = input.replaceFirst("delete", "").trim();
+                    int oneBasedIndex = validateDoneOrDeleteIndex(newInput);
+                    deleteTask(oneBasedIndex);
                 } else {
                     throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -58,7 +62,7 @@ public class Duke {
         printExitMessage();
     }
 
-    private int validateDoneInput(String doneInput) throws DukeException {
+    private int validateDoneOrDeleteIndex(String doneInput) throws DukeException {
         // Checks that the string is not empty and is an integer
         if (doneInput.isEmpty() || !doneInput.matches("-?(0|[1-9]\\d*)")) {
             throw new DukeException("\u2639 OOPS!!! The index to remove cannot be blank or not an integer.");
@@ -103,25 +107,32 @@ public class Duke {
         printMessage("Nice! I've marked this task as done:\n\t\t" + list.get(zeroBasedIndex));
     }
 
+    private void deleteTask(int oneBasedIndex) {
+        int zeroBasedIndex = oneBasedIndex - 1;
+        Task deletedTask = list.get(zeroBasedIndex);
+        list.remove(zeroBasedIndex);
+        printDeleteSuccessMessage(deletedTask);
+    }
+
     private void addTodoToList(String input) {
         Todo newTodo = new Todo(input);
         list.add(newTodo);
-        printSuccessMessage(newTodo);
+        printAddSuccessMessage(newTodo);
     }
 
     private void addDeadlineToList(String description, String deadlineBy) {
         Deadline newDeadline = new Deadline(description, deadlineBy);
         list.add(newDeadline);
-        printSuccessMessage(newDeadline);
+        printAddSuccessMessage(newDeadline);
     }
 
     private void addEventToList(String description, String eventTime) {
         Event newEvent = new Event(description, eventTime);
         list.add(newEvent);
-        printSuccessMessage(newEvent);
+        printAddSuccessMessage(newEvent);
     }
 
-    private void printSuccessMessage(Task task) {
+    private void printAddSuccessMessage(Task task) {
         printLine();
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + task);
@@ -129,8 +140,17 @@ public class Duke {
         printLine();
     }
 
+    private void printDeleteSuccessMessage(Task task) {
+        printLine();
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t\t" + task);
+        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        printLine();
+    }
+
     private void printList() {
         printLine();
+        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             int oneBasedIndex = i + 1;
             System.out.printf("\t%d. %s\n", oneBasedIndex, list.get(i));
@@ -160,6 +180,10 @@ public class Duke {
 
     private boolean isAddEventCommand(String input) {
         return input.startsWith("event");
+    }
+
+    private boolean isDeleteCommand(String input) {
+        return input.startsWith("delete");
     }
 
     private void printGreetingMessage() {

@@ -4,5 +4,26 @@ list
 event project meeting /at 21st August
 list
 done 2
-list 
+list
+done 1
+done
+listabc
+deadline
+event
+todo
+deadline test /by
+event test /at
+deadline /by test
+event /at test
+deadline test /at test
+event test /by test
+done 0
+done 4
+done abcdef
+list
+delete 0
+delete 4
+delete abcdef
+delete 2
+list
 bye

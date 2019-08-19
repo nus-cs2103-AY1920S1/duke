@@ -3,22 +3,27 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TodoList todos = new TodoList();
+        TaskList tasks = new TaskList();
 
-        OutputHandler.sayHi();
+        OutputUtilities.sayHi();
 
         while (true) {
             String input = sc.nextLine();
-
-            switch (input) {
+            String[] parts = input.split("\\s");
+            String part1 = parts[0];
+            switch (part1) {
                 case "list":
-                    todos.printTasks();
+                    tasks.printTasks();
+                    break;
+                case "done":
+                    int id = Integer.parseInt(parts[1]);
+                    tasks.markTaskAsCompleted(id);
                     break;
                 case "bye":
-                    OutputHandler.sayBye();
+                    OutputUtilities.sayBye();
                     return;
                 default:
-                    todos.addTask(input);
+                    tasks.addTask(input);
 
             }
 

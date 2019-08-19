@@ -33,6 +33,9 @@ public class Duke {
         }
         for ( int k = j + 1 ; k < token.length ; k++ ) {
             time.append(token[k]);
+            if (k != token.length - 1) {
+                time.append(" ");
+            }
         }
         if(token[0].equals("deadline")) {
             return new Deadline(desc.toString(), time.toString());

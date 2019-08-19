@@ -13,7 +13,6 @@ public class Duke {
         String input = "";
 
         //Create array of tasks
-//        String[] list = new String[100];
         Task list[]= new Task[100];
 
         //Set index of number of task
@@ -44,7 +43,7 @@ public class Duke {
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < n; i++) {
                     System.out.print("     " + (i+1) + ".");
-                    Task.printTask(list[i].getStatusIcon(), list[i].description);
+                    System.out.println(list[i].toString());
                 }
             }
             else if (input.contains("done")) {
@@ -59,13 +58,50 @@ public class Duke {
 
                 System.out.println("     Nice! I've marked this task as done: ");
                 System.out.print("       ");
-                Task.printTask(list[index-1].getStatusIcon(), list[index-1].description);
+                System.out.println(list[index-1].toString());
+
+            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+                String[] substrings = input.split(" ");
+                String action = substrings[0];
+                switch(action) {
+
+                    case "todo":
+                        String subT = input.replace("todo", "");
+                        list[n] = new ToDo(subT.trim()); //Remove blank spaces
+                        break;
+
+                    case "deadline":
+                        String subD = input.replace("deadline", "");
+                        //Split task and deadline
+                        String[] partsD = subD.split("\\/by");
+                        String descriptionD = partsD[0].trim(); //Remove blank spaces
+                        String by = partsD[1].trim(); //Remove blank spaces
+                        list[n] = new Deadline(descriptionD, by);
+                        break;
+
+                    case "event":
+                        //Separate description and time for clarity
+                        String sub3 = input.replace("event", "");
+                        //Split task and deadline
+                        String[] partsE = sub3.split("\\/at");
+                        String descriptionE = partsE[0].trim(); //Remove blank spaces
+                        String at = partsE[1].trim(); //Remove blank spaces
+                        list[n] = new Event(descriptionE, at);
+                        break;
+                }
+
+                System.out.println("     Got it. I've added this task:");
+                System.out.print("       "); //indentation
+                System.out.println(list[n].toString());
+
+                //After storing user input into array, increment index
+                n += 1;
+                System.out.println("     Now you have " + (n) + " tasks in the list.");
 
             } else {
                 //Create task as a object and store in array
                 Task t = new Task(input);
                 list[n] = t;
-
                 System.out.println("     added: " + input);
 
                 //After storing user input into array, increment index
@@ -91,12 +127,56 @@ class Task {
         this.isDone = false;
     }
 
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    //Print specific task with its status
-    public static void printTask(String status, String description) {
-        System.out.println("[" + status + "] " + description);
+}
+
+class ToDo extends Task {
+
+    protected String by;
+
+    public ToDo(String description) {
+        super(description);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends Task {
+
+    protected String by;
+
+    public Deadline(String description, String by) {
+        super(description);
+        this.by = by;
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+}
+
+class Event extends Task {
+
+    protected String at;
+
+    public Event(String description, String at) {
+        super(description);
+        this.at = at;
+    }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }

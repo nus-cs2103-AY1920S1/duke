@@ -12,6 +12,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return String.format("  [E][%s]%s(at:%s)", this.getStatusIcon(), getDescription(), getDateTime());
+        return String.format("  [E][%s]%s(at:%s)", getStatusIcon(), getDescription(), getDateTime());
     }
 }

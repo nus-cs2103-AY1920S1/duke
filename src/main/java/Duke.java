@@ -2,7 +2,9 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String border = "____________________________________________________________";
-    private static String[] strList = new String[100];
+    private static final String upperBorder = border + "\n\n";
+    private static final String lowerBorder = border + "\n";
+    private static Task[] taskList = new Task[100];
 
     public static void main(String[] args) {
 
@@ -15,37 +17,46 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n"
-                + border + "\n\nHello! I'm Duke\n" + "What can I do for you?\n" + border + "\n");
+                + upperBorder + "Hello! I'm Duke\n" + "What can I do for you?\n" + lowerBorder);
 
         while (true) {
             String str = sc.nextLine();
-            if (str.equals("bye")) {
+            String[] keywords = str.split(" ");
+            if (keywords[0].equals("bye")) {
                 break;
-            } else if (str.equals("list")) {
-                outputList(pointer, strList);
+            } else if (keywords[0].equals("list")) {
+                outputList(pointer, taskList);
+            } else if (keywords[0].equals("done")) {
+                System.out.println(doneTask(Integer.parseInt(keywords[1]), taskList));
             } else {
                 System.out.println(addToList(pointer, str));
                 pointer++;
             }
         }
 
-        System.out.println(border + "\n\nBye. Hope to see you again soon!" + "\n" + border);
+        System.out.println(upperBorder + "Bye. Hope to see you again soon!\n" + lowerBorder);
 
         sc.close();
 
     }
 
     public static String addToList(int pointer, String string) {
-        strList[pointer] = string;
-        return border + "\n\n" + "added: " + string + "\n" + border + "\n";
+        taskList[pointer] = new Task(string);
+        return upperBorder + "added: " + string + "\n" + lowerBorder;
     }
 
-    public static void outputList(int pointer, String[] strList) {
+    public static void outputList(int pointer, Task[] taskList) {
         System.out.println(border + "\n");
         for (int i = 1; i < pointer + 1; i++) {
-            System.out.println(i + ". " + strList[i - 1]);
+            System.out.println(i + ". " + taskList[i - 1]);
         }
-        System.out.println(border + "\n");
+        System.out.println(lowerBorder);
+    }
+
+    public static String doneTask(int pointer, Task[] taskList) {
+        taskList[pointer - 1].setDone();
+        return upperBorder + "Nice! I've marked this task as done:\n"
+            + taskList[pointer - 1] + "\n" + lowerBorder;
     }
 
 }

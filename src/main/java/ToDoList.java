@@ -11,8 +11,9 @@ public class ToDoList {
         while (!input.equals("bye")){ //first check for bye command
             if(input.equals("list")){ //check if list command
                 System.out.println(border);
+                System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < counter; i++){
-                    System.out.println("     " + (i + 1) + ".[" + arr[i].getStatusIcon() + "] " + arr[i].getDescription());
+                    System.out.println("     " + (i + 1) + "." + arr[i]);
                 }
                 System.out.println(border);
             } else {
@@ -20,7 +21,10 @@ public class ToDoList {
                 if (temp[0].equals("done")){ //command to add task as done
                     int done = Integer.parseInt(temp[1]) - 1;
                     arr[done].markAsDone();
-                    System.out.println("     " + done + ".[" + arr[done].getStatusIcon() + "] " + arr[done].getDescription());
+                    System.out.println(border);
+                    System.out.println("     Nice! I've marked this task as done: ");
+                    System.out.println("       " + arr[done]);
+                    System.out.println(border);
 
                 } else { //command to add task to list
                     System.out.println(border + "\n" + "     added: " + input + "\n" + border);

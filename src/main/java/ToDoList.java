@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class ToDoList {
-    public void run() {
+    public void run(){
         Scanner sc = new Scanner(System.in);
         String border = "    ____________________________________________________________";
         Task[] arr = new Task[100];
@@ -31,30 +31,50 @@ public class ToDoList {
 
                     String date;
                     String message;
+                    Boolean added = false;
 
-                    switch (temp[0]){
-                        case "deadline":
-                            date = input.substring(input.indexOf("/") + 4);
-                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                            arr[counter] = new Deadlines(message, date);
-                            break;
-                        case "event":
-                            date = input.substring(input.indexOf("/") + 4);
-                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                            arr[counter] = new Events(message, date);
-                            break;
-                        case "todo":
-                            message = input.substring(input.indexOf(' ') + 1);
-                            arr[counter] = new ToDos(message);
-                            break;
+                    try {
+                        switch (temp[0]){
+                            case "deadline":
+                                date = input.substring(input.indexOf("/") + 4);
+                                message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                                arr[counter] = new Deadlines(message, date);
+                                added = true;
+                                break;
+                            case "event":
+                                date = input.substring(input.indexOf("/") + 4);
+                                message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                                arr[counter] = new Events(message, date);
+                                added = true;
+                                break;
+                            case "todo":
+                                if (temp.length < 2) throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                                message = input.substring(input.indexOf(' ') + 1);
+                                arr[counter] = new ToDos(message);
+                                added = true;
+                                break;
+                        }
+
+                        if (added) {
+                            counter ++;
+                            System.out.println(border);
+                            System.out.println("     Got it. I've added this task: ");
+                            System.out.println("       " + arr[counter - 1]);
+                            System.out.printf("     Now you have %s tasks in the list.\n", counter);
+                            System.out.println(border);
+                        } else {
+                            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        }
+                    }
+                    catch (DukeException e){
+                        System.out.println(e);
+                    }
+                    catch (StringIndexOutOfBoundsException e){
+                        System.out.println(border);
+                        System.out.println("     Please input a task and date");
+                        System.out.println(border);
                     }
 
-                    counter ++;
-                    System.out.println(border);
-                    System.out.println("     Got it. I've added this task: ");
-                    System.out.println("       " + arr[counter - 1]);
-                    System.out.printf("     Now you have %s tasks in the list.\n", counter);
-                    System.out.println(border);
                 }
             }
 

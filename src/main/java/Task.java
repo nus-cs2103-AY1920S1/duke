@@ -27,8 +27,9 @@ public class Task {
         this.desc = desc;
     }
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
+    // marks a task as done, changes the done symbol to check mark
+    public void markAsDone() {
+        this.isDone = true;
         setDoneSymbol();
     }
 
@@ -38,7 +39,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return taskNo + ". " + "[" + doneSymbol + "] " + desc;
+        return taskNo + "." + "[" + doneSymbol + "] " + desc;
     }
 
 }

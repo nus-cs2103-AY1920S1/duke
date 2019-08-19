@@ -6,24 +6,25 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private ArrayList<String> list;
+    private ArrayList<Task> list;
 
     public Duke() {
         this.list = new ArrayList<>();
     }
 
-    public ArrayList<String> getList() {
+    public ArrayList<Task> getList() {
         return this.list;
     }
 
-    public void setList(ArrayList<String> list) {
+    public void setList(ArrayList<Task> list) {
         this.list = list;
     }
 
     // print out all the commands as a numbered list
     private void printList() {
-        for (int i = 1; i <= this.list.size(); i++) {
-            System.out.println("\t" + i + ". " + this.list.get(i - 1));
+        System.out.println("\tHere are the tasks in your list:");
+        for (Task task : list) {
+            System.out.println("\t" + task);
         }
     }
 
@@ -42,10 +43,19 @@ public class Duke {
 
     // execute command given depending on what command it is
     private void execCommand(String command) {
+        String[] commandStringArray = command.split(" ");
         if (command.equals("list")) {
             printList();
+        } else if (command.contains("done") && commandStringArray.length == 2) {
+            // command is done and then followed by task number
+            int taskNo = Integer.parseInt(commandStringArray[1]);
+            Task taskDone = this.list.get(taskNo - 1);
+            taskDone.markAsDone();
+            System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
         } else {
-            this.list.add(command);
+            // add new task to the list
+            Task task = new Task(command,this.list.size() + 1);
+            this.list.add(task);
             System.out.println("\tadded: " + command);
         }
     }
@@ -61,7 +71,8 @@ public class Duke {
         //take in user input and print according to user command
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
-            String command = scanner.nextLine().trim();
+            String command = scanner.nextLine();
+            command = command.trim();
             if (command.equals("bye")) { //user wants to exit
                 duke.printExitMessage(); //program terminates
                 return;

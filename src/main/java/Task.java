@@ -22,6 +22,7 @@ public class Task {
 
     public String toString() {
         String statusIcon = this.getStatusIcon();
-        return  ("[" + statusIcon + "] " + description);
+        return  ("[" + typeOfTask + "]" + "[" + statusIcon + "] "
+                + description);
     }
 }

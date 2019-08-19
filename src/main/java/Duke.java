@@ -8,6 +8,10 @@ public class Duke {
     public static final String BYE_STR = "Bye. Hope to see you again soon!";
     public static final String LIST_STR = "Here are the tasks in your list:";
     public static final String DONE_STR = "Nice! I've marked this task as done:";
+    public static final String OOPS_STR = "☹ OOPS!!! ";
+    public static final String INVALID_COMMAND_STR = "I'm sorry, but I don't know what that means :-(";
+    public static final String EMPTY_DESCRIPTION_STR_1 = "The description of a ";
+    public static final String EMPTY_DESCRIPTION_STR_2 = " cannot be empty.";
     public static final String BYE_CMD = "bye";
     public static final String DONE_CMD = "done";
     public static final String LIST_CMD = "list";
@@ -27,7 +31,14 @@ public class Duke {
         String command = input.nextLine();
 
         while (!command.equals(BYE_CMD)) {
-            processCommand(command);
+
+            try {
+                processCommand(command);
+            }
+            catch (DukeException e) {
+                printWithLongLines(e.getMessage());
+            }
+
             command = input.nextLine();
         }
 
@@ -35,7 +46,7 @@ public class Duke {
         printGoodbye();
     }
 
-    public static void processCommand(String command) {
+    public static void processCommand(String command) throws DukeException {
         switch (command.split(" ")[0]) {
         case LIST_CMD:
             printList();
@@ -53,25 +64,59 @@ public class Duke {
             addTodo(command);
             break;
         default:
-            break;
+            throw new InvalidCommandException(OOPS_STR + INVALID_COMMAND_STR);
         }
     }
 
-    public static void addDeadline(String command) {
-        String[] deadlineArgs = command.split(DEADLINE_CMD)[1].split(BY_DELIM);
-        Task newDeadline = new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim());
-        addTask(newDeadline);
+    public static void addDeadline(String command) throws EmptyDescriptionException {
+        if (verifyArgsNotEmpty(command)) {
+            String[] deadlineArgs = command.split(DEADLINE_CMD)[1].split(BY_DELIM);
+            Task newDeadline = new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim());
+            addTask(newDeadline);
+        }
+        else {
+            throw new EmptyDescriptionException(
+                OOPS_STR
+                + EMPTY_DESCRIPTION_STR_1
+                + DEADLINE_CMD
+                + EMPTY_DESCRIPTION_STR_2
+            );
+        }
     }
 
-    public static void addEvent(String command) {
-        String[] eventArgs = command.split(EVENT_CMD)[1].split(AT_DELIM);
-        Task newEvent = new Event(eventArgs[0].trim(), eventArgs[1].trim());
-        addTask(newEvent);
+    public static void addEvent(String command) throws EmptyDescriptionException {
+        if (verifyArgsNotEmpty(command)) {
+            String[] eventArgs = command.split(EVENT_CMD)[1].split(AT_DELIM);
+            Task newEvent = new Event(eventArgs[0].trim(), eventArgs[1].trim());
+            addTask(newEvent);
+        }
+        else {
+            throw new EmptyDescriptionException(
+                OOPS_STR
+                + EMPTY_DESCRIPTION_STR_1
+                + EVENT_CMD
+                + EMPTY_DESCRIPTION_STR_2
+            );
+        }
     }
-    public static void addTodo(String command) {
-        String todoArg = command.split(TODO_CMD)[1];
-        Task newTodo = new Todo(todoArg); 
-        addTask(newTodo);
+    public static void addTodo(String command) throws EmptyDescriptionException {
+        if (verifyArgsNotEmpty(command)) {
+            String todoArg = command.split(TODO_CMD)[1];
+            Task newTodo = new Todo(todoArg); 
+            addTask(newTodo);
+        }
+        else {
+            throw new EmptyDescriptionException(
+                OOPS_STR 
+                + EMPTY_DESCRIPTION_STR_1
+                + TODO_CMD
+                + EMPTY_DESCRIPTION_STR_2
+            );
+        }
+    }
+
+    public static boolean verifyArgsNotEmpty(String args) {
+        return args.trim().split(" ").length > 1;
     }
 
     public static void markTaskAsDone(Task doneTask) {

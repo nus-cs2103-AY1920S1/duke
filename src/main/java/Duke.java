@@ -10,6 +10,7 @@ public class Duke {
 
     // 79 characters, excluding \n. Line is of length 75 characters.
     private static final String LINE = "    ___________________________________________________________________________\n";
+    private static final int PRINT_THRESHOLD = 73; // length that a string to be printed should not exceed.
 
     public Duke() {
         taskList = new LinkedList<>();
@@ -25,13 +26,15 @@ public class Duke {
     }
 
     private void printWelcomeMessage() {
-        String logo = " ____        _        \n"
+        String logo = "      ____        _        \n"
                 + "     |  _ \\ _   _| | _____ \n"
                 + "     | | | | | | | |/ / _ \\\n"
                 + "     | |_| | |_| |   <  __/\n"
                 + "     |____/ \\__,_|_|\\_\\___|\n";
 
-        echo(logo, "Hello! I'm Duke", "What can I do for you?");
+        System.out.print(LINE + logo + "\n");
+        System.out.print(IDENTATION_LVL1 + "Hello! I'm Duke\n" + IDENTATION_LVL1 + "What can I do for you?\n");
+        System.out.print(LINE + "\n");
     }
 
     private void receiveCommand() {
@@ -146,7 +149,12 @@ public class Duke {
         ListIterator<Task> iterator = taskList.listIterator();
 
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%s%d.%s\n", IDENTATION_LVL1, i + 1, iterator.next());
+            String taskDetails = iterator.next().toString();
+            if (taskDetails.length() <= PRINT_THRESHOLD - 3) {
+                System.out.printf("%s%d.%s\n", IDENTATION_LVL1, i + 1, taskDetails);
+            } else {
+                System.out.printf(splitIntoLines(String.format("%d.%s\n", i + 1, taskDetails)));
+            }
         }
 
         System.out.print(LINE);
@@ -161,11 +169,38 @@ public class Duke {
         System.out.print(LINE);
 
         for (String string : strings) {
-            System.out.print(IDENTATION_LVL1 + string + "\n");
+            if (string.length() <= PRINT_THRESHOLD) {
+                System.out.printf("%s%s\n", IDENTATION_LVL1, string);
+            } else {
+                System.out.print(splitIntoLines(string));
+            }
         }
 
         System.out.print(LINE);
         System.out.print("\n");
+    }
+
+    private String splitIntoLines(String string) {
+        // To deal with the case where the length of string to be printed is greater than the print threshold.
+        StringBuilder builder = new StringBuilder(string.length() + 30);
+        String string_to_be_treated = string;
+
+        // Should return a list of strings without adding any identation?
+        while (true) {
+            builder.append(IDENTATION_LVL1);
+            builder.append(string_to_be_treated.substring(0, PRINT_THRESHOLD));
+            builder.append("\n");
+
+            string_to_be_treated = string_to_be_treated.substring(PRINT_THRESHOLD);
+            if (string_to_be_treated.length() <= PRINT_THRESHOLD) {
+                builder.append(IDENTATION_LVL1);
+                builder.append(string_to_be_treated);
+                builder.append("\n");
+                break;
+            }
+        }
+
+        return builder.toString();
     }
 
     private boolean indexIsValid(int index) {

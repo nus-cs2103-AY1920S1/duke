@@ -9,10 +9,12 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println();
 
         while (sc.hasNextLine()) {
-            System.out.println("____________________________________________________________");
             String input = sc.nextLine();
+            System.out.println(input);
+            System.out.println("____________________________________________________________");
             String[] words = input.split(" ");
             StringBuilder description = new StringBuilder();
 
@@ -103,6 +105,8 @@ public class Duke {
                     System.out.println(new DukeException());
                     break;
             }
+            System.out.println("____________________________________________________________");
+
         }
     }
 }

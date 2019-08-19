@@ -14,21 +14,25 @@ public class Duke {
         System.out.println(line + "\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + line);
 
-        // Reads in input
+        // Read in input
         Task t = new Task(sc.nextLine());
         while (!t.description.equals("bye")) {
             System.out.println(line + "\n");
             if (t.description.equals("list")) {
                 System.out.println("Here are the tasks in your list:\n");
 
-                // Prints Each Item in the format "1. Item"
-                allItems.forEach(x -> System.out.println((allItems.indexOf(x) + 1) + x.toString()));
+                // Print Each Item in the format "1. Item"
+                allItems.forEach(x -> System.out.println((allItems.indexOf(x) + 1) + ". " + x));
             } else if (t.description.contains("done")) {
-                t.markAsDone();
+                int indexToMark = Integer.parseInt(t.description.split(" ")[1]);
+
+                // Mark item of interest as done
+                allItems.get(indexToMark - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n");
+                System.out.println(allItems.get(indexToMark - 1));
             } else {
                 allItems.add(t);
-                //Prints "added: Item"
+                //Print "added: Item"
                 System.out.println("added: " + t.description);
             }
             System.out.println("\n" + line);

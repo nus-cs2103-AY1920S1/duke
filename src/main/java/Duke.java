@@ -51,9 +51,11 @@ public class Duke {
                         }
                         if (instr.startsWith("done")) {
                             try {
-                                t = this.ls.get(Integer.parseInt(instr.substring(4).trim()));
-                                if(t == null)
+                                int i = Integer.parseInt(instr.substring(4).trim());
+                                if(i <= 0 || i > this.ls.size())
                                     throw new IndexOutOfBoundsException();
+                                t = this.ls.get(i);
+
                             } catch (NumberFormatException e) {
                                 throw new DukeException(
                                         "List index not provided or in wrong format.\nExample Correct Usage: done 2");
@@ -65,6 +67,25 @@ public class Duke {
                             this.cout("Nice! I've marked this task as done:\n" + t);
                             break;
                         }
+                        if (instr.startsWith("delete")) {
+                            try {
+                                int i = Integer.parseInt(instr.substring(6).trim());
+                                if(i <= 0 || i > this.ls.size())
+                                    throw new IndexOutOfBoundsException();
+                                t = this.ls.remove(i);
+                            } catch (NumberFormatException e) {
+                                throw new DukeException(
+                                        "List index not provided or in wrong format.\nExample Correct Usage: delete 2");
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new DukeException(
+                                        "Index given is out of bound.\nUse from 1 to last index of list only.");
+                            }
+                            this.cout("Noted. I've removed this task:\n  " +
+                                    t +
+                                    "Now you have " + (this.ls.size() - 1) + " tasks in the list.");
+                            break;
+                        }
+
                         throw new DukeException();
                 }
             } catch (DukeException e) {

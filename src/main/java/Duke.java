@@ -19,7 +19,18 @@ public class Duke {
             StringBuilder description = new StringBuilder();
 
             switch(words[0]) {
-
+                case "delete":
+                    if (words.length <= 1) {
+                        System.out.println(new DukeException("delete"));
+                        break;
+                    }
+                    int indextodelete = Integer.parseInt(words[1]);
+                    Task dt = list.get(indextodelete-1);
+                    list.remove(indextodelete-1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + dt);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    break;
                 case "todo":
                     if (words.length <= 1) {
                         System.out.println(new DukeException("todo"));

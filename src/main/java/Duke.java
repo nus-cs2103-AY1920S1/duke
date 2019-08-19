@@ -27,8 +27,8 @@ public class Duke {
                 if (command.equals("list")) {
                     System.out.println("    Here are the tasks in your list:");
                     for (int i = 0; i < currentIndex; i++) {
-                        System.out.printf("    %d.[%s] %s\n",
-                            i + 1, itemsLst[i].getStatusIcon(), itemsLst[i].description);
+                        System.out.printf("    %d.%s\n",
+                            i + 1, itemsLst[i]);
                     }
                 } else { // if command is neither list nor bye
                     Scanner tempSc = new Scanner(command);
@@ -36,12 +36,48 @@ public class Duke {
                     if (tempSc.hasNext() && tempSc.next().equals("done")) {
                         int tempInt = tempSc.nextInt() - 1;
                         itemsLst[tempInt].markAsDone();
-                        System.out.printf("    Nice! I've marked this task as done:\n      [%s] %s\n"
-                            , itemsLst[tempInt].getStatusIcon(), itemsLst[tempInt].description);
-                    } else {
-                        itemsLst[currentIndex] = new Task(command);
-                        System.out.printf("    added:[%s] %s\n", itemsLst[currentIndex].getStatusIcon(), command);
-                        currentIndex++;
+                        System.out.printf("    Nice! I've marked this task as done:\n      %s\n"
+                            , itemsLst[tempInt]);
+                    } else { // add a new task
+                        if (command.startsWith("todo")) {
+                            Scanner taskSc = new Scanner(command);
+                            taskSc.next();
+                            itemsLst[currentIndex] = new ToDo(taskSc.nextLine().substring(1));
+                        } else if (command.startsWith("deadline")) {
+                            Scanner taskSc = new Scanner(command);
+                            taskSc.next();
+                            String by = taskSc.nextLine().substring(1);
+                            String desc = "";
+                            for (int i = 0; i < by.length(); i++) {
+                                char c = by.charAt(i);
+                                if (c != '/') {
+                                    desc += c;
+                                } else {
+                                    by = by.substring(i + 4);
+                                    desc = desc.substring(0, desc.length() - 1); // get rid of space
+                                    break;
+                                }
+                            }
+                            itemsLst[currentIndex] = new Deadline(desc, by);
+                        } else { // assume that task is an event
+                            Scanner taskSc = new Scanner(command);
+                            taskSc.next();
+                            String at = taskSc.nextLine().substring(1);
+                            String desc = "";
+                            for (int i = 0; i < at.length(); i++) {
+                                char c = at.charAt(i);
+                                if (c != '/') {
+                                    desc += c;
+                                } else {
+                                    at = at.substring(i + 4);
+                                    desc = desc.substring(0, desc.length() - 1); // get rid of space
+                                    break;
+                                }
+                            }
+                            itemsLst[currentIndex] = new Event(desc, at);
+                        }
+                        System.out.printf("    Got it. I've added this task:\n      %s\n" +
+                                "    Now you have %d tasks in the list.\n", itemsLst[currentIndex], ++currentIndex);
                     }
                 }
                 System.out.printf("%s\n\n", hLine);

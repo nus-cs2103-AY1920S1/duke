@@ -20,12 +20,19 @@ public class ToDoList {
             } else {
                 String[] temp = input.split(" ");
                 if (temp[0].equals("done")){ //command to add task as done
-                    int done = Integer.parseInt(temp[1]) - 1;
-                    arr[done].markAsDone();
-                    System.out.println(border);
-                    System.out.println("     Nice! I've marked this task as done: ");
-                    System.out.println("       " + arr[done]);
-                    System.out.println(border);
+                    try{
+                        int done = Integer.parseInt(temp[1]) - 1;
+                        arr[done].markAsDone();
+                        System.out.println(border);
+                        System.out.println("     Nice! I've marked this task as done: ");
+                        System.out.println("       " + arr[done]);
+                        System.out.println(border);
+                    }
+                    catch (NullPointerException e){
+                        System.out.println(border);
+                        System.out.println("     Please input a valid task number.");
+                        System.out.println(border);
+                    }
 
                 } else { //command to add task to list
 
@@ -71,7 +78,7 @@ public class ToDoList {
                     }
                     catch (StringIndexOutOfBoundsException e){
                         System.out.println(border);
-                        System.out.println("     Please input a task and date");
+                        System.out.println("     Please input a task and date.");
                         System.out.println(border);
                     }
 

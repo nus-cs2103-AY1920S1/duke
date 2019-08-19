@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private Scanner scanner;
     private boolean running;
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
 
     public Duke() {
         scanner = new Scanner(System.in);
@@ -16,13 +16,17 @@ public class Duke {
         String input;
         say("Hello! I'm Duke\nWhat can I do for you?");
         while (running) {
-            input = scanner.next();
-            switch(input) {
+            input = scanner.nextLine();
+            String[] inputSequence = input.split(" ");
+            switch(inputSequence[0]) {
                 case "bye":
                     exit();
                     break;
                 case "list":
                     listTasks();
+                    break;
+                case "done":
+                    markDone(Integer.parseInt(inputSequence[1]));
                     break;
                 default:
                     addTask(input);
@@ -31,8 +35,18 @@ public class Duke {
         }
     }
 
+    private void markDone(int index) {
+        Task doneTask = tasks.get(index - 1);
+        doneTask.markDone();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n  ");
+        sb.append(doneTask);
+        say(sb.toString());
+    }
+
     private void addTask(String task) {
-        tasks.add(task);
+        Task newTask = new Task(task);
+        tasks.add(newTask);
         say("added: " + task);
     }
 
@@ -43,16 +57,16 @@ public class Duke {
         } else {
             int index = 1;
             StringBuilder listOfTasks = new StringBuilder();
-            for(String task : tasks) {
+            for(Task task : tasks) {
                 if(index == 1) {
                     listOfTasks.append(index);
-                    listOfTasks.append(": ");
+                    listOfTasks.append(".");
                     listOfTasks.append(task);
                     index++;
                 } else {
                     listOfTasks.append("\n");
                     listOfTasks.append(index);
-                    listOfTasks.append(": ");
+                    listOfTasks.append(".");
                     listOfTasks.append(task);
                     index++;
                 }

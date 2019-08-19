@@ -4,6 +4,7 @@ import java.io.*;
 public class Duke {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String[] token;
+    String tokenString;
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -12,84 +13,100 @@ public class Duke {
     String underline = "____________________________________________________________\n";
     ArrayList<Task> tasks = new ArrayList<Task>();
 
+    private String doubleLine(String msg) {
+        return underline + msg + "\n" + underline;
+    }
+
     private void printAddTask(Task task) {
         System.out.println(underline + "Got it. I've added this task:\n  " + task + "\n" + "Now you have " + tasks.size() + " task" + (tasks.size()==1?" ":"s ") + "in the list.\n" + underline);
     }
 
-    private Task parseAddTask(String[] token, String delimiter) {
-        StringBuilder desc = new StringBuilder();
-        StringBuilder time = new StringBuilder();
-        int j = token.length;
-        for( int i = 1 ; i < token.length ; i++ ) {
-            if (token[i].equals(delimiter)) {
-                j = i;
-                break;
-            } else {
-                desc.append(token[i]) ;
-                if(i != token.length-1) {
-                    desc.append(" ");
+    private void addTask(String tokenString, String[] token) {
+        try {
+            if (token[0].equals("todo")) {
+                String taskDesc = tokenString.substring(4).trim();
+                if(taskDesc.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
+                Task task = new ToDo(taskDesc);
+                tasks.add(task);
+                printAddTask(task);
+            } else if (token[0].equals("deadline")) {
+                String[] temp = tokenString.split("/by");
+                String taskDesc = temp[0].substring(8).trim();
+                if(taskDesc.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                } else if(temp.length < 2) {
+                    throw new DukeException("Event tasks require an deadline time. Did you remember to use \"/by\"?");
+                }
+                String time = temp[1].trim();
+                Task task = new Event(taskDesc, time);
+                tasks.add(task);
+                printAddTask(task);
+            } else if (token[0].equals("event")) {
+                String[] temp = tokenString.split("/at");
+                String taskDesc = temp[0].substring(5).trim();
+                if(taskDesc.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                } else if (temp.length < 2) {
+                    throw new DukeException("Event tasks require an event time. Did you remember to use \"/at\"?");
+                }
+                String time = temp[1].trim();
+                Task task = new Event(taskDesc, time);
+                tasks.add(task);
+                printAddTask(task);
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means xd");
             }
+        } catch (DukeException e) {
+            System.out.print(doubleLine(e.getMessage()));
         }
-        for ( int k = j + 1 ; k < token.length ; k++ ) {
-            time.append(token[k]);
-            if (k != token.length - 1) {
-                time.append(" ");
+    }
+
+    private void doneTask(String tokenString, String[] token) {
+        int taskDone = Integer.parseInt(token[1]) - 1;
+        try {
+            if(tasks.size() == 0) {
+                throw new DukeException("You have no tasks to be done.");
+            } else if(taskDone >= tasks.size() || taskDone < 0) {
+                throw new DukeException("Invalid task done. Insert a number from 1 to " + tasks.size() + ".");
             }
+            tasks.get(taskDone).markAsDone();
+            System.out.println(underline + "Nice! I've marked this task as done:\n  " + tasks.get(taskDone) + "\n" + underline);
+        } catch (DukeException e) {
+            System.out.print(doubleLine(e.getMessage()));
         }
-        if(token[0].equals("deadline")) {
-            return new Deadline(desc.toString(), time.toString());
-        } else if(token[0].equals("event")) {
-            return new Event(desc.toString(), time.toString());
-        } else {
-            return null;
-            //throw smth
+    }
+
+    private void printList() {
+        System.out.print(underline + "Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i));
         }
+        System.out.print(underline);
     }
 
     private void run() throws IOException {
         System.out.println(underline + "Hello from\n" + logo + "\nWhat can i do for you?\n" + underline);
 
-        token = br.readLine().split(" ");
+        tokenString = br.readLine();
+        token = tokenString.split(" ");
         while(!(token[0].equals("bye"))) {
             if (token[0].equals("list")) {
-                System.out.print(underline + "Here are the tasks in your list:\n");
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println((i + 1) + "." + tasks.get(i));
-                }
-                System.out.print(underline);
-                token = br.readLine().split(" ");
+                printList();
             } else if (token[0].equals("done")) {
-                int taskDone = Integer.parseInt(token[1]) - 1;
-                tasks.get(taskDone).markAsDone();
-                System.out.println(underline + "Nice! I've marked this task as done:\n  " + tasks.get(taskDone) + "\n" + underline);
-                token = br.readLine().split(" ");
-            } else if (token[0].equals("deadline")) {
-                Task task = parseAddTask(token, "/by");
-                tasks.add(task);
-                printAddTask(task);
-                token = br.readLine().split(" ");
-            } else if (token[0].equals("event")) {
-                Task task = parseAddTask(token, "/at");
-                tasks.add(task);
-                printAddTask(task);
-                token = br.readLine().split(" ");
-            } else if (token[0].equals("todo")) {
-                StringBuilder desc = new StringBuilder();
-                for( int i = 1 ; i < token.length ; i++ ) {
-                    desc.append(token[i]);
-                    if(i != token.length-1) {
-                        desc.append(" ");
-                    }
-                }
-                Task task = new ToDo(desc.toString());
-                tasks.add(task);
-                printAddTask(task);
-                token = br.readLine().split(" ");
+                doneTask(tokenString, token);
+            } else if ( token[0].equals("todo") || token[0].equals("deadline") || token[0].equals("event")  ) {
+                addTask(tokenString, token);
             } else {
-                //token = br.readLine().split(" ");
-                //throw smth
+                try {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } catch (DukeException e) {
+                    System.out.print(doubleLine(e.getMessage()));
+                }
             }
+            tokenString = br.readLine();
+            token = tokenString.split(" ");
         }
         System.out.print(underline + "Bye. Hope to see you again soon!\n" + underline);
     }

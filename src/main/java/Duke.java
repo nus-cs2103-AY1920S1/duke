@@ -46,7 +46,7 @@ public class Duke {
                 //forming the message
                 sb.append(border + "\n");
                 sb.append("Nice! I've marked this task as done:\n");
-                sb.append("[" + curr.getStatusIcon() + "]" + curr.getDescription() + "\n");
+                sb.append(curr + "\n");
                 sb.append(border + "\n");
                 System.out.println(sb.toString());
                 sb.setLength(0);
@@ -56,18 +56,58 @@ public class Duke {
                 //list out all items in arraylist items
                 for (int i = 1; i <= items.size(); i++) {
                     Task curr = items.get(i - 1);
-                    sb.append(i + "." + "[" + curr.getStatusIcon() + "]" + " " + curr.getDescription() + "\n");
+                    sb.append(i + "." + curr + "\n");
                 }
                 sb.append(border + "\n");
                 System.out.println(sb.toString());
                 sb.setLength(0);
                 input = sc.nextLine();
-            } else {
+            } else if (input.toLowerCase().contains("todo")) {
                 //adding an item
+                Todo newTask = new Todo(input.substring(5));
+                items.add(newTask);
+                sb.append(border + "\n");
+                sb.append("Got it. I've added this task: \n");
+                sb.append(newTask + "\n");
+                sb.append("Now you have " + items.size() + " tasks in the list.\n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+                input = sc.nextLine();
+            } else if (input.toLowerCase().contains("deadline")) {
+                int date = input.indexOf("/by");
+                //split input into [deadline] [description] [date]
+                Deadline newTask = new Deadline(input.substring(9, date), input.substring(date + 3));
+                items.add(newTask);
+                sb.append(border + "\n");
+                sb.append("Got it. I've added this task: \n");
+                sb.append(newTask + "\n");
+                sb.append("Now you have " + items.size() + " tasks in the list.\n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+                input = sc.nextLine();
+            } else if (input.toLowerCase().contains("event")) {
+                int time = input.indexOf("/at");
+                //split input into [event] [description] [timing]
+                Event newTask = new Event(input.substring(6, time), input.substring(time + 3));
+                items.add(newTask);
+                sb.append(border + "\n");
+                sb.append("Got it. I've added this task: \n");
+                sb.append(newTask + "\n");
+                sb.append("Now you have " + items.size() + " tasks in the list.\n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+                input = sc.nextLine();
+            } else {
+                //remainder input
                 Task newTask = new Task(input);
                 items.add(newTask);
                 sb.append(border + "\n");
-                sb.append("added: " + input + "\n");
+                sb.append("Got it. I've added this task: \n");
+                sb.append(newTask + "\n");
+                sb.append("Now you have " + items.size() + " tasks in the list.\n");
                 sb.append(border + "\n");
                 System.out.println(sb.toString());
                 sb.setLength(0);

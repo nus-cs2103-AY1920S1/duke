@@ -29,7 +29,11 @@ public class Duke {
             input = sc.nextLine();
             if (input.equals("list")) {
                 listTasks();
-            } else if (input.matches("done\\s\\d+")) {
+            }
+            else if (input.matches("todo\\s.*")) {
+                addTodo(input.substring(5));
+            }
+            else if (input.matches("done\\s\\d+")) {
                doDoneTask(input);
             } else if (input.equals("bye")) {
                 exitApp();
@@ -49,6 +53,12 @@ public class Duke {
         CmdInterface.printHBars("added: " + taskName);
     }
 
+    public static void addTodo(String todoName) {
+        Task newTask = new Todo(todoName);
+        taskList.add(newTask);
+        printAddSuccess(newTask);
+    }
+
     public static void doDoneTask(String input) {
         int chosenTaskNo = Integer.parseInt(input.substring(5));
         Task chosenTask = taskList.get(chosenTaskNo - 1);
@@ -60,10 +70,19 @@ public class Duke {
     public static void listTasks() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
+        sb.append("Here are the tasks in your list:\n");
         for (Task task : taskList) {
             String checkbox = task.isDone() ? "[✓]" : "[✗]";
-            sb.append(i++ + ". " + checkbox + " " + task.getTaskName() + "\n");
+            sb.append(i++ + ". [" + task.getRepLetter() + "]" + checkbox + " " + task.getTaskName() + "\n");
         }
         CmdInterface.printHBars(sb.toString());
     }
+
+    public static void printAddSuccess(Task task) {
+        String checkbox = task.isDone() ? "[✓]" : "[✗]";
+        CmdInterface.printHBars("Got it. I've added this task: \n" +
+                "  [" + task.getRepLetter() + "]" + checkbox + task.getTaskName() +"\n" +
+                "Now you have " + taskList.size() + " tasks in the list.");
+    }
+
 }

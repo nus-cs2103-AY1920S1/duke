@@ -22,4 +22,9 @@ public class Task {
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
+
+    public char getRepLetter() {
+        return ' ';
+    }
+
 }

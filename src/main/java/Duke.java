@@ -10,7 +10,9 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> array = new ArrayList<>();
+        ArrayList<Task> array = new ArrayList<>();
+
+        int num = 1;
 
         while (sc.hasNext()) {
             String word = sc.nextLine();
@@ -18,12 +20,14 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.exit(0);
             } else if (word.equals("list")) {
-                for(String s : array) {
-                    System.out.println(s);
-                }
+                Task.printList(array);
+            } else if (word.contains("done")) {
+                String arr[] = word.split(" ");
+                int taskNum = Integer.parseInt(arr[1]);
+                Task.markAsDone(taskNum, array);
             } else {
-                array.add("1. " + word);
-                System.out.println("added: " + word);
+                Task.addList(num, word,array);
+                num++;
             }
         }
     }

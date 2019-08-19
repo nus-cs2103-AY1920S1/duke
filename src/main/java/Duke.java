@@ -1,9 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    ArrayList<String> tasks = new ArrayList<>();
+
     /**
      * Setup Duke.
-     * @param args the setup arguments
+     * @param args Setup arguments
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -24,13 +27,18 @@ public class Duke {
         sayGreeting();
         String command;
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        do {
             command = sc.nextLine();
-            if (command.equals("bye")) {
+            switch (command) {
+            case "list":
+                printTasks();
                 break;
+            case "bye":
+                break;
+            default:
+                addTask(command);
             }
-            printFormatted(command);
-        }
+        } while (!command.equals("bye"));
         sayBye();
     }
 
@@ -52,5 +60,20 @@ public class Duke {
         }
         stringBuilder.append(horLine + "\n");
         System.out.println(stringBuilder);
+    }
+
+    private void addTask(String text) {
+        this.tasks.add(text);
+        printFormatted("added: " + text);
+    }
+
+    private void printTasks() {
+        StringBuilder lines = new StringBuilder();
+        int counter = 0;
+        for (String task : this.tasks) {
+            counter++;
+            lines.append(String.format("%d. %s\n", counter, task));
+        }
+        printFormatted(lines.toString());
     }
 }

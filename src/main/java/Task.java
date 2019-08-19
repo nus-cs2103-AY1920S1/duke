@@ -2,11 +2,9 @@
     public class Task {
         protected String taskDesc;
         protected boolean isDone;
-        protected int taskID;
 
-        public Task(String desc, int taskID) {
+        public Task(String desc) {
             this.taskDesc = desc;
-            this.taskID = taskID;
             this.isDone = false;
         }
 
@@ -18,12 +16,13 @@
             isDone = true;
         }
 
-        public String printTask() {
+        @Override
+        public String toString() {
             if(isDone) {
-                String printable = taskID + ".[✓] " + taskDesc;
+                String printable = "[✓] " + taskDesc;
                 return printable;
             } else {
-                String printable = taskID + ".[✗] " + taskDesc;
+                String printable ="[✗] " + taskDesc;
                 return printable;
             }
         }

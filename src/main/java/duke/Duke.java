@@ -1,6 +1,7 @@
 package duke;
 
 import duke.commands.Bye;
+import duke.commands.Done;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ public class Duke {
     public Duke() {
         commandMap.register(new Bye(this));
         commandMap.register(new duke.commands.List(this));
+        commandMap.register(new Done(this));
     }
     public void run() {
         say("Hello! I'm Duke\nWhat can I do for you?");
@@ -29,8 +31,8 @@ public class Duke {
             }
         }
     }
-    public String getTaskListString() {
-        return taskList.toString();
+    public TaskList getTaskList() {
+        return taskList;
     }
     public void say(String text) {
         System.out.println(" ____________________________________________________________");

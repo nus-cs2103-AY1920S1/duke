@@ -9,6 +9,6 @@ public class List extends Command {
         name = "list";
     }
     public void execute(String[] args) {
-        duke.say(duke.getTaskListString());
+        duke.say(duke.getTaskList().toString());
     }
 }

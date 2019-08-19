@@ -1,16 +1,18 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
     	Scanner scanner = new Scanner(System.in);
-    	Task[] taskArray = new Task[100];
-    	int taskCounter = 0;
+		ArrayList<Task> taskArrayList = new ArrayList<Task>();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
 		System.out.println("What can I do for you?");
 
@@ -20,71 +22,48 @@ public class Duke {
 
         while (!command.equals("bye")) {
         	if (userInput.equals("list")) {
-        		String prettifiedList = listConverter(taskArray);
-        		System.out.println(prettifiedList);
+				printTaskList(taskArrayList);
 			} else if (command.equals("done")) {
         		Integer taskNumber = Integer.parseInt(inLineScanner.next()) - 1;
-				String output = taskArray[taskNumber].markCompleted();
-				System.out.println(output);
+				Task task = taskArrayList.get(taskNumber);
+				task.markCompleted();
+				StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
+				sb.append("    ");
+				sb.append(task.toString());
+				System.out.println(sb.toString());
 			} else {
         		switch(command) {
 					case "todo":
-						taskArray[taskCounter] = new ToDo(inLineScanner.nextLine().trim());
+						taskArrayList.add(new ToDo(inLineScanner.nextLine().trim()));
 						break;
 					case "deadline":
 						String[] deadlineNameAndDate = inLineScanner.nextLine().split("/by");
 						String deadLineName = deadlineNameAndDate[0].trim();
 						String deadLineDate = deadlineNameAndDate[1].trim();
-						taskArray[taskCounter] = new DeadLine(deadLineName, deadLineDate);
+						taskArrayList.add(new DeadLine(deadLineName, deadLineDate));
 						break;
 					case "event":
 						String[] eventNameAndDate = inLineScanner.nextLine().split("/at");
 						String eventName = eventNameAndDate[0].trim();
 						String eventDate = eventNameAndDate[1].trim();
-						taskArray[taskCounter] = new Event(eventName, eventDate);
+						taskArrayList.add(new Event(eventName, eventDate));
 						break;
 				}
-        		taskCounter++;
         		System.out.println("Got it. I've added this task: ");
-				System.out.println(taskArray[taskCounter - 1]);
-				System.out.printf("Now you have %d tasks in the list.\n", taskCounter);
+				System.out.println(taskArrayList.get(taskArrayList.size() -1));
+				System.out.printf("Now you have %d tasks in the list.\n", taskArrayList.size());
 			}
         	userInput = scanner.nextLine();
 			inLineScanner = new Scanner(userInput);
 			command = inLineScanner.next();
 		}
-
         System.out.print("Bye. Hope to see you again soon!");
     }
 
-    private static String[] getTaskNameAndDate(Scanner inLineScanner, String dateIndicator) {
-    	String currentWord = inLineScanner.next();
-    	StringBuilder taskName  = new StringBuilder();
-    	StringBuilder date = new StringBuilder();
-    	String[] taskNameAndDate = new String[2];
-    	while (!currentWord.equals("dateIndicator")) {
-			taskName.append(currentWord);
-			currentWord = inLineScanner.next();
+    private static void printTaskList(ArrayList<Task> taskArrayList) {
+    	for (int i = 0; i < taskArrayList.size(); i++) {
+    		System.out.printf("%d.%s\n", i + 1, taskArrayList.get(i).toString());
 		}
-    	while(inLineScanner.hasNext()) {
-			date.append(currentWord);
-			currentWord = inLineScanner.next();
-		}
-    	taskNameAndDate[0] = taskName.toString();
-    	taskNameAndDate[1] = date.toString();
-    	return taskNameAndDate;
-	}
-
-    private static String listConverter(Task[] list) {
-    	StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < list.length; i++)
-		{
-			if (list[i] != null) {
-				sb.append(i + 1 + "." + list[i].toString());
-				sb.append("\n");
-			}
-		}
-		return sb.toString().trim();
 	}
 }
 
@@ -97,14 +76,8 @@ class Task {
 		this.doneStatus = false;
 	}
 
-	public String markCompleted() {
+	public void markCompleted() {
 		this.doneStatus = true;
-		StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
-		sb.append("    ");
-		sb.append("[✓]");
-		sb.append(" ");
-		sb.append(taskName);
-		return sb.toString();
 	}
 
 	@Override
@@ -159,3 +132,7 @@ class Event extends Task {
 		return "[E]" + super.toString() + " (at: " + eventDate + ")";
 	}
 }
+
+//class DukeException extends Exception {
+//	public DukeException
+//}

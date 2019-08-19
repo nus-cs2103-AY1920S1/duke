@@ -18,7 +18,7 @@ public class Duke {
                 System.out.println("    _____________________________________\n");
             } else if (command.contains("done")) {
                 int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
-                list.get(taskNumber).setDone();
+                list.get(taskNumber).markAsDone();
                 System.out.println("    _____________________________________");
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + list.get(taskNumber));

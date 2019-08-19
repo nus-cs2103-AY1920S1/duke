@@ -1,21 +1,22 @@
-class Task {
-    String taskName;
-    boolean isDone;
+public class Task {
+    protected String description;
+    protected boolean isDone;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public void setDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
     public String toString() {
         String task;
         if (isDone) {
-            return 	"[+] " + taskName; //Task is Done
+            return 	"[+] " + description; //Task is Done
         } else {
-            return 	"[-] " + taskName; //Task not Done
+            return 	"[-] " + description; //Task not Done
         }
     }
 }

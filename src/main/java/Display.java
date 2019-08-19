@@ -28,8 +28,8 @@ class Display implements TaskObserver {
     }
 
     private static void printExitMessage() {
-//        String farewell = "Bye. Hope to see you "
-//           + "again soon!";
+        //String farewell = "Bye. Hope to see you "
+        //     + "again soon!";
         String farewell = "NyOO >w< owo dont goo iww miss youu!!";
 
         Display.printSection(farewell);
@@ -82,8 +82,8 @@ class Display implements TaskObserver {
     }
 
     private static void printSection(String job) {
-//        ArrayList<String> printxs = new ArrayList<>();
-//        printxs.add(job);
+        //ArrayList<String> printxs = new ArrayList<>();
+        //printxs.add(job);
         List<String> printxs = Display.stringToList(job);
         Display.printSection(printxs);
     }
@@ -113,15 +113,24 @@ class Display implements TaskObserver {
 
     }
 
+    public static void printDeleteTaskSection(String 
+            taskDetails, int totalTasks) {
+        String header = "Nyoted. I've wemuvd this task:\n";
+        String footer = "Nyow you have "
+           + totalTasks + " tasks in the wist.";
+        Display.printSection(header + footer);
+    }
+
     public static void printErrorSection(String message) {
         Display.printSection(message);
     }        
+
 
     public static void 
         printAllTasks(Iterator<TaskInterface> iter) {
 
         ArrayList<String> printxs = new ArrayList<>();
-//        String headermsg = "Here are the tasks in your list:";
+        //  String headermsg = "Here are the tasks in your list:";
         String headermsg = "Hewe awe the tasks in youw wist:";
         printxs.add(headermsg);
 
@@ -156,6 +165,9 @@ class Display implements TaskObserver {
             } else if 
                 (commandlist[0].toUpperCase().equals("DONE")) {
                 this.controller.doneTask(command);
+            } else if 
+                (commandlist[0].toUpperCase().equals("DELETE")) {
+                this.controller.deleteTask(command);
             } else {
                 this.controller.addTask(command);
             }

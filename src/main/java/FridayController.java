@@ -41,6 +41,15 @@ class FridayController implements ControllerInterface {
         this.display.printDoneTaskSection(task.toString());
     }
 
+    public void deleteTask(String command) {
+        String[] commandlist = command.split(" ");
+        /* check for exceptions */
+        Integer taskNum = Integer.valueOf(commandlist[1]);
+        TaskInterface task = this.model.deleteTask(taskNum);
+        this.display.printDeleteTaskSection(task.toString(), 
+                this.model.getTotalTasks());
+    }
+
     public void listTasks() {
         Iterator<TaskInterface> iter = 
             this.model.getTaskListIterator();

@@ -3,5 +3,6 @@ public interface ControllerInterface {
     void stop();
     void addTask(String command);
     void doneTask(String command);
+    void deleteTask(String command);
     void listTasks();
 }

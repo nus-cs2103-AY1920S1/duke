@@ -2,6 +2,13 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Arrays;
+/*
+ * Look, if we need to have a list of commands to be more 
+ * modular, we can 
+ * 1. Wrapper class for BasicTaskCreator
+ * 2. Facade to limit BasicTaskCreator
+ * 3. Make a compositeTaskCreator and accept ToDoTaskCreator et al
+ */
 class BasicTaskCreator implements TaskCreator {
     public BasicTaskCreator() {
     }
@@ -46,6 +53,7 @@ class BasicTaskCreator implements TaskCreator {
 
     public TaskInterface createTask(String command) 
         throws OWOException {
+
         String[] cmdList = command.split(" ");
 
         if (cmdList[0].toUpperCase().equals("TODO")) {

@@ -33,12 +33,23 @@ class BasicTaskModel implements TaskModelInterface {
         this.notifyObservers();
     }
 
+    // returns TaskInterface so task details can be printed
+    // by the Display GUI
     public TaskInterface doneTask(int refNum) {
+        //the datastructure list is index0 
+        //the GUI list is index1
         int indexNum = refNum - 1;
         TaskInterface pendingTask = this.taskList.get(indexNum);
         TaskInterface doneTask = pendingTask.completeTask();
         this.taskList.set(indexNum, doneTask);
         return doneTask;
+    }
+
+    public TaskInterface deleteTask(int refNum) {
+        int indexNum = refNum - 1;
+        TaskInterface deletedTask = 
+            this.taskList.remove(indexNum);
+        return deletedTask;
     }
 
     public Iterator<TaskInterface> getTaskListIterator(){

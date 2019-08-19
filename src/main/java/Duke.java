@@ -9,10 +9,17 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
 
+        Task_List schedule = new Task_List();
         Scanner sc = new Scanner(System.in);
-        String input = "Hello! I'm Duke \n What can I do for you?";
+        System.out.println(new Border());
+        System.out.println("    Hello! I'm Duke \n    What can I do for you?\n");
+        System.out.println(new Border() + "\n");
+        String input = sc.nextLine();
         while (! input.equals("bye")){
-            System.out.println(input);
+            if (input.equals("list")) {
+                System.out.println(schedule);
+            }
+            schedule.add(input);
             input = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");

@@ -25,7 +25,7 @@ public class Duke {
             if (s.equals("list")) {
                 printList();
             } else if (strArr[0].equals("done")) {
-                done(strArr);
+                done(s, strArr);
             } else {
                 addTask(s, strArr);
             }
@@ -44,13 +44,22 @@ public class Duke {
         System.out.println(LINES);
     }
 
-    private void done(String[] strArr) {
-        ((Task) list.get(Integer.parseInt(strArr[1]) - 1)).markAsDone();
-        System.out.println(display(
-                "Nice! I've marked this task as done:\n"
-                        + ((Task) list.get(Integer.parseInt(strArr[1]) - 1))
+    private void done(String s, String[] strArr) {
+        try {
+            if (s.length() < 6) {
+                throw new DukeException("Please write in this format: done X\nWhere X is a number in the list");
+            }
+            ((Task) list.get(Integer.parseInt(strArr[1]) - 1)).markAsDone();
+            System.out.println(display(
+                    "Nice! I've marked this task as done:\n"
+                            + ((Task) list.get(Integer.parseInt(strArr[1]) - 1))
 
-        ));
+            ));
+        } catch (DukeException e) {
+            System.out.print(display(e.getMessage()));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.print(display("Please input a number that is within the list"));
+        }
     }
 
     private void addTask(String s, String[] strArr) {

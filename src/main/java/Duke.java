@@ -23,6 +23,16 @@ public class Duke {
                         System.out.println("Nice! I've marked this task as done:" + "\n" +
                                 taskList.get(numChange).toString());
                     }
+                } else if((command.split(" ")[0]).equals("delete")) {
+                    if(command.split(" ").length == 1) {
+                        throw new DukeException("☹ OOPS!!! Please indicate which task you would like to delete.");
+                    } else {
+                        int numChange = Integer.parseInt(command.split(" ")[1]) - 1;
+                        Task toRemove = taskList.get(numChange);
+                        taskList.remove(numChange);
+                        System.out.println("Noted. I've removed this task:" + "\n" + toRemove.toString()
+                                            + "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+                    }
                 } else if((command.split(" ")[0]).equals("todo")||(command.split(" ")[0]).equals("deadline")||(command.split(" ")[0]).equals("event")) {
                     String type = command.split(" ")[0];
 

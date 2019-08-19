@@ -1,8 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    private String[] list;
-
     /**
      * Main method.
      */

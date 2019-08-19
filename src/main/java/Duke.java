@@ -12,7 +12,7 @@ public class Duke { // handles all input and output
 
     final static String line = "____________________________________________________________";
 
-    final static ArrayList<Task> _todo = new ArrayList<Task>();
+    final static ArrayList<Task> _task = new ArrayList<Task>();
 
     public static String intro() {
         String intro = String.format("%s%n%s%n Hello! I'm Duke%n What can I do for you?%n%s%n",
@@ -24,12 +24,13 @@ public class Duke { // handles all input and output
         StringBuilder s = new StringBuilder(line);
         s.append(System.getProperty("line.separator"));
         s.append(" Here are the tasks in your list:");
-        for (int i = 1; i <= _todo.size(); i++) {
+        for (int i = 1; i <= _task.size(); i++) {
             s.append(System.getProperty("line.separator"));
-            s.append(" ").append(i).append(".[");
-            Task t = _todo.get(i - 1);
-            s.append(t.getStatusIcon()).append("] ");
-            s.append(t.getDesc());
+            s.append(" ").append(i).append(".");
+            Task t = _task.get(i - 1);
+            s.append(t.toString());
+//            s.append(t.getStatusIcon()).append("] ");
+//            s.append(t.getDesc());
         }
         s.append(System.getProperty("line.separator"));
         s.append(line);
@@ -49,15 +50,16 @@ public class Duke { // handles all input and output
         return bye;
     }
 
-    public static String addToList(String task) {
-        _todo.add(new Task(task));
-        String added = String.format("%s%n added: %s%n%s%n",
-                        line, task, line);
+    public static String newTask(Task t) {
+        _task.add(t);
+        String added = String.format("%s%n Got it! I've added this task:" +
+                        "%n   %s%n Now you have %d task in the list.%n%s%n",
+                        line, t.toString(), _task.size(), line);
         return added;
     }
 
     public static String done(int n) {
-        Task t = _todo.get(n - 1);
+        Task t = _task.get(n - 1);
         t.markAsDone();
         String done = String.format("%s%n Nice! I've marked this task as done:%n [%s] %s%n",
                         line, t.getStatusIcon(), t.getDesc(), line);
@@ -69,9 +71,10 @@ public class Duke { // handles all input and output
         System.out.println(intro());
 
         while (sc.hasNext()) {
-            String cmd = sc.nextLine();
+            String cmdWord = sc.next(); // extract first only
+            String cmdLine = sc.nextLine(); // extract the rest of the line
 
-            switch(cmd) {
+            switch(cmdWord) {
                 case "list":
                     System.out.println(list());
                     break;
@@ -81,13 +84,23 @@ public class Duke { // handles all input and output
                 case "bye":
                     System.out.println(bye());
                     break;
-                default:
-                    if (cmd.contains("done")) {
-                        int taskNo = Integer.parseInt(cmd.substring(cmd.length() - 1));
-                        System.out.println(done(taskNo));
-                    } else {
-                        System.out.println(addToList(cmd));
-                    }
+                case "done":
+                    int taskNo = Integer.parseInt(cmdLine.substring(1));
+                    System.out.println(done(taskNo));
+                    break;
+                case "todo":
+                    ToDo td = new ToDo(cmdLine);
+                    System.out.println(newTask(td));
+                    break;
+                case "deadline":
+                    String[] cmdSplit = cmdLine.split("/by");
+                    Deadline dl = new Deadline(cmdSplit[0], cmdSplit[1]);
+                    System.out.println(newTask(dl));
+                    break;
+                case "event":
+                    String[] cmdSplitt = cmdLine.split("/at");
+                    Event e = new Event(cmdSplitt[0], cmdSplitt[1]);
+                    System.out.println(newTask(e));
                     break;
             }
         }

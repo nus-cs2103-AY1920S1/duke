@@ -28,7 +28,7 @@ public class Duke {
             } else {
                 Task newTask = new Task(input);
                 taskList.add(newTask);
-                printMessage(" added: " + input);
+                printMessage("added: " + input);
             }
         }
 

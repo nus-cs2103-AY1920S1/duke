@@ -20,6 +20,8 @@ public class Duke {
         String taskName;
         Scanner scanner = new Scanner(System.in);
         String [] command;
+        String [] date;
+        Task task;
         boolean isContinue = true;
 
         displayWelcome();
@@ -37,10 +39,24 @@ public class Duke {
                 case "done":
                     done(tasks, (int)command[1].charAt(0));
                     break;
-                default:
-                    Task task = new Task (taskName);
+                case "todo":
+                    task = new Todo (taskName);
                     addTaskIn(task,tasks);
+                    break;
 
+                case "deadline":
+                    date = taskName.split("/");
+                    task = new Deadline (taskName,date[1]);
+                    addTaskIn(task,tasks);
+                    break;
+
+                case "event":
+                    date = taskName.split("/");
+                    task = new Event (taskName, date[1]);
+                    addTaskIn(task,tasks);
+                    break;
+                default:
+                    //
             }
         }
     }
@@ -68,14 +84,31 @@ public class Duke {
     public static void addTaskIn(Task task,ArrayList<Task> tasks) {
         System.out.println("    ____________________________________________________________");
         tasks.add(task);
-        System.out.println("     added: "+task.getTaskName());
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       ["+task.getType()+"]"+"["+ task.getStatus()+"] "+task.getTaskName());
+        //System.out.println("     added: "+task.getTaskName());
+        System.out.println("     Now you have "+tasks.size()+" tasks in the list");
         System.out.println("    ____________________________________________________________");
     }
 
     public static void list (ArrayList<Task> tasks){
         System.out.println("    ____________________________________________________________");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     "+(i+1)+"."+"["+ tasks.get(i).getStatus()+"]"+tasks.get(i).getTaskName());
+            System.out.print("     "+(i+1)+"."+"["+tasks.get(i).getType()+"]"+"["+ tasks.get(i).getStatus()+"] "+tasks.get(i).getTaskName()+" ");
+            switch (tasks.get(i).getType()){
+                case 'T':
+                    System.out.println();
+                    break;
+                case 'D':
+                    //Forced type casting
+                    Deadline dtask = (Deadline) tasks.get(i);
+                    System.out.println("(by: "+dtask.getBy()+")");
+                    break;
+                case 'E':
+                    Event etask = (Event) tasks.get(i);
+                    System.out.println("(by: "+etask.getStart()+")");
+                    break;
+            }
         }
         System.out.println("    ____________________________________________________________");
     }

@@ -12,27 +12,34 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }*/
     public static void main(String[] args) {
-        ArrayList<String> arrayList = new ArrayList<>();
-        runUI(arrayList);
+        ArrayList<Task> tasks = new ArrayList<>();
+        runUI(tasks);
     }
 
-    public static void runUI(ArrayList<String> arrayList){
-        String str;
-        boolean isContinue = true;
+    public static void runUI(ArrayList<Task> tasks){
+        String taskName;
         Scanner scanner = new Scanner(System.in);
+        String [] command;
+        boolean isContinue = true;
+
         displayWelcome();
         while(isContinue) {
-            str = scanner.nextLine();
-            switch (str) {
+            taskName = scanner.nextLine();
+            command = taskName.split(" ");
+            switch (command[0]) {
                 case "bye":
                     displayQuit();
                     isContinue = false;
                     break;
                 case "list":
-                    list(arrayList);
+                    list(tasks);
+                    break;
+                case "done":
+                    done(tasks, (int)command[1].charAt(0));
                     break;
                 default:
-                    addTaskIn(str,arrayList);
+                    Task task = new Task (taskName);
+                    addTaskIn(task,tasks);
 
             }
         }
@@ -58,18 +65,29 @@ public class Duke {
     }*/
 
     //Add new task
-    public static void addTaskIn(String str,ArrayList<String> arrayList) {
+    public static void addTaskIn(Task task,ArrayList<Task> tasks) {
         System.out.println("    ____________________________________________________________");
-        arrayList.add(str);
-        System.out.println("added: "+str);
+        tasks.add(task);
+        System.out.println("     added: "+task.getTaskName());
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void list (ArrayList<String> arrayList){
+    public static void list (ArrayList<Task> tasks){
         System.out.println("    ____________________________________________________________");
-        for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println("     "+(i+1)+". "+arrayList.get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("     "+(i+1)+"."+"["+ tasks.get(i).getStatus()+"]"+tasks.get(i).getTaskName());
         }
         System.out.println("    ____________________________________________________________");
     }
+
+    public static void done(ArrayList<Task> tasks, int index) {
+        tasks.get(index-49).setStatus();
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Nice! I've marked this task as done: ");
+        System.out.println("       ["+tasks.get(index-49).getStatus()+"] "+tasks.get(index-49).getTaskName());
+        System.out.println("    ____________________________________________________________");
+    }
+
 }
+
+

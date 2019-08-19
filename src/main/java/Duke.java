@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,31 +13,47 @@ public class Duke {
         System.out.print("\n");
     }
 
-    private static void add_task(String task_name) {
-        Task next_task = new Task(task_name);
-        tasklist.add(next_task);
+    // This method add a new task into the task list
+    private static void add_task(String task_type, String task_name, String date_or_time) {
+        // Add the right type of task
+        Task toAdd;
+        if (task_type.equals("Todo")) {
+            toAdd = new Todo(task_name);
+            tasklist.add(toAdd);
+        }
+        else if (task_type.equals("Event")) {
+            toAdd = new Event(task_name, date_or_time);
+            tasklist.add(toAdd);
+        }
+        else {
+            toAdd = new Deadline(task_name, date_or_time);
+            tasklist.add(toAdd);
+        }
+
+        // Print out the message
         draw_line();
-        System.out.println("     " + "added: " + task_name);
+        System.out.println("     Got it. I have added this task:");
+        System.out.println("       " + toAdd.task_info());
+        System.out.println("     You have now " + Task.get_total_number() + " tasks in the list.");
         draw_line();
     }
 
+    // This method list down all tasks
     private static void list_task() {
         draw_line();
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < tasklist.size(); i++) {
-            String indicator;
-            if (tasklist.get(i).isFinished()) {indicator = ".[\u2713] ";}
-            else {indicator = ".[\u2715] ";}
-            System.out.println("     " + (i + 1) + indicator + tasklist.get(i).get_name());
+            System.out.println((i + 1) + "." + tasklist.get(i));
         }
         draw_line();
     }
 
+    // This method sets task as finished
     private static void finish_task(int just_done) {
         draw_line();
         tasklist.get(just_done - 1).set_as_finish();
         System.out.println("     Nice! I have set this task as done:");
-        System.out.println("       [\u2713] " + tasklist.get(just_done - 1).get_name());
+        System.out.println("       " + tasklist.get(just_done - 1).get_name());
         draw_line();
     }
 
@@ -43,12 +61,30 @@ public class Duke {
     //Except bye is recognized directly through the main method.
     private static void recognizer(String input) {
         String[] split_input = input.split(" ");
+
+        // When the user want to see the task list.
         if (split_input[0].equals("list")) list_task();
+
+        // When the user has finished a task.
         else if (split_input[0].equals("done")) {
             int just_done = Integer.parseInt(split_input[1]);
             finish_task(just_done);
-        } else {
-            add_task(input);
+        }
+
+        // When the user want to add a todo task.
+        else if (split_input[0].equals("todo")) {
+            String task_name = "";
+            for (int i = 1; i < split_input.length; i++) {
+                task_name = split_input[i];
+                if (i != split_input.length - 1) task_name = task_name + " ";
+            }
+            add_task("Todo", task_name, null);
+        }
+
+        // When the user want to add a event task.
+        else if (split_input[0].equals("event")) {
+            String task_name = "";
+            
         }
     }
 
@@ -64,6 +100,8 @@ public class Duke {
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             if (input.equals("bye")) break;
+
+            // The pot will be thrown to the recognizer
             else recognizer(input);
         }
 

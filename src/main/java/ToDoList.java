@@ -4,21 +4,29 @@ public class ToDoList {
     public void run() {
         Scanner sc = new Scanner(System.in);
         String border = "    ____________________________________________________________";
-        String[] arr = new String[100];
+        Task[] arr = new Task[100];
         int counter = 0;
 
         String input = sc.nextLine();
-        while (!input.equals("bye")){
-            if(input.equals("list")){
+        while (!input.equals("bye")){ //first check for bye command
+            if(input.equals("list")){ //check if list command
                 System.out.println(border);
                 for (int i = 0; i < counter; i++){
-                    System.out.println("     " + (i + 1) + ". " + arr[i]);
+                    System.out.println("     " + (i + 1) + ".[" + arr[i].getStatusIcon() + "] " + arr[i].getDescription());
                 }
                 System.out.println(border);
             } else {
-                System.out.println(border + "\n" + "     added: " + input + "\n" + border);
-                arr[counter] = input;
-                counter ++;
+                String[] temp = input.split(" ");
+                if (temp[0].equals("done")){ //command to add task as done
+                    int done = Integer.parseInt(temp[1]) - 1;
+                    arr[done].markAsDone();
+                    System.out.println("     " + done + ".[" + arr[done].getStatusIcon() + "] " + arr[done].getDescription());
+
+                } else { //command to add task to list
+                    System.out.println(border + "\n" + "     added: " + input + "\n" + border);
+                    arr[counter] = new Task(input);
+                    counter ++;
+                }
             }
             input = sc.nextLine();
         }

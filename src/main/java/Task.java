@@ -1,10 +1,12 @@
 public class Task {
     private String taskName;
+    private String taskIcon;
     private boolean isDone;
 
-    public Task(String taskName) {
+    public Task(String taskName, String taskIcon) {
         this.taskName = taskName;
         this.isDone = false;
+        this.taskIcon = taskIcon;
     }
 
     /**
@@ -35,8 +37,12 @@ public class Task {
         return "✗";
     }
 
+    private String getTaskIcon() {
+        return this.taskIcon;
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getDoneSymbol() + "] " + this.getName();
+        return this.getTaskIcon() + "[" + this.getDoneSymbol() + "] " + this.getName();
     }
 }

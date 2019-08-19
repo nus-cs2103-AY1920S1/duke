@@ -15,11 +15,13 @@ public class TaskList {
         if(command.equals("list")) {
             this.printList();
         } else {
-            String[] strArray = command.split("\\s+");
+            String[] strArray = command.split("\\s+", 2);
             if(strArray[0].equals("done")) {
                 markTaskDone(Integer.parseInt(strArray[1]));
             } else {
-                addCommand(command);
+                System.out.println("Got it. I've added this task: ");
+                addCommand(strArray);
+                System.out.println("Now you have " + this.list.size() + " tasks in the list.");
             }
         }
     }
@@ -27,9 +29,19 @@ public class TaskList {
     /**
      * Adds new command into list
      */
-    public void addCommand(String command) {
-        this.list.add(new Task(command));
-        System.out.println("added: " + command);
+    public void addCommand(String[] strArray) {
+        if(strArray[0].equals("todo")) {
+            this.list.add(new ToDoTask(strArray[1]));
+        } else {
+            String[] taskArray = strArray[1].split("/", 2);
+            String taskName = taskArray[0].trim();
+            String date = taskArray[1].split("\\s+", 2)[1];
+            if(strArray[0].equals("deadline")) {
+              this.list.add(new DeadlineTask(taskName, date));
+            } else {
+                this.list.add(new EventTask(taskName, date));
+            }
+        }
     }
 
     /**

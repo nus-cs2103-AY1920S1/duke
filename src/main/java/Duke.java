@@ -15,49 +15,75 @@ public class Duke {
 
         ArrayList<Task> taskStore = new ArrayList<>(100);
         String userInput = scan.nextLine();
-        while(!"bye".equals(userInput)) {
-            switch (userInput.split(" ")[0]) {
-                case "list":
-                    System.out.println(separationLine + "\n     Here are the tasks in your list:");
-                    for (Task task : taskStore) {
-                        System.out.println("     " + (taskStore.indexOf(task) + 1) + "." + task.toString());
-                    }
-                    System.out.println(separationLine + "\n");
-                    break;
-                case "done":
-                    Task doneTask = taskStore.get(Integer.parseInt(userInput.split(" ")[1]) - 1);
-                    doneTask.setDone();
-                    System.out.println(separationLine + "\n     Nice! I've marked this task as done:\n       "
-                            + doneTask + "\n" + separationLine);
-                    break;
-                case "todo":
-                    ToDo todo = new ToDo(userInput.replace("todo ", ""));
-                    taskStore.add(todo);
-                    System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + todo
-                            + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
-                            + separationLine + "\n");
-                    break;
-                case "deadline":
-                    String[] splitStringD = userInput.split(" /by ");
-                    Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""),
-                            splitStringD[1]);
-                    taskStore.add(deadline);
-                    System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + deadline
-                            + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
-                            + separationLine + "\n");
-                    break;
-                case "event":
-                    String[] splitStringE = userInput.split(" /at ");
-                    Event event = new Event(splitStringE[0].replace("event ", ""), splitStringE[1]);
-                    taskStore.add(event);
-                    System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + event
-                            + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
-                            + separationLine + "\n");
-                    break;
-                default:
-//                    taskStore.add(new Task(userInput));
-//                    System.out.println(separationLine + "\n     added: " + userInput + "\n" + separationLine + "\n");
-                    break;
+        while (!"bye".equals(userInput)) {
+            try {
+                String[] inputSplit = userInput.split(" ");
+                switch (inputSplit[0]) {
+                    case "list":
+                        System.out.println(separationLine + "\n     Here are the tasks in your list:");
+                        for (Task task : taskStore) {
+                            System.out.println("     " + (taskStore.indexOf(task) + 1) + "." + task.toString());
+                        }
+                        System.out.println(separationLine + "\n");
+                        break;
+                    case "done":
+                        if (inputSplit.length != 2) {
+                            // Exception if there is no task number or multiple words after "done"
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! Please specify number of a single task to mark as done.\n" + separationLine + "\n");
+                        }
+                        int specifiedNo = Integer.parseInt(inputSplit[1]); // will throw NumberFormatException if not int after "done"
+                        if (specifiedNo < 1 || specifiedNo > taskStore.size()) {
+                            // Exception if task number is beyond current number of tasks
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! Please specify valid task number.\n" + separationLine + "\n");
+                        }
+                        Task doneTask = taskStore.get(specifiedNo - 1);
+                        doneTask.setDone();
+                        System.out.println(separationLine + "\n     Nice! I've marked this task as done:\n       "
+                                + doneTask + "\n" + separationLine + "\n");
+                        break;
+                    case "todo":
+                        if (inputSplit.length == 1) {
+                            // Exception if no description after "todo"
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! The description of a todo cannot be empty.\n" + separationLine + "\n");
+                        }
+                        ToDo todo = new ToDo(userInput.replace("todo ", ""));
+                        taskStore.add(todo);
+                        System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + todo
+                                + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                                + separationLine + "\n");
+                        break;
+                    case "deadline":
+                        String[] splitStringD = userInput.split(" /by ");
+                        Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""),
+                                splitStringD[1]);
+                        taskStore.add(deadline);
+                        System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + deadline
+                                + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                                + separationLine + "\n");
+                        break;
+                    case "event":
+                        String[] splitStringE = userInput.split(" /at ");
+                        Event event = new Event(splitStringE[0].replace("event ", ""), splitStringE[1]);
+                        taskStore.add(event);
+                        System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + event
+                                + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                                + separationLine + "\n");
+                        break;
+                    default:
+                        // Exception if invalid instruction
+                        throw new DukeException(separationLine +
+                                "\n     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                                + separationLine + "\n");
+                }
+            } catch (DukeException de) {
+                System.err.println(de.getMessage());
+            } catch (NumberFormatException ne) {
+                System.err.println(separationLine +
+                        "\n     \u2639 OOPS!!! Please specify task number as one integer only\n"
+                        + separationLine + "\n");
             }
             userInput = scan.nextLine();
         }

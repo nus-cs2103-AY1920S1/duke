@@ -22,4 +22,10 @@ public class Task{
     public String getStatusIcon(){
         return (isDone ? "\u2713" : "\u2718");
     }
+
+    @Override
+    public String toString(){
+        String status = getStatusIcon();
+        return ("[" + status + "]" + description);
+    }
 }

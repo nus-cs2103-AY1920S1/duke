@@ -11,9 +11,11 @@ public class Duke {
         System.out.println("\n");
     }
 
-    static void takeInput(String echo){
+    static void takeInput(Task t, int i){
         printline();
-        System.out.println("\tadded:" + echo);
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t\t" + t);
+        System.out.println("\tNow you have " + i + " tasks in the list");
         printline();
     }
 
@@ -22,7 +24,7 @@ public class Duke {
         System.out.println("\tHere are the tasks in your list:");
         for(int i = 0; i < li.size(); i++){
             int j = i+1;
-            System.out.println("\t" + j + ". " + li.get(i).taskCompletion());
+            System.out.println("\t" + j + ". " + li.get(i));
         }
         printline();
     }
@@ -54,14 +56,19 @@ public class Duke {
             String echo = scan.next();
 
             if(echo.equals("bye")){
+                // if bye, then end the program
                 printline();
                 System.out.println("\tBye. Hope to see you again soon!");
                 printline();
                 break;
+
             } else if(echo.equals("list")){
+                //if list, print the list of tasks
                 scan.nextLine();
                 printList(li);
+
             } else if(echo.equals("done")){
+                //if done, change the task status and tell them what they have completed
                 int taskNum = scan.nextInt();
                 //scan.nextLine();
                 System.out.println(taskNum);
@@ -69,11 +76,48 @@ public class Duke {
                 Task change = li.get(taskNumb);
                 change.completed();
                 printDone(change);
+
             } else {
-                String fullEcho = echo + scan.nextLine();
-                Task newTask = new Task(fullEcho);
-                li.add(newTask);
-                takeInput(fullEcho);
+                Task newTask = null;
+                String actual =  "";
+                if (echo.equals("todo")){
+                    actual =  scan.nextLine();
+                    newTask =  new ToDo(actual);
+                } else if (echo.equals("deadline")){
+                    String help = scan.next();
+                    
+                    while(!(help.equals("/by"))){
+                        //System.out.println(help);
+                        if (actual.length() == 0){
+                            actual = actual + help;
+                        } else {
+                            actual = actual + " " + help;
+                        }
+                        help = scan.next();
+                    }
+                    String by = scan.nextLine();
+                    newTask = new Deadline(actual, by);
+                } else if(echo.equals("event")){
+                    String help = scan.next();
+                    
+                    while(!(help.equals("/at"))){
+                        //System.out.println(help);
+                        if (actual.length() == 0){
+                            actual = actual + help;
+                        } else {
+                            actual = actual + " " + help;
+                        }
+                        help = scan.next();
+                    }
+                    String at = scan.nextLine();
+                    newTask = new Event(actual, at);
+                }
+                if(newTask == null){
+
+                } else {
+                    li.add(newTask);
+                    takeInput(newTask, li.size());
+                }
             }
         }
 

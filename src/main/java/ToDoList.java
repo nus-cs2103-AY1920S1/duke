@@ -1,10 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ToDoList {
     public void run(){
         Scanner sc = new Scanner(System.in);
         String border = "    ____________________________________________________________";
-        Task[] arr = new Task[100];
+        ArrayList<Task> arr = new ArrayList<Task>();
         int counter = 0;
 
         String input = sc.nextLine();
@@ -14,7 +15,7 @@ public class ToDoList {
                 System.out.println(border);
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < counter; i++){
-                    System.out.println("     " + (i + 1) + "." + arr[i]);
+                    System.out.println("     " + (i + 1) + "." + arr.get(i));
                 }
                 System.out.println(border);
             } else {
@@ -22,10 +23,10 @@ public class ToDoList {
                 if (temp[0].equals("done")){ //command to add task as done
                     try{
                         int done = Integer.parseInt(temp[1]) - 1;
-                        arr[done].markAsDone();
+                        arr.get(done).markAsDone();
                         System.out.println(border);
                         System.out.println("     Nice! I've marked this task as done: ");
-                        System.out.println("       " + arr[done]);
+                        System.out.println("       " + arr.get(done));
                         System.out.println(border);
                     }
                     catch (NullPointerException e){
@@ -45,19 +46,19 @@ public class ToDoList {
                             case "deadline":
                                 date = input.substring(input.indexOf("/") + 4);
                                 message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                                arr[counter] = new Deadlines(message, date);
+                                arr.add(new Deadlines(message, date));
                                 added = true;
                                 break;
                             case "event":
                                 date = input.substring(input.indexOf("/") + 4);
                                 message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                                arr[counter] = new Events(message, date);
+                                arr.add(new Events(message, date));
                                 added = true;
                                 break;
                             case "todo":
                                 if (temp.length < 2) throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
                                 message = input.substring(input.indexOf(' ') + 1);
-                                arr[counter] = new ToDos(message);
+                                arr.add(new ToDos(message));
                                 added = true;
                                 break;
                         }
@@ -66,7 +67,7 @@ public class ToDoList {
                             counter ++;
                             System.out.println(border);
                             System.out.println("     Got it. I've added this task: ");
-                            System.out.println("       " + arr[counter - 1]);
+                            System.out.println("       " + arr.get(counter - 1));
                             System.out.printf("     Now you have %s tasks in the list.\n", counter);
                             System.out.println(border);
                         } else {

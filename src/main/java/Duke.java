@@ -36,7 +36,6 @@ public class Duke {
                     System.out.println("\t" + (i + 1)  + ". " + list.get(i));
                 System.out.println(HORIZONTAL_LINE);
             }
-
             else{
                 // Store content
                 list.add(readInput);
@@ -45,7 +44,6 @@ public class Duke {
                 String processedInput = Duke.process(readInput);
                 System.out.println(processedInput);
             }
-
         }
     }
 

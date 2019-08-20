@@ -18,9 +18,9 @@ public class Duke {
 
         String greetingText = "Hello! I'm Duke\nWhat can I do for you?";
         String listText = "Here are the tasks in your list:";
-        String doneText = "Nice! I've marked this task as done: ";
 
-        String farewellText = "Bye. Hope to see you again soon!";
+
+        String farewellText = "Bye <3 Hope to see you again soon!";
 
         System.out.println(greetingText);
 
@@ -46,16 +46,11 @@ public class Duke {
                 addEvent(sc);
                 break;
             case "done":
-                // Will cause error if user did not give entry number.
-                int entry = Integer.parseInt(sc.nextLine().trim()) - 1;
-                Task task = tasks.get(entry);
-                task.markAsDone();
-                System.out.println(doneText);
-                System.out.println("  " + task.toString());
+                TaskDone(sc);
                 break;
-            default: // should change ltr
-                tasks.add(new Task(input));
-                System.out.println("added: " + input);
+            default:
+                System.out.println("☹  OOPS!!! I'm sorry, but I don't know what that means. " +
+                        "I sure need more sleep...");
                 break;
             } // End switch
 
@@ -76,21 +71,38 @@ public class Duke {
     } // End method.
 
     private static void addTodo(Scanner sc) {
-        String params = sc.nextLine().trim();
-        Todo todo = new Todo(params);
-        tasks.add(todo);
-        addTaskDialogue(todo.toString());
+        try {
+            String params = sc.nextLine().trim();
+            if (params.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+            Todo todo = new Todo(params);
+            tasks.add(todo);
+            addTaskDialogue(todo.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println(":( OOPS!!! The description of a todo cannot be empty.");
+        } catch (Exception e) {
+            System.out.println("To enter a new todo, type: todo <description>");
+        }
     } // End method.
 
     private static void addDeadline(Scanner sc) {
         String params = sc.nextLine().trim();
         String[] paramsArr = params.split("/by");
+
         try {
+            if (params.isEmpty() || paramsArr[0].isEmpty() || paramsArr[1].isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+
             Deadline deadline = new Deadline(paramsArr[0].trim(), paramsArr[1].trim());
             tasks.add(deadline);
             addTaskDialogue(deadline.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println(":( OOPS!!! The description or due date of a deadline cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException(e.getMessage());
+            System.out.println("The description or due date of a deadline cannot be empty! " +
+                    "To enter a new deadline, type: deadline <description> /by <date>");
         } // End catch.
     } // End method.
 
@@ -98,13 +110,42 @@ public class Duke {
         String params = sc.nextLine().trim();
         String[] paramsArr = params.split("/at");
         try {
+            if (params.isEmpty() || paramsArr[0].isEmpty() || paramsArr[1].isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+
             Event event = new Event(paramsArr[0].trim(), paramsArr[1].trim());
             tasks.add(event);
             addTaskDialogue(event.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println(":( OOPS!!! The description or date and time of an event cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException(e.getMessage());
+            System.out.println("You need to enter an event? " +
+                    "To enter a new event, type: event <description> /at <date&time>");
         } // End catch.
     } // End method.
+
+    private static void TaskDone(Scanner sc) {
+        String doneText = "Nice! I've marked this task as done: ";
+        try {
+            // Will cause error if user did not give entry number.
+            String inputEntry = sc.nextLine().trim();
+            int entry = Integer.parseInt(inputEntry) - 1;
+
+            if (inputEntry == null || entry < 0) {
+                throw new IllegalArgumentException();
+            }
+
+            Task task = tasks.get(entry);
+            task.markAsDone();
+            System.out.println(doneText);
+            System.out.println("  " + task.toString());
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("You need to specify the task you want to complete!");
+        } // End of try-catch.
+
+    } // End pf method.
 
     private static void addTaskDialogue(String desc) {
         String addText = "Got it. I've added this task:";

@@ -1,14 +1,16 @@
-public class Task {
-    private int taskID;
-    private String taskName;
-    private boolean isCompleted;
+import java.util.UUID;
 
-    public Task(int taskID, String taskName) {
-        this.taskID = taskID;
+public abstract class Task {
+    protected String taskID;
+    protected String taskName;
+    protected boolean isCompleted;
+    protected String prefix;
+
+    public Task(String taskName) {
+        this.taskID = UUID.randomUUID().toString();
         this.taskName = taskName;
         this.isCompleted = false;
     }
-
 
     public void markAsCompleted() {
         this.isCompleted = true;
@@ -18,9 +20,8 @@ public class Task {
         return taskName;
     }
 
-    @Override
-    public String toString() {
-        char symbol = isCompleted ? '✓' : '✗';
-        return "\t " + taskID + ".[" + symbol + "] " + taskName;
+    public String getTaskID() {
+        return taskID;
     }
+
 }

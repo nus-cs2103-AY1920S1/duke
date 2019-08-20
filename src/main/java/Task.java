@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -15,8 +15,5 @@ public class Task {
         this.isDone = true;
     }
 
-    public String toString(){
-        String output = "[" + this.getStatusIcon() + "]" + " " + this.description;
-        return output;
-    }
+    public abstract String toString();
 }

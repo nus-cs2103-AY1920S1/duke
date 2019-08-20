@@ -17,6 +17,10 @@ public abstract class Task {
         return NUMBEROFTASKS;
     }
 
+    public static void decrementNumber() {
+        NUMBEROFTASKS--;
+    }
+
     @Override
     public String toString() {
         String mark = (isDone ? "✓" : "✗");

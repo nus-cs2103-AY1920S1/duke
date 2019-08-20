@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> commands = new ArrayList<String>();
+        ArrayList<Task> commands = new ArrayList<Task>();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
@@ -11,14 +11,16 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 scanner.close();
                 break;
-            } if(input.equals("list")) {
+            } else if(input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int count = 1;
-                for (String s : commands) {
+                for (Task s : commands) {
                     System.out.println(count + ". " + s);
                     count++;
                 }
             } else {
-                commands.add(input);
+                Task t = new Task(input);
+                commands.add(t);
                 System.out.println("added: " + input);
             }
         }

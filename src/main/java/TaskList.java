@@ -22,6 +22,19 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println( taskList.get(x) );
     }
+    protected void deleteTask(int y) {
+        if (taskList.size() == 0)
+            System.out.println("The task list is empty");
+        else {
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(taskList.get(y - 1));
+            taskList.remove(y - 1);
+            if (taskList.size() == 1)
+                System.out.println("Now you have 1 task in your list.");
+            else
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        }
+    }
     protected void getList(){
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= taskList.size(); i+=1){

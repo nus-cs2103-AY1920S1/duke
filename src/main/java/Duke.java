@@ -69,6 +69,10 @@ public class Duke {
                     t.Add(t1);
                 }
             }
+            else if(a.equals("delete")){
+                int number = scan.nextInt();
+                t.deleteTask(number);
+            }
             else
                 System.out.println("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
 

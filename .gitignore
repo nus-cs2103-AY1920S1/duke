@@ -14,5 +14,5 @@ src/main/resources/docs/
 bin/
 
 # Vim temporary files
-.swp
+*.swp
 

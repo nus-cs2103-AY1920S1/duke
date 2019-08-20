@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
     */
+    ArrayList<String> store = new ArrayList<>();
+
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
@@ -18,15 +21,21 @@ public class Duke {
     public void run() {
         boolean flag = true;
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNext()) {
-            String cmd = sc.next();
+        while(sc.hasNextLine()) {
+            String cmd = sc.nextLine();
             switch(cmd) {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     flag = false;
                     break;
+                case "list":
+                    for(int i = 0; i < store.size(); ++i) {
+                        System.out.println(i + 1 + ". " + store.get(i));
+                    }
+                    break;
                 default:
-                    System.out.println(cmd);
+                    System.out.println("added: " + cmd);
+                    store.add(cmd);
                     break;
             }
             if (!flag) {

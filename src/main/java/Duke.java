@@ -6,6 +6,7 @@ import java.util.Scanner;
  * This is the main driver class and entry point.
  */
 public class Duke {
+
     static final String welcomeMsg = "Hello! I'm Duke\n" +
             "What can I do for you?";
     static final String exitMsg = "Bye. Hope to see you again soon!";
@@ -26,23 +27,46 @@ public class Duke {
         boolean isGoodbye = false;
         while (!isGoodbye) {
             String input;
-            input = sc.nextLine();
-            if (input.equals("list")) {
-                listTasks();
-            } else if (input.matches("todo\\s.*")) {
-                addTodo(input.substring(5));
-            } else if (input.matches("deadline\\s.*")) {
-                addDeadline(input.substring(9));
-            } else if (input.matches("event\\s.*")) {
-                addEvent(input.substring(6));
-            } else if (input.matches("done\\s\\d+")) {
-               doDoneTask(input);
-            } else if (input.equals("bye")) {
-                exitApp();
-                isGoodbye = true;
-            } else {
-                addTask(input);
+            try {
+                input = sc.nextLine();
+                if (input.equals("list")) {
+                    listTasks();
+                } else if (input.matches("todo.*")) {
+                    if (input.equals("todo")) {
+                        throw new DukeTodoException();
+                    } else if (input.charAt(4) == ' ') {
+                        addTodo(input.substring(5));
+                    } else {
+                        throw new DukeUnknownCommandException();
+                    }
+                } else if (input.matches("deadline.*")) {
+                    if (input.equals("deadline")) {
+                        throw new DukeDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    } else if (input.charAt(8) == ' ') {
+                        addDeadline(input.substring(9));
+                    } else {
+                        throw new DukeUnknownCommandException();
+                    }
+                } else if (input.matches("event.*")) {
+                    if (input.equals("event")) {
+                        throw new DukeEventException("☹ OOPS!!! The description of a event cannot be empty.");
+                    } else if (input.charAt(5) == ' ') {
+                        addEvent(input.substring(6));
+                    } else {
+                        throw new DukeUnknownCommandException();
+                    }
+                } else if (input.matches("done\\s\\d+")) {
+                    doDoneTask(input);
+                } else if (input.equals("bye")) {
+                    exitApp();
+                    isGoodbye = true;
+                } else {
+                    throw new DukeUnknownCommandException();
+                }
+            } catch (DukeException dukeEx) {
+                //do nothing
             }
+
         }
     }
 
@@ -50,29 +74,52 @@ public class Duke {
         CmdInterface.printHBars(exitMsg);
     }
 
+
+    /* deprecated
     public static void addTask(String taskName) {
         taskList.add(new Task(taskName));
         CmdInterface.printHBars("added: " + taskName);
     }
+     */
 
-    public static void addTodo(String todoName) {
-        Todo newTodo = new Todo(todoName);
-        taskList.add(newTodo);
-        printAddSuccess(newTodo);
+    public static void addTodo(String todoName) throws DukeTodoException {
+        if (todoName.length() < 1) {
+            throw new DukeTodoException();
+        } else {
+            //main body
+            Todo newTodo = new Todo(todoName);
+            taskList.add(newTodo);
+            printAddSuccess(newTodo);
+        }
+
     }
 
-    public static void addDeadline(String deadlineDetail) {
-        String[] detailSplit = deadlineDetail.split(" /by ");
-        Deadline newDeadline = new Deadline(detailSplit[0], detailSplit[1]);
-        taskList.add(newDeadline);
-        printAddSuccess(newDeadline);
+    public static void addDeadline(String deadlineDetail) throws DukeDeadlineException {
+        if (deadlineDetail.length() < 1) {
+            throw new DukeDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (!deadlineDetail.contains("/by")) {
+            throw new DukeDeadlineException("☹ OOPS!!! The format of deadline is wrong!");
+        } else {
+            //main body
+            String[] detailSplit = deadlineDetail.split(" /by ");
+            Deadline newDeadline = new Deadline(detailSplit[0], detailSplit[1]);
+            taskList.add(newDeadline);
+            printAddSuccess(newDeadline);
+        }
     }
 
-    public static void addEvent(String eventDetail) {
-        String[] detailSplit = eventDetail.split(" /at ");
-        Event newEvent = new Event(detailSplit[0], detailSplit[1]);
-        taskList.add(newEvent);
-        printAddSuccess(newEvent);
+    public static void addEvent(String eventDetail) throws DukeEventException {
+        if (eventDetail.length() < 1) {
+            throw new DukeEventException("☹ OOPS!!! The description of a event cannot be empty.");
+        } else if (!eventDetail.contains("/at")) {
+            throw new DukeEventException("☹ OOPS!!! The format of event is wrong!");
+        } else {
+            //main body
+            String[] detailSplit = eventDetail.split(" /at ");
+            Event newEvent = new Event(detailSplit[0], detailSplit[1]);
+            taskList.add(newEvent);
+            printAddSuccess(newEvent);
+        }
     }
 
     public static void doDoneTask(String input) {

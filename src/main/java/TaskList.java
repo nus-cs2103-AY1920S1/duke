@@ -16,10 +16,10 @@ public class TaskList {
 
     /**
      * Adds Task to list.
-     * @param description Description of the task..
+     * @param task Task to be added.
      */
-    void addTask(String description) {
-        list.add(new Task(description));
+    void addTask(Task task) {
+        list.add(task);
     }
 
     /**
@@ -45,10 +45,10 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String indent = "     ";
-        StringBuilder strb = new StringBuilder();
+        String indent = String.format("%5s", "");
+        StringBuilder strb = new StringBuilder(indent + "Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); ++i) {
-            strb.append(indent).append(i + 1).append(". ").append(list.get(i));
+            strb.append(indent).append(i + 1).append(".").append(list.get(i));
             if (i < list.size() - 1) {
                 strb.append("\n");
             }

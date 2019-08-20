@@ -29,51 +29,55 @@ public class Duke {
         printGreeting();
 
         Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
+        String line = input.nextLine();
 
-        while (!command.equals(BYE_CMD)) {
+        while (!line.equals(BYE_CMD)) {
 
             try {
-                processCommand(command);
+                processInputLine(line);
             }
             catch (DukeException e) {
                 printWithLongLines(e.getMessage());
             }
 
-            command = input.nextLine();
+            line = input.nextLine();
         }
 
         input.close();
         printGoodbye();
     }
 
-    public static void processCommand(String command) throws DukeException {
-        switch (command.split(" ")[0]) {
+    public static void processInputLine(String line) throws DukeException {
+
+        String command = line.split(" ")[0];
+
+        switch (command) {
         case LIST_CMD:
             printList();
             break;
         case DONE_CMD:
-            markTaskAsDone(taskList.get(Integer.parseInt(command.split(" ")[1]) - 1));
+            markTaskAsDone(line);
             break;
         case DEADLINE_CMD:
-            addDeadline(command);
+            addDeadline(line);
             break;
         case EVENT_CMD:
-            addEvent(command);
+            addEvent(line);
             break;
         case TODO_CMD:
-            addTodo(command);
+            addTodo(line);
             break;
         case DELETE_CMD:
-            deleteTask(command);
+            deleteTask(line);
             break;
         default:
             throw new InvalidCommandException(OOPS_STR + INVALID_COMMAND_STR);
         }
     }
 
-    public static void deleteTask(String command) {
-        Task taskToDelete = taskList.get(Integer.parseInt(command.split(" ")[1]) - 1); 
+    public static void deleteTask(String line) {
+        int index = Integer.parseInt(line.split(" ")[1]) - 1;
+        Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
         printWithLongLines(
             "Noted. I've removed this task:\n"
@@ -84,9 +88,9 @@ public class Duke {
         );
     }
 
-    public static void addDeadline(String command) throws EmptyDescriptionException {
-        if (verifyArgsNotEmpty(command)) {
-            String[] deadlineArgs = command.split(DEADLINE_CMD)[1].split(BY_DELIM);
+    public static void addDeadline(String line) throws EmptyDescriptionException {
+        if (verifyArgsNotEmpty(line)) {
+            String[] deadlineArgs = line.split(DEADLINE_CMD)[1].split(BY_DELIM);
             Task newDeadline = new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim());
             addTask(newDeadline);
         }
@@ -100,9 +104,9 @@ public class Duke {
         }
     }
 
-    public static void addEvent(String command) throws EmptyDescriptionException {
-        if (verifyArgsNotEmpty(command)) {
-            String[] eventArgs = command.split(EVENT_CMD)[1].split(AT_DELIM);
+    public static void addEvent(String line) throws EmptyDescriptionException {
+        if (verifyArgsNotEmpty(line)) {
+            String[] eventArgs = line.split(EVENT_CMD)[1].split(AT_DELIM);
             Task newEvent = new Event(eventArgs[0].trim(), eventArgs[1].trim());
             addTask(newEvent);
         }
@@ -115,9 +119,9 @@ public class Duke {
             );
         }
     }
-    public static void addTodo(String command) throws EmptyDescriptionException {
-        if (verifyArgsNotEmpty(command)) {
-            String todoArg = command.split(TODO_CMD)[1];
+    public static void addTodo(String line) throws EmptyDescriptionException {
+        if (verifyArgsNotEmpty(line)) {
+            String todoArg = line.split(TODO_CMD)[1];
             Task newTodo = new Todo(todoArg); 
             addTask(newTodo);
         }
@@ -135,7 +139,9 @@ public class Duke {
         return args.trim().split(" ").length > 1;
     }
 
-    public static void markTaskAsDone(Task doneTask) {
+    public static void markTaskAsDone(String line) {
+        int index = Integer.parseInt(line.split(" ")[1]) - 1;
+        Task doneTask = taskList.get(index);
         doneTask.markAsDone();
         printWithLongLines(
             DONE_STR

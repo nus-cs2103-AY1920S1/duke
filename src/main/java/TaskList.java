@@ -21,6 +21,12 @@ public class TaskList {
         return task;
     }
 
+    public Task markDone(int index) {
+        Task task = this.tasks.get(index - 1);
+        task.setDone(true);
+        return task;
+    }
+
     public List<String> getTaskNames() {
         List<String> taskNames = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {

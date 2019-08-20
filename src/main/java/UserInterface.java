@@ -41,8 +41,13 @@ public class UserInterface {
     }
 
     public void showTaskList(List<String> taskNames) {
+        showToUser("Here are the tasks in your list:");
         for (String taskName : taskNames) {
             showToUser(taskName);
         }
+    }
+
+    public void showMarkDone(Task task) {
+        showToUser("Nice! I've marked this task as done:\n" + LINE_PREFIX + task);
     }
 }

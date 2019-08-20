@@ -9,6 +9,7 @@ public class Duke {
 
     private void run() {
         ui.showWelcomeMessage();
+        Task task;
         while (true) {
             String inputLine = ui.readLine();
             String command = getCommandFrom(inputLine);
@@ -18,8 +19,11 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 ui.showTaskList(taskList.getTaskNames());
+            } else if (command.equals("done")) {
+                task = taskList.markDone(getIndexFrom(inputLine));
+                ui.showMarkDone(task);
             } else {
-                Task task = taskList.addTask(new Task(inputLine));
+                task = taskList.addTask(new Task(inputLine));
                 ui.showAddition(task);
             }
             ui.showLine();
@@ -28,6 +32,10 @@ public class Duke {
 
     private String getCommandFrom(String inputLine) {
         return inputLine.strip().split(" ")[0];
+    }
+
+    private int getIndexFrom(String inputLine) {
+        return Integer.parseInt(inputLine.strip().split(" ")[1]);
     }
 
     public static void main (String[]args){

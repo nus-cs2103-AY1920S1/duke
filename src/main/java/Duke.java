@@ -22,6 +22,8 @@ public class Duke {
                     printTasks(list);
                 } else if (command.length() > 4 && command.substring(0, 4).equals("done")) {
                     doneTask(list, command);
+                } else if (command.length() > 6 && command.substring(0, 6).equals("delete")) {
+                    deleteTask(list, command);
                 } else {  // add task or wrong command
                     String[] temp = command.split(" ");
                     if (!temp[0].equals("deadline") && !temp[0].equals("event") && !temp[0].equals("todo")) {
@@ -78,6 +80,24 @@ public class Duke {
             System.out.println("       " + list.get(number - 1));
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("     ☹ OOPS!!! The task number cannot be empty.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("     ☹ OOPS!!! The task number does not exist.");
+        }
+    }
+
+    private static void deleteTask(List<Task> list, String command) throws DukeException {
+        try {
+            String[] done = command.split(" ");
+            int number = Integer.valueOf(done[1]);
+            Task task = list.get(number - 1);
+            list.remove(number - 1);
+            System.out.println("     Noted. I've removed this task: ");
+            System.out.println("       " + task);
+            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("     ☹ OOPS!!! The task number cannot be empty.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("     ☹ OOPS!!! The task number does not exist.");
         }
     }
 

@@ -31,8 +31,9 @@ public class Duke {
                 }
 
                 String[] tok = line.split(" ", 2);
-                if (tok.length < 1) {
-                    break;
+                if (tok.length < 1 || tok[0].isBlank()) {
+                    System.out.println("No command entered.");
+                    continue;
                 }
 
                 switch (line.toLowerCase()) {

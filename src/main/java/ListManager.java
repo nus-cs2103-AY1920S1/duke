@@ -1,21 +1,44 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class ListManager {
     ArrayList<Task> actualList;
     String startMessage;
     String exitMessage;
     String bar;
+    Scanner scanner;
 
-    public ListManager() {
+    public ListManager(Scanner sc) {
         this.startMessage = "\tHello! I'm Duke \n\tWhat can I do for you?";
         this.exitMessage = "\tBye. Hope to see you again soon!";
         this.bar = "\t______________________________";
         this.actualList = new ArrayList<>();
+        this.scanner = sc;
     }
 
     public void add(String input) {
-        Task t = new Task(input);
-        actualList.add(t);
+        String[] strArray = input.split(" ", 0);
+        if(strArray[0].equals("todo")) {
+            String[] stringBreaker = input.split("todo",2);
+            ToDos todo = new ToDos(stringBreaker[1]);
+            actualList.add(todo);
+        } else if (strArray[0].equals("deadline")) {
+            String newString = input.substring(9);
+            String[] stringBreaker = newString.split("/by",2);
+            Deadlines deadline = new Deadlines(stringBreaker[0], stringBreaker[1]);
+            actualList.add(deadline);
+        } else if (strArray[0].equals("event")) {
+            String newString = input.substring(6);
+            String[] stringBreaker = newString.split("/at",2);
+            Events event = new Events(stringBreaker[0], stringBreaker[1]);
+            actualList.add(event);
+        }
+        System.out.println(bar);
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t  " + actualList.get(actualList.size() - 1));
+        System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
+        System.out.println(bar);
     }
 
     public void iterate() {
@@ -29,12 +52,7 @@ public class ListManager {
             for(int i = 0; i < actualList.size(); i++) {
                 System.out.print('\t');
                 System.out.print(i+1 + ".");
-                if (actualList.get(i).done) {
-                    System.out.print("[✓] ");
-                } else {
-                    System.out.print("[X] ");
-                }
-                System.out.println(actualList.get(i).name);
+                System.out.println(actualList.get(i));
             }
             System.out.println(bar);
         }

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,28 +14,25 @@ public class Processor {
         this.exitMessage = "\tBye. Hope to see you again soon!";
         this.bar = "\t______________________________";
         this.sc = new Scanner(System.in);
-        this.taskList = new ListManager();
+        this.taskList = new ListManager(sc);
     }
     public void initialise() {
         System.out.println(bar);
         System.out.println(startMessage);
     }
     public void run() {
-        String input = sc.next();
+        String input = sc.nextLine();
         while (!input.equals("quit")) {
+            String[] strArray = input.split(" ",0);
             if (input.equals("list")) {
                 taskList.iterate();
-                input = sc.next();
-            } else if (input.equals("done")) {
-                int index = sc.nextInt();
-                taskList.done(index);
-                input = sc.next();
+                input = sc.nextLine();
+            } else if (strArray[0].equals("done")) {
+                taskList.done(Integer.parseInt(strArray[1]));
+                input = sc.nextLine();
             } else {
-                System.out.println(this.bar);
-                System.out.println('\t' + "added: " + input);
                 taskList.add(input);
-                System.out.println(this.bar);
-                input = sc.next();
+                input = sc.nextLine();
             }
         }
         this.exit();

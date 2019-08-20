@@ -2,10 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
+    static String horizontal_line = "\t__________________________________________________";
+
     public static void main(String[] args) {
         //start Duke program
         Scanner sc = new Scanner(System.in);
-        String horizontal_line = "\t__________________________________________________";
         System.out.println(horizontal_line);
         System.out.println("\t  Hello! I'm Duke");
         System.out.println("\t  What can I do for you?");
@@ -39,6 +40,72 @@ public class Main {
                 System.out.println("\t  Nice! I've marked this task as done:");
                 System.out.println("\t    " + strArr.get(indexDone - 1));
                 System.out.println(horizontal_line);
+            } else if (inputArr[0].equals("todo")) {
+                // todo event
+                StringBuilder newStr = new StringBuilder();
+                for (int x = 1; x < inputArr.length; x++) {
+                    if (x == inputArr.length - 1) {
+                        newStr.append(inputArr[x]);
+                    } else {
+                        newStr.append(inputArr[x] + " ");
+                    }
+                }
+
+                Task todoTask = new Todo(newStr.toString());
+                strArr.add(todoTask);
+                printAddedTask(todoTask, strArr.size());
+            } else if (inputArr[0].equals("deadline")) {
+                // deadline
+                StringBuilder desc = new StringBuilder();
+                StringBuilder by = new StringBuilder();
+                for (int x = 1; x < inputArr.length; x++) {
+                    if (inputArr[x].charAt(0) == '/') {
+                        for (int xx = x + 1; xx < inputArr.length; xx++) {
+                            if (xx == inputArr.length - 1) {
+                                by.append(inputArr[xx]);
+                            } else {
+                                by.append(inputArr[xx] + " ");
+                            }
+                        }
+                        break;
+                    } else {
+                        if (x == inputArr.length - 1) {
+                            desc.append(inputArr[x]);
+                        } else {
+                            desc.append(inputArr[x] + " ");
+                        }
+                    }
+                }
+
+                Task deadlineTask = new Deadline(desc.toString(), by.toString());
+                strArr.add(deadlineTask);
+                printAddedTask(deadlineTask, strArr.size());
+            } else if (inputArr[0].equals("event")) {
+                // event
+                StringBuilder desc = new StringBuilder();
+                StringBuilder at = new StringBuilder();
+                for (int x = 1; x < inputArr.length; x++) {
+                    if (inputArr[x].charAt(0) == '/') {
+                        for (int xx = x + 1; xx < inputArr.length; xx++) {
+                            if (xx == inputArr.length - 1) {
+                                at.append(inputArr[xx]);
+                            } else {
+                                at.append(inputArr[xx] + " ");
+                            }
+                        }
+                        break;
+                    } else {
+                        if (x == inputArr.length - 1) {
+                            desc.append(inputArr[x]);
+                        } else {
+                            desc.append(inputArr[x] + " ");
+                        }
+                    }
+                }
+
+                Task eventTask = new Event(desc.toString(), at.toString());
+                strArr.add(eventTask);
+                printAddedTask(eventTask, strArr.size());
             } else {
                 Task newTask = new Task(inputStr);
                 strArr.add(newTask);
@@ -47,5 +114,13 @@ public class Main {
                 System.out.println(horizontal_line);
             }
         }
+    }
+
+    public static void printAddedTask(Task taskAdded, int totalTask) {
+        System.out.println(horizontal_line);
+        System.out.println("\t  Got it. I've added this task:");
+        System.out.println("\t    " + taskAdded);
+        System.out.println("\t  Now you have " + totalTask +" tasks in the list.");
+        System.out.println(horizontal_line);
     }
 }

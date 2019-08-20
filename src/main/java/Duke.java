@@ -4,11 +4,8 @@ public class Duke {
     private static Task[] tasks = new Task[100];
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);
 
@@ -18,44 +15,50 @@ public class Duke {
 
         greeting();
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
-            // String taskName = commandArr[1] + commandArr[2];
+            String[] keywords = {};
+            int i = 1; // skip the task type
 
-            switch(commandArr[0].toLowerCase()) {
-                case "event":
-                    String name = "";
-                    String time = "";
-                    boolean flag = false;
-                    for (int i = 1; i < commandArr.length; i++ ) {
-                        if (commandArr[i].equals("/at")) {
-                            flag = true;
-                        } else if (flag) {
-                            time += commandArr[i] + " ";
-                        } else {
-                            name += commandArr[i] + " ";
-                        }
-                    }
-                    handleEvent(name.trim(), time.trim(), counter);
-                    counter++;
-                    break;
+            switch (commandArr[0].toLowerCase()) {
 
-                case "list":
-                    printList(counter);
-                    break;
+            case "todo":
+                String name = "";
+                for (i = 1; i < commandArr.length; i++) {
+                    name += commandArr[i] + " ";
+                }
+                handleTodo(name.trim(), counter);
+                counter++;
+                break;
 
-                case "done":
-                    int taskId = Integer.parseInt(commandArr[1]);
-                    handleDone(taskId);
-                    break;
+            case "deadline":
+                keywords = splitCommands(commandArr, "/by");
+                handleDeadline(keywords[0], keywords[1], counter);
+                counter++;
+                break;
 
-                case "bye":
-                    handleExit();
-                    return;
-                
-                default:
-                    break;
+            case "event":
+                keywords = splitCommands(commandArr, "/at");
+                handleEvent(keywords[0], keywords[1], counter);
+                counter++;
+                break;
+
+            case "list":
+                printList(counter);
+                break;
+
+            case "done":
+                int taskId = Integer.parseInt(commandArr[1]);
+                handleDone(taskId);
+                break;
+
+            case "bye":
+                handleExit();
+                return;
+
+            default:
+                break;
             }
         }
 
@@ -73,10 +76,40 @@ public class Duke {
         addBorder("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    /* Takes the task name and index to add to the arr */
+    /* Parse the commands to obtain task name and time for deadline/event tasks */
+    public static String[] splitCommands(String[] commandArr, String keyword) {
+        String name = "";
+        String time = "";
+        boolean flag = false;
+        int i = 1; // skip the task type
+        for (i = 1; i < commandArr.length; i++) {
+            if (commandArr[i].equals(keyword)) {
+                flag = true;
+            } else if (flag) {
+                time += commandArr[i] + " ";
+            } else {
+                name += commandArr[i] + " ";
+            }
+        }
+
+        String[] output =  { name.trim(), time.trim() };
+        return output;
+    }
+
     public static void addTask(int index, Task task) {
         tasks[index] = task;
-        addBorder(task.toString());
+        int taskNum = index + 1;
+        String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
+                + " tasks in the list.";
+        addBorder(feedback);
+    }
+
+    public static void handleTodo(String name, int index) {
+        addTask(index, new Todo(name));
+    }
+
+    public static void handleDeadline(String name, String time, int index) {
+        addTask(index, new Deadline(name, time));
     }
 
     public static void handleEvent(String name, String time, int index) {
@@ -86,11 +119,9 @@ public class Duke {
     public static void handleDone(int taskId) {
         Task doneTask = tasks[taskId - 1];
         doneTask.markAsDone();
-        String str = "Nice! I've marked this task as done:\n" 
-            + " " + doneTask.toString();
+        String str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
 
         addBorder(str);
-        
     }
 
     public static void handleExit() {
@@ -102,13 +133,13 @@ public class Duke {
 
         for (int i = 1; i < index + 1; i++) {
             if (i == index) {
-                str += i + "." + tasks[i-1];
+                str += i + "." + tasks[i - 1];
             } else {
-                str += i + "." + tasks[i-1] + "\n";
+                str += i + "." + tasks[i - 1] + "\n";
             }
         }
 
         addBorder(str);
-    } 
+    }
 
 }

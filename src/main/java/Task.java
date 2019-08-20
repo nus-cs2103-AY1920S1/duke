@@ -6,7 +6,6 @@ public class Task {
     private String name;
     private boolean done;
 
-    // constructor
     public Task(String name) {
         this.name = name;
         this.done = false;

@@ -24,18 +24,20 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= this.tasks.size(); i++) {
             Task curr_task = this.tasks.get(i-1);
-            System.out.println(i + ".[" + curr_task.getStatusIcon() + "] " + curr_task);
+            System.out.println(i + "." + curr_task);
         }
     }
     public void add(Task task) {
         this.tasks.add(task);
-        System.out.println("added: " + task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("  " + task);
+        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
     public void done(int task_num) {
         Task curr_task = this.tasks.get(task_num - 1);
         curr_task.setDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + "[" + curr_task.getStatusIcon() + "] " + curr_task);
+        System.out.println("  " + curr_task);
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -53,10 +55,21 @@ public class Duke {
                 if(splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
                     duke.done(Integer.parseInt(splited[1]));
                 } else {
-                    duke.add(new Task(command));
+                    //Todo: Handle error
                 }
-            } else {
-                duke.add(new Task(command));
+            } else if(command.startsWith("todo ")) {
+                ToDo curr_task = new ToDo(command.replaceFirst("todo ", ""));
+                duke.add(curr_task);
+            } else if(command.startsWith("deadline ")) {
+                String[] splited = command.split(" /by ");
+                splited[0].replaceFirst("deadline ", "");
+                Deadline curr_task = new Deadline(splited[0], splited[1]);
+                duke.add(curr_task);
+            } else if(command.startsWith("event ")) {
+                String[] splited = command.split(" /at ");
+                splited[0].replaceFirst("event ", "");
+                Event curr_task = new Event(splited[0], splited[1]);
+                duke.add(curr_task);
             }
         }
     }

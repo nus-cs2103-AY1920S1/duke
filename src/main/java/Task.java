@@ -16,12 +16,6 @@ public abstract class Task {
         this.type = type;
     }
 
-    public Task(String description, boolean isDone, TaskType type) {
-        this.description = description;
-        this.isDone = isDone;
-        this.type = type;
-    }
-
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 

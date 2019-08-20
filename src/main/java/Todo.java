@@ -11,12 +11,8 @@ public class Todo extends Task {
         super(description, TaskType.TODO);
     }
 
-    public Todo(String description, boolean isDone) {
-        super(description, isDone, TaskType.TODO);
-    }
-
     @Override
     public String toString() {
-        return "[" + TaskType.TODO.getTag() + "]" + super.toString();
+        return String.format("[%s]%s", TaskType.TODO.getTag(), super.toString());
     }
 }

@@ -5,15 +5,22 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean run = true;
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         greet();
         while (run && sc.hasNext()) {
             String command = sc.nextLine();
+            String[] commandArr = command.split(" ");
 
-            switch (command) {
+            switch (commandArr[0]) {
                 case "list":
                     printArray(taskList);
+                    break;
+
+                case "done":
+                    Task currTask = taskList.get(Integer.parseInt(commandArr[1]) - 1);
+                    currTask.markAsDone();
+                    taskComplete(currTask);
                     break;
 
                 case "bye":
@@ -22,7 +29,8 @@ public class Duke {
                     break;
 
                 default:
-                    taskList.add(command);
+                    Task task = new Task(command);
+                    taskList.add(task);
                     echo("added: " + command);
                     break;
             }
@@ -31,10 +39,18 @@ public class Duke {
         sc.close();
     }
 
-    private static void printArray(ArrayList<String> taskList) {
+    private static void taskComplete(Task currTask) {
         printLine();
+        System.out.println("     Nice! I've marked this task as done: \n       " + currTask);
+        printLine();
+        System.out.println();
+    }
+
+    private static void printArray(ArrayList<Task> taskList) {
+        printLine();
+        System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("     %d. %s\n", i + 1, taskList.get(i));
+            System.out.println("     " + (i + 1) + "." + taskList.get(i));
         }
         printLine();
         System.out.println();

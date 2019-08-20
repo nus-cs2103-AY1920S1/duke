@@ -32,7 +32,8 @@ public class Duke {
                     try {
                         System.out.println(doneTask(Integer.parseInt(keywords[1])));
                     } catch (ArrayIndexOutOfBoundsException ex) {
-                        System.out.println(upperBorder + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
+                        System.out.println(upperBorder
+                                + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
                     }
                 } else if (keywords[0].equals("todo")) {
                     try {
@@ -64,6 +65,9 @@ public class Duke {
                         pointer--;
                     } catch (DukeException ex) {
                         System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        System.out.println(upperBorder
+                                + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
                     }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

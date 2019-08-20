@@ -22,7 +22,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < actions.size(); i++) {
                     Task current = actions.get(i);
-                    System.out.println((i + 1) +  ".[" + current.getStatusIcon() + "] " + current.getDescription());
+                    System.out.println((i + 1) +  "." + current.toString());
                 }
             } else if (command.startsWith("done")) {
                 int taskNumber = Integer.valueOf(command.substring(command.length() - 1)).intValue();
@@ -32,11 +32,28 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     Task current = actions.get(taskNumber - 1);
                     current.markAsDone();
-                    System.out.println("[" + current.getStatusIcon() + "] "+ current.getDescription());
+                    System.out.println(current.toString());
                 }
+            } else if (command.startsWith("deadline")) {
+                System.out.println("Got it. I've added this task:");
+                String[] temp = command.substring(8).split("/by");
+                Task current = new Deadline(temp[0].trim(), temp[1].trim());
+                actions.add(current);
+                System.out.println(current.toString());
+                System.out.println("Now you have " + actions.size() + " tasks in the list.");
+            } else if (command.startsWith("event")) {
+                System.out.println("Got it. I've added this task:");
+                String[] temp = command.substring(5).split("/at");
+                Task current = new Event(temp[0].trim(), temp[1].trim());
+                actions.add(current);
+                System.out.println(current.toString());
+                System.out.println("Now you have " + actions.size() + " tasks in the list.");
             } else {
-                actions.add(new Task(command));
-                System.out.println("added: " + command);
+                System.out.println("Got it. I've added this task:");
+                Task current = new Todo(command.substring(5));
+                actions.add(current);
+                System.out.println(current.toString());
+                System.out.println("Now you have " + actions.size() + " tasks in the list.");
             }
         }
     }

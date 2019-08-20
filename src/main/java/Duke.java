@@ -81,6 +81,18 @@ public class Duke {
         line();
     }
 
+    void delete(int i) {
+        //retrieve task to delete
+        Task dltTask = tasks.get(i);
+        tasks.remove(i);
+
+        line();
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t" + dltTask.toString());
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+        line();
+    }
+
     private void line() {
         System.out.println("\t____________________________________________________________");
     }

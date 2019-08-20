@@ -23,11 +23,10 @@ public class HelperDuke {
                     duke.markAsDone(index);
                     break;
                 case "todo":
-                    String tTask = s.nextLine();
-                    if (tTask.isEmpty()) {
+                    if (!s.hasNextLine()) {
                         duke.error(action);
                     } else {
-                        Todo todo = new Todo(tTask);
+                        Todo todo = new Todo(s.nextLine());
                         duke.add(todo);
 
                         //echo the text added
@@ -35,11 +34,10 @@ public class HelperDuke {
                     }
                     break;
                 case "deadline":
-                    String dTask = s.nextLine();
-                    if (dTask.isEmpty()) {
+                    if (!s.hasNextLine()) {
                         duke.error(action);
                     } else {
-                        String[] d = dTask.split("/by", 2);
+                        String[] d = s.nextLine().split("/by", 2);
                         Deadline deadline = new Deadline(d[0], d[1]);
                         duke.add(deadline);
 
@@ -48,16 +46,22 @@ public class HelperDuke {
                     }
                     break;
                 case "event":
-                    String eTask = s.nextLine();
-                    if (eTask.isEmpty()) {
+                    if (!s.hasNextLine()) {
                         duke.error(action);
                     } else {
-                        String[] e = eTask.split(" /at ", 2);
+                        String[] e = s.nextLine().split(" /at ", 2);
                         Event event = new Event(e[0], e[1]);
                         duke.add(event);
 
                         //echo the text added
                         duke.echo(event);
+                    }
+                    break;
+                case "delete":
+                    if (!s.hasNextInt()) {
+                        duke.error(action);
+                    } else {
+                        duke.delete(s.nextInt());
                     }
                     break;
                 default:

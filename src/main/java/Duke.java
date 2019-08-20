@@ -13,6 +13,11 @@ public class Duke {
 
     private static final List<String> inputList = new ArrayList<>();
 
+    /**
+     * Adds the given input to the list of previous user inputs if the input
+     * is not "list". Otherwise, prints the full list of user inputs.
+     * @param input     User text to be processed.
+     */
     private static void process(String input) {
         if (input.equals("list")) {
             DukeFormatter.prettyPrint(inputList);
@@ -23,12 +28,13 @@ public class Duke {
     }
 
     /**
-     * Echoes user input without input validation.
+     * Takes in user input and processes it accordingly without input validation.
      * @param args  Standard args
      */
     // TODO: add input validation
     public static void main(String[] args) {
-        DukeFormatter.prettyPrint("Hello! I'm Duke\nWhat can I do for you?");
+        DukeFormatter.prettyPrint(
+                "Hello! I'm Duke\nWhat can I do for you?");
         while (scanner.hasNext()) {
             String userInput = scanner.nextLine();
             if (userInput.equals("bye")) { break; }

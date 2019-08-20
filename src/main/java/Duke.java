@@ -1,11 +1,11 @@
 import java.util.Scanner;
-
 import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        String[] wordArr;
         ArrayList<Task> taskList = new ArrayList<>();
 
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -21,25 +21,39 @@ public class Duke {
         // Echo commands until bye is entered
 
         while (true) {
-            String str = sc.nextLine();
 
-            if (str.equals("list")) {
+            String text = sc.nextLine();
+            wordArr = text.split(" ");
+
+            String command = wordArr[0];
+
+            if (command.equals("list")) {
                 System.out.println("\t____________________________________________________________");
+                System.out.println("\n\tHere are the tasks in your list: ");
                 for (int i = 0; i < taskList.size(); i++) {
                     System.out.println("\n\t" + (i + 1) + ". " + taskList.get(i).toString());
                 }
                 System.out.println("\t____________________________________________________________\n");
-            } else if (str.equals("bye")) {
+            } else if (command.equals("done")) {
+                // Get number
+                int taskNum = Integer.valueOf(wordArr[1]);
+                taskList.get(taskNum).setAsDone();
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\n\tNice! I have marked this task as done: ");
+                System.out.println("\n\t" + taskList.get(taskNum));
+                System.out.println("\t____________________________________________________________\n");
+
+            } else if (command.equals("bye")) {
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\n\tBye. Hope to see you again soon!");
                 System.out.println("\t____________________________________________________________\n");
                 break;
             } else {
                 // Create task
-                Task t = new Task(str);
+                Task t = new Task(text);
                 taskList.add(t);
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\n\t" + "added: " + str);
+                System.out.println("\n\t" + "added: " + text);
                 System.out.println("\t____________________________________________________________\n");
             }
         }

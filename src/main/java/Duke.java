@@ -107,9 +107,23 @@ public class Duke {
 			}
 			taskArrayList.add(new Event(eventName.toString().trim(), eventDate.toString().trim()));
 			alertLatestTaskAdded(taskArrayList);
+		} else if (command.equals("delete")) {
+			if (!inLineScanner.hasNext()) {
+				throw new DukeException("no number provided");
+			}
+			Integer taskToDeleteIndex = Integer.parseInt(inLineScanner.next());
+			Task taskToBeDeleted;
+			try {
+				taskToBeDeleted = taskArrayList.remove(taskToDeleteIndex - 1);
+			} catch (Exception e) {
+				throw new DukeException(e.getMessage());
+			}
+			System.out.println("Noted. I've removed this task:");
+			System.out.println("    " + taskToBeDeleted);
+			System.out.printf("Now you have %d tasks in the list.\n", taskArrayList.size());
 		} else {
-			//command not found
-			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+				//command not found
+				throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 		}
     }
 

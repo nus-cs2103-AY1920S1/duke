@@ -12,6 +12,7 @@ public class Duke {
         commandMap.register(new duke.commands.Todo(this));
         commandMap.register(new duke.commands.Deadline(this));
         commandMap.register(new duke.commands.Event(this));
+        commandMap.register(new duke.commands.Delete(this));
     }
     public void run() {
         say("Hello! I'm Duke\nWhat can I do for you?");

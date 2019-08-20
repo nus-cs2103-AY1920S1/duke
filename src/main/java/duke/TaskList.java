@@ -14,6 +14,9 @@ public class TaskList {
     public void markDone(int oneIndex) throws DukeException {
         tasks.get(oneIndex-1).markDone();
     }
+    public Task delete(int oneIndex) {
+        return tasks.remove(oneIndex-1);
+    }
     public Task get(int oneIndex) {
         return tasks.get(oneIndex-1);
     }

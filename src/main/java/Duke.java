@@ -1,4 +1,3 @@
-import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,15 +5,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String message;
-//
-////        String logo = " ____        _        \n"
-////                + "|  _ \\ _   _| | _____ \n"
-////                + "| | | | | | | |/ / _ \\\n"
-////                + "| |_| | |_| |   <  __/\n"
-////                + "|____/ \\__,_|_|\\_\\___|\n";
-////        System.out.println("Hello from " + logo);
-//        System.out.println(sc.nextLine());
-
+        String[] myList = new String[100];
+        int idx = 0;
 
         String upperLine = "____________________________________________________________\n";
         String greet = "Hello! I'm Duke\n"
@@ -24,16 +16,27 @@ public class Duke {
         greet = upperLine + greet + lowerLine;
         System.out.println(greet);
         while(true){
-            String cmd = sc.next();
+            String cmd = sc.nextLine();
             if(cmd.equals("bye")){
                 message = upperLine + "Bye. Hope to see you again soon!\n" + lowerLine;
                 System.out.println(message);
                 break;
+                //below: add and list feature
             }else{
-                message = upperLine + cmd + "\n" + lowerLine;
-                System.out.println(message);
+                if(!cmd.equals("list")){
+                    myList[idx] = cmd;
+                    idx++;
+                    message = upperLine + "add: " + cmd + "\n" + lowerLine;
+                    System.out.println(message);
+                }else{
+                    System.out.print(upperLine);
+                    for(int i = 0; i < idx; i++){
+                        message = myList[i];
+                        System.out.println((i+1) + ": " + message);
+                    }
+                    System.out.println(lowerLine);
+                }
             }
         }
-
     }
 }

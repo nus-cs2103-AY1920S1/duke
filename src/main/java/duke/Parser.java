@@ -1,6 +1,4 @@
-package duke.commands;
-
-import duke.DukeException;
+package duke;
 
 import java.util.*;
 

@@ -1,14 +1,16 @@
 public class Task {
     public static final String TICK = "\u2713";
     public static final String CROSS = "\u2718";
-    private int index;
-    private String name;
-    private boolean done;
+    protected String name;
+    protected boolean done;
 
-    public Task(String name, int index) {
+    public Task() {
+
+    }
+
+    public Task(String name) {
         this.name = name;
         this.done = false;
-        this.index = index;
     }
 
     public String done() {
@@ -17,6 +19,6 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("%d.[%s] %s", index, done ? "v" : "x", name);
+        return String.format("[T][%s] %s", done ? "v" : "x", name);
     }
 }

@@ -14,6 +14,13 @@ public class TasksHolder {
         System.out.println("Now you have " + tasksArr.size() + " tasks in the list.");
     }
 
+    public void deleteTask(int index){
+        System.out.println("Noted. I've removed this task: ");
+        Task removedTask = tasksArr.remove(index-1);
+        System.out.println(removedTask.getTaskDetails());
+        System.out.println("Now you have " + tasksArr.size() + " tasks in the list.");
+    }
+
     public void taskDone(int index) {
         System.out.println("Nice! I've marked this task as done: ");
         Task currTask = tasksArr.get(index - 1);

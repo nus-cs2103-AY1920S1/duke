@@ -21,6 +21,9 @@ public class Duke {
             } else if (line.contains(" ") && line.split(" ")[0].equals("done")) {
                 int index = Integer.valueOf(line.split(" ")[1]);
                 tasksHolder.taskDone(index);
+            } else if (line.contains(" ") && line.split(" ")[0].equals("delete")) {
+                int index = Integer.valueOf(line.split(" ")[1]);
+                tasksHolder.deleteTask(index);
             } else if (line.contains("/")) {
                 String taskCat = line.split(" ")[0];
                 if (taskCat.equals("deadline")) {

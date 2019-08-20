@@ -20,30 +20,39 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
-        ArrayList<String> list = new ArrayList<>(100);
+        ArrayList<Task> list = new ArrayList<>(100);
 
         while (run) {
-            String command = scanner.nextLine();
+            String input = scanner.nextLine();
+            String command = input.split(" ")[0];
 
             if (command.equals("bye")) {
                 run = false;
-                command = "\tBye. Hope to see you again soon!";
+                inputread = "\tBye. Hope to see you again soon!";
             } else if (command.equals("list")) {
-                int i = 1;
                 System.out.println(divider);
-                for (String s: list) {
-                    System.out.println("\t" + i + ". " + s);
-                    i++;
+                System.out.println("\tHere are the tasks in your list:");
+                for (Task t : list) {
+                    System.out.println("\t" + t);
                 }
                 System.out.println(divider);
                 continue;
+            } else if (command.equals("done")) {
+                int id = Integer.parseInt(input.split(" ")[1]);
+                list.get(id - 1).markAsComplete();
+
+                System.out.println(divider);
+                System.out.println("\tNice, I've marked this task as done!");
+                System.out.println("\t\t" + list.get(id-1).toStringNoID());
+                System.out.println(divider);
+                continue;
             } else {
-                list.add(command);
-                command = "\tadded: " + command;
+                list.add(new Task(input));
+                input = "\tadded: " + input;
             }
 
             System.out.println(divider);
-            System.out.println(command);
+            System.out.println(input);
             System.out.println(divider);
         }
     }

@@ -29,7 +29,7 @@ public class Duke {
 
             // Include case-insensitive bye
             if(readInput.toLowerCase().equals("bye")) {
-                System.out.println(process(goodbye));
+                System.out.println(processText(goodbye));
                 break;
             }
             else if (readInput.toLowerCase().equals("list")){
@@ -43,14 +43,14 @@ public class Duke {
                 list.add(readInput);
                 listCounter++;
 
-                String processedInput = Duke.process(readInput);
+                String processedInput = Duke.processText(readInput);
                 System.out.println(processedInput);
             }
         }
     }
 
     // Add in Indentation and horizontal lines
-    private static String process(String input){
+    private static String processText(String input){
         return HORIZONTAL_LINE + "\n" + "\t" + input + "\n" + HORIZONTAL_LINE + "\n";
     }
 }

@@ -18,11 +18,25 @@ public class Task_List {
                 break;
 
             default:
-                schedule[task_Num++] = new Task(task);
+                Task new_task = track(task);
+                schedule[task_Num++] = new_task;
                 System.out.println(new Border());
-                System.out.println("     added: " + task);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("       " + new_task.toString());
+                System.out.println("     Now you have " + task_Num + " tasks in the list.");
                 System.out.println(new Border() + "\n");
                 break;
+        }
+    }
+
+    private Task track(String task){
+        String[] word_Arr = task.split(" ");
+        if (word_Arr[0].equals("todo")){
+            return new Todo(task.split(" ", 2)[1]);
+        } else if (word_Arr[0].equals("deadline")){
+            return new Deadline(task.split(" ", 2)[1]);
+        } else {
+            return new Event(task.split(" ", 2)[1]);
         }
     }
 

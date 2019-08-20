@@ -2,13 +2,12 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-
 public class Duke {
 
     public static void main(String[] args) {
         String startingMessage = "Hello! I'm Duke\nWhat can I do for you?" ;
         System.out.println(startingMessage);
-        List <String> listOfStuff = new ArrayList <String>();
+        List <Task> listOfStuff = new ArrayList <Task>();
         
         boolean flag = true;
         while(flag){
@@ -23,8 +22,21 @@ public class Duke {
                     String message = number + ". " + listOfStuff.get(i);
                     System.out.println(message);
                   }
+            }else if(line.contains("done")){
+                for (int i = 0; i < listOfStuff.size(); i++) {
+                    Integer indexOfTask = i + 1;
+                    String stringFromUser = line.replaceAll("\\D+","");
+                    Integer indexFromUser = Integer.parseInt(stringFromUser);
+                    if(indexOfTask == indexFromUser ){
+                        Task currentTask = listOfStuff.get(i);
+                        currentTask.setStatus(true);
+                        String message = "Nice! I've marked this task as done:\n" + currentTask;
+                        System.out.println(message);
+                    }
+                  }
             }else{
-                listOfStuff.add(line);
+                Task newTask = new Task (false, line);
+                listOfStuff.add(newTask);
                 System.out.println(line);
             }
         }

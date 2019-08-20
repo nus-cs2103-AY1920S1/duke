@@ -8,9 +8,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
         printWelcomeMsg();
-
 
         List<Task> list = new LinkedList<>();
         String command = sc.nextLine();
@@ -26,14 +24,35 @@ public class Duke {
             } else if (command.length() > 4 && command.substring(0, 4).equals("done")) {
                 doneTask(list, command);
             } else {
-                list.add(new Task(command));
-                System.out.println("     added: " + command);
+                addTask(list, command);
             }
             printHorizontalLine();
             command = sc.nextLine();
         }
 
         sc.close();
+    }
+
+    private static void addTask(List<Task> list, String command) {
+        String[] words = command.split(" ");
+        String type = words[0];
+
+        Task task;
+        if (type.equals("todo")) {
+            task = new Todo(command.substring(5));
+        } else {
+            int index = command.indexOf('/');
+            if (type.equals("deadline")) {
+                task = new Deadline(command.substring(9, index-1), command.substring(index+4));
+            } else {
+                task = new Event(command.substring(6, index-1), command.substring(index+4));
+            }
+        }
+
+        list.add(task);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + task);
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
     }
 
     private static void doneTask(List<Task> list, String command) {

@@ -42,17 +42,31 @@ public class Duke {
         return sb.toString();
     }
 
+    private String markTask(int taskNum) {
+        StringBuilder sb = new StringBuilder();
+        Task task = taskList.get(taskNum - 1);
+        task.markDone();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append("  " + task.toString());
+        return sb.toString();
+    }
+
     void start() {
         System.out.println(greet());
         while (sc.hasNextLine()) {
-            String command = sc.nextLine();
+            String input = sc.nextLine();
+            String[] eachWord = input.split(" ");
+            String command = eachWord[0];
             if (command.equals("bye")) {
                 System.out.println(bye());
                 break;
             } else if (command.equals("list")) {
                 System.out.println(lineWrap(getList()));
+            } else if (command.equals("done")) {
+                int taskNumber = Integer.parseInt(eachWord[1]);
+                System.out.println(lineWrap(markTask(taskNumber)));
             } else {
-                Task t = new Task(command);
+                Task t = new Task(input);
                 taskList.add(t);
                 System.out.println(lineWrap("added: " + t.toString()));
             }

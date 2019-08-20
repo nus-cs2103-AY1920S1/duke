@@ -2,19 +2,25 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class Task {
+public abstract class Task {
+    public static String tick = "\u2713";
+    public static String cross = "\u2717";
     public static int totalNumOfTasks = 0;
     public static List<Task> taskList = new ArrayList<>();
 
-    private String description;
-    private boolean completed;
-    private int id;
+    protected String description;
+    protected boolean completed;
+    protected int id;
 
+    protected String taskType;
+
+    /*
     //constructors
     private Task() {
         this.description = "";
         this.completed = false;
         this.id = 0;
+        this.taskType = "";
     }
 
     private Task(String description, boolean completed, int id) {
@@ -34,6 +40,7 @@ public class Task {
             return Optional.of(newTask);
         }
     }
+     */
 
     //getter mtds
     public String getDescription() {
@@ -49,9 +56,6 @@ public class Task {
     public void setCompleted() {
         this.completed = true;
     }
-    public void setDescription(String descr) { //may not need
-        this.description = descr;
-    }
 
     @Override
     public String toString() {
@@ -61,6 +65,6 @@ public class Task {
         } else {
             checked = "\u2717";
         }
-        return String.format("[%s] %s", checked, this.description);
+        return String.format("[%s][%s]%s", this.taskType, checked, this.description);
     }
 }

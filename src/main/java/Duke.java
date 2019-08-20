@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] tasks = new Task[100];
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -21,6 +23,7 @@ public class Duke {
                 String[] commandArr = command.split(" ");
                 String[] keywords = {};
                 int i = 1; // skip the task type
+                int taskId = 0;
 
                 switch (commandArr[0].toLowerCase()) {
 
@@ -51,8 +54,13 @@ public class Duke {
                     break;
 
                 case "done":
-                    int taskId = Integer.parseInt(commandArr[1]);
+                    taskId = Integer.parseInt(commandArr[1]);
                     handleDone(taskId);
+                    break;
+
+                case "delete":
+                    taskId = Integer.parseInt(commandArr[1]);
+                    handleDelete(taskId);
                     break;
 
                 case "bye":
@@ -118,32 +126,48 @@ public class Duke {
         }
     }
 
-    public static void addTask(int index, Task task) {
-        tasks[index] = task;
-        int taskNum = index + 1;
+    public static void addTask(Task task) {
+        tasks.add(task);
+        int taskNum = tasks.size();
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
                 + " tasks in the list.";
         addBorder(feedback);
     }
 
     public static void handleTodo(String name, int index) {
-        addTask(index, new Todo(name));
+        addTask(new Todo(name));
     }
 
     public static void handleDeadline(String name, String time, int index) {
-        addTask(index, new Deadline(name, time));
+        addTask(new Deadline(name, time));
     }
 
     public static void handleEvent(String name, String time, int index) {
-        addTask(index, new Event(name, time));
+        addTask(new Event(name, time));
     }
 
-    public static void handleDone(int taskId) {
-        Task doneTask = tasks[taskId - 1];
-        doneTask.markAsDone();
-        String str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
+    public static void handleDone(int taskId) throws DukeException {
+        String str = "";
+        if (taskId > tasks.size()) {
+            throw new DukeException("Please choose a task within the list");
+        } else {
+            Task doneTask = tasks.get(taskId - 1);
+            doneTask.markAsDone();
+            str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
+            addBorder(str);
+        }
+    }
 
-        addBorder(str);
+    public static void handleDelete(int taskId) throws DukeException {
+        String str = "";
+        if (taskId > tasks.size()) {
+            throw new DukeException("Please choose a task within the list");
+        } else {
+            Task toDelete = tasks.remove(taskId - 1);
+            str = "Noted. I've removed this task:\n" + " " + toDelete.toString() + "\nNow you have " + tasks.size()
+                + " tasks in the list.";
+            addBorder(str);
+        }
     }
 
     public static void handleExit() {
@@ -155,9 +179,9 @@ public class Duke {
 
         for (int i = 1; i < index + 1; i++) {
             if (i == index) {
-                str += i + "." + tasks[i - 1];
+                str += i + "." + tasks.get(i - 1);
             } else {
-                str += i + "." + tasks[i - 1] + "\n";
+                str += i + "." + tasks.get(i - 1) + "\n";
             }
         }
 

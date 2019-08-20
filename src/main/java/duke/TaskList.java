@@ -17,6 +17,9 @@ public class TaskList {
     public Task get(int oneIndex) {
         return tasks.get(oneIndex-1);
     }
+    public int size() {
+        return tasks.size();
+    }
 
     @Override
     public String toString() {

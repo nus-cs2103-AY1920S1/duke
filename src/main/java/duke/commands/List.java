@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Command;
 import duke.Duke;
+import duke.TaskList;
 
 public class List extends Command {
     public List(Duke duke) {
@@ -11,6 +12,12 @@ public class List extends Command {
 
     @Override
     public void execute(String[] args) {
-        duke.say(duke.getTaskList().toString());
+        TaskList taskList = duke.getTaskList();
+        if(taskList.size() > 0) {
+            duke.say(duke.getTaskList().toString());
+        }
+        else {
+            duke.say("No tasks yet.");
+        }
     }
 }

@@ -32,15 +32,14 @@ public class Duke {
             }
 
             else if (readInput.toLowerCase().equals("list")){
-                System.out.println(HORIZONTAL_LINE);
 
+                String printList = "Here are the tasks in your list:\n";
                 for(int i = 0; i < listCounter; i++){
-                    String processedTaskString = "\t" + (i + 1)
-                            + "." + list.get(i).getStatusIcon() + " " + list.get(i).getTaskItem();
-                    System.out.println(processedTaskString);
+                    printList = printList + "\t\t" + (i + 1) +
+                            "." + list.get(i).getStatusIcon() + " " + list.get(i).getTaskItem();
+                    if(i != listCounter - 1) printList = printList + "\n";
                 }
-
-                System.out.println(HORIZONTAL_LINE);
+                System.out.println(processText(printList));
             }
 
             else if(readInput.toLowerCase().equals("done")){
@@ -95,10 +94,6 @@ class Task{
 
     public void setDone(){
         isDone = true;
-    }
-
-    public boolean getCompletedStatus(){
-        return isDone;
     }
 
     public String getStatusIcon(){

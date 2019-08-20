@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -19,16 +20,30 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
+        ArrayList<String> list = new ArrayList<>(100);
 
         while (run) {
             String command = scanner.nextLine();
 
             if (command.equals("bye")) {
                 run = false;
-                command = "Bye. Hope to see you again soon!";
+                command = "\tBye. Hope to see you again soon!";
+            } else if (command.equals("list")) {
+                int i = 1;
+                System.out.println(divider);
+                for (String s: list) {
+                    System.out.println("\t" + i + ". " + s);
+                    i++;
+                }
+                System.out.println(divider);
+                continue;
+            } else {
+                list.add(command);
+                command = "\tadded: " + command;
             }
+
             System.out.println(divider);
-            System.out.println("\t" + command);
+            System.out.println(command);
             System.out.println(divider);
         }
     }

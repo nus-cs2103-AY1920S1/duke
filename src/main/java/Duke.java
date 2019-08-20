@@ -57,6 +57,15 @@ public class Duke { // handles all input and output
         return done;
     }
 
+    public static String delete(int n) {
+        Task t = _task.get(n - 1);
+        _task.remove(n - 1);
+        String del = String.format("%s%n Noted. I've removed this task:%n   %s%n" +
+                        "Now you have %d tasks in the list.%n%s%n",
+                        line, t.toString(), _task.size(), line);
+        return del;
+    }
+
     public static void main(String[] args) { // handles all input and output
         Scanner sc = new Scanner(System.in);
         System.out.println(intro());
@@ -76,6 +85,10 @@ public class Duke { // handles all input and output
                     case "done":
                         int taskNo = Integer.parseInt(cmdLine.substring(1));
                         System.out.println(done(taskNo));
+                        break;
+                    case "delete":
+                        int taskNum = Integer.parseInt(cmdLine.substring(1));
+                        System.out.println(delete(taskNum));
                         break;
                     case "todo":
                         if (cmdLine.isEmpty()) {

@@ -1,0 +1,23 @@
+list
+done 0
+done -1
+done 1.5
+done one
+todo todo_task_1
+todo todo_task_2
+todo
+deadline deadline_task_1 /by 12pm
+deadline deadline_task_2 /at 3pm
+deadline deadline_task_3
+deadline
+event event_task_1 /at 3pm
+event event_task_2 /by 4pm
+event /at 3pm
+event
+list
+done 1
+done 3
+list
+delete 2
+list
+bye

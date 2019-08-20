@@ -52,3 +52,19 @@ public class Duke {
         return HORIZONTAL_LINE + "\n" + "\t" + input + "\n" + HORIZONTAL_LINE + "\n";
     }
 }
+
+class Task{
+    private boolean isDone;
+    private String taskItem;
+
+    // Default Constructor
+    public Task(){
+        isDone = false;
+    }
+
+    // Non-default Constructor
+    public Task(String taskItem, boolean isDone){
+        this.isDone = isDone;
+        this.taskItem = taskItem;
+    }
+}

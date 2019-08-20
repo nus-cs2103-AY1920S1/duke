@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Duke {
@@ -10,10 +11,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }*/
 
-    private ArrayList<String> texts;
+    private ArrayList<Task> tasks;
 
     Duke() {
-        texts = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     void startDuke() {
@@ -23,7 +24,11 @@ public class Duke {
     }
 
     void add(String s) {
-        texts.add(s);
+        //add task
+        Task task = new Task(s);
+
+        //add task into the list of tasks
+        tasks.add(task);
     }
 
     void listAll() {
@@ -31,8 +36,9 @@ public class Duke {
 
         //list out all the texts from the user
         line();
-        for (String t: texts) {
-            System.out.println("\t" + counter + ". " + t);
+        System.out.println("\tHere are the tasks in your list:");
+        for (Task t: tasks) {
+            System.out.println("\t" + counter + "." + t.toString());
             counter++;
         }
         line();
@@ -41,6 +47,18 @@ public class Duke {
     void echo(String s) {
         line();
         System.out.println("\tadded: " + s);
+        line();
+    }
+
+    void markAsDone(int i) {
+        //set task as done
+        Task specificTask = tasks.get(i - 1);
+        specificTask.done();
+
+        //display the task
+        line();
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t  " + specificTask.toString());
         line();
     }
 

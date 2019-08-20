@@ -10,14 +10,15 @@ public class HelperDuke {
 
         //input action
         Scanner s = new Scanner(System.in);
-        String action = s.nextLine();
+        String action = s.nextLine().toLowerCase();
 
-
-        while (!action.equalsIgnoreCase("bye")) {
-            if(action.equalsIgnoreCase("list")) {
-
+        while (!action.equals("bye")) {
+            if(action.equals("list")) {
                 duke.listAll();
-
+            } else if (action.contains("done")) {
+                //mark the specific task
+                int index = Integer.parseInt(action.substring(5,6));
+                duke.markAsDone(index);
             } else {
                 //keep account of all the texts
                 duke.add(action);
@@ -27,7 +28,7 @@ public class HelperDuke {
             }
 
             //ask for next action
-            action = s.nextLine();
+            action = s.nextLine().toLowerCase();
         }
 
         //ending

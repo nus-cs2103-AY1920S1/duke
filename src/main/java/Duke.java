@@ -20,9 +20,21 @@ public class Duke {
                         counter++;
                         System.out.println(counter + ". " + t);
                     }
+                } else if (input.equals("delete")) {
+                    int index = scanner.nextInt();
+                    if(index > alist.size()) {
+                        throw new DukeException("OOPS!!! Task not found.");
+                    }
+                    Task task = alist.get(index - 1);
+                    alist.remove(task);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task);
+                    System.out.println("Now you have " + alist.size() + " tasks in the list.");
                 } else if (input.equals("done")) {
-                    String number = scanner.next();
-                    int index = Integer.parseInt(number);
+                    int index = scanner.nextInt();
+                    if(index > alist.size()) {
+                        throw new DukeException("OOPS!!! Task not found.");
+                    }
                     Task task = alist.get(index - 1);
                     task.markDone();
                     System.out.println("Nice! I've marked this task as done: \n" +

@@ -11,7 +11,12 @@ public class Duke {
     }
     private void Add(Task t, ArrayList<Task> l){
         l.add(t);
-        System.out.println("added: " + t.getDescription());
+        System.out.println(" Got it. I've added this task: " );
+        System.out.println(l.get(l.size() - 1));
+        if(l.size() == 1)
+            System.out.println("Now you have 1 task in your list.");
+        else
+        System.out.println("Now you have " + l.size() + " tasks in the list.");
     }
     private void Echo(String a){
         System.out.println(a);
@@ -19,12 +24,12 @@ public class Duke {
     private void MarkAsDone(int x, ArrayList<Task> li){
         li.get(x).markAsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + li.get(x).getStatusIcon() + "] " + li.get(x).description);
+        System.out.println( li.get(x) );
     }
     private void getList(ArrayList<Task> lis){
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= lis.size(); i+=1){
-            System.out.println(i + ".[" + lis.get(i-1).getStatusIcon() + "] " + lis.get(i-1).description);
+            System.out.println(i + ". " + lis.get(i-1) );
         }
     }
     private void Exit(){
@@ -49,11 +54,26 @@ public class Duke {
                 d.MarkAsDone(num-1,d.list);
                 String c = scan.nextLine();
             }
-            else{
-               String b = a + scan.nextLine();
-                Task t = new Task(b);
+            else if(a.equals("event")){
+               String b = scan.nextLine();
+               int first = b.indexOf('/');
+               String desc = b.substring(0,first-1);
+               String byTime = b.substring(first+4);
+               Task t = new Event(desc,byTime);
                 d.Add(t,d.list);
-
+            }
+            else if(a.equals("deadline")){
+                String det = scan.nextLine();
+                int first = det.indexOf('/');
+                String descr = det.substring(0,first-1);
+                String byTime = det.substring(first+4);
+                Task t = new Deadline(descr,byTime);
+                d.Add(t,d.list);
+            }
+            else{
+                String todoDetails = scan.nextLine();
+                Task t = new ToDo(todoDetails);
+                d.Add(t,d.list);
             }
 
         }

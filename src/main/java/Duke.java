@@ -20,51 +20,44 @@ public class Duke {
                 + upperBorder + "Hello! I'm Duke\n" + "What can I do for you?\n" + lowerBorder);
 
         while (true) {
-            String str = sc.nextLine();
-            String[] keywords = str.split(" ");
-            if (keywords[0].equals("bye")) {
-                break;
-            } else if (keywords[0].equals("list")) {
-                outputList(pointer, taskList);
-            } else if (keywords[0].equals("done")) {
-                System.out.println(doneTask(Integer.parseInt(keywords[1]), taskList));
-            } else if (keywords[0].equals("todo")) {
-                String temp = "";
-                for (int i = 1; i < keywords.length; i++) {
-                    temp = temp + " " + keywords[i];
-                }
-                System.out.println(todo(temp.strip()));
-                pointer++;
-            } else if (keywords[0].equals("deadline")) {
-                String temp = "";
-                String date = "";
-                boolean byFlag = false;
-                for (int i = 1; i < keywords.length; i++) {
-                    if (byFlag) {
-                        date = date + " " + keywords[i];
-                    } else if (keywords[i].equals("/by")) {
-                        byFlag = true;
-                    } else {
-                        temp = temp + " " + keywords[i];
+            try {
+                String str = sc.nextLine();
+                String[] keywords = str.split(" ");
+                if (keywords[0].equals("bye")) {
+                    break;
+                } else if (keywords[0].equals("list")) {
+                    outputList(pointer, taskList);
+                } else if (keywords[0].equals("done")) {
+                    System.out.println(doneTask(Integer.parseInt(keywords[1]), taskList));
+                } else if (keywords[0].equals("todo")) {
+                    try {
+                        String temp = parseTodo(keywords);
+                        System.out.println(todo(temp.strip()));
+                        pointer++;
+                    } catch (DukeException ex) {
+                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
                     }
-                }
-                System.out.println(deadline(temp.strip(), date.strip()));
-                pointer++;
-            } else if (keywords[0].equals("event")) {
-                String temp = "";
-                String date = "";
-                boolean atFlag = false;
-                for (int i = 1; i < keywords.length; i++) {
-                    if (atFlag) {
-                        date = date + " " + keywords[i];
-                    } else if (keywords[i].equals("/at")) {
-                        atFlag = true;
-                    } else {
-                        temp = temp + " " + keywords[i];
+                } else if (keywords[0].equals("deadline")) {
+                    try {
+                        String[] temp = parseTaskTime(keywords, "deadline");
+                        System.out.println(deadline(temp[0].strip(), temp[1].strip()));
+                        pointer++;
+                    } catch (DukeException ex) {
+                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
                     }
+                } else if (keywords[0].equals("event")) {
+                    try {
+                        String[] temp = parseTaskTime(keywords, "event");
+                        System.out.println(event(temp[0].strip(), temp[1].strip()));
+                        pointer++;
+                    } catch (DukeException ex) {
+                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
+                    }
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                System.out.println(event(temp.strip(), date.strip()));
-                pointer++;
+            } catch (DukeException ex) {
+                System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
             }
         }
 
@@ -74,10 +67,10 @@ public class Duke {
 
     }
 
-    public static String addToList(int pointer, String string) {
-        taskList[pointer] = new Task(string);
-        return upperBorder + "added: " + string + "\n" + lowerBorder;
-    }
+    // public static String addToList(int pointer, String string) {
+    //     taskList[pointer] = new Task(string);
+    //     return upperBorder + "added: " + string + "\n" + lowerBorder;
+    // }
 
     public static void outputList(int pointer, Task[] taskList) {
         System.out.println(border + "\n");
@@ -111,6 +104,50 @@ public class Duke {
     public static String taskWrap(Task task) {
         return upperBorder + "Got it. I've added this task:\n" + task
         + "\n" + "Now you have " + (pointer + 1) + " tasks in the list.\n" + lowerBorder;
+    }
+
+    public static String parseTodo(String[] keywords) throws DukeException {
+        if (keywords.length < 2) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }else {
+            String temp = "";
+            for (int i = 1; i < keywords.length; i++) {
+                temp = temp + " " + keywords[i];
+            }
+            return temp;
+        }
+    }
+
+    public static String[] parseTaskTime(String[] keywords, String dateTimeType) throws DukeException {
+       if (keywords.length < 2) {
+            throw new DukeException("☹ OOPS!!! The description of a " + dateTimeType + " cannot be empty.");
+        } else {
+            String temp = "";
+            String date = "";
+            boolean flag = false;
+            for (int i = 1; i < keywords.length; i++) {
+                if (flag) {
+                    date = date + " " + keywords[i];
+                } else if (keywords[i].equals("/by")) {
+                    flag = true;
+                } else {
+                    temp = temp + " " + keywords[i];
+                }
+            }
+            if (date.equals("")) {
+                switch (dateTimeType) {
+                    case "deadline":
+                    throw new DukeException("☹ OOPS!!! Your deadline does not have a /by.");
+
+                    case "event":
+                    throw new DukeException("☹ OOPS!!! Your event does not have an /at.");
+
+                    default:
+                    break;
+                }
+            }
+            return new String[] {temp, date};
+        }
     }
 
 }

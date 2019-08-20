@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Duke {
     boolean exited = false;
+    List<String> toDoList = new ArrayList<>();
 
     public void respond() {
         Scanner scanner = new Scanner(System.in);
@@ -21,8 +22,17 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
 
+                case "list":
+                    int index = 1;
+                    for(String s: toDoList){
+                        System.out.println(index + ". " + s);
+                        index++;
+                    }
+                    break;
+
                 default:
-                    System.out.println(input);
+                    toDoList.add(input);
+                    System.out.println("added: " +input);
             }
         }
     }

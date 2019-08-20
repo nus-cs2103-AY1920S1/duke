@@ -21,8 +21,26 @@ public class Duke {
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
+            // String taskName = commandArr[1] + commandArr[2];
 
             switch(commandArr[0].toLowerCase()) {
+                case "event":
+                    String name = "";
+                    String time = "";
+                    boolean flag = false;
+                    for (int i = 1; i < commandArr.length; i++ ) {
+                        if (commandArr[i].equals("/at")) {
+                            flag = true;
+                        } else if (flag) {
+                            time += commandArr[i] + " ";
+                        } else {
+                            name += commandArr[i] + " ";
+                        }
+                    }
+                    handleEvent(name.trim(), time.trim(), counter);
+                    counter++;
+                    break;
+
                 case "list":
                     printList(counter);
                     break;
@@ -37,8 +55,6 @@ public class Duke {
                     return;
                 
                 default:
-                    addTask(counter, command.toLowerCase());
-                    counter ++;
                     break;
             }
         }
@@ -57,10 +73,14 @@ public class Duke {
         addBorder("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    public static void addTask(int index, String input) {
-        tasks[index] = new Task(input);
-        String str = "added: " + input;
-        addBorder(str);
+    /* Takes the task name and index to add to the arr */
+    public static void addTask(int index, Task task) {
+        tasks[index] = task;
+        addBorder(task.toString());
+    }
+
+    public static void handleEvent(String name, String time, int index) {
+        addTask(index, new Event(name, time));
     }
 
     public static void handleDone(int taskId) {
@@ -78,7 +98,7 @@ public class Duke {
     }
 
     public static void printList(int index) {
-        String str = "Here are the tasks in your list\n";
+        String str = "Here are the tasks in your list:\n";
 
         for (int i = 1; i < index + 1; i++) {
             if (i == index) {

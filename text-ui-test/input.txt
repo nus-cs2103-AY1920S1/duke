@@ -1,0 +1,5 @@
+todo borrow book
+todo read book
+deadline return book /by next Monday
+event book discussion session /at Thursday night
+bye

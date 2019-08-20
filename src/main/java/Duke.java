@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _____\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
@@ -19,7 +19,7 @@ public class Duke {
         Task[] list = new Task[100];
         int index = 1;
         String input = scan.nextLine();
-        
+
         while (!input.equals("bye")) {
             String arr[] = input.split(" ",2 );
             String command = arr[0];

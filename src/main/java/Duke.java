@@ -16,32 +16,47 @@ public class Duke {
         while (!exited && scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
-            switch (input) {
-                case "bye":
-                    exited = true;
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
+           try{
+               giveRespond(input);
+           } catch (IllegalArgumentException e1 ){
+               System.out.println(e1);
+           } catch (EmptyDescException e2){
+               System.out.println(e2);
+           }
+        }
+    }
 
-                case "list":
+    public void giveRespond(String input) throws IllegalArgumentException, EmptyDescException {
+        switch (input) {
+            case "bye":
+                exited = true;
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
 
-                    System.out.println("Here are the tasks in your list:");
-                    int index = 1;
-                    for (Task s : toDoList) {
-                        System.out.print(index + ". " + s);
-                        index++;
-                    }
-                    break;
+            case "list":
 
-                default:
-                    if (input.contains("done")) {
-                        int taskNum = Integer.parseInt(input.substring(5)) - 1;
-                        Task updatedTask = toDoList.get(taskNum);
-                        updatedTask.markAsDone();
-                        System.out.println("Nice! I've marked this task as done: ");
-                        System.out.println(updatedTask);
+                System.out.println("Here are the tasks in your list:");
+                int index = 1;
+                for (Task s : toDoList) {
+                    System.out.print(index + ". " + s);
+                    index++;
+                }
+                break;
+
+            default:
+                if (input.contains("done")) {
+                    int taskNum = Integer.parseInt(input.substring(5)) - 1;
+                    Task updatedTask = toDoList.get(taskNum);
+                    updatedTask.markAsDone();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println(updatedTask);
 
 
-                    } else if (input.contains("todo")) {
+                } else if (input.contains("todo")) {
+
+                    if (input.length() < 5) {
+                        throw new EmptyDescException("todo");
+                    } else {
 
                         String desc = input.substring(5);
 
@@ -55,9 +70,14 @@ public class Duke {
                         System.out.println("Got it. I've added this task: \n" + "  "
                                 + newTodo + "Now you have " +
                                 numTask + " tasks in the list.");
+                    }
 
 
-                    } else if (input.contains("deadline")) {
+                } else if (input.contains("deadline")) {
+
+                    if (input.length() < 9) {
+                        throw new EmptyDescException("deadline");
+                    } else {
 
                         int deadlineIndex = input.indexOf('/') + 4;
                         String deadline = input.substring(deadlineIndex);
@@ -73,7 +93,12 @@ public class Duke {
                         System.out.println("Got it. I've added this task: \n" + "  "
                                 + newDeadline + "Now you have " +
                                 numTask + " tasks in the list.");
-                    } else if (input.contains("event")) {
+                    }
+                } else if (input.contains("event")) {
+
+                    if (input.length() < 6) {
+                        throw new EmptyDescException("event");
+                    } else {
 
                         int timeIndex = input.indexOf('/') + 4;
                         String time = input.substring(timeIndex);
@@ -92,9 +117,12 @@ public class Duke {
                                 + newEvent + " Now you have" +
                                 numTask + " tasks in the list.");
                     }
-            }
+                } else {
+                    throw new IllegalArgumentException();
+                }
         }
     }
+
 
     public static void main(String[] args) {
         Duke D1 = new Duke();

@@ -28,6 +28,11 @@ public class Duke {
                 int index = Integer.parseInt(next.split(" ")[1]);
                 tasks.get(index - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done\n" + tasks.get(index - 1));
+            } else if (firstWord.equals("delete")) {
+                int target = Integer.parseInt(next.split(" ")[1]);
+                System.out.println("Noted. I've removed this task:\n\t" + tasks.get(target - 1));
+                tasks.remove(target - 1);
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")){
                 try {
                     String[] arrCommands = next.split(" ");

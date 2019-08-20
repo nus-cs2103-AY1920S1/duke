@@ -37,8 +37,12 @@ public class Duke {
                 } else if (input.substring(0, 4).equals("done")) {
                     String[] arr = input.split(" ");
                     int number = Integer.parseInt(arr[1]);
+                    if (number > commandList.size() + 1) {
+                        throw new TaskNotFoundException("OOPS!!! Task number is incorrect");
+                    }
                     commandList.get(number - 1).complete();
-                } else {
+                }
+                else {
                     if (input.substring(0, 4).equals("todo")) {
                         if (input.length() == 4) {
                             throw new TodoEmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
@@ -64,7 +68,16 @@ public class Duke {
                         } catch (ArrayIndexOutOfBoundsException e) {
                             System.out.println("Input format is wrong.");
                         }
-                    } else if (input.length() <= 7) {
+                    } else if (input.substring(0,6).equals("delete")) {
+                        String[] arr = input.split(" ");
+                        int number = Integer.parseInt(arr[1]);
+                        if (number > commandList.size() + 1) {
+                            throw new TaskNotFoundException("OOPS!!! Task number is incorrect");
+                        }
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(commandList.get(number-1));
+                        commandList.remove(number-1);
+                } else if (input.length() <= 7) {
                         throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     } else if (input.substring(0, 8).equals("deadline")) {
                         String deadlineDetails = input.substring(9);

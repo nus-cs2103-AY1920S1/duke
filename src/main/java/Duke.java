@@ -26,33 +26,41 @@ public class Duke {
 
         while (sc.hasNext()) {
             String input = sc.next();
-            String[] inputArr = input.split(" ");
 
-            switch (input) {
-            case "bye":
-                System.out.println(farewellText);
-                return;
-            case "list":
-                System.out.println(listText);
-                listEntries();
-                break;
-            case "todo":
-                addTodo(sc);
-                break;
-            case "deadline":
-                addDeadline(sc);
-                break;
-            case "event":
-                addEvent(sc);
-                break;
-            case "done":
-                TaskDone(sc);
-                break;
-            default:
-                System.out.println("☹  OOPS!!! I'm sorry, but I don't know what that means. " +
-                        "I sure need more sleep...");
-                break;
-            } // End switch
+            try {
+                Command command = Command.valueOf(input.toUpperCase());
+                switch (command) {
+                case BYE:
+                    System.out.println(farewellText);
+                    return;
+                case LIST:
+                    System.out.println(listText);
+                    listEntries();
+                    break;
+                case TODO:
+                    addTodo(sc);
+                    break;
+                case DEADLINE:
+                    addDeadline(sc);
+                    break;
+                case EVENT:
+                    addEvent(sc);
+                    break;
+                case DONE:
+                    taskDone(sc);
+                    break;
+                case DELETE:
+                    deleteTask(sc);
+                    break;
+                default:
+                    System.out.println("☹  OOPS!!! I'm sorry, but I don't know what that means. "
+                            + "I sure need more sleep...");
+                    break;
+                } // End switch
+            } catch (IllegalArgumentException e) {
+                System.out.println("☹  OOPS!!! I'm sorry, but I don't know what that means. "
+                        + "I sure need more sleep...");
+            }
 
         } // End while loop.
 
@@ -101,8 +109,8 @@ public class Duke {
         } catch (IllegalArgumentException e) {
             System.out.println(":( OOPS!!! The description or due date of a deadline cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("The description or due date of a deadline cannot be empty! " +
-                    "To enter a new deadline, type: deadline <description> /by <date>");
+            System.out.println("The description or due date of a deadline cannot be empty! "
+                    + "To enter a new deadline, type: deadline <description> /by <date>");
         } // End catch.
     } // End method.
 
@@ -120,19 +128,19 @@ public class Duke {
         } catch (IllegalArgumentException e) {
             System.out.println(":( OOPS!!! The description or date and time of an event cannot be empty.");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("You need to enter an event? " +
-                    "To enter a new event, type: event <description> /at <date&time>");
+            System.out.println("You need to enter an event? "
+                    + "To enter a new event, type: event <description> /at <date&time>");
         } // End catch.
     } // End method.
 
-    private static void TaskDone(Scanner sc) {
+    private static void taskDone(Scanner sc) {
         String doneText = "Nice! I've marked this task as done: ";
         try {
             // Will cause error if user did not give entry number.
             String inputEntry = sc.nextLine().trim();
             int entry = Integer.parseInt(inputEntry) - 1;
 
-            if (inputEntry == null || entry < 0) {
+            if (inputEntry.isEmpty() || entry < 0) {
                 throw new IllegalArgumentException();
             }
 
@@ -145,7 +153,31 @@ public class Duke {
             System.out.println("You need to specify the task you want to complete!");
         } // End of try-catch.
 
-    } // End pf method.
+    } // End of method.
+
+    private static void deleteTask(Scanner sc) {
+        String removeText = "Noted. I've removed this task:";
+        try {
+            String inputEntry = sc.nextLine().trim();
+            int entry = Integer.parseInt(inputEntry) - 1;
+
+            if (inputEntry.isEmpty() || entry < 0) {
+                throw new IllegalArgumentException();
+            }
+
+            Task removedTask = tasks.remove(entry);
+
+            String taskWord = tasks.size() <= 1 ? "task" : "tasks"; // Ensure correct grammar.
+
+            System.out.println(removeText);
+            System.out.println("  " + removedTask.toString());
+            System.out.printf("Now you have %d %s in the list.\n", tasks.size(), taskWord);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("You need to specify the task you want to delete!");
+        } // End of try-catch.
+
+    } // End of method.
 
     private static void addTaskDialogue(String desc) {
         String addText = "Got it. I've added this task:";

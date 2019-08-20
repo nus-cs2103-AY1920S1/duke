@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,8 +13,13 @@ public class Duke {
         System.out.println("    Hello! I'm Duke");
         System.out.println("    What can I do for you?");
         String input  = sc.nextLine();
+        ListOfInput list = new ListOfInput();
         while (!input.equals("bye")) {
-            System.out.println("    " + input);
+            if (input.equals("list")) {
+                list.printList();
+            } else {
+                list.addToList(input);
+            }
             input = sc.nextLine();
         }
         System.out.println("    Bye. Hope to see you again soon!");

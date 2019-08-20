@@ -1,7 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] list = new Task[100];
+    private static ArrayList<Task> list = new ArrayList<>(); 
     private static int count = 0;
     public static void main(String[] args) {
         welcomeMessage();
@@ -14,15 +15,38 @@ public class Duke {
           } else if (input.equals("list")) {
             displayList();
           } else if (input.equals("done")) {
-            markItemComplete(Integer.parseInt(sc.next()));
+            try {
+              markItemComplete(Integer.parseInt(sc.next()));
+            } catch (DukeException e) {
+              printErrorMessage(e.getMessage());
+            }
           } else {
-            String type = input;
-            String taskName = sc.nextLine().substring(1);
-            Task t = addToList(taskName, type);
-            echo(t);
+            try {
+              String type = input;
+              if (
+                !type.equals("todo") &&
+                !type.equals("deadline") &&
+                !type.equals("event")
+              ) {
+                throw new DukeException("I don't know what that means :(");
+              }
+              String taskName = sc.nextLine();
+              Task t = addToList(taskName, type);
+              echo(t);
+            } catch (DukeException e) {
+              printErrorMessage(e.getMessage());
+            }
           } 
         }
         sc.close();
+    }
+
+    static void printErrorMessage(String e) {
+      String line = "    ________________________" 
+          + "____________________________________";
+      System.out.println(line);
+      System.out.println("     " + e);
+      System.out.println(line + "\n");
     }
 
     static void displayList() {
@@ -32,34 +56,57 @@ public class Duke {
       System.out.println("    Here are the tasks in your list:");
       for (int i = 0; i < count; i++) {
         int listNumber = i + 1;
-        System.out.println("    " + listNumber + "." + list[i]);
+        System.out.println("    " + listNumber + "." + list.get(i));
       }
       System.out.println(line + "\n");
     }
 
-    static void markItemComplete(int index) {
+    static void markItemComplete(int index) throws DukeException {
+      if (index <= 0 || index > count) {
+        throw new DukeException("Invalid task number!");
+      }
       String line = "    ________________________" 
           + "____________________________________";
-      Task t = list[index - 1];
+      Task t = list.get(index - 1);
       t.complete();
       System.out.println(line);
       System.out.println("     Nice! I've marked this task as done:");
-      System.out.println("       " + t);
+      System.out.println("     " + t);
       System.out.println(line + "\n");
     }
 
-    static Task addToList(String s, String type) {
+    static Task addToList(String s, String type) throws DukeException {
+      String trimmed = s.replaceAll("^\\s+", "");
+      if (trimmed.equals("")) {
+        throw new DukeException("Description cannot be empty!");
+      }
       if (type.equals("todo")) {
-        list[count] = new Todo(s, count + 1);
+        list.add(new Todo(s, count + 1));
       } else if (type.equals("deadline")) {
         String[] parts = s.split("\\/" + "by");
-        list[count] = new Deadline(parts[0], count + 1, parts[1]);
+        if (parts.length < 2) {
+          String message = "Date required! ";
+          message += "Format: deadline YOUR_TASK_NAME /by YOUR_DEADLINE";
+          throw new DukeException(message);
+        } else if (parts.length != 2) {
+          String message = "Format: deadline YOUR_TASK_NAME /by YOUR_DEADLINE";
+          throw new DukeException(message);
+        }
+        list.add(new Deadline(parts[0], count + 1, parts[1]));
       } else if (type.equals("event")) {
         String[] parts = s.split("\\/" + "at");
-        list[count] = new Event(parts[0], count + 1, parts[1]);
+        if (parts.length < 2) {
+          String message = "Date required! ";
+          message += "Format: event YOUR_TASK_NAME /at YOUR_EVENT_DATE";
+          throw new DukeException(message);
+        } else if (parts.length != 2) {
+          String message = "Format: event YOUR_TASK_NAME /at YOUR_EVENT_DATE";
+          throw new DukeException(message);
+        }
+        list.add(new Event(parts[0], count + 1, parts[1]));
       }
       count++;
-      return list[count - 1];
+      return list.get(count - 1);
     }
     static void welcomeMessage() {
         String logo = "     ____        _        \n"
@@ -88,8 +135,13 @@ public class Duke {
             + "____________________________________";
         System.out.println(line);
         System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + t);
-        System.out.println("     Now you have "+count+" tasks in the list.");
+        System.out.println("      " + t);
+        if (count == 1) {
+          System.out.println("     Now you have 1 task in the list.");
+        } else {
+          String message = "     Now you have "+count+" tasks in the list.";
+          System.out.println(message);
+        }
         System.out.println(line + "\n");
         return;
     }

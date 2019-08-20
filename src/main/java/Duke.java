@@ -18,6 +18,9 @@ public class Duke {
         //Set index of number of task
         int n = 0;
 
+        //Null task for exception
+        Task t = null;
+
         //Read command-line input with Scanner
         Scanner scanner = new Scanner(System.in);
 
@@ -32,7 +35,7 @@ public class Duke {
         while (!input.equals("bye")) {
 
             // Get entire line of input from command-line
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim(); //Remove blank space
 
             //Store whatever text entered, except "bye", exit loop
             if (input.equals("bye")) break;
@@ -47,15 +50,23 @@ public class Duke {
                 }
             }
             else if (input.contains("done")) {
-                //Assumption: fixed format - remove first 5 characters to get index. i.e. "done_"
-                String value = input.substring(5);
+                //Assumption: fixed format - remove first 4 characters to get index. i.e. "done"
+                String value = input.substring(4);
 
                 //Get integer found in user input
-                int index = Integer.parseInt(value);
+                int index = Integer.parseInt(value.trim()); //Remove any blank space
 
-                //Mark task as done
-                list[index-1].isDone = true;
-
+              // Optional error handling - if entry does not exist and is marked 'done'
+                try {
+                    //Mark task as done
+                    list[index-1].isDone = true;
+                }
+                catch (NullPointerException err){
+                    System.out.println("     List entry does not exist!");
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("");
+                    continue;
+                    }
                 System.out.println("     Nice! I've marked this task as done: ");
                 System.out.print("       ");
                 System.out.println(list[index-1].toString());
@@ -63,6 +74,17 @@ public class Duke {
             } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
                 String[] substrings = input.split(" ");
                 String action = substrings[0];
+                try {
+                    t = new Task(input, substrings.length);
+                }
+                //If length is 1, it only has the action but no description
+                catch (DukeException err) {
+                    System.out.println(err.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("");
+                    continue;
+                }
+
                 switch(action) {
 
                     case "todo":
@@ -99,17 +121,20 @@ public class Duke {
                 System.out.println("     Now you have " + (n) + " tasks in the list.");
 
             } else {
-                //Create task as a object and store in array
-                Task t = new Task(input);
-                list[n] = t;
-                System.out.println("     added: " + input);
-
-                //After storing user input into array, increment index
-                n += 1;
+               //Do not fit any commands
+                try {
+                    t = new Task(input, 0);
+                }
+                catch (DukeException err) {
+                    System.out.println(err.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("");
+                    continue;
+                }
             }
+
             System.out.println("    ____________________________________________________________");
             System.out.println("");
-
         }
         //Closing statement
         System.out.println("    ____________________________________________________________");
@@ -125,6 +150,15 @@ class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    //Invalid task throws DukeException
+    public Task(String action, int size) throws DukeException {
+        if (size == 0) {
+            throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-("); //no valid command given
+        } else if (size == 1) {
+            throw new DukeException("    ☹ OOPS!!! The description of a "+ action +" cannot be empty."); //empty description
+        }
     }
 
     public String toString() {
@@ -178,5 +212,12 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+}
+
+//Custom exception class for Duke
+ class DukeException extends Exception {
+    public DukeException(String errorMessage) {
+        super(errorMessage);
     }
 }

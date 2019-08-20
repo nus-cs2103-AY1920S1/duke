@@ -27,9 +27,22 @@ public class Duke {
         sb.append(border + "\n");
         String greetings = sb.toString();
         System.out.println(greetings);
-
-        //reset Stringbuilder for next message
         sb.setLength(0);
+
+        //error message for indexOutOfBound
+        sb.append(border + "\n");
+        sb.append("Invalid number. Number not listed. \n");
+        sb.append(border + "\n");
+        String indexError = sb.toString();
+        sb.setLength(0);
+
+        //error message for empty input
+        sb.append(border + "\n");
+        sb.append("No input detected. Please enter a number. \n");
+        sb.append(border + "\n");
+        String emptyError = sb.toString();
+        sb.setLength(0);
+
         //Scanner obj for input
         Scanner sc = new Scanner(System.in);
 
@@ -42,7 +55,7 @@ public class Duke {
                 //getting the number for item
                 try {
                     int itemNum = Integer.parseInt(input.substring(input.length() - 1));
-                    Task curr = items.get( itemNum - 1);
+                    Task curr = items.get(itemNum - 1);
                     curr.markAsDone();
                     //forming the message
                     sb.append(border + "\n");
@@ -53,17 +66,11 @@ public class Duke {
                     sb.setLength(0);
                     input = sc.nextLine();
                 } catch (IndexOutOfBoundsException e) {
-                    sb.append(border + "\n");
-                    sb.append("Invalid number. Number not listed. \n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
+                    System.out.println(indexError);
                     sb.setLength(0);
                     input = sc.nextLine();
                 } catch (NumberFormatException e) {
-                    sb.append(border + "\n");
-                    sb.append("No input detected. Please enter a number. \n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
+                    System.out.println(emptyError);
                     sb.setLength(0);
                     input = sc.nextLine();
                 }
@@ -72,28 +79,24 @@ public class Duke {
                 try {
                     int itemNum = Integer.parseInt(input.substring(input.length() - 1));
                     Task curr = items.get(itemNum - 1);
-                    items.remove(itemNum - 1);
-
                     //forming the message
                     sb.append(border + "\n");
                     sb.append("Noted! I've removed this task:\n");
                     sb.append(curr + "\n");
+                    sb.append("Now you have " + (items.size() - 1) + " tasks in the list.\n");
                     sb.append(border + "\n");
+
+                    items.remove(itemNum - 1);
+
                     System.out.println(sb.toString());
                     sb.setLength(0);
                     input = sc.nextLine();
                 } catch (IndexOutOfBoundsException e) {
-                    sb.append(border + "\n");
-                    sb.append("Invalid number. Number not listed. \n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
+                    System.out.println(indexError);
                     sb.setLength(0);
                     input = sc.nextLine();
                 } catch (NumberFormatException e) {
-                    sb.append(border + "\n");
-                    sb.append("No input detected. Please enter a number. \n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
+                    System.out.println(emptyError);
                     sb.setLength(0);
                     input = sc.nextLine();
                 }

@@ -1,10 +1,13 @@
 package seedu.duke;
 
-import seedu.duke.Task;
+import seedu.duke.model.Deadline;
+import seedu.duke.model.Event;
+import seedu.duke.model.Task;
+import seedu.duke.model.Todo;
 
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     private static String greetingMsg =
@@ -27,12 +30,30 @@ public class Duke {
         boolean exit = false;
         while (!exit) {
             String input = sc.nextLine();
-            String arr[] = input.split(" ");
+            String arr[] = input.split(" ", 2);
+            String cmd = arr[0]; //command
+
             System.out.println("____________________________________________________________");
             if (input.equals("bye")) {
                 exit = true;
             } else if (input.equals("list")) {
                 displayList(list);
+
+            } else if (cmd.equals("todo")) {
+                addTodo(list, arr[1]);
+
+            } else if (cmd.equals("deadline")) {
+                String arr1[] = arr[1].split(" /by ", 2);
+                String desc = arr1[0];
+                String by = arr1[1];
+                addDeadline(list, desc, by);
+
+            } else if (cmd.equals("event")) {
+                String arr2[] = arr[1].split(" /at ", 2);
+                String desc = arr2[0];
+                String at = arr2[1];
+                addEvent(list, desc, at);
+
             } else if (arr[0].equals("done")) {
                 int index = Integer.valueOf(arr[1]) - 1;
                 list.get(index).markAsDone();
@@ -50,12 +71,11 @@ public class Duke {
     }
 
     private static void displayList(List<Task> list) {
+        System.out.println("Here are the tasks in your list:");
         int index = 0;
         for (Task task : list) {
             index++;
-            System.out.println(index + "." +
-                    task.getStatusIcon() + " " +
-                    task.getDescription());
+            System.out.println(index + "." + task);
         }
     }
 
@@ -63,6 +83,34 @@ public class Duke {
         if (index >= 0) {
             System.out.println(list.get(index));
         }
+    }
+
+    private static int getListSize(List<Task> list) {
+        return list.size();
+    }
+
+    private static void addTodo(List<Task> list, String desc) {
+        System.out.println("Got it. I've added this task:");
+        Todo todo = new Todo(desc);
+        list.add(todo);
+        System.out.println("  " + todo);
+        System.out.println("Now you have " + getListSize(list) + " tasks in the list.");
+    }
+
+    private static void addDeadline(List<Task> list, String desc, String by) {
+        System.out.println("Got it. I've added this task:");
+        Deadline deadline = new Deadline(desc, by);
+        list.add(deadline);
+        System.out.println("  " + deadline);
+        System.out.println("Now you have " + getListSize(list) + " tasks in the list.");
+    }
+
+    private static void addEvent(List<Task> list, String desc, String at) {
+        System.out.println("Got it. I've added this task:");
+        Event event = new Event(desc, at);
+        list.add(event);
+        System.out.println("  " + event);
+        System.out.println("Now you have " + getListSize(list) + " tasks in the list.");
     }
 
     public static void main(String[] args) {

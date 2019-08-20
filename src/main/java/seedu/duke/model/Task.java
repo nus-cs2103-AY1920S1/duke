@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.model;
 
 public class Task {
     protected String description;
@@ -35,7 +35,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]": "[\u2718]");
+        return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
     @Override

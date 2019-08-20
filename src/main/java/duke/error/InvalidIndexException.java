@@ -1,7 +1,7 @@
 package duke.error;
 
-public class InvalidDoneCommandException extends DukeException {
-    public InvalidDoneCommandException(String message) {
+public class InvalidIndexException extends DukeException {
+    public InvalidIndexException(String message) {
         super(message);
     }
 

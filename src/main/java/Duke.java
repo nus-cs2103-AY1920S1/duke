@@ -10,7 +10,7 @@ import duke.task.ToDo;
 import duke.error.DukeException;
 import duke.error.InvalidCommandException;
 import duke.error.InvalidTaskArgumentException;
-import duke.error.InvalidDoneCommandException;
+import duke.error.InvalidIndexException;
 
 public class Duke {
     private List<Task> list;
@@ -80,6 +80,9 @@ public class Duke {
             case "event":
                 this.handleEventCommand(command);
                 break;
+            case "delete":
+                this.handleDeleteCommand(command);
+                break;
             default:
                 throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -113,18 +116,42 @@ public class Duke {
     /**
      * Handle Done command.
      * @param command String
-     * @throws InvalidDoneCommandException if the task to modify is invalid
+     * @throws InvalidIndexException if the task to modify is invalid
+     * @throws InvalidCommandException if the Done command is not correct
      */
-    void handleDoneCommand(String command) throws InvalidDoneCommandException {
+    void handleDoneCommand(String command) throws InvalidIndexException, InvalidCommandException {
         String[] doneArr = command.split(" ");
+        if (doneArr.length != 2) {
+            throw new InvalidCommandException("☹ OOPS!!! Done command should only have a valid index");
+        }
         int indexToEdit = Integer.parseInt(doneArr[1]);
         if (indexToEdit > this.list.size() || indexToEdit < 1) {
-            throw new InvalidDoneCommandException("☹ OOPS!!! Trying to modify invalid task");
+            throw new InvalidIndexException("☹ OOPS!!! Trying to modify invalid task");
         }
         Task task = this.list.get(indexToEdit - 1);
         task.markDone();
         System.out.printf("    Nice! I've marked this task as done:\n");
         this.printStream.printf("      %s\n", task); 
+    }
+
+    /**
+     * Handle Delete command.
+     * @param commandString
+     * @throws InvalidIndex
+     */
+    void handleDeleteCommand(String command) throws InvalidIndexException, InvalidCommandException {
+        String[] deleteArr = command.split(" ");
+        if (deleteArr.length != 2) {
+            throw new InvalidCommandException("☹ OOPS!!! Done command should only have a valid index");
+        }
+        int indexToEdit = Integer.parseInt(deleteArr[1]);
+        if (indexToEdit > this.list.size() || indexToEdit < 1) {
+            throw new InvalidIndexException("☹ OOPS!!! Trying to delete invalid task");
+        }
+        Task removedTask = this.list.remove(indexToEdit - 1);
+        System.out.println("    Noted. I've removed the task:");
+        this.printStream.printf("      %s\n", removedTask); 
+        System.out.printf("    Now you have %d tasks in the list.\n", this.list.size()); 
     }
 
     /**

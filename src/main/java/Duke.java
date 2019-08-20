@@ -28,7 +28,7 @@ public class Duke {
 
             if (command.equals("bye")) {
                 run = false;
-                inputread = "\tBye. Hope to see you again soon!";
+                input = "\tBye. Hope to see you again soon!";
             } else if (command.equals("list")) {
                 System.out.println(divider);
                 System.out.println("\tHere are the tasks in your list:");

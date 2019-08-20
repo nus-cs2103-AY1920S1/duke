@@ -7,14 +7,21 @@ public class Duke {
     private static void listData() {
         String[] taskStrings = new String[Task.totalNumOfTasks + 1];
         taskStrings[0] = "Here are the tasks in your list:";
+        int listIndex = 0;
         for (Task t : Task.taskList) {
-            int id = t.getId();
-            taskStrings[id] = String.format("%d.%s", id, t.toString());
+            listIndex++;
+            //int id = t.getId();
+            //ASSUMPTION: ok fine need to at least print new id, if i dont wanna change the init id
+            taskStrings[listIndex] = String.format("%d.%s", listIndex, t.toString());
         }
         dukeRespond(taskStrings);
     }
     private static void addData(String input) throws InvalidKeywordException,
             EmptyDescriptionException, IncorrectTaskFormatException {
+        if (input.equals("")) {
+            dukeRespond("Did you want to say something? Cus you didn't type anything haha");
+            return;
+        }
         //get task keyword
         Scanner tmp = new Scanner(input);
         String kw = tmp.next();
@@ -44,16 +51,22 @@ public class Duke {
         }
         dukeRespond("Got it. I've added this task:",
                 "  " + newTask.toString(),
-                String.format("Now you have %d task(s) in the list", Task.totalNumOfTasks));
+                String.format("Now you have %d tasks in the list", Task.totalNumOfTasks));
     }
-    private static void markDone(String cmd) throws InvalidIDException {
+    private static void markDone(String cmd) throws InvalidIDException, NoIDGivenException {
         String[] tmp = cmd.split(" ");
-        int id = Integer.parseInt(tmp[1]);
-        //ASSUMING VALID ID; THROW EXCEPTION AND HANDLE IF NEEDED LATER
+
+        if (tmp.length < 2)
+            throw new NoIDGivenException("done");
+
+        int id;
+        try {
+            id = Integer.parseInt(tmp[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidIDException(tmp[1]);
+        }
+
         if (id > Task.totalNumOfTasks || id < 1) {
-            //dukeRespond("Oof invalid id",
-            //        "Wanna try again?");
-            //return;
             throw new InvalidIDException(""+id);
         }
 
@@ -61,6 +74,29 @@ public class Duke {
         task.setCompleted();
         dukeRespond("Nice! I've marked this task as done:",
                 "  " + task.toString());
+    }
+    private static void deleteTask(String cmd) {
+        String[] tmp = cmd.split(" ");
+
+        if (tmp.length < 2)
+            throw new NoIDGivenException("delete");
+
+        int id;
+        try {
+            id = Integer.parseInt(tmp[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidIDException(tmp[1]);
+        }
+
+        if (id > Task.totalNumOfTasks || id < 1) {
+            throw new InvalidIDException(""+id);
+        }
+
+        Task task = Task.taskList.remove(id - 1);
+        Task.totalNumOfTasks--;
+        dukeRespond("Noted. I've removed this task:",
+                "  " + task.toString(),
+                String.format("Now you have %d tasks in the list.", Task.totalNumOfTasks));
     }
 
     public static void dukeRespond(String... inputs) {
@@ -89,13 +125,25 @@ public class Duke {
             !userCmd.equalsIgnoreCase("exit")) {
 
             try {
-                if (userCmd.equalsIgnoreCase("list")) {
-                    listData();
-                } else if (userCmd.split(" ")[0].equalsIgnoreCase("done")) {
-                    markDone(userCmd);
-                } else {
-                    addData(userCmd);
-                }
+                //if (userCmd.equalsIgnoreCase("list")) {
+                //    listData();
+                //} else{
+                    switch (userCmd.split(" ")[0].toLowerCase()) {
+                        case "list":
+                            listData();
+                            break;
+                        case "done":
+                            markDone(userCmd);
+                            break;
+                        case "delete":
+                            deleteTask(userCmd);
+                            break;
+                        default:
+                            addData(userCmd);
+                            break;
+                    }
+
+                //}
             } catch (IllegalArgumentException e) {
                 dukeRespond(e.toString());
             }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,6 +15,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
+        ArrayList<String> todolist = new ArrayList<String>();
 
         while (scanner.hasNext()) {
             String request = scanner.nextLine();
@@ -23,9 +25,17 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 return ;
+            } else if (request.equals("list")) {
+                for (int i = 0; i < todolist.size(); i++) {
+                    String todo = String.format("%d. %s", i+1, todolist.get(i));
+                    System.out.println(todo);
+                }
+            } else {
+                todolist.add(request);
+                String add = String.format("added: %s", request);
+                System.out.println(add);
             }
 
-            System.out.println(request);
             System.out.println("____________________________________________________________");
         }
     }

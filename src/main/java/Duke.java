@@ -26,12 +26,37 @@ public class Duke {
                 Task targetTask = dukeList.get(actualListIndex);
                 targetTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("["+ targetTask.getStatusIcon() + "] "
-                                    + targetTask.getDescription());
-            } else {
-                Task t = new Task(input);
+                System.out.println(targetTask);
+            } else if (inputSplit[0].equals("todo")) {
+                String todoDescription = input.substring(5);
+                Task t = new Todo(todoDescription);
                 dukeList.add(t);
-                System.out.println("added: " + t.getDescription());
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t);
+                System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            } else if (inputSplit[0].equals("deadline")) {
+                int slashLocation = slashLocator(input);
+                int firstIndex = slashLocation - 1;
+                int secondIndex = slashLocation + 4;
+                String deadlineDescription = input.substring(9, firstIndex);
+                String deadlineBy = input.substring(secondIndex);
+                Task t = new Deadline(deadlineDescription, deadlineBy);
+                dukeList.add(t);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t);
+                System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            } else if (inputSplit[0].equals("event")) {
+                int slashLocation = slashLocator(input);
+                int firstIndex = slashLocation - 1;
+                int secondIndex = slashLocation + 4;
+                String eventDescription = input.substring(6, firstIndex);
+                String eventAt = input.substring(secondIndex);
+                Task t = new Event(eventDescription, eventAt);
+                dukeList.add(t);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(t);
+                System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            } else {
             }
         }
     }
@@ -39,9 +64,12 @@ public class Duke {
     public static void displayDukeList() {
         for (int i = 0; i < dukeList.size(); i++) {
             int itemIndex = i + 1;
-            String itemDisplay = itemIndex + ".[" + dukeList.get(i).getStatusIcon() + "] "
-                                 + dukeList.get(i).getDescription();
+            String itemDisplay = itemIndex + "." + dukeList.get(i).toString();
             System.out.println(itemDisplay);
         }
+    }
+
+    public static int slashLocator(String sentence) {
+        return sentence.indexOf("/");
     }
 }

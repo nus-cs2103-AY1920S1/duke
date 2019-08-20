@@ -16,49 +16,56 @@ public class Duke {
         greeting();
 
         while (sc.hasNextLine()) {
-            String command = sc.nextLine();
-            String[] commandArr = command.split(" ");
-            String[] keywords = {};
-            int i = 1; // skip the task type
+            try {
+                String command = sc.nextLine();
+                String[] commandArr = command.split(" ");
+                String[] keywords = {};
+                int i = 1; // skip the task type
 
-            switch (commandArr[0].toLowerCase()) {
+                switch (commandArr[0].toLowerCase()) {
 
-            case "todo":
-                String name = "";
-                for (i = 1; i < commandArr.length; i++) {
-                    name += commandArr[i] + " ";
+                case "todo":
+                    String name = "";
+                    checkCommand(commandArr, "todo");
+                    for (i = 1; i < commandArr.length; i++) {
+                        name += commandArr[i] + " ";
+                    }
+                    handleTodo(name.trim(), counter);
+                    counter++;
+                    break;
+
+                case "deadline":
+                    keywords = splitCommands(commandArr, "/by", "deadline");
+                    handleDeadline(keywords[0], keywords[1], counter);
+                    counter++;
+                    break;
+
+                case "event":
+                    keywords = splitCommands(commandArr, "/at", "event");
+                    handleEvent(keywords[0], keywords[1], counter);
+                    counter++;
+                    break;
+
+                case "list":
+                    printList(counter);
+                    break;
+
+                case "done":
+                    int taskId = Integer.parseInt(commandArr[1]);
+                    handleDone(taskId);
+                    break;
+
+                case "bye":
+                    handleExit();
+                    return;
+
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                handleTodo(name.trim(), counter);
-                counter++;
-                break;
-
-            case "deadline":
-                keywords = splitCommands(commandArr, "/by");
-                handleDeadline(keywords[0], keywords[1], counter);
-                counter++;
-                break;
-
-            case "event":
-                keywords = splitCommands(commandArr, "/at");
-                handleEvent(keywords[0], keywords[1], counter);
-                counter++;
-                break;
-
-            case "list":
-                printList(counter);
-                break;
-
-            case "done":
-                int taskId = Integer.parseInt(commandArr[1]);
-                handleDone(taskId);
-                break;
-
-            case "bye":
-                handleExit();
-                return;
-
-            default:
-                break;
+            } catch (DukeException e) {
+                addBorder(e.getMessage());
+            } catch (ArrayIndexOutOfBoundsException e) { // incase of empty input
+                addBorder("Input cannot be empty!");
             }
         }
 
@@ -76,8 +83,14 @@ public class Duke {
         addBorder("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
+    public static void checkCommand(String[] commandArr, String keyword) throws DukeException {
+        if (commandArr.length < 2) { 
+            throw new DukeException("☹ OOPS!!! The description of a " + keyword + " cannot be empty.");
+        } 
+    }
+
     /* Parse the commands to obtain task name and time for deadline/event tasks */
-    public static String[] splitCommands(String[] commandArr, String keyword) {
+    public static String[] splitCommands(String[] commandArr, String keyword, String taskType) throws DukeException {
         String name = "";
         String time = "";
         boolean flag = false;
@@ -92,8 +105,17 @@ public class Duke {
             }
         }
 
-        String[] output =  { name.trim(), time.trim() };
-        return output;
+        // error handling 
+        if (name.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
+        } else if (!flag) {
+            throw new DukeException("Please remember to put " + keyword + " before the timing.");
+        } else if (time.isEmpty()) {
+            throw new DukeException("Please input the time as well!");
+        } else {
+            String[] output =  { name.trim(), time.trim() };
+            return output;
+        }
     }
 
     public static void addTask(int index, Task task) {

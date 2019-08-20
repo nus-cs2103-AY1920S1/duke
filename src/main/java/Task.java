@@ -1,4 +1,4 @@
-public class Task {
+public class Task implements ITask {
     private String taskName;
     private String taskIcon;
     private boolean isDone;
@@ -30,7 +30,7 @@ public class Task {
      * Returns tick if task is Done, else returns cross
      * @return String symbol
      */
-    private String getDoneSymbol () {
+    private String getDoneSymbol() {
         if(this.isDone) {
             return "✓";
         }

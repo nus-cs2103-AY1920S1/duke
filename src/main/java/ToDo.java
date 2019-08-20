@@ -5,6 +5,12 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Parses the query as a ToDo Task.
+     * @param in A query from the user.
+     * @return A ToDo task
+     * @throws DukeException representing any checked exceptions
+     */
     public static Task parse(Scanner in) throws DukeException {
         in.useDelimiter("\\z");
         if (!in.hasNext()) {

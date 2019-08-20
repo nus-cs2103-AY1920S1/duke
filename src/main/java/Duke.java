@@ -7,22 +7,24 @@ public class Duke {
     //Constants
     private static final String MESSAGE_PADDING  = "     ";
     private static final String MESSAGE_BOUNDARY = "    ____________________________________________________________";
+    private static final String MESSAGE_SAD_FACE = "\u2639";
 
     //Class Variables
     private final List<Task> taskList;
 
     /**
-     * Constructor for the class Duke
+     * Constructor for the class Duke.
      */
     //Constructor
     public Duke() {
         this.taskList = new ArrayList<>();
     }
 
+    //#region [Print Response Helper Functions]
     /**
+     * Prints a single response.
      * @param responseHeader A message to the user.
      */
-    //#region [Print Response Helper Functions]
     private void printResponse(String responseHeader) {
         //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
@@ -36,6 +38,7 @@ public class Duke {
     }
 
     /**
+     * Prints a response and list the given tasks.
      * @param responseHeader A message to the user.
      * @param listOfTasks The list of tasks to be displayed to the user.
      */
@@ -62,6 +65,7 @@ public class Duke {
     }
 
     /**
+     * Prints a single response and list a specified task.
      * @param responseHeader A message to the user.
      * @param refTask The task to be displayed to the user.
      * @param displayNumOfTasks Display number of task(s) in task list
@@ -91,12 +95,13 @@ public class Duke {
     //#endregion [Print Response Helper Functions]
 
     /**
+     * Marks a specified task as done.
      * @param in The query to process.
      * @return The task that was marked as done.
      * @throws DukeException representing any checked exceptions
      */
     //#region [Business Logic]
-    private Task markTaskAsDone(Scanner in) throws DukeException{
+    private Task markTaskAsDone(Scanner in) throws DukeException {
 
         if (!in.hasNextInt()) {
             throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
@@ -117,12 +122,13 @@ public class Duke {
     }
 
     /**
+     * Deletes the specified task.
      * @param in The query to process.
      * @return The task that was deleted.
      * @throws DukeException representing any checked exceptions
      */
     //#region [Business Logic]
-    private Task deleteTask(Scanner in) throws DukeException{
+    private Task deleteTask(Scanner in) throws DukeException {
 
         if (!in.hasNextInt()) {
             throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
@@ -143,6 +149,7 @@ public class Duke {
     }
 
     /**
+     * Executes the user's query and finds the appropriate response.
      * @param query A query from the user.
      * @return A boolean representing whether Duke should continue the chat.
      */
@@ -159,46 +166,46 @@ public class Duke {
 
             //Try to parse User's query
             String command = in.next();
-            switch(command) {
-                case "todo":
-                    newTask = ToDo.parse(in);
-                    break;
+            switch (command) {
+            case "todo":
+                newTask = ToDo.parse(in);
+                break;
 
-                case "deadline":
-                    newTask = Deadline.parse(in);
-                    break;
+            case "deadline":
+                newTask = Deadline.parse(in);
+                break;
 
-                case "event":
-                    newTask = Event.parse(in);
-                    break;
+            case "event":
+                newTask = Event.parse(in);
+                break;
 
-                case "list":
-                    printResponse("Here are the tasks in your list:", this.taskList);
-                    break;
+            case "list":
+                printResponse("Here are the tasks in your list:", this.taskList);
+                break;
 
-                case "done":
-                    Task completedTask = markTaskAsDone(in);
-                    printResponseSingleTask("Nice! I've marked this task as done:",
-                            completedTask, false);
-                    break;
+            case "done":
+                Task completedTask = markTaskAsDone(in);
+                printResponseSingleTask("Nice! I've marked this task as done:",
+                    completedTask, false);
+                break;
 
-                case "delete":
-                    Task deletedTask = deleteTask(in);
-                    printResponseSingleTask("Noted. I've removed this task:",
-                            deletedTask, true);
-                    break;
+            case "delete":
+                Task deletedTask = deleteTask(in);
+                printResponseSingleTask("Noted. I've removed this task:",
+                    deletedTask, true);
+                break;
 
-                case "bye":
-                    shouldContinueChat = false;
-                    printResponse("Bye. Hope to see you again soon!");
-                    break;
+            case "bye":
+                shouldContinueChat = false;
+                printResponse("Bye. Hope to see you again soon!");
+                break;
 
-                default:
-                    throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
+            default:
+                throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException ex) {
             //Info user that an error occurred
-            printResponse("\u2639 OOPS!!! " + ex.getMessage());
+            printResponse(MESSAGE_SAD_FACE + " OOPS!!! " + ex.getMessage());
         } finally {
             //Clean up
             in.close();
@@ -216,7 +223,7 @@ public class Duke {
 
 
     /**
-     * To run Duke's program
+     * To run Duke's program.
      */
     public void spin() {
         boolean continueChat;

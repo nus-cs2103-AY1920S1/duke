@@ -8,6 +8,12 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Parses the query as a Event Task.
+     * @param in A query from the user.
+     * @return A Event task
+     * @throws DukeException representing any checked exceptions
+     */
     public static Task parse(Scanner in) throws DukeException {
 
         String delimiter = "/at ";
@@ -28,6 +34,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()+ " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }

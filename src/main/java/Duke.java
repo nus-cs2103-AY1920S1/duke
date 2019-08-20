@@ -20,8 +20,20 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(ls.get(index));
             } else {
-                ls.add(new Task(s));
-                System.out.println("added: " + s);
+                Task newTask;
+                if (s.startsWith("deadline")) {
+                    String[] phrases = s.substring(9).split(" /by ");
+                    newTask = new Deadline(phrases[0], phrases[1]);
+                } else if (s.startsWith("event")) {
+                    String[] phrases = s.substring(6).split(" /at ");
+                    newTask = new Event(phrases[0], phrases[1]);
+                } else {
+                    newTask = new Todo(s.substring(5));
+                }
+                ls.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
+                System.out.println(String.format("Now you have %d tasks in the list.", Task.getNumberOfTasks()));
             }
         }
 

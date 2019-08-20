@@ -4,12 +4,15 @@ import java.util.ArrayList;
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
 
+    // Messages
     private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String MESSAGE_BYE      = "Bye. Hope to see you again soon!";
-    private static final String MESSAGE_ADD      = "Got it. I've added this task:\n  %s\nNow you have %d %s in the list.";
+    private static final String MESSAGE_ADD      = "Got it. I've added this task:\n  %s\n"
+            + "Now you have %d %s in the list.";
     private static final String MESSAGE_LIST     = "Here are the tasks in your list:\n";
     private static final String MESSAGE_DONE     = "Nice! I've marked this task as done:\n  %s";
 
+    // Errors
     private static final String ERROR_INVALID_INPUT = "I'm sorry, but I don't know what that means :-(";
     private static final String ERROR_MISSING_DESCRIPTION = "The description of a %s cannot be empty.";
     private static final String ERROR_MISSING_TASK_ID = "The id of the task must be provided.";
@@ -19,7 +22,7 @@ public class Duke {
     private static final String ERROR_TOO_MANY_ARGUMENTS = "There are too many arguments for this command.";
 
     /**
-     * Setup Duke.
+     * Setups Duke.
      * @param args Setup arguments
      */
     public static void main(String[] args) {
@@ -28,7 +31,8 @@ public class Duke {
     }
 
     /**
-     * Run Duke.
+     * Runs Duke.
+     * Handles command management.
      */
     private void run() {
         sayGreeting();
@@ -82,14 +86,24 @@ public class Duke {
         sayBye();
     }
 
+    /**
+     * Prints the greeting message for starting Duke.
+     */
     private void sayGreeting() {
         printFormatted(MESSAGE_GREETING);
     }
 
+    /**
+     * Prints the bye message for exiting Duke.
+     */
     private void sayBye() {
         printFormatted(MESSAGE_BYE);
     }
 
+    /**
+     * Prints output in a standardised format.
+     * @param output String to be printed by Duke.
+     */
     private void printFormatted(String output) {
         String horLine = "\t____________________________________________________________";
         String[] lines = output.split("\n");
@@ -102,6 +116,12 @@ public class Duke {
         System.out.println(stringBuilder);
     }
 
+    /**
+     * Adds task to task list.
+     * @param command Type of task.
+     * @param description Description of task.
+     * @throws DukeException If invalid description.
+     */
     private void addTask(String command, String description) throws DukeException {
         Task task;
         switch (command) {
@@ -129,6 +149,9 @@ public class Duke {
                                      this.tasks.size() > 1 ? "tasks" : "task"));
     }
 
+    /**
+     * Prints current task listing.
+     */
     private void printTasks() {
         StringBuilder lines = new StringBuilder();
         int counter = 0;
@@ -140,6 +163,10 @@ public class Duke {
         printFormatted(lines.toString());
     }
 
+    /**
+     * Marks task as completed.
+     * @param id Id of task to mark completed.
+     */
     private void doTask(int id) {
         Task task = this.tasks.get(id - 1);
         task.markAsDone();

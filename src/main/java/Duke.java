@@ -13,9 +13,17 @@ public class Duke {
         String input;
         String output;
         while(!(input = sc.nextLine()).equals("bye")) {
-            switch(input) {
+            String[] splitInput = input.split(" ");
+            String command = splitInput[0];
+            switch(command) {
                 case "list":
                     output = historyToString(history);
+                    break;
+                case "done":
+                    int selectedIndex = Integer.parseInt(splitInput[1]) - 1;
+                    Task task = history.get(selectedIndex);
+                    task.markAsDone();
+                    output = getMarkTaskAsDoneOutput(task);
                     break;
                 default:
                     history.add(new Task(input));
@@ -26,6 +34,12 @@ public class Duke {
 
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(wrap(endMessage));
+    }
+
+    private static String getMarkTaskAsDoneOutput(Task task) {
+        return "Nice! I've marked this task as done: \n"
+                + indent
+                + task.toString();
     }
 
     private static String historyToString(List<Task> history) {

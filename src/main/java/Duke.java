@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.StringJoiner;
+import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Duke {
@@ -23,6 +25,52 @@ public class Duke {
                     taskComplete(currTask);
                     break;
 
+                case "todo":
+                    StringJoiner todoDescription = new StringJoiner(" ");
+                    for (int i = 1; i < commandArr.length; i++) {
+                        todoDescription.add(commandArr[i]);
+                    }
+                    Task todo = new ToDo(todoDescription.toString());
+                    taskList.add(todo);
+                    printTask(todo, taskList.size());
+                    break;
+
+                case "event":
+                    StringJoiner atTime = new StringJoiner(" ");
+                    StringJoiner eventDescription = new StringJoiner(" ");
+                    int indexEvent = Arrays.asList(commandArr).indexOf("/at");
+
+                    for (int i = indexEvent + 1; i < commandArr.length; i++) {
+                        atTime.add(commandArr[i]);
+                    }
+
+                    for (int i = 1; i < indexEvent; i++) {
+                        eventDescription.add(commandArr[i]);
+                    }
+
+                    Task event = new Event(eventDescription.toString(), atTime.toString());
+                    taskList.add(event);
+                    printTask(event, taskList.size());
+                    break;
+
+                case "deadline":
+                    StringJoiner timeLimit = new StringJoiner(" ");
+                    StringJoiner taskDescription = new StringJoiner(" ");
+                    int index = Arrays.asList(commandArr).indexOf("/by");
+
+                    for (int i = index + 1; i < commandArr.length; i++) {
+                        timeLimit.add(commandArr[i]);
+                    }
+
+                    for (int i = 1; i < index; i++) {
+                        taskDescription.add(commandArr[i]);
+                    }
+
+                    Task deadline = new Deadline(taskDescription.toString(), timeLimit.toString());
+                    taskList.add(deadline);
+                    printTask(deadline, taskList.size());
+                    break;
+
                 case "bye":
                     exit();
                     run = false;
@@ -37,6 +85,14 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    private static void printTask(Task task, int size) {
+        printLine();
+        System.out.println("     Got it. I've added this task: \n       " + task);
+        System.out.printf("     Now you have %d tasks in the list.\n", size);
+        printLine();
+        System.out.println();
     }
 
     private static void taskComplete(Task currTask) {

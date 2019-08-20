@@ -2,20 +2,33 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        printline("Hello! I'm Duke\n     What can I do for you?");
+        greet();
+
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
         while (!input.equals("bye")) {
-            printline(input);
+            echo(input);
             input = sc.next();
         }
-        printline("Bye. Hope to see you again soon!");
+
+        exit();
     }
 
-    public static void printline(String s) {
+    public static void greet() {
+        echo("Hello! I'm Duke\nWhat can I do for you?");
+    }
+
+    public static void exit() {
+        echo("Bye. Hope to see you again soon!");
+    }
+
+    public static void echo(String s) {
+        String[] arr = s.split("\n");
         String indentedline = "    ____________________________________________________________";
         System.out.println(indentedline);
-        System.out.println("     " + s);
+        for (String str : arr) {
+            System.out.println("     " + str);
+        }
         System.out.println(indentedline);
     }
 }

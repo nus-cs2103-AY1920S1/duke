@@ -3,6 +3,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a product named Duke, a personal assistant chat bot that helps a person to keep track of various things.
+ * It can add, delete, and list task entries and mark them as done.
+ */
 public class Duke {
     private static final String INDENTATION_LVL1 = "     "; // 5 spaces, for first level indentation.
     private static final String INDENTATION_LVL2 = "       "; // 7 spaces, for second level indentation (i.e. more inner).
@@ -12,15 +16,25 @@ public class Duke {
     private static final String LINE = "    ___________________________________________________________________________\n";
     private static final int CHARACTERS_LIMIT = 73; // length that a string to be printed should not exceed.
 
+    /**
+     * Construct a Duke chat bot.
+     */
     public Duke() {
         taskList = new LinkedList<>();
     }
 
+    /**
+     * Run the entire program.
+     *
+     * @param args user input (not required).
+     */
     public static void main(String[] args) {
         new Duke().start();
     }
 
-    // Start Duke bot
+    /**
+     * Start the Duke chat bot.
+     */
     public void start() {
         printWelcomeMessage();
         receiveCommand();
@@ -39,7 +53,7 @@ public class Duke {
         });
     }
 
-    // Receive command from the user, exits the program when user enter "bye"
+    // Receive command from the user, exits the program when user enter "bye".
     private void receiveCommand() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -70,7 +84,7 @@ public class Duke {
         }
     }
 
-    // add to do entry to the taskList
+    // add to do entry to the taskList.
     private void addToDo(String command) throws DukeException {
         String topic = command.substring(4).trim();
 
@@ -81,7 +95,7 @@ public class Duke {
         addTask(new ToDo(topic));
     }
 
-    // add deadline entry to the taskList
+    // add deadline entry to the taskList.
     private void addDeadline(String command) throws DukeException {
         String[] details = command.substring(8).trim().split("/by");
 
@@ -94,7 +108,7 @@ public class Duke {
         addTask(new Deadline(topic, deadline));
     }
 
-    // add event entry to the taskList
+    // add event entry to the taskList.
     private void addEvent(String command) throws DukeException {
         String[] details = command.substring(5).trim().split("/at");
 
@@ -107,7 +121,7 @@ public class Duke {
         addTask(new Event(topic, date));
     }
 
-    // add Task entries(to do, deadline & event) to the taskList
+    // add Task entries(to do, deadline & event) to the taskList.
     private void addTask(Task task) {
         taskList.add(task);
 
@@ -118,7 +132,7 @@ public class Duke {
         });
     }
 
-    // delete a task from the taskList
+    // delete a task from the taskList.
     private void deleteTask(String command) throws DukeException {
         try {
             int index = Integer.parseInt(command.substring(6).trim());
@@ -139,7 +153,7 @@ public class Duke {
         }
     }
 
-    // Mark a task in the task list as done
+    // Mark a task in the task list as done.
     private void markTaskAsDone(String command) throws DukeException {
         try {
             int index = Integer.parseInt(command.substring(4).trim());
@@ -160,7 +174,7 @@ public class Duke {
         }
     }
 
-    // List all the tasks in the taskList
+    // List all the tasks in the taskList.
     private void list() {
         echo(() -> {
             System.out.print(INDENTATION_LVL1 + "Here are the tasks in your list:\n");
@@ -176,6 +190,7 @@ public class Duke {
 
     /**
      * print the stuff specified by the printFunction, enclosed within two lines.
+     *
      * @param printFunction function which print something.
      */
     public void echo(PrintFunction printFunction) {
@@ -188,6 +203,7 @@ public class Duke {
     /**
      * Print the strings provided line by line, enclosed within two long horizontal lines.
      * Each line is indented by 5 spaces.
+     *
      * @param strings strings to be printed.
      */
     public void echo(String... strings) {
@@ -220,7 +236,7 @@ public class Duke {
         StringBuilder builder = new StringBuilder(string.length() + 30);
         String indentation_string = getIndentationString(indentation);
 
-        // Remove the spaces in front of the given string first
+        // Remove the spaces in front of the given string first.
         String string_to_be_treated = string.trim();
 
         int lengthLimit = getLengthLimit(indentation);
@@ -241,7 +257,7 @@ public class Duke {
         return builder.toString();
     }
 
-    // Return an indentation String
+    // Return an indentation String.
     private String getIndentationString(int indentation) {
         if (indentation == INDENTATION_LVL1.length()) {
             return INDENTATION_LVL1;
@@ -268,7 +284,7 @@ public class Duke {
         return size > 1 ? size + " tasks" : size + " task";
     }
 
-    // Return the number of characters allowed in one line after taking indentation into consideration
+    // Return the number of characters allowed in one line after taking indentation into consideration.
     private int getLengthLimit(int indentation) {
         return CHARACTERS_LIMIT - (indentation - INDENTATION_LVL1.length());
     }

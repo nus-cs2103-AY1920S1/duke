@@ -1,11 +1,11 @@
 /**
- * An interface used for printing.
+ * This is a functional interface and can be used for a lamda expression that is used for printing messages.
  */
+@FunctionalInterface
 public interface PrintFunction {
     /**
      * Print the things specified in the implementation of this method.
-     * This method is used for specifying what to be printed, and hence allowing objects of this interface type
-     * to be passed around to other methods.
+     * The implementation specifies what and how things should be printed.
      */
     void print();
 }

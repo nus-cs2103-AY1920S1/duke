@@ -1,6 +1,15 @@
+/**
+ * Encapsulates a task object of type Deadline.
+ */
 public class Deadline extends Task {
     private String deadline;
 
+    /**
+     * Construct a Deadline object.
+     *
+     * @param topic the topic of the deadline.
+     * @param deadline its deadline.
+     */
     public Deadline(String topic, String deadline) {
         super(topic);
         this.deadline = deadline;

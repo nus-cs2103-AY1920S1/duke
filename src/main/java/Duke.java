@@ -5,7 +5,6 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        String[] wordArr;
         ArrayList<Task> taskList = new ArrayList<>();
 
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -22,10 +21,7 @@ public class Duke {
 
         while (true) {
 
-            String text = sc.nextLine();
-            wordArr = text.split(" ");
-
-            String command = wordArr[0];
+            String command = sc.next();
 
             if (command.equals("list")) {
                 System.out.println("\t____________________________________________________________");
@@ -36,7 +32,7 @@ public class Duke {
                 System.out.println("\t____________________________________________________________\n");
             } else if (command.equals("done")) {
                 // Get number
-                int taskNum = Integer.valueOf(wordArr[1]);
+                int taskNum = Integer.valueOf(sc.next());
                 taskList.get(taskNum).setAsDone();
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\n\tNice! I have marked this task as done: ");
@@ -48,12 +44,46 @@ public class Duke {
                 System.out.println("\n\tBye. Hope to see you again soon!");
                 System.out.println("\t____________________________________________________________\n");
                 break;
-            } else {
-                // Create task
-                Task t = new Task(text);
-                taskList.add(t);
+            } else if (command.equals("todo")) {
+
+                String str = sc.nextLine();
+
+                // Create ToDo object
+                ToDo toDoTask = new ToDo(str);
+                taskList.add(toDoTask);
+
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\n\t" + "added: " + text);
+                System.out.println("\n\tGot it! I've added this task: ");
+                System.out.println("\n\t" + toDoTask.toString());
+                System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
+                System.out.println("\t____________________________________________________________\n");
+
+            } else if (command.equals("deadline")) {
+
+                String str = sc.nextLine();
+                String[] wordArr = str.split("/by", 2);
+
+                // Create DeadLine object
+                DeadLine d = new DeadLine(wordArr[0], wordArr[1]);
+                taskList.add(d);
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\n\tGot it! I've added this task: ");
+                System.out.println("\n\t" + d.toString());
+                System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
+                System.out.println("\t____________________________________________________________\n");
+
+            } else if (command.equals("event")) {
+
+                String str = sc.nextLine();
+                String[] wordArr = str.split("/at", 2);
+
+                // Create Event Object
+                Event e = new Event(wordArr[0], wordArr[1]);
+                taskList.add(e);
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\n\tGot it! I've added this task: ");
+                System.out.println("\n\t" + e.toString());
+                System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                 System.out.println("\t____________________________________________________________\n");
             }
         }

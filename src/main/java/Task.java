@@ -1,7 +1,8 @@
-public class Task{
-    private String description;
-    private boolean isDone;
-    
+public abstract class Task{
+    protected String description;
+    protected boolean isDone;
+    protected String taskType;
+
     public Task(String description){
         this.description = description;
         this.isDone = false;
@@ -15,13 +16,11 @@ public class Task{
         return this.description;
     }
 
-    public Task markAsDone(){
-        Task completedTask = new Task(this.description);
-        completedTask.isDone = true;
-        return completedTask;
+    public abstract Task markAsDone();
+
+    public String getTaskType(){
+        return this.taskType;
     }
 
-    public String printTaskStatus(){
-        return ("[" + this.getStatusIcon() + "] " + this.getTaskDescription());
-    }
+    public abstract String printTaskStatus();
 }

@@ -1,23 +1,27 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 public class Duke {
     private static String divider = "    " + "-".repeat(61);
-    private static List<String> dataList = new ArrayList<>();
-    private static int dataSize = 0;
 
     private static void listData() {
-        String[] dataStrings = new String[dataSize];
-        dukeRespond(dataList.toArray(dataStrings));
+        String[] taskStrings = new String[Task.totalNumOfTasks];
+        for (Task t : Task.taskList) {
+            taskStrings[t.getId() - 1] = t.toString();
+        }
+        dukeRespond(taskStrings);
     }
     private static void addData(String data) {
-        dataSize++;
-        dataList.add(String.format("%d. %s", dataSize, data));
-        dukeRespond("added: " + data);
+        Optional<Task> newTask = Task.createTask(data, false);
+        if (newTask.isEmpty()) {
+            dukeRespond("Ohnoes you didn't key in a valid command!",
+                    "Please try again friend \\o/");
+        } else {
+            dukeRespond("added: " + data);
+        }
     }
 
-    private static void dukeRespond(String... inputs) {
+    public static void dukeRespond(String... inputs) {
         System.out.println(divider);
         for (String str : inputs) {
             System.out.println("     " + str);
@@ -38,12 +42,9 @@ public class Duke {
         //start listening for user input
         Scanner sc = new Scanner(System.in);
         String userCmd = sc.nextLine();
-        //System.out.println(userCmd);
+
         while (!userCmd.equals("bye")) {
-            /*lvl1: echo cmd
-            dukeRespond(userCmd);
-            */
-            //lvl2: store and display when required
+
             if (userCmd.equals("list")) {
                 listData();
             } else {

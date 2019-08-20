@@ -1,9 +1,8 @@
-import java.security.cert.CertificateRevokedException;
 import java.util.Scanner;
 import java.util.LinkedList;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         LinkedList<Task> allTasks = new LinkedList<>();
         String line = "____________________________________________________________";
@@ -25,9 +24,12 @@ public class Duke {
                     System.out.println("Here are the tasks in your list:");
                     allTasks.forEach(x -> System.out.println((allTasks.indexOf(x) + 1) + ". " + x));
                 } else if (t.description.contains("done")) {
-                    // Mark item of interest as done
-                    int indexToMark = Integer.parseInt(t.description.split(" ")[1]);
-                    allTasks.get(indexToMark - 1).markAsDone();
+                    // Mark task as specified as done
+                    int indexToMark = Integer.parseInt(t.description.split(" ")[1]) - 1;
+                    allTasks.get(indexToMark).markAsDone();
+                } else if (t.description.contains("delete")) {
+                    // Delete task as specified
+                    System.out.println(deleteTask(t, allTasks));
                 } else if (t.description.contains("todo")) {
                     //Process to-do-task
                     try {
@@ -72,6 +74,18 @@ public class Duke {
     public static String addTask(Task t, LinkedList<Task> allTasks) {
         allTasks.add(t);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + t);
+        if (allTasks.size() == 1) {
+            sb.append("\nNow you have " + allTasks.size() + " task in the list.");
+        } else {
+            sb.append("\nNow you have " + allTasks.size() + " tasks in the list.");
+        }
+        return sb.toString();
+    }
+
+    public static String deleteTask(Task t, LinkedList<Task> allTasks) {
+        int indexToDelete = Integer.parseInt(t.description.split(" ")[1]) - 1;
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n" + allTasks.get(indexToDelete));
+        allTasks.remove(indexToDelete);
         if (allTasks.size() == 1) {
             sb.append("\nNow you have " + allTasks.size() + " task in the list.");
         } else {

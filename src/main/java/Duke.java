@@ -1,7 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Duke {
+    boolean exited = false;
 
     public void respond() {
         Scanner scanner = new Scanner(System.in);
@@ -9,11 +12,12 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
 
-        while (scanner.hasNextLine()) {
+        while (!exited && scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
             switch (input) {
                 case "bye":
+                    exited = true;
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
 

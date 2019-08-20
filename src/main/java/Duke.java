@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> todolist = new ArrayList<String>();
+        ArrayList<Task> todolist = new ArrayList<Task>();
 
         while (scanner.hasNext()) {
             String request = scanner.nextLine();
@@ -27,11 +27,18 @@ public class Duke {
                 return ;
             } else if (request.equals("list")) {
                 for (int i = 0; i < todolist.size(); i++) {
-                    String todo = String.format("%d. %s", i+1, todolist.get(i));
+                    String todo = String.format("%d. %s", i+1, todolist.get(i).toString());
                     System.out.println(todo);
                 }
+            } else if (request.startsWith("done")) {
+                char num = request.charAt(request.length() - 1);
+                int index = Character.getNumericValue(num);
+                Task task = todolist.get(index - 1);
+                task.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(task.toString());
             } else {
-                todolist.add(request);
+                todolist.add(new Task(request));
                 String add = String.format("added: %s", request);
                 System.out.println(add);
             }

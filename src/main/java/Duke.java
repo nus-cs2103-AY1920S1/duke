@@ -13,7 +13,8 @@ public class Duke {
         }
         dukeRespond(taskStrings);
     }
-    private static void addData(String input) throws InvalidKeywordException, EmptyDescriptionException {
+    private static void addData(String input) throws InvalidKeywordException,
+            EmptyDescriptionException, IncorrectTaskFormatException {
         //get task keyword
         Scanner tmp = new Scanner(input);
         String kw = tmp.next();
@@ -25,7 +26,6 @@ public class Duke {
         tmp.close();
 
         Task newTask;
-        System.out.println(kw);
         switch (kw.toLowerCase()) {
             case "deadline":
                 newTask = Deadline.create(descr);

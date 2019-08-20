@@ -6,27 +6,36 @@ public class Event extends Task {
     private String notesInBrackets;
 
     private Event() {}
-    private Event(String descr, boolean completed, int id) {
+    private Event(String descr, boolean completed, int id) throws IncorrectTaskFormatException {
         super.completed = completed;
         super.id = id;
         super.taskType = TaskType.E;
 
         setupDetails(descr);
     }
-    private void setupDetails(String input) {
+    private void setupDetails(String input) throws IncorrectTaskFormatException {
         String[] tmp = input.split("/");
         //inputs should only have <=1 '/' characters
+        if (tmp.length < 2)
+            throw new IncorrectTaskFormatException("at");
+
         this.description = tmp[0];
         Scanner tmp2 = new Scanner(tmp[1]);
         String term = tmp2.next();
-        String datetime = tmp2.nextLine();
+        String datetime = "";
+        if (tmp2.hasNext())
+            datetime = tmp2.nextLine();
         tmp2.close();
+
+        if (datetime.equals(""))
+            throw new IncorrectTaskFormatException("at");
+
         this.notesInBrackets = String.format("%s:%s", term, datetime);
 
         super.description = String.format("%s(%s)", this.description, this.notesInBrackets);
     }
 
-    public static Event create(String descr) throws EmptyDescriptionException {
+    public static Event create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {
         if (descr.equals(""))
             throw new EmptyDescriptionException("an event");
 

@@ -18,52 +18,77 @@ public class Duke {
         int taskCount;
 
         while (check.equals("bye") == false) {
-            input = sc.nextLine();
-            check = input.toLowerCase();
-            if (check.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i <= taskStorage.size(); i++) {
-                    Task evaluatingTask = taskStorage.get(i - 1);
-                    System.out.println(i + "." + evaluatingTask.toString());
-                }
-                System.out.println();
-                continue;
-            }
+             try {
+                 input = sc.nextLine();
+                 check = input.toLowerCase();
+                 if (check.equals("list")) {
+                     System.out.println("Here are the tasks in your list:");
+                     for (int i = 1; i <= taskStorage.size(); i++) {
+                         Task evaluatingTask = taskStorage.get(i - 1);
+                         System.out.println(i + "." + evaluatingTask.toString());
+                     }
+                     System.out.println();
+                     continue;
+                 }
 
-            String[] dueSplit = input.split("/");
-            String due = "dummy";
-            if (dueSplit.length > 1) {
-                due = dueSplit[1];
-            }
-            String[] doneMarkers = dueSplit[0].split(" ", 2);
-            String userCommand = doneMarkers[0].toLowerCase();
-            String taskDescription = "dummy";
-            if (doneMarkers.length > 1) {
-                taskDescription = doneMarkers[1];
-            }
+                 String[] dueSplit = input.split("/");
+                 String due = "dummy";
+                 if (dueSplit.length > 1) {
+                     due = dueSplit[1];
+                 }
+                 String[] doneMarkers = dueSplit[0].split(" ", 2);
+                 String userCommand = doneMarkers[0].toLowerCase();
+                 String taskDescription = "dummy";
+                 if (doneMarkers.length > 1) {
+                     taskDescription = doneMarkers[1];
+                 }
 
-            if(userCommand.equals("done")) {
-                Task taskDone = taskStorage.get(Integer.valueOf(taskDescription) - 1);
-                taskDone.markAsDone();
-                System.out.println("Nice! I've marked this task as done: " + "\n"
-                        + "    " + taskDone + "\n");
-            } else if (check.equals("bye") == false) {
-                Task t = new Task("");
-                if (userCommand.equals("todo")) {
-                    t = new Todo(taskDescription);
-                    taskStorage.add(t);
-                } else if (userCommand.equals("deadline")) {
-                    t = new Deadline(taskDescription, due);
-                    taskStorage.add(t);
-                } else if (userCommand.equals("event")) {
-                    t = new Event(taskDescription, due);
-                    taskStorage.add(t);
-                }
+                 if (userCommand.equals("done")) {
+                     int target = Integer.valueOf(taskDescription);
+                     Task taskDone;
+                     if (taskStorage.size() >= target) {
+                         taskDone = taskStorage.get(target - 1);
+                     } else {
+                         throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
+                     }
+                     taskDone.markAsDone();
+                     System.out.println("Nice! I've marked this task as done: " + "\n"
+                             + "    " + taskDone + "\n");
+                 } else if (check.equals("bye") == false) {
+                     Task t = new Task("");
+                     if (userCommand.equals("todo")) {
+                         if (taskDescription.equals("dummy")) {
+                             throw new EmptyToDoDescriptionException("The description of a todo cannot be empty.");
+                         }
+                         t = new Todo(taskDescription);
+                         taskStorage.add(t);
+                     } else if (userCommand.equals("deadline")) {
+                         if (taskDescription.equals("dummy")) {
+                             throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
+                         } else if (due.equals("dummy")) {
+                             throw new EmptyDueDateException("The due date and time of this deadline is not specified.");
+                         }
+                         t = new Deadline(taskDescription, due);
+                         taskStorage.add(t);
+                     } else if (userCommand.equals("event")) {
+                         if (taskDescription.equals("dummy")) {
+                             throw new EmptyDescriptionException("The description of a event cannot be empty.");
+                         } else if (due.equals("dummy")) {
+                             throw new EmptyDueDateException("The due date and time of this task are not specified.");
+                         }
+                         t = new Event(taskDescription, due);
+                         taskStorage.add(t);
+                     } else {
+                         throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
+                     }
 
-                taskCount = Task.getTaskCount();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("    " + t);
-                System.out.println(taskCounter(taskCount) + "\n");
+                     taskCount = Task.getTaskCount();
+                     System.out.println("Got it. I've added this task:");
+                     System.out.println("    " + t);
+                     System.out.println(taskCounter(taskCount) + "\n");
+                 }
+             } catch (DukeException ex) {
+                System.out.println("    ☹ OOPS!!! " + ex.getMessage() + "\n");
             }
         }
 

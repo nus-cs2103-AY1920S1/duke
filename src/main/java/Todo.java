@@ -1,5 +1,6 @@
-public class Todo extends Task {
-	
+// Adapted from https://nus-cs2103-ay1920s1.github.io/website/schedule/week2/project.html 
+
+public class Todo extends Task {	
 	public Todo(String description) {
 		super(description);
 	}

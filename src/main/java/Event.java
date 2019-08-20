@@ -1,5 +1,6 @@
-public class Event extends Task {
-	
+// Adapted from https://nus-cs2103-ay1920s1.github.io/website/schedule/week2/project.html 
+
+public class Event extends Task {	
     protected String at;
 
     public Event(String description, String at) {

@@ -27,22 +27,28 @@ public class TaskList {
         }
     }
 
+    /**
+     * Performs any modification on list - add/delete/markDone
+     * @param commandDescription - Command input given by user
+     */
     private void modifyList(String[] commandDescription) throws InvalidCommandError {
         try {
             if(commandDescription.length <= 1) {
                 throw new IncompleteCommandError("empty");
             }
             switch(commandDescription[0]) {
+                case "delete":
                 case "done":
-                    this.markTaskDone(commandDescription);
+                    this.modifyTask(commandDescription);
                     break;
                 case "todo":
-                    this.addTodo(commandDescription);
+                case "deadline":
+                case "event":
+                    this.addTask(commandDescription);
                     printSuccessfulAddMessage();
                     break;
                 default:
-                    this.addTaskWithDate(commandDescription);
-                    printSuccessfulAddMessage();
+                    throw new InvalidCommandError(commandDescription[0]);
             }
         } catch(IncompleteCommandError e) {
             System.out.println("☹ OOPS!!! The description of a " + commandDescription[0] + " cannot be "
@@ -51,7 +57,44 @@ public class TaskList {
     }
 
     /**
-     * Adds new task into list
+     * Performs any modification on task - delete/markDone
+     * @param commandDescription - Input given by user
+     */
+    private void modifyTask(String[] commandDescription) throws InvalidCommandError {
+        if(commandDescription.length != 2) {
+            throw new InvalidCommandError(commandDescription[0]);
+        }
+        try {
+            switch(commandDescription[0]) {
+                case "delete":
+                    this.deleteTask(commandDescription);
+                    break;
+                case "done":
+                    this.markTaskDone(commandDescription);
+            }
+        } catch(NumberFormatException e) {
+            throw new InvalidCommandError(commandDescription[0]);
+        } catch(IndexOutOfBoundsException e) {
+            System.out.println("There is/are only " + this.list.size() + " item(s) in the list :( ");
+        }
+    }
+
+    /**
+     * Performs any addition of task on list
+     * @param commandDescription - Input given by user
+     */
+    private void addTask(String[] commandDescription) throws IncompleteCommandError {
+        switch(commandDescription[0]) {
+            case "todo":
+                this.list.add(new ToDoTask(commandDescription[1]));
+                break;
+            default:
+                addTaskWithDate(commandDescription);
+        }
+    }
+
+    /**
+     * Adds new task (with date) into list
      * @param commandDescription - array of strings containing command description
      */
     private void addTaskWithDate(String[] commandDescription) throws IncompleteCommandError {
@@ -71,8 +114,11 @@ public class TaskList {
         }
     }
 
-    private void addTodo(String[] commandDescription) {
-        this.list.add(new ToDoTask(commandDescription[1]));
+    private void deleteTask(String[] commandDescription) throws NumberFormatException, IndexOutOfBoundsException {
+        int idx = Integer.parseInt(commandDescription[1]);
+        Task task = this.list.get(idx-1);
+        this.list.remove(idx-1);
+        printDeleteTaskMessage(task);
     }
 
     /**
@@ -80,18 +126,8 @@ public class TaskList {
      * @param commandDescription - array of strings containing command description
      */
     private void markTaskDone(String[] commandDescription) throws InvalidCommandError {
-        try {
-            int idx = Integer.parseInt(commandDescription[1]);
-            this.list.get(idx-1).markDone();
-        } catch(NumberFormatException e) {
-            throw new InvalidCommandError(commandDescription[0]);
-        } catch(IndexOutOfBoundsException e) {
-            if(this.list.size() == 1) {
-                System.out.println("There is only " + this.list.size() + " item in the list :( ");
-            } else {
-                System.out.println("There are only " + this.list.size() + " items in the list :( ");
-            }
-        }
+        int idx = Integer.parseInt(commandDescription[1]);
+        this.list.get(idx-1).markDone();
     }
 
     /**
@@ -112,9 +148,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out message after successful addition of task
+     */
     private void printSuccessfulAddMessage() {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + this.list.get(list.size()-1));
+        System.out.println("Now you have " + this.list.size() + " tasks in the list.");
+    }
+
+    /**
+     * Prints out message after successful deletion of task
+     * @param task - Task that has been successfully deleted
+     */
+    private void printDeleteTaskMessage(Task task) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
         System.out.println("Now you have " + this.list.size() + " tasks in the list.");
     }
 }

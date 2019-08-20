@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 public class DukeException extends Exception{
     public DukeException() {
@@ -6,7 +6,7 @@ public class DukeException extends Exception{
     }
 
     public DukeException(String msg) {
-        super("OOPS!!! The description/time of a " + msg + " cannot be empty.");
+        super(msg);
     }
 
     public DukeException(String msg, Throwable cause) {

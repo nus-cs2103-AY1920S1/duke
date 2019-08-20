@@ -1,7 +1,6 @@
 package main.java;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
@@ -38,38 +37,49 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String[] commands = sc.nextLine().split(" ");
-            String[] args = Arrays.copyOfRange(commands, 1, commands.length);
-
-            switch (commands[0]) {
-                case "event":
-                    String[] eventArgs = String.join(" ", args).split("/at");
-                    Task eventTask = taskList.add(new Event(eventArgs[0].strip(), eventArgs[1].strip()));
-                    System.out.println(TOP_SEPARATOR + messageAddTask(eventTask) + BOTTOM_SEPARATOR);
-                    break;
-                case "deadline":
-                    String[] todoArgs = String.join(" ", args).split("/by");
-                    Task deadlineTask = taskList.add(new Deadline(todoArgs[0].strip(), todoArgs[1].strip()));
-                    System.out.println(TOP_SEPARATOR + messageAddTask(deadlineTask) + BOTTOM_SEPARATOR);
-                    break;
-                case "todo":
-                    String task = String.join(" ", args);
-                    Task todoTask = taskList.add(new Todo(task));
-                    System.out.println(TOP_SEPARATOR + messageAddTask(todoTask) + BOTTOM_SEPARATOR);
-                    break;
-                case "done":
-                    int doneIdx = Integer.valueOf(commands[1]);
-                    taskList.markAsDone(doneIdx);
-                    System.out.println(TOP_SEPARATOR + DONE_MESSAGE + "\t" + taskList.get(doneIdx) + "\n" + BOTTOM_SEPARATOR);
-                    break;
-                case "list":
-                    System.out.println(TOP_SEPARATOR + taskList.format() + BOTTOM_SEPARATOR);
-                    break;
-                case "bye":
-                    System.out.println(TOP_SEPARATOR + EXIT_MESSAGE + BOTTOM_SEPARATOR);
-                    return;
-                default:
-                    System.out.println(TOP_SEPARATOR + ERROR_MESSAGE + BOTTOM_SEPARATOR);
-                    break;
+            String[] args = commands.length >= 2
+                                ? Arrays.copyOfRange(commands, 1, commands.length)
+                                : new String[0];
+            try {
+                switch (commands[0]) {
+                    case "event":
+                        String[] eventArgs = String.join(" ", args).split("/at");
+                        Task eventTask = taskList.add(new Event(eventArgs[0].strip(), eventArgs[1].strip()));
+                        System.out.println(TOP_SEPARATOR + messageAddTask(eventTask) + BOTTOM_SEPARATOR);
+                        break;
+                    case "deadline":
+                        String[] todoArgs = String.join(" ", args).split("/by");
+                        Task deadlineTask = taskList.add(new Deadline(todoArgs[0].strip(), todoArgs[1].strip()));
+                        System.out.println(TOP_SEPARATOR + messageAddTask(deadlineTask) + BOTTOM_SEPARATOR);
+                        break;
+                    case "todo":
+                        if (args.length == 0) {
+                            throw new DukeMissingDescriptionException(":'( OOPS!!! The description of a todo cannot be empty.");
+                        } else {
+                            String task = String.join(" ", args);
+                            Task todoTask = taskList.add(new Todo(task));
+                            System.out.println(TOP_SEPARATOR + messageAddTask(todoTask) + BOTTOM_SEPARATOR);
+                        }
+                        break;
+                    case "done":
+                        int doneIdx = Integer.valueOf(commands[1]);
+                        taskList.markAsDone(doneIdx);
+                        System.out.println(TOP_SEPARATOR + DONE_MESSAGE + "\t" + taskList.get(doneIdx) + "\n" + BOTTOM_SEPARATOR);
+                        break;
+                    case "list":
+                        System.out.println(TOP_SEPARATOR + taskList.format() + BOTTOM_SEPARATOR);
+                        break;
+                    case "bye":
+                        System.out.println(TOP_SEPARATOR + EXIT_MESSAGE + BOTTOM_SEPARATOR);
+                        return;
+                    default:
+                        throw new DukeMissingDescriptionException(":'( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            }
+            catch (DukeUnknownInputException | DukeMissingDescriptionException e) {
+                System.out.println(TOP_SEPARATOR
+                        + "\t" + e.getMessage() + "\n"
+                        + BOTTOM_SEPARATOR);
             }
         }
     }

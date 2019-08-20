@@ -23,12 +23,16 @@ public class Duke {
                 }
                 command = input.nextLine();
             } else {
-                if (!command.isEmpty()) {
-                    Task newTask = generateNewTask(command);
-                    taskList.addTask(newTask);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + newTask.toString());
-                    System.out.println("Now you have " + taskList.numTasks  + " tasks in the list");
+                try {
+                    if (!command.isEmpty()) {
+                        Task newTask = generateNewTask(command);
+                        taskList.addTask(newTask);
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println("  " + newTask.toString());
+                        System.out.println("Now you have " + taskList.numTasks + " tasks in the list");
+                    }
+                } catch (DukeException err) {
+                    System.out.println(err.getMessage());
                 }
                 command = input.nextLine();
             }
@@ -38,27 +42,39 @@ public class Duke {
         System.out.println(farewell);
     }
 
-    public static Task generateNewTask(String task) {
-        String type = task.substring(0, task.indexOf(' '));
-        String taskDescription = task.substring(task.indexOf(' ') + 1);
-        Task newTask = new Task("dummy");
+    public static Task generateNewTask(String task) throws DukeException {
+        try {
+            String type = task.substring(0, task.indexOf(' '));
+            String taskDescription = task.substring(task.indexOf(' ') + 1);
+            Task newTask = new Task("dummy");
 
-        if (type.equals("todo")) {
-            newTask = new ToDo(taskDescription);
-        } else if (type.equals("deadline")) {
-            String[] sentence = taskDescription.split("/by");
-            String description = sentence[0];
-            String deadline = sentence[1];
-            newTask = new Deadline(description, deadline);
-        } else if (type.equals("event")) {
-            String[] sentence = taskDescription.split("/at");
-            String description = sentence[0];
-            String time = sentence[1];
-            newTask = new Event(description, time);
-        } else {
-            System.out.println("Wrong format");
+            if (type.equals("todo")) {
+                newTask = new ToDo(taskDescription);
+            }
+
+            if (type.equals("deadline")) {
+                String[] sentence = taskDescription.split("/by");
+                String description = sentence[0];
+                String deadline = sentence[1];
+                newTask = new Deadline(description, deadline);
+            }
+
+            if (type.equals("event")) {
+                String[] sentence = taskDescription.split("/at");
+                String description = sentence[0];
+                String time = sentence[1];
+                newTask = new Event(description, time);
+            }
+
+            return newTask;
+
+        } catch (StringIndexOutOfBoundsException rootError) {
+            // if task type is correct, then error is due to empty description.
+            if (task.equals("todo") | task.equals("deadline") | task.equals("event")) {
+                throw new EmptyDescriptionException(task, rootError);
+            } else {
+                throw new UnknownTaskTypeException();
+            }
         }
-
-        return newTask;
     }
 }

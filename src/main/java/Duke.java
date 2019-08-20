@@ -68,7 +68,7 @@ public class Duke {
                         System.out.println(divider);
                         break;
 
-                    case ("deadline"):
+                    case ("deadline") :
                         System.out.println(divider);
                         String remainingStuff2 = sc.nextLine();
                         input = input + remainingStuff2;
@@ -82,8 +82,16 @@ public class Duke {
                         System.out.println("Now you have " + arr.size() + " tasks in the list.");
                         System.out.println(divider);
                         break;
+                    case ("delete") :
+                        int position = sc.nextInt();
+                        System.out.println("Noted. I've removed this task.");
+                        System.out.println(arr.get(position-1));
+                        arr.remove(position-1);
+                        System.out.println("Now you have " + arr.size() + " tasks in the list");
+                        break;
 
                     default:
+                        sc.nextLine();
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException dx) {

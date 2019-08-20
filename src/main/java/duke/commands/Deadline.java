@@ -4,7 +4,6 @@ import duke.Command;
 import duke.Duke;
 import duke.DukeException;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Deadline extends Command {

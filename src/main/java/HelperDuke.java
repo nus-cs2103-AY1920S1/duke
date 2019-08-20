@@ -10,25 +10,48 @@ public class HelperDuke {
 
         //input action
         Scanner s = new Scanner(System.in);
-        String action = s.nextLine().toLowerCase();
+        String action = s.next().toLowerCase();
 
         while (!action.equals("bye")) {
-            if(action.equals("list")) {
-                duke.listAll();
-            } else if (action.contains("done")) {
-                //mark the specific task
-                int index = Integer.parseInt(action.substring(5,6));
-                duke.markAsDone(index);
-            } else {
-                //keep account of all the texts
-                duke.add(action);
+            switch (action) {
+                case "list":
+                    duke.listAll();
+                    break;
+                case "done":
+                    //get the specified task
+                    int index = s.nextInt();
+                    duke.markAsDone(index);
+                    break;
+                case "todo":
+                    Todo todo = new Todo(s.nextLine());
+                    duke.add(todo);
 
-                //echo the text added
-                duke.echo(action);
+                    //echo the text added
+                    duke.echo(todo);
+
+                    break;
+                case "deadline":
+                    String[] d = s.nextLine().split("/by", 2);
+                    Deadline deadline = new Deadline(d[0], d[1]);
+                    duke.add(deadline);
+
+                    //echo the text added
+                    duke.echo(deadline);
+
+                    break;
+                case "event":
+                    String[] e = s.nextLine().split(" /at ", 2);
+                    Event event = new Event(e[0], e[1]);
+                    duke.add(event);
+
+                    //echo the text added
+                    duke.echo(event);
+
+                    break;
             }
 
             //ask for next action
-            action = s.nextLine().toLowerCase();
+            action = s.next().toLowerCase();
         }
 
         //ending

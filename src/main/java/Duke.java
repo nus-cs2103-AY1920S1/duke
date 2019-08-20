@@ -23,10 +23,7 @@ public class Duke {
         line();
     }
 
-    void add(String s) {
-        //add task
-        Task task = new Task(s);
-
+    void add(Task task) {
         //add task into the list of tasks
         tasks.add(task);
     }
@@ -44,9 +41,11 @@ public class Duke {
         line();
     }
 
-    void echo(String s) {
+    void echo(Task task) {
         line();
-        System.out.println("\tadded: " + s);
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t " + task.toString());
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
         line();
     }
 

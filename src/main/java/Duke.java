@@ -23,23 +23,37 @@ public class Duke {
 
         // Start reading input
         while(sc.hasNextLine()){
-            String readInput = sc.nextLine();
+            String readInput = sc.next();
 
             // Include case-insensitive bye
             if(readInput.toLowerCase().equals("bye")) {
                 System.out.println(processText(goodbye));
                 break;
             }
+
             else if (readInput.toLowerCase().equals("list")){
                 System.out.println(HORIZONTAL_LINE);
+
                 for(int i = 0; i < listCounter; i++){
                     String processedTaskString = "\t" + (i + 1)
                             + "." + list.get(i).getStatusIcon() + " " + list.get(i).getTaskItem();
                     System.out.println(processedTaskString);
                 }
+
                 System.out.println(HORIZONTAL_LINE);
             }
+
+            else if(readInput.toLowerCase().equals("done")){
+                // Might need to implement exception handling
+                int indexDone = sc.nextInt();
+
+                list.get(--indexDone).setDone();
+            }
+
             else{
+                // Read any remaining lines
+                readInput = readInput + sc.nextLine();
+
                 // Store content
                 list.add(new Task(readInput, false));
                 listCounter++;

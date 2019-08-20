@@ -16,7 +16,7 @@ public class Duke {
         LinkedList<String> lst = new LinkedList<>();
 
         Scanner sc = new Scanner(System.in);
-        String word = sc.next();
+        String word = sc.nextLine();
 
         while (!word.equals("bye")) {
             if (word.equals("list")) {
@@ -29,7 +29,7 @@ public class Duke {
                 System.out.println("added: " + word);
                 lst.add(word);
             }
-            word = sc.next();
+            word = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }

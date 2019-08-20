@@ -39,38 +39,50 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("  " + curr_task);
     }
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
         duke.introduction();
-        while(sc.hasNextLine()) {
-            String command = sc.nextLine();
-            if(command.equals("bye")) {
-                duke.exit();
-                return;
-            } else if(command.equals("list")) {
-                duke.list();
-            } else if(command.startsWith("done ")) {
-                String[] splited = command.split(" ");
-                if(splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
-                    duke.done(Integer.parseInt(splited[1]));
+        try {
+            while(sc.hasNextLine()) {
+                String command = sc.nextLine();
+                if (command.equals("bye")) {
+                    duke.exit();
+                    return;
+                } else if (command.equals("list")) {
+                    duke.list();
+                } else if (command.startsWith("done ")) {
+                    String[] splited = command.split(" ");
+                    if (splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
+                        duke.done(Integer.parseInt(splited[1]));
+                    } else {
+                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                } else if (command.startsWith("todo")) {
+                    if(command.equals("todo") || command.equals("todo ")) {
+                        throw new EmptyToDoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    ToDo curr_task = new ToDo(command.replaceFirst("todo ", ""));
+                    duke.add(curr_task);
+                } else if (command.startsWith("deadline ")) {
+                    String[] splited = command.split(" /by ");
+                    splited[0].replaceFirst("deadline ", "");
+                    Deadline curr_task = new Deadline(splited[0], splited[1]);
+                    duke.add(curr_task);
+                } else if (command.startsWith("event ")) {
+                    String[] splited = command.split(" /at ");
+                    splited[0].replaceFirst("event ", "");
+                    Event curr_task = new Event(splited[0], splited[1]);
+                    duke.add(curr_task);
                 } else {
-                    //Todo: Handle error
+                    throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } else if(command.startsWith("todo ")) {
-                ToDo curr_task = new ToDo(command.replaceFirst("todo ", ""));
-                duke.add(curr_task);
-            } else if(command.startsWith("deadline ")) {
-                String[] splited = command.split(" /by ");
-                splited[0].replaceFirst("deadline ", "");
-                Deadline curr_task = new Deadline(splited[0], splited[1]);
-                duke.add(curr_task);
-            } else if(command.startsWith("event ")) {
-                String[] splited = command.split(" /at ");
-                splited[0].replaceFirst("event ", "");
-                Event curr_task = new Event(splited[0], splited[1]);
-                duke.add(curr_task);
             }
+        } catch(InvalidInputException ex) {
+            System.out.println(ex.getMessage());
+        } catch(EmptyToDoDescriptionException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

@@ -20,13 +20,15 @@ public class Duke {
                         list.printList();
                         break;
                     case "done":
-                        int num = Integer.parseInt(wordArray[1]);
-                        list.markAsDone(num);
+                        list.markAsDone(Integer.parseInt(wordArray[1]));
                         break;
                     case "todo":
                     case "event":
                     case "deadline":
                         list.addToList(input);
+                        break;
+                    case "delete":
+                        list.delete(Integer.parseInt(wordArray[1]));
                         break;
                     default:
                         throw new DukeException();

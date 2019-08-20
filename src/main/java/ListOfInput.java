@@ -38,7 +38,7 @@ public class ListOfInput {
         } catch (DukeException a) {
             print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " cannot be empty.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " does not follow the specified format");
+            print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " does not follow the specified format.");
         }
     }
 
@@ -47,6 +47,14 @@ public class ListOfInput {
         task.isDone();
         print("    Nice! I've marked this task as done:");
         System.out.println("    " + task);
+    }
+
+    public void delete(int num) {
+        Task deletedTask = list.get(num - 1);
+        list.remove(num - 1);
+        print("    Noted. I've removed this task:");
+        System.out.println("        " + deletedTask);
+        print("    Now you have " + list.size() + " tasks in the list.");
     }
 
     public void printList() {

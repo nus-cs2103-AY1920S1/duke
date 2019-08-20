@@ -17,7 +17,12 @@ public class Duke {
                 break;
             } else if (line.equals("list")){
                 tasksHolder.printTasks();
-            } else {
+            } else if(line.contains(" ") && line.split(" ")[0].equals("done")){
+                int index = Integer.valueOf(line.split(" ")[1]);
+                tasksHolder.taskDone(index);
+            }
+
+            else {
                 Task currTask = new Task(line);
                 tasksHolder.addTask(currTask);
             }

@@ -1,39 +1,94 @@
 import java.util.Scanner;
-
-import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        LinkedList<String> inputList = new LinkedList<>();
+
         greet();
-        String line = line();
-        String exit = "Bye. Hope to see you again soon!";
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            System.out.printf("    %s%n    %s%n    %s%n", line, input, line);
-            input = sc.nextLine();
+            if (!input.equals("list")) {
+                printLine();
+
+                printIndent();
+                System.out.println("added: " + input);
+
+                printLine();
+
+                inputList.add(input);
+
+                input = sc.nextLine();
+            } else {
+                printList(inputList);
+
+                input = sc.nextLine();
+            }
         }
 
-        System.out.printf("    %s%n    %s%n    %s%n", line, exit, line);
+        exit();
     }
 
-    public static String line() {
+    public static echo(String input) {
+        printLine();
+
+        System.out.println()
+    }
+
+    public static void printLine() {
         StringBuilder line = new StringBuilder();
 
-        for (int i = 0; i < 35; i++) {
+        for (int i = 0; i < 60; i++) {
             line.append("_");
         }
 
         String stringLine = line.toString();
-        return stringLine;
+        printIndent();
+        System.out.println(stringLine);
+    }
+
+    public static void printIndent() {
+        System.out.print("    ");
     }
 
     public static void greet() {
-        String line = line();
         String greeting = "Hello! I'm Duke\n" +
                 "    What can I do for you?";
 
-        System.out.printf("    %s%n    %s%n    %s%n", line, greeting, line);
+        printLine();
+
+        printIndent();
+        System.out.println(greeting);
+
+        printLine();
+    }
+
+    public static void exit() {
+        String exitMessage = "Bye. Hope to see you again soon";
+
+        printLine();
+
+        printIndent();
+        System.out.println(exitMessage);
+
+        printLine();
+    }
+
+    public static void printList(LinkedList<String> stringList) {
+        ListIterator<String> iter = stringList.listIterator();
+        int count = 1;
+
+        printLine();
+
+        while (iter.hasNext()) {
+            printIndent();
+            System.out.println(count + ". " + iter.next());
+            count++;
+        }
+
+        printLine();
     }
 }

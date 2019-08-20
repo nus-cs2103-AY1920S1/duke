@@ -27,7 +27,7 @@ public class Duke {
                     Task newTask = generateNewTask(command);
                     taskList.addTask(newTask);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(newTask.toString());
+                    System.out.println("  " + newTask.toString());
                     System.out.println("Now you have " + taskList.numTasks  + " tasks in the list");
                 }
                 command = input.nextLine();

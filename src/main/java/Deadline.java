@@ -3,7 +3,11 @@ public class Deadline extends Task {
 
 	public Deadline(String description, String by) {
 		super(description);
-		this.by = by;
+		try {
+			this.by = Parser.parseDateTime(by);
+		} catch (Exception e) {
+			this.by = by;
+		}
 	}
 
 	@Override

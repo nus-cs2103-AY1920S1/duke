@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,8 +13,8 @@ public class Duke {
         //Store command-line input as String
         String input = "";
 
-        //Create array of tasks
-        Task list[]= new Task[100];
+        //Create ArrayList of tasks - dynamic array
+        ArrayList<Task> list = new ArrayList<>();
 
         //Set index of number of task
         int n = 0;
@@ -46,7 +47,7 @@ public class Duke {
                 System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < n; i++) {
                     System.out.print("     " + (i+1) + ".");
-                    System.out.println(list[i].toString());
+                    System.out.println(list.get(i));
                 }
             }
             else if (input.contains("done")) {
@@ -59,7 +60,7 @@ public class Duke {
               // Optional error handling - if entry does not exist and is marked 'done'
                 try {
                     //Mark task as done
-                    list[index-1].isDone = true;
+                    list.get(index-1).isDone = true;
                 }
                 catch (NullPointerException err){
                     System.out.println("     List entry does not exist!");
@@ -67,11 +68,28 @@ public class Duke {
                     System.out.println("");
                     continue;
                     }
-                System.out.println("     Nice! I've marked this task as done: ");
-                System.out.print("       ");
-                System.out.println(list[index-1].toString());
 
-            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.print("       "); //indentation
+                System.out.println(list.get(index-1));
+
+            } else if (input.contains("delete")) {
+                //Assumption: fixed format - remove first 6 characters to get index. i.e. "delete"
+                String value = input.substring(6);
+
+                //Get integer found in user input
+                int index = Integer.parseInt(value.trim()); //Remove any blank space
+                System.out.println("     Noted. I've removed this task: ");
+                System.out.print("       "); //indentation
+                System.out.println(list.get(index-1)); //index start from 0
+
+                //Remove task from list
+                list.remove(index-1); //index start from 0
+                n -= 1; //Remove 1 task from total
+                System.out.println("     Now you have " + (n) + " tasks in the list.");
+            }
+
+            else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
                 String[] substrings = input.split(" ");
                 String action = substrings[0];
                 try {
@@ -89,7 +107,7 @@ public class Duke {
 
                     case "todo":
                         String subT = input.replace("todo", "");
-                        list[n] = new ToDo(subT.trim()); //Remove blank spaces
+                        list.add(new ToDo(subT.trim())); //Remove blank spaces
                         break;
 
                     case "deadline":
@@ -98,7 +116,7 @@ public class Duke {
                         String[] partsD = subD.split("\\/by");
                         String descriptionD = partsD[0].trim(); //Remove blank spaces
                         String by = partsD[1].trim(); //Remove blank spaces
-                        list[n] = new Deadline(descriptionD, by);
+                        list.add(new Deadline(descriptionD, by));
                         break;
 
                     case "event":
@@ -108,13 +126,13 @@ public class Duke {
                         String[] partsE = sub3.split("\\/at");
                         String descriptionE = partsE[0].trim(); //Remove blank spaces
                         String at = partsE[1].trim(); //Remove blank spaces
-                        list[n] = new Event(descriptionE, at);
+                        list.add(new Event(descriptionE, at));
                         break;
                 }
 
                 System.out.println("     Got it. I've added this task:");
                 System.out.print("       "); //indentation
-                System.out.println(list[n].toString());
+                System.out.println(list.get(n));
 
                 //After storing user input into array, increment index
                 n += 1;

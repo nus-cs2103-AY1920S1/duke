@@ -17,7 +17,6 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
                 break;
             } else if (word.equals("list")) {
-                System.out.println("    ____________________________________________________________");
                 for (int i = 1; i < count + 1; i++) {
                         System.out.print("     " + i + ". ");
                         System.out.println(arr[i-1]);

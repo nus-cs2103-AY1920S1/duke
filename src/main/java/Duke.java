@@ -4,13 +4,13 @@ import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String IDENTATION_LVL1 = "     "; // 5 spaces, for first level indentation.
-    private static final String IDENTATION_LVL2 = "  "; // 2 spaces, for second level indentation (i.e. more inner).
+    private static final String INDENTATION_LVL1 = "     "; // 5 spaces, for first level indentation.
+    private static final String INDENTATION_LVL2 = "       "; // 7 spaces, for second level indentation (i.e. more inner).
     private List<Task> taskList;
 
     // 79 characters, excluding \n. Line is of length 75 characters.
     private static final String LINE = "    ___________________________________________________________________________\n";
-    private static final int PRINT_THRESHOLD = 73; // length that a string to be printed should not exceed.
+    private static final int CHARACTERS_LIMIT = 73; // length that a string to be printed should not exceed.
 
     public Duke() {
         taskList = new LinkedList<>();
@@ -20,6 +20,7 @@ public class Duke {
         new Duke().start();
     }
 
+    // Start Duke bot
     public void start() {
         printWelcomeMessage();
         receiveCommand();
@@ -32,11 +33,13 @@ public class Duke {
                 + "     | |_| | |_| |   <  __/\n"
                 + "     |____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.print(LINE + logo + "\n");
-        System.out.print(IDENTATION_LVL1 + "Hello! I'm Duke\n" + IDENTATION_LVL1 + "What can I do for you?\n");
-        System.out.print(LINE + "\n");
+        echo(() -> {
+            System.out.print(logo + "\n");
+            System.out.print(INDENTATION_LVL1 + "Hello! I'm Duke\n" + INDENTATION_LVL1 + "What can I do for you?\n");
+        });
     }
 
+    // Receive command from the user, exits the program when user enter "bye"
     private void receiveCommand() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -67,6 +70,7 @@ public class Duke {
         }
     }
 
+    // add to do entry to the taskList
     private void addToDo(String command) throws DukeException {
         String topic = command.substring(4).trim();
 
@@ -77,6 +81,7 @@ public class Duke {
         addTask(new ToDo(topic));
     }
 
+    // add deadline entry to the taskList
     private void addDeadline(String command) throws DukeException {
         String[] details = command.substring(8).trim().split("/by");
 
@@ -89,6 +94,7 @@ public class Duke {
         addTask(new Deadline(topic, deadline));
     }
 
+    // add event entry to the taskList
     private void addEvent(String command) throws DukeException {
         String[] details = command.substring(5).trim().split("/at");
 
@@ -101,13 +107,18 @@ public class Duke {
         addTask(new Event(topic, date));
     }
 
+    // add Task entries(to do, deadline & event) to the taskList
     private void addTask(Task task) {
         taskList.add(task);
-        echo("Got it. I've added this task:",
-                String.format("%s%s", IDENTATION_LVL2, task.toString()),
-                String.format("Now you have %s in the list.", getTaskWord()));
+
+        echo(() -> {
+            System.out.printf("%sGot it. I've added this task:\n", INDENTATION_LVL1);
+            System.out.printf(indentAndSplit(task.toString(), INDENTATION_LVL2));
+            System.out.printf(String.format("%sNow you have %s in the list.\n", INDENTATION_LVL1, getTaskPhrase()));
+        });
     }
 
+    // delete a task from the taskList
     private void deleteTask(String command) throws DukeException {
         try {
             int index = Integer.parseInt(command.substring(6).trim());
@@ -118,14 +129,17 @@ public class Duke {
 
             Task task = taskList.remove(index - 1);
 
-            echo("Noted. I've removed this task:",
-                    String.format("%s%s", IDENTATION_LVL2, task.toString()),
-                    String.format("Now you have %s in the list.", getTaskWord()));
+            echo(() -> {
+                System.out.printf("%sNoted. I've removed this task:\n", INDENTATION_LVL1);
+                System.out.printf(indentAndSplit(task.toString(), INDENTATION_LVL2)); // task details
+                System.out.printf("%sNow you have %s in the list.\n", INDENTATION_LVL1, getTaskPhrase());
+            });
         } catch (NumberFormatException e) {
             echo(String.format("%s There can only be an integer after the word \"delete\"", DukeException.PREFIX ));
         }
     }
 
+    // Mark a task in the task list as done
     private void markTaskAsDone(String command) throws DukeException {
         try {
             int index = Integer.parseInt(command.substring(4).trim());
@@ -136,64 +150,88 @@ public class Duke {
 
             Task task = taskList.get(index - 1);
             task.markAsDone();
-            echo("Nice! I've marked this task as done:",
-                    String.format("%s%s", IDENTATION_LVL2, task.toString()));
+
+            echo(() -> {
+                System.out.printf("%sNice! I've marked this task as done:\n", INDENTATION_LVL1);
+                System.out.printf(indentAndSplit(task.toString(), INDENTATION_LVL2)); // task details
+            });
         } catch (NumberFormatException e) {
             echo(String.format("%s There can only be an integer after the word \"done\"", DukeException.PREFIX ));
         }
     }
 
+    // List all the tasks in the taskList
     private void list() {
-        System.out.print(LINE);
-        System.out.print(IDENTATION_LVL1 + "Here are the tasks in your list:\n");
-        ListIterator<Task> iterator = taskList.listIterator();
+        echo(() -> {
+            System.out.print(INDENTATION_LVL1 + "Here are the tasks in your list:\n");
+            ListIterator<Task> iterator = taskList.listIterator();
 
-        for (int i = 0; i < taskList.size(); i++) {
-            String taskDetails = iterator.next().toString();
-            if (taskDetails.length() <= PRINT_THRESHOLD - 3) {
-                System.out.printf("%s%d.%s\n", IDENTATION_LVL1, i + 1, taskDetails);
-            } else {
-                System.out.printf(splitIntoLines(String.format("%d.%s\n", i + 1, taskDetails)));
+            for (int i = 0; i < taskList.size(); i++) {
+                String taskDetails = iterator.next().toString();
+                System.out.printf(indentAndSplit(String.format("%d.%s", i + 1, taskDetails),
+                        INDENTATION_LVL1));
             }
-        }
-
-        System.out.print(LINE);
-        System.out.print('\n');
+        });
     }
 
     /**
-     * print the strings provided line by line, enclosed within two lines.
-     * @param strings Strings to be printed.
+     * print the stuff specified by the printFunction, enclosed within two lines.
+     * @param printFunction function which print something.
      */
-    public void echo(String... strings) {
+    public void echo(PrintFunction printFunction) {
         System.out.print(LINE);
-
-        for (String string : strings) {
-            if (string.length() <= PRINT_THRESHOLD) {
-                System.out.printf("%s%s\n", IDENTATION_LVL1, string);
-            } else {
-                System.out.print(splitIntoLines(string));
-            }
-        }
-
+        printFunction.print();
         System.out.print(LINE);
         System.out.print("\n");
     }
 
-    private String splitIntoLines(String string) {
-        // To deal with the case where the length of string to be printed is greater than the print threshold.
-        StringBuilder builder = new StringBuilder(string.length() + 30);
-        String string_to_be_treated = string;
+    /**
+     * Print the strings provided line by line, enclosed within two long horizontal lines.
+     * Each line is indented by 5 spaces.
+     * @param strings strings to be printed.
+     */
+    public void echo(String... strings) {
+        echo(() -> {
+            for (String string : strings) {
+                System.out.print(indentAndSplit(string, INDENTATION_LVL1));
+            }
+        });
+    }
 
-        // Should return a list of strings without adding any identation?
+    // Indent a string using the indentation string given and add a newline character at the back.
+    // If the length of the string is more than the number of characters allowed in a line
+    // (taking the indentation into account), split the string into separate lines.
+    private String indentAndSplit(String string, String indentation) {
+        int lengthLimit = getLengthLimit(indentation.length());
+
+        if (string.length() <= lengthLimit) {
+            return String.format("%s%s\n", indentation, string);
+        } else {
+            return splitIntoLines(string, indentation.length());
+        }
+    }
+
+    /*
+     * Split a given string into lines if it's more than the characters limit allowed in one line
+     * , with indentation in front of the string in each line.
+     * Indentation Number is the number of spaces in front of a string in each line.
+     */
+    private String splitIntoLines(String string, int indentation) {
+        StringBuilder builder = new StringBuilder(string.length() + 30);
+        String indentation_string = getIndentationString(indentation);
+
+        // Remove the spaces in front of the given string first
+        String string_to_be_treated = string.trim();
+
+        int lengthLimit = getLengthLimit(indentation);
         while (true) {
-            builder.append(IDENTATION_LVL1);
-            builder.append(string_to_be_treated.substring(0, PRINT_THRESHOLD));
+            builder.append(indentation_string);
+            builder.append(string_to_be_treated.substring(0, lengthLimit));
             builder.append("\n");
 
-            string_to_be_treated = string_to_be_treated.substring(PRINT_THRESHOLD);
-            if (string_to_be_treated.length() <= PRINT_THRESHOLD) {
-                builder.append(IDENTATION_LVL1);
+            string_to_be_treated = string_to_be_treated.substring(lengthLimit);
+            if (string_to_be_treated.length() <= lengthLimit) {
+                builder.append(indentation_string);
                 builder.append(string_to_be_treated);
                 builder.append("\n");
                 break;
@@ -203,12 +241,35 @@ public class Duke {
         return builder.toString();
     }
 
+    // Return an indentation String
+    private String getIndentationString(int indentation) {
+        if (indentation == INDENTATION_LVL1.length()) {
+            return INDENTATION_LVL1;
+        } else if (indentation == INDENTATION_LVL2.length()) {
+            return INDENTATION_LVL2;
+        } else {
+            StringBuilder identationBuilder = new StringBuilder(indentation);
+            for (int i = 0; i < indentation; i++) {
+                identationBuilder.append(" ");
+            }
+            return identationBuilder.toString();
+        }
+    }
+
+    // Check if a user-given index for accessing the taskList is valid.
     private boolean indexIsValid(int index) {
         return index > 0 && index <= taskList.size();
     }
 
-    private String getTaskWord() {
+    // Return the phrase "N word" or "N words" (singular or plural).
+    // N is the the number of tasks in the taskList.
+    private String getTaskPhrase() {
         int size = taskList.size();
         return size > 1 ? size + " tasks" : size + " task";
+    }
+
+    // Return the number of characters allowed in one line after taking indentation into consideration
+    private int getLengthLimit(int indentation) {
+        return CHARACTERS_LIMIT - (indentation - INDENTATION_LVL1.length());
     }
 }

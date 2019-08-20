@@ -19,7 +19,6 @@ then
     exit 1
 fi
 
-# Test 1
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
@@ -27,21 +26,9 @@ java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 diff ACTUAL.TXT EXPECTED.TXT
 if [ $? -eq 0 ]
 then
-    echo "Test 1 result: PASSED"
-else
-    echo "Test 1 result: FAILED"
-    exit 1
-fi
-
-# Test 2
-java -classpath ../bin Duke < input2.txt > ACTUAL2.TXT
-
-diff ACTUAL2.TXT EXPECTED2.TXT
-if [ $? -eq 0 ]
-then
-    echo "Test 2 result: PASSED"
+    echo "Test result: PASSED"
     exit 0
 else
-    echo "Test 2 result: FAILED"
+    echo "Test result: FAILED"
     exit 1
 fi

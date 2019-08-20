@@ -41,6 +41,17 @@ public class Main {
                     System.out.println("\t  Nice! I've marked this task as done:");
                     System.out.println("\t    " + strArr.get(indexDone - 1));
                     System.out.println(horizontal_line);
+                } else if (inputArr[0].equals("delete")) {
+                    Integer indexRemove = Integer.valueOf(inputArr[1]);
+                    Task deletedTask = strArr.get(indexRemove - 1);
+                    strArr.remove(indexRemove - 1);
+
+                    System.out.println(horizontal_line);
+                    System.out.println("\t  Noted. I've removed this task:");
+                    System.out.println("\t    " + deletedTask);
+                    System.out.println("\t  Now you have " + strArr.size() +" tasks in the list.");
+                    System.out.println(horizontal_line);
+
                 } else if (inputArr[0].equals("todo")) {
                     // todo event
                     if (inputArr.length == 1) {

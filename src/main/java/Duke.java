@@ -43,6 +43,7 @@ public class Duke {
         String taskDescription = task.substring(task.indexOf(' ') + 1);
         Task newTask = new Task("dummy");
 
+        // Create the appropriate Task type
         if (type.equals("todo")) {
             newTask = new ToDo(taskDescription);
         } else if (type.equals("deadline")) {

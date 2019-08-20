@@ -44,14 +44,42 @@ public class Duke {
         running = false;
     }
 
-    public static void addToList() {
-        Task toAdd = new Task(input);
-        list.add(toAdd);
-        System.out.println(
-                "    ____________________________________________________________\n" +
-                        String.format("     added: %s\n", toAdd) +
-                        "    ____________________________________________________________\n"
-        );
+    public static void addTaskToList() {
+        Task taskToAdd = null;
+        String checkType[] = input.split(" ", 2);
+        String typeOfTask = checkType[0];
+        String theTask = checkType[1];
+        // switch statement for todo, deadline, task
+        switch(typeOfTask) {
+            case "todo":
+                taskToAdd = new ToDo(theTask);
+                list.add(taskToAdd);
+                break;
+
+            case "deadline":
+                String taskByWhen[] = theTask.split(" /", 2);
+                String deadlineTask = taskByWhen[0];
+                String byWhen = taskByWhen[1];
+                taskToAdd = new Deadline(deadlineTask, byWhen);
+                list.add(taskToAdd);
+                break;
+
+            case "event":
+                String taskAtTime[] = theTask.split(" /", 2);
+                String eventTask = taskAtTime[0];
+                String atTime = taskAtTime[1];
+                taskToAdd = new Event(eventTask, atTime);
+                list.add(taskToAdd);
+                break;
+
+            default:
+                break;
+        }
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + taskToAdd);
+        System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
+        System.out.println("    ____________________________________________________________");
     }
 
     public static void printList() {
@@ -95,7 +123,7 @@ public class Duke {
                 break;
 
             default:
-                addToList();
+                addTaskToList();
         }
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke {
+public class Duke{
     private static String greetingMsg =
             "____________________________________________________________\n" +
             "Hello! I'm Duke\n" +
@@ -22,7 +22,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static void run() {
+    private static void run() throws DukeException{
         Scanner sc = new Scanner(System.in);
         List<Task> list = new ArrayList<>();
 
@@ -31,7 +31,11 @@ public class Duke {
         while (!exit) {
             String input = sc.nextLine();
             String arr[] = input.split(" ", 2);
+
             String cmd = arr[0]; //command
+            String description = "";
+            if (arr.length >= 2)
+                description = arr[1];
 
             System.out.println("____________________________________________________________");
             if (input.equals("bye")) {
@@ -40,19 +44,33 @@ public class Duke {
                 displayList(list);
 
             } else if (cmd.equals("todo")) {
-                addTodo(list, arr[1]);
+                if (validate(description, cmd)) {
+                    addTask(list, cmd, description, "");
+                } else {
+                    throw new DukeException(cmd);
+                }
 
             } else if (cmd.equals("deadline")) {
-                String arr1[] = arr[1].split(" /by ", 2);
-                String desc = arr1[0];
-                String by = arr1[1];
-                addDeadline(list, desc, by);
+                if (validate(description, cmd)) {
+                    String arr1[] = description.split(" /by ", 2);
+                    validateTime(arr1);
+                    String desc = arr1[0];
+                    String by = arr1[1];
+                    addTask(list, cmd, desc, by);
+                } else {
+                    throw new DukeException(cmd);
+                }
 
             } else if (cmd.equals("event")) {
-                String arr2[] = arr[1].split(" /at ", 2);
-                String desc = arr2[0];
-                String at = arr2[1];
-                addEvent(list, desc, at);
+                if (validate(description, cmd)) {
+                    String arr2[] = description.split(" /at ", 2);
+                    validateTime(arr2);
+                    String desc = arr2[0];
+                    String at = arr2[1];
+                    addTask(list, cmd, desc, at);
+                } else {
+                    throw new DukeException(cmd);
+                }
 
             } else if (arr[0].equals("done")) {
                 int index = Integer.valueOf(arr[1]) - 1;
@@ -61,13 +79,26 @@ public class Duke {
                 displayTask(list, index);
 
             } else {
-                list.add(new Task(input));
-                System.out.println("added: " + input);
+                //incorrect command
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             System.out.println("____________________________________________________________");
         }
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("____________________________________________________________");
+    }
+
+    private static boolean validate(String test, String cmd){
+        if (test.equals("") || test == null) {
+            return false;
+        }
+        return true;
+    }
+
+    private static void validateTime(String[] arr) throws DukeException{
+        if (arr.length <= 1) {
+            throw new DukeException("command");
+        }
     }
 
     private static void displayList(List<Task> list) {
@@ -85,35 +116,22 @@ public class Duke {
         }
     }
 
-    private static int getListSize(List<Task> list) {
-        return list.size();
-    }
-
-    private static void addTodo(List<Task> list, String desc) {
+    private static void addTask(List<Task> list, String cmd, String desc, String time) {
         System.out.println("Got it. I've added this task:");
-        Todo todo = new Todo(desc);
-        list.add(todo);
-        System.out.println("  " + todo);
-        System.out.println("Now you have " + getListSize(list) + " tasks in the list.");
+        Task task = null;
+        if (cmd.equals("todo")) {
+            task = new Todo(desc);
+        } else if (cmd.equals("deadline")) {
+            task = new Deadline(desc, time);
+        } else if (cmd.equals("event")) {
+            task = new Event(desc, time);
+        }
+        list.add(task);
+        System.out.println("  " + task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
-    private static void addDeadline(List<Task> list, String desc, String by) {
-        System.out.println("Got it. I've added this task:");
-        Deadline deadline = new Deadline(desc, by);
-        list.add(deadline);
-        System.out.println("  " + deadline);
-        System.out.println("Now you have " + getListSize(list) + " tasks in the list.");
-    }
-
-    private static void addEvent(List<Task> list, String desc, String at) {
-        System.out.println("Got it. I've added this task:");
-        Event event = new Event(desc, at);
-        list.add(event);
-        System.out.println("  " + event);
-        System.out.println("Now you have " + getListSize(list) + " tasks in the list.");
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         run();
     }
 }

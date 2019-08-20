@@ -8,6 +8,9 @@
 /build/
 src/main/resources/docs/
 
+# A Text-UI test
+/.text-ui-test/
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml

@@ -9,6 +9,10 @@ public class Task {
         isDone = true;
     }
 
+    public boolean isDone(){
+        return isDone;
+    }
+
     public String getTaskName() {
         return taskName;
     }

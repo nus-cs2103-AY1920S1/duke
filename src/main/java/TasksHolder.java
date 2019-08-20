@@ -8,8 +8,10 @@ public class TasksHolder {
     }
 
     public void addTask(Task task) {
-        System.out.println("  added: " + task.getTaskName());
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task.getTaskDetails());
         tasksArr.add(task);
+        System.out.println("Now you have " + tasksArr.size() + " tasks in the list.");
     }
 
     public void taskDone(int index) {

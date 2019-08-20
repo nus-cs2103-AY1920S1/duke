@@ -20,9 +20,24 @@ public class Duke {
             } else if(line.contains(" ") && line.split(" ")[0].equals("done")){
                 int index = Integer.valueOf(line.split(" ")[1]);
                 tasksHolder.taskDone(index);
-            }
-
-            else {
+            } else if (line.contains("/")){
+                String taskCat = line.split(" ")[0];
+                if(taskCat.equals("deadline")){
+                    String endDate = line.split("/")[1].split(" ")[1];
+                    String taskName = line.split("/")[0].split("deadline ")[1];
+                    Task currTask = new Deadline(taskName, endDate);
+                    tasksHolder.addTask(currTask);
+                } else if (taskCat.equals("event")){
+                    String eventDate = line.split("/")[1].split("at ")[1];
+                    String taskName = line.split("/")[0].split("event ")[1];
+                    Task currTask = new Event(taskName, eventDate);
+                    tasksHolder.addTask(currTask);
+                }
+            } else if(line.contains(" ") && line.split(" ")[0].equals("todo")) {
+                String taskName = line.split("todo ")[1];
+                Task currTask = new Todo(taskName);
+                tasksHolder.addTask(currTask);
+            } else {
                 Task currTask = new Task(line);
                 tasksHolder.addTask(currTask);
             }

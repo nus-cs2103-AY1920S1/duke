@@ -7,7 +7,7 @@ public class Task{
         this.order = order;
     }
     public String toString(){
-        String res = order + ".[";
+        String res = "[";
         if(done){
             res += "\u2713";
         }

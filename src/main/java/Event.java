@@ -26,8 +26,10 @@ public class Event extends Task {
         super.description = String.format("%s(%s)", this.description, this.notesInBrackets);
     }
 
-    public static Event create(String descr) {
-        //assume legit; not using optional for now
+    public static Event create(String descr) throws EmptyDescriptionException {
+        if (descr.equals(""))
+            throw new EmptyDescriptionException("an event");
+
         Task.totalNumOfTasks++;
         Event newTask = new Event(descr, false, Task.totalNumOfTasks);
         Task.taskList.add(newTask);

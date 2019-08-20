@@ -26,8 +26,10 @@ public class Deadline extends Task {
         super.description = String.format("%s(%s)", this.description, this.notesInBrackets);
     }
 
-    public static Deadline create(String descr) {
-        //assume legit; not using optional for now
+    public static Deadline create(String descr) throws EmptyDescriptionException {
+        if (descr.equals(""))
+            throw new EmptyDescriptionException("a deadline");
+
         Task.totalNumOfTasks++;
         Deadline newTask = new Deadline(descr, false, Task.totalNumOfTasks);
         Task.taskList.add(newTask);

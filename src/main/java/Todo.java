@@ -8,8 +8,10 @@ public class Todo extends Task {
         super.taskType = TaskType.T;
     }
 
-    public static Todo create(String descr) {
-        //assume legit; not using optional for now
+    public static Todo create(String descr) throws EmptyDescriptionException {
+        if (descr.equals(""))
+            throw new EmptyDescriptionException("a todo");
+
         Task.totalNumOfTasks++;
         Todo newTask = new Todo(descr, false, Task.totalNumOfTasks);
         Task.taskList.add(newTask);

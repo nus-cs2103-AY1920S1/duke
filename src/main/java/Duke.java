@@ -13,11 +13,15 @@ public class Duke {
         }
         dukeRespond(taskStrings);
     }
-    private static void addData(String input) {
+    private static void addData(String input) throws InvalidKeywordException, EmptyDescriptionException {
         //get task keyword
         Scanner tmp = new Scanner(input);
         String kw = tmp.next();
-        String descr = tmp.nextLine();
+        String descr = "";
+
+        if (tmp.hasNext()) {
+            descr = tmp.nextLine();
+        }
         tmp.close();
 
         Task newTask;
@@ -33,22 +37,24 @@ public class Duke {
                 newTask = Todo.create(descr);
                 break;
             default:
-                dukeRespond("Accidentally pressed enter?",
-                        "nvm you can continue with your next cmd! :D");
-                return;
+                //dukeRespond("Accidentally pressed enter?",
+                //        "nvm you can continue with your next cmd! :D");
+                //return;
+                throw new InvalidKeywordException("");
         }
         dukeRespond("Got it. I've added this task:",
                 "  " + newTask.toString(),
                 String.format("Now you have %d task(s) in the list", Task.totalNumOfTasks));
     }
-    private static void markDone(String cmd) {
+    private static void markDone(String cmd) throws InvalidIDException {
         String[] tmp = cmd.split(" ");
         int id = Integer.parseInt(tmp[1]);
         //ASSUMING VALID ID; THROW EXCEPTION AND HANDLE IF NEEDED LATER
         if (id > Task.totalNumOfTasks || id < 1) {
-            dukeRespond("Oof invalid id",
-                    "Wanna try again?");
-            return;
+            //dukeRespond("Oof invalid id",
+            //        "Wanna try again?");
+            //return;
+            throw new InvalidIDException(""+id);
         }
 
         Task task = Task.taskList.get(id - 1);
@@ -82,12 +88,16 @@ public class Duke {
         while (!userCmd.equalsIgnoreCase("bye") &&
             !userCmd.equalsIgnoreCase("exit")) {
 
-            if (userCmd.equalsIgnoreCase("list")) {
-                listData();
-            } else if (userCmd.split(" ")[0].equalsIgnoreCase("done")) {
-                markDone(userCmd);
-            } else {
-                addData(userCmd);
+            try {
+                if (userCmd.equalsIgnoreCase("list")) {
+                    listData();
+                } else if (userCmd.split(" ")[0].equalsIgnoreCase("done")) {
+                    markDone(userCmd);
+                } else {
+                    addData(userCmd);
+                }
+            } catch (IllegalArgumentException e) {
+                dukeRespond(e.toString());
             }
 
             userCmd = sc.nextLine();

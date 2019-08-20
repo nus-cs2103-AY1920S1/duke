@@ -32,7 +32,15 @@ public class Duke {
     static void printDone(Task task){
         printline();
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + task.taskCompletion());
+        System.out.println("\t\t" + task);
+        printline();
+    }
+
+    static void printDelete(Task task, int i){
+        printline();
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t\t" + task);
+        System.out.println("\tNow you have " + i + " tasks in the list");
         printline();
     }
     public static void main(String[] args) {
@@ -77,7 +85,14 @@ public class Duke {
                 change.completed();
                 printDone(change);
 
-            } else {
+            } else if (echo.equals("delete")){
+                int taskNum = scan.nextInt();
+                int taskNumb = taskNum - 1;
+                
+                printDelete(li.get(taskNumb), li.size() - 1);
+                li.remove(taskNumb);
+
+            }else {
                 Task newTask = null;
                 String actual =  "";
                 String error = "";

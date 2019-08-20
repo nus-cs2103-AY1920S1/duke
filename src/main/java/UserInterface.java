@@ -1,18 +1,16 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-    private static Scanner SCANNER;
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String LINE = "____________________________________________________________";
     private static final String LINE_PREFIX = "     ";
+    private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
-    public UserInterface() {
-        SCANNER = new Scanner(System.in);
-    }
 
     public String readLine() {
         String nextLine = SCANNER.nextLine().strip();
@@ -35,6 +33,16 @@ public class UserInterface {
     }
 
     public void exitProgram() {
-        showToUser("Bye. Hope to see you again soon!");
+        showToUser(MESSAGE_BYE);
+    }
+
+    public void showAddition(Task task) {
+        showToUser("  added: " + task);
+    }
+
+    public void showTaskList(List<String> taskNames) {
+        for (String taskName : taskNames) {
+            showToUser(taskName);
+        }
     }
 }

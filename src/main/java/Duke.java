@@ -1,23 +1,33 @@
 public class Duke {
     private UserInterface ui;
+    private TaskList taskList;
 
     private Duke() {
         ui = new UserInterface();
+        taskList = new TaskList();
     }
 
     private void run() {
         ui.showWelcomeMessage();
         while (true) {
             String inputLine = ui.readLine();
+            String command = getCommandFrom(inputLine);
             ui.showLine();
-            if (inputLine.equals("bye")) {
+            if (command.equals("bye")) {
                 ui.exitProgram();
                 break;
+            } else if (command.equals("list")) {
+                ui.showTaskList(taskList.getTaskNames());
             } else {
-                ui.showToUser(inputLine);
+                Task task = taskList.addTask(new Task(inputLine));
+                ui.showAddition(task);
             }
             ui.showLine();
         }
+    }
+
+    private String getCommandFrom(String inputLine) {
+        return inputLine.strip().split(" ")[0];
     }
 
     public static void main (String[]args){

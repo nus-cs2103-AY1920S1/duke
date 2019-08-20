@@ -14,8 +14,8 @@ public class CommandHandler {
                 tasks.printTasks();
                 break;
             case "done":
-                int id = Integer.parseInt(input);
-                tasks.markTaskAsCompleted(id);
+                int taskNumber = Integer.parseInt(input);
+                tasks.markTaskAsCompleted(taskNumber);
                 break;
             case "bye":
                 OutputUtilities.sayBye();

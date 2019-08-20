@@ -1,13 +1,10 @@
-import java.util.UUID;
-
 public abstract class Task {
-    protected String taskID;
     protected String taskName;
     protected boolean isCompleted;
     protected String prefix;
+    protected String suffix;
 
     public Task(String taskName) {
-        this.taskID = UUID.randomUUID().toString();
         this.taskName = taskName;
         this.isCompleted = false;
     }
@@ -20,8 +17,8 @@ public abstract class Task {
         return taskName;
     }
 
-    public String getTaskID() {
-        return taskID;
-    }
 
+    public String getSuffix() {
+        return suffix;
+    }
 }

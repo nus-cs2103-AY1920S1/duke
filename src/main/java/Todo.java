@@ -2,6 +2,7 @@ public class Todo extends Task {
     public Todo(String taskName) {
         super(taskName);
         this.prefix = "[T]";
+        this.suffix = "";
     }
 
 

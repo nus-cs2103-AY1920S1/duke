@@ -29,7 +29,7 @@ public class TaskList {
 
         OutputUtilities.printLine();
         System.out.println("\tNice! I've marked this task as done: \n" +
-                "\t  [✓] " + t.getTaskName());
+                "\t  [✓] " + t.getTaskName() + " " + t.getSuffix() );
         OutputUtilities.printLine();
     }
 

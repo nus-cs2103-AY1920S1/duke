@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class ListManager {
-    ArrayList<String> actualList;
+    ArrayList<Task> actualList;
     String startMessage;
     String exitMessage;
     String bar;
@@ -14,7 +14,8 @@ public class ListManager {
     }
 
     public void add(String input) {
-        actualList.add(input);
+        Task t = new Task(input);
+        actualList.add(t);
     }
 
     public void iterate() {
@@ -24,11 +25,30 @@ public class ListManager {
             System.out.println(bar);
         } else {
             System.out.println(bar);
+            System.out.println("\tHere are the tasks in your list:");
             for(int i = 0; i < actualList.size(); i++) {
                 System.out.print('\t');
-                System.out.println((i+1) +". " + actualList.get(i));
+                System.out.print(i+1 + ".");
+                if (actualList.get(i).done) {
+                    System.out.print("[✓] ");
+                } else {
+                    System.out.print("[X] ");
+                }
+                System.out.println(actualList.get(i).name);
             }
             System.out.println(bar);
         }
+    }
+
+    public void done(int index) {
+        System.out.println(bar);
+        if (index <= actualList.size()) {
+            actualList.get(index - 1).done = true;
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t  [✓] " + actualList.get(index - 1).name);
+        } else {
+            System.out.println("\tTask does not exist!");
+        }
+        System.out.println(bar);
     }
 }

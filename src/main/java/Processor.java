@@ -25,6 +25,10 @@ public class Processor {
             if (input.equals("list")) {
                 taskList.iterate();
                 input = sc.next();
+            } else if (input.equals("done")) {
+                int index = sc.nextInt();
+                taskList.done(index);
+                input = sc.next();
             } else {
                 System.out.println(this.bar);
                 System.out.println('\t' + "added: " + input);

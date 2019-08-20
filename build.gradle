@@ -19,11 +19,15 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "seedu.duke.Duke"
 }
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+run {
+    standardInput = System.in
 }
 
 test {

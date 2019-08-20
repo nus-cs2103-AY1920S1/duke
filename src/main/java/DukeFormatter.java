@@ -35,14 +35,13 @@ class DukeFormatter {
      * Prints the items in the given list with their corresponding index
      * numbers. A horizontal line is printed above and below the list, and
      * output is indented by four spaces throughout.
-     * @param list      A List of Strings to be printed. Each string in the
-     *                  list should not exceed 54 characters in length.
+     * @param list      A List of Tasks to be printed.
      */
     // TODO: Wrap text for longer user input
-     static void prettyPrint(List<String> list) {
+     static void prettyPrint(List<Task> list) {
         print(horizontalLine);
         for (int i = 1; i <= list.size(); i++) {
-            print(i + ". " + list.get(i - 1));
+            print(i + "." + list.get(i - 1).toString());
         }
         print(horizontalLine);
     }

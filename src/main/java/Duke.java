@@ -8,34 +8,39 @@ public class Duke {
         LinkedList<String> inputList = new LinkedList<>();
 
         greet();
-        String input = sc.nextLine();
+        String input = sc.next();
 
         while (!input.equals("bye")) {
             if (!input.equals("list")) {
-                printLine();
+                if (!input.equals("done")) {
+                    input = input + " " + sc.nextLine();
+                    printLine();
 
-                printIndent();
-                System.out.println("added: " + input);
+                    printIndent();
 
-                printLine();
+                    System.out.println("added: " + input);
 
-                inputList.add(input);
+                    printLine();
 
-                input = sc.nextLine();
+                    Task newTask = new Task(input);
+                    Task.addTask(newTask);
+
+                    input = sc.next();
+                } else {
+                    int taskNum = sc.nextInt();
+                    Task.doTask(taskNum);
+
+                    sc.nextLine();
+                    input = sc.next();
+                }
             } else {
-                printList(inputList);
+                Task.printTaskList();
 
-                input = sc.nextLine();
+                input = sc.next();
             }
         }
 
         exit();
-    }
-
-    public static echo(String input) {
-        printLine();
-
-        System.out.println()
     }
 
     public static void printLine() {
@@ -77,18 +82,5 @@ public class Duke {
         printLine();
     }
 
-    public static void printList(LinkedList<String> stringList) {
-        ListIterator<String> iter = stringList.listIterator();
-        int count = 1;
 
-        printLine();
-
-        while (iter.hasNext()) {
-            printIndent();
-            System.out.println(count + ". " + iter.next());
-            count++;
-        }
-
-        printLine();
-    }
 }

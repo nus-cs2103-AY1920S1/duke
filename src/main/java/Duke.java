@@ -1,6 +1,38 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+enum Command {
+    BYE     ("bye"),
+    DONE    ("done"),
+    LIST    ("list"),
+    TODO    ("todo"),
+    EVENT   ("event"),
+    DEADLINE("deadline"),
+    DELETE  ("delete");
+
+    private String commandText;
+
+    Command (String commandText) {
+        this.commandText = commandText;
+    }
+
+    public String toString() {
+        return commandText;
+    }
+
+    public static Command getFromString(String commandText) throws InvalidCommandException {
+        Command[] allCommands = Command.values();
+
+        for (Command cmd : allCommands) {
+            if (commandText.equals(cmd.toString())) {
+                return cmd;
+            }
+        }
+
+        throw new InvalidCommandException(Duke.OOPS_STR + Duke.INVALID_COMMAND_STR);
+    }
+}
+
 public class Duke {
 
     public static final int MAX_TASKS = 100;
@@ -16,15 +48,6 @@ public class Duke {
     public static final String EMPTY_DESCRIPTION_STR_1 = "The description of a ";
     public static final String EMPTY_DESCRIPTION_STR_2 = " cannot be empty.";
 
-    // All recognized commands.
-    public static final String BYE_CMD = "bye";
-    public static final String DONE_CMD = "done";
-    public static final String LIST_CMD = "list";
-    public static final String TODO_CMD = "todo";
-    public static final String EVENT_CMD = "event";
-    public static final String DEADLINE_CMD = "deadline";
-    public static final String DELETE_CMD = "delete";
-
     // Delimiters
     public static final String BY_DELIM = "/by";
     public static final String AT_DELIM = "/at";
@@ -39,7 +62,7 @@ public class Duke {
         String line = input.nextLine();
 
         // Keep reading input until the bye command is received.
-        while (!line.equals(BYE_CMD)) {
+        while (!line.equals(Command.BYE.toString())) {
 
             try {
                 processInputLine(line);
@@ -59,25 +82,25 @@ public class Duke {
     // to a subfunction to handle the command call.
     public static void processInputLine(String line) throws DukeException {
 
-        String command = line.split(" ")[0];
+        Command command = Command.getFromString(line.split(" ")[0]);
 
         switch (command) {
-        case LIST_CMD:
+        case LIST:
             printList();
             break;
-        case DONE_CMD:
+        case DONE:
             markTaskAsDone(line);
             break;
-        case DEADLINE_CMD:
+        case DEADLINE:
             addDeadline(line);
             break;
-        case EVENT_CMD:
+        case EVENT:
             addEvent(line);
             break;
-        case TODO_CMD:
+        case TODO:
             addTodo(line);
             break;
-        case DELETE_CMD:
+        case DELETE:
             deleteTask(line);
             break;
         default:
@@ -103,7 +126,7 @@ public class Duke {
     public static void addDeadline(String line) throws EmptyDescriptionException {
         
         if (verifyArgsNotEmpty(line)) {
-            String[] deadlineArgs = line.split(DEADLINE_CMD)[1].split(BY_DELIM);
+            String[] deadlineArgs = line.split(Command.DEADLINE.toString())[1].split(BY_DELIM);
             Task newDeadline = new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim());
             addTask(newDeadline);
         }
@@ -111,7 +134,7 @@ public class Duke {
             throw new EmptyDescriptionException(
                 OOPS_STR
                 + EMPTY_DESCRIPTION_STR_1
-                + DEADLINE_CMD
+                + Command.DEADLINE.toString()
                 + EMPTY_DESCRIPTION_STR_2
             );
         }
@@ -120,7 +143,7 @@ public class Duke {
     public static void addEvent(String line) throws EmptyDescriptionException {
 
         if (verifyArgsNotEmpty(line)) {
-            String[] eventArgs = line.split(EVENT_CMD)[1].split(AT_DELIM);
+            String[] eventArgs = line.split(Command.EVENT.toString())[1].split(AT_DELIM);
             Task newEvent = new Event(eventArgs[0].trim(), eventArgs[1].trim());
             addTask(newEvent);
         }
@@ -128,7 +151,7 @@ public class Duke {
             throw new EmptyDescriptionException(
                 OOPS_STR
                 + EMPTY_DESCRIPTION_STR_1
-                + EVENT_CMD
+                + Command.EVENT.toString()
                 + EMPTY_DESCRIPTION_STR_2
             );
         }
@@ -136,7 +159,7 @@ public class Duke {
     public static void addTodo(String line) throws EmptyDescriptionException {
 
         if (verifyArgsNotEmpty(line)) {
-            String todoArg = line.split(TODO_CMD)[1];
+            String todoArg = line.split(Command.TODO.toString())[1];
             Task newTodo = new Todo(todoArg); 
             addTask(newTodo);
         }
@@ -144,7 +167,7 @@ public class Duke {
             throw new EmptyDescriptionException(
                 OOPS_STR 
                 + EMPTY_DESCRIPTION_STR_1
-                + TODO_CMD
+                + Command.TODO.toString()
                 + EMPTY_DESCRIPTION_STR_2
             );
         }

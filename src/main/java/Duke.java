@@ -1,11 +1,11 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Duke {
     boolean exited = false;
-    List<String> toDoList = new ArrayList<>();
+    List<Task> toDoList = new ArrayList<>();
 
     public void respond() {
         Scanner scanner = new Scanner(System.in);
@@ -24,15 +24,26 @@ public class Duke {
 
                 case "list":
                     int index = 1;
-                    for(String s: toDoList){
+                    for (Task s : toDoList) {
                         System.out.println(index + ". " + s);
                         index++;
                     }
                     break;
 
                 default:
-                    toDoList.add(input);
-                    System.out.println("added: " +input);
+                    if (input.contains("done")) {
+                        int taskNum = Integer.parseInt(input.substring(5)) - 1;
+                        Task updatedTask = toDoList.get(taskNum);
+                        updatedTask.markAsDone();
+                        System.out.println("Nice! I've marked this task as done: ");
+                        System.out.println(updatedTask);
+                        break;
+
+                    } else {
+                        toDoList.add(new Task(input));
+                        System.out.println("added: " + input);
+                        break;
+                    }
             }
         }
     }

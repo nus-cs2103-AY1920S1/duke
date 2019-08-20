@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
 
     static int noOfTasks = 1;
     protected int taskID;
@@ -19,6 +19,10 @@ public class Task {
         } else {
             return false;
         }
+    }
+
+    static String totalNoOfTasks() {
+        return "\tNow you have " + (noOfTasks - 1) + ((noOfTasks - 1) == 1? " task" : " tasks") + " in the list.\n";
     }
 
     @Override

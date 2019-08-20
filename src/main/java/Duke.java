@@ -31,6 +31,10 @@ public class Duke {
                 listTasks();
             } else if (input.matches("todo\\s.*")) {
                 addTodo(input.substring(5));
+            } else if (input.matches("deadline\\s.*")) {
+                addDeadline(input.substring(9));
+            } else if (input.matches("event\\s.*")) {
+                addEvent(input.substring(6));
             } else if (input.matches("done\\s\\d+")) {
                doDoneTask(input);
             } else if (input.equals("bye")) {
@@ -52,9 +56,23 @@ public class Duke {
     }
 
     public static void addTodo(String todoName) {
-        Task newTask = new Todo(todoName);
-        taskList.add(newTask);
-        printAddSuccess(newTask);
+        Todo newTodo = new Todo(todoName);
+        taskList.add(newTodo);
+        printAddSuccess(newTodo);
+    }
+
+    public static void addDeadline(String deadlineDetail) {
+        String[] detailSplit = deadlineDetail.split(" /by ");
+        Deadline newDeadline = new Deadline(detailSplit[0], detailSplit[1]);
+        taskList.add(newDeadline);
+        printAddSuccess(newDeadline);
+    }
+
+    public static void addEvent(String eventDetail) {
+        String[] detailSplit = eventDetail.split(" /at ");
+        Event newEvent = new Event(detailSplit[0], detailSplit[1]);
+        taskList.add(newEvent);
+        printAddSuccess(newEvent);
     }
 
     public static void doDoneTask(String input) {

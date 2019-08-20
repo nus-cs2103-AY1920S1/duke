@@ -20,7 +20,6 @@ public class Duke {
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
-    /*
     public void list() {
         for(int i = 1; i <= this.tasks.size(); i++) {
             System.out.println(i + ". " + this.tasks.get(i - 1));
@@ -30,7 +29,6 @@ public class Duke {
         this.tasks.add(task);
         System.out.println("added: " + task);
     }
-    */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
@@ -40,8 +38,10 @@ public class Duke {
             if(command.equals("bye")) {
                 duke.exit();
                 return;
+            } else if (command.equals("list")) {
+                duke.list();
             } else {
-                System.out.println(command);
+                duke.add(command);
             }
         }
     }

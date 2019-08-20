@@ -23,15 +23,29 @@ public class Duke {
                 int taskNo = sc.nextInt();
                 store.get(taskNo-1).markAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("  [" + store.get(taskNo-1).getStatusIcon() + "] " + store.get(taskNo-1).toString());
+                System.out.println("  " + store.get(taskNo-1).toString());
             } else if (next.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else {
+            } else if (next.equals("todo") || next.equals("deadline") || next.equals("event")){
+                Task newTask;
                 String remainder = sc.nextLine();
-                Task newTask = new Task(next + remainder);
+                if (next.equals("todo")) {
+                    newTask = new Todo(remainder);
+                } else if (next.equals("deadline")) {
+                    int position = remainder.indexOf("/");
+                    newTask = new Deadline(remainder.substring(0,position), remainder.substring(position+3));
+                } else {
+                    int position = remainder.indexOf("/");
+                    newTask = new Event(remainder.substring(0,position), remainder.substring(position+3));
+                }
                 store.add(newTask);
-                System.out.println("added: " + newTask.toString());
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + newTask.toString());
+                String size = Integer.toString(store.size());
+                System.out.println("Now you have " + size + " tasks in the list.");
+            } else {
+                //exception handling
             }
         }
     }

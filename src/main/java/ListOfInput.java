@@ -12,26 +12,35 @@ public class ListOfInput {
         String[] arrOfWords = input.split(" ");
         String taskWithoutType = input.replace(arrOfWords[0], "");
         Task task = new Task(input);
-        switch (arrOfWords[0]) {
-            case "todo":
-                task = new ToDo(taskWithoutType);
-                list.add(task);
-                break;
-            case "deadline":
-                String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
-                task = new Deadline(arrOfWordsDeadline[0], arrOfWordsDeadline[1]);
-                list.add(task);
-                break;
-            case "event":
-                String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
-                task = new Event(arrOfWordsEvent[0], arrOfWordsEvent[1]);
-                list.add(task);
-                break;
+        try {
+            if (taskWithoutType.isEmpty()) {
+                throw new DukeException();
+            }
+            switch (arrOfWords[0]) {
+                case "todo":
+                    task = new ToDo(taskWithoutType);
+                    list.add(task);
+                    break;
+                case "deadline":
+                    String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
+                    task = new Deadline(arrOfWordsDeadline[0], arrOfWordsDeadline[1]);
+                    list.add(task);
+                    break;
+                case "event":
+                    String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
+                    task = new Event(arrOfWordsEvent[0], arrOfWordsEvent[1]);
+                    list.add(task);
+                    break;
+            }
+            print("    Got it. I've added this task:");
+            System.out.println("        " + task);
+            print("    Now you have " + list.size() + " tasks in the list");
+        } catch (DukeException a) {
+            print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " cannot be empty.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " does not follow the specified format");
         }
-        print("    Got it. I've added this task:");
-        System.out.println("        " + task);
-        print("    Now you have " + list.size() + " tasks in the list");
-    } // may have problem with this
+    }
 
     public void markAsDone(int num) {
         Task task = list.get(num - 1);

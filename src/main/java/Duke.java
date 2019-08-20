@@ -13,14 +13,22 @@ public class Duke {
         System.out.println("    Hello! I'm Duke");
         System.out.println("    What can I do for you?");
         String input  = sc.nextLine();
+        String[] wordArray = input.split(" ");
         ListOfInput list = new ListOfInput();
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                list.printList();
-            } else {
-                list.addToList(input);
+        while (!wordArray[0].equals("bye")) {
+            switch (wordArray[0]) {
+                case "list":
+                    list.printList();
+                    break;
+                case "done":
+                    int num = Integer.parseInt(wordArray[1]);
+                    list.markAsDone(num);
+                    break;
+                default:
+                    list.addToList(input);
             }
             input = sc.nextLine();
+            wordArray = input.split(" ");
         }
         System.out.println("    Bye. Hope to see you again soon!");
     }

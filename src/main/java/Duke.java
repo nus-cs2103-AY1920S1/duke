@@ -25,7 +25,7 @@ public class Duke {
             myList[idx] = new Deadline(getDescription(cmd), by);
         }else{
             String at = cmd.split("/at ")[1];
-            myList[idx] = new Deadline(getDescription(cmd), at);
+            myList[idx] = new Event(getDescription(cmd), at);
         }
         System.out.println(myList[idx]);
         idx++;

@@ -48,6 +48,11 @@ public class Duke {
                 int indexDone = sc.nextInt();
 
                 list.get(--indexDone).setDone();
+
+                String doneMessage = "Nice! I've marked this task as done: \n\t";
+                System.out.println(processText(doneMessage +
+                        list.get(indexDone).getStatusIcon() + " " +
+                        list.get(indexDone).getTaskItem()));
             }
 
             else{

@@ -16,7 +16,7 @@ public class Duke {
         in.close();
     }
 
-    static void printMessage(String message) {
+    private static void printMessage(String message) {
         String[] messages = message.split("\n");
         System.out.println("    ____________________________________________________________");
         for (String line : messages) {

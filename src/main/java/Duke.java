@@ -36,6 +36,7 @@ public class Duke {
                 Task task = todolist.get(index - 1);
                 task.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
+                System.out.print("  ");
                 System.out.println(task.toString());
             } else {
                 todolist.add(new Task(request));

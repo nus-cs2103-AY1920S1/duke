@@ -23,9 +23,11 @@ public class Duke {
                     break;
 
                 case "list":
+
+                    System.out.println("Here are the tasks in your list:");
                     int index = 1;
                     for (Task s : toDoList) {
-                        System.out.println(index + ". " + s);
+                        System.out.print(index + ". " + s);
                         index++;
                     }
                     break;
@@ -37,12 +39,58 @@ public class Duke {
                         updatedTask.markAsDone();
                         System.out.println("Nice! I've marked this task as done: ");
                         System.out.println(updatedTask);
-                        break;
 
-                    } else {
-                        toDoList.add(new Task(input));
-                        System.out.println("added: " + input);
-                        break;
+
+                    } else if (input.contains("todo")) {
+
+                        String desc = input.substring(5);
+
+                        Todo newTodo = new Todo(desc);
+
+                        toDoList.add(newTodo);
+
+                        int numTask = toDoList.size();
+
+
+                        System.out.println("Got it. I've added this task: \n" + "  "
+                                + newTodo + "Now you have " +
+                                numTask + " tasks in the list.");
+
+
+                    } else if (input.contains("deadline")) {
+
+                        int deadlineIndex = input.indexOf('/') + 4;
+                        String deadline = input.substring(deadlineIndex);
+                        String desc = input.substring(9, deadlineIndex - 5);
+
+                        Deadline newDeadline = new Deadline(desc, deadline);
+
+                        toDoList.add(newDeadline);
+
+                        int numTask = toDoList.size();
+
+
+                        System.out.println("Got it. I've added this task: \n" + "  "
+                                + newDeadline + "Now you have " +
+                                numTask + " tasks in the list.");
+                    } else if (input.contains("event")) {
+
+                        int timeIndex = input.indexOf('/') + 4;
+                        String time = input.substring(timeIndex);
+
+                        String desc = input.substring(6, timeIndex - 5);
+
+
+                        Event newEvent = new Event(desc, time);
+
+                        toDoList.add(newEvent);
+
+                        int numTask = toDoList.size();
+
+
+                        System.out.println("Got it. I've added this task: \n" + "  "
+                                + newEvent + " Now you have" +
+                                numTask + " tasks in the list.");
                     }
             }
         }

@@ -1,6 +1,7 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+
 
     public Task(String description) {
         this.description = description;
@@ -14,15 +15,13 @@ public class Task {
 
 
     public String getStatusIcon() {
-        return (isDone ? "v" : "x"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public void markAsDone(){
         isDone = true;
     }
 
-    public String toString(){
-        return "[" + getStatusIcon() + "] " + getDescription();
-    }
+    public abstract String toString();
 }
 

@@ -46,7 +46,7 @@ public class Duke {
                  if (userCommand.equals("done")) {
                      int target = Integer.valueOf(taskDescription);
                      Task taskDone;
-                     if (taskStorage.size() >= target) {
+                     if (taskStorage.size() >= target && target > 0) {
                          taskDone = taskStorage.get(target - 1);
                      } else {
                          throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
@@ -54,6 +54,21 @@ public class Duke {
                      taskDone.markAsDone();
                      System.out.println("Nice! I've marked this task as done: " + "\n"
                              + "    " + taskDone + "\n");
+                 } else if (userCommand.equals("delete")) {
+                     int target = Integer.valueOf(taskDescription);
+                     Task taskDelete;
+                     if (taskStorage.size() >= target && target > 0) {
+                         taskDelete = taskStorage.get((target - 1));
+                         removeTask(taskStorage, (target - 1));
+                     } else {
+                         throw new IndexDoesNotExistException(taskDescription + " is out of the list.");
+                     }
+                     Task.reduceTaskCount();
+
+                     System.out.println("Noted. I've removed this task:" + "\n"
+                             + "    " + taskDelete);
+                     taskCount = Task.getTaskCount();
+                     System.out.println(taskCounter(taskCount) + "\n");
                  } else if (check.equals("bye") == false) {
                      Task t = new Task("");
                      if (userCommand.equals("todo")) {
@@ -95,11 +110,15 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static String taskCounter(int taskCount) {
+    private static String taskCounter(int taskCount) {
         if (taskCount > 1) {
             return ("Now you have " + taskCount + " tasks in the list.");
         } else {
             return ("Now you have " + taskCount + " task in the list.");
         }
+    }
+
+    private static void removeTask(ArrayList taskStorage, int index) {
+        taskStorage.remove(index);
     }
 }

@@ -24,6 +24,10 @@ public class Task {
         return taskCount;
     }
 
+    public static void reduceTaskCount() {
+        taskCount -= 1;
+    }
+
     public String toString() {
         String statusIcon = this.getStatusIcon();
         return  ("[" + typeOfTask + "]" + "[" + statusIcon + "] "

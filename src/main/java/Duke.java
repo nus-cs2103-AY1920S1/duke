@@ -45,7 +45,7 @@ public class Duke {
         input = sc.nextLine();
     }
 
-    public static void processInput() throws InvalidInputDukeException, EmptyTaskDukeException, InvalidTaskDukeException {
+    public static void processInput() throws InvalidInputDukeException, EmptyTaskDukeException, InvalidTaskDukeException{
         Scanner scanner = new Scanner(input);
         if (scanner.hasNext()) {
             String toProcess = scanner.next();
@@ -61,6 +61,10 @@ public class Duke {
 
                 case "done":
                     markAsDone(scanner.nextInt());
+                    break;
+
+                case "delete":
+                    removeTaskFromList(scanner.nextInt());
                     break;
 
                 case "todo":
@@ -126,6 +130,15 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
+    public static void removeTaskFromList(int positionInList) {
+        Task removedTask = list.remove(positionInList - 1);
+        System.out.println("    ____________________________________________________________\n" +
+                "     Noted. I've removed this task: ");
+        System.out.println(removedTask);
+        System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
+        System.out.println("    ____________________________________________________________");
+    }
+
     public static void printList() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
@@ -157,9 +170,7 @@ public class Duke {
             System.out.println(String.format("    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! Invalid input! Make sure your %s has a description and /at or /by.\n" +
                     "    ____________________________________________________________", e.getMessage()));
-        }
-
-        else {
+        } else {
             System.out.println(e.getMessage()); // for undeclared exceptions
         }
 

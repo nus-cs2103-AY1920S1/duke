@@ -28,11 +28,12 @@ public class Duke {
     }
 
     private static void process(String input, Storage storage) {
-        String command = input.split(" ")[0];
+        String[] tokens = input.split(" ");
+        String command = tokens[0];
 
         switch (command) {
             case "list": {
-                ArrayList<String> items = storage.retrieve();
+                ArrayList<Task> items = storage.retrieve();
 
                 StringBuilder output = new StringBuilder();
                 for (int i = 0; i < items.size(); i++) {
@@ -43,8 +44,18 @@ public class Duke {
                 break;
             }
 
+            case "done": {
+                int taskId = Integer.parseInt(tokens[1]) - 1;
+                Task task = storage.retrieve().get(taskId);
+
+                task.markAsDone();
+                print(String.format("Nice! I've marked this task as done: %s", task));
+
+                break;
+            }
+
             default: {
-                if (storage.addItem(input)) {
+                if (storage.addTask(input)) {
                     print(String.format("Added: %s", input));
                 } else {
                     print("Error");

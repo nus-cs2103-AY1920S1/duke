@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
 public class Storage {
-    private ArrayList<String> items = new ArrayList<String>();
+    private ArrayList<Task> items = new ArrayList<Task>();
 
-    protected ArrayList<String> retrieve() {
+    protected ArrayList<Task> retrieve() {
         return this.items;
     }
 
-    protected boolean addItem(String item) {
-        return this.items.add(item);
+    protected boolean addTask(String title) {
+        Task newTask = new Task(title);
+        return this.items.add(newTask);
     }
 }

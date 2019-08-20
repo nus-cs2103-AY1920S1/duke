@@ -43,7 +43,7 @@ public class Duke {
 
     // execute command given depending on what command it is
     private void execCommand(String command) {
-        String[] commandStringArray = command.split(" ");
+        String[] commandStringArray = command.split(" "); //split by words
         if (command.equals("list")) {
             printList();
         } else if (command.contains("done") && commandStringArray.length == 2) {
@@ -54,9 +54,39 @@ public class Duke {
             System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
         } else {
             // add new task to the list
-            Task task = new Task(command,this.list.size() + 1);
-            this.list.add(task);
-            System.out.println("\tadded: " + command);
+            System.out.println("\tGot it. I've added this task:");
+            String taskType = commandStringArray[0];
+            switch (taskType) {
+                case ("todo"):
+                    Todo newTodo = new Todo(command.substring(5)); // add newTodo to tasks list with only the description
+                    this.list.add(newTodo);
+                    System.out.println("\t  " + newTodo.toString());
+                    break;
+                case ("deadline"):
+                    String deadline = command.substring(command.indexOf("/by") + 4);
+                    Deadline newDeadline = new Deadline(
+                            command.substring(9, command.indexOf("/by")).trim(),
+                            // remove trailing white spaces for the description, exclude the deadline
+                            deadline);
+                    // add new deadline task to the tasks list
+                    this.list.add(newDeadline);
+                    System.out.println("\t  " + newDeadline.toString());
+                    break;
+                case ("event"):
+                    String when = command.substring(command.indexOf("/at") + 4);
+                    Event newEvent = new Event(
+                            command.substring(6, command.indexOf("/at")).trim(),
+                            // remove trailing white spaces for the description, exclude event day and time
+                            when);
+                    // add new event task to the tasks list
+                    this.list.add(newEvent);
+                    System.out.println("\t  " + newEvent.toString());
+                    break;
+                default:
+                    System.out.println("task not recognisable");
+                    break;
+            }
+            System.out.println(String.format("\tNow you have %d tasks in the list.", this.list.size()));
         }
     }
 

@@ -3,14 +3,13 @@
  */
 public class Task {
 
-    private String desc;
-    private int taskNo;
-    private boolean isDone;
-    private String doneSymbol;
+    protected String desc;
+    //protected int taskNo;
+    protected boolean isDone;
+    protected String doneSymbol;
 
-    public Task(String desc, int taskNo) {
+    public Task(String desc) {
         this.desc = desc;
-        this.taskNo = taskNo;
         this.isDone = false;
         setDoneSymbol();
     }
@@ -27,19 +26,23 @@ public class Task {
         this.desc = desc;
     }
 
+    protected String getDoneSymbol() {
+        return this.isDone ? "✓" : "x";
+    }
+
+    protected void setDoneSymbol() {
+        this.doneSymbol = isDone ? "✓" : "x";
+    }
+
     // marks a task as done, changes the done symbol to check mark
-    public void markAsDone() {
+    protected void markAsDone() {
         this.isDone = true;
         setDoneSymbol();
     }
 
-    private void setDoneSymbol() {
-        this.doneSymbol = isDone ? "✓" : "x";
-    }
-
-    @Override
-    public String toString() {
-        return taskNo + "." + "[" + doneSymbol + "] " + desc;
-    }
+//    @Override
+//    public String toString() {
+//        return taskNo + "." + "[" + doneSymbol + "] " + desc;
+//    }
 
 }

@@ -16,10 +16,10 @@ public class Duke {
           } else if (input.equals("done")) {
             markItemComplete(Integer.parseInt(sc.next()));
           } else {
-            String remaining = sc.next();
-            String taskName = input + " " + remaining;
-            addToList(taskName);
-            echo(taskName);
+            String type = input;
+            String taskName = sc.nextLine().substring(1);
+            Task t = addToList(taskName, type);
+            echo(t);
           } 
         }
         sc.close();
@@ -48,9 +48,18 @@ public class Duke {
       System.out.println(line + "\n");
     }
 
-    static void addToList(String s) {
-      list[count] = new Task(s, count + 1);
+    static Task addToList(String s, String type) {
+      if (type.equals("todo")) {
+        list[count] = new Todo(s, count + 1);
+      } else if (type.equals("deadline")) {
+        String[] parts = s.split("\\/" + "by");
+        list[count] = new Deadline(parts[0], count + 1, parts[1]);
+      } else if (type.equals("event")) {
+        String[] parts = s.split("\\/" + "at");
+        list[count] = new Event(parts[0], count + 1, parts[1]);
+      }
       count++;
+      return list[count - 1];
     }
     static void welcomeMessage() {
         String logo = "     ____        _        \n"
@@ -74,11 +83,13 @@ public class Duke {
         System.out.println(line + "\n");
     }
     
-    public static void echo(String s) {
+    public static void echo(Task t) {
         String line = "    ________________________" 
             + "____________________________________";
         System.out.println(line);
-        System.out.println("     added: " + s);
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       " + t);
+        System.out.println("     Now you have "+count+" tasks in the list.");
         System.out.println(line + "\n");
         return;
     }

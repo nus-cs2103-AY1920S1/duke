@@ -1,0 +1,17 @@
+
+public class Deadline extends Task {
+  private String date;
+
+  public Deadline(String n, int index, String date) {
+    super(n, index);
+    this.date = date;
+  }
+  @Override
+  public String toString() {
+    String result = "[D][";
+    result = this.completed ? result + "✓]" : result + "✗]";
+    result += " " + this.name;
+    result += "(by:" + this.date + ")";
+    return result;
+  }
+}

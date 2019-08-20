@@ -35,8 +35,36 @@ public class Duke {
                     System.out.println("There is no task with ID " + taskId + ". Please enter a valid ID.");
                 }
             } else {
-                list.add(new Task(input));
-                System.out.println("added: " + input);
+                String[] inputBreakDown = input.split(" ", 2);
+                String taskType = inputBreakDown[0];
+                Task newTask = null;
+                switch (taskType) {
+                case "todo":
+                    newTask = new Todo(inputBreakDown[1]);
+                    break;
+                case "deadline":
+                    String[] deadlineBreakDown = inputBreakDown[1].split(" /by ");
+                    String deadlineDescription = deadlineBreakDown[0];
+                    String by = deadlineBreakDown[1];
+                    newTask = new Deadline(deadlineDescription, by);
+                    break;
+                case "event":
+                    String[] eventBreakDown = inputBreakDown[1].split(" /at ");
+                    String eventDescription = eventBreakDown[0];
+                    String at = eventBreakDown[1];
+                    newTask = new Event(eventDescription, at);
+                    break;
+                default: 
+                }
+                if (newTask != null) {
+                    list.add(newTask);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + newTask);
+                    int total = Task.getTotal();
+                    System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+                } else {
+                    System.out.println("Unknown task type. Please enter a valid task type");
+                }
             }
             System.out.println();
         }

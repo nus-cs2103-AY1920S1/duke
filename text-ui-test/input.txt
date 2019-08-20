@@ -1,0 +1,9 @@
+event project meeting /at tomorrow 2pm
+deadline homework /by friday 12pm
+todo read chapter 3
+list
+done 2
+deadline OP1 submission /by next monday 4:30pm
+done 4
+list 
+bye

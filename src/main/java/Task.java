@@ -7,8 +7,8 @@ public class Task {
         this.isDone = false;
     }
 
-    public Character getStatusIcon() {
-        return (isDone ? 'V' : 'X'); //return tick or X symbols
+    public String getStatusIcon() {
+        return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
     public void setDone() {

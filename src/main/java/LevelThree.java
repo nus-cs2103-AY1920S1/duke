@@ -19,6 +19,7 @@ public class LevelThree {
                     completeTask(sc.nextInt());
                     break;
                 default:
+                    input += sc.nextLine();
                     Task newTask = new Task(input);
                     list.add(newTask);
                     echoEntry(input);
@@ -46,7 +47,7 @@ public class LevelThree {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list: ");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(String.format("     %d.[%c] %s",
+            System.out.println(String.format("     %d.[%s] %s",
                     i+1, list.get(i).getStatusIcon(), list.get(i).toString()));
         }
         System.out.println("    ____________________________________________________________");
@@ -56,7 +57,7 @@ public class LevelThree {
         list.get(entryNumber - 1).setDone();
         System.out.println("    ____________________________________________________________");
         System.out.println("      Nice! I've marked this task as done: ");
-        System.out.println(String.format("      [%c] %s",
+        System.out.println(String.format("      [%s] %s",
                 list.get(entryNumber - 1).getStatusIcon(), list.get(entryNumber - 1).toString()));
         System.out.println("    ____________________________________________________________");
     }

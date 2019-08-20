@@ -13,9 +13,19 @@ public class Duke {
         Scanner scn = new Scanner(System.in);
 
         String command = scn.nextLine();
+        String[] commands = new String[100];
+        int commands_count = 0;
 
         while (!command.equals("bye")) {
-            System.out.println(command);
+            if (command.equals("list")) {
+                for (int i = 0; i < commands_count; i++) {
+                    System.out.println((i + 1) + ". " + commands[i]);
+                }
+            } else {
+                commands[commands_count] = command;
+                System.out.println("added: " + command);
+                commands_count++;
+            }
             command = scn.nextLine();
         }
 

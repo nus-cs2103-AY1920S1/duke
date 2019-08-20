@@ -29,7 +29,7 @@ do
    if [ -f ${f%.in}.out ]
    then
       echo "Running: $(basename $f)"
-      java -classpath ../bin Duke < input.txt > $(basename ${f%.in}).actual
+      java -classpath ../bin Duke < $f > $(basename ${f%.in}).actual
       # compare the output to the expected output
       diff -u $(basename ${f%.in}).actual ${f%.in}.out
       if [ $? -eq 0 ]

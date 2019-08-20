@@ -56,13 +56,24 @@ public class Duke {
 
 
                 case "deadline":
+                    try {
+                        taskName = taskName.substring(9);
+                        date = taskName.split("/");
+                        task = new Deadline (date[0],date[1].substring(3));
+                        addTaskIn(task,tasks);
+                    } catch (StringIndexOutOfBoundsException ex2){
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
 
+                    } catch (IndexOutOfBoundsException ex3){
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The end time of a deadline cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
 
-                    taskName = taskName.substring(9);
-                    date = taskName.split("/");
-                    task = new Deadline (date[0],date[1].substring(3));
-                    addTaskIn(task,tasks);
-                    break;
+                    } finally {
+                        break;
+                    }
 
                 case "event":
                     taskName = taskName.substring(6);

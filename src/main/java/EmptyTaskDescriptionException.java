@@ -1,4 +1,4 @@
-public class EmptyTaskDescriptionException extends Exception {
+public class EmptyTaskDescriptionException extends DukeException {
     public EmptyTaskDescriptionException(String message) {
         super(message);
     }

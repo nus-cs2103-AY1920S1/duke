@@ -1,4 +1,4 @@
-public class InvalidInstructionException extends Exception {
+public class InvalidInstructionException extends DukeException {
     public InvalidInstructionException(String message) {
         super(message);
     }

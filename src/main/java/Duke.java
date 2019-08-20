@@ -1,5 +1,5 @@
+import java.io.InputStream;
 import java.util.Scanner;
-import java.util.Optional;
 
 public class Duke {
     private static String divider = "    " + "-".repeat(61);
@@ -13,14 +13,33 @@ public class Duke {
         }
         dukeRespond(taskStrings);
     }
-    private static void addData(String data) {
-        Optional<Task> newTask = Task.createTask(data, false);
-        if (newTask.isEmpty()) {
-            dukeRespond("Ohnoes you didn't key in a valid command!",
-                    "Please try again friend \\o/");
-        } else {
-            dukeRespond("added: " + data);
+    private static void addData(String input) {
+        //get task keyword
+        Scanner tmp = new Scanner(input);
+        String kw = tmp.next();
+        String descr = tmp.nextLine();
+        tmp.close();
+
+        Task newTask;
+        System.out.println(kw);
+        switch (kw.toLowerCase()) {
+            case "deadline":
+                newTask = Deadline.create(descr);
+                break;
+            case "event":
+                newTask = Event.create(descr);
+                break;
+            case "todo":
+                newTask = Todo.create(descr);
+                break;
+            default:
+                dukeRespond("Accidentally pressed enter?",
+                        "nvm you can continue with your next cmd! :D");
+                return;
         }
+        dukeRespond("Got it. I've added this task:",
+                "  " + newTask.toString(),
+                String.format("Now you have %d tasks in the list", Task.totalNumOfTasks));
     }
     private static void markDone(String cmd) {
         String[] tmp = cmd.split(" ");
@@ -60,7 +79,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userCmd = sc.nextLine();
 
-        while (!userCmd.equalsIgnoreCase("bye")) {
+        while (!userCmd.equalsIgnoreCase("bye") &&
+            !userCmd.equalsIgnoreCase("exit")) {
 
             if (userCmd.equalsIgnoreCase("list")) {
                 listData();

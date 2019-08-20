@@ -4,42 +4,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private ArrayList<Task> list;
+    private TaskList taskList;
     public Duke(){}
     private void Greet(){
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
     }
-    private void Add(Task t, ArrayList<Task> l){
-        l.add(t);
-        System.out.println(" Got it. I've added this task: " );
-        System.out.println(l.get(l.size() - 1));
-        if(l.size() == 1)
-            System.out.println("Now you have 1 task in your list.");
-        else
-        System.out.println("Now you have " + l.size() + " tasks in the list.");
-    }
+
     private void Echo(String a){
         System.out.println(a);
     }
-    private void MarkAsDone(int x, ArrayList<Task> li){
-        li.get(x).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println( li.get(x) );
-    }
-    private void getList(ArrayList<Task> lis){
-        System.out.println("Here are the tasks in your list:");
-        for(int i = 1; i <= lis.size(); i+=1){
-            System.out.println(i + ". " + lis.get(i-1) );
-        }
-    }
+
     private void Exit(){
         System.out.println("Bye. Hope to see you again soon!");
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Duke d = new Duke();
         Scanner scan = new Scanner(System.in);
         d.Greet();
-        d.list = new ArrayList<>();
+        TaskList t = new TaskList();
         while(scan.hasNextLine()){
             String a = scan.next();
             if(a.equals("bye")){
@@ -47,34 +29,48 @@ public class Duke {
                 break;
             }
             else if(a.equals("list")){
-                d.getList(d.list);
+                t.getList();
             }
             else if(a.equals("done")){
                 int num = scan.nextInt();
-                d.MarkAsDone(num-1,d.list);
+                t.MarkAsDone(num-1);
                 String c = scan.nextLine();
             }
-            else if(a.equals("event")){
-               String b = scan.nextLine();
-               int first = b.indexOf('/');
-               String desc = b.substring(0,first-1);
-               String byTime = b.substring(first+4);
-               Task t = new Event(desc,byTime);
-                d.Add(t,d.list);
+            else if(a.equals("event")) {
+                String b = scan.nextLine();
+                if (b.length() == 0) {
+                    System.out.println("\u2639" + " OOPS!!! the description of a event cannot be empty. ");
+                } else {
+                    int first = b.indexOf('/');
+                    String desc = b.substring(0, first - 1);
+                    String byTime = b.substring(first + 4);
+                    Task t1 = new Event(desc, byTime);
+                    t.Add(t1);
+                }
             }
-            else if(a.equals("deadline")){
+            else if(a.equals("deadline")) {
                 String det = scan.nextLine();
-                int first = det.indexOf('/');
-                String descr = det.substring(0,first-1);
-                String byTime = det.substring(first+4);
-                Task t = new Deadline(descr,byTime);
-                d.Add(t,d.list);
+                if (det.length() == 0) {
+                    System.out.println("\u2639" + " OOPS!!! the description of a deadline cannot be empty. ");
+                } else {
+                    int first = det.indexOf('/');
+                    String descr = det.substring(0, first - 1);
+                    String byTime = det.substring(first + 4);
+                    Task t1 = new Deadline(descr, byTime);
+                    t.Add(t1);
+                }
             }
-            else{
+            else if (a.equals("todo")) {
                 String todoDetails = scan.nextLine();
-                Task t = new ToDo(todoDetails);
-                d.Add(t,d.list);
+                if (todoDetails.length() == 0)
+                    System.out.println("\u2639" + " OOPS!!! the description of a todo cannot be empty. ");
+                else {
+                    Task t1 = new ToDo(todoDetails);
+                    t.Add(t1);
+                }
             }
+            else
+                System.out.println("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
 

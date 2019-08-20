@@ -42,13 +42,35 @@ public class Duke {
                     break mainLoop;
                 case "list":
                     for (int i = 0; i < taskList.size(); ++i) {
-                        System.out.printf("%d. %s%n", i + 1, taskList.get(i).getDescription());
+                        System.out.printf("%d. %s%n", i + 1, taskList.get(i));
                     }
                     continue mainLoop;
+                }
+
+                switch (tok[0].toLowerCase()) {
+                case "done":
+                    if (tok.length < 2) {
+                        System.out.println("Usage: done <task ID>");
+                        break;
+                    }
+                    try {
+                        int index = Integer.parseInt(tok[1]);
+                        if (index < 1 || taskList.size() < index) {
+                            System.out.println("Invalid task ID.");
+                            break;
+                        }
+
+                        Task t = taskList.get(index - 1);
+                        t.setDone(true);
+                        System.out.printf("Nice! I've marked this task as done:%n%s%n", t);
+                    } catch (NumberFormatException nfe) {
+                        System.out.println("Invalid number provided as task ID.");
+                    }
+                    break;
                 default:
                     taskList.add(new Task(line));
                     System.out.printf("added: %s%n", line);
-                    continue mainLoop;
+                    break;
                 }
             }
         } catch (IOException e) {

@@ -1,11 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     private static int pointer = 0;
     private static final String border = "____________________________________________________________";
     private static final String upperBorder = border + "\n\n";
     private static final String lowerBorder = border + "\n";
-    private static Task[] taskList = new Task[100];
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
 
     public static void main(String[] args) {
 
@@ -26,9 +27,13 @@ public class Duke {
                 if (keywords[0].equals("bye")) {
                     break;
                 } else if (keywords[0].equals("list")) {
-                    outputList(pointer, taskList);
+                    outputList(taskList);
                 } else if (keywords[0].equals("done")) {
-                    System.out.println(doneTask(Integer.parseInt(keywords[1]), taskList));
+                    try {
+                        System.out.println(doneTask(Integer.parseInt(keywords[1])));
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        System.out.println(upperBorder + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
+                    }
                 } else if (keywords[0].equals("todo")) {
                     try {
                         String temp = parseTodo(keywords);
@@ -53,6 +58,13 @@ public class Duke {
                     } catch (DukeException ex) {
                         System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
                     }
+                } else if (keywords[0].equals("delete")) {
+                    try {
+                        System.out.println(deleteTask(Integer.parseInt(keywords[1])));
+                        pointer--;
+                    } catch (DukeException ex) {
+                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -72,38 +84,46 @@ public class Duke {
     //     return upperBorder + "added: " + string + "\n" + lowerBorder;
     // }
 
-    public static void outputList(int pointer, Task[] taskList) {
+    public static void outputList(ArrayList<Task> taskList) {
         System.out.println(border + "\n");
-        for (int i = 1; i < pointer + 1; i++) {
-            System.out.println(i + ". " + taskList[i - 1]);
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            System.out.println(i + ". " + taskList.get(i - 1));
         }
         System.out.println(lowerBorder);
     }
 
-    public static String doneTask(int pointer, Task[] taskList) {
-        taskList[pointer - 1].setDone();
+    public static String doneTask(int pointer) {
+        taskList.get(pointer - 1).setDone();
         return upperBorder + "Nice! I've marked this task as done:\n"
-            + taskList[pointer - 1] + "\n" + lowerBorder;
+            + taskList.get(pointer - 1) + "\n" + lowerBorder;
     }
 
     public static String todo(String string) {
-        taskList[pointer] = new Todo(string);
-        return taskWrap(taskList[pointer]);
+        taskList.add(new Todo(string));
+        return taskWrap(taskList.get(pointer), "add");
     }
 
     public static String deadline(String string, String by) {
-        taskList[pointer] = new Deadline(string, by);
-        return taskWrap(taskList[pointer]);
+        taskList.add(new Deadline(string, by));
+        return taskWrap(taskList.get(pointer), "add");
     }
 
     public static String event(String string, String at) {
-        taskList[pointer] = new Event(string, at);
-        return taskWrap(taskList[pointer]);
+        taskList.add(new Event(string, at));
+        return taskWrap(taskList.get(pointer), "add");
     }
 
-    public static String taskWrap(Task task) {
-        return upperBorder + "Got it. I've added this task:\n" + task
-        + "\n" + "Now you have " + (pointer + 1) + " tasks in the list.\n" + lowerBorder;
+    public static String taskWrap(Task task, String type) {
+        switch (type) {
+            case "add":
+                return upperBorder + "Got it. I've added this task:\n" + task
+                + "\n" + "Now you have " + (pointer + 1) + " tasks in the list.\n" + lowerBorder;
+
+            case "delete":     
+                return upperBorder + "Noted. I've removed this task:\n" + task
+                + "\n" + "Now you have " + (pointer - 1) + " tasks in the list.\n" + lowerBorder;
+        }
+        return "";
     }
 
     public static String parseTodo(String[] keywords) throws DukeException {
@@ -125,14 +145,33 @@ public class Duke {
             String temp = "";
             String date = "";
             boolean flag = false;
-            for (int i = 1; i < keywords.length; i++) {
-                if (flag) {
-                    date = date + " " + keywords[i];
-                } else if (keywords[i].equals("/by")) {
-                    flag = true;
-                } else {
-                    temp = temp + " " + keywords[i];
+            switch (dateTimeType) {
+                case "deadline":
+                for (int i = 1; i < keywords.length; i++) {
+                    if (flag) {
+                        date = date + " " + keywords[i];
+                    } else if (keywords[i].equals("/by")) {
+                        flag = true;
+                    } else {
+                        temp = temp + " " + keywords[i];
+                    }
                 }
+                break;
+
+                case "event":
+                for (int i = 1; i < keywords.length; i++) {
+                    if (flag) {
+                        date = date + " " + keywords[i];
+                    } else if (keywords[i].equals("/at")) {
+                        flag = true;
+                    } else {
+                        temp = temp + " " + keywords[i];
+                    }
+                }
+                break;
+
+                default:
+                break;
             }
             if (date.equals("")) {
                 switch (dateTimeType) {
@@ -147,6 +186,14 @@ public class Duke {
                 }
             }
             return new String[] {temp, date};
+        }
+    }
+
+    public static String deleteTask(int pointer) throws DukeException {
+        try {
+            return taskWrap(taskList.remove(pointer - 1), "delete");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
         }
     }
 

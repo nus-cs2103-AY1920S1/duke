@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    static ArrayList<Task> todolist = new ArrayList<Task>();
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,10 +17,9 @@ public class Duke {
         System.out.println("____________________________________________________________");
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> todolist = new ArrayList<Task>();
 
         while (scanner.hasNext()) {
-            String request = scanner.nextLine();
+            String request = scanner.next();
 
             System.out.println("____________________________________________________________");
             if (request.equals("bye")) {
@@ -30,21 +31,38 @@ public class Duke {
                     String todo = String.format("%d. %s", i+1, todolist.get(i).toString());
                     System.out.println(todo);
                 }
-            } else if (request.startsWith("done")) {
-                char num = request.charAt(request.length() - 1);
-                int index = Character.getNumericValue(num);
+            } else if (request.equals("done")) {
+                int index = scanner.nextInt();
                 Task task = todolist.get(index - 1);
                 task.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.print("  ");
                 System.out.println(task.toString());
-            } else {
-                todolist.add(new Task(request));
+            } else if (request.equals("todo")){
+                String descrip = scanner.nextLine();
+                Task task = new Todo(descrip);
+                todolist.add(task);
                 String add = String.format("added: %s", request);
-                System.out.println(add);
+                addTask(task);
+            } else if (request.equals("event")) {
+                String[] event = scanner.nextLine().split(" /at ");
+                Task task = new Event(event[0], event[1]);
+                todolist.add(task);
+                addTask(task);
+            } else if (request.equals("deadline")) {
+                String[] event = scanner.nextLine().split(" /by ");
+                Task task = new Deadline(event[0], event[1]);
+                todolist.add(task);
+                addTask(task);
             }
 
             System.out.println("____________________________________________________________");
         }
+    }
+
+    private static void addTask(Task task) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(String.format("  %s", task.toString()));
+        System.out.println(String.format("Now you have %d tasks in the list.", todolist.size()));
     }
 }

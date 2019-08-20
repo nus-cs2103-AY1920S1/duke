@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     /**
@@ -8,12 +9,15 @@ public class Duke {
      * @params args String[]
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
+
+        /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + logo);
+        */
+        ArrayList<Task> tasks = new ArrayList<>();
         String line = "____________________________________________________________";
         System.out.println(line);
         System.out.println("Hello, I'm Duke");
@@ -22,13 +26,21 @@ public class Duke {
 
         String cmd = "";
         Scanner sc = new Scanner(System.in);
-        cmd = sc.next();
+        cmd = sc.nextLine();
 
         while (!cmd.equals("bye")) {
-            System.out.println(line);
-            System.out.println(cmd);
-            System.out.println(line);
-            cmd = sc.next();
+            if (!cmd.equals("list")) {
+                Task newTask = new Task(cmd);
+                tasks.add(newTask);
+                System.out.println(line);
+                System.out.println("added: " + cmd);
+                System.out.println(line);
+            } else {
+                for (int i = 1; i <= tasks.size(); i++) {
+                    System.out.println(i + ". " + tasks.get(i - 1));
+                }
+            }
+            cmd = sc.nextLine();
         }
 
         System.out.println(line);

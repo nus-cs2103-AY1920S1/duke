@@ -29,17 +29,24 @@ public class Duke {
         cmd = sc.nextLine();
 
         while (!cmd.equals("bye")) {
-            if (!cmd.equals("list")) {
-                Task newTask = new Task(cmd);
-                tasks.add(newTask);
-                System.out.println(line);
-                System.out.println("added: " + cmd);
-                System.out.println(line);
-            } else {
+            System.out.println(line);
+            if (cmd.equals("list")) {
                 for (int i = 1; i <= tasks.size(); i++) {
                     System.out.println(i + ". " + tasks.get(i - 1));
                 }
+            } else if (cmd.contains("done")) {
+                String[] words = cmd.split(" ");
+                System.out.println("Nice! I've marked this task as done: ");
+                Task taskToMarkAsDone = tasks.get(Integer.parseInt(words[1]) - 1);
+                taskToMarkAsDone.markAsDone();
+                System.out.println(taskToMarkAsDone);
+
+            } else {
+                Task newTask = new Task(cmd);
+                tasks.add(newTask);
+                System.out.println("added: " + cmd);
             }
+            System.out.println(line);
             cmd = sc.nextLine();
         }
 

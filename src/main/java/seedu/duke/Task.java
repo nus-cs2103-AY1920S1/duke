@@ -1,22 +1,24 @@
 package seedu.duke;
 
 public class Task {
-    String task;
+    protected String description;
+    protected boolean isDone;
 
-    public Task(String task) {
-        this.task = task;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public String getTask() {
-        return task;
+    public void markAsDone() {
+        this.isDone = true;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     @Override
     public String toString() {
-        return this.task;
+        return "[" + this.getStatusIcon() + "]" + this.description;
     }
 }

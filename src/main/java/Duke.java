@@ -28,16 +28,17 @@ public class Duke {
     }
 
     private static void process(String input, Storage storage) {
-        String[] tokens = input.split(" ");
+        String[] tokens = input.split(" ", 2);
         String command = tokens[0];
 
         switch (command) {
             case "list": {
-                ArrayList<Task> items = storage.retrieve();
+                ArrayList<Task> items = storage.getTasks();
 
                 StringBuilder output = new StringBuilder();
+                output.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < items.size(); i++) {
-                    output.append(String.format("%d. %s%n", i + 1, items.get(i)));
+                    output.append(String.format("%d.%s%n", i + 1, items.get(i).toString()));
                 }
                 print(output.toString().trim());
 
@@ -46,20 +47,41 @@ public class Duke {
 
             case "done": {
                 int taskId = Integer.parseInt(tokens[1]) - 1;
-                Task task = storage.retrieve().get(taskId);
+                Task task = storage.getTasks().get(taskId);
 
                 task.markAsDone();
-                print(String.format("Nice! I've marked this task as done: %s", task));
+                print(String.format("Nice! I've marked this task as done:%n%s", task.toString()));
+
+                break;
+            }
+
+            case "todo":
+            case "deadline":
+            case "event": {
+                Task newTask;
+
+                if (command.equals("todo")) {
+                    newTask = new Todo(tokens[1]);
+                } else if (command.equals("deadline")) {
+                    String[] deadlineTokens = tokens[1].split(" /by ", 2);
+                    newTask = new Deadline(deadlineTokens[0], deadlineTokens[1]);
+                } else {
+                    String[] eventTokens = tokens[1].split(" /at ", 2);
+                    newTask = new Event(eventTokens[0], eventTokens[1]);
+                }
+
+                if (storage.addTask(newTask)) {
+                    print(String.format(
+                        "Got it. I've added this task:%n%s%nNow you have %d tasks in the list.",
+                        newTask.toString(), storage.getTaskCount()
+                    ));
+                }
 
                 break;
             }
 
             default: {
-                if (storage.addTask(input)) {
-                    print(String.format("Added: %s", input));
-                } else {
-                    print("Error");
-                }
+                print("I don't understand, please try again.");
             }
         }
     }

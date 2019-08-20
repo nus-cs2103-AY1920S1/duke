@@ -20,6 +20,12 @@ public class Duke {
             } catch (DukeException e) {
               printErrorMessage(e.getMessage());
             }
+          } else if (input.equals("delete")) {
+            try {
+              deleteItem(Integer.parseInt(sc.next()));
+            } catch (DukeException e) {
+              printErrorMessage(e.getMessage());
+            }
           } else {
             try {
               String type = input;
@@ -39,6 +45,27 @@ public class Duke {
           } 
         }
         sc.close();
+    }
+
+    static void deleteItem(int index) throws DukeException {
+      if (index <= 0 || index > count) {
+        throw new DukeException("Invalid task number!");
+      }
+      index--;
+      Task t = list.get(index);
+      list.remove(index);
+      String line = "    ________________________" 
+          + "____________________________________";
+      System.out.println(line);
+      System.out.println("     Noted. I've removed this task:");
+      System.out.println("      " + t);
+      count--;
+      String message = 
+        count == 1 
+          ? "     Now you have 1 task in the list"
+          : "     Now you have " + count + " tasks in the list";
+      System.out.println(message);
+      System.out.println(line + "\n");
     }
 
     static void printErrorMessage(String e) {

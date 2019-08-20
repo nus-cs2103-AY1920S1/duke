@@ -9,9 +9,10 @@ public class Duke {
     /** TaskList to store user input. */
     private static TaskList taskList = new TaskList();
     /** Line for responses. */
-    private static String line = "    ____________________________________________________________";
+//    private static final String line = "    ____________________________________________________________";
+    private static final String line = String.format("%4s", " ") + String.format("%60s", " ").replace(" ", "_");
     /** Indentation for response. */
-    private static String indent = "     ";
+    private static final String indent = String.format("%5s", " ");
 
     /**
      * Main Method.
@@ -44,7 +45,7 @@ public class Duke {
             if (input.equals("list")) {
                 printList();
             } else {
-                String[] tokens = input.split(" ");
+                String[] tokens = input.split("\\s+");
                 if (tokens[0].equals("done")) {
                     try {
                         doTask(Integer.parseInt(tokens[1]));
@@ -64,9 +65,10 @@ public class Duke {
      * Adds Task to the TaskList from the given text and prints response.
      * @param text String text to be added.
      */
-    private static void addTask(String text) {
-        taskList.addTask(text);
-        String response = String.format("%s\n     added: %s\n%s\n", line, text, line);
+    private static void addTask(String description) {
+        Task task = TaskFactory.create(description);
+        taskList.addTask(task);
+        String response = String.format("%s\n%s\n%s\n", line, task.message(), line);
         System.out.println(response);
     }
 

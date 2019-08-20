@@ -34,11 +34,23 @@ public class Duke {
                 } else if (request.startsWith("done")) {
                     char num = request.charAt(request.length() - 1);
                     int index = Character.getNumericValue(num);
+                    if (index >= todolist.size()) {
+                        throw new DukeException(" ☹ OOPS!!! Do not exist that task.");
+                    }
                     Task task = todolist.get(index - 1);
                     task.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.print("  ");
                     System.out.println(task.toString());
+                } else if (request.startsWith("delete")) {
+                    char num = request.charAt(request.length() - 1);
+                    int index = Character.getNumericValue(num);
+                    if (index >= todolist.size()) {
+                        throw new DukeException(" ☹ OOPS!!! Do not exist that task.");
+                    }
+                    Task task = todolist.get(index - 1);
+                    todolist.remove(index - 1);
+                    deleteTask(task);
                 } else if (request.startsWith("todo")) {
                     if (request.trim().length() == 4) {
                         throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -84,6 +96,12 @@ public class Duke {
 
     private static void addTask(Task task) {
         System.out.println("Got it. I've added this task:");
+        System.out.println(String.format("  %s", task.toString()));
+        System.out.println(String.format("Now you have %d tasks in the list.", todolist.size()));
+    }
+
+    private static void deleteTask(Task task) {
+        System.out.println("Noted. I've removed this task:");
         System.out.println(String.format("  %s", task.toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", todolist.size()));
     }

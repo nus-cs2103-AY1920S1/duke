@@ -59,16 +59,20 @@ public class Duke {
         return command;
     }
 
-    private static void conductCommand(Command command) throws DukeException{
+    private static void conductCommand(Command command) throws DukeException {
         if (command == Command.LIST) {
             System.out.println(showFormattedList(tasks));
         } else if (command == Command.DONE) {
+            Task doneTask = tasks.get(scanner.nextInt() - 1);
+            doneTask.markDone();
+            System.out.println(showFormattedStr("Nice! I've marked this task as done:\n" + "  " + doneTask));
+        } else if (command == Command.DELETE) {
             Task removedTask = tasks.remove(scanner.nextInt() - 1);
-            removedTask.markDone();
-            System.out.println(showFormattedStr("Nice! I've marked this task as done:\n" + "  " + removedTask));
+            System.out.println(showFormattedStr("Noted. I've removed this task: \n" + "  " + removedTask
+                    + "\nNow you have " + tasks.size() + " tasks in the list."));
         } else {
             Task newTask;
-            String description = scanner.nextLine();
+            String description = scanner.nextLine().trim();
             if (command == Command.TODO) {
                 if (description.length() == 0) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");

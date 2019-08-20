@@ -15,6 +15,7 @@ public class Duke {
         String input;
         String check = "dummy";
         ArrayList<Task> taskStorage = new ArrayList<>();
+        int taskCount;
 
         while (check.equals("bye") == false) {
             input = sc.nextLine();
@@ -29,19 +30,51 @@ public class Duke {
                 continue;
             }
 
-            String[] doneMarkers = check.split(" ");
-            if(doneMarkers[0].equals("done")) {
-                Task taskDone = taskStorage.get(Integer.valueOf(doneMarkers[1]) - 1);
+            String[] dueSplit = input.split("/");
+            String due = "dummy";
+            if (dueSplit.length > 1) {
+                due = dueSplit[1];
+            }
+            String[] doneMarkers = dueSplit[0].split(" ", 2);
+            String userCommand = doneMarkers[0].toLowerCase();
+            String taskDescription = "dummy";
+            if (doneMarkers.length > 1) {
+                taskDescription = doneMarkers[1];
+            }
+
+            if(userCommand.equals("done")) {
+                Task taskDone = taskStorage.get(Integer.valueOf(taskDescription) - 1);
                 taskDone.markAsDone();
                 System.out.println("Nice! I've marked this task as done: " + "\n"
-                        + "  [" + taskDone.getStatusIcon() + "] " + taskDone.getDescription() + "\n");
-            } else {
-                Task t = new Task(input);
-                taskStorage.add(t);
-                System.out.println("added: " + t.getDescription() + "\n");
+                        + "    " + taskDone + "\n");
+            } else if (check.equals("bye") == false) {
+                Task t = new Task("");
+                if (userCommand.equals("todo")) {
+                    t = new Todo(taskDescription);
+                    taskStorage.add(t);
+                } else if (userCommand.equals("deadline")) {
+                    t = new Deadline(taskDescription, due);
+                    taskStorage.add(t);
+                } else if (userCommand.equals("event")) {
+                    t = new Event(taskDescription, due);
+                    taskStorage.add(t);
+                }
+
+                taskCount = Task.getTaskCount();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("    " + t);
+                System.out.println(taskCounter(taskCount) + "\n");
             }
         }
 
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static String taskCounter(int taskCount) {
+        if (taskCount > 1) {
+            return ("Now you have " + taskCount + " tasks in the list.");
+        } else {
+            return ("Now you have " + taskCount + " task in the list.");
+        }
     }
 }

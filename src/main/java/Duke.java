@@ -18,14 +18,25 @@ public class Duke {
     }
     public static void Detecting() {
         Scanner sc = new Scanner(System.in);
+        List<String> toDo = new LinkedList<>();
         while(true) {
             String cmd = sc.nextLine();
             if (cmd.toLowerCase().equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else {
-                System.out.println(cmd);
+                switch (cmd.toLowerCase()) {
+                    case "list":
+                        for (int i = 1; i <= toDo.size(); i++) {
+                            System.out.println(i + ". " + toDo.get(i-1));
+                        }
+                        break;
+                    default:
+                        toDo.add(cmd);
+                        System.out.println("added: " + cmd);
+                }
             }
         }
     }
 }
+

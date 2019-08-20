@@ -3,14 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    /*public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }*/
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         runUI(tasks);
@@ -39,6 +31,9 @@ public class Duke {
                     break;
                 case "done":
                     done(tasks, (int)command[1].charAt(0));
+                    break;
+                case "delete":
+                    deleteTask(tasks, (int)command[1].charAt(0));
                     break;
                 case "todo":
                     try {
@@ -123,11 +118,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    /*public static void echo(String str) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println(str);
-        System.out.println("    ____________________________________________________________");
-    }*/
+
 
     //Add new task
     public static void addTaskIn(Task task,ArrayList<Task> tasks) {
@@ -135,7 +126,6 @@ public class Duke {
         tasks.add(task);
         System.out.println("     Got it. I've added this task:");
         System.out.println("       ["+task.getType()+"]"+"["+ task.getStatus()+"] "+task.getTaskName());
-        //System.out.println("     added: "+task.getTaskName());
         System.out.println("     Now you have "+tasks.size()+" tasks in the list");
         System.out.println("    ____________________________________________________________");
     }
@@ -170,6 +160,24 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
+    //delate a task from list
+    public static void deleteTask(ArrayList<Task> tasks,int taskIndex) {
+        Task task = tasks.remove(taskIndex-49);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("       ["+task.getType()+"]"+"["+ task.getStatus()+"] "+task.getTaskName());
+        System.out.println("     Now you have "+tasks.size()+" tasks in the list");
+        System.out.println("    ____________________________________________________________");
+    }
 }
 
 
+
+    /*public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+    }*/

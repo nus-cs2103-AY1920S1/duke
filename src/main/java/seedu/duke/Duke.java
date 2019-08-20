@@ -3,6 +3,7 @@ package seedu.duke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String PROMPT = "> ";
@@ -15,6 +16,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?\n");
+
+        ArrayList<Task> taskList = new ArrayList<>();
 
         try (InputStreamReader isr = new InputStreamReader(System.in);
              BufferedReader br = new BufferedReader(isr)) {
@@ -36,9 +39,15 @@ public class Duke {
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     break mainLoop;
+                case "list":
+                    for (int i = 0; i < taskList.size(); ++i) {
+                        System.out.printf("%d. %s%n", i + 1, taskList.get(i).getDescription());
+                    }
+                    continue mainLoop;
                 default:
-                    System.out.println(line);
-                    break;
+                    taskList.add(new Task(line));
+                    System.out.printf("added: %s%n", line);
+                    continue mainLoop;
                 }
             }
         } catch (IOException e) {

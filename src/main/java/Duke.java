@@ -18,8 +18,7 @@ public class Duke {
     }
     public static void Detecting() {
         Scanner sc = new Scanner(System.in);
-        List<String> toDo = new LinkedList<>();
-        List<String> done = new LinkedList<>();
+        List<Task> toDo = new LinkedList<>();
         while(true) {
             String cmd = sc.nextLine();
             Scanner cmdSc = new Scanner(cmd);
@@ -28,20 +27,21 @@ public class Duke {
                 break;
             } else if (cmdSc.next().toLowerCase().equals("done")) {
                 int numDone = Integer.parseInt(cmdSc.next()) - 1;
-                done.set(numDone, "V");
-                System.out.println("Nice! I've marked this task as done:\n[V] " + toDo.get(numDone));
+                Task itemDone = toDo.get(numDone);
+                itemDone.mardAsDone();
+                System.out.println("Nice! I've marked this task as done:\n[" + itemDone.getStatusIcon() + "] " + itemDone.description);
             } else {
                 switch (cmd.toLowerCase()) {
                     case "list":
                         System.out.println("Here are the tasks in your list:");
                         for (int i = 1; i <= toDo.size(); i++) {
-                            System.out.println(i + ". " + "[" + done.get(i-1) + "] " + toDo.get(i-1));
+                            Task tsk = toDo.get(i-1);
+                            System.out.println(i + ". " + "[" + tsk.getStatusIcon() + "] " + tsk.description);
                         }
                         break;
 
                     default:
-                        toDo.add(cmd);
-                        done.add("X");
+                        toDo.add(new Task(cmd));
                         System.out.println("added: " + cmd);
                 }
             }

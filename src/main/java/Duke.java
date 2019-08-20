@@ -17,11 +17,20 @@ public class Duke {
             } else if (command.contains("done")) {
                 // Check if the first word is done
                 String[] sentence = command.split(" ");
-                if (sentence[0].equals("done")) {
-                    int completedTaskIndex = Integer.parseInt(sentence[1]);
-                    taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
+
+                try {
+                    if (sentence[0].equals("done")) {
+                        int completedTaskIndex = Integer.parseInt(sentence[1]);
+                        taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Which task on the list have you completed? (Eg 'done 2')");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! That task is not on the list, please check the list again by calling 'list'.");
                 }
+
                 command = input.nextLine();
+
             } else {
                 try {
                     if (!command.isEmpty()) {
@@ -42,7 +51,7 @@ public class Duke {
         System.out.println(farewell);
     }
 
-    public static Task generateNewTask(String task) throws DukeException {
+    private static Task generateNewTask(String task) throws DukeException {
         try {
             String type = task.substring(0, task.indexOf(' '));
             String taskDescription = task.substring(task.indexOf(' ') + 1);

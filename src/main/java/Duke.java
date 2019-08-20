@@ -10,10 +10,18 @@ public class Duke {
     private static String taskDoneMessage = "Good job! I've marked this task as done:\n  %s";
     private static String taskDeletedMessage = "No problem! I've deleted the task:\n %s\nYou've got %d tasks in your list.";
 
-    private static TaskList tasks = new TaskList();
+    //private TaskList tasks = new TaskList();
+    private TaskList tasks;
+    private DukeSaveLoad dukeSaveLoad = new DukeSaveLoad();
+    
+    //Constructor for Duke
+    public Duke() {
+        //If a pre-existing list exists, creates list data from it. Otherwise, an empty TaskList is initialised. 
+        tasks = dukeSaveLoad.createTaskListByReadingFromSaveFile();
+    }
 
     //Main method. Contains the interaction loop between Duke and the User.
-    public static void main(String[] args) throws UnsupportedEncodingException{
+    public static void main(String[] args) throws UnsupportedEncodingException {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
 
@@ -58,19 +66,29 @@ public class Duke {
             }
             //Fallthrough
         case Done: //Duke will mark one Task for completion
-            return processDoneCase(userInputString);
+            DukeReply doneReply = processDoneCase(userInputString);
+            dukeSaveLoad.writeTaskListToSaveFile(tasks); //Update the Save File
+            return doneReply;
             //Fallthrough
         case Delete:
-            return processDeleteCase(userInputString);
+            DukeReply deleteReply = processDeleteCase(userInputString);
+            dukeSaveLoad.writeTaskListToSaveFile(tasks); //Update the Save File
+            return deleteReply;            
             //Fallthrough
         case ToDo: //Duke will record a Todo Task
-            return processTodoCase(userInputString);
+            DukeReply ToDoReply = processTodoCase(userInputString);
+            dukeSaveLoad.writeTaskListToSaveFile(tasks); //Update the Save File
+            return ToDoReply;
             //Fallthrough
         case Deadline: //Duke will record a Deadline Task
-            return processDeadlineCase(userInputString);
+            DukeReply deadlineReply = processDeadlineCase(userInputString);
+            dukeSaveLoad.writeTaskListToSaveFile(tasks); //Update the Save File
+            return deadlineReply;
             //Fallthrough
         case Event: //Duke will record an Event Task
-            return processEventCase(userInputString);
+            DukeReply eventReply = processEventCase(userInputString);
+            dukeSaveLoad.writeTaskListToSaveFile(tasks); //Update the Save File
+            return eventReply;
             //Fallthrough
         case Invalid: //Something went wrong
             throw new InvalidInputException("");

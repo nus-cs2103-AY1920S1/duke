@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     @Override
-    //Converts the TaskList into a readable String
+    //Converts the TaskList into a human-readable String
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -46,6 +46,18 @@ public class TaskList {
             sb.append(t.toString());
             sb.append('\n');
         }
+        return sb.toString();
+    }
+
+    //converts the TaskList into a computer-readable string
+    public String toSaveFileString() {
+        StringBuilder sb = new StringBuilder();
+
+        for(Task t : tasks) {
+            sb.append(t.toSaveFileString());
+            sb.append("\n");
+        }
+
         return sb.toString();
     }
 }

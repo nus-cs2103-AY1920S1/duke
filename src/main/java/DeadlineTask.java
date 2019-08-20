@@ -40,4 +40,18 @@ public class DeadlineTask implements Task {
         sb.append(")");
         return sb.toString();
     }
+
+    @Override
+    //Converts the task into a computer-readable string
+    public String toSaveFileString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("D"); //Task Type
+        sb.append(Task.DEMARCATOR_STRING);
+        sb.append(description); //Description
+        sb.append(Task.DEMARCATOR_STRING);
+        sb.append(isDone ? 1 : 0); //Completion Status
+        sb.append(Task.DEMARCATOR_STRING);
+        sb.append(doByString); //Deadline of Event
+        return sb.toString();
+    }
 }

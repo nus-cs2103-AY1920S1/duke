@@ -34,4 +34,16 @@ public class ToDoTask implements Task {
         sb.append(this.description);
         return sb.toString();
     }
+
+    @Override
+    //Converts the task into a computer-readable string
+    public String toSaveFileString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("T"); //Task Type
+        sb.append(Task.DEMARCATOR_STRING);
+        sb.append(description); //Description
+        sb.append(Task.DEMARCATOR_STRING);
+        sb.append(isDone ? 1 : 0); //Completion Status
+        return sb.toString();
+    }
 }

@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
-    private static final String TICK = "?";
-    private static final String CROSS = "?";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -15,7 +13,7 @@ public class Duke {
         //System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         int listCounter = 0;
 
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
@@ -34,13 +32,16 @@ public class Duke {
             }
             else if (readInput.toLowerCase().equals("list")){
                 System.out.println(HORIZONTAL_LINE);
-                for(int i = 0; i < listCounter; i++)
-                    System.out.println("\t" + (i + 1)  + ". " + list.get(i));
+                for(int i = 0; i < listCounter; i++){
+                    String processedTaskString = "\t" + (i + 1)
+                            + "." + list.get(i).getStatusIcon() + " " + list.get(i).getTaskItem();
+                    System.out.println(processedTaskString);
+                }
                 System.out.println(HORIZONTAL_LINE);
             }
             else{
                 // Store content
-                list.add(readInput);
+                list.add(new Task(readInput, false));
                 listCounter++;
 
                 String processedInput = Duke.processText(readInput);
@@ -56,6 +57,9 @@ public class Duke {
 }
 
 class Task{
+    private static final String TICK = "\u2713";
+    private static final String CROSS = "\u2718";
+
     private boolean isDone;
     private String taskItem;
 
@@ -76,6 +80,11 @@ class Task{
 
     public boolean getCompletedStatus(){
         return isDone;
+    }
+
+    public String getStatusIcon(){
+        if(isDone) return "[" + TICK + "]";
+        else return "[" + CROSS + "]";
     }
 
     public String getTaskItem(){

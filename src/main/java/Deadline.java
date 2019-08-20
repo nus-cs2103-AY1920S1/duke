@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Deadline extends Task {
-    protected String byDate;
+    protected final String byDate;
 
     public Deadline(String description, String by) {
         super(description);

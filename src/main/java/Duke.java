@@ -9,14 +9,14 @@ public class Duke {
     private static final String MESSAGE_BOUNDARY = "    ____________________________________________________________";
 
     //Class Variables
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     /**
      * Constructor for the class Duke
      */
     //Constructor
     public Duke() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -32,26 +32,26 @@ public class Duke {
 
         //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
-        System.out.println("");
+        System.out.println();
     }
 
     /**
      * @param responseHeader A message to the user.
-     * @param listofTasks The list of tasks to be displayed to the user.
+     * @param listOfTasks The list of tasks to be displayed to the user.
      */
-    private void printResponse(String responseHeader, List<Task> listofTasks) {
+    private void printResponse(String responseHeader, List<Task> listOfTasks) {
         //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
         System.out.println(responseHeader);
 
-        if (listofTasks != null) {
-            int indexofTask = 0;
-            for (Task currentTask : listofTasks) {
+        if (listOfTasks != null) {
+            int indexOfTask = 0;
+            for (Task currentTask : listOfTasks) {
 
-                indexofTask += 1;
+                indexOfTask += 1;
                 System.out.print(MESSAGE_PADDING);
-                System.out.print(String.format("%d.", indexofTask));
+                System.out.print(String.format("%d.", indexOfTask));
                 System.out.println(currentTask);
             }
         }
@@ -64,9 +64,9 @@ public class Duke {
     /**
      * @param responseHeader A message to the user.
      * @param refTask The task to be displayed to the user.
-     * @param displayNumofTasks Display number of task(s) in task list
+     * @param displayNumOfTasks Display number of task(s) in task list
      */
-    private void printResponseSingleTask(String responseHeader, Task refTask, boolean displayNumofTasks) {
+    private void printResponseSingleTask(String responseHeader, Task refTask, boolean displayNumOfTasks) {
         //Print Boundary
         System.out.println(MESSAGE_BOUNDARY);
         System.out.print(MESSAGE_PADDING);
@@ -76,7 +76,7 @@ public class Duke {
         System.out.print("  ");
         System.out.println(refTask);
 
-        if (displayNumofTasks) {
+        if (displayNumOfTasks) {
             System.out.print(MESSAGE_PADDING);
             System.out.println(String.format(
                     "Now you have %d task%s in the list.",
@@ -93,24 +93,50 @@ public class Duke {
     /**
      * @param in The query to process.
      * @return The task that was marked as done.
-     * @throws DukeException
+     * @throws DukeException representing any checked exceptions
      */
     //#region [Business Logic]
-    private Task tryMarkTaskAsDone(Scanner in) throws DukeException{
+    private Task markTaskAsDone(Scanner in) throws DukeException{
 
         if (!in.hasNextInt()) {
             throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
         }
 
         int taskIndexRef = in.nextInt();
-
         if (in.hasNext()) {
             throw new DukeIllegalArgumentException("Too many arguments for the 'mark as done' command");
         }
 
         if (0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
-            this.taskList.get(taskIndexRef - 1).markAsDone();
-            return this.taskList.get(taskIndexRef - 1);
+            Task taskRef = this.taskList.get(taskIndexRef - 1);
+            taskRef.markAsDone();
+            return taskRef;
+        }
+
+        throw new DukeInvalidCommandException("No such task was found");
+    }
+
+    /**
+     * @param in The query to process.
+     * @return The task that was deleted.
+     * @throws DukeException representing any checked exceptions
+     */
+    //#region [Business Logic]
+    private Task deleteTask(Scanner in) throws DukeException{
+
+        if (!in.hasNextInt()) {
+            throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
+        }
+
+        int taskIndexRef = in.nextInt();
+        if (in.hasNext()) {
+            throw new DukeIllegalArgumentException("Too many arguments for the 'delete task' command");
+        }
+
+        if (0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
+            Task taskRef = this.taskList.get(taskIndexRef - 1);
+            this.taskList.remove(taskIndexRef - 1);
+            return taskRef;
         }
 
         throw new DukeInvalidCommandException("No such task was found");
@@ -151,8 +177,15 @@ public class Duke {
                     break;
 
                 case "done":
-                    Task completedtask = tryMarkTaskAsDone(in);
-                    printResponseSingleTask("Nice! I've marked this task as done:", completedtask, false);
+                    Task completedTask = markTaskAsDone(in);
+                    printResponseSingleTask("Nice! I've marked this task as done:",
+                            completedTask, false);
+                    break;
+
+                case "delete":
+                    Task deletedTask = deleteTask(in);
+                    printResponseSingleTask("Noted. I've removed this task:",
+                            deletedTask, true);
                     break;
 
                 case "bye":
@@ -187,19 +220,19 @@ public class Duke {
      */
     public void spin() {
         boolean continueChat;
-        Scanner myscanner = new Scanner(System.in);  // Create a Scanner object
+        Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
 
         printResponse("Hello! I'm Duke\n" + MESSAGE_PADDING + "What can I do for you?");
 
         do {
             //Get query from user
-            String userQuery = myscanner.nextLine();
+            String userQuery = myScanner.nextLine();
 
             //Find and give Response
             continueChat = giveResponse(userQuery);
 
         } while (continueChat);
-        myscanner.close();
+        myScanner.close();
     }
 
 

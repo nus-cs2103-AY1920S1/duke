@@ -1,4 +1,6 @@
-public class Task {
+package duke.tasks;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -11,21 +13,12 @@ public class Task {
         this.isDone = true;
     }
 
-    public void unmarkDone() {
-        this.isDone = false;
-    }
-
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        sb.append(getStatusIcon());
-        sb.append("] ");
-        sb.append(description);
-        return sb.toString();
+        return String.format("[%s]%s", getStatusIcon(), description);
     }
 }

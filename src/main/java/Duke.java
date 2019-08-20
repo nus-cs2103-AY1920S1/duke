@@ -70,6 +70,8 @@ public class Duke {
                 }
             } catch (DukeException ex) {
                 System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                System.out.println(upperBorder + "☹ OOPS!!! Please input something! :-(" + "\n" + lowerBorder);
             }
         }
 

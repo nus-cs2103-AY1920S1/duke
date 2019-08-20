@@ -22,6 +22,10 @@ public class Task {
         return (isDone ? "+" : " "); //return "+" if done " " otherwise
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return ("[" + getStatusIcon() + "] " + this.description);

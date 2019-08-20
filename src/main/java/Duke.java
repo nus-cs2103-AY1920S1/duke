@@ -24,9 +24,11 @@ public class Duke {
                 command = input.nextLine();
             } else {
                 if (!command.isEmpty()) {
-                    Task newTask = new Task(command);
+                    Task newTask = generateNewTask(command);
                     taskList.addTask(newTask);
-                    System.out.println("added: " + command);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newTask.toString());
+                    System.out.println("Now you have " + taskList.numTasks  + " tasks in the list");
                 }
                 command = input.nextLine();
             }
@@ -34,5 +36,29 @@ public class Duke {
 
         String farewell = "Bye. Hope to see you again soon!";
         System.out.println(farewell);
+    }
+
+    public static Task generateNewTask(String task) {
+        String type = task.substring(0, task.indexOf(' '));
+        String taskDescription = task.substring(task.indexOf(' ') + 1);
+        Task newTask = new Task("dummy");
+
+        if (type.equals("todo")) {
+            newTask = new ToDo(taskDescription);
+        } else if (type.equals("deadline")) {
+            String[] sentence = taskDescription.split("/by");
+            String description = sentence[0];
+            String deadline = sentence[1];
+            newTask = new Deadline(description, deadline);
+        } else if (type.equals("event")) {
+            String[] sentence = taskDescription.split("/at");
+            String description = sentence[0];
+            String time = sentence[1];
+            newTask = new Event(description, time);
+        } else {
+            System.out.println("Wrong format");
+        }
+
+        return newTask;
     }
 }

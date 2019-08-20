@@ -1,8 +1,8 @@
 package duke;
 
-public class Task {
-    String description;
-    boolean done;
+abstract public class Task {
+    protected String description;
+    protected boolean done;
     public Task(String d) {
         description = d;
         done = false;
@@ -13,10 +13,5 @@ public class Task {
     public void markDone() {
         done = true;
     }
-
-    @Override
-    public String toString() {
-        char statusChar = done ? '✓' : '✗';
-        return String.format("[%c] %s", statusChar, getDescription());
-    }
+    abstract public String toString();
 }

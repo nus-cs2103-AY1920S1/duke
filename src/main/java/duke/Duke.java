@@ -1,18 +1,15 @@
 package duke;
 
-import duke.commands.Bye;
-import duke.commands.Done;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     private CommandMap commandMap = new CommandMap();
     private TaskList taskList = new TaskList();
     public Duke() {
-        commandMap.register(new Bye(this));
+        commandMap.register(new duke.commands.Bye(this));
         commandMap.register(new duke.commands.List(this));
-        commandMap.register(new Done(this));
+        commandMap.register(new duke.commands.Done(this));
+        commandMap.register(new duke.commands.Todo(this));
     }
     public void run() {
         say("Hello! I'm Duke\nWhat can I do for you?");
@@ -26,10 +23,13 @@ public class Duke {
                 command.execute(args);
             }
             else {
-                taskList.add(new Task(input));
-                say("added: " + input);
+                say("Sorry, I don't know what that means.");
             }
         }
+    }
+    public void addTask(Task t) {
+        taskList.add(t);
+        say("added: " + t);
     }
     public TaskList getTaskList() {
         return taskList;

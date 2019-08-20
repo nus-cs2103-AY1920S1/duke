@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.Scanner;
 import seedu.duke.PrettyPrint;
 import seedu.duke.EventHandler;
 /**
@@ -20,5 +21,16 @@ public class Duke {
 
     PrettyPrint.printBlock(new String[] {"Hello! I'm Duke.", "What can I do for you?"});
 
+    // Begin input handling
+    Scanner sc = new Scanner(System.in);
+    String input;
+    input = sc.next();
+    EventHandler eventHandler = new EventHandler();
+
+    while (!input.equals("exit")) {
+      eventHandler.run(input);
+      input = sc.next();
     }
+
+  }
 }

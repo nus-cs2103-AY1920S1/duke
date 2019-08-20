@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
+    private static final String TICK = "?";
+    private static final String CROSS = "?";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -66,5 +68,17 @@ class Task{
     public Task(String taskItem, boolean isDone){
         this.isDone = isDone;
         this.taskItem = taskItem;
+    }
+
+    public void setDone(){
+        isDone = true;
+    }
+
+    public boolean getCompletedStatus(){
+        return isDone;
+    }
+
+    public String getTaskItem(){
+        return taskItem;
     }
 }

@@ -16,4 +16,5 @@ public class Event extends Task {
     public char getRepLetter() {
         return 'E';
     }
+
 }

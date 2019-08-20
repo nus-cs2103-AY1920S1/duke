@@ -57,6 +57,8 @@ public class Duke {
                     }
                 } else if (input.matches("done\\s\\d+")) {
                     doDoneTask(input);
+                } else if (input.matches("delete\\s\\d+")) {
+                    doDeleteTask(input);
                 } else if (input.equals("bye")) {
                     exitApp();
                     isGoodbye = true;
@@ -65,6 +67,8 @@ public class Duke {
                 }
             } catch (DukeException dukeEx) {
                 //do nothing
+            } catch (Exception e) {
+                CmdInterface.printHBars("☹ OOPS!!! Error: " + e.getMessage());
             }
 
         }
@@ -123,11 +127,20 @@ public class Duke {
     }
 
     public static void doDoneTask(String input) {
-        int chosenTaskNo = Integer.parseInt(input.substring(5));
-        Task chosenTask = taskList.get(chosenTaskNo - 1);
+        int chosenTaskNo = Integer.parseInt(input.substring(5)) - 1;
+        Task chosenTask = taskList.get(chosenTaskNo);
         chosenTask.setDone(true);
         CmdInterface.printHBars("Nice! I've marked this task as done: \n" +
-                "  [✓] " + chosenTask.getTaskName());
+                " " + Checkbox.TICK.icon + " "  + chosenTask.getTaskName());
+    }
+
+    public static void doDeleteTask(String input) {
+        int chosenTaskNo = Integer.parseInt(input.substring(7)) - 1;
+        Task chosenTask = taskList.get(chosenTaskNo);
+        taskList.remove(chosenTaskNo);
+        CmdInterface.printHBars("Noted. I've removed this task: \n" +
+                "  "+ chosenTask.toString() + "\n" +
+                "Now you have "+ taskList.size() + " tasks in the list.");
     }
 
     public static void listTasks() {
@@ -135,16 +148,14 @@ public class Duke {
         int i = 1;
         sb.append("Here are the tasks in your list:\n");
         for (Task task : taskList) {
-            String checkbox = task.isDone() ? "[✓]" : "[✗]";
-            sb.append(i++ + ". [" + task.getRepLetter() + "]" + checkbox + " " + task.getTaskName() + "\n");
+            sb.append(i++ + "." + task.toString() + "\n");
         }
         CmdInterface.printHBars(sb.toString());
     }
 
     public static void printAddSuccess(Task task) {
-        String checkbox = task.isDone() ? "[✓]" : "[✗]";
         CmdInterface.printHBars("Got it. I've added this task: \n" +
-                "  [" + task.getRepLetter() + "]" + checkbox + task.getTaskName() +"\n" +
+                "  " + task.toString() +"\n" +
                 "Now you have " + taskList.size() + " tasks in the list.");
     }
 

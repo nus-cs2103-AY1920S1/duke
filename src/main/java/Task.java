@@ -28,4 +28,10 @@ public class Task {
         return ' ';
     }
 
+    @Override
+    public String toString() {
+        String checkbox = this.isDone() ? Checkbox.TICK.icon : Checkbox.CROSS.icon;
+        return "[" + this.getRepLetter() + "]" + checkbox + " " + this.getTaskName();
+    }
+
 }

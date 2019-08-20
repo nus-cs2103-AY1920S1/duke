@@ -4,4 +4,6 @@ event DOTA wcg /at Mon 9pm - 12pm
 list
 done 1
 list
+delete 1
+list
 bye

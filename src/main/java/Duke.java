@@ -18,11 +18,21 @@ public class Duke {
         // Start reading input
         while(sc.hasNextLine()){
             String readInput = sc.nextLine();
+
+            // Include case-insensitive bye
             if(readInput.toLowerCase().equals("bye")) {
                 System.out.println(goodbye);
                 break;
             }
-            else System.out.println(readInput);
+
+            String processedInput = Duke.process(readInput);
+            System.out.println(processedInput);
         }
+    }
+
+    // Add in Indentation and horizontal lines
+    private static String process(String input){
+        String horizontalLines = "\t____________________________________________________________\n";
+        return horizontalLines + "\t" + input + "\n" + horizontalLines;
     }
 }

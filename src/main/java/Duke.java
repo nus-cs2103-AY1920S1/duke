@@ -29,7 +29,7 @@ public class Duke {
                     System.out.println(line + "\n" + "Nice! I've marked this task as done: \n" +
                             allcoms.get(val - 1).printer() + "\n" + line);
                 }catch(Exception e){
-                    System.out.println("Error");
+                    System.out.println("Error, you have entered an invalid number");
                 }
             }else if(command.equals("list")){
                 System.out.println(line);
@@ -38,23 +38,42 @@ public class Duke {
                 }
                 System.out.println(line);
             }else{
-                String[]splitwords = command.split(" ");
-                if(splitwords[0].equals("todo")){
-                    String midcommand = command.substring(5);
-                    allcoms.add(new ToDo(midcommand));
-                }else if(splitwords[0].equals("deadline")){
-                    String midcommand = command.substring(9);
-                    allcoms.add(new Deadline(midcommand));
-                }else if(splitwords[0].equals("event")){
-                    String midcommand = command.substring(6);
-                    allcoms.add(new Event(midcommand));
-                }else{System.err.println("You have entered an invalid command");}
-
+                String[]splitwords = command.trim().split("\\s");
+                try {
+                    if (splitwords[0].equals("todo")) {
+                        String midcommand = command.trim().substring(5);
+                        if (midcommand.length() != 0) {
+                            allcoms.add(new ToDo(midcommand));
+                        } else {
+                            throw new NullPointerException();
+                        }
+                    } else if (splitwords[0].equals("deadline")) {
+                        String midcommand = command.trim().substring(9);
+                        if (midcommand.length() != 0) {
+                            allcoms.add(new Deadline(midcommand));
+                        } else {
+                            throw new NullPointerException();
+                        }
+                    } else if (splitwords[0].equals("event")) {
+                        String midcommand = command.trim().substring(6);
+                        if (midcommand.length() != 0) {
+                            allcoms.add(new Event(midcommand));
+                        } else {
+                            throw new NullPointerException();
+                        }
+                    } else {
+                        throw new IllegalArgumentException();
+                    }
 
                 /*allcoms.add(new Task(command));*/
                 System.out.println(line + "\n" + "Got it. I've added this task:" + "\n" +
                                             allcoms.get(allcoms.size()-1).printer() + "\n" + "Now you have "
                                                 + allcoms.size() + " tasks in the list."+ "\n" + line);
+                }catch(IllegalArgumentException e){
+                    System.out.println(line + "\n" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-()" + "\n" + line);
+                }catch(Exception e){
+                    System.out.println(line + "\n" + "☹ OOPS!!! The description of a event cannot be empty."+ "\n" + line);
+                }
             }
         }
     }

@@ -5,18 +5,11 @@ public class Event extends Task {
     private String description;
     private String notesInBrackets;
 
-    private Event() {
-        super.description = "";
-        super.completed = false;
-        super.id = 0;
-        super.taskType = "";
-        this.description = "";
-        this.notesInBrackets = "";
-    }
+    private Event() {}
     private Event(String descr, boolean completed, int id) {
         super.completed = completed;
         super.id = id;
-        super.taskType = "E";
+        super.taskType = TaskType.E;
 
         setupDetails(descr);
     }

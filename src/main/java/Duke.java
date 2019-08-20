@@ -39,7 +39,7 @@ public class Duke {
         }
         dukeRespond("Got it. I've added this task:",
                 "  " + newTask.toString(),
-                String.format("Now you have %d tasks in the list", Task.totalNumOfTasks));
+                String.format("Now you have %d task(s) in the list", Task.totalNumOfTasks));
     }
     private static void markDone(String cmd) {
         String[] tmp = cmd.split(" ");

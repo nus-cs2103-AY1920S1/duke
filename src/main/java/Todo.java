@@ -1,16 +1,11 @@
 public class Todo extends Task {
 
-    private Todo() {
-        super.description = "";
-        super.completed = false;
-        super.id = 0;
-        super.taskType = "";
-    }
+    private Todo() {}
     private Todo(String descr, boolean completed, int id) {
         super.description = descr;
         super.completed = completed;
         super.id = id;
-        super.taskType = "T";
+        super.taskType = TaskType.T;
     }
 
     public static Todo create(String descr) {

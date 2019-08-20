@@ -5,18 +5,11 @@ public class Deadline extends Task {
     private String description;
     private String notesInBrackets;
 
-    private Deadline() {
-        super.description = "";
-        super.completed = false;
-        super.id = 0;
-        super.taskType = "";
-        this.description = "";
-        this.notesInBrackets = "";
-    }
+    private Deadline() {}
     private Deadline(String descr, boolean completed, int id) {
         super.completed = completed;
         super.id = id;
-        super.taskType = "D";
+        super.taskType = TaskType.D;
 
         setupDetails(descr);
     }

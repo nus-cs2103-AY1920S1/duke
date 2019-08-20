@@ -12,7 +12,7 @@ public abstract class Task {
     protected boolean completed;
     protected int id;
 
-    protected String taskType;
+    protected TaskType taskType;
 
     /*
     //constructors

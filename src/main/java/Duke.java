@@ -70,7 +70,7 @@ public class Duke {
     private void addTask(String text) {
         String[] input = text.split(" ", 2);
         Task task;
-        switch(input[0]) {
+        switch (input[0]) {
         case "event": {
             String[] desc = input[1].split(" /at ");
             task = new Event(desc[0], desc[1]);

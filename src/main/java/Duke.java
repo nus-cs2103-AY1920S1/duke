@@ -231,7 +231,7 @@ public class Duke {
                 Task task = tasks.get(i);
 
                 StringBuilder rowBuilder = new StringBuilder(
-                        String.format("%s|%s|%s", task.type, task.isDone ? "1" : "0", task.description));
+                        String.format("%s|%s|%s", task.type.getTag(), task.isDone ? "1" : "0", task.description));
 
                 if (task instanceof Deadline) {
                     rowBuilder.append(String.format("|%s", ((Deadline) task).by));
@@ -263,17 +263,14 @@ public class Duke {
                     boolean isDone = "1".equals(parts[1]);
                     String description = parts[2];
 
-                    switch(type) {
-                        case "T":
-                            tasks.add(new Todo(description, isDone));
-                            break;
-                        case "D":
-                            String by = parts[3];
-                            tasks.add(new Deadline(description, isDone, by));
-                            break;
-                        case "E":
-                            String at = parts[3];
-                            tasks.add(new Event(description, isDone, at));
+                    if (type.equalsIgnoreCase(TaskType.TODO.getTag())) {
+                        tasks.add(new Todo(description, isDone));
+                    } else if(type.equalsIgnoreCase(TaskType.DEADLINE.getTag())) {
+                        String by = parts[3];
+                        tasks.add(new Deadline(description, isDone, by));
+                    } else if (type.equalsIgnoreCase(TaskType.EVENT.getTag())) {
+                        String at = parts[3];
+                        tasks.add(new Event(description, isDone, at));
                     }
                 }
 

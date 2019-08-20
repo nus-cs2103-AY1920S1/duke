@@ -10,16 +10,16 @@ public class Event extends Task {
     protected String at;
 
     public Event(String description, String at) {
-        super(description, "E");
+        super(description, TaskType.EVENT);
         this.at = at;
     }
 
     public Event(String description, boolean isDone, String at) {
-        super(description, isDone, "E");
+        super(description, isDone, TaskType.EVENT);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[" + TaskType.EVENT.getTag() + "]" + super.toString() + " (at: " + at + ")";
     }
 }

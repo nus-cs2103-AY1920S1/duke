@@ -8,15 +8,15 @@
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected String type;
+    protected TaskType type;
 
-    public Task(String description, String type) {
+    public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
         this.type = type;
     }
 
-    public Task(String description, boolean isDone, String type) {
+    public Task(String description, boolean isDone, TaskType type) {
         this.description = description;
         this.isDone = isDone;
         this.type = type;
@@ -25,8 +25,8 @@ public abstract class Task {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public TaskType getType() { return type; }
+    public void setType(TaskType type) { this.type = type; }
 
     public boolean isDone() { return isDone; }
     public void setDone(boolean isDone) { this.isDone = isDone; }

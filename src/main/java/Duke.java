@@ -14,6 +14,7 @@ public class Duke {
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         runUI(tasks);
+
     }
 
     public static void runUI(ArrayList<Task> tasks){
@@ -40,6 +41,7 @@ public class Duke {
                     done(tasks, (int)command[1].charAt(0));
                     break;
                 case "todo":
+
                     taskName = taskName.substring(5);
                     task = new Todo (taskName);
                     addTaskIn(task,tasks);
@@ -48,14 +50,14 @@ public class Duke {
                 case "deadline":
                     taskName = taskName.substring(9);
                     date = taskName.split("/");
-                    task = new Deadline (taskName,date[1]);
+                    task = new Deadline (date[0],date[1].substring(3));
                     addTaskIn(task,tasks);
                     break;
 
                 case "event":
                     taskName = taskName.substring(6);
                     date = taskName.split("/");
-                    task = new Event (taskName, date[1]);
+                    task = new Event (date[0], date[1].substring(3));
                     addTaskIn(task,tasks);
                     break;
                 default:

@@ -18,19 +18,21 @@ public class Duke {
         System.out.println("    What can I do for you?");
         System.out.println(line);
 
-        String echo = sc.nextLine();
-        while(!echo.equals("bye")) {
-            System.out.println(line);
-            System.out.println("    " + echo);
-            System.out.println(line);
-            echo = sc.nextLine();
-        }
+        if(sc.hasNextLine()) {
+            String echo = sc.nextLine();
 
-        if(echo.equals("bye")) {
-            System.out.println(line);
-            System.out.println("    Bye. Hope to see you again soon!");
-            System.out.println(line);
-        }
+            while (!echo.equals("bye")) {
+                System.out.println(line);
+                System.out.println("    " + echo);
+                System.out.println(line);
+                echo = sc.nextLine();
+            }
 
+            if (echo.equals("bye")) {
+                System.out.println(line);
+                System.out.println("    Bye. Hope to see you again soon!");
+                System.out.println(line);
+            }
+        }
     }
 }

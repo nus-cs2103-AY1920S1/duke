@@ -41,13 +41,23 @@ public class Duke {
                     done(tasks, (int)command[1].charAt(0));
                     break;
                 case "todo":
+                    try {
+                        taskName = taskName.substring(5);
+                        task = new Todo (taskName);
+                        addTaskIn(task,tasks);
 
-                    taskName = taskName.substring(5);
-                    task = new Todo (taskName);
-                    addTaskIn(task,tasks);
-                    break;
+                    } catch (StringIndexOutOfBoundsException ex1) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
+                    } finally {
+                        break;
+                    }
+
 
                 case "deadline":
+
+
                     taskName = taskName.substring(9);
                     date = taskName.split("/");
                     task = new Deadline (date[0],date[1].substring(3));
@@ -62,6 +72,16 @@ public class Duke {
                     break;
                 default:
                     //
+                    try {
+                        throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    } catch (RuntimeException ex4) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println(ex4.getMessage());
+                        System.out.println("    ____________________________________________________________");
+                    } finally {
+                        break;
+                    }
+
             }
         }
     }

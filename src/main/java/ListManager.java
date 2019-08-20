@@ -84,4 +84,13 @@ public class ListManager {
         }
         System.out.println(bar);
     }
+
+    public void delete(int index) {
+        Task removed = this.actualList.remove(index - 1);
+        System.out.println(bar);
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t  " + removed);
+        System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
+        System.out.println(bar);
+    }
 }

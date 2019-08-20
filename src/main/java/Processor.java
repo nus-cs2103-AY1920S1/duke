@@ -30,6 +30,9 @@ public class Processor {
             } else if (strArray[0].equals("done")) {
                 taskList.done(Integer.parseInt(strArray[1]));
                 input = sc.nextLine();
+            } else if (strArray[0].equals("delete")) {
+                taskList.delete(Integer.parseInt(strArray[1]));
+                input = sc.nextLine();
             } else {
                 taskList.add(input);
                 input = sc.nextLine();

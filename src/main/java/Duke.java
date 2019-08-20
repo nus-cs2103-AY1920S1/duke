@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class Duke {
 
     private static String divider = "\t____________________________________________________________\n";
-    private static String intro = "\tHello! I'm Duke\n\tWhat can I do for you?\n";
-    private static String goodbye = "\tBye. Hope to see you again soon!\n";
-    private static String tasklist_header = "\tHere are the tasks in your list:\n";
-    private static String done_message = "\tNice! I've marked this task as done!\n";
-    private static String task_added_message = "\tGot it. I've added this task:\n";
+    private static String divider_no_newline = "\t____________________________________________________________";
+    private static String intro = "\t Hello! I'm Duke\n\t What can I do for you?\n";
+    private static String goodbye = "\t Bye. Hope to see you again soon!\n";
+    private static String tasklist_header = "\t Here are the tasks in your list:\n";
+    private static String done_message = "\t Nice! I've marked this task as done:\n";
+    private static String task_added_message = "\t Got it. I've added this task:\n";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -19,9 +20,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println(divider);
-        System.out.println(intro);
-        System.out.println(divider);
+        System.out.print(divider);
+        System.out.print(intro);
+        System.out.print(divider);
 
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
@@ -41,7 +42,7 @@ public class Duke {
                 case "list": {
                     StringBuilder s = new StringBuilder(tasklist_header);
                     for (Task t: list) {
-                        s.append("\t").append(t);
+                        s.append("\t ").append(t);
                     }
                     print(s.toString());
                     break;
@@ -50,14 +51,14 @@ public class Duke {
                     int id = Integer.valueOf(params[0]);
                     Task current = list.get(id-1);
                     current.markAsComplete();
-                    String s = done_message + "\t\t" + current.toStringNoID();
+                    String s = done_message + "\t   " + current.toStringNoID();
                     print(s);
                     break;
                 }
                 case "todo": {
                     Task current = new ToDo(joinStrings(params));
                     list.add(current);
-                    String s = task_added_message + "\t\t" + current.toStringNoID() + Task.totalNoOfTasks();
+                    String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
                     print(s);
                     break;
                 }
@@ -65,7 +66,7 @@ public class Duke {
                     String[] details = splitByIdentifier(params, "/by");
                     Task current = new Deadline(details[0], details[1]);
                     list.add(current);
-                    String s = task_added_message + "\t\t" + current.toStringNoID() + Task.totalNoOfTasks();
+                    String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
                     print(s);
                     break;
                 }
@@ -73,7 +74,7 @@ public class Duke {
                     String[] details = splitByIdentifier(params, "/at");
                     Task current = new Event(details[0], details[1]);
                     list.add(current);
-                    String s = task_added_message + "\t\t" + current.toStringNoID() + Task.totalNoOfTasks();
+                    String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
                     print(s);
                     break;
                 }
@@ -83,13 +84,14 @@ public class Duke {
                 }
             }
 
+            System.out.println();
         }
     }
 
     private static void print (String s) {
-        System.out.println(divider);
+        System.out.print(divider);
         System.out.print(s);
-        System.out.println(divider);
+        System.out.print(divider_no_newline);
     }
 
     private static String joinStrings (String[] strings) {

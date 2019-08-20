@@ -1,4 +1,4 @@
-abstract class Task {
+public abstract class Task {
 
     static int noOfTasks = 1;
     protected int taskID;
@@ -22,7 +22,7 @@ abstract class Task {
     }
 
     static String totalNoOfTasks() {
-        return "\tNow you have " + (noOfTasks - 1) + ((noOfTasks - 1) == 1? " task" : " tasks") + " in the list.\n";
+        return "\t Now you have " + (noOfTasks - 1) + ((noOfTasks - 1) == 1? " task" : " tasks") + " in the list.\n";
     }
 
     @Override

@@ -8,6 +8,8 @@ public class List extends Command {
         super(duke);
         name = "list";
     }
+
+    @Override
     public void execute(String[] args) {
         duke.say(duke.getTaskList().toString());
     }

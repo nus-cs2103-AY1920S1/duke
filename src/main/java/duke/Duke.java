@@ -10,6 +10,7 @@ public class Duke {
         commandMap.register(new duke.commands.List(this));
         commandMap.register(new duke.commands.Done(this));
         commandMap.register(new duke.commands.Todo(this));
+        commandMap.register(new duke.commands.Deadline(this));
     }
     public void run() {
         say("Hello! I'm Duke\nWhat can I do for you?");
@@ -20,7 +21,12 @@ public class Duke {
             if(args.length == 0) continue;
             Command command = commandMap.get(args[0]);
             if(command != null) {
-                command.execute(args);
+                try {
+                    command.execute(args);
+                }
+                catch(DukeException e) {
+                    say(e.toString());
+                }
             }
             else {
                 say("Sorry, I don't know what that means.");

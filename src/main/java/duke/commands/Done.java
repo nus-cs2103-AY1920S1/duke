@@ -9,6 +9,8 @@ public class Done extends Command {
         super(duke);
         name = "done";
     }
+
+    @Override
     public void execute(String[] args) {
         TaskList taskList = duke.getTaskList();
         int oneIndex = Integer.parseInt(args[1]);

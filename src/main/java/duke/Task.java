@@ -7,6 +7,9 @@ abstract public class Task {
         description = d;
         done = false;
     }
+    public char getStatusChar() {
+        return done ? '✓' : '✗';
+    }
     public String getDescription() {
         return description;
     }

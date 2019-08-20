@@ -9,5 +9,5 @@ abstract public class Command {
     public String getName() {
         return name;
     };
-    abstract public void execute(String[] args);
+    abstract public void execute(String[] args) throws DukeException;
 }

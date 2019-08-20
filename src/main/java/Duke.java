@@ -38,8 +38,23 @@ public class Duke {
                 }
                 System.out.println(line);
             }else{
-                allcoms.add(new Task(command));
-                System.out.println(line + "\n" + "added: " + command + "\n" + line);
+                String[]splitwords = command.split(" ");
+                if(splitwords[0].equals("todo")){
+                    String midcommand = command.substring(5);
+                    allcoms.add(new ToDo(midcommand));
+                }else if(splitwords[0].equals("deadline")){
+                    String midcommand = command.substring(9);
+                    allcoms.add(new Deadline(midcommand));
+                }else if(splitwords[0].equals("event")){
+                    String midcommand = command.substring(6);
+                    allcoms.add(new Event(midcommand));
+                }else{System.err.println("You have entered an invalid command");}
+
+
+                /*allcoms.add(new Task(command));*/
+                System.out.println(line + "\n" + "Got it. I've added this task:" + "\n" +
+                                            allcoms.get(allcoms.size()-1).printer() + "\n" + "Now you have "
+                                                + allcoms.size() + " tasks in the list."+ "\n" + line);
             }
         }
     }

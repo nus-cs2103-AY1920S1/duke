@@ -8,7 +8,7 @@ public class Duke {
 
     private ArrayList<Task> list;
 
-    public Duke() {
+    private Duke() {
         this.list = new ArrayList<>();
     }
 
@@ -23,8 +23,8 @@ public class Duke {
     // print out all the commands as a numbered list
     private void printList() {
         System.out.println("\tHere are the tasks in your list:");
-        for (Task task : list) {
-            System.out.println("\t" + task);
+        for (int i = 0; i < this.list.size(); i++) {
+            System.out.println(String.format("\t%d.%s", i + 1, this.list.get(i)));
         }
     }
 

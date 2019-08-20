@@ -39,7 +39,13 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("  " + curr_task);
     }
-
+    public void delete(int task_num) {
+        Task curr_task = this.tasks.get(task_num - 1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("  " + curr_task);
+        this.tasks.remove(task_num - 1);
+        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
+    }
     public static void main(String[] args) throws DukeException{
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
@@ -57,7 +63,7 @@ public class Duke {
                     if (splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
                         duke.done(Integer.parseInt(splited[1]));
                     } else {
-                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DoneParameterException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } else if (command.startsWith("todo")) {
                     if(command.equals("todo") || command.equals("todo ")) {
@@ -75,6 +81,13 @@ public class Duke {
                     splited[0].replaceFirst("event ", "");
                     Event curr_task = new Event(splited[0], splited[1]);
                     duke.add(curr_task);
+                } else if (command.startsWith("delete ")) {
+                    String[] splited = command.split(" ");
+                    if (splited[1].matches("^[0-9]*[1-9][0-9]*$") && splited.length == 2) {
+                        duke.delete(Integer.parseInt(splited[1]));
+                    } else {
+                        throw new DeleteParameterException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
                 } else {
                     throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -82,6 +95,10 @@ public class Duke {
         } catch(InvalidInputException ex) {
             System.out.println(ex.getMessage());
         } catch(EmptyToDoDescriptionException ex) {
+            System.out.println(ex.getMessage());
+        } catch(DoneParameterException ex) {
+            System.out.println(ex.getMessage());
+        } catch(DeleteParameterException ex) {
             System.out.println(ex.getMessage());
         }
     }

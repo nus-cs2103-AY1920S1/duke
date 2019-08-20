@@ -92,13 +92,13 @@ public class Duke{
     private static void removeTask(List<Task> list, int index) throws TaskListEmptyException, DukeException{
         if (list.isEmpty()) {
             throw new TaskListEmptyException("list is empty");
-        } else if (index < - 1) {
+        } else if (index <= -1) {
             throw new DukeException("incorrect index: " + index);
         } else {
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + list.get(index));
             list.remove(index);
-            System.out.println("Now you have " + list.size() + "tasks in the list.");
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
         }
     }
 

@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -92,20 +98,31 @@ public class Duke {
                 throw new EmptyFieldException("OOPS!!! The description of a deadline cannot be empty mate.");
             }
 
-            // parse by-date from command
+            // parse by-datetime from command
             String by = command.substring(byIndex + byLength).trim();
             if (by.isEmpty()) {
                 throw new EmptyFieldException("OOPS!!! The date of a deadline cannot be empty mate.");
             }
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("d/M/yyyy[ HHmm]");
+            TemporalAccessor parsedBy = fmt.parseBest(by, LocalDateTime::from, LocalDate::from);
+
+            Task task = null;
+
+            // create task depending on given whether a by-time is given
+            if (parsedBy instanceof LocalDateTime) {
+                task = new Deadline(description, (LocalDateTime) parsedBy);
+            } else if (parsedBy instanceof LocalDate) {
+                task = new Deadline(description, ((LocalDate) parsedBy).atStartOfDay(), true );
+            }
 
             // add task and reply user
-            Task task = new Deadline(description, by);
             tasks.add(task);
             replyAddTask(task);
 
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme a deadline with the right format: " +
-                    "'deadline [description] /by [deadline date]'");
+                    "'deadline [description] /by [datetime]'\n\t" +
+                    "datetime format: d/M/yyyy[ HHmm]");
         }
     }
 
@@ -122,20 +139,52 @@ public class Duke {
                 throw new EmptyFieldException("OOPS!!! The description of an event cannot be empty mate.");
             }
 
-            // parse at-date from command
+            // parse at-datetime from command
             String at = command.substring(atIndex + atLength).trim();
             if (at.isEmpty()) {
                 throw new EmptyFieldException("OOPS!!! The start & end dates of an event cannot be empty mate.");
             }
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("d/M/yyyy[ HHmm]");
+            DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("[d/M/yyyy ][HHmm]");
+            Task task = null;
+            int dashIndex = at.indexOf("-");
+            if (dashIndex != -1) {
+                String atStart = at.substring(0, dashIndex).trim();
+                String atEnd = at.substring(dashIndex + 1).trim();
+                TemporalAccessor parsedStart = fmt.parseBest(atStart, LocalDateTime::from, LocalDate::from);
+                TemporalAccessor parsedEnd = fmt2.parseBest(atEnd,
+                        LocalDateTime::from, LocalDate::from, LocalTime::from);
+                if ((parsedStart instanceof LocalDateTime) && (parsedEnd instanceof LocalDateTime)) {
+                    task = new Event(description, (LocalDateTime) parsedStart,
+                            (LocalDateTime) parsedEnd);
+                } else if ((parsedStart instanceof LocalDate) && ((parsedEnd instanceof LocalDate))) {
+                    task = new Event(description, ((LocalDate) parsedStart).atStartOfDay(),
+                            ((LocalDate) parsedEnd).atStartOfDay(), true);
+                } else if ((parsedStart instanceof LocalDate) && (parsedEnd instanceof LocalTime)) {
+                    task = new Event(description, ((LocalDate) parsedStart).atStartOfDay(),
+                            ((LocalTime) parsedEnd).atDate((LocalDate) parsedStart), true);
+                } else {
+                    throw new InvalidCommandFormatException("OOPS!!! Please gimme an event with the right format: " +
+                            "'event [description] /at [start datetime] - [end datetime]'\n\t" +
+                            "datetime format: d/M/yyyy HHmm");
+                }
+            } else {
+                TemporalAccessor parsedStart = fmt.parseBest(at, LocalDateTime::from, LocalDate::from);
+                if (parsedStart instanceof LocalDateTime) {
+                    task = new Event(description, (LocalDateTime) parsedStart);
+                } else if (parsedStart instanceof LocalDate) {
+                    task = new Event(description, ((LocalDate) parsedStart).atStartOfDay(), true );
+                }
+            }
 
             // add task and reply user
-            Task task = new Event(description, at);
             tasks.add(task);
             replyAddTask(task);
 
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
             throw new InvalidCommandFormatException("OOPS!!! Please gimme an event with the right format: " +
-                    "'event [description] /at [start & end date]'");
+                    "'event [description] /at [start datetime] - [end datetime]'\n\t" +
+                    "datetime format: d/M/yyyy HHmm");
         }
     }
 

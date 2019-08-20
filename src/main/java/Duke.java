@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,8 +17,12 @@ public class Duke {
         setupResources();
         greet();
         while (running) {
-            readInput();
-            processInput();
+            try {
+                readInput();
+                processInput();
+            } catch (Exception e) {
+                handleException(e);
+            }
         }
     }
 
@@ -35,18 +40,46 @@ public class Duke {
                         "    ____________________________________________________________\n");
     }
 
-    public static void sayGoodbye() {
-        System.out.println(
-                "    ____________________________________________________________\n" +
-                        "     Bye. Hope to see you again soon!\n" +
-                        "    ____________________________________________________________"
-        );
-        running = false;
+    public static void readInput() {
+        Scanner sc = new Scanner(System.in);
+        input = sc.nextLine();
     }
 
-    public static void addTaskToList() {
+    public static void processInput() throws InvalidInputDukeException, EmptyTaskDukeException, InvalidTaskDukeException {
+        Scanner scanner = new Scanner(input);
+        if (scanner.hasNext()) {
+            String toProcess = scanner.next();
+
+            switch (toProcess) {
+                case "list":
+                    printList();
+                    break;
+
+                case "bye":
+                    sayGoodbye();
+                    break;
+
+                case "done":
+                    markAsDone(scanner.nextInt());
+                    break;
+
+                case "todo":
+                case "deadline":
+                case "event":
+                    addTaskToList();
+                    break;
+
+                default:
+                    throw new InvalidInputDukeException();
+            }
+        } else {
+            throw new InvalidInputDukeException();
+        }
+    }
+
+    public static void addTaskToList() throws EmptyTaskDukeException, InvalidTaskDukeException {
         Task taskToAdd = null;
-        String checkType[] = input.split(" ", 2);
+        String checkType[] = Arrays.copyOf(input.split(" ", 2), 2);
         String typeOfTask = checkType[0];
         String theTask = checkType[1];
         // switch statement for todo, deadline, task
@@ -57,7 +90,13 @@ public class Duke {
                 break;
 
             case "deadline":
-                String taskByWhen[] = theTask.split(" /", 2);
+                String taskByWhen[];
+                // hardcode exception first
+                if (theTask == null) {
+                    taskByWhen = new String[] {null, null};
+                } else {
+                    taskByWhen = Arrays.copyOf(theTask.split(" /", 2), 2);
+                }
                 String deadlineTask = taskByWhen[0];
                 String byWhen = taskByWhen[1];
                 taskToAdd = new Deadline(deadlineTask, byWhen);
@@ -65,7 +104,12 @@ public class Duke {
                 break;
 
             case "event":
-                String taskAtTime[] = theTask.split(" /", 2);
+                String taskAtTime[];
+                if (theTask == null) {
+                    taskAtTime = new String[] {null, null};
+                } else {
+                    taskAtTime = Arrays.copyOf(theTask.split(" /", 2), 2);
+                }
                 String eventTask = taskAtTime[0];
                 String atTime = taskAtTime[1];
                 taskToAdd = new Event(eventTask, atTime);
@@ -91,11 +135,6 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void readInput() {
-        Scanner sc = new Scanner(System.in);
-        input = sc.nextLine();
-    }
-
     public static void markAsDone(int positionInList) {
         Task taskToMark = list.get(positionInList - 1);
         taskToMark.done();
@@ -105,25 +144,33 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void processInput() {
-        Scanner scanner = new Scanner(input);
-        String toProcess = scanner.next();
-
-        switch (toProcess) {
-            case "list":
-                printList();
-                break;
-
-            case "bye":
-                sayGoodbye();
-                break;
-
-            case "done":
-                markAsDone(scanner.nextInt());
-                break;
-
-            default:
-                addTaskToList();
+    public static void handleException(Exception e) {
+        if (e instanceof InvalidInputDukeException) {
+            System.out.println("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "    ____________________________________________________________");
+        } else if (e instanceof EmptyTaskDukeException) {
+            System.out.println(String.format("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The description of a %s cannot be empty.\n" +
+                    "    ____________________________________________________________", e.getMessage()));
+        } else if (e instanceof InvalidTaskDukeException) {
+            System.out.println(String.format("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! Invalid input! Make sure your %s has a description and /at or /by.\n" +
+                    "    ____________________________________________________________", e.getMessage()));
         }
+
+        else {
+            System.out.println(e.getMessage()); // for undeclared exceptions
+        }
+
+    }
+
+    public static void sayGoodbye() {
+        System.out.println(
+                "    ____________________________________________________________\n" +
+                        "     Bye. Hope to see you again soon!\n" +
+                        "    ____________________________________________________________"
+        );
+        running = false;
     }
 }

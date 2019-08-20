@@ -6,6 +6,6 @@ public class EmptyDescException extends DukeException {
     }
 
     public String toString(){
-        return "☹ OOPS!!! The description of a " + type + " cannot be empty.";
+        return " OOPS!!! The description of a " + type + " cannot be empty.";
     }
 }

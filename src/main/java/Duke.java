@@ -114,9 +114,15 @@ public class Duke {
 
 
                         System.out.println("Got it. I've added this task: \n" + "  "
-                                + newEvent + " Now you have" +
+                                + newEvent + "Now you have " +
                                 numTask + " tasks in the list.");
                     }
+                } else if(input.contains("delete")){
+                    int taskNum = Integer.parseInt(input.substring(7)) - 1;
+                   Task removedTask =  toDoList.remove(taskNum);
+                    System.out.println("Noted. I've removed this task:\n" + removedTask +
+                            "Now you have " + toDoList.size() + " tasks in the list.");
+
                 } else {
                     throw new IllegalArgumentException();
                 }

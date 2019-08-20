@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidInputException, EmptyDescriptionException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -20,20 +20,29 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(ls.get(index));
             } else {
-                Task newTask;
-                if (s.startsWith("deadline")) {
-                    String[] phrases = s.substring(9).split(" /by ");
-                    newTask = new Deadline(phrases[0], phrases[1]);
-                } else if (s.startsWith("event")) {
-                    String[] phrases = s.substring(6).split(" /at ");
-                    newTask = new Event(phrases[0], phrases[1]);
-                } else {
-                    newTask = new Todo(s.substring(5));
+                try {
+                    Task newTask;
+                    if (s.equals("deadline") || s.equals("event") || s.equals("todo")) {
+                        throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + s + " cannot be empty.");
+                    } else if (s.startsWith("deadline")) {
+                        String[] phrases = s.substring(9).split(" /by ");
+                        newTask = new Deadline(phrases[0], phrases[1]);
+                    } else if (s.startsWith("event")) {
+                        String[] phrases = s.substring(6).split(" /at ");
+                        newTask = new Event(phrases[0], phrases[1]);
+                    } else if (s.startsWith("todo")) {
+                        newTask = new Todo(s.substring(5));
+                    } else {
+                        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+
+                    ls.add(newTask);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newTask);
+                    System.out.println(String.format("Now you have %d tasks in the list.", Task.getNumberOfTasks()));
+                } catch (DukeException ex) {
+                    System.err.println(ex);
                 }
-                ls.add(newTask);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newTask);
-                System.out.println(String.format("Now you have %d tasks in the list.", Task.getNumberOfTasks()));
             }
         }
 

@@ -11,6 +11,8 @@ public class Duke {
             + "Now you have %d %s in the list.";
     private static final String MESSAGE_LIST     = "Here are the tasks in your list:\n";
     private static final String MESSAGE_DONE     = "Nice! I've marked this task as done:\n  %s";
+    private static final String MESSAGE_DELETE   = "Noted. I've removed this task:\n  %s\n"
+            + "Now you have %d %s in the list.";
 
     // Errors
     private static final String ERROR_INVALID_INPUT = "I'm sorry, but I don't know what that means :-(";
@@ -58,18 +60,14 @@ public class Duke {
                     }
                     printTasks();
                     break;
-                case "done":
-                    if (line.length == 1) {
-                        throw new DukeException(ERROR_MISSING_TASK_ID);
-                    }
-                    int taskId = -1;
-                    try {
-                        taskId = Integer.parseInt(line[1]);
-                    } catch (NumberFormatException ex) {
-                        throw new DukeException(ERROR_INVALID_TASK_ID);
-                    }
-                    doTask(taskId);
+                case "done": {
+                    doTask(getId(line));
                     break;
+                }
+                case "delete": {
+                    deleteTask(getId(line));
+                    break;
+                }
                 case "bye":
                     if (line.length != 1) {
                         throw new DukeException(ERROR_TOO_MANY_ARGUMENTS);
@@ -146,7 +144,7 @@ public class Duke {
         }
         this.tasks.add(task);
         printFormatted(String.format(MESSAGE_ADD,  task.toString(), this.tasks.size(),
-                                     this.tasks.size() > 1 ? "tasks" : "task"));
+                this.tasks.size() != 1 ? "tasks" : "task"));
     }
 
     /**
@@ -170,6 +168,36 @@ public class Duke {
     private void doTask(int id) {
         Task task = this.tasks.get(id - 1);
         task.markAsDone();
-        printFormatted(String.format(MESSAGE_DONE, task));
+        printFormatted(String.format(MESSAGE_DONE, task.toString()));
+    }
+
+    /**
+     * Deletes task from task list.
+     * @param id Id of task to delete.
+     */
+    private void deleteTask(int id) {
+        Task task = this.tasks.get(id - 1);
+        this.tasks.remove(id - 1);
+        printFormatted(String.format(MESSAGE_DELETE, task.toString(), this.tasks.size(),
+                this.tasks.size() != 1 ? "tasks" : "task"));
+    }
+
+    /**
+     * Returns parsed number from input.
+     * @param input Entire line of input.
+     * @return Number in rest of input.
+     * @throws DukeException If rest of input is not a number.
+     */
+    private int getId(String[] input) throws DukeException {
+        if (input.length == 1) {
+            throw new DukeException(ERROR_MISSING_TASK_ID);
+        }
+        int taskId = -1;
+        try {
+            taskId = Integer.parseInt(input[1]);
+        } catch (NumberFormatException ex) {
+            throw new DukeException(ERROR_INVALID_TASK_ID);
+        }
+        return taskId;
     }
 }

@@ -1,21 +1,43 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        boolean run = true;
+        ArrayList<String> taskList = new ArrayList<>();
 
         greet();
-        while (sc.hasNext()){
+        while (run && sc.hasNext()) {
             String command = sc.nextLine();
-            if (command.equals("bye")) {
-                exit(command);
-                break;
-            } else {
-                echo(command);
+
+            switch (command) {
+                case "list":
+                    printArray(taskList);
+                    break;
+
+                case "bye":
+                    exit();
+                    run = false;
+                    break;
+
+                default:
+                    taskList.add(command);
+                    echo("added: " + command);
+                    break;
             }
         }
 
         sc.close();
+    }
+
+    private static void printArray(ArrayList<String> taskList) {
+        printLine();
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.printf("     %d. %s\n", i + 1, taskList.get(i));
+        }
+        printLine();
+        System.out.println();
     }
 
     //Greet the user when starting up Duke
@@ -42,7 +64,7 @@ public class Duke {
     }
 
     //Exits when the user types bye
-    private static void exit(String command) {
+    private static void exit() {
         printLine();
         System.out.println("      Bye. Hope to see you again soon!");
         printLine();

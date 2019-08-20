@@ -17,6 +17,7 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int size = commandList.size();
                 for (int i = 1; i < size + 1; i++) {
                     System.out.print(i + ".");
@@ -27,9 +28,31 @@ public class Duke {
                 int number = Integer.parseInt(arr[1]);
                 commandList.get(number-1).complete();
             } else {
-                commandList.add(new Task(input));
-                System.out.print("added : ");
-                System.out.println(input);
+                if (input.substring(0, 4).equals("todo")) {
+                    ToDo todo = new ToDo(input.substring(5));
+                    commandList.add(todo);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(todo);
+                } else if (input.substring(0, 8).equals("deadline")) {
+                    String deadlineDetails = input.substring(9);
+                    String[] arr = deadlineDetails.split("/");
+                    Deadline deadline = new Deadline(arr[0], arr[1]);
+                    commandList.add(deadline);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(deadline);
+                } else {
+                    String eventDetails = input.substring(6);
+                    String[] arr = eventDetails.split("/");
+                    Event event = new Event(arr[0], arr[1]);
+                    commandList.add(event);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(event);
+                }
+                int numberOfTasks = commandList.size();
+                if (numberOfTasks == 1) {
+                    System.out.println("Now you have " + numberOfTasks + " task in the list");
+                } else
+                    System.out.println("Now you have " + numberOfTasks + " tasks in the list");
             }
             input = sc.nextLine();
         }

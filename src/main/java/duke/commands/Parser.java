@@ -52,10 +52,13 @@ public class Parser {
         return switchArgs;
     }
     public static String concatenate(String[] strings) {
+        return concatenate(strings, 0, strings.length);
+    }
+    public static String concatenate(String[] strings, int fromIndex, int toIndex) {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < strings.length; i++) {
+        for(int i = fromIndex; i < toIndex; i++) {
             sb.append(strings[i]);
-            if(i != strings.length-1) sb.append(" ");
+            if(i != toIndex-1) sb.append(" ");
         }
         return sb.toString();
     }

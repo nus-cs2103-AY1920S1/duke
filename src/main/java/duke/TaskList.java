@@ -11,7 +11,7 @@ public class TaskList {
     public void add(Task t) {
         tasks.add(t);
     }
-    public void markDone(int oneIndex) {
+    public void markDone(int oneIndex) throws DukeException {
         tasks.get(oneIndex-1).markDone();
     }
     public Task get(int oneIndex) {

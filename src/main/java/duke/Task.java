@@ -13,7 +13,10 @@ abstract public class Task {
     public String getDescription() {
         return description;
     }
-    public void markDone() {
+    public void markDone() throws DukeException {
+        if(done) {
+            throw new DukeException("Task is already done!");
+        }
         done = true;
     }
     abstract public String toString();

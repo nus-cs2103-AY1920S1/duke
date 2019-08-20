@@ -26,11 +26,11 @@ public class Duke {
                     command.execute(args);
                 }
                 catch(DukeException e) {
-                    say(e.toString());
+                    oops(e.getMessage());
                 }
             }
             else {
-                say("Sorry, I don't know what that means.");
+                oops("I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -46,6 +46,9 @@ public class Duke {
         System.out.println(text);
         System.out.println(" ____________________________________________________________");
         System.out.println("");
+    }
+    public void oops(String text) {
+        say("☹ OOPS!!! " + text);
     }
     public void quit() {
         System.exit(0);

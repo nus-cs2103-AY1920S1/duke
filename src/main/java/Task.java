@@ -1,6 +1,6 @@
-public class Task {
-    private String description;
-    private boolean isDone;
+public abstract class Task {
+    String description;
+    boolean isDone;
 
     public Task (String description) {
         this.description = description;
@@ -11,15 +11,5 @@ public class Task {
         this.isDone = true;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        if(isDone) {
-            sb.append("[✓] ");
-        } else {
-            sb.append("[✗] ");
-        }
-        sb.append(description);
-        return sb.toString();
-    }
+    public abstract String toString();
 }

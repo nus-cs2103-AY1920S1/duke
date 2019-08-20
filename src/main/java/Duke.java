@@ -25,7 +25,11 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
             } else if (nextItem.equals("done")) {
-                doneTask();
+                try {
+                    doneTask();
+                } catch (DukeException ex) {
+                    System.out.println(ex);
+                }
             } else if (nextItem.equals("todo")) {
                 try {
                     addToDo();
@@ -41,6 +45,12 @@ public class Duke {
             } else if (nextItem.equals("event")) {
                 try {
                     addEvent();
+                } catch (DukeException ex) {
+                    System.out.println(ex);
+                }
+            } else if (nextItem.equals("delete")) {
+                try{
+                    delete();
                 } catch (DukeException ex) {
                     System.out.println(ex);
                 }
@@ -63,8 +73,15 @@ public class Duke {
         }
     }
 
-    private static void doneTask(){
+    private static void doneTask() throws DukeException{
+        if(!sc.hasNextInt()){
+            throw new DukeException("☹ OOPS!!! The index of the task to mark as complete " +
+                    "must be specified");
+        }
         int taskID = sc.nextInt();
+        if(taskID < 1 || tasksList.size() < taskID){
+            throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
+        }
         Task doneTask = tasksList.get(taskID - 1);
         doneTask.setDone(true);
         System.out.println("Nice! I've marked this task as done:");
@@ -118,6 +135,22 @@ public class Duke {
         tasksList.add(newEvent);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newEvent);
+        System.out.println("Now you have " + tasksList.size() +
+                " tasks in the list.");
+    }
+
+    private static void delete() throws DukeException{
+        if(!sc.hasNextInt()){
+            throw new DukeException("☹ OOPS!!! The index of the task to delete must be specified");
+        }
+        int index = sc.nextInt();
+        if(index < 1 || tasksList.size() < index){
+            throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
+        }
+        Task toRemove = tasksList.get(index - 1);
+        tasksList.remove(index - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + toRemove);
         System.out.println("Now you have " + tasksList.size() +
                 " tasks in the list.");
     }

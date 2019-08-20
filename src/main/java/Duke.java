@@ -76,18 +76,31 @@ public class Duke {
                     }
 
                 case "event":
-                    taskName = taskName.substring(6);
-                    date = taskName.split("/");
-                    task = new Event (date[0], date[1].substring(3));
-                    addTaskIn(task,tasks);
-                    break;
+                    try {
+                        taskName = taskName.substring(6);
+                        date = taskName.split("/");
+                        task = new Event (date[0], date[1].substring(3));
+                        addTaskIn(task,tasks);
+                    } catch (StringIndexOutOfBoundsException ex4) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
+
+                    } catch (IndexOutOfBoundsException ex5){
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! The start time of a event cannot be empty.");
+                        System.out.println("    ____________________________________________________________");
+                    } finally {
+                        break;
+                    }
+
                 default:
                     //
                     try {
                         throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    } catch (RuntimeException ex4) {
+                    } catch (RuntimeException ex6) {
                         System.out.println("    ____________________________________________________________");
-                        System.out.println(ex4.getMessage());
+                        System.out.println(ex6.getMessage());
                         System.out.println("    ____________________________________________________________");
                     } finally {
                         break;

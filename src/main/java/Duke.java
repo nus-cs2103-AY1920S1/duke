@@ -19,25 +19,23 @@ public class Duke {
         while (!t.description.equals("bye")) {
             System.out.println(line + "\n");
             if (t.description.equals("list")) {
+                // Print all existing items in the list
                 System.out.println("Here are the tasks in your list:\n");
-
-                // Print Each Item in the format "1. Item"
                 allItems.forEach(x -> System.out.println((allItems.indexOf(x) + 1) + ". " + x));
             } else if (t.description.contains("done")) {
-                int indexToMark = Integer.parseInt(t.description.split(" ")[1]);
-
                 // Mark item of interest as done
+                int indexToMark = Integer.parseInt(t.description.split(" ")[1]);
                 allItems.get(indexToMark - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n");
                 System.out.println(allItems.get(indexToMark - 1));
             } else {
+                // Add item to list
                 allItems.add(t);
-                //Print "added: Item"
                 System.out.println("added: " + t.description);
             }
+            // Print a horizontal line and require next input
             System.out.println("\n" + line);
             t = new Task(sc.nextLine());
-            System.out.println(allItems.size());
         }
         System.out.println(line + "\n Bye. Hope to see you again soon! \n" + line);
     }

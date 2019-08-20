@@ -16,8 +16,8 @@ public class Duke {
 
 
         Scanner scan = new Scanner(System.in);
-        Task[] list = new Task[100];
-        int index = 1;
+        ArrayList<Task> list = new ArrayList<>();
+        list.add(new Task("Task 0"));
         String input = scan.nextLine();
 
         while (!input.equals("bye")) {
@@ -26,12 +26,12 @@ public class Duke {
             try {
                 switch (command) {
                     case "list":
-                        if (index == 1) {
+                        if (list.size() == 1) {
                             throw new DukeException("OOPS!!! You have no tasks to be displayed.");
                         } else {
                             System.out.println("Here are the tasks in your list:");
-                            for (int i = 1; i < index; i++) {
-                                System.out.println(i + "." + list[i]);
+                            for (int i = 1; i < list.size(); i++) {
+                                System.out.println(i + "." + list.get(i));
                             }
                         }
                         break;
@@ -40,10 +40,10 @@ public class Duke {
                             throw new DukeException("OOPS!!! Please enter a task number to check as done e.g done 1");
                         } else {
                             int num = Integer.parseInt(arr[1]);
-                            if (num >= index || num < 1) {
+                            if (num >= list.size() || num < 1) {
                                 throw new DukeException("This task does not exist.");
                             } else {
-                                System.out.println(list[num].done());
+                                System.out.println(list.get(num).done());
                             }
                         }
                         break;
@@ -51,10 +51,9 @@ public class Duke {
                         if (arr.length == 1) {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         } else {
-                            list[index] = new Task(arr[1]);
-                            System.out.println("Got it. I've added this task:\n" + list[index]);
-                            System.out.println("Now you have " + index + " tasks in the list");
-                            index++;
+                            list.add(new Task(arr[1]));
+                            System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
+                            System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                         }
                         break;
                     case "deadline":
@@ -65,10 +64,9 @@ public class Duke {
                             if (deadline.length == 1) {
                                 throw new DukeException("OOPS!!! Please enter a due date. e.g complete homework /by 1 Jan");
                             } else {
-                                list[index] = new Deadline(deadline[0], deadline[1]);
-                                System.out.println("Got it. I've added this task:\n" + list[index]);
-                                System.out.println("Now you have " + index + " tasks in the list");
-                                index++;
+                                list.add(new Deadline(deadline[0], deadline[1]));
+                                System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
+                                System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                             }
                         }
                         break;
@@ -80,10 +78,22 @@ public class Duke {
                             if (event.length == 1) {
                                 throw new DukeException("OOPS!!! Please enter an event date. e.g group meeting /at 1 Jan");
                             } else {
-                                list[index] = new Event(event[0], event[1]);
-                                System.out.println("Got it. I've added this task:\n" + list[index]);
-                                System.out.println("Now you have " + index + " tasks in the list");
-                                index++;
+                                list.add(new Event(event[0], event[1]));
+                                System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
+                                System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
+                            }
+                        }
+                        break;
+                    case "delete":
+                        if (arr.length == 1) {
+                            throw new DukeException("OOPS!!! Please enter a task number to delete e.g delete 1");
+                        } else {
+                            int num = Integer.parseInt(arr[1]);
+                            if (num >= list.size() || num < 1) {
+                                throw new DukeException("This task does not exist.");
+                            } else {
+                                System.out.println("Noted. I've removed this task:\n" + list.remove(num));
+                                System.out.println("Now you have " + (list.size() - 1) + " tasks in the list.");
                             }
                         }
                         break;

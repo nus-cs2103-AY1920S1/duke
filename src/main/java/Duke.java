@@ -14,7 +14,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else {
-                System.out.println(userInput);
+                System.out.println(userInput + "\n");
             }
         }
     }

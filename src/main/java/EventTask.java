@@ -5,7 +5,6 @@ public class EventTask extends Task {
     public EventTask(String taskName, String duration) {
         super(taskName, DEFAULT_EVENT_ICON);
         this.duration = duration;
-        System.out.println("  " + this);
     }
 
     @Override

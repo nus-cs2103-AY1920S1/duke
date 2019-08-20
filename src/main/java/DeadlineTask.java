@@ -5,7 +5,6 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String taskName, String deadLine) {
         super(taskName, DEFAULT_DEADLINE_ICON);
         this.deadLine = deadLine;
-        System.out.println("  " + this);
     }
 
     @Override

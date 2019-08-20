@@ -1,7 +1,3 @@
-/**
- * My <b>class</b>.
- *
- */
 import java.util.*;
 public class Duke {
 
@@ -18,10 +14,14 @@ public class Duke {
     static void runEvents() {
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String command = sc.nextLine().trim();
         while(!command.equals("bye")) {
-            taskList.runCommand(command);
-            command = sc.nextLine();
+            try {
+                taskList.runCommand(command);
+            } catch (UnknownCommandException e) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            command = sc.nextLine().trim();
         }
     }
 }

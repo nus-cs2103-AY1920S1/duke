@@ -23,30 +23,46 @@ public class HelperDuke {
                     duke.markAsDone(index);
                     break;
                 case "todo":
-                    Todo todo = new Todo(s.nextLine());
-                    duke.add(todo);
+                    String tTask = s.nextLine();
+                    if (tTask.isEmpty()) {
+                        duke.error(action);
+                    } else {
+                        Todo todo = new Todo(tTask);
+                        duke.add(todo);
 
-                    //echo the text added
-                    duke.echo(todo);
-
+                        //echo the text added
+                        duke.echo(todo);
+                    }
                     break;
                 case "deadline":
-                    String[] d = s.nextLine().split("/by", 2);
-                    Deadline deadline = new Deadline(d[0], d[1]);
-                    duke.add(deadline);
+                    String dTask = s.nextLine();
+                    if (dTask.isEmpty()) {
+                        duke.error(action);
+                    } else {
+                        String[] d = dTask.split("/by", 2);
+                        Deadline deadline = new Deadline(d[0], d[1]);
+                        duke.add(deadline);
 
-                    //echo the text added
-                    duke.echo(deadline);
-
+                        //echo the text added
+                        duke.echo(deadline);
+                    }
                     break;
                 case "event":
-                    String[] e = s.nextLine().split(" /at ", 2);
-                    Event event = new Event(e[0], e[1]);
-                    duke.add(event);
+                    String eTask = s.nextLine();
+                    if (eTask.isEmpty()) {
+                        duke.error(action);
+                    } else {
+                        String[] e = eTask.split(" /at ", 2);
+                        Event event = new Event(e[0], e[1]);
+                        duke.add(event);
 
-                    //echo the text added
-                    duke.echo(event);
-
+                        //echo the text added
+                        duke.echo(event);
+                    }
+                    break;
+                default:
+                    //no such action
+                    duke.error();
                     break;
             }
 

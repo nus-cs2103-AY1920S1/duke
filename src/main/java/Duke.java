@@ -12,8 +12,10 @@ public class Duke {
     }*/
 
     private ArrayList<Task> tasks;
+    private DukeException error;
 
     Duke() {
+        error = new DukeException();
         tasks = new ArrayList<>();
     }
 
@@ -64,6 +66,18 @@ public class Duke {
     void endDuke() {
         line();
         System.out.println("\tBye. Hope to see you again soon!");
+        line();
+    }
+
+    void error() {
+        line();
+        error.errorAction();
+        line();
+    }
+
+    void error(String s) {
+        line();
+        error.incompleteAction(s);
         line();
     }
 

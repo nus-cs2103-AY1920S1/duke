@@ -32,13 +32,13 @@ public class Duke {
                             throw new DukeException(separationLine +
                                     "\n     \u2639 OOPS!!! Please specify number of a single task to mark as done.\n" + separationLine + "\n");
                         }
-                        int specifiedNo = Integer.parseInt(inputSplit[1]); // will throw NumberFormatException if not int after "done"
-                        if (specifiedNo < 1 || specifiedNo > taskStore.size()) {
+                        int specifiedDone = Integer.parseInt(inputSplit[1]); // will throw NumberFormatException if not int after "done"
+                        if (specifiedDone < 1 || specifiedDone > taskStore.size()) {
                             // Exception if task number is beyond current number of tasks
                             throw new DukeException(separationLine +
                                     "\n     \u2639 OOPS!!! Please specify valid task number.\n" + separationLine + "\n");
                         }
-                        Task doneTask = taskStore.get(specifiedNo - 1);
+                        Task doneTask = taskStore.get(specifiedDone - 1);
                         doneTask.setDone();
                         System.out.println(separationLine + "\n     Nice! I've marked this task as done:\n       "
                                 + doneTask + "\n" + separationLine + "\n");
@@ -83,6 +83,24 @@ public class Duke {
                         Event event = new Event(splitStringE[0].replace("event ", ""), splitStringE[1]);
                         taskStore.add(event);
                         System.out.println(separationLine + "\n     Got it. I've added this task:\n       " + event
+                                + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
+                                + separationLine + "\n");
+                        break;
+                    case "delete":
+                        if (inputSplit.length != 2) {
+                            // Exception if there is no task number or multiple words after "delete"
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! Please specify number of a single task to delete.\n" + separationLine + "\n");
+                        }
+                        int specifiedDel = Integer.parseInt(inputSplit[1]); // will throw NumberFormatException if not int after "done"
+                        if (specifiedDel < 1 || specifiedDel > taskStore.size()) {
+                            // Exception if task number is beyond current number of tasks
+                            throw new DukeException(separationLine +
+                                    "\n     \u2639 OOPS!!! Please specify valid task number.\n" + separationLine + "\n");
+                        }
+                        Task delTask = taskStore.get(specifiedDel - 1);
+                        taskStore.remove(specifiedDel - 1);
+                        System.out.println(separationLine + "\n     Noted. I've removed this task:\n       " + delTask
                                 + "\n     Now you have " + taskStore.size() + " tasks in the list." + "\n"
                                 + separationLine + "\n");
                         break;

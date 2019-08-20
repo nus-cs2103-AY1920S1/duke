@@ -1,6 +1,27 @@
 todo borrow book
-list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+list
+random string
+todo
+deadline
+deadline return book 2/by Sunday
+event
+event project meeting 2 /atMon 4-6pm
+done 2
+done
+done everything
+done 0
+done -2
+done 20
+done 0 7 4 3 7
+list
+delete 2
+delete
+delete everything
+delete 0
+delete -2
+delete 20
+delete 9 5 3 7 9
 list
 bye

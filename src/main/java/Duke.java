@@ -1,22 +1,26 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String[] list = new String[100];
+    private static Task[] list = new Task[100];
     private static int count = 0;
     public static void main(String[] args) {
         welcomeMessage();
         Scanner sc = new Scanner(System.in);
         while (true) {
-          String input = sc.nextLine();
+          String input = sc.next();
           if (input.equals("bye")) {
             byeMessage();
             break;
           } else if (input.equals("list")) {
             displayList();
+          } else if (input.equals("done")) {
+            markItemComplete(Integer.parseInt(sc.next()));
           } else {
-            addToList(input);
-            echo(input);
-          }
+            String remaining = sc.next();
+            String taskName = input + " " + remaining;
+            addToList(taskName);
+            echo(taskName);
+          } 
         }
         sc.close();
     }
@@ -25,15 +29,27 @@ public class Duke {
       String line = "    ________________________" 
           + "____________________________________";
       System.out.println(line);
+      System.out.println("    Here are the tasks in your list:");
       for (int i = 0; i < count; i++) {
-        int index = i + 1;
-        System.out.println("    " + index + ". " + list[i]);
+        int listNumber = i + 1;
+        System.out.println("    " + listNumber + "." + list[i]);
       }
+      System.out.println(line + "\n");
+    }
+
+    static void markItemComplete(int index) {
+      String line = "    ________________________" 
+          + "____________________________________";
+      Task t = list[index - 1];
+      t.complete();
       System.out.println(line);
+      System.out.println("     Nice! I've marked this task as done:");
+      System.out.println("       " + t);
+      System.out.println(line + "\n");
     }
 
     static void addToList(String s) {
-      list[count] = s;
+      list[count] = new Task(s, count + 1);
       count++;
     }
     static void welcomeMessage() {

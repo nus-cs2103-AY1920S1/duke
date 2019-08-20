@@ -1,0 +1,14 @@
+{
+    "formats": ["java"],
+    "ignoreCommitList": [],
+    "authors":
+    [
+      {
+        "githubId": "DivineDX",
+        "emails": ["chia.dexun97@gmail.com"],
+        "displayName": "Chia De Xun",
+        "authorNames": ["DivineDX"],
+        "ignoreGlobList": []
+      }
+    ]
+  }

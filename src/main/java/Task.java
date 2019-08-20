@@ -61,6 +61,6 @@ public class Task {
         } else {
             checked = "\u2717";
         }
-        return String.format("%d.[%s] %s", this.id, checked, this.description);
+        return String.format("[%s] %s", checked, this.description);
     }
 }

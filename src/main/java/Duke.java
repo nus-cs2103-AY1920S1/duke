@@ -5,9 +5,11 @@ public class Duke {
     private static String divider = "    " + "-".repeat(61);
 
     private static void listData() {
-        String[] taskStrings = new String[Task.totalNumOfTasks];
+        String[] taskStrings = new String[Task.totalNumOfTasks + 1];
+        taskStrings[0] = "Here are the tasks in your list:";
         for (Task t : Task.taskList) {
-            taskStrings[t.getId() - 1] = t.toString();
+            int id = t.getId();
+            taskStrings[id] = String.format("%d.%s", id, t.toString());
         }
         dukeRespond(taskStrings);
     }
@@ -19,6 +21,21 @@ public class Duke {
         } else {
             dukeRespond("added: " + data);
         }
+    }
+    private static void markDone(String cmd) {
+        String[] tmp = cmd.split(" ");
+        int id = Integer.parseInt(tmp[1]);
+        //ASSUMING VALID ID; THROW EXCEPTION AND HANDLE IF NEEDED LATER
+        if (id > Task.totalNumOfTasks || id < 1) {
+            dukeRespond("Oof invalid id",
+                    "Wanna try again?");
+            return;
+        }
+
+        Task task = Task.taskList.get(id - 1);
+        task.setCompleted();
+        dukeRespond("Nice! I've marked this task as done:",
+                "  " + task.toString());
     }
 
     public static void dukeRespond(String... inputs) {
@@ -43,10 +60,12 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String userCmd = sc.nextLine();
 
-        while (!userCmd.equals("bye")) {
+        while (!userCmd.equalsIgnoreCase("bye")) {
 
-            if (userCmd.equals("list")) {
+            if (userCmd.equalsIgnoreCase("list")) {
                 listData();
+            } else if (userCmd.split(" ")[0].equalsIgnoreCase("done")) {
+                markDone(userCmd);
             } else {
                 addData(userCmd);
             }

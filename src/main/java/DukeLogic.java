@@ -1,5 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class DukeLogic {
@@ -9,18 +16,23 @@ public class DukeLogic {
     =================================*/
 
     private final String DUKE_ASCII_LOGO = " ____        _        \n"
-                                        + "|  _ \\ _   _| | _____ \n"
-                                        + "| | | | | | | |/ / _ \\\n"
-                                        + "| |_| | |_| |   <  __/\n"
-                                        + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     private final String DUKE_WELCOME_MESSAGE = "Hello! I'm Duke\n\t What can I do for you?";
     private final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means " +
+            ":-(";
     private final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task cannot be empty.";
     private final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
     private final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task index.";
     private final String DUKE_ERR_MISSING_INDEX = "☹ OOPS!!! The index of the completed task is missing.";
+    private final String DUKE_ERR_INVALID_DATE_FORMAT = "☹ OOPS!!! Please input the deadline in the following " +
+            "format: \"dd/mm/yyyy hhmm\".";
     private final String SEPARATOR = "____________________________________________________________";
+    private final String DUKE_DATETIME_INPUT_FORMAT = "d/MM/yyyy HHmm";
+    private final String DUKE_DATETIME_OUTPUT_FORMAT = "MMMM uuuu, Ka";
     private final int DUKE_MAXIMUM_TASKS = 100;
     private enum DukeCommand {
         TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
@@ -104,6 +116,39 @@ public class DukeLogic {
     }
 
     /**
+     * Takes a input String date-time in the format {@link #DUKE_DATETIME_INPUT_FORMAT} and attempts to create a
+     * LocalDateTime object. Then, depending on the day of the month, there will be a suffix at the end. For example,
+     * 1st, 2nd, 3rd, 4th, etc. This LocalDateTime object is then formatted to the format
+     * {@link #DUKE_DATETIME_OUTPUT_FORMAT}
+     * @param input Date-time String in the format "d/MM/uuuu HHmm". E.g. "2/12/2019 1800".
+     * @return Date-time String in the format: "ddth of MM uuuu, Ka". E.g. "2nd of December 2019, 6PM".
+     * @throws DateTimeParseException If the input String does not match the required format.
+     */
+    private String formatDate(String input) throws DateTimeParseException {
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(DUKE_DATETIME_INPUT_FORMAT);
+        LocalDateTime inputDateTime = LocalDateTime.parse(input, dateTimeFormat);
+
+        Map<Long, String> ordinalNumbers = new HashMap<>(31);
+        ordinalNumbers.put(1L, "1st");
+        ordinalNumbers.put(2L, "2nd");
+        ordinalNumbers.put(3L, "3rd");
+        ordinalNumbers.put(21L, "21st");
+        ordinalNumbers.put(22L, "22nd");
+        ordinalNumbers.put(23L, "23rd");
+        ordinalNumbers.put(31L, "31st");
+        for (long d = 1; d <= 31; d++) {
+            ordinalNumbers.putIfAbsent(d, "" + d + "th");
+        }
+
+        DateTimeFormatter dayOfMonthFormatter = new DateTimeFormatterBuilder()
+                .appendText(ChronoField.DAY_OF_MONTH, ordinalNumbers)
+                .appendLiteral(" of ")
+                .appendPattern(DUKE_DATETIME_OUTPUT_FORMAT)
+                .toFormatter();
+        return inputDateTime.format(dayOfMonthFormatter);
+    }
+
+    /**
      * Reads in user-input as a String before checking the input. If the command is to terminate the program,
      * {@link #terminateProgram()} will be called. If the command is to list the tasks, {@link #displayDukeTasks()}
      * will be called. Otherwise, if the user-input wishes to add to the task list with "todo", "deadline" or "event",
@@ -141,9 +186,13 @@ public class DukeLogic {
                                     (deadlineParameterIndex - 2));
                             String deadlineParameterString = concatStringTokens(inputTokens, deadlineParameterIndex,
                                     (inputTokens.length - 1));
-                            DukeTaskDeadline dukeDeadline = new DukeTaskDeadline(deadlineTaskName,
-                                    deadlineParameterString);
-                            addToDukeTasks(dukeDeadline);
+                            try {
+                                DukeTaskDeadline dukeDeadline = new DukeTaskDeadline(deadlineTaskName,
+                                        formatDate(deadlineParameterString));
+                                addToDukeTasks(dukeDeadline);
+                            } catch (DateTimeParseException ex) {
+                                displayToUser(DUKE_ERR_INVALID_DATE_FORMAT);
+                            }
                         }
                     }
                     break;
@@ -199,7 +248,7 @@ public class DukeLogic {
                         } catch (NumberFormatException ex) {
                             displayToUser(DUKE_ERR_INVALID_INDEX);
                         }
-                }
+                    }
             }
         } catch (IllegalArgumentException ex) {
             displayToUser(DUKE_ERR_UNKNOWN_COMMAND_MESSAGE);

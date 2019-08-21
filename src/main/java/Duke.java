@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.lang.StringBuilder;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -28,10 +27,27 @@ public class Duke {
             } else if (tokens[0].equals("done")) {
                 doTask(tokens[1]);
             } else {
-                Task task = new Task(input);
+                Task task = Task.createTask(tokens);
+                lst.add(task); //because must count so must put first
                 printInput(task);
-                lst.add(task);
+
             }
+//            } else if (tokens[0].equals("todo")) {
+//
+//            } else if (tokens[0].equals("deadline")) {
+//
+//            } else if (tokens[0].equals("event")) {
+//
+//            }
+//
+//
+//
+//
+//            } else {
+//                Task task = new Task(input);
+//                printInput(task);
+//                lst.add(task);
+//            }
 
         }
 
@@ -39,7 +55,10 @@ public class Duke {
 
     public static void printInput(Task input) {
     	System.out.println("    ____________________________________________________________");
-    	System.out.println(String.format("     added:%s",input));
+
+        System.out.println("     Got it. I've added this task:");
+    	System.out.println(String.format("       %s",input));
+        System.out.println("     Now you have %d tasks in the list.");
     	System.out.println("    ____________________________________________________________");
     	System.out.println();
 
@@ -83,6 +102,8 @@ public class Duke {
                 "  "+task.toString());
         printInput(inst);
     }
+
+
 
 
 

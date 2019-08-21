@@ -7,6 +7,17 @@ public class Task {
         this.isDone = false;
     }
 
+    public static Task createTask(String [] tokens) {
+        if (tokens[0].equals("todo")) {
+            return ToDo.createToDo(tokens);
+//        } else if (tokens[0].equals("deadline")) {
+//            return Deadline.createDeadLine(tokens);
+//        } else if (tokens[0].equals("event")) {
+//            return Event.createEvent(tokens);
+        }
+        return null;
+    }
+
     public String getStatusIcon() {
         //return (isDone ? "✓" : "✗" );
         return (isDone ? "\u2713" : "\u2718");

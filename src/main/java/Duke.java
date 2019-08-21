@@ -34,6 +34,16 @@ public class Duke {
                         }
                         break;
 
+                    case "delete":
+                        int taskNo = Integer.parseInt(sc.nextLine().trim());
+                        int listSize = list.getNumOfTasks();
+                        if (taskNo > listSize || taskNo < 1) {
+                            throw new InvalidDescriptionException(errorMsg);
+                        } else {
+                            list.removeTask(taskNo);
+                        }
+                        break;
+
                     case "todo":
                         String input1 = sc.nextLine();
                         if (input1.equals("")) {

@@ -27,6 +27,15 @@ public class TaskList {
         System.out.println(xs.get(num - 1));
     }
 
+    public void removeTask(int num) {
+        numOfTasks--;
+        Task t = xs.get(num - 1);
+        xs.remove(num - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(t);
+        System.out.printf("Now you have %d tasks in the list.\n", numOfTasks);
+    }
+
     public void printTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= xs.size(); i++) {

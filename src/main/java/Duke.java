@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -26,38 +27,53 @@ public class Duke {
 
         while (contRunning) {
             String command = sc.next();
-            switch (command) {
-                case "bye":
-                    contRunning = false;
-                    break;
-                case "list":
-                    listStoredTasks();
-                    break;
-                case "done":
-                    completeTask(sc.nextInt());
-                    break;
-                case "todo":
-                    String taskDescription = sc.nextLine();
-                    addToDo(taskDescription);
-                    break;
-                case "deadline":
-                    addDeadline(sc.nextLine());
-                    break;
-                case "event":
-                    addEvent(sc.nextLine());
-                    break;
-                default:
-                    //Provided input is a task
-                    System.out.println("An invalid input was provided");
+            try {
+                switch (command) {
+                    case "bye":
+                        contRunning = false;
+                        break;
+                    case "list":
+                        listStoredTasks();
+                        break;
+                    case "done":
+                        completeTask(sc.nextInt());
+                        break;
+                    case "todo":
+                        addToDo(sc.nextLine());
+                        break;
+                    case "deadline":
+                        addDeadline(sc.nextLine());
+                        break;
+                    case "event":
+                        addEvent(sc.nextLine());
+                        break;
+                    default:
+                        //Provided input is a task
+                        throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
             }
+            catch (DukeException e) {
+                printErrorMessage(e);
+            }
+
         }
+    }
+
+    public void printErrorMessage(DukeException e) {
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t" + e.getMessage());
+        System.out.println("\t____________________________________________________________");
     }
 
     /**
      * Method to add a ToDo object
      * @param taskDescription the string containing the description of the task
      */
-    public void addToDo(String taskDescription) {
+    public void addToDo(String taskDescription) throws DukeException{
+        if (taskDescription.trim().length() == 0) {
+            throw new DukeException("\u2639" + " OOPS!!! The description of a todo cannot be empty.");
+        }
+
         Task t = new ToDo(taskDescription);
         this.storedTasks.add(t);
         printAddTaskOutput(t);
@@ -69,13 +85,25 @@ public class Duke {
      *                                    of the task (unsplit). Will split using "/by" as
      *                                    delimiter
      */
-    public void addDeadline(String taskDescriptionwithDeadline) {
-        String[] strArr = taskDescriptionwithDeadline.split("/by");
-        String description = strArr[0].trim();
-        String deadline = strArr[1].trim();
-        Task t = new Deadline(description, deadline);
-        this.storedTasks.add(t);
-        printAddTaskOutput(t);
+    public void addDeadline(String taskDescriptionwithDeadline) throws DukeException{
+        try {
+            //If the input is missing /by, the input is of the wrong form
+            String[] strArr = taskDescriptionwithDeadline.split("/by");
+            String description = strArr[0].trim();
+            String deadline = strArr[1].trim();
+
+            //Either description or duration is missing, but /by is possibly present
+            if (description.length() == 0 || deadline.length() == 0) {
+                throw new DukeException("\u2639" + " OOPS!!! The description/deadline of a deadline cannot be empty.");
+            }
+
+            Task t = new Deadline(description, deadline);
+            this.storedTasks.add(t);
+            printAddTaskOutput(t);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\u2639" + " OOPS!!! The description/deadline of a deadline cannot be empty.");
+        }
     }
 
     /**
@@ -84,13 +112,25 @@ public class Duke {
      *                                    of the event (unsplit). Will split using "/at" as
      *                                    delimiter
      */
-    public void addEvent(String taskDescriptionwithDuration) {
-        String[] strArr = taskDescriptionwithDuration.split("/at");
-        String description = strArr[0].trim();
-        String duration = strArr[1].trim();
-        Task t = new Event(description, duration);
-        this.storedTasks.add(t);
-        printAddTaskOutput(t);
+    public void addEvent(String taskDescriptionwithDuration) throws DukeException{
+        try {
+            //If the input is missing /at, the input is of the wrong form
+            String[] strArr = taskDescriptionwithDuration.split("/at");
+            String description = strArr[0].trim();
+            String duration = strArr[1].trim();
+
+            //Either description or duration is missing, but /at is possibly present
+            if (description.length() == 0 || duration.length() == 0) {
+                throw new DukeException("\u2639" + " OOPS!!! The description/duration of a deadline cannot be empty.");
+            }
+
+            Task t = new Event(description, duration);
+            this.storedTasks.add(t);
+            printAddTaskOutput(t);
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("\u2639" + " OOPS!!! The description/duration of an event cannot be empty.");
+        }
     }
 
     /**
@@ -111,14 +151,19 @@ public class Duke {
      * Method is invoked when "done" is input to console
      * @param taskNum the number of the task as shown whenever `list` is typed in the console
      */
-    public void completeTask(int taskNum) {
-        Task t = this.storedTasks.get(taskNum - 1); //Because storedTasks is zero-indexed
-        t.markAsDone();
+    public void completeTask(int taskNum) throws DukeException{
+        try {
+            Task t = this.storedTasks.get(taskNum - 1); //Because storedTasks is zero-indexed
+            t.markAsDone();
 
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t\t" + t);
-        System.out.println("\t____________________________________________________________");
+            System.out.println("\t____________________________________________________________");
+            System.out.println("\tNice! I've marked this task as done: ");
+            System.out.println("\t\t" + t);
+            System.out.println("\t____________________________________________________________");
+        }
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639" + " OOPS!!! The task number is invalid!");
+        }
     }
 
     /**

@@ -50,7 +50,7 @@ public class Parser {
 				case 3:
 					return integer + "rd";
 				default:
-					return integer + "tg";
+					return integer + "th";
 			}
 		}
 	}

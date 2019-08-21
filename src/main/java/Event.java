@@ -6,6 +6,11 @@ public class Event extends Task {
         this.eventDateTime = dateTime;
     }
 
+    public Event(String description, boolean isDone, String dateTime) {
+        this(description, dateTime);
+        this.isDone = isDone;
+    }
+
     /**
      * Getter for when this Event occurs.
      *

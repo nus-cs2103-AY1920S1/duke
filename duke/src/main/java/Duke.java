@@ -17,30 +17,38 @@ public class Duke {
 		String next = scanner.next(); // no longer need nextline because adding comes with type of task
 
 		while (!next.equals("bye")) {
-			if (next.equals("list")) {
-				System.out.println("Here are the tasks in your list:");
-				for (int i = 0; i < list.size(); i++) {
-					System.out.println((i+1) + "." + list.get(i).toString());
-				}
-			} else if (next.equals("done")) {
-				int index = scanner.nextInt(); // since scanner only took in the word done
-				Task task = list.get(index-1);
-				task.markAsDone();
-				System.out.println("Nice! I've marked this task as done:\n  " + task.toString());
-			} else {
-				Task task = new Task("");
-				String desc = "";
-				try {
+			try {
+				if (next.equals("list")) {
+					System.out.println("Here are the tasks in your list:");
+					for (int i = 0; i < list.size(); i++) {
+						System.out.println((i + 1) + "." + list.get(i).toString());
+					}
+				} else if (next.equals("done")) {
+					if (list.isEmpty()) {
+						scanner.nextLine(); // just to clear whatever's left on the line
+						throw new DukeException("You have no task to do!");
+					} else if (!scanner.hasNextInt()) {
+						throw new DukeException("Which task have you done?");
+					}
+						int index = scanner.nextInt(); // since scanner only took in the word done
+					Task task = list.get(index - 1);
+					task.markAsDone();
+					System.out.println("Nice! I've marked this task as done:\n  " + task.toString());
+				} else {
+					Task task = new Task("");
+					String desc = "";
 					String line = scanner.nextLine().trim(); // would be \n if incorrect input
 					switch (next) {
 						case "todo":
-							if (line.isEmpty()) throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+							if (line.isEmpty())
+								throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
 							desc = line; // assuming it takes whatever remains on the line before crossing over \n
 							task = new Todo(desc);
 							break;
 
 						case "deadline":
-							if (line.isEmpty()) throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+							if (line.isEmpty())
+								throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
 							int indexBy = line.indexOf("/"); // potential source of error
 							if (indexBy == -1) {
 								throw new DukeException("Put / before by!");
@@ -51,7 +59,8 @@ public class Duke {
 							break;
 
 						case "event":
-							if (line.isEmpty()) throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
+							if (line.isEmpty())
+								throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
 							int indexAt = line.indexOf("/");
 							if (indexAt == -1) {
 								throw new DukeException("Put / before at!");
@@ -67,9 +76,9 @@ public class Duke {
 					list.add(task);
 					System.out.println("Got it. I've added this task:\n  " + task.toString());
 					System.out.println("Now you have " + list.size() + " tasks in the list.");
-				} catch (DukeException de) {
-					System.out.println(de.toString());
 				}
+			} catch (DukeException de){
+				System.out.println(de.toString());
 			}
 			next = scanner.next();
 		}

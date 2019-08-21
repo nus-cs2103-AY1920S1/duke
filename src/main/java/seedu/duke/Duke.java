@@ -47,29 +47,29 @@ public class Duke{
                     displayList(list);
                 } else if (cmd.equals("delete")) {
                     try {
-                        int index = Integer.valueOf(description) - 1;
-                        removeTask(list, index);
+                        if (description.equals("") || description == null) {
+                            throw new DukeException("Entered index empty..");
+                        } else {
+                            int index = Integer.valueOf(description) - 1;
+                            removeTask(list, index);
+                        }
                     } catch (TaskListEmptyException e) {
                         System.out.println(e);
                     }
                 } else if (cmd.equals("todo")) {
                     addTask(list, cmd, description, "__dummy__");
                 } else if (cmd.equals("deadline")) {
-                    if (validate(description, cmd)) {
-                        String arr1[] = description.split(" /by ", 2);
-                        validateTime(arr1);
-                        String desc = arr1[0];
-                        String by = arr1[1];
-                        addTask(list, cmd, desc, by);
-                    }
+                    String arr1[] = description.split(" /by ", 2);
+                    validateTime(arr1);
+                    String desc = arr1[0];
+                    String by = arr1[1];
+                    addTask(list, cmd, desc, by);
                 } else if (cmd.equals("event")) {
-                    if (validate(description, cmd)) {
-                        String arr2[] = description.split(" /at ", 2);
-                        validateTime(arr2);
-                        String desc = arr2[0];
-                        String at = arr2[1];
-                        addTask(list, cmd, desc, at);
-                    }
+                    String arr2[] = description.split(" /at ", 2);
+                    validateTime(arr2);
+                    String desc = arr2[0];
+                    String at = arr2[1];
+                    addTask(list, cmd, desc, at);
                 } else if (arr[0].equals("done")) {
                     int index = Integer.valueOf(arr[1]) - 1;
                     list.get(index).markAsDone();
@@ -77,12 +77,11 @@ public class Duke{
                     displayTask(list, index);
                 } else {
                     //incorrect command
-                    throw new DukeException("\nOOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch(DukeException e) {
                 System.out.println(e);
             }
-
             System.out.println("____________________________________________________________");
         }
         System.out.println("Bye. Hope to see you again soon!");
@@ -92,8 +91,8 @@ public class Duke{
     private static void removeTask(List<Task> list, int index) throws TaskListEmptyException, DukeException{
         if (list.isEmpty()) {
             throw new TaskListEmptyException("list is empty");
-        } else if (index <= -1) {
-            throw new DukeException("incorrect index: " + index);
+        } else if (index + 1 < list.size() || list.size() < index  + 1) {
+            throw new DukeException("Entered index is out of bound: " + index);
         } else {
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + list.get(index));
@@ -102,16 +101,11 @@ public class Duke{
         }
     }
 
-    private static boolean validate(String test, String cmd){
-        if (test.equals("") || test == null) {
-            return false;
-        }
-        return true;
-    }
-
     private static void validateTime(String[] arr) throws DukeException{
-        if (arr.length <= 1) {
-            throw new DukeException("command");
+        if (arr[0].equals("")) {
+            throw new DukeException("Oops! please specify task description");
+        } else if (!arr[0].equals("") && arr.length == 1){
+            throw new DukeException("Oops! please specify time (/at, /by ...");
         }
     }
 

@@ -109,7 +109,7 @@ public class Duke {
             if (itemNo == 0) {
                 throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The task list are currently empty.");
             } else if (item > itemNo) {
-                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Number enter can only be less than " + itemNo);
+                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Number enter can only be less than or equal " + itemNo);
             }
 
             printLine();
@@ -143,8 +143,17 @@ public class Duke {
         System.out.println("");
     }
 
-    public static void commandDeadline(String data) {
+    public static void commandDeadline(String data) throws DukeException {
+        if (data.isEmpty()) {
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a deadline cannot be empty.");
+        }
+
         String[] result = data.split("/by");
+
+        if (result.length <= 1) {
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Deadline is needed");
+        }
+
         String achieve = result[0].trim();
         String timeline = result[1].trim();
         task.add(new Deadline(achieve, timeline));
@@ -157,8 +166,17 @@ public class Duke {
         System.out.println("");
     }
 
-    public static void commandEvent(String data) {
+    public static void commandEvent(String data) throws DukeException {
+        if (data.isEmpty()) {
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of an event cannot be empty.");
+        }
+
         String[] result = data.split("/at");
+
+        if (result.length <= 1) {
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Event time is needed");
+        }
+
         String achieve = result[0].trim();
         String timeline = result[1].trim();
         task.add(new Event(achieve, timeline));

@@ -1,7 +1,8 @@
 package duke.init;
 
-import java.util.Scanner;
 import java.lang.StringBuilder;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @author Lim Yong Shen, Kevin
@@ -9,6 +10,7 @@ import java.lang.StringBuilder;
 public class Duke {
 
     private static final int BORDER_LENGTH = 60;
+    private static final ArrayList<String> storedText = new ArrayList<>();
 
     /**
      * Runs the Duke chatbot.
@@ -20,13 +22,13 @@ public class Duke {
         greet();
         printHorizontalBorder();
         System.out.println();
-        String command = scanner.next();
+        String command = scanner.nextLine();
         while (!command.equals("bye")) {
             printHorizontalBorder();
-            echo(command);
+            process(command);
             printHorizontalBorder();
             System.out.println();
-            command = scanner.next();
+            command = scanner.nextLine();
         }
         printHorizontalBorder();
         sayBye();
@@ -53,6 +55,40 @@ public class Duke {
      */
     private static void echo(String command) {
         System.out.println("\t" + command);
+    }
+
+    /**
+     * Processes the specified command.
+     * @param command The specified command.
+     */
+    private static void process(String command) {
+        if (command.equals("list")) {
+            listStoredText();
+        } else {
+            storeText(command);
+        }
+    }
+
+    /**
+     * Lists stored text.
+     */
+    private static void listStoredText() {
+        if (storedText.size() == 0) {
+            System.out.println("No stored text.");
+        } else {
+            for (int i = 0; i < storedText.size(); i++) {
+                System.out.format("%d. %s\n", i + 1, storedText.get(i));
+            }
+        }
+    }
+
+    /**
+     * Stores the specified text.
+     * @param text The specified text.
+     */
+    private static void storeText(String text) {
+        System.out.println("added: " + text);
+        storedText.add(text);
     }
 
     /**

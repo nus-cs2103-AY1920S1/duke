@@ -48,7 +48,19 @@ public class Duke {
                     System.out.println("Unable to find task. Please try again." );
 
                 }
-            } else if (firstWord.equals("todo")){
+            } else if (firstWord.equals("delete")) {
+                try {
+                    int position = Integer.parseInt(words[1]) - 1;
+                    Task currTask = list.get(position);
+                    list.remove(position);
+                    System.out.println("Noted. I've removed this task:  \n " +
+                            currTask.toString() + "\n Now you have " + list.size() + " task(s) in the list." );
+                } catch (Exception ex) {
+                    System.out.println("Unable to find task. Please try again." );
+
+                }
+            } else
+             if (firstWord.equals("todo")){
                 if (line.equals("")) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     continue;

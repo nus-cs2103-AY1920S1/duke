@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,7 +16,7 @@ public class Duke {
     public static void Greet(){
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
-    public static void Detecting() {
+    public static void Detecting() throws DukeException {
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new LinkedList<>();
         while(true) {
@@ -29,10 +29,19 @@ public class Duke {
                 String cmdWord = cmdSc.next().toLowerCase();
                 switch (cmdWord) {
                     case "todo":
-                        String toDoTsk = cmdSc.nextLine();
-                        tasks.add(new toDo(toDoTsk));
-                        System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size()-1));
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        try {
+                            if (cmdSc.hasNext()) {
+                                String toDoTsk = cmdSc.nextLine();
+                                tasks.add(new toDo(toDoTsk));
+                                System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
+                                System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                            } else {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            }
+                        }
+                        catch (DukeException exp) {
+                            System.out.println("OOPS!!! " + exp.getMessage());
+                        }
                         break;
                     //list
                     case "list":
@@ -44,19 +53,37 @@ public class Duke {
                         break;
                     //deadline
                     case "deadline":
-                        String tskBy = cmdSc.nextLine();
-                        Scanner ddlSc = new Scanner(tskBy).useDelimiter("\\s*/by\\s*");
-                        tasks.add(new Deadline(ddlSc.next(), ddlSc.next()));
-                        System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size()-1));
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        try {
+                            if (cmdSc.hasNext()) {
+                                String tskBy = cmdSc.nextLine();
+                                Scanner ddlSc = new Scanner(tskBy).useDelimiter("\\s*/by\\s*");
+                                tasks.add(new Deadline(ddlSc.next(), ddlSc.next()));
+                                System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
+                                System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                            } else {
+                                throw new DukeException("The description of a deadline cannot be empty.");
+                            }
+                        }
+                        catch (DukeException exp) {
+                            System.out.println("OOPS!!! " + exp.getMessage());
+                        }
                         break;
                     //event
                     case "event":
-                        String tskAt = cmdSc.nextLine();
-                        Scanner evtSc = new Scanner(tskAt).useDelimiter("\\s*/at\\s*");
-                        tasks.add(new Event(evtSc.next(), evtSc.next()));
-                        System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size()-1));
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        try {
+                            if (cmdSc.hasNext()) {
+                                String tskAt = cmdSc.nextLine();
+                                Scanner evtSc = new Scanner(tskAt).useDelimiter("\\s*/at\\s*");
+                                tasks.add(new Event(evtSc.next(), evtSc.next()));
+                                System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
+                                System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                            } else {
+                                throw new DukeException("The description of an event cannot be empty.");
+                            }
+                        }
+                        catch (DukeException exp) {
+                            System.out.println("OOPS!!! " + exp.getMessage());
+                        }
                         break;
                     //done
                     case "done":
@@ -67,8 +94,12 @@ public class Duke {
                         break;
 
                     default:
-                        tasks.add(new Task(cmd));
-                        System.out.println("added: " + cmd);
+                        try {
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        }
+                        catch (DukeException exp) {
+                            System.out.println("OOPS!!!" + exp.getMessage());
+                        }
                 }
             }
         }

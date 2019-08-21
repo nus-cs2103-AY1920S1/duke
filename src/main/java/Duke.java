@@ -18,12 +18,14 @@ public class Duke {
         while(true) {
             String command = sc.nextLine();
             System.out.println(hr);
-            if (command.split(" ")[0].equals("done")){
+            String[] commandWords = command.split(" ");
+            String order = commandWords[0];
+            if (order.equals("done")){
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
                 Task temp = arr.get(index);
                 temp.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  [" + temp.getStatusIcon() + "] " + temp);
+                System.out.println("  " + temp);
             } else if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.print(hr);
@@ -31,11 +33,32 @@ public class Duke {
             } else if(command.equals("list")) {
                 for(int i = 0; i < arr.size(); i++) {
                     Task temp = arr.get(i);
-                    System.out.println((i + 1) + ".[" + temp.getStatusIcon() + "] " + temp);
+                    System.out.println((i + 1) + ". " + temp);
                 }
             } else {
-                arr.add(new Task(command));
-                System.out.println("added: " + command);
+                if (order.equals("todo")) {
+                    Task temp = new ToDo(command.split("todo ")[1]);
+                    arr.add(temp);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(" " + temp);
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                } else if (order.equals("deadline")) {
+                    String instruction = command.split("deadline ")[1];
+                    String[] details = instruction.split(" /by ");
+                    Task temp = new Deadline(details[0], details[1]);
+                    arr.add(temp);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(" " + temp);
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                } else {
+                    String instruction = command.split("event ")[1];
+                    String[] details = instruction.split(" /at ");
+                    Task temp = new Event(details[0], details[1]);
+                    arr.add(temp);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(" " + temp);
+                    System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                }
             }
             System.out.println(hr);
         }

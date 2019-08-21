@@ -13,29 +13,43 @@ public class Duke {
         while (!input.equals("bye")) {
             if (!input.equals("list")) {
                 if (!input.equals("done")) {
-                    input = input + " " + sc.nextLine();
-                    printLine();
+                    if (input.equals("todo")) {
+                        input = sc.nextLine();
+                        Task newTodo = new Todo(input);
+                        Task.addTask(newTodo);
 
-                    printIndent();
+                        input = sc.next();
 
-                    System.out.println("added: " + input);
+                    } else if (input.equals("deadline")) {
+                        input = sc.nextLine();
+                        String[] inputArr = input.split(" /");
 
-                    printLine();
+                        Task newDeadline = new Deadline(inputArr[0], inputArr[1]);
 
-                    Task newTask = new Task(input);
-                    Task.addTask(newTask);
+                        Task.addTask(newDeadline);
 
-                    input = sc.next();
+                        input = sc.next();
+
+                    } else {
+                        input = sc.nextLine();
+                        String[] inputArr = input.split(" /");
+
+                        Task newEvent = new Event(inputArr[0], inputArr[1]);
+
+                        Task.addTask(newEvent);
+
+                        input = sc.next();
+                    }
                 } else {
                     int taskNum = sc.nextInt();
                     Task.doTask(taskNum);
 
-                    sc.nextLine();
                     input = sc.next();
                 }
             } else {
                 Task.printTaskList();
 
+                sc.nextLine();
                 input = sc.next();
             }
         }

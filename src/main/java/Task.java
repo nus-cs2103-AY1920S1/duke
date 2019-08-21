@@ -21,6 +21,17 @@ public class Task {
 
     public static void addTask(Task task) {
         taskList.add(task);
+
+        printLine();
+
+        printIndent();
+        System.out.println("Got it. I've added this task:");
+        printIndent();
+        System.out.println("  " + task.toString());
+        printIndent();
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
+        printLine();
     }
 
     public void done() {

@@ -12,4 +12,7 @@ event career fair
 event /at 12 October
 done 5
 done *(&*%^jh
+delete 1
+delete 10
+list
 bye

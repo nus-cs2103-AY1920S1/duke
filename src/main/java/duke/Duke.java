@@ -77,6 +77,20 @@ public class Duke {
         }
     }
 
+    private static void handleDelete(final String arguments) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(arguments) - 1;
+            Task task = taskList.deleteTask(taskNumber);
+            echo("Noted. I've removed this task:\n  "
+                + task + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list");
+        } catch (NumberFormatException e) {
+            throw new DukeException("Error: Invalid task number format");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Error: Task does not exist");
+        }
+    }
+
     public static void main(String[] args) {
         echo("Hello from\n" + logo + "What can I do for you?");
 
@@ -108,6 +122,9 @@ public class Duke {
                         break;
                     case "done":
                         handleDone(arguments);
+                        break;
+                    case "delete":
+                        handleDelete(arguments);
                         break;
                     default:
                         throw new DukeException("Error: Unrecognised command");

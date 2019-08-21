@@ -17,6 +17,12 @@ class TaskList {
         return tasks.get(index);
     }
 
+    Task deleteTask(final int index) {
+        Task task = getTask(index);
+        tasks.remove(index);
+        return task;
+    }
+
     int size() {
         return tasks.size();
     }

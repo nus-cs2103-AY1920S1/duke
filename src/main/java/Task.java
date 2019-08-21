@@ -17,4 +17,7 @@ public class Task {
         reply += "  [\u2713] " + this.description;
         return reply;
     }
+    public String toString(){
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }

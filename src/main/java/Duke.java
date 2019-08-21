@@ -8,7 +8,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
-
         Task_List schedule = new Task_List();
         Scanner sc = new Scanner(System.in);
         System.out.println(new Border());

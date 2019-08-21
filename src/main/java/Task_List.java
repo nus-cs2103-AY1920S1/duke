@@ -1,91 +1,96 @@
 import java.util.ArrayList;
 
+
 public class Task_List {
     ArrayList <Task> schedule = new ArrayList<> ();
     int task_Num = 0;
 
     public void add(String task){
         String[] word_Arr = task.split(" ", 2);
-        switch (word_Arr[0]){
-            case "list":
-                System.out.println(this);
-                break;
+        try {
+            Commands command = Commands.getByName(word_Arr[0]);
+            switch (command) {
+                case LIST:
+                    System.out.println(this);
+                    break;
 
-            case "done":
-                try{
+                case DONE:
                     try {
-                        if (word_Arr.length < 2)
-                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Which task did you complete again?\n" + (new Border()));
-                        schedule.get(Integer.parseInt(word_Arr[1]) - 1).markAsDone();
-                        System.out.println(new Border());
-                        System.out.println("     Nice! I've marked this task as done:");
-                        System.out.println("       " + schedule.get(Integer.parseInt(word_Arr[1]) - 1).toString());
-                        System.out.println(new Border());
-                    } catch (NullPointerException | IndexOutOfBoundsException e) {
-                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()));
-                    } catch (NumberFormatException e) {
-                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()));
+                        try {
+                            if (word_Arr.length < 2)
+                                throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Which task did you complete again?\n" + (new Border()) + "\n");
+                            schedule.get(Integer.parseInt(word_Arr[1]) - 1).markAsDone();
+                            System.out.println(new Border());
+                            System.out.println("     Nice! I've marked this task as done:");
+                            System.out.println("       " + schedule.get(Integer.parseInt(word_Arr[1]) - 1).toString());
+                            System.out.println(new Border());
+                        } catch (NullPointerException | IndexOutOfBoundsException e) {
+                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()) + "\n");
+                        } catch (NumberFormatException e) {
+                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()) + "\n");
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
                     }
-                } catch (DukeException e){
-                    System.out.println(e.getMessage());
-                } finally{
-                    break;
-                }
 
-            case "delete":
-                try{
+                case DELETE:
                     try {
-                        if (word_Arr.length < 2)
-                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! What do you want to delete again?\n" + (new Border()));
-                        Task removed_Task = schedule.get(Integer.parseInt(word_Arr[1]) - 1);
-                        schedule.remove(removed_Task);
-                        task_Num --;
-                        System.out.println(new Border());
-                        System.out.println("     Noted. I've removed this task:");
-                        System.out.println("       " + removed_Task.toString());
-                        System.out.println("      Now you have " + task_Num + " tasks in the list.");
-                        System.out.println(new Border());
-                    } catch (NullPointerException | IndexOutOfBoundsException e) {
-                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()));
-                    } catch (NumberFormatException e) {
-                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()));
+                        try {
+                            if (word_Arr.length < 2)
+                                throw new DukeException((new Border()) + "\n     ☹ OOPS!!! What do you want to delete again?\n" + (new Border()) + "\n");
+                            Task removed_Task = schedule.get(Integer.parseInt(word_Arr[1]) - 1);
+                            schedule.remove(removed_Task);
+                            task_Num--;
+                            System.out.println(new Border());
+                            System.out.println("     Noted. I've removed this task:");
+                            System.out.println("       " + removed_Task.toString());
+                            System.out.println("      Now you have " + task_Num + " tasks in the list.");
+                            System.out.println(new Border());
+                        } catch (NullPointerException | IndexOutOfBoundsException e) {
+                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()) + "\n");
+                        } catch (NumberFormatException e) {
+                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()) + "\n");
+                        }
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    } finally {
+                        break;
                     }
-                } catch (DukeException e){
-                    System.out.println(e.getMessage());
-                } finally {
-                    break;
+                default:
+                    try {
+                        Task new_task = track(command, word_Arr);
+                        schedule.add(new_task);
+                        task_Num++;
+                        System.out.println(new Border());
+                        System.out.println("     Got it. I've added this task:");
+                        System.out.println("       " + new_task.toString());
+                        System.out.println("     Now you have " + task_Num + " tasks in the list.");
+                        System.out.println(new Border() + "\n");
+                        break;
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
-            default:
-                try {
-                    Task new_task = track(word_Arr);
-                    schedule.add(new_task);
-                    task_Num ++;
-                    System.out.println(new Border());
-                    System.out.println("     Got it. I've added this task:");
-                    System.out.println("       " + new_task.toString());
-                    System.out.println("     Now you have " + task_Num + " tasks in the list.");
-                    System.out.println(new Border() + "\n");
-                    break;
-                } catch (DukeException e){
-                    System.out.println(e.getMessage());
-                }
+            } catch (DukeException e){
+                System.out.println(e.getMessage());
             }
         }
 
-    private Task track(String[] word_Arr) throws DukeException{
+    private Task track(Commands command, String[] word_Arr) throws DukeException{
         try {
-            if (word_Arr[0].equals("todo")) {
-                check_Decription(word_Arr, "todo");
-                return new Todo(word_Arr[1]);
-            } else if (word_Arr[0].equals("deadline")) {
-                check_Decription(word_Arr, "deadline");
-                return new Deadline(word_Arr[1]);
-            } else if (word_Arr[0].equals("event")){
-                check_Decription(word_Arr, "event");
-                return new Event(word_Arr[1]);
-            } else {
-                throw new DukeException((new Border()) + "\n     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + (new Border()), new IllegalArgumentException());
-            }
+            switch (command) {
+                case TODO:
+                    check_Decription(word_Arr, "todo");
+                    return new Todo(word_Arr[1]);
+                case DEADLINE:
+                    check_Decription(word_Arr, "deadline");
+                    return new Deadline(word_Arr[1]);
+                default:
+                    check_Decription(word_Arr, "event");
+                    return new Event(word_Arr[1]);
+                }
         } catch(DukeException e){
             throw e;
         }
@@ -93,7 +98,7 @@ public class Task_List {
 
     private void check_Decription(String[] word_Arr, String task_Type) throws DukeException{
         if (word_Arr.length < 2) {
-            throw new DukeException("     ☹ OOPS!!! The description of a " + task_Type + " cannot be empty.\\n\" + (new Border())");
+            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! The description of a " + task_Type + " cannot be empty.\n" + (new Border()));
         }
     }
 

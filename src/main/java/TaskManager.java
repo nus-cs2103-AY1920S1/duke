@@ -20,4 +20,8 @@ public class TaskManager {
         taskList.get(i).changeStatusTrue();
     }
 
+    public Task deleteTask(int i) {
+        return taskList.remove(i);
+    }
+
 }

@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
-        List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline");
+        List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline", "delete");
 
         greet();
 
@@ -24,6 +24,11 @@ public class Duke {
                     String[] words = command.split("\\s");
                     int index = Integer.parseInt(words[1]);
                     doneTask(taskManager, index);
+                } else if (command.startsWith("delete")){
+                    totalTask--;
+                    String[] words = command.split("\\s");
+                    int index = Integer.parseInt(words[1]);
+                    deleteTask(taskManager, index);
                 } else {
                     totalTask++;
                     addTask(taskManager, command);
@@ -139,9 +144,18 @@ public class Duke {
         taskManager.doneTask(index);
         horizontalLine();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [" + taskManager.getTask(index).getStatusIcon() + "] " + taskManager.getTask(index).getDescription() + taskManager.getTask(index).getDate());
+        System.out.println("  [" + taskManager.getTask(index).getType() + "]" + "[" + taskManager.getTask(index).getStatusIcon() + "] " + taskManager.getTask(index).getDescription() + taskManager.getTask(index).getDate());
         horizontalLine();
         System.out.println();
     }
 
+    public static void deleteTask(TaskManager taskManager, int index) {
+        index = index - 1;
+        Task taskHolder = taskManager.deleteTask(index);
+        horizontalLine();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  [" + taskHolder.getType() + "]" + "[" + taskHolder.getStatusIcon() + "] " + taskHolder.getDescription() + taskHolder.getDate());
+        horizontalLine();
+        System.out.println();
+    }
 }

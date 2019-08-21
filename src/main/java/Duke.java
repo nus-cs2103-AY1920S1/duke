@@ -16,7 +16,7 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________");
 
-        String cmd = sc.nextLine();
+        String cmd = sc.nextLine().toLowerCase();
         while (!cmd.equals("bye")) {
 
             String arr[] = cmd.split(" ", 2);
@@ -92,54 +92,5 @@ public class Duke {
     public static void main(String[] args) {
         Duke lvl4 = new Duke();
         lvl4.run();
-    }
-}
-
-class Task {
-
-    String _name;
-    String _status;
-
-    public Task(String name) {
-        _name = name;
-        _status = "✗";
-    }
-
-    public String toString() {  return "[" + _status + "] " + _name; }
-
-    public void finishTask() {_status = "✓";}
-
-}
-
-class ToDo extends Task {
-    public ToDo(String name) {
-        super(name);
-    }
-    public String toString() { return "[T]" + super.toString(); }
-}
-
-class Deadline extends Task {
-    String _dateTime;
-
-    public Deadline(String name, String dateTime) {
-        super(name);
-        _dateTime = dateTime;
-    }
-    public String toString() {
-        String arr[] = _dateTime.split(" ", 2);
-        return "[D]" + super.toString() + "(" + arr[0] + ": " + arr[1] + ")";
-    }
-}
-
-class Event extends Task {
-    String _dateTime;
-
-    public Event(String name, String dateTime) {
-        super(name);
-        _dateTime = dateTime;
-    }
-    public String toString() {
-        String arr[] = _dateTime.split(" ", 2);
-        return "[E]" + super.toString() + "(" + arr[0] + ": " + arr[1] + ")";
     }
 }

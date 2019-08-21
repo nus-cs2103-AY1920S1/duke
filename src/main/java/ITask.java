@@ -1,7 +1,8 @@
 public interface ITask {
-    public String getName();
-    public void markDone();
+    String getName();
+    void markDone();
     @Override
-    public String toString();
+    String toString();
+
 }
 

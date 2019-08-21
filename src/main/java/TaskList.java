@@ -31,8 +31,8 @@ public class TaskList {
      * Performs any modification on list - add/delete/markDone
      * @param commandDescription - Command input given by user
      */
-    private void modifyList(String[] commandDescription) throws UnknownCommandException {
-        if(!this.isValidCommand(commandDescription[0])) { throw new UnknownCommandException("Unknown Command");};
+    private void modifyList(String[] commandDescription) throws UnknownCommandException, IndexOutOfBoundsException {
+        if(!this.isValidCommand(commandDescription[0])) { throw new UnknownCommandException("Unknown Command");}
         if (commandDescription.length <= 1) {
             throw new IncompleteCommandError("empty", commandDescription[0]);
         }
@@ -58,11 +58,13 @@ public class TaskList {
             }
         } catch (NumberFormatException e) {
             throw new InvalidCommandError(commandDescription[0]);
-        } catch (IndexOutOfBoundsException e) {
-            throw new IncompleteCommandError("incomplete", commandDescription[0]);
         }
     }
 
+    /**
+     * Adds new task (without date) into list
+     * @param commandDescription - array of strings containing command description
+     */
     private void addTaskWithoutDate(String[] commandDescription) {
         this.list.add(new ToDoTask(commandDescription[1]));
     }
@@ -71,17 +73,25 @@ public class TaskList {
      * Adds new task (with date) into list
      * @param commandDescription - array of strings containing command description
      */
-    private void addTaskWithDate(String[] commandDescription) throws IndexOutOfBoundsException {
-        String[] taskArray = commandDescription[1].split("/", 2);
-        String taskName = taskArray[0].trim();
-        String date = taskArray[1].split("\\s+", 2)[1];
-        if (commandDescription[0].equals("deadline")) {
-            this.list.add(new DeadlineTask(taskName, date));
-        } else {
-            this.list.add(new EventTask(taskName, date));
+    private void addTaskWithDate(String[] commandDescription) throws IncompleteCommandError {
+        try {
+            String[] taskArray = commandDescription[1].split("/", 2);
+            String taskName = taskArray[0].trim();
+            String date = taskArray[1].split("\\s+", 2)[1];
+            if (commandDescription[0].equals("deadline")) {
+                this.list.add(new DeadlineTask(taskName, date));
+            } else {
+                this.list.add(new EventTask(taskName, date));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new IncompleteCommandError("incomplete", commandDescription[0]);
         }
     }
 
+    /**
+     * Deletes existing task from list
+     * @param commandDescription - array of strings containing command description
+     */
     private void deleteTask(String[] commandDescription) throws NumberFormatException, IndexOutOfBoundsException {
         int idx = Integer.parseInt(commandDescription[1]);
         Task task = this.list.get(idx-1);
@@ -109,7 +119,8 @@ public class TaskList {
     }
 
     /**
-     * Prints out contents of list according to order of insertion
+     * Returns True if input is a valid command, else returns false
+     * @param command - command given by user
      */
     private boolean isValidCommand(String command) {
         return Arrays.asList(Command.values()).toString().contains(command);

@@ -79,7 +79,6 @@ public class Duke {
                     }
                     System.out.println("     Now you have " + (count-1) + " task(s) in the list.");
             }
-
             System.out.println("    ____________________________________________________________");
         }
 

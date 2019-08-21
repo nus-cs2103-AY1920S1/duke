@@ -42,15 +42,21 @@ public class Duke {
         return sb.toString();
     }
 
-    private Task createTask(String str, String command) { //command is either todo, deadline or event
+    private Task createTask(String str, String command) throws DukeException { //command is either todo, deadline or event
         String[] splitStr;
         if (command.equals("todo")) {
             return new ToDo(str);
         } else if (command.equals("deadline")) {
-            splitStr = str.split("by");
+            splitStr = str.split("/by");
+            if (splitStr.length == 1) {
+                throw new DukeException("Invalid format. Please use 'by:' to state your deadline");
+            }
             return new Deadlines(splitStr[0].trim(), splitStr[1].trim());
         } else if (command.equals("event")) {
-            splitStr = str.split("at");
+            splitStr = str.split("/at");
+            if (splitStr.length == 1) {
+                throw new DukeException("Invalid format. Please use 'at:' to state your deadline");
+            }
             return new Events(splitStr[0].trim(), splitStr[1].trim());
         } else {
             return null;
@@ -75,15 +81,20 @@ public class Duke {
         return sb.toString();
     }
 
-    void executeCommand(String command, String[] inputSplit){
+    void executeCommand(String command, String[] inputSplit) throws DukeException {
         if (command.equals("list")) {
             System.out.println(lineWrap(getList()));
         } else if (command.equals("done")) {
             int taskNumber = Integer.parseInt(inputSplit[1]);
             System.out.println(lineWrap(markTask(taskNumber)));
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            if (inputSplit.length == 1) {
+                throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+            }
             Task task = createTask(inputSplit[1], command);
             System.out.println(lineWrap(addTask(task)));
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -91,13 +102,18 @@ public class Duke {
         System.out.println(greet());
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            String[] inputSplit = input.split(" ", 2);
+            String[] inputSplit = input.split(" ", 2); //split into command and remaining sentence
             String command = inputSplit[0];
-            if (command.equals("bye")) {
-                System.out.println(bye());
-                break;
-            } else {
-                executeCommand(command, inputSplit);
+
+            try {
+                if (command.equals("bye")) {
+                    System.out.println(bye());
+                    break;
+                } else {
+                    executeCommand(command, inputSplit);
+                }
+            } catch (DukeException e) {
+                System.out.println(lineWrap(e.getMessage()));
             }
         }
     }

@@ -1,6 +1,6 @@
 package seedu.duke.cli;
 
-import seedu.duke.Task;
+import seedu.duke.tasks.Task;
 
 import java.util.List;
 

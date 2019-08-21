@@ -1,6 +1,6 @@
 package seedu.duke.cli.commands;
 
-import seedu.duke.Task;
+import seedu.duke.tasks.Task;
 import seedu.duke.cli.Command;
 import seedu.duke.cli.CommandException;
 import seedu.duke.cli.annotations.CommandConstructor;

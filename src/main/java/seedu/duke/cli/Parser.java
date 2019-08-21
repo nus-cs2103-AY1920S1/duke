@@ -3,8 +3,11 @@ package seedu.duke.cli;
 import seedu.duke.cli.annotations.Argument;
 import seedu.duke.cli.annotations.CommandConstructor;
 import seedu.duke.cli.commands.ByeCommand;
+import seedu.duke.cli.commands.DeadlineCommand;
 import seedu.duke.cli.commands.DoneCommand;
+import seedu.duke.cli.commands.EventCommand;
 import seedu.duke.cli.commands.ListCommand;
+import seedu.duke.cli.commands.TodoCommand;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -24,6 +27,9 @@ public class Parser {
         addConstructors(ListCommand.class);
         addConstructors(ByeCommand.class);
         addConstructors(DoneCommand.class);
+        addConstructors(TodoCommand.class);
+        addConstructors(EventCommand.class);
+        addConstructors(DeadlineCommand.class);
     }
 
     @SuppressWarnings("unchecked")

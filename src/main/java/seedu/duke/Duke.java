@@ -4,6 +4,7 @@ import seedu.duke.cli.Command;
 import seedu.duke.cli.CommandException;
 import seedu.duke.cli.Parser;
 import seedu.duke.cli.commands.ByeCommand;
+import seedu.duke.tasks.Task;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,8 +40,7 @@ public class Duke {
                 try {
                     Command c = Parser.parse(line);
                     if (c == null) {
-                        taskList.add(new Task(line));
-                        System.out.printf("added: %s%n", line);
+                        System.out.println("Unknown command.");
                     } else if (c instanceof ByeCommand) {
                         System.out.println("Bye. Hope to see you again soon!");
                         break;

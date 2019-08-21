@@ -7,6 +7,7 @@ public class Duke {
     private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
     private static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:\n";
     private static final String DUKE_ADD_TASK = "Got it. I've added this task:\n";
+    private static final String DUKE_DELETE_TASK = "Noted. I've removed this task:\n";
     private static final String DUKE_NUMBER_OF_TASKS = "Now you have %d tasks in the list.";
     private static final String DUKE_LINE = "    ____________________________________________________________\n";
     private static final String DUKE_TAB4 = "    ";
@@ -58,11 +59,25 @@ public class Duke {
                     this.listTasks();
                 } else if (command.startsWith("done")) {
                     // Mark Task at index specified as done
-                    int index = Integer.parseInt(command.substring(5));
-                    taskList.markAsDoneTaskAt(index);
-                    System.out.println(DUKE_TAB4 + DUKE_MARK_AS_DONE
-                            + DUKE_TAB4 + DUKE_TAB2
-                            + taskList.getTaskAt(index).getStatus());
+                    try {
+                        int index = Integer.parseInt(command.substring(5));
+                        taskList.markAsDoneTaskAt(index);
+                        System.out.println(DUKE_TAB4 + DUKE_MARK_AS_DONE
+                                + DUKE_TAB4 + DUKE_TAB2
+                                + taskList.getTaskAt(index).getStatus());
+                    } catch (StringIndexOutOfBoundsException e) {
+                        throw new DukeIllegalArgumentException("☹ OOPS!!! You must include an index.");
+                    }
+                } else if (command.startsWith("delete")) {
+                    try {
+                        int index = Integer.parseInt(command.substring(7));
+                        System.out.println(DUKE_TAB4 + DUKE_DELETE_TASK
+                                + DUKE_TAB4 + DUKE_TAB2 + taskList.deleteTaskAt(index).getStatus()
+                                + String.format("\n" + DUKE_TAB4 + DUKE_NUMBER_OF_TASKS,
+                                taskList.getSize()));
+                    } catch (StringIndexOutOfBoundsException e) {
+                        throw new DukeIllegalArgumentException("☹ OOPS!!! You must include an index.");
+                    }
                 } else if (command.startsWith("todo")) {
                     try {
                         command = command.substring(5);
@@ -88,8 +103,6 @@ public class Duke {
                     } catch (StringIndexOutOfBoundsException e) {
                         throw new DukeIllegalArgumentException("☹ OOPS!!! The description of a deadline "
                                 + "cannot be empty.");
-                    } catch (DukeIllegalArgumentException e) {
-                        throw e;
                     }
                 } else if (command.startsWith("event")) {
                     try {
@@ -108,8 +121,6 @@ public class Duke {
                     } catch (StringIndexOutOfBoundsException e) {
                         throw new DukeIllegalArgumentException("☹ OOPS!!! The description of an event "
                                 + "cannot be empty.");
-                    } catch (DukeIllegalArgumentException e) {
-                        throw e;
                     }
                 } else {
                     throw new DukeIllegalCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

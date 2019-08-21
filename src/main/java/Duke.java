@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 
+//Assumption: reads word by word, additional arguments would be ignored
 public class Duke {
     public static void main(String[] args) {
         String input = "";
@@ -16,16 +17,32 @@ public class Duke {
             }
 
             input = sc.nextLine();
+            String[] arguments = input.split(" ");
 
-            switch (input) {
+            switch (arguments[0]) {
                 case "bye":
                     printExitMsg();
                     break;
                 case "list":
                     printList(taskList);
                     break;
+                case "done":
+                    try {
+                        int num = Integer.parseInt(arguments[1]);
+                        if (num < 1 || num > taskList.getNumTasks()) {
+                            throw new IndexOutOfBoundsException();
+                        }
+                        Task task = taskList.getTaskByIndex(num);
+                        task.markAsDone();
+                        printDoneMsg(task);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter an integer after done.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("No such task, please try another number.");
+                    }
+                    break;
                 default:
-                    taskList.add(input);
+                    taskList.add(new Task(input));
                     printAddTask(input);
                     break;
             }
@@ -73,21 +90,34 @@ public class Duke {
     private static void printAddTask(String task) {
         printLine();
         printIndentation();
-        System.out.println(" added: " + task);
+        System.out.printf(" added: %s\n", task);
         printLine();
         System.out.println();
     }
 
     private static void printList(MyList myList) {
-        List<String> list = myList.getList();
+        List<Task> list = myList.getList();
         int listNum = 1;
         printLine();
-        for (String taskName : list) {
+        printIndentation();
+        System.out.println(" Here are the tasks in your list:");
+        for (Task task : list) {
             printIndentation();
-            System.out.println(" " + listNum + ". " + taskName);
+            System.out.printf(" %d.[%s] %s\n", listNum, task.getStatusIcon(), task.getDescription());
             listNum++;
         }
         printLine();
         System.out.println();
+    }
+
+    private static void printDoneMsg(Task task) {
+        printLine();
+        printIndentation();
+        System.out.println(" Nice! I've marked this task as done: ");
+        printIndentation();
+        System.out.printf("   [%s] %s\n", task.getStatusIcon(), task.getDescription());
+        printLine();
+        System.out.println();
+
     }
 }

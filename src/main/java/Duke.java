@@ -10,28 +10,39 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         */
         Scanner sc = new Scanner(System.in);
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int pos = 0;
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
         while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
-            } else if (input.equals("list")) {
-                int k = 0;
-                while (k != pos) {
-                    int bullet = k + 1;
-                    System.out.println(bullet + ". " + list[k]);
-                    k++;
-                }
+            if (sc.hasNext("done")) {
+                String dummy = sc.next();
+                int number = sc.nextInt();
+                int pos1 = number - 1;
+                String dummy1 = sc.nextLine();
+                list[pos1].markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[" + list[pos1].getStatusIcon() + "] " + list[pos1]);
             } else {
-                list[pos] = input;
-                System.out.println("added: " + input);
-                pos++;
+                String input = sc.nextLine();
+                if (input.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                } else if (input.equals("list")) {
+                    int k = 0;
+                    while (k != pos) {
+                        int bullet = k + 1;
+                        System.out.println(bullet + ".[" + list[k].getStatusIcon() + "] " + list[k]);
+                        k++;
+                    }
+                } else {
+                    Task task = new Task(input);
+                    list[pos] = task;
+                    System.out.println("added: " + input);
+                    pos++;
+                }
             }
 
         }

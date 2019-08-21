@@ -1,10 +1,12 @@
 package duke;
 
+import duke.commands.Command;
+
 import java.util.Scanner;
 
 public class Duke {
     private static final int NUMBER_TASKS = 100;
-    private static final String LINE_BREAK = "____________________________________________________________";
+    private static final String LINE_BREAK = "______________________________________________________________________";
     private static final String HELLO_STRING = "Hello! I'm duke.Duke\nWhat can I do for you?";
     private static final String BYE_STRING = "Bye. Hope to see you again soon!";
 
@@ -23,13 +25,18 @@ public class Duke {
         say(HELLO_STRING);
         while (running) {
             input = scanner.nextLine();
-            Command command = Command.create(this, input);
-            command.execute();
+            try {
+                Command command = Command.create(this, input);
+                command.execute();
+            } catch (DukeException e) {
+                say(e.getMessage());
+            }
         }
     }
 
     public void exit() {
         this.running = false;
+        scanner.close();
         say(BYE_STRING);
     }
 

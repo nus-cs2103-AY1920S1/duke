@@ -1,4 +1,10 @@
-package duke;
+package duke.commands;
+
+import duke.*;
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TodoTask;
 
 public class AddCommand extends Command {
     private static final String AT_DELIMITER = "/at";

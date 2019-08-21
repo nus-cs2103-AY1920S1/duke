@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+
 public class Task_List {
-    Task [] schedule = new Task [100];
+    ArrayList <Task> schedule = new ArrayList<> ();
     int task_Num = 0;
 
     public void add(String task){
@@ -14,13 +16,15 @@ public class Task_List {
                     try {
                         if (word_Arr.length < 2)
                             throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Which task did you complete again?\n" + (new Border()));
-                        schedule[Integer.parseInt(word_Arr[1]) - 1].markAsDone();
+                        schedule.get(Integer.parseInt(word_Arr[1]) - 1).markAsDone();
                         System.out.println(new Border());
-                        System.out.println("     Nice! I've marked this task as done: ");
-                        System.out.println("       " + schedule[Integer.parseInt(word_Arr[1]) - 1].toString());
+                        System.out.println("     Nice! I've marked this task as done:");
+                        System.out.println("       " + schedule.get(Integer.parseInt(word_Arr[1]) - 1).toString());
                         System.out.println(new Border());
                     } catch (NullPointerException | IndexOutOfBoundsException e) {
                         throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()));
+                    } catch (NumberFormatException e) {
+                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()));
                     }
                 } catch (DukeException e){
                     System.out.println(e.getMessage());
@@ -28,11 +32,34 @@ public class Task_List {
                     break;
                 }
 
-
+            case "delete":
+                try{
+                    try {
+                        if (word_Arr.length < 2)
+                            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! What do you want to delete again?\n" + (new Border()));
+                        Task removed_Task = schedule.get(Integer.parseInt(word_Arr[1]) - 1);
+                        schedule.remove(removed_Task);
+                        task_Num --;
+                        System.out.println(new Border());
+                        System.out.println("     Noted. I've removed this task:");
+                        System.out.println("       " + removed_Task.toString());
+                        System.out.println("      Now you have " + task_Num + " tasks in the list.");
+                        System.out.println(new Border());
+                    } catch (NullPointerException | IndexOutOfBoundsException e) {
+                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()));
+                    } catch (NumberFormatException e) {
+                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()));
+                    }
+                } catch (DukeException e){
+                    System.out.println(e.getMessage());
+                } finally {
+                    break;
+                }
             default:
                 try {
                     Task new_task = track(word_Arr);
-                    schedule[task_Num++] = new_task;
+                    schedule.add(new_task);
+                    task_Num ++;
                     System.out.println(new Border());
                     System.out.println("     Got it. I've added this task:");
                     System.out.println("       " + new_task.toString());
@@ -73,16 +100,9 @@ public class Task_List {
 
     public String toString(){
         String output = (new Border()) + "\n" + "     Here are the tasks in your list: \n";
-        for (int index = 0; index <= task_Num; index ++){
-            Task task = schedule[index];
-            if (task == null){
-                break;
-            } else {
-                /*System.out.println(index + 1);
-                System.out.println(schedule[index]);
-                String task = schedule[index].toString();*/
-                output += ("     " + (index + 1) + "." + task.toString() + "\n");
-            }
+        for (int index = 0; index < task_Num; index ++){
+            Task task = schedule.get(index);
+            output += ("     " + (index + 1) + "." + task.toString() + "\n");
         }
         return output + (new Border()) + "\n";
     }

@@ -37,6 +37,9 @@ public class Duke {
                 case "done":
                     finishTask(arr);
                     break;
+                case "delete":
+                    deleteTask(arr);
+                    break;
                 default:
                     addNewTask(arr);
             }
@@ -47,6 +50,7 @@ public class Duke {
 
     }
 
+
     private void addNewTask(String[] arr) {
 
         //Possible exception: command not recognized
@@ -55,16 +59,19 @@ public class Duke {
         if (!validTask) {
             dukeEcho("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             return;
-        };
+        }
 
         String taskDetails;
         Task newTask;
 
-        //Possible exception: no parameters for task name and detail
+        //Possible error: no parameters for task name and detail, or trailing whitespaces for detail
         try {
             taskDetails = arr[1];
         } catch (IndexOutOfBoundsException e) {
             dukeEcho("☹ OOPS!!! The description of a " + arr[0] + " cannot be empty.");
+            return;
+        } if (taskDetails.replaceAll("\\s+", "").equals("")) {
+            dukeEcho("☹ OOPS!!! The description of a(n) " + arr[0] + " cannot be empty.");
             return;
         }
 
@@ -102,39 +109,64 @@ public class Duke {
 
     private void finishTask(String[] arr){
 
-        int taskNum;
+        Task currTask = getTask(arr);
+        if (currTask == null) return;
 
+        // No error, proceed to mark task as complete
+        currTask.finishTask();
+        dukeEcho("Nice! I've marked this task as done:", currTask.toString());
+
+
+    }
+
+    private void deleteTask(String[] arr) {
+
+        Task currTask = getTask(arr);
+        if (currTask == null) return;
+
+        // No error, proceed to delete task
+        _tasks.remove(currTask);
+        dukeEcho("Noted. I've removed this task:",
+                currTask.toString(),
+                "Now you have " + _tasks.size() + " tasks in the list.");
+    }
+
+    /*
+    getTask takes in an array with the command at index 0 and the taskID in index 1
+    returns the Task object with the corresponding taskID if ID is valid.
+     */
+    private Task getTask(String[] arr) {
+
+        int taskNum;
         try {
             String secondParam;
             secondParam = arr[1];
             taskNum = Integer.parseInt(secondParam);
         }
-        //Possible exception: No input value behind "done" command
+        //Possible error: No input value behind "done" command
         catch (IndexOutOfBoundsException e) {
             dukeEcho("Please enter a task ID.");
-            return;
+            return null;
         }
-        //Possible exception: Task ID not in numerical format
+        //Possible error: Task ID not in numerical format
         catch (NumberFormatException e) {
             dukeEcho("Please enter a valid numerical task ID.");
-            return;
+            return null;
         }
 
         Task currTask;
         try {
             currTask = _tasks.get(taskNum-1);
         }
-        //Possible exception: Task ID out of bounds
+        //Possible error: Task ID out of bounds
         catch (IndexOutOfBoundsException e) {
             dukeEcho("Please ensure task ID is between 1 and " + _tasks.size());
-            return;
+            return null;
         }
 
-        currTask.finishTask();
-        dukeEcho("Nice! I've marked this task as done:", currTask.toString());
-
-
+        return currTask;
     }
+
 
     private void listTasks() {
         System.out.println(DIVIDER);
@@ -146,7 +178,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke lvl4 = new Duke();
-        lvl4.run();
+        Duke lvl6 = new Duke();
+        lvl6.run();
     }
 }

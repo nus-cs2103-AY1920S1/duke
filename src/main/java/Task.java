@@ -16,7 +16,7 @@ public abstract class Task{
         return this.description;
     }
 
-    public abstract Task markAsDone();
+    public abstract Task markAsDone() throws DukeException;
 
     public String getTaskType(){
         return this.taskType;

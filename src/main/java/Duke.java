@@ -11,53 +11,85 @@ public class Duke {
 
         System.out.println(indent(wrapWithHorizontalLines(intro)));
         String input;
-        String output;
+
         while(!(input = sc.nextLine()).equals("bye")) {
-            String[] splitInput = input.split(" ");
-            String command = splitInput[0];
-            switch(command) {
-                case "list":
-                    output = historyToString(history);
-                    break;
-                case "done":
-                    int selectedIndex = Integer.parseInt(splitInput[1]) - 1;
-                    Task task = history.get(selectedIndex);
-                    task.markAsDone();
-                    output = "Nice! I've marked this task as done: \n"
-                            + indent(task.toString());
-                    break;
-                case "deadline":
-                    int byIndex = input.indexOf(" /by ");
-                    String deadlineDescription =  input.substring(9, byIndex);
-                    String by = input.substring(byIndex + 5);
-                    Deadline deadline = new Deadline(deadlineDescription, by);
-                    history.add(deadline);
-                    output = wrapWithAddTask(deadline);
-                    break;
-                case "event":
-                    int atIndex = input.indexOf(" /at ");
-                    String eventDescription =  input.substring(6, atIndex);
-                    String at = input.substring(atIndex + 5);
-                    Event event = new Event(eventDescription, at);
-                    history.add(event);
-                    output = wrapWithAddTask(event);
-                    break;
-                case "todo":
-                    String todoDescription = input.substring(5);
-                    Todo todo = new Todo(todoDescription);
-                    history.add(todo);
-                    output = wrapWithAddTask(todo);
-                    break;
-                default:
-                    history.add(new Task(input));
-                    output = "added: " + input;
+            String output;
+            try{
+                output = handleInput(input);
+            } catch(DukeException e) {
+                output = e.getMessage();
             }
-            System.out.println(indent(wrapWithHorizontalLines(output)));
+            System.out.println(output);
         };
 
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(indent(wrapWithHorizontalLines(endMessage)));
     }
+
+    private static String handleInput(String input) throws DukeException {
+        String output;
+        String[] splitInput = input.split(" ");
+        String command = splitInput[0];
+        switch(command) {
+            case "list":
+                output = historyToString(history);
+                break;
+            case "done":
+                Task task;
+                int selectedIndex;
+                try {
+                    selectedIndex = Integer.parseInt(splitInput[1]) - 1;
+                } catch(NumberFormatException e) {
+                    throw new DukeException("Argument passed to done must be a valid integer");
+                }
+                try {
+                    task = history.get(selectedIndex);
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException("Selected task number does not exist.");
+                }
+                task.markAsDone();
+                output = "Nice! I've marked this task as done: \n"
+                        + indent(task.toString());
+                break;
+            case "deadline":
+                int byIndex = input.indexOf(" /by ");
+                if(byIndex < 0) {
+                    throw new DukeException("Command deadline requires an argument /by, followed by deadline description");
+                }
+                String deadlineDescription =  input.substring(9, byIndex);
+                String by = input.substring(byIndex + 5);
+                Deadline deadline = new Deadline(deadlineDescription, by);
+                history.add(deadline);
+                output = wrapWithAddTask(deadline);
+                break;
+            case "event":
+                int atIndex = input.indexOf(" /at ");
+                if(atIndex < 0) {
+                    throw new DukeException("Command event requires an argument /at, followed by event description");
+                }
+                String eventDescription =  input.substring(6, atIndex);
+                String at = input.substring(atIndex + 5);
+                Event event = new Event(eventDescription, at);
+                history.add(event);
+                output = wrapWithAddTask(event);
+                break;
+            case "todo":
+                String todoDescription;
+                try {
+                    todoDescription = input.substring(5);
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                Todo todo = new Todo(todoDescription);
+                history.add(todo);
+                output = wrapWithAddTask(todo);
+                break;
+            default:
+                output = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        }
+        return indent(wrapWithHorizontalLines(output));
+    }
+
 
     private static String historyToString(List<Task> history) {
         StringJoiner sj = new StringJoiner("\n");

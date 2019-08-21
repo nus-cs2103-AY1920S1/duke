@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import seedu.duke.cli.CommandException;
+import seedu.duke.cli.Parser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,49 +31,14 @@ public class Duke {
                 String line = br.readLine();
                 if (line == null) {
                     break;
-                }
-
-                String[] tok = line.split(" ", 2);
-                if (tok.length < 1 || tok[0].isBlank()) {
+                } else if (line.isBlank()) {
                     System.out.println("No command entered.");
                     continue;
                 }
-
-                switch (line.toLowerCase()) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break mainLoop;
-                case "list":
-                    for (int i = 0; i < taskList.size(); ++i) {
-                        System.out.printf("%d. %s%n", i + 1, taskList.get(i));
-                    }
-                    continue mainLoop;
-                }
-
-                switch (tok[0].toLowerCase()) {
-                case "done":
-                    if (tok.length < 2) {
-                        System.out.println("Usage: done <task ID>");
-                        break;
-                    }
-                    try {
-                        int index = Integer.parseInt(tok[1]);
-                        if (index < 1 || taskList.size() < index) {
-                            System.out.println("Invalid task ID.");
-                            break;
-                        }
-
-                        Task t = taskList.get(index - 1);
-                        t.setDone(true);
-                        System.out.printf("Nice! I've marked this task as done:%n%s%n", t);
-                    } catch (NumberFormatException nfe) {
-                        System.out.println("Invalid number provided as task ID.");
-                    }
-                    break;
-                default:
-                    taskList.add(new Task(line));
-                    System.out.printf("added: %s%n", line);
-                    break;
+                try {
+                    Parser.parse(line).execute(taskList);
+                } catch (CommandException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         } catch (IOException e) {

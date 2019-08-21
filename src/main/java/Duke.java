@@ -5,8 +5,26 @@ public class Duke {
         Duke d = new Duke();
 
         d.initDuke();
+        d.runDuke();
         d.terminateDuke();
+    }
 
+    public void runDuke() {
+        Scanner sc = new Scanner(System.in);
+        Boolean contRunning = true;
+
+        while (contRunning) {
+            String s = sc.nextLine();
+            switch (s) {
+                case "bye":
+                    contRunning = false;
+                    break;
+                default:
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\t" + s);
+                    System.out.println("\t____________________________________________________________");
+            }
+        }
     }
 
     public void initDuke() {
@@ -14,13 +32,6 @@ public class Duke {
                           +"\tHello! I'm Duke\n"
                           +"\tWhat can I do for you?\n"
                           +"\t____________________________________________________________\n");
-
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
     }
 
     public void terminateDuke() {

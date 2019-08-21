@@ -37,6 +37,12 @@ public class Duke {
                 }
 
                 else if (readInput.toLowerCase().equals("list")) {
+
+                    // Error Handling: ListEmpty
+                    if(listCounter == 0){
+                        throw new EmptyListException();
+                    }
+
                     String printList = "Here are the tasks in your list:\n";
 
                     for (int i = 0; i < listCounter; i++) {
@@ -136,6 +142,9 @@ public class Duke {
             }
             catch (EmptyCommandField e){
                 System.out.println(processText("\u263A The description of a " + e.getMessage() + " cannot be empty."));
+            }
+            catch (EmptyListException l){
+                System.out.println(processText("\u263A List is empty!"));
             }
 
         }
@@ -267,6 +276,12 @@ class Event extends Task {
 class CommandNotRecognizedException extends Exception{
     public CommandNotRecognizedException(){
         super("Error");
+    }
+}
+
+class EmptyListException extends Exception{
+    public EmptyListException(){
+        super("Empty list");
     }
 }
 

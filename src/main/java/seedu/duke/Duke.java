@@ -1,7 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.cli.Command;
 import seedu.duke.cli.CommandException;
 import seedu.duke.cli.Parser;
+import seedu.duke.cli.commands.ByeCommand;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +26,6 @@ public class Duke {
 
         try (InputStreamReader isr = new InputStreamReader(System.in);
              BufferedReader br = new BufferedReader(isr)) {
-            mainLoop:
             while (true) {
                 System.out.print(PROMPT);
                 System.out.flush();
@@ -36,7 +37,16 @@ public class Duke {
                     continue;
                 }
                 try {
-                    Parser.parse(line).execute(taskList);
+                    Command c = Parser.parse(line);
+                    if (c == null) {
+                        taskList.add(new Task(line));
+                        System.out.printf("added: %s%n", line);
+                    } else if (c instanceof ByeCommand) {
+                        System.out.println("Bye. Hope to see you again soon!");
+                        break;
+                    } else {
+                        c.execute(taskList);
+                    }
                 } catch (CommandException e) {
                     System.out.println(e.getMessage());
                 }

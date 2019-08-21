@@ -2,6 +2,8 @@ package seedu.duke.cli;
 
 import seedu.duke.cli.annotations.Argument;
 import seedu.duke.cli.annotations.CommandConstructor;
+import seedu.duke.cli.commands.ByeCommand;
+import seedu.duke.cli.commands.DoneCommand;
 import seedu.duke.cli.commands.ListCommand;
 
 import java.lang.annotation.Annotation;
@@ -20,6 +22,8 @@ public class Parser {
     static {
         constructors = new HashMap<>();
         addConstructors(ListCommand.class);
+        addConstructors(ByeCommand.class);
+        addConstructors(DoneCommand.class);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +38,7 @@ public class Parser {
             constructors.put(ccAnn.value().toLowerCase(), cc);
             boolean seenTrailing = false;
             for (Argument a : cc.getParameterAnnotations()) {
-                if (!a.trailing() || !a.prefix().isBlank()) {
+                if (a == null || !a.trailing() || !a.prefix().isBlank()) {
                     continue;
                 }
 
@@ -48,11 +52,21 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse a command line and return an object implementing {@link Command} that represents
+     * the command.
+     *
+     * @param in The command line to parse
+     * @return An object representing the parsed command, or {@code null} if no matching command was
+     * found
+     * @throws CommandException if there were insufficient arguments or some arguments were invalid
+     * for their type
+     */
     public static Command parse(String in) throws CommandException {
         String[] tok = in.split("\\s", 2);
         ConstructorCache ctor = constructors.get(tok[0].toLowerCase());
         if (ctor == null) {
-            throw new CommandException("Invalid command");
+            return null;
         }
 
         Class<?>[] paramTypes = ctor.getParameterTypes();
@@ -88,7 +102,11 @@ public class Parser {
             }
 
             if (paramTypes[i].equals(int.class)) {
-                params[i] = Integer.parseInt(value, 10);
+                try {
+                    params[i] = Integer.parseInt(value, 10);
+                } catch (NumberFormatException nfe) {
+                    throw new CommandException("Invalid number " + value, nfe);
+                }
             } else if (paramTypes[i].equals(String.class)) {
                 params[i] = value;
             } else {

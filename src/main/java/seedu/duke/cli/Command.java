@@ -5,5 +5,5 @@ import seedu.duke.Task;
 import java.util.List;
 
 public interface Command {
-    boolean execute(List<Task> taskList);
+    boolean execute(List<Task> taskList) throws CommandException;
 }

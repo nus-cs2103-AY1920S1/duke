@@ -1,0 +1,29 @@
+Bye
+todo read book
+deadline todo
+list
+deadline return book /by June 6th
+eventtodo
+todo join sports club
+done 100000000000000
+done 1
+delete this and that
+event /at Friday
+list
+echo
+delete 10
+event team meeting /at Aug 6th 2-4pm
+bye guys
+list
+delete 3
+list
+done 4
+done 10
+event project work /at Saturday
+todo return book
+list
+done 4
+list
+delete 4
+list
+bye

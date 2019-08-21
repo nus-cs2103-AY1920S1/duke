@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+
+    public static ArrayList<String> myList = new ArrayList<>();
 
     public static void printWelcome() {
         System.out.println("    ____________________________________________________________");
@@ -17,9 +20,20 @@ public class Duke {
         System.out.println("");
     }
 
-    public static void printEcho(String command) {
+    public static void printAdded(String command) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("     " + command);
+        System.out.println("     added: " + command);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("");
+    }
+
+    public static void printList() {
+        System.out.println("    ____________________________________________________________");
+        int counter = 1;
+        for (String item : myList) {
+            System.out.println("     " + counter + ". " + item);
+            counter++;
+        }
         System.out.println("    ____________________________________________________________");
         System.out.println("");
     }
@@ -35,8 +49,11 @@ public class Duke {
                 printBye();
                 sc.close();
                 System.exit(0);
+            } else if (currLine.equals("list")) {
+                printList();
             } else {
-                printEcho(currLine);
+                myList.add(currLine);
+                printAdded(currLine);
             }
         }
     }

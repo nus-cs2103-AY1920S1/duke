@@ -18,7 +18,14 @@ public class Duke {
             if (input.equalsIgnoreCase("bye")) {
                 break;
             }
-            process(input, storage);
+
+            try {
+                process(input, storage);
+            } catch (DukeException e) {
+                print(String.format("☹ OOPS!!! %s", e.getMessage()));
+            } catch (Exception e) {
+                print("☹ OOPS!!! An unknown error occurred.");
+            }
 
             prompt();
         }
@@ -27,7 +34,7 @@ public class Duke {
         sc.close();
     }
 
-    private static void process(String input, Storage storage) {
+    private static void process(String input, Storage storage) throws DukeException {
         String[] tokens = input.split(" ", 2);
         String command = tokens[0];
 
@@ -46,8 +53,18 @@ public class Duke {
             }
 
             case "done": {
-                int taskId = Integer.parseInt(tokens[1]) - 1;
-                Task task = storage.getTasks().get(taskId);
+                if (tokens.length <= 1) {
+                    throw new DukeException("Missing task ID.");
+                }
+
+                Task task;
+                int taskId;
+                try {
+                    taskId = Integer.parseInt(tokens[1]) - 1;
+                    task = storage.getTasks().get(taskId);
+                } catch (Exception e) {
+                    throw new DukeException("Invalid task ID.");
+                }
 
                 task.markAsDone();
                 print(String.format("Nice! I've marked this task as done:%n%s", task.toString()));
@@ -58,15 +75,28 @@ public class Duke {
             case "todo":
             case "deadline":
             case "event": {
+                if (tokens.length <= 1) {
+                    throw new DukeException("The description of a task cannot be empty.");
+                }
+                String description = tokens[1];
+
                 Task newTask;
 
                 if (command.equals("todo")) {
-                    newTask = new Todo(tokens[1]);
+                    newTask = new Todo(description);
                 } else if (command.equals("deadline")) {
-                    String[] deadlineTokens = tokens[1].split(" /by ", 2);
+                    if (!description.contains(" /by ")) {
+                        throw new DukeException("A deadline must have a date.");
+                    }
+
+                    String[] deadlineTokens = description.split(" /by ", 2);
                     newTask = new Deadline(deadlineTokens[0], deadlineTokens[1]);
                 } else {
-                    String[] eventTokens = tokens[1].split(" /at ", 2);
+                    if (!description.contains(" /at ")) {
+                        throw new DukeException("An event must have a date.");
+                    }
+
+                    String[] eventTokens = description.split(" /at ", 2);
                     newTask = new Event(eventTokens[0], eventTokens[1]);
                 }
 
@@ -75,13 +105,15 @@ public class Duke {
                         "Got it. I've added this task:%n%s%nNow you have %d tasks in the list.",
                         newTask.toString(), storage.getTaskCount()
                     ));
+                } else {
+                    throw new DukeException("Task could not be saved.");
                 }
 
                 break;
             }
 
             default: {
-                print("I don't understand, please try again.");
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         }
     }

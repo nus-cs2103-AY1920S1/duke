@@ -15,7 +15,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean hi = true;
         String input = "";
-        ArrayList<String> tasks = new ArrayList<>();
+        int value = 0;
+        ArrayList<Task> tasks = new ArrayList<>();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         while(hi) {
@@ -27,12 +28,18 @@ public class Duke {
                 if (tasks.size() == 0) {
                     System.out.println("List is empty!");
                 } else {
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i+1) + ". " + tasks.get(i));
+                        System.out.println((i+1) + "." + tasks.get(i));
                     }
                 }
+            } else if (input.contains("done")) {
+                value = Integer.parseInt(input.substring(input.length() - 1));
+                tasks.get(value - 1).setDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(tasks.get(value - 1));
             } else {
-                tasks.add(input);
+                tasks.add(new Task(input));
                 System.out.println("added: " + input);
             }
         }

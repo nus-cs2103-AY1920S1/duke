@@ -4,15 +4,19 @@ import java.util.ArrayList;
 public class Duke {
 
 
-    public static void printList(ArrayList<String> list) {
+    public static void printList(ArrayList<Task> list) {
         int i = 1;
-        for (String s : list) {
-            System.out.println(i + ". " + s);
+        for (Task task : list) {
+            System.out.println(i + "." + task.toString());
             i += 1;
         }
     }
+
+    public static void taskDone(int i, ArrayList<Task> list) {
+        list.get(i - 1).markAsDone();
+    }
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         String input;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -30,12 +34,13 @@ public class Duke {
         while (! input.equals("bye")) {
             if (input.equals("list")) {
                 printList(list);
-                input = scanner.nextLine();
+            } else if (input.substring(0, input.indexOf(' ')).equals("done")) {
+                taskDone(Integer.parseInt(input.substring(input.indexOf(' ') + 1, input.length())), list);
             } else {
                 System.out.println("added: " + input);
-                list.add(input);
-                input = scanner.nextLine();
+                list.add(new Task(input));
             }
+            input = scanner.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");

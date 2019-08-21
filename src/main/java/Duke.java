@@ -1,8 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> lst = new ArrayList<>();
 
         printLogo();
         printWelcome();
@@ -14,8 +16,12 @@ public class Duke {
                     case "bye":
                         printBye();
                         return;
+                    case "list":
+                        printList(lst);
+                        break;
                     default:
-                        printMessage(command);
+                        lst.add(command);
+                        printAddition(command);
                         break;
                 }
             }
@@ -71,6 +77,21 @@ public class Duke {
         printTopLine();
         printIndentWSpace();
         System.out.println(msg);
+        printBotLine();
+    }
+
+    private static void printAddition(String msg) {
+        printMessage(("added: " + msg));
+    }
+
+    private static void printList(ArrayList<String> list) {
+        int count = 1;
+        printTopLine();
+        for(String item: list) {
+            printIndentWSpace();
+            System.out.println(count + ". " + item);
+            count++;
+        }
         printBotLine();
     }
 }

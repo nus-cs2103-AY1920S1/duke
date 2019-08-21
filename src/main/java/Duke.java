@@ -32,13 +32,13 @@ public class Duke {
                 String[] echoSplit = echo.split(" ");
                 if (echoSplit.length < 2) {
                     try {
-                        throw new DukeException("No task number");
+                        throw new DukeException("No task number done");
                     } catch (DukeException e) {
                         System.out.println("\u2639 OOPS!!! Please specify a task number to mark as done.");
                     }
                 } else if (!isNum(echoSplit[1])) {
                     try {
-                        throw new DukeException("Second word is not number");
+                        throw new DukeException("Second word is not number done");
                     } catch (DukeException e) {
                         System.out.println("\u2639 OOPS!!! Please enter a task number after done.");
                     }
@@ -54,6 +54,34 @@ public class Duke {
                         list.get(item).setAsDone();
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(list.get(item));
+                    }
+                }
+            } else if (echo.startsWith("delete")) {
+                String[] echoSplit = echo.split(" ");
+                if (echoSplit.length < 2) {
+                    try {
+                        throw new DukeException("No task number delete");
+                    } catch (DukeException e) {
+                        System.out.println("\u2639 OOPS!!! Please specify a task number to delete.");
+                    }
+                } else if (!isNum(echoSplit[1])) {
+                    try {
+                        throw new DukeException("Second word is not number delete");
+                    } catch (DukeException e) {
+                        System.out.println("\u2639 OOPS!!! Please enter a task number after delete.");
+                    }
+                } else {
+                    int item = Integer.parseInt(echoSplit[1]) - 1;
+                    if (item >= list.size()) {
+                        try {
+                            throw new DukeException("Task does not exist");
+                        } catch (DukeException e) {
+                            System.out.println("\u2639 OOPS!!! The task number does not exist.");
+                        }
+                    } else {
+                        Task deleted = list.remove(item);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(deleted);
                     }
                 }
             } else {

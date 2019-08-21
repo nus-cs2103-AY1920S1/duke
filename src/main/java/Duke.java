@@ -31,8 +31,16 @@ public class Duke {
                     Task chosen_Task = tasks.get(do_Index);
                     chosen_Task.markAsDone();
 
-                    System.out.println("Nice! I've marked this task as done:\n" +
+                    System.out.println("Nice! I've marked this task as done:\n  " +
                             chosen_Task.toString());
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                    int delete_Index = Integer.parseInt(input.substring(7)) - 1;
+                    Task chosen_Task = tasks.get(delete_Index);
+                    tasks.remove(delete_Index);
+
+                    System.out.println("Noted. I've removed this task:\n  " + chosen_Task.toString());
+                    System.out.println("Now you have " + tasks.size() +
+                            (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
                 } else {
                     if (input.substring(0, 4).equals("todo")) {
                         if (input.length() == 4) {
@@ -55,7 +63,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(tasks.get(tasks.size() - 1));
+                    System.out.println("  " + tasks.get(tasks.size() - 1));
                     System.out.println("Now you have " + tasks.size() +
                             (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
                 }

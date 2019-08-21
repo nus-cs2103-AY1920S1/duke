@@ -2,11 +2,13 @@ public abstract class Task {
     public boolean done;
     public int no;
     public String task;
+    public String type;
 
-    public Task(int num, String task) {
+    public Task(int num, String task, String type) {
         this.no = num;
         this.done = false;
         this.task = task;
+        this.type = type;
     }
 
     public void setDone() {
@@ -14,7 +16,7 @@ public abstract class Task {
     }
 
     public String listify() {
-        return "    " + no + ". [" + (done ? "✓" : "✗") + "] " + task;
+        return String.format("    %d.  [%s][%s] ", no, type, (done ? "✓" : "✗"));
     }
 
     public String doneify()  {

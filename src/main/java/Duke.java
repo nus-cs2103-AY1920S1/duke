@@ -22,7 +22,7 @@ public class Duke {
                     System.out.println("    Here are the tasks in your list:");
                     for (Task task : arr) {
                         if (task != null) {
-                            System.out.println(task.listify());
+                            System.out.println(task.listify() + task);
                         }
                     }
                     break;
@@ -59,22 +59,22 @@ public class Duke {
                     }
                     switch (first) {
                         case "todo":
-                            task = new Todo(count, name);
+                            task = new Todo(count, name, "T");
                             arr[count] = task;
                             count++;
-                            System.out.println(task.addTask());
+                            System.out.println(task.addTask() + task);
                             break;
                         case "deadline":
-                            task = new Deadline(count, name, time);
+                            task = new Deadline(count, name, time, "D");
                             arr[count] = task;
                             count++;
-                            System.out.println(task.addTask());
+                            System.out.println(task.addTask() + task);
                             break;
                         case "event":
-                            task = new Event(count, name, time);
+                            task = new Event(count, name, time, "E");
                             arr[count] = task;
                             count++;
-                            System.out.println(task.addTask());
+                            System.out.println(task.addTask() + task);
                             break;
                     }
                     System.out.println("     Now you have " + (count-1) + " task(s) in the list.");

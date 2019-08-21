@@ -35,7 +35,7 @@ public class Duke {
                 output = historyToString(history);
                 break;
             case "done":
-                Task task;
+                Task taskToMarkAsDone;
                 int selectedIndex;
                 try {
                     selectedIndex = Integer.parseInt(splitInput[1]) - 1;
@@ -43,18 +43,34 @@ public class Duke {
                     throw new DukeException("Argument passed to done must be a valid integer");
                 }
                 try {
-                    task = history.get(selectedIndex);
+                    taskToMarkAsDone = history.get(selectedIndex);
                 } catch(IndexOutOfBoundsException e) {
                     throw new DukeException("Selected task number does not exist.");
                 }
-                task.markAsDone();
+                taskToMarkAsDone.markAsDone();
                 output = "Nice! I've marked this task as done: \n"
-                        + indent(task.toString());
+                        + indent(taskToMarkAsDone.toString());
+                break;
+            case "delete":
+                Task taskToDelete;
+                int deleteIndex;
+                try {
+                    deleteIndex = Integer.parseInt(splitInput[1]) - 1;
+                } catch(NumberFormatException e) {
+                    throw new DukeException("Argument passed to delete must be a valid integer");
+                }
+                try {
+                    taskToDelete = history.get(deleteIndex);
+                } catch(IndexOutOfBoundsException e) {
+                    throw new DukeException("Selected task number does not exist.");
+                }
+                history.remove(deleteIndex);
+                output = wrapWithDeleteTask(taskToDelete);
                 break;
             case "deadline":
                 int byIndex = input.indexOf(" /by ");
                 if(byIndex < 0) {
-                    throw new DukeException("Command deadline requires an argument /by, followed by deadline description");
+                    throw new DukeException("Command deadline requires an argument /by, followed by deadline date");
                 }
                 String deadlineDescription =  input.substring(9, byIndex);
                 String by = input.substring(byIndex + 5);
@@ -65,7 +81,7 @@ public class Duke {
             case "event":
                 int atIndex = input.indexOf(" /at ");
                 if(atIndex < 0) {
-                    throw new DukeException("Command event requires an argument /at, followed by event description");
+                    throw new DukeException("Command event requires an argument /at, followed by event date");
                 }
                 String eventDescription =  input.substring(6, atIndex);
                 String at = input.substring(atIndex + 5);
@@ -109,6 +125,12 @@ public class Duke {
         return "Got it. I've added this task: \n"
                 + indent(task.toString())
                 + String.format("\nNow you have %d tasks in the list.", history.size());
+    }
+
+    private static String wrapWithDeleteTask(Task task) {
+        return "Noted. I've removed this task: \n" +
+                indent(task.toString()) +
+                String.format("\nNow you have %d tasks in the list.", history.size());
     }
 
     private static String indent(String str) {

@@ -163,6 +163,4 @@ public class Duke {
     public static void other(String s) throws ErrorException{
         throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
-
-
 }

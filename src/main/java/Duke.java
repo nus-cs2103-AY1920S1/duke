@@ -17,8 +17,11 @@ public class Duke {
             if (input.strip().toLowerCase().equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!\n");
                 break;
+            } else if (input.equals("list")) {
+                Task.printList();
             } else {
-                System.out.println(input);
+                Task task = new Task(input);
+                System.out.println("added: " + task);
             }
         }
 

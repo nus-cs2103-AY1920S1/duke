@@ -39,4 +39,23 @@ DateTime missing. Please set a deadline. (Eg. deadline read book /by Sunday)
 Got it. I've added this task:
   [D][ ] shower (by: Sunday)
 Now you have 6 tasks in the list.
+Here are the tasks in your list:
+1.[T][+] read book
+2.[D][ ] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+4.[T][ ] borrow book
+5.[E][ ] swim (at: Mon 2-4pm)
+6.[D][ ] shower (by: Sunday)
+Which task on the list would you like to delete? (Eg. 'delete 2')
+OOPS!!! Wrong format. Please key in a valid number (Eg 'delete 2')
+OOPS!!! I'm sorry, but I don't know what that means :-(
+Noted. I've removed this task:
+  [T][ ] borrow book
+Now you have 5 tasks in the list.
+Here are the tasks in your list:
+1.[T][+] read book
+2.[D][ ] return book (by: June 6th)
+3.[E][ ] project meeting (at: Aug 6th 2-4pm)
+4.[E][ ] swim (at: Mon 2-4pm)
+5.[D][ ] shower (by: Sunday)
 Bye. Hope to see you again soon!

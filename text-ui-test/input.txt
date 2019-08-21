@@ -16,4 +16,10 @@ event swim /at Mon 2-4pm
 deadline
 deadline shower /by
 deadline shower /by Sunday
+list
+delete
+delete four
+delete4
+delete 4
+list
 bye

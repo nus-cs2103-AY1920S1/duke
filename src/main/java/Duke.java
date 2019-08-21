@@ -21,12 +21,23 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String echo = "";
+        int counter = 0;
+        String[] list = new String[100];
+
         if (sc.hasNextLine()) {
             echo = sc.nextLine();
 
             while (!echo.equals("bye")) {
                 System.out.println(line);
-                System.out.println("    " + echo);
+                if(echo.equals("list")) {
+                    for(int i = 0; i < counter; i++) {
+                        System.out.println("    " + (i + 1) + ". " + list[i]);
+                    }
+                } else {
+                    System.out.println("    added: " + echo);
+                    list[counter] = echo;
+                    counter++;
+                }
                 System.out.println(line);
                 echo = sc.nextLine();
             }

@@ -37,19 +37,41 @@ public class Duke {
                     done(list, n-1);
                     break;
                 case "todo":
-                    todo(list,s);
+                    try{
+                        todo(list,s);
+                    }
+                    catch (ErrorException e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case "event":
-                    event(list,s);
+                    try{
+                        event(list,s);
+                    }
+                    catch (ErrorException e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case "deadline":
-                    deadline(list,s);
+
+                    try{
+                        deadline(list,s);
+                    }
+                    catch (ErrorException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
 
                 default:
-                    Task task = new Task(s);
-                    echo(list, task);
+                    try{
+                        other(s);
+                    }
+                    catch (ErrorException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
             }
@@ -87,42 +109,60 @@ public class Duke {
         System.out.println("     [✓]"+list.get(k).getName());
         drawline();
     }
-    public static void todo(ArrayList<Task>list,String s){
-        String td = s.substring(5);
-        Task t = new Todo(td);
-        list.add(t);
-        drawline();
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("     "+t);
-        System.out.println("     Now you have "+list.size()+" tasks in the list.");
-        drawline();
+    public static void todo(ArrayList<Task>list,String s) throws ErrorException{
+        if (s.length() == 4) {
+            throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        else {
+            String td = s.substring(5);
+            Task t = new Todo(td);
+            list.add(t);
+            drawline();
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("     " + t);
+            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+            drawline();
+        }
     }
-    public static void deadline(ArrayList<Task>list,String s){
+    public static void deadline(ArrayList<Task>list,String s) throws ErrorException{
+        if (s.length() == 8) {
+            throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        else {
+            int sIndex = s.indexOf("/");
+            int firstIndex = sIndex - 1;
+            int secondIndex = sIndex + 4;
+            String deadlineDescription = s.substring(9, firstIndex);
+            String deadlineBy = s.substring(secondIndex);
+            Task t = new Deadline(deadlineDescription, deadlineBy);
+            list.add(t);
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("     " + t);
+            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+            drawline();
+        }
+    }
+    public static void event(ArrayList<Task>list,String s) throws ErrorException{
+        if (s.length() == 5) {
+            throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        else {
+            int sIndex = s.indexOf("/");
+            int firstIndex = sIndex - 1;
+            int secondIndex = sIndex + 4;
+            String eventDescription = s.substring(6, firstIndex);
+            String eventAt = s.substring(secondIndex);
+            Task t = new Event(eventDescription, eventAt);
+            list.add(t);
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("     " + t);
+            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+            drawline();
+        }
+    }
+    public static void other(String s) throws ErrorException{
+        throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
 
-        int sIndex = s.indexOf("/");
-        int firstIndex = sIndex - 1;
-        int secondIndex = sIndex + 4;
-        String deadlineDescription = s.substring(9, firstIndex);
-        String deadlineBy = s.substring(secondIndex);
-        Task t = new Deadline(deadlineDescription, deadlineBy);
-        list.add(t);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("     "+t);
-        System.out.println("     Now you have "+list.size()+" tasks in the list.");
-        drawline();
-    }
-    public static void event(ArrayList<Task>list,String s){
-        int sIndex = s.indexOf("/");
-        int firstIndex = sIndex - 1;
-        int secondIndex = sIndex + 4;
-        String eventDescription = s.substring(6, firstIndex);
-        String eventAt = s.substring(secondIndex);
-        Task t = new Event(eventDescription, eventAt);
-        list.add(t);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("     "+t);
-        System.out.println("     Now you have "+list.size()+" tasks in the list.");
-        drawline();
-    }
 
 }

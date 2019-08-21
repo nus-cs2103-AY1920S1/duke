@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class TaskManager {
-    private ArrayList<String> tasks = new ArrayList<String>();
+    private ArrayList<Task> tasks = new ArrayList<Task>();
 
     public void addTask(String task) {
-        tasks.add(task);
+        tasks.add(new Task(task));
         System.out.println("added: " + task);
     }
 

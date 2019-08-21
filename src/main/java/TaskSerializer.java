@@ -267,13 +267,13 @@ abstract class TokenParseError extends SerializerException {
     }
 }
 
-class DoneTokenParseError extends SerializerException {
+class DoneTokenParseError extends TokenParseError {
     public DoneTokenParseError(String message) {
         super(message);
     }
 }
 
-class TypeTokenParseError extends SerializerException {
+class TypeTokenParseError extends TokenParseError {
     public TypeTokenParseError(String message) {
         super(message);
     }

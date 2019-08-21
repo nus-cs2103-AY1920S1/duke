@@ -1,3 +1,5 @@
+package duke.task;
+
 public class DukeTaskEvent extends DukeTask {
     private String taskLocation;
 

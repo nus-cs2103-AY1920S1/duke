@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.DukeTask;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +14,7 @@ public class DukeTaskList {
     private StringBuilder sb;
 
     /**
-     * This constructor is used if a new List<DukeTask> of initial capacity of {@link #DUKE_MAXIMUM_TASKS} is
+     * This constructor is used if a new List<duke.task.DukeTask> of initial capacity of {@link #DUKE_MAXIMUM_TASKS} is
      * to be instantiated.
      */
     public DukeTaskList() {
@@ -19,8 +23,8 @@ public class DukeTaskList {
     }
 
     /**
-     * This constructor is used if an existing List<DukeTask> is to be used.
-     * @param userDukeTasks An existing and initialized List<DukeTask> to be used.
+     * This constructor is used if an existing List<duke.task.DukeTask> is to be used.
+     * @param userDukeTasks An existing and initialized List<duke.task.DukeTask> to be used.
      */
     public DukeTaskList(List<DukeTask> userDukeTasks) {
         this.userDukeTasks = userDukeTasks;
@@ -28,13 +32,13 @@ public class DukeTaskList {
     }
 
     /**
-     * Creates a new DukeTask and adds it into the current list of user DukeTask. The specified input is also mirrored
-     * to the user. The list of user DukeTask is then saved to the hard disk via
+     * Creates a new duke.task.DukeTask and adds it into the current list of user duke.task.DukeTask. The specified input is also mirrored
+     * to the user. The list of user duke.task.DukeTask is then saved to the hard disk via
      * {@link DukeStorage#save(List<DukeTask>)}.
-     * @param inputTask User specified input that will be the name of the DukeTask to be added to the current list of
-     *              DukeTask.
-     * @param ui DukeUi object for displaying output to the user.
-     * @param storage DukeStorage object for updating the data file on the hard disk.
+     * @param inputTask User specified input that will be the name of the duke.task.DukeTask to be added to the current list of
+     *              duke.task.DukeTask.
+     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
      */
     public void addToDukeTasks(DukeTask inputTask, DukeUi ui, DukeStorage storage) {
         try {
@@ -54,7 +58,7 @@ public class DukeTaskList {
      * Displays the user-supplied list of tasks in a formatted style. This method will prepare the list by looping
      * through the List of tasks and printing each task with its index. Then it will call
      * {@link DukeUi#displayToUser(String)} to display the final formatted list.
-     * @param ui DukeUi object for displaying output to the user.
+     * @param ui duke.util.DukeUi object for displaying output to the user.
      */
     public void displayDukeTasks(DukeUi ui) {
         sb.setLength(0);
@@ -72,8 +76,8 @@ public class DukeTaskList {
      * Checks if the specified task index has already been marked as complete. If it is not then mark the task as
      * complete and print out the name of this task.
      * @param taskIndexString Raw String index of the task following the printed list from running the "list" command.
-     * @param ui DukeUi object for displaying output to the user.
-     * @param storage DukeStorage object for updating the data file on the hard disk.
+     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
      */
     public void markDukeTaskComplete(String taskIndexString, DukeUi ui, DukeStorage storage) {
         try {
@@ -103,8 +107,8 @@ public class DukeTaskList {
      * Deletes the specified task index.
      * @param taskIndexString Raw String index of the task to be deleted, following the printed list index from
      *                        the "list" command.
-     * @param ui DukeUi object for displaying output to the user.
-     * @param storage DukeStorage object for updating the data file on the hard disk.
+     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
      */
     public void deleteDukeTask(String taskIndexString, DukeUi ui, DukeStorage storage) {
         try {

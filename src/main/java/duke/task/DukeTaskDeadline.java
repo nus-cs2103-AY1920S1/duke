@@ -1,3 +1,5 @@
+package duke.task;
+
 public class DukeTaskDeadline extends DukeTask {
     private String taskDeadline;
 

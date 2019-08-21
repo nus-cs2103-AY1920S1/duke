@@ -1,3 +1,5 @@
+package duke.task;
+
 public class DukeTaskToDo extends DukeTask {
     public DukeTaskToDo(String taskName) {
         super(taskName, "T");

@@ -22,21 +22,44 @@ public class Duke {
             input = scanner.nextLine();
 
             if(input.equals("list")){
+                System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i < lst.size(); i++){
                     System.out.println(i+1 + ". " + lst.get(i));
                 }
-            } else {
-                String[] inputArr = input.split(" ");
-                if (inputArr[0].equals("done")) {
+            } else if (input.equals("bye")) {
+                break;
+            }
+            else {
+                String[] inputArr = input.split(" ", 2);
+                String command = inputArr[0];
+                if(command.equals("done")){
                     int i = Integer.parseInt(inputArr[1]) - 1;
                     lst.get(i).done();
                     String nice = "Nice! I've marked this task as done:";
                     System.out.println(nice + "\n\t" + lst.get(i));
                 } else {
-                    Task task = new Task(input);
+                    String detail = inputArr[1];
+                    Task task = new Task("");
+                    switch (command) {
+                        case "todo":
+                            task = new Todo(detail);
+                            break;
+                        case "deadline":
+                            String[] deadlineArr = detail.split("/", 2);
+                            String at = deadlineArr[1];
+                            task = new Deadline(deadlineArr[0], at.split(" ", 2)[1]);
+                            break;
+                        case "event":
+                            String[] eventArr = detail.split("/", 2);
+                            String by = eventArr[1];
+                            task = new Event(eventArr[0], by.split(" ", 2)[1]);
+                            break;
+                    }
                     lst.add(task);
-                    System.out.println("added: " + input);
+                    String gotit = "Got it. I've added this task:\n\t" + task + "\nNow you have " + lst.size() + " tasks in the list.";
+                    System.out.println(gotit);
                 }
+
             }
         }
 

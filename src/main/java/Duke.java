@@ -1,17 +1,23 @@
 import java.util.Scanner;
+import todo.ToDo;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ToDo todo = new ToDo();
         String input = "";
 
         printFormattedText("Hello! I'm Duke\n" +
                 "    What can I do for you?");
 
         while (!input.equals("bye")) {
-            input = sc.next();
-            if (input.equals("bye")) break;
-            printFormattedText(input);
+            input = sc.nextLine();
+            if (input.equals("bye"))
+                break;
+            else if (input.equals("list"))
+                printFormattedText(todo.displayList());
+            else
+                printFormattedText(todo.addTask(input));
         }
 
         printFormattedText("Bye. Hope to see you again soon!");
@@ -19,7 +25,6 @@ public class Duke {
 
     private static void printFormattedText(String text) {
         printDivider();
-        indent();
         System.out.println(text);
         printDivider();
     }

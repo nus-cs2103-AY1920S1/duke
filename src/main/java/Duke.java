@@ -14,7 +14,7 @@ public class Duke {
 
     public void runDuke() {
         Scanner sc = new Scanner(System.in);
-        Boolean contRunning = true;
+        boolean contRunning = true;
 
         while (contRunning) {
             String s = sc.nextLine();

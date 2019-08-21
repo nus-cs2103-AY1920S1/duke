@@ -25,7 +25,6 @@ public class Duke {
                     line += words[i] + " ";
                 }
             }
-            //spli
 
 
             if (userInput.equals("bye")) {
@@ -46,16 +45,24 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: \n " +
                             currTask.toString() + "\n");
                 } catch (Exception ex) {
-                    System.out.println("Please try again.");
+                    System.out.println("Unable to find task. Please try again." );
 
                 }
             } else if (firstWord.equals("todo")){
-
+                if (line.equals("")) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    continue;
+                }
                 Todo task = new Todo(line);
                 list.add(task);
                 System.out.println("Got it. I've added this task: \n"
                         + task.toString() + "\n Now you have " + list.size() + " tasks in the list");
             } else if (firstWord.equals("deadline")) {
+
+                if (line.equals("")) {
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    continue;
+                }
                 //split the string by /
                 String[] halves = line.split("/by");
                 String event = halves[0];
@@ -65,6 +72,10 @@ public class Duke {
                 System.out.println("Got it. I've added this task: \n"
                         + deadline.toString() + "\n Now you have " + list.size() + " tasks in the list");
             } else if (firstWord.equals("event")) {
+                if (line.equals("")) {
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                    continue;
+                }
                 //split the string by /
                 String[] halves = line.split("/at");
                 String event = halves[0];
@@ -73,6 +84,8 @@ public class Duke {
                 list.add(myEvent);
                 System.out.println("Got it. I've added this task: \n"
                         + myEvent.toString() + "\n Now you have " + list.size() + " tasks in the list");
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }

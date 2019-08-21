@@ -1,0 +1,30 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+ What can I do for you? 
+Got it. I've added this task: 
+[T][✘] dance
+ Now you have 1 tasks in the list
+Got it. I've added this task: 
+[D][✘] dance (by: 2pm)
+ Now you have 2 tasks in the list
+Got it. I've added this task: 
+[E][✘] dance all around (at: 4-6pm)
+ Now you have 3 tasks in the listHere are the tasks in your list: 
+1. [T][✘] dance
+2. [D][✘] dance (by: 2pm)
+3. [E][✘] dance all around (at: 4-6pm)
+Here are the tasks in your list: 
+1. [T][✘] dance
+2. [D][✘] dance (by: 2pm)
+3. [E][✘] dance all around (at: 4-6pm)
+Nice! I've marked this task as done: 
+ [T][✓] dance
+Here are the tasks in your list: 
+1. [T][✓] dance
+2. [D][✘] dance (by: 2pm)
+3. [E][✘] dance all around (at: 4-6pm)

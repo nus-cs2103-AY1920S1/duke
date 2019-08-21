@@ -35,4 +35,8 @@ public class TaskList {
         return this.taskList.get(index - 1);
     }
 
+    protected int getSize() {
+        return this.taskList.size();
+    }
+
 }

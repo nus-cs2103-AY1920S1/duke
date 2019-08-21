@@ -5,4 +5,11 @@ list
 done 2
 list
 blah
+todo
+deadline individual project
+deadline /by Monday
+event career fair
+event /at 12 October
+done 5
+done *(&*%^jh
 bye

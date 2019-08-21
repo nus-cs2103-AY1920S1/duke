@@ -1,10 +1,9 @@
-import java.util.MissingFormatArgumentException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    final private static String horizontalLine = "\t____________________________________________________________";
+    final private static String horizontalLine = "    ____________________________________________________________";
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) throws InvalidCommandException {
@@ -112,8 +111,6 @@ public class Duke {
         exitMessage();
     }
 
-
-
     private static void addToDo(String task){
         System.out.println(horizontalLine);
         System.out.println(formatText("Got it. I've added this task:"));
@@ -123,6 +120,7 @@ public class Duke {
         System.out.println(formatText("Now you have " + taskList.size() + " tasks in the list."));
         System.out.println(horizontalLine);
     }
+
     private static void addDeadline(String task, String by){
         System.out.println(horizontalLine);
         System.out.println(formatText("Got it. I've added this task:"));
@@ -155,10 +153,11 @@ public class Duke {
     }
 
     private static void deleteTask(int index) throws IndexOutOfBoundsException{
+        Task toRemove = taskList.get(index-1);
         taskList.remove(index - 1);
         System.out.println(horizontalLine);
         System.out.println(formatText("Noted. I've removed this task:"));
-        System.out.println(formatText("  " + taskList.get(index-1)));
+        System.out.println(formatText("  " + toRemove));
         System.out.println(formatText("Now you have " + taskList.size() + " tasks in the list."));
         System.out.println(horizontalLine);
     }
@@ -174,7 +173,7 @@ public class Duke {
         System.out.println(horizontalLine);
     }
     private static String formatText(String text) {
-        return "\t " + text;
+        return "     " + text;
     }
 
     private static void startMessage() {

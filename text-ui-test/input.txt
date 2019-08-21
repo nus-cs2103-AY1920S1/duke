@@ -1,0 +1,34 @@
+list
+todo read book
+list
+todo sleep
+todo wake up
+todo watch movie
+list
+list
+event project meeting /at Aug 25th 2-4pm
+event concert /at Sunday 8-10pm
+done 1
+done 2
+list
+done 3
+done 4
+list
+delete 5
+list
+done 5
+list
+deadline coding assignment /by Monday
+list
+done 1
+list
+delete 20
+done 20
+todo
+done
+event
+event lol
+deadline
+deadline lol
+list
+bye

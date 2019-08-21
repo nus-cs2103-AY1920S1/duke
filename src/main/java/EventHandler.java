@@ -9,7 +9,7 @@ public class EventHandler {
 
   public void run(String command) {
     switch(command) {
-      case "exit":
+      case "bye":
         return;
       default:
         PrettyPrint.printBlock(command);

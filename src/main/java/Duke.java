@@ -27,10 +27,12 @@ public class Duke {
     input = sc.next();
     EventHandler eventHandler = new EventHandler();
 
-    while (!input.equals("exit")) {
+    while (!input.equals("bye")) {
       eventHandler.run(input);
       input = sc.next();
     }
+
+    PrettyPrint.printBlock(new String[] {"Bye. Hope to see you again soon!"});
 
   }
 }

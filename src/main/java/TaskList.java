@@ -20,12 +20,16 @@ public class TaskList {
     }
 
     /**
-     * Adds an item to the list.
-     * @param item The item to be stored in the list.
+     * Adds a task to the list based on the given command.
+     * @param command The command given by the user to be processed.
      */
-    protected void add(String item) {
-        listItems.add(new Task(item));
-        ps.println("\t" + "added: " + item);
+    protected void add(String command) {
+        Task newTask = Task.create(command);
+        listItems.add(newTask);
+        String taskSingular = listItems.size() == 1 ? "task" : "tasks";
+        ps.println("\t" + "Got it. I've added this task: \n"
+                + "\t  " + newTask + "\n"
+                + "\t" + "Now you have " + listItems.size() + " " + taskSingular + " in the list.");
     }
 
     /**

@@ -3,11 +3,9 @@
 REM create bin directory if it doesn't exist
 REM if not exist ..\bin mkdir ..\bin
 
-cd ../
-
-call gradlew shadowJar
-
-cd text-ui-test
+CD ../
+gradlew shadowJar
+CD text-ui-test/
 
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT

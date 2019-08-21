@@ -1,4 +1,16 @@
-todo borrow book
 list
+delete 1
+todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+asdafs
+list
+delete 2
+delete 5
+delete 0
+event
+event project meeting
+deadline
+deadline finish assignment
+todo
+bye

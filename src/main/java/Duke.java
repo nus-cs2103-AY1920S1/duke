@@ -42,11 +42,15 @@ public class Duke {
         return sb.toString();
     }
 
-    private Task createTask(String str, String splitter) { //splitter is either /by or /at
-        String[] splitStr = str.split(splitter);
-        if (splitter.equals("/by")) {
+    private Task createTask(String str, String command) { //command is either todo, deadline or event
+        String[] splitStr;
+        if (command.equals("todo")) {
+            return new ToDo(str);
+        } else if (command.equals("deadline")) {
+            splitStr = str.split("by");
             return new Deadlines(splitStr[0].trim(), splitStr[1].trim());
-        } else if (splitter.equals("/at")) {
+        } else if (command.equals("event")) {
+            splitStr = str.split("at");
             return new Events(splitStr[0].trim(), splitStr[1].trim());
         } else {
             return null;
@@ -71,6 +75,17 @@ public class Duke {
         return sb.toString();
     }
 
+    void executeCommand(String command, String[] inputSplit){
+        if (command.equals("list")) {
+            System.out.println(lineWrap(getList()));
+        } else if (command.equals("done")) {
+            int taskNumber = Integer.parseInt(inputSplit[1]);
+            System.out.println(lineWrap(markTask(taskNumber)));
+        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+            Task task = createTask(inputSplit[1], command);
+            System.out.println(lineWrap(addTask(task)));
+        }
+    }
 
     void start() {
         System.out.println(greet());
@@ -78,24 +93,11 @@ public class Duke {
             String input = sc.nextLine();
             String[] inputSplit = input.split(" ", 2);
             String command = inputSplit[0];
-
             if (command.equals("bye")) {
                 System.out.println(bye());
                 break;
-            } else if (command.equals("list")) {
-                System.out.println(lineWrap(getList()));
-            } else if (command.equals("todo")) {
-                Task task = new ToDo(inputSplit[1]);
-                System.out.println(lineWrap(addTask(task)));
-            } else if (command.equals("deadline")) {
-                Task task = createTask(inputSplit[1], "/by");
-                System.out.println(lineWrap(addTask(task)));
-            } else if (command.equals("event")) {
-                Task task = createTask(inputSplit[1], "/at");
-                System.out.println(lineWrap(addTask(task)));
-            } else if (command.equals("done")) {
-                int taskNumber = Integer.parseInt(inputSplit[1]);
-                System.out.println(lineWrap(markTask(taskNumber)));
+            } else {
+                executeCommand(command, inputSplit);
             }
         }
     }

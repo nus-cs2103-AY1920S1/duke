@@ -24,12 +24,12 @@ public class Duke {
     // Begin input handling
     Scanner sc = new Scanner(System.in);
     String input;
-    input = sc.next();
+    input = sc.nextLine();
     EventHandler eventHandler = new EventHandler();
 
     while (!input.equals("bye")) {
       eventHandler.run(input);
-      input = sc.next();
+      input = sc.nextLine();
     }
 
     PrettyPrint.printBlock(new String[] {"Bye. Hope to see you again soon!"});

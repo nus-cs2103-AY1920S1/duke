@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * The duke project.
+     */
+
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,8 +19,10 @@ public class Duke {
         System.out.println("    What can I do for you?");
         System.out.println(line);
 
-        if(sc.hasNextLine()) {
-            String echo = sc.nextLine();
+        Scanner sc = new Scanner(System.in);
+        String echo = "";
+        if (sc.hasNextLine()) {
+            echo = sc.nextLine();
 
             while (!echo.equals("bye")) {
                 System.out.println(line);
@@ -34,5 +37,6 @@ public class Duke {
                 System.out.println(line);
             }
         }
+
     }
 }

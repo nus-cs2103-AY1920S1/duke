@@ -12,6 +12,14 @@ public class Task {
 		return this;
 	}
 
+	public boolean isComplete() {
+		return taskCompletionStatus;
+	}
+
+	public String getDescription() {
+		return new String(taskDescription);
+	}
+
 	@Override
 	public String toString() {
 		return "[" + (taskCompletionStatus ? "✓" : "✗") + "] " + taskDescription;

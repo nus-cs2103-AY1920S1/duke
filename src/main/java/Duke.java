@@ -20,9 +20,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.print(divider);
-        System.out.print(intro);
-        System.out.print(divider);
+        print(intro);
 
         Scanner scanner = new Scanner(System.in);
         boolean run = true;

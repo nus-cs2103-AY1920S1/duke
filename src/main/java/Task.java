@@ -1,16 +1,16 @@
 public abstract class Task {
 
-    protected boolean completed;
+    protected Status completed;
     protected String taskName;
 
     public Task(String taskName) {
-        this.completed = false;
+        this.completed = Status.INCOMPLETE;
         this.taskName = taskName;
     }
 
     public boolean markAsComplete() {
-        if (!completed) {
-            completed = true;
+        if (this.completed == Status.INCOMPLETE) {
+            completed = Status.COMPLETE;
             return true;
         } else {
             return false;
@@ -19,7 +19,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (completed ? "✓" : "✗") + "] " + taskName;
+        return "[" + (this.completed == Status.COMPLETE ? "✓" : "✗") + "] " + taskName;
     }
 
 }

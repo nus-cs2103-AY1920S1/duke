@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Duke {
 
     private static final int BORDER_LENGTH = 60;
-    private static final ArrayList<String> storedText = new ArrayList<>();
+    private static final ArrayList<Task> storedTasks = new ArrayList<>();
 
     /**
      * Runs the Duke chatbot.
@@ -63,32 +63,37 @@ public class Duke {
      */
     private static void process(String command) {
         if (command.equals("list")) {
-            listStoredText();
+            listStoredTasks();
+        } else if (command.length() > 4
+                && command.substring(0, 4).equals("done")) {
+            int taskNumber = Integer.parseInt(command.split(" ")[1]);
+            setAsDone(taskNumber);
         } else {
-            storeText(command);
+            storeTask(command);
         }
     }
 
     /**
      * Lists stored text.
      */
-    private static void listStoredText() {
-        if (storedText.size() == 0) {
-            System.out.println("No stored text.");
+    private static void listStoredTasks() {
+        if (storedTasks.size() == 0) {
+            System.out.println("\tNo stored text.");
         } else {
-            for (int i = 0; i < storedText.size(); i++) {
-                System.out.format("%d. %s\n", i + 1, storedText.get(i));
+            System.out.println("\tHere are the tasks in your list:");
+            for (int i = 0; i < storedTasks.size(); i++) {
+                System.out.format("\t%d.%s\n", i + 1, storedTasks.get(i));
             }
         }
     }
 
     /**
-     * Stores the specified text.
-     * @param text The specified text.
+     * Stores a task with the specified description.
+     * @param description The specified task.
      */
-    private static void storeText(String text) {
-        System.out.println("added: " + text);
-        storedText.add(text);
+    private static void storeTask(String description) {
+        System.out.println("\tadded: " + description);
+        storedTasks.add(new Task(description));
     }
 
     /**
@@ -96,6 +101,17 @@ public class Duke {
      */
     private static void sayBye() {
         System.out.println("\tBye. Hope to see you again soon!");
+    }
+
+    /**
+     * Sets the task with the specified number as done.
+     * @param taskNumber The specified task number.
+     */
+    private static void setAsDone(int taskNumber) {
+        Task task = storedTasks.get(taskNumber - 1);
+        task.setAsDone();
+        System.out.println("\tNice! I've marked this task as done:");
+        System.out.println("\t" + task);
     }
 
     /**
@@ -110,4 +126,3 @@ public class Duke {
     }
 
 }
-

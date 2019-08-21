@@ -23,6 +23,8 @@ public class Duke {
                     handleDeadlineCommand();
                 } else if (command.equals("event")) {
                     handleEventCommand();
+                } else if (command.equals("delete")) {
+                    handleDeleteCommand();
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -142,6 +144,23 @@ public class Duke {
             throw new DukeException("OOPS!!! The task number you specified is not in the list.");
         } catch (Exception e) {
             throw new DukeException("OOPS!!! Your input format is wrong. Use: done [task number]");
+        }
+    }
+
+    public static void handleDeleteCommand() throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(sc.nextLine().trim()) - 1;
+            Task deletedTask = list.get(taskNumber);
+            list.remove(taskNumber);
+            System.out.println("    _____________________________________");
+            System.out.println("     Noted. I've removed this task:");
+            System.out.println("       " + deletedTask);
+            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+            System.out.println("    _____________________________________\n");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The task number you specified is not in the list.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: delete [task number]");
         }
     }
 

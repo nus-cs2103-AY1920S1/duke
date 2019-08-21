@@ -10,22 +10,31 @@ public class Duke {
 
     private static void echo(final String message) {
         System.out.println(separator);
-        System.out.println(message);
+        System.out.println(message.stripTrailing());
         System.out.println(separator);
-        System.out.println();
     }
 
     public static void main(String[] args) {
         echo("Hello from\n" + logo + "What can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
+        Tasks tasks = new Tasks();
+
         while (scanner.hasNextLine()) {
-            String command = scanner.nextLine();
-            if (command.strip().toLowerCase().equals("bye")) {
-                echo("Bye. Hope to see you again soon!");
-                return;
-            } else {
-                echo(command);
+            String input = scanner.nextLine();
+            switch (input) {
+                case "list":
+                    echo(tasks.toString());
+                    break;
+                case "bye":
+                    echo("Bye. Hope to see you again soon!");
+                    return;
+                default:
+                    Task task = new Task(input);
+                    if (tasks.addTask(task)) {
+                        echo("added: " + task.getContent());
+                    }
+                    break;
             }
         }
     }

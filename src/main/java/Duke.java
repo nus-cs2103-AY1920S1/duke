@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,25 +13,26 @@ public class Duke {
         Scanner scn = new Scanner(System.in);
 
         String input = scn.nextLine();
-        List<Task> tasks = new ArrayList<Task>();
+        Task tasks[] = new Task[100];
+        int task_count = 0;
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                int index = 1;
-                for (Task task : tasks) {
-                    System.out.println(index + ".[" + task.getStatusIcon() + "] " + task.description);
-                    index++;
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < task_count; i++) {
+                    Task t = tasks[i];
+                    System.out.println((i + 1) + "." + t.toString());
                 }
             } else if (input.substring(0, 4).equals("done")) {
                 int do_Index = Integer.parseInt(input.substring(5)) - 1;
-                Task chosen_Task = tasks.get(do_Index);
+                Task chosen_Task = tasks[do_Index];
                 chosen_Task.markAsDone();
 
                 System.out.println("Nice! I've marked this task as done:\n" +
-                        "[" + chosen_Task.getStatusIcon() + "] " + tasks.get(do_Index).description);
+                        chosen_Task.toString());
             } else {
-                Task c = new Task(input);
-                tasks.add(c);
+                tasks[task_count] = new Task(input);
+                task_count++;
                 System.out.println("added: " + input);
             }
             input = scn.nextLine();

@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,6 +12,7 @@ public class Duke {
     private static void print(String str) {
         System.out.println(str);
     }
+
     /**
      * Adds a task to the array.
      */
@@ -18,7 +20,7 @@ public class Duke {
         print("Got it. I've added this task:");
         print(task.toString());
         arr[index++] = task;
-        print("Now you have " + index + (index > 1 ? " tasks": " task") + " in the list.");
+        print("Now you have " + index + (index > 1 ? " tasks" : " task") + " in the list.");
     }
 
     /**
@@ -35,7 +37,7 @@ public class Duke {
             String str = sc.nextLine();
             Scanner scanner = new Scanner(str);
             String firstWord = scanner.next();
-            switch(firstWord) {
+            switch (firstWord) {
                 case "bye":
                     print("Bye. Hope to see you again soon!");
                     break;
@@ -46,14 +48,18 @@ public class Duke {
                     }
                     break;
                 case "todo":
-                    taskName = scanner.nextLine();
-                    temp = new TaskBuilder().type(TaskType.TODO).description(taskName).build();
-                    addTask(temp);
+                    try {
+                        taskName = scanner.nextLine();
+                        temp = new TaskBuilder().type(TaskType.TODO).description(taskName).build();
+                        addTask(temp);
+                    } catch (NoSuchElementException e) {
+                        print("OOPS!!! The description of a todo cannot be empty.");
+                    }
                     break;
                 case "deadline":
-                    taskName  = "";
+                    taskName = "";
                     String deadline = "";
-                    while(scanner.hasNext()) {
+                    while (scanner.hasNext()) {
                         String s = scanner.next();
                         if (s.equals("/by")) {
                             deadline = scanner.nextLine().strip();
@@ -67,9 +73,9 @@ public class Duke {
                     addTask(temp);
                     break;
                 case "event":
-                    taskName  = "";
+                    taskName = "";
                     String timeframe = "";
-                    while(scanner.hasNext()) {
+                    while (scanner.hasNext()) {
                         String s = scanner.next();
                         if (s.equals("/at")) {
                             timeframe = scanner.nextLine().strip();
@@ -89,7 +95,7 @@ public class Duke {
                     print(arr[whichTask].toString());
                     break;
                 default:
-                    break;
+                    print("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
         }

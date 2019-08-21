@@ -8,13 +8,28 @@ public class Tasks {
         tasks = new ArrayList<>();
     }
 
-    public void add(String description) {
-        Task task = new Task(description);
+    public void add(Task task) {
         tasks.add(task);
         System.out.println("     ------------------------------------------------------------");
         System.out.println("     Got it. I've added this task:");
         System.out.println("     \u2795  " + task.toString());
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
         System.out.println("     ------------------------------------------------------------");
+    }
+
+    public void addTodo(String description) {
+        Task task = new Todo(description);
+        add(task);
+    }
+
+    public void addDeadline(String description, String by) {
+        Task task = new Deadline(description, by);
+        add(task);
+    }
+
+    public void addEvent(String description, String at) {
+        Task task = new Event(description, at);
+        add(task);
     }
 
     public void done(int arg) {

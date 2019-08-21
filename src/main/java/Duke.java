@@ -21,9 +21,22 @@ public class Duke {
                 case "done":
                     tasks.done(sc.nextInt());
                     break;
-                default :
-                    tasks.add(input + sc.nextLine());
+                case "todo":
+                    String todoDescription = sc.nextLine().trim();
+                    tasks.addTodo(todoDescription);
                     break;
+                case "deadline":
+                    String deadlineLine = sc.nextLine().trim();
+                    String[] splitBy = deadlineLine.split("/by");
+                    tasks.addDeadline(splitBy[0], splitBy[1]);
+                    break;
+                case "event":
+                    String eventLine = sc.nextLine().trim();
+                    String[] splitAt = eventLine.split("/at");
+                    tasks.addEvent(splitAt[0], splitAt[1]);
+                    break;
+                default :
+                    System.out.println("    Oops. Something Went Wrong!");
             }
             input = sc.next();
         }

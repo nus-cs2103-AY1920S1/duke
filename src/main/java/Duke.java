@@ -16,19 +16,19 @@ public class Duke {
                 String taskName = input.substring(5);
                 Task myTask = new Todo(taskName);
                 myList.add(myTask);
-                printMessage("Got it. I've added this task:\n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
             } else if (input.contains("deadline")) {
-                String taskName = input.substring(9, input.indexOf("/"));
+                String taskName = input.substring(9, input.indexOf("/") - 1);
                 String param = input.substring(input.indexOf("/by") + 4);
                 Task myTask = new Deadline(taskName, param);
                 myList.add(myTask);
-                printMessage("Got it. I've added this task:\n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
             } else if (input.contains("event")) {
-                String taskName = input.substring(6, input.indexOf("/"));
+                String taskName = input.substring(6, input.indexOf("/") - 1);
                 String param = input.substring(input.indexOf("/at") + 4);
                 Task myTask = new Event(taskName, param);
                 myList.add(myTask);
-                printMessage("Got it. I've added this task:\n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
             } else if (input.equals("list")) {
                 StringBuilder myBuilder = new StringBuilder();
                 myBuilder.append("Here are the tasks in your list:\n");

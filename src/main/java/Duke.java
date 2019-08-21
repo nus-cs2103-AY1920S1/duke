@@ -13,7 +13,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        ArrayList<Task> toDoList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         System.out.println("Hello I'm\n" + logo + "\nWhat can I do for you?");
 
@@ -27,18 +27,43 @@ public class Duke {
             switch (command) {
 
                 case "list":
-                    printList(toDoList);
+                    printList(taskList);
+                    break;
+
+                case "todo":
+                    ToDo newTodo = new ToDo(sc.nextLine());
+                    addTask(newTodo, taskList);
+                    break;
+
+                case "deadline":
+                    String wholeTask = sc.nextLine();
+                    int index = wholeTask.indexOf('/');
+                    //what the task is
+                    String description = wholeTask.substring(0, index);
+                    //when it is due by
+                    String date = wholeTask.substring(index + 4);
+                    Deadline newDeadlineTask = new Deadline(description, date);
+                    addTask(newDeadlineTask, taskList);
+                    break;
+
+                case "event":
+                    String eventAndDate = sc.nextLine();
+                    int index2 = eventAndDate.indexOf('/');
+                    //what the task is
+                    String eventDescr = eventAndDate.substring(0, index2);
+                    //when it is due by
+                    String date2 = eventAndDate.substring(index2 + 4);
+                    Event newEventTask = new Event(eventDescr, date2);
+                    addTask(newEventTask, taskList);
                     break;
 
                 case "done":
                     int taskNumber = sc.nextInt()-1;
-                    completeTask(taskNumber, toDoList);
+                    completeTask(taskNumber, taskList);
                     break;
+
                 default:
-                    String wholeCommand = command + sc.nextLine();
-                    Task newTask = new Task(wholeCommand);
-                    toDoList.add(newTask);
-                    System.out.println("added: " + wholeCommand);
+
                     break;
 
             }
@@ -71,7 +96,7 @@ public class Duke {
         } else {
 
             for (Task item : toDoList) {
-                System.out.println(n + ". " + item.getStatusIcon() + " " + item);
+                System.out.println(n + ". " + item);
                 n++;
             }
 
@@ -82,7 +107,18 @@ public class Duke {
         Task completed = list.get(taskNumber);
 
             completed.markAsDone();
-            System.out.println("Nice! I've marked this task as done: \n" + "   " + completed.getStatusIcon() + " " + completed);
+            System.out.println("Nice! I've marked this task as done: \n" + "   " + completed);
 
+    }
+
+    public static void addTask(Task current, ArrayList<Task> list) {
+        list.add(current);
+        if(list.size() >1) {
+            System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
+                    "Now you have " + list.size() + " tasks in the list ");
+        } else {
+            System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
+                    "Now you have " + list.size() + " task in the list ");
+        }
     }
 }

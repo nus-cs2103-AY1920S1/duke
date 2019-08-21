@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -13,20 +15,20 @@ public class Duke {
         Scanner scn = new Scanner(System.in);
 
         String input = scn.nextLine();
-        Task tasks[] = new Task[100];
-        int task_count = 0;
+        List<Task> tasks = new ArrayList<Task>();
 
         while (!input.equals("bye")) {
             try{
                 if (input.equals("list")) {
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < task_count; i++) {
-                        Task t = tasks[i];
-                        System.out.println((i + 1) + "." + t.toString());
+                    int index = 0;
+                    for (Task t : tasks) {
+                        System.out.println((index + 1) + "." + t.toString());
+                        index++;
                     }
                 } else if (input.substring(0, 4).equals("done")) {
                     int do_Index = Integer.parseInt(input.substring(5)) - 1;
-                    Task chosen_Task = tasks[do_Index];
+                    Task chosen_Task = tasks.get(do_Index);
                     chosen_Task.markAsDone();
 
                     System.out.println("Nice! I've marked this task as done:\n" +
@@ -36,27 +38,26 @@ public class Duke {
                         if (input.length() == 4) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        tasks[task_count] = new ToDo(input.substring(5));
+                        tasks.add(new ToDo(input.substring(5)));
                     } else if (input.substring(0, 5).equals("event")) {
                         if (input.length() == 5) {
-                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                         }
                         int i = input.indexOf('/');
-                        tasks[task_count] = new Event(input.substring(6, i - 1), input.substring(i + 4));
+                        tasks.add(new Event(input.substring(6, i - 1), input.substring(i + 4)));
                     } else if (input.substring(0, 8).equals("deadline")) {
                         if (input.length() == 8) {
-                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of an deadline cannot be empty.");
                         }
                         int i = input.indexOf('/');
-                        tasks[task_count] = new Deadline(input.substring(9, i - 1), input.substring(i + 4));
+                        tasks.add(new Deadline(input.substring(9, i - 1), input.substring(i + 4)));
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(tasks[task_count].toString());
-                    System.out.println("Now you have " + (task_count + 1) +
-                            (task_count == 0 ? " task" : " tasks") + " in the list.");
-                    task_count++;
+                    System.out.println(tasks.get(tasks.size() - 1));
+                    System.out.println("Now you have " + tasks.size() +
+                            (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
                 }
             }
             catch (DukeException ex) {

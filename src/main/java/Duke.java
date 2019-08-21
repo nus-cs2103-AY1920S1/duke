@@ -12,10 +12,23 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
+        String[] taskList = new String[100];
+        int numCommands = 0;
+
         while (!command.equals("bye")){
-            System.out.println(command);
+            if (command.equals("list")){
+                for (int i = 1; i <= numCommands; i++){
+                    System.out.println(i + ". "+ taskList[i-1]);
+                }
+            }
+            else {
+                numCommands += 1;
+                taskList[numCommands-1] = command;
+                System.out.println("added: " + command);
+            }
             command = scanner.nextLine();
         }
+
         System.out.println("Bye. Hope to see you again soon!");
     }
 }

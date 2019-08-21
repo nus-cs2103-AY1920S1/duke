@@ -39,6 +39,18 @@ public class Duke {
                     task.setDone(true);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + task.toString());
+                } else if (firstWord.equals("delete")) {
+                    String[] words = text.split(" ");
+                    if (words.length != 2) {
+                        throw new DukeException("You need to specify a task that is done.");
+                    }
+                    if (Integer.parseInt(words[1]) > list.size() || Integer.parseInt(words[1]) <= 0) {
+                        throw new DukeException("Task does not exist.");
+                    }
+                    Task removed = list.remove(Integer.parseInt(words[1]) -1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + removed.toString());
+                    System.out.println("Now you have " + list.size() + " in the list.");
                 } else {
                     Task task;
                     if (firstWord.equals("todo")) {

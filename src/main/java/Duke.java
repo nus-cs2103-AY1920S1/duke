@@ -18,30 +18,56 @@ public class Duke {
     }
     public static void Detecting() {
         Scanner sc = new Scanner(System.in);
-        List<Task> toDo = new LinkedList<>();
+        List<Task> tasks = new LinkedList<>();
         while(true) {
             String cmd = sc.nextLine();
             Scanner cmdSc = new Scanner(cmd);
             if (cmd.toLowerCase().equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (cmdSc.next().toLowerCase().equals("done")) {
-                int numDone = Integer.parseInt(cmdSc.next()) - 1;
-                Task itemDone = toDo.get(numDone);
-                itemDone.mardAsDone();
-                System.out.println("Nice! I've marked this task as done:\n[" + itemDone.getStatusIcon() + "] " + itemDone.description);
             } else {
-                switch (cmd.toLowerCase()) {
+                String cmdWord = cmdSc.next().toLowerCase();
+                switch (cmdWord) {
+                    case "todo":
+                        String toDoTsk = cmdSc.nextLine();
+                        tasks.add(new toDo(toDoTsk));
+                        System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size()-1));
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        break;
+                    //list
                     case "list":
                         System.out.println("Here are the tasks in your list:");
-                        for (int i = 1; i <= toDo.size(); i++) {
-                            Task tsk = toDo.get(i-1);
-                            System.out.println(i + ". " + "[" + tsk.getStatusIcon() + "] " + tsk.description);
+                        for (int i = 1; i <= tasks.size(); i++) {
+                            Task tsk = tasks.get(i-1);
+                            System.out.println(i + ". " + tsk);
                         }
+                        break;
+                    //deadline
+                    case "deadline":
+                        String tskBy = cmdSc.nextLine();
+                        Scanner ddlSc = new Scanner(tskBy).useDelimiter("\\s*/by\\s*");
+                        tasks.add(new Deadline(ddlSc.next(), ddlSc.next()));
+                        System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size()-1));
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        break;
+                    //event
+                    case "event":
+                        String tskAt = cmdSc.nextLine();
+                        Scanner evtSc = new Scanner(tskAt).useDelimiter("\\s*/at\\s*");
+                        tasks.add(new Event(evtSc.next(), evtSc.next()));
+                        System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size()-1));
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                        break;
+                    //done
+                    case "done":
+                        int numDone = Integer.parseInt(cmdSc.next()) - 1;
+                        Task itemDone = tasks.get(numDone);
+                        itemDone.mardAsDone();
+                        System.out.println("Nice! I've marked this task as done:\n  " + itemDone);
                         break;
 
                     default:
-                        toDo.add(new Task(cmd));
+                        tasks.add(new Task(cmd));
                         System.out.println("added: " + cmd);
                 }
             }

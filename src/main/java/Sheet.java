@@ -3,18 +3,27 @@ import java.util.ArrayList;
 
 public class Sheet {
     private List<Task> list = new ArrayList<>(100);
-    public int numOfTask = list.size();
+    public int numOfTask = 0;
 
     public void add(Task task) {
         this.list.add(task);
         System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOT + Formatter.INDENT + "  "
                 + task.toString() + "\n");
-        this.count();
         System.out.printf(Formatter.LINE);
+        this.numOfTask++;
+        this.count();
     }
 
     private void count() {
-        System.out.printf(Formatter.INDENT + "Now you have %d tasks in the list.\n", list.size());
+        if (this.list.size() < 2) {
+            System.out.printf(Formatter.INDENT + "Now you have %d task in the list.\n", numOfTask);
+        } else {
+            System.out.printf(Formatter.INDENT + "Now you have %d tasks in the list.\n", numOfTask);
+        }
+    }
+
+    public boolean isEmpty() {
+        return this.list.isEmpty();
     }
 
     public Task get(int index) {
@@ -24,6 +33,8 @@ public class Sheet {
     public void markAsDone(int num) {
         Task target = this.list.get(num - 1);
         this.list.set(num - 1,target.finish());
+        System.out.println(Formatter.LINE + Formatter.INDENT + Formatter.DONE + Formatter.INDENT +
+                this.list.get(num - 1).toString() + "\n" + Formatter.LINE);
     }
 
     public void showList() {

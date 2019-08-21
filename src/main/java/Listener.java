@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Listener {
@@ -10,6 +11,7 @@ public class Listener {
         this.sheet = sheet;
 
         System.out.print(Formatter.WELCOME);
+
         while(sc.hasNext()) {
             String command = sc.next();
             if (command.equals("bye")) {
@@ -18,32 +20,80 @@ public class Listener {
             } else if (command.equals("list")) {
                 this.sheet.showList();
             } else if (command.equals("done")) {
-                int index = sc.nextInt();
-                this.sheet.markAsDone(index);
-                System.out.println(Formatter.LINE + Formatter.INDENT + Formatter.DONE + Formatter.INDENT +
-                        sheet.get(index - 1).toString() + "\n" + Formatter.LINE);
+                try {
+                    int index = sc.nextInt();
+                    if (index > this.sheet.numOfTask) {
+                        if (this.sheet.isEmpty()) {
+                            throw new TaskNotFoundException("☹ OOPS!!! The list is empty.");
+                        } else {
+                            throw new TaskNotFoundException("☹ OOPS!!! The list contains only " +
+                                    this.sheet.numOfTask + (this.sheet.numOfTask == 1 ? " task." : " tasks."));
+                        }
+                    }
+                    if (index < 1) {
+                        throw new TaskNotFoundException("☹ OOPS!!! Do we have non-positive tasks?");
+                    }
+                    this.sheet.markAsDone(index);
+                } catch (TaskNotFoundException tfe){
+                    System.out.println(tfe.toString());
+                } catch (InputMismatchException ime) {
+                    System.out.println("☹ OOPS!!! I cannot recognise that task index. :-(");
+                }
             } else if (command.equals("todo")){
-                Task todoTask = new Todo(sc.nextLine());
-                this.sheet.add(todoTask);
+                try {
+                    String description = sc.nextLine();
+                    if (description.isBlank()) {
+                        throw new MissingDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Task todoTask = new Todo(description);
+                    this.sheet.add(todoTask);
+                } catch (MissingDescriptionException e) {
+                    System.out.printf(e.toString());
+                }
             }else if (command.equals("deadline")) {
-                String next;
-                String description = "";
-                while (!(next = sc.next()).equals("/by")) {
-                    description += " " + next;
+                try {
+                    String next;
+                    String description = "";
+                    while (!(next = sc.next()).equals("/by")) {
+                        description += " " + next;
+                    }
+                    String by = sc.nextLine().trim();
+                    if (by.isBlank()) {
+                        throw new MissingDescriptionException(
+                                "☹ OOPS!!! The deadline cannot be empty."
+                        );
+                    }
+                    Task dlTask = new Deadline(description, by);
+                    this.sheet.add(dlTask);
+                } catch (MissingDescriptionException dl) {
+                    System.out.printf(dl.toString());
+                } finally {
+
                 }
-                String by = sc.nextLine().trim();
-                Task dlTask = new Deadline(description, by);
-                this.sheet.add(dlTask);
             } else if (command.equals("event")){
-                String next;
-                String description = "";
-                while (!(next = sc.next()).equals("/at")) {
-                    description += " " + next;
+                try {
+                    String next;
+                    String description = "";
+                    while (!(next = sc.next()).equals("/at")) {
+                        description += " " + next;
+                    }
+                    String span = sc.nextLine().trim();
+                    if (span.isBlank()) {
+                        throw new MissingDescriptionException("☹ OOPS!!! The event time cannot be empty.");
+                    }
+                    Task eventTask = new Event(description, span);
+                    this.sheet.add(eventTask);
+                } catch (MissingDescriptionException mde) {
+                    System.out.println(mde.toString());
+                } finally {
                 }
-                String span = sc.nextLine().trim();
-                Task eventTask = new Event(description, span);
-                this.sheet.add(eventTask);
-            } else {}
+            } else {
+                try {
+                    throw new IllegalCommandException(Formatter.UNKNOWN);
+                } catch (IllegalCommandException ice) {
+                    System.out.printf(ice.toString());
+                }
+            }
         }
     }
 }

@@ -29,34 +29,72 @@ public class Duke {
                 }
                 System.out.println(lines);
             } else if (comd[0].equals("done")) {
-                int n = Integer.parseInt(comd[1]) - 1;
-                taskList.get(n).markAsDone();
-                System.out.print(lines);
-                System.out.println(indent   + "Nice! I've marked this task as done: \n" +
-                        indent   + "  " + taskList.get(n));
-                System.out.println(lines);
-            } else {
-                Task task = new Task();
-                if (comd[0].equals("todo")) {
-                    String event = command.substring(5);
-                    task = new ToDo(event);
-                    taskList.add(task);
-                } else if (comd[0].equals("deadline")) {
-                    String event = command.substring(9, command.lastIndexOf('/'));
-                    String date = command.substring(command.lastIndexOf('/') + 4);
-                    task = new Deadline(event, date);
-                    taskList.add(task);
-                } else if (comd[0].equals("event")) {
-                    String event = command.substring(6, command.lastIndexOf('/'));
-                    String date = command.substring(command.lastIndexOf('/') + 4);
-                    task = new Event(event, date);
-                    taskList.add(task);
+                try {
+                    if (comd.length <= 1) {
+                        throw new DukeException(" OOPS!!! The task number cannot be empty.\n");
+                    }
+                    int n = Integer.parseInt(comd[1]) - 1;
+                    if (n < 0 || n > taskList.size() - 1) {
+                        throw new DukeException(" OOPS!!! The number inputted is not on the list.\n");
+                    }
+                    taskList.get(n).markAsDone();
+                    System.out.print(lines);
+                    System.out.println(indent + "Nice! I've marked this task as done: \n" +
+                            indent + "  " + taskList.get(n));
+                    System.out.println(lines);
+                } catch (DukeException ex) {
+                    System.out.print(lines);
+                    System.out.print(indent + ex.getMessage());
+                    System.out.println(lines);
                 }
-                System.out.print(lines);
-                System.out.println(indent + " Got it. I've added this task: \n" +
-                        indent + "   " + task + "\n" +
-                        indent + " Now you have " + taskList.size() + " tasks in the list.");
-                System.out.println(lines);
+            } else {
+                try {
+                    Task task = new Task();
+                    if (comd[0].equals("todo")) {
+                        if (comd.length <= 1) {
+                            throw new DukeException(" OOPS!!! The description of a todo cannot be empty.\n");
+                        } else {
+                            String event = command.substring(5);
+                            task = new ToDo(event);
+                            taskList.add(task);
+                        }
+                    } else if (comd[0].equals("deadline")) {
+                        if (comd.length <= 1) {
+                            throw new DukeException(" OOPS!!! The description of a deadline cannot be empty.\n");
+                        } else {
+                            if (!command.contains("/")) {
+                                throw new DukeException(" OOPS!!! The time is missing a \"/\"\n");
+                            }
+                            String event = command.substring(9, command.lastIndexOf('/'));
+                            String date = command.substring(command.lastIndexOf('/') + 4);
+                            task = new Deadline(event, date);
+                            taskList.add(task);
+                        }
+                    } else if (comd[0].equals("event")) {
+                        if (comd.length <= 1) {
+                            throw new DukeException(" OOPS!!! The description of a event cannot be empty.\n");
+                        } else {
+                            if (!command.contains("/")) {
+                                throw new DukeException(" OOPS!!! The time is missing a \"/\"\n");
+                            }
+                            String event = command.substring(6, command.lastIndexOf('/'));
+                            String date = command.substring(command.lastIndexOf('/') + 4);
+                            task = new Event(event, date);
+                            taskList.add(task);
+                        }
+                    } else {
+                        throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    }
+                    System.out.print(lines);
+                    System.out.println(indent + " Got it. I've added this task: \n" +
+                            indent + "   " + task + "\n" +
+                            indent + " Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println(lines);
+                } catch (DukeException ex) {
+                    System.out.print(lines);
+                    System.out.print(indent + ex.getMessage());
+                    System.out.println(lines);
+                }
             }
             command = sc.nextLine();
             comd = command.split("\\s");

@@ -52,7 +52,8 @@ public class Duke {
                 break;
             }
 
-            case "done": {
+            case "done":
+            case "delete": {
                 if (tokens.length <= 1) {
                     throw new DukeException("Missing task ID.");
                 }
@@ -61,13 +62,25 @@ public class Duke {
                 int taskId;
                 try {
                     taskId = Integer.parseInt(tokens[1]) - 1;
-                    task = storage.getTasks().get(taskId);
+
+                    if (command.equals("done")) {
+                        task = storage.getTasks().get(taskId);
+                        task.markAsDone();
+                    } else {
+                        task = storage.getTasks().remove(taskId);
+                    }
                 } catch (Exception e) {
                     throw new DukeException("Invalid task ID.");
                 }
 
-                task.markAsDone();
-                print(String.format("Nice! I've marked this task as done:%n%s", task.toString()));
+                if (command.equals("done")) {
+                    print(String.format("Nice! I've marked this task as done:%n%s", task.toString()));
+                } else {
+                    print(String.format(
+                        "Noted. I've removed this task:%n%s%nNow you have %d tasks in the list.",
+                        task.toString(), storage.getTaskCount()
+                    ));
+                }
 
                 break;
             }

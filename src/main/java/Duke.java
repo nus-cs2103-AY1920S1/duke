@@ -2,14 +2,14 @@ import java.util.*;
 
 public class Duke {
     public static final String indent = "    ";
+    private static List<Task> history = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String intro = "Hello! I'm Duke\n" +
                 "What can I do for you?";
-        List<Task> history = new ArrayList<>();
 
-        System.out.println(wrap(intro));
+        System.out.println(indent(wrapWithHorizontalLines(intro)));
         String input;
         String output;
         while(!(input = sc.nextLine()).equals("bye")) {
@@ -23,23 +23,40 @@ public class Duke {
                     int selectedIndex = Integer.parseInt(splitInput[1]) - 1;
                     Task task = history.get(selectedIndex);
                     task.markAsDone();
-                    output = getMarkTaskAsDoneOutput(task);
+                    output = "Nice! I've marked this task as done: \n"
+                            + indent(task.toString());
+                    break;
+                case "deadline":
+                    int byIndex = input.indexOf(" /by ");
+                    String deadlineDescription =  input.substring(9, byIndex);
+                    String by = input.substring(byIndex + 5);
+                    Deadline deadline = new Deadline(deadlineDescription, by);
+                    history.add(deadline);
+                    output = wrapWithAddTask(deadline);
+                    break;
+                case "event":
+                    int atIndex = input.indexOf(" /at ");
+                    String eventDescription =  input.substring(6, atIndex);
+                    String at = input.substring(atIndex + 5);
+                    Event event = new Event(eventDescription, at);
+                    history.add(event);
+                    output = wrapWithAddTask(event);
+                    break;
+                case "todo":
+                    String todoDescription = input.substring(5);
+                    Todo todo = new Todo(todoDescription);
+                    history.add(todo);
+                    output = wrapWithAddTask(todo);
                     break;
                 default:
                     history.add(new Task(input));
                     output = "added: " + input;
             }
-            System.out.println(wrap(output));
+            System.out.println(indent(wrapWithHorizontalLines(output)));
         };
 
         String endMessage = "Bye. Hope to see you again soon!";
-        System.out.println(wrap(endMessage));
-    }
-
-    private static String getMarkTaskAsDoneOutput(Task task) {
-        return "Nice! I've marked this task as done: \n"
-                + indent
-                + task.toString();
+        System.out.println(indent(wrapWithHorizontalLines(endMessage)));
     }
 
     private static String historyToString(List<Task> history) {
@@ -50,12 +67,20 @@ public class Duke {
         return sj.toString();
     }
 
-    private static String wrap(String str) {
-        String wrappedString = "____________________________________________________________\n"
+    private static String wrapWithHorizontalLines(String str) {
+        return "____________________________________________________________\n"
                 + str
                 + "\n" + "____________________________________________________________";
-        String[] indentedStrings = Arrays.stream(wrappedString.split("\n")).map(s -> indent + s).toArray(String[]::new);
+    }
 
+    private static String wrapWithAddTask(Task task) {
+        return "Got it. I've added this task: \n"
+                + indent(task.toString())
+                + String.format("\nNow you have %d tasks in the list.", history.size());
+    }
+
+    private static String indent(String str) {
+        String[] indentedStrings = Arrays.stream(str.split("\n")).map(s -> indent + s).toArray(String[]::new);
         return String.join("\n", indentedStrings);
     }
 }

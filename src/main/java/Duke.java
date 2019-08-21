@@ -1,11 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import main.task.Task;
+
 public class Duke {
     public static void main(String[] args) {
-        //Level 2
+        //Level 3
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> events = new ArrayList<>();
+        ArrayList<Task> events = new ArrayList<Task>();
         String input = sc.nextLine();
         System.out.print("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
@@ -15,19 +17,32 @@ public class Duke {
             if (input.equals("list")) {
                 String result = "";
                 for (int i = 0; i < events.size(); i = i + 1) {
-                    result = result + "    " + (i + 1) + ". " + events.get(i) + "\n";
+                    result = result + "    " + (i + 1) + ". " + events.get(i).toString() + "\n";
                 }
                 result = result.equals("") ? "\n" : result;
                 System.out.print("    ____________________________________________________________\n" +
-                         result +
+                        result +
                         "    ____________________________________________________________\n");
                 input = sc.nextLine();
                 continue;
+            } else if (input.substring(0, 4).equals("done")) {
+                Scanner sc2 = new Scanner(input);
+                sc2.next();
+                int taskNumber = sc2.nextInt();
+                Task targetedTask = events.get(taskNumber - 1);
+                Task.markAsDone(targetedTask);
+                sc2.close();
+                System.out.print("    ____________________________________________________________\n" +
+                        "     Nice! I've marked this task as done: \n" +
+                        "       " + targetedTask.toString() +"\n" +
+                        "    ____________________________________________________________\n");
+                input = sc.nextLine();
             } else {
+                Task t = new Task(input);
                 System.out.print("    ____________________________________________________________\n" +
                         "    added: "+ input + "\n" +
                         "    ____________________________________________________________\n");
-                events.add(input);
+                events.add(t);
                 input = sc.nextLine();
             }
         }

@@ -14,15 +14,24 @@ public class Duke {
         System.out.println(Duke.format(intro));
 
         Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
 
-        while (sc.hasNext()) {
+        while (isRunning && sc.hasNextLine()) {
             String command = sc.nextLine().trim();
+
+            switch (command) {
             // Terminate the bot if the 'bye' command is issued
-            if (command.equals("bye")) {
+            case "bye":
+                isRunning = false;
                 break;
-            } else {
-                // Echo the input command
+            // Catch empty commands (ENTER key pressed)
+            case "":
+                System.out.println(Duke.format("No command issued."));
+                break;
+            // Otherwise echo the input command
+            default:
                 System.out.println(Duke.format(command));
+                break;
             }
         }
 

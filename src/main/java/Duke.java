@@ -5,7 +5,7 @@ import main.task.*;
 
 public class Duke {
     public static void main(String[] args) {
-        //Level 3
+        //Level 5
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
@@ -14,7 +14,7 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
         while (!input.equalsIgnoreCase("bye")) {
-            if (input.equals("list")) {
+            if (input.length() == 4 && input.substring(0, 4).equals("list")) {
                 String result = "";
                 for (int i = 0; i < tasks.size(); i = i + 1) {
                     result = result + "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
@@ -26,7 +26,7 @@ public class Duke {
                         "    ____________________________________________________________\n");
                 input = sc.nextLine();
                 continue;
-            } else if (input.substring(0, 4).equals("done")) {
+            } else if (input.length() > 4 && input.substring(0, 4).equals("done")) {
                 Scanner sc2 = new Scanner(input);
                 sc2.next();
                 int taskNumber = sc2.nextInt();
@@ -39,24 +39,52 @@ public class Duke {
                         "    ____________________________________________________________\n");
                 input = sc.nextLine();
             } else {
-                Task t;
-                if (input.substring(0, 4).equals("todo")) {
-                    t = new ToDo(input.substring(5));
-                } else if (input.substring(0, 8).equals("deadline")) {
-                    String res = input.substring(9);
-                    String[] pair = res.split("/");
-                    t = new Deadline(pair[0], pair[1]);
-                } else {
-                    String res = input.substring(6);
-                    String[] pair = res.split("/");
-                    t = new Event(pair[0], pair[1]);
+                Task t = null;
+                String taskType = "";
+                try {
+                    if (input.length() > 4 && input.substring(0, 4).equals("todo")) {
+                        taskType = "todo";
+                        if (input.length() < 6) {
+                            throw new InsufficientTaskArgumentException("Not enough arguments for To Do");
+                        }
+                        t = new ToDo(input.substring(5));
+                    } else if (input.length() > 8 && input.substring(0, 8).equals("deadline")) {
+                        taskType = "deadline";
+                        if (input.length() < 10 || !input.contains("/")) {
+                            throw new InsufficientTaskArgumentException("Not enough arguments for Deadline");
+                        }
+                        String res = input.substring(9);
+                        String[] pair = res.split("/");
+                        t = new Deadline(pair[0], pair[1]);
+                    } else if (input.length() > 5 && input.substring(0, 5).equals("event")) {
+                        taskType = "event";
+                        if (input.length() < 7 || !input.contains("/")) {
+                            throw new InsufficientTaskArgumentException("Not enough arguments for Deadline");
+                        }
+                        String res = input.substring(6);
+                        String[] pair = res.split("/");
+                        t = new Event(pair[0], pair[1]);
+                    } else {
+                        throw new InvalidTaskException(input + " is not a valid task");
+                    }
+
+                } catch (InsufficientTaskArgumentException e) {
+                    System.out.print("    ____________________________________________________________\n" +
+                            "     ☹ OOPS!!! The description of a " + taskType + " cannot be empty.\n" +
+                            "    ____________________________________________________________\n");
+                    input = sc.nextLine();
+                    continue;
+                } catch (InvalidTaskException e) {
+                    System.out.print(e.toString() + "\n");
+                    input = sc.nextLine();
+                    continue;
                 }
-                System.out.print("    ____________________________________________________________\n" +
-                        "     Got it. I've added this task: \n" +
-                        "       "+ t.toString() + "\n" +
-                        "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                        "    ____________________________________________________________\n");
                 tasks.add(t);
+                System.out.print("    ____________________________________________________________\n" +
+                            "     Got it. I've added this task: \n" +
+                            "       "+ t.toString() + "\n" +
+                            "     Now you have " + tasks.size() + " tasks in the list.\n" +
+                            "    ____________________________________________________________\n");
                 input = sc.nextLine();
             }
         }

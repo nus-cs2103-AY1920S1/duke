@@ -2,7 +2,7 @@ package command;
 
 import java.util.Optional;
 
-import util.dukeOutput;
+import util.DukeOutput;
 
 public class GreetCommand implements Command {
     private static final String DUKE_LOGO =
@@ -19,7 +19,7 @@ public class GreetCommand implements Command {
 
     @Override
     public Optional<Command> execute() {
-        dukeOutput.printMessage(GREETING);
-        return Optional.of(new EchoCommand());
+        DukeOutput.printMessage(GREETING);
+        return Optional.empty();
     }
 }

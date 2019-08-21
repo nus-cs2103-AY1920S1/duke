@@ -2,7 +2,7 @@ package util;
 
 import java.util.Scanner;
 
-public class dukeInput {
+public class DukeInput {
     private static Scanner SCANNER = new Scanner(System.in);
 
     public static String readUserInput() {

@@ -27,7 +27,7 @@ public class Duke {
 		try {
 			taskList.loadFrom(filePath);
 		} catch (DukeException e) {
-			//do nothing
+			new Output("☹ OOPS!!! Your list cannot be saved/loaded", e.getMessage()).print();
 		}
 		//begin taking input and process
 		while (takingInput) {
@@ -37,7 +37,7 @@ public class Duke {
 		try {
 			taskList.saveTo(filePath);
 		} catch (DukeException e) {
-			new Output("☹ OOPS!!! Your list cannot be saved. (" + filePath + ") is not a valid file path!").print();
+			new Output("☹ OOPS!!! Your list cannot be saved/loaded", e.getMessage()).print();
 		}
 		//print goodbye msg
 		new Output("Bye. Hope to see you again soon!").print();

@@ -125,7 +125,7 @@ public class TaskList {
 			}
 			saved.close();
 		} catch (FileNotFoundException e) {
-			throw new DukeException("the path is not valid");
+			throw new DukeException("path provided is incorrect.");
 		} catch (IOException e) {
 			System.err.println(e);
 		}
@@ -142,9 +142,10 @@ public class TaskList {
 				switch (reader.readLine()) {
 					case "T":
 						if (Integer.parseInt(reader.readLine()) == 1) {
-							newList.add(new ToDo(reader.readLine()).complete()); } else {
+							newList.add(new ToDo(reader.readLine()).complete()); }
+						else {
 								newList.add(new ToDo(reader.readLine()));
-							}
+						}
 						break;
 					case "D":
 						if (Integer.parseInt(reader.readLine()) == 1) {
@@ -161,15 +162,15 @@ public class TaskList {
 						}
 						break;
 					default:
-						throw new DukeException("incorrect file format");
+						throw new DukeException("save file has incorrect file format");
 				}
 			}
 			load.close();
 			taskList = newList;
 		} catch (NumberFormatException e) {
-			throw new DukeException("incorrect file format");
+			throw new DukeException("save file has incorrect file format");
 		} catch (FileNotFoundException e) { 
-			throw new DukeException("file not found");
+			throw new DukeException("path provided is incorrect.");
 		} catch (IOException e) {
 			System.err.println(e);
 		}

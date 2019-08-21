@@ -12,3 +12,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+text-ui-test/input.txt
+text-ui-test/EXPECTED.txt
+text-ui-test/ACTUAL.TXT
+src/main/java/input.txt
+src/main/java/output.txt

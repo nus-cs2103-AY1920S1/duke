@@ -1,9 +1,12 @@
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Duke {
 
     static TaskList taskList = new TaskList();
     static Scanner scanner = new Scanner(System.in);
+    static PrintStream ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
 
     /**
      * Main program loop of the program.
@@ -11,7 +14,6 @@ public class Duke {
      */
     public static void main(String[] args) {
         welcomeMessage();
-
         String command = "";
 
         while (!command.equals("bye")) {
@@ -27,16 +29,19 @@ public class Duke {
      * @param command The user's input.
      */
     public static void processCommand(String command) {
-        System.out.println("\t____________________________________________________________");
+        String[] commandArray = command.split(" ");
+        ps.println("\t____________________________________________________________");
         if (command.equals("bye")) {
-            System.out.println("\tBye. Hope to see you again soon!");
+            ps.println("\tBye. Hope to see you again soon!");
         } else if (command.equals("list")) {
             taskList.printList();
+        } else if (commandArray[0].equals("done") && commandArray[1].matches("\\d+")) {
+            int id = Integer.parseInt(commandArray[1]);
+            taskList.markAsDone(id);
         } else {
-            System.out.println("\t" + "added: " + command);
             taskList.add(command);
         }
-        System.out.println("\t____________________________________________________________");
+        ps.println("\t____________________________________________________________");
     }
 
     /**
@@ -48,9 +53,9 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
-        System.out.println("\t____________________________________________________________");
+        ps.println("Hello from\n" + logo);
+        ps.println("\t____________________________________________________________");
+        ps.println("\tHello! I'm Duke\n\tWhat can I do for you?");
+        ps.println("\t____________________________________________________________");
     }
 }

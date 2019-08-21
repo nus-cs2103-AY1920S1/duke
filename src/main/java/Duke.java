@@ -25,6 +25,9 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 taskManager.printTasks();
+            } else if (input.matches("^done \\d+$")) {
+                int index = Integer.parseInt(input.split(" ")[1]);
+                taskManager.markAsDone(index);
             } else {
                 taskManager.addTask(input);
             }

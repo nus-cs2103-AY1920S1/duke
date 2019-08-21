@@ -9,11 +9,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return taskID + ".[D]" + super.toStringNoID() + " (by: " + deadline + ")" + "\n";
-    }
-
-    @Override
-    public String toStringNoID() {
-        return "[D]" + super.toStringNoID() + " (by: " + deadline + ")" + "\n";
+        return "[D]" + super.toString() + " (by: " + deadline + ")" + "\n";
     }
 }

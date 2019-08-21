@@ -9,11 +9,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return taskID + ".[E]" + super.toStringNoID() + " (at: " + time + ")" + "\n";
+        return "[E]" + super.toString() + " (at: " + time + ")" + "\n";
     }
 
-    @Override
-    public String toStringNoID() {
-        return "[E]" + super.toStringNoID() + " (at: " + time + ")" + "\n";
-    }
 }

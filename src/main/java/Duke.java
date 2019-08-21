@@ -10,6 +10,7 @@ public class Duke {
     private static String tasklist_header = "\t Here are the tasks in your list:\n";
     private static String done_message = "\t Nice! I've marked this task as done:\n";
     private static String task_added_message = "\t Got it. I've added this task:\n";
+    private static String delete_message = "\t Noted. I've removed this task:\n";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -44,8 +45,8 @@ public class Duke {
                             throw new DukeException("There are no tasks to display.");
                         }
                         StringBuilder s = new StringBuilder(tasklist_header);
-                        for (Task t : list) {
-                            s.append("\t ").append(t);
+                        for (int i = 0; i < list.size(); i++) {
+                            s.append("\t " + (i+1) + ".").append(list.get(i));
                         }
                         print(s.toString());
                         break;
@@ -67,7 +68,24 @@ public class Duke {
                         if (!status) {
                             throw new DukeException("Action already marked as done!");
                         }
-                        String s = done_message + "\t   " + current.toStringNoID();
+                        String s = done_message + "\t   " + current;
+                        print(s);
+                        break;
+                    }
+                    case "delete":{
+                        int id;
+                        try {
+                            id = Integer.valueOf(params[0]);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("You need to specify a task ID to delete.");
+                        }
+                        Task current;
+                        try {
+                            current = list.remove(id - 1);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("No such task with that ID.");
+                        }
+                        String s = delete_message + "\t   " + current;
                         print(s);
                         break;
                     }
@@ -78,7 +96,7 @@ public class Duke {
                         }
                         Task current = new ToDo(task);
                         list.add(current);
-                        String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
+                        String s = task_added_message + "\t   " + current + totalNoOfTasks(list);
                         print(s);
                         break;
                     }
@@ -94,7 +112,7 @@ public class Duke {
                         }
                         Task current = new Deadline(details[0], details[1]);
                         list.add(current);
-                        String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
+                        String s = task_added_message + "\t   " + current + totalNoOfTasks(list);
                         print(s);
                         break;
                     }
@@ -110,7 +128,7 @@ public class Duke {
                         }
                         Task current = new Event(details[0], details[1]);
                         list.add(current);
-                        String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
+                        String s = task_added_message + "\t   " + current + totalNoOfTasks(list);
                         print(s);
                         break;
                     }
@@ -154,6 +172,11 @@ public class Duke {
         String task_desc = joinStrings(Arrays.copyOfRange(params, 0, split));
         String task_due = joinStrings(Arrays.copyOfRange(params, split + 1, params.length));
         return new String[]{task_desc, task_due};
+    }
+
+    private static String totalNoOfTasks(ArrayList list) {
+        int noOfTasks = list.size();
+        return "\t Now you have " + (noOfTasks) + (noOfTasks == 1? " task" : " tasks") + " in the list.\n";
     }
 
 }

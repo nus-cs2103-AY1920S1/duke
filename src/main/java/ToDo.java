@@ -6,11 +6,7 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return taskID + ".[T]" + super.toStringNoID() + "\n";
+        return "[T]" + super.toString() + "\n";
     }
 
-    @Override
-    public String toStringNoID() {
-        return "[T]" + super.toStringNoID() + "\n";
-    }
 }

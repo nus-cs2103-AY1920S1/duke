@@ -10,15 +10,6 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    protected String getTaskList() {
-        StringBuilder tasks = new StringBuilder("");
-        int count = 1;
-        for (Task task : this.taskList) {
-            tasks.append(count++ + ". " + task.getStatus() + "\n");
-        }
-        return tasks.toString();
-    }
-
     // Index starts from 1
     protected void markAsDoneTaskAt(int index) {
         this.taskList.get(index - 1).markAsDone();

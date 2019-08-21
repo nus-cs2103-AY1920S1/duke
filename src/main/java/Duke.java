@@ -1,24 +1,38 @@
 import java.util.Scanner;
+import java.util.function.DoubleToIntFunction;
 
 public class Duke {
 
-    private static final String DUKE_HELLO = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String DUKE_HELLO = "Hello! I'm Duke\n    What can I do for you?\n";
     private static final String DUKE_BYE = "Bye. Hope to see you again soon!";
-    private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:\n";
+    private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
     private static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:\n";
     private static final String DUKE_ADD_TASK = "Got it. I've added this task:\n";
     private static final String DUKE_NUMBER_OF_TASKS = "Now you have %d tasks in the list.";
+    private static final String DUKE_LINE = "    ____________________________________________________________\n";
+    private static final String DUKE_TAB4 = "    ";
+    private static final String DUKE_TAB2 = "  ";
     protected TaskList taskList;
 
     protected Duke() {
         this.taskList = new TaskList();
     }
 
-    private String addTask(Task task) {
-        return String.format("%s  %s\n",
-                    DUKE_ADD_TASK,
-                    taskList.addTask(task).getStatus())
-                + String.format(DUKE_NUMBER_OF_TASKS, taskList.getSize());
+    private void listTasks() {
+        System.out.println(DUKE_TAB4 + DUKE_LIST_TASKS);
+        for (int i = 1; i <= this.taskList.getSize(); i++) {
+            System.out.println(String.format("%s%d.%s",
+                                             DUKE_TAB4,
+                                             i,
+                                             taskList.getTaskAt(i).getStatus()));
+        }
+    }
+
+    private void addTask(Task task) {
+        System.out.println(DUKE_TAB4 + DUKE_ADD_TASK
+                           + DUKE_TAB4 + DUKE_TAB2 + taskList.addTask(task).getStatus()
+                           + String.format("\n" + DUKE_TAB4 + DUKE_NUMBER_OF_TASKS,
+                                   taskList.getSize()));
     }
 
     protected void run() {
@@ -31,39 +45,44 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Greet the user
-        System.out.println(DUKE_HELLO);
+        System.out.print(DUKE_LINE
+                           + DUKE_TAB4 + DUKE_HELLO
+                           + DUKE_LINE);
 
         // Handle user input
         String command;
-        Task task = null;
         while (!(command = sc.nextLine()).equals("bye")) {
+            System.out.print(DUKE_LINE);
+
             if (command.equals("list")) {
                 // List all the commands entered by user
-                System.out.print(DUKE_LIST_TASKS + taskList.getTaskList());
-                continue;
+                this.listTasks();
             } else if (command.startsWith("done")) {
                 // Mark Task at index specified as done
                 int index = Integer.parseInt(command.split(" ")[1]);
                 taskList.markAsDoneTaskAt(index);
-                System.out.println(DUKE_MARK_AS_DONE + taskList.getTaskAt(index).getStatus());
-                continue;
+                System.out.println(DUKE_TAB4 + DUKE_MARK_AS_DONE
+                                   + DUKE_TAB4 + DUKE_TAB2
+                                   + taskList.getTaskAt(index).getStatus());
             } else if (command.startsWith("todo")) {
-                task = new TodoTask(command.substring(5));
+                this.addTask(new TodoTask(command.substring(5)));
             } else if (command.startsWith("deadline")) {
                 String[] cmd = command.substring(9).split(" /by ");
-                task = new DeadlineTask(cmd[0], cmd[1]);
+                this.addTask(new DeadlineTask(cmd[0], cmd[1]));
             } else if (command.startsWith("event")) {
                 String[] cmd = command.substring(6).split(" /at ");
-                task = new EventTask(cmd[0], cmd[1]);
+                this.addTask(new EventTask(cmd[0], cmd[1]));
             } else {
-                System.err.println("Incorrect command");
-                continue;
+                System.err.println(DUKE_TAB4 + "Incorrect command");
             }
-            System.out.println(this.addTask(task));
+
+            System.out.print(DUKE_LINE);
         }
 
         // Greet the user and quit program
-        System.out.println(DUKE_BYE);
+        System.out.println(DUKE_LINE
+                           + DUKE_TAB4 + DUKE_BYE
+                           + DUKE_LINE);
     }
     
 }

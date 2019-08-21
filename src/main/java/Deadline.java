@@ -1,6 +1,6 @@
 /*
  * Deadline.java
- * Level-5
+ * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -11,11 +11,17 @@
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description) {
+    public Deadline(String description) throws DukeException {
         super(description);
         String[] splitDescription = description.split(" /by ", 2);
-        this.description = splitDescription[0];
-        this.by = splitDescription[1];
+
+        try {
+            this.description = splitDescription[0];
+            this.by = splitDescription[1];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please enter a deadline using \"/by\".");
+        }
     }
 
     @Override

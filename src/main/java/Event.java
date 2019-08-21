@@ -1,6 +1,6 @@
 /*
  * Event.java
- * Level-5
+ * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -11,11 +11,16 @@
 public class Event extends Task {
     protected String at;
 
-    public Event(String description) {
+    public Event(String description) throws DukeException {
         super(description);
         String[] splitDescription = description.split(" /at ", 2);
-        this.description = splitDescription[0];
-        this.at = splitDescription[1];
+        try {
+            this.description = splitDescription[0];
+            this.at = splitDescription[1];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please enter a deadline using \"/at\".");
+        }
     }
 
     @Override

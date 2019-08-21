@@ -1,6 +1,6 @@
 /*
  * Duke.java
- * Level-5
+ * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -29,6 +29,8 @@ public class Duke {
                 // Check if task type and add accordingly
                 if (input.startsWith("done ")) {
                     doneTask(input, list);
+                } else if (input.startsWith("delete ")) {
+                    deleteTask(input, list);
                 } else if (input.startsWith("todo")) {
                     addToList(input, TaskType.Todo, list);
                 } else if (input.startsWith("deadline ")) {
@@ -137,6 +139,27 @@ public class Duke {
         } else {
             throw new DukeException("The description of a done cannot be empty.");
         }
+    }
 
+    // Removes the item in list
+    public static void deleteTask(String input, ArrayList<Task> list) throws DukeException {
+        // Process input
+        if (input.length() > 7) {
+            try {
+                int taskIndex = Integer.parseInt(input.substring(7));
+                if (list.size() >= taskIndex && taskIndex > 0) {
+                    printOutput("Noted. I've removed this task:\n  " + list.get(taskIndex - 1) +
+                            "\nNow you have " + (list.size() - 1) + " tasks in the list.");
+                    list.remove(taskIndex - 1);
+                }
+                else {
+                    throw new DukeException("The integer entered for deletion is not valid.");
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeException("The description of a delete must be an integer.");
+            }
+        } else {
+            throw new DukeException("The description of a delete cannot be empty.");
+        }
     }
 }

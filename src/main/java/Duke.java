@@ -22,11 +22,16 @@ public class Duke {
             } else if (msg.equals("done")) {
                 int index = sc.nextInt();
                 list.mark(index);
-            } else {
-                msg += sc.nextLine();
-                list.add(msg);
+            } else if(msg.equals("todo")) {
+                String msgs = sc.nextLine();
+                list.addTodo(msgs);
+            } else if(msg.equals("deadline")) {
+                String msgs = sc.nextLine();
+                list.addDeadline(msgs);
+            } else if(msg.equals("event")) {
+                String msgs = sc.nextLine();
+                list.addEvent(msgs);
             }
         }
-
     }
 }

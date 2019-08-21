@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -38,6 +39,16 @@ public class Duke {
             Scanner scanner = new Scanner(str);
             String firstWord = scanner.next();
             switch (firstWord) {
+                case "delete":
+                    try {
+                        Task removed = arr.remove(scanner.nextInt() - 1);
+                        print("Noted. I've removed this task:");
+                        print(removed.toString());
+                        print("Now you have " + arr.size() + (arr.size() > 1 ? " tasks" : " task") + " in the list.");
+                    } catch (InputMismatchException e) {
+                        print("OOPS!!! You need to enter a natural number.");
+                    }
+                    break;
                 case "bye":
                     print("Bye. Hope to see you again soon!");
                     break;
@@ -84,7 +95,7 @@ public class Duke {
                 case "event":
                     taskName = "";
                     String timeframe = "";
-                    if (scanner.hasNext()){
+                    if (scanner.hasNext()) {
                         while (scanner.hasNext()) {
                             String s = scanner.next();
                             if (s.equals("/at")) {
@@ -106,10 +117,14 @@ public class Duke {
                     }
                     break;
                 case "done":
-                    int whichTask = scanner.nextInt() - 1;
-                    arr.get(whichTask).markAsDone();
-                    print("Nice! I've marked this task as done:");
-                    print(arr.get(whichTask).toString());
+                    try {
+                        int whichTask = scanner.nextInt() - 1;
+                        arr.get(whichTask).markAsDone();
+                        print("Nice! I've marked this task as done:");
+                        print(arr.get(whichTask).toString());
+                    } catch (InputMismatchException e) {
+                        print("OOPS!!! You need to enter a natural number.");
+                    }
                     break;
                 default:
                     print("OOPS!!! I'm sorry, but I don't know what that means :-(");

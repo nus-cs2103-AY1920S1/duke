@@ -6,22 +6,28 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        String[] data = new String[100];
+        Task[] data = new Task[100];
         int x = 0;
 
         while (!input.equals("bye")) {
-
-            switch(input) {
-                case "list":
-                    printlist(data);
-                    input = sc.nextLine();
-                    break;
-                default:
-                    data[x] = input;
-                    x++;
-                    echo("Added: " + input);
-                    input = sc.nextLine();
-                    break;
+            if (input.startsWith("done")) {
+                int index = Integer.parseInt(input.substring(5));
+                data[index-1].markAsDone();
+                printDone(data[index-1]);
+                input = sc.nextLine();
+            } else {
+                switch (input) {
+                    case "list":
+                        printList(data);
+                        input = sc.nextLine();
+                        break;
+                    default:
+                        data[x] = new Task(input);
+                        x++;
+                        echo("Added: " + input);
+                        input = sc.nextLine();
+                        break;
+                }
             }
         }
 
@@ -46,7 +52,7 @@ public class Duke {
         System.out.println(indentedline);
     }
 
-    public static void printlist(String[] array) {
+    public static void printList(Object[] array) {
         String indentedline = "    ____________________________________________________________";
         System.out.println(indentedline);
         int y = 0;
@@ -55,5 +61,12 @@ public class Duke {
             y++;
         }
         System.out.println(indentedline);
+    }
+
+    public static void printDone(Task t) {
+        String indentedline = "    ____________________________________________________________";
+        System.out.println(indentedline);
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       " + t);
     }
 }

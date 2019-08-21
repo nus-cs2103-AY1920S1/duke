@@ -17,17 +17,33 @@ public class TaskList {
     /**
      * Adds Task to list.
      * @param task Task to be added.
+     * @return Task that was added.
      */
-    void addTask(Task task) {
+    public Task addTask(Task task) {
         list.add(task);
+        return task;
     }
 
     /**
      * Does Task at the given 1-based index.
-     * @param index index of task to check (1-based).
+     * @param index Index of task to check (1-based).
+     * @return Task that was done.
      */
-    void doTask(int index) {
-        list.get(index - 1).markAsDone();
+    public Task doTask(int index) {
+        Task task = getTask(index);
+        task.markAsDone();
+        return task;
+    }
+
+    /**
+     * Deletes a task at given 1-based index to delete.
+     * @param index Index of the task to delete (1-based).
+     * @return Task that was deleted.
+     */
+    public Task deleteTask(int index) {
+        Task task = getTask(index);
+        list.remove(index - 1);
+        return task;
     }
 
     /**
@@ -35,7 +51,7 @@ public class TaskList {
      * @param index index of task to get (1-based).
      * @return Task object.
      */
-    Task getTask(int index) {
+    public Task getTask(int index) {
         return list.get(index - 1);
     }
 

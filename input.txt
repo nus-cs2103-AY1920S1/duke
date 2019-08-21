@@ -1,0 +1,21 @@
+hello
+list
+done 1
+done 0
+done asdhagsdh
+todo asdasdg
+todo sdfusdguiohdfg
+event sdfjhsdfjsd
+event awdfksdhjfjkh /at sdfjksdhfgudfg
+todo sdhjsdfjhdfg /at sdfsdfgdfgh
+deadline sdfjhsfgjh /by asdfdfhguidfgd
+deadline fsjgdfjkgh /at sdgldfhguid
+done 1
+done 2
+list
+done 7
+list
+delete 5
+done 4
+list
+bye

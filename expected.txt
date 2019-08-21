@@ -1,0 +1,66 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+What can I do for you?
+
+> Unknown command.
+> > Invalid task ID
+> Invalid task ID
+> Invalid number asdhagsdh
+> Got it. I've added this task:
+  [T][ ] asdasdg
+Now you have 1 tasks in the list.
+> Got it. I've added this task:
+  [T][ ] sdfusdguiohdfg
+Now you have 2 tasks in the list.
+> Got it. I've added this task:
+  [E][ ] sdfjhsdfjsd
+Now you have 3 tasks in the list.
+> Got it. I've added this task:
+  [E][ ] awdfksdhjfjkh (at: sdfjksdhfgudfg)
+Now you have 4 tasks in the list.
+> Got it. I've added this task:
+  [T][ ] sdhjsdfjhdfg /at sdfsdfgdfgh
+Now you have 5 tasks in the list.
+> Got it. I've added this task:
+  [D][ ] sdfjhsfgjh (by: asdfdfhguidfgd)
+Now you have 6 tasks in the list.
+> Got it. I've added this task:
+  [D][ ] fsjgdfjkgh /at sdgldfhguid
+Now you have 7 tasks in the list.
+> Nice! I've marked this task as done:
+[T][✓] asdasdg
+> Nice! I've marked this task as done:
+[T][✓] sdfusdguiohdfg
+> 1. [T][✓] asdasdg
+2. [T][✓] sdfusdguiohdfg
+3. [E][ ] sdfjhsdfjsd
+4. [E][ ] awdfksdhjfjkh (at: sdfjksdhfgudfg)
+5. [T][ ] sdhjsdfjhdfg /at sdfsdfgdfgh
+6. [D][ ] sdfjhsfgjh (by: asdfdfhguidfgd)
+7. [D][ ] fsjgdfjkgh /at sdgldfhguid
+> Nice! I've marked this task as done:
+[D][✓] fsjgdfjkgh /at sdgldfhguid
+> 1. [T][✓] asdasdg
+2. [T][✓] sdfusdguiohdfg
+3. [E][ ] sdfjhsdfjsd
+4. [E][ ] awdfksdhjfjkh (at: sdfjksdhfgudfg)
+5. [T][ ] sdhjsdfjhdfg /at sdfsdfgdfgh
+6. [D][ ] sdfjhsfgjh (by: asdfdfhguidfgd)
+7. [D][✓] fsjgdfjkgh /at sdgldfhguid
+> Noted. I've removed this task:
+  [T][ ] sdhjsdfjhdfg /at sdfsdfgdfgh
+Now you have 6 tasks in the list.
+> Nice! I've marked this task as done:
+[E][✓] awdfksdhjfjkh (at: sdfjksdhfgudfg)
+> 1. [T][✓] asdasdg
+2. [T][✓] sdfusdguiohdfg
+3. [E][ ] sdfjhsdfjsd
+4. [E][✓] awdfksdhjfjkh (at: sdfjksdhfgudfg)
+5. [D][ ] sdfjhsfgjh (by: asdfdfhguidfgd)
+6. [D][✓] fsjgdfjkgh /at sdgldfhguid
+> Bye. Hope to see you again soon!

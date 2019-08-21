@@ -89,6 +89,11 @@ public class Duke {
                 int myNum = Integer.valueOf(input.substring(5));
                 myList.get(myNum - 1).markAsDone();
                 printMessage("Nice! I've marked this task as done:\n  " + myList.get(myNum - 1));
+            } else if (input.contains("delete")) {
+                int myNum = Integer.valueOf(input.substring(7));
+                Task myTask = myList.get(myNum - 1);
+                printMessage("Noted. I've removed this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size() - 1) + " in the list.");
+                myList.remove(myNum - 1);
             } else {
                 printException(new DukeException("I'm sorry, but I don't know what that means :-("));
             }

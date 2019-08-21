@@ -34,7 +34,34 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 arr[num-1].markAsDone();
                 System.out.println(arr[num]);
-            } else {
+            } else if(input.equals("todo")) {
+                arr[i] = new Todo(sc.nextLine());
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + arr[i]);
+                System.out.println("Now you have " + (i+1) + " tasks in the list.");
+                i++;
+            } else if(input.equals("deadline")) {
+                String rem = sc.nextLine();
+                String[] descriptionNDate = rem.split("/by");
+                String description = descriptionNDate[0];
+                String by = descriptionNDate[1];
+                arr[i] = new Deadline(description, by);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + arr[i]);
+                System.out.println("Now you have " + (i+1) + " tasks in the list.");
+                i++;
+            } else if(input.equals("event")) {
+                String rest = sc.nextLine();
+                String[] descriptionNAt = rest.split("/at");
+                String desc = descriptionNAt[0];
+                String at = descriptionNAt[1];
+                arr[i] = new Event(desc, at);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(" " + arr[i]);
+                System.out.println("Now you have " + (i+1) + " tasks in the list.");
+                i++;
+            }
+            else {
                 String activity = input + sc.nextLine();
                 Task t = new Task(activity);
                 arr[i] = t;

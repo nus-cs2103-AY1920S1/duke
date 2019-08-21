@@ -1,26 +1,29 @@
 import java.util.Scanner;
 
 public class Listener {
-    public static final String LINE = "    ____________________________________________________________\n";
-    public static final String INDENT = "    ";
-    public static final String GOODBYE = "Bye. Hope to see you again soon!";
-    public static final String WELCOME = LINE + INDENT + "Hello! I'm Duke\n" + INDENT + "What can I do for you?\n"
-                                        + LINE;
 
-    public void start() {
+    private Adder adder;
+
+    public void start(Adder adder) {
 
         Scanner sc = new Scanner(System.in);
+        this.adder = adder;
 
-        System.out.print(WELCOME);
+        System.out.print(Formatter.WELCOME);
         while(sc.hasNext()) {
-            String command = sc.next();
+            String command = sc.nextLine();
             if (command.equals("bye")) {
-                System.out.print(LINE + INDENT + GOODBYE + "\n" + LINE);
+                System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOODBYE + "\n" + Formatter.LINE);
                 break;
             } else {
                 switch (command) {
+                    case "list":
+                        this.adder.showList();
+                        break;
                     default:
-                        System.out.print(LINE + INDENT + command + "\n" + LINE);
+                        adder.add(command);
+                        System.out.print(Formatter.LINE + Formatter.INDENT + "added: "
+                                + command + "\n" + Formatter.LINE);
                         break;
                 }
             }

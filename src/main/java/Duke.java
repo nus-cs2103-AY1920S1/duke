@@ -8,6 +8,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Listener listener = new Listener();
-        listener.start();
+        Adder adder = new Adder();
+        listener.start(adder);
     }
 }

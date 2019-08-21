@@ -1,5 +1,7 @@
 Hello! I'm Duke
 What can I do for you?
-e
-a
+added: e
+added: a
+1. e
+2. a
 Bye. Hope to see you again soon!

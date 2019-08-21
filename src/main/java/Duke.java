@@ -32,8 +32,11 @@ public class Duke {
         } else if (input.matches("^done\\s+\\d+$")) {
             int taskId = Integer.parseInt(input.split("\\s+")[1]);
             completeTask(taskId);
-        } else if (input.matches("^(todo|deadline|event).*")){
+        } else if (input.matches("^(todo|deadline|event).*")) {
             addTask(input);
+        } else if (input.matches("^delete\\s+\\d+$")) {
+            int taskId = Integer.parseInt(input.split("\\s+")[1]);
+            deleteTask(taskId);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -108,7 +111,21 @@ public class Duke {
         list.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
-        int total = Task.getTotal();
+        int total = list.size();
         System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+    }
+
+    private static void deleteTask(int taskId) {
+        try {
+            Task task = list.get(taskId - 1);
+            list.remove(task);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + task);
+            int total = list.size();
+            System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(String.format(
+                    "Task No.%d is not present in the list. Please enter a valid task ID.", taskId));
+        }
     }
 }

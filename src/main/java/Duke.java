@@ -68,18 +68,26 @@ public class Duke {
                 newTask = new ToDo(taskDescription);
             }
 
-            if (type.equals("deadline")) {
-                String[] sentence = taskDescription.split("/by");
-                String description = sentence[0];
-                String deadline = sentence[1];
-                newTask = new Deadline(description, deadline);
+            try {
+                if (type.equals("deadline")) {
+                    String[] sentence = taskDescription.split("/by");
+                    String description = sentence[0];
+                    String deadline = sentence[1];
+                    newTask = new Deadline(description, deadline);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new MissingDateTimeException("DateTime missing. Please set a deadline. (Eg. deadline read book /by Sunday)");
             }
 
-            if (type.equals("event")) {
-                String[] sentence = taskDescription.split("/at");
-                String description = sentence[0];
-                String time = sentence[1];
-                newTask = new Event(description, time);
+            try {
+                if (type.equals("event")) {
+                    String[] sentence = taskDescription.split("/at");
+                    String description = sentence[0];
+                    String time = sentence[1];
+                    newTask = new Event(description, time);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new MissingDateTimeException("Event time period missing. Please set a start and end time. (Eg. event dance /at Mon 2-4pm)");
             }
 
             return newTask;

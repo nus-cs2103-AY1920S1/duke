@@ -15,7 +15,7 @@ class DukeFormatter {
 
     /**
      * Prints the given text with indentation of five spaces.
-     * @param text
+     * @param text      Single line of text to be printed
      */
     private static void print(String text) {
         System.out.println(indent + " " + text);

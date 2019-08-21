@@ -1,13 +1,13 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates a new undone Task with the given description.
      * @param description   Description of the Task. Description length should
      *                      be at most 50 characters (for now).
      */
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -25,14 +25,14 @@ public class Task {
     /**
      * Indicates that the current Task has been completed.
      */
-    public void markAsDone() {
+    void markAsDone() {
         this.isDone = true;
     }
 
     /**
      * Indicates that the current Task has not been completed.
      */
-    public void markAsUndone() {
+    void markAsUndone() {
         this.isDone = false;
     }
 

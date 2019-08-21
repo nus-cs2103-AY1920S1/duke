@@ -1,12 +1,12 @@
 public class Event extends Task {
-    protected String time;
+    private String time;
 
     /**
      * Creates a new Event with the given description and timing.
      * @param description       Description of Event.
      * @param time              Timing of the Event.
      */
-    public Event(String description, String time) {
+    Event(String description, String time) {
         super(description);
         this.time = time;
     }

@@ -3,7 +3,7 @@ public class Todo extends Task {
      * Creates a new Todo task with the given description.
      * @param description       Task to be completed.
      */
-    public Todo(String description) {
+    Todo(String description) {
         super(description);
     }
 

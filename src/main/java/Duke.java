@@ -14,8 +14,13 @@ public class Duke {
     private static final List<Task> taskList = new ArrayList<>();
 
     /**
-     * Throws an exception if the given input does not have a valid format,
-     * as specified in the description of process(String).
+     * Throws an exception if the given input does not have a valid format.
+     * Valid formats are: 1. "list"
+     *                    2. "done [taskIndex]"
+     *                    3. "undo [taskIndex]"
+     *                    4. "todo [description]"
+     *                    5. "deadline [description] /by [time]"
+     *                    6. "event [description] /at [time]"
      * @param input             Text input to be validated
      * @throws DukeException    An exception with a message describing Duke's
      *                          response to the problem
@@ -54,14 +59,7 @@ public class Duke {
      * "done" or "undo" followed by an integer, marks the task corresponding to
      * the index integer as done or undone respectively. Otherwise, adds the
      * given input to the list of tasks.
-     * @param input     User text to be processed. Input can take one of the
-     *                  following forms:
-     *                  1. "list"
-     *                  2. "done [taskIndex]"
-     *                  3. "undo [taskIndex]"
-     *                  4. "todo [description]"
-     *                  5. "deadline [description] /by [time]"
-     *                  6. "event [description] /at [time]"
+     * @param input     User text to be processed.
      */
     private static void process(String input) throws DukeException {
         if (input.equalsIgnoreCase("list")) {
@@ -107,8 +105,9 @@ public class Duke {
     }
 
     /**
-     * Add a new task to the list according to the given task type.
-     * @param task      Description of task and other relevant information.
+     * Add a new task to the list according to the given task type - Todo,
+     * Event, or Deadline.
+     * @param task      Description of task and other relevant details.
      */
     private static void addNewTask(String task) {
         if (task.startsWith("todo")) { // Todo
@@ -126,7 +125,7 @@ public class Duke {
 
     /**
      * Takes in user input and processes it accordingly.
-     * @param args  Standard args
+     * @param args  Standard arguments
      */
     public static void main(String[] args) {
         DukeFormatter.prettyPrint(

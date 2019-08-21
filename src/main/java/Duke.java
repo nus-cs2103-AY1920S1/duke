@@ -81,10 +81,10 @@ public class Duke {
                     throw new DukeException("The description and the due time of a deadline cannot be empty.");
                 }
                 if (inputBreakDown[1].indexOf("/by") == 0) {
-                    throw new DukeException("The description of a deadline cannot be empty");
+                    throw new DukeException("The description of a deadline cannot be empty.");
                 }
                 if (!inputBreakDown[1].contains("/by") || inputBreakDown[1].matches(".*/by$")) {
-                    throw new DukeException("The due time of a deadline cannot be empty");
+                    throw new DukeException("The due time of a deadline cannot be empty.");
                 }
 
                 String[] deadlineBreakDown = inputBreakDown[1].split("\\s*/by\\s*", 2);
@@ -95,10 +95,10 @@ public class Duke {
                     throw new DukeException("The description and the time of an event cannot be empty.");
                 }
                 if (inputBreakDown[1].indexOf("/at") == 0) {
-                    throw new DukeException("The description of an event cannot be empty");
+                    throw new DukeException("The description of an event cannot be empty.");
                 }
                 if (!inputBreakDown[1].contains("/at") || inputBreakDown[1].matches(".*/at$")) {
-                    throw new DukeException("The time of an event cannot be empty");
+                    throw new DukeException("The time of an event cannot be empty.");
                 }
 
                 String[] eventBreakDown = inputBreakDown[1].split("\\s*/at\\s*", 2);

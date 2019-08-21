@@ -18,8 +18,7 @@ public class Duke {
                 System.out.println("    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +
                         "    ____________________________________________________________");
-                sc.close();
-                break;
+                System.exit(0);
             } else {
                 System.out.println("    ____________________________________________________________\n" +
                         "     " + user_input + '\n' +

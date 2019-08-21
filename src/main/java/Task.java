@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -6,6 +6,8 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public abstract String getType();
 
     public String getDescription() {
         return description;
@@ -16,7 +18,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+        return (isDone ? "x" : " "); // return x or no symbol
     }
 
     public void markAsUnfinished() {
@@ -29,6 +31,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("[%s][%s] %s", getType(), getStatusIcon(), description);
     }
 }

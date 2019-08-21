@@ -1,9 +1,8 @@
-import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static List<Task> dukeList = new ArrayList<>();
+    private static ArrayList<Task> dukeList = new ArrayList<>();
 
     public static void main(String[] args) {
         String initialMessage = "Hello! I'm Duke\nWhat can I do for you?";

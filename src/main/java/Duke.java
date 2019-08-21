@@ -69,6 +69,10 @@ public class Duke {
                         bye();
                         break;
 
+                    case "delete":
+                        delete(rest);
+                        break;
+
                     default:
                         throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "I'm sorry, but I don't know what that means :-(");
                 }
@@ -120,7 +124,7 @@ public class Duke {
             System.out.println(INDENT_COMMENT + "Nice! I've marked this task as done:");
             Task t = task.get(--item);
             t.markAsDone();
-            System.out.println("      " + t);
+            System.out.println(INDENT_TASK + t);
             printLine();
             System.out.println("");
         } catch (NumberFormatException ex) {
@@ -198,6 +202,40 @@ public class Duke {
         printLine();
         System.out.println("");
         System.exit(0);
+    }
+
+    public static void delete(String data) throws DukeException {
+        try {
+            if (data.isEmpty()) {
+                if (itemNo == 0) {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                } else {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "Index of task are needed.");
+                }
+            }
+
+            int item = Integer.parseInt(data);
+
+            if (item > itemNo) {
+                if (itemNo == 0) {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                } else {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "Number enter can only be less than or equal number of task.");
+                }
+            }
+            printLine();
+            System.out.println(INDENT_COMMENT + "Noted. I've removed this task: ");
+            System.out.println(INDENT_TASK + task.remove(--item));
+            itemNo--;
+            System.out.println(INDENT_COMMENT + "Now you have " + itemNo + " tasks in the list.");
+            printLine();
+            System.out.println("");
+        } catch (NumberFormatException ex) {
+            printLine();
+            System.out.println(INDENT_COMMENT + "\u2639 OOPS !!! " + "Only Integer is allowed after done.");
+            printLine();
+            System.out.println("");
+        }
     }
 
     public static void main(String[] args) {

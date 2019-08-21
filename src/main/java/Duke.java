@@ -14,7 +14,7 @@ public class Duke {
         String input = sc.next();
         while(!input.equals("bye")) {
             System.out.println("    ------------------------------------------------------------");
-            System.out.println("    " + input);
+            System.out.println("    " + input + sc.nextLine());
             System.out.println("    ------------------------------------------------------------");
             input = sc.next();
         }

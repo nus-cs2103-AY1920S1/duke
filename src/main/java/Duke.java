@@ -38,9 +38,37 @@ public class Duke {
                             System.out.println("    " + (i + 1) + ". " + list.get(i));
                         }
                     } else if (echoArr[0].equals("done")) {
-                        list.get(Integer.parseInt(echoArr[1]) - 1).markAsDone();
-                        System.out.println("    Nice! I've marked this task as done: ");
-                        System.out.println("     " + list.get(Integer.parseInt(echoArr[1]) - 1));
+                        try {
+                            if(echoArr.length == 1) {
+                                throw new DukeException("☹ OOPS!!! Please specify which task is done");
+                            } else if (Integer.parseInt(echoArr[1]) > counter) {
+                                throw new DukeException("☹ OOPS!!! Task " + echoArr[1] + " does not exist");
+                            } else {
+                                list.get(Integer.parseInt(echoArr[1]) - 1).markAsDone();
+                                System.out.println("    Nice! I've marked this task as done: ");
+                                System.out.println("     " + list.get(Integer.parseInt(echoArr[1]) - 1));
+                            }
+                        } catch (DukeException exp) {
+                            System.out.println("    " + exp.getMessage());
+                        }
+
+                    } else if (echoArr[0].equals("delete")) {
+                        try {
+                            if(echoArr.length == 1) {
+                                throw new DukeException("☹ OOPS!!! Please specify which task is to be deleted");
+                            } else if (Integer.parseInt(echoArr[1]) > counter) {
+                                throw new DukeException("☹ OOPS!!! Task " + echoArr[1] + " does not exist");
+                            } else {
+                                Task tsk = list.remove(Integer.parseInt(echoArr[1]) - 1);
+                                counter--;
+                                System.out.println("    Noted. I've removed this task:");
+                                System.out.println("     " + tsk);
+                                System.out.println("    Now you have " + counter + " tasks in the list.");
+                            }
+                        } catch (DukeException exp) {
+                            System.out.println("    " + exp.getMessage());
+                        }
+
                     } else if (echoArr[0].equals("deadline") || echoArr[0].equals("todo") || echoArr[0].equals("event")) {
                         if (echoArr[0].equals("deadline")) {
                             try {

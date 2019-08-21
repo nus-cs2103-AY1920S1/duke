@@ -67,6 +67,20 @@ public class Duke {
                 "    ____________________________________________________________\n");
     }
 
+    public static void printDelete(Task t) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     Noted. I've removed this task: ");
+        if (t.getType().equals("todo")) {
+            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t.toString());
+        } else if (t.getType().equals("event")) {
+            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t.toString() + " (at: " + t.getDate() + ")");
+        } else {
+            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t.toString() + " (by: " + t.getDate() + ")");
+        }
+        System.out.println("     Now you have " + tasks.size() + " tasks in the list.\n" +
+                "    ____________________________________________________________\n");
+    }
+
     public static void main(String[] args) throws DukeException {
             printGreeting();
             tasks = new ArrayList<>();
@@ -147,6 +161,12 @@ public class Duke {
                     Event e = new Event(task_name, date);
                     tasks.add(e);
                     printEvent(e);
+                } else if (input_string[0].equals("delete")) {
+                    int task_num = Integer.parseInt(input_string[1]);
+                    int new_total_tasks = tasks.size() - 1;
+                    Task t = tasks.get(task_num - 1);
+                    tasks.remove(task_num - 1);
+                    printDelete(t);
                 } else {
                     try {
                         throw new DukeException("    ____________________________________________________________\n" +

@@ -125,7 +125,7 @@ public class Duke {
             System.out.println("     Got it. I've added this task:");
             System.out.println("     " + t);
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
-            drawline();
+            drawline(); 
         }
     }
     public static void deadline(ArrayList<Task>list,String s) throws ErrorException{

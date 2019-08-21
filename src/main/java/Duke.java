@@ -27,12 +27,12 @@ public class Duke {
             try{
                 switch (commands[0]) {
                     case "done":
+                        if( commands.length > 2){
+                            throw new DukeException("☹ OOPS!!! Your command is in the wrong format.");
+                        }
                         int completedTaskNum = Integer.parseInt(commands[1]);
                         if( completedTaskNum <= 0 || completedTaskNum > toDoList.size()){
                             throw new DukeException("Task Number is out of bounds");
-                        }
-                        if( commands.length > 2){
-                            throw new DukeException("☹ OOPS!!! Your command is in the wrong format.");
                         }
                         toDoList.set(completedTaskNum - 1, toDoList.get(completedTaskNum - 1).markAsDone());
                         printLine();
@@ -67,7 +67,25 @@ public class Duke {
                         printIndentedMsg("Now you have " + toDoList.size() + ((toDoList.size() <= 1) ? " task" : " tasks") + " in the list.");
                         printLine();
                         break;
+                    case "delete":
+                        if( commands.length > 2){
+                            throw new DukeException("☹ OOPS!!! Your command is in the wrong format.");
+                        }
+                        int deleteTaskNum = Integer.parseInt(commands[1]);
+                        if( deleteTaskNum <= 0 || deleteTaskNum > toDoList.size()){
+                            throw new DukeException("Task Number is out of bounds");
+                        }
+                        Task removedTask = toDoList.remove(deleteTaskNum - 1);
+                        printLine();
+                        printIndentedMsg("Noted. I've removed this task:");
+                        printIndentedMsg(removedTask.getTaskDescription());
+                        printIndentedMsg("Now you have " + toDoList.size() + ((toDoList.size() <= 1) ? " task" : " tasks") + " in the list.");
+                        printLine();
+                        break;
                     case "list":
+                        if( commands.length > 1){
+                            throw new DukeException("☹ OOPS!!! Your command is in the wrong format.");
+                        }
                         printLine();
                         int startNumber = 1;
                         printIndentedMsg("Here are the tasks in your list:");

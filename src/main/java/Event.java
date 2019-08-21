@@ -34,6 +34,6 @@ public class Event extends Task{
 
     public String getTaskStatus(){
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()
-                + "(at: " + this.getEventDate() + ")" ); 
+                + "(at:" + this.getEventDate() + ")" ); 
     }
 }

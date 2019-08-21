@@ -15,8 +15,19 @@ public class Duke {
 
             String userInput = sc.nextLine();
             String[] words = userInput.split(" ");
-
             String firstWord = words[0];
+            //remove first word
+            String line = "";
+            for (int i = 1; i < words.length; i++) {
+                if (i == words.length - 1) {
+                    line += words[i];
+                } else {
+                    line += words[i] + " ";
+                }
+            }
+            //spli
+
+
             if (userInput.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -39,21 +50,12 @@ public class Duke {
 
                 }
             } else if (firstWord.equals("todo")){
-                Todo task = new Todo(userInput);
+
+                Todo task = new Todo(line);
                 list.add(task);
                 System.out.println("Got it. I've added this task: \n"
                         + task.toString() + "\n Now you have " + list.size() + " tasks in the list");
             } else if (firstWord.equals("deadline")) {
-                //form the sentence without the first word
-                String line = "";
-                for (int i = 1; i < words.length; i++) {
-                    if (i == words.length - 1) {
-                        line += words[i];
-                    } else {
-                        line += words[i] + " ";
-                    }
-
-                }
                 //split the string by /
                 String[] halves = line.split("/by");
                 String event = halves[0];
@@ -63,16 +65,6 @@ public class Duke {
                 System.out.println("Got it. I've added this task: \n"
                         + deadline.toString() + "\n Now you have " + list.size() + " tasks in the list");
             } else if (firstWord.equals("event")) {
-                //form the sentence without the first word
-                String line = "";
-                for (int i = 1; i < words.length; i++) {
-                    if (i == words.length - 1) {
-                        line += words[i];
-                    } else {
-                        line += words[i] + " ";
-                    }
-
-                }
                 //split the string by /
                 String[] halves = line.split("/at");
                 String event = halves[0];

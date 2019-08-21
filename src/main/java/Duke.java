@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void printLine() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("   ____________________________________________________________");
     }
 
     public static void printGreet() {

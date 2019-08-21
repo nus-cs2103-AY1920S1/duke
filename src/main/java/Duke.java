@@ -39,10 +39,22 @@ public class Duke {
                     System.out.println(formatText("But this task has already been done!"));
                     System.out.println(horizontalLine);
                 }
+                catch (IndexOutOfBoundsException error3){
+                    System.out.println(horizontalLine);
+                    System.out.println(formatText("No such task dude"));
+                    System.out.println(horizontalLine);
+                }
             }
 
             else if (tokens[0].equals("delete")){
-                deleteTask(Integer.parseInt(tokens[1]));
+                try {
+                    deleteTask(Integer.parseInt(tokens[1]));
+                }
+                catch (IndexOutOfBoundsException error){
+                    System.out.println(horizontalLine);
+                    System.out.println(formatText("No such task dude"));
+                    System.out.println(horizontalLine);
+                }
             }
 
             else if (tokens[0].equals("todo")){
@@ -88,7 +100,7 @@ public class Duke {
                 }
                 catch (MissingFormatArgumentException error2){
                     System.out.println(horizontalLine);
-                    System.out.println(formatText("The event must have a location!"));
+                    System.out.println(formatText("The event must have a date!"));
                     System.out.println(horizontalLine);
                 }
             }
@@ -99,6 +111,8 @@ public class Duke {
         }
         exitMessage();
     }
+
+
 
     private static void addToDo(String task){
         System.out.println(horizontalLine);
@@ -129,7 +143,7 @@ public class Duke {
         System.out.println(horizontalLine);
     }
 
-    private static void doneTask(int index) throws IllegalArgumentException{
+    private static void doneTask(int index) throws IllegalArgumentException, IndexOutOfBoundsException{
         if (taskList.get(index-1).getIsDone()){
             throw new IllegalArgumentException("Task has already been done");
         }
@@ -140,8 +154,13 @@ public class Duke {
         System.out.println(horizontalLine);
     }
 
-    private static void deleteTask(int index){
-    
+    private static void deleteTask(int index) throws IndexOutOfBoundsException{
+        taskList.remove(index - 1);
+        System.out.println(horizontalLine);
+        System.out.println(formatText("Noted. I've removed this task:"));
+        System.out.println(formatText("  " + taskList.get(index-1)));
+        System.out.println(formatText("Now you have " + taskList.size() + " tasks in the list."));
+        System.out.println(horizontalLine);
     }
 
     private static void printList(){

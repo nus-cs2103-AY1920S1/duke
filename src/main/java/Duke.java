@@ -20,11 +20,18 @@ public class Duke {
     }
 
     public static void printList() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n" +
+                "     Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             int list_num = i + 1;
             Task task = tasks.get(i);
-            System.out.println("    " + list_num + ".[" + task.getStatusIcon() + "] " + task.toString());
+            if (task.getType().equals("todo")) {
+                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString());
+            } else if (task.getType().equals("event")) {
+                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString() + "(at: " + task.getDate() + ")");
+            } else {
+                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString() + "(by: " + task.getDate() + ")");
+            }
         }
         System.out.println("    ____________________________________________________________\n");
     }
@@ -38,8 +45,32 @@ public class Duke {
     public static void printDone(String task) {
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done: \n" +
-                "       [" + "\u2713" + "] " + task + '\n' +
+                "       [" + '+' + "] " + task + '\n' +
                 "    ____________________________________________________________\n");
+    }
+
+    public static void printTodo(Todo t) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     Got it. I've added this task: \n" +
+                "       [T]" + "[ ]" + ' ' + t.toString() + '\n' +
+                "     Now you have " + tasks.size() + " tasks in the list.\n" +
+                "    ____________________________________________________________");
+    }
+
+    public static void printDeadline(Deadline d) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     Got it. I've added this task: \n" +
+                "       [D][ ] " + d.toString() + "(by: " + d.getDate() + ")\n" +
+                "     Now you have " + tasks.size() + " tasks in the list.\n" +
+                "    ____________________________________________________________");
+    }
+
+    public static void printEvent(Event e) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     Got it. I've added this task: \n" +
+                "       [E][ ] " + e.toString() + "(at: " + e.getDate() + ")\n" +
+                "     Now you have " + tasks.size() + " tasks in the list.\n" +
+                "    ____________________________________________________________");
     }
 
     public static void main(String[] args) {
@@ -59,6 +90,25 @@ public class Duke {
                 Task task = tasks.get(task_num);
                 task.setDone();
                 printDone(task.toString());
+            } else if (input_string[0].equals("todo")) {
+                String task_name = (user_input.split(" ", 2))[1];
+                Todo t = new Todo(task_name);
+                tasks.add(t);
+                printTodo(t);
+            } else if (input_string[0].equals("deadline")) {
+                String[] separate_task_date = user_input.split("/");
+                String task_name = (separate_task_date[0].split(" ", 2))[1];
+                String date = (separate_task_date[1].split(" ", 2))[1];
+                Deadline d = new Deadline(task_name, date);
+                tasks.add(d);
+                printDeadline(d);
+            } else if (input_string[0].equals("event")) {
+                String[] separate_task_date = user_input.split("/");
+                String task_name = (separate_task_date[0].split(" ", 2))[1];
+                String date = (separate_task_date[1].split(" ", 2))[1];
+                Event e = new Event(task_name, date);
+                tasks.add(e);
+                printEvent(e);
             } else {
                 Task task = new Task(user_input);
                 tasks.add(task);

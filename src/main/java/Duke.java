@@ -30,11 +30,30 @@ public class Duke {
                     System.out.println(taskList[taskNumber-1]);
                 }
             }
-            else {
+            else if (command.length() >= 4 && command.substring(0,4).equals("todo")){
                 numCommands += 1;
-                taskList[numCommands-1] = new Task(command);
-                System.out.println("added: " + command);
+                taskList[numCommands-1] = new Todo(command.substring(5));
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(taskList[numCommands-1]);
+                System.out.println("Now you have "  + numCommands + " tasks in the list.");
             }
+            else if (command.length() >= 8 && command.substring(0,8).equals("deadline")){
+                numCommands += 1;
+                String[] commandLine = command.substring(9).split(" /by ");
+                taskList[numCommands-1] = new Deadline(commandLine[0], commandLine[1]);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(taskList[numCommands-1]);
+                System.out.println("Now you have "  + numCommands + " tasks in the list.");
+            }
+            else if (command.length() >= 5 && command.substring(0,5).equals("event")){
+                numCommands += 1;
+                String[] commandLine = command.substring(6).split(" /at ");
+                taskList[numCommands-1] = new Event(commandLine[0], commandLine[1]);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(taskList[numCommands-1]);
+                System.out.println("Now you have "  + numCommands + " tasks in the list.");
+            }
+
             command = scanner.nextLine();
         }
 

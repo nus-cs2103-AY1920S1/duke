@@ -66,10 +66,23 @@ public class Duke {
      * @param text String text to be added.
      */
     private static void addTask(String description) {
-        Task task = TaskFactory.create(description);
-        taskList.addTask(task);
-        String response = String.format("%s\n%s\n%s\n", line, task.message(), line);
-        System.out.println(response);
+        String message = null;
+        try {
+            Task task = TaskFactory.create(description);
+            taskList.addTask(task);
+            message = task.message();
+        } catch (ToDoTaskException e) {
+            message = "     OOPS!!! The description of a todo cannot be empty.";
+        } catch (DeadlineTaskException e) {
+            message = "     OOPS!!! The description of a deadline cannot be empty.";
+        } catch (EventTaskException e) {
+            message = "     OOPS!!! The description of a event cannot be empty.";
+        } catch (TaskException e) {
+            message = "     OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } finally {
+            String response = String.format("%s\n%s\n%s\n", line, message, line);
+            System.out.println(response);
+        }
     }
 
     /**

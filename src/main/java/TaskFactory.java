@@ -8,7 +8,7 @@ public class TaskFactory {
      * @param description String description of the task to be created.
      * @return Task Object.
      */
-    public static Task create(String description) {
+    public static Task create(String description) throws TaskException, ToDoTaskException, DeadlineTaskException, EventTaskException {
         String[] tokens = description.split("\\s+");
         switch (tokens[0]) {
             case "todo":
@@ -18,7 +18,7 @@ public class TaskFactory {
             case "event":
                 return createEvent(description);
             default:
-                return createTask(description);
+                throw new TaskException();
         }
     }
 
@@ -27,8 +27,12 @@ public class TaskFactory {
      * @param description String description for task.
      * @return Task object.
      */
-    private static Task createToDo(String description) {
-        String message = description.trim().split("todo")[1];
+    private static Task createToDo(String description) throws ToDoTaskException {
+        String[] tokens = description.trim().split("todo");
+        if (tokens.length <= 1) {
+            throw new ToDoTaskException();
+        }
+        String message = tokens[1];
         return new ToDo(message.trim());
     }
 
@@ -37,8 +41,12 @@ public class TaskFactory {
      * @param description String description for task.
      * @return Task Object.
      */
-    private static Task createDeadline(String description) {
-        String message = description.trim().split("deadline")[1];
+    private static Task createDeadline(String description) throws DeadlineTaskException {
+        String[] tokens = description.trim().split("deadline");
+        if (tokens.length <= 1) {
+            throw new DeadlineTaskException();
+        }
+        String message = tokens[1];
         String[] divide = message.split("/by");
         return new Deadline(divide[0].trim(), divide[1].trim());
     }
@@ -48,8 +56,12 @@ public class TaskFactory {
      * @param description String description for task.
      * @return Task Object.
      */
-    private static Task createEvent(String description) {
-        String message = description.trim().split("event")[1];
+    private static Task createEvent(String description) throws EventTaskException {
+        String[] tokens = description.trim().split("event");
+        if (tokens.length <= 1) {
+            throw new EventTaskException();
+        }
+        String message = tokens[1];
         String[] divide = message.split("/at");
         return new Event(divide[0].trim(), divide[1].trim());
     }

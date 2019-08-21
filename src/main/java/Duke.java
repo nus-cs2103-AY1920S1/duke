@@ -10,24 +10,23 @@ public class Duke {
         int x = 0;
 
         while (!input.equals("bye")) {
-            if (input.startsWith("done")) {
-                int index = Integer.parseInt(input.substring(5));
-                data[index-1].markAsDone();
-                printDone(data[index-1]);
-                input = sc.nextLine();
-            } else {
-                switch (input) {
-                    case "list":
-                        printList(data);
-                        input = sc.nextLine();
-                        break;
-                    default:
-                        data[x] = new Task(input);
-                        x++;
-                        echo("Added: " + input);
-                        input = sc.nextLine();
-                        break;
-                }
+            switch (input.split(" ")[0]) {
+                case "list":
+                    printList(data);
+                    input = sc.nextLine();
+                    break;
+                case "done":
+                    int index = Integer.parseInt(input.substring(5));
+                    data[index-1].markAsDone();
+                    printDone(data[index-1]);
+                    input = sc.nextLine();
+                    break;
+                default:
+                    data[x] = new Task(input);
+                    x++;
+                    echo("Added: " + input);
+                    input = sc.nextLine();
+                    break;
             }
         }
 
@@ -55,6 +54,7 @@ public class Duke {
     public static void printList(Object[] array) {
         String indentedline = "    ____________________________________________________________";
         System.out.println(indentedline);
+        System.out.println("     Here are the tasks in your list:");
         int y = 0;
         while (array[y] != null) {
             System.out.println("     " + (y+1) + ". " + array[y]);

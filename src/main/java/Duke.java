@@ -12,24 +12,22 @@ public class Duke {
         Task[] taskList = new Task[100]; //fixed-size array
         int lastTaskIndex = 0;
         while (true){
-            /*
             String command = scanner.nextLine();
             String[] tokens = command.split(" ");
-            */
-            if (scanner.hasNext("bye")){
-                scanner.next();
+
+            if (tokens[0].equals("bye")){
                 break;
             }
-            else if (scanner.hasNext("list")){
-                scanner.next();
+
+            else if (tokens[0].equals("list")){
                 printList(taskList, lastTaskIndex);
             }
-            else if (scanner.hasNext("done")){
-                scanner.next();
-                doneTask(taskList, scanner.nextInt());
+
+            else if (tokens[0].equals("done")){
+                doneTask(taskList, Integer.valueOf(tokens[1]));
             }
+
             else {
-                String command = scanner.nextLine();
                 System.out.println(horizontalLine);
                 System.out.println(formatText("added: " + command));
                 System.out.println(horizontalLine);

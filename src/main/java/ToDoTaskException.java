@@ -4,6 +4,21 @@
 public class ToDoTaskException extends TaskException {
     /**
      * Constructor.
+     */
+    public ToDoTaskException() {
+        super();
+    }
+
+    /**
+     * Constructor.
+     * @param errorMessage Message of error.
+     */
+    public ToDoTaskException(String errorMessage) {
+        super(errorMessage);
+    }
+
+    /**
+     * Constructor.
      * @param errorMessage Message of error.
      * @param err Root cause of exception.
      */

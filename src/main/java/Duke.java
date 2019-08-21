@@ -1,6 +1,32 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<String> texts = new ArrayList<String>();
+
+    private static void list() {
+        for (int i = 0; i < texts.size(); i++) {
+            System.out.println((i + 1) + ". " + texts.get(i));
+        }
+    }
+
+    private static void output(Scanner sc) {
+        while (sc.hasNextLine()) {
+            String cmmd = sc.nextLine();
+            if (cmmd.equals("bye")) {
+                break;
+            }
+            else if (cmmd.equals("list")) {
+                list();
+            }
+            else {
+                System.out.println("added: " + cmmd);
+                texts.add(cmmd);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,13 +38,8 @@ public class Duke {
 
         System.out.println(opening);
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String cmmd = sc.next();
-            if (cmmd.equals("bye")) {
-                System.out.println(closing);
-                System.exit(0);
-            }
-            System.out.println(cmmd);
-        }
+        output(sc);
+        System.out.println(closing);
+        System.exit(0);
     }
 }

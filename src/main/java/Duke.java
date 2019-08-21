@@ -29,17 +29,17 @@ public class Duke {
                 System.out.println("    _____________________________________\n");
                 sc.nextLine();
             } else if (command.equals("todo")) {
-                Task newTodo = new Todo(sc.nextLine());
+                Task newTodo = new Todo(sc.nextLine().trim());
                 list.add(newTodo);
                 printAddTask(newTodo);
             } else if (command.equals("deadline")) {
                 String[] statement = sc.nextLine().split("/by");
-                Task newDeadline = new Deadline(statement[0], statement[1]);
+                Task newDeadline = new Deadline(statement[0].trim(), statement[1].trim());
                 list.add(newDeadline);
                 printAddTask(newDeadline);
             } else if (command.equals("event")) {
                 String[] statement = sc.nextLine().split("/at");
-                Task newEvent = new Event(statement[0], statement[1]);
+                Task newEvent = new Event(statement[0].trim(), statement[1].trim());
                 list.add(newEvent);
                 printAddTask(newEvent);
             }

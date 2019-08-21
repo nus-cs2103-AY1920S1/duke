@@ -116,18 +116,20 @@ public class Duke {
                 README:
                 ECHO FUNCTION HAS BEEN REPLACED WITH COMMAND ECHO,
                 TO FACILITATE COMMANDS THAT ARE NOT RECOGNIZABLE.
-                */
-                else if (readInput.toLowerCase().equals("echo") && sc.hasNext()) {
+                 */
+                else if (readInput.toLowerCase().equals("echo")) {
                     // Read any remaining lines
-                    readInput = readInput + sc.nextLine();
-                    System.out.println(sc + " Helo");
+                    String echoInput = sc.nextLine().trim();
 
+                    if(echoInput.equals("")){
+                        throw new EmptyCommandField("echo");
+                    }
 
                     // Store content
-                    list.add(new Task(readInput, false));
+                    list.add(new Task(echoInput, false));
                     listCounter++;
 
-                    String processedInput = Duke.processText(readInput);
+                    String processedInput = Duke.processText(echoInput);
                     System.out.println(processedInput);
                 }
 
@@ -141,7 +143,7 @@ public class Duke {
                 System.out.println(processText("\u263A OOPS!!! I'm sorry, but I don't know what that means :-("));
             }
             catch (EmptyCommandField e){
-                System.out.println(processText("\u263A The description of a " + e.getMessage() + " cannot be empty."));
+                System.out.println(processText("\u263A The description of " + e.getMessage() + " cannot be empty."));
             }
             catch (EmptyListException l){
                 System.out.println(processText("\u263A List is empty!"));

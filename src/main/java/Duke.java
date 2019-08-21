@@ -9,33 +9,50 @@ public class Duke {
         startMessage();
         //import scanner + logic
         Scanner scanner = new Scanner(System.in);
-        String[] taskList = new String[100]; //fixed-size array
+        Task[] taskList = new Task[100]; //fixed-size array
         int lastTaskIndex = 0;
         while (true){
+            /*
             String command = scanner.nextLine();
-            if (command.equals("bye")){
+            String[] tokens = command.split(" ");
+            */
+            if (scanner.hasNext("bye")){
+                scanner.next();
                 break;
             }
-            else if (command.equals("list")){
+            else if (scanner.hasNext("list")){
+                scanner.next();
                 printList(taskList, lastTaskIndex);
-                continue;
+            }
+            else if (scanner.hasNext("done")){
+                scanner.next();
+                doneTask(taskList, scanner.nextInt());
             }
             else {
+                String command = scanner.nextLine();
                 System.out.println(horizontalLine);
                 System.out.println(formatText("added: " + command));
                 System.out.println(horizontalLine);
-                taskList[lastTaskIndex] = command;
+                taskList[lastTaskIndex] = new Task(command);
                 lastTaskIndex++;
             }
         }
         exitMessage();
-
     }
 
-    private static void printList(String[] list , int index){
+    private static void doneTask(Task[] list, int index){
+        list[index - 1].toggleDone();
         System.out.println(horizontalLine);
+        System.out.println(formatText("Nice! I've marked this task as done:"));
+        System.out.println(formatText("  [" + list[index - 1].getStatusIcon() + "] " + list[index - 1]));
+        System.out.println(horizontalLine);
+    }
+
+    private static void printList(Task[] list , int index){
+        System.out.println(horizontalLine);
+        System.out.println(formatText("Here are the tasks in your list:"));
         for (int i = 1; i <= index; i++){
-            System.out.println(formatText(i + ". " + list[i-1]));
+            System.out.println(formatText(i + ".[" + list[i-1].getStatusIcon() + "] " + list[i-1]));
         }
         System.out.println(horizontalLine);
     }
@@ -55,4 +72,5 @@ public class Duke {
         System.out.println(formatText(exitMessage));
         System.out.println(horizontalLine);
     }
+
 }

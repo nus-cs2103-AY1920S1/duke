@@ -26,7 +26,7 @@ Here are the tasks in your list:
 2.[D][✓] return book (by: June 6th)
 3.[E][✘] project meeting (at: Aug 6th 2-4pm)
 
-☹ OOPS!!! Task No.4 is not present in the list. Please enter a valid task ID.
+☹ OOPS!!! Task No.4 is not present in your list. Please enter a valid task ID.
 
 Noted. I've removed this task:
   [D][✓] return book (by: June 6th)
@@ -36,7 +36,7 @@ Here are the tasks in your list:
 1.[T][✘] read book
 2.[E][✘] project meeting (at: Aug 6th 2-4pm)
 
-☹ OOPS!!! Task No.4 is not present in the list. Please enter a valid task ID.
+☹ OOPS!!! Task No.4 is not present in your list. Please enter a valid task ID.
 
 ☹ OOPS!!! The description of a todo cannot be empty.
 

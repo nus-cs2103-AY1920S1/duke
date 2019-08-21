@@ -28,10 +28,22 @@ public class Duke {
                         System.out.println(counter + ". " + task);
                         counter++;
                     }
+//                } else if (word.startsWith("delete ")) {
+//                    String[] arr = word.split(" ");
+//                    int i = Integer.parseInt(arr[1]);
+//                    if (i > lst.size()) {
+//                        throw new DukeException("Number can't be bigger than list size.");
+//                    } else if (i < 1) {
+//                        throw new DukeException("Number must be greater than 0");
+//                    }
+//                    Task task = lst.remove(i - 1);
+//                    System.out.println("Noted. I've removed this task: : ");
+//                    System.out.println("\t" + task);
+//                    System.out.println("Now you have " +  lst.size()  +  " tasks in the list.");
                 } else if (word.startsWith("done ")) {
                     String[] arr = word.split(" ");
                     int i = Integer.parseInt(arr[1]);
-                    if (i >= lst.size()) {
+                    if (i > lst.size()) {
                         throw new DukeException("Number can't be bigger than list size.");
                     } else if (i < 1) {
                         throw new DukeException("Number must be greater than 0");

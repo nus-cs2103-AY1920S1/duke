@@ -52,5 +52,18 @@ public class TaskList {
                 + "\t  " + task);
     }
 
-
+    /**
+     * Delete a task in the list based on its ID.
+     * @param id the ID of the task that is to be deleted.
+     * @throws DukeException Exception thrown if the ID input is invalid.
+     */
+    protected void delete(int id) throws DukeException {
+        if (id > listItems.size() || id <= 0) {
+            throw new DukeException("The ID that you have entered is not a valid task ID");
+        }
+        Task task = listItems.remove(id - 1);
+        ps.println("\tNoted. I've removed this task:\n"
+                + "\t  " + task + "\n"
+                + "Now you have " + listItems.size() + " tasks in the list.");
+    }
 }

@@ -50,6 +50,14 @@ public class Duke {
             }
             int id = Integer.parseInt(commandArray[1]);
             taskList.markAsDone(id);
+        } else if (commandArray[0].equals("delete")) {
+            if (commandArray.length == 1) {
+                throw new DukeException("Please specify a task ID to delete!");
+            } else if (!commandArray[1].matches("\\d+")) {
+                throw new DukeException("The ID of the task must be an integer!");
+            }
+            int id = Integer.parseInt(commandArray[1]);
+            taskList.delete(id);
         } else if (isValidTaskType(commandArray[0])) {
             if (command.equals("todo")) {
                 throw new DukeException("The description of a todo cannot be empty.");

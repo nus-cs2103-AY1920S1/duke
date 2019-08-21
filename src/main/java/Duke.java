@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.Iterator;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,19 +14,43 @@ public class Duke {
                 + "  |____/ \\__,_|_|\\_\\___|\n"
                 + startMessage
                 + dividerLine;
+
+        LinkedList<String> tasks = new LinkedList<>();
+
         System.out.print(dividerLine + "  Hello from\n" + logo);
 
         //Take in input
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         //Check if bye
-        while (!input.equals("bye")){
-            // Else echo input
-            System.out.print(dividerLine
-                    + "  "
-                    + input
-                    + "\n"
-                    + dividerLine);
+        while (!input.equals("bye")) {
+            //If list print all tasks
+            if (input.equals("list")) {
+                System.out.print(dividerLine);
+
+                //Print each task
+                Iterator<String> tasksIterator = tasks.iterator();
+
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.print("  "
+                            + (i+1)
+                            + "."
+                            + tasksIterator.next()
+                            + "\n");
+                }
+
+                System.out.print(dividerLine);
+            }
+            //Else add input to array list
+            //and echo that input is added
+            else {
+                tasks.add(input);
+                System.out.print(dividerLine
+                        + "  added "
+                        + input
+                        + "\n"
+                        + dividerLine);
+            }
 
             input = sc.nextLine();
         }

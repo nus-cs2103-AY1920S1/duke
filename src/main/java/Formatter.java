@@ -6,4 +6,5 @@ public class Formatter {
             + LINE;
     public static final String DONE = "Nice! I've marked this task as done: \n";
     public static final String GOT = "Got it. I've added this task: \n";
+    public static final String LIST = "Here are the tasks in your list:\n";
 }

@@ -26,21 +26,21 @@ public class Listener {
                 Task todoTask = new Todo(sc.nextLine());
                 this.sheet.add(todoTask);
             }else if (command.equals("deadline")) {
-                String next = sc.next();
+                String next;
                 String description = "";
-                while (!next.equals("/")) {
-                    description += next;
+                while (!(next = sc.next()).equals("/by")) {
+                    description += " " + next;
                 }
-                String by = sc.nextLine();
+                String by = sc.nextLine().trim();
                 Task dlTask = new Deadline(description, by);
                 this.sheet.add(dlTask);
             } else if (command.equals("event")){
-                String next = sc.next();
+                String next;
                 String description = "";
-                while (!next.equals("/")) {
-                    description += next;
+                while (!(next = sc.next()).equals("/at")) {
+                    description += " " + next;
                 }
-                String span = sc.nextLine();
+                String span = sc.nextLine().trim();
                 Task eventTask = new Event(description, span);
                 this.sheet.add(eventTask);
             } else {}

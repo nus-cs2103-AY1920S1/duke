@@ -7,14 +7,14 @@ public class Sheet {
 
     public void add(Task task) {
         this.list.add(task);
-        System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOT + "  "
-                + task.toString() + "\n" + Formatter.LINE);
+        System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOT + Formatter.INDENT + "  "
+                + task.toString() + "\n");
         this.count();
-        System.out.println(Formatter.LINE);
+        System.out.printf(Formatter.LINE);
     }
 
     private void count() {
-        System.out.printf("Now you have %d tasks in the list.\n", list.size());
+        System.out.printf(Formatter.INDENT + "Now you have %d tasks in the list.\n", list.size());
     }
 
     public Task get(int index) {
@@ -27,12 +27,12 @@ public class Sheet {
     }
 
     public void showList() {
-        System.out.print(Formatter.LINE);
+        System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.LIST);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(Formatter.INDENT + (i + 1) + ". " +
                     list.get(i).toString());
         }
-        System.out.println(Formatter.LINE);
+        System.out.printf(Formatter.LINE);
     }
 
 }

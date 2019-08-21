@@ -6,6 +6,15 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+    public Deadline(String description, String by, boolean done) {
+        super(description, done);
+        this.by = by;
+    }
+
+    @Override
+    public Deadline finish() {
+        return new Deadline(description,by,true);
+    }
 
     @Override
     public String toString() {

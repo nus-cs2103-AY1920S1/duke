@@ -1,16 +1,26 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 class Texts {
-    private ArrayList<String> Texts = new ArrayList<>();
+    private LinkedList<Task> texts = new LinkedList<>();
     private int counter = 0;
-    public void add(String text) {
+    public void add(String text, String status) {
         counter++;
-        Texts.add(counter + ". " + text);
+        Task task = new Task(text, counter, status);
+        texts.add(task);
     }
     public void print() {
-        for (String t : Texts) {
-            System.out.println(t);
+        for (Task t : texts) {
+            System.out.println(t.getStatus() + t.getIndex() + t);
         }
 
+    }
+    public Task get(int n) {
+        return texts.get(n);
+    }
+    public Task getLast() {
+        return texts.getLast();
+    }
+    public int getNumber() {
+        return texts.size();
     }
 }

@@ -84,7 +84,7 @@ public class Duke {
                                     throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be deadline description /by time.");
                                 } else if(arr[1].trim().matches("/by.*")) {
                                     throw new FormatException("☹ oops!!! you forget to add description for the " + arr[0] + " command.");
-                                } else if(arr[1].trim().matches(".+ /by")) {
+                                } else if(arr[1].trim().matches(".*/by")) {
                                     throw new FormatException("☹ oops!!! you forget to add time for the " + arr[0] + " command.");
                                 }
                                 t = new Deadline(ddl[0].trim(), ddl[1].trim());
@@ -94,7 +94,7 @@ public class Duke {
                                     throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be event description /at time.");
                                 } else if(arr[1].trim().matches("/at.*")) {
                                     throw new FormatException("☹ oops!!! you forget to add description for the " + arr[0] + " command.");
-                                } else if(arr[1].trim().matches(".+ /at")) {
+                                } else if(arr[1].trim().matches(".*/at")) {
                                     throw new FormatException("☹ oops!!! you forget to add time for the " + arr[0] + " command.");
                                 }
                                 t = new Event(evt[0].trim(), evt[1].trim());

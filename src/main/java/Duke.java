@@ -74,6 +74,15 @@ public class Duke {
                     } else {
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     }
+                } else if (taskType.equals("delete")) {
+                    int deleteIndex = Integer.valueOf(splitString[1]) - 1;
+                    Task removed = tasks.remove(deleteIndex);
+                    System.out.println("Noted. I've removed this task:\n  " + removed);
+                    if (tasks.size() == 1) {
+                        System.out.println("Now you have " + tasks.size() + " task in the list.");
+                    } else {
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    }
                 } else {
                     throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

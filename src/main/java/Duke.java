@@ -22,6 +22,8 @@ public class Duke {
                     if (sentence[0].equals("done")) {
                         int completedTaskIndex = Integer.parseInt(sentence[1]);
                         taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
+                    } else {
+                        throw new UnknownTaskTypeException();
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Which task on the list have you completed? (Eg 'done 2')");
@@ -29,6 +31,8 @@ public class Duke {
                     System.out.println("OOPS!!! That task is not on the list, please check the list again by calling 'list'.");
                 } catch (NumberFormatException e) {
                     System.out.println("OOPS!!! Wrong format. Please key in a valid number (Eg 'done 2')");
+                } catch (UnknownTaskTypeException e) {
+                    System.out.println(e.getMessage());
                 }
 
                 command = input.nextLine().trim();

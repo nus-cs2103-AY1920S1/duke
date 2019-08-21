@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private static final int BORDER_LENGTH = 60;
+    private static final int BORDER_LENGTH = 80;
     private static final ArrayList<Task> storedTasks = new ArrayList<>();
 
     /**
@@ -64,6 +64,9 @@ public class Duke {
             case "done":
                 setTaskAsDone(input);
                 break;
+            case "delete":
+                deleteStoredTask(input);
+                break;
             case "todo":
                 storeTodo(input);
                 break;
@@ -85,12 +88,38 @@ public class Duke {
      */
     private static void listStoredTasks() {
         if (storedTasks.size() == 0) {
-            System.out.println("\tNo stored tasks.");
+            System.out.println("\tYou have 0 tasks in the list.");
         } else {
             System.out.println("\tHere are the tasks in your list:");
             for (int i = 0; i < storedTasks.size(); i++) {
                 System.out.format("\t%d.%s\n", i + 1, storedTasks.get(i));
             }
+        }
+    }
+
+    /**
+     * Deletes the stored task that corresponds to the specified input.
+     * @param input The specified input.
+     */
+    private static void deleteStoredTask(String input) {
+        try {
+            String[] inputWords = input.split(" ");
+            if (inputWords.length > 2) {
+                throw new DukeException();
+            }
+            int taskNumber = Integer.parseInt(inputWords[1]);
+            Task task = storedTasks.remove(taskNumber - 1);
+            System.out.println("\tNoted. I've removed this task: ");
+            System.out.println("\t\t" + task);
+            System.out.format("\tNow you have %d task(s) in the list.\n",
+                    storedTasks.size());
+        } catch (NumberFormatException
+                | ArrayIndexOutOfBoundsException
+                | DukeException e) {
+            System.out.println("\tdelete command format: delete <number>");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\tPlease enter a valid task number for the delete command.\n"
+                    + "\tThe delete command will not work if there are 0 stored tasks.");
         }
     }
 
@@ -142,7 +171,7 @@ public class Duke {
         try {
             String description = input.substring(6);
             String[] taskInformation = description.split(" /at ");
-            storeTask(new Deadline(taskInformation[0], taskInformation[1]));
+            storeTask(new Event(taskInformation[0], taskInformation[1]));
         } catch (ArrayIndexOutOfBoundsException
                 | StringIndexOutOfBoundsException e) {
             System.out.println("\tevent command format: event <description> /at <dateAndTime>");
@@ -176,7 +205,8 @@ public class Duke {
                 | DukeException e) {
             System.out.println("\tdone command format: done <number>");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please enter a valid task number for the done command.");
+            System.out.println("\tPlease enter a valid task number for the done command.\n"
+                    + "\tThe done command will not work if there are 0 stored tasks.");
         }
     }
 

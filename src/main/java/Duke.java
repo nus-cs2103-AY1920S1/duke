@@ -10,17 +10,18 @@ public class Duke {
         TaskList taskList = new TaskList();
 
         while (!command.equals("bye")) {
+            // Block for 'list'
             if (command.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 taskList.printAllTasks();
                 command = input.nextLine().trim();
 
             } else if (command.contains("done")) {
-                // Check if the first word is done
                 String[] sentence = command.split(" ");
 
+                // Block for 'done'
                 try {
-                    if (sentence[0].equals("done")) {
+                    if (sentence[0].equals("done")) { // Check if the first word is done
                         int completedTaskIndex = Integer.parseInt(sentence[1]);
                         taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
                     } else {
@@ -41,6 +42,7 @@ public class Duke {
             } else if (command.contains("delete")) {
                 String[] sentence = command.split(" ");
 
+                // Block for 'delete'
                 try {
                     if (sentence[0].equals("delete")) {
                         int taskIndex = Integer.parseInt(sentence[1]);
@@ -65,6 +67,7 @@ public class Duke {
                 command = input.nextLine().trim();
 
             } else {
+                // Generate new task
                 try {
                     if (!command.isEmpty()) {
                         Task newTask = generateNewTask(command);
@@ -120,7 +123,8 @@ public class Duke {
             return newTask;
 
         } catch (StringIndexOutOfBoundsException rootError) {
-            // if task type is correct, then error is due to empty description.
+            // If task type is correct, the error is due to empty description
+            // else the task type is unknown
             if (task.equals("todo") | task.equals("deadline") | task.equals("event")) {
                 throw new EmptyDescriptionException(task, rootError);
             } else {

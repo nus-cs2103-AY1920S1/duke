@@ -10,8 +10,13 @@ public class UserInterface {
     private static final String MESSAGE_MARK_DONE = "Nice! I've marked this task as done:";
     private static final String MESSAGE_SHOW_TASK_LIST = "Here are the tasks in your list:";
     private static final String MESSAGE_SHOW_TASK_SIZE = "Now you have %1$s tasks in the list.";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT =
-            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public final String MESSAGE_INVALID_COMMAND_FORMAT = "I'm sorry, but I don't know what that means :-(";
+    public final String MESSAGE_INVALID_TODO_FORMAT = "The description of a todo cannot be empty.";
+    public final String MESSAGE_INVALID_DEADLINE_FORMAT =
+            "The description of a deadline must have /by and cannot be empty. E.g. deadline return book /by Sunday";
+    public final String MESSAGE_INVALID_EVENT_FORMAT =
+            "The description of a event must have /at and cannot be empty. E.g. event project meeting /at Mon 2-4pm";
+    public final String MESSAGE_INVALID_MARK_DONE_FORMAT = "Invalid task number. Task numbers are 1-based.";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -60,5 +65,9 @@ public class UserInterface {
 
     public void showTaskSize(TaskList taskList) {
         showToUser(String.format(MESSAGE_SHOW_TASK_SIZE, taskList.size()));
+    }
+
+    public void showExceptionMessage(String message) {
+        showToUser("☹ OOPS!!! " + message);
     }
 }

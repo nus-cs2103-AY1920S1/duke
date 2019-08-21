@@ -24,7 +24,7 @@ public class Duke {
             }
 
             else if (tokens[0].equals("done")){
-                doneTask(taskList, Integer.valueOf(tokens[1]));
+                doneTask(taskList, Integer.parseInt(tokens[1]));
             }
 
             else {

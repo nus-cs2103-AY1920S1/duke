@@ -1,9 +1,11 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         String input = "";
         Scanner sc = new Scanner(System.in);
+        MyList taskList = new TaskList();
 
         printLogo();
         printIntro();
@@ -15,10 +17,17 @@ public class Duke {
 
             input = sc.nextLine();
 
-            if (input.equals("bye")) {
-                printExitMsg();
-            } else {
-                printResponse(input);
+            switch (input) {
+                case "bye":
+                    printExitMsg();
+                    break;
+                case "list":
+                    printList(taskList);
+                    break;
+                default:
+                    taskList.add(input);
+                    printAddTask(input);
+                    break;
             }
         } while (!input.equals("bye"));
     }
@@ -61,10 +70,23 @@ public class Duke {
         printLine();
     }
 
-    private static void printResponse(String response) {
+    private static void printAddTask(String task) {
         printLine();
         printIndentation();
-        System.out.println(" " + response);
+        System.out.println(" added: " + task);
+        printLine();
+        System.out.println();
+    }
+
+    private static void printList(MyList myList) {
+        List<String> list = myList.getList();
+        int listNum = 1;
+        printLine();
+        for (String taskName : list) {
+            printIndentation();
+            System.out.println(" " + listNum + ". " + taskName);
+            listNum++;
+        }
         printLine();
         System.out.println();
     }

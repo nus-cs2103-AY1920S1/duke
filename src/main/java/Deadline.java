@@ -1,12 +1,14 @@
-public class Deadline extends Task {
-    protected String deadline;
+import java.time.LocalDateTime;
 
-    public Deadline(String description, String deadline) {
+public class Deadline extends Task {
+    protected LocalDateTime deadline;
+
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
-    public Deadline(String description, boolean isDone, String deadline) {
+    public Deadline(String description, boolean isDone, LocalDateTime deadline) {
         this(description, deadline);
         this.isDone = isDone;
     }
@@ -16,7 +18,7 @@ public class Deadline extends Task {
      *
      * @return Deadline for this task.
      */
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 }

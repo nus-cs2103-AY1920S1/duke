@@ -3,6 +3,8 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,6 +21,7 @@ public class TaskSerializer {
             "E", Event.class
     );
     private static final Map<Class<? extends Task>, String> EVENT_TYPE_TO_TOKEN;
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     static {
         // creates an immutable reverse mapping of EVENT_TOKEN_TO_TYPE and stores it as EVENT_TYPE_TO_TOKEN
@@ -106,14 +109,14 @@ public class TaskSerializer {
                 throw new MissingTokenParseError(String.format("Deadline task expected 4 values, received %d instead.", tokens.length));
             }
 
-            final String deadline = tokens[3];
+            final LocalDateTime deadline = parseDateTime(tokens[3]);
             task = new Deadline(taskDescription, isTaskDone, deadline);
         } else if (taskType == Event.class) {
             if (tokens.length != 4) {
                 throw new MissingTokenParseError(String.format("Event task expected 4 values, received %d instead.", tokens.length));
             }
 
-            final String dateTime = tokens[3];
+            final LocalDateTime dateTime = parseDateTime(tokens[3]);
             task = new Event(taskDescription, isTaskDone, dateTime);
         }
 
@@ -152,6 +155,10 @@ public class TaskSerializer {
         default:
             throw new DoneTokenParseError(String.format("\"%s\" is not a valid done value.", doneToken));
         }
+    }
+
+    private static LocalDateTime parseDateTime(String dateTimeToken) {
+        return LocalDateTime.parse(dateTimeToken, DATE_TIME_FORMATTER);
     }
 
     /**
@@ -199,10 +206,10 @@ public class TaskSerializer {
 
         if (t instanceof Deadline) {
             Deadline d = (Deadline) t;
-            output.add(d.getDeadline());
+            output.add(serializeDateTimeToToken(d.getDeadline()));
         } else if (t instanceof Event) {
             Event e = (Event) t;
-            output.add(e.getEventDateTime());
+            output.add(serializeDateTimeToToken(e.getEventDateTime()));
         }
 
         return output.toString();
@@ -233,6 +240,9 @@ public class TaskSerializer {
         return t.isDone() ? "1" : "0";
     }
 
+    private static String serializeDateTimeToToken(LocalDateTime dateTime) {
+        return dateTime.format(DATE_TIME_FORMATTER);
+    }
 }
 
 abstract class SerializerException extends DukeException {

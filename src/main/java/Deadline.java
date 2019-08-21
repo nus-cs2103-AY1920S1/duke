@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     /**
      * Creates a new Deadline with the given description and due date.

@@ -12,7 +12,7 @@ public class Event extends Task{
 
     @Override
     public String toString(){
-        String output = "[D][" + super.getStatusIcon() + "]" + " " + super.description + "(at: " + date_Time + ")";
+        String output = "[E][" + super.getStatusIcon() + "]" + " " + super.description + "(at: " + date_Time + ")";
         return output;
     }
 }

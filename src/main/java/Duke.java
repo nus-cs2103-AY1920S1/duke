@@ -66,6 +66,15 @@ public class Duke {
                         } finally {
                             break;
                         }
+                    case "delete":
+                        try {
+                            int index = Integer.parseInt(input.split(" ")[1]);
+                            tl.removeTask(index);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            prettyPrint("☹ OOPS!!! Please provide an index to delete.");
+                        } finally {
+                            break;
+                        }
                     default:
                         prettyPrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         break;
@@ -186,9 +195,17 @@ class TaskList {
     // mark task as done
     public void taskDone(int index) {
         this.tasks.get(index-1).markDone();
-        StringBuilder output = new StringBuilder("Nice! I've marked this task as done:\n");
-        output.append(String.format("     %s", this.tasks.get(index-1).toString()));
-        prettyPrint(output.toString());
+        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
+        sb.append(String.format("     %s", this.tasks.get(index-1).toString()));
+        prettyPrint(sb.toString());
+    }
+
+    // remove task from list
+    public void removeTask(int index) {
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n");
+        sb.append(String.format("     %s\n", this.tasks.remove(index-1).toString()));
+        sb.append(String.format("     Now you have %d tasks in the list.", this.tasks.size()));
+        prettyPrint(sb.toString());
     }
 
     // pretty print a string

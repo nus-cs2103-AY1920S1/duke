@@ -61,7 +61,7 @@ public class Duke {
                 //Printing
                 System.out.print(dividerLine);
 
-                System.out.print("  Nice! I've marked this task as done: \n");
+                System.out.print("  Nice! I've marked this task as done:\n");
                 System.out.print("    "
                         + modifiedTask
                         + "\n");

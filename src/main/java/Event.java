@@ -19,7 +19,7 @@ public class Event extends Task{
                 + this.getStatusIcon()
                 + "] "
                 + this.getDescription()
-                + "(by: "
+                + " (at: "
                 + this.getAtDateTime()
                 + ")";
         return str;

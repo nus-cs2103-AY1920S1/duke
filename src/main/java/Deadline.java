@@ -18,7 +18,7 @@ public class Deadline extends Task{
                 + this.getStatusIcon()
                 + "] "
                 + this.getDescription()
-                + "(by: "
+                + " (by: "
                 + this.getByDateTime()
                 + ")";
         return str;

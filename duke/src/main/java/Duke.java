@@ -30,10 +30,22 @@ public class Duke {
 					} else if (!scanner.hasNextInt()) {
 						throw new DukeException("Which task have you done?");
 					}
-						int index = scanner.nextInt(); // since scanner only took in the word done
+					int index = scanner.nextInt(); // since scanner only took in the word done
 					Task task = list.get(index - 1);
 					task.markAsDone();
 					System.out.println("Nice! I've marked this task as done:\n  " + task.toString());
+				} else if (next.equals("delete")) {
+					if (list.isEmpty()) {
+						scanner.nextLine(); // just to clear whatever's left on the line
+						throw new DukeException("You have no task to delete!");
+					} else if (!scanner.hasNextInt()) {
+						throw new DukeException("Which task do you want to delete?");
+					}
+					int index = scanner.nextInt(); // since scanner only took in the word done
+					Task task = list.get(index - 1);
+					list.remove(task);
+					System.out.println("Noted. I've removed this task:\n  " + task.toString());
+					System.out.println("Now you have " + list.size() + " tasks in the list.");
 				} else {
 					Task task = new Task("");
 					String desc = "";

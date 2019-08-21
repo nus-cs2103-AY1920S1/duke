@@ -54,7 +54,7 @@ public class Duke {
                 task = new DeadlineTask(cmd[0], cmd[1]);
             } else if (command.startsWith("event")) {
                 String[] cmd = command.substring(6).split(" /at ");
-                task = new DeadlineTask(cmd[0], cmd[1]);
+                task = new EventTask(cmd[0], cmd[1]);
             } else {
                 System.err.println("Incorrect command");
                 continue;

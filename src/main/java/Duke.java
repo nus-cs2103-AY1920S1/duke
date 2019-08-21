@@ -92,6 +92,13 @@ public class Duke {
                         itemDone.mardAsDone();
                         System.out.println("Nice! I've marked this task as done:\n  " + itemDone);
                         break;
+                    //delete
+                    case "delete":
+                        int numDelete = Integer.parseInt(cmdSc.next()) - 1;
+                        Task itemDelete = tasks.remove(numDelete);
+                        System.out.println("Noted. I've removed the task:\n  " + itemDelete);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        break;
 
                     default:
                         try {

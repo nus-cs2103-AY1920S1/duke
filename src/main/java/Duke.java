@@ -21,15 +21,19 @@ public class Duke {
      *                    4. "todo [description]"
      *                    5. "deadline [description] /by [time]"
      *                    6. "event [description] /at [time]"
+     *                    7. "delete [taskIndex]"
      * @param input             Text input to be validated
      * @throws DukeException    An exception with a message describing Duke's
      *                          response to the problem
      */
     private static void validate(String input) throws DukeException {
-        if (input.startsWith("done") || input.startsWith("undo")){
+        if (input.startsWith("done") || input.startsWith("undo")) {
             if (input.length() < 6) {
-                throw new DukeException(
-                        "I could't find the task you requested!");
+                throw new DukeException("I couldn't find a task to look up.");
+            }
+        } else if (input.startsWith("delete")) {
+            if (input.length() < 8) {
+                throw new DukeException("I couldn't find a task to delete.");
             }
         } else if (input.startsWith("todo")) {
             if (input.length() < 6) {
@@ -38,10 +42,10 @@ public class Duke {
             }
         } else if (input.startsWith("event")) {
             if (input.length() < 7) {
-                throw new DukeException(
-                        "I need to know the description of your event.");
+                throw new DukeException("I need to know the event description.");
             } else if (!input.contains(" /at ")) {
-                throw new DukeException("I also need to know when your event is.");
+                throw new DukeException(
+                        "I also need to know when your event is.");
             }
         } else if (input.startsWith("deadline")) {
             if (input.length() < 10) {
@@ -64,33 +68,50 @@ public class Duke {
     private static void process(String input) throws DukeException {
         if (input.equalsIgnoreCase("list")) {
             DukeFormatter.prettyPrint(taskList);
-        } else if (input.startsWith("done") || input.startsWith("undo")) {
-            try {
-                int taskIndex = Integer.parseInt(input.substring(5));
-                if (!isValid(taskIndex)) {
-                    throw new DukeException("I couldn't find the task you requested!");
-                }
-                Task completedTask = taskList.get(taskIndex - 1); // zero-indexed
-                if (input.startsWith("done")) {
-                    completedTask.markAsDone();
-                    DukeFormatter.prettyPrint(
-                            "Nice! I've marked this task as done:\n  "
-                                    + completedTask.toString());
-                } else {
-                    completedTask.markAsUndone();
-                    DukeFormatter.prettyPrint(
-                            "Oh dear. I've marked this task as undone:"
-                                    + "\n  " + completedTask.toString());
-                }
-            } catch (NumberFormatException e) {
-                throw new DukeException("I couldn't find the task you requested!");
-            }
+        } else if (input.startsWith("done")) {
+            int taskIndex = getTaskIndex(input.substring(5));
+            Task selectedTask = taskList.get(taskIndex);
+            selectedTask.markAsDone();
+            DukeFormatter.prettyPrint("Nice! I've marked this task as done:"
+                    + "\n  " + selectedTask.toString());
+        } else if (input.startsWith("undo")) {
+            int taskIndex = getTaskIndex(input.substring(5));
+            Task selectedTask = taskList.get(taskIndex);
+            selectedTask.markAsUndone();
+            DukeFormatter.prettyPrint("Oh dear. I've marked this task as undone:"
+                    + "\n  " + selectedTask.toString());
+        } else if (input.startsWith("delete")) {
+            int taskIndex = getTaskIndex(input.substring(7));
+            Task deletedTask = taskList.remove(taskIndex);
+            DukeFormatter.prettyPrint("Noted. I've removed this task:"
+                    + "\n  " + deletedTask.toString()
+                    + "\nNow you have " + taskList.size() + " tasks in the list.");
         } else {
             addNewTask(input);
             int numberOfTasks = taskList.size();
             DukeFormatter.prettyPrint("Got it. I've added this task:"
                     + "\n  " + taskList.get(numberOfTasks - 1)
                     + "\nNow you have " + numberOfTasks + " tasks in the list.");
+        }
+    }
+
+    /**
+     * Returns the taskList index of the task with the given number if such a
+     * task exists, and throws an exception otherwise. Note that taskList is
+     * zero-indexed, whereas the input number is one-indexed.
+     * @param number            String containing a (possibly invalid) number
+     * @return                  The requested task index
+     * @throws DukeException    Exception message indicating task not found
+     */
+    private static int getTaskIndex(String number) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(number);
+            if (!isValid(taskIndex)) {
+                throw new DukeException("I couldn't find the task you requested!");
+            }
+            return taskIndex - 1; // taskList is zero-indexed
+        } catch (NumberFormatException e) {
+            throw new DukeException("I couldn't find the task you requested!");
         }
     }
 

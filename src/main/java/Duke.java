@@ -40,6 +40,9 @@ public class Duke {
 
                     // Error Handling: ListEmpty
                     if(listCounter == 0){
+                        // Clear buffer of scanner
+                        String i = sc.nextLine();
+
                         throw new EmptyListException("");
                     }
 
@@ -73,9 +76,14 @@ public class Duke {
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
 
-                    // Implies only word "deadline"
+                    // Implies only word "event"
                     if(tokenList.length == 1) {
                         throw new EmptyCommandField("event");
+                    }
+
+                    // Format for item is incorrect
+                    if(tokenList.length != 2){
+                        throw new CommandFieldFormatException("event");
                     }
 
                     list.add(new Event(tokenList[0], tokenList[1], false));
@@ -94,6 +102,7 @@ public class Duke {
                         throw new EmptyCommandField("deadline");
                     }
 
+                    // Format for item is incorrect
                     if(tokenList.length != 2){
                         throw new CommandFieldFormatException("deadline");
                     }
@@ -107,11 +116,21 @@ public class Duke {
                 }
 
                 else if (readInput.toLowerCase().equals("done")) {
+
+                    // Cannot perform done in zero list
                     if(listCounter == 0){
+                        // Clear buffer of scanner
+                        String i = sc.nextLine();
+
                         throw new EmptyListException("Cannot perform done.");
                     }
 
                     int indexDone = sc.nextInt();
+
+                    // If indexDone exceed listCounter
+                    if(indexDone > listCounter){
+                        throw new ExceedItemNumberException();
+                    }
 
                     list.get(--indexDone).setDone();
 
@@ -147,6 +166,9 @@ public class Duke {
             }
 
             catch (CommandNotRecognizedException c) {
+                // Clear buffer of scanner
+                String i = sc.nextLine();
+
                 System.out.println(processText("\u263A OOPS!!! I'm sorry, but I don't know what that means :-("));
             }
             catch (EmptyCommandField e){
@@ -155,7 +177,13 @@ public class Duke {
             catch (EmptyListException l){
                 System.out.println(processText("\u263A List is empty! " + l.getMessage()));
             }
+            catch (CommandFieldFormatException f){
+                System.out.println(processText("\u263A Description format is incorrect for " + f.getMessage() + "."));
+            }
+            catch (ExceedItemNumberException n){
+                System.out.println(processText("\u263A Input number exceeded number of task items."));
 
+            }
         }
     }
 
@@ -301,6 +329,13 @@ class EmptyListException extends Exception{
 class CommandFieldFormatException extends Exception{
     public CommandFieldFormatException(String command){
         super(command);
+    }
+}
+
+// Exceeded number of items in list
+class ExceedItemNumberException extends Exception{
+    public ExceedItemNumberException(){
+        super("Error exceeding item number");
     }
 }
 

@@ -1,12 +1,19 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.IllegalArgumentException;;
 
 public class Duke {
     List<Task> l;
     String doneMessage = "Nice! I've marked this task as done:";
     String addedMessage = "Got it. I've added this task:";
     String deleteMessage = "Noted. I've removed this task: ";
+    String emptyToDoErrorMessage = "____________________________________________________________\n"
+            + "☹ OOPS!!! The description of a todo cannot be empty.\n"
+            + "____________________________________________________________";
+    String illegalArgumentMessage = "____________________________________________________________\n"
+    + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+    + "____________________________________________________________";
 
     public void list() {
         System.out.println("____________________________________________________________");
@@ -25,7 +32,7 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    public void delete(int i){
+    public void delete(int i) {
         System.out.println("____________________________________________________________");
         System.out.println(deleteMessage);
         System.out.println(l.get(i - 1));
@@ -62,46 +69,46 @@ public class Duke {
         String exitMessage = "Bye. Hope to see you again soon!";
         l = new ArrayList<>();
         while (!exit) {
-            String command = sc.next();
-            switch (command) {
-            case "todo":
-                String task = sc.nextLine().trim();
-                if (!task.isEmpty()) {
-                    this.addToDo(sc.nextLine().trim());
-                } else {
-                    System.out.println("____________________________________________________________");
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                    System.out.println("____________________________________________________________");
+            try {
+                String command = sc.next();
+                switch (command) {
+                case "todo":
+                    String task = sc.nextLine().trim();
+                    if (!task.isEmpty()) {
+                        this.addToDo(sc.nextLine().trim());
+                    } else {
+                        throw new IllegalArgumentException(emptyToDoErrorMessage);
+                    }
+                    break;
+                case "deadline":
+                    String[] arrDeadLine = sc.nextLine().split("/by");
+                    String taskDeadLine = arrDeadLine[0].trim();
+                    String dateDeadLine = arrDeadLine[1].trim();
+                    this.addDeadline(taskDeadLine, dateDeadLine);
+                    break;
+                case "event":
+                    String[] arrEvent = sc.nextLine().split("/at");
+                    String taskEvent = arrEvent[0].trim();
+                    String dateEvent = arrEvent[1].trim();
+                    this.addEvent(taskEvent, dateEvent);
+                    break;
+                case "list":
+                    this.list();
+                    break;
+                case "done":
+                    this.done(sc.nextInt());
+                    break;
+                case "delete":
+                    this.delete(sc.nextInt());
+                    break;
+                case "bye":
+                    exit = true;
+                    break;
+                default:
+                    throw new IllegalArgumentException(illegalArgumentMessage);
                 }
-                break;
-            case "deadline":
-                String[] arrDeadLine = sc.nextLine().split("/by");
-                String taskDeadLine = arrDeadLine[0].trim();
-                String dateDeadLine = arrDeadLine[1].trim();
-                this.addDeadline(taskDeadLine, dateDeadLine);
-                break;
-            case "event":
-                String[] arrEvent = sc.nextLine().split("/at");
-                String taskEvent = arrEvent[0].trim();
-                String dateEvent = arrEvent[1].trim();
-                this.addEvent(taskEvent, dateEvent);
-                break;
-            case "list":
-                this.list();
-                break;
-            case "done":
-                this.done(sc.nextInt());
-                break;
-            case "delete":
-                this.delete(sc.nextInt());
-                break;
-            case "bye":
-                exit = true;
-                break;
-            default:
-                System.out.println("____________________________________________________________");
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("____________________________________________________________");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("____________________________________________________________");

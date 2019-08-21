@@ -33,32 +33,28 @@ public class Duke {
                     String[] inputArr = input.split(" ", 2);
                     String command = inputArr[0];
                     if (command.equals("done")) {
-                        int i = Integer.parseInt(inputArr[1]) - 1;
-                        lst.get(i).done();
-                        String nice = "Nice! I've marked this task as done:";
-                        System.out.println(nice + "\n\t" + lst.get(i));
+                        try {
+                            int i = Integer.parseInt(inputArr[1]) - 1;
+                            lst.get(i).done();
+                            String nice = "Nice! I've marked this task as done:";
+                            System.out.println(nice + "\n\t" + lst.get(i));
+                        } catch (IndexOutOfBoundsException ex) {
+                            System.out.println("☹ OOPS!!! I'm sorry, that task does not exist");
+                        }
+                    } else if (command.equals("delete")) {
+                        try {
+                            int i = Integer.parseInt(inputArr[1]) - 1;
+                            Task task = lst.get(i);
+                            lst.remove(i);
+                            String noted = "Noted. I've removed this task:\n\t" + task + "\nNow you have " + lst.size() + " tasks in the list.";
+                            System.out.println(noted);
+                        } catch (IndexOutOfBoundsException ex) {
+                            System.out.println("☹ OOPS!!! I'm sorry, that task does not exist");
+                        }
                     } else {
                         Task task = new Task("");
                         DukeEnum de = null;
                         try {
-//                                switch (command) {
-//                                    case "todo":
-//                                        String todoDesc = inputArr[1];
-//                                        task = new Todo(todoDesc);
-//
-//                                    case "deadline":
-//                                        String deadlineDesc = inputArr[1];
-//                                        String[] deadlineArr = deadlineDesc.split("/", 2);
-//                                        String at = deadlineArr[1];
-//                                        task = new Deadline(deadlineArr[0], at.split(" ", 2)[1]);
-//                                        break;
-//                                    case "event":
-//                                        String evenDesc = inputArr[1];
-//                                        String[] eventArr = evenDesc.split("/", 2);
-//                                        String by = eventArr[1];
-//                                        task = new Event(eventArr[0], by.split(" ", 2)[1]);
-//                                        break;
-//                                }
                             switch (command) {
                                 case "todo":
                                     de = DukeEnum.TODO;

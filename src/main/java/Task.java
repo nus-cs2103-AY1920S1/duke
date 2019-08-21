@@ -22,6 +22,7 @@ public class Task {
         return true;
     }
 
+    @Override
     public String toString() {
         String str = "["
                 + this.getStatusIcon()

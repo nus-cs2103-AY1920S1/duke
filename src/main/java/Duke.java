@@ -27,32 +27,38 @@ public class Duke {
             //Split input incase it has a command and argument
             String[] inputArray = input.split(" ", 2);
 
+            String[] cmdArgs = new String[0];
+            Task newTask = new Task("");
+
             //If list print all tasks
-            if (input.equals("list")) {
+            switch (inputArray[0]) {
+            case "list":
                 System.out.print(dividerLine);
 
                 //Print each task
                 Iterator<Task> tasksIterator = tasks.iterator();
                 Task currTask = new Task("");
 
-                for (int i = 0; i < tasks.size(); i++) {
+                for (int i = 1; i <= tasks.size(); i++) {
                     currTask = tasksIterator.next();
 
                     System.out.print("  "
-                            + (i+1)
+                            + i
                             + ". "
                             + currTask
                             + "\n");
                 }
 
                 System.out.print(dividerLine);
-            } else if (inputArray[0].equals("done")) {
+                break;
+            case "done":
                 int taskNum = Integer.parseInt(inputArray[1]);
                 int taskIndex = taskNum - 1;
 
                 Task modifiedTask = tasks.get(taskIndex);
                 modifiedTask.markAsDone();
 
+                //Printing
                 System.out.print(dividerLine);
 
                 System.out.print("  Nice! I've marked this task as done: \n");
@@ -61,18 +67,42 @@ public class Duke {
                         + "\n");
 
                 System.out.print(dividerLine);
-            }
-
-            //Else add input to array list
-            //and echo that input is added
-            else {
-                Task newTask = new Task(input);
+                break;
+            case "todo":
+                newTask = new Todo(inputArray[1]);
                 tasks.add(newTask);
                 System.out.print(dividerLine
-                        + "  added "
-                        + input
+                        + "  Got it. I've added this task:\n"
+                        + "    "
+                        + newTask
                         + "\n"
                         + dividerLine);
+                break;
+            case "event":
+                cmdArgs = inputArray[1].split(" /at ", 2);
+                newTask = new Event(cmdArgs[0], cmdArgs[1]);
+                tasks.add(newTask);
+                System.out.print(dividerLine
+                        + "  Got it. I've added this task:\n"
+                        + "    "
+                        + newTask
+                        + "\n"
+                        + dividerLine);
+                break;
+            case "deadline":
+                cmdArgs = inputArray[1].split(" /by ", 2);
+                newTask = new Deadline(cmdArgs[0], cmdArgs[1]);
+                tasks.add(newTask);
+                System.out.print(dividerLine
+                        + "  Got it. I've added this task:\n"
+                        + "    "
+                        + newTask
+                        + "\n"
+                        + dividerLine);
+                break;
+            default:
+                System.out.println("Invalid Command");
+                break;
             }
 
             input = sc.nextLine();

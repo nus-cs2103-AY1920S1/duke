@@ -45,6 +45,23 @@ public class Duke {
         }
     }
 
+    public static void handleDelete(String command) {
+        taskCount--;
+        String[] currArray = command.split("\\s+", 2);
+        int currStep = Integer.parseInt(currArray[1]);
+        String string = (myList.get(currStep - 1)).toString();
+        myList.remove(currStep - 1);
+        printDelete(string);
+    }
+
+    public static void printDelete(String string) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Noted. I've removed this task:");
+        System.out.println("       " + string);
+        printListSize();
+        printClose();
+    }
+
     public static void printTask(Task task) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");
@@ -64,10 +81,8 @@ public class Duke {
     public static void printList() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
-        int counter = 1;
-        for (Task task : myList) {
-            System.out.println("     " + counter + "." + task);
-            counter++;
+        for (int i = 0; i < taskCount; i++) {
+            System.out.println("     " + (i + 1) + "." + myList.get(i));
         }
         printClose();
     }
@@ -96,6 +111,7 @@ public class Duke {
         validCommands.add("done");
         validCommands.add("list");
         validCommands.add("bye");
+        validCommands.add("delete");
         if (!validCommands.contains(command)) {
             throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    ____________________________________________________________\n" + "\n");
         }
@@ -141,6 +157,8 @@ public class Duke {
                     printList();
                 } else if (currArray[0].equals("done")) {
                     printDone(currLine);
+                } else if (currArray[0].equals("delete")) {
+                    handleDelete(currLine);
                 } else {
                     handleTask(currLine);
                 }

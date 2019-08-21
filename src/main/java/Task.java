@@ -24,11 +24,22 @@ public class Task {
     public void setName(String name) {
         this.name = name;
     }
+
     public String gettype() {
         return name;
     }
 
     public void settype(String name) {
         this.name = name;
+    }
+
+    public String getStatusIcon() {
+        return (done ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    @Override
+    public String toString() {
+        String s = "[" + getStatusIcon() + "] " + getName();
+        return s;
     }
 }

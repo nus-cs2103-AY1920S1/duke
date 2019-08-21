@@ -1,11 +1,25 @@
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class Duke {
     public static void main(String[] args) {
-        List<Task> tasks = new ArrayList<>();
-        UserInterface ui = new UserInterface();
+        final Path TASK_STORAGE_PATH = Path.of("./data/duke.txt");
+        final UserInterface ui = new UserInterface();
+        List<Task> tasks;
+        try {
+            tasks = TaskSerializer.parseFromFile(TASK_STORAGE_PATH);
+        } catch (FileIOException | TokenParseError exc) {
+            if (exc.getCause() instanceof NoSuchFileException) {
+                tasks = new ArrayList<>();
+            } else {
+                ui.printBlock(" ☹ OOPS!!! " + exc.getMessage());
+                System.exit(-1);
+                return;
+            }
+        }
 
         ui.printBlock("Hello! I'm Duke\n" +
                 "What can I do for you?");

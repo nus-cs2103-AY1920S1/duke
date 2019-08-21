@@ -7,20 +7,24 @@ public class Duke {
         ToDo todo = new ToDo();
         String input = "";
 
-        printFormattedText("Hello! I'm Duke\n" +
+        printFormattedText("    Hello! I'm Duke\n" +
                 "    What can I do for you?");
 
-        while (!input.equals("bye")) {
+        while (true) {
             input = sc.nextLine();
             if (input.equals("bye"))
                 break;
+            else if (input.contains("done")) {
+                int index = Integer.parseInt(input.substring(5));
+                printFormattedText(todo.markTaskDone(index));
+            }
             else if (input.equals("list"))
                 printFormattedText(todo.displayList());
             else
                 printFormattedText(todo.addTask(input));
         }
 
-        printFormattedText("Bye. Hope to see you again soon!");
+        printFormattedText("    Bye. Hope to see you again soon!");
     }
 
     private static void printFormattedText(String text) {

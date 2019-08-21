@@ -1,15 +1,17 @@
 todo
-event
 deadline
+event
+deadline /by Sunday
+deadline return books
+deadline return books /by Sunday
 event project meeting
 event /at Sunday 2-4pm
 event project meeting /at Sunday 2-4pm
-deadline return books
-deadline /by Sunday
-deadline return books /by Sunday
+list
+done 2
 list
 done 3
 list
-done 2
+blah
 list
 bye

@@ -158,7 +158,7 @@ public class Duke {
         String[] result = data.split("/by");
 
         if (result.length <= 1) {
-            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Deadline is needed");
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Deadline is needed.");
         }
 
         String achieve = result[0].trim();
@@ -181,7 +181,7 @@ public class Duke {
         String[] result = data.split("/at");
 
         if (result.length <= 1) {
-            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Event time is needed");
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Event time is needed.");
         }
 
         String achieve = result[0].trim();

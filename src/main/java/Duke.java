@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String dividerLine = new String("\u2500").repeat(80).concat("\n");
+        String dividerLine = new String("\u2501").repeat(80).concat("\n");
         String startMessage = "  Hello! I'm Duke\n"
                 + "  What can I do for you?\n";
         String logo = "   ____        _        \n"

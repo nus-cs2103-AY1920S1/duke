@@ -1,7 +1,11 @@
 todo Eat
 todo Sleep
 event project meeting /at Mon 2-4pm
+event fake event
 list
 done 1
+list
+delete 5
+delete 2
 list
 bye

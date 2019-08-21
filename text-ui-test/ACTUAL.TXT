@@ -9,6 +9,7 @@ What can I do for you
     Got it. I've added this task:
       [E][✗] project meeting  (at: Mon 2-4pm)
     Now you have 3 tasks in the list.
+☹ OOPS!!! Event must have a description and date
     Here are the tasks in your list:
     1.[T][✗] Eat
     2.[T][✗] Sleep
@@ -19,4 +20,11 @@ What can I do for you
     1.[T][✓] Eat
     2.[T][✗] Sleep
     3.[E][✗] project meeting  (at: Mon 2-4pm)
+☹ OOPS!!! Trying to delete invalid task
+    Noted. I've removed the task:
+      [T][✗] Sleep
+    Now you have 2 tasks in the list.
+    Here are the tasks in your list:
+    1.[T][✓] Eat
+    2.[E][✗] project meeting  (at: Mon 2-4pm)
 Bye. Hope to see you again soon!

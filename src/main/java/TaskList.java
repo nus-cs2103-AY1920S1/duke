@@ -19,8 +19,8 @@ public class TaskList {
     //Replaces the task at the specified index with a clone marked as done
     public Task markAsDone(int index) {
         int realIndex = index - 1;
-        tasks.set(index, tasks.get(index).getTaskMarkedAsDone());
-        return tasks.get(index);
+        tasks.set(realIndex, tasks.get(realIndex).getTaskMarkedAsDone());
+        return tasks.get(realIndex);
     }
 
     //Returns whether or not the TaskList is empty

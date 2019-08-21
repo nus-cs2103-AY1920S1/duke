@@ -1,30 +1,39 @@
 public class EventTask implements Task {
     public final String description;
-    public final String timingString;
+    public final DukeDateTime startDateTime;
+    public final DukeDateTime endDateTime;
     public final boolean isDone;
 
-    public EventTask(String description, String timingString) {
+    //User inputs Date as DD/MM/YYYY and in Military Time
+    public EventTask(String description, String startTimeString, String endTimeString) {
         this.description = description;
-        this.timingString = timingString;
+
+        String [] startTimeStrings = startTimeString.split(" ");
+        startDateTime = new DukeDateTime(startTimeStrings[0], startTimeStrings[1]);
+
+        String [] endTimeStrings = endTimeString.split(" ");
+        endDateTime = new DukeDateTime(endTimeStrings[0], endTimeStrings[1]);
+
         this.isDone = false;
     }
 
-    public EventTask(String description, String timingString, boolean isDone) {
+    public EventTask(String description, DukeDateTime startDateTime, DukeDateTime endDateTime, boolean isDone) {
         this.description = description;
-        this.timingString = timingString;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
         this.isDone = isDone;
     }
 
     @Override
     public Task getTaskMarkedAsDone() {
         //Returns a copy of this task but with its completion status marked as done
-        return new EventTask(description, timingString, true);
+        return new EventTask(description, startDateTime, endDateTime, true);
     }
 
     @Override
     public Task getTaskMarkedUndone() {
         //Returns a copy of this task but with its completion status marked as undone
-        return new EventTask(description, timingString, false);
+        return new EventTask(description, startDateTime, endDateTime, false);
     }
 
     @Override
@@ -36,7 +45,9 @@ public class EventTask implements Task {
         sb.append("] ");
         sb.append(this.description);
         sb.append(" (at: ");
-        sb.append(timingString);
+        sb.append(startDateTime.toString());
+        sb.append(" to ");
+        sb.append(endDateTime.toString());
         sb.append(")");
         return sb.toString();
     }

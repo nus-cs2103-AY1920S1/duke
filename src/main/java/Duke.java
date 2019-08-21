@@ -40,11 +40,17 @@ public class Duke {
                     tasks.get(value - 1).setDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(value - 1));
+                } else if (arr[0].equals("delete")) {
+                    value = Integer.parseInt(input.substring(input.length() - 1));
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(tasks.get(value - 1));
+                    tasks.remove(value - 1);
+                    System.out.println("Now you have " + tasks.size()  + " tasks in the list.");
                 } else {
                     input = input.replace(arr[0], "");
                     switch (arr[0]) {
                         case "todo":
-                            tasks.add(new Task("T", process(input)));
+                            tasks.add(new Task("T", input));
                             break;
                         case "deadline":
                             tasks.add(new Task("D", process(input)));

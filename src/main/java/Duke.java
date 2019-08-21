@@ -8,22 +8,47 @@ public class Duke {
 
         // Print initial welcome string 
         System.out.println("    --------------------------------------------------------");
-        System.out.println("     Hello! I'm Duke :)\n What can I do for you?");
+        System.out.println("     Hello! I'm Duke :)\n     What can I do for you?");
         System.out.println("    --------------------------------------------------------");
 
         // initialize a TaskList
         TaskList tl = new TaskList();
 
-        // Run till user types bye
+        // Run till user types "bye"
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 tl.listTasks();
-            } else if (input.split(" ")[0].equals("done")) {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                tl.taskDone(index);
-            } else {
-                tl.addTask(new Task(input));
+            }
+            else {
+                String command = input.split(" ")[0];
+                switch (command) {
+                    case "list":
+                        tl.listTasks();
+                        break;
+                    case "done":
+                        int index = Integer.parseInt(input.split(" ")[1]);
+                        tl.taskDone(index);
+                        break;
+                    case "todo":
+                        ToDo todo = new ToDo(input.split(" ",2)[1]);
+                        tl.addTask(todo);
+                        break;
+                    case "deadline":
+                        String deadline_str = input.split(" ", 2)[1];
+                        String deadline_name = deadline_str.split(" /by ")[0];
+                        String deadline_date = deadline_str.split(" /by ")[1];
+                        Deadline deadline = new Deadline(deadline_name, deadline_date);
+                        tl.addTask(deadline);
+                        break;
+                    case "event":
+                        String event_str = input.split(" ", 2)[1];
+                        String event_name = event_str.split(" /at ")[0];
+                        String event_date = event_str.split(" /at ")[1];
+                        Event event = new Event(event_name, event_date);
+                        tl.addTask(event);
+                        break;
+                }
             }
             input = sc.nextLine();
         }
@@ -37,8 +62,8 @@ public class Duke {
 
 /** Class to represent a task. */
 class Task {
-    private String name;
-    private boolean done;
+    protected String name;
+    protected boolean done;
 
     public Task(String name) {
         this.name = name;
@@ -54,13 +79,56 @@ class Task {
     public String getName() {
         return this.name;
     }
+}
+
+/** Task to represent a To-do */
+class ToDo extends Task {
+
+    public ToDo(String name) {
+        super(name);
+    }
 
     @Override
     public String toString() {
         String done_str = this.done ? "✓" : "✗";
-        return String.format("[%s] %s", done_str, this.name);
+        return String.format("[T][%s] %s", done_str, this.name);
     }
 }
+
+/** Task to represent a deadline */
+class Deadline extends Task {
+
+    protected String date;
+
+    public Deadline(String name, String date) {
+        super(name);
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        String done_str = this.done ? "✓" : "✗";
+        return String.format("[D][%s] %s (by: %s)", done_str, this.name, this.date);
+    }
+}
+
+/** Task to represent an event */
+class Event extends Task {
+
+    protected String date;
+
+    public Event(String name, String date) {
+        super(name);
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        String done_str = this.done ? "✓" : "✗";
+        return String.format("[E][%s] %s (at: %s)", done_str, this.name, this.date);
+    }
+}
+
 
 /** Class to represent a list of tasks. */
 class TaskList {
@@ -74,7 +142,10 @@ class TaskList {
     // add tasks
     public void addTask(Task task) {
         tasks.add(task);
-        prettyPrint("added: " + task.getName());
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
+        sb.append("       " + task + "\n");
+        sb.append(String.format("     Now you have %d tasks in the list.", this.tasks.size()));
+        prettyPrint(sb.toString());
     }
 
     // list tasks

@@ -22,8 +22,8 @@ public class Duke {
             if (word.equals("list")) {
                 int counter = 1;
                 System.out.println("Here are the tasks in your list:");
-                for (Task t : lst) {
-                    System.out.println(counter + ". " + "[" + t.getStatusIcon() + "] " + t.getDescription());
+                for (Task task : lst) {
+                    System.out.println(counter + ". " + task);
                     counter++;
                 }
             } else if (word.startsWith("done ")) {
@@ -32,10 +32,27 @@ public class Duke {
                 Task task = lst.get(i - 1);
                 lst.get(i - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
+                System.out.println("\t" + task);
             } else {
-                System.out.println("added: " + word);
-                lst.add(new Task(word));
+                String[] arr = word.split("/");
+                String[] arr2 = arr[0].split(" ", 2);
+
+                Task task;
+                if (arr2[0].equals("todo")) {
+                    task = new Todo(arr2[1], "");
+                } else  if (arr2[0].equals("deadline")) {
+                    task = new Deadline(arr2[1], arr[1]);
+                } else {
+                    task = new Event(arr2[1], arr[1]);
+                }
+                lst.add(task);
+
+
+                System.out.println("Got it. I've added this task:");
+//                System.out.println("\t" + "[" + task.getSymbol() + "][" + task.getStatusIcon() + "] " + task.getDescription() + " (" + task.getInfo() + ")");
+                System.out.println("\t" + task.toString());
+                System.out.println("Now you have " +  lst.size()  +  " tasks in the list.");
+
             }
             word = sc.nextLine();
         }

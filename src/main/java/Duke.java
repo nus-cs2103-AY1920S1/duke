@@ -26,9 +26,8 @@ public class Duke {
                 switch(arr[0]) {
                     case "list":
                         if (arr.length > 1) {
-                            continue;
+                            throw new FormatException("☹ OOPS!!! The list command should just be \"list\".");
                         }
-                        ;
                         System.out.println("Here are the tasks in your list:");
                         int counter = 0;
                         for (Task t : tasks) {
@@ -38,13 +37,13 @@ public class Duke {
                         break;
                     case "bye":
                         if (arr.length > 1) {
-                            continue;
+                            throw new FormatException("☹ OOPS!!! The bye command should just be \"bye\".");
                         }
                         System.out.println("Bye. Hope to see you again soon!");
                         System.exit(0);
                     case "done":
                         if (arr.length > 2) {
-                            continue;
+                            throw new FormatException("☹ OOPS!!! The done command should be \"done\" + task No.");
                         }
                         int index = Integer.parseInt(arr[1]) - 1;
                         tasks.get(index).markDone();

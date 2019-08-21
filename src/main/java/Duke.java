@@ -11,7 +11,7 @@ public class Duke {
         System.out.println(logo);
 
         String intro = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(Duke.format(intro));
+        Duke.print(intro);
 
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
@@ -27,15 +27,15 @@ public class Duke {
                 break;
             // List all stored commands in the TaskList
             case "list":
-                System.out.println(Duke.format(commands.toString()));
+                Duke.print(commands.toString());
                 break;
             // Catch empty commands (ENTER key pressed)
             case "":
-                System.out.println(Duke.format("No command issued."));
+                Duke.print("No command issued.");
                 break;
             // Otherwise store the commands entered in the TaskList
             default:
-                System.out.println(Duke.format(commands.addTask(command)));
+                Duke.print(commands.addTask(command));
                 break;
             }
         }
@@ -44,13 +44,12 @@ public class Duke {
         sc.close();
     }
 
-    /** Returns a new string from pretty-printing the original message string.
+    /** Pretty-prints a given message string to the standard output stream.
      *  Adds indentation and horizontal lines to the message.
      * 
-     * @param message a string to embellish.
-     * @return a formatted String to print as output.
+     * @param message a string to embellish then print to <code>System.out</code>.
      */
-    public static String format(String message) {
+    public static void print(String message) {
         StringBuilder result = new StringBuilder();
 
         String divider = "    ________________________________________________________________\n";
@@ -66,6 +65,6 @@ public class Duke {
         }
         
         result.append(divider);
-        return result.toString();
+        System.out.println(result.toString());
     }
 }

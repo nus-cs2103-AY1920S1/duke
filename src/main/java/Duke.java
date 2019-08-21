@@ -63,6 +63,16 @@ public class Duke {
         }
     }
 
+    private String deleteTask(int taskNum) {
+        StringBuilder sb = new StringBuilder();
+        Task t = taskList.get(taskNum - 1);
+        sb.append("Noted. I've removed this task: \n");
+        sb.append("  " + t + "\n");
+        taskList.remove(taskNum - 1);
+        sb.append("Now you have " + taskList.size() + " tasks in the list.");
+        return sb.toString();
+    }
+
     private String addTask(Task task) {
         taskList.add(task);
         StringBuilder sb = new StringBuilder();
@@ -93,6 +103,16 @@ public class Duke {
             }
             Task task = createTask(inputSplit[1], command);
             System.out.println(lineWrap(addTask(task)));
+        } else if (command.equals("delete")) {
+            if (inputSplit.length == 1) {
+                throw new DukeException("Invalid format, please state a number");
+            }
+            try {
+                int taskNum = Integer.parseInt(inputSplit[1]);
+                System.out.println(lineWrap(deleteTask(taskNum)));
+            } catch (NumberFormatException e) {
+                throw new DukeException("Please state a valid task number (integer).");
+            }
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -117,5 +137,4 @@ public class Duke {
             }
         }
     }
-
 }

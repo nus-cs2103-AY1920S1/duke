@@ -13,25 +13,26 @@ public class Duke {
     }
     */
     private ArrayList<Task> store = new ArrayList<>();
+    private static boolean flag = true;
 
-    public void greet() {
+    private void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    public void run() throws DukeIllegalDescriptionException, DukeIllegalInputException{
-        boolean flag = true;
+    private void run() throws DukeIllegalDescriptionException, DukeIllegalInputException{
+
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String cmd = sc.nextLine(); //Read the command
-            String head[] = cmd.split(" ", 2); //Break the command into array
-            switch(head[0]) { //Read the first key word
+            String[] head = cmd.split(" ", 2); /* Break the command into array with two parts */
+            switch (head[0]) { //Read the first key word
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     flag = false;
                     break;
                 case "list":
                     System.out.println("Here are the tasks in your list:");
-                    for(int i = 0; i < store.size(); ++i) {
+                    for (int i = 0; i < store.size(); ++i) {
                         System.out.println(i + 1 + "." + store.get(i));
                     }
                     break;
@@ -78,6 +79,13 @@ public class Duke {
                         throw new DukeIllegalDescriptionException(head[0]);
                     }
                     break;
+                case "delete":
+                    int delNum = Integer.parseInt(head[1]) - 1;
+                    Task delTask = store.get(delNum);
+                    store.remove(delNum);
+                    System.out.println("Noted. I've removed this task:\n" + delTask.toString());
+                    printCountTasks();
+                    break;
                 default:
                     throw new DukeIllegalInputException();
             }
@@ -85,25 +93,26 @@ public class Duke {
                 break;
             }
         }
+        sc.close();
     }
 
-    public void printAddTask() {
+    private void printAddTask() {
         System.out.println("Got it. I've added this task:");
     }
 
-    public void printCountTasks() {
+    private void printCountTasks() {
         System.out.println("Now you have " + store.size() + " tasks in the list.");
     }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        try {
-            duke.run();
-        } catch (DukeIllegalInputException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeIllegalDescriptionException e) {
-            System.out.println(e.getMessage());
+        while (flag) {
+            try {
+                duke.run();
+            } catch (DukeIllegalInputException | DukeIllegalDescriptionException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

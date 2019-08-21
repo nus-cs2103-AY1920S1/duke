@@ -19,22 +19,36 @@ public class Duke {
         String text = sc.nextLine();
 
         while (!text.equals("bye")) {
-            if (text.equals("list")) {
+            String firstWord = text.split(" ")[0];
+            if (firstWord.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 IntStream.rangeClosed(1, list.size()).forEach(x -> {
                     Task task = list.get(x - 1);
-                    System.out.println(x + ".[" + task.getStatusIcon()  + "] " + task.getTaskName());
+                    System.out.println(x + "." + task.toString());
                 });
-            } else {
+            } else if (firstWord.equals("done")) {
                 String[] words = text.split(" ");
-                if (words[0].equals("done")) {
-                    list.get(Integer.parseInt(words[1]) - 1).setDone(true);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  [\u2713] " + list.get(Integer.parseInt(words[1]) - 1).getTaskName());
+                Task task = list.get(Integer.parseInt(words[1]) - 1);
+                task.setDone(true);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("  " + task.toString());
+            } else {
+                Task task;
+                if (firstWord.equals("todo")) {
+                    task = new ToDo(text.split(" ", 2)[1]);
+                } else if (firstWord.equals("deadline")) {
+                    String description = text.split(" ", 2)[1].split(" /", 2)[0];
+                    String by = text.split(" ", 2)[1].split(" /by ", 2)[1];
+                    task = new Deadline(description, by);
                 } else {
-                    System.out.println("added: " + text);
-                    list.add(new Task(text));
+                    String description = text.split(" ", 2)[1].split(" /", 2)[0];
+                    String at = text.split(" ", 2)[1].split(" /at ", 2)[1];
+                    task = new Event(description, at);
                 }
+                list.add(task);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + task.toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list");
             }
             text = sc.nextLine();
         }

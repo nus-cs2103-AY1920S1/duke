@@ -1,10 +1,11 @@
 public class Task {
-    protected boolean isDone;
-    protected String taskName;
 
-    public Task(String taskName) {
+    protected boolean isDone;
+    protected String description;
+
+    public Task(String description) {
         this.isDone = false;
-        this.taskName = taskName;
+        this.description = description;
     }
 
     public String getStatusIcon() {
@@ -19,11 +20,16 @@ public class Task {
         this.isDone = done;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

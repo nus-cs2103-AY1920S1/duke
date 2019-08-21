@@ -17,19 +17,26 @@ public class Duke {
         System.out.println(greet);
 
         String input = "";
-        ArrayList lst = new ArrayList();
+        ArrayList<Task> lst = new ArrayList();
         while(!input.equals("bye")) {
             input = scanner.nextLine();
-//            Level-1
-//            System.out.println(input);
 
             if(input.equals("list")){
                 for(int i = 0; i < lst.size(); i++){
                     System.out.println(i+1 + ". " + lst.get(i));
                 }
             } else {
-                lst.add(input);
-                System.out.println("added: " + input);
+                String[] inputArr = input.split(" ");
+                if (inputArr[0].equals("done")) {
+                    int i = Integer.parseInt(inputArr[1]) - 1;
+                    lst.get(i).done();
+                    String nice = "Nice! I've marked this task as done:";
+                    System.out.println(nice + "\n\t" + lst.get(i));
+                } else {
+                    Task task = new Task(input);
+                    lst.add(task);
+                    System.out.println("added: " + input);
+                }
             }
         }
 

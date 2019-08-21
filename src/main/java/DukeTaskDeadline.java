@@ -2,7 +2,12 @@ public class DukeTaskDeadline extends DukeTask {
     private String taskDeadline;
 
     public DukeTaskDeadline(String taskName, String taskDeadline) {
-        super(taskName);
+        super(taskName, "D");
+        this.taskDeadline = taskDeadline;
+    }
+
+    public DukeTaskDeadline(String taskName, boolean isComplete, String taskDeadline) {
+        super(taskName, isComplete, "D");
         this.taskDeadline = taskDeadline;
     }
 
@@ -13,7 +18,7 @@ public class DukeTaskDeadline extends DukeTask {
     @Override
     public String toString() {
         String symbol = getTaskIsComplete() ? "\u2713" : "\u2718";
-        return "[D][" + symbol + "] " + getTaskName() + " (by: " + this.taskDeadline + ")";
+        return "[" + getTaskType() +"][" + symbol + "] " + getTaskName() + " (by: " + this.taskDeadline + ")";
     }
 
 }

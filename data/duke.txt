@@ -1,0 +1,4 @@
+D | 0 | abc | a
+T | 0 | defg
+D | 0 | laala | bdd=f
+E | 0 | a | b

@@ -2,7 +2,12 @@ public class DukeTaskEvent extends DukeTask {
     private String taskLocation;
 
     public DukeTaskEvent(String taskName, String taskLocation) {
-        super(taskName);
+        super(taskName, "E");
+        this.taskLocation = taskLocation;
+    }
+
+    public DukeTaskEvent(String taskName, boolean isComplete, String taskLocation) {
+        super(taskName, isComplete, "E");
         this.taskLocation = taskLocation;
     }
 
@@ -13,6 +18,6 @@ public class DukeTaskEvent extends DukeTask {
     @Override
     public String toString() {
         String symbol = getTaskIsComplete() ? "\u2713" : "\u2718";
-        return "[E][" + symbol + "] " + getTaskName() + " (at: " + this.taskLocation + ")";
+        return "[" + getTaskType() +"][" + symbol + "] " + getTaskName() + " (at: " + this.taskLocation + ")";
     }
 }

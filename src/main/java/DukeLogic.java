@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class DukeLogic {
@@ -20,7 +21,10 @@ public class DukeLogic {
     private final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
     private final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task index.";
     private final String DUKE_ERR_MISSING_INDEX = "☹ OOPS!!! The index of the completed task is missing.";
+    private final String DUKE_ERR_FAILED_TO_INIT_TASKS = "☹ OOPS!!! The saved tasks failed to restore.";
     private final String SEPARATOR = "____________________________________________________________";
+
+    private final String DUKE_TASK_FILE_PATH = ".\\data\\duke.txt";
     private final int DUKE_MAXIMUM_TASKS = 100;
     private enum DukeCommand {
         TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
@@ -33,6 +37,7 @@ public class DukeLogic {
     private StringBuilder sb;
     private Scanner scanner;
     private List<DukeTask> userDukeTasks;
+    private DukeStorage storage;
 
     /*===============================
     ||  Private Auxiliary Methods  ||
@@ -68,6 +73,22 @@ public class DukeLogic {
         sb = new StringBuilder();
         scanner = new Scanner(System.in);
         userDukeTasks = new ArrayList<>(DUKE_MAXIMUM_TASKS);
+        storage = new DukeStorage(DUKE_TASK_FILE_PATH);
+
+        initializeSavedTasks();
+    }
+
+    /**
+     * Calls {@link DukeStorage#load()} to retrieve the saved tasks from the file on the hard disk. This will initialize
+     * the userDukeTasks List if the saved tasks are restored.
+     */
+    private void initializeSavedTasks() {
+        Optional<List<DukeTask>> restoredTasks = storage.load();
+        if (restoredTasks.isEmpty()) {
+            displayToUser(DUKE_ERR_FAILED_TO_INIT_TASKS);
+        } else {
+            userDukeTasks = restoredTasks.get();
+        }
     }
 
     /**
@@ -208,7 +229,8 @@ public class DukeLogic {
 
     /**
      * Creates a new DukeTask and adds it into the current list of user DukeTask. The specified input is also mirrored
-     * to the user.
+     * to the user. The list of user DukeTask is then saved to the hard disk via
+     * {@link DukeStorage#save(List<DukeTask>)}.
      * @param inputTask User specified input that will be the name of the DukeTask to be added to the current list of
      *              DukeTask.
      */
@@ -219,6 +241,7 @@ public class DukeLogic {
         sb.append(inputTask.toString());
         sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
         displayToUser(sb.toString());
+        storage.save(userDukeTasks);
     }
 
     /**
@@ -253,6 +276,7 @@ public class DukeLogic {
             sb.append("Nice! I've marked this task as done:\n\t   " + completedTask.toString());
         }
         displayToUser(sb.toString());
+        storage.save(userDukeTasks);
     }
 
     /**
@@ -267,6 +291,7 @@ public class DukeLogic {
         sb.append(deletedTask.toString());
         sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
         displayToUser(sb.toString());
+        storage.save(userDukeTasks);
     }
 
     /**

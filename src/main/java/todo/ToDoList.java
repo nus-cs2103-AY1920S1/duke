@@ -1,11 +1,11 @@
 package todo;
 import java.lang.StringBuilder;
 
-public class ToDo {
+public class ToDoList {
     private Task[] todoList;
     private int counter;
 
-    public ToDo() {
+    public ToDoList() {
         this.todoList = new Task[100];
         this.counter = 0;
     }

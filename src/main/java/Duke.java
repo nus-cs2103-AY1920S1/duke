@@ -1,17 +1,17 @@
 import java.util.Scanner;
-import todo.ToDo;
+import todo.ToDoList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ToDo todo = new ToDo();
+        ToDoList todo = new ToDoList();
         String input = "";
 
         printFormattedText("    Hello! I'm Duke\n" +
                 "    What can I do for you?");
 
         while (true) {
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             if (input.equals("bye"))
                 break;
             else if (input.contains("done")) {

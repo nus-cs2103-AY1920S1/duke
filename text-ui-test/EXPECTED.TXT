@@ -3,35 +3,57 @@
 	What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
+	☹ OOPS!!! The description of a todo cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The description/duration of an event cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The description/deadline of a deadline cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The description/duration of an event cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The description/duration of a deadline cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
 	Got it. I've added this task:
-		[T][✘]  borrow book
+		[E][✘] project meeting (at: Sunday 2-4pm)
 	Now you have 1 tasks in the list
 	____________________________________________________________
 	____________________________________________________________
-	Here are the tasks in your list:
-	1. [T][✘]  borrow book
+	☹ OOPS!!! The description/deadline of a deadline cannot be empty.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! The description/deadline of a deadline cannot be empty.
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[D][✘] return book (by: Sunday)
+		[D][✘] return books (by: Sunday)
 	Now you have 2 tasks in the list
 	____________________________________________________________
 	____________________________________________________________
-	Got it. I've added this task:
-		[E][✘] project meeting (at: Mon 2-4pm)
-	Now you have 3 tasks in the list
+	Here are the tasks in your list:
+	1. [E][✘] project meeting (at: Sunday 2-4pm)
+	2. [D][✘] return books (by: Sunday)
 	____________________________________________________________
 	____________________________________________________________
-	Got it. I've added this task:
-		[T][✘]  borrow a Chinese book
-	Now you have 4 tasks in the list
+	☹ OOPS!!! The task number is invalid!
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
-	1. [T][✘]  borrow book
-	2. [D][✘] return book (by: Sunday)
-	3. [E][✘] project meeting (at: Mon 2-4pm)
-	4. [T][✘]  borrow a Chinese book
+	1. [E][✘] project meeting (at: Sunday 2-4pm)
+	2. [D][✘] return books (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	Nice! I've marked this task as done: 
+		[D][✓] return books (by: Sunday)
+	____________________________________________________________
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [E][✘] project meeting (at: Sunday 2-4pm)
+	2. [D][✓] return books (by: Sunday)
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!

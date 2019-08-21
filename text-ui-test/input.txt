@@ -1,7 +1,15 @@
-todo borrow book
+todo
+event
+deadline
+event project meeting
+event /at Sunday 2-4pm
+event project meeting /at Sunday 2-4pm
+deadline return books
+deadline /by Sunday
+deadline return books /by Sunday
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-todo borrow a Chinese book
+done 3
+list
+done 2
 list
 bye

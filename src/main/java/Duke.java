@@ -81,7 +81,7 @@ public class Duke {
      * @return commands entered by the user
      */
     public String[] readCommand() {
-        return myScanner.nextLine().trim().split(" ");
+        return myScanner.nextLine().trim().split("\\s+");
     }
 
     /**

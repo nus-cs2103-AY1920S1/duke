@@ -25,11 +25,22 @@ public class Duke {
                         currTask.doTask();
                         printDone(currTask);
                         break;
+                    case "todo":
+                        Todo todo = new Todo(sc.nextLine());
+                        taskList.add(todo);
+                        printLastTask(taskList);
+                        break;
+                    case "deadline":
+                        Deadline deadline = makeDeadline(sc.nextLine());
+                        taskList.add(deadline);
+                        printLastTask(taskList);
+                        break;
+                    case "event":
+                        Event event = makeEvent(sc.nextLine());
+                        taskList.add(event);
+                        printLastTask(taskList);
+                        break;
                     default:
-                        String fullCommand = command + sc.nextLine();
-                        Task task = new Task(fullCommand);
-                        taskList.add(task);
-                        printAddition(task);
                         break;
                 }
             }
@@ -111,6 +122,28 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         printIndentWSpace();
         System.out.println("   " + task);
+        printBotLine();
+    }
+
+    private static Deadline makeDeadline(String item) {
+        String[] words = item.split(" /by ");
+        return new Deadline(words[0], words[1]);
+    }
+
+    private static Event makeEvent(String item) {
+        String[] words = item.split(" /at ");
+        return new Event(words[0], words[1]);
+    }
+
+    private static void printLastTask(ArrayList<Task> list) {
+        Task last = list.get(list.size() - 1);
+        printTopLine();
+        printIndentWSpace();
+        System.out.println("Got it. I've added this task:");
+        printIndentWSpace();
+        System.out.printf("   %s\n", last);
+        printIndentWSpace();
+        System.out.printf("Now you have %d tasks in the list.\n", list.size());
         printBotLine();
     }
 }

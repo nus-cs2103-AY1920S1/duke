@@ -19,7 +19,9 @@ public class Duke {
                 break;
             }else if(msg.equals("list")) {
                 list.listing();
-
+            } else if (msg.equals("done")) {
+                int index = sc.nextInt();
+                list.mark(index);
             } else {
                 msg += sc.nextLine();
                 list.add(msg);

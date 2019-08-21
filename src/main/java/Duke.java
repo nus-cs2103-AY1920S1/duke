@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -67,6 +69,7 @@ public class Duke {
                         final String COMMAND_TOKEN_TODO = "todo ";
                         final String COMMAND_TOKEN_DEADLINE = "deadline ";
                         final String COMMAND_TOKEN_EVENT = "event ";
+                        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
                         if (input.startsWith(COMMAND_TOKEN_TODO)) {
                             String todoDescription = input.substring(COMMAND_TOKEN_TODO.length());
@@ -79,13 +82,13 @@ public class Duke {
                         } else if (input.startsWith(COMMAND_TOKEN_DEADLINE)) {
                             final String[] deadlineArgs = input.substring(COMMAND_TOKEN_DEADLINE.length()).split(" /by ");
                             final String deadlineDescription = deadlineArgs[0];
-                            final String deadlineDue = deadlineArgs[1];
+                            final LocalDateTime deadlineDue = LocalDateTime.parse(deadlineArgs[1], dateTimeFormatter);
 
                             t = new Deadline(deadlineDescription, deadlineDue);
                         } else if (input.startsWith(COMMAND_TOKEN_EVENT)) {
                             final String[] eventArgs = input.substring(COMMAND_TOKEN_EVENT.length()).split(" /at ");
                             final String eventDescription = eventArgs[0];
-                            final String eventDateTime = eventArgs[1];
+                            final LocalDateTime eventDateTime = LocalDateTime.parse(eventArgs[1], dateTimeFormatter);
 
                             t = new Event(eventDescription, eventDateTime);
                         } else {
@@ -117,6 +120,7 @@ public class Duke {
     private static String formatTask(Task t) {
         String taskType = null;
         String description = null;
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
         if (t instanceof Todo) {
             taskType = "T";
@@ -124,11 +128,11 @@ public class Duke {
         } else if (t instanceof Deadline) {
             Deadline d = (Deadline) t;
             taskType = "D";
-            description = String.format("%s (by: %s)", d.getDescription(), d.getDeadline());
+            description = String.format("%s (by: %s)", d.getDescription(), d.getDeadline().format(dateTimeFormatter));
         } else if (t instanceof Event) {
             Event e = (Event) t;
             taskType = "E";
-            description = String.format("%s (at: %s)", e.getDescription(), e.getEventDateTime());
+            description = String.format("%s (at: %s)", e.getDescription(), e.getEventDateTime().format(dateTimeFormatter));
         }
 
         return String.format("[%s][%s] %s", taskType, t.getStatusIcon(), description);

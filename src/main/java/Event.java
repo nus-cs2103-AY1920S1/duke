@@ -1,7 +1,9 @@
-public class Event extends Task {
-    protected String eventDateTime;
+import java.time.LocalDateTime;
 
-    public Event(String description, String dateTime) {
+public class Event extends Task {
+    protected LocalDateTime eventDateTime;
+
+    public Event(String description, LocalDateTime dateTime) {
         super(description);
         this.eventDateTime = dateTime;
     }
@@ -11,7 +13,7 @@ public class Event extends Task {
      *
      * @return Date and time of this Event.
      */
-    public String getEventDateTime() {
+    public LocalDateTime getEventDateTime() {
         return eventDateTime;
     }
 }

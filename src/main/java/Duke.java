@@ -63,8 +63,12 @@ public class Duke {
     public static void doneFeature() throws DukeException{
         System.out.print(upperLine);
         //make sure it only have one number follow
+//        System.out.println("oneLine.length: " + oneLine.length);
+//        System.out.println("isNumeric(oneLine[1]) " + isNumeric(oneLine[1]));
+//        System.out.println("!oneLine[1].isBlank() " + !oneLine[1].isBlank());
+
         if(oneLine.length != 1 && !oneLine[1].isBlank()
-                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1])){
+                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())){
 
             int i = Integer.parseInt(oneLine[1].trim());
             if(i <= myList.size() && i > 0){
@@ -89,7 +93,7 @@ public class Duke {
         //make sure it only have one number follow
         if(oneLine.length != 1 && !oneLine[1].isBlank()
                 && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1])){
-            int i = Integer.parseInt(oneLine[1].trim());
+            int i = Integer.parseInt(oneLine[1]);
             if(i <= myList.size() && i > 0){
                 System.out.println(deleteMessage1);
                 Task delete_task = myList.get(i - 1);
@@ -109,14 +113,14 @@ public class Duke {
 
     public static void listFeature() throws DukeException{
         System.out.print(upperLine);
-        if(oneLine.length == 1) {
+        if(oneLine.length == 1 || oneLine[1].isBlank()) {
             String title = "Here are the tasks in your list:\n";
             System.out.print(title);
             for(int i = 0; i < idx; i++){
                 System.out.println((i+1) + ". " + myList.get(i));
             }
         }else{
-            throw new DukeException("TThere is extra description for bye");
+            throw new DukeException("TThere is extra description for list");
         }
         System.out.println(lowerLine);
     }

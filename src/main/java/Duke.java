@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static String[] data = new String[100];
+    public static List<Task> task = new ArrayList<>();
 
     public static void printLine() {
         System.out.println("   ____________________________________________________________");
@@ -23,7 +25,6 @@ public class Duke {
 
     public static void readInput() {
         Scanner input = new Scanner(System.in);
-        int item = 0;
         while (input.hasNextLine()) {
             String line = input.nextLine();
 
@@ -33,21 +34,38 @@ public class Duke {
                 printLine();
                 System.out.println("");
                 break;
-            } else if (line.equals("list")) {
-                int index = 1;
-                printLine();
-                for (int i = 0; i < item; i++) {
-                    System.out.println("    " + index++ + "." + data[i]);
-                }
-                printLine();
-                System.out.println("");
-            } else {
-                data[item] = line;
-                printLine();
-                System.out.println("    " + "added: " + line);
-                printLine();
-                System.out.println("");
-                item++;
+            }
+
+            switch (line) {
+                case "list":
+                    int index = 1;
+                    printLine();
+                    System.out.println("    " + "Here are the tasks in your list:");
+                    for (int i = 0; i < task.size(); i++) {
+                        System.out.println("    " + index++ + "." + "[" + task.get(i).getStatusIcon() + "] " + task.get(i).description);
+                    }
+                    printLine();
+                    System.out.println("");
+                    break;
+
+                default:
+                    String[] data = line.split(" ");
+                    if (data[0].equals("done")) {
+                        printLine();
+                        System.out.println("    " + "Nice! I've marked this task as done:");
+                        int item = Integer.parseInt(data[1]);
+                        Task t = task.get(--item);
+                        t.markAsDone();
+                        System.out.println("      " + "[" + t.getStatusIcon() + "] "+ t.getDescription());
+                        printLine();
+                        System.out.println("");
+                    } else {
+                        task.add(new Task(line));
+                        printLine();
+                        System.out.println("    " + "added: " + line);
+                        printLine();
+                        System.out.println("");
+                    }
             }
         }
     }

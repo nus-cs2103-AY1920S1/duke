@@ -39,9 +39,29 @@ public class Duke {
                     }
                     taskList.get(n).markAsDone();
                     System.out.print(lines);
-                    System.out.println(indent + "Nice! I've marked this task as done: \n" +
-                            indent + "  " + taskList.get(n));
+                    System.out.println(indent + " Nice! I've marked this task as done: \n" +
+                            indent + "   " + taskList.get(n));
                     System.out.println(lines);
+                } catch (DukeException ex) {
+                    System.out.print(lines);
+                    System.out.print(indent + ex.getMessage());
+                    System.out.println(lines);
+                }
+            } else if (comd[0].equals("delete")) {
+                try {
+                    if (comd.length <= 1) {
+                        throw new DukeException(" OOPS!!! The task number cannot be empty.\n");
+                    }
+                    int n = Integer.parseInt(comd[1]) - 1;
+                    if (n < 0 || n > taskList.size() - 1) {
+                        throw new DukeException(" OOPS!!! The number inputted is not on the list.\n");
+                    }
+                    System.out.print(lines);
+                    System.out.println(indent + " Noted. I've removed this task: \n" +
+                            indent + "   " + taskList.get(n) + "\n" +
+                            indent + " Now you have " + (taskList.size() - 1) + " tasks in the list.");
+                    System.out.println(lines);
+                    taskList.remove(n);
                 } catch (DukeException ex) {
                     System.out.print(lines);
                     System.out.print(indent + ex.getMessage());

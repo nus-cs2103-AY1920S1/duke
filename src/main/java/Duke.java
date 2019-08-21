@@ -15,7 +15,7 @@ public class Duke {
                 + startMessage
                 + dividerLine;
 
-        LinkedList<String> tasks = new LinkedList<>();
+        LinkedList<Task> tasks = new LinkedList<>();
 
         System.out.print(dividerLine + "  Hello from\n" + logo);
 
@@ -24,27 +24,56 @@ public class Duke {
         String input = sc.nextLine();
         //Check if bye
         while (!input.equals("bye")) {
+            //Split input incase it has a command and argument
+            String[] inputArray = input.split(" ", 2);
+
             //If list print all tasks
             if (input.equals("list")) {
                 System.out.print(dividerLine);
 
                 //Print each task
-                Iterator<String> tasksIterator = tasks.iterator();
+                Iterator<Task> tasksIterator = tasks.iterator();
+                Task currTask = new Task("");
 
                 for (int i = 0; i < tasks.size(); i++) {
+                    currTask = tasksIterator.next();
+
                     System.out.print("  "
                             + (i+1)
-                            + "."
-                            + tasksIterator.next()
+                            + ". "
+                            + "["
+                            + currTask.getStatusIcon()
+                            + "] "
+                            + currTask.getDescription()
                             + "\n");
                 }
 
                 System.out.print(dividerLine);
+            } else if (inputArray[0].equals("done")) {
+                int taskNum = Integer.parseInt(inputArray[1]);
+                int taskIndex = taskNum - 1;
+
+                Task modifiedTask = tasks.get(taskIndex);
+                modifiedTask.markAsDone();
+
+                System.out.print(dividerLine);
+
+                System.out.print("  Nice! I've marked this task as done: \n");
+                System.out.print("    "
+                        + "["
+                        + modifiedTask.getStatusIcon()
+                        + "] "
+                        + modifiedTask.getDescription()
+                        + "\n");
+
+                System.out.print(dividerLine);
             }
+
             //Else add input to array list
             //and echo that input is added
             else {
-                tasks.add(input);
+                Task newTask = new Task(input);
+                tasks.add(newTask);
                 System.out.print(dividerLine
                         + "  added "
                         + input
@@ -55,7 +84,7 @@ public class Duke {
             input = sc.nextLine();
         }
         // Exit if bye
-        System.out.println(dividerLine
+        System.out.print(dividerLine
                 + "  Bye. Hope to see you again soon!\n"
                 + dividerLine);
 

@@ -29,6 +29,8 @@ public abstract class Command {
                 return new ListCommand(duke, input);
             case "done":
                 return new DoneCommand(duke, input);
+            case "delete":
+                return new DeleteCommand(duke, input);
             case "todo":
                 if (numArgs == 1) {
                     throw new DukeException(EMPTY_TODO_STRING);

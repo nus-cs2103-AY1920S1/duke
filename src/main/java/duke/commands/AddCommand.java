@@ -52,5 +52,4 @@ public class AddCommand extends Command {
                         ADDED_TASK_STRING, newTask, duke.getTasks().numTasks())
         );
     }
-
 }

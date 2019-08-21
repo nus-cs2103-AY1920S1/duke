@@ -4,7 +4,7 @@ import duke.Duke;
 import duke.tasks.Task;
 
 public class DoneCommand extends Command {
-    private static final String DONE_TASK_STRING = "Nice! I've marked this task as done:\n";
+    private static final String DONE_TASK_STRING = "Nice! I've marked this task as done:";
 
     private int index;
 
@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     public void execute() {
         Task doneTask = duke.getTasks().getTask(index);
         duke.getTasks().markDone(index);
-        String message = String.format("%s\t%s", DONE_TASK_STRING, doneTask);
+        String message = String.format("%s\n\t%s", DONE_TASK_STRING, doneTask);
         duke.say(message);
     }
 

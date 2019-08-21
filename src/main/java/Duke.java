@@ -42,7 +42,7 @@ public class Duke {
                     printLine();
                     System.out.println("    " + "Here are the tasks in your list:");
                     for (int i = 0; i < task.size(); i++) {
-                        System.out.println("    " + index++ + "." + "[" + task.get(i).getStatusIcon() + "] " + task.get(i).description);
+                        System.out.println("    " + index++ + "." + task.get(i));
                     }
                     printLine();
                     System.out.println("");
@@ -56,7 +56,7 @@ public class Duke {
                         int item = Integer.parseInt(data[1]);
                         Task t = task.get(--item);
                         t.markAsDone();
-                        System.out.println("      " + "[" + t.getStatusIcon() + "] "+ t.getDescription());
+                        System.out.println("      " + t);
                         printLine();
                         System.out.println("");
                     } else {

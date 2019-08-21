@@ -33,7 +33,8 @@ public class Duke {
                     list(list);
                     break;
                 case "done":
-                    done(list, a[1].charAt(0));
+                    int n = Integer.parseInt(a[1]);
+                    done(list, n-1);
                     break;
 
                 default:
@@ -72,10 +73,10 @@ public class Duke {
         drawline();
     }
     public static void done(ArrayList<Task>list,int k){
-        drawline();
-        list.get(k-49).setDone(true);
+       drawline();
+        list.get(k).setDone(true);
         System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("     [✓]"+list.get(k-49).getName());
+        System.out.println("     [✓]"+list.get(k).getName());
         drawline();
     }
 

@@ -1,11 +1,13 @@
-public class Task {
+package duke;
+
+class Task {
     private String content;
 
-    public Task(final String content) {
+    Task(final String content) {
         this.content = content;
     }
 
-    public String getContent() {
+    String getContent() {
         return this.content;
     }
 }

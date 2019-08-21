@@ -1,11 +1,13 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
     private static final String logo = " ____        _        \n"
-                                     + "|  _ \\ _   _| | _____ \n"
-                                     + "| | | | | | | |/ / _ \\\n"
-                                     + "| |_| | |_| |   <  __/\n"
-                                     + "|____/ \\__,_|_|\\_\\___|\n";
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String separator = "-".repeat(60);
 
     private static void echo(final String message) {

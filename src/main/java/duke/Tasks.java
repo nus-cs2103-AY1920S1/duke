@@ -1,13 +1,15 @@
+package duke;
+
 import java.util.ArrayList;
 
-public class Tasks {
+class Tasks {
     private ArrayList<Task> tasks;
 
-    public Tasks() {
+    Tasks() {
         this.tasks = new ArrayList<>();
     }
 
-    public boolean addTask(Task task) {
+    boolean addTask(final Task task) {
         return tasks.add(task);
     }
 
@@ -15,9 +17,10 @@ public class Tasks {
     public String toString() {
         StringBuilder ret = new StringBuilder();
         for (int i = 0; i < tasks.size(); ++i) {
-            ret.append(i + 1).append(". ")
-               .append(tasks.get(i).getContent())
-               .append("\n");
+            ret.append(i + 1)
+                .append(". ")
+                .append(tasks.get(i).getContent())
+                .append("\n");
         }
         return ret.toString();
     }

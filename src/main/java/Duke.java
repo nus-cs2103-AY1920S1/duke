@@ -44,6 +44,14 @@ public class Duke {
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
+            } else if (inputSplit[0].equals("delete")) {
+                int inputIndex = Integer.parseInt(inputSplit[1]);
+                int actualIndex = inputIndex - 1;
+                Task toBeRemoved = dukeList.get(actualIndex);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(toBeRemoved);
+                dukeList.remove(actualIndex);
+                System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
             } else {
                 try {
                     handleInputUnrecognised(input);

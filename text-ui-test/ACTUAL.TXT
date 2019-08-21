@@ -4,13 +4,13 @@
     _____________________________________
 
     _____________________________________
-     Got it. I've added this task: 
+     Got it. I've added this task:
        [D][-] return book (by: Sunday)
      Now you have 1 tasks in the list.
     _____________________________________
 
     _____________________________________
-     Got it. I've added this task: 
+     Got it. I've added this task:
        [E][-] project meeting (at: Mon 2-4pm)
      Now you have 2 tasks in the list.
     _____________________________________
@@ -21,7 +21,7 @@
     _____________________________________
 
     _____________________________________
-     Got it. I've added this task: 
+     Got it. I've added this task:
        [D][-] do homework (by: no idea :-p)
      Now you have 3 tasks in the list.
     _____________________________________

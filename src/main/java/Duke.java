@@ -60,7 +60,7 @@ public class Duke {
 
     public static void printAddTask(Task newTask) {
         System.out.println("    _____________________________________");
-        System.out.println("     Got it. I've added this task: ");
+        System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask);
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
         System.out.println("    _____________________________________\n");

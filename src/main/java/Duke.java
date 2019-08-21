@@ -37,24 +37,33 @@ public class Duke {
             } else {
                 String[] inputBreakDown = input.split(" ", 2);
                 String taskType = inputBreakDown[0];
+                if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
+                    System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    continue;
+                }
+                if (inputBreakDown.length < 2 || inputBreakDown[1].matches("\\s*")) {
+                    System.out.println("\u2639 OOPS!!! Please provide more details about this task!\n");
+                    continue;
+                }
+                String taskDetails = inputBreakDown[1];
                 Task newTask = null;
                 switch (taskType) {
                 case "todo":
-                    newTask = new Todo(inputBreakDown[1]);
+                    newTask = new Todo(taskDetails);
                     break;
                 case "deadline":
-                    String[] deadlineBreakDown = inputBreakDown[1].split(" /by ");
+                    String[] deadlineBreakDown = taskDetails.split(" /by ");
                     String deadlineDescription = deadlineBreakDown[0];
                     String by = deadlineBreakDown[1];
                     newTask = new Deadline(deadlineDescription, by);
                     break;
                 case "event":
-                    String[] eventBreakDown = inputBreakDown[1].split(" /at ");
+                    String[] eventBreakDown = taskDetails.split(" /at ");
                     String eventDescription = eventBreakDown[0];
                     String at = eventBreakDown[1];
                     newTask = new Event(eventDescription, at);
                     break;
-                default: 
+                default:
                 }
                 if (newTask != null) {
                     list.add(newTask);
@@ -62,8 +71,6 @@ public class Duke {
                     System.out.println("  " + newTask);
                     int total = Task.getTotal();
                     System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
-                } else {
-                    System.out.println("Unknown task type. Please enter a valid task type");
                 }
             }
             System.out.println();

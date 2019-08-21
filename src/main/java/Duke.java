@@ -59,7 +59,7 @@ public class Duke {
                         int dlDivision = dlDetail.indexOf("/");
                         try {
                             String dlDescription = dlDetail.substring(0, dlDivision - 1);
-                            String by = dlDetail.substring(dlDivision + 1, dlDetail.length());
+                            String by = dlDetail.substring(dlDivision + 3, dlDetail.length());
                             Task dl = new Deadline(dlDescription, by);
                             tasks.add(dl);
                             System.out.println("Got it. I've added this task: \n" + dl.toString()
@@ -73,7 +73,7 @@ public class Duke {
                         int eventDivision = eventDetail.indexOf("/");
                         try {
                             String eventDescription = eventDetail.substring(0, eventDivision - 1);
-                            String at = eventDetail.substring(eventDivision + 1, eventDetail.length());
+                            String at = eventDetail.substring(eventDivision + 3, eventDetail.length());
                             Task event = new Event(eventDescription, at);
                             tasks.add(event);
                             System.out.println("Got it. I've added this task: \n" + event.toString()

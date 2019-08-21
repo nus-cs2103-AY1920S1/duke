@@ -1,12 +1,13 @@
 package duke.init;
 
 /**
+ * Implements a task.
  * @author lyskevin
  */
 public class Task {
 
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Constructs a task with the specified description.
@@ -29,7 +30,7 @@ public class Task {
      * Sets this task as done.
      */
     public void setAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -38,12 +39,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String statusIcon;
-        if (isDone) {
-            statusIcon = "\u2713";
-        } else {
-            statusIcon = "\u2718";
-        }
+        String statusIcon = isDone ? "\u2713" : "\u2718";
         return String.format("[%s] %s", statusIcon, description);
     }
 

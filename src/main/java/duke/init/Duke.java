@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * Implements the Duke chatbot.
  * @author Lim Yong Shen, Kevin
  */
 public class Duke {
@@ -22,13 +23,14 @@ public class Duke {
         greet();
         printHorizontalBorder();
         System.out.println();
-        String command = scanner.nextLine();
+        String input = scanner.nextLine();
+        String command = input.split(" ")[0];
         while (!command.equals("bye")) {
             printHorizontalBorder();
-            process(command);
+            process(input);
             printHorizontalBorder();
             System.out.println();
-            command = scanner.nextLine();
+            input = scanner.nextLine();
         }
         printHorizontalBorder();
         sayBye();
@@ -50,26 +52,40 @@ public class Duke {
     }
 
     /**
-     * Echos the specified command.
-     * @param command The specified command.
+     * Processes the specified input.
+     * @param input The specified input.
      */
-    private static void echo(String command) {
-        System.out.println("\t" + command);
-    }
-
-    /**
-     * Processes the specified command.
-     * @param command The specified command.
-     */
-    private static void process(String command) {
-        if (command.equals("list")) {
-            listStoredTasks();
-        } else if (command.length() > 4
-                && command.substring(0, 4).equals("done")) {
-            int taskNumber = Integer.parseInt(command.split(" ")[1]);
-            setAsDone(taskNumber);
-        } else {
-            storeTask(command);
+    private static void process(String input) {
+        String[] inputWords = input.split(" ");
+        String command = inputWords[0];
+        Task task;
+        String[] taskInformation;
+        switch(command) {
+            case "list":
+                listStoredTasks();
+                break;
+            case "done":
+                int taskNumber = Integer.parseInt(inputWords[1]);
+                setAsDone(taskNumber);
+                break;
+            case "todo":
+                task = new Todo(input.substring(5));
+                storeTask(task);
+                break;
+            case "deadline":
+                taskInformation = input.substring(9).split(" /by ");
+                task = new Deadline(taskInformation[0], taskInformation[1]);
+                storeTask(task);
+                break;
+            case "event":
+                taskInformation = input.substring(6).split(" /at ");
+                task = new Event(taskInformation[0], taskInformation[1]);
+                storeTask(task);
+                break;
+            default:
+                task = new Task(input);
+                storeTask(task);
+                break;
         }
     }
 
@@ -88,12 +104,15 @@ public class Duke {
     }
 
     /**
-     * Stores a task with the specified description.
-     * @param description The specified task.
+     * Stores the specified task.
+     * @param task The specified task.
      */
-    private static void storeTask(String description) {
-        System.out.println("\tadded: " + description);
-        storedTasks.add(new Task(description));
+    private static void storeTask(Task task) {
+        storedTasks.add(task);
+        System.out.println("\tGot it. I've added this task: ");
+        System.out.println("\t\t" + task);
+        System.out.format("\tNow you have %d task(s) in the list.\n",
+                storedTasks.size());
     }
 
     /**
@@ -104,7 +123,7 @@ public class Duke {
     }
 
     /**
-     * Sets the task with the specified number as done.
+     * Sets the task with the specified task number as done.
      * @param taskNumber The specified task number.
      */
     private static void setAsDone(int taskNumber) {

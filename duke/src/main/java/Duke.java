@@ -14,50 +14,24 @@ public class Duke {
 		System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
 		Scanner scanner = new Scanner(System.in);
-		String next = scanner.next(); // no longer need nextline because adding comes with type of task
+		String next = scanner.nextLine();
 
 		while (!next.equals("bye")) {
 		  if (next.equals("list")) {
 		  	System.out.println("Here are the tasks in your list:");
 			for (int i = 0; i < list.size(); i++) {
-			  System.out.println((i+1) + "." + list.get(i).toString());
+			  System.out.println((i+1) + "." + list.get(i).getStatus());
 			}
-		  } else if (next.equals("done")) {
-		  	int index = scanner.nextInt(); // since scanner only took in the word done
+		  } else if (next.contains("done")) {
+		  	int index = Integer.valueOf(next.substring(next.length()-1));
 		  	Task task = list.get(index-1);
 		  	task.markAsDone();
-		  	System.out.println("Nice! I've marked this task as done:\n  " + task.toString());
+		  	System.out.println("Nice! I've marked this task as done:\n  " + task.getStatus());
 		  } else {
-		  	Task task = new Task("");
-		  	switch(next) {
-				case "todo":
-					String desc = scanner.nextLine().trim(); // assuming it takes whatever remains on the line before crossing over \n
-					task = new Todo(desc);
-					break;
-
-				case "deadline":
-					String line = scanner.nextLine().trim();
-					int indexStart = line.indexOf(" ");
-					int indexBy = line.indexOf("/");
-					String desc2 = line.substring(0, indexBy-1); // start after space, end before space before /
-					String by = line.substring(indexBy+1);
-					task = new Deadline(desc2, by);
-					break;
-
-				case "event":
-					String line2 = scanner.nextLine().trim();
-					int indexStart2 = line2.indexOf(" ");
-					int indexAt = line2.indexOf("/");
-					String desc3 = line2.substring(0, indexAt-1); // start after space, end before space before /
-					String at = line2.substring(indexAt+1);
-					task = new Event(desc3, at);
-					break;
-		  	}
-		  	list.add(task);
-		  	System.out.println("Got it. I've added this task:\n  " + task.toString()); // not overridden???
-		  	System.out.println("Now you have " + list.size() + " tasks in the list.");
+			list.add(new Task(next));
+			System.out.println("added: " + next);
 		  }
-		  next = scanner.next();
+		  next = scanner.nextLine();
 		}
 
 		System.out.println("Bye. Hope to see you again soon!");

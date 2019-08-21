@@ -5,18 +5,22 @@ import java.util.ArrayList;
 
 public class EventHandler {
 
-  private ArrayList<String> TodoList;
+  private ArrayList<Task> todoList;
 
   public EventHandler() {
-    TodoList = new ArrayList<String>();
+    this.todoList = new ArrayList<Task>();
   }
 
   public void run(String command) {
-    switch(command) {
+    String[] tokens = command.split(" ", 2);
+    switch (tokens[0]) {
       case "bye":
         return;
       case "list":
         list(command);
+        break;
+      case "done":
+        markAsDone(Integer.parseInt(tokens[1]));
         break;
       default:
         add(command);
@@ -24,18 +28,41 @@ public class EventHandler {
     }
   }
 
+  private void markAsDone(int index) {
+
+    // EXCEPTION: WHEN INDEX IS OUT OF RANGE
+    if (index < 1 || index > todoList.size()) {
+      String errorMessage = String.format(
+        "There is no task number #%d. Please enter a range between 1 and %d.",
+        index, todoList.size());
+      PrettyPrint.printBlock(new String[] {errorMessage});
+      return;
+    }
+
+    todoList.get(index - 1).markAsDone();
+    String[] outputs = new String[2];
+    outputs[0] = "Nice! I've marked this task as done: ";
+    outputs[1] = "  " + todoList.get(index - 1).toString();
+    PrettyPrint.printBlock(outputs);
+  }
+
   private void add(String todo) {
-    TodoList.add(todo);
+    todoList.add(new Task(todo));
     String output = "added: " + todo;
     PrettyPrint.printBlock(new String[] {output});
   }
 
   private void list(String command) {
-    String[] outputs = TodoList.toArray(new String[TodoList.size()]);
-    for (int z = 0; z < TodoList.size(); z++) {
-      outputs[z] = String.format("%3d. " + outputs[z], z + 1);
+    PrettyPrint.printBlock(toStringArray());
+  }
+
+  // Converts todoList into a String Array
+  private String[] toStringArray() {
+    String[] stringArray = new String[todoList.size()];
+    for (int z = 0; z < todoList.size(); z++) {
+      stringArray[z] = String.format("%3d." + todoList.get(z).toString(), z + 1);
     }
-    PrettyPrint.printBlock(outputs);
+    return stringArray;
   }
 
 }

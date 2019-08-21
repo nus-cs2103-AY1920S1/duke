@@ -11,14 +11,14 @@ public class PrettyPrint {
   public static void printBlock(String[] outputs) {
     print(line);
     for (String output : outputs) {
-      print(output);
+      print(" " + output);
     }
     print(line);
   }
 
   public static void printBlock(String output) {
-     print(line);
-     print(output);
-     print(line);
+    print(line);
+    print(output);
+    print(line);
   }
 }

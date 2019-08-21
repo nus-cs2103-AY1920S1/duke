@@ -1,0 +1,8 @@
+todo borrow book
+deadline CS2103 assignment /by Mon 6pm
+event formal dinner /at 4 Sep 17:00
+list
+done 2
+list
+blah
+bye

@@ -3,7 +3,11 @@ public class Event extends Task {
 
 	public Event(String description, String at) {
 		super(description);
-		this.at = at;
+		try {
+			this.at = Parser.parseDateTime(at);
+		} catch (Exception e) {
+			this.at = at;
+		}
 	}
 
 	@Override

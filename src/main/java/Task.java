@@ -21,7 +21,7 @@ public class Task {
 
 
     public String getStatusIcon() {
-        return (isDone ? "+" : "-"); //return + or - symbols means done
+        return (isDone ? "+" : "-"); //return + symbols means done - symbol means not done
     }
 
     @Override

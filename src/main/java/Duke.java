@@ -47,13 +47,13 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            if (command.equals("bye")) {
+            if (command.equalsIgnoreCase("bye")) {
                 break;
-            } else if (command.equals("list")){
+            } else if (command.equalsIgnoreCase("list")){
                 duke.list();
             } else {
                 String[] commandSplit = command.split(" ");
-                if (!commandSplit[0].equals("done")) {
+                if (!commandSplit[0].equalsIgnoreCase("done")) {
                     Task task = new Task(command);
                     duke.add(task);
                 } else {

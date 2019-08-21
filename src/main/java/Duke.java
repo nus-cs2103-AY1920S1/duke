@@ -16,6 +16,10 @@ public class Duke {
         d.terminateDuke();
     }
 
+    /**
+     * Method to be run the Duke object. This method is in charge of taking in input from the console
+     * and dealing with the different commands.
+     */
     public void runDuke() {
         Scanner sc = new Scanner(System.in);
         boolean contRunning = true;
@@ -49,12 +53,22 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to add a ToDo object
+     * @param taskDescription the string containing the description of the task
+     */
     public void addToDo(String taskDescription) {
         Task t = new ToDo(taskDescription);
         this.storedTasks.add(t);
         printAddTaskOutput(t);
     }
 
+    /**
+     * Method to add a Deadline object
+     * @param taskDescriptionwithDeadline the string containing the description and deadline
+     *                                    of the task (unsplit). Will split using "/by" as
+     *                                    delimiter
+     */
     public void addDeadline(String taskDescriptionwithDeadline) {
         String[] strArr = taskDescriptionwithDeadline.split("/by");
         String description = strArr[0].trim();
@@ -64,6 +78,12 @@ public class Duke {
         printAddTaskOutput(t);
     }
 
+    /**
+     * Method to add an Event object.
+     * @param taskDescriptionwithDuration the string containing the description and duration
+     *                                    of the event (unsplit). Will split using "/at" as
+     *                                    delimiter
+     */
     public void addEvent(String taskDescriptionwithDuration) {
         String[] strArr = taskDescriptionwithDuration.split("/at");
         String description = strArr[0].trim();
@@ -73,6 +93,11 @@ public class Duke {
         printAddTaskOutput(t);
     }
 
+    /**
+     * Helper function to print output to console whenever a task is added (applies
+     * to ToDos, Deadlines and Events)
+     * @param t Can be a Deadline, Event or Todo object
+     */
     public void printAddTaskOutput(Task t) {
         System.out.println("\t____________________________________________________________");
         System.out.println("\tGot it. I've added this task:");
@@ -81,6 +106,11 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Method to be invoked whenever a task is completed.
+     * Method is invoked when "done" is input to console
+     * @param taskNum the number of the task as shown whenever `list` is typed in the console
+     */
     public void completeTask(int taskNum) {
         Task t = this.storedTasks.get(taskNum - 1); //Because storedTasks is zero-indexed
         t.markAsDone();
@@ -91,6 +121,10 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Method to be invoked to list all existing tasks
+     * Method is invoked when "list" is input to console
+     */
     public void listStoredTasks() {
         System.out.println("\t____________________________________________________________");
         System.out.println("\tHere are the tasks in your list:");
@@ -104,6 +138,10 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
+    /**
+     * Initialisation method for Duke object. This is meant to encapsulate all the greetings
+     * and other initialisations required in the future.
+     */
     public void initDuke() {
         System.out.println("\t____________________________________________________________\n"
                           +"\tHello! I'm Duke\n"
@@ -111,6 +149,10 @@ public class Duke {
                           +"\t____________________________________________________________\n");
     }
 
+    /**
+     * A method to clean-up the Duke object when it is no longer needed. This is meant to
+     * encapsulation all termination logic required now and in the future.
+     */
     public void terminateDuke() {
         System.out.println("\t____________________________________________________________\n"
                           +"\tBye. Hope to see you again soon!\n"

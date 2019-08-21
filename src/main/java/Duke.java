@@ -1,11 +1,12 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         String border = "____________________________________________________________";
         System.out.println(border + "\nHello! I'm Duke\nWhat can I do for you?\n" + border);
 
-        Task[] userList = new Task[100];
+        ArrayList<Task> userList = new ArrayList<>();
          int counter = 0;
         Scanner scanner = new Scanner(System.in);
 
@@ -18,7 +19,7 @@ public class Duke {
                 int itemNumber = 1;
                 System.out.println(border + "\nHere are the tasks in your list:");
                 for(int i = 0; i < counter; i++) {
-                    System.out.println(itemNumber + "." + userList[i].toString());
+                    System.out.println(itemNumber + "." + userList.get(i).toString());
                     itemNumber ++;
                 }
                 System.out.println(border);
@@ -29,9 +30,9 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! Which task do you want to complete?");
                     }
                     int taskIndex = Integer.parseInt(taskDone[1]);
-                    userList[taskIndex - 1].markAsDone();
+                    userList.get(taskIndex - 1).markAsDone();
                     System.out.println(border + "\nNice! I've marked this task as done:");
-                    System.out.println(userList[taskIndex - 1].toString() +  "\n" + border);
+                    System.out.println(userList.get(taskIndex - 1).toString() +  "\n" + border);
 
                 } catch(DukeException e) {
                     System.out.println(e);
@@ -49,7 +50,7 @@ public class Duke {
                     String taskD = deadLineDate[0];
                     String dateD = deadLineDate[1];
                     Deadline newDeadLine = new Deadline(taskD, dateD);
-                    userList[counter] = newDeadLine;
+                    userList.add(newDeadLine);
                     counter ++;
                     System.out.println(border + "\nGot it. I've added this task:");
                     System.out.println(newDeadLine.toString());
@@ -70,7 +71,7 @@ public class Duke {
                     String taskE = eventDate[0];
                     String dateE = eventDate[1];
                     Event newEvent = new Event(taskE, dateE);
-                    userList[counter] = newEvent;
+                    userList.add(newEvent);
                     counter ++;
                     System.out.println(border + "\nGot it. I've added this task:");
                     System.out.println(newEvent.toString());
@@ -88,7 +89,7 @@ public class Duke {
 
                     String td = input.substring(5);
                     Todo newToDo = new Todo(td);
-                    userList[counter] = newToDo;
+                    userList.add(newToDo);
                     counter ++;
                     System.out.println(border + "\nGot it. I've added this task:");
                     System.out.println(newToDo.toString());
@@ -98,7 +99,24 @@ public class Duke {
                     System.out.println(e);
                 }
 
-            }else{
+            } else if(input.startsWith("delete")) {
+                try {
+                    String[] taskDelete = input.split(" ");
+                    if(taskDelete.length == 1) {
+                        throw new DukeException("☹ OOPS!!! Which task would you like to delete?");
+                    }
+
+                    int taskIndex = Integer.parseInt(taskDelete[1]);
+                    userList.remove(taskIndex - 1);
+                    counter --;
+                    System.out.println(border + "\nNoted. I've removed this task:");
+                    System.out.println(userList.get(taskIndex - 1).toString() +  "\n" );
+                    System.out.println("Now you have " + counter + " tasks in the list." + border);
+
+                } catch(DukeException e) {
+                    System.out.println(e);
+                }
+            } else{
                 try {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } catch (DukeException e){

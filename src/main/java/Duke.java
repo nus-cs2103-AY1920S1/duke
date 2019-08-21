@@ -63,6 +63,10 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
+                case "delete":
+                    int m = Integer.parseInt(a[1]);
+                    delete(list, m-1);
+                    break;
 
 
                 default:
@@ -136,6 +140,7 @@ public class Duke {
             String deadlineBy = s.substring(secondIndex);
             Task t = new Deadline(deadlineDescription, deadlineBy);
             list.add(t);
+            drawline();
             System.out.println("     Got it. I've added this task:");
             System.out.println("     " + t);
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
@@ -154,6 +159,7 @@ public class Duke {
             String eventAt = s.substring(secondIndex);
             Task t = new Event(eventDescription, eventAt);
             list.add(t);
+            drawline();
             System.out.println("     Got it. I've added this task:");
             System.out.println("     " + t);
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
@@ -163,4 +169,14 @@ public class Duke {
     public static void other(String s) throws ErrorException{
         throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+    public static void delete(ArrayList<Task>list,int p){
+        Task rt = list.get(p);
+        drawline();
+        System.out.println("     Noted. I've removed this task:");
+        System.out.println("     "+rt);
+        list.remove(p);
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
+        drawline();
+    }
+
 }

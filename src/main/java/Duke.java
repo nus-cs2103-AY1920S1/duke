@@ -29,7 +29,7 @@ public class Duke {
                     }
                 } else if (words[0].equals("done")) {
                     num = Integer.valueOf(words[1]);
-                    currTask = (Task) list.get(num - 1);
+                    currTask = list.get(num - 1);
                     currTask.setStatusIcon(true);
                     System.out.println("Nice! I've marked this task as done: \n  " + currTask);
                 } else if (currEvent.equals("todo")) {
@@ -57,6 +57,11 @@ public class Duke {
                     time = words[1].split(" /at ", 2)[1];
                     list.add(new Event(desc, time));
                     System.out.println("Got it. I've added this task: \n  " + list.get(list.size() - 1)
+                            + "\nNow you have " + list.size() + " tasks in the list.");
+                } else if (words[0].equals("delete")) {
+                    num = Integer.valueOf(words[1]);
+                    currTask = list.remove(num - 1);
+                    System.out.println("Noted. I've removed this task: \n  " + currTask
                             + "\nNow you have " + list.size() + " tasks in the list.");
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

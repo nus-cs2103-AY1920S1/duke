@@ -9,21 +9,30 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        ArrayList list = new ArrayList<>();
+        Integer num;
+        Task curr;
+        ArrayList list = new ArrayList<Task>();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String word = sc.nextLine();
-        while (!word.equals("bye")) {
-            if (!word.equals("list")) {
-                System.out.println("added: " + word);
-                list.add(word);
-                word = sc.nextLine();
-            } else {
+        String line = sc.nextLine();
+        while (!line.equals("bye")) {
+            String[] words = line.split(" ");
+            if (line.equals("list")) {
                 for (int i = 1; i <= list.size(); i++) {
                     System.out.println(i + ". " + list.get(i - 1));
                 }
-                word = sc.nextLine();
+                line = sc.nextLine();
+            } else if (words[0].equals("done")) {
+                num = Integer.valueOf(words[1]);
+                curr = (Task) list.get(num - 1);
+                curr.setStatusIcon(true);
+                System.out.println("Nice! I've marked this task as done: \n  " + curr);
+                line = sc.nextLine();
+            } else {
+                System.out.println("added: " + line);
+                list.add(new Task(line));
+                line = sc.nextLine();
             }
         }
         System.out.println("Bye. Hope to see you again soon!");

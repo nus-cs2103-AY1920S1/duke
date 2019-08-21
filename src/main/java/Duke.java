@@ -13,14 +13,20 @@ public class Duke {
 
     public static void main(String[] args) {
         greet();
+
+        TaskManager taskManager = new TaskManager();
+
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
+
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (input.equals("list")) {
+                taskManager.printTasks();
             } else {
-                System.out.println(input);
+                taskManager.addTask(input);
             }
         }
         scanner.close();

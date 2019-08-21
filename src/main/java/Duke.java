@@ -10,18 +10,27 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Hello! I'm \n" + logo + "What can I do for you?\n");
+        System.out.println("Hello! I'm \n" + logo + "What can I do for you?");
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.strip().toLowerCase().equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!\n");
-                break;
-            } else if (input.equals("list")) {
-                Task.printList();
-            } else {
-                Task task = new Task(input);
-                System.out.println("added: " + task);
+            String[] inputArr = input.split("\\s+", 2);
+            String command = inputArr[0];
+            switch (command) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    return;
+                case "list":
+                    Task.printList();
+                    break;
+                case "done":
+                    if (inputArr.length > 1) {
+                        Task.doTask(Integer.parseInt(inputArr[1]));
+                    }
+                    break;
+                default:
+                    new Task(input);
+                    break;
             }
         }
 

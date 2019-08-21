@@ -19,29 +19,53 @@ public class Duke {
 
         displayWelcome();
         while(isContinue) {
-            taskName = scanner.nextLine();
-            command = taskName.split(" ");
-            switch (command[0]) {
+            taskName = scanner.nextLine();      //the whole user command
+            command = taskName.split(" "); //the different parts pf the command
+            switch (command[0]) {               //according to the first part of the command
                 case "bye":
                     displayQuit();
                     isContinue = false;
                     break;
                 case "list":
-                    list(tasks);
-                    break;
+                    try {
+                        list(tasks);
+                    } catch (RuntimeException exList) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! There is no task in your list.");
+                        System.out.println("    ____________________________________________________________");
+                    } finally {
+                        break;
+                    }
+
                 case "done":
-                    done(tasks, (int)command[1].charAt(0));
-                    break;
+                    try{
+                        done(tasks, Integer.parseInt(command[1])-1);
+                    } catch (IndexOutOfBoundsException exDone) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
+                        System.out.println("    ____________________________________________________________");
+                    } finally {
+                        break;
+                    }
+
                 case "delete":
-                    deleteTask(tasks, (int)command[1].charAt(0));
-                    break;
+                    try{
+                        deleteTask(tasks, Integer.parseInt(command[1])-1);
+                    } catch (IndexOutOfBoundsException exDelete) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     ☹ OOPS!!! There is no task "+Integer.parseInt(command[1])+" in the list.");
+                        System.out.println("    ____________________________________________________________");
+                    } finally {
+                        break;
+                    }
+
                 case "todo":
                     try {
-                        taskName = taskName.substring(5);
+                        taskName = taskName.trim().substring(5);         //it is very important to trim the space at the end
                         task = new Todo (taskName);
                         addTaskIn(task,tasks);
 
-                    } catch (StringIndexOutOfBoundsException ex1) {
+                    } catch (StringIndexOutOfBoundsException exTodo) {
                         System.out.println("    ____________________________________________________________");
                         System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
                         System.out.println("    ____________________________________________________________");
@@ -52,16 +76,16 @@ public class Duke {
 
                 case "deadline":
                     try {
-                        taskName = taskName.substring(9);
+                        taskName = taskName.trim().substring(9);
                         date = taskName.split("/");
                         task = new Deadline (date[0],date[1].substring(3));
                         addTaskIn(task,tasks);
-                    } catch (StringIndexOutOfBoundsException ex2){
+                    } catch (StringIndexOutOfBoundsException exDeadline1){
                         System.out.println("    ____________________________________________________________");
                         System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
                         System.out.println("    ____________________________________________________________");
 
-                    } catch (IndexOutOfBoundsException ex3){
+                    } catch (IndexOutOfBoundsException exDeadline2){
                         System.out.println("    ____________________________________________________________");
                         System.out.println("     ☹ OOPS!!! The end time of a deadline cannot be empty.");
                         System.out.println("    ____________________________________________________________");
@@ -72,16 +96,16 @@ public class Duke {
 
                 case "event":
                     try {
-                        taskName = taskName.substring(6);
+                        taskName = taskName.trim().substring(6);
                         date = taskName.split("/");
                         task = new Event (date[0], date[1].substring(3));
                         addTaskIn(task,tasks);
-                    } catch (StringIndexOutOfBoundsException ex4) {
+                    } catch (StringIndexOutOfBoundsException exEvent1) {
                         System.out.println("    ____________________________________________________________");
                         System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
                         System.out.println("    ____________________________________________________________");
 
-                    } catch (IndexOutOfBoundsException ex5){
+                    } catch (IndexOutOfBoundsException exEvent2){
                         System.out.println("    ____________________________________________________________");
                         System.out.println("     ☹ OOPS!!! The start time of a event cannot be empty.");
                         System.out.println("    ____________________________________________________________");
@@ -93,9 +117,9 @@ public class Duke {
                     //
                     try {
                         throw new InvalidCommandException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    } catch (RuntimeException ex6) {
+                    } catch (RuntimeException exDefault1) {
                         System.out.println("    ____________________________________________________________");
-                        System.out.println(ex6.getMessage());
+                        System.out.println(exDefault1.getMessage());
                         System.out.println("    ____________________________________________________________");
                     } finally {
                         break;
@@ -122,6 +146,11 @@ public class Duke {
 
     //Add new task
     public static void addTaskIn(Task task,ArrayList<Task> tasks) {
+
+        if(task == null ){
+            throw new StringIndexOutOfBoundsException();
+        }
+
         System.out.println("    ____________________________________________________________");
         tasks.add(task);
         System.out.println("     Got it. I've added this task:");
@@ -131,6 +160,9 @@ public class Duke {
     }
 
     public static void list (ArrayList<Task> tasks){
+        if(tasks.size() == 0){
+            throw new RuntimeException();
+        }
         System.out.println("    ____________________________________________________________");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.print("     "+(i+1)+"."+"["+tasks.get(i).getType()+"]"+"["+ tasks.get(i).getStatus()+"] "+tasks.get(i).getTaskName()+" ");
@@ -153,22 +185,29 @@ public class Duke {
     }
 
     public static void done(ArrayList<Task> tasks, int index) {
-        tasks.get(index-49).setStatus();
+        if (index > tasks.size()-1) {
+            throw new IndexOutOfBoundsException();
+        }
+        tasks.get(index).setStatus();
         System.out.println("    ____________________________________________________________");
         System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       ["+tasks.get(index-49).getStatus()+"] "+tasks.get(index-49).getTaskName());
+        System.out.println("       ["+tasks.get(index).getStatus()+"] "+tasks.get(index).getTaskName());
         System.out.println("    ____________________________________________________________");
     }
 
     //delate a task from list
-    public static void deleteTask(ArrayList<Task> tasks,int taskIndex) {
-        Task task = tasks.remove(taskIndex-49);
+    public static void deleteTask(ArrayList<Task> tasks,int index) {
+        if (index > tasks.size()-1) {
+            throw new IndexOutOfBoundsException();
+        }
+        Task task = tasks.remove(index);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Noted. I've removed this task: ");
         System.out.println("       ["+task.getType()+"]"+"["+ task.getStatus()+"] "+task.getTaskName());
         System.out.println("     Now you have "+tasks.size()+" tasks in the list");
         System.out.println("    ____________________________________________________________");
     }
+
 }
 
 

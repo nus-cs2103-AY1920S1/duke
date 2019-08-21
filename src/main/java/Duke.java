@@ -27,14 +27,6 @@ public class Duke {
                 printNumberList(lst);
             } else if (tokens[0].equals("done")) {
                 doTask(tokens[1]);
-//                char rawPos = input.charAt(input.length()-1);
-//                int pos = Integer.parseInt(Character.toString(rawPos)) - 1;
-//                Task task = lst.get(pos);
-//                task.doTask();
-//                List<String> inst = List.of("Nice! I've marked this task as done: ",
-//                        "  "+task.toString());
-//                //System.out.println("Nice! I've marked this task as done: ");
-//                //System.out.println(this);
             } else {
                 Task task = new Task(input);
                 printInput(task);
@@ -84,16 +76,12 @@ public class Duke {
     }
 
     public static void doTask(String str) {
-        //char rawPos = input.charAt(input.length()-1);
-        //int pos = Integer.parseInt(Character.toString(rawPos)) - 1;
         int pos = Integer.parseInt(str)-1;
         Task task = lst.get(pos);
         task.doTask();
         List<String> inst = List.of("Nice! I've marked this task as done: ",
                 "  "+task.toString());
         printInput(inst);
-        //System.out.println("Nice! I've marked this task as done: ");
-        //System.out.println(this);
     }
 
 

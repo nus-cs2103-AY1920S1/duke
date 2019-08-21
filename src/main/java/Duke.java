@@ -42,16 +42,26 @@ public class Duke {
                         System.out.println("Bye. Hope to see you again soon!");
                         System.exit(0);
                     case "done":
+                    case "delete":
                         if (arr.length == 1 || arr.length > 2) {
-                            throw new FormatException("☹ OOPS!!! The done command should be \"done\" + task No.");
+                            throw new FormatException("☹ OOPS!!! The " + arr[0] + " command should be " + arr[0] + " + task No.");
                         }
                         int index = Integer.parseInt(arr[1]) - 1;
                         if(index >= tasks.size() || index < 0) {
                             throw new FormatException("☹ OOPS!!! The task No. you refer to is non-existent. Try another one.");
                         }
-                        tasks.get(index).markDone();
-                        String prompt = "Nice! I've marked this task as done:\n" +
-                                "    " + tasks.get(index).toString();
+                        String prompt;
+                        if(arr[0].equals("done")){
+                            tasks.get(index).markDone();
+                            prompt = "Nice! I've marked this task as done:\n" +
+                                    "    " + tasks.get(index).toString();
+                        } else {
+                            Task t = tasks.get(index);
+                            tasks.remove(index);
+                            prompt = "Noted. I've removed this task:\n" +
+                                            "    " + t.toString() + "\n" +
+                                            "Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list.";
+                        }
                         System.out.println(prompt);
                         break;
                     case "todo":

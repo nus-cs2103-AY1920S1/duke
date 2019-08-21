@@ -4,10 +4,12 @@ import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
 import weijie.duke.views.ConsoleView;
 
+import java.util.List;
+
 public class ConsolePresenter implements InputListener {
 
     private ConsoleView view;
-    private IRepository repo;
+    private IRepository<Task> repo;
 
     public ConsolePresenter(ConsoleView view, IRepository<Task> repo) {
         view.registerListener(this);
@@ -19,8 +21,22 @@ public class ConsolePresenter implements InputListener {
     public void onInputReceived(String input) {
         if (input.equals("bye")) {
             view.exit();
+
+        } else if (input.equals("list")) {
+            List<Task> tasks = repo.getAll();
+            StringBuilder output = new StringBuilder();
+
+            for (int i = 0; i < tasks.size(); i++) {
+                output.append(i + 1).append(". ").append(tasks.get(i).getDescription()).append("\n");
+            }
+
+            view.print(output.toString().trim());
+
         } else {
-            view.print(input);
+            Task task = new Task(input);
+            repo.create(task);
+            view.print("added: " + task.getDescription());
         }
     }
 }
+

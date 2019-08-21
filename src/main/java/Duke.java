@@ -92,8 +92,8 @@ public class Duke {
         System.out.print(upperLine);
         //make sure it only have one number follow
         if(oneLine.length != 1 && !oneLine[1].isBlank()
-                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1])){
-            int i = Integer.parseInt(oneLine[1]);
+                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())){
+            int i = Integer.parseInt(oneLine[1].trim());
             if(i <= myList.size() && i > 0){
                 System.out.println(deleteMessage1);
                 Task delete_task = myList.get(i - 1);

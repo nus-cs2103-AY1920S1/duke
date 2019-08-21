@@ -55,7 +55,7 @@ public class Duke {
         if (!validTask) {
             dukeEcho("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             return;
-        };
+        }
 
         String taskDetails;
         Task newTask;

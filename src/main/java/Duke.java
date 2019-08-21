@@ -4,24 +4,32 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> lst = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         printLogo();
         printWelcome();
 
         while (true) {
             if (sc.hasNextLine()) {
-                String command = sc.nextLine();
+                String command = sc.next();
                 switch (command) {
                     case "bye":
                         printBye();
                         return;
                     case "list":
-                        printList(lst);
+                        printList(taskList);
+                        break;
+                    case "done":
+                        int itemIndex = sc.nextInt();
+                        Task currTask = taskList.get(itemIndex - 1);
+                        currTask.doTask();
+                        printDone(currTask);
                         break;
                     default:
-                        lst.add(command);
-                        printAddition(command);
+                        String fullCommand = command + sc.nextLine();
+                        Task task = new Task(fullCommand);
+                        taskList.add(task);
+                        printAddition(task);
                         break;
                 }
             }
@@ -80,18 +88,29 @@ public class Duke {
         printBotLine();
     }
 
-    private static void printAddition(String msg) {
-        printMessage(("added: " + msg));
+    private static void printAddition(Task task) {
+        printMessage(("added: " + task.description));
     }
 
-    private static void printList(ArrayList<String> list) {
+    private static void printList(ArrayList<Task> list) {
         int count = 1;
         printTopLine();
-        for(String item: list) {
+        printIndentWSpace();
+        System.out.println("Here are the tasks in your list:");
+        for(Task item: list) {
             printIndentWSpace();
-            System.out.println(count + ". " + item);
+            System.out.println(count + "." + item);
             count++;
         }
+        printBotLine();
+    }
+
+    private static void printDone(Task task) {
+        printTopLine();
+        printIndentWSpace();
+        System.out.println("Nice! I've marked this task as done: ");
+        printIndentWSpace();
+        System.out.println("   " + task);
         printBotLine();
     }
 }

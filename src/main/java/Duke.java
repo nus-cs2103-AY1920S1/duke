@@ -1,13 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import main.task.Task;
+import main.task.*;
 
 public class Duke {
     public static void main(String[] args) {
         //Level 3
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> events = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
         System.out.print("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
@@ -16,11 +16,12 @@ public class Duke {
         while (!input.equalsIgnoreCase("bye")) {
             if (input.equals("list")) {
                 String result = "";
-                for (int i = 0; i < events.size(); i = i + 1) {
-                    result = result + "    " + (i + 1) + ". " + events.get(i).toString() + "\n";
+                for (int i = 0; i < tasks.size(); i = i + 1) {
+                    result = result + "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
                 }
                 result = result.equals("") ? "\n" : result;
                 System.out.print("    ____________________________________________________________\n" +
+                        "    Here are the tasks in your list:\n" +
                         result +
                         "    ____________________________________________________________\n");
                 input = sc.nextLine();
@@ -29,7 +30,7 @@ public class Duke {
                 Scanner sc2 = new Scanner(input);
                 sc2.next();
                 int taskNumber = sc2.nextInt();
-                Task targetedTask = events.get(taskNumber - 1);
+                Task targetedTask = tasks.get(taskNumber - 1);
                 Task.markAsDone(targetedTask);
                 sc2.close();
                 System.out.print("    ____________________________________________________________\n" +
@@ -38,11 +39,24 @@ public class Duke {
                         "    ____________________________________________________________\n");
                 input = sc.nextLine();
             } else {
-                Task t = new Task(input);
+                Task t;
+                if (input.substring(0, 4).equals("todo")) {
+                    t = new ToDo(input.substring(5));
+                } else if (input.substring(0, 8).equals("deadline")) {
+                    String res = input.substring(9);
+                    String[] pair = res.split("/");
+                    t = new Deadline(pair[0], pair[1]);
+                } else {
+                    String res = input.substring(6);
+                    String[] pair = res.split("/");
+                    t = new Event(pair[0], pair[1]);
+                }
                 System.out.print("    ____________________________________________________________\n" +
-                        "    added: "+ input + "\n" +
+                        "     Got it. I've added this task: \n" +
+                        "       "+ t.toString() + "\n" +
+                        "     Now you have " + tasks.size() + " tasks in the list.\n" +
                         "    ____________________________________________________________\n");
-                events.add(t);
+                tasks.add(t);
                 input = sc.nextLine();
             }
         }

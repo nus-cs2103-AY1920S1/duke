@@ -54,7 +54,12 @@ public class Duke {
                     System.out.println("    Now you have " + counter + " in the list.");
                 }
                 System.out.println(line);
-                echo = sc.nextLine();
+                if(sc.hasNextLine()) {
+                    echo = sc.nextLine();
+                } else {
+                    break;
+                }
+
             }
 
             if (echo.equals("bye")) {

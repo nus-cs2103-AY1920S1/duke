@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
-    private static Task[] arr = new Task[100];
-    private static int index = 0;
+    private static ArrayList<Task> arr = new ArrayList<>(100);
 
     /**
      * Prints a string.
@@ -19,8 +19,8 @@ public class Duke {
     private static void addTask(Task task) {
         print("Got it. I've added this task:");
         print(task.toString());
-        arr[index++] = task;
-        print("Now you have " + index + (index > 1 ? " tasks" : " task") + " in the list.");
+        arr.add(task);
+        print("Now you have " + arr.size() + (arr.size() > 1 ? " tasks" : " task") + " in the list.");
     }
 
     /**
@@ -43,8 +43,9 @@ public class Duke {
                     break;
                 case "list":
                     print("Here are the tasks in your list:");
-                    for (int i = 0; i < index; i++) {
-                        print((i + 1) + "." + arr[i]);
+                    int i = 0;
+                    for (Task t : arr) {
+                        print(++i + "." + t);
                     }
                     break;
                 case "todo":

@@ -18,6 +18,9 @@ public class Duke {
                 case "list":
                     tasks.list();
                     break;
+                case "done":
+                    tasks.done(sc.nextInt());
+                    break;
                 default :
                     tasks.add(input + sc.nextLine());
                     break;

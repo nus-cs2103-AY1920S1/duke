@@ -9,9 +9,9 @@ public class Sheet {
         this.list.add(task);
         System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOT + Formatter.INDENT + "  "
                 + task.toString() + "\n");
-        System.out.printf(Formatter.LINE);
         this.numOfTask++;
         this.count();
+        System.out.printf(Formatter.LINE);
     }
 
     private void count() {
@@ -33,7 +33,7 @@ public class Sheet {
     public void markAsDone(int num) {
         Task target = this.list.get(num - 1);
         this.list.set(num - 1,target.finish());
-        System.out.println(Formatter.LINE + Formatter.INDENT + Formatter.DONE + Formatter.INDENT +
+        System.out.printf(Formatter.LINE + Formatter.INDENT + Formatter.DONE + Formatter.INDENT +
                 this.list.get(num - 1).toString() + "\n" + Formatter.LINE);
     }
 

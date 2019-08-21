@@ -35,9 +35,13 @@ public class Listener {
                     }
                     this.sheet.markAsDone(index);
                 } catch (TaskNotFoundException tfe){
-                    System.out.println(tfe.toString());
+                    System.out.printf(tfe.toString());
                 } catch (InputMismatchException ime) {
-                    System.out.println("☹ OOPS!!! I cannot recognise that task index. :-(");
+                    System.out.printf(
+                            Formatter.LINE + Formatter.INDENT +
+                                    "☹ OOPS!!! I cannot recognise that task index. :-(" + "\n"
+                                    + Formatter.LINE );
+                    sc.nextLine();
                 }
             } else if (command.equals("todo")){
                 try {
@@ -84,7 +88,7 @@ public class Listener {
                     Task eventTask = new Event(description, span);
                     this.sheet.add(eventTask);
                 } catch (MissingDescriptionException mde) {
-                    System.out.println(mde.toString());
+                    System.out.printf(mde.toString());
                 } finally {
                 }
             } else {

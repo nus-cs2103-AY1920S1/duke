@@ -5,6 +5,6 @@ public class ToDo extends Task {
 
     public String toString() {
         String statusIcon = getStatusIcon();
-        return "[T][" + "[" + statusIcon + "] " + this.description;
+        return "[T][" + statusIcon + "] " + this.description;
     }
 }

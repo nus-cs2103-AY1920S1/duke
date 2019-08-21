@@ -32,12 +32,53 @@ public class Duke {
                 case "done":
                     completeTask(sc.nextInt());
                     break;
+                case "todo":
+                    String taskDescription = sc.nextLine();
+                    addToDo(taskDescription);
+                    break;
+                case "deadline":
+                    addDeadline(sc.nextLine());
+                    break;
+                case "event":
+                    addEvent(sc.nextLine());
+                    break;
                 default:
                     //Provided input is a task
-                    String taskName = command + sc.nextLine();
-                    addTaskToStore(taskName);
+                    System.out.println("An invalid input was provided");
             }
         }
+    }
+
+    public void addToDo(String taskDescription) {
+        Task t = new ToDo(taskDescription);
+        this.storedTasks.add(t);
+        printAddTaskOutput(t);
+    }
+
+    public void addDeadline(String taskDescriptionwithDeadline) {
+        String[] strArr = taskDescriptionwithDeadline.split("/by");
+        String description = strArr[0].trim();
+        String deadline = strArr[1].trim();
+        Task t = new Deadline(description, deadline);
+        this.storedTasks.add(t);
+        printAddTaskOutput(t);
+    }
+
+    public void addEvent(String taskDescriptionwithDuration) {
+        String[] strArr = taskDescriptionwithDuration.split("/at");
+        String description = strArr[0].trim();
+        String duration = strArr[1].trim();
+        Task t = new Event(description, duration);
+        this.storedTasks.add(t);
+        printAddTaskOutput(t);
+    }
+
+    public void printAddTaskOutput(Task t) {
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t\t" + t);
+        System.out.println("\tNow you have " + this.storedTasks.size() + " tasks in the list");
+        System.out.println("\t____________________________________________________________");
     }
 
     public void completeTask(int taskNum) {
@@ -46,20 +87,13 @@ public class Duke {
 
         System.out.println("\t____________________________________________________________");
         System.out.println("\tNice! I've marked this task as done: ");
-        System.out.println("\t" + t);
-        System.out.println("\t____________________________________________________________");
-    }
-
-    public void addTaskToStore(String taskName) {
-        this.storedTasks.add(new Task(taskName));
-
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\tadded: " + taskName);
+        System.out.println("\t\t" + t);
         System.out.println("\t____________________________________________________________");
     }
 
     public void listStoredTasks() {
         System.out.println("\t____________________________________________________________");
+        System.out.println("\tHere are the tasks in your list:");
 
         int counter = 1;
         for (Task t : this.storedTasks) {

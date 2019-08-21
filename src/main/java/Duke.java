@@ -27,6 +27,11 @@ public class Duke {
                         taskComplete(currTask);
                         break;
 
+                    case "delete":
+                        deleteComplete(taskList.size(), taskList.get(Integer.parseInt(commandArr[1]) - 1));
+                        taskList.remove(Integer.parseInt(commandArr[1]) - 1);
+                        break;
+
                     case "todo":
                         Task todo = new ToDo(getDescription(commandArr));
                         taskList.add(todo);
@@ -70,6 +75,15 @@ public class Duke {
         sc.close();
     }
 
+    private static void deleteComplete(int size, Task currTask) {
+        printLine();
+        System.out.println("     Noted. I've removed this task: \n       " +
+                currTask +
+                "\n     Now you have " + (size - 1) + " tasks in the list.");
+        printLine();
+        System.out.println();
+    }
+
     private static void numberErrorMessage() {
         System.out.println("    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! Please type in a valid index from 1 to 100\n" +
@@ -83,7 +97,7 @@ public class Duke {
     }
 
     private static void checkCommand(String[] commandArr) throws DukeException {
-        if (!commandArr[0].matches("todo|deadline|event|done|list|bye")) {
+        if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete")) {
             throw new DukeException("    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                     "    ____________________________________________________________\n");

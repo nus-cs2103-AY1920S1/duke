@@ -75,11 +75,11 @@ public class Duke {
 }
 
 class Task{
-    private static final String TICK = "\u2713";
-    private static final String CROSS = "\u2718";
+    protected static final String TICK = "\u2713";
+    protected static final String CROSS = "\u2718";
 
-    private boolean isDone;
-    private String taskItem;
+    protected boolean isDone;
+    protected String taskItem;
 
     // Default Constructor
     public Task(){
@@ -103,5 +103,18 @@ class Task{
 
     public String getTaskItem(){
         return taskItem;
+    }
+}
+
+class ToDo extends Task{
+
+    public ToDo(String toDo, boolean isDone){
+        super(toDo, isDone);
+    }
+
+    @Override
+    public String getStatusIcon(){
+        if(isDone) return "[T][" + TICK + "]";
+        else return "[T][" + CROSS + "]";
     }
 }

@@ -2,16 +2,23 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> xs;
+    private int numOfTasks;
 
     public TaskList() {
         xs = new ArrayList<Task>();
+        numOfTasks = 0;
+    }
+
+    public int getNumOfTasks() {
+        return numOfTasks;
     }
 
     public void addTask(Task t) {
+        numOfTasks++;
         xs.add(t);
         System.out.println("Got it. I've added this task:");
         System.out.println(t);
-        System.out.printf("Now you have %d tasks in the list.\n", xs.size());
+        System.out.printf("Now you have %d tasks in the list.\n", numOfTasks);
     }
 
     public void tickTask(int num) {

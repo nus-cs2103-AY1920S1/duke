@@ -18,14 +18,23 @@ public class Duke {
      * "done" or "undo" followed by an integer, marks the task corresponding to
      * the index integer as done or undone respectively. Otherwise, adds the
      * given input to the list of tasks.
-     * @param input     User text to be processed.
+     * @param input     User text to be processed. Input can take one of the
+     *                  following forms:
+     *                  1. "list"
+     *                  2. "done [taskIndex]"
+     *                  3. "undo [taskIndex]"
+     *                  4. "todo [description]"
+     *                  5. "deadline [description] /by [time]"
+     *                  6. "event [description] /at [time]"
+     *                  7. "[taskDescription]" (default: treat as Todo)
      */
     private static void process(String input) {
-        if (input.equals("list")) {
+        if (input.equalsIgnoreCase("list")) {
             DukeFormatter.prettyPrint(taskList);
-        } else if (input.substring(0, 4).equals("done")) {
+        } else if (input.substring(0, 4).equalsIgnoreCase("done")) {
             // Note: "done" must be followed by an integer
-            int taskIndex = Integer.parseInt(input.substring(5)); // TODO: handle parseInt error
+            int taskIndex = Integer.parseInt(input.substring(5));
+                    // TODO: handle parseInt error
             if (!isValid(taskIndex)) {
                 DukeFormatter.prettyPrint(
                         "Sorry, I couldn't find the task you requested!");
@@ -35,7 +44,7 @@ public class Duke {
             completedTask.markAsDone();
             DukeFormatter.prettyPrint("Nice! I've marked this task as done:\n  "
                     + completedTask.toString());
-        } else if (input.substring(0, 4).equals("undo")) {
+        } else if (input.substring(0, 4).equalsIgnoreCase("undo")) {
             // TODO: get rid of duplicated code for "done" and "undo"
             int taskIndex = Integer.parseInt(input.substring(5));
             if (!isValid(taskIndex)) {
@@ -45,11 +54,37 @@ public class Duke {
             }
             Task completedTask = taskList.get(taskIndex - 1);
             completedTask.markAsUndone();
-            DukeFormatter.prettyPrint("Oh dear. I've marked this task as undone:\n  "
-                    + completedTask.toString());
+            DukeFormatter.prettyPrint("Oh dear. I've marked this task as undone:"
+                    + "\n  " + completedTask.toString());
         } else {
-            taskList.add(new Task(input));
-            DukeFormatter.prettyPrint("added: " + input);
+            addNewTask(input);
+            int numberOfTasks = taskList.size();
+            DukeFormatter.prettyPrint("Got it. I've added this task:"
+                    + "\n  " + taskList.get(numberOfTasks - 1)
+                    + "\nNow you have " + numberOfTasks + " tasks in the list.");
+        }
+    }
+
+    /**
+     * Add a new task to the list according to the given task type.
+     * @param task      Description of task and other relevant information.
+     */
+    private static void addNewTask(String task) {
+        // TODO: reorganise and reduce code duplication
+        if (task.substring(0, 4).equalsIgnoreCase("todo")) { // Todo
+            taskList.add(new Todo(task.substring(5)));
+        } else if (task.length() < 5) { // FIXME: treat as Todo for now
+            taskList.add(new Todo(task));
+        } else if (task.substring(0, 5).equalsIgnoreCase("event")) { // Event
+            String[] taskDetails = task.substring(6).split(" /at ");
+            taskList.add(new Event(taskDetails[0], taskDetails[1]));
+        } else if (task.length() < 8) { // FIXME: treat as Todo for now
+            taskList.add(new Todo(task));
+        } else if (task.substring(0, 8).equalsIgnoreCase( "deadline")) { // Deadline
+            String[] taskDetails = task.substring(9).split(" /by ");
+            taskList.add(new Deadline(taskDetails[0], taskDetails[1]));
+        } else {
+            taskList.add(new Todo(task));
         }
     }
 
@@ -60,10 +95,7 @@ public class Duke {
      * @return              True if the index is valid and false otherwise
      */
     private static boolean isValid(int taskIndex) {
-        if (taskIndex < 1 || taskIndex > taskList.size()) {
-            return false;
-        }
-        return true;
+        return taskIndex >= 1 && taskIndex <= taskList.size();
     }
 
     /**
@@ -74,8 +106,8 @@ public class Duke {
         DukeFormatter.prettyPrint(
                 "Hello! I'm Duke\nWhat can I do for you?");
         while (scanner.hasNext()) {
-            String userInput = scanner.nextLine();
-            if (userInput.equals("bye")) { break; }
+            String userInput = scanner.nextLine().strip();
+            if (userInput.equalsIgnoreCase("bye")) { break; }
             process(userInput);
         }
         DukeFormatter.prettyPrint("Bye. Hope to see you again soon!");

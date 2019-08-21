@@ -1,6 +1,6 @@
 /*
  * Duke.java
- * Level-4
+ * Level-5
  * CS2103T
  * @author Gabriel Ong
  *
@@ -25,24 +25,24 @@ public class Duke {
         // Run input loop
         while (!(input = sc.nextLine()).equals("bye")) {
 
-            // Check if task type and add accordingly
-            if (input.startsWith("done ")) {
-                doneTask(input, list);
+            try {
+                // Check if task type and add accordingly
+                if (input.startsWith("done ")) {
+                    doneTask(input, list);
+                } else if (input.startsWith("todo")) {
+                    addToList(input, TaskType.Todo, list);
+                } else if (input.startsWith("deadline ")) {
+                    addToList(input, TaskType.Deadline, list);
+                } else if (input.startsWith("event ")) {
+                    addToList(input, TaskType.Event, list);
+                } else if (input.equals("list")) {
+                    readList(list);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
             }
-            else if (input.startsWith("todo")) {
-                addToList(input, TaskType.Todo, list);
-            }
-            else if (input.startsWith("deadline ")) {
-                addToList(input, TaskType.Deadline, list);
-            }
-            else if (input.startsWith("event ")) {
-                addToList(input, TaskType.Event, list);
-            }
-            else if (input.equals("list")) {
-                readList(list);
-            }
-            else {
-                printOutput("Error : Command was not recognized!");
+            catch (DukeException e) {
+                printOutput(e.getMessage());
             }
         }
 
@@ -68,7 +68,7 @@ public class Duke {
     }
 
     //Adds a list of a particular task type to the task list.
-    public static void addToList(String input, TaskType type, ArrayList<Task> list) {
+    public static void addToList(String input, TaskType type, ArrayList<Task> list) throws DukeException {
         Task task = null;
         // Process input string (Cut command suffix)
         switch(type) {
@@ -76,21 +76,21 @@ public class Duke {
                 if (input.length() > 5) {
                     task = new Todo(input.substring(5));
                 } else {
-                    printOutput("Error : Input too short!");
+                    throw new DukeException("The description of a todo cannot be empty.");
                 }
                 break;
             case Deadline:
                 if (input.length() > 9) {
                     task = new Deadline(input.substring(9));
                 } else {
-                    printOutput("Error : Input too short!");
+                    throw new DukeException("The description of a deadline cannot be empty.");
                 }
                 break;
             case Event:
                 if (input.length() > 6) {
                     task = new Event(input.substring(6));
                 } else {
-                    printOutput("Error : Input too short!");
+                    throw new DukeException("The description of an event cannot be empty.");
                 }
                 break;
         }
@@ -102,7 +102,7 @@ public class Duke {
     }
 
     // Iterates through and prints every task in the task list
-    public static void readList(ArrayList<Task> list) {
+    public static void readList(ArrayList<Task> list) throws DukeException {
         int count = 1;
         StringBuilder output = new StringBuilder();
 
@@ -118,12 +118,12 @@ public class Duke {
             output.deleteCharAt(output.toString().length() - 1);
             printOutput(output.toString());
         } else {
-            printOutput("Error : Nothing has been added yet!");
+            throw new DukeException("The task list is empty.");
         }
     }
 
     // Marks if item in list as done.
-    public static void doneTask(String input, ArrayList<Task> list) {
+    public static void doneTask(String input, ArrayList<Task> list) throws DukeException {
         // Process input
         if (input.length() > 5) {
             try {
@@ -132,10 +132,10 @@ public class Duke {
                 item.setDone();
                 printOutput("Nice! I've marked this task as done:\n  " + item);
             } catch (NumberFormatException e) {
-                printOutput("Error : Please enter a number!");
+                throw new DukeException("The description of a done must be an integer.");
             }
         } else {
-            printOutput("Error : Input too short!");
+            throw new DukeException("The description of a done cannot be empty.");
         }
 
     }

@@ -14,77 +14,134 @@ public class Duke {
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
 
-            switch (commandArr[0]) {
-                case "list":
-                    printArray(taskList);
-                    break;
+            try {
+                checkCommand(commandArr);
+                switch (commandArr[0]) {
+                    case "list":
+                        printArray(taskList);
+                        break;
 
-                case "done":
-                    Task currTask = taskList.get(Integer.parseInt(commandArr[1]) - 1);
-                    currTask.markAsDone();
-                    taskComplete(currTask);
-                    break;
+                    case "done":
+                        Task currTask = taskList.get(Integer.parseInt(commandArr[1]) - 1);
+                        currTask.markAsDone();
+                        taskComplete(currTask);
+                        break;
 
-                case "todo":
-                    StringJoiner todoDescription = new StringJoiner(" ");
-                    for (int i = 1; i < commandArr.length; i++) {
-                        todoDescription.add(commandArr[i]);
-                    }
-                    Task todo = new ToDo(todoDescription.toString());
-                    taskList.add(todo);
-                    printTask(todo, taskList.size());
-                    break;
+                    case "todo":
+                        Task todo = new ToDo(getDescription(commandArr));
+                        taskList.add(todo);
+                        printTask(todo, taskList.size());
+                        break;
 
-                case "event":
-                    StringJoiner atTime = new StringJoiner(" ");
-                    StringJoiner eventDescription = new StringJoiner(" ");
-                    int indexEvent = Arrays.asList(commandArr).indexOf("/at");
+                    case "event":
+                        String eventTime = getTime(commandArr);
+                        Task event = new Event(getDescription(commandArr), eventTime);
+                        taskList.add(event);
+                        printTask(event, taskList.size());
+                        break;
 
-                    for (int i = indexEvent + 1; i < commandArr.length; i++) {
-                        atTime.add(commandArr[i]);
-                    }
+                    case "deadline":
+                        String deadlineTime = getTime(commandArr);
+                        Task deadline = new Deadline(getDescription(commandArr), deadlineTime);
+                        taskList.add(deadline);
+                        printTask(deadline, taskList.size());
+                        break;
 
-                    for (int i = 1; i < indexEvent; i++) {
-                        eventDescription.add(commandArr[i]);
-                    }
+                    case "bye":
+                        exit();
+                        run = false;
+                        break;
 
-                    Task event = new Event(eventDescription.toString(), atTime.toString());
-                    taskList.add(event);
-                    printTask(event, taskList.size());
-                    break;
-
-                case "deadline":
-                    StringJoiner timeLimit = new StringJoiner(" ");
-                    StringJoiner taskDescription = new StringJoiner(" ");
-                    int index = Arrays.asList(commandArr).indexOf("/by");
-
-                    for (int i = index + 1; i < commandArr.length; i++) {
-                        timeLimit.add(commandArr[i]);
-                    }
-
-                    for (int i = 1; i < index; i++) {
-                        taskDescription.add(commandArr[i]);
-                    }
-
-                    Task deadline = new Deadline(taskDescription.toString(), timeLimit.toString());
-                    taskList.add(deadline);
-                    printTask(deadline, taskList.size());
-                    break;
-
-                case "bye":
-                    exit();
-                    run = false;
-                    break;
-
-                default:
-                    Task task = new Task(command);
-                    taskList.add(task);
-                    echo("added: " + command);
-                    break;
+                    default:
+                        Task task = new Task(command);
+                        taskList.add(task);
+                        echo("added: " + command);
+                        break;
+                }
+            } catch (DukeException ex) {
+                System.out.println(ex.getMessage());
+            } catch (IndexOutOfBoundsException ex) {
+                indexErrorMessage(commandArr[1], taskList.size());
+            } catch (NumberFormatException ex) {
+                numberErrorMessage();
             }
         }
 
         sc.close();
+    }
+
+    private static void numberErrorMessage() {
+        System.out.println("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! Please type in a valid index from 1 to 100\n" +
+                "    ____________________________________________________________\n");
+    }
+
+    private static void indexErrorMessage(String index, int len) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! Index " + index + " out of bounds for task list of length " + len + "\n" +
+                "    ____________________________________________________________\n");
+    }
+
+    private static void checkCommand(String[] commandArr) throws DukeException {
+        if (!commandArr[0].matches("todo|deadline|event|done|list|bye")) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "    ____________________________________________________________\n");
+        }
+
+        if (commandArr[0].matches("list|bye")) {
+            if (commandArr.length > 1) {
+                throw new DukeException("    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "    ____________________________________________________________\n");
+            }
+        }
+    }
+
+    private static String getDescription(String[] commandArr) throws DukeException {
+        StringJoiner description = new StringJoiner(" ");
+        int index;
+        if (commandArr[0].equals("todo")) {
+            index = commandArr.length;
+        } else if (commandArr[0].equals("deadline")) {
+            index = Arrays.asList(commandArr).indexOf("/by");
+        } else {
+            index = Arrays.asList(commandArr).indexOf("/at");
+        }
+
+        for (int i = 1; i < index; i++) {
+            description.add(commandArr[i]);
+        }
+
+        if (description.toString().equals("")) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The description of a " + commandArr[0] + " cannot be empty.\n" +
+                    "    ____________________________________________________________\n");
+        }
+
+        return description.toString();
+    }
+
+    private static String getTime(String[] commandArr) throws DukeException {
+        StringJoiner timing = new StringJoiner(" ");
+        int index;
+        if (commandArr[0].equals("deadline")) {
+            index = Arrays.asList(commandArr).indexOf("/by");
+        } else {
+            index = Arrays.asList(commandArr).indexOf("/at");
+        }
+
+        for (int i = index + 1; i < commandArr.length; i++) {
+            timing.add(commandArr[i]);
+        }
+
+        if (index == -1) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n" +
+                    "    ____________________________________________________________\n");
+        }
+
+        return timing.toString();
     }
 
     private static void printTask(Task task, int size) {

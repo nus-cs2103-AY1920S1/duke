@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,7 +24,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String echo = "";
         int counter = 0;
-        Task[] list = new Task[100];
+        ArrayList<Task> list = new ArrayList<>();
 
         if (sc.hasNextLine()) {
             echo = sc.nextLine();
@@ -34,12 +35,12 @@ public class Duke {
                     if (echo.equals("list")) {
                         System.out.println("    Here are the tasks in your list:");
                         for (int i = 0; i < counter; i++) {
-                            System.out.println("    " + (i + 1) + ". " + list[i]);
+                            System.out.println("    " + (i + 1) + ". " + list.get(i));
                         }
                     } else if (echoArr[0].equals("done")) {
-                        list[Integer.parseInt(echoArr[1]) - 1].markAsDone();
+                        list.get(Integer.parseInt(echoArr[1]) - 1).markAsDone();
                         System.out.println("    Nice! I've marked this task as done: ");
-                        System.out.println("     " + list[Integer.parseInt(echoArr[1]) - 1]);
+                        System.out.println("     " + list.get(Integer.parseInt(echoArr[1]) - 1));
                     } else if (echoArr[0].equals("deadline") || echoArr[0].equals("todo") || echoArr[0].equals("event")) {
                         if (echoArr[0].equals("deadline")) {
                             try {
@@ -48,8 +49,8 @@ public class Duke {
                                 } else if (!echo.contains("/by")) {
                                     throw new DukeException("☹ OOPS!!! The deadline must be completed by a certain date");
                                 } else {
-                                    list[counter] = new Deadline(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
-                                            echo.substring(echo.indexOf("/by") + 4));
+                                    list.add(new Deadline(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
+                                            echo.substring(echo.indexOf("/by") + 4)));
                                 }
                             } catch (DukeException exp) {
                                 System.out.println("    " + exp.getMessage());
@@ -59,7 +60,7 @@ public class Duke {
                                 if (echoArr.length == 1) {
                                     throw new DukeException("☹ OOPS!!! The description of deadline cannot be empty");
                                 } else {
-                                    list[counter] = new Todo(echo.substring(echo.indexOf(" ") + 1));
+                                    list.add(new Todo(echo.substring(echo.indexOf(" ") + 1)));
                                 }
                             } catch (DukeException exp) {
                                 System.out.println("    " + exp.getMessage());
@@ -71,17 +72,17 @@ public class Duke {
                                 } else if (!echo.contains("/at")) {
                                     throw new DukeException("☹ OOPS!!! The event must be at by a certain date");
                                 } else {
-                                    list[counter] = new Event(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
-                                            echo.substring(echo.indexOf("/at") + 4));
+                                    list.add(new Event(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
+                                            echo.substring(echo.indexOf("/at") + 4)));
                                 }
                             } catch (DukeException exp) {
                                 System.out.println("    " + exp.getMessage());
                             }
                         }
 
-                        if (list[counter] != null) {
+                        if (list.size() > counter) {
                             System.out.println("    Got it. I've added this task:");
-                            System.out.println("     " + list[counter]);
+                            System.out.println("     " + list.get(counter));
                             counter++;
                             System.out.println("    Now you have " + counter + " in the list.");
                         }

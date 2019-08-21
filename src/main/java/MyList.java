@@ -11,5 +11,8 @@ public interface MyList {
     public abstract int getNumTasks();
 
     //returns tasks by index
-    public abstract Task getTaskByIndex(int index);
+    public abstract Task getTask(int index);
+
+    //removes task by index
+    public abstract Task removeTask(int index);
 }

@@ -24,6 +24,7 @@ public class Duke {
 
             try {
                 Task task;
+                int num;
                 switch (arguments[0]) {
                     case "bye":
                         printExitMsg();
@@ -33,11 +34,11 @@ public class Duke {
                         printList(taskList);
                         break;
                     case "done":
-                        int num = Integer.parseInt(arguments[1]);
+                        num = Integer.parseInt(arguments[1]);
                         if (num < 1 || num > taskList.getNumTasks()) {
                             throw new IndexOutOfBoundsException();
                         }
-                        task = taskList.getTaskByIndex(num);
+                        task = taskList.getTask(num);
                         task.markAsDone();
                         printDoneMsg(task);
                         break;
@@ -74,15 +75,23 @@ public class Duke {
                         taskList.add(task);
                         printAddTaskMsg(task);
                         break;
+                    case "delete":
+                        num = Integer.parseInt(arguments[1]);
+                        if (num < 1 || num > taskList.getNumTasks()) {
+                            throw new IndexOutOfBoundsException();
+                        }
+                        task = taskList.removeTask(num);
+                        printDeleteMsg(task);
+                        break;
                     default:
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 printException(e.getMessage());
             } catch (NumberFormatException e) {
-                printException(" ☹ OOPS!!! Please enter an integer after done.");
+                printException(" ☹ OOPS!!! Please enter an integer after done/delete.");
             } catch (IndexOutOfBoundsException e) {
-                printException(" ☹ OOPS!!! There is no such task with this index, please try another index.");
+                printException(" ☹ OOPS!!! There is no such task with this index.");
             }
         } while (!input.equals("bye"));
     }
@@ -164,6 +173,14 @@ public class Duke {
 
     private static void printException(String msg) {
         printSection(msg);
+    }
+
+    private static void printDeleteMsg(Task task) {
+        String[] array = new String[3];
+        array[0] = " Noted. I've removed this task: ";
+        array[1] = String.format("   %s", task);
+        array[2] = String.format(" Now you have %d %s in the list.",taskList.getNumTasks(), taskList.getNumTasks() == 1 ? "task" : "tasks");
+        printSection(array);
     }
 
     //returns index of token if found, else returns -1

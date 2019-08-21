@@ -25,9 +25,14 @@ public class TaskList implements MyList {
         return list.size();
     }
 
+    //index is the number shown when list is called
     @Override
-    public Task getTaskByIndex(int index) {
+    public Task getTask(int index) {
         return list.get(index - 1);
     }
 
+    @Override
+    public Task removeTask(int index) {
+        return list.remove(index - 1);
+    }
 }

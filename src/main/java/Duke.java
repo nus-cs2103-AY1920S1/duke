@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,9 +19,17 @@ public class Duke {
             } else if (command.equals("list")) {
                 printTasks();
             } else if (command.startsWith("done")) {
-                handleTaskDoneCommand(command);
+                String[] subArgs = command.split("\\s+");
+                if (subArgs.length > 0) {
+                    int index = Integer.parseInt(subArgs[1]);
+
+                    if (index >= 1) {
+                        index--;
+                        markAndPrintTaskAsDone(index);
+                    }
+                }
             } else {
-                handleAddTaskCommand(command);
+                addTask(command);
             }
         }
     }
@@ -46,77 +53,17 @@ public class Duke {
         System.out.println();
     }
 
-    public static void handleAddTaskCommand(String command) {
-        if (command.isEmpty()) {
+    public static void addTask(String task) {
+        if (task.isEmpty()) {
             return;
         }
 
-        String[] subArgs = command.split("\\s+");
-        if (subArgs.length > 1) {
-            String[] subArgsWithoutFirst = Arrays.copyOfRange(subArgs, 1, subArgs.length);
-            String taskDescription = String.join(" ", subArgsWithoutFirst);
+        taskManager.addTask(new Task(task));
 
-            Task task = null;
-            StringBuilder stringBuilder = new StringBuilder();
-
-            switch (subArgs[0]) {
-            case "todo":
-                task = new Todo(taskDescription);
-                break;
-
-            case "deadline":
-                String by = "";
-
-                for (int i = 1; i < subArgs.length; i++) {
-                    if (subArgs[i].equals("/by")) {
-                        taskDescription = stringBuilder.toString().stripTrailing();
-                        stringBuilder = new StringBuilder();
-                    } else {
-                        stringBuilder.append(subArgs[i]);
-
-                        if (i != subArgs.length - 1) {
-                            stringBuilder.append(" ");
-                        }
-                    }
-                }
-
-                by = stringBuilder.toString();
-                task = new Deadline(taskDescription, by);
-                break;
-
-            case "event":
-                String at = "";
-
-                for (int i = 1; i < subArgs.length; i++) {
-                    if (subArgs[i].equals("/at")) {
-                        taskDescription = stringBuilder.toString().stripTrailing();
-                        stringBuilder = new StringBuilder();
-                    } else {
-                        stringBuilder.append(subArgs[i]);
-
-                        if (i != subArgs.length - 1) {
-                            stringBuilder.append(" ");
-                        }
-                    }
-                }
-
-                at = stringBuilder.toString();
-                task = new Event(taskDescription, at);
-                break;
-
-            default:
-                return;
-            }
-
-            taskManager.addTask(task);
-
-            printSeparator();
-            System.out.println(" Got it. I've added this task: ");
-            System.out.println("  " + task);
-            System.out.println(" Now you have " + taskManager.getTaskList().size() + " tasks in the list.");
-            printSeparator();
-            System.out.println();
-        }
+        printSeparator();
+        System.out.println(" added: " + task);
+        printSeparator();
+        System.out.println();
     }
 
     public static void printTasks() {
@@ -126,29 +73,10 @@ public class Duke {
         System.out.println();
     }
 
-    public static void handleTaskDoneCommand(String command) {
-        String[] subArgs = command.split("\\s+");
-        if (subArgs.length > 0) {
-            int index = Integer.parseInt(subArgs[1]);
-
-            if (index >= 1) {
-                index--;
-                markAndPrintTaskAsDone(index);
-            }
-        }
-    }
-
     public static void markAndPrintTaskAsDone(int index) {
-        Task task = taskManager.getTask(index);
-
-        if (task != null) {
-            task.markAsDone();
-
-            printSeparator();
-            System.out.println(" Nice! I've marked this task as done: ");
-            System.out.println("  " + task);
-            printSeparator();
-            System.out.println();
-        }
+        printSeparator();
+        taskManager.markAsDone(index);
+        printSeparator();
+        System.out.println();
     }
 }

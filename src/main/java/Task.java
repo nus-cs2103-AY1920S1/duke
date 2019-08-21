@@ -1,4 +1,4 @@
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -6,8 +6,6 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-
-    public abstract String getType();
 
     public String getDescription() {
         return description;
@@ -31,6 +29,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getType(), getStatusIcon(), description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }

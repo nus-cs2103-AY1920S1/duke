@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static boolean isNum(String str){
+    public static boolean isNum(String str) {
         try {
             int i = Integer.parseInt(str);
         } catch (NumberFormatException | NullPointerException nfe) {
@@ -10,54 +10,125 @@ public class Duke {
         }
         return true;
     }
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello, I'm\n" + logo);
         System.out.println("What can I do for you?");
 
         Scanner s = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        int len = 0;
         String echo = s.nextLine();
-        while(true){
-            if(echo.equals("bye")){
+        while (true) {
+            if (echo.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            }
-            else if(echo.equals("list")){
-                for(int i = 0; i < list.size(); i++){
-                    System.out.println((i+1)+"."+list.get(i));
+            } else if (echo.equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println((i + 1) + "." + list.get(i));
                 }
-            }
-            else if(echo.startsWith("done ")){
+            } else if (echo.startsWith("done")) {
                 String[] echoSplit = echo.split(" ");
-                int item = Integer.parseInt(echoSplit[1]) - 1;
-                list.get(item).setAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list.get(item));
-            }
-            else{
-                len++;
-                if(echo.startsWith("todo ")){
-                    list.add(new Todo(echo.substring(5), len));
+                if (echoSplit.length < 2) {
+                    try {
+                        throw new DukeException("No task number");
+                    } catch (DukeException e) {
+                        System.out.println("\u2639 OOPS!!! Please specify a task number to mark as done.");
+                    }
+                } else if (!isNum(echoSplit[1])) {
+                    try {
+                        throw new DukeException("Second word is not number");
+                    } catch (DukeException e) {
+                        System.out.println("\u2639 OOPS!!! Please enter a task number after done.");
+                    }
+                } else {
+                    int item = Integer.parseInt(echoSplit[1]) - 1;
+                    if (item >= list.size()) {
+                        try {
+                            throw new DukeException("Task does not exist");
+                        } catch (DukeException e) {
+                            System.out.println("\u2639 OOPS!!! The task number does not exist.");
+                        }
+                    } else {
+                        list.get(item).setAsDone();
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println(list.get(item));
+                    }
                 }
-                else if(echo.startsWith("deadline ")){
-                    echo = echo.substring(9);
-                    String[] echoSplit = echo.split(" /by ");
-                    list.add(new Deadline(echoSplit[0], len, echoSplit[1]));
-                }
-                else if(echo.startsWith("event ")){
-                    echo = echo.substring(6);
-                    String[] echoSplit = echo.split(" /at ");
-                    list.add(new Event(echoSplit[0], len, echoSplit[1]));
+            } else {
+                if (echo.startsWith("todo")) {
+                    if (echo.length() <= 5) {
+                        try {
+                            throw new DukeException("todo desc empty");
+                        } catch (DukeException e) {
+                            System.out.println("\u2639 OOPS!!! The description of a todo cannot be empty.");
+                            echo = s.nextLine();
+                            continue;
+                        }
+                    } else {
+                        list.add(new Todo(echo.substring(5)));
+                    }
+                } else if (echo.startsWith("deadline")) {
+                    if (echo.length() <= 9) {
+                        try {
+                            throw new DukeException("deadline desc empty");
+                        } catch (DukeException e) {
+                            System.out.println("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+                            echo = s.nextLine();
+                            continue;
+                        }
+                    } else {
+                        echo = echo.substring(9);
+                        String[] echoSplit = echo.split(" /by ");
+                        if (echoSplit.length < 2) {
+                            try {
+                                throw new DukeException("deadline by empty");
+                            } catch (DukeException e) {
+                                System.out.println("\u2639 OOPS!!! The by date of a deadline cannot be empty.");
+                                echo = s.nextLine();
+                                continue;
+                            }
+                        } else {
+                            list.add(new Deadline(echoSplit[0], echoSplit[1]));
+                        }
+                    }
+                } else if (echo.startsWith("event")) {
+                    if (echo.length() <= 6) {
+                        try {
+                            throw new DukeException("event desc empty");
+                        } catch (DukeException e) {
+                            System.out.println("\u2639 OOPS!!! The description of an event cannot be empty.");
+                            echo = s.nextLine();
+                            continue;
+                        }
+                    } else {
+                        echo = echo.substring(6);
+                        String[] echoSplit = echo.split(" /at ");
+                        if (echoSplit.length < 2) {
+                            try {
+                                throw new DukeException("event at empty");
+                            } catch (DukeException e) {
+                                System.out.println("\u2639 OOPS!!! The at date/time of an event cannot be empty.");
+                                echo = s.nextLine();
+                                continue;
+                            }
+                        } else {
+                            list.add(new Event(echoSplit[0], echoSplit[1]));
+                        }
+                    }
+                } else {
+                    try {
+                        throw new DukeException("invalid input");
+                    } catch (DukeException e) {
+                        System.out.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    echo = s.nextLine();
+                    continue;
                 }
                 System.out.println("Got it. I've added this task: ");
-                System.out.println(list.get(len-1));
-                System.out.println("Now you have "+len+" tasks in the list.");
+                System.out.println(list.get(list.size() - 1));
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
             echo = s.nextLine();
         }

@@ -1,7 +1,7 @@
 public class Deadline extends Task{
     String by;
-    public Deadline(String content, int order, String by){
-        super(content, order);
+    public Deadline(String content, String by){
+        super(content);
         this.by = by;
     }
     public String toString(){

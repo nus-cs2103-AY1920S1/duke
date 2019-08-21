@@ -13,12 +13,13 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         String next = sc.next();
-        int count = 1;
+        int count = 0;
         while (!next.equals("bye")) {
             if (next.equals("list")) {
+                int listCount = 1;
                 for (Task task : list) {
-                    System.out.println(count + "." + task);
-                    count++;
+                    System.out.println(listCount + "." + task);
+                    listCount++;
                 }
             } else if (next.equals("done")) {
                 int number = sc.nextInt() - 1;
@@ -26,12 +27,25 @@ public class Duke {
                 taskDone.markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n  " + taskDone);
             } else {
-                if (sc.hasNext()) {
-                    next += sc.nextLine();
+                count++;
+                String description = sc.nextLine();
+                Task t;
+                System.out.println("Got it. I've added this task:");
+                if (next.equals("todo")) {
+                    t = new Todos(description.trim());
+                } else if (next.equals("deadline")) {
+                    int index = description.indexOf("/");
+                    String byWhen = description.substring(index + 4, description.length());
+                    String desc = description.substring(1, index - 1);
+                    t = new Deadline(desc, byWhen);
+                } else {
+                    int index = description.indexOf("/");
+                    String at = description.substring(index + 4, description.length());
+                    String desc = description.substring(1, index - 1);
+                    t = new Event(desc, at);
                 }
-                Task nextTask = new Task(next);
-                list.add(nextTask);
-                System.out.println("added: " + next);
+            list.add(t);
+            System.out.println("  " + t + "\nNow you have " + count + " tasks in the list.");
             }
             next = sc.next();
         }

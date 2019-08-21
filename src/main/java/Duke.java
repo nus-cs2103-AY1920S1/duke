@@ -15,12 +15,8 @@ public class Duke {
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine().trim();
-        while(!command.equals("bye")) {
-            try {
-                taskList.runCommand(command);
-            } catch (UnknownCommandException e) {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
+        while (!command.equals("bye")) {
+            taskList.runCommand(command);
             command = sc.nextLine().trim();
         }
     }

@@ -11,18 +11,18 @@ public class TaskList {
      * Performs required action based on command
      * @param command - Input given by user
      */
-    public void runCommand(String command) throws UnknownCommandException {
-        if(command.equals("list")) {
+    public void runCommand(String command) {
+        command = command.trim();
+        if (command.equals("list")) {
             this.printList();
         } else {
             String[] strArray = command.split("\\s+", 2);
-            if(!isKnownCommand(strArray[0])) {
-                throw new UnknownCommandException("Unknown command");
-            }
             try {
                 this.modifyList(strArray);
-            } catch(InvalidCommandError e) {
-                System.out.println("☹ OOPS!!! The statement: \"" + command + "\" is invalid. ");
+            } catch (UnknownCommandException e) {
+                System.out.println(e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("There is/are only " + this.list.size() + " item(s) in the list :( ");
             }
         }
     }
@@ -31,86 +31,54 @@ public class TaskList {
      * Performs any modification on list - add/delete/markDone
      * @param commandDescription - Command input given by user
      */
-    private void modifyList(String[] commandDescription) throws InvalidCommandError {
-        try {
-            if(commandDescription.length <= 1) {
-                throw new IncompleteCommandError("empty");
-            }
-            switch(commandDescription[0]) {
-                case "delete":
-                case "done":
-                    this.modifyTask(commandDescription);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    this.addTask(commandDescription);
-                    printSuccessfulAddMessage();
-                    break;
-                default:
-                    throw new InvalidCommandError(commandDescription[0]);
-            }
-        } catch(IncompleteCommandError e) {
-            System.out.println("☹ OOPS!!! The description of a " + commandDescription[0] + " cannot be "
-                    + e.getMessage() + ".");
-        }
-    }
-
-    /**
-     * Performs any modification on task - delete/markDone
-     * @param commandDescription - Input given by user
-     */
-    private void modifyTask(String[] commandDescription) throws InvalidCommandError {
-        if(commandDescription.length != 2) {
-            throw new InvalidCommandError(commandDescription[0]);
+    private void modifyList(String[] commandDescription) throws UnknownCommandException {
+        if(!this.isValidCommand(commandDescription[0])) { throw new UnknownCommandException("Unknown Command");};
+        if (commandDescription.length <= 1) {
+            throw new IncompleteCommandError("empty", commandDescription[0]);
         }
         try {
-            switch(commandDescription[0]) {
+            switch (commandDescription[0]) {
                 case "delete":
                     this.deleteTask(commandDescription);
                     break;
                 case "done":
                     this.markTaskDone(commandDescription);
+                    break;
+                case "todo":
+                    this.addTaskWithoutDate(commandDescription);
+                    printSuccessfulAddMessage();
+                    break;
+                case "deadline":
+                case "event":
+                    this.addTaskWithDate(commandDescription);
+                    printSuccessfulAddMessage();
+                    break;
+                default:
+                    throw new UnknownCommandException(commandDescription[0]);
             }
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new InvalidCommandError(commandDescription[0]);
-        } catch(IndexOutOfBoundsException e) {
-            System.out.println("There is/are only " + this.list.size() + " item(s) in the list :( ");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IncompleteCommandError("incomplete", commandDescription[0]);
         }
     }
 
-    /**
-     * Performs any addition of task on list
-     * @param commandDescription - Input given by user
-     */
-    private void addTask(String[] commandDescription) throws IncompleteCommandError {
-        switch(commandDescription[0]) {
-            case "todo":
-                this.list.add(new ToDoTask(commandDescription[1]));
-                break;
-            default:
-                addTaskWithDate(commandDescription);
-        }
+    private void addTaskWithoutDate(String[] commandDescription) {
+        this.list.add(new ToDoTask(commandDescription[1]));
     }
 
     /**
      * Adds new task (with date) into list
      * @param commandDescription - array of strings containing command description
      */
-    private void addTaskWithDate(String[] commandDescription) throws IncompleteCommandError {
+    private void addTaskWithDate(String[] commandDescription) throws IndexOutOfBoundsException {
         String[] taskArray = commandDescription[1].split("/", 2);
-        // Get String name
-        if(taskArray.length <= 1) {throw new IncompleteCommandError("incomplete");}
         String taskName = taskArray[0].trim();
-        try {
-            String date = taskArray[1].split("\\s+", 2)[1];
-            if(commandDescription[0].equals("deadline")) {
-                this.list.add(new DeadlineTask(taskName, date));
-            } else {
-                this.list.add(new EventTask(taskName, date));
-            }
-        } catch(IndexOutOfBoundsException e) {
-            throw new IncompleteCommandError("incomplete");
+        String date = taskArray[1].split("\\s+", 2)[1];
+        if (commandDescription[0].equals("deadline")) {
+            this.list.add(new DeadlineTask(taskName, date));
+        } else {
+            this.list.add(new EventTask(taskName, date));
         }
     }
 
@@ -125,17 +93,9 @@ public class TaskList {
      * Marks specified command as done based on idx of command
      * @param commandDescription - array of strings containing command description
      */
-    private void markTaskDone(String[] commandDescription) throws InvalidCommandError {
+    private void markTaskDone(String[] commandDescription) throws NumberFormatException {
         int idx = Integer.parseInt(commandDescription[1]);
         this.list.get(idx-1).markDone();
-    }
-
-    /**
-     * Returns true if command is a valid command, else returns false
-     * @param command - String containing command phrase
-     */
-    private boolean isKnownCommand(String command) {
-        return Arrays.stream(Command.values()).anyMatch((t) -> t.name().equals(command));
     }
 
     /**
@@ -143,9 +103,16 @@ public class TaskList {
      */
     private void printList() {
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < this.list.size(); i++) {
+        for (int i = 0; i < this.list.size(); i++) {
             System.out.println((i+1) + "." + this.list.get(i));
         }
+    }
+
+    /**
+     * Prints out contents of list according to order of insertion
+     */
+    private boolean isValidCommand(String command) {
+        return Arrays.asList(Command.values()).toString().contains(command);
     }
 
     /**

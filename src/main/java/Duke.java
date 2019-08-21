@@ -31,7 +31,7 @@ public class Duke {
     }
 
     /** Returns a new string from pretty-printing the original message string.
-     *  Adds identation and horizontal lines to the message.
+     *  Adds indentation and horizontal lines to the message.
      * 
      * @param message a string to embellish.
      * @return a formatted String to print as output.

@@ -42,12 +42,19 @@ public class Duke {
                         System.out.println("     " + "Current number of tasks = " + store.size());
                         System.out.println(horizontalLine + "\n");
                     } else {
-                        Task task = store.get(Integer.parseInt(argument) - 1);
-                        task.markAsDone();
-                        System.out.println(horizontalLine);
-                        System.out.println("     Nice! I've marked this task as done:");
-                        System.out.println("       " + task);
-                        System.out.println(horizontalLine + "\n");
+                        Task task = store.get(taskToBeDone - 1);
+                        if (task.isDone) {
+                            System.out.println(horizontalLine);
+                            System.out.println("     Hey! I've already marked this task as done :)");
+                            System.out.println("       " + task);
+                            System.out.println(horizontalLine + "\n");
+                        } else {
+                            task.markAsDone();
+                            System.out.println(horizontalLine);
+                            System.out.println("     Nice! I've marked this task as done:");
+                            System.out.println("       " + task);
+                            System.out.println(horizontalLine + "\n");
+                        }
                     }
                 }
             } else if (userInput.equals("todo")) { //todo task
@@ -96,7 +103,7 @@ public class Duke {
                         System.out.println(horizontalLine + "\n");
                     }
                 }
-            } else if (userInput.equals("event")){ //event task
+            } else if (userInput.equals("event")) { //event task
                 String argument = sc.nextLine().strip();
                 if (argument.isEmpty()) {
                     System.out.println(horizontalLine);
@@ -115,6 +122,33 @@ public class Duke {
                         System.out.println(horizontalLine);
                         System.out.println("     Got it. I've added this task:");
                         System.out.println("       " + newEventTask);
+                        if (store.size() > 1) {
+                            System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                        } else {
+                            System.out.println("     Now you have " + store.size() + " task in the list.");
+                        }
+                        System.out.println(horizontalLine + "\n");
+                    }
+                }
+            } else if (userInput.equals("delete")) {
+                String argument = sc.nextLine().strip();
+                if (argument.isEmpty()) {
+                    System.out.println(horizontalLine);
+                    System.err.println("     " + new DeleteException());
+                    System.out.println(horizontalLine + "\n");
+                } else {
+                    int taskToDelete = Integer.parseInt(argument);
+                    if (store.size() < taskToDelete) { //check if it's a valid delete
+                        System.out.println(horizontalLine);
+                        System.err.println("     " + new DeleteException("OOPS!!! There is no such task in your list!"));
+                        System.out.println("     " + "Current number of tasks = " + store.size());
+                        System.out.println(horizontalLine + "\n");
+                    } else {
+                        Task task = store.get(taskToDelete - 1);
+                        store.remove(taskToDelete - 1);
+                        System.out.println(horizontalLine);
+                        System.out.println("     Noted I've removed this task:");
+                        System.out.println("       " + task);
                         if (store.size() > 1) {
                             System.out.println("     Now you have " + store.size() + " tasks in the list.");
                         } else {

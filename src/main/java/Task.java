@@ -11,8 +11,12 @@ public class Task {
         this.isDone = true;
     }
 
+    protected String getStatusIcon() {
+        return isDone ? "\u2713" : "\u2718";
+    }
+
     public String toString() {
-        String statusIcon = isDone ? "\u2713" : "\u2718";
+        String statusIcon = getStatusIcon();
         return "[" + statusIcon + "] " + this.description;
     }
 }

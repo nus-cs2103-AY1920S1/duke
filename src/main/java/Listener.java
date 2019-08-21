@@ -22,13 +22,28 @@ public class Listener {
                 this.sheet.markAsDone(index);
                 System.out.println(Formatter.LINE + Formatter.INDENT + Formatter.DONE + Formatter.INDENT +
                         sheet.get(index - 1).toString() + "\n" + Formatter.LINE);
-            } else {
-                command = command + sc.nextLine();
-                Task task = new Task(command);
-                this.sheet.add(task);
-                System.out.print(Formatter.LINE + Formatter.INDENT + "added: "
-                                + command + "\n" + Formatter.LINE);
-            }
+            } else if (command.equals("todo")){
+                Task todoTask = new Todo(sc.nextLine());
+                this.sheet.add(todoTask);
+            }else if (command.equals("deadline")) {
+                String next = sc.next();
+                String description = "";
+                while (!next.equals("/")) {
+                    description += next;
+                }
+                String by = sc.nextLine();
+                Task dlTask = new Deadline(description, by);
+                this.sheet.add(dlTask);
+            } else if (command.equals("event")){
+                String next = sc.next();
+                String description = "";
+                while (!next.equals("/")) {
+                    description += next;
+                }
+                String span = sc.nextLine();
+                Task eventTask = new Event(description, span);
+                this.sheet.add(eventTask);
+            } else {}
         }
     }
 }

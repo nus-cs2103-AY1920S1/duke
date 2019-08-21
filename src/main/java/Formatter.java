@@ -5,4 +5,5 @@ public class Formatter {
     public static final String WELCOME = LINE + INDENT + "Hello! I'm Duke\n" + INDENT + "What can I do for you?\n"
             + LINE;
     public static final String DONE = "Nice! I've marked this task as done: \n";
+    public static final String GOT = "Got it. I've added this task: \n";
 }

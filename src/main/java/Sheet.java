@@ -7,6 +7,14 @@ public class Sheet {
 
     public void add(Task task) {
         this.list.add(task);
+        System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOT + "  "
+                + task.toString() + "\n" + Formatter.LINE);
+        this.count();
+        System.out.println(Formatter.LINE);
+    }
+
+    private void count() {
+        System.out.printf("Now you have %d tasks in the list.\n", list.size());
     }
 
     public Task get(int index) {

@@ -6,14 +6,14 @@ public class Duke {
         System.out.println(greetings);
 
         Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
+        String command = input.nextLine().trim(); //trim leading/trailing whitespace
         TaskList taskList = new TaskList();
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 taskList.printAllTasks();
-                command = input.nextLine();
+                command = input.nextLine().trim();
             } else if (command.contains("done")) {
                 // Check if the first word is done
                 String[] sentence = command.split(" ");
@@ -31,7 +31,7 @@ public class Duke {
                     System.out.println("OOPS!!! Wrong format. Please key in a valid number (Eg 'done 2')");
                 }
 
-                command = input.nextLine();
+                command = input.nextLine().trim();
 
             } else {
                 try {
@@ -45,7 +45,7 @@ public class Duke {
                 } catch (DukeException err) {
                     System.out.println(err.getMessage());
                 }
-                command = input.nextLine();
+                command = input.nextLine().trim();
             }
         }
 

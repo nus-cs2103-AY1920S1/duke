@@ -37,11 +37,13 @@ public class Duke {
                     for (int i = 1; i <= duke.tasks.size(); i++) {
                         System.out.println(i + "." + duke.tasks.get(i - 1));
                     }
+
                 } else if (keyword.equals("done")) {
                     System.out.println("Nice! I've marked this task as done: ");
                     Task taskToMarkAsDone = duke.tasks.get(Integer.parseInt(cmdList[1]) - 1);
                     taskToMarkAsDone.markAsDone();
                     System.out.println(taskToMarkAsDone);
+
                 } else if (keyword.equals("delete")) {
                     Task taskToBeRemoved = duke.tasks.get(Integer.parseInt(cmdList[1]) - 1);
                     duke.tasks.remove(taskToBeRemoved);
@@ -49,6 +51,7 @@ public class Duke {
                     System.out.print("  ");
                     System.out.println(taskToBeRemoved);
                     System.out.println("Now you have " + duke.tasks.size() + " in the list.");
+
                 } else { // it is a new Task
                     Task newTaskToBeAdded = duke.handleNewTask(keyword, cmd);
                     duke.tasks.add(newTaskToBeAdded);

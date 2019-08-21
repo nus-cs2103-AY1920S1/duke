@@ -1,17 +1,18 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Duke {
 
-    public static void listTasks(List<String> taskList) {
-        int count = 1;
-        for (String task : taskList) {
-            System.out.println(count++ + ". " + task);
-        }
+    private static final String DUKE_HELLO = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String DUKE_BYE = "Bye. Hope to see you again soon!";
+    private static final String DUKE_LIST_TASKS = "Here are the tasks in your list:\n";
+    private static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:\n";
+    protected TaskList taskList;
+    
+    protected Duke() {
+        this.taskList = new TaskList();
     }
 
-    public static void main(String[] args) {
+    protected void run() {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -21,22 +22,28 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        // Greet the user
+        System.out.println(DUKE_HELLO);
 
-        List<String> taskList = new ArrayList<String>();
+        // Handle user input
         String command;
         while (!(command = sc.nextLine()).equals("bye")) {
             if (command.equals("list")) {
-                listTasks(taskList);
+                // List all the commands entered by user
+                System.out.print(DUKE_LIST_TASKS + taskList.getTaskList());
+                continue;
+            } else if (command.startsWith("done")) {
+                // Mark Task at index specified as done
+                int index = Integer.parseInt(command.split(" ")[1]);
+                taskList.markAsDoneTaskAt(index);
+                System.out.println(DUKE_MARK_AS_DONE + taskList.getTaskAt(index).getStatus());
                 continue;
             }
-            taskList.add(command);
-            System.out.println("added: " + command);
+            System.out.println("added: " + taskList.addTask(new Task(command)));
         }
-        System.out.println("Bye. Hope to see you again soon!");
 
-        sc.close();
+        // Greet the user and quit program
+        System.out.println(DUKE_BYE);
     }
     
 }

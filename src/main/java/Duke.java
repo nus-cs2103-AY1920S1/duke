@@ -26,5 +26,6 @@ public class Duke {
                 System.out.println(input);
             }
         }
+        sc.close();
     }
 }

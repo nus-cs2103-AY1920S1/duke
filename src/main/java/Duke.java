@@ -10,16 +10,28 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
-            String s = sc.next().toLowerCase();
+            String full = sc.nextLine();
+            String[] arr = full.split(" ", 2);
+            String s = arr[0];
 
+            try {
+                validateInput(full);
+            } catch (DukeException d) {
+                System.out.println(line + "\n ☹ OOPS!!! " + d.response + "\n" + line);
+                continue;
+            }
+
+            //handles done commands using markAsDone method
             if (s.equals("done")) {
-                markAsDone(sc.nextInt() - 1);
+                markAsDone(Integer.valueOf(arr[1]) - 1);
             }
 
+            //handles tasks using the process method
             else if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
-                process(s, sc.nextLine().trim());
+                process(s, arr[1].trim());
             }
 
+            //prints out list
             else if (s.toLowerCase().equals("list")) {
                 System.out.println(line + "\n Here are the tasks in your list:");
                 for (int i = 1; i <= count; i++) {
@@ -73,5 +85,43 @@ public class Duke {
         array[i].done();
         Task t = array[i];
         System.out.println(line + "\n Nice! I've marked this task as done: \n " + t.toString() + "\n" + line);
+    }
+
+    public static void validateInput(String input) throws DukeException {
+        String[] array = input.trim().split(" ");
+        String first = array[0];
+        Boolean task = false;
+
+        if (first.equals("todo") || first.equals("deadline") || first.equals("event")) {
+            task = true;
+        }
+
+        if (array.length == 1) {
+            //if to do, event or deadline are missing a description
+            if (task) {
+                throw new DukeException("Empty Description", "The description of a " + first + " cannot be empty.");
+            }
+
+            //if done is not followed by a number
+            else if (first.equals("done")) {
+                throw new DukeException("Missing Task", "Please specify a task to mark as complete.");
+            }
+
+            //if it is not a single-worded valid input
+            else if (!first.equals("bye") && !first.equals("list")) {
+                throw new DukeException("Invalid Input", "I'm sorry, but I don't know what that means :-(");
+            }
+        } else {
+            //if it is an invalid input containing multiple words
+            if (!task && !first.equals("done")) {
+                throw new DukeException("Invalid Input", "I'm sorry, but I don't know what that means :-(");
+            }
+
+            //if event or deadline do not have details
+            else if ((first.equals("event") && !input.contains("/at")) ||
+                    (first.equals("deadline") && !input.contains("/by"))) {
+                throw new DukeException("Missing Details", "The details of a " + first + " cannot be missing.");
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Duke {
 
     private static String divider = "\t____________________________________________________________\n";
-    private static String divider_no_newline = "\t____________________________________________________________";
     private static String intro = "\t Hello! I'm Duke\n\t What can I do for you?\n";
     private static String goodbye = "\t Bye. Hope to see you again soon!\n";
     private static String tasklist_header = "\t Here are the tasks in your list:\n";
@@ -29,69 +28,108 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>(100);
 
         while (run) {
-            String[] input = scanner.nextLine().split(" ");
-            String command = input[0];
-            String[] params = Arrays.copyOfRange(input, 1, input.length);
+            try {
+                String[] input = scanner.nextLine().split(" ");
+                String command = input[0];
+                String[] params = Arrays.copyOfRange(input, 1, input.length);
 
-            switch (command) {
-                case "bye": {
-                    print(goodbye);
-                    run = false;
-                    break;
-                }
-                case "list": {
-                    StringBuilder s = new StringBuilder(tasklist_header);
-                    for (Task t: list) {
-                        s.append("\t ").append(t);
+                switch (command) {
+                    case "bye": {
+                        print(goodbye);
+                        run = false;
+                        break;
                     }
-                    print(s.toString());
-                    break;
+                    case "list": {
+                        if (list.isEmpty()) {
+                            throw new DukeException("There are no tasks to display.");
+                        }
+                        StringBuilder s = new StringBuilder(tasklist_header);
+                        for (Task t : list) {
+                            s.append("\t ").append(t);
+                        }
+                        print(s.toString());
+                        break;
+                    }
+                    case "done": {
+                        int id;
+                        try {
+                            id = Integer.valueOf(params[0]);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("You need to specify a task ID to mark as done.");
+                        }
+                        Task current;
+                        try {
+                            current = list.get(id - 1);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("No such task with that ID.");
+                        }
+                        boolean status = current.markAsComplete();
+                        if (!status) {
+                            throw new DukeException("Action already marked as done!");
+                        }
+                        String s = done_message + "\t   " + current.toStringNoID();
+                        print(s);
+                        break;
+                    }
+                    case "todo": {
+                        String task = joinStrings(params);
+                        if (task.isEmpty()) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                        Task current = new ToDo(task);
+                        list.add(current);
+                        String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
+                        print(s);
+                        break;
+                    }
+                    case "deadline": {
+                        if (joinStrings(params).isEmpty()) {
+                            throw new DukeException("The description and due date of a deadline cannot be empty.");
+                        }
+                        String[] details = splitByIdentifier(params, "/by");
+                        if (details[0].isEmpty() && details[1].isEmpty()) {
+                            throw new DukeException("You need to specify a due date, denoted by /by");
+                        } else if (details[0].isEmpty() && !details[1].isEmpty()) {
+                            throw new DukeException("The description of a deadline cannot be empty.");
+                        }
+                        Task current = new Deadline(details[0], details[1]);
+                        list.add(current);
+                        String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
+                        print(s);
+                        break;
+                    }
+                    case "event": {
+                        if (joinStrings(params).isEmpty()) {
+                            throw new DukeException("The description and due date of an event cannot be empty.");
+                        }
+                        String[] details = splitByIdentifier(params, "/at");
+                        if (details[0].isEmpty() && details[1].isEmpty()) {
+                            throw new DukeException("You need to specify a due date, denoted by /at");
+                        } else if (details[0].isEmpty() && !details[1].isEmpty()) {
+                            throw new DukeException("The description of an event cannot be empty.");
+                        }
+                        Task current = new Event(details[0], details[1]);
+                        list.add(current);
+                        String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
+                        print(s);
+                        break;
+                    }
+                    default: {
+                        throw new DukeException("I'm sorry, but I don't know what that means.");
+                    }
                 }
-                case "done": {
-                    int id = Integer.valueOf(params[0]);
-                    Task current = list.get(id-1);
-                    current.markAsComplete();
-                    String s = done_message + "\t   " + current.toStringNoID();
-                    print(s);
-                    break;
-                }
-                case "todo": {
-                    Task current = new ToDo(joinStrings(params));
-                    list.add(current);
-                    String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
-                    print(s);
-                    break;
-                }
-                case "deadline": {
-                    String[] details = splitByIdentifier(params, "/by");
-                    Task current = new Deadline(details[0], details[1]);
-                    list.add(current);
-                    String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
-                    print(s);
-                    break;
-                }
-                case "event": {
-                    String[] details = splitByIdentifier(params, "/at");
-                    Task current = new Event(details[0], details[1]);
-                    list.add(current);
-                    String s = task_added_message + "\t   " + current.toStringNoID() + Task.totalNoOfTasks();
-                    print(s);
-                    break;
-                }
-                default: {
-                    print("Invalid task entered. Please try again.\n");
-                    break;
-                }
+            } catch (DukeException e) {
+                print(e.toString());
             }
 
-            System.out.println();
         }
+
     }
 
     private static void print (String s) {
         System.out.print(divider);
         System.out.print(s);
-        System.out.print(divider_no_newline);
+        System.out.print(divider);
     }
 
     private static String joinStrings (String[] strings) {

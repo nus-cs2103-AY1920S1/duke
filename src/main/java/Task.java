@@ -1,13 +1,15 @@
 
 class Task{
 
-    private boolean status;
-    private String message;
+    protected boolean status;
+    protected String message;
+    protected String type;
 
 
-    public Task (Boolean status, String message){
+    public Task (Boolean status, String message, String type){
         this.status = status;
         this.message = message;
+        this.type = type;
     }
 
     public void setStatus(boolean status){
@@ -22,7 +24,6 @@ class Task{
         }else{
             doneString = "[X]";
         }
-
-        return doneString + " " + message;
+        return type + doneString + " " + message;
     }
 }

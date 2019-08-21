@@ -1,11 +1,24 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static Scanner sc = new Scanner(System.in);
+    private static Task[] arr = new Task[100];
+    private static int index = 0;
+
     /**
-     * Prints DUKE.
+     * Prints a string.
      */
     private static void print(String str) {
         System.out.println(str);
+    }
+    /**
+     * Adds a task to the array.
+     */
+    private static void addTask(Task task) {
+        print("Got it. I've added this task:");
+        print(task.toString());
+        arr[index++] = task;
+        print("Now you have " + index + (index > 1 ? " tasks": " task") + " in the list.");
     }
 
     /**
@@ -16,61 +29,70 @@ public class Duke {
     public static void main(String[] args) {
 
         print("Hello! I'm Duke\nWhat can I do for you?");
-
-        Scanner sc = new Scanner(System.in);
-        Task[] arr = new Task[100];
-        int index = 0;
-
-        while (sc.hasNextLine()) {
+        String taskName;
+        Task temp;
+        while (sc.hasNext()) {
             String str = sc.nextLine();
-
-            if (str.equals("bye")) {
-                print("Bye. Hope to see you again soon!");
-                break;
-            } else if (str.equals("list")) {
-                print("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++) {
-                    print((i + 1) + ". " + arr[i]);
-                }
-            } else if (str.startsWith("done")) {
-                //str = "done 1" / "done 5" but str is 1-indexed
-                String[] instruction = str.split(" ");
-                int whichTask = Integer.parseInt(instruction[1]) - 1;
-                arr[whichTask].markAsDone();
-                print("Nice! I've marked this task as done:");
-                print(arr[whichTask].toString());
-            } else {
-                arr[index++] = new Task(str);
-                print("added: " + str);
-
+            Scanner scanner = new Scanner(str);
+            String firstWord = scanner.next();
+            switch(firstWord) {
+                case "bye":
+                    print("Bye. Hope to see you again soon!");
+                    break;
+                case "list":
+                    print("Here are the tasks in your list:");
+                    for (int i = 0; i < index; i++) {
+                        print((i + 1) + "." + arr[i]);
+                    }
+                    break;
+                case "todo":
+                    taskName = scanner.nextLine();
+                    temp = new TaskBuilder().type(TaskType.TODO).description(taskName).build();
+                    addTask(temp);
+                    break;
+                case "deadline":
+                    taskName  = "";
+                    String deadline = "";
+                    while(scanner.hasNext()) {
+                        String s = scanner.next();
+                        if (s.equals("/by")) {
+                            deadline = scanner.nextLine().strip();
+                            taskName = taskName.stripTrailing();
+                            break;
+                        } else {
+                            taskName += s + " ";
+                        }
+                    }
+                    temp = new TaskBuilder().type(TaskType.DEADLINE).description(taskName).deadline(deadline).build();
+                    addTask(temp);
+                    break;
+                case "event":
+                    taskName  = "";
+                    String timeframe = "";
+                    while(scanner.hasNext()) {
+                        String s = scanner.next();
+                        if (s.equals("/at")) {
+                            timeframe = scanner.nextLine().strip();
+                            taskName = taskName.stripTrailing();
+                            break;
+                        } else {
+                            taskName += s + " ";
+                        }
+                    }
+                    temp = new TaskBuilder().type(TaskType.EVENT).description(taskName).timeframe(timeframe).build();
+                    addTask(temp);
+                    break;
+                case "done":
+                    int whichTask = scanner.nextInt() - 1;
+                    arr[whichTask].markAsDone();
+                    print("Nice! I've marked this task as done:");
+                    print(arr[whichTask].toString());
+                    break;
+                default:
+                    break;
             }
 
         }
     }
 
-    /**
-     * Inner class to Duke. A Task class representing a task with a isDone component.
-     */
-    static class Task {
-        private String description;
-        private boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        private String getStatusIcon() {
-            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        }
-
-        public void markAsDone() {
-            isDone = true;
-        }
-
-        @Override
-        public String toString() {
-            return "[" + getStatusIcon() + "]" + " " + description;
-        }
-    }
 }

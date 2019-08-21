@@ -1,7 +1,15 @@
+/**
+ * Represents a Deadline task.
+ */
 public class Deadline extends Task {
 
     private String deadline;
 
+    /**
+     * Creates a Deadline task with the associated description and deadline.
+     * @param desc Describes the deadline.
+     * @param deadline The deadline that the task is due by.
+     */
     public Deadline(String desc, String deadline) {
         super(desc);
         this.deadline = deadline;

@@ -1,7 +1,15 @@
+/**
+ * Represents an Event task.
+ */
 public class Event extends Task {
 
     private String when;
 
+    /**
+     * Creates an Event task with the associated description and event day and time.
+     * @param desc Describes the event.
+     * @param when The event day and event time.
+     */
     public Event(String desc, String when) {
         super(desc);
         this.when = when;

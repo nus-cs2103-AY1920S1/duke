@@ -4,7 +4,6 @@
 public class Task {
 
     protected String desc;
-    //protected int taskNo;
     protected boolean isDone;
     protected String doneSymbol;
 
@@ -39,10 +38,5 @@ public class Task {
         this.isDone = true;
         setDoneSymbol();
     }
-
-//    @Override
-//    public String toString() {
-//        return taskNo + "." + "[" + doneSymbol + "] " + desc;
-//    }
 
 }

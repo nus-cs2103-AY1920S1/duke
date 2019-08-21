@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Duke {
 
     public static ArrayList<Task> myList = new ArrayList<>();
+    public static int taskCount;
 
     public static void printWelcome() {
         System.out.println("    ____________________________________________________________");
@@ -25,6 +26,7 @@ public class Duke {
     }
 
     public static void handleTask(String command) {
+        taskCount++;
         String[] extractCommand = command.split("\\s+", 2);
         if (extractCommand[0].equals("todo")) {
             Task currTask = new Todo(extractCommand[1]);
@@ -72,33 +74,78 @@ public class Duke {
 
     public static void printDone(String command) {
         String[] currArray = command.split("\\s+", 2);
-        int currStep = Integer.parseInt(currArray[1]);
-        Task currTask = myList.get(currStep - 1);
-        currTask.markAsDone();
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + currTask);
-        printClose();
+        try {
+            checkDone(currArray);
+            int currStep = Integer.parseInt(currArray[1]);
+            Task currTask = myList.get(currStep - 1);
+            currTask.markAsDone();
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     Nice! I've marked this task as done:");
+            System.out.println("       " + currTask);
+            printClose();
+        } catch (DukeException error) {
+            System.err.println(error.getMessage());
+        }
     }
 
+    public static void checkValidCommand(String command) throws DukeException {
+        ArrayList<String> validCommands = new ArrayList<>();
+        validCommands.add("todo");
+        validCommands.add("deadline");
+        validCommands.add("event");
+        validCommands.add("done");
+        validCommands.add("list");
+        validCommands.add("bye");
+        if (!validCommands.contains(command)) {
+            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    ____________________________________________________________\n" + "\n");
+        }
+    }
+
+    public static void checkEmptyDesc(String[] currArray) throws DukeException {
+        ArrayList<String> taskTypes = new ArrayList<>();
+        taskTypes.add("todo");
+        taskTypes.add("deadline");
+        taskTypes.add("event");
+        if (taskTypes.contains(currArray[0]) && currArray.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! The description of a " + currArray[0] + " cannot be empty.\n" + "    ____________________________________________________________\n" +"\n");
+        }
+    }
+
+    public static void checkDone(String[] currArray) throws DukeException {
+        if (currArray.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! Please specify a task number! :-)\n" + "    ____________________________________________________________" + "\n");
+        } 
+        int currStep = Integer.parseInt(currArray[1]);
+        if (currStep == 0 || currStep > taskCount) {
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! Your specified task number is out of range :-(\n"
+                    + "    ____________________________________________________________" + "\n");
+        }
+    }
     public static void main(String[] args) {
         printWelcome();
 
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
-            String currLine = sc.nextLine();
+            String currLine = sc.nextLine().trim();
             String[] currArray = currLine.split("\\s+");
-            if (currLine.equals("bye")) {
-                printBye();
-                sc.close();
-                System.exit(0);
-            } else if (currLine.equals("list")) {
-                printList();
-            } else if (currArray[0].equals("done")) {
-                printDone(currLine);
-            } else {
-                handleTask(currLine);
+            try {
+                checkValidCommand(currArray[0]);
+                checkEmptyDesc(currArray);
+                if (currArray[0].equals("bye")) {
+                    printBye();
+                    sc.close();
+                    System.exit(0);
+                } else if (currArray[0].equals("list")) {
+                    printList();
+                } else if (currArray[0].equals("done")) {
+                    printDone(currLine);
+                } else {
+                    handleTask(currLine);
+                }
+            } catch (DukeException error) {
+                System.err.println(error.getMessage());
             }
         }
     }

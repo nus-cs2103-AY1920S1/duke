@@ -52,6 +52,12 @@ public class Duke {
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                         addTask(input);
                     }
+                } else if (tokens[0].equals("delete")) {
+                    try {
+                        deleteTask(Integer.parseInt(tokens[1]));
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                        addTask(input);
+                    }
                 } else {
                     addTask(input);
                 }
@@ -92,6 +98,27 @@ public class Duke {
     private static void doTask(int index) {
         taskList.doTask(index);
         String message = indent + "Nice! I've marked this task as done:\n" + indent + "  " + taskList.getTask(index);
+        String response = String.format("%s\n%s\n%s\n", line, message, line);
+        System.out.println(response);
+    }
+
+    /**
+     * Deletes the task from the tasklist at the given 1-based index.
+     * @param index 1-based index of the task to delete.
+     */
+    private static void deleteTask(int index) {
+        Task task = taskList.deleteTask(index);
+        String message;
+        if (task == null) {
+            message = indent + "Index out of range, no task found.";
+        } else {
+            StringBuilder strb = new StringBuilder();
+            message = strb
+                    .append(indent + "Noted. I've removed this task:\n")
+                    .append(indent + "  " + task + "\n")
+                    .append(indent + "Now you have " + taskList.getTotalTasks() + " tasks in the list.")
+                    .toString();
+        }
         String response = String.format("%s\n%s\n%s\n", line, message, line);
         System.out.println(response);
     }

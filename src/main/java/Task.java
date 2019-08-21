@@ -19,6 +19,14 @@ public class Task {
     }
 
     /**
+     * Gets the total number of tasks created.
+     * @return The total tasks created.
+     */
+    public static int getTotalTasks() {
+        return totalTasks;
+    }
+
+    /**
      * Changes isDone to true, setting the task to be done.
      */
     public void markAsDone() {

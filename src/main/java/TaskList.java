@@ -15,6 +15,14 @@ public class TaskList {
     }
 
     /**
+     * Gets the total number of tasks in this list.
+     * @return Total number of tasks in the list.
+     */
+    public int getTotalTasks() {
+        return list.size();
+    }
+
+    /**
      * Adds Task to list.
      * @param task Task to be added.
      * @return Task that was added.
@@ -38,9 +46,12 @@ public class TaskList {
     /**
      * Deletes a task at given 1-based index to delete.
      * @param index Index of the task to delete (1-based).
-     * @return Task that was deleted.
+     * @return Task that was deleted. Null if index is out of range.
      */
     public Task deleteTask(int index) {
+        if (index > list.size()) {
+            return null;
+        }
         Task task = getTask(index);
         list.remove(index - 1);
         return task;

@@ -1,5 +1,11 @@
 @ECHO OFF
 
+REM delete duke data before testing
+cd data
+del duke.txt
+
+cd ..
+
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 

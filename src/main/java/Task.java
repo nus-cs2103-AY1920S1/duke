@@ -7,6 +7,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public abstract String getType();
 
     public String getDescription() {
@@ -18,7 +23,11 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "x" : " "); // return x or no symbol
+        return (isDone ? "x" : " "); // return tick or no symbol
+    }
+
+    public boolean getDoneStatus() {
+        return isDone;
     }
 
     public void markAsUnfinished() {

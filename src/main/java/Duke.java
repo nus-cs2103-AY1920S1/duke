@@ -40,8 +40,11 @@ public class Duke {
                         String eventLine = sc.nextLine().trim();
                         String[] splitAt = eventLine.split("/at");
                         if(splitAt.length == 2) {
-                            tasks.addDeadline(splitAt[0], splitAt[1]);
+                            tasks.addEvent(splitAt[0], splitAt[1]);
                         }
+                        break;
+                    case "delete" :
+                        tasks.delete(sc.nextInt());
                         break;
                     default :
                         throw new InvalidArgumentException();

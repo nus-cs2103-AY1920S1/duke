@@ -42,6 +42,17 @@ public class Tasks {
         System.out.println("    ------------------------------------------------------------");
     }
 
+    public void delete(int arg) {
+        int index  = arg - 1;
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        System.out.println("    ------------------------------------------------------------");
+        System.out.println("    Noted. I've removed this task:");
+        System.out.println("    \uD83D\uDDD1  " + task.toString());
+        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println("    ------------------------------------------------------------");
+    }
+
     public void list() {
         int i = 1;
         System.out.println("    ============================================================");

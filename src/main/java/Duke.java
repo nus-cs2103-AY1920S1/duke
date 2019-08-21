@@ -32,14 +32,28 @@ public class Duke {
             }
 
             else if (readInput.toLowerCase().equals("list")){
-
                 String printList = "Here are the tasks in your list:\n";
+
                 for(int i = 0; i < listCounter; i++){
-                    printList = printList + "\t\t" + (i + 1) +
-                            "." + list.get(i).getStatusIcon() + " " + list.get(i).getTaskItem();
-                    if(i != listCounter - 1) printList = printList + "\n";
+                    String temp = "\t\t" + (i + 1) + "." +
+                            list.get(i).getStatusIcon() + " " + list.get(i).getTaskItem();
+                    printList = printList + temp + "\n";
                 }
+
                 System.out.println(processText(printList));
+            }
+
+            else if(readInput.toLowerCase().equals("todo")){
+                String toDoItem = sc.nextLine();
+
+                list.add(new ToDo(toDoItem, false));
+                listCounter++;
+
+                String tempPrint = "Got it. I've added this task: \n\t\t" +
+                        list.get(listCounter - 1).getStatusIcon() + " " +
+                        toDoItem + "\n\tNow you have " + listCounter + " tasks in the list." ;
+
+                System.out.println(processText(tempPrint));
             }
 
             else if(readInput.toLowerCase().equals("done")){

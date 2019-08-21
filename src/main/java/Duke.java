@@ -13,7 +13,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        LinkedList<String> lst = new LinkedList<>();
+        LinkedList<Task> lst = new LinkedList<>();
 
         Scanner sc = new Scanner(System.in);
         String word = sc.nextLine();
@@ -21,13 +21,21 @@ public class Duke {
         while (!word.equals("bye")) {
             if (word.equals("list")) {
                 int counter = 1;
-                for (String s: lst) {
-                    System.out.println(counter + ". " + s);
+                System.out.println("Here are the tasks in your list:");
+                for (Task t : lst) {
+                    System.out.println(counter + ". " + "[" + t.getStatusIcon() + "] " + t.getDescription());
                     counter++;
                 }
+            } else if (word.startsWith("done ")) {
+                String[] arr = word.split(" ");
+                int i = Integer.valueOf(arr[1]);
+                Task task = lst.get(i - 1);
+                lst.get(i - 1).markAsDone();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
             } else {
                 System.out.println("added: " + word);
-                lst.add(word);
+                lst.add(new Task(word));
             }
             word = sc.nextLine();
         }

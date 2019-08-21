@@ -11,12 +11,13 @@ public class Task {
         this.isDone = true;
     }
 
+    @Override
     public String toString() {
         String task;
         if (isDone) {
-            return 	"[+] " + description; //Task is Done
+            return 	"[+]" + description; //Task is Done
         } else {
-            return 	"[-] " + description; //Task not Done
+            return 	"[-]" + description; //Task not Done
         }
     }
 }

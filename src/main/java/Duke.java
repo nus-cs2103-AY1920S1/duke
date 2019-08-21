@@ -2,30 +2,46 @@ import java.util.Scanner;
 import java.util.LinkedList;
 
 public class Duke {
+
+    static LinkedList<Task> list = new LinkedList<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LinkedList<Task> list = new LinkedList<>();
         String command;
         printHello();
 
-        while (!( command = sc.nextLine()).equals("bye")) {
+        while (!( command = sc.next()).equals("bye")) {
             if (command.equals("list")) {
                 System.out.println("    _____________________________________");
+                System.out.println("     Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
                     int number = i + 1;
                     System.out.println("     " + number + "." + list.get(i));
                 }
                 System.out.println("    _____________________________________\n");
-            } else if (command.contains("done")) {
-                int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+                sc.nextLine();
+            } else if (command.equals("done")) {
+                int taskNumber = sc.nextInt() - 1;
                 list.get(taskNumber).markAsDone();
                 System.out.println("    _____________________________________");
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + list.get(taskNumber));
                 System.out.println("    _____________________________________\n");
-            } else {
-                list.add(new Task(command));
-                printAddItem(command);
+                sc.nextLine();
+            } else if (command.equals("todo")) {
+                Task newTodo = new Todo(sc.nextLine());
+                list.add(newTodo);
+                printAddTask(newTodo);
+            } else if (command.equals("deadline")) {
+                String[] statement = sc.nextLine().split("/by");
+                Task newDeadline = new Deadline(statement[0], statement[1]);
+                list.add(newDeadline);
+                printAddTask(newDeadline);
+            } else if (command.equals("event")) {
+                String[] statement = sc.nextLine().split("/at");
+                Task newEvent = new Event(statement[0], statement[1]);
+                list.add(newEvent);
+                printAddTask(newEvent);
             }
         }
         printBye();
@@ -42,9 +58,11 @@ public class Duke {
         System.out.println("    _____________________________________");
     }
 
-    public static void printAddItem(String item) {
+    public static void printAddTask(Task newTask) {
         System.out.println("    _____________________________________");
-        System.out.println("     added: " + item);
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + newTask);
+        System.out.println("     Now you have " + list.size() + " tasks in the list.");
         System.out.println("    _____________________________________\n");
     }
 }

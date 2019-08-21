@@ -28,7 +28,7 @@ public class Duke {
                 case "bye" :
                     bye();
                     flag = false;
-                    return;
+                    break;
                 case "list" :
                     list(list);
                     break;
@@ -36,6 +36,16 @@ public class Duke {
                     int n = Integer.parseInt(a[1]);
                     done(list, n-1);
                     break;
+                case "todo":
+                    todo(list,s);
+                    break;
+                case "event":
+                    event(list,s);
+                    break;
+                case "deadline":
+                    deadline(list,s);
+                    break;
+
 
                 default:
                     Task task = new Task(s);
@@ -57,12 +67,10 @@ public class Duke {
     }
     public static void list(ArrayList<Task>list){
         drawline();
+        System.out.println("     Here are the tasks in your list:");
         for(int n=0; n<list.size();n++) {
             int m = n+1;
-            if(list.get(n).isDone()== true)
-                System.out.println("     [✓]" + m + ". " + list.get(n).getName());
-            else
-                System.out.println("     [✗]" + m + ". " + list.get(n).getName());
+            System.out.println("     "+m+"."+list.get(n));
         }
         drawline();
     }
@@ -77,6 +85,43 @@ public class Duke {
         list.get(k).setDone(true);
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("     [✓]"+list.get(k).getName());
+        drawline();
+    }
+    public static void todo(ArrayList<Task>list,String s){
+        String td = s.substring(5);
+        Task t = new Todo(td);
+        list.add(t);
+        drawline();
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("     "+t);
+        System.out.println("     Now you have "+list.size()+" tasks in the list.");
+        drawline();
+    }
+    public static void deadline(ArrayList<Task>list,String s){
+
+        int sIndex = s.indexOf("/");
+        int firstIndex = sIndex - 1;
+        int secondIndex = sIndex + 4;
+        String deadlineDescription = s.substring(9, firstIndex);
+        String deadlineBy = s.substring(secondIndex);
+        Task t = new Deadline(deadlineDescription, deadlineBy);
+        list.add(t);
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("     "+t);
+        System.out.println("     Now you have "+list.size()+" tasks in the list.");
+        drawline();
+    }
+    public static void event(ArrayList<Task>list,String s){
+        int sIndex = s.indexOf("/");
+        int firstIndex = sIndex - 1;
+        int secondIndex = sIndex + 4;
+        String eventDescription = s.substring(6, firstIndex);
+        String eventAt = s.substring(secondIndex);
+        Task t = new Event(eventDescription, eventAt);
+        list.add(t);
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("     "+t);
+        System.out.println("     Now you have "+list.size()+" tasks in the list.");
         drawline();
     }
 

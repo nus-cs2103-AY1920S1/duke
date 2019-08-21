@@ -1,7 +1,7 @@
 /**
  * Task class. Holds the string of the task, and whether it is done.
  */
-class Task {
+public class Task {
     /** Total tasks created */
     private static int totalTasks = 0;
     /** Whether task is done. */
@@ -13,7 +13,7 @@ class Task {
      * Constructor.
      * @param description String of the task.
      */
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         ++totalTasks;
     }
@@ -21,7 +21,7 @@ class Task {
     /**
      * Changes isDone to true, setting the task to be done.
      */
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -29,7 +29,7 @@ class Task {
      * Gets the string message of the task.
      * @return String message.
      */
-    String message() {
+    public String message() {
         String indent = String.format("%4s", "");
         StringBuilder strb = new StringBuilder();
         return strb

@@ -60,40 +60,56 @@ public class Duke {
                 case "deadline":
                     taskName = "";
                     String deadline = "";
-                    while (scanner.hasNext()) {
-                        String s = scanner.next();
-                        if (s.equals("/by")) {
-                            deadline = scanner.nextLine().strip();
-                            taskName = taskName.stripTrailing();
-                            break;
-                        } else {
-                            taskName += s + " ";
+                    if (scanner.hasNext()) {
+                        while (scanner.hasNext()) {
+                            String s = scanner.next();
+                            if (s.equals("/by")) {
+                                deadline = scanner.nextLine().strip();
+                                taskName = taskName.stripTrailing();
+                                break;
+                            } else {
+                                taskName += s + " ";
+                            }
                         }
+                        if (deadline.isBlank()) {
+                            temp = new TaskBuilder().type(TaskType.DEADLINE).description(taskName).deadline(deadline).build();
+                            addTask(temp);
+                        } else {
+                            print("OOPS!!! The deadline cannot be empty.");
+                        }
+                    } else {
+                        print("OOPS!!! The description of a deadline cannot be empty.");
                     }
-                    temp = new TaskBuilder().type(TaskType.DEADLINE).description(taskName).deadline(deadline).build();
-                    addTask(temp);
                     break;
                 case "event":
                     taskName = "";
                     String timeframe = "";
-                    while (scanner.hasNext()) {
-                        String s = scanner.next();
-                        if (s.equals("/at")) {
-                            timeframe = scanner.nextLine().strip();
-                            taskName = taskName.stripTrailing();
-                            break;
-                        } else {
-                            taskName += s + " ";
+                    if (scanner.hasNext()){
+                        while (scanner.hasNext()) {
+                            String s = scanner.next();
+                            if (s.equals("/at")) {
+                                timeframe = scanner.nextLine().strip();
+                                taskName = taskName.stripTrailing();
+                                break;
+                            } else {
+                                taskName += s + " ";
+                            }
                         }
+                        if (!timeframe.isBlank()) {
+                            temp = new TaskBuilder().type(TaskType.EVENT).description(taskName).timeframe(timeframe).build();
+                            addTask(temp);
+                        } else {
+                            print("OOPS!!! The timeframe of an event cannot be empty.");
+                        }
+                    } else {
+                        print("OOPS!!! The description of an event cannot be empty.");
                     }
-                    temp = new TaskBuilder().type(TaskType.EVENT).description(taskName).timeframe(timeframe).build();
-                    addTask(temp);
                     break;
                 case "done":
                     int whichTask = scanner.nextInt() - 1;
-                    arr[whichTask].markAsDone();
+                    arr.get(whichTask).markAsDone();
                     print("Nice! I've marked this task as done:");
-                    print(arr[whichTask].toString());
+                    print(arr.get(whichTask).toString());
                     break;
                 default:
                     print("OOPS!!! I'm sorry, but I don't know what that means :-(");

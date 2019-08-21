@@ -1,4 +1,5 @@
-public class Todo extends Task {
+package DukePkg;
+public class Todo extends DukePkg.Task {
     public Todo(String task) {
         super(task);
     }

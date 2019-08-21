@@ -1,4 +1,6 @@
-public class Event extends Task{
+package DukePkg;
+
+public class Event extends DukePkg.Task {
     protected String at;
 
     public Event(String task, String at) {

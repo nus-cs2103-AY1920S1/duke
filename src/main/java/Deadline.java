@@ -1,4 +1,6 @@
-public class Deadline extends Task{
+package DukePkg;
+
+public class Deadline extends DukePkg.Task{
     protected String by;
 
     public Deadline(String task, String by) {

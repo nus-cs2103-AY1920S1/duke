@@ -22,61 +22,67 @@ public class Duke {
             input = sc.nextLine();
             String[] arguments = input.split(" ");
 
-            switch (arguments[0]) {
-                case "bye":
-                    printExitMsg();
-                    System.exit(0);
-                    break;
-                case "list":
-                    printList(taskList);
-                    break;
-                case "done":
-                    try {
+            try {
+                Task task;
+                switch (arguments[0]) {
+                    case "bye":
+                        printExitMsg();
+                        System.exit(0);
+                        break;
+                    case "list":
+                        printList(taskList);
+                        break;
+                    case "done":
                         int num = Integer.parseInt(arguments[1]);
                         if (num < 1 || num > taskList.getNumTasks()) {
                             throw new IndexOutOfBoundsException();
                         }
-                        Task task = taskList.getTaskByIndex(num);
+                        task = taskList.getTaskByIndex(num);
                         task.markAsDone();
                         printDoneMsg(task);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please enter an integer after done.");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("No such task, please try another number.");
-                    }
-                    break;
-                case "deadline":
-                case "event":
-                case "todo":
-                    int index = -1;
-                    Task task;
-                    if (arguments[0].equals("deadline")) {
-                        index = findIndexByToken(arguments, "/by");
-                    } else if (arguments[0].equals("event")){
-                        index = findIndexByToken(arguments, "/at");
-                    }
-                    if (arguments[0].equals("todo")) {
-
-                        String description = parseArguments(arguments, 1, arguments.length);
-                        task = new TodoTask(description);
-                    } else if (index == -1) {
-                        System.out.println("Time not specified. Try again.");
                         break;
-                    } else {
-                        String description = parseArguments(arguments, 1, index);
-                        String time = parseArguments(arguments, index + 1, arguments.length);
-                        if (arguments[0].equals("deadline")) {
-                            task = new DeadlineTask(description, time);
-                        } else {
-                            task = new EventTask(description, time);
+                    case "deadline":
+                    case "event":
+                    case "todo":
+                        if (arguments.length == 1) {
+                            throw new DukeException(String.format(" ☹ OOPS!!! The description of %s %s cannot be empty.", arguments[0].equals("event") ? "an" : "a", arguments[0]));
                         }
-                    }
-                    taskList.add(task);
-                    printAddTaskMsg(task);
-                    break;
-                default:
-                    System.out.println("Invalid Command, try again.");
-                    break;
+                        int index = -1;
+                        if (arguments[0].equals("deadline")) {
+                            index = findIndexByToken(arguments, "/by");
+                            if (index == -1) {
+                                throw new DukeException(" ☹ OOPS!!! /by must be present for a deadline.");
+                            }
+                        } else if (arguments[0].equals("event")){
+                            index = findIndexByToken(arguments, "/at");
+                            if (index == -1) {
+                                throw new DukeException(" ☹ OOPS!!! /at must be present for an event.");
+                            }
+                        }
+                        if (arguments[0].equals("todo")) {
+                            String description = parseArguments(arguments, 1, arguments.length);
+                            task = new TodoTask(description);
+                        } else {
+                            String description = parseArguments(arguments, 1, index);
+                            String time = parseArguments(arguments, index + 1, arguments.length);
+                            if (arguments[0].equals("deadline")) {
+                                task = new DeadlineTask(description, time);
+                            } else {
+                                task = new EventTask(description, time);
+                            }
+                        }
+                        taskList.add(task);
+                        printAddTaskMsg(task);
+                        break;
+                    default:
+                        throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                printException(e.getMessage());
+            } catch (NumberFormatException e) {
+                printException(" ☹ OOPS!!! Please enter an integer after done.");
+            } catch (IndexOutOfBoundsException e) {
+                printException(" ☹ OOPS!!! There is no such task with this index, please try another index.");
             }
         } while (!input.equals("bye"));
     }
@@ -97,63 +103,67 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-    //prints the intro text
-    private static void printIntroText() {
-        printIndentation();
-        System.out.println(" Hello! I'm Duke");
-        printIndentation();
-        System.out.println(" What can I do for you?");
-    }
-
-    private static void printIntro() {
+    //prints one section(bounded by lines)
+    private static void printSection(String msg) {
         printLine();
-        printIntroText();
+        printIndentation();
+        System.out.println(" " + msg);
         printLine();
         System.out.println();
     }
 
-    private static void printExitMsg() {
+    //prints one section(bounded by lines) with multiple lines of messages
+    private static void printSection(String[] msgArray) {
         printLine();
-        printIndentation();
-        System.out.println(" Bye. Hope to see you again soon!");
-        printLine();
-    }
-
-    private static void printAddTaskMsg(Task task) {
-        printLine();
-        printIndentation();
-        System.out.println(" Got it. I've added this task: ");
-        printIndentation();
-        System.out.printf("   %s\n", task);
-        printIndentation();
-        System.out.printf(" Now you have %d %s in the list.\n",taskList.getNumTasks(), taskList.getNumTasks() == 1 ? "task" : "tasks");
-        printLine();
-        System.out.println();
-    }
-
-    private static void printList(MyList myList) {
-        List<Task> list = myList.getList();
-        int listNum = 1;
-        printLine();
-        printIndentation();
-        System.out.println(" Here are the tasks in your list:");
-        for (Task task : list) {
+        for (String string : msgArray) {
             printIndentation();
-            System.out.printf(" %d.%s\n", listNum, task);
-            listNum++;
+            System.out.println(string);
         }
         printLine();
         System.out.println();
     }
 
+    private static void printIntro() {
+        String[] array = new String[2];
+        array[0] = " Hello! I'm Duke";
+        array[1] = " What can I do for you?";
+        printSection(array);
+    }
+
+    private static void printExitMsg() {
+        printSection(" Bye. Hope to see you again soon!");
+    }
+
+    private static void printAddTaskMsg(Task task) {
+        String[] array = new String[3];
+        array[0] = " Got it. I've added this task: ";
+        array[1] = String.format("   %s", task);
+        array[2] = String.format(" Now you have %d %s in the list.",taskList.getNumTasks(), taskList.getNumTasks() == 1 ? "task" : "tasks");
+        printSection(array);
+    }
+
+    private static void printList(MyList myList) {
+        List<Task> list = myList.getList();
+        int listNum = 1;
+
+        String[] array = new String[myList.getNumTasks() + 1];
+        array[0] = " Here are the tasks in your list:";
+        for (Task task : list) {
+            array[listNum] = String.format(" %d.%s", listNum, task);
+            listNum++;
+        }
+        printSection(array);
+    }
+
     private static void printDoneMsg(Task task) {
-        printLine();
-        printIndentation();
-        System.out.println(" Nice! I've marked this task as done: ");
-        printIndentation();
-        System.out.printf("   %s\n", task);
-        printLine();
-        System.out.println();
+        String[] array = new String[2];
+        array[0] = " Nice! I've marked this task as done: ";
+        array[1] = String.format("   %s", task);
+        printSection(array);
+    }
+
+    private static void printException(String msg) {
+        printSection(msg);
     }
 
     //returns index of token if found, else returns -1

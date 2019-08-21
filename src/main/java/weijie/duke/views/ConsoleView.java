@@ -1,10 +1,17 @@
 package weijie.duke.views;
 
+import weijie.duke.presenters.InputListener;
 import weijie.duke.utils.StringUtils;
 
 import java.util.Scanner;
 
 public class ConsoleView {
+
+    private InputListener inputListener;
+
+    public void registerListener(InputListener inputListener) {
+        this.inputListener = inputListener;
+    }
 
     public void init() {
         String logo = " ____        _        \n"

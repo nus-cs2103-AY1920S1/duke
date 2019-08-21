@@ -2,10 +2,10 @@ package duke;
 
 import java.util.ArrayList;
 
-class Tasks {
+class TaskList {
     private ArrayList<Task> tasks;
 
-    Tasks() {
+    TaskList() {
         this.tasks = new ArrayList<>();
     }
 
@@ -15,6 +15,10 @@ class Tasks {
 
     Task getTask(final int index) {
         return tasks.get(index);
+    }
+
+    int size() {
+        return tasks.size();
     }
 
     @Override

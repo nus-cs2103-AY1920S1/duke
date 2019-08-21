@@ -4,6 +4,7 @@ import seedu.duke.cli.annotations.Argument;
 import seedu.duke.cli.annotations.CommandConstructor;
 import seedu.duke.cli.commands.ByeCommand;
 import seedu.duke.cli.commands.DeadlineCommand;
+import seedu.duke.cli.commands.DeleteCommand;
 import seedu.duke.cli.commands.DoneCommand;
 import seedu.duke.cli.commands.EventCommand;
 import seedu.duke.cli.commands.ListCommand;
@@ -30,6 +31,7 @@ public class Parser {
         addConstructors(TodoCommand.class);
         addConstructors(EventCommand.class);
         addConstructors(DeadlineCommand.class);
+        addConstructors(DeleteCommand.class);
     }
 
     @SuppressWarnings("unchecked")

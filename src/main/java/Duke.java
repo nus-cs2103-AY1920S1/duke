@@ -1,13 +1,37 @@
+import java.util.Scanner;
+
 public class Duke {
     /**
         Prints DUKE.
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private static void print(String str) {
+        System.out.println(str);
     }
+
+    /**
+     * Prints a greeting and echoes user input.
+     * @param args takes in arguments.
+     */
+    public static void main(String[] args) {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
+
+        print("Hello! I'm Duke\nWhat can I do for you?");
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String str = sc.nextLine();
+            if (!str.equals("bye")) {
+                print(str);
+            } else {
+                print("Bye. Hope to see you again soon!");
+                break;
+            }
+
+        }
+    }
+
 }

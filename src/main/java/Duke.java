@@ -1,47 +1,35 @@
 import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Duke {
 
-    static LinkedList<Task> list = new LinkedList<>();
+    protected static ArrayList<Task> list = new ArrayList<>();
+    protected static Scanner sc;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         String command;
         printHello();
 
         while (!( command = sc.next()).equals("bye")) {
-            if (command.equals("list")) {
-                System.out.println("    _____________________________________");
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < list.size(); i++) {
-                    int number = i + 1;
-                    System.out.println("     " + number + "." + list.get(i));
+            try {
+                if (command.equals("list")) {
+                    handleListCommand();
+                } else if (command.equals("done")) {
+                    handleDoneCommand();
+                } else if (command.equals("todo")) {
+                    handleTodoCommand();
+                } else if (command.equals("deadline")) {
+                    handleDeadlineCommand();
+                } else if (command.equals("event")) {
+                    handleEventCommand();
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                System.out.println("    _____________________________________\n");
-                sc.nextLine();
-            } else if (command.equals("done")) {
-                int taskNumber = sc.nextInt() - 1;
-                list.get(taskNumber).markAsDone();
+            } catch (DukeException e) {
                 System.out.println("    _____________________________________");
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + list.get(taskNumber));
+                System.out.println("     " + e.getMessage());
                 System.out.println("    _____________________________________\n");
-                sc.nextLine();
-            } else if (command.equals("todo")) {
-                Task newTodo = new Todo(sc.nextLine().trim());
-                list.add(newTodo);
-                printAddTask(newTodo);
-            } else if (command.equals("deadline")) {
-                String[] statement = sc.nextLine().split("/by");
-                Task newDeadline = new Deadline(statement[0].trim(), statement[1].trim());
-                list.add(newDeadline);
-                printAddTask(newDeadline);
-            } else if (command.equals("event")) {
-                String[] statement = sc.nextLine().split("/at");
-                Task newEvent = new Event(statement[0].trim(), statement[1].trim());
-                list.add(newEvent);
-                printAddTask(newEvent);
             }
         }
         printBye();
@@ -65,4 +53,96 @@ public class Duke {
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
         System.out.println("    _____________________________________\n");
     }
+
+    public static void handleTodoCommand() throws DukeException {
+        try {
+            String description = sc.nextLine().trim();
+            if (description.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+            Task newTodo = new Todo(description);
+            list.add(newTodo);
+            printAddTask(newTodo);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: todo [task description]");
+        }
+    }
+
+    public static void handleListCommand() throws DukeException {
+        try {
+            String statement = sc.nextLine();
+
+            if (!statement.isBlank()) {
+                throw new Exception();
+            }
+
+            System.out.println("    _____________________________________");
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                int number = i + 1;
+                System.out.println("     " + number + "." + list.get(i));
+            }
+            System.out.println("    _____________________________________\n");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: list");
+        }
+    }
+
+    public static void handleDeadlineCommand() throws DukeException {
+        try {
+            String[] statement = sc.nextLine().split("/by");
+            String taskDescription = statement[0].trim();
+            String taskBy = statement[1].trim();
+
+            if (taskDescription.isBlank() || taskBy.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+            Task newDeadline = new Deadline(taskDescription, taskBy);
+            list.add(newDeadline);
+            printAddTask(newDeadline);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! Task description/Task by can not be empty");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: deadline [task description] /by [task deadline]");
+        }
+    }
+
+    public static void handleEventCommand() throws DukeException {
+        try {
+            String[] statement = sc.nextLine().split("/at");
+            String taskDescription = statement[0].trim();
+            String taskAt = statement[1].trim();
+
+            if (taskDescription.isBlank() || taskAt.isBlank()) {
+                throw new IllegalArgumentException();
+            }
+
+            Task newEvent = new Event(taskDescription, taskAt);
+            list.add(newEvent);
+            printAddTask(newEvent);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! Task description/Task at can not be empty");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: event [task description] /at [task at]");
+        }
+    }
+
+    public static void handleDoneCommand() throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(sc.nextLine().trim()) - 1;
+            list.get(taskNumber).markAsDone();
+            System.out.println("    _____________________________________");
+            System.out.println("     Nice! I've marked this task as done:");
+            System.out.println("       " + list.get(taskNumber));
+            System.out.println("    _____________________________________\n");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! The task number you specified is not in the list.");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: done [task number]");
+        }
+    }
+
 }

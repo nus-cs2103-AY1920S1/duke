@@ -50,14 +50,28 @@ public class Duke {
                 }
                 break;
             case "done":
+            case "delete":
+                if (inputs.length == 1)
+                    throw new DukeException(indent + "☹ OOPS!!! The index of " + inputs[0] + " operation cannot be empty.");
+                if (!inputs[1].matches("(0|[1-9]\\d*)"))
+                    throw new DukeException(indent + "☹ OOPS!!! The index of " + inputs[0] + " operation must be a positive integer.");
                 int i = Integer.parseInt(inputs[1]);
-                try {
-                    task = list.get(i - 1);
-                    task.setDone();
-                    System.out.println(indent + "Nice! I've marked this task as done: ");
-                    System.out.println(indent + "  " + task);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(indent + "Invalid index, please try again");
+                if (i > list.size())
+                    throw new DukeException(indent + "☹ OOPS!!! There is no task at index " + i + ".");
+
+                switch (inputs[0]) {
+                    case "done":
+                        task = list.get(i - 1);
+                        task.setDone();
+                        System.out.println(indent + "Nice! I've marked this task as done: ");
+                        System.out.println(indent + "  " + task);
+                        break;
+                    case "delete":
+                        list.remove(i - 1);
+                        System.out.println(indent + "Noted. I've removed this task:");
+                        System.out.println(indent + "  " + task);
+                        printListSize();
+                        break;
                 }
                 break;
             case "todo":
@@ -82,7 +96,7 @@ public class Duke {
                 list.add(task);
                 System.out.println(indent + "Got it. I've added this task:");
                 System.out.println(indent + "  " + task);
-                System.out.println(indent + "Now you have " + list.size() + "tasks in the list.");
+                printListSize();
                 break;
             default:
                 throw new DukeException(indent + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -98,5 +112,8 @@ public class Duke {
     }
     private void UILine() {
         System.out.println("    ____________________________________________________________");
+    }
+    private void printListSize() {
+        System.out.println(indent + "Now you have " + list.size() + " tasks in the list.");
     }
 }

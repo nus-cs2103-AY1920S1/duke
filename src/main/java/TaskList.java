@@ -25,6 +25,8 @@ public class TaskList {
     /**
      * Adds a task to the list based on the given command.
      * @param command The command given by the user to be processed.
+     * @throws DukeException Exception thrown during the creation of
+     *     the Task object if the command is invalid.
      */
     protected void addTask(String command) throws DukeException {
         Task newTask = Task.create(command);
@@ -38,6 +40,7 @@ public class TaskList {
     /**
      * Mark a task in the list as done based on its ID.
      * @param id the ID of the task that is done.
+     * @throws DukeException Exception thrown if the ID input is invalid.
      */
     protected void markAsDone(int id) throws DukeException {
         if (id > listItems.size() || id <= 0) {
@@ -48,4 +51,6 @@ public class TaskList {
         ps.println("\tNice! I've marked this task as done: \n"
                 + "\t  " + task);
     }
+
+
 }

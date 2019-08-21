@@ -42,7 +42,12 @@ public class Duke {
             ps.println("\tBye. Hope to see you again soon!");
         } else if (command.equals("list")) {
             taskList.printList();
-        } else if (commandArray[0].equals("done") && commandArray[1].matches("\\d+")) {
+        } else if (commandArray[0].equals("done")) {
+            if (commandArray.length == 1) {
+                throw new DukeException("Please specify a task ID to set as done!");
+            } else if (!commandArray[1].matches("\\d+")) {
+                throw new DukeException("The ID of the task must be an integer!");
+            }
             int id = Integer.parseInt(commandArray[1]);
             taskList.markAsDone(id);
         } else if (isValidTaskType(commandArray[0])) {

@@ -11,6 +11,7 @@ public abstract class Task {
      * Creates the type of task to be added to the list based on user's command.
      * @param command The entire line of command input by the user into the program.
      * @return A Task object that follows the specifications of the input.
+     * @throws DukeException Exception thrown if the format is invalid.
      */
     protected static Task create(String command) throws DukeException {
         String[] commandArray = command.split(" ");

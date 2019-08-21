@@ -35,7 +35,7 @@ public class Duke {
                     Task newTask;
                     String remainder = sc.nextLine();
                     if (next.equals("todo")) {
-                        if (remainder.isEmpty()) {
+                        if (remainder.trim().isEmpty()) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                         newTask = new Todo(remainder);
@@ -55,6 +55,16 @@ public class Duke {
                     store.add(newTask);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + newTask.toString());
+                    String size = Integer.toString(store.size());
+                    System.out.println("Now you have " + size + " tasks in the list.");
+                } else if (next.equals("delete")){
+                    int taskNo = sc.nextInt();
+                    if (taskNo > store.size()) {
+                        throw new DukeException("☹ OOPS!!! No such item in the list!");
+                    }
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("  " + store.get(taskNo-1).toString());
+                    store.remove(taskNo-1);
                     String size = Integer.toString(store.size());
                     System.out.println("Now you have " + size + " tasks in the list.");
                 } else {

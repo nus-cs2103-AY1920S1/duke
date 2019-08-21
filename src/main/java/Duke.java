@@ -1,8 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    static Task[] array;
-    static int count;
+    static ArrayList<Task> list;
     static String line = "____________________________________________________________";
 
     public static void main(String[] args) {
@@ -17,13 +17,17 @@ public class Duke {
             try {
                 validateInput(full);
             } catch (DukeException d) {
-                System.out.println(line + "\n ☹ OOPS!!! " + d.response + "\n" + line);
+                System.out.println(format("☹ OOPS!!! " + d.response));
                 continue;
             }
 
             //handles done commands using markAsDone method
             if (s.equals("done")) {
                 markAsDone(Integer.valueOf(arr[1]) - 1);
+            }
+
+            else if (s.equals("delete")) {
+                delete(Integer.valueOf(arr[1]) - 1);
             }
 
             //handles tasks using the process method
@@ -34,15 +38,15 @@ public class Duke {
             //prints out list
             else if (s.toLowerCase().equals("list")) {
                 System.out.println(line + "\n Here are the tasks in your list:");
-                for (int i = 1; i <= count; i++) {
-                    System.out.println(" " + i + ". " + array[i - 1].toString());
+                for (int i = 1; i <= list.size(); i++) {
+                    System.out.println(" " + i + ". " + list.get(i - 1).toString());
                 }
                 System.out.println(line);
             }
 
             else {
                 if (s.equals("bye")) {
-                    System.out.println(line + "\n Bye. Hope to see you again soon!\n" + line);
+                    System.out.println(format("Bye. Hope to see you again soon!"));
                     break;
                 }
             }
@@ -50,14 +54,17 @@ public class Duke {
     }
 
     public static void intro() {
-        array = new Task[100];
-        count = 0;
+        list = new ArrayList();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(line + "\n" + logo + "\n Hello! I'm Duke\n What can I do for you?\n" + line);
+        System.out.println(format(logo + "\n Hello! I'm Duke\n What can I do for you?"));
+    }
+
+    public static String format(String s) {
+        return line + "\n " + s + "\n" + line;
     }
 
     public static void process(String s, String des) {
@@ -71,20 +78,26 @@ public class Duke {
             String[] arr = des.split("/at");
             task = new Event(arr[0].trim(), arr[1].trim());
         }
-        array[count] = task;
-        count += 1;
+        list.add(task);
         printTask(task);
     }
 
     public static void printTask(Task t) {
-        System.out.println(line + "\n Got it. I've added this task: \n  " +
-                t.toString() + "\n Now you have " + count + " tasks in the list.\n" + line);
+        System.out.println(format("Got it. I've added this task: \n   " +
+                t.toString() + "\n Now you have " + list.size() + " tasks in the list."));
     }
 
     public static void markAsDone(int i) {
-        array[i].done();
-        Task t = array[i];
-        System.out.println(line + "\n Nice! I've marked this task as done: \n " + t.toString() + "\n" + line);
+        Task t = list.get(i);
+        t.done();
+        System.out.println(format("Nice! I've marked this task as done: \n   " + t.toString()));
+    }
+
+    public static void delete(int i) {
+        Task t = list.get(i);
+        list.remove(i);
+        System.out.println(format("Noted. I've removed this task: \n   " + t.toString() + "\n Now you have " +
+                list.size() + " tasks in the list."));
     }
 
     public static void validateInput(String input) throws DukeException {
@@ -102,9 +115,9 @@ public class Duke {
                 throw new DukeException("Empty Description", "The description of a " + first + " cannot be empty.");
             }
 
-            //if done is not followed by a number
-            else if (first.equals("done")) {
-                throw new DukeException("Missing Task", "Please specify a task to mark as complete.");
+            //if done or delete are not followed by a number
+            else if (first.equals("done") || first.equals("delete")) {
+                throw new DukeException("Missing Task", "Please specify a task.");
             }
 
             //if it is not a single-worded valid input
@@ -113,7 +126,7 @@ public class Duke {
             }
         } else {
             //if it is an invalid input containing multiple words
-            if (!task && !first.equals("done")) {
+            if (!task && !first.equals("done") && !first.equals("delete")) {
                 throw new DukeException("Invalid Input", "I'm sorry, but I don't know what that means :-(");
             }
 

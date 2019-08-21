@@ -41,10 +41,7 @@ public class Duke {
                     System.out.print("  "
                             + (i+1)
                             + ". "
-                            + "["
-                            + currTask.getStatusIcon()
-                            + "] "
-                            + currTask.getDescription()
+                            + currTask
                             + "\n");
                 }
 
@@ -60,10 +57,7 @@ public class Duke {
 
                 System.out.print("  Nice! I've marked this task as done: \n");
                 System.out.print("    "
-                        + "["
-                        + modifiedTask.getStatusIcon()
-                        + "] "
-                        + modifiedTask.getDescription()
+                        + modifiedTask
                         + "\n");
 
                 System.out.print(dividerLine);

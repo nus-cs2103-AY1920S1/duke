@@ -31,6 +31,7 @@ public class Duke {
                         System.out.println("\n\t" + (i + 1) + ". " + taskList.get(i).toString());
                     }
                     System.out.println("\t____________________________________________________________\n");
+
                 } else if (command.equals("done")) {
                     int taskNum = Integer.valueOf(sc.next());
                     if (taskNum < 0 || taskNum > taskList.size()) {
@@ -47,6 +48,7 @@ public class Duke {
                     System.out.println("\n\tBye. Hope to see you again soon!");
                     System.out.println("\t____________________________________________________________\n");
                     break;
+
                 } else if (command.equals("todo")) {
 
                     String str = sc.nextLine();
@@ -100,12 +102,29 @@ public class Duke {
                     System.out.println("\n\t" + e.toString());
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
-                } else {
+
+                } else if (command.equals("delete")) {
+
+                    int taskNum = Integer.valueOf(sc.next());
+                    if (taskNum < 0 || taskNum > taskList.size()) {
+                        throw new DukeException("OOPS! Integer is out of range of list.");
+                    }
+                    Task removed = taskList.get(taskNum);
+                    taskList.remove(taskNum);
+                    System.out.println("\t____________________________________________________________");
+                    System.out.println("\n\tNoted. I have removed this task: ");
+                    System.out.println("\n\t" + removed);
+                    System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
+                    System.out.println("\t____________________________________________________________\n");
+
+                }
+
+                else {
                     throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("\t____________________________________________________________");
-                System.out.println("\n\tOOPS! An integer is expected after done.");
+                System.out.println("\n\tOOPS! An integer is expected after done / delete.");
                 System.out.println("\t____________________________________________________________\n");
             } catch (DukeException e) {
                 System.out.println("\t____________________________________________________________");

@@ -4,6 +4,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    // the parent class of Deadline, Event and To-do classes
     public Task(String description) {
         this.description = description;
         this.isDone = false;

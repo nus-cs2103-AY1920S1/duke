@@ -1,6 +1,7 @@
 public class Event extends Task {
     protected String at;
 
+    // to manage incoming event list at specific location
     public Event(String description, String at) {
         super(description);
         this.at = at;

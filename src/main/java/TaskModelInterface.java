@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.stream.Stream;
 interface TaskModelInterface {
     void initialize();
     void registerObserver(TaskObserver o);
@@ -8,4 +9,5 @@ interface TaskModelInterface {
     TaskInterface doneTask(int refNum); 
     TaskInterface deleteTask(int refNum); 
     Iterator<TaskInterface> getTaskListIterator();
+    Stream<TaskInterface> getTaskStream();
 }

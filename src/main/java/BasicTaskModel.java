@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 class BasicTaskModel implements TaskModelInterface {
     private List<TaskObserver> observers;
@@ -54,6 +55,10 @@ class BasicTaskModel implements TaskModelInterface {
 
     public Iterator<TaskInterface> getTaskListIterator(){
         return this.taskList.listIterator();
+    }
+
+    public Stream<TaskInterface> getTaskStream() {
+        return this.taskList.stream();
     }
 
     /* when do we notify the task again? */

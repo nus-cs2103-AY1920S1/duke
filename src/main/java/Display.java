@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Arrays;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 class Display implements TaskObserver {
     private ControllerInterface controller; 
@@ -134,10 +136,16 @@ class Display implements TaskObserver {
 
 
     public static void 
-        printAllTasks(Iterator<TaskInterface> iter) {
+        //printAllTasks(Iterator<TaskInterface> iter) {
+        printAllTasks(Stream<TaskInterface> taskStream) {
+        //convert the stream into a list
+
+        List<TaskInterface> taskList = taskStream
+            .collect(Collectors.toCollection(ArrayList::new));
+        Iterator<TaskInterface> iter = taskList.listIterator();
 
         ArrayList<String> printxs = new ArrayList<>();
-        //  String headermsg = "Here are the tasks in your list:";
+        //String headermsg = "Here are the tasks in your list:";
         String headermsg = "hewe awe the tasks in youw wist:";
         printxs.add(headermsg);
 

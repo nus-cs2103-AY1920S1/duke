@@ -1,4 +1,5 @@
 // java -Dfile.encoding=UTF8 classname
+import java.util.stream.Stream;
 import java.util.Iterator;
 class FridayController implements ControllerInterface {
     private TaskModelInterface model;
@@ -51,9 +52,12 @@ class FridayController implements ControllerInterface {
     }
 
     public void listTasks() {
-        Iterator<TaskInterface> iter = 
-            this.model.getTaskListIterator();
+//        Iterator<TaskInterface> iter = 
+//            this.model.getTaskListIterator();
+        Stream<TaskInterface> taskStream = 
+            this.model.getTaskStream();
 
-        this.display.printAllTasks(iter);
+        //this.display.printAllTasks(iter);
+        this.display.printAllTasks(taskStream);
     }
 }

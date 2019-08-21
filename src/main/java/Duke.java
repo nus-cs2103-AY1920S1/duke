@@ -9,7 +9,7 @@ public class Duke {
     public static int itemNo = 0;
 
     public static void printLine() {
-        System.out.println("   ____________________________________________________________");
+        System.out.println("   ________________________________________________________________________");
     }
 
     public static void printGreet() {
@@ -70,7 +70,7 @@ public class Duke {
                         break;
 
                     default:
-                        throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!!" + "I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException ex) {
                 printLine();
@@ -81,12 +81,10 @@ public class Duke {
         }
     }
 
-    public static void commandList() throws DukeException{
-
+    public static void commandList() throws DukeException {
         if (itemNo == 0) {
-            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The task list are currently empty.");
+            throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
         }
-
         int index = 1;
         printLine();
         System.out.println(INDENT_COMMENT + "Here are the tasks in your list:");
@@ -101,15 +99,21 @@ public class Duke {
         try {
 
             if (data.isEmpty()) {
-                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Index of task are needed.");
+                if (itemNo == 0) {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                } else {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "Index of task are needed.");
+                }
             }
 
             int item = Integer.parseInt(data);
 
-            if (itemNo == 0) {
-                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The task list are currently empty.");
-            } else if (item > itemNo) {
-                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Number enter can only be less than or equal " + itemNo);
+            if (item > itemNo) {
+                if (itemNo == 0) {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                } else {
+                    throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "Number enter can only be less than or equal number of task.");
+                }
             }
 
             printLine();
@@ -128,7 +132,6 @@ public class Duke {
     }
 
     public static void commandTodo(String data) throws DukeException {
-
         if (data.isEmpty()) {
             throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a todo cannot be empty.");
         }

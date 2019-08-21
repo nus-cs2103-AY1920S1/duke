@@ -5,10 +5,24 @@ public class Duke {
         greet();
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
+        String input = sc.nextLine();
+        String[] data = new String[100];
+        int x = 0;
+
         while (!input.equals("bye")) {
-            echo(input);
-            input = sc.next();
+
+            switch(input) {
+                case "list":
+                    printlist(data);
+                    input = sc.nextLine();
+                    break;
+                default:
+                    data[x] = input;
+                    x++;
+                    echo("Added: " + input);
+                    input = sc.nextLine();
+                    break;
+            }
         }
 
         exit();
@@ -28,6 +42,17 @@ public class Duke {
         System.out.println(indentedline);
         for (String str : arr) {
             System.out.println("     " + str);
+        }
+        System.out.println(indentedline);
+    }
+
+    public static void printlist(String[] array) {
+        String indentedline = "    ____________________________________________________________";
+        System.out.println(indentedline);
+        int y = 0;
+        while (array[y] != null) {
+            System.out.println("     " + (y+1) + ". " + array[y]);
+            y++;
         }
         System.out.println(indentedline);
     }

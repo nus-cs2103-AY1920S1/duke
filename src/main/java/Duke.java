@@ -30,9 +30,23 @@ public class Duke {
                         taskList.get(index - 1).markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
                     } catch (NumberFormatException error) { // if not a number is entered after 'done'
-                        throw new NotAnIntegerDoneException("OOPS!!! Please enter a task number after 'done'!");
+                        throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
                     } catch (IndexOutOfBoundsException error) { // if an invalid number is entered after 'done'
-                        throw new InvalidIntegerDoneException("OOPS!!! Please enter a valid task number!");
+                        throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
+                    }
+                } else if (instruction.equals("delete")) { // Then, check if task is marked delete
+                    if (taskList.size() == 0) { // if 'list' is empty, 'delete' cannot be called
+                        throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
+                    }
+                    try {
+                        int index = Integer.parseInt(input.split(" ", 2)[1]);
+                        Task currentTask = taskList.remove(index - 1);
+                        System.out.println("Noted. I've removed this task:\n  " + currentTask);
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    } catch (NumberFormatException error) { // if not a number is entered after 'delete'
+                        throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
+                    } catch (IndexOutOfBoundsException error) { // if an invalid number is entered after 'delete'
+                        throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
                     }
                 } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")) {
                     try {

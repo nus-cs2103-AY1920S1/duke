@@ -159,6 +159,20 @@ public class Duke {
                     System.out.println(processedInput);
                 }
 
+                else if(readInput.toLowerCase().equals("delete")){
+
+                    int numberToDelete = sc.nextInt();
+
+                    // Make sure number is valid
+
+                    Task deletedTask = list.remove(numberToDelete - 1);
+                    listCounter--;
+                    String tempPrint = "Noted. I've removed this task:\n\t\t" +
+                            deletedTask.getItemInfo() +
+                            "\n\tNow you have "+ listCounter + " tasks in the list.";
+                    System.out.println(processText(tempPrint));
+                }
+
                 else {
                     // Not recognized command
                     throw new CommandNotRecognizedException();

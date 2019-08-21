@@ -18,7 +18,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    public void run() {
+    public void run() throws DukeIllegalDescriptionException, DukeIllegalInputException{
         boolean flag = true;
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
@@ -36,40 +36,50 @@ public class Duke {
                     }
                     break;
                 case "done":
-                    System.out.println("Nice! I've marked this task as done:");
                     int num = Integer.parseInt(head[1]);
-                    Task newTask = store.get(num);
+                    Task newTask = store.get(num - 1);
                     newTask.markAsDone();
-                    store.set(num, newTask);
-                    System.out.println(store.get(num));
+                    store.set(num - 1, newTask);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(store.get(num - 1));
                     break;
                 case "todo":
-                    printAddTask();
-                    Task todo = new Todo(head[1]);
-                    store.add(todo);
-                    System.out.println(todo);
-                    printCountTasks();
+                    try {
+                        Task todo = new Todo(head[1]);
+                        store.add(todo);
+                        printAddTask();
+                        System.out.println(todo);
+                        printCountTasks();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeIllegalDescriptionException(head[0]);
+                    }
                     break;
                 case "deadline":
-                    printAddTask();
-                    String dl[] = head[1].split(" /by ");
-                    Task deadline = new Deadline(dl[0], dl[1]);
-                    store.add(deadline);
-                    System.out.println(deadline);
-                    printCountTasks();
+                    try {
+                        String[] dl = head[1].split(" /by ");
+                        Task deadline = new Deadline(dl[0], dl[1]);
+                        store.add(deadline);
+                        printAddTask();
+                        System.out.println(deadline);
+                        printCountTasks();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeIllegalDescriptionException(head[0]);
+                    }
                     break;
                 case "event":
-                    printAddTask();
-                    String ev[] = head[1].split(" /at ");
-                    Task event = new Event(ev[0], ev[1]);
-                    store.add(event);
-                    System.out.println(event);
-                    printCountTasks();
+                    try {
+                        String[] ev = head[1].split(" /at ");
+                        Task event = new Event(ev[0], ev[1]);
+                        store.add(event);
+                        printAddTask();
+                        System.out.println(event);
+                        printCountTasks();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeIllegalDescriptionException(head[0]);
+                    }
                     break;
                 default:
-                    System.out.println("added: " + cmd);
-                    store.add(new Task(cmd));
-                    break;
+                    throw new DukeIllegalInputException();
             }
             if (!flag) {
                 break;
@@ -88,6 +98,12 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        duke.run();
+        try {
+            duke.run();
+        } catch (DukeIllegalInputException e) {
+            System.out.println(e.getMessage());
+        } catch (DukeIllegalDescriptionException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

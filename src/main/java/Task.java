@@ -2,7 +2,7 @@
  * Task class. Holds the string of the task, and whether it is done.
  */
 public class Task {
-    /** Total tasks created */
+    /** Total tasks created. */
     private static int totalTasks = 0;
     /** Whether task is done. */
     private boolean isDone;
@@ -39,8 +39,7 @@ public class Task {
      */
     public String message() {
         String indent = String.format("%4s", "");
-        StringBuilder strb = new StringBuilder();
-        return strb
+        return new StringBuilder()
                 .append(indent + " Got it. I've added this task:\n")
                 .append(indent + "   " + this + "\n")
                 .append(indent + " Now you have " + totalTasks + " tasks in the list.")

@@ -9,10 +9,9 @@ public class Duke {
     /** TaskList to store user input. */
     private static TaskList taskList = new TaskList();
     /** Line for responses. */
-//    private static final String line = "    ____________________________________________________________";
-    private static final String line = String.format("%4s", " ") + String.format("%60s", " ").replace(" ", "_");
+    private static final String line = String.format("%4s", "") + String.format("%60s", "").replace(" ", "_");
     /** Indentation for response. */
-    private static final String indent = String.format("%5s", " ");
+    private static final String indent = String.format("%5s", "");
 
     /**
      * Main Method.
@@ -69,22 +68,23 @@ public class Duke {
 
     /**
      * Adds Task to the TaskList from the given text and prints response.
-     * @param text String text to be added.
+     * @param description String text to be added.
      */
     private static void addTask(String description) {
         String message = null;
+        String indent = String.format("%5s", "");
         try {
             Task task = TaskFactory.create(description);
             taskList.addTask(task);
             message = task.message();
         } catch (ToDoTaskException e) {
-            message = "     OOPS!!! The description of a todo cannot be empty.";
+            message = indent + "OOPS!!! The description of a todo cannot be empty.";
         } catch (DeadlineTaskException e) {
-            message = "     OOPS!!! The description of a deadline cannot be empty.";
+            message = indent + "OOPS!!! The description of a deadline cannot be empty.";
         } catch (EventTaskException e) {
-            message = "     OOPS!!! The description of a event cannot be empty.";
+            message = indent + "OOPS!!! The description of a event cannot be empty.";
         } catch (TaskException e) {
-            message = "     OOPS!!! I'm sorry, but I don't know what that means :-(";
+            message = indent + "OOPS!!! I'm sorry, but I don't know what that means :-(";
         } finally {
             String response = String.format("%s\n%s\n%s\n", line, message, line);
             System.out.println(response);
@@ -112,8 +112,7 @@ public class Duke {
         if (task == null) {
             message = indent + "Index out of range, no task found.";
         } else {
-            StringBuilder strb = new StringBuilder();
-            message = strb
+            message = new StringBuilder()
                     .append(indent + "Noted. I've removed this task:\n")
                     .append(indent + "  " + task + "\n")
                     .append(indent + "Now you have " + taskList.getTotalTasks() + " tasks in the list.")

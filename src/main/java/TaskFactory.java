@@ -8,7 +8,7 @@ public class TaskFactory {
      * @param description String description of the task to be created.
      * @return Task Object.
      */
-    public static Task create(String description) throws TaskException, ToDoTaskException, DeadlineTaskException, EventTaskException {
+    public static Task create(String description) throws TaskException {
         String[] tokens = description.split("\\s+");
         switch (tokens[0]) {
             case "todo":

@@ -76,6 +76,10 @@ public class Duke {
                         + "    "
                         + newTask
                         + "\n"
+                        + "  Now you have "
+                        + tasks.size()
+                        + " task(s) in the list."
+                        + "\n"
                         + dividerLine);
                 break;
             case "event":
@@ -87,6 +91,10 @@ public class Duke {
                         + "    "
                         + newTask
                         + "\n"
+                        + "  Now you have "
+                        + tasks.size()
+                        + " task(s) in the list."
+                        + "\n"
                         + dividerLine);
                 break;
             case "deadline":
@@ -97,6 +105,10 @@ public class Duke {
                         + "  Got it. I've added this task:\n"
                         + "    "
                         + newTask
+                        + "\n"
+                        + "  Now you have "
+                        + tasks.size()
+                        + " task(s) in the list."
                         + "\n"
                         + dividerLine);
                 break;

@@ -12,31 +12,39 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        ArrayList<Task> xs = new ArrayList<>();
+        TaskList list = new TaskList();
         String command = "";
 
         while (true) {
-            command = sc.nextLine();
-            String[] arr = command.split(" ");
+            command = sc.next();
 
-            if (arr[0].equals("done")) {
-                int taskNum = Integer.parseInt(arr[1]);
-                xs.get(taskNum - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(xs.get(taskNum - 1));
-            } else {
-                if (command.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+            switch (command) {
+                case "list":
+                    list.printTasks();
                     break;
-                } else if (command.equals("list")) {
-                    for (int i = 1; i <= xs.size(); i++) {
-                        System.out.println("Here are the tasks in your list:");
-                        System.out.println(i + ". " + xs.get(i - 1));
-                    }
-                } else {
-                    xs.add(new Task(command));
-                    System.out.println("added: " + command);
-                }
+
+                case "done":
+                    int taskNum = sc.nextInt();
+                    list.tickTask(taskNum);
+                    break;
+
+                case "todo":
+                    String[] input1 = sc.nextLine().split("/by");
+                    list.addTask(new ToDos(input1[0]));
+                    break;
+
+                case "deadline":
+                    String[] input2 = sc.nextLine().split("/by");
+                    list.addTask(new Deadlines(input2[0], input2[1]));
+                    break;
+
+                case "event":
+                    String[] input3 = sc.nextLine().split("/at");
+                    list.addTask(new Event(input3[0], input3[1]));
+                    break;
+
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
             }
         }
     }

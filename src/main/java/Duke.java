@@ -7,6 +7,8 @@ enum Day{
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
+    private static ArrayList<Task> list = new ArrayList<>();
+    private static int listCounter = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -17,8 +19,7 @@ public class Duke {
         //System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
-        int listCounter = 0;
+
 
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
         String goodbye = "Bye. Hope to see you again soon!";
@@ -53,9 +54,7 @@ public class Duke {
                 list.add(new ToDo(toDoItem, false));
                 listCounter++;
 
-                String tempPrint = "Got it. I've added this task: \n\t\t" +
-                        list.get(listCounter - 1).getStatusIcon() + " " +
-                        toDoItem + "\n\tNow you have " + listCounter + " tasks in the list." ;
+                String tempPrint = addedTaskText();
 
                 System.out.println(processText(tempPrint));
             }
@@ -67,9 +66,7 @@ public class Duke {
                 list.add(new Event(tokenList[0], tokenList[1], false));
                 listCounter++;
 
-                String tempPrint = "Got it. I've added this task:\n\t\t" +
-                        list.get(listCounter - 1).getItemInfo() +
-                        "\n\tNow you have " + listCounter + " tasks in the list.";
+                String tempPrint = addedTaskText();
 
                 System.out.println(processText(tempPrint));
             }
@@ -81,9 +78,7 @@ public class Duke {
                 list.add(new Deadline(tokenList[0], tokenList[1], false));
                 listCounter++;
 
-                String tempPrint = "Got it. I've added this task:\n\t\t" +
-                        list.get(listCounter - 1).getItemInfo() +
-                        "\n\tNow you have " + listCounter + " tasks in the list.";
+                String tempPrint = addedTaskText();
 
                 System.out.println(processText(tempPrint));
             }
@@ -115,6 +110,12 @@ public class Duke {
     // Add in Indentation and horizontal lines
     private static String processText(String input){
         return HORIZONTAL_LINE + "\n" + "\t" + input + "\n" + HORIZONTAL_LINE + "\n";
+    }
+
+    private static String addedTaskText(){
+        return "Got it. I've added this task:\n\t\t" +
+                list.get(listCounter - 1).getItemInfo() +
+                "\n\tNow you have " + listCounter + " tasks in the list.";
     }
 }
 

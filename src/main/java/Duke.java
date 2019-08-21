@@ -2,11 +2,14 @@ import java.util.List;
 import java.util.Scanner;
 
 //Assumption: reads word by word, additional arguments would be ignored
+// Accepts empty task
 public class Duke {
+    private static MyList taskList;
+
     public static void main(String[] args) {
         String input = "";
         Scanner sc = new Scanner(System.in);
-        MyList taskList = new TaskList();
+        taskList = new TaskList();
 
         printLogo();
         printIntro();
@@ -22,6 +25,7 @@ public class Duke {
             switch (arguments[0]) {
                 case "bye":
                     printExitMsg();
+                    System.exit(0);
                     break;
                 case "list":
                     printList(taskList);
@@ -41,9 +45,37 @@ public class Duke {
                         System.out.println("No such task, please try another number.");
                     }
                     break;
+                case "deadline":
+                case "event":
+                case "todo":
+                    int index = -1;
+                    Task task;
+                    if (arguments[0].equals("deadline")) {
+                        index = findIndexByToken(arguments, "/by");
+                    } else if (arguments[0].equals("event")){
+                        index = findIndexByToken(arguments, "/at");
+                    }
+                    if (arguments[0].equals("todo")) {
+
+                        String description = parseArguments(arguments, 1, arguments.length);
+                        task = new TodoTask(description);
+                    } else if (index == -1) {
+                        System.out.println("Time not specified. Try again.");
+                        break;
+                    } else {
+                        String description = parseArguments(arguments, 1, index);
+                        String time = parseArguments(arguments, index + 1, arguments.length);
+                        if (arguments[0].equals("deadline")) {
+                            task = new DeadlineTask(description, time);
+                        } else {
+                            task = new EventTask(description, time);
+                        }
+                    }
+                    taskList.add(task);
+                    printAddTaskMsg(task);
+                    break;
                 default:
-                    taskList.add(new Task(input));
-                    printAddTask(input);
+                    System.out.println("Invalid Command, try again.");
                     break;
             }
         } while (!input.equals("bye"));
@@ -87,10 +119,14 @@ public class Duke {
         printLine();
     }
 
-    private static void printAddTask(String task) {
+    private static void printAddTaskMsg(Task task) {
         printLine();
         printIndentation();
-        System.out.printf(" added: %s\n", task);
+        System.out.println(" Got it. I've added this task: ");
+        printIndentation();
+        System.out.printf("   %s\n", task);
+        printIndentation();
+        System.out.printf(" Now you have %d %s in the list.\n",taskList.getNumTasks(), taskList.getNumTasks() == 1 ? "task" : "tasks");
         printLine();
         System.out.println();
     }
@@ -103,7 +139,7 @@ public class Duke {
         System.out.println(" Here are the tasks in your list:");
         for (Task task : list) {
             printIndentation();
-            System.out.printf(" %d.[%s] %s\n", listNum, task.getStatusIcon(), task.getDescription());
+            System.out.printf(" %d.%s\n", listNum, task);
             listNum++;
         }
         printLine();
@@ -115,9 +151,34 @@ public class Duke {
         printIndentation();
         System.out.println(" Nice! I've marked this task as done: ");
         printIndentation();
-        System.out.printf("   [%s] %s\n", task.getStatusIcon(), task.getDescription());
+        System.out.printf("   %s\n", task);
         printLine();
         System.out.println();
+    }
 
+    //returns index of token if found, else returns -1
+    //stops at first occurrence of token
+    private static int findIndexByToken(String[] array, String token) {
+        int index = -1;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i].equals(token)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    // Combines words into a sentence
+    private static String parseArguments(String[] array, int start, int end) {
+        if (start >= end) {
+            return "";
+        }
+
+        StringBuilder result = new StringBuilder(array[start]);
+        for (int i = start + 1; i < end; i++) {
+            result.append(" ").append(array[i]);
+        }
+        return result.toString();
     }
 }

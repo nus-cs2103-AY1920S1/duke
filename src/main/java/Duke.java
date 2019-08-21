@@ -3,7 +3,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    List<Task> list = new ArrayList<>();
     String indent = "     ";
+    String input;
+    String[] inputs;
+    String[] inputFormatted;
+    Task task;
+    int output;
 
     public static void main(String[] args) {
         Duke newDuke = new Duke();
@@ -11,74 +17,78 @@ public class Duke {
     }
 
     public void run() {
-        String desc;
-        String input;
-        String by;
-        String duration;
-        String[] inputs;
-        String[] inputFormatted;
-        Task task;
         Scanner sc = new Scanner(System.in);
-        List<Task> list = new ArrayList<>();
 
         printIntro();
-
-        while (true) {
+        do {
             input = sc.nextLine();
-            inputs = input.split(" ", 2);
             UILine();
-            // Exit program
-            if (inputs[0].equals("bye")) {
-                System.out.println(indent + "Bye. Hope to see you again soon!");
-                break;
+            try {
+                output = processInput(input);
             }
-            // Show list of events
-            else if (inputs[0].equals("list")) {
+            catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+            UILine();
+            System.out.println();
+        }
+        while (output != 1);
+    }
+
+    private int processInput(String input) throws DukeException {
+        inputs = input.split(" ", 2);
+        // Exit program
+        switch (inputs[0]) {
+            case "bye":
+                System.out.println(indent + "Bye. Hope to see you again soon!");
+                return 1;
+            case "list":
+                if (list.isEmpty()) throw new DukeException(indent + "Your list is currently empty...");
                 System.out.println(indent + "Here are the tasks in your list:");
                 for (Task t: list) {
                     System.out.println(indent + (list.indexOf(t) + 1) + ". " + t);
                 }
-            }
-            // Mark as Done
-            else if (inputs[0].equals("done")) {
+                break;
+            case "done":
                 int i = Integer.parseInt(inputs[1]);
                 try {
                     task = list.get(i - 1);
                     task.setDone();
                     System.out.println(indent + "Nice! I've marked this task as done: ");
-                    System.out.println(indent + "   " + task);
+                    System.out.println(indent + "  " + task);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(indent + "Invalid index, please try again");
                 }
-            }
-            else if (inputs[0].equals("todo")
-                    || inputs[0].equals("deadline")
-                    || inputs[0].equals("event")) {
-                try {
-                    if (inputs[0].equals("todo")) {
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                if (inputs.length == 1) throw new DukeException(indent + "☹ OOPS!!! The description of a " + inputs[0] + " cannot be empty.");
+                switch (inputs[0]) {
+                    case "todo":
                         task = new Todo(inputs[1]);
-                    } else if (inputs[0].equals("deadline")) {
-                        if (!inputs[1].contains("/by")) throw new Exception();
+                        break;
+                    case "deadline":
+                        if (!inputs[1].contains(" /by ")) throw new DukeException(indent + "☹ OOPS!!! The due date of a deadline cannot be empty.");
                         inputFormatted = inputs[1].split(" /by ", 2);
                         task = new Deadline(inputFormatted[0], inputFormatted[1]);
-                    } else /*if (inputs[0].equals("event"))*/ {
-                        if (!inputs[1].contains("/at")) throw new Exception();
+                        break;
+                    case "event":
+                        if (!inputs[1].contains(" /at ")) throw new DukeException(indent + "☹ OOPS!!! The duration of a event cannot be empty.");
                         inputFormatted = inputs[1].split(" /at ", 2);
                         task = new Event(inputFormatted[0], inputFormatted[1]);
-                    }
-                    list.add(task);
-                    System.out.println(indent + "Got it. I've added this task:");
-                    System.out.println(indent + "   " + task);
-                    System.out.println(indent + "Now you have " + list.size() + "tasks in the list.");
-                } catch (Exception e) {
-                    System.out.println(indent + "Please enter date info using '/by' for deadline and '/at' for event");
+                        break;
                 }
-            }
-            UILine();
-            System.out.println();
+                list.add(task);
+                System.out.println(indent + "Got it. I've added this task:");
+                System.out.println(indent + "  " + task);
+                System.out.println(indent + "Now you have " + list.size() + "tasks in the list.");
+                break;
+            default:
+                throw new DukeException(indent + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        return 0;
     }
-
     private void printIntro() {
         UILine();
         System.out.println(indent + "Hello! I'm Duke");

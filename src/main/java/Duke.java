@@ -6,7 +6,7 @@ public class Duke {
     private static Task[] taskList = new Task[100];
     private static int lastTaskIndex = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCommandException {
         //program start
         startMessage();
         //import scanner + logic
@@ -25,27 +25,55 @@ public class Duke {
             }
 
             else if (tokens[0].equals("done")){
-                doneTask(taskList, Integer.parseInt(tokens[1]));
+                try {
+                    doneTask(taskList, Integer.parseInt(tokens[1]));
+                }
+                catch (ArrayIndexOutOfBoundsException error){
+                    System.out.println(horizontalLine);
+                    System.out.println(formatText("Huh, what do you wanna do?"));
+                    System.out.println(horizontalLine);
+                }
             }
 
             else if (tokens[0].equals("todo")){
-                addToDo(input.substring(5));
-                lastTaskIndex++;
+                try {
+                    addToDo(input.substring(5));
+                    lastTaskIndex++;
+                }
+                catch (StringIndexOutOfBoundsException error){
+                    System.out.println(horizontalLine);
+                    System.out.println(formatText("The description of todo cannot be empty :("));
+                    System.out.println(horizontalLine);
+                }
 
             }
             else if (tokens[0].equals("deadline")){
-                String[] dateSplit = input.split(" /by ");
-                addDeadline(dateSplit[0].substring(9), dateSplit[dateSplit.length-1]);
-                lastTaskIndex++;
+                try {
+                    String[] dateSplit = input.split(" /by ");
+                    addDeadline(dateSplit[0].substring(9), dateSplit[dateSplit.length - 1]);
+                    lastTaskIndex++;
+                }
+                catch (StringIndexOutOfBoundsException error){
+                    System.out.println(horizontalLine);
+                    System.out.println(formatText("The description of deadline cannot be empty :("));
+                    System.out.println(horizontalLine);
+                }
             }
             else if (tokens[0].equals("event")){
-                String[] dateSplit = input.split(" /at ");
-                addEvent(dateSplit[0].substring(6),dateSplit[dateSplit.length-1]);
-                lastTaskIndex++;
+                try {
+                    String[] dateSplit = input.split(" /at ");
+                    addEvent(dateSplit[0].substring(6), dateSplit[dateSplit.length - 1]);
+                    lastTaskIndex++;
+                }
+                catch (StringIndexOutOfBoundsException error){
+                    System.out.println(horizontalLine);
+                    System.out.println(formatText("The description of event cannot be empty :("));
+                    System.out.println(horizontalLine);
+                }
             }
 
             else {
-                System.out.println("Invalid command");
+                throw new InvalidCommandException("Invalid Command :( Duke is sad. Please try again.");
             }
         }
         exitMessage();

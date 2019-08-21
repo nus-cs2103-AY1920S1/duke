@@ -2,7 +2,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private ArrayList<String> storedInput = new ArrayList<String>();
+    private ArrayList<Task> storedTasks;
+
+    public Duke() {
+        this.storedTasks = new ArrayList<Task>();
+    }
 
     public static void main(String[] args) {
         Duke d = new Duke();
@@ -17,34 +21,49 @@ public class Duke {
         boolean contRunning = true;
 
         while (contRunning) {
-            String s = sc.nextLine();
-            switch (s) {
+            String command = sc.next();
+            switch (command) {
                 case "bye":
                     contRunning = false;
                     break;
                 case "list":
-                    listStoredInput();
+                    listStoredTasks();
+                    break;
+                case "done":
+                    completeTask(sc.nextInt());
                     break;
                 default:
-                    addInputToStore(s);
+                    //Provided input is a task
+                    String taskName = command + sc.nextLine();
+                    addTaskToStore(taskName);
             }
         }
     }
 
-    public void addInputToStore(String input) {
-        this.storedInput.add(input);
+    public void completeTask(int taskNum) {
+        Task t = this.storedTasks.get(taskNum - 1); //Because storedTasks is zero-indexed
+        t.markAsDone();
 
         System.out.println("\t____________________________________________________________");
-        System.out.println("\tadded: " + input);
+        System.out.println("\tNice! I've marked this task as done: ");
+        System.out.println("\t" + t);
         System.out.println("\t____________________________________________________________");
     }
 
-    public void listStoredInput() {
+    public void addTaskToStore(String taskName) {
+        this.storedTasks.add(new Task(taskName));
+
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\tadded: " + taskName);
+        System.out.println("\t____________________________________________________________");
+    }
+
+    public void listStoredTasks() {
         System.out.println("\t____________________________________________________________");
 
         int counter = 1;
-        for (String input : this.storedInput) {
-            System.out.println("\t" + counter + ". " + input);
+        for (Task t : this.storedTasks) {
+            System.out.println("\t" + counter + ". " + t);
             counter++;
         }
 

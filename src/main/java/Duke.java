@@ -29,13 +29,21 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
             } else if (sc.hasNext("todo")) {
-                String dummy = sc.next();
-                Task curr = new Todo(sc.nextLine());
-                list[pos] = curr;
-                pos++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println(curr);
-                System.out.println("Now you have " + pos + " tasks in the list.");
+                try {
+                    String dummy = sc.next();
+                    String description = sc.nextLine();
+                    if (description.equals("")) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Task curr = new Todo(description);
+                    list[pos] = curr;
+                    pos++;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(curr);
+                    System.out.println("Now you have " + pos + " tasks in the list.");
+                } catch (DukeException e) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
             } else if (sc.hasNext("deadline")) {
                 String dummy = sc.next();
                 String[] split = new String[2];
@@ -57,13 +65,20 @@ public class Duke {
                 System.out.println(curr);
                 System.out.println("Now you have " + pos + " tasks in the list.");
             } else {
-                String input = sc.nextLine();
-                System.out.println("Here are the tasks in your list:");
-                int k = 0;
-                while (k != pos) {
-                    int bullet = k + 1;
-                    System.out.println(bullet + "." + list[k]);
-                    k++;
+                try {
+                    String input = sc.nextLine();
+                    if (!input.equals("list")) {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    System.out.println("Here are the tasks in your list:");
+                    int k = 0;
+                    while (k != pos) {
+                        int bullet = k + 1;
+                        System.out.println(bullet + "." + list[k]);
+                        k++;
+                    }
+                } catch (DukeException e) {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
 

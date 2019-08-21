@@ -32,14 +32,6 @@ public class Duke {
         while (input.hasNextLine()) {
             String line = input.nextLine();
 
-            if (line.equals("bye")) {
-                printLine();
-                System.out.println(INDENT_COMMENT + "Bye. Hope to see you again soon!");
-                printLine();
-                System.out.println("");
-                break;
-            }
-
             String command = "";
             String rest = "";
 
@@ -51,32 +43,50 @@ public class Duke {
                 rest = data[1];
             }
 
-            switch (command) {
-                case "list":
-                    commandList();
-                    break;
+            try {
+                switch (command) {
+                    case "list":
+                        commandList();
+                        break;
 
-                case "done":
-                    commandDone(rest);
-                    break;
+                    case "done":
+                        commandDone(rest);
+                        break;
 
-                case "todo":
-                    commandTodo(rest);
-                    break;
+                    case "todo":
+                        commandTodo(rest);
+                        break;
 
-                case "deadline":
-                    commandDeadline(rest);
-                    break;
+                    case "deadline":
+                        commandDeadline(rest);
+                        break;
 
-                case "event":
-                    commandEvent(rest);
-                    break;
+                    case "event":
+                        commandEvent(rest);
+                        break;
 
+                    case "bye":
+                        bye();
+                        break;
+
+                    default:
+                        throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!!" + "I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException ex) {
+                printLine();
+                System.out.println(ex.getMessage());
+                printLine();
+                System.out.println("");
             }
         }
     }
 
-    public static void commandList() {
+    public static void commandList() throws DukeException{
+
+        if (itemNo == 0) {
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The task list are currently empty.");
+        }
+
         int index = 1;
         printLine();
         System.out.println(INDENT_COMMENT + "Here are the tasks in your list:");
@@ -87,18 +97,42 @@ public class Duke {
         System.out.println("");
     }
 
-    public static void commandDone(String data) {
-        printLine();
-        System.out.println(INDENT_COMMENT + "Nice! I've marked this task as done:");
-        int item = Integer.parseInt(data);
-        Task t = task.get(--item);
-        t.markAsDone();
-        System.out.println("      " + t);
-        printLine();
-        System.out.println("");
+    public static void commandDone(String data) throws DukeException {
+        try {
+
+            if (data.isEmpty()) {
+                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Index of task are needed.");
+            }
+
+            int item = Integer.parseInt(data);
+
+            if (itemNo == 0) {
+                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The task list are currently empty.");
+            } else if (item > itemNo) {
+                throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "Number enter can only be less than " + itemNo);
+            }
+
+            printLine();
+            System.out.println(INDENT_COMMENT + "Nice! I've marked this task as done:");
+            Task t = task.get(--item);
+            t.markAsDone();
+            System.out.println("      " + t);
+            printLine();
+            System.out.println("");
+        } catch (NumberFormatException ex) {
+            printLine();
+            System.out.println(INDENT_COMMENT + "\u2639 OOPS !!! " + "Only Integer is allowed after done.");
+            printLine();
+            System.out.println("");
+        }
     }
 
-    public static void commandTodo(String data) {
+    public static void commandTodo(String data) throws DukeException {
+
+        if (data.isEmpty()) {
+            throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a todo cannot be empty.");
+        }
+
         task.add(new Todo(data));
         printLine();
         System.out.println(INDENT_COMMENT + "Got it. I've added this task: ");
@@ -135,6 +169,14 @@ public class Duke {
         System.out.println(INDENT_COMMENT + "Now you have " + itemNo + " tasks in the list.");
         printLine();
         System.out.println("");
+    }
+
+    public static void bye() {
+        printLine();
+        System.out.println(INDENT_COMMENT + "Bye. Hope to see you again soon!");
+        printLine();
+        System.out.println("");
+        System.exit(0);
     }
 
     public static void main(String[] args) {

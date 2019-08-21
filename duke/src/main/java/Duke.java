@@ -40,7 +40,7 @@ public class Duke {
 					int indexStart = line.indexOf(" ");
 					int indexBy = line.indexOf("/");
 					String desc2 = line.substring(0, indexBy-1); // start after space, end before space before /
-					String by = line.substring(indexBy+1);
+					String by = line.substring(indexBy+3);
 					task = new Deadline(desc2, by);
 					break;
 
@@ -49,7 +49,7 @@ public class Duke {
 					int indexStart2 = line2.indexOf(" ");
 					int indexAt = line2.indexOf("/");
 					String desc3 = line2.substring(0, indexAt-1); // start after space, end before space before /
-					String at = line2.substring(indexAt+1);
+					String at = line2.substring(indexAt+3);
 					task = new Event(desc3, at);
 					break;
 		  	}

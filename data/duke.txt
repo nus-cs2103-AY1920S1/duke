@@ -1,4 +1,6 @@
-D | 0 | abc | a
-T | 0 | defg
 D | 0 | laala | bdd=f
-E | 0 | a | b
+E | 1 | a | b
+D | 0 | test | 1st of December 2019, 1PM
+E | 0 | /at | 10/102/210
+D | 1 | abc | 12th of December 2021, 12PM
+D | 0 | abc | 10th of October 1990, 9PM

@@ -9,20 +9,21 @@ import java.util.Optional;
 
 public class DukeStorage {
 
-    private final String DUKE_ERR_TASK_UNKNOWN = "An error occurred when trying to re-create a task from the saved file!";
-    private final String DUKE_ERR_FILE_IO_EXCEPTION = "Failed to open file! Is the path correct?";
-
     private BufferedReader taskFileInputBuffer;
     private BufferedWriter taskFileOutputBuffer;
     private String taskFilePath;
 
+    /**
+     * This constructor takes in the path of the data file stored on the hard disk.
+     * @param taskFilePath Relative/Full path to the data file.
+     */
     public DukeStorage (String taskFilePath) {
         this.taskFilePath = taskFilePath;
     }
 
     /**
      * Initializes the BufferedWriter object to prepare for writing to the specified file in {@link #taskFilePath}.
-     * @throws IOException
+     * @throws IOException If there are any errors like insufficient permissions, file not found or other file errors.
      */
     private void initializeFileOutputStream() throws IOException {
         taskFileOutputBuffer = new BufferedWriter(new FileWriter(taskFilePath, false));
@@ -51,10 +52,11 @@ public class DukeStorage {
 
     /**
      * Reads the specified file in {@link #taskFilePath} and initializes a List<DukeTask> object to be returned.
+     * @param ui Instance of {@link DukeUi} which will show output to the user.
      * @return An initialized List of DukeTask objects, can be an empty List if there are no tasks in the read file.
      * @throws IOException File parsing error.
      */
-    private List<DukeTask> readDukeTasks() throws IOException {
+    private List<DukeTask> readDukeTasks(DukeUi ui) throws IOException {
         List<DukeTask> userTasks = new ArrayList<>();
         String line;
         while ((line = taskFileInputBuffer.readLine()) != null) {
@@ -62,7 +64,7 @@ public class DukeStorage {
             if (!readTask.isEmpty()) {
                 userTasks.add(readTask.get());
             } else {
-                System.out.println(DUKE_ERR_TASK_UNKNOWN);
+                ui.displayUnknownTask();
             }
         }
         return userTasks;
@@ -70,7 +72,7 @@ public class DukeStorage {
 
     /**
      * Takes in a DukeTask object and determines how the final String to write to the file should be formatted.
-     * @param task DukeTask object to save to file as a String.
+     * @param task {@link DukeTask} object to save to file as a String.
      * @return Formatted String to be written to the file.
      */
     private String processWriteTask(DukeTask task) {
@@ -120,32 +122,26 @@ public class DukeStorage {
     /**
      * Loads the data file and reads it, initializing a List<DukeTask> to be returned to the caller. This List will be
      * populated with DukeTask from the data file.
+     * @param ui Instance of {@link DukeUi} which will show output to the user.
      * @return Optional<DukeTask> which could be Optional.empty() if there are file parsing errors.
+     * @throws IOException File parsing error.
      */
-    public Optional<List<DukeTask>> load() {
-        try {
-            initializeFileInputStream();
-            List<DukeTask> retrievedTasks = readDukeTasks();
-            taskFileInputBuffer.close();
-            return Optional.of(retrievedTasks);
-        } catch (IOException ex) {
-            System.out.println(DUKE_ERR_FILE_IO_EXCEPTION);
-            return Optional.empty();
-        }
+    public List<DukeTask> load(DukeUi ui) throws IOException {
+        initializeFileInputStream();
+        List<DukeTask> retrievedTasks = readDukeTasks(ui);
+        taskFileInputBuffer.close();
+        return retrievedTasks;
     }
 
     /**
      * Saves the List<DukeTask> into the data file. Saving process is opening the target data file for writing without
      * append option, meaning the file will be reset each time.
      * @param userTasks List<DukeTask> to be written to the data file in String format.
+     * @throws IOException File parsing error.
      */
-    public void save(List<DukeTask> userTasks) {
-        try {
-            initializeFileOutputStream();
-            writeDukeTasks(userTasks);
-            taskFileOutputBuffer.close();
-        } catch (IOException ex) {
-            System.out.println(DUKE_ERR_FILE_IO_EXCEPTION);
-        }
+    public void save(List<DukeTask> userTasks) throws IOException {
+        initializeFileOutputStream();
+        writeDukeTasks(userTasks);
+        taskFileOutputBuffer.close();
     }
 }

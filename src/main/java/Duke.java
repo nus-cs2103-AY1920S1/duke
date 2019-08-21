@@ -8,6 +8,7 @@ public class Duke {
     static Scanner scanner = new Scanner(System.in);
     static PrintStream ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
     static String[] validTaskTypes = new String[] {"deadline", "event", "todo"};
+
     /**
      * Main program loop of the program.
      * @param args Unused args.
@@ -44,7 +45,7 @@ public class Duke {
         } else if (commandArray[0].equals("done") && commandArray[1].matches("\\d+")) {
             int id = Integer.parseInt(commandArray[1]);
             taskList.markAsDone(id);
-        } else if (isValidTaskType(commandArray[0])){
+        } else if (isValidTaskType(commandArray[0])) {
             if (command.equals("todo")) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
@@ -70,6 +71,11 @@ public class Duke {
         ps.println("\t____________________________________________________________");
     }
 
+    /**
+     * Check against the list of valid Task types to see if the command is valid.
+     * @param taskType the first argument of the command input.
+     * @return True if the first argument of the command input is valid.
+     */
     public static boolean isValidTaskType(String taskType) {
         for (String s : validTaskTypes) {
             if (taskType.equals(s)) {

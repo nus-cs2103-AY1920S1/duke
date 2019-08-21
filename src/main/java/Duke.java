@@ -14,6 +14,8 @@ public class Duke {
         System.out.println(startMessage);
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList();
+        String taskName;
+        Task task;
         while(sc.hasNext()){
             String userCmd = sc.next();
             if(userCmd.equals("bye")){
@@ -29,10 +31,28 @@ public class Duke {
                     System.out.print(lineSpace);
                     break;
                 case "todo":
-                    String taskName = sc.nextLine();
+                    taskName = sc.nextLine();
                     taskName = taskName.trim();
-                    list.add(new Task(taskName));
-                    System.out.println(lineSpace + "added: " + taskName + "\n" + lineSpace);
+                    task = new Task(taskName);
+                    list.add(task);
+                    System.out.println(lineSpace + "Got it. I've added this task:\n" + task
+                            + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);
+                    break;
+                case "deadline":
+                    taskName = sc.nextLine();
+                    String[] userWords = taskName.trim().split("/by");
+                    task = new Deadline(userWords[0].trim(), userWords[1].trim());
+                    list.add(task);
+                    System.out.println(lineSpace + "Got it. I've added this task:\n" + task
+                            + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);
+                    break;
+                case "event":
+                    taskName = sc.nextLine();
+                    userWords = taskName.trim().split("/at");
+                    task = new Event(userWords[0].trim(), userWords[1].trim());
+                    list.add(task);
+                    System.out.println(lineSpace + "Got it. I've added this task:\n" + task
+                            + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);
                     break;
                 case "done":
                     int taskNo = sc.nextInt();

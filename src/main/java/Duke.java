@@ -161,9 +161,16 @@ public class Duke {
 
                 else if(readInput.toLowerCase().equals("delete")){
 
+                    // Incorrect format for delete
+                    if(!sc.hasNextInt()){
+                        sc.nextLine();
+                        throw new CommandFieldFormatException("delete");
+                    }
+
                     int numberToDelete = sc.nextInt();
 
                     // Make sure number is valid
+
 
                     Task deletedTask = list.remove(numberToDelete - 1);
                     listCounter--;

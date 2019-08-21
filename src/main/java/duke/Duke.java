@@ -24,7 +24,7 @@ public class Duke {
 
     private static void handleAddTask(final Task task) {
         if (taskList.addTask(task)) {
-            echo("Got it. I've added this task: \n"
+            echo("Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
                 + "Now you have " + taskList.size() + " tasks in the list");
         } else {

@@ -24,4 +24,19 @@ Here are the tasks in your list:
 2.[D][ ] return book (by: June 6th)
 3.[E][ ] project meeting (at: Aug 6th 2-4pm)
 4.[T][ ] borrow book
+Which task on the list have you completed? (Eg 'done 2')
+OOPS!!! Wrong format. Please key in a valid number (Eg 'done 2')
+OOPS!!! I'm sorry, but I don't know what that means :-(
+OOPS!!! That task is not on the list, please check the list again by calling 'list'.
+OOPS!!! The description of a todo cannot be empty.
+OOPS!!! The description of a event cannot be empty.
+Event time period missing. Please set a start and end time. (Eg. event dance /at Mon 2-4pm)
+Got it. I've added this task:
+  [E][ ] swim (at: Mon 2-4pm)
+Now you have 5 tasks in the list.
+OOPS!!! The description of a deadline cannot be empty.
+DateTime missing. Please set a deadline. (Eg. deadline read book /by Sunday)
+Got it. I've added this task:
+  [D][ ] shower (by: Sunday)
+Now you have 6 tasks in the list.
 Bye. Hope to see you again soon!

@@ -5,4 +5,15 @@ todo borrow book
 list
 done 1
 list
+done
+done five
+done5
+done 5
+todo
+event
+event swim /at
+event swim /at Mon 2-4pm
+deadline
+deadline shower /by
+deadline shower /by Sunday
 bye

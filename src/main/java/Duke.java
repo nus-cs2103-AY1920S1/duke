@@ -10,25 +10,35 @@ public class Duke {
         int x = 0;
 
         while (!input.equals("bye")) {
-
-            if (input.startsWith("done")) {
-                int index = Integer.parseInt(input.substring(5));
-                data[index-1].markAsDone();
-                printDone(data[index-1]);
-                input = sc.nextLine();
-            } else {
-                switch (input) {
-                    case "list":
-                        printList(data);
-                        input = sc.nextLine();
-                        break;
-                    default:
-                        data[x] = new Task(input);
-                        x++;
-                        echo("Added: " + input);
-                        input = sc.nextLine();
-                        break;
-                }
+            switch (input.split(" ")[0]) {
+                case "list":
+                    printList(data);
+                    input = sc.nextLine();
+                    break;
+                case "done":
+                    int index = Integer.parseInt(input.substring(5));
+                    data[index-1].markAsDone();
+                    printDone(data[index-1]);
+                    input = sc.nextLine();
+                    break;
+                case "todo":
+                    data[x] = new ToDo(input.substring(5));
+                    x++;
+                    echo(data[x-1], x);
+                    input = sc.nextLine();
+                    break;
+                case "event":
+                    data[x] = new Event(input.split(" /at ")[0].substring(6), input.split(" /at ")[1]);
+                    x++;
+                    echo(data[x-1], x);
+                    input = sc.nextLine();
+                    break;
+                case "deadline":
+                    data[x] = new Deadline(input.split(" /by ")[0].substring(9), input.split(" /by ")[1]);
+                    x++;
+                    echo(data[x-1], x);
+                    input = sc.nextLine();
+                    break;
             }
         }
 
@@ -53,6 +63,13 @@ public class Duke {
         System.out.println(indentedline);
     }
 
+    public static void echo(Task t, int x) {
+        if (x == 1) {
+            echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " task in the list.");
+        } else {
+            echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " tasks in the list.");
+        }    }
+
     public static void printList(Object[] array) {
         String indentedline = "    ____________________________________________________________";
         System.out.println(indentedline);
@@ -71,6 +88,5 @@ public class Duke {
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       " + t);
         System.out.println(indentedline);
-
     }
 }

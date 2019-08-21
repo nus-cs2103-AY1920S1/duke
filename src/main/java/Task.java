@@ -19,10 +19,6 @@ public class Task {
         this.isDone = true;
     }
 
-    public void addToArray(Task t, Task[] arr, int index) {
-        arr[index] = t;
-    }
-
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

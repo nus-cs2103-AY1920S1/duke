@@ -1,18 +1,23 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
-group 'seedu.duke'
+group 'weijie.duke'
 version '0.1.0'
 
 repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "weijie.duke.Duke"
 }
 
 run {

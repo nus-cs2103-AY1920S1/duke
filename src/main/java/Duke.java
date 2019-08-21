@@ -46,6 +46,9 @@ public class Duke {
                             throw new FormatException("☹ OOPS!!! The done command should be \"done\" + task No.");
                         }
                         int index = Integer.parseInt(arr[1]) - 1;
+                        if(index >= tasks.size() || index < 0) {
+                            throw new FormatException("☹ OOPS!!! The task No. you refer to is non-existent. Try another one.");
+                        }
                         tasks.get(index).markDone();
                         String prompt = "Nice! I've marked this task as done:\n" +
                                 "    " + tasks.get(index).toString();

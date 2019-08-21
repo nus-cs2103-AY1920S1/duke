@@ -10,21 +10,30 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
-        String next = sc.nextLine();
+        String next = sc.next();
         int count = 1;
         while (!next.equals("bye")) {
             if (next.equals("list")) {
-                for (String text : list) {
-                    System.out.println(count + ". " + text);
+                for (Task task : list) {
+                    System.out.println(count + "." + task);
                     count++;
                 }
+            } else if (next.equals("done")) {
+                int number = sc.nextInt() - 1;
+                Task taskDone = list.get(number);
+                taskDone.markAsDone();
+                System.out.println("Nice! I've marked this task as done:\n  " + taskDone);
             } else {
-                list.add(next);
+                if (sc.hasNext()) {
+                    next += sc.nextLine();
+                }
+                Task nextTask = new Task(next);
+                list.add(nextTask);
                 System.out.println("added: " + next);
             }
-            next = sc.nextLine();
+            next = sc.next();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }

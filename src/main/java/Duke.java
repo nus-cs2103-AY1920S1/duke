@@ -47,6 +47,9 @@ public class Duke {
                     case "event":
                         addEvent(sc.nextLine());
                         break;
+                    case "delete":
+                        deleteTask(sc.nextInt());
+                        break;
                     default:
                         //Provided input is a task
                         throw new DukeException("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -59,10 +62,35 @@ public class Duke {
         }
     }
 
+    /**
+     * For printing out the exception to console
+     * @param e DukeException class containing an error message that will be printed to the console
+     */
     public void printErrorMessage(DukeException e) {
         System.out.println("\t____________________________________________________________");
         System.out.println("\t" + e.getMessage());
         System.out.println("\t____________________________________________________________");
+    }
+
+    /**
+     * Method to delete a task from the storedTasks ArrayList
+     * Method is invoked when "delete" is input to console
+     * @param taskNum
+     */
+    public void deleteTask(int taskNum) throws DukeException{
+        try {
+            Task t = this.storedTasks.get(taskNum-1);
+            this.storedTasks.remove(taskNum-1);
+
+            System.out.println("\t____________________________________________________________");
+            System.out.println("\tNoted. I've removed this task:");
+            System.out.println("\t\t" + t);
+            System.out.println("\tNow you have " + this.storedTasks.size() + " tasks in the list.");
+            System.out.println("\t____________________________________________________________");
+        }
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639" + " OOPS!!! The task number is invalid!");
+        }
     }
 
     /**

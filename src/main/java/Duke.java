@@ -58,6 +58,8 @@ public class Duke {
                     Task t = tasks.get(taskIndex - 1);
                     t.markAsDone();
 
+                    TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
+
                     StringJoiner successMessage = UserInterface.createStringJoiner("Nice! I've marked this task as done:");
                     successMessage.add("  " + formatTask(t));
 
@@ -68,6 +70,8 @@ public class Duke {
 
                     Task t = tasks.get(taskIndex - 1);
                     tasks.remove(taskIndex - 1);
+
+                    TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
 
                     StringJoiner successMessage = UserInterface.createStringJoiner("Noted. I've removed this task:");
                     successMessage.add("  " + formatTask(t));
@@ -107,6 +111,8 @@ public class Duke {
                         }
 
                         tasks.add(t);
+
+                        TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
 
                         StringJoiner successMessage = UserInterface.createStringJoiner("Got it. I've added this task: ");
                         successMessage.add("  " + formatTask(t));

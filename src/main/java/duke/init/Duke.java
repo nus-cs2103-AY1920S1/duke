@@ -56,35 +56,26 @@ public class Duke {
      * @param input The specified input.
      */
     private static void process(String input) {
-        String[] inputWords = input.split(" ");
-        String command = inputWords[0];
-        Task task;
-        String[] taskInformation;
-        switch(command) {
+        String command = input.split(" ")[0];
+        switch (command) {
             case "list":
                 listStoredTasks();
                 break;
             case "done":
-                int taskNumber = Integer.parseInt(inputWords[1]);
-                setAsDone(taskNumber);
+                setTaskAsDone(input);
                 break;
             case "todo":
-                task = new Todo(input.substring(5));
-                storeTask(task);
+                storeTodo(input);
                 break;
             case "deadline":
-                taskInformation = input.substring(9).split(" /by ");
-                task = new Deadline(taskInformation[0], taskInformation[1]);
-                storeTask(task);
+                storeDeadline(input);
                 break;
             case "event":
-                taskInformation = input.substring(6).split(" /at ");
-                task = new Event(taskInformation[0], taskInformation[1]);
-                storeTask(task);
+                storeEvent(input);
                 break;
             default:
-                task = new Task(input);
-                storeTask(task);
+                System.out.println("\u2639 OOPS!!! I'm sorry, but I don't"
+                        + " know what that means :-(");
                 break;
         }
     }
@@ -94,7 +85,7 @@ public class Duke {
      */
     private static void listStoredTasks() {
         if (storedTasks.size() == 0) {
-            System.out.println("\tNo stored text.");
+            System.out.println("\tNo stored tasks.");
         } else {
             System.out.println("\tHere are the tasks in your list:");
             for (int i = 0; i < storedTasks.size(); i++) {
@@ -116,6 +107,49 @@ public class Duke {
     }
 
     /**
+     * Stores a todo task based on the specified input.
+     * @param input The specified input.
+     */
+    private static void storeTodo(String input) {
+        try {
+            String description = input.substring(5);
+            storeTask(new Todo(description));
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("\ttodo command format: todo <description>");
+        }
+    }
+
+    /**
+     * Stores a deadline task based on the specified input.
+     * @param input The specified input.
+     */
+    private static void storeDeadline(String input) {
+        try {
+            String description = input.substring(9);
+            String[] taskInformation = description.split(" /by ");
+            storeTask(new Deadline(taskInformation[0], taskInformation[1]));
+    } catch (ArrayIndexOutOfBoundsException
+                | StringIndexOutOfBoundsException e) {
+            System.out.println("\tdeadline command format: deadline <description> /by <date>");
+        }
+    }
+
+    /**
+     * Stores an event task based on the specified input.
+     * @param input The specified input.
+     */
+    private static void storeEvent(String input) {
+        try {
+            String description = input.substring(6);
+            String[] taskInformation = description.split(" /at ");
+            storeTask(new Deadline(taskInformation[0], taskInformation[1]));
+        } catch (ArrayIndexOutOfBoundsException
+                | StringIndexOutOfBoundsException e) {
+            System.out.println("\tevent command format: event <description> /at <dateAndTime>");
+        }
+    }
+
+    /**
      * Says bye to the user.
      */
     private static void sayBye() {
@@ -123,14 +157,27 @@ public class Duke {
     }
 
     /**
-     * Sets the task with the specified task number as done.
-     * @param taskNumber The specified task number.
+     * Sets a task as done based on the specified input.
+     * @param input The specified input.
      */
-    private static void setAsDone(int taskNumber) {
-        Task task = storedTasks.get(taskNumber - 1);
-        task.setAsDone();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t" + task);
+    private static void setTaskAsDone(String input) {
+        try {
+            String[] inputWords = input.split(" ");
+            if (inputWords.length > 2) {
+                throw new DukeException();
+            }
+            int taskNumber = Integer.parseInt(inputWords[1]);
+            Task task = storedTasks.get(taskNumber - 1);
+            task.setAsDone();
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t" + task);
+        } catch (NumberFormatException
+                | ArrayIndexOutOfBoundsException
+                | DukeException e) {
+            System.out.println("\tdone command format: done <number>");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid task number for the done command.");
+        }
     }
 
     /**

@@ -42,7 +42,7 @@ public class Duke {
                         System.out.println("Bye. Hope to see you again soon!");
                         System.exit(0);
                     case "done":
-                        if (arr.length > 2) {
+                        if (arr.length == 1 || arr.length > 2) {
                             throw new FormatException("☹ OOPS!!! The done command should be \"done\" + task No.");
                         }
                         int index = Integer.parseInt(arr[1]) - 1;

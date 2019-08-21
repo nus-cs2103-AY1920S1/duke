@@ -18,6 +18,7 @@ public class Duke {
 
         System.out.println(greet);
         Texts texts = new Texts();
+        outerloop:
         while(sc.hasNext()) {
             String next = sc.next();
             try {
@@ -30,8 +31,7 @@ public class Duke {
                     case bye:
                         String Exit = "Bye. Hope to see you again soon!";
                         System.out.println(Exit);
-                        sc.close();
-                        break;
+                        break outerloop;
                     case done:
                         int n = sc.nextInt();
                         texts.get(n - 1).setDone();
@@ -47,12 +47,23 @@ public class Duke {
                         break;
                     case deadline:
                         String allD = sc.nextLine();
-                        int place = allD.indexOf("/");
-                        String descriptionD = allD.substring(place - 1);
-                        String date = allD.substring(place + 3, allD.length());
-                        
+                        int placeD = allD.indexOf("/");
+                        String descriptionD = allD.substring(0, placeD - 1);
+                        String dateD = allD.substring(placeD + 3, allD.length());
+                        texts.add(descriptionD + " (by:" + dateD + ")", "D");
+                        System.out.println("Got it. I've added this task:\n" + "  "
+                                + "[D]" + texts.getLast() + "\nNow you have " +
+                                texts.getNumber() + " tasks in the list.");
                         break;
                     case event:
+                        String allE = sc.nextLine();
+                        int placeE = allE.indexOf("/");
+                        String descriptionE = allE.substring(0, placeE - 1);
+                        String dateE = allE.substring(placeE + 3, allE.length());
+                        texts.add(descriptionE + " (at:" + dateE + ")", "E");
+                        System.out.println("Got it. I've added this task:\n" + "  "
+                                + "[E]" + texts.getLast() + "\nNow you have " +
+                                texts.getNumber() + " tasks in the list.");
                         break;
                 }
             } catch(IllegalArgumentException e) {

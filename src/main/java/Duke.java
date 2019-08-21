@@ -41,6 +41,10 @@ public class Duke {
                 }
             }
 
+            else if (tokens[0].equals("delete")){
+                deleteTask(Integer.parseInt(tokens[1]));
+            }
+
             else if (tokens[0].equals("todo")){
                 try {
                     addToDo(input.substring(5));
@@ -131,9 +135,13 @@ public class Duke {
         }
         taskList.get(index-1).toggleDone();
         System.out.println(horizontalLine);
-        System.out.println(formatText("Nic  e! I've marked this task as done:"));
+        System.out.println(formatText("Nice! I've marked this task as done:"));
         System.out.println(formatText("  " + taskList.get(index-1)));
         System.out.println(horizontalLine);
+    }
+
+    private static void deleteTask(int index){
+    
     }
 
     private static void printList(){

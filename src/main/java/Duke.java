@@ -1,25 +1,24 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.lang.Exception;
 
-enum Day{
-    SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+/*
+public class runDuke{
+    public static void main(String[] args) throws CommandNotRecognizedException {
+        Duke duke = new Duke();
+        duke.runDuke();
+    }
 }
+*/
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
     private static ArrayList<Task> list = new ArrayList<>();
     private static int listCounter = 0;
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
-
+    //public void runDuke() throws CommandNotRecognizedException
+    public static void main(String[] args) throws CommandNotRecognizedException, EmptyCommandField {
         Scanner sc = new Scanner(System.in);
-
 
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
         String goodbye = "Bye. Hope to see you again soon!";
@@ -27,83 +26,118 @@ public class Duke {
         System.out.println(greeting);
 
         // Start reading input
-        while(sc.hasNextLine()){
-            String readInput = sc.next();
+        while (sc.hasNextLine()) {
+            try {
+                String readInput = sc.next();
 
-            // Include case-insensitive bye
-            if(readInput.toLowerCase().equals("bye")) {
-                System.out.println(processText(goodbye));
-                break;
-            }
-
-            else if (readInput.toLowerCase().equals("list")){
-                String printList = "Here are the tasks in your list:\n";
-
-                for(int i = 0; i < listCounter; i++){
-                    String temp = "\t\t" + (i + 1) + "." + list.get(i).getItemInfo();
-                    printList = printList + temp;
-                    if(i != listCounter - 1) printList = printList + "\n";
+                // Include case-insensitive bye
+                if (readInput.toLowerCase().equals("bye")) {
+                    System.out.println(processText(goodbye));
+                    break;
                 }
 
-                System.out.println(processText(printList));
+                else if (readInput.toLowerCase().equals("list")) {
+                    String printList = "Here are the tasks in your list:\n";
+
+                    for (int i = 0; i < listCounter; i++) {
+                        String temp = "\t\t" + (i + 1) + "." + list.get(i).getItemInfo();
+                        printList = printList + temp;
+                        if (i != listCounter - 1) printList = printList + "\n";
+                    }
+
+                    System.out.println(processText(printList));
+                }
+
+                else if (readInput.toLowerCase().equals("todo")) {
+                    String toDoItem = sc.nextLine().trim();
+
+                    // Implies only word "deadline"
+                    if(toDoItem.equals("")) {
+                        throw new EmptyCommandField("todo");
+                    }
+
+                    list.add(new ToDo(toDoItem, false));
+                    listCounter++;
+
+                    String tempPrint = addedTaskText();
+                    System.out.println(processText(tempPrint));
+                }
+
+                else if (readInput.toLowerCase().equals("event")) {
+                    String input = sc.nextLine().trim();
+                    String[] tokenList = input.split("/");
+
+                    // Implies only word "deadline"
+                    if(tokenList.length == 1) {
+                        throw new EmptyCommandField("event");
+                    }
+
+                    list.add(new Event(tokenList[0], tokenList[1], false));
+                    listCounter++;
+
+                    String tempPrint = addedTaskText();
+                    System.out.println(processText(tempPrint));
+                }
+
+                else if (readInput.toLowerCase().equals("deadline")) {
+                    String input = sc.nextLine().trim();
+                    String[] tokenList = input.split("/");
+
+                    // Implies only word "deadline"
+                    if(tokenList.length == 1) {
+                        throw new EmptyCommandField("deadline");
+                    }
+
+                    list.add(new Deadline(tokenList[0], tokenList[1], false));
+                    listCounter++;
+
+                    String tempPrint = addedTaskText();
+
+                    System.out.println(processText(tempPrint));
+                }
+
+                else if (readInput.toLowerCase().equals("done")) {
+                    // Might need to implement exception handling
+                    int indexDone = sc.nextInt();
+
+                    list.get(--indexDone).setDone();
+
+                    String doneMessage = "Nice! I've marked this task as done: \n\t\t";
+                    System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
+                }
+
+                /*
+                README:
+                ECHO FUNCTION HAS BEEN REPLACED WITH COMMAND ECHO,
+                TO FACILITATE COMMANDS THAT ARE NOT RECOGNIZABLE.
+                */
+                else if (readInput.toLowerCase().equals("echo") && sc.hasNext()) {
+                    // Read any remaining lines
+                    readInput = readInput + sc.nextLine();
+                    System.out.println(sc + " Helo");
+
+
+                    // Store content
+                    list.add(new Task(readInput, false));
+                    listCounter++;
+
+                    String processedInput = Duke.processText(readInput);
+                    System.out.println(processedInput);
+                }
+
+                else {
+                    // Not recognized command
+                    throw new CommandNotRecognizedException();
+                }
             }
 
-            else if(readInput.toLowerCase().equals("todo")){
-                String toDoItem = sc.nextLine();
-
-                list.add(new ToDo(toDoItem, false));
-                listCounter++;
-
-                String tempPrint = addedTaskText();
-
-                System.out.println(processText(tempPrint));
+            catch (CommandNotRecognizedException c) {
+                System.out.println(processText("\u263A OOPS!!! I'm sorry, but I don't know what that means :-("));
+            }
+            catch (EmptyCommandField e){
+                System.out.println(processText("\u263A The description of a " + e.getMessage() + " cannot be empty."));
             }
 
-            else if(readInput.toLowerCase().equals("event")){
-                String input = sc.nextLine().trim();
-                String[] tokenList = input.split("/");
-
-                list.add(new Event(tokenList[0], tokenList[1], false));
-                listCounter++;
-
-                String tempPrint = addedTaskText();
-
-                System.out.println(processText(tempPrint));
-            }
-
-            else if(readInput.toLowerCase().equals("deadline")){
-                String input = sc.nextLine().trim();
-                String[] tokenList = input.split("/");
-
-                list.add(new Deadline(tokenList[0], tokenList[1], false));
-                listCounter++;
-
-                String tempPrint = addedTaskText();
-
-                System.out.println(processText(tempPrint));
-            }
-
-            else if(readInput.toLowerCase().equals("done")){
-                // Might need to implement exception handling
-                int indexDone = sc.nextInt();
-
-                list.get(--indexDone).setDone();
-
-                String doneMessage = "Nice! I've marked this task as done: \n\t\t";
-                System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
-            }
-
-            else{
-                // Read any remaining lines
-                readInput = readInput + sc.nextLine();
-
-                // Store content
-                list.add(new Task(readInput, false));
-                listCounter++;
-
-                String processedInput = Duke.processText(readInput);
-                System.out.println(processedInput);
-            }
         }
     }
 
@@ -228,4 +262,16 @@ class Event extends Task {
         return getStatusIcon() + " " + getTaskItem() + " (at: " + getTiming() + ")";
     }
 
+}
+
+class CommandNotRecognizedException extends Exception{
+    public CommandNotRecognizedException(){
+        super("Error");
+    }
+}
+
+class EmptyCommandField extends Exception {
+    public EmptyCommandField(String command){
+        super(command);
+    }
 }

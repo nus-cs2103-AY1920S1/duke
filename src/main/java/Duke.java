@@ -1,3 +1,4 @@
+import java.net.SocketOption;
 import java.util.Scanner;
 
 public class Duke {
@@ -33,12 +34,23 @@ public class Duke {
             } else if (action.equals("done")) {
                 int doneIndex = Integer.parseInt(words[1]);
                 doneTask(doneIndex);
+            } else if (action.equals("todo")) {
+                addTodo(words[1]);
+            } else if (action.equals("deadline")) {
+                addDeadline(words[1]);
+            } else if (action.equals("event")) {
+                addEvent(words[1]);
             } else if (command.equals("list")) {
                 printList();
             } else {
                 addTask(command);
             }
         }
+    }
+
+    public static void printNumber() {
+        String string = String.format("     Now you have %d tasks in the list.", totalNumber);
+        System.out.println(string);
     }
 
     public static void printList() {
@@ -51,6 +63,7 @@ public class Duke {
 
     }
 
+    // remove
     public static void addTask(String command) {
         taskList[totalNumber] = new Task(command);
         totalNumber++;
@@ -65,6 +78,44 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + currentTask);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void addTodo(String action) {
+        ToDo todo = new ToDo(action);
+        taskList[totalNumber] = todo;
+        totalNumber++;
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + todo);
+        printNumber();
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void addDeadline(String action) {
+        String[] actionAndTime = action.split("/by");
+        Deadline deadline = new Deadline(actionAndTime[0], actionAndTime[1]);
+        taskList[totalNumber] = deadline;
+        totalNumber++;
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + deadline);
+        printNumber();
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void addEvent(String action) {
+        String[] actionAndTime = action.split("/at");
+        Event event = new Event(actionAndTime[0], actionAndTime[1]);
+        taskList[totalNumber] = event;
+        totalNumber++;
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println("       " + event);
+        printNumber();
         System.out.println("    ____________________________________________________________");
     }
 

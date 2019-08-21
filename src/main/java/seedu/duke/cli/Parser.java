@@ -47,7 +47,6 @@ public class Parser {
                 } else {
                     throw new RuntimeException("Cannot have multiple trailing arguments without a prefix");
                 }
-
             }
         }
     }

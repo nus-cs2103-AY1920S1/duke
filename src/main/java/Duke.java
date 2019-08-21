@@ -5,24 +5,34 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
+        List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline");
 
         greet();
 
         while(scanner.hasNext()) {
             String command = scanner.nextLine();
 
-            if (command.equals("bye")) {
-                exit();
-                break;
-            } else if (command.equals("list")) {
-                printList(taskManager);
-            } else if (command.startsWith("done")) {
-                String[] words = command.split("\\s");
-                int index = Integer.parseInt(words[1]);
-                doneTask(taskManager, index);
-            } else {
-                totalTask++;
-                addTask(taskManager, command);
+            try {
+                if (!availableCommands.contains(command.split(" ")[0])) {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                } else if (command.equals("bye")) {
+                    exit();
+                    break;
+                } else if (command.equals("list")) {
+                    printList(taskManager);
+                } else if (command.startsWith("done")) {
+                    String[] words = command.split("\\s");
+                    int index = Integer.parseInt(words[1]);
+                    doneTask(taskManager, index);
+                } else {
+                    totalTask++;
+                    addTask(taskManager, command);
+                }
+            } catch (DukeException e) {
+                horizontalLine();
+                System.out.println(e.getMessage());
+                horizontalLine();
+                System.out.println();
             }
 
         }
@@ -47,17 +57,21 @@ public class Duke {
         horizontalLine();
     }
 
-    public static void addTask(TaskManager taskManager, String command) {
+    public static void addTask(TaskManager taskManager, String command) throws DukeException{
         horizontalLine();
         List<String> commandList = new ArrayList<>(Arrays.asList(command.split(" ")));
         String stringHolder = (commandList.remove(0));
         List<String> listHolder = new ArrayList<>(commandList);
         if (stringHolder.startsWith("todo")) {
             stringHolder = (String.join(" ", commandList));
-            taskManager.addTask(new ToDo(stringHolder));
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  [T][\u2718] " + stringHolder);
-            System.out.println("Now you have " + totalTask + " tasks in the list.");
+            if (!stringHolder.isEmpty()) {
+                taskManager.addTask(new ToDo(stringHolder));
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  [T][\u2718] " + stringHolder);
+                System.out.println("Now you have " + totalTask + " tasks in the list.");
+            } else {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
         } else if (stringHolder.startsWith("deadline")) {
             stringHolder = commandList.remove(0);
             listHolder.remove(0);

@@ -80,7 +80,7 @@ public class Duke {
                     System.out.println(formatText("The description of deadline cannot be empty :("));
                     System.out.println(horizontalLine);
                 }
-                catch (MissingFormatArgumentException error2){
+                catch (IllegalArgumentException error2){
                     System.out.println(horizontalLine);
                     System.out.println(formatText("No deadline detected!"));
                     System.out.println(horizontalLine);
@@ -98,7 +98,7 @@ public class Duke {
                     System.out.println(formatText("The description of event cannot be empty :("));
                     System.out.println(horizontalLine);
                 }
-                catch (MissingFormatArgumentException error2){
+                catch (IllegalArgumentException error2){
                     System.out.println(horizontalLine);
                     System.out.println(formatText("The event must have a date!"));
                     System.out.println(horizontalLine);
@@ -190,16 +190,16 @@ public class Duke {
         System.out.println(horizontalLine);
     }
 
-    private static void checkValidInput(String command, String input) throws MissingFormatArgumentException{
+    private static void checkValidInput(String command, String input) throws IllegalArgumentException{
         switch(command){
             case "deadline":
                 if (!input.contains(" /by ")){
-                    throw new MissingFormatArgumentException("Missing deadline");
+                    throw new IllegalArgumentException("Missing deadline");
                 }
                 break;
             case "event":
                 if (!input.contains(" /at ")){
-                    throw new MissingFormatArgumentException("Missing deadline");
+                    throw new IllegalArgumentException("Missing deadline");
                 }
                 break;
             default:

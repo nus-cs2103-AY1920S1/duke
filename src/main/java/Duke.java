@@ -23,7 +23,7 @@ public class Duke {
                 }
             }
             else if (command.length() >= 4 && command.substring(0,4).equals("done")){
-                int taskNumber = Character.getNumericValue(command.charAt(command.length()-1));
+                int taskNumber = Integer.parseInt(command.substring(5).split(" ")[0]);
                 if (taskNumber > 0 && taskNumber <= numCommands) {
                     taskList[taskNumber-1].markAsDone();
                     System.out.println("Nice! I've marked this task as done: ");

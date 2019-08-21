@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Listing list = new Listing();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,9 +16,13 @@ public class Duke {
             String msg = sc.next();
             if(msg.equals("bye")) {
                 Message.leavingMsg();
+                break;
+            }else if(msg.equals("list")) {
+                list.listing();
+
             } else {
                 msg += sc.nextLine();
-                Message.echo(msg);
+                list.add(msg);
             }
         }
 

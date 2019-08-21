@@ -12,3 +12,9 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Compiled Java files
+*.class
+
+# Test Output
+text-ui-test/ACTUAL.TXT

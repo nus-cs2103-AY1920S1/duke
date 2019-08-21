@@ -1,4 +1,4 @@
-public class DukeException extends IllegalArgumentException {
+public class DukeException extends Exception {
 
     public DukeException(String message) {
         super(message);
@@ -6,6 +6,6 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-        return "\u2639 OOPS!!! " + getMessage();
+        return String.format("\u2639 OOPS!!! %s", getMessage());
     }
 }

@@ -28,8 +28,8 @@ public class Duke {
                 }
             } else {
                 arr[i] = input;
-                System.out.println("added: " + input);
                 i++;
+                System.out.println("added: " + input);
             }
         }
     }

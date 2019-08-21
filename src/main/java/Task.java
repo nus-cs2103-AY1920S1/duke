@@ -2,6 +2,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    public Task() {
+        isDone = false;
+    }
+
     public Task(String description) {
         this.description = description;
         isDone = false;

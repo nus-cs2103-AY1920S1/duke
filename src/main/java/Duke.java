@@ -128,8 +128,8 @@ public class Duke {
                     int indexDone = sc.nextInt();
 
                     // If indexDone exceed listCounter
-                    if(indexDone > listCounter){
-                        throw new ExceedItemNumberException();
+                    if(indexDone > listCounter || indexDone < 0){
+                        throw new InvalidNumberException("Error exceeding item number");
                     }
 
                     list.get(--indexDone).setDone();
@@ -170,7 +170,9 @@ public class Duke {
                     int numberToDelete = sc.nextInt();
 
                     // Make sure number is valid
-
+                    if(numberToDelete > listCounter || numberToDelete < 1){
+                        throw new InvalidNumberException("Number to delete does not exist");
+                    }
 
                     Task deletedTask = list.remove(numberToDelete - 1);
                     listCounter--;
@@ -201,8 +203,8 @@ public class Duke {
             catch (CommandFieldFormatException f){
                 System.out.println(processText("\u263A Description format is incorrect for " + f.getMessage() + "."));
             }
-            catch (ExceedItemNumberException n){
-                System.out.println(processText("\u263A Input number exceeded number of task items."));
+            catch (InvalidNumberException n){
+                System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
 
             }
         }
@@ -354,9 +356,9 @@ class CommandFieldFormatException extends Exception{
 }
 
 // Exceeded number of items in list
-class ExceedItemNumberException extends Exception{
-    public ExceedItemNumberException(){
-        super("Error exceeding item number");
+class InvalidNumberException extends Exception{
+    public InvalidNumberException(String info){
+        super(info);
     }
 }
 

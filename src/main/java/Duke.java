@@ -20,7 +20,14 @@ public class Duke {
         while (isRunning && sc.hasNextLine()) {
             String command = sc.nextLine().trim();
 
-            switch (command) {
+            // Catch empty commands (ENTER key pressed)
+            if (command.equals("")) {
+                Duke.print("No command issued.");
+                continue;
+            }
+
+            // Otherwise determine type of command from first token
+            switch (command.split(" ")[0]) {
             // Terminate the bot if the 'bye' command is issued
             case "bye":
                 isRunning = false;
@@ -29,9 +36,11 @@ public class Duke {
             case "list":
                 Duke.print(commands.toString());
                 break;
-            // Catch empty commands (ENTER key pressed)
-            case "":
-                Duke.print("No command issued.");
+            // Mark an item in the TaskList as completed by its position (task ID)
+            // Discards additional arguments apart from the first
+            case "done":
+                int id = Integer.valueOf(command.split(" ")[1]);
+                Duke.print(commands.getTask(id - 1).complete());
                 break;
             // Otherwise store the commands entered in the TaskList
             default:

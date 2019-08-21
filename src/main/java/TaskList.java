@@ -2,15 +2,19 @@ import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<String> tasks;
+    protected ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<String>();
+        this.tasks = new ArrayList<Task>();
     }
 
-    public String addTask(String task) {
-        this.tasks.add(task);
-        return String.format("added: %s", task);
+    public Task getTask(int idx) {
+        return this.tasks.get(idx);
+    }
+
+    public String addTask(String description) {
+        this.tasks.add(new Task(description));
+        return String.format("added: %s", description);
     }
 
     public int numberOfTasks() {
@@ -33,7 +37,7 @@ public class TaskList {
 
             for (int i = 0; i < length; i++) {
                 result.append(String.format(formatTemplate, i + 1))
-                      .append(String.format(". %s\n", this.tasks.get(i)));
+                      .append(String.format(". %s\n", this.tasks.get(i).toString()));
             }
 
             // Trim trailing newline

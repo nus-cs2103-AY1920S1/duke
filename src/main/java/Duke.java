@@ -94,13 +94,10 @@ public class Duke {
                 return;
         }
 
-        System.out.println(DIVIDER);
-        System.out.println(BLANKSPACE + "Got it. I've added this task:");
         _tasks.add(newTask);
-        System.out.println(BLANKSPACE + newTask);
-
-        System.out.println(BLANKSPACE + "Now you have " + _tasks.size() + " tasks in the list.");
-        System.out.println(DIVIDER);
+        dukeEcho("Got it. I've added this task:",
+                newTask.toString(),
+                "Now you have " + _tasks.size() + " tasks in the list.");
     }
 
     private void finishTask(String[] arr){

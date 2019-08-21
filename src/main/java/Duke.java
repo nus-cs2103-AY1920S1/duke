@@ -13,22 +13,67 @@ public class Duke {
                 printMessage("Bye. Hope to see you again soon!");
                 break;
             } else if (input.contains("todo")) {
-                String taskName = input.substring(5);
-                Task myTask = new Todo(taskName);
-                myList.add(myTask);
-                printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                String taskName;
+                try {
+                    taskName = input.substring(5);
+                } catch (StringIndexOutOfBoundsException e) {
+                    taskName = "";
+                }
+                try {
+                    Task myTask = new Todo(taskName);
+                    myList.add(myTask);
+                    printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                } catch (DukeException e) {
+                    printException(e);
+                }
             } else if (input.contains("deadline")) {
-                String taskName = input.substring(9, input.indexOf("/") - 1);
-                String param = input.substring(input.indexOf("/by") + 4);
-                Task myTask = new Deadline(taskName, param);
-                myList.add(myTask);
-                printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                String taskName;
+                try {
+                    if (input.contains("/")) {
+                        taskName = input.substring(9, input.indexOf("/") - 1);
+                    } else {
+                        taskName = input.substring(9);
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    taskName = "";
+                }
+                String param;
+                if (input.contains("/by")) {
+                    param = input.substring(input.indexOf("/by") + 4);
+                } else {
+                    param = "";
+                }
+                try {
+                    Task myTask = new Deadline(taskName, param);
+                    myList.add(myTask);
+                    printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                } catch (DukeException e) {
+                    printException(e);
+                }
             } else if (input.contains("event")) {
-                String taskName = input.substring(6, input.indexOf("/") - 1);
-                String param = input.substring(input.indexOf("/at") + 4);
-                Task myTask = new Event(taskName, param);
-                myList.add(myTask);
-                printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                String taskName;
+                try {
+                    if (input.contains("/")) {
+                        taskName = input.substring(6, input.indexOf("/") - 1);
+                    } else {
+                        taskName = input.substring(6);
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    taskName = "";
+                }
+                String param;
+                if (input.contains("/at")) {
+                    param = input.substring(input.indexOf("/at") + 4);
+                } else {
+                    param = "";
+                }
+                try {
+                    Task myTask = new Event(taskName, param);
+                    myList.add(myTask);
+                    printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
+                } catch (DukeException e) {
+                    printException(e);
+                }
             } else if (input.equals("list")) {
                 StringBuilder myBuilder = new StringBuilder();
                 myBuilder.append("Here are the tasks in your list:\n");
@@ -45,8 +90,7 @@ public class Duke {
                 myList.get(myNum - 1).markAsDone();
                 printMessage("Nice! I've marked this task as done:\n  " + myList.get(myNum - 1));
             } else {
-                printMessage("added: " + input);
-                myList.add(new Task(input));
+                printException(new DukeException("I'm sorry, but I don't know what that means :-("));
             }
         }
         in.close();
@@ -60,6 +104,10 @@ public class Duke {
         }
         System.out.println("    ____________________________________________________________");
         System.out.println();
+    }
+
+    private static void printException(DukeException e) {
+        printMessage("☹ OOPS!!! " + e.getMessage());
     }
 
     private static String pluralize(String item, Integer quantity) {

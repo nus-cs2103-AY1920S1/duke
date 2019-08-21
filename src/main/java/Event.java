@@ -3,7 +3,7 @@ public class Event extends Task {
     public Event(String taskName, String at) {
         super(taskName);
         this.prefix = "[E]";
-        this.suffix = "(at: " + at + ")";
+        this.details = "(at: " + at + ")";
     }
 
 
@@ -11,6 +11,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         char symbol = this.isCompleted ? '✓' : '✗';
-        return prefix + "[" + symbol + "] " + taskName + " " + suffix;
+        return prefix + "[" + symbol + "] " + taskName + " " + details;
     }
 }

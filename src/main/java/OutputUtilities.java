@@ -1,9 +1,7 @@
 public class OutputUtilities {
 
     public static void sayBye() {
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        System.out.println("\t Bye. Hope to see you again soon!");
     }
 
    public static void sayHi() {
@@ -12,9 +10,9 @@ public class OutputUtilities {
                "\tHello! I'm Duke\n" +
                "\tWhat can I do for you?");
         printLine();
-
    }
-    public static void printLine() {
+
+   public static void printLine() {
         System.out.println("\t_______________________________");
     }
 

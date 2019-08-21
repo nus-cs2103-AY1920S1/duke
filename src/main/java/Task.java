@@ -2,7 +2,7 @@ public abstract class Task {
     protected String taskName;
     protected boolean isCompleted;
     protected String prefix;
-    protected String suffix;
+    protected String details;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -18,7 +18,7 @@ public abstract class Task {
     }
 
 
-    public String getSuffix() {
-        return suffix;
+    public String getDetails() {
+        return details;
     }
 }

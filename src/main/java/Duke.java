@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.StringBuilder;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,8 +10,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
 
-        String intro = "Hello! I'm Duke\nWhat can I do for you?\n";
-        System.out.println(intro);
+        String intro = "Hello! I'm Duke\nWhat can I do for you?";
+        System.out.println(Duke.format(intro));
 
         Scanner sc = new Scanner(System.in);
 
@@ -21,11 +22,36 @@ public class Duke {
                 break;
             } else {
                 // Echo the input command
-                System.out.println(command + "\n");
+                System.out.println(Duke.format(command));
             }
         }
 
         // Explicitly closes the Scanner and input stream
         sc.close();
+    }
+
+    /** Returns a new string from pretty-printing the original message string.
+     *  Adds identation and horizontal lines to the message.
+     * 
+     * @param message a string to embellish.
+     * @return a formatted String to print as output.
+     */
+    public static String format(String message) {
+        StringBuilder result = new StringBuilder();
+
+        String divider = "    ________________________________________________________________\n";
+        result.append(divider)
+              .append("\n");
+
+        // Retrieves each individual line in the message
+        String[] lines = message.split("\n");
+        for (String line: lines) {
+            result.append("     ")
+                  .append(line)
+                  .append("\n");
+        }
+        
+        result.append(divider);
+        return result.toString();
     }
 }

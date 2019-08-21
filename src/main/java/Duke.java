@@ -7,7 +7,7 @@ public class Duke {
     static TaskList taskList = new TaskList();
     static Scanner scanner = new Scanner(System.in);
     static PrintStream ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-
+    static String[] validTaskTypes = new String[] {"deadline", "event", "todo"};
     /**
      * Main program loop of the program.
      * @param args Unused args.
@@ -17,8 +17,15 @@ public class Duke {
         String command = "";
 
         while (!command.equals("bye")) {
-            command = scanner.nextLine();
-            processCommand(command);
+            try {
+                command = scanner.nextLine();
+                ps.println(command);
+                ps.println("\t____________________________________________________________");
+                processCommand(command);
+            } catch (DukeException e) {
+                ps.println(e.getMessage());
+                ps.println("\t____________________________________________________________");
+            }
         }
         scanner.close();
         System.exit(1);
@@ -28,9 +35,8 @@ public class Duke {
      * Processes the user input and outputs a response.
      * @param command The user's input.
      */
-    public static void processCommand(String command) {
+    public static void processCommand(String command) throws DukeException {
         String[] commandArray = command.split(" ");
-        ps.println("\t____________________________________________________________");
         if (command.equals("bye")) {
             ps.println("\tBye. Hope to see you again soon!");
         } else if (command.equals("list")) {
@@ -38,8 +44,13 @@ public class Duke {
         } else if (commandArray[0].equals("done") && commandArray[1].matches("\\d+")) {
             int id = Integer.parseInt(commandArray[1]);
             taskList.markAsDone(id);
+        } else if (isValidTaskType(commandArray[0])){
+            if (command.equals("todo")) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+            taskList.addTask(command);
         } else {
-            taskList.add(command);
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         ps.println("\t____________________________________________________________");
     }
@@ -57,5 +68,14 @@ public class Duke {
         ps.println("\t____________________________________________________________");
         ps.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         ps.println("\t____________________________________________________________");
+    }
+
+    public static boolean isValidTaskType(String taskType) {
+        for (String s : validTaskTypes) {
+            if (taskType.equals(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

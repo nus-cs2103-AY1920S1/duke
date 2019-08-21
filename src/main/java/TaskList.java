@@ -14,6 +14,9 @@ public class TaskList {
      * Prints the list of items in the order as stored by the program.
      */
     protected void printList() {
+        if (listItems.isEmpty()) {
+            ps.println("\tYou currently have no tasks!");
+        }
         for (int i = 1; i <= listItems.size(); i++) {
             ps.println("\t  " + i + ". " + listItems.get(i - 1));
         }
@@ -23,7 +26,7 @@ public class TaskList {
      * Adds a task to the list based on the given command.
      * @param command The command given by the user to be processed.
      */
-    protected void add(String command) {
+    protected void addTask(String command) throws DukeException {
         Task newTask = Task.create(command);
         listItems.add(newTask);
         String taskSingular = listItems.size() == 1 ? "task" : "tasks";
@@ -36,7 +39,10 @@ public class TaskList {
      * Mark a task in the list as done based on its ID.
      * @param id the ID of the task that is done.
      */
-    protected void markAsDone(int id) {
+    protected void markAsDone(int id) throws DukeException {
+        if (id > listItems.size() || id <= 0) {
+            throw new DukeException("The ID that you have entered is not a valid task ID");
+        }
         Task task = listItems.get(id - 1);
         task.setDone();
         ps.println("\tNice! I've marked this task as done: \n"

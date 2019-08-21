@@ -12,18 +12,34 @@ public abstract class Task {
      * @param command The entire line of command input by the user into the program.
      * @return A Task object that follows the specifications of the input.
      */
-    protected static Task create(String command) {
+    protected static Task create(String command) throws DukeException {
         String[] commandArray = command.split(" ");
         String taskType = commandArray[0];
         command = command.replaceFirst(taskType + " ", "");
         if (taskType.equals("event")) {
             commandArray = command.split(" /at ");
-            return new Event(commandArray[0], commandArray[1]);
+            String details = commandArray[0];
+            if (commandArray.length != 2) {
+                throw new DukeException("Invalid command format! Proper usage: "
+                        + "'event <details> /at <timing>'");
+            } else if (details.equals("")) {
+                throw new DukeException("The description of an event cannot be empty.");
+            } else {
+                return new EventTask(commandArray[0], commandArray[1]);
+            }
         } else if (taskType.equals("deadline")) {
             commandArray = command.split(" /by ");
-            return new Deadline(commandArray[0], commandArray[1]);
+            String details = commandArray[0];
+            if (commandArray.length != 2) {
+                throw new DukeException("Invalid command format! Proper usage: "
+                        + "'deadline <details> /by <timing>'");
+            } else if (details.equals("")) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            } else {
+                return new DeadlineTask(commandArray[0], commandArray[1]);
+            }
         } else {
-            return new ToDo(command);
+            return new ToDoTask(command);
         }
     }
 

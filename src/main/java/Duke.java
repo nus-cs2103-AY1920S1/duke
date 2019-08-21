@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
     public static String message;
@@ -8,24 +7,43 @@ public class Duke {
     public static String upperLine = "____________________________________________________________\n";
     public static String lowerLine = "____________________________________________________________\n";
     public static int size;
+    public static String[] oneLine;
+    public static String[] timeDate;
 
-    public static String getDescription(String cmd){
-     String[] curr = cmd.split(" ");
-     return curr[1] + " " + curr[2];
-    }
-
-    public static void childFeature(String cmd){
+    public static void childFeature() throws DukeException{
         System.out.print(upperLine);
-        System.out.println("Got it. I've added this task: ");
-        String firstWord = cmd.split(" ")[0];
-        if(firstWord.equals("todo")){
-            myList[idx] = new Todo(getDescription(cmd));
-        }else if(firstWord.equals("deadline")){
-            String by = cmd.split("/by ")[1];
-            myList[idx] = new Deadline(getDescription(cmd), by);
+        String description;
+        String time_date;
+        String firstWord = oneLine[0];
+
+        if(oneLine.length == 2){
+            System.out.println("Got it. I've added this task: ");
+            //todo with description
+            //deadline may not have /by
+            //event may not have /at
+            if(firstWord.equals("todo")){
+                myList[idx] = new Todo(oneLine[1]);
+            }else if(firstWord.equals("deadline")){
+                timeDate = oneLine[1].split(" /by ");
+                if(timeDate.length == 2){
+                    description = timeDate[0];
+                    time_date = timeDate[1];
+                    myList[idx] = new Deadline(description, time_date);
+                }else{
+                    throw new DukeException("specific date/time for deadline is wrong");
+                }
+            }else{
+                timeDate = oneLine[1].split(" /at ");
+                if(timeDate.length == 2){
+                    description = timeDate[0];
+                    time_date = timeDate[1];
+                    myList[idx] = new Event(description, time_date);
+                }else{
+                    throw new DukeException("specific date/time for event is wrong");
+                }
+            }
         }else{
-            String at = cmd.split("/at ")[1];
-            myList[idx] = new Event(getDescription(cmd), at);
+            throw new DukeException("The description of a " + firstWord + " cannot be empty");
         }
         System.out.println(myList[idx]);
         idx++;
@@ -33,70 +51,84 @@ public class Duke {
         System.out.println("Now you have "+ size + " tasks in the list.");
         System.out.println(lowerLine);
     }
-    public static void addFeature(String cmd){
 
-        myList[idx] = new Task(cmd);
-        idx++;
-        size++;
-        message = upperLine + "add: " + cmd + "\n" + lowerLine;
-        System.out.println(message);
+    public static void doneFeature() throws DukeException{
+        System.out.print(upperLine);
+        //make sure it only have one number follow
+        if(oneLine[1].split(" ").length == 1){
+
+            int i = Integer.parseInt(oneLine[1]);
+            if(i <= size){
+                System.out.println("Nice! I've marked this task as done: ");
+                Task current = myList[i - 1];
+                current.markAsDone();
+                System.out.println(current);
+            }else{
+                throw new DukeException("task number cannot markAsDone as it not exist");
+            }
+        }
+        else{
+            throw new DukeException("check there are only one number follow done");
+        }
+        System.out.println(lowerLine);
     }
 
-    public static void tryFeature(String cmd) {
-        String firstWord = cmd.split(" ")[0];
-        if(firstWord.equals("todo") || firstWord.equals("deadline")
-                ||firstWord.equals("event")){
-            childFeature(cmd);
+    public static void listFeature() throws DukeException{
+        System.out.print(upperLine);
+        if(oneLine.length == 1) {
+            String title = "Here are the tasks in your list:\n";
+            System.out.print(title);
+            for(int i = 0; i < idx; i++){
+                System.out.println((i+1) + ". " + myList[i]);
+            }
         }else{
-            addFeature(cmd);
-        }
-    }
-        public static void doneFeature(String num_string){
-        int i = Integer.parseInt(num_string);
-        System.out.print(upperLine);
-        System.out.println("Nice! I've marked this task as done: ");
-        Task current = myList[i - 1];
-        current.markAsDone();
-        System.out.println(current);
-        System.out.println(lowerLine);
-        size++;
-
-    }
-    public static void listFeature(){
-        System.out.print(upperLine);
-        String title = "Here are the tasks in your list:\n";
-        System.out.print(title);
-        for(int i = 0; i < idx; i++){
-            System.out.println((i+1) + ". " + myList[i]);
+            throw new DukeException("There is no description for bye");
         }
         System.out.println(lowerLine);
     }
 
-    public static void byeFeature(){
-        message = upperLine + "Bye. Hope to see you again soon!\n" + lowerLine;
-        System.out.println(message);
+    public static void byeFeature() throws DukeException{
+        System.out.print(upperLine);
+        if(oneLine.length == 1){
+                message ="Bye. Hope to see you again soon!\n";
+                System.out.print(message);
+            }else{
+                throw new DukeException("There is extra description for bye");
+            }
+        System.out.println(lowerLine);
     }
+
     public static void main(String[] args) {
         String greet = "Hello! I'm Duke\n"
         + "What can I do for you?\n";
         greet = upperLine + greet + lowerLine;
         System.out.println(greet);
+            while(true){
+                try{
+                    String cmd = sc.nextLine();
+                    oneLine = cmd.split(" ", 2);
+                    String firstWord = oneLine[0];
 
-        while(true){
-            String cmd = sc.nextLine();
-            if(cmd.equals("bye")){
-                byeFeature();
-                break;
-            }else{
-                if(cmd.equals("list")){
-                    listFeature();
-                }else if(cmd.split(" ").length == 2 &&
-                        cmd.split(" ")[0].equals("done")){
-                    doneFeature(cmd.split(" ")[1]);
-                }else{
-                    tryFeature(cmd);
-                }
+                    if(firstWord.equals("bye")){
+                        byeFeature();
+                        break;
+                    }else if(firstWord.equals("list")){
+                        listFeature();
+                    }else if(firstWord.equals("done")){
+                        doneFeature();
+                    }else if(firstWord.equals("todo") || firstWord.equals("deadline")
+                            ||firstWord.equals("event")){
+                            childFeature();
+                    }else{
+                        //situation of firstWord is invalid
+                        System.out.print(upperLine);
+                        throw new DukeException("I'm sorry, but I don't know what that means :-");
+                    }
+            }catch(DukeException e){
+                    System.out.println(e);
+                    System.out.println(lowerLine);
             }
+//                System.out.println(size);
         }
     }
 }

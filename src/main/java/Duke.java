@@ -1,5 +1,3 @@
-import javafx.concurrent.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,14 +22,14 @@ public class Duke {
                     System.out.println("Nothing added yet");
                 } else {
                     for (int i = 1; i <= list.size(); i++) {
-                        System.out.println("" + i + ". " + list.get(i - 1));
+                        System.out.println("" + i + "." + list.get(i - 1));
                     }
                 }
             } else if (str.substring(0, 4).equals("done")) {
                 Integer taskNum = Integer.valueOf(str.substring(5));
                 Task currTask = list.get(taskNum-1);
                 currTask.markAsDone();
-                System.out.println("Nice! I've markedthis task as done:" + "\n" + "\u2713 " + currTask.getDescription());
+                System.out.println("Nice! I've marked this task as done:" + "\n" + "[\u2713] " + currTask.getDescription());
             } else {
                 System.out.println("added: " + str);
                 list.add(new Task(str));
@@ -39,4 +37,5 @@ public class Duke {
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
+
 }

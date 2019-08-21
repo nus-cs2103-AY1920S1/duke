@@ -25,7 +25,7 @@
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
 
-##Tutorials 
+## Tutorials 
 
 Duke Increment | Tutorial
 ---------------|---------------

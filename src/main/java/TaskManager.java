@@ -2,16 +2,17 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+
+import java.nio.charset.StandardCharsets;
 
 class TaskManager {
     private Scanner sc;
     private PrintStream ps;
     private ArrayList<Task> list;
 
-    public TaskManager() throws UnsupportedEncodingException {
+    public TaskManager() {
         this.sc = new Scanner(System.in);
-        this.ps = new PrintStream(System.out, true, "UTF-8");
+        this.ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
         this.list = new ArrayList<>();
     }
 

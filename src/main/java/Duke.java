@@ -14,6 +14,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 taskList.printAllTasks();
                 command = input.nextLine().trim();
+
             } else if (command.contains("done")) {
                 // Check if the first word is done
                 String[] sentence = command.split(" ");
@@ -31,6 +32,32 @@ public class Duke {
                     System.out.println("OOPS!!! That task is not on the list, please check the list again by calling 'list'.");
                 } catch (NumberFormatException e) {
                     System.out.println("OOPS!!! Wrong format. Please key in a valid number (Eg 'done 2')");
+                } catch (UnknownTaskTypeException e) {
+                    System.out.println(e.getMessage());
+                }
+
+                command = input.nextLine().trim();
+
+            } else if (command.contains("delete")) {
+                String[] sentence = command.split(" ");
+
+                try {
+                    if (sentence[0].equals("delete")) {
+                        int taskIndex = Integer.parseInt(sentence[1]);
+                        Task deletedTask = taskList.deleteTask((taskIndex - 1));
+                        System.out.println("Noted. I've removed this task:\n"
+                                + "  "
+                                + deletedTask
+                                + String.format("\nNow you have %d tasks in the list.", taskList.numTasks));
+                    } else {
+                        throw new UnknownTaskTypeException();
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Which task on the list would you like to delete? (Eg. 'delete 2')");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! That task is not on the list, please check the list again by calling 'list'.");
+                } catch (NumberFormatException e) {
+                    System.out.println("OOPS!!! Wrong format. Please key in a valid number (Eg 'delete 2')");
                 } catch (UnknownTaskTypeException e) {
                     System.out.println(e.getMessage());
                 }

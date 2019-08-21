@@ -27,4 +27,11 @@ public class TaskList {
         }
     }
 
+    public Task deleteTask(int index) {
+        Task deletedTask = allTasks.get(index);
+        allTasks.remove(index);
+        numTasks--;
+        return deletedTask;
+    }
+
 }

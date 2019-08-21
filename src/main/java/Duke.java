@@ -6,10 +6,8 @@ public class Duke {
      
         Scanner sc = new Scanner(System.in);
 
-        // Print initial welcome string 
-        System.out.println("    --------------------------------------------------------");
-        System.out.println("     Hello! I'm Duke :)\n     What can I do for you?");
-        System.out.println("    --------------------------------------------------------");
+        // Print initial welcome string
+        prettyPrint("Hello! I'm Duke :)\n     What can I do for you?");
 
         // initialize a TaskList
         TaskList tl = new TaskList();
@@ -27,26 +25,49 @@ public class Duke {
                         tl.listTasks();
                         break;
                     case "done":
-                        int index = Integer.parseInt(input.split(" ")[1]);
-                        tl.taskDone(index);
-                        break;
+                        try {
+                            int index = Integer.parseInt(input.split(" ")[1]);
+                            tl.taskDone(index);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            prettyPrint("☹ OOPS!!! Please enter an index to delete.");
+                        } finally {
+                            break;
+                        }
                     case "todo":
-                        ToDo todo = new ToDo(input.split(" ",2)[1]);
-                        tl.addTask(todo);
-                        break;
+                        try {
+                            ToDo todo = new ToDo(input.split(" ", 2)[1]);
+                            tl.addTask(todo);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            prettyPrint("☹ OOPS!!! The description of a todo cannot be empty.");
+                        } finally {
+                            break;
+                        }
                     case "deadline":
-                        String deadline_str = input.split(" ", 2)[1];
-                        String deadline_name = deadline_str.split(" /by ")[0];
-                        String deadline_date = deadline_str.split(" /by ")[1];
-                        Deadline deadline = new Deadline(deadline_name, deadline_date);
-                        tl.addTask(deadline);
-                        break;
+                        try {
+                            String deadline_str = input.split(" ", 2)[1];
+                            String deadline_name = deadline_str.split(" /by ")[0];
+                            String deadline_date = deadline_str.split(" /by ")[1];
+                            Deadline deadline = new Deadline(deadline_name, deadline_date);
+                            tl.addTask(deadline);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            prettyPrint("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        } finally {
+                            break;
+                        }
                     case "event":
-                        String event_str = input.split(" ", 2)[1];
-                        String event_name = event_str.split(" /at ")[0];
-                        String event_date = event_str.split(" /at ")[1];
-                        Event event = new Event(event_name, event_date);
-                        tl.addTask(event);
+                        try {
+                            String event_str = input.split(" ", 2)[1];
+                            String event_name = event_str.split(" /at ")[0];
+                            String event_date = event_str.split(" /at ")[1];
+                            Event event = new Event(event_name, event_date);
+                            tl.addTask(event);
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            prettyPrint("☹ OOPS!!! The description of an event cannot be empty.");
+                        } finally {
+                            break;
+                        }
+                    default:
+                        prettyPrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         break;
                 }
             }
@@ -54,9 +75,14 @@ public class Duke {
         }
 
         // Print exit string
-        System.out.println("    --------------------------------------------------------");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    --------------------------------------------------------");
+        prettyPrint("Bye. Hope to see you again soon!");
+    }
+
+    // pretty print a string
+    static void prettyPrint(String str) {
+        System.out.println("    --------------------------------------------------");
+        System.out.println("     " + str);
+        System.out.println("    --------------------------------------------------");
     }
 }
 

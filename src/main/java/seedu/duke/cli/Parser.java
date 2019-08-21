@@ -74,9 +74,15 @@ public class Parser {
         Object[] params = new Object[paramTypes.length];
 
         for (int i = 0; i < params.length; ++i) {
+            Argument me = paramAnns[i];
             if (tok.length < 2) {
-                // We have a new argument, but there are no more tokens
-                throw new CommandException("Insufficient arguments");
+                if (me.trailing()) {
+                    params[i] = "";
+                    continue;
+                } else {
+                    // We have a new argument, but there are no more tokens
+                    throw new CommandException("Insufficient arguments");
+                }
             }
             // Three cases here:
             // (1) We are not a trailing argument. The next token is our value.
@@ -86,7 +92,6 @@ public class Parser {
             //     The next token up to the prefix of the next argument is our value.
 
             String value;
-            Argument me = paramAnns[i];
             if (me == null || !me.trailing()) {
                 // Case 1
                 tok = tok[1].split("\\s", 2);

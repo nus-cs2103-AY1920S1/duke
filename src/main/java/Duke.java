@@ -22,26 +22,15 @@ public class Duke {
             String arr[] = cmd.split(" ", 2);
             String firstWord = arr[0];
 
-            if (firstWord.equals("list")) {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < _tasks.size(); i++) {
-                    System.out.println("     " + (i + 1) + ". " + _tasks.get(i));
-                }
-                System.out.println("    ____________________________________________________________");
-            } else if (firstWord.equals("done")) {
-                int taskNum = Integer.parseInt(arr[1]);
-                Task currTask = _tasks.get(taskNum - 1);
-                currTask.finishTask();
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + currTask);
-                System.out.println("    ____________________________________________________________");
-            } else {
-                System.out.println("    ____________________________________________________________");
-                System.out.println("     added: " + cmd);
-                System.out.println("    ____________________________________________________________");
-                _tasks.add(new Task(cmd));
+            switch (firstWord) {
+                case "list":
+                    listTasks();
+                    break;
+                case "done":
+                    finishTask(Integer.parseInt(arr[1]));
+                    break;
+                default:
+                    addNewTask(arr[0], arr[1]);
             }
             cmd = sc.nextLine();
         }
@@ -50,6 +39,54 @@ public class Duke {
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________\n");
 
+    }
+
+    private void addNewTask(String taskType, String taskDetails) {
+
+        Task newTask;
+
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Got it. I've added this task:");
+
+        switch(taskType) {
+            case "todo":
+                newTask = new ToDo(taskDetails);
+                break;
+            case "deadline":
+                String deadlineTask[] = taskDetails.split("/");
+                newTask = new Deadline(deadlineTask[0], deadlineTask[1]);
+                break;
+            case "event":
+                String eventTask[] = taskDetails.split("/");
+                newTask = new Event(eventTask[0], eventTask[1]);
+                break;
+            default:
+                throw new IllegalArgumentException("No Such Task Type");
+        }
+
+        _tasks.add(newTask);
+        System.out.println("       " + newTask);
+
+        System.out.println("     Now you have " + _tasks.size() + " tasks in the list.");
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private void finishTask(int taskNum) {
+        Task currTask = _tasks.get(taskNum - 1);
+        currTask.finishTask();
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Nice! I've marked this task as done:");
+        System.out.println("       " + currTask);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    private void listTasks() {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the tasks in your list:");
+        for (int i = 0; i < _tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + ". " + _tasks.get(i));
+        }
+        System.out.println("    ____________________________________________________________");
     }
 
     public static void main(String[] args) {

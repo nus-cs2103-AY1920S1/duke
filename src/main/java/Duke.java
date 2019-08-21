@@ -1,9 +1,15 @@
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    private ArrayList<Task> _tasks;
+
+    public Duke() {
+        _tasks = new ArrayList<>();
+    }
+
+    private void run() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> todo = new ArrayList<>();
 
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
@@ -19,13 +25,13 @@ public class Duke {
             if (firstWord.equals("list")) {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < todo.size(); i++) {
-                    System.out.println("     " + (i + 1) + ". " + todo.get(i));
+                for (int i = 0; i < _tasks.size(); i++) {
+                    System.out.println("     " + (i + 1) + ". " + _tasks.get(i));
                 }
                 System.out.println("    ____________________________________________________________");
-            } else if (firstWord.equals("done")){
+            } else if (firstWord.equals("done")) {
                 int taskNum = Integer.parseInt(arr[1]);
-                Task currTask = todo.get(taskNum-1);
+                Task currTask = _tasks.get(taskNum - 1);
                 currTask.finishTask();
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Nice! I've marked this task as done:");
@@ -35,7 +41,7 @@ public class Duke {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     added: " + cmd);
                 System.out.println("    ____________________________________________________________");
-                todo.add(new Task(cmd));
+                _tasks.add(new Task(cmd));
             }
             cmd = sc.nextLine();
         }
@@ -45,9 +51,15 @@ public class Duke {
                 "    ____________________________________________________________\n");
 
     }
+
+    public static void main(String[] args) {
+        Duke lvl4 = new Duke();
+        lvl4.run();
+    }
 }
 
 class Task {
+
     String _name;
     String _status;
 
@@ -60,4 +72,37 @@ class Task {
 
     public void finishTask() {_status = "✓";}
 
+}
+
+class ToDo extends Task {
+    public ToDo(String name) {
+        super(name);
+    }
+    public String toString() { return "[T]" + super.toString(); }
+}
+
+class Deadline extends Task {
+    String _dateTime;
+
+    public Deadline(String name, String dateTime) {
+        super(name);
+        _dateTime = dateTime;
+    }
+    public String toString() {
+        String arr[] = _dateTime.split(" ", 2);
+        return "[D]" + super.toString() + "(" + arr[0] + ": " + arr[1] + ")";
+    }
+}
+
+class Event extends Task {
+    String _dateTime;
+
+    public Event(String name, String dateTime) {
+        super(name);
+        _dateTime = dateTime;
+    }
+    public String toString() {
+        String arr[] = _dateTime.split(" ", 2);
+        return "[E]" + super.toString() + "(" + arr[0] + ": " + arr[1] + ")";
+    }
 }

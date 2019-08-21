@@ -44,7 +44,7 @@ public class Duke {
                         taskList.addTask(newTask);
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + newTask.toString());
-                        System.out.println("Now you have " + taskList.numTasks + " tasks in the list");
+                        System.out.println("Now you have " + taskList.numTasks + " tasks in the list.");
                     }
                 } catch (DukeException err) {
                     System.out.println(err.getMessage());

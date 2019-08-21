@@ -35,8 +35,20 @@ public class Duke {
                 sc2.close();
                 System.out.print("    ____________________________________________________________\n" +
                         "     Nice! I've marked this task as done: \n" +
-                        "       " + targetedTask.toString() +"\n" +
+                        "       " + targetedTask.toString() + "\n" +
                         "    ____________________________________________________________\n");
+                input = sc.nextLine();
+            } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")){
+                Scanner sc2 = new Scanner(input);
+                sc2.next();
+                int taskNumToRemove = sc2.nextInt();
+                Task removed = tasks.remove(taskNumToRemove - 1);
+                System.out.print("    ____________________________________________________________\n" +
+                        "     Noted. I've removed this task: \n" +
+                        "       " + removed.toString() + "\n" +
+                        "     Now you have " + tasks.size() + " tasks in the list.\n" +
+                        "    ____________________________________________________________\n");
+                sc2.close();
                 input = sc.nextLine();
             } else {
                 Task t = null;
@@ -88,7 +100,7 @@ public class Duke {
                 input = sc.nextLine();
             }
         }
-
+        sc.close();
         System.out.print("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
                 "    ____________________________________________________________\n");

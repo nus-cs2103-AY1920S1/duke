@@ -17,7 +17,7 @@ public class Duke {
     private static int listCounter = 0;
 
     //public void runDuke() throws CommandNotRecognizedException
-    public static void main(String[] args) throws CommandNotRecognizedException, EmptyCommandField {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
 
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
@@ -40,7 +40,7 @@ public class Duke {
 
                     // Error Handling: ListEmpty
                     if(listCounter == 0){
-                        throw new EmptyListException();
+                        throw new EmptyListException("");
                     }
 
                     String printList = "Here are the tasks in your list:\n";
@@ -94,6 +94,10 @@ public class Duke {
                         throw new EmptyCommandField("deadline");
                     }
 
+                    if(tokenList.length != 2){
+                        throw new CommandFieldFormatException("deadline");
+                    }
+
                     list.add(new Deadline(tokenList[0], tokenList[1], false));
                     listCounter++;
 
@@ -103,7 +107,10 @@ public class Duke {
                 }
 
                 else if (readInput.toLowerCase().equals("done")) {
-                    // Might need to implement exception handling
+                    if(listCounter == 0){
+                        throw new EmptyListException("Cannot perform done.");
+                    }
+
                     int indexDone = sc.nextInt();
 
                     list.get(--indexDone).setDone();
@@ -146,7 +153,7 @@ public class Duke {
                 System.out.println(processText("\u263A The description of " + e.getMessage() + " cannot be empty."));
             }
             catch (EmptyListException l){
-                System.out.println(processText("\u263A List is empty!"));
+                System.out.println(processText("\u263A List is empty! " + l.getMessage()));
             }
 
         }
@@ -281,9 +288,19 @@ class CommandNotRecognizedException extends Exception{
     }
 }
 
+// For:
+// (1) Error printing empty list
+// (2) Error performing done on empty list
 class EmptyListException extends Exception{
-    public EmptyListException(){
-        super("Empty list");
+    public EmptyListException(String info){
+        super(info);
+    }
+}
+
+// Format of command is incorrect: not using "/"
+class CommandFieldFormatException extends Exception{
+    public CommandFieldFormatException(String command){
+        super(command);
     }
 }
 

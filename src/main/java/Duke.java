@@ -60,7 +60,7 @@ public class Duke {
                     printIndentedMsg("Now you have " + toDoList.size() + ((toDoList.size() <= 1) ? " task" : " tasks") + " in the list.");
                     printLine();
                     break;
-                case "Event":
+                case "event":
                     Event newEvent = new Event(msg.substring(6));
                     toDoList.add(newEvent);
                     printLine();

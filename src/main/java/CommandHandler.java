@@ -40,6 +40,10 @@ public class CommandHandler {
                     String at = eventParts[1];
                     tasks.addTask(new Event(eventText, at));
                     break;
+                case "delete":
+                    int taskNumberToRemove = Integer.parseInt(input);
+                    tasks.deleteTask(taskNumberToRemove);
+                    break;
                 default:
                     throw new InvalidCommandException();
             }
@@ -47,7 +51,6 @@ public class CommandHandler {
             if (dukeException instanceof EmptyTodoTextException) System.out.println("\t ☹ OOPS!!! The description of a todo cannot be empty.");
             else if (dukeException instanceof InvalidCommandException) System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
         OutputUtilities.printLine();
     }
 

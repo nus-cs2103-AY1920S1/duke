@@ -24,8 +24,17 @@ public class TaskList {
         Task t = tasks.get(taskNumber - 1);
         t.markAsCompleted();
 
-        System.out.println("\tNice! I've marked this task as done: \n" +
+        System.out.println("\t Nice! I've marked this task as done: \n" +
                 "\t  [✓] " + t.getTaskName() + " " + t.getDetails() );
+    }
+
+    public void deleteTask(int taskNumber) {
+        Task t = tasks.get(taskNumber - 1);
+        tasks.remove(t);
+
+        System.out.println("\t I've removed this task: \n" +
+                "\t  [✓] " + t.getTaskName() + " " + t.getDetails() + "\n" +
+                "\t Now you have " + tasks.size() + " tasks in the list");
     }
 
 

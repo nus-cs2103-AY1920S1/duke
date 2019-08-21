@@ -4,6 +4,8 @@ import DukePkg.Event;
 import DukePkg.Todo;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
@@ -46,6 +48,9 @@ public class Duke {
                         if (arr.length == 1 || arr.length > 2) {
                             throw new FormatException("☹ OOPS!!! The " + arr[0] + " command should be " + arr[0] + " + task No.");
                         }
+                        if (!arr[1].matches("(?<=\\s|^)\\d+(?=\\s|$)")){
+                            throw new FormatException("☹ OOPS!!! The " + arr[0] + " command should be followed by a integer.");
+                        }
                         int index = Integer.parseInt(arr[1]) - 1;
                         if(index >= tasks.size() || index < 0) {
                             throw new FormatException("☹ OOPS!!! The task No. you refer to is non-existent. Try another one.");
@@ -73,14 +78,26 @@ public class Duke {
                         Task t = new Task("");
                         t = new Todo(arr[1]);
                         if (!arr[0].equals("todo")) {
-                            String ddl[] = arr[1].split("\\B\\/\\w+" + " ", 2);
-                            if(ddl.length < 2 || ddl[0].equals("")) {
-                                throw new FormatException("☹ OOPS!!! Both description & time of " + arr[0] + " cannot be empty.");
-                            }
                             if(arr[0].equals("deadline")) {
-                                t = new Deadline(ddl[0], ddl[1]);
+                                String ddl[] = arr[1].trim().split("/by", 2);
+                                if(ddl.length < 2) {
+                                    throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be deadline description /by time.");
+                                } else if(arr[1].trim().matches("/by.*")) {
+                                    throw new FormatException("☹ oops!!! you forget to add description for the " + arr[0] + " command.");
+                                } else if(arr[1].trim().matches(".+ /by")) {
+                                    throw new FormatException("☹ oops!!! you forget to add time for the " + arr[0] + " command.");
+                                }
+                                t = new Deadline(ddl[0].trim(), ddl[1].trim());
                             } else {
-                                t = new Event(ddl[0], ddl[1]);
+                                String evt[] = arr[1].trim().split("/at", 2);
+                                if(evt.length < 2) {
+                                    throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be event description /at time.");
+                                } else if(arr[1].trim().matches("/at.*")) {
+                                    throw new FormatException("☹ oops!!! you forget to add description for the " + arr[0] + " command.");
+                                } else if(arr[1].trim().matches(".+ /at")) {
+                                    throw new FormatException("☹ oops!!! you forget to add time for the " + arr[0] + " command.");
+                                }
+                                t = new Event(evt[0].trim(), evt[1].trim());
                             }
                         }
                         tasks.add(t);

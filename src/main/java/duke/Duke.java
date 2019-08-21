@@ -1,8 +1,5 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.commands.Command;
-
 import java.util.Scanner;
 
 public class Duke {
@@ -15,18 +12,13 @@ public class Duke {
     private boolean running;
     private TaskList tasks;
 
-    public static void main(String args[]) {
-        Duke duke = new Duke();
-        duke.start();
-    }
-
     public Duke() {
         scanner = new Scanner(System.in);
         running = true;
         tasks = new TaskList(NUMBER_TASKS);
     }
 
-    private void start() {
+    public void start() {
         String input;
         say(HELLO_STRING);
         while (running) {

@@ -1,4 +1,4 @@
-package duke.tasks;
+package duke;
 
 public class EventTask extends Task {
     private String location;

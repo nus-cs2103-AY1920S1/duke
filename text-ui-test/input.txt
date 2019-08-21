@@ -1,0 +1,8 @@
+todo one two
+event three four /at five six
+deadline seven eight /by nine ten
+list
+done 1
+done 2
+list
+bye

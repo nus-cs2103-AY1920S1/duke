@@ -1,6 +1,4 @@
-package duke.commands;
-
-import duke.Duke;
+package duke;
 
 public abstract class Command {
     protected Duke duke;

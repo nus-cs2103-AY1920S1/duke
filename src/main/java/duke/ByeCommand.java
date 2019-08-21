@@ -1,6 +1,4 @@
-package duke.commands;
-
-import duke.Duke;
+package duke;
 
 public class ByeCommand extends Command{
 

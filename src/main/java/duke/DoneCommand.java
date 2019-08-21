@@ -1,7 +1,4 @@
-package duke.commands;
-
-import duke.Duke;
-import duke.tasks.Task;
+package duke;
 
 public class DoneCommand extends Command {
     private static final String DONE_TASK_STRING = "Nice! I've marked this task as done:\n";

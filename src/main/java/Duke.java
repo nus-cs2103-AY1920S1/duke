@@ -21,7 +21,7 @@ public class Duke {
             }
 
             else if (s.toLowerCase().equals("list")) {
-                System.out.println(line);
+                System.out.println(line + "\n Here are the tasks in your list:");
                 for (int i = 1; i <= count; i++) {
                     System.out.println(" " + i + ". " + array[i - 1].toString());
                 }

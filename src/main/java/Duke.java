@@ -15,6 +15,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         boolean isRunning = true;
+        TaskList commands = new TaskList();
 
         while (isRunning && sc.hasNextLine()) {
             String command = sc.nextLine().trim();
@@ -24,13 +25,17 @@ public class Duke {
             case "bye":
                 isRunning = false;
                 break;
+            // List all stored commands in the TaskList
+            case "list":
+                System.out.println(Duke.format(commands.toString()));
+                break;
             // Catch empty commands (ENTER key pressed)
             case "":
                 System.out.println(Duke.format("No command issued."));
                 break;
-            // Otherwise echo the input command
+            // Otherwise store the commands entered in the TaskList
             default:
-                System.out.println(Duke.format(command));
+                System.out.println(Duke.format(commands.addTask(command)));
                 break;
             }
         }

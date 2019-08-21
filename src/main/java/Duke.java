@@ -39,9 +39,19 @@ public class Duke {
                     System.out.println("    Nice! I've marked this task as done: ");
                     System.out.println("     " + list[Integer.parseInt(echoArr[1]) - 1]);
                 } else {
-                    System.out.println("    added: " + echo);
-                    list[counter] = new Task(echo);
+                    if(echoArr[0].equals("deadline")) {
+                        list[counter] = new Deadline(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
+                                                     echo.substring(echo.indexOf("/by") + 4));
+                    } else if(echoArr[0].equals("todo")) {
+                        list[counter] = new Todo(echo.substring(echo.indexOf(" ") + 1));
+                    } else if(echoArr[0].equals("event")) {
+                        list[counter] = new Event(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
+                                echo.substring(echo.indexOf("/at") + 4));
+                    }
+                    System.out.println("    Got it. I've added this task:");
+                    System.out.println("     " + list[counter]);
                     counter++;
+                    System.out.println("    Now you have " + counter + " in the list.");
                 }
                 System.out.println(line);
                 echo = sc.nextLine();

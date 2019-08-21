@@ -1,11 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
 	static Scanner scanner = new Scanner(System.in);
 	static Parser inputParser = new Parser();
-	static TaskList taskList = new TaskList("DukeSaveFile.txt");
+	static String filePath = "DukeSaved.txt";
+	static TaskList taskList = new TaskList();
 	static String logo = " ____        _        \n"
 			+ "|  _ \\ _   _| | _____ \n"
 			+ "| | | | | | | |/ / _ \\\n"
@@ -21,14 +23,23 @@ public class Duke {
 		Output.setLeftBorder("    ");
 		Output.setLeftIndent(1);
 		new Output("Hello! I'm Duke :)", "What can I do for you?").print();
+		//try to load saved file if it exists
+		try {
+			taskList.loadFrom(filePath);
+		} catch (DukeException e) {
+			//do nothing
+		}
+		//begin taking input and process
 		while (takingInput) {
 			executeCommand(inputParser, getUserInput());
 		}
+		//when done try to save to path provided
 		try {
-			taskList.save();
-		} catch (IOException e) {
-			//
+			taskList.saveTo(filePath);
+		} catch (DukeException e) {
+			new Output("☹ OOPS!!! Your list cannot be saved. (" + filePath + ") is not a valid file path!").print();
 		}
+		//print goodbye msg
 		new Output("Bye. Hope to see you again soon!").print();
 	}
 

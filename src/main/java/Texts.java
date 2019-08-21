@@ -10,7 +10,7 @@ class Texts {
     }
     public void print() {
         for (Task t : texts) {
-            System.out.println(t.getIndex() + t.getStatus() + t);
+            System.out.println(t.getIndex() + t.getStatus()+ t);
         }
 
     }

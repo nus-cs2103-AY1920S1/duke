@@ -8,10 +8,14 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
         Duke duke = new Duke();
-        duke.run();
+        try {
+            duke.run();
+        } catch(IllegalDukeDescriptionException|IllegalDukeFormatException|IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    private void run() {
+    private void run() throws IllegalDukeDescriptionException, IllegalDukeFormatException, IllegalArgumentException {
         Scanner sc = new Scanner(System.in);
         String greet = "Hello! I'm Duke\n" +
                 "What can I do for you?";
@@ -40,34 +44,56 @@ public class Duke {
                         break;
                     case todo:
                         String descriptionT = sc.nextLine();
-                        texts.add(descriptionT,"T");
-                        System.out.println("Got it. I've added this task:\n" + "  "
-                                + "[T]" + texts.getLast() + "\nNow you have " +
-                                texts.getNumber() + " tasks in the list.");
+                        if (descriptionT.isBlank()) {
+                            throw new IllegalDukeDescriptionException("todo");
+                        } else {
+                            texts.add(descriptionT,"T");
+                            System.out.println("Got it. I've added this task:\n" + "  "
+                                    + "[T]" + texts.getLast() + "\nNow you have " +
+                                    texts.getNumber() + " tasks in the list.");
+                        }
                         break;
                     case deadline:
                         String allD = sc.nextLine();
-                        int placeD = allD.indexOf("/");
-                        String descriptionD = allD.substring(0, placeD - 1);
-                        String dateD = allD.substring(placeD + 3, allD.length());
-                        texts.add(descriptionD + " (by:" + dateD + ")", "D");
-                        System.out.println("Got it. I've added this task:\n" + "  "
-                                + "[D]" + texts.getLast() + "\nNow you have " +
-                                texts.getNumber() + " tasks in the list.");
+                        if (allD.contains("/by")) {
+                            int placeD = allD.indexOf("/");
+                            String descriptionD = allD.substring(0, placeD - 1);
+                            String dateD = allD.substring(placeD + 3, allD.length());
+                            if (descriptionD.isBlank() || dateD.isBlank()) {
+                                throw new IllegalDukeDescriptionException("deadline");
+                            } else {
+                                texts.add(descriptionD + " (by:" + dateD + ")", "D");
+                                System.out.println("Got it. I've added this task:\n" + "  "
+                                        + "[D]" + texts.getLast() + "\nNow you have " +
+                                        texts.getNumber() + " tasks in the list.");
+                            }
+                        } else {
+                            throw new IllegalDukeFormatException("deadline", "/by");
+                        }
+
+
                         break;
                     case event:
                         String allE = sc.nextLine();
-                        int placeE = allE.indexOf("/");
-                        String descriptionE = allE.substring(0, placeE - 1);
-                        String dateE = allE.substring(placeE + 3, allE.length());
-                        texts.add(descriptionE + " (at:" + dateE + ")", "E");
-                        System.out.println("Got it. I've added this task:\n" + "  "
-                                + "[E]" + texts.getLast() + "\nNow you have " +
-                                texts.getNumber() + " tasks in the list.");
+                        if (allE.contains("/at")) {
+                            int placeE = allE.indexOf("/");
+                            String descriptionE = allE.substring(0, placeE - 1);
+                            String dateE = allE.substring(placeE + 3, allE.length());
+                            if (descriptionE.isBlank() || dateE.isBlank()) {
+                                throw new IllegalDukeDescriptionException("event");
+                            } else {
+                                texts.add(descriptionE + " (at:" + dateE + ")", "E");
+                                System.out.println("Got it. I've added this task:\n" + "  "
+                                        + "[E]" + texts.getLast() + "\nNow you have " +
+                                        texts.getNumber() + " tasks in the list.");
+                            }
+                        } else {
+                            throw new IllegalDukeFormatException("event", "/at");
+                        }
                         break;
                 }
             } catch(IllegalArgumentException e) {
-                throw new IllegalArgumentException();
+                throw new IllegalDukeArgumentException();
             }
         }
     }

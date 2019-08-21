@@ -1,12 +1,10 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected int index;
     protected String status;
 
-    public Task(String description, int index, String status) {
+    public Task(String description, String status) {
         this.description = description;
-        this.index = index;
         this.status = status;
         this.isDone = false;
     }
@@ -18,9 +16,7 @@ public class Task {
     public void setDone() {
         this.isDone = true;
     }
-    public String getIndex() {
-        return this.index + ".";
-    }
+
     public String getStatus() {
         return "[" + this.status + "]";
     }

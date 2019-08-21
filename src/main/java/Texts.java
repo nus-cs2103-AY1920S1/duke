@@ -2,15 +2,15 @@ import java.util.LinkedList;
 
 class Texts {
     private LinkedList<Task> texts = new LinkedList<>();
-    private int counter = 0;
+
     public void add(String text, String status) {
-        counter++;
-        Task task = new Task(text, counter, status);
+        Task task = new Task(text, status);
         texts.add(task);
     }
     public void print() {
         for (Task t : texts) {
-            System.out.println(t.getIndex() + t.getStatus()+ t);
+            int index = texts.indexOf(t) + 1;
+            System.out.println( index + t.getStatus()+ t);
         }
 
     }
@@ -22,5 +22,9 @@ class Texts {
     }
     public int getNumber() {
         return texts.size();
+    }
+
+    public Task remove(int i) {
+        return texts.remove(i);
     }
 }

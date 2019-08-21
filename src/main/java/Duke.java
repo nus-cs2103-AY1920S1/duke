@@ -91,6 +91,12 @@ public class Duke {
                             throw new IllegalDukeFormatException("event", "/at");
                         }
                         break;
+                    case delete:
+                        int indexD = sc.nextInt() - 1;
+                        Task t = texts.remove(indexD);
+                        System.out.println("Noted. I've removed this task: \n" +
+                                "  " + t.getStatus() + t.toString() +
+                                "\nNow you have " + texts.getNumber() + " tasks in the list.");
                 }
             } catch(IllegalArgumentException e) {
                 throw new IllegalDukeArgumentException();
@@ -101,5 +107,5 @@ public class Duke {
 }
 
 enum Command {
-    list,bye,done,todo,deadline,event;
+    list,bye,done,todo,deadline,event,delete;
         }

@@ -42,16 +42,22 @@ public class Duke {
 						case "deadline":
 							if (line.isEmpty()) throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
 							int indexBy = line.indexOf("/"); // potential source of error
+							if (indexBy == -1) {
+								throw new DukeException("Put / before by!");
+							}
 							desc = line.substring(0, indexBy - 1); // start after space, end before space before /
-							String by = line.substring(indexBy + 3);
+							String by = line.substring(indexBy + 4);
 							task = new Deadline(desc, by);
 							break;
 
 						case "event":
 							if (line.isEmpty()) throw new DukeException("☹ OOPS!!! The description of a " + next + " cannot be empty.");
 							int indexAt = line.indexOf("/");
+							if (indexAt == -1) {
+								throw new DukeException("Put / before at!");
+							}
 							desc = line.substring(0, indexAt - 1); // start after space, end before space before /
-							String at = line.substring(indexAt + 3);
+							String at = line.substring(indexAt + 4);
 							task = new Event(desc, at);
 							break;
 
@@ -59,7 +65,7 @@ public class Duke {
 							throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 					}
 					list.add(task);
-					System.out.println("Got it. I've added this task:\n  " + task.toString()); // not overridden???
+					System.out.println("Got it. I've added this task:\n  " + task.toString());
 					System.out.println("Now you have " + list.size() + " tasks in the list.");
 				} catch (DukeException de) {
 					System.out.println(de.toString());

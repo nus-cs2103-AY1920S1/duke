@@ -31,7 +31,7 @@ public class Duke {
     private static void process(String input) {
         if (input.equalsIgnoreCase("list")) {
             DukeFormatter.prettyPrint(taskList);
-        } else if (input.substring(0, 4).equalsIgnoreCase("done")) {
+        } else if (input.startsWith("done")) {
             // Note: "done" must be followed by an integer
             int taskIndex = Integer.parseInt(input.substring(5));
                     // TODO: handle parseInt error
@@ -44,7 +44,7 @@ public class Duke {
             completedTask.markAsDone();
             DukeFormatter.prettyPrint("Nice! I've marked this task as done:\n  "
                     + completedTask.toString());
-        } else if (input.substring(0, 4).equalsIgnoreCase("undo")) {
+        } else if (input.startsWith("undo")) {
             // TODO: get rid of duplicated code for "done" and "undo"
             int taskIndex = Integer.parseInt(input.substring(5));
             if (!isValid(taskIndex)) {
@@ -71,21 +71,20 @@ public class Duke {
      */
     private static void addNewTask(String task) {
         // TODO: reorganise and reduce code duplication
-        if (task.substring(0, 4).equalsIgnoreCase("todo")) { // Todo
+        if (task.startsWith("todo")) { // Todo
             taskList.add(new Todo(task.substring(5)));
-        } else if (task.length() < 5) { // FIXME: treat as Todo for now
-            taskList.add(new Todo(task));
-        } else if (task.substring(0, 5).equalsIgnoreCase("event")) { // Event
+        } else if (task.startsWith("event")) { // Event
             String[] taskDetails = task.substring(6).split(" /at ");
             taskList.add(new Event(taskDetails[0], taskDetails[1]));
-        } else if (task.length() < 8) { // FIXME: treat as Todo for now
-            taskList.add(new Todo(task));
-        } else if (task.substring(0, 8).equalsIgnoreCase( "deadline")) { // Deadline
+        } else if (task.startsWith("deadline")) { // Deadline
             String[] taskDetails = task.substring(9).split(" /by ");
             taskList.add(new Deadline(taskDetails[0], taskDetails[1]));
         } else {
             taskList.add(new Todo(task));
         }
+    }
+
+    private static void validate(String input) throws DukeException {
     }
 
     /**
@@ -106,9 +105,15 @@ public class Duke {
         DukeFormatter.prettyPrint(
                 "Hello! I'm Duke\nWhat can I do for you?");
         while (scanner.hasNext()) {
-            String userInput = scanner.nextLine().strip();
+            String userInput = scanner.nextLine();
+            userInput = userInput.strip();
             if (userInput.equalsIgnoreCase("bye")) { break; }
-            process(userInput);
+            try {
+                validate(userInput);
+                process(userInput);
+            } catch (DukeException e) {
+                DukeFormatter.prettyPrint("Oops! " + e.getMessage());
+            }
         }
         DukeFormatter.prettyPrint("Bye. Hope to see you again soon!");
     }

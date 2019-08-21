@@ -28,12 +28,12 @@ public class Duke {
             if (task.getType().equals("todo")) {
                 System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString());
             } else if (task.getType().equals("event")) {
-                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString() + "(at: " + task.getDate() + ")");
+                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString() + " (at: " + task.getDate() + ")");
             } else {
-                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString() + "(by: " + task.getDate() + ")");
+                System.out.println("    " + list_num + "." + task.getTypeIcon() + '[' + task.getStatusIcon() + "] " + task.toString() + " (by: " + task.getDate() + ")");
             }
         }
-        System.out.println("    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________");
     }
 
     public static void printInput(String input) {
@@ -46,7 +46,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                 "     Nice! I've marked this task as done: \n" +
                 "       [" + '+' + "] " + task + '\n' +
-                "    ____________________________________________________________\n");
+                "    ____________________________________________________________");
     }
 
     public static void printTodo(Todo t) {
@@ -60,7 +60,7 @@ public class Duke {
     public static void printDeadline(Deadline d) {
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                "       [D][ ] " + d.toString() + "(by: " + d.getDate() + ")\n" +
+                "       [D][ ] " + d.toString() + " (by: " + d.getDate() + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________");
     }
@@ -68,7 +68,7 @@ public class Duke {
     public static void printEvent(Event e) {
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                "       [E][ ] " + e.toString() + "(at: " + e.getDate() + ")\n" +
+                "       [E][ ] " + e.toString() + " (at: " + e.getDate() + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________");
     }
@@ -91,21 +91,21 @@ public class Duke {
                 task.setDone();
                 printDone(task.toString());
             } else if (input_string[0].equals("todo")) {
-                String task_name = (user_input.split(" ", 2))[1];
+                String task_name = ((user_input.split(" ", 2))[1]).strip();
                 Todo t = new Todo(task_name);
                 tasks.add(t);
                 printTodo(t);
             } else if (input_string[0].equals("deadline")) {
                 String[] separate_task_date = user_input.split("/");
-                String task_name = (separate_task_date[0].split(" ", 2))[1];
-                String date = (separate_task_date[1].split(" ", 2))[1];
+                String task_name = ((separate_task_date[0].split(" ", 2))[1]).strip();
+                String date = ((separate_task_date[1].split(" ", 2))[1]).strip();
                 Deadline d = new Deadline(task_name, date);
                 tasks.add(d);
                 printDeadline(d);
             } else if (input_string[0].equals("event")) {
                 String[] separate_task_date = user_input.split("/");
-                String task_name = (separate_task_date[0].split(" ", 2))[1];
-                String date = (separate_task_date[1].split(" ", 2))[1];
+                String task_name = ((separate_task_date[0].split(" ", 2))[1]).strip();
+                String date = ((separate_task_date[1].split(" ", 2))[1]).strip();
                 Event e = new Event(task_name, date);
                 tasks.add(e);
                 printEvent(e);

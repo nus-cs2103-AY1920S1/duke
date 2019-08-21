@@ -46,6 +46,11 @@ public class Duke {
                         ui.showAddition(task);
                         ui.showTaskSize(taskList);
                         break;
+                    case "delete":
+                        task = taskList.delete(getIndexFrom(inputLine));
+                        ui.showDeletion(task);
+                        ui.showTaskSize(taskList);
+                        break;
                     default:
                         throw new DukeException(ui.MESSAGE_INVALID_COMMAND_FORMAT);
                 }
@@ -65,11 +70,11 @@ public class Duke {
         try {
             int index = Integer.parseInt(inputLine.strip().split(" ")[1]);
             if (index <= 0 || index > taskList.size()) {
-                throw new DukeException(ui.MESSAGE_INVALID_MARK_DONE_FORMAT);
+                throw new DukeException(ui.MESSAGE_INVALID_TASK_INDEX);
             }
             return index;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(ui.MESSAGE_INVALID_MARK_DONE_FORMAT);
+            throw new DukeException(ui.MESSAGE_INVALID_TASK_INDEX);
         }
     }
 

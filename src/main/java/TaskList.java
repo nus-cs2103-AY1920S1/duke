@@ -27,6 +27,12 @@ public class TaskList {
         return task;
     }
 
+    public Task delete(int index) {
+        Task task = this.tasks.get(index - 1);
+        this.tasks.remove(index - 1);
+        return task;
+    }
+
     public List<String> getTaskNames() {
         List<String> taskNames = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {

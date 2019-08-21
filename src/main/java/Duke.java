@@ -19,58 +19,75 @@ public class Duke {
 
         String command = promptEntry();
 
+try {
+
+    while (!command.equals("bye")) {
 
 
-        while (!command.equals("bye")) {
+        switch (command) {
 
+            case "list":
+                printList(taskList);
+                break;
 
-            switch (command) {
-
-                case "list":
-                    printList(taskList);
-                    break;
-
-                case "todo":
-                    ToDo newTodo = new ToDo(sc.nextLine());
+            case "todo":
+                String task = sc.nextLine().trim();
+                if(!task.isEmpty()) {
+                    ToDo newTodo = new ToDo(task);
                     addTask(newTodo, taskList);
-                    break;
+                } else {
+                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                break;
 
-                case "deadline":
-                    String wholeTask = sc.nextLine();
-                    int index = wholeTask.indexOf('/');
+            case "deadline":
+                String wholeTask = sc.nextLine();
+                int index = wholeTask.indexOf('/');
+                if(index > 0) {
                     //what the task is
-                    String description = wholeTask.substring(0, index);
+                    String description = wholeTask.substring(0, index).trim();
                     //when it is due by
-                    String date = wholeTask.substring(index + 4);
+                    String date = wholeTask.substring(index + 4).trim();
                     Deadline newDeadlineTask = new Deadline(description, date);
                     addTask(newDeadlineTask, taskList);
-                    break;
+                } else {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
+                            " It must be in the format <description> /by <date/time> ");
+                }
+                break;
 
-                case "event":
-                    String eventAndDate = sc.nextLine();
-                    int index2 = eventAndDate.indexOf('/');
+            case "event":
+                String eventAndDate = sc.nextLine();
+                int index2 = eventAndDate.indexOf('/');
+                if(index2 > 0) {
                     //what the task is
-                    String eventDescr = eventAndDate.substring(0, index2);
+                    String eventDescr = eventAndDate.substring(0, index2).trim();
                     //when it is due by
-                    String date2 = eventAndDate.substring(index2 + 4);
+                    String date2 = eventAndDate.substring(index2 + 4).trim();
                     Event newEventTask = new Event(eventDescr, date2);
                     addTask(newEventTask, taskList);
-                    break;
+                } else {
+                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
+                            " It must be in the format <description> /at <start and end of specific time> ");
+                }
+                break;
 
-                case "done":
-                    int taskNumber = sc.nextInt()-1;
-                    completeTask(taskNumber, taskList);
-                    break;
+            case "done":
+                int taskNumber = sc.nextInt() - 1;
+                completeTask(taskNumber, taskList);
+                break;
 
-                default:
-
-                    break;
-
-            }
-            command = promptEntry();
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
-        printCommand("Bye. Hope to see you again soon!");
+        command = promptEntry();
+
+    }
+    printCommand("Bye. Hope to see you again soon!");
+} catch (DukeException e) {
+    System.out.println(e);
+}
 
     }
 
@@ -96,7 +113,7 @@ public class Duke {
         } else {
 
             for (Task item : toDoList) {
-                System.out.println(n + ". " + item);
+                System.out.println(n + "." + item);
                 n++;
             }
 
@@ -115,10 +132,10 @@ public class Duke {
         list.add(current);
         if(list.size() >1) {
             System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list ");
+                    "Now you have " + list.size() + " tasks in the list. ");
         } else {
             System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list ");
+                    "Now you have " + list.size() + " task in the list. ");
         }
     }
 }

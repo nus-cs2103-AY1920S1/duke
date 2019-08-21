@@ -72,7 +72,7 @@ public class Duke {
                             }
                         }
                         tasks.add(t);
-                        String output = "Got it. I've added this task: \n" +
+                        String output = "Got it. I've added this task:\n" +
                                 "    " + t.toString() + "\n" +
                                 "Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the list.";
                         System.out.println(output);

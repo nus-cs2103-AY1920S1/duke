@@ -17,5 +17,7 @@ public class Duke {
 
         System.out.println(welcome);
 
+        Scanner scanner = new Scanner(System.in);
+
     }
 }

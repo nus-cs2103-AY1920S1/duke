@@ -27,6 +27,8 @@ public class Duke {
                     System.out.println("Which task on the list have you completed? (Eg 'done 2')");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("OOPS!!! That task is not on the list, please check the list again by calling 'list'.");
+                } catch (NumberFormatException e) {
+                    System.out.println("OOPS!!! Wrong format. Please key in a valid number (Eg 'done 2')");
                 }
 
                 command = input.nextLine();

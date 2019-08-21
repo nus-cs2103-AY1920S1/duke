@@ -10,6 +10,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         */
         Scanner sc = new Scanner(System.in);
+        String[] list = new String[100];
+        int pos = 0;
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -19,8 +21,17 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 return;
+            } else if (input.equals("list")) {
+                int k = 0;
+                while (k != pos) {
+                    int bullet = k + 1;
+                    System.out.println(bullet + ". " + list[k]);
+                    k++;
+                }
             } else {
-                System.out.println(input);
+                list[pos] = input;
+                System.out.println("added: " + input);
+                pos++;
             }
 
         }

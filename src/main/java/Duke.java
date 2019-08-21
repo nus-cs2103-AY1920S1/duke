@@ -11,11 +11,17 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         greet();
         Scanner sc = new Scanner(System.in);
+        Tasks tasks = new Tasks();
         String input = sc.next();
         while(!input.equals("bye")) {
-            System.out.println("    ------------------------------------------------------------");
-            System.out.println("    " + input + sc.nextLine());
-            System.out.println("    ------------------------------------------------------------");
+            switch (input) {
+                case "list":
+                    tasks.list();
+                    break;
+                default :
+                    tasks.add(input + sc.nextLine());
+                    break;
+            }
             input = sc.next();
         }
         bye();

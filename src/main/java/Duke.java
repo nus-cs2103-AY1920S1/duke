@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -35,7 +36,10 @@ public class Duke {
         System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
     }
 
-    public void done(int number) {
+    public void done(int number) throws IndexOutOfBoundsException {
+        if (number > Duke.numberOfTasks || number == 0) {
+            throw new IndexOutOfBoundsException("The task number does not exist.");
+        }
         Task task = Duke.tasks.get(number - 1);
         task.setDone();
         System.out.println("Nice! I've marked this task as done: ");
@@ -46,38 +50,54 @@ public class Duke {
         Duke duke = new Duke();
         duke.greet();
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            String command = scanner.nextLine();
-            if (command.equalsIgnoreCase("bye")) {
-                duke.bye();
-                break;
-            } else if (command.equalsIgnoreCase("list")){
-                duke.list();
-            } else {
-                String[] commandSplit = command.split(" ");
-                String deadline = "deadline";
-                String event = "event";
-                String todo = "todo";
-                if (!commandSplit[0].equalsIgnoreCase("done")) {
-                    if (commandSplit[0].equalsIgnoreCase(deadline)) {
-                        String[] detail = command.substring(deadline.length()).split("/by");
+        String command = scanner.nextLine();
+
+        while (!command.equalsIgnoreCase("bye")) {
+            try {
+                if (command.equalsIgnoreCase("list")) {
+                    duke.list();
+                } else {
+                    String[] commandSplit = command.split(" ");
+                    String deadline = "deadline";
+                    String event = "event";
+                    String todo = "todo";
+                    if (commandSplit[0].equalsIgnoreCase("done")) {
+                        int index = Integer.parseInt(commandSplit[1]);
+                        duke.done(index);
+                    } else if (commandSplit[0].equalsIgnoreCase(deadline)) {
+                        String details = command.substring(deadline.length()).trim();
+                        if (details.length() == 0) {
+                            throw new InputMismatchException("The description of a deadline cannot be empty.");
+                        }
+                        String[] detail = details.split(" /by");
                         Task addTask = new Deadline(detail[0], detail[1]);
                         duke.add(addTask);
                     } else if (commandSplit[0].equalsIgnoreCase(event)) {
-                        String[] detail = command.substring(event.length()).split("/at");
-                        Task addTask =  new Event(detail[0], detail[1]);
+                        String details = command.substring(event.length()).trim();
+                        if (details.length() == 0) {
+                            throw new InputMismatchException("The description of a event cannot be empty.");
+                        }
+                        String[] detail = details.split(" /at");
+                        Task addTask = new Event(detail[0], detail[1]);
+                        duke.add(addTask);
+                    } else if (commandSplit[0].equalsIgnoreCase(todo)) {
+                        String details = command.substring(todo.length()).trim();
+                        if (details.length() == 0) {
+                            throw new InputMismatchException("The description of a todo cannot be empty.");
+                        }
+                        Task addTask = new Todo(details);
                         duke.add(addTask);
                     } else {
-                        Task addTask = new Todo(command.substring(todo.length()));
-                        duke.add(addTask);
+                        throw new InputMismatchException("I'm sorry, but I don't know what that means :-(");
                     }
-
-                } else {
-                    int index = Integer.parseInt(commandSplit[1]);
-                    duke.done(index);
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("OOPS!!! " + e.getMessage());
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! " + e.getMessage());
             }
+            command = scanner.nextLine();
         }
-
+        duke.bye();
     }
 }

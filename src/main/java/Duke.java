@@ -45,8 +45,33 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(currentTask);
                 System.out.println("___________________________________");
-            }
-            else {
+            } else if (inputCommand.equals("todo")){
+                String subInput = inputString.substring(5);
+                Task newTask = new Todo(subInput);
+                taskList.add(newTask);
+                System.out.println("___________________________________");
+                System.out.println("Got it. I've added this task:\n" + newTask);
+                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("___________________________________");
+            } else if (inputCommand.equals("deadline")) {
+                String subInput1 = inputString.substring(9, inputString.lastIndexOf("/by") - 1);
+                String subInput2 = inputString.substring(inputString.lastIndexOf("/by") + 4);
+                Task newTask = new Deadline(subInput1, subInput2);
+                taskList.add(newTask);
+                System.out.println("___________________________________");
+                System.out.println("Got it. I've added this task:\n" + newTask);
+                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("___________________________________");
+            } else if (inputCommand.equals("event")) {
+                String subInput1 = inputString.substring(6, inputString.lastIndexOf("/at"));
+                String subInput2 = inputString.substring(inputString.lastIndexOf("/at") + 4);
+                Task newTask = new Event(subInput1, subInput2);
+                taskList.add(newTask);
+                System.out.println("___________________________________");
+                System.out.println("Got it. I've added this task:\n" + newTask);
+                System.out.println("Now you have " + Task.total + " tasks in the list.");
+                System.out.println("___________________________________");
+            } else {
                 System.out.println("___________________________________");
                 System.out.println("added: " + inputString);
                 System.out.println("___________________________________");

@@ -11,16 +11,16 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }
 
+    private final TaskSerializer storage;
     private final UserInterface ui;
     private List<Task> tasks;
-    private final Path TASK_STORAGE_PATH;
 
     public Duke(String filePath) {
         ui = new UserInterface();
+        storage = new TaskSerializer(Path.of(filePath));
 
-        TASK_STORAGE_PATH = Path.of(filePath);
         try {
-            tasks = TaskSerializer.parseFromFile(TASK_STORAGE_PATH);
+            tasks = storage.load();
         } catch (FileIOException | TokenParseError exc) {
             if (exc.getCause() instanceof NoSuchFileException) {
                 tasks = new ArrayList<>();
@@ -70,7 +70,7 @@ public class Duke {
                     Task t = tasks.get(taskIndex - 1);
                     t.markAsDone();
 
-                    TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
+                    storage.save(tasks);
 
                     StringJoiner successMessage = UserInterface.createStringJoiner("Nice! I've marked this task as done:");
                     successMessage.add("  " + UserInterface.formatTask(t));
@@ -83,7 +83,7 @@ public class Duke {
                     Task t = tasks.get(taskIndex - 1);
                     tasks.remove(taskIndex - 1);
 
-                    TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
+                    storage.save(tasks);
 
                     StringJoiner successMessage = UserInterface.createStringJoiner("Noted. I've removed this task:");
                     successMessage.add("  " + UserInterface.formatTask(t));
@@ -125,7 +125,7 @@ public class Duke {
 
                         tasks.add(t);
 
-                        TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
+                        storage.save(tasks);
 
                         StringJoiner successMessage = UserInterface.createStringJoiner("Got it. I've added this task: ");
                         successMessage.add("  " + UserInterface.formatTask(t));

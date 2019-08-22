@@ -23,7 +23,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        storinglist = new Task[100];
+        storinglist = new ArrayList<>();
 
 
         while (true) {
@@ -32,20 +32,20 @@ public class Duke {
 
                 if (command.equals("list")) {
                     System.out.println("--------------------------");
-                    for (int x = 0; x < i; x++) {
-                        System.out.println(x + 1 + ". " + storinglist[x]);
+                    for (int x = 0; x < storinglist.size(); x++) {
+                        System.out.println(x + 1 + ". " + storinglist.get(x));
                     }
                     System.out.println("\n--------------------------");
                 } else if (command.contains("done")) {
-                    if (command.length() < 2) {
+                    if (!command.contains(" ")) {
                         throw new IllegalCommandException("There must be a number after done.");
                     }
                     String splitstring[] = command.split(" ");
                     int taskdone = Integer.valueOf(splitstring[1]);
-                    storinglist[taskdone - 1].markasdone();
+                    storinglist.get(taskdone - 1).markasdone();
                     System.out.println("--------------------------\n"
                             + "Nice! I've marked this tasked as done:\n"
-                            + storinglist[taskdone - 1]
+                            + storinglist.get(taskdone - 1)
                             + "\n\n--------------------------");
                 } else if (command.equals("bye")) {
                     System.out.println("--------------------------\n"
@@ -57,11 +57,10 @@ public class Duke {
                         throw new IllegalCommandException("The description of a todo cannot be empty.");
                     }
                     String splitcommand[] = command.split(" ", 2);
-                    storinglist[i] = new ToDos(splitcommand[1]);
-                    i++;
+                    storinglist.add(new ToDos(splitcommand[1]));
                     System.out.println("--------------------------\n"
-                            + "Got it. I've added this task:\n" + "  " + storinglist[i - 1]
-                            + "\nNow you have " + i + " tasks in the list"
+                            + "Got it. I've added this task:\n" + "  " + storinglist.get(storinglist.size()-1)
+                            + "\nNow you have " + storinglist.size() + " tasks in the list"
                             + "\n\n--------------------------");
 
                 } else if (command.contains("deadline")) {
@@ -70,11 +69,10 @@ public class Duke {
                     }
                     String splitcommand[] = command.split(" ", 2);
                     String splitdeadline[] = (splitcommand[1].split("/"));
-                    storinglist[i] = new Deadline(splitdeadline[0], splitdeadline[1]);
-                    i++;
+                    storinglist.add(new Deadline(splitdeadline[0], splitdeadline[1]));
                     System.out.println("--------------------------\n"
-                            + "Got it. I've added this task:\n" + "  " + storinglist[i - 1]
-                            + "\nNow you have " + i + " tasks in the list"
+                            + "Got it. I've added this task:\n" + "  " + storinglist.get(storinglist.size()-1)
+                            + "\nNow you have " + storinglist.size() + " tasks in the list"
                             + "\n\n--------------------------");
 
                 } else if (command.contains("event")) {
@@ -83,13 +81,27 @@ public class Duke {
                     }
                     String splitcommand[] = command.split(" ", 2);
                     String splitevent[] = (splitcommand[1].split("/"));
-                    storinglist[i] = new Events(splitevent[0], splitevent[1]);
-                    i++;
+                    storinglist.add(new Events(splitevent[0], splitevent[1]));
                     System.out.println("--------------------------\n"
-                            + "Got it. I've added this task:\n" + "  " + storinglist[i - 1]
-                            + "\nNow you have " + i + " tasks in the list"
+                            + "Got it. I've added this task:\n" + "  " + storinglist.get(storinglist.size() - 1)
+                            + "\nNow you have " + storinglist.size() + " tasks in the list"
                             + "\n\n--------------------------");
-                } else {
+                } else if (command.contains("delete")) {
+                    if (!command.contains(" ")) {
+                        throw new IllegalCommandException("Give a task to delete.");
+                    }
+                    String splitcommand[] = command.split(" ");
+                    int taskdelete = Integer.valueOf(splitcommand[1]);
+                    System.out.println("--------------------------\n"
+                            + "Noted. I've removed this task: \n"
+                            + "  " + storinglist.get(taskdelete - 1));
+                    storinglist.remove(taskdelete - 1);
+                    System.out.println("Now you have " + storinglist.size()
+                            + " tasks in the list "
+                            + "\n\n--------------------------");
+
+                }
+                    else {
                     throw new IllegalCommandException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (IllegalCommandException errormsg) {

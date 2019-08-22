@@ -1,0 +1,7 @@
+todo read lecture notes
+event attend lecture /at Monday 8-10am
+deadline finish quiz /by Sunday
+list
+done 2
+list
+bye

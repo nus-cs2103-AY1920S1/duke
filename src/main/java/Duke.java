@@ -34,12 +34,14 @@ public class Duke {
             } else if(input.equals("bye")) {
                 print("Bye. Hope to see you again soon!");
 
-           }else if (temp[0].equals("done")) {
+            }else if (temp[0].equals("done")) {
                 try {
+                    //no input number
                     if (temp.length == 1) {
                         throw new NumberFormatException();
                     }
                     int num = Integer.parseInt(temp[1]);
+                    //invalid num, will index out of bounds
                     if (num > tasks.size()) {
                         throw new NumberFormatException();
                     } else {
@@ -47,7 +49,7 @@ public class Duke {
                     }
                 }catch(NumberFormatException e){
                     print("☹ OOPS!!! Please input a valid number.");
-                } 
+                }
 
             }else {
                 Task task = null;
@@ -74,6 +76,7 @@ public class Duke {
                         String desc = input.substring(9, num);
                         //trim so that cannot pass with just spaces
                         String by = input.substring(num + 3).trim();
+                        //no input time after /by
                         if (by.equals("")) {
                            print("☹ OOPS!!! Please input a deadline after /by");
                         }else {
@@ -87,18 +90,37 @@ public class Duke {
                         print("☹ OOPS!!! The description of a event cannot be empty.");
                     }
                     //-1 means /at is not found
-                    else if (num == -1){
+                    else if (num == -1) {
                         print("☹ OOPS!!! Please type /at before inputting the time.");
-                    }else {
+                    } else {
                         String desc = input.substring(6, num);
                         //trim so that cannot pass with just spaces
                         String at = input.substring(num + 3).trim();
-
+                        //no input time after /at
                         if (at.equals("")) {
                             print("☹ OOPS!!! Please input a time after /at");
                         } else {
                             task = new Event(desc, at);
                         }
+                    }
+                }else if (temp[0].equals("delete")) {
+                    try {
+                        //no input number
+                        if (temp.length == 1) {
+                            throw new NumberFormatException();
+                        }
+                        int num = Integer.parseInt(temp[1]);
+                        //invalid num, will index out of bounds
+                        if (num > tasks.size()) {
+                            throw new NumberFormatException();
+                        } else {
+                            print("Noted. I've removed this task:\n" +
+                                    "     " + tasks.get(num-1) + "\n" +
+                                    "     Now you have " + (tasks.size() - 1) + " tasks in the list.");
+                           tasks.remove(num-1);
+                        }
+                    }catch(NumberFormatException e){
+                        print("☹ OOPS!!! Please input a valid number.");
                     }
                 } else {
 //                     if anything else other than todo, deadline or event as first word, don't recognise

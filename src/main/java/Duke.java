@@ -8,28 +8,37 @@ public class Duke {
                 "     " + content + "\n" +
                 "    ____________________________________________________________\n    ");
     }
+
     public static void main(String[] args) {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________");
         Scanner sc = new Scanner(System.in);
-        List<String> data = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         while (true) {
             String userInput = sc.nextLine();
             if (userInput.matches("bye")) {
                 printWithIndentation("Bye. Hope to see you again soon!");
                 break;
             } else if (userInput.matches("list")) {
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < data.size(); i++) {
-                    if(i != 0)
-                        builder.append("\n" + "     ");
-                    builder.append(i+1).append(". ").append(data.get(i));
+                StringBuilder builder = new StringBuilder("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    builder.append("\n" + "     ");
+                    builder.append(i + 1).append(".[").append(tasks.get(i).getStatusIcon())
+                            .append("] ").append(tasks.get(i).getDescription());
                 }
                 printWithIndentation(builder.toString());
+            } else if (userInput.matches("done .*")) {
+                int doneNo = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                tasks.get(doneNo).markAsDone();
+                StringBuilder builder = new StringBuilder("Nice! I've marked this task as done: ");
+                builder.append("\n" + "       ");
+                builder.append("[").append(tasks.get(doneNo).getStatusIcon())
+                        .append("] ").append(tasks.get(doneNo).getDescription());
+                printWithIndentation(builder.toString());
             } else {
-                data.add(userInput);
+                tasks.add(new Task(userInput));
                 printWithIndentation("added: " + userInput);
             }
         }

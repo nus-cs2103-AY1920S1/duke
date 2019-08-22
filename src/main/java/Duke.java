@@ -12,6 +12,7 @@ public class Duke {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= list.size(); i++) {
                     Task t = list.get(i-1);
                     System.out.println( i + "." + t);
@@ -24,8 +25,8 @@ public class Duke {
             } else if (input.equals("delete")) {
             	int num = Integer.parseInt(sc.next());
             	Task t = list.remove(num);
-            	System.out.println("Noted. I've removed this task: \n" + t + "\n Now you have "
-                            + list.size() + " tasks in the list.")
+            	System.out.println("Noted. I've removed this task: \n" + t + "\nNow you have "
+                            + list.size() + " tasks in the list.");
             } else {
                 try {
                     Task t;
@@ -45,7 +46,7 @@ public class Duke {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                     list.add(t);
-                    System.out.println("Got it. I've added this task: \n" + t + "\n Now you have "
+                    System.out.println("Got it. I've added this task: \n" + t + "\nNow you have "
                             + list.size() + " tasks in the list.");
                     } catch (DukeException ex) {
                         System.out.println(ex);

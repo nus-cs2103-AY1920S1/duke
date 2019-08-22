@@ -9,11 +9,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", task, time);
-    }
-
-    @Override
-    public String addTask() {
-        return "    Got it. I've added this task:\n       [E][✗] ";
+        return String.format("[E][%s] %s (at: %s)", done ? "✓" : "✗",task, time);
     }
 }

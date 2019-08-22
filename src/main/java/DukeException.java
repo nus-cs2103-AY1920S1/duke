@@ -40,8 +40,6 @@ public class DukeException extends Exception {
     }
 
     public void printError() {
-        formatter.printLine();
-        System.out.println(formatter.format(errorMessage()));
-        formatter.printLine();
+        formatter.printFormat(errorMessage());
     }
 }

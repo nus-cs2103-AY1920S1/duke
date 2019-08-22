@@ -9,12 +9,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", task, time);
-    }
-
-    @Override
-    public String addTask() {
-        return String.format("     Got it. I've added this task:\n       [D][✗] ");
+        return String.format("[D][%s] %s (by: %s)", done ? "✓" : "✗",task, time);
     }
 
 }

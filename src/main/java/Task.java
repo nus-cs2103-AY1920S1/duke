@@ -15,15 +15,4 @@ public abstract class Task {
         this.done = true;
     }
 
-    public String listify() {
-        return String.format("    %d.  [%s][%s] ", no, type, (done ? "✓" : "✗"));
-    }
-
-    public String doneify()  {
-        return  "     Nice! I've marked this task as done: \n" +
-                "       [✓] " + task;
-    }
-
-    public abstract String addTask();
-
 }

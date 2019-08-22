@@ -7,11 +7,6 @@ public class Todo extends Task {
     }
 
     public String toString() {
-        return task;
-    }
-
-    @Override
-    public String addTask() {
-        return "     Got it. I've added this task: \n       [T][✗] ";
+        return String.format("[T][%s] %s", done ? "✓" : "✗",task);
     }
 }

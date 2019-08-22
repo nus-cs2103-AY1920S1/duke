@@ -6,7 +6,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Formatter formatter = new Formatter();
-        Greeter greeter = new Greeter();
+        MessageGenerator greeter = new MessageGenerator();
         Storage storage = new Storage();
         Parser parser = new Parser();
         greeter.greet();
@@ -30,16 +30,20 @@ public class Duke {
                     case "deadline":
                     case "event":
                         String line = sc.nextLine();
-                        String[] words = line.split(" ");
+                        String[] description = line.split(" ");
                         try {
-                            storage.addTask(parser.createNewTask(count, first, words));
-                            count++;
-                            if (words.length <= 1) {
+                            if (description.length <= 1) {
                                 throw new DukeException(ErrorType.MISSING, first);
                             }
+                            storage.addTask(parser.createNewTask(count, first, description));
+                            count++;
                         } catch (DukeException e) {
                             e.printError();
                         }
+                        break;
+                    case "delete":
+                        int listNo = sc.nextInt();
+                        storage.deleteTask(listNo);
                         break;
                     default:
                         throw new DukeException(ErrorType.COMMAND);
@@ -51,3 +55,4 @@ public class Duke {
 
         }
 }
+

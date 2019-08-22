@@ -8,9 +8,17 @@ import java.util.StringJoiner;
 
 public class Duke {
     public static void main(String[] args) {
-        final Path TASK_STORAGE_PATH = Path.of("./data/duke.txt");
-        final UserInterface ui = new UserInterface();
-        List<Task> tasks;
+        new Duke("./data/duke.txt").run();
+    }
+
+    private final UserInterface ui;
+    private List<Task> tasks;
+    private final Path TASK_STORAGE_PATH;
+
+    public Duke(String filePath) {
+        ui = new UserInterface();
+
+        TASK_STORAGE_PATH = Path.of(filePath);
         try {
             tasks = TaskSerializer.parseFromFile(TASK_STORAGE_PATH);
         } catch (FileIOException | TokenParseError exc) {
@@ -22,7 +30,9 @@ public class Duke {
                 return;
             }
         }
+    }
 
+    public void run() {
         ui.printBlock("Hello! I'm Duke\n" +
                 "What can I do for you?");
         ui.println();

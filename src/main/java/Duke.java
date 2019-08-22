@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<String> list = new ArrayList<String>(100);
+    private static ArrayList<Task> list = new ArrayList<>(100);
 
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
@@ -17,40 +17,53 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         greet();
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String input = br.readLine();
+        Scanner sc = new Scanner(System.in);
 
-        while(!input.equals("bye")) {
-            if(!input.equals("list")) {
-                addList(input);
-                input = br.readLine();
-            } else {
+        while(sc.hasNextLine()) {
+            String input = sc.nextLine();
+            int i = input.indexOf(' ');
+            String first = getFirstWord(input);
+            if(input.equals("list")) {
                 readList();
-                input = br.readLine();
+            } else if (first.equals("done")) {
+                int taskNo = Integer.parseInt(input.substring(i + 1));
+                list.get(taskNo).markAsDone();
+            } else if(input.equals("bye")) {
+                exit();
+            } else {
+                addList(input);
             }
         }
-
-        exit();
     }
 
     private static void readList() {
+        System.out.println("Here are the tasks in your list:\n");
         for(int i = 1;i <= list.size();i++) {
-            System.out.println(i + ". " + list.get(i - 1));
+            System.out.println(i + ". " + "[" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).description);
         }
     }
 
     private static void addList(String input) {
-        list.add(input);
+        Task t = new Task(input);
+        list.add(t);
         System.out.println("added: " + input);
     }
 
 
     private static void exit() {
         System.out.println("Bye! Hope to see you again soon!");
+        System.exit(0);
     }
 
     private static void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
+    private static String getFirstWord(String input) {
+        if (input.indexOf(" ") > -1) {
+            return input.substring(0, input.indexOf(" "));
+        } else {
+            return input;
+        }
+    }
 }

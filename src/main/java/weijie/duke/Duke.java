@@ -19,7 +19,9 @@ public class Duke {
 
         HashMap<String, ITaskCommand> commandMap = new HashMap<>();
         commandMap.put("list", new ListCommand(repo));
-        commandMap.put("add", new AddCommand(repo));
+        commandMap.put("todo", new AddTodoCommand(repo));
+        commandMap.put("deadline", new AddDeadlineCommand(repo));
+        commandMap.put("event", new AddEventCommand(repo));
         commandMap.put("done", new DoneCommand(repo));
         TaskCommandFactory factory = new TaskCommandFactory(commandMap);
 

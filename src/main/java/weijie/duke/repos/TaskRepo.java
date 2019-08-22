@@ -19,6 +19,11 @@ public class TaskRepo implements IRepository<Task> {
     }
 
     @Override
+    public int getSize() {
+        return tasks.size();
+    }
+
+    @Override
     public Task get(int id) {
         return tasks.get(id);
     }

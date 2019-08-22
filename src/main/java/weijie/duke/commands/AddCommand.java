@@ -4,21 +4,18 @@ import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
 import weijie.duke.responses.TaskResponse;
 
-import java.util.Collections;
+public abstract class AddCommand implements ITaskCommand {
+    IRepository<Task> repo;
 
-public class AddCommand implements ITaskCommand {
-    private IRepository<Task> repo;
-
-    public AddCommand(IRepository<Task> repo) {
+    AddCommand(IRepository<Task> repo) {
         this.repo = repo;
     }
 
     @Override
-    public TaskResponse execute(String... args) {
-        String description = String.join(" ", args);
-        Task task = new Task(description);
-        repo.create(task);
+    public abstract TaskResponse execute(String... args);
 
-        return new TaskResponse("added: %s", Collections.singletonList(task));
+    String getResponseFormat() {
+        int size = repo.getSize();
+        return "Got it. I've added this task:\n  %s\nNow you have " + size + " tasks in the list.";
     }
 }

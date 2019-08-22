@@ -1,6 +1,6 @@
 package weijie.duke.models;
 
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getDescription() {
-        return "[" + getStatusIcon() + "] " + description;
+        return getTaskIcon() + "[" + getStatusIcon() + "] " + description + " " + getDateTimeInfo();
     }
 
     private String getStatusIcon() {
@@ -20,4 +20,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String getDateTimeInfo();
+
+    public abstract String getTaskIcon();
 }

@@ -44,16 +44,27 @@ public class Task {
         }
     }
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
     public String toStringWithIndex() {
-        return getListIndex() +  ". " + getTaskType() + " " + getStatusIcon() + " " + getDescription();
+        return getListIndex() +  ". " + toString();
     }
 
     @Override
     public String toString() {
-        return getTaskType() + " " + getStatusIcon() + " " + getDescription();
+        String stringToPrint = getTaskType() + " " + getStatusIcon() + " " + getDescription();
+        if(taskType.equals("deadline")) {
+            return stringToPrint + " (by: " + getDateTime() + ")";
+        } else if(taskType.equals("event")) {
+            return stringToPrint + " (at: " + getDateTime() + ")";
+        } else {
+            return stringToPrint;
+        }
     }
 }

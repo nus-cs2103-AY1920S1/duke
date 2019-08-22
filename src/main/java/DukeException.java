@@ -1,43 +1,16 @@
-public class DukeException extends Exception {
+public abstract class DukeException extends Exception {
     Formatter formatter = new Formatter();
     ErrorType type;
-    String message = "";
-    String taskType = "";
+    String message = "☹ OOPS!!! ";
+    String taskType;
 
-    public DukeException(ErrorType type) { this.type = type;}
+    public DukeException() { }
 
-    public DukeException(ErrorType type, String taskType) {
-        this.type = type;
+    public DukeException(String taskType) {
         this.taskType = taskType;
     }
 
-    public String errorMessage() {
-        message += "☹ OOPS!!! ";
-        switch (type) {
-            case COMMAND:
-                message += "I'm sorry, but I don't know what that means :-(";
-                break;
-            case MISSING:
-                message += "The description of a ";
-                switch (taskType) {
-                    case "E":
-                        message += "event";
-                        break;
-                    case "D":
-                        message += "deadline";
-                        break;
-                    case "T":
-                        message += "todo";
-                        break;
-                }
-                message += " cannot be empty.";
-                break;
-            case INVALIDITEM:
-                message += "This item does not exist on the list";
-                break;
-        }
-        return message;
-    }
+    public abstract String errorMessage();
 
     public void printError() {
         formatter.printFormat(errorMessage());

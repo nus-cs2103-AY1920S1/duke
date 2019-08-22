@@ -41,13 +41,13 @@ public class Storage {
     }
 
     public boolean invalidTaskNo(int taskNo) {
-        return taskNo > taskList.size();
+        return taskNo >= taskList.size();
     }
 
     public void setDone(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
-                throw new DukeException(ErrorType.INVALIDITEM);
+                throw new InvalidItemException();
             }
             taskList.get(taskNo).setDone();
             msgGenerator.printDone(taskList.get(taskNo));
@@ -59,7 +59,7 @@ public class Storage {
     public void deleteTask(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
-                throw new DukeException(ErrorType.INVALIDITEM);
+                throw new InvalidItemException();
             }
             removeTask(taskNo);
         } catch (DukeException e) {

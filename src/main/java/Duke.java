@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,8 +24,15 @@ public class Duke {
                         storage.printList();
                         break;
                     case "done":
-                        int number = sc.nextInt();
-                        storage.setDone(number);
+                            try {
+                                if (!sc.hasNextInt()) {
+                                    throw new InvalidItemException();
+                                }
+                                int number = sc.nextInt();
+                                storage.setDone(number);
+                            } catch (InvalidItemException e) {
+                                e.printError();
+                            }
                         break;
                     case "todo":
                     case "deadline":
@@ -33,22 +41,29 @@ public class Duke {
                         String[] description = line.split(" ");
                         try {
                             if (description.length <= 1) {
-                                throw new DukeException(ErrorType.MISSING, first);
+                                throw new MissingInputException(first);
                             }
                             storage.addTask(parser.createNewTask(count, first, description));
                             count++;
-                        } catch (DukeException e) {
+                        } catch (MissingInputException e) {
                             e.printError();
                         }
                         break;
                     case "delete":
-                        int listNo = sc.nextInt();
-                        storage.deleteTask(listNo);
-                        break;
+                        try {
+                            if (!sc.hasNextInt()) {
+                                throw new InvalidItemException();
+                            }
+                            int number = sc.nextInt();
+                            storage.deleteTask(number);
+                        } catch (InvalidItemException e) {
+                            e.printError();
+                        }
                     default:
-                        throw new DukeException(ErrorType.COMMAND);
+                        throw new InvalidCommandException();
                 }
             } catch (DukeException e) {
+                System.out.println("Here again");
                 e.printError();
             }
         }

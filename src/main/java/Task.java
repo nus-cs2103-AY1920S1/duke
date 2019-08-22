@@ -27,9 +27,6 @@ public class Task {
     }
 
     public static void doTask(int index) {
-        if (index > taskList.size()) {
-            return;
-        }
         Task task = taskList.get(index - 1);
         task.markAsDone();
         System.out.println("Nice! I've marked this task as done:");
@@ -46,12 +43,12 @@ public class Task {
 
     protected static void addNewTask(Task task) {
         taskList.add(task);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it! I've added this task:");
         System.out.println(task);
         if (taskList.size() == 1)  {
-            System.out.println("Now you have 1 task in the list.");
+            System.out.println("Now you have 1 task in the list!");
         } else {
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            System.out.println("Now you have " + taskList.size() + " tasks in the list!");
         }
     }
 }

@@ -10,10 +10,10 @@ public class Task {
     }
 
     public String getDescription() {
-        return description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
     }
 

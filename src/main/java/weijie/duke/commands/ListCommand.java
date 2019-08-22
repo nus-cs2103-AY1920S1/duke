@@ -19,7 +19,7 @@ public class ListCommand implements ITaskCommand {
     public TaskResponse execute(String... args) {
         List<Task> tasks = repo.getAll();
         String responseFormat = IntStream.rangeClosed(1, tasks.size())
-                .mapToObj(index -> index + ". %s")
+                .mapToObj(index -> index + ".%s")
                 .collect(Collectors.joining("\n"));
         return new TaskResponse(responseFormat, tasks);
     }

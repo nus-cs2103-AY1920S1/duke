@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static void printWithIndentation(String content) {
+    private static void formattedPrint(String content) {
         System.out.println("    ____________________________________________________________\n" +
                 "     " + content + "\n" +
                 "    ____________________________________________________________\n    ");
@@ -14,39 +14,26 @@ public class Duke {
         String output = "Got it. I've added this task: " + "\n" + "       "
                 + task.toString() + "\n" + "     "
                 + "Now you have " + list.size() + (list.size() == 1 ? " task in the list." : " tasks in the list.");
-        printWithIndentation(output);
+        formattedPrint(output);
     }
 
-    private static String[] splitByKeyword(String input, String keyword) {
-        StringBuilder before = new StringBuilder();
-        boolean beforeFirst = true;
-        StringBuilder after = new StringBuilder();
-        boolean afterFirst = true;
-        String[] words = input.split(" ");
-        boolean isBefore = true;
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].matches(keyword)) {
-                isBefore = false;
-            } else if (isBefore) {
-                if (beforeFirst) {
-                    beforeFirst = false;
-                } else {
-                    before.append(" ");
-                }
-                before.append(words[i]);
-            } else {
-                if (afterFirst) {
-                    afterFirst = false;
-                } else {
-                    after.append(" ");
-                }
-                after.append(words[i]);
-            }
+    private static String[] splitByKeyword(String input, String keyword) throws DukeException {
+        try {
+            int index;
+            String[] res = new String[2];
+            index = input.indexOf(keyword);
+            if (index == -1)
+                throw new DukeException("No keyword " + keyword + " is found.");
+            res[0] = input.substring(0, index - 1);
+            if (res[0].length() == 0)
+                throw new DukeException("No description found before keyword " + keyword + ".");
+            res[1] = input.substring(index + keyword.length() + 1);
+            if (res[1].length() == 0)
+                throw new DukeException("No description found after keyword " + keyword + ".");
+            return res;
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("Please check your format around keyword " + keyword);
         }
-        String[] res = new String[2];
-        res[0] = before.toString();
-        res[1] = after.toString();
-        return res;
     }
 
     public static void main(String[] args) {
@@ -56,48 +43,73 @@ public class Duke {
                 "    ____________________________________________________________\n");
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
-        while (true) {
+        boolean shouldRun = true;
+        while (shouldRun) {
             try {
                 String userInput = sc.nextLine();
-                if (userInput.matches("bye")) {
-                    printWithIndentation("Bye. Hope to see you again soon!");
-                    break;
-                } else if (userInput.matches("list")) {
-                    StringBuilder builder = new StringBuilder("Here are the tasks in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        builder.append("\n" + "     ");
-                        builder.append(i + 1).append(".").append(tasks.get(i).toString());
+                switch (DukeCommand.parseCommand(userInput)) {
+                    case BYE: {
+                        formattedPrint("Bye. Hope to see you again soon!");
+                        shouldRun = false;
+                        break;
                     }
-                    printWithIndentation(builder.toString());
-                } else if (userInput.startsWith("done")) {
-                    int doneNo = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                    tasks.get(doneNo).markAsDone();
-                    String tempOut = "Nice! I've marked this task as done: " + "\n" + "       " +
-                            tasks.get(doneNo).toString();
-                    printWithIndentation(tempOut);
-                } else if (userInput.startsWith("todo")) {
-                    try {
-                        if (userInput.length() == 4) {
-                            throw new DukeException("The description of a todo cannot be empty.");
+                    case LIST: {
+                        StringBuilder builder = new StringBuilder("Here are the tasks in your list:");
+                        for (int i = 0; i < tasks.size(); i++) {
+                            builder.append("\n" + "     ");
+                            builder.append(i + 1).append(".").append(tasks.get(i).toString());
                         }
+                        formattedPrint(builder.toString());
+                        break;
+                    }
+                    case DONE: {
+                        int doneNo = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                        tasks.get(doneNo).markAsDone();
+                        String tempOut = "Nice! I've marked this task as done: " + "\n" + "       " +
+                                tasks.get(doneNo).toString();
+                        formattedPrint(tempOut);
+                        break;
+                    }
+                    case DELETE: {
+                        int removeNo = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                        String tempOut = "Noted. I've removed this task: " + "\n" + "       " +
+                                tasks.get(removeNo).toString() + "\n" + "     " +
+                                "Now you have " + (tasks.size() - 1) +
+                                (tasks.size() - 1 == 1 ? " task in the list." : " tasks in the list.");
+                        tasks.remove(removeNo);
+                        formattedPrint(tempOut);
+                        break;
+                    }
+                    case TODO: {
+                        if (userInput.length() == 4)
+                            throw new DukeException("The description of a todo cannot be empty.");
                         String restOfInput = userInput.substring(5);
                         addTask(new ToDo(restOfInput), tasks);
-                    } catch (DukeException e) {
-                        printWithIndentation("☹ OOPS!!! " + e.getMessage());
+                        break;
                     }
-                } else if (userInput.startsWith("deadline")) {
-                    String[] temp = splitByKeyword(userInput.substring(9), "/by");
-                    addTask(new Deadline(temp[0], temp[1]), tasks);
-                } else if (userInput.startsWith("event")) {
-                    String[] temp = splitByKeyword(userInput.substring(6), "/at");
-                    addTask(new Event(temp[0], temp[1]), tasks);
-                } else {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    case DEADLINE: {
+                        if (userInput.length() == 8)
+                            throw new DukeException("The description of a deadline cannot be empty.");
+                        userInput = userInput.substring(9);
+                        String[] temp = splitByKeyword(userInput, "/by");
+                        addTask(new Deadline(temp[0], temp[1]), tasks);
+                        break;
+                    }
+                    case EVENT: {
+                        if (userInput.length() == 5)
+                            throw new DukeException("The description of an event cannot be empty.");
+                        userInput = userInput.substring(6);
+                        String[] temp = splitByKeyword(userInput, "/at");
+                        addTask(new Event(temp[0], temp[1]), tasks);
+                        break;
+                    }
+                    default: {
+                        throw new DukeException("Command found but no implementation is provided.");
+                    }
                 }
             } catch (DukeException e) {
-                printWithIndentation("☹ OOPS!!! " + e.getMessage());
+                formattedPrint("☹ OOPS!!! " + e.getMessage());
             }
-
         }
     }
 }

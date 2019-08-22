@@ -85,7 +85,7 @@ public class Listing {
     public void mark(String[] msg) throws  DukeException {
         if(msg.length == 2) {
             try {
-                int index = Integer.parseInt(msg[1]);
+                int index = Integer.parseInt(msg[1].trim());
                 if(index > list.size()) {
                     throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
                 } else if (index < 1) {

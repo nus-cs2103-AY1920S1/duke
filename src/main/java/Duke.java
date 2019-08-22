@@ -50,12 +50,35 @@ public class Duke {
                         + "Bye. Hope to see you again soon!\n\n"
                         + "--------------------------");
                 break;
-            } else {
-                storinglist[i] = new Task(command);
+            } else if (command.contains("todo")) {
+                String splitcommand[] = command.split(" ", 2);
+                storinglist[i] = new ToDos(splitcommand[1]);
                 i++;
                 System.out.println("--------------------------\n"
-                        + "added: " + command
+                        + "Got it. I've added this task:\n" + "  " + storinglist[i - 1]
+                        + "\nNow you have " + i + " tasks in the list"
                         + "\n\n--------------------------");
+
+            } else if (command.contains("deadline")) {
+                String splitcommand[] = command.split(" ", 2);
+                String splitdeadline[] = (splitcommand[1].split("/"));
+                storinglist[i] = new Deadline(splitdeadline[0], splitdeadline[1]);
+                i++;
+                System.out.println("--------------------------\n"
+                        + "Got it. I've added this task:\n" + "  " + storinglist[i - 1]
+                        + "\nNow you have " + i + " tasks in the list"
+                        + "\n\n--------------------------");
+
+            } else if (command.contains("event")) {
+                String splitcommand[] = command.split(" ", 2);
+                String splitevent[] = (splitcommand[1].split("/"));
+                storinglist[i] = new Events(splitevent[0], splitevent[1]);
+                i++;
+                System.out.println("--------------------------\n"
+                        + "Got it. I've added this task:\n" + "  " + storinglist[i - 1]
+                        + "\nNow you have " + i + " tasks in the list"
+                        + "\n\n--------------------------");
+
             }
         }
     }

@@ -18,6 +18,10 @@ public class TodoList {
         return task;
     }
 
+    Task delete(int index) {
+        return list.remove(index - 1);
+    }
+
     int length() {
         return list.size();
     }

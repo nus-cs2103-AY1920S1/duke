@@ -15,28 +15,54 @@ public class Duke {
         TodoList todolist = new TodoList();
 
         while (!next[0].equals("bye")) {
-            if (next[0].equals("list")) {
-                System.out.println(reply(todolist.toString()));
-            } else if (next[0].equals("done")) {
-                int index = Integer.parseInt(next[1]);
-                Task completed = todolist.markAsDone(index);
-                System.out.println(reply("Nice! I've marked this task as done:\n  "
-                        + completed.toString()));
-            } else {
-                Task task = new Task("placeholder");
-                if (next[0].equals("todo")) {
-                    task = new Todo(Arrays.copyOfRange(next, 1, next.length));
-                } else if (next[0].equals("deadline")) {
-                    String[] details = String.join(" ", next).split("/by");
-                    task = new Deadline(details[0].trim(), details[1].trim());
-                } else if (next[0].equals("event")) {
-                    String[] details = String.join(" ", next).split("/at");
-                    task = new Event(details[0].trim(), details[1].trim());
+            try {
+                switch (next[0]) {
+                    case "list":
+                        System.out.println(reply(todolist.toString()));
+                        break;
+                    case "done": {
+                        int index = Integer.parseInt(next[1]);
+                        if (index > todolist.length()) throw new DukeException("OOPS!!! That's an invalid index");
+                        Task completed = todolist.markAsDone(index);
+                        System.out.println(reply("Nice! I've marked this task as done:\n  "
+                                + completed.toString()));
+                        break;
+                    }
+                    default:
+                        Task task;
+                        switch (next[0]) {
+                            case "todo":
+                                String[] desc = Arrays.copyOfRange(next, 1, next.length);
+                                if (desc.length == 0)
+                                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                                task = new Todo(desc);
+                                break;
+                            case "deadline": {
+                                String[] details = String.join(" ", next).split("/by");
+                                if (details.length == 1)
+                                    throw new DukeException("OOPS!!! The deadline of a deadline cannot be empty.");
+                                task = new Deadline(details[0].trim(), details[1].trim());
+                                break;
+                            }
+                            case "event": {
+                                String[] details = String.join(" ", next).split("/at");
+                                if (details.length == 1)
+                                    throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
+                                task = new Event(details[0].trim(), details[1].trim());
+                                break;
+                            }
+                            default:
+                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        }
+                        todolist.add(task);
+                        System.out.println(reply("Got it. I've added this task: \n  " + task + "\nNow you have " + todolist.length() + " tasks in the list."));
+                        break;
                 }
-                todolist.add(task);
-                System.out.println(reply("Got it. I've added this task: \n" + task + "\n  Now you have " + todolist.length() + " tasks in the list."));
+            } catch (DukeException e) {
+                System.out.println(reply(e.toString()));
+            } finally {
+                next = scanner.nextLine().trim().split(" ");
             }
-            next = scanner.nextLine().trim().split(" ");
         }
         System.out.println(reply("Bye. Hope to see you again soon!"));
     }

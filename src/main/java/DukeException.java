@@ -1,7 +1,6 @@
 /**
- * A custom exceptions class to represent exceptions specific to Duke.
+ * Represents a custom exceptions class to represent exceptions specific to Duke.
  */
-
 public class DukeException extends Exception {
 
     protected String errorMessage;

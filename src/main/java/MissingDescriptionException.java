@@ -1,5 +1,6 @@
 /**
- * Represents the exception that is thrown when a task is missing its exception.
+ * Represents a custom exceptions class that extends from DukeException.
+ * This exception is thrown when a task is missing its description.
  */
 public class MissingDescriptionException extends DukeException {
 

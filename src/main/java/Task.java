@@ -35,7 +35,9 @@ public class Task {
         this.doneSymbol = isDone ? "✓" : "x";
     }
 
-    // marks a task as done, changes the done symbol to check mark
+    /**
+     * Marks a task as done, and changes the doneSymbol to a check mark.
+     */
     protected void markAsDone() {
         this.isDone = true;
         setDoneSymbol();

@@ -19,8 +19,10 @@ public class Duke {
     public void setList(ArrayList<Task> list) {
         this.list = list;
     }
-
-    // print out all the commands as a numbered list
+    
+    /**
+     * Prints out all the tasks in a numbered list.
+     */
     private void printList() {
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < this.list.size(); i++) {
@@ -28,7 +30,9 @@ public class Duke {
         }
     }
 
-    // print hello message
+    /**
+     * Prints hello message.
+     */
     private void hello() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -41,8 +45,14 @@ public class Duke {
         System.out.println(openingMessage);
     }
 
-    // execute command given depending on what command it is
-    private void execCommand(String command) throws InvalidTaskException {
+    // execute command given depending on what command it 
+
+    /**
+     * Executes the command given by the user. 
+     * @param command The command input by the user.
+     * @throws InvalidCommandException This exception is thrown when the command is invalid or not recognisable.
+     */
+    private void execCommand(String command) throws InvalidCommandException {
         String[] commandStringArray = command.trim().split(" "); //split by words
         String firstWord = commandStringArray[0];
         if (command.equals("list")) {
@@ -65,18 +75,30 @@ public class Duke {
             deleteTask(taskNo);
         } else {
             // taskType is not a valid command, throw IllegalArgumentException
-            throw new InvalidTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    // marks a task in the list as done
+    /**
+     * Marks a task as done (completed).
+     * @param taskNo The position of the task in the list that is printed out
+     *               (not the index of the task in the stored ArrayList).
+     */
     private void markTaskAsDone(int taskNo) {
         Task taskDone = this.list.get(taskNo - 1);
         taskDone.markAsDone();
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
     }
 
-    // adds a certain type of task to the tasks list depending on user's input
+    /**
+     * Adds a task to the tasks list according to the user's command.
+     * @param command The command that was input by the user.
+     * @param taskType The type of the task that the user wants to add to the list.
+     * @throws MissingDescriptionException This exception is thrown when the type of the task is valid but its
+     * description is not to be found.
+     * @throws MissingInputException This exception is thrown when a certain type of input is not found,
+     * namely, the deadline of a Deadline task, and the event time/day for an Event task.
+     */
     private void addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
         String desc = command.substring(taskType.length()).trim();
         Task task = new Task();
@@ -126,14 +148,21 @@ public class Duke {
         printAddedTask(task);
     }
 
-    // prints necessary lines when adding a task
+    /**
+     * Prints the necessary lines when a task is added to the tasks list.
+     * @param task The task that is being added to the tasks list.
+     */
     private void printAddedTask(Task task) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + task.toString());
         System.out.println(String.format("\tNow you have %d tasks in the list.", this.list.size()));
     }
 
-    // deletes a task from the tasks list
+    /**
+     * Deletes a task from the tasks list.
+     * @param taskNo The position of the task in the list when it is printed out
+     *               (not the index of the task in the stored ArrayList).
+     */
     private void deleteTask(int taskNo) {
         Task removedTask = this.list.remove(taskNo - 1);
         System.out.println("\tNoted. I've removed this task:");
@@ -160,7 +189,7 @@ public class Duke {
             } else {
                 try {
                     duke.execCommand(command);
-                } catch (InvalidTaskException e) {
+                } catch (InvalidCommandException e) {
                     System.out.println("\t" + e.getMessage());
                 }
             }

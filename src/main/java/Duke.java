@@ -19,11 +19,11 @@ public class Duke {
 
         String command = promptEntry();
 
-try {
+
 
     while (!command.equals("bye")) {
 
-
+        try {
         switch (command) {
 
             case "list":
@@ -82,10 +82,7 @@ try {
                 }
                 break;
 
-            case "delete":
-                int taskToBeDeleted = sc.nextInt() -1;
-                deleteTask(taskToBeDeleted, taskList);
-                break;
+
 
             case "done":
                 int taskNumber = sc.nextInt() - 1;
@@ -95,14 +92,19 @@ try {
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
+
         }
+
+
+    } catch (DukeException e) {
+            System.out.println(e);
+        }
+
         command = promptEntry();
 
-    }
-    printCommand("Bye. Hope to see you again soon!");
-} catch (DukeException e) {
-    System.out.println(e);
+
 }
+        printCommand("Bye. Hope to see you again soon!");
 
     }
 
@@ -154,17 +156,7 @@ try {
         }
     }
 
-    public static void deleteTask(int current, ArrayList<Task> list) {
-        Task deleted = list.get(current);
-        list.remove(current);
-        if(list.size() > 1) {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list. ");
-        } else {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list. ");
-        }
-    }
+
 
 
 

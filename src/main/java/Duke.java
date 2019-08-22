@@ -44,14 +44,20 @@ public class Duke {
                                 "Nice! I've marked this task as done:\n%s",
                                 task.toString()));
                 } else {
-                    System.out.println("Invalid item selected.");
+                    System.out.println("☹ OOPS!!! Invalid item selected.");
                 }
+            } else if (Pattern.matches("todo ?", input)) {
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
             } else if (Pattern.matches("todo .+", input)) {
                 TodoTask task = new TodoTask();
                 task.setTitle(input.split("todo ", 2)[1]);
                 tasks.add(task);
                 hasAddedTask = true;
                 addedTask = task;
+            } else if (Pattern.matches("deadline ?/by.*", input)) {
+                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+            } else if (Pattern.matches("deadline .+ /by ?", input)) {
+                System.out.println("☹ OOPS!!! The cutoff of a deadline cannot be empty.");
             } else if (Pattern.matches("deadline .+ /by .+", input)) {
                 String[] data = input.split("deadline ", 2)[1].split(" /by ", 2);
                 DeadlineTask task = new DeadlineTask();
@@ -60,6 +66,10 @@ public class Duke {
                 tasks.add(task);
                 hasAddedTask = true;
                 addedTask = task;
+            } else if (Pattern.matches("event ?/at.*", input)) {
+                System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+            } else if (Pattern.matches("event .+ /at ?", input)) {
+                System.out.println("☹ OOPS!!! The time of an event cannot be empty.");
             } else if (Pattern.matches("event .+ /at .+", input)) {
                 String[] data = input.split("event ", 2)[1].split(" /at ", 2);
                 EventTask task = new EventTask();
@@ -69,7 +79,7 @@ public class Duke {
                 hasAddedTask = true;
                 addedTask = task;
             } else {
-                System.out.println("Unknown command.");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 continue;
             }
 

@@ -14,7 +14,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printLineS();
-        String[] cmd = new String[100];
+        Task[] cmd = new Task[100];
         int count = 0;
 
         while (sc.hasNext()) {
@@ -26,17 +26,29 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 printLine();
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < count; i ++) {
                     int num = i + 1;
                     System.out.println(num + ". " + cmd[i]);
                 }
                 printLineS();
             } else {
-                cmd[count] = command;
-                printLine();
-                System.out.println("added: " + command);
-                printLineS();
-                count++;
+            	if (command.substring(0, 4).equals("done")) {
+            		String num = command.substring(5, 6);
+            		int res = Integer.parseInt(num);
+            		Task t = cmd[res - 1];
+            		t.markAsDone();
+            		printLine();
+            		System.out.println("Nice! I've marked this task as done: ");
+            		System.out.println(t);
+            		printLineS();
+            	} else {
+	            	cmd[count] = new Task(command);
+	                printLine();
+	                System.out.println("added: " + command);
+	                printLineS();
+	                count++;
+            	}
             }
         }
     }

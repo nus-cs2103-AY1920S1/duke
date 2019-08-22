@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,8 +14,8 @@ public class Duke {
                 break;
            } else if (next == "list") {
                int numOfOp = list.size();
-               for (i = 1; i <= numOfOp; i++) {
-                   System.out.println(i + ". " + list(i - 1));
+               for (int i = 1; i <= numOfOp; i++) {
+                   System.out.println(i + ". " + list.get(i - 1));
                }
            } else {
                list.add(next);

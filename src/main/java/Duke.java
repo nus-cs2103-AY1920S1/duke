@@ -53,11 +53,8 @@ public class Duke {
 
             else{  //all other commands
                 if(input.equals("todo")) {
-                    String temp = reader.nextLine();
-                    System.out.println(temp);
-                    temp.toString();
-                    taskList.add(new Todo(taskList.size() + 1, temp));
-
+                        String temp = reader.nextLine();
+                        taskList.add(new Todo(taskList.size() + 1, temp));
                 } else{
                     String tempString = reader.nextLine();
                     String[] tempStringArr = tempString.split("/");

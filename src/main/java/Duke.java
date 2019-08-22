@@ -6,7 +6,7 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.print("Now you have " + taskListSize);
-        if (taskListSize <= 1) System.out.println(" task in the list.");
+        if (taskListSize == 1) System.out.println(" task in the list.");
         else System.out.println(" tasks in the list.");
     }
 
@@ -27,12 +27,23 @@ public class Duke {
                         }
                         break;
                     case "done":
-                        System.out.println("Nice! I've marked this task as done:");
                         int i = Integer.parseInt(command[1]) - 1;
+                        if (i+1 > tasks.size() || i+1 < 0) throw new DukeException("\u2639 OOPS!!! This task does not exist.");
                         Task t = tasks.remove(i);
                         t.markAsDone();
                         tasks.add(i, t);
+                        System.out.println("Nice! I've marked this task as done:");
                         System.out.println(t);
+                        break;
+                    case "delete":
+                        int j = Integer.parseInt(command[1]) - 1;
+                        if (j+1 > tasks.size() || j+1 < 0) throw new DukeException("\u2639 OOPS!!! This task does not exist.");
+                        Task tsk = tasks.remove(j);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(tsk);
+                        System.out.print("Now you have " + tasks.size());
+                        if (tasks.size() == 1) System.out.println(" task in the list.");
+                        else System.out.println(" tasks in the list.");
                         break;
                     case "todo":
                         if (command.length < 2)
@@ -64,8 +75,6 @@ public class Duke {
                     default:
                         throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                System.out.println("\u2639 OOPS!!! The description of a todo cannot be empty.");
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             } finally {

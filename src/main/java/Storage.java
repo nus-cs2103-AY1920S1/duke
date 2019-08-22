@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
-public class TaskSerializer {
+public class Storage {
     public static final String FIELD_DELIMITER = "\u001F";
     private static final Map<String, Class<? extends Task>> EVENT_TOKEN_TO_TYPE = Map.of(
             "T", Todo.class,
@@ -35,7 +35,7 @@ public class TaskSerializer {
 
     private final Path filePath;
 
-    public TaskSerializer(Path filePath) {
+    public Storage(Path filePath) {
         this.filePath = filePath;
     }
 

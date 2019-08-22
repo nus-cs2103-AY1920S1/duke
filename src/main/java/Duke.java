@@ -6,13 +6,13 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }
 
-    private final TaskSerializer storage;
+    private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new TaskSerializer(Path.of(filePath));
+        storage = new Storage(Path.of(filePath));
 
         try {
             tasks = new TaskList(storage.load());

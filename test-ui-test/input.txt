@@ -1,0 +1,5 @@
+todo return book
+delete 1
+delete 0
+todo return books
+list

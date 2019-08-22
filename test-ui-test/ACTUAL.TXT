@@ -1,0 +1,14 @@
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task: 
+[T][-] return book
+Now you have 1 tasks in the list.
+Noted. I've removed this task:
+[T][-] return book
+Now you have 0 tasks in the list
+OOPS!!! The task number does not exist.
+Got it. I've added this task: 
+[T][-] return books
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+1. [T][-] return books

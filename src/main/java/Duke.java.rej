@@ -1,0 +1,38 @@
+diff a/duke-master/src/main/java/Duke.java b/duke-master/src/main/java/Duke.java	(rejected hunks)
+@@ -3,21 +3,28 @@
+ 
+ public class Duke {
+     public static void main(String[] args) {
+-        ArrayList<String> list = new ArrayList<>();
++        ArrayList<Task> list = new ArrayList<>();
+         System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?");
+ 
+         Scanner sc = new Scanner(System.in);
+-        while(sc.hasNext()) {
+-            String input = sc.nextLine();
++        while (sc.hasNext()) {
++            String input = sc.next();
+             if (input.equals("bye")) {
+                 System.out.println("Bye. Hope to see you again soon!");
+-            } else if(input.equals("list")) {
++            } else if (input.equals("list")) {
+                 for (int i = 1; i <= list.size(); i++) {
+-                    System.out.println( i + ". " + list.get(i-1));
++                    Task t = list.get(i-1);
++                    System.out.println( i + "." + t);
+                 }
+-            } else  {
+-                list.add(input);
+-                System.out.println("added: " + input);
++            } else if (input.equals("done")) {
++                int num = Integer.parseInt(sc.next());
++                Task t = list.get(num - 1);
++                t.markAsDone();
++                System.out.println("Nice! I've marked this task as done: "+ "\n" + t);
++            } else {
++                String x = input + sc.nextLine();
++                list.add(new Task(x));
++                System.out.println("added: " + x);
+             }
+         }
+     }

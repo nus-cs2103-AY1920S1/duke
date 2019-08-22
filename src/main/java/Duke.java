@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         canEnd = false;
         while (!canEnd) {
-            String input, response = "";
+            String input;
             input = myScanner.nextLine();
             if (isDone(input)) {
                 continue;
@@ -29,20 +29,18 @@ public class Duke {
                     System.out.println("Here are the tasks in your list");
                     for (int i = 0; i < myList.size(); i = i + 1) {
                         int number = i + 1;
-                        System.out.println(number + ".[" + myList.get(i).getStatusIcon() + "]"
-                                + myList.get(i).getDescription());
+                        System.out.println(number + "." + myList.get(i));
                     }
                     break;
                 default:
-                    myList.add(new Task(input));
-                    System.out.println("added: " + input);
+                    processCommandType(input);
                     break;
             }
         }
     }
 
     /**
-     * Returns true if input of the form "done <int>"
+     * Returns true if input is of the form "done <int>"
      * @param input
      */
     private boolean isDone(String input) {
@@ -55,7 +53,7 @@ public class Duke {
                     myList.get(index).setStatus(true);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("[" + myList.get(index).getStatusIcon()
-                            + "] " + myList.get(index).getDescription());
+                            + "]" + myList.get(index).getDescription());
                 }
                 else {
                     System.out.println("Please enter a valid number");
@@ -64,6 +62,40 @@ public class Duke {
             }
         }
         return false;
+    }
+
+    private void processCommandType(String input) {
+        String[] type = new String[]{"todo", "deadline", "event"};
+        String[] date = new String[]{"", "/by", "/at"};
+        boolean enterLoop = false;
+        for (int i = 0; i < type.length; i++) {
+            int startIdx = input.indexOf(type[i]);
+            int endIdx = input.indexOf(date[i]);
+            if ((startIdx != -1 && i == 1)
+                    || (startIdx != -1 && endIdx != -1)) {
+                System.out.println("Got it. I've added this task:");
+                enterLoop = true;
+            } else if (i == 2){
+                System.out.println("Please enter a valid command");
+                return;
+            }
+            if (!enterLoop) {
+                continue;
+            }
+            if (i == 0) {
+                myList.add(new ToDo(input.substring(type[i].length())));
+            } else if (i == 1) {
+                myList.add(new Deadline(input.substring(type[i].length(),endIdx), input.substring(endIdx
+                        + date[i].length() + 1)));
+            } else {
+                myList.add(new Event(input.substring(type[i].length(),endIdx), input.substring(endIdx
+                        + date[i].length() + 1)));
+            }
+            System.out.println(myList.get(myList.size()-1));
+            System.out.println("Now you have " + myList.size()
+                    + " tasks in the list.");
+            break;
+        }
     }
 
     public static void main(String[] args) {

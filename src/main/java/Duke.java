@@ -7,20 +7,26 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        Duke duke = new Duke();
-        try {
-            duke.run();
-        } catch(IllegalDukeDescriptionException|IllegalDukeFormatException|IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void run() throws IllegalDukeDescriptionException, IllegalDukeFormatException, IllegalArgumentException {
-        Scanner sc = new Scanner(System.in);
         String greet = "Hello! I'm Duke\n" +
                 "What can I do for you?";
 
         System.out.println(greet);
+        Duke duke = new Duke();
+
+        while (flag) {
+            try {
+                duke.run();
+            } catch(IllegalDukeDescriptionException|IllegalDukeFormatException|IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+
+            }
+        }
+
+    }
+    private static boolean flag = true;
+    private static void run() throws IllegalDukeDescriptionException, IllegalDukeFormatException, IllegalArgumentException {
+        Scanner sc = new Scanner(System.in);
+
         Texts texts = new Texts();
         outerloop:
         while(sc.hasNext()) {
@@ -35,6 +41,7 @@ public class Duke {
                     case bye:
                         String Exit = "Bye. Hope to see you again soon!";
                         System.out.println(Exit);
+                        flag = false;
                         break outerloop;
                     case done:
                         int n = sc.nextInt();

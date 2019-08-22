@@ -23,28 +23,20 @@ public class Duke {
                done.finishTask();
                System.out.println("Nice! I've marked this task as done:\n " + done);
            } else {
-               StringBuilder sb = new StringBuilder();
-               StringBuilder sb2 = new StringBuilder();
-               int slash = -1;
-               for(int i = 1; i < command.length; i++) {
-                   if(!command[i].equals("/")) {
-                       slash = i;
-                       break;
-                   } else {
-                       sb.append(command[i]);
-                       sb.append(" ");
-                   }
+               int index = next.lastIndexOf("/");
+               String time = "";
+               if(index != -1) {
+                   time = next.substring(index + 1);
                }
-               if(slash != -1) {
-                    sb2.append("( ");
-                    sb2.append(command[slash + 1] + ":");
-                    for(int j = slash + 2; j <= command.length; j++) {
-                        sb2.append(" ");
-                        sb2.append(command[j]);
-                    }
-                    sb2.append(")");
+               String desc;
+               if(command[0].equals("deadline")) {
+                   desc = next.substring(9, index - 1) + " ";
+               } else if(command[0].equals("event")) {
+                   desc = next.substring(6, index - 1) + " ";
+               } else {
+                   desc = next.substring(5);
                }
-               Tasks nextTask = new Tasks(sb.toString(), command[0], sb2.toString()); 
+               Tasks nextTask = new Tasks(desc, command[0], time); 
                list.add(nextTask);
                System.out.println("Got it. I've added this task:\n " + nextTask);
            }

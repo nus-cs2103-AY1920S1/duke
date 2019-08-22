@@ -17,6 +17,7 @@ public class Duke {
         int count = 0;
         while (!next.equals("bye")) {
             if (next.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int listCount = 1;
                 for (Task task : list) {
                     System.out.println(listCount + "." + task);
@@ -27,8 +28,12 @@ public class Duke {
                 Task taskDone = list.get(number);
                 taskDone.markAsDone();
                 System.out.println("Nice! I've marked this task as done:\n  " + taskDone);
+            } else if(next.equals("delete")) {
+                int number = Integer.parseInt(arr[1]) - 1;
+                Task taskRemoved = list.remove(number);
+                System.out.println("Noted. I've removed this task:");
+                printTask(--count, taskRemoved);
             } else {
-                count++;
                 String description = "";
                 Task t;
                 try {
@@ -44,6 +49,7 @@ public class Duke {
                         throw new UnknownTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                     System.out.println("Got it. I've added this task:");
+                    count++;
                     if (next.equals("todo")) {
                         t = new Todos(description.trim());
                     } else if (next.equals("deadline")) {
@@ -58,11 +64,7 @@ public class Duke {
                         t = new Event(desc, at);
                     }
                     list.add(t);
-                    if (count == 1) {
-                        System.out.println("  " + t + "\nNow you have " + count + " task in the list.");
-                    } else {
-                        System.out.println("  " + t + "\nNow you have " + count + " tasks in the list.");
-                    }
+                    printTask(count, t);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
@@ -71,6 +73,14 @@ public class Duke {
             next = arr[0];
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void printTask(int count, Task t) {
+        if (count == 1) {
+            System.out.println("  " + t + "\nNow you have " + count + " task in the list.");
+        } else {
+            System.out.println("  " + t + "\nNow you have " + count + " tasks in the list.");
+        }
     }
 
 }

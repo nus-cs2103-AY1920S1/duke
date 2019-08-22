@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.awt.*;
@@ -28,7 +29,7 @@ public class Duke {
                 (taskList.get(index)).setStatus();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(taskList.get(index));
-            } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")){
+            } else if (input.contains("todo") || input.contains("event") || input.contains("deadline")) {
                 System.out.println("Got it. I've added this task:");
                 Task newTask = new Task("");
                 String description;
@@ -50,8 +51,13 @@ public class Duke {
                     newTask = new Deadline(arr[0], task);
                     taskList.add(newTask);
                 }
-
                 System.out.println(newTask);
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            } else if (input.contains("delete")) {
+                System.out.println("Noted. I've removed this task:");
+                int index = Character.getNumericValue(input.charAt(7)) - 1;
+                System.out.println(taskList.get(index));
+                taskList.remove(index);
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
             }
             input = sc.nextLine();

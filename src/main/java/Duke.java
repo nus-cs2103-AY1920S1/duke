@@ -46,7 +46,7 @@ public class Duke {
                 }
             }
         } else {
-            throw new DukeException("The description of a " + firstWord + " cannot be empty");
+            throw new DukeException("The description of a " + firstWord + " cannot be empty.");
         }
         System.out.println(frontSpace + "   " + myList.get(idx));
         idx++;
@@ -67,7 +67,7 @@ public class Duke {
         System.out.print(frontSpace + upperLine);
         //done or "done     "
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
-            throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty");
+            throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length == 2 && !oneLine[1].isBlank()
                 && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
 
@@ -96,7 +96,7 @@ public class Duke {
         System.out.print(frontSpace + upperLine);
         //make sure it only have one number follow
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
-            throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty");
+            throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length != 1 && !oneLine[1].isBlank()
                 && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
             int i = Integer.parseInt(oneLine[1].trim());
@@ -170,7 +170,7 @@ public class Duke {
                     //situation of firstWord is invalid
                     System.out.print(frontSpace + upperLine);
 
-                    throw new InvalidCommandException("I'm sorry, but I don't know what that means :-");
+                    throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(e);

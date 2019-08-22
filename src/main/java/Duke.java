@@ -18,18 +18,26 @@ public class Duke {
                 break;
             }
         }
-
     }
-
+    private static LinkedList<String> tasks = new LinkedList<>();
     private static void run() {
         Scanner sc = new Scanner(System.in);
-        String next = sc.next();
+
+        String next = sc.nextLine();
         switch(next) {
             case "bye":
                 System.out.println("Bye. Hope to see you again soon!");
                 sc.close();
                 break;
-            default: System.out.println(next);
+            case "list":
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(1 + i + "." + tasks.get(i));
+                }
+                break;
+            default:
+                System.out.println("added: "+next);
+                tasks.add(next);
+                break;
         }
     }
 }

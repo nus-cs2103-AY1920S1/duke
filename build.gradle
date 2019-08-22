@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group 'seedu.duke'
+group 'leeyiyuan'
 version '0.1.0'
 
 repositories {
@@ -12,9 +12,15 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "com.leeyiyuan.Duke"
 }
 
 run {
-    standardInput = System.in
+  standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.leeyiyuan.Duke'
+    }
 }

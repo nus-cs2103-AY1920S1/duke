@@ -32,19 +32,23 @@ public class Duke {
                 // System.out.print("\t");
                 adl.printEvent(index - 1);
             } else if(subin1.contentEquals("event") ||  subin1.contentEquals("deadline") || subin1.contentEquals("todo")) {
-                counter += 1;
-                System.out.println(subin1);
-                if(in.split("/").length == 1) {
-                    adl.addEventWithoutTime(in.split(" ")[1], subin1);
+                if(in.split(" ").length == 1) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 } else {
-                    adl.addEventWithTime(in.split(" ")[1].split("/")[0], subin1, in.split("/")[1].split(" ")[1], in.split("/")[1].split(" ")[0]);
+                    counter += 1;
+                    System.out.println(subin1);
+                    if (in.split("/").length == 1) {
+                        adl.addEventWithoutTime(in.split(" ")[1], subin1);
+                    } else {
+                        adl.addEventWithTime(in.split(" ")[1].split("/")[0], subin1, in.split("/")[1].split(" ")[1], in.split("/")[1].split(" ")[0]);
+                    }
+                    System.out.println("Got it. I have added this task:");
+                    adl.printEvent(counter - 1);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
                 }
-                System.out.println("Got it. I have added this task:");
-                adl.printEvent(counter - 1);
-                System.out.println("Now you have " + counter + " tasks in the list.");
             }
             else {
-                System.out.println("error 001");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             System.out.println("____________________________________________________________");
         }

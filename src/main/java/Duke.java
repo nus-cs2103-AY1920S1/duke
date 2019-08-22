@@ -30,20 +30,39 @@ public class Duke {
                 printIndentedString("Nice! I've marked this task as done: \n"
                         + indent + "   " + listArr[listPointer - 1].getStatusIcon() +
                         ' ' + listArr[listPointer - 1].getDescription(), indent);
-            } else {
+            } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + indent + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
-                if(inputArr[0].equals("todo")) {
-                    listArr[listSize] = new Task(inputArr[1], (listSize + 1), "todo");
-                } else if(inputArr[0].equals("deadline")) {
-                    String deadline = input.split(" /by ")[1];
-                    listArr[listSize] = new Task(inputArr[1].split(" /by ")[0], (listSize + 1), "deadline", deadline);
-                } else if(inputArr[0].equals("event")) {
-                    String eventDateTime = input.split(" /at ")[1];
-                    listArr[listSize] = new Task(inputArr[1].split(" /at ")[0], (listSize + 1), "event", eventDateTime);
+                if(inputArr.length > 1) {
+                    if(inputArr[0].equals("todo")) {
+                            System.out.println("RUNNING TODO TASK MAKER");
+                            listArr[listSize] = new Task(inputArr[1], (listSize + 1), "todo");
+                            printIndentedString(befTaskAddMessage + listArr[listSize] + "\n " + indent + aftTaskAddMessage, indent);
+                            listSize++;
+                    } else if(inputArr[0].equals("deadline")) {
+                        if(input.contains(" /by ")) {
+                            String deadline = input.split(" /by ")[1];
+                            listArr[listSize] = new Task(inputArr[1].split(" /by ")[0], (listSize + 1), "deadline", deadline);
+                            printIndentedString(befTaskAddMessage + listArr[listSize] + "\n " + indent + aftTaskAddMessage, indent);
+                            listSize++;
+                        } else {
+                            printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by.", indent);
+                        }
+                    } else if(inputArr[0].equals("event")) {
+                        if(input.contains(" /at ")) {
+                            String eventDateTime = input.split(" /at ")[1];
+                            listArr[listSize] = new Task(inputArr[1].split(" /at ")[0], (listSize + 1), "event", eventDateTime);
+                            printIndentedString(befTaskAddMessage + listArr[listSize] + "\n " + indent + aftTaskAddMessage, indent);
+                            listSize++;
+                        } else {
+                            printIndentedString("☹ OOPS!!! Events require a specific datetime after /at.", indent);
+                        }
+                    }
+                } else {
+                    printIndentedString("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.", indent);
                 }
-                printIndentedString(befTaskAddMessage + listArr[listSize] + "\n " + indent + aftTaskAddMessage, indent);
-                listSize++;
+            } else {
+                printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", indent);
             }
             input = sc.nextLine();
             inputArr = input.split(" ");

@@ -15,7 +15,7 @@ class ToDo {
         while (!nextCommand.equals("bye")) {
             if (nextCommand.equals("list")) {
                 for (int i = 0; i < todoList.size(); i++) {
-                    System.out.println(i + 1 + ": " + todoList.get(i));
+                    System.out.println(i + 1 + ". " + todoList.get(i));
                 }
                 nextCommand = sc.nextLine();
             } else {

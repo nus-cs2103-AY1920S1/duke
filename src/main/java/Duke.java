@@ -20,19 +20,23 @@ public class Duke {
         while (isRunning && sc.hasNextLine()) {
             String command = sc.nextLine().trim();
 
-            switch (command) {
-            // Catch empty commands (ENTER key pressed)
-            case "":
-                Duke.print("No command issued.");
-                break;
-            // Terminate the bot if the 'bye' command is issued
-            case "bye":
-                isRunning = false;
-                break;
-            // Otherwise attempt to parse the command string with the TaskList
-            default:
-                Duke.print(Parser.parse(tasks, command));
-                break;
+            try {
+                switch (command) {
+                // Catch empty commands (ENTER key pressed)
+                case "":
+                    throw new DukeNoCommandException();
+                // Terminate the bot if the 'bye' command is issued
+                case "bye":
+                    isRunning = false;
+                    break;
+                // Otherwise attempt to parse the command string with the TaskList
+                default:
+                    Duke.print(Parser.parse(tasks, command));
+                    break;
+                }
+            } catch (DukeException e) {
+                // Catches all custom exceptions thrown for incorrect user input
+                Duke.print(e.toString());
             }
         }
 

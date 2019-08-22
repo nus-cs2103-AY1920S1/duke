@@ -5,7 +5,7 @@ public class DukeIncorrectArgumentsException extends DukeException {
     public DukeIncorrectArgumentsException(
         int numCommandArgs, String commandFormat, int numArgs, String errorSource) {
         super(
-            String.format("Expected %d arguments for command '%s', but got %d",
+            String.format("Expected %d argument(s) for command '%s', but got %d",
                 numCommandArgs, errorSource.split(" ", 2)[0], numArgs),
             errorSource
         );

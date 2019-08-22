@@ -30,7 +30,8 @@ public class Duke {
                     if((!inputnoun.equals("done")) &&
                     (!inputnoun.equals("todo")) &&
                     (!inputnoun.equals("deadline")) &&
-                    (!inputnoun.equals("event")) ){
+                    (!inputnoun.equals("event")) &&
+                    (!inputnoun.equals("delete")) ){
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
 
                     }else if((line.split(" ", 2)).length < 2){
@@ -83,6 +84,17 @@ public class Duke {
                             listOfStuff.add(newTask);
                             System.out.println(newTask);
                             System.out.println(String.format("Now you have %d tasks in the list.", listOfStuff.size() ));
+                        }else{
+                            int offset = Integer.parseInt(taskName) - 1;
+                            if(offset > listOfStuff.size() - 1){
+                                throw new DukeException("☹ OOPS!!! There aren't so many tasks!"); 
+                            }else{
+
+                                System.out.println("Noted. I've removed this task:");
+                                System.out.println(listOfStuff.get(offset));
+                                listOfStuff.remove(offset);
+                                System.out.println(String.format("Now you have %d tasks in the list.", listOfStuff.size() ));
+                            }
                         }
                     }
                 }catch(DukeException e){

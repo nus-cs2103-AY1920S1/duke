@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
@@ -107,5 +108,68 @@ public class UserInterface {
         }
 
         return String.format("[%s][%s] %s", taskType, t.getStatusIcon(), description);
+    }
+
+    public void displayWelcome() {
+        printBlock("Hello! I'm Duke\n" +
+                "What can I do for you?");
+        println();
+    }
+
+    public void displayLoadingError(Throwable exc){
+        StringJoiner errorMessage = createStringJoiner("Couldn't load previously saved Tasks.");
+        errorMessage.add("Duke will start with an empty Task list.");
+        errorMessage.add("");
+        errorMessage.add("More details: " + exc.getMessage());
+        if(exc.getCause() != null){
+            errorMessage.add(exc.getCause().getMessage());
+        }
+
+        displayError(errorMessage.toString());
+    }
+
+    public void displayError(DukeException exc){
+        displayError(exc.getMessage());
+    }
+
+    public void displayError(String message){
+        printBlock(" ☹ OOPS!!! " + message);
+        println();
+    }
+
+    public void displayTasks(List<Task> tasks) {
+        displayTasks(null, tasks);
+    }
+
+    public void displayTasks(String title, List<Task> tasks) {
+        StringJoiner taskListDisplay = createStringJoiner(title);
+        int listIdx = 1;
+        for (Task task : tasks) {
+            final String formattedTask = String.format("%d.%s", listIdx, formatTask(task));
+            taskListDisplay.add(formattedTask);
+            listIdx++;
+        }
+        printBlock(taskListDisplay.toString());
+    }
+
+    public void displaySuccessfullyDoneTask(String title, Task task) {
+        StringJoiner successMessage = UserInterface.createStringJoiner(title);
+        successMessage.add("  " + formatTask(task));
+        printBlock(successMessage.toString());
+    }
+
+    public void displaySuccessfullyRemovedTask(String title, Task task, int tasksLeft) {
+        StringJoiner successMessage = UserInterface.createStringJoiner(title);
+        successMessage.add("  " + formatTask(task));
+        successMessage.add(String.format("Now you have %d tasks in the list.", tasksLeft));
+        printBlock(successMessage.toString());
+    }
+
+    public void displaySuccessfullyAddedTask(String title, Task task, int tasksLeft) {
+        StringJoiner successMessage = UserInterface.createStringJoiner(title);
+        successMessage.add("  " + formatTask(task));
+        successMessage.add(String.format("Now you have %d tasks in the list.", tasksLeft));
+        printBlock(successMessage.toString());
+        println();
     }
 }

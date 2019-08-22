@@ -20,8 +20,7 @@ public class AddCommand implements Command {
         taskListController.addTask(task);
 
         StringBuilder message = new StringBuilder("added: ")
-                .append(task.getDescription())
-                .append("\n");
+                .append(task.getDescription());
 
         DukeOutput.printMessage(message.toString());
 

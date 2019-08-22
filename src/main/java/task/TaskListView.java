@@ -8,17 +8,22 @@ class TaskListView {
     void displayAllTasks(List<Task> tasks) {
         StringBuilder message = new StringBuilder();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            message.append(i + 1)
+        if (!tasks.isEmpty()) {
+            message.append("1. ")
+                    .append(formatTaskMessage(tasks.get(0)));
+        }
+
+        for (int i = 1; i < tasks.size(); i++) {
+            message.append("\n")
+                    .append(i + 1)
                     .append(". ")
-                    .append(formatTaskMessage(tasks.get(i)))
-                    .append("\n");
+                    .append(formatTaskMessage(tasks.get(i)));
         }
 
         DukeOutput.printMessage(message.toString());
     }
 
-    String formatTaskMessage(Task task) {
+    private String formatTaskMessage(Task task) {
         StringBuilder message = new StringBuilder();
         if (task.isDone()) {
             message.append("[✓] ");

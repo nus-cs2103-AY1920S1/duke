@@ -1,11 +1,9 @@
 package command;
 
+import error.UnknownCommandException;
 import task.Task;
 import task.TaskListController;
 import task.tasks.TaskKeyword;
-import task.tasks.ToDo;
-import util.DukeMessage;
-import util.DukeOutput;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -30,6 +28,6 @@ public class AddCommand implements Command {
         return Stream.of(TaskKeyword.values())
                 .filter(taskKeyWord -> taskKeyWord.keyword.equals(keyword))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(UnknownCommandException::new);
     }
 }

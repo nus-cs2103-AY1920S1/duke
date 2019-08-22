@@ -6,7 +6,7 @@ public class Duke {
     final private static String horizontalLine = "    ____________________________________________________________";
     private static ArrayList<Task> taskList = new ArrayList<>();
 
-    public static void main(String[] args) throws InvalidCommandException {
+    public static void main(String[] args){
         //program start
         startMessage();
         //import scanner + logic
@@ -29,19 +29,13 @@ public class Duke {
                     doneTask(Integer.parseInt(tokens[1]));
                 }
                 catch (ArrayIndexOutOfBoundsException error){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("Huh, what do you wanna do?"));
-                    System.out.println(horizontalLine);
+                    new DukeException("MIssing task", DukeExceptionType.MISSINGTASK).printError();
                 }
                 catch (IllegalArgumentException error2){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("But this task has already been done!"));
-                    System.out.println(horizontalLine);
+                    new DukeException("Task has been done", DukeExceptionType.TASKALREADYDONE).printError();
                 }
                 catch (IndexOutOfBoundsException error3){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("No such task dude"));
-                    System.out.println(horizontalLine);
+                    new DukeException("No such task", DukeExceptionType.TASKNOTFOUND).printError();
                 }
             }
 
@@ -50,9 +44,7 @@ public class Duke {
                     deleteTask(Integer.parseInt(tokens[1]));
                 }
                 catch (IndexOutOfBoundsException error){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("No such task dude"));
-                    System.out.println(horizontalLine);
+                    new DukeException("No such task", DukeExceptionType.TASKNOTFOUND).printError();
                 }
             }
 
@@ -61,9 +53,7 @@ public class Duke {
                     addToDo(input.substring(5));
                 }
                 catch (StringIndexOutOfBoundsException error){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("The description of todo cannot be empty :("));
-                    System.out.println(horizontalLine);
+                    new DukeException("Empty description", DukeExceptionType.MISSINGDESCRIPTION).printError();
                 }
 
             }
@@ -75,14 +65,10 @@ public class Duke {
                     addDeadline(deadlineDesc, dateSplit[dateSplit.length - 1]);
                 }
                 catch (StringIndexOutOfBoundsException error){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("The description of deadline cannot be empty :("));
-                    System.out.println(horizontalLine);
+                    new DukeException("Empty description", DukeExceptionType.MISSINGDESCRIPTION).printError();
                 }
                 catch (IllegalArgumentException error2){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("No deadline detected!"));
-                    System.out.println(horizontalLine);
+                    new DukeException("Missing date", DukeExceptionType.MISSINGDATE).printError();
                 }
             }
             else if (tokens[0].equals("event")){
@@ -93,19 +79,15 @@ public class Duke {
                     addEvent(eventDesc, dateSplit[dateSplit.length - 1]);
                 }
                 catch (StringIndexOutOfBoundsException error){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("The description of event cannot be empty :("));
-                    System.out.println(horizontalLine);
+                    new DukeException("Empty description", DukeExceptionType.MISSINGDESCRIPTION).printError();
                 }
                 catch (IllegalArgumentException error2){
-                    System.out.println(horizontalLine);
-                    System.out.println(formatText("The event must have a date!"));
-                    System.out.println(horizontalLine);
+                    new DukeException("Missing date", DukeExceptionType.MISSINGDATE).printError();
                 }
             }
 
             else {
-                throw new InvalidCommandException("Invalid Command :( Duke is sad. Please try again.");
+                new DukeException("Invalid Command", DukeExceptionType.INVALIDCOMMAND).printError();
             }
         }
         exitMessage();

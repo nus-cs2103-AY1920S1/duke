@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
 
     private static Scanner sc;
-    private static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
     private static int numberOfTasks = 0;
 
     public static void main(String[] args) {
@@ -33,21 +33,37 @@ public class Duke {
             dukeOutput("Bye. Have a nice day!");
         } else if (input.equalsIgnoreCase("list")) {
             printTasks();
-        }
-        else {
+        } else if (input.startsWith("done")) {
+            evaluateDone(input);
+        } else {
             dukeOutput("added: " + input);
             addTask(input);
         }
     }
 
-    public static void addTask(String task) {
-        tasks[numberOfTasks++] = task;
+    public static void evaluateDone(String input) {
+        String number = input.substring(5, input.length());
+        int taskNumber = Integer.parseInt(number);
+        if (number.isEmpty()) {
+            dukeOutput("Invalid input!");
+        } else if (taskNumber > numberOfTasks) {
+            dukeOutput("Task doesn't exist");
+        } else {
+            tasks[taskNumber - 1].markAsDone();
+            String output = "Nice! I've marked this task as done:"
+                    + "\n  " + tasks[taskNumber - 1].toString();
+            dukeOutput(output);
+        }
+    }
+
+    public static void addTask(String description) {
+        tasks[numberOfTasks++] = new Task(description);
     }
 
     public static void printTasks() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < numberOfTasks; i++) {
-            output.append((i + 1) + ". " + tasks[i]);
+            output.append((i + 1) + ". " + tasks[i].toString());
             if (i != numberOfTasks - 1) {
                 output.append("\n");
             }

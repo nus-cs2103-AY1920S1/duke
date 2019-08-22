@@ -8,10 +8,10 @@ public class Duke {
 
     private final TaskSerializer storage;
     private TaskList tasks;
-    private final UserInterface ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
-        ui = new UserInterface();
+        ui = new Ui();
         storage = new TaskSerializer(Path.of(filePath));
 
         try {

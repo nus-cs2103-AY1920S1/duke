@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
-public class UserInterface {
+public class Ui {
     private static final String LINE_INDENT = "\t";
     private static final String HORIZONTAL_LINE = LINE_INDENT + "_".repeat(60);
     private static final Pattern LINE_START_PATTERN = Pattern.compile("^", Pattern.MULTILINE);
@@ -13,7 +13,7 @@ public class UserInterface {
     private final Scanner scanner;
     private final PrintStream output = System.out;
 
-    UserInterface() {
+    Ui() {
         scanner = new Scanner(System.in);
     }
 
@@ -153,20 +153,20 @@ public class UserInterface {
     }
 
     public void displaySuccessfullyDoneTask(String title, Task task) {
-        StringJoiner successMessage = UserInterface.createStringJoiner(title);
+        StringJoiner successMessage = Ui.createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         printBlock(successMessage.toString());
     }
 
     public void displaySuccessfullyRemovedTask(String title, Task task, int tasksLeft) {
-        StringJoiner successMessage = UserInterface.createStringJoiner(title);
+        StringJoiner successMessage = Ui.createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         successMessage.add(String.format("Now you have %d tasks in the list.", tasksLeft));
         printBlock(successMessage.toString());
     }
 
     public void displaySuccessfullyAddedTask(String title, Task task, int tasksLeft) {
-        StringJoiner successMessage = UserInterface.createStringJoiner(title);
+        StringJoiner successMessage = Ui.createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         successMessage.add(String.format("Now you have %d tasks in the list.", tasksLeft));
         printBlock(successMessage.toString());

@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public interface Command {
-    void execute(List<Task> tasks, UserInterface ui, TaskSerializer storage);
+    void execute(List<Task> tasks, Ui ui, TaskSerializer storage);
 
     default boolean isExit() {
         return false;
@@ -11,7 +11,7 @@ public interface Command {
 }
 
 class ExitCommand implements Command {
-    public void execute(List<Task> tasks, UserInterface ui, TaskSerializer storage) {
+    public void execute(List<Task> tasks, Ui ui, TaskSerializer storage) {
         ui.printBlock("Bye. Hope to see you again soon!");
     }
 
@@ -21,7 +21,7 @@ class ExitCommand implements Command {
 }
 
 class ListCommand implements Command {
-    public void execute(List<Task> tasks, UserInterface ui, TaskSerializer storage) {
+    public void execute(List<Task> tasks, Ui ui, TaskSerializer storage) {
         ui.displayTasks("Here are the tasks in your list:", tasks);
     }
 }
@@ -33,7 +33,7 @@ class DoneCommand implements Command {
         taskIndex = Integer.parseInt(command);
     }
 
-    public void execute(List<Task> tasks, UserInterface ui, TaskSerializer storage) {
+    public void execute(List<Task> tasks, Ui ui, TaskSerializer storage) {
         Task t = tasks.get(taskIndex - 1);
         t.markAsDone();
 
@@ -49,7 +49,7 @@ class DeleteCommand implements Command {
         taskIndex = Integer.parseInt(command);
     }
 
-    public void execute(List<Task> tasks, UserInterface ui, TaskSerializer storage) {
+    public void execute(List<Task> tasks, Ui ui, TaskSerializer storage) {
         Task t = tasks.get(taskIndex - 1);
         tasks.remove(taskIndex - 1);
 
@@ -69,7 +69,7 @@ abstract class AddCommand implements Command {
 
     abstract protected Task instantiateTask();
 
-    public void execute(List<Task> tasks, UserInterface ui, TaskSerializer storage) {
+    public void execute(List<Task> tasks, Ui ui, TaskSerializer storage) {
         final Task t = instantiateTask();
         tasks.add(t);
 

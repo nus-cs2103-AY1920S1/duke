@@ -33,7 +33,11 @@ public class Duke {
                     }
                     break;
                 default:
-                    processCommandType(input);
+                    try {
+                        processCommandType(input);
+                    } catch (DukeException e) {
+                        System.out.println("\u2639 OOPS!!! " + e.getMessage());
+                    }
                     break;
             }
         }
@@ -64,20 +68,24 @@ public class Duke {
         return false;
     }
 
-    private void processCommandType(String input) {
+    private void processCommandType(String input) throws DukeException {
         String[] type = new String[]{"todo", "deadline", "event"};
         String[] date = new String[]{"", "/by", "/at"};
         boolean enterLoop = false;
         for (int i = 0; i < type.length; i++) {
             int startIdx = input.indexOf(type[i]);
             int endIdx = input.indexOf(date[i]);
+            if (input.trim().equals("todo")
+                    || (input.split(" ")[0].equals("deadline") && endIdx == -1 && i == 1)
+                    || (input.split(" ")[0].equals("event") && endIdx == -1 && i == 2)) {
+                throw new DukeException(input);
+            }
             if ((startIdx != -1 && i == 1)
                     || (startIdx != -1 && endIdx != -1)) {
                 System.out.println("Got it. I've added this task:");
                 enterLoop = true;
-            } else if (i == 2){
-                System.out.println("Please enter a valid command");
-                return;
+            } else if (i == 2 && endIdx == -1) {
+                throw new DukeException(input);
             }
             if (!enterLoop) {
                 continue;

@@ -42,56 +42,108 @@ public class Duke {
     }
 
     // execute command given depending on what command it is
-    private void execCommand(String command) {
+    private void execCommand(String command) throws IllegalArgumentException {
         String[] commandStringArray = command.split(" "); //split by words
+        String taskType = commandStringArray[0];
         if (command.equals("list")) {
             printList();
-        } else if (command.contains("done") && commandStringArray.length == 2) {
+        } else if (taskType.equals("done") && commandStringArray.length == 2) {
             // command is done and then followed by task number
             int taskNo = Integer.parseInt(commandStringArray[1]);
             Task taskDone = this.list.get(taskNo - 1);
             taskDone.markAsDone();
             System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
-        } else {
-            // add new task to the list
-            String taskType = commandStringArray[0];
+        } else if (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
+            // check if the taskType is a valid command before adding the task to the tasks list
             addTask(command, taskType);
+        } else {
+            // taskType is not a valid command, throw IllegalArgumentException
+            throw new IllegalArgumentException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+
+//            try {
+//                addTask(command, taskType);
+//            } catch (IllegalArgumentException e) {
+//                System.out.println(e.getMessage());
+//            } finally {
+//
+//            }
         }
     }
 
     // adds a certain type of task to the tasks list depending on user's input
-    private void addTask(String command, String taskType) {
-        System.out.println("\tGot it. I've added this task:");
+    private void addTask(String command, String taskType) throws IllegalArgumentException {
+        String desc = command.substring(taskType.length()).trim();
+        Task task;
+        if (desc.isEmpty()) {
+            throw new IllegalArgumentException("☹ OOPS!!! The description of " + taskType + " cannot be empty.");
+        }
+        //System.out.println("\tGot it. I've added this task:");
         switch (taskType) {
             case ("todo"):
-                Todo newTodo = new Todo(command.substring(5)); // add newTodo to tasks list with only the description
-                this.list.add(newTodo);
-                System.out.println("\t  " + newTodo.toString());
+                task = new Todo(desc); // add newTodo to tasks list with only the description
+                //this.list.add(task);
+                //System.out.println("\t  " + newTodo.toString());
                 break;
             case ("deadline"):
-                String deadline = command.substring(command.indexOf("/by") + 4);
-                Deadline newDeadline = new Deadline(
-                        command.substring(9, command.indexOf("/by")).trim(),
+                //String deadline = command.substring(command.indexOf("/by") + 4).trim();
+                if (!desc.contains("/by")) {
+                    throw new IllegalArgumentException("☹ OOPS!!! The deadline cannot be found because /by is missing");
+                }
+                String[] splitDeadlineDesc = desc.split("/by");
+                desc = splitDeadlineDesc[0].trim();
+                String deadline;
+                try {
+                    deadline = splitDeadlineDesc[1].trim();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    // above exception will be thrown when the splitDeadlineDesc only has one element
+                    // this means that there is nothing after /by
+                    throw new IllegalArgumentException("☹ OOPS!!! The deadline cannot be found");
+                }
+                task = new Deadline(
+                        desc,
                         // remove trailing white spaces for the description, exclude the deadline
                         deadline);
                 // add new deadline task to the tasks list
-                this.list.add(newDeadline);
-                System.out.println("\t  " + newDeadline.toString());
+               // this.list.add(task);
+                //System.out.println("\t  " + newDeadline.toString());
                 break;
             case ("event"):
-                String when = command.substring(command.indexOf("/at") + 4);
-                Event newEvent = new Event(
-                        command.substring(6, command.indexOf("/at")).trim(),
+                //String when = command.substring(command.indexOf("/at") + 4).trim();
+                if (!desc.contains("/at")) {
+                    throw new IllegalArgumentException("☹ OOPS!!! The event date and time cannot be found because /at is missing");
+                }
+                String[] splitEventDesc = desc.split("/at");
+                desc = splitEventDesc[0].trim();
+                String when;
+                try {
+                    when = splitEventDesc[1].trim();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    // above exception will be thrown when the splitEventDesc only has one element
+                    // this means that there is nothing after /at
+                    throw new IllegalArgumentException("☹ OOPS!!! The event date and time cannot be found");
+                }
+
+                task = new Event(
+                        desc,
                         // remove trailing white spaces for the description, exclude event day and time
                         when);
                 // add new event task to the tasks list
-                this.list.add(newEvent);
-                System.out.println("\t  " + newEvent.toString());
+                //his.list.add(task);
+                //System.out.println("\t  " + newEvent.toString());
                 break;
             default:
-                System.out.println("task not recognisable");
-                break;
+                // taskType is not valid
+                throw new IllegalArgumentException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        this.list.add(task);
+        printAddedTask(task);
+        //System.out.println(String.format("\tNow you have %d tasks in the list.", this.list.size()));
+    }
+
+    private void printAddedTask(Task task) {
+        System.out.println("\tGot it. I've added this task:");
+        System.out.println("\t  " + task.toString());
         System.out.println(String.format("\tNow you have %d tasks in the list.", this.list.size()));
     }
 

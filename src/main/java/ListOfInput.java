@@ -10,31 +10,31 @@ public class ListOfInput {
 
     public void addToList(String input) {
         String[] arrOfWords = input.split(" ");
-        String taskWithoutType = input.replace(arrOfWords[0], "");
+        String taskWithoutType = input.replace(arrOfWords[0], "").trim();
         Task task = new Task(input);
         try {
             if (taskWithoutType.isEmpty()) {
                 throw new DukeException();
             }
             switch (arrOfWords[0]) {
-                case "todo":
-                    task = new ToDo(taskWithoutType);
-                    list.add(task);
-                    break;
-                case "deadline":
-                    String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
-                    task = new Deadline(arrOfWordsDeadline[0], arrOfWordsDeadline[1]);
-                    list.add(task);
-                    break;
-                case "event":
-                    String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
-                    task = new Event(arrOfWordsEvent[0], arrOfWordsEvent[1]);
-                    list.add(task);
-                    break;
+            case "todo":
+                task = new ToDo(taskWithoutType);
+                list.add(task);
+                break;
+            case "deadline":
+                String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
+                task = new Deadline(arrOfWordsDeadline[0], arrOfWordsDeadline[1]);
+                list.add(task);
+                break;
+            case "event":
+                String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
+                task = new Event(arrOfWordsEvent[0], arrOfWordsEvent[1]);
+                list.add(task);
+                break;
             }
             print("    Got it. I've added this task:");
             System.out.println("        " + task);
-            print("    Now you have " + list.size() + " tasks in the list");
+            print("    Now you have " + list.size() + " tasks in the list.");
         } catch (DukeException a) {
             print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " cannot be empty.");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -44,7 +44,7 @@ public class ListOfInput {
 
     public void markAsDone(int num) {
         Task task = list.get(num - 1);
-        task.isDone();
+        task.setDone();
         print("    Nice! I've marked this task as done:");
         System.out.println("    " + task);
     }

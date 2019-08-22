@@ -15,7 +15,7 @@ public class Task {
         return description;
     }
 
-    public void isDone() {
+    public void setDone() {
         isDone = true;
     }
 

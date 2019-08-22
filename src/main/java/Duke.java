@@ -16,22 +16,22 @@ public class Duke {
         while (!wordArray[0].equals("bye")) {
             try {
                 switch (wordArray[0]) {
-                    case "list":
-                        list.printList();
-                        break;
-                    case "done":
-                        list.markAsDone(Integer.parseInt(wordArray[1]));
-                        break;
-                    case "todo":
-                    case "event":
-                    case "deadline":
-                        list.addToList(input);
-                        break;
-                    case "delete":
-                        list.delete(Integer.parseInt(wordArray[1]));
-                        break;
-                    default:
-                        throw new DukeException();
+                case "list":
+                    list.printList();
+                    break;
+                case "done":
+                    list.markAsDone(Integer.parseInt(wordArray[1]));
+                    break;
+                case "todo":
+                case "event":
+                case "deadline":
+                    list.addToList(input);
+                    break;
+                case "delete":
+                    list.delete(Integer.parseInt(wordArray[1]));
+                    break;
+                default:
+                    throw new DukeException();
                 }
             } catch (DukeException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

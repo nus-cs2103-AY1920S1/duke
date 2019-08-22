@@ -43,6 +43,23 @@ public class Duke {
         }
     }
 
+    public static void checkIllegalInstruction(String[] words) throws DukeException {
+        String fw = words[0];
+        if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event"))) {
+            throw new DukeException(" \u2639  OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        if ((fw.equals("todo") || fw.equals("deadline") || fw.equals("event")) && words.length < 2) {
+            throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
+        }
+        if ((fw.equals("deadline") && findIdx(words, "/by") == -1) || 
+                (fw.equals("event") && findIdx(words, "/at") == -1)) {
+            throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
+                }
+        if (fw.equals("done") && words.length < 2) {
+            throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
+        }
+    }
+
     public static void processor(){
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -52,16 +69,22 @@ public class Duke {
                 printList(tasks);
             } else {
                 String[] words = command.split(" ");
-                if (words[0].equals("done")) {
-                    int i = Integer.parseInt(words[1]);
-                    Task t = tasks.get(i - 1);
-                    t.markAsDone();
-                    System.out.println("Nice! I've marked this task as done: \n  " + t);
-                } else {
-                    Task t = parseTask(words);
-                    tasks.add(t);
-                    System.out.println("Got it. I've added this task: \n  " + t + "\nNow you have "
-                            + tasks.size() + " tasks in the list.");
+                try {
+                    checkIllegalInstruction(words);
+                    if (words[0].equals("done")) {
+                        int i = Integer.parseInt(words[1]);
+                        Task t = tasks.get(i - 1);
+                        t.markAsDone();
+                        System.out.println("Nice! I've marked this task as done: \n  " + t);
+                    } else {
+                        Task t = parseTask(words);
+                        tasks.add(t);
+                        System.out.println("Got it. I've added this task: \n  " + t + "\nNow you have "
+                                + tasks.size() + " tasks in the list.");
+                    }
+                }
+                catch(DukeException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         }

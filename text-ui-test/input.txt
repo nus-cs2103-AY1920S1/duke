@@ -1,0 +1,10 @@
+todo borrow book
+list
+deadline CS2103T Project /by Today
+done 1
+list
+deadline return book /by Sunday
+done 3
+event project meeting /at Mon 2-4pm
+list
+bye

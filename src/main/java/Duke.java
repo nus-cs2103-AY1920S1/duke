@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Tasks> list = new ArrayList<Tasks>();
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         while(sc.hasNext()) {
            String next = sc.nextLine(); 

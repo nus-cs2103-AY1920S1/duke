@@ -21,15 +21,23 @@ public class Duke {
             String input = scanner.nextLine();
 
             if (input.equals("bye")) {
+                TaskManager.separator();
                 System.out.println("Bye. Hope to see you again soon!");
+                TaskManager.separator();
                 break;
             } else if (input.equals("list")) {
                 taskManager.printTasks();
             } else if (input.matches("^done \\d+$")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 taskManager.markAsDone(index);
+            } else if (input.startsWith("deadline ")) {
+                String suffix = input.split(" ", 2)[1];
+                String description = suffix.split(" /by ", 2)[0];
+                String by = suffix.split(" /by ", 2)[1];
+                taskManager.addTask(new Deadline(description, by));
             } else {
-                taskManager.addTask(input);
+                scanner.close();
+                throw new IllegalArgumentException();
             }
         }
         scanner.close();

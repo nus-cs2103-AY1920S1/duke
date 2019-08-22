@@ -11,17 +11,19 @@ public class Duke {
                 "    What can I do for you?");
 
         while (true) {
-            input = sc.nextLine().trim();
+            input = sc.next().trim();
             if (input.equals("bye"))
                 break;
             else if (input.contains("done")) {
-                int index = Integer.parseInt(input.substring(5));
+                int index = Integer.parseInt(sc.next());
                 printFormattedText(todo.markTaskDone(index));
             }
             else if (input.equals("list"))
                 printFormattedText(todo.displayList());
-            else
-                printFormattedText(todo.addTask(input));
+            else {
+                String remainingInput = sc.nextLine();
+                printFormattedText(todo.addTask(input, remainingInput));
+            }
         }
 
         printFormattedText("    Bye. Hope to see you again soon!");

@@ -43,28 +43,37 @@ public class Duke {
 
     // execute command given depending on what command it is
     private void execCommand(String command) throws InvalidTaskException {
-        String[] commandStringArray = command.split(" "); //split by words
-        String taskType = commandStringArray[0];
+        String[] commandStringArray = command.trim().split(" "); //split by words
+        String firstWord = commandStringArray[0];
         if (command.equals("list")) {
             printList();
-        } else if (taskType.equals("done") && commandStringArray.length == 2) {
+        } else if (firstWord.equals("done") && commandStringArray.length == 2) {
             // when the command is done and followed by task number
             int taskNo = Integer.parseInt(commandStringArray[1]);
-            Task taskDone = this.list.get(taskNo - 1);
-            taskDone.markAsDone();
-            System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
-        } else if (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
+            markTaskAsDone(taskNo);
+        } else if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
             // check if the taskType is a valid command before adding the task to the tasks list
             try {
-                addTask(command, taskType);
+                addTask(command, firstWord);
             } catch (MissingDescriptionException | MissingInputException e) {
                 // taskType is valid but missing arguments
                 System.out.println("\t" + e.getMessage());
             }
+        } else if (firstWord.equals("delete") && commandStringArray.length == 2) {
+            // when the command is delete and is followed by task number
+            int taskNo = Integer.parseInt(commandStringArray[1]);
+            deleteTask(taskNo);
         } else {
             // taskType is not a valid command, throw IllegalArgumentException
             throw new InvalidTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    // marks a task in the list as done
+    private void markTaskAsDone(int taskNo) {
+        Task taskDone = this.list.get(taskNo - 1);
+        taskDone.markAsDone();
+        System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
     }
 
     // adds a certain type of task to the tasks list depending on user's input
@@ -121,6 +130,14 @@ public class Duke {
     private void printAddedTask(Task task) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + task.toString());
+        System.out.println(String.format("\tNow you have %d tasks in the list.", this.list.size()));
+    }
+
+    // deletes a task from the tasks list
+    private void deleteTask(int taskNo) {
+        Task removedTask = this.list.remove(taskNo - 1);
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t  " + removedTask.toString());
         System.out.println(String.format("\tNow you have %d tasks in the list.", this.list.size()));
     }
 

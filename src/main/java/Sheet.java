@@ -14,6 +14,15 @@ public class Sheet {
         System.out.printf(Formatter.LINE);
     }
 
+    public void delete(int index) {
+        this.list.remove(index);
+        System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.REMOVE + Formatter.INDENT + "  "
+                + this.list.get(index - 1).toString() + "\n");
+        this.numOfTask--;
+        this.count();
+        System.out.printf(Formatter.LINE);
+    }
+
     private void count() {
         if (this.list.size() < 2) {
             System.out.printf(Formatter.INDENT + "Now you have %d task in the list.\n", numOfTask);

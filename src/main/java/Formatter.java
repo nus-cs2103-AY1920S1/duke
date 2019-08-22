@@ -8,4 +8,5 @@ public class Formatter {
     public static final String GOT = "Got it. I've added this task: \n";
     public static final String LIST = "Here are the tasks in your list:\n";
     public static final String UNKNOWN = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String REMOVE = "Noted. I've removed this task:\n";
 }

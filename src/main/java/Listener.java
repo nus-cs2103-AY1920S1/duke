@@ -19,6 +19,9 @@ public class Listener {
                 break;
             } else if (command.equals("list")) {
                 this.sheet.showList();
+            } else if (command.equals("delete")|| command.equals("done"))) {
+                int index = sc.nextInt();
+                this.sheet.delete(index);
             } else if (command.equals("done")) {
                 try {
                     int index = sc.nextInt();

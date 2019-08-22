@@ -36,6 +36,16 @@ public class Duke {
                 } catch (IndexOutOfBoundsException error3) {
                     printInput(List.of("☹ No such task"));
                 }
+            } else if (tokens[0].equals("delete")) {
+                try {
+                    deleteTask(tokens[1]);
+                } catch (NumberFormatException error) {
+                    printInput(List.of("☹ Invalid input must be an integer"));
+                } catch (IllegalArgumentException error2) {
+                    printInput(List.of(error2.getMessage()));
+                } catch (IndexOutOfBoundsException error3) {
+                    printInput(List.of("☹ No such task"));
+                }
             } else {
                 createTask(tokens);
             }
@@ -137,6 +147,8 @@ public class Duke {
             printInput(task);
         }
     }
+
+
 
     public static void checkValidLength(String[] tokens) throws IllegalArgumentException {
         if (tokens.length == 1) {

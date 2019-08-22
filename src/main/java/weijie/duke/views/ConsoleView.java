@@ -1,6 +1,7 @@
 package weijie.duke.views;
 
 import weijie.duke.presenters.ConsoleInputListener;
+import weijie.duke.responses.TaskResponse;
 import weijie.duke.utils.StringUtils;
 
 import java.util.Scanner;
@@ -33,7 +34,8 @@ public class ConsoleView {
         }
     }
 
-    public void print(String output) {
+    public void print(TaskResponse response) {
+        String output = response.getFormattedResponse();
         System.out.println(StringUtils.indentf("%s" + output + "\n%s", DIVIDER, DIVIDER));
     }
 

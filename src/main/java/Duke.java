@@ -45,7 +45,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Greet the user
-        System.out.print(DUKE_LINE
+        System.out.println(DUKE_LINE
                            + DUKE_TAB4 + DUKE_HELLO
                            + DUKE_LINE);
 

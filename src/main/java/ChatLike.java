@@ -84,6 +84,9 @@ public class ChatLike {
     Apart from the two types exceptions given, I came up with this possible exception
     In command done <taskNumber>, <taskNumber> should necessarily be less than the taskList size, else an exception is thrown,
     which I have handled here.
+    Similar with delete <taskNumber>.
+    I figured out that writing only "done" or only "delete" also throws an exception, but it can be rectified in
+    later levels.
     */
     public void done(int n) throws DukeException{ //Marks a task to be completed by calling method of Task object
         if(n > this.taskList.size()) {
@@ -93,6 +96,20 @@ public class ChatLike {
         }
         this.taskList.get(n - 1).mark();
         this.response = "Nice! I've marked this task as done:\n       " + this.taskList.get(n - 1);
+        System.out.println(this);
+    }
+
+    public void delete(int n) throws DukeException{ //Marks a task to be completed by calling method of Task object
+        if(n > this.taskList.size()) {
+            throw new DukeException("    ____________________________________________________________\n     " +
+                    "\u2639" + " OOPS!!! I'm sorry, but you do not have a task at that position to delete :-(" +
+                    "\n    ____________________________________________________________\n");
+        }
+        Task taskToBeDel = this.taskList.get(n - 1);
+        this.taskList.remove(taskToBeDel); //Deletes the task from taskList
+
+        this.response = "Noted. I've removed this task:\n       " + taskToBeDel +
+                "\n     Now you have " + taskList.size() + " tasks in the list."; //Shows truncated list
         System.out.println(this);
     }
 

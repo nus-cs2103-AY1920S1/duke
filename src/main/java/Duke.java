@@ -21,6 +21,12 @@ public class Duke {
                 catch(DukeException exc) {
                     System.out.println(exc.getMessage());
                 }
+            } else if (comm.length() >= 6 && comm.substring(0,6).equals("delete")) {
+                try {
+                    cl.delete(Integer.valueOf(comm.substring(7))); //Sends the list number to be marked as done
+                } catch (DukeException exc) {
+                    System.out.println(exc.getMessage());
+                }
             } else {
                 try {
                     cl.add(comm);

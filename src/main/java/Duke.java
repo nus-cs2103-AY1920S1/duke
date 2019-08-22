@@ -17,12 +17,14 @@ public class Duke {
                     break;
                 } else if (input.equals("list")) {
                     printList(tasks);
-                } else if (input.contains("done")) {
+                } else if (input.startsWith("done")) {
                     String[] inputs = input.split(" ");
-                    int number = Integer.parseInt(inputs[1]) - 1;
-                    tasks.get(number).complete();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(tasks.get(number));
+                    int numberToComplete = Integer.parseInt(inputs[1]) - 1;
+                    completeTask(numberToComplete, tasks);
+                } else if (input.startsWith("delete")) {
+                    String[] inputs = input.split(" ");
+                    int numberToDelete = Integer.parseInt(inputs[1]) - 1;
+                    deleteTask(numberToDelete, tasks);
                 } else if (input.startsWith("todo")) {
                     if (!input.substring(4).isEmpty()) {
                         String description = input.substring(4);
@@ -73,6 +75,19 @@ public class Duke {
                 handleException(e);
             }
         }
+    }
+
+    public static void completeTask(int index, ArrayList<Task> tasksList) {
+        tasksList.get(index).complete();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(tasksList.get(index));
+    }
+
+    public static void deleteTask(int index, ArrayList<Task> tasksList) {
+        Task removedTask = tasksList.remove(index);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removedTask);
+        System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
     }
 
     public static void printout(Task task, ArrayList<Task> tasksList) {

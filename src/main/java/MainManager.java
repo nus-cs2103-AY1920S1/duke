@@ -37,7 +37,7 @@ public class MainManager {
 
 
                 default:
-                    Task curr = new Task(toPrint);
+                    Task curr = new Task(toPrint, command[0].toUpperCase());
                     list[counter] = curr;
                     counter++;
                     System.out.println("added: " + toPrint);

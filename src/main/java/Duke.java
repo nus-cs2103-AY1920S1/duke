@@ -12,7 +12,7 @@ public class Duke {
            String[] command = next.split(" ");
            if(command[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
-                continue;
+                break;
            } else if (command[0].equals("list")) {
                int numOfOp = list.size();
                for (int i = 1; i <= numOfOp; i++) {
@@ -22,14 +22,20 @@ public class Duke {
                Tasks done = list.get(Integer.parseInt(command[1]) - 1);
                done.finishTask();
                System.out.println("Nice! I've marked this task as done:\n " + done);
-           } else {
+           } else if (command[0].equals("delete")) {
+               Tasks removeThis = list.get(Integer.parseInt(command[1]) - 1);
+               System.out.println("Noted. I've removed this task:\n " + removeThis);
+               list.remove(Integer.parseInt(command[1]) - 1);
+               System.out.println("Now you have " + list.size() + " tasks in the list."); 
+           } 
+           else {
                int index = next.lastIndexOf("/");
                String time = "";
                if(index != -1) {
                    time = next.substring(index + 1);
                    if(time.equals("")) {
                        System.out.println("☹ OOPS!!! The time cannot be empty.");
-                       break;
+                       continue;
                    }
                }
                String desc;

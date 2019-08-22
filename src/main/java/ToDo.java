@@ -8,6 +8,9 @@ public class ToDo extends Task {
 
     static Command getCommand(List<Task> tasks) {
         return words -> {
+            if (words.length == 1) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
             String[] nameArr = Arrays.copyOfRange(words, 1, words.length);
             Task task = new ToDo(String.join(" ", nameArr));
             tasks.add(task);

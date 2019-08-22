@@ -26,9 +26,13 @@ public class Duke {
         while (!exit && input.hasNext()) {
             String line = input.nextLine();
             String[] words = line.split(" ");
-            Command command = parser.parse(words);
-            printMessage(command.run(words));
-            exit = command.isExit();
+            try {
+                Command command = parser.parse(words);
+                printMessage(command.run(words));
+                exit = command.isExit();
+            } catch (DukeException e) {
+                printMessage(List.of(e.getMessage()));
+            }
         }
     }
 

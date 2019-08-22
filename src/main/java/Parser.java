@@ -8,7 +8,11 @@ class Parser {
         commands.put(name, command);
     }
 
-    Command parse(String[] words) {
-        return commands.get(words[0]);
+    Command parse(String[] words) throws DukeException {
+        Command command = commands.get(words[0]);
+        if (command == null) {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+        return command;
     }
 }

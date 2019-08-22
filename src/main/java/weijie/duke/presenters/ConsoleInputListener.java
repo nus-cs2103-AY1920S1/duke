@@ -1,5 +1,5 @@
 package weijie.duke.presenters;
 
-public interface InputListener {
+public interface ConsoleInputListener {
     void onInputReceived(String input);
 }

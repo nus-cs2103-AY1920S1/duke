@@ -6,12 +6,12 @@ import weijie.duke.views.ConsoleView;
 
 import java.util.List;
 
-public class ConsolePresenter implements InputListener {
+public class TasksPresenter implements ConsoleInputListener {
 
     private ConsoleView view;
     private IRepository<Task> repo;
 
-    public ConsolePresenter(ConsoleView view, IRepository<Task> repo) {
+    public TasksPresenter(ConsoleView view, IRepository<Task> repo) {
         view.registerListener(this);
         this.view = view;
         this.repo = repo;
@@ -37,6 +37,10 @@ public class ConsolePresenter implements InputListener {
             repo.create(task);
             view.print("added: " + task.getDescription());
         }
+    }
+
+    public void start() {
+        view.startDisplay();
     }
 }
 

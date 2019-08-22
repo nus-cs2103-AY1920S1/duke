@@ -1,6 +1,6 @@
 package weijie.duke.views;
 
-import weijie.duke.presenters.InputListener;
+import weijie.duke.presenters.ConsoleInputListener;
 import weijie.duke.utils.StringUtils;
 
 import java.util.Scanner;
@@ -14,13 +14,13 @@ public class ConsoleView {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String DIVIDER = "____________________________________________________________\n";
 
-    private InputListener inputListener;
+    private ConsoleInputListener inputListener;
 
-    public void registerListener(InputListener inputListener) {
+    public void registerListener(ConsoleInputListener inputListener) {
         this.inputListener = inputListener;
     }
 
-    public void init() {
+    public void startDisplay() {
         System.out.println(
                 StringUtils.indentf("%s%sHello! I'm Duke\nWhat can I do for you?\n%s", DIVIDER, LOGO, DIVIDER));
 

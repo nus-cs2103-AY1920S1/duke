@@ -11,10 +11,7 @@ public class TaskCommandFactory {
     }
 
     public ITaskCommand tryMakeCommand(String command) {
-        if (!commandMap.containsKey(command)) {
-            return commandMap.get("add");
-        } else {
-            return commandMap.get(command);
-        }
+        return commandMap.getOrDefault(command, new InvalidCommand());
+
     }
 }

@@ -1,5 +1,6 @@
 package weijie.duke.commands;
 
+import weijie.duke.exceptions.DukeException;
 import weijie.duke.models.Task;
 import weijie.duke.models.Todo;
 import weijie.duke.repos.IRepository;
@@ -17,6 +18,10 @@ public class AddTodoCommand extends AddCommand {
     @Override
     public TaskResponse execute(String... args) {
         String description = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+        if (description.isEmpty()) {
+            return new TaskResponse(new DukeException("☹ OOPS!!! The description of a todo cannot be empty."));
+        }
+
         Task task = new Todo(description);
         repo.create(task);
 

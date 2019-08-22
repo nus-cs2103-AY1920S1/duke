@@ -35,6 +35,10 @@ public class ConsoleView {
     }
 
     public void print(TaskResponse response) {
+        if (response.isInvalidInput()) {
+            System.out.println(StringUtils.indentf("%s" + response.getErrorMessage() + "\n%s", DIVIDER, DIVIDER));
+            return;
+        }
         String output = response.getFormattedResponse();
         System.out.println(StringUtils.indentf("%s" + output + "\n%s", DIVIDER, DIVIDER));
     }

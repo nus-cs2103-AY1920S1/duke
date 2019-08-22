@@ -7,6 +7,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
     public String getStatusIcon() {
         if(isDone) {
             return "\u2713";

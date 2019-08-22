@@ -18,6 +18,12 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: \n" + doneTask.toString());
     }
 
+    static void delete(String number) {
+        Task deleted = tasks.remove(Integer.parseInt(number) - 1);
+        System.out.println(String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list",
+                deleted.toString(), tasks.size()));
+    }
+
     static void deadline(String s) {
         String[] split = s.split(" /by ");
         Deadline dl = new Deadline(split[0], split[1]);
@@ -52,6 +58,8 @@ public class Duke {
                     list();
                 } else if (splitCmmd[0].equals("done")) {
                     done(splitCmmd[1]);
+                } else if (splitCmmd[0].equals("delete")) {
+                    delete(splitCmmd[1]);
                 } else if (splitCmmd[0].equals("deadline")) {
                     deadline(cmmd.substring(9));
                 } else if (splitCmmd[0].equals("event")) {

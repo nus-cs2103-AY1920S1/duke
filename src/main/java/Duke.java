@@ -1,3 +1,4 @@
+import java.lang.annotation.Repeatable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,7 +8,7 @@ public class Duke {
     private List<String> taskList;
 
     public Duke() {
-       this.taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
 
@@ -26,10 +27,14 @@ public class Duke {
         while (sc.hasNext()) {
             String command = sc.nextLine();
             switch (command) {
-                case "list": this.handleList();
-                case "bye": this.handleBye();
+                case "list":
+                    this.handleList();
+                    break;
+                case "bye":
+                    this.handleBye();
                     return;  // exit
-                default: this.handleDefault(command);
+                default:
+                    this.handleAddItem(command); // add item to list
             }
         }
         sc.close();
@@ -39,15 +44,12 @@ public class Duke {
         Response.NewFarewell().print();
     }
 
-    private void handleDefault(String command) {
-        Response.NewEcho(command).print();
+    private void handleAddItem(String item) {
+        this.taskList.add(item);
+        Response.NewAdded(item).print();
     }
 
     private void handleList() {
-        for (int i = 0; i < this.taskList.size(); i++) {
-
-            System.out.println();
-
-        }
+        Response.NewListing(this.taskList).print();
     }
 }

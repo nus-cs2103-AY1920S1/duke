@@ -8,6 +8,9 @@
 /build/
 src/main/resources/docs/
 
+# Text-UI checking giles
+text-ui-test/sources.txt
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml

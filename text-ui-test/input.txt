@@ -1,0 +1,18 @@
+list
+done 1
+done a
+todo Hello World
+list
+done 1
+done 2
+deadline Test without date
+deadline Test with date /by tomorrow
+list
+done 2
+list
+event Test without date
+event Event with date /at 3rd July
+list
+done 3
+list
+bye

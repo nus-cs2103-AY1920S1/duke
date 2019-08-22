@@ -16,3 +16,5 @@ bin/
 # Vim temporary files
 *.swp
 
+# Testing result file
+text-ui-test/ACTUAL.TXT

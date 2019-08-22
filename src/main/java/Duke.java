@@ -21,7 +21,7 @@ public class Duke {
             String[] commandWords = command.split(" ");
             String order = commandWords[0];
             if (order.equals("done")){
-                int index = Integer.parseInt(command.split(" ")[1]) - 1;
+                int index = Integer.parseInt(commandWords[1]) - 1;
                 try {
                     if (index >= arr.size() || index < 0) {
                         throw new DukeException(" :( OOPS!!! Requested task number is not available");
@@ -30,9 +30,12 @@ public class Duke {
                     temp.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + temp);
-                    System.out.println(hr);
                 } catch (DukeException de) {
                     System.err.println(de.getMessage());
+                } catch (NumberFormatException nfe) {
+                    System.err.println(" :( OOPS!!! Invalid format. Enter number of task to be marked as done.");
+                } finally {
+                    System.out.println(hr);
                 }
             } else if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -105,7 +108,30 @@ public class Duke {
                     } finally {
                         System.out.println(hr);
                     }
-                } else {
+                } else if (order.equals("delete")) {
+                    try {
+                        if (commandWords.length == 1) {
+                            throw new DukeException(" :( OOPS!!! Provided task number does not exist.");
+                        } else {
+                            int index = Integer.parseInt(commandWords[1]) - 1;
+                            if (index >= arr.size() || index < 0) {
+                                throw new DukeException(" :( OOPS!!! Task to be deleted is not available");
+                            } else {
+                                Task temp = arr.remove(index);
+                                System.out.println("Noted. I've removed this task:");
+                                System.out.println(" " + temp);
+                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                            }
+                        }
+                    } catch (DukeException de) {
+                        System.err.println(de.getMessage());
+                    } catch (NumberFormatException nfe) {
+                        System.err.println(" :( OOPS!!! Invalid format. Enter number of task to be deleted");
+                    } finally {
+                        System.out.println(hr);
+                    }
+                }
+                else {
                     try {
                         throw new DukeException(" :( OOPS!!! I'm sorry but I don't know what that means :-(");
                     } catch (DukeException de) {

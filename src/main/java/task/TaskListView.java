@@ -1,12 +1,13 @@
 package task;
 
 import util.DukeMessage;
+import util.DukeOutput;
 
 import java.util.List;
 
 class TaskListView {
-    public DukeMessage formatAllTasksMessage(List<Task> tasks) {
-        DukeMessage taskList = new DukeMessage("Here are the task.tasks in your list:")
+    public void displayAllTasks(List<Task> tasks) {
+        DukeMessage taskList = new DukeMessage("Here are the tasks in your list:")
                 .newLine();
 
         if (!tasks.isEmpty()) {
@@ -21,27 +22,28 @@ class TaskListView {
                     .append(formatTaskMessage(tasks.get(i)));
         }
 
-        return taskList;
+        DukeOutput.printMessage(taskList);
     }
 
-    public DukeMessage formatTaskMessage(Task task) {
+    private DukeMessage formatTaskMessage(Task task) {
         return new DukeMessage(task.getTaskMessage());
     }
 
-    public DukeMessage formatNewTask(Task task, int tasksLength) {
-        return new DukeMessage("Got it. I've added this task:")
+    public void displayNewTask(Task task, int tasksLength) {
+        DukeMessage newTaskMessage = new DukeMessage("Got it. I've added this task:")
                 .newLine()
                 .indent()
                 .append(task.getTaskMessage())
                 .newLine()
                 .append(String.format("Now you have %d tasks in the list", tasksLength));
+        DukeOutput.printMessage(newTaskMessage);
     }
 
-    public DukeMessage formatTaskDone(Task task) {
-        return new DukeMessage("Nice! I've marked this task as done:")
+    public void displayTaskDone(Task task) {
+        DukeMessage taskDoneMessage = new DukeMessage("Nice! I've marked this task as done:")
                 .newLine()
                 .indent()
                 .append(task.getTaskMessage());
-
+        DukeOutput.printMessage(taskDoneMessage);
     }
 }

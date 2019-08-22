@@ -14,7 +14,7 @@ public class ListCommand implements Command {
 
     @Override
     public Optional<Command> execute() {
-        DukeOutput.printMessage(taskListController.getAllTasksMessage());
+        taskListController.displayAllTasks();
 
         return Optional.of(new ListenCommand(taskListController));
     }

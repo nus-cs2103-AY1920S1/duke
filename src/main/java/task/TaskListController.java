@@ -14,17 +14,17 @@ public class TaskListController {
         view = new TaskListView();
     }
 
-    public DukeMessage addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
-        return view.formatNewTask(task, tasks.size());
+        view.displayNewTask(task, tasks.size());
     }
 
-    public DukeMessage setTaskToDone(int index) {
+    public void setTaskToDone(int index) {
         tasks.get(index).setDone(true);
-        return view.formatTaskDone(tasks.get(index));
+        view.displayTaskDone(tasks.get(index));
     }
 
-    public DukeMessage getAllTasksMessage() {
-        return view.formatAllTasksMessage(tasks);
+    public void displayAllTasks() {
+        view.displayAllTasks(tasks);
     }
 }

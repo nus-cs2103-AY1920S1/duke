@@ -17,9 +17,7 @@ public class DoneCommand implements Command {
 
     @Override
     public Optional<Command> execute() {
-        DukeMessage doneMessage = taskListController.setTaskToDone(completedTaskIndex);
-
-        DukeOutput.printMessage(doneMessage);
+        taskListController.setTaskToDone(completedTaskIndex);
 
         return Optional.of(new ListenCommand(taskListController));
     }

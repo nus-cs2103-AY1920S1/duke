@@ -21,9 +21,7 @@ public class AddCommand implements Command {
 
     @Override
     public Optional<Command> execute() {
-        DukeMessage addMessage = taskListController.addTask(task);
-
-        DukeOutput.printMessage(addMessage);
+        taskListController.addTask(task);
 
         return Optional.of(new ListenCommand(taskListController));
     }

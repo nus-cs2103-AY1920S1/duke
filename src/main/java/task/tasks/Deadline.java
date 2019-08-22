@@ -19,7 +19,7 @@ public class Deadline extends Task {
 
     @Override
     protected Optional<String> getTaskExtraDetails() {
-        return Optional.of(String.format("at: %s", by));
+        return Optional.of(String.format("by: %s", by));
     }
 
     private static String getDescription(String arguments) {

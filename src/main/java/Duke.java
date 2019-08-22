@@ -18,7 +18,10 @@ public class Duke {
     }
 
     //Lists out all the tasks in Duke
-    public void list() {
+    public void list() throws IllegalArgumentException {
+        if (tasks.size() == 0) {
+            throw new IllegalArgumentException("Nothing found in list");
+        }
         int number = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task task : tasks) {
@@ -37,7 +40,7 @@ public class Duke {
     }
 
     public void done(int number) throws IndexOutOfBoundsException {
-        if (number > Duke.numberOfTasks || number == 0) {
+        if (number > Duke.numberOfTasks || number <= 0) {
             throw new IndexOutOfBoundsException("The task number does not exist.");
         }
         Task task = Duke.tasks.get(number - 1);
@@ -94,6 +97,8 @@ public class Duke {
             } catch (InputMismatchException e) {
                 System.out.println("OOPS!!! " + e.getMessage());
             } catch (IndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! " + e.getMessage());
+            } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! " + e.getMessage());
             }
             command = scanner.nextLine();

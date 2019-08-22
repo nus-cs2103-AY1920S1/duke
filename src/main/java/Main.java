@@ -10,7 +10,9 @@ public class Main {
     /**
      * The main method for Duke.
      *
-     * Reads data from stdin and hands it over to Duke for processing.
+     * Creates a new instance of Duke, asks Duke to greet user, and then reads
+     * data from stdin. This input is then handed over to Duke for processing.
+     *
      * @param args command(s) from the user
      */
     public static void main(String[] args) {
@@ -21,7 +23,6 @@ public class Main {
         // scan for commands from the over and send them to Duke for processing
         Scanner scanner = new Scanner(System.in);
         while (duke.getIsListening()) {
-
             duke.processCommand(scanner.nextLine());
         }
     }

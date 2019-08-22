@@ -18,7 +18,7 @@ public class Task {
     /**
      * Creates a task with a description and a status.
      *
-     * @param description string representing the description of this task
+     * @param description string representing the description of this task.
      */
     public Task(String description) {
         this.description = description;
@@ -26,37 +26,36 @@ public class Task {
     }
 
     /**
-     * Retrieves the unicode icon indicating task status
+     * Retrieves the unicode icon indicating task status.
      *
-     * @return tick mark if task is done or cross mark if task is not done
+     * @return tick mark if task is done or cross mark if task is not done.
      */
     private String getTaskStatusIcon() {
-        return (this.isDone ? "Y" : "N"); // return tick or X symbols
-        // return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+        return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     /**
-     * Get current status of this task
+     * Get current status of this task.
      *
-     * @return true if current task is done, false if current task is not done
+     * @return true if current task is done, false if current task is not done.
      */
     public boolean getIsDone() {
         return this.isDone;
     }
 
     /**
-     * Changes the status of the task to 'done'
+     * Changes the status of the task to 'done'.
      *
-     * @param hasBeenDone boolean to indicate that the task has been completed
+     * @param hasBeenDone boolean to indicate that the task has been completed.
      */
     public void setTaskAsDone(boolean hasBeenDone) {
         this.isDone = hasBeenDone;
     }
 
     /**
-     * Return a string representation of this task
+     * Return a string representation of this task.
      *
-     * @return string representing this task
+     * @return string representing this task.
      */
     public String toString() {
         return "[" + this.getTaskStatusIcon() + "] " + this.description;

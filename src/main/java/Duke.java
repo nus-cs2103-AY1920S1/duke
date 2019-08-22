@@ -31,13 +31,13 @@ public class Duke {
             try {
 
                 if (keyword.equals("list")) {
-                    System.out.println("Here are the tasks in your list: ");
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 1; i <= duke.tasks.size(); i++) {
                         System.out.println(i + "." + duke.tasks.get(i - 1));
                     }
 
                 } else if (keyword.equals("done")) {
-                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("Nice! I've marked this task as done:");
                     Task taskToMarkAsDone = duke.tasks.get(Integer.parseInt(cmdList[1]) - 1);
                     taskToMarkAsDone.markAsDone();
                     System.out.println(taskToMarkAsDone);
@@ -45,7 +45,7 @@ public class Duke {
                 } else if (keyword.equals("delete")) {
                     Task taskToBeRemoved = duke.tasks.get(Integer.parseInt(cmdList[1]) - 1);
                     duke.tasks.remove(taskToBeRemoved);
-                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("Noted. I've removed this task:");
                     System.out.print("  ");
                     System.out.println(taskToBeRemoved);
                     System.out.println("Now you have " + duke.tasks.size() + " in the list.");
@@ -53,7 +53,7 @@ public class Duke {
                 } else { // it is a new Task
                     Task newTaskToBeAdded = duke.handleNewTask(keyword, cmd);
                     duke.tasks.add(newTaskToBeAdded);
-                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("Got it. I've added this task:");
                     System.out.print("  ");
                     System.out.println(newTaskToBeAdded);
                     System.out.println("Now you have " + duke.tasks.size() + " tasks in the list.");

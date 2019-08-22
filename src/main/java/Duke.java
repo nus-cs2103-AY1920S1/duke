@@ -24,38 +24,56 @@ public class Duke {
             String input = sc.nextLine();
             int i = input.indexOf(' ');
             String first = getFirstWord(input);
-            System.out.println(first);
 
-            if (input.equals("list")) {
-                readList();
-            } else if (first.equals("done")) {
-                int taskNo = Integer.parseInt(input.substring(i + 1));
-                list.get(taskNo).markAsDone();
-            } else if (input.equals("bye")) {
-                exit();
-            } else if (first.equals("todo")) {
-                String task = input.substring(i + 1);
-                ToDos todo = new ToDos(task);
-                todo.setTaskType("T");
-                addList(todo);
-            } else {
+            try {
+                if (input.equals("list")) {
+                    readList();
+                } else if (first.equals("done")) {
+                    int taskNo = Integer.parseInt(input.substring(i + 1));
+                    list.get(taskNo).markAsDone();
+                } else if (input.equals("bye")) {
+                    exit();
+                } else if (first.equals("todo")) {
+                    String task = input.substring(i + 1);
+                    if (input.length() == 4) {
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        ToDos todo = new ToDos(task);
+                        todo.setTaskType("T");
+                        addList(todo);
+                    }
+                } else if (first.equals("deadline") || first.equals("event")) {
 
-                int j = input.indexOf("/");
-                int k = input.indexOf(" ");
-                String task = input.substring(k + 1, j + 1);
-                String time = input.substring(j + 4);
+                    int j = input.indexOf("/");
+                    int k = input.indexOf(" ");
+                    String task = input.substring(k + 1, j + 1);
+                    String time = input.substring(j + 4);
 
-                if (first.equals("deadline")) {
-                    Deadlines ddl = new Deadlines(task);
-                    ddl.setTime(time);
-                    ddl.setTaskType("D");
-                    addList(ddl);
+                    if (first.equals("deadline")) {
+                        if (input.length() == 8) {
+                            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        } else {
+                            Deadlines ddl = new Deadlines(task);
+                            ddl.setTime(time);
+                            ddl.setTaskType("D");
+                            addList(ddl);
+                        }
+                    } else {
+                        if (input.length() == 5) {
+                            System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                        } else {
+                            Events e = new Events(task);
+                            e.setTime(time);
+                            e.setTaskType("E");
+                            addList(e);
+                        }
+                    }
                 } else {
-                    Events e = new Events(task);
-                    e.setTime(time);
-                    e.setTaskType("E");
-                    addList(e);
+                    DukeException e2 = new DukeException(input);
+                    throw e2;
                 }
+            } catch (DukeException e2) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
             }
         }
     }

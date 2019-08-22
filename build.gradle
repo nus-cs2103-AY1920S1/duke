@@ -36,3 +36,7 @@ application {
     mainClassName = "Duke"
 }
 
+run {
+    standardInput = System.in
+}
+

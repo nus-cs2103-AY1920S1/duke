@@ -14,4 +14,4 @@ public class Duke {
             if (command.equals("bye")) break; // to exit code
         }
     }
-}
+} //For level 3 Duke class remains unchanged

@@ -25,12 +25,28 @@ public class Duke {
                 adl.printAllEvent();
                 System.out.println();
             } else if(subin1.contentEquals("done")) {
-                String subin2 = in.split(" ")[1];
-                System.out.println("Nice! I have marked this task as done:");
-                int index = Integer.parseInt(subin2);
-                adl.changeEvent(index - 1);
-                // System.out.print("\t");
-                adl.printEvent(index - 1);
+                if(in.split(" ").length == 1) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    String subin2 = in.split(" ")[1];
+                    System.out.println("Nice! I have marked this task as done:");
+                    int index = Integer.parseInt(subin2);
+                    adl.changeEvent(index - 1);
+                    // System.out.print("\t");
+                    adl.printEvent(index - 1);
+                }
+            } else if(subin1.contentEquals("delete")) {
+                if (in.split(" ").length == 1) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    String subin2 = in.split(" ")[1];
+                    int index = Integer.parseInt(subin2);
+                    System.out.println("Noted. I've removed this task: ");
+                    adl.printEvent(index - 1);
+                    adl.deleteMission(index - 1);
+                    counter -= 1;
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                }
             } else if(subin1.contentEquals("event") ||  subin1.contentEquals("deadline") || subin1.contentEquals("todo")) {
                 if(in.split(" ").length == 1) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");

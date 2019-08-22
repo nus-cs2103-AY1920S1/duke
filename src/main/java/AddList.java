@@ -33,4 +33,8 @@ public class AddList {
     public void changeEvent(int index) {
         ls.get(index).changeState();
     }
+
+    public void deleteMission(int index) {
+        ls.remove(index);
+    }
 }

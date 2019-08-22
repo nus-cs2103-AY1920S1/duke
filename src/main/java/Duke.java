@@ -31,6 +31,9 @@ public class Duke {
                 } else if (first.equals("done")) {
                     int taskNo = Integer.parseInt(input.substring(i + 1));
                     list.get(taskNo).markAsDone();
+                } else if (first.equals("delete")) {
+                    int taskNo = Integer.parseInt(input.substring(i + 1));
+                    delete(taskNo);
                 } else if (input.equals("bye")) {
                     exit();
                 } else if (first.equals("todo")) {
@@ -46,7 +49,7 @@ public class Duke {
 
                     int j = input.indexOf("/");
                     int k = input.indexOf(" ");
-                    String task = input.substring(k + 1, j + 1);
+                    String task = input.substring(k + 1, j - 1);
                     String time = input.substring(j + 4);
 
                     if (first.equals("deadline")) {
@@ -78,13 +81,27 @@ public class Duke {
         }
     }
 
+    private static void delete(int taskNo) {
+        System.out.println("Noted. I've removed this task: ");
+
+        if (list.get(taskNo - 1).taskType.equals("T")) {
+            System.out.println("  [" + list.get(taskNo - 1).taskType + "][" + list.get(taskNo - 1).getStatusIcon() + "] " + list.get(taskNo - 1).description);
+        } else if (list.get(taskNo - 1).taskType.equals("D")) {
+            System.out.println("  [" + list.get(taskNo - 1).taskType + "][" + list.get(taskNo - 1).getStatusIcon() + "] " + list.get(taskNo - 1).description + " (by: " + list.get(taskNo - 1).time + ")");
+        } else {
+            System.out.println("  [" + list.get(taskNo - 1).taskType + "][" + list.get(taskNo - 1).getStatusIcon() + "] " + list.get(taskNo - 1).description + " (at: " + list.get(taskNo - 1).time + ")");
+        }
+        list.remove(taskNo - 1);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    }
+
     private static void readList() {
         System.out.println("Here are the tasks in your list:\n");
         for(int i = 1;i <= list.size();i++) {
             if (list.get(i - 1).taskType.equals("D")) {
-                System.out.println(i + "." + "[" + list.get(i - 1).taskType + "][" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).description + "(by: " + list.get(i - 1).time + ")");
+                System.out.println(i + "." + "[" + list.get(i - 1).taskType + "][" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).description + " (by: " + list.get(i - 1).time + ")");
             } else if (list.get(i - 1).taskType.equals("E")) {
-                System.out.println(i + "." + "[" + list.get(i - 1).taskType + "][" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).description + "(at: " + list.get(i - 1).time + ")");
+                System.out.println(i + "." + "[" + list.get(i - 1).taskType + "][" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).description + " (at: " + list.get(i - 1).time + ")");
             } else {
                 System.out.println(i + "." + "[" + list.get(i - 1).taskType + "][" + list.get(i - 1).getStatusIcon() + "] " + list.get(i - 1).description);
             }
@@ -96,9 +113,9 @@ public class Duke {
         list.add(t);
         System.out.println("Got it. I've added this task:");
         if (t.taskType.equals("D")) {
-            System.out.println("[" + t.taskType + "][" + t.getStatusIcon() + "] " + t.description + "(by: " + t.time + ")");
+            System.out.println("[" + t.taskType + "][" + t.getStatusIcon() + "] " + t.description + " (by: " + t.time + ")");
         } else if (t.taskType.equals("E")) {
-            System.out.println("[" + t.taskType + "][" + t.getStatusIcon() + "] " + t.description + "(at: " + t.time + ")");
+            System.out.println("[" + t.taskType + "][" + t.getStatusIcon() + "] " + t.description + " (at: " + t.time + ")");
         } else {
             System.out.println("[" + t.taskType + "][" + t.getStatusIcon() + "] " + t.description);
         }

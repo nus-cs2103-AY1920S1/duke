@@ -11,6 +11,9 @@ public class Task {
         this.isDone = false;
     }
 
+    public static int getTotal() {
+        return total;
+    }
     public int getIdx() {
         return this.idx;
     }

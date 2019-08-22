@@ -4,7 +4,7 @@ public class Event extends Task {
 
     public Event(String description, String on) {
         super(description);
-        this.on = description;
+        this.on = on.substring(3);
     }
 
     @Override

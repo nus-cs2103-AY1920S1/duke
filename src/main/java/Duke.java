@@ -54,25 +54,31 @@ public class Duke {
 
     static void echo(String[] s) throws Exception {
         PrintStream ps = new PrintStream(System.out, true, "UTF-8");
-        System.out.println("Got it. I've added this task:");
         String[] task = processTask(s);
         switch (task[0]) {
             case "todo":
                 ToDo td = new ToDo(task[1]);
-                taskList.add(td);
-                ps.println("  " + td);
+                addTask(td);
                 break;
             case "deadline":
                 Deadline dl = new Deadline(task[1], task[2]);
-                taskList.add(dl);
-                ps.println("  " + dl);
+                addTask(dl);
                 break;
             case "event":
                 Event e = new Event(task[1], task[2]);
-                taskList.add(e);
-                ps.println("  " + e);
+                addTask(e);
+                break;
+            case "done":
+                ps.println(Duke.completed(2));
                 break;
         }
+    }
+
+    static String completed(int i) {
+        Task t = taskList.get(i - 1);
+        t.setDone();
+        return "Nice! I've marked this task as done: \n"
+                + "  " + t;
     }
 
     static String[] processTask(String[] s) {
@@ -91,10 +97,11 @@ public class Duke {
         return task;
     }
 
-    static String completed(int i) {
-        Task t = taskList.get(i - 1);
-        t.setDone();
-        return "Nice! I've marked this task as done: \n"
-                + "  " + t;
+    static void addTask(Task t) throws Exception {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
+        taskList.add(t);
+        ps.println("Got it. I've added this task:");
+        ps.println("  " + t);
+        ps.println("Now you have " + Task.getTotal() + " tasks in the list.");
     }
 }

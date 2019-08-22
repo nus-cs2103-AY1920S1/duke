@@ -1,8 +1,15 @@
 public class DukeException extends Exception {
 
-	String inputMessage;
+	protected String inputMessage;
 
 	public DukeException(String inputMessage) {
-		super(inputMessage);
+
+		this.inputMessage = inputMessage;
+	}
+
+	@Override
+	public String toString() {
+
+		return this.inputMessage;
 	}
 }

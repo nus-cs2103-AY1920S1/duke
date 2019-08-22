@@ -93,6 +93,28 @@ public class Task {
         }
     }
 
+    public static void deleteTask(int num) {
+        printLine();
+
+        printIndent();
+        System.out.println("Noted. I've removed this task:");
+        printIndent();
+        System.out.println("  " + taskList.get(num - 1).toString());
+
+        printIndent();
+        if (taskList.size() == 2) {
+            System.out.println("Now you have 1 task in your list.");
+        } else if (taskList.size() == 1) {
+            System.out.println("Now you have no tasks in your list.");
+        } else {
+            System.out.println("Now you have " + (taskList.size() - 1) + " tasks in your list.");
+        }
+
+        printLine();
+
+        taskList.remove(num - 1);
+    }
+
     public static void printLine() {
         StringBuilder line = new StringBuilder();
 

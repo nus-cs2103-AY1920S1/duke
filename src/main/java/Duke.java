@@ -29,7 +29,7 @@ public class Duke {
                 }
 
                 if (!taskType.equals("list")) {
-                    if (!taskType.equals("done")) {
+                    if (!taskType.equals("done") && !taskType.equals("delete")) {
                         if (inputArr.length == 1) {
                             throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
                         }
@@ -62,6 +62,11 @@ public class Duke {
                         } else {
                             throw new NoDescriptionException(":( OOPS!!! The description of " + input + " cannot be empty");
                         }
+                    } else if (taskType.equals("delete")) {
+                        int taskNum = Integer.parseInt(taskDesc);
+                        Task.deleteTask(taskNum);
+
+                        input = sc.nextLine();
                     } else {
                         int taskNum = Integer.parseInt(taskDesc);
                         Task.doTask(taskNum);
@@ -90,11 +95,12 @@ public class Duke {
 
     public static boolean correctInput(String input) {
         if (input.equals("todo") ||
-            input.equals("event") ||
-            input.equals("deadline") ||
-            input.equals("list") ||
-            input.equals("done") ||
-            input.equals("bye")) {
+                input.equals("event") ||
+                input.equals("deadline") ||
+                input.equals("list") ||
+                input.equals("done") ||
+                input.equals("bye") ||
+                input.equals("delete")) {
             return true;
         } else {
             return false;
@@ -154,6 +160,4 @@ public class Duke {
 
         printLine();
     }
-
-
 }

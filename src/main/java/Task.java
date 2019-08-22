@@ -30,7 +30,7 @@ public class Task {
 
     @Override
     public String toString() {
-            return tag + "[" + getStatusIcon() + "]"
+            return tag + "[" + getStatusIcon() + "] "
                     + description + information;
         }
 }

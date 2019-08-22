@@ -2,10 +2,18 @@
 public class Tasks {
     String taskDesc;
     String status;
+    String tde;  
 
-    public Tasks(String desc) {
+    public Tasks(String desc, String tde) {
         taskDesc = desc;
         status = "✗";
+        if(tde.equals("todo")) {
+            tde = t;
+        } else if(tde.equals("deadline")) {
+            tde = d;
+        } else {
+            tde = e;
+        }
     }
 
     String getStatus() {
@@ -20,6 +28,5 @@ public class Tasks {
     public String toString() {
         return "[" + status + "] " + taskDesc;
     } 
-
 
 }

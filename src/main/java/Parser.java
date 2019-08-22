@@ -1,6 +1,7 @@
 public class Parser {
     // Command templates
     public static final String DONE_TEMPLATE = "done <id>";
+    public static final String DELETE_TEMPLATE = "delete <id>";
     public static final String TODO_TEMPLATE = "todo <description>";
     public static final String DEADLINE_TEMPLATE = "deadline <description> /by <date | time>";
     public static final String EVENT_TEMPLATE = "event <description> /by <date | time>";
@@ -14,6 +15,9 @@ public class Parser {
         // "done" sets the status of the task with a given task ID (its position) to completed
         case "done":
             return Parser.parseDone(tasks, command);
+        // "delete" removes a given task by its task ID from the TaskList
+        case "delete":
+            return Parser.parseDelete(tasks, command);
         // "todo": creates a Todo task (no attached date/time)
         case "todo":
             return Parser.parseTodo(tasks, command);
@@ -30,20 +34,40 @@ public class Parser {
     }
 
     public static String parseDone(TaskList tasks, String command) throws DukeException {
-        String[] args = command.split(" ");
+        String[] tokens = command.split(" ");
         // GUARD: against too few (e.g. done) or too many (e.g. done 5 example) arguments
-        if (args.length != 2) {
-            throw new DukeIncorrectArgumentsException(1, DONE_TEMPLATE, args.length - 1, command);
+        if (tokens.length != 2) {
+            throw new DukeIncorrectArgumentsException(1, DONE_TEMPLATE, tokens.length - 1, command);
         }
 
         try {
             // Attempt to parse the id of the task as an integer
-            int id = Integer.valueOf(args[1]);
+            int id = Integer.valueOf(tokens[1]);
             // GUARD: against invalid (non-existent) task IDs
             if (id < 1 || id > tasks.numberOfTasks()) {
                 throw new DukeInvalidTaskException(id, command);
             }
             return tasks.getTask(id - 1).complete();
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException("id", "int", command);
+        }
+    }
+
+    public static String parseDelete(TaskList tasks, String command) throws DukeException {
+        String[] tokens = command.split(" ");
+        // GUARD: against too few (e.g. done) or too many (e.g. done 5 example) arguments
+        if (tokens.length != 2) {
+            throw new DukeIncorrectArgumentsException(1, DELETE_TEMPLATE, tokens.length - 1, command);
+        }
+
+        try {
+            // Attempt to parse the id of the task as an integer
+            int id = Integer.valueOf(tokens[1]);
+            // GUARD: against invalid (non-existent) task IDs
+            if (id < 1 || id > tasks.numberOfTasks()) {
+                throw new DukeInvalidTaskException(id, command);
+            }
+            return tasks.deleteTask(id - 1);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException("id", "int", command);
         }

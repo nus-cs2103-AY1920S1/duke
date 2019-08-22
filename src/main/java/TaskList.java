@@ -18,6 +18,12 @@ public class TaskList {
         return String.format(template, task.toString(), this.numberOfTasks());
     }
 
+    public String deleteTask(int idx) {
+        Task task = this.tasks.remove(idx);
+        String template = "Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.";
+        return String.format(template, task.toString(), this.numberOfTasks());
+    }
+
     public int numberOfTasks() {
         return this.tasks.size();
     }

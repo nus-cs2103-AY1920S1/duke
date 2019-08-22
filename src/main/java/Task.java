@@ -20,7 +20,12 @@ public class Task {
             throw new DukeException("☹ OOPS!!! The index of a done task cannot be empty.");
         }
 
+        int numoftasks = Duke.taskList.size();
         int doneIndex = Integer.parseInt(words[1]);
+        if (doneIndex > numoftasks || doneIndex <= 0) {
+            throw new DukeException("☹ OOPS!!! The task is not found.");
+        }
+
         Task currentTask = Duke.taskList.get(doneIndex - 1);
         currentTask.markAsDone();
         System.out.println("    ____________________________________________________________");
@@ -33,8 +38,12 @@ public class Task {
         if (words.length < 2) {
             throw new DukeException("☹ OOPS!!! The index of a delete task cannot be empty.");
         }
-
+        int numoftasks = Duke.taskList.size();
         int doneIndex = Integer.parseInt(words[1]);
+        if (doneIndex > numoftasks || doneIndex <= 0) {
+            throw new DukeException("☹ OOPS!!! The task is not found.");
+        }
+        
         Task currentTask = Duke.taskList.get(doneIndex - 1);
         Duke.taskList.remove(doneIndex - 1);
         System.out.println("    ____________________________________________________________");

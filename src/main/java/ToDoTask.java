@@ -1,6 +1,9 @@
 public class ToDoTask extends Task {
     public ToDoTask(String task) {
         super(task);
+        if (task.trim().length() == 0) {
+                throw new EmptyDescriptionDukeException("todo");
+        }
     }
 
     @Override

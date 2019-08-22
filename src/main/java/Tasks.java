@@ -1,14 +1,14 @@
 
 class Tasks {
     String taskDesc;
-    int status;
+    String status;
 
     Tasks(String desc) {
         taskDesc = desc;
         status = 0;
     }
 
-    int getStatus() {
+    String getStatus() {
         return status;
     }
 
@@ -18,8 +18,8 @@ class Tasks {
 
     @Override 
     String toString() {
-        return taskDesc;
-    }
+        return "[" + status + "] " + taskDesc;
+    } 
 
 
 }

@@ -18,7 +18,7 @@ public class Duke {
                    System.out.println(i + ". " + list.get(i - 1));
                }
            } else {
-               list.add(next);
+               list.add(new Task(next));
                System.out.println("added: " + next);
            }
         }

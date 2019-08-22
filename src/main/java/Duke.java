@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.Arrays;
 //import javafx.application.Application;
 //import javafx.scene.Scene;
 //import javafx.scene.control.Label;
@@ -13,18 +15,22 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
         String input = "";
+        String[] tasks = new String[100];
         while (!input.equals("bye")) {
-            input = sc.next();
-            if(!input.equals("bye")) {
+            input = sc.nextLine();
+
+           if(input.equals("bye")) {
                 System.out.println(
                         "    ____________________________________________________________\n" +
-                                "     " + input + "\n" +
-                                "    ____________________________________________________________\n");
+                        "     Bye. Hope to see you again soon!\n" +
+                        "    ____________________________________________________________\n");
             }else {
+                
                 System.out.println(
                         "    ____________________________________________________________\n" +
-                                "     Bye. Hope to see you again soon!\n" +
-                                "    ____________________________________________________________\n");
+                        "     " + input + "\n" +
+                        "    ____________________________________________________________\n");
+
             }
         }
 

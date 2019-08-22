@@ -17,7 +17,7 @@ public class Duke {
             } else if (command.length() >= 4 && command.substring(0,4).equals("done")){
                 b.done(Integer.valueOf(command.substring(5)));
             } else {
-                b.add(command);
+                try{b.add(command);} catch (DukeException e){System.out.println(e.getMessage());};
             }
         }
 

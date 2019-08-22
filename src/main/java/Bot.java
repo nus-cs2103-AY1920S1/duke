@@ -5,7 +5,7 @@ public class Bot {
     private String response;
     private List<Task> tasks = new ArrayList<Task>();
 
-    public void add(String s) {
+    public void add(String s) throws DukeException{
         String[] arr = s.split(" ");
         String taskType = arr[0];
         String taskDes = "";
@@ -13,16 +13,31 @@ public class Bot {
 
         for(int i = 1; i < arr.length; i++){
             if(arr[i].length() >= 1 && arr[i].charAt(0) == '/') {
-               for(int j = i + 1; j < arr.length; j++) {
-                   taskTime += " " + arr[j];
-               }
-               break;
+                for(int j = i + 1; j < arr.length; j++) {
+                    taskTime += " " + arr[j];
+                }
+                break;
             } else {
                 taskDes += " " + arr[i];
             }
         }
         taskDes = taskDes.trim();
         taskTime = taskTime.trim();
+        if (!(taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"))) {
+            throw new DukeException("    ____________________________________________________________\n     " +
+                    "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                    "\n    ____________________________________________________________\n");
+        }
+        if (taskDes.equals("")) throw new DukeException(
+                "    ____________________________________________________________\n     " +
+                "\u2639" +" OOPS!!! The description of a " + taskType + " cannot be empty." +
+                "\n    ____________________________________________________________\n");
+        if ((taskType.equals("deadline") || taskType.equals("event")) && taskTime.equals(""))
+            throw new DukeException(
+                "    ____________________________________________________________\n     " +
+                "\u2639" + " OOPS!!! The time of a " + taskType + " cannot be empty." +
+                "\n    ____________________________________________________________\n");
+
         Task task;
         if (taskType.equals("todo")) {
             task = new ToDo(taskDes);
@@ -33,7 +48,7 @@ public class Bot {
         } else if (taskType.equals("event")) {
             task = new Event(taskDes, taskTime);
             tasks.add(task);
-        } else {return;}
+        } else {return;};
 
         this.response = "Got it. I've added this task:\n       " + task
                 + "\n     Now you have " + tasks.size() + " tasks in the list.";

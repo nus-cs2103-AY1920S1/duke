@@ -1,3 +1,4 @@
+import java.util.IllegalFormatException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -44,6 +45,8 @@ public class Duke {
                 || input.toLowerCase().startsWith("deadline")
                 || input.toLowerCase().startsWith("event")) {
             addTask(input);
+        } else if (input.toLowerCase().startsWith("delete")) {
+            deleteTask(input);
         } else {
             throw new DukeException("OOPS!!! I don't know what this is :(");
         }
@@ -62,6 +65,26 @@ public class Duke {
                 String output = "Nice! I've marked this task as done:"
                         + "\n  " + tasks.get(taskNumber - 1).toString();
                 dukeOutput(output);
+            }
+        }
+    }
+
+    public static void deleteTask(String input) throws DukeException {
+        String[] tokens = input.split("\\s+");
+        if (tokens.length != 2) {
+            throw new DukeException("OOPS!!! Invalid delete command.");
+        } else {
+            try {
+                int taskNumber = Integer.parseInt(tokens[1]);
+                Task removedTask = tasks.get(taskNumber - 1);
+                tasks.remove(taskNumber - 1);
+                numberOfTasks--; // House-keeping
+                String message = "Noted. I've deleted this task:\n"
+                        + "  " + removedTask.toString()
+                        + "\n" + getNumberOfTasks();
+                dukeOutput(message);
+            } catch (IllegalFormatException | IndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! Please enter a valid number after delete.");
             }
         }
     }

@@ -30,17 +30,7 @@ public class Duke {
                 try {
                     doTask(tokens[1]);
                 } catch (NumberFormatException error) {
-                    printInput(List.of("☹ Invalid input must be an integer"));
-                } catch (IllegalArgumentException error2) {
-                    printInput(List.of(error2.getMessage()));
-                } catch (IndexOutOfBoundsException error3) {
-                    printInput(List.of("☹ No such task"));
-                }
-            } else if (tokens[0].equals("delete")) {
-                try {
-                    deleteTask(tokens[1]);
-                } catch (NumberFormatException error) {
-                    printInput(List.of("☹ Invalid input must be an integer"));
+                    printInput(List.of("☹ Invalid input, must be an integer!!"));
                 } catch (IllegalArgumentException error2) {
                     printInput(List.of(error2.getMessage()));
                 } catch (IndexOutOfBoundsException error3) {
@@ -119,7 +109,7 @@ public class Duke {
         } else if (tokens[0].equals("deadline")) {
             try {
                 checkValidLength(tokens);
-                if (Arrays.asList(tokens).contains("/by")) {
+                if (!Arrays.asList(tokens).contains("/by")) {
                     throw new IllegalArgumentException("Missing deadline");
                 } else {
                     task = Deadline.createDeadline(tokens);
@@ -130,7 +120,7 @@ public class Duke {
         } else if (tokens[0].equals("event")) {
             try {
                 checkValidLength(tokens);
-                if (Arrays.asList(tokens).contains("/at")) {
+                if (!Arrays.asList(tokens).contains("/at")) {
                     throw new IllegalArgumentException("Missing deadline");
                 } else {
                     task = Event.createEvent(tokens);
@@ -152,7 +142,7 @@ public class Duke {
 
     public static void checkValidLength(String[] tokens) throws IllegalArgumentException {
         if (tokens.length == 1) {
-            throw new IllegalArgumentException(String.format("☹ OOPS!!! The description of a todo cannot be empty.",tokens[0]));
+            throw new IllegalArgumentException(String.format("☹ OOPS!!! The description of a %s cannot be empty.",tokens[0]));
         }
     }   
 

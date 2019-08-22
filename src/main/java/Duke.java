@@ -48,6 +48,17 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(task.toString());
     }
+    public void delete(int number) throws IndexOutOfBoundsException {
+        if (number > Duke.numberOfTasks || number <= 0) {
+            throw new IndexOutOfBoundsException("The task number does not exist.");
+        }
+        Task task = Duke.tasks.get(number - 1);
+        tasks.remove(number-1);
+        numberOfTasks--;
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task.toString());
+        System.out.println("Now you have " + numberOfTasks + " tasks in the list");
+    }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -67,6 +78,9 @@ public class Duke {
                     if (commandSplit[0].equalsIgnoreCase("done")) {
                         int index = Integer.parseInt(commandSplit[1]);
                         duke.done(index);
+                    } else if (commandSplit[0].equalsIgnoreCase("delete")) {
+                        int index = Integer.parseInt(commandSplit[1]);
+                        duke.delete(index);
                     } else if (commandSplit[0].equalsIgnoreCase(deadline)) {
                         String details = command.substring(deadline.length()).trim();
                         if (details.length() == 0) {

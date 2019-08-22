@@ -25,23 +25,19 @@ public class Duke {
     }
 
     static void addList() throws Exception {
-        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         String[] s = Duke.sc.nextLine().split(" ");
         while (!s[0].equals("bye")) {
-            switch (s[0]) {
-                case "list":
-                    Duke.checkList();
-                    break;
-                case "done":
-                    ps.println(Duke.completed(2));
-                    break;
-                default:
-                    Duke.echo(String.join(" ", s));
-                    break;
+            if (s[0].equals("list")) {
+                Duke.checkList();
+            } else {
+//                case "done":
+//                    ps.println(Duke.completed(2));
+//                    break;
+                Duke.echo(s); //now passing in an array
             }
             s = Duke.sc.nextLine().split(" ");
         }
-        ps.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
         Duke.sc.close();
     }
 
@@ -56,9 +52,43 @@ public class Duke {
         }
     }
 
-    static void echo(String s) {
-        System.out.println("added: " + s);
-        taskList.add(new Task(s));
+    static void echo(String[] s) throws Exception {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
+        System.out.println("Got it. I've added this task:");
+        String[] task = processTask(s);
+        switch (task[0]) {
+            case "todo":
+                ToDo td = new ToDo(task[1]);
+                taskList.add(td);
+                ps.println("  " + td);
+                break;
+            case "deadline":
+                Deadline dl = new Deadline(task[1], task[2]);
+                taskList.add(dl);
+                ps.println("  " + dl);
+                break;
+            case "event":
+                Event e = new Event(task[1], task[2]);
+                taskList.add(e);
+                ps.println("  " + e);
+                break;
+        }
+    }
+
+    static String[] processTask(String[] s) {
+        String[] task = new String[3]; // [todo/deadline/event], [desc], [dateline if applicable];
+        task[0] = s[0];
+        s[0] = "";
+        String s2 = String.join(" ", s);
+        String[] s3 = s2.split("/");
+        if (s3.length == 2) { // deadline and event
+            task[1] = s3[0];
+            task[2] = s3[1];
+        } else { // todo has no date portion, hence task[2] = ""
+            task[1] = s3[0];
+            task[2] = "";
+        }
+        return task;
     }
 
     static String completed(int i) {

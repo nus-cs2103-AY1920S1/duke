@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private List<String> taskList;
+    private List<Task> taskList;
 
     public Duke() {
         this.taskList = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Duke {
     }
 
     private void handleAddItem(String item) {
-        this.taskList.add(item);
+        this.taskList.add(new Task(item));
         Response.NewAdded(item).print();
     }
 

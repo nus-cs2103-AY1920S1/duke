@@ -34,9 +34,9 @@ public class Response {
         return new Response(List.of(added + item));
     }
 
-    public static Response NewListing(List<String> items) {
+    public static Response NewListing(List<Task> items) {
         List<String> content = IntStream.range(0, items.size())
-                .mapToObj(i -> (i + 1) +". "+items.get(i))
+                .mapToObj(i -> (i + 1) +"."+items.get(i).toString())
                 .collect(Collectors.toList());
 
         return new Response(content);

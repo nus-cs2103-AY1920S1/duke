@@ -18,6 +18,10 @@ public class TodoList {
         return task;
     }
 
+    int length() {
+        return list.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

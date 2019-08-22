@@ -9,11 +9,11 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> storage = new ArrayList<String>();
+        ArrayList<Task> storage = new ArrayList<>();
         String in;
 inputloop:
         while(true){
-            in = sc.nextLine().trim();
+            in = sc.next();
             switch(in){
                 case "bye":
                     System.out.println("Bye!");
@@ -21,13 +21,23 @@ inputloop:
 
                 case "list":
                     for(int i = 1; i <= storage.size(); i++) {
-                        System.out.println(i + ". " + in);
+                        Task t = storage.get(i-1);
+                        System.out.println(String.format(
+                            "%d. %s", i, t.toString()));
                     }
+                    break;
+
+                case "done":
+                    Task t = storage.get(sc.nextInt()-1);
+                    t.markDone();
+                    System.out.println(String.format(
+                        "Nice! I've marked this task as done:\n  %s",
+                            t.toString()));
                     break;
 
                 default:
                     System.out.println("added: " + in);
-                    storage.add(in);
+                    storage.add(new Task(in));
             }
         }
     }

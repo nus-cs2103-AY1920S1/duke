@@ -1,47 +1,59 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         greet();
-
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Task[] data = new Task[100];
         int x = 0;
 
         while (!input.equals("bye")) {
-            switch (input.split(" ")[0]) {
-                case "list":
-                    printList(data);
-                    input = sc.nextLine();
-                    break;
-                case "done":
-                    int index = Integer.parseInt(input.substring(5));
-                    data[index-1].markAsDone();
-                    printDone(data[index-1]);
-                    input = sc.nextLine();
-                    break;
-                case "todo":
-                    data[x] = new ToDo(input.substring(5));
-                    x++;
-                    echo(data[x-1], x);
-                    input = sc.nextLine();
-                    break;
-                case "event":
-                    data[x] = new Event(input.split(" /at ")[0].substring(6), input.split(" /at ")[1]);
-                    x++;
-                    echo(data[x-1], x);
-                    input = sc.nextLine();
-                    break;
-                case "deadline":
-                    data[x] = new Deadline(input.split(" /by ")[0].substring(9), input.split(" /by ")[1]);
-                    x++;
-                    echo(data[x-1], x);
-                    input = sc.nextLine();
-                    break;
+            try {
+                if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
+                    throw new EmptyTaskException("☹ OOPS!!! The description of a " + input + " cannot be empty.");
+                } else {
+                    switch (input.split(" ")[0]) {
+                        case "list":
+                            printList(data);
+                            input = sc.nextLine();
+                            break;
+                        case "done":
+                            int index = Integer.parseInt(input.substring(5));
+                            data[index - 1].markAsDone();
+                            printDone(data[index - 1]);
+                            input = sc.nextLine();
+                            break;
+                        case "todo":
+                            data[x] = new ToDo(input.substring(5));
+                            x++;
+                            echo(data[x - 1], x);
+                            input = sc.nextLine();
+                            break;
+                        case "event":
+                            data[x] = new Event(input.split(" /at ")[0].substring(6), input.split(" /at ")[1]);
+                            x++;
+                            echo(data[x - 1], x);
+                            input = sc.nextLine();
+                            break;
+                        case "deadline":
+                            data[x] = new Deadline(input.split(" /by ")[0].substring(9), input.split(" /by ")[1]);
+                            x++;
+                            echo(data[x - 1], x);
+                            input = sc.nextLine();
+                            break;
+                        default:
+                            throw new UnknownInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                }
+            } catch (DukeException e) {
+                String indentedline = "    ____________________________________________________________";
+                System.out.println(indentedline);
+                System.out.println("     " + e.getMessage());
+                System.out.println(indentedline);
+                input = sc.nextLine();
             }
         }
-
         exit();
     }
 
@@ -68,7 +80,8 @@ public class Duke {
             echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " task in the list.");
         } else {
             echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " tasks in the list.");
-        }    }
+        }
+    }
 
     public static void printList(Object[] array) {
         String indentedline = "    ____________________________________________________________";

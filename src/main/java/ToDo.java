@@ -89,6 +89,13 @@ class ToDo {
                     System.out.println("Now you have " + todoList.size() + " tasks in the list.");
                 }
                 nextCommand = sc.nextLine();
+            } else if (splitCommand[0].equals("delete")) {
+                int index = Integer.parseInt(splitCommand[1]);
+                Task toBeRemoved = todoList.remove(index - 1);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(toBeRemoved);
+                System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+                nextCommand = sc.nextLine();
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 nextCommand = sc.nextLine();

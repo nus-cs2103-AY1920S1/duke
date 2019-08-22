@@ -32,10 +32,27 @@ public class Duke {
                         System.out.println(current.toString());
                     } catch (InputMismatchException e) {
                         System.out.println("OOPS!!! Number of completed task required.");
+                        input.nextLine();
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("OOPS!!! Input is an invalid task number.");
                     } catch (DukeTaskDoneException e) {
                         System.out.println(e.getMessage());
+                    }
+                    break;
+
+                case "delete":
+                    try {
+                        int taskNumber = input.nextInt();
+                        Task current = tasks.get(taskNumber - 1);
+                        tasks.remove(current);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(current.toString());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    } catch (InputMismatchException e) {
+                        System.out.println("OOPS!!! Number of task to delete required.");
+                        input.nextLine();
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("OOPS!!! Input is an invalid task number.");
                     }
                     break;
 
@@ -110,6 +127,7 @@ public class Duke {
 
                 default:
                     try {
+                        input.nextLine();
                         throw new DukeWrongInputException();
                     } catch (DukeWrongInputException e) {
                         System.out.println(e.getMessage());

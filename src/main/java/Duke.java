@@ -14,6 +14,8 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printLineS();
+        String[] cmd = new String[100];
+        int count = 0;
 
         while (sc.hasNext()) {
             String command = sc.nextLine();
@@ -22,10 +24,19 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 printLineS();
                 break;
-            } else {
+            } else if (command.equals("list")) {
                 printLine();
-                System.out.println(command);
+                for (int i = 0; i < count; i ++) {
+                    int num = i + 1;
+                    System.out.println(num + ". " + cmd[i]);
+                }
                 printLineS();
+            } else {
+                cmd[count] = command;
+                printLine();
+                System.out.println("added: " + command);
+                printLineS();
+                count++;
             }
         }
     }

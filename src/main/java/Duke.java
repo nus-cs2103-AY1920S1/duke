@@ -82,6 +82,12 @@ public class Duke {
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             } else if (str.equals("blah")) {
                 throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
+            } else if (str.substring(0, 6).equals("delete")) {
+                Integer index = Integer.valueOf(str.substring(7));
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(list.get(index));
+                list.remove((int)index);
+                System.out.println("Now you have " + list.size() + " tasks in the list");
             } else {
                 System.out.println("added: " + str);
                 list.add(new Task(str));

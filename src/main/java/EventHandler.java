@@ -33,6 +33,9 @@ public class EventHandler {
         case "event":
             addEvent(inputs[1]);
             break;
+        case "delete":
+            deleteTask(inputs[1]);
+            break;
         default:
             throw new DukeNoSuchCommandException();
         }
@@ -124,6 +127,41 @@ public class EventHandler {
         String[] outputs = new String[3];
         outputs[0] = "Got it. I've added this task:";
         outputs[1] = "  " + newEvent.toString();
+        outputs[2] = String.format("Now you have %d tasks in the list.", todoList.size());
+
+        PrettyPrint.printBlock(outputs);
+
+    }
+
+    private void deleteTask(String input) throws DukeException {
+
+        int index;
+
+        try {
+            index = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            PrettyPrint.printBlock("Please input a number.");
+            return;
+        }
+
+        // EXCEPTION: WHEN INDEX IS OUT OF RANGE
+        if (index < 1 || index > todoList.size()) {
+
+            String errorMessage;
+
+            if (todoList.size() == 0) {
+                throw new DukeDoneEmptyListException();
+            } else {
+                throw new DukeIndexOutOfBoundException(index, todoList.size());
+            }
+        }
+
+        Task oldTask = todoList.get(index - 1);
+        todoList.remove(index - 1);
+
+        String[] outputs = new String[3];
+        outputs[0] = "Noted. I've removed this task:";
+        outputs[1] = "  " + oldTask.toString();
         outputs[2] = String.format("Now you have %d tasks in the list.", todoList.size());
 
         PrettyPrint.printBlock(outputs);

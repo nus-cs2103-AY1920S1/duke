@@ -26,7 +26,7 @@ public class Duke {
                StringBuilder sb = new StringBuilder();
                StringBuilder sb2 = new StringBuilder();
                int slash = -1;
-               for(int i = 1; i < command.size; i++) {
+               for(int i = 1; i < command.length; i++) {
                    if(!command[i].equals("/")) {
                        slash = i;
                        break;
@@ -38,13 +38,13 @@ public class Duke {
                if(slash != -1) {
                     sb2.append("( ");
                     sb2.append(command[slash + 1] + ":");
-                    for(int j = slash + 2; j <= command.size; j++) {
+                    for(int j = slash + 2; j <= command.length; j++) {
                         sb2.append(" ");
                         sb2.append(command[j]);
                     }
                     sb2.append(")");
                }
-               Task nextTask = new Tasks(sb.toString(), command[0], sb2.toString()); 
+               Tasks nextTask = new Tasks(sb.toString(), command[0], sb2.toString()); 
                list.add(nextTask);
                System.out.println("Got it. I've added this task:\n " + nextTask);
            }

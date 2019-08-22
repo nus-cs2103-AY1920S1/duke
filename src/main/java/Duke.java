@@ -20,10 +20,10 @@ public class Duke {
             }
         }
     }
-
+    private static LinkedList<Task> tasks = new LinkedList<>();
     private static void run() throws DukeIllegalActionException, DukeIllegalDescriptionException {
         Scanner sc = new Scanner(System.in);
-        LinkedList<Task> tasks = new LinkedList<>();
+
         while(sc.hasNext()) {
             String act = sc.next();
             try {

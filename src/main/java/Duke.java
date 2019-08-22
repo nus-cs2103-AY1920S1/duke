@@ -8,13 +8,16 @@ import java.util.Arrays;
 //import javafx.stage.Stage;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void print(String message) {
         System.out.println(
                 "    ____________________________________________________________\n" +
-                "     Hello! I am Duke\n" +
-                "     What can I do for you?\n" +
+                "     " + message + "\n" +
                 "    ____________________________________________________________\n");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+       print("Hello! I am Duke\n" +
+                "     What can I do for you?");
         String input = "";
         ArrayList<Task> tasks = new ArrayList<>();
         while (!input.equals("bye")) {
@@ -23,42 +26,94 @@ public class Duke {
             if (input.equals("list")) {
                 int size = tasks.size();
                 //may have to catch error if no items in list
-                System.out.println("    ____________________________________________________________");
+                StringBuilder listOfTask = new StringBuilder();
                 for (int i = 0; i < size; i++) {
-                    System.out.println(i+1+". " +tasks.get(i));
+                   listOfTask.append(i+1+". " +tasks.get(i)+"\n" + "     ");
                 }
-                System.out.println("    ____________________________________________________________\n");
-
+                print(listOfTask.toString());
             } else if(input.equals("bye")) {
-                System.out.println(
-                                "    ____________________________________________________________\n" +
-                                "     Bye. Hope to see you again soon!\n" +
-                                "    ____________________________________________________________\n");
-            }else if (temp[0].equals("done")) {
-                int num = Integer.parseInt(temp[1]) -1 ;
-                tasks.get(num).markAsDone();
+                print("Bye. Hope to see you again soon!");
+
+           }else if (temp[0].equals("done")) {
+                try {
+                    if (temp.length == 1) {
+                        throw new NumberFormatException();
+                    }
+                    int num = Integer.parseInt(temp[1]);
+                    if (num > tasks.size()) {
+                        throw new NumberFormatException();
+                    } else {
+                        tasks.get(num - 1).markAsDone();
+                    }
+                }catch(NumberFormatException e){
+                    print("☹ OOPS!!! Please input a valid number.");
+                } 
 
             }else {
                 Task task = null;
                 if(temp[0].equals("todo")){
-                    task = new Todo(input.substring(5));
+                    //trim so that cannot pass with just spaces
+                    String desc = input.substring(4).trim();
+                    if (desc.equals("")) {
+                        print("☹ OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        task = new Todo(desc);
+                    }
 
                 } else if (temp[0].equals("deadline")) {
                     int num = input.indexOf("/by");
-                    task = new Deadline(input.substring(9,num),input.substring(num+4));
+                    //length == 1 means only has 'deadline', and temp[1] equal /by means no desc as well
+                    if (temp.length == 1 || temp[1].equals("/by")) {
+                        print("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
+                    //-1 means /by is not found
+                    else if (num == -1){
+                       print("☹ OOPS!!! Please type /by before inputting the deadline.");
+
+                    }else {
+                        String desc = input.substring(9, num);
+                        //trim so that cannot pass with just spaces
+                        String by = input.substring(num + 3).trim();
+                        if (by.equals("")) {
+                           print("☹ OOPS!!! Please input a deadline after /by");
+                        }else {
+                            task = new Deadline(desc, by);
+                        }
+                    }
                 } else if (temp[0].equals("event")) {
                     int num = input.indexOf("/at");
-                    task = new Event(input.substring(6, num), input.substring(num + 4));
-                }
-                tasks.add(task);
-                System.out.println(
-                                "    ____________________________________________________________\n" +
-                                "     Got it. I've added this task: \n" +
-                                "       " + task + "\n" +
-                                "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                                "    ____________________________________________________________\n"
-                );
+                    //length == 1 means only has 'event', and temp[1] equal /at means no desc as well
+                    if (temp.length == 1 || temp[1].equals("/at")) {
+                        print("☹ OOPS!!! The description of a event cannot be empty.");
+                    }
+                    //-1 means /at is not found
+                    else if (num == -1){
+                        print("☹ OOPS!!! Please type /at before inputting the time.");
+                    }else {
+                        String desc = input.substring(6, num);
+                        //trim so that cannot pass with just spaces
+                        String at = input.substring(num + 3).trim();
 
+                        if (at.equals("")) {
+                            print("☹ OOPS!!! Please input a time after /at");
+                        } else {
+                            task = new Event(desc, at);
+                        }
+                    }
+                } else {
+//                     if anything else other than todo, deadline or event as first word, don't recognise
+                    print("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+                }
+                if (task == null) {
+                    // if task is still null do nothing
+                } else {
+                    tasks.add(task);
+                    print("Got it. I've added this task: \n" +
+                            "       " + task + "\n" +
+                            "     Now you have " + tasks.size() + " tasks in the list.");
+
+                }
             }
         }
 

@@ -79,17 +79,21 @@ public class Duke {
     }
 
     private Todo createTodoFrom(String inputLine) throws DukeException {
-        String description = inputLine.substring("todo".length()).strip();
-        if (description.isEmpty()) {
+        String todoDescription = inputLine.substring("todo".length()).strip();
+        if (todoDescription.isEmpty()) {
             throw new DukeException(ui.MESSAGE_INVALID_TODO_FORMAT);
         }
-        return new Todo(description);
+        return new Todo(todoDescription);
     }
 
     private Deadline createDeadlineFrom(String inputLine) throws DukeException {
         try {
             String[] deadlinePart = inputLine.substring("deadline".length()).split("/by");
-            return new Deadline(deadlinePart[0].strip(), deadlinePart[1].strip());
+            String deadlineDescription = deadlinePart[0].strip();
+            if (deadlineDescription.isEmpty()) {
+                throw new DukeException(ui.MESSAGE_INVALID_DEADLINE_FORMAT);
+            }
+            return new Deadline(deadlineDescription, deadlinePart[1].strip());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.MESSAGE_INVALID_DEADLINE_FORMAT);
         }
@@ -98,13 +102,17 @@ public class Duke {
     private Event createEventFrom(String inputLine) throws DukeException {
         try {
             String[] eventPart = inputLine.substring("event".length()).split("/at");
-            return new Event(eventPart[0].strip(), eventPart[1].strip());
+            String eventDescription = eventPart[0].strip();
+            if (eventDescription.isEmpty()) {
+                throw new DukeException(ui.MESSAGE_INVALID_EVENT_FORMAT);
+            }
+            return new Event(eventDescription, eventPart[1].strip());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.MESSAGE_INVALID_EVENT_FORMAT);
         }
     }
 
-    public static void main (String[]args){
+    public static void main (String[] args){
         Duke duke = new Duke();
         duke.run();
     }

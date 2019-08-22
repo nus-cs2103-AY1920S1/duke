@@ -10,7 +10,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Hello! I'm \n" + logo + "What can I do for you?");
+        System.out.println("Hello! I'm\n" + logo + "What can I do for you?");
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -28,8 +28,28 @@ public class Duke {
                         Task.doTask(Integer.parseInt(inputArr[1]));
                     }
                     break;
+                case "todo":
+                    if (inputArr.length > 1) {
+                        new ToDo(inputArr[1]);
+                    }
+                    break;
+                case "deadline":
+                    if (inputArr.length > 1) {
+                        String[] deadlineInputArr = inputArr[1].split(" /by ");
+                        if (deadlineInputArr.length > 1) {
+                            new Deadline(deadlineInputArr[0], deadlineInputArr[1]);
+                        }
+                    }
+                    break;
+                case "event":
+                    if (inputArr.length > 1) {
+                        String[] eventInputArr = inputArr[1].split(" /at ");
+                        if (eventInputArr.length > 1) {
+                            new Event(eventInputArr[0], eventInputArr[1]);
+                        }
+                    }
+                    break;
                 default:
-                    new Task(input);
                     break;
             }
         }

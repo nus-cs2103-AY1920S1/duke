@@ -7,8 +7,6 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        taskList.add(this);
-        System.out.println("added: " + this);
     }
 
     private String getStatusIcon() {
@@ -25,7 +23,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return this.getStatusIcon() + this.description;
     }
 
     public static void doTask(int index) {
@@ -35,14 +33,25 @@ public class Task {
         Task task = taskList.get(index - 1);
         task.markAsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.getStatusIcon() + task);
+        System.out.println(task);
     }
 
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         int counter = 1;
         for (Task task : taskList) {
-            System.out.println(counter++ + "." + task.getStatusIcon() + task);
+            System.out.println(counter++ + "." + task);
+        }
+    }
+
+    protected static void addNewTask(Task task) {
+        taskList.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        if (taskList.size() == 1)  {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         }
     }
 }

@@ -1,6 +1,6 @@
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
 //import javafx.application.Application;
 //import javafx.scene.Scene;
@@ -16,9 +16,10 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
         String input = "";
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         while (!input.equals("bye")) {
             input = sc.nextLine();
+            String[] temp = input.split(" ");
             if (input.equals("list")) {
                 int size = tasks.size();
                 //may have to catch error if no items in list
@@ -31,10 +32,15 @@ public class Duke {
             } else if(input.equals("bye")) {
                 System.out.println(
                         "    ____________________________________________________________\n" +
-                        "     Bye. Hope to see you again soon!\n" +
-                        "    ____________________________________________________________\n");
+                                "     Bye. Hope to see you again soon!\n" +
+                                "    ____________________________________________________________\n");
+            }else if (temp[0].equals("done")) {
+                int num = Integer.parseInt(temp[1]) -1 ;
+                tasks.get(num).markAsDone();
+
             }else {
-                tasks.add(input);
+                Task task = new Task(input);
+                tasks.add(task);
                 System.out.println(
                         "    ____________________________________________________________\n" +
                         "     added: " + input + "\n" +

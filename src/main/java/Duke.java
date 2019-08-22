@@ -28,6 +28,13 @@ public class Duke {
                                 + completed.toString()));
                         break;
                     }
+                    case "delete": {
+                        int index = Integer.parseInt(next[1]);
+                        if (index > todolist.length()) throw new DukeException("OOPS!!! That's an invalid index");
+                        Task deleted = todolist.delete(index);
+                        System.out.println(reply("Noted. I've removed this task: \n  " + deleted + "\nNow you have " + todolist.length() + " tasks in the list."));
+                        break;
+                    }
                     default:
                         Task task;
                         switch (next[0]) {

@@ -29,7 +29,11 @@ public class Duke {
         EventHandler eventHandler = new EventHandler();
 
         while (!input.equals("bye")) {
-            eventHandler.run(input);
+            try {
+                eventHandler.run(input);
+            } catch (DukeException e) {
+                e.printMessage();
+            }
             input = sc.nextLine();
         }
 

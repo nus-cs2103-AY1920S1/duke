@@ -13,7 +13,7 @@ public class EventHandler {
         this.todoList = new ArrayList<Task>();
     }
 
-    public void run(String command) {
+    public void run(String command) throws DukeException {
         String[] inputs = command.split(" ", 2);
         switch (inputs[0]) {
         case "bye":
@@ -34,12 +34,11 @@ public class EventHandler {
             addEvent(inputs[1]);
             break;
         default:
-            PrettyPrint.printBlock("No such command found.");
-            break;
+            throw new DukeNoSuchCommandException();
         }
     }
 
-    private void markAsDone(String input) {
+    private void markAsDone(String input) throws DukeException {
 
         int index;
 
@@ -56,14 +55,10 @@ public class EventHandler {
             String errorMessage;
 
             if (todoList.size() == 0) {
-                errorMessage = "The todo list is empty.";
+                throw new DukeDoneEmptyListException();
             } else {
-                errorMessage = String.format(
-                        "There is no task number #%d. Please enter a range between 1 and %d.",
-                        index, todoList.size());
+                throw new DukeDoneIndexOutOfBoundException(index, todoList.size());
             }
-            PrettyPrint.printBlock(errorMessage);
-            return;
         }
 
         todoList.get(index - 1).markAsDone();
@@ -75,7 +70,7 @@ public class EventHandler {
         PrettyPrint.printBlock(outputs);
     }
 
-    private void addTodo(String description) {
+    private void addTodo(String description) throws DukeException {
         Todo newTodo = new Todo(description);
         todoList.add(newTodo);
 
@@ -97,12 +92,11 @@ public class EventHandler {
         PrettyPrint.printBlock(toStringArray());
     }
 
-    private void addDeadline(String command) {
+    private void addDeadline(String command) throws DukeException {
 
         String[] descriptions = command.split(" /by ", 2);
         if (descriptions.length == 1) {
-            PrettyPrint.printBlock("For adding deadlines, please add the deadline date as well.");
-            return;
+            throw new DukeDeadlineMissingDateException();
         }
 
         Deadline newDeadline = new Deadline(descriptions[0], descriptions[1]);
@@ -117,12 +111,11 @@ public class EventHandler {
 
     }
 
-    private void addEvent(String command) {
+    private void addEvent(String command) throws DukeException {
 
         String[] descriptions = command.split(" /at ", 2);
         if (descriptions.length == 1) {
-            PrettyPrint.printBlock("For adding event, please add the event start date as well.");
-            return;
+            throw new DukeEventMissingDateException();
         }
 
         Event newEvent = new Event(descriptions[0], descriptions[1]);

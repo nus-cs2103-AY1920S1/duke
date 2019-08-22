@@ -14,7 +14,7 @@ public class Duke {
         Message.greeting();
         while (true) {
             try {
-                String[] msg = sc.nextLine().split(" ", 2);
+                String[] msg = sc.nextLine().trim().split(" ", 2);
                 if (msg[0].equals("bye")) {
                     Message.leavingMsg();
                     break;

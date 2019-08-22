@@ -13,7 +13,9 @@ public class Listing {
         System.out.println(String.format("added: %s", msg));
     }
 
-    //msg[0] = event, msg[1] = description
+    // msg[0] = event, msg[1] = description
+    // throw exception when
+    // the description is empty
     public void addTodo(String[] msg) throws DukeException {
         if(msg.length == 2 && !msg[1].trim().equals("")) {
             Task task = new Todo(msg[1]);
@@ -26,12 +28,15 @@ public class Listing {
         }
     }
 
-    //msg[0] = event, msg[1] = description
+    // msg[0] = event, msg[1] = description
+    // throw exception when
+    // 1. description is empty
+    // 2. timeDate leaved empty
     public void addDeadline(String[] msg) throws DukeException {
         if(msg.length > 1) {
             String[] msgs = msg[1].split("/by");
             //check is the description correct.
-            if(msgs.length == 2 && !msgs[1].trim().equals("")) {
+            if(msgs.length == 2 && !msgs[1].equals(" ") && !msgs[0].equals("")) {
                 Task task = new Deadline(msgs[0], msgs[1]);
                 list.add(task);
                 System.out.println(String.format(
@@ -47,10 +52,14 @@ public class Listing {
     }
 
     //msg[0] = event, msg[1] = description
+    //throw exception when
+    // throw exception when
+    //    // 1. description is empty
+    //    // 2. timeDate leaved empty
     public void addEvent (String[] msg) throws DukeException {
         if(msg.length > 1) {
             String[] msgs = msg[1].split("/at");
-            if(msgs.length == 2 && !msgs[1].trim().equals("")) {
+            if(msgs.length == 2 && !msgs[1].equals(" ") && !msgs[0].equals("")) {
                 Task task = new Event(msgs[0], msgs[1]);
                 list.add(task);
                 System.out.println(String.format(
@@ -69,16 +78,25 @@ public class Listing {
         throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
     }
 
-
+    //msg[0] = done msg[1] = integer
+    //throw exception when msg[1] is not an num
+    //throw exception when msg[1] is out of list range
+    //throw exception when the format is wrong
     public void mark(String[] msg) throws  DukeException {
         if(msg.length == 2) {
             try {
                 int index = Integer.parseInt(msg[1].trim());
-                Task tk = list.get(index - 1);
-                tk.markAsDone();
-                System.out.println(
-                        String.format("Nice! I've marked this task as done:\n"
-                                + "  " + tk));
+                if(index > list.size()) {
+                    throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
+                } else if (index < 1) {
+                    throw new DukeException("OOPS!! The number should be larger than 0");
+                } else {
+                    Task tk = list.get(index - 1);
+                    tk.markAsDone();
+                    System.out.println(
+                            String.format("Nice! I've marked this task as done:\n"
+                                    + "  " + tk));
+                }
             } catch (NumberFormatException ex) {
                 throw new DukeException("\u1F65 OOPS! Invalid number as input");
             }
@@ -87,8 +105,10 @@ public class Listing {
         }
     }
 
+    //msg should only contain "list" and no other things
     public void listing(String[] msg) throws DukeException {
         if(msg.length == 1) {
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < list.size(); i++) {
                 Task tk = list.get(i);
                 System.out.println(i + 1 + "." + tk);
@@ -98,16 +118,26 @@ public class Listing {
         }
     }
 
+    //msg[0] = delete msg[1] = integer
+    //throw exception when msg[1] is not an num
+    //throw exception when msg[1] is out of list range
+    //throw exception when the format is wrong
     public void delete(String[] msg) throws DukeException {
         if(msg.length == 2) {
             try {
                 int index = Integer.parseInt(msg[1].trim());
-                Task tk = list.get(index - 1);
-                list.remove(index - 1);
-                Task.reduceByOne();
-                System.out.println(String.format(
-                        "Noted. I\'ve removed this task: \n  "
-                        + tk + "\nNow you have %d tasks in the list.", Task.noOfTask));
+                if(index > list.size()) {
+                    throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
+                } else if (index < 1) {
+                    throw new DukeException("OOPS!! The number should be larger than 0");
+                } else {
+                    Task tk = list.get(index - 1);
+                    list.remove(index - 1);
+                    Task.reduceByOne();
+                    System.out.println(String.format(
+                            "Noted. I\'ve removed this task: \n  "
+                                    + tk + "\nNow you have %d tasks in the list.", Task.noOfTask));
+                }
             } catch (NumberFormatException ex) {
                 throw new DukeException("\u1F65 OOPS! Invalid number as input");
             }

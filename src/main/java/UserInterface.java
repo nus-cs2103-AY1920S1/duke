@@ -1,4 +1,5 @@
 import java.io.PrintStream;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
@@ -79,5 +80,32 @@ public class UserInterface {
         StringJoiner instance = createStringJoiner();
         instance.add(str);
         return instance;
+    }
+
+    /**
+     * Convenience function to format a Task differently based on its subtype (i.e. Todo/Deadline/Event).
+     *
+     * @param t Task instance to represent as a string, can be Todo, Deadline or Event.
+     * @return A textual representation of the given Task.
+     */
+    public static String formatTask(Task t) {
+        String taskType = null;
+        String description = null;
+        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
+        if (t instanceof Todo) {
+            taskType = "T";
+            description = t.getDescription();
+        } else if (t instanceof Deadline) {
+            Deadline d = (Deadline) t;
+            taskType = "D";
+            description = String.format("%s (by: %s)", d.getDescription(), d.getDeadline().format(dateTimeFormatter));
+        } else if (t instanceof Event) {
+            Event e = (Event) t;
+            taskType = "E";
+            description = String.format("%s (at: %s)", e.getDescription(), e.getEventDateTime().format(dateTimeFormatter));
+        }
+
+        return String.format("[%s][%s] %s", taskType, t.getStatusIcon(), description);
     }
 }

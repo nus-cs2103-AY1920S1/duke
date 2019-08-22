@@ -52,7 +52,7 @@ public class Duke {
 
                 StringJoiner taskListDisplay = UserInterface.createStringJoiner("Here are the tasks in your list:");
                 for (Task task : tasks) {
-                    final String formattedTask = String.format("%d.%s", listIdx, formatTask(task));
+                    final String formattedTask = String.format("%d.%s", listIdx, UserInterface.formatTask(task));
                     taskListDisplay.add(formattedTask);
                     listIdx++;
                 }
@@ -73,7 +73,7 @@ public class Duke {
                     TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
 
                     StringJoiner successMessage = UserInterface.createStringJoiner("Nice! I've marked this task as done:");
-                    successMessage.add("  " + formatTask(t));
+                    successMessage.add("  " + UserInterface.formatTask(t));
 
                     ui.printBlock(successMessage.toString());
                 } else if (input.startsWith("delete ")) {
@@ -86,7 +86,7 @@ public class Duke {
                     TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
 
                     StringJoiner successMessage = UserInterface.createStringJoiner("Noted. I've removed this task:");
-                    successMessage.add("  " + formatTask(t));
+                    successMessage.add("  " + UserInterface.formatTask(t));
                     successMessage.add(String.format("Now you have %d tasks in the list.", tasks.size()));
 
                     ui.printBlock(successMessage.toString());
@@ -128,7 +128,7 @@ public class Duke {
                         TaskSerializer.serializeToFile(TASK_STORAGE_PATH, tasks);
 
                         StringJoiner successMessage = UserInterface.createStringJoiner("Got it. I've added this task: ");
-                        successMessage.add("  " + formatTask(t));
+                        successMessage.add("  " + UserInterface.formatTask(t));
                         successMessage.add(String.format("Now you have %d tasks in the list.", tasks.size()));
                         ui.printBlock(successMessage.toString());
                         ui.println();
@@ -139,32 +139,5 @@ public class Duke {
                 }
             }
         }
-    }
-
-    /**
-     * Convenience function to format a Task differently based on its subtype (i.e. Todo/Deadline/Event).
-     *
-     * @param t Task instance to represent as a string, can be Todo, Deadline or Event.
-     * @return A textual representation of the given Task.
-     */
-    private static String formatTask(Task t) {
-        String taskType = null;
-        String description = null;
-        final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-
-        if (t instanceof Todo) {
-            taskType = "T";
-            description = t.getDescription();
-        } else if (t instanceof Deadline) {
-            Deadline d = (Deadline) t;
-            taskType = "D";
-            description = String.format("%s (by: %s)", d.getDescription(), d.getDeadline().format(dateTimeFormatter));
-        } else if (t instanceof Event) {
-            Event e = (Event) t;
-            taskType = "E";
-            description = String.format("%s (at: %s)", e.getDescription(), e.getEventDateTime().format(dateTimeFormatter));
-        }
-
-        return String.format("[%s][%s] %s", taskType, t.getStatusIcon(), description);
     }
 }

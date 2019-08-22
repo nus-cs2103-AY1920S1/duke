@@ -44,13 +44,17 @@ public class Duke {
                     doneTask.markAsDone();
                     System.out.println(indentation + doneTask);
                     System.out.println(indentation + horizontalLine + "\n");
-                } /** else if (input.startsWith("delete")) {
+                } else if (input.startsWith("delete")) {
                     System.out.println(indentation + horizontalLine);
                     System.out.println("Noted. I've removed this task: ");
                     int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1; // possible error here
                     System.out.println(indentation + taskList.remove(deleteIndex));
+                    if (taskList.size() == 1)
+                        System.out.println(indentation + "Now you have " + taskList.size() + " task in the list.");
+                    else
+                        System.out.println(indentation + "Now you have " + taskList.size() + " tasks in the list.");
                     System.out.println(indentation + horizontalLine + "\n");
-                } **/ else { // task
+                } else { // task
                     System.out.println(indentation + horizontalLine);
                     Task task = null;
                     if (input.startsWith("todo")) {

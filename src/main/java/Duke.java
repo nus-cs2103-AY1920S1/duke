@@ -1,10 +1,10 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Encapsulates attributes and behaviour of Duke, a personal assistant chatbot.
  *
- * Duke can greet the user with a welcome message, echo commands from the user,
- * and exit when the user types 'bye'.
+ * Duke greets the user, stores commands entered by the user, and exits when the
+ * user types 'bye'. Duke can retrieve stored commands in a user readable format.
  *
  * @author atharvjoshi
  * @contributors j-lum, damithc
@@ -21,7 +21,10 @@ public class Duke {
     private String exitMessage;
 
     /** flag to indicate if Duke is listening to commands from the user */
-    public boolean isListening;
+    private boolean isListening;
+
+    /** a list of all commands entered by the user */
+    private ArrayList<String> commands;
 
     /**
      * Creates and initialises an instance of Duke. Duke's logo is assigned
@@ -41,14 +44,8 @@ public class Duke {
 
         // when an instance of Duke is created, it starts listening to commands
         isListening = true;
-    }
 
-    /**
-     * Returns the unique logo of Duke
-     * @return a string representation of Duke's a logo
-     */
-    public String getLogo() {
-        return logo;
+        commands = new ArrayList<String>();
     }
 
     /**
@@ -68,9 +65,12 @@ public class Duke {
             // user wants to quit, so Duke stops listening to commands and exits
             isListening = false;
             exit();
+        } else if (command.equalsIgnoreCase("list")) {
+            // user wants to print all commands entered
+            printCommands();
         } else {
-            // duke simply echoes all other commands entered by the user
-            System.out.println(command);
+            // add command to commands list and inform user
+            storeCommand(command);
         }
     }
 
@@ -79,5 +79,47 @@ public class Duke {
      */
     private void exit() {
         System.out.print(exitMessage);
+    }
+
+    /**
+     * Returns the unique logo of Duke
+     * @return a string representation of Duke's a logo
+     */
+    public String getLogo() {
+        return logo;
+    }
+
+    /**
+     * Returns the current listening state of Duke
+     * @return true if Duke is currently listening to commands, false otherwise
+     */
+    public boolean getIsListening() {
+        return isListening;
+    }
+
+    /**
+     * Prints all commands entered by the user in a readable format
+     */
+    private void printCommands() {
+        // inform user if the list is empty
+        if (commands.isEmpty()) {
+            System.out.println("No tasks in your list!");
+        } else {
+            int listSize = commands.size(); // find number of commands entered
+            for (int i = 0; i < listSize; i++) {
+                // specified format: "1. task 1"
+                System.out.format("%d. %s\n", i + 1, commands.get(i));
+            }
+        }
+    }
+
+    /**
+     * Stores commands entered by the user
+     *
+     * @param command the command entered by the user
+     */
+    private void storeCommand(String command) {
+        commands.add(command);
+        System.out.println("added: " + command);
     }
 }

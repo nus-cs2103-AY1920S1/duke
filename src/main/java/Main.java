@@ -20,7 +20,7 @@ public class Main {
 
         // scan for commands from the over and send them to Duke for processing
         Scanner scanner = new Scanner(System.in);
-        while (duke.isListening) {
+        while (duke.getIsListening()) {
             duke.processCommand(scanner.nextLine());
         }
     }

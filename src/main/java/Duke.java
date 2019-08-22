@@ -35,6 +35,8 @@ public class Duke {
             String rest=input.substring(spacepos+1);
             if (command.equals("done")) {
                 this.done(rest);
+            }else if(command.equals("delete")){
+                this.delete(rest);
             }else if(command.equals("todo")){
                 this.addtodo(rest);
             }else if(command.equals("event")){
@@ -46,7 +48,7 @@ public class Duke {
             }
         }
     }
-    private void done(String doneindex){  //exception complete
+    private void done(String doneindex){
         try{
             int doneint=Integer.parseInt(doneindex);
             this.todolist.get(doneint-1).isdone();
@@ -54,6 +56,19 @@ public class Duke {
             Duke.print("Error: bad task index"); // for wrong index provided
         }catch(IndexOutOfBoundsException e){
             Duke.print("Error: no such task index");  //for index>array length
+        }
+    }
+    private void delete(String deleteindex){  //exception same as done method
+        try{
+            int delindex=Integer.parseInt(deleteindex);
+            StringBuilder outmsg=new StringBuilder("Following task removed:\n    " + this.todolist.get(delindex-1));
+            outmsg.append("\n  " + (this.todolist.size()-1) + " tasks left in the list");
+            this.todolist.remove(delindex-1);
+            Duke.print(outmsg.toString());
+        }catch(NumberFormatException e) {
+            Duke.print("Error: bad task index");
+        }catch(IndexOutOfBoundsException e){
+            Duke.print("Error: no such task index");
         }
     }
     private void addtodo(String task){

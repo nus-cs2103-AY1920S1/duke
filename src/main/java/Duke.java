@@ -13,24 +13,27 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Message.greeting();
         while (true) {
-            String msg = sc.next();
-            if(msg.equals("bye")) {
-                Message.leavingMsg();
-                break;
-            }else if(msg.equals("list")) {
-                list.listing();
-            } else if (msg.equals("done")) {
-                int index = sc.nextInt();
-                list.mark(index);
-            } else if(msg.equals("todo")) {
-                String msgs = sc.nextLine();
-                list.addTodo(msgs);
-            } else if(msg.equals("deadline")) {
-                String msgs = sc.nextLine();
-                list.addDeadline(msgs);
-            } else if(msg.equals("event")) {
-                String msgs = sc.nextLine();
-                list.addEvent(msgs);
+            try {
+                String[] msg = sc.nextLine().split(" ", 2);
+                if (msg[0].equals("bye")) {
+                    Message.leavingMsg();
+                    break;
+                } else if (msg[0].equals("list")) {
+                    list.listing();
+                } else if (msg[0].equals("done")) {
+                    int index = sc.nextInt();
+                    list.mark(index);
+                } else if (msg[0].equals("todo")) {
+                    list.addTodo(msg);
+                } else if (msg[0].equals("deadline")) {
+                    list.addDeadline(msg);
+                } else if (msg[0].equals("event")) {
+                    list.addEvent(msg);
+                } else {
+                    list.invalidInput();
+                }
+            }catch (DukeException ex) {
+                System.out.println(ex.getMessage());
             }
         }
     }

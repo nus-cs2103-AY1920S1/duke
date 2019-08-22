@@ -13,30 +13,63 @@ public class Listing {
         System.out.println(String.format("added: %s", msg));
     }
 
-    public void addTodo(String msg) {
-        Task task = new Todo(msg);
-        list.add(task);
-        System.out.println(String.format(
+    //msg[0] = event, msg[1] = description
+    public void addTodo(String[] msg) throws DukeException {
+        if(msg.length > 1) {
+            Task task = new Todo(msg[1]);
+            list.add(task);
+            System.out.println(String.format(
                 "Got it. I\'ve added this task:\n  "
                 + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+        }else {
+            throw new DukeException("\u1F65 OOPS!!! The description of a todo cannot be empty.");
+        }
     }
 
-    public void addDeadline(String msg) {
-        String[] msgs = msg.split("/by");
-        Task task = new Deadline(msgs[0], msgs[1]);
-        list.add(task);
-        System.out.println(String.format(
-                "Got it. I\'ve added this task:\n  "
+    //msg[0] = event, msg[1] = description
+    public void addDeadline(String[] msg) throws DukeException {
+        if(msg.length > 1) {
+            String[] msgs = msg[1].split("/by");
+            //check is the description correct.
+            if(msgs.length == 2) {
+                Task task = new Deadline(msgs[0], msgs[1]);
+                list.add(task);
+                System.out.println(String.format(
+                        "Got it. I\'ve added this task:\n  "
                         + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+            }else {
+                throw new DukeException("\u1F65 OOPS!!! The format of the description of a deadline is wrong");
+
+            }
+        }else {
+            throw new DukeException("\u1F65 OOPS!!! The description of a deadline cannot be empty.");
+        }
     }
-    public void addEvent(String msg) {
-        String[] msgs = msg.split("/at");
-        Task task = new Event(msgs[0], msgs[1]);
-        list.add(task);
-        System.out.println(String.format(
-                "Got it. I\'ve added this task:\n  "
-                        + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+
+    //msg[0] = event, msg[1] = description
+    public void addEvent (String[] msg) throws DukeException {
+        if(msg.length > 1) {
+            String[] msgs = msg[1].split("/at");
+            if(msgs.length == 2) {
+                Task task = new Event(msgs[0], msgs[1]);
+                list.add(task);
+                System.out.println(String.format(
+                        "Got it. I\'ve added this task:\n  "
+                                + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+            }else {
+                throw new DukeException("\u1F65 OOPS!! The format of the description of a deadline is wrong.");
+            }
+        }else {
+            throw new DukeException("\u1F65 OOPS!! The description of a deadline cannot be empty.");
+        }
     }
+
+    //when the input is invalid
+    public void invalidInput() throws DukeException {
+        throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
+    }
+
+
     public void mark(int index) {
         Task tk = list.get(index - 1);
         tk.markAsDone();

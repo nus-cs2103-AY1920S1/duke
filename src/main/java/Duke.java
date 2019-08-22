@@ -5,7 +5,6 @@ public class Duke {
     public static void main(String[] args) {
         String indent = "    ";
         Scanner sc = new Scanner(System.in);
-//        Task[] listArr = new Task[100]; // max list length: 100
         ArrayList<Task> listArr = new ArrayList<Task>();
         int listSize = 0;
         int listPointer;
@@ -30,20 +29,19 @@ public class Duke {
                 listPointer = Integer.parseInt(inputArr[1]);
                 listArr.get(listPointer - 1).markAsDone();
                 printIndentedString("Nice! I've marked this task as done: \n"
-                        + indent + "   " + listArr.get(listPointer - 1).getStatusIcon() +
-                        ' ' + listArr.get(listPointer - 1).getDescription(), indent);
+                        + indent + "   " + listArr.get(listPointer - 1), indent);
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + indent + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
-                            listArr.add(new Task(inputArr[1], (listSize + 1), "todo"));
+                            listArr.add(new Task(inputArr[1], "todo"));
                             printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
                             listSize++;
                     } else if(inputArr[0].equals("deadline")) {
                         if(input.contains(" /by ")) {
                             String deadline = input.split(" /by ")[1];
-                            listArr.add(new Task(inputArr[1].split(" /by ")[0], (listSize + 1), "deadline", deadline));
+                            listArr.add(new Task(inputArr[1].split(" /by ")[0], "deadline", deadline));
                             printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
                             listSize++;
                         } else {
@@ -52,7 +50,7 @@ public class Duke {
                     } else if(inputArr[0].equals("event")) {
                         if(input.contains(" /at ")) {
                             String eventDateTime = input.split(" /at ")[1];
-                            listArr.add(new Task(inputArr[1].split(" /at ")[0], (listSize + 1), "event", eventDateTime));
+                            listArr.add(new Task(inputArr[1].split(" /at ")[0], "event", eventDateTime));
                             printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
                             listSize++;
                         } else {

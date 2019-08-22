@@ -98,6 +98,29 @@ public class Duke {
                     System.out.println(e);
                     System.out.println("___________________________________");
                 }
+            } else if (inputCommand.equals("delete")) {
+                try {
+                    if (inputString.length() == 6 || inputString.length() == 7) {
+                        throw new DukeException("delete");
+                    }
+                    String[] words = inputString.split(" ");
+                    int taskNum = Integer.parseInt(words[1]);
+                    if (taskNum > taskList.size()) {
+                        throw new DukeException("index");
+                    }
+                    Task currentTask = taskList.get(taskNum - 1);
+                    taskList.remove(taskNum - 1);
+                    System.out.println("___________________________________");
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(currentTask);
+                    Task.total--;
+                    System.out.println("Now you have " + Task.total + " tasks in the list.");
+                    System.out.println("___________________________________");
+                } catch (Exception e) {
+                    System.out.println("___________________________________");
+                    System.out.println(e);
+                    System.out.println("___________________________________");
+                }
             } else {
                 try {
                     throw new DukeException("invalid");

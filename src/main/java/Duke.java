@@ -41,15 +41,59 @@ public class Duke {
 				memory.get(listIndex).markAsDone();
 				System.out.println(line);
 				System.out.println(" " + "Nice! I've marked this task as done:");
-				System.out.println(memory.get(listIndex).showTask());
+				System.out.println("   " + memory.get(listIndex).showTask());
+				System.out.println(line);
+				System.out.println();
+			} else if (rawInput.toLowerCase().startsWith("todo")) {
+				String description = rawInput.substring(5);
+				Task newTask = new Todo(description);
+				memory.add(newTask);
+				
+				System.out.println(line);
+				System.out.println(" " + "Got it. I've added this task:");
+				System.out.println("   " + newTask.showTask());
+				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+				System.out.println(line);
+				System.out.println();
+			} else if (rawInput.toLowerCase().startsWith("deadline")) {
+				String[] deadlineInput = rawInput.substring(9).split("/by");
+				String description = deadlineInput[0].trim();
+				String by = deadlineInput[1].trim();
+				Task newTask = new Deadline(description, by);
+				memory.add(newTask);
+				
+				System.out.println(line);
+				System.out.println(" " + "Got it. I've added this task:");
+				System.out.println("   " + newTask.showTask());
+				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+				System.out.println(line);
+				System.out.println();
+			} else if (rawInput.toLowerCase().startsWith("event")) {
+				String[] eventInput = rawInput.substring(6).split("/at");
+				String description = eventInput[0].trim();
+				String at = eventInput[1].trim();
+				Task newTask = new Event(description, at);
+				memory.add(newTask);
+				
+				System.out.println(line);
+				System.out.println(" " + "Got it. I've added this task:");
+				System.out.println("   " + newTask.showTask());
+				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
 				System.out.println(line);
 				System.out.println();
 			} else {
+				memory.add(new Task(rawInput));
+				
 				System.out.println(line);
+				System.out.println(" " + "Got it. I've added this task:");
 				System.out.println(" " + "added: " + rawInput);
+				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
 				System.out.println(line);
 				System.out.println();
-				memory.add(new Task(rawInput));
 			}
 		}
 		
@@ -59,7 +103,7 @@ public class Duke {
 	private static void list() {
 		int counter = 1;
 		for (Task t : memory) {
-			System.out.println(t.showTask(counter));
+			System.out.println(" " + counter + "." + t.showTask());
 			counter++;
 		}
 	}

@@ -13,11 +13,7 @@ public class Task {
     }
     
     public String showTask() {
-    	return "   [" + getStatusIcon() + "] " + description;
-    }
-    
-    public String showTask(int index) {
-    	return " " + index + ".[" + getStatusIcon() + "] " + description;
+    	return "[" + getStatusIcon() + "] " + description;
     }
     
     public void markAsDone() {

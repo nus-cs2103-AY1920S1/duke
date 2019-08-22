@@ -1,4 +1,6 @@
-public class DeleteException extends Exception {
+package exceptionpackage;
+
+public class DeleteException extends DukeException {
 
     public DeleteException() {
         super("OOPS!!! The description of a delete cannot be empty.");

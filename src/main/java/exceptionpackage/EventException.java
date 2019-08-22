@@ -1,4 +1,6 @@
-public class EventException extends Exception {
+package exceptionpackage;
+
+public class EventException extends DukeException {
 
     public EventException() {
         super("OOPS!!! The description of an event cannot be empty.");

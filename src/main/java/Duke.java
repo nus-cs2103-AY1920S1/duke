@@ -1,6 +1,18 @@
-import java.util.Scanner;
-import java.util.List;
+import exceptionpackage.DukeException;
+import exceptionpackage.DoneException;
+import exceptionpackage.ToDoException;
+import exceptionpackage.DeadlineException;
+import exceptionpackage.EventException;
+import exceptionpackage.DeleteException;
+import exceptionpackage.InvalidInstructionException;
+import taskpackage.Deadline;
+import taskpackage.Event;
+import taskpackage.Task;
+import taskpackage.ToDo;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
@@ -43,7 +55,7 @@ public class Duke {
                         System.out.println(horizontalLine + "\n");
                     } else {
                         Task task = store.get(taskToBeDone - 1);
-                        if (task.isDone) {
+                        if (task.isDone()) {
                             System.out.println(horizontalLine);
                             System.out.println("     Hey! I've already marked this task as done :)");
                             System.out.println("       " + task);
@@ -83,7 +95,7 @@ public class Duke {
                     System.err.println("     " + new DeadlineException());
                     System.out.println(horizontalLine + "\n");
                 } else {
-                    String[] splitResult = argument.split("/");
+                    String[] splitResult = argument.split("/by");
                     if (splitResult.length != 2) { //there might be a typo
                         System.out.println(horizontalLine);
                         System.err.println("     " + new DeadlineException("OOPS!!! Did you type anything wrongly?"));
@@ -110,7 +122,7 @@ public class Duke {
                     System.err.println("     " + new EventException());
                     System.out.println(horizontalLine + "\n");
                 } else {
-                    String[] splitResult = argument.split("/");
+                    String[] splitResult = argument.split("/at");
                     if (splitResult.length != 2) { //there might be a typo
                         System.out.println(horizontalLine);
                         System.err.println("     " + new EventException("OOPS!!! Did you type anything wrongly?"));

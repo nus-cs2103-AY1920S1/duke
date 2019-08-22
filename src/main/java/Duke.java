@@ -80,6 +80,21 @@ public class Duke {
                     tasks.add(task);
                     hasAddedTask = true;
                     addedTask = task;
+                } else if (Pattern.matches("delete ?", input)) {
+                    throw new DukeException("The item id of a delete command cannot be empty.");
+                } else if (Pattern.matches("delete [0-9]+", input)) {
+                    int index = Integer.parseInt(input.split(" ")[1]);
+                    if (index > 0 && index <= tasks.size()) {
+                        Task task = tasks.remove(index - 1);
+                        System.out.println(String.format(
+                                    "Noted. I've removed this task:\n%s",
+                                    task.toString()));
+                        System.out.println(String.format(
+                                    "Now you have %d %s in the list.",
+                                    tasks.size(),
+                                    tasks.size() == 1 ? "task" : "tasks"));
+                } else {
+                    throw new DukeException("Invalid item selected for deletion.");
                 } else {
                     throw new DukeException("Unknown command.");
                 }

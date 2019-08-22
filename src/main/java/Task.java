@@ -9,6 +9,14 @@ public class Task {
         this.isDone = false;
     }
 
+    public static int getTotal() {
+        return total;
+    }
+
+    public static void setTotal() {
+        total--;
+    }
+
     public void setDone() {
         this.isDone = true;
     }

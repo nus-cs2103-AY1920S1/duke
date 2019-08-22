@@ -37,13 +37,38 @@ public class Duke {
 				System.out.println(line);
 				System.out.println();
 			} else if (rawInput.toLowerCase().startsWith("done")) {
-				int listIndex = Integer.parseInt(rawInput.split(" ")[1]) - 1;
-				memory.get(listIndex).markAsDone();
-				System.out.println(line);
-				System.out.println(" " + "Nice! I've marked this task as done:");
-				System.out.println("   " + memory.get(listIndex).showTask());
-				System.out.println(line);
-				System.out.println();
+				try {
+					int listIndex = Integer.parseInt(rawInput.split(" ")[1]) - 1;
+					memory.get(listIndex).markAsDone();
+					System.out.println(line);
+					System.out.println(" " + "Nice! I've marked this task as done:");
+					System.out.println("   " + memory.get(listIndex).showTask());
+					System.out.println(line);
+					System.out.println();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! Please indicate which task is done.");
+					System.out.println(line);
+					System.out.println();
+				}
+			} else if (rawInput.toLowerCase().startsWith("delete")) {
+				try {
+					int listIndex = Integer.parseInt(rawInput.split(" ")[1]) - 1;
+					Task removed = memory.get(listIndex);
+					memory.remove(listIndex);
+					System.out.println(line);
+					System.out.println(" " + "Noted. I've removed this task:");
+					System.out.println("   " + removed.showTask());
+					if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+					else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+					System.out.println(line);
+					System.out.println();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! Please indicate which task to delete.");
+					System.out.println(line);
+					System.out.println();
+				}
 			} else if (rawInput.toLowerCase().startsWith("todo")) {
 				try {
 					String description = rawInput.substring(5);

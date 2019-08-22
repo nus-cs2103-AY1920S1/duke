@@ -52,7 +52,8 @@ public class Duke {
     public static void print(String message) {
         StringBuilder result = new StringBuilder();
 
-        String divider = "    ________________________________________________________________\n";
+        String bar = "________________________________________________";
+        String divider = String.format("    %s%s\n", bar, bar);
         result.append(divider)
               .append("\n");
 

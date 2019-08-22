@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 	static Scanner sc = new Scanner(System.in);
@@ -14,6 +15,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printLineS();
+        ArrayList<Task> tasks = new ArrayList<Task>();
         Task[] cmd = new Task[100];
         int count = 0;
 
@@ -27,9 +29,9 @@ public class Duke {
             } else if (command.equals("list")) {
                 printLine();
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < count; i ++) {
+                for (int i = 0; i < tasks.size(); i ++) {
                     int num = i + 1;
-                    System.out.println(num + ". " + cmd[i]);
+                    System.out.println(num + ". " + tasks.get(i));
                 }
                 printLineS();
             } else {
@@ -37,7 +39,7 @@ public class Duke {
             	if (ls[0].equals("done")) {
             		String num = command.substring(5, 6);
             		int res = Integer.parseInt(num);
-            		Task t = cmd[res - 1];
+            		Task t = tasks.get(res - 1);
             		t.markAsDone();
             		printLine();
             		System.out.println("Nice! I've marked this task as done: ");
@@ -57,10 +59,10 @@ public class Duke {
 	            		} else {
 
 	            		}
-	            		cmd[count] = new Todo(com);
+	            		tasks.add(new Todo(com));
 	            		printLine();
 	            		System.out.println("Got it. I've added this task:");
-	            		System.out.println(cmd[count]);
+	            		System.out.println(tasks.get(count));
 	            		count++;
 	            		System.out.println("Now you have " + count + " tasks in the list.");
 	            		printLineS();
@@ -86,10 +88,10 @@ public class Duke {
             				}
             			}
             		}
-            		cmd[count] = new Event(com, eventdate);
+            		tasks.add(new Event(com, eventdate));
             		printLine();
             		System.out.println("Got it. I've added this task:");
-            		System.out.println(cmd[count]);
+            		System.out.println(tasks.get(count));
             		count++;
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS(); 
@@ -112,10 +114,10 @@ public class Duke {
             				}
             			}
             		}
-            		cmd[count] = new Deadline(com, deadline);
+            		tasks.add(new Deadline(com, deadline));
             		printLine();
             		System.out.println("Got it. I've added this task:");
-            		System.out.println(cmd[count]);
+            		System.out.println(tasks.get(count));
             		count++;
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS(); 
@@ -124,14 +126,8 @@ public class Duke {
             		int dnum = Integer.parseInt(dnumber);
             		printLine();
             		System.out.println("Noted. I've removed this task:");
-            		System.out.println(cmd[dnum-1]);
-            		if (dnum == count) {
-            			cmd[dnum] = null;
-            		} else {
-	            		for (int i = dnum; i < cmd.length; dnum ++) {
-	            			cmd[dnum] = cmd[dnum-1];
-	            		}
-	            	}
+            		System.out.println(tasks.get(dnum-1));
+            		tasks.remove(dnum-1);
             		count--;
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS();

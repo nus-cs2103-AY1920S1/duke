@@ -53,38 +53,51 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
-                "    ____________________________________________________________");
+                "    ____________________________________________________________\n");
         Scanner sc = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         while (true) {
-            String userInput = sc.nextLine();
-            if (userInput.matches("bye")) {
-                printWithIndentation("Bye. Hope to see you again soon!");
-                break;
-            } else if (userInput.matches("list")) {
-                StringBuilder builder = new StringBuilder("Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    builder.append("\n" + "     ");
-                    builder.append(i + 1).append(".").append(tasks.get(i).toString());
+            try {
+                String userInput = sc.nextLine();
+                if (userInput.matches("bye")) {
+                    printWithIndentation("Bye. Hope to see you again soon!");
+                    break;
+                } else if (userInput.matches("list")) {
+                    StringBuilder builder = new StringBuilder("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        builder.append("\n" + "     ");
+                        builder.append(i + 1).append(".").append(tasks.get(i).toString());
+                    }
+                    printWithIndentation(builder.toString());
+                } else if (userInput.startsWith("done")) {
+                    int doneNo = Integer.parseInt(userInput.split(" ")[1]) - 1;
+                    tasks.get(doneNo).markAsDone();
+                    String tempOut = "Nice! I've marked this task as done: " + "\n" + "       " +
+                            tasks.get(doneNo).toString();
+                    printWithIndentation(tempOut);
+                } else if (userInput.startsWith("todo")) {
+                    try {
+                        if (userInput.length() == 4) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
+                        String restOfInput = userInput.substring(5);
+                        addTask(new ToDo(restOfInput), tasks);
+                    } catch (DukeException e) {
+                        printWithIndentation("☹ OOPS!!! " + e.getMessage());
+                    }
+                } else if (userInput.startsWith("deadline")) {
+                    String[] temp = splitByKeyword(userInput.substring(9), "/by");
+                    addTask(new Deadline(temp[0], temp[1]), tasks);
+                } else if (userInput.startsWith("event")) {
+                    String[] temp = splitByKeyword(userInput.substring(6), "/at");
+                    addTask(new Event(temp[0], temp[1]), tasks);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-                printWithIndentation(builder.toString());
-            } else if (userInput.startsWith("done")) {
-                int doneNo = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                tasks.get(doneNo).markAsDone();
-                String tempOut = "Nice! I've marked this task as done: " + "\n" + "       " +
-                        tasks.get(doneNo).toString();
-                printWithIndentation(tempOut);
-            } else if (userInput.startsWith("todo")) {
-                addTask(new ToDo(userInput.substring(5)), tasks);
-            } else if (userInput.startsWith("deadline")) {
-                String[] temp = splitByKeyword(userInput.substring(9), "/by");
-                addTask(new Deadline(temp[0], temp[1]), tasks);
-            } else if (userInput.startsWith("event")) {
-                String[] temp = splitByKeyword(userInput.substring(6), "/at");
-                addTask(new Event(temp[0], temp[1]), tasks);
-            } else {
-                addTask(new Task(userInput), tasks);
+            } catch (DukeException e) {
+                printWithIndentation("☹ OOPS!!! " + e.getMessage());
             }
+
         }
     }
 }

@@ -27,7 +27,8 @@ public class Duke {
                 listPointer = Integer.parseInt(input.split(" ")[1]);
                 listArr[listPointer - 1].markAsDone();
                 printIndentedString("Nice! I've marked this task as done: \n"
-                        + indent + "   " + listArr[listPointer - 1], indent);
+                        + indent + "   " + listArr[listPointer - 1].getStatusIcon() +
+                        ' ' + listArr[listPointer - 1].getDescription(), indent);
             } else {
                 listArr[listSize] = new Task(input, (listSize + 1));
                 listSize++;

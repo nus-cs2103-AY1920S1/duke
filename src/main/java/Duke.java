@@ -10,10 +10,10 @@ public class Duke {
         while(sc.hasNext()) {
            String next = sc.nextLine(); 
            String[] command = next.split(" ");
-           if(next.equals("bye")) {
+           if(command[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-           } else if (next.equals("list")) {
+           } else if (command[0].equals("list")) {
                int numOfOp = list.size();
                for (int i = 1; i <= numOfOp; i++) {
                    System.out.println(i + "." + list.get(i - 1));

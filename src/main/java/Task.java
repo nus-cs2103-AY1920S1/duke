@@ -18,4 +18,22 @@ public class Task {
         isDone = true;
 
     }
+
+    public static void printGI() {
+        //Duke temp = new Duke();
+        Duke.printLine();
+        Duke.printIndent();
+        System.out.println("Got it. I've added this task:");
+    }
+
+    public static void printNumOfTasks() {
+        Duke.printIndent();
+        System.out.println("Now you have " + Duke.counter + " tasks in the list.");
+        Duke.printLine();
+    }
+
+    public String toString() {
+        return "[" + getStatusIcon() + "]";
+    }
+
 }

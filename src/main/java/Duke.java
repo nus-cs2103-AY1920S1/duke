@@ -42,7 +42,7 @@ public class Duke {
                         }
                         break;
                     default:
-                        throw new DukeException(ErrorType.INVALID);
+                        throw new DukeException(ErrorType.COMMAND);
                 }
             } catch (DukeException e) {
                 e.printError();

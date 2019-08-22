@@ -14,7 +14,7 @@ public class DukeException extends Exception {
     public String errorMessage() {
         message += "☹ OOPS!!! ";
         switch (type) {
-            case INVALID:
+            case COMMAND:
                 message += "I'm sorry, but I don't know what that means :-(";
                 break;
             case MISSING:
@@ -31,14 +31,17 @@ public class DukeException extends Exception {
                         break;
                 }
                 message += " cannot be empty.";
+                break;
+            case INVALIDITEM:
+                message += "This item does not exist on the list";
+                break;
         }
-
         return message;
     }
 
     public void printError() {
         formatter.printLine();
-        System.err.println(formatter.format(errorMessage()));
+        System.out.println(formatter.format(errorMessage()));
         formatter.printLine();
     }
 }

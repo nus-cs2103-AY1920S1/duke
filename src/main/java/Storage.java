@@ -30,10 +30,17 @@ public class Storage {
     }
 
     public void setDone(int taskNo) {
-        taskList.get(taskNo).setDone();
-        formatter.printLine();
-        System.out.println(taskList.get(taskNo).doneify());
-        formatter.printLine();
+        try {
+            if (taskList.size() - 1 < taskNo) {
+                throw new DukeException(ErrorType.INVALIDITEM);
+            }
+            taskList.get(taskNo).setDone();
+            formatter.printLine();
+            System.out.println(taskList.get(taskNo).doneify());
+            formatter.printLine();
+        } catch (DukeException e) {
+            e.printError();
+        }
     }
 
 }

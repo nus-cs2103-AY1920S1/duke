@@ -1,12 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
-    public void Duke() {
+    public Duke() {
     }
 
     private void run() {
@@ -26,5 +21,10 @@ public class Duke {
             }
             System.out.println(response);
         }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 }

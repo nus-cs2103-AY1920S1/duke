@@ -1,15 +1,19 @@
 import java.util.ArrayList;
 
-public class Task {
+abstract class Task {
     private int taskNumber;
     private String taskCheck;
     private String taskName;
+    private String type;
 
-    public Task(int i, String tC, String tN) {
+    public Task(int i, String tC, String tN, String t) {
         taskNumber = i;
         taskCheck = tC;
         taskName = tN;
+        type = t;
     }
+
+    public abstract String getAB();
 
     public int getTaskNumber() {
         return taskNumber;
@@ -21,6 +25,10 @@ public class Task {
 
     public String getTaskName() {
         return taskName;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void changeTaskCheck() {
@@ -40,21 +48,38 @@ public class Task {
         System.out.println("Nice! I've marked this task as done:");
         Task t = a.get(i - 1);
         String currentTask = t.getTaskName();
-        Task doneTask = new Task(i, "[✓]", currentTask);
-        a.set(i - 1, doneTask);
+        String getType = t.getType();
+        Task doneTask;
+        if(getType.equals("todo")) {
+            doneTask = new Todo(i, "[✓]", currentTask, getType);
+            a.set(i - 1, doneTask);
+        } else if (getType.equals("event")) {
+            doneTask = new Event(i, "[✓]", currentTask, getType, t.getAB());
+            a.set(i - 1, doneTask);
+        } else {
+            doneTask = new Deadline(i, "[✓]", currentTask, getType, t.getAB());
+            a.set(i - 1, doneTask);
+        }
         System.out.println("[✓] " + currentTask);
     }
 
-    static void addList(int i, String s, ArrayList<Task> a) {
-        Task t = new Task(i, "[✗]", s);
+    void addList(Task t, ArrayList<Task> a, int n) {
+        System.out.println("Got it. I've added this task:");
         a.add(t);
-        System.out.println("added: " + s);
+        System.out.println(t);
+        System.out.println("Now you have " + Integer.toString(n) + " tasks in the list.");
+    }
+
+    void deleteTask(Task t, ArrayList<Task> a) {
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(t);
+        int taskNumber = t.getTaskNumber();
+        a.remove(taskNumber - 1);
+        System.out.println("Now you have " + Integer.toString(a.size()) + " tasks in the list.");
     }
 
     @Override
     public String toString() {
         return Integer.toString(taskNumber) + "." + taskCheck + " " + taskName;
     }
-    
-
 }

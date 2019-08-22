@@ -16,18 +16,53 @@ public class Duke {
 
         while (sc.hasNext()) {
             String word = sc.nextLine();
+
             if (word.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.exit(0);
             } else if (word.equals("list")) {
                 Task.printList(array);
             } else if (word.contains("done")) {
-                String arr[] = word.split(" ");
-                int taskNum = Integer.parseInt(arr[1]);
+                String arr1[] = word.split(" ");
+                int taskNum = Integer.parseInt(arr1[1]);
                 Task.markAsDone(taskNum, array);
-            } else {
-                Task.addList(num, word,array);
+            } else if (word.contains("todo")) {
+                Task todoT = new Todo(num, "[✗]", word, "todo");
+                todoT.addList(todoT, array, num);
                 num++;
+            } else if (word.contains(("event"))) {
+                String arr2[] = word.split("/");
+                Task eventT = new Event(num, "[✗]", arr2[0], "event", arr2[1]);
+                eventT.addList(eventT, array, num);
+                num++;
+            } else if (word.contains("deadline")) {
+                String arr3[] = word.split("/");
+                Task deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", arr3[1]);
+                deadlineT.addList(deadlineT, array, num);
+                num++;
+            } else if (word.contains("delete")) {
+                String arr4[] = word.split(" ");
+                int taskNum = Integer.parseInt(arr4[1]);
+                Task forDelete = array.get(taskNum - 1);
+                forDelete.deleteTask(forDelete, array);
+                int size = array.size();
+                for(int i = 0; i < size; i++) {
+                    Task t = array.get(i);
+                    int current = t.getTaskNumber();
+                    String type = t.getType();
+                    if(current != i + 1) {
+                        if(type.equals("todo")) {
+                            Task t1 = new Todo(i + 1, t.getTaskCheck(), t.getTaskName(), "todo");
+                            array.set(i, t1);
+                        } else if(type.equals("event")) {
+                            Task t2 = new Event(i + 1, t.getTaskCheck(), t.getTaskName(), "event", t.getAB());
+                            array.set(i, t2);
+                        } else {
+                            Task t3 = new Deadline(i + 1, t.getTaskCheck(), t.getTaskName(), "deadline", t.getAB());
+                            array.set(i, t3);
+                        }
+                    }
+                }
             }
         }
     }

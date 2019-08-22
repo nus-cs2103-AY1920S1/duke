@@ -31,7 +31,11 @@ public class Response {
         ));
     }
 
-    public static Response newAdded(String item, int totalItem) {
+    public static Response newException(Exception e) {
+        return new Response(List.of(e.getMessage()));
+    }
+
+    public static Response newAdded(Task item, int totalItem) {
         return new Response(List.of(
                 "Got it. I've added this task: ",
                 Response.INDENT + item.toString(),
@@ -51,7 +55,7 @@ public class Response {
                 .mapToObj(i -> (i + 1) + "." + items.get(i).toString())
                 .collect(Collectors.toList());
 
-        content.add(0, "Here are the tasks in your list:" );
+        content.add(0, "Here are the tasks in your list:");
 
         return new Response(content);
     }

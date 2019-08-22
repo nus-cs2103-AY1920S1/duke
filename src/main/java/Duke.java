@@ -23,26 +23,30 @@ public class Duke {
         Response.newGreetings().print();
 
         while (sc.hasNext()) {
-            Command command = Command.NewCommand(sc.nextLine());
-            switch (command.getType()) {
-                case LIST:
-                    this.handleList();
-                    break;
-                case DONE:
-                    this.handleDone(command.getTargetIndex());
-                    break;
-                case ADD:
-                    this.handleAddItem(command.getAddedTask());
-                    break;
-                case BYE:
-                    this.handleBye();
-                    return;  // exit
-                case ECHO:
-                    this.handleEcho(command.toString());
-                default:
-                    // placeholder
-
+            try {
+                Command command = Command.NewCommand(sc.nextLine());
+                switch (command.getType()) {
+                    case LIST:
+                        this.handleList();
+                        break;
+                    case DONE:
+                        this.handleDone(command.getTargetIndex());
+                        break;
+                    case ADD:
+                        this.handleAddItem(command.getAddedTask());
+                        break;
+                    case BYE:
+                        this.handleBye();
+                        return;  // exit
+                    case ECHO:
+                        this.handleEcho(command.toString());
+                    default:
+                        // placeholder
+                }
+            } catch (CommandException e) {
+                Response.newException(e).print();
             }
+
         }
         sc.close();
     }
@@ -62,10 +66,14 @@ public class Duke {
 
     private void handleAddItem(Task item) {
         this.taskList.add(item);
-        Response.newAdded(item.toString(), this.taskList.size()).print();
+        Response.newAdded(item, this.taskList.size()).print();
     }
 
     private void handleList() {
         Response.newListing(this.taskList).print();
+    }
+
+    private void handleException(Exception e) {
+        Response.newException(e).print();
     }
 }

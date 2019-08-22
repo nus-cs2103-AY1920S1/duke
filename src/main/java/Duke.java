@@ -18,15 +18,25 @@ public class Duke {
     }
     private void run(String input) {
         int spacepos = input.indexOf(" ");
-        if (spacepos == -1) {  //will change in level-4
-            this.add(input);
+        if (spacepos == -1) {  //will change in level-5
+            System.out.println("input error"); // level-5
         }else{
             String command = input.substring(0, spacepos);
+            String rest=input.substring(spacepos+1);
             if (command.equals("done")) {
-                String doneindex = input.substring(spacepos + 1);
+                String doneindex = rest;
                 this.done(doneindex);
+            }else if(command.equals("todo")){
+                String taskdescript=rest;
+                this.addtodo(taskdescript);
+            }else if(command.equals("event")){
+                String taskdescript=rest;
+                this.addevent(taskdescript);
+            }else if(command.equals("deadline")) {
+                String taskdescript = rest;
+                this.adddeadline(taskdescript);
             }else{
-                this.add(input);
+                System.out.println("command not recognized");  // level-5
             }
         }
     }
@@ -42,7 +52,44 @@ public class Duke {
         Task t=new Task(task);
         this.todolist.add(t);
     }
-
+    private void addtodo(String task){
+        Todo td=new Todo(task);
+        this.todolist.add(td);
+        StringBuilder output=new StringBuilder("Task added:\n");
+        output.append("    "+td);
+        output.append("\n  There are "+this.todolist.size()+" tasks in the list.");
+        Duke.print(output.toString());
+    }
+    private void addevent(String task){
+        int split=task.indexOf(" /at");
+        if(split==-1){
+            System.out.println("Input error placeholder exception throw"); //done in level-5
+        }else{
+            String descript=task.substring(0, split);
+            String deadline=task.substring(split+5);
+            Event e=new Event(descript, deadline);
+            this.todolist.add(e);
+            StringBuilder output=new StringBuilder("Task added:\n");
+            output.append("    "+e);
+            output.append("\n  There are "+this.todolist.size()+" tasks in the list.");
+            Duke.print(output.toString());
+        }
+    }
+    private void adddeadline(String task){
+        int split=task.indexOf(" /by");
+        if(split==-1){
+            System.out.println("Input error placeholder exception throw"); //done in level-5
+        }else{
+            String descript=task.substring(0, split);
+            String deadline=task.substring(split+5);
+            Deadline d=new Deadline(descript, deadline);
+            this.todolist.add(d);
+            StringBuilder output=new StringBuilder("Task added:\n");
+            output.append("    "+d);
+            output.append("\n  There are "+this.todolist.size()+" tasks in the list.");
+            Duke.print(output.toString());
+        }
+    }
     public class Task{
         protected String description;
         protected boolean done;
@@ -61,6 +108,49 @@ public class Duke {
                 return "[" + "\u2713" + "]" + this.description;
             }else{
                 return "[" + "\u2718" + "]" + this.description;
+            }
+        }
+    }
+    public class Todo extends Task{
+        public Todo(String descript){
+            super(descript);
+        }
+        @Override
+        public String toString(){
+            if(done) {
+                return "[T]" + "[" + "\u2713" + "]" + this.description;
+            }else{
+                return "[T]" + "[" + "\u2718" + "]" + this.description;
+            }
+        }
+    }
+    public class Event extends Task{
+        String deadline;
+        public Event(String descript, String deadline){
+            super(descript);
+            this.deadline=deadline;
+        }
+        @Override
+        public String toString(){
+            if(done) {
+                return "[E]" + "[" + "\u2713" + "]" + this.description + " (at: " + this.deadline + ")";
+            }else{
+                return "[E]" + "[" + "\u2718" + "]" + this.description + " (at: " + this.deadline + ")";
+            }
+        }
+    }
+    public class Deadline extends Task{
+        String deadline;
+        public Deadline(String descript, String deadline){
+            super(descript);
+            this.deadline=deadline;
+        }
+        @Override
+        public String toString(){
+            if(done) {
+                return "[D]" + "[" + "\u2713" + "]" + this.description + " (by: " + this.deadline + ")";
+            }else{
+                return "[D]" + "[" + "\u2718" + "]" + this.description + " (by: " + this.deadline + ")";
             }
         }
     }

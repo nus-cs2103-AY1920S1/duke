@@ -4,8 +4,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) throws Exception {
 
-        Task storinglist[];
-        int i = 0;
+        ArrayList<Task> storinglist;
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

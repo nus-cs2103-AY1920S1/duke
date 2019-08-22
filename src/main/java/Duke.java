@@ -1,4 +1,9 @@
 import java.util.*;
+class DukeException extends Exception{
+    public DukeException(String s){
+        super(s);
+    }
+}
 public class Duke {
     private ArrayList<Task> todolist;
     public Duke(){
@@ -17,77 +22,98 @@ public class Duke {
         print(output);
     }
     private void run(String input) {
+        input=input.trim();
         int spacepos = input.indexOf(" ");
-        if (spacepos == -1) {  //will change in level-5
-            System.out.println("input error"); // level-5
+        if (spacepos == -1) {  //raise exception: only 1 word given
+            try{
+                this.findandraisesingle(input);
+            }catch(DukeException e){
+                Duke.print(e.getMessage());
+            }
         }else{
             String command = input.substring(0, spacepos);
             String rest=input.substring(spacepos+1);
             if (command.equals("done")) {
-                String doneindex = rest;
-                this.done(doneindex);
+                this.done(rest);
             }else if(command.equals("todo")){
-                String taskdescript=rest;
-                this.addtodo(taskdescript);
+                this.addtodo(rest);
             }else if(command.equals("event")){
-                String taskdescript=rest;
-                this.addevent(taskdescript);
+                this.addevent(rest);
             }else if(command.equals("deadline")) {
-                String taskdescript = rest;
-                this.adddeadline(taskdescript);
+                this.adddeadline(rest);
             }else{
-                System.out.println("command not recognized");  // level-5
+                Duke.print("Error: input not recognized");  //
             }
         }
     }
-    private void done(String doneindex){
+    private void done(String doneindex){  //exception complete
         try{
             int doneint=Integer.parseInt(doneindex);
             this.todolist.get(doneint-1).isdone();
         }catch(NumberFormatException e) {
-            System.out.println("placeholder exception throw"); //done in level-5
+            Duke.print("Error: bad task index"); // for wrong index provided
+        }catch(IndexOutOfBoundsException e){
+            Duke.print("Error: no such task index");  //for index>array length
         }
     }
-    private void add(String task){
-        Task t=new Task(task);
-        this.todolist.add(t);
-    }
     private void addtodo(String task){
+        task=task.trim();
         Todo td=new Todo(task);
         this.todolist.add(td);
         StringBuilder output=new StringBuilder("Task added:\n");
         output.append("    "+td);
-        output.append("\n  There are "+this.todolist.size()+" tasks in the list.");
+        output.append("\n  There are "+this.todolist.size()+" tasks in the list");
         Duke.print(output.toString());
     }
     private void addevent(String task){
         int split=task.indexOf(" /at");
         if(split==-1){
-            System.out.println("Input error placeholder exception throw"); //done in level-5
+            Duke.print("Error: event time not given. Specify event time using \"/at\""); //throw exception?
         }else{
-            String descript=task.substring(0, split);
-            String deadline=task.substring(split+5);
-            Event e=new Event(descript, deadline);
-            this.todolist.add(e);
-            StringBuilder output=new StringBuilder("Task added:\n");
-            output.append("    "+e);
-            output.append("\n  There are "+this.todolist.size()+" tasks in the list.");
-            Duke.print(output.toString());
+            try{
+                String descript = task.substring(0, split);
+                String deadline = task.substring(split + 5);  //exception may occur
+                descript=descript.trim();
+                deadline=deadline.trim();
+                Event e = new Event(descript, deadline);
+                this.todolist.add(e);
+                StringBuilder output = new StringBuilder("Task added:\n");
+                output.append("    " + e);
+                output.append("\n  There are " + this.todolist.size() + " tasks in the list.");
+                Duke.print(output.toString());
+            }catch(IndexOutOfBoundsException e){ // happens when input is "event xx /at" with no time given
+                Duke.print("Error: no event time provided");
+            }
         }
     }
     private void adddeadline(String task){
         int split=task.indexOf(" /by");
         if(split==-1){
-            System.out.println("Input error placeholder exception throw"); //done in level-5
+            Duke.print("Error: deadline not given. Specify deadline using \"/by\""); // i dont know abt this
         }else{
-            String descript=task.substring(0, split);
-            String deadline=task.substring(split+5);
-            Deadline d=new Deadline(descript, deadline);
-            this.todolist.add(d);
-            StringBuilder output=new StringBuilder("Task added:\n");
-            output.append("    "+d);
-            output.append("\n  There are "+this.todolist.size()+" tasks in the list.");
-            Duke.print(output.toString());
+            try {
+                String descript = task.substring(0, split);
+                String deadline = task.substring(split + 5);
+                descript=descript.trim();
+                deadline=deadline.trim();
+                Deadline d = new Deadline(descript, deadline);
+                this.todolist.add(d);
+                StringBuilder output = new StringBuilder("Task added:\n");
+                output.append("    " + d);
+                output.append("\n  There are " + this.todolist.size() + " tasks in the list.");
+                Duke.print(output.toString());
+            }catch(IndexOutOfBoundsException e){ //same as event time
+                Duke.print("Error: no deadline provided");
+            }
+        }
+    }
+    private void findandraisesingle(String badinput) throws DukeException{
+        if(badinput.equals("todo")||badinput.equals("event")||badinput.equals("deadline")){
+            throw new DukeException("Error: no description for task.");
+        }else if(badinput.equals("done")){
+            throw new DukeException("Error: done task index missing");
+        }else{
+            throw new DukeException("Error: no such command");
         }
     }
     public class Task{
@@ -173,7 +199,7 @@ public class Duke {
                 process.run(input);
             }
         }
-        String exitmsg="Bye. Hope to see you again.";
+        String exitmsg="Goodbye. Hope to see you again.";
         print(exitmsg);
     }
 }

@@ -28,6 +28,10 @@ public class Task {
         return noOfTask;
     }
 
+    public static void reduceByOne() {
+        noOfTask--;
+    }
+
     @Override
     public String toString() {
             return tag + "[" + getStatusIcon() + "]"

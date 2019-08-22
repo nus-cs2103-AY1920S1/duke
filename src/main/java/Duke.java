@@ -28,6 +28,8 @@ public class Duke {
                     list.addDeadline(msg);
                 } else if (msg[0].equals("event")) {
                     list.addEvent(msg);
+                } else if (msg[0].equals("delete")) {
+                    list.delete(msg);
                 } else {
                     list.invalidInput();
                 }

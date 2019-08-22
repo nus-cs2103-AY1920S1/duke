@@ -98,7 +98,9 @@ public class Duke {
                 }
                 echo = sc.nextLine();
             } else {
-                System.out.println("error");
+                System.out.println("____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "____________________________________________________________");
                 break;
             }
         }

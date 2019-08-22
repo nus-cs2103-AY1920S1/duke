@@ -56,11 +56,17 @@ public class Duke {
                     }
 
                     case "done": {
-                        int taskId = Integer.parseInt(inputWords[1]) - 1;
-                        Task task = tasks.get(taskId);
+                        int id = Integer.parseInt(inputWords[1]) - 1;
+                        Task task = tasks.get(id);
                         task.markAsDone();
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(task);
+                        break;
+                    }
+
+                    case "delete": {
+                        int id = Integer.parseInt(inputWords[1]) - 1;
+                        deleteTask(id);
                         break;
                     }
 
@@ -83,15 +89,27 @@ public class Duke {
         sc.close();
     }
 
-    private static void addTask(Task task) {
-        tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
+    private static void printTaskCount() {
         if (tasks.size() == 1) {
             System.out.println("Now you have 1 task in the list.");
         } else {
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
+    }
+
+    private static void addTask(Task task) {
+        tasks.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        printTaskCount();
+    }
+
+    private static void deleteTask(int id) {
+        Task task = tasks.get(id);
+        tasks.remove(id);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        printTaskCount();
     }
 }
 

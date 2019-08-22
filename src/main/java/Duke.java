@@ -4,8 +4,9 @@ public class Duke {
     public static void main(String[] args) {
         String indent = "    ";
         Scanner sc = new Scanner(System.in);
-        String[] listArr = new String[100]; // max list length: 100
-        int listIndex = 1;
+        Task[] listArr = new Task[100]; // max list length: 100
+        int listSize = 0;
+        int listPointer;
         String listString;
 
         printIndentedString("Hello! I'm Duke\n" +
@@ -13,18 +14,23 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            if(input.equals("list")) {
+            if (input.equals("list")) {
                 listString = "";
-                for(int i = 0; i < (listIndex - 1); i++) {
+                for (int i = 0; i < listSize; i++) {
                     listString += listArr[i];
-                    if(i != (listIndex - 2)) {
+                    if (i != (listSize - 1)) {
                         listString += '\n' + indent + ' ';
                     }
                 }
                 printIndentedString(listString, indent);
+            } else if(input.split(" ")[0].equals("done")){
+                listPointer = Integer.parseInt(input.split(" ")[1]);
+                listArr[listPointer - 1].markAsDone();
+                printIndentedString("Nice! I've marked this task as done: \n"
+                        + indent + "   " + listArr[listPointer - 1], indent);
             } else {
-                listArr[listIndex - 1] = listIndex + ". " + input;
-                listIndex++;
+                listArr[listSize] = new Task(input, (listSize + 1));
+                listSize++;
                 printIndentedString("added: " + input, indent);
             }
             input = sc.nextLine();

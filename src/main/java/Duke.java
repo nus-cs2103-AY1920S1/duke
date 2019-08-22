@@ -23,7 +23,7 @@ public class Duke {
                done.finishTask();
                System.out.println("Nice! I've marked this task as done:\n " + done);
            } else {
-               list.add(new Tasks(next));
+               list.add(new Tasks(next, command[0]));
                System.out.println("added: " + next);
            }
         }

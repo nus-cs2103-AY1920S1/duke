@@ -1,16 +1,20 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String[] welcomeMessage = {
+            "Hello! I'm",
+            " ____        _        ",
+            "|  _ \\ _   _| | _____ ",
+            "| | | | | | | |/ / _ \\",
+            "| |_| | |_| |   <  __/",
+            "|____/ \\__,_|_|\\_\\___|",
+            "What can I do for you?"
+    };
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Hello! I'm\n" + logo + "What can I do for you?");
+        Console.print(welcomeMessage);
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -19,7 +23,7 @@ public class Duke {
             try {
                 switch (command) {
                     case "bye":
-                        System.out.println("Bye! Hope to see you again soon!");
+                        Console.print("Bye! Hope to see you again soon!");
                         return;
                     case "list":
                         Task.printList();
@@ -86,7 +90,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS! I can't do it!");
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                Console.print(e.getMessage());
             }
         }
 

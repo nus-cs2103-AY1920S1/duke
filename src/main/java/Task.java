@@ -28,38 +28,38 @@ public class Task {
 
     public static void addNewTask(Task task) {
         taskList.add(task);
-        System.out.println("Got it! I've added this task:");
-        System.out.println(task);
+        Console.print("Got it! I've added this task:");
+        Console.print(task.toString());
         if (taskList.size() == 1)  {
-            System.out.println("Now you have 1 task in the list!");
+            Console.print("Now you have 1 task in the list!");
         } else {
-            System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+            Console.print("Now you have " + taskList.size() + " tasks in the list!");
         }
     }
 
     public static void doTask(int index) {
         Task task = taskList.get(index - 1);
         task.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+        Console.print("Nice! I've marked this task as done:");
+        Console.print(task.toString());
     }
 
     public static void deleteTask(int index) {
         Task task = taskList.remove(index - 1);
-        System.out.println("Noted! I've removed this task:");
-        System.out.println(task);
+        Console.print("Noted! I've removed this task:");
+        Console.print(task.toString());
         if (taskList.size() == 1)  {
-            System.out.println("Now you have 1 task in the list!");
+            Console.print("Now you have 1 task in the list!");
         } else {
-            System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+            Console.print("Now you have " + taskList.size() + " tasks in the list!");
         }
     }
 
     public static void printList() {
-        System.out.println("Here are the tasks in your list:");
+        Console.print("Here are the tasks in your list:");
         int counter = 1;
         for (Task task : taskList) {
-            System.out.println(counter++ + "." + task);
+            Console.print(counter++ + "." + task);
         }
     }
 }

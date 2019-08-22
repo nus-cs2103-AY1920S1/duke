@@ -49,13 +49,13 @@ public class Duke {
                         tasks.add(new ToDo(input.substring(5)));
                     } else if (input.substring(0, 5).equals("event")) {
                         if (input.length() == 5) {
-                            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                         }
                         int i = input.indexOf('/');
                         tasks.add(new Event(input.substring(6, i - 1), input.substring(i + 4)));
                     } else if (input.substring(0, 8).equals("deadline")) {
                         if (input.length() == 8) {
-                            throw new DukeException("☹ OOPS!!! The description of an deadline cannot be empty.");
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
                         int i = input.indexOf('/');
                         tasks.add(new Deadline(input.substring(9, i - 1), input.substring(i + 4)));

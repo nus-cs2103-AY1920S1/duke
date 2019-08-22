@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    private static Task[] list = new Task[100];
+    private static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -25,9 +26,16 @@ public class Duke {
                             break;
                         case "done":
                             int indexToMark = Integer.parseInt(part[1]);
-                            list[indexToMark - 1].markAsDone();
+                            list.get(indexToMark - 1).markAsDone();
                             System.out.println("Nice! I've marked this task as done: \n  " +
-                                    list[indexToMark - 1]);
+                                    list.get(indexToMark - 1));
+                            break;
+                        case "delete":
+                            int indexToDelete = Integer.parseInt(part[1]);
+                            Task removed = list.remove(indexToDelete - 1);
+                            counter--;
+                            System.out.println("Noted. I've removed this task: \n  " +
+                                    removed + "\nNow you have " + counter + " tasks in the list.");
                             break;
                         case "todo":
                         case "deadline":
@@ -54,8 +62,12 @@ public class Duke {
             String[] part = description.split(" ");
             String firstWord = part[0];
             switch (firstWord) {
-                case "list": case "done":
+                case "list":
                     break;
+                case "done": case "delete":
+                    if (part.length < 2) {
+                        throw new DukeException("☹ OOPS!!! You need to enter an index.");
+                    }
                 case "todo":
                     // check task description.
                     if (part.length < 2) {
@@ -83,7 +95,7 @@ public class Duke {
     public static void showList(int counter) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < counter; i++) {
-            System.out.println((i+1) + ". " + list[i]);
+            System.out.println((i+1) + ". " + list.get(i));
         }
     }
 
@@ -112,7 +124,7 @@ public class Duke {
                 newTask = new Task(command);
         }
 
-        list[counter] = newTask;
+        list.add(newTask);
         System.out.println("Got it. I've added this task: \n  " +
                 newTask + "\nNow you have " + (counter + 1) + " tasks in the list.");
     }

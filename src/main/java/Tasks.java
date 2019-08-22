@@ -2,21 +2,20 @@
 public class Tasks {
     String taskDesc;
     String status;
-    String tde;  
+    String tde; 
+    String timeOfEvent; 
 
-    public Tasks(String desc, String tde) {
-        //taskDesc = desc;
+    public Tasks(String desc, String tde, String time) {
+        taskDesc = desc;
         status = "✗";
         if(tde.equals("todo")) {
-            tde = t;
-            taskDesc = desc.substring(5);
+            tde = "T";
         } else if(tde.equals("deadline")) {
-            tde = d;
-            taskDesc = desc.substring(8);
+            tde = "D";
         } else {
-            tde = e;
-            taskDesc = desc.substring(5);
+            tde = "E";
         }
+        timeOfEvent = time;
     }
 
     String getStatus() {
@@ -29,7 +28,7 @@ public class Tasks {
 
     @Override 
     public String toString() {
-        return "[" + status + "] " + taskDesc;
+        return "[" + tde + "] " + "[" + status + "] " + taskDesc + timeOfEvent;
     } 
 
 }

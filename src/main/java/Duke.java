@@ -46,7 +46,7 @@ inputloop:
                 }
 
                 case "todo":
-                    addTask(new ToDo(in));
+                    addTask(new ToDo(sc.nextLine().trim()));
                     break;
 
                 case "deadline": {

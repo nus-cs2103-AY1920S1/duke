@@ -12,7 +12,7 @@ public class Duke {
             switch (userInput) {
                 case "list":
                     for (int i = 0; i < todos.size(); i++) {
-                        System.out.println((i + 1) + ": " + todos.get(i));
+                        System.out.println((i + 1) + ". " + todos.get(i));
                     }
                     break;
                 default:

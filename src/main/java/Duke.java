@@ -119,6 +119,22 @@ public class Duke {
             		count++;
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS(); 
+            	} else if (ls[0].equals("delete")) {
+            		String dnumber = ls[1];
+            		int dnum = Integer.parseInt(dnumber);
+            		printLine();
+            		System.out.println("Noted. I've removed this task:");
+            		System.out.println(cmd[dnum-1]);
+            		if (dnum == count) {
+            			cmd[dnum] = null;
+            		} else {
+	            		for (int i = dnum; i < cmd.length; dnum ++) {
+	            			cmd[dnum] = cmd[dnum-1];
+	            		}
+	            	}
+            		count--;
+            		System.out.println("Now you have " + count + " tasks in the list.");
+            		printLineS();
             	} else {
             		try {
             			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

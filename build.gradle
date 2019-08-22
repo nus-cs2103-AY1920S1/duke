@@ -11,6 +11,9 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Main"
+}
+
+run {
+    standardInput = System.in
 }

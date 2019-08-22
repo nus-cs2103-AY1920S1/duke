@@ -8,8 +8,8 @@ public class Task {
         this.status = true;
         System.out.println(
                 "    ____________________________________________________________\n" +
-                "     Nice! I've marked this task as done:\n" +
-                "     " + this + "\n" +
+                "Nice! I've marked this task as done:\n" +
+                this + "\n" +
                 "    ____________________________________________________________\n");
     }
     @Override

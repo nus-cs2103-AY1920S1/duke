@@ -4,9 +4,14 @@ deadline finish quiz /by Sunday
 list
 done 2
 list
+delete 2
+list
 done
 done a
 done 100
+delete
+delete a
+delete 100
 todo
 deadline
 deadline /by Sunday

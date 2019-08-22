@@ -24,6 +24,15 @@ Here are the tasks in your list:
 1.[T][✘] read lecture notes
 2.[E][✓] attend lecture (at: Monday 8-10am)
 3.[D][✘] finish quiz (by: Sunday)
+Noted! I've removed this task:
+[E][✓] attend lecture (at: Monday 8-10am)
+Now you have 2 tasks in the list!
+Here are the tasks in your list:
+1.[T][✘] read lecture notes
+2.[D][✘] finish quiz (by: Sunday)
+☹ OOPS! Task number missing!
+☹ OOPS! Task number format invalid!
+☹ OOPS! Task number invalid!
 ☹ OOPS! Task number missing!
 ☹ OOPS! Task number format invalid!
 ☹ OOPS! Task number invalid!

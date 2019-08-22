@@ -22,13 +22,27 @@ public class Duke {
                 doneTask.markAsDone();
                 System.out.println(doneTask + "\n");
             } else if(!input.equals("list")) {
-                taskList[numTask] = new Task(input);
+                System.out.println("Got it. I've added this task:");
+
+                if(input.matches("todo\\s+.+")) {
+                    taskList[numTask] = new Todo(input.replaceAll("todo\\s+", ""));
+                } else if (input.matches("deadline\\s+.+")) {
+                    String taskDetails = input.replaceAll("deadline\\s+", "");
+                    String details[] = taskDetails.split("\\s+/by\\s+");
+                    taskList[numTask] = new Deadline(details[0], details[1]);
+                } else {
+                    String taskDetails = input.replaceAll("event\\s+", "");
+                    String details[] = taskDetails.split("\\s+/at\\s+");
+                    taskList[numTask] = new Event(details[0], details[1]);
+                }
+
+                System.out.println(taskList[numTask]);
                 numTask++;
-                System.out.println(String.format("added: %s\n", input));
+                System.out.println(String.format("Now you have %d tasks in the list.\n", numTask));
             } else {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < numTask; i++) {
-                    System.out.println(String.format("%d. %s", i + 1, taskList[i]));
+                    System.out.println(String.format("%d.%s", i + 1, taskList[i]));
                 }
                 System.out.println();
             }

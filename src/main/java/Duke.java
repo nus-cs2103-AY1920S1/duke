@@ -63,9 +63,9 @@ public class Duke {
      * @param command a string containing the command(s) entered by the user
      */
     public void processCommand(String command) {
-        String imperative = command.split(" ")[0];
+        String imperative = command.split(" ")[0].toUpperCase();
 
-        switch (imperative.toUpperCase()) {
+        switch (imperative) {
             case "BYE":
                 // user wants to quit, so Duke stops listening to commands and exits
                 this.exit();
@@ -75,12 +75,17 @@ public class Duke {
                 this.printTasks();
                 break;
             case "DONE":
-                String taskNumber = command.split(" ")[1];
-                this.markTaskAsDone(taskNumber);
+                this.markTaskAsDone(command);
                 break;
             default:
-                // add command to task list and inform user
-                this.storeTask(command);
+                if (imperative.equals("TODO") || imperative.equals("DEADLINE")
+                        || imperative.equals("EVENT")) {
+                    // Valid command - Add command to task list and inform user
+                    this.storeTask(command);
+                } else {
+                    System.out.println("OOPS!!! I'm sorry, but I don't know"
+                            + " what that means :-(");
+                }
         }
     }
 
@@ -133,32 +138,43 @@ public class Duke {
      *
      * @param command the command entered by the user
      */
-    private void storeTask(String command) {
-        String[] segmentedCommand = command.split(" ", 2);
-
-        Task task = null;
-        switch(segmentedCommand[0].toUpperCase()) {
-            case "TODO":
-                task = new Todo(segmentedCommand[1]);
-                break;
-            case "DEADLINE":
-                String deadline = segmentedCommand[1].split("\\/")[1].substring(2);
-                String deadlineDescription = segmentedCommand[1].split("\\/")[0];
-                task = new Deadline(deadlineDescription, deadline);
-                break;
-            case "EVENT":
-                String date = segmentedCommand[1].split("\\/")[1].substring(2);
-                String eventDescription = segmentedCommand[1].split("\\/")[0];
-                task = new Event(eventDescription, date);
-                break;
-            default:
-                System.out.println("OOPS!!! I'm sorry, but I don't know"
-                        + "what that means :-(");
+    private void storeTask(String command) throws ArrayIndexOutOfBoundsException {
+        try {
+            String[] segmentedCommand = command.split(" ", 2);
+            Task task = null;
+            switch (segmentedCommand[0].toUpperCase()) {
+                case "TODO":
+                    task = new Todo(segmentedCommand[1]);
+                    break;
+                case "DEADLINE":
+                    String deadline = segmentedCommand[1].split("\\/")[1].substring(2);
+                    String deadlineDescription = segmentedCommand[1].split("\\/")[0];
+                    task = new Deadline(deadlineDescription, deadline);
+                    break;
+                case "EVENT":
+                    String date = segmentedCommand[1].split("\\/")[1].substring(2);
+                    String eventDescription = segmentedCommand[1].split("\\/")[0];
+                    task = new Event(eventDescription, date);
+                    break;
+                default:
+                    System.out.println("OOPS!!! I'm sorry, but I don't know"
+                            + " what that means :-(");
+            }
+            this.tasks.add(task);
+            System.out.println("Got it. I've added this task: \n"
+                    + "  " + task);
+            System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            if (command.equalsIgnoreCase("todo")
+                    || command.equalsIgnoreCase("deadline")
+                    || command.equalsIgnoreCase("event")) {
+                System.out.println("OOPS!!! The description of a " + command
+                        + " cannot be empty.");
+            } else {
+                System.out.println("OOPS!!! Incorrect Format. Please follow - "
+                        + "<event type> <description> / <day/date/time>");
+            }
         }
-        this.tasks.add(task);
-        System.out.println("Got it. I've added this task: \n"
-                + task);
-        System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
     }
 
     /**
@@ -166,11 +182,24 @@ public class Duke {
      *
      * @param String string reprsenting the order of the task in the list
      */
-    private void markTaskAsDone(String taskNumber) {
-        int taskIndex = Integer.parseInt(taskNumber) - 1;
-        Task currentTask = this.tasks.get(taskIndex);
-        currentTask.setTaskAsDone(true);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("   " + currentTask);
+    private void markTaskAsDone(String command) throws IndexOutOfBoundsException {
+        try {
+            String taskNumber = command.split(" ")[1];
+            int taskIndex = Integer.parseInt(taskNumber) - 1;
+            Task currentTask = this.tasks.get(taskIndex);
+            currentTask.setTaskAsDone(true);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println("   " + currentTask);
+        } catch (IndexOutOfBoundsException exception) {
+            if (this.tasks.isEmpty()) {
+                System.out.println("No tasks in your list to complete!");
+            } else if (command.equalsIgnoreCase("done")) {
+                System.out.println("Please specify the index of the task "
+                        + "you wish to mark as completed!");
+            } else {
+                System.out.println("OOPS! You've specified an index that is "
+                        + "bigger than the size of your list!");
+            }
+        }
     }
 }

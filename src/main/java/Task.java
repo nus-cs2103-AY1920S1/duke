@@ -31,7 +31,8 @@ public class Task {
      * @return tick mark if task is done or cross mark if task is not done
      */
     private String getTaskStatusIcon() {
-        return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+        return (this.isDone ? "Y" : "N"); // return tick or X symbols
+        // return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     /**

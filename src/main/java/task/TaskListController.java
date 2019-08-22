@@ -1,7 +1,5 @@
 package task;
 
-import util.DukeMessage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,5 +24,12 @@ public class TaskListController {
 
     public void displayAllTasks() {
         view.displayAllTasks(tasks);
+    }
+
+    public void deleteTask(int index) {
+        Task deletedTask = tasks.get(index);
+        tasks.remove(index);
+        view.displayTaskDeleted(deletedTask, tasks.size());
+
     }
 }

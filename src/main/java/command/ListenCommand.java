@@ -25,6 +25,8 @@ public class ListenCommand implements Command {
                 return Optional.of(new ListCommand(taskListController));
             case "done":
                 return Optional.of(new DoneCommand(taskListController, arguments));
+            case "delete":
+                return Optional.of(new DeleteCommand(taskListController, arguments));
             default:
                 return Optional.of(new AddCommand(command, arguments, taskListController));
         }

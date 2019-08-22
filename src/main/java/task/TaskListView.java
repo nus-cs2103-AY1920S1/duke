@@ -46,4 +46,14 @@ class TaskListView {
                 .append(task.getTaskMessage());
         DukeOutput.printMessage(taskDoneMessage);
     }
+
+    public void displayTaskDeleted(Task task, int tasksLength) {
+        DukeMessage taskDeletedMessage = new DukeMessage("Noted. I've removed this task:")
+                .newLine()
+                .indent()
+                .append(task.getTaskMessage())
+                .newLine()
+                .append(String.format("Now you have %d tasks in the list", tasksLength));
+        DukeOutput.printMessage(taskDeletedMessage);
+    }
 }

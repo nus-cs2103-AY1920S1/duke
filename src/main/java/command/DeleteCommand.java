@@ -4,19 +4,20 @@ import task.TaskListController;
 
 import java.util.Optional;
 
-public class DoneCommand implements Command {
+public class DeleteCommand implements Command {
     private TaskListController taskListController;
-    private int completedTaskIndex;
+    private int deletedTaskIndex;
 
-    public DoneCommand(TaskListController taskListController, String argument) {
+    public DeleteCommand(TaskListController taskListController, String argument) {
         this.taskListController = taskListController;
-        completedTaskIndex = Integer.valueOf(argument) - 1;
+        deletedTaskIndex = Integer.valueOf(argument) - 1;
     }
 
     @Override
     public Optional<Command> execute() {
-        taskListController.setTaskToDone(completedTaskIndex);
+        taskListController.deleteTask(deletedTaskIndex);
 
         return Optional.of(new ListenCommand(taskListController));
     }
+
 }

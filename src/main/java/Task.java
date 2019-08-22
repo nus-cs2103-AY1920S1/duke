@@ -1,6 +1,7 @@
 public class Task {
-    private String taskName;
-    private boolean done;
+
+    protected String taskName;
+    protected boolean done;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -9,15 +10,14 @@ public class Task {
 
     public void markAsDone() {
         done = true;
-        System.out.println("Nice! I've marked this task as done: \n" +
-                "[✓] " + taskName);
     }
 
     public String toString() {
         if (done) {
-            return "[✓] " + taskName;
+            return "[✓]" + taskName;
         } else {
-            return "[✗] " + taskName;
+            return "[✗]" + taskName;
         }
     }
 }
+

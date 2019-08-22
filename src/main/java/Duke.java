@@ -9,24 +9,28 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        String command = sc.nextLine();
+        String command = sc.next();
         int counter = 0;
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                showList(counter);
-            }
-            else {
-                String[] part = command.split(" ");
-                if (part[0].equals("done")) {
-                    int indexToMark = Integer.parseInt(part[1]);
+
+            switch(command)
+            {
+                case "list":
+                    showList(counter);
+                    break;
+                case "done":
+                    int indexToMark = sc.nextInt();
                     list[indexToMark - 1].markAsDone();
-                } else {
-                    addTask(counter, command);
+                    System.out.println("Nice! I've marked this task as done: \n  " +
+                            list[indexToMark - 1]);
+                    break;
+                default:
+                    addTask(sc, counter, command);
                     counter++;
-                }
             }
-            command = sc.nextLine();
+            command = sc.next();
         }
+
         if (command.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
             sc.close(); //exit the program
@@ -42,9 +46,31 @@ public class Duke {
     }
 
     // To add a new task into the list array.
-    public static void addTask(int counter, String command) {
-        Task newTask = new Task(command);
+    public static void addTask(Scanner sc, int counter, String command) {
+        Task newTask;
+        switch(command)
+        {
+            case "todo":
+                newTask = new Todo(sc.nextLine());
+                break;
+            case "deadline":
+                String details = sc.nextLine();
+                String[] part = details.split("/");
+                String[] time = part[1].split("by");
+                newTask = new Deadline(part[0], time[1]);
+                break;
+            case "event":
+                String details2 = sc.nextLine();
+                String[] part2 = details2.split("/");
+                String[] time2 = part2[1].split("at");
+                newTask = new Event(part2[0], time2[1]);
+                break;
+            default:
+                newTask = new Task(command);
+        }
+
         list[counter] = newTask;
-        System.out.println("added: " + command);
+        System.out.println("Got it. I've added this task: \n  " +
+                newTask + "\nNow you have " + (counter + 1) + " tasks in the list.");
     }
 }

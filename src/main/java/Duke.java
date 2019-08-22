@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Duke {
 
     private static Scanner sc;
+    private static String[] tasks = new String[100];
+    private static int numberOfTasks = 0;
 
     public static void main(String[] args) {
         /*
@@ -29,9 +31,28 @@ public class Duke {
     public static void evaluateInput(String input) {
         if (input.equalsIgnoreCase("bye")) {
             dukeOutput("Bye. Have a nice day!");
-        } else {
-            dukeOutput(input);
+        } else if (input.equalsIgnoreCase("list")) {
+            printTasks();
         }
+        else {
+            dukeOutput("added: " + input);
+            addTask(input);
+        }
+    }
+
+    public static void addTask(String task) {
+        tasks[numberOfTasks++] = task;
+    }
+
+    public static void printTasks() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < numberOfTasks; i++) {
+            output.append((i + 1) + ". " + tasks[i]);
+            if (i != numberOfTasks - 1) {
+                output.append("\n");
+            }
+        }
+        dukeOutput(output.toString());
     }
 
     public static void dukeOutput(String out) {

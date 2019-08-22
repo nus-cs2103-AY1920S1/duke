@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class Todo extends Task {
+    public Todo(String name, boolean isDone) {
+        super(name, isDone);
+    }
 
-public class Todo {
+    @Override
+    public String toString() {
+        return "[T][" + getStatusIcon() + "] " + getName();
+    }
 }

@@ -20,7 +20,7 @@ public class Duke {
                 for (int i = 0; i < tasks.size(); i++) {
                     int currentItemNumber = i + 1;
                     Task currentTask = tasks.get(i);
-                    System.out.println(currentItemNumber + ".[" + currentTask.getStatusIcon() + "] " + currentTask.getName());
+                    System.out.println(currentItemNumber + "." + currentTask);
                 }
             }
             else {
@@ -34,9 +34,47 @@ public class Duke {
                 }
                 // Add
                 else {
-                    // Add user input to list and output
-                    tasks.add(new Task(userinput, false));
-                    System.out.println("added: " + userinput);
+                    System.out.println("Got it. I've added this task:");
+                    // to do
+                    if (words[0].equals("todo")) {
+                        // Remaining words
+                        String remainingWords = userinput.replaceFirst("todo ", "");
+
+                        // Add new task to list
+                        Todo newTodo = new Todo(remainingWords, false);
+                        tasks.add(newTodo) ;
+
+                        System.out.println(newTodo);
+                    }
+                    // deadline
+                    else if (words[0].equals("deadline")) {
+                        // Remaining words
+                        String remainingWords = userinput.replaceFirst("deadline ", "");
+                        String[] remainingWords2 = remainingWords.split(" /by ", 2);
+
+                        // Add new task to list
+                        Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1]);
+                        tasks.add(newDeadline);
+
+                        System.out.println(newDeadline);
+                    }
+                    // event
+                    else if (words[0].equals("event")) {
+                        // Remaining words
+                        String remainingWords = userinput.replaceFirst("event ", "");
+                        String[] remainingWords2 = remainingWords.split(" /at ", 2);
+
+                        // Add new task to list
+                        Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1]);
+                        tasks.add(newEvent);
+
+                        System.out.println(newEvent);
+                    }
+                    // default
+                    else {
+                        System.out.println("added: " + userinput);
+                    }
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 }
             }
             // Ask for next userinput

@@ -14,7 +14,7 @@ public class Duke {
         try {
             duke.run();
         } catch (DukeException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 

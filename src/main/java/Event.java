@@ -13,8 +13,7 @@ public class Event extends Task {
         String description = words[1];
         String[] actionAndTime = description.split("/at");
         Event event = new Event(actionAndTime[0], actionAndTime[1]);
-        Duke.taskList[Duke.totalNumber] = event;
-        Duke.totalNumber++;
+        Duke.taskList.add(event);
 
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task: ");
@@ -25,6 +24,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        return "[E]" + super.toString() + "(at:" + at + ")";
     }
 }

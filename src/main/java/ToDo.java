@@ -11,8 +11,7 @@ public class ToDo extends Task {
         }
         String description = words[1];
         ToDo todo = new ToDo(description);
-        Duke.taskList[Duke.totalNumber] = todo;
-        Duke.totalNumber++;
+        Duke.taskList.add(todo);
 
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task: ");

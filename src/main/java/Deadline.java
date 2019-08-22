@@ -15,8 +15,7 @@ public class Deadline extends Task {
         String[] actionAndTime = description.split("/by");
 
         Deadline deadline = new Deadline(actionAndTime[0], actionAndTime[1]);
-        Duke.taskList[Duke.totalNumber] = deadline;
-        Duke.totalNumber++;
+        Duke.taskList.add(deadline);
 
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task: ");
@@ -27,6 +26,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        return "[D]" + super.toString() + "(by:" + by + ")";
     }
 }

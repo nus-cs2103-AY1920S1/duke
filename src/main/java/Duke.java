@@ -1,10 +1,11 @@
 import java.net.SocketOption;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    static Task[] taskList = new Task[100];
-    static int totalNumber = 0;
+    static ArrayList<Task> taskList = new ArrayList<>();
+    //static int totalNumber = 0;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -34,6 +35,8 @@ public class Duke {
                     return;
                 } else if (action.equals("done")) {
                     Task.doneTask(words);
+                } else if (action.equals("delete")) {
+                    Task.deleteTask(words);
                 } else if (action.equals("todo")) {
                     ToDo.addTodo(words);
                 } else if (action.equals("deadline")) {
@@ -55,15 +58,15 @@ public class Duke {
     }
 
     public static void printNumber() {
-        String string = String.format("     Now you have %d tasks in the list.", totalNumber);
+        String string = String.format("     Now you have %d tasks in the list.", taskList.size());
         System.out.println(string);
     }
 
     public static void printList() {
         System.out.println("    ____________________________________________________________");
-        for (int i = 0; i < totalNumber; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            System.out.println("     " + index + ". " + taskList[i]);
+            System.out.println("     " + index + ". " + taskList.get(i));
         }
         System.out.println("    ____________________________________________________________");
     }

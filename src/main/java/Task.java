@@ -21,11 +21,26 @@ public class Task {
         }
 
         int doneIndex = Integer.parseInt(words[1]);
-        Task currentTask = Duke.taskList[doneIndex - 1];
+        Task currentTask = Duke.taskList.get(doneIndex - 1);
         currentTask.markAsDone();
         System.out.println("    ____________________________________________________________");
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + currentTask);
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void deleteTask(String[] words) throws DukeException {
+        if (words.length < 2) {
+            throw new DukeException("☹ OOPS!!! The index of a delete task cannot be empty.");
+        }
+
+        int doneIndex = Integer.parseInt(words[1]);
+        Task currentTask = Duke.taskList.get(doneIndex - 1);
+        Duke.taskList.remove(doneIndex - 1);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("       " + currentTask);
+        Duke.printNumber();
         System.out.println("    ____________________________________________________________");
     }
 

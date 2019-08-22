@@ -48,8 +48,13 @@ try {
                     String description = wholeTask.substring(0, index).trim();
                     //when it is due by
                     String date = wholeTask.substring(index + 4).trim();
-                    Deadline newDeadlineTask = new Deadline(description, date);
-                    addTask(newDeadlineTask, taskList);
+                    if(description.isEmpty() || date.isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
+                                " It must be in the format <description> /by <date/time> ");
+                    } else {
+                        Deadline newDeadlineTask = new Deadline(description, date);
+                        addTask(newDeadlineTask, taskList);
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
                             " It must be in the format <description> /by <date/time> ");
@@ -64,17 +69,17 @@ try {
                     String eventDescr = eventAndDate.substring(0, index2).trim();
                     //when it is due by
                     String date2 = eventAndDate.substring(index2 + 4).trim();
-                    Event newEventTask = new Event(eventDescr, date2);
-                    addTask(newEventTask, taskList);
+                    if(eventDescr.isEmpty() || date2.isEmpty()) {
+                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
+                                " It must be in the format <description> /at <start and end of specific time> ");
+                    } else {
+                        Event newEventTask = new Event(eventDescr, date2);
+                        addTask(newEventTask, taskList);
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
                             " It must be in the format <description> /at <start and end of specific time> ");
                 }
-                break;
-
-            case "delete":
-                int taskToBeDeleted = sc.nextInt() -1;
-                deleteTask(taskToBeDeleted, taskList);
                 break;
 
             case "done":
@@ -144,15 +149,5 @@ try {
         }
     }
 
-    public static void deleteTask(int current, ArrayList<Task> list) {
-        Task deleted = list.get(current);
-        list.remove(current);
-        if(list.size() > 1) {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list. ");
-        } else {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list. ");
-        }
-    }
+
 }

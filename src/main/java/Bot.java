@@ -1,8 +1,5 @@
 public class Bot {
     public String response;
-    public Bot() {
-
-    }
 
     public void echo(String s) {
         this.response = s;

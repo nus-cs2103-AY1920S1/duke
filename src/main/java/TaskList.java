@@ -12,9 +12,10 @@ public class TaskList {
         return this.tasks.get(idx);
     }
 
-    public String addTask(String description) {
-        this.tasks.add(new Task(description));
-        return String.format("added: %s", description);
+    public String addTask(Task task) {
+        this.tasks.add(task);
+        String template = "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.";
+        return String.format(template, task.toString(), this.numberOfTasks());
     }
 
     public int numberOfTasks() {

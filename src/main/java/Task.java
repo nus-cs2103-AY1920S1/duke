@@ -10,7 +10,7 @@ public class Task {
     public void mark() {
         if (!isDone)
             this.isDone = true;
-    } //update status of task
+    } //update status of task if completed
 
     protected String getStatusIcon() {
         return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListController {
-    private List<String> tasks;
+    private List<Task> tasks;
     private TaskListView view;
 
     public TaskListController() {
@@ -12,7 +12,7 @@ public class TaskListController {
         view = new TaskListView();
     }
 
-    public void addTask(String task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 

@@ -4,12 +4,25 @@ public class Duke {
   private static ArrayList<Task> storage = new ArrayList<>();
   private static Scanner sc = new Scanner(System.in);
 
-  private static void addTask(Task t) {
-    System.out.println("Got it. I've added this task:\n" + t.toString());
-    storage.add(t);
+  private static void printStorageSize() {
     System.out.println(
       "Now you have " + storage.size() + " tasks in your list."
     );
+  }
+
+  private static void addTask(Task t) {
+    System.out.println("Got it. I've added this task:\n" + t.toString());
+    storage.add(t);
+    printStorageSize();
+  }
+
+  private static void removeTask(int i) {
+    Task t = storage.get(i);
+    System.out.println(
+      String.format("Noted. I've removed this task:\n  %s", t.toString())
+    );
+    storage.remove(i);
+    printStorageSize();
   }
 
   private static boolean handleCommand(String in) throws DukeException {
@@ -36,6 +49,9 @@ public class Duke {
           );
           break;
         }
+      case "delete":
+        removeTask(sc.nextInt() - 1);
+        break;
       case "todo":
         {
           String details = sc.nextLine().trim();

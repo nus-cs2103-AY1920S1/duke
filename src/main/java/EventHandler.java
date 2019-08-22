@@ -57,7 +57,7 @@ public class EventHandler {
             if (todoList.size() == 0) {
                 throw new DukeDoneEmptyListException();
             } else {
-                throw new DukeDoneIndexOutOfBoundException(index, todoList.size());
+                throw new DukeIndexOutOfBoundException(index, todoList.size());
             }
         }
 

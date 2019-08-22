@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
 
-        String storinglist[];
+        Task storinglist[];
         int i = 0;
 
         String logo = " ____        _        \n"
@@ -24,7 +24,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        storinglist = new String[100];
+        storinglist = new Task[100];
 
 
         while (true) {
@@ -37,17 +37,21 @@ public class Duke {
                 }
 
                 System.out.println("\n--------------------------");
-            } else if (command.equals("blah")) {
+            } else if (command.contains("done")) {
+                String splitstring[] = command.split(" ");
+                int taskdone = Integer.valueOf(splitstring[1]);
+                storinglist[taskdone - 1].markasdone();
                 System.out.println("--------------------------\n"
-                        + "blah\n\n"
-                        + "--------------------------");
+                        + "Nice! I've marked this tasked as done:\n"
+                        + storinglist[taskdone - 1]
+                        + "\n\n--------------------------");
             } else if (command.equals("bye")) {
                 System.out.println("--------------------------\n"
                         + "Bye. Hope to see you again soon!\n\n"
                         + "--------------------------");
                 break;
             } else {
-                storinglist[i] = command;
+                storinglist[i] = new Task(command);
                 i++;
                 System.out.println("--------------------------\n"
                         + "added: " + command

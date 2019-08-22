@@ -55,7 +55,7 @@ public class Duke {
         String[] inputAsArr = input.split(" ");
         validateDetail(inputAsArr);
         String command = inputAsArr[0];
-        String rest = input.substring(input.indexOf(command + " "));
+        String rest = input.substring(input.indexOf(" ") + 1);
 
         if (command.equals("todo")) {
             task = new ToDos(rest);
@@ -125,8 +125,6 @@ public class Duke {
         }
 
         System.out.println("Bye. Hope to see you again soon!");
-
-
 
     }
 }

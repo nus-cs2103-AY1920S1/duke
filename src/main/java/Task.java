@@ -36,4 +36,10 @@ public class Task {
         return "[" + getStatusIcon() + "]";
     }
 
+    public static void printRemove() {
+        Duke.printLine();
+        Duke.printIndent();
+        Duke.counter--;
+        System.out.println("Noted. I've removed this task.");
+    }
 }

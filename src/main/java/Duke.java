@@ -42,8 +42,14 @@ public class Duke {
                     if (splittedText[0].equals("done")) {
                         int num = text.indexOf(" ");
                         printDone(Integer.parseInt(text.substring(num + 1, num + 2)));
-                        tasking[num] = arrayList.get(num - 1);  // MIGHT BE WRONG NUM
-
+                        tasking[num] = arrayList.get(num - 1);
+                    } else if (splittedText[0].equals("delete")) {
+                        int num = text.indexOf(" ");
+                        Task.printRemove();
+                        printDelete(Integer.parseInt(text.substring(num + 1, num + 2)));
+                        Task.printNumOfTasks();
+                        // delete tasking[Integer.parseInt(text.substring(num + 1, num + 2))]
+                        arrayList.remove(Integer.parseInt(text.substring(num + 1, num + 2)));
                     } else {
                         Task.printGI();
                         printIndent();
@@ -144,6 +150,12 @@ public class Duke {
         printLine();
         printIndent();
         System.out.println("Nice! I've marked this task as done:");
+        printIndent();
+        System.out.println(tasking[i].toString());
+        printLine();
+    }
+
+    private static void printDelete(int i) {
         printIndent();
         System.out.println(tasking[i].toString());
         printLine();

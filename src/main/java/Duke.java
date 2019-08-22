@@ -58,19 +58,29 @@ public class Duke {
         String[] task = processTask(s);
         switch (task[0]) {
             case "todo":
-                ToDo td = new ToDo(task[1]);
-                addTask(td);
+                if (validTask(task)) {
+                    ToDo td = new ToDo(task[1]);
+                    addTask(td);
+                }
                 break;
             case "deadline":
-                Deadline dl = new Deadline(task[1], task[2]);
-                addTask(dl);
+                if (validTask(task)) {
+                    Deadline dl = new Deadline(task[1], task[2]);
+                    addTask(dl);
+                }
                 break;
             case "event":
-                Event e = new Event(task[1], task[2]);
-                addTask(e);
+                if (validTask(task)) {
+                    Event e = new Event(task[1], task[2]);
+                    addTask(e);
+                }
                 break;
             case "done":
-                Duke.completed(Integer.parseInt(s[1]));
+                task[1] = task[1].substring(1);
+                Duke.completed(Integer.parseInt(task[1]));
+                break;
+            default:
+                ps.println("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
         }
     }
@@ -105,5 +115,21 @@ public class Duke {
         ps.println("Got it. I've added this task:");
         ps.println("  " + t);
         ps.println("Now you have " + Task.getTotal() + " tasks in the list.");
+    }
+
+    static boolean validTask(String[] s) throws Exception {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
+        try {
+            if (s[1].equals("")) {
+                throw new DukeException(s);
+            } else if (!s[0].equals("todo") && s[2].equals("")) {
+                throw new DukeException(s, "date");
+            }
+            return true;
+        } catch (DukeException de) {
+            ps.print("\u2639 OOPS!!! ");
+            ps.println(de.getMessage());
+            return false;
+        }
     }
 }

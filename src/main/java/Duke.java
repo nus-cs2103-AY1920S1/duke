@@ -4,7 +4,7 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> repeatList = new ArrayList();
 
@@ -25,30 +25,50 @@ public class Duke {
                     System.out.println(i + ". " + repeatList.get(i - 1));
                 }
             } else if (repeatStr.contains("done")) {
-                int target = parseInt(repeatStr.replaceAll("\\D+","")) - 1;
+                int target = parseInt(repeatStr.replaceAll("\\D+", "")) - 1;
                 repeatList.get(target).done();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println("  " + repeatList.get(target));
             } else {
-                boolean hit = false;
-                if (repeatStr.contains("todo")) {
-                    hit = true;
-                    repeatList.add(new Todo(repeatStr.substring(repeatStr.lastIndexOf("todo ") + 5)));
-                } else if (repeatStr.contains("deadline")) {
-                    hit = true;
-                    repeatList.add(new Deadline(repeatStr.substring(9, repeatStr.lastIndexOf("/by")).trim(),
-                            repeatStr.substring(repeatStr.lastIndexOf("/by ") + 3).trim()));
-                } else if (repeatStr.contains("event")) {
-                    hit = true;
-                    repeatList.add(new Event(repeatStr.substring(6, repeatStr.lastIndexOf("/at")).trim(),
-                            repeatStr.substring(repeatStr.lastIndexOf("/at ") + 3).trim()));
-                }
-
-                if (hit) {
+                try {
+                    String addTextDescription = "";
+                    String addTextPeriod = "";
+                    if (repeatStr.contains("todo")) {
+                        addTextDescription = repeatStr.substring(repeatStr.lastIndexOf("todo ") + 5);
+                        if (addTextDescription.length() == 0) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        } else {
+                            repeatList.add(new Todo(addTextDescription));
+                        }
+                    } else if (repeatStr.contains("deadline")) {
+                        if (repeatStr.lastIndexOf("/by") == -1)
+                            throw new DukeException("☹ OOPS!!! You are missing information.");
+                        addTextDescription = repeatStr.substring(9, repeatStr.lastIndexOf("/by")).trim();
+                        addTextPeriod = repeatStr.substring(repeatStr.lastIndexOf("/by ") + 3).trim();
+                        if (addTextDescription.length() == 0 || addTextPeriod.length() == 0) {
+                            throw new DukeException("☹ OOPS!!! You are missing information.");
+                        } else {
+                            repeatList.add(new Deadline(addTextDescription, addTextPeriod));
+                        }
+                    } else if (repeatStr.contains("event")) {
+                        if (repeatStr.lastIndexOf("/at") == -1)
+                            throw new DukeException("☹ OOPS!!! You are missing information.");
+                        addTextDescription = repeatStr.substring(6, repeatStr.lastIndexOf("/at")).trim();
+                        addTextPeriod = repeatStr.substring(repeatStr.lastIndexOf("/at ") + 3).trim();
+                        if (addTextDescription.length() == 0 || addTextPeriod.length() == 0) {
+                            throw new DukeException("☹ OOPS!!! You are missing information.");
+                        } else {
+                            repeatList.add(new Event(addTextDescription, addTextPeriod));
+                        }
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
                     System.out.println("Got it. I've added this task: ");
                     int size = repeatList.size();
                     System.out.println("  " + repeatList.get(size - 1));
                     System.out.println("You now have " + size + (size == 1 ? " task" : " tasks") + " in the list.");
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
                 }
             }
         }

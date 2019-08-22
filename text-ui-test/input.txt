@@ -4,4 +4,17 @@ deadline finish quiz /by Sunday
 list
 done 2
 list
+done
+done a
+done 100
+todo
+deadline
+deadline /by Sunday
+deadline finish quiz
+deadline finish quiz /by
+event
+event /at Monday 8-10am
+event attend lecture
+event attend lecture /at
+sleep
 bye

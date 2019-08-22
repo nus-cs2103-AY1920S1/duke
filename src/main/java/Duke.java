@@ -51,7 +51,7 @@ public class Duke {
                             if (inputArr[1].indexOf("/by") == 0) {
                                 throw new DukeException("☹ OOPS! Deadline description format invalid!");
                             } else {
-                                throw new DukeException("☹ OOPS! Deadline timing missing!");
+                                throw new DukeException("☹ OOPS! Deadline due date missing!");
                             }
                         }
                         new Deadline(deadlineInputArr[0], deadlineInputArr[1]);
@@ -65,7 +65,7 @@ public class Duke {
                             if (inputArr[1].indexOf("/at") == 0) {
                                 throw new DukeException("☹ OOPS! Event description format invalid!");
                             } else {
-                                throw new DukeException("☹ OOPS! Event venue missing!");
+                                throw new DukeException("☹ OOPS! Event timing missing!");
                             }
                         }
                         new Event(eventInputArr[0], eventInputArr[1]);

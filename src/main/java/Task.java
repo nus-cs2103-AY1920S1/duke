@@ -1,17 +1,12 @@
-public class Task {
-    private String name;
-    private boolean isDone;
-    private Inputs Type;
+public abstract class Task {
+    protected String name;
+    protected boolean isDone;
+    //private Inputs Type;
 
-    enum Inputs {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
+    public Task() {}
 
-    public Task(String name, String input) {
+    public Task(String name) {
         this.name = name;
-        this.Type = Inputs.valueOf(input);
         this.isDone = false;
     }
 
@@ -20,11 +15,5 @@ public class Task {
     }
 
     @Override
-    public String toString() {
-        if(isDone) {
-            return "[✓] " + name;
-        } else {
-            return "[✗] " + name;
-        }
-    }
+    public abstract String toString();
 }

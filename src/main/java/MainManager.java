@@ -9,6 +9,17 @@ public class MainManager {
         counter = 0;
     }
 
+    private String[] getEventDetails(String command) {
+        String woCommand = command.substring(6);
+        return woCommand.split(" /at ");
+    }
+
+    private String[] getDeadlineDetails(String command) {
+        String woCommand = command.substring(9);
+        return woCommand.split(" /by ");
+    }
+
+
     public void run() {
         Scanner sc = new Scanner(System.in);
 
@@ -35,13 +46,48 @@ public class MainManager {
                     System.out.println(" " + currTask);
                     break;
 
+                case "todo":
+                    String todoName = toPrint.substring(5);
+                    Task todo = new Todo(todoName);
+                    list[counter] = todo;
+                    counter++;
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("    " + todo);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                    break;
+
+                case "deadline":
+                    String[] deadlineDetails = getDeadlineDetails(toPrint);
+                    Task deadline = new Deadline(deadlineDetails[0], deadlineDetails[1]);
+                    list[counter] = deadline;
+                    counter++;
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("    " + deadline);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                    break;
+
+                case "event":
+                    String[] eventDetails = getEventDetails(toPrint);
+                    Task event = new Event(eventDetails[0], eventDetails[1]);
+                    list[counter] = event;
+                    counter++;
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("    " + event);
+                    System.out.println("Now you have " + counter + " tasks in the list.");
+                    break;
+
 
                 default:
-                    Task curr = new Task(toPrint, command[0].toUpperCase());
+                    /*
+                    Task curr = new Task(toPrint);
                     list[counter] = curr;
                     counter++;
                     System.out.println("added: " + toPrint);
+                    */
+                    System.out.println("ERROR: Unsupported action");
                     break;
+
+
             }
 
             if(toPrint.equals("bye")) {

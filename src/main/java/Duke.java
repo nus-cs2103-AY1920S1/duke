@@ -25,10 +25,29 @@ public class Duke {
                     System.out.println(i + ". " + repeatList.get(i - 1));
                 }
             } else if (repeatStr.contains("done")) {
-                int target = parseInt(repeatStr.replaceAll("\\D+", "")) - 1;
-                repeatList.get(target).done();
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("  " + repeatList.get(target));
+                try {
+                    int target = parseInt(repeatStr.replaceAll("\\D+", "")) - 1;
+                    repeatList.get(target).done();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("  " + repeatList.get(target));
+                } catch (NumberFormatException ex) {
+                    System.out.println("☹ OOPS!!! Invalid Information.");
+                } catch (IndexOutOfBoundsException ex) {
+                    System.out.println("☹ OOPS!!! Invalid Information.");
+                }
+            } else if (repeatStr.contains("delete")) {
+                try {
+                    int target = parseInt(repeatStr.replaceAll("\\D+", "")) - 1;
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("  " + repeatList.get(target));
+                    repeatList.remove(target);
+                    int size = repeatList.size();
+                    System.out.println("You now have " + size + (size == 1 ? " task" : " tasks") + " in the list.");
+                } catch (NumberFormatException ex) {
+                    System.out.println("☹ OOPS!!! Invalid Information.");
+                } catch (IndexOutOfBoundsException ex) {
+                    System.out.println("☹ OOPS!!! Invalid Information.");
+                }
             } else {
                 try {
                     String addTextDescription = "";

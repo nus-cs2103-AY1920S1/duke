@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String markAsDone(){
-        this.isDone = true;
+        isDone = true;
         String reply = "Nice! I've marked this task as done:\n\t ";
         reply += "  [\u2713] " + this.description;
         return reply;

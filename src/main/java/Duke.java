@@ -38,8 +38,8 @@ public class Duke {
         printReply("Bye. Hope to see you again soon!");
     }
     public static void printReply(String reply){
-        System.out.println("\t______________________________________________________________\n\t " + reply
-                       + "\n\t______________________________________________________________");
+        System.out.println("\t_______________________________________________________________\n\t " + reply
+                       + "\n\t_______________________________________________________________");
     }
     public static void addToList(Task task, ArrayList<Task> taskList){
         taskList.add(task);

@@ -46,10 +46,17 @@ public class MainManager {
                     break;
 
                 case "done" :
-                    System.out.println("Nice! I've marked this task as done:");
-                    Task currTask = list[Integer.parseInt(command[1]) - 1];
-                    currTask.setDone();
-                    System.out.println(" " + currTask);
+                    try {
+                        if(toPrint.length() <= 4) {
+                            throw new DoneException();
+                        }
+                        System.out.println("Nice! I've marked this task as done:");
+                        Task currTask = list[Integer.parseInt(command[1]) - 1];
+                        currTask.setDone();
+                        System.out.println(" " + currTask);
+                    } catch (DoneException doEx) {
+                        System.out.println(doEx);
+                    }
                     break;
 
                 case "todo":
@@ -100,16 +107,8 @@ public class MainManager {
 
 
                 default:
-                    /*
-                    Task curr = new Task(toPrint);
-                    list[counter] = curr;
-                    counter++;
-                    System.out.println("added: " + toPrint);
-                    */
-                    System.out.println("ERROR: Unsupported action");
+                    System.out.println(new UnknownCommandException());
                     break;
-
-
             }
 
             if(toPrint.equals("bye")) {

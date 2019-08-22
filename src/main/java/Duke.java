@@ -124,7 +124,7 @@ public class Duke {
             String title = " Here are the tasks in your list:\n";
             System.out.print(frontSpace + title);
             for (int i = 0; i < idx; i++) {
-                System.out.println(frontSpace + " " + (i + 1) + ". " + myList.get(i));
+                System.out.println(frontSpace + " " + (i + 1) + "." + myList.get(i));
             }
         } else {
             throw new ExtraDescriptionException("There is extra description for list");

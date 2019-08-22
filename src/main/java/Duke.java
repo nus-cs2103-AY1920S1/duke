@@ -5,8 +5,12 @@ import java.util.regex.Pattern;
 import java.util.Scanner;
 
 import com.leeyiyuan.Task;
+import com.leeyiyuan.TodoTask;
+import com.leeyiyuan.DeadlineTask;
+import com.leeyiyuan.EventTask;
 
 public class Duke {
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<Task>();
         
@@ -14,7 +18,10 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            boolean hasAddedTask = false;
+            Task addedTask = null;
             String input = scanner.nextLine();
+
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -23,10 +30,9 @@ public class Duke {
                 for (int i = 0; i < tasks.size(); i++) {
                     Task task = tasks.get(i);
                     System.out.println(String.format(
-                                "%d.[%s] %s", 
+                                "%d.%s", 
                                 i + 1, 
-                                task.getIsDone() ? "✓" : "✗",
-                                task.getTitle()));
+                                task.toString()));
                 }
 
             } else if (Pattern.matches("done [0-9]+", input)) {
@@ -35,17 +41,47 @@ public class Duke {
                     Task task = tasks.get(index - 1);
                     task.setIsDone(true);
                     System.out.println(String.format(
-                                "Nice! I've marked this task as done:\n[✓] %s",
-                                task.getTitle()));
+                                "Nice! I've marked this task as done:\n%s",
+                                task.toString()));
                 } else {
                     System.out.println("Invalid item selected.");
                 }
-            } else {
-                Task task = new Task();
-                task.setTitle(input);
+            } else if (Pattern.matches("todo .+", input)) {
+                TodoTask task = new TodoTask();
+                task.setTitle(input.split("todo ", 2)[1]);
                 tasks.add(task);
-                System.out.println(String.format("added: %s", input));
+                hasAddedTask = true;
+                addedTask = task;
+            } else if (Pattern.matches("deadline .+ /by .+", input)) {
+                String[] data = input.split("deadline ", 2)[1].split(" /by ", 2);
+                DeadlineTask task = new DeadlineTask();
+                task.setTitle(data[0]);
+                task.setDeadline(data[1]);
+                tasks.add(task);
+                hasAddedTask = true;
+                addedTask = task;
+            } else if (Pattern.matches("event .+ /at .+", input)) {
+                String[] data = input.split("event ", 2)[1].split(" /at ", 2);
+                EventTask task = new EventTask();
+                task.setTitle(data[0]);
+                task.setTime(data[1]);
+                tasks.add(task);
+                hasAddedTask = true;
+                addedTask = task;
+            } else {
+                System.out.println("Unknown command.");
+                continue;
+            }
+
+            if (hasAddedTask) {
+                System.out.println("Got it. I've added this task:");
+                System.out.println(String.format("  %s", addedTask.toString()));
+                System.out.println(String.format(
+                            "Now you have %d %s in the list.",
+                            tasks.size(),
+                            tasks.size() == 1 ? "task" : "tasks"));
             }
         }
     }
+
 }

@@ -1,8 +1,9 @@
 package com.leeyiyuan;
 
 public class Task {
-    private String title;
-    private boolean isDone;
+    
+    protected String title;
+    protected boolean isDone;
     
     public Task() { }
 
@@ -21,4 +22,5 @@ public class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
+
 }

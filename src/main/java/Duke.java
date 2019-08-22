@@ -14,28 +14,21 @@ public class Duke {
         printMessage(List.of("Hello! I'm Duke", "What can I do for you?"));
 
         List<Task> tasks = new ArrayList<>();
+        Parser parser = new Parser();
+        parser.register("todo", ToDo.getCommand(tasks));
+        parser.register("deadline", Deadline.getCommand(tasks));
+        parser.register("event", Event.getCommand(tasks));
+        parser.register("list", new ListCommand(tasks));
+        parser.register("done", new Done(tasks));
+        parser.register("bye", new Bye());
         Scanner input = new Scanner(System.in);
-        boolean end = false;
-        while (!end && input.hasNext()) {
-            String command = input.nextLine();
-            if (command.equals("bye")) {
-                end = true;
-                printMessage(List.of("Bye. Hope to see you again soon!"));
-            } else if (command.equals("list")) {
-                List<String> messages = new ArrayList<>();
-                for (int i = 0; i < tasks.size(); i++) {
-                    messages.add(i + 1 + "." + tasks.get(i));
-                }
-                printMessage(messages);
-            } else if (command.split(" ")[0].equals("done")) {
-                Task task = tasks.get(Integer.parseInt(command.substring(5)) - 1);
-                task.markAsDone();
-                printMessage(List.of("Nice! I've marked this task as done:", "  " + task));
-            } else {
-                Task task = new Task(command);
-                tasks.add(task);
-                printMessage(List.of("added: " + task));
-            }
+        boolean exit = false;
+        while (!exit && input.hasNext()) {
+            String line = input.nextLine();
+            String[] words = line.split(" ");
+            Command command = parser.parse(words);
+            printMessage(command.run(words));
+            exit = command.isExit();
         }
     }
 

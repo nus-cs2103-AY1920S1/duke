@@ -1,9 +1,9 @@
 public class Task {
     protected boolean isDone = false;
-    protected String taskName;
+    protected String description;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String description) {
+        this.description = description;
     }
 
     public String getStatusIcon() {
@@ -15,6 +15,6 @@ public class Task {
     }
 
     public String toString() {
-        return this.getStatusIcon() + this.taskName;
+        return this.getStatusIcon() + this.description;
     }
 }

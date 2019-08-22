@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,26 +14,34 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         int numTask = 0;
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<>();
 
         while(!input.equals("bye")) {
             if (input.matches("done\\s+\\d+")) {
                 System.out.println("Nice! I've marked this task as done:");
-                Task doneTask = taskList[Integer.valueOf(input.replaceAll("done\\s+", "")) - 1];
+                Task doneTask = taskList.get(Integer.valueOf(input.replaceAll("done\\s+", "")) - 1);
                 doneTask.markAsDone();
                 System.out.println(doneTask + "\n");
+            } else if (input.matches("delete\\s+\\d+")) {
+                System.out.println("Noted. I've removed this task:");
+                int listRank = Integer.valueOf(input.replaceAll("delete\\s+", "")) - 1;
+                Task deletedTask = taskList.get(listRank);
+                System.out.println(deletedTask);
+                taskList.remove(listRank);
+                numTask--;
+                System.out.println(String.format("Now you have %d tasks in the list.\n", numTask));
             } else if (!input.equals("list")) {
 
                 if (input.matches("todo\\s+.+")) {
-                    taskList[numTask] = new Todo(input.replaceAll("todo\\s+", ""));
+                    taskList.add(new Todo(input.replaceAll("todo\\s+", "")));
                 } else if (input.matches("deadline\\s+.+")) {
                     String taskDetails = input.replaceAll("deadline\\s+", "");
                     String[] details = taskDetails.split("\\s+/by\\s+");
-                    taskList[numTask] = new Deadline(details[0], details[1]);
+                    taskList.add(new Deadline(details[0], details[1]));
                 } else if (input.matches("event\\s+.+")) {
                     String taskDetails = input.replaceAll("event\\s+", "");
                     String[] details = taskDetails.split("\\s+/at\\s+");
-                    taskList[numTask] = new Event(details[0], details[1]);
+                    taskList.add(new Event(details[0], details[1]));
                 } else {
                     try {
                         if (input.equals("todo") || input.equals("deadline") || input.equals("event")
@@ -47,16 +56,16 @@ public class Duke {
                     }
                 }
 
-                if (taskList[numTask] != null) {
+                if (taskList.size() == numTask + 1) {
                     System.out.println("Got it. I've added this task:");
-                    System.out.println(taskList[numTask]);
+                    System.out.println(taskList.get(numTask));
                     numTask++;
                     System.out.println(String.format("Now you have %d tasks in the list.\n", numTask));
                 }
             } else {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < numTask; i++) {
-                    System.out.println(String.format("%d.%s", i + 1, taskList[i]));
+                    System.out.println(String.format("%d.%s", i + 1, taskList.get(i)));
                 }
                 System.out.println();
             }

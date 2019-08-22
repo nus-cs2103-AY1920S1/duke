@@ -97,6 +97,16 @@ public class Duke {
                     System.out.println("____________________________________________________________\n");
                 }
                 echo = sc.nextLine();
+            } else if (echo.startsWith("delete")) {
+                int taskNo = Character.getNumericValue(echo.charAt(echo.length() - 1));
+                System.out.println("____________________________________________________________\n" +
+                        "Noted. I've removed this task: \n" +
+                        taskList.get(taskNo - 1).toString() + "\n" +
+                        "Now you have " + (taskList.size() - 1) + " tasks in the list.\n" +
+                        "____________________________________________________________");
+                taskList.remove(taskNo - 1);
+                echo = sc.nextLine();
+
             } else {
                 System.out.println("____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +

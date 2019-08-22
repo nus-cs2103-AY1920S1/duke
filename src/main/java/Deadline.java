@@ -20,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String task = "[D][" + this.getStatusIcon() + "]" + description + " (" + deadline + ")";
+        String task = "[D][" + this.getStatusIcon() + "] " + description + " (" + deadline + ")";
         return task;
     }
 }

@@ -4,57 +4,116 @@ import java.util.ListIterator;
 
 public class Duke {
     public static void main(String[] args) {
+        run();
+    }
+
+    public static void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         LinkedList<String> inputList = new LinkedList<>();
 
         greet();
-        String input = sc.next();
+        String input = sc.nextLine();
 
-        while (!input.equals("bye")) {
-            if (!input.equals("list")) {
-                if (!input.equals("done")) {
-                    if (input.equals("todo")) {
-                        input = sc.nextLine();
-                        Task newTodo = new Todo(input);
-                        Task.addTask(newTodo);
+        while (true) {
+            try {
+                String[] inputArr = input.split(" ");
+                String taskType = inputArr[0];
+                String taskDesc = combine(inputArr);
 
-                        input = sc.next();
+                if (!correctInput(taskType)) {
+                    throw new IncorrectInputException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
 
-                    } else if (input.equals("deadline")) {
-                        input = sc.nextLine();
-                        String[] inputArr = input.split(" /");
+                if (taskType.equals("bye")) {
+                    break;
+                }
 
-                        Task newDeadline = new Deadline(inputArr[0], inputArr[1]);
+                if (!taskType.equals("list")) {
+                    if (!taskType.equals("done")) {
+                        if (inputArr.length == 1) {
+                            throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
+                        }
 
-                        Task.addTask(newDeadline);
+                        if (inputArr.length != 1) {
+                            if (taskType.equals("todo")) {
+                                Task newTodo = new Todo(taskDesc);
+                                Task.addTask(newTodo);
 
-                        input = sc.next();
+                                input = sc.nextLine();
 
+                            } else if (taskType.equals("deadline")) {
+                                String[] taskDescArr = taskDesc.split(" /");
+
+                                Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1]);
+
+                                Task.addTask(newDeadline);
+
+                                input = sc.nextLine();
+
+                            } else {
+                                String[] taskDescArr = taskDesc.split(" /");
+
+                                Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
+
+                                Task.addTask(newEvent);
+
+                                input = sc.nextLine();
+                            }
+                        } else {
+                            throw new NoDescriptionException(":( OOPS!!! The description of " + input + " cannot be empty");
+                        }
                     } else {
+                        int taskNum = Integer.parseInt(taskDesc);
+                        Task.doTask(taskNum);
+
                         input = sc.nextLine();
-                        String[] inputArr = input.split(" /");
-
-                        Task newEvent = new Event(inputArr[0], inputArr[1]);
-
-                        Task.addTask(newEvent);
-
-                        input = sc.next();
                     }
                 } else {
-                    int taskNum = sc.nextInt();
-                    Task.doTask(taskNum);
+                    Task.printTaskList();
 
-                    input = sc.next();
+                    input = sc.nextLine();
                 }
-            } else {
-                Task.printTaskList();
+            } catch (DukeException e) {
+                printLine();
 
-                sc.nextLine();
-                input = sc.next();
+                printIndent();
+                System.out.println(e.getMessage());
+
+                printLine();
+
+                input = sc.nextLine();
             }
         }
 
         exit();
+    }
+
+    public static boolean correctInput(String input) {
+        if (input.equals("todo") ||
+            input.equals("event") ||
+            input.equals("deadline") ||
+            input.equals("list") ||
+            input.equals("done") ||
+            input.equals("bye")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static String combine(String[] inputArr) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 1; i < inputArr.length; i++) {
+            if (i != inputArr.length - 1) {
+                builder.append(inputArr[i]);
+                builder.append(" ");
+            } else {
+                builder.append(inputArr[i]);
+            }
+        }
+
+        return builder.toString();
     }
 
     public static void printLine() {

@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Event extends Task {
     private String eventDate;
 
@@ -22,7 +20,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String task = "[E][" + this.getStatusIcon() + "]" + this.description + " (" + eventDate + ")";
+        String task = "[E][" + this.getStatusIcon() + "] " + this.description + " (" + eventDate + ")";
         return task;
     }
 }

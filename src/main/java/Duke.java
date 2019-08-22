@@ -13,15 +13,15 @@ public class Duke {
         while (true) {
             try {
                 run();
-//            } catch (DukeIllegalActionException | DukeIllegalDescriptionException e) {
-//                System.out.println(e.getMessage());
+            } catch (DukeIllegalActionException | DukeIllegalDescriptionException e) {
+                System.out.println(e.getMessage());
             } catch (IllegalStateException e) {
                 break;
             }
         }
     }
 
-    private static void run(){
+    private static void run() throws DukeIllegalActionException, DukeIllegalDescriptionException {
         Scanner sc = new Scanner(System.in);
         LinkedList<Task> tasks = new LinkedList<>();
         while(sc.hasNext()) {
@@ -46,7 +46,7 @@ public class Duke {
                     case todo:
                         String tdDescription = sc.nextLine();
                         if (tdDescription.isBlank()) {
-//                            throw new DukeIllegalDescriptionException(act);
+                            throw new DukeIllegalDescriptionException(act);
                         } else {
                             Task todo = new ToDo(tdDescription);
                             tasks.add(todo);
@@ -65,7 +65,7 @@ public class Duke {
                             System.out.println("Got it. I've added this task: \n" + dl.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
                         } catch (StringIndexOutOfBoundsException e) {
-//                            throw new DukeIllegalDescriptionException(act);
+                            throw new DukeIllegalDescriptionException(act);
                         }
                         break;
                     case event:
@@ -79,7 +79,7 @@ public class Duke {
                             System.out.println("Got it. I've added this task: \n" + event.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
                         } catch (StringIndexOutOfBoundsException e) {
-//                            throw new DukeIllegalDescriptionException(act);
+                            throw new DukeIllegalDescriptionException(act);
                         }
                         break;
 //                    case delete:
@@ -91,7 +91,7 @@ public class Duke {
 //                        break;
                 }
             } catch(IllegalArgumentException e) {
-//                throw new DukeIllegalActionException();
+                throw new DukeIllegalActionException();
             }
         }
     }

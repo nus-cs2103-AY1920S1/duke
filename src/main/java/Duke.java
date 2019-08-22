@@ -6,7 +6,7 @@ public class Duke {
         int idx = 1;
         System.out.println("Here are the tasks in your list:");
         for (Task t : list) {
-            System.out.println(idx + ". " + t);
+            System.out.println(idx + "." + t);
             idx++;
         }
     }

@@ -20,10 +20,10 @@ public class Duke {
         catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
-        finally {
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println(list.get(i - 1).toString());
-        }
+        
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(list.get(i - 1).toString());
+
     }
 
     public static void deleteTask(int i, ArrayList<Task> list) throws Exception {
@@ -33,12 +33,11 @@ public class Duke {
         catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
-        finally {
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(list.get(i - 1).toString());
-            list.remove(i - 1);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
-        }
+        
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(list.get(i - 1).toString());
+        list.remove(i - 1);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
     public static void validateDetail(String[] detail) throws DukeException {
@@ -66,6 +65,11 @@ public class Duke {
     public static void addTask(String input, ArrayList<Task> list) throws Exception {
         Task task;
         String detail;
+        String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
         String dueDetail;
         String[] inputAsArr = input.split(" ");
         validateDetail(inputAsArr);
@@ -96,7 +100,6 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task);
         }
-
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 

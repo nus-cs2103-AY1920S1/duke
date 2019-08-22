@@ -30,8 +30,26 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println("  " + repeatList.get(target));
             } else {
-                repeatList.add(new Task(repeatStr));
-                System.out.println("added: " + repeatStr);
+                boolean hit = false;
+                if (repeatStr.contains("todo")) {
+                    hit = true;
+                    repeatList.add(new Todo(repeatStr.substring(repeatStr.lastIndexOf("todo ") + 5)));
+                } else if (repeatStr.contains("deadline")) {
+                    hit = true;
+                    repeatList.add(new Deadline(repeatStr.substring(9, repeatStr.lastIndexOf("/by")).trim(),
+                            repeatStr.substring(repeatStr.lastIndexOf("/by ") + 3).trim()));
+                } else if (repeatStr.contains("event")) {
+                    hit = true;
+                    repeatList.add(new Event(repeatStr.substring(6, repeatStr.lastIndexOf("/at")).trim(),
+                            repeatStr.substring(repeatStr.lastIndexOf("/at ") + 3).trim()));
+                }
+
+                if (hit) {
+                    System.out.println("Got it. I've added this task: ");
+                    int size = repeatList.size();
+                    System.out.println("  " + repeatList.get(size - 1));
+                    System.out.println("You now have " + size + (size == 1 ? " task" : " tasks") + " in the list.");
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ public class Duke {
         System.out.println();
         while(book == 1) {
             String in = sc.nextLine();
+            String subin1 = in.split(" ")[0];
             System.out.println("--------------------------------------");
             System.out.print("");
             if(in.contentEquals("bye")) {
@@ -19,8 +20,16 @@ public class Duke {
                 System.out.println();
                 book = 0;
             } else if(in.contentEquals("list")) {
-                adl.printEvent();
+                System.out.println("Here are the tasks in your list:");
+                adl.printAllEvent();
                 System.out.println();
+            } else if(subin1.contentEquals("done")) {
+                String subin2 = in.split(" ")[1];
+                System.out.println("Nice! I have marked this task as done:");
+                int index = Integer.parseInt(subin2);
+                adl.changeEvent(index - 1);
+                // System.out.print("\t");
+                adl.printEvent(index);
             }
             else {
                 adl.addEvent(in);

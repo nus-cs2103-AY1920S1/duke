@@ -37,7 +37,6 @@ public class Duke {
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
-                            System.out.println("RUNNING TODO TASK MAKER");
                             listArr.add(new Task(inputArr[1], (listSize + 1), "todo"));
                             printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
                             listSize++;

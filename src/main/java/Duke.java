@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -6,6 +8,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Task[] data = new Task[100];
+
         int x = 0;
 
         while (!input.equals("bye")) {
@@ -40,6 +43,17 @@ public class Duke {
                             data[x] = new Deadline(input.split(" /by ")[0].substring(9), input.split(" /by ")[1]);
                             x++;
                             echo(data[x - 1], x);
+                            input = sc.nextLine();
+                            break;
+                        case "delete":
+                            ArrayList<Task> datalist = new ArrayList<Task>(Arrays.asList(data));
+                            int indextodel = Integer.parseInt(input.substring(7));
+                            Task removed = datalist.remove(indextodel - 1);
+                            printDeleted(removed, --x);
+                            data = new Task[100];
+                            for (int i = 0; i < datalist.size(); i++) {
+                                data[i] = datalist.get(i);
+                            }
                             input = sc.nextLine();
                             break;
                         default:
@@ -89,7 +103,7 @@ public class Duke {
         System.out.println("     Here are the tasks in your list:");
         int y = 0;
         while (array[y] != null) {
-            System.out.println("     " + (y+1) + ". " + array[y]);
+            System.out.println("     " + (y + 1) + ". " + array[y]);
             y++;
         }
         System.out.println(indentedline);
@@ -100,6 +114,19 @@ public class Duke {
         System.out.println(indentedline);
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("       " + t);
+        System.out.println(indentedline);
+    }
+
+    public static void printDeleted(Task t, int x) {
+        String indentedline = "    ____________________________________________________________";
+        System.out.println(indentedline);
+        System.out.println("     Noted. I've removed this task:");
+        System.out.println("       " + t);
+        if (x == 1) {
+            System.out.println("     Now you have " + x + " task in the list.");
+        } else {
+            System.out.println("     Now you have " + x + " tasks in the list.");
+        }
         System.out.println(indentedline);
     }
 }

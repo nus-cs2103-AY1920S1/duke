@@ -3,6 +3,8 @@ import java.util.Scanner;
 /**
  * Encapsulates attributes and behaviour of Duke, a personal assistant chatbot.
  *
+ * Duke can send its unique logo when queried.
+ *
  * @author atharvjoshi
  * @contributors j-lum, damithc
  * @version CS2103 AY19/20 Sem 1 iP Week 2

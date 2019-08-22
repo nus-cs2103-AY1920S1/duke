@@ -17,7 +17,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while (scanner.hasNextLine()) {
             boolean hasAddedTask = false;
             Task addedTask = null;
             String input = scanner.nextLine();

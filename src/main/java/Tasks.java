@@ -1,9 +1,9 @@
 
-class Tasks {
+public class Tasks {
     String taskDesc;
     String status;
 
-    Tasks(String desc) {
+    public Tasks(String desc) {
         taskDesc = desc;
         status = "✗";
     }
@@ -17,7 +17,7 @@ class Tasks {
     }
 
     @Override 
-    String toString() {
+    public String toString() {
         return "[" + status + "] " + taskDesc;
     } 
 

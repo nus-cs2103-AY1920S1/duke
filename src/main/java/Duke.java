@@ -9,16 +9,21 @@ public class Duke {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         while(sc.hasNext()) {
            String next = sc.nextLine(); 
+           String[] command = next.split(" ");
            if(next.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
            } else if (next.equals("list")) {
                int numOfOp = list.size();
                for (int i = 1; i <= numOfOp; i++) {
-                   System.out.println(i + ". " + list.get(i - 1));
+                   System.out.println(i + "." + list.get(i - 1));
                }
+           } else if (command[0].equals("done")) {
+               Tasks done = list.get(Integer.parseInt(command[1]) - 1);
+               done.finishTask();
+               System.out.println("Nice! I've marked this task as done:\n " + done);
            } else {
-               list.add(new Task(next));
+               list.add(new Tasks(next));
                System.out.println("added: " + next);
            }
         }

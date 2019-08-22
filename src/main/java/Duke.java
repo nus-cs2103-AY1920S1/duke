@@ -17,7 +17,7 @@ public class Duke {
                }
            } else {
                list.add(next);
-               System.out.println(next);
+               System.out.println("added: " + next);
            }
         }
         

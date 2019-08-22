@@ -8,7 +8,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String doneIcon = done ? "✓" : "✗";
-        return String.format("[D][%s] %s (by: %s)", doneIcon, description, deadline);
+        return "[D]" + super.toString();
     }
 }

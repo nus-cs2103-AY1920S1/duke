@@ -8,7 +8,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String doneIcon = done ? "✓" : "✗";
-        return String.format("[E][%s] %s (at: %s)", doneIcon, description, time);
+        return "[E]" + super.toString();
     }
 }

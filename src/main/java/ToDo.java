@@ -5,7 +5,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String doneIcon = done ? "✓" : "✗";
-        return String.format("[T][%s] %s", doneIcon, description);
+        return "[T]" + super.toString();
     }
 }

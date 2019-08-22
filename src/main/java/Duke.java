@@ -45,53 +45,80 @@ public class Duke {
 				System.out.println(line);
 				System.out.println();
 			} else if (rawInput.toLowerCase().startsWith("todo")) {
-				String description = rawInput.substring(5);
-				Task newTask = new Todo(description);
-				memory.add(newTask);
+				try {
+					String description = rawInput.substring(5);
+					Task newTask = new Todo(description);
+					memory.add(newTask);
+					
+					System.out.println(line);
+					System.out.println(" " + "Got it. I've added this task:");
+					System.out.println("   " + newTask.showTask());
+					if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+					else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+					System.out.println(line);
+					System.out.println();
+				} catch (StringIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+					System.out.println(line);
+					System.out.println();
+				}
 				
-				System.out.println(line);
-				System.out.println(" " + "Got it. I've added this task:");
-				System.out.println("   " + newTask.showTask());
-				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
-				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
-				System.out.println(line);
-				System.out.println();
 			} else if (rawInput.toLowerCase().startsWith("deadline")) {
-				String[] deadlineInput = rawInput.substring(9).split("/by");
-				String description = deadlineInput[0].trim();
-				String by = deadlineInput[1].trim();
-				Task newTask = new Deadline(description, by);
-				memory.add(newTask);
-				
-				System.out.println(line);
-				System.out.println(" " + "Got it. I've added this task:");
-				System.out.println("   " + newTask.showTask());
-				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
-				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
-				System.out.println(line);
-				System.out.println();
+				try {
+					String[] deadlineInput = rawInput.substring(9).split("/by");
+					String description = deadlineInput[0].trim();
+					String by = deadlineInput[1].trim();
+					Task newTask = new Deadline(description, by);
+					memory.add(newTask);
+					
+					System.out.println(line);
+					System.out.println(" " + "Got it. I've added this task:");
+					System.out.println("   " + newTask.showTask());
+					if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+					else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+					System.out.println(line);
+					System.out.println();
+				} catch (StringIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+					System.out.println(line);
+					System.out.println();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! The timing of a deadline cannot be empty.");
+					System.out.println(line);
+					System.out.println();
+				}
 			} else if (rawInput.toLowerCase().startsWith("event")) {
-				String[] eventInput = rawInput.substring(6).split("/at");
-				String description = eventInput[0].trim();
-				String at = eventInput[1].trim();
-				Task newTask = new Event(description, at);
-				memory.add(newTask);
-				
-				System.out.println(line);
-				System.out.println(" " + "Got it. I've added this task:");
-				System.out.println("   " + newTask.showTask());
-				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
-				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
-				System.out.println(line);
-				System.out.println();
+				try {
+					String[] eventInput = rawInput.substring(6).split("/at");
+					String description = eventInput[0].trim();
+					String at = eventInput[1].trim();
+					Task newTask = new Event(description, at);
+					memory.add(newTask);
+					
+					System.out.println(line);
+					System.out.println(" " + "Got it. I've added this task:");
+					System.out.println("   " + newTask.showTask());
+					if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
+					else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+					System.out.println(line);
+					System.out.println();
+				} catch (StringIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! The description of a event cannot be empty.");
+					System.out.println(line);
+					System.out.println();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println(line);
+					System.out.println(" ☹ OOPS!!! The timing of a event cannot be empty.");
+					System.out.println(line);
+					System.out.println();
+				}
 			} else {
-				memory.add(new Task(rawInput));
-				
 				System.out.println(line);
-				System.out.println(" " + "Got it. I've added this task:");
-				System.out.println(" " + "added: " + rawInput);
-				if (memory.size() == 1) System.out.println(" " + "Now you have 1 task in your list");
-				else System.out.println(" " + "Now you have " + memory.size() + " tasks in your list.");
+				System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 				System.out.println(line);
 				System.out.println();
 			}

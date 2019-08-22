@@ -16,7 +16,15 @@ public class Duke {
 
         while (sc.hasNext()) {
             String word = sc.nextLine();
-
+            while (!word.equals("bye") && !word.equals("list") && !word.contains("done") && !word.contains("todo")
+                    && !word.contains("event") && !word.contains("deadline") && !word.contains("delete")) {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                word = sc.nextLine();
+            }
+            while(word.equals("todo") || word.equals("event") || word.equals("deadline")) {
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                word = sc.nextLine();
+            }
             if (word.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.exit(0);

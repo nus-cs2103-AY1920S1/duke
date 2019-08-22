@@ -16,10 +16,11 @@ public class Duke {
         int numberOfTask = 0;
         boolean shouldStop = false;
         while (!shouldStop) {
-            String input = sc.nextLine();
-            String[] command = input.split(" ");
+            String input = sc.nextLine().trim();
+            String command = input.split(" ")[0]; //the first word of the user input
+            String description = input.substring(command.length()).trim();
             System.out.println("\n--------------------------------------");
-            switch (command[0]) {
+            switch (command) {
                 case "bye":
                     System.out.println("    Bye! See you again soon!!");
                     System.out.println("--------------------------------------");
@@ -33,16 +34,39 @@ public class Duke {
                     System.out.println("--------------------------------------");
                     break;
                 case "done":
-                    int taskNumber = Integer.parseInt(command[1]) - 1;
+                    int taskNumber = Integer.parseInt(description) - 1;
                     tasks[taskNumber].complete();
                     System.out.println("    Nice! I've marked this task as done:");
                     System.out.println("      " + tasks[taskNumber].toString());
                     System.out.println("--------------------------------------");
                     break;
-                default:
-                    System.out.println("    added: " + input);
-                    tasks[numberOfTask] = new Task(input);
+                case "todo":
+                    System.out.println("    Got it. I've added this task: ");
+                    tasks[numberOfTask] = new ToDoTask(description);
+                    System.out.println("      " + tasks[numberOfTask].toString());
                     numberOfTask++;
+                    System.out.println("    Now you have " + numberOfTask + " tasks in the list.");
+                    System.out.println("--------------------------------------");
+                    break;
+                case "event":
+                    System.out.println("    Got it. I've added this task: ");
+                    tasks[numberOfTask] = new EventsTask(description);
+                    System.out.println("      " + tasks[numberOfTask].toString());
+                    numberOfTask++;
+                    System.out.println("    Now you have " + numberOfTask + " tasks in the list.");
+                    System.out.println("--------------------------------------");
+                    break;
+                case "deadline":
+                    System.out.println("    Got it. I've added this task: ");
+                    tasks[numberOfTask] = new DeadlinesTask(description);
+                    System.out.println("      " + tasks[numberOfTask].toString());
+                    numberOfTask++;
+                    System.out.println("    Now you have " + numberOfTask + " tasks in the list.");
+                    System.out.println("--------------------------------------");
+                    break;
+                default:
+                    System.out.println("    unknown command");
+
                     System.out.println("--------------------------------------");
                     break;
             }

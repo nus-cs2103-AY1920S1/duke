@@ -23,7 +23,7 @@ public class Duke {
                     System.out.println("  " + todo);
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } catch (DukeException error) {
-                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
             } else if (s[0].equals("deadline")) {
                 try {
@@ -37,7 +37,7 @@ public class Duke {
                     System.out.println("  " + deadline);
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } catch (DukeException error) {
-                    System.out.println(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
             } else if (s[0].equals("event")) {
                 try {
@@ -50,7 +50,7 @@ public class Duke {
                     System.out.println("  " + event);
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } catch (DukeException error) {
-                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
             } else if (s[0].equals("list")) {
                 int length = list.size();
@@ -68,11 +68,27 @@ public class Duke {
             } else if (s[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (s[0].equals("delete")) {
+                try {
+                    if (text.length() <= 6) {
+                        throw new DukeException();
+                    }
+                    int num = Integer.parseInt(s[1]);
+                    if (num > list.size()) {
+                        throw new DukeException();
+                    }
+                    Task removed = list.remove(num - 1);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println("  " + removed);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                } catch (DukeException error) {
+                    System.out.println("☹ OOPS!!! There is no such task.");
+                }
             } else {
                 try {
                     throw new DukeException();
                 } catch (DukeException error) {
-                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         }

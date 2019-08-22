@@ -8,7 +8,9 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void greet() {
+        TaskManager.separator();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        TaskManager.separator();
     }
 
     public static void main(String[] args) {
@@ -35,6 +37,9 @@ public class Duke {
                 String description = suffix.split(" /by ", 2)[0];
                 String by = suffix.split(" /by ", 2)[1];
                 taskManager.addTask(new Deadline(description, by));
+            } else if  (input.startsWith("todo ")) {
+                String description = input.split(" ", 2)[1];
+                taskManager.addTask(new Todo(description));
             } else {
                 scanner.close();
                 throw new IllegalArgumentException();

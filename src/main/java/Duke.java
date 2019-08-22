@@ -59,6 +59,12 @@ public class Duke {
                         System.out.print(line + "     Got it. I've added this task: "
                                 + "\n       " + eTask.toString() + "\n" + "     Now you have "
                                 + commandList.size() + " tasks in the list." + "\n" + line);
+                    } else if (command.equals("delete")) {
+                        int taskNum = sc.nextInt();
+                        System.out.println(line + "     Noted. I've removed this task: ");
+                        System.out.println("       " + commandList.get(taskNum - 1). toString());
+                        commandList.remove(taskNum - 1);
+                        System.out.print("     Now you have " + commandList.size() + "tasks in the list.\n" + line);
                     } else {
                         throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -66,7 +72,6 @@ public class Duke {
             } catch (DukeException error) {
                 System.out.print(line + "     " + error.getMessage() + "\n" + line);
             }
-
         } while (x==1);
     }
 }

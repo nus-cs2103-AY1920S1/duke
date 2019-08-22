@@ -5,7 +5,7 @@ public class ChatLike {
     private String response;
     private List<Task> taskList = new ArrayList<Task>();
 
-    public void add(String s) {
+    public void add(String s) throws DukeException{
         String[] arrWords = s.split(" ");
         String tasksType = arrWords[0]; //Type of Task: ToDo, Event, Deadline
         String tasksDescr = ""; //Description of the task
@@ -24,6 +24,20 @@ public class ChatLike {
         tasksDescr = tasksDescr.trim(); //Remove extra spaces
         tasksTime = tasksTime.trim();
 
+        if (!(tasksType.equals("todo") || tasksType.equals("deadline") || tasksType.equals("event"))) {
+            throw new DukeException("    ____________________________________________________________\n     " +
+                    "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                    "\n    ____________________________________________________________\n");
+        }
+        if (tasksDescr.equals("")) throw new DukeException(
+                "    ____________________________________________________________\n     " +
+                        "\u2639" +" OOPS!!! The description of a " + tasksType + " cannot be empty." +
+                        "\n    ____________________________________________________________\n");
+        if ((tasksType.equals("deadline") || tasksType.equals("event")) && tasksTime.equals(""))
+            throw new DukeException(
+                    "    ____________________________________________________________\n     " +
+                            "\u2639" + " OOPS!!! The time of a " + tasksType + " cannot be empty." +
+                            "\n    ____________________________________________________________\n");
 
         Task task;
         if (tasksType.equals("todo")) {
@@ -66,7 +80,17 @@ public class ChatLike {
         System.out.println(this);
     }
 
-    public void done(int n) { //Marks a task to be completed by calling method of Task object
+    /*
+    Apart from the two types exceptions given, I came up with this possible exception
+    In command done <taskNumber>, <taskNumber> should necessarily be less than the taskList size, else an exception is thrown,
+    which I have handled here.
+    */
+    public void done(int n) throws DukeException{ //Marks a task to be completed by calling method of Task object
+        if(n > this.taskList.size()) {
+            throw new DukeException("    ____________________________________________________________\n     " +
+                    "\u2639" + " OOPS!!! I'm sorry, but you do not have so many tasks :-(" +
+                    "\n    ____________________________________________________________\n");
+        }
         this.taskList.get(n - 1).mark();
         this.response = "Nice! I've marked this task as done:\n       " + this.taskList.get(n - 1);
         System.out.println(this);

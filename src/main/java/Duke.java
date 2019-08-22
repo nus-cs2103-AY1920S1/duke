@@ -31,9 +31,22 @@ public class Duke {
                 String output = "Nice! I've marked this task as done:\n  " + items[num - 1];
                 System.out.println(output);
             } else {
-                items[counter] = new Task(next);
+                if (next.startsWith("todo")) {
+                    items[counter] = new Todo(next.substring(5));
+                } else if (next.startsWith("deadline")) {
+                    String[] parts = next.split(" /by ");
+                    items[counter] = new Deadline(parts[0].substring(9), parts[1]);
+                } else if (next.startsWith("event")) {
+                    String[] parts = next.split(" /at ");
+                    items[counter] = new Event(parts[0].substring(6), parts[1]);
+                } else {
+                    items[counter] = new Task(next);
+                }
+
+                String output = "Got it. I've added this task:\n  " + items[counter];
+                output += "\nNow you have " + (counter + 1) + " tasks in the list.";
+                System.out.println(output);
                 counter++;
-                System.out.println("added: " + next);
             }
         }
 

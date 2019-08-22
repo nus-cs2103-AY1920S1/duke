@@ -46,7 +46,6 @@ public class Duke {
         addBorder(input);
     }
 
-
     public static void printExitMessage() {
         addBorder("Bye. Hope to see you again soon!");
     }

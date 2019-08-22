@@ -6,9 +6,9 @@ public class Duke {
     private ArrayList<Task> taskList;
     //Constructor
     public Duke() {
-        taskList = new ArrayList<>();
+        taskList = new ArrayList<Task>();
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,18 +25,30 @@ public class Duke {
     }
 
     private boolean inProgram;
-    private void run() {
+    private void run() throws DukeException {
         //Initialise Scanner object
         Scanner input = new Scanner(System.in);
-        String userInput;
         Task newTask;
+        String taskDescription;
+        //More general than taskDescription, includes "/by", "/at" info
+        String taskInformation;
+        // E.g. /by, /at
+        String subCommand;
+        int subCommandLen;
         //Continually receive commands until exit
         inProgram = true;
         while (inProgram) {
-            String firstCommand = input.next();
-            String taskDescription;
+            String userInput = input.nextLine();
+            ArrayList<String> userInputArr = new ArrayList<String>(
+                    //LEARN: Split string by any number of consecutive whitespaces
+                    //Arrays.asList(userInput.split("//s+"))
+                    //LEARN: Split string by first occurring whitespace, where limit param means pattern applied n-1 times
+                    //Arrays.asList(userInput.split(" ", 2))
+                    //Split string by white spaces
+                    Arrays.asList(userInput.split(" "))
+            );
             //Identify command by first word
-            switch (firstCommand) {
+            switch (userInputArr.get(0)) {
                 case ("bye"):
                     display("Bye. Hope to see you again soon!");
                     //Exit program
@@ -50,45 +62,71 @@ public class Duke {
                     }
                     break;
                 case ("todo"):
-                    //TODO check for valid input (no whitespace only)
-                    if (input.hasNext()) {
-                        //Ignore starting whitespace
-                        taskDescription = input.nextLine().substring(1);
+                    //Empty description
+                    if (userInputArr.size() == 1) {
+                        throw new EmptyDescriptionException("todo");
+                    } else {
+                        //Splice back the description
+                        taskDescription = String.join(" ",
+                                userInputArr.subList(1, userInputArr.size()));
                         newTask = new ToDo(taskDescription);
                         taskList.add(newTask);
                         displayResponse(newTask);
-                    } else {
-                        display("Please write something after \"todo\"!");
                     }
                     break;
                 case ("deadline"):
-                    //TODO check for valid input
-                    // (no whitespace only, has "/by")
-                    if (input.hasNext()) {
-                        userInput = input.nextLine().substring(1);
-                        int byIdx = userInput.indexOf("/by");
-                        taskDescription = userInput.substring(0, byIdx-1);
-                        String by = userInput.substring(byIdx+4);
-                        newTask = new Deadline(taskDescription, by);
-                        taskList.add(newTask);
-                        displayResponse(newTask);
+                    subCommand = "/by";
+                    subCommandLen = subCommand.length();
+                    //Empty Description (only "deadline" or "deadline /by")
+                    if (userInputArr.size() == 1 || userInputArr.get(1).equalsIgnoreCase(subCommand)) {
+                        throw new EmptyDescriptionException("deadline");
                     } else {
-                        display("Please write something after \"deadline\"!");
+                        int firstByIdx = userInputArr.indexOf(subCommand);
+                        int lastByIdx = userInputArr.lastIndexOf(subCommand);
+                        //No "/by" or multiple "/by"s provided
+                        if (firstByIdx == -1 || firstByIdx != lastByIdx) {
+                            throw new IncorrectInfoInputException(subCommand);
+                        //No description of "/by"
+                        } else if (firstByIdx == userInputArr.size()-1) {
+                            throw new EmptyDescriptionException(subCommand);
+                        } else {
+                            //Splice words after first-word command and before "/by"
+                            //NOTE: .subList(startIdx, endIdx) where endIdx is NOT inclusive
+                            taskDescription = String.join(" ",
+                                    userInputArr.subList(1, firstByIdx));
+                            String byDescription = String.join(" ",
+                                    userInputArr.subList(firstByIdx+1, userInputArr.size()));
+                            newTask = new Deadline(taskDescription, byDescription);
+                            taskList.add(newTask);
+                            displayResponse(newTask);
+                        }
                     }
                     break;
                 case ("event"):
-                    //TODO check for valid input
-                    // (no whitespace only, has "/at")
-                    if (input.hasNext()) {
-                        userInput = input.nextLine().substring(1);
-                        int atIdx = userInput.indexOf("/at");
-                        taskDescription = userInput.substring(0, atIdx-1);
-                        String at = userInput.substring(atIdx+4);
-                        newTask = new Event(taskDescription, at);
-                        taskList.add(newTask);
-                        displayResponse(newTask);
+                    subCommand = "/at";
+                    subCommandLen = subCommand.length();
+                    //Empty Description (only "deadline" or "deadline /by")
+                    if (userInputArr.size() == 1 || userInputArr.get(1).equalsIgnoreCase(subCommand)) {
+                        throw new EmptyDescriptionException("event");
                     } else {
-                        display("Please write something after \"event\"!");
+                        int firstByIdx = userInputArr.indexOf(subCommand);
+                        int lastByIdx = userInputArr.lastIndexOf(subCommand);
+                        //No "/by" or multiple "/by"s provided
+                        if (firstByIdx == -1 || firstByIdx != lastByIdx) {
+                            throw new IncorrectInfoInputException(subCommand);
+                            //No description of "/by"
+                        } else if (firstByIdx == userInputArr.size()-1) {
+                            throw new EmptyDescriptionException(subCommand);
+                        } else {
+                            //Splice words after first-word command and before "/at"
+                            taskDescription = String.join(" ",
+                                    userInputArr.subList(1, firstByIdx));
+                            String atDescription = String.join(" ",
+                                    userInputArr.subList(firstByIdx+1, userInputArr.size()));
+                            newTask = new Event(taskDescription, atDescription);
+                            taskList.add(newTask);
+                            displayResponse(newTask);
+                        }
                     }
                     break;
                 case ("done"):
@@ -104,12 +142,7 @@ public class Duke {
                     }
                     break;
                 default:
-                    display("\"" + firstCommand + "\"" +
-                            " is not a valid command. Try again.\n\n" +
-                            indentString +
-                            "List of valid commands: \n" +
-                            indentString +
-                            "todo, deadline, event, list, done, bye");
+                    throw new UnknownCommandException();
             }
         }
     }
@@ -140,7 +173,7 @@ public class Duke {
     private void displayResponse(Task task) {
         System.out.println("-----");
         System.out.println(indentString + "Got it. I've added this task:");
-        System.out.println(indentString + task.toString());
+        System.out.println(indentString + "  " + task.toString());
         System.out.println(indentString +
                 "Now you have " + taskList.size() +
                 (taskList.size() == 1? " task":" tasks") +
@@ -150,8 +183,9 @@ public class Duke {
 
     private void displayMarkDone(Task doneTask) {
         System.out.println("-----");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("    " + doneTask.toString());
+        System.out.println(indentString + "Nice! I've marked this task as done:");
+        System.out.println(indentString + "  " + doneTask.toString());
         System.out.println("-----");
     }
+
 }

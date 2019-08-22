@@ -117,10 +117,7 @@ public class Duke {
         String at = description.substring(indexOfAt + 3).strip();
         tasks.add(new Event(desc, at));
         numberOfTasks++;
-        String output = "Got it. I've added this task:\n"
-                + "  " + tasks.get(numberOfTasks - 1).toString()
-                + "\n" + getNumberOfTasks();
-        dukeOutput(output);
+        printTaskAdded();
     }
 
     public static void addTodo(String description) throws DukeException {
@@ -132,10 +129,7 @@ public class Duke {
         String newDescription = desc.toString().strip();
         tasks.add(new Todo(newDescription));
         numberOfTasks++;
-        String output = "Got it. I've added this task:\n"
-                + "  " + tasks.get(numberOfTasks - 1).toString()
-                + "\n" + getNumberOfTasks();
-        dukeOutput(output);
+        printTaskAdded();
     }
 
     public static void addDeadline(String description) throws DukeException {
@@ -147,6 +141,10 @@ public class Duke {
         String by = description.substring(indexOfBy + 3).strip();
         tasks.add(new Deadline(desc, by));
         numberOfTasks++;
+        printTaskAdded();
+    }
+
+    public static void printTaskAdded() {
         String output = "Got it. I've added this task:\n"
                 + "  " + tasks.get(numberOfTasks - 1).toString()
                 + "\n" + getNumberOfTasks();
@@ -161,8 +159,13 @@ public class Duke {
                 output.append("\n");
             }
         }
-        dukeOutput(output.toString());
+        if (output.toString().isBlank()) {
+            dukeOutput("You have no tasks to do o_O!");
+        } else {
+            dukeOutput(output.toString());
+        }
     }
+
 
     public static String getNumberOfTasks() {
         return "Now you have " + numberOfTasks + " tasks in the list.";

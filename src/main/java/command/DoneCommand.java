@@ -17,11 +17,7 @@ public class DoneCommand implements Command {
 
     @Override
     public Optional<Command> execute() {
-        taskListController.setTaskToDone(completedTaskIndex);
-        DukeMessage doneMessage = new DukeMessage("Nice! I've marked this task as done:")
-                .newLine()
-                .indent();
-        doneMessage.append(taskListController.getTaskMessage(completedTaskIndex));
+        DukeMessage doneMessage = taskListController.setTaskToDone(completedTaskIndex);
 
         DukeOutput.printMessage(doneMessage);
 

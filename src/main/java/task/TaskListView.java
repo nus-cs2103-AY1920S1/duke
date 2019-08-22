@@ -6,7 +6,7 @@ import java.util.List;
 
 class TaskListView {
     public DukeMessage formatAllTasksMessage(List<Task> tasks) {
-        DukeMessage taskList = new DukeMessage("Here are the tasks in your list:")
+        DukeMessage taskList = new DukeMessage("Here are the task.tasks in your list:")
                 .newLine();
 
         if (!tasks.isEmpty()) {
@@ -25,15 +25,23 @@ class TaskListView {
     }
 
     public DukeMessage formatTaskMessage(Task task) {
-        DukeMessage taskMessage = new DukeMessage();
-        if (task.isDone()) {
-            taskMessage.append("[\u2713] ");
-        } else {
-            taskMessage.append("[\u2718] ");
-        }
+        return new DukeMessage(task.getTaskMessage());
+    }
 
-        taskMessage.append(task.getDescription());
+    public DukeMessage formatNewTask(Task task, int tasksLength) {
+        return new DukeMessage("Got it. I've added this task:")
+                .newLine()
+                .indent()
+                .append(task.getTaskMessage())
+                .newLine()
+                .append(String.format("Now you have %d tasks in the list", tasksLength));
+    }
 
-        return taskMessage;
+    public DukeMessage formatTaskDone(Task task) {
+        return new DukeMessage("Nice! I've marked this task as done:")
+                .newLine()
+                .indent()
+                .append(task.getTaskMessage());
+
     }
 }

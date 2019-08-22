@@ -1,21 +1,21 @@
 public class Task {
-    private boolean done;
-    private String description;
+    private boolean isDone;
+    protected String description;
 
     public Task(String s) {
-        this.done = false;
+        this.isDone = false;
         this.description = s;
     }
 
     public void mark() {
-        if (!this.done) this.done = true;
+        if (!isDone) this.isDone = true;
+    } //update status of task
+
+    protected String getStatusIcon() {
+        return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
     }
 
     public String toString() {
-        if (this.done) {
-            return "[\u2713] " + this.description;
-        } else {
-            return "[\u2718] " + this.description;
-        }
+            return this.getStatusIcon() + this.description;
     }
 }

@@ -32,10 +32,19 @@ public class Duke {
                         "Here are the tasks in your list:");
                 int count = 1;
                 for (Task t : taskList) {
-                    System.out.println(count + "." + t.getDescription());
-                    //System.out.printf("[%s]%d. %s%n", t.getStatusIcon(), count, t.description);
+                    //System.out.println(count + "." + t.getDescription());
+                    System.out.printf("[%s]%d. %s%n", t.getStatusIcon(), count, t.description);
                     count++;
                 }
+                System.out.println("____________________________________________________________\n");
+                echo = sc.nextLine();
+
+            } else if (echo.startsWith("done")) {
+                int taskNo = Character.getNumericValue(echo.charAt(echo.length() - 1));
+                System.out.println("____________________________________________________________\n" +
+                        "Nice! I've marked this task as done: ");
+                taskList.get(taskNo - 1).markAsDone(taskList.get(taskNo - 1));
+                System.out.println("[" + taskList.get(taskNo - 1).getStatusIcon() + "] " + taskList.get(taskNo - 1).getDescription());
                 System.out.println("____________________________________________________________\n");
                 echo = sc.nextLine();
 

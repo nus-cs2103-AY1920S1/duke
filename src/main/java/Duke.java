@@ -10,8 +10,14 @@ public class Duke {
            if(next == "bye") {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
+           } else if (next == "list") {
+               int numOfOp = list.size();
+               for (i = 1; i <= numOfOp; i++) {
+                   System.out.println(i + ". " + list(i - 1));
+               }
            } else {
-                System.out.println(next);
+               list.add(next);
+               System.out.println(next);
            }
         }
         

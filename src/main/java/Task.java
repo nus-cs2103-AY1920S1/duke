@@ -7,6 +7,8 @@ public class Task {
     protected boolean isDone;
     protected String doneSymbol;
 
+    public Task() {}
+
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;

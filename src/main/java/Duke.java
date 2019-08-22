@@ -1,8 +1,26 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<Task> tasks = new ArrayList<Task>();
+
+    /*
+        prints out a series of dashes that result in a straight line
+     */
     private static void straightLine() {
         System.out.println("\n--------------------------------------");
+    }
+
+    /*
+        adds a new task newTask to the arraylist tasks
+        and also prints out statememnts stating that it has been completed
+     */
+    private static void addTask(Task newTask) {
+        tasks.add(newTask);
+        System.out.println("    Got it. I've added this task: ");
+        System.out.println("      " + newTask.toString());
+        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+        straightLine();
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -12,11 +30,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("\n");
         System.out.println("How may I help you?\n");
         straightLine();
-        Task[] tasks = new Task[100];
-        int numberOfTask = 0;
+
         boolean shouldStop = false;
         while (!shouldStop) {
             try {
@@ -32,53 +48,51 @@ public class Duke {
                         break;
                     case "list":
                         System.out.println("    Here are the tasks in your list:");
-                        for (int i = 0; i < numberOfTask; i++) {
-                            System.out.println("    " + (i + 1) + "." + tasks[i]);
+                        for (int i = 0; i < tasks.size(); i++) {
+                            System.out.println("      " + (i + 1) + "." + tasks.get(i).toString());
                         }
                         straightLine();
                         break;
                     case "done":
-                        int taskNumber;
-                        try {
-                            taskNumber = Integer.parseInt(description) - 1;
-                            if (taskNumber > numberOfTask) {
+                        {
+                            int taskNumber;
+                            try {
+                                taskNumber = Integer.parseInt(description) - 1;
+                                tasks.get(taskNumber).complete();
+                                System.out.println("    Nice! I've marked this task as done:");
+                                System.out.println("      " + tasks.get(taskNumber).toString());
+                                straightLine();
+                            } catch (IndexOutOfBoundsException | NumberFormatException err) {
                                 throw new InvalidDescriptionDukeException(command, description);
                             }
-                        } catch (NumberFormatException err) {
-                            throw new InvalidDescriptionDukeException(command, description);
                         }
-                        tasks[taskNumber].complete();
-                        System.out.println("    Nice! I've marked this task as done:");
-                        System.out.println("      " + tasks[taskNumber].toString());
-                        straightLine();
+                        break;
+                    case "delete":
+                        {
+                            int taskNumber;
+                            try {
+                                taskNumber = Integer.parseInt(description) - 1;
+                                System.out.println("    Noted. I've removed this task:");
+                                System.out.println("      " + tasks.get(taskNumber).toString());
+                                tasks.remove(taskNumber);
+                                System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                                straightLine();
+                            } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                                throw new InvalidDescriptionDukeException(command, description);
+                            }
+                        }
                         break;
                     case "todo":
-                        tasks[numberOfTask] = new ToDoTask(description);
-                        System.out.println("    Got it. I've added this task: ");
-                        System.out.println("      " + tasks[numberOfTask].toString());
-                        numberOfTask++;
-                        System.out.println("    Now you have " + numberOfTask + " tasks in the list.");
-                        straightLine();
+                        addTask(new ToDoTask(description));
                         break;
                     case "event":
-                        tasks[numberOfTask] = new EventsTask(description);
-                        System.out.println("    Got it. I've added this task: ");
-                        System.out.println("      " + tasks[numberOfTask].toString());
-                        numberOfTask++;
-                        System.out.println("    Now you have " + numberOfTask + " tasks in the list.");
-                        straightLine();
+                        addTask(new EventsTask(description));
                         break;
                     case "deadline":
-                        tasks[numberOfTask] = new DeadlinesTask(description);
-                        System.out.println("    Got it. I've added this task: ");
-                        System.out.println("      " + tasks[numberOfTask].toString());
-                        numberOfTask++;
-                        System.out.println("    Now you have " + numberOfTask + " tasks in the list.");
-                        straightLine();
+                        addTask(new DeadlinesTask(description));
                         break;
                     default:
                         throw new InvalidCommandDukeException(command);
-
                 }
              } catch(DukeException err) {
                 System.out.println("    " + err.toString());

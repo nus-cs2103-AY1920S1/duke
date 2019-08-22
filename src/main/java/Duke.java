@@ -1,10 +1,25 @@
+import java.util.Scanner;
+
 public class Duke {
+    private static void printWithIndentation(String content) {
+        System.out.println("    ____________________________________________________________\n" +
+                "     " + content + "\n" +
+                "    ____________________________________________________________\n    ");
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("    ____________________________________________________________\n" +
+                "     Hello! I'm Duke\n" +
+                "     What can I do for you?\n" +
+                "    ____________________________________________________________");
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            String userInput = sc.nextLine();
+            if (userInput.matches("bye")) {
+                printWithIndentation("Bye. Hope to see you again soon!");
+                break;
+            } else {
+                printWithIndentation(userInput);
+            }
+        }
     }
 }

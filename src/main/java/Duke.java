@@ -32,6 +32,14 @@ public class Duke {
                     currentTask.setDone(true);
                     System.out.println("Nice! I've marked this task as done:\n[✓] " + currentTask.getName());
                 }
+                else if (words[0].equals("delete")) {
+                    System.out.println("Noted. I've removed this task:");
+                    int itemId = Integer.parseInt(words[1]);
+                    Task currentTask = tasks.get(itemId - 1);
+                    tasks.remove(currentTask);
+                    System.out.println(currentTask);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                }
                 // Add
                 else {
                     try {

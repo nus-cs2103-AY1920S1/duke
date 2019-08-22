@@ -15,3 +15,6 @@ bin/
 
 # JAVA class file
 *.class
+
+# Text UI Testing
+ACTUAL.TXT

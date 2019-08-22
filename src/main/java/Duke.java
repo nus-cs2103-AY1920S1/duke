@@ -36,6 +36,18 @@ public class Duke {
                             throw new DukeException("☹ OOPS! Task number invalid!");
                         }
                         break;
+                    case "delete":
+                        if (inputArr.length <= 1) {
+                            throw new DukeException("☹ OOPS! Task number missing!");
+                        }
+                        try {
+                            Task.deleteTask(Integer.parseInt(inputArr[1]));
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("☹ OOPS! Task number format invalid!");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS! Task number invalid!");
+                        }
+                        break;
                     case "todo":
                         if (inputArr.length <= 1) {
                             throw new DukeException("☹ OOPS! Todo description missing!");

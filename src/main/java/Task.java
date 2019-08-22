@@ -33,6 +33,17 @@ public class Task {
         System.out.println(task);
     }
 
+    public static void deleteTask(int index) {
+        Task task = taskList.remove(index - 1);
+        System.out.println("Noted! I've removed this task:");
+        System.out.println(task);
+        if (taskList.size() == 1)  {
+            System.out.println("Now you have 1 task in the list!");
+        } else {
+            System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+        }
+    }
+
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         int counter = 1;

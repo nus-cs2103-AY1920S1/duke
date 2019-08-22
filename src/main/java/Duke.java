@@ -136,8 +136,9 @@ public class Duke {
 
     /**
      * Handle Delete command.
-     * @param commandString
-     * @throws InvalidIndex
+     * @param command String
+     * @throws InvalidIndexException if the index provided is invalid
+     * @throws InvalidCommandException if the arguments provided are invalid
      */
     void handleDeleteCommand(String command) throws InvalidIndexException, InvalidCommandException {
         String[] deleteArr = command.split(" ");

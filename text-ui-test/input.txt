@@ -1,0 +1,6 @@
+lul
+todo read book
+event return book /at sunday
+deadline do test /by then
+list
+bye

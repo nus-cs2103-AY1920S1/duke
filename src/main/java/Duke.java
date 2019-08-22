@@ -26,6 +26,21 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(int i, ArrayList<Task> list) throws Exception {
+        try {
+            list.get(i - 1);
+        }
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
+        }
+        finally {
+            System.out.println("Noted. I've removed this task: ");
+            System.out.println(list.get(i - 1).toString());
+            list.remove(i - 1);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        }
+    }
+
     public static void validateDetail(String[] detail) throws DukeException {
         if (detail.length == 0) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -110,6 +125,17 @@ public class Duke {
                         } 
                         catch (NumberFormatException nfe) {
                             throw new DukeException("☹ OOPS!!! The completed task's index must be a number.");
+                        }
+                    }
+                } else if (command[0].equals("delete")) {
+                    if (command.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The index of task to be deleted must be mentioned.");
+                    } else {
+                        try {
+                            deleteTask(Integer.parseInt(command[1]), list);
+                        } 
+                        catch (NumberFormatException nfe) {
+                            throw new DukeException("☹ OOPS!!! The index of task to be deleted must be a number.");
                         }
                     }
                 } else {

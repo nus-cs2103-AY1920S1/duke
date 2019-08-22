@@ -126,6 +126,24 @@ public class Duke {
                                 + "\n"
                                 + dividerLine);
                         break;
+                    case "delete":
+                        if (inputArray.length < 2) {
+                            throw new DukeException("OOPS!!! You need to specify the number of the task "
+                                    + "you want to delete!");
+                        }
+                        int taskIndexToRemove = Integer.parseInt(inputArray[1]) - 1;
+                        Task removedTask = tasks.remove(taskIndexToRemove);
+                        System.out.print(dividerLine
+                                + "  Noted. I've removed this task:\n"
+                                + "    "
+                                + removedTask
+                                + "\n"
+                                + "  Now you have "
+                                + tasks.size()
+                                + " task(s) in the list."
+                                + "\n"
+                                + dividerLine);
+                        break;
                     default:
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

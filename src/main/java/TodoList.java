@@ -12,13 +12,19 @@ public class TodoList {
         list.add(task);
     }
 
+    Task markAsDone(int index) {
+        Task task = list.get(index - 1);
+        task.markAsDone();
+        return task;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         ListIterator<Task> listIterator = this.list.listIterator();
         while(listIterator.hasNext()) {
             sb.append(listIterator.nextIndex() + 1);
-            sb.append(". ");
+            sb.append(".");
             sb.append(listIterator.next());
             sb.append("\n");
         }

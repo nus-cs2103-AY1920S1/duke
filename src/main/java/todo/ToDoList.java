@@ -1,12 +1,14 @@
 package todo;
 import java.lang.StringBuilder;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ToDoList {
-    private Task[] todoList;
+    private List<Task> todoList;
     private int counter;
 
     public ToDoList() {
-        this.todoList = new Task[100];
+        this.todoList = new ArrayList();
         this.counter = 0;
     }
 
@@ -14,10 +16,12 @@ public class ToDoList {
         StringBuilder output = new StringBuilder();
         int index;
         Task currentTask;
+        System.out.println(todoList);
+
 
         output.append("    Here are the tasks in your list:\n");
         for (int i = 0 ; i < counter; i++) {
-            currentTask = todoList[i];
+            currentTask = todoList.get(i);
             index = i + 1;
             output.append("    ");
             output.append(index);
@@ -29,7 +33,7 @@ public class ToDoList {
     }
 
     public String addTask(String taskType, String taskDetail) {
-        int numOfTasks = counter + 1;
+        int numOfTasks = counter++ + 1;
         String[] inputTask = taskDetail.split("/");
         String description = inputTask[0];
         Task newTask = new Task("");
@@ -50,7 +54,7 @@ public class ToDoList {
                 break;
         }
 
-        todoList[counter++] = newTask;
+        todoList.add(newTask);
         return "    Got it. I've added this task:\n" +
                 "      " + newTask +
                 "\n    Now you have " + numOfTasks +
@@ -58,9 +62,18 @@ public class ToDoList {
     }
 
     public String markTaskDone(int index) {
-        todoList[index - 1].markAsDone();
+        todoList.get(index - 1).markAsDone();
         return "    Nice! I've marked this task as done:\n" +
-               "        " + todoList[index - 1].getStatusIcon() +
-                todoList[index - 1].getDescription();
+                "        " + todoList.get(index - 1).getStatusIcon() +
+                todoList.get(index - 1).getDescription();
+    }
+
+    public String removeTask(int index) {
+        Task removedTask = todoList.remove(index - 1);
+        int numOfTasks = --counter;
+        return "    Noted. I've removed this task:\n" +
+                "       " + removedTask +
+                "\n    Now you have " + numOfTasks +
+                " task" + (numOfTasks > 1 ? "s" : "") + " in the list.";
     }
 }

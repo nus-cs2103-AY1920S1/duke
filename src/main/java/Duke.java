@@ -16,10 +16,14 @@ public class Duke {
                 if (input.equals("bye"))
                     break;
                 else if (input.contains("done")) {
-                    int index = Integer.parseInt(sc.next());
+                    int index = sc.nextInt();
                     printFormattedText(todo.markTaskDone(index));
                 } else if (input.equals("list"))
                     printFormattedText(todo.displayList());
+                else if (input.equals("delete")) {
+                    int index = sc.nextInt();
+                    printFormattedText(todo.removeTask(index));
+                }
                 else if (input.equals("todo")
                         || input.equals("deadline")
                         || input.equals("event")) {

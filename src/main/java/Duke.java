@@ -17,6 +17,9 @@ public class Duke {
                 listString = "";
                 for(int i = 0; i < (listIndex - 1); i++) {
                     listString += listArr[i];
+                    if(i != (listIndex - 2)) {
+                        listString += '\n' + indent + ' ';
+                    }
                 }
                 printIndentedString(listString, indent);
             } else {

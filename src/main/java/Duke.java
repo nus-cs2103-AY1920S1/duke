@@ -13,7 +13,7 @@ public class Duke {
 
         printMessage(List.of("Hello! I'm Duke", "What can I do for you?"));
 
-        List<String> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         Scanner input = new Scanner(System.in);
         boolean end = false;
         while (!end && input.hasNext()) {
@@ -24,12 +24,17 @@ public class Duke {
             } else if (command.equals("list")) {
                 List<String> messages = new ArrayList<>();
                 for (int i = 0; i < tasks.size(); i++) {
-                    messages.add(i + 1 + ". " + tasks.get(i));
+                    messages.add(i + 1 + "." + tasks.get(i));
                 }
                 printMessage(messages);
+            } else if (command.split(" ")[0].equals("done")) {
+                Task task = tasks.get(Integer.parseInt(command.substring(5)) - 1);
+                task.markAsDone();
+                printMessage(List.of("Nice! I've marked this task as done:", "  " + task));
             } else {
-                printMessage(List.of("added: " + command));
-                tasks.add(command);
+                Task task = new Task(command);
+                tasks.add(task);
+                printMessage(List.of("added: " + task));
             }
         }
     }

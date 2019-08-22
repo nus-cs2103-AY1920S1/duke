@@ -36,6 +36,14 @@ public class Duke {
                 } catch (IndexOutOfBoundsException error3) {
                     printInput(List.of("☹ No such task"));
                 }
+            } else if (tokens[0].equals("delete")) {
+                try {
+                    deleteTask(tokens[1]);
+                } catch (NumberFormatException error) {
+                    printInput(List.of("☹ Invalid input must be an integer"));
+                } catch (IndexOutOfBoundsException error3) {
+                    printInput(List.of("☹ No such task"));
+                }
             } else {
                 createTask(tokens);
             }
@@ -47,7 +55,18 @@ public class Duke {
     public static void printInput(Task input) {
         System.out.println(horizontalLine);
 
-        System.out.println("     Got it. I've added this task:");
+        System.out.println("     Got it. I've added this task: ");
+        System.out.println(String.format("       %s",input));
+        System.out.println(String.format("     Now you have %d tasks in the list.",lst.size()));
+        System.out.println(horizontalLine);
+        System.out.println();
+
+    }
+
+    public static void printDeletion(Task input) {
+        System.out.println(horizontalLine);
+
+        System.out.println("     Noted. I've removed this task: ");
         System.out.println(String.format("       %s",input));
         System.out.println(String.format("     Now you have %d tasks in the list.",lst.size()));
         System.out.println(horizontalLine);
@@ -138,6 +157,12 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(String str) throws NumberFormatException, IndexOutOfBoundsException {
+        int pos = Integer.parseInt(str)-1;
+        Task task = lst.get(pos);
+        lst.remove(task);
+        printDeletion(task);
+    } 
 
 
     public static void checkValidLength(String[] tokens) throws IllegalArgumentException {

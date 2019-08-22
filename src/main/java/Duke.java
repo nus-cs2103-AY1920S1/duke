@@ -82,7 +82,10 @@ public class Duke {
                 }
                 break;
 
-
+            case "delete":
+                int taskToBeDeleted = sc.nextInt() -1;
+                deleteTask(taskToBeDeleted, taskList);
+                break;
 
             case "done":
                 int taskNumber = sc.nextInt() - 1;
@@ -155,6 +158,19 @@ public class Duke {
                     "Now you have " + list.size() + " task in the list. ");
         }
     }
+
+    public static void deleteTask(int current, ArrayList<Task> list) {
+        Task deleted = list.get(current);
+        list.remove(current);
+        if(list.size() > 1) {
+            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
+                    "Now you have " + list.size() + " tasks in the list. ");
+        } else {
+            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
+                    "Now you have " + list.size() + " task in the list. ");
+        }
+    }
+
 
 
 

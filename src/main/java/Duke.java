@@ -55,21 +55,21 @@ public class Duke {
                         if (midcommand.length() != 0) {
                             allcoms.add(new ToDo(midcommand));
                         } else {
-                            throw new NullPointerException();
+                            throw new DukeException("");
                         }
                     } else if (splitwords[0].equals("deadline")) {
                         String midcommand = command.trim().substring(9);
                         if (midcommand.length() != 0) {
                             allcoms.add(new Deadline(midcommand));
                         } else {
-                            throw new NullPointerException();
+                            throw new DukeException("");
                         }
                     } else if (splitwords[0].equals("event")) {
                         String midcommand = command.trim().substring(6);
                         if (midcommand.length() != 0) {
                             allcoms.add(new Event(midcommand));
                         } else {
-                            throw new NullPointerException();
+                            throw new DukeException("");
                         }
                     } else {
                         throw new IllegalArgumentException();

@@ -13,14 +13,20 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         int numTask = 0;
-        String taskList[] = new String[100];
+        Task taskList[] = new Task[100];
 
         while(!input.equals("bye")) {
-            if(!input.equals("list")) {
-                taskList[numTask] = input;
+            if(input.matches("done\\s+\\d+")) {
+                System.out.println("Nice! I've marked this task as done:");
+                Task doneTask = taskList[Integer.valueOf(input.replaceAll("done\\s+", "")) - 1];
+                doneTask.markAsDone();
+                System.out.println(doneTask + "\n");
+            } else if(!input.equals("list")) {
+                taskList[numTask] = new Task(input);
                 numTask++;
                 System.out.println(String.format("added: %s\n", input));
             } else {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < numTask; i++) {
                     System.out.println(String.format("%d. %s", i + 1, taskList[i]));
                 }

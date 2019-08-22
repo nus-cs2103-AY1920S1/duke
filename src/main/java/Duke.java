@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 //import javafx.application.Application;
@@ -15,20 +16,28 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
         String input = "";
-        String[] tasks = new String[100];
+        ArrayList<String> tasks = new ArrayList<>();
         while (!input.equals("bye")) {
             input = sc.nextLine();
+            if (input.equals("list")) {
+                int size = tasks.size();
+                //may have to catch error if no items in list
+                System.out.println("    ____________________________________________________________");
+                for (int i = 0; i < size; i++) {
+                    System.out.println(i+1+". " +tasks.get(i));
+                }
+                System.out.println("    ____________________________________________________________\n");
 
-           if(input.equals("bye")) {
+            } else if(input.equals("bye")) {
                 System.out.println(
                         "    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +
                         "    ____________________________________________________________\n");
             }else {
-                
+                tasks.add(input);
                 System.out.println(
                         "    ____________________________________________________________\n" +
-                        "     " + input + "\n" +
+                        "     added: " + input + "\n" +
                         "    ____________________________________________________________\n");
 
             }

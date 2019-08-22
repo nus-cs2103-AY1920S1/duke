@@ -25,19 +25,31 @@ public class Duke {
         Response.NewGreetings().print();
 
         while (sc.hasNext()) {
-            String command = sc.nextLine();
-            switch (command) {
-                case "list":
+            Command command = Command.NewCommand(sc.nextLine());
+            switch (command.getType()) {
+                case LIST:
                     this.handleList();
                     break;
-                case "bye":
+                case DONE:
+                    this.handleDone(command.getTargetIndex());
+                    break;
+                case ADD:
+                    this.handleAddItem(command.getAddedTask());
+                    break;
+                case BYE:
                     this.handleBye();
                     return;  // exit
                 default:
-                    this.handleAddItem(command); // add item to list
+                    // placeholder
+
             }
         }
         sc.close();
+    }
+
+    private void handleDone(int targetIndex) {
+        this.taskList.get(targetIndex).setCompleted(true);
+        Response.NewDone(this.taskList.get(targetIndex)).print();
     }
 
     private void handleBye() {

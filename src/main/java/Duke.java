@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Duke {
@@ -77,6 +78,19 @@ public class Duke {
                                 + "\nNow you have " + commands.size() + " tasks in the list.");
                     } catch(ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                } else if(command.equals("delete")) {
+                    try {
+                        int i = Integer.parseInt(inputArr[1]) - 1;
+                        try {
+                            Task tt = commands.remove(i);
+                            System.out.println("Noted. I've removed this task:\n  " + tt +
+                                               "\nNow you have " + commands.size() + " tasks in the list.");
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("OOPS!!! Index for delete does not exist in the list.");
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("OOPS!!! Index for delete cannot be empty.");
                     }
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

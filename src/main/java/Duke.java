@@ -1,6 +1,4 @@
-import java.lang.annotation.Repeatable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +20,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // start interaction
-        Response.NewGreetings().print();
+        Response.newGreetings().print();
 
         while (sc.hasNext()) {
             Command command = Command.NewCommand(sc.nextLine());
@@ -39,6 +37,8 @@ public class Duke {
                 case BYE:
                     this.handleBye();
                     return;  // exit
+                case ECHO:
+                    this.handleEcho(command.toString());
                 default:
                     // placeholder
 
@@ -49,19 +49,23 @@ public class Duke {
 
     private void handleDone(int targetIndex) {
         this.taskList.get(targetIndex).setCompleted(true);
-        Response.NewDone(this.taskList.get(targetIndex)).print();
+        Response.newDone(this.taskList.get(targetIndex)).print();
     }
 
     private void handleBye() {
-        Response.NewFarewell().print();
+        Response.newFarewell().print();
     }
 
-    private void handleAddItem(String item) {
-        this.taskList.add(new Task(item));
-        Response.NewAdded(item).print();
+    private void handleEcho(String command) {
+        Response.newEcho(command).print();
+    }
+
+    private void handleAddItem(Task item) {
+        this.taskList.add(item);
+        Response.newAdded(item.toString(), this.taskList.size()).print();
     }
 
     private void handleList() {
-        Response.NewListing(this.taskList).print();
+        Response.newListing(this.taskList).print();
     }
 }

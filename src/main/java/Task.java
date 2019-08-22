@@ -1,6 +1,6 @@
-public class Task {
-    private boolean isCompleted;
-    private String taskName;
+public abstract class Task {
+    protected boolean isCompleted;
+    protected String taskName;
 
     public Task(String taskName) {
         this.isCompleted = false;
@@ -19,7 +19,6 @@ public class Task {
         isCompleted = completed;
     }
 
-    @Override
     public String toString() {
         String statusIcon = this.isCompleted ? "✓" : "✗";
         return String.format("[%s] %s", statusIcon, this.taskName);

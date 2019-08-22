@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -88,10 +89,9 @@ public class Duke {
         if (res[0].isEmpty())
             throw new DukeException("☹ OOPS!!! The description of a " + (deadline ? "deadline" : "event") + " cannot be empty.");
         sb = new StringBuilder();
-        for (int i = divide + 1; i < arr.length; i++) {
-            sb.append(arr[i]);
-            sb.append(" ");
-        }
+        sb.append(arr[divide + 1]);
+        sb.append(" ");
+        sb.append(arr[divide + 2]);
         res[1] = sb.toString().trim();
         return res;
     }

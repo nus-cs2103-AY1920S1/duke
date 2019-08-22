@@ -27,9 +27,9 @@ class TaskListView {
     public DukeMessage formatTaskMessage(Task task) {
         DukeMessage taskMessage = new DukeMessage();
         if (task.isDone()) {
-            taskMessage.append("[✓] ");
+            taskMessage.append("[\u2713] ");
         } else {
-            taskMessage.append("[✗] ");
+            taskMessage.append("[\u2718] ");
         }
 
         taskMessage.append(task.getDescription());

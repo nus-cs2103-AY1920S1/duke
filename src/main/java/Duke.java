@@ -143,6 +143,27 @@ public class Duke {
                         }
                     }
                     break;
+                case ("delete"):
+                    //Empty/no list index of task provided
+                    if (userInputArr.size() == 1 || userInputArr.size() > 2) {
+                        throw new DukeException("Please put the list index of the " +
+                                "completed task after \"delete\" and nothing else.");
+                    } else {
+                        //Check if integer is provided
+                        try {
+                            int deleteIdx = Integer.parseInt(userInputArr.get(1));
+                            //Check if integer is within range of number of tasks
+                            if (deleteIdx > taskList.size() || deleteIdx < 1) {
+                                throw new DukeException("Integer is not within range of tasks.");
+                            }
+                            Task deletedTask = taskList.get(deleteIdx-1);
+                            taskList.remove(deleteIdx-1);
+                            displayDeletedTask(deletedTask);
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("Please enter a valid integer after \"delete\".");
+                        }
+                    }
+                    break;
                 default:
                     throw new UnknownCommandException();
             }
@@ -159,6 +180,7 @@ public class Duke {
     }
 
     //List out added tasks ('list')
+
     private void displayTasks() {
         System.out.println("-----");
         System.out.println(indentString + "Here are the tasks in your list:");
@@ -190,4 +212,14 @@ public class Duke {
         System.out.println("-----");
     }
 
+    private void displayDeletedTask(Task deletedTask) {
+        System.out.println("-----");
+        System.out.println(indentString + "Noted. I've removed this task:");
+        System.out.println(indentString + "  " + deletedTask.toString());
+        System.out.println(indentString +
+                "Now you have " + taskList.size() +
+                (taskList.size() == 1? " task":" tasks") +
+                " in the list.");
+        System.out.println("-----");
+    }
 }

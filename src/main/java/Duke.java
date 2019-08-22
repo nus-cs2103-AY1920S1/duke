@@ -81,6 +81,27 @@ public class Duke {
                             printMessage(e.toString());
                         }
                         break;
+                    case "delete":
+                        try {
+                            if(command.split(" ").length > 1) {
+                                try {
+                                    int deleteIndex = Integer.parseInt(command.split(" ")[1]);
+                                    if(deleteIndex > taskList.size() || deleteIndex < 1) {
+                                        throw new DukeException("The task to be deleted is not within the list.");
+                                    } else {
+                                        Task deleted = taskList.remove(deleteIndex - 1);
+                                        printDeletedTask(taskList, deleted);
+                                    }
+                                } catch(NumberFormatException e) {
+                                    throw new DukeException("The task specified is not a number.");
+                                }
+                            } else {
+                                throw new DukeException("The task to be deleted is not specified.");
+                            }
+                        } catch(DukeException e) {
+                            printMessage(e.toString());
+                        }
+                        break;
                     default:
                         try {
                             throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -200,6 +221,17 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         printIndentWSpace();
         System.out.printf("   %s\n", last);
+        printIndentWSpace();
+        System.out.printf("Now you have %d task(s) in the list.\n", list.size());
+        printBotLine();
+    }
+
+    private static void printDeletedTask(ArrayList<Task> list, Task task) {
+        printTopLine();
+        printIndentWSpace();
+        System.out.println("Noted. I've removed this task:");
+        printIndentWSpace();
+        System.out.printf("   %s\n", task);
         printIndentWSpace();
         System.out.printf("Now you have %d task(s) in the list.\n", list.size());
         printBotLine();

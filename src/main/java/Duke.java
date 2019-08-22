@@ -2,8 +2,6 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringJoiner;
 
 public class Duke {
@@ -12,23 +10,20 @@ public class Duke {
     }
 
     private final TaskSerializer storage;
+    private TaskList tasks;
     private final UserInterface ui;
-    private List<Task> tasks;
 
     public Duke(String filePath) {
         ui = new UserInterface();
         storage = new TaskSerializer(Path.of(filePath));
 
         try {
-            tasks = storage.load();
+            tasks = new TaskList(storage.load());
         } catch (FileIOException | TokenParseError exc) {
-            if (exc.getCause() instanceof NoSuchFileException) {
-                tasks = new ArrayList<>();
-            } else {
+            if (!(exc.getCause() instanceof NoSuchFileException)) {
                 ui.printBlock(" ☹ OOPS!!! " + exc.getMessage());
-                System.exit(-1);
-                return;
             }
+            tasks = new TaskList();
         }
     }
 

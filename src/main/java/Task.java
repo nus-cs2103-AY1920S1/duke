@@ -30,7 +30,7 @@ public class Task {
      *
      * @return tick mark if task is done or cross mark if task is not done
      */
-    public String getTaskStatusIcon() {
+    private String getTaskStatusIcon() {
         return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
@@ -44,20 +44,20 @@ public class Task {
     }
 
     /**
-     * Get description of this task
-     *
-     * @return string representing description of this task
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
      * Changes the status of the task to 'done'
-     * 
+     *
      * @param hasBeenDone boolean to indicate that the task has been completed
      */
     public void setTaskAsDone(boolean hasBeenDone) {
         this.isDone = hasBeenDone;
+    }
+
+    /**
+     * Return a string representation of this task
+     *
+     * @return string representing this task
+     */
+    public String toString() {
+        return "[" + this.getTaskStatusIcon() + "] " + this.description;
     }
 }

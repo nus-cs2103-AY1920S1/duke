@@ -63,20 +63,24 @@ public class Duke {
      * @param command a string containing the command(s) entered by the user
      */
     public void processCommand(String command) {
-        if (command.equalsIgnoreCase("bye")) {
-            // user wants to quit, so Duke stops listening to commands and exits
-            this.isListening = false;
-            this.exit();
-        } else if (command.equalsIgnoreCase("list")) {
-            // user wants to print all tasks entered
-            this.printTasks();
-        } else if (command.split(" ")[0].equalsIgnoreCase("done")) {
-            String taskNumber = command.split(" ")[1];
-            int taskIndex = Integer.parseInt(taskNumber) - 1;
-            this.markTaskAsDone(this.tasks.get(taskIndex));
-        } else {
-            // add command to task list and inform user
-            this.storeTask(command);
+        String imperative = command.split(" ")[0];
+
+        switch (imperative.toUpperCase()) {
+            case "BYE":
+                // user wants to quit, so Duke stops listening to commands and exits
+                this.exit();
+                break;
+            case "LIST":
+                // user wants to print all tasks entered
+                this.printTasks();
+                break;
+            case "DONE":
+                String taskNumber = command.split(" ")[1];
+                this.markTaskAsDone(taskNumber);
+                break;
+            default:
+                // add command to task list and inform user
+                this.storeTask(command);
         }
     }
 
@@ -84,6 +88,7 @@ public class Duke {
      * Exits the chatbot application with an exit message
      */
     private void exit() {
+        this.isListening = false;
         System.out.print(exitMessage);
     }
 
@@ -118,9 +123,7 @@ public class Duke {
             for (int i = 0; i < listSize; i++) {
                 // specified format: "1. task 1"
                 Task currentTask = this.tasks.get(i);
-                System.out.format("%d. [%s] %s\n", i + 1,
-                        currentTask.getTaskStatusIcon(),
-                        currentTask.getDescription());
+                System.out.format("%d. %s\n", i + 1, currentTask);
             }
         }
     }
@@ -131,20 +134,43 @@ public class Duke {
      * @param command the command entered by the user
      */
     private void storeTask(String command) {
-        Task task = new Task(command);
+        String[] segmentedCommand = command.split(" ", 2);
+
+        Task task = null;
+        switch(segmentedCommand[0].toUpperCase()) {
+            case "TODO":
+                task = new Todo(segmentedCommand[1]);
+                break;
+            case "DEADLINE":
+                String deadline = segmentedCommand[1].split("\\/")[1].substring(2);
+                String deadlineDescription = segmentedCommand[1].split("\\/")[0];
+                task = new Deadline(deadlineDescription, deadline);
+                break;
+            case "EVENT":
+                String date = segmentedCommand[1].split("\\/")[1].substring(2);
+                String eventDescription = segmentedCommand[1].split("\\/")[0];
+                task = new Event(eventDescription, date);
+                break;
+            default:
+                System.out.println("OOPS!!! I'm sorry, but I don't know"
+                        + "what that means :-(");
+        }
         this.tasks.add(task);
-        System.out.println("added: " + command);
+        System.out.println("Got it. I've added this task: \n"
+                + task);
+        System.out.format("Now you have %d tasks in the list.\n", this.tasks.size());
     }
 
     /**
      * Marks tasks as done and prints a message for the user
      *
-     * @param task the task to be marked as done
+     * @param String string reprsenting the order of the task in the list
      */
-    private void markTaskAsDone(Task task) {
-        task.setTaskAsDone(true);
+    private void markTaskAsDone(String taskNumber) {
+        int taskIndex = Integer.parseInt(taskNumber) - 1;
+        Task currentTask = this.tasks.get(taskIndex);
+        currentTask.setTaskAsDone(true);
         System.out.println("Nice! I've marked this task as done:");
-        System.out.format("   [%s] %s\n", task.getTaskStatusIcon(),
-                task.getDescription());
+        System.out.println("   " + currentTask);
     }
 }

@@ -82,13 +82,13 @@ public class Duke {
                             throw new DukeIllegalDescriptionException(act);
                         }
                         break;
-//                    case delete:
-//                        int d = sc.nextInt() - 1;
-//                        Task temp = tasks.get(d);
-//                        tasks.remove(d);
-//                        System.out.println("Noted. I've removed this task: \n" + temp.toString()
-//                                + "\nNow you have " + (tasks.size()) + " tasks in the list.");
-//                        break;
+                    case delete:
+                        int d = sc.nextInt() - 1;
+                        Task temp = tasks.get(d);
+                        tasks.remove(d);
+                        System.out.println("Noted. I've removed this task: \n" + temp.toString()
+                                + "\nNow you have " + (tasks.size()) + " tasks in the list.");
+                        break;
                 }
             } catch(IllegalArgumentException e) {
                 throw new DukeIllegalActionException();

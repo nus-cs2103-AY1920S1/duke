@@ -33,7 +33,8 @@ public class Duke {
                 }
                 printLineS();
             } else {
-            	if (command.substring(0, 4).equals("done")) {
+            	String[] ls = command.split(" ");
+            	if (ls[0].equals("done")) {
             		String num = command.substring(5, 6);
             		int res = Integer.parseInt(num);
             		Task t = cmd[res - 1];
@@ -42,24 +43,31 @@ public class Duke {
             		System.out.println("Nice! I've marked this task as done: ");
             		System.out.println(t);
             		printLineS();
-            	} else if (command.substring(0, 4).equals("todo")) {
+            	} else if (ls[0].equals("todo")) {
             		String[] td = command.split(" ");
-            		String com = td[1];
-            		if (td.length > 1) {
-            			for (int i = 2; i < td.length; i ++) {
-	            			com = com + " " + td[i];
-	            		}           			
-            		} else {
-            			
-            		}
-            		cmd[count] = new Todo(com);
-            		printLine();
-            		System.out.println("Got it. I've added this task:");
-            		System.out.println(cmd[count]);
-            		count++;
-            		System.out.println("Now you have " + count + " tasks in the list.");
-            		printLineS(); 
-            	} else if (command.substring(0, 5).equals("event")) {
+            		try {
+            			if (td.length == 1) {
+            				throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            			}
+	            		String com = td[1];
+	            		if (td.length > 1) {
+	            			for (int i = 2; i < td.length; i ++) {
+		            			com = com + " " + td[i];
+		            		}           			
+	            		} else {
+
+	            		}
+	            		cmd[count] = new Todo(com);
+	            		printLine();
+	            		System.out.println("Got it. I've added this task:");
+	            		System.out.println(cmd[count]);
+	            		count++;
+	            		System.out.println("Now you have " + count + " tasks in the list.");
+	            		printLineS();
+	            	} catch (DukeException e){
+	            		System.out.println(e);
+	            	} 
+            	} else if (ls[0].equals("event")) {
             		String[] eve = command.split(" ");
             		String com = "";
             		String eventdate = "";
@@ -85,7 +93,7 @@ public class Duke {
             		count++;
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS(); 
-            	} else if (command.substring(0, 8).equals("deadline")) {
+            	} else if (ls[0].equals("deadline")) {
             		String[] eve = command.split(" ");
             		String com = "";
             		String deadline = "";
@@ -112,11 +120,11 @@ public class Duke {
             		System.out.println("Now you have " + count + " tasks in the list.");
             		printLineS(); 
             	} else {
-	            	cmd[count] = new Task(command);
-	                printLine();
-	                System.out.println("added: " + command);
-	                printLineS();
-	                count++;
+            		try {
+            			throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            		} catch (DukeException e) {
+            			System.out.println(e);
+            		}
             	}
             }
         }

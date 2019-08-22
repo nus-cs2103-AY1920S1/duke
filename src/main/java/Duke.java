@@ -1,39 +1,43 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
     private static int numTasks = 0;
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         Task[] taskList = new Task[100];
 
         printReply("Hello! I'm Duke\n\t What can I do for you?");
         String command = sc.nextLine();
-        while(!command.equals("bye")){
-            String[] parts = command.split(" ",2);
-            if(command.equals("list"))
-                printList(taskList);
-            else if(parts[0].equals("done")){
-                int taskNum = Integer.valueOf(parts[1]);
-                printReply(taskList[taskNum-1].markAsDone());
+            while (!command.equals("bye")) {
+                try {
+                    String[] parts = command.split(" ", 2);
+                    if (command.equals("list"))
+                        printList(taskList);
+                    else if (parts[0].equals("done")) {
+                        int taskNum = Integer.valueOf(parts[1]);
+                        printReply(taskList[taskNum - 1].markAsDone());
+                    } else if (parts[0].equals("todo")) {
+                        addToList(new Todo(parts[1]), taskList);
+                    } else if (parts[0].equals("deadline")) {
+                        String[] subparts = parts[1].split(" /by ");
+                        addToList(new Deadline(subparts[0], subparts[1]), taskList);
+                    } else if (parts[0].equals("event")) {
+                        String[] subparts = parts[1].split(" /at ");
+                        addToList(new Event(subparts[0], subparts[1]), taskList);
+                    } else
+                        throw new DukeException("");
+                }catch(DukeException e){
+                    printReply("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }catch(ArrayIndexOutOfBoundsException e){
+                    printReply("OOPS!!! The description of a " + command.split(" ", 2)[0] + " cannot be empty");
+                }
+                command = sc.nextLine();
             }
-            else if(parts[0].equals("todo"))
-                addToList(new Todo(parts[1]), taskList);
-            else if(parts[0].equals("deadline")){
-                String[] subparts = parts[1].split(" /by ");
-                addToList(new Deadline(subparts[0], subparts[1]), taskList);
-            }
-            else if(parts[0].equals("event")){
-                String[] subparts = parts[1].split(" /at ");
-                addToList(new Event(subparts[0], subparts[1]), taskList);
-            }
-            else
-                addToList(new Task(command), taskList);
-            command = sc.nextLine();
-        }
         printReply("Bye. Hope to see you again soon!");
     }
     public static void printReply(String reply){
-        System.out.println("\t________________________________________\n\t " + reply
-                           + "\n\t________________________________________");
+        System.out.println("\t______________________________________________________________\n\t " + reply
+                       + "\n\t______________________________________________________________");
     }
     public static void addToList(Task task, Task[] taskList){
         taskList[numTasks++] = task;

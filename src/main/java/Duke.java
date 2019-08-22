@@ -31,6 +31,16 @@ public class Duke {
                 }catch(Exception e){
                     System.out.println("Error, you have entered an invalid number");
                 }
+            }else if((words.length==2)&&(words[0].equals("delete"))&&(isNumeric(words[1]))){
+                try {
+                    int val = Integer.parseInt(words[1]);
+                    System.out.println(line + "\n" + "Noted. I've removed this task:"+ "\n" +
+                            allcoms.get(val - 1).printer() + "\n"+ "Now you have "
+                            + (allcoms.size()-1) + " tasks in the list."+ "\n" + line);
+                    allcoms.remove(val - 1);
+                }catch(Exception e){
+                    System.out.println("Error, you have entered an invalid number");
+                }
             }else if(command.equals("list")){
                 System.out.println(line);
                 for(int i=1; i<=allcoms.size(); i++){

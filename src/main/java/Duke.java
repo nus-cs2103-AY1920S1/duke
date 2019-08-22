@@ -105,6 +105,7 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 input = sc.nextLine();
+                //reads the next input
             }
         }
         System.out.println("Bye. Hope to see you again soon!");

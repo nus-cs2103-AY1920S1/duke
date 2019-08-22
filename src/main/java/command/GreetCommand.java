@@ -2,6 +2,7 @@ package command;
 
 import java.util.Optional;
 
+import util.DukeMessage;
 import util.DukeOutput;
 
 public class GreetCommand implements Command {
@@ -15,11 +16,12 @@ public class GreetCommand implements Command {
     private static final String GREETING =
             DUKE_LOGO + "\n" + "\n" +
             "Hello! I'm Duke\n" +
-            "What can I do for you?\n";
+            "What can I do for you?";
 
     @Override
     public Optional<Command> execute() {
-        DukeOutput.printMessage(GREETING);
+        DukeMessage greetingMessage = new DukeMessage(GREETING);
+        DukeOutput.printMessage(greetingMessage);
         return Optional.empty();
     }
 }

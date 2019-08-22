@@ -2,6 +2,7 @@ package command;
 
 import task.Task;
 import task.TaskListController;
+import util.DukeMessage;
 import util.DukeOutput;
 
 import java.util.Optional;
@@ -19,10 +20,10 @@ public class AddCommand implements Command {
     public Optional<Command> execute() {
         taskListController.addTask(task);
 
-        StringBuilder message = new StringBuilder("added: ")
+        DukeMessage message = new DukeMessage("added: ")
                 .append(task.getDescription());
 
-        DukeOutput.printMessage(message.toString());
+        DukeOutput.printMessage(message);
 
         return Optional.of(new ListenCommand(taskListController));
     }

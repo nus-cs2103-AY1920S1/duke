@@ -1,6 +1,7 @@
 package command;
 
 import task.TaskListController;
+import util.DukeOutput;
 
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public class ListCommand implements Command {
 
     @Override
     public Optional<Command> execute() {
-        taskListController.displayTasks();
+        DukeOutput.printMessage(taskListController.getAllTasksMessage());
 
         return Optional.of(new ListenCommand(taskListController));
     }

@@ -1,38 +1,40 @@
 package task;
 
+import util.DukeMessage;
 import util.DukeOutput;
 
 import java.util.List;
 
 class TaskListView {
-    void displayAllTasks(List<Task> tasks) {
-        StringBuilder message = new StringBuilder();
+    public DukeMessage formatAllTasksMessage(List<Task> tasks) {
+        DukeMessage taskList = new DukeMessage("Here are the tasks in your list:")
+                .newLine();
 
         if (!tasks.isEmpty()) {
-            message.append("1. ")
+            taskList.append("1.")
                     .append(formatTaskMessage(tasks.get(0)));
         }
 
         for (int i = 1; i < tasks.size(); i++) {
-            message.append("\n")
+            taskList.newLine()
                     .append(i + 1)
-                    .append(". ")
+                    .append(".")
                     .append(formatTaskMessage(tasks.get(i)));
         }
 
-        DukeOutput.printMessage(message.toString());
+        return taskList;
     }
 
-    private String formatTaskMessage(Task task) {
-        StringBuilder message = new StringBuilder();
+    public DukeMessage formatTaskMessage(Task task) {
+        DukeMessage taskMessage = new DukeMessage();
         if (task.isDone()) {
-            message.append("[✓] ");
+            taskMessage.append("[✓] ");
         } else {
-            message.append("[✗] ");
+            taskMessage.append("[✗] ");
         }
 
-        message.append(task.getDescription());
+        taskMessage.append(task.getDescription());
 
-        return message.toString();
+        return taskMessage;
     }
 }

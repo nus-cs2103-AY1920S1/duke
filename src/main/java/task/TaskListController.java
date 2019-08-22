@@ -1,5 +1,8 @@
 package task;
 
+import util.DukeMessage;
+import util.DukeOutput;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +19,15 @@ public class TaskListController {
         tasks.add(task);
     }
 
-    public void displayTasks() {
-        view.displayAllTasks(tasks);
+    public void setTaskToDone(int index) {
+        tasks.get(index).setDone(true);
+    }
+
+    public DukeMessage getAllTasksMessage() {
+        return view.formatAllTasksMessage(tasks);
+    }
+
+    public DukeMessage getTaskMessage(int index) {
+        return view.formatTaskMessage(tasks.get(index));
     }
 }

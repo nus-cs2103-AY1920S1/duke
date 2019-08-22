@@ -51,6 +51,16 @@ public class Duke {
         }
     }
 
+    private static void parseDoneInstruction(TaskManager taskManager, String instruction) throws DukeException {
+        int index = Integer.parseInt(instruction.split(" ")[1]);
+        taskManager.markAsDone(index);
+    }
+
+    private static void parseDeleteInstruction(TaskManager taskManager, String instruction) throws DukeException {
+        int index = Integer.parseInt(instruction.split(" ")[1]);
+        taskManager.deleteTask(index);
+    }
+
     private static boolean parseInstruction(TaskManager taskManager, String instruction) throws DukeException{
         if (instruction.equals("bye")) {
             closing();
@@ -58,8 +68,9 @@ public class Duke {
         } else if (instruction.equals("list")) {
             taskManager.printTasks();
         } else if (instruction.matches("^done \\d+$")) {
-            int index = Integer.parseInt(instruction.split(" ")[1]);
-            taskManager.markAsDone(index);
+            parseDoneInstruction(taskManager, instruction);
+        } else if (instruction.matches("^delete \\d+$")) {
+            parseDeleteInstruction(taskManager, instruction);
         } else if (instruction.startsWith("deadline")) {
             taskManager.addTask(parseDeadlineTask(instruction));
         } else if  (instruction.startsWith("todo")) {

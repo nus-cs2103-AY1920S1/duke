@@ -12,12 +12,25 @@ public class TaskManager {
         separator();
     }
 
-    public void markAsDone(int index) {
-        separator();
+    public void markAsDone(int index) throws DukeException {
         index--;
+        validateIndex(index);
         tasks.get(index).markAsDone();
+        separator();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + tasks.get(index));
+        separator();
+    }
+
+    public void deleteTask(int index) throws DukeException {
+        index--;
+        validateIndex(index);
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        separator();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
+        printTotalTask();
         separator();
     }
 
@@ -38,5 +51,11 @@ public class TaskManager {
         boolean isPlural = tasks.size() > 1;
         System.out.println("Now you have " + tasks.size() + " task"
                 + (isPlural ? "s" : "") + " in the list.");
+    }
+
+    private void validateIndex(int index) throws DukeException {
+        if (!(0 <= index && index < tasks.size())) {
+            throw new DukeException("Invalid task index.");
+        }
     }
 }

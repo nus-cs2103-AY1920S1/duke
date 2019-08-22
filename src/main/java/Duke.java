@@ -84,6 +84,13 @@ public class Duke {
                         System.out.println(e.getMessage());
                     }
                     break;
+                case "delete":
+                    int deletionNumber = sc.nextInt();
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println("  " + tasks.get(deletionNumber - 1));
+                    tasks.remove(deletionNumber - 1);
+                    System.out.println("Now you have " + tasks.size() + " " + (tasks.size() == 1 ? "task" : "tasks") + " in the list.");
+                    break;
                 default:
                     try {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

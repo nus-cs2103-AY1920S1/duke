@@ -24,31 +24,39 @@ public class Duke {
         String input = "";
         while (!input.equalsIgnoreCase("bye") && sc.hasNextLine()) {
             input = sc.nextLine();
-            evaluateInput(input);
+            try {
+                evaluateInput(input);
+            } catch (DukeException e) {
+                dukeOutput(e.getMessage());
+            }
         }
         sc.close();
     }
 
-    public static void evaluateInput(String input) {
+    public static void evaluateInput(String input) throws DukeException {
         if (input.equalsIgnoreCase("bye")) {
             dukeOutput("Bye. Have a nice day!");
         } else if (input.equalsIgnoreCase("list")) {
             printTasks();
-        } else if (input.startsWith("done")) {
+        } else if (input.toLowerCase().startsWith("done")) {
             evaluateDone(input);
-        } else {
+        } else if (input.toLowerCase().startsWith("todo")
+                || input.toLowerCase().startsWith("deadline")
+                || input.toLowerCase().startsWith("event")) {
             addTask(input);
+        } else {
+            throw new DukeException("OOPS!!! I don't know what this is :(");
         }
     }
 
     public static void evaluateDone(String input) {
         String number = input.substring(4, input.length()).strip();
         if (number.isEmpty()) {
-            dukeOutput("Invalid input!");
+            dukeOutput("Invalid input! Mention a valid task number.");
         } else {
             int taskNumber = Integer.parseInt(number);
             if (taskNumber > numberOfTasks) {
-                dukeOutput("Task doesn't exist");
+                dukeOutput("Task doesn't exist.");
             } else {
                 tasks.get(taskNumber - 1).markAsDone();
                 String output = "Nice! I've marked this task as done:"
@@ -61,20 +69,27 @@ public class Duke {
     public static void addTask(String description) {
         String[] tokens = description.split("\\s+");
         String taskType = tokens[0];
-        System.out.println(taskType);
-        if (taskType.equalsIgnoreCase("Event")) {
-            addEvent(description);
-        } else if (taskType.equalsIgnoreCase("Todo")) {
-            addTodo(description);
-        } else if (taskType.equalsIgnoreCase("Deadline")) {
-            addDeadline(description);
-        } else {
-            dukeOutput("Invalid task!");
+        //System.out.println(taskType);
+        try {
+            if (taskType.equalsIgnoreCase("Event")) {
+                addEvent(description);
+            } else if (taskType.equalsIgnoreCase("Todo")) {
+                addTodo(description);
+            } else if (taskType.equalsIgnoreCase("Deadline")) {
+                addDeadline(description);
+            } else {
+                dukeOutput("Invalid task!");
+            }
+        } catch (DukeException e) {
+            dukeOutput(e.getMessage());
         }
     }
 
-    public static void addEvent(String description) {
+    public static void addEvent(String description) throws DukeException {
         int indexOfAt = description.indexOf("/at");
+        if (indexOfAt == -1) {
+            throw new DukeException("OOPS!!! The event description must contain a time following \"/at\"");
+        }
         String desc = description.substring(5, indexOfAt).strip();
         String at = description.substring(indexOfAt + 3).strip();
         tasks.add(new Event(desc, at));
@@ -85,7 +100,7 @@ public class Duke {
         dukeOutput(output);
     }
 
-    public static void addTodo(String description) {
+    public static void addTodo(String description) throws DukeException {
         String[] tokens = description.split("\\s+");
         StringBuilder desc = new StringBuilder();
         for (int i = 1; i < tokens.length; i++) {
@@ -100,10 +115,13 @@ public class Duke {
         dukeOutput(output);
     }
 
-    public static void addDeadline(String description) {
-        int indexOfAt = description.indexOf("/by");
-        String desc = description.substring(8, indexOfAt).strip();
-        String by = description.substring(indexOfAt + 3).strip();
+    public static void addDeadline(String description) throws DukeException {
+        int indexOfBy = description.indexOf("/by");
+        if (indexOfBy == -1) {
+            throw new DukeException("OOPS!!! The deadline description must contain a time following \"/by\"");
+        }
+        String desc = description.substring(8, indexOfBy).strip();
+        String by = description.substring(indexOfBy + 3).strip();
         tasks.add(new Deadline(desc, by));
         numberOfTasks++;
         String output = "Got it. I've added this task:\n"

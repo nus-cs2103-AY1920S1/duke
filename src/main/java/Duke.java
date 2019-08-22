@@ -22,11 +22,18 @@ public class Duke {
             String order = commandWords[0];
             if (order.equals("done")){
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
-                Task temp = arr.get(index);
-                temp.markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + temp);
-                System.out.println(hr);
+                try {
+                    if (index >= arr.size() || index < 0) {
+                        throw new DukeException(" :( OOPS!!! Requested task number is not available");
+                    }
+                    Task temp = arr.get(index);
+                    temp.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + temp);
+                    System.out.println(hr);
+                } catch (DukeException de) {
+                    System.err.println(de.getMessage());
+                }
             } else if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(hr);

@@ -17,7 +17,7 @@ public class Duke {
                         System.out.println(divider);
                         System.out.println("Bye. Hope to see you again soon!");
                         System.out.println(divider);
-                        
+
                         return;
 
                     case ("list"):
@@ -46,7 +46,7 @@ public class Duke {
                         if (remaining.equals("")) {
                             throw new DukeException("☹OOPS!!! The Description of a todo cannot be empty");
                         }
-                        Todo t = new Todo(remaining.substring(1));
+                        Todo t = new Todo(remaining.substring(0));
                         arr.add(t);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(t);
@@ -57,20 +57,21 @@ public class Duke {
                     case ("event"):
                         System.out.println(divider);
                         String remainingStuff = sc.nextLine();
-                        int end = input.indexOf('/');
+                        int end = remainingStuff.indexOf('/');
                         if (end > 0) {
-                            input = input + remainingStuff;
                             String description = remainingStuff.substring(1, remainingStuff.indexOf('/'));
-                            String time = input.substring(end + 4).trim();
+                            String time = remainingStuff.substring(end + 4).trim();
                             if (time.isEmpty()) {
                                 throw new DukeException("☹OOPS!!! Wrong format'");
                             }
-                            Event m = new Event(description, time);
-                            arr.add(m);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(m);
-                            System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                            System.out.println(divider);
+                            else {
+                                Event m = new Event(description, time);
+                                arr.add(m);
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(m);
+                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                                System.out.println(divider);
+                            }
                         }
                         else {
                             throw new DukeException("☹OOPS!!! Wrong format'");
@@ -81,26 +82,28 @@ public class Duke {
                     case ("deadline") :
                         System.out.println(divider);
                         String remainingStuff2 = sc.nextLine();
-                        int endies = input.indexOf('/');
+                        int endies = remainingStuff2.indexOf('/');
                         if (endies > 0) {
-                            input = input + remainingStuff2;
 
                             String description2 = remainingStuff2.substring(1, remainingStuff2.indexOf('/'));
-                            String timezies = input.substring(endies + 4);
+                            String timezies = remainingStuff2.substring(endies + 4).trim(t);
                             if (timezies.isEmpty()) {
                                 throw new DukeException("☹OOPS!!! Wrong format'");
                             }
-                            Deadline k = new Deadline(description2, timezies);
-                            arr.add(k);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(k);
-                            System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                            System.out.println(divider);
+                            else {
+                                Deadline k = new Deadline(description2, timezies);
+                                arr.add(k);
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(k);
+                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                                System.out.println(divider);
+                            }
                         }
                         else {
                             throw new DukeException("☹OOPS!!! Wrong format");
                         }
                         break;
+
                     default:
                         sc.nextLine();
                         throw new DukeException("☹OOPS!!! I'm sorry, but I don't know what that means :-(");

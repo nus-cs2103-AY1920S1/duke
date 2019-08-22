@@ -45,9 +45,10 @@ public class Duke {
 
     public static void checkIllegalInstruction(String[] words) throws DukeException {
         String fw = words[0];
-        if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event"))) {
+        if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event")
+                    || fw.equals("delete"))) {
             throw new DukeException(" \u2639  OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
+                    }
         if ((fw.equals("todo") || fw.equals("deadline") || fw.equals("event")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
         }
@@ -55,7 +56,7 @@ public class Duke {
                 (fw.equals("event") && findIdx(words, "/at") == -1)) {
             throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
                 }
-        if (fw.equals("done") && words.length < 2) {
+        if ((fw.equals("done") || fw.equals("delete")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
         }
     }
@@ -76,6 +77,12 @@ public class Duke {
                         Task t = tasks.get(i - 1);
                         t.markAsDone();
                         System.out.println("Nice! I've marked this task as done: \n  " + t);
+                    } else if (words[0].equals("delete")) {
+                        int i = Integer.parseInt(words[1]);
+                        Task t = tasks.get(i - 1);
+                        tasks.remove (i - 1);
+                        System.out.println("Noted. I've removed this task: \n  " + t + "\nNow you have "
+                                + tasks.size() + " tasks in the list.");
                     } else {
                         Task t = parseTask(words);
                         tasks.add(t);

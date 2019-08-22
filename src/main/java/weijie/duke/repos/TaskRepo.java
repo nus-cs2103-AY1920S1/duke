@@ -37,4 +37,9 @@ public class TaskRepo implements IRepository<Task> {
     public void update(int id, Task entity) {
         tasks.set(id, entity);
     }
+
+    @Override
+    public void delete(int id) {
+        tasks.remove(id);
+    }
 }

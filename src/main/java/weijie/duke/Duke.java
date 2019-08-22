@@ -23,6 +23,7 @@ public class Duke {
         commandMap.put("deadline", new AddDeadlineCommand(repo));
         commandMap.put("event", new AddEventCommand(repo));
         commandMap.put("done", new DoneCommand(repo));
+        commandMap.put("delete", new DeleteCommand(repo));
         TaskCommandFactory factory = new TaskCommandFactory(commandMap);
 
         TasksPresenter presenter = new TasksPresenter(view, factory);

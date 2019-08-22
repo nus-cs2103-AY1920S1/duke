@@ -8,9 +8,9 @@ public class Event extends Task {
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {
-            doneSymbol = "Yes";
+            doneSymbol = "✓";
         } else {
-            doneSymbol = "No";
+            doneSymbol = "✗";
         }
         return "  [E]" + "[" + doneSymbol + "] " + getTaskName() + " (at: " + eventDate + ")";
     }

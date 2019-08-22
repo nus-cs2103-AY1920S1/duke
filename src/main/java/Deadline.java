@@ -8,9 +8,9 @@ public class Deadline extends Task {
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {
-            doneSymbol = "Yes";
+            doneSymbol = "✓";
         } else {
-            doneSymbol = "No";
+            doneSymbol = "✗";
         }
         return "  [D]" + "[" + doneSymbol + "] " + getTaskName() + " (by: " + endDate + ")";
     }

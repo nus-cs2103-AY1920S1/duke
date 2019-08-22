@@ -20,9 +20,9 @@ public class Task {
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone) {
-            doneSymbol = "Yes";
+            doneSymbol = "✓";
         } else {
-            doneSymbol = "No";
+            doneSymbol = "✗";
         }
         return "[" + doneSymbol + "] " + taskName;
     }

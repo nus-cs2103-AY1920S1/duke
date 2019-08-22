@@ -6,9 +6,9 @@ public class Todo extends Task {
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {
-            doneSymbol = "Yes";
+            doneSymbol = "✓";
         } else {
-            doneSymbol = "No";
+            doneSymbol = "✗";
         }
         return "  [T]" + "[" + doneSymbol + "] " + getTaskName();
     }

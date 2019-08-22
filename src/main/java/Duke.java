@@ -43,9 +43,9 @@ public class Duke {
                 tasksHolder.addTask(currTask);
             } else {
                 if(line.equals("todo")){
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
                 } else {
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         }

@@ -20,6 +20,7 @@ public class Duke {
         parser.register("event", Event.getCommand(tasks));
         parser.register("list", new ListCommand(tasks));
         parser.register("done", new Done(tasks));
+        parser.register("delete", new Delete(tasks));
         parser.register("bye", new Bye());
         Scanner input = new Scanner(System.in);
         boolean exit = false;

@@ -58,10 +58,10 @@ public class Duke {
                     taskDone.markAsDone();
                     System.out.print(LINE);
                     System.out.println("     Nice! I've marked this task as done: ");
-                    System.out.println("       " + taskDone.getStatusIcon() + " " + taskDone);
+                    System.out.println("       " + taskDone.getTypeIcon() + taskDone.getStatusIcon() + " " + taskDone);
                     System.out.print(LINE);
                     getUserInput();
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! The task you want to mark as done doesn't exist.");
                     System.out.print(LINE);
@@ -147,6 +147,23 @@ public class Duke {
                 } catch (DukeException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! " + e);
+                    System.out.print(LINE);
+                    getUserInput();
+                }
+                break;
+            case "delete":
+                try {
+                    int index = Integer.parseInt(userInput.split("\\s")[1]);
+                    Task taskRemoved = tasks.remove(index - 1);
+                    System.out.print(LINE);
+                    System.out.println("     Noted. I've removed this task: ");
+                    System.out.println("       " + taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon() + " " + taskRemoved);
+                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
+                    System.out.print(LINE);
+                    getUserInput();
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.print(LINE);
+                    System.out.println("     ☹ OOPS!!! The task you want to delete doesn't exist.");
                     System.out.print(LINE);
                     getUserInput();
                 }

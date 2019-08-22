@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Task {
     private String description;
-    private boolean status = false;
+    private boolean isDone = false;
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public Task(String description) {
@@ -10,7 +10,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        if (this.status) {
+        if (this.isDone) {
             return "[\u2713] ";
         } else {
             return "[\u2718] ";
@@ -18,7 +18,7 @@ public class Task {
     }
 
     private void markAsDone() {
-        this.status = true;
+        this.isDone = true;
     }
 
     @Override

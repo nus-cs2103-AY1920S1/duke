@@ -1,8 +1,10 @@
 import java.util.Scanner;
 
 public class Duke {
+    static String[] tasks = new String[100];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int count = 0;
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,12 +19,17 @@ public class Duke {
             String input = sc.nextLine();
 
             switch(input) {
+                case "list":
+                    printList(count);
+                    break;
                 case "bye":
                     printExitMessage();
                     return;
 
                 default:
                     printDefaultMessage(input.toLowerCase());
+                    addTask(count, input.toLowerCase());
+                    count ++;
                     break;
             }
         }
@@ -48,6 +55,26 @@ public class Duke {
 
     public static void printExitMessage() {
         addBorder("Bye. Hope to see you again soon!");
+    }
+
+    public static void addTask(int index, String input) {
+        tasks[index] = input;
+        String output = "added: " + input;
+        addBorder(output);
+    }
+
+    public static void printList(int index) {
+        String str = "";
+
+        for (int i = 1; i < index + 1; i++) {
+            if (i == index) {
+                str += i + ". " + tasks[i-1];
+            } else {
+                str += i + ". " + tasks[i-1] + "\n";
+            }
+        }
+
+        addBorder(str);
     }
 
 }

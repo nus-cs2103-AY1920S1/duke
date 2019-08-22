@@ -93,8 +93,9 @@ public class Duke {
                                     "Now you have %d %s in the list.",
                                     tasks.size(),
                                     tasks.size() == 1 ? "task" : "tasks"));
-                } else {
-                    throw new DukeException("Invalid item selected for deletion.");
+                    } else {
+                        throw new DukeException("Invalid item selected for deletion.");
+                    }
                 } else {
                     throw new DukeException("Unknown command.");
                 }

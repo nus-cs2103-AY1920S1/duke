@@ -43,25 +43,27 @@ public class Duke {
 
     static void output(Scanner sc) {
         while (sc.hasNextLine()) {
-            String cmmd = sc.nextLine();
-            String[] splitCmmd = cmmd.split(" ");
-            if (cmmd.equals("bye")) {
-                break;
+            try {
+                String cmmd = sc.nextLine();
+                String[] splitCmmd = cmmd.split(" ");
+                if (cmmd.equals("bye")) {
+                    break;
+                } else if (cmmd.equals("list")) {
+                    list();
+                } else if (splitCmmd[0].equals("done")) {
+                    done(splitCmmd[1]);
+                } else if (splitCmmd[0].equals("deadline")) {
+                    deadline(cmmd.substring(9));
+                } else if (splitCmmd[0].equals("event")) {
+                    event(cmmd.substring(6));
+                } else if (splitCmmd[0].equals("todo")) {
+                    todo(cmmd.substring(5));
+                } else {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-()");
+                }
             }
-            else if (cmmd.equals("list")) {
-                list();
-            }
-            else if (splitCmmd[0].equals("done")) {
-                done(splitCmmd[1]);
-            }
-            else if (splitCmmd[0].equals("deadline")) {
-                deadline(cmmd.substring(9));
-            }
-            else if (splitCmmd[0].equals("event")) {
-                event(cmmd.substring(6));
-            }
-            else {
-                todo(cmmd.substring(5));
+            catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

@@ -3,32 +3,44 @@ public class Tasks {
     String taskDesc;
     String status;
     String tde; 
-    String timeOfEvent; 
+    //String timeOfEvent; 
+    String[] timeOfEvent;
 
-    public Tasks(String desc, String tde, String time) {
+    public Tasks(String desc, String type, String time) {
         taskDesc = desc;
         status = "✗";
-        if(tde.equals("todo")) {
+        if(type.equals("todo")) {
             tde = "T";
-        } else if(tde.equals("deadline")) {
+        } else if(type.equals("deadline")) {
             tde = "D";
         } else {
             tde = "E";
         }
-        timeOfEvent = time;
+        timeOfEvent = time.split(" ");
     }
 
     String getStatus() {
         return status;
     }
 
-    void finishTask() {
+    public void finishTask() {
         status = "✓";
     }
 
+   String formatTime() {
+        String output = "";
+        if(timeOfEvent.length > 1) {
+            output = "(" + timeOfEvent[0] + ":";
+            for(int i = 1; i < timeOfEvent.length; i++) {
+                output = output + " " + timeOfEvent[i];
+            }
+            output = output + ")";
+        }
+        return output;
+    }
     @Override 
     public String toString() {
-        return "[" + tde + "] " + "[" + status + "] " + taskDesc + timeOfEvent;
+        return "[" + tde + "] " + "[" + status + "] " + taskDesc + formatTime();
     } 
 
 }

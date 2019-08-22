@@ -5,6 +5,9 @@ public class DeadlinesTask extends Task {
     public DeadlinesTask(String task) {
         super(task);
         String[] taskSplit = task.split("/");
+        if(taskSplit.length < 2) {
+            throw new EmptyDescriptionDukeException("deadline");
+        }
         taskName = taskSplit[0].trim();
         String taskTimeOriginal = taskSplit[1];
         int firstWordLength = taskTimeOriginal.split(" ")[0].length();

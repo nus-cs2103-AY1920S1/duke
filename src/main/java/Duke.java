@@ -17,24 +17,39 @@ public class Duke {
 
         boolean readingCommands = true;
         while (readingCommands) {
-            String command = sc.nextLine();
+            String input = sc.nextLine();
+            String[] inputWords = input.split(" ");
+            String command = inputWords[0];
+
             switch (command) {
-                case "list":
+                case "list": {
                     for (int i = 1; i <= tasks.size(); i++) {
                         Task task = tasks.get(i - 1);
                         System.out.println(i + ". " + task);
                     }
                     break;
+                }
 
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    readingCommands = false;
+                case "done": {
+                    int taskId = Integer.parseInt(inputWords[1]) - 1;
+                    Task task = tasks.get(taskId);
+                    task.markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(task);
                     break;
+                }
 
-                default:
-                    Task task = new Task(command);
+                case "bye": {
+                    readingCommands = false;
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                }
+
+                default: {
+                    Task task = new Task(input);
                     tasks.add(task);
-                    System.out.println("added: " + task);
+                    System.out.println("added: " + task.description);
+                }
             }
         }
         sc.close();

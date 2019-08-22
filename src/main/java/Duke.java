@@ -40,6 +40,11 @@ public class Duke {
             } else if  (input.startsWith("todo ")) {
                 String description = input.split(" ", 2)[1];
                 taskManager.addTask(new Todo(description));
+            } else if (input.startsWith("event ")) {
+                String suffix = input.split(" ", 2)[1];
+                String description = suffix.split(" /at ", 2)[0];
+                String at = suffix.split(" /at ", 2)[1];
+                taskManager.addTask(new Event(description, at));
             } else {
                 scanner.close();
                 throw new IllegalArgumentException();

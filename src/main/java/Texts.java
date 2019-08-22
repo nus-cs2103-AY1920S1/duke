@@ -8,10 +8,12 @@ class Texts {
         texts.add(task);
     }
     public void print() {
-        for (Task t : texts) {
-            int index = texts.indexOf(t) + 1;
-            System.out.println( index + t.getStatus()+ t);
+        for (int i = 0; i < texts.size(); i++) {
+            int index = i + 1;
+            Task t = texts.get(i);
+            System.out.println(index + t.getStatus() + t);
         }
+
 
     }
     public Task get(int n) {

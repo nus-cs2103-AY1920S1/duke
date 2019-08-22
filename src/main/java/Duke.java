@@ -7,10 +7,69 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static void greet() {
+    private static void greet() {
         TaskManager.separator();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         TaskManager.separator();
+    }
+
+    private static void closing() {
+        TaskManager.separator();
+        System.out.println("Bye. Hope to see you again soon!");
+        TaskManager.separator();
+    }
+
+    private static Deadline parseDeadlineTask(String instruction) throws DukeException{
+        try {
+            String suffix = instruction.split(" ", 2)[1];
+            String description = suffix.split(" /by ", 2)[0];
+            String by = suffix.split(" /by ", 2)[1];
+            return new Deadline(description, by);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("Deadline task formatting error.");
+        }
+    }
+
+    private static Todo parseTodoTask(String instruction) throws DukeException {
+        try {
+            String description = instruction.split(" ", 2)[1];
+            return new Todo(description);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+    }
+
+    private static Event parseEventTask(String instruction) throws DukeException {
+        try {
+            String suffix = instruction.split(" ", 2)[1];
+            String description = suffix.split(" /at ", 2)[0];
+            String at = suffix.split(" /at ", 2)[1];
+
+            return new Event(description, at);
+        } catch(IndexOutOfBoundsException ex) {
+            throw new DukeException("Event task formatting error.");
+        }
+    }
+
+    private static boolean parseInstruction(TaskManager taskManager, String instruction) throws DukeException{
+        if (instruction.equals("bye")) {
+            closing();
+            return false;
+        } else if (instruction.equals("list")) {
+            taskManager.printTasks();
+        } else if (instruction.matches("^done \\d+$")) {
+            int index = Integer.parseInt(instruction.split(" ")[1]);
+            taskManager.markAsDone(index);
+        } else if (instruction.startsWith("deadline")) {
+            taskManager.addTask(parseDeadlineTask(instruction));
+        } else if  (instruction.startsWith("todo")) {
+            taskManager.addTask(parseTodoTask(instruction));
+        } else if (instruction.startsWith("event")) {
+            taskManager.addTask(parseEventTask(instruction));
+        } else {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -20,34 +79,15 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-
-            if (input.equals("bye")) {
+            try {
+                String instruction = scanner.nextLine();
+                if (!parseInstruction(taskManager, instruction)) {
+                    break;
+                }
+            } catch (DukeException ex) {
                 TaskManager.separator();
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(ex);
                 TaskManager.separator();
-                break;
-            } else if (input.equals("list")) {
-                taskManager.printTasks();
-            } else if (input.matches("^done \\d+$")) {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                taskManager.markAsDone(index);
-            } else if (input.startsWith("deadline ")) {
-                String suffix = input.split(" ", 2)[1];
-                String description = suffix.split(" /by ", 2)[0];
-                String by = suffix.split(" /by ", 2)[1];
-                taskManager.addTask(new Deadline(description, by));
-            } else if  (input.startsWith("todo ")) {
-                String description = input.split(" ", 2)[1];
-                taskManager.addTask(new Todo(description));
-            } else if (input.startsWith("event ")) {
-                String suffix = input.split(" ", 2)[1];
-                String description = suffix.split(" /at ", 2)[0];
-                String at = suffix.split(" /at ", 2)[1];
-                taskManager.addTask(new Event(description, at));
-            } else {
-                scanner.close();
-                throw new IllegalArgumentException();
             }
         }
         scanner.close();

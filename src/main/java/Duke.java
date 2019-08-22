@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    protected static String[] list = new String[100];
+    protected static ArrayList<Task> arrayList = new ArrayList<Task>();
+
     public static void main(String[] args) {
         String logo = "     ____        _        \n"
                     + "    |  _ \\ _   _| | _____ \n"
@@ -16,11 +20,15 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         // String array to store text entered by user.
-        String[] list = new String[100];
+        //String[] list = new String[100];
         // Counter to count total number of items in array.
         int n = 0;
+
+        //Task task = new Task();
+
         while (sc.hasNext()) {
             String text = sc.nextLine();
+            Task task = new Task(text);
             if (text.equals("bye")) {
                 printBye();
                 break;
@@ -28,14 +36,20 @@ public class Duke {
                 printLine();
                 for (int i = 1; i <= n; i++) {
                     printIndent();
-                    System.out.println(i + ". " + list[i-1]);
+                    System.out.println(i + "." + arrayList.get(i-1).getStatusIcon() + " " + list[i - 1]);
                 }
                 printLine();
+            } else if (text.indexOf(" ") > -1 &&
+                    (text.substring(0, text.indexOf(" "))).equals("done")) {
+                //Task.checklist[n] = "done";
+                int num = text.indexOf(" ");
+                printDone(Integer.parseInt(text.substring(num+1, num+2)));
             } else {
-                addToList(list, text, n);
+                addToList(text, n);
                 printAdds(text);
                 n++;
             }
+            arrayList.add(task);
         }
     }
 
@@ -51,7 +65,7 @@ public class Duke {
     }
 
     // Adds text into the string array.
-    private static void addToList(String[] list, String str, int num) {
+    private static void addToList(String str, int num) {
         list[num] = str;
     }
 
@@ -70,4 +84,15 @@ public class Duke {
         System.out.println("added: " + str);
         printLine();
     }
+
+    private static void printDone(int i) {
+        arrayList.get(i-1).markAsDone();
+        printLine();
+        printIndent();
+        System.out.println("Nice! I've marked this task as done:");
+        printIndent();
+        System.out.println("  " + arrayList.get(i-1).getStatusIcon() + " " + list[i-1]);
+        printLine();
+    }
+
 }

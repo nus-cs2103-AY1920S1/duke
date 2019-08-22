@@ -24,6 +24,6 @@ class ToDo {
                 nextCommand = sc.nextLine();
             }
         }
-        System.out.println("Bye! Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }

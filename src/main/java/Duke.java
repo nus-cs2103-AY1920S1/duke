@@ -72,8 +72,21 @@ public class Duke {
                         System.out.println(lineSpace + "Got it. I've added this task:\n" + task
                                 + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);
                         break;
+                    case "delete":
+                        int deletion = sc.nextInt();
+                        if(deletion < 0 || deletion > list.size()){
+                            throw new DukeException("Task not found");
+                        }
+                        Task temp = list.get(deletion-1);
+                        list.remove(deletion-1);
+                        System.out.println(lineSpace + "Noted. I've removed this task:\n" + temp
+                                + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);
+                        break;
                     case "done":
                         int taskNo = sc.nextInt();
+                        if(taskNo < 0 || taskNo > list.size()){
+                            throw new DukeException("Task not found");
+                        }
                         list.get(taskNo - 1).markAsDone();
                         System.out.println(lineSpace + "Nice! I've marked this task as done:\n"
                                 + list.get(taskNo - 1) + "\n" + lineSpace);

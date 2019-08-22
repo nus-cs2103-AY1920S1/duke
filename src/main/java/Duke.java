@@ -86,7 +86,7 @@ public class Duke {
                         if (endies > 0) {
 
                             String description2 = remainingStuff2.substring(1, remainingStuff2.indexOf('/'));
-                            String timezies = remainingStuff2.substring(endies + 4).trim(t);
+                            String timezies = remainingStuff2.substring(endies + 4).trim();
                             if (timezies.isEmpty()) {
                                 throw new DukeException("☹OOPS!!! Wrong format'");
                             }
@@ -103,6 +103,15 @@ public class Duke {
                             throw new DukeException("☹OOPS!!! Wrong format");
                         }
                         break;
+
+                    case ("delete") :
+                        int position = sc.nextInt();
+                        System.out.println("Noted. I've removed this task.");
+                        System.out.println(arr.get(position-1));
+                        arr.remove(position-1);
+                        System.out.println("Now you have " + arr.size() + " tasks in the list");
+                        break;
+
 
                     default:
                         sc.nextLine();

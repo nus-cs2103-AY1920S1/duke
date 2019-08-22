@@ -18,6 +18,7 @@ public class AddTodoCommand extends AddCommand {
     @Override
     public TaskResponse execute(String... args) {
         String description = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+
         if (description.isEmpty()) {
             return new TaskResponse(new DukeException("☹ OOPS!!! The description of a todo cannot be empty."));
         }

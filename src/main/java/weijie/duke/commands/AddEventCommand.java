@@ -1,5 +1,6 @@
 package weijie.duke.commands;
 
+import weijie.duke.exceptions.DukeException;
 import weijie.duke.models.Event;
 import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
@@ -18,6 +19,11 @@ public class AddEventCommand extends AddCommand {
     public TaskResponse execute(String... args) {
         String input = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
         String[] descriptionAndDate = input.split(" /at ");
+
+        if (descriptionAndDate.length <= 1) {
+            return new TaskResponse(new DukeException("☹ OOPS!!! Must specify date/time for event"));
+        }
+
         Task task = new Event(descriptionAndDate[0], descriptionAndDate[1]);
         repo.create(task);
 

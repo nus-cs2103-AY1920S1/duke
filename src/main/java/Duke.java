@@ -30,8 +30,17 @@ public class Duke {
                 case "done":
                     myTasks.checkTask(Integer.parseInt(splitInput[1]) - 1);
                     break;
+                case "todo":
+                    myTasks.addTask(input.substring(5), TaskType.TODO);
+                    break;
+                case "deadline":
+                    myTasks.addTask(input.substring(9), TaskType.DEADLINE);
+                    break;
+                case "event":
+                    myTasks.addTask(input.substring(6), TaskType.EVENT);
+                    break;
                 default:
-                    myTasks.addTask(input);
+                    System.out.println("error in input");
                     break;
             }
         }

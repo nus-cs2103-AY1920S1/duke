@@ -5,9 +5,36 @@ class ToDoList {
     ToDoList() {
         taskList = new ArrayList<>(100);
     }
-    void addTask(String task) {
-        taskList.add(new Task(task));
-        System.out.println("added: " + task);
+    void addTask(String task, TaskType type) {
+        System.out.println("Got it. I've added this task:");
+        Task addedTask;
+        switch (type) {
+            case TODO:
+                addedTask = new TodoTask(task);
+                taskList.add(addedTask);
+                System.out.println(addedTask);
+                break;
+            case DEADLINE:
+                addedTask = new Deadline(
+                    task.substring(0, task.indexOf('/') - 1),
+                    task.substring(task.indexOf('/') + 1)
+                );
+                taskList.add(addedTask);
+                System.out.println(addedTask);
+                break;
+            case EVENT:
+                addedTask = new Event(
+                        task.substring(0, task.indexOf('/') - 1),
+                        task.substring(task.indexOf('/') + 1)
+                );
+                taskList.add(addedTask);
+                System.out.println(addedTask);
+                break;
+            default:
+                // throw some exception here?
+                break;
+        }
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
     void listAllTasks() {
         int total = taskList.size();

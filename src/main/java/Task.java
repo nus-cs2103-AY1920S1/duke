@@ -1,6 +1,6 @@
-class Task {
-    private String taskDetails;
-    private boolean completed;
+abstract class Task {
+    String taskDetails;
+    boolean completed;
     Task(String taskDetails) {
         this.taskDetails = taskDetails;
         this.completed = false;

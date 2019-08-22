@@ -5,7 +5,7 @@ class Tasks {
 
     Tasks(String desc) {
         taskDesc = desc;
-        status = 0;
+        status = "✗";
     }
 
     String getStatus() {
@@ -13,7 +13,7 @@ class Tasks {
     }
 
     void finishTask() {
-        status = 1;
+        status = "✓";
     }
 
     @Override 

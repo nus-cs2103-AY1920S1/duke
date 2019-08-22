@@ -50,13 +50,15 @@ public class Duke {
                     input = input.replace(arr[0], "");
                     switch (arr[0]) {
                         case "todo":
-                            tasks.add(new Task("T", input));
+                            tasks.add(new Todo(input, ""));
                             break;
                         case "deadline":
-                            tasks.add(new Task("D", process(input)));
+                            arr = process(input);
+                            tasks.add(new Deadline(arr[0], arr[1]));
                             break;
                         case "event":
-                            tasks.add(new Task("E", process(input)));
+                            arr = process(input);
+                            tasks.add(new Event(arr[0], arr[1]));
                             break;
                         default:
                             throw new UnsupportedOperationException();
@@ -76,11 +78,11 @@ public class Duke {
         sc.close();
     }
 
-    private static String process(String input) throws ArrayIndexOutOfBoundsException {
+    private static String[] process(String input) throws ArrayIndexOutOfBoundsException {
         String desc[] = input.split("/");
         String temp[] = desc[1].split(" ");
         desc[1] = desc[1].replace(temp[0], "");
-        input = desc[0] + " (" + temp[0] + ": " + desc[1] + ")";
-        return input;
+        desc[1] = " (" + temp[0] + ": " + desc[1] + ")";
+        return desc;
     }
 }

@@ -13,3 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 *.class
+src/main/java/input.txt

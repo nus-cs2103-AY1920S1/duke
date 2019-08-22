@@ -1,11 +1,11 @@
 public class Task {
     private int id;
-    private String task;
-    private boolean done;
+    private String description;
+    public boolean done;
 
-    public Task(int id, String task) {
+    public Task(int id, String description) {
         this.id = id;
-        this.task = task;
+        this.description = description;
         this.done = false;
     }
 
@@ -13,7 +13,7 @@ public class Task {
         return this.id;
     }
     public String getTask() {
-        return this.task;
+        return this.description;
     }
     public boolean isDone() {
         return this.done;
@@ -30,7 +30,7 @@ public class Task {
         } else {
             temp.append("[✗] ");
         }
-        temp.append(this.task);
+        temp.append(this.description);
         return temp.toString();
     }
 }

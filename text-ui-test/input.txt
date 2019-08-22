@@ -1,0 +1,10 @@
+list
+todo return book
+deadline homework /by Monday
+event project meeting /at Mon 2-4pm
+list
+done 1
+done 2
+done 3
+list
+bye

@@ -3,11 +3,12 @@ import java.util.List;
 
 public class Bot {
     private String response;
-    private List<String> tasks = new ArrayList<String>();
+    private List<Task> tasks = new ArrayList<Task>();
 
     public void add(String s) {
+        Task task = new Task(s);
         this.response = "added: " + s;
-        tasks.add(s);
+        tasks.add(task);
         System.out.println(this);
     }
 
@@ -29,6 +30,13 @@ public class Bot {
             if (i != this.tasks.size() - 1) taskList += "\n     ";
         }
         this.response = taskList;
+        System.out.println(this);
+    }
+
+    public void done(int n) {
+        this.tasks.get(n - 1).mark();
+        this.response = "Nice! I've marked this task as done:\n       " + this.tasks.get(n - 1);
+
         System.out.println(this);
     }
 

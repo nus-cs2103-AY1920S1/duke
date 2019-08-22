@@ -11,6 +11,38 @@ public class Duke {
         }
     }
 
+    public static String subString(String[] words, int start, int end) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = start; i < end; i++) {
+            sb.append(words[i] + " ");
+        }
+        return sb.toString().trim();
+    }
+
+    public static int findIdx(String[] words, String s) {
+        for(int i = 0; i < words.length; i++) {
+            if(words[i].equals(s))
+                return i;
+        }
+        return -1;
+    }
+
+    public static Task parseTask(String[] words) {
+        if(words[0].equals("todo")) {
+            return new ToDo(subString(words, 1, words.length));
+        } else if (words[0].equals("deadline")) {
+            int i = findIdx(words, "/by");
+            String description = subString(words, 1, i);
+            String by = subString(words, i + 1, words.length);
+            return new Deadline(description, by);
+        } else {
+            int i = findIdx(words, "/at");
+            String description = subString(words, 1, i);
+            String at = subString(words, i + 1, words.length);
+            return new Event(description, at);
+        }
+    }
+
     public static void processor(){
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -26,9 +58,10 @@ public class Duke {
                     t.markAsDone();
                     System.out.println("Nice! I've marked this task as done: \n  " + t);
                 } else {
-                    Task t = new Task(command);
+                    Task t = parseTask(words);
                     tasks.add(t);
-                    System.out.println("added: " + command);
+                    System.out.println("Got it. I've added this task: \n  " + t + "\nNow you have "
+                            + tasks.size() + " tasks in the list.");
                 }
             }
         }

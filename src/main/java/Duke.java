@@ -1,21 +1,23 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
-    private static int numTasks = 0;
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        Task[] taskList = new Task[100];
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
         printReply("Hello! I'm Duke\n\t What can I do for you?");
         String command = sc.nextLine();
             while (!command.equals("bye")) {
                 try {
                     String[] parts = command.split(" ", 2);
-                    if (command.equals("list"))
+                    if (command.equals("list")) {
                         printList(taskList);
-                    else if (parts[0].equals("done")) {
+                    } else if (parts[0].equals("done")) {
                         int taskNum = Integer.valueOf(parts[1]);
-                        printReply(taskList[taskNum - 1].markAsDone());
+                        printReply(taskList.get(taskNum - 1).markAsDone());
+                    } else if (parts[0].equals("delete")) {
+                        int taskNum = Integer.valueOf(parts[1]);
+                        removeFromList(taskList, taskNum);
                     } else if (parts[0].equals("todo")) {
                         addToList(new Todo(parts[1]), taskList);
                     } else if (parts[0].equals("deadline")) {
@@ -39,20 +41,25 @@ public class Duke {
         System.out.println("\t______________________________________________________________\n\t " + reply
                        + "\n\t______________________________________________________________");
     }
-    public static void addToList(Task task, Task[] taskList){
-        taskList[numTasks++] = task;
-        String reply = "Got it. I've added this task: \n\t  " + task + "\n\t Now you have " + numTasks;
-        if(numTasks == 1) reply += " task in the list.";
-        else reply += " tasks in the list.";
+    public static void addToList(Task task, ArrayList<Task> taskList){
+        taskList.add(task);
+        String reply = "Got it. I've added this task:\n\t  " + task + "\n\t Now you have " + taskList.size()
+                + ((taskList.size() == 1)?" task":" tasks") + " in the list.";
         printReply(reply);
     }
-    public static void printList(Task[] taskList){
-        String listReply = "Here are the tasks in your list:\n\t ";
-        for(int i=0; i<numTasks; i++) {
-            listReply += (i + 1) + "." + taskList[i];
-            if (i != numTasks - 1)
-                listReply += "\n\t ";
+    public static void printList(ArrayList<Task> taskList){
+        String reply = "Here are the tasks in your list:\n\t ";
+        for(int i=0; i<taskList.size(); i++) {
+            reply += (i + 1) + "." + taskList.get(i);
+            if (i != taskList.size() - 1)
+                reply += "\n\t ";
         }
-        printReply(listReply);
+        printReply(reply);
+    }
+    public static void removeFromList(ArrayList<Task> taskList, int taskIndex) throws DukeException{
+        if(taskIndex > taskList.size()) throw new DukeException("");
+        String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex-1) + "\n\t Now you have " + taskList.size()
+                + ((taskList.size() == 1)?" task":" tasks") + " in the list.";
+        printReply(reply);
     }
 }

@@ -52,7 +52,7 @@ public class Duke {
                         if (inputArr.length <= 1) {
                             throw new DukeException("☹ OOPS! Todo description missing!");
                         }
-                        new ToDo(inputArr[1]);
+                        Task.addNewTask(new ToDo(inputArr[1]));
                         break;
                     case "deadline":
                         if (inputArr.length <= 1) {
@@ -66,7 +66,7 @@ public class Duke {
                                 throw new DukeException("☹ OOPS! Deadline due date missing!");
                             }
                         }
-                        new Deadline(deadlineInputArr[0], deadlineInputArr[1]);
+                        Task.addNewTask(new Deadline(deadlineInputArr[0], deadlineInputArr[1]));
                         break;
                     case "event":
                         if (inputArr.length <= 1) {
@@ -80,7 +80,7 @@ public class Duke {
                                 throw new DukeException("☹ OOPS! Event timing missing!");
                             }
                         }
-                        new Event(eventInputArr[0], eventInputArr[1]);
+                        Task.addNewTask(new Event(eventInputArr[0], eventInputArr[1]));
                         break;
                     default:
                         throw new DukeException("☹ OOPS! I can't do it!");

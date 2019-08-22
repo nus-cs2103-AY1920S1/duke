@@ -26,6 +26,17 @@ public class Task {
         return this.getStatusIcon() + this.description;
     }
 
+    public static void addNewTask(Task task) {
+        taskList.add(task);
+        System.out.println("Got it! I've added this task:");
+        System.out.println(task);
+        if (taskList.size() == 1)  {
+            System.out.println("Now you have 1 task in the list!");
+        } else {
+            System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+        }
+    }
+
     public static void doTask(int index) {
         Task task = taskList.get(index - 1);
         task.markAsDone();
@@ -49,17 +60,6 @@ public class Task {
         int counter = 1;
         for (Task task : taskList) {
             System.out.println(counter++ + "." + task);
-        }
-    }
-
-    protected static void addNewTask(Task task) {
-        taskList.add(task);
-        System.out.println("Got it! I've added this task:");
-        System.out.println(task);
-        if (taskList.size() == 1)  {
-            System.out.println("Now you have 1 task in the list!");
-        } else {
-            System.out.println("Now you have " + taskList.size() + " tasks in the list!");
         }
     }
 }

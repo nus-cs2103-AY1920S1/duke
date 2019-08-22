@@ -19,25 +19,31 @@ public class Duke {
             }
         }
     }
-    private static LinkedList<String> tasks = new LinkedList<>();
+    private static LinkedList<Task> tasks = new LinkedList<>();
     private static void run() {
         Scanner sc = new Scanner(System.in);
 
-        String next = sc.nextLine();
+        String next = sc.next();
         switch(next) {
+            case "list":
+                System.out.println("Here are the tasks in your list:\n");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(1 + i + "." + tasks.get(i).toString());
+                }
+                break;
             case "bye":
                 System.out.println("Bye. Hope to see you again soon!");
                 sc.close();
                 break;
-            case "list":
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(1 + i + "." + tasks.get(i));
-                }
+            case "done":
+                int n = sc.nextInt();
+                tasks.get(n - 1).setDone();
+                System.out.println("Nice! I've marked this task as done:\n" + tasks.get(n - 1).toString());
                 break;
             default:
-                System.out.println("added: "+next);
-                tasks.add(next);
-                break;
+                Task newt = new Task(next + sc.nextLine());
+                tasks.add(newt);
+                System.out.println("added: " + newt.toString());
         }
     }
 }

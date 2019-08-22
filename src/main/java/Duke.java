@@ -18,10 +18,10 @@ public class Duke {
             "\tHello! I'm Duke. What can I do for you?\n";
     private static final String ADD_MESSAGE =
             "\tGot it. I've added this task:\n";
+    private static final String DELETE_MESSAGE =
+            "\tNoted. I've removed this task:\n";
     private static final String DONE_MESSAGE =
             "\tNice! I've marked this task as done:\n";
-    private static final String ERROR_MESSAGE =
-            "\tI don't understand your command...\n";
     private static final String EXIT_MESSAGE =
             "\tBye. Hope to see you again soon!\n";
 
@@ -55,16 +55,20 @@ public class Duke {
                     case "todo":
                         if (args.length == 0) {
                             throw new DukeMissingDescriptionException(":'( OOPS!!! The description of a todo cannot be empty.");
-                        } else {
-                            String task = String.join(" ", args);
-                            Task todoTask = taskList.add(new Todo(task));
-                            System.out.println(TOP_SEPARATOR + messageAddTask(todoTask) + BOTTOM_SEPARATOR);
                         }
+                        String todoDescription = String.join(" ", args);
+                        Task todoTask = taskList.add(new Todo(todoDescription));
+                        System.out.println(TOP_SEPARATOR + messageAddTask(todoTask) + BOTTOM_SEPARATOR);
                         break;
                     case "done":
                         int doneIdx = Integer.valueOf(commands[1]);
                         taskList.markAsDone(doneIdx);
                         System.out.println(TOP_SEPARATOR + DONE_MESSAGE + "\t" + taskList.get(doneIdx) + "\n" + BOTTOM_SEPARATOR);
+                        break;
+                    case "delete":
+                        int deleteIdx = Integer.valueOf(commands[1]);
+                        Task deletedTask = taskList.delete(deleteIdx);
+                        System.out.println(TOP_SEPARATOR + messageDeleteTask(deletedTask) + BOTTOM_SEPARATOR);
                         break;
                     case "list":
                         System.out.println(TOP_SEPARATOR + taskList.format() + BOTTOM_SEPARATOR);
@@ -76,7 +80,8 @@ public class Duke {
                         throw new DukeMissingDescriptionException(":'( OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-            catch (DukeUnknownInputException | DukeMissingDescriptionException e) {
+            catch (DukeUnknownInputException | DukeMissingDescriptionException |
+                    DukeIndexOutOfBoundsException e) {
                 System.out.println(TOP_SEPARATOR
                         + "\t" + e.getMessage() + "\n"
                         + BOTTOM_SEPARATOR);
@@ -84,13 +89,22 @@ public class Duke {
         }
     }
 
+    // todo: Use enums to print custom messages? messageDeleteTask
     // prints the message added and the number of tasks currently in the list.
     public String messageAddTask(Task task) {
-        long taskCount = taskList.count();
-        return ADD_MESSAGE + "\t" + task.toString() + "\n"
-                + (taskCount <= 1
-                    ? String.format("\tNow you have %d task in the list.\n", taskCount)
-                    : String.format("\tNow you have %d tasks in the list.\n", taskCount));
+        return ADD_MESSAGE
+                + "\t" + task + "\n"
+                + (taskList.count() == 1
+                    ? String.format("\tNow you have %d task in the list.\n", taskList.count())
+                    : String.format("\tNow you have %d tasks in the list.\n", taskList.count()));
+    }
+
+    public String messageDeleteTask(Task task) {
+        return DELETE_MESSAGE
+                + "\t" + task + "\n"
+                + (taskList.count() == 1
+                    ? String.format("\tNow you have %d task in the list.\n", taskList.count())
+                    : String.format("\tNow you have %d tasks in the list.\n", taskList.count()));
     }
 
     public static void main(String[] args) {

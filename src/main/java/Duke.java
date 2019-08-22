@@ -20,11 +20,11 @@ public class Duke {
     /**
      * Adds commands to lists and runs required commands
      */
-    static void runEvents() {
+    private static void runEvents() {
         tasklist = new TaskList();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine().trim();
-        while (!command.equals("bye")) {
+        while (!command.toLowerCase().equals("bye")) {
             logicManager.executeCommand(tasklist, command);
             command = sc.nextLine().trim();
         }

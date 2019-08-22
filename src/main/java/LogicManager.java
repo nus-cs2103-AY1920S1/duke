@@ -2,10 +2,11 @@ public class LogicManager {
     private TaskList taskList;
     public void executeCommand(TaskList taskList, String command) {
         this.taskList = taskList;
-        command = command.trim();
-        String[] commandDescription = command.split("\\s+", 2);
+        String[] commandDescription = command.trim().split("\\s+", 2);
+        commandDescription[0] = commandDescription[0].toLowerCase();
+        String taskName = commandDescription[0];
         try {
-            switch (commandDescription[0]) {
+            switch (taskName) {
                 case "list":
                     this.printList(command);
                     break;
@@ -37,7 +38,7 @@ public class LogicManager {
     /**
      * Adds new task (without date) into list
      * @param commandDescription - array of strings containing command description
-     * @throws IncompleteCommandError
+     * @throws IncompleteCommandError - throws error if the command is not in complete format
      */
     private void addTaskWithoutDate(String[] commandDescription) throws IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
@@ -47,15 +48,15 @@ public class LogicManager {
     /**
      * Adds new task (with date) into list
      * @param commandDescription - array of strings containing command description
-     * @throws UnknownCommandException
+     * @throws IncompleteCommandError - throws error if the command is not in correct format
      */
     private void addTaskWithDate(String[] commandDescription) throws UnknownCommandException {
         this.checkCommandEmpty(commandDescription);
         try {
             String[] taskArray = commandDescription[1].split("/", 2);
             String taskName = taskArray[0].trim();
-            String date = taskArray[1].split("\\s+", 2)[1];
-            this.taskList.add(commandDescription[0], taskName, date);
+            String[] statementAndDate = taskArray[1].split("\\s+", 2);
+            this.taskList.add(commandDescription[0], taskName, statementAndDate[1], statementAndDate[0]);
         } catch (IndexOutOfBoundsException e) {
             throw new IncompleteCommandError("incomplete", commandDescription[0]);
         }
@@ -65,7 +66,7 @@ public class LogicManager {
      * Deletes existing task from list
      * @param commandDescription - array of strings containing command description
      * @throws RuntimeException - contains both NumberFormatException and IndexOutOfBoundsException
-     * @throws IncompleteCommandError
+     * @throws IncompleteCommandError - throws error if the command is not in complete format
      */
     private void deleteTask(String[] commandDescription) throws RuntimeException, IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
@@ -86,7 +87,7 @@ public class LogicManager {
 
     /**
      * Prints out contents of list according to order of insertion
-     * @throws InvalidCommandError
+     * @throws InvalidCommandError - throws error if the command is in wrong format
      */
     private void printList(String command) throws InvalidCommandError {
         if (!command.equals("list")) { throw new InvalidCommandError(command); }
@@ -96,7 +97,7 @@ public class LogicManager {
     /**
      * Throws error if the given command is empty
      * @param commandDescription - array of strings containing command description
-     * @throws IncompleteCommandError
+     * @throws IncompleteCommandError - throws error if the command is not in complete format
      */
     private void checkCommandEmpty(String[] commandDescription) throws IncompleteCommandError {
         if(commandDescription.length == 1) {

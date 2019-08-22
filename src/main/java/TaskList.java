@@ -21,18 +21,18 @@ public class TaskList {
      * @param taskType - Type description of task
      * @param taskName - Name of task
      * @param date - Date of which the task needs to be completed
-     * @throws UnknownCommandException
+     * @param taskStatement - statement required by the task. E.g deadline: by
      */
-    public void add(String taskType, String taskName, String date) throws UnknownCommandException {
+    public void add(String taskType, String taskName, String date, String taskStatement) throws IncorrectStatementException {
         switch (taskType) {
             case "deadline":
+                DeadlineTask.verifyTaskStatement(taskStatement);
                 this.list.add(new DeadlineTask(taskName, date));
                 break;
             case "event":
+                EventTask.verifyTaskStatement(taskStatement);
                 this.list.add(new EventTask(taskName, date));
                 break;
-            default:
-                throw new UnknownCommandException(taskType);
         }
         Message.successfulAddMessage(this.list.get(list.size()-1), this.size());
     }
@@ -40,7 +40,7 @@ public class TaskList {
     /**
      * Marks task at given index as done
      * @param idx - Index of task in list
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException - Throws error if given index is out of list bounds
      */
     public void done(int idx) throws IndexOutOfBoundsException {
         this.list.get(idx).markDone();
@@ -49,7 +49,7 @@ public class TaskList {
     /**
      * Marks task at given index as done
      * @param idx - Index of task in list
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException - Throws error if given index is out of list bounds
      */
     public void delete(int idx) throws IndexOutOfBoundsException {
         Task task = this.list.get(idx);

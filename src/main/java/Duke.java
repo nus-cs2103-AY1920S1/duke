@@ -13,24 +13,25 @@ public class Duke {
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String input;
+        String[] splitInput;
         boolean dukeIsOn = true;
-        ArrayList<String> toDoList = new ArrayList<>(100);
+        ToDoList myTasks = new ToDoList();
         while(dukeIsOn){
             input = sc.nextLine();
-            switch (input) {
+            splitInput = input.split(" ");
+            switch (splitInput[0]) {
                 case "list":
-                    int total = toDoList.size();
-                    for (int i = 0; i < total; i++) {
-                        System.out.println((i + 1) + ". " + toDoList.get(i));
-                    }
+                    myTasks.listAllTasks();
                     break;
                 case "bye":
                     System.out.println("Bye. Hope to see you again soon!");
                     dukeIsOn = false;
                     break;
+                case "done":
+                    myTasks.checkTask(Integer.parseInt(splitInput[1]) - 1);
+                    break;
                 default:
-                    toDoList.add(input);
-                    System.out.println("added: " + input);
+                    myTasks.addTask(input);
                     break;
             }
         }

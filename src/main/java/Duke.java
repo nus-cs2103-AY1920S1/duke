@@ -34,14 +34,24 @@ public class Duke {
             printTask(currTask);
         } else if (extractCommand[0].equals("deadline")) {
             String[] currArray = extractCommand[1].split(" /by ", 2);
-            Task currTask = new Deadline(currArray[0], currArray[1]);
-            myList.add(currTask);
-            printTask(currTask);
+            try {
+                checkTime(currArray, "deadline");
+                Task currTask = new Deadline(currArray[0], currArray[1]);
+                myList.add(currTask);
+                printTask(currTask);
+            } catch (DukeException error) {
+                System.err.println(error.getMessage());
+            }
         } else {
             String[] currArray = extractCommand[1].split(" /at ", 2);
-            Task currTask = new Event(currArray[0], currArray[1]);
-            myList.add(currTask);
-            printTask(currTask);
+            try {
+                checkTime(currArray, "event");
+                Task currTask = new Event(currArray[0], currArray[1]);
+                myList.add(currTask);
+                printTask(currTask);
+            } catch (DukeException error) {
+                System.err.println(error.getMessage());
+            }
         }
     }
 
@@ -138,6 +148,13 @@ public class Duke {
                     + "    ____________________________________________________________" + "\n");
         }
     }
+
+    public static void checkTime(String[] currArray, String taskType) throws DukeException {
+        if (currArray.length == 1) {
+            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! Your " + taskType + " needs a specific date/time! Please re-enter your " + taskType + " :-)\n" + "    ____________________________________________________________" + "\n");        
+        }
+    }    
+
     public static void main(String[] args) {
         printWelcome();
 

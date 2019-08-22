@@ -18,18 +18,24 @@ public class Duke {
         while (!inputArr[0].equals("bye")) {
             if (inputArr[0].equals("list")) {
                 listString = "Here are the tasks in your list:\n" + indent + " ";
-                for (int i = 0; i < listSize; i++) {
+                for (int i = 0; i < listArr.size(); i++) {
                     listString += (i + 1) + ". " + listArr.get(i);
-                    if (i != (listSize - 1)) {
+                    if (i != (listArr.size() - 1)) {
                         listString += '\n' + indent + ' ';
                     }
                 }
                 printIndentedString(listString, indent);
-            } else if(inputArr[0].equals("done")){
+            } else if (inputArr[0].equals("done")) {
                 listPointer = Integer.parseInt(inputArr[1]);
                 listArr.get(listPointer - 1).markAsDone();
                 printIndentedString("Nice! I've marked this task as done: \n"
                         + indent + "   " + listArr.get(listPointer - 1), indent);
+            } else if(inputArr[0].equals("delete")) {
+                listPointer = Integer.parseInt(inputArr[1]);
+                listArr.remove(listPointer - 1);
+                printIndentedString("Noted. I've removed this task: \n"
+                        + indent + "   " + listArr.get(listPointer - 1) + "\n" + indent +
+                        "Now you have " + listArr.size() + " tasks in the list.", indent);
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + indent + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
@@ -64,7 +70,7 @@ public class Duke {
                 printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", indent);
             }
             input = sc.nextLine();
-            inputArr = input.split(" ");
+            inputArr = input.split(" ", 2);
         }
         printIndentedString("Bye. Hope to see you again soon!", indent);
     }

@@ -1,4 +1,4 @@
-public class LogicManager {
+public class Parser {
     private TaskList taskList;
     public void executeCommand(TaskList taskList, String command) {
         this.taskList = taskList;
@@ -55,8 +55,17 @@ public class LogicManager {
         try {
             String[] taskArray = commandDescription[1].split("/", 2);
             String taskName = taskArray[0].trim();
+            String taskType = commandDescription[0].toLowerCase();
             String[] statementAndDate = taskArray[1].split("\\s+", 2);
-            this.taskList.add(commandDescription[0], taskName, statementAndDate[1], statementAndDate[0]);
+            switch(taskType) {
+                case "deadline":
+                    DeadlineTask.verifyTaskStatement(statementAndDate[0]);
+                    break;
+                case "event":
+                    EventTask.verifyTaskStatement(statementAndDate[0]);
+                    break;
+            }
+            this.taskList.add(commandDescription[0], taskName, statementAndDate[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new IncompleteCommandError("incomplete", commandDescription[0]);
         }
@@ -90,7 +99,7 @@ public class LogicManager {
      * @throws InvalidCommandError - throws error if the command is in wrong format
      */
     private void printList(String command) throws InvalidCommandError {
-        if (!command.equals("list")) { throw new InvalidCommandError(command); }
+        if (!command.toLowerCase().equals("list")) { throw new InvalidCommandError(command); }
         this.taskList.print();
     }
 

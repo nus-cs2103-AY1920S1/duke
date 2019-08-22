@@ -2,11 +2,11 @@ import java.util.*;
 public class Duke {
     /* Globals */
     private static TaskList tasklist;
-    private static LogicManager logicManager;
+    private static Parser parser;
 
     public static void init() {
         tasklist = new TaskList();
-        logicManager = new LogicManager();
+        parser = new Parser();
     }
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine().trim();
         while (!command.toLowerCase().equals("bye")) {
-            logicManager.executeCommand(tasklist, command);
+            parser.executeCommand(tasklist, command);
             command = sc.nextLine().trim();
         }
     }

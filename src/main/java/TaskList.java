@@ -21,16 +21,13 @@ public class TaskList {
      * @param taskType - Type description of task
      * @param taskName - Name of task
      * @param date - Date of which the task needs to be completed
-     * @param taskStatement - statement required by the task. E.g deadline: by
      */
-    public void add(String taskType, String taskName, String date, String taskStatement) throws IncorrectStatementException {
+    public void add(String taskType, String taskName, String date) {
         switch (taskType) {
             case "deadline":
-                DeadlineTask.verifyTaskStatement(taskStatement);
                 this.list.add(new DeadlineTask(taskName, date));
                 break;
             case "event":
-                EventTask.verifyTaskStatement(taskStatement);
                 this.list.add(new EventTask(taskName, date));
                 break;
         }

@@ -29,7 +29,7 @@ public class Duke {
             run(br);
             br.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println("IOException:\n" + e);
         }
     }
 
@@ -40,28 +40,38 @@ public class Duke {
     private static void run(BufferedReader br) throws IOException {
         greeting();
         String input = br.readLine();
-        while (input != null && !input.equals("bye")) {
-            if (input.equals("list")) {
+        Command cmd = Command.lookup(input);
+        while (input != null && cmd != Command.BYE) {
+            if (cmd == Command.LIST) {
                 printList();
             } else {
                 String[] tokens = input.split("\\s+");
-                if (tokens[0].equals("done")) {
-                    try {
-                        doTask(Integer.parseInt(tokens[1]));
-                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        addTask(input);
-                    }
-                } else if (tokens[0].equals("delete")) {
-                    try {
-                        deleteTask(Integer.parseInt(tokens[1]));
-                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        addTask(input);
+                cmd = Command.lookup(tokens[0]);
+                if (cmd != null) {
+                    switch (cmd) {
+                        case DONE:
+                            try {
+                                doTask(Integer.parseInt(tokens[1]));
+                            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                                addTask(input);
+                            }
+                            break;
+                        case DELETE:
+                            try {
+                                deleteTask(Integer.parseInt(tokens[1]));
+                            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                                addTask(input);
+                            }
+                            break;
+                        default:
+                            addTask(input);
                     }
                 } else {
                     addTask(input);
                 }
             }
             input = br.readLine();
+            cmd = Command.lookup(input);
         }
         exit();
     }

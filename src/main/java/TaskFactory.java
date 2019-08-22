@@ -2,7 +2,6 @@
  * Factory Class for Tasks.
  */
 public class TaskFactory {
-
     /**
      * Creates a Task object. Determines which subClass constructor to call.
      * @param description String description of the task to be created.
@@ -10,12 +9,16 @@ public class TaskFactory {
      */
     public static Task create(String description) throws TaskException {
         String[] tokens = description.split("\\s+");
-        switch (tokens[0]) {
-            case "todo":
+        Command cmd = Command.lookup(tokens[0]);
+        if (cmd == null) {
+            throw new TaskException();
+        }
+        switch (Command.lookup(tokens[0])) {
+            case TODO:
                 return createToDo(description);
-            case "deadline":
+            case DEADLINE:
                 return createDeadline(description);
-            case "event":
+            case EVENT:
                 return createEvent(description);
             default:
                 throw new TaskException();

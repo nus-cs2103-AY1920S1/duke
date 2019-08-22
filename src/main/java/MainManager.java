@@ -1,12 +1,12 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class MainManager {
-    private Task[] list;
-    private int counter;
+    private ArrayList<Task> list;
 
     public MainManager() {
-        this.list = new Task[100];
-        counter = 0;
+        this.list = new ArrayList<>();
     }
 
     private String[] getEventDetails(String command) throws TaskException{
@@ -38,9 +38,9 @@ public class MainManager {
                     break;
 
                 case "list":
-                    for(int i = 0; i < list.length; i++) {
-                        if(list[i] != null) {
-                            System.out.println(i + 1 + "." + list[i]);
+                    for(int i = 0; i < list.size(); i++) {
+                        if(list.get(i) != null) {
+                            System.out.println(i + 1 + "." + list.get(i));
                         }
                     }
                     break;
@@ -51,7 +51,7 @@ public class MainManager {
                             throw new DoneException();
                         }
                         System.out.println("Nice! I've marked this task as done:");
-                        Task currTask = list[Integer.parseInt(command[1]) - 1];
+                        Task currTask = list.get(Integer.parseInt(command[1]) - 1);
                         currTask.setDone();
                         System.out.println(" " + currTask);
                     } catch (DoneException doEx) {
@@ -66,11 +66,10 @@ public class MainManager {
                         }
                         String todoName = toPrint.substring(5);
                         Task todo = new Todo(todoName);
-                        list[counter] = todo;
-                        counter++;
+                        list.add(todo);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println("    " + todo);
-                        System.out.println("Now you have " + counter + " tasks in the list.");
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
 
                     } catch(TaskException toEx)  {
                         System.out.println(toEx);
@@ -81,13 +80,12 @@ public class MainManager {
                     try {
                         String[] deadlineDetails = getDeadlineDetails(toPrint);
                         Task deadline = new Deadline(deadlineDetails[0], deadlineDetails[1]);
-                        list[counter] = deadline;
-                        counter++;
+                        list.add(deadline);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println("    " + deadline);
-                        System.out.println("Now you have " + counter + " tasks in the list.");
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
                     } catch(TaskException dlEx) {
-                            System.out.println(dlEx);
+                        System.out.println(dlEx);
                     }
                     break;
 
@@ -95,13 +93,32 @@ public class MainManager {
                     try {
                         String[] eventDetails = getEventDetails(toPrint);
                         Task event = new Event(eventDetails[0], eventDetails[1]);
-                        list[counter] = event;
-                        counter++;
+                        list.add(event);
                         System.out.println("Got it. I've added this task: ");
                         System.out.println("    " + event);
-                        System.out.println("Now you have " + counter + " tasks in the list.");
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
                     } catch (TaskException evEx) {
                         System.out.println(evEx);
+                    }
+                    break;
+
+                case "delete":
+                    try {
+                        if (command.length <= 1){
+                            throw new DeleteException();
+                        } else {
+                            int index = Integer.parseInt(command[1]);
+
+                            if (command.length <= 1 || index > list.size() || index <= 0) {
+                                throw new DeleteException();
+                            }
+
+                            System.out.println(" Noted. I've removed this task: ");
+                            System.out.println("    " + list.remove(index - 1));
+                            System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        }
+                    } catch(DeleteException deEx) {
+                        System.out.println(deEx);
                     }
                     break;
 

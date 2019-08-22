@@ -17,7 +17,7 @@ public class Duke {
         while (!canEnd) {
             String input;
             input = myScanner.nextLine();
-            if (isDone(input)) {
+            if (isDone(input) || isRemove(input)) {
                 continue;
             }
             switch (input) {
@@ -41,6 +41,31 @@ public class Duke {
                     break;
             }
         }
+    }
+
+    /**
+     * Returns true if input is of the form "delete <int>"
+     * @param input
+     */
+    private boolean isRemove(String input) {
+        String[] keywords = input.split(" ");
+        if (keywords[0].equals("delete") && keywords.length == 2) {
+            Scanner s = new Scanner(keywords[1]);
+            if (s.hasNextInt()) {
+                int index = s.nextInt() - 1;
+                if (index >=0 && index < myList.size()) {
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(myList.get(index));
+                    myList.remove(index);
+                    System.out.println("Now you have " + myList.size());
+                }
+                else {
+                    System.out.println("Please enter a valid number");
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -15,7 +15,7 @@ public class Listing {
 
     //msg[0] = event, msg[1] = description
     public void addTodo(String[] msg) throws DukeException {
-        if(msg.length > 1) {
+        if(msg.length > 1 && !msg[1].equals("")) {
             Task task = new Todo(msg[1]);
             list.add(task);
             System.out.println(String.format(
@@ -31,7 +31,7 @@ public class Listing {
         if(msg.length > 1) {
             String[] msgs = msg[1].split("/by");
             //check is the description correct.
-            if(msgs.length == 2) {
+            if(msgs.length == 2 && !msgs[1].equals(" ")) {
                 Task task = new Deadline(msgs[0], msgs[1]);
                 list.add(task);
                 System.out.println(String.format(
@@ -50,7 +50,7 @@ public class Listing {
     public void addEvent (String[] msg) throws DukeException {
         if(msg.length > 1) {
             String[] msgs = msg[1].split("/at");
-            if(msgs.length == 2) {
+            if(msgs.length == 2 && !msgs[1].equals(" ")) {
                 Task task = new Event(msgs[0], msgs[1]);
                 list.add(task);
                 System.out.println(String.format(
@@ -70,19 +70,31 @@ public class Listing {
     }
 
 
-    public void mark(int index) {
-        Task tk = list.get(index - 1);
-        tk.markAsDone();
-        System.out.println(
-                String.format("Nice! I've marked this task as done:\n"
-                        + "  " +tk));
-
+    public void mark(String[] msg) throws  DukeException {
+        if(msg.length == 2) {
+            try {
+                int index = Integer.parseInt(msg[1]);
+                Task tk = list.get(index - 1);
+                tk.markAsDone();
+                System.out.println(
+                        String.format("Nice! I've marked this task as done:\n"
+                                + "  " + tk));
+            } catch (NumberFormatException ex) {
+                throw new DukeException("\u1F65 OOPS! Invalid input as number");
+            }
+        } else {
+            throw new DukeException("\u1F65 OOPS!! The format of the input is wrong");
+        }
     }
 
-    public void listing() {
-        for (int i = 0; i < list.size(); i++) {
-            Task tk = list.get(i);
-            System.out.println( i + 1 + "." + tk);
+    public void listing(String[] msg) throws DukeException {
+        if(msg.length == 1) {
+            for (int i = 0; i < list.size(); i++) {
+                Task tk = list.get(i);
+                System.out.println(i + 1 + "." + tk);
+            }
+        } else {
+            throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
         }
     }
 }

@@ -19,10 +19,9 @@ public class Duke {
                     Message.leavingMsg();
                     break;
                 } else if (msg[0].equals("list")) {
-                    list.listing();
+                    list.listing(msg);
                 } else if (msg[0].equals("done")) {
-                    int index = sc.nextInt();
-                    list.mark(index);
+                    list.mark(msg);
                 } else if (msg[0].equals("todo")) {
                     list.addTodo(msg);
                 } else if (msg[0].equals("deadline")) {

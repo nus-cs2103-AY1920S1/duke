@@ -24,27 +24,33 @@ public class Duke {
 
     public static void readList(Scanner sc) {
         while(sc.hasNext()) {
-            String command = sc.nextLine();
-            String[] words = command.split(" ", 2);
-            String action = words[0];
+            try {
+                String command = sc.nextLine();
+                String[] words = command.split(" ", 2);
+                String action = words[0];
 
-            if (command.equals("bye")) {
-                printBye();
-                return;
-            } else if (action.equals("done")) {
-                int doneIndex = Integer.parseInt(words[1]);
-                doneTask(doneIndex);
-            } else if (action.equals("todo")) {
-                addTodo(words[1]);
-            } else if (action.equals("deadline")) {
-                addDeadline(words[1]);
-            } else if (action.equals("event")) {
-                addEvent(words[1]);
-            } else if (command.equals("list")) {
-                printList();
-            } else {
-                addTask(command);
+                if (command.equals("bye")) {
+                    printBye();
+                    return;
+                } else if (action.equals("done")) {
+                    Task.doneTask(words);
+                } else if (action.equals("todo")) {
+                    ToDo.addTodo(words);
+                } else if (action.equals("deadline")) {
+                    Deadline.addDeadline(words);
+                } else if (action.equals("event")) {
+                    Event.addEvent(words);
+                } else if (command.equals("list")) {
+                    printList();
+                } else {
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch(DukeException ex) {
+                System.out.println("    ____________________________________________________________");
+                System.err.println("     " + ex);
+                System.out.println("    ____________________________________________________________");
             }
+
         }
     }
 
@@ -59,63 +65,6 @@ public class Duke {
             int index = i + 1;
             System.out.println("     " + index + ". " + taskList[i]);
         }
-        System.out.println("    ____________________________________________________________");
-
-    }
-
-    // remove
-    public static void addTask(String command) {
-        taskList[totalNumber] = new Task(command);
-        totalNumber++;
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     added: " + command);
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public static void doneTask(int num) {
-        Task currentTask = taskList[num - 1];
-        currentTask.markAsDone();
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + currentTask);
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public static void addTodo(String action) {
-        ToDo todo = new ToDo(action);
-        taskList[totalNumber] = todo;
-        totalNumber++;
-
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + todo);
-        printNumber();
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public static void addDeadline(String action) {
-        String[] actionAndTime = action.split("/by");
-        Deadline deadline = new Deadline(actionAndTime[0], actionAndTime[1]);
-        taskList[totalNumber] = deadline;
-        totalNumber++;
-
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + deadline);
-        printNumber();
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public static void addEvent(String action) {
-        String[] actionAndTime = action.split("/at");
-        Event event = new Event(actionAndTime[0], actionAndTime[1]);
-        taskList[totalNumber] = event;
-        totalNumber++;
-
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println("       " + event);
-        printNumber();
         System.out.println("    ____________________________________________________________");
     }
 

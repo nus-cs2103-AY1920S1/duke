@@ -15,6 +15,20 @@ public class Task {
         this.isDone = true;
     }
 
+    public static void doneTask(String[] words) throws DukeException {
+        if (words.length < 2) {
+            throw new DukeException("☹ OOPS!!! The index of a done task cannot be empty.");
+        }
+
+        int doneIndex = Integer.parseInt(words[1]);
+        Task currentTask = Duke.taskList[doneIndex - 1];
+        currentTask.markAsDone();
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Nice! I've marked this task as done: ");
+        System.out.println("       " + currentTask);
+        System.out.println("    ____________________________________________________________");
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

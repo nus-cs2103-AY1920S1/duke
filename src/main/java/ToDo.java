@@ -16,19 +16,8 @@ public class ToDo extends Task{
         return new ToDo(builder.toString());
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "✓" : "✗" );
-        //return (isDone ? "\u2713" : "\u2718");
-    }
-
-    public String getDescription() {
-        return description;
-    }
     public String toString() {
         return String.format("[T][%s] %s", getStatusIcon(), getDescription());
     }
 
-    public void doTask() {
-        this.isDone = true;
-    }
 }

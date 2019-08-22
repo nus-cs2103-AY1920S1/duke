@@ -10,10 +10,10 @@ public class Task {
     public static Task createTask(String [] tokens) {
         if (tokens[0].equals("todo")) {
             return ToDo.createToDo(tokens);
-//        } else if (tokens[0].equals("deadline")) {
-//            return Deadline.createDeadLine(tokens);
-//        } else if (tokens[0].equals("event")) {
-//            return Event.createEvent(tokens);
+        } else if (tokens[0].equals("deadline")) {
+            return Deadline.createDeadline(tokens);
+        } else if (tokens[0].equals("event")) {
+            return Event.createEvent(tokens);
         }
         return null;
     }

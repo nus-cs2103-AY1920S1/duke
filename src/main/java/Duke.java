@@ -28,26 +28,10 @@ public class Duke {
                 doTask(tokens[1]);
             } else {
                 Task task = Task.createTask(tokens);
-                lst.add(task); //because must count so must put first
+                lst.add(task); 
                 printInput(task);
 
             }
-//            } else if (tokens[0].equals("todo")) {
-//
-//            } else if (tokens[0].equals("deadline")) {
-//
-//            } else if (tokens[0].equals("event")) {
-//
-//            }
-//
-//
-//
-//
-//            } else {
-//                Task task = new Task(input);
-//                printInput(task);
-//                lst.add(task);
-//            }
 
         }
 
@@ -58,7 +42,7 @@ public class Duke {
 
         System.out.println("     Got it. I've added this task:");
     	System.out.println(String.format("       %s",input));
-        System.out.println("     Now you have %d tasks in the list.");
+        System.out.println(String.format("     Now you have %d tasks in the list.",lst.size()));
     	System.out.println("    ____________________________________________________________");
     	System.out.println();
 

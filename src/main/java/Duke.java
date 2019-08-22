@@ -1,7 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+
+        String storinglist[];
+        int i = 0;
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,13 +24,19 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        while(true) {
+        storinglist = new String[100];
+
+
+        while (true) {
             String command = scanner.nextLine();
 
             if (command.equals("list")) {
-                System.out.println("--------------------------\n"
-                        + "list\n\n"
-                        + "--------------------------" );
+                System.out.println("--------------------------");
+                for (int x = 0; x < i; x++) {
+                    System.out.println(x + 1 + ". " + storinglist[x]);
+                }
+
+                System.out.println("\n--------------------------");
             } else if (command.equals("blah")) {
                 System.out.println("--------------------------\n"
                         + "blah\n\n"
@@ -36,9 +47,11 @@ public class Duke {
                         + "--------------------------");
                 break;
             } else {
-                System.out.println("--------------------------\n "
-                        + "Wrong command! Enter again.\n\n"
-                        +  "--------------------------");
+                storinglist[i] = command;
+                i++;
+                System.out.println("--------------------------\n"
+                        + "added: " + command
+                        + "\n\n--------------------------");
             }
         }
     }

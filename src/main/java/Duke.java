@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.ArrayList; 
+import java.util.List; 
 
 public class Duke {
     void logo(){
@@ -18,10 +20,20 @@ public class Duke {
     }
     static String addDoubleLine(String str){
         String line = "    ____________________________________________________________";
-        String newstr = "     " + str;
-        return line + "\n" + newstr + "\n" + line;
+        return line + "\n" + str + "\n" + line;
+    }
+    static void handleList(ArrayList ls){
+        String output = ""; 
+        for(int i = 0; i < ls.size(); i++){
+            output = output + "     " +  (i+1) + ": " + ls.get(i);
+            if(i < ls.size() - 1){
+                output = output + "\n";
+            }
+        }
+        System.out.println(addDoubleLine(output));
     }
     static void handleInput(){
+        ArrayList <String> list = new ArrayList<String>();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()){
             String check = sc.nextLine();
@@ -32,8 +44,11 @@ public class Duke {
                     )
                 );
                 System.exit(0);
+            }else if(check.equals("list")){
+                handleList(list);
             }else{
-                System.out.println(addDoubleLine(check));
+                list.add(check);
+                System.out.println(addDoubleLine("added: " + check));
             }
         }
     }

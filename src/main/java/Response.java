@@ -50,11 +50,18 @@ public class Response {
         ));
     }
 
+    public static Response newDelete(Task item, int totalItem) {
+        return new Response(List.of(
+                "Noted. I've removed this task: ",
+                Response.INDENT + item.toString(),
+                String.format("Now you have %d tasks in the list.", totalItem)
+        ));
+    }
+
     public static Response newListing(List<Task> items) {
         List<String> content = IntStream.range(0, items.size())
                 .mapToObj(i -> (i + 1) + "." + items.get(i).toString())
                 .collect(Collectors.toList());
-
         content.add(0, "Here are the tasks in your list:");
 
         return new Response(content);

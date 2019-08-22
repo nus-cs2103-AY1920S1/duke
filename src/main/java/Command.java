@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -41,6 +40,11 @@ public class Command {
                     throw new CommandException("☹ OOPS!!! You must specify a task number.");
                 }
                 return new Command(CommandType.DONE, Integer.parseInt(command[1]));
+            case "delete":
+                if (command.length <= 1) {
+                    throw new CommandException("☹ OOPS!!! You must specify a task number.");
+                }
+                return new Command(CommandType.DELETE, Integer.parseInt(command[1]));
             case "todo":
                 if (command.length <= 1) {
                     throw new CommandException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -57,7 +61,8 @@ public class Command {
 
             case "event":
                 List<String> eventDetails = Stream.of(String.join(" ", Arrays.copyOfRange(command, 1, command.length))
-                        .split("/at")).map(String::trim).collect(Collectors.toList());;
+                        .split("/at")).map(String::trim).collect(Collectors.toList());
+                ;
                 if (eventDetails.size() != 2) {
                     throw new CommandException("☹ OOPS!!! Something is wrong with your input.");
                 }
@@ -68,6 +73,7 @@ public class Command {
 
         }
     }
+
     public int getTargetIndex() {
         return targetIndex;
     }
@@ -81,6 +87,6 @@ public class Command {
     }
 
     public enum CommandType {
-        BYE, LIST, DONE, ADD, ECHO
+        BYE, LIST, DONE, ADD, ECHO, DELETE
     }
 }

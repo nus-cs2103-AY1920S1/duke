@@ -32,6 +32,9 @@ public class Duke {
                     case DONE:
                         this.handleDone(command.getTargetIndex());
                         break;
+                    case DELETE:
+                        this.handleDelete(command.getTargetIndex());
+                        break;
                     case ADD:
                         this.handleAddItem(command.getAddedTask());
                         break;
@@ -56,6 +59,11 @@ public class Duke {
         Response.newDone(this.taskList.get(targetIndex)).print();
     }
 
+    private void handleDelete(int targetIndex) {
+        Task removed = this.taskList.remove(targetIndex);
+        Response.newDelete(removed, this.taskList.size()).print();
+    }
+
     private void handleBye() {
         Response.newFarewell().print();
     }
@@ -73,7 +81,4 @@ public class Duke {
         Response.newListing(this.taskList).print();
     }
 
-    private void handleException(Exception e) {
-        Response.newException(e).print();
-    }
 }

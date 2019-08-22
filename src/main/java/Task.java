@@ -1,12 +1,10 @@
 public class Task {
     protected static int total;
-    protected int idx;
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
         total++;
-        this.idx = total;
         this.description = description;
         this.isDone = false;
     }
@@ -14,8 +12,9 @@ public class Task {
     public static int getTotal() {
         return total;
     }
-    public int getIdx() {
-        return this.idx;
+
+    public static void setTotal() {
+        total--;
     }
 
     public void setDone() {

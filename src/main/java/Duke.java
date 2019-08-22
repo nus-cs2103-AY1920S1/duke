@@ -47,8 +47,9 @@ public class Duke {
         if (taskList.isEmpty()) {
             return;
         }
-        for (Task t : taskList) {
-            ps.println(t.getIdx() + "." + t);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            ps.println((i+1) + "." + t);
         }
     }
 
@@ -75,7 +76,12 @@ public class Duke {
                 }
                 break;
             case "done":
-                ps.println(Duke.completed(2));
+                task[1] = task[1].substring(1);
+                Duke.completed(Integer.parseInt(task[1]));
+                break;
+            case "delete":
+                task[1] = task[1].substring(1);
+                Duke.delete(Integer.parseInt(task[1]));
                 break;
             default:
                 ps.println("\u2639 OOPS!!! I'm sorry, but I dont know what that means :-(");
@@ -83,11 +89,12 @@ public class Duke {
         }
     }
 
-    static String completed(int i) {
+    static void completed(int i) throws Exception {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
         Task t = taskList.get(i - 1);
         t.setDone();
-        return "Nice! I've marked this task as done: \n"
-                + "  " + t;
+        ps.println("Nice! I've marked this task as done: ");
+        ps.println("  " + t);
     }
 
     static String[] processTask(String[] s) {
@@ -95,11 +102,11 @@ public class Duke {
         task[0] = s[0];
         s[0] = "";
         String s2 = String.join(" ", s);
-        String[] s3 = s2.split("/");
+        String[] s3 = s2.split("/"); // now there might be trailing spaces infront of the words
         if (s3.length == 2) { // deadline and event
             task[1] = s3[0];
             task[2] = s3[1];
-        } else { // todo has no date portion, hence task[2] = ""
+        } else { // todo, done and delete has no date portion, hence task[2] = ""
             task[1] = s3[0];
             task[2] = "";
         }
@@ -128,5 +135,14 @@ public class Duke {
             ps.println(de.getMessage());
             return false;
         }
+    }
+
+    static void delete(int i) throws Exception {
+        PrintStream ps = new PrintStream(System.out, true, "UTF-8");
+        Task t = taskList.remove(i - 1);
+        ps.println("Noted. I've removed this task:");
+        ps.println("  " + t);
+        Task.setTotal();
+        ps.println("Now you have " + Task.getTotal() + " tasks in the list.");
     }
 }

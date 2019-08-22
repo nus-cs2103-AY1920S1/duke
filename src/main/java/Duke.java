@@ -26,66 +26,85 @@ public class Duke {
         //String[] list = new String[100];
 
         while (scan.hasNext()) {
-            String text = scan.nextLine().trim();
-            if (text.equals("bye")) {
-                printBye();
-                break;
+            try {
+                String text = scan.nextLine().trim();
+                if (text.equals("bye")) {
+                    printBye();
+                    break;
 
-            } else if (text.equals("list")) {
-                printList();
+                } else if (text.equals("list")) {
+                    printList();
 
-            } else if (text.indexOf(" ") > -1) {
+                } else if (text.indexOf(" ") > -1) {
 
-                String[] splittedText = text.split(" ");
+                    String[] splittedText = text.split(" ");
 
-                if (splittedText[0].equals("done")) {
-                    int num = text.indexOf(" ");
-                    printDone(Integer.parseInt(text.substring(num+1, num+2)));
-                    tasking[num] = arrayList.get(num-1);  // MIGHT BE WRONG NUM
+                    if (splittedText[0].equals("done")) {
+                        int num = text.indexOf(" ");
+                        printDone(Integer.parseInt(text.substring(num + 1, num + 2)));
+                        tasking[num] = arrayList.get(num - 1);  // MIGHT BE WRONG NUM
+
+                    } else {
+                        Task.printGI();
+                        printIndent();
+                        counter++;
+
+
+                        if (splittedText[0].equals("todo")) {
+
+
+                            int num = text.indexOf(" ");
+                            Task task = new Todo(text.substring(num + 1));
+
+                            System.out.println("  " + task.toString());
+                            Task.printNumOfTasks();
+                            tasking[counter] = task;
+                            arrayList.add(task);
+
+
+                        } else if (splittedText[0].equals("deadline")) {
+                            int num = text.indexOf("/");
+                            int num1 = text.indexOf(" ");
+                            Task task = new Deadline(text.substring(num1, num - 1), text.substring(num + 4));
+                            System.out.println("  " + task.toString());
+                            Task.printNumOfTasks();
+                            tasking[counter] = task;
+                            arrayList.add(task);
+
+
+                        } else if (splittedText[0].equals("event")) {
+                            int num = text.indexOf("/");
+                            int num1 = text.indexOf(" ");
+                            Task task = new Event(text.substring(num1, num - 1), text.substring(num + 4));
+                            System.out.println("  " + task.toString());
+                            Task.printNumOfTasks();
+                            tasking[counter] = task;
+                            arrayList.add(task);
+                        }
+
+                        //counter++;
+                        //arrayList.add(task);
+                    }
+                    //tasking[counter] = task;
 
                 } else {
-                    Task.printGI();
+                    printLine();
                     printIndent();
-                    counter++;
-
-
-                    if (splittedText[0].equals("todo")) {
-
-
-                        int num = text.indexOf(" ");
-                        Task task = new Todo(text.substring(num+1));
-
-                        System.out.println("  " + task.toString());
-                        Task.printNumOfTasks();
-                        tasking[counter] = task;
-                        arrayList.add(task);
-
-
-                    } else if (splittedText[0].equals("deadline")) {
-                        int num = text.indexOf("/");
-                        int num1 = text.indexOf(" ");
-                        Task task = new Deadline(text.substring(num1, num-1), text.substring(num+4));
-                        System.out.println("  " + task.toString());
-                        Task.printNumOfTasks();
-                        tasking[counter] = task;
-                        arrayList.add(task);
-
-
-                    } else if (splittedText[0].equals("event")) {
-                        int num = text.indexOf("/");
-                        int num1 = text.indexOf(" ");
-                        Task task = new Event(text.substring(num1, num-1), text.substring(num+4));
-                        System.out.println("  " + task.toString());
-                        Task.printNumOfTasks();
-                        tasking[counter] = task;
-                        arrayList.add(task);
+                    if (text.equals("todo")) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. It must be in proper format (i.e. todo clean table).");
+                    } else if (text.equals("deadline")) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. It must be in proper format (i.e. deadline return book /by 23 Aug).");
+                    } else if (text.equals("event")) {
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. It must be in proper format (i.e. event Don's birthday /at 15 Jan 3pm).");
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
 
-                    //counter++;
-                    //arrayList.add(task);
                 }
-                //tasking[counter] = task;
+            } catch (DukeException e) {
 
+                System.out.println(e);
+                printLine();
             }
         }
     }

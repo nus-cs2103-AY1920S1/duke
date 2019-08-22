@@ -63,6 +63,7 @@ abstract class Task {
         System.out.println("[✓] " + currentTask);
     }
 
+    //to add task
     void addList(Task t, ArrayList<Task> a, int n) {
         System.out.println("Got it. I've added this task:");
         a.add(t);
@@ -70,6 +71,7 @@ abstract class Task {
         System.out.println("Now you have " + Integer.toString(n) + " tasks in the list.");
     }
 
+    //to delete task
     void deleteTask(Task t, ArrayList<Task> a) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(t);

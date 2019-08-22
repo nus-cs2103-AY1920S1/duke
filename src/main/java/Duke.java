@@ -13,8 +13,17 @@ public class Duke {
         }
     }
 
-    public static void taskDone(int i, ArrayList<Task> list) {
-        list.get(i - 1).markAsDone();
+    public static void taskDone(int i, ArrayList<Task> list) throws Exception {
+        try {
+            list.get(i - 1).markAsDone();
+        } 
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
+        }
+        finally {
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(list.get(i - 1).toString());
+        }
     }
 
     public static void validateDetail(String[] detail) throws DukeException {
@@ -28,13 +37,13 @@ public class Duke {
     }
 
     public static void validateDeadlineDetails(String[] detail) throws DukeException {
-        if (detail.length < 2) {
+        if (detail.length != 2) {
             throw new DukeException("☹ OOPS!!! The due date of a deadline must be specified.");
         }
     }
 
     public static void validateEventDetails(String[] detail) throws DukeException {
-        if (detail.length < 2) {
+        if (detail.length != 2) {
             throw new DukeException("☹ OOPS!!! The timeline of an event must be specified.");
         }
     }
@@ -46,12 +55,12 @@ public class Duke {
         String[] inputAsArr = input.split(" ");
         validateDetail(inputAsArr);
         String command = inputAsArr[0];
-        String rest = inputAsArr[1];
-        System.out.println("Got it. I've added this task:");
+        String rest = input.substring(input.indexOf(command + " "));
 
         if (command.equals("todo")) {
             task = new ToDos(rest);
             list.add(task);
+            System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task.toString());
         } else if (command.equals("deadline")) {
             String[] detAsArr = rest.split(" /by ");
@@ -60,6 +69,7 @@ public class Duke {
             dueDetail = detAsArr[1];
             task = new Deadline(detail, dueDetail);
             list.add(task);
+            System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task.toString());
         } else {
             String[] detAsArr = rest.split(" /at ");
@@ -68,6 +78,7 @@ public class Duke {
             dueDetail = detAsArr[1];
             task = new Event(detail, dueDetail);
             list.add(task);
+            System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task);
         }
 
@@ -91,7 +102,7 @@ public class Duke {
                 if (input.equals("list")) {
                     printList(list);
                 } else if (command[0].equals("done")) {
-                    if (command.length == 0) {
+                    if (command.length == 1) {
                         throw new DukeException("☹ OOPS!!! The completed task's index must be mentioned.");
                     } else {
                         try {

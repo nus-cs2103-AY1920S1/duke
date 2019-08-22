@@ -24,7 +24,61 @@ class ToDo {
                 int index = Integer.parseInt(splitCommand[1]) - 1;
                 todoList.get(index).markAsDone();
                 nextCommand = sc.nextLine();
+            } else if (splitCommand[0].equals("event")) {
+                String event = splitCommand[1];
+                int indexStop = 0;
+                for (int i = 2; i < splitCommand.length; i++) {
+                    if (splitCommand[i].equals("/at")) {
+                        indexStop = i + 1;
+                        break;
+                    }
+                    event += " " + splitCommand[i];
+                }
+                String time = splitCommand[indexStop];
+                for (int i = indexStop + 1; i < splitCommand.length; i++) {
+                    time += " " + splitCommand[i];
+                }
+                Task newTask = new Event(event, time);
+                todoList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
+                System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+                nextCommand = sc.nextLine();
+            } else if (splitCommand[0].equals("deadline")) {
+                String event = splitCommand[1];
+                int indexStop = 0;
+                for (int i = 2; i < splitCommand.length; i++) {
+                    if (splitCommand[i].equals("/by")) {
+                        indexStop = i + 1;
+                        break;
+                    }
+                    event += " " + splitCommand[i];
+                }
+                String time = splitCommand[indexStop];
+                for (int i = indexStop + 1; i < splitCommand.length; i++) {
+                    time += " " + splitCommand[i];
+                }
+                Task newTask = new Event(event, time);
+                todoList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
+                System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+                nextCommand = sc.nextLine();
+            } else if (splitCommand[0].equals("todo")) {
+                String task = splitCommand[1];
+                if (splitCommand.length > 2) {
+                    for (int i = 2; i < splitCommand.length; i++) {
+                        task += " " + splitCommand[i];
+                    }
+                }
+                Task newTask = new TodoTask(task);
+                todoList.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask);
+                System.out.println("Now you have " + todoList.size() + " tasks in the list.");
+                nextCommand = sc.nextLine();
             } else {
+                // catch
                 Task newTask = new Task(nextCommand);
                 todoList.add(newTask);
                 System.out.println("added: " + nextCommand);

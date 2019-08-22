@@ -34,50 +34,55 @@ public class Duke {
                 }
                 // Add
                 else {
-                    System.out.println("Got it. I've added this task:");
-                    // to do
-                    if (words[0].equals("todo")) {
-                        // Remaining words
-                        String remainingWords = userinput.replaceFirst("todo ", "");
+                    try {
+                        // to do
+                        if (words[0].equals("todo")) {
+                            // Remaining words
+                            String remainingWords = userinput.replaceFirst("todo", "").trim();
+                            if (remainingWords.equals("")) {
+                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
 
-                        // Add new task to list
-                        Todo newTodo = new Todo(remainingWords, false);
-                        tasks.add(newTodo) ;
+                            // Add new task to list
+                            Todo newTodo = new Todo(remainingWords, false);
+                            tasks.add(newTodo);
+                        }
+                        // deadline
+                        else if (words[0].equals("deadline")) {
+                            // Remaining words
+                            String remainingWords = userinput.replaceFirst("deadline ", "");
+                            String[] remainingWords2 = remainingWords.split(" /by ", 2);
 
-                        System.out.println(newTodo);
+                            // Add new task to list
+                            Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1]);
+                            tasks.add(newDeadline);
+                        }
+                        // event
+                        else if (words[0].equals("event")) {
+                            // Remaining words
+                            String remainingWords = userinput.replaceFirst("event ", "");
+                            String[] remainingWords2 = remainingWords.split(" /at ", 2);
+
+                            // Add new task to list
+                            Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1]);
+                            tasks.add(newEvent);
+                        }
+                        // default
+                        else {
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        }
+
+                        // Print output of ADD
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(tasks.get(tasks.size() - 1));
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     }
-                    // deadline
-                    else if (words[0].equals("deadline")) {
-                        // Remaining words
-                        String remainingWords = userinput.replaceFirst("deadline ", "");
-                        String[] remainingWords2 = remainingWords.split(" /by ", 2);
-
-                        // Add new task to list
-                        Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1]);
-                        tasks.add(newDeadline);
-
-                        System.out.println(newDeadline);
+                    catch (DukeException e) {
+                        System.out.println(e.getMessage());
                     }
-                    // event
-                    else if (words[0].equals("event")) {
-                        // Remaining words
-                        String remainingWords = userinput.replaceFirst("event ", "");
-                        String[] remainingWords2 = remainingWords.split(" /at ", 2);
-
-                        // Add new task to list
-                        Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1]);
-                        tasks.add(newEvent);
-
-                        System.out.println(newEvent);
-                    }
-                    // default
-                    else {
-                        System.out.println("added: " + userinput);
-                    }
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 }
             }
-            // Ask for next userinput
+            // Ask for next userinput again
             userinput = scanner.nextLine();
         }
 

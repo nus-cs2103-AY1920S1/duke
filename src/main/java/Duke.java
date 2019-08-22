@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Duke {
                 + indentation + "| |_| | |_| |   <  __/\n"
                 + indentation + "|____/ \\__,_|_|\\_\\___|\n";
         String input;
-        List<Task> toDoList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         boolean isBye = false;
         System.out.println(indentation + horizontalLine);
         System.out.println(indentation + "Hello from\n" + logo);
@@ -29,7 +30,7 @@ public class Duke {
                     System.out.println(indentation + horizontalLine);
                     System.out.println("Here are the tasks in your list:");
                     int index = 1;
-                    for (Iterator iterator = toDoList.iterator(); iterator.hasNext(); index++) {
+                    for (Iterator iterator = taskList.iterator(); iterator.hasNext(); index++) {
                         System.out.println(indentation + index + "." + iterator.next());
                     }
                     System.out.println(indentation + horizontalLine + "\n");
@@ -37,15 +38,28 @@ public class Duke {
                     System.out.println(indentation + horizontalLine);
                     System.out.println("Nice! I've marked this task as done:");
                     int doneIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-                    Task doneTask = toDoList.get(doneIndex);
+                    Task doneTask = taskList.get(doneIndex);
                     doneTask.markAsDone();
                     System.out.println(indentation + doneTask);
                     System.out.println(indentation + horizontalLine + "\n");
-                } else {
+                } else { // task
                     System.out.println(indentation + horizontalLine);
-                    Task task = new Task(input);
-                    toDoList.add(task);
-                    System.out.println(indentation + "added: " + input);
+                    Task task;
+                    if (input.startsWith("todo"))
+                        task = new ToDo(input.substring(input.indexOf(" ") + 1));
+                    else if (input.startsWith("deadline"))
+                        task = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1), input.substring(input.indexOf("/") + 4));
+                    else if (input.startsWith("event"))
+                        task = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1), input.substring(input.indexOf("/") + 4));
+                    else
+                        task = new Task(input);
+                    taskList.add(task);
+                    System.out.println(indentation + "Got it. I've added this task:");
+                    System.out.println(indentation + "  " + task);
+                    if (taskList.size() == 1)
+                        System.out.println(indentation + "Now you have " + taskList.size() + " task in the list.");
+                    else
+                        System.out.println(indentation + "Now you have " + taskList.size() + " tasks in the list.");
                     System.out.println(indentation + horizontalLine + "\n");
                 }
             }

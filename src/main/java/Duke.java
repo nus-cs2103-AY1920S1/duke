@@ -34,16 +34,11 @@ public class Duke {
         String taskInformation;
         // E.g. /by, /at
         String subCommand;
-        int subCommandLen;
         //Continually receive commands until exit
         inProgram = true;
         while (inProgram) {
             String userInput = input.nextLine();
             ArrayList<String> userInputArr = new ArrayList<String>(
-                    //LEARN: Split string by any number of consecutive whitespaces
-                    //Arrays.asList(userInput.split("//s+"))
-                    //LEARN: Split string by first occurring whitespace, where limit param means pattern applied n-1 times
-                    //Arrays.asList(userInput.split(" ", 2))
                     //Split string by white spaces
                     Arrays.asList(userInput.split(" "))
             );
@@ -76,7 +71,6 @@ public class Duke {
                     break;
                 case ("deadline"):
                     subCommand = "/by";
-                    subCommandLen = subCommand.length();
                     //Empty Description (only "deadline" or "deadline /by")
                     if (userInputArr.size() == 1 || userInputArr.get(1).equalsIgnoreCase(subCommand)) {
                         throw new EmptyDescriptionException("deadline");
@@ -104,7 +98,6 @@ public class Duke {
                     break;
                 case ("event"):
                     subCommand = "/at";
-                    subCommandLen = subCommand.length();
                     //Empty Description (only "deadline" or "deadline /by")
                     if (userInputArr.size() == 1 || userInputArr.get(1).equalsIgnoreCase(subCommand)) {
                         throw new EmptyDescriptionException("event");
@@ -130,15 +123,24 @@ public class Duke {
                     }
                     break;
                 case ("done"):
-                    //TODO check for valid inputs
-                    // (integer valid in list)
-                    if (input.hasNext()) {
-                        int doneNum = input.nextInt();
-                        Task doneTask = taskList.get(doneNum-1);
-                        doneTask.markDone();
-                        displayMarkDone(doneTask);
+                    //Empty/no list index of task provided
+                    if (userInputArr.size() == 1 || userInputArr.size() > 2) {
+                        throw new DukeException("Please put the list index of the " +
+                                "completed task after \"done\" and nothing else.");
                     } else {
-                        display("Please write something after \"event\"!");
+                        //Check if integer is provided
+                        try {
+                            int doneIdx = Integer.parseInt(userInputArr.get(1));
+                            //Check if integer is within range of number of tasks
+                            if (doneIdx > taskList.size() || doneIdx < 1) {
+                                throw new DukeException("Integer is not within range of tasks.");
+                            }
+                            Task doneTask = taskList.get(doneIdx-1);
+                            doneTask.markDone();
+                            displayMarkDone(doneTask);
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("Please enter a valid integer after \"Done\".");
+                        }
                     }
                     break;
                 default:

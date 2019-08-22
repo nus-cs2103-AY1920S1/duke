@@ -1,30 +1,33 @@
 public class DeadlineTask implements Task {
     public final String description;
-    public final String doByString;
+    public final DukeDateTime doByDateTime;
     public final boolean isDone;
 
     public DeadlineTask(String description, String doByString) {
         this.description = description;
-        this.doByString = doByString;
+        
+        String [] dateTimeStrings = doByString.split(" ");
+        this.doByDateTime = new DukeDateTime(dateTimeStrings[0], dateTimeStrings[1]);
+
         this.isDone = false;
     }
 
-    public DeadlineTask(String description, String doByString, boolean isDone) {
+    public DeadlineTask(String description, DukeDateTime doByDateTime, boolean isDone) {
         this.description = description;
-        this.doByString = doByString;
+        this.doByDateTime = doByDateTime;
         this.isDone = isDone;
     }
 
     @Override
     //Returns a copy of this task but with its completion status marked as done
     public Task getTaskMarkedAsDone() {
-        return new DeadlineTask(description, doByString, true);
+        return new DeadlineTask(description, doByDateTime, true);
     }
 
     @Override
     //Returns a copy of this task but with its completion status marked as undone
     public Task getTaskMarkedUndone() {
-        return new DeadlineTask(description, doByString, false);
+        return new DeadlineTask(description, doByDateTime, false);
     }
 
     @Override
@@ -36,7 +39,7 @@ public class DeadlineTask implements Task {
         sb.append("] ");
         sb.append(this.description);
         sb.append(" (by: ");
-        sb.append(doByString);
+        sb.append(doByDateTime.toString());
         sb.append(")");
         return sb.toString();
     }

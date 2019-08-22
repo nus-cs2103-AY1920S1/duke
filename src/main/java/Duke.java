@@ -156,7 +156,7 @@ public class Duke {
 
                 if(indexIsInRange) {
                     Task newlyDeletedTask = tasks.deleteAt(userSpecifiedIndex);
-                    return new DukeReply(false, DukeTextFormatter.makeFormattedText(String.format(taskDoneMessage, newlyDeletedTask.toString(), tasks.size()))); 
+                    return new DukeReply(false, DukeTextFormatter.makeFormattedText(String.format(taskDeletedMessage, newlyDeletedTask.toString(), tasks.size()))); 
                 } else {
                     throw new IndexNotInRangeException(splitString[1]);
                 }
@@ -193,7 +193,7 @@ public class Duke {
         boolean inputIsComplete = (splitString.length == 2);
 
         if(inputIsComplete) {
-            String taskDescription = splitString[0].substring(8).trim();
+            String taskDescription = splitString[0].substring(8).trim(); //gets rid of the "deadline" at the start of the String
             String doByString = splitString[1].trim();
 
             //Initialise and record the new Task
@@ -217,8 +217,10 @@ public class Duke {
             String taskDescription = splitString[0].substring(5).trim();
             String timingString = splitString[1].trim();
 
+            String [] startEndTimeStrings = timingString.split("to");
+
             //Initialise and record the new Task
-            Task newTask = new EventTask(taskDescription, timingString);
+            Task newTask = new EventTask(taskDescription, startEndTimeStrings[0].trim(), startEndTimeStrings[1].trim());
             tasks.add(newTask);
     
             return new DukeReply(false, DukeTextFormatter.makeFormattedText(String.format(taskAddedMessage, newTask.toString(), tasks.size())));

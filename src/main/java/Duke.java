@@ -23,7 +23,7 @@ public class Duke {
     public static void readInputs() {
         sc = new Scanner(System.in);
         String input = "";
-        while (!input.equalsIgnoreCase("bye") && sc.hasNextLine()) {
+        while (!input.equalsIgnoreCase("bye")) {
             input = sc.nextLine();
             try {
                 evaluateInput(input);
@@ -52,19 +52,23 @@ public class Duke {
         }
     }
 
-    public static void evaluateDone(String input) {
+    public static void evaluateDone(String input) throws DukeException {
         String number = input.substring(4, input.length()).strip();
         if (number.isEmpty()) {
             dukeOutput("Invalid input! Mention a valid task number.");
         } else {
-            int taskNumber = Integer.parseInt(number);
-            if (taskNumber > numberOfTasks) {
-                dukeOutput("Task doesn't exist.");
-            } else {
-                tasks.get(taskNumber - 1).markAsDone();
-                String output = "Nice! I've marked this task as done:"
-                        + "\n  " + tasks.get(taskNumber - 1).toString();
-                dukeOutput(output);
+            try {
+                int taskNumber = Integer.parseInt(number);
+                if (taskNumber > numberOfTasks) {
+                    dukeOutput("Task doesn't exist.");
+                } else {
+                    tasks.get(taskNumber - 1).markAsDone();
+                    String output = "Nice! I've marked this task as done:"
+                            + "\n  " + tasks.get(taskNumber - 1).toString();
+                    dukeOutput(output);
+                }
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new DukeException("OOPS!!! The Done command must be followed by a valid task ID.");
             }
         }
     }
@@ -83,7 +87,7 @@ public class Duke {
                         + "  " + removedTask.toString()
                         + "\n" + getNumberOfTasks();
                 dukeOutput(message);
-            } catch (IllegalFormatException | IndexOutOfBoundsException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! Please enter a valid number after delete.");
             }
         }

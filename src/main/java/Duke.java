@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,6 +14,7 @@ public class Duke {
                 + indentation + "| |_| | |_| |   <  __/\n"
                 + indentation + "|____/ \\__,_|_|\\_\\___|\n";
         String input = "";
+        List<String> toDoList = new ArrayList<>();
         boolean bye = false;
         System.out.println(indentation + horizontalLine);
         System.out.println(indentation + "Hello from\n" + logo);
@@ -19,9 +23,22 @@ public class Duke {
         while (!bye) {
             input = scanner.nextLine();
             if (!input.equals("bye")) {
-                System.out.println(indentation + horizontalLine);
-                System.out.println(indentation + input);
-                System.out.println(indentation + horizontalLine + "\n");
+                if (input.equals("list")) {
+                    Iterator iterator = toDoList.iterator();
+                    int index = 1;
+                    System.out.println(indentation + horizontalLine);
+                    while (iterator.hasNext()) {
+                        System.out.println(indentation + index + ". " + iterator.next());
+                        index++;
+                    }
+                    System.out.println(indentation + horizontalLine + "\n");
+                }
+                else {
+                    System.out.println(indentation + horizontalLine);
+                    toDoList.add(input);
+                    System.out.println(indentation + "added: " + input);
+                    System.out.println(indentation + horizontalLine + "\n");
+                }
             }
             else {
                 bye = true;

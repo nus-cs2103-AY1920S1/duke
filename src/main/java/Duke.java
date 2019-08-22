@@ -1,35 +1,53 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private List<String> taskList;
+
+    public Duke() {
+       this.taskList = new ArrayList<>();
+    }
+
+
     public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String greetings = "Hello! I'm Duke\n" + "What can I do for you?";
-        String farewell = "Bye. Hope to see you again soon!";
 
         Scanner sc = new Scanner(System.in);
 
         // start interaction
-        this.handleOutput(greetings);
+        Response.NewGreetings().print();
+
         while (sc.hasNext()) {
             String command = sc.nextLine();
             switch (command) {
-                case "bye": this.handleOutput(farewell);
-                return;
-                default: this.handleOutput(command);
+                case "list": this.handleList();
+                case "bye": this.handleBye();
+                    return;  // exit
+                default: this.handleDefault(command);
             }
         }
         sc.close();
     }
 
-    private void handleOutput(String inputString) {
-        String divider = "____________________________________________________________";
-        System.out.println(divider);
-        System.out.println(inputString);
-        System.out.println(divider);
-        System.out.println();
+    private void handleBye() {
+        Response.NewFarewell().print();
+    }
+
+    private void handleDefault(String command) {
+        Response.NewEcho(command).print();
+    }
+
+    private void handleList() {
+        for (int i = 0; i < this.taskList.size(); i++) {
+
+            System.out.println();
+
+        }
     }
 }

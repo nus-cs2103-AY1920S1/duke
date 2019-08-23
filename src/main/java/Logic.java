@@ -1,10 +1,6 @@
 import exceptions.*;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
+import java.util.Scanner;
 
 public class Logic {
     private static final String BYE_COMMAND = "bye";

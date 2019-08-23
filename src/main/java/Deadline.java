@@ -1,5 +1,6 @@
 public class Deadline extends Task {
     public static final String REGEX = "/by";
+    public static final String INITIAL = "D";
 
     private String by;
 
@@ -9,11 +10,16 @@ public class Deadline extends Task {
     }
     @Override
     String getInitial() {
-        return "D";
+        return INITIAL;
     }
 
     @Override
-    String getAdditionalMessage() {
-        return "(by: " + by + ")";
+    String getDate() {
+        return by;
+    }
+
+    @Override
+    String getPrefix() {
+        return "by: ";
     }
 }

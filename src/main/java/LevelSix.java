@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,48 +12,60 @@ public class LevelSix {
         Scanner sc = new Scanner(System.in);
         String input = sc.next(); // Initial Input
         while (!input.equals("bye")) {
-            switch (input) {
-                case "list":
-                    echoList(list);
-                    break;
-                case "done":
-                    completeTask(sc.nextInt());
-                    break;
-                case "delete":
-                    deleteTask(sc.nextInt());
-                    break;
-                case "todo":
-                    createTodo(sc.nextLine());
-                    break;
-                case "deadline":
-                    createDeadline(sc.nextLine());
-                    break;
-                case "event":
-                    createEvent(sc.nextLine());
-                    break;
-                default:
-                    sc.nextLine();
-                    handleDefault();
-
+            try {
+                switch (input) {
+                    case "list":
+                        echoList(list);
+                        sc.nextLine();
+                        break;
+                    case "done":
+                        completeTask(sc.nextInt());
+                        break;
+                    case "delete":
+                        deleteTask(sc.nextInt());
+                        break;
+                    case "todo":
+                        createTodo(sc.nextLine());
+                        break;
+                    case "deadline":
+                        createDeadline(sc.nextLine());
+                        break;
+                    case "event":
+                        createEvent(sc.nextLine());
+                        break;
+                    default:
+                        System.out.println(input);
+                        sc.nextLine();
+                        handleDefault();
+                }
             }
-            input = sc.next();
+            catch (InputMismatchException e) {
+                System.out.println("Input Mismatch Exception caught");
+                sc.nextLine();
+            }
+            catch (IndexOutOfBoundsException e) {
+                System.out.println(String.format("Index Out of Bounds Exception: %s", e.getMessage()));
+            }
+            catch(DukeException e) {
+                System.out.println(e.getMessage());
+            }
+            catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+            finally {
+                input = sc.next();
+            }
         }
         exit();
     }
 
     // Helper Functions
-    private void createTodo(String input) {
-        try {
-            if (input.isEmpty())
-                throw new DukeException("The description of a todo cannot be empty.");
-            Task newTodo = new Todo(input);
-            list.add(newTodo);
-            echoEntry(newTodo.toString());
-        }
-        catch (DukeException e) {
-            System.out.println(e.getMessage());
-
-        }
+    private void createTodo(String input) throws DukeException{
+        if (input.isEmpty())
+            throw new DukeException("The description of a todo cannot be empty.");
+        Task newTodo = new Todo(input);
+        list.add(newTodo);
+        echoEntry(newTodo.toString());
     }
 
     private void greet() {
@@ -80,57 +93,44 @@ public class LevelSix {
         System.out.println("    ____________________________________________________________");
     }
 
-    private void completeTask(int entryNumber) {
+    private void completeTask(int entryNumber) throws IndexOutOfBoundsException{
         list.get(entryNumber - 1).setDone();
         System.out.println(String.format("    ____________________________________________________________\n" +
-                "     Nice! I've marked this task as done: \n" +
-                "       %s\n" +
-                "    ____________________________________________________________",
+                        "     Nice! I've marked this task as done: \n" +
+                        "       %s\n" +
+                        "    ____________________________________________________________",
                 list.get(entryNumber - 1).toString()));
     }
 
-    private void deleteTask(int entryNumber) {
+    private void deleteTask(int entryNumber) throws IndexOutOfBoundsException{
         System.out.println(String.format("    ____________________________________________________________\n" +
-                "     Noted. I've removed this task: \n" +
-                "       %s\n" +
-                "     Now you have %d tasks in the list.\n" +
-                "    ____________________________________________________________",
+                        "     Noted. I've removed this task: \n" +
+                        "       %s\n" +
+                        "     Now you have %d tasks in the list.\n" +
+                        "    ____________________________________________________________",
                 list.remove(entryNumber - 1).toString(), list.size()));
     }
 
-    private void createDeadline(String input) {
-        try {
-            String[] parsedDeadline = input.split(" \\/by ");
-            if (input.isEmpty())
-                throw new DukeException("The description of a deadline cannot be empty.");
-            if (parsedDeadline.length == 1)
-                throw new DukeException("Deadline is missing a deadline");
-            Task newDeadline = new Deadline(parsedDeadline[0], parsedDeadline[1]);
-            list.add(newDeadline);
-            echoEntry(newDeadline.toString());
-        }
-        catch (DukeException e) {
-            System.out.println(e.getMessage());
-
-        }
+    private void createDeadline(String input) throws DukeException {
+        String[] parsedDeadline = input.split(" \\/by ");
+        if (input.isEmpty())
+            throw new DukeException("The description of a deadline cannot be empty.");
+        if (parsedDeadline.length == 1)
+            throw new DukeException("Deadline is missing a deadline");
+        Task newDeadline = new Deadline(parsedDeadline[0], parsedDeadline[1]);
+        list.add(newDeadline);
+        echoEntry(newDeadline.toString());
     }
 
-    private void createEvent(String input) {
-        try {
-            String[] parsedEvent = input.split(" \\/at ");
-            if (input.isEmpty())
-                throw new DukeException("The description of an event cannot be empty.");
-            if (parsedEvent.length == 1)
-                throw new DukeException("Event is missing a location");
-            Task newEvent = new Event(parsedEvent[0], parsedEvent[1]);
-            list.add(newEvent);
-            echoEntry(newEvent.toString());
-
-        }
-        catch (DukeException e) {
-            System.out.println(e.getMessage());
-
-        }
+    private void createEvent(String input) throws DukeException{
+        String[] parsedEvent = input.split(" \\/at ");
+        if (input.isEmpty())
+            throw new DukeException("The description of an event cannot be empty.");
+        if (parsedEvent.length == 1)
+            throw new DukeException("Event is missing a location");
+        Task newEvent = new Event(parsedEvent[0], parsedEvent[1]);
+        list.add(newEvent);
+        echoEntry(newEvent.toString());
     }
 
     private void handleDefault() {

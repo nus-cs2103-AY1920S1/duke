@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class Duke {
 
     public static void main(String[] args) {
-        System.out.println("\u2713");
         ConsoleView view = new ConsoleView();
 
         IRepository<Task> repo = new TaskRepo();

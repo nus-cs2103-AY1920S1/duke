@@ -4,13 +4,13 @@ import java.util.stream.Collectors;
 
 public class Client {
     private static Client client = null;
-    private Storage storage;
+    private TaskList taskList;
     private Echoer echoer;
     private ExceptionHandler exceptionHandler;
 
 
     private Client() {
-        this.storage = new Storage();
+        this.taskList = new TaskList();
         this.echoer = new Echoer();
         this.exceptionHandler = new ExceptionHandler(this.echoer);
         this.echoer.greet();
@@ -88,15 +88,15 @@ public class Client {
             }
         }
 
-        this.storage.add(task);
-        int numOfTasks = this.storage.getSize();
+        this.taskList.add(task);
+        int numOfTasks = this.taskList.getSize();
         this.echoer.echo("Got it. I've added this task:"
                 , "  " + task
                 , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }
 
     private void listTasks() {
-        List<String> tasks = this.storage
+        List<String> tasks = this.taskList
                 .getList()
                 .stream()
                 .map(Task::toString)
@@ -109,16 +109,16 @@ public class Client {
     }
 
     private void completeTask(int ordering) {
-        Task task = this.storage.getList().get(ordering - 1);
+        Task task = this.taskList.getList().get(ordering - 1);
         task.markAsDone();
         this.echoer.echo("Nice! I've marked this task as done:", "  " + task);
     }
 
     private void deleteTask(int ordering) {
-        List<Task> taskList = this.storage.getList();
+        List<Task> taskList = this.taskList.getList();
         Task task = taskList.get(ordering - 1);
         taskList.remove(ordering - 1);
-        int numOfTasks = this.storage.getSize();
+        int numOfTasks = this.taskList.getSize();
         this.echoer.echo("Noted. I've removed this task:"
                 , "  " + task
                 , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));

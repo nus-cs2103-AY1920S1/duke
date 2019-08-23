@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage {
+public class TaskList {
     private List<Task> list;
 
-    Storage() {
+    TaskList() {
         this.list = new ArrayList<>();
     }
 

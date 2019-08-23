@@ -12,4 +12,8 @@ public class TaskList {
         this.taskLst = taskLst;
     }
 
+    public ArrayList<Task> getTaskLst() {
+        return taskLst;
+    }
+
 }

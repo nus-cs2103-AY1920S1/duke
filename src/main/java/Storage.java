@@ -53,10 +53,10 @@ public class Storage {
     }
 
     // Saving new task list to the hard disk
-    private static void writeToFile(String filePath) throws IOException {
+    public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String textToAdd = "";
-        for (Task task : Task.itemsLst) {
+        for (Task task : tasks.getTaskLst()) {
             textToAdd += task.fileString() + "\n";
         }
         fw.write(textToAdd);

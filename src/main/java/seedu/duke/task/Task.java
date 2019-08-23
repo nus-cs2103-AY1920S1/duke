@@ -55,6 +55,10 @@ public abstract class Task {
         return null;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }

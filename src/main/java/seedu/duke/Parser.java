@@ -16,7 +16,9 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Parser {
     private static final String BYE_COMMAND = "bye";
@@ -26,12 +28,9 @@ public class Parser {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     private static final String INDENT = "     ";
-    private static final String ADDED_MSG = "Got it. I've added this task: ";
-    private static final String TASK_REMOVED_MSG = "Noted. I've removed this task:";
-    private static final String TASK_DONE_MSG = "Nice! I've marked this task as done:";
-    private static final String LIST_MSG = "Here are the tasks in your list:";
 
     private Scanner sc;
     private TaskList taskList;
@@ -68,6 +67,9 @@ public class Parser {
             case DELETE_COMMAND:
                 delete(sc.nextLine().trim());
                 break;
+            case FIND_COMMAND:
+                find(sc.nextLine().trim());
+                break;
             default:
                 throw new UnknownCommandException();
             }
@@ -75,6 +77,17 @@ public class Parser {
             print(e.toString());
         }
         return 0;
+    }
+
+    private void find(String keyword) {
+        List<Task> list = taskList
+                .stream()
+                .filter(x -> x.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+        print("Here are the matching tasks in your list:");
+        for (int i = 0; i < list.size(); ++i) {
+            print((i + 1) + ". " + list.get(i));
+        }
     }
 
     private void done(String s) throws DukeException {
@@ -86,7 +99,7 @@ public class Parser {
             Task task = taskList.get(i);
             task.markAsDone();
             taskList.notifyChange();
-            print(TASK_DONE_MSG);
+            print("Nice! I've marked this task as done:");
             print("  " + task.toString());
         } catch (NumberFormatException e) {
             throw new ArgumentNotNumberException();
@@ -103,7 +116,7 @@ public class Parser {
             int i = Integer.parseInt(s);
             Task task = taskList.get(i);
             taskList.remove(i);
-            print(TASK_REMOVED_MSG);
+            print("Noted. I've removed this task:");
             print("  " + task.toString());
             printListSize();
         } catch (NumberFormatException e) {
@@ -114,9 +127,9 @@ public class Parser {
     }
 
     private void list() {
-        print(LIST_MSG);
+        print("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); ++i) {
-            print(i + " " + taskList.get(i));
+            print(i + ". " + taskList.get(i));
         }
     }
 
@@ -159,7 +172,7 @@ public class Parser {
     }
 
     private void printAdded(Task task) {
-        print(ADDED_MSG);
+        print("Got it. I've added this task: ");
         print("  " + task);
         printListSize();
     }

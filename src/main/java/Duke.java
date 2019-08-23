@@ -90,6 +90,34 @@ public class Duke {
         System.out.println(frontSpace + lowerLine);
     }
 
+    public static void deleteFeature() throws DukeException {
+        String deleteMessage1 = " Noted. I've removed this task: ";
+        String deleteMessage2 = " Now you have " + (myList.size() - 1) + " tasks in the list.";
+        System.out.print(frontSpace + upperLine);
+        //make sure it only have one number follow
+        if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
+            throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
+        } else if (oneLine.length != 1 && !oneLine[1].isBlank()
+                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
+            int i = Integer.parseInt(oneLine[1].trim());
+            if (i <= myList.size() && i > 0) {
+                System.out.println(frontSpace + deleteMessage1);
+                Task delete_task = myList.get(i - 1);
+                myList.remove(i - 1);
+                System.out.println(frontSpace + "   " + delete_task);
+                idx--;
+            } else {
+                throw new TaskNotExistException("task does not exist");
+            }
+        }else if (oneLine.length == 2 && oneLine[1].trim().split(" ").length != 1) {
+            throw new ExtraDescriptionException("There is extra description for delete");
+        } else {
+            throw new InvalidNumberException("the description should be a number");
+        }
+        System.out.println(frontSpace + deleteMessage2);
+        System.out.println(frontSpace + lowerLine);
+    }
+
     public static void listFeature() throws DukeException {
         System.out.print(frontSpace + upperLine);
         if (oneLine.length == 1 || oneLine[1].isBlank()) {
@@ -133,6 +161,8 @@ public class Duke {
                     listFeature();
                 } else if (firstWord.equals("done")) {
                     doneFeature();
+                } else if (firstWord.equals("delete")) {
+                    deleteFeature();
                 } else if (firstWord.equals("todo") || firstWord.equals("deadline")
                         || firstWord.equals("event")) {
                     childFeature();

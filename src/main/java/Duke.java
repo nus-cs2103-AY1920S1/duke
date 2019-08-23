@@ -11,7 +11,7 @@ public class Duke {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private static List<Task> taskList = new ArrayList<>();
+    private static final List<Task> taskList = new ArrayList<>();
 
     /**
      * Throws an exception if the given input does not have a valid format.
@@ -37,15 +37,13 @@ public class Duke {
             }
         } else if (input.startsWith("todo")) {
             if (input.length() < 6) {
-                throw new DukeException(
-                        "I can't see the description of your todo.");
+                throw new DukeException("I can't see the description of your todo.");
             }
         } else if (input.startsWith("event")) {
             if (input.length() < 7) {
                 throw new DukeException("I need to know the event description.");
             } else if (!input.contains(" /at ")) {
-                throw new DukeException(
-                        "I also need to know when your event is.");
+                throw new DukeException("I also need to know when your event is.");
             }
         } else if (input.startsWith("deadline")) {
             if (input.length() < 10) {
@@ -131,12 +129,12 @@ public class Duke {
      * @param task      Description of task and other relevant details.
      */
     private static void addNewTask(String task) {
-        if (task.startsWith("todo")) { // Todo
+        if (task.startsWith("todo")) {
             taskList.add(new Todo(task.substring(5)));
-        } else if (task.startsWith("event")) { // Event
+        } else if (task.startsWith("event")) {
             String[] taskDetails = task.substring(6).split(" /at ");
             taskList.add(new Event(taskDetails[0], taskDetails[1]));
-        } else if (task.startsWith("deadline")) { // Deadline
+        } else if (task.startsWith("deadline")) {
             String[] taskDetails = task.substring(9).split(" /by ");
             taskList.add(new Deadline(taskDetails[0], taskDetails[1]));
         } else {

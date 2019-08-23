@@ -1,8 +1,13 @@
-read book
-return book
-buy bread
+todo read book
+deadline buy fruits /by Tue
+event project meeting /at Mon 2-4pm
 list
+eatsomefreepizza
+e
 done 1
 done 3
+delete 1
+list
+delete 2
 list
 bye

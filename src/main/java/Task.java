@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,14 +25,16 @@ public abstract class Task {
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '|') {
                         itemsLst.add(new Deadline(line.substring(0, i - 1),
-                                line.substring(i + 2), s.charAt(4) == '1' ? true : false));
+                            LocalDateTime.parse(line.substring(i + 2), DateTimeFormatter.ofPattern("d MMMM yyyy, ha")),
+                                s.charAt(4) == '1' ? true : false));
                     }
                 }
             } else if (s.charAt(0) == 'E') {
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '|') {
                         itemsLst.add(new Event(line.substring(0, i - 1),
-                                line.substring(i + 2), s.charAt(4) == '1' ? true : false));
+                            LocalDateTime.parse(line.substring(i + 2), DateTimeFormatter.ofPattern("d MMMM yyyy, ha")),
+                                s.charAt(4) == '1' ? true : false));
                     }
                 }
             } else {

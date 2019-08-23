@@ -1,20 +1,23 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDateTime at;
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
-    }
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha")) + ")";
+}
 
     @Override
     public String fileString() {
-        return "E" + super.fileString() + " | " + this.at;
+        return "E" + super.fileString() + " | " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha"));
     }
 
 }

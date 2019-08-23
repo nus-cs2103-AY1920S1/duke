@@ -3,7 +3,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -107,9 +108,10 @@ public class Duke {
                                         break;
                                     }
                                 }
-                                Task.itemsLst.add(new Deadline(description, by, false));
-                            } else if (command.startsWith("event")) {
-                            // Add an Event task
+                                Task.itemsLst.add(new Deadline(description,
+                                    LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
+                                        false));
+                            } else if (command.startsWith("event")) { // assume that task is an event
                                 Scanner taskSc = new Scanner(command);
                                 taskSc.next();
                                 String at = taskSc.nextLine().substring(1);
@@ -125,7 +127,9 @@ public class Duke {
                                         break;
                                     }
                                 }
-                                Task.itemsLst.add(new Event(description, at, false));
+                                Task.itemsLst.add(new Event(description,
+                                    LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
+                                        false));
                             } else {
                                 throw new DukeException("     \u2639 OOPS!!! I'm sorry, " +
                                         "but I don't know what that means :-(");

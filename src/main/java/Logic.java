@@ -1,5 +1,9 @@
 import exceptions.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Logic {
@@ -17,43 +21,48 @@ public class Logic {
     private static final String TASK_DONE_MSG = "Nice! I've marked this task as done:";
     private static final String LIST_MSG = "Here are the tasks in your list:";
 
+    private static final String FILE_PATH = "data/duke.txt";
+
     private Scanner sc;
-    private List<Task> taskList;
+    private TaskList taskList;
 
     Logic(Scanner sc) {
         this.sc = sc;
-        taskList = new ArrayList<>();
+        try {
+            taskList = new TaskList(FILE_PATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     int process(String command) {
         if (command.length() == 0) {
             return 0;
         }
-
         try {
             switch (command) {
-                case TODO_COMMAND:
-                    addTodo(sc.nextLine());
-                    break;
-                case DEADLINE_COMMAND:
-                    addDeadline(sc.nextLine());
-                    break;
-                case EVENT_COMMAND:
-                    addEvent(sc.nextLine());
-                    break;
-                case BYE_COMMAND:
-                    return -1;
-                case LIST_COMMAND:
-                    list();
-                    break;
-                case DONE_COMMAND:
-                    done(sc.nextLine().trim());
-                    break;
-                case DELETE_COMMAND:
-                    delete(sc.nextLine().trim());
-                    break;
-                default:
-                    throw new UnknownCommandException();
+            case TODO_COMMAND:
+                addTodo(sc.nextLine());
+                break;
+            case DEADLINE_COMMAND:
+                addDeadline(sc.nextLine());
+                break;
+            case EVENT_COMMAND:
+                addEvent(sc.nextLine());
+                break;
+            case BYE_COMMAND:
+                return -1;
+            case LIST_COMMAND:
+                list();
+                break;
+            case DONE_COMMAND:
+                done(sc.nextLine().trim());
+                break;
+            case DELETE_COMMAND:
+                delete(sc.nextLine().trim());
+                break;
+            default:
+                throw new UnknownCommandException();
             }
         } catch (DukeException e) {
             print(e.toString());
@@ -69,6 +78,7 @@ public class Logic {
             int i = Integer.parseInt(s) - 1;
             Task task = taskList.get(i);
             task.markAsDone();
+            taskList.notifyChange();
             print(TASK_DONE_MSG);
             print("  " + task.toString());
         } catch (NumberFormatException e) {

@@ -1,5 +1,6 @@
 public class Event extends Task {
     public static final String REGEX = "/at";
+    public static final String INITIAL = "E";
 
     private String at;
 
@@ -9,11 +10,16 @@ public class Event extends Task {
     }
     @Override
     String getInitial() {
-        return "E";
+        return INITIAL;
     }
 
     @Override
-    String getAdditionalMessage() {
-        return "(at: " + at + ")";
+    String getDate() {
+        return at;
+    }
+
+    @Override
+    String getPrefix() {
+        return "at: ";
     }
 }

@@ -10,14 +10,14 @@ public class DukeIO {
 	private static final String lineRule =
 		"____________________________________________________________";
 
-	private final Map<String, Predicate<String>> commandMap
+	private final Map<String, Predicate<Command>> commandMap
 		= new HashMap<>();
-	private Predicate<String> defaultHandler = null;
+	private Predicate<Command> defaultHandler = null;
 
-	private final Scanner parser;
+	private final Scanner scanner;
 
 	public DukeIO() {
-		this.parser = new Scanner(System.in);
+		this.scanner = new Scanner(System.in);
 	}
 
 	public void say(String... lines) {
@@ -37,36 +37,31 @@ public class DukeIO {
 		System.out.println();
 	}
 
-	public void bindCommand(String command, Predicate<String> handler) {
+	public void bindCommand(String command, Predicate<Command> handler) {
 		this.commandMap.put(command, handler);
 	}
 
-	public void setUnknownCommandHandler(Predicate<String> handler) {
+	public void setUnknownCommandHandler(Predicate<Command> handler) {
 		this.defaultHandler = handler;
 	}
 
 	public void listen() {
 		//While there is still input from user
-		while(parser.hasNextLine()) {
+		while(scanner.hasNextLine()) {
 			//Read single line of user input, and remove extra spaces
-			String userInput = parser.nextLine().trim();
+			String userInput = scanner.nextLine();
 
-			int spacePos = userInput.indexOf(' ');
-			String command, rest;
-			if(spacePos == -1) {
-				command = userInput;
-				rest = null;
-			} else {
-				command = userInput.substring(0, spacePos);
-				rest = userInput.substring(spacePos+1);
-			}
+			Command command = Command.parse(userInput);
 
-			Predicate<String> cmdHandler = commandMap.get(command);
+			Predicate<Command> cmdHandler = commandMap.get(command.type);
 			boolean shouldExit;
 			if(cmdHandler != null) {
-				shouldExit = cmdHandler.test(rest);
+				shouldExit = cmdHandler.test(command);
+			} else if(defaultHandler != null) {
+				shouldExit = defaultHandler.test(command);
 			} else {
-				shouldExit = defaultHandler.test(userInput);
+				say(String.format("Unknown command %s", command.type));
+				shouldExit = false;
 			}
 
 			if(shouldExit) {

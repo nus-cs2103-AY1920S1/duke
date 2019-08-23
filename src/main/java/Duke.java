@@ -27,12 +27,12 @@ public class Duke {
 				);
 	}
 
-	private boolean handleBye(String input) {
+	private boolean handleBye(Command input) {
 		this.io.say("Bye. Hope to see you again soon!");
 		return true;
 	}
 
-	private boolean displayList(String input) {
+	private boolean displayList(Command input) {
 		this.io.say(this.taskList.stream()
 				.map(Object::toString)
 				.map(new CounterDecorator(1))
@@ -40,26 +40,27 @@ public class Duke {
 		return false;
 	}
 
-	private static final String bySwitch = " /by ";
-	private boolean makeDeadlineTask(String input) {
-		int deadlineIndex = input.indexOf(bySwitch);
-		String description = input.substring(0, deadlineIndex);
-		String deadline = input.substring(deadlineIndex + bySwitch.length());
+	private boolean makeDeadlineTask(Command input) {
+		String description = input.arguments;
+		String deadline = input.namedArguments.get("by");
+		if(deadline == null) {
+			deadline = "unknown";
+		}
+
 		DeadlineTask task = new DeadlineTask(description, deadline);
+
 		this.addTask(task);
 		return false;
 	}
-
-	private boolean makeToDoTask(String input) {
-		Task task = new Task(input);
-		this.addTask(task);
+	private boolean makeToDoTask(Command input) {
+		this.addTask(new Task(input.arguments));
 		return false;
 	}
 
-	private boolean markAsDone(String input) {
+	private boolean markAsDone(Command input) {
 		int index;
 		try {
-			index = Integer.parseInt(input);
+			index = Integer.parseInt(input.arguments);
 		} catch(NumberFormatException e) {
 			this.io.say("Index provided was not an integer!");
 			return false;
@@ -84,7 +85,7 @@ public class Duke {
 		this.io.bindCommand("done", this::markAsDone);
 		this.io.bindCommand("bye", this::handleBye);
 		this.io.bindCommand("deadline", this::makeDeadlineTask);
-		this.io.setUnknownCommandHandler(this::makeToDoTask);
+		this.io.bindCommand("todo", this::makeToDoTask);
 
 		this.taskList = new ArrayList<>();
 	}

@@ -5,29 +5,52 @@ class ToDoList {
     ToDoList() {
         taskList = new ArrayList<>(100);
     }
-    void addTask(String task, TaskType type) {
-        System.out.println("Got it. I've added this task:");
+    void addTask(String task, TaskType type) throws EmptyEventDscDukeException, EmptyDeadlineDscDukeException, NoDateDukeException {
         Task addedTask;
+        String date;
         switch (type) {
             case TODO:
                 addedTask = new TodoTask(task);
                 taskList.add(addedTask);
+                System.out.println("Got it. I've added this task:");
                 System.out.println(addedTask);
                 break;
             case DEADLINE:
+                if (task.indexOf('/') == -1) {
+                    throw new NoDateDukeException("/ wasn't found");
+                }
+                if (task.indexOf('/') == 0) {
+                    throw new EmptyDeadlineDscDukeException("Description for deadline is empty.");
+                }
+                date = task.substring(task.indexOf('/') + 1);
+                if (date.equals("")) {
+                    throw new NoDateDukeException("No date provided");
+                }
                 addedTask = new Deadline(
                     task.substring(0, task.indexOf('/') - 1),
-                    task.substring(task.indexOf('/') + 1)
+                    date
                 );
                 taskList.add(addedTask);
+                System.out.println("Got it. I've added this task:");
                 System.out.println(addedTask);
                 break;
             case EVENT:
+                if (task.indexOf('/') == -1) {
+                    throw new NoDateDukeException("No date found");
+                }
+                if (task.indexOf('/') == 0) {
+                    throw new EmptyEventDscDukeException("Description for event is empty.");
+                }
+                date = task.substring(task.indexOf('/') + 1);
+                if (date.equals("")) {
+                    throw new NoDateDukeException("No date provided");
+                }
                 addedTask = new Event(
                         task.substring(0, task.indexOf('/') - 1),
-                        task.substring(task.indexOf('/') + 1)
+                        date
                 );
                 taskList.add(addedTask);
+                System.out.println("Got it. I've added this task:");
                 System.out.println(addedTask);
                 break;
             default:

@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,31 +16,52 @@ public class Duke {
         boolean dukeIsOn = true;
         ToDoList myTasks = new ToDoList();
         while(dukeIsOn){
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             splitInput = input.split(" ");
-            switch (splitInput[0]) {
-                case "list":
-                    myTasks.listAllTasks();
-                    break;
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    dukeIsOn = false;
-                    break;
-                case "done":
-                    myTasks.checkTask(Integer.parseInt(splitInput[1]) - 1);
-                    break;
-                case "todo":
-                    myTasks.addTask(input.substring(5), TaskType.TODO);
-                    break;
-                case "deadline":
-                    myTasks.addTask(input.substring(9), TaskType.DEADLINE);
-                    break;
-                case "event":
-                    myTasks.addTask(input.substring(6), TaskType.EVENT);
-                    break;
-                default:
-                    System.out.println("error in input");
-                    break;
+            try {
+                switch (splitInput[0]) {
+                    case "list":
+                        myTasks.listAllTasks();
+                        break;
+                    case "bye":
+                        System.out.println("Bye. Hope to see you again soon!");
+                        dukeIsOn = false;
+                        break;
+                    case "done":
+                        myTasks.checkTask(Integer.parseInt(splitInput[1]) - 1);
+                        break;
+                    case "todo":
+                        if (input.length() <= 4) {
+                            throw (new EmptyTodoDscDukeException("todo task has empty description."));
+                        }
+                        myTasks.addTask(input.substring(5), TaskType.TODO);
+                        break;
+                    case "deadline":
+                        if (input.length() <= 8) {
+                            throw (new EmptyDeadlineDscDukeException("deadline task has empty description."));
+                        }
+                        myTasks.addTask(input.substring(9), TaskType.DEADLINE);
+                        break;
+                    case "event":
+                        if (input.length() <= 5) {
+                            throw (new EmptyEventDscDukeException("event task has empty description."));
+                        }
+                        myTasks.addTask(input.substring(6), TaskType.EVENT);
+                        break;
+                    default:
+                        throw(new UnknownCmdDukeException(splitInput[0] + " is not a known command."));
+
+                }
+            } catch (UnknownCmdDukeException e){
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (EmptyTodoDscDukeException e) {
+                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            } catch (EmptyDeadlineDscDukeException e) {
+                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+            } catch (EmptyEventDscDukeException e) {
+                System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+            } catch (NoDateDukeException e) {
+                System.out.println("☹ OOPS!!! You need to provide a date, with / to indicate it:-(");
             }
         }
     }

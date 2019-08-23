@@ -14,4 +14,4 @@ src/main/resources/docs/
 bin/
 
 # java class files
-.class
+*.class

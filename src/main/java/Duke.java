@@ -16,6 +16,17 @@ public class Duke {
 	private DukeIO io;
 	private final List<Task> taskList;
 
+	private void addTask(Task t) {
+		this.taskList.add(t);
+		this.io.say(
+				"Got it. I've added this task:",
+				"  " + t,
+				String.format("Now you have %d task%s in the list.",
+					this.taskList.size(),
+					this.taskList.size() == 1 ? "" : "s")
+				);
+	}
+
 	private boolean handleBye(String input) {
 		this.io.say("Bye. Hope to see you again soon!");
 		return true;
@@ -30,19 +41,18 @@ public class Duke {
 	}
 
 	private static final String bySwitch = " /by ";
-	private boolean addDeadlineTask(String input) {
+	private boolean makeDeadlineTask(String input) {
 		int deadlineIndex = input.indexOf(bySwitch);
 		String description = input.substring(0, deadlineIndex);
 		String deadline = input.substring(deadlineIndex + bySwitch.length());
 		DeadlineTask task = new DeadlineTask(description, deadline);
-		this.taskList.add(task);
-		this.io.say("added: " + task);
+		this.addTask(task);
 		return false;
 	}
 
-	private boolean addTask(String input) {
-		this.taskList.add(new Task(input));
-		this.io.say("added: " + input);
+	private boolean makeToDoTask(String input) {
+		Task task = new Task(input);
+		this.addTask(task);
 		return false;
 	}
 
@@ -73,8 +83,8 @@ public class Duke {
 		this.io.bindCommand("list", this::displayList);
 		this.io.bindCommand("done", this::markAsDone);
 		this.io.bindCommand("bye", this::handleBye);
-		this.io.bindCommand("deadline", this::addDeadlineTask);
-		this.io.setUnknownCommandHandler(this::addTask);
+		this.io.bindCommand("deadline", this::makeDeadlineTask);
+		this.io.setUnknownCommandHandler(this::makeToDoTask);
 
 		this.taskList = new ArrayList<>();
 	}

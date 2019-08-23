@@ -5,9 +5,13 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 asdafs
 list
+done 1
+list
 delete 2
+list
 delete 5
 delete 0
+list
 event
 event project meeting
 deadline

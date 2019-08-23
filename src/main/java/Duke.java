@@ -1,6 +1,9 @@
 import java.io.*;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
 
@@ -133,12 +136,13 @@ public class Duke {
                 try {
                     int date = input.indexOf("/by");
                     //split input into [deadline] [description] [date]
-                    Deadline newTask = new Deadline(input.substring(9, date), input.substring(date + 3));
+                    Date deadLineDate = convertStringToDeadline(input.substring(date + 3));
+                    Deadline newTask = new Deadline(input.substring(9, date), deadLineDate);
                     items.add(newTask);
                     String message = generateMessage(newTask);
                     System.out.println(message);
                     input = sc.nextLine();
-                } catch (StringIndexOutOfBoundsException e) {
+                } catch (StringIndexOutOfBoundsException | ParseException e) {
                     sb.append(border + "\n");
                     sb.append("Invalid Deadline's arguments \n");
                     sb.append(border + "\n");
@@ -150,13 +154,16 @@ public class Duke {
             } else if (input.toLowerCase().contains("event")) {
                 try {
                     int time = input.indexOf("/at");
+                    int timeRange = input.indexOf("-");
                     //split input into [event] [description] [timing]
-                    Event newTask = new Event(input.substring(6, time), input.substring(time + 3));
+                    Date eventDate = convertStringToEventStart(input.substring(time + 3, timeRange));
+                    Date eventEnd = convertStringToEventEnd(input.substring(timeRange + 1));
+                    Event newTask = new Event(input.substring(6, time), eventDate, eventEnd);
                     items.add(newTask);
                     String message = generateMessage(newTask);
                     System.out.println(message);
                     input = sc.nextLine();
-                } catch (StringIndexOutOfBoundsException e) {
+                } catch (StringIndexOutOfBoundsException | ParseException e) {
                     sb.append(border + "\n");
                     sb.append("Invalid Event's arguments \n");
                     sb.append(border + "\n");
@@ -200,6 +207,19 @@ public class Duke {
         return sb.toString();
     }
 
+    private static Date convertStringToDeadline(String input) throws ParseException {
+        Date result = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(input);
+        return result;
+    }
 
+    private static Date convertStringToEventStart(String input) throws ParseException {
+        Date result = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(input);
+        return result;
+    }
+
+    private static Date convertStringToEventEnd(String input) throws ParseException {
+        Date result = new SimpleDateFormat("HH:mm").parse(input);
+        return result;
+    }
 
 }

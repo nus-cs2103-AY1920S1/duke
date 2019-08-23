@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,9 +9,11 @@ public class Duke {
 
     private static final String indentation = "     ";
     private static final String separator = "    ____________________________________________________________\n";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final ArrayList<Task> tasks = new ArrayList<>();
+
 
     public static void main(String[] args) {
 
@@ -83,15 +88,17 @@ public class Duke {
                 if (command == Command.DEADLINE) {
                     details = description.split(" /by ");
                     if (details.length != 2) {
-                        throw new DukeException ("\"☹ OOPS!!! The description of a deadline is not enough.");
+                        throw new DukeException ("☹ OOPS!!! The description of a deadline is not enough.");
                     }
-                    newTask = new Deadline(details[0], details[1]);
+                    newTask = new Deadline(details[0], LocalDateTime.parse(details[1],formatter));
                 } else {
                     details = description.split(" /at ");
                     if (details.length != 2) {
-                        throw new DukeException ("\"☹ OOPS!!! The description of a event is not enough.");
+                        throw new DukeException ("☹ OOPS!!! The description of a event is not enough.");
                     }
-                    newTask = new Event(details[0], details[1]);
+                    //format: /at 2/2/1999 12:00-14:00
+                    String[] times = details[1].split("-");
+                    newTask = new Event(details[0], LocalDateTime.parse(times[0],formatter), LocalTime.parse(times[1]));
                 }
             }
             tasks.add(newTask);

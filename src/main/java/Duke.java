@@ -44,7 +44,7 @@ public class Duke {
 
                 } else if (taskType.equals("done")) {
 
-                    taskNum = Integer.parseInt(command.substring(5));
+                    taskNum = Integer.parseInt(command.substring(5)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
                     tasks.get(taskNum).setDone();
 
@@ -112,12 +112,34 @@ public class Duke {
 
                     System.out.println(output);
 
+                } else if (taskType.equals("delete")){
+
+                    taskNum = Integer.parseInt(command.substring(7)); // NTS: check for index outofbounds
+                    taskNum--; // ArrayList index == taskNum - 1
+
+                    if (taskNum >= tasks.size()){
+                        throw new DukeException("Task no. " + (taskNum+1) + " does not exist");
+                    }
+
+                    Task taskToDelete = tasks.get(taskNum);
+                    tasks.remove(taskNum);
+
+                    output = underscore + "     Noted. I've removed this task.\n       " +
+                            taskToDelete.toString() + "\n     Now you have " +
+                            tasks.size() + " tasks in the list.\n" + underscore;
+
+                    System.out.println(output);
+                    taskToDelete = null;
+
+
                 } else { // An invalid task command is given
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e){
                 System.out.println(e.getMessage());
             } catch (StringIndexOutOfBoundsException e){
+                System.out.println(e.getMessage());
+            } catch (NumberFormatException e){
                 System.out.println(e.getMessage());
             }
 

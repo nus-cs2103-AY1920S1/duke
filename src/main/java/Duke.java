@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -5,10 +6,50 @@ import main.task.*;
 
 public class Duke {
     public static void main(String[] args) {
-        //Level 5
+        //Level 7
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
+        File data = new File("../src/main/task/Dukedata.txt");
+        FileWriter fileWriter = null;
+        try {
+            if (data.createNewFile()) {
+                System.out.println("Previous file not found. Creating a new file");
+            } else {
+                //read file
+                System.out.println("Previous file is found in the database. Retrieving information from there");
+                FileReader fileReader = new FileReader(data);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                while (bufferedReader.ready()) {
+                    String dataRead = bufferedReader.readLine();
+                    String[] dataReads = dataRead.split("|");
+                    for (String s : dataReads) {
+                        System.out.println(s);
+                    }
+                    if (dataReads[0].equals("T")) {
+                        Task todo = new ToDo(dataReads[2]);
+                        tasks.add(todo);
+                    } else if (dataReads[0].equals("E")) {
+                        Task event = new Event(dataReads[2], dataReads[3]);
+                        tasks.add(event);
+                    } else if (dataReads[0].equals("D")) {
+                        Task deadline = new Deadline(dataReads[2], dataReads[3]);
+                        tasks.add(deadline);
+                        System.out.println(dataReads[2]);
+                        System.out.println(dataReads[3]);
+                    }
+                }
+                System.out.print("Here are your previous tasks:\n");
+                for (int i = 0; i < tasks.size(); i = i + 1) {
+                    System.out.print(tasks.get(i).toString() + "\n");
+                }
+            }
+            fileWriter = new FileWriter(data, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PrintWriter writer = new PrintWriter(fileWriter);
+
         System.out.print("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
@@ -43,6 +84,18 @@ public class Duke {
                 sc2.next();
                 int taskNumToRemove = sc2.nextInt();
                 Task removed = tasks.remove(taskNumToRemove - 1);
+                try {
+                    data.delete();
+                    data.createNewFile();
+                    fileWriter = new FileWriter(data);
+                    writer = new PrintWriter(fileWriter);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        writer.println(tasks.get(i).toDataFormat());
+                        writer.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.print("    ____________________________________________________________\n" +
                         "     Noted. I've removed this task: \n" +
                         "       " + removed.toString() + "\n" +
@@ -92,6 +145,19 @@ public class Duke {
                     continue;
                 }
                 tasks.add(t);
+
+                try {
+                    data.delete();
+                    data.createNewFile();
+                    fileWriter = new FileWriter(data);
+                    writer = new PrintWriter(fileWriter);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        writer.println(tasks.get(i).toDataFormat());
+                        writer.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.print("    ____________________________________________________________\n" +
                             "     Got it. I've added this task: \n" +
                             "       "+ t.toString() + "\n" +

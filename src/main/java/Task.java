@@ -1,18 +1,13 @@
 public class Task {
-    private int id;
     private String description;
     public boolean done;
 
-    public Task(int id, String description) {
-        this.id = id;
+    public Task(String description) {
         this.description = description;
         this.done = false;
     }
 
-    public int getId() {
-        return this.id;
-    }
-    public String getTask() {
+    public String getDescription() {
         return this.description;
     }
     public boolean isDone() {

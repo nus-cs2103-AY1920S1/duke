@@ -5,6 +5,7 @@ public class Duke {
 
     public static void main(String[] args) {
         //dukeSayHello();
+        //comment on branch
         greetings();
 
         Scanner sc = new Scanner(System.in);

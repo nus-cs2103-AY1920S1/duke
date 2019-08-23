@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
 
 public class Duke {
 
@@ -72,6 +73,8 @@ public class Duke {
                 sendMessage(error.toString());
                 sendLine();
             }
+
+            writeToFile();
         }
 
         sendLine();
@@ -187,5 +190,18 @@ public class Duke {
 
     public static void sendMessage(String input) {
         System.out.println(" " + input);
+    }
+
+    public static void writeToFile() {
+        try {
+            FileWriter writer = new FileWriter("output.txt");
+            for (int i = 0; i < tasks.size(); i ++) {
+                writer.write(tasks.get(i).toString());
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (Exception e) {
+
+        }
     }
 }

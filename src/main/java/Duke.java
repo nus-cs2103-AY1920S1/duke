@@ -20,29 +20,30 @@ public class Duke {
 
         while (true) {
 
-            String input = sc.nextLine();
+            if(sc.hasNextLine()) {
+                String input = sc.nextLine();
 
-            if (isBye(input)) {
-                printGoodbyeMessage();
-                break;
-            }
+                if (isBye(input)) {
+                    printGoodbyeMessage();
+                    break;
+                }
 
-            if (isList(input)) {
-                printList();
-            } else if (input.startsWith("done")) {
-                processDoneTask(input);
-            } else if (input.startsWith("delete")) {
-                processDeletedTask(input);
-            }
-            else {
-                try {
-                    processInputTask(input);
-                } catch(InvalidInputException e) {
-                    System.out.println("InvalidInputException occurred: " + e);
-                    System.out.println();
+                if (isList(input)) {
+                    printList();
+                } else if (input.startsWith("done")) {
+                    processDoneTask(input);
+                } else if (input.startsWith("delete")) {
+                    processDeletedTask(input);
+                }
+                else {
+                    try {
+                        processInputTask(input);
+                    } catch(InvalidInputException e) {
+                        System.out.println("InvalidInputException occurred: " + e);
+                        System.out.println();
+                    }
                 }
             }
-
         }
 
     }

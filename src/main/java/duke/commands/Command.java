@@ -4,6 +4,7 @@ import duke.Duke;
 import duke.DukeException;
 
 public abstract class Command {
+
     private static final String EMPTY_TODO_STRING = "☹ OOPS!!! The description of a todo cannot be empty.";
     private static final String EMPTY_EVENT_STRING = "☹ OOPS!!! The description of a event cannot be empty.";
     private static final String EMPTY_DEADLINE_STRING = "☹ OOPS!!! The description of a deadline cannot be empty.";
@@ -11,6 +12,7 @@ public abstract class Command {
 
     protected Duke duke;
     protected String input;
+    protected String[] args;
 
     public Command(Duke duke, String input) {
         this.duke = duke;
@@ -24,13 +26,13 @@ public abstract class Command {
         int numArgs = args.length;
         switch(args[0]) {
             case "bye":
-                return new ByeCommand(duke, input);
+                return ByeCommand.create(duke, input, args);
             case "list":
-                return new ListCommand(duke, input);
+                return ListCommand.create(duke, input, args);
             case "done":
-                return new DoneCommand(duke, input);
+                return DoneCommand.create(duke, input, args);
             case "delete":
-                return new DeleteCommand(duke, input);
+                return DeleteCommand.create(duke, input, args);
             case "todo":
                 if (numArgs == 1) {
                     throw new DukeException(EMPTY_TODO_STRING);

@@ -24,7 +24,7 @@ public class Duke {
         String input;
         say(HELLO_STRING);
         while (running) {
-            input = scanner.nextLine();
+            input = scanner.nextLine().trim();
             try {
                 Command command = Command.create(this, input);
                 command.execute();

@@ -1,66 +1,35 @@
-import exceptions.DukeException;
+import task.Task;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList extends ArrayList<Task> {
-    private String filePath;
+    private Storage storage;
 
-    TaskList(String filePath) {
-        this.filePath = filePath;
+    TaskList(Storage storage) {
+        this.storage = storage;
 
-        try {
-            String data = Files.readString(Path.of(filePath));
-            Scanner sc = new Scanner(data);
-            while (sc.hasNextLine()) {
-                super.add(Task.parse(sc.nextLine()));
-            }
-        } catch (IOException e) {
-            // no such file
-        } catch (DukeException e) {
-            e.toString();
-        }
     }
 
     @Override
     public boolean add(Task task) {
         boolean added = super.add(task);
-        save();
+        storage.save(this);
         return added;
     }
 
     @Override
     public Task remove(int index) {
-        Task removed = super.remove(index);
-        save();
+        Task removed = super.remove(index - 1);
+        storage.save(this);
         return removed;
     }
 
-    private void save() {
-        StringBuilder sb = new StringBuilder();
-        for (Task task : this) {
-            sb.append(task.getStringRepresentation());
-            sb.append("\n");
-        }
-        String text = sb.toString();
-        BufferedWriter output = null;
-        try {
-            File file = new File(filePath);
-            output = new BufferedWriter(new FileWriter(file));
-            output.write(text);
-            output.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public Task get(int index) {
+        return super.get(index - 1);
     }
 
     public void notifyChange() {
-        save();
+        storage.save(this);
     }
 }

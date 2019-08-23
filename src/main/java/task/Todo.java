@@ -1,7 +1,9 @@
+package task;
+
 public class Todo extends Task {
     public static final String INITIAL = "T";
 
-    Todo(String desc) {
+    public Todo(String desc) {
         super(desc.trim());
     }
 

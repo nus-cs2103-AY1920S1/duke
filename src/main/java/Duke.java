@@ -1,46 +1,35 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String BREAKLINE = "    ____________________________________________________________";
-    private static String GREETING = "     Hello! I'm Duke\n" +
-            "     What can I do for you?";
-    private static String GOODBYE = "     Bye. Hope to see you again soon!";
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    private Ui ui;
+    private Storage storage;
+    private Parser parser;
+    private Scanner sc;
 
-        printBreakLine();
-        greeting();
-        printBreakLine();
+    Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        sc = new Scanner(System.in);
+        parser = new Parser(sc, storage);
+    }
 
-        Scanner sc = new Scanner(System.in);
-        Logic logic = new Logic(sc);
+    void run() {
+        ui.greeting();
         int response;
         do {
-            System.out.println();
+            ui.printLine();
             String command = sc.next();
-            printBreakLine();
-            response = logic.process(command);
+            ui.printBreakLine();
+            response = parser.process(command);
             if (response == -1) {
-                goodbye();
+                ui.goodbye();
             }
-            printBreakLine();
+            ui.printBreakLine();
         } while (response != -1);
     }
 
-    private static void printBreakLine() {
-        System.out.println(BREAKLINE);
-    }
-
-    private static void greeting() {
-        System.out.println(GREETING);
-    }
-
-    private static void goodbye() {
-        System.out.println(GOODBYE);
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 }

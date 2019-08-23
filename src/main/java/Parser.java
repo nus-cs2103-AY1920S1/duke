@@ -1,8 +1,12 @@
 import exceptions.*;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 import java.util.Scanner;
 
-public class Logic {
+public class Parser {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
@@ -20,7 +24,7 @@ public class Logic {
     private Scanner sc;
     private TaskList taskList;
 
-    Logic(Scanner sc, Storage storage) {
+    Parser(Scanner sc, Storage storage) {
         this.sc = sc;
         taskList = new TaskList(storage);
         taskList.addAll(storage.load());

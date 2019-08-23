@@ -1,18 +1,20 @@
+package task;
+
 import exceptions.DateParseException;
 
 import java.text.ParseException;
 import java.util.Date;
 
-public class Deadline extends Task {
-    public static final String REGEX = "/by";
-    public static final String INITIAL = "D";
+public class Event extends Task {
+    public static final String REGEX = "/at";
+    public static final String INITIAL = "E";
 
-    private Date by;
+    private Date at;
 
-    Deadline(String desc, String by) throws DateParseException {
+    public Event(String desc, String at) throws DateParseException {
         super(desc.trim());
         try {
-            this.by = INPUT_DATE_FORMAT.parse(by);
+            this.at = INPUT_DATE_FORMAT.parse(at);
         } catch (ParseException e) {
             throw new DateParseException();
         }
@@ -24,11 +26,11 @@ public class Deadline extends Task {
 
     @Override
     Date getDate() {
-        return by;
+        return at;
     }
 
     @Override
     String getPrefix() {
-        return "by: ";
+        return "at: ";
     }
 }

@@ -1,3 +1,5 @@
+package task;
+
 import exceptions.DukeException;
 
 import java.text.SimpleDateFormat;
@@ -12,7 +14,7 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
-    static Task parse(String str) throws DukeException {
+    public static Task parse(String str) throws DukeException {
         String[] data = str.split(DELIMITER);
         String type = data[0];
         boolean isDone = Integer.parseInt(data[1]) == 1;
@@ -57,11 +59,11 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 
-    String getStringRepresentation() {
+    public String getStringRepresentation() {
         StringBuilder sb = new StringBuilder();
         sb.append(getInitial());
         sb.append(DELIMITER);

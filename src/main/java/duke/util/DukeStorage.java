@@ -25,7 +25,7 @@ public class DukeStorage {
      * This constructor takes in the path of the data file stored on the hard disk.
      * @param taskFilePath Relative/Full path to the data file.
      */
-    public DukeStorage (String taskFilePath) throws NullPointerException {
+    public DukeStorage(String taskFilePath) throws NullPointerException {
         this.taskFilePath = new File(taskFilePath);
     }
 
@@ -40,7 +40,7 @@ public class DukeStorage {
     /**
      * Initializes the BufferedReader object to prepare for reading from the specified file in {@link #taskFilePath}. If
      * the data file does not exist, create it along with the necessary folders.
-     * @throws IOException
+     * @throws IOException File parsing error.
      */
     private void initializeFileInputStream() throws IOException {
         if (!taskFilePath.exists()) {
@@ -50,9 +50,9 @@ public class DukeStorage {
     }
 
     /**
-     * Writes a specified List<duke.task.DukeTask> into the specified file in {@link #taskFilePath}. Each task will be written
-     * on a new line.
-     * @param userTasks List<duke.task.DukeTask> to save tasks from, to the file.
+     * Writes a specified List&lt;duke.task.DukeTask&gt; into the specified file in {@link #taskFilePath}.
+     * Each task will be written on a new line.
+     * @param userTasks List&lt;duke.task.DukeTask&gt; to save tasks from, to the file.
      * @throws IOException File parsing error.
      */
     private void writeDukeTasks(List<DukeTask> userTasks) throws IOException {
@@ -63,9 +63,11 @@ public class DukeStorage {
     }
 
     /**
-     * Reads the specified file in {@link #taskFilePath} and initializes a List<duke.task.DukeTask> object to be returned.
+     * Reads the specified file in {@link #taskFilePath} and initializes a List&lt;duke.task.DukeTask&gt;
+     * object to be returned.
      * @param ui Instance of {@link DukeUi} which will show output to the user.
-     * @return An initialized List of duke.task.DukeTask objects, can be an empty List if there are no tasks in the read file.
+     * @return An initialized List of duke.task.DukeTask objects, can be an empty List if there are no
+     *     tasks in the read file.
      * @throws IOException File parsing error.
      */
     private List<DukeTask> readDukeTasks(DukeUi ui) throws IOException {
@@ -83,7 +85,8 @@ public class DukeStorage {
     }
 
     /**
-     * Takes in a duke.task.DukeTask object and determines how the final String to write to the file should be formatted.
+     * Takes in a {@link duke.task.DukeTask} object and determines how the final String to write to the file should be
+     * formatted.
      * @param task {@link DukeTask} object to save to file as a String.
      * @return Formatted String to be written to the file.
      */
@@ -109,7 +112,8 @@ public class DukeStorage {
     /**
      * Takes in a line read from the data file and determines what duke.task.DukeTask should be re-constructed.
      * @param line A single line from the data file.
-     * @return Optional<duke.task.DukeTask> which could be Optional.empty() if the String has an unexpected formatting.
+     * @return Optional&lt;duke.task.DukeTask&gt; which could be Optional.empty() if the String has an unexpected
+     *     formatting.
      */
     private Optional<DukeTask> processReadTask(String line) {
         DukeTask task;
@@ -132,10 +136,10 @@ public class DukeStorage {
     }
 
     /**
-     * Loads the data file and reads it, initializing a List<duke.task.DukeTask> to be returned to the caller. This List will be
-     * populated with duke.task.DukeTask from the data file.
+     * Loads the data file and reads it, initializing a List&lt;duke.task.DukeTask&gt; to be returned to the caller.
+     * This List will be populated with {@link duke.task.DukeTask} from the data file.
      * @param ui Instance of {@link DukeUi} which will show output to the user.
-     * @return Optional<duke.task.DukeTask> which could be Optional.empty() if there are file parsing errors.
+     * @return Optional&lt;duke.task.DukeTask&gt; which could be Optional.empty() if there are file parsing errors.
      * @throws IOException File parsing error.
      */
     public List<DukeTask> load(DukeUi ui) throws IOException {
@@ -146,9 +150,9 @@ public class DukeStorage {
     }
 
     /**
-     * Saves the List<duke.task.DukeTask> into the data file. Saving process is opening the target data file for writing without
-     * append option, meaning the file will be reset each time.
-     * @param userTasks List<duke.task.DukeTask> to be written to the data file in String format.
+     * Saves the List&lt;duke.task.DukeTask&gt; into the data file. Saving process is opening the target data file for
+     * writing without append option, meaning the file will be reset each time.
+     * @param userTasks List&lt;duke.task.DukeTask&gt; to be written to the data file in String format.
      * @throws IOException File parsing error.
      */
     public void save(List<DukeTask> userTasks) throws IOException {

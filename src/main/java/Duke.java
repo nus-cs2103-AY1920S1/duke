@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class Duke {
 
-    private final static String DUKE_TASK_FILE_PATH = ".\\data\\duke.txt";
+    private static final String DUKE_TASK_FILE_PATH = ".\\data\\duke.txt";
 
     private DukeStorage storage;
     private DukeTaskList tasks;

@@ -23,6 +23,10 @@ public class DukeCommandTest {
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
+    /**
+     * Initializes the required {@link DukeTaskList}, {@link DukeUi} and {@link DukeStorage} instances for the tests to
+     * be ran. Assumes that {@link #DUKE_TASK_FILE_PATH} is a proper, readable and writable text file location.
+     */
     @BeforeAll
     public static void beforeAll() {
         tasks = new DukeTaskList();

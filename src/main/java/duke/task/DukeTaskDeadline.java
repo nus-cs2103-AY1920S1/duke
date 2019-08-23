@@ -36,14 +36,14 @@ public class DukeTaskDeadline extends DukeTask {
     }
 
     /**
-     * Prints out this deadline Task in the format:
+     * Prints out this deadline Task in the format.
      * [D][x] taskName (by: taskDeadline)
-     * @return
+     * @return The String formatted as above.
      */
     @Override
     public String toString() {
-        String symbol = getTaskIsComplete() ? "\u2713" : "\u2718";
-        return "[" + getTaskType() +"][" + symbol + "] " + getTaskName() + " (by: " + this.taskDeadline + ")";
+        String symbol = getTaskIsComplete() ? "✓" : "✗";
+        return "[" + getTaskType() + "][" + symbol + "] " + getTaskName() + " (by: " + this.taskDeadline + ")";
     }
 
 }

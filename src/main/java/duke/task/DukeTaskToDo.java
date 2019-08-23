@@ -21,13 +21,13 @@ public class DukeTaskToDo extends DukeTask {
     }
 
     /**
-     * Prints out this to-do Task in the format:
+     * Prints out this to-do Task in the format.
      * [T][x] taskName
-     * @return
+     * @return The String formatted as above.
      */
     @Override
     public String toString() {
-        String symbol = getTaskIsComplete() ? "\u2713" : "\u2718";
-        return "[" + getTaskType() +"][" + symbol + "] " + getTaskName();
+        String symbol = getTaskIsComplete() ? "✓" : "✗";
+        return "[" + getTaskType() + "][" + symbol + "] " + getTaskName();
     }
 }

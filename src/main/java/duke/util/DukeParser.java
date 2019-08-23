@@ -46,7 +46,7 @@ public class DukeParser {
      * @param startIndex Starting index (inclusive) to start concatenating from.
      * @param endIndex Ending index (inclusive) to end concatenating at.
      * @return A concatenated String starting from the startIndex to the endIndex, with a single-space delimiter except
-     * after the last token.
+     *     after the last token.
      */
     public static String concatStringTokens(String[] inputTokens, int startIndex, int endIndex) {
         StringBuilder sb = new StringBuilder();
@@ -67,9 +67,6 @@ public class DukeParser {
      * @throws DateTimeParseException If the input String does not match the required format.
      */
     public static String formatDate(String input) throws DateTimeParseException {
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(DUKE_DATETIME_INPUT_FORMAT);
-        LocalDateTime inputDateTime = LocalDateTime.parse(input, dateTimeFormat);
-
         Map<Long, String> ordinalNumbers = new HashMap<>(31);
         ordinalNumbers.put(1L, "1st");
         ordinalNumbers.put(2L, "2nd");
@@ -87,6 +84,9 @@ public class DukeParser {
                 .appendLiteral(" of ")
                 .appendPattern(DUKE_DATETIME_OUTPUT_FORMAT)
                 .toFormatter();
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(DUKE_DATETIME_INPUT_FORMAT);
+        LocalDateTime inputDateTime = LocalDateTime.parse(input, dateTimeFormat);
         return inputDateTime.format(dayOfMonthFormatter);
     }
 
@@ -96,31 +96,34 @@ public class DukeParser {
      * DELETE", a {@link DukeCommandUpdate} class will be instantiated and returned. If the command is to "LIST", a
      * {@link DukeCommandList} class will be instantiated and returned. If the command is to "BYE", a
      * {@link DukeCommandExit} class will be instantiated and returned. An Optional.empty() will be returned if the
-     * user input cannot be parsed.
+     *     user input cannot be parsed.
      * @param input Raw user input String obtained from {@link DukeUi#readCommand()}.
      * @param ui Instance of {@link DukeUi} which will show output to the user.
-     * @return Optional<DukeCommand> which is empty if the user input cannot be parsed, or a {@link DukeCommand}
-     * sub-class which has a {@link DukeCommand#execute(DukeTaskList, DukeUi, DukeStorage)} method.
+     * @return Optional&lt;DukeCommand&gt; which is empty if the user input cannot be parsed, or a {@link DukeCommand}
+     *     sub-class which has a {@link DukeCommand#execute(DukeTaskList, DukeUi, DukeStorage)} method.
      */
     public static Optional<DukeCommand> parseCommand(String input, DukeUi ui) {
         String[] inputTokens = input.split(" ");
         try {
             DukeCommandEnum inputCommand = DukeCommandEnum.valueOf(inputTokens[0].toUpperCase());
             switch (inputCommand) {
-                case BYE:
-                    return Optional.of(new DukeCommandExit());
+            case BYE:
+                return Optional.of(new DukeCommandExit());
 
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    return Optional.of(new DukeCommandAdd(inputTokens));
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                return Optional.of(new DukeCommandAdd(inputTokens));
 
-                case LIST:
-                    return Optional.of(new DukeCommandList());
+            case LIST:
+                return Optional.of(new DukeCommandList());
 
-                case DONE:
-                case DELETE:
-                    return Optional.of(new DukeCommandUpdate(inputTokens));
+            case DONE:
+            case DELETE:
+                return Optional.of(new DukeCommandUpdate(inputTokens));
+
+            default:
+                return Optional.empty();
             }
         } catch (IllegalArgumentException ex) {
             ui.displayUnknownCommand();

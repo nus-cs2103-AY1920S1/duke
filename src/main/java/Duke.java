@@ -38,8 +38,8 @@ public class Duke {
                         System.out.println("     " + task.getId() + "." + task);
                     }
                 }
-                System.out.println(horLine);
-                System.out.println();
+                System.out.println(horLine + "\n");
+
             } else if(input.equals("done")) {
                 int number = reader.nextInt();
                 Task temp = taskList.get(number);
@@ -47,24 +47,45 @@ public class Duke {
                 System.out.println(horLine);
                 System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("       " + temp);
-                System.out.println(horLine);
-                System.out.println();
+                System.out.println(horLine + "\n");
             }
 
             else{  //all other commands
-                if(input.equals("todo")) {
-                        String temp = reader.nextLine();
-                        taskList.add(new Todo(taskList.size() + 1, temp));
-                } else{
-                    String tempString = reader.nextLine();
-                    String[] tempStringArr = tempString.split("/");
-                    String description = (String) Array.get(tempStringArr, 0);
-                    String secondString = ((String)Array.get(tempStringArr, 1)).substring(3);
-                    if(input.equals("deadline")) {
-                        taskList.add(new Deadline(taskList.size() + 1, description, secondString));
-                    } else {
-                        taskList.add(new Event(taskList.size() + 1, description, secondString));
+                try {
+                    if (input.equals("todo")) {
+                            String tempString = reader.nextLine();
+                            if (tempString.equals("")) {
+                                throw new DukeException("      ☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            taskList.add(new Todo(taskList.size() + 1, tempString));
+                    } else if (input.equals("deadline") || input.equals("event")) {
+                        String tempString = reader.nextLine();
+                        if(tempString.equals("")) {
+                            throw new DukeException("      ☹ OOPS!!! The description of a " +
+                                    input + " cannot be empty.");
+                        }
+                        String[] tempStringArr = tempString.split("/");
+                        String description = (String) Array.get(tempStringArr, 0);
+                        String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
+                        if (input.equals("deadline")) {
+                            taskList.add(new Deadline(taskList.size() + 1, description, secondString));
+                        } else {
+                            taskList.add(new Event(taskList.size() + 1, description, secondString));
+                        }
+                    } else {//all other keywords not part of Duke's task handling schedule
+                        throw new DukeException("      ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
+                } catch (DukeException de) {
+                    System.out.println(horLine);
+                    System.err.println(de.getMessage());
+                    System.out.println(horLine + "\n");
+                    continue;  //to prevent printing of below mentioned lines
+                } catch (ArrayIndexOutOfBoundsException ae) {
+                    System.out.println(horLine);
+                    System.err.println("      ☹ OOPS!!! You need to specify the " + input +
+                            " time through a /by (deadline) and /at (event)");
+                    System.out.println(horLine + "\n");
+                    continue;
                 }
                 System.out.println(horLine);
                 System.out.println("      Got it. I've added this task:");

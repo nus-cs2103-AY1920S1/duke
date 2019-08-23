@@ -26,25 +26,25 @@ public class Duke {
             try {
                 Command command = Command.NewCommand(sc.nextLine());
                 switch (command.getType()) {
-                    case LIST:
-                        this.handleList();
-                        break;
-                    case DONE:
-                        this.handleDone(command.getTargetIndex());
-                        break;
-                    case DELETE:
-                        this.handleDelete(command.getTargetIndex());
-                        break;
-                    case ADD:
-                        this.handleAddItem(command.getAddedTask());
-                        break;
-                    case BYE:
-                        this.handleBye();
-                        return;  // exit
-                    case ECHO:
-                        this.handleEcho(command.toString());
-                    default:
-                        // placeholder
+                case LIST:
+                    this.handleList();
+                    break;
+                case DONE:
+                    this.handleDone(command.getTargetIndex());
+                    break;
+                case DELETE:
+                    this.handleDelete(command.getTargetIndex());
+                    break;
+                case ADD:
+                    this.handleAddItem(command.getAddedTask());
+                    break;
+                case BYE:
+                    this.handleBye();
+                    return;  // exit
+                case ECHO:
+                    this.handleEcho(command.toString());
+                default:
+                    // placeholder
                 }
             } catch (CommandException e) {
                 Response.newException(e).print();

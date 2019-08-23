@@ -15,3 +15,5 @@ bin/
 
 # duke data file
 duke_data.txt
+
+*.class

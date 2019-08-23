@@ -1,3 +1,5 @@
+import java.io.*;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,8 +8,9 @@ public class Duke {
 
     private static final String indentation = "     ";
     private static final String separator = "    ____________________________________________________________\n";
+    private static final String storagePath = "/Users/xiaoyu/duke/data/duke.txt";
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner;
     private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -15,8 +18,25 @@ public class Duke {
         final String welcomeSentence = "Hello! I'm Duke\nWhat can I do for you?";
         final String endingSentence = "Bye. Hope to see you again soon!";
 
+
         System.out.println(showFormattedStr(welcomeSentence));
 
+        try {
+            readData();
+        } catch (FileNotFoundException e) {
+            new File(storagePath);
+        }
+
+        if (tasks.size() > 0) {
+            try {
+                conductCommand(Command.LIST);
+            } catch (DukeException de) {
+                System.out.println(showFormattedStr(de.getMessage()));
+            }
+
+        }
+
+        scanner = new Scanner(System.in);
         String text = scanner.next();
         Command command;
 
@@ -30,6 +50,12 @@ public class Duke {
             text = scanner.next();
         }
 
+        try {
+            writeData();
+        } catch (IOException e) {
+            System.out.println(showFormattedStr("☹ OOPS!!! We cannot store your data!"));
+        }
+
         System.out.println(showFormattedStr(endingSentence));
     }
 
@@ -40,12 +66,16 @@ public class Duke {
     private static String showFormattedList(List<Task> list) {
         String formattedList = separator;
         formattedList = formattedList + indentation + "Here are the tasks in your list:\n";
+        if (list.size() == 0) {
+            return showFormattedStr("Currently there is no task~");
+        }
         for (int i = 1; i <= list.size(); i++) {
             formattedList = formattedList + indentation + i + ". " + list.get(i - 1) + "\n";
         }
         formattedList = formattedList + separator;
         return formattedList;
     }
+
 
     private static Command readCommand(String text) throws DukeException {
         Command command;
@@ -100,5 +130,30 @@ public class Duke {
                             + "\nNow you have " + tasks.size() + " tasks in the list."));
         }
 
+    }
+
+    private static void readData() throws FileNotFoundException{
+        scanner = new Scanner(new File(storagePath));
+        while (scanner.hasNext()) {
+            tasks.add(Task.from(scanner.nextLine()));
+        }
+    }
+
+    private static void writeData() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(storagePath));
+        String content = "";
+        for (Task task : tasks) {
+            if (task instanceof Todo) {
+                content = "T|" + task.getStatus() +  "|" + task.getDescription();
+            } else if (task instanceof Deadline) {
+                Deadline dl = (Deadline) task;
+                content = "D|" + task.getStatus() +  "|" + dl.getDescription() + "|" + dl.getDueDateTime();
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
+                content = "E|" + e.getStatus() + "|" + e.getDescription() + "|" + e.getDuration();
+            }
+            writer.append(content + "\n");
+        }
+        writer.close();
     }
 }

@@ -1,3 +1,5 @@
-T | 0 | Test adding todo task.
+T | 1 | Test adding todo task.
 D | 0 | Test adding deadline | 18th of October 2019, 7PM
-E | 0 | Test adding event | i3 Auditorium
+E | 1 | Test adding event | i3 Auditorium
+D | 0 | def | 11th of November 2011, 9:34PM
+D | 0 | read | 9th of September 2019, 11:00AM

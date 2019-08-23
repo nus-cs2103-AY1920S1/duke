@@ -1,12 +1,14 @@
 package duke.command;
 
+import duke.command.update.DukeCommandUpdateTaskComplete;
+import duke.command.update.DukeCommandUpdateTaskDelete;
 import duke.util.DukeStorage;
 import duke.util.DukeTaskList;
 import duke.util.DukeUi;
 
 public class DukeCommandUpdate extends DukeCommand {
 
-    private String[] inputTokens;
+    protected String[] inputTokens;
 
     /**
      * Constructor that takes in the user input split by the " " delimiter into a String[].
@@ -26,10 +28,10 @@ public class DukeCommandUpdate extends DukeCommand {
     @Override
     public void execute(DukeTaskList tasks, DukeUi ui, DukeStorage storage) {
         if (inputTokens.length == 2) {
-            if (inputTokens[0].equals("done")) {
-                tasks.markDukeTaskComplete(inputTokens[1], ui, storage);
-            } else if (inputTokens[0].equals("delete")) {
-                tasks.deleteDukeTask(inputTokens[1], ui, storage);
+            if (inputTokens[0].toLowerCase().equals("done")) {
+                new DukeCommandUpdateTaskComplete(inputTokens).execute(tasks, ui, storage);
+            } else if (inputTokens[0].toLowerCase().equals("delete")) {
+                new DukeCommandUpdateTaskDelete(inputTokens).execute(tasks, ui, storage);
             }
         } else {
             ui.displayMissingIndex();

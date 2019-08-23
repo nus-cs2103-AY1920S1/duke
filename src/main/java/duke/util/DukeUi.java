@@ -17,6 +17,7 @@ public class DukeUi {
     || Error Messages ||
     ==================*/
     private final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task cannot be empty.";
+    private final String DUKE_ERR_EMPTY_SEARCH_TERM = "☹ OOPS!!! The search term is missing.";
     private final String DUKE_ERR_FILE_IO_EXCEPTION = "☹ OOPS!!! Failed to open file! Is the path correct?";
     private final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
     private final String DUKE_ERR_INVALID_DATE_FORMAT = "☹ OOPS!!! Please input the deadline in the following " +
@@ -79,6 +80,13 @@ public class DukeUi {
      */
     public void displayEmptyDescriptionError() {
         System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE));
+    }
+
+    /**
+     * Prints the error message for when the search term is empty from using the "find" command.
+     */
+    public void displayEmptySearchTermError() {
+        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_EMPTY_SEARCH_TERM));
     }
 
     /**

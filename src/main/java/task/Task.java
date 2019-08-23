@@ -1,5 +1,3 @@
-package main.java;
-
 abstract class Task {
     private String description;
     private boolean isDone;

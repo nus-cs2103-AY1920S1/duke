@@ -1,7 +1,6 @@
-package main.java;
+import exception.DukeIndexOutOfBoundsException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
     private ArrayList<Task> tasks;

@@ -7,6 +7,7 @@ import duke.task.DukeTaskToDo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,14 +19,14 @@ public class DukeStorage {
 
     private BufferedReader taskFileInputBuffer;
     private BufferedWriter taskFileOutputBuffer;
-    private String taskFilePath;
+    private File taskFilePath;
 
     /**
      * This constructor takes in the path of the data file stored on the hard disk.
      * @param taskFilePath Relative/Full path to the data file.
      */
     public DukeStorage (String taskFilePath) {
-        this.taskFilePath = taskFilePath;
+        this.taskFilePath = new File(taskFilePath);
     }
 
     /**
@@ -37,10 +38,14 @@ public class DukeStorage {
     }
 
     /**
-     * Initializes the BufferedReader object to prepare for reading from the specified file in {@link #taskFilePath}.
+     * Initializes the BufferedReader object to prepare for reading from the specified file in {@link #taskFilePath}. If
+     * the data file does not exist, create it along with the necessary folders.
      * @throws IOException
      */
     private void initializeFileInputStream() throws IOException {
+        if (!taskFilePath.exists()) {
+            taskFilePath.getParentFile().mkdirs();
+        }
         taskFileInputBuffer = new BufferedReader(new FileReader(taskFilePath));
     }
 

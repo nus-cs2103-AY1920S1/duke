@@ -7,10 +7,20 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> list = new ArrayList<>();
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
-        String str = sc.nextLine();
+        String str = sc.next();
         while (!str.equals("bye")) {
-            System.out.println(str);
-            str = sc.nextLine();
+            if (str.equals("list")) {
+                int index = 0;
+                for (String element : list) {
+                    index++;
+                    System.out.println(index + ". " + element);
+                }
+                str = sc.next();
+            } else {
+                System.out.println("added: " + str);
+                list.add(str);
+                str = sc.next();
+            }
         }
     }
 }

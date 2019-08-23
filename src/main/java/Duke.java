@@ -1,10 +1,16 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<>();
+        System.out.println("Hello I'm Duke\nWhat can I do for you?");
+        String str = sc.nextLine();
+        while (!str.equals("bye")) {
+            System.out.println(str);
+            str = sc.nextLine();
+        }
     }
 }

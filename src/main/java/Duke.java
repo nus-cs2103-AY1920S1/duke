@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -69,7 +71,8 @@ public class Duke {
                                         break;
                                     }
                                 }
-                                Task.itemsLst.add(new Deadline(desc, by));
+                                Task.itemsLst.add(new Deadline(desc,
+                                    LocalDateTime.parse(by, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"))));
                             } else if (command.startsWith("event")) { // assume that task is an event
                                 Scanner taskSc = new Scanner(command);
                                 taskSc.next();
@@ -85,9 +88,11 @@ public class Duke {
                                         break;
                                     }
                                 }
-                                Task.itemsLst.add(new Event(desc, at));
+                                Task.itemsLst.add(new Event(desc,
+                                    LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"))));
                             } else {
-                                throw new DukeException("     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+                                throw new DukeException("     \u2639 OOPS!!! I'm sorry, " +
+                                        "but I don't know what that means :-(");
                             }
                             System.out.printf("     Got it. I've added this task:\n       %s\n" +
                                     "     Now you have %d tasks in the list.\n",

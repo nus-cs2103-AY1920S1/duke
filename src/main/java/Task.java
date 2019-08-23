@@ -15,12 +15,12 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    String getDescription() {
-        return this.description;
-    }
-
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
+    }
+
+    String toSaveFormat() {
+        return String.format("%d|%s", this.isDone ? 1 : 0, this.description);
     }
 }

@@ -1,6 +1,3 @@
-D | 0 | laala | bdd=f
-E | 1 | a | b
-D | 0 | test | 1st of December 2019, 1PM
-E | 0 | /at | 10/102/210
-D | 1 | abc | 12th of December 2021, 12PM
-D | 0 | abc | 10th of October 1990, 9PM
+T | 0 | Test adding todo task.
+D | 0 | Test adding deadline | 18th of October 2019, 7PM
+E | 0 | Test adding event | i3 Auditorium

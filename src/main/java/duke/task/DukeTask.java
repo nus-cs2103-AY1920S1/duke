@@ -5,11 +5,6 @@ public class DukeTask {
     private String taskType;
     private boolean isComplete;
 
-    public DukeTask(String taskName) {
-        this.taskName = taskName;
-        this.isComplete = false;
-    }
-
     public DukeTask(String taskName, String taskType) {
         this.taskName = taskName;
         this.taskType = taskType;

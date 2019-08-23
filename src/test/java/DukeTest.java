@@ -1,6 +1,11 @@
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 public class DukeTest {
-    public static void main(String args[]) {
-        Duke d = new Duke();
-        System.out.println(d.toString());
+
+    @Test
+    public void testFileLoad() {
+        assertDoesNotThrow(() -> new Duke("Invalid Path"));
     }
 }

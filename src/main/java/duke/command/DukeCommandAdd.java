@@ -41,7 +41,7 @@ public class DukeCommandAdd extends DukeCommand {
      */
     private void handleDeadline(DukeTaskList tasks, DukeUi ui, DukeStorage storage) {
         int deadlineParameterIndex = DukeParser.getInputFlagParameterStartingIndex(inputTokens, "/by");
-        if (deadlineParameterIndex == -1) {
+        if (deadlineParameterIndex == -1 || deadlineParameterIndex == inputTokens.length) {
             ui.displayMissingDeadlineParam();
         } else {
             String deadlineTaskName = DukeParser.concatStringTokens(inputTokens, 1,
@@ -66,7 +66,7 @@ public class DukeCommandAdd extends DukeCommand {
      */
     private void handleEvent(DukeTaskList tasks, DukeUi ui, DukeStorage storage) {
         int eventParameterIndex = DukeParser.getInputFlagParameterStartingIndex(inputTokens, "/at");
-        if (eventParameterIndex == -1) {
+        if (eventParameterIndex == -1 || eventParameterIndex == inputTokens.length) {
             ui.displayMissingEventParam();
         } else {
             String eventTaskName = DukeParser.concatStringTokens(inputTokens, 1,

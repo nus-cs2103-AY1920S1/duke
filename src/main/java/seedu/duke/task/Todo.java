@@ -1,5 +1,8 @@
 package seedu.duke.task;
 
+/**
+ * Represents a todo task.
+ */
 public class Todo extends Task {
     public static final String INITIAL = "T";
 

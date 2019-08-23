@@ -4,6 +4,9 @@ import seedu.duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of tasks. Every time the data is changed, the new data will be saved.
+ */
 public class TaskList extends ArrayList<Task> {
     private Storage storage;
 
@@ -30,6 +33,9 @@ public class TaskList extends ArrayList<Task> {
         return super.get(index - 1);
     }
 
+    /**
+     * Notifies the change of the tasks such that the tasks can be saved.
+     */
     public void notifyChange() {
         storage.save(this);
     }

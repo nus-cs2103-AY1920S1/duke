@@ -73,9 +73,31 @@ public class Duke {
 		return false;
 	}
 
+	private static boolean markAsDone(String input) {
+		int index;
+		try {
+			index = Integer.parseInt(input);
+		} catch(NumberFormatException e) {
+			say("Index provided was not an integer!");
+			return false;
+		}
+
+		if(index < 0 || index > Duke.taskList.size()) {
+			say("There's no task with that index!");
+			return false;
+		}
+
+		Task selectedTask = Duke.taskList.get(index-1);
+		selectedTask.markComplete();
+		say("Nice! I've marked this task as done:",
+			"  " + selectedTask);
+		return false;
+	}
+
     public static void main(String[] args) {
 		//Bind command handlers
 		Duke.commandMap.put("list", Duke::displayList);
+		Duke.commandMap.put("done", Duke::markAsDone);
 		Duke.commandMap.put("bye", Duke::handleBye);
 		Duke.defaultHandler = Duke::addTask;
 

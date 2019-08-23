@@ -22,7 +22,8 @@ public class DukeCommandAdd extends DukeCommand {
     }
 
     /**
-     * This method will handle adding of a {@link DukeTaskToDo} into {@link DukeTaskList} list of {@link duke.task.DukeTask}.
+     * This method will handle adding of a {@link DukeTaskToDo} into {@link DukeTaskList} list of
+     * {@link duke.task.DukeTask}.
      * @param tasks Instance of {@link DukeTaskList} which contains an existing list of {@link duke.task.DukeTask}.
      * @param ui Instance of {@link DukeUi} which will show output to the user.
      * @param storage Instance of {@link DukeStorage} which will save the {@link DukeTaskList} to the hard disk.
@@ -34,7 +35,8 @@ public class DukeCommandAdd extends DukeCommand {
     }
 
     /**
-     * This method will handle adding of a {@link DukeTaskDeadline} into {@link DukeTaskList} list of {@link duke.task.DukeTask}.
+     * This method will handle adding of a {@link DukeTaskDeadline} into {@link DukeTaskList} list of
+     * {@link duke.task.DukeTask}.
      * @param tasks Instance of {@link DukeTaskList} which contains an existing list of {@link duke.task.DukeTask}.
      * @param ui Instance of {@link DukeUi} which will show output to the user.
      * @param storage Instance of {@link DukeStorage} which will save the {@link DukeTaskList} to the hard disk.
@@ -59,7 +61,8 @@ public class DukeCommandAdd extends DukeCommand {
     }
 
     /**
-     * This method will handle adding of a {@link DukeTaskEvent} into {@link DukeTaskList} list of {@link duke.task.DukeTask}.
+     * This method will handle adding of a {@link DukeTaskEvent} into {@link DukeTaskList} list of
+     * {@link duke.task.DukeTask}.
      * @param tasks Instance of {@link DukeTaskList} which contains an existing list of {@link duke.task.DukeTask}.
      * @param ui Instance of {@link DukeUi} which will show output to the user.
      * @param storage Instance of {@link DukeStorage} which will save the {@link DukeTaskList} to the hard disk.

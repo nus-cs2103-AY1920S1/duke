@@ -35,13 +35,13 @@ public class DukeTaskEvent extends DukeTask {
     }
 
     /**
-     * Prints out this event Task in the format:
+     * Prints out this event Task in the format.
      * [E][x] taskName (at: taskLocation)
-     * @return
+     * @return The String formatted as above.
      */
     @Override
     public String toString() {
-        String symbol = getTaskIsComplete() ? "\u2713" : "\u2718";
-        return "[" + getTaskType() +"][" + symbol + "] " + getTaskName() + " (at: " + this.taskLocation + ")";
+        String symbol = getTaskIsComplete() ? "✓" : "✗";
+        return "[" + getTaskType() + "][" + symbol + "] " + getTaskName() + " (at: " + this.taskLocation + ")";
     }
 }

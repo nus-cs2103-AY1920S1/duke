@@ -4,30 +4,31 @@ import java.util.Scanner;
 
 public class DukeUi {
 
-    private final String DUKE_ASCII_LOGO = " ____        _        \n"
+    private static final String DUKE_ASCII_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String SEPARATOR = "____________________________________________________________";
-    private final String DUKE_WELCOME_MESSAGE = "Hello! I'm Duke\n\t What can I do for you?";
-    private final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-
-    /*==================
-    || Error Messages ||
-    ==================*/
-    private final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task cannot be empty.";
-    private final String DUKE_ERR_FILE_IO_EXCEPTION = "☹ OOPS!!! Failed to open file! Is the path correct?";
-    private final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
-    private final String DUKE_ERR_INVALID_DATE_FORMAT = "☹ OOPS!!! Please input the deadline in the following " +
-            "format: \"dd/mm/yyyy hhmm\".";
-    private final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task index.";
-    private final String DUKE_ERR_MISSING_DEADLINE_PARAM = "☹ OOPS!!! The deadline for the task must be specified with \"/by\".";
-    private final String DUKE_ERR_MISSING_EVENT_PARAM = "\"☹ OOPS!!! The event parameter must be specified with \\\"/at\\\".\"";
-    private final String DUKE_ERR_MISSING_INDEX = "☹ OOPS!!! The index of the completed task is missing.";
-    private final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means " +
-            ":-(";
-    private final String DUKE_ERR_UNKNOWN_TASK = "An error occurred when trying to re-create a task from the saved file!";
+    private static final String SEPARATOR = "____________________________________________________________";
+    private static final String DUKE_WELCOME_MESSAGE = "Hello! I'm Duke\n\t What can I do for you?";
+    private static final String DUKE_EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! The description of a task"
+            + "cannot be empty.";
+    private static final String DUKE_ERR_FILE_IO_EXCEPTION = "☹ OOPS!!! Failed to open file! Is the path correct?";
+    private static final String DUKE_ERR_INDEX_OUT_OF_BOUNDS = "☹ OOPS!!! Please enter a valid task index value.";
+    private static final String DUKE_ERR_INVALID_DATE_FORMAT = "☹ OOPS!!! Please input the deadline in the following "
+            + "format: \"dd/mm/yyyy hhmm\".";
+    private static final String DUKE_ERR_INVALID_INDEX = "☹ OOPS!!! Please only enter numeric values for the task"
+            + " index.";
+    private static final String DUKE_ERR_MISSING_DEADLINE_PARAM = "☹ OOPS!!! The deadline for the task must be "
+            + "specified with \"/by\".";
+    private static final String DUKE_ERR_MISSING_EVENT_PARAM = "\"☹ OOPS!!! The event parameter must be specified"
+            + "with \\\"/at\\\".\"";
+    private static final String DUKE_ERR_MISSING_INDEX = "☹ OOPS!!! The index of the completed task is missing.";
+    private static final String DUKE_ERR_UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what"
+            + "that means :-(";
+    private static final String DUKE_ERR_UNKNOWN_TASK = "An error occurred when trying to re-create a task from the"
+            + "saved file!";
 
     private StringBuilder sb;
     private Scanner scanner;

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class Duke {
      *
      *
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -42,6 +43,7 @@ public class Duke {
         sb.append(border + "\n");
         String emptyError = sb.toString();
         sb.setLength(0);
+
 
         //Scanner obj for input
         Scanner sc = new Scanner(System.in);
@@ -173,6 +175,7 @@ public class Duke {
 
         }
 
+
         //Concluding Message
         sb.append(border + "\n");
         sb.append("Bye. Hope to see you again soon!\n");
@@ -196,4 +199,7 @@ public class Duke {
         sb.append(border + "\n");
         return sb.toString();
     }
+
+
+
 }

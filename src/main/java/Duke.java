@@ -1,8 +1,13 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Duke {
 
@@ -25,6 +30,7 @@ public class Duke {
 		while(lines.hasNext()) {
 			System.out.println(lines.next());
 		}
+
 		//Print end of reply line, and extra empty line
 		System.out.println(lineRule);
 		System.out.println();
@@ -42,30 +48,67 @@ public class Duke {
 		}
 	}
 
+	private static final Map<String, Predicate<String>> commandMap
+		= new HashMap<>();
+	private static Predicate<String> defaultHandler;
+
+	private static final List<Task> taskList = new ArrayList<>();
+
+	private static boolean handleBye(String input) {
+		say("Bye. Hope to see you again soon!");
+		return true;
+	}
+
+	private static boolean displayList(String input) {
+		say(Duke.taskList.stream()
+				.map(Object::toString)
+				.map(new CounterDecorator(1))
+				.iterator());
+		return false;
+	}
+
+	private static boolean addTask(String input) {
+		Duke.taskList.add(new Task(input));
+		say("added: " + input);
+		return false;
+	}
+
     public static void main(String[] args) {
+		//Bind command handlers
+		Duke.commandMap.put("list", Duke::displayList);
+		Duke.commandMap.put("bye", Duke::handleBye);
+		Duke.defaultHandler = Duke::addTask;
+
 		//Initialize input.
 		Scanner s = new Scanner(System.in);
-		ArrayList<String> storageList = new ArrayList<>();
 
 		//Start off greeting the user.
 		say(initialGreeting);
 
 		//While there is still input from user
-inputLoop:
 		while(s.hasNextLine()) {
 			//Read single line of user input, and remove extra spaces
 			String userInput = s.nextLine().trim();
 
-			switch(userInput) {
-			case "bye": 
-				say("Bye. Hope to see you again soon!");
-				break inputLoop;
-			case "list":
-				say(storageList.stream().map(new CounterDecorator(1)).iterator());
-				break;
-			default:
-				say("added: " + userInput);
-				storageList.add(userInput);
+			int spacePos = userInput.indexOf(' ');
+			String command, rest;
+			if(spacePos == -1) {
+				command = userInput;
+				rest = null;
+			} else {
+				command = userInput.substring(0, spacePos);
+				rest = userInput.substring(spacePos+1);
+			}
+
+			Predicate<String> cmdHandler = commandMap.get(command);
+			boolean shouldExit;
+			if(cmdHandler != null) {
+				shouldExit = cmdHandler.test(rest);
+			} else {
+				shouldExit = defaultHandler.test(userInput);
+			}
+
+			if(shouldExit) {
 				break;
 			}
 		}

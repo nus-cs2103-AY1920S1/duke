@@ -1,6 +1,6 @@
 import java.util.*;
 /**
- *  Week 2 IP Deliverable
+ *  Week 2 iP Deliverable
  *
  *  @author Ahmed Bahajjaj
  */

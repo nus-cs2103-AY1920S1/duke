@@ -7,8 +7,9 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDone() {
+    public Task markAsDone() {
         this.isDone = true;
+        return this;
     }
 
     public String getDesc() {

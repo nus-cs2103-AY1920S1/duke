@@ -76,64 +76,64 @@ public class Duke { // handles all input and output
 
             try {
                 switch (cmdWord) {
-                    case "list":
-                        System.out.println(list());
-                        break;
-                    case "bye":
-                        System.out.println(bye());
-                        break;
-                    case "done":
-                        int taskNo = Integer.parseInt(cmdLine.substring(1));
-                        System.out.println(done(taskNo));
-                        break;
-                    case "delete":
-                        int taskNum = Integer.parseInt(cmdLine.substring(1));
-                        System.out.println(delete(taskNum));
-                        break;
-                    case "todo":
-                        if (cmdLine.isEmpty()) {
-                            throw new ToDoException(cmdLine);
-                        } else {
-                            ToDo td = new ToDo(cmdLine);
-                            System.out.println(newTask(td));
-                        }
-                        break;
-                    case "deadline":
-                        if (cmdLine.isEmpty()) {
+                case "list":
+                    System.out.println(list());
+                    break;
+                case "bye":
+                    System.out.println(bye());
+                    break;
+                case "done":
+                    int taskNo = Integer.parseInt(cmdLine.substring(1));
+                    System.out.println(done(taskNo));
+                    break;
+                case "delete":
+                    int taskNum = Integer.parseInt(cmdLine.substring(1));
+                    System.out.println(delete(taskNum));
+                    break;
+                case "todo":
+                    if (cmdLine.isEmpty()) {
+                        throw new ToDoException(cmdLine);
+                    } else {
+                        ToDo td = new ToDo(cmdLine);
+                        System.out.println(newTask(td));
+                    }
+                    break;
+                case "deadline":
+                    if (cmdLine.isEmpty()) {
+                        throw new DeadlineException(cmdLine, 3);
+                    } else if (!cmdLine.contains("/by")) {
+                        throw new DeadlineException(cmdLine, 1);
+                    } else {
+                        String[] cmdSplit = cmdLine.split("/by");
+                        if (cmdSplit.length <= 1) {
                             throw new DeadlineException(cmdLine, 3);
-                        } else if (!cmdLine.contains("/by")) {
-                            throw new DeadlineException(cmdLine, 1);
+                        } else if (cmdSplit[0].equals(" ")) {
+                            throw new DeadlineException(cmdLine, 2);
                         } else {
-                            String[] cmdSplit = cmdLine.split("/by");
-                            if (cmdSplit.length <= 1) {
-                                throw new DeadlineException(cmdLine, 3);
-                            } else if (cmdSplit[0].equals(" ")) {
-                                throw new DeadlineException(cmdLine, 2);
-                            } else {
-                                Deadline dl = new Deadline(cmdSplit[0], cmdSplit[1]);
-                                System.out.println(newTask(dl));
-                            }
+                            Deadline dl = new Deadline(cmdSplit[0], cmdSplit[1]);
+                            System.out.println(newTask(dl));
                         }
-                        break;
-                    case "event":
-                        if (cmdLine.isEmpty()) {
+                    }
+                    break;
+                case "event":
+                    if (cmdLine.isEmpty()) {
+                        throw new EventException(cmdLine, 3);
+                    } else if (!cmdLine.contains("/at")) {
+                        throw new EventException(cmdLine, 1);
+                    } else {
+                        String[] cmdSplitt = cmdLine.split("/at");
+                        if (cmdSplitt.length <= 1) {
                             throw new EventException(cmdLine, 3);
-                        } else if (!cmdLine.contains("/at")) {
-                            throw new EventException(cmdLine, 1);
+                        } else if (cmdSplitt[0].equals(" ")) {
+                            throw new EventException(cmdLine, 2);
                         } else {
-                            String[] cmdSplitt = cmdLine.split("/at");
-                            if (cmdSplitt.length <= 1) {
-                                throw new EventException(cmdLine, 3);
-                            } else if (cmdSplitt[0].equals(" ")) {
-                                throw new EventException(cmdLine, 2);
-                            } else {
-                                Event e = new Event(cmdSplitt[0], cmdSplitt[1]);
-                                System.out.println(newTask(e));
-                            }
+                            Event e = new Event(cmdSplitt[0], cmdSplitt[1]);
+                            System.out.println(newTask(e));
                         }
-                        break;
-                    default: // if it is not any of the above commands
-                        throw new DukeException(cmdWord + cmdLine);
+                    }
+                    break;
+                default: // if it is not any of the above commands
+                    throw new DukeException(cmdWord + cmdLine);
                 }
             } catch(DukeException e) {
                 System.out.println(line);

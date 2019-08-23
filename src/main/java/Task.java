@@ -1,6 +1,11 @@
-public class Task {
-    private String description;
-    private boolean isDone;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Map;
+
+abstract public class Task {
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -16,9 +21,24 @@ public class Task {
         this.isDone = true;
     }
 
-
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public abstract Map<String, Object> toMap();
+
+    public static Task fromJson(JSONObject json) throws JSONException, DukeException {
+        String type = json.getString("type");
+        switch (type) {
+            case "deadline":
+                return Deadline.fromJson(json);
+            case "event":
+                return Event.fromJson(json);
+            case "todo":
+                return ToDo.fromJson(json);
+            default:
+                throw new DukeException("JSON parse error");
+        }
     }
 }

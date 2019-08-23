@@ -56,6 +56,35 @@ public class DukeTaskList {
     }
 
     /**
+     * Deletes the specified task index.
+     * @param taskIndexString Raw String index of the task to be deleted, following the printed list index from
+     *                        the "list" command.
+     * @param ui duke.util.DukeUi object for displaying output to the user.
+     * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
+     */
+    public void deleteDukeTask(String taskIndexString, DukeUi ui, DukeStorage storage) {
+        try {
+            int taskIndex = Integer.parseInt(taskIndexString);
+            if (taskIndex < 1 || taskIndex > userDukeTasks.size()) {
+                ui.displayTaskIndexOutOfBounds();
+            } else {
+                DukeTask deletedTask = userDukeTasks.get(taskIndex - 1);
+                userDukeTasks.remove(taskIndex - 1);
+                sb.setLength(0);
+                sb.append("Noted. I've removed this task:\n\t   ");
+                sb.append(deletedTask.toString());
+                sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
+                ui.displayToUser(sb.toString());
+                storage.save(userDukeTasks);
+            }
+        } catch (IOException ex) {
+            ui.displayFileLoadingError();
+        } catch (NumberFormatException ex) {
+            ui.displayTaskInvalidIndex();
+        }
+    }
+
+    /**
      * Displays the user-supplied list of tasks in a formatted style. This method will prepare the list by looping
      * through the List of tasks and printing each task with its index. Then it will call
      * {@link DukeUi#displayToUser(String)} to display the final formatted list.
@@ -65,10 +94,33 @@ public class DukeTaskList {
         sb.setLength(0);
         sb.append("Here are the tasks in your list:\n\t ");
         for (int index = 0; index < userDukeTasks.size(); index++) {
-            sb.append((index + 1) + "." + userDukeTasks.get(index).toString());
-            if (index != (userDukeTasks.size() - 1)) {
-                sb.append("\n\t ");
+            sb.append((index + 1) + "." + userDukeTasks.get(index).toString() + "\n\t ");
+        }
+        //Remove trailing \n\t
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 3);
+        }
+        ui.displayToUser(sb.toString());
+    }
+
+    /**
+     * Searches the user-supplied list of tasks for the input search terms. Then prints out tasks that matches the
+     * search terms.
+     * @param searchTerms Substring to search for in the entire task list.
+     * @param ui duke.util.DukeUi object for displaying output to the user.
+     */
+    public void findDukeTasks(String searchTerms, DukeUi ui) {
+        sb.setLength(0);
+        sb.append("Here are the matching tasks in your list:\n\t ");
+        for (int index = 0; index < userDukeTasks.size(); index++) {
+            DukeTask currentTask = userDukeTasks.get(index);
+            if (currentTask.getTaskName().contains(searchTerms)) {
+                sb.append((index + 1) + "." + currentTask.toString() + "\n\t ");
             }
+        }
+        //Remove trailing \n\t
+        if (sb.length() > 0) {
+            sb.setLength(sb.length() - 3);
         }
         ui.displayToUser(sb.toString());
     }
@@ -94,35 +146,6 @@ public class DukeTaskList {
                     completedTask.setTaskComplete();
                     sb.append("Nice! I've marked this task as done:\n\t   " + completedTask.toString());
                 }
-                ui.displayToUser(sb.toString());
-                storage.save(userDukeTasks);
-            }
-        } catch (IOException ex) {
-            ui.displayFileLoadingError();
-        } catch (NumberFormatException ex) {
-            ui.displayTaskInvalidIndex();
-        }
-    }
-
-    /**
-     * Deletes the specified task index.
-     * @param taskIndexString Raw String index of the task to be deleted, following the printed list index from
-     *                        the "list" command.
-     * @param ui duke.util.DukeUi object for displaying output to the user.
-     * @param storage duke.util.DukeStorage object for updating the data file on the hard disk.
-     */
-    public void deleteDukeTask(String taskIndexString, DukeUi ui, DukeStorage storage) {
-        try {
-            int taskIndex = Integer.parseInt(taskIndexString);
-            if (taskIndex < 1 || taskIndex > userDukeTasks.size()) {
-                ui.displayTaskIndexOutOfBounds();
-            } else {
-                sb.setLength(0);
-                DukeTask deletedTask = userDukeTasks.get(taskIndex - 1);
-                userDukeTasks.remove(taskIndex - 1);
-                sb.append("Noted. I've removed this task:\n\t   ");
-                sb.append(deletedTask.toString());
-                sb.append("\n\t Now you have " + userDukeTasks.size() + " tasks in the list.");
                 ui.displayToUser(sb.toString());
                 storage.save(userDukeTasks);
             }

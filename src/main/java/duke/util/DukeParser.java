@@ -18,10 +18,10 @@ import java.util.Optional;
 public class DukeParser {
 
     private static final String DUKE_DATETIME_INPUT_FORMAT = "d/M/yyyy HHmm";
-    private static final String DUKE_DATETIME_OUTPUT_FORMAT = "MMMM uuuu, ha";
+    private static final String DUKE_DATETIME_OUTPUT_FORMAT = "MMMM uuuu, h:mma";
 
     private enum DukeCommandEnum {
-        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, BYE
+        TODO, DEADLINE, EVENT, FIND, LIST, DONE, DELETE, BYE
     }
 
     /**
@@ -93,7 +93,7 @@ public class DukeParser {
     /**
      * Checks the user input to determine the course of action depending on the command. If the command is to "TODO/
      * DEADLINE/EVENT", a {@link DukeCommandAdd} class will be instantiated and returned. If the command is to "DONE/
-     * DELETE", a {@link DukeCommandUpdate} class will be instantiated and returned. If the command is to "LIST", a
+     * DELETE", a {@link DukeCommandUpdate} class will be instantiated and returned. If the command is to "LIST/FIND", a
      * {@link DukeCommandList} class will be instantiated and returned. If the command is to "BYE", a
      * {@link DukeCommandExit} class will be instantiated and returned. An Optional.empty() will be returned if the
      *     user input cannot be parsed.
@@ -115,12 +115,13 @@ public class DukeParser {
             case EVENT:
                 return Optional.of(new DukeCommandAdd(inputTokens));
 
-            case LIST:
-                return Optional.of(new DukeCommandList());
-
             case DONE:
             case DELETE:
                 return Optional.of(new DukeCommandUpdate(inputTokens));
+
+            case FIND:
+            case LIST:
+                return Optional.of(new DukeCommandList(inputTokens));
 
             default:
                 return Optional.empty();

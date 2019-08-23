@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles storage related functions, e.g. loads data from disk and saves data to disk.
+ */
 public class Storage {
     private String filePath;
 
@@ -20,7 +23,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    List<Task> load() {
+    /**
+     * Loads the data in the file path and returns the corresponding list of tasks.
+     * @return The list of tasks.
+     */
+    public List<Task> load() {
         List<Task> list = new ArrayList<>();
         try {
             String data = Files.readString(Path.of(filePath));
@@ -37,7 +44,11 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    void save(List<Task> list) {
+    /**
+     * Saves the list to the current directory.
+     * @param list The list to be saved.
+     */
+    public void save(List<Task> list) {
         StringBuilder sb = new StringBuilder();
         for (Task task : list) {
             sb.append(task.getStringRepresentation());

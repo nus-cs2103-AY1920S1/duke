@@ -18,6 +18,9 @@ import seedu.duke.task.Todo;
 
 import java.util.Scanner;
 
+/**
+ * Parses string commands and execute them.
+ */
 public class Parser {
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
@@ -42,6 +45,11 @@ public class Parser {
         taskList.addAll(storage.load());
     }
 
+    /**
+     * Processes the command and execute it.
+     * @param command The command.
+     * @return -1 if command is an exit command, 0 otherwise.
+     */
     int process(String command) {
         if (command.length() == 0) {
             return 0;
@@ -77,6 +85,12 @@ public class Parser {
         return 0;
     }
 
+    /**
+     * Marks a task as done.
+     * @param s The index of the task to be marked as done, represented as a String
+     * @throws DukeException If <code>s</code> cannot be parsed to an Integer, or if the integer as an index is not
+     *         within the <code>TaskList</code> bound.
+     */
     private void done(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
@@ -95,6 +109,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes a task.
+     * @param s The index of the task to be deleted, represented as a String.
+     * @throws DukeException If <code>s</code> cannot be parsed to an Integer, or if the integer as an index is not
+     *         within the <code>TaskList</code> bound.
+     */
     private void delete(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
@@ -113,6 +133,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Lists all the tasks.
+     */
     private void list() {
         print(LIST_MSG);
         for (int i = 1; i <= taskList.size(); ++i) {
@@ -120,22 +143,33 @@ public class Parser {
         }
     }
 
-    private void addTodo(String s) throws DukeException {
-        if (s.isEmpty()) {
+    /**
+     * Adds a Todo to the list of tasks.
+     * @param desc The description of the todo
+     * @throws DukeException If <code>desc</code> is empty.
+     */
+    private void addTodo(String desc) throws DukeException {
+        if (desc.isEmpty()) {
             throw new EmptyTodoDescException();
         }
-        Task task = new Todo(s);
+        Task task = new Todo(desc);
         taskList.add(task);
         printAdded(task);
 
     }
 
-    private void addDeadline(String s) throws DukeException {
+    /**
+     * Adds a Deadline to the list of tasks.
+     * @param desc The description of the Deadline
+     * @throws DukeException If <code>desc</code> is empty, or does not contain the second argument separated by
+     *         the regex "/by"
+     */
+    private void addDeadline(String desc) throws DukeException {
         try {
-            if (s.isEmpty()) {
+            if (desc.isEmpty()) {
                 throw new EmptyDeadlineDescException();
             }
-            String[] strs = s.split(Deadline.REGEX);
+            String[] strs = desc.split(Deadline.REGEX);
             Task task = new Deadline(strs[0], strs[1]);
             taskList.add(task);
             printAdded(task);
@@ -144,12 +178,18 @@ public class Parser {
         }
     }
 
-    private void addEvent(String s) throws DukeException {
+    /**
+     * Adds an Event to the list of tasks.
+     * @param desc The description of the Deadline
+     * @throws DukeException If <code>desc</code> is empty, or does not contain the second argument separated by
+     *         the regex "/at"
+     */
+    private void addEvent(String desc) throws DukeException {
         try {
-            if (s.isEmpty()) {
+            if (desc.isEmpty()) {
                 throw new EmptyEventDescException();
             }
-            String[] strs = s.split(Event.REGEX);
+            String[] strs = desc.split(Event.REGEX);
             Task task = new Event(strs[0], strs[1]);
             taskList.add(task);
             printAdded(task);

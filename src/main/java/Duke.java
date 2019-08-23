@@ -8,6 +8,7 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
 
+
         arr = new ArrayList<>();
 
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
@@ -61,7 +62,7 @@ public class Duke {
        }
    }
 
-   private static void markAsDone(int num) throws DukeException{
+   private static void markAsDone(int num) throws DukeException {
        if (num <= 0 || num > arr.size() ) {
            throw new DukeException("OOPS!!! Number is out of range");
        } else {
@@ -119,7 +120,7 @@ public class Duke {
         printDeletedTask(t);
    }
 
-   private static boolean isCommandValid(String str) throws DukeException{
+   private static boolean isCommandValid(String str) throws DukeException {
 
 
         if (! (str.split(" ")[0].equals("list") ||

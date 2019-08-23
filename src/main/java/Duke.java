@@ -29,6 +29,17 @@ public class Duke {
 		return false;
 	}
 
+	private static final String bySwitch = " /by ";
+	private boolean addDeadlineTask(String input) {
+		int deadlineIndex = input.indexOf(bySwitch);
+		String description = input.substring(0, deadlineIndex);
+		String deadline = input.substring(deadlineIndex + bySwitch.length());
+		DeadlineTask task = new DeadlineTask(description, deadline);
+		this.taskList.add(task);
+		this.io.say("added: " + task);
+		return false;
+	}
+
 	private boolean addTask(String input) {
 		this.taskList.add(new Task(input));
 		this.io.say("added: " + input);
@@ -62,6 +73,7 @@ public class Duke {
 		this.io.bindCommand("list", this::displayList);
 		this.io.bindCommand("done", this::markAsDone);
 		this.io.bindCommand("bye", this::handleBye);
+		this.io.bindCommand("deadline", this::addDeadlineTask);
 		this.io.setUnknownCommandHandler(this::addTask);
 
 		this.taskList = new ArrayList<>();

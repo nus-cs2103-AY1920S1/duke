@@ -2,8 +2,8 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
         this.at = at;
     }
 
@@ -11,4 +11,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    @Override
+    public String fileString() {
+        return "E" + super.fileString() + " | " + this.at;
+    }
+
 }

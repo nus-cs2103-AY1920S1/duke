@@ -22,12 +22,11 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new DukeUi();
-        storage = new DukeStorage(filePath);
         try {
+            storage = new DukeStorage(filePath);
             tasks = new DukeTaskList(storage.load(ui));
-        } catch (IOException ex) {
+        } catch (NullPointerException | IOException ex) {
             ui.displayFileLoadingError();
-            tasks = new DukeTaskList();
         }
     }
 

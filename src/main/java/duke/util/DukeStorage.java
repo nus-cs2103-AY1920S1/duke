@@ -25,7 +25,7 @@ public class DukeStorage {
      * This constructor takes in the path of the data file stored on the hard disk.
      * @param taskFilePath Relative/Full path to the data file.
      */
-    public DukeStorage (String taskFilePath) {
+    public DukeStorage (String taskFilePath) throws NullPointerException {
         this.taskFilePath = new File(taskFilePath);
     }
 

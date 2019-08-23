@@ -1,10 +1,7 @@
 import exceptions.DateParseException;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import java.text.SimpleDateFormat;
 
 public class Event extends Task {
     public static final String REGEX = "/at";

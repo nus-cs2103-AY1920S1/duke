@@ -49,22 +49,22 @@ public class Duke {
                 cmd = Command.lookup(tokens[0]);
                 if (cmd != null) {
                     switch (cmd) {
-                        case DONE:
-                            try {
-                                doTask(Integer.parseInt(tokens[1]));
-                            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                                addTask(input);
-                            }
-                            break;
-                        case DELETE:
-                            try {
-                                deleteTask(Integer.parseInt(tokens[1]));
-                            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                                addTask(input);
-                            }
-                            break;
-                        default:
+                    case DONE:
+                        try {
+                            doTask(Integer.parseInt(tokens[1]));
+                        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                             addTask(input);
+                        }
+                        break;
+                    case DELETE:
+                        try {
+                            deleteTask(Integer.parseInt(tokens[1]));
+                        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                            addTask(input);
+                        }
+                        break;
+                    default:
+                        addTask(input);
                     }
                 } else {
                     addTask(input);

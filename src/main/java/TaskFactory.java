@@ -14,14 +14,14 @@ public class TaskFactory {
             throw new TaskException();
         }
         switch (Command.lookup(tokens[0])) {
-            case TODO:
-                return createToDo(description);
-            case DEADLINE:
-                return createDeadline(description);
-            case EVENT:
-                return createEvent(description);
-            default:
-                throw new TaskException();
+        case TODO:
+            return createToDo(description);
+        case DEADLINE:
+            return createDeadline(description);
+        case EVENT:
+            return createEvent(description);
+        default:
+            throw new TaskException();
         }
     }
 

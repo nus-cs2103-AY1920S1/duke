@@ -33,6 +33,7 @@ public class Duke {
 	}
 
 	private boolean displayList(Command input) {
+		this.io.say("Here are the tasks in your list:");
 		this.io.say(this.taskList.stream()
 				.map(Object::toString)
 				.map(new CounterDecorator(1))

@@ -57,7 +57,7 @@ class ToDoList {
                 // throw some exception here?
                 break;
         }
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        printTotalTasks();
     }
     void listAllTasks() {
         int total = taskList.size();
@@ -71,5 +71,17 @@ class ToDoList {
         t.taskDone();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(t);
+    }
+    void deleteTask(int taskIndex) throws InvalidTaskIndexDukeException {
+        if (taskIndex < 0 || taskIndex > taskList.size() - 1) {
+            throw new InvalidTaskIndexDukeException(taskIndex + " exceeds the range of taskList.");
+        }
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(taskList.get(taskIndex));
+        taskList.remove(taskIndex);
+        printTotalTasks();
+    }
+    private void printTotalTasks() {
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 }

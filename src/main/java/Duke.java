@@ -48,6 +48,12 @@ public class Duke {
                         }
                         myTasks.addTask(input.substring(6), TaskType.EVENT);
                         break;
+                    case "delete":
+                        if (input.length() <= 6) {
+                            throw new InvalidTaskIndexDukeException("No task number was given.");
+                        }
+                        myTasks.deleteTask(Integer.parseInt(splitInput[1]) - 1);
+                        break;
                     default:
                         throw(new UnknownCmdDukeException(splitInput[0] + " is not a known command."));
 
@@ -62,6 +68,10 @@ public class Duke {
                 System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
             } catch (NoDateDukeException e) {
                 System.out.println("☹ OOPS!!! You need to provide a date, with / to indicate it:-(");
+            } catch (InvalidTaskIndexDukeException e) {
+                System.out.println("☹ OOPS!!! You need to provide a valid task number :-(");
+            } catch (NumberFormatException e) {
+                System.out.println("☹ OOPS!!! You need to provide a valid number :-(");
             }
         }
     }

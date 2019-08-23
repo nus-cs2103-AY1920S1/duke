@@ -63,6 +63,9 @@ public class Duke {
                 case "event":
                     handleEvent(wordReader.nextLine());
                     break;
+                case "delete":
+                    handleDelete(wordReader.nextLine());
+                    break;
                 default:
                     printHelpMessage();
                     break;
@@ -79,6 +82,7 @@ public class Duke {
                 "todo <desc>\n" +
                 "deadline <desc> /by <time>\n" +
                 "list\n" +
+                "delete <number>\n" +
                 "done <number>\n");
     }
     
@@ -96,6 +100,25 @@ public class Duke {
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("The format is: 'done <number>'. Please try again.");
+            banner();
+        }
+    }
+
+    private void handleDelete(String number) {
+        // parse the number, mark as done
+        try {
+            int n = Integer.parseInt(number.trim());
+            Task t = cache.remove(n-1); 
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(t);
+            System.out.printf("Now you have %d tasks in the list.\n", cache.size());
+            banner();
+        } catch (NullPointerException e) {
+            System.out.println("You probably gave a number outside of the list.");
+            banner();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("The format is: 'delete <number>'. Please try again.");
             banner();
         }
     }

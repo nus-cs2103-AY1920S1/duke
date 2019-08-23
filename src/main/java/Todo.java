@@ -1,4 +1,4 @@
-public class Todo extends Task {
+class Todo extends Task {
     /**
      * Creates a new Todo task with the given description.
      * @param description       Task to be completed.

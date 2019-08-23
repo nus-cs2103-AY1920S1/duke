@@ -1,16 +1,16 @@
 import java.util.List;
 
 class DukeFormatter {
-    private static final String horizontalLine =
+    private static final String HORIZONTAL_LINE =
             "____________________________________________________________";
 
-    private static final String indent = "    ";
+    private static final String INDENT = "    ";
 
     /**
      * Prints a horizontal line of width 60 characters.
      */
     private static void printBorder() {
-        System.out.println(indent + horizontalLine);
+        System.out.println(INDENT + HORIZONTAL_LINE);
     }
 
     /**
@@ -18,7 +18,7 @@ class DukeFormatter {
      * @param text      Single line of text to be printed
      */
     private static void print(String text) {
-        System.out.println(indent + " " + text);
+        System.out.println(INDENT + " " + text);
     }
 
     /**

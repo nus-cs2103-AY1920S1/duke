@@ -3,15 +3,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    public static final String logo = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
-    private static final List<Task> taskList = new ArrayList<>();
+    private static List<Task> taskList = new ArrayList<>();
 
     /**
      * Throws an exception if the given input does not have a valid format.
@@ -151,8 +151,8 @@ public class Duke {
     public static void main(String[] args) {
         DukeFormatter.prettyPrint(
                 "Hello! I'm Duke\nWhat can I do for you?");
-        while (scanner.hasNext()) {
-            String userInput = scanner.nextLine();
+        while (SCANNER.hasNext()) {
+            String userInput = SCANNER.nextLine();
             userInput = userInput.strip();
             if (userInput.equalsIgnoreCase("bye")) { break; }
             try {

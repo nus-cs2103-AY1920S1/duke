@@ -59,10 +59,10 @@ public class Parser {
             String[] statementAndDate = taskArray[1].split("\\s+", 2);
             switch(taskType) {
                 case "deadline":
-                    DeadlineTask.verifyTaskStatement(statementAndDate[0]);
+                    DeadlineTask.verifyTaskStatement(statementAndDate[0].toLowerCase());
                     break;
                 case "event":
-                    EventTask.verifyTaskStatement(statementAndDate[0]);
+                    EventTask.verifyTaskStatement(statementAndDate[0].toLowerCase());
                     break;
             }
             this.taskList.add(commandDescription[0], taskName, statementAndDate[1]);

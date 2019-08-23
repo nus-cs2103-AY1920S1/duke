@@ -1,11 +1,11 @@
 import java.util.*;
 public class Duke {
     /* Globals */
-    private static TaskList tasklist;
+    private static TaskList taskList;
     private static Parser parser;
 
     public static void init() {
-        tasklist = new TaskList();
+        taskList = new TaskList();
         parser = new Parser();
     }
 
@@ -21,11 +21,11 @@ public class Duke {
      * Adds commands to lists and runs required commands
      */
     private static void runEvents() {
-        tasklist = new TaskList();
+        taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine().trim();
         while (!command.toLowerCase().equals("bye")) {
-            parser.executeCommand(tasklist, command);
+            parser.executeCommand(taskList, command);
             command = sc.nextLine().trim();
         }
     }

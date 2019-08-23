@@ -9,7 +9,7 @@ public class DeadlineTask extends Task {
     }
 
     public static void verifyTaskStatement(String statement) throws IncorrectStatementException {
-        if(!statement.equals(DEADLINE_TASK_STATEMENT)) {
+        if (!statement.equals(DEADLINE_TASK_STATEMENT)) {
             throw new IncorrectStatementException(statement, DEADLINE_TASK_STATEMENT);
         }
     }

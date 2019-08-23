@@ -9,7 +9,7 @@ public class EventTask extends Task {
     }
 
     public static void verifyTaskStatement(String statement) throws IncorrectStatementException {
-        if(!statement.equals(EVENT_TASK_STATEMENT)) {
+        if (!statement.equals(EVENT_TASK_STATEMENT)) {
             throw new IncorrectStatementException(statement, EVENT_TASK_STATEMENT);
         }
     }

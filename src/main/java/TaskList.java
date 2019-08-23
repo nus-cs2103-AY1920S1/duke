@@ -13,7 +13,7 @@ public class TaskList {
      */
     public void add(String taskName) {
         this.list.add(new ToDoTask(taskName));
-        Message.successfulAddMessage(this.list.get(list.size()-1), this.size());
+        Message.printSuccessfulAddMessage(this.list.get(list.size()-1), this.size());
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
                 this.list.add(new EventTask(taskName, date));
                 break;
         }
-        Message.successfulAddMessage(this.list.get(list.size()-1), this.size());
+        Message.printSuccessfulAddMessage(this.list.get(list.size()-1), this.size());
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
     public void delete(int idx) throws IndexOutOfBoundsException {
         Task task = this.list.get(idx);
         this.list.remove(idx);
-        Message.deleteTaskMessage(task, this.size());
+        Message.printSuccessDeleteTaskMessage(task, this.size());
     }
 
     /**

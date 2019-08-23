@@ -4,7 +4,7 @@ public class Message {
      * @param task - Task that has been successfully deleted
      * @param size - Current size of list
      */
-    public static void successfulAddMessage(Task task, int size) {
+    public static void printSuccessfulAddMessage(Task task, int size) {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + task);
         System.out.println("Now you have " + size + " tasks in the list.");
@@ -15,7 +15,7 @@ public class Message {
      * @param task - Task that has been successfully deleted
      * @param size - Current size of list
      */
-    public static void deleteTaskMessage(Task task, int size) {
+    public static void printSuccessDeleteTaskMessage(Task task, int size) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task);
         System.out.println("Now you have " + size + " tasks in the list.");

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class DukeIO {
 
@@ -13,6 +14,7 @@ public class DukeIO {
 	private final Map<String, Predicate<Command>> commandMap
 		= new HashMap<>();
 	private Predicate<Command> defaultHandler = null;
+	private boolean printingDialogBlock;
 
 	private final Scanner scanner;
 
@@ -24,17 +26,16 @@ public class DukeIO {
 		say(Arrays.asList(lines).iterator());
 	}
 	public void say(Iterator<String> lines) {
-		//Print start of reply line
-		System.out.println(lineRule);
+		if(!this.printingDialogBlock) {
+			//Print start of reply line
+			System.out.println(lineRule);
+			this.printingDialogBlock = true;
+		}
 
 		//Print each given line
 		while(lines.hasNext()) {
 			System.out.println(lines.next());
 		}
-
-		//Print end of reply line, and extra empty line
-		System.out.println(lineRule);
-		System.out.println();
 	}
 
 	public void bindCommand(String command, Predicate<Command> handler) {
@@ -43,6 +44,31 @@ public class DukeIO {
 
 	public void setUnknownCommandHandler(Predicate<Command> handler) {
 		this.defaultHandler = handler;
+	}
+
+	public void withDialogBlock(Runnable action) {
+		this.printingDialogBlock = false;
+		try {
+			action.run();
+		} finally {
+			if(this.printingDialogBlock) {
+				//Print end of reply line, and extra empty line
+				System.out.println(lineRule);
+				System.out.println();
+			}
+		}
+	}
+	public <T> T withDialogBlock(Supplier<T> action) {
+		this.printingDialogBlock = false;
+		try {
+			return action.get();
+		} finally {
+			if(this.printingDialogBlock) {
+				//Print end of reply line, and extra empty line
+				System.out.println(lineRule);
+				System.out.println();
+			}
+		}
 	}
 
 	public void listen() {
@@ -56,11 +82,13 @@ public class DukeIO {
 			Predicate<Command> cmdHandler = commandMap.get(command.type);
 			boolean shouldExit;
 			if(cmdHandler != null) {
-				shouldExit = cmdHandler.test(command);
+				shouldExit = this.withDialogBlock(() -> cmdHandler.test(command));
 			} else if(defaultHandler != null) {
-				shouldExit = defaultHandler.test(command);
+				shouldExit = this.withDialogBlock(() -> defaultHandler.test(command));
 			} else {
-				say(String.format("Unknown command %s", command.type));
+				this.withDialogBlock(
+						() -> say(String.format("Unknown command %s", command.type))
+						);
 				shouldExit = false;
 			}
 

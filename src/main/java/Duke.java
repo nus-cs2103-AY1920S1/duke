@@ -92,7 +92,7 @@ public class Duke {
 
 	private void run() {
 		//Start off greeting the user.
-		this.io.say(initialGreeting);
+		this.io.withDialogBlock(() -> this.io.say(initialGreeting));
 
 		//Start listen loop.
 		this.io.listen();

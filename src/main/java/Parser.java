@@ -17,14 +17,13 @@ public class Logic {
     private static final String TASK_DONE_MSG = "Nice! I've marked this task as done:";
     private static final String LIST_MSG = "Here are the tasks in your list:";
 
-    private static final String FILE_PATH = "data/duke.txt";
-
     private Scanner sc;
     private TaskList taskList;
 
-    Logic(Scanner sc) {
+    Logic(Scanner sc, Storage storage) {
         this.sc = sc;
-        taskList = new TaskList(FILE_PATH);
+        taskList = new TaskList(storage);
+        taskList.addAll(storage.load());
     }
 
     int process(String command) {
@@ -67,7 +66,7 @@ public class Logic {
             if (s.isEmpty()) {
                 throw new TaskNotSpecifiedException();
             }
-            int i = Integer.parseInt(s) - 1;
+            int i = Integer.parseInt(s);
             Task task = taskList.get(i);
             task.markAsDone();
             taskList.notifyChange();
@@ -85,7 +84,7 @@ public class Logic {
             if (s.isEmpty()) {
                 throw new TaskNotSpecifiedException();
             }
-            int i = Integer.parseInt(s) - 1;
+            int i = Integer.parseInt(s);
             Task task = taskList.get(i);
             taskList.remove(i);
             print(TASK_REMOVED_MSG);
@@ -100,8 +99,8 @@ public class Logic {
 
     private void list() {
         print(LIST_MSG);
-        for (int i = 0; i < taskList.size(); ++i) {
-            print((i + 1) + ". " + taskList.get(i));
+        for (int i = 1; i <= taskList.size(); ++i) {
+            print(i + ". " + taskList.get(i));
         }
     }
 

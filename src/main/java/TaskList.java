@@ -1,3 +1,5 @@
+import exceptions.DukeException;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.util.Scanner;
 public class TaskList extends ArrayList<Task> {
     private String filePath;
 
-    TaskList(String filePath) throws IOException{
+    TaskList(String filePath) {
         this.filePath = filePath;
 
         try {
@@ -21,6 +23,8 @@ public class TaskList extends ArrayList<Task> {
             }
         } catch (IOException e) {
             // no such file
+        } catch (DukeException e) {
+            e.toString();
         }
     }
 

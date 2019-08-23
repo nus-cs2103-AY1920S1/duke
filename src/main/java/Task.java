@@ -1,13 +1,20 @@
+import exceptions.DukeException;
+
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public abstract class Task {
     private static final String DELIMITER = " ` ";
 
+    public static final SimpleDateFormat INPUT_DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static final SimpleDateFormat OUTPUT_DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy hh:mma");
+
     private String description;
     private boolean isDone;
 
-    static Task parse(String str) {
+    static Task parse(String str) throws DukeException {
         String[] data = str.split(DELIMITER);
         String type = data[0];
         boolean isDone = Integer.parseInt(data[1]) == 1;
@@ -40,7 +47,7 @@ public abstract class Task {
 
     abstract String getInitial();
 
-    String getDate() {
+    Date getDate() {
         return null;
     }
 
@@ -65,7 +72,7 @@ public abstract class Task {
         sb.append(description);
         if (getDate() != null) {
             sb.append(DELIMITER);
-            sb.append(getDate());
+            sb.append(INPUT_DATE_FORMAT.format(getDate()));
         }
         return sb.toString();
     }
@@ -73,7 +80,7 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + getInitial() + "]" + "[" + getStatusIcon() + "] " + description + " " +
-                (getDate() == null ? "" : brackets(getPrefix() + getDate()));
+                (getDate() == null ? "" : brackets(getPrefix() + OUTPUT_DATE_FORMAT.format(getDate())));
     }
 
     private String brackets(String s) {

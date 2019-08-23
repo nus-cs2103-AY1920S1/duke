@@ -1,12 +1,22 @@
+import exceptions.DateParseException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
     public static final String REGEX = "/by";
     public static final String INITIAL = "D";
 
-    private String by;
+    private Date by;
 
-    Deadline(String desc, String by) {
+    Deadline(String desc, String by) throws DateParseException {
         super(desc.trim());
-        this.by = by.trim();
+        try {
+            this.by = INPUT_DATE_FORMAT.parse(by);
+        } catch (ParseException e) {
+            throw new DateParseException();
+        }
     }
     @Override
     String getInitial() {
@@ -14,7 +24,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    String getDate() {
+    Date getDate() {
         return by;
     }
 

@@ -28,11 +28,7 @@ public class Logic {
 
     Logic(Scanner sc) {
         this.sc = sc;
-        try {
-            taskList = new TaskList(FILE_PATH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        taskList = new TaskList(FILE_PATH);
     }
 
     int process(String command) {

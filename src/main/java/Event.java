@@ -1,12 +1,24 @@
+import exceptions.DateParseException;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import java.text.SimpleDateFormat;
+
 public class Event extends Task {
     public static final String REGEX = "/at";
     public static final String INITIAL = "E";
 
-    private String at;
+    private Date at;
 
-    Event(String desc, String at) {
+    Event(String desc, String at) throws DateParseException {
         super(desc.trim());
-        this.at = at.trim();
+        try {
+            this.at = INPUT_DATE_FORMAT.parse(at);
+        } catch (ParseException e) {
+            throw new DateParseException();
+        }
     }
     @Override
     String getInitial() {
@@ -14,7 +26,7 @@ public class Event extends Task {
     }
 
     @Override
-    String getDate() {
+    Date getDate() {
         return at;
     }
 

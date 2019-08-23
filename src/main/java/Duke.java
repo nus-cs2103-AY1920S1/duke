@@ -53,6 +53,19 @@ public class Duke {
 		this.addTask(task);
 		return false;
 	}
+
+	private boolean makeEventTask(Command input) {
+		String description = input.arguments;
+		String timing = input.namedArguments.get("at");
+		if(timing == null) {
+			timing = "unknown";
+		}
+
+		EventTask task = new EventTask(description, timing);
+
+		this.addTask(task);
+		return false;
+	}
 	private boolean makeToDoTask(Command input) {
 		this.addTask(new Task(input.arguments));
 		return false;
@@ -86,6 +99,7 @@ public class Duke {
 		this.io.bindCommand("done", this::markAsDone);
 		this.io.bindCommand("bye", this::handleBye);
 		this.io.bindCommand("deadline", this::makeDeadlineTask);
+		this.io.bindCommand("event", this::makeEventTask);
 		this.io.bindCommand("todo", this::makeToDoTask);
 
 		this.taskList = new ArrayList<>();

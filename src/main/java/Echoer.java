@@ -14,7 +14,7 @@ public class Echoer {
     }
 
     void greet() {
-        this.echo("Hello! I'm Duke", "What can I do for you?");
+        this.echo("Hello! I'm Jermi", "What can I do for you?");
     }
 
     void exit() {

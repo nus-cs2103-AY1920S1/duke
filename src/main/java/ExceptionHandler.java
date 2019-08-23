@@ -5,7 +5,7 @@ public class ExceptionHandler {
         this.echoer = echoer;
     }
 
-    void handleKnownException(DukeException e) {
+    void handleKnownException(JermiException e) {
         this.echoer.echo(e.getMessage());
     }
 

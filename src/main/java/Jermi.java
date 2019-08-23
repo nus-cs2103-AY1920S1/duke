@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Jermi {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Client client = Client.initialise();

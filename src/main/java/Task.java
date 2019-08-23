@@ -1,4 +1,7 @@
 public abstract class Task {
+    public static final String INPUT_DATE_FORMAT = "dd/MM/yyyy HHmm";
+    public static final String OUTPUT_DATE_FORMAT = "dd MMMM yyyy hh:mma";
+
     private String description;
     private boolean isDone;
 

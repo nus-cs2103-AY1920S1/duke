@@ -26,7 +26,6 @@ public class ListManager {
                 actualList.add(todo);
                 this.successfulAdd();
             } else {
-                System.out.println(bar);
                 System.out.println("\t☹ OOPS!!! The description of a todo cannot be empty.");
                 System.out.println(bar);
             }
@@ -43,14 +42,12 @@ public class ListManager {
             actualList.add(event);
             this.successfulAdd();
         } else {
-            System.out.println(bar);
             System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             System.out.println(bar);
         }
     }
 
     public void successfulAdd() {
-        System.out.println(bar);
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + actualList.get(actualList.size() - 1));
         System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
@@ -58,11 +55,9 @@ public class ListManager {
     }
     public void iterate() {
         if (this.actualList.isEmpty()) {
-            System.out.println(bar);
             System.out.println("\tYou have nothing on your to-do list!");
             System.out.println(bar);
         } else {
-            System.out.println(bar);
             System.out.println("\tHere are the tasks in your list:");
             for(int i = 0; i < actualList.size(); i++) {
                 System.out.print('\t');
@@ -74,7 +69,6 @@ public class ListManager {
     }
 
     public void done(int index) {
-        System.out.println(bar);
         if (index <= actualList.size()) {
             actualList.get(index - 1).done = true;
             System.out.println("\tNice! I've marked this task as done:");
@@ -87,7 +81,6 @@ public class ListManager {
 
     public void delete(int index) {
         Task removed = this.actualList.remove(index - 1);
-        System.out.println(bar);
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t  " + removed);
         System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");

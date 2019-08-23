@@ -24,6 +24,7 @@ public class Processor {
         String input = sc.nextLine();
         while (!input.equals("quit")) {
             String[] strArray = input.split(" ",0);
+            System.out.println(bar);
             if (input.equals("list")) {
                 taskList.iterate();
                 input = sc.nextLine();

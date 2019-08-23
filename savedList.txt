@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 [T][✓] 2        1
 [T][✘] 3        0
 [T][✘] 4       0
 [D][✘] sadasd   (by:  asdasd) 0
 [E][✘] sdasdas   (at:  asdasd) 0
+=======
+[D][✓] sdasd    (by:  asdasd) 1
+[E][✘] asdasd    (at:  asdasd) 0
+>>>>>>> branch-Level-7

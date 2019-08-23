@@ -44,7 +44,12 @@ public class Duke {
         String emptyError = sb.toString();
         sb.setLength(0);
 
+<<<<<<< HEAD
 
+=======
+        Scanner pastScan = new Scanner(new FileReader("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt"));
+        loadExisting(pastScan);
+>>>>>>> branch-Level-7
         //Scanner obj for input
         Scanner sc = new Scanner(System.in);
 
@@ -176,6 +181,11 @@ public class Duke {
         }
 
 
+<<<<<<< HEAD
+=======
+        storeCurrent(items);
+
+>>>>>>> branch-Level-7
         //Concluding Message
         sb.append(border + "\n");
         sb.append("Bye. Hope to see you again soon!\n");
@@ -200,6 +210,87 @@ public class Duke {
         return sb.toString();
     }
 
+<<<<<<< HEAD
+=======
+    private static void loadExisting(Scanner stored) {
+        StringBuilder sb = new StringBuilder();
+        while (stored.hasNextLine()) {
+            String input = stored.nextLine();
+            if (input.toLowerCase().contains("[t]")) {
+                //adding an item
+                try {
+                    Todo newTask = new Todo(input.substring(7, input.length() - 1));
+                    if (Integer.parseInt(input.substring(input.length() - 1)) == 1) {
+                        newTask.markAsDone();
+                    }
+                    items.add(newTask);
+                } catch (StringIndexOutOfBoundsException e) {
+                    sb.append(border + "\n");
+                    sb.append("Todo must have valid description\n");
+                    sb.append(border + "\n");
+                    System.out.println(sb.toString());
+                    sb.setLength(0);
+                }
+            } else if (input.toLowerCase().contains("[d]")) {
+                try {
+                    int date = input.indexOf("(by");
+                    int close = input.indexOf(")");
+                    //split input into [deadline] [description] [date]
+                    Deadline newTask = new Deadline(input.substring(7, date), input.substring(date + 5, close));
+                    if (Integer.parseInt(input.substring(input.length() - 1)) == 1) {
+                        newTask.markAsDone();
+                    }
+                    items.add(newTask);
+                } catch (StringIndexOutOfBoundsException e) {
+                    sb.append(border + "\n");
+                    sb.append("Invalid Deadline's arguments \n");
+                    sb.append(border + "\n");
+                    System.out.println(sb.toString());
+                    sb.setLength(0);
+                }
+
+            } else if (input.toLowerCase().contains("[e]")) {
+                try {
+                    int time = input.indexOf("(at");
+                    int close = input.indexOf(")");
+                    //split input into [event] [description] [timing]
+                    Event newTask = new Event(input.substring(7, time), input.substring(time + 5, close));
+                    if (Integer.parseInt(input.substring(input.length() - 1)) == 1) {
+                        newTask.markAsDone();
+                    }
+                    items.add(newTask);
+                } catch (StringIndexOutOfBoundsException e) {
+                    sb.append(border + "\n");
+                    sb.append("Invalid Event's arguments \n");
+                    sb.append(border + "\n");
+                    System.out.println(sb.toString());
+                    sb.setLength(0);
+                }
+            }
+        }
+    }
+
+    private static void storeCurrent(ArrayList<Task> inputs) {
+        try {
+            File file = new File("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt");
+            FileWriter fileWriter = new FileWriter(file);
+            PrintWriter pw = new PrintWriter(fileWriter);
+            for (Task input : inputs) {
+                int status = 0;
+                if (input.isDone) {
+                    status = 1;
+                }
+                pw.println(input + " " + status);
+            }
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+>>>>>>> branch-Level-7
 
 
 }
+

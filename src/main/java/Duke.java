@@ -80,19 +80,19 @@ public class Duke {
                 }
                 Task t = new Task(arg[1]);
                 if (arg[0].equals("todo")) {
-                    t = new Todo(arg[1]);
+                    t = new TodoTask(arg[1]);
                 } else if (arg[0].equals("deadline")) {
                     String[] temp = arg[1].split(" /by ", 2);
                     if (temp.length < 2 || temp[1].trim().length() < 1) {
                         throw new DukeEmptyDateException(arg[0]);
                     }
-                    t = new Deadline(temp[0], temp[1]);
+                    t = new DeadlineTask(temp[0], temp[1]);
                 } else if (arg[0].equals("event")) {
                     String[] temp = arg[1].split(" /at ", 2);
                     if (temp.length < 2 || temp[1].trim().length() < 1) {
                         throw new DukeEmptyDateException(arg[0]);
                     }
-                    t = new Event(temp[0], temp[1]);
+                    t = new EventTask(temp[0], temp[1]);
                 }
                 tasks.add(t);
                 result = "Got it. I've added this task:\n";

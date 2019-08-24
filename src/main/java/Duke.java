@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -103,6 +104,8 @@ public class Duke {
             default:
                 throw new DukeException();
             }
+        } catch (ParseException e) {
+            System.out.println("Invalid date format!");
         } catch (DukeException e) {
             dukePrint(e.toString());
         } finally {

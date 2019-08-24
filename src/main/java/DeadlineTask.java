@@ -1,10 +1,15 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DeadlineTask extends Task {
 
-    protected String by;
+    protected Date by;
 
-    public DeadlineTask(String description, String by) {
+    public DeadlineTask(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        this.by = format.parse(by);
     }
 
     @Override

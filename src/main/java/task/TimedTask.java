@@ -23,10 +23,10 @@ public abstract class TimedTask extends Task {
             SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date dateTime = inputFormat.parse(time);
             SimpleDateFormat dateFormat = new SimpleDateFormat("d");
-            SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM yyyy");
+            SimpleDateFormat monthYearFormat = new SimpleDateFormat("MMMM yyyy");
             SimpleDateFormat hourFormat = new SimpleDateFormat("ha");
             this.time = suffixes[Integer.parseInt(dateFormat.format(dateTime))]
-                      + " of " + outputFormat.format(dateTime) + ", " + hourFormat.format(dateTime).toLowerCase();
+                      + " of " + monthYearFormat.format(dateTime) + ", " + hourFormat.format(dateTime).toLowerCase();
         } catch (ParseException e) {
             this.time = time;
         }

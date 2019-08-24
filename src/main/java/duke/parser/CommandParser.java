@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputDukeException;
@@ -73,6 +74,16 @@ public class CommandParser {
             }
 
             return new DeleteCommand(getIndexFromMatcher(matcher.group(1)));
+        } else if (input.startsWith("find")) {
+            Pattern findPattern = Pattern.compile("find (.*)");
+            matcher = findPattern.matcher(input);
+
+            if (!matcher.matches()) {
+                throw new InvalidInputDukeException("Syntax error. "
+                        + "Usage: find [keywords]");
+            }
+
+            return new FindCommand(matcher.group(1));
         } else {
             Task task = TaskParser.parse(input);
             return new AddCommand(task);

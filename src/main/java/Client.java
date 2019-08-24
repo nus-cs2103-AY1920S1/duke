@@ -68,7 +68,7 @@ public class Client {
         if (description.isEmpty()) {
             return new String[]{"", ""};
         }
-        String[] toEdit = description.split("/");
+        String[] toEdit = description.split("/", 2);
         String activity = toEdit[0].trim();
         toEdit = toEdit[1].split(" ");
         toEdit[0] = "";

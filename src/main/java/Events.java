@@ -8,9 +8,9 @@ public class Events extends Task {
     public String toString(){
         String box;
         String msg = "[E]";
-        if (!this.isDone()){
+        if (!this.isDone()) {
             box = "[✗]";
-        } else{
+        } else {
             box = "[✓]";
         }
         return msg + box + " " + this.getTask() + " (at: " + timeDate + ")";

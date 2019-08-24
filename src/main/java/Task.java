@@ -1,19 +1,20 @@
 public class Task {
+    protected String type;
     protected String description;
-    protected boolean isDone;
+    protected int isDone;
 
-    public Task(String description) {
+    public Task(String description, int isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void setDone() {
-        this.isDone = true;
+        this.isDone = 1;
     }
 
     @Override
     public String toString() {
-        String doneSymbol = isDone ? "[+]" : "[ ]"; /* "[\u2713]" : "[\u2718]"; don't display properly */
+        String doneSymbol = isDone == 1 ? "[+]" : "[ ]"; /* "[\u2713]" : "[\u2718]"; don't display properly */
         return doneSymbol + " " + description;
     }
 }

@@ -107,17 +107,24 @@ public class Duke {
                             if (tokens.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                             }
-                            String date = "";
                             boolean dateFlag = false;
+                            String dateString = "";
+                            String timeString = "";
                             for (int m = 1; m < tokens.length; m++) {
                                 if (tokens[m].equals("/by")) {
                                     dateFlag = true;
                                 } else {
                                     if (dateFlag == false) toAdd = toAdd + tokens[m] + " ";
-                                    else date = date + tokens[m] + " ";
+                                    else {
+                                        if (m == tokens.length - 1) {
+                                            timeString = tokens[m];
+                                        } else {
+                                            dateString = tokens[m];
+                                        }
+                                    }
                                 }
                             }
-                            newTask = new Deadline(toAdd.trim(), date.trim());
+                            newTask = new Deadline(toAdd.trim(), dateString.trim(), timeString.trim());
                             System.out.println(gotIt);
                             System.out.println(" " + newTask.toString());
                             listOfTasks.add(newTask);
@@ -132,16 +139,23 @@ public class Duke {
                             if(tokens.length == 1){
                                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                             }
-                            String timing = " ";
+                            String dateString = "";
+                            String timeString = "";
                             boolean timeFlag = false;
                             for (int z = 1; z < tokens.length; z++) {
                                 if (tokens[z].equals("/at")) timeFlag = true;
                                 else {
                                     if (timeFlag == false) toAdd = toAdd + tokens[z] + " ";
-                                    else timing = timing + tokens[z] + " ";
+                                    else{
+                                        if(z == tokens.length - 1){
+                                            timeString = tokens[z];
+                                        } else {
+                                            dateString = tokens[z];
+                                        }
+                                    }
                                 }
                             }
-                            newTask = new Event(toAdd.trim(), timing.trim());
+                            newTask = new Event(toAdd.trim(), dateString.trim(), timeString.trim());
                             System.out.println(gotIt);
                             System.out.println(" " + newTask.toString());
                             listOfTasks.add(newTask);

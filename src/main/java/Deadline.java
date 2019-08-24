@@ -1,15 +1,17 @@
 public class Deadline extends Task {
 
-    protected String by;
+	protected Date date;
+	protected Time time;
 
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
+	public Deadline(String description, Date date, Time time) {
+		super(description);
+		this.date = date;
+		this.time = time;
+	}
 
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
+	@Override
+	public String toString() {
+		return "[D]" + super.toString() + " (by: " + date + (time.isNull() ? "" : ", " + time) + ")";
+	}
 
 }

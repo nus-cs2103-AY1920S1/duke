@@ -43,14 +43,30 @@ public class Duke {
         }
     }
 
+    private static String getSaveFilePath() {
+        if (System.getProperty("os.name").equals("Windows 10"))
+            return "/Users/uicfa/Downloads/data.json";
+        else
+            return "/Users/leo/Downloads/data.json";
+    }
+
+    private static void createSaveFile() throws IOException {
+        formattedPrint("data.json not found. Creating a new one...");
+        File file = new File(getSaveFilePath());
+        if (!file.createNewFile()) throw new IOException();
+        writeToSaveFile("{\"data\":[]}");
+    }
+
     private static JSONObject readSaveFile() throws IOException, JSONException {
         // TODO: handle the exception where data.json doesn't exist or format is wrong
-        String path;
-        if (System.getProperty("os.name").equals("Windows 10"))
-            path = "/Users/uicfa/Downloads/data.json";
-        else
-            path = "/Users/leo/Downloads/data.json";
-        InputStream is = new FileInputStream(path);
+        String path = getSaveFilePath();
+        InputStream is;
+        try {
+            is = new FileInputStream(path);
+        } catch (FileNotFoundException e) {
+            createSaveFile();
+            is = new FileInputStream(path);
+        }
         BufferedReader buf = new BufferedReader(new InputStreamReader(is));
         String line = buf.readLine();
         StringBuilder sb = new StringBuilder();
@@ -62,11 +78,7 @@ public class Duke {
     }
 
     private static void writeToSaveFile(String content) throws IOException {
-        String path;
-        if (System.getProperty("os.name").equals("Windows 10"))
-            path = "/Users/uicfa/Downloads/data.json";
-        else
-            path = "/Users/leo/Downloads/data.json";
+        String path = getSaveFilePath();
         FileWriter fileWriter = new FileWriter(path);
         fileWriter.write(content);
         fileWriter.close();
@@ -80,6 +92,7 @@ public class Duke {
 
     private static void syncSaveFile(List<Task> tasks) throws IOException, JSONException {
         JSONObject obj = new JSONObject();
+        obj.put("data", new ArrayList<>());
         for (Task t : tasks) {
             obj.append("data", t.toMap());
         }

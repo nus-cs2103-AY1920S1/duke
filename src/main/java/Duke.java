@@ -22,6 +22,8 @@ public class Duke {
         System.out.println(greeting);
         ArrayList<Task> tasks = new ArrayList<>();
         int index = 0;
+        String command = "";
+        Scanner sc = new Scanner(System.in);
         try {
             //make a new file or read from existing file
             File f = new File("data/duke.txt");
@@ -29,11 +31,16 @@ public class Duke {
             f.createNewFile();
             BufferedReader bfr = new BufferedReader(new FileReader(f));
             String line = null;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
             while ((line = bfr.readLine()) != null) {
                 index++;
-                String[] stringArr = line.split( " [|] " , 0);
+                String[] stringArr = line.split(" [|] ", 0);
                 if (stringArr[0].equals("E")) {
-                    Event event = new Event(stringArr[2], stringArr[3]);
+                    String[] dateTimeArr = (stringArr[3]).split(" ", 2);
+                    Date date = dateFormat.parse(dateTimeArr[0]);
+                    Date time = timeFormat.parse(dateTimeArr[1]);
+                    Event event = new Event(stringArr[2], date, time);
                     if (stringArr[1] == "1") {
                         event.markAsDone();
                     }
@@ -45,22 +52,32 @@ public class Duke {
                     }
                     tasks.add(td);
                 } else {
-                    Deadline dl = new Deadline(stringArr[2], stringArr[3]);
+                    String[] dateTimeArr = (stringArr[3]).split(" ", 2);
+                    Date date = dateFormat.parse(dateTimeArr[0]);
+                    Date time = timeFormat.parse(dateTimeArr[1]);
+                    Deadline dl = new Deadline(stringArr[2], date, time);
                     if (stringArr[1] == "1") {
                         dl.markAsDone();
                     }
-                    tasks.add(dl);;
+                    tasks.add(dl);
+                    ;
                 }
 
             }
+            command = sc.nextLine();
+        } catch (ParseException e) {
+            System.out.println("\u2639 OOPS!!! There is an incorrect format in the data file."
+                + "Please correct it.");
+            System.out.println(e);
+            command = "bye";
+
         } catch (Exception e) {
             //add more specific exceptions
             System.out.println("Error with the data file initialization");
             System.out.println(e);
-        }
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+            command = "bye";
 
+        }
 
         while (!command.equals("bye")) {
             try {

@@ -5,6 +5,8 @@ import java.util.Date;
 public class Event extends Task {
     protected DateFormat outDateFormat = new SimpleDateFormat( "dd/MM/yyyy");
     protected DateFormat outTimeFormat = new SimpleDateFormat("HH.mm aa");
+    protected SimpleDateFormat fileDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    protected SimpleDateFormat fileTimeFormat = new SimpleDateFormat("HHmm");
     protected Date date, time;
     public Event(String description, Date date, Date time) {
         super(description);
@@ -19,6 +21,6 @@ public class Event extends Task {
 
     @Override
     public String toWriteIntoFile() {
-        return "E" + super.toWriteIntoFile() + " | " + at;
+        return "E" + super.toWriteIntoFile() + " | " + fileDateFormat.format(date) + " " + fileTimeFormat.format(time);
     }
 }

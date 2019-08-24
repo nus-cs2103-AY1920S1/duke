@@ -13,12 +13,13 @@ import java.util.Date;
 public class Duke {
 
     private static String border = "-------------------------------------";
-    private static ArrayList<Task> items = new ArrayList<Task>();
+    private static ArrayList<Task> items;
     private Ui user;
 
 
     public Duke() {
         user = new Ui();
+        items = new ArrayList<>();
     }
     /**
      * Main method for executing Duke.
@@ -77,9 +78,7 @@ public class Duke {
                 //getting the number for item
                 try {
                     int itemNum = Integer.parseInt(input.substring(input.length() - 1));
-                    Task curr = items.get(itemNum - 1);
-                    user.deleteMessage(curr, (items.size() - 1));
-                    items.remove(itemNum - 1);
+                    deleteTask(itemNum);
                     input = sc.nextLine();
                 } catch (IndexOutOfBoundsException e) {
                     user.indexError();
@@ -105,20 +104,22 @@ public class Duke {
     }
 
 
-    private void generateTask(String input) {
+    public String generateTask(String input) {
         StringBuilder sb = new StringBuilder();
+        String message = "";
         if (input.toLowerCase().contains("todo")) {
             //adding an item
             try {
                 Todo newTask = new Todo(input.substring(5));
                 items.add(newTask);
-                String message = user.generateMessage(newTask, items.size());
+                message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException e) {
                 sb.append(border + "\n");
                 sb.append("Todo must have valid description\n");
                 sb.append(border + "\n");
-                System.out.println(sb.toString());
+                message = sb.toString();
+                System.out.println(message);
                 sb.setLength(0);
             }
         } else if (input.toLowerCase().contains("deadline")) {
@@ -128,13 +129,14 @@ public class Duke {
                 Date deadLineDate = convertStringToDeadline(input.substring(date + 3));
                 Deadline newTask = new Deadline(input.substring(9, date), deadLineDate);
                 items.add(newTask);
-                String message = user.generateMessage(newTask, items.size());
+                message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 sb.append(border + "\n");
                 sb.append("Invalid Deadline's arguments \n");
                 sb.append(border + "\n");
-                System.out.println(sb.toString());
+                message = sb.toString();
+                System.out.println(message);
                 sb.setLength(0);
             }
 
@@ -147,22 +149,25 @@ public class Duke {
                 Date eventEnd = convertStringToEventEnd(input.substring(timeRange + 1));
                 Event newTask = new Event(input.substring(6, time), eventDate, eventEnd);
                 items.add(newTask);
-                String message = user.generateMessage(newTask, items.size());
+                message = user.generateMessage(newTask, items.size());
                 System.out.println(message);
             } catch (StringIndexOutOfBoundsException | ParseException e) {
                 sb.append(border + "\n");
                 sb.append("Invalid Event's arguments \n");
                 sb.append(border + "\n");
-                System.out.println(sb.toString());
+                message = sb.toString();
+                System.out.println(message);
                 sb.setLength(0);
             }
         } else {
             sb.append(border + "\n");
             sb.append("Unable to understand. Invalid Input. \n");
             sb.append(border + "\n");
-            System.out.println(sb.toString());
+            message = sb.toString();
+            System.out.println(message);
             sb.setLength(0);
         }
+        return message;
     }
 
 
@@ -245,6 +250,13 @@ public class Duke {
             e.printStackTrace();
         }
 
+    }
+
+    public String deleteTask(int num) throws IndexOutOfBoundsException {
+        Task curr = items.get(num - 1);
+        items.remove(num - 1);
+        String delete = user.deleteMessage(curr, items.size());
+        return delete;
     }
 
     private static Date convertStringToDeadline(String input) throws ParseException {

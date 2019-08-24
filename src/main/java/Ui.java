@@ -24,7 +24,7 @@ public class Ui {
         System.out.println(greetings);
     }
 
-    public void indexError() {
+    public String indexError() {
         //error message for indexOutOfBound
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
@@ -32,9 +32,10 @@ public class Ui {
         sb.append(border + "\n");
         String indexError = sb.toString();
         System.out.println(indexError);
+        return indexError;
     }
 
-    public void emptyError() {
+    public String emptyError() {
         //error message for empty input
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
@@ -42,6 +43,7 @@ public class Ui {
         sb.append(border + "\n");
         String emptyError = sb.toString();
         System.out.println(emptyError);
+        return emptyError;
     }
 
     public void conclusion() {
@@ -53,22 +55,27 @@ public class Ui {
         System.out.println(conclude);
     }
 
-    public void doneMessage(Task curr) {
+    public String doneMessage(Task curr) {
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
         sb.append("Nice! I've marked this task as done:\n");
         sb.append(curr + "\n");
         sb.append(border + "\n");
-        System.out.println(sb.toString());
+        String done = sb.toString();
+        System.out.println(done);
+        return done;
     }
 
-    public void deleteMessage(Task curr, int size) {
+    public String deleteMessage(Task curr, int size) {
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
         sb.append("Noted! I've removed this task:\n");
         sb.append(curr + "\n");
         sb.append("Now you have " + size + " tasks in the list.\n");
         sb.append(border + "\n");
+        String delete = sb.toString();
+        System.out.println(delete);
+        return delete;
     }
 
     public void listTask(ArrayList<Task> items) {

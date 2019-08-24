@@ -6,6 +6,14 @@ class Event extends Task {
         this.date = date;
     }
 
+    public String toStore() {
+        if(super.isCompleted()) {
+            return "E | 1 | " + super.toString() + " | " + this.date;
+        } else {
+            return "E | 0 | " + super.toString() + " | " + this.date;     
+        }
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.date + ")";

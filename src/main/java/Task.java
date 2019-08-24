@@ -1,4 +1,6 @@
-class Task {
+import java.io.Serializable;
+
+class Task implements Serializable{
     private static final String TICK = "\u2713";
     private static final String CROSS = "\u2717";
 
@@ -14,11 +16,11 @@ class Task {
         return this.task;
     }
 
-    public boolean isComplete() {
+    public boolean isCompleted() {
         return this.isCompleted;
     }
 
-    public void setComplete(boolean isCompleted) {
+    public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 

@@ -6,6 +6,14 @@ class Deadline extends Task {
         this.date = date;
     }
 
+    public String toStore() {
+        if(super.isCompleted()) {
+            return "D | 1 | " + super.toString() + " | " + this.date;
+        } else {
+            return "D | 0 | " + super.toString() + " | " + this.date;     
+        }
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.date + ")";

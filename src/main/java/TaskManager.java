@@ -1,32 +1,56 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
 import java.io.PrintStream;
+import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 import java.nio.charset.StandardCharsets;
 
 class TaskManager {
-    private Scanner sc;
-    private PrintStream ps;
+    private Scanner scanner;
+    private PrintStream printer;
     private ArrayList<Task> list;
+    private File tasksList;
 
-    public TaskManager() {
-        this.sc = new Scanner(System.in);
-        this.ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-        this.list = new ArrayList<>();
+    public TaskManager() throws IOException, ClassNotFoundException, DukeException {
+        this.scanner = new Scanner(System.in);
+        this.printer = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+        this.tasksList = new File("TasksList.sav");
+        if(!tasksList.exists()) {
+            this.list = new ArrayList<Task>();
+            tasksList.createNewFile();
+            serializeList();
+        } else {
+            try {
+                FileInputStream fileIn = new FileInputStream("TasksList.sav");
+                ObjectInputStream in = new ObjectInputStream(fileIn);       
+                Object ob = in.readObject();
+                if(ob instanceof ArrayList<?>) {
+                    this.list = (ArrayList) ob;
+                }
+                fileIn.close();
+                in.close();
+            } catch (IOException error) {
+                this.list = new ArrayList<Task>();
+                tasksList.createNewFile();
+                serializeList();
+                throw new DukeException("Error: Corrupted save file. "
+                        + "I have rewrote the old save file with a new one. "
+                        + "Please restart me again.");
+            }
+        }
     }
 
-    public void initializeTasks() {
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
+    public void initializeTasks() throws DukeException {
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
             String[] inputArr = input.split(" ", 2);
             Action action = getAction(inputArr[0]);
-            
-            if(action == null) {
-                generalError();
-                System.out.println();
-                continue;
-            }
 
             // For 1 word type Actions
             if (inputArr.length == 1) {
@@ -36,7 +60,7 @@ class TaskManager {
                     break;
                 case BYE :
                     System.out.println("Bye. Hope to see you again soon!");
-                    break;
+                    return;
                 default :
                     checkInputError(action);
                     break;
@@ -69,13 +93,14 @@ class TaskManager {
         }
     }
 
-    private void todoAction(String taskString) {
+    private void todoAction(String taskString) throws DukeException {
         Todo todo = new Todo(taskString);
         list.add(todo);
         printTask(todo);
+        serializeList();
     }
 
-    private void deadlineAction(String taskString, Action action) {
+    private void deadlineAction(String taskString, Action action) throws DukeException {
         String[] taskArr = taskString.split(" /by ", 2);
         if (taskArr.length == 1) {
             taskFormatError(action);
@@ -83,10 +108,11 @@ class TaskManager {
             Deadline deadline = new Deadline(taskArr[0], taskArr[1]);
             list.add(deadline);
             printTask(deadline);
+            serializeList();
         }
     }
 
-    private void eventAction(String taskString, Action action) {
+    private void eventAction(String taskString, Action action) throws DukeException {
         String[] taskArr = taskString.split(" /at ", 2);
         if (taskArr.length == 1) {
             taskFormatError(action);
@@ -94,44 +120,41 @@ class TaskManager {
             Event event = new Event(taskArr[0], taskArr[1]);
             list.add(event);
             printTask(event);
+            serializeList();
         }
     }
 
-    private void doneAction(Task task) {
-        if (task != null) {
-            if(task.isComplete()) {
-                System.out.println("Task is already completed!");
-            } else {
-                task.setComplete(true);
-                System.out.println("Nice! I've marked this task as done: ");
-                ps.println("  " + task.toString());
-            }
-        } 
+    private void doneAction(Task task) throws DukeException {
+        if(task.isCompleted()) {
+            throw new DukeException("Task is already completed!");
+        } else {
+            task.setCompleted(true);
+            System.out.println("Nice! I've marked this task as done: ");
+            printer.println("  " + task.toString());
+            serializeList();
+        }
     }
     
-    private void deleteAction(Task task) {
-        if (task != null) {
-            System.out.println("Noted. I've removed this task: ");
-            ps.println("  " + task.toString());
-            list.remove(task);
-            System.out.println("Now you have " + list.size() + " tasks in the list.");
-        }
+    private void deleteAction(Task task) throws DukeException {
+        System.out.println("Noted. I've removed this task: ");
+        printer.println("  " + task.toString());
+        list.remove(task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        serializeList();
     }
 
-    private Task getTask(String givenTask) {
+    private Task getTask(String givenTask) throws DukeException {
         try {
             Integer.parseInt(givenTask);
         } catch (Exception e) {
-            System.out.println("Oof. Done requires a number behind");
-            return null;
+            throw new DukeException("Oof. Done requires a number behind");
         }
 
         Integer taskNum = Integer.parseInt(givenTask);
         try {
             list.get(taskNum - 1);
         } catch (Exception e) {
-            System.out.println("Oof. The given task number is not found");
-            return null;
+            throw new DukeException("Oof. The given task number is not found");
         }
 
         return list.get(taskNum - 1);
@@ -139,22 +162,26 @@ class TaskManager {
 
     private void printTask(Task task) {
         System.out.println("Got it. I've added this task: ");
-        ps.println("  " + task.toString());
+        printer.println("  " + task.toString());
         System.out.println("Now you have " + this.list.size() +  " tasks in the list.");
     }
 
     private void printList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < this.list.size(); i++) {
-            if(this.list.get(i).isComplete()) {
-                ps.println((i + 1) + ". " + this.list.get(i));
-            } else {
-                ps.println((i + 1) + ". " + this.list.get(i));
+        if(this.list.size() == 0) {
+            System.out.println("Your list is empty!");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < this.list.size(); i++) {
+                if(this.list.get(i).isCompleted()) {
+                    printer.println((i + 1) + ". " + this.list.get(i));
+                } else {
+                    printer.println((i + 1) + ". " + this.list.get(i));
+                }
             }
         }
     }
 
-    public Action getAction(String action) {
+    public Action getAction(String action) throws DukeException {
         switch (action) {
         case "list" :
             return Action.LIST;
@@ -171,49 +198,53 @@ class TaskManager {
         case "delete" :
             return Action.DELETE;
         default :
+            generalError();
             return null;
         }
     }
 
-    private void checkInputError(Action action) {
+    private void checkInputError(Action action) throws DukeException {
         switch (action) {
         case TODO :
-            System.out.println("OOPS!!! The description of a todo cannot be empty.");
-            break;
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         case DEADLINE :
-            System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-            break;
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         case EVENT :
-            System.out.println("OOPS!!! The description of a event cannot be empty.");
-            break;
+            throw new DukeException("OOPS!!! The description of a event cannot be empty."); 
         case DONE :
-            System.out.println("OOPS!!! The description of a done cannot be empty.");
-            break;
+            throw new DukeException("OOPS!!! The description of a done cannot be empty.");
         case DELETE :
-            System.out.println("OOPS!!! The description of a delete cannot be empty.");
-            break;
+            throw new DukeException("OOPS!!! The description of a delete cannot be empty.");
         default :
-            // For anything else that is not a specified action
-            generalError();
-            break;
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private void taskFormatError(Action action) {
+    private void taskFormatError(Action action) throws DukeException {
         switch (action) {
         case DEADLINE :
-            System.out.println("Deadline requires a specified time. E.g. \'/by Sunday\'");
-            break;
+            throw new DukeException("Deadline requires a specified time. E.g. \'Task /by Sunday\'");
         case EVENT :
-            System.out.println("Event requires a specified time. E.g. \'/at Mon 2-4pm\'");
-            break;
+            throw new DukeException("Event requires a specified time. E.g. \'Task /at Mon 2-4pm\'");
         default :
-            // Not supposed to happen
-            throw new java.lang.Error("Task Error thrown was of: " + action + " type");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    private void generalError() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    private void generalError() throws DukeException {
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    private void serializeList() throws DukeException {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("TasksList.sav");
+            ObjectOutputStream out =  new ObjectOutputStream(fileOut);
+            out.writeObject(this.list);
+            out.close();
+            fileOut.close();
+        } catch (IOException error) {
+            throw new DukeException("Unable to serialize the list to TasksList.sav. Error: " 
+                    + error.getMessage());
+        }
     }
 }

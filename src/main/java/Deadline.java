@@ -1,8 +1,11 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected Date by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
@@ -15,6 +18,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+        return "[D]" + super.toString() + " (by: " + dateFormat.format(this.by) + ")";
     }
 }

@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -40,6 +43,40 @@ public class Duke {
                 break;
             }
         }
+
+        ArrayList<SimpleDateFormat> dateFormats = new ArrayList<>() {
+            {
+                add(new SimpleDateFormat("dd/M/yyyy h a"));
+                add(new SimpleDateFormat("dd-M-yyyy h a"));
+                add(new SimpleDateFormat("dd.M.yyyy h a"));
+                add(new SimpleDateFormat("dd/M/yyyy hhmm a"));
+                add(new SimpleDateFormat("dd-M-yyyy hhmm a"));
+                add(new SimpleDateFormat("dd.M.yyyy hhmm a"));
+                add(new SimpleDateFormat("dd/M/yyyy hh:mm a"));
+                add(new SimpleDateFormat("dd-M-yyyy hh:mm a"));
+                add(new SimpleDateFormat("dd.M.yyyy hh:mm a"));
+                add(new SimpleDateFormat("dd/M/yyyy hhmm"));
+                add(new SimpleDateFormat("dd-M-yyyy hhmm"));
+                add(new SimpleDateFormat("dd.M.yyyy hhmm"));
+                add(new SimpleDateFormat("dd/M/yyyy hh:mm"));
+                add(new SimpleDateFormat("dd-M-yyyy hh:mm"));
+                add(new SimpleDateFormat("dd.M.yyyy hh:mm"));
+                add(new SimpleDateFormat("dd/M/yyyy HHmm"));
+                add(new SimpleDateFormat("dd-M-yyyy HHmm"));
+                add(new SimpleDateFormat("dd.M.yyyy HHmm"));
+                add(new SimpleDateFormat("dd/M/yyyy HH:mm"));
+                add(new SimpleDateFormat("dd-M-yyyy HH:mm"));
+                add(new SimpleDateFormat("dd.M.yyyy HH:mm"));
+                add(new SimpleDateFormat("dd MMM yyyy HHmm"));
+                add(new SimpleDateFormat("dd MMMM yyyy HHmm"));
+                add(new SimpleDateFormat("dd/M/yyyy"));
+                add(new SimpleDateFormat("dd-M-yyyy"));
+                add(new SimpleDateFormat("dd.M.yyyy"));
+                add(new SimpleDateFormat("dd MMM yyyy"));
+                add(new SimpleDateFormat("dd MMMM yyyy"));
+            }
+        };
+
         String userInput = scan.nextLine();
         while (!"bye".equals(userInput)) {
             boolean shouldOverwriteFile = false;
@@ -76,7 +113,8 @@ public class Duke {
                     if (inputSplit.length == 1) {
                         // Exception if no description after "todo"
                         throw new DukeException(separationLine
-                                + "\n     \u2639 OOPS!!! The description of a todo cannot be empty.\n" + separationLine + "\n");
+                                + "\n     \u2639 OOPS!!! The description of a todo cannot be empty.\n" + separationLine
+                                + "\n");
                     }
                     ToDo todo = new ToDo(userInput.replace("todo ", ""), 0);
                     taskStore.add(todo);
@@ -95,8 +133,11 @@ public class Duke {
                                 + separationLine + "\n");
                     }
                     String[] splitStringD = userInput.split(" /by ");
+                    Date inputDateD = convertToDate(splitStringD[1], dateFormats);
+                    String inputDateStrD = inputDateD == null ? splitStringD[1]
+                            : new SimpleDateFormat("dd MMM yyyy, hh:mm a").format(inputDateD);
                     Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""), 0,
-                            splitStringD[1]);
+                            inputDateStrD);
                     taskStore.add(deadline);
                     String writeStringD = deadline.type + " 0" + " " + deadline.description + " | " + deadline.endTime
                             + "\n";
@@ -127,14 +168,15 @@ public class Duke {
                 case "delete":
                     if (inputSplit.length != 2) {
                         // Exception if there is no task number or multiple words after "delete"
-                        throw new DukeException(separationLine +
-                                "\n     \u2639 OOPS!!! Please specify number of a single task to delete.\n" + separationLine + "\n");
+                        throw new DukeException(separationLine
+                                + "\n     \u2639 OOPS!!! Please specify number of a single task to delete.\n"
+                                + separationLine + "\n");
                     }
                     int specifiedDel = Integer.parseInt(inputSplit[1]); // will throw NumberFormatException if not int after "done"
                     if (specifiedDel < 1 || specifiedDel > taskStore.size()) {
                         // Exception if task number is beyond current number of tasks
-                        throw new DukeException(separationLine +
-                                "\n     \u2639 OOPS!!! Please specify valid task number.\n" + separationLine + "\n");
+                        throw new DukeException(separationLine
+                                + "\n     \u2639 OOPS!!! Please specify valid task number.\n" + separationLine + "\n");
                     }
                     Task delTask = taskStore.get(specifiedDel - 1);
                     taskStore.remove(specifiedDel - 1);
@@ -179,5 +221,20 @@ public class Duke {
         FileWriter fw = isAppend ? new FileWriter(filePath, true) : new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
+    }
+
+    private static Date convertToDate(String dateString, ArrayList<SimpleDateFormat> dateFormats) {
+        Date date = null;
+        for (SimpleDateFormat sdf : dateFormats) {
+            try {
+                sdf.setLenient(false);
+                date = sdf.parse(dateString);
+            } catch (ParseException pe) {
+                 // Continue checking for matching date format
+            }
+            if (date != null) break;
+        }
+        System.out.println("Here " + date);
+        return date;
     }
 }

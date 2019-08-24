@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-
 public class Storage {
     private File file;
     private TaskList taskList;
@@ -15,19 +14,19 @@ public class Storage {
         this.fileToTaskList();
     }
 
-    private Task fileFormatToTask(String fileFormat) {
+    private Task fileFormatToTask(String fileFormat) throws EmptyDescriptionException {
         Task task = null;
         String[] components = fileFormat.split("\\|");
 
         switch (components[0]) {
         case "T":
-            task = new ToDo(components[1], components[2]);
+            task = new ToDo(components[2], components[1]);
             break;
         case "D":
-            task = new Deadline(components[1], components[2], components[3]);
+            task = new Deadline(components[2], components[3], components[1]);
             break;
         case "E":
-            task = new Event(components[1], components[2], components[3]);
+            task = new Event(components[2], components[3], components[1]);
             break;
         }
         return task;
@@ -39,7 +38,7 @@ public class Storage {
             for (String line : lines) {
                 this.taskList.add(this.fileFormatToTask(line));
             }
-        } catch (IOException e) {
+        } catch (IOException | EmptyDescriptionException e) {
             e.printStackTrace();
         }
     }

@@ -64,7 +64,7 @@ public class Client {
         }
     }
 
-    private String[] getActivityAndDatetime(String description) {
+    private String[] getActivityAndDateTime(String description) {
         if (description.isEmpty()) {
             return new String[]{"", ""};
         }
@@ -72,8 +72,8 @@ public class Client {
         String activity = toEdit[0].trim();
         toEdit = toEdit[1].split(" ");
         toEdit[0] = "";
-        String datetime = Arrays.stream(toEdit).reduce("", (x, y) -> x + " " + y).trim();
-        return new String[]{activity, datetime};
+        String dateTime = Arrays.stream(toEdit).reduce("", (x, y) -> x + " " + y).trim();
+        return new String[]{activity, dateTime};
     }
 
     private void addTask(String command, String description) throws EmptyDescriptionException {
@@ -82,14 +82,14 @@ public class Client {
         if (command.equals("todo")) {
             task = new ToDo(description);
         } else {
-            String[] activityAndDatetime = this.getActivityAndDatetime(description);
-            String activity = activityAndDatetime[0];
-            String datetime = activityAndDatetime[1];
+            String[] activityAndDateTime = this.getActivityAndDateTime(description);
+            String activity = activityAndDateTime[0];
+            String dateTime = activityAndDateTime[1];
 
             if (command.equals("deadline")) {
-                task = new Deadline(activity, datetime);
+                task = new Deadline(activity, dateTime);
             } else {
-                task = new Event(activity, datetime);
+                task = new Event(activity, dateTime);
             }
         }
 

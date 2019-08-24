@@ -2,9 +2,12 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
-    Task(String description) {
+    Task(String type, String description, String isDone) throws EmptyDescriptionException {
+        if (description.isEmpty()) {
+            throw new EmptyDescriptionException(type);
+        }
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone.equals("1");
     }
 
     private String getStatusIcon() {
@@ -15,12 +18,14 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    abstract String getTypeCode();
+
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s][%s] %s", this.getTypeCode(), this.getStatusIcon(), this.description);
     }
 
     String toSaveFormat() {
-        return String.format("%d|%s", this.isDone ? 1 : 0, this.description);
+        return String.format("%s|%d|%s", this.getTypeCode(), this.isDone ? 1 : 0, this.description);
     }
 }

@@ -1,51 +1,21 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-public class Deadline extends Task {
-    private String deadline;
+public class Deadline extends TaskWithDateTime {
 
     Deadline(String description, String deadline) throws EmptyDescriptionException {
-        super(description);
-
-        if (description.isEmpty()) {
-            throw new EmptyDescriptionException("a deadline");
-        }
-
-        try {
-            this.deadline = parseStringFormatDateTime(deadline);
-        } catch (DateTimeParseException e) {
-            this.deadline = deadline;
-        }
+        super("a deadline", description, deadline, "0");
     }
 
-    private LocalDateTime stringToDatetime(String string) {
-        return LocalDateTime.parse(string, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+    Deadline(String description, String deadline, String isDone) throws EmptyDescriptionException {
+        super("a deadline", description, deadline, isDone);
     }
 
-    private String datetimeToString(LocalDateTime datetime) {
-        return datetime.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h.mma"));
-    }
-
-    private String parseStringFormatDateTime(String stringFormatDateTime) {
-        return this.datetimeToString(this.stringToDatetime(stringFormatDateTime));
-    }
-
-    Deadline(String done, String description, String deadline) {
-        super(description);
-        if (done.equals("1")) {
-            this.markAsDone();
-        }
-        this.deadline = deadline;
+    @Override
+    String getTypeCode() {
+        return "D";
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.deadline);
+        return String.format("%s (by: %s)", super.toString(), this.getDateTime());
     }
 
-    @Override
-    String toSaveFormat() {
-        return String.format("D|%s|%s", super.toSaveFormat(), this.deadline);
-    }
 }

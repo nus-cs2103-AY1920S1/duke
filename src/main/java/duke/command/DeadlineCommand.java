@@ -29,7 +29,7 @@ public class DeadlineCommand extends AddCommand {
 
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
             String[] args = GetArgumentsUtil.getTwoCommandArgs(1, "/by", commands);
@@ -39,10 +39,13 @@ public class DeadlineCommand extends AddCommand {
             ui.showMessage(Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION +
                     Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
+            return true;
         } catch (DateTimeParseException e) {
             ui.showError(Messages.DATETIME_PARSE_EXCEPTION);
+            return false;
         } catch (DukeException e1) {
             ui.showError(e1.getMessage());
+            return false;
         }
     }
 }

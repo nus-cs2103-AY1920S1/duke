@@ -18,12 +18,13 @@ public class ToDoCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         String arg = GetArgumentsUtil.concatStrings(Arrays.copyOfRange(commands, 1, commands.length));
         Task toDoTask = new Todo(arg);
         taskList.addToTaskList(toDoTask);
         ui.showMessage(Messages.ADDED_TASK_MESSAGE,
                 Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + toDoTask.toString(),
                 String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
+        return true;
     }
 }

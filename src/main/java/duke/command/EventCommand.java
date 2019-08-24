@@ -22,7 +22,7 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             String[] args = GetArgumentsUtil.getTwoCommandArgs(1, "/at", commands);
             Task eventTask = new Event(args[0], args[1]);
@@ -30,8 +30,10 @@ public class EventCommand extends AddCommand {
             ui.showMessage( Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION +
                     Messages.COMPLETION_INDENTATION + eventTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
+            return true;
         } catch (DukeException e) {
             ui.showError(e.getMessage());
+            return false;
         }
     }
 }

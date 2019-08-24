@@ -12,8 +12,9 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         String formattedString = taskList.getTasksInString();
         ui.showMessage(Messages.LIST_MESSAGE, Messages.COMMAND_INDENTATION + formattedString);
+        return true;
     }
 }

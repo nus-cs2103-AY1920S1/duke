@@ -14,12 +14,15 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             storage.saveData(taskList.getTaskList());
+            ui.showMessage(Messages.BYE_MESSAGE);
+            return true;
         } catch (IOException e) {
             ui.showError(e.getMessage());
+            return false;
         }
-        ui.showMessage(Messages.BYE_MESSAGE);
+
     }
 }

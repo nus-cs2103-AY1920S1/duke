@@ -1,6 +1,2 @@
-E | 1 | project meeting | Aug 6th 2-4pm
-T | 1 | join sports club
-T | 0 | play games
-E | 0 | have dinner with friends | MBS 1pm
-D | 0 | cs2103T | 29 August 2019, 11:59 PM
-D | 0 | submission | 28 February 2019, 06:00 PM
+D | 0 | submit | 24 August 2019, 08:08 PM
+D | 0 | submit another | 24 August 2019, 08:08 PM

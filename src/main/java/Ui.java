@@ -79,7 +79,9 @@ public class Ui {
      */
     public static StringJoiner createStringJoiner(String str) {
         StringJoiner instance = createStringJoiner();
-        instance.add(str);
+        if (str != null) {
+            instance.add(str);
+        }
         return instance;
     }
 

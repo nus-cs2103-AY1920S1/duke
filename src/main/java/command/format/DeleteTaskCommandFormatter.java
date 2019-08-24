@@ -1,11 +1,9 @@
 package com.leeyiyuan.command.format;
 
-import java.util.regex.Pattern;
 
-import com.leeyiyuan.command.DeleteTaskCommand;
 import com.leeyiyuan.command.Command;
-import com.leeyiyuan.command.format.CommandFormatter;
-import com.leeyiyuan.command.format.CommandParseException;
+import com.leeyiyuan.command.DeleteTaskCommand;
+import java.util.regex.Pattern;
 
 public class DeleteTaskCommandFormatter extends CommandFormatter {
 
@@ -20,5 +18,4 @@ public class DeleteTaskCommandFormatter extends CommandFormatter {
             throw new CommandParseException("Unknown command.");
         }
     }
-
 }

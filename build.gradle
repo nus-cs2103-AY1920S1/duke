@@ -1,6 +1,18 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.diffplug.gradle.spotless' version '3.24.2'
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        indentWithTabs(2)
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        removeUnusedImports()
+        importOrder()
+    }
 }
 
 group 'leeyiyuan'
@@ -11,7 +23,6 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
     mainClassName = "com.leeyiyuan.Duke"
 }
 

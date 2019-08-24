@@ -1,7 +1,6 @@
 package com.leeyiyuan.command;
 
-import com.leeyiyuan.command.CommandExecuteException;
-import com.leeyiyuan.command.Command;
+
 import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.TaskList;
@@ -15,7 +14,8 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException, StorageException {
+    public void execute(TaskList tasks, Storage storage)
+            throws CommandExecuteException, StorageException {
         if (tasks.size() >= this.index) {
             tasks.remove(this.index - 1);
             storage.save(tasks);
@@ -23,5 +23,4 @@ public class DeleteTaskCommand extends Command {
             throw new CommandExecuteException("Task does not exist at index.");
         }
     }
-
 }

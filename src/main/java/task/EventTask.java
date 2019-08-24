@@ -1,9 +1,8 @@
 package com.leeyiyuan.task;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import com.leeyiyuan.task.Task;
 
 public class EventTask extends Task {
 
@@ -12,7 +11,7 @@ public class EventTask extends Task {
     public EventTask() {
         super();
     }
-    
+
     public LocalDateTime getAt() {
         return this.at;
     }
@@ -20,13 +19,13 @@ public class EventTask extends Task {
     public void setAt(LocalDateTime at) {
         this.at = at;
     }
-    
+
     @Override
-    public String toString() { 
-        return String.format("[E][%s] %s (at: %s)",
+    public String toString() {
+        return String.format(
+                "[E][%s] %s (at: %s)",
                 this.isDone ? "✓" : "✗",
                 this.title,
                 this.at.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
-
 }

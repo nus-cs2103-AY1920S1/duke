@@ -1,11 +1,9 @@
 package com.leeyiyuan.command.format;
 
-import java.util.regex.Pattern;
 
-import com.leeyiyuan.command.ExitCommand;
 import com.leeyiyuan.command.Command;
-import com.leeyiyuan.command.format.CommandFormatter;
-import com.leeyiyuan.command.format.CommandParseException;
+import com.leeyiyuan.command.ExitCommand;
+import java.util.regex.Pattern;
 
 public class ExitCommandFormatter extends CommandFormatter {
 
@@ -17,5 +15,4 @@ public class ExitCommandFormatter extends CommandFormatter {
             throw new CommandParseException("Unknown command.");
         }
     }
-
 }

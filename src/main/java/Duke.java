@@ -1,6 +1,5 @@
 package com.leeyiyuan;
 
-import java.util.Scanner;
 
 import com.leeyiyuan.command.Command;
 import com.leeyiyuan.command.CommandExecuteException;
@@ -9,6 +8,7 @@ import com.leeyiyuan.command.format.Parser;
 import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.TaskList;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -33,5 +33,4 @@ public class Duke {
             System.out.println("Caught exception: " + e.toString());
         }
     }
-
 }

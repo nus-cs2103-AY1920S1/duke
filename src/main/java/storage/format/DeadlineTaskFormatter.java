@@ -1,15 +1,11 @@
 package com.leeyiyuan.storage.format;
 
+
+import com.leeyiyuan.task.DeadlineTask;
+import com.leeyiyuan.task.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
-
-import com.leeyiyuan.exception.DukeIllegalArgumentException;
-import com.leeyiyuan.storage.format.TaskFormatException;
-import com.leeyiyuan.storage.format.TaskFormatter;
-import com.leeyiyuan.storage.format.TaskParseException;
-import com.leeyiyuan.task.DeadlineTask;
-import com.leeyiyuan.task.Task;
 
 public class DeadlineTaskFormatter extends TaskFormatter {
 
@@ -33,10 +29,10 @@ public class DeadlineTaskFormatter extends TaskFormatter {
             throw new TaskFormatException("Invalid task.");
         }
 
-        return String.format("D | %d | %s | %s",
-                ((DeadlineTask)task).getIsDone() ? 1 : 0,
-                ((DeadlineTask)task).getTitle(),
-                ((DeadlineTask)task).getBy().format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
+        return String.format(
+                "D | %d | %s | %s",
+                ((DeadlineTask) task).getIsDone() ? 1 : 0,
+                ((DeadlineTask) task).getTitle(),
+                ((DeadlineTask) task).getBy().format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
-
 }

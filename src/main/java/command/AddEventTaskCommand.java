@@ -1,18 +1,16 @@
 package com.leeyiyuan.command;
 
-import java.time.LocalDateTime;
 
-import com.leeyiyuan.command.CommandExecuteException;
-import com.leeyiyuan.command.Command;
-import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.storage.Storage;
+import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.EventTask;
 import com.leeyiyuan.task.TaskList;
+import java.time.LocalDateTime;
 
 public class AddEventTaskCommand extends Command {
 
     protected String title;
-    
+
     protected LocalDateTime at;
 
     public AddEventTaskCommand(String title, LocalDateTime at) {
@@ -21,12 +19,12 @@ public class AddEventTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException, StorageException {
+    public void execute(TaskList tasks, Storage storage)
+            throws CommandExecuteException, StorageException {
         EventTask task = new EventTask();
         task.setTitle(this.title);
         task.setAt(this.at);
         tasks.add(task);
         storage.save(tasks);
     }
-
 }

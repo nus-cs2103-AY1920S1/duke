@@ -1,9 +1,9 @@
 package com.leeyiyuan.command;
 
-import com.leeyiyuan.command.Command;
+
 import com.leeyiyuan.storage.Storage;
-import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.task.Task;
+import com.leeyiyuan.task.TaskList;
 
 public class ListTasksCommand extends Command {
 
@@ -12,11 +12,7 @@ public class ListTasksCommand extends Command {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            System.out.println(String.format(
-                        "%d.%s", 
-                        i + 1, 
-                        task.toString()));
+            System.out.println(String.format("%d.%s", i + 1, task.toString()));
         }
     }
-
 }

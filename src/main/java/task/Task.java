@@ -1,11 +1,11 @@
 package com.leeyiyuan.task;
 
 public class Task {
-    
+
     protected String title;
     protected boolean isDone;
-    
-    public Task() { }
+
+    public Task() {}
 
     public String getTitle() {
         return this.title;
@@ -22,5 +22,4 @@ public class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
-
 }

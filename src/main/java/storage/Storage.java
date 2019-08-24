@@ -1,15 +1,5 @@
 package com.leeyiyuan.storage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter; 
-import java.io.IOException;
-import java.io.Writer;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import com.leeyiyuan.storage.format.DeadlineTaskFormatter;
 import com.leeyiyuan.storage.format.EventTaskFormatter;
@@ -17,8 +7,13 @@ import com.leeyiyuan.storage.format.TaskFormatException;
 import com.leeyiyuan.storage.format.TaskFormatter;
 import com.leeyiyuan.storage.format.TaskParseException;
 import com.leeyiyuan.storage.format.TodoTaskFormatter;
-import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.Task;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
 
@@ -48,7 +43,7 @@ public class Storage {
                         task = taskFormatter.parse(line);
                         break;
                     } catch (TaskParseException e) {
-                        
+
                     }
                 }
                 if (task == null) {
@@ -102,5 +97,4 @@ public class Storage {
             }
         }
     }
-
 }

@@ -1,11 +1,9 @@
 package com.leeyiyuan.command.format;
 
-import java.util.regex.Pattern;
 
-import com.leeyiyuan.command.TaskDoneCommand;
 import com.leeyiyuan.command.Command;
-import com.leeyiyuan.command.format.CommandFormatter;
-import com.leeyiyuan.command.format.CommandParseException;
+import com.leeyiyuan.command.TaskDoneCommand;
+import java.util.regex.Pattern;
 
 public class TaskDoneCommandFormatter extends CommandFormatter {
 
@@ -18,5 +16,4 @@ public class TaskDoneCommandFormatter extends CommandFormatter {
             throw new CommandParseException("Unknown command.");
         }
     }
-
 }

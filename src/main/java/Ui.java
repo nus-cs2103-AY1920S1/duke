@@ -123,6 +123,26 @@ public class Ui {
     }
 
     /**
+     * Listing all tasks stored in list that matched with search term.
+     * @param items ArrayList containing current tasks
+     * @param key search term provided by user
+     */
+    public void findTask(ArrayList<Task> items, String key) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(border + "\n");
+        sb.append("Here are the matching tasks in your list: \n");
+        //list out all items in arraylist items that matched with user input
+        for (int i = 1; i <= items.size(); i++) {
+            Task curr = items.get(i - 1);
+            if (curr.getDescription().contains(key)) {
+                sb.append(i + "." + curr + "\n");
+            }
+        }
+        sb.append(border + "\n");
+        System.out.println(sb.toString());
+    }
+
+    /**
      * generating message for individual task with border and indentation.
      * @param current current task
      * @param size size of list

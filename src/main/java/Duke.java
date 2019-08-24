@@ -95,12 +95,16 @@ public class Duke {
                 //listing all task in current list
                 user.listTask(items);
                 input = sc.nextLine();
-            } else {
-                //generate task and store into list
-                generateTask(input);
+            } else if (input.toLowerCase().contains("find")) {
+                String searchTerm = input.substring(5);
+                user.findTask(items, searchTerm);
                 input = sc.nextLine();
+            } else {
+                    //generate task and store into list
+                    generateTask(input);
+                    input = sc.nextLine();
+                }
             }
-        }
 
         //store current tasks into local file for future reference
         storeCurrent(items);

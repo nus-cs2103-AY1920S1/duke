@@ -1,10 +1,12 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task{
 
-    private String datetime;
+    private LocalDateTime dateTime;
 
-    public Event(String taskName, String datetime) {
+    public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
-        this.datetime = datetime;
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -12,18 +14,16 @@ public class Event extends Task{
         return "E";
     }
 
-    public String getDatetime() {
-        return datetime;
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
-    }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)",
+        return String.format("[%s][%s] %s (at: %d/%d/%d %d%02d)",
                 this.getType() ,isDone ? "\u2713": "\u2718",
-                this.taskName, this.datetime);
+                this.taskName, this.dateTime.getDayOfMonth(), this.dateTime.getMonthValue(), this.dateTime.getYear(),
+                this.dateTime.getHour() ,this.dateTime.getMinute() );
     }
 }

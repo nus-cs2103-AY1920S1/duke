@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 
 public class Duke {
@@ -29,16 +30,18 @@ public class Duke {
             } else if (command.split(" ")[0].equals("todo")) {
                 int spaceIndex = command.indexOf(" ");
                 addToDo(command.substring(spaceIndex + 1));
-
+                printAddedTask();
             } else if (command.split(" ")[0].equals("deadline")) {
 
                 int spaceIndex = command.indexOf(" ");
                 int slashIndex = command.indexOf("/");
                 addDeadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+                printAddedTask();
             } else if (command.split(" ")[0].equals("event")) {
                 int spaceIndex = command.indexOf(" ");
                 int slashIndex = command.indexOf("/");
                 addEvent(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+                printAddedTask();
             } else if (command.split(" ")[0].equals("delete")) {
 
                 deleteTask(Integer.parseInt(command.split(" ")[1]));
@@ -77,7 +80,7 @@ public class Duke {
 
        arr.add(newToDo);
 
-       printAddedTask();
+
    }
 
    private static void printDoneTask(Task t) {
@@ -98,19 +101,37 @@ public class Duke {
    }
 
    private static void addDeadline(String taskName, String datetime) {
-        Deadline deadline = new Deadline(taskName,datetime);
+
+
+        LocalDateTime dateTimeObj = parseDateTime(datetime);
+        Deadline deadline = new Deadline(taskName, dateTimeObj);
 
         arr.add(deadline);
 
-        printAddedTask();
+
    }
 
    private static void addEvent(String taskName, String datetime) {
-        Event e = new Event(taskName, datetime);
+        LocalDateTime dateTimeObj = parseDateTime(datetime);
+        Event e = new Event(taskName, dateTimeObj);
 
         arr.add(e);
 
-        printAddedTask();
+
+   }
+
+   private static LocalDateTime parseDateTime(String datetime) {
+        int spaceIndex = datetime.indexOf(" ");
+        String[] stringArr = datetime.substring(0, spaceIndex).split("/");
+
+        int day = Integer.parseInt(stringArr[0]);
+        int month = Integer.parseInt(stringArr[1]);
+        int year = Integer.parseInt(stringArr[2]);
+
+        int hour = Integer.parseInt(datetime.substring(spaceIndex+1).trim()) / 100;
+        int minute = Integer.parseInt(datetime.substring(spaceIndex+1).trim()) % 100;
+
+        return LocalDateTime.of(year,month,day,hour,minute);
    }
 
    private static void deleteTask(int index) {

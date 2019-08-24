@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -46,7 +45,6 @@ class AddEventTaskCommandTest extends CommandTest {
     }
 
     @Test
-    @Disabled
     void addEventMissingDateTime() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddEventTaskCommand("an event to attend");
@@ -54,7 +52,6 @@ class AddEventTaskCommandTest extends CommandTest {
     }
 
     @Test
-    @Disabled
     void addEventBlankDateTime() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddEventTaskCommand("an event to attend /at");

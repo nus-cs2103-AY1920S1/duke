@@ -3,13 +3,14 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
     private static ArrayList<Task> arr;
     private static Scanner sc;
 
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
 
 
         arr = new ArrayList<>();
@@ -20,7 +21,7 @@ public class Duke {
 
     }
 
-    private static void readCommand() throws DukeException{
+    private static void readCommand() throws DukeException , IOException{
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
        sc = new Scanner(System.in);
 
@@ -89,7 +90,7 @@ public class Duke {
             }
 
             if (stringArr[1].trim().equals("1")) {
-                arr.get(arr.size()-1).done();
+                arr.get(arr.size()-1).markAsDone();
             }
 
         }
@@ -97,7 +98,27 @@ public class Duke {
 
     }
 
-    private static void writeListToFile() {
+    private static void writeListToFile() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        StringBuilder sb = new StringBuilder();
+        for (Task entry : arr) {
+            if (entry instanceof Deadline) {
+                sb.append(String.format("D | %s | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getTaskName(), ((Deadline) entry).getDatetime() ));
+            } else if (entry instanceof Event) {
+                sb.append(String.format("E | %s | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getTaskName(), ((Event) entry).getDatetime() ));
+            } else if (entry instanceof ToDo) {
+                sb.append(String.format("T | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getTaskName() ));
+            }
+
+            sb.append(System.lineSeparator());
+            fw.write(sb.toString());
+            sb = new StringBuilder();
+        }
+
+        fw.close();
 
     }
 
@@ -115,7 +136,7 @@ public class Duke {
        if (num <= 0 || num > arr.size() ) {
            throw new DukeException("OOPS!!! Number is out of range");
        } else {
-           arr.get(num - 1).done();
+           arr.get(num - 1).markAsDone();
 
            printDoneTask(arr.get(num-1));
        }

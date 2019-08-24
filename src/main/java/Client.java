@@ -1,13 +1,15 @@
 public class Client {
     private static Client client = null;
     private Ui ui;
+    private Parser parser;
     private TaskList taskList;
     private Storage storage;
     private ExceptionHandler exceptionHandler;
 
 
     private Client() {
-        this.ui = new Ui()
+        this.ui = new Ui();
+        this.parser = new Parser();
         this.taskList = new TaskList();
         this.exceptionHandler = new ExceptionHandler(this.ui);
     }
@@ -38,8 +40,9 @@ public class Client {
 
         while (shouldContinue) {
             try {
-                String input = this.ui.read();
-                Command command = this.parser.parse(input);
+                String inputCommand = this.ui.readCommand();
+                String inputDetails = this.ui.readDetails();
+                Command command = this.parser.parse(inputCommand, inputDetails);
                 command.execute(this.taskList, this.ui, this.storage);
                 shouldContinue = !command.shouldExit();
             } catch (JermiException e) {

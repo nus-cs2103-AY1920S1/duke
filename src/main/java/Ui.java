@@ -11,8 +11,12 @@ public class Ui {
         return "     " + message + "\n";
     }
 
-    String read() {
-        return this.scanner.nextLine();
+    String readCommand() {
+        return this.scanner.next();
+    }
+
+    String readDetails() {
+        return this.scanner.nextLine().trim();
     }
 
     void echo(String... messages) {

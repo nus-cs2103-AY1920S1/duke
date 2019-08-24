@@ -1,9 +1,15 @@
-public class TaskWithDate extends Task {
-    protected String date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public TaskWithDate(String description, String date) {
+public class TaskWithDate extends Task {
+    static final SimpleDateFormat TASK_WITH_DATE_FORMATTER = new SimpleDateFormat("dd 'of' MMMM yyyy, Kmma");
+    static final SimpleDateFormat TASK_WITH_DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    protected Date date;
+
+    public TaskWithDate(String description, String date) throws ParseException {
         super(description);
-        this.date = date;
+        this.date = TASK_WITH_DATE_PARSER.parse(date);
     }
 
     public static String[] extractDataFromLine(String line, String delimiter) {

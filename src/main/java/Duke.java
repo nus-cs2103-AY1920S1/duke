@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -91,7 +92,8 @@ public class Duke {
             }
         }
         String[] splitData;
-        switch (taskType) {
+        try {
+            switch (taskType) {
             case todo:
                 if (Task.validateData(data, "todo"))
                     insertNewTask(taskList, new Todo(data));
@@ -104,8 +106,11 @@ public class Duke {
             case deadline:
                 splitData = TaskWithDate.extractDataFromLine(data, " /by ");
                 if (TaskWithDate.validateData(splitData, "deadline"))
-                insertNewTask(taskList, new Deadline(splitData[0], splitData[1]));
+                    insertNewTask(taskList, new Deadline(splitData[0], splitData[1]));
                 break;
+            }
+        } catch (ParseException e) {
+            System.out.println("Failed to add task because date is not in the right format (should be in dd/MM/yyyy HHmm)");
         }
     }
 

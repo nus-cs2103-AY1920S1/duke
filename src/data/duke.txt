@@ -1,9 +1,4 @@
-T | + | run 
-D | + | go home | 3am
-E | - | shopping | MBS
-D | - | go running | 23
-D | - | go home | 2
-D | - | go home | 2
-D | - | go home | 2
-D | - | go home | 2
-D | - | go home | 2
+T | - | go the gym 
+D | - | do homework | 2pm
+D | - | finish netflix | 23rd of February 2019, 7.00pm
+E | - | go fishing with friends | Marina Bay from 2 to 4

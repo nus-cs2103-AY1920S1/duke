@@ -17,5 +17,13 @@ todo
 blah
 delete 3
 delete 5
+delete 2
+delete 4
+delete 3
+delete 1
+delete 1
+list
+deadline return book /by 2/12/2019 1800
+event see eclipse /at 25/12/2019 1323
 list
 bye

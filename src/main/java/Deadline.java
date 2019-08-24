@@ -16,15 +16,15 @@ public class Deadline extends Task{
 
         String[] dateTime = by.split(" ");
         String[] date = dateTime[0].split("/");
-        this.day = date[0];
-        this.month = date[1];
-        this.year = date[2];
-        this.hour = dateTime[1].substring(0, 2);
-        this.minute = dateTime[1].substring(2);
-
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         try {
+            this.day = date[0];
+            this.month = date[1];
+            this.year = date[2];
+            this.hour = dateTime[1].substring(0, 2);
+            this.minute = dateTime[1].substring(2);
+
             this.byDate = format.parse(day + "/" + month + "/" + year + " " + hour + ":" + minute);
         } catch (Exception e) { throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of event timing is invalid.");}
     }

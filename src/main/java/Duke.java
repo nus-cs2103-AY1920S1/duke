@@ -11,7 +11,15 @@ public class Duke {
         String line = "    ____________________________________________________________";
         String currentCommand = "";
         ArrayList<Task> addedItems = new ArrayList<>();
-        getTasksFromFile(addedItems, filePath);
+
+        try {
+            getTasksFromFile(addedItems, filePath);
+        } catch (InvalidTaskArgumentDukeException e) {
+            System.out.println(line);
+            System.out.println("     " + e.getMessage());
+            System.out.println(line);
+        }
+
 
         System.out.println(line);
         System.out.println("     Hello! I'm Duke");
@@ -169,7 +177,7 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void getTasksFromFile(ArrayList<Task> taskList, String filePath) throws FileNotFoundException {
+    public static void getTasksFromFile(ArrayList<Task> taskList, String filePath) throws FileNotFoundException, InvalidTaskArgumentDukeException {
         File taskFile = new File(filePath);
         Scanner scanner = new Scanner(taskFile);
         while (scanner.hasNext()) {
@@ -198,7 +206,7 @@ public class Duke {
 
     }
 
-    public static Task stringToTask(String text) {
+    public static Task stringToTask(String text) throws InvalidTaskArgumentDukeException {
             String[] textSplit = text.split("\\|");
             Task resultTask;
 

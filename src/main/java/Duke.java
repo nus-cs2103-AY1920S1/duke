@@ -1,8 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+
     private static void formattedPrint(String content) {
         System.out.println("    ____________________________________________________________\n" +
                 "     " + content + "\n" +
@@ -51,6 +55,7 @@ public class Duke {
                     case BYE: {
                         formattedPrint("Bye. Hope to see you again soon!");
                         shouldRun = false;
+                        sc.close();
                         break;
                     }
                     case LIST: {
@@ -92,7 +97,7 @@ public class Duke {
                             throw new DukeException("The description of a deadline cannot be empty.");
                         userInput = userInput.substring(9);
                         String[] temp = splitByKeyword(userInput, "/by");
-                        addTask(new Deadline(temp[0], temp[1]), tasks);
+                        addTask(new Deadline(temp[0], LocalDateTime.from(dateTimeFormatter.parse(temp[1]))), tasks);
                         break;
                     }
                     case EVENT: {
@@ -100,7 +105,7 @@ public class Duke {
                             throw new DukeException("The description of an event cannot be empty.");
                         userInput = userInput.substring(6);
                         String[] temp = splitByKeyword(userInput, "/at");
-                        addTask(new Event(temp[0], temp[1]), tasks);
+                        addTask(new Event(temp[0], LocalDateTime.from(dateTimeFormatter.parse(temp[1]))), tasks);
                         break;
                     }
                     default: {

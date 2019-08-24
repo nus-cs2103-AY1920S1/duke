@@ -1,13 +1,13 @@
 plugins {
     id 'java'
     id 'application'
-//    id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-//checkstyle {
-//    toolVersion = '8.23'
-//}
+checkstyle {
+    toolVersion = '8.23'
+}
 
 shadowJar {
     archiveBaseName = "duke"
@@ -25,7 +25,7 @@ test {
     useJUnitPlatform()
 }
 
-group 'duke'
+group 'leotan'
 version '0.1.0'
 
 repositories {

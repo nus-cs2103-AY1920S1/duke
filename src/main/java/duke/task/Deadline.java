@@ -26,6 +26,13 @@ public class Deadline extends Task {
         return Map.of("type", "deadline", "description", this.description, "by", Duke.dateTimeFormatter.format(this.by), "is_done", this.isDone);
     }
 
+    /**
+     * Parse to a Deadline object from JSONObject.
+     *
+     * @param json
+     * @return parsed Deadline
+     * @throws JSONException
+     */
     public static Deadline fromJson(JSONObject json) throws JSONException {
         // TODO: make sure the type is deadline
         Deadline rtn = new Deadline(json.getString("description"), LocalDateTime.from(Duke.dateTimeFormatter.parse(json.getString("by"))));

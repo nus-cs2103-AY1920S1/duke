@@ -34,6 +34,14 @@ abstract public class Task {
 
     public abstract Map<String, Object> toMap();
 
+    /**
+     * Parse to a Task object from JSONObject.
+     *
+     * @param json
+     * @return parsed Task
+     * @throws JSONException
+     * @throws DukeException
+     */
     public static Task fromJson(JSONObject json) throws JSONException, DukeException {
         String type = json.getString("type");
         switch (type) {

@@ -1,5 +1,11 @@
+package commands;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import tasks.Task;
 
 public class DeleteCommand extends Command {
 

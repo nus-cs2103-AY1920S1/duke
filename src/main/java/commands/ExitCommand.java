@@ -1,3 +1,9 @@
+package commands;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class ExitCommand extends Command {
 
     public ExitCommand(String fullCommand) {

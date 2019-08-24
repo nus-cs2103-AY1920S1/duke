@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -172,8 +173,8 @@ public class Duke {
 
    private static void addDeadline(String taskName, String datetime) {
 
-
-        LocalDateTime dateTimeObj = parseDateTime(datetime);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        LocalDateTime dateTimeObj =  LocalDateTime.parse(datetime, dtf);
         Deadline deadline = new Deadline(taskName, dateTimeObj);
 
         arr.add(deadline);
@@ -182,8 +183,9 @@ public class Duke {
    }
 
    private static void addEvent(String taskName, String datetime) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        LocalDateTime dateTimeObj =  LocalDateTime.parse(datetime, dtf);
 
-        LocalDateTime dateTimeObj = parseDateTime(datetime);
         Event e = new Event(taskName, dateTimeObj);
 
         arr.add(e);
@@ -191,29 +193,6 @@ public class Duke {
 
    }
 
-   private static LocalDateTime parseDateTime(String datetime) {
-        if (! datetime.contains(" ")) { //only contain the date
-            String[] stringArr = datetime.split("/");
-
-            int day = Integer.parseInt(stringArr[0]);
-            int month = Integer.parseInt(stringArr[1]);
-            int year = Integer.parseInt(stringArr[2]);
-
-            return LocalDateTime.of(year,month,day,0,0);
-        } else {
-            int spaceIndex = datetime.indexOf(" ");
-            String[] stringArr = datetime.substring(0, spaceIndex).split("/");
-
-            int day = Integer.parseInt(stringArr[0]);
-            int month = Integer.parseInt(stringArr[1]);
-            int year = Integer.parseInt(stringArr[2]);
-
-            int hour = Integer.parseInt(datetime.substring(spaceIndex + 1).trim()) / 100;
-            int minute = Integer.parseInt(datetime.substring(spaceIndex + 1).trim()) % 100;
-
-            return LocalDateTime.of(year, month, day, hour, minute);
-        }
-    }
     private static void deleteTask(int index) {
 
         Task t = arr.remove(index-1);

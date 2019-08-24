@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
@@ -15,16 +16,15 @@ public class Deadline extends Task {
     }
 
     public String getDateTime() {
-        return String.format("%d/%d/%d %02d%02d",this.dateTime.getDayOfMonth(), this.dateTime.getMonthValue(), this.dateTime.getYear(),
-                this.dateTime.getHour() ,this.dateTime.getMinute());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        return this.dateTime.format(dtf);
     }
 
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %d/%d/%d %02d%02d)",
+        return String.format("[%s][%s] %s (by: %s)",
                 this.getType() ,isDone ? "\u2713": "\u2718",
-                this.taskName, this.dateTime.getDayOfMonth(), this.dateTime.getMonthValue(), this.dateTime.getYear(),
-                this.dateTime.getHour() ,this.dateTime.getMinute());
+                this.taskName, getDateTime());
     }
 }

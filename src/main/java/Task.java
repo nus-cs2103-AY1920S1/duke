@@ -1,6 +1,5 @@
 public class Task {
-
-    protected String description;
+    private String description;
     protected boolean isDone;
 
     public Task(String description) {
@@ -20,6 +19,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "| " + getStatusIcon() + " | " + description + " ";
     }
 }

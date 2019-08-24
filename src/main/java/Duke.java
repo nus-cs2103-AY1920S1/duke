@@ -5,7 +5,6 @@ public class Duke {
 
     public static void main(String[] args) {
         //dukeSayHello();
-        //comment on branch
         greetings();
 
         Scanner sc = new Scanner(System.in);
@@ -50,9 +49,9 @@ public class Duke {
         }
         else if (command.equals("deadline")) {
             try {
-                String[] itemSlashDeadline = item.split("/");
-                String deadline = itemSlashDeadline[1].substring(3);
-                task = new Deadline(itemSlashDeadline[0].trim(), deadline);
+                String description = item.split("/")[0].trim();
+                String deadline = item.substring(item.indexOf("by") + 3).trim();
+                task = new Deadline(description, deadline);
             }
             catch (ArrayIndexOutOfBoundsException ex) {
                 System.out.println("Invalid deadline input");

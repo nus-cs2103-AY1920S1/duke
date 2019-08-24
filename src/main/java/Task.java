@@ -2,6 +2,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -31,6 +36,12 @@ public class Task {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 
+    /**
+     * Validate the input from the user.
+     * @param description Description of the task
+     * @param taskName Name of the task e.g. event or deadline
+     * @return
+     */
     public static boolean validateData(String description, String taskName) {
         if (description.length() <= 0) {
             System.out.println("☹ OOPS!!! The description of a " + taskName + " cannot be empty.");

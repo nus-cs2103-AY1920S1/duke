@@ -1,0 +1,3 @@
+todo|todo x|true
+event|event asad /at e|false
+deadline|deadline asa /by wtf|false

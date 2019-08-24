@@ -13,14 +13,35 @@ import tasks.Deadline;
 import tasks.ToDo;
 import exceptions.DukeException;
 
-
+/**
+ * AddCommand is a class dealing with commands that
+ * add task items to the list of tasks. These items
+ * can be ToDo, Event or Deadline tasks.
+ */
 public class AddCommand extends Command {
 
+    /**
+     * Constructor for AddCommand.
+     * Boolean isExit is set to false because
+     * program should not terminate after command is executed.
+     *
+     * @param fullCommand the line of user input.
+     */
     public AddCommand(String fullCommand) {
         this.fullCommand = fullCommand;
         isExit = false;
     }
 
+    /**
+     * Adds the corresponding Task type to the list of tasks
+     * based on the user input. These Tasks can be either
+     * a ToDo, Event or Deadline Task.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     * @param ui the Ui object dealing with user interaction.
+     * @param storage the Storage object that reads from and writes to the file.
+     * @throws DukeException  If there is invalid input.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
         sc.next();

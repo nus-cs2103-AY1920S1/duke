@@ -50,6 +50,11 @@ public class Ui {
         listTasks(tasks.getList(), "Here are the tasks in your list:");
     }
 
+    /**
+     * Show found tasks from the "find" command.
+     *
+     * @param tasks
+     */
     public void showFoundTasks(List<Task> tasks) {
         listTasks(tasks, "Here are the matching tasks in your list:");
     }

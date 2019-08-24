@@ -4,10 +4,19 @@ import tasks.Task;
 
 public class Deadline extends Task {
     protected String by;
+    protected String year;
+    protected String month;
+    protected String day;
+    protected String time;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        String[] splits = by.split("[/ ]");
+        day = splits[0];
+        month = splits[1];
+        year = splits[2];
+        time = splits[3];
     }
 
     public String getBy(){

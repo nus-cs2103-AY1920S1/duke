@@ -56,7 +56,7 @@ public class Duke {
                 case "deadline":
                     if (parts.length == 1)
                         throw new DukeException("The description of a deadline cannot be empty.");
-                    index = query.lastIndexOf("/");
+                    index = query.indexOf("/");
                     if (index == -1 || index + 4 >= query.length())
                         throw new DukeException("Please provide a time for your deadline task");
                     if ("deadline".length() + 1 >= index - 1)
@@ -67,7 +67,7 @@ public class Duke {
                     break;
                 case "event":
                     if (parts.length == 1) throw new DukeException("The description of a event cannot be empty.");
-                    index = query.lastIndexOf("/");
+                    index = query.indexOf("/");
                     if (index == -1 || index + 4 >= query.length())
                         throw new DukeException("Please provide a time for your event task");
                     if ("event".length() + 1 >= index - 1)
@@ -118,7 +118,6 @@ public class Duke {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -149,7 +148,6 @@ public class Duke {
                 myList.add(newTask);
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

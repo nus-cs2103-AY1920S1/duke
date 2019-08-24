@@ -12,9 +12,9 @@ class DeleteCommandTest extends CommandTest {
                 new Todo("a thing that needs to be done", false)
         );
 
-        String expectedFileContents = "T\u001F0\u001Fa thing that needs to be done";
+        final String expectedFileContents = "T\u001F0\u001Fa thing that needs to be done";
 
-        String expectedSysOut = "\t____________________________________________________________\n"
+        final String expectedSysOut = "\t____________________________________________________________\n"
                 + "\tNoted. I've removed this task:\n"
                 + "\t  [T][✘] a todo to be deleted\n"
                 + "\tNow you have 1 tasks in the list.\n"

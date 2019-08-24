@@ -13,9 +13,9 @@ class AddEventTaskCommandTest extends CommandTest {
         );
         List<Task> actualTasks = mutableTaskListOf();
 
-        String expectedFileContents = "E\u001F0\u001Fan event to attend\u001F6/8/2019 1400";
+        final String expectedFileContents = "E\u001F0\u001Fan event to attend\u001F6/8/2019 1400";
 
-        String expectedSysOut = "\t____________________________________________________________\n"
+        final String expectedSysOut = "\t____________________________________________________________\n"
                 + "\tGot it. I've added this task: \n"
                 + "\t  [E][✘] an event to attend (at: 6/8/2019 1400)\n"
                 + "\tNow you have 1 tasks in the list.\n"

@@ -13,9 +13,9 @@ class AddDeadlineTaskCommandTest extends CommandTest {
         );
         List<Task> actualTasks = mutableTaskListOf();
 
-        String expectedFileContents = "D\u001F0\u001Fa deadline to meet\u001F6/6/2019 0000";
+        final String expectedFileContents = "D\u001F0\u001Fa deadline to meet\u001F6/6/2019 0000";
 
-        String expectedSysOut = "\t____________________________________________________________\n"
+        final String expectedSysOut = "\t____________________________________________________________\n"
                 + "\tGot it. I've added this task: \n"
                 + "\t  [D][✘] a deadline to meet (by: 6/6/2019 0000)\n"
                 + "\tNow you have 1 tasks in the list.\n"

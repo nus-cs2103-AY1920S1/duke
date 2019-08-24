@@ -12,9 +12,9 @@ class AddTodoTaskCommandTest extends CommandTest {
         );
         List<Task> actualTasks = mutableTaskListOf();
 
-        String expectedFileContents = "T\u001F0\u001Fa thing that needs to be done";
+        final String expectedFileContents = "T\u001F0\u001Fa thing that needs to be done";
 
-        String expectedSysOut = "\t____________________________________________________________\n"
+        final String expectedSysOut = "\t____________________________________________________________\n"
                 + "\tGot it. I've added this task: \n"
                 + "\t  [T][✘] a thing that needs to be done\n"
                 + "\tNow you have 1 tasks in the list.\n"

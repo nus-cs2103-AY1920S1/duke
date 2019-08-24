@@ -41,6 +41,8 @@ public class Parser {
                 return new AddEventCommand(line);
             } else if (line.indexOf("deadline ") == 0) {
                 return new AddDeadlineCommand(line);
+            } else if (line.indexOf("find ") == 0) {
+                return new FindCommand(line);
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }

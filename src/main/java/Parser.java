@@ -14,10 +14,9 @@ public class Parser {
     private static final Pattern COMMAND_PARSER = Pattern.compile("\\A(?<command>\\S+)(?: (?<args>.+))?\\z");
 
     public static Command parse(String command) {
-        switch (command) {
-        case "bye":
+        if (command.equals("bye")) {
             return new ExitCommand();
-        case "list":
+        } else if (command.equals("list")) {
             return new ListCommand();
         }
 

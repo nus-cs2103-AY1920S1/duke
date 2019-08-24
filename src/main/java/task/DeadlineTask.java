@@ -1,6 +1,6 @@
-package com.leeyiyuan;
+package com.leeyiyuan.task;
 
-import com.leeyiyuan.Task;
+import com.leeyiyuan.task.Task;
 
 public class DeadlineTask extends Task {
         

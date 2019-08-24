@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.Scanner;
 
-import com.leeyiyuan.Task;
-import com.leeyiyuan.TodoTask;
-import com.leeyiyuan.DeadlineTask;
-import com.leeyiyuan.EventTask;
+import com.leeyiyuan.task.Task;
+import com.leeyiyuan.task.TodoTask;
+import com.leeyiyuan.task.DeadlineTask;
+import com.leeyiyuan.task.EventTask;
 import com.leeyiyuan.DukeException;
 
 public class Duke {

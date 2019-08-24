@@ -1,0 +1,5 @@
+T 0 Nay
+T 1 NANA
+D 0 whatever | sometime
+E 1 whatsoever | never
+E 0 gogo | power rangers

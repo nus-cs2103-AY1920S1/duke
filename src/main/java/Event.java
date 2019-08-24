@@ -1,8 +1,9 @@
 public class Event extends Task {
-    private String eventPeriod;
+    protected String eventPeriod;
 
-    public Event(String description, String eventPeriod) {
-        super(description);
+    public Event(String description, int isDone, String eventPeriod) {
+        super(description, isDone);
+        this.type = "E";
         this.eventPeriod = eventPeriod;
     }
 

@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.shared.Messages;
+
 public class Parser {
 
     public static Command parse(String command) throws DukeException, NumberFormatException {

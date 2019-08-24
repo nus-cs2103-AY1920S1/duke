@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.shared.Messages;
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 

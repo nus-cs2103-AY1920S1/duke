@@ -1,3 +1,14 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.shared.GetArgumentsUtil;
+import duke.shared.Messages;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class EventCommand extends AddCommand {
     private String[] commands;
 

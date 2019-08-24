@@ -1,3 +1,7 @@
+package duke.shared;
+
+import duke.exception.DukeException;
+
 import java.util.Arrays;
 import java.util.List;
 

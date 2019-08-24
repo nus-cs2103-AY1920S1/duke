@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.shared.Messages;
+
 import java.util.Scanner;
 
 public class Ui {

@@ -1,5 +1,11 @@
+package duke.command;
+
+import duke.shared.Messages;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
-import java.util.List;
 
 public class ExitCommand extends Command {
     @Override

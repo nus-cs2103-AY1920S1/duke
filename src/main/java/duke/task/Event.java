@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task{
     private char shortForm = 'E';
     protected String timing;

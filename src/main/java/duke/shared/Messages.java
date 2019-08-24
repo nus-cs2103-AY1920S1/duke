@@ -1,8 +1,10 @@
+package duke.shared;
+
 public class Messages {
     public static final String COMMAND_INDENTATION = "    ";
     public static final String COMPLETION_INDENTATION = "  ";
     public static final String BYE_MESSAGE = COMMAND_INDENTATION + "Bye. Hope to see you again soon!";
-    public static final String GREETING_MESSAGE = COMMAND_INDENTATION + "Hello! I'm Duke\n" +
+    public static final String GREETING_MESSAGE = COMMAND_INDENTATION + "Hello! I'm duke.Duke\n" +
             COMMAND_INDENTATION + "What can I do for you?";
     public static final String ADDED_MESSAGE = COMMAND_INDENTATION + "added: ";
     public static final String LIST_MESSAGE = COMMAND_INDENTATION + "Here are the tasks in your list:";

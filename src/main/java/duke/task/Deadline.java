@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -5,7 +7,7 @@ public class Deadline extends Task {
 
     private final Date by;
 
-    Deadline(String description, Date by) {
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }

@@ -1,11 +1,20 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.InvalidCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-class Parser {
+public class Parser {
 
-    static Task convertSavedTextToTask(String savedText) throws ParseException {
+    public static Task convertSavedTextToTask(String savedText) throws ParseException {
         String[] tokens = savedText.split("\\s\\|\\s");
 
         String type = tokens[0];
@@ -31,7 +40,7 @@ class Parser {
         return task;
     }
 
-    static String convertTasksToSavedText(ArrayList<Task> tasks) {
+    public static String convertTasksToSavedText(ArrayList<Task> tasks) {
         StringBuilder text = new StringBuilder();
         for (Task task : tasks) {
             text.append(task.toSaveString());
@@ -40,7 +49,7 @@ class Parser {
         return text.toString();
     }
 
-    static Command parseCommand(String fullCommand) throws ParseException, InvalidCommandException {
+    public static Command parseCommand(String fullCommand) throws ParseException, InvalidCommandException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         String commandName = fullCommand.split(" ", 2)[0];
         switch (commandName) {

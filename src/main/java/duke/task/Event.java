@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -5,7 +7,7 @@ public class Event extends Task {
 
     private final Date at;
 
-    Event(String description, Date at) {
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }

@@ -1,17 +1,23 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import java.io.IOException;
 
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
 
     private final int index;
 
-    DeleteCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 
     @Override
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = tasks.remove(this.index - 1);
-        ui.showDelete(task, tasks);
+        tasks.get(this.index - 1).markAsDone();
+        ui.showDone(tasks.get(this.index - 1));
         try {
             storage.saveTasks(tasks);
         } catch (IOException e) {

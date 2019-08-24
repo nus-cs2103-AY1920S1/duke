@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,7 +9,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
 
     private final String filePath;
 
@@ -13,7 +17,7 @@ class Storage {
         this.filePath = filePath;
     }
 
-    TaskList loadTasks() throws FileNotFoundException, ParseException {
+    public TaskList loadTasks() throws FileNotFoundException, ParseException {
         TaskList tasks = new TaskList();
         File file = new File(this.filePath);
         Scanner scanner = new Scanner(file);
@@ -24,7 +28,7 @@ class Storage {
         return tasks;
     }
 
-    void saveTasks(TaskList tasks) throws IOException {
+    public void saveTasks(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
         fileWriter.write(Parser.convertTasksToSavedText(tasks));
         fileWriter.close();

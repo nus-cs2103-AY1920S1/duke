@@ -1,7 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.InvalidCommandException;
+
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
-class Duke {
+public class Duke {
 
     private final Storage storage;
     private TaskList tasks;

@@ -1,19 +1,27 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.Date;
 
-public class DeadlineCommand extends Command {
+public class EventCommand extends Command {
 
     private final String description;
-    private final Date by;
+    private final Date at;
 
-    DeadlineCommand(String description, Date by) {
+    public EventCommand(String description, Date at) {
         this.description = description;
-        this.by = by;
+        this.at = at;
     }
 
     @Override
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Deadline(this.description, this.by);
+        Task task = new Event(this.description, this.at);
         tasks.add(task);
         ui.showTaskAdded(task, tasks);
         try {

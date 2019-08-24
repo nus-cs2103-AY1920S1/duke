@@ -1,9 +1,11 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
 
     final String description;
     boolean isDone;
 
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -12,7 +14,7 @@ abstract class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 

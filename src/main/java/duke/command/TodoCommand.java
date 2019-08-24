@@ -1,19 +1,24 @@
-import java.io.IOException;
-import java.util.Date;
+package duke.command;
 
-public class EventCommand extends Command {
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.Todo;
+
+import java.io.IOException;
+
+public class TodoCommand extends Command {
 
     private final String description;
-    private final Date at;
 
-    EventCommand(String description, Date at) {
+    public TodoCommand(String description) {
         this.description = description;
-        this.at = at;
     }
 
     @Override
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Event(this.description, this.at);
+        Task task = new Todo(this.description);
         tasks.add(task);
         ui.showTaskAdded(task, tasks);
         try {

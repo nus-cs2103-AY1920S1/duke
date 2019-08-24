@@ -1,58 +1,128 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
     private static ArrayList<Task> arr;
+    private static Scanner sc;
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
 
 
         arr = new ArrayList<>();
 
+        readFile();
+
+        readCommand();
+
+    }
+
+    private static void readCommand() throws DukeException , IOException{
         System.out.println("Hello I'm Duke! \nWhat can I do for you?");
-        Scanner sc = new Scanner(System.in);
+       sc = new Scanner(System.in);
 
-        String command = sc.nextLine();
-        while (! command.toLowerCase().equals("bye")) {
 
-            isCommandValid(command);
-            if (command.equals("list")) {
-                list(command);
-            } else if (command.split(" ")[0].equals("done")) {
+       String command = sc.nextLine();
+       while (! command.toLowerCase().equals("bye")) {
 
-                int num = Integer.parseInt(command.split(" ")[1]);
+           isCommandValid(command);
 
-                markAsDone(num);
 
-            } else if (command.split(" ")[0].equals("todo")) {
-                int spaceIndex = command.indexOf(" ");
-                addToDo(command.substring(spaceIndex + 1));
+           if (command.equals("list")) {
+               list(command);
+           } else if (command.split(" ")[0].equals("done")) {
 
-            } else if (command.split(" ")[0].equals("deadline")) {
+               int num = Integer.parseInt(command.split(" ")[1]);
 
-                int spaceIndex = command.indexOf(" ");
-                int slashIndex = command.indexOf("/");
-                addDeadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
-            } else if (command.split(" ")[0].equals("event")) {
-                int spaceIndex = command.indexOf(" ");
-                int slashIndex = command.indexOf("/");
-                addEvent(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
-            } else if (command.split(" ")[0].equals("delete")) {
+               markAsDone(num);
 
-                deleteTask(Integer.parseInt(command.split(" ")[1]));
+           } else if (command.split(" ")[0].equals("todo")) {
+               int spaceIndex = command.indexOf(" ");
+               addToDo(command.substring(spaceIndex + 1));
+               printAddedTask();
+           } else if (command.split(" ")[0].equals("deadline")) {
+
+               int spaceIndex = command.indexOf(" ");
+               int slashIndex = command.indexOf("/");
+               addDeadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+               printAddedTask();
+
+           } else if (command.split(" ")[0].equals("event")) {
+               int spaceIndex = command.indexOf(" ");
+               int slashIndex = command.indexOf("/");
+               addEvent(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+
+               printAddedTask();
+           } else if (command.split(" ")[0].equals("delete")) {
+
+               deleteTask(Integer.parseInt(command.split(" ")[1]));
+           }
+
+           writeListToFile();
+
+           command = sc.nextLine();
+       }
+
+       System.out.println("Bye. Hope to see you again!");
+
+    }
+
+    private static void readFile() throws FileNotFoundException {
+        File f = new File("data/duke.txt");
+        sc = new Scanner (f);
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+
+            String[] stringArr = line.split("\\|");
+
+
+            if (stringArr[0].trim().equals("T")) {
+
+                addToDo(stringArr[2].trim());
+            } else if (stringArr[0].trim().equals("D")) {
+                addDeadline(stringArr[2].trim(), stringArr[3].trim());
+            } else if (stringArr[0].trim().equals("E")) {
+                addEvent(stringArr[2].trim(), stringArr[3].trim());
             }
 
+            if (stringArr[1].trim().equals("1")) {
+                arr.get(arr.size()-1).markAsDone();
+            }
 
-            command = sc.nextLine();
         }
 
-        System.out.println("Bye. Hope to see you again!");
 
-   }
+    }
 
-   private static void list(String command) {
+    private static void writeListToFile() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        StringBuilder sb = new StringBuilder();
+        for (Task entry : arr) {
+            if (entry instanceof Deadline) {
+                sb.append(String.format("D | %s | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getTaskName(), ((Deadline) entry).getDatetime() ));
+            } else if (entry instanceof Event) {
+                sb.append(String.format("E | %s | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getTaskName(), ((Event) entry).getDatetime() ));
+            } else if (entry instanceof ToDo) {
+                sb.append(String.format("T | %s | %s", entry.isDone() ? "1" : "0",
+                        entry.getTaskName() ));
+            }
+
+            sb.append(System.lineSeparator());
+            fw.write(sb.toString());
+            sb = new StringBuilder();
+        }
+
+        fw.close();
+
+    }
+
+    private static void list(String command) {
        System.out.println("Here are the tasks in your list:");
 
        int index  = 1;
@@ -60,67 +130,67 @@ public class Duke {
            System.out.println(String.format("%d. %s", index , task.toString()));
            index++;
        }
-   }
+    }
 
-   private static void markAsDone(int num) throws DukeException {
+    private static void markAsDone(int num) throws DukeException {
        if (num <= 0 || num > arr.size() ) {
            throw new DukeException("OOPS!!! Number is out of range");
        } else {
-           arr.get(num - 1).done();
+           arr.get(num - 1).markAsDone();
 
            printDoneTask(arr.get(num-1));
        }
-   }
+    }
 
-   private static void addToDo(String taskName) {
+    private static void addToDo(String taskName) {
        ToDo newToDo = new ToDo(taskName);
 
        arr.add(newToDo);
 
-       printAddedTask();
-   }
 
-   private static void printDoneTask(Task t) {
+    }
+
+    private static void printDoneTask(Task t) {
         System.out.println("Nice! I've marked this task as done");
         System.out.println(String.format("    %s", t));
-   }
+    }
 
-   private static void printAddedTask() {
+    private static void printAddedTask() {
         System.out.println("Got it. I've added this task: ");
         System.out.println(String.format("    %s", arr.get(arr.size()-1).toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
-   }
+    }
 
-   private static void printDeletedTask(Task t) {
+    private static void printDeletedTask(Task t) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(String.format("    %s",t));
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
-   }
+    }
 
-   private static void addDeadline(String taskName, String datetime) {
+    private static void addDeadline(String taskName, String datetime) {
         Deadline deadline = new Deadline(taskName,datetime);
 
         arr.add(deadline);
 
-        printAddedTask();
-   }
 
-   private static void addEvent(String taskName, String datetime) {
+    }
+
+    private static void addEvent(String taskName, String datetime) {
         Event e = new Event(taskName, datetime);
 
         arr.add(e);
 
-        printAddedTask();
-   }
 
-   private static void deleteTask(int index) {
+    }
+
+    private static void deleteTask(int index) {
 
         Task t = arr.remove(index);
 
         printDeletedTask(t);
-   }
+    }
 
-   private static boolean isCommandValid(String str) throws DukeException {
+    private static boolean isCommandValid(String str) throws DukeException {
 
 
         if (! (str.split(" ")[0].equals("list") ||
@@ -158,9 +228,10 @@ public class Duke {
        }
 
         return true;
-   }
+    }
 
     private static boolean isNumeric(String strNum) {
         return strNum.matches("-?\\d+(\\.\\d+)?");
     }
+
 }

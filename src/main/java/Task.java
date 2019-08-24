@@ -13,12 +13,20 @@ public class Task {
         return String.format("[%s][%s] %s", this.getType() ,isDone ? "\u2713": "\u2718", taskName );
     }
 
-    public void done() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
     public String getType() {
         return " ";
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getTaskName() {
+        return this.taskName;
     }
 
 

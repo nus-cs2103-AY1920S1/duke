@@ -21,7 +21,8 @@ public class Duke {
             sb.append(this.ls.get(i).toFileString())
                     .append((char) 30);
         }
-        sb.setLength(sb.length() - 1);
+        if(sb.length() > 0)
+            sb.setLength(sb.length() - 1);
         try{
             FileWriter fw = new FileWriter("./data/duke.txt", false);
             fw.write(sb.toString());

@@ -1,3 +1,5 @@
+import jermi.Client;
+
 public class Jermi {
     public static void main(String[] args) {
         Client client = Client.initialise();

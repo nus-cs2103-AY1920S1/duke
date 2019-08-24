@@ -1,9 +1,11 @@
+package jermi.component;
+
 import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
 
-    Ui() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
@@ -11,15 +13,15 @@ public class Ui {
         return "     " + message + "\n";
     }
 
-    String readCommand() {
+    public String readCommand() {
         return this.scanner.next();
     }
 
-    String readDetails() {
+    public String readDetails() {
         return this.scanner.nextLine().trim();
     }
 
-    void echo(String... messages) {
+    public void echo(String... messages) {
         String border = "    ____________________________________________________________\n";
         StringBuilder toEcho = new StringBuilder(border);
         for (String message : messages) {
@@ -29,15 +31,15 @@ public class Ui {
         System.out.println(toEcho);
     }
 
-    void greet() {
+    public void greet() {
         echo("Hello! I'm Jermi", "What can I do for you?");
     }
 
-    void exit() {
+    public void exit() {
         echo("Bye. Hope to see you again soon!");
     }
 
-    void runFail() {
+    public void runFail() {
         echo("Client has failed to run.", "Please resolve the issue above before running again.");
     }
 }

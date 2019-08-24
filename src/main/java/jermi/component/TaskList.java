@@ -1,30 +1,33 @@
+package jermi.component;
+
+import jermi.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
     private List<Task> list;
 
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    List<Task> getList() {
+    public List<Task> getList() {
         return this.list;
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         this.list.add(task);
     }
 
-    int getSize() {
+    public int getSize() {
         return this.list.size();
     }
 
-    Task getTask(int ordering) {
+    public Task getTask(int ordering) {
         return this.list.get(ordering - 1);
     }
 
-    void remove(int ordering) {
+    public void remove(int ordering) {
         this.list.remove(ordering - 1);
     }
 }

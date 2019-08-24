@@ -1,10 +1,12 @@
+package jermi.task;
+
 public class Event extends TaskWithDateTime {
 
-    Event(String description, String dateTime) {
+    public Event(String description, String dateTime) {
         this(description, dateTime, "0");
     }
 
-    Event(String description, String dateTime, String isDone) {
+    public Event(String description, String dateTime, String isDone) {
         super(description, dateTime, isDone);
     }
 

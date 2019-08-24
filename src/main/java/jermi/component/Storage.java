@@ -1,3 +1,12 @@
+package jermi.component;
+
+import jermi.exception.JermiException;
+import jermi.exception.ReadingException;
+import jermi.exception.WritingException;
+import jermi.task.Deadline;
+import jermi.task.Event;
+import jermi.task.Task;
+import jermi.task.ToDo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +16,7 @@ public class Storage {
     private File file;
     private TaskList taskList;
 
-    Storage(String pathName, TaskList taskList) throws JermiException {
+    public Storage(String pathName, TaskList taskList) throws JermiException {
         this.taskList = taskList;
         this.file = new File(pathName);
         this.fileToTaskList();
@@ -42,7 +51,7 @@ public class Storage {
         }
     }
 
-    void taskListToFile() throws JermiException {
+    public void taskListToFile() throws JermiException {
         try {
             StringBuilder toWrite = new StringBuilder();
             for (Task task : this.taskList.getList()) {

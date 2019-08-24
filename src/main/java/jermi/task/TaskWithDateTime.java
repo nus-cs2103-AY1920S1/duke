@@ -1,3 +1,4 @@
+package jermi.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -31,7 +32,7 @@ public abstract class TaskWithDateTime extends Task {
     }
 
     @Override
-    String toSaveFormat() {
+    public String toSaveFormat() {
         return String.format("%s|%s", super.toSaveFormat(), this.dateTime);
     }
 }

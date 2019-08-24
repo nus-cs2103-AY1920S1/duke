@@ -1,6 +1,8 @@
+package jermi.exception;
+
 public class WritingException extends JermiException {
 
-    WritingException(String message) {
+    public WritingException(String message) {
         super("An error has occurred while saving: " + message);
     }
 }

@@ -1,3 +1,5 @@
+package jermi.task;
+
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -11,7 +13,7 @@ public abstract class Task {
         return this.isDone ? "\u2713" : "\u2718";
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -22,7 +24,7 @@ public abstract class Task {
         return String.format("[%s][%s] %s", this.getTypeCode(), this.getStatusIcon(), this.description);
     }
 
-    String toSaveFormat() {
+    public String toSaveFormat() {
         return String.format("%s|%d|%s", this.getTypeCode(), this.isDone ? 1 : 0, this.description);
     }
 }

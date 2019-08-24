@@ -1,3 +1,14 @@
+package jermi;
+
+import jermi.command.Command;
+import jermi.component.Ui;
+import jermi.component.Parser;
+import jermi.component.TaskList;
+import jermi.component.Storage;
+import jermi.component.ExceptionHandler;
+import jermi.exception.JermiException;
+
+
 public class Client {
     private static Client client = null;
     private Ui ui;
@@ -14,12 +25,12 @@ public class Client {
         this.exceptionHandler = new ExceptionHandler(this.ui);
     }
 
-    static Client initialise() {
+    public static Client initialise() {
         client = new Client();
         return client;
     }
 
-    boolean initialiseStorage(String pathName) {
+    private boolean initialiseStorage(String pathName) {
         boolean shouldContinue = false;
         try {
             this.storage = new Storage(pathName, this.taskList);
@@ -35,7 +46,7 @@ public class Client {
         return shouldContinue;
     }
 
-    void run(String pathName) {
+    public void run(String pathName) {
         boolean shouldContinue = initialiseStorage(pathName);
 
         while (shouldContinue) {

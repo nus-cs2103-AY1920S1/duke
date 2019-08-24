@@ -1,9 +1,16 @@
-import java.io.IOException;
+package jermi.command;
+
+import jermi.component.Storage;
+import jermi.component.TaskList;
+import jermi.component.Ui;
+import jermi.exception.JermiException;
+import jermi.exception.NotANumberException;
+import jermi.task.Task;
 
 public class DeleteCommand extends Command {
     private int ordering;
 
-    DeleteCommand(String ordering) throws JermiException {
+    public DeleteCommand(String ordering) throws JermiException {
         super();
 
         try {
@@ -14,7 +21,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         Task task = taskList.getTask(ordering);
         taskList.remove(ordering);
         int numOfTasks = taskList.getSize();
@@ -25,7 +32,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    boolean shouldExit() {
+    public boolean shouldExit() {
         return false;
     }
 }

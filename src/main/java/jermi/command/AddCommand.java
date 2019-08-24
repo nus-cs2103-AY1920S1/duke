@@ -1,10 +1,20 @@
-import java.io.IOException;
+package jermi.command;
+
+import jermi.component.Storage;
+import jermi.component.TaskList;
+import jermi.component.Ui;
+import jermi.exception.JermiException;
+import jermi.task.Deadline;
+import jermi.task.Event;
+import jermi.task.Task;
+import jermi.task.ToDo;
+import jermi.type.TaskType;
 
 public class AddCommand extends Command {
     private TaskType taskType;
     private String description;
 
-    AddCommand(TaskType taskType, String description) {
+    public AddCommand(TaskType taskType, String description) {
         super();
         this.taskType = taskType;
         this.description = description;
@@ -35,7 +45,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         Task task = this.createTask();
         taskList.add(task);
         int numOfTasks = taskList.getSize();
@@ -46,7 +56,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    boolean shouldExit() {
+    public boolean shouldExit() {
         return false;
     }
 }

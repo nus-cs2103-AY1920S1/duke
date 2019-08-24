@@ -1,15 +1,21 @@
-import java.io.IOException;
+package jermi.command;
+import jermi.component.Storage;
+import jermi.component.TaskList;
+import jermi.component.Ui;
+import jermi.exception.JermiException;
+import jermi.task.Task;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListCommand extends Command {
 
-    ListCommand() {
+    public ListCommand() {
         super();
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         List<String> tasks = taskList
                 .getList()
                 .stream()
@@ -24,7 +30,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    boolean shouldExit() {
+    public boolean shouldExit() {
         return false;
     }
 }

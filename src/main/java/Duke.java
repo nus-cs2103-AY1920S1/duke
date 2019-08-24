@@ -12,7 +12,7 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileIOException | TokenParseError exc) {
+        } catch (FileIoException | TokenParseError exc) {
             if (!(exc.getCause() instanceof NoSuchFileException)) {
                 ui.displayLoadingError(exc);
             }

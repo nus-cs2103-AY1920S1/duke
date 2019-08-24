@@ -60,7 +60,7 @@ public class Storage {
         try (final Reader reader = Files.newBufferedReader(file)) {
             return parse(reader, tasks);
         } catch (IOException exc) {
-            throw new FileIOException(String.format("Unable to read tasks from file: %s", file.toString()), exc);
+            throw new FileIoException(String.format("Unable to read tasks from file: %s", file.toString()), exc);
         }
     }
 
@@ -177,7 +177,7 @@ public class Storage {
         try (final Writer output = Files.newBufferedWriter(file)) {
             output.write(serialize(tasks));
         } catch (IOException exc) {
-            throw new FileIOException(String.format("Unable to save tasks to file: %s", file.toString()), exc);
+            throw new FileIoException(String.format("Unable to save tasks to file: %s", file.toString()), exc);
         }
     }
 

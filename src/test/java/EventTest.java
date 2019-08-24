@@ -6,7 +6,7 @@ public class EventTest {
 
     @Test
     public void testEvent() {
-        Duke d = new Duke();
+        final Duke d = new Duke();
         String border = "-------------------------------------";
 
         StringBuilder sb = new StringBuilder();
@@ -18,12 +18,13 @@ public class EventTest {
         String correct = sb.toString();
         sb.setLength(0);
 
+        assertEquals(correct, d.generateTask("event test /at 12/12/1212 18:00 - 19:00"));
+
         sb.append(border + "\n");
         sb.append("Invalid Event's arguments \n");
         sb.append(border + "\n");
         String wrong = sb.toString();
 
-        assertEquals(correct, d.generateTask("event test /at 12/12/1212 18:00 - 19:00"));
         assertEquals(wrong, d.generateTask("event test /at 12/12/1212 1800 - 1900"));
         assertEquals(wrong, d.generateTask("event test /at 12/12/212 25:00"));
         assertEquals(wrong, d.generateTask("event test /at 12/12/1212 2pm"));

@@ -6,7 +6,7 @@ public class TodoTest {
 
     @Test
     public void testTodo() {
-        Duke d = new Duke();
+        final Duke d = new Duke();
         String border = "-------------------------------------";
 
         StringBuilder sb = new StringBuilder();
@@ -18,12 +18,13 @@ public class TodoTest {
         String correct = sb.toString();
         sb.setLength(0);
 
+        assertEquals(correct, d.generateTask("todo test"));
+
         sb.append(border + "\n");
         sb.append("Todo must have valid description\n");
         sb.append(border + "\n");
         String wrong = sb.toString();
 
-        assertEquals(correct, d.generateTask("todo test"));
         assertEquals(wrong, d.generateTask("todo"));
     }
 }

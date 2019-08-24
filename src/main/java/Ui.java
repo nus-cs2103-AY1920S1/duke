@@ -89,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Message notifying user when a task is deleted
+     * Message notifying user when a task is deleted.
      * @param curr Task that user wished to delete
      * @param size size of list after deletion
      * @return String message notifying user

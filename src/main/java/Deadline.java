@@ -20,7 +20,9 @@ public class Deadline extends Task {
                 //Process char
 
             }
-            //Process char
+            return "[D]" + temp.append(')').toString();
+        } else {
+            return "[D]" + unprocessed;
         }
 
 

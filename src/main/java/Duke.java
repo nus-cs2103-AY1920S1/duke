@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Duke {
 
+    //comment on branch 7
     public static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";
 
     public static void main(String[] args) {

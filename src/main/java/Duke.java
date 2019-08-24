@@ -1,9 +1,14 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static ArrayList<Task> arr = new ArrayList<>();
-    public static String lines = "    ____________________________________________________________________";
+    public static String lines = "\t____________________________________________________________________";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,7 +21,54 @@ public class Duke {
         System.out.println("    Hello! I'm Duke\n    What can I do for you?");
         System.out.println(lines);
 
+        try {
+            FileReader reader = new FileReader("C:\\Users\\jietung\\Desktop\\duke\\src\\main\\data\\duke.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+
+            String s;
+
+            System.out.println(lines);
+            System.out.println("\tHere are the tasks in your list:");
+
+            int i = 1;
+
+            while ((s = bufferedReader.readLine()) != null) {
+                Task t;
+                if (s.charAt(1) == 'T') {
+                    t = new Todo(s.substring(7));
+                    if (s.charAt(4) == '\u2713') {
+                        t.markAsDone();
+                    }
+                    arr.add(t);
+                } else if (s.charAt(1) == 'D') {
+                    int index = s.indexOf(40);
+                    t = new Deadline(s.substring(7, index - 1), s.substring(index + 5, s.length() - 2));
+                    if (s.charAt(4) == '\u2713') {
+                        t.markAsDone();
+                    }
+                    arr.add(t);
+                } else {
+                    int index = s.indexOf(40);
+                    t = new Event(s.substring(7, index - 1), s.substring(index + 5, s.length() - 2));
+                    if (s.charAt(4) == '\u2713') {
+                        t.markAsDone();
+                    }
+                    arr.add(t);
+                }
+                System.out.println("\t" + i + ". " + t);
+                i++;
+            }
+
+            System.out.println(lines);
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
+
+
 
         String str = sc.nextLine();
         while (!str.equals("bye")) {
@@ -24,13 +76,29 @@ public class Duke {
                 input(str);
             } catch (DukeException e) {
                 System.out.println(lines);
-                System.err.println("    " + e.getMessage());
+                System.err.println("\t" + e.getMessage());
                 System.out.println(lines);
             }
             str = sc.nextLine();
         }
+
+        try {
+            FileWriter writer = new FileWriter("C:\\Users\\jietung\\Desktop\\duke\\src\\main\\data\\duke.txt", false);
+            BufferedWriter bufferedWriter =  new BufferedWriter(writer);
+
+            for (Task t : arr) {
+                bufferedWriter.write(t.toString());
+                bufferedWriter.newLine();
+            }
+
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(lines);
-        System.out.println("    Bye. Hope to see you again soon!");
+        System.out.println("\tBye. Hope to see you again soon!");
         System.out.println(lines);
     }
 
@@ -42,7 +110,7 @@ public class Duke {
 
             int i = 1;
             System.out.println(lines);
-            System.out.println("    Here are the tasks in your list:");
+            System.out.println("\tHere are the tasks in your list:");
 
             for (Task t : arr) {
                 System.out.println("    " + i + "." +  t);
@@ -51,7 +119,7 @@ public class Duke {
 
             System.out.println(lines);
 
-        } else if(strArr[0].equals("done")) { //mark task as done
+        } else if (strArr[0].equals("done")) { //mark task as done
 
             if (strArr.length == 1) {
                 throw new DukeException("OOPS!!! Please state the task number you want to mark as done.");
@@ -69,11 +137,11 @@ public class Duke {
             t.markAsDone();
 
             System.out.println(lines);
-            System.out.println("    Nice! I've marked this task as done:");
-            System.out.println("    " + t);
+            System.out.println("\tNice! I've marked this task as done:");
+            System.out.println("\t" + t);
             System.out.println(lines);
 
-        } else if(strArr[0].equals("todo")
+        } else if (strArr[0].equals("todo")
                 || strArr[0].equals("deadline")
                 || strArr[0].equals("event")) { //add task to list
 
@@ -141,9 +209,9 @@ public class Duke {
             }
 
             System.out.println(lines);
-            System.out.println("    Got it. I've added this task:");
-            System.out.println("      " + t);
-            System.out.println("    Now you have " + arr.size() + " tasks in the list.");
+            System.out.println("\tGot it. I've added this task:");
+            System.out.println("\t  " + t);
+            System.out.println("\tNow you have " + arr.size() + " tasks in the list.");
             System.out.println(lines);
 
         }  else if (strArr[0].equals("delete")) { //delete
@@ -163,9 +231,9 @@ public class Duke {
             Task t = arr.remove(index);
 
             System.out.println(lines);
-            System.out.println("    Noted! I've removed this task:");
-            System.out.println("    " + t);
-            System.out.println("    Now you have " + arr.size() + " tasks in the list.");
+            System.out.println("\tNoted! I've removed this task:");
+            System.out.println("\t" + t);
+            System.out.println("\tNow you have " + arr.size() + " tasks in the list.");
             System.out.println(lines);
 
         } else {

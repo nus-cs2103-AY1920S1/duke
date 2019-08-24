@@ -2,6 +2,8 @@ import java.security.Timestamp;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -17,6 +19,10 @@ public class Duke {
     private static void add_task(String task_type, String task_name, String date_or_time) {
         // Add the right type of task
         Task toAdd;
+
+        // Process the time string
+        //TODO
+
         if (task_type.equals("Todo")) {
             toAdd = new Todo(task_name);
             tasklist.add(toAdd);

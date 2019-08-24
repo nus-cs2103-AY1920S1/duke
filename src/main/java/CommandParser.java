@@ -1,4 +1,4 @@
-public class Command {
+public class CommandParser {
     protected final String input;
     protected final String keyword;
     protected final String args;
@@ -11,7 +11,7 @@ public class Command {
      * Does not ensure that the resulting command is legal.
      * @param input Command input as a string
      */
-    public Command(String input) {
+    public CommandParser(String input) {
         input = input.trim();
         this.input = input;
 

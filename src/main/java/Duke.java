@@ -51,10 +51,7 @@ public class Duke {
         }
     }
 
-    private static void addTask(Task task) throws DukeException {
-        if (!task.isValid()) {
-            throw new DukeException(task.invalidMessage());
-        }
+    private static void addTask(Task task) {
         tasks.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
@@ -75,13 +72,13 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            Command cmd = new Command(input);
-            String cmdInput = cmd.getInput();
-            String cmdKeyword = cmd.getKeyword();
-            String cmdArgs = cmd.getArgs();
-            String cmdBeforeSlashArgs = cmd.getBeforeSlashArgs();
-            String cmdSlashKeyword = cmd.getSlashKeyword();
-            String cmdSlashArgs = cmd.getSlashArgs();
+            CommandParser cmdParser = new CommandParser(input);
+            String cmdInput = cmdParser.getInput();
+            String cmdKeyword = cmdParser.getKeyword();
+            String cmdArgs = cmdParser.getArgs();
+            String cmdBeforeSlashArgs = cmdParser.getBeforeSlashArgs();
+            String cmdSlashKeyword = cmdParser.getSlashKeyword();
+            String cmdSlashArgs = cmdParser.getSlashArgs();
 
             try {
                 if (cmdInput.equals("bye")) {
@@ -94,11 +91,20 @@ public class Duke {
                 } else if (cmdKeyword.equals("delete")) {
                     deleteTask(cmdArgs);
                 } else if (cmdKeyword.equals("todo")) {
+                    if (cmdArgs == null) {
+                        throw new DukeException("The description of a todo cannot be empty.");
+                    }
                     addTask(new Todo(cmdArgs));
                 } else if (cmdKeyword.equals("event")) {
-                    addTask(new Event(cmdBeforeSlashArgs, cmdSlashKeyword, cmdSlashArgs));
+                    if (cmdSlashKeyword == null || !cmdSlashKeyword.equals("at")) {
+                        throw new DukeException("An event must have an 'at' date or time.");
+                    }
+                    addTask(new Event(cmdBeforeSlashArgs, cmdSlashArgs));
                 } else if (cmdKeyword.equals("deadline")) {
-                    addTask(new Deadline(cmdBeforeSlashArgs, cmdSlashKeyword, cmdSlashArgs));
+                    if (cmdSlashKeyword == null || !cmdSlashKeyword.equals("by")) {
+                        throw new DukeException("A deadline must have a 'by' date or time.");
+                    }
+                    addTask(new Deadline(cmdBeforeSlashArgs, cmdSlashArgs));
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }

@@ -32,7 +32,7 @@ public class TaskWithDate extends Task {
     }
 
     /**
-     * Verify that the data is correct before creating a task with data
+     * Verify that the data is correct before creating a task with data.
      * @param data the data as extracted from extractDataFromLine
      * @param taskName Name of the task e.g. event or deadline
      * @return

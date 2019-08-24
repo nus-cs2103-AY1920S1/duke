@@ -1,7 +1,10 @@
 package duke.command;
 
-import duke.*;
-import duke.task.Task;
+import duke.Duke;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class ClearCommand extends Command {
 

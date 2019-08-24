@@ -2,7 +2,10 @@ package duke;
 
 import duke.command.Command;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
 
 public class Duke {
@@ -20,6 +23,10 @@ public class Duke {
     private Parser parser = null;
     private boolean isRunning = true;
 
+    /**
+     * Creates an instance of Duke which runs the program.
+     * @param saveFilePath Save file path to be used for saving / loading tasks
+     */
     public Duke(String saveFilePath) {
         ui = new Ui();
         storage = new Storage(saveFilePath);
@@ -30,7 +37,7 @@ public class Duke {
         } catch (InvalidPropertiesFormatException e) {
             ui.storageInvalidLineError();
         } catch (IOException e) {
-            ui.storageIOExceptionError();
+            ui.storageIoExceptionError();
         } catch (DukeException e) {
             ui.printError(e);
         } finally {
@@ -41,6 +48,9 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Run the Duke instance.
+     */
     public void run() {
         ui.setEnabled(true);
         ui.printGreeting();

@@ -1,15 +1,24 @@
 package duke.command;
 
-import duke.*;
+import duke.Duke;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Event;
 import duke.task.TaskWithDate;
-import duke.task.Todo;
 
 import java.text.ParseException;
 
 public class AddEventCommand extends TextBasedCommand {
     public static final String COMMAND = "event";
     public static final String DISPLAY_COMMAND = COMMAND;
+
+    /**
+     * Create event command (extended from text based command).
+     * @param line line of user input
+     * @throws DukeException generic error with message
+     */
     public AddEventCommand(String line) throws DukeException {
         super(line, COMMAND);
     }

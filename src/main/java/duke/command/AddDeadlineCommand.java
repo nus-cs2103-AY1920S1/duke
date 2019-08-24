@@ -1,6 +1,11 @@
 package duke.command;
 
-import duke.*;
+
+import duke.Duke;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Event;
 import duke.task.TaskWithDate;
 
@@ -9,6 +14,12 @@ import java.text.ParseException;
 public class AddDeadlineCommand extends TextBasedCommand {
     public static final String COMMAND = "deadline";
     public static final String DISPLAY_COMMAND = COMMAND;
+
+    /**
+     * Add a deadline command (extended from text based command).
+     * @param line line of input
+     * @throws DukeException generic error with message
+     */
     public AddDeadlineCommand(String line) throws DukeException {
         super(line, COMMAND);
     }

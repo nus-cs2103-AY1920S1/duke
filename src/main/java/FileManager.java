@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /** This class is in charge of recording the current task list to the hard disk as well as reloading,
@@ -8,43 +7,51 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-    private BufferedOutputStream recorder = null;
-    private BufferedInputStream reader = null;
-    private ObjectOutputStream outAssistant = null;
-    private ObjectInputStream inAssistant = null;
+    private static BufferedWriter recorder = null;
+    private static BufferedReader reader = null;
 
-    FileManager() {}
-
-    /** This method rewrite the string into the taskfile.txt*/
-    void rewrite(ArrayList<Task> tasklist) {
-        try {
-            recorder = new BufferedOutputStream(new FileOutputStream("dukedata/taskfile"));
-            outAssistant = new ObjectOutputStream(recorder);
-            outAssistant.writeObject(tasklist);
-            outAssistant.close();
-            recorder.close();
-        } catch (IOException e) {
-            System.out.println("Records this time failed to be serialized");
+    // Reload the previous task list.
+    static ArrayList<Task> reload() throws IOException{
+        reader = new BufferedReader(new FileReader("./dukedata/taskfile.txt"));
+        ArrayList<Task> toReturn = new ArrayList<>();
+        if (reader == null) return toReturn;
+        String line = reader.readLine();
+        while (line != null) {
+            String[] lineComponents = line.split("\\|");
+            boolean finished;
+            if (lineComponents[1].equals("0")) finished = false;
+            else finished = true;
+            String taskname = lineComponents[2];
+            if (lineComponents[0].equals("T")) {
+                Task toAdd = new Todo(taskname);
+                if (finished) toAdd.set_as_finish();
+                toReturn.add(toAdd);
+            } else if (lineComponents[0].equals("D")) {
+                String tasktime = lineComponents[3];
+                Task toAdd = new Deadline(taskname, tasktime);
+                if (finished) toAdd.set_as_finish();
+                toReturn.add(toAdd);
+            } else {
+                String tasktime = lineComponents[3];
+                Task toAdd = new Event(taskname, tasktime);
+                if (finished) toAdd.set_as_finish();
+                toReturn.add(toAdd);
+            }
+            line = reader.readLine();
         }
+        reader.close();
+        return toReturn;
     }
 
-    /** This method reloads the previous task list to the current execute.
-     * Remember this method will and only will be run once each time the program is started.*/
-    ArrayList<Task> reload() {
-        ArrayList<Task> toReturn = new ArrayList<>();
-        try {
-            reader = new BufferedInputStream(new FileInputStream("dukedata/taskfile"));
-            inAssistant = new ObjectInputStream(reader);
-            toReturn = (ArrayList<Task>) inAssistant.readObject();
-            inAssistant.close();
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Previous task list cannot be loaded. (FileNotFoundException)");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Previous task list cannot be loaded. (ClassNotFoundException)");
-        } catch (IOException e) {
-            System.out.println("Previous task list cannot be loaded. (IOException)");
+    // Rewrite the task list file, remember to clear the original file first.
+    static void rewrite(ArrayList<Task> tasklist) throws IOException{
+        PrintWriter pw = new PrintWriter("./dukedata/taskfile.txt");
+        pw.close();
+        recorder = new BufferedWriter(new FileWriter("./dukedata/taskfile.txt", true));
+        for (Task t : tasklist) {
+            recorder.write(t.record_info());
+            recorder.write("\n");
         }
-        return toReturn;
+        recorder.close();
     }
 }

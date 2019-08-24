@@ -14,4 +14,10 @@ public class Deadline extends Task {
         else indicator = "[\u2715] ";
         return "[D]" + indicator + get_name() + " (by: " + death_data + ")";
     }
+
+    @Override
+    String record_info() {
+        if (isFinished()) return "D|" + "1|" + get_name() + "|" + death_data;
+        else return "D|" + "0|" + get_name() + "|" + death_data;
+    }
 }

@@ -11,4 +11,10 @@ public class Todo extends Task {
         else indicator = "[\u2715] ";
         return "[T]" + indicator + get_name();
     }
+
+    @Override
+    String record_info() {
+        if (isFinished()) return "T|" + "1|" + get_name();
+        else return "T|" + "0|" + get_name();
+    }
 }

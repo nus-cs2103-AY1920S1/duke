@@ -14,4 +14,10 @@ public class Event extends Task{
         else indicator = "[\u2715] ";
         return "[E]" + indicator + get_name() + " (at: " + event_time + ")";
     }
+
+    @Override
+    String record_info() {
+        if (isFinished()) return "E|" + "1|" + get_name() + "|" + event_time;
+        else return "E|" + "0|" + get_name() + "|" + event_time;
+    }
 }

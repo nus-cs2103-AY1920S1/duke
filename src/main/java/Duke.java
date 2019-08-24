@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Duke {
 
     private static ArrayList<Task> tasklist = new ArrayList<>();
-    private static FileManager fm;
 
     private static void draw_line() {
         System.out.print("    ");
@@ -20,16 +19,14 @@ public class Duke {
         Task toAdd;
         if (task_type.equals("Todo")) {
             toAdd = new Todo(task_name);
-            tasklist.add(toAdd);
         }
         else if (task_type.equals("Event")) {
             toAdd = new Event(task_name, date_or_time);
-            tasklist.add(toAdd);
         }
         else {
             toAdd = new Deadline(task_name, date_or_time);
-            tasklist.add(toAdd);
         }
+        tasklist.add(toAdd);
 
         // Print out the message
         draw_line();
@@ -181,10 +178,12 @@ public class Duke {
             new File("./dukedata").mkdir();
         }
 
-        // Generate the FileManager which records the latest update of the task list and reload the tasklist.
-        // Abandon generating a recorder and tell the user if the file cannot be read.
-        fm = new FileManager();
-        tasklist = fm.reload();
+        // Reload the previous task list.
+        try {
+            tasklist = FileManager.reload();
+        } catch (IOException e) {
+            System.out.println("Previous task list cannot be loaded.");
+        }
 
         // The welcome page.
         draw_line();
@@ -242,9 +241,12 @@ public class Duke {
             }
         }
 
-        // Now the user want to exit the program.
-        // Close the FileManager.
-        fm.rewrite(tasklist);
+        // Rewrite the task list file.
+        try {
+            FileManager.rewrite(tasklist);
+        } catch (IOException e) {
+            System.out.println("Oops, modification this time cannot be recorded.");
+        }
 
         //The exit page.
         draw_line();

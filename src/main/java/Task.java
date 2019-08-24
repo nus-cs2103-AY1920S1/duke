@@ -12,6 +12,8 @@ public abstract class Task {
 
     abstract String task_info();
 
+    abstract String record_info();
+
     String get_name() {
         return task_name;
     }

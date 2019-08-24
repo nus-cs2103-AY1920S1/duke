@@ -33,7 +33,7 @@ public class Ui {
     public void showWelcomeMessage() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke.\n" +
-                "     What can I do for you?\n" +
+                "     I changed some random stuff so that I can merge changes to master.\n" +
                 "    ____________________________________________________________\n");
     }
 

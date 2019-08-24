@@ -1,7 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Duke {
+    // String Constants used for Duke output
+    private static final String INTRODUCTION = "     Hello! I'm Duke";
+    private static final String USER_PROMPT = "     What can I do for you?";
+    private static final String SEPARATOR = "    ____________________________________________________________";
+    private static final String SHOW_LIST = "     Here are the tasks in your list:";
+    private static final String INVALID_LIST_ENTRY = "     List entry does not exist!";
+    private static final String MARK_TASK_COMPLETE = "     Nice! I've marked this task as done: ";
+    private static final String ADD_TASK = "     Got it. I've added this task:";
+    private static final String REMOVE_TASK = "     Noted. I've removed this task: ";
+    private static final String CLOSING_STATEMENT = "     Bye. Hope to see you again soon!";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,26 +22,26 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        //Store command-line input as String
+        // Store command-line input as String
         String input = "";
 
-        //Create ArrayList of tasks - dynamic array
+        // Create ArrayList of tasks - dynamic array
         ArrayList<Task> list = new ArrayList<>();
 
-        //Set index of number of task
+        // Set index of number of task
         int n = 0;
 
-        //Null task for exception
+        // Null task for exception
         Task t = null;
 
         //Read command-line input with Scanner
         Scanner scanner = new Scanner(System.in);
 
         //Initial opening introduction and prompt for user input
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(SEPARATOR);
+        System.out.println(INTRODUCTION);
+        System.out.println(USER_PROMPT);
+        System.out.println(SEPARATOR);
         System.out.println("");
 
         //Check for last statement
@@ -41,10 +53,10 @@ public class Duke {
             //Store whatever text entered, except "bye", exit loop
             if (input.equals("bye")) break;
 
-            System.out.println("    ____________________________________________________________");
+            System.out.println(SEPARATOR);
 
             if (input.equals("list")) {
-                System.out.println("     Here are the tasks in your list:");
+                System.out.println(SHOW_LIST);
                 for (int i = 0; i < n; i++) {
                     System.out.print("     " + (i+1) + ".");
                     System.out.println(list.get(i));
@@ -63,13 +75,13 @@ public class Duke {
                     list.get(index-1).isDone = true;
                 }
                 catch (NullPointerException err){
-                    System.out.println("     List entry does not exist!");
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(INVALID_LIST_ENTRY);
+                    System.out.println(SEPARATOR);
                     System.out.println("");
                     continue;
                     }
 
-                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.println(MARK_TASK_COMPLETE);
                 System.out.print("       "); //indentation
                 System.out.println(list.get(index-1));
 
@@ -79,7 +91,7 @@ public class Duke {
 
                 //Get integer found in user input
                 int index = Integer.parseInt(value.trim()); //Remove any blank space
-                System.out.println("     Noted. I've removed this task: ");
+                System.out.println(REMOVE_TASK);
                 System.out.print("       "); //indentation
                 System.out.println(list.get(index-1)); //index start from 0
 
@@ -98,7 +110,7 @@ public class Duke {
                 //If length is 1, it only has the action but no description
                 catch (DukeException err) {
                     System.out.println(err.getMessage());
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println("");
                     continue;
                 }
@@ -130,7 +142,7 @@ public class Duke {
                         break;
                 }
 
-                System.out.println("     Got it. I've added this task:");
+                System.out.println(ADD_TASK);
                 System.out.print("       "); //indentation
                 System.out.println(list.get(n));
 
@@ -145,19 +157,19 @@ public class Duke {
                 }
                 catch (DukeException err) {
                     System.out.println(err.getMessage());
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(SEPARATOR);
                     System.out.println("");
                     continue;
                 }
             }
 
-            System.out.println("    ____________________________________________________________");
+            System.out.println(SEPARATOR);
             System.out.println("");
         }
         //Closing statement
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(SEPARATOR);
+        System.out.println(CLOSING_STATEMENT);
+        System.out.println(SEPARATOR);
     }
 }
 

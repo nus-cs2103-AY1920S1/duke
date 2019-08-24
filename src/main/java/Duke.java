@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,7 +52,8 @@ public class Duke {
                         String description = command.split(" ", 2)[1];
                         String at = description.split(" /at ", 2)[1];
                         description = description.split(" /at ", 2)[0];
-                        Task task = new Event(description, at);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+                        Task task = new Event(description, dateFormat.parse(at));
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task.toString());
@@ -58,13 +61,16 @@ public class Duke {
                         System.out.println();
                     } catch (IndexOutOfBoundsException e) {
                         throw new EmptyDescriptionException();
+                    } catch (ParseException e) {
+                        System.out.println("☹ OOPS!!! The date is invalid.");
                     }
                 } else if (command.startsWith("deadline")) {
                     try {
                         String description = command.split(" ", 2)[1];
                         String by = description.split(" /by ", 2)[1];
                         description = description.split(" /by ", 2)[0];
-                        Task task = new Event(description, by);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+                        Task task = new Event(description, dateFormat.parse(by));
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task.toString());
@@ -72,6 +78,8 @@ public class Duke {
                         System.out.println();
                     } catch (IndexOutOfBoundsException e) {
                         throw new EmptyDescriptionException();
+                    } catch (ParseException e) {
+                        System.out.println("☹ OOPS!!! The date is invalid.");
                     }
                 } else {
                     throw new InvalidCommandException();

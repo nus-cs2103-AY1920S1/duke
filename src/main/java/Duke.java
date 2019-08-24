@@ -1,7 +1,12 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+    private ArrayList<Task> task = new ArrayList<>();
+    private int counter = 0;
 
     /**
      * Main method.
@@ -9,9 +14,12 @@ public class Duke {
      * @param args arguments passed into main
      */
     public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    private void run() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> task = new ArrayList<>();
-        int counter = 0;
 
         System.out.println("Hello I'm Duke\n" + "What can I do for you?");
 
@@ -46,7 +54,7 @@ public class Duke {
                     }
                     String description = textInput.replaceFirst("todo ", "");
                     task.add(new Todo(description));
-                    counter = (new Duke()).printAddedTask(task, counter);
+                    counter = printAddedTask(task, counter);
                 } else if (textInput.startsWith("deadline")) {
                     if (textInput.equals("deadline") || textInput.equals("deadline ")) {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -54,7 +62,7 @@ public class Duke {
                     String removeTaskWord = textInput.replaceFirst("deadline ", "");
                     String[] taskSplit = removeTaskWord.split(" /by ");
                     task.add(new Deadline(taskSplit[0], taskSplit[1]));
-                    counter = (new Duke()).printAddedTask(task, counter);
+                    counter = printAddedTask(task, counter);
                 } else if (textInput.startsWith("event")) {
                     if (textInput.equals("event") || textInput.equals("event ")) {
                         throw new DukeException("OOPS!!! The description of a event cannot be empty.");
@@ -63,7 +71,7 @@ public class Duke {
                     String removeTaskWord = textInput.replaceFirst("event ", "");
                     String[] taskSplit = removeTaskWord.split(" /at ");
                     task.add(new Event(taskSplit[0], taskSplit[1]));
-                    counter = (new Duke()).printAddedTask(task, counter);
+                    counter = printAddedTask(task, counter);
                 } else if (textInput.startsWith("delete")) {
                     if (textInput.equals("delete") || textInput.equals("delete ")) {
                         throw new DukeException("OOPS!!! Index required.");
@@ -93,7 +101,17 @@ public class Duke {
 
         // Close the scanner
         sc.close();
+    }
 
+    private void readData() throws FileNotFoundException {
+        File f = new File("data/duke.txt");
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            System.out.println(sc.nextLine());
+        }
+
+        // Close the scanner
+        sc.close();
     }
 
     private int printAddedTask(ArrayList<Task> task, int counter) {

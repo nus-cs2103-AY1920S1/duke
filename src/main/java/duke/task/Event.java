@@ -1,8 +1,9 @@
 package duke.task;
 
-public class Event extends Task{
+public class Event extends Task {
     private char shortForm = 'E';
     protected String timing;
+
     public Event(String name, String timing) {
         super(name);
         this.timing = timing;

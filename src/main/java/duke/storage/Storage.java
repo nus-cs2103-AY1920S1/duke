@@ -7,7 +7,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,16 +29,31 @@ public class Storage {
     public static final int TASK_INDEX = 0;
     public static final int START_ARGUMENTS_INDEX = 4;
 
+    /**
+     * Constructor for storage.
+     * @param filePath file path to load our data from
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads and load data from file.
+     * @return list of tasks loaded from the file
+     * @throws IOException throws by {@link #readFile()}
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
+     */
     public List<Task> load() throws IOException, DukeException {
         taskList = new ArrayList<>();
         readFile();
         return taskList;
     }
 
+    /**
+     * Read file line-by-line.
+     * @throws IOException if file cannot be found / file cannot be opened
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
+     */
     public void readFile() throws IOException, DukeException {
         String line;
         BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -47,6 +66,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Decode line.
+     * @param line line from the text file
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
+     */
     public void decodeLine(String line) throws DukeException {
         String[] inputLines = line.split("\\s+");
         Task task = null;
@@ -60,6 +84,11 @@ public class Storage {
         taskList.add(task);
     }
 
+    /**
+     * Convert to todo object.
+     * @param inputLines line from the text file
+     * @return converted todo object
+     */
     public Task toDoParser(String[] inputLines) {
         Task toDoTask = null;
         String taskName = String.join(" ", Arrays.copyOfRange(inputLines, START_ARGUMENTS_INDEX,
@@ -72,6 +101,12 @@ public class Storage {
         return toDoTask;
     }
 
+    /**
+     * Convert to event object.
+     * @param inputLines line from the text file
+     * @return converted event object
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
+     */
     public Task eventParser(String[] inputLines) throws DukeException {
         Task eventTask = null;
         String[] args = GetArgumentsUtil.getTwoCommandArgs(0,"|",
@@ -84,6 +119,12 @@ public class Storage {
         return eventTask;
     }
 
+    /**
+     * Convert to deadline object.
+     * @param inputLines line from the text file
+     * @return converted deadline object
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
+     */
     public Task deadlineParser(String[] inputLines) throws DukeException {
         Task deadlineTask = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
@@ -98,6 +139,11 @@ public class Storage {
         return deadlineTask;
     }
 
+    /**
+     * Encode the task and save it to the text file.
+     * @param taskList list of tasks in the duke program
+     * @throws IOException throws by {@link #writeToFile(String)}
+     */
     public void saveData(List<Task> taskList) throws IOException {
         StringBuilder myStringBuilder = new StringBuilder();
         for (Task task : taskList) {
@@ -109,13 +155,19 @@ public class Storage {
                         .append(task.getName()).append(" | ").append(((Event) task).getTiming()).append("\n");
             } else if (task instanceof Deadline) {
                 myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                        .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime()).append("\n");
+                        .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime())
+                        .append("\n");
             }
         }
         myStringBuilder.deleteCharAt(myStringBuilder.length() - 1);
         writeToFile(myStringBuilder.toString());
     }
 
+    /**
+     * Write text to file.
+     * @param linesToWrite string to be written to the file
+     * @throws IOException if file cannot be opened
+     */
     public void writeToFile(String linesToWrite) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
         bufferedWriter.append(linesToWrite);

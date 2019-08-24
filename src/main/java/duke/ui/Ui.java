@@ -5,8 +5,10 @@ import duke.shared.Messages;
 import java.util.Scanner;
 
 public class Ui {
-    public static final String START_HORIZONTAL_LINE = "   ____________________________________________________________";
-    public static final String END_HORIZONTAL_LINE = "   ____________________________________________________________\n";
+    public static final String START_HORIZONTAL_LINE = "   _______________________________________________________"
+            + "_____";
+    public static final String END_HORIZONTAL_LINE = "   _________________________________________________________"
+            + "___\n";
 
     private Scanner scanner;
 
@@ -14,10 +16,18 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Displays error messages to user.
+     * @param errorMessages error message
+     */
     public void showError(String... errorMessages) {
         printLines(errorMessages);
     }
 
+    /**
+     * Displays info messages to user.
+     * @param messages info message
+     */
     public void showMessage(String... messages) {
         printLines(messages);
     }
@@ -41,7 +51,7 @@ public class Ui {
      * Prints message to the console.
      * @param messagesLines message to be printed to the console
      */
-    public void printLines(String ... messagesLines) {
+    public void printLines(String... messagesLines) {
         System.out.println(START_HORIZONTAL_LINE);
         for (String line : messagesLines) {
             System.out.println(line);

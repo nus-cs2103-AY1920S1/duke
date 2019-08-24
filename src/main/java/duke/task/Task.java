@@ -3,6 +3,7 @@ package duke.task;
 public abstract class Task {
     protected String name;
     protected boolean isDone;
+
     public Task(String name) {
         this.name = name;
         this.isDone = false;
@@ -25,12 +26,15 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Set the status icon to tick.
+     */
     public void completeTask() {
         this.isDone = true;
     }
 
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? "✓" : "✗";
     }
 
     public abstract char getShortForm();

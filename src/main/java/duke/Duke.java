@@ -17,7 +17,10 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
-
+    /**
+     * Constructor of Duke object.
+     * @param filePath path to the input text file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -34,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * Runs the duke.Duke program.
+     * Runs the duke program.
      */
     public void run() {
         ui.showWelcome();

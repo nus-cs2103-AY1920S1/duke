@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private char shortForm = 'D';
     protected LocalDateTime submissionTime;
+
     public Deadline(String name, LocalDateTime submissionTime) {
         super(name);
         this.submissionTime = submissionTime;

@@ -38,14 +38,18 @@ public class Duke {
                 lineToWrite = "T" + "|" + doneFlag + "|" + curr.getDescription();
             } else if(curr instanceof Deadline){
                 Deadline currDeadline = (Deadline) curr;
-                lineToWrite = "D" + "|" + doneFlag + "|" + currDeadline.getDescription() + "|" + currDeadline.getDate();
+                lineToWrite = "D" + "|" + doneFlag + "|" + currDeadline.getDescription() + "|"
+                        + currDeadline.getDate().getDateString() + " " + currDeadline.getTiming().getTimeString();
             } else {
                 Event currEvent = (Event) curr;
-                lineToWrite = "E" + "|" + doneFlag + "|" + currEvent.getDescription() + "|" + currEvent.getTiming();
+                lineToWrite = "E" + "|" + doneFlag + "|" + currEvent.getDescription() + "|"
+                        + currEvent.getDate().getDateString() + " " + currEvent.getTiming().getTimeString();
             }
             fw.write(lineToWrite + System.lineSeparator());
         }
+        System.out.println("Writing new changes to disk...");
         fw.close();
+        System.out.println("Writing done!");
     }
 
     public static void main(String[] args) throws Exception {
@@ -60,19 +64,25 @@ public class Duke {
             String taskType = fileTokens[0];
             int doneFlag = Integer.parseInt(fileTokens[1]);
             String taskDesc = fileTokens[2];
+            String taskDate;
             String taskTime;
+            String[] dateTimeTokens;
 
             switch (taskType){
             case "T":
                 listOfTasks.add(new Todo(taskDesc, doneFlag));
                 break;
             case "D":
-                taskTime = fileTokens[3];
-                listOfTasks.add(new Deadline(taskDesc, taskTime, doneFlag));
+                dateTimeTokens = fileTokens[3].split(" ");
+                taskDate = dateTimeTokens[0];
+                taskTime = dateTimeTokens[1];
+                listOfTasks.add(new Deadline(taskDesc, taskDate, taskTime, doneFlag));
                 break;
             case "E":
-                taskTime = fileTokens[3];
-                listOfTasks.add(new Event(taskDesc, taskTime, doneFlag));
+                dateTimeTokens = fileTokens[3].split(" ");
+                taskDate = dateTimeTokens[0];
+                taskTime = dateTimeTokens[1];
+                listOfTasks.add(new Event(taskDesc, taskDate, taskTime, doneFlag));
                 break;
             default:
                 break;
@@ -117,6 +127,7 @@ public class Duke {
                         listOfTasks.get(toComplete).completeTask();
                         System.out.println(niceAdded);
                         System.out.println(curr.toString());
+                        fileIsChanged = true;
                     } catch (DukeException de){
                         System.err.println(de.getMessage());
                     }
@@ -137,6 +148,7 @@ public class Duke {
                             listOfTasks.remove(toDelete);
                             Task.totalTasks--;
                             printNumTasks();
+                            fileIsChanged = true;
                         }
                     } catch (DukeException de){
                         System.err.println(de.getMessage());
@@ -155,6 +167,7 @@ public class Duke {
                         System.out.println(gotIt);
                         System.out.println(" " + newTask.toString());
                         listOfTasks.add(newTask);
+                        fileIsChanged = true;
                         printNumTasks();
                     } catch (DukeException de) {
                         System.err.println(de.getMessage());
@@ -166,20 +179,34 @@ public class Duke {
                         if (tokens.length == 1) {
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
-                        String date = "";
                         boolean dateFlag = false;
+                        String dateString = "";
+                        String timeString = "";
+
+                        //Check if both date and time are specified
+                        if(command.split("/by")[1].trim().split(" ").length != 2){
+                            throw new DukeException("☹ OOPS!!! Date and Timing not specified correctly!");
+                        }
+
                         for (int m = 1; m < tokens.length; m++) {
                             if (tokens[m].equals("/by")) {
                                 dateFlag = true;
                             } else {
                                 if (dateFlag == false) toAdd = toAdd + tokens[m] + " ";
-                                else date = date + tokens[m] + " ";
+                                else {
+                                    if (m == tokens.length - 1) {
+                                        timeString = tokens[m];
+                                    } else {
+                                        dateString = tokens[m];
+                                    }
+                                }
                             }
                         }
-                        newTask = new Deadline(toAdd.trim(), date.trim());
+                        newTask = new Deadline(toAdd.trim(), dateString.trim(), timeString.trim());
                         System.out.println(gotIt);
                         System.out.println(" " + newTask.toString());
                         listOfTasks.add(newTask);
+                        fileIsChanged = true;
                         printNumTasks();
                     } catch (DukeException de){
                         System.err.println(de.getMessage());
@@ -191,19 +218,33 @@ public class Duke {
                         if(tokens.length == 1){
                             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
                         }
-                        String timing = " ";
+                        String dateString = "";
+                        String timeString = "";
                         boolean timeFlag = false;
+
+                        //Check if both date and time are specified
+                        if(command.split("/by")[1].trim().split(" ").length != 2){
+                            throw new DukeException("☹ OOPS!!! Date and Timing not specified correctly!");
+                        }
+
                         for (int z = 1; z < tokens.length; z++) {
                             if (tokens[z].equals("/at")) timeFlag = true;
                             else {
                                 if (timeFlag == false) toAdd = toAdd + tokens[z] + " ";
-                                else timing = timing + tokens[z] + " ";
+                                else{
+                                    if(z == tokens.length - 1){
+                                        timeString = tokens[z];
+                                    } else {
+                                        dateString = tokens[z];
+                                    }
+                                }
                             }
                         }
-                        newTask = new Event(toAdd.trim(), timing.trim());
+                        newTask = new Event(toAdd.trim(), dateString.trim(), timeString.trim());
                         System.out.println(gotIt);
                         System.out.println(" " + newTask.toString());
                         listOfTasks.add(newTask);
+                        fileIsChanged = true;
                         printNumTasks();
                     } catch (DukeException de){
                         System.err.println(de.getMessage());
@@ -221,7 +262,9 @@ public class Duke {
         }
         //exit program
         input.close();
-        writeToDisk(f.getAbsolutePath());
+        if(fileIsChanged) {
+            writeToDisk(f.getAbsolutePath());
+        }
         System.out.println(goodbye);
     }
-}
+ }

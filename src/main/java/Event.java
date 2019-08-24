@@ -1,23 +1,33 @@
 public class Event extends Task {
-    String timing;
-    public Event(String description, String timing){
-        super(description);
-        this.timing = timing;
-        Task.totalTasks++;
-    }
+    Date date;
+    Timing timing;
 
-    public Event(String description, String timing, int done){
+    public Event(String description,String date, String timing, int done){
         super(description, done);
-        this.timing = timing;
+        this.date = new Date(date);
+        this.timing = new Timing(timing);
         Task.totalTasks++;
     }
 
-    public String getTiming() {
+    public Date getDate() {
+        return date;
+    }
+
+    public Timing getTiming(){
         return timing;
     }
 
+    public Event(String description, String date, String timing){
+        super(description);
+        this.date = new Date(date);
+        this.timing = new Timing(timing);
+        Task.totalTasks++;
+    }
+
+
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timing + ")";
+        return "[E]" + super.toString() + " (at: " + date.toString() + ", " + timing.toString() + ")";
     }
 }

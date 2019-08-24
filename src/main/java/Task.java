@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
@@ -23,12 +25,12 @@ public class Task {
         case "T":
             return new Todo(taskInfos[2], Boolean.parseBoolean(taskInfos[1]));
         case "D":
-            return new Deadline(taskInfos[2], taskInfos[3], Boolean.parseBoolean(taskInfos[1]));
+            return new Deadline(taskInfos[2], LocalDateTime.parse(taskInfos[3]), Boolean.parseBoolean(taskInfos[1]));
         case "E":
-            return new Event(taskInfos[2], taskInfos[3], Boolean.parseBoolean(taskInfos[1]));
+            return new Event(taskInfos[2], LocalDateTime.parse(taskInfos[3]), LocalTime.parse(taskInfos[4]),
+                    Boolean.parseBoolean(taskInfos[1]));
         default:
             break;
-
         }
         return new Task(taskInfos[2]);
     }

@@ -4,26 +4,31 @@ import java.time.LocalTime;
 
 public class Event extends Task {
 
-    private LocalDateTime startdateTime;
+    private LocalDateTime startDateTime;
     private LocalTime endTime;
 
     public Event(String description, LocalDateTime startdateTime, LocalTime endTime) {
         super(description);
-        this.startdateTime = startdateTime;
+        this.startDateTime = startdateTime;
         this.endTime = endTime;
     }
 
-    public Event(String description, String duration, boolean isDone) {
+    public Event(String description, LocalDateTime startDateTime, LocalTime endTime, boolean isDone) {
         super(description, isDone);
-        this.duration = duration;
+        this.startDateTime = startDateTime;
+        this.endTime = endTime;
     }
 
-    public String getDuration() {
-        return duration;
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + formatter.format(startdateTime) + " - " + endTime + ")";
+        return "[E]" + super.toString() + " (at: " + formatter.format(startDateTime) + " - " + endTime + ")";
     }
 }

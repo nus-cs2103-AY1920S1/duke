@@ -1,4 +1,8 @@
-public class Task {
+package duke.task;
+
+import duke.DukeException;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -42,10 +46,9 @@ public class Task {
      * @param taskName Name of the task e.g. event or deadline
      * @return
      */
-    public static boolean validateData(String description, String taskName) {
+    public static boolean validateData(String description, String taskName) throws DukeException {
         if (description.length() <= 0) {
-            System.out.println("☹ OOPS!!! The description of a " + taskName + " cannot be empty.");
-            return false;
+            throw new DukeException("The description of a " + taskName + " cannot be empty.");
         }
         return true;
     }

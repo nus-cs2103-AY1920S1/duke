@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.TaskWithDate;
+
 import java.text.ParseException;
 
 public class Deadline extends TaskWithDate {

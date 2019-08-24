@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.ParseException;
 
 public class Event extends TaskWithDate {

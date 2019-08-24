@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,13 +37,11 @@ public class TaskWithDate extends Task {
      * @param taskName Name of the task e.g. event or deadline
      * @return
      */
-    public static boolean validateData(String[] data, String taskName) {
+    public static boolean validateData(String[] data, String taskName) throws DukeException {
         if (data[0].length() <= 0) {
-            System.out.println("☹ OOPS!!! The description of a " + taskName + " cannot be empty.");
-            return false;
+            throw new DukeException("The description of a " + taskName + " cannot be empty.");
         } else if (data.length <= 1 || data[1].length() <= 0) {
-            System.out.println("☹ OOPS!!! The date of a " + taskName + " cannot be empty.");
-            return false;
+            throw new DukeException("The date of a " + taskName + " cannot be empty.");
         }
         return true;
     }

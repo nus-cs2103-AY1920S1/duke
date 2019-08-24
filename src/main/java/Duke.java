@@ -2,9 +2,13 @@ public class Duke {
     public static void main(String[] args) {
         /* TODO: init friday and model */
 
-        TaskModelInterface model = new BasicTaskModel();
-        StorageInterface storage = new BasicStorage(model);
-        ControllerInterface friday = new FridayController(model);
+        //TaskModelInterface model = new BasicTaskModel();
+        //StorageInterface storage = new BasicStorage(model);
+        //ControllerInterface friday = new FridayController(model);
+
+        TaskModelInterface model = new TaskList();
+        StorageInterface storage = new Storage(model);
+        ControllerInterface friday = new Parser(model);
 
 
         friday.start();

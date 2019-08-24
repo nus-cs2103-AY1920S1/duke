@@ -6,13 +6,13 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-class Display implements TaskObserver {
+class Ui implements TaskObserver {
     private ControllerInterface controller; 
     private TaskModelInterface model;
     private Scanner sc;
     private int totalTasks;
 
-    public Display(ControllerInterface controller, TaskModelInterface model) {
+    public Ui(ControllerInterface controller, TaskModelInterface model) {
         this.controller = controller;
         this.model = model;
         this.model.registerObserver(this);
@@ -21,7 +21,7 @@ class Display implements TaskObserver {
     }
 
     private static void printGreeting() {
-        Display.printBanner();
+        Ui.printBanner();
         String greeting1 = "hewwo! i'm OwO\n"
             + "Mistew Stawk's augmented weawity gwocewy wist\n"
             + "OwO stands fow \"Owways With Owws\"\n"
@@ -32,7 +32,7 @@ class Display implements TaskObserver {
         //printxs.add(greeting1);
         //printxs.add(greeting2);
             //Display.printSection(printxs);
-            Display.printSection(greeting1);
+            Ui.printSection(greeting1);
     }
 
     private static void printExitMessage() {
@@ -41,7 +41,7 @@ class Display implements TaskObserver {
         String farewell = "NyOO >w< owo dont goo OwO wiww "
             + "miss youu!!";
 
-        Display.printSection(farewell);
+        Ui.printSection(farewell);
     }
 
     private static void printLineBreak() {
@@ -53,19 +53,15 @@ class Display implements TaskObserver {
 
     private static void printHeader() {
         System.out.println();
-        Display.printLineBreak();
+        Ui.printLineBreak();
     }
 
     private static void printFooter() {
-        Display.printLineBreak();
+        Ui.printLineBreak();
         System.out.println();
         System.out.println();
     }
 
-    private static boolean isEndCommand(String cmd) {
-        String[] cmdlist = cmd.split(" ");
-        return cmdlist[0].toUpperCase().equals("BYE");
-    }
 
     private static List<String> stringToList(String text) {
         String[] textArr = text.split("\n");
@@ -85,16 +81,16 @@ class Display implements TaskObserver {
     }
 
     private static void printSection(List<String> printJobs){
-        Display.printHeader();
-        Display.printList(printJobs);
-        Display.printFooter();
+        Ui.printHeader();
+        Ui.printList(printJobs);
+        Ui.printFooter();
     }
 
     private static void printSection(String job) {
         //ArrayList<String> printxs = new ArrayList<>();
         //printxs.add(job);
-        List<String> printxs = Display.stringToList(job);
-        Display.printSection(printxs);
+        List<String> printxs = Ui.stringToList(job);
+        Ui.printSection(printxs);
     }
 
     public static void printAddTaskSection(String taskDetails,
@@ -109,7 +105,7 @@ class Display implements TaskObserver {
         printxs.add(headerMsg);
         printxs.add(outputMsg);
         printxs.add(footerMsg);
-        Display.printSection(printxs);
+        Ui.printSection(printxs);
     }        
 
     public static void printDoneTaskSection(String taskDetails) {
@@ -119,7 +115,7 @@ class Display implements TaskObserver {
         //String headermsg = "Nice! I've marked this task as done:";
         printxs.add(headermsg);
         printxs.add(taskDetails);
-        Display.printSection(printxs);
+        Ui.printSection(printxs);
 
     }
 
@@ -128,11 +124,11 @@ class Display implements TaskObserver {
         String header = "nyoted. OwO has wemuvd this task:\n";
         String footer = "nyow you have "
            + totalTasks + " tasks in the wist";
-        Display.printSection(header + footer);
+        Ui.printSection(header + footer);
     }
 
     public static void printErrorSection(String message) {
-        Display.printSection(message);
+        Ui.printSection(message);
     }        
 
 
@@ -159,7 +155,7 @@ class Display implements TaskObserver {
 
             ++counter;
         }
-        Display.printSection(printxs);
+        Ui.printSection(printxs);
     }
 
     public void update(TaskModelInterface model){
@@ -170,27 +166,14 @@ class Display implements TaskObserver {
     }
 
     public void instance() {
-        Display.printGreeting();
+        Ui.printGreeting();
         String command = this.sc.nextLine();
 
-        while (! isEndCommand(command)) {
-
-            String[] commandlist = command.split(" ");
-            if (commandlist[0].toUpperCase().equals("LIST")) {
-                this.controller.listTasks();
-            } else if 
-                (commandlist[0].toUpperCase().equals("DONE")) {
-                this.controller.doneTask(command);
-            } else if 
-                (commandlist[0].toUpperCase().equals("DELETE")) {
-                this.controller.deleteTask(command);
-            } else {
-                this.controller.addTask(command);
-            }
-
+        while (! this.controller.isEndCommand(command)) {
+            this.controller.whatsGoingOn(command);
             command = this.sc.nextLine();
         }
-        Display.printExitMessage();
+        Ui.printExitMessage();
     }
 
     public static void printBanner() {

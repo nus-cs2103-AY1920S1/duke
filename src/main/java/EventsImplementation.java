@@ -48,7 +48,7 @@ class EventsImplementation implements TaskInterface,
 
     public String getPrintDate() {
         if (this.date.length() > 0) {
-            return "by: " + getDate();
+            return "at: " + getDate();
         } else {
             return "";
         }

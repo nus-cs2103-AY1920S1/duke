@@ -4,16 +4,16 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-class BasicTaskModel implements TaskModelInterface {
+class TaskList implements TaskModelInterface {
     private List<TaskObserver> observers;
     private List<TaskInterface> taskList;
 
-    public BasicTaskModel() {
+    public TaskList() {
         this.observers = new ArrayList<>();
         this.taskList = new ArrayList<>();
     }
 
-    public BasicTaskModel(Stream<TaskInterface> taskStream) {
+    public TaskList(Stream<TaskInterface> taskStream) {
         this.observers = new ArrayList<>();
         this.taskList = taskStream.collect(Collectors.toList());
     }

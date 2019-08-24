@@ -1,4 +1,4 @@
 
-T | 1 | Summon Cthulhu
-E | 0 | Halloween Parth | day after friday 13th
-T | 1 | Photocopy Necronomicon
+T | 1 | Read Necronomicon
+D | 0 | Summon Cthulhu | Innsmouth Holiday Season
+E | 0 | Halloween Party | day after friday 13th

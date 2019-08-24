@@ -1,14 +1,15 @@
 // java -Dfile.encoding=UTF8 classname
 import java.util.stream.Stream;
 import java.util.Iterator;
-class FridayController implements ControllerInterface {
+class Parser implements ControllerInterface {
     private TaskModelInterface model;
-    private Display display;
+    private Ui display;
     private TaskCreator taskCreator;
 
-    public FridayController(TaskModelInterface model) {
+    public Parser(TaskModelInterface model) {
         this.model = model;
-        this.display = new Display(this, model);
+        //this.display = new Display(this, model);
+        this.display = new Ui(this, model);
         this.taskCreator = new BasicTaskCreator();
     }
 
@@ -18,6 +19,26 @@ class FridayController implements ControllerInterface {
 
     public void stop() {
         //this.display.
+    }
+
+    public void whatsGoingOn(String command) {
+        String[] commandlist = command.split(" ");
+        if (commandlist[0].toUpperCase().equals("LIST")) {
+            this.listTasks();
+        } else if 
+            (commandlist[0].toUpperCase().equals("DONE")) {
+            this.doneTask(command);
+        } else if 
+            (commandlist[0].toUpperCase().equals("DELETE")) {
+            this.deleteTask(command);
+        } else {
+            this.addTask(command);
+        }
+    }
+
+    public boolean isEndCommand(String cmd) {
+        String[] cmdlist = cmd.split(" ");
+        return cmdlist[0].toUpperCase().equals("BYE");
     }
 
     public void addTask(String command) {

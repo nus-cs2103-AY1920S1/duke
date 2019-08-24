@@ -7,14 +7,14 @@ import java.util.stream.Stream;
 import java.lang.System;
 import java.util.List;
 import java.util.ArrayList;
-class BasicStorage implements TaskObserver, StorageInterface {
+class Storage implements TaskObserver, StorageInterface {
 
 
     private TaskModelInterface model;
     private String path = "../../../../data/duke.txt";
     private TaskCreator taskCreator;
 
-    public BasicStorage(TaskModelInterface model) {
+    public Storage(TaskModelInterface model) {
         this.taskCreator = new LoadTaskCreator();
         this.model = model;
         Stream<TaskInterface> taskStream = loadData();
@@ -55,7 +55,7 @@ class BasicStorage implements TaskObserver, StorageInterface {
                 + "taskwist fwom this session cannyot be saved";
             System.out.println(e);
 
-            Display.printErrorSection(loadFileErrorMsg);
+            Ui.printErrorSection(loadFileErrorMsg);
         } 
         return taskList.stream();
     }

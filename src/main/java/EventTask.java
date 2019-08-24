@@ -12,6 +12,11 @@ public class EventTask extends Task {
 	}
 
 	@Override
+	protected String getTaskType() {
+		return "event";
+	}
+
+	@Override
 	public String toString() {
 		String baseDescription = super.toString();
 		return String.format("%s (at: %s)", baseDescription, timing);

@@ -47,21 +47,15 @@ public class DukeIO {
 	}
 
 	public void withDialogBlock(Runnable action) {
-		this.printingDialogBlock = false;
-		try {
-			action.run();
-		} finally {
-			if(this.printingDialogBlock) {
-				//Print end of reply line, and extra empty line
-				System.out.println(lineRule);
-				System.out.println();
-			}
-		}
+		this.withDialogBlock(() -> { action.run(); return null; }, null);
 	}
-	public <T> T withDialogBlock(Supplier<T> action) {
+	public <T> T withDialogBlock(Supplier<T> action, T fallback) {
 		this.printingDialogBlock = false;
 		try {
 			return action.get();
+		} catch(DukeException e) {
+			this.say(String.format("☹ OOPS!!! %s", e.getMessage())); 
+			return fallback;
 		} finally {
 			if(this.printingDialogBlock) {
 				//Print end of reply line, and extra empty line
@@ -80,17 +74,16 @@ public class DukeIO {
 			Command command = Command.parse(userInput);
 
 			Predicate<Command> cmdHandler = commandMap.get(command.type);
-			boolean shouldExit;
-			if(cmdHandler != null) {
-				shouldExit = this.withDialogBlock(() -> cmdHandler.test(command));
-			} else if(defaultHandler != null) {
-				shouldExit = this.withDialogBlock(() -> defaultHandler.test(command));
-			} else {
-				this.withDialogBlock(
-						() -> say(String.format("Unknown command %s", command.type))
-						);
-				shouldExit = false;
-			}
+			boolean shouldExit = this.withDialogBlock( () -> {
+				if(cmdHandler != null) {
+					return cmdHandler.test(command);
+				} else if(defaultHandler != null) {
+					return defaultHandler.test(command);
+				} else {
+					this.say(String.format("Unknown command %s", command.type));
+					return false;
+				}
+			}, false);
 
 			if(shouldExit) {
 				break;

@@ -76,13 +76,11 @@ public class Duke {
 		try {
 			index = Integer.parseInt(input.arguments);
 		} catch(NumberFormatException e) {
-			this.io.say("Index provided was not an integer!");
-			return false;
+			throw new DukeException("Index provided was not an integer!", e);
 		}
 
 		if(index < 0 || index > this.taskList.size()) {
-			this.io.say("There's no task with that index!");
-			return false;
+			throw new DukeException("There's no task with that index!");
 		}
 
 		Task selectedTask = this.taskList.get(index-1);
@@ -101,7 +99,7 @@ public class Duke {
 		this.io.bindCommand("deadline", this::makeDeadlineTask);
 		this.io.bindCommand("event", this::makeEventTask);
 		this.io.bindCommand("todo", this::makeToDoTask);
-
+		this.io.setUnknownCommandHandler(cmd -> { throw new DukeException("I'm sorry, but I don't know what that means. :-("); });
 		this.taskList = new ArrayList<>();
 	}
 

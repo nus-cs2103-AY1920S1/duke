@@ -3,6 +3,10 @@ public class Task {
 	private boolean completed;
 
 	public Task(String description) {
+		if(description == null || description.isEmpty()) {
+			String message = String.format("The description of a %s cannot be empty.", this.getTaskType());
+			throw new DukeException(message);
+		}
 		this.description = description;
 		this.completed = false;
 	}
@@ -20,6 +24,10 @@ public class Task {
 
 	protected String getTypeMarker() {
 		return "[T]";
+	}
+
+	protected String getTaskType() {
+		return "todo";
 	}
 
 	private String getCompleteMarker() {

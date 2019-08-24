@@ -10,7 +10,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -18,6 +18,21 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+        }
+    }
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        try {
+            tasks = new TaskList(storage.loadFromSaveFile());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
         }
     }
 
@@ -38,6 +53,6 @@ public class Duke {
 
 
     public static void main(String[] args) throws JSONException, IOException {
-        new Duke("filePath").run();
+        new Duke().run();
     }
 }

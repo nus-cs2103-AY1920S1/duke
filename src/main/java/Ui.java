@@ -66,6 +66,10 @@ public class Ui {
         formattedPrint("Bye. Hope to see you again soon!");
     }
 
+    public static void showCreateSaveFileMessage() {
+        formattedPrint("data.json not found. Created a new one for you~");
+    }
+
     public String readCommand() {
         return sc.nextLine();
     }

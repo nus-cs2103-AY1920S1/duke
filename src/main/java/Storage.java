@@ -15,6 +15,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public Storage() {
+        this.filePath = getSaveFilePath();
+    }
+
     private String getSaveFilePath() {
         if (System.getProperty("os.name").equals("Windows 10"))
             return "/Users/uicfa/Downloads/data.json";
@@ -23,21 +27,20 @@ public class Storage {
     }
 
     private void createSaveFile() throws IOException {
-//        formattedPrint("data.json not found. Creating a new one...");
-        File file = new File(getSaveFilePath());
+        File file = new File(this.filePath);
         if (!file.createNewFile()) throw new IOException();
         writeToSaveFile("{\"data\":[]}");
+        Ui.showCreateSaveFileMessage();
     }
 
     private JSONObject readSaveFile() throws IOException, JSONException {
         // TODO: handle the exception where data.json doesn't exist or format is wrong
-        String path = getSaveFilePath();
         InputStream is;
         try {
-            is = new FileInputStream(path);
+            is = new FileInputStream(this.filePath);
         } catch (FileNotFoundException e) {
             createSaveFile();
-            is = new FileInputStream(path);
+            is = new FileInputStream(this.filePath);
         }
         BufferedReader buf = new BufferedReader(new InputStreamReader(is));
         String line = buf.readLine();
@@ -50,8 +53,7 @@ public class Storage {
     }
 
     private void writeToSaveFile(String content) throws IOException {
-        String path = getSaveFilePath();
-        FileWriter fileWriter = new FileWriter(path);
+        FileWriter fileWriter = new FileWriter(this.filePath);
         fileWriter.write(content);
         fileWriter.close();
     }

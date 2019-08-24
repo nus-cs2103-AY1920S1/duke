@@ -8,8 +8,10 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 import duke.shared.Messages;
+import java.util.Arrays;
 
 /**
  * Parses command.
@@ -84,6 +86,12 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new NumberFormatException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "delete",
                         "number"));
+            }
+        } else if (commands[0].equals("find")) {
+            if (commands.length > 1) {
+                return new FindCommand(Arrays.copyOfRange(commands, 1, commands.length));
+            } else if (commands.length == 1) {
+                throw new DukeException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "find"));
             }
         }
         throw new DukeException(Messages.UNKNOWN_COMMAND_EXCEPTION);

@@ -1,9 +1,14 @@
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean isDone;
     public Task(String name) {
         this.name = name;
-        isDone = false;
+        this.isDone = false;
+    }
+
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
     }
 
     public String getName() {
@@ -25,6 +30,8 @@ public class Task {
     public String getStatusIcon() {
         return isDone ? "\u2713" : "\u2718";
     }
+
+    public abstract char getShortForm();
 
     @Override
     public String toString() {

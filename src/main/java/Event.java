@@ -1,9 +1,13 @@
-import org.w3c.dom.html.HTMLImageElement;
-
 public class Event extends Task{
+    private char shortForm = 'E';
     protected String timing;
     public Event(String name, String timing) {
         super(name);
+        this.timing = timing;
+    }
+
+    public Event(String name, String timing, boolean isDone) {
+        super(name, isDone);
         this.timing = timing;
     }
 
@@ -16,7 +20,12 @@ public class Event extends Task{
     }
 
     @Override
+    public char getShortForm() {
+        return shortForm;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timing + ")";
+        return "[" + getShortForm() + "]" + super.toString() + " (at: " + timing + ")";
     }
 }

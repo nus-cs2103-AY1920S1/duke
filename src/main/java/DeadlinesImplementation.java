@@ -32,9 +32,17 @@ class DeadLinesImplementation implements TaskInterface,
         return this.sym;
     }
 
+    public String getPrintDate() {
+        if (this.date.length() > 0) {
+            return "by: " + getDate();
+        } else {
+            return "";
+        }
+    }
+
     public String getDate() {
         if (this.date.length() > 0) {
-            return "by: " + this.date;
+            return this.date;
         } else {
             return "";
         }
@@ -42,8 +50,12 @@ class DeadLinesImplementation implements TaskInterface,
 
     // Override
     @Override
-    public String toString(){
+    public String toString() {
         return this.formatter.formatText();
+    }
+
+    public String getSaveFormat() {
+        return this.formatter.getSaveFormat();
     }
           
 }

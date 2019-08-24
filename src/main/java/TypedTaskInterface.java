@@ -3,4 +3,5 @@ interface TypedTaskInterface {
     boolean getIsDone();
     String getSymbol();
     String getDate();
+    String getPrintDate();
 }    

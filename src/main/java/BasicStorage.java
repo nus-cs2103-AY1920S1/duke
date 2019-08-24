@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.stream.Stream;
+import java.lang.System;
 class BasicStorage implements TaskObserver, StorageInterface {
 
 
@@ -15,7 +17,7 @@ class BasicStorage implements TaskObserver, StorageInterface {
     }
 
     public void update(TaskModelInterface model) {
-        String toWrite = "dummy";
+        String toWrite = saveFormat(model.getTaskStream());
         writeData(toWrite);
     }
 
@@ -31,6 +33,18 @@ class BasicStorage implements TaskObserver, StorageInterface {
         }
     }
 
+    public static String 
+        saveFormat(Stream<TaskInterface> taskStream) {
+        return taskStream
+            .map(x -> x.getSaveFormat())
+            .reduce("", (x, accu) -> 
+                    //x + System.lineSeperator() 
+                    x + "\n"
+                    + accu);
+//            .forEach(x -> System.out.println(x.getSaveFormat()));
+//            .forEach(x -> System.out.println(x));
+    }
+
     private void writeData(String textToAdd) {
 //        File f = new File(this.path);
  //       System.out.println("file exists?: " + f.exists());
@@ -43,7 +57,7 @@ class BasicStorage implements TaskObserver, StorageInterface {
         } catch (IOException e) {
             System.out.println(e);
             System.out.println("you need to create a folder" 
-                    + " called "data" in "duke" dir");
+                    + " called 'data' in 'duke' dir");
         }
                 
     }

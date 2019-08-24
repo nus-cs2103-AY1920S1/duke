@@ -1,7 +1,10 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
 class EventsImplementation implements TaskInterface,  
     TypedTaskInterface {
     private final String name;
     private final String date;
+    private final Date objDate;
     private final boolean isDone;
     private final TaskFormatInterface formatter;
     private final String sym = "E";
@@ -10,10 +13,21 @@ class EventsImplementation implements TaskInterface,
             boolean isDone) {
         this.name = name;
         this.date = date;
+        this.objDate = setDate(date);
         this.isDone = isDone;
         String outputText = String.format("%s (at: %s)", 
                 name, date);
         this.formatter = new TypedTaskFormatter(this);
+    }
+
+    private Date setDate(String date) {
+        try {
+            Date toSet = new SimpleDateFormat("dd/MM/yyy HHmm")
+                .parse(date);
+            return toSet;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public TaskInterface completeTask(){

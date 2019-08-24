@@ -1,4 +1,8 @@
-import java.util.List;
+package duck.command;
+
+import duck.util.TaskList;
+import duck.util.Storage;
+import duck.util.Ui;
 
 public abstract class Command {
 

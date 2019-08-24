@@ -1,12 +1,22 @@
+package duck.command;
+
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.Task;
+import duck.task.Todo;
+import duck.util.Storage;
+import duck.util.TaskList;
+import duck.util.Ui;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class AddCommand extends Command {
 
-    String taskType;
-    String description;
-    LocalDateTime dateTime;
-    LocalTime time;
+    private String taskType;
+    private String description;
+    private LocalDateTime dateTime;
+    private LocalTime time;
 
     public AddCommand(String taskType, String description) {
         this.taskType = taskType;

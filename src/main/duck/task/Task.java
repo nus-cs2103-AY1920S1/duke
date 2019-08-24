@@ -1,3 +1,5 @@
+package duck.task;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +9,6 @@ public class Task {
     static protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy, HH:mm");
     protected String description;
     protected boolean isDone;
-
 
     Task(String description) {
         this.description = description;
@@ -19,7 +20,7 @@ public class Task {
         this.isDone = isDone;
     }
 
-    static Task from(String taskInfo) {
+    static public Task from(String taskInfo) {
         String[] taskInfos = taskInfo.split("\\|");
         switch (taskInfos[0]) {
         case "T":

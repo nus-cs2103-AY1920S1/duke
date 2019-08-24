@@ -1,3 +1,7 @@
+package duck.util;
+
+import duck.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 

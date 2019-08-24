@@ -1,8 +1,15 @@
+package duck.command;
+
+import duck.task.Task;
+import duck.util.Storage;
+import duck.util.TaskList;
+import duck.util.Ui;
+
 public class DeleteCommand extends Command {
 
     private int target;
 
-    DeleteCommand(int target) {
+    public DeleteCommand(int target) {
         this.target = target;
     }
 

@@ -1,3 +1,5 @@
+package duck.util;
+
 public class DukeException extends Exception {
 
     private String errorMessage;

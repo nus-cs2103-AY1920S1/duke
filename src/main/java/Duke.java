@@ -1,5 +1,8 @@
+import duck.command.Command;
+import duck.util.*;
+
+
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class Duke {
 

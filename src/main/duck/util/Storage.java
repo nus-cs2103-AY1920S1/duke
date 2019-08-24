@@ -1,3 +1,10 @@
+package duck.util;
+
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.Task;
+import duck.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;

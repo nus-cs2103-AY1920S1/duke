@@ -1,6 +1,10 @@
-import java.io.FileNotFoundException;
+package duck.command;
+
+import duck.util.Storage;
+import duck.util.TaskList;
+import duck.util.Ui;
+
 import java.io.IOException;
-import java.util.List;
 
 public class ExitCommand extends Command {
 

@@ -22,10 +22,7 @@ public class Duke {
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 while (bufferedReader.ready()) {
                     String dataRead = bufferedReader.readLine();
-                    String[] dataReads = dataRead.split("|");
-                    for (String s : dataReads) {
-                        System.out.println(s);
-                    }
+                    String[] dataReads = dataRead.split(" \\| ");
                     if (dataReads[0].equals("T")) {
                         Task todo = new ToDo(dataReads[2]);
                         tasks.add(todo);
@@ -35,13 +32,11 @@ public class Duke {
                     } else if (dataReads[0].equals("D")) {
                         Task deadline = new Deadline(dataReads[2], dataReads[3]);
                         tasks.add(deadline);
-                        System.out.println(dataReads[2]);
-                        System.out.println(dataReads[3]);
                     }
                 }
-                System.out.print("Here are your previous tasks:\n");
+                System.out.print("    Here are your previous tasks:\n");
                 for (int i = 0; i < tasks.size(); i = i + 1) {
-                    System.out.print(tasks.get(i).toString() + "\n");
+                    System.out.print("    " + tasks.get(i).toString() + "\n");
                 }
             }
             fileWriter = new FileWriter(data, false);

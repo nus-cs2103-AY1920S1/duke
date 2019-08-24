@@ -1,13 +1,8 @@
-todo read book
-deadline buy fruits /by Tue
-event project meeting /at Mon 2-4pm
+todo water plants
+deadline quiz /by Wed
+event skating /at Fri 1-3pm
 list
-eatsomefreepizza
-e
-done 1
 done 3
-delete 1
-list
-delete 2
+done 5
 list
 bye

@@ -11,7 +11,7 @@ abstract class AddCommand implements Command {
         task = instantiateTask();
     }
 
-    abstract protected Task instantiateTask();
+    protected abstract Task instantiateTask();
 
     public void execute(List<Task> tasks, Ui ui, Storage storage) {
         tasks.add(task);

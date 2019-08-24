@@ -8,11 +8,11 @@ import java.util.List;
 public class GetArgumentsUtil {
 
     /**
-     * Retrieves two args from an arrays.
+     * Retrieves two args from an array.
      * @param start is the start index where the program will sublist from
      * @param delimiter is the string that determine the 2 arguments
      * @param commands is the latest command inputted by the user
-     * @return an array of 2 item, command description and sub-command(e.g. /at) description
+     * @return an array of 2 items, command description and sub-command(e.g. /at) description
      * @throws DukeException if user does not provide the sub-command / the sub-command does not have any description
      */
     public static String[] getTwoCommandArgs(int start, String delimiter, String[] commands) throws DukeException {
@@ -31,7 +31,7 @@ public class GetArgumentsUtil {
     }
 
     /**
-     * Concatenate the argument (in array).
+     * Concatenate the arguments (in array).
      * @param command is last command inputted by the user (in array)
      * @return argument of the command in String
      */

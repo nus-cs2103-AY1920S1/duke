@@ -4,6 +4,9 @@ import duke.shared.Messages;
 
 import java.util.Scanner;
 
+/**
+ * Displays message to the user via terminal.
+ */
 public class Ui {
     public static final String START_HORIZONTAL_LINE = "   ____________________________________________________________";
     public static final String END_HORIZONTAL_LINE = "   ____________________________________________________________\n";
@@ -14,32 +17,40 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Print error messages to user.
+     * @param errorMessages error message that Ui will displayed to user
+     */
     public void showError(String... errorMessages) {
         printLines(errorMessages);
     }
 
+    /**
+     * Print info messages to user.
+     * @param messages info message that Ui will displayed to user
+     */
     public void showMessage(String... messages) {
         printLines(messages);
     }
 
     /**
      * Reads user command entered by the user.
-     * @return commands entered by the user
+     * @return command entered by the user
      */
     public String readCommand() {
         return scanner.nextLine().trim();
     }
 
     /**
-     * Formats the welcome message and print it.
+     * Print welcome message to user.
      */
     public void showWelcome() {
         printLines(Messages.GREETING_MESSAGE);
     }
 
     /**
-     * Prints message to the console.
-     * @param messagesLines message to be printed to the console
+     * Prints messages to the terminal.
+     * @param messagesLines messages to be printed to the console
      */
     public void printLines(String ... messagesLines) {
         System.out.println(START_HORIZONTAL_LINE);

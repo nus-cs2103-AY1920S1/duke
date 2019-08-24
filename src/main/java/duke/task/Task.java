@@ -3,11 +3,14 @@ package duke.task;
 public abstract class Task {
     protected String name;
     protected boolean isDone;
+
+    //Used when user entered command
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
 
+    //Used when program loads data from text
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
@@ -25,6 +28,9 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Change status icon to tick
+     */
     public void completeTask() {
         this.isDone = true;
     }

@@ -17,6 +17,13 @@ public class ToDoCommand extends AddCommand {
         this.commands = commands;
     }
 
+    /**
+     * Executes ToDo command.
+     * @param taskList TaskList object for the duke program
+     * @param ui ui object for the duke program
+     * @param storage storage object for the duke program
+     * @return true 
+     */
     @Override
     public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         String arg = GetArgumentsUtil.concatStrings(Arrays.copyOfRange(commands, 1, commands.length));

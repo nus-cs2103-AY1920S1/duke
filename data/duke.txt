@@ -1,0 +1,4 @@
+
+T | 1 | Summon Cthulhu
+E | 0 | Halloween Parth | day after friday 13th
+T | 1 | Photocopy Necronomicon

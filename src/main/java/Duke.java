@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -63,16 +65,29 @@ public class Duke {
                 }
             }
             catch (DukeException exception) {
-                printError(exception);
+                printException(exception);
             }
         }
     }
 
-    public static void printError(DukeException exception) {
+    public static void printException(DukeException exception) {
         String message = exception.getMessage();
         drawLine();
         System.out.println("\t " + message);
         drawLine();
+    }
+
+    public static void writeToHardDisk() throws DukeException {
+        try {
+        FileWriter fileWriter = new FileWriter(
+                "C:\\Users\\Yi Yin\\Documents\\Year 2\\Semester 1\\CS2103\\duke\\data\\duke.txt");
+            for (int i = 0; i < actions.size(); i++) {
+                fileWriter.write(actions.get(i).toString() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException exception) {
+            throw new DukeException("\u2539 OOPS!!! Something went wrong :" + exception.getMessage());
+        }
     }
 
     public static void deleteFromList(int index) {
@@ -83,6 +98,11 @@ public class Duke {
         int numberOfTasks = actions.size();
         System.out.println("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task": " tasks") + " in the list.");
         drawLine();
+        try {
+            writeToHardDisk();
+        } catch (DukeException exception) {
+            printException(exception);
+        }
     }
 
     public static void printAddedTask(Task task) {
@@ -101,6 +121,11 @@ public class Duke {
         Task todo = new Todo(details.trim());
         actions.add(todo);
         printAddedTask(todo);
+        try {
+            writeToHardDisk();
+        } catch (DukeException exception) {
+            printException(exception);
+        }
     }
 
     public static void addDeadline(String details) throws DukeException {
@@ -116,6 +141,11 @@ public class Duke {
         Task taskDeadline = new Deadline(action, deadline);
         actions.add(taskDeadline);
         printAddedTask(taskDeadline);
+        try {
+            writeToHardDisk();
+        } catch (DukeException exception) {
+            printException(exception);
+        }
     }
 
     public static void addEvent(String details) throws DukeException{
@@ -131,6 +161,11 @@ public class Duke {
         Task taskEvent = new Event(event, timing);
         actions.add(taskEvent);
         printAddedTask(taskEvent);
+        try {
+            writeToHardDisk();
+        } catch (DukeException exception) {
+            printException(exception);
+        }
     }
 
     public static void markAsDone(int index) {
@@ -140,6 +175,11 @@ public class Duke {
         System.out.println("\t Nice! I've marked this task as done: ");
         System.out.println("\t\t " + action);
         drawLine();
+        try {
+            writeToHardDisk();
+        } catch (DukeException exception) {
+            printException(exception);
+        }
     }
     public static void sayBye() {
         drawLine();

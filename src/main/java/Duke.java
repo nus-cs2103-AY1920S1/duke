@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,9 +11,36 @@ public class Duke {
         this.ls.add(null);
     }
 
+    public void addTask(Task t){
+        this.ls.add(t);
+    }
+
+    public void rewriteFile(){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i < this.ls.size(); i++){
+            sb.append(this.ls.get(i).toFileString())
+                    .append((char) 30);
+        }
+        sb.setLength(sb.length() - 1);
+        try{
+            FileWriter fw = new FileWriter("./data/duke.txt", false);
+            fw.write(sb.toString());
+            fw.close();
+        }catch(Exception e){
+            this.cout("Oops. Something went wrong with file writing.");
+        }
+    }
+
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
         Duke d = new Duke();
+        try {
+            for(String cell : new BufferedReader(new FileReader("./data/duke.txt")).readLine().split("\\x1e")){
+                d.addTask(Task.parseFileTask(cell));
+            }
+        }catch(Exception e){
+            d.cout("duke.txt not found.\nIt will be automatically created once you have a list.");
+        };
+        Scanner in = new Scanner(System.in);
         d.cout("Hello! I'm Duke\nWhat can I do for you?");
         d.run(in);
         d.cout("Bye. Hope to see you again soon!");
@@ -39,7 +69,7 @@ public class Duke {
                                     .append(this.ls.get(i));
                         }
                         this.cout(sb.toString());
-                        break;
+                        continue;
                     default:
                         Task t = Task.parseTask(instr);
                         if (t != null) {
@@ -78,6 +108,7 @@ public class Duke {
                         }
                         throw new InvalidCommandDukeException();
                 }
+                rewriteFile();
             } catch (DukeException e) {
                 this.cout(e.getMessage());
             }

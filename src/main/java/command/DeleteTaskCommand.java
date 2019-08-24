@@ -15,15 +15,10 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException {
+    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException, StorageException {
         if (tasks.size() >= this.index) {
             tasks.remove(this.index - 1);
-            
-            try {
-                storage.save(tasks);
-            } catch (StorageException e) {
-                throw new CommandExecuteException("Unable to save tasks.");
-            }
+            storage.save(tasks);
         } else {
             throw new CommandExecuteException("Task does not exist at index.");
         }

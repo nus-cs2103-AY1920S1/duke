@@ -15,18 +15,13 @@ public class TaskDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException {
+    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException, StorageException {
         if (tasks.size() >= this.index) {
             if (tasks.get(this.index - 1).getIsDone()) {
                 throw new CommandExecuteException("Task is already marked as done.");
             }
             tasks.get(this.index - 1).setIsDone(true);
-            
-            try {
-                storage.save(tasks);
-            } catch (StorageException e) {
-                throw new CommandExecuteException("Unable to save tasks.");
-            }
+            storage.save(tasks);
         } else {
             throw new CommandExecuteException("Task does not exist at index.");
         }

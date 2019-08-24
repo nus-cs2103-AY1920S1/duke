@@ -16,16 +16,11 @@ public class AddTodoTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException {
+    public void execute(TaskList tasks, Storage storage) throws CommandExecuteException, StorageException {
         TodoTask task = new TodoTask();
         task.setTitle(this.title);
         tasks.add(task);
-        
-        try {
-            storage.save(tasks);
-        } catch (StorageException e) {
-            throw new CommandExecuteException("Unable to save tasks.");
-        }
+        storage.save(tasks);
     }
 
 }

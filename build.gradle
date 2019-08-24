@@ -1,20 +1,32 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
 }
 
-group 'seedu.duke'
+group 'duke'
 version '0.1.0'
+
+application {
+    mainClassName = "duke.Duke"
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
 
 repositories {
     mavenCentral()
 }
 
-application {
-    // Change this to your main class.
-    mainClassName = "seedu.duke.Duke"
-}
-
 run {
     standardInput = System.in
+}
+
+test {
+    useJUnitPlatform()
 }

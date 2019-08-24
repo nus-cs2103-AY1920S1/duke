@@ -3,12 +3,78 @@ import task.Todo;
 import task.Deadline;
 import task.Event;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    private static ArrayList<Task> tasks;
+    private static ArrayList<Task> tasks = new ArrayList<>();
+
+    private static final String DATA_FILE_TASKS = "./data/duke.txt";
+
+    /**
+     * Reads tasks from ./data/duke.txt, creating an empty file there if it doesn't exist.
+     */
+    private static void readTasks() {
+        tasks = new ArrayList<>();
+        try {
+            File file = new File(DATA_FILE_TASKS);
+            file.createNewFile();
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split("\\|");
+                for (int i = 0; i < data.length; i++) {
+                    data[i] = data[i].trim();
+                }
+                Task task;
+                switch (data[0]) {
+                case "T":
+                    task = new Todo(data[2]);
+                    break;
+                case "D":
+                    task = new Deadline(data[2], data[3]);
+                    break;
+                case "E":
+                    task = new Event(data[2], data[3]);
+                    break;
+                default:
+                    throw new IOException();
+                }
+                if (data[1].equals("1")) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+            }
+            reader.close();
+        } catch (IOException ignored) {
+        }
+    }
+
+    /**
+     * Saves tasks into ./data/duke.txt, creating a new file with the output if it doesn't exist.
+     */
+    private static void saveTasks() {
+        try {
+            File file = new File(DATA_FILE_TASKS);
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            boolean first = true;
+            for (Task task : tasks) {
+                writer.write(first ? "" : "\n");
+                first = false;
+                writer.write(task.toSaveString());
+            }
+            writer.flush();
+            writer.close();
+        } catch (IOException ignored) {
+        }
+    }
 
     private static void printNumberTasks() {
         String s = tasks.size() == 1 ? "" : "s";
@@ -66,7 +132,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        tasks = new ArrayList<>();
+        readTasks();
 
         Scanner sc = new Scanner(System.in);
 
@@ -83,6 +149,7 @@ public class Duke {
             try {
                 if (cmdInput.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
+                    saveTasks();
                     break;
                 } else if (cmdInput.equals("list")) {
                     listTasks();

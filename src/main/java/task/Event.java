@@ -19,7 +19,12 @@ public class Event extends Task {
     }
 
     @Override
-    public String extraText() {
+    protected String extraText() {
         return " (at: " + this.time + ")";
+    }
+
+    @Override
+    protected String extraSaveText() {
+        return " | " + this.time;
     }
 }

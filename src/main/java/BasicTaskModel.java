@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 class BasicTaskModel implements TaskModelInterface {
     private List<TaskObserver> observers;
@@ -10,6 +11,16 @@ class BasicTaskModel implements TaskModelInterface {
     public BasicTaskModel() {
         this.observers = new ArrayList<>();
         this.taskList = new ArrayList<>();
+    }
+
+    public BasicTaskModel(Stream<TaskInterface> taskStream) {
+        this.observers = new ArrayList<>();
+        this.taskList = taskStream.collect(Collectors.toList());
+    }
+
+    public void loadData(Stream<TaskInterface> taskStream) {
+        taskStream.forEach(x -> this.taskList.add(x));
+        this.notifyObservers();
     }
 
     public void registerObserver(TaskObserver observer) {
@@ -65,6 +76,7 @@ class BasicTaskModel implements TaskModelInterface {
 
     /* when do we notify the task again? */
     public void notifyObservers() {
+        //System.out.println("Notifying... ");
         for (TaskObserver observer : observers) {
             observer.update(this);
         }    

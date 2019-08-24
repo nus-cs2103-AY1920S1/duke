@@ -5,32 +5,52 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.stream.Stream;
 import java.lang.System;
+import java.util.List;
+import java.util.ArrayList;
 class BasicStorage implements TaskObserver, StorageInterface {
 
 
     private TaskModelInterface model;
     private String path = "../../../../data/duke.txt";
+    private TaskCreator taskCreator;
 
     public BasicStorage(TaskModelInterface model) {
+        this.taskCreator = new LoadTaskCreator();
         this.model = model;
+        Stream<TaskInterface> taskStream = loadData();
+        model.loadData(taskStream);
         model.registerObserver(this);
     }
 
+    public void registerModel(TaskModelInterface model) {
+        this.model.registerObserver(this);
+    }
+
     public void update(TaskModelInterface model) {
+        //System.out.println("Flag 1");
         String toWrite = saveFormat(model.getTaskStream());
+        //System.out.println("Flag 2");
         writeData(toWrite);
     }
 
-    public void loadData() {
+    public Stream<TaskInterface> loadData() {
+        List<TaskInterface> taskList = new ArrayList<>();
         try {
             File f = new File(this.path);
             Scanner fileScanner = new Scanner(f);
             while (fileScanner.hasNext()) {
-                System.out.println(fileScanner.nextLine());
+                try {
+                    String loadLine = fileScanner.nextLine();
+                    TaskInterface loadTask = this.taskCreator
+                        .createTask(loadLine);
+                    taskList.add(loadTask);
+                } catch (OWOException e) {
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);
-        }
+        } 
+        return taskList.stream();
     }
 
     public static String 
@@ -41,13 +61,12 @@ class BasicStorage implements TaskObserver, StorageInterface {
                     //x + System.lineSeperator() 
                     x + "\n"
                     + accu);
-//            .forEach(x -> System.out.println(x.getSaveFormat()));
-//            .forEach(x -> System.out.println(x));
     }
 
     private void writeData(String textToAdd) {
 //        File f = new File(this.path);
  //       System.out.println("file exists?: " + f.exists());
+        System.out.println("Attempting to write");
         try {
 
             FileWriter fw = new FileWriter(this.path);

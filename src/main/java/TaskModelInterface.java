@@ -11,4 +11,5 @@ interface TaskModelInterface {
     //delete this
     Iterator<TaskInterface> getTaskListIterator();
     Stream<TaskInterface> getTaskStream();
+    void loadData(Stream<TaskInterface> taskStream);
 }

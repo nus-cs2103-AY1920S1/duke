@@ -3,13 +3,9 @@ public class Duke {
         /* TODO: init friday and model */
 
         TaskModelInterface model = new BasicTaskModel();
+        StorageInterface storage = new BasicStorage(model);
         ControllerInterface friday = new FridayController(model);
 
-        String logo2 = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         String logo = "        \u2606                     \u273f\n"
             + "                                    \u2606 \u273f\n"
             + "         \u273f                 \u273f \u2606\n"

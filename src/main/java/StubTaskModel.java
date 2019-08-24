@@ -12,6 +12,7 @@ class StubTaskModel implements TaskModelInterface {
     public TaskInterface doneTask(int refNum) { return null; }
     public TaskInterface deleteTask(int refNum) { return null; }
     public Iterator<TaskInterface> getTaskListIterator() { return null; }
+    public void loadData(Stream<TaskInterface> taskStream) {}
     public Stream<TaskInterface> getTaskStream() { 
         List<TaskInterface> xs = new ArrayList<>();
         xs.add(new DeadLinesImplementation("Summon Cthulhu", 

@@ -1,10 +1,20 @@
 import java.awt.*;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 public class Duke {
     List<Task> list = new ArrayList<>();
+    DateTimeFormatter f;
+    LocalDateTime dateTime;
+    LocalDateTime startDate;
+    LocalDateTime endDate;
     String indent = "     ";
     String input;
     String[] inputs;
@@ -12,6 +22,7 @@ public class Duke {
     Task task;
     int output;
     int i;
+    private String[] startEndDate;
 
     public static void main(String[] args) {
         Duke newDuke = new Duke();
@@ -20,6 +31,7 @@ public class Duke {
 
     public void run() {
         Scanner sc = new Scanner(System.in);
+        f = DateTimeFormatter.ofPattern("d/M/yyyy HHmm", Locale.ENGLISH);
         Output.printIntro();
         do {
             input = sc.nextLine();
@@ -79,7 +91,12 @@ public class Duke {
                 case "deadline":
                     if (inputs[1].contains(" /by ")) {
                         inputFormatted = inputs[1].split(" /by ", 2);
-                        task = new Deadline(inputFormatted[0], inputFormatted[1]);
+                        try {
+                            dateTime = LocalDateTime.parse(inputFormatted[1], f);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("/u2754 OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
+                        }
+                        task = new Deadline(inputFormatted[0], dateTime);
                     } else {
                         throw new DukeException("☹ OOPS!!! The due date of a deadline cannot be empty.");
                     }
@@ -87,7 +104,15 @@ public class Duke {
                 case "event":
                     if (inputs[1].contains(" /at ")) {
                         inputFormatted = inputs[1].split(" /at ", 2);
-                        task = new Event(inputFormatted[0], inputFormatted[1]);
+                        startEndDate = inputFormatted[1].split(" ");
+                        if (startEndDate.length < 4) throw new DukeException("/u2754 OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
+                        try {
+                            startDate = LocalDateTime.parse(startEndDate[0] + " " + startEndDate[1], f);
+                            endDate = LocalDateTime.parse(startEndDate[2] + " " + startEndDate[3], f);
+                        } catch (DateTimeParseException e) {
+                            throw new DukeException("/u2754 OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
+                        }
+                        task = new Event(inputFormatted[0], startDate, endDate);
                     } else {
                         throw new DukeException("☹ OOPS!!! The duration of a event cannot be empty.");
                     }

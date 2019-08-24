@@ -1,11 +1,17 @@
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
 
-    public static void runDuke() {
+    public static void runDuke(String filePath) throws IOException {
         String line = "    ____________________________________________________________";
         String currentCommand = "";
         ArrayList<Task> addedItems = new ArrayList<>();
+        getTasksFromFile(addedItems, filePath);
 
         System.out.println(line);
         System.out.println("     Hello! I'm Duke");
@@ -90,11 +96,11 @@ public class Duke {
                                 }
                             }
 
-                            if (!description.equals("")) {
+                            if (!description.equals("") && !by.equals("")) {
                                 currentTask = new Deadline(description, by);
                                 addedItems.add(currentTask);
                             } else {
-                                throw new InvalidTaskDescriptionDukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                                throw new InvalidTaskDescriptionDukeException("☹ OOPS!!! The description/timing of a deadline cannot be empty.");
                             }
 
                         } else if (tempArray[0].equals("event")) {
@@ -117,11 +123,11 @@ public class Duke {
                                 }
                             }
 
-                            if (!description.equals("")) {
+                            if (!description.equals("") && !at.equals("")) {
                                 currentTask = new Event(description, at);
                                 addedItems.add(currentTask);
                             } else {
-                                throw new InvalidTaskDescriptionDukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                                throw new InvalidTaskDescriptionDukeException("☹ OOPS!!! The description/timing of an event cannot be empty.");
                             }
 
                         }
@@ -152,18 +158,96 @@ public class Duke {
             }
         }
 
+        loadTasksToFile(addedItems, filePath);
+
         System.out.println(line);
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println(line);
     }
 
-    public static void main(String[] args) {
+    public static void getTasksFromFile(ArrayList<Task> taskList, String filePath) throws FileNotFoundException {
+        File taskFile = new File(filePath);
+        Scanner scanner = new Scanner(taskFile);
+        while (scanner.hasNext()) {
+            String textLine = scanner.nextLine();
+            taskList.add(stringToTask(textLine));
+        }
+    }
+
+    public static void loadTasksToFile(ArrayList<Task> taskList, String filePath) throws IOException {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+
+            for (int i = 0; i < taskList.size(); i++) {
+                fileWriter.write(taskToString(taskList.get(i)));
+
+                if (i != taskList.size() - 1) {
+                    fileWriter.write(System.lineSeparator());
+                }
+            }
+
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+
+
+    }
+
+    public static Task stringToTask(String text) {
+            String[] textSplit = text.split("\\|");
+            Task resultTask;
+
+            if (textSplit[0].equals("T")) {
+                resultTask = new ToDo(textSplit[2]);
+            } else if (textSplit[0].equals("D")) {
+                resultTask = new Deadline(textSplit[2], textSplit[3]);
+            } else {
+                resultTask = new Event(textSplit[2], textSplit[3]);
+            }
+
+            if (textSplit[1].equals("1")) {
+                resultTask.markAsDone();
+            }
+
+            return resultTask;
+    }
+
+    public static String taskToString(Task task) {
+        String taskType = "";
+        String description = task.getDescription();
+        String isDone = "0";
+
+        if (task.isDone()) {
+            isDone = "1";
+        }
+
+        if (task instanceof ToDo) {
+            taskType = "T";
+            return taskType + "|" + isDone + "|" + description;
+        } else { // event or deadline
+            String time = "";
+
+            if (task instanceof Event) {
+                taskType = "E";
+                time = ((Event) task).getAt();
+            } else {
+                taskType = "D";
+                time = ((Deadline) task).getBy();
+            }
+
+            return taskType + "|" + isDone + "|" + description + "|" + time;
+
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        runDuke();
+        runDuke("data/tasks.txt");
     }
 }

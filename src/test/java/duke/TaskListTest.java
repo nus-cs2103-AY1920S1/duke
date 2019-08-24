@@ -49,4 +49,13 @@ class TaskListTest {
         TaskList tasks = new TaskList();
         assertThrows(InvalidTaskDukeException.class, () -> tasks.getTask(0));
     }
+
+    @Test
+    void testTaskList_FindTasksByKeyword() {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new Todo("hi"));
+        tasks.addTask(new Todo("bye"));
+        assertEquals(tasks.findTasksByKeyword("bye").size(), 1);
+        assertEquals(tasks.findTasksByKeyword("bye").get(0).getDescription(), "bye");
+    }
 }

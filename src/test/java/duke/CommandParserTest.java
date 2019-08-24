@@ -7,6 +7,7 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputDukeException;
@@ -40,6 +41,14 @@ class CommandParserTest {
         assertTrue(command instanceof DeleteCommand);
 
         assertThrows(InvalidInputDukeException.class, () -> CommandParser.parse("delete"));
+    }
+
+    @Test
+    void testFind() throws DukeException {
+        Command command = CommandParser.parse("find 1");
+        assertTrue(command instanceof FindCommand);
+
+        assertThrows(InvalidInputDukeException.class, () -> CommandParser.parse("find"));
     }
 
     @Test

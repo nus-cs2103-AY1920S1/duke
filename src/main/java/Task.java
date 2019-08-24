@@ -10,9 +10,14 @@ public class Task {
         this.isDone = false;
     }
 
+    //for the purpose of text-ui-testing
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "?");
     }
+
+    /* public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    } */
 
     public void markAsDone() {
         this.isDone = true;

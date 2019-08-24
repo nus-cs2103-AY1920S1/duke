@@ -1,52 +1,35 @@
 Previous file is found in the database. Retrieving information from there
-Here are your previous tasks:
-    [T][-] read book
-    [D][-] buy fruits (by: Tue)
-    [E][-] project meeting (at: Mon 2-4pm)
+    Here are your previous tasks:
+    [T][-] buy dinner
+    [D][-] CS2100 Lab (by: 12nd August 2019)
+    [E][-] dance party (at: 15th August 2019)
     ____________________________________________________________
      Hello! I'm Duke
      What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
-       [T][-] water plants
+       [T][-] read book
      Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
-       [D][-] quiz (by: Wed)
+       [D][-] CS2103 Project (by: 12nd August 2019)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
-       [E][-] skating (at: Fri 1-3pm)
+       [E][-] birthday partyy (at: 15th August 2019)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][-] read book
-    2. [D][-] buy fruits (by: Tue)
-    3. [E][-] project meeting (at: Mon 2-4pm)
-    4. [T][-] water plants
-    5. [D][-] quiz (by: Wed)
-    6. [E][-] skating (at: Fri 1-3pm)
-    ____________________________________________________________
-    ____________________________________________________________
-     Nice! I've marked this task as done: 
-       [E][+] project meeting (at: Mon 2-4pm)
-    ____________________________________________________________
-    ____________________________________________________________
-     Nice! I've marked this task as done: 
-       [D][+] quiz (by: Wed)
-    ____________________________________________________________
-    ____________________________________________________________
-    Here are the tasks in your list:
-    1. [T][-] read book
-    2. [D][-] buy fruits (by: Tue)
-    3. [E][+] project meeting (at: Mon 2-4pm)
-    4. [T][-] water plants
-    5. [D][+] quiz (by: Wed)
-    6. [E][-] skating (at: Fri 1-3pm)
+    1. [T][-] buy dinner
+    2. [D][-] CS2100 Lab (by: 12nd August 2019)
+    3. [E][-] dance party (at: 15th August 2019)
+    4. [T][-] read book
+    5. [D][-] CS2103 Project (by: 12nd August 2019)
+    6. [E][-] birthday partyy (at: 15th August 2019)
     ____________________________________________________________
     ____________________________________________________________
      Bye. Hope to see you again soon!

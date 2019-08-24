@@ -1,21 +1,23 @@
 package main.task;
 
 public class Event extends Task {
-    String date;
+    Date date;
+    Time time;
 
-    public Event(String description, String date) {
+    public Event(String description, String date, String time) {
         super(description.trim());
-        this.date = date;
+        this.date = new Date(date);
+        this.time = new Time(time);
     }
 
     @Override
     public String toString() {
-        String displayDate = this.date.substring(0, 2) + ": " + this.date.substring(3);
+        String displayDate = "at: " + this.date.toString();
         return "[E][" + super.getStatusIcon() + "] "
                 + super.description + " (" + displayDate + ")";
     }
 
     public String toDataFormat() {
-        return "E | " + super.getStatusIcon() + " | " + super.description + " | " + this.date;
+        return "E | " + super.getStatusIcon() + " | " + super.description + " | " + this.date.origin() + " | " + this.time.origin();
     }
 }

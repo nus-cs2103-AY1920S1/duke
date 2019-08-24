@@ -6,7 +6,7 @@ import main.task.*;
 
 public class Duke {
     public static void main(String[] args) {
-        //Level 7
+        //Level-7 and Level-8 Merged
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
@@ -27,7 +27,7 @@ public class Duke {
                         Task todo = new ToDo(dataReads[2]);
                         tasks.add(todo);
                     } else if (dataReads[0].equals("E")) {
-                        Task event = new Event(dataReads[2], dataReads[3]);
+                        Task event = new Event(dataReads[2], dataReads[3], dataReads[4]);
                         tasks.add(event);
                     } else if (dataReads[0].equals("D")) {
                         Task deadline = new Deadline(dataReads[2], dataReads[3]);
@@ -110,20 +110,21 @@ public class Duke {
                         t = new ToDo(input.substring(5));
                     } else if (input.length() > 8 && input.substring(0, 8).equals("deadline")) {
                         taskType = "deadline";
-                        if (input.length() < 10 || !input.contains("/")) {
+                        if (input.length() < 10 || !input.contains("/by")) {
                             throw new InsufficientTaskArgumentException("Not enough arguments for Deadline");
                         }
                         String res = input.substring(9);
-                        String[] pair = res.split("/");
+                        String[] pair = res.split("/by ");
                         t = new Deadline(pair[0], pair[1]);
                     } else if (input.length() > 5 && input.substring(0, 5).equals("event")) {
                         taskType = "event";
-                        if (input.length() < 7 || !input.contains("/")) {
+                        if (input.length() < 7 || !input.contains("/at")) {
                             throw new InsufficientTaskArgumentException("Not enough arguments for Deadline");
                         }
                         String res = input.substring(6);
-                        String[] pair = res.split("/");
-                        t = new Event(pair[0], pair[1]);
+                        String[] pair = res.split("/at ");
+                        String[] dateComponents = pair[1].split(" ");
+                        t = new Event(pair[0], dateComponents[0], dateComponents[1]);
                     } else {
                         throw new InvalidTaskException(input + " is not a valid task");
                     }

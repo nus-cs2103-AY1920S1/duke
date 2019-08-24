@@ -1,8 +1,5 @@
-todo water plants
-deadline quiz /by Wed
-event skating /at Fri 1-3pm
-list
-done 3
-done 5
+todo read book
+deadline CS2103 Project /by 12/08/2019
+event birthday partyy /at 15/08/2019 1800
 list
 bye

@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
 public class Duke {
     private static  LinkedList<Task> tasks = new LinkedList<Task>();
     private static String pathName = "C:/Users/User/Documents/GitHub/duke/src/main/";
@@ -91,7 +97,7 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Please follow format e.g deadline return book /by Sunday");
                 valid = false;
             } else {
-                curr = new Deadline(command);
+                curr = new Deadline(getTime(command));
                 tasks.add(curr);
                 addTasksToFile(curr);
             }
@@ -100,7 +106,7 @@ public class Duke {
                 System.out.println("☹ OOPS!!! Please follow format e.g event project meeting /at Mon 2-4pm");
                 valid = false;
             } else {
-                curr = new Event(command);
+                curr = new Event(getTime(command));
                 tasks.add(curr);
                 addTasksToFile(curr);
             }
@@ -109,7 +115,7 @@ public class Duke {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             valid = false;
         }
-        
+
         if (valid) {
             System.out.println("Got it. I've added this task: ");
             System.out.println(curr);
@@ -196,6 +202,50 @@ public class Duke {
             }
         }
     }
+
+
+    private static String getTime(String input) {
+        StringBuilder temp = new StringBuilder();
+        StringBuilder result = new StringBuilder();
+        boolean flag = false;
+
+        List<String> formatStrings = Arrays.asList("d/M/y hhmm", "d/M/y", "d/M" );
+        List<String> outputFormats = Arrays.asList("MMMMM dd, yyyy, h:mm a", "MMMMM dd, yyyy", "MMMMM dd" );
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (flag) {
+                temp.append(c);
+            } else {
+                result.append(c);
+            }
+            if (c == '/') {
+                flag = true;
+            }
+        }
+        Date date = null;
+        for (int i = 0; i < formatStrings.size(); i++)
+        {
+            try {
+                DateFormat df = new SimpleDateFormat(formatStrings.get(i));
+                date = df.parse(temp.toString().substring(3));
+                DateFormat formatter = new SimpleDateFormat(outputFormats.get(i));
+                result.append("   ").append(formatter.format(date));
+                break;
+
+            } catch (ParseException e) {
+                System.out.println("!");
+            }
+
+        }
+
+
+        if (date == null) {
+            return input;
+        } else {
+            return result.toString();
+        }
+    }
+
 
 
 }

@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,6 +45,7 @@ public class Duke {
             e1.printStackTrace();
         }
         String echo = s.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         while (true) {
             if (echo.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -141,7 +144,7 @@ public class Duke {
                                 continue;
                             }
                         } else {
-                            list.add(new Deadline(echoSplit[0], echoSplit[1]));
+                            list.add(new Deadline(echoSplit[0], LocalDateTime.parse(echoSplit[1], formatter)));
                         }
                     }
                 } else if (echo.startsWith("event")) {
@@ -165,7 +168,8 @@ public class Duke {
                                 continue;
                             }
                         } else {
-                            list.add(new Event(echoSplit[0], echoSplit[1]));
+                            String[] fromTo = echoSplit[1].split(" to ");
+                            list.add(new Event(echoSplit[0], LocalDateTime.parse(fromTo[0], formatter), LocalDateTime.parse(fromTo[1], formatter)));
                         }
                     }
                 } else {

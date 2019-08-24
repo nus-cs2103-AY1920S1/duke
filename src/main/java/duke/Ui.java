@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -36,13 +37,21 @@ public class Ui {
                 "    ____________________________________________________________\n");
     }
 
-    public void showTasks(TaskList tasks) {
-        StringBuilder builder = new StringBuilder("Here are the tasks in your list:");
+    private void listTasks(List<Task> tasks, String promptMessage) {
+        StringBuilder builder = new StringBuilder(promptMessage);
         for (int i = 0; i < tasks.size(); i++) {
             builder.append("\n" + "     ");
             builder.append(i + 1).append(".").append(tasks.get(i).toString());
         }
         formattedPrint(builder.toString());
+    }
+
+    public void showTasks(TaskList tasks) {
+        listTasks(tasks.getList(), "Here are the tasks in your list:");
+    }
+
+    public void showFoundTasks(List<Task> tasks) {
+        listTasks(tasks, "Here are the matching tasks in your list:");
     }
 
     public void showAddTaskMessage(Task task, TaskList tasks) {

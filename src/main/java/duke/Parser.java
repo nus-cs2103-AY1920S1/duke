@@ -36,6 +36,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(userInput.split(" ")[1]) - 1);
         } else if (userInput.startsWith("delete")) {
             return new DeleteCommand(Integer.parseInt(userInput.split(" ")[1]) - 1);
+        } else if (userInput.startsWith("find")) {
+            return new FindCommand(userInput.split(" ")[1]);
         } else if (userInput.startsWith("todo")) {
             if (userInput.length() == 4)
                 throw new DukeException("The description of a todo cannot be empty.");

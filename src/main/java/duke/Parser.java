@@ -14,6 +14,15 @@ import java.util.Date;
 
 public class Parser {
 
+    /**
+     * Convert a task from its saved format to a task object.
+     * The savedText argument must be in the correct format. An
+     * example of a correctly formatted task is
+     * "E | 0 | dancing session | 12/1/2010 1212"
+     *
+     * @param savedText the task in saved text format
+     * @return the task object converted from the saved text
+     */
     public static Task convertSavedTextToTask(String savedText) throws ParseException {
         String[] tokens = savedText.split("\\s\\|\\s");
 
@@ -40,6 +49,13 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Convert list of tasks to saved text format.
+     * The returned value can be written into a file.
+     *
+     * @param tasks the list of tasks
+     * @return the saved text format of the list of tasks
+     */
     public static String convertTasksToSavedText(ArrayList<Task> tasks) {
         StringBuilder text = new StringBuilder();
         for (Task task : tasks) {
@@ -49,6 +65,14 @@ public class Parser {
         return text.toString();
     }
 
+    /**
+     * Parse a command string.
+     * This method always return a {@link Command} object
+     * corresponding to the command written by user.
+     *
+     * @param fullCommand the raw string command
+     * @return the executable command object
+     */
     public static Command parseCommand(String fullCommand) throws ParseException, InvalidCommandException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         String commandName = fullCommand.split(" ", 2)[0];

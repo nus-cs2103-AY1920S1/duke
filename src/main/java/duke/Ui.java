@@ -11,6 +11,10 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Show welcome message.
+     * Often used in the beginning of the program.
+     */
     public void showWelcome() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -25,6 +29,13 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Show all tasks.
+     * This method would format the list of tasks
+     * and display them neatly.
+     *
+     * @param tasks the list of tasks to be shown
+     */
     public void showTasks(TaskList tasks) {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i).toString());
@@ -36,12 +47,28 @@ public class Ui {
         System.out.println(task.toString());
     }
 
+    /**
+     * Show notification of successful deletion.
+     * This method would notify the user that the task
+     * is successfully deleted.
+     *
+     * @param task the task that is deleted
+     * @param tasks the list of tasks left after deletion
+     */
     public void showDelete(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Show notification of successful addition.
+     * This method would notify the user that the task
+     * is successfully added.
+     *
+     * @param task the task that is added
+     * @param tasks the list of tasks left after addition
+     */
     public void showTaskAdded(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task.toString());

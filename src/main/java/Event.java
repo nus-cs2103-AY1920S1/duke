@@ -1,9 +1,11 @@
 // Adapted from https://nus-cs2103-ay1920s1.github.io/website/schedule/week2/project.html 
 
-public class Event extends Task {	
-    protected String at;
+import java.util.Date;
 
-    public Event(String description, String at) {
+public class Event extends Task {	
+    protected Date at;
+
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }

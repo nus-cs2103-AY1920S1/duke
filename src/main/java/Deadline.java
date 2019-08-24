@@ -2,10 +2,12 @@
 // Referenced from https://nus-cs2103-ay1920s1.github.io/website/schedule/week2/project.html
 // with minor modifications 
 
-public class Deadline extends Task {
-    protected String by;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected Date by;
+
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }

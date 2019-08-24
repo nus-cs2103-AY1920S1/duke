@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     @Override
     public boolean execute(TaskList taskList, Ui ui, Storage storage) {
-        String formattedString = taskList.getTasksInString();
+        String formattedString = taskList.getTasksInString(taskList.getTaskList());
         ui.showMessage(Messages.LIST_MESSAGE, Messages.COMMAND_INDENTATION + formattedString);
         return true;
     }

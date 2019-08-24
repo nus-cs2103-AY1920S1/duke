@@ -4,6 +4,8 @@ import duke.command.*;
 import duke.exception.DukeException;
 import duke.shared.Messages;
 
+import java.util.Arrays;
+
 public class Parser {
 
     public static Command parse(String command) throws DukeException, NumberFormatException {
@@ -66,6 +68,12 @@ public class Parser {
                 }
             } catch (NumberFormatException e) {
                 throw new NumberFormatException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "delete", "number"));
+            }
+        } else if (commands[0].equals("find")) {
+            if (commands.length > 1) {
+                return new FindCommand(Arrays.copyOfRange(commands, 1, commands.length));
+            } else if (commands.length == 1) {
+                throw new DukeException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "find"));
             }
         }
         throw new DukeException(Messages.UNKNOWN_COMMAND_EXCEPTION);

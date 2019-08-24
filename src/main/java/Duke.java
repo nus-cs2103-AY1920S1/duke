@@ -29,7 +29,8 @@ public class Duke {
             String line = null;
             while ((line = bfr.readLine()) != null) {
                 System.out.println("heres");
-                String[] stringArr = line.split(" | ");
+                index++;
+                String[] stringArr = line.split( " [|] " , 0);
                 if (stringArr[0].equals("E")) {
                     Event event = new Event(stringArr[2], stringArr[3]);
                     if (stringArr[1] == "1") {
@@ -38,6 +39,7 @@ public class Duke {
                     tasks.add(event);
                 } else if (stringArr[0].equals("T")) {
                     Todo td = new Todo(stringArr[2]);
+                    System.out.println(stringArr[0] + stringArr[1] + stringArr[2]);
                     if (stringArr[1] == "1") {
                         td.markAsDone();
                     }
@@ -52,6 +54,7 @@ public class Duke {
 
             }
         } catch (Exception e) {
+            //add more specific exceptions
             System.out.println("Error with the data file initialization");
         }
         Scanner sc = new Scanner(System.in);
@@ -106,9 +109,9 @@ public class Duke {
                         String textFileMsg = "";
                         for (int i = 0; i < index; i++) {
                             if (i == 0) {
-                                textFileMsg = tasks.get(i).toWriteIntoFile();
+                                textFileMsg = textFileMsg + tasks.get(i).toWriteIntoFile();
                             } else {
-                                textFileMsg = System.lineSeparator() + tasks.get(i).toWriteIntoFile();
+                                textFileMsg = textFileMsg + System.lineSeparator() + tasks.get(i).toWriteIntoFile();
                             }
                         }
                         fw.write(textFileMsg);

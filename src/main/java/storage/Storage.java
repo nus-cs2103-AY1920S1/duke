@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter; 
 import java.io.IOException;
 import java.io.Writer;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -15,6 +17,8 @@ import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TodoTask;
 
 public class Storage {
+
+    protected static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     protected String filePath;
 
@@ -60,14 +64,14 @@ public class Storage {
             DeadlineTask task = new DeadlineTask();
             task.setIsDone(data[1].equals("1"));
             task.setTitle(data[2]);
-            task.setDeadline(data[3]);
+            task.setBy(LocalDateTime.parse(data[3], Storage.dateTimeFormatter));
             return task;
         } else if (Pattern.matches("^E \\| [01] \\| .+ \\| .+$", line)) {
             String[] data = line.split(" \\| ", 4);
             EventTask task = new EventTask();
             task.setIsDone(data[1].equals("1"));
             task.setTitle(data[2]);
-            task.setTime(data[3]);
+            task.setAt(LocalDateTime.parse(data[3], Storage.dateTimeFormatter));
             return task;
         } else {
             return null;
@@ -84,12 +88,12 @@ public class Storage {
             return String.format("D | %d | %s | %s",
                    ((DeadlineTask)task).getIsDone() ? 1 : 0,
                    ((DeadlineTask)task).getTitle(),
-                   ((DeadlineTask)task).getDeadline());
+                   ((DeadlineTask)task).getBy().format(Storage.dateTimeFormatter));
         } else if (task instanceof EventTask) {
             return String.format("E | %d | %s | %s",
                     ((EventTask)task).getIsDone() ? 1 : 0,
                     ((EventTask)task).getTitle(),
-                    ((EventTask)task).getTime());
+                    ((EventTask)task).getAt().format(Storage.dateTimeFormatter));
         }
         return null;
     }

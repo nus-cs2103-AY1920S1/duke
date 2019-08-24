@@ -1,21 +1,24 @@
 package com.leeyiyuan.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.leeyiyuan.task.Task;
 
 public class DeadlineTask extends Task {
         
-    protected String deadline;
+    protected LocalDateTime by;
 
     public DeadlineTask() {
         super();
     }
     
-    public String getDeadline() {
-        return this.deadline;
+    public LocalDateTime getBy() {
+        return this.by;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+    public void setBy(LocalDateTime by) {
+        this.by = by;
     }
     
     @Override
@@ -23,7 +26,7 @@ public class DeadlineTask extends Task {
         return String.format("[D][%s] %s (by: %s)",
                 this.isDone ? "✓" : "✗",
                 this.title,
-                this.deadline); 
+                this.by.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
 
 }

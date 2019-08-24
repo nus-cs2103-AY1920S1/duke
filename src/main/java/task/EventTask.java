@@ -1,21 +1,24 @@
 package com.leeyiyuan.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.leeyiyuan.task.Task;
 
 public class EventTask extends Task {
 
-    protected String time;
+    protected LocalDateTime at;
 
     public EventTask() {
         super();
     }
     
-    public String getTime() {
-        return this.time;
+    public LocalDateTime getAt() {
+        return this.at;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setAt(LocalDateTime at) {
+        this.at = at;
     }
     
     @Override
@@ -23,7 +26,7 @@ public class EventTask extends Task {
         return String.format("[E][%s] %s (at: %s)",
                 this.isDone ? "✓" : "✗",
                 this.title,
-                this.time); 
+                this.at.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
 
 }

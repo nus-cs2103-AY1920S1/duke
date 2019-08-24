@@ -1,5 +1,8 @@
 package com.leeyiyuan;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -16,6 +19,7 @@ public class Duke {
 
     public static void main(String[] args) {
         try {
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             Storage storage = new Storage("/home/leeyiyuan/Projects/duke/data/duke.txt");
             ArrayList<Task> tasks = storage.load();
 
@@ -69,7 +73,7 @@ public class Duke {
                     String[] data = input.split("deadline ", 2)[1].split(" /by ", 2);
                     DeadlineTask task = new DeadlineTask();
                     task.setTitle(data[0]);
-                    task.setDeadline(data[1]);
+                    task.setBy(LocalDateTime.parse(data[1], dateTimeFormatter));
                     tasks.add(task);
                     hasAddedTask = true;
                     addedTask = task;
@@ -82,7 +86,7 @@ public class Duke {
                     String[] data = input.split("event ", 2)[1].split(" /at ", 2);
                     EventTask task = new EventTask();
                     task.setTitle(data[0]);
-                    task.setTime(data[1]);
+                    task.setAt(LocalDateTime.parse(data[1], dateTimeFormatter));
                     tasks.add(task);
                     hasAddedTask = true;
                     addedTask = task;
@@ -121,6 +125,8 @@ public class Duke {
             System.out.println("Caught IOException: " + e.toString());
         } catch (DukeException e) {
             System.out.println("Caught DukeEception: " + e.toString());
+        } catch (DateTimeParseException e) {
+            System.out.println("Caught exception: " + e.toString());
         }
     }
 

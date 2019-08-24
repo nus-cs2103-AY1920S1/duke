@@ -37,7 +37,6 @@ public class Duke {
                     tasks.add(event);
                 } else if (stringArr[0].equals("T")) {
                     Todo td = new Todo(stringArr[2]);
-                    System.out.println(stringArr[0] + stringArr[1] + stringArr[2]);
                     if (stringArr[1] == "1") {
                         td.markAsDone();
                     }

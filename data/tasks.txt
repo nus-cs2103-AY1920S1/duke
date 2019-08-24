@@ -1,0 +1,3 @@
+T|0|todo test
+E|1|event test|monday 12 pm
+D|1|deadline test|friday 4pm

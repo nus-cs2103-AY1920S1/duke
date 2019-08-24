@@ -19,6 +19,12 @@ public class Duke {
     }
 
     private void run() {
+        try {
+            readData();
+        } catch (FileNotFoundException e) {
+            System.err.println(e);
+        }
+
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Hello I'm Duke\n" + "What can I do for you?");
@@ -107,7 +113,22 @@ public class Duke {
         File f = new File("data/duke.txt");
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
-            System.out.println(sc.nextLine());
+            String taskLine = sc.nextLine();
+            String[] taskLineSplit = taskLine.split(":");
+            switch (taskLineSplit[0]) {
+            case "T":
+                task.add(new Todo(taskLineSplit[2], Integer.parseInt(taskLineSplit[1])));
+                counter++;
+                break;
+            case "E":
+                task.add(new Event(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
+                counter++;
+                break;
+            case "D":
+                task.add(new Deadline(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
+                counter++;
+                break;
+            }
         }
 
         // Close the scanner

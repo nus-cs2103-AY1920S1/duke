@@ -14,9 +14,13 @@ public class Duke {
         greetUser();
         drawLine();
         Scanner input = new Scanner(System.in);
+        readInputs(input);
+    }
+
+    public static void readInputs(Scanner input) {
         while (input.hasNext()) {
             try {
-                String userInput = input.nextLine();
+                String userInput = input.nextLine().replaceAll("\\s+", " ");
                 if (userInput.equals("bye")) {
                     sayBye();
                     input.close();
@@ -34,18 +38,24 @@ public class Duke {
                     addEvent(details);
                 } else if (userInput.contains("done")) {
                     String[] doneDetails = userInput.split(" ");
-                    if (doneDetails.length == 1) {
+                    if (doneDetails.length < 2) {
                         throw new DukeException("\u2639 OOPS!!! The description of done cannot be empty.");
                     }
                     String listActionIndex = doneDetails[1];
+                    if (Integer.parseInt(listActionIndex) > actions.size()) {
+                        throw new DukeException("\u2639 OOPS!!! This item does not exist.");
+                    }
                     int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
                     markAsDone(arrayActionIndex);
                 } else if (userInput.contains("delete")) {
                     String[] deleteDetails = userInput.split(" ");
-                    if (deleteDetails.length == 1) {
+                    if (deleteDetails.length < 2) {
                         throw new DukeException("\u2639 OOPS!!! The description of delete cannot be empty.");
                     }
                     String listActionIndex = deleteDetails[1];
+                    if (Integer.parseInt(listActionIndex) > actions.size()) {
+                        throw new DukeException("\u2639 OOPS!!! This item does not exist.");
+                    }
                     int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
                     deleteFromList(arrayActionIndex);
                 }else {
@@ -53,12 +63,16 @@ public class Duke {
                 }
             }
             catch (DukeException exception) {
-                String message = exception.getMessage();
-                drawLine();
-                System.out.println("\t " + message);
-                drawLine();
+                printError(exception);
             }
         }
+    }
+
+    public static void printError(DukeException exception) {
+        String message = exception.getMessage();
+        drawLine();
+        System.out.println("\t " + message);
+        drawLine();
     }
 
     public static void deleteFromList(int index) {
@@ -81,42 +95,42 @@ public class Duke {
     }
 
     public static void addToDo(String details) throws DukeException{
-        if (details.length() == 0) {
+        if (details.trim().length() == 0) {
             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
         }
-        Task _todo = new Todo(details.trim());
-        actions.add(_todo);
-        printAddedTask(_todo);
+        Task todo = new Todo(details.trim());
+        actions.add(todo);
+        printAddedTask(todo);
     }
 
     public static void addDeadline(String details) throws DukeException {
-        String[] detailSplit = details.split(" /by ");
-        if (detailSplit.length == 0) {
+        String[] detailsSplit = details.split("/by");
+        if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
             throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
         }
-        if (detailSplit.length == 1) {
-            throw new DukeException("\u2639 OOPS!!! The description of a deadline requires a due date.");
+        if (detailsSplit.length < 2 || detailsSplit[1].trim().length() == 0) {
+            throw new DukeException("\u2639 OOPS!!! The description of a deadline requires a task and/or a due date");
         }
-        String action = detailSplit[0].trim();
-        String deadline = detailSplit[1].trim();
-        Task _deadline = new Deadline(action, deadline);
-        actions.add(_deadline);
-        printAddedTask(_deadline);
+        String action = detailsSplit[0].trim();
+        String deadline = detailsSplit[1].trim();
+        Task taskDeadline = new Deadline(action, deadline);
+        actions.add(taskDeadline);
+        printAddedTask(taskDeadline);
     }
 
     public static void addEvent(String details) throws DukeException{
-        String[] detailSplit = details.split( " /at ");
-        if (detailSplit.length == 0) {
+        String[] detailsSplit = details.split( "/at");
+        if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
             throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
         }
-        if (detailSplit.length == 1) {
-            throw new DukeException("\u2639 OOPS!!! The description of an event requires a timing.");
+        if (detailsSplit.length < 2 || detailsSplit[1].trim().length() == 0) {
+            throw new DukeException("\u2639 OOPS!!! The description of an event requires a task and/or a scheduled time");
         }
-        String event = detailSplit[0].trim();
-        String timing = detailSplit[1].trim();
-        Task _event = new Event(event, timing);
-        actions.add(_event);
-        printAddedTask(_event);
+        String event = detailsSplit[0].trim();
+        String timing = detailsSplit[1].trim();
+        Task taskEvent = new Event(event, timing);
+        actions.add(taskEvent);
+        printAddedTask(taskEvent);
     }
 
     public static void markAsDone(int index) {

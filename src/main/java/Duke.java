@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -20,6 +21,8 @@ public class Duke {
                     tasks.add(parseFileLine(fileSc.nextLine()));
                 } catch (DukeException e) {
                     dukePrint(e.toString());
+                } catch (ParseException e) {
+                    System.out.println("Invalid date format!");
                 }
             }
         } else {
@@ -124,6 +127,8 @@ public class Duke {
                 throw new DukeException();
             }
             writeToFile();
+        } catch (ParseException e) {
+            System.out.println("Invalid date format!");
         } catch (DukeException e) {
             dukePrint(e.toString());
         } finally {
@@ -139,7 +144,7 @@ public class Duke {
         bw.close();
     }
 
-    private Task parseFileLine(String line) throws DukeException {
+    private Task parseFileLine(String line) throws DukeException, ParseException {
         String[] arg = line.split("\t");
         if (arg.length < 3) {
             throw new DukeInvalidTaskFormatException(line);

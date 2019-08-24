@@ -1,15 +1,20 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DeadlineTask extends Task {
 
-    protected String by;
+    protected Date by;
 
-    public DeadlineTask(String description, String by) {
+    public DeadlineTask(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        this.by = format.parse(by);
     }
 
     @Override
     public String toFileString() {
-        return "T\t" + (this.isDone ? "1\t" : "0\t") + this.description + "\t" + this.by;
+        return "D\t" + (this.isDone ? "1\t" : "0\t") + this.description + "\t" + dateFormat.format(this.by) + "\n";
     }
 
     @Override

@@ -5,7 +5,7 @@ public class TodoTask extends Task {
 
     @Override
     public String toFileString() {
-        return "T\t" + (this.isDone ? "1\t" : "0\t") + this.description;
+        return "T\t" + (this.isDone ? "1\t" : "0\t") + this.description + "\n";
     }
 
     @Override

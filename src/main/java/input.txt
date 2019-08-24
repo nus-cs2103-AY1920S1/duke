@@ -1,7 +1,0 @@
-todo buy bread
-deadline submit project /by Thursday afternoon
-event lecture /at Friday 2pm
-hurhurhur
-done 2
-delete 3
-bye

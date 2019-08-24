@@ -12,4 +12,9 @@ public class Event extends TaskWithDate {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + TASK_WITH_DATE_FORMATTER.format(date) + ")";
     }
+
+    @Override
+    public String getTaskName() {
+        return "event";
+    }
 }

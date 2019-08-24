@@ -57,4 +57,10 @@ public abstract class Task {
     public String toString() {
         return getStatusWithDescription();
     }
+
+    /**
+     * Gets the task name, used by storage to identify tasks.
+     * @return String denoting task name e.g. todo, event, deadline. In low caps;
+     */
+    public abstract String getTaskName();
 }

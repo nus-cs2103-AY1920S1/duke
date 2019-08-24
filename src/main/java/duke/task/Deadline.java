@@ -14,4 +14,9 @@ public class Deadline extends TaskWithDate {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + TASK_WITH_DATE_FORMATTER.format(date) + ")";
     }
+
+    @Override
+    public String getTaskName() {
+        return "deadline";
+    }
 }

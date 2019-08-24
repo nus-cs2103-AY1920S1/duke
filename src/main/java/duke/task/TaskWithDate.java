@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TaskWithDate extends Task {
+public abstract class TaskWithDate extends Task {
     static final SimpleDateFormat TASK_WITH_DATE_FORMATTER = new SimpleDateFormat("dd 'of' MMMM yyyy, K:mma");
     static final SimpleDateFormat TASK_WITH_DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
     protected Date date;

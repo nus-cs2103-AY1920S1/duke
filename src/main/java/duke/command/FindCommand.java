@@ -28,7 +28,7 @@ public class FindCommand extends TextBasedCommand {
         for (int i = 0; i < taskList.size(); i++) {
             String taskDetails = taskList.get(i).toString();
             if (taskDetails.contains(remainingLine)) {
-                ui.println(i + "." + taskDetails);
+                ui.println((i + 1) + "." + taskDetails);
             }
         }
         ui.println("____________________________________________________________");

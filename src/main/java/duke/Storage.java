@@ -68,7 +68,7 @@ public class Storage {
             writer = new PrintWriter(path, "UTF-8");
             for (Task task : taskList) {
                 StringBuilder sb = new StringBuilder();
-                String taskCommand = task.getClass().getName().toLowerCase();
+                String taskCommand = task.getTaskName().toLowerCase();
                 sb.append(taskCommand)
                         .append("|")
                         .append(taskCommand)

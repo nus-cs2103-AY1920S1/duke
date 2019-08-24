@@ -1,5 +1,7 @@
-import java.util.*;
-import java.io.*;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.PrintStream;
 
 class DukeException extends Exception {}
 class InputUnknownException extends DukeException {}

@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.time.LocalTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,7 +25,7 @@ public class Duke {
         while (!str.equals("bye")) {
             try {
                 input(str);
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 System.out.println(lines);
                 System.err.println("    " + e.getMessage());
                 System.out.println(lines);
@@ -34,7 +37,7 @@ public class Duke {
         System.out.println(lines);
     }
 
-    public static void input(String str) throws DukeException {
+    public static void input(String str) throws Exception {
 
         String[] strArr = str.split(" ");
 
@@ -110,7 +113,15 @@ public class Duke {
                     throw new DukeException("OOPS!!! The date/time of deadline cannot be empty.");
                 }
 
-                t = new Deadline(str.substring(9, indexOfSlash - 1), str.substring(indexOfSlash + 4));
+                SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = parser.parse(ss2Arr[1]);
+
+                int intTime = Integer.parseInt(ss2Arr[2]);
+                int hour = intTime / 100;
+                int minute = intTime % 100;
+                LocalTime time = LocalTime.of(hour, minute);
+
+                t = new Deadline(str.substring(9, indexOfSlash - 1), date, time);
                 arr.add(t);
 
             } else { //event
@@ -135,7 +146,15 @@ public class Duke {
                     throw new DukeException("OOPS!!! The date/time of event cannot be empty.");
                 }
 
-                t = new Event(str.substring(6, indexOfSlash - 1), str.substring(indexOfSlash + 4));
+                SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = parser.parse(ss2Arr[1]);
+
+                int intTime = Integer.parseInt(ss2Arr[2]);
+                int hour = intTime / 100;
+                int minute = intTime % 100;
+                LocalTime time = LocalTime.of(hour, minute);
+
+                t = new Event(str.substring(6, indexOfSlash - 1), date, time);
                 arr.add(t);
 
             }

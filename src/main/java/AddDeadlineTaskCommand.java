@@ -6,13 +6,14 @@ class AddDeadlineTaskCommand extends AddCommand {
     }
 
     protected Task instantiateTask() {
-        final String[] deadlineArgs = command.split(" /by ");
-        final String deadlineDescription = deadlineArgs[0];
+        final String[] deadlineArgs = command.split("(?:\\A| )/by\\b ?");
+        final String deadlineDescription = deadlineArgs[0].stripTrailing();
         if (deadlineDescription.isEmpty()) {
             throw new EmptyTaskDescriptionException("The description of a deadline cannot be empty.");
         }
 
-        final LocalDateTime deadlineDue = LocalDateTime.parse(deadlineArgs[1], dateTimeFormatter);
+        final String deadlineDueText = deadlineArgs[1].stripLeading();
+        final LocalDateTime deadlineDue = LocalDateTime.parse(deadlineDueText, dateTimeFormatter);
 
         return new Deadline(deadlineDescription, deadlineDue);
     }

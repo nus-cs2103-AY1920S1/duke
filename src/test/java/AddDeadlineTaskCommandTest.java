@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -47,7 +46,6 @@ class AddDeadlineTaskCommandTest extends CommandTest {
     }
 
     @Test
-    @Disabled
     void addDeadlineMissingDateTime() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddDeadlineTaskCommand("a deadline to meet");
@@ -55,7 +53,6 @@ class AddDeadlineTaskCommandTest extends CommandTest {
     }
 
     @Test
-    @Disabled
     void addDeadlineBlankDateTime() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddDeadlineTaskCommand("a deadline to meet /by");

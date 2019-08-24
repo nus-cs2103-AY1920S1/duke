@@ -23,7 +23,8 @@ public class Deadline extends Task {
 
     @Override
     public Map<String, Object> toMap() {
-        return Map.of("type", "deadline", "description", this.description, "by", Duke.dateTimeFormatter.format(this.by), "is_done", this.isDone);
+        return Map.of("type", "deadline", "description", this.description,
+                "by", Duke.dateTimeFormatter.format(this.by), "is_done", this.isDone);
     }
 
     /**
@@ -35,7 +36,8 @@ public class Deadline extends Task {
      */
     public static Deadline fromJson(JSONObject json) throws JSONException {
         // TODO: make sure the type is deadline
-        Deadline rtn = new Deadline(json.getString("description"), LocalDateTime.from(Duke.dateTimeFormatter.parse(json.getString("by"))));
+        Deadline rtn = new Deadline(json.getString("description"),
+                LocalDateTime.from(Duke.dateTimeFormatter.parse(json.getString("by"))));
         rtn.isDone = json.getBoolean("is_done");
         return rtn;
     }

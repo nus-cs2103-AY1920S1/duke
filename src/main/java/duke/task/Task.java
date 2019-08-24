@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-abstract public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 

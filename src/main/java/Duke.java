@@ -149,6 +149,10 @@ public class Duke {
                 System.out.println(line);
                 System.out.println("     " + e.getMessage());
                 System.out.println(line);
+            } catch (InvalidTaskArgumentDukeException e) {
+                System.out.println(line);
+                System.out.println("     " + e.getMessage());
+                System.out.println(line);
             }
         }
 

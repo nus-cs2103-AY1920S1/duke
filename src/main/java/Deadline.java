@@ -14,7 +14,7 @@ public class Deadline extends Task {
     }
 
     public String getDate(){
-        return by;
+        return by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
     }
 
     @Override

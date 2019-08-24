@@ -17,6 +17,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load all tasks from storage.
+     *
+     * @return the list of tasks saved in the storage
+     */
     public TaskList loadTasks() throws FileNotFoundException, ParseException {
         TaskList tasks = new TaskList();
         File file = new File(this.filePath);
@@ -28,6 +33,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save all tasks into storage.
+     *
+     * @param tasks the list of tasks to be saved into storage
+     */
     public void saveTasks(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
         fileWriter.write(Parser.convertTasksToSavedText(tasks));

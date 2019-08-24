@@ -34,7 +34,7 @@ public class Storage {
         this.taskFormatters.add(new EventTaskFormatter());
     }
 
-    public ArrayList<Task> load() throws IOException, StorageException {
+    public ArrayList<Task> load() throws StorageException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner scanner = null;
 
@@ -67,27 +67,40 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasks) throws IOException, StorageException {
-        File file = new File(filePath);
-        file.getParentFile().mkdirs();
-        file.createNewFile();
-        FileWriter fw = new FileWriter(filePath, false);
-        for (Task task : tasks) {
-            String line = null;
-            for (TaskFormatter taskFormatter : this.taskFormatters) {
+    public void save(ArrayList<Task> tasks) throws StorageException {
+        FileWriter fileWriter = null;
+
+        try {
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            fileWriter = new FileWriter(filePath, false);
+            for (Task task : tasks) {
+                String line = null;
+                for (TaskFormatter taskFormatter : this.taskFormatters) {
+                    try {
+                        line = taskFormatter.format(task);
+                        break;
+                    } catch (TaskFormatException e) {
+
+                    }
+                }
+                if (line == null) {
+                    throw new StorageException("Unsupported task in tasks list.");
+                }
+                fileWriter.write(line + "\n");
+            }
+        } catch (IOException e) {
+            throw new StorageException("Error writing to file.");
+        } finally {
+            if (fileWriter != null) {
                 try {
-                    line = taskFormatter.format(task);
-                    break;
-                } catch (TaskFormatException e) {
-                    
+                    fileWriter.close();
+                } catch (IOException e) {
+                    throw new StorageException("Error closing file.");
                 }
             }
-            if (line == null) {
-                throw new StorageException("Unsupported task in tasks list.");
-            }
-            fw.write(line + "\n");
         }
-        fw.close();         
     }
 
 }

@@ -1,10 +1,13 @@
 import java.util.Scanner;
 
 public class Duke {
+    private static final String filePath = "C:/Users/jxken/Desktop/Github/duke/data/duke.txt";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
-        CommandHandler commandHandler = new CommandHandler(tasks);
+        LocalStorage storage = new LocalStorage(filePath);
+        CommandHandler commandHandler = new CommandHandler(tasks, storage);
 
         OutputUtilities.sayHi();
 

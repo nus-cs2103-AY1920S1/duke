@@ -2,6 +2,7 @@ public class Event extends Task {
 
     public Event(String taskName, String at) {
         super(taskName);
+        this.taskType = TypeOfTask.EVENT;
         this.prefix = "[E]";
         this.details = "(at: " + at + ")";
     }

@@ -10,12 +10,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    protected String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    @Override
     protected String getTypeSymbol() {
         return "[D]";
     }
 
     @Override
-    protected String getAdditionalInfo() {
+    protected String displayAdditionalInfo() {
         return String.format("(by: %s)", additionalInfo);
     }
 

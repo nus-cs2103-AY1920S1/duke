@@ -10,12 +10,17 @@ public class Event extends Task {
     }
 
     @Override
+    protected String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    @Override
     protected String getTypeSymbol() {
         return "[E]";
     }
 
     @Override
-    protected String getAdditionalInfo() {
+    protected String displayAdditionalInfo() {
         return String.format("(at: %s)", additionalInfo);
     }
 }

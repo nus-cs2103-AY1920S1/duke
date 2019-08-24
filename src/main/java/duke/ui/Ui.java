@@ -1,11 +1,15 @@
-package ui;
+package duke.ui;
 
 import java.util.Scanner;
 
 public class Ui {
-  private Scanner reader = new Scanner(System.in);
+  private Scanner reader;
 
-  public static void showWelcome() {
+  public Ui() {
+    reader = new Scanner(System.in);
+  }
+
+  public void showWelcome() {
     System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
   }
 
@@ -13,11 +17,15 @@ public class Ui {
     return reader.nextLine();
   }
 
-  public void showLine() {
-
+  public static void printLine(String line) {
+    System.out.println(line);
   }
 
-  public static void showError(String err) {
+  public void showError(String err) {
     System.out.println(err);
+  }
+
+  public void showLoadingError() {
+    System.out.println("You have not stored any tasks!");
   }
 }

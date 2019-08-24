@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.util.Calendar;
 
 public class Deadlines extends Task {
   private Calendar datetime = Calendar.getInstance();
   private String datetimeString;
 
-  Deadlines(String name, String datetime) {
+  public Deadlines(String name, String datetime) {
     this(name, datetime, false);
   }
 

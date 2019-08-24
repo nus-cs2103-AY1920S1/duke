@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.util.Calendar;
 
 public class Event extends Task {
   private Calendar datetime = Calendar.getInstance();
   private String datetimeString;
 
-  Event(String name, String datetime) {
+  public Event(String name, String datetime) {
     this(name, datetime, false);
   }
 

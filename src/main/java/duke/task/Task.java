@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
   private String name;
   private boolean done;
@@ -19,20 +21,20 @@ public abstract class Task {
     return this.done;
   }
 
-  void setDone() {
+  public void setDone() {
     this.done = true;
     System.out.println("Nice! I've marked this task as done: ");
     System.out.println("  " + this.toString());
   }
 
-  abstract String storageString();
+  public abstract String storageString();
 
   @Override
   public String toString() {
     return ("[" + (this.done ? "✓" : "✗") + "]" + " " + this.name);
   }
 
-  static Task taskMaker(String[] arr) {
+  public static Task taskMaker(String[] arr) {
     String type = arr[0];
     boolean done = arr[1].equals("1");
     String name = arr[2];
@@ -52,5 +54,4 @@ public abstract class Task {
     }
     return task;
   }
-
 }

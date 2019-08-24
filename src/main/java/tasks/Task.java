@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -12,6 +14,10 @@ public class Task {
         return (isDone ? "+" : "-"); //return tick or X symbols
     }
 
+    public boolean getStatus(){
+        return isDone;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -22,5 +28,9 @@ public class Task {
 
     public String toString() {
         return "["+this.getStatusIcon()+"] "+this.getDescription();
+    }
+
+    public String writer() {
+        return "This is a task";
     }
 }

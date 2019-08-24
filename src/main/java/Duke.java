@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Duke {
 
@@ -17,7 +16,7 @@ public class Duke {
     private static List<Task> taskList = new ArrayList<>();
     private static File file;
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException, IOException, ParseException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -177,6 +176,8 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n" +
                     "     one argument after the keyword %s.\n", "/by");
+        } catch (ParseException e) {
+            System.out.print("     ☹ OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\"\n");
         }
     }
 
@@ -219,7 +220,11 @@ public class Duke {
         return newTask;
     }
 
-    private static Task addNewDeadline(String taskName, String additionalInfo, boolean isDone) {
+    private static Task addNewDeadline(String taskName, String additionalInfo, boolean isDone)
+            throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sdf.parse(additionalInfo));
         Task newTask = new Deadline(taskName, additionalInfo);
         if (isDone) {
             newTask.setDone();
@@ -237,7 +242,8 @@ public class Duke {
         System.out.printf("     Now you have %d tasks in the list.\n", taskList.size());
     }
 
-    private static void loadData() throws FileNotFoundException {
+
+    private static void loadData() throws FileNotFoundException, ParseException {
         file = new File(ROOT + "/data/duke.txt");
         if (file.exists()) {
             Scanner sc = new Scanner(file);

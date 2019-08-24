@@ -1,4 +1,4 @@
-public class InvalidDeadlineException extends Exception {
+public class InvalidDeadlineException extends DukeException {
 
     public String message;
 
@@ -7,7 +7,7 @@ public class InvalidDeadlineException extends Exception {
     }
 
     public String toString() {
-        return "☹ OOPS!!! " + message;
+        return "OOPS!!! " + message;
     }
 
 }

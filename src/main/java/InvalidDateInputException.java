@@ -1,4 +1,4 @@
-public class InvalidDateInputException extends Exception {
+public class InvalidDateInputException extends DukeException {
 
     private String message;
 
@@ -7,6 +7,6 @@ public class InvalidDateInputException extends Exception {
     }
 
     public String toString() {
-        return "☹ OOPS!!! " + this.message;
+        return "OOPS!!! " + this.message;
     }
 }

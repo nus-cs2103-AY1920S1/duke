@@ -4,11 +4,15 @@ public class ToDoTask extends Task {
         super(todo);
     }
 
+    public ToDoTask(String todo, boolean isCompleted) {
+        super(todo, isCompleted);
+    }
+
     public String toString() {
-        if (completed) {
-            return  String.format("[T}[✓] %s", this.todo);
+        if (isCompleted) {
+            return  String.format("[T][Y] %s", this.todo);
         } else {
-            return  String.format("[T}[✗] %s", this.todo);
+            return  String.format("[T][N] %s", this.todo);
         }
     }
 

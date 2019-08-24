@@ -7,11 +7,16 @@ public class EventTask extends Task {
         this.time = time;
     }
 
+    public EventTask(String todo, boolean isCompleted, String time) {
+        super(todo, isCompleted);
+        this.time = time;
+    }
+
     public String toString() {
-        if (completed) {
-            return  String.format("[E}[✓] %s (at: %s)", this.todo, this.time);
+        if (isCompleted) {
+            return  String.format("[E][Y] %s (at: %s)", this.todo, this.time);
         } else {
-            return  String.format("[E}[✗] %s (at: %s)", this.todo, this.time);
+            return  String.format("[E][N] %s (at: %s)", this.todo, this.time);
         }
     }
 }

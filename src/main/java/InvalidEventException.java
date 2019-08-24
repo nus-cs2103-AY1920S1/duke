@@ -1,4 +1,4 @@
-public class InvalidEventException extends Exception {
+public class InvalidEventException extends DukeException {
 
     public String message;
 
@@ -7,7 +7,7 @@ public class InvalidEventException extends Exception {
     }
 
     public String toString() {
-        return "☹ OOPS!!! " + message;
+        return "OOPS!!! " + message;
     }
 
 }

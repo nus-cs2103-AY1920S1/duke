@@ -1,17 +1,22 @@
 public class Task {
     public String todo;
-    public boolean completed;
+    public boolean isCompleted;
 
     public Task(String todo) {
         this.todo = todo;
-        this.completed = false;
+        this.isCompleted = false;
+    }
+
+    public Task(String todo, boolean isCompleted) {
+        this.todo = todo;
+        this.isCompleted = isCompleted;
     }
 
     public String toString() {
-        if (completed) {
-            return "[✓] " + this.todo;
+        if (isCompleted) {
+            return "[Y] " + this.todo;
         } else {
-            return "[✗] " + this.todo;
+            return "[N] " + this.todo;
         }
     }
 }

@@ -1,7 +1,7 @@
-public class InvalidToDoException extends Exception {
+public class InvalidToDoException extends DukeException {
 
     public String toString() {
-        return "☹ OOPS!!! The description of a todo cannot be empty";
+        return "OOPS!!! The description of a todo cannot be empty";
     }
 
 }

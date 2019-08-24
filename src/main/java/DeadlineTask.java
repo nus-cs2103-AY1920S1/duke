@@ -7,11 +7,16 @@ public class DeadlineTask extends Task{
         this.deadline = deadline;
     }
 
+    public DeadlineTask(String todo, boolean isCompleted, String deadline) {
+        super(todo, isCompleted);
+        this.deadline = deadline;
+    }
+
     public String toString() {
-        if (completed) {
-            return  String.format("[D}[✓] %s (by: %s)", this.todo, this.deadline);
+        if (isCompleted) {
+            return  String.format("[D][Y] %s (by: %s)", this.todo, this.deadline);
         } else {
-            return  String.format("[D}[✗] %s (by: %s)", this.todo, this.deadline);
+            return  String.format("[D][N] %s (by: %s)", this.todo, this.deadline);
         }
     }
 }

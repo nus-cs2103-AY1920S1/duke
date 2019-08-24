@@ -9,7 +9,7 @@ public class DateParser {
     private String input;
     private Calendar calendar = Calendar.getInstance();
 
-    public DateParser(String input) {
+    public void readInput(String input) {
         this.input = input;
     }
 
@@ -109,7 +109,6 @@ public class DateParser {
             String month = monthToString(calendar.get(Calendar.MONTH));
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            System.out.println(hour);
             int minutes = calendar.get(Calendar.MINUTE);
             return String.format("%02d of %s %d %s", day, month, year, timeToString(hour, minutes,
                     (input.split(" "))[1]));

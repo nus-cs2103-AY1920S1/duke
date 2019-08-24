@@ -1,211 +1,49 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.FileWriter;
+import java.util.Date;
 
 public class Duke {
 
-    public static ArrayList<Task> tasks = new ArrayList<>(); // changed data structure
+    Storage storage;
+    TaskList taskList;
+    Ui ui;
+    DataParser parser;
+    DateParser dateHelper;
 
     public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
 
-        Scanner sc = new Scanner(System.in);
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        parser = new DataParser();
+        dateHelper = new DateParser();
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
+    }
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        sendLine();
-        sendGreeting();
-        sendLine();
-
+    public void run() {
+        ui.sendGreeting();
         boolean hasTerminated = false;
 
         while (!hasTerminated) {
+            if (!parser.hasAnymoreData()) {
+                break;
+            }
+
             try {
-                String input = sc.nextLine();
-                if (input.equals("bye")) {
-                    hasTerminated = true;
-                } else if (input.equals("list")) {
-                    sendLine();
-                    sendTasks();
-                    sendLine();
-                } else if (input.startsWith("done")) {
-                    String[] parsedData = input.split(" ");
-                    if (parsedData.length < 2) {
-                        throw new InvalidTaskIndexException();
-                    } else {
-                        String todoIndex = parsedData[1];
-                        completeTask(todoIndex);
-                    }
-                } else if (input.startsWith("delete")) {
-                    String[] parsedData = input.split(" ");
-                    if (parsedData.length < 2) {
-                        throw new InvalidTaskIndexException();
-                    } else {
-                        String todoIndex = parsedData[1];
-                        deleteTask(todoIndex);
-                    }
-                } else {
-                    if (input.startsWith("todo")) {
-                        if (tasks.size() >= 100) {
-                            throw new TooManyTasksException();
-                        }
-                        addTodoTask(input.substring(4));
-                    } else if (input.startsWith("deadline")) {
-                        if (tasks.size() >= 100) {
-                            throw new TooManyTasksException();
-                        }
-                        addDeadlineTask(input.substring(8));
-                    } else if (input.startsWith("event")) {
-                        if (tasks.size() >= 100) {
-                            throw new TooManyTasksException();
-                        }
-                        addEventTask(input.substring(5));
-                    } else {
-                        throw new UnknownCommandException();
-                    }
-                }
-            } catch (Exception error) {
-                sendLine();
-                sendMessage(error.toString());
-                sendLine();
-            }
-
-            writeToFile();
-        }
-
-        sendLine();
-        sendFarewell();;
-        sendLine();
-    }
-
-    public static void addTodoTask(String todo) throws InvalidToDoException {
-        if (todo.trim().equals("")) {
-            throw new InvalidToDoException();
-        }
-        ToDoTask newTask = new ToDoTask(todo.trim());
-        tasks.add(newTask);
-        sendLine();
-        sendMessage("Got it. I've added this task: ");
-        sendMessage("  " + newTask);
-        sendMessage("Now you have " + tasks.size() + " tasks in the list");
-        sendLine();
-    }
-
-    public static void addDeadlineTask(String todo) throws Exception {
-        if (todo.trim().equals("")) {
-            throw new InvalidDeadlineException("The description of a deadline cannot be empty.");
-        } else if (!todo.trim().contains("/by")) {
-            throw new InvalidDeadlineException("Please include the time of a deadline.");
-        }
-        String[] taskData = todo.trim().split(" /by ");
-        if (taskData.length == 1) {
-            throw new InvalidDeadlineException("The time of a deadline cannot be empty.");
-        }
-        DateParser parser = new DateParser(taskData[1]);
-        String dateOutput = parser.convertDateToString();
-        DeadlineTask newTask = new DeadlineTask(taskData[0], dateOutput);
-        tasks.add(newTask);
-        sendLine();
-        sendMessage("Got it. I've added this task: ");
-        sendMessage("  " + newTask);
-        sendMessage("Now you have " + tasks.size() + " tasks in the list");
-        sendLine();
-    }
-
-    public static void addEventTask(String todo)throws Exception {
-        if (todo.trim().equals("")) {
-            throw new InvalidEventException("The description of an event cannot be empty.");
-        } else if (!todo.trim().contains("/at")) {
-            throw new InvalidEventException("Please include the time of an event.");
-        }
-        String[] taskData = todo.trim().split(" /at ");
-        if (taskData.length == 1) {
-            throw new InvalidEventException("The time of an event cannot be empty.");
-        }
-        DateParser parser = new DateParser(taskData[1]);
-        String dateOutput = parser.convertDateToString();
-        EventTask newTask = new EventTask(taskData[0], dateOutput);
-        tasks.add(newTask);
-        sendLine();
-        sendMessage("Got it. I've added this task: ");
-        sendMessage("  " + newTask);
-        sendMessage("Now you have " + tasks.size() + " tasks in the list");
-        sendLine();
-    }
-
-    public static void completeTask(String todoIndex) throws InvalidTaskIndexException {
-        int index = Integer.parseInt(todoIndex) - 1;
-        if (index < 0 || index >= tasks.size()) {
-            throw new InvalidTaskIndexException();
-        } else {
-            Task task = tasks.get(index);
-            task.completed = true;
-            sendLine();
-            sendMessage("Nice! I've marked this task as done:");
-            sendMessage("  " + task.toString());
-            sendLine();
-        }
-    }
-
-    public static void deleteTask(String todoIndex) throws InvalidTaskIndexException {
-        int index = Integer.parseInt(todoIndex) - 1;
-        if (index < 0 || index >= tasks.size()) {
-            throw new InvalidTaskIndexException();
-        } else {
-            Task task = tasks.get(index);
-            tasks.remove(index);
-            sendLine();
-            sendMessage("Noted. I've removed this task: ");
-            sendMessage("  " + task.toString());
-            sendMessage("Now you have " +  tasks.size() + " tasks in the list.");
-            sendLine();
-        }
-    }
-
-    public static void sendTasks() {
-        sendMessage("Here are the tasks in your list:");
-        for (int tasknum = 0; tasknum < tasks.size(); tasknum ++) {
-            Task task = tasks.get(tasknum);
-            String todo = task.toString();
-            if (task.completed) {
-                sendMessage((tasknum + 1) + "." + todo);
-            } else {
-                sendMessage((tasknum + 1) + "." + todo);
+                parser.readInput();
+                Command c = parser.findCommand();
+                hasTerminated = c.isExit;
+                c.execute(taskList, ui, storage, parser, dateHelper);
+            } catch (DukeException error) {
+                ui.sendErrorMessage(error);
             }
         }
+        ui.sendFarewell();;
     }
 
-    public static void sendLine() {
-        System.out.println("____________________________________________________________");
-    }
-
-    public static void sendGreeting() {
-        System.out.println(" Hello! I'm Duke");
-        System.out.println(" What can I do for you?");
-    }
-
-    public static void sendFarewell() {
-        System.out.println(" Bye. Hope to see you again soon!");
-    }
-
-    public static void sendMessage(String input) {
-        System.out.println(" " + input);
-    }
-
-    public static void writeToFile() {
-        try {
-            FileWriter writer = new FileWriter("output.txt");
-            for (int i = 0; i < tasks.size(); i ++) {
-                writer.write(tasks.get(i).toString());
-                writer.write("\n");
-            }
-            writer.close();
-        } catch (Exception e) {
-
-        }
-    }
 }

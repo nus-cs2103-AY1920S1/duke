@@ -1,7 +1,7 @@
-public class InvalidTaskIndexException extends Exception {
+public class InvalidTaskIndexException extends DukeException {
 
     public String toString() {
-        return "☹ OOPS!!! Please key in a valid task index!";
+        return "OOPS!!! Please key in a valid task index!";
     }
 
 }

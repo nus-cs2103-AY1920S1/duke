@@ -4,22 +4,19 @@ import java.util.ArrayList;
 public class Duke {
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+		printLogo();
+		greetUser();
 
-        greetUser();
+		ArrayList<Task> tasks = new ArrayList<Task>();
+		Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+		readAndExecuteCommands(scanner, tasks);
+	}
 
-        Scanner scanner = new Scanner(System.in);
-
+	public static void readAndExecuteCommands(Scanner scanner, ArrayList<Task> tasks) {
         while (scanner.hasNextLine()) {
             try {
-                String command = scanner.nextLine();
+                String command = scanner.nextLine().replaceAll("\\s+", " ");;
                 if (command.equals("bye")) {
                     exit();
                     scanner.close();
@@ -32,6 +29,9 @@ public class Duke {
                         throw new DukeException("\u2639 OOPS!!! Please specify a task to delete.");
                     }
                     int index = Integer.parseInt(commandSplit[1]);
+                    if (index > tasks.size()) {
+                    	throw new DukeException("\u2639 OOPS!!! There is no such task in the list to delete.");
+					}
                     delete(index, tasks);
                 } else if (command.startsWith("done")) {
                     String[] commandSplit = command.split(" ");
@@ -39,6 +39,9 @@ public class Duke {
                         throw new DukeException("\u2639 OOPS!!! Please specify the task that has been done.");
                     }
                     int index = Integer.parseInt(commandSplit[1]);
+                    if (index > tasks.size()) {
+                    	throw new DukeException("\u2639 OOPS!!! There is no such task in the list to mark as done.");
+					}
                     done(index, tasks);
                 } else {
                     addTask(command, tasks);
@@ -52,6 +55,15 @@ public class Duke {
             }
         }
     }
+
+    public static void printLogo() {
+		String logo = " ____        _        \n"
+				+ "|  _ \\ _   _| | _____ \n"
+				+ "| | | | | | | |/ / _ \\\n"
+				+ "| |_| | |_| |   <  __/\n"
+				+ "|____/ \\__,_|_|\\_\\___|\n";
+		System.out.println("Hello from\n" + logo);
+	}
 
     public static void greetUser() {
         printLine();
@@ -76,8 +88,8 @@ public class Duke {
         System.out.println("\t Noted. I've removed this task:");
         System.out.print("\t \t");
         System.out.println(deletedTask);
-        System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the " +
-                "list.");
+        System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ")
+                + "in the " + "list.");
         printLine();
     }
 
@@ -92,23 +104,22 @@ public class Duke {
     }
 
     public static void addTask(String command, ArrayList<Task> tasks) throws DukeException {
-        printLine();
         Task newTask;
         if (command.startsWith("todo")) {
-            String taskDetailsString = command.replaceFirst("todo", "").trim();
-            if (taskDetailsString.length() == 0) {
+            String taskDetailsString = command.replaceFirst("todo", "");
+            if (taskDetailsString.trim().length() == 0) {
                 throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
-            newTask = new ToDo(taskDetailsString);
+            newTask = new Todo(taskDetailsString);
         } else {
             String[] taskDetails;
             if (command.startsWith("deadline")) {
                 String taskDetailsString = command.replaceFirst("deadline", "");
-                if (taskDetailsString.length() == 0) {
+				taskDetails = taskDetailsString.split("/by");
+                if (taskDetailsString.length() == 0 || taskDetails[0].trim().length() == 0) {
                     throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
                 }
-                taskDetails = taskDetailsString.split("/by");
-                if (taskDetails.length < 2) {
+                if (taskDetails.length < 2 || taskDetails[1].trim().length() == 0) {
                     throw new DukeException("\u2639 OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 String taskDescription = taskDetails[0].trim();
@@ -116,25 +127,26 @@ public class Duke {
                 newTask = new Deadline(taskDescription, taskSpecifics);
             } else if (command.startsWith("event")){
                 String taskDetailsString = command.replaceFirst("event", "");
-                if (taskDetailsString.length() == 0) {
-                    throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
-                }
-                taskDetails = taskDetailsString.split("/at");
-                String taskDescription = taskDetails[0].trim();
-                String taskSpecifics = taskDetails[1].trim();
-                if (taskDetails.length < 2) {
+				taskDetails = taskDetailsString.split("/at");
+                if (taskDetailsString.length() == 0 || taskDetails[0].trim().length() == 0) {
+					throw new DukeException("\u2639 OOPS!!! The description of an event cannot be empty.");
+				}
+                if (taskDetails.length < 2 || taskDetails[1].trim().length() == 0) {
                     throw new DukeException("\u2639 OOPS!!! The date/time of an event cannot be empty.");
                 }
+				String taskDescription = taskDetails[0].trim();
+				String taskSpecifics = taskDetails[1].trim();
                 newTask = new Event(taskDescription, taskSpecifics);
             } else {
                 throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
         tasks.add(newTask);
+		printLine();
         System.out.println("\t Got it. I've added this task:");
         System.out.println("\t \t " + newTask);
-        System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ") + "in the " +
-                "list.");
+        System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ")
+                + "in the " + "list.");
         printLine();
     }
 

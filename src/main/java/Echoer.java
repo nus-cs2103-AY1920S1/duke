@@ -1,16 +1,16 @@
 public class Echoer {
-    
+
     private static String formatMessage(String message) {
         return "     " + message + "\n";
     }
 
     static void echo(String... messages) {
         String border = "    ____________________________________________________________\n";
-        String toEcho = border;
+        StringBuilder toEcho = new StringBuilder(border);
         for (String message : messages) {
-            toEcho += formatMessage(message);
+            toEcho.append(formatMessage(message));
         }
-        toEcho += border;
+        toEcho.append(border);
         System.out.println(toEcho);
     }
 

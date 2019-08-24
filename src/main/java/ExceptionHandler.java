@@ -1,15 +1,10 @@
 public class ExceptionHandler {
-    private Echoer echoer;
 
-    ExceptionHandler(Echoer echoer) {
-        this.echoer = echoer;
+    static void handleKnownException(JermiException e) {
+        Echoer.echo(e.getMessage());
     }
 
-    void handleKnownException(JermiException e) {
-        this.echoer.echo(e.getMessage());
-    }
-
-    void handleUnknownException(Exception e) {
+    static void handleUnknownException(Exception e) {
         e.printStackTrace();
     }
 }

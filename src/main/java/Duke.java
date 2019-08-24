@@ -1,41 +1,47 @@
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";
+    private static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";
+    private Storage storage;
+    private TaskList tasks;
 
-    public static void main(String[] args) {
+    public Duke() {
+        storage = new Storage(LIST_PATH);
+        try {
+            tasks = new TaskList(storage.load());
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("create Duke exception and handle this");
+        }
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
-        File planner = new File(LIST_PATH);
-        setPlannerPermissions(planner);
-        ItemsList itemsList = new ItemsList(planner);
-        greetings(itemsList);
-
-        //Events that change list: mark as done, to-do, events, and deadlines, and deletions
+        greetings(tasks);
         while (sc.hasNext()) {
             String command = sc.next();
             if (command.equals("list")) {
-                itemsList.printList();
+                tasks.printList();
             } else if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (command.equals("done")) {
                 int itemIndex = sc.nextInt();
-                Task task = itemsList.getTaskAtIndex(itemIndex - 1);
-                task.markAsDone();
-                writeListToFile(planner, itemsList);
+                tasks.markIndexedTaskAsDone(itemIndex);
+                storage.writeListToFile(tasks);
             } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) { // new item
-                addNewItem(command, sc, itemsList, planner);
+                Task task = addNewItem(command, sc, tasks);
+                storage.addTaskToFile(task);
             } else if (command.equals("delete")) {
                 int itemIndex = sc.nextInt();
-                itemsList.deleteTask(itemIndex);
-                writeListToFile(planner, itemsList);
+                tasks.deleteTask(itemIndex);
+                storage.writeListToFile(tasks);
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 sc.nextLine();
@@ -43,11 +49,15 @@ public class Duke {
         }
     }
 
-    private static void addNewItem(String command, Scanner sc, ItemsList itemsList, File planner) {
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    private static Task addNewItem(String command, Scanner sc, TaskList taskList) {
         String item = sc.nextLine().trim();
         if (item.equals("")) {
             System.out.printf("☹ OOPS!!! The description of a %s cannot be empty.\n", command);
-            return;
+            return null;
         }
         Task task;
         if (command.equals("todo")) {
@@ -60,66 +70,29 @@ public class Duke {
             }
             catch (ArrayIndexOutOfBoundsException ex) {
                 System.out.println("Invalid deadline input");
-                return;
+                return null;
             }
         } else if (command.equals("event")) {
             try {
-                String[] itemsSlashTiming = item.split("/");
-                String timing = itemsSlashTiming[1].substring(3);
-                task = new Event(itemsSlashTiming[0].trim(), timing);
+                String[] tasksSlashTiming = item.split("/");
+                String timing = tasksSlashTiming[1].substring(3);
+                task = new Event(tasksSlashTiming[0].trim(), timing);
             } catch (ArrayIndexOutOfBoundsException ex) {
                 System.out.println("Invalid event input");
-                return;
+                return null;
             }
         } else {
             System.out.println("Task type can only be of type todo, deadline or event");
-            return;
+            return null;
         }
-        itemsList.addItem(task);
-        appendToFile(planner, task.toString());
+        taskList.addItem(task);
+        return task;
     }
 
-    private static void appendToFile(File file, String textToAppend) {
-        try {
-            FileWriter fw = new FileWriter(file, true); // create a FileWriter in append mode
-            fw.write(textToAppend + "\n");
-            fw.close();
-        }
-        catch (IOException ex) {
-            System.out.println(ex);
-        }
-    }
-
-    private static void greetings(ItemsList itemsList) {
+    private static void greetings(TaskList taskList) {
         System.out.println("Hello! I am Jeong's Slave");
-        itemsList.printList();
+        taskList.printList();
         System.out.println("What can I do for you?");
     }
 
-    private static void setPlannerPermissions(File planner) {
-        planner.setExecutable(true);
-        planner.setWritable(true);
-        planner.setWritable(true);
-    }
-
-    private static void writeStringToFile(File file, String textToAdd) {
-        try {
-            FileWriter fw = new FileWriter(file); //creates FileWriter in overwrite mode
-            fw.write(textToAdd + "\n");
-            fw.close();
-        }
-        catch (IOException ex) {
-            System.out.println(ex);
-        }
-    }
-
-    private static void writeListToFile(File file, ItemsList itemsList) {
-        StringBuilder sb = new StringBuilder();
-        ArrayList<Task> items = itemsList.getItemsList();
-        for (Task task : items) {
-            sb.append(task);
-            sb.append("\n");
-        }
-        writeStringToFile(file, sb.toString().trim());
-    }
 }

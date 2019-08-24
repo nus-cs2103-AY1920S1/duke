@@ -1,4 +1,5 @@
 T | - | go the gym 
-D | - | do homework | 2pm
-D | - | finish netflix | 23rd of February 2019, 7.00pm
-E | - | go fishing with friends | Marina Bay from 2 to 4
+D | + | finish netflix | 23rd of February 2019, 7.00pm
+T | - | jump 
+T | - | go to school 
+T | - | run

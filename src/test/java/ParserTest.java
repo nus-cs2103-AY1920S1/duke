@@ -5,6 +5,13 @@ import org.junit.jupiter.api.Test;
 class ParserTest {
 
     @Test
+    void invalidCommand() {
+        Assertions.assertThrows(UnknownCommandException.class, () -> {
+            Parser.parse("not a valid command");
+        });
+    }
+
+    @Test
     void byeInput() {
         String input = "bye";
         Class expected = ExitCommand.class;

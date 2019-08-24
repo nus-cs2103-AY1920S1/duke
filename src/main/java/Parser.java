@@ -9,7 +9,8 @@ public class Parser {
             "delete", DeleteCommand.class,
             "todo", AddTodoTaskCommand.class,
             "deadline", AddDeadlineTaskCommand.class,
-            "event", AddEventTaskCommand.class
+            "event", AddEventTaskCommand.class,
+            "find", FindTaskCommand.class
     );
     private static final Pattern COMMAND_PARSER = Pattern.compile("\\A(?<command>\\S+)(?: (?<args>.+))?\\z");
 

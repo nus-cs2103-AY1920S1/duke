@@ -1,10 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAccessor;
+
+import static java.time.temporal.ChronoField.*;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) throws DukeException{
+    public Task(String description) throws DukeException {
         this.description = description.trim();
-        if(this.description.isBlank())
+        if (this.description.isBlank())
             throw new EmptyFieldDukeException("description", this.childClass());
         this.isDone = false;
     }
@@ -25,7 +34,20 @@ public abstract class Task {
 
     abstract protected String childClass();
 
-    public static Task parseTask(String str) throws DukeException{
+    protected static DateTimeFormatter inDTF() {
+        LocalDateTime dt = LocalDateTime.now();
+        return new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .appendPattern("[MMMM][MMM][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ ]['T'][HH[':']mm]")
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .parseDefaulting(ChronoField.YEAR_OF_ERA, dt.getYear())
+                .parseDefaulting(MONTH_OF_YEAR, dt.getMonthValue())
+                .parseDefaulting(ChronoField.DAY_OF_MONTH, dt.getDayOfMonth())
+                .toFormatter();
+    }
+
+    public static Task parseTask(String str) throws DukeException {
         if (str.startsWith("deadline")) {
             String[] temp = str.substring(8).split(" /by ");
             if (temp.length < 1 || temp[0].isBlank())
@@ -49,51 +71,57 @@ public abstract class Task {
     }
 }
 
-class Deadline extends Task{
+class Deadline extends Task {
 
-    protected String by;
+    private LocalDateTime by;
+    private static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");
 
-    public Deadline(String description, String by) throws DukeException{
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by.trim();
-        if(this.by.isBlank())
-            throw new EmptyFieldDukeException("time", this.childClass());
+        try {
+            this.by = LocalDateTime.parse(by.trim(), super.inDTF());
+        } catch (DateTimeParseException e) {
+            throw new DateTimeParseDukeException();
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")\n";
+        return "[D]" + super.toString() + " (by: " + this.by.format(outDTF) + ")\n";
     }
 
-    protected String childClass(){
+    protected String childClass() {
         return "deadline";
     }
 }
 
 class Event extends Task {
 
-    protected String at;
+    private LocalDateTime at;
+    private static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");;
 
-    public Event(String description, String at) throws DukeException{
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at.trim();
-        if(this.at.isBlank())
-            throw new EmptyFieldDukeException("time", this.childClass());
+        try {
+            this.at = LocalDateTime.parse(at.trim(), super.inDTF());
+        } catch (DateTimeParseException e) {
+            throw new DateTimeParseDukeException();
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")\n";
+        return "[E]" + super.toString() + " (at: " + this.at.format(outDTF) + ")\n";
     }
 
-    protected String childClass(){
+    protected String childClass() {
         return "event";
     }
 }
 
 class Todo extends Task {
 
-    public Todo(String description) throws DukeException{
+    public Todo(String description) throws DukeException {
         super(description);
     }
 
@@ -102,7 +130,7 @@ class Todo extends Task {
         return "[T]" + super.toString() + '\n';
     }
 
-    protected String childClass(){
+    protected String childClass() {
         return "todo";
     }
 }

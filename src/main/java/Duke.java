@@ -1,25 +1,28 @@
 package com.leeyiyuan;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.io.IOException;
 
-import com.leeyiyuan.task.Task;
-import com.leeyiyuan.task.TodoTask;
+import com.leeyiyuan.DukeException;
+import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.task.DeadlineTask;
 import com.leeyiyuan.task.EventTask;
-import com.leeyiyuan.DukeException;
+import com.leeyiyuan.task.Task;
+import com.leeyiyuan.task.TodoTask;
 
 public class Duke {
 
-    public static void main(String[] args) throws DukeException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public static void main(String[] args) {
+        try {
+            Storage storage = new Storage("/home/leeyiyuan/Projects/duke/data/duke.txt");
+            ArrayList<Task> tasks = storage.load();
 
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            try {
+            System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
+            Scanner scanner = new Scanner(System.in);
+            while (scanner.hasNextLine()) {
                 boolean hasAddedTask = false;
                 Task addedTask = null;
                 String input = scanner.nextLine();
@@ -45,6 +48,7 @@ public class Duke {
                         System.out.println(String.format(
                                     "Nice! I've marked this task as done:\n%s",
                                     task.toString()));
+                        storage.save(tasks);
                     } else {
                         throw new DukeException("Invalid item selected.");
                     }
@@ -56,6 +60,7 @@ public class Duke {
                     tasks.add(task);
                     hasAddedTask = true;
                     addedTask = task;
+                    storage.save(tasks);
                 } else if (Pattern.matches("deadline ?/by.*", input)) {
                     throw new DukeException("The description of a deadline cannot be empty.");
                 } else if (Pattern.matches("deadline .+ /by ?", input)) {
@@ -68,6 +73,7 @@ public class Duke {
                     tasks.add(task);
                     hasAddedTask = true;
                     addedTask = task;
+                    storage.save(tasks);
                 } else if (Pattern.matches("event ?/at.*", input)) {
                     throw new DukeException("The description of an event cannot be empty.");
                 } else if (Pattern.matches("event .+ /at ?", input)) {
@@ -80,6 +86,7 @@ public class Duke {
                     tasks.add(task);
                     hasAddedTask = true;
                     addedTask = task;
+                    storage.save(tasks);
                 } else if (Pattern.matches("delete ?", input)) {
                     throw new DukeException("The item id of a delete command cannot be empty.");
                 } else if (Pattern.matches("delete [0-9]+", input)) {
@@ -93,6 +100,7 @@ public class Duke {
                                     "Now you have %d %s in the list.",
                                     tasks.size(),
                                     tasks.size() == 1 ? "task" : "tasks"));
+                        storage.save(tasks);
                     } else {
                         throw new DukeException("Invalid item selected for deletion.");
                     }
@@ -108,9 +116,11 @@ public class Duke {
                                 tasks.size(),
                                 tasks.size() == 1 ? "task" : "tasks"));
                 }
-            } catch (DukeException e) {
-                System.out.println("Caught exception: " + e.toString());
             }
+        } catch (IOException e) {
+            System.out.println("Caught IOException: " + e.toString());
+        } catch (DukeException e) {
+            System.out.println("Caught DukeEception: " + e.toString());
         }
     }
 

@@ -34,6 +34,15 @@ public abstract class Task {
     }
 
     /**
+     * Return the description of the task.
+     *
+     * @return the String description of the task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Changes the state of the task from not completed to completed.
      * Boolean value is held by isDone is changed from false to true.
      */

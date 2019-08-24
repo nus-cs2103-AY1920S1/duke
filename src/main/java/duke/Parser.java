@@ -1,12 +1,8 @@
 package duke;
 
 import java.util.Scanner;
-import commands.Command;
-import commands.AddCommand;
-import commands.ListCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ExitCommand;
+
+import commands.*;
 import exceptions.DukeException;
 
 /**
@@ -17,10 +13,13 @@ import exceptions.DukeException;
 public class Parser {
 
     /**
-     * Returns a Command object that is one of 5 types:
-     * AddCommand, DeleteCommand, DoneCommand, ExitCommand and ListCommand.
-     * The type of object returned is based on the user input:
-     * add, delete, done, exit, and list commands respectively.
+     * Returns a Command object that is one of 6 types:
+     * AddCommand, DeleteCommand, DoneCommand,
+     * FindCommand, ExitCommand and ListCommand.
+     * The type of Command object returned is based on the user input:
+     * add [description] [datetime] (datetime only required for Event and Deadline Tasks),
+     * delete [task number], done [task number], find [keyword],
+     * exit, and list commands respectively.
      *
      * @param fullCommand the line of user input.
      * @return a Command object associated with user input.
@@ -37,6 +36,8 @@ public class Parser {
             return new DeleteCommand(fullCommand);
         } else if (command.startsWith("done")) {
             return new DoneCommand(fullCommand);
+        } else if (command.startsWith("find")) {
+            return new FindCommand(fullCommand);
         } else if (command.startsWith("todo") || command.startsWith("deadline")
                 || command.startsWith("event")) {
             return new AddCommand(fullCommand);

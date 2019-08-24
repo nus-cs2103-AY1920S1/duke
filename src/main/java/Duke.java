@@ -1,4 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -61,6 +64,8 @@ public class Duke {
                     }
                     System.out.println(statusOfList);
                 } else if (!command.equals("list") && !command.substring(0, 4).equals("done")) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
                     //adding new task of 1 of 3 types
                     if (command.length() >= 4 && command.substring(0, 4).equals("todo")) {
                         if (command.length() == 4) {
@@ -109,7 +114,10 @@ public class Duke {
                            throw new DukeException(error);
                        }
                         String[] arr = command.split(" /at ", 2);
-                        tasks.add(new Event(arr[0].substring(6), arr[1]));
+                        String[] dateTimeArr = (arr[1]).split(" ", 2);
+                        Date date = dateFormat.parse(dateTimeArr[0]);
+                        Date time = timeFormat.parse(dateTimeArr[1]);
+                        tasks.add(new Event(arr[0].substring(6), date, time));
                     } else if (command.length() >= 8 && command.substring(0, 8).equals("deadline")) {
                         if (command.length() == 8) {
                             //throw exception for no description
@@ -139,7 +147,10 @@ public class Duke {
                             throw new DukeException(error);
                         }
                         String[] arr = command.split(" /by ", 2);
-                        tasks.add(new Deadline(arr[0].substring(9), arr[1]));
+                        String[] dateTimeArr = (arr[1]).split(" ", 2);
+                        Date date = dateFormat.parse(dateTimeArr[0]);
+                        Date time = timeFormat.parse(dateTimeArr[1]);
+                        tasks.add(new Event(arr[0].substring(6), date, time));
                     } else {
                         //throw exception for wrong command
                         String error = "\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n";
@@ -194,6 +205,10 @@ public class Duke {
                     System.out.println();
                 }
             } catch (DukeException e) {
+                System.out.println(e);
+            } catch (ParseException e) {
+                System.out.println("\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
+                        "and time in 24hr format, separated by a space.");
                 System.out.println(e);
             } finally {
                 command = sc.nextLine();

@@ -16,9 +16,9 @@ public class Ui {
     }
 
     public static void formattedPrint(String content) {
-        System.out.println("    ____________________________________________________________\n" +
-                "     " + content + "\n" +
-                "    ____________________________________________________________\n    ");
+        System.out.println("    ____________________________________________________________\n"
+                + "     " + content + "\n"
+                + "    ____________________________________________________________\n    ");
     }
 
     public void showError(String errorMessage) {
@@ -30,10 +30,10 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke.\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Hello! I'm Duke.\n"
+                + "     What can I do for you?\n"
+                + "    ____________________________________________________________\n");
     }
 
     public void showTasks(TaskList tasks) {
@@ -53,16 +53,16 @@ public class Ui {
     }
 
     public void showDeleteTaskMessage(TaskList tasks, int index) {
-        String tempOut = "Noted. I've removed this task: " + "\n" + "       " +
-                tasks.get(index).toString() + "\n" + "     " +
-                "Now you have " + (tasks.size() - 1) +
-                (tasks.size() - 1 == 1 ? " task in the list." : " tasks in the list.");
+        String tempOut = "Noted. I've removed this task: " + "\n" + "       "
+                + tasks.get(index).toString() + "\n" + "     "
+                + "Now you have " + (tasks.size() - 1)
+                + (tasks.size() - 1 == 1 ? " task in the list." : " tasks in the list.");
         formattedPrint(tempOut);
     }
 
     public void showDoneTaskMessage(TaskList tasks, int index) {
-        String tempOut = "Nice! I've marked this task as done: " + "\n" + "       " +
-                tasks.get(index).toString();
+        String tempOut = "Nice! I've marked this task as done: " + "\n"
+                + "       " + tasks.get(index).toString();
         formattedPrint(tempOut);
     }
 

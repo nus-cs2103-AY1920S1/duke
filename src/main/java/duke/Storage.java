@@ -23,15 +23,18 @@ public class Storage {
     }
 
     private String getSaveFilePath() {
-        if (System.getProperty("os.name").equals("Windows 10"))
+        if (System.getProperty("os.name").equals("Windows 10")) {
             return "/Users/uicfa/Downloads/data.json";
-        else
+        } else {
             return "/Users/leo/Downloads/data.json";
+        }
     }
 
     private void createSaveFile() throws IOException {
         File file = new File(this.filePath);
-        if (!file.createNewFile()) throw new IOException();
+        if (!file.createNewFile()) {
+            throw new IOException();
+        }
         writeToSaveFile("{\"data\":[]}");
         Ui.showCreateSaveFileMessage();
     }

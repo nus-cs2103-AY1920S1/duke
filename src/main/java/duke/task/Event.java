@@ -23,12 +23,14 @@ public class Event extends Task {
 
     @Override
     public Map<String, Object> toMap() {
-        return Map.of("type", "event", "description", this.description, "at", Duke.dateTimeFormatter.format(this.at), "is_done", this.isDone);
+        return Map.of("type", "event", "description", this.description,
+                "at", Duke.dateTimeFormatter.format(this.at), "is_done", this.isDone);
     }
 
     public static Event fromJson(JSONObject json) throws JSONException {
         // TODO: make sure the type is event
-        Event rtn = new Event(json.getString("description"), LocalDateTime.from(Duke.dateTimeFormatter.parse(json.getString("at"))));
+        Event rtn = new Event(json.getString("description"),
+                LocalDateTime.from(Duke.dateTimeFormatter.parse(json.getString("at"))));
         rtn.isDone = json.getBoolean("is_done");
         return rtn;
     }

@@ -11,10 +11,7 @@ public class ParserTest {
     public void parseTest() {
         try {
             assertTrue(Parser.parse("bye") instanceof ExitCommand);
-            assertThrows(DukeException.class, () -> {
-                        Parser.parse("byesth");
-                    }
-            );
+            assertThrows(DukeException.class, () -> Parser.parse("byesth"));
         } catch (DukeException e) {
             e.printStackTrace();
         }

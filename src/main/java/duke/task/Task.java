@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-abstract public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -34,14 +34,14 @@ abstract public class Task {
     public static Task fromJson(JSONObject json) throws JSONException, DukeException {
         String type = json.getString("type");
         switch (type) {
-            case "deadline":
-                return Deadline.fromJson(json);
-            case "event":
-                return Event.fromJson(json);
-            case "todo":
-                return ToDo.fromJson(json);
-            default:
-                throw new DukeException("JSON parse error");
+        case "deadline":
+            return Deadline.fromJson(json);
+        case "event":
+            return Event.fromJson(json);
+        case "todo":
+            return ToDo.fromJson(json);
+        default:
+            throw new DukeException("JSON parse error");
         }
     }
 }

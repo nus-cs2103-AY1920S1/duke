@@ -38,4 +38,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+
+    filter {
+        includeTestsMatching "duke.*"
+    }
 }

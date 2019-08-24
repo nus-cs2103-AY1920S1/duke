@@ -7,12 +7,14 @@ public class Client {
     private TaskList taskList;
     private Echoer echoer;
     private ExceptionHandler exceptionHandler;
+    private Storage storage;
 
 
     private Client() {
         this.taskList = new TaskList();
         this.echoer = new Echoer();
         this.exceptionHandler = new ExceptionHandler(this.echoer);
+        this.storage = new Storage(this.taskList);
         this.echoer.greet();
     }
 
@@ -33,6 +35,7 @@ public class Client {
             case "deadline":
             case "event":
                 this.addTask(command, description);
+                this.storage.taskListToFile();
                 break;
             case "list":
                 this.listTasks();
@@ -43,9 +46,11 @@ public class Client {
                 break;
             case "done":
                 this.completeTask(Integer.parseInt(description));
+                this.storage.taskListToFile();
                 break;
             case "delete":
                 this.deleteTask(Integer.parseInt(description));
+                this.storage.taskListToFile();
                 break;
             default:
                 throw new InvalidCommandException();

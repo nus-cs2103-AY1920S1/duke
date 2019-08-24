@@ -19,8 +19,4 @@ public class TaskList {
     int getSize() {
         return this.list.size();
     }
-
-    void clear() {
-        this.list.clear();
-    }
 }

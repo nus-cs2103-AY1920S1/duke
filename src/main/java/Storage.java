@@ -1,7 +1,5 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -11,15 +9,15 @@ public class Storage {
     private TaskList taskList;
 
 
-    Storage(TaskList taskList) throws IOException {
+    Storage(TaskList taskList) {
         this.taskList = taskList;
-        this.file = new File("../../../data/jermi.txt");
+        this.file = new File("data/jermi.txt");
         this.fileToTaskList();
     }
 
     private Task fileFormatToTask(String fileFormat) {
         Task task = null;
-        String[] components = fileFormat.split("|");
+        String[] components = fileFormat.split("\\|");
 
         switch (components[0]) {
         case "T":
@@ -35,20 +33,24 @@ public class Storage {
         return task;
     }
 
-    private void fileToTaskList() throws IOException {
-        List<String> lines = Files.readAllLines(this.file.toPath());
-        for (String line : lines) {
-            this.taskList.add(this.fileFormatToTask(line));
+    private void fileToTaskList() {
+        try {
+            List<String> lines = Files.readAllLines(this.file.toPath());
+            for (String line : lines) {
+                this.taskList.add(this.fileFormatToTask(line));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     void taskListToFile() throws IOException {
-        Files.writeString(this.file.toPath(), this.taskList
-                .getList()
-                .stream()
-                .map(Task::toSaveFormat)
-                .reduce((x, y) -> x + "\n" + y)
-                .orElse(""));
+        String toWrite = "";
+        for (Task task : this.taskList.getList()) {
+            toWrite += task.toSaveFormat();
+            toWrite += "\n";
+        }
+        Files.writeString(this.file.toPath(), toWrite);
     }
 
 

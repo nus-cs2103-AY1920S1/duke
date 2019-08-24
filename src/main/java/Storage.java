@@ -40,7 +40,8 @@ public class Storage {
     }
 
     /**
-     * Convenience function that loads the given file path and parses the Tasks within, returning a new List of the Tasks.
+     * Convenience function that loads the given file path and
+     * parses the Tasks within, returning a new List of the Tasks.
      *
      * @param file File path that contains the Tasks to load.
      * @return A new List of the Tasks represented by the given file path.
@@ -112,14 +113,20 @@ public class Storage {
             task = new Todo(taskDescription, isTaskDone);
         } else if (taskType == Deadline.class) {
             if (tokens.length != 4) {
-                throw new MissingTokenParseError(String.format("Deadline task expected 4 values, received %d instead.", tokens.length));
+                throw new MissingTokenParseError(String.format(
+                        "Deadline task expected 4 values, received %d instead.",
+                        tokens.length
+                ));
             }
 
             final LocalDateTime deadline = parseDateTime(tokens[3]);
             task = new Deadline(taskDescription, isTaskDone, deadline);
         } else if (taskType == Event.class) {
             if (tokens.length != 4) {
-                throw new MissingTokenParseError(String.format("Event task expected 4 values, received %d instead.", tokens.length));
+                throw new MissingTokenParseError(String.format(
+                        "Event task expected 4 values, received %d instead.",
+                        tokens.length
+                ));
             }
 
             final LocalDateTime dateTime = parseDateTime(tokens[3]);
@@ -230,7 +237,10 @@ public class Storage {
     private static String serializeTypeToToken(Task t) {
         String taskType = EVENT_TYPE_TO_TOKEN.get(t.getClass());
         if (taskType == null) {
-            throw new UnserializableType(String.format("\"%s\" is not a serializable task type.", t.getClass().getName()));
+            throw new UnserializableType(String.format(
+                    "\"%s\" is not a serializable task type.",
+                    t.getClass().getName()
+            ));
         } else {
             return taskType;
         }

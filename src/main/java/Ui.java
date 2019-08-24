@@ -61,7 +61,11 @@ public class Ui {
         } else if (t instanceof Event) {
             Event e = (Event) t;
             taskType = "E";
-            description = String.format("%s (at: %s)", e.getDescription(), e.getEventDateTime().format(dateTimeFormatter));
+            description = String.format(
+                    "%s (at: %s)",
+                    e.getDescription(),
+                    e.getEventDateTime().format(dateTimeFormatter)
+            );
         }
 
         return String.format("[%s][%s] %s", taskType, t.getStatusIcon(), description);
@@ -113,8 +117,8 @@ public class Ui {
     }
 
     public void displayWelcome() {
-        printBlock("Hello! I'm Duke\n" +
-                "What can I do for you?");
+        printBlock("Hello! I'm Duke"
+                + "\nWhat can I do for you?");
         println();
     }
 

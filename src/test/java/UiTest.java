@@ -21,14 +21,38 @@ class UiTest {
 
     static List<Arguments> getTasksWithExpectedStringDisplays() {
         return List.of(
-                Arguments.of(new Todo("not done todo", false), "[T][✘] not done todo"),
-                Arguments.of(new Todo("done todo", true), "[T][✓] done todo"),
-                Arguments.of(new Deadline("not done deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)), "[D][✘] not done deadline (by: 6/6/2019 0000)"),
-                Arguments.of(new Deadline("done deadline", true, LocalDateTime.of(2019, 6, 6, 0, 0)), "[D][✓] done deadline (by: 6/6/2019 0000)"),
-                Arguments.of(new Deadline("date format deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)), "[D][✘] date format deadline (by: 6/6/2019 0000)"),
-                Arguments.of(new Event("not done event", false, LocalDateTime.of(2019, 8, 6, 14, 0)), "[E][✘] not done event (at: 6/8/2019 1400)"),
-                Arguments.of(new Event("done event", true, LocalDateTime.of(2019, 8, 6, 14, 0)), "[E][✓] done event (at: 6/8/2019 1400)"),
-                Arguments.of(new Event("date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)), "[E][✘] date format event (at: 6/8/2019 1400)")
+                Arguments.of(
+                        new Todo("not done todo", false),
+                        "[T][✘] not done todo"
+                ),
+                Arguments.of(
+                        new Todo("done todo", true),
+                        "[T][✓] done todo"
+                ),
+                Arguments.of(
+                        new Deadline("not done deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                        "[D][✘] not done deadline (by: 6/6/2019 0000)"
+                ),
+                Arguments.of(
+                        new Deadline("done deadline", true, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                        "[D][✓] done deadline (by: 6/6/2019 0000)"
+                ),
+                Arguments.of(
+                        new Deadline("date format deadline", false, LocalDateTime.of(2019, 6, 6, 0, 0)),
+                        "[D][✘] date format deadline (by: 6/6/2019 0000)"
+                ),
+                Arguments.of(
+                        new Event("not done event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                        "[E][✘] not done event (at: 6/8/2019 1400)"
+                ),
+                Arguments.of(
+                        new Event("done event", true, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                        "[E][✓] done event (at: 6/8/2019 1400)"
+                ),
+                Arguments.of(
+                        new Event("date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
+                        "[E][✘] date format event (at: 6/8/2019 1400)"
+                )
         );
     }
 

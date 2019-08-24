@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import java.text.SimpleDateFormat;
 
 public class Duke {
     public static void main(String[] args) {
@@ -122,7 +123,9 @@ public class Duke {
 
                             }
                         }
-
+                        System.out.println(deadlineTaskDateAndTimeString);
+                        deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
+                        System.out.println(deadlineTaskDateAndTimeString);
                         //use .trim() method to eliminate trailing white space
                         Task deadlineTask = new Deadline(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
                         store.add(deadlineTask);
@@ -164,6 +167,8 @@ public class Duke {
 
                             }
                         }
+
+                        eventTaskDateAndTimeString = convertStringToDate(eventTaskDateAndTimeString);
                         //use of .trim() to avoid trailing whitespace
                         Task eventTask = new Event(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
                         store.add(eventTask);
@@ -212,10 +217,108 @@ public class Duke {
                 }
             }
         }
-
+        //test
         //exiting program
         System.out.println("Bye. Hope to see you again soon!");
         myScanner.close();
+    }
+
+
+    private static String convertStringToDate(String dateAndTimeString) {
+        try {
+            String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
+            /*for (String i : arrayOfDateAndTime) {
+                System.out.println(i);
+
+            }*/
+            String date = arrayOfDateAndTime[0];
+            String time = arrayOfDateAndTime[1];
+            // d/mm/yyyy
+
+            date = formatString(date);
+            Integer timeInInt = Integer.valueOf(time);
+            time = convertTime(timeInInt);
+            dateAndTimeString = date + ", " + time;
+            return dateAndTimeString;
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("invalid date and time supplied: try d/mm/yyyy 0000 format");
+        } catch (DukeException e ) {
+            System.out.println(e);
+        }
+
+        return " ";
+    }
+
+    private static String convertTime(Integer convertedTime) throws  DukeException{
+        String time = "";
+        if (convertedTime == 0) {
+            //midnight
+            convertedTime = 12;
+        } else if ( convertedTime > 0 &&  convertedTime < 1200) {
+            int mins = convertedTime % 100;
+            if (mins == 0 ) {
+                convertedTime = convertedTime % 100;
+            }
+            time = convertedTime.toString() + "am";
+        } else if (convertedTime < 2359 && convertedTime >= 1300) {
+            //1300 / 100 = 13 % 12
+            int hrs = (convertedTime / 100) % 12;
+            int mins = convertedTime % 100;
+            if (mins == 0) {
+                time = String.valueOf(hrs) + "pm";
+            } else {
+                time = String.valueOf(hrs) + String.valueOf(mins) + "pm";
+            }
+
+        } else if (convertedTime < 1300 && convertedTime >= 1200 ) {
+            int mins = convertedTime % 100;
+            if (mins == 0) {
+                time = "12pm";
+            } else {
+                time = "12" + String.valueOf(mins) + "pm";
+            }
+
+            time = "12" + String.valueOf(mins) + "pm";
+        } else {
+            throw new DukeException("invalid time entered");
+        }
+
+        return time;
+    }
+
+    private static String formatString(String date) {
+        //[ 2 , 12, 2019]
+        String[] newArr = date.split("/");
+
+        String result = "";
+        String num = newArr[0];
+        num = getOrdinal(num);
+        String month = newArr[1];
+        month = getMonth(month);
+        return num + " of " + month + " " + newArr[2];
+    }
+
+    private static String getMonth(String month) {
+        String[] arrMonths = {" bye", "January", "February", "March", "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"};
+        int temp = Integer.valueOf(month);
+
+        return arrMonths[temp];
+
+    }
+
+    private static String getOrdinal(String num) {
+        int temp = Integer.valueOf(num);
+        if (temp == 1 || temp == 21 || temp == 31) {
+            return String.valueOf(temp) + "st";
+        } else if (temp == 2 || temp == 22 ) {
+            return String.valueOf(temp) + "nd";
+        } else if (temp == 3 || temp == 23) {
+            return String.valueOf(temp) + "rd";
+        }else {
+            return String.valueOf(temp) + "th";
+        }
     }
 
     /*

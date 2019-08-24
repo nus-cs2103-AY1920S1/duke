@@ -16,7 +16,9 @@ public class Duke {
     private static ArrayList<Task> items;
     private Ui user;
 
-
+    /**
+     * Constructor for Duke class.
+     */
     public Duke() {
         user = new Ui();
         items = new ArrayList<>();
@@ -108,7 +110,11 @@ public class Duke {
         user.conclusion();
     }
 
-
+    /**
+     * Generation of task - Todo, Event, Deadline and store in ArrayList.
+     * @param input String input from user input
+     * @return output message for different task
+     */
     public String generateTask(String input) {
         StringBuilder sb = new StringBuilder();
         String message = "";
@@ -176,7 +182,10 @@ public class Duke {
     }
 
 
-
+    /**
+     * Load past tasks to current ArrayList.
+     * @param stored Scanner obj scanning local text file containing past tasks
+     */
     private static void loadExisting(Scanner stored) {
         StringBuilder sb = new StringBuilder();
         while (stored.hasNextLine()) {
@@ -237,6 +246,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Store current tasks into text file.
+     * @param inputs Arraylist containing current tasks
+     */
     private static void storeCurrent(ArrayList<Task> inputs) {
         try {
             File file = new File("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt");
@@ -257,6 +270,12 @@ public class Duke {
 
     }
 
+    /**
+     * Deleting of task from ArrayList
+     * @param num index of task in list
+     * @return output message notifying user of deletion
+     * @throws IndexOutOfBoundsException index of task not found in list
+     */
     public String deleteTask(int num) throws IndexOutOfBoundsException {
         Task curr = items.get(num - 1);
         items.remove(num - 1);
@@ -264,17 +283,34 @@ public class Duke {
         return delete;
     }
 
+    /**
+     * Converting String to datetime for storage.
+     * @param input String from user input containing datetime for deadline
+     * @return Date containing dd/MM/yyyy HH:mm
+     * @throws ParseException when input does not matched date format
+     */
     private static Date convertStringToDeadline(String input) throws ParseException {
         Date result = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(input);
         return result;
     }
 
+    /**
+     * Converting String to datetime for storage
+     * @param input String from user input from date to start time for event
+     * @return Date containing dd/MM/yyy HH:mm
+     * @throws ParseException input does not matched date format
+     */
     private static Date convertStringToEventStart(String input) throws ParseException {
         Date result = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(input);
         return result;
     }
 
-
+    /**
+     * Converting String to datetime for storage
+     * @param input String from user input containing end time for event
+     * @return Date containing HH:mm
+     * @throws ParseException input does not matched date format
+     */
     private static Date convertStringToEventEnd(String input) throws ParseException {
         Date result = new SimpleDateFormat("HH:mm").parse(input);
         return result;

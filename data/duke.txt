@@ -1,0 +1,4 @@
+T | 0 | readd
+D | 0 | cool | 31pm mon
+D | 1 |  | 
+D | 0 | weee | tev 2pm

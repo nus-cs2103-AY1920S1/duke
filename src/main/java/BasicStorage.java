@@ -48,7 +48,14 @@ class BasicStorage implements TaskObserver, StorageInterface {
                 }
             }
         } catch (FileNotFoundException e) {
+            //System.out
+            String loadFileErrorMsg = "OHNyO ;;w;; >w<\n"
+                //.println("OHNyO ;;w;; >w<\n"
+                + "owo cant woad the save fiwe!!\n" 
+                + "taskwist fwom this session cannyot be saved";
             System.out.println(e);
+
+            Display.printErrorSection(loadFileErrorMsg);
         } 
         return taskList.stream();
     }

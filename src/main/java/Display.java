@@ -21,6 +21,7 @@ class Display implements TaskObserver {
     }
 
     private static void printGreeting() {
+        Display.printBanner();
         String greeting1 = "hewwo! i'm OwO\n"
             + "Mistew Stawk's augmented weawity gwocewy wist\n"
             + "OwO stands fow \"Owways With Owws\"\n"
@@ -190,5 +191,28 @@ class Display implements TaskObserver {
             command = this.sc.nextLine();
         }
         Display.printExitMessage();
+    }
+
+    public static void printBanner() {
+        String logo = "        \u2606                     \u273f\n"
+            + "                                    \u2606 \u273f\n"
+            + "         \u273f                 \u273f \u2606\n"
+            + "  \u2606                \u2606\n"
+            + "          \u2727   \u2606      \u273f\n"
+            + "                \u2727     \u2606\n"
+            + "         #####                  #####\n"
+            + "        #     #                #     #\n"
+            + "       #       #              #       #\n"
+            + "       #       #  \\\\  /\\  //  #       #\n"
+            + "        #     #    \\\\/  \\//    #     #\n"
+            + "         #####      \\_/\\_/      #####\n"
+            + "  \u2727\n"
+            + "                    \u2606            \u2606\n"
+            + " \u273f         \u2606\n"
+            + "        \u2606       \u2606       \u2606\n"
+            + "\n"
+            + "              \u2606       \u273f\n";
+
+        System.out.println("Hewwo fwom\n" + logo);
     }
 }

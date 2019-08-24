@@ -1,12 +1,17 @@
 plugins {
     id 'java'
     id 'application'
-    //id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-//checkstyle {
-//    toolVersion = '8.23'
+checkstyle {
+    toolVersion = '8.23'
+}
+//compileJava.options.encoding = 'UTF-8'
+//
+//tasks.withType(JavaCompile) {
+//    options.encoding = 'UTF-8'
 //}
 
 shadowJar {
@@ -40,3 +45,4 @@ run {
 //https://stackoverflow.com/questions/36723447/java-util-scanner-throws-nosuchelementexception-when-application-is-started-with
     standardInput = System.in
 }
+

@@ -6,26 +6,6 @@ public class Duke {
         StorageInterface storage = new BasicStorage(model);
         ControllerInterface friday = new FridayController(model);
 
-        String logo = "        \u2606                     \u273f\n"
-            + "                                    \u2606 \u273f\n"
-            + "         \u273f                 \u273f \u2606\n"
-            + "  \u2606                \u2606\n"
-            + "          \u2727   \u2606      \u273f\n"
-            + "                \u2727     \u2606\n"
-            + "         #####                  #####\n"
-            + "        #     #                #     #\n"
-            + "       #       #              #       #\n"
-            + "       #       #  \\\\  /\\  //  #       #\n"
-            + "        #     #    \\\\/  \\//    #     #\n"
-            + "         #####      \\_/\\_/      #####\n"
-            + "  \u2727\n"
-            + "                    \u2606            \u2606\n"
-            + " \u273f         \u2606\n"
-            + "        \u2606       \u2606       \u2606\n"
-            + "\n"
-            + "              \u2606       \u273f\n";
-
-        System.out.println("Hewwo fwom\n" + logo);
 
         friday.start();
     }

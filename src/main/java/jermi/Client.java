@@ -26,7 +26,11 @@ public class Client {
     }
 
     public static Client initialise() {
-        client = new Client();
+        if (client == null) {
+            client = new Client();
+        } else {
+            client.ui.echo("Client has already been initialised.");
+        }
         return client;
     }
 

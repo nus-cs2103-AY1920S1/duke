@@ -26,6 +26,7 @@ public class Duke {
         File file = new File("../../../data/duke.txt");
         ArrayList<Task> list = new ArrayList<>();
         Scanner sFile;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         try {
             file.createNewFile();
             sFile = new Scanner(file);
@@ -35,9 +36,10 @@ public class Duke {
                 if (lnSplit[0].equals("T")) {
                     list.add(new Todo(lnSplit[2]));
                 } else if (lnSplit[0].equals("E")) {
-                    list.add(new Event(lnSplit[2], lnSplit[3]));
+                    String[] fromTo = lnSplit[2].split(" to ");
+                    list.add(new Event(lnSplit[1], LocalDateTime.parse(fromTo[0], formatter), LocalDateTime.parse(fromTo[1], formatter)));
                 } else if (lnSplit[0].equals("D")) {
-                    list.add(new Deadline(lnSplit[2], lnSplit[3]));
+                    list.add(new Deadline(lnSplit[2], LocalDateTime.parse(lnSplit[3], formatter)));
                 }
             }
         } catch (IOException e1) {
@@ -45,7 +47,6 @@ public class Duke {
             e1.printStackTrace();
         }
         String echo = s.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         while (true) {
             if (echo.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");

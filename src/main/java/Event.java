@@ -6,6 +6,12 @@ public class Event extends Task {
         Task.totalTasks++;
     }
 
+    public Event(String description, String timing, int done){
+        super(description, done);
+        this.timing = timing;
+        Task.totalTasks++;
+    }
+
     public String getTiming() {
         return timing;
     }

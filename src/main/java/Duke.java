@@ -1,3 +1,10 @@
+/**
+ * Handles the details of the Duke System,
+ * receiving user input and displaying the
+ * appropriate information as per requested.
+ * @author Fabian Chia Hup Peng
+ */
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,44 +17,25 @@ public class Duke {
     private static final String indentLine = "---------------------------------------------";
     private static final String introMessage = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String goodbyeMessage = "Bye. Hope to see you again soon!";
-    private static final String doneMessage = "Nice! I've marked this task as done:";
     private static final String addMessage = "Got it. I've added this task:";
+    private static final String doneMessage = "Nice! I've marked this task as done:";
     private static final String deleteMessage = "Noted. I've removed this task:";
 
+    /**
+     * Simulates the operation of the Duke System.
+     * @param args The arguments to be taken in the command line.
+     */
     public static void main(String[] args) {
 
         printIntroMessage();
 
-        while (true) {
-
-            if(sc.hasNextLine()) {
-                String input = sc.nextLine();
-
-                if (isBye(input)) {
-                    printGoodbyeMessage();
-                    break;
-                }
-
-                if (isList(input)) {
-                    printList();
-                } else if (input.startsWith("done")) {
-                    processDoneTask(input);
-                } else if (input.startsWith("delete")) {
-                    processDeletedTask(input);
-                }
-                else {
-                    try {
-                        processInputTask(input);
-                    } catch(InvalidInputException e) {
-                        System.out.println("InvalidInputException occurred: " + e);
-                        System.out.println();
-                    }
-                }
-            }
-        }
+        processUserInput();
 
     }
 
+    /**
+     * Prints the Duke introduction message.
+     */
     private static void printIntroMessage() {
         System.out.println(indentLine);
 
@@ -60,6 +48,9 @@ public class Duke {
         System.out.println();
     }
 
+    /**
+     * Prints the Duke goodbye message.
+     */
     private static void printGoodbyeMessage() {
         System.out.println();
 
@@ -72,34 +63,10 @@ public class Duke {
         System.out.println(indentLine);
     }
 
-    private static void processDoneTask(String input) {
-        String[] stringArray = input.split(" ");
-
-        int taskNum = Integer.parseInt(stringArray[1]);
-
-        Task task = taskList.get(taskNum - 1);
-
-        task.setDone();
-
-        printDoneMessage(task);
-    }
-
-    private static void printDoneMessage(Task task) {
-        System.out.println();
-
-        System.out.println(indentLine);
-
-        System.out.println(doneMessage);
-
-        System.out.println("    " + task);
-
-        System.out.println();
-
-        System.out.println(indentLine);
-
-        System.out.println();
-    }
-
+    /**
+     * Prints the confirmation message upon adding a task.
+     * @param task The added task.
+     */
     private static void printAddMessage(Task task) {
         System.out.println();
 
@@ -124,6 +91,30 @@ public class Duke {
         System.out.println();
     }
 
+    /**
+     * Prints the confirmation message upon marking a task as done.
+     * @param task The done task.
+     */
+    private static void printDoneMessage(Task task) {
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println(doneMessage);
+
+        System.out.println("    " + task);
+
+        System.out.println();
+
+        System.out.println(indentLine);
+
+        System.out.println();
+    }
+
+    /**
+     * Prints the confirmation message upon deleting a task.
+     * @param task The deleted task.
+     */
     private static void printDeleteMessage(Task task) {
         System.out.println();
 
@@ -148,7 +139,10 @@ public class Duke {
         System.out.println();
     }
 
-    private static void printList() {
+    /**
+     * Prints out the entirety of the Duke task list.
+     */
+    private static void printTaskList() {
 
         int size = taskList.size();
 
@@ -169,6 +163,47 @@ public class Duke {
         System.out.println();
     }
 
+    /**
+     * Processes the user input:
+     * Passes the appropriate parameters to methods that
+     * are relevant to users' requests.
+     */
+    private static void processUserInput() {
+        while (true) {
+
+            if(sc.hasNextLine()) {
+                String input = sc.nextLine();
+
+                if (isBye(input)) {
+                    printGoodbyeMessage();
+                    break;
+                }
+
+                if (isList(input)) {
+                    printTaskList();
+                } else if (input.startsWith("done")) {
+                    processDoneTask(input);
+                } else if (input.startsWith("delete")) {
+                    processDeletedTask(input);
+                }
+                else {
+                    try {
+                        processInputTask(input);
+                    } catch(InvalidInputException e) {
+                        System.out.println("InvalidInputException occurred: " + e);
+                        System.out.println();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Processes the user input and categorises commands into one
+     * of the following: todo, deadline, or event.
+     * @param input The user input.
+     * @throws InvalidInputException Invalid input exception.
+     */
     private static void processInputTask(String input) throws InvalidInputException {
 
         if (!input.startsWith("todo")) {
@@ -211,6 +246,26 @@ public class Duke {
 
     }
 
+    /**
+     * Marks a task as done.
+     * @param input The String form of the task to be marked as done.
+     */
+    private static void processDoneTask(String input) {
+        String[] stringArray = input.split(" ");
+
+        int taskNum = Integer.parseInt(stringArray[1]);
+
+        Task task = taskList.get(taskNum - 1);
+
+        task.setDone();
+
+        printDoneMessage(task);
+    }
+
+    /**
+     * Deletes a task from the Duke task list.
+     * @param input The String form of the task to be deleted.
+     */
     private static void processDeletedTask(String input) {
         String[] stringArray = input.split(" ");
 
@@ -223,6 +278,11 @@ public class Duke {
         printDeleteMessage(task);
     }
 
+    /**
+     * Splits the input String into appropriate format.
+     * @param input The user input.
+     * @return The description of the action to be carried out.
+     */
     private static String processInputDescription(String input) {
         String[] splitInput = input.split(" ");
         int arrSize = splitInput.length;

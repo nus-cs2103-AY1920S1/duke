@@ -25,9 +25,8 @@ public class Duke {
     }
 
     /**
-     * Main method for executing Duke.
-     *
-     *
+     * Main method for Duke.
+      * @param args user input
      */
     public static void main(String[] args) {
         Duke execute = new Duke();
@@ -271,7 +270,7 @@ public class Duke {
     }
 
     /**
-     * Deleting of task from ArrayList
+     * Deleting of task from ArrayList.
      * @param num index of task in list
      * @return output message notifying user of deletion
      * @throws IndexOutOfBoundsException index of task not found in list
@@ -295,7 +294,7 @@ public class Duke {
     }
 
     /**
-     * Converting String to datetime for storage
+     * Converting String to datetime for storage.
      * @param input String from user input from date to start time for event
      * @return Date containing dd/MM/yyy HH:mm
      * @throws ParseException input does not matched date format
@@ -306,7 +305,7 @@ public class Duke {
     }
 
     /**
-     * Converting String to datetime for storage
+     * Converting String to datetime for storage.
      * @param input String from user input containing end time for event
      * @return Date containing HH:mm
      * @throws ParseException input does not matched date format

@@ -89,7 +89,7 @@ public class Ui {
     }
 
     /**
-     * Message notifying user when a task is deleted
+     * Message notifying user when a task is deleted.
      * @param curr Task that user wished to delete
      * @param size size of list after deletion
      * @return String message notifying user
@@ -123,9 +123,10 @@ public class Ui {
     }
 
     /**
-     * Message generator for task with indentation and border.
-     *
-     *
+     * generating message for individual task with border and indentation.
+     * @param current current task
+     * @param size size of list
+     * @return message generated for selected task
      */
     public String generateMessage(Task current, int size) {
         StringBuilder sb = new StringBuilder();

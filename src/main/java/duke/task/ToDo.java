@@ -21,6 +21,13 @@ public class ToDo extends Task {
         return Map.of("type", "todo", "description", this.description, "is_done", this.isDone);
     }
 
+    /**
+     * Parse to a ToDo object from JSONObject.
+     *
+     * @param json
+     * @return parsed ToDo
+     * @throws JSONException
+     */
     public static ToDo fromJson(JSONObject json) throws JSONException {
         // TODO: make sure the type is todo
         ToDo rtn = new ToDo(json.getString("description"));

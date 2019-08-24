@@ -34,6 +34,15 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Add a task to TaskList, output the result using Ui.
+     *
+     * @param task
+     * @param ui
+     * @param storage
+     * @throws IOException
+     * @throws JSONException
+     */
     public void addTask(Task task, Ui ui, Storage storage) throws IOException, JSONException {
         tasks.add(task);
         storage.appendToSaveFile(task);

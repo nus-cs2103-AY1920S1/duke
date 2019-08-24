@@ -6,6 +6,9 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Main class for Duke app.
+ */
 public class Duke {
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
@@ -13,6 +16,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+
+    /**
+     * Constructor for Duke when save file path is known.
+     *
+     * @param filePath file path
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +35,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructor for Duke when save file path is unknown (will use the default location).
+     *
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -39,6 +52,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to start Duke app.
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.showWelcomeMessage();
         boolean isExit = false;
@@ -55,6 +72,12 @@ public class Duke {
     }
 
 
+    /**
+     * Main function where the app launches.
+     * @param args
+     * @throws JSONException
+     * @throws IOException
+     */
     public static void main(String[] args) throws JSONException, IOException {
         new Duke().run();
     }

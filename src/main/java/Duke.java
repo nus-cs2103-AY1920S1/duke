@@ -92,7 +92,7 @@ public class Duke {
         sendLine();
     }
 
-    public static void addDeadlineTask(String todo) throws InvalidDeadlineException {
+    public static void addDeadlineTask(String todo) throws Exception {
         if (todo.trim().equals("")) {
             throw new InvalidDeadlineException("The description of a deadline cannot be empty.");
         } else if (!todo.trim().contains("/by")) {
@@ -102,7 +102,9 @@ public class Duke {
         if (taskData.length == 1) {
             throw new InvalidDeadlineException("The time of a deadline cannot be empty.");
         }
-        DeadlineTask newTask = new DeadlineTask(taskData[0], taskData[1]);
+        DateParser parser = new DateParser(taskData[1]);
+        String dateOutput = parser.convertDateToString();
+        DeadlineTask newTask = new DeadlineTask(taskData[0], dateOutput);
         tasks.add(newTask);
         sendLine();
         sendMessage("Got it. I've added this task: ");
@@ -111,7 +113,7 @@ public class Duke {
         sendLine();
     }
 
-    public static void addEventTask(String todo)throws InvalidEventException {
+    public static void addEventTask(String todo)throws Exception {
         if (todo.trim().equals("")) {
             throw new InvalidEventException("The description of an event cannot be empty.");
         } else if (!todo.trim().contains("/at")) {
@@ -121,7 +123,9 @@ public class Duke {
         if (taskData.length == 1) {
             throw new InvalidEventException("The time of an event cannot be empty.");
         }
-        EventTask newTask = new EventTask(taskData[0], taskData[1]);
+        DateParser parser = new DateParser(taskData[1]);
+        String dateOutput = parser.convertDateToString();
+        EventTask newTask = new EventTask(taskData[0], dateOutput);
         tasks.add(newTask);
         sendLine();
         sendMessage("Got it. I've added this task: ");

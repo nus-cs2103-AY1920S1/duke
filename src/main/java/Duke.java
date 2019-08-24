@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -47,11 +49,7 @@ public class Duke {
                     addTask(command, tasks);
                 }
             } catch (DukeException exception) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("\t ---------------------------------------------------------- \n");
-                sb.append("\t " + exception.getMessage() + "\n");
-                sb.append("\t ---------------------------------------------------------- \n");
-                System.out.print(sb.toString());
+                printExceptionMessage(exception);
             }
         }
     }
@@ -91,6 +89,11 @@ public class Duke {
         System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ")
                 + "in the " + "list.");
         printLine();
+		try {
+			writeToFile(tasks);
+		} catch (DukeException exception) {
+			printExceptionMessage(exception);
+		}
     }
 
     public static void done(int index, ArrayList<Task> tasks) {
@@ -101,13 +104,18 @@ public class Duke {
         System.out.print("\t \t");
         System.out.println(doneTask);
         printLine();
+		try {
+			writeToFile(tasks);
+		} catch (DukeException exception) {
+			printExceptionMessage(exception);
+		}
     }
 
     public static void addTask(String command, ArrayList<Task> tasks) throws DukeException {
         Task newTask;
         if (command.startsWith("todo")) {
-            String taskDetailsString = command.replaceFirst("todo", "");
-            if (taskDetailsString.trim().length() == 0) {
+            String taskDetailsString = command.replaceFirst("todo", "").trim();
+            if (taskDetailsString.length() == 0) {
                 throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
             newTask = new Todo(taskDetailsString);
@@ -148,7 +156,33 @@ public class Duke {
         System.out.println("\t Now you have " + tasks.size() + (tasks.size() == 1 ? " task " : " tasks ")
                 + "in the " + "list.");
         printLine();
+		try {
+			writeToFile(tasks);
+		} catch (DukeException exception) {
+			printExceptionMessage(exception);
+		}
     }
+
+    public static void writeToFile(ArrayList<Task> tasks) throws DukeException {
+    	try {
+			FileWriter writer = new FileWriter(
+					"C:\\Users\\Yi Wai\\Documents\\Year 2 Semester 1\\CS2103\\duke\\data\\duke.txt");
+			for (Task task : tasks) {
+				writer.write(task.toString() + "\n");
+			}
+			writer.close();
+		} catch (IOException exception) {
+			throw new DukeException("\u2639 OOPS!!! Something went wrong: " + exception.getMessage());
+		}
+	}
+
+	public static void printExceptionMessage(Exception exception) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("\t ---------------------------------------------------------- \n");
+		sb.append("\t " + exception.getMessage() + "\n");
+		sb.append("\t ---------------------------------------------------------- \n");
+		System.out.print(sb.toString());
+	}
 
     public static void exit() {
         printLine();

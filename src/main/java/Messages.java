@@ -1,9 +1,6 @@
 public class Messages {
-    public static final String START_HORIZONTAL_LINE = "   ____________________________________________________________";
-    public static final String END_HORIZONTAL_LINE = "   ____________________________________________________________\n";
     public static final String COMMAND_INDENTATION = "    ";
     public static final String COMPLETION_INDENTATION = "  ";
-
     public static final String BYE_MESSAGE = COMMAND_INDENTATION + "Bye. Hope to see you again soon!";
     public static final String GREETING_MESSAGE = COMMAND_INDENTATION + "Hello! I'm Duke\n" +
             COMMAND_INDENTATION + "What can I do for you?";
@@ -20,7 +17,7 @@ public class Messages {
     public static final String UNKNOWN_COMMAND_EXCEPTION = COMMAND_INDENTATION +
             "\u2639\uFE0FOOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String DESCRIPTION_FORMAT_EXCEPTION = COMMAND_INDENTATION +
-            "\u2639\uFE0FOOPS!!! The description of %s need to be %s.";
+            "\u2639\uFE0FOOPS!!! The description need to be %s.";
     public static final String SUBDESCRIPTION_MISSING_EXCEPTION = COMMAND_INDENTATION +
             "\u2639\uFE0FOOPS!!! The description of a %s cannot be empty.";
     public static final String NO_SUBDESCRIPTION_EXCEPTION = COMMAND_INDENTATION +
@@ -28,6 +25,5 @@ public class Messages {
     public static final String INVALID_SIZE_EXCEPTION = COMMAND_INDENTATION +
             "\u2639\uFE0FOOPS!!! Invalid task number";
     public static final String DATETIME_PARSE_EXCEPTION = COMMAND_INDENTATION +
-            "\u2639\uFE0F The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
-
+            "\u2639\uFE0FThe description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
 }

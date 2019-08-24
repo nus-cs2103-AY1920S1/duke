@@ -69,7 +69,7 @@ public class Duke {
 	private boolean makeToDoTask(Command input) {
 		this.addTask(new Task(input.arguments));
 		return false;
-	}
+	} 
 
 	private boolean markAsDone(Command input) {
 		int index;
@@ -90,6 +90,29 @@ public class Duke {
 		return false;
 	}
 
+	private boolean deleteTask(Command input) {
+		int index;
+		try {
+			index = Integer.parseInt(input.arguments);
+		} catch(NumberFormatException e) {
+			throw new DukeException("Index provided was not an integer!", e);
+		}
+
+		if(index < 0 || index > this.taskList.size()) {
+			throw new DukeException("There's no task with that index!");
+		}
+
+		Task selectedTask = this.taskList.remove(index-1);
+		this.io.say("Nice! I've marked this task as done:",
+			"  " + selectedTask,
+			String.format("Now you have %d task%s in the list.",
+				this.taskList.size(),
+				this.taskList.size() == 1 ? "" : "s"));
+
+	
+		return false;
+	}
+
 	private Duke() {
 		this.io = new DukeIO();
 		//Bind command handlers
@@ -99,6 +122,7 @@ public class Duke {
 		this.io.bindCommand("deadline", this::makeDeadlineTask);
 		this.io.bindCommand("event", this::makeEventTask);
 		this.io.bindCommand("todo", this::makeToDoTask);
+		this.io.bindCommand("delete", this::deleteTask);
 		this.io.setUnknownCommandHandler(cmd -> { throw new DukeException("I'm sorry, but I don't know what that means. :-("); });
 		this.taskList = new ArrayList<>();
 	}

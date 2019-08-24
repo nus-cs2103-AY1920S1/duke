@@ -14,6 +14,11 @@ public class Duke {
         do {
             user.setCurrentInput(input.nextLine());
 
+            //int switchCase = user.getSwitchCase();
+
+           // switch(switchCase){
+
+
             if (user.inputIsBye()) {
                 //Do nothing and wait to exit program if input is 'bye'
             } else if (user.inputIsList()) {
@@ -24,6 +29,7 @@ public class Duke {
                 user.addCurrentInput();
             }
         } while (!user.inputIsBye());
+
         user.sayByeToUser();
     }
 }
@@ -63,6 +69,7 @@ class User {
     private String currentInput = "";
     private ArrayList<String> userInputs = new ArrayList<String>();
     private ArrayList<Task> userTasks = new ArrayList<Task>();
+    private int numOfTasks = 0;
 
     public User() {
         System.out.println("    ____________________________________________________________\n"
@@ -119,9 +126,9 @@ class User {
         for (Task task : userTasks) {
             if (count == taskNumber) {
                 task.markIsDone();
-                System.out.println("    ____________________________________________________________\r"
-                        + "     Nice! I've marked this task as done: \r" + "       [" + task.getStatusIcon()
-                        + "] " + task.getDescription() + "\r"
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Nice! I've marked this task as done: \n" + "       [" + task.getStatusIcon()
+                        + "] " + task.getDescription() + "\n"
                         + ("    ____________________________________________________________\n"));
             }
             count++;
@@ -130,10 +137,10 @@ class User {
 
     public void printUserInputs() { //catch empty list?
         int count = 1;
-        System.out.println("    ____________________________________________________________\r");
+        System.out.println("    ____________________________________________________________");
         for (Task temp : userTasks) {
             System.out.println("    " + count + ".[" + temp.getStatusIcon() + "] "
-                    + temp.getDescription() + "\r");
+                    + temp.getDescription() );
             count++;
         }
         System.out.println("    ____________________________________________________________\n");

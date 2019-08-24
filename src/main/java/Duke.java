@@ -1,6 +1,15 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Entry point of this project Duke. Duke is a Task manager that aims
+ * to serve as an efficient way to manage our day to day tasks. It supports multiple types of task
+ * such as todo reminders, tasks with a deadline and even an event.
+ * The Duke task manager has many iterations, it is
+ * continuously evolving and becoming smarter to cater to it users' needs.
+ *
+ * @author TuanDingWei
+ */
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -103,13 +112,18 @@ public class Duke {
                      System.out.println(taskCounter(taskCount) + "\n");
                  }
              } catch (DukeException ex) {
-                System.out.println("    ☹ OOPS!!! " + ex.getMessage() + "\n");
+                System.out.println("OOPS!!! " + ex.getMessage() + "\n");
             }
         }
 
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays the task count.
+     * @param taskCount The total number of Task that exist in the list.
+     * @return An message that tells the user the total number of tasks are in the list.
+     */
     private static String taskCounter(int taskCount) {
         if (taskCount > 1) {
             return ("Now you have " + taskCount + " tasks in the list.");
@@ -118,6 +132,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Removes task from the list.
+     * @param taskStorage A list that stores all the existing tasks.
+     *                    It is in the format of an ArrayList.
+     * @param index The index of task that the user wishes to delete.
+     */
     private static void removeTask(ArrayList taskStorage, int index) {
         taskStorage.remove(index);
     }

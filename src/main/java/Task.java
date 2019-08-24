@@ -1,5 +1,5 @@
 public class Task {
-	private boolean taskCompletionStatus;
+	public boolean taskCompletionStatus;
 	private String taskDescription;
 
 	public Task(String description) {

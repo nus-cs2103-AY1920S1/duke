@@ -1,20 +1,16 @@
 public class DukeMissingParameterException extends DukeException {
-    public DukeMissingParameterException(Command command) {
-        super("A " + command.name()+ " requires the following field(s) to be non-empty: "
-                + getRequiredFieldsString(command));
+    public DukeMissingParameterException(Command.Type type, String[] parameters) {
+        super(missingParameters(type, parameters));
     }
 
-    private static String getRequiredFieldsString(Command command) {
-        StringBuffer paramsRequired = new StringBuffer();
-        int count = 0;
-        for (String param : command.parameters) {
-            count++;
-            paramsRequired.append("(");
-            paramsRequired.append(count);
-            paramsRequired.append(")");
-            paramsRequired.append(param);
-            paramsRequired.append(" ");
+    private static String missingParameters(Command.Type type, String[] parametersProvided) {
+        StringBuffer message = new StringBuffer("The following field(s) cannot be empty:");
+        for (int i = 0; i < type.parametersExpected; i++) {
+            if (parametersProvided[i] == null) {
+                message.append("\n>>>");
+                message.append(type.parameters.get(i));
+            }
         }
-        return paramsRequired.toString();
+        return message.toString();
     }
 }

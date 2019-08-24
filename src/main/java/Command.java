@@ -1,50 +1,46 @@
 import java.util.ArrayList;
 
-public enum Command {
-    EXIT(0),
-    LIST(0),
-    DELETE(1, "task number"),
-    DONE(1, "task number"),
-    TODO(1, "description"),
-    DEADLINE(2, "description", "time", " /by "),
-    EVENT(2, "description", "time", " /at ");
+public class Command {
 
-    private Command(int parametersExpected, String... parameterNamesAndDelimiters) {
-        this.parametersExpected = parametersExpected;
-        this.parameters = new ArrayList<String>();
-        this.delimiters = new ArrayList<String>();
-        for (int i = 0; i < parameterNamesAndDelimiters.length; i++) {
-            if (i < parametersExpected) {
-                this.parameters.add(parameterNamesAndDelimiters[i]);
-            } else {
-                this.delimiters.add(parameterNamesAndDelimiters[i]);
+    public enum Type {
+        UNUSED(0),
+        EXIT(0),
+        LIST(0),
+        DELETE(1, "task number"),
+        COMPLETE(1, "task number"),
+        ADD_TODO(1, "description"),
+        ADD_DEADLINE(2, "description", "time", "/by"),
+        ADD_EVENT(2, "description", "time", "/at");
+
+        Type(int parametersExpected, String... parameterNamesAndDelimiters) {
+            this.parametersExpected = parametersExpected;
+            this.parameters = new ArrayList<String>();
+            this.delimiters = new ArrayList<String>();
+            for (int i = 0; i < parameterNamesAndDelimiters.length; i++) {
+                if (i < parametersExpected) {
+                    this.parameters.add(parameterNamesAndDelimiters[i]);
+                } else {
+                    this.delimiters.add(parameterNamesAndDelimiters[i]);
+                }
             }
         }
+
+        public final int parametersExpected;
+        public ArrayList<String> parameters;
+        public ArrayList<String> delimiters;
+
     }
+    
+    public Type type;
+    public String[] parameters;
 
-    public final int parametersExpected;
-    public ArrayList<String> parameters, delimiters;
-
-    public static Command fromString(String command) throws DukeException {
-        switch(command) {
-            case "":
-                throw new DukeMissingCommandException();
-            case "bye":
-                return EXIT;
-            case "list":
-                return LIST;
-            case "delete":
-                return DELETE;
-            case "done":
-                return DONE;
-            case "todo":
-                return TODO;
-            case "deadline":
-                return DEADLINE;
-            case "event":
-                return EVENT;
-            default:
-                throw new DukeUnknownCommandException();
-        }
+    public Command(Type type, String... parameters) {
+        this.type = type;
+        this.parameters = parameters;
     }
 }
+
+
+
+
+

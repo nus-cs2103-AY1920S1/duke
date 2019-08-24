@@ -42,10 +42,12 @@ public class Duke {
      * @throws FileNotFoundException retrieving file that stored existing tasks
      */
     public void run() throws FileNotFoundException {
+        //Start of program
         user.greeting();
 
         StringBuilder sb = new StringBuilder();
 
+        //Loading stored task into current list
         Scanner pastScan = new Scanner(new FileReader("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt"));
         loadExisting(pastScan);
 
@@ -58,8 +60,8 @@ public class Duke {
 
             //adding items to arraylist for listing purpose
             if (input.toLowerCase().contains("done")) {
-                //getting the number for item
                 try {
+                    //mark task as done, change cross to tick
                     int itemNum = Integer.parseInt(input.substring(input.length() - 1));
                     Task curr = items.get(itemNum - 1);
                     curr.markAsDone();
@@ -75,8 +77,8 @@ public class Duke {
                     input = sc.nextLine();
                 }
             } else if (input.toLowerCase().contains("delete")) {
-                //getting the number for item
                 try {
+                    //delete task
                     int itemNum = Integer.parseInt(input.substring(input.length() - 1));
                     deleteTask(itemNum);
                     input = sc.nextLine();
@@ -88,16 +90,18 @@ public class Duke {
                     input = sc.nextLine();
                 }
             } else if (input.toLowerCase().equals("list")) {
+                //listing all task in current list
                 user.listTask(items);
                 input = sc.nextLine();
             } else {
+                //generate task and store into list
                 generateTask(input);
                 input = sc.nextLine();
             }
         }
 
+        //store current tasks into local file for future reference
         storeCurrent(items);
-
 
         //Concluding Message
         user.conclusion();

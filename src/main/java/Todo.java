@@ -7,12 +7,17 @@ public class Todo extends Task {
     }
 
     @Override
+    protected String getAdditionalInfo() {
+        return "";
+    }
+
+    @Override
     protected String getTypeSymbol() {
         return "[T]";
     }
 
     @Override
-    protected String getAdditionalInfo() {
+    protected String displayAdditionalInfo() {
         return "";
     }
 }

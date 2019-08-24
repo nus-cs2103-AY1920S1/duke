@@ -2,6 +2,7 @@ package main.java;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -10,73 +11,79 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static String divider = "    ____________________________________________________________\n";
+    private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
+    private static final String DIVIDER = "    ____________________________________________________________\n";
+    private static final String SEPARATOR = " | ";
     private static List<Task> taskList = new ArrayList<>();
     private static File file;
 
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
+    public static void main(String[] args) throws DukeException, IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.print(divider);
+        System.out.print(DIVIDER);
         System.out.print("\t Hello! I'm Duke\n");
         System.out.print("\t What can I do for you?\n");
-        System.out.print(divider);
+        System.out.print(DIVIDER);
 
-//        loadData();
+        loadData();
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String action = sc.next();
             if (action.equals("bye")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 System.out.print("     Bye. Hope to see you again soon!\n");
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 break;
 
             } else if (action.equals("list")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 listTasks();
-                System.out.print(divider);
+                System.out.print(DIVIDER);
 
             } else if (action.equals("done")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 markTaskAsDone(sc);
-                System.out.print(divider);
-
+                System.out.print(DIVIDER);
+                updateData();
 
             } else if (action.equals("todo")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 onTodoActionCalled(sc);
-                System.out.print(divider);
+                System.out.print(DIVIDER);
+                updateData();
 
             } else if (action.equals("deadline")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 onDeadlineActionCalled(sc);
-                System.out.print(divider);
+                System.out.print(DIVIDER);
+                updateData();
 
             } else if (action.equals("event")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 onEventActionCalled(sc);
-                System.out.print(divider);
+                System.out.print(DIVIDER);
+                updateData();
 
             } else if (action.equals("delete")) {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 deleteTask(sc);
-                System.out.print(divider);
+                System.out.print(DIVIDER);
+                updateData();
 
             } else {
-                System.out.print(divider);
+                System.out.print(DIVIDER);
                 try {
                     throw new InvalidCommandException();
                 } catch (InvalidCommandException e) {
                     sc.nextLine();
                     System.out.print("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
                 }
-                System.out.print(divider);
+                System.out.print(DIVIDER);
             }
         }
 
@@ -149,11 +156,9 @@ public class Duke {
             }
             Task newTask = addNewTodo(taskName, false);
             printAddTaskMessage(newTask);
-
         } catch (EmptyDescriptionException e) {
             System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", "todo");
         }
-
     }
 
     private static void onDeadlineActionCalled(Scanner sc) {
@@ -166,7 +171,6 @@ public class Duke {
             }
             Task newTask = addNewDeadline(taskInfo[0], taskInfo[1], false);
             printAddTaskMessage(newTask);
-
         } catch (EmptyDescriptionException e) {
             System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", "deadline");
 
@@ -234,11 +238,11 @@ public class Duke {
     }
 
     private static void loadData() throws FileNotFoundException {
-        file = new File("data/fruits.txt");
+        file = new File(ROOT + "/data/duke.txt");
         if (file.exists()) {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String[] taskInfo = sc.nextLine().split("\\s*|\\s*");
+                String[] taskInfo = sc.nextLine().split("\\s*\\|\\s*");
                 switch (taskInfo[0]) {
                     case "T":
                         addNewTodo(taskInfo[2], taskInfo[1].equals("1"));
@@ -256,10 +260,48 @@ public class Duke {
         } else {
             try {
                 file.createNewFile();
+                file = new File(file.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static void updateData() throws IOException {
+        FileWriter fw = new FileWriter(file.getAbsolutePath());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task instanceof Todo) {
+                sb.append("T");
+                sb.append(SEPARATOR);
+                sb.append(task.getStatus());
+                sb.append(SEPARATOR);
+                sb.append(task.getName());
+            } else if (task instanceof Deadline) {
+                sb.append("D");
+                sb.append(SEPARATOR);
+                sb.append(task.getStatus());
+                sb.append(SEPARATOR);
+                sb.append(task.getName());
+                sb.append(SEPARATOR);
+                sb.append(task.getAdditionalInfo());
+            } else if (task instanceof Event) {
+                sb.append("E");
+                sb.append(SEPARATOR);
+                sb.append(task.getStatus());
+                sb.append(SEPARATOR);
+                sb.append(task.getName());
+                sb.append(SEPARATOR);
+                sb.append(task.getAdditionalInfo());
+            }
+
+            if (i < taskList.size()) {
+                sb.append(System.lineSeparator());
+            }
+        }
+        fw.write(sb.toString());
+        fw.close();
     }
 
 }

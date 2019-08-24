@@ -14,6 +14,7 @@ public abstract class Task {
 
     protected abstract String getTypeSymbol();
     protected abstract String getAdditionalInfo();
+    protected abstract String displayAdditionalInfo();
 
     protected void setDone() {
         this.status = DONE;
@@ -23,7 +24,11 @@ public abstract class Task {
         this.status = NOT_DONE;
     }
 
-    private int getStatus() {
+    protected  String getName() {
+        return name;
+    }
+
+    protected int getStatus() {
         return status;
     }
 
@@ -37,6 +42,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("%s%s %s %s", getTypeSymbol(), getStatusSymbol(), name, getAdditionalInfo());
+        return String.format("%s%s %s %s", getTypeSymbol(), getStatusSymbol(), name, displayAdditionalInfo());
     }
 }

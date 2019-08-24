@@ -4,14 +4,23 @@ public abstract class Task {
     protected String name;
     protected boolean isDone;
 
-    //Used when user entered command
+    /**
+     * Constructor that will be used for entered command.
+     * @param name name of the task
+     */
     public Task(String name) {
+        //Used when user entered command
         this.name = name;
         this.isDone = false;
     }
 
-    //Used when program loads data from text
+    /**
+     * Constructor that will be used for loading data from text.
+     * @param name name of the task
+     * @param isDone is the status of the task
+     */
     public Task(String name, boolean isDone) {
+        //Used when program loads data from text
         this.name = name;
         this.isDone = isDone;
     }
@@ -29,14 +38,14 @@ public abstract class Task {
     }
 
     /**
-     * Change status icon to tick
+     * Change status icon to tick.
      */
     public void completeTask() {
         this.isDone = true;
     }
 
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? "✓" : "✗";
     }
 
     public abstract char getShortForm();

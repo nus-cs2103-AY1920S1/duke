@@ -8,8 +8,10 @@ import java.util.Scanner;
  * Displays message to the user via terminal.
  */
 public class Ui {
-    public static final String START_HORIZONTAL_LINE = "   ____________________________________________________________";
-    public static final String END_HORIZONTAL_LINE = "   ____________________________________________________________\n";
+    public static final String START_HORIZONTAL_LINE = "   _______________________________________________________"
+            + "_____";
+    public static final String END_HORIZONTAL_LINE = "   _________________________________________________________"
+            + "___\n";
 
     private Scanner scanner;
 
@@ -18,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Print error messages to user.
+     * Displays error messages to user.
      * @param errorMessages error message that Ui will displayed to user
      */
     public void showError(String... errorMessages) {
@@ -26,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * Print info messages to user.
+     * Displays info messages to user.
      * @param messages info message that Ui will displayed to user
      */
     public void showMessage(String... messages) {
@@ -52,7 +54,7 @@ public class Ui {
      * Prints messages to the terminal.
      * @param messagesLines messages to be printed to the console
      */
-    public void printLines(String ... messagesLines) {
+    public void printLines(String... messagesLines) {
         System.out.println(START_HORIZONTAL_LINE);
         for (String line : messagesLines) {
             System.out.println(line);

@@ -1,16 +1,23 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.DeleteCommand;
+import duke.command.DeadlineCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.exception.DukeException;
 import duke.shared.Messages;
 
 /**
- * Parses command
+ * Parses command.
  */
 public class Parser {
     /**
-     * Converts the command into command object
-     * @param command is the command inputted by the user
+     * Converts the command into command object.
+     * @param command command inputted by the user
      * @return converted command object
      * @throws DukeException throws by {@link #findCommand(String[])}
      * @throws NumberFormatException throws by {@link #findCommand(String[])}
@@ -21,7 +28,7 @@ public class Parser {
     }
 
     /**
-     * Returns the correct command object based on user inputted command
+     * Returns the correct command object based on user inputted command.
      * @param commands is the last command entered by the user
      * @throws DukeException if user inputted an invalid command
      * @throws NumberFormatException if user inputted an invalid description for done and delete command
@@ -50,7 +57,7 @@ public class Parser {
         } else if (commands[0].equals("todo")) {
             if (commands.length > 1) {
                 return new ToDoCommand(commands);
-            } else if (commands.length == 1){
+            } else if (commands.length == 1) {
                 throw new DukeException(String.format(Messages.DESCRIPTION_MISSING_EXCEPTION, "todo"));
             }
         } else if (commands[0].equals("deadline")) {
@@ -75,7 +82,8 @@ public class Parser {
                     throw new DukeException(Messages.UNKNOWN_COMMAND_EXCEPTION);
                 }
             } catch (NumberFormatException e) {
-                throw new NumberFormatException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "delete", "number"));
+                throw new NumberFormatException(String.format(Messages.DESCRIPTION_FORMAT_EXCEPTION, "delete",
+                        "number"));
             }
         }
         throw new DukeException(Messages.UNKNOWN_COMMAND_EXCEPTION);

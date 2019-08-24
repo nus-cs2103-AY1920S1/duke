@@ -7,7 +7,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,15 +32,19 @@ public class Storage {
     public static final int TASK_INDEX = 0;
     public static final int START_ARGUMENTS_INDEX = 4;
 
+    /**
+     * Constructor for storage.
+     * @param filePath file path to load our data from
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Reads and loads the data from the text file.
+     * Reads and load data from file.
      * @return list of past tasks saved in the text file
      * @throws IOException throws by {@link #readFile()}
-     * @throws DukeException throws by {@link #eventParser(String[])} and {@link #deadlineParser(String[])}
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
      */
     public List<Task> load() throws IOException, DukeException {
         taskList = new ArrayList<>();
@@ -46,8 +54,8 @@ public class Storage {
 
     /**
      * Reads and decode the text in the text file line-by-line.
-     * @throws IOException file is not found / unable to read the file
-     * @throws DukeException throws by {@link #eventParser(String[])} and {@link #deadlineParser(String[])}
+     * @throws IOException if file cannot be found / file cannot be opened
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
      */
     public void readFile() throws IOException, DukeException {
         String line;
@@ -64,7 +72,7 @@ public class Storage {
     /**
      * Decode the line and adds to the tasklist.
      * @param line line read from the text file
-     * @throws DukeException throws by {@link #eventParser(String[])} and {@link #deadlineParser(String[])}
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
      */
     public void decodeLine(String line) throws DukeException {
         String[] inputLines = line.split("\\s+");
@@ -81,8 +89,8 @@ public class Storage {
 
     /**
      * Convert the decoded line to ToDo object.
-     * @param inputLines String array of input line
-     * @return ToDo task after decoding
+     * @param inputLines line from the text file
+     * @return converted todo object
      */
     public Task toDoParser(String[] inputLines) {
         Task toDoTask = null;
@@ -98,9 +106,9 @@ public class Storage {
 
     /**
      * Convert the decoded line to Event object.
-     * @param inputLines String array of input line
-     * @return Event task after decoding
-     * @throws DukeException if {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])} unable to retrieve the descriptions
+     * @param inputLines line from the text file
+     * @return converted event object
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
      */
     public Task eventParser(String[] inputLines) throws DukeException {
         Task eventTask = null;
@@ -116,9 +124,9 @@ public class Storage {
 
     /**
      * Convert the decoded line to Deadline Object.
-     * @param inputLines String array of input line
-     * @return Deadline task after decoding
-     * @throws DukeException if {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])} unable to retrieve the descriptions
+     * @param inputLines line from the text file
+     * @return converted deadline object
+     * @throws DukeException throws by {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])}
      */
     public Task deadlineParser(String[] inputLines) throws DukeException {
         Task deadlineTask = null;
@@ -135,7 +143,7 @@ public class Storage {
     }
 
     /**
-     * Formats the tasklist and save into the defined text file.
+     * Encode the task and save it to the text file.
      * @param taskList latest list of tasks
      * @throws IOException throws by {@link #writeToFile(String)}
      */
@@ -150,7 +158,8 @@ public class Storage {
                         .append(task.getName()).append(" | ").append(((Event) task).getTiming()).append("\n");
             } else if (task instanceof Deadline) {
                 myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                        .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime()).append("\n");
+                        .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime())
+                        .append("\n");
             }
         }
         myStringBuilder.deleteCharAt(myStringBuilder.length() - 1);
@@ -158,9 +167,9 @@ public class Storage {
     }
 
     /**
-     * Writes data to text file.
-     * @param linesToWrite string to be written to the text file
-     * @throws IOException if the file is not found
+     * Write text to file.
+     * @param linesToWrite string to be written to the file
+     * @throws IOException if file cannot be opened
      */
     public void writeToFile(String linesToWrite) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));

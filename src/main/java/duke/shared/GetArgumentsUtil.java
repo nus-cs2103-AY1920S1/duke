@@ -8,8 +8,8 @@ import java.util.List;
 public class GetArgumentsUtil {
 
     /**
-     * Retrieves two args from an array.
-     * @param start is the start index where the program will sublist from
+     * Retrieves two args from an arrays.
+     * @param start is the start index where the method will sublist from
      * @param delimiter is the string that determine the 2 arguments
      * @param commands is the latest command inputted by the user
      * @return an array of 2 items, command description and sub-command(e.g. /at) description
@@ -24,8 +24,10 @@ public class GetArgumentsUtil {
         } else if (indexOfSeparator == -1) {
             throw new DukeException(String.format(Messages.NO_SUBDESCRIPTION_EXCEPTION, delimiter));
         } else {
-            args[0] = concatStrings(commandList.subList(start, indexOfSeparator).toArray(new String[indexOfSeparator - 1]));
-            args[1] = concatStrings(commandList.subList(indexOfSeparator + 1, commandList.size()).toArray(new String[commandList.size() - (indexOfSeparator + 1)]));
+            args[0] = concatStrings(commandList.subList(start, indexOfSeparator)
+                    .toArray(new String[indexOfSeparator - 1]));
+            args[1] = concatStrings(commandList.subList(indexOfSeparator + 1, commandList.size())
+                    .toArray(new String[commandList.size() - (indexOfSeparator + 1)]));
         }
         return args;
     }

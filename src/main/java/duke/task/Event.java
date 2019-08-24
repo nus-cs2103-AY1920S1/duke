@@ -1,17 +1,28 @@
 package duke.task;
 
-public class Event extends Task{
+public class Event extends Task {
     private char shortForm = 'E';
     protected String timing;
 
-    //Used when user entered command
+    /**
+     * Constructor that will be used for entered command.
+     * @param name name of the event task
+     * @param timing datetime/location of the event task
+     */
     public Event(String name, String timing) {
+        //Used when user entered command
         super(name);
         this.timing = timing;
     }
 
-    //Used when program loads data from text
+    /**
+     * Constructor that will be used for loading data from text.
+     * @param name name of the event task
+     * @param timing datetime/location of the event task
+     * @param isDone is the status of the task
+     */
     public Event(String name, String timing, boolean isDone) {
+        //Used when program loads data from text
         super(name, isDone);
         this.timing = timing;
     }

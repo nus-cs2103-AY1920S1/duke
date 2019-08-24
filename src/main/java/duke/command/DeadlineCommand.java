@@ -47,8 +47,8 @@ public class DeadlineCommand extends AddCommand {
             LocalDateTime dateTime = LocalDateTime.parse(args[1], formatter);
             Task deadlineTask = new Deadline(args[0], dateTime);
             taskList.addToTaskList(deadlineTask);
-            ui.showMessage(Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION +
-                    Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
+            ui.showMessage(Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
+                    + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
             return true;
         } catch (DateTimeParseException e) {

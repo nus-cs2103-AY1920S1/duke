@@ -38,8 +38,8 @@ public class EventCommand extends AddCommand {
             String[] args = GetArgumentsUtil.getTwoCommandArgs(1, "/at", commands);
             Task eventTask = new Event(args[0], args[1]);
             taskList.addToTaskList(eventTask);
-            ui.showMessage( Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION +
-                    Messages.COMPLETION_INDENTATION + eventTask.toString(),
+            ui.showMessage(Messages.ADDED_TASK_MESSAGE, Messages.COMMAND_INDENTATION
+                    + Messages.COMPLETION_INDENTATION + eventTask.toString(),
                     String.format(Messages.LIST_SIZE_FORMAT, taskList.getSize()));
             return true;
         } catch (DukeException e) {

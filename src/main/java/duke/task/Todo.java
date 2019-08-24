@@ -3,13 +3,13 @@ package duke.task;
 public class Todo extends Task {
     private char shortForm = 'T';
 
-    //Used when user entered command
     public Todo(String name) {
+        //Used when user entered command
         super(name);
     }
 
-    //Used when program loads data from text
     public Todo(String name, boolean isDone) {
+        //Used when program loads data from text
         super(name, isDone);
     }
 

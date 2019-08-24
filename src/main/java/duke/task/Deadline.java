@@ -7,13 +7,22 @@ public class Deadline extends Task {
     private char shortForm = 'D';
     protected LocalDateTime submissionTime;
 
-    //Used when user entered command
+    /**
+     * Constructor that will be used for entered command.
+     * @param name name of the deadline task
+     * @param submissionTime datetime of the deadline task
+     */
     public Deadline(String name, LocalDateTime submissionTime) {
         super(name);
         this.submissionTime = submissionTime;
     }
 
-    //Used when program loads data from text
+    /**
+     * Constructor that will be used for loading data from text.
+     * @param name name of the deadline task
+     * @param submissionTime datetime of the deadline task
+     * @param isDone is the status of the task
+     */
     public Deadline(String name, LocalDateTime submissionTime, boolean isDone) {
         super(name, isDone);
         this.submissionTime = submissionTime;

@@ -33,6 +33,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getDataBaseFormat() {
+        return String.format("E | %d | %s | %s |\r\n", (isDone ? 1 : 0), description, at);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

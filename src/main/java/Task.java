@@ -16,6 +16,8 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public abstract String getDataBaseFormat();
+
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);
     }

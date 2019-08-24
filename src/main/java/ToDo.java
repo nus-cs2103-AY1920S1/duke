@@ -12,4 +12,11 @@ public class ToDo extends Task {
             return "[T][\u2718] " + this.description;
         }
     }
+
+    @Override
+    public String createTaskInFileFormat() {
+        String temp = "T ";
+        temp += super.createTaskInFileFormat();
+        return temp;
+    }
 }

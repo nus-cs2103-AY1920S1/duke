@@ -1,6 +1,11 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Stream;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,8 +18,19 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        //intialize an arraylist to store strings
-        List<Task> store = new ArrayList<Task>();
+
+        //initialise array list to store strings from file
+        ArrayList<String> storingStrings = new ArrayList<>();
+        //initialise an arraylist to store Tasks
+        ArrayList<Task> store = new ArrayList<Task>();
+        try{
+            Stream<String> stream = Files.lines(Paths.get("data/duke.txt"));
+            stream.forEach(storingStrings::add);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //storingStrings.forEach(System.out::println);
+        store = createTasksFromFile(storingStrings, store);
         Scanner myScanner = new Scanner(System.in);
         String argument = myScanner.nextLine();
         //when user input is not bye
@@ -29,6 +45,7 @@ public class Duke {
                 argument = myScanner.nextLine();
             } else {
                 String[] argumentArray = argument.split(" ");
+                //start of toDo,Event,Deadline
                 if (argumentArray[0].equals("done")) {
                     try {
                         if (argumentArray.length == 1) {
@@ -48,6 +65,7 @@ public class Duke {
                     }catch (DukeException e) {
                         System.out.println(e);
                     } finally {
+                        saveTaskToFile(store);
                         argument = myScanner.nextLine();
                     }
                 } else if (argumentArray[0].equals("todo")) {
@@ -73,6 +91,7 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e);
                     } finally {
+                        saveTaskToFile(store);
                         argument = myScanner.nextLine();
                     }
                 } else if (argumentArray[0].equals("deadline")) {
@@ -114,6 +133,7 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e);
                     } finally {
+                        saveTaskToFile(store);
                         argument = myScanner.nextLine();
                     }
                 } else if (argumentArray[0].equals("event")) {
@@ -154,6 +174,7 @@ public class Duke {
                     } catch (DukeException e) {
                         System.out.println(e);
                     } finally {
+                        saveTaskToFile(store);
                         argument = myScanner.nextLine();
                     }
                 }else if (argumentArray[0].equals("delete")) {
@@ -175,14 +196,11 @@ public class Duke {
                         }catch (DukeException e) {
                             System.out.println(e);
                         } finally {
+                            saveTaskToFile(store);
                             argument = myScanner.nextLine();
                         }
 
                 } else {
-                    /*Task incomingTask = new Task(argument);
-                    store.add(incomingTask);
-                    System.out.println("added: " + argument);
-                    argument = myScanner.nextLine();*/
                     try {
                         //handles error for not recognized command
                         throw new DukeException("☹  OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -199,6 +217,122 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         myScanner.close();
     }
+
+    /*
+    static Task createToDoTask(String line) {
+
+    }
+
+
+    static Task createDeadLineTask(String line) {
+
+    }
+
+
+    static Task createEventTask(String line) {
+
+    }*/
+
+    static void saveTaskToFile(ArrayList<Task> list) {
+        try {
+            File tempFile = new File("data/duke.txt");
+            FileWriter fileWriter = new FileWriter(tempFile);
+            for (int i = 0; i < list.size(); i++) {
+                Task currentTask = list.get(i);
+                fileWriter.write(currentTask.createTaskInFileFormat() + "\n");
+            }
+            fileWriter.close();
+
+        } catch(IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    static ArrayList<Task> createTasksFromFile(ArrayList<String> list, ArrayList<Task> store) {
+        for (int i = 0; i < list.size(); i++) {
+            String wholeLine = list.get(i);
+            String[] argumentArray = wholeLine.split(" ");
+
+            boolean isCompleted = false;
+            if (argumentArray[1].equals("1"))  {
+                //completed
+                //System.out.println(argumentArray[1]);
+                isCompleted = true;
+            }
+
+            if (argumentArray[0].equals("T")) {
+
+                String toDoTaskString = "";
+                for (int j = 2; j < argumentArray.length; j++) {
+                    toDoTaskString += argumentArray[j];
+                    toDoTaskString += " ";
+                }
+                //.trim() to remove trailing space
+                Task toDoTask = new ToDo(toDoTaskString.trim());
+
+                if(isCompleted) {
+                    toDoTask.markAsDone();
+                }
+                store.add(toDoTask);
+
+            } else if (argumentArray[0].equals("D")) {
+
+                String deadlineTaskDescriptionString = "";
+                String deadlineTaskDateAndTimeString = "";
+                boolean createDesc = true;
+                for (int j = 2; j < argumentArray.length; j++) {
+                    if (argumentArray[j].equals("/by")) {
+                        createDesc = false;
+                    } else if (createDesc) {
+                        deadlineTaskDescriptionString += argumentArray[j];
+                        deadlineTaskDescriptionString += " ";
+                    } else {
+                        deadlineTaskDateAndTimeString += argumentArray[j];
+                        deadlineTaskDateAndTimeString += " ";
+                    }
+                }
+
+                //use .trim() method to eliminate trailing white space
+                Task deadlineTask = new Deadline(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
+                if (isCompleted) {
+                    deadlineTask.markAsDone();
+                }
+                store.add(deadlineTask);
+
+            } else if (argumentArray[0].equals("E")) {
+                String eventTaskDescriptionString = "";
+                String eventTaskDateAndTimeString = "";
+                boolean createDesc = true;
+
+
+                for (int j = 2; j < argumentArray.length; j++) {
+                    if (argumentArray[j].equals("/at")) {
+                        createDesc = false;
+                    } else if (createDesc) {
+                        eventTaskDescriptionString += argumentArray[j];
+                        eventTaskDescriptionString += " ";
+                    } else {
+                        eventTaskDateAndTimeString += argumentArray[j];
+                        eventTaskDateAndTimeString += " ";
+
+                    }
+                }
+
+                //use of .trim() to avoid trailing whitespace
+                Task eventTask = new Event(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
+                if (isCompleted) {
+                    eventTask.markAsDone();
+                }
+                store.add(eventTask);
+            } else {
+
+            }
+        }
+
+
+        return store;
+    }
+
 
     //print common methods to call
     static void printNoted() {

@@ -18,4 +18,10 @@ public class Task{
     public void setAsDone(){
         done = true;
     }
+    public String toFile(){
+        int d;
+        if(done){d = 1;}
+        else{d = 0;}
+        return d+","+content;
+    }
 }

@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +21,27 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Scanner s = new Scanner(System.in);
+        File file = new File("../../../data/duke.txt");
         ArrayList<Task> list = new ArrayList<>();
+        Scanner sFile;
+        try {
+            file.createNewFile();
+            sFile = new Scanner(file);
+            while (sFile.hasNextLine()) {
+                String ln = sFile.nextLine();
+                String[] lnSplit = ln.split(",");
+                if (lnSplit[0].equals("T")) {
+                    list.add(new Todo(lnSplit[2]));
+                } else if (lnSplit[0].equals("E")) {
+                    list.add(new Event(lnSplit[2], lnSplit[3]));
+                } else if (lnSplit[0].equals("D")) {
+                    list.add(new Deadline(lnSplit[2], lnSplit[3]));
+                }
+            }
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         String echo = s.nextLine();
         while (true) {
             if (echo.equals("bye")) {
@@ -159,6 +182,16 @@ public class Duke {
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
             echo = s.nextLine();
+        }
+        try {
+            FileWriter fw = new FileWriter(file);
+            for (Task t : list) {
+                fw.write(t.toFile() + "\n");
+            }
+            fw.close();
+        } catch (IOException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
         }
     }
 }

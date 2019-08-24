@@ -7,4 +7,7 @@ public class Deadline extends Task{
     public String toString(){
         return "[D]"+super.toString()+ " (by: " + by + ")";
     }
+    public String toFile(){
+        return "D,"+super.toFile()+","+by;
+    }
 }

@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -35,11 +34,9 @@ class DoneCommandTest extends CommandTest {
     }
 
     @Test
-    @Disabled
     void doMarkDoneNonNumericIndex() {
-        command = new DoneCommand("garbage input");
         Assertions.assertThrows(NumberFormatException.class, () -> {
-            command.execute(mutableTaskListOf(), ui, store);
+            new DoneCommand("garbage input");
         });
     }
 

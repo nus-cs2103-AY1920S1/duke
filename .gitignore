@@ -19,4 +19,5 @@ src/main/java/Event.class
 src/main/java/Duke.class
 src/main/java/Deadline.class
 src/main/java/DukeException.class
-data/duke.txt
+
+*.txt

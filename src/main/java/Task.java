@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +34,9 @@ public class Task {
                 type = t instanceof Todo ? "T" : t instanceof Deadline ? "D" : "E";
                 isDone = t.isDone() ? "1" : "0";
                 desc = t.getDesc();
-                time = t instanceof Todo ? "" : t instanceof Deadline ? ((Deadline) t).getDateBy() : ((Event) t).getDuration();
+                time = t instanceof Todo ? "" :
+                        t instanceof Deadline ? String.valueOf(((Deadline) t).getDateBy()) :
+                                ((Event) t).getStartDate() + gap + ((Event) t).getEndDate();
                 fw.write(type + gap + isDone + gap + desc + (time.equals("") ? "" : gap) + time + "\n");
             }
             fw.close();
@@ -63,10 +66,10 @@ public class Task {
                     task = new Todo(inputs[2], isDone);
                     break;
                 case "D":
-                    task = new Deadline(inputs[2], inputs[3], isDone);
+                    task = new Deadline(inputs[2], LocalDateTime.parse(inputs[3]), isDone);
                     break;
                 case "E":
-                    task = new Event(inputs[2], inputs[3], isDone);
+                    task = new Event(inputs[2], LocalDateTime.parse(inputs[3]), LocalDateTime.parse(inputs[4]), isDone);
                     break;
                 }
                 tasks.add(task);

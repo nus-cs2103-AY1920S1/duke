@@ -1,33 +1,44 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    protected String duration;
+    protected LocalDateTime startDate;
+    protected LocalDateTime endDate;
 
     Event(String desc) {
         super(desc);
-        this.duration = "no idea :-p";
     }
     Event(String desc, boolean done) {
         super(desc, done);
-        this.duration = "no idea :-p";
     }
-    Event(String desc, String duration) {
+    Event(String desc, LocalDateTime startDate, LocalDateTime endDate) {
         super(desc);
-        this.duration = duration;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
-    Event(String desc, String duration, boolean done) {
+    Event(String desc, LocalDateTime startDate, LocalDateTime endDate, boolean done) {
         super(desc, done);
-        this.duration = duration;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public String getDuration() {
-        return duration;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getDuration() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getStartDate() + " to " + this.getEndDate() + ")";
     }
 }

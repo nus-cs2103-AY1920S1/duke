@@ -1,27 +1,28 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     Deadline(String desc) {
         super(desc);
-        this.by = "no idea :-p";
     }
     Deadline(String desc, boolean done) {
         super(desc, done);
     }
-    Deadline(String desc, String by) {
+    Deadline(String desc, LocalDateTime by) {
         super(desc);
         this.by = by;
     }
-    Deadline(String desc, String by, boolean done) {
+    Deadline(String desc, LocalDateTime by, boolean done) {
         super(desc, done);
         this.by = by;
     }
 
-    public String getDateBy() {
+    public LocalDateTime getDateBy() {
         return by;
     }
 
-    public void setDateBy(String by) {
+    public void setDateBy(LocalDateTime by) {
         this.by = by;
     }
     @Override

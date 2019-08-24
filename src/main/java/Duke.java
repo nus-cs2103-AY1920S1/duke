@@ -1,14 +1,33 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+    private static final String SAVE_PATH = "duke.txt";
+
     public static void main(String[] args) {
+        ArrayList<Task> tasks;
+
+        try {
+            tasks = Duke.loadTasks();
+        } catch (FileNotFoundException ex) {
+            tasks = new ArrayList<>();
+            try {
+                File file = new File(Duke.SAVE_PATH);
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("☹ OOPS!!! There's problem with the IO.");
+            }
+        }
+
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println();
 
-        ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
 
@@ -20,12 +39,14 @@ public class Duke {
                         System.out.println((i + 1) + ". " + tasks.get(i).toString());
                     }
                     System.out.println();
+                    Duke.saveTasks(tasks);
                 } else if (command.startsWith("done")) {
                     int index = Integer.parseInt(command.split(" ")[1]);
                     tasks.get(index - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(index - 1).toString());
                     System.out.println();
+                    Duke.saveTasks(tasks);
                 } else if (command.startsWith("delete")) {
                     int index = Integer.parseInt(command.split(" ")[1]);
                     Task task = tasks.remove(index - 1);
@@ -33,6 +54,7 @@ public class Duke {
                     System.out.println(task.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println();
+                    Duke.saveTasks(tasks);
                 } else if (command.startsWith("todo")) {
                     try {
                         String description = command.split(" ", 2)[1];
@@ -42,6 +64,7 @@ public class Duke {
                         System.out.println(task.toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println();
+                        Duke.saveTasks(tasks);
                     } catch (IndexOutOfBoundsException e) {
                         throw new EmptyDescriptionException();
                     }
@@ -56,6 +79,7 @@ public class Duke {
                         System.out.println(task.toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println();
+                        Duke.saveTasks(tasks);
                     } catch (IndexOutOfBoundsException e) {
                         throw new EmptyDescriptionException();
                     }
@@ -70,6 +94,7 @@ public class Duke {
                         System.out.println(task.toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         System.out.println();
+                        Duke.saveTasks(tasks);
                     } catch (IndexOutOfBoundsException e) {
                         throw new EmptyDescriptionException();
                     }
@@ -88,6 +113,58 @@ public class Duke {
         }
 
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static String convertTasksToText(ArrayList<Task> tasks) {
+        StringBuilder text = new StringBuilder();
+        for (Task task : tasks) {
+            text.append(task.toSaveString());
+            text.append("\n");
+        }
+        return text.toString();
+    }
+
+    private static Task convertTextToTask(String text) {
+        String[] tokens = text.split(" | ");
+        String type = tokens[0];
+        boolean isDone = tokens[2].equals("1");
+        String description = tokens[4];
+        Task task;
+
+        if (type.equals("T")) {
+            task = new Todo(description);
+        } else if (type.equals("E")) {
+            task = new Event(description, tokens[6]);
+        } else {
+            task = new Deadline(description, tokens[6]);
+        }
+
+        if (isDone) {
+            task.markAsDone();
+        }
+
+         return task;
+    }
+
+    private static ArrayList<Task> loadTasks() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        File file = new File(Duke.SAVE_PATH);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            Task task = Duke.convertTextToTask(scanner.nextLine());
+            tasks.add(task);
+        }
+        return tasks;
+    }
+
+    private static void saveTasks(ArrayList<Task> tasks) {
+        try {
+            FileWriter fw = new FileWriter(Duke.SAVE_PATH);
+            fw.write(Duke.convertTasksToText(tasks));
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

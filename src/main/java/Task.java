@@ -1,5 +1,5 @@
 
-    public class Task {
+    public abstract class Task {
         protected String taskDesc;
         protected boolean isDone;
 
@@ -26,5 +26,7 @@
                 return printable;
             }
         }
+
+        public abstract String toFileFormat();
     }
 

@@ -10,4 +10,14 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + super.toString() + "(by: " + timeDesc + ")";
     }
+
+    public String toFileFormat() {
+        if(isDone) {
+            String format = "D | [✓] | " + taskDesc + " | " + timeDesc + "\n";
+            return format;
+        } else {
+            String format = "D | [✗] | " + taskDesc + " | " + timeDesc + "\n";
+            return format;
+        }
+    }
 }

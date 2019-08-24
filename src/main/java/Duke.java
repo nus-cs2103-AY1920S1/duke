@@ -1,4 +1,7 @@
 import java.util.*;
+import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,13 +20,12 @@ public class Duke {
                 } else {
                     String[] commandSplit = command.split(" ");
                     String firstInput = commandSplit[0];
-                    String secondInput = commandSplit[1];
-
                     switch (firstInput) {
                         case "done":
                             if (commandSplit.length == 1) {
                                 throw new DukeException("☹ OOPS!!! Please indicate which task you have completed.");
                             } else {
+                                String secondInput = commandSplit[1];
                                 int numChange = Integer.parseInt(secondInput);
                                 if (numChange > taskList.size()) {
                                     throw new DukeException("☹ OOPS!!! Task " + numChange + " does not exist.");
@@ -39,6 +41,7 @@ public class Duke {
                             if (commandSplit.length == 1) {
                                 throw new DukeException("☹ OOPS!!! Please indicate which task you would like to delete.");
                             } else {
+                                String secondInput = commandSplit[1];
                                 int numChange = Integer.parseInt(secondInput);
                                 if (numChange > taskList.size()) {
                                     throw new DukeException("☹ OOPS!!! Task " + numChange + " does not exist.");
@@ -101,6 +104,18 @@ public class Duke {
                         default:
                             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
+
+                    try {
+                        FileWriter fw = new FileWriter("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\dukenew\\src\\main\\java\\duke.txt");
+                        for (int i=0; i<taskList.size(); i++) {
+                            fw.write(taskList.get(i).toFileFormat());
+                        }
+
+                        fw.close();
+                    } catch (IOException e) {
+                        throw new DukeException("Something went wrong writing to file!");
+                    }
+
                 }
             } catch(DukeException ex){
                     System.out.println(ex.getMessage());

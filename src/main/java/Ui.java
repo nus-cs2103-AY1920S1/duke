@@ -18,51 +18,6 @@ public class Ui {
     }
 
     /**
-     * Gets a line of input from the user.
-     *
-     * @return A line of input from the user.
-     */
-    public String nextLine() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Prints a horizontal line to the user.
-     */
-    public void printHorizontalLine() {
-        output.println(HORIZONTAL_LINE);
-    }
-
-    /**
-     * Prints an empty line to the user.
-     */
-    public void println() {
-        output.println();
-    }
-
-    /**
-     * Prints the content argument with indentation.
-     *
-     * @param content Text to display to the user.
-     */
-    public void println(String content) {
-        content = LINE_START_PATTERN.matcher(content).replaceAll(LINE_INDENT);
-        output.println(content);
-    }
-
-    /**
-     * Prints a horizontal line, the argument and another horizontal line
-     * while taking care of indentation to create a block user interface element.
-     *
-     * @param content Text to display to the user.
-     */
-    public void printBlock(String content) {
-        printHorizontalLine();
-        println(content);
-        printHorizontalLine();
-    }
-
-    /**
      * A convenience method to create a {@code StringJoiner} using the system's newline separator.
      *
      * @return A new instance of {@code StringJoiner}.
@@ -112,29 +67,74 @@ public class Ui {
         return String.format("[%s][%s] %s", taskType, t.getStatusIcon(), description);
     }
 
+    /**
+     * Gets a line of input from the user.
+     *
+     * @return A line of input from the user.
+     */
+    public String nextLine() {
+        return scanner.nextLine();
+    }
+
+    /**
+     * Prints a horizontal line to the user.
+     */
+    public void printHorizontalLine() {
+        output.println(HORIZONTAL_LINE);
+    }
+
+    /**
+     * Prints an empty line to the user.
+     */
+    public void println() {
+        output.println();
+    }
+
+    /**
+     * Prints the content argument with indentation.
+     *
+     * @param content Text to display to the user.
+     */
+    public void println(String content) {
+        content = LINE_START_PATTERN.matcher(content).replaceAll(LINE_INDENT);
+        output.println(content);
+    }
+
+    /**
+     * Prints a horizontal line, the argument and another horizontal line
+     * while taking care of indentation to create a block user interface element.
+     *
+     * @param content Text to display to the user.
+     */
+    public void printBlock(String content) {
+        printHorizontalLine();
+        println(content);
+        printHorizontalLine();
+    }
+
     public void displayWelcome() {
         printBlock("Hello! I'm Duke\n" +
                 "What can I do for you?");
         println();
     }
 
-    public void displayLoadingError(Throwable exc){
+    public void displayLoadingError(Throwable exc) {
         StringJoiner errorMessage = createStringJoiner("Couldn't load previously saved Tasks.");
         errorMessage.add("Duke will start with an empty Task list.");
         errorMessage.add("");
         errorMessage.add("More details: " + exc.getMessage());
-        if(exc.getCause() != null){
+        if (exc.getCause() != null) {
             errorMessage.add(exc.getCause().getMessage());
         }
 
         displayError(errorMessage.toString());
     }
 
-    public void displayError(DukeException exc){
+    public void displayError(DukeException exc) {
         displayError(exc.getMessage());
     }
 
-    public void displayError(String message){
+    public void displayError(String message) {
         printBlock(" ☹ OOPS!!! " + message);
         println();
     }

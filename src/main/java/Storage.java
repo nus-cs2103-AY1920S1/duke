@@ -39,14 +39,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() {
-        return parseFromFile(filePath);
-    }
-
-    public void save(List<Task> tasks) {
-        serializeToFile(filePath, tasks);
-    }
-
     /**
      * Convenience function that loads the given file path and parses the Tasks within, returning a new List of the Tasks.
      *
@@ -256,6 +248,14 @@ public class Storage {
 
     private static String serializeDateTimeToToken(LocalDateTime dateTime) {
         return dateTime.format(DATE_TIME_FORMATTER);
+    }
+
+    public List<Task> load() {
+        return parseFromFile(filePath);
+    }
+
+    public void save(List<Task> tasks) {
+        serializeToFile(filePath, tasks);
     }
 }
 

@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class UiTest {
+    private static final String HORIZONTAL_LINE = "\t" + "_".repeat(60) + "\n";
     private final OutputStream mockedSysOut = new ByteArrayOutputStream();
     private final OutputStream realSysOut = System.out;
     private Ui ui;
-    private static final String HORIZONTAL_LINE = "\t" + "_".repeat(60) + "\n";
 
     static List<Arguments> getTasksWithExpectedStringDisplays() {
         return List.of(

@@ -2,13 +2,9 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 public class Duke {
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
-    }
-
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
+    private TaskList tasks;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -22,6 +18,10 @@ public class Duke {
             }
             tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("./data/duke.txt").run();
     }
 
     public void run() {

@@ -4,6 +4,11 @@ public class TodoTask extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return "T\t" + (this.isDone ? "1\t" : "0\t") + this.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

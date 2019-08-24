@@ -8,6 +8,11 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return "T\t" + (this.isDone ? "1\t" : "0\t") + this.description + "\t" + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

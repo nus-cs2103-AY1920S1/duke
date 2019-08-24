@@ -43,6 +43,7 @@ class BasicTaskModel implements TaskModelInterface {
         TaskInterface pendingTask = this.taskList.get(indexNum);
         TaskInterface doneTask = pendingTask.completeTask();
         this.taskList.set(indexNum, doneTask);
+        this.notifyObservers();
         return doneTask;
     }
 
@@ -50,6 +51,7 @@ class BasicTaskModel implements TaskModelInterface {
         int indexNum = refNum - 1;
         TaskInterface deletedTask = 
             this.taskList.remove(indexNum);
+        this.notifyObservers();
         return deletedTask;
     }
 

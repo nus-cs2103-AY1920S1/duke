@@ -31,8 +31,7 @@ class CommandParserTest {
         Command command = CommandParser.parse("done 1");
         assertTrue(command instanceof DoneCommand);
 
-        assertThrows(InvalidInputDukeException.class,
-                () -> CommandParser.parse("done"));
+        assertThrows(InvalidInputDukeException.class, () -> CommandParser.parse("done"));
     }
 
     @Test
@@ -40,8 +39,7 @@ class CommandParserTest {
         Command command = CommandParser.parse("delete 1");
         assertTrue(command instanceof DeleteCommand);
 
-        assertThrows(InvalidInputDukeException.class,
-                () -> CommandParser.parse("delete"));
+        assertThrows(InvalidInputDukeException.class, () -> CommandParser.parse("delete"));
     }
 
     @Test

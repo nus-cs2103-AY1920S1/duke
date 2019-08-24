@@ -51,73 +51,32 @@ class TaskParserTest {
 
     @Test
     void testTodo_InvalidInput() {
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("todo")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("todo ")
-        );
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("todo"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("todo "));
     }
 
     @Test
     void testDeadline_InvalidInput() {
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("deadline")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("deadline ")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("deadline aa")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("deadline /by")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("deadline /by abc")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("deadline /by 1/1/2019 1200")
-        );
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("deadline"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("deadline "));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("deadline aa"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("deadline /by"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("deadline /by abc"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("deadline /by 1/1/2019 1200"));
     }
 
     @Test
     void testEvent_InvalidInput() {
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("event")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("event ")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("event aa")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("event /at")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("event /at abc")
-        );
-
-        assertThrows(InvalidInputDukeException.class,
-                () -> TaskParser.parse("event /at 1/1/2019 1200")
-        );
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("event"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("event "));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("event aa"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("event /at"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("event /at abc"));
+        assertThrows(InvalidInputDukeException.class, () -> TaskParser.parse("event /at 1/1/2019 1200"));
     }
 
     @Test
     void testAdd_Random() {
-        assertThrows(UnknownCommandDukeException.class,
-                () -> TaskParser.parse("thiswillfail")
-        );
+        assertThrows(UnknownCommandDukeException.class, () -> TaskParser.parse("thiswillfail"));
     }
 }

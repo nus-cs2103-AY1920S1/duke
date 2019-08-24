@@ -28,8 +28,7 @@ class TaskListTest {
     @Test
     void testTaskList_DeleteInvalidElement() {
         TaskList tasks = new TaskList();
-        assertThrows(InvalidTaskDukeException.class,
-                () -> tasks.deleteTask(0));
+        assertThrows(InvalidTaskDukeException.class, () -> tasks.deleteTask(0));
     }
 
     @Test
@@ -48,7 +47,6 @@ class TaskListTest {
     @Test
     void testTaskList_GetInvalidElement() {
         TaskList tasks = new TaskList();
-        assertThrows(InvalidTaskDukeException.class,
-                () -> tasks.getTask(0));
+        assertThrows(InvalidTaskDukeException.class, () -> tasks.getTask(0));
     }
 }

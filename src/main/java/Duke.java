@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+
+
 
 public class Duke {
 
@@ -64,6 +67,7 @@ public class Duke {
 
            writeListToFile();
 
+
            command = sc.nextLine();
        }
 
@@ -104,10 +108,10 @@ public class Duke {
         for (Task entry : arr) {
             if (entry instanceof Deadline) {
                 sb.append(String.format("D | %s | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName(), ((Deadline) entry).getDatetime() ));
+                        entry.getTaskName(), ((Deadline) entry).getDateTime() ));
             } else if (entry instanceof Event) {
                 sb.append(String.format("E | %s | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName(), ((Event) entry).getDatetime() ));
+                        entry.getTaskName(), ((Event) entry).getDateTime() ));
             } else if (entry instanceof ToDo) {
                 sb.append(String.format("T | %s | %s", entry.isDone() ? "1" : "0",
                         entry.getTaskName() ));
@@ -147,7 +151,6 @@ public class Duke {
 
        arr.add(newToDo);
 
-
     }
 
     private static void printDoneTask(Task t) {
@@ -167,25 +170,53 @@ public class Duke {
         System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
     }
 
-    private static void addDeadline(String taskName, String datetime) {
-        Deadline deadline = new Deadline(taskName,datetime);
+   private static void addDeadline(String taskName, String datetime) {
+
+
+        LocalDateTime dateTimeObj = parseDateTime(datetime);
+        Deadline deadline = new Deadline(taskName, dateTimeObj);
 
         arr.add(deadline);
 
 
-    }
+   }
 
-    private static void addEvent(String taskName, String datetime) {
-        Event e = new Event(taskName, datetime);
+   private static void addEvent(String taskName, String datetime) {
+
+        LocalDateTime dateTimeObj = parseDateTime(datetime);
+        Event e = new Event(taskName, dateTimeObj);
 
         arr.add(e);
 
 
-    }
+   }
 
+   private static LocalDateTime parseDateTime(String datetime) {
+        if (! datetime.contains(" ")) { //only contain the date
+            String[] stringArr = datetime.split("/");
+
+            int day = Integer.parseInt(stringArr[0]);
+            int month = Integer.parseInt(stringArr[1]);
+            int year = Integer.parseInt(stringArr[2]);
+
+            return LocalDateTime.of(year,month,day,0,0);
+        } else {
+            int spaceIndex = datetime.indexOf(" ");
+            String[] stringArr = datetime.substring(0, spaceIndex).split("/");
+
+            int day = Integer.parseInt(stringArr[0]);
+            int month = Integer.parseInt(stringArr[1]);
+            int year = Integer.parseInt(stringArr[2]);
+
+            int hour = Integer.parseInt(datetime.substring(spaceIndex + 1).trim()) / 100;
+            int minute = Integer.parseInt(datetime.substring(spaceIndex + 1).trim()) % 100;
+
+            return LocalDateTime.of(year, month, day, hour, minute);
+        }
+    }
     private static void deleteTask(int index) {
 
-        Task t = arr.remove(index);
+        Task t = arr.remove(index-1);
 
         printDeletedTask(t);
     }
@@ -220,8 +251,8 @@ public class Duke {
         } else if (str.split(" ")[0].equals("delete") &&  ! isNumeric(str.split(" ")[1])) {
             throw new DukeException("OOPS!!! The index of the array has to be specified.");
         } else if (str.split(" ")[0].equals("delete") && isNumeric(str.split(" ")[1])
-                && (Integer.parseInt(str.split(" ")[1]) < 0 ||
-                Integer.parseInt(str.split(" ")[1]) >= arr.size())) {
+                && (Integer.parseInt(str.split(" ")[1]) <= 0 ||
+                Integer.parseInt(str.split(" ")[1]) > arr.size())) {
             throw new DukeException("OOPS!!! Index out of bounds. It is larger or smaller than size of list.");
        } else if (str.split(" ")[0].equals("delete") && str.split(" ").length > 2) {
             throw new DukeException("OOPS!!! Please key in 'delete x', where x is the index that you want to delete!");

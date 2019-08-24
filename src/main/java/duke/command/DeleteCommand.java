@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Deletes a task and saves the program state.
+ */
 public class DeleteCommand extends Command {
     private int taskId;
 

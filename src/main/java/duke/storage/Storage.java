@@ -19,6 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages storage information for the program.
+ */
 public class Storage {
     private String filePath;
 
@@ -26,6 +29,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a list of tasks from the file path in the constructor object.
+     *
+     * @return List of tasks.
+     * @throws DukeException If the file could not be read.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 
@@ -73,6 +82,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a list of tasks to the file path in the constructor object.
+     *
+     * @throws DukeException If the file failed to save.
+     */
     public void save(TaskList tasks) throws DukeException {
         PrintWriter writer = null;
         try {

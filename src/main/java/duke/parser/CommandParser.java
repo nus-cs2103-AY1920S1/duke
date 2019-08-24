@@ -13,6 +13,9 @@ import duke.task.Task;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles command parsing.
+ */
 public class CommandParser {
     private static int getIndexFromMatcher(String matcherResult) throws DukeException {
         int index;
@@ -31,6 +34,14 @@ public class CommandParser {
         return index;
     }
 
+    /**
+     * Parses a given input to generate a Command.
+     * If the input is unrecognised, null is returned.
+     *
+     * @param input Input string.
+     * @return Command to be executed.
+     * @throws DukeException If input is invalid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.isEmpty()) {
             throw new UnknownCommandDukeException();

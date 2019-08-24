@@ -1,9 +1,12 @@
 package duke.task;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Tasks used for deadlines.
+ */
 public class Deadline extends Task {
+    /** Deadline by date. **/
     private Date by;
 
     public Deadline(String description, Date by) {

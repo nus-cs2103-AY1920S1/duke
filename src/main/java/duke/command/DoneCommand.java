@@ -1,12 +1,14 @@
 package duke.command;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Marks a task as done and saves the program state.
+ */
 public class DoneCommand extends Command {
     private int taskId;
 

@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.task.Task;
-
+/**
+ * Tasks used for todos.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Manages everything related to the UI.
+ */
 public class Ui {
     private Scanner scanner;
 
@@ -21,6 +24,9 @@ public class Ui {
         print(" " + message);
     }
 
+    /**
+     * Shows a welcome message.
+     */
     public void showWelcome() {
         showLine();
         print(" Hello! I'm Duke");
@@ -28,6 +34,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Shows a loading error.
+     */
     public void showLoadingError() {
         showLine();
         print(" The save file doesn't seem to be there or is incorrect!");
@@ -35,10 +44,17 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints a message.
+     */
     public void print() {
         System.out.println();
     }
 
+    /**
+     * Prints a message.
+     * @param message To be printed.
+     */
     public void print(String message) {
         System.out.println(message);
     }

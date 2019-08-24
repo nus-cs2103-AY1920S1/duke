@@ -1,8 +1,14 @@
 package duke.task;
 
+/**
+ * Tasks are used in the entire program.
+ */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    /** Task description. **/
+    private String description;
+
+    /** Status of task. **/
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;

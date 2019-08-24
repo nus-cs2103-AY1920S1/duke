@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Adds a new task and saves the program state.
+ */
 public class AddCommand extends Command {
     private Task task;
 

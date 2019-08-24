@@ -2,7 +2,11 @@ package duke.task;
 
 import java.util.Date;
 
+/**
+ * Tasks used for events.
+ */
 public class Event extends Task {
+    /** Event at date. **/
     private Date at;
 
     public Event(String description, Date at) {

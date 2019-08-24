@@ -2,7 +2,6 @@ package duke.parser;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputDukeException;
-import duke.exception.InvalidTaskDukeException;
 import duke.exception.UnknownCommandDukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -15,11 +14,27 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles task parsing.
+ */
 public class TaskParser {
+    /** Syntax for date. **/
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
+
+    /** Syntax for deadline. **/
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("deadline (.*) /by (.*)");
+
+    /** Syntax for event. **/
     private static final Pattern EVENT_PATTERN = Pattern.compile("event (.*) /at (.*)");
 
+    /**
+     * Parses a given input to generate a Task.
+     * If the input is unrecognised, null is returned.
+     *
+     * @param input Input string.
+     * @return Task object.
+     * @throws DukeException If input is invalid.
+     */
     public static Task parse(String input) throws DukeException {
         String[] subArgs = input.split("\\s+", 2);
 

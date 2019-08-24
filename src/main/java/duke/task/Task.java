@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public abstract class Task {
     protected String description;
@@ -20,16 +20,16 @@ public abstract class Task {
     public abstract String getTaskInitial();
 
     /**
-     * Override this function to provide extra text at the end of the task's string representation.
-     * @return Extra text to be inserted at the end of the task's string representation
+     * Override this function to provide extra text at the end of the duke.task's string representation.
+     * @return Extra text to be inserted at the end of the duke.task's string representation
      */
     protected String extraText() {
         return "";
     }
 
     /**
-     * Override this function to provide extra text at the end of the task's save string representation.
-     * @return Extra text to be inserted at the end of the task's save string representation
+     * Override this function to provide extra text at the end of the duke.task's save string representation.
+     * @return Extra text to be inserted at the end of the duke.task's save string representation
      */
     protected String extraSaveText() {
         return "";

@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,9 +13,9 @@ public abstract class TimedTask extends Task {
           "26th", "27th", "28th", "29th", "30th", "31st" };
 
     /**
-     * Creates a new timed task.
-     * @param description Description of the task
-     * @param time Time of the task
+     * Creates a new timed duke.task.
+     * @param description Description of the duke.task
+     * @param time Time of the duke.task
      */
     public TimedTask(String description, String time) {
         super(description);

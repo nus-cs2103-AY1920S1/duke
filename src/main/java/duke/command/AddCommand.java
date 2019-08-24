@@ -1,4 +1,8 @@
-import task.Task;
+package duke.command;
+
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
 
 public abstract class AddCommand extends Command {
     protected final String description;

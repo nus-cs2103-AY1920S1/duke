@@ -1,5 +1,9 @@
-import task.Event;
-import task.Task;
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
+import duke.task.Task;
 
 public class AddEventCommand extends AddCommand {
     private final String time;

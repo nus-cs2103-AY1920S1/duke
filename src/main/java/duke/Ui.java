@@ -1,4 +1,6 @@
-import task.Task;
+package duke;
+
+import duke.task.Task;
 
 import java.util.List;
 import java.util.Scanner;
@@ -75,7 +77,7 @@ public class Ui {
     }
 
     public void showNumTasks(int num) {
-        showMessage("Now you have " + num + " task" + (num == 1 ? "" : "s") + " in the list.");
+        showMessage("Now you have " + num + "task" + (num == 1 ? "" : "s") + " in the list.");
     }
 
     public void showAllTasks(List<Task> tasks) {

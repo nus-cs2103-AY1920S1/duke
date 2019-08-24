@@ -1,3 +1,14 @@
+package duke;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FinishCommand;
+import duke.command.ListCommand;
+
 public class Parser {
 
     public static class ParsedCommand {
@@ -31,9 +42,9 @@ public class Parser {
     }
 
     /**
-     * Parses a command into its keyword and its arguments both before and after the slash, given an input string.
-     * Does not ensure that the resulting command is legal.
-     * @param input Command input as a string
+     * Parses a duke.command into its keyword and its arguments both before and after the slash, given an input string.
+     * Does not ensure that the resulting duke.command is legal.
+     * @param input duke.command.Command input as a string
      */
     public static Command parse(String input) throws DukeException {
         ParsedCommand parsedCommand = new ParsedCommand(input);

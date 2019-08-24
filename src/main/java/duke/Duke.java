@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 public class Duke {
 
     private static final String DATA_FILE_TASKS = "./data/duke.txt";
@@ -41,8 +45,8 @@ public class Duke {
     }
 
     /**
-     * This is the main method and entry point for the Duke program.
-     * @param args Command line arguments
+     * This is the main method and entry point for the duke.Duke program.
+     * @param args duke.command.Command line arguments
      */
     public static void main(String[] args) {
         new Duke(DATA_FILE_TASKS).run();

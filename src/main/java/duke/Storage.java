@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,7 +18,7 @@ public class Storage {
 
     /**
      * Loads tasks from the file path.
-     * @return A list of tasks, where each task is represented as a list of strings
+     * @return A list of tasks, where each duke.task is represented as a list of strings
      */
     public List<List<String>> load() throws DukeException {
         ArrayList<List<String>> tasks = new ArrayList<>();
@@ -41,7 +43,7 @@ public class Storage {
 
     /**
      * Saves tasks into the file path.
-     * @param tasks A list of strings, where each string represents the task to be saved
+     * @param tasks A list of strings, where each string represents the duke.task to be saved
      */
     public void save(List<String> tasks) throws DukeException {
         try {

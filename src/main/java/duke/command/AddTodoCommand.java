@@ -1,5 +1,9 @@
-import task.Task;
-import task.Todo;
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class AddTodoCommand extends AddCommand {
     public AddTodoCommand(String description) {

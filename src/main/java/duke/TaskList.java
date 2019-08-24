@@ -1,7 +1,9 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,7 @@ public class TaskList {
         try {
             return tasks.get(position);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no task at the given position.");
+            throw new DukeException("There is no duke.task at the given position.");
         }
     }
 
@@ -64,7 +66,7 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeException("Your input should be a number.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no task at the given position.");
+            throw new DukeException("There is no duke.task at the given position.");
         }
     }
 

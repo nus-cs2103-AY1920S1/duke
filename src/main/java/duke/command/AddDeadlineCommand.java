@@ -1,5 +1,9 @@
-import task.Deadline;
-import task.Task;
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Task;
 
 public class AddDeadlineCommand extends AddCommand {
     private final String time;

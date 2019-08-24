@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Deadline extends TimedTask {
     public Deadline(String description, String deadline) {

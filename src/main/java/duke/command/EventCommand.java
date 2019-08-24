@@ -16,11 +16,22 @@ public class EventCommand extends AddCommand {
         this.commands = commands;
     }
 
+    /**
+     * Notify the program to exit.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Executes Event command.
+     * @param taskList TaskList object for the duke program
+     * @param ui ui object for the duke program
+     * @param storage storage object for the duke program
+     * @return true if the command executes successfully, else false
+     */
     @Override
     public boolean execute(TaskList taskList, Ui ui, Storage storage) {
         try {

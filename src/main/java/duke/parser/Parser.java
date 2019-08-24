@@ -4,17 +4,27 @@ import duke.command.*;
 import duke.exception.DukeException;
 import duke.shared.Messages;
 
+/**
+ * Parses command
+ */
 public class Parser {
-
+    /**
+     * Converts the command into command object
+     * @param command is the command inputted by the user
+     * @return converted command object
+     * @throws DukeException throws by {@link #findCommand(String[])}
+     * @throws NumberFormatException throws by {@link #findCommand(String[])}
+     */
     public static Command parse(String command) throws DukeException, NumberFormatException {
         String[] commandArr = command.split("\\s+");
         return findCommand(commandArr);
     }
 
     /**
-     * Runs the commands entered by the user.
+     * Returns the correct command object based on user inputted command
      * @param commands is the last command entered by the user
-     * @throws DukeException If user inputted an invalid command
+     * @throws DukeException if user inputted an invalid command
+     * @throws NumberFormatException if user inputted an invalid description for done and delete command
      */
     public static Command findCommand(String[] commands) throws DukeException, NumberFormatException {
         if (commands[0].equals("bye")) {

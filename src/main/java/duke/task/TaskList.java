@@ -34,22 +34,46 @@ public class TaskList {
         return myStringBuilder.toString();
     }
 
+    /**
+     * Adds task to tasklist.
+     * @param task task to be added to tasklist
+     */
     public void addToTaskList(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Provides the number of items in taskList.
+     * @return number of items inside taskList
+     */
     public int getSize() {
         return taskList.size();
     }
 
+    /**
+     * Removes task from taskList.
+     * @param index index of the taskList
+     * @return removed task
+     * @throws IndexOutOfBoundsException index less than 0 or bigger than the size of taskList
+     */
     public Task deleteFromTaskList(int index) throws IndexOutOfBoundsException {
         return taskList.remove(index);
     }
 
+    /**
+     * Retrieves task from tasklist.
+     * @param index index of the taskList
+     * @return requested task
+     * @throws IndexOutOfBoundsException index less than 0 or bigger than the size of the tasklist
+     */
     public Task getTask(int index) throws IndexOutOfBoundsException {
         return taskList.get(index);
     }
 
+    /**
+     * Provides all tasks within the tasklist.
+     * @return a list of tasks within the tasklist
+     */
     public List<Task> getTaskList() {
         return taskList;
     }

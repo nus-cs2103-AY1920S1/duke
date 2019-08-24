@@ -10,6 +10,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Main Duke Program.
+ */
 public class Duke {
 
 
@@ -34,7 +37,7 @@ public class Duke {
     }
 
     /**
-     * Runs the duke.Duke program.
+     * Runs the duke program.
      */
     public void run() {
         ui.showWelcome();

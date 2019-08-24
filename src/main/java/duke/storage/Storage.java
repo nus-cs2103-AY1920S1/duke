@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Loads and save data from text file.
+ */
 public class Storage {
 
     private String filePath;
@@ -29,12 +32,23 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads and loads the data from the text file.
+     * @return list of past tasks saved in the text file
+     * @throws IOException throws by {@link #readFile()}
+     * @throws DukeException throws by {@link #eventParser(String[])} and {@link #deadlineParser(String[])}
+     */
     public List<Task> load() throws IOException, DukeException {
         taskList = new ArrayList<>();
         readFile();
         return taskList;
     }
 
+    /**
+     * Reads and decode the text in the text file line-by-line.
+     * @throws IOException file is not found / unable to read the file
+     * @throws DukeException throws by {@link #eventParser(String[])} and {@link #deadlineParser(String[])}
+     */
     public void readFile() throws IOException, DukeException {
         String line;
         BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -47,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Decode the line and adds to the tasklist.
+     * @param line line read from the text file
+     * @throws DukeException throws by {@link #eventParser(String[])} and {@link #deadlineParser(String[])}
+     */
     public void decodeLine(String line) throws DukeException {
         String[] inputLines = line.split("\\s+");
         Task task = null;
@@ -60,6 +79,11 @@ public class Storage {
         taskList.add(task);
     }
 
+    /**
+     * Convert the decoded line to ToDo object.
+     * @param inputLines String array of input line
+     * @return ToDo task after decoding
+     */
     public Task toDoParser(String[] inputLines) {
         Task toDoTask = null;
         String taskName = String.join(" ", Arrays.copyOfRange(inputLines, START_ARGUMENTS_INDEX,
@@ -72,6 +96,12 @@ public class Storage {
         return toDoTask;
     }
 
+    /**
+     * Convert the decoded line to Event object.
+     * @param inputLines String array of input line
+     * @return Event task after decoding
+     * @throws DukeException if {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])} unable to retrieve the descriptions
+     */
     public Task eventParser(String[] inputLines) throws DukeException {
         Task eventTask = null;
         String[] args = GetArgumentsUtil.getTwoCommandArgs(0,"|",
@@ -84,6 +114,12 @@ public class Storage {
         return eventTask;
     }
 
+    /**
+     * Convert the decoded line to Deadline Object.
+     * @param inputLines String array of input line
+     * @return Deadline task after decoding
+     * @throws DukeException if {@link GetArgumentsUtil#getTwoCommandArgs(int, String, String[])} unable to retrieve the descriptions
+     */
     public Task deadlineParser(String[] inputLines) throws DukeException {
         Task deadlineTask = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
@@ -98,6 +134,11 @@ public class Storage {
         return deadlineTask;
     }
 
+    /**
+     * Formats the tasklist and save into the defined text file.
+     * @param taskList latest list of tasks
+     * @throws IOException throws by {@link #writeToFile(String)}
+     */
     public void saveData(List<Task> taskList) throws IOException {
         StringBuilder myStringBuilder = new StringBuilder();
         for (Task task : taskList) {
@@ -116,6 +157,11 @@ public class Storage {
         writeToFile(myStringBuilder.toString());
     }
 
+    /**
+     * Writes data to text file.
+     * @param linesToWrite string to be written to the text file
+     * @throws IOException if the file is not found
+     */
     public void writeToFile(String linesToWrite) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
         bufferedWriter.append(linesToWrite);

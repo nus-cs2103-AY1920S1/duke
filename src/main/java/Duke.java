@@ -1,4 +1,10 @@
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -7,6 +13,8 @@ public class Duke {
     public static void main(String[] args) {
 
         printOutput("Hello! I'm Duke\nWhat can i do for you?");
+
+        load(); //Load saved file
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -66,6 +74,9 @@ public class Duke {
                             ;
                             break;
                     }
+
+                    save(); //Save the changes to file
+
                 } catch(DukeException de){
 
                 } catch(Exception e){
@@ -86,6 +97,8 @@ public class Duke {
                     }
 
                     printOutput("Nice! I've marked this task as done: \n  " + task);
+
+                    save(); //Save the changes to file
                 } catch(DukeException de){
 
                 } catch(NumberFormatException nfe) {
@@ -108,6 +121,7 @@ public class Duke {
                         throw new DukeException("There are no items in the list.");
                     }
 
+                    save(); //Save the changes to file
                 } catch(DukeException de){
 
                 } catch(NumberFormatException nfe) {
@@ -135,6 +149,79 @@ public class Duke {
             input = sc.nextLine();
         }
         printOutput("Bye. Hope to see you again soon!");
+    }
+
+    private static void save() {
+        try {
+            String path = "data/duke.txt";
+            FileWriter fw = new FileWriter(path);
+
+            String text = "";
+            for (int i = 0; i < storage.size(); i++) {
+                //Get tasks
+                Task task = storage.get(i);
+
+                if(task instanceof Todo){
+                    text += "T|" + task.isDone + "|" + task.description;
+                } else if(task instanceof Deadline){
+                    text += "D|" + task.isDone + "|" + task.description + "|" + ((Deadline)task).getDate();
+                } else if(task instanceof Event){
+                    text += "D|" + task.isDone + "|" + task.description + "|" + ((Event)task).getDate();
+                }
+
+                if (i + 1 != storage.size()) {
+                    text += "\n";
+                }
+            }
+
+            fw.write(text);
+            fw.close();
+        } catch(IOException ie) {
+            new DukeException("Something went wrong when saving. Please ensure the data directory is created.");
+        }
+    }
+
+    private static void load() {
+        try {
+            String path = "data/duke.txt";
+            File f = new File(path); // create a File for the given file path
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                String[] input = s.nextLine().split("[|]");
+
+                switch(input[0]){
+                case "T":
+                    Todo todo = new Todo(input[2]);
+                    if(input[1].equals("true")) {
+                        todo.markAsDone();
+                    }
+                    storage.add(todo);
+                    break;
+                case "D":
+                    Deadline deadline = new Deadline(input[2], input[3]);
+                    if(input[1].equals("true")) {
+                        deadline.markAsDone();
+                    }
+                    storage.add(deadline);
+                    break;
+                case "E":
+                    Event event = new Event(input[2], input[3]);
+                    if(input[1].equals("true")) {
+                        event.markAsDone();
+                    }
+                    storage.add(event);
+                    break;
+                default:;
+                    break;
+                }
+
+            }
+        } catch(FileNotFoundException fnfe) {
+            new DukeException("Unable to load file. Your saved data will not be loaded.");
+        } catch(ArrayIndexOutOfBoundsException aiobe) {
+            storage = new ArrayList<>();
+            new DukeException("File corrupted. Your saved data will not be loaded.");
+        }
     }
 
     private static void printOutput(String s){

@@ -69,7 +69,7 @@ public class Duke {
        if (num <= 0 || num > arr.size() ) {
            throw new DukeException("OOPS!!! Number is out of range");
        } else {
-           arr.get(num - 1).done();
+           arr.get(num-1).done();
 
            printDoneTask(arr.get(num-1));
        }
@@ -112,6 +112,7 @@ public class Duke {
    }
 
    private static void addEvent(String taskName, String datetime) {
+
         LocalDateTime dateTimeObj = parseDateTime(datetime);
         Event e = new Event(taskName, dateTimeObj);
 
@@ -121,22 +122,32 @@ public class Duke {
    }
 
    private static LocalDateTime parseDateTime(String datetime) {
-        int spaceIndex = datetime.indexOf(" ");
-        String[] stringArr = datetime.substring(0, spaceIndex).split("/");
+        if (! datetime.contains(" ")) { //only contain the date
+            String[] stringArr = datetime.split("/");
 
-        int day = Integer.parseInt(stringArr[0]);
-        int month = Integer.parseInt(stringArr[1]);
-        int year = Integer.parseInt(stringArr[2]);
+            int day = Integer.parseInt(stringArr[0]);
+            int month = Integer.parseInt(stringArr[1]);
+            int year = Integer.parseInt(stringArr[2]);
 
-        int hour = Integer.parseInt(datetime.substring(spaceIndex+1).trim()) / 100;
-        int minute = Integer.parseInt(datetime.substring(spaceIndex+1).trim()) % 100;
+            return LocalDateTime.of(year,month,day,0,0);
+        } else {
+            int spaceIndex = datetime.indexOf(" ");
+            String[] stringArr = datetime.substring(0, spaceIndex).split("/");
 
-        return LocalDateTime.of(year,month,day,hour,minute);
+            int day = Integer.parseInt(stringArr[0]);
+            int month = Integer.parseInt(stringArr[1]);
+            int year = Integer.parseInt(stringArr[2]);
+
+            int hour = Integer.parseInt(datetime.substring(spaceIndex + 1).trim()) / 100;
+            int minute = Integer.parseInt(datetime.substring(spaceIndex + 1).trim()) % 100;
+
+            return LocalDateTime.of(year, month, day, hour, minute);
+        }
    }
 
    private static void deleteTask(int index) {
 
-        Task t = arr.remove(index);
+        Task t = arr.remove(index-1);
 
         printDeletedTask(t);
    }
@@ -171,8 +182,8 @@ public class Duke {
         } else if (str.split(" ")[0].equals("delete") &&  ! isNumeric(str.split(" ")[1])) {
             throw new DukeException("OOPS!!! The index of the array has to be specified.");
         } else if (str.split(" ")[0].equals("delete") && isNumeric(str.split(" ")[1])
-                && (Integer.parseInt(str.split(" ")[1]) < 0 ||
-                Integer.parseInt(str.split(" ")[1]) >= arr.size())) {
+                && (Integer.parseInt(str.split(" ")[1]) <= 0 ||
+                Integer.parseInt(str.split(" ")[1]) > arr.size())) {
             throw new DukeException("OOPS!!! Index out of bounds. It is larger or smaller than size of list.");
        } else if (str.split(" ")[0].equals("delete") && str.split(" ").length > 2) {
             throw new DukeException("OOPS!!! Please key in 'delete x', where x is the index that you want to delete!");

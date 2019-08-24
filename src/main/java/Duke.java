@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,10 +17,48 @@ public class Duke {
         String greeting = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
         System.out.println(greeting);
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
         int index = 0;
+        try {
+            //make a new file or read from existing file
+            File f = new File("data/duke.txt");
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            BufferedReader bfr = new BufferedReader(new FileReader(f));
+            String line = null;
+            while ((line = bfr.readLine()) != null) {
+                index++;
+                String[] stringArr = line.split( " [|] " , 0);
+                if (stringArr[0].equals("E")) {
+                    Event event = new Event(stringArr[2], stringArr[3]);
+                    if (stringArr[1] == "1") {
+                        event.markAsDone();
+                    }
+                    tasks.add(event);
+                } else if (stringArr[0].equals("T")) {
+                    Todo td = new Todo(stringArr[2]);
+                    if (stringArr[1] == "1") {
+                        td.markAsDone();
+                    }
+                    tasks.add(td);
+                } else {
+                    Deadline dl = new Deadline(stringArr[2], stringArr[3]);
+                    if (stringArr[1] == "1") {
+                        dl.markAsDone();
+                    }
+                    tasks.add(dl);;
+                }
+
+            }
+        } catch (Exception e) {
+            //add more specific exceptions
+            System.out.println("Error with the data file initialization");
+            System.out.println(e);
+        }
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
+
+
         while (!command.equals("bye")) {
             try {
                 if (command.length() < 4) {
@@ -60,6 +102,20 @@ public class Duke {
                         statusOfList = "Now you have " + index + " tasks in the list.\n";
                     }
                     System.out.println(statusOfList);
+
+                    //write 'tasks' into data file, overwriting all contents
+                    FileWriter fw = new FileWriter("data/duke.txt");
+                    String textFileMsg = "";
+                    for (int i = 0; i < index; i++) {
+                        if (i == 0) {
+                            textFileMsg = textFileMsg + tasks.get(i).toWriteIntoFile();
+                        } else {
+                            textFileMsg = textFileMsg + System.lineSeparator() + tasks.get(i).toWriteIntoFile();
+                        }
+                    }
+                    fw.write(textFileMsg);
+                    fw.close();
+
                 } else if (!command.equals("list") && !command.substring(0, 4).equals("done")) {
                     //adding new task of 1 of 3 types
                     if (command.length() >= 4 && command.substring(0, 4).equals("todo")) {
@@ -148,6 +204,7 @@ public class Duke {
                     String commandMsg = "Got it. I've added this task:\n"
                             + tasks.get(index);
 
+                    String textFileMsg = System.lineSeparator() + tasks.get(index).toWriteIntoFile();
                     index++;
                     System.out.println(commandMsg);
                     String statusOfList;
@@ -157,6 +214,9 @@ public class Duke {
                         statusOfList = "Now you have " + index + " tasks in the list.\n";
                     }
                     System.out.println(statusOfList);
+                    FileWriter fw = new FileWriter("data/duke.txt", true);
+                    fw.write(textFileMsg);
+                    fw.close();
                 } else if (command.substring(0, 4).equals("done")) {
                     //marking task as done
                     if (command.contains(" ")) {
@@ -182,6 +242,17 @@ public class Duke {
                     String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
                             "[" + tasks.get(curr - 1).getStatusIcon() + "] " + tasks.get(curr - 1).getDescription() + "\n";
                     System.out.println(markAsDoneMsg);
+                    FileWriter fw = new FileWriter("data/duke.txt");
+                    String textFileMsg = "";
+                    for (int i = 0; i < index; i++) {
+                        if (i == 0) {
+                            textFileMsg = textFileMsg + tasks.get(i).toWriteIntoFile();
+                        } else {
+                            textFileMsg = textFileMsg + System.lineSeparator() + tasks.get(i).toWriteIntoFile();
+                        }
+                    }
+                    fw.write(textFileMsg);
+                    fw.close();
                 } else {
                     //listing tasks out
                     String listMsg = "Here are the tasks in your list:";
@@ -194,6 +265,8 @@ public class Duke {
                     System.out.println();
                 }
             } catch (DukeException e) {
+                System.out.println(e);
+            } catch (Exception e) {
                 System.out.println(e);
             } finally {
                 command = sc.nextLine();

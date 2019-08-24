@@ -12,9 +12,10 @@ public class DeadlineTest {
         final Duke d = new Duke();
 
         StringBuilder sb = new StringBuilder();
+        Task t = new Task("test");
         sb.append(border + "\n");
         sb.append("Got it. I've added this task: \n");
-        sb.append("[D][\u2718] test  (by: 12/12/1212 18:00)\n");
+        sb.append("[D][" + t.getStatusIcon() + "] test  (by: 12/12/1212 18:00)\n");
         sb.append("Now you have 1 tasks in the list.\n");
         sb.append(border + "\n");
         String correct = sb.toString();

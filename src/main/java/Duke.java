@@ -25,9 +25,8 @@ public class Duke {
     }
 
     /**
-     * Main method for executing Duke.
-     *
-     *
+     * Main method for Duke.
+      * @param args user input
      */
     public static void main(String[] args) {
         Duke execute = new Duke();

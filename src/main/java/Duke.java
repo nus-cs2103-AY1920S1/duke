@@ -156,7 +156,7 @@ public class Duke {
 
     public static void runInterface() {
         Scanner scan = new Scanner(System.in);
-        
+
         while (!isBye) {
             System.out.print("input command here: ");
             String input = scan.nextLine();

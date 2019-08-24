@@ -84,4 +84,8 @@ public class Output {
     public static void dataSavedMsg() {
         System.out.println(indent + "Data saved successfully.");
     }
+
+    public static void loadingSuccessMsg(int size) {
+        System.out.println(indent + size + " tasks loaded.");
+    }
 }

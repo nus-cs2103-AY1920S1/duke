@@ -10,7 +10,7 @@ public class Duke {
     List<Task> list = new ArrayList<>();
     String indent = "     ";
     String input;
-    String dataPath = "../data/duke.txt";
+    String dataPath = "data/duke.txt";
     String[] inputs;
     String[] inputFormatted;
     Task task;
@@ -37,7 +37,6 @@ public class Duke {
             Output.line();
             System.out.println();
         } while (output != 1);
-        Task.saveTasks(list, dataPath);
     }
 
     private int processInput(String input) throws DukeException {
@@ -64,15 +63,16 @@ public class Duke {
                             Output.printTask(task);
                             break;
                         case "delete":
-                            list.remove(i - 1);
+                            task = list.remove(i - 1);
                             Output.delMsg();
                             Output.printTask(task);
                             Output.printListSize(list);
                             break;
                         }
-                    } else throw new DukeException("☹ OOPS!!! There is no task at index " + i + ".");
-                } else throw new DukeException("☹ OOPS!!! The index of " + inputs[0] + " operation must be a positive integer.");
-            } else throw new DukeException("☹ OOPS!!! The index of " + inputs[0] + " operation cannot be empty.");
+                        Task.saveTasks(list, dataPath);
+                    } else throw new DukeException("\u2754 OOPS!!! There is no task at index " + i + ".");
+                } else throw new DukeException("\u2754 OOPS!!! The index of " + inputs[0] + " operation must be a positive integer.");
+            } else throw new DukeException("\u2754 OOPS!!! The index of " + inputs[0] + " operation cannot be empty.");
             break;
         case "todo":
         case "deadline":
@@ -87,7 +87,7 @@ public class Duke {
                         inputFormatted = inputs[1].split(" /by ", 2);
                         task = new Deadline(inputFormatted[0], inputFormatted[1]);
                     } else {
-                        throw new DukeException("☹ OOPS!!! The due date of a deadline cannot be empty.");
+                        throw new DukeException("\u2754 OOPS!!! The due date of a deadline cannot be empty.");
                     }
                     break;
                 case "event":
@@ -95,18 +95,19 @@ public class Duke {
                         inputFormatted = inputs[1].split(" /at ", 2);
                         task = new Event(inputFormatted[0], inputFormatted[1]);
                     } else {
-                        throw new DukeException("☹ OOPS!!! The duration of a event cannot be empty.");
+                        throw new DukeException("\u2754 OOPS!!! The duration of a event cannot be empty.");
                     }
                     break;
                 }
-            } else throw new DukeException("☹ OOPS!!! The description of a " + inputs[0] + " cannot be empty.");
+            } else throw new DukeException("\u2754 OOPS!!! The description of a " + inputs[0] + " cannot be empty.");
             list.add(task);
             Output.addMsg();
             Output.printTask(task);
             Output.printListSize(list);
+            Task.saveTasks(list, dataPath);
             break;
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("\u2754 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return 0;
     }

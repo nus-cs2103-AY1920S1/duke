@@ -74,6 +74,7 @@ public class Task {
         } catch (FileNotFoundException e) {
             Output.noRecordsFoundMsg();
         }
+        Output.loadingSuccessMsg(tasks.size());
         return tasks;
     }
 
@@ -98,7 +99,7 @@ public class Task {
     }
 
     public String getDoneStatus() {
-        return isDone() ? "✓" : "✗";
+        return isDone() ? "\u2713" : "\u2718";
     }
 
     @Override

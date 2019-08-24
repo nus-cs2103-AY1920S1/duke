@@ -55,10 +55,18 @@ public class Duke {
             task = new ToDo(item);
         } else if (command.equals("deadline")) {
             try {
+<<<<<<< HEAD
                 String[] itemSlashDeadline = item.split("/");
                 String deadline = itemSlashDeadline[1].substring(3);
                 task = new Deadline(itemSlashDeadline[0].trim(), deadline);
             } catch (ArrayIndexOutOfBoundsException ex) {
+=======
+                String description = item.split("/")[0].trim();
+                String deadline = item.substring(item.indexOf("by") + 3).trim();
+                task = new Deadline(description, deadline);
+            }
+            catch (ArrayIndexOutOfBoundsException ex) {
+>>>>>>> branch-Level-8
                 System.out.println("Invalid deadline input");
                 return;
             }

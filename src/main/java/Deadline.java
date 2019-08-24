@@ -1,7 +1,7 @@
 import java.text.SimpleDateFormat;
 
 public class Deadline extends Task {
-    private String by;
+    protected String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -9,6 +9,7 @@ public class Deadline extends Task {
         humanizeDeadline();
     }
 
+    //branch 8 comment
     //Regex below adapted from https://stackoverflow.com/questions/23360599/regular-expression-for-dd-mm-yyyy-hhmm
     private void humanizeDeadline() {
         String dateRegex = "^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\\d\\d\\d\\d [012]{0,1}[0-9][0-6][0-9]$";
@@ -98,7 +99,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "D " + super.toString() + "| " + by;
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }
 

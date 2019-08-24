@@ -14,6 +14,7 @@ import com.leeyiyuan.task.DeadlineTask;
 import com.leeyiyuan.task.EventTask;
 import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TodoTask;
+import com.leeyiyuan.task.TaskList;
 
 public class Duke {
 
@@ -21,7 +22,7 @@ public class Duke {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             Storage storage = new Storage("/home/leeyiyuan/Projects/duke/data/duke.txt");
-            ArrayList<Task> tasks = storage.load();
+            TaskList tasks = new TaskList(storage.load());
 
             System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 

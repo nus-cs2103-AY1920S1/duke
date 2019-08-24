@@ -1,3 +1,4 @@
+//deprecated
 class TaskImplementation implements TaskInterface {
     private final String name;
     private final boolean isDone;
@@ -19,8 +20,12 @@ class TaskImplementation implements TaskInterface {
 
     // Override
     @Override
-    public String toString(){
+    public String toString() {
         return this.formatter.formatText();
+    }
+
+    public String getSaveFormat() {
+        return "not supported";
     }
           
 }

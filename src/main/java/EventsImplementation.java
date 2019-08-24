@@ -32,9 +32,17 @@ class EventsImplementation implements TaskInterface,
         return this.sym;
     }
 
+    public String getPrintDate() {
+        if (this.date.length() > 0) {
+            return "by: " + getDate();
+        } else {
+            return "";
+        }
+    }
+
     public String getDate() {
         if (this.date.length() > 0) {
-            return "at: " + this.date;
+            return this.date;
         } else {
             return "";
         }
@@ -44,6 +52,10 @@ class EventsImplementation implements TaskInterface,
     @Override
     public String toString(){
         return this.formatter.formatText();
+    }
+
+    public String getSaveFormat() {
+        return this.formatter.getSaveFormat();
     }
           
 }

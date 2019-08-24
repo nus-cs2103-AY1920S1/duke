@@ -13,6 +13,11 @@ class BasicTaskFormatter implements TaskFormatInterface {
         //return (this.isDone ? "\u2713" : "\u2718"); 
         return (this.isDone ? "V" : "X"); 
     }
+    
+    public String getSaveFormat() {
+        //not supported
+        return "";
+    }
 
     public String formatText() {
         return String.format("[%s] %s", 

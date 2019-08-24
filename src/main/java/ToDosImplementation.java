@@ -13,7 +13,7 @@ class ToDosImplementation implements TaskInterface,
         this.formatter = new TypedTaskFormatter(this);
     }
 
-    public TaskInterface completeTask(){
+    public TaskInterface completeTask() {
         return new ToDosImplementation(this.name, true);
     }
 
@@ -33,10 +33,18 @@ class ToDosImplementation implements TaskInterface,
         return "";
     }
 
+    public String getPrintDate() {
+        return "";
+    }
+
     // Override
     @Override
-    public String toString(){
+    public String toString() {
         return this.formatter.formatText();
+    }
+
+    public String getSaveFormat() {
+        return this.formatter.getSaveFormat();
     }
           
 }

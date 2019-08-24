@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.Duke;
 import org.json.JSONException;
 import org.json.JSONObject;
 

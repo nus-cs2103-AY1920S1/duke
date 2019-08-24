@@ -1,3 +1,6 @@
+package duke;
+
+import duke.task.Task;
 import org.json.JSONException;
 
 import java.io.IOException;

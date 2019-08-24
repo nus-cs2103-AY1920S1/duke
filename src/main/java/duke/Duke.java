@@ -1,10 +1,13 @@
+package duke;
+
+import duke.command.Command;
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 public class Duke {
-    static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     private Storage storage;
     private TaskList tasks;

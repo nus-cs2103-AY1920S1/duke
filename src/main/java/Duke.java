@@ -47,7 +47,11 @@ public class Duke {
                     addTask(command, tasks);
                 }
             } catch (DukeException exception) {
-				printExceptionMessage(exception);
+                StringBuilder sb = new StringBuilder();
+                sb.append("\t ---------------------------------------------------------- \n");
+                sb.append("\t " + exception.getMessage() + "\n");
+                sb.append("\t ---------------------------------------------------------- \n");
+                System.out.print(sb.toString());
             }
         }
     }
@@ -119,17 +123,8 @@ public class Duke {
                     throw new DukeException("\u2639 OOPS!!! The date/time of a deadline cannot be empty.");
                 }
                 String taskDescription = taskDetails[0].trim();
-                String[] taskSpecifics = taskDetails[1].trim().split(" ");
-                String rawTaskDate = taskSpecifics[0];
-                String rawTaskTime;
-                if (taskSpecifics.length < 2 || taskSpecifics[1].trim().length() == 0) {
-                	rawTaskTime = null;
-				} else {
-                	rawTaskTime = taskSpecifics[1];
-				}
-                Date taskDate = new Date(rawTaskDate);
-                Time taskTime = new Time(rawTaskTime);
-                newTask = new Deadline(taskDescription, taskDate, taskTime);
+                String taskSpecifics = taskDetails[1].trim();
+                newTask = new Deadline(taskDescription, taskSpecifics);
             } else if (command.startsWith("event")){
                 String taskDetailsString = command.replaceFirst("event", "");
 				taskDetails = taskDetailsString.split("/at");
@@ -140,31 +135,8 @@ public class Duke {
                     throw new DukeException("\u2639 OOPS!!! The date/time of an event cannot be empty.");
                 }
 				String taskDescription = taskDetails[0].trim();
-				String[] taskSpecifics = taskDetails[1].trim().split("/to");
-				if (taskSpecifics[0].trim().length() == 0) {
-					throw new DukeException("\u2639 OOPS!!! The starting date/time of an event cannot be empty.");
-				} else {
-					String[] rawStarts = taskSpecifics[0].trim().split(" ");
-					String rawStartDate = rawStarts[0];
-					String rawStartTime = null;
-					if (rawStarts.length >= 2 && rawStarts[1].trim().length() != 0) {
-						rawStartTime = rawStarts[1];
-					}
-					String rawEndDate = null;
-					String rawEndTime = null;
-					if (taskSpecifics.length > 1) {
-						String[] rawEnds = taskSpecifics[1].trim().split(" ");
-						rawEndDate = rawEnds[0];
-						if (rawEnds.length >= 2 && rawEnds[1].trim().length() != 0) {
-							rawEndTime = rawEnds[1];
-						}
-					}
-					Date startDate = new Date(rawStartDate);
-					Time startTime = new Time(rawStartTime);
-					Date endDate = new Date(rawEndDate);
-					Time endTime = new Time(rawEndTime);
-					newTask = new Event(taskDescription, startDate, startTime, endDate, endTime);
-				}
+				String taskSpecifics = taskDetails[1].trim();
+                newTask = new Event(taskDescription, taskSpecifics);
             } else {
                 throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -177,14 +149,6 @@ public class Duke {
                 + "in the " + "list.");
         printLine();
     }
-
-    public static void printExceptionMessage(DukeException exception) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("\t ---------------------------------------------------------- \n");
-		sb.append("\t " + exception.getMessage() + "\n");
-		sb.append("\t ---------------------------------------------------------- \n");
-		System.out.print(sb.toString());
-	}
 
     public static void exit() {
         printLine();

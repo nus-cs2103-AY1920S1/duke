@@ -1,5 +1,7 @@
-T | 0 | erfern
 T | 0 | ervnev
-T | 0 | evnevb
-T | 0 | ewnr
+T | 1 | ewnr
 T | 0 | ewfnw
+T | 0 | evnvnev
+T | 0 | evnev
+D | 0 | frcbe | cecb
+E | 0 | eciercb | eneverc

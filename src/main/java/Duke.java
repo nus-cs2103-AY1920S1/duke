@@ -20,15 +20,13 @@ public class Duke {
         ArrayList<Task> tasks = new ArrayList<>();
         int index = 0;
         try {
+            //make a new file or read from existing file
             File f = new File("data/duke.txt");
-            System.out.println("here");
             f.getParentFile().mkdirs();
             f.createNewFile();
             BufferedReader bfr = new BufferedReader(new FileReader(f));
-            System.out.println("here1");
             String line = null;
             while ((line = bfr.readLine()) != null) {
-                System.out.println("heres");
                 index++;
                 String[] stringArr = line.split( " [|] " , 0);
                 if (stringArr[0].equals("E")) {
@@ -104,22 +102,19 @@ public class Duke {
                         statusOfList = "Now you have " + index + " tasks in the list.\n";
                     }
                     System.out.println(statusOfList);
-                    try {
-                        FileWriter fw = new FileWriter("data/duke.txt");
-                        String textFileMsg = "";
-                        for (int i = 0; i < index; i++) {
-                            if (i == 0) {
-                                textFileMsg = textFileMsg + tasks.get(i).toWriteIntoFile();
-                            } else {
-                                textFileMsg = textFileMsg + System.lineSeparator() + tasks.get(i).toWriteIntoFile();
-                            }
-                        }
-                        fw.write(textFileMsg);
-                        fw.close();
 
-                    } catch (Exception e) {
-                        System.out.println("Unable to write to file");
+                    //write 'tasks' into data file, overwriting all contents
+                    FileWriter fw = new FileWriter("data/duke.txt");
+                    String textFileMsg = "";
+                    for (int i = 0; i < index; i++) {
+                        if (i == 0) {
+                            textFileMsg = textFileMsg + tasks.get(i).toWriteIntoFile();
+                        } else {
+                            textFileMsg = textFileMsg + System.lineSeparator() + tasks.get(i).toWriteIntoFile();
+                        }
                     }
+                    fw.write(textFileMsg);
+                    fw.close();
 
                 } else if (!command.equals("list") && !command.substring(0, 4).equals("done")) {
                     //adding new task of 1 of 3 types
@@ -209,6 +204,7 @@ public class Duke {
                     String commandMsg = "Got it. I've added this task:\n"
                             + tasks.get(index);
 
+                    String textFileMsg = System.lineSeparator() + tasks.get(index).toWriteIntoFile();
                     index++;
                     System.out.println(commandMsg);
                     String statusOfList;
@@ -218,6 +214,9 @@ public class Duke {
                         statusOfList = "Now you have " + index + " tasks in the list.\n";
                     }
                     System.out.println(statusOfList);
+                    FileWriter fw = new FileWriter("data/duke.txt", true);
+                    fw.write(textFileMsg);
+                    fw.close();
                 } else if (command.substring(0, 4).equals("done")) {
                     //marking task as done
                     if (command.contains(" ")) {
@@ -243,6 +242,17 @@ public class Duke {
                     String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
                             "[" + tasks.get(curr - 1).getStatusIcon() + "] " + tasks.get(curr - 1).getDescription() + "\n";
                     System.out.println(markAsDoneMsg);
+                    FileWriter fw = new FileWriter("data/duke.txt");
+                    String textFileMsg = "";
+                    for (int i = 0; i < index; i++) {
+                        if (i == 0) {
+                            textFileMsg = textFileMsg + tasks.get(i).toWriteIntoFile();
+                        } else {
+                            textFileMsg = textFileMsg + System.lineSeparator() + tasks.get(i).toWriteIntoFile();
+                        }
+                    }
+                    fw.write(textFileMsg);
+                    fw.close();
                 } else {
                     //listing tasks out
                     String listMsg = "Here are the tasks in your list:";
@@ -255,6 +265,8 @@ public class Duke {
                     System.out.println();
                 }
             } catch (DukeException e) {
+                System.out.println(e);
+            } catch (Exception e) {
                 System.out.println(e);
             } finally {
                 command = sc.nextLine();

@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,44 +14,36 @@ public class Duke {
 
     private static String border = "-------------------------------------";
     private static ArrayList<Task> items = new ArrayList<Task>();
+    private Ui user;
 
+
+    public Duke() {
+        user = new Ui();
+    }
     /**
      * Main method for executing Duke.
      *
      *
      */
-    public static void main(String[] args) throws FileNotFoundException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public static void main(String[] args) {
+        Duke execute = new Duke();
 
-        //Greetings before program
+        try {
+            execute.run();
+        } catch (FileNotFoundException e) {
+            System.out.println("Stored file not found!!!");
+        }
+    }
+
+    /**
+     * Runnable method containing main process.
+     *
+     * @throws FileNotFoundException retrieving file that stored existing tasks
+     */
+    public void run() throws FileNotFoundException {
+        user.greeting();
+
         StringBuilder sb = new StringBuilder();
-        sb.append(border + "\n");
-        sb.append("Hello! I'm Duke\n");
-        sb.append("What can I do for you?\n");
-        sb.append(border + "\n");
-        String greetings = sb.toString();
-        System.out.println(greetings);
-        sb.setLength(0);
-
-        //error message for indexOutOfBound
-        sb.append(border + "\n");
-        sb.append("Invalid number. Number not listed. \n");
-        sb.append(border + "\n");
-        String indexError = sb.toString();
-        sb.setLength(0);
-
-        //error message for empty input
-        sb.append(border + "\n");
-        sb.append("No input detected. Please enter a number. \n");
-        sb.append(border + "\n");
-        String emptyError = sb.toString();
-        sb.setLength(0);
-
 
         Scanner pastScan = new Scanner(new FileReader("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt"));
         loadExisting(pastScan);
@@ -66,20 +63,14 @@ public class Duke {
                     Task curr = items.get(itemNum - 1);
                     curr.markAsDone();
                     //forming the message
-                    sb.append(border + "\n");
-                    sb.append("Nice! I've marked this task as done:\n");
-                    sb.append(curr + "\n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
+                    user.doneMessage(curr);
                     sb.setLength(0);
                     input = sc.nextLine();
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(indexError);
-                    sb.setLength(0);
+                    user.indexError();
                     input = sc.nextLine();
                 } catch (NumberFormatException e) {
-                    System.out.println(emptyError);
-                    sb.setLength(0);
+                    user.emptyError();
                     input = sc.nextLine();
                 }
             } else if (input.toLowerCase().contains("delete")) {
@@ -87,133 +78,94 @@ public class Duke {
                 try {
                     int itemNum = Integer.parseInt(input.substring(input.length() - 1));
                     Task curr = items.get(itemNum - 1);
-                    //forming the message
-                    sb.append(border + "\n");
-                    sb.append("Noted! I've removed this task:\n");
-                    sb.append(curr + "\n");
-                    sb.append("Now you have " + (items.size() - 1) + " tasks in the list.\n");
-                    sb.append(border + "\n");
-
+                    user.deleteMessage(curr, (items.size() - 1));
                     items.remove(itemNum - 1);
-
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
                     input = sc.nextLine();
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(indexError);
-                    sb.setLength(0);
+                    user.indexError();
                     input = sc.nextLine();
                 } catch (NumberFormatException e) {
-                    System.out.println(emptyError);
-                    sb.setLength(0);
+                    user.emptyError();
                     input = sc.nextLine();
                 }
             } else if (input.toLowerCase().equals("list")) {
-                sb.append(border + "\n");
-                //list out all items in arraylist items
-                for (int i = 1; i <= items.size(); i++) {
-                    Task curr = items.get(i - 1);
-                    sb.append(i + "." + curr + "\n");
-                }
-                sb.append(border + "\n");
-                System.out.println(sb.toString());
-                sb.setLength(0);
+                user.listTask(items);
                 input = sc.nextLine();
-            } else if (input.toLowerCase().contains("todo")) {
-                //adding an item
-                try {
-                    Todo newTask = new Todo(input.substring(5));
-                    items.add(newTask);
-                    String message = generateMessage(newTask);
-                    System.out.println(message);
-                    input = sc.nextLine();
-                } catch (StringIndexOutOfBoundsException e) {
-                    sb.append(border + "\n");
-                    sb.append("Todo must have valid description\n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
-                    input = sc.nextLine();
-                }
-            } else if (input.toLowerCase().contains("deadline")) {
-                try {
-                    int date = input.indexOf("/by");
-                    //split input into [deadline] [description] [date]
-                    Date deadLineDate = convertStringToDeadline(input.substring(date + 3));
-                    Deadline newTask = new Deadline(input.substring(9, date), deadLineDate);
-                    items.add(newTask);
-                    String message = generateMessage(newTask);
-                    System.out.println(message);
-                    input = sc.nextLine();
-                } catch (StringIndexOutOfBoundsException | ParseException e) {
-                    sb.append(border + "\n");
-                    sb.append("Invalid Deadline's arguments \n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
-                    input = sc.nextLine();
-                }
-
-            } else if (input.toLowerCase().contains("event")) {
-                try {
-                    int time = input.indexOf("/at");
-                    int timeRange = input.indexOf("-");
-                    //split input into [event] [description] [timing]
-                    Date eventDate = convertStringToEventStart(input.substring(time + 3, timeRange));
-                    Date eventEnd = convertStringToEventEnd(input.substring(timeRange + 1));
-                    Event newTask = new Event(input.substring(6, time), eventDate, eventEnd);
-                    items.add(newTask);
-                    String message = generateMessage(newTask);
-                    System.out.println(message);
-                    input = sc.nextLine();
-                } catch (StringIndexOutOfBoundsException | ParseException e) {
-                    sb.append(border + "\n");
-                    sb.append("Invalid Event's arguments \n");
-                    sb.append(border + "\n");
-                    System.out.println(sb.toString());
-                    sb.setLength(0);
-                    input = sc.nextLine();
-                }
             } else {
-                sb.append(border + "\n");
-                sb.append("Unable to understand. Invalid Input. \n");
-                sb.append(border + "\n");
-                System.out.println(sb.toString());
-                sb.setLength(0);
+                generateTask(input);
                 input = sc.nextLine();
             }
-
         }
 
-
-<<<<<<< HEAD
-=======
         storeCurrent(items);
 
->>>>>>> branch-Level-7
+
         //Concluding Message
-        sb.append(border + "\n");
-        sb.append("Bye. Hope to see you again soon!\n");
-        sb.append(border + "\n");
-        String conclude = sb.toString();
-        System.out.println(conclude);
-
+        user.conclusion();
     }
 
-    /**
-     * Message generator for task with indentation and border.
-     *
-     *
-     */
-    private static String generateMessage(Task current) {
+
+    private void generateTask(String input) {
         StringBuilder sb = new StringBuilder();
-        sb.append(border + "\n");
-        sb.append("Got it. I've added this task: \n");
-        sb.append(current + "\n");
-        sb.append("Now you have " + items.size() + " tasks in the list.\n");
-        sb.append(border + "\n");
-        return sb.toString();
+        if (input.toLowerCase().contains("todo")) {
+            //adding an item
+            try {
+                Todo newTask = new Todo(input.substring(5));
+                items.add(newTask);
+                String message = user.generateMessage(newTask, items.size());
+                System.out.println(message);
+            } catch (StringIndexOutOfBoundsException e) {
+                sb.append(border + "\n");
+                sb.append("Todo must have valid description\n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+            }
+        } else if (input.toLowerCase().contains("deadline")) {
+            try {
+                int date = input.indexOf("/by");
+                //split input into [deadline] [description] [date]
+                Date deadLineDate = convertStringToDeadline(input.substring(date + 3));
+                Deadline newTask = new Deadline(input.substring(9, date), deadLineDate);
+                items.add(newTask);
+                String message = user.generateMessage(newTask, items.size());
+                System.out.println(message);
+            } catch (StringIndexOutOfBoundsException | ParseException e) {
+                sb.append(border + "\n");
+                sb.append("Invalid Deadline's arguments \n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+            }
+
+        } else if (input.toLowerCase().contains("event")) {
+            try {
+                int time = input.indexOf("/at");
+                int timeRange = input.indexOf("-");
+                //split input into [event] [description] [timing]
+                Date eventDate = convertStringToEventStart(input.substring(time + 3, timeRange));
+                Date eventEnd = convertStringToEventEnd(input.substring(timeRange + 1));
+                Event newTask = new Event(input.substring(6, time), eventDate, eventEnd);
+                items.add(newTask);
+                String message = user.generateMessage(newTask, items.size());
+                System.out.println(message);
+            } catch (StringIndexOutOfBoundsException | ParseException e) {
+                sb.append(border + "\n");
+                sb.append("Invalid Event's arguments \n");
+                sb.append(border + "\n");
+                System.out.println(sb.toString());
+                sb.setLength(0);
+            }
+        } else {
+            sb.append(border + "\n");
+            sb.append("Unable to understand. Invalid Input. \n");
+            sb.append(border + "\n");
+            System.out.println(sb.toString());
+            sb.setLength(0);
+        }
     }
+
+
 
     private static void loadExisting(Scanner stored) {
         StringBuilder sb = new StringBuilder();
@@ -234,17 +186,17 @@ public class Duke {
                     System.out.println(sb.toString());
                     sb.setLength(0);
                 }
+
             } else if (input.toLowerCase().contains("[d]")) {
                 try {
                     int date = input.indexOf("(by");
-                    int close = input.indexOf(")");
-                    //split input into [deadline] [description] [date]
-                    Deadline newTask = new Deadline(input.substring(7, date), input.substring(date + 5, close));
+                    Date deadLineDate = convertStringToDeadline(input.substring(date + 4));
+                    Deadline newTask = new Deadline(input.substring(7, date), deadLineDate);
                     if (Integer.parseInt(input.substring(input.length() - 1)) == 1) {
                         newTask.markAsDone();
                     }
                     items.add(newTask);
-                } catch (StringIndexOutOfBoundsException e) {
+                } catch (StringIndexOutOfBoundsException | ParseException e) {
                     sb.append(border + "\n");
                     sb.append("Invalid Deadline's arguments \n");
                     sb.append(border + "\n");
@@ -255,14 +207,16 @@ public class Duke {
             } else if (input.toLowerCase().contains("[e]")) {
                 try {
                     int time = input.indexOf("(at");
-                    int close = input.indexOf(")");
+                    int timeRange = input.indexOf("-");
+                    Date eventDate = convertStringToEventStart(input.substring(time + 4, timeRange));
+                    Date eventEnd = convertStringToEventEnd(input.substring(timeRange + 1));
                     //split input into [event] [description] [timing]
-                    Event newTask = new Event(input.substring(7, time), input.substring(time + 5, close));
+                    Event newTask = new Event(input.substring(7, time), eventDate, eventEnd);
                     if (Integer.parseInt(input.substring(input.length() - 1)) == 1) {
                         newTask.markAsDone();
                     }
                     items.add(newTask);
-                } catch (StringIndexOutOfBoundsException e) {
+                } catch (StringIndexOutOfBoundsException | ParseException e) {
                     sb.append(border + "\n");
                     sb.append("Invalid Event's arguments \n");
                     sb.append(border + "\n");
@@ -276,8 +230,8 @@ public class Duke {
     private static void storeCurrent(ArrayList<Task> inputs) {
         try {
             File file = new File("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt");
-            FileWriter fileWriter = new FileWriter(file);
-            PrintWriter pw = new PrintWriter(fileWriter);
+            FileWriter fw = new FileWriter(file);
+            PrintWriter pw = new PrintWriter(fw);
             for (Task input : inputs) {
                 int status = 0;
                 if (input.isDone) {
@@ -285,8 +239,8 @@ public class Duke {
                 }
                 pw.println(input + " " + status);
             }
-            fileWriter.flush();
-            fileWriter.close();
+            fw.flush();
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

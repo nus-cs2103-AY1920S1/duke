@@ -1,8 +1,4 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,9 +6,11 @@ public class Duke {
     private static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     public Duke() {
         storage = new Storage(LIST_PATH);
+        ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
         }
@@ -22,30 +20,29 @@ public class Duke {
     }
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-        greetings(tasks);
-        while (sc.hasNext()) {
-            String command = sc.next();
-            if (command.equals("list")) {
-                tasks.printList();
-            } else if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (command.equals("done")) {
-                int itemIndex = sc.nextInt();
-                tasks.markIndexedTaskAsDone(itemIndex);
-                storage.writeListToFile(tasks);
-            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) { // new item
-                Task task = addNewItem(command, sc, tasks);
-                storage.addTaskToFile(task);
-            } else if (command.equals("delete")) {
-                int itemIndex = sc.nextInt();
-                tasks.deleteTask(itemIndex);
-                storage.writeListToFile(tasks);
-            } else {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                sc.nextLine();
-            }
+        ui.greetings();
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+
+//            } else if (command.equals("done")) {
+//                int itemIndex = sc.nextInt();
+//                tasks.markIndexedTaskAsDone(itemIndex);
+//                storage.writeListToFile(tasks);
+//            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) { // new item
+//                Task task = addNewItem(command, sc, tasks);
+//                storage.addTaskToFile(task);
+//            } else if (command.equals("delete")) {
+//                int itemIndex = sc.nextInt();
+//                tasks.deleteTask(itemIndex);
+//                storage.writeListToFile(tasks);
+//            } else {
+//                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+//                sc.nextLine();
+//            }
         }
     }
 
@@ -87,12 +84,6 @@ public class Duke {
         }
         taskList.addItem(task);
         return task;
-    }
-
-    private static void greetings(TaskList taskList) {
-        System.out.println("Hello! I am Jeong's Slave");
-        taskList.printList();
-        System.out.println("What can I do for you?");
     }
 
 }

@@ -19,7 +19,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String extraText() {
+    protected String extraText() {
         return " (by: " + this.deadline + ")";
+    }
+
+    @Override
+    protected String extraSaveText() {
+        return " | " + this.deadline;
     }
 }

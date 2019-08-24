@@ -19,13 +19,30 @@ public abstract class Task {
 
     public abstract String getTaskInitial();
 
-    // Override this function to provide extra text at the end of the task's string representation
-    public String extraText() {
+    /**
+     * Override this function to provide extra text at the end of the task's string representation.
+     * @return Extra text to be inserted at the end of the task's string representation
+     */
+    protected String extraText() {
         return "";
+    }
+
+    /**
+     * Override this function to provide extra text at the end of the task's save string representation.
+     * @return Extra text to be inserted at the end of the task's save string representation
+     */
+    protected String extraSaveText() {
+        return "";
+    }
+
+    public String toSaveString() {
+        return this.getTaskInitial() + " | " + (this.isDone ? "1" : "0") + " | " + this.description
+             + this.extraSaveText();
     }
 
     @Override
     public String toString() {
-        return "[" + this.getTaskInitial() + "][" + this.getStatusIcon() + "] " + this.description + this.extraText();
+        return "[" + this.getTaskInitial() + "][" + this.getStatusIcon() + "] " + this.description
+             + this.extraText();
     }
 }

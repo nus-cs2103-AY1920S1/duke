@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Ui {
@@ -26,7 +27,7 @@ public class Ui {
         System.out.println(line + "\n");
     }
 
-    String getInputLine() {
+    String getInputLine() throws NoSuchElementException {
         return sc.nextLine();
     }
 }

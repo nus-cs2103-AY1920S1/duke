@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 public class Duke {
     private TaskList tasks;
@@ -27,6 +28,8 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.dukePrint(e.toString());
+            } catch (NoSuchElementException e) {
+                return;
             }
         }
     }

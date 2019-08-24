@@ -3,9 +3,9 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    protected Date at;
+    private final Date at;
 
-    public Event(String description, Date at) {
+    Event(String description, Date at) {
         super(description);
         this.at = at;
     }

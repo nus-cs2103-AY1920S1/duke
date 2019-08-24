@@ -12,8 +12,9 @@ public class Event extends Task {
 
     @Override
     public String toSaveString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         String isDone = this.isDone ? "1" : "0";
-        return "E | " +  isDone + " | " + this.description + " | " + this.at;
+        return "E | " +  isDone + " | " + this.description + " | " + dateFormat.format(this.at);
     }
 
     @Override

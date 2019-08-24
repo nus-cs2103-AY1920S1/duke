@@ -13,7 +13,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
         String isDone = this.isDone ? "1" : "0";
-        return "D | " +  isDone + " | " + this.description + " | " + this.by;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+        return "D | " +  isDone + " | " + this.description + " | " + dateFormat.format(this.by);
     }
 
     @Override

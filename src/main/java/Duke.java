@@ -16,7 +16,7 @@ public class Duke {
 
         try {
             tasks = Duke.loadTasks();
-        } catch (FileNotFoundException ex) {
+        } catch (ParseException | FileNotFoundException ex) {
             tasks = new ArrayList<>();
             try {
                 File file = new File(Duke.SAVE_PATH);
@@ -94,7 +94,7 @@ public class Duke {
                         String by = description.split(" /by ", 2)[1];
                         description = description.split(" /by ", 2)[0];
                         SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
-                        Task task = new Event(description, dateFormat.parse(by));
+                        Task task = new Deadline(description, dateFormat.parse(by));
                         tasks.add(task);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task.toString());
@@ -132,19 +132,21 @@ public class Duke {
         return text.toString();
     }
 
-    private static Task convertTextToTask(String text) {
-        String[] tokens = text.split(" | ");
+    private static Task convertTextToTask(String text) throws ParseException {
+        String[] tokens = text.split("\\s\\|\\s");
         String type = tokens[0];
-        boolean isDone = tokens[2].equals("1");
-        String description = tokens[4];
+        boolean isDone = tokens[1].equals("1");
+        String description = tokens[2];
         Task task;
 
         if (type.equals("T")) {
             task = new Todo(description);
         } else if (type.equals("E")) {
-            task = new Event(description, tokens[6]);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+            task = new Event(description, dateFormat.parse(tokens[3]));
         } else {
-            task = new Deadline(description, tokens[6]);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+            task = new Deadline(description, dateFormat.parse(tokens[3]));
         }
 
         if (isDone) {
@@ -154,7 +156,7 @@ public class Duke {
          return task;
     }
 
-    private static ArrayList<Task> loadTasks() throws FileNotFoundException {
+    private static ArrayList<Task> loadTasks() throws FileNotFoundException, ParseException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(Duke.SAVE_PATH);
         Scanner scanner = new Scanner(file);

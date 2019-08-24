@@ -5,7 +5,7 @@ import main.task.*;
 
 public class Duke {
     public static void main(String[] args) {
-        //Level 5
+        //Level 8
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<Task>();
         String input = sc.nextLine();
@@ -62,20 +62,21 @@ public class Duke {
                         t = new ToDo(input.substring(5));
                     } else if (input.length() > 8 && input.substring(0, 8).equals("deadline")) {
                         taskType = "deadline";
-                        if (input.length() < 10 || !input.contains("/")) {
+                        if (input.length() < 10 || !input.contains("/by")) {
                             throw new InsufficientTaskArgumentException("Not enough arguments for Deadline");
                         }
                         String res = input.substring(9);
-                        String[] pair = res.split("/");
+                        String[] pair = res.split("/by ");
                         t = new Deadline(pair[0], pair[1]);
                     } else if (input.length() > 5 && input.substring(0, 5).equals("event")) {
                         taskType = "event";
-                        if (input.length() < 7 || !input.contains("/")) {
+                        if (input.length() < 7 || !input.contains("/at")) {
                             throw new InsufficientTaskArgumentException("Not enough arguments for Deadline");
                         }
                         String res = input.substring(6);
-                        String[] pair = res.split("/");
-                        t = new Event(pair[0], pair[1]);
+                        String[] pair = res.split("/at ");
+                        String[] dateComponents = pair[1].split(" ");
+                        t = new Event(pair[0], dateComponents[0], dateComponents[1]);
                     } else {
                         throw new InvalidTaskException(input + " is not a valid task");
                     }

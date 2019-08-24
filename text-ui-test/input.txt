@@ -1,13 +1,10 @@
 todo read book
-deadline buy fruits /by Tue
-event project meeting /at Mon 2-4pm
+deadline buy fruits /by 10/08/2019
+event project meeting /at 01/08/2019 1200
 list
 eatsomefreepizza
 e
 done 1
 done 3
-delete 1
-list
-delete 2
 list
 bye

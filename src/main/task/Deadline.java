@@ -1,16 +1,16 @@
 package main.task;
 
 public class Deadline extends Task {
-    String date;
+    Date date;
 
     public Deadline(String description, String date) {
-        super(description);
-        this.date = date;
+        super(description.trim());
+        this.date = new Date(date);
     }
 
     @Override
     public String toString() {
-        String displayDate = this.date.substring(0, 2) + ": " + this.date.substring(3);
+        String displayDate = "by: " + this.date.toString();
         return "[D][" + super.getStatusIcon() + "] "
                 + super.description + " (" + displayDate + ")";
     }

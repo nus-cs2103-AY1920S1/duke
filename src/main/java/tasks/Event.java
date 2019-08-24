@@ -4,10 +4,19 @@ import tasks.Task;
 
 public class Event extends Task {
     protected String at;
+    protected String year;
+    protected String month;
+    protected String day;
+    protected String time;
 
     public Event(String description, String at) {
         super(description);
         this.at = at;
+        String[] splits = at.split("[/ ]");
+        day = splits[0];
+        month = splits[1];
+        year = splits[2];
+        time = splits[3];
     }
 
     public String getAt(){

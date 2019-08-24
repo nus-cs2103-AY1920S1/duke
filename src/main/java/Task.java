@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -37,5 +39,23 @@ public abstract class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Task task = (Task) o;
+        return isDone == task.isDone
+                && description.equals(task.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone);
     }
 }

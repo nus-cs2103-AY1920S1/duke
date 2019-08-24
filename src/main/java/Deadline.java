@@ -15,4 +15,13 @@ public class Deadline extends Task {
             return "[D][\u2718] " + this.description + " (by: " + this.dateAndTime + ")";
         }
     }
+
+    @Override
+    public String createTaskInFileFormat() {
+        String temp = "D ";
+        temp += super.createTaskInFileFormat();
+        temp += " /by ";
+        temp += this.dateAndTime;
+        return temp;
+    }
 }

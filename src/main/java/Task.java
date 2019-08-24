@@ -19,4 +19,15 @@ public class Task {
             return "[\u2718] " + this.description;
         }
     }
+
+    public String createTaskInFileFormat() {
+        String temp = "";
+        if (this.isDone) {
+            temp += "1 ";
+        } else {
+            temp += "0 ";
+        }
+        temp += this.description;
+        return temp;
+    }
 }

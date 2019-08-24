@@ -15,4 +15,13 @@ public class Event extends Task {
             return "[E][\u2718] " + this.description + " (at: " + this.eventDuration + ")";
         }
     }
+
+    @Override
+    public String createTaskInFileFormat() {
+        String temp = "E ";
+        temp += super.createTaskInFileFormat();
+        temp += " /at ";
+        temp += this.eventDuration;
+        return temp;
+    }
 }

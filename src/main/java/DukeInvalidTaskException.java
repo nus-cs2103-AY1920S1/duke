@@ -4,6 +4,10 @@ public class DukeInvalidTaskException extends DukeException {
         this.task = task;
     }
 
+    public DukeInvalidTaskException (int task) {
+        this.task = Integer.toString(task);
+    }
+
     @Override
     public String toString() {
         return oops + "Task " + task + " does not exist.";

@@ -6,10 +6,14 @@ public class DeadlineTask extends Task {
 
     protected Date by;
 
-    public DeadlineTask(String description, String by) throws ParseException {
+    public DeadlineTask(String description, String by) throws DukeInvalidDateException {
         super(description);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        this.by = format.parse(by);
+        try {
+            this.by = format.parse(by);
+        } catch (ParseException e) {
+            throw new DukeInvalidDateException(by);
+        }
     }
 
     @Override

@@ -6,10 +6,14 @@ public class EventTask extends Task {
 
     protected Date at;
 
-    public EventTask(String description, String at) throws ParseException {
+    public EventTask(String description, String at) throws DukeInvalidDateException {
         super(description);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        this.at = format.parse(at);
+        try {
+            this.at = format.parse(at);
+        } catch (ParseException e) {
+            throw new DukeInvalidDateException(at);
+        }
     }
 
     @Override

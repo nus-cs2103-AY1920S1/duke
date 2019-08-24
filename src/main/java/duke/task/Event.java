@@ -1,12 +1,16 @@
-public class Event extends Task {
-    protected String at;
+package duke.task;
 
-    public Event(String description, String at) {
+import java.util.Date;
+
+public class Event extends Task {
+    private Date at;
+
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, Date at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
@@ -16,7 +20,7 @@ public class Event extends Task {
         return "E";
     }
 
-    public String getAt() {
+    public Date getAt() {
         return at;
     }
 

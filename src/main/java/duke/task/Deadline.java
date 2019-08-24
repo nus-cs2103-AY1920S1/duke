@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task {
-    protected Date by;
+    private Date by;
     SimpleDateFormat formatter = new SimpleDateFormat("d 'of' M/yyyy HHmm");
 
     public Deadline(String description, Date by) {

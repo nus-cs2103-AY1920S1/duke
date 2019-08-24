@@ -45,12 +45,12 @@ public class CommandHandler {
                     tasks.deleteTask(taskNumberToRemove);
                     break;
                 default:
-                    throw new InvalidCommandException();
+                    throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException dukeException) {
-            if (dukeException instanceof EmptyTodoTextException) System.out.println("\t ☹ OOPS!!! The description of a todo cannot be empty.");
-            else if (dukeException instanceof InvalidCommandException) System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("\t ☹ OOPS!!! " + dukeException.getMessage());
         }
+
         OutputUtilities.printLine();
     }
 

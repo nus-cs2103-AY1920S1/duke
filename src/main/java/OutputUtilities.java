@@ -7,8 +7,8 @@ public class OutputUtilities {
    public static void sayHi() {
         printLine();
         System.out.println(
-               "\tHello! I'm Duke\n" +
-               "\tWhat can I do for you?");
+               "\t Hello! I'm Duke\n" +
+               "\t What can I do for you?");
         printLine();
    }
 

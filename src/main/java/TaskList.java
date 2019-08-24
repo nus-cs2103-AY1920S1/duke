@@ -5,7 +5,7 @@ public class TaskList {
     private List<Task> tasks = new ArrayList<>();
 
     public void addTask(Task t) throws DukeException {
-        if (t.getTaskName().isBlank()) throw new EmptyTodoTextException();
+        if (t.getTaskName().isBlank()) throw new EmptyTodoTextException("The description of a todo cannot be empty");
         tasks.add(t);
         System.out.println("\t Got it. I've added this task: \n" +
                 "\t  " + t.toString() + "\n" +
@@ -20,10 +20,11 @@ public class TaskList {
         }
     }
 
-    public void markTaskAsCompleted(int taskNumber) {
+    public void markTaskAsCompleted(int taskNumber) throws DukeException {
+        if (taskNumber < 1 || taskNumber > tasks.size()) throw new TaskDoesNotExistException("Task not found");
         Task t = tasks.get(taskNumber - 1);
-        t.markAsCompleted();
 
+        t.markAsCompleted();
         System.out.println("\t Nice! I've marked this task as done: \n" +
                 "\t  [✓] " + t.getTaskName() + " " + t.getDetails() );
     }

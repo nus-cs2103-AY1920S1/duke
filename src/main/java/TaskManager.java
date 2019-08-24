@@ -39,7 +39,7 @@ class TaskManager {
                 this.list = new ArrayList<Task>();
                 tasksList.createNewFile();
                 serializeList();
-                throw new DukeException("Error: Corrupted save file. "
+                throw new DukeException("Oof. Corrupted save file. "
                         + "I have rewrote the old save file with a new one. "
                         + "Please restart me again.");
             }
@@ -61,6 +61,9 @@ class TaskManager {
                 case BYE :
                     System.out.println("Bye. Hope to see you again soon!");
                     return;
+                case HELP :
+                    printHelp();
+                    break;
                 default :
                     checkInputError(action);
                     break;
@@ -183,18 +186,28 @@ class TaskManager {
 
     public Action getAction(String action) throws DukeException {
         switch (action) {
+        case "List" :
         case "list" :
             return Action.LIST;
+        case "Bye" :
         case "bye" :
             return Action.BYE;
+        case "Help" :
+        case "help" :
+            return Action.HELP;
+        case "Todo" :
         case "todo" :
             return Action.TODO;
+        case "Deadline" :
         case "deadline" :
             return Action.DEADLINE;
+        case "Event" :
         case "event" :
             return Action.EVENT;
+        case "Done" :
         case "done" :
             return Action.DONE;
+        case "Delete" :
         case "delete" :
             return Action.DELETE;
         default :
@@ -206,33 +219,35 @@ class TaskManager {
     private void checkInputError(Action action) throws DukeException {
         switch (action) {
         case TODO :
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("Oof. The description of a todo cannot be empty.");
         case DEADLINE :
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("Oof. The description of a deadline cannot be empty.");
         case EVENT :
-            throw new DukeException("OOPS!!! The description of a event cannot be empty."); 
+            throw new DukeException("Oof. The description of a event cannot be empty."); 
         case DONE :
-            throw new DukeException("OOPS!!! The description of a done cannot be empty.");
+            throw new DukeException("Oof. The description of a done cannot be empty.");
         case DELETE :
-            throw new DukeException("OOPS!!! The description of a delete cannot be empty.");
+            throw new DukeException("Oof. The description of a delete cannot be empty.");
         default :
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Oof. I'm sorry, but I don't know what that means :-(");
         }
     }
 
     private void taskFormatError(Action action) throws DukeException {
         switch (action) {
         case DEADLINE :
-            throw new DukeException("Deadline requires a specified time. E.g. \'Task /by Sunday\'");
+            throw new DukeException("Oof. There seems to be an error with your deadline format. "
+                    + "Here's an example: \'deadline Handup Quiz /by 17/05/2019 14:05\'");
         case EVENT :
-            throw new DukeException("Event requires a specified time. E.g. \'Task /at Mon 2-4pm\'");
+            throw new DukeException("Oof. There seems to be an eror with your event format" 
+                    + "Here's an example: \'event Go to class /at 17/05/2019 14:05\'");
         default :
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Oof. I'm sorry, but I don't know what that means :-(");
         }
     }
 
     private void generalError() throws DukeException {
-        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("Oof. I'm sorry, but I don't know what that means :-(");
     }
 
     private void serializeList() throws DukeException {
@@ -243,8 +258,54 @@ class TaskManager {
             out.close();
             fileOut.close();
         } catch (IOException error) {
-            throw new DukeException("Unable to serialize the list to TasksList.sav. Error: " 
+            throw new DukeException("Oof. Unable to serialize the list to TasksList.sav. Error: " 
                     + error.getMessage());
+        }
+    }
+
+    private void printHelp() {
+        System.out.println("Hello this is Duke's Task Manager help page.");
+        System.out.println("There are 7 main features excluding help");
+        System.out.println("Type in the number respective to what you want to know. ");
+        System.out.println("Otherwise, type in any other thing to return.");
+        System.out.println("1. list 2. todo 3. deadline 4. event 5. done 6. delete 7. bye");
+        while(scanner.hasNextLine()) {
+            switch(scanner.nextLine()) {
+                case "1" :
+                    System.out.println("Type \'list\' to print your current tasks.");
+                    break;
+                case "2" :
+                    System.out.println("Type \'todo myTask\' to keep track of a to-do.");
+                    break;
+                case "3" :
+                    System.out.println("Type \'deadline myTask /by myDate\' to record a deadline.");
+                    System.out.println("Format of myDate can be either in date or time or both: ");
+                    System.out.println("DD/MM/YYYY HH:mm");
+                    System.out.println("DD/MM/YYYY");
+                    System.out.println("hh:mm");
+                    break;
+                case "4" :
+                    System.out.println("Type \'event myTask /at myDate\' to record an event.");
+                    System.out.println("Format of myDate can be either in date or time or both: ");
+                    System.out.println("DD/MM/YYYY HH:mm");
+                    System.out.println("DD/MM/YYYY");
+                    System.out.println("hh:mm");
+                    break;
+                case "5" :
+                    System.out.println("Type \'done number\' to complete the task of the number.");
+                    System.out.println("If unsure of the task's number, use \'list\' to check first.");
+                    break;
+                case "6" :
+                    System.out.println("Type \'delete number\' to remove the task of the number.");
+                    System.out.println("If unsure of the task's number, use \'list\' to check first.");
+                    break;
+                case "7" :
+                    System.out.println("Exits, what more?");
+                    break;
+                default :
+                    System.out.println("Returning back to main page.");
+                    return;
+                }
         }
     }
 }

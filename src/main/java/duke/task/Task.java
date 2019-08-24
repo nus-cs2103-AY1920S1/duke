@@ -11,7 +11,7 @@ public abstract class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "✓" : "✘");
     }
 
     public void markAsDone() {

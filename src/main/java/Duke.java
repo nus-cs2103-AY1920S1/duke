@@ -1,3 +1,9 @@
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,11 +15,12 @@ public class Duke {
                 "    ____________________________________________________________\n    ");
     }
 
-    private static void addTask(Task task, List<Task> list) {
+    private static void addTask(Task task, List<Task> list) throws IOException, JSONException {
         list.add(task);
         String output = "Got it. I've added this task: " + "\n" + "       "
                 + task.toString() + "\n" + "     "
                 + "Now you have " + list.size() + (list.size() == 1 ? " task in the list." : " tasks in the list.");
+        appendToSaveFile(task);
         formattedPrint(output);
     }
 
@@ -36,13 +43,56 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    private static JSONObject readSaveFile() throws IOException, JSONException {
+        // TODO: handle the exception where data.json doesn't exist or format is wrong
+        InputStream is = new FileInputStream("/Users/leo/Downloads/data.json");
+        BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+        String line = buf.readLine();
+        StringBuilder sb = new StringBuilder();
+        while (line != null) {
+            sb.append(line).append("\n");
+            line = buf.readLine();
+        }
+        return new JSONObject(new JSONTokener(sb.toString()));
+    }
+
+    private static void writeToSaveFile(String content) throws IOException {
+        FileWriter fileWriter = new FileWriter("/Users/leo/Downloads/data.json");
+        fileWriter.write(content);
+        fileWriter.close();
+    }
+
+    private static void appendToSaveFile(Task task) throws IOException, JSONException {
+        JSONObject obj = readSaveFile();
+        obj.append("data", task.toMap());
+        writeToSaveFile(obj.toString());
+    }
+
+    private static void syncSaveFile(List<Task> tasks) throws IOException, JSONException {
+        JSONObject obj = new JSONObject();
+        for (Task t : tasks) {
+            obj.append("data", t.toMap());
+        }
+        writeToSaveFile(obj.toString());
+    }
+
+    private static List<Task> loadFromSaveFile() throws IOException, JSONException, DukeException {
+        List<Task> tasks = new ArrayList<>();
+        JSONObject obj = readSaveFile();
+        JSONArray dataArray = obj.getJSONArray("data");
+        for (int i = 0; i < dataArray.length(); i++) {
+            tasks.add(Task.fromJson(dataArray.getJSONObject(i)));
+        }
+        return tasks;
+    }
+
+    public static void main(String[] args) throws JSONException, IOException, DukeException {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = loadFromSaveFile();
         boolean shouldRun = true;
         while (shouldRun) {
             try {
@@ -67,6 +117,7 @@ public class Duke {
                         tasks.get(doneNo).markAsDone();
                         String tempOut = "Nice! I've marked this task as done: " + "\n" + "       " +
                                 tasks.get(doneNo).toString();
+                        syncSaveFile(tasks);
                         formattedPrint(tempOut);
                         break;
                     }
@@ -77,6 +128,7 @@ public class Duke {
                                 "Now you have " + (tasks.size() - 1) +
                                 (tasks.size() - 1 == 1 ? " task in the list." : " tasks in the list.");
                         tasks.remove(removeNo);
+                        syncSaveFile(tasks);
                         formattedPrint(tempOut);
                         break;
                     }

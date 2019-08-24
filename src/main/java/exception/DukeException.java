@@ -1,4 +1,6 @@
-package com.leeyiyuan;
+package com.leeyiyuan.exception;
+
+import java.lang.Exception;
 
 public class DukeException extends Exception {
     

@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.io.IOException;
 
-import com.leeyiyuan.DukeException;
+import com.leeyiyuan.exception.DukeException;
 import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.task.DeadlineTask;
 import com.leeyiyuan.task.EventTask;

@@ -11,91 +11,83 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import com.leeyiyuan.task.DeadlineTask;
-import com.leeyiyuan.task.EventTask;
+import com.leeyiyuan.storage.format.DeadlineTaskFormatter;
+import com.leeyiyuan.storage.format.EventTaskFormatter;
+import com.leeyiyuan.storage.format.TaskFormatException;
+import com.leeyiyuan.storage.format.TaskFormatter;
+import com.leeyiyuan.storage.format.TaskParseException;
+import com.leeyiyuan.storage.format.TodoTaskFormatter;
+import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.Task;
-import com.leeyiyuan.task.TodoTask;
 
 public class Storage {
 
-    protected static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-
     protected String filePath;
+
+    protected ArrayList<TaskFormatter> taskFormatters;
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        this.taskFormatters = new ArrayList<TaskFormatter>();
+        this.taskFormatters.add(new TodoTaskFormatter());
+        this.taskFormatters.add(new DeadlineTaskFormatter());
+        this.taskFormatters.add(new EventTaskFormatter());
     }
 
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, StorageException {
         ArrayList<Task> tasks = new ArrayList<Task>();
+        Scanner scanner = null;
+
         try {
-            Scanner scanner = new Scanner(new File(filePath));
+            scanner = new Scanner(new File(this.filePath));
             while (scanner.hasNextLine()) {
-                tasks.add(Storage.deserialize(scanner.nextLine()));
+                String line = scanner.nextLine();
+                Task task = null;
+                for (TaskFormatter taskFormatter : this.taskFormatters) {
+                    try {
+                        task = taskFormatter.parse(line);
+                        break;
+                    } catch (TaskParseException e) {
+                        
+                    }
+                }
+                if (task == null) {
+                    throw new StorageException("Unreadable data in tasks file.");
+                }
+                tasks.add(task);
             }
-            scanner.close();
         } catch (FileNotFoundException e) {
 
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
         }
+
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasks) throws IOException {
+    public void save(ArrayList<Task> tasks) throws IOException, StorageException {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         file.createNewFile();
         FileWriter fw = new FileWriter(filePath, false);
         for (Task task : tasks) {
-            fw.write(Storage.serialize(task) + "\n");
+            String line = null;
+            for (TaskFormatter taskFormatter : this.taskFormatters) {
+                try {
+                    line = taskFormatter.format(task);
+                    break;
+                } catch (TaskFormatException e) {
+                    
+                }
+            }
+            if (line == null) {
+                throw new StorageException("Unsupported task in tasks list.");
+            }
+            fw.write(line + "\n");
         }
         fw.close();         
-    }
-
-    // TODO Utilize polymorphism on Task subclasses.
-    protected static Task deserialize(String line) {
-        if (Pattern.matches("^T \\| [01] \\| .+$", line)) {
-            String[] data = line.split(" \\| ", 3);
-            TodoTask task = new TodoTask();
-            task.setIsDone(data[1].equals("1"));
-            task.setTitle(data[2]);
-            return task;
-        } else if (Pattern.matches("^D \\| [01] \\| .+ \\| .+$", line)) {
-            String[] data = line.split(" \\| ", 4);
-            DeadlineTask task = new DeadlineTask();
-            task.setIsDone(data[1].equals("1"));
-            task.setTitle(data[2]);
-            task.setBy(LocalDateTime.parse(data[3], Storage.dateTimeFormatter));
-            return task;
-        } else if (Pattern.matches("^E \\| [01] \\| .+ \\| .+$", line)) {
-            String[] data = line.split(" \\| ", 4);
-            EventTask task = new EventTask();
-            task.setIsDone(data[1].equals("1"));
-            task.setTitle(data[2]);
-            task.setAt(LocalDateTime.parse(data[3], Storage.dateTimeFormatter));
-            return task;
-        } else {
-            return null;
-        }
-    }
-
-    // TODO Utilize polymorphism on Task subclasses.
-    protected static String serialize(Task task) {
-        if (task instanceof TodoTask) {
-            return String.format("T | %d | %s",
-                    ((TodoTask)task).getIsDone() ? 1 : 0,
-                    ((TodoTask)task).getTitle());
-        } else if (task instanceof DeadlineTask) {
-            return String.format("D | %d | %s | %s",
-                   ((DeadlineTask)task).getIsDone() ? 1 : 0,
-                   ((DeadlineTask)task).getTitle(),
-                   ((DeadlineTask)task).getBy().format(Storage.dateTimeFormatter));
-        } else if (task instanceof EventTask) {
-            return String.format("E | %d | %s | %s",
-                    ((EventTask)task).getIsDone() ? 1 : 0,
-                    ((EventTask)task).getTitle(),
-                    ((EventTask)task).getAt().format(Storage.dateTimeFormatter));
-        }
-        return null;
     }
 
 }

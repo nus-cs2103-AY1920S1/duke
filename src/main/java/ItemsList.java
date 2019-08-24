@@ -22,6 +22,10 @@ public class ItemsList {
         }
     }
 
+    public ArrayList<Task> getItemsList() {
+        return itemsList;
+    }
+
     public void deleteTask(int position) {
         Task task = itemsList.remove(position - 1);
         System.out.println("Noted. I've removed this task:");

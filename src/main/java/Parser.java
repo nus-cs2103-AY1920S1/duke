@@ -1,3 +1,4 @@
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,7 +11,7 @@ public class Parser {
             "deadline", AddDeadlineTaskCommand.class,
             "event", AddEventTaskCommand.class
     );
-    private static final Pattern COMMAND_PARSER = Pattern.compile("\\A(?<command>\\S+) (?<args>.+)\\z");
+    private static final Pattern COMMAND_PARSER = Pattern.compile("\\A(?<command>\\S+)(?: (?<args>.+))?\\z");
 
     public static Command parse(String command) {
         switch (command) {
@@ -27,6 +28,12 @@ public class Parser {
             if (commandClass != null) {
                 try {
                     return commandClass.getConstructor(String.class).newInstance(m.group("args"));
+                } catch (InvocationTargetException exc) {
+                    if (exc.getCause() instanceof DukeException) {
+                        throw (DukeException) exc.getCause();
+                    } else {
+                        throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(", exc);
+                    }
                 } catch (ReflectiveOperationException exc) {
                     throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(", exc);
                 }

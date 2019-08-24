@@ -1,10 +1,15 @@
 public class ExceptionHandler {
+    Ui ui;
 
-    static void handleKnownException(JermiException e) {
-        Ui.echo(e.getMessage());
+    ExceptionHandler(Ui ui) {
+        this.ui = ui;
     }
 
-    static void handleUnknownException(Exception e) {
+    void handleCheckedExceptions(JermiException e) {
+        this.ui.echo(e.getMessage());
+    }
+
+    void handleUncheckedExceptions(Exception e) {
         e.printStackTrace();
     }
 }

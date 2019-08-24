@@ -1,7 +1,7 @@
 public class Event extends TaskWithDateTime {
 
     Event(String description, String dateTime) throws EmptyDescriptionException {
-        super("an event", description, dateTime, "0");
+        this(description, dateTime, "0");
     }
 
     Event(String description, String dateTime, String isDone) throws EmptyDescriptionException {

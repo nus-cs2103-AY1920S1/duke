@@ -1,7 +1,7 @@
 public class Deadline extends TaskWithDateTime {
 
     Deadline(String description, String deadline) throws EmptyDescriptionException {
-        super("a deadline", description, deadline, "0");
+        this(description, deadline, "0");
     }
 
     Deadline(String description, String deadline, String isDone) throws EmptyDescriptionException {

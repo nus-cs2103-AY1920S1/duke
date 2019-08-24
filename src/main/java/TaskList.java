@@ -19,4 +19,12 @@ public class TaskList {
     int getSize() {
         return this.list.size();
     }
+
+    Task getTask(int ordering) {
+        return this.list.get(ordering - 1);
+    }
+
+    void remove(int ordering) {
+        this.list.remove(ordering - 1);
+    }
 }

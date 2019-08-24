@@ -1,10 +1,21 @@
-public class Ui {
+import java.util.Scanner;
 
-    private static String formatMessage(String message) {
+public class Ui {
+    private Scanner scanner;
+
+    Ui() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    private String formatMessage(String message) {
         return "     " + message + "\n";
     }
 
-    static void echo(String... messages) {
+    String read() {
+        return this.scanner.nextLine();
+    }
+
+    void echo(String... messages) {
         String border = "    ____________________________________________________________\n";
         StringBuilder toEcho = new StringBuilder(border);
         for (String message : messages) {
@@ -14,11 +25,15 @@ public class Ui {
         System.out.println(toEcho);
     }
 
-    static void greet() {
+    void greet() {
         echo("Hello! I'm Jermi", "What can I do for you?");
     }
 
-    static void exit() {
+    void exit() {
         echo("Bye. Hope to see you again soon!");
+    }
+
+    void runFail() {
+        echo("Client has failed to run.", "Please resolve the issue above before running again.");
     }
 }

@@ -7,10 +7,9 @@ public class Storage {
     private File file;
     private TaskList taskList;
 
-
-    Storage(TaskList taskList) {
+    Storage(String pathName, TaskList taskList) throws IOException, EmptyDescriptionException {
         this.taskList = taskList;
-        this.file = new File("data/jermi.txt");
+        this.file = new File(pathName);
         this.fileToTaskList();
     }
 
@@ -32,14 +31,10 @@ public class Storage {
         return task;
     }
 
-    private void fileToTaskList() {
-        try {
-            List<String> lines = Files.readAllLines(this.file.toPath());
-            for (String line : lines) {
-                this.taskList.add(this.fileFormatToTask(line));
-            }
-        } catch (IOException | EmptyDescriptionException e) {
-            e.printStackTrace();
+    private void fileToTaskList() throws EmptyDescriptionException, IOException {
+        List<String> lines = Files.readAllLines(this.file.toPath());
+        for (String line : lines) {
+            this.taskList.add(this.fileFormatToTask(line));
         }
     }
 

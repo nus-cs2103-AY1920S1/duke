@@ -27,7 +27,7 @@ public class Task {
      *Returns the status of the Task with a tick or cross icon if the task is done or incomplete respectively.
      * @return a tick or cross icon
      */
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 

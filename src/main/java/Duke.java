@@ -1,6 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.FileWriter;
 
 public class Duke {
     // String Constants used for Duke output
@@ -14,7 +18,7 @@ public class Duke {
     private static final String REMOVE_TASK = "     Noted. I've removed this task: ";
     private static final String CLOSING_STATEMENT = "     Bye. Hope to see you again soon!";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -34,23 +38,29 @@ public class Duke {
         // Null task for exception
         Task t = null;
 
-        //Read command-line input with Scanner
+        ListFile lf = new ListFile();
+        lf.openFile();
+        list = lf.readAndWriteList(list); // add existing tasks from txt file onto ArrayList
+        n = list.size(); // get existing size of list
+        lf.closeFile();
+
+        // Read command-line input with Scanner
         Scanner scanner = new Scanner(System.in);
 
-        //Initial opening introduction and prompt for user input
+        // Initial opening introduction and prompt for user input
         System.out.println(SEPARATOR);
         System.out.println(INTRODUCTION);
         System.out.println(USER_PROMPT);
         System.out.println(SEPARATOR);
         System.out.println("");
 
-        //Check for last statement
+        // Check for last statement
         while (!input.equals("bye")) {
 
             // Get entire line of input from command-line
             input = scanner.nextLine().trim(); //Remove blank space
 
-            //Store whatever text entered, except "bye", exit loop
+            // Store whatever text entered, except "bye", exit loop
             if (input.equals("bye")) break;
 
             System.out.println(SEPARATOR);
@@ -63,10 +73,10 @@ public class Duke {
                 }
             }
             else if (input.contains("done")) {
-                //Assumption: fixed format - remove first 4 characters to get index. i.e. "done"
+                // Assumption: fixed format - remove first 4 characters to get index. i.e. "done"
                 String value = input.substring(4);
 
-                //Get integer found in user input
+                // Get integer found in user input
                 int index = Integer.parseInt(value.trim()); //Remove any blank space
 
               // Optional error handling - if entry does not exist and is marked 'done'
@@ -86,16 +96,16 @@ public class Duke {
                 System.out.println(list.get(index-1));
 
             } else if (input.contains("delete")) {
-                //Assumption: fixed format - remove first 6 characters to get index. i.e. "delete"
+                // Assumption: fixed format - remove first 6 characters to get index. i.e. "delete"
                 String value = input.substring(6);
 
-                //Get integer found in user input
+                // Get integer found in user input
                 int index = Integer.parseInt(value.trim()); //Remove any blank space
                 System.out.println(REMOVE_TASK);
                 System.out.print("       "); //indentation
                 System.out.println(list.get(index-1)); //index start from 0
 
-                //Remove task from list
+                // Remove task from list
                 list.remove(index-1); //index start from 0
                 n -= 1; //Remove 1 task from total
                 System.out.println("     Now you have " + (n) + " tasks in the list.");
@@ -107,7 +117,7 @@ public class Duke {
                 try {
                     t = new Task(input, substrings.length);
                 }
-                //If length is 1, it only has the action but no description
+                // If length is 1, it only has the action but no description
                 catch (DukeException err) {
                     System.out.println(err.getMessage());
                     System.out.println(SEPARATOR);
@@ -126,8 +136,8 @@ public class Duke {
                         String subD = input.replace("deadline", "");
                         //Split task and deadline
                         String[] partsD = subD.split("\\/by");
-                        String descriptionD = partsD[0].trim(); //Remove blank spaces
-                        String by = partsD[1].trim(); //Remove blank spaces
+                        String descriptionD = partsD[0].trim(); // Remove blank spaces
+                        String by = partsD[1].trim(); // Remove blank spaces
                         list.add(new Deadline(descriptionD, by));
                         break;
 
@@ -136,22 +146,22 @@ public class Duke {
                         String sub3 = input.replace("event", "");
                         //Split task and deadline
                         String[] partsE = sub3.split("\\/at");
-                        String descriptionE = partsE[0].trim(); //Remove blank spaces
-                        String at = partsE[1].trim(); //Remove blank spaces
+                        String descriptionE = partsE[0].trim(); // Remove blank spaces
+                        String at = partsE[1].trim(); // Remove blank spaces
                         list.add(new Event(descriptionE, at));
                         break;
                 }
 
                 System.out.println(ADD_TASK);
-                System.out.print("       "); //indentation
+                System.out.print("       "); // indentation
                 System.out.println(list.get(n));
 
-                //After storing user input into array, increment index
+                // After storing user input into array, increment index
                 n += 1;
                 System.out.println("     Now you have " + (n) + " tasks in the list.");
 
             } else {
-               //Do not fit any commands
+               // Do not fit any commands
                 try {
                     t = new Task(input, 0);
                 }
@@ -165,8 +175,16 @@ public class Duke {
 
             System.out.println(SEPARATOR);
             System.out.println("");
+
+            FileWriter fw = new FileWriter("list.txt");
+            BufferedWriter output = new BufferedWriter(fw);
+            for (int i=0; i<n; i++) {
+                output.write(list.get(i).toSave());
+                output.newLine();
+            }
+            output.close();
         }
-        //Closing statement
+        // Closing statement
         System.out.println(SEPARATOR);
         System.out.println(CLOSING_STATEMENT);
         System.out.println(SEPARATOR);

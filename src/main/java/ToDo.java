@@ -10,4 +10,7 @@ class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String toSave() { return "T | " + (isDone ? "1" : "0") + " | " + this.description; }
 }

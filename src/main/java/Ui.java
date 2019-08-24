@@ -4,6 +4,9 @@ import java.util.ArrayList;
 public class Ui {
     private String border = "-------------------------------------";
 
+    /**
+     * Welcome message when program is executed.
+     */
     public void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,6 +16,9 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Greeting message before user input is required.
+     */
     public void greeting() {
         //Greetings before program
         StringBuilder sb = new StringBuilder();
@@ -24,6 +30,10 @@ public class Ui {
         System.out.println(greetings);
     }
 
+    /**
+     * Message when index given is out of range.
+     * @return String message generated
+     */
     public String indexError() {
         //error message for indexOutOfBound
         StringBuilder sb = new StringBuilder();
@@ -35,6 +45,10 @@ public class Ui {
         return indexError;
     }
 
+    /**
+     * Message when no index is provided.
+     * @return String message generated
+     */
     public String emptyError() {
         //error message for empty input
         StringBuilder sb = new StringBuilder();
@@ -46,6 +60,9 @@ public class Ui {
         return emptyError;
     }
 
+    /**
+     * Ending message when user input bye.
+     */
     public void conclusion() {
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
@@ -55,6 +72,11 @@ public class Ui {
         System.out.println(conclude);
     }
 
+    /**
+     * Message notifying user when a task is marked done.
+     * @param curr task that user wish to mark as done
+     * @return String message notifying user
+     */
     public String doneMessage(Task curr) {
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
@@ -66,6 +88,12 @@ public class Ui {
         return done;
     }
 
+    /**
+     * Message notifying user when a task is deleted
+     * @param curr Task that user wished to delete
+     * @param size size of list after deletion
+     * @return String message notifying user
+     */
     public String deleteMessage(Task curr, int size) {
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");
@@ -78,6 +106,10 @@ public class Ui {
         return delete;
     }
 
+    /**
+     * Listing all tasks stored in list.
+     * @param items ArrayList containing current tasks
+     */
     public void listTask(ArrayList<Task> items) {
         StringBuilder sb = new StringBuilder();
         sb.append(border + "\n");

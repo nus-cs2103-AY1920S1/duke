@@ -1,16 +1,8 @@
 package task;
 
-public class Event extends Task {
-    protected String time;
-
-    /**
-     * Creates a new event task.
-     * @param description Description of the task
-     * @param time Time of the event
-     */
+public class Event extends TimedTask {
     public Event(String description, String time) {
-        super(description);
-        this.time = time;
+        super(description, time);
     }
 
     @Override

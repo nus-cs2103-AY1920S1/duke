@@ -5,8 +5,16 @@ public class Event extends Task {
         super(desc);
         this.duration = "no idea :-p";
     }
+    Event(String desc, boolean done) {
+        super(desc, done);
+        this.duration = "no idea :-p";
+    }
     Event(String desc, String duration) {
         super(desc);
+        this.duration = duration;
+    }
+    Event(String desc, String duration, boolean done) {
+        super(desc, done);
         this.duration = duration;
     }
 

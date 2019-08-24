@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class Output {
@@ -58,5 +59,33 @@ public class Output {
     }
     public static void printTask(Task task) {
         System.out.println(indent + "  " + task);
+    }
+
+    public static void loadingDataMsg() {
+        System.out.println(indent + "Loading data from file...");
+    }
+
+    public static void noRecordsFoundMsg() {
+        System.out.println(indent + "No Records Found.");
+    }
+
+    public static void savingDataMsg() {
+        System.out.println(indent + "Saving data...");
+    }
+
+    public static void nothingToSaveMsg() {
+        System.out.println(indent + "Nothing to save.");
+    }
+
+    public static void errorSavingMsg() {
+        System.out.println(indent + "Error saving to file.");
+    }
+
+    public static void dataSavedMsg() {
+        System.out.println(indent + "Data saved successfully.");
+    }
+
+    public static void loadingSuccessMsg(int size) {
+        System.out.println(indent + size + " tasks loaded.");
     }
 }

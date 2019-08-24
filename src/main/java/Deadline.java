@@ -5,8 +5,15 @@ public class Deadline extends Task {
         super(desc);
         this.by = "no idea :-p";
     }
+    Deadline(String desc, boolean done) {
+        super(desc, done);
+    }
     Deadline(String desc, String by) {
         super(desc);
+        this.by = by;
+    }
+    Deadline(String desc, String by, boolean done) {
+        super(desc, done);
         this.by = by;
     }
 

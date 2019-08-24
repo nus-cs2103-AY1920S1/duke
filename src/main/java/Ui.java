@@ -1,4 +1,4 @@
-public class Echoer {
+public class Ui {
 
     private static String formatMessage(String message) {
         return "     " + message + "\n";

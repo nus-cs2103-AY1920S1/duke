@@ -5,17 +5,13 @@ import java.util.stream.Collectors;
 public class Client {
     private static Client client = null;
     private TaskList taskList;
-    private Echoer echoer;
-    private ExceptionHandler exceptionHandler;
     private Storage storage;
 
 
     private Client() {
         this.taskList = new TaskList();
-        this.echoer = new Echoer();
-        this.exceptionHandler = new ExceptionHandler(this.echoer);
         this.storage = new Storage(this.taskList);
-        this.echoer.greet();
+        Ui.greet();
     }
 
     static Client initialise() {
@@ -41,7 +37,7 @@ public class Client {
                 this.listTasks();
                 break;
             case "bye":
-                this.echoer.exit();
+                Ui.exit();
                 shouldContinue = false;
                 break;
             case "done":
@@ -56,9 +52,9 @@ public class Client {
                 throw new InvalidCommandException();
             }
         } catch (InvalidCommandException | EmptyDescriptionException e) {
-            this.exceptionHandler.handleKnownException(e);
+            ExceptionHandler.handleKnownException(e);
         } catch (Exception e) {
-            this.exceptionHandler.handleUnknownException(e);
+            ExceptionHandler.handleUnknownException(e);
         } finally {
             return shouldContinue;
         }
@@ -95,7 +91,7 @@ public class Client {
 
         this.taskList.add(task);
         int numOfTasks = this.taskList.getSize();
-        this.echoer.echo("Got it. I've added this task:"
+        Ui.echo("Got it. I've added this task:"
                 , "  " + task
                 , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }
@@ -110,13 +106,13 @@ public class Client {
             tasks.set(ordering - 1, ordering + "." + tasks.get(ordering - 1));
         }
         tasks.add(0, "Here are the tasks in your list:");
-        this.echoer.echo(tasks.toArray(new String[0]));
+        Ui.echo(tasks.toArray(new String[0]));
     }
 
     private void completeTask(int ordering) {
         Task task = this.taskList.getList().get(ordering - 1);
         task.markAsDone();
-        this.echoer.echo("Nice! I've marked this task as done:", "  " + task);
+        Ui.echo("Nice! I've marked this task as done:", "  " + task);
     }
 
     private void deleteTask(int ordering) {
@@ -124,7 +120,7 @@ public class Client {
         Task task = taskList.get(ordering - 1);
         taskList.remove(ordering - 1);
         int numOfTasks = this.taskList.getSize();
-        this.echoer.echo("Noted. I've removed this task:"
+        Ui.echo("Noted. I've removed this task:"
                 , "  " + task
                 , String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
     }

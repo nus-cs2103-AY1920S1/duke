@@ -1,7 +1,7 @@
 public class ExceptionHandler {
 
     static void handleKnownException(JermiException e) {
-        Echoer.echo(e.getMessage());
+        Ui.echo(e.getMessage());
     }
 
     static void handleUnknownException(Exception e) {

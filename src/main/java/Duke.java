@@ -1,9 +1,12 @@
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     private static ArrayList<Task> tasklist = new ArrayList<>();
+    private static FileManager fm;
 
     private static void draw_line() {
         System.out.print("    ");
@@ -48,8 +51,9 @@ public class Duke {
 
     // This method sets task as finished
     private static void finish_task(int just_done) {
-        draw_line();
         tasklist.get(just_done - 1).set_as_finish();
+
+        draw_line();
         System.out.println("     Nice! I have set this task as done:");
         System.out.println("       " + tasklist.get(just_done - 1).task_info());
         draw_line();
@@ -166,21 +170,39 @@ public class Duke {
         }
     }
 
-    //The main method will be used to recognize inputs and call relative methods
+    //The main method will be used to send the user's input to the recognizer.
+    //Except it should recognize the bye input by itself.
+    //It should also catch the exceptions thrown by the recognizer.
     public static void main(String[] args) {
+        // Check if the dukedata directory exists or not.
+        // If it does not, it means duke is the first time to run by the user.
+        // Create the dukedata directory.
+        if (!(new File("./dukedata").exists())) {
+            new File("./dukedata").mkdir();
+        }
+
+        // Generate the FileManager which records the latest update of the task list and reload the tasklist.
+        // Abandon generating a recorder and tell the user if the file cannot be read.
+        fm = new FileManager();
+        tasklist = fm.reload();
+
         // The welcome page.
         draw_line();
         System.out.println("     Hello, I'm Duke.");
         System.out.println("     What can I do for you?");
         draw_line();
 
+        // From now on, start getting user's input.
         while(true){
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
+
+            // Find if the user's input is bye.
             if (input.equals("bye")) break;
 
-            // The pot will be thrown to the recognizer.
+            // Since the user's input is not bye, The user's input will now be thrown to the recognizer.
             // main method will also inspect what kind of exception is thrown by recognizer.
+            // Based on what kind of exception is thrown, the main method will decide what is wrong.
             else {
                 try{
                     recognizer(input);
@@ -220,7 +242,11 @@ public class Duke {
             }
         }
 
-        //The exit page
+        // Now the user want to exit the program.
+        // Close the FileManager.
+        fm.rewrite(tasklist);
+
+        //The exit page.
         draw_line();
         System.out.println("     Bye. Hope to see you again soon!");
         draw_line();

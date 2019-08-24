@@ -19,9 +19,9 @@ public class Deadline extends Task {
   @Override
   public String toString() {
     String result = "[D][";
-    result = this.completed ? result + "✓]" : result + "✗]";
+    result = this.completed ? result + "\u2713" + "]" : result + "\u2718" + "]";
     result += " " + this.name;
-    result += " (by:" + this.date + ")";
+    result += " (by: " + this.date + ")";
     return result;
   }
 }

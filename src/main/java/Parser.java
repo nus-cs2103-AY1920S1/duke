@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -6,6 +8,8 @@ import java.util.List;
 public class Parser {
     public static final String FILEPATH = "data/duke.txt";
     private List<Task> taskList;
+
+    public static final String DATETIME_PATTERN = "dd MMMM yyyy, hh:mm a";
 
     public static final int DONE_INDEX = 2;
     public static final int TASK_INDEX = 0;
@@ -68,12 +72,14 @@ public class Parser {
 
     public Task deadlineParser(String[] inputLines) throws DukeException {
         Task deadlineTask = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
         String[] args = GetArgumentsUtil.getTwoCommandArgs(0, "|",
                 Arrays.copyOfRange(inputLines, START_ARGUMENTS_INDEX, inputLines.length));
+        LocalDateTime dateTime = LocalDateTime.parse(args[1], formatter);
         if (inputLines[DONE_INDEX].equals("1")) {
-            deadlineTask = new Deadline(args[0], args[1], true);
+            deadlineTask = new Deadline(args[0], dateTime, true);
         } else if (inputLines[DONE_INDEX].equals("0")) {
-            deadlineTask = new Deadline(args[0], args[1], false);
+            deadlineTask = new Deadline(args[0], dateTime, false);
         }
         return deadlineTask;
     }
@@ -89,7 +95,7 @@ public class Parser {
                         .append(task.getName()).append(" | ").append(((Event) task).getTiming()).append("\n");
             } else if (task instanceof Deadline) {
                 myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                        .append(task.getName()).append(" | ").append(((Deadline) task).getSubmissionTime()).append("\n");
+                        .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime()).append("\n");
             }
         }
         myStringBuilder.deleteCharAt(myStringBuilder.length() - 1);

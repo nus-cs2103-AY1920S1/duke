@@ -1,7 +1,8 @@
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Duke {
     private List<Task> taskList;
     private Scanner myScanner;
 
-
+    public static final String DATETIME_PATTERN = "dd/MM/yyyy HHmm";
 
     private Parser myParser;
 
@@ -47,7 +48,6 @@ public class Duke {
         } catch (DukeException e2) {
             printLines(Messages.START_HORIZONTAL_LINE, e2.getMessage(), Messages.END_HORIZONTAL_LINE);
         }
-
     }
 
 
@@ -184,12 +184,18 @@ public class Duke {
      * @throws DukeException the exception thrown by getTwoCommandArgs()
      */
     public void performsDeadlineCommand(String[] commands) throws DukeException {
-        String[] args = GetArgumentsUtil.getTwoCommandArgs(1,"/by", commands);
-        Task deadlineTask = new Deadline(args[0], args[1]);
-        taskList.add(deadlineTask);
-        printLines(Messages.START_HORIZONTAL_LINE, Messages.ADDED_TASK_MESSAGE,
-                Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
-                String.format(Messages.LIST_SIZE_FORMAT, taskList.size()), Messages.END_HORIZONTAL_LINE);
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
+            String[] args = GetArgumentsUtil.getTwoCommandArgs(1, "/by", commands);
+            LocalDateTime dateTime = LocalDateTime.parse(args[1], formatter);
+            Task deadlineTask = new Deadline(args[0], dateTime);
+            taskList.add(deadlineTask);
+            printLines(Messages.START_HORIZONTAL_LINE, Messages.ADDED_TASK_MESSAGE,
+                    Messages.COMMAND_INDENTATION + Messages.COMPLETION_INDENTATION + deadlineTask.toString(),
+                    String.format(Messages.LIST_SIZE_FORMAT, taskList.size()), Messages.END_HORIZONTAL_LINE);
+        } catch (DateTimeParseException e) {
+            printLines(Messages.START_HORIZONTAL_LINE, Messages.DATETIME_PARSE_EXCEPTION, Messages.END_HORIZONTAL_LINE);
+        }
     }
 
 

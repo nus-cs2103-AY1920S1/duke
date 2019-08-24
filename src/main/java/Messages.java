@@ -27,4 +27,7 @@ public class Messages {
             "\u2639\uFE0FOOPS!!! \"%s\" cannot be found in the command";
     public static final String INVALID_SIZE_EXCEPTION = COMMAND_INDENTATION +
             "\u2639\uFE0FOOPS!!! Invalid task number";
+    public static final String DATETIME_PARSE_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0F The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
+
 }

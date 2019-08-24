@@ -53,6 +53,7 @@ public class Duke {
         } catch (Exception e) {
             //add more specific exceptions
             System.out.println("Error with the data file initialization");
+            System.out.println(e);
         }
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();

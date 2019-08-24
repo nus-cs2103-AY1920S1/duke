@@ -43,7 +43,7 @@ public class Duke {
     public static final String BYE_STR = "Bye. Hope to see you again soon!";
     public static final String LIST_STR = "Here are the tasks in your list:";
     public static final String DONE_STR = "Nice! I've marked this task as done:";
-    public static final String OOPS_STR = "☹ OOPS!!! ";
+    public static final String OOPS_STR = "OOPS!!! ";
     public static final String INVALID_COMMAND_STR = "I'm sorry, but I don't know what that means :-(";
     public static final String EMPTY_DESCRIPTION_STR_1 = "The description of a ";
     public static final String EMPTY_DESCRIPTION_STR_2 = " cannot be empty.";

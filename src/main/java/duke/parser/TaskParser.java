@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
 
 public class TaskParser {
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
-    private static final Pattern DEADLINE_PATTERN = Pattern.compile("(.*) /by (.*)");
-    private static final Pattern EVENT_PATTERN = Pattern.compile("(.*) /at (.*)");
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile("deadline (.*) /by (.*)");
+    private static final Pattern EVENT_PATTERN = Pattern.compile("event (.*) /at (.*)");
 
     public static Task parse(String input) throws DukeException {
         String[] subArgs = input.split("\\s+", 2);
@@ -28,13 +28,13 @@ public class TaskParser {
 
         switch (subArgs[0]) {
         case "todo":
-            if (subArgs[1].isEmpty()) {
+            if (subArgs.length < 2 || subArgs[1].isEmpty()) {
                 throw new InvalidInputDukeException("Todo description cannot be empty");
             }
 
             return new Todo(subArgs[1]);
         case "deadline":
-            matcher = DEADLINE_PATTERN.matcher(subArgs[1]);
+            matcher = DEADLINE_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "
@@ -49,7 +49,7 @@ public class TaskParser {
 
             return new Deadline(matcher.group(1), date);
         case "event":
-            matcher = EVENT_PATTERN.matcher(subArgs[1]);
+            matcher = EVENT_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "

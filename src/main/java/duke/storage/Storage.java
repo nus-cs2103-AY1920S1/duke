@@ -79,7 +79,7 @@ public class Storage {
             writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
             for (Task task : tasks.getTaskList()) {
                 String output = String.format("%s|%b|%s",
-                        task.getType(), task.getDoneStatus(), task.getDescription());
+                        task.getType(), task.getIsDone(), task.getDescription());
                 if (task instanceof Deadline) {
                     SimpleDateFormat formatter = new SimpleDateFormat("d/M/yyyy HHmm");
                     output += "|" + formatter.format(((Deadline)task).getBy());

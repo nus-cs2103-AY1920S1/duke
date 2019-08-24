@@ -28,7 +28,7 @@ public abstract class Task {
         return (isDone ? "x" : " "); // return tick or no symbol
     }
 
-    public boolean getDoneStatus() {
+    public boolean getIsDone() {
         return isDone;
     }
 

@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Deadline extends Task {
     private Date by;
-    SimpleDateFormat formatter = new SimpleDateFormat("d 'of' M/yyyy HHmm");
 
     public Deadline(String description, Date by) {
         super(description);

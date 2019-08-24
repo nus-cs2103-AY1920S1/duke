@@ -15,14 +15,11 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.deleteTask(taskId);
+        Task task = tasks.deleteTask(taskId);
         storage.save(tasks);
 
         ui.print(" Noted. I've removed this task: ");
-
-        Task task = tasks.getTask(taskId);
         ui.print("  " + task);
-
         ui.print(" Now you have "
                 + tasks.size()
                 + " tasks in the list.");

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -16,6 +17,11 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.getTask(taskId);
+
+        if (task.getIsDone()) {
+            throw new DukeException("This task is already marked as done.");
+        }
+
         task.markAsDone();
         storage.save(tasks);
 

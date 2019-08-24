@@ -1,4 +1,7 @@
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,6 +10,7 @@ public class Duke {
     List<Task> list = new ArrayList<>();
     String indent = "     ";
     String input;
+    String dataPath = "../data/duke.txt";
     String[] inputs;
     String[] inputFormatted;
     Task task;
@@ -20,6 +24,7 @@ public class Duke {
 
     public void run() {
         Scanner sc = new Scanner(System.in);
+        list = Task.loadTasks(dataPath);
         Output.printIntro();
         do {
             input = sc.nextLine();
@@ -32,6 +37,7 @@ public class Duke {
             Output.line();
             System.out.println();
         } while (output != 1);
+        Task.saveTasks(list, dataPath);
     }
 
     private int processInput(String input) throws DukeException {

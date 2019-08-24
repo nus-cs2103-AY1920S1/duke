@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DeadlineCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.InvalidCommandException;
@@ -107,6 +108,9 @@ public class Parser {
             Date by = dateFormat.parse(deadlineDescription.split(" /by ", 2)[1]);
             deadlineDescription = deadlineDescription.split(" /by ", 2)[0];
             return new DeadlineCommand(deadlineDescription, by);
+        case "find":
+            String keyword = fullCommand.split(" ", 2)[1];
+            return new FindCommand(keyword);
         default:
             throw new InvalidCommandException();
         }

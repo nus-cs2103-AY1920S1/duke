@@ -18,6 +18,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public abstract String toSaveString();
 
     @Override

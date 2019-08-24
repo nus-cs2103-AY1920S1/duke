@@ -1,7 +1,10 @@
+import task.Task;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    private static String prefix = "☹ OOPS!!!";
+    private static final String prefix = "☹ OOPS!!!";
 
     private Scanner sc;
 
@@ -50,6 +53,36 @@ public class Ui {
 
     public void showGoodbye() {
         showMessage("Bye. Hope to see you again soon!");
+    }
+
+    public void showTask(Task task) {
+        showMessage("  " + task);
+    }
+
+    public void showTaskDone(Task task) {
+        showMessage("Nice! I've marked this task as done:");
+        showTask(task);
+    }
+
+    public void showTaskAdded(Task task) {
+        showMessage("Got it. I've added this task:");
+        showTask(task);
+    }
+
+    public void showTaskDeleted(Task task) {
+        showMessage("Noted. I've removed this task:");
+        showTask(task);
+    }
+
+    public void showNumTasks(int num) {
+        showMessage("Now you have " + num + " task" + (num == 1 ? "" : "s") + " in the list.");
+    }
+
+    public void showAllTasks(List<Task> tasks) {
+        showMessage("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i));
+        }
     }
 
     public String readCommand() {

@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +38,11 @@ public class Duke {
             "\u2639\uFE0FOOPS!!! \"%s\" cannot be found in the command";
     public final String INVALID_SIZE_EXCEPTION = COMMAND_INDENTATION +
             "\u2639\uFE0FOOPS!!! Invalid task number";
+    public static final String DATETIME_PARSE_EXCEPTION = COMMAND_INDENTATION +
+            "\u2639\uFE0F The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
+
+    public static final String DATETIME_PATTERN = "dd/MM/yyyy HHmm";
+
 
 
     public static void main(String[] args) {
@@ -55,6 +63,8 @@ public class Duke {
                 executeCommand(userInput);
             } catch (DukeException e) {
                 printLines(START_HORIZONTAL_LINE, e.getMessage(), END_HORIZONTAL_LINE);
+            } catch (DateTimeParseException e1) {
+                printLines(START_HORIZONTAL_LINE, DATETIME_PARSE_EXCEPTION, END_HORIZONTAL_LINE);
             }
         }
     }
@@ -218,9 +228,11 @@ public class Duke {
      * @param commands is the latest command inputted by the user
      * @throws DukeException the exception thrown by getTwoCommandArgs()
      */
-    public void performsDeadlineCommand(String[] commands) throws DukeException {
+    public void performsDeadlineCommand(String[] commands) throws DukeException, DateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
         String[] args = getTwoCommandArgs("/by", commands);
-        Task deadlineTask = new Deadline(args[0], args[1]);
+        LocalDateTime dateTime = LocalDateTime.parse(args[1], formatter);
+        Task deadlineTask = new Deadline(args[0], dateTime);
         taskList.add(deadlineTask);
         printLines(START_HORIZONTAL_LINE, ADDED_TASK_MESSAGE,
                 COMMAND_INDENTATION + COMPLETION_INDENTATION + deadlineTask.toString(),

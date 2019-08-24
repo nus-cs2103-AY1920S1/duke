@@ -45,7 +45,12 @@ public class Duke {
 
     private static JSONObject readSaveFile() throws IOException, JSONException {
         // TODO: handle the exception where data.json doesn't exist or format is wrong
-        InputStream is = new FileInputStream("/Users/leo/Downloads/data.json");
+        String path;
+        if (System.getProperty("os.name").equals("Windows 10"))
+            path = "/Users/uicfa/Downloads/data.json";
+        else
+            path = "/Users/leo/Downloads/data.json";
+        InputStream is = new FileInputStream(path);
         BufferedReader buf = new BufferedReader(new InputStreamReader(is));
         String line = buf.readLine();
         StringBuilder sb = new StringBuilder();
@@ -57,7 +62,12 @@ public class Duke {
     }
 
     private static void writeToSaveFile(String content) throws IOException {
-        FileWriter fileWriter = new FileWriter("/Users/leo/Downloads/data.json");
+        String path;
+        if (System.getProperty("os.name").equals("Windows 10"))
+            path = "/Users/uicfa/Downloads/data.json";
+        else
+            path = "/Users/leo/Downloads/data.json";
+        FileWriter fileWriter = new FileWriter(path);
         fileWriter.write(content);
         fileWriter.close();
     }

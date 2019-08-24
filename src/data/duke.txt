@@ -4,3 +4,6 @@ E | - | shopping | MBS
 D | - | go running | 23
 D | - | go home | 2
 D | - | go home | 2
+D | - | go home | 2
+D | - | go home | 2
+D | - | go home | 2

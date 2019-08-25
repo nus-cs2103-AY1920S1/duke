@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeFileWriteException extends DukeExceptions {
     public DukeFileWriteException(String displayMsg) {
         super("Error encountered while writing task data to disk", displayMsg);

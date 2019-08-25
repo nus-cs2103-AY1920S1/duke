@@ -1,4 +1,4 @@
-package DukeTask;
+package duke.task;
 
 public class EventTask extends Task {
     public EventTask(String description, String timing) {

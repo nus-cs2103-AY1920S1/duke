@@ -1,4 +1,4 @@
-package DukeTask;
+package duke.task;
 
 public enum TaskType {
     todo(false),

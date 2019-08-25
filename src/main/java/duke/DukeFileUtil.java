@@ -1,8 +1,10 @@
-import DukeTask.DeadlineTask;
-import DukeTask.EventTask;
-import DukeTask.Task;
-import DukeTask.TodoTask;
-import DukeTask.TaskType;
+package duke;
+
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
+import duke.task.TaskType;
 
 import java.io.File;
 import java.io.FileWriter;

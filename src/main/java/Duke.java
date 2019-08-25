@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -60,8 +57,6 @@ public class Duke {
         //Read input
         try {
             String input = scan.nextLine();
-            FileWriter fw = new FileWriter("duke.txt", true);
-            fw.write("\n");
             while (!input.equals("bye")) {
                 String arr[] = input.split(" ",2 );
                 String command = arr[0];
@@ -93,7 +88,7 @@ public class Duke {
                                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                             } else {
                                 list.add(new Task("T", arr[1]));
-                                fw.write(list.get(list.size()-1).fileFormat());
+                               // fw.write(list.get(list.size()-1).fileFormat());
                                 System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
                                 System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                             }
@@ -107,7 +102,7 @@ public class Duke {
                                     throw new DukeException("OOPS!!! Please enter a due date. e.g complete homework /by 1 Jan");
                                 } else {
                                     list.add(new Deadline("D", deadline[0], deadline[1]));
-                                    fw.write(list.get(list.size()-1).fileFormat());
+                                    //fw.write(list.get(list.size()-1).fileFormat());
                                     System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
                                     System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                                 }
@@ -122,7 +117,7 @@ public class Duke {
                                     throw new DukeException("OOPS!!! Please enter an event date. e.g group meeting /at 1 Jan");
                                 } else {
                                     list.add(new Event("E", event[0], event[1]));
-                                    fw.write(list.get(list.size()-1).fileFormat());
+                                   // fw.write(list.get(list.size()-1).fileFormat());
                                     System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
                                     System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                                 }
@@ -149,6 +144,10 @@ public class Duke {
 
                 //Taking in the next line
                 input = scan.nextLine();
+            }
+            BufferedWriter fw = new BufferedWriter(new FileWriter("duke.txt"));
+            for (int i = 1; i < list.size(); i++) {
+                fw.write(list.get(i).fileFormat());
             }
             fw.close();
         } catch (Exception ex) {

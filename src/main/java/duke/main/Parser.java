@@ -49,7 +49,7 @@ class Parser {
             int oneBasedIndex = validateDeleteIndex(newInput);
             return new DeleteCommand(oneBasedIndex);
         } else {
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -88,7 +88,7 @@ class Parser {
     private static int validateDoneOrDeleteIndex(String doneInput) throws DukeException {
         // Checks that the string is not empty and is an integer
         if (doneInput.isEmpty() || isNotNumeric(doneInput)) {
-            throw new DukeException("\u2639 OOPS!!! The index to remove cannot be blank or not an integer.");
+            throw new DukeException("☹ OOPS!!! The index to remove cannot be blank or not an integer.");
         }
 
         return Integer.parseInt(doneInput);
@@ -100,7 +100,7 @@ class Parser {
 
     private static void validateTodo(String todo) throws DukeException {
         if (todo.isEmpty()) {
-            throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
@@ -112,7 +112,8 @@ class Parser {
         return validateEventOrDeadline(input, "deadline", "/by");
     }
 
-    private static String[] validateEventOrDeadline(String input, String textToReplace, String textToSplit) throws DukeException {
+    private static String[] validateEventOrDeadline(String input, String textToReplace, String textToSplit)
+            throws DukeException {
         // Removes textToReplace from input,
         // and finally split it by textToSplit
         String[] splitInput = input.replaceFirst(textToReplace, "")
@@ -125,8 +126,8 @@ class Parser {
 
         // Event or deadline should be of length 2 after splitting and both should not be blank
         if (splitInput.length != 2 || splitInput[0].isBlank() || splitInput[1].isBlank()) {
-            throw new DukeException("\u2639 OOPS!!! I had trouble processing that input.\n" +
-                    "\tPlease make sure that the task description and dates are not empty!");
+            throw new DukeException("☹ OOPS!!! I had trouble processing that input.\n"
+                    + "\tPlease make sure that the task description and dates are not empty!");
         }
         return splitInput;
     }

@@ -48,7 +48,7 @@ public class Storage {
                     task = new Event(splitInput[2], splitInput[3]);
                     break;
                 default:
-                    throw new DukeException("An error occurred during file parsing, unexpected task type was encountered.");
+                    throw new DukeException("Error occurred during file parsing, unexpected task type encountered.");
                 }
 
                 if (Integer.parseInt(splitInput[1]) == 1) {

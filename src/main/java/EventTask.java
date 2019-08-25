@@ -1,3 +1,6 @@
+/**
+ * Object representing an Event task.
+ */
 public class EventTask extends Task {
 
     String date;

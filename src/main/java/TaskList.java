@@ -1,7 +1,16 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.PrintStream;
+import java.io.FileReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+/**
+ * An object representing the list of tasks,
+ * that reads, writes, and updates task information to the hard disk.
+ */
 public class TaskList {
     private ArrayList<Task> listItems;
     private PrintStream ps;
@@ -16,12 +25,12 @@ public class TaskList {
     void load() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(saveFilePath)));
-            while(br.ready()){
+            while (br.ready()) {
                 String item = br.readLine();
                 Task newTask = Task.createFromFile(item);
                 listItems.add(newTask);
             }
-        } catch (IOException e){ // this should not occur as the file is hard-coded.
+        } catch (IOException e) { // this should not occur as the file is hard-coded.
             ps.println("Error occurred while loading file: \n" + e + "\nExiting program...");
             ps.close();
             System.exit(1);
@@ -109,8 +118,8 @@ public class TaskList {
             fw.write(newFileContent.toString());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Error while updating task in save file: " +
-                    "File not found!\n" + e);
+            throw new DukeException("Error while updating task in save file: "
+                    + "File not found!\n" + e);
         }
     }
 }

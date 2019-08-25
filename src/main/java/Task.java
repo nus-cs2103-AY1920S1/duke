@@ -1,3 +1,6 @@
+/**
+ * Object representing a Task in the TaskList.
+ */
 public abstract class Task {
     protected boolean isDone;
     protected String details;
@@ -44,6 +47,11 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Creates the type of task to be added to the list based on the line in the save file.
+     * @param item The entire line of command input by the user into the program.
+     * @return A Task object according to the line in the save file.
+     */
     protected static Task createFromFile(String item) {
         String[] args = item.split(" \\| ");
         String taskType = args[0];

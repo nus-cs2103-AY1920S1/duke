@@ -1,7 +1,7 @@
 public class DukeInvalidTaskFormatException extends DukeException {
     String task;
 
-    DukeInvalidTaskFormatException (String task) {
+    DukeInvalidTaskFormatException(String task) {
         this.task = task;
     }
 

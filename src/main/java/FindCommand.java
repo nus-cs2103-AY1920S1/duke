@@ -2,7 +2,7 @@ public class FindCommand extends Command {
     String string;
 
     /**
-     * Creates a FindCommand object to find tasks that contain a given string
+     * Creates a FindCommand object to find tasks that contain a given string.
      * @param string The string to search for
      */
     FindCommand(String string) {

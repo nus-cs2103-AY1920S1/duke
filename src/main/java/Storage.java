@@ -22,6 +22,7 @@ public class Storage {
         } else {
             file.getParentFile().mkdirs();
             file.createNewFile();
+            this.fileSc = new Scanner(file);
         }
     }
 

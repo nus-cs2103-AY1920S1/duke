@@ -1,23 +1,36 @@
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.io.FileNotFoundException;
 
 
 public class Duke {
 
-    public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    /**
+     * the main class, the Duke bot.
+     */
+    static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException, ParseException{
+    /**
+     * constructor.
+     * @param filePath of the file
+     * @throws IOException when input is different from required.
+     * @throws ParseException when input is different from required.
+     */
+    private Duke(String filePath) throws IOException, ParseException{
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
-    public void run() throws ParseException, IOException {
+    /**
+     * runs the bot and process inputs from users.
+     * @throws ParseException if format of date is not the same as required.
+     * @throws IOException when input is different from required.
+     */
+    private void run() throws ParseException, IOException {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -36,7 +49,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
+    public static void main(String[] args) throws IOException, ParseException{
         new Duke("duke.txt").run();
     }
 }

@@ -1,25 +1,48 @@
 public class Task {
+    /**
+     * the task which will be categorised further.
+     */
+
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    /**
+     * constructor.
+     * @param description of the task.
+     */
+    Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
+    /**
+     * return a symbol showing when the task is done or not.
+     * @return a tick of X symbol.
+     */
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    /**
+     * mark the task as done.
+     */
+    void markAsDone() {
         this.isDone = true;
     }
 
-    public String getDescription() {
+    /**
+     * how the task is described.
+     * @return description of the task.
+     */
+    String getDescription() {
         return this.description;
     }
 
-    public boolean getStatus() {
+    /**
+     * tells whether task is done or not.
+     * @return true or false of whether the task is done
+     */
+    boolean getStatus() {
         return this.isDone;
     }
 

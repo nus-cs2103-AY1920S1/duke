@@ -1,29 +1,56 @@
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
+    /**
+     * the list of all tasks.
+     */
     private ArrayList<Task> taskList;
 
-    public TaskList(ArrayList<Task> taskList) {
+    /**
+     * constructor.
+     * @param taskList that is returned from storage.
+     */
+    TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public int getSize() {
+    /**
+     * how many tasks in the list.
+     * @return number of tasks.
+     */
+    int getSize() {
         return taskList.size();
     }
 
-    public Task getTask(int index) {
+    /**
+     * get the task at (index+1)th position.
+     * @param index of task.
+     * @return the task
+     */
+    Task getTask(int index) {
         return taskList.get(index);
     }
 
-    public void addTask(Task task) {
+    /**
+     * add a task to the list.
+     * @param task to be added.
+     */
+    void addTask(Task task) {
         taskList.add(task);
     }
 
-    public void deleteTask(int index) {
+    /**
+     * delete a task from list at (index+1)th position
+     * @param index of task.
+     */
+    void deleteTask(int index) {
         taskList.remove(index);
     }
 
-    public void printList() {
+    /**
+     * print the whole list of tasks
+     */
+    void printList() {
         int counter = 1;
         for (Task t: taskList) {
             System.out.println("      " + counter + "." + t) ;

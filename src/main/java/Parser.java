@@ -3,6 +3,13 @@ import java.util.Scanner;
 
 class Parser {
 
+    /**
+     * parsing the statement by the user.
+     * @param fullCommand input by user.
+     * @return a command
+     * @throws DukeException when input does not follow required format.
+     * @throws ParseException when input format is different from required.
+     */
     static Command parse(String fullCommand) throws DukeException, ParseException {
         Scanner sc = new Scanner(fullCommand);
         String command = sc.next();

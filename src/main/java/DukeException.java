@@ -8,7 +8,7 @@ public class DukeException extends Exception {
 class EmptyCommandException extends DukeException {
     private String type;
 
-    public  EmptyCommandException(String type) {
+    EmptyCommandException(String type) {
         this.type = type;
     }
 
@@ -32,7 +32,7 @@ class UnknownCommandExeption extends DukeException {
 class NoDateException extends DukeException {
     private String type;
 
-    public NoDateException(String type) {
+    NoDateException(String type) {
         this.type = type;
     }
     @Override

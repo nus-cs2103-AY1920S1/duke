@@ -2,14 +2,27 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class Event extends Task {
-    protected Date at;
+    /**
+     * An event task.
+     */
+    private Date at;
 
-    public Event(String description, String at) throws ParseException {
+    /**
+     * constructor.
+     * @param description of task.
+     * @param at is the date and time of task.
+     * @throws ParseException when input format is different from required.
+     */
+    Event(String description, String at) throws ParseException {
         super(description);
         this.at = Duke.formatter.parse(at);
     }
 
-    public String getAt() {
+    /**
+     * get the date and time of the event.
+     * @return a string describing the date and time.
+     */
+    String getAt() {
         return Duke.formatter.format(at);
     }
 

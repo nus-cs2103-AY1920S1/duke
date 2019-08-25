@@ -1,6 +1,6 @@
 public class Event extends Task {
     //3.[E][✗] project meeting (at: Aug 6th 2-4pm)
-    protected String at;
+    private String at;
 
     public Event(String description, String at) {
         super(description);
@@ -10,5 +10,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+
+    @Override
+    public String fileFormat() {
+        return String.format("E | %s | %s | %s", isDoneString(), getDescription(), this.at);
     }
 }

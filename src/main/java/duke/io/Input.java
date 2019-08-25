@@ -19,7 +19,7 @@ public class Input {
             String userInput = bufferedReader.readLine();
             return userInput;
         } catch (IOException ex) {
-            throw new DukeException("input error");
+            throw new DukeException("Input error");
         }
     }
 }

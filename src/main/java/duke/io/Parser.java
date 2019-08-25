@@ -3,7 +3,6 @@ package duke.io;
 import duke.command.*;
 import duke.DukeException;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import java.time.format.DateTimeFormatter;
@@ -28,10 +27,7 @@ public class Parser {
             dateTime.append(" ");
             dateTime.append(year);
             dateTime.append(", ");
-            if (hour >= 12) {
-                hour = hour - 12;
-            }
-            dateTime.append(hour);
+            dateTime.append((hour > 12 ? hour - 12 : hour == 0 ? 12 : hour));
             if (minute != 0) {
                 dateTime.append(":");
                 dateTime.append(minute);

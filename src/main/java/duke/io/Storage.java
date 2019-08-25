@@ -1,6 +1,5 @@
 package duke.io;
 
-import duke.command.*;
 import duke.DukeException;
 import duke.tasklist.ToDo;
 import duke.tasklist.Deadline;
@@ -19,7 +18,7 @@ public class Storage {
     private String filePath;
 
     public Storage(String path) {
-        this.filePath = "SaveFiles/".concat(path);
+        this.filePath = "src/main/resources/SaveFiles/".concat(path);
     }
 
     public TaskList load() throws DukeException {

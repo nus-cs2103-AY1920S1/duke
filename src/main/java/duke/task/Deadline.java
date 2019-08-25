@@ -1,14 +1,20 @@
 package duke.task;
 
-public class Deadline extends Task {
-    String time;
+import java.util.Optional;
 
+public class Deadline extends Task {
     /**
      * Constructor.
      */
     public Deadline(String name, String time) {
-        super(name);
-        this.time = time;
+        super(name, Optional.of(time), TaskType.DEADLINE, false);
+    }
+
+    /**
+     * Constructor with isDone.
+     */
+    public Deadline(String name, String time, boolean isDone) {
+        super(name, Optional.of(time), TaskType.DEADLINE, isDone);
     }
 
     @Override
@@ -17,12 +23,6 @@ public class Deadline extends Task {
      * @return String
      */
     public String toString() {
-        String status;
-        if (this.isDone) {
-            status = "[✓]";
-        } else {
-            status = "[✗]";
-        }
-        return String.format("[D]%s %s (by: %s)", status, this.name, this.time);
+        return String.format("[D]%s %s (by: %s)", getStatus(), this.name, this.time.get());
     }
 }

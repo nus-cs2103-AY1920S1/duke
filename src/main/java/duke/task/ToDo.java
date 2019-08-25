@@ -1,11 +1,20 @@
 package duke.task;
 
+import java.util.Optional;
+
 public class ToDo extends Task {
     /**
      * Constructor.
      */
     public ToDo(String name) {
-        super(name);
+        super(name, Optional.empty(), TaskType.TODO, false);
+    }
+
+    /**
+     * Constuctor with isDone.
+     */
+    public ToDo(String name, boolean isDone) {
+        super(name, Optional.empty(), TaskType.TODO, isDone);
     }
 
     @Override
@@ -14,12 +23,6 @@ public class ToDo extends Task {
      * @return String
      */
     public String toString() {
-        String status;
-        if (this.isDone) {
-            status = "[✓]";
-        } else {
-            status = "[✗]";
-        }
-        return String.format("[T]%s %s", status, this.name);
+        return String.format("[T]%s %s", getStatus(), this.name);
     }
 }

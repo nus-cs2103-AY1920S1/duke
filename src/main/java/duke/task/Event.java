@@ -1,14 +1,20 @@
 package duke.task;
 
-public class Event extends Task {
-    String time;
+import java.util.Optional;
 
+public class Event extends Task {
     /**
      * Constructor.
      */
     public Event(String name, String time) {
-        super(name);
-        this.time = time;
+        super(name, Optional.of(time), TaskType.EVENT, false);
+    }
+    
+    /**
+     * Constructor with isDone.
+     */
+    public Event(String name, String time, boolean isDone) {
+        super(name, Optional.of(time), TaskType.EVENT, isDone);
     }
 
     @Override
@@ -17,12 +23,6 @@ public class Event extends Task {
      * @return String
      */
     public String toString() {
-        String status;
-        if (this.isDone) {
-            status = "[✓]";
-        } else {
-            status = "[✗]";
-        }
-        return String.format("[E]%s %s (at: %s)", status, this.name, this.time);
+        return String.format("[E]%s %s (at: %s)", getStatus(), this.name, this.time.get());
     }
 }

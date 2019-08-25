@@ -13,11 +13,15 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:\n" + this);
+
     }
 
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toStore() {
+        return isDone ? "|1|" + this.description : "|0|" + this.description;
     }
 }

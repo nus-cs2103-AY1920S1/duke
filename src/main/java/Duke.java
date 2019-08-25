@@ -2,7 +2,9 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.File;
 
 public class Duke {
@@ -25,18 +27,26 @@ public class Duke {
             System.out.println(line);
             try {
                 if (t.description.equals("list")) {
+
                     // Print all existing items in the list
                     System.out.println("Here are the tasks in your list:");
                     allTasks.forEach(x -> System.out.println((allTasks.indexOf(x) + 1) + ". " + x));
                 } else if (t.description.contains("done")) {
+
                     // Mark task as specified as done
                     int indexToMark = Integer.parseInt(t.description.split(" ")[1]) - 1;
+
+                    // Delete from file, mark as done, reinsert into file
+                    deleteTaskFromFile(allTasks.get(indexToMark), file);
                     allTasks.get(indexToMark).markAsDone();
                     System.out.println("Nice! I've marked this task as done:\n" + allTasks.get(indexToMark));
+                    appendTaskToFile(allTasks.get(indexToMark), file);
                 } else if (t.description.contains("delete")) {
+
                     // Delete task as specified
                     System.out.println(deleteTask(t, allTasks));
                 } else if (t.description.contains("todo")) {
+
                     //Process to-do-task
                     try {
                         String description = t.description.split("todo")[1];
@@ -45,6 +55,7 @@ public class Duke {
                         throw new DukeException("The description of a todo cannot be empty");
                     }
                 } else if (t.description.contains("deadline")) {
+
                     //Process deadline-task
                     try {
                         String description = t.description.split("deadline")[1];
@@ -54,6 +65,7 @@ public class Duke {
                         throw new DukeException("The description of a deadline cannot be empty.");
                     }
                 } else if (t.description.contains("event")) {
+
                     //Process event-task
                     try {
                         String description = t.description.split("event")[1];
@@ -63,6 +75,7 @@ public class Duke {
                         throw new DukeException("The description of an event cannot be empty");
                     }
                 } else {
+
                     //Throw Exception
                     throw new DukeException("I'm sorry, but I don't know what that means :-( ");
                 }
@@ -85,12 +98,14 @@ public class Duke {
         } else {
             sb.append("\nNow you have " + allTasks.size() + " tasks in the list.");
         }
+        appendTaskToFile(t, "duke.txt");
         return sb.toString();
     }
 
     public static String deleteTask(Task t, LinkedList<Task> allTasks) {
         int indexToDelete = Integer.parseInt(t.description.split(" ")[1]) - 1;
         StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n" + allTasks.get(indexToDelete));
+        deleteTaskFromFile(allTasks.get(indexToDelete), "duke.txt");
         allTasks.remove(indexToDelete);
         if (allTasks.size() == 1) {
             sb.append("\nNow you have " + allTasks.size() + " task in the list.");
@@ -138,4 +153,42 @@ public class Duke {
         }
         return allTasks;
     }
+
+    public static boolean deleteTaskFromFile(Task t, String filename) {
+        File inputFile = new File(filename);
+        File tempFile = new File("temp.txt");
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String lineToRemove = t.toStore();
+            String currentLine;
+
+            while ((currentLine = reader.readLine()) != null) {
+                // trim newline when comparing with lineToRemove
+                String trimmedLine = currentLine.trim();
+                if (trimmedLine.equals(lineToRemove)) continue;
+                writer.write(currentLine + "\n");
+            }
+            writer.close();
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        boolean successful = tempFile.renameTo(inputFile);
+        return successful;
+    }
+
+    public static boolean appendTaskToFile(Task t, String filename) {
+        try {
+            BufferedWriter output = new BufferedWriter(new FileWriter(filename, true));
+            output.append(t.toStore() + "\n");
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
 }

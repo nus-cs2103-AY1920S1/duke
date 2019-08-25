@@ -23,9 +23,13 @@ public class Parser {
             command = new ExitCommand();
             break;
         case "todo":
+            //Fallthrough
         case "deadline":
+            //Fallthrough
         case "event":
+            //Fallthrough
         case "done":
+            //Fallthrough
         case "delete":
             if (inputDetails.isEmpty()) {
                 throw new EmptyDescriptionException(inputCommand);

@@ -1,5 +1,11 @@
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class DukeTest {
-    public static void main(String[] args) {
-        System.out.println("Duke Test, Zetsubou wo Kurau");
+    @Test
+    public void dummyTest() {
+        assertEquals(69., 69);
     }
 }

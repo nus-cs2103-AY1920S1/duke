@@ -1,8 +1,10 @@
+package duke.task;
+
 public class Deadline extends Task {
 
     private String deadlineTime;
 
-    public Deadline (String deadlineName, String deadlineTime) {
+    public Deadline(String deadlineName, String deadlineTime) {
         super(deadlineName);
         this.deadlineTime = deadlineTime;
     }
@@ -16,4 +18,5 @@ public class Deadline extends Task {
     public char getRepLetter() {
         return 'D';
     }
+
 }

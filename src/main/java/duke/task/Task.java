@@ -1,6 +1,10 @@
+package duke.task;
+
+import duke.ui.Checkbox;
+
 /**
- * Represents the Task object
- * One Task object per task.
+ * Represents the Duke.Task.Duke.Task object
+ * One Duke.Task.Duke.Task object per task.
  */
 public class Task {
 

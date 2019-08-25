@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.CmdUx;
+
 public class DukeDeadlineException extends DukeException {
 
     public DukeDeadlineException() {
@@ -6,7 +10,7 @@ public class DukeDeadlineException extends DukeException {
 
     public DukeDeadlineException(String message) {
         super(message);
-        CmdInterface.printHBars(message);
+        CmdUx.printHBars(message);
     }
 
 }

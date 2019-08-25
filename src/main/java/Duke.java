@@ -91,8 +91,6 @@ public class Duke {
                                                             Integer.parseInt(time[1]) / 100,
                                                                     Integer.parseInt(time[1]) % 100);
 
-                    System.out.println(dateAndTime.getYear());
-
                     Task newTask;
 
                     if (inputType.equals("deadline")) {

@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Duke {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String filePath;
     String[] token;
     String tokenString;
     String logo = " ____        _        \n"
@@ -17,11 +18,19 @@ public class Duke {
         return underline + msg + "\n" + underline;
     }
 
+    private void printList() {
+        System.out.print(underline + "Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i));
+        }
+        System.out.print(underline);
+    }
+
     private void printAddTask(Task task) {
         System.out.println(underline + "Got it. I've added this task:\n  " + task + "\n" + "Now you have " + tasks.size() + " task" + (tasks.size()==1?" ":"s ") + "in the list.\n" + underline);
     }
 
-    private void addTask(String tokenString, String[] token) {
+    private void addTask(String tokenString, String[] token) throws IOException {
         try {
             if (token[0].equals("todo")) {
                 String taskDesc = tokenString.substring(4).trim();
@@ -58,12 +67,13 @@ public class Duke {
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means xd");
             }
+            writeToFile();
         } catch (DukeException e) {
             System.out.print(doubleLine(e.getMessage()));
         }
     }
 
-    private void doneTask(String tokenString, String[] token) {
+    private void doneTask(String tokenString, String[] token) throws IOException {
         try {
             if(tokenString.length() == 4) {
                 throw new DukeException("Give me a goddamn numbered task to do.");
@@ -77,20 +87,13 @@ public class Duke {
             }
             tasks.get(taskDone).markAsDone();
             System.out.println(underline + "Nice! I've marked this task as done:\n  " + tasks.get(taskDone) + "\n" + underline);
+            writeToFile();
         } catch (DukeException e) {
             System.out.print(doubleLine(e.getMessage()));
         }
     }
 
-    private void printList() {
-        System.out.print(underline + "Here are the tasks in your list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
-        }
-        System.out.print(underline);
-    }
-
-    private void deleteTask(String tokenString, String[] token) {
+    private void deleteTask(String tokenString, String[] token) throws IOException {
         try {
             if(tokenString.length() == 6) {
                 throw new DukeException("Give me a goddamn numbered task to delete.");
@@ -105,14 +108,67 @@ public class Duke {
                 tasks.remove(taskDeleted);
                 System.out.println(underline + "Noted. I've removed this task:\n" + task + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n" + underline);
             }
+            writeToFile();
         } catch (DukeException e) {
             System.out.print(doubleLine(e.getMessage()));
         }
     }
 
-    private void run() throws IOException {
-        System.out.println(underline + "Hello from\n" + logo + "\nWhat can i do for you?\n" + underline);
+    public void readFile(String filePath) throws FileNotFoundException, DukeException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String tokenString = s.nextLine();
+            String[] token = tokenString.split("\\|\\|");
+            String taskType = token[0].trim();
+            Boolean isDone = token[1].trim().equals("1");
+            String taskDesc = token[2].trim();
+            String time = token.length >= 4 ? token[3] : "";
+            Task task;
+            switch (taskType) {
+            case "T":
+                task = new ToDo(taskDesc);
+                break;
+            case "D":
+                task = new Deadline(taskDesc, time);
+                break;
+            case "E":
+                task = new Event(taskDesc, time);
+                break;
+            default:
+                System.out.println(tokenString);
+                throw new DukeException("Corrupted file");
+            }
+            tasks.add(task);
+            if(isDone) {
+                task.markAsDone();
+            }
+        }
+        introduction();
+    }
 
+    public void writeToFile() throws IOException {
+        FileWriter fw1 = new FileWriter(filePath);
+        fw1.write("");
+        fw1.close();
+        FileWriter fw2 = new FileWriter(filePath, true);
+        for(Task task : tasks) {
+            String s = task.toFileString() + "\n";
+            fw2.write(s);
+        }
+        fw2.close();
+    }
+
+    private void introduction() {
+        System.out.println(underline + "Hello from\n" + logo + "\nWhat can i do for you?\n" + underline);
+        printList();
+    }
+    private void run() throws IOException {
+        try {
+            readFile(filePath);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
         tokenString = br.readLine();
         token = tokenString.split(" ");
         while(!(token[0].equals("bye"))) {
@@ -139,6 +195,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
+        duke.filePath = "../../../data/duke.txt";
         try {
             duke.run();
         } catch (Exception e) {

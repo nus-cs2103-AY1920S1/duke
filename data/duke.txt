@@ -1,0 +1,6 @@
+T||1||todo1
+D||0||deadline1|| tmr
+E||1||event1|| next week
+T||0||hello
+D||1||world||10
+D||0||hi there||now

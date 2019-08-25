@@ -1,10 +1,9 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
     public String getStatusIcon() {
@@ -14,6 +13,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public abstract String toFileString();
 
     @Override
     public String toString() {

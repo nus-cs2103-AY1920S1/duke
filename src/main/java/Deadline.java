@@ -11,15 +11,12 @@ public class Deadline extends Task {
      * Constructor.
      * @param description Description of the deadline.
      * @param by deadline for the deadline.
+     * @throws InvalidDateTimeException If DateTime format is wrong.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws InvalidDateTimeException {
         super(description);
         this.by = by;
-        try {
-            datetime = new DateTime(by);
-        } catch (InvalidDateTimeException e) {
-            System.out.println(e.getMessage());
-        }
+        datetime = new DateTime(by);
     }
 
     /**

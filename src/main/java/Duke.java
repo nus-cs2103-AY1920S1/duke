@@ -1,10 +1,15 @@
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LinkedList<Task> allTasks = new LinkedList<>();
+        String file =  "duke.txt";
+        LinkedList<Task> allTasks = readFile(file);
         String line = "____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,6 +32,7 @@ public class Duke {
                     // Mark task as specified as done
                     int indexToMark = Integer.parseInt(t.description.split(" ")[1]) - 1;
                     allTasks.get(indexToMark).markAsDone();
+                    System.out.println("Nice! I've marked this task as done:\n" + allTasks.get(indexToMark));
                 } else if (t.description.contains("delete")) {
                     // Delete task as specified
                     System.out.println(deleteTask(t, allTasks));
@@ -92,5 +98,44 @@ public class Duke {
             sb.append("\nNow you have " + allTasks.size() + " tasks in the list.");
         }
         return sb.toString();
+    }
+
+    public static LinkedList<Task> readFile(String filename) {
+        LinkedList<Task> allTasks = new LinkedList<>();
+        try {
+            File f = new File(filename);
+            if (f.exists()) {
+            } else {
+                f.createNewFile();
+            }
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(f));
+            String currLine;
+            while ((currLine = bufferedReader.readLine()) != null) {
+                String[] formatted_text = currLine.split("\\|");
+                Task t;
+                switch (formatted_text[0]){
+                    case "T":
+                        t = new ToDo(formatted_text[2]);
+                        break;
+                    case "D":
+                        t = new Deadline(formatted_text[2], formatted_text[3]);
+                        break;
+                    case "E":
+                        t = new Event(formatted_text[2], formatted_text[3]);
+                        break;
+                    default:
+                        t = new Task("");
+                        break;
+                }
+                if (formatted_text[1].equals("1")) {
+                    t.markAsDone();
+                } else {}
+                allTasks.add(t);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return allTasks;
     }
 }

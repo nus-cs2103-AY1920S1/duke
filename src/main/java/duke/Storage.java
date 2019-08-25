@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DukeFileUtil {
+class Storage {
 
     private static String PARSE_ERROR_MSG =
             " \u2639 Oops! I encountered an error while reading your previous tasks,\n"
@@ -21,7 +21,15 @@ public class DukeFileUtil {
     private static String DELIMITER = "|";
     private static String DELIMITER_REGEX = "\\|";
 
-    static ArrayList<Task> loadTasksFromDisk(String filePath) {
+    private String filePath;
+    private Ui ui;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        ui = new Ui();
+    }
+
+    ArrayList<Task> loadTasksFromDisk() {
         ArrayList<Task> existingTasks = new ArrayList<Task>();
 
         try {
@@ -64,18 +72,18 @@ public class DukeFileUtil {
                     existingTasks.add(taskToAdd);
 
                 } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
-                    System.out.print(Duke.HORIZONTAL_LINE);
+                    System.out.print(Ui.HORIZONTAL_LINE);
                     System.out.println(ex.getDisplayMsg());
-                    System.out.println(Duke.HORIZONTAL_LINE);
+                    System.out.println(Ui.HORIZONTAL_LINE);
                     continue;
                 }
             }
 
         } catch (FileNotFoundException ex) {
-            System.out.print(Duke.HORIZONTAL_LINE);
+            System.out.print(Ui.HORIZONTAL_LINE);
             System.out.println(" I did not find any previous data in your data directory,\n"
                     + "Creating one...");
-            System.out.println(Duke.HORIZONTAL_LINE);
+            System.out.println(Ui.HORIZONTAL_LINE);
 
         }
 
@@ -116,19 +124,27 @@ public class DukeFileUtil {
         }
     }
 
-    private static void validateDelimiter(String[] inputs, int lineNumber)
+    void saveTasksToDisk(ArrayList<Task> tasks) {
+        try {
+            Storage.writeTasksToDisk(tasks, TASK_DATA_PATH);
+        } catch (DukeFileWriteException ex) {
+            ui.displayDukeException(ex);
+        }
+    }
+
+    private void validateDelimiter(String[] inputs, int lineNumber)
             throws DukeTaskFileParseException {
 
         if (inputs.length != 3 && inputs.length != 4) {
             throwParseException(
                     "Missing delimiter or invalid number of delimiters encountered while parsing task file",
                     String.format("Invalid delimiter or number of delimiters \"%s\"",
-                            DukeFileUtil.DELIMITER),
+                            Storage.DELIMITER),
                     lineNumber);
         }
     }
 
-    private static TaskType getTaskType(String input, int lineNumber)
+    private TaskType getTaskType(String input, int lineNumber)
             throws DukeTaskFileParseException {
         TaskType taskType = null;
 
@@ -145,7 +161,7 @@ public class DukeFileUtil {
         return taskType;
     }
 
-    private static boolean getDoneStatus(String status, int lineNumber)
+    private boolean getDoneStatus(String status, int lineNumber)
             throws DukeTaskFileParseException {
 
         try {
@@ -169,7 +185,7 @@ public class DukeFileUtil {
         }
     }
 
-    private static String getDescription(String description, int lineNumber)
+    private String getDescription(String description, int lineNumber)
         throws DukeTaskFileParseException {
 
         try {
@@ -184,7 +200,7 @@ public class DukeFileUtil {
         return description;
     }
 
-    private static String getTime(String[] inputs, int lineNumber)
+    private String getTime(String[] inputs, int lineNumber)
             throws DukeTaskFileParseException {
 
         if (inputs.length != 4) {

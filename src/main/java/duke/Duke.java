@@ -12,37 +12,30 @@ import duke.task.EventTask;
 public class Duke {
     private static String TASK_DATA_PATH = "../data/taskData.txt";
 
-    static String HORIZONTAL_LINE = "________________________________________________________________\n";
-
-    private enum Input {
-        list,
-        bye,
-        done,
-        delete,
-        todo,
-        deadline,
-        event
-    }
+    private Storage storage;
+    private Ui ui;
+    private TaskList tasks;
 
     public static void main(String[] args) {
-        String greetingMsg = Duke.HORIZONTAL_LINE
-                + " Hello! I'm Duke\n"
-                + " What can I do for you?\n"
-                + Duke.HORIZONTAL_LINE;
-        System.out.println(greetingMsg);
+        Duke duke = new Duke(TASK_DATA_PATH);
+        duke.run();
+    }
 
-        Scanner scanner = new Scanner(System.in);
+    private Duke(String dataFilePath) {
+        storage = new Storage(dataFilePath);
+        ui = new Ui(new Scanner(System.in));
+        tasks = new TaskList(storage.loadTasksFromDisk());
+    }
 
-        ArrayList<Task> tasks = DukeFileUtil.loadTasksFromDisk(TASK_DATA_PATH);
+    private void run() {
+        ui.printGreetingMsg();
+
         String[] inputs;
         String input;
 
         mainLoop:
         while (true) {
-            input = scanner.nextLine();
-            inputs = input.split("\\s+");
-
-            System.out.print(Duke.HORIZONTAL_LINE);
+            inputs = ui.readLine().split("\\s+");
 
             if (inputs.length >= 1) {
                 Input firstWord;
@@ -55,7 +48,7 @@ public class Duke {
                                 " \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeInvalidCommandException ex) {
-                    displayDukeException(ex);
+                    ui.displayDukeException(ex);
                     continue;
                 }
 
@@ -65,7 +58,7 @@ public class Duke {
                         handleBye(inputs);
                         break mainLoop;
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                         break;
                     }
 
@@ -73,7 +66,7 @@ public class Duke {
                     try {
                         handleList(tasks, inputs);
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                     }
                     break;
 
@@ -81,7 +74,7 @@ public class Duke {
                     try {
                         setTaskDone(tasks, inputs);
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                     }
                     break;
 
@@ -89,18 +82,18 @@ public class Duke {
                     try {
                         deleteTask(tasks, inputs);
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                     }
                     break;
 
                 case todo:
                     try {
                         String description = DukeUtil.concatStrings(inputs, " ", 1, inputs.length - 1);
-                        validateTaskDescription(description);
+                        Parser.validateTaskDescription(description);
 
                         addAndPrintTask(tasks, new TodoTask(description));
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                     }
                     break;
 
@@ -113,7 +106,7 @@ public class Duke {
                             String timing = DukeUtil.concatStrings(inputs, " ", byIndex + 1,
                                     inputs.length - 1);
 
-                            validateTaskDescription(description);
+                            Parser.validateTaskDescription(description);
                             DeadlineTask deadlineTask = new DeadlineTask(description, timing);
 
                             addAndPrintTask(tasks, deadlineTask);
@@ -125,7 +118,7 @@ public class Duke {
                                             + " \'deadline <description> /by <timing>\'");
                         }
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                     }
                     break;
 
@@ -136,7 +129,7 @@ public class Duke {
                             String description = DukeUtil.concatStrings(inputs, " ", 1, atIndex - 1);
                             String timing = DukeUtil.concatStrings(inputs, " ", atIndex + 1, inputs.length - 1);
 
-                            validateTaskDescription(description);
+                            Parser.validateTaskDescription(description);
                             EventTask eventTask = new EventTask(description, timing);
 
                             addAndPrintTask(tasks, eventTask);
@@ -148,7 +141,7 @@ public class Duke {
                                             + " \'event <description> /at <time>\'");
                         }
                     } catch (DukeInvalidArgumentException ex) {
-                        displayDukeException(ex);
+                        ui.displayDukeException(ex);
                     }
                     break;
 
@@ -162,7 +155,7 @@ public class Duke {
     }
 
 
-    private static void handleBye(String[] inputs) throws DukeInvalidArgumentException {
+    private void handleBye(String[] inputs) throws DukeInvalidArgumentException {
         if (inputs.length > 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after bye command",
@@ -171,10 +164,10 @@ public class Duke {
         }
 
         System.out.println(" Bye. Hope to see you again soon!");
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(Ui.HORIZONTAL_LINE);
     }
 
-    private static void handleList(ArrayList<Task> tasks, String[] inputs)
+    private void handleList(ArrayList<Task> tasks, String[] inputs)
             throws DukeInvalidArgumentException {
 
         if (inputs.length > 1) {
@@ -187,7 +180,7 @@ public class Duke {
         printTaskArray(tasks);
     }
 
-    private static void printTaskArray(ArrayList<Task> tasks) {
+    private void printTaskArray(ArrayList<Task> tasks) {
         System.out.println(" Here are the tasks in your list:");
 
         int taskIndex = 1;
@@ -196,10 +189,10 @@ public class Duke {
             taskIndex++;
         }
 
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(Ui.HORIZONTAL_LINE);
     }
 
-    private static void setTaskDone(ArrayList<Task> tasks, String[] inputs) throws DukeInvalidArgumentException {
+    private void setTaskDone(ArrayList<Task> tasks, String[] inputs) throws DukeInvalidArgumentException {
         try {
             if (inputs.length > 2) {
                 throw new DukeInvalidArgumentException(
@@ -218,7 +211,7 @@ public class Duke {
 
             task.setDone(true);
             printTaskDone(task);
-            saveTasksToDisk(tasks);
+            storage.saveTasksToDisk(tasks);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
@@ -232,15 +225,15 @@ public class Duke {
         }
     }
 
-    private static void printTaskDone(Task task) {
+    private void printTaskDone(Task task) {
         if (task.isDone()) {
             System.out.println(" Nice! I've marked this task as done:");
             System.out.printf("   %s\n", task.getStatusText());
-            System.out.println(Duke.HORIZONTAL_LINE);
+            System.out.println(Ui.HORIZONTAL_LINE);
         }
     }
 
-    private static void deleteTask(ArrayList<Task> tasks, String[] inputs)
+    private void deleteTask(ArrayList<Task> tasks, String[] inputs)
             throws DukeInvalidArgumentException {
 
         try {
@@ -267,24 +260,14 @@ public class Duke {
         }
     }
 
-    private static void printTaskDeleted(Task task, int finalSize) {
+    private void printTaskDeleted(Task task, int finalSize) {
         System.out.println(" Noted. I've removed this task:");
         System.out.printf("   %s\n", task.getStatusText());
         System.out.printf(" Now you have %d tasks in the list.\n", finalSize);
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(Ui.HORIZONTAL_LINE);
     }
 
-    static void validateTaskDescription(String description)
-            throws DukeInvalidArgumentException {
-
-        if (description.length() == 0) {
-            throw new DukeInvalidArgumentException(
-                    "User specified description of task is empty",
-                    " \u2639 OOPS!!! The description of a task cannot be empty.");
-        }
-    }
-
-    private static void addAndPrintTask(ArrayList<Task> tasks, Task task)
+    private void addAndPrintTask(ArrayList<Task> tasks, Task task)
             throws DukeInvalidArgumentException {
 
         tasks.add(task);
@@ -292,21 +275,8 @@ public class Duke {
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + task.getStatusText());
         System.out.printf(" Now you have %d tasks in the list.\n", tasks.size());
-        System.out.println(Duke.HORIZONTAL_LINE);
+        System.out.println(Ui.HORIZONTAL_LINE);
 
         saveTasksToDisk(tasks);
-    }
-
-    private static void saveTasksToDisk(ArrayList<Task> tasks) {
-        try {
-            DukeFileUtil.writeTasksToDisk(tasks, TASK_DATA_PATH);
-        } catch (DukeFileWriteException ex) {
-            displayDukeException(ex);
-        }
-    }
-
-    private static void displayDukeException(DukeExceptions ex) {
-        System.out.println(ex.getDisplayMsg());
-        System.out.println(Duke.HORIZONTAL_LINE);
     }
 }

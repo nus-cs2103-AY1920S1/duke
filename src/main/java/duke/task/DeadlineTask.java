@@ -13,6 +13,7 @@ public class DeadlineTask extends Task {
         this.deadlineDate = TaskUtil.getDateFromString(deadlineDate);
     }
 
+    @Override
     public String getStatusText() {
         return String.format("[D][%s] %s (by: %s)",
                 getStatusIcon(),

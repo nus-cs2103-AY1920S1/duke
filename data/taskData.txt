@@ -1,3 +1,3 @@
-event | 1 | tutorial | Mon 2-4pm
+todo | 1 | just a todo
 todo | 0 | just a todo
 todo | 0 | another todo

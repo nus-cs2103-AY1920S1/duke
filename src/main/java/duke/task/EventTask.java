@@ -15,6 +15,7 @@ public class EventTask extends Task {
         initDates(timing);
     }
 
+    @Override
     public String getStatusText() {
         return String.format("[E][%s] %s (at: %s)",
                 getStatusIcon(),

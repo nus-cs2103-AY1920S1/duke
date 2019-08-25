@@ -7,19 +7,20 @@ import java.util.ArrayList;
 
 /**
  * Storage class.
- * Instances can write to "../data/duke.txt" and are
+ * Instances can write to data file and are
  * responsible for writing to the file for storage purposes.
  */
 public class Storage {
-    /** Given path to the duke.txt which holds the data. */
-    private static final String PATH = "../data/duke.txt";
+    /** Given path to the which holds the data. */
+    private String filePath = "../data/duke.txt";
 
     /**
      * Constructor.
-     * Tries to create duke.txt if it does not exist.
+     * Tries to create if it does not exist.
      */
-    public Storage() {
-        File f = new File(PATH);
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        File f = new File(filePath);
         try {
             f.createNewFile();
         } catch (IOException e) {
@@ -28,12 +29,12 @@ public class Storage {
     }
 
     /**
-     * Writes down all tasks and their state and data to duke.txt.
+     * Writes down all tasks and their state and data.
      * @param tasklist Tasklist that provides the relevant data.
      */
     public void write(TaskList tasklist) {
         try {
-            FileWriter fw = new FileWriter(PATH);
+            FileWriter fw = new FileWriter(filePath);
             ArrayList<Task> tasks = tasklist.getAllTasks();
             for (Task task : tasks) {
                 if (task instanceof ToDo) {
@@ -72,13 +73,13 @@ public class Storage {
     }
 
     /**
-     * Read duke.txt and gets all the tasks written on it.
-     * @return ArrayList of Tasks recorded on duke.txt.
+     * Read data file and gets all the tasks written on it.
+     * @return ArrayList of Tasks recorded on data file.
      */
     public ArrayList<Task> parseFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(PATH));
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
             String line = br.readLine();
             while (line != null) {
                 String[] tokens = line.split(" - ");

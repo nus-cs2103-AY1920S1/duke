@@ -8,10 +8,19 @@ public class TaskList {
     private ArrayList<Task> list;
 
     /**
-     * Constructor.
+     * Constructor. Creates a new empty tasklist.
      */
     public TaskList() {
         list = new ArrayList<>();
+    }
+
+    /**
+     * Constructor.
+     * @param storage
+     */
+    public TaskList(Storage storage) {
+        this();
+        load(storage);
     }
 
     /**

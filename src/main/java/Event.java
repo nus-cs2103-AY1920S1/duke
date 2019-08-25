@@ -11,15 +11,12 @@ public class Event extends Task {
      * Constructor.
      * @param description Description of event.
      * @param at Time of the event.
+     * @throws InvalidDateTimeException If DateTime format is wrong.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws InvalidDateTimeException {
         super(description);
         this.at = at;
-        try {
-            datetime = new DateTime(at);
-        } catch (InvalidDateTimeException e) {
-            System.out.println(e.getMessage());
-        }
+        datetime = new DateTime(at);
     }
 
     /**

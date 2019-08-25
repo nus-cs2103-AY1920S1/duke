@@ -37,10 +37,10 @@ public class Parser {
 			} else {
 				String[] taskDetails;
 				if (commandDetails.startsWith("deadline")) {
-					taskDetailsString = commandDetails.replaceFirst("deadline", "");
+					taskDetailsString = commandDetails.replaceFirst("deadline", "").trim();
 					return new AddDeadlineCommand(taskDetailsString);
 				} else if (commandDetails.startsWith("event")) {
-					taskDetailsString = commandDetails.replaceFirst("event", "");
+					taskDetailsString = commandDetails.replaceFirst("event", "").trim();
 					return new AddEventCommand(taskDetailsString);
 				} else {
 					throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");

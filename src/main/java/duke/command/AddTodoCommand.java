@@ -34,5 +34,21 @@ public class AddTodoCommand extends Command {
 		return false;
 	}
 
+	public String getDetails() {
+		return details;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		} else if (o instanceof AddTodoCommand) {
+			AddTodoCommand addTodoCommand = (AddTodoCommand) o;
+			return addTodoCommand.getDetails().equals(details);
+		} else {
+			return false;
+		}
+	}
+
 }
 

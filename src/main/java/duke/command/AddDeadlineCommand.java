@@ -11,6 +11,7 @@ import duke.task.Deadline;
 public class AddDeadlineCommand extends Command {
 
 	String details;
+
 	public AddDeadlineCommand(String details) {
 		super();
 		this.details = details;
@@ -47,6 +48,22 @@ public class AddDeadlineCommand extends Command {
 
 	public boolean isExit() {
 		return false;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		} else if (o instanceof AddDeadlineCommand) {
+			AddDeadlineCommand addDeadlineCommand = (AddDeadlineCommand) o;
+			return addDeadlineCommand.getDetails().equals(details);
+		} else {
+			return false;
+		}
 	}
 
 }

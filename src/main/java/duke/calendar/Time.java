@@ -24,11 +24,12 @@ public class Time {
 			if (hour > 11) {
 				isPastNoon = true;
 				hour = hour % 12;
-				if (hour == 0) {
-					hour = 12;
-				}
-			} else {
+			}
+			else {
 				isPastNoon = false;
+			}
+			if (hour == 0) {
+				hour = 12;
 			}
 			minutes = Integer.parseInt(rawTime.substring(2));
 		} else {
@@ -62,7 +63,7 @@ public class Time {
 
 	@Override
 	public String toString() {
-		if (minutes != 0) {
+		if (minutes == 0) {
 			return hour + (isPastNoon ? "pm" : "am");
 		} else {
 			return hour + ":" + (minutes < 10 ? "0" + minutes : minutes) + (isPastNoon ? "pm" : "am");

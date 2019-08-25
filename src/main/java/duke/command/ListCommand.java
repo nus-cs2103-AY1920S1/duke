@@ -21,4 +21,15 @@ public class ListCommand extends Command {
 		return false;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		} else if (o instanceof ListCommand) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

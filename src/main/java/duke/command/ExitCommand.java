@@ -19,4 +19,15 @@ public class ExitCommand extends Command {
 		return true;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		} else if (o instanceof ExitCommand) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

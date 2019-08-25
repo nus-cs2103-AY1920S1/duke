@@ -1,3 +1,10 @@
+package DirectProcessor;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -5,14 +12,14 @@ import java.util.ArrayList;
  * It saves the task list to the file dukedata/datafile.txt,
  * In this file, each line is a task.*/
 
-public class FileManager {
+public class Storage {
 
-    private static BufferedWriter recorder = null;
-    private static BufferedReader reader = null;
+    private static BufferedWriter recorder;
+    private static BufferedReader reader;
 
     // Reload the previous task list.
-    static ArrayList<Task> reload() throws IOException{
-        reader = new BufferedReader(new FileReader("./dukedata/taskfile.txt"));
+    public static ArrayList<Task> reload() throws IOException{
+        reader = new BufferedReader(new FileReader("taskfile.txt"));
         ArrayList<Task> toReturn = new ArrayList<>();
         if (reader == null) return toReturn;
         String line = reader.readLine();
@@ -41,17 +48,5 @@ public class FileManager {
         }
         reader.close();
         return toReturn;
-    }
-
-    // Rewrite the task list file, remember to clear the original file first.
-    static void rewrite(ArrayList<Task> tasklist) throws IOException{
-        PrintWriter pw = new PrintWriter("./dukedata/taskfile.txt");
-        pw.close();
-        recorder = new BufferedWriter(new FileWriter("./dukedata/taskfile.txt", true));
-        for (Task t : tasklist) {
-            recorder.write(t.record_info());
-            recorder.write("\n");
-        }
-        recorder.close();
     }
 }

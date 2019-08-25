@@ -1,11 +1,13 @@
+package Tasks;
+
 public class Todo extends Task {
 
-    Todo(String task_name) {
+    public Todo(String task_name) {
         super(task_name);
     }
 
     @Override
-    String task_info() {
+    public String task_info() {
         String indicator;
         if (isFinished()) indicator = "[\u2713] ";
         else indicator = "[\u2715] ";
@@ -13,7 +15,7 @@ public class Todo extends Task {
     }
 
     @Override
-    String record_info() {
+    public String record_info() {
         if (isFinished()) return "T|" + "1|" + get_name();
         else return "T|" + "0|" + get_name();
     }

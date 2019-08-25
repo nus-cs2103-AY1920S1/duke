@@ -131,7 +131,7 @@ public class Duke {
         } catch (DukeException e) {
             System.out.print(display(e.getMessage()));
         } catch (Exception e) {
-            assert false : "Uncaught exception";
+            System.out.println("Please input a date in this format : dd/MM/yy HH:mm");
         }
     }
 

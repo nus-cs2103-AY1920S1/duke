@@ -48,7 +48,7 @@ public class LoadFile {
             Task newTask = new Task("");
             switch (typeOfTask) {
             case "T":
-                newTask = new Todo(desc);
+                newTask = new ToDo(desc);
                 taskArr.add(newTask);
                 break;
             case "D":

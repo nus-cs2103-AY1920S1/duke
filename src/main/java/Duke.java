@@ -1,7 +1,35 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Duke {
+
+    private static String getSuffix(LocalDateTime dateTime) {
+        int day = dateTime.getDayOfMonth();
+        int remainder = day % 10;
+        if (remainder == 1) {
+            return "st";
+        } else if (remainder == 2) {
+            return "nd";
+        } else if (remainder == 3) {
+            return "rd";
+        } else {
+            return "th";
+        }
+    }
+
+    private static String getDate(String dateTimeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
+        String suffix = getSuffix(dateTime) + " of";
+
+        DateTimeFormatter wantedFormat = DateTimeFormatter.ofPattern(" d'" + suffix + "' MMMM yyyy, h.mm a");
+        String formattedDate = wantedFormat.format(dateTime);
+        return formattedDate;
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -76,8 +104,11 @@ public class Duke {
                         throw new DukeException("OOPS! Deadlines should be followed by a /by.");
                     }
 
+                    // Format date accordingly
+                    String date = getDate(wordArr[1].stripLeading());
+
                     // Create DeadLine object
-                    DeadLine d = new DeadLine(wordArr[0], wordArr[1]);
+                    DeadLine d = new DeadLine(wordArr[0], date);
                     taskList.add(d);
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\n\tGot it! I've added this task: ");
@@ -94,8 +125,11 @@ public class Duke {
                         throw new DukeException("OOPS! Events should be followed by a /at.");
                     }
 
+                    // Format date accordingly
+                    String date = getDate(wordArr[1].stripLeading());
+
                     // Create Event Object
-                    Event e = new Event(wordArr[0], wordArr[1]);
+                    Event e = new Event(wordArr[0], date);
                     taskList.add(e);
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\n\tGot it! I've added this task: ");

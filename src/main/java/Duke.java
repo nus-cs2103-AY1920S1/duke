@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
     private static DateTimeFormatter dukeDateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    //LocalDateTime dt = LocalDateTime.parse(input, dukeDateTimeFormatter);
 
     public static void main(String[] args) {
 

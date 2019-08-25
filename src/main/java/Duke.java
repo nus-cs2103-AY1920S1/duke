@@ -1,7 +1,7 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Encapsulates a product named Duke, a personal assistant chat bot that helps a person to keep track of various things.
@@ -103,9 +103,15 @@ public class Duke {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
 
-        String topic = details[0].stripTrailing();
-        String deadline = details[1].stripLeading();
-        addTask(new Deadline(topic, deadline));
+        try {
+            String topic = details[0].stripTrailing();
+            String deadlineUserInput = details[1].stripLeading();
+            String deadline = formatDateAndTime(deadlineUserInput);
+
+            addTask(new Deadline(topic, deadline));
+        } catch (ParseException e) {
+            echo(DukeException.PREFIX + " The format of date and time is wrong!");
+        }
     }
 
     // add event entry to the taskList.
@@ -116,9 +122,23 @@ public class Duke {
             throw new DukeException("The description and date of an event cannot be empty.");
         }
 
-        String topic = details[0].stripTrailing();
-        String date = details[1].stripLeading();
-        addTask(new Event(topic, date));
+        try {
+            String topic = details[0].stripTrailing();
+            String dateUserInput = details[1].stripLeading();
+            String date = formatDateAndTime(dateUserInput);
+
+            addTask(new Event(topic, date));
+        } catch (ParseException e) {
+            echo(DukeException.PREFIX + " The format of date and time is wrong!");
+        }
+    }
+
+    private String formatDateAndTime(String dateTime) throws ParseException {
+        DateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        DateFormat outputFormatter = new SimpleDateFormat("d MMMM yyyy, h:mm a");
+        Date date = inputFormatter.parse(dateTime);
+
+        return outputFormatter.format(date);
     }
 
     // add Task entries(to do, deadline & event) to the taskList.

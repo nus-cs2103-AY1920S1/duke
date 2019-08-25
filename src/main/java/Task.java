@@ -11,16 +11,21 @@ public class Task {
     }
 
     //for the purpose of text-ui-testing
+    /*
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "?");
-    }
-
-    /* public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
     } */
 
-    public void markAsDone() {
-        this.isDone = true;
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public void markAsDone() throws DukeException {
+        if (this.isDone == true) {
+            throw new DukeException("This task has already been done!");
+        } else {
+            this.isDone = true;
+        }
     }
 
     @Override

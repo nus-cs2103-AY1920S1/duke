@@ -4,9 +4,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Deals with loading/saving tasks from/to a file in the hard drive.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Creates a Storage object with the file's file path as the argument.
+     *
+     * @param filePath String of file's filepath.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -19,6 +27,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Accesses the file and extracts tasks from it, saving the tasks into a TaskList object.
+     *
+     * @param taskList Tasks extracted from file will be added to this TaskList object
+     * @throws FileNotFoundException Thrown when the file specified by the filepath does not exist.
+     * @throws InvalidTaskArgumentDukeException Thrown when the file contains invalid information to create task objects.
+     */
     public void getTasksFromFile(TaskList taskList) throws FileNotFoundException, InvalidTaskArgumentDukeException {
         File taskFile = new File(filePath);
         Scanner scanner = new Scanner(taskFile);
@@ -28,6 +43,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in the TaskList object into the file.
+     *
+     * @param taskList TaskList object with tasks to be saved.
+     * @throws IOException thrown if an error occurs when writing into the file.
+     */
     public void loadTasksToFile(TaskList taskList) throws IOException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
@@ -48,6 +69,15 @@ public class Storage {
 
     }
 
+    /**
+     * Converts a String in the valid format into a task object.
+     * Used in getTasksFromFile method to extract task objects from a file.
+     *
+     * @param text String input in required format.
+     * @return Task object created from processing the input text.
+     * @throws InvalidTaskArgumentDukeException Thrown when the String text is in an invalid format so
+     * the argument entered when creating a task object is invalid.
+     */
     public Task stringToTask(String text) throws InvalidTaskArgumentDukeException {
         String[] textSplit = text.split("\\|");
         Task resultTask;
@@ -67,6 +97,13 @@ public class Storage {
         return resultTask;
     }
 
+    /**
+     * Converts a task object into its String representation to be saved into a file.
+     * Used in loadTasksToFile method to save tasks objects into a file as Strings.
+     *
+     * @param task Task object to be represented as a String.
+     * @return String representation of the argument Task object.
+     */
     public String taskToString(Task task) {
         String taskType = "";
         String description = task.getDescription();

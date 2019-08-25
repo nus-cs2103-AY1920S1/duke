@@ -1,9 +1,18 @@
+/**
+ * A program that manages and keeps track of a list of tasks.
+ * Features include adding and deleting tasks, as well as displaying list of current tasks.
+ * Tasks can be marked as done once the user has completed it.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke Object.
+     * @param filePath The filepath of the file the Duke object reads and writes its task list to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -15,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke program.
+     */
     public  void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;

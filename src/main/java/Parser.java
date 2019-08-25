@@ -1,5 +1,16 @@
+/**
+ * Makes sense of user input into a Duke Object.
+ */
 public class Parser {
 
+    /**
+     * Parses the input command and then returns the corresponding command object.
+     * If the input is invalid, a Duke exception is thrown.
+     *
+     * @param fullCommand String input into a Duke object
+     * @return Command object based on the input parsed.
+     * @throws DukeException thrown when input entered is invalid and does not correspond to any command.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             return new ExitCommand();

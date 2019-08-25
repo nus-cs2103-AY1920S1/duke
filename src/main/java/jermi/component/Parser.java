@@ -43,6 +43,7 @@ public class Parser {
         case "done":
             //Fallthrough
         case "delete":
+            //Fallthrough
         case "find":
             if (inputDetails.isEmpty()) {
                 throw new EmptyDescriptionException(inputCommand);

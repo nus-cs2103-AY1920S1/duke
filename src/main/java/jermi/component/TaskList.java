@@ -66,6 +66,12 @@ public class TaskList {
         this.list.remove(index - 1);
     }
 
+    /**
+     * Returns a list of task descriptions containing the keyword.
+     *
+     * @param keyword Keyword used for finding.
+     * @return A list of task descriptions containing the keyword.
+     */
     public List<String> find(String keyword) {
         return this.list
                 .stream()

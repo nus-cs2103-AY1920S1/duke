@@ -75,7 +75,7 @@ public class Client {
     /**
      * Runs the client.
      *
-     * @param pathname Path name of storage file.
+     * @param pathname Pathname of storage file.
      */
     public void run(String pathname) {
         boolean shouldContinue = initialiseStorage(pathname);

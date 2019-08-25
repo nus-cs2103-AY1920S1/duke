@@ -37,8 +37,8 @@ public class ListCommand extends Command {
                 .map(Task::toString)
                 .collect(Collectors.toList());
 
-        for (int ordering = 1; ordering <= tasks.size(); ordering++) {
-            tasks.set(ordering - 1, ordering + "." + tasks.get(ordering - 1));
+        for (int index = 1; index <= tasks.size(); index++) {
+            tasks.set(index - 1, index + "." + tasks.get(index - 1));
         }
         tasks.add(0, "Here are the tasks in your list:");
         ui.echo(tasks.toArray(new String[0]));

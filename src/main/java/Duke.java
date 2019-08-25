@@ -1,5 +1,9 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,6 +21,8 @@ public class Duke {
     private ArrayList<Task> store = new ArrayList<>();
     private static boolean flag = true;
     private static String filePath = "/Users/auxin/duke/data/Tasks.txt";
+    private static SimpleDateFormat newFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm a", Locale.ENGLISH);
+
 
     private void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
@@ -145,7 +151,10 @@ public class Duke {
                     case deadline:
                         try {
                             String[] dl = head[1].split(" /by ");
-                            Task deadline = new Deadline(dl[0], dl[1]);
+                            String ddlTime = dl[1];
+                            SimpleDateFormat ddlFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                            Date ddlDate = ddlFormat.parse(ddlTime);
+                            Task deadline = new Deadline(dl[0], newFormat.format(ddlDate));
                             store.add(deadline);
                             printAddTask();
                             System.out.println(deadline);
@@ -153,12 +162,17 @@ public class Duke {
                             appendToFile(filePath, deadline.toString(), true);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(head[0]);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                         break;
                     case event:
                         try {
                             String[] ev = head[1].split(" /at ");
-                            Task event = new Event(ev[0], ev[1]);
+                            String eventTime = ev[1];
+                            SimpleDateFormat eventFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                            Date eventDate = eventFormat.parse(eventTime);
+                            Task event = new Event(ev[0], newFormat.format(eventDate));
                             store.add(event);
                             printAddTask();
                             System.out.println(event);
@@ -166,6 +180,8 @@ public class Duke {
                             appendToFile(filePath, event.toString(), true);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(head[0]);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                         break;
                     case delete:

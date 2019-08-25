@@ -1,27 +1,26 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.nio.Buffer;
-import java.nio.charset.StandardCharsets;
-import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class Duke {
-    static ArrayList<Task> listOfInputs = new ArrayList<>(100);
+    private ArrayList<Task> listOfInputs;
 
-    private static void todoCheck(String[] tasks) throws DukeException {
+    private Duke() {
+        this.listOfInputs = new ArrayList<>(100);
+    }
+
+    private void todoCheck(String[] tasks) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
-    private static void deadlineCheck(String[] tasks, String userInput) throws DukeException {
+    private void deadlineCheck(String[] tasks, String userInput) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else if (!userInput.contains("/by")) {
@@ -32,7 +31,7 @@ public class Duke {
         }
     }
 
-    private static void eventCheck(String[] tasks, String userInput) throws DukeException {
+    private void eventCheck(String[] tasks, String userInput) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         } else if (!userInput.contains("/at")) {
@@ -43,66 +42,77 @@ public class Duke {
         }
     }
 
-    // For list tasks
-    private static void printFileContents(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-        s.close();
-    }
-
-    // For done tasks
-    private static void replaceLine(String lineToReplace, String newLine, String filePath)
-            throws FileNotFoundException {
-        int index = 0;
+    private void updateInputList() throws DukeException {
         try {
-            ArrayList<String> fileContent = new ArrayList<>(
-                    Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8));
-            for (int i = 0; i < fileContent.size(); i++) {
-                if (fileContent.get(i).equals(lineToReplace)) {
-                    fileContent.set(i, newLine);
-                    break;
+            File f = new File("./data/duke.txt");
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+
+            } else {
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String text;
+                while ((text = br.readLine()) != null) {
+                    String taskType = text.charAt(1) + "";
+                    switch (taskType) {
+                    case "T": {
+                        Task todo = new Todo(text.substring(7));
+                        if (text.substring(4, 5).equals("V")) {
+                            todo.markedAsDone();
+                        }
+                        listOfInputs.add(todo);
+                        break;
+                    }
+                    case "D": {
+                        Task deadline = new Deadline(text.substring(7, text.indexOf("by") - 2),
+                                text.substring(text.indexOf("by") + 4, text.length() - 1));
+                        if (text.substring(4, 5).equals("V")) {
+                            deadline.markedAsDone();
+                        }
+                        listOfInputs.add(deadline);
+                        break;
+                    }
+                    case "E": {
+                        Task event = new Event(text.substring(7, text.indexOf("at") - 2),
+                                text.substring(text.indexOf("at") + 4, text.length() - 1));
+                        if (text.substring(4, 5).equals("V")) {
+                            event.markedAsDone();
+                        }
+                        listOfInputs.add(event);
+                        break;
+                    }
+                    default: {
+                        throw new DukeException("Error occurred, invalid Task type found.");
+                    }
+                    }
                 }
             }
-            Files.write(Paths.get(filePath), fileContent, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException(e.getMessage());
         }
 
     }
 
-    private static void deleteLine(String filePath, String lineToDelete) throws FileNotFoundException {
+    private void updateToDo() throws DukeException {
         try {
-            File inputFile = new File("data/duke.txt");
-            File tempFile = new File("myTempFile.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-            String currentLine;
-            while ((currentLine = reader.readLine()) != null) {
-                String trimmedLine = currentLine.trim();
-                if (trimmedLine.equals(lineToDelete))
-                    continue;
-                writer.write(currentLine + System.getProperty("line.separator"));
+            File f = new File("./data/duke.txt");
+            f.getParentFile().mkdirs();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            for (Task task : listOfInputs) {
+                bw.append(task.toString());
+                bw.append("\n");
             }
-            writer.close();
-            reader.close();
-            boolean success = tempFile.renameTo(inputFile);
+            bw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("An IOException occurred.");
         }
-
     }
 
-    // just need to append new tasks into file
-    private static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend + "\n");
-        fw.close();
-    }
-
-    public static void main(String[] args) {
+    private void run() {
+        try {
+            updateInputList();
+        } catch (DukeException e) {
+            System.err.println(e.getMessage());
+        }
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         while (true) {
@@ -112,18 +122,12 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (userInput.equals("list")) {
-                try {
-                    System.out.println("Here are the tasks in your list:");
-                    // int counter = 0;
-                    // for (Task item : listOfInputs) {
-                    // counter++;
-                    // System.out.println(counter + "." + item.toString());
-                    // }
-                    printFileContents("data/duke.txt");
-                } catch (FileNotFoundException e) {
-                    System.err.println("Something went wrong: " + e.getMessage());
+                System.out.println("Here are the tasks in your list:");
+                int counter = 0;
+                for (Task item : listOfInputs) {
+                    counter++;
+                    System.out.println(counter + "." + item.toString());
                 }
-
             } else {
                 String[] task = userInput.split(" ");
                 String instruction = task[0];
@@ -133,16 +137,10 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(listOfInputs.get(taskNumber - 1));
                 } else if (instruction.equals("delete")) {
-                    try {
-                        int taskNumber = Integer.parseInt(task[1]);
-                        System.out.println("Noted. I've removed this task:");
-                        String toRemove = listOfInputs.remove(taskNumber - 1).toString();
-                        deleteLine("data/duke.txt", toRemove);
-                        System.out.println(toRemove);
-                        System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
-                    } catch (FileNotFoundException ex) {
-                        System.err.println("Something went wrong: " + ex.getMessage());
-                    }
+                    int taskNumber = Integer.parseInt(task[1]);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(listOfInputs.remove(taskNumber - 1));
+                    System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                 } else {
                     try {
                         switch (instruction) {
@@ -153,12 +151,9 @@ public class Duke {
                                 listOfInputs.add(todo);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(todo);
-                                appendToFile("data/duke.txt", todo.toString());
                                 System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             } finally {
                                 break;
                             }
@@ -171,12 +166,9 @@ public class Duke {
                                 listOfInputs.add(deadline);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(deadline);
-                                appendToFile("data/duke.txt", deadline.toString());
                                 System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             } finally {
                                 break;
                             }
@@ -189,12 +181,9 @@ public class Duke {
                                 listOfInputs.add(event);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(event);
-                                appendToFile("data/duke.txt", event.toString());
                                 System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             } finally {
                                 break;
                             }
@@ -206,16 +195,20 @@ public class Duke {
                     } catch (DukeException ex) {
                         System.out.println(ex.getMessage());
                     }
-                    // try {
-                    // for (int i = 0; i < listOfInputs.size(); i++) {
-                    // writeToFile("duke.txt", listOfInputs.get(i).toString());
-                    // }
-                    // } catch (IOException e) {
-                    // System.out.println("Something went wrong:" + e.getMessage());
-                    // }
                 }
             }
         }
+        try {
+            updateToDo();
+        } catch (DukeException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
 }

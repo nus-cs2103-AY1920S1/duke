@@ -54,6 +54,22 @@ public class Task {
         taskCount -= 1;
     }
 
+    public String getTypeOfTask() {
+        return this.typeOfTask;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDue() {
+        return "This task has no due date.";
+    }
+
     /**
      * Convert to standard string format
      * @return a message that reflects the type and description of the Task.

@@ -24,6 +24,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getDue() {
+        return this.endDate;
+    }
+
+    @Override
     public String toString() {
         String[] prepositionSplit = endDate.split(" ", 2);
         String statusIcon = this.getStatusIcon();

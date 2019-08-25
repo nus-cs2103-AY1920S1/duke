@@ -25,6 +25,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getDue() {
+        return this.duration;
+    }
+
+    @Override
     public String toString() {
         String[] prepositionSplit = duration.split(" ",2);
         String statusIcon = this.getStatusIcon();

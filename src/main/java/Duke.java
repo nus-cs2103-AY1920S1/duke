@@ -2,11 +2,15 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.Buffer;
 import java.nio.charset.StandardCharsets;
 import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 public class Duke {
     static ArrayList<Task> listOfInputs = new ArrayList<>(100);
@@ -69,11 +73,32 @@ public class Duke {
 
     }
 
+    private static void deleteLine(String filePath, String lineToDelete) throws FileNotFoundException {
+        try {
+            File inputFile = new File("data/duke.txt");
+            File tempFile = new File("myTempFile.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String trimmedLine = currentLine.trim();
+                if (trimmedLine.equals(lineToDelete))
+                    continue;
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+            writer.close();
+            reader.close();
+            boolean success = tempFile.renameTo(inputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     // just need to append new tasks into file
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.write("\n");
+        fw.write(textToAppend + "\n");
         fw.close();
     }
 
@@ -96,7 +121,7 @@ public class Duke {
                     // }
                     printFileContents("data/duke.txt");
                 } catch (FileNotFoundException e) {
-                    System.err.println("Something went wrong:" + e.getMessage());
+                    System.err.println("Something went wrong: " + e.getMessage());
                 }
 
             } else {
@@ -108,10 +133,16 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println(listOfInputs.get(taskNumber - 1));
                 } else if (instruction.equals("delete")) {
-                    int taskNumber = Integer.parseInt(task[1]);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(listOfInputs.remove(taskNumber - 1));
-                    System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
+                    try {
+                        int taskNumber = Integer.parseInt(task[1]);
+                        System.out.println("Noted. I've removed this task:");
+                        String toRemove = listOfInputs.remove(taskNumber - 1).toString();
+                        deleteLine("data/duke.txt", toRemove);
+                        System.out.println(toRemove);
+                        System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
+                    } catch (FileNotFoundException ex) {
+                        System.err.println("Something went wrong: " + ex.getMessage());
+                    }
                 } else {
                     try {
                         switch (instruction) {

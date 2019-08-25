@@ -1,10 +1,16 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
+    private static DateTimeFormatter dukeDateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    //LocalDateTime dt = LocalDateTime.parse(input, dukeDateTimeFormatter);
 
     public static void main(String[] args) {
+
         String initialMessage = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(initialMessage);
 
@@ -79,24 +85,7 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             String todoDescription = inputTodo.substring(5);
-            Task t = new Todo(todoDescription);
-            dukeList.add(t);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(t);
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
-        }
-    }
-
-    public static void handleInputDeadline(String inputDeadline) throws DukeException {
-        if (inputDeadline.length() == 8) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-        } else {
-            int slashLocation = slashLocator(inputDeadline);
-            int firstIndex = slashLocation - 1;
-            int secondIndex = slashLocation + 4;
-            String deadlineDescription = inputDeadline.substring(9, firstIndex);
-            String deadlineBy = inputDeadline.substring(secondIndex);
-            Task t = new Deadline(deadlineDescription, deadlineBy);
+            Todo t = new Todo(todoDescription);
             dukeList.add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
@@ -113,11 +102,22 @@ public class Duke {
             int secondIndex = slashLocation + 4;
             String eventDescription = inputEvent.substring(6, firstIndex);
             String eventAt = inputEvent.substring(secondIndex);
-            Task t = new Event(eventDescription, eventAt);
-            dukeList.add(t);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(t);
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            Event e = new Event(eventDescription, eventAt);
+            addTaskToListAfterValidation(eventAt, e);
+        }
+    }
+
+    public static void handleInputDeadline(String inputDeadline) throws DukeException {
+        if (inputDeadline.length() == 8) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else {
+            int slashLocation = slashLocator(inputDeadline);
+            int firstIndex = slashLocation - 1;
+            int secondIndex = slashLocation + 4;
+            String deadlineDescription = inputDeadline.substring(9, firstIndex);
+            String deadlineBy = inputDeadline.substring(secondIndex);
+            Deadline d = new Deadline(deadlineDescription, deadlineBy);
+            addTaskToListAfterValidation(deadlineBy, d);
         }
     }
 
@@ -125,4 +125,25 @@ public class Duke {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    public static void addTaskToListAfterValidation(String dateTimeString, Task t) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dukeDateTimeFormatter);
+
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                e.setDateTimeAt(dateTime);
+            } else {
+                Deadline d = (Deadline) t;
+                d.setDateTimeBy(dateTime);
+            }
+
+            dukeList.add(t);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(t);
+            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            System.out.println("Task not added to list because the input format for date and time is unrecognised. " +
+                                "Please enter date and time in dd/MM/yyyy HHmm format.");
+        }
+    }
 }

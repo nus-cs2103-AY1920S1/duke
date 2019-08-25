@@ -1,7 +1,7 @@
 public class Deadline extends Task {
-    private DateTime byWhen;
+    private String byWhen;
 
-    public DateTime getByWhen() {
+    public String getByWhen() {
         return byWhen;
     }
 
@@ -13,7 +13,7 @@ public class Deadline extends Task {
         if (byWhen == null) {
             throw new InvalidTaskDukeException("deadline");
         }
-        this.byWhen = DateTime.create(byWhen);
+        this.byWhen = byWhen;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Deadline extends Task {
         StringBuilder stringBuilder = new StringBuilder("[D]");
         stringBuilder.append(super.toString());
         stringBuilder.append(" (");
-        stringBuilder.append(byWhen);
+        stringBuilder.append(DateTime.create(byWhen));
         stringBuilder.append(")");
         return stringBuilder.toString();
     }

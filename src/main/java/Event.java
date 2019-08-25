@@ -1,5 +1,5 @@
 public class Event extends Task {
-    private DateTime atTime;
+    private String atTime;
 
     public Event(String name, String atTime) throws EmptyTaskDukeException, InvalidTaskDukeException {
         super(name);
@@ -9,10 +9,10 @@ public class Event extends Task {
         if (atTime == null) {
             throw new InvalidTaskDukeException("event");
         }
-        this.atTime = DateTime.create(atTime);
+        this.atTime = atTime;
     }
 
-    public DateTime getAtTime() {
+    public String getAtTime() {
         return atTime;
     }
 
@@ -21,7 +21,7 @@ public class Event extends Task {
         StringBuilder stringBuilder = new StringBuilder("[E]");
         stringBuilder.append(super.toString());
         stringBuilder.append(" (");
-        stringBuilder.append(atTime);
+        stringBuilder.append(DateTime.create(atTime));
         stringBuilder.append(")");
         return stringBuilder.toString();
     }

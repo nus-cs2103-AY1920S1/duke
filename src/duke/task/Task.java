@@ -1,8 +1,8 @@
 package duke.task;
 
 public abstract class Task {
-    private static int NOT_DONE = 0;
-    private static int DONE = 1;
+    public static int NOT_DONE = 0;
+    public static int DONE = 1;
 
     private String name;
     private int status;

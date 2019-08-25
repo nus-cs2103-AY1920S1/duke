@@ -44,7 +44,8 @@ public class Duke {
         while (parser.hasNext()) {
             String action = parser.getNextAction();
             ui.printDivider();
-            commandCentre.execute(action);
+            boolean isSuccessful = commandCentre.execute(action);
+            if (!isSuccessful) parser.nextLine();
             ui.printDivider();
         }
     }

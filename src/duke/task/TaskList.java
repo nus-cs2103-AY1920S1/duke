@@ -82,4 +82,9 @@ public class TaskList {
     void markAsNotDone(int idx) {
         tasks.get(idx).setNotDone();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return tasks.equals(((TaskList)obj).getTasks());
+    }
 }

@@ -1,4 +1,5 @@
-T | 0 | hey
-T | 0 | you
-E | 0 | sfn m | nskfnckw
-D | 0 | m2 | 11/09/2019 2019
+T | 0 | lalala
+E | 1 | happy | sad
+E | 0 | 456 | 789
+D | 0 | d3 | 22/09/2019 1800
+D | 0 | hello | 32/12/2019 1200

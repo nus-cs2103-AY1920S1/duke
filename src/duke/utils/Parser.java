@@ -16,7 +16,11 @@ public class Parser {
         sc = new Scanner(System.in);
     }
 
-    void nextLine() {
+    public void setScanner(Scanner sc) {
+        this.sc = sc;
+    }
+
+    public void nextLine() {
         sc.nextLine();
     }
 
@@ -32,7 +36,7 @@ public class Parser {
         try {
             String taskName = sc.nextLine().trim();
             String[] taskInfo = taskName.split("\\s*/at\\s*");
-            if (taskName.isEmpty() || taskInfo[0].trim().isEmpty()) {
+            if (taskName.isEmpty() || taskInfo[0].trim().isEmpty() || taskInfo[1].equals("")) {
                 throw new EmptyDescriptionException();
             }
             return taskInfo;
@@ -51,13 +55,13 @@ public class Parser {
             String taskName = sc.nextLine().trim();
             String[] taskInfo = taskName.split("\\s*/by\\s*");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            sdf.setLenient(false);
             Calendar cal = Calendar.getInstance();
             cal.setTime(sdf.parse(taskInfo[1]));
 
             if (taskName.isEmpty() || taskInfo[0].trim().isEmpty()) {
                 throw new EmptyDescriptionException();
             }
-
             return taskInfo;
 
         } catch (EmptyDescriptionException e) {
@@ -70,7 +74,8 @@ public class Parser {
             return null;
 
         } catch (ParseException e) {
-            System.out.print("     ☹ OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\"\n");
+            System.out.print("     ☹ OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\"\n + " +
+                    "     and must be valid.");
             return null;
         }
     }

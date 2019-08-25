@@ -1,68 +1,36 @@
-public class EventTask implements Task {
-    public final String description;
-    public final DukeDateTime startDateTime;
-    public final DukeDateTime endDateTime;
-    public final boolean isDone;
+public class EventTask extends Task {
+    private final DukeDuration eventDuration;
 
-    //User inputs Date as DD/MM/YYYY and in Military Time
-    public EventTask(String description, String startTimeString, String endTimeString) {
+    public EventTask(String description, DukeDuration eventDuration) {
         this.description = description;
-
-        String [] startTimeStrings = startTimeString.split(" ");
-        startDateTime = new DukeDateTime(startTimeStrings[0], startTimeStrings[1]);
-
-        String [] endTimeStrings = endTimeString.split(" ");
-        endDateTime = new DukeDateTime(endTimeStrings[0], endTimeStrings[1]);
-
+        this.eventDuration = eventDuration;
         this.isDone = false;
     }
 
-    public EventTask(String description, DukeDateTime startDateTime, DukeDateTime endDateTime, boolean isDone) {
+    public EventTask(String description, DukeDuration eventDuration, boolean isDone) {
         this.description = description;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.eventDuration = eventDuration;
         this.isDone = isDone;
     }
 
     @Override
+    //Returns a copy of this task but with its completion status marked as done
     public Task getTaskMarkedAsDone() {
-        //Returns a copy of this task but with its completion status marked as done
-        return new EventTask(description, startDateTime, endDateTime, true);
+        return new EventTask(description, eventDuration, true);
     }
 
     @Override
+    //Returns a copy of this task but with its completion status marked as undone
     public Task getTaskMarkedUndone() {
-        //Returns a copy of this task but with its completion status marked as undone
-        return new EventTask(description, startDateTime, endDateTime, false);
+        return new EventTask(description, eventDuration, false);
     }
 
     @Override
-    //Returns a string representation of the Task, including its type, completion status, description and duration
+    //Returns a string representation of the Task, including its type, completion status, description and deadline
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[E][");
-        sb.append(Task.getStatusIcon(isDone));
-        sb.append("] ");
-        sb.append(this.description);
-        sb.append(" (at: ");
-        sb.append(startDateTime.toString());
-        sb.append(" to ");
-        sb.append(endDateTime.toString());
-        sb.append(")");
-        return sb.toString();
-    }
-
-    @Override
-    //Converts the task into a computer-readable string
-    public String toSaveFileString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("E"); //Task Type
-        sb.append(Task.DEMARCATOR_STRING);
-        sb.append(description); //Description
-        sb.append(Task.DEMARCATOR_STRING);
-        sb.append(isDone ? 1 : 0); //Completion Status
-        sb.append(Task.DEMARCATOR_STRING);
-        sb.append(timingString); //Timing of Event
+        sb.append(String.format(TO_STRING_FORMAT, 'E', this.getStatusIcon(), this.description));
+        sb.append(String.format(" (at %s)", eventDuration.toString()));
         return sb.toString();
     }
 }

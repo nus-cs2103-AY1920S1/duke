@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class TaskList {
+public class TaskList implements Serializable {
     private ArrayList<Task> tasks = new ArrayList<>();
 
     //Adds a task to the end of the TaskList
@@ -9,16 +10,39 @@ public class TaskList {
     }
 
     //Deletes the task at the specified index by decreasing the index of all subsequent entries by 1.
-    public Task deleteAt(int index) {
+    public Task deleteAt(int index) throws DukeException {
         int realIndex = index - 1;
+
+        if(realIndex < 0) {
+            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_LIST_INDEX_SMALL));
+        }
+
+        if(realIndex >= tasks.size()) {
+            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
+        }
+
         Task deletedTask = tasks.get(realIndex);
         tasks.remove(realIndex);
         return deletedTask;
     }
+
+    //Deletes all the tasks in the TaskList, leaving it empty
+    public void deleteAllTasks() {
+        tasks = new ArrayList<Task>();
+    }
     
     //Replaces the task at the specified index with a clone marked as done
-    public Task markAsDone(int index) {
+    public Task markAsDone(int index) throws DukeException {
         int realIndex = index - 1;
+
+        if(realIndex < 0) {
+            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_LIST_INDEX_SMALL));
+        }
+
+        if(realIndex >= tasks.size()) {
+            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
+        }
+
         tasks.set(realIndex, tasks.get(realIndex).getTaskMarkedAsDone());
         return tasks.get(realIndex);
     }
@@ -37,25 +61,11 @@ public class TaskList {
     //Converts the TaskList into a human-readable String
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
         int iterator = 1;
+
         for (Task t : tasks) {
             //For each Task t, print out one line of "X.[<Status>] Description"
-            sb.append(iterator++);
-            sb.append(".");
-            sb.append(t.toString());
-            sb.append('\n');
-        }
-        return sb.toString();
-    }
-
-    //converts the TaskList into a computer-readable string
-    public String toSaveFileString() {
-        StringBuilder sb = new StringBuilder();
-
-        for(Task t : tasks) {
-            sb.append(t.toSaveFileString());
-            sb.append("\n");
+            sb.append(String.format("%d.%s\n", iterator++, t.toString()));
         }
 
         return sb.toString();

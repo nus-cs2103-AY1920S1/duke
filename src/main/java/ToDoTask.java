@@ -1,17 +1,14 @@
-public class ToDoTask implements Task {
-    public final String description;
-    public final boolean isDone;
-
-    public ToDoTask(String description) {
+public class ToDoTask extends Task {
+    public ToDoTask (String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public ToDoTask(String description, boolean isDone) {
+    public ToDoTask (String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
-
+    
     @Override
     //Returns a copy of this task but with its completion status marked as done
     public Task getTaskMarkedAsDone() {
@@ -27,23 +24,6 @@ public class ToDoTask implements Task {
     @Override
     //Returns a string representation of the Task, including its type, completion status and description
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[T][");
-        sb.append(Task.getStatusIcon(isDone));
-        sb.append("] ");
-        sb.append(this.description);
-        return sb.toString();
-    }
-
-    @Override
-    //Converts the task into a computer-readable string
-    public String toSaveFileString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("T"); //Task Type
-        sb.append(Task.DEMARCATOR_STRING);
-        sb.append(description); //Description
-        sb.append(Task.DEMARCATOR_STRING);
-        sb.append(isDone ? 1 : 0); //Completion Status
-        return sb.toString();
+        return String.format(TO_STRING_FORMAT, 'T', this.getStatusIcon(), this.description);
     }
 }

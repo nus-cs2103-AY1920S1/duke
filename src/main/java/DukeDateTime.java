@@ -1,51 +1,50 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class DukeDateTime {
-    public final LocalTime time;
-    public final LocalDate date;
+public class DukeDateTime implements Serializable {
+    private final LocalDate date;
+    private final LocalTime time;
 
-    //Date should be received in DD/MM/YYYY format
-    //Time should be received in Military Time (HHMM)
-    public DukeDateTime (String dateString, String militaryTimeString) {
-        date = parseDate(dateString);
-        time = parseMilitaryTime(militaryTimeString);
+    public DukeDateTime(LocalDate date, LocalTime time) {
+        this.date = date;
+        this.time = time;
     }
 
-    private LocalDate parseDate (String dateString) {
-        String [] dateStringSplit = dateString.split("/");
-        LocalDate localDate = LocalDate.of(Integer.parseInt(dateStringSplit[2]), 
-                                           Integer.parseInt(dateStringSplit[1]),
-                                           Integer.parseInt(dateStringSplit[0]));
-        
-        return localDate;
-    }
-
-    private LocalTime parseMilitaryTime (String militaryTimeString) {
-        int hourOfDay = Integer.parseInt(militaryTimeString.substring(0, 2));
-        int minuteOfDay = Integer.parseInt(militaryTimeString.substring(2, 4));
-        LocalTime localTime = LocalTime.of(hourOfDay, minuteOfDay);
-
-        return localTime;
+    public boolean isEmpty() {
+        return date == null && time == null;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        if(date == null && time == null) {
+            return "Unspecified Time";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            boolean dateExists = false;
 
-        String dateString = date.toString();
-        sb.append(dateString.substring(8, 10));
-        sb.append("/");
-        sb.append(dateString.substring(5, 7));
-        sb.append("/");
-        sb.append(dateString.substring(0, 4));
+            if(date != null) {
+                String dateString = date.toString();
+                sb.append(dateString.substring(8, 10));
+                sb.append("/");
+                sb.append(dateString.substring(5, 7));
+                sb.append("/");
+                sb.append(dateString.substring(0, 4));
 
-        sb.append(" ");
+                dateExists = true;
+            }
 
-        String timeString = time.toString();
-        sb.append(timeString.substring(0, 2));
-        sb.append(timeString.substring(3, 5));
+            if(time != null) {
+                if(dateExists) {
+                    sb.append(" ");
+                }
 
-        return sb.toString();
+                String timeString = time.toString();
+                sb.append(timeString.substring(0, 2));
+                sb.append(timeString.substring(3, 5));
+            }
+
+            return sb.toString();
+        }
     }
 }

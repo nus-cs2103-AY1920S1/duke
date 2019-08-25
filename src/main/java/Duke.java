@@ -1,89 +1,106 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    private static ArrayList<Task> alist = new ArrayList<>();
+    private static String fileName = "duke.txt";
 
-    public Duke() {}
+    private Duke() {}
 
-    private void run() throws DukeException {
-        ArrayList<Task> alist = new ArrayList<>();
+    private void run() {
+        loadData();
         Scanner scanner = new Scanner(System.in);
+
         while (scanner.hasNext()) {
             try {
                 String input = scanner.next();
-                if (input.equals("bye")) {
+                switch (input) {
+                case "bye":
                     System.out.println("Bye. Hope to see you again soon!\n");
-                } else if (input.equals("list")) {
+                    break;
+                case "list":
                     System.out.println("Here are the tasks in your list:\n");
                     int counter = 0;
                     for (Task t : alist) {
                         counter++;
                         System.out.println(counter + ". " + t);
                     }
-                } else if (input.equals("delete")) {
+                    break;
+                case "delete":
                     int index = scanner.nextInt();
-                    if(index > alist.size()) {
+                    if (index > alist.size()) {
                         throw new DukeException("OOPS!!! Task not found.");
                     }
                     Task task = alist.get(index - 1);
                     alist.remove(task);
+                    writeToHardDisk();
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(task);
                     System.out.println("Now you have " + alist.size() + " tasks in the list.");
-                } else if (input.equals("done")) {
-                    int index = scanner.nextInt();
-                    if(index > alist.size()) {
+                    break;
+                case "done":
+                    int indexD = scanner.nextInt();
+                    if (indexD > alist.size()) {
                         throw new DukeException("OOPS!!! Task not found.");
                     }
-                    Task task = alist.get(index - 1);
-                    task.markDone();
+                    Task taskDone = alist.get(indexD - 1);
+                    taskDone.markDone();
+                    writeToHardDisk();
                     System.out.println("Nice! I've marked this task as done: \n" +
-                            "[" + task.getStatusIcon() + "] " + task.description);
-                } else if (input.equals("todo")) {
+                            "[" + taskDone.getStatusIcon() + "] " + taskDone.description);
+                    break;
+                case "todo":
                     String what = scanner.nextLine();
                     if (what.isEmpty()) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
                     Todo todo = new Todo(what);
                     alist.add(todo);
+                    writeToHardDisk();
                     System.out.println("Got it. I've added this task:");
                     System.out.println(todo);
                     System.out.println("Now you have " + alist.size() + " tasks in the list.");
-                } else if (input.equals("deadline")) {
+                    break;
+                case "deadline":
                     String when = scanner.nextLine();
                     if (when.isEmpty()) {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     }
-                    String[] parts = when.split("/");
-                    if (parts.length == 1) {
+                    String[] partsD = when.split("/");
+                    if (partsD.length == 1) {
                         throw new DukeException("OOPS!!! The time of a deadline cannot be empty.");
                     }
-                        String desc = parts[0];
-                        String time = parts[1];
-                        Deadline deadline = new Deadline(desc);
-                        deadline.setTime(time);
-                        alist.add(deadline);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(deadline);
-                        System.out.println("Now you have " + alist.size() + " tasks in the list.");
-                } else if (input.equals("event")) {
+                    String descD = partsD[0];
+                    String timeD = partsD[1];
+                    Deadline deadline = new Deadline(descD);
+                    deadline.setTime(timeD);
+                    alist.add(deadline);
+                    writeToHardDisk();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(deadline);
+                    System.out.println("Now you have " + alist.size() + " tasks in the list.");
+                    break;
+                case "event":
                     String where = scanner.nextLine();
                     if (where.isEmpty()) {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                     }
-                    String[] parts = where.split("/");
-                    if (parts.length == 1) {
+                    String[] partsE = where.split("/");
+                    if (partsE.length == 1) {
                         throw new DukeException("OOPS!!! The time of an event cannot be empty.");
                     }
-                        String desc = parts[0];
-                        String time = parts[1];
-                        Event event = new Event(desc);
-                        event.setTime(time);
-                        alist.add(event);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(event);
-                        System.out.println("Now you have " + alist.size() + " tasks in the list.");
-                } else {    //invalid task name
+                    String descE = partsE[0];
+                    String timeE = partsE[1];
+                    Event event = new Event(descE);
+                    event.setTime(timeE);
+                    alist.add(event);
+                    writeToHardDisk();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(event);
+                    System.out.println("Now you have " + alist.size() + " tasks in the list.");
+                    break;
+                default:     //invalid task name
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException ex) {
@@ -91,7 +108,53 @@ public class Duke {
             }
         }
     }
-    public static void main(String[] args) throws DukeException {
+    private static void loadData() {
+        String line;
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileName));
+            while ((line = br.readLine()) != null) {
+                String description = line.substring(7);
+                if (line.charAt(1) == 'T') {
+                    Todo todo = new Todo(description);
+                    if (line.charAt(4) == '\u2713') {
+                        todo.markDone();
+                    }
+                    alist.add(todo);
+                } else if (line.charAt(1) == 'D') {
+                    Deadline deadline = new Deadline(description);
+                    if (line.charAt(4) == '\u2713') {
+                        deadline.markDone();
+                    }
+                    alist.add(deadline);
+                } else {
+                    Event event = new Event(description);
+                    if (line.charAt(4) == '\u2713') {
+                        event.markDone();
+                    }
+                    alist.add(event);
+                }
+            }
+            br.close();
+        } catch(IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
+    private static void writeToHardDisk() {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            for(Task t: alist) {
+                fileWriter.write(t.toString() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

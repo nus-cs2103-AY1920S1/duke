@@ -19,6 +19,14 @@ public class Task {
     }
 
     /**
+     * Gets the description of the task.
+     * @return Description of task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Gets the total number of tasks created.
      * @return The total tasks created.
      */
@@ -47,11 +55,20 @@ public class Task {
     }
 
     /**
+     * Checks whether the task is done.
+     * @return Boolean value on whether task is done.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Gets the string symbol of whether the task is done.
      * @return String symbol of whether the task is done.
      */
     private String getStatusIcon() {
-        return isDone ? "✓" : "✗";
+//        return isDone ? "✓" : "✗";
+        return isDone ? "Y" : "N";
     }
 
     /**

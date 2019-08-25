@@ -36,7 +36,7 @@ public abstract class Task {
 
     /**
      * Get time.
-     * @return Optional<String>
+     * @return Optional of String
      */
     public Optional<String> getTime() {
         return this.time;

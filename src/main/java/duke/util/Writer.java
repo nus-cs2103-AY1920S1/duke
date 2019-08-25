@@ -8,7 +8,9 @@ import duke.task.TaskType;
 import duke.error.InvalidFileException;
 import java.util.List;
 import java.util.ArrayList;
+//CHECKSTYLE:OFF - Doing this because Paths need the * import
 import java.nio.file.*;
+//CHECKSTYLE:ON
 import java.lang.IndexOutOfBoundsException;
 import java.io.IOException;
 
@@ -25,20 +27,22 @@ public class Writer {
     /**
      * Write data to file and assumes that this destination is fixed.
      * Also overwrite file if it already exists.
-     * @param data List<Task>
-     * @throws IOException
+     * @param data List of Task
+     * @throws IOException if an error appears
      */
     public void writeFile(List<Task> data) throws IOException {
-       String dataString = encodeData(data);
-       Files.write(this.path, 
-                   dataString.getBytes(), 
-                   StandardOpenOption.CREATE); 
+        String dataString = encodeData(data);
+        Files.write(this.path, 
+                    dataString.getBytes(), 
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.WRITE,
+                    StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     /**
      * Read data from file.
-     * @return List<Task>
-     * @throws IOException
+     * @return List of Task
+     * @throws IOException if an error appears
      */
     public List<Task> readFile() throws IOException {
         return this.decodeData(Files.readAllLines(this.path));
@@ -46,7 +50,7 @@ public class Writer {
 
     /**
      * Transform the Task List into Strings.
-     * @param data List<Task>
+     * @param data List of Task
      * @return String
      */
     private String encodeData(List<Task> data) {
@@ -66,15 +70,16 @@ public class Writer {
 
     /**
      * Decode the data.
-     * @param data List<String>
-     * @return List<Task>
+     * @param data List of String
+     * @return List of Task
      */
     private List<Task> decodeData(List<String> data) {
         List<Task> result = new ArrayList<>();
         for (String line: data) {
             try {
-                String[] lineArr = line.split(" | ");
-                switch(lineArr[0]) {
+                // Need special character here or the split will mess up
+                String[] lineArr = line.split(" \\| ");
+                switch (lineArr[0]) {
                 case "EVENT":
                     result.add(new Event(lineArr[2], lineArr[3], lineArr[1].equals("1")));
                     break;
@@ -86,7 +91,7 @@ public class Writer {
                     break;
                 default:
                 }
-            } catch(IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error decoding data from file");
             }            
         } 

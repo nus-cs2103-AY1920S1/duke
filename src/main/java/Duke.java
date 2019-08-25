@@ -149,7 +149,7 @@ public class Duke {
         if (commandArr.length != 2) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! Deadline must have a description and date");
         }
-        Task taskToAdd = new Deadline(commandArr[0], commandArr[1]);
+        Task taskToAdd = new Deadline(commandArr[0].trim(), commandArr[1].trim());
         this.addToList(taskToAdd);
     }
 
@@ -163,7 +163,7 @@ public class Duke {
         if (commandArr.length != 2) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! Event must have a description and date");
         }
-        Task taskToAdd = new Event(commandArr[0], commandArr[1]);
+        Task taskToAdd = new Event(commandArr[0].trim(), commandArr[1].trim());
         this.addToList(taskToAdd);
     }
 
@@ -214,7 +214,7 @@ public class Duke {
 
     /**
      * Get data from disk.
-     * @return List<Task>
+     * @return List of Task
      */
     private List<Task> getListFromDisk() {
         try {

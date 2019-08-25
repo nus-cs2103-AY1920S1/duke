@@ -11,8 +11,6 @@ public class Duke {
         loop: while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
-
-
             switch (input) {
             case "list":
                 StringBuilder formattedList = new StringBuilder();
@@ -33,20 +31,20 @@ public class Duke {
                 break loop;
                 // bye
             default:
-                if(input.matches("^done [0-9]+$")) {
+                if (input.matches("^done [0-9]+$")) {
                     int index = Integer.parseInt(input.split(" ")[1]) - 1;
                     // get index
-                    if(index < 0 || index > list.size()) {
+                    if (index < 0 || index > list.size()) {
                         Printer.printString("That is not a valid task index");
                         // index out of bounds
-                    }else {
+                    } else {
                         list.get(index).markAsDone();
                         Printer.printString(
                                 "Nice! I've marked this task as done:\n  " + list.get(index)
                                         .toString());
                         // mark done
                     }
-                }else {
+                } else {
                     Printer.printString("added: " + input);
                     list.add(new DoableTask(input));
                     // add to list
@@ -62,6 +60,7 @@ class Task {
     public Task(String taskName) {
         name = taskName;
     }
+
     public String toString() {
         return name;
     }
@@ -74,12 +73,15 @@ class DoableTask extends Task {
         super(taskName);
         isDone = false;
     }
+
     public void markAsDone() {
         isDone = true;
     }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + super.toString();
     }
@@ -147,9 +149,7 @@ class Printer {
      */
     private static String repeatChar(int length, char c) {
         StringBuilder s = new StringBuilder();
-        for(int i = 0; i < length; i++) {
-            s.append(c);
-        }
+        s.append(String.valueOf(c).repeat(Math.max(0, length)));
         return s.toString();
     }
 }

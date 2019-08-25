@@ -20,7 +20,6 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     String underline = "____________________________________________________________\n";
     ArrayList<Task> tasks = new ArrayList<Task>();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private String doubleLine(String msg) {
         return underline + msg + "\n" + underline;
@@ -83,16 +82,17 @@ public class Duke {
         }
     }
 
-    private String understandTime(String time) throws ParseException {
-        Date temp = sdf.parse(time);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(temp);
-        String dayNumberSuffix = getDayNumberSuffix(cal.DATE);
-        SimpleDateFormat changeFormat = new SimpleDateFormat("d'" + dayNumberSuffix + "' 'of' MMMM yyyy',' haa");
-        return changeFormat.format(temp);
+    public static String timeFormat(Date time) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date temp = time;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(temp);
+            String dayNumberSuffix = getDayNumberSuffix(cal.DATE);
+            SimpleDateFormat changeFormat = new SimpleDateFormat("d'" + dayNumberSuffix + "' 'of' MMMM yyyy',' haa");
+            return changeFormat.format(temp);
     }
 
-    private String getDayNumberSuffix(int day) {
+    private static String getDayNumberSuffix(int day) {
         if(day >= 11 && day <=13) {
             return "th";
         }
@@ -148,7 +148,7 @@ public class Duke {
         }
     }
 
-    public void readFile(String filePath) throws FileNotFoundException, DukeException {
+    public void readFile(String filePath) throws FileNotFoundException, DukeException, ParseException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
@@ -157,16 +157,18 @@ public class Duke {
             String taskType = token[0].trim();
             Boolean isDone = token[1].trim().equals("1");
             String taskDesc = token[2].trim();
-            String time = token.length >= 4 ? token[3] : "";
+            String time;
             Task task;
             switch (taskType) {
             case "T":
                 task = new ToDo(taskDesc);
                 break;
             case "D":
+                time = token[3];
                 task = new Deadline(taskDesc, time);
                 break;
             case "E":
+                time = token[3];
                 task = new Event(taskDesc, time);
                 break;
             default:
@@ -201,6 +203,8 @@ public class Duke {
         try {
             readFile(filePath);
         } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
         tokenString = br.readLine();

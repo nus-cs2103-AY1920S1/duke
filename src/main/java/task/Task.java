@@ -15,7 +15,7 @@ public class Task {
      * Constructs a Task.
      */
     public Task() {
-    
+
     }
 
     /**

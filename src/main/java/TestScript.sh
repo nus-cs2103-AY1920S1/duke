@@ -13,6 +13,9 @@ else
 fi
 
 # For each input, generate its output, and chk its diff
-echo "Checking Output.txt against Expected.txt"
+echo "Checking Output.txt against Expected.txt..."
 java Duke < Test/Input.txt > Test/Output.txt
 colordiff Test/Output.txt Test/Expected.txt
+
+echo "Checking data saved..."
+colordiff Data/duke.txt Data/Expected.txt

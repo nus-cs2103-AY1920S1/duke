@@ -154,7 +154,7 @@ public class Duke {
                     this.delete(sc.nextInt());
                     break;
                 case "save":
-                    this.save("./Data/duke.txt", "this.list()");
+                    this.save("./Data/duke.txt", this.list());
                     break;
                 case "bye":
                     exit = true;

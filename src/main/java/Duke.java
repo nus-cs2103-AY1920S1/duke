@@ -68,6 +68,8 @@ public class Duke {
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("     ☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        } catch (DukeException e) {
+            throw e;
         }
     }
 

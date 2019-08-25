@@ -66,9 +66,9 @@ public class Main {
                         }
                     }
 
-                    Task todoTask = new Todo(newStr.toString());
-                    taskArr.add(todoTask);
-                    printAddedTask(todoTask, taskArr.size());
+                    Task toDoTask = new ToDo(newStr.toString());
+                    taskArr.add(toDoTask);
+                    printAddedTask(toDoTask, taskArr.size());
                 } else if (inputArr[0].equals("deadline")) {
                     // deadline
                     StringBuilder desc = new StringBuilder();

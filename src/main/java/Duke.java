@@ -5,14 +5,14 @@ import java.lang.IllegalArgumentException;
 
 public class Duke {
     List<Task> toDoList;
-    String doneMessage = "Nice! I've marked this task as done:";
-    String addedMessage = "Got it. I've added this task:";
-    String deleteMessage = "Noted. I've removed this task: ";
-    String exitMessage = "Bye. Hope to see you again soon!";
-    String emptyToDoErrorMessage = "____________________________________________________________\n"
+    final String doneMessage = "Nice! I've marked this task as done:";
+    final String addedMessage = "Got it. I've added this task:";
+    final String deleteMessage = "Noted. I've removed this task: ";
+    final String exitMessage = "Bye. Hope to see you again soon!";
+    final String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "☹ OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
-    String illegalArgumentMessage = "____________________________________________________________\n"
+    final String illegalArgumentMessage = "____________________________________________________________\n"
         + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
         + "____________________________________________________________";
 

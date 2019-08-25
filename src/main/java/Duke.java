@@ -1,4 +1,6 @@
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -115,19 +117,25 @@ public class Duke {
             if (!enterLoop) {
                 continue;
             }
-            if (i == 0) {
-                myList.add(new ToDo(input.substring(type[i].length())));
-            } else if (i == 1) {
-                myList.add(new Deadline(input.substring(type[i].length(),endIdx), input.substring(endIdx
-                        + date[i].length() + 1)));
-            } else {
-                myList.add(new Event(input.substring(type[i].length(),endIdx), input.substring(endIdx
-                        + date[i].length() + 1)));
+            try {
+                if (i == 0) {
+                    myList.add(new ToDo(input.substring(type[i].length())));
+                } else if (i == 1) {
+                    StringToDateConverter converter = new StringToDateConverter();
+                    Date by = converter.convertStringToDate(input.substring(endIdx + date[i].length() + 1));
+                    myList.add(new Deadline(input.substring(type[i].length(), endIdx), by));
+                } else {
+                    StringToDateConverter converter = new StringToDateConverter();
+                    Date at = converter.convertStringToDate(input.substring(endIdx + date[i].length() + 1));
+                    myList.add(new Event(input.substring(type[i].length(), endIdx), at));
+                }
+                System.out.println(myList.get(myList.size() - 1));
+                System.out.println("Now you have " + myList.size()
+                        + " tasks in the list.");
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            System.out.println(myList.get(myList.size()-1));
-            System.out.println("Now you have " + myList.size()
-                    + " tasks in the list.");
-            break;
         }
     }
 

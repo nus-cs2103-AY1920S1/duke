@@ -1,3 +1,7 @@
+package duke.calendar;
+
+import duke.exception.DukeException;
+
 public class Time {
 
 	protected String rawTime;

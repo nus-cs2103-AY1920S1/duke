@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.calendar.Date;
+import duke.calendar.Time;
+
 public class Event extends Task {
 
 	protected Date startDate;

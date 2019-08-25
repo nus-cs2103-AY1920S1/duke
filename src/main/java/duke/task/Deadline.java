@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.calendar.Date;
+import duke.calendar.Time;
+
 public class Deadline extends Task {
 
 	protected Date date;

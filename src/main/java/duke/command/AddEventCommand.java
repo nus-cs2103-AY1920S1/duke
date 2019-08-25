@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.calendar.Date;
+import duke.calendar.Time;
+import duke.exception.DukeException;
+import duke.task.Event;
+
 public class AddEventCommand extends Command {
 
 	String details;

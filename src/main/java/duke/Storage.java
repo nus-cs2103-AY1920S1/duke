@@ -1,3 +1,13 @@
+package duke;
+
+import duke.calendar.Date;
+import duke.calendar.Time;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,31 +29,31 @@ public class Storage {
 			Scanner scanner = new Scanner(new File(filePath));
 			while (scanner.hasNextLine()) {
 				String taskLine = scanner.nextLine();
-				String[] taskDetails = taskLine.split(" | ");
-				String taskType = taskDetails[0];
-				String taskDoneStatus = taskDetails[1];
-				String taskDescription = taskDetails[2];
+				String[] taskDetails = taskLine.split(" \\| ");
+				String taskType = taskDetails[0].trim();
+				String taskDoneStatus = taskDetails[1].trim();
+				String taskDescription = taskDetails[2].trim();
 				Task task;
 				if (taskType.equals("T")) {
 					task = new Todo(taskDescription);
 				} else if (taskType.equals("D")) {
-					String taskDate = taskDetails[3];
+					String taskDate = taskDetails[3].trim();
 					String taskTime = null;
 					if (taskDetails.length > 4) {
-						taskTime = taskDetails[4];
+						taskTime = taskDetails[4].trim();
 					}
 					task = new Deadline(taskDescription, new Date(taskDate), new Time(taskTime));
 				} else {
-					String taskStartDate = taskDetails[3];
+					String taskStartDate = taskDetails[3].trim();
 					String taskStartTime = null;
 					String taskEndDate = null;
 					String taskEndTime = null;
 					if (taskDetails.length > 4) {
-						taskStartTime = taskDetails[4];
+						taskStartTime = taskDetails[4].trim();
 						if (taskDetails.length > 5) {
-							taskEndDate = taskDetails[5];
+							taskEndDate = taskDetails[5].trim();
 							if (taskDetails.length > 6) {
-								taskEndTime = taskDetails[6];
+								taskEndTime = taskDetails[6].trim();
 							}
 						}
 					}

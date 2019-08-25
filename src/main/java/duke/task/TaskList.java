@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import duke.exception.*;
+import java.util.ArrayList;
 
 public class TaskList {
 
@@ -56,6 +57,18 @@ public class TaskList {
             tasks.remove(index);
             return task;
         }
+    }
+
+    public ArrayList<Integer> findMatchingTasks(String keyword) {
+        ArrayList<Integer> matchingIndexes = new ArrayList<>();
+        for (int i = 0; i < getNumberOfTasks(); i++) {
+            Task task = tasks.get(i);
+            if (task.todo.contains(keyword)) {
+                matchingIndexes.add(i);
+            }
+        }
+
+        return matchingIndexes;
     }
 
     public static int getNumberOfTasks() {

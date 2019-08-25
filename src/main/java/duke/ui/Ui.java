@@ -4,6 +4,8 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     public void sendLine() {
@@ -44,6 +46,16 @@ public class Ui {
     public void sendFarewell() {
         sendLine();
         System.out.println(" Bye. Hope to see you again soon!");
+        sendLine();
+    }
+
+    public void showMatchingTasks(ArrayList<Integer> taskIndexes) {
+        sendLine();
+        sendMessage("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskIndexes.size(); i++) {
+            Task task = TaskList.getTask(taskIndexes.get(i));
+            sendMessage(" " + task.toString());
+        }
         sendLine();
     }
 

@@ -11,11 +11,11 @@ public class Duke {
             if(input.equalsIgnoreCase("bye")) {
                 Printer.printString("Bye. Hope to see you again soon!");
                 break;
+                // bye
             }else {
                 Printer.printString(input);
                 // echo
             }
-            // bye
         }
     }
 }

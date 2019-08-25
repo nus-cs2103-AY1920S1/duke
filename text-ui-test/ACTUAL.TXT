@@ -5,6 +5,11 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Bad String
+Invalid Date
+[T][N] join sports club
+[D][N] return book (by: null)
+[E][N] project meeting (at: null)
     ____________________________________________________________
      Hello! I'm Duke
      What can I do for you?

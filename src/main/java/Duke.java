@@ -12,7 +12,7 @@ public class Duke {
         readCurrent();
     }
     
-    public static void update(int index) throws IOException{
+    public static void updateComplete(int index) throws IOException{
         try {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
@@ -20,7 +20,6 @@ public class Duke {
             int count = 0;
             ArrayList<String> input = new ArrayList<>();
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 if (count == index) {
                     count++;
                     line = line.replace("0", "1");
@@ -213,18 +212,55 @@ public class Duke {
         String[] inputs = input.split(" ");
         int index = Integer.parseInt(inputs[1]) - 1;
         tasks.get(index).complete();
-        update(index);
+        updateComplete(index);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks.get(index));
     }
+    
+    public static void updateDelete(int index) throws IOException{
+        try {
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line = null;
+            int count = 0;
+            ArrayList<String> input = new ArrayList<>();
+            while ((line = br.readLine()) != null) {
+                if (count == index) {
+                    count++;
+                } else {
+                    count++;
+                    input.add(line);
+                }
+            }
+            fr.close();
+            br.close();
+            
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter out = new BufferedWriter(fw);
+            for(String s : input) {
+                out.write(s);
+                out.newLine();
+            }
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+    
 
-    public static void deleteTask(String input) {
-        String[] inputs = input.split(" ");
-        int index = Integer.parseInt(inputs[1]) - 1;
-        Task removedTask = tasks.remove(index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(removedTask);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    public static void deleteTask(String input) throws IOException {
+        try {
+            String[] inputs = input.split(" ");
+            int index = Integer.parseInt(inputs[1]) - 1;
+            Task removedTask = tasks.remove(index);
+            updateDelete(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(removedTask);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void printOut(Task task) {

@@ -1,7 +1,13 @@
-import DukeTask.*;
+package duke;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import duke.task.Task;
+import duke.task.TodoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+
 
 public class Duke {
     static String HORIZONTAL_LINE = "____________________________________________________________\n";
@@ -106,9 +112,9 @@ public class Duke {
                                     inputs.length - 1);
 
                             validateTaskDescription(description);
-                            validateTaskTiming(timing);
+                            DeadlineTask deadlineTask = new DeadlineTask(description, timing);
 
-                            addAndPrintTask(tasks, new DeadlineTask(description, timing));
+                            addAndPrintTask(tasks, deadlineTask);
                         } else {
                             throw new DukeInvalidArgumentException(
                                     "Missing /by delimiter for deadline command",
@@ -129,9 +135,9 @@ public class Duke {
                             String timing = DukeUtil.concatStrings(inputs, " ", atIndex + 1, inputs.length - 1);
 
                             validateTaskDescription(description);
-                            validateTaskTiming(timing);
+                            EventTask eventTask = new EventTask(description, timing);
 
-                            addAndPrintTask(tasks, new EventTask(description, timing));
+                            addAndPrintTask(tasks, eventTask);
                         } else {
                             throw new DukeInvalidArgumentException(
                                     "Missing /at delimiter for event command",
@@ -274,10 +280,9 @@ public class Duke {
         }
     }
 
-    //only performs basic empty timing validation for now since timings are to be treated
-    //as strings as stated
-    private static void validateTaskTiming(String timing)
-            throws DukeInvalidArgumentException {
+    private static void validateTaskPeriod(String timing)
+        throws DukeInvalidArgumentException {
+
         if (timing.length() == 0) {
             throw new DukeInvalidArgumentException(
                     "User specified timing of task is empty",

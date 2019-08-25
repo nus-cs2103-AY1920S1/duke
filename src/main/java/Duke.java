@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
 
@@ -23,7 +24,7 @@ public class Duke {
         }
     }
 
-    private static String getDate(String dateTimeString) {
+    private static String getDate(String dateTimeString) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
         String suffix = getSuffix(dateTime) + " of";
@@ -133,6 +134,7 @@ public class Duke {
                     // Save the command in taskList.txt
                     String text = "done " + taskNum + "\n";
                     appendToFile(f.getAbsolutePath(), text);
+
                 } else if (command.equals("bye")) {
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\n\tBye. Hope to see you again soon!");
@@ -183,6 +185,7 @@ public class Duke {
                     // Save the command in taskList.txt
                     String text = "deadline " + wordArr[0] + " /by " + date + "\n";
                     appendToFile(f.getAbsolutePath(), text);
+
                 } else if (command.equals("event")) {
 
                     String str = sc.nextLine();
@@ -230,6 +233,10 @@ public class Duke {
                 else {
                     throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
                 }
+            } catch (DateTimeParseException e) {
+                System.out.println("\t____________________________________________________________");
+                System.out.println("\n\tOOPS! Please supply date in the format: dd/mm/yyyy (Time in 24h format)");
+                System.out.println("\t____________________________________________________________\n");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {

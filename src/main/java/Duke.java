@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 public class Duke {
     private static ArrayList<Task> alist = new ArrayList<>();
-    private static String fileName = "duke.txt";
+    private static String fileName = "/Users/Bernice/Desktop/CS2103T/duke/duke.txt";
 
     private Duke() {}
 
     private void run() {
         loadData();
-        ArrayList<Task> alist = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNext()) {
@@ -150,6 +149,7 @@ public class Duke {
             for(Task t: alist) {
                 fileWriter.write(t.toString() + "\n");
             }
+            fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());

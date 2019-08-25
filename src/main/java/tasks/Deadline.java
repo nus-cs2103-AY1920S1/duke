@@ -19,7 +19,7 @@ public class Deadline extends Task {
         time = splits[3];
     }
 
-    public String getBy(){
+    public String getBy() {
         return by;
     }
 
@@ -31,10 +31,10 @@ public class Deadline extends Task {
     @Override
     public String writer() {
         String text = "D | ";
-        if(getStatus() == false){
-            text = text.concat("0 | "+getDescription()+" | "+getBy());
-        }else{
-            text = text.concat("1 | "+getDescription()+" | "+getBy());
+        if (getStatus() == false) {
+            text = text.concat("0 | " + getDescription() + " | " + getBy());
+        } else {
+            text = text.concat("1 | " + getDescription() + " | " + getBy());
         }
         return text;
     }

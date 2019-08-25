@@ -9,8 +9,8 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public String readCommand(){
-        if(sc.hasNextLine()) return sc.nextLine();
+    public String readCommand() {
+        if (sc.hasNextLine()) return sc.nextLine();
         else return "";
     }
 
@@ -30,7 +30,7 @@ public class Ui {
         print(message);
     }
 
-    public void showLoadingError(){
+    public void showLoadingError() {
         print("This is your first time using Duke, no history loaded.");
     }
 

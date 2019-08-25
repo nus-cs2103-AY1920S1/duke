@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:");
         if (number > taskList.getSize()) throw new DukeException("It's an invalid task");
         Task doneTask = taskList.markDone(number);

@@ -16,10 +16,10 @@ public class Todo extends Task {
     @Override
     public String writer() {
         String text = "T | ";
-        if(getStatus() == false){
-            text = text.concat("0 | "+getDescription());
-        }else{
-            text = text.concat("1 | "+getDescription());
+        if (getStatus() == false) {
+            text = text.concat("0 | " + getDescription());
+        } else {
+            text = text.concat("1 | " + getDescription());
         }
         return text;
     }

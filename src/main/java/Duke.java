@@ -1,7 +1,7 @@
 import command.Command;
 import storage.Storage;
-import tasks.*;
 import exception.DukeException;
+import tasks.TaskList;
 import ui.Parser;
 import ui.Ui;
 

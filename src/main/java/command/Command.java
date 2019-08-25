@@ -6,9 +6,9 @@ import tasks.TaskList;
 import ui.Ui;
 
 
-abstract public class Command {
+public abstract class Command {
 
-    abstract public boolean isExit();
+    public abstract boolean isExit();
 
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

@@ -19,7 +19,7 @@ public class Event extends Task {
         time = splits[3];
     }
 
-    public String getAt(){
+    public String getAt() {
         return at;
     }
 
@@ -31,10 +31,10 @@ public class Event extends Task {
     @Override
     public String writer() {
         String text = "E | ";
-        if(getStatus() == false){
-            text = text.concat("0 | "+getDescription()+" | "+getAt());
-        }else{
-            text = text.concat("1 | "+getDescription()+" | "+getAt());
+        if (getStatus() == false) {
+            text = text.concat("0 | " + getDescription() + " | " + getAt());
+        } else {
+            text = text.concat("1 | " + getDescription() + " | " + getAt());
         }
         return text;
     }

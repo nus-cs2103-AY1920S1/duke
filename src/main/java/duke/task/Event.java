@@ -1,21 +1,23 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
 
-    Event(String desc) {
+    public Event(String desc) {
         super(desc);
     }
-    Event(String desc, boolean done) {
+    public Event(String desc, boolean done) {
         super(desc, done);
     }
-    Event(String desc, LocalDateTime startDate, LocalDateTime endDate) {
+    public Event(String desc, LocalDateTime startDate, LocalDateTime endDate) {
         super(desc);
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    Event(String desc, LocalDateTime startDate, LocalDateTime endDate, boolean done) {
+    public Event(String desc, LocalDateTime startDate, LocalDateTime endDate, boolean done) {
         super(desc, done);
         this.startDate = startDate;
         this.endDate = endDate;

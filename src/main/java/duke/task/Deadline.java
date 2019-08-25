@@ -1,19 +1,23 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
 
-    Deadline(String desc) {
+    public Deadline(String desc) {
         super(desc);
     }
-    Deadline(String desc, boolean done) {
+    public Deadline(String desc, boolean done) {
         super(desc, done);
     }
-    Deadline(String desc, LocalDateTime by) {
+    public Deadline(String desc, LocalDateTime by) {
         super(desc);
         this.by = by;
     }
-    Deadline(String desc, LocalDateTime by, boolean done) {
+    public Deadline(String desc, LocalDateTime by, boolean done) {
         super(desc, done);
         this.by = by;
     }

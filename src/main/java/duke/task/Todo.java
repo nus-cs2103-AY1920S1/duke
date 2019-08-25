@@ -1,8 +1,14 @@
+package duke.task;
+
+import duke.task.Task;
+
 public class Todo extends Task {
-    Todo(String desc) {
+
+    public Todo(String desc) {
         super(desc);
     }
-    Todo(String desc, boolean done) {
+
+    public Todo(String desc, boolean done) {
         super(desc, done);
     }
 

@@ -1,3 +1,10 @@
+import duke.DukeException;
+import duke.command.Command;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.text.Parser;
+import duke.ui.Ui;
+
 public class Duke {
     protected TaskList tasks;
     protected Storage storage;
@@ -17,7 +24,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke newDuke = new Duke("../data/duke.txt");
+        Duke newDuke = new Duke("data/duke.txt");
         newDuke.run();
     }
 

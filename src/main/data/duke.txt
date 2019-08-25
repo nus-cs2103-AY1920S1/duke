@@ -1,0 +1,3 @@
+[D][✓] homework (by: 31-Dec-2019 06:00PM)
+[E][✓] meeting (at: 31-Dec-2019 11:59PM)
+[D][✘] assignment (by: 04-Apr-2019 05:00PM)

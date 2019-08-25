@@ -1,4 +1,5 @@
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -44,15 +45,33 @@ public class Duke {
                     }
                     arr.add(t);
                 } else if (s.charAt(1) == 'D') {
-                    int index = s.indexOf(40);
-                    t = new Deadline(s.substring(7, index - 1), s.substring(index + 5, s.length() - 2));
+                    int index = s.indexOf(58);
+                    String ss = s.substring(index);
+                    String[] ssArr = ss.split(" ");
+
+                    SimpleDateFormat parser = new SimpleDateFormat("dd-MMM-yyyy");
+                    Date date = parser.parse(ssArr[1]);
+
+                    String strTime = ssArr[2].substring(0, 7);
+                    LocalTime time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mma"));
+
+                    t = new Deadline(s.substring(7, index - 4), date, time);
                     if (s.charAt(4) == '\u2713') {
                         t.markAsDone();
                     }
                     arr.add(t);
                 } else {
-                    int index = s.indexOf(40);
-                    t = new Event(s.substring(7, index - 1), s.substring(index + 5, s.length() - 2));
+                    int index = s.indexOf(58);
+                    String ss = s.substring(index);
+                    String[] ssArr = ss.split(" ");
+
+                    SimpleDateFormat parser = new SimpleDateFormat("dd-MMM-yyyy");
+                    Date date = parser.parse(ssArr[1]);
+
+                    String strTime = ssArr[2].substring(0, 7);
+                    LocalTime time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mma"));
+
+                    t = new Event(s.substring(7, index - 4), date, time);
                     if (s.charAt(4) == '\u2713') {
                         t.markAsDone();
                     }
@@ -65,7 +84,7 @@ public class Duke {
             System.out.println(lines);
             reader.close();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

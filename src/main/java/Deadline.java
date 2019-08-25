@@ -13,11 +13,19 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public String getDateString() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
+        return dateFormatter.format(date);
+    }
+
+    public String getTimeString() {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");
+        return timeFormatter.format(time);
+    }
+
     @Override
     public String toString() {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MMM yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");
-        return "[D]" + super.toString() + " (by: " + dateFormatter.format(date)  + " "
-                + timeFormatter.format(time) + ")";
+        return "[D]" + super.toString() + " (by: " + getDateString()  + " "
+                + getTimeString() + ")";
     }
 }

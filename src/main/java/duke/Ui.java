@@ -80,6 +80,10 @@ public class Ui {
         showMessage("Now you have " + num + " task" + (num == 1 ? "" : "s") + " in the list.");
     }
 
+    /**
+     * Shows all the tasks in a list of tasks.
+     * @param tasks A list of tasks
+     */
     public void showAllTasks(List<Task> tasks) {
         if (tasks.size() == 0) {
             showMessage("There are no tasks in your list.");

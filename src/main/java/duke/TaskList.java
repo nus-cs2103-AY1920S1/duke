@@ -15,6 +15,11 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a task list from a list of task inputs.
+     * @param taskInputs A list of task inputs, where each task input is represented as a list of words
+     * @throws DukeException Error raised if tasks cannot be loaded
+     */
     public TaskList(List<List<String>> taskInputs) throws DukeException {
         this.tasks = new ArrayList<>();
         for (List<String> taskInput : taskInputs) {
@@ -47,6 +52,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Returns a task at the given position.
+     * @param position Given position
+     * @return Task at the given position
+     * @throws DukeException Error raised if no task exists at the given position
+     */
     public Task getTask(int position) throws DukeException {
         try {
             return tasks.get(position);
@@ -59,6 +70,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Deletes a task at the given position.
+     * @param position Given position
+     * @throws DukeException Error raised if no task exists at the given position
+     */
     public void deleteTask(int position) throws DukeException {
         try {
             tasks.remove(position);
@@ -69,6 +85,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Dumps the tasks in a save-compatible format for storage.
+     * @return A list of strings, each representing a task in a save-compatible format
+     */
     public List<String> dump() {
         ArrayList<String> dump = new ArrayList<>();
         for (Task task : tasks) {

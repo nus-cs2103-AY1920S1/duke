@@ -16,6 +16,12 @@ public abstract class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Adds a given task to the task list, showing the appropriate messages through UI.
+     * @param tasks Task list
+     * @param ui UI for output
+     * @param task Task to be added to the task list
+     */
     public void executeAddTask(TaskList tasks, Ui ui, Task task) {
         tasks.addTask(task);
         ui.showTaskAdded(task);

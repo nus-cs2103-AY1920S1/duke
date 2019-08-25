@@ -27,8 +27,6 @@ public class Duke {
                 String[] info = str.split("/");
                 String[] type = info[0].split(" ");
                 Task task;
-                System.out.println(Arrays.toString(info));
-                System.out.println(Arrays.toString(type));
                 switch (type[0]) {
                 case "todo":
                     System.out.println("todo");

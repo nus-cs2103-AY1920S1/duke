@@ -1,0 +1,22 @@
+Hello I'm Duke
+What can I do for you?
+Got it. I've added this task
+todo
+  [T][✗] read book
+Now you have 1 task in the list
+Got it. I've added this task
+deadline
+  [D][✗] return book (by: June 6th)
+Now you have 2 tasks in the list
+Got it. I've added this task
+event
+  [E][✗] project meeting (at: Aug 6th 2-4pm)
+Now you have 3 tasks in the list
+Got it. I've added this task
+todo
+  [T][✗] join sports club
+Now you have 4 tasks in the list
+Got it. I've added this task
+todo
+  [T][✗] borrow book
+Now you have 5 tasks in the list

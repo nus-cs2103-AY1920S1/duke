@@ -19,6 +19,48 @@ import java.lang.Integer;
  * @version CS2103 AY19/20 Sem 1 iP Week 2
  */
 public class Duke {
+
+    /**
+     * An enumeration of all commands handled by Duke, which currently include:
+     * BYE, DEADLINE, DELETE, DONE, EVENT, LIST, TODO.
+     */
+    private enum Command {
+        BYE {
+            public void run(Duke duke) {
+                duke.exit();
+            }
+        }, DEADLINE {
+            public void run(Duke duke) {
+                duke.storeTask(this.name());
+            }
+        }, DELETE {
+            public void run(Duke duke) {
+                duke.deleteTask(this.name());
+            }
+        }, DONE {
+            public void run(Duke duke) {
+                duke.markTaskAsDone(this.name());
+            }
+        }, EVENT {
+            public void run(Duke duke) {
+                duke.storeTask(this.name());
+            }
+        }, LIST {
+            public void run(Duke duke) {
+                duke.printTasks();
+            }
+        }, TODO {
+            public void run(Duke duke) {
+                duke.storeTask(this.name());
+            }
+        };
+
+        /**
+         * Abstract method to run command, specified by each command
+         */
+        public abstract void run(Duke duke);
+    }
+
     /** a unique logo for Duke */
     private final String logo;
 
@@ -34,13 +76,15 @@ public class Duke {
     /** a list of all tasks entered by the user */
     private ArrayList<Task> tasks;
 
+    /** current command being processed by Duke */
+    private String currentCommand;
+
     /**
      * Creates and initialises an instance of Duke.
-     *
+     * <p>
      * Duke is initialised with a unique logo, a welcome and exit message,
      * active status (listening or not listening), and an empty list of tasks
      * to be added to by the user.
-     *
      */
     public Duke() {
         this.logo = " ____        _        \n"
@@ -69,45 +113,33 @@ public class Duke {
 
     /**
      * Processes a command entered by the user.
-     *
+     * <p>
      * This method runs through a list of accepted commands and handles
      * them accordingly. It prints an error message if it encounters an
      * unrecognised command.
      *
-     * @param command a string containing the command(s) entered by the user
+     * @param inputString a string containing the command(s) entered by the user
      */
-    public void processCommand(String command) {
-        String imperative = command.split(" ")[0].toUpperCase();
+    public void processCommand(String inputString) {
+        // set current command
+        this.currentCommand = inputString;
 
-        switch (imperative) {
-            case "BYE":
-                // user wants to quit, so Duke stops listening to commands and exits
-                this.exit();
-                break;
-            case "LIST":
-                // user wants to print all tasks entered
-                this.printTasks();
-                break;
-            case "DONE":
-                // user wants to mark a task at the specified index as done
-                this.markTaskAsDone(command);
-                break;
-            case "DELETE":
-                // user wants to delete a task at the specified index
-                this.deleteTask(command);
-                break;
-            case "TODO":
-                // Fallthrough
-            case "DEADLINE":
-                // Fallthrough
-            case "EVENT":
-                // valid task storing command found
-                this.storeTask(command);
-                break;
-            default:
-                System.out.println("OOPS!!! I'm sorry, but I don't know"
-                        + " what that means :-(");
-                break;
+        // extract the imperative specified by the user to identify which
+        // command is to be executed by Duke
+        String imperative = inputString.split(" ")[0].toUpperCase();
+
+        // try to create the command enum based on the imperative and run it
+        // if the imperative entered is unrecognised, inform the user
+        try {
+            Command command = Command.valueOf(imperative);
+            command.run(this);
+        } catch (IllegalArgumentException exceptionOne) {
+            System.out.println("You entered a command I do not understand :-(");
+            System.out.println("Let's speak the same language! Type 'help' to "
+                    + "see the list of commands I understand :-)");
+        } catch (NullPointerException exceptionTwo) {
+            // the user has entered an empty line, wait for next command
+            return;
         }
     }
 
@@ -117,15 +149,6 @@ public class Duke {
     private void exit() {
         this.isListening = false;
         System.out.print(exitMessage);
-    }
-
-    /**
-     * Returns the unique logo of Duke.
-     *
-     * @return a string representation of Duke's a logo
-     */
-    public String getLogo() {
-        return this.logo;
     }
 
     /**
@@ -146,9 +169,10 @@ public class Duke {
             System.out.println("No tasks in your list!");
         } else {
             System.out.println("Here are the tasks in your list:");
-            int listSize = this.tasks.size(); // find number of commands entered
+            // loop through each task in list and print it
+            int listSize = this.tasks.size();
             for (int i = 0; i < listSize; i++) {
-                // specified format: "1. task 1"
+                // specified format e.g. "1. task 1"
                 Task currentTask = this.tasks.get(i);
                 System.out.format("%d. %s\n", i + 1, currentTask);
             }
@@ -156,103 +180,110 @@ public class Duke {
     }
 
     /**
-     * Stores commands entered by the user based on the type of tasks specified.
+     * Creates a new task based on given task type and attributes.
      *
-     * Throws an exception if the user enters a task with an empty description
-     * or incorrect format.
-     *
-     * @param command the command entered by the user.
+     * @param taskType the type of task to be created - deadline, event, todo
+     * @param taskAttributes the description and date/time of the task
+     * @return the new task if one can be created, or null otherwise
+     * @throws IndexOutOfBoundsException if incorrect input format encountered
      */
-    private void storeTask(String command) throws ArrayIndexOutOfBoundsException {
+    private Task createNewTask(String taskType, String taskAttributes)
+            throws IndexOutOfBoundsException {
+        if (taskType.equals("TODO")) {
+            return new Todo(taskAttributes);
+        } else {
+            try {
+                // try to obtain the description and date/time information of
+                // the deadline / event. Inform user if the input is in an
+                // incorrect format.
+                String[] splitTaskAttributes = taskAttributes.split("\\/");
+                String taskDescription = splitTaskAttributes[0];
+                String taskDateTime = splitTaskAttributes[1].split(" ", 2)[1];
+
+                if (taskType.equals("DEADLINE")) {
+                    return new Deadline(taskDescription, taskDateTime);
+                } else if (taskType.equals("EVENT")) {
+                    return new Event(taskDescription, taskDateTime);
+                }
+            } catch (IndexOutOfBoundsException exception) {
+                System.out.println("Looks like your format is incorrect. "
+                        + "Please follow <event type> <description> / <day/date/time>");
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Stores tasks such as deadlines, events, and todos in the chatbot's
+     * internal list of tasks.
+     *
+     * @param taskType the type of task to store
+     * @throws IndexOutOfBoundsException if the user enters a task with an
+     *      empty description.
+     */
+    private void storeTask(String taskType) throws IndexOutOfBoundsException {
         try {
-            // segment the input into two parts - imperative and task attribute
-            String[] segmentedCommand = command.split(" ", 2);
+            // try to get the task attributes from the current command
+            // if the task attributes are empty, inform the user
+            String taskAttributes = this.currentCommand.split(" ", 2)[1];
 
-            Task task = null; // initialise task instance
-
-            // create the various kind of tasks based on the specified command
-            switch (segmentedCommand[0].toUpperCase()) {
-                case "TODO":
-                    task = new Todo(segmentedCommand[1]);
-                    break;
-                case "DEADLINE":
-                    // obtain task description and date/time attribute from segmented command
-                    // only valid for deadline and event task types
-                    String deadlineDescription = segmentedCommand[1].split("\\/")[0];
-                    String dueDate = segmentedCommand[1].split("\\/")[1].substring(2);
-                    task = new Deadline(deadlineDescription, dueDate);
-                    break;
-                case "EVENT":
-                    // obtain task description and date/time attribute from segmented command
-                    // only valid for deadline and event task types
-                    String eventDescription = segmentedCommand[1].split("\\/")[0];
-                    String dateTime = segmentedCommand[1].split("\\/")[1].substring(2);
-                    task = new Event(eventDescription, dateTime);
-                    break;
-                default:
-                    System.out.println("OOPS!!! I'm sorry, but I don't know"
-                            + " what that means :-(");
-                    break;
+            // try to create a new task based on obtained attributes
+            // add this new task to the list and inform the user
+            Task newTask = this.createNewTask(taskType, taskAttributes);
+            if (newTask != null) {
+                this.tasks.add(newTask);
+                System.out.println("Got it. I've added this task: \n"
+                        + "  " + newTask);
+                System.out.format("Now you have %d tasks in the list.\n",
+                        this.tasks.size());
             }
-
-            // store tasks in list and inform the user
-            this.tasks.add(task);
-            System.out.println("Got it. I've added this task: \n"
-                    + "  " + task);
-            System.out.format("Now you have %d tasks in the list.\n",
-                    this.tasks.size());
-        } catch (ArrayIndexOutOfBoundsException exception) {
-            // if the user has simply typed the imperative without
-            // specifying any task attributes, or entered an incorrect
-            // input format, let the user know.
-            if (command.equalsIgnoreCase("todo")
-                    || command.equalsIgnoreCase("deadline")
-                    || command.equalsIgnoreCase("event")) {
-                System.out.println("OOPS!!! The description of a " + command
-                        + " cannot be empty.");
-            } else {
-                System.out.println("OOPS!!! Incorrect Format. Please follow - "
-                        + "<event type> <description> / <day/date/time>");
-            }
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("Please enter a description of the " +
+                    taskType + " you want to get done :-)");
         }
     }
 
     /**
-     * Marks a specified task as done and prints a message for the user.
+     * Marks the task specified by the user as 'done' and informs the user.
      *
-     * @param command the command entered by the user.
-     * @throws IndexOutOfBoundsException if the user tries to wokr on an empty
-     * list, does not specify index of list, or provides an index bigger than
-     * the size of the list.
+     * @param commandType the command type i.e. "DONE".
+     * @throws NumberFormatException if the user does not enter an integer
+     *      after the command type 'done'.
+     * @throws IndexOutOfBoundsException if the user provides an index
+     *      bigger than the size of the list.
      */
-    private void markTaskAsDone(String command) throws IndexOutOfBoundsException {
-        try {
-            // obtain the index of the task to be marked as done from the input
-            String taskNumber = command.split(" ")[1];
-            int taskIndex = Integer.parseInt(taskNumber) - 1;
+    private void markTaskAsDone(String commandType)
+            throws NumberFormatException, IndexOutOfBoundsException {
+        if (this.tasks.isEmpty()) {
+            // if the user is trying this command on an empty task list
+            System.out.println("No tasks in your list to complete!");
+        } else if (this.currentCommand.equalsIgnoreCase(commandType)) {
+            // the user has not specified the index of the task to be marked
+            System.out.println("Please specify the index of the task "
+                    + "you wish to mark as completed!");
+        } else {
+            try {
+                // try to get index of the task to be marked from the input
+                String taskNumber = this.currentCommand.split(" ")[1];
+                int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            // retrieve task from list, mark as done, and inform the user
-            Task currentTask = this.tasks.get(taskIndex);
-            if (!currentTask.getIsDone()) {
-                currentTask.setTaskAsDone(true);
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("   " + currentTask);
-            } else {
-                System.out.println("This task has already been done!");
-            }
-        } catch (IndexOutOfBoundsException exception) {
-            if (this.tasks.isEmpty()) {
-                // if the user is trying this command on an empty task list
-                System.out.println("No tasks in your list to complete!");
-            } else if (command.equalsIgnoreCase("done")) {
-                // if the user did not specify the index of the task to be marked
-                System.out.println("Please specify the index of the task "
-                        + "you wish to mark as completed!");
-            } else {
-                // if the user specified an index larger than the size of the
-                // task list
-                System.out.println("OOPS! You've specified an index that is "
-                        + "bigger than the size of your list!");
+                // retrieve task from list, mark as done, and inform the user
+                Task currentTask = this.tasks.get(taskIndex);
+                if (!currentTask.getIsDone()) {
+                    currentTask.setTaskAsDone(true);
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("   " + currentTask);
+                } else {
+                    System.out.println("This task has already been done!");
+                }
+            } catch (NumberFormatException exceptionOne) {
+                // if the user does not specify an integer in the command
+                System.out.println("Please input an integer which is the " +
+                        "index of the task you wish to mark as done.");
+            } catch (IndexOutOfBoundsException exceptionTwo) {
+                // if the user specifies an index that is bigger than list size
+                System.out.println("You've specified a 0 index or an index " +
+                        "that is bigger than the size of your list!");
             }
         }
     }
@@ -260,36 +291,42 @@ public class Duke {
     /**
      * Deletes a specified task from the list and informs the user.
      *
-     * @param command the command entered  by the user.
-     * @throws IndexOutOfBoundsException if the user tries to wokr on an empty
-     *      * list, does not specify index of list, or provides an index bigger than
-     *      * the size of the list.
+     * @param commandType the command type i.e. "DELETE".
+     * @throws NumberFormatException if the user does not enter an integer
+     *      after the command type 'delete'.
+     * @throws IndexOutOfBoundsException if the user provides an index bigger
+     *      than the size of the list.
      */
-    private void deleteTask(String command) throws IndexOutOfBoundsException {
-        try {
-            // obtain the index of the task to be deleted
-            String taskNumber = command.split(" ")[1];
-            int taskIndex = Integer.parseInt(taskNumber) - 1;
+    private void deleteTask(String commandType)
+            throws NumberFormatException, IndexOutOfBoundsException {
+        if (this.tasks.isEmpty()) {
+            // if the user is trying this command on an empty task list
+            System.out.println("No tasks in your list to delete!");
+        } else if (this.currentCommand.equalsIgnoreCase(commandType)) {
+            // the user has not specified the index of the task to be marked
+            System.out.println("Please specify the index of the task "
+                    + "you wish to delete!");
+        } else {
+            try {
+                // obtain the index of the task to be deleted
+                String taskNumber = this.currentCommand.split(" ")[1];
+                int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            // retrieve task to be removed, remove it, and inform the user
-            Task taskToRemove = this.tasks.get(taskIndex);
-            this.tasks.remove(taskIndex);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("   " + taskToRemove);
-            System.out.format("Now you have %d tasks in the list\n", this.tasks.size());
-        } catch (IndexOutOfBoundsException exception) {
-            // if the user tries to delete from an empty list
-            if (this.tasks.isEmpty()) {
-                System.out.println("No tasks in your list to delete!");
-            } else if (command.equalsIgnoreCase("delete")) {
-                // if the user does not specify the index of the item to be deleted
-                System.out.println("Please specify the index of the task "
-                        + "you wish to delete!");
-            } else {
-                // if the user specifies an index that is bigger than the size
-                // of the task list
-                System.out.println("OOPS! You've specified an index that is "
-                        + "bigger than the size of your list!");
+                // retrieve task to be removed, remove it, and inform the user
+                Task taskToRemove = this.tasks.get(taskIndex);
+                this.tasks.remove(taskIndex);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("   " + taskToRemove);
+                System.out.format("Now you have %d tasks in the list\n",
+                        this.tasks.size());
+            } catch (NumberFormatException exceptionOne) {
+                // if the user does not specify an integer in the command
+                System.out.println("Please input an integer which is the " +
+                        "index of the task you wish to mark as done.");
+            } catch (IndexOutOfBoundsException exceptionTwo) {
+                // if the user specifies an index that is bigger than list size
+                System.out.println("You've specified a 0 index or index "
+                        + "that is bigger than the size of your list!");
             }
         }
     }

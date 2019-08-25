@@ -2,7 +2,6 @@
 /.idea/
 /out/
 /*.iml
-/data/
 
 # Gradle build files
 /.gradle/
@@ -13,3 +12,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Local data files
+/data/duke.txt

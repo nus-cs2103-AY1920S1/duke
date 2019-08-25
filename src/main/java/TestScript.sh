@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Changing to correct directory..."
+cd /Users/larrylaw/Learn/Uni/Y2S1/CS2103/duke/src/main/java;
+
 echo "Compiling all java files in this directory..."
 if ! javac *.java;
 then

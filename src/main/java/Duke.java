@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.lang.IllegalArgumentException;;
 
 public class Duke {
-    List<Task> l;
+    List<Task> toDoList;
     String doneMessage = "Nice! I've marked this task as done:";
     String addedMessage = "Got it. I've added this task:";
     String deleteMessage = "Noted. I've removed this task: ";
@@ -17,49 +17,49 @@ public class Duke {
 
     public void list() {
         System.out.println("____________________________________________________________");
-        for (int i = 0; i < l.size(); i++) {
-            Task t = l.get(i);
+        for (int i = 0; i < toDoList.size(); i++) {
+            Task t = toDoList.get(i);
             System.out.println(String.format("%d.%s", i + 1, t));
         }
         System.out.println("____________________________________________________________");
     }
 
     public void done(int i) {
-        l.get(i - 1).setDone(true);
+        toDoList.get(i - 1).setDone(true);
         System.out.println("____________________________________________________________");
         System.out.println(doneMessage);
-        System.out.println(l.get(i - 1));
+        System.out.println(toDoList.get(i - 1));
         System.out.println("____________________________________________________________");
     }
 
     public void delete(int i) {
         System.out.println("____________________________________________________________");
         System.out.println(deleteMessage);
-        System.out.println(l.get(i - 1));
-        System.out.println(String.format("Now you have %d tasks in the list.", l.size()));
+        System.out.println(toDoList.get(i - 1));
+        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
         System.out.println("____________________________________________________________");
     }
 
     public void addToDo(String task) {
-        l.add(new ToDo(task));
+        toDoList.add(new ToDo(task));
         this.printAddedMessage();
     }
 
     public void addDeadline(String task, String date) {
-        l.add(new Deadline(task, date));
+        toDoList.add(new Deadline(task, date));
         this.printAddedMessage();
     }
 
     public void addEvent(String task, String date) {
-        l.add(new Event(task, date));
+        toDoList.add(new Event(task, date));
         this.printAddedMessage();
     }
 
     public void printAddedMessage() {
         System.out.println("____________________________________________________________");
         System.out.println(addedMessage);
-        System.out.println(l.get(l.size() - 1));
-        System.out.println(String.format("Now you have %d tasks in the list.", l.size()));
+        System.out.println(toDoList.get(toDoList.size() - 1));
+        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
         System.out.println("____________________________________________________________");
     }
 
@@ -67,7 +67,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
         String exitMessage = "Bye. Hope to see you again soon!";
-        l = new ArrayList<>();
+        toDoList = new ArrayList<>();
         while (!exit) {
             try {
                 String command = sc.next();

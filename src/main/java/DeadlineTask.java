@@ -6,7 +6,12 @@ public class DeadlineTask extends Task {
 
     protected Date by;
 
-    public DeadlineTask(String description, String by) throws DukeInvalidDateException {
+    /**
+     * Creates a DeadlineTask with a given description and deadline.
+     * @param description Task description
+     * @param by Task deadline date in format of "dd/mm/yyyy hhmm" e.g. "31/12/2019 2359"
+     */
+    DeadlineTask(String description, String by) throws DukeInvalidDateException {
         super(description);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {

@@ -3,6 +3,10 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates a TaskList which stores Tasks. A TaskList with n items indexes tasks from 1 to n.
+     * @param tasks An ArrayList of tasks which will be used to populate the task list.
+     */
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

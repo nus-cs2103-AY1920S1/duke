@@ -3,6 +3,10 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     private int deleteIdx;
 
+    /**
+     * Creates a DeleteCommand with a given task index to delete.
+     * @param idx Index of task to be deleted
+     */
     DeleteCommand(int idx) {
         this.deleteIdx = idx;
     }

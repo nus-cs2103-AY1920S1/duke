@@ -1,6 +1,6 @@
 public class DukeEmptyDescException extends DukeException {
     private String cmd;
-    public DukeEmptyDescException (String cmd) {
+    DukeEmptyDescException (String cmd) {
         this.cmd = cmd;
     }
 

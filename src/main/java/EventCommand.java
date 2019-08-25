@@ -4,6 +4,11 @@ public class EventCommand extends Command {
     private String description;
     private String at;
 
+    /**
+     * Creates an EventCommand with a given description and event date.
+     * @param description Task description
+     * @param at Event date in format of "dd/mm/yyyy hhmm" e.g. "31/12/2019 2359"
+     */
     EventCommand(String description, String at) {
         this.description = description;
         this.at = at;

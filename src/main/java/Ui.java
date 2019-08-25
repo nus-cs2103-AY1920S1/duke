@@ -5,6 +5,9 @@ public class Ui {
     private Scanner sc;
     private final String line = "\t____________________________________________________________";
 
+    /**
+     * Creates a Ui object that handles user interaction in the console.
+     */
     Ui() {
         sc = new Scanner(System.in);
     }

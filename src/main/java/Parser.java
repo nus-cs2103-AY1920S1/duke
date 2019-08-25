@@ -1,4 +1,10 @@
 public class Parser {
+
+    /**
+     * A method that parses user input lines and converts them into executable Command objects.
+     * @param s A String that contains the user input line
+     * @return A Command object representing the command as parsed
+     */
     static Command parse(String s) throws DukeException {
         String[] arg = s.split(" ", 2);
         switch (arg[0]) {

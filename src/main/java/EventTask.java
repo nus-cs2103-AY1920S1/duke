@@ -6,7 +6,12 @@ public class EventTask extends Task {
 
     protected Date at;
 
-    public EventTask(String description, String at) throws DukeInvalidDateException {
+    /**
+     * Creates an EventTask with a given description and event date.
+     * @param description Task description
+     * @param at Event date in format of "dd/mm/yyyy hhmm" e.g. "31/12/2019 2359"
+     */
+    EventTask(String description, String at) throws DukeInvalidDateException {
         super(description);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {

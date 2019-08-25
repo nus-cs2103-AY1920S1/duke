@@ -3,6 +3,10 @@ import java.io.IOException;
 public class DoneCommand extends Command {
     private int doneIdx;
 
+    /**
+     * Creates a DoneCommand with a given task index to be marked as done.
+     * @param idx Index of task to be marked as done
+     */
     DoneCommand(int idx) {
         this.doneIdx = idx;
     }

@@ -6,6 +6,12 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Creates an instance of Duke, a task manager.
+     * @param filePath location of the text file to read/write tasks to the hard disk.
+     *                 If the file exists, it will load tasks from it and write to it whenever users update the tasks.
+     *                 If the file does not exist, it will create the file to write to.
+     */
     public Duke(String filePath) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -16,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initiates the program loop where users can key in commands to interact with Duke.
+     */
     public void start() throws IOException {
         ui.showWelcome();
         String input;

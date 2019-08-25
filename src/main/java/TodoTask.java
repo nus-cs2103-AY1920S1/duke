@@ -1,5 +1,10 @@
 public class TodoTask extends Task {
-    public TodoTask(String description) {
+
+    /**
+     * Creates a TodoTask with a given description.
+     * @param description Task description
+     */
+    TodoTask(String description) {
         super(description);
     }
 

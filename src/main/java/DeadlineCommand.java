@@ -4,6 +4,11 @@ public class DeadlineCommand extends Command {
     private String description;
     private String by;
 
+    /**
+     * Creates a DeadlineCommand with a given description and deadline.
+     * @param description Task description
+     * @param by Task deadline date in format of "dd/mm/yyyy hhmm" e.g. "31/12/2019 2359"
+     */
     DeadlineCommand(String description, String by) {
         this.description = description;
         this.by = by;

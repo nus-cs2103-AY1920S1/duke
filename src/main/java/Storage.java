@@ -9,6 +9,11 @@ public class Storage {
     private String filePath;
     private Scanner fileSc;
 
+    /**
+     * Creates a Storage object which handles file I/O for reading/saving tasks.
+     * @param filePath The location of the text file to be used.
+     *                 If the file does not exist, it will create the file.
+     */
     Storage(String filePath) throws IOException {
         this.filePath = filePath;
         File file = new File(filePath);

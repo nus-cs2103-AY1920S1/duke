@@ -5,7 +5,11 @@ public abstract class Task {
     protected boolean isDone;
     protected SimpleDateFormat dateFormat;
 
-    public Task(String description) {
+    /**
+     * Task constructor used by classes extending Task. Cannot be called directly as Task is abstract.
+     * @param description Task description
+     */
+    Task(String description) {
         this.description = description;
         this.isDone = false;
         this.dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");

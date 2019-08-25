@@ -9,6 +9,11 @@ public class Duke {
 
     private ArrayList<Task> task = new ArrayList<>();
     private int counter = 0;
+    private Storage storage;
+
+    public Duke() {
+        storage = new Storage("data/duke.txt");
+    }
 
     /**
      * Main method.
@@ -22,7 +27,8 @@ public class Duke {
 
     private void run() {
         try {
-            readData();
+            task = storage.readData();
+            counter = task.size();
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
@@ -108,79 +114,13 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
 
         try {
-            writeData();
+            storage.writeData(task);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
 
         // Close the scanner
         sc.close();
-    }
-
-    private void readData() throws FileNotFoundException {
-        File f = new File("data/duke.txt");
-        Scanner sc = new Scanner(f);
-        while (sc.hasNext()) {
-            String taskLine = sc.nextLine();
-            String[] taskLineSplit = taskLine.split(":");
-            switch (taskLineSplit[0]) {
-            case "T":
-                task.add(new Todo(taskLineSplit[2], Integer.parseInt(taskLineSplit[1])));
-                counter++;
-                break;
-            case "E":
-                task.add(new Event(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
-                counter++;
-                break;
-            case "D":
-                task.add(new Deadline(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
-                counter++;
-                break;
-            }
-        }
-
-        // Close the scanner
-        sc.close();
-    }
-
-    private void writeData() throws IOException {
-        FileWriter fw = new FileWriter("data/duke.txt");
-        String stringToWrite = "";
-        for (int i = 0; i < counter; i++) {
-            Task taskToWrite = task.get(i);
-            if (taskToWrite instanceof Todo) {
-                stringToWrite += "T:";
-                stringToWrite += writeStatus(taskToWrite);
-                stringToWrite += taskToWrite.getDescription();
-            } else if (taskToWrite instanceof Event) {
-                stringToWrite += "E:";
-                stringToWrite += writeStatus(taskToWrite);
-                stringToWrite += taskToWrite.getDescription() + ":";
-                Event e = (Event) taskToWrite;
-                stringToWrite += e.getTime();
-            } else if (taskToWrite instanceof Deadline) {
-                stringToWrite += "D:";
-                stringToWrite += writeStatus(taskToWrite);
-                stringToWrite += taskToWrite.getDescription() + ":";
-                Deadline d = (Deadline) taskToWrite;
-                stringToWrite += d.getTime();
-            }
-
-            if (i != counter - 1) {
-                stringToWrite += System.lineSeparator();
-            }
-        }
-        fw.write(stringToWrite);
-        fw.close();
-    }
-
-    private String writeStatus(Task t) {
-        String statusIcon = t.getStatusIcon();
-        if (statusIcon.equals("O")) {
-            return "1:";
-        } else {
-            return "0:";
-        }
     }
 
     private int printAddedTask(ArrayList<Task> task, int counter) {

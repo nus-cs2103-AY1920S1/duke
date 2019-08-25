@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A Class that represents a Task in which the user wishes to complete by a certain deadline.
+ */
 public class DeadlineTask extends Task{
 
     public String deadline;
@@ -7,6 +10,7 @@ public class DeadlineTask extends Task{
     /**
      * Constructs a Deadline Task which sets the default of isCompleted value to false.
      * @param todo The name of the deadline task.
+     * @param deadline The time of the deadline task.
      */
     public DeadlineTask(String todo, String deadline) {
         super(todo);
@@ -17,6 +21,7 @@ public class DeadlineTask extends Task{
      * Constructs a Deadline Task based on the name and the isComplated value given.
      * @param todo The name of the task.
      * @param isCompleted Whether the task is Completed or not.
+     * @param deadline The time of the task.
      */
     public DeadlineTask(String todo, boolean isCompleted, String deadline) {
         super(todo, isCompleted);

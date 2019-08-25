@@ -3,6 +3,9 @@ package duke.task;
 import java.util.ArrayList;
 import duke.exception.*;
 
+/**
+ * A Class that represents a list of all completed and uncompleted Tasks.
+ */
 public class TaskList {
 
     /**
@@ -69,7 +72,7 @@ public class TaskList {
     /**
      * Completes a task based on the index given.
      * @param index The index of the task.
-     * @throws InvalidTaskIndexException If the index < 0 or the index exceeds the number of tasks.
+     * @throws InvalidTaskIndexException If the index is lees than 0 or the index exceeds the number of tasks.
      */
     public void completeTask(int index) throws InvalidTaskIndexException {
         if (index < 0 || index >= tasks.size()) {
@@ -84,7 +87,7 @@ public class TaskList {
      * Deletes a task based on the index given, returning the Task that was deleted.
      * @param index The index of the task.
      * @return The deleted task.
-     * @throws InvalidTaskIndexException If the index < 0 or the index exceeds the number of tasks.
+     * @throws InvalidTaskIndexException If the index is less than 0 or the index exceeds the number of tasks.
      */
     public Task deleteTask(int index) throws InvalidTaskIndexException {
         if (index < 0 || index >= tasks.size()) {

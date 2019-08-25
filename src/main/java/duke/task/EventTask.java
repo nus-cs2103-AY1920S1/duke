@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A Class that represents a Task in which the user wishes to complete at a certain time period.
+ */
 public class EventTask extends Task {
 
     public String time;
@@ -7,6 +10,7 @@ public class EventTask extends Task {
     /**
      * Constructs am Event Task which sets the default of isCompleted value to false.
      * @param todo The name of the event task.
+     * @param time The time of the event task.
      */
     public EventTask(String todo, String time) {
         super(todo);
@@ -17,6 +21,7 @@ public class EventTask extends Task {
      * Constructs an Event Task based on the name and the isComplated value given.
      * @param todo The name of the task.
      * @param isCompleted Whether the task is Completed or not.
+     * @param time The time of the task.
      */
     public EventTask(String todo, boolean isCompleted, String time) {
         super(todo, isCompleted);

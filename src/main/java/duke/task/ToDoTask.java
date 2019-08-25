@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A Class that represents a Task in which the user wishes to do.
+ */
 public class ToDoTask extends Task {
 
     /**

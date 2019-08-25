@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +13,11 @@ public class Duke {
     private void run() {
         boolean canEnd;
 
+        try {
+            TaskFileReader reader = new TaskFileReader();
+            reader.loadTaskContents("data/duke.txt", myList);
+        } catch (FileNotFoundException e) {
+        }
         Scanner myScanner = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         canEnd = false;
@@ -21,25 +28,31 @@ public class Duke {
                 continue;
             }
             switch (input) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    canEnd = true;
-                    break;
-                case "list":
-                    System.out.println("Here are the tasks in your list");
-                    for (int i = 0; i < myList.size(); i = i + 1) {
-                        int number = i + 1;
-                        System.out.println(number + "." + myList.get(i));
-                    }
-                    break;
-                default:
-                    try {
-                        processCommandType(input);
-                    } catch (DukeException e) {
-                        System.out.println("\u2639 OOPS!!! " + e.getMessage());
-                    }
-                    break;
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                canEnd = true;
+                break;
+            case "list":
+                System.out.println("Here are the tasks in your list");
+                for (int i = 0; i < myList.size(); i = i + 1) {
+                    int number = i + 1;
+                    System.out.println(number + "." + myList.get(i));
+                }
+                break;
+            default:
+                try {
+                    processCommandType(input);
+                } catch (DukeException e) {
+                    System.out.println("\u2639 OOPS!!! " + e.getMessage());
+                }
+                break;
             }
+        }
+        TaskFileWriter writer = new TaskFileWriter();
+        try {
+            writer.writeToFile("data/duke.txt", myList);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

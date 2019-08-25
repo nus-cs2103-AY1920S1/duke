@@ -21,24 +21,24 @@ public class Duke {
                 continue;
             }
             switch (input) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    canEnd = true;
-                    break;
-                case "list":
-                    System.out.println("Here are the tasks in your list");
-                    for (int i = 0; i < myList.size(); i = i + 1) {
-                        int number = i + 1;
-                        System.out.println(number + "." + myList.get(i));
-                    }
-                    break;
-                default:
-                    try {
-                        processCommandType(input);
-                    } catch (DukeException e) {
-                        System.out.println("\u2639 OOPS!!! " + e.getMessage());
-                    }
-                    break;
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                canEnd = true;
+                break;
+            case "list":
+                System.out.println("Here are the tasks in your list");
+                for (int i = 0; i < myList.size(); i = i + 1) {
+                    int number = i + 1;
+                    System.out.println(number + "." + myList.get(i));
+                }
+                break;
+            default:
+                try {
+                    processCommandType(input);
+                } catch (DukeException e) {
+                    System.out.println("\u2639 OOPS!!! " + e.getMessage());
+                }
+                break;
             }
         }
     }

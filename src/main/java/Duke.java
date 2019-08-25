@@ -1,9 +1,13 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
     private static boolean isBye = false;
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * prints details for all available task when the list command is invoked.
+     */
     public static void printList(){
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++){
@@ -13,10 +17,17 @@ public class Duke {
         }
     }
 
+    /**
+     * marks a task as done and prints message that a task is marked as done.
+     *
+     * @param taskIndex position of a task in the tasks Arraylist
+     *
+     */
+
     public static void done(int taskIndex){
         try{
             Task t = tasks.get(taskIndex);
-            t.completed();
+            t.setCompleted();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("   [✓] " + t.getTask());
         } catch (IndexOutOfBoundsException ex){
@@ -28,6 +39,13 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * deletes a task from tasks Arraylist and prints message that a task is deleted.
+     *
+     * @param taskIndex position of a task in the tasks Arraylist
+     *
+     */
 
     public static void delete(int taskIndex){
         try{
@@ -50,6 +68,13 @@ public class Duke {
         }
     }
 
+    /**
+     * creates a deadline object and prints a message related to its creation.
+     *
+     * @param input information in the form of: return book /by 2/12/2019 1800 (an example)
+     *
+     */
+
     public static void deadline(String input){
         String[] words = input.split(" /by ");
         Deadline dl = new Deadline(words[0], words[1]);
@@ -57,6 +82,12 @@ public class Duke {
         dl.printAddedDeadline(tasks.size());
     }
 
+    /**
+     * creates an event object and prints a message related to its creation.
+     *
+     * @param input information in the form of: proj-meeting /at 13/10/2019 6-8pm (an example)
+     *
+     */
     public static void event(String input){
         String[] words = input.split(" /at ");
         Events event = new Events(words[0], words[1]);
@@ -64,12 +95,25 @@ public class Duke {
         event.printAddedEvent(tasks.size());
     }
 
+    /**
+     * creates a todo object and prints a message related to its creation.
+     *
+     * @param input information in the form of: proj-meeting (an example)
+     *
+     */
+
     public static void todo(String input){
         Todo td = new Todo(input);
         tasks.add(td);
         td.printAddedTodo(tasks.size());
     }
 
+    /**
+     * responds a command
+     *
+     * @param input a command for Duke
+     *
+     */
     public static void checkCommand(String input) throws NoValidCommandException{
         String[] words = input.split(" ", 2);
         String command = words[0];
@@ -121,6 +165,11 @@ public class Duke {
 
     }
 
+    /**
+     * runs the commandline interface for an user to interact with Duke.
+     *
+     */
+
     public static void runInterface(){
         Scanner scan = new Scanner(System.in);
         while(!isBye){
@@ -134,12 +183,13 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");

@@ -11,13 +11,18 @@ public class DoneCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        if (taskList.getTaskByIndex(this.index).getIsDone()){
-            throw new IllegalArgumentException("Task has already been done");
+        try {
+            taskList.getTaskByIndex(this.index);
+        } catch (IndexOutOfBoundsException error) {
+            throw new DukeException("Oh no! Task not found!", DukeExceptionType.TASKNOTFOUND);
         }
-        taskList.setDoneInList(index);
+        if (taskList.getTaskByIndex(this.index).getIsDone()){
+            throw new DukeException("Task has already been done!", DukeExceptionType.TASKALREADYDONE);
+        }
+        taskList.setDoneInList(this.index);
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Nice! I've marked this task as done:"));
-        System.out.println(Formatter.indentLine("  " + taskList.getTaskByIndex(index)));
+        System.out.println(Formatter.indentLine("  " + taskList.getTaskByIndex(this.index)));
         Formatter.printLine();
     }
 }

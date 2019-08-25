@@ -2,6 +2,7 @@ public class DoneCommand extends Command {
     public DoneCommand(int n) {
         super.n = n;
     }
+
     public void execute(TaskList t, Ui ui, Storage storage) throws DukeException {
         try {
             Task doneTask = t.list.get(n).markAsDone();

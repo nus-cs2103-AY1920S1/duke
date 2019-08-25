@@ -11,7 +11,9 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
-    protected String getDoneStatus() { return (isDone? "1" : "0"); }
+    protected String getDoneStatus() {
+        return (isDone ? "1" : "0");
+    }
 
     public Task markAsDone() {
         isDone = true;

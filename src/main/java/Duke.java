@@ -1,7 +1,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.IllegalArgumentException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -69,9 +71,9 @@ public class Duke {
     /**
      * Appends deadline to To Do List. (one based numbering)
      * @param task Task description
-     * @param date Deadline
+     * @param date Deadline in date format
      */
-    public void addDeadline(String task, String date) {
+    public void addDeadline(String task, Date date) {
         toDoList.add(new Deadline(task, date));
         this.printAddedMessage();
     }
@@ -81,7 +83,7 @@ public class Duke {
      * @param task Task description
      * @param date Date
      */
-    public void addEvent(String task, String date) {
+    public void addEvent(String task, Date date) {
         toDoList.add(new Event(task, date));
         this.printAddedMessage();
     }
@@ -118,6 +120,9 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
+        String[] arr;
+        String task, date;
+        SimpleDateFormat readFormat;
         boolean exit = false;
         toDoList = new ArrayList<>();
         while (!exit) {
@@ -125,7 +130,7 @@ public class Duke {
                 String command = sc.next();
                 switch (command) {
                 case "todo":
-                    String task = sc.nextLine().trim();
+                    task = sc.nextLine().trim();
                     if (!task.isEmpty()) {
                         this.addToDo(sc.nextLine().trim());
                     } else {
@@ -133,16 +138,18 @@ public class Duke {
                     }
                     break;
                 case "deadline":
-                    String[] arrDeadLine = sc.nextLine().split("/by");
-                    String taskDeadLine = arrDeadLine[0].trim();
-                    String dateDeadLine = arrDeadLine[1].trim();
-                    this.addDeadline(taskDeadLine, dateDeadLine);
+                    arr = sc.nextLine().split("/by");
+                    task = arr[0].trim();
+                    date = arr[1].trim();
+                    readFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                    this.addDeadline(task, readFormat.parse(date));
                     break;
                 case "event":
-                    String[] arrEvent = sc.nextLine().split("/at");
-                    String taskEvent = arrEvent[0].trim();
-                    String dateEvent = arrEvent[1].trim();
-                    this.addEvent(taskEvent, dateEvent);
+                    arr = sc.nextLine().split("/at");
+                    task = arr[0].trim();
+                    date = arr[1].trim();
+                    readFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                    this.addEvent(task, readFormat.parse(date));
                     break;
                 case "list":
                     System.out.println(this.list());

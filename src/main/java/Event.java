@@ -1,7 +1,9 @@
-class Event extends Task {
-    String date;
+import java.util.Date;
 
-    Event(String task, String date) {
+class Event extends Task {
+    Date date;
+
+    Event(String task, Date date) {
         super(task);
         this.date = date;
     }
@@ -9,6 +11,6 @@ class Event extends Task {
     @Override
     public String toString() {
         String iconForDone = done ? "v" : "x";
-        return String.format("[E][%s] %s (at: %s)", iconForDone, this.task, this.date);
+        return String.format("[E][%s] %s (at: %s)", iconForDone, this.task, this.date.toString());
     }
 }

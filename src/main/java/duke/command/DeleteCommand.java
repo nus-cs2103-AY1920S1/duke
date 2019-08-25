@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.logic.Storage;
+import duke.logic.TaskList;
+import duke.task.Task;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

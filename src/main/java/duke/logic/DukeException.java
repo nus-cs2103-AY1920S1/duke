@@ -1,3 +1,5 @@
+package duke.logic;
+
 public class DukeException extends Exception {
 
 	private String mesg;

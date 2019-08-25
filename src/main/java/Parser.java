@@ -86,7 +86,7 @@ public class Parser  {
 
                             }
                         }
-                        //System.out.println(deadlineTaskDateAndTimeString);
+                        
                         deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
                         //System.out.println(deadlineTaskDateAndTimeString);
                         storeTaskList.addDeadlineTask(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
@@ -211,9 +211,9 @@ public class Parser  {
             int hrs = (convertedTime / 100) % 12;
             int mins = convertedTime % 100;
             if (mins == 0) {
-                time = String.valueOf(hrs) + "pm";
+                time = hrs + "pm";
             } else {
-                time = String.valueOf(hrs) + String.valueOf(mins) + "pm";
+                time = String.valueOf(hrs) + mins + "pm";
             }
 
         } else if (convertedTime < 1300 && convertedTime >= 1200 ) {
@@ -221,10 +221,10 @@ public class Parser  {
             if (mins == 0) {
                 time = "12pm";
             } else {
-                time = "12" + String.valueOf(mins) + "pm";
+                time = "12" + mins + "pm";
             }
 
-            time = "12" + String.valueOf(mins) + "pm";
+            time = "12" + mins + "pm";
         } else {
             throw new DukeException("invalid time entered");
         }
@@ -257,13 +257,13 @@ public class Parser  {
     private static String getOrdinal(String num) {
         int temp = Integer.valueOf(num);
         if (temp == 1 || temp == 21 || temp == 31) {
-            return String.valueOf(temp) + "st";
+            return temp + "st";
         } else if (temp == 2 || temp == 22 ) {
-            return String.valueOf(temp) + "nd";
+            return temp + "nd";
         } else if (temp == 3 || temp == 23) {
-            return String.valueOf(temp) + "rd";
+            return temp + "rd";
         }else {
-            return String.valueOf(temp) + "th";
+            return temp + "th";
         }
     }
 

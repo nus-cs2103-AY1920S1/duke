@@ -1,6 +1,6 @@
 public class ToDoStub extends ToDo {
 
-    public ToDoStub() { ;
+    public ToDoStub() {
         super.description = "read book";
         super.isDone = false;
     }

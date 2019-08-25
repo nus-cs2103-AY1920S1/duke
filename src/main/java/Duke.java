@@ -10,6 +10,9 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         loop: while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
+
+
+
             switch (input) {
             case "list":
                 StringBuilder formattedList = new StringBuilder();
@@ -30,9 +33,24 @@ public class Duke {
                 break loop;
                 // bye
             default:
-                Printer.printString("added: " + input);
-                list.add(new DoableTask(input));
-                // add to list
+                if(input.matches("^done [0-9]+$")) {
+                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    // get index
+                    if(index < 0 || index > list.size()) {
+                        Printer.printString("That is not a valid task index");
+                        // index out of bounds
+                    }else {
+                        list.get(index).markAsDone();
+                        Printer.printString(
+                                "Nice! I've marked this task as done:\n  " + list.get(index)
+                                        .toString());
+                        // mark done
+                    }
+                }else {
+                    Printer.printString("added: " + input);
+                    list.add(new DoableTask(input));
+                    // add to list
+                }
             }
         }
     }

@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class InvalidDateInputException extends DukeException {
 
     private String message;

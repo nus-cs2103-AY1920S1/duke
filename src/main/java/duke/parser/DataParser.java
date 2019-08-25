@@ -1,4 +1,9 @@
+package duke.parser;
+
+import duke.command.*;
+
 import java.util.Scanner;
+import duke.exception.*;
 
 public class DataParser {
 

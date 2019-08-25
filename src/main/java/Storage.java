@@ -65,7 +65,7 @@ public class Storage {
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @throws DukeException if save file fails
      */
-    public void updateSaveFile(LinkedList<Task> tasks) throws DukeException{
+    public void updateSaveFile(LinkedList<Task> tasks) throws DukeException {
         try {
             File saveFile = new File(filePath);
             FileWriter fw = new FileWriter(saveFile, false);

@@ -1,4 +1,4 @@
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     int id;
 
     /**

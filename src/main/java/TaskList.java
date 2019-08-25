@@ -26,7 +26,7 @@ public class TaskList {
      * @return task
      */
     public Task getTask(int id) {
-        return this.tasks.get(id-1);
+        return this.tasks.get(id - 1);
     }
 
     /**
@@ -46,7 +46,7 @@ public class TaskList {
      */
     public void deleteTask(int i) throws DukeException {
         try {
-            this.tasks.remove(i-1);
+            this.tasks.remove(i - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! No such task exist!");
         }
@@ -60,7 +60,7 @@ public class TaskList {
      */
     public void completeTask(int i) throws DukeException {
         try {
-            this.tasks.get(i-1).setDone();
+            this.tasks.get(i - 1).setDone();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! No such task exist!");
         }

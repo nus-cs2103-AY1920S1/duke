@@ -1,10 +1,26 @@
 public class Duke {
+
+    private UI ui;
+    private Storage storage;
+    private TaskList tasks;
+
+    public Duke(String filePath) {
+        ui = new UI();
+        storage = new Storage(filePath);
+        //load previous task list. If not found, create a new one
+        try {
+            tasks = new TaskList(storage.load());
+            ui.showLoadingSuccessful();
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+    }
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        new Duke("data/tasks.txt").run();
     }
 }

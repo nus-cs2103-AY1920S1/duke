@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         //start Duke program
         Scanner sc = new Scanner(System.in);
         printLine();
@@ -12,11 +12,10 @@ public class Main {
         printLine();
 
         //directory for task list
-        String dir = "./data/";
-        String fileName = "duke.txt";
+        String filePath = "./data/duke.txt";
 
         //load previous task list
-        LoadFile prevTaskList = new LoadFile(dir, fileName);
+        LoadFile prevTaskList = new LoadFile(filePath);
         ArrayList<Task> taskArr = prevTaskList.loadTaskFromFile();
 
         //take in inputs
@@ -29,7 +28,7 @@ public class Main {
                 if (inputArr[0].equals("bye")) {
                     System.out.println("\t  Bye. Hope to see you again soon!");
 
-                    WriteFile wf = new WriteFile(dir, fileName);
+                    WriteFile wf = new WriteFile(filePath);
                     wf.writeTaskToFile(taskArr);
                     break;
                 } else if (inputArr[0].equals("list")) {

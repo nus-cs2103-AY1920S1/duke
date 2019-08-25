@@ -6,17 +6,15 @@ import java.io.IOException;
 
 public class WriteFile {
 
-    private String dir;
-    private String fileName;
+    private String filePath;
 
-    public WriteFile(String dir, String fileName) {
-        this.dir = dir;
-        this.fileName = fileName;
+    public WriteFile(String filePath) {
+        this.filePath = filePath;
     }
 
     //get methods
     public String getPath() {
-        return this.dir + this.fileName;
+        return this.filePath;
     }
 
     //set methods

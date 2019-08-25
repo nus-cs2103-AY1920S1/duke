@@ -6,30 +6,30 @@ import java.io.File;
 
 public class LoadFile {
 
-    private String dir;
-    private String fileName;
+    private String filePath;
 
-    public LoadFile(String dir, String fileName) {
-        this.dir = dir;
-        this.fileName = fileName;
+    public LoadFile(String filePath) {
+        this.filePath = filePath;
     }
 
-    public String getPath() {
-        return this.dir + this.fileName;
+    public String getFilePath() {
+        return this.filePath;
     }
 
-    public ArrayList<Task> loadTaskFromFile() {
+    public ArrayList<Task> loadTaskFromFile() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();
         try {
-            File savedFile = new File(this.getPath());
+            File savedFile = new File(this.getFilePath());
             Scanner sc = new Scanner(new FileReader(savedFile));
 
             taskArr = changeTextToTask(taskArr, sc);
             return taskArr;
         } catch (IOException err) {
-            System.err.println(err);
+            throw new DukeException("Unable to load file.");
+        } finally {
+            return taskArr;
         }
-        return taskArr;
+
     }
 
     private ArrayList<Task> changeTextToTask(ArrayList<Task> taskArr, Scanner sc) throws IOException {

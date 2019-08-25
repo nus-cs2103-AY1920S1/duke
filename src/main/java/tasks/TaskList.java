@@ -25,6 +25,11 @@ public class TaskList {
         list.add(newTask);
     }
 
+    /**
+     * delete a task from the list.
+     * @param number task number
+     * @return return the deleted task
+     */
     public Task deleteTask(int number) {
         Task deletedTask = list.get(number - 1);
         list.remove(deletedTask);

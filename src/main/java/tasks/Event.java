@@ -9,6 +9,12 @@ public class Event extends Task {
     protected String day;
     protected String time;
 
+    /**
+     * create an event task.
+     *
+     * @param description description of the task
+     * @param at          time information
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;

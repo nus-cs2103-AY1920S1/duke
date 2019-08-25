@@ -9,6 +9,11 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * read the user input.
+     *
+     * @return return string
+     */
     public String readCommand() {
         if (sc.hasNextLine()) {
             return sc.nextLine();
@@ -17,6 +22,9 @@ public class Ui {
         }
     }
 
+    /**
+     * print out greeting information.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,6 +37,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * show errors encountered during execution.
+     *
+     * @param message error message
+     */
     public void showError(String message) {
         print(message);
     }
@@ -41,6 +54,11 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * print out information in certain format.
+     *
+     * @param str message to be printed
+     */
     public void print(String str) {
         String[] lines = str.split("\n");
         StringBuilder sb = new StringBuilder();

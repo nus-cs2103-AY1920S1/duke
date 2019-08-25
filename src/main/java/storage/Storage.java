@@ -1,7 +1,10 @@
 package storage;
 
-import tasks.*;
 import exception.DukeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +19,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * load the history of Duke.
+     *
+     * @return return an arraylist of tasks
+     * @throws DukeException when loading encounters exception
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -39,7 +48,9 @@ public class Storage {
                 default:
                     newTask = new Task("");
                 }
-                if (completed == 1) newTask.changeStatus();
+                if (completed == 1) {
+                    newTask.changeStatus();
+                }
                 list.add(newTask);
             }
         } catch (IOException e) {
@@ -49,7 +60,12 @@ public class Storage {
         return list;
     }
 
-    public void save(ArrayList<Task> list) {
+    /**
+     * save the tasks into a .txt file.
+     *
+     * @param list a list of tasks
+     */
+    public void save(ArrayList<Task> list) throws DukeException {
         try {
             File myFile = new File(filePath);
             if (!myFile.getParentFile().exists()) {
@@ -67,6 +83,7 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
+            throw new DukeException("Tasks are not able to be saved into .txt file.");
         }
     }
 }

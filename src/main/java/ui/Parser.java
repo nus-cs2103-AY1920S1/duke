@@ -1,6 +1,11 @@
 package ui;
 
-import command.*;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.ListCommand;
+import command.AddCommand;
 import exception.DukeException;
 import tasks.Deadline;
 import tasks.Event;
@@ -8,10 +13,19 @@ import tasks.Task;
 import tasks.Todo;
 
 public class Parser {
+    /**
+     * parse the command string and create according type of command.
+     *
+     * @param fullCommand string of command
+     * @return return a new command
+     * @throws DukeException when command is invalid
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ");
-        int number, index;
-        String description, date;
+        int number;
+        int index;
+        String description;
+        String date;
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else if (parts.length == 0) {

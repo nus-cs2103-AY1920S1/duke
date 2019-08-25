@@ -56,6 +56,10 @@ Here are the tasks in your list:
 
 
 Nice! I've marked this task as done:
+  [T][✓] A
+
+
+Nice! I've marked this task as done:
   [T][✓] B C
 
 
@@ -64,7 +68,7 @@ Nice! I've marked this task as done:
 
 
 Here are the tasks in your list:
-1.[T][✘] A
+1.[T][✓] A
 2.[T][✓] B C
 3.[T][✘] D  E  F  /at G
 4.[D][✘] foo (by: Sunday)
@@ -82,7 +86,7 @@ Nice! I've marked this task as done:
 
 
 Here are the tasks in your list:
-1.[T][✘] A
+1.[T][✓] A
 2.[T][✓] B C
 3.[T][✓] D  E  F  /at G
 4.[D][✘] foo (by: Sunday)
@@ -123,7 +127,7 @@ Now you have 2 tasks in the list.
 
 
 Noted. I've removed this task:
-  [T][✘] A
+  [T][✓] A
 Now you have 1 task in the list.
 
 

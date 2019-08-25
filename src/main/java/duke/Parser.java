@@ -85,11 +85,11 @@ public class Parser {
             validateNull(parsedCommand.args, "The list command should take no arguments.");
             return new ListCommand();
         case "done":
-            validateIsPositiveInteger(parsedCommand.args, "The argument for done should be a positive whole number");
-            return new FinishCommand(Integer.parseInt(parsedCommand.args));
+            validateIsPositiveInteger(parsedCommand.args, "The argument for done should be a positive whole number.");
+            return new FinishCommand(Integer.parseInt(parsedCommand.args) - 1);
         case "delete":
-            validateIsPositiveInteger(parsedCommand.args, "The argument for delete should be a positive whole number");
-            return new DeleteCommand(Integer.parseInt(parsedCommand.args));
+            validateIsPositiveInteger(parsedCommand.args, "The argument for delete should be a positive whole number.");
+            return new DeleteCommand(Integer.parseInt(parsedCommand.args) - 1);
         case "todo":
             validateNotNull(parsedCommand.args, "The description of a todo cannot be empty.");
             return new AddTodoCommand(parsedCommand.args);

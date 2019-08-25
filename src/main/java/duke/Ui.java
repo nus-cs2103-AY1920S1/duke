@@ -81,9 +81,13 @@ public class Ui {
     }
 
     public void showAllTasks(List<Task> tasks) {
-        showMessage("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
+        if (tasks.size() == 0) {
+            showMessage("There are no tasks in your list.");
+        } else {
+            showMessage("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + "." + tasks.get(i));
+            }
         }
     }
 

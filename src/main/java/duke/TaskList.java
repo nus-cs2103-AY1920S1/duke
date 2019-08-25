@@ -51,7 +51,7 @@ public class TaskList {
         try {
             return tasks.get(position);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no duke.task at the given position.");
+            throw new DukeException("There is no task at the given position.");
         }
     }
 
@@ -61,12 +61,11 @@ public class TaskList {
 
     public void deleteTask(int position) throws DukeException {
         try {
-            Task task = tasks.get(position);
             tasks.remove(position);
         } catch (NumberFormatException e) {
             throw new DukeException("Your input should be a number.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("There is no duke.task at the given position.");
+            throw new DukeException("There is no task at the given position.");
         }
     }
 

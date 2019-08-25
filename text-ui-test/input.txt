@@ -7,6 +7,7 @@ list
 event project meeting /at Mon 2-4pm
 event asd/  /at /sOmE-Time/
 list
+done 1
 done 2
 done 2
 list

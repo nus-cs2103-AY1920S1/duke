@@ -120,4 +120,8 @@ public class Storage {
         }
     }
 
+    public String getFilePath() {
+        return this.filepath;
+    }
+
 }

@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Task("Task 0"));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM YYYY, h a");
         String input = scan.nextLine();
 
         while (!input.equals("bye")) {

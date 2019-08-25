@@ -4,6 +4,7 @@ deadline today /by tmr
 list
 todo dododo
 event 456 /at 789
+deadline d3 /by 22/09/2019 1800
 list
 done 2
 done 3

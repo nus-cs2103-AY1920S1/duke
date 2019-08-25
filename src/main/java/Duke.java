@@ -103,7 +103,7 @@ public class Duke {
             }
             bw.close();
         } catch (IOException e) {
-            throw new DukeException("An IOException occurred.");
+            throw new DukeException("Something went wrong: " + e.getMessage());
         }
     }
 

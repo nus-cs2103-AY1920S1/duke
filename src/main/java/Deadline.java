@@ -15,5 +15,6 @@ public class Deadline extends Task {
         this.deadline = deadline;
         this.type = "D";
         this.details = String.format("%s (by: %s)", topic, deadline);
+        this.detailsForDatabase = String.format("%s | %s", topic, deadline);
     }
 }

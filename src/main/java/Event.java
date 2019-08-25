@@ -15,5 +15,6 @@ public class Event extends Task {
         this.date = date;
         this.type = "E";
         this.details = String.format("%s (at: %s)", topic, date);
+        this.detailsForDatabase = String.format("%s | %s", topic, date);
     }
 }

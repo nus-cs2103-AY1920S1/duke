@@ -1,8 +1,11 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Task {
-    public static final String TICK = "\u2713";
-    public static final String CROSS = "\u2718";
+    public static final DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
     protected String name;
     protected boolean done;
+
 
     public Task() {
 

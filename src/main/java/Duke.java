@@ -1,9 +1,21 @@
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
+
+    public static LocalDateTime formatDate(String date) {
+        String[] splitDateTime = date.split(" ", 2);
+        String[] splitDate = splitDateTime[0].split("/", 3);
+        System.out.println(splitDate[0]);
+        LocalDateTime local = LocalDateTime.of(
+                Integer.parseInt(splitDate[2]),  Integer.parseInt(splitDate[1]),  Integer.parseInt(splitDate[0]),
+                Integer.parseInt(splitDateTime[1].substring(0, 2)), Integer.parseInt(splitDateTime[1].substring(2, 4)));
+        return local;
+
+    }
     public static void main(String[] args) {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -17,10 +29,9 @@ public class Duke {
 
 
         Scanner scan = new Scanner(System.in);
+        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("dd MMMM YYYY, h a");
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Task("Task 0"));
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM YYYY, h a");
         String input = scan.nextLine();
 
         while (!input.equals("bye")) {
@@ -67,7 +78,7 @@ public class Duke {
                             if (deadline.length == 1) {
                                 throw new DukeException("OOPS!!! Please enter a due date. e.g complete homework /by 1 Jan");
                             } else {
-                                list.add(new Deadline(deadline[0], deadline[1]));
+                                list.add(new Deadline(deadline[0], formatDate(deadline[1])));
                                 System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
                                 System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                             }
@@ -81,7 +92,7 @@ public class Duke {
                             if (event.length == 1) {
                                 throw new DukeException("OOPS!!! Please enter an event date. e.g group meeting /at 1 Jan");
                             } else {
-                                list.add(new Event(event[0], event[1]));
+                                list.add(new Event(event[0], formatDate(event[1])));
                                 System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
                                 System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
                             }

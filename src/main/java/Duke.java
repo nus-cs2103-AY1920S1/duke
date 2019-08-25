@@ -10,6 +10,7 @@ import taskpackage.Event;
 import taskpackage.Task;
 import taskpackage.ToDo;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -102,17 +103,24 @@ public class Duke {
                         System.out.println("     " + "Make sure to use '/' to indicate timing!");
                         System.out.println(horizontalLine + "\n");
                     } else {
-                        Task newDeadlineTask = new Deadline(splitResult[0].strip(), splitResult[1].strip());
-                        store.add(newDeadlineTask);
-                        System.out.println(horizontalLine);
-                        System.out.println("     Got it. I've added this task:");
-                        System.out.println("       " + newDeadlineTask);
-                        if (store.size() > 1) {
-                            System.out.println("     Now you have " + store.size() + " tasks in the list.");
-                        } else {
-                            System.out.println("     Now you have " + store.size() + " task in the list.");
+                        try {
+                            Task newDeadlineTask = new Deadline(splitResult[0].strip(), splitResult[1].strip());
+                            store.add(newDeadlineTask);
+                            System.out.println(horizontalLine);
+                            System.out.println("     Got it. I've added this task:");
+                            System.out.println("       " + newDeadlineTask);
+                            if (store.size() > 1) {
+                                System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                            } else {
+                                System.out.println("     Now you have " + store.size() + " task in the list.");
+                            }
+                            System.out.println(horizontalLine + "\n");
+                        } catch (ParseException e) {
+                            System.out.println(horizontalLine);
+                            System.out.println("     " + e);
+                            System.out.println("     OOPS!!! Please key in date and time in the format of <dd/M/yyyy hh:mm>");
+                            System.out.println(horizontalLine + "\n");
                         }
-                        System.out.println(horizontalLine + "\n");
                     }
                 }
             } else if (userInput.equals("event")) { //event task
@@ -129,17 +137,24 @@ public class Duke {
                         System.out.println("     " + "Make sure to use '/' to indicate timing!");
                         System.out.println(horizontalLine + "\n");
                     } else {
-                        Task newEventTask = new Event(splitResult[0].strip(), splitResult[1].strip());
-                        store.add(newEventTask);
-                        System.out.println(horizontalLine);
-                        System.out.println("     Got it. I've added this task:");
-                        System.out.println("       " + newEventTask);
-                        if (store.size() > 1) {
-                            System.out.println("     Now you have " + store.size() + " tasks in the list.");
-                        } else {
-                            System.out.println("     Now you have " + store.size() + " task in the list.");
+                        try {
+                            Task newEventTask = new Event(splitResult[0].strip(), splitResult[1].strip());
+                            store.add(newEventTask);
+                            System.out.println(horizontalLine);
+                            System.out.println("     Got it. I've added this task:");
+                            System.out.println("       " + newEventTask);
+                            if (store.size() > 1) {
+                                System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                            } else {
+                                System.out.println("     Now you have " + store.size() + " task in the list.");
+                            }
+                            System.out.println(horizontalLine + "\n");
+                        } catch (ParseException e) {
+                                System.out.println(horizontalLine);
+                                System.out.println("     " + e);
+                                System.out.println("     OOPS!!! Please key in date and time in the format of <dd/M/yyyy hh:mm>");
+                                System.out.println(horizontalLine + "\n");
                         }
-                        System.out.println(horizontalLine + "\n");
                     }
                 }
             } else if (userInput.equals("delete")) {
@@ -173,6 +188,7 @@ public class Duke {
                 System.out.println(horizontalLine);
                 System.err.println("     " + new InvalidInstructionException());
                 System.out.println(horizontalLine + "\n");
+                sc.nextLine();
             }
             userInput = sc.next();
         }

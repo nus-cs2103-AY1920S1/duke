@@ -12,19 +12,19 @@ public class Parser {
             return new ListCommand();
         } else if (userInput.startsWith("todo")) {
             String details = userInput.replaceFirst("todo", "");
-            return new AddTodoCommand(details);
+            return new AddTodoCommand(details.trim());
         } else if (userInput.startsWith("deadline")) {
             String details = userInput.replaceFirst("deadline", "");
-            return new AddDeadlineCommand(details);
+            return new AddDeadlineCommand(details.trim());
         } else if (userInput.startsWith("event")) {
             String details = userInput.replaceFirst("event", "");
-            return new AddEventCommand(details);
+            return new AddEventCommand(details.trim());
         } else if (userInput.contains("done")) {
             String[] doneDetails = userInput.split(" ");
             if (doneDetails.length < 2) {
                 throw new DukeException("\u2639 OOPS!!! The description of done cannot be empty.");
             }
-            String listActionIndex = doneDetails[1];
+            String listActionIndex = doneDetails[1].trim();
             int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
             return new DoneCommand(arrayActionIndex);
         } else if (userInput.contains("delete")) {
@@ -32,7 +32,7 @@ public class Parser {
             if (deleteDetails.length < 2) {
                 throw new DukeException("\u2639 OOPS!!! The description of delete cannot be empty.");
             }
-            String listActionIndex = deleteDetails[1];
+            String listActionIndex = deleteDetails[1].trim();
             int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
             return new DeleteCommand(arrayActionIndex);
         } else {

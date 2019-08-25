@@ -71,4 +71,20 @@ public class AddEventCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public String getDetails() {
+        return details;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof AddEventCommand) {
+            AddEventCommand obj = (AddEventCommand) o;
+            return obj.getDetails().equals(details);
+        } else {
+            return false;
+        }
+    }
 }

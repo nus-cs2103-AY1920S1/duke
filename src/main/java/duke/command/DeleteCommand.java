@@ -32,4 +32,21 @@ public class DeleteCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof DeleteCommand) {
+            DeleteCommand obj = (DeleteCommand) o;
+            return obj.getIndex() == index;
+        } else {
+            return false;
+        }
+    }
 }
+

@@ -52,4 +52,20 @@ public class AddDeadlineCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public String getDetails() {
+        return details;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof AddDeadlineCommand) {
+            AddDeadlineCommand obj = (AddDeadlineCommand) o;
+            return obj.getDetails().equals(details);
+        } else {
+            return false;
+        }
+    }
 }

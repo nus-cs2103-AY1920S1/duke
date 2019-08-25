@@ -31,4 +31,20 @@ public class DoneCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof DoneCommand) {
+            DoneCommand obj = (DoneCommand) o;
+            return obj.getIndex() == index;
+        } else {
+            return false;
+        }
+    }
 }

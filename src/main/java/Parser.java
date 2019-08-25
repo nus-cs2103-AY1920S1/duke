@@ -40,8 +40,16 @@ public class Parser  {
                         if (argumentArray.length == 1) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
+                        //form back string
+                        String toDoTaskString = "";
+                        for (int i = 1; i < argumentArray.length; i++) {
+                            toDoTaskString += argumentArray[i];
+                            toDoTaskString += " ";
 
-                        storeTaskList.addToDoTask(argumentArray);
+                        }
+                        //.trim() to remove trailing space
+
+                        storeTaskList.addToDoTask(toDoTaskString.trim());
 
                     } catch (DukeException e) {
                         System.out.println(e);
@@ -257,5 +265,13 @@ public class Parser  {
         }else {
             return String.valueOf(temp) + "th";
         }
+    }
+
+    public static String accessConvertStringToDate(String test) {
+        return convertStringToDate(test);
+    }
+
+    public static String accessConvertTime(int convertedTime) throws DukeException {
+        return convertTime(convertedTime);
     }
 }

@@ -10,6 +10,9 @@ public class TaskList {
 
     }
 
+    public TaskList(ArrayList<Task> listOfTasks) {
+    }
+
     public void listTask() {
         int num = 1;
         System.out.println("Here are the tasks in your list:");
@@ -28,16 +31,9 @@ public class TaskList {
 
     }
 
-    public void addToDoTask(String[] argumentArray) {
-        //form back string
-        String toDoTaskString = "";
-        for (int i = 1; i < argumentArray.length; i++) {
-            toDoTaskString += argumentArray[i];
-            toDoTaskString += " ";
-
-        }
+    public void addToDoTask(String toDoTaskString) {
         //.trim() to remove trailing space
-        Task toDoTask = new ToDo(toDoTaskString.trim());
+        Task toDoTask = new ToDo(toDoTaskString);
         store.add(toDoTask);
         storage.saveTaskToFile(store);
         Ui.printGotIt();

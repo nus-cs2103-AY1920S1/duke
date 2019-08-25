@@ -1,11 +1,10 @@
-public class ToDo extends Task {
+public class ToDoStub extends ToDo {
 
-    public ToDo(String description) {
-        super(description);
+    public ToDoStub() { ;
+        super.description = "read book";
+        super.isDone = false;
     }
-    public ToDo() {
 
-    }
 
     @Override
     public String toString() {
@@ -18,8 +17,6 @@ public class ToDo extends Task {
 
     @Override
     public String createTaskInFileFormat() {
-        String temp = "T ";
-        temp += super.createTaskInFileFormat();
-        return temp;
+        return super.createTaskInFileFormat();
     }
 }

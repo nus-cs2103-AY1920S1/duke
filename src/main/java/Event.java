@@ -1,13 +1,28 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
     private String eventTime;
+    private Date eventDate;
 
     Event(String description, String eventTime) {
         super(description);
         this.eventTime = eventTime;
     }
 
+    Event(String description, Date eventDate) {
+        super(description);
+        this.eventDate = eventDate;
+    }
+
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), eventTime);
+        if (eventDate != null) {
+            DateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            return String.format("[E]%s (at: %s)", super.toString(), dtf.format(eventDate));
+        } else {
+            return String.format("[E]%s (at: %s)", super.toString(), eventTime);
+        }
     }
 }

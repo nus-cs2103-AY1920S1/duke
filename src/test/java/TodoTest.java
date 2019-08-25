@@ -1,4 +1,11 @@
-package PACKAGE_NAME;
+import org.junit.jupiter.api.Test;
 
-public class TodoTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class TodoTest {
+    @Test
+    void getDescription() {
+        Todo t = new Todo("yoyo watermelon");
+        assertEquals("yoyo watermelon", t.getDescription());
+    }
 }

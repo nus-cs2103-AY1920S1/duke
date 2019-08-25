@@ -31,6 +31,11 @@ class Parser {
             return new DeleteCommand(index);
         }
 
+        case "find":
+            if (!sc.hasNext()) {
+                throw new NoTaskException();
+            }
+            return new FindCommand(sc.nextLine().trim());
         case "bye":
             return new ExitCommand();
         case "list":

@@ -1,3 +1,5 @@
 T | + | read book
-E | - | project meeting | Aug 6th 2-4pm
+E | - | project meeting | 02-12-2019 18:00
 T | + | join sports club
+D | - | team meeting | 11-12-2222 18:00
+D | - | test | 02-02-0202 02:02

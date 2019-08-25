@@ -1,22 +1,29 @@
-public class Event extends Task {
-    protected String at;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    Event(String description, boolean isDone, String at) {
+public class Event extends Task {
+    protected Date at;
+
+    Event(String description, boolean isDone, Date at) {
         super(description, isDone);
         this.at = at;
     }
 
-    Event(String description, String at) {
+    Event(String description, Date at) {
         super(description);
         this.at = at;
     }
 
+    private String stringDate() {
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(at);
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + stringDate() + ")";
     }
 
     public String toFile() {
-        return "E | " + super.getStatusIcon() + " | " + description + " | " + at;
+        return "E | " + super.getStatusIcon() + " | " + description + " | " + stringDate();
     }
 }

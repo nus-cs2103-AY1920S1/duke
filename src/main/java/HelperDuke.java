@@ -1,9 +1,10 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class HelperDuke {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         //start a Duke
         Duke duke = new Duke();
 
@@ -13,6 +14,8 @@ public class HelperDuke {
         //input action
         Scanner s = new Scanner(System.in);
         String action = s.next().toLowerCase();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         while (!action.equals("bye")) {
             switch (action) {
@@ -41,8 +44,8 @@ public class HelperDuke {
                 if (!s.hasNextLine()) {
                     duke.error(action);
                 } else {
-                    String[] d = s.nextLine().split("/by", 2);
-                    Deadline deadline = new Deadline(d[0], d[1]);
+                    String[] d = s.nextLine().split(" /by ", 2);
+                    Deadline deadline = new Deadline(d[0].trim(), formatter.parse(d[1]));
                     duke.add(deadline);
 
                     //echo the text added
@@ -54,7 +57,7 @@ public class HelperDuke {
                     duke.error(action);
                 } else {
                     String[] e = s.nextLine().split(" /at ", 2);
-                    Event event = new Event(e[0], e[1]);
+                    Event event = new Event(e[0].trim(), formatter.parse(e[1]));
                     duke.add(event);
 
                     //echo the text added

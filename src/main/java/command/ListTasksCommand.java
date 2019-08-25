@@ -16,10 +16,10 @@ public class ListTasksCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Here are the tasks in your list:");
+        ui.showLine("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            System.out.println(String.format("%d.%s", i + 1, task.toString()));
+            ui.showLine(String.format("%d.%s", i + 1, task.toString()));
         }
     }
 }

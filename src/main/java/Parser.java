@@ -86,11 +86,8 @@ public class Parser  {
 
                             }
                         }
-                        
                         deadlineTaskDateAndTimeString = convertStringToDate(deadlineTaskDateAndTimeString);
-                        //System.out.println(deadlineTaskDateAndTimeString);
                         storeTaskList.addDeadlineTask(deadlineTaskDescriptionString.trim(), deadlineTaskDateAndTimeString.trim());
-                        //argument = myScanner.nextLine();
                     } catch (DukeException e) {
                         System.out.println(e);
                     } finally {
@@ -173,10 +170,6 @@ public class Parser  {
     private static String convertStringToDate(String dateAndTimeString) {
         try {
             String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
-            /*for (String i : arrayOfDateAndTime) {
-                System.out.println(i);
-
-            }*/
             String date = arrayOfDateAndTime[0];
             String time = arrayOfDateAndTime[1];
             // d/mm/yyyy

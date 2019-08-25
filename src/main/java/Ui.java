@@ -3,9 +3,11 @@ import java.util.Scanner;
 
 public class Ui {
     Scanner sc;
+
     public Ui() {
         this.sc = new Scanner(System.in);
     }
+
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,9 +26,11 @@ public class Ui {
     public void showError(String message) {
         System.out.println(message);
     }
+
     public void showGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
     public void showList(LinkedList<Task> tasks) {
         int i = 1;
         System.out.println("Here are the tasks in your list:");
@@ -35,6 +39,7 @@ public class Ui {
             i++;
         }
     }
+
     public void showDelete(Task t, int i) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(t);
@@ -51,6 +56,7 @@ public class Ui {
         System.out.println(t);
         System.out.println("Now you have " + i + " tasks in the list.");
     }
+
     public void showLine() {
         System.out.println("-----------------------------------------------------------------------------------\n");
     }

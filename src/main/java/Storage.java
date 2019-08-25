@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Storage {
     private String filePath;
+
     public Storage(String s) {
         this.filePath = s;
     }
@@ -47,7 +48,7 @@ public class Storage {
         return result;
     }
 
-    public void updateSaveFile(LinkedList<Task> tasks) throws DukeException{
+    public void updateSaveFile(LinkedList<Task> tasks) throws DukeException {
         try {
             File saveFile = new File(filePath);
             FileWriter fw = new FileWriter(saveFile, false);

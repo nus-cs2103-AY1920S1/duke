@@ -11,7 +11,7 @@ public class Parser {
             return new ExitCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
-        } else if (command.startsWith("done ")){
+        } else if (command.startsWith("done ")) {
             try {
                 int id = Integer.parseInt(command.substring(5));
                 return new DoneCommand(id);
@@ -50,8 +50,8 @@ public class Parser {
         StringBuilder result = new StringBuilder();
         boolean flag = false;
 
-        List<String> formatStrings = Arrays.asList("d/M/y HHmm", "d/M/y", "d/M" );
-        List<String> outputFormats = Arrays.asList("MMMMM dd, yyyy, h:mm a", "MMMMM dd, yyyy", "MMMMM dd" );
+        List<String> formatStrings = Arrays.asList("d/M/y HHmm", "d/M/y", "d/M");
+        List<String> outputFormats = Arrays.asList("MMMMM dd, yyyy, h:mm a", "MMMMM dd, yyyy", "MMMMM dd");
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
             if (flag) {
@@ -64,8 +64,7 @@ public class Parser {
             }
         }
         Date date = null;
-        for (int i = 0; i < formatStrings.size(); i++)
-        {
+        for (int i = 0; i < formatStrings.size(); i++) {
             try {
                 DateFormat df = new SimpleDateFormat(formatStrings.get(i));
                 df.setLenient(false);

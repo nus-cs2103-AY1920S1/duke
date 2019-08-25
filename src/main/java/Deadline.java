@@ -2,6 +2,7 @@ public class Deadline extends Task {
     public Deadline(String s) {
         super(s);
     }
+
     public String toString() {
         String unprocessed = super.toString();
         StringBuilder temp = new StringBuilder();

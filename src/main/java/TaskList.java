@@ -2,6 +2,7 @@ import java.util.LinkedList;
 
 public class TaskList {
     LinkedList<Task> tasks;
+
     public TaskList() {
         this.tasks = new LinkedList<Task>();
     }
@@ -11,15 +12,16 @@ public class TaskList {
     }
 
     public Task getTask(int id) {
-        return this.tasks.get(id-1);
+        return this.tasks.get(id - 1);
     }
+
     public LinkedList<Task> getAllTasks() {
         return this.tasks;
     }
 
     public void deleteTask(int i) throws DukeException {
         try {
-            this.tasks.remove(i-1);
+            this.tasks.remove(i - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! No such task exist!");
         }
@@ -27,7 +29,7 @@ public class TaskList {
 
     public void completeTask(int i) throws DukeException {
         try {
-            this.tasks.get(i-1).markAsDone();
+            this.tasks.get(i - 1).markAsDone();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! No such task exist!");
         }

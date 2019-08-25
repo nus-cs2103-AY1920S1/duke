@@ -1,4 +1,9 @@
+
 import java.io.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,6 +19,17 @@ public class Duke {
             fileContent.add(fileScan.nextLine());
         }
         return fileContent;
+    }
+
+    public static LocalDateTime formatDate(String date) {
+        String[] splitDateTime = date.split(" ", 2);
+        String[] splitDate = splitDateTime[0].split("/", 3);
+        System.out.println(splitDate[0]);
+        LocalDateTime local = LocalDateTime.of(
+                Integer.parseInt(splitDate[2]),  Integer.parseInt(splitDate[1]),  Integer.parseInt(splitDate[0]),
+                Integer.parseInt(splitDateTime[1].substring(0, 2)), Integer.parseInt(splitDateTime[1].substring(2, 4)));
+        return local;
+
     }
 
     public static void main(String[] args) {
@@ -33,6 +49,8 @@ public class Duke {
 
         //Load files
         Scanner scan = new Scanner(System.in);
+
+
         try {
             List<String> fileContents = loadFile();
             for (int i = 0; i < fileContents.size(); i++) {
@@ -43,10 +61,10 @@ public class Duke {
                         list.add(new Task(arr[0], arr[1], arr[2]));
                         break;
                     case "D":
-                        list.add(new Deadline(arr[0], arr[1], arr[2], arr[3]));
+                        list.add(new Deadline(arr[0], arr[1], arr[2], formatDate(arr[3])));
                         break;
                     case "E":
-                        list.add(new Event(arr[0], arr[1], arr[2], arr[3]));
+                        list.add(new Event(arr[0], arr[1], arr[2], formatDate(arr[3])));
                         break;
                 }
             }
@@ -54,12 +72,14 @@ public class Duke {
             System.out.println(ex);
         }
 
+
         //Read input
-        try {
+
             String input = scan.nextLine();
             while (!input.equals("bye")) {
-                String arr[] = input.split(" ",2 );
-                String command = arr[0];
+                try {
+                    String arr[] = input.split(" ", 2);
+                    String command = arr[0];
                     switch (command) {
                         case "list":
                             if (list.size() == 1) {
@@ -88,23 +108,24 @@ public class Duke {
                                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                             } else {
                                 list.add(new Task("T", arr[1]));
-                               // fw.write(list.get(list.size()-1).fileFormat());
-                                System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
-                                System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
+                                // fw.write(list.get(list.size()-1).fileFormat());
+                                System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1));
+                                System.out.println("Now you have " + (list.size() - 1) + " tasks in the list");
                             }
                             break;
                         case "deadline":
                             if (arr.length == 1) {
                                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                             } else {
+
                                 String[] deadline = arr[1].split(" /by ", 2);
                                 if (deadline.length == 1) {
                                     throw new DukeException("OOPS!!! Please enter a due date. e.g complete homework /by 1 Jan");
                                 } else {
-                                    list.add(new Deadline("D", deadline[0], deadline[1]));
+                                    list.add(new Deadline("D", deadline[0], formatDate(deadline[1])));
                                     //fw.write(list.get(list.size()-1).fileFormat());
-                                    System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
-                                    System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
+                                    System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1));
+                                    System.out.println("Now you have " + (list.size() - 1) + " tasks in the list");
                                 }
                             }
                             break;
@@ -116,10 +137,10 @@ public class Duke {
                                 if (event.length == 1) {
                                     throw new DukeException("OOPS!!! Please enter an event date. e.g group meeting /at 1 Jan");
                                 } else {
-                                    list.add(new Event("E", event[0], event[1]));
-                                   // fw.write(list.get(list.size()-1).fileFormat());
-                                    System.out.println("Got it. I've added this task:\n" + list.get(list.size()-1));
-                                    System.out.println("Now you have " + (list.size()-1) + " tasks in the list");
+                                    list.add(new Event("E", event[0], formatDate(event[1])));
+                                    // fw.write(list.get(list.size()-1).fileFormat());
+                                    System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1));
+                                    System.out.println("Now you have " + (list.size() - 1) + " tasks in the list");
                                 }
                             }
                             break;
@@ -140,19 +161,25 @@ public class Duke {
                             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
                     }
+                } catch (DukeException ex) {
+                    System.out.println(ex.getMessage());
+                }
 
 
                 //Taking in the next line
                 input = scan.nextLine();
             }
-            BufferedWriter fw = new BufferedWriter(new FileWriter("duke.txt"));
-            for (int i = 1; i < list.size(); i++) {
-                fw.write(list.get(i).fileFormat());
+
+            try {
+                BufferedWriter fw = new BufferedWriter(new FileWriter("duke.txt"));
+                for (int i = 1; i < list.size(); i++) {
+                    fw.write(list.get(i).fileFormat());
+                }
+                fw.close();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
             }
-            fw.close();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+
 
         //Exit
         System.out.println("Bye. Hope to see you again soon!");

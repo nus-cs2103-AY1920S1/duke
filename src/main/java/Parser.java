@@ -143,6 +143,7 @@ public class Parser  {
                         argument = myScanner.nextLine();
                     }
 
+
                 } else {
                     try {
                         //handles error for not recognized command

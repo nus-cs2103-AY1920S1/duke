@@ -31,7 +31,8 @@ class EventsImplementation implements TaskInterface,
     }
 
     public TaskInterface completeTask(){
-        return new ToDosImplementation(this.name, true);
+        return 
+            new EventsImplementation(this.name, this.date, true);
     }
 
     public String getName() {

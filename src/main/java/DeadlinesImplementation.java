@@ -32,7 +32,7 @@ class DeadLinesImplementation implements TaskInterface,
     }
 
     public TaskInterface completeTask(){
-        return new ToDosImplementation(this.name, true);
+        return new DeadLinesImplementation(this.name, date, true);
     }
 
     public String getName() {

@@ -1,18 +1,19 @@
 package duke.exception;
 
 /**
- * Deadline Task Exception. Thrown when invalid deadline command.
+ * Custom Deadline Task Exception.
  */
 public class DeadlineTaskException extends TaskException {
     /**
-     * Constructor.
+     * Creates an instance of Deadline Task Exception.
      */
     public DeadlineTaskException() {
         super();
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Deadline Task Exception.
+     *
      * @param errorMessage Message of error.
      */
     public DeadlineTaskException(String errorMessage) {
@@ -20,7 +21,8 @@ public class DeadlineTaskException extends TaskException {
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Deadline Task Exception.
+     *
      * @param errorMessage Message of the error.
      * @param err Root cause of error.
      */

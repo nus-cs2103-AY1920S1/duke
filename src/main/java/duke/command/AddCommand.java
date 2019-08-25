@@ -8,14 +8,17 @@ import duke.storage.Storage;
 import duke.exception.TaskException;
 
 /**
- * Add Command. Adds a task to the tasklist.
+ * Represents an Add Command.
+ * Each instance is a command to add a task.
  */
 public class AddCommand extends Command {
     /** Description of the task. */
     private String description;
 
     /**
-     * Constructor. Sets isExit to false as it is not an exit command.
+     * Creates an instance of AddCommand.
+     * Sets isExit to false as it is not an exit command.
+     *
      * @param description Description of the task to be added.
      */
     public AddCommand(String description) {
@@ -24,7 +27,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Behaviour of Add Command. Adds the Task.
+     * Adds the task to the task list.
+     * Prints the response.
+     * Writes the changes to the data file.
+     *
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.

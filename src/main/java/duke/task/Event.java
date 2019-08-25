@@ -4,7 +4,8 @@ import duke.datetime.DateTime;
 import duke.exception.InvalidDateTimeException;
 
 /**
- * Event class. SubClass of Task.
+ * Represents Event Tasks.
+ * Instances are tasks with at a specific time.
  */
 public class Event extends Task {
     /** Time of event. */
@@ -13,7 +14,8 @@ public class Event extends Task {
     private DateTime datetime;
 
     /**
-     * Constructor.
+     * Creates an instance of Event.
+     *
      * @param description Description of event.
      * @param at Time of the event.
      * @throws InvalidDateTimeException If DateTime format is wrong.
@@ -25,7 +27,7 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the timing of the event.
+     * Returns the timing of the event.
      * @return String time;
      */
     public String getAt() {
@@ -33,7 +35,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the Event.
+     * Returns String representation of the Event.
      * @return String representation of the Event.
      */
     @Override

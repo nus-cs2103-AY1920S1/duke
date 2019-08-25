@@ -8,21 +8,27 @@ import duke.task.TaskList;
 import duke.exception.DukeException;
 
 /**
- * Ui class. Instances facilitate interaction with user.
+ * Represents interactions with user via CLI.
  */
 public class Ui {
+    /** BufferedReader to read CLI input. */
     private BufferedReader br;
     /** Line for responses. */
     private static final String line = String.format("%4s", "") + String.format("%60s", "").replace(" ", "_");
     /** Indentation for response. */
     private static final String indent = String.format("%5s", "");
 
+    /**
+     * Creates an instance of Ui.
+     * Opens BufferedReader.
+     */
     public Ui() {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
 
     /**
      * Reads the user command from CLI.
+     *
      * @return String command from user.
      */
     public String readCommand() throws DukeException {
@@ -49,8 +55,9 @@ public class Ui {
     }
 
     /**
-     * Prints out the tasklist.
-     * @param tasklist Tasklist to be printed out.
+     * Prints out the task list.
+     *
+     * @param tasklist TaskList to be printed out.
      */
     public static void printList(TaskList tasklist) {
         System.out.println(tasklist);
@@ -65,6 +72,7 @@ public class Ui {
 
     /**
      * Gets the in text indent width.
+     *
      * @return Indentation.
      */
     public String getIndent() {
@@ -78,6 +86,9 @@ public class Ui {
         System.out.println(errMessage);
     }
 
+    /**
+     * Closes the bufferedreader.
+     */
     public void close() {
         try {
             br.close();

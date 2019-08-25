@@ -1,18 +1,19 @@
 package duke.exception;
 
 /**
- * ToDo Task Exception. Thrown when invalid ToDo command.
+ * Custom ToDo Task Exception.
  */
 public class ToDoTaskException extends TaskException {
     /**
-     * Constructor.
+     * Creates an instance of ToDo Task Exception.
      */
     public ToDoTaskException() {
         super();
     }
 
     /**
-     * Constructor.
+     * Creates an instance of ToDo Task Exception.
+     *
      * @param errorMessage Message of error.
      */
     public ToDoTaskException(String errorMessage) {
@@ -20,7 +21,8 @@ public class ToDoTaskException extends TaskException {
     }
 
     /**
-     * Constructor.
+     * Creates an instance of ToDo Task Exception.
+     *
      * @param errorMessage Message of error.
      * @param err Root cause of exception.
      */

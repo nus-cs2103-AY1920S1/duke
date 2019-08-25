@@ -9,12 +9,13 @@ import duke.command.ExitCommand;
 import duke.exception.DukeException;
 
 /**
- * Parser Class. Parses input to determine the type of command.
+ * Represents parsing and decomposing string commands into Command types.
  */
 public class Parser {
 
     /**
      * Parses a string, determining what command it is.
+     *
      * @param string String to be parsed.
      * @return Relevant command.
      * @throws DukeException If string is badly formatted.

@@ -1,7 +1,8 @@
 package duke.task;
 
 /**
- * Task class. Holds the string of the task, and whether it is done.
+ * Represents Tasks.
+ * Tasks could be ToDos, Deadlines, Events.
  */
 public class Task {
     /** Total tasks created. */
@@ -12,7 +13,8 @@ public class Task {
     private String description;
 
     /**
-     * Constructor.
+     * Creates an instance of Task.
+     *
      * @param description String of the task.
      */
     public Task(String description) {
@@ -22,6 +24,7 @@ public class Task {
 
     /**
      * Gets the description of the task.
+     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -30,6 +33,7 @@ public class Task {
 
     /**
      * Gets the total number of tasks created.
+     *
      * @return The total tasks created.
      */
     public static int getTotalTasks() {
@@ -45,6 +49,7 @@ public class Task {
 
     /**
      * Gets the string message of the task.
+     *
      * @return String message.
      */
     public String message() {
@@ -58,6 +63,7 @@ public class Task {
 
     /**
      * Checks whether the task is done.
+     *
      * @return Boolean value on whether task is done.
      */
     public boolean isDone() {
@@ -66,15 +72,16 @@ public class Task {
 
     /**
      * Gets the string symbol of whether the task is done.
+     *
      * @return String symbol of whether the task is done.
      */
     private String getStatusIcon() {
-//        return isDone ? "✓" : "✗";
-        return isDone ? "Y" : "N";
+        return isDone ? "✓" : "✗";
     }
 
     /**
-     * String representation of the task.
+     * Returns String representation of the task.
+     *
      * @return String representation of the task.
      */
     @Override

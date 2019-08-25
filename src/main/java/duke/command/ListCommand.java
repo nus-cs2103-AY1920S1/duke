@@ -5,19 +5,22 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
- * List Command. Command to print out the tasklist.
+ * Represents a List Command.
+ * Each instance prints out the task list.
  */
 public class ListCommand extends Command {
 
     /**
-     * Constructor. Sets isExit to false as it is not an exit command.
+     * Creates an instance of List Command.
+     * Sets isExit to false as it is not an exit command.
      */
     public ListCommand() {
         isExit = false;
     }
 
     /**
-     * Behaviour of List Command. Prints out tasklist.
+     * Prints the task list.
+     *
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.

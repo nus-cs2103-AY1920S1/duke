@@ -1,18 +1,19 @@
 package duke.exception;
 
 /**
- * Event Task Exception. Thrown when invalid event command.
+ * Custom Event Task Exception.
  */
 public class EventTaskException extends TaskException {
     /**
-     * Constructor.
+     * Creates an instance of Event Task Exception.
      */
     public EventTaskException() {
         super();
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Event Task Exception.
+     *
      * @param errorMessage Message of error.
      */
     public EventTaskException(String errorMessage) {
@@ -20,7 +21,8 @@ public class EventTaskException extends TaskException {
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Event Task Exception.
+     *
      * @param errorMessage Message of error.
      * @param err Root cause of error.
      */

@@ -7,15 +7,18 @@ import duke.exception.EventTaskException;
 import duke.exception.InvalidDateTimeException;
 
 /**
- * Factory Class for Tasks. Responsible for logic determining the type of Task given the description.
+ * Represents a TaskFactory.
+ * Class creates a task and determines what type of task it is.
  */
 public class TaskFactory {
     /**
-     * Creates a Task object. Determines which subClass constructor to call.
+     * Creates a Task object.
+     * Determines which sub-class constructor to call.
+     *
      * @param description String description of the task to be created.
      * @return Task Object.
      * @throws TaskException When task cannot be created. Sub-classes of task
-     * exception are called in for specificity.
+     *     exception are called in for specificity.
      */
     public static Task create(String description) throws TaskException {
         String[] tokens = description.split("\\s+");
@@ -36,6 +39,7 @@ public class TaskFactory {
 
     /**
      * Creates a ToDo Task Object.
+     *
      * @param description String description for task.
      * @return Task object.
      * @throws ToDoTaskException If formatting of tokens in description is invalid.
@@ -55,6 +59,7 @@ public class TaskFactory {
 
     /**
      * Creates a Deadline Task Object.
+     *
      * @param description String description for task.
      * @return Task Object.
      * @throws DeadlineTaskException If formatting of tokens in description is invalid.
@@ -75,6 +80,7 @@ public class TaskFactory {
 
     /**
      * Creates Event Task Object.
+     *
      * @param description String description for task.
      * @return Task Object.
      * @throws EventTaskException If formatting of tokens in description is invalid.

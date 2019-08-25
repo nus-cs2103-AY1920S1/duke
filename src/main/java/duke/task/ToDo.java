@@ -1,11 +1,12 @@
 package duke.task;
 
 /**
- * To Do Class. SubClass of Task.
+ * Represents a ToDo Task.
  */
 public class ToDo extends Task {
     /**
-     * Constructor.
+     * Creates an instance of a ToDo Task.
+     *
      * @param description Description of the todo task.
      */
     public ToDo(String description) {
@@ -13,7 +14,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * String representation of a todo task.
+     * Returns String representation of a todo task.
+     *
      * @return String representation of a todo task.
      */
     @Override

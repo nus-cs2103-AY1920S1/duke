@@ -1,18 +1,19 @@
 package duke.exception;
 
 /**
- * Invalid DateTime Exception. Thrown if date time format is wrong.
+ * Custom Invalid DateTime Exception.
  */
 public class InvalidDateTimeException extends Exception {
     /**
-     * Constructor.
+     * Creates an instance of Invalid DateTime Exception.
      */
     public InvalidDateTimeException() {
         super();
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Invalid DateTime Exception.
+     *
      * @param errorMessage Message of error.
      */
     public InvalidDateTimeException(String errorMessage) {
@@ -20,7 +21,8 @@ public class InvalidDateTimeException extends Exception {
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Invalid DateTime Exception.
+     *
      * @param errorMessage Message of error.
      * @param err Root cause of error.
      */

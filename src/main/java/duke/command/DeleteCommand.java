@@ -6,15 +6,18 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
- * Delete Command. Deletes the Task from the given 1-based index.
+ * Represents a delete command.
+ * Each instance is a command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
     /** Index of the task to be deleted. */
     private int index;
 
     /**
-     * Constructor. Sets isExit to false as it is not an exit command.
-     * @param index
+     * Creates an instance of delete command.
+     * Sets isExit to false as it is not an exit command.
+     *
+     * @param index Index of task to be deleted.
      */
     public DeleteCommand(int index) {
         this.index = index;
@@ -22,7 +25,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Behaviour of Delete Command. Deletes the task.
+     * Deletes the task from the task list, which is determined by a 1-based index.
+     * Prints the response.
+     * Writes the changes to the data file.
+     *
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.

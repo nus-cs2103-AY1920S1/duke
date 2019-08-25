@@ -7,9 +7,10 @@ import duke.exception.DukeException;
 
 /**
  * Duke Class.
+ * Represents the main driver class of Duke.
  */
 public class Duke {
-    /** Storage. */
+    /** Storage to data file access and writes.. */
     private Storage storage;
     /** TaskList to store user input. */
     private TaskList taskList;
@@ -17,18 +18,20 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor.
+     * Creates an instance of Duke.
+     *
      * @param filePath File path of data file.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
-        taskList = new TaskList();
-        taskList.load(storage);
+        taskList = new TaskList(storage);
     }
 
     /**
      * Main Method.
+     * Creates an instance of Duke and runs the logic.
+     *
      * @param args Arguments.
      */
     public static void main(String[] args) {
@@ -54,5 +57,6 @@ public class Duke {
                 ui.showLine();
             }
         }
+        ui.close();
     }
 }

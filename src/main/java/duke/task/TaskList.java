@@ -5,22 +5,24 @@ import duke.storage.Storage;
 import java.util.ArrayList;
 
 /**
- * TaskList class. Instances represents lists of texts stored by user.
+ * Represents a list of tasks.
  */
 public class TaskList {
     /** ArrayList to store Tasks. */
     private ArrayList<Task> list;
 
     /**
-     * Constructor. Creates a new empty tasklist.
+     * Creates an instance of an empty TaskList.
      */
     public TaskList() {
         list = new ArrayList<>();
     }
 
     /**
-     * Constructor.
-     * @param storage
+     * Creates an instance of a TaskList.
+     * Loads tasks stored on data file.
+     *
+     * @param storage Storage object to access data file.
      */
     public TaskList(Storage storage) {
         this();
@@ -29,6 +31,7 @@ public class TaskList {
 
     /**
      * Loads the tasks from storage.
+     *
      * @param storage Storage instance to load files.
      */
     public void load(Storage storage) {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Gets the total number of tasks in this list.
+     *
      * @return Total number of tasks in the list.
      */
     public int getTotalTasks() {
@@ -47,6 +51,7 @@ public class TaskList {
 
     /**
      * Adds Task to list.
+     *
      * @param task Task to be added.
      * @return Task that was added.
      */
@@ -57,6 +62,7 @@ public class TaskList {
 
     /**
      * Does Task at the given 1-based index.
+     *
      * @param index Index of task to check (1-based).
      * @return Task that was done.
      */
@@ -68,6 +74,7 @@ public class TaskList {
 
     /**
      * Deletes a task at given 1-based index to delete.
+     *
      * @param index Index of the task to delete (1-based).
      * @return Task that was deleted. Null if index is out of range.
      */
@@ -82,6 +89,7 @@ public class TaskList {
 
     /**
      * Gets a Task from the list.
+     *
      * @param index index of task to get (1-based).
      * @return Task object.
      */
@@ -90,8 +98,9 @@ public class TaskList {
     }
 
     /**
-     * Gets an arraylist of all tasks in the tasklist.
-     * @return ArrayList of all tasks in the tasklist.
+     * Gets an ArrayList of all tasks in the task list.
+     *
+     * @return ArrayList of all tasks in the task list.
      */
     public ArrayList<Task> getAllTasks() {
         ArrayList<Task> newList = new ArrayList<>();
@@ -100,7 +109,8 @@ public class TaskList {
     }
 
     /**
-     * String representation of list (indented).
+     * Returns String representation of the task list.
+     *
      * @return String representation.
      */
     @Override

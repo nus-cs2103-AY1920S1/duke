@@ -5,23 +5,26 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
- * Command Abstract Class. Abstract class for sub-commands (add, delete, do, exit, list).
+ * An abstract class of commands.
+ * Each instance of its sub-classes are instances of commands.
  */
 public abstract class Command {
     /** Whether the command is an exit command. */
     protected boolean isExit;
 
     /**
-     * Command behaviour. Implemented in subclasses.
+     * Acts as intended depending on the command.
+     *
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Checks if command is an exit command.
-     * @return isExit boolean attribute.
+     *
+     * @return boolean attribute of whether command is an exit command.
      */
     public boolean isExit() {
         return isExit;

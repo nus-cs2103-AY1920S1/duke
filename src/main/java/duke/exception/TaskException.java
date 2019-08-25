@@ -1,19 +1,20 @@
 package duke.exception;
 
 /**
- * Task Exception. Thrown when command does not start with "todo" / "deadline" / "event"
+ * Custom Task Exception.
  */
 public class TaskException extends DukeException {
 
     /**
-     * Constructor.
+     * Creates an instance of Task Exception.
      */
     public TaskException() {
         super();
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Task Exception.
+     *
      * @param errorMessage Message of error.
      */
     public TaskException(String errorMessage) {
@@ -21,7 +22,8 @@ public class TaskException extends DukeException {
     }
 
     /**
-     * Constructor.
+     * Creates an instance of Task Exception.
+     *
      * @param errorMessage Message of error.
      * @param err Root cause of exception.
      */

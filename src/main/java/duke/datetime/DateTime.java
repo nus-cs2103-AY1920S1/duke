@@ -5,10 +5,9 @@ import java.util.HashMap;
 import duke.exception.InvalidDateTimeException;
 
 /**
- * DateTime class. Each instance contains the day, month, year, hour, minute of a specific time (12hr clock).
- * Date and Time should be delimited by spaces.
- * Date should be in the form of dd/mm/yyyy.
- * Time should be in the form of 24hr clock.
+ * Represents a Date and Time.
+ * Each instance keeps track of the day, month, year, hours and minutes.
+ *
  */
 public class DateTime {
     /** Day. */
@@ -26,7 +25,10 @@ public class DateTime {
     /** Month Mapping from 1-12 to Jan-Dec. */
     private static HashMap<String, String> monthMap = new HashMap<>();
 
-    /** Loads the monthMap when class is loaded. */
+    /**
+     * Adds all the mappings from numbers to month names.
+     * Executes when class is loaded.
+     */
     static {
         monthMap.put("1", "January");
         monthMap.put("2", "February");
@@ -43,7 +45,8 @@ public class DateTime {
     }
 
     /**
-     * Constructor.
+     * Creates an instance of DateTime.
+     *
      * @param info Date and Time information, delimited by a space.
      * @throws InvalidDateTimeException Invalid info given either in the wrong format, or incompatible.
      */
@@ -61,6 +64,7 @@ public class DateTime {
 
     /**
      * Checks date and sets day, month, year fields.
+     *
      * @param date Date string to parse.
      * @throws InvalidDateTimeException Thrown if date is not formatted correctly.
      */
@@ -88,6 +92,7 @@ public class DateTime {
 
     /**
      * Checks the time and sets hours, minutes and sign.
+     *
      * @param time Time string to be parsed.
      * @throws InvalidDateTimeException Thrown if time string is not formatted correctly.
      */
@@ -95,11 +100,11 @@ public class DateTime {
         try {
             int t = Integer.parseInt(time);
             int hrs = t / 100;
-            int mins = t % 100;
             boolean isAft = hrs > 12;
             hrs = isAft ? hrs - 12 : hrs;
             sign = isAft ? "pm" : "am";
             hours = String.format("%d", hrs);
+            int mins = t % 100;
             minutes = String.format("%02d", mins);
         } catch (NumberFormatException e) {
             throw new InvalidDateTimeException("Invalid Time");
@@ -107,7 +112,7 @@ public class DateTime {
     }
 
     /**
-     * String representation of DateTime.
+     * Returns String representation of DateTime (nth of month year, HH:MM am/pm).
      * @return String representation of DateTime.
      */
     @Override

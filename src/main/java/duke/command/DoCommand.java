@@ -5,14 +5,17 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 /**
- * Do Command. Does the task in tasklist by the given 1-based index.
+ * Represents of a Do Command.
+ * Each instance is a command to do a task.
  */
 public class DoCommand extends Command {
     /** Index of task to do. */
     private int index;
 
     /**
-     * Constructor. Sets isExit to false as it is not an exit command.
+     * Creates an instance of a Do Command.
+     * Sets isExit to false as it is not an exit command.
+     *
      * @param index Index of the task to do.
      */
     public DoCommand(int index) {
@@ -21,7 +24,10 @@ public class DoCommand extends Command {
     }
 
     /**
-     * Behavior of Do Command. Does the task.
+     * Does a task in the task list, which is determined by a 1-based index.
+     * Prints the response.
+     * Writes to the data file.
+     *
      * @param taskList TaskList of tasks.
      * @param ui Ui object for user interaction.
      * @param storage Storage object for data file.

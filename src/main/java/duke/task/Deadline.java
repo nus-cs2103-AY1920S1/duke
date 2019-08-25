@@ -4,7 +4,8 @@ import duke.datetime.DateTime;
 import duke.exception.InvalidDateTimeException;
 
 /**
- * Deadline class. SubClass of Task.
+ * Represents Deadline Tasks.
+ * Instances are tasks that has a due date.
  */
 public class Deadline extends Task {
     /** Deadline date for the deadline. */
@@ -13,7 +14,8 @@ public class Deadline extends Task {
     private DateTime datetime;
 
     /**
-     * Constructor.
+     * Creates an instance of Deadline.
+     *
      * @param description Description of the deadline.
      * @param by deadline for the deadline.
      * @throws InvalidDateTimeException If DateTime format is wrong.
@@ -33,7 +35,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of deadlines.
+     * Returns the String representation of deadlines.
      * @return String representation of deadlines.
      */
     @Override

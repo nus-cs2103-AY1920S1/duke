@@ -14,7 +14,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 
 /**
- * Storage class.
+ * Represents the storage and updating of tasks to data file.
  * Instances can write to data file and are
  * responsible for writing to the file for storage purposes.
  */
@@ -23,8 +23,8 @@ public class Storage {
     private String filePath = "../data/duke.txt";
 
     /**
-     * Constructor.
-     * Tries to create if it does not exist.
+     * Creates an instance of Storage.
+     * Tries to create data file if it does not exist.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -38,6 +38,7 @@ public class Storage {
 
     /**
      * Writes down all tasks and their state and data.
+     *
      * @param tasklist Tasklist that provides the relevant data.
      */
     public void write(TaskList tasklist) {
@@ -81,7 +82,8 @@ public class Storage {
     }
 
     /**
-     * Read data file and gets all the tasks written on it.
+     * Reads data file and gets all the tasks written on it.
+     *
      * @return ArrayList of Tasks recorded on data file.
      */
     public ArrayList<Task> parseFile() {

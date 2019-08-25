@@ -1,6 +1,6 @@
 package duke.task;
 
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
 
     public String deadline;
 

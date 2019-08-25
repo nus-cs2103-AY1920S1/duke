@@ -1,9 +1,21 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddDeadlineTaskCommand;
+import duke.command.AddEventTaskCommand;
+import duke.command.AddToDoTaskCommand;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.EndCommand;
+import duke.command.ListTaskCommand;
 
 import java.util.Scanner;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.UnknownCommandException;
+import duke.exception.InvalidTaskIndexException;
+import duke.exception.InvalidDeadlineException;
+import duke.exception.InvalidEventException;
+import duke.exception.InvalidToDoException;
 
 public class DataParser {
 

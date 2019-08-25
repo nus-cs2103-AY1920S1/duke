@@ -2,7 +2,11 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.exception.DukeLoadingError;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.ToDoTask;
 
 import java.util.ArrayList;
 import java.io.BufferedReader;
@@ -88,7 +92,7 @@ public class Storage {
     public void save() {
         try {
             writer = new FileWriter(filepath);
-            for (int i = 0; i < TaskList.getNumberOfTasks(); i ++) {
+            for (int i = 0; i < TaskList.getNumberOfTasks(); i++) {
                 Task task = TaskList.getTask(i);
                 if (task instanceof DeadlineTask) {
                     DeadlineTask deadlineTask = (DeadlineTask) task;
@@ -116,7 +120,7 @@ public class Storage {
             }
             writer.close();
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 

@@ -1,7 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
-import duke.exception.*;
+import duke.exception.InvalidTaskIndexException;
 
 public class TaskList {
 
@@ -31,7 +31,7 @@ public class TaskList {
         return index;
     }
 
-    public int addEventTask(String taskName, String taskDate){
+    public int addEventTask(String taskName, String taskDate) {
         EventTask newTask = new EventTask(taskName, taskDate);
         tasks.add(newTask);
 
@@ -44,7 +44,7 @@ public class TaskList {
             throw new InvalidTaskIndexException();
         } else {
             Task task = tasks.get(index);
-            task.isCompleted= true;
+            task.isCompleted = true;
         }
     }
 

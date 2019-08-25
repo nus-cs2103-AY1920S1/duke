@@ -3,7 +3,7 @@ package duke.parser;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import duke.exception.*;
+import duke.exception.InvalidDateInputException;
 
 public class DateParser {
 
@@ -45,8 +45,8 @@ public class DateParser {
     }
 
     private void checkDateData(String[] dateData) throws InvalidDateInputException {
-        InvalidDateInputException error = new InvalidDateInputException("Please key in a valid date in the format:\n " +
-                "dd/MM/yyyy");
+        InvalidDateInputException error = new InvalidDateInputException("Please key in a valid date in the format:\n "
+                + "dd/MM/yyyy");
         int day = Integer.parseInt(dateData[0]);
         int month = Integer.parseInt(dateData[1]);
         int year = Integer.parseInt(dateData[2]);
@@ -54,7 +54,7 @@ public class DateParser {
         if (year < 0 || month < 0 ||  month > 12 || day < 0 || day > 31) {
             throw error;
         } else if (day > 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8
-                    || month == 10 || month == 12)){
+                    || month == 10 || month == 12)) {
             throw error;
         } else if (month == 2 && ((day > 29 && year % 4 == 0) || day > 28)) {
             throw error;
@@ -64,8 +64,8 @@ public class DateParser {
     }
 
     private void checkTimeData(String time) throws InvalidDateInputException {
-        InvalidDateInputException error = new InvalidDateInputException("Please key in a valid time in the format:\n " +
-                "hhmm");
+        InvalidDateInputException error = new InvalidDateInputException("Please key in a valid time in the format:\n "
+                + "hhmm");
         int hours = Integer.parseInt(time.substring(0, 2));
         int mins = Integer.parseInt(time.substring(2));
 
@@ -91,7 +91,7 @@ public class DateParser {
 
     private String timeToString(int hour, int minutes, String timeInString) {
         if (hour > 12) {
-            return String.format("%02d:%02d pm", (hour-12), minutes);
+            return String.format("%02d:%02d pm", hour - 12, minutes);
         } else if (hour > 0 && hour < 12) {
             return String.format("%02d:%02d am", hour, minutes);
         } else if (timeInString.substring(0, 2).equals("12")) {

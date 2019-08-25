@@ -1,0 +1,2 @@
+T|0|nothinf
+E|0|test event|1/1/2019 1800

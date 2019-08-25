@@ -26,7 +26,7 @@ public class Deadline extends Task{
             this.minute = dateTime[1].substring(2);
 
             this.byDate = format.parse(day + "/" + month + "/" + year + " " + hour + ":" + minute);
-        } catch (Exception e) { throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of event timing is invalid.");}
+        } catch (Exception e) { throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of deadline timing is invalid.");}
     }
 
     public String dateToString() {

@@ -1,12 +1,14 @@
-public class TodoCommand extends Command {
+package seedu.duke;
+
+public class EventCommand extends Command {
     private String command;
-    public TodoCommand(String command) {
+    public EventCommand(String command) {
         this.command = command;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        ui.checkErrorForTodoCommand(command, tasks);
-        tasks.add(Parser.createTodo(command));
+        ui.checkErrorForEventCommand(command, tasks);
+        tasks.add(Parser.createEvent(command));
         ui.printAddedTask(tasks.get(tasks.size() - 1));
         ui.printNoOfTaskInList(tasks);
         storage.appendFile(tasks);

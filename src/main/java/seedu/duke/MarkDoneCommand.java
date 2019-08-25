@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class MarkDoneCommand extends Command {
     private String command;
     public MarkDoneCommand(String command) {

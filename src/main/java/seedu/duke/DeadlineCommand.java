@@ -1,12 +1,14 @@
-public class EventCommand extends Command {
+package seedu.duke;
+
+public class DeadlineCommand extends Command {
     private String command;
-    public EventCommand(String command) {
+    public DeadlineCommand(String command) {
         this.command = command;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        ui.checkErrorForEventCommand(command, tasks);
-        tasks.add(Parser.createEvent(command));
+        ui.checkErrorForDeadlineCommand(command, tasks);
+        tasks.add(Parser.createDeadline(command));
         ui.printAddedTask(tasks.get(tasks.size() - 1));
         ui.printNoOfTaskInList(tasks);
         storage.appendFile(tasks);

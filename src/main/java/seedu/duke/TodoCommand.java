@@ -1,12 +1,14 @@
-public class DeadlineCommand extends Command {
+package seedu.duke;
+
+public class TodoCommand extends Command {
     private String command;
-    public DeadlineCommand(String command) {
+    public TodoCommand(String command) {
         this.command = command;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
-        ui.checkErrorForDeadlineCommand(command, tasks);
-        tasks.add(Parser.createDeadline(command));
+        ui.checkErrorForTodoCommand(command, tasks);
+        tasks.add(Parser.createTodo(command));
         ui.printAddedTask(tasks.get(tasks.size() - 1));
         ui.printNoOfTaskInList(tasks);
         storage.appendFile(tasks);

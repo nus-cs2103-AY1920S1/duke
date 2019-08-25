@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class ListCommand extends Command {
     private String command;
     public ListCommand(String command) {

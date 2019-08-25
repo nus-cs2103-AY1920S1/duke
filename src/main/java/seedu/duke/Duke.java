@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.text.ParseException;
 
 public class Duke {

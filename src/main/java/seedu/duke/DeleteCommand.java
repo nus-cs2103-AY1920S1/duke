@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class DeleteCommand extends Command {
     private String command;
     public DeleteCommand(String command) {

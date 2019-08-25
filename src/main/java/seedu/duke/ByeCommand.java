@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class ByeCommand extends Command {
     private String command;
     private Ui ui;

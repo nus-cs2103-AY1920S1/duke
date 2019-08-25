@@ -2,14 +2,17 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
     protected Date time;
 
-    public Deadline(String description, String time) throws ParseException {
+    public DeadlineTask(String description, String time) throws DukeException {
         super(description);
-
-        this.time = format.parse(time);
+        try {
+            this.time = format.parse(time);
+        } catch (ParseException e) {
+             throw new DukeInvalidTaskDateException(time);
+        }
     }
 
     public String toFileString() {

@@ -1,0 +1,22 @@
+import java.io.IOException;
+
+public class ToDoCommand extends Command {
+    private String description;
+
+    public ToDoCommand(String description) {
+        this.description = description;
+    }
+
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        Task task = new ToDoTask(description);
+        tasks.addTask(task);
+        ui.print("Got it. I've added this task:\n " + task + "\n" + "Now you have " + tasks.getSize() + " task"
+            + (tasks.getSize()==1?" ":"s ") + "in the list.");
+        storage.save(tasks);
+    }
+
+    public boolean isExit() {
+        return false;
+    }
+
+}

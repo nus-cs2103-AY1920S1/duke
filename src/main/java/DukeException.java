@@ -1,5 +1,11 @@
 public class DukeException extends Exception {
-    public DukeException(String message) {
-        super(message);
+    String msg;
+
+    public DukeException(String msg) {
+        super(msg);
+    }
+
+    public String toString() {
+        return msg;
     }
 }

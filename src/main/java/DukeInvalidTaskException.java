@@ -1,10 +1,11 @@
 public class DukeInvalidTaskException extends DukeException {
     String task;
-    public DukeInvalidTaskException (String task) {
+
+    public DukeInvalidTaskException(String task) {
         this.task = task;
     }
 
-    public DukeInvalidTaskException (int task) {
+    public DukeInvalidTaskException(int task) {
         this.task = Integer.toString(task);
     }
 

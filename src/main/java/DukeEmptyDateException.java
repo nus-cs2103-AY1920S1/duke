@@ -1,6 +1,7 @@
 public class DukeEmptyDateException extends DukeException {
     private String cmd;
-    public DukeEmptyDateException (String cmd) {
+
+    public DukeEmptyDateException(String cmd) {
         this.cmd = cmd;
     }
 

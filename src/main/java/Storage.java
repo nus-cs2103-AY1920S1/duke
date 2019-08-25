@@ -43,23 +43,23 @@ public class Storage {
         }
         Task t;
         switch (arg[0]) {
-            case "T":
-                t = new TodoTask(arg[2]);
-                break;
-            case "D":
-                if (arg.length < 4) {
-                    throw new DukeInvalidTaskFormatException(line);
-                }
-                t = new DeadlineTask(arg[2], arg[3]);
-                break;
-            case "E":
-                if (arg.length < 4) {
-                    throw new DukeInvalidTaskFormatException(line);
-                }
-                t = new EventTask(arg[2], arg[3]);
-                break;
-            default:
+        case "T":
+            t = new TodoTask(arg[2]);
+            break;
+        case "D":
+            if (arg.length < 4) {
                 throw new DukeInvalidTaskFormatException(line);
+            }
+            t = new DeadlineTask(arg[2], arg[3]);
+            break;
+        case "E":
+            if (arg.length < 4) {
+                throw new DukeInvalidTaskFormatException(line);
+            }
+            t = new EventTask(arg[2], arg[3]);
+            break;
+        default:
+            throw new DukeInvalidTaskFormatException(line);
         }
         if (arg[1].equals("1")) {
             t.markAsDone();

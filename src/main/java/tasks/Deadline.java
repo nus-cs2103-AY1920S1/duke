@@ -9,6 +9,12 @@ public class Deadline extends Task {
     protected String day;
     protected String time;
 
+    /**
+     * constructor of Deadline task.
+     *
+     * @param description description of the task
+     * @param by          time
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;

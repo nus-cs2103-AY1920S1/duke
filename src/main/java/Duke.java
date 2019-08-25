@@ -10,6 +10,10 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * constructor for Duke.
+     * @param filePath which specifies the path for the .txt file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,10 +25,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Instantiate a Duke object and run it.
+     * @param args standard main args
+     */
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }
 
+    /**
+     * Running process of Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

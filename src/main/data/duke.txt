@@ -1,0 +1,7 @@
+T true read book
+D false return book/June 6th
+D false project meeting/Aug 6th 2-4pm
+T true join sports club
+T true dance
+D false get food/tmr
+E true dance party/my place

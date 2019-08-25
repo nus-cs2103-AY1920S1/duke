@@ -19,6 +19,7 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> listOfTasks) {
+        this.store = listOfTasks;
     }
 
     /**
@@ -105,5 +106,33 @@ public class TaskList {
         Ui.printNow(store.size());
     }
 
+    private void addGenericTask(Task task) {
+        this.store.add(task);
+    }
 
+    private void listSearchQuery() {
+        int num = 1;
+        for (Task i : store) {
+            System.out.println(+num + ". " + i);
+            num++;
+        }
+    }
+
+
+    public void findTask(String query) {
+        ArrayList<String> listOfAllDesc = new ArrayList<>();
+        for (Task i : store) {
+            listOfAllDesc.add(i.description);
+        }
+        TaskList temp = new TaskList(new ArrayList<Task>());
+
+        for (int i = 0; i < store.size(); i++) {
+            String eachDescription = listOfAllDesc.get(i);
+            if (eachDescription.contains(query)) {
+                temp.addGenericTask(store.get(i));
+            }
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        temp.listSearchQuery();
+    }
 }

@@ -1,16 +1,20 @@
+package task;
+
 import exception.DukeUnknownInputException;
 
 public class TaskFactory {
     public Task getTask(TaskType taskType, String[] args) throws DukeUnknownInputException {
-        if (taskType == TaskType.TODO) {
+        switch (taskType) {
+        case TODO:
             return new Todo(String.join(" ", args));
+        case EVENT:
+            String[] eArgs = String.join(" ", args).split(" /at ");
+            return new Event(eArgs[0].strip(), eArgs[1].strip());
+        case DEADLINE:
+            String[] dArgs = String.join(" ", args).split(" /by ");
+            return new Deadline(dArgs[0].strip(), dArgs[1].strip());
+        default:
+            throw new DukeUnknownInputException("Invalid TaskType enum given!");
         }
-        if (taskType == TaskType.EVENT) {
-            return new Event(args[0].strip(), args[1].strip());
-        }
-        if (taskType == TaskType.DEADLINE) {
-            return new Deadline(args[0].strip(), args[1].strip());
-        }
-        throw new DukeUnknownInputException("Invalid TaskType given!");
     }
 }

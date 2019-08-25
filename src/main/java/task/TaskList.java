@@ -1,3 +1,6 @@
+package task;
+
+import exception.DukeIllegalStateException;
 import exception.DukeIndexOutOfBoundsException;
 
 import java.util.ArrayList;
@@ -15,40 +18,34 @@ public class TaskList {
         return task;
     }
 
-    public Task delete(int idx) {
+    public Task delete(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
             throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
         }
         return tasks.remove(idx);
     }
 
-    public Task get(int idx) throws DukeIndexOutOfBoundsException{
+    public Task get(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
             throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
         }
         return tasks.get(idx);
     }
 
-    public boolean markAsDone(int idx) {
+    public Task markAsDone(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
             throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
         }
-        return tasks.get(idx).markAsDone();
+        Task task = tasks.get(idx);
+        task.markAsDone();
+        return task;
     }
 
     public long count() {
         return tasks.size() - 1; // account for 1-indexing.
     }
 
-    // Takes a list of Strings and numbers them in order, in a top-down list format.
-    public String format() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task != null) {
-                sb.append("\t").append(i).append(". ").append(task).append("\n");
-            }
-        }
-        return sb.toString();
+    public ArrayList<Task> getTaskList() {
+        return this.tasks;
     }
 }

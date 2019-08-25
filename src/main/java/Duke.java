@@ -1,3 +1,14 @@
+import exception.DukeIllegalStateException;
+import exception.DukeIndexOutOfBoundsException;
+import exception.DukeMissingDescriptionException;
+import exception.DukeUnknownInputException;
+import task.Task;
+import task.TaskList;
+import task.TaskFactory;
+import static task.TaskType.TODO;
+import static task.TaskType.DEADLINE;
+import static task.TaskType.EVENT;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -13,20 +24,20 @@ public class Duke {
     private static final String BOTTOM_SEPARATOR =
             "\t____________________________________________________________";
     private static final String GREET_MESSAGE =
-            "\tHello! I'm Duke. What can I do for you?\n";
-    private static final String ADD_MESSAGE =
-            "\tGot it. I've added this task:\n";
-    private static final String DELETE_MESSAGE =
-            "\tNoted. I've removed this task:\n";
-    private static final String DONE_MESSAGE =
-            "\tNice! I've marked this task as done:\n";
+            "    Hello! I'm Duke. What can I do for you?\n";
     private static final String EXIT_MESSAGE =
-            "\tBye. Hope to see you again soon!\n";
+            "    Bye. Hope to see you again soon!\n";
 
     private TaskList taskList;
+    private TaskFactory factory;
+    private PrettyPrinter pp;
+    private Memory memory;
 
     public Duke() {
-        this.taskList = new TaskList(); // leave index 0 empty for clarity
+        this.memory = new Memory("data/duke.txt");
+        this.taskList = memory.readFromDisk(); // leave index 0 empty for clarity
+        this.factory = new TaskFactory();
+        this.pp = new PrettyPrinter();
     }
 
     public void run() {
@@ -41,56 +52,41 @@ public class Duke {
             try {
                 switch (commands[0]) {
                 case "event":
-                    String[] eventArgs = String.join(" ", args).split("/at");
-                    Task eventTask = taskList.add(
-                            new Event(eventArgs[0].strip(), eventArgs[1].strip()));
-                    System.out.println(TOP_SEPARATOR
-                            + messageAddTask(eventTask)
-                            + BOTTOM_SEPARATOR);
+                    Task eventTask = taskList.add(factory.getTask(EVENT, args));
+                    System.out.println(pp.formatAddTask(eventTask, taskList));
+                    memory.writeToDisk(taskList);
                     break;
                 case "deadline":
-                    String[] todoArgs = String.join(" ", args).split("/by");
-                    Task deadlineTask = taskList.add(
-                            new Deadline(todoArgs[0].strip(), todoArgs[1].strip()));
-                    System.out.println(TOP_SEPARATOR
-                            + messageAddTask(deadlineTask)
-                            + BOTTOM_SEPARATOR);
+                    Task deadlineTask = taskList.add(factory.getTask(DEADLINE, args));
+                    System.out.println(pp.formatAddTask(deadlineTask, taskList));
+                    memory.writeToDisk(taskList);
                     break;
                 case "todo":
                     if (args.length == 0) {
                         throw new DukeMissingDescriptionException(
                                 ":'( OOPS!!! The description of a todo cannot be empty.");
                     }
-                    String todoDescription = String.join(" ", args);
-                    Task todoTask = taskList.add(new Todo(todoDescription));
-                    System.out.println(TOP_SEPARATOR
-                            + messageAddTask(todoTask)
-                            + BOTTOM_SEPARATOR);
+                    Task todoTask = taskList.add(factory.getTask(TODO, args));
+                    System.out.println(pp.formatAddTask(todoTask, taskList));
+                    memory.writeToDisk(taskList);
                     break;
                 case "done":
                     int doneIdx = Integer.valueOf(commands[1]);
-                    taskList.markAsDone(doneIdx);
-                    System.out.println(TOP_SEPARATOR
-                            + DONE_MESSAGE
-                            + "\t" + taskList.get(doneIdx) + "\n"
-                            + BOTTOM_SEPARATOR);
+                    Task task = taskList.markAsDone(doneIdx);
+                    System.out.println(pp.formatDoneTask(task));
+                    memory.writeToDisk(taskList);
                     break;
                 case "delete":
                     int deleteIdx = Integer.valueOf(commands[1]);
                     Task deletedTask = taskList.delete(deleteIdx);
-                    System.out.println(TOP_SEPARATOR
-                            + messageDeleteTask(deletedTask)
-                            + BOTTOM_SEPARATOR);
+                    System.out.println(pp.formatDeleteTask(deletedTask, taskList));
+                    memory.writeToDisk(taskList);
                     break;
                 case "list":
-                    System.out.println(TOP_SEPARATOR
-                            + taskList.format()
-                            + BOTTOM_SEPARATOR);
+                    System.out.println(pp.formatTaskList(taskList));
                     break;
                 case "bye":
-                    System.out.println(TOP_SEPARATOR
-                            + EXIT_MESSAGE
-                            + BOTTOM_SEPARATOR);
+                    System.out.println(pp.addSeparators(EXIT_MESSAGE));
                     return;
                 default:
                     throw new DukeMissingDescriptionException(
@@ -98,30 +94,12 @@ public class Duke {
                 }
             } catch (DukeUnknownInputException
                     | DukeMissingDescriptionException
-                    | DukeIndexOutOfBoundsException e) {
-                System.out.println(TOP_SEPARATOR
-                        + "\t" + e.getMessage() + "\n"
-                        + BOTTOM_SEPARATOR);
+                    | DukeIndexOutOfBoundsException
+                    | DukeIllegalStateException e) {
+                System.err.println("EXCEPTION!");
+                System.out.println(pp.addSeparatorsAddIndent(e.getMessage()));
             }
         }
-    }
-
-    // todo: Use enums to print custom messages? messageDeleteTask
-    // prints the message added and the number of tasks currently in the list.
-    public String messageAddTask(Task task) {
-        return ADD_MESSAGE
-                + "\t" + task + "\n"
-                + (taskList.count() == 1
-                    ? String.format("\tNow you have %d task in the list.\n", taskList.count())
-                    : String.format("\tNow you have %d tasks in the list.\n", taskList.count()));
-    }
-
-    public String messageDeleteTask(Task task) {
-        return DELETE_MESSAGE
-                + "\t" + task + "\n"
-                + (taskList.count() == 1
-                    ? String.format("\tNow you have %d task in the list.\n", taskList.count())
-                    : String.format("\tNow you have %d tasks in the list.\n", taskList.count()));
     }
 
     public static void main(String[] args) {

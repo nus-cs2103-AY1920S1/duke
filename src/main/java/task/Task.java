@@ -1,4 +1,6 @@
-abstract class Task {
+package task;
+
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -6,7 +8,7 @@ abstract class Task {
         this(description, false);
     }
 
-    private Task(String description, boolean isDone) {
+    protected Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
@@ -18,6 +20,14 @@ abstract class Task {
     protected boolean markAsDone() {
         this.isDone = true;
         return isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     @Override

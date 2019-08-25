@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +23,7 @@ public class Duke {
         tasks = new ArrayList<>();
     }
 
-    void startDuke() throws FileNotFoundException {
+    void startDuke() throws FileNotFoundException, ParseException {
         importData();
 
         line();
@@ -35,13 +37,14 @@ public class Duke {
         line();
     }
 
-    private void importData() throws FileNotFoundException {
+    private void importData() throws FileNotFoundException, ParseException {
         // pass the path to the file as a parameter
         File file =
-                new File("C:\\Users\\Jasmine\\Desktop\\semester1\\CS2103T\\iP\\duke\\data\\duke.txt");
+                new File("C:\\Users\\Jasmine\\Desktop\\semester1\\CS2103T\\iP\\duke\\data\\startDuke.txt");
         Scanner s = new Scanner(file);
 
         Duke duke = new Duke();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         while (s.hasNextLine()) {
             String[] task = s.nextLine().split(" \\| ");
@@ -50,10 +53,10 @@ public class Duke {
 
             switch (task[0]) {
             case "D":
-                taskToAdd = new Deadline(task[2], task[1].equals("+"), task[3]);
+                taskToAdd = new Deadline(task[2], task[1].equals("+"), formatter.parse(task[3]));
                 break;
             case "E":
-                taskToAdd = new Event(task[2], task[1].equals("+"), task[3]);
+                taskToAdd = new Event(task[2], task[1].equals("+"), formatter.parse(task[3]));
                 break;
             case "T":
                 taskToAdd = new Todo(task[2], task[1].equals("+"));

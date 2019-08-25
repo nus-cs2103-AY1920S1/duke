@@ -26,13 +26,13 @@ public class Duke {
         String command = in.nextLine().trim();
         String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
 
-        while ( !command.equals("bye") ){
+        while ( true ){
 
-            taskType = command.split(" ")[0];
+            taskType = command.split(" ")[0]; // taskType contains the first word of the command input string
 
             try {
 
-                if (command.equals("list")) {
+                if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) { // Changing implementation
 
                     output = underscore + "     Here are the tasks in your list:\n";
                     for (int i = 0; i < tasks.size(); i++) {
@@ -42,7 +42,7 @@ public class Duke {
 
                     System.out.println(output);
 
-                } else if (taskType.equals("done")) {
+                } else if (taskType.equals(possibleTasks.DONE.toString().toLowerCase())) {
 
                     taskNum = Integer.parseInt(command.substring(5)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
@@ -54,7 +54,7 @@ public class Duke {
 
                     System.out.println(output);
 
-                } else if (taskType.equals("todo")) {
+                } else if (taskType.equals(possibleTasks.TODO.toString().toLowerCase())) {
 
                     if (command.length() < 5){
                         throw new DukeException ("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -71,7 +71,7 @@ public class Duke {
 
                     System.out.println(output);
 
-                } else if (taskType.equals("deadline")) {
+                } else if (taskType.equals(possibleTasks.DEADLINE.toString().toLowerCase())) {
 
                     if ( ( command.length() < 9 )){ // Input is only "deadline"
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -91,7 +91,7 @@ public class Duke {
 
                     System.out.println(output);
 
-                } else if (taskType.equals("event")) {
+                } else if (taskType.equals(possibleTasks.EVENT.toString().toLowerCase())) {
 
                     if ( ( command.length() < 6 )){ // Input is only "event"
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -112,7 +112,7 @@ public class Duke {
 
                     System.out.println(output);
 
-                } else if (taskType.equals("delete")){
+                } else if (taskType.equals(possibleTasks.DELETE.toString().toLowerCase())){
 
                     taskNum = Integer.parseInt(command.substring(7)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
@@ -132,6 +132,14 @@ public class Duke {
                     taskToDelete = null;
 
 
+                } else if (taskType.equals(possibleTasks.BYE.toString().toLowerCase())){
+
+                    // Prints goodbye sequence
+                    output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
+                    System.out.print(output);
+
+                    break;
+
                 } else { // An invalid task command is given
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -147,9 +155,15 @@ public class Duke {
             output = "";
         }
 
-        // Prints goodbye sequence
-        output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
-        System.out.print(output);
+    }
+    enum possibleTasks{
+        BYE,
+        LIST,
+        DONE,
+        DELETE,
+        EVENT,
+        TODO,
+        DEADLINE
     }
 
 }

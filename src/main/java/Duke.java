@@ -6,7 +6,7 @@ public class Duke {
         Printer.printString("Hello! I'm Duke\nWhat can I do for you?");
         // greet
 
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<DonableTask> list = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         loop: while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
@@ -18,7 +18,7 @@ public class Duke {
                         formattedList.append("\n");
                     }
                     formattedList.append(i + 1);
-                    formattedList.append(". ");
+                    formattedList.append(".");
                     formattedList.append(list.get(i).toString());
                 }
                 // format list
@@ -31,7 +31,7 @@ public class Duke {
                 // bye
             default:
                 Printer.printString("added: " + input);
-                list.add(new Task(input));
+                list.add(new DonableTask(input));
                 // add to list
             }
         }
@@ -40,11 +40,27 @@ public class Duke {
 
 class Task {
     private String name;
+
     public Task(String taskName) {
         name = taskName;
     }
     public String toString() {
         return name;
+    }
+}
+
+class DonableTask extends Task {
+    public boolean isDone;
+
+    public DonableTask(String taskName) {
+        super(taskName);
+        isDone = false;
+    }
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + super.toString();
     }
 }
 

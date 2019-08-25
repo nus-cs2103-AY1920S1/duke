@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class TaskFileReader {
@@ -18,10 +19,15 @@ public class TaskFileReader {
             else {
                 isDone = false;
             }
-            String date = "";
+            Date date = null;
             String description = output[2];
             if (output.length > 3) {
-                date = output[3];
+                try {
+                    StringDateConverter converter = new StringDateConverter();
+                    date = converter.convertLongStringToDate(output[3]);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
             switch (output[0]) {
             case "T":

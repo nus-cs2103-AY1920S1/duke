@@ -1,14 +1,15 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TaskFileWriter {
     public void writeToFile(String filePath, ArrayList<Task> myList) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : myList) {
-            String description, date, textToAdd;
+            String description, textToAdd;
+            Date date = null;
             textToAdd = "";
-            date = "";
             description = task.getDescription();
             if (task instanceof Deadline) {
                 textToAdd += "D";
@@ -27,7 +28,7 @@ public class TaskFileWriter {
                 textToAdd += " | Not done";
             }
             textToAdd += " | " + description;
-            if (!date.equals("")) {
+            if (date != null) {
                 textToAdd += " | " + date;
             }
 //            textToAdd += "\n";

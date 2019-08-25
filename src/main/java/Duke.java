@@ -134,11 +134,11 @@ public class Duke {
                 if (i == 0) {
                     myList.add(new ToDo(input.substring(type[i].length())));
                 } else if (i == 1) {
-                    StringToDateConverter converter = new StringToDateConverter();
+                    StringDateConverter converter = new StringDateConverter();
                     Date by = converter.convertStringToDate(input.substring(endIdx + date[i].length() + 1));
                     myList.add(new Deadline(input.substring(type[i].length(), endIdx), by));
                 } else {
-                    StringToDateConverter converter = new StringToDateConverter();
+                    StringDateConverter converter = new StringDateConverter();
                     Date at = converter.convertStringToDate(input.substring(endIdx + date[i].length() + 1));
                     myList.add(new Event(input.substring(type[i].length(), endIdx), at));
                 }

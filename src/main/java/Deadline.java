@@ -9,12 +9,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, Date by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
-    public String getBy() {
+    public Date getBy() {
         return by;
     }
 

@@ -9,12 +9,12 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, Date at, boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
 
-    public String getAt() {
+    public Date getAt() {
         return at;
     }
 

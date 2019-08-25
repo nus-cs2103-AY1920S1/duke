@@ -1,9 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+
+
 
 public class Duke {
     private static boolean isBye = false;
@@ -29,9 +32,16 @@ public class Duke {
             System.out.println("task file is not found");
         }
 
+
     }
 
-    public static void printList() {
+
+
+    /**
+     * prints details for all available task when the list command is invoked.
+     */
+    public static void printList(){
+
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++){
             Task task = tasks.get(i);
@@ -40,12 +50,22 @@ public class Duke {
         }
     }
 
-    public static void done(int taskIndex) {
+
+
+    /**
+     * marks a task as done and prints message that a task is marked as done.
+     *
+     * @param taskIndex position of a task in the tasks Arraylist
+     *
+     */
+
+    public static void done(int taskIndex){
         try{
-            Task task = tasks.get(taskIndex);
-            task.completed();
+            Task t = tasks.get(taskIndex);
+            t.setCompleted();
+
             System.out.println("Nice! I've marked this task as done:");
-            System.out.println("   [✓] " + task.getTask());
+            System.out.println("   [✓] " + t.getTask());
         } catch (IndexOutOfBoundsException ex) {
             if (tasks.size() == 0){
                 System.out.println("No tasks to be done.");
@@ -56,7 +76,17 @@ public class Duke {
         }
     }
 
-    public static void delete(int taskIndex) {
+
+
+    /**
+     * deletes a task from tasks Arraylist and prints message that a task is deleted.
+     *
+     * @param taskIndex position of a task in the tasks Arraylist
+     *
+     */
+
+    public static void delete(int taskIndex){
+
         try{
             Task deletedTask = tasks.remove(taskIndex);
             System.out.println("Noted. I've removed this task:");
@@ -78,27 +108,59 @@ public class Duke {
         }
     }
 
-    public static void createDeadLine(String input) {
+
+    /**
+     * creates a deadline object and prints a message related to its creation.
+     *
+     * @param input information in the form of: return book /by 2/12/2019 1800 (an example)
+     *
+     */
+
+    public static void deadline(String input){
+
         String[] words = input.split(" /by ");
         Deadline deadLine = new Deadline(words[0], words[1]);
         tasks.add(deadLine);
         deadLine.printAddedDeadline(tasks.size());
     }
 
-    public static void createEvent(String input) {
+
+    /**
+     * creates an event object and prints a message related to its creation.
+     *
+     * @param input information in the form of: proj-meeting /at 13/10/2019 6-8pm (an example)
+     *
+     */
+    public static void event(String input){
+
         String[] words = input.split(" /at ");
         Events event = new Events(words[0], words[1]);
         tasks.add(event);
         event.printAddedEvent(tasks.size());
     }
 
-    public static void createToDo(String input){
-        Todo toDo = new Todo(input);
-        tasks.add(toDo);
-        toDo.printAddedTodo(tasks.size());
+
+    /**
+     * creates a todo object and prints a message related to its creation.
+     *
+     * @param input information in the form of: proj-meeting (an example)
+     *
+     */
+
+    public static void todo(String input){
+        Todo td = new Todo(input);
+        tasks.add(td);
+        td.printAddedTodo(tasks.size());
     }
 
-    public static void checkCommand(String input) throws NoValidCommandException {
+    /**
+     * responds a command
+     *
+     * @param input a command for Duke
+     *
+     */
+    public static void checkCommand(String input) throws NoValidCommandException{
+
         String[] words = input.split(" ", 2);
         String command = words[0];
 
@@ -126,13 +188,13 @@ public class Duke {
                 break;
 
             case "deadline":
-                createDeadLine(words[1]);
+                deadline(words[1]);
                 saveTaskUtil();
                 break;
 
             case "event":
                 try{
-                createEvent(words[1]);
+                event(words[1]);
                 } catch (IndexOutOfBoundsException ex) {
                     System.out.println("Either event description or event specific timing is missing.");
                 }
@@ -141,7 +203,7 @@ public class Duke {
 
             case "todo":
                 try {
-                    createToDo(words[1]);
+                    todo(words[1]);
                 } catch (IndexOutOfBoundsException ex) {
                     System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
@@ -154,7 +216,14 @@ public class Duke {
 
     }
 
-    public static void runInterface() {
+
+    /**
+     * runs the commandline interface for an user to interact with Duke.
+     *
+     */
+
+    public static void runInterface(){
+
         Scanner scan = new Scanner(System.in);
 
         while (!isBye) {
@@ -168,12 +237,15 @@ public class Duke {
         }
     }
 
-    public static void main (String[] args) {
+
+    public static void main(String[] args)  {
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");

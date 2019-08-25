@@ -41,6 +41,35 @@ public class Parser {
         }
     }
 
+    private static void validateIsPositiveInteger(String s, String message) throws DukeException {
+        try {
+            int integer = Integer.parseInt(s);
+            if (integer <= 0) {
+                throw new DukeException(message);
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException(message);
+        }
+    }
+
+    private static void validateNull(String s, String message) throws DukeException {
+        if (s != null) {
+            throw new DukeException(message);
+        }
+    }
+
+    private static void validateNotNull(String s, String message) throws DukeException {
+        if (s == null) {
+            throw new DukeException(message);
+        }
+    }
+
+    private static void validateString(String s, String target, String message) throws DukeException {
+        if (s == null || !s.equals(target)) {
+            throw new DukeException(message);
+        }
+    }
+
     /**
      * Parses a duke.command into its keyword and its arguments both before and after the slash, given an input string.
      * Does not ensure that the resulting duke.command is legal.
@@ -50,33 +79,29 @@ public class Parser {
         ParsedCommand parsedCommand = new ParsedCommand(input);
         switch (parsedCommand.keyword) {
         case "bye":
-            if (parsedCommand.args != null) {
-                throw new DukeException("The bye command should take no arguments.");
-            }
+            validateNull(parsedCommand.args, "The bye command should take no arguments.");
             return new ExitCommand();
         case "list":
-            if (parsedCommand.args != null) {
-                throw new DukeException("The list command should take no arguments.");
-            }
+            validateNull(parsedCommand.args, "The list command should take no arguments.");
             return new ListCommand();
         case "done":
-            return new FinishCommand(parsedCommand.args);
+            validateIsPositiveInteger(parsedCommand.args, "The argument for done should be a positive whole number");
+            return new FinishCommand(Integer.parseInt(parsedCommand.args));
         case "delete":
-            return new DeleteCommand(parsedCommand.args);
+            validateIsPositiveInteger(parsedCommand.args, "The argument for delete should be a positive whole number");
+            return new DeleteCommand(Integer.parseInt(parsedCommand.args));
         case "todo":
-            if (parsedCommand.args == null) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
+            validateNotNull(parsedCommand.args, "The description of a todo cannot be empty.");
             return new AddTodoCommand(parsedCommand.args);
         case "event":
-            if (parsedCommand.slashKeyword == null || !parsedCommand.slashKeyword.equals("at")) {
-                throw new DukeException("An event must have an 'at' date or time.");
-            }
+            validateNotNull(parsedCommand.beforeSlashArgs, "The description of an event cannot be empty.");
+            validateString(parsedCommand.slashKeyword, "at", "An event must have an 'at' date or time.");
+            validateNotNull(parsedCommand.slashArgs, "The 'at' date or time cannot be empty.");
             return new AddEventCommand(parsedCommand.beforeSlashArgs, parsedCommand.slashArgs);
         case "deadline":
-            if (parsedCommand.slashKeyword == null || !parsedCommand.slashKeyword.equals("by")) {
-                throw new DukeException("A deadline must have a 'by' date or time.");
-            }
+            validateNotNull(parsedCommand.beforeSlashArgs, "The description of a deadline cannot be empty.");
+            validateString(parsedCommand.slashKeyword, "by", "A deadline must have a 'by' date or time.");
+            validateNotNull(parsedCommand.slashArgs, "The 'by' date or time cannot be empty.");
             return new AddDeadlineCommand(parsedCommand.beforeSlashArgs, parsedCommand.slashArgs);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

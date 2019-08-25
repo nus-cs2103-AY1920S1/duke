@@ -4,7 +4,7 @@ import duke.command.Command;
 
 public class Duke {
 
-    private static final String DATA_FILE_TASKS = "./data/duke.txt";
+    public static final String DATA_FILE_TASKS = "./data/duke.txt";
 
     private Storage storage;
     private TaskList tasks;
@@ -23,6 +23,7 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {

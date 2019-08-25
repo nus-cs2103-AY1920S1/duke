@@ -6,10 +6,10 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    private final String posString;
+    private final int position;
 
-    public DeleteCommand(String posString) {
-        this.posString = posString;
+    public DeleteCommand(int position) {
+        this.position = position;
     }
 
     @Override
@@ -19,14 +19,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        try {
-            int position = Integer.parseInt(posString) - 1;
-            Task oldTask = tasks.getTask(position);
-            tasks.deleteTask(position);
-            ui.showTaskDeleted(oldTask);
-            ui.showNumTasks(tasks.getNumTasks());
-        } catch (NumberFormatException e) {
-            throw new DukeException("Your input should be a number.");
-        }
+        Task oldTask = tasks.getTask(position);
+        tasks.deleteTask(position);
+        ui.showTaskDeleted(oldTask);
+        ui.showNumTasks(tasks.getNumTasks());
     }
 }

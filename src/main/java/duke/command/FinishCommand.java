@@ -6,10 +6,10 @@ import duke.Ui;
 import duke.task.Task;
 
 public class FinishCommand extends Command {
-    private final String posString;
+    private final int position;
 
-    public FinishCommand(String posString) {
-        this.posString = posString;
+    public FinishCommand(int position) {
+        this.position = position;
     }
 
     @Override
@@ -19,13 +19,8 @@ public class FinishCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        try {
-            int position = Integer.parseInt(this.posString) - 1;
-            Task task = tasks.getTask(position);
-            task.markAsDone();
-            ui.showTaskDone(task);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Your input should be a number.");
-        }
+        Task task = tasks.getTask(position);
+        task.markAsDone();
+        ui.showTaskDone(task);
     }
 }

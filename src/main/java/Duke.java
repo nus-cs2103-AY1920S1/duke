@@ -1,6 +1,22 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
         Printer.printString("Hello! I'm Duke\nWhat can I do for you?");
+        // greet
+
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            if(input.equalsIgnoreCase("bye")) {
+                Printer.printString("Bye. Hope to see you again soon!");
+                break;
+            }else {
+                Printer.printString(input);
+                // echo
+            }
+            // bye
+        }
     }
 }
 

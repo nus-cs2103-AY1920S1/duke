@@ -32,7 +32,7 @@ public class Duke {
                 // bye
             default:
                 if (input.matches("^done [0-9]+$")) {
-                    int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    int index = Integer.parseInt(input.split("done ", 2)[1]) - 1;
                     // get index
                     if (index < 0 || index > list.size()) {
                         Printer.printString("That is not a valid task index");
@@ -45,8 +45,28 @@ public class Duke {
                         // mark done
                     }
                 } else {
-                    Printer.printString("added: " + input);
-                    list.add(new DoableTask(input));
+                    boolean erroneousInput = false;
+                    DoableTask t = null;
+                    String contentString;
+                    String[] contentSegments;
+                    if (input.matches("^todo .+")) {
+                        t = new Todo(input.split("todo ", 2)[1]);
+                    } else if (input.matches("^deadline .+ /by .+")) {
+                        contentString = input.split("deadline ",2)[1];
+                        contentSegments = contentString.split("/by ");
+                        t = new Deadline(contentSegments[0], contentSegments[1]);
+                    } else if (input.matches("^event .+ /at .+")) {
+                        contentString = input.split("event ",2)[1];
+                        contentSegments = contentString.split("/at ");
+                        t = new Event(contentSegments[0], contentSegments[1]);
+                    } else {
+                        Printer.printString("That is not a valid input statement");
+                        erroneousInput = true;
+                    }
+                    if (!erroneousInput) {
+                        list.add(t);
+                        Printer.addTaskMessage(t, list.size());
+                    }
                     // add to list
                 }
             }
@@ -87,6 +107,42 @@ class DoableTask extends Task {
     }
 }
 
+class Todo extends DoableTask {
+    public Todo(String taskName) {
+        super(taskName);
+    }
+
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+}
+
+class Deadline extends DoableTask {
+    private String deadline;
+
+    public Deadline(String taskName, String due) {
+        super(taskName);
+        deadline = due;
+    }
+
+    public String toString() {
+        return "[D]" + super.toString() + "(by: " + deadline + ")";
+    }
+}
+
+class Event extends DoableTask {
+    private String dateRange;
+
+    public Event(String taskName, String range) {
+        super(taskName);
+        dateRange = range;
+    }
+
+    public String toString() {
+        return "[E]" + super.toString() + "(at: " + dateRange + ")";
+    }
+}
+
 class Printer {
 
     /** The spacing after padding for each line of text. */
@@ -113,6 +169,18 @@ class Printer {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+    }
+
+    /**
+     * Prints an added message for the last task in the list.
+     * @precondition must have at least one element in the list.
+     * @param tasks ArrayList of tasks.
+     */
+    public static void addTaskMessage(Task task, int length) {
+        printString("Got it. I've added this task:\n  "
+                + task.toString()
+                + "\nNow you have " + length
+                + "tasks in the list.");
     }
 
     /**

@@ -52,6 +52,10 @@ public class Time {
 		return isNull;
 	}
 
+	public String getRawTime() {
+		return rawTime;
+	}
+
 	@Override
 	public String toString() {
 		if (minutes != 0) {

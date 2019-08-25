@@ -88,6 +88,10 @@ public class Date {
 		return isNull;
 	}
 
+	public String getRawDate() {
+		return rawDate;
+	}
+
 	@Override
 	public String toString() {
 		if ((day % 10) == 1 && day != 11) {

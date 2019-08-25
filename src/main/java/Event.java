@@ -13,6 +13,26 @@ public class Event extends Task {
 		this.endTime = endTime;
 	}
 
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public Time getStartTime() {
+		return startTime;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public Time getEndTime() {
+		return endTime;
+	}
+
+	public String getType() {
+		return "E";
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

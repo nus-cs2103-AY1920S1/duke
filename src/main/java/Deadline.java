@@ -9,6 +9,18 @@ public class Deadline extends Task {
 		this.time = time;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
+	public String getType() {
+		return "D";
+	}
+
 	@Override
 	public String toString() {
 		return "[D]" + super.toString() + " (by: " + date + (time.isNull() ? "" : ", " + time) + ")";

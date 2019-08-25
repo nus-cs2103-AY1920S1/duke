@@ -7,7 +7,14 @@ public class Task {
         this.isDone = false;
     }
 
-    private String getStatusIcon() {
+    Task() {}
+
+    Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    protected String getStatusIcon() {
         return (isDone ? "+" : "-");
     }
 
@@ -17,5 +24,9 @@ public class Task {
 
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String toFile() {
+        return "";
     }
 }

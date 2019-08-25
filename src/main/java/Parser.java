@@ -6,6 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 public class Parser {
+    /**
+     * To parse all user inputs
+     *
+     * @param command user input
+     * @return command to be executed
+     * @throws DukeException If invalid command
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();
@@ -46,6 +53,13 @@ public class Parser {
         }
     }
 
+    /**
+     * To format time of user input
+     *
+     * @param input user input
+     * @return formatted time string
+     * @throws DukeException if invalid time format
+     */
     private static String formatTime(String input) throws DukeException {
         StringBuilder temp = new StringBuilder();
         StringBuilder result = new StringBuilder();

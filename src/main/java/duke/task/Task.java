@@ -1,7 +1,8 @@
 package duke.task;
 
-abstract public class Task {
-    String description, timing;
+public abstract class Task {
+    String description;
+    String timing;
     boolean isDone;
     TaskType taskType;
 

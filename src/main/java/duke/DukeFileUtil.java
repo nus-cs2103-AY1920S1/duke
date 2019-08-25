@@ -63,7 +63,7 @@ public class DukeFileUtil {
 
                     existingTasks.add(taskToAdd);
 
-                } catch (DukeTaskFileParseException ex) {
+                } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
                     System.out.print(Duke.HORIZONTAL_LINE);
                     System.out.println(ex.getDisplayMsg());
                     System.out.println(Duke.HORIZONTAL_LINE);
@@ -173,9 +173,7 @@ public class DukeFileUtil {
         throws DukeTaskFileParseException {
 
         try {
-            //Call Duke validate for now, will be refactored post merge
             Duke.validateTaskDescription(description);
-
         } catch (DukeInvalidArgumentException ex) {
             throwParseException(
                     "Invalid task description encountered when parsing task file",
@@ -189,19 +187,10 @@ public class DukeFileUtil {
     private static String getTime(String[] inputs, int lineNumber)
             throws DukeTaskFileParseException {
 
-        try {
-            //Call Duke validate for now, will be refactored post merge
-            Duke.validateTaskTiming(inputs[3]);
-
-        } catch (IndexOutOfBoundsException ex) {
+        if (inputs.length != 4) {
             throwParseException(
                     "Missing time information encountered when parsing task file",
                     "Empty time information for task requiring it",
-                    lineNumber);
-        } catch (DukeInvalidArgumentException ex) {
-            throwParseException(
-                    "Invalid task time encountered when parsing task file",
-                    "Invalid task time format",
                     lineNumber);
         }
 

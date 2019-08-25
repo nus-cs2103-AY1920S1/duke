@@ -69,10 +69,11 @@ public class Duke {
 
     }
 
-    // If there's already a file, just need to append new tasks into file
+    // just need to append new tasks into file
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
+        fw.write("\n");
         fw.close();
     }
 
@@ -118,13 +119,15 @@ public class Duke {
                             try {
                                 todoCheck(task);
                                 Task todo = new Todo(userInput.substring(5));
-                                // listOfInputs.add(todo);
-
+                                listOfInputs.add(todo);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(todo);
+                                appendToFile("data/duke.txt", todo.toString());
                                 System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             } finally {
                                 break;
                             }
@@ -137,9 +140,12 @@ public class Duke {
                                 listOfInputs.add(deadline);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(deadline);
+                                appendToFile("data/duke.txt", deadline.toString());
                                 System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             } finally {
                                 break;
                             }
@@ -152,9 +158,12 @@ public class Duke {
                                 listOfInputs.add(event);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(event);
+                                appendToFile("data/duke.txt", event.toString());
                                 System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             } finally {
                                 break;
                             }

@@ -5,10 +5,21 @@ public class Parser  {
     TaskList storeTaskList;
 
 
+    /**
+     * Parser class responsible for parsing user input.
+     * This includes asking for user input, decoding user input accordingly.
+     * Only responsible for making sense of the users command e.g String manipulation
+     * @param list TaskList object at any instance, usually the TaskList read from the hard drive
+     */
     public Parser(TaskList list) {
         this.storeTaskList = list;
 
     }
+
+    /**
+     * main driver method for Parser class
+     * calls and links to other objects to execute the entire program
+     */
 
     public void readUserInput() {
         Scanner myScanner = new Scanner(System.in);
@@ -125,7 +136,7 @@ public class Parser  {
                             }
                         }
 
-                        eventTaskDateAndTimeString = convertStringToDate(eventTaskDateAndTimeString);
+                        //eventTaskDateAndTimeString = convertStringToDate(eventTaskDateAndTimeString);
                         storeTaskList.addEventTask(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
                         //argument = myScanner.nextLine();
                     } catch (DukeException e) {
@@ -170,6 +181,12 @@ public class Parser  {
         myScanner.close();
     }
 
+    /**
+     * String manipulation method to return a formatted
+     * from 2/12/2019 1800 to 2nd of December 2019 6pm etc
+     * @param dateAndTimeString given string in the format of d/mm/yyyy HHmm
+     * @return formatted date and time
+     */
     private static String convertStringToDate(String dateAndTimeString) {
         try {
             String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
@@ -195,6 +212,12 @@ public class Parser  {
         return " ";
     }
 
+    /**
+     * converts time to string
+     * @param convertedTime given input e.g 1630
+     * @return formatted string e.g 1630 becomes 430pm
+     * @throws DukeException exception when the input is not four digits / out of bounds e.g 2500
+     */
     private static String convertTime(Integer convertedTime) throws  DukeException{
         String time = "";
         if (convertedTime == 0) {
@@ -232,6 +255,13 @@ public class Parser  {
         return time;
     }
 
+    /**
+     *
+     * helper function to convert d/mm/yyyy to the correct format
+     * @param date inputdate etc 2/12/2019
+     * @return formatted date
+     */
+
     private static String formatString(String date) {
         //[ 2 , 12, 2019]
         String[] newArr = date.split("/");
@@ -244,6 +274,12 @@ public class Parser  {
         return num + " of " + month + " " + newArr[2];
     }
 
+    /**
+     * method to return the month in full spelling
+     * @param month given month number as input
+     * @return name of the month
+     */
+
     private static String getMonth(String month) {
         String[] arrMonths = {" bye", "January", "February", "March", "April", "May", "June",
                 "July", "August", "September",
@@ -254,6 +290,11 @@ public class Parser  {
 
     }
 
+    /**
+     * method to find the ordinal of each number e.g 1st, 2nd, 3rd
+     * @param num input num
+     * @return formatted number e.g 1 becomes 1st, 21 becomes 21st
+     */
     private static String getOrdinal(String num) {
         int temp = Integer.valueOf(num);
         if (temp == 1 || temp == 21 || temp == 31) {
@@ -267,10 +308,21 @@ public class Parser  {
         }
     }
 
+    /**
+     * method for testing private static methods
+     * @param test dummy String
+     * @return
+     */
     public static String accessConvertStringToDate(String test) {
         return convertStringToDate(test);
     }
 
+    /**
+     * method for testing private static method
+     * @param convertedTime dummy int
+     * @return
+     * @throws DukeException
+     */
     public static String accessConvertTime(int convertedTime) throws DukeException {
         return convertTime(convertedTime);
     }

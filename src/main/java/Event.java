@@ -1,7 +1,11 @@
 public class Event extends Task {
     String eventDuration;
 
-
+    /**
+     * Event task
+     * @param description user input of the title of the task
+     * @param eventDuration user input of the duration of the event
+     */
     public Event(String description, String eventDuration) {
         super(description);
         this.eventDuration = eventDuration;

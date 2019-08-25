@@ -24,6 +24,7 @@ public class Parser {
         this.commandFormatters.add(new ExitCommandFormatter());
         this.commandFormatters.add(new ListTasksCommandFormatter());
         this.commandFormatters.add(new TaskDoneCommandFormatter());
+        this.commandFormatters.add(new FindTaskCommandFormatter());
     }
 
     /**

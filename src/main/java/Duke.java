@@ -18,7 +18,7 @@ public class Duke {
     public Duke(String filepath) {
         storage = new Storage(filepath);
         //initialise an arraylist to store Tasks
-        TaskList store = new TaskList(storage.createTasksFromFile(tempStore), storage);
+        TaskList store = new TaskList(storage.createTasksFromFile(), storage);
         this.parser = new Parser(store);
     }
 

@@ -37,7 +37,8 @@ public class Storage {
         }
     }
 
-    public  ArrayList<Task> createTasksFromFile(ArrayList<Task> store) {
+    public ArrayList<Task> createTasksFromFile() {
+        ArrayList<Task> store = new ArrayList<>();
         for (int i = 0; i < this.storingStrings.size(); i++) {
             String wholeLine = this.storingStrings.get(i);
             String[] argumentArray = wholeLine.split(" ");

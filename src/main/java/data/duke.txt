@@ -1,5 +1,5 @@
 T 1 join sports club
 T 1 five guys
-D 0 return book /by 2nd of December 2019, 6pm
-T 0 read book
+D 1 return book /by 2nd of December 2019, 6pm
 E 0 project meeting /at 22nd of October 2017, 620pm
+T 0 read apple

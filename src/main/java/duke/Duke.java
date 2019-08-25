@@ -280,16 +280,6 @@ public class Duke {
         }
     }
 
-    private static void validateTaskPeriod(String timing)
-        throws DukeInvalidArgumentException {
-
-        if (timing.length() == 0) {
-            throw new DukeInvalidArgumentException(
-                    "User specified timing of task is empty",
-                    " \u2639 OOPS!!! The timing cannot be empty.");
-        }
-    }
-
     private static void addAndPrintTask(ArrayList<Task> tasks, Task task)
             throws DukeInvalidArgumentException {
 

@@ -1,7 +1,5 @@
 T:1:read book
 D:1:return book:2/12/2019
 E:1:project meeting:6/8/2019 1400-1630
-T:1:join sports club
-T:1:sleep
-T:0:eat
 D:0:play com:19/11/2019
+E:0:sleep:21/3/2019 1000-1130

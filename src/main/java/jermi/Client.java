@@ -8,16 +8,27 @@ import jermi.component.Storage;
 import jermi.component.ExceptionHandler;
 import jermi.exception.JermiException;
 
-
+/**
+ * The Client program manages the workflow of the application.
+ */
 public class Client {
+    /** Client object reference */
     private static Client client = null;
+    /** Ui object reference */
     private Ui ui;
+    /** Parser object reference */
     private Parser parser;
+    /** TaskList object reference */
     private TaskList taskList;
+    /** Storage object reference */
     private Storage storage;
+    /** ExceptionHandler object reference */
     private ExceptionHandler exceptionHandler;
 
-
+    /**
+     * Private constructor for class.
+     * Initialises {@link Ui}, {@link Parser}, {@link TaskList} and {@link ExceptionHandler}.
+     */
     private Client() {
         this.ui = new Ui();
         this.parser = new Parser();
@@ -25,6 +36,11 @@ public class Client {
         this.exceptionHandler = new ExceptionHandler(this.ui);
     }
 
+    /**
+     * Initialises {@link Client}.
+     *
+     * @return New Client object if one has not been initialised before, else existing Client object.
+     */
     public static Client initialise() {
         if (client == null) {
             client = new Client();
@@ -34,10 +50,16 @@ public class Client {
         return client;
     }
 
-    private boolean initialiseStorage(String pathName) {
+    /**
+     * Initialises {@link Storage}.
+     *
+     * @param pathname Pathname of storage file.
+     * @return true if Storage has been successfully initialised, else false.
+     */
+    private boolean initialiseStorage(String pathname) {
         boolean shouldContinue = false;
         try {
-            this.storage = new Storage(pathName, this.taskList);
+            this.storage = new Storage(pathname, this.taskList);
             this.ui.greet();
             shouldContinue = true;
         } catch (JermiException e) {
@@ -50,8 +72,13 @@ public class Client {
         return shouldContinue;
     }
 
-    public void run(String pathName) {
-        boolean shouldContinue = initialiseStorage(pathName);
+    /**
+     * Runs the client.
+     *
+     * @param pathname Path name of storage file.
+     */
+    public void run(String pathname) {
+        boolean shouldContinue = initialiseStorage(pathname);
 
         while (shouldContinue) {
             try {

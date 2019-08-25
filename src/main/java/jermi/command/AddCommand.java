@@ -10,16 +10,32 @@ import jermi.task.Task;
 import jermi.task.ToDo;
 import jermi.type.TaskType;
 
+/**
+ * A representation of the command for adding task to the list.
+ */
 public class AddCommand extends Command {
+    /** Task type of the task to be added */
     private TaskType taskType;
+    /** Description of the task to be added */
     private String description;
 
+    /**
+     * Public constructor for class.
+     *
+     * @param taskType Task type of the task to be added.
+     * @param description Description of the task to be added.
+     */
     public AddCommand(TaskType taskType, String description) {
         super();
         this.taskType = taskType;
         this.description = description;
     }
 
+    /**
+     * Creates the task according to the task type and the description of the task.
+     *
+     * @return Created task.
+     */
     private Task createTask() {
         Task task = null;
         switch (this.taskType) {
@@ -44,6 +60,14 @@ public class AddCommand extends Command {
         return task;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param taskList Task list.
+     * @param ui UI.
+     * @param storage Storage.
+     * @throws JermiException JermiException.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws JermiException {
         Task task = this.createTask();
@@ -55,6 +79,11 @@ public class AddCommand extends Command {
         storage.taskListToFile();
     }
 
+    /**
+     * Indicates if the program should exit.
+     *
+     * @return {@code false}.
+     */
     @Override
     public boolean shouldExit() {
         return false;

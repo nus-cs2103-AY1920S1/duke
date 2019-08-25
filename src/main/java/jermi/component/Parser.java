@@ -11,8 +11,19 @@ import jermi.exception.InvalidCommandException;
 import jermi.exception.JermiException;
 import jermi.type.TaskType;
 
+/**
+ * A class that deals with making sense of the user input.
+ */
 public class Parser {
 
+    /**
+     * Parses and returns the {@link Command} associated with the user input.
+     *
+     * @param inputCommand User input command.
+     * @param inputDetails User input details.
+     * @return Associated command.
+     * @throws JermiException All checked exceptions in the Jermi program.
+     */
     public Command parse(String inputCommand, String inputDetails) throws JermiException {
         Command command = null;
         switch (inputCommand) {

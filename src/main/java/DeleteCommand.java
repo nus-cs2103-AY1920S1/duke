@@ -18,10 +18,6 @@ public class DeleteCommand extends Command {
         }
         Task toRemove = taskList.getTaskByIndex(this.index);
         taskList.removeFromList(this.index);
-        Formatter.printLine();
-        System.out.println(Formatter.indentLine("Noted. I've removed this task:"));
-        System.out.println(Formatter.indentLine("  " + toRemove));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
-        Formatter.printLine();
+        ui.printDeleteCommand(toRemove, taskList);
     }
 }

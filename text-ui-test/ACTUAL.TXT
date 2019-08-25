@@ -1,167 +1,178 @@
     ____________________________________________________________
-     Hello! I'm Duke
+     Hello! I'm Slave! Your very own productivity application.
      What can I do for you?
     ____________________________________________________________
+
     ____________________________________________________________
      Here are the tasks in your list:
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [T][?] read book
+       [T][X] read book
      Now you have 1 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
+     1.[T][X] read book
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [T][?] sleep
+       [T][X] sleep
      Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [T][?] wake up
+       [T][X] wake up
      Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [T][?] watch movie
+       [T][X] watch movie
      Now you have 4 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
+     1.[T][X] read book
+     2.[T][X] sleep
+     3.[T][X] wake up
+     4.[T][X] watch movie
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
+     1.[T][X] read book
+     2.[T][X] sleep
+     3.[T][X] wake up
+     4.[T][X] watch movie
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][?] project meeting (at: Aug 25th 2-4pm)
+       [E][X] project meeting (at: Aug 25th 2-4pm)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [E][?] concert (at: Sunday 8-10pm)
+       [E][X] concert (at: Sunday 8-10pm)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][?] read book
+       [T][Done] read book
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][?] sleep
+       [T][Done] sleep
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][?] wake up
+       [T][Done] wake up
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][?] watch movie
+       [T][Done] watch movie
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
-     5.[E][?] project meeting (at: Aug 25th 2-4pm)
-     6.[E][?] concert (at: Sunday 8-10pm)
+     1.[T][Done] read book
+     2.[T][Done] sleep
+     3.[T][Done] wake up
+     4.[T][Done] watch movie
+     5.[E][X] project meeting (at: Aug 25th 2-4pm)
+     6.[E][X] concert (at: Sunday 8-10pm)
     ____________________________________________________________
     ____________________________________________________________
      Noted. I've removed this task:
-       [E][?] project meeting (at: Aug 25th 2-4pm)
+       [E][X] project meeting (at: Aug 25th 2-4pm)
      Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
-     5.[E][?] concert (at: Sunday 8-10pm)
+     1.[T][Done] read book
+     2.[T][Done] sleep
+     3.[T][Done] wake up
+     4.[T][Done] watch movie
+     5.[E][X] concert (at: Sunday 8-10pm)
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [E][?] concert (at: Sunday 8-10pm)
+       [E][Done] concert (at: Sunday 8-10pm)
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
-     5.[E][?] concert (at: Sunday 8-10pm)
+     1.[T][Done] read book
+     2.[T][Done] sleep
+     3.[T][Done] wake up
+     4.[T][Done] watch movie
+     5.[E][Done] concert (at: Sunday 8-10pm)
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task:
-       [D][?] coding assignment (by: Monday)
+       [D][X] coding assignment (by: Monday)
      Now you have 6 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
-     5.[E][?] concert (at: Sunday 8-10pm)
-     6.[D][?] coding assignment (by: Monday)
+     1.[T][Done] read book
+     2.[T][Done] sleep
+     3.[T][Done] wake up
+     4.[T][Done] watch movie
+     5.[E][Done] concert (at: Sunday 8-10pm)
+     6.[D][X] coding assignment (by: Monday)
     ____________________________________________________________
     ____________________________________________________________
-     Task has already been done! The Duke is sad :(
+     Task has already been done!
     ____________________________________________________________
-    ____________________________________________________________
-     Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
-     5.[E][?] concert (at: Sunday 8-10pm)
-     6.[D][?] coding assignment (by: Monday)
-    ____________________________________________________________
-    ____________________________________________________________
-     Task is not in your list The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     Task is not in your list The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     Task has no description, please enter again. The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     Please specify the task! The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     Task has no description, please enter again. The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     The event/deadline is missing a date! The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     Task has no description, please enter again. The Duke is sad :(
-    ____________________________________________________________
-    ____________________________________________________________
-     The event/deadline is missing a date! The Duke is sad :(
-    ____________________________________________________________
+
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][?] read book
-     2.[T][?] sleep
-     3.[T][?] wake up
-     4.[T][?] watch movie
-     5.[E][?] concert (at: Sunday 8-10pm)
-     6.[D][?] coding assignment (by: Monday)
+     1.[T][Done] read book
+     2.[T][Done] sleep
+     3.[T][Done] wake up
+     4.[T][Done] watch movie
+     5.[E][Done] concert (at: Sunday 8-10pm)
+     6.[D][X] coding assignment (by: Monday)
     ____________________________________________________________
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     Oh no! Task not found!
     ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! Task not found!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! Missing description!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! No task specified!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! Missing description!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! Missing date!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! Missing description!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Oh no! Missing date!
+    ____________________________________________________________
+
+    ____________________________________________________________
+     Here are the tasks in your list:
+     1.[T][Done] read book
+     2.[T][Done] sleep
+     3.[T][Done] wake up
+     4.[T][Done] watch movie
+     5.[E][Done] concert (at: Sunday 8-10pm)
+     6.[D][X] coding assignment (by: Monday)
+    ____________________________________________________________
+    ____________________________________________________________
+     Bye! Thanks for using me! Will be right here when you need me.
+    ____________________________________________________________
+

@@ -14,10 +14,6 @@ public class AddToDoCommand extends Command{
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         this.toDoTask = new ToDo(this.task, taskList.getSize() + 1);
         taskList.addToList(this.toDoTask);
-        Formatter.printLine();
-        System.out.println(Formatter.indentLine("Got it. I've added this task:"));
-        System.out.println(Formatter.indentLine("  " + this.toDoTask));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
-        Formatter.printLine();
+        ui.printAddToDoCommand(toDoTask, taskList);
     }
 }

@@ -8,11 +8,6 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        Formatter.printLine();
-        System.out.println(Formatter.indentLine("Here are the tasks in your list:"));
-        for (Task task: taskList.getList()){
-            System.out.println(Formatter.indentLine(task.id + "." + task.toString()));
-        }
-        Formatter.printLine();
+        ui.printListCommand(taskList);
     }
 }

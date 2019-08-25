@@ -20,9 +20,7 @@ public class DoneCommand extends Command{
             throw new DukeException("Task has already been done!", DukeExceptionType.TASKALREADYDONE);
         }
         taskList.setDoneInList(this.index);
-        Formatter.printLine();
-        System.out.println(Formatter.indentLine("Nice! I've marked this task as done:"));
-        System.out.println(Formatter.indentLine("  " + taskList.getTaskByIndex(this.index)));
-        Formatter.printLine();
+        Task task = taskList.getTaskByIndex(this.index);
+        ui.printDoneCommand(task, taskList);
     }
 }

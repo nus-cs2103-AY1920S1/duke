@@ -14,10 +14,6 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         this.deadlineTask = new Deadline(this.task, taskList.getSize() + 1, this.date);
         taskList.addToList(this.deadlineTask);
-        Formatter.printLine();
-        System.out.println(Formatter.indentLine("Got it. I've added this task:"));
-        System.out.println(Formatter.indentLine("  " + this.deadlineTask));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
-        Formatter.printLine();
+        ui.printAddDeadlineCommand(this.deadlineTask, taskList);
     }
 }

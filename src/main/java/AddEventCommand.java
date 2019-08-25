@@ -14,10 +14,6 @@ public class AddEventCommand extends Command{
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         this.eventTask = new Event(this.task, taskList.getSize() + 1, this.date);
         taskList.addToList(this.eventTask);
-        Formatter.printLine();
-        System.out.println(Formatter.indentLine("Got it. I've added this task:"));
-        System.out.println(Formatter.indentLine("  " + this.eventTask));
-        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
-        Formatter.printLine();
+        ui.printAddEventCommand(eventTask, taskList);
     }
 }

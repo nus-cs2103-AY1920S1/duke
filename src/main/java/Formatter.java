@@ -1,6 +1,6 @@
 public class Formatter {
 
-    final private static String HORIZONTAL_LINE = "\t____________________________________________________________";
+    final private static String HORIZONTAL_LINE = "    ____________________________________________________________";
     final private static String INDENTATION = "     ";
 
     public static String formatMessage(String text){

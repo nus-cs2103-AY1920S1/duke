@@ -1,11 +1,68 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
+
+    private static void appendToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static ArrayList<Task> createTasks(File f) throws FileNotFoundException {
+        ArrayList<Task> result = new ArrayList<>();
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String command = s.next();
+
+                if (command.equals("todo")) {
+                    String str = s.nextLine();
+                    result.add(new ToDo(str));
+                } else if (command.equals("deadline")) {
+                    String str = s.nextLine();
+                    String[] wordArr = str.split("/by", 2);
+                    result.add(new DeadLine(wordArr[0], wordArr[1]));
+                } else if (command.equals("event")) {
+                    String str = s.nextLine();
+                    String[] wordArr = str.split("/at", 2);
+                    result.add(new DeadLine(wordArr[0], wordArr[1]));
+                } else if (command.equals("delete")) {
+                    int taskNum = s.nextInt();
+                    result.remove(taskNum);
+                } else {
+                    int taskNum = s.nextInt();
+                    result.get(taskNum).setAsDone();
+                }
+            }
+            s.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("OOPS! The file has not been found!");
+        }
+
+        return result;
+    }
+
+    private static void printTasks(ArrayList<Task> t) {
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\n\tHere are the tasks in your list: ");
+        for (int i = 0; i < t.size(); i++) {
+            System.out.println("\n\t" + (i + 1) + ". " + t.get(i).toString());
+        }
+        System.out.println("\t____________________________________________________________\n");
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
+
+        // Create a .txt file to store data
+        File f = new File("data/taskList.txt");
 
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -17,6 +74,15 @@ public class Duke {
         System.out.println("\tWhat can I do for you?");
         System.out.println("\t____________________________________________________________\n");
 
+        // Create taskList from data file
+        try {
+            taskList = createTasks(f);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        printTasks(taskList);
+
         // Echo commands until bye is entered
 
         while (true) {
@@ -25,16 +91,12 @@ public class Duke {
 
             try {
                 if (command.equals("list")) {
-                    System.out.println("\t____________________________________________________________");
-                    System.out.println("\n\tHere are the tasks in your list: ");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println("\n\t" + (i + 1) + ". " + taskList.get(i).toString());
-                    }
-                    System.out.println("\t____________________________________________________________\n");
+
+                    printTasks(taskList);
 
                 } else if (command.equals("done")) {
                     int taskNum = Integer.valueOf(sc.next());
-                    if (taskNum < 0 || taskNum > taskList.size()) {
+                    if (taskNum < 0 || taskNum >= taskList.size()) {
                         throw new DukeException("OOPS! Integer is out of range of list.");
                     }
                     taskList.get(taskNum).setAsDone();
@@ -43,7 +105,12 @@ public class Duke {
                     System.out.println("\n\t" + taskList.get(taskNum));
                     System.out.println("\t____________________________________________________________\n");
 
+                    // Save the command in taskList.txt
+                    String text = "done " + taskNum + "\n";
+                    appendToFile(f.getAbsolutePath(), text);
+
                 } else if (command.equals("bye")) {
+
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\n\tBye. Hope to see you again soon!");
                     System.out.println("\t____________________________________________________________\n");
@@ -67,6 +134,10 @@ public class Duke {
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
 
+                    // Save the command in taskList.txt
+                    String text = "todo " + str + "\n";
+                    appendToFile(f.getAbsolutePath(), text);
+
                 } else if (command.equals("deadline")) {
 
                     String str = sc.nextLine();
@@ -84,6 +155,10 @@ public class Duke {
                     System.out.println("\n\t" + d.toString());
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
+
+                    // Save the command in taskList.txt
+                    String text = "deadline " + wordArr[0] + " /by " + wordArr[1] + "\n";
+                    appendToFile(f.getAbsolutePath(), text);
 
                 } else if (command.equals("event")) {
 
@@ -103,10 +178,14 @@ public class Duke {
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
 
+                    // Save the command in taskList.txt
+                    String text = "event " + wordArr[0] + " /at " + wordArr[1] + "\n";
+                    appendToFile(f.getAbsolutePath(), text);
+
                 } else if (command.equals("delete")) {
 
                     int taskNum = Integer.valueOf(sc.next());
-                    if (taskNum < 0 || taskNum > taskList.size()) {
+                    if (taskNum < 0 || taskNum >= taskList.size()) {
                         throw new DukeException("OOPS! Integer is out of range of list.");
                     }
                     Task removed = taskList.get(taskNum);
@@ -117,11 +196,15 @@ public class Duke {
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
 
-                }
+                    // Save the command in taskList.txt
+                    String text = "delete " + taskNum + "\n";
+                    appendToFile(f.getAbsolutePath(), text);
 
-                else {
+                } else {
                     throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
                 }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println("\t____________________________________________________________");
                 System.out.println("\n\tOOPS! An integer is expected after done / delete.");

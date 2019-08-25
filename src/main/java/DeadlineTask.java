@@ -7,6 +7,11 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String formattedString() {
+        return "D | " + super.formattedString() + " | " + this.time + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.time + ")";
     }

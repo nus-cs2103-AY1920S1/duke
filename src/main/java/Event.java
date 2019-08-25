@@ -4,7 +4,7 @@ public class Event extends Task {
     /**
      * Event task
      * @param description user input of the title of the task
-     * @param eventDuration user input of the duration of the event
+     * @param eventDuration user input of the duration of the event the format is d/MM/yyyy HHmm-HHmm
      */
     public Event(String description, String eventDuration) {
         super(description);

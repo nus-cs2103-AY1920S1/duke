@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.io.IOException;
@@ -6,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.File;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     public static void main(String[] args) {
@@ -60,7 +64,7 @@ public class Duke {
                     try {
                         String description = t.description.split("deadline")[1];
                         String[] details = description.split("/by");
-                        System.out.println(addTask(new Deadline(details[0], details[1]), allTasks));
+                        System.out.println(addTask(new Deadline(details[0], parseDate(details[1])), allTasks));
                     } catch (ArrayIndexOutOfBoundsException a) {
                         throw new DukeException("The description of a deadline cannot be empty.");
                     }
@@ -189,6 +193,19 @@ public class Duke {
             e.printStackTrace();
         }
         return true;
+    }
+
+    private static String parseDate(String s) {
+        ArrayList<SimpleDateFormat> allDateFormats = new ArrayList<>();
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
+            Date myDate = sdf.parse(s.replaceAll("-", "/"));
+            sdf.applyPattern("EEE, d MMM yyyy, hh:mm a");
+            String sMyDate = sdf.format(myDate);
+            return sMyDate;
+        } catch (ParseException e) {
+            return s;
+        }
     }
 
 }

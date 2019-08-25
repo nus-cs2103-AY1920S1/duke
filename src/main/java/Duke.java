@@ -25,7 +25,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = DukeFileUtil.loadTasksFromDisk();
         String[] inputs;
         String input;
 
@@ -264,7 +264,7 @@ public class Duke {
         System.out.println(Duke.HORIZONTAL_LINE);
     }
 
-    private static void validateTaskDescription(String description)
+    static void validateTaskDescription(String description)
             throws DukeInvalidArgumentException {
 
         if (description.length() == 0) {
@@ -276,7 +276,7 @@ public class Duke {
 
     //only performs basic empty timing validation for now since timings are to be treated
     //as strings as stated
-    private static void validateTaskTiming(String timing)
+    static void validateTaskTiming(String timing)
             throws DukeInvalidArgumentException {
         if (timing.length() == 0) {
             throw new DukeInvalidArgumentException(

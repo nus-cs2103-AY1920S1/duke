@@ -5,6 +5,9 @@ public class DukeException extends Exception {
         this.errMsg = errMsg;
     }
 
+    public DukeException() {
+    }
+
     @Override
     public String toString() {
         return this.errMsg;

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Event extends Task {
     protected DateFormat outDateFormat = new SimpleDateFormat( "dd/MM/yyyy");
-    protected DateFormat outTimeFormat = new SimpleDateFormat("HH.mm aa");
+    protected DateFormat outTimeFormat = new SimpleDateFormat("H.mm aa");
     protected SimpleDateFormat fileDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected SimpleDateFormat fileTimeFormat = new SimpleDateFormat("HHmm");
     protected Date date, time;

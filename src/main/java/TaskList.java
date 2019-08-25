@@ -34,9 +34,11 @@ public class TaskList {
     protected void printList() {
         if (listItems.isEmpty()) {
             ps.println("\tYou currently have no tasks!");
-        }
-        for (int i = 1; i <= listItems.size(); i++) {
-            ps.println("\t  " + i + ". " + listItems.get(i - 1));
+        } else {
+            ps.println("\tHere are the tasks in your list:");
+            for (int i = 1; i <= listItems.size(); i++) {
+                ps.println("\t  " + i + ". " + listItems.get(i - 1));
+            }
         }
     }
 
@@ -73,7 +75,7 @@ public class TaskList {
         }
         Task task = listItems.get(id - 1);
         task.setDone();
-        updateSaveFileLine(task.toFileString(), id);
+        updateSaveFile();
         ps.println("\tNice! I've marked this task as done: \n"
                 + "\t  " + task);
     }
@@ -87,43 +89,28 @@ public class TaskList {
         if (id > listItems.size() || id <= 0) {
             throw new DukeException("The ID that you have entered is not a valid task ID");
         }
-        updateSaveFileLine("delete", id);
         Task task = listItems.remove(id - 1);
+        updateSaveFile();
         ps.println("\tNoted. I've removed this task:\n"
                 + "\t  " + task + "\n"
                 + "Now you have " + listItems.size() + " tasks in the list.");
     }
 
     /**
-     * Updates a task in the list as specified in the arguments, and given its ID.
-     * The ID is the line number of the task in the file, and is thus used to update the file.
-     * If the task parameter is "delete", this will delete the specified line.
-     * @param task The String representation of the task, that can be processed by the program.
-     *             If this is "delete", then the function will delete the line instead.
-     * @param id The ID of the task (1-indexed).
+     * Updates the save file with the updated list.
      */
-    protected void updateSaveFileLine(String task, int id) throws DukeException {
+    protected void updateSaveFile() throws DukeException {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(saveFilePath)));
-            int i = 1;
-            StringBuilder fileContent = new StringBuilder();
-            while (br.ready()) {
-                String line = br.readLine();
-                if (i == id) {
-                    if (task.equals("delete")) {
-                        i++;
-                        continue;
-                    }
-                    line = task;
-                }
-                fileContent.append(line).append("\n");
-                i++;
+            StringBuilder newFileContent = new StringBuilder();
+            for (Task task : listItems) {
+                newFileContent.append(task.toFileString()).append("\n");
             }
             FileWriter fw = new FileWriter(new File(saveFilePath));
-            fw.write(fileContent.toString());
+            fw.write(newFileContent.toString());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Error while updating task in save file: File not found!\n" + e);
+            throw new DukeException("Error while updating task in save file: " +
+                    "File not found!\n" + e);
         }
     }
 }

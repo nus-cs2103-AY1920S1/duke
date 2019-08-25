@@ -1,12 +1,37 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
+
+    private static String getSuffix(LocalDateTime dateTime) {
+        int day = dateTime.getDayOfMonth();
+        int remainder = day % 10;
+        if (remainder == 1) {
+            return "st";
+        } else if (remainder == 2) {
+            return "nd";
+        } else if (remainder == 3) {
+            return "rd";
+        } else {
+            return "th";
+        }
+    }
+
+    private static String getDate(String dateTimeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
+        String suffix = getSuffix(dateTime) + " of";
+
+        DateTimeFormatter wantedFormat = DateTimeFormatter.ofPattern(" d'" + suffix + "' MMMM yyyy, h.mm a");
+        String formattedDate = wantedFormat.format(dateTime);
+        return formattedDate;
+    }
 
     private static void appendToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
@@ -55,36 +80,6 @@ public class Duke {
             System.out.println("\n\t" + (i + 1) + ". " + t.get(i).toString());
         }
         System.out.println("\t____________________________________________________________\n");
-=======
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
-public class Duke {
-
-    private static String getSuffix(LocalDateTime dateTime) {
-        int day = dateTime.getDayOfMonth();
-        int remainder = day % 10;
-        if (remainder == 1) {
-            return "st";
-        } else if (remainder == 2) {
-            return "nd";
-        } else if (remainder == 3) {
-            return "rd";
-        } else {
-            return "th";
-        }
-    }
-
-    private static String getDate(String dateTimeString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
-        String suffix = getSuffix(dateTime) + " of";
-
-        DateTimeFormatter wantedFormat = DateTimeFormatter.ofPattern(" d'" + suffix + "' MMMM yyyy, h.mm a");
-        String formattedDate = wantedFormat.format(dateTime);
-        return formattedDate;
->>>>>>> branch-Level-8
     }
 
     public static void main(String[] args) {
@@ -122,7 +117,6 @@ public class Duke {
 
             try {
                 if (command.equals("list")) {
-
                     printTasks(taskList);
 
                 } else if (command.equals("done")) {
@@ -139,9 +133,7 @@ public class Duke {
                     // Save the command in taskList.txt
                     String text = "done " + taskNum + "\n";
                     appendToFile(f.getAbsolutePath(), text);
-
                 } else if (command.equals("bye")) {
-
                     System.out.println("\t____________________________________________________________");
                     System.out.println("\n\tBye. Hope to see you again soon!");
                     System.out.println("\t____________________________________________________________\n");
@@ -166,9 +158,8 @@ public class Duke {
                     System.out.println("\t____________________________________________________________\n");
 
                     // Save the command in taskList.txt
-                    String text = "todo " + str + "\n";
+                    String text = "done " + str + "\n";
                     appendToFile(f.getAbsolutePath(), text);
-
                 } else if (command.equals("deadline")) {
 
                     String str = sc.nextLine();
@@ -189,11 +180,9 @@ public class Duke {
                     System.out.println("\n\t" + d.toString());
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
-
                     // Save the command in taskList.txt
                     String text = "deadline " + wordArr[0] + " /by " + wordArr[1] + "\n";
                     appendToFile(f.getAbsolutePath(), text);
-
                 } else if (command.equals("event")) {
 
                     String str = sc.nextLine();
@@ -236,8 +225,9 @@ public class Duke {
                     // Save the command in taskList.txt
                     String text = "delete " + taskNum + "\n";
                     appendToFile(f.getAbsolutePath(), text);
+                }
 
-                } else {
+                else {
                     throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
                 }
             } catch (IOException e) {

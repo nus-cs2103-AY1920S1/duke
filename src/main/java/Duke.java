@@ -28,20 +28,9 @@ public class Duke {
             c.execute(tasks, ui, storage);
             isExit = c.isExit();
 
-//            } else if (command.equals("done")) {
-//                int itemIndex = sc.nextInt();
-//                tasks.markIndexedTaskAsDone(itemIndex);
-//                storage.writeListToFile(tasks);
 //            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) { // new item
 //                Task task = addNewItem(command, sc, tasks);
 //                storage.addTaskToFile(task);
-//            } else if (command.equals("delete")) {
-//                int itemIndex = sc.nextInt();
-//                tasks.deleteTask(itemIndex);
-//                storage.writeListToFile(tasks);
-//            } else {
-//                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-//                sc.nextLine();
 //            }
         }
     }
@@ -85,5 +74,4 @@ public class Duke {
         taskList.addItem(task);
         return task;
     }
-
 }

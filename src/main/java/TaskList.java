@@ -14,15 +14,15 @@ public class TaskList {
         System.out.printf("Now you have %d tasks in the list.\n", tasksList.size());
     }
 
-    public void markIndexedTaskAsDone(int index) {
-        getTaskAtIndex(index - 1).markAsDone();
+    public void markNumberedTaskAsDone(int number) {
+        getTaskAtIndex(number - 1).markAsDone();
     }
 
     public ArrayList<Task> getTasksList() {
         return tasksList;
     }
 
-    public void deleteTask(int position) {
+    public void deleteTaskAtNumber(int position) {
         Task task = tasksList.remove(position - 1);
         System.out.println("Noted. I've removed this task:");
         System.out.println("\t" + task);

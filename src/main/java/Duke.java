@@ -194,7 +194,6 @@ public class Duke {
                             throw new DukeMissingDescriptionException(("deadline"));
                         } else {
                             System.out.println("Got it. I've added this task:");
-                            Deadline current = new Deadline(information[0].trim(), information[1].trim());
                             tasks.add(current);
                             System.out.println(current.toString());
                             System.out.println("Now you have " + tasks.size() + " task in the list.");
@@ -221,7 +220,6 @@ public class Duke {
                             throw new DukeMissingDescriptionException("event");
                         } else {
                             System.out.println("Got it. I've added this task:");
-                            Event current = new Event(information[0].trim(), information[1].trim());
                             tasks.add(current);
                             System.out.println(current.toString());
                             System.out.println("Now you have " + tasks.size() + " task in the list.");

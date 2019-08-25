@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.diffplug.gradle.spotless' version '3.24.2'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 dependencies {
@@ -39,8 +40,9 @@ test {
     useJUnitPlatform()
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.leeyiyuan.Duke'
-    }
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.0"
+    archiveClassifier = null
+    archiveAppendix = null
 }

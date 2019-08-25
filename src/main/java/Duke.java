@@ -4,7 +4,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static String TASK_DATA_PATH = "../data/taskData.txt";
+
+    static String HORIZONTAL_LINE = "________________________________________________________________\n";
 
     private enum Input {
         list,
@@ -25,7 +27,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Task> tasks = DukeFileUtil.loadTasksFromDisk();
+        ArrayList<Task> tasks = DukeFileUtil.loadTasksFromDisk(TASK_DATA_PATH);
         String[] inputs;
         String input;
 
@@ -210,6 +212,7 @@ public class Duke {
 
             task.setDone(true);
             printTaskDone(task);
+            saveTasksToDisk(tasks);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
@@ -245,6 +248,7 @@ public class Duke {
             Task task = tasks.remove(--taskIndex);
 
             printTaskDeleted(task, tasks.size());
+            saveTasksToDisk(tasks);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
@@ -293,8 +297,12 @@ public class Duke {
         System.out.printf(" Now you have %d tasks in the list.\n", tasks.size());
         System.out.println(Duke.HORIZONTAL_LINE);
 
+        saveTasksToDisk(tasks);
+    }
+
+    private static void saveTasksToDisk(ArrayList<Task> tasks) {
         try {
-            DukeFileUtil.writeTasksToDisk(tasks);
+            DukeFileUtil.writeTasksToDisk(tasks, TASK_DATA_PATH);
         } catch (DukeFileWriteException ex) {
             displayDukeException(ex);
         }

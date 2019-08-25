@@ -27,6 +27,14 @@ abstract public class Task {
         return taskType;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getTiming() {
+        return this.timing;
+    }
+
     //setDone so that if the user accidentally marks something to done, it can be undone
     public void setDone(boolean done) {
         this.isDone = done;

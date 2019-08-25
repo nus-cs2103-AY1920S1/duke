@@ -13,30 +13,31 @@ import java.util.Scanner;
 
 public class DukeFileUtil {
 
-    private static String TASK_DATA_PATH = "../../../data/taskData.txt";
     private static String PARSE_ERROR_MSG =
             " \u2639 Oops! I encountered an error while reading your previous tasks,\n"
                     + " I ignored that line of input but you should check it out...\n";
     private static String DELIMITER = "|";
+    private static String DELIMITER_REGEX = "\\|";
 
-    static ArrayList<Task> loadTasksFromDisk() {
+    static ArrayList<Task> loadTasksFromDisk(String filePath) {
         ArrayList<Task> existingTasks = new ArrayList<Task>();
 
         try {
-            Scanner dataScanner = new Scanner(new File(TASK_DATA_PATH));
+            Scanner dataScanner = new Scanner(new File(filePath));
             String inputs[];
-            int lineNumber = 1;
+            int lineNumber = 0;
 
             while (dataScanner.hasNextLine()) {
                 try {
-                    inputs = dataScanner.nextLine().split(DELIMITER);
+                    lineNumber++;
+                    inputs = dataScanner.nextLine().split(DELIMITER_REGEX);
 
                     validateDelimiter(inputs, lineNumber);
 
                     // validate respective inputs
-                    TaskType taskType = getTaskType(inputs[0], lineNumber);
+                    TaskType taskType = getTaskType(inputs[0].trim(), lineNumber);
                     boolean isDone = getDoneStatus(inputs[1].trim(), lineNumber);
-                    String description = getDescription(inputs[2], lineNumber);
+                    String description = getDescription(inputs[2].trim(), lineNumber);
 
                     //assume time is correct for now, will be corrected post level-8 merge, but check for its existence
                     String timing = null;
@@ -79,48 +80,38 @@ public class DukeFileUtil {
         return existingTasks;
     }
 
-    static void writeTasksToDisk(ArrayList<Task> tasks)
+    static void writeTasksToDisk(ArrayList<Task> tasks, String filePath)
         throws DukeFileWriteException {
 
         FileWriter fileWriter;
         try {
-            fileWriter = new FileWriter(TASK_DATA_PATH);
+            fileWriter = new FileWriter(filePath);
+            TaskType taskType;
+
+            //append tasks to disk
+            for (Task task : tasks) {
+                taskType = task.getTaskType();
+
+                fileWriter.write(taskType.toString());
+                fileWriter.write(String.format(" %s ", DELIMITER));
+                fileWriter.write(task.isDone() ? "1" : "0");
+                fileWriter.write(String.format(" %s ", DELIMITER));
+                fileWriter.write(task.getDescription());
+
+                if (taskType.hasTime()) {
+                    fileWriter.write(String.format(" %s ", DELIMITER));
+                    fileWriter.write(task.getTiming());
+                }
+
+                fileWriter.write("\n");
+            }
+
+            fileWriter.close();
         } catch (IOException ex) {
             throw new DukeFileWriteException(
                     ex.getMessage(),
                     " \u2639 OOPS!!! I failed to write the task data to disk!");
         }
-
-        //append tasks to disk
-        for (Task task : tasks) {
-            try {
-                fileWriter.write(task.getTaskType().toString());
-            } catch (IOException ex) {
-                throw new DukeFileWriteException(
-                        ex.getMessage(),
-                        " \u2639 OOPS!!! I failed to write a task to disk!\n"
-                                + " Task info:"
-                                + "  type: " + task.getTaskType().toString() + "\n"
-                                + "  " + task.getStatusText());
-            }
-        }
-    }
-
-    private static TaskType getTaskType(String input, int lineNumber)
-            throws DukeTaskFileParseException {
-        TaskType taskType = null;
-
-        try {
-            taskType = TaskType.valueOf(input.trim());
-
-        } catch (IllegalArgumentException ex) {
-            throwParseException(
-                    "Invalid task type encountered while parsing task file",
-                    "Invalid Task Type",
-                    lineNumber);
-        }
-
-        return taskType;
     }
 
     private static void validateDelimiter(String[] inputs, int lineNumber)
@@ -133,6 +124,23 @@ public class DukeFileUtil {
                             DukeFileUtil.DELIMITER),
                     lineNumber);
         }
+    }
+
+    private static TaskType getTaskType(String input, int lineNumber)
+            throws DukeTaskFileParseException {
+        TaskType taskType = null;
+
+        try {
+            taskType = TaskType.valueOf(input);
+
+        } catch (IllegalArgumentException ex) {
+            throwParseException(
+                    "Invalid task type encountered while parsing task file",
+                    "Invalid Task Type",
+                    lineNumber);
+        }
+
+        return taskType;
     }
 
     private static boolean getDoneStatus(String status, int lineNumber)
@@ -195,7 +203,7 @@ public class DukeFileUtil {
                     lineNumber);
         }
 
-        return inputs[3];
+        return inputs[3].trim();
     }
 
     private static void throwParseException(String errorMsg, String displayMsg, int lineNumber)

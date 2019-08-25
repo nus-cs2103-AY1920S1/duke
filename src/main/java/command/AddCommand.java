@@ -11,6 +11,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor of AddCommand which executes add functionality.
+     *
      * @param task the new task which needs to be added to the task list
      */
     public AddCommand(Task task) {
@@ -19,6 +20,7 @@ public class AddCommand extends Command {
 
     /**
      * Tell whether this is an exit command.
+     *
      * @return false
      */
     public boolean isExit() {
@@ -27,9 +29,10 @@ public class AddCommand extends Command {
 
     /**
      * Add the new task into task list.
+     *
      * @param taskList The list of tasks maintained in Duke
-     * @param ui Ui module
-     * @param storage in charge of loading and saving the tasks
+     * @param ui       Ui module
+     * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the command is invalid
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

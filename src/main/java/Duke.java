@@ -12,6 +12,7 @@ public class Duke {
 
     /**
      * constructor for Duke.
+     *
      * @param filePath which specifies the path for the .txt file
      */
     public Duke(String filePath) {
@@ -27,6 +28,7 @@ public class Duke {
 
     /**
      * Instantiate a Duke object and run it.
+     *
      * @param args standard main args
      */
     public static void main(String[] args) {

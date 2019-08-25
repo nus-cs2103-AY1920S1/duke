@@ -9,18 +9,37 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+/**
+ * Represents a Storage Class which loads and saves data to the output file.
+ */
 public class Storage {
 
     private BufferedReader reader;
     private FileWriter writer;
+
+    /**
+     * The path of the output file.
+     */
     private String filepath;
+
+    /**
+     * The list of the tasks to be uploaded or saved.
+     */
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates a new Storage based on the filepath provided.
+     * @param filepath the path of the file provided.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Loads back the Deadline Task based on the task data loaded from the file.
+     * @param task the data from the file.
+     */
     public void addBackDeadlineTask(String task) {
         String[] taskDetails = task.split(" / ");
         String completion = taskDetails[1];
@@ -33,7 +52,10 @@ public class Storage {
             tasks.add(new DeadlineTask(nameOfTask, false, deadline));
         }
     }
-
+    /**
+     * Loads back the Event Task based on the task data loaded from the file.
+     * @param task the data from the file.
+     */
     public void addBackEventTask(String task) {
         String[] taskDetails = task.split(" / ");
         String completion = taskDetails[1];
@@ -46,7 +68,10 @@ public class Storage {
             tasks.add(new EventTask(nameOfTask, false, time));
         }
     }
-
+    /**
+     * Loads back the ToDo Task based on the task data loaded from the file.
+     * @param task the data from the file.
+     */
     public void addBackToDoTask(String task) {
         String[] taskDetails = task.split(" / ");
         String completion = taskDetails[1];
@@ -59,6 +84,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads all the data from the output file.
+     * If there is no data provided, an error is thrown.
+     * @return A list of Tasks loaded from the file.
+     * @throws DukeException If there is no file or data provided.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             reader = new BufferedReader(new FileReader(filepath));
@@ -85,6 +116,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves all the tasks from the TaskList into the output file one by one.
+     */
     public void save() {
         try {
             writer = new FileWriter(filepath);
@@ -120,6 +154,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the filepath of the storage.
+     * @return The filepath of the storage.
+     */
     public String getFilePath() {
         return this.filepath;
     }

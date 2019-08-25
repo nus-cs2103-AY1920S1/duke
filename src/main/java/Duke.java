@@ -1,5 +1,7 @@
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     /*public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }*/
 
-    private ArrayList<Task> tasks;
+    private static ArrayList<Task> tasks;
     private DukeException error;
 
     Duke() {
@@ -19,15 +21,58 @@ public class Duke {
         tasks = new ArrayList<>();
     }
 
-    void startDuke() {
+    void startDuke() throws FileNotFoundException {
+        importData();
+
         line();
         System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         line();
     }
 
-    void add(Task task) {
-        //add task into the list of tasks
-        tasks.add(task);
+    void endDuke() {
+        line();
+        System.out.println("\tBye. Hope to see you again soon!");
+        line();
+    }
+
+    private void importData() throws FileNotFoundException {
+        // pass the path to the file as a parameter
+        File file =
+                new File("C:\\Users\\Jasmine\\Desktop\\semester1\\CS2103T\\iP\\duke\\data\\duke.txt");
+        Scanner s = new Scanner(file);
+
+        Duke duke = new Duke();
+
+        while (s.hasNextLine()) {
+            String[] task = s.nextLine().split(" \\| ");
+
+            Task taskToAdd = new Task();
+
+            switch (task[0]) {
+            case "D":
+                taskToAdd = new Deadline(task[2], task[1].equals("+"), task[3]);
+                break;
+            case "E":
+                taskToAdd = new Event(task[2], task[1].equals("+"), task[3]);
+                break;
+            case "T":
+                taskToAdd = new Todo(task[2], task[1].equals("+"));
+                break;
+            default:
+                duke.error(task[0]);
+                break;
+            }
+
+            duke.add(taskToAdd);
+        }
+    }
+
+    void saveData() throws IOException {
+        FileWriter writer = new FileWriter("data\\duke.txt");
+        for(Task task: tasks) {
+            writer.write(task.toFile() + System.lineSeparator());
+        }
+        writer.close();
     }
 
     void listAll() {
@@ -43,6 +88,21 @@ public class Duke {
         line();
     }
 
+    void add(Task task) {
+        //add task into the list of tasks
+        tasks.add(task);
+    }
+
+    void markAsDone(int index) {
+        //set task as done
+        tasks.get(index - 1).done();
+    }
+
+    void delete(int index) {
+        //retrieve task to delete
+        tasks.remove(index);
+    }
+
     void echo(Task task) {
         line();
         System.out.println("\tGot it. I've added this task:");
@@ -51,21 +111,21 @@ public class Duke {
         line();
     }
 
-    void markAsDone(int i) {
-        //set task as done
-        Task specificTask = tasks.get(i - 1);
-        specificTask.done();
-
+    void echoDone(int index) {
+        Task task = tasks.get(index);
         //display the task
         line();
         System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  " + specificTask.toString());
+        System.out.println("\t  " + task.toString());
         line();
     }
 
-    void endDuke() {
+    void echoRemoved(int index) {
+        Task task = tasks.get(index);
         line();
-        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t" + task.toString());
+        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
         line();
     }
 
@@ -78,18 +138,6 @@ public class Duke {
     void error(String s) {
         line();
         error.incompleteAction(s);
-        line();
-    }
-
-    void delete(int i) {
-        //retrieve task to delete
-        Task dltTask = tasks.get(i);
-        tasks.remove(i);
-
-        line();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t" + dltTask.toString());
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
         line();
     }
 

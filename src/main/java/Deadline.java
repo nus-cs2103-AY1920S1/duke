@@ -27,4 +27,16 @@ public class Deadline extends Task {
 
         return s + " " + name + " (by: " + deadLine + ")";
     }
+
+    public String toIndicationInsideFile() {
+        String s = "D | ";
+
+        if(done) {
+            s = s + "1 | ";
+        } else {
+            s = s + "0 | ";
+        }
+
+        return s + name + " | " + deadLine;
+    }
 }

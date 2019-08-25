@@ -24,4 +24,16 @@ public class Todo extends Task {
 
         return s + " " + name;
     }
+
+    public String toIndicationInsideFile() {
+        String s = "T | ";
+
+        if(done) {
+            s = s + "1 | ";
+        } else {
+            s = s + "0 | ";
+        }
+
+        return s + name;
+    }
 }

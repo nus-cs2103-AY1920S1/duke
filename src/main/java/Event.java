@@ -27,4 +27,16 @@ public class Event extends Task {
 
         return s + " " + name + " (at: " + time + ")";
     }
+
+    public String toIndicationInsideFile() {
+        String s = "E | ";
+
+        if(done) {
+            s = s + "1 | ";
+        } else {
+            s = s + "0 | ";
+        }
+
+        return s + name + " | " + time;
+    }
 }

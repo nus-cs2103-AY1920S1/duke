@@ -23,4 +23,16 @@ public class Task {
     public void setDone() {
         this.done = true;
     }
+
+    public String toIndicationInsideFile() {
+        String s = "T | ";
+
+        if(done) {
+            s = s + "1 | ";
+        } else {
+            s = s + "1 | ";
+        }
+
+        return s + name;
+    }
 }

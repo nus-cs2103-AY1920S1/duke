@@ -13,10 +13,26 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public String getUnprocessedStartDate() {
+        return startDate.getUnprocessedDate();
+    }
+
+    public String getUnprocessedStartTime() {
+        return startTime.getUnprocessedTime();
+    }
+
+    public String getUnprocessedEndDate() {
+        return endDate.getUnprocessedDate();
+    }
+
+    public String getUnprocessedEndTime() {
+        return endTime.getUnprocessedTime();
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append("[E]" + super.toString() + "(at: " + startDate.toString() + (startTime.toString().equals("") ? "" : ", " + startTime.toString()));
+        output.append("[E]" + super.toString() + " (at: " + startDate.toString() + (startTime.toString().equals("") ? "" : ", " + startTime.toString()));
         if (endDate.toString().equals("") && endTime.toString().equals("")) {
             output.append(")");
         } else {
@@ -29,5 +45,9 @@ public class Event extends Task {
             }
         }
         return output.toString();
+    }
+
+    public String getType() {
+        return "E";
     }
 }

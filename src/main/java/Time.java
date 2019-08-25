@@ -52,4 +52,8 @@ public class Time {
             return processedTime + "am";
         }
     }
+
+    public String getUnprocessedTime() {
+        return unprocessedTime;
+    }
 }

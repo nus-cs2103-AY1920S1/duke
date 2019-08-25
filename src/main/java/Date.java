@@ -118,5 +118,8 @@ public class Date {
             return day + "th of " + month + " " + year;
         }
     }
+    public String getUnprocessedDate() {
+        return unprocessedDate;
+    }
 
 }

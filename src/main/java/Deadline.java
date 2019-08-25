@@ -13,4 +13,16 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.toString() + (time.toString().equals("") ? "" : ", " + time.toString()) + ")";
     }
+
+    public String getUnprocessedDate() {
+        return date.getUnprocessedDate();
+    }
+
+    public String getUnprocessedTime() {
+        return time.getUnprocessedTime();
+    }
+
+    public String getType() {
+        return "D";
+    }
 }

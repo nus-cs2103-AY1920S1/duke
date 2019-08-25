@@ -9,10 +9,22 @@ import java.util.stream.Collectors;
 
 public class Storage {
     private String filePath;
+
+    /**
+     * Constructor
+     *
+     * @param s location of file
+     */
     public Storage(String s) {
         this.filePath = s;
     }
 
+    /**
+     * Loads tasks to task list
+     *
+     * @return LinkedList containing tasks
+     * @throws DukeException if file does not exist
+     */
     public LinkedList<Task> load() throws DukeException {
         File file = new File(filePath);
         LinkedList<Task> result = new LinkedList<>();
@@ -47,6 +59,12 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Updates Save file with any changes
+     *
+     * @param tasks Class dealing with manipulating global LinkedList storing tasks
+     * @throws DukeException if save file fails
+     */
     public void updateSaveFile(LinkedList<Task> tasks) throws DukeException{
         try {
             File saveFile = new File(filePath);

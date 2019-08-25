@@ -6,6 +6,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor
+     *
+     * @param filePath location of file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +22,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main loop which takes in command and execute
+     * until isExit = true
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -35,6 +44,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main driver
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("C:/Users/User/Documents/GitHub/duke/src/main/tasks.txt").run();
     }

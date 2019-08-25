@@ -1,8 +1,18 @@
 public class Event extends Task{
+    /**
+     * Constructor
+     *
+     * @param s Input String specifying task
+     */
     public Event(String s) {
         super(s);
     }
 
+    /**
+     * returns Task as formatted String
+     *
+     * @return formatted String
+     */
     public String toString() {
         String unprocessed = super.toString();
         StringBuilder temp = new StringBuilder();

@@ -1,10 +1,12 @@
+package duke.tasklist;
+
 public class Task {
 	public boolean taskCompletionStatus;
 	private String taskDescription;
 
 	public Task(String description) {
 		taskCompletionStatus = false;
-		taskDescription = description; 
+		taskDescription = description;
 	}
 
 	public Task complete() {
@@ -22,6 +24,10 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "[" + (taskCompletionStatus ? "✓" : "✗") + "] " + taskDescription;
+		return new StringBuilder("[")
+				.append((taskCompletionStatus ? "✓" : "✗"))
+				.append("] ")
+				.append(taskDescription)
+				.toString();
 	}
 }

@@ -1,3 +1,13 @@
+package duke.io;
+
+import duke.command.*;
+import duke.DukeException;
+import duke.tasklist.ToDo;
+import duke.tasklist.Deadline;
+import duke.tasklist.Event;
+import duke.tasklist.Task;
+import duke.tasklist.TaskList;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +19,7 @@ public class Storage {
     private String filePath;
 
     public Storage(String path) {
-        this.filePath = path;
+        this.filePath = "SaveFiles/".concat(path);
     }
 
     public TaskList load() throws DukeException {
@@ -33,7 +43,7 @@ public class Storage {
                         taskList.add(readAsToDo(file));
                         break;
                     default:
-                        throw new DukeException("save file at " + filePath + " is corrupt");
+                        throw new DukeException("The save file at ", filePath, " is corrupt.");
                         //throw DukeCorruptSaveFileException(filePath);
                 }
             }
@@ -43,7 +53,7 @@ public class Storage {
             //throw new DukeException(filePath + " is invalid");
             //throw DukeInvalidFilePathException(filePath);
         } catch (IOException | NumberFormatException ex) {
-            throw new DukeException("save file at " + filePath + " is corrupt");
+            throw new DukeException("The save file at ,", filePath, " is corrupt.");
             //throw DukeCorruptSaveFileException(filePath);
         }
     } // throws dukeCorruptFileException dukeInvalidPathException

@@ -1,29 +1,43 @@
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.IOException;
+package duke.frontend;
+
+import duke.io.Input;
+import duke.io.Output;
+import duke.io.Parser;
+import duke.io.Storage;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.AddTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ShowListCommand;
+import duke.command.ExitCommand;
+import duke.DukeException;
+import duke.tasklist.Task;
+import duke.tasklist.TaskList;
+import duke.tasklist.ToDo;
+import duke.tasklist.Deadline;
+import duke.tasklist.Event;
 
 public class UserInterface {
-    private BufferedReader bufferedReader;
     private boolean acceptingInput;
     private TaskList taskList;
     private Storage storage;
+    private Input input;
     private Output standardOutput;
     private Output errorOutput;
 
-    public UserInterface(InputStream inputStream) {
+    public UserInterface() {
         // setup input and output
-        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        input = new Input(System.in);
         String lineBreak1 = "___________________________________________________________";
 		String lineBreak2 = "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾";
-        errorOutput = new Output();
+        errorOutput = new Output(System.out);
         errorOutput.setHeader(lineBreak1, " ☹ OOPS!!!");
         errorOutput.setFooter(lineBreak2);
         errorOutput.setLeftBorder("ERROR ");
         errorOutput.setLeftIndent(1);
         errorOutput.setWrapOn(true);
 
-        standardOutput = new Output();
+        standardOutput = new Output(System.out);
         standardOutput.setHeader(lineBreak1);
         standardOutput.setFooter(lineBreak2);
         standardOutput.setLeftBorder("      ");
@@ -31,7 +45,7 @@ public class UserInterface {
         standardOutput.setWrapOn(true);
 
         // storage = new Storage("SaveFiles");
-        storage = new Storage("SaveFiles/DukeSave01.txt");
+        storage = new Storage("DukeSave01.txt");
 
         // load default exisiting task list if any
         taskList = new TaskList();
@@ -40,8 +54,8 @@ public class UserInterface {
     }
 
     public void start() throws DukeException {
-        Output logo = new Output()
-                .addLine(" ____        _        ")
+        Output logo = new Output(System.out);
+        logo.addLine(" ____        _        ")
                 .addLine("|  _ \\ _   _| | _____ ")
                 .addLine("| | | | | | | |/ / _ \\")
                 .addLine("| |_| | |_| |   <  __/")
@@ -65,22 +79,19 @@ public class UserInterface {
     }
 
     public void displayError(DukeException ex) {
+        //flushes standard output otherwise future output may be wrong
         standardOutput.flush();
 
+        // displays dukeexception error messages
         errorOutput.addLine(ex.getMessage());
         errorOutput.print();
     }
 
     public Command readInput() throws DukeException {
-        try {
-            return Parser.parseAsCommand(bufferedReader.readLine());
-        } catch (IOException ex) {
-            // should be unreachable
-            System.err.println(ex);
-            throw new DukeException(ex.getMessage());
-        }
+        return Parser.parseAsCommand(input.get());
     }
 
+    // methods that enable parsed commands to instruct duke
     public void executeCommand(Command c) throws DukeException {
         // all commands passed to this method have all required parameter non-empty
         switch (c.getClass().getSimpleName()) {

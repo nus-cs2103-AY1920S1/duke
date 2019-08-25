@@ -1,3 +1,6 @@
+package duke.tasklist;
+
+import duke.DukeException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -39,7 +42,6 @@ public class TaskList {
 			return delete(Integer.parseInt(id));
 		} catch (NumberFormatException ex) {
 			throw new DukeIncorrectParameterTypeException("Integer", id);
-			// "\"" + id + "\" cannot be converted to an integer. Please enter a valid integer as a parameter.");
 		}
 	}
 
@@ -47,7 +49,6 @@ public class TaskList {
 		try {
 			return taskList.get(id - 1).complete();
 		} catch (IndexOutOfBoundsException ex) {
-			//task id does not correspond to task in the list
 			throw new DukeNoCorrespondingTaskException(id);
 		}
 	}
@@ -57,7 +58,6 @@ public class TaskList {
 			return complete(Integer.parseInt(id));
 		} catch (NumberFormatException ex) {
 			throw new DukeIncorrectParameterTypeException("Integer", id);
-			//		"\"" + id + "\" cannot be converted to an integer. Please enter a valid integer as a parameter.");
 		}
 	}
 }

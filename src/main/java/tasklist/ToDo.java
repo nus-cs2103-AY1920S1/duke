@@ -1,3 +1,5 @@
+package duke.tasklist;
+
 public class ToDo extends Task {
 	public ToDo(String description) {
 		super(description);
@@ -10,6 +12,6 @@ public class ToDo extends Task {
 
 	@Override
 	public String toString() {
-		return "[T]" + super.toString();
+		return "[T]".concat(super.toString());
 	}
 }

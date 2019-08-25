@@ -1,15 +1,20 @@
+package duke.io;
+
+import duke.command.*;
+import duke.DukeException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 
 public class Parser {
 
-    public static String parseDateTime(String dateTimeString) throws DukeException {
+        public static String parseDateTime(String dateTimeString) throws DukeException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-                    "dd/MM/yyyy HHmm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime dateAndTime = LocalDateTime.parse(dateTimeString, formatter);
             int day = dateAndTime.getDayOfMonth();
             String month = dateAndTime.getMonth().toString();
@@ -70,7 +75,7 @@ public class Parser {
         }
         // is the command valid
 
-        Command.Type type;
+        Type type;
 
         switch (split[0]) {
             case "list":
@@ -78,19 +83,19 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             case "todo":
-                type = Command.Type.ADD_TODO;
+                type = Type.ADD_TODO;
                 break;
             case "event":
-                type = Command.Type.ADD_EVENT;
+                type = Type.ADD_EVENT;
                 break;
             case "deadline":
-                type = Command.Type.ADD_DEADLINE;
+                type = Type.ADD_DEADLINE;
                 break;
             case "delete":
-                type = Command.Type.DELETE;
+                type = Type.DELETE;
                 break;
             case "done":
-                type = Command.Type.COMPLETE;
+                type = Type.COMPLETE;
                 break;
             default:
                 throw new DukeUnknownCommandException();

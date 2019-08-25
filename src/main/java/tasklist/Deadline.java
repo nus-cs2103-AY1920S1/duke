@@ -1,11 +1,16 @@
+package duke.tasklist;
+
+import duke.DukeException;
+import duke.io.Parser;
+
 public class Deadline extends Task {
-	protected String time;
+	public String time;
 
 	public Deadline(String description, String time) {
 		super(description);
 		try {
 			this.time = Parser.parseDateTime(time);
-		} catch (Exception e) {
+		} catch (DukeException e) {
 			this.time = time;
 		}
 	}
@@ -14,7 +19,7 @@ public class Deadline extends Task {
 		super(description);
 		try {
 			this.time = Parser.parseDateTime(time);
-		} catch (Exception e) {
+		} catch (DukeException e) {
 			this.time = time;
 		}
 		taskCompletionStatus = isComplete;
@@ -22,6 +27,11 @@ public class Deadline extends Task {
 
 	@Override
 	public String toString() {
-		return "[D]" + super.toString() + " (by: " + time + ")";
+		return new StringBuilder("[D]")
+				.append(super.toString())
+				.append(" (by: ")
+				.append(time)
+				.append(")")
+				.toString();
 	}
 }

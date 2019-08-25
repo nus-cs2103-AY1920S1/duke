@@ -26,4 +26,7 @@ delete 4
 delete abcdef
 delete 2
 list
+event event /at 15/10/2015 1450
+deadline deadline /by 12/10/2016 1500
+list
 bye

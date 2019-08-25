@@ -1,10 +1,14 @@
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
     private String LINES = "\n" + "____________________________________________________________" + "\n";
-    private ArrayList list = new ArrayList<Task>();
+    private ArrayList<Task> list = new ArrayList<Task>();
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -14,6 +18,53 @@ public class Duke {
 
     private void start() {
         System.out.println(display("Hello! I'm Duke\nWhat can I do for you?"));
+        readFile();
+    }
+
+    private void readFile() {
+        try {
+            File f = new File("src/main/java/data/duke.txt");
+            Scanner fileSc = new Scanner(f);
+            System.out.println("Your leftover task: ");
+            while (fileSc.hasNext()) {
+                String s = fileSc.nextLine();
+                String[] strArr = s.split(" \\| ");
+                Task t = null;
+                switch (strArr[0]) {
+                    case "T":
+                        t = new ToDo(strArr[2]);
+                        break;
+                    case "D":
+                        t = new Deadline(strArr[2], strArr[3]);
+                        break;
+                    case "E":
+                        t = new Event(strArr[2], strArr[3]);
+                        break;
+                    default :
+                        throw new DukeException("Previous Task storage is corrupted. Resetting your task . .");
+
+                }
+                if (strArr[1].equals("1")) {
+                    t.markAsDone();
+                }
+                list.add(t);
+                System.out.println(s);
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("You have no task.");
+        } catch (DukeException e) {
+            try {
+                System.out.println(e.getMessage());
+                FileWriter fw = new FileWriter("src/main/java/data/duke.txt");
+                String fileContent = "";
+                fw.write(fileContent);
+                fw.close();
+            } catch (IOException ex) {
+                System.out.println("FileWriting problem");
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void run() {
@@ -137,6 +188,22 @@ public class Duke {
 
     private void exit() {
         System.out.println(display("Bye. Hope to see you again soon!"));
+        writeFile();
+    }
+
+    private void writeFile() {
+        try {
+            FileWriter fw = new FileWriter("src/main/java/data/duke.txt");
+            String fileContent = "";
+            for (Task t : list) {
+                fileContent += t.toWriteFile() + "\n";
+            }
+            System.out.println(fileContent);
+            fw.write(fileContent);
+            fw.close();
+        } catch (IOException e) {
+            assert(false);
+        }
     }
 
     private String display(String text) {

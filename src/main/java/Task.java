@@ -11,9 +11,15 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]");
     }
 
+    protected String getDoneStatus() { return (isDone? "1" : "0"); }
+
     public Task markAsDone() {
         isDone = true;
         return this;
+    }
+
+    public String toWriteFile() {
+        return "T | " + getDoneStatus() + " | " + description;
     }
 
     @Override

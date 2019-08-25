@@ -10,6 +10,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates an instance of Duke, setting up the UI, storage, and task list.
+     * @param filePath Path to the data file for tasks, used by storage
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the instance of Duke with the main loop.
+     */
     public void run() {
         ui.showWelcome();
         ui.showLine();

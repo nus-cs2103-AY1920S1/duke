@@ -19,6 +19,12 @@ public class Parser {
         public final String slashKeyword;
         public final String slashArgs;
 
+        /**
+         * Creates a parsed command, whereby the input command as a string is parsed into its components.
+         * Components include the entire trimmed input, keyword, arguments, arguments before the slash keyword,
+         * arguments after the slash keyword, and the slash keyword itself.
+         * @param input Input command as a string
+         */
         public ParsedCommand(String input) {
             input = input.trim();
             this.input = input;

@@ -11,10 +11,13 @@ public class Main {
         System.out.println("\t  What can I do for you?");
         printLine();
 
-        //store the list
-        ArrayList<Task> taskArr = new ArrayList<>();
+        //directory for task list
         String dir = "./data/";
         String fileName = "duke.txt";
+
+        //load previous task list
+        LoadFile prevTaskList = new LoadFile(dir, fileName);
+        ArrayList<Task> taskArr = prevTaskList.loadTaskFromFile();
 
         //take in inputs
         while (sc.hasNext()) {
@@ -81,7 +84,7 @@ public class Main {
                             }
                             break;
                         } else {
-                            if (x == inputArr.length - 1) {
+                            if (inputArr[x + 1].charAt(0) == '/') {
                                 desc.append(inputArr[x]);
                             } else {
                                 desc.append(inputArr[x] + " ");
@@ -107,7 +110,7 @@ public class Main {
                             }
                             break;
                         } else {
-                            if (x == inputArr.length - 1) {
+                            if (inputArr[x + 1].charAt(0) == '/') {
                                 desc.append(inputArr[x]);
                             } else {
                                 desc.append(inputArr[x] + " ");

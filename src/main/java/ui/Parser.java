@@ -4,6 +4,7 @@ import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.AddCommand;
 import exception.DukeException;
@@ -84,6 +85,13 @@ public class Parser {
             date = fullCommand.substring(index + 4);
             Task eventTask = new Event(description, date);
             return new AddCommand(eventTask);
+        case "find":
+            if (parts.length == 1) {
+                throw new DukeException("Please provide the string you want to search in the tasks");
+            }
+            index = fullCommand.indexOf(" ");
+            String find = fullCommand.substring(index + 1);
+            return new FindCommand(find);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

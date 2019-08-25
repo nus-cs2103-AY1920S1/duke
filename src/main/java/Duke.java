@@ -23,26 +23,40 @@ public class Duke {
                     formattedList.append(list.get(i).toString());
                 }
                 // format list
-                Printer.printString(formattedList.toString());
+                String finalString = formattedList.toString();
+                finalString = finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString;
+                Printer.printString(finalString);
                 // print list
                 break;
             case "bye":
                 Printer.printString("Bye. Hope to see you again soon!");
                 break loop;
-                // bye
+            // bye
             default:
                 if (input.matches("^done [0-9]+$")) {
                     int index = Integer.parseInt(input.split("done ", 2)[1]) - 1;
                     // get index
-                    if (index < 0 || index > list.size()) {
+                    if (index < 0 || index > list.size() - 1) {
                         Printer.printError("That is not a valid task index");
                         // index out of bounds
                     } else {
                         list.get(index).markAsDone();
                         Printer.printString(
-                                "Nice! I've marked this task as done:\n  " + list.get(index)
-                                        .toString());
+                                "Nice! I've marked this task as done:\n  "
+                                        + list.get(index).toString());
                         // mark done
+                    }
+                } else if (input.matches("^delete [0-9]+$")) {
+                    int index = Integer.parseInt(input.split("delete ", 2)[1]) - 1;
+                    // get index
+                    if (index < 0 || index > list.size() - 1) {
+                        Printer.printError("That is not a valid task index");
+                        // index out of bounds
+                    }else {
+                        Printer.printString(
+                                "Noted! I've removed this task:\n  " + list.get(index).toString()
+                                + "\nNow you have " + (list.size() - 1) + " tasks in the list.");
+                        list.remove(index);
                     }
                 } else {
                     DoableTask t = null;

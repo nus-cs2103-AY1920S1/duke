@@ -65,7 +65,7 @@ public class Duke {
      */
     public void addToDo(String task) {
         toDoList.add(new ToDo(task));
-        this.printAddedMessage();
+        this.addedMessage();
     }
 
     /**
@@ -75,7 +75,7 @@ public class Duke {
      */
     public void addDeadline(String task, Date date) {
         toDoList.add(new Deadline(task, date));
-        this.printAddedMessage();
+        this.addedMessage();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Duke {
      */
     public void addEvent(String task, Date date) {
         toDoList.add(new Event(task, date));
-        this.printAddedMessage();
+        this.addedMessage();
     }
 
     /**
@@ -99,12 +99,12 @@ public class Duke {
         fw.close();
     }
 
-    private void printAddedMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println(addedMessage);
-        System.out.println(toDoList.get(toDoList.size() - 1));
-        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
-        System.out.println("____________________________________________________________");
+    private String addedMessage() {
+        StringJoiner result = new StringJoiner("\n");
+        result.add(addedMessage);
+        result.add(toDoList.get(toDoList.size() - 1).toString());
+        result.add(String.format("Now you have %d tasks in the list.", toDoList.size()));
+        return padMessage(result.toString());
     }
 
     private String padMessage(String message) {

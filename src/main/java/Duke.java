@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     static ArrayList<Task> memory = new ArrayList<>();
     static int index;
+    static DateTime DT = new DateTime();
 
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -32,25 +33,26 @@ public class Duke {
                     doneTask(taskNum);
                 } else if (input.equals("todo")) {
                     String TodoTask = sc.nextLine();
-                        if (TodoTask.equals("")) {
-                            throw new DukeException("Oops! The description of a todo cannot be empty.");
-                        } else {
-                            toDoTask(TodoTask);
-                        }
+                    if (TodoTask.equals("")) {
+                        throw new DukeException("Oops! The description of a todo cannot be empty.");
+                    } else {
+                        toDoTask(TodoTask);
+                    }
                 } else if (input.equals("event")) {
                     String EventTask = sc.nextLine();
-                        if (EventTask.equals("")) {
-                            throw new DukeException("Oops! The description of an event cannot be empty.");
-                        } else {
-                            eventTask(EventTask);
-                        }
+                    if (EventTask.equals("")) {
+                        throw new DukeException("Oops! The description of an event cannot be empty.");
+                    } else {
+                        eventTask(EventTask);
+                    }
                 } else if (input.equals("deadline")) {
                     String DeadlineTask = sc.nextLine();
-                        if (DeadlineTask.equals("")) {
-                            throw new DukeException("Oops! The description of a deadline cannot be empty.");
-                        } else {
-                            deadlineTask(DeadlineTask);
-                        }
+                    if (DeadlineTask.equals("")) {
+                        throw new DukeException("Oops! The description of a deadline cannot be empty.");
+                    } else {
+                        deadlineTask(DeadlineTask);
+                        System.out.println("deadline created");
+                    }
                 } else if (input.equals("delete")) {
                     int deleteNum = sc.nextInt();
                     deleteTask(deleteNum);
@@ -63,8 +65,6 @@ public class Duke {
                 input = sc.next();
             }
         }
-
-        //end of the loop before Duke encounters BYE
         if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
         }
@@ -115,9 +115,19 @@ public class Duke {
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the event timing and resubmit that command.");
         } else {
-            Event newEvent = new Event(details[0], details[1]);
-            memory.add(newEvent);
-            printTask(newEvent);
+            String[] time = details[1].trim().split(" ");
+            if (time.length < 2) {
+                throw new DukeException("Oops! Please write the event timing in: ddmmyy time(military)");
+            } else {
+                try {
+                    String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
+                    Event newEvent = new Event(details[0], formattedTime);
+                    memory.add(newEvent);
+                    printTask(newEvent);
+                } catch (DateException e) {
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing in: ddmmyy time(military)");
+                }
+            }
         }
     }
 
@@ -130,9 +140,19 @@ public class Duke {
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the deadline and resubmit that command.");
         } else {
-            Deadline newDeadline = new Deadline(details[0], details[1]);
-            memory.add(newDeadline);
-            printTask(newDeadline);
+            String[] time = details[1].trim().split(" ");
+            if (time.length < 2) {
+                throw new DukeException("Oops! Please write the deadline in: ddmmyy time(military)");
+            } else {
+                try {
+                    String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
+                    Deadline newDeadline = new Deadline(details[0], formattedTime);
+                    memory.add(newDeadline);
+                    printTask(newDeadline);
+                } catch (DateException e) {
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing in: ddmmyy time(military)");
+                }
+            }
         }
     }
 

@@ -35,7 +35,7 @@ public class Duke {
                     int index = Integer.parseInt(input.split("done ", 2)[1]) - 1;
                     // get index
                     if (index < 0 || index > list.size()) {
-                        Printer.printString("That is not a valid task index");
+                        Printer.printError("That is not a valid task index");
                         // index out of bounds
                     } else {
                         list.get(index).markAsDone();
@@ -45,25 +45,42 @@ public class Duke {
                         // mark done
                     }
                 } else {
-                    boolean erroneousInput = false;
                     DoableTask t = null;
                     String contentString;
                     String[] contentSegments;
-                    if (input.matches("^todo .+")) {
-                        t = new Todo(input.split("todo ", 2)[1]);
-                    } else if (input.matches("^deadline .+ /by .+")) {
-                        contentString = input.split("deadline ",2)[1];
-                        contentSegments = contentString.split("/by ");
-                        t = new Deadline(contentSegments[0], contentSegments[1]);
-                    } else if (input.matches("^event .+ /at .+")) {
-                        contentString = input.split("event ",2)[1];
-                        contentSegments = contentString.split("/at ");
-                        t = new Event(contentSegments[0], contentSegments[1]);
+                    if (input.matches("^todo.*")) {
+                        if (input.matches("^todo .+")) {
+                            t = new Todo(input.split("todo ", 2)[1]);
+                        } else {
+                            Printer.printError("The description of a todo cannot be empty");
+                        }
+                        // add todo
+                    } else if (input.matches("^deadline.*")) {
+                        if (input.matches("^deadline .+ /by .+")) {
+                            contentString = input.split("deadline ", 2)[1];
+                            contentSegments = contentString.split("/by ");
+                            t = new Deadline(contentSegments[0], contentSegments[1]);
+                        } else if (input.matches("^deadline .+((?!/by ).)")) {
+                            Printer.printError("The due date of a deadline cannot be empty");
+                        } else {
+                            Printer.printError("The description of a deadline cannot be empty");
+                        }
+                        // add deadline
+                    } else if (input.matches("^event.*")) {
+                        if (input.matches("^event .+ /at .+")) {
+                            contentString = input.split("event ", 2)[1];
+                            contentSegments = contentString.split("/at ");
+                            t = new Event(contentSegments[0], contentSegments[1]);
+                        } else if (input.matches("^event .+((?!/at ).)")) {
+                            Printer.printError("The date range of an event cannot be empty");
+                        } else {
+                            Printer.printError("The description of an event cannot be empty");
+                        }
+                        // add event
                     } else {
-                        Printer.printString("That is not a valid input statement");
-                        erroneousInput = true;
+                        Printer.printError("I'm sorry, but I don't know what that means :-(");
                     }
-                    if (!erroneousInput) {
+                    if (t != null) {
                         list.add(t);
                         Printer.addTaskMessage(t, list.size());
                     }
@@ -181,6 +198,14 @@ class Printer {
                 + task.toString()
                 + "\nNow you have " + length
                 + "tasks in the list.");
+    }
+
+    /**
+     * Print with error decorator prefixing the string
+     * @param str   string to be printed
+     */
+    public static void printError(String str) {
+        System.out.print(formatString("☹ OOPS!!! " + str));
     }
 
     /**

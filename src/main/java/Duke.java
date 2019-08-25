@@ -4,13 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-
 
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
-    private static DateTimeFormatter dukeDateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     private static void loadSavedTasks(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
@@ -153,7 +149,7 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             String todoDescription = inputTodo.substring(5);
-            Todo t = new Todo(todoDescription);
+            Task t = new Todo(todoDescription);
             dukeList.add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
@@ -162,22 +158,7 @@ public class Duke {
         }
     }
 
-    public static void handleInputEvent(String inputEvent) throws DukeException {
-        if (inputEvent.length() == 5) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-        } else {
-            int slashLocation = slashLocator(inputEvent);
-            int firstIndex = slashLocation - 1;
-            int secondIndex = slashLocation + 4;
-            String eventDescription = inputEvent.substring(6, firstIndex);
-            String eventAt = inputEvent.substring(secondIndex);
-            Event e = new Event(eventDescription, eventAt);
-            addTaskToListAfterValidation(eventAt, e);
-            updateTaskList();
-        }
-    }
-
-    public static void handleInputDeadline(String inputDeadline) throws DukeException {
+    private static void handleInputDeadline(String inputDeadline) throws DukeException {
         if (inputDeadline.length() == 8) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         } else {
@@ -186,36 +167,35 @@ public class Duke {
             int secondIndex = slashLocation + 4;
             String deadlineDescription = inputDeadline.substring(9, firstIndex);
             String deadlineBy = inputDeadline.substring(secondIndex);
-            Deadline d = new Deadline(deadlineDescription, deadlineBy);
-            addTaskToListAfterValidation(deadlineBy, d);
-            updateTaskList();
-        }
-    }
-
-    public static void handleInputUnrecognised(String inputUnrecognised) throws DukeException {
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
-
-    public static void addTaskToListAfterValidation(String dateTimeString, Task t) {
-        try {
-            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dukeDateTimeFormatter);
-
-            if (t instanceof Event) {
-                Event e = (Event) t;
-                e.setDateTimeAt(dateTime);
-            } else {
-                Deadline d = (Deadline) t;
-                d.setDateTimeBy(dateTime);
-            }
-
+            Task t = new Deadline(deadlineDescription, deadlineBy);
             dukeList.add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
-        } catch (Exception e) {
-            System.out.println("Task not added to list because the input format for date and time is unrecognised. " +
-                                "Please enter date and time in dd/MM/yyyy HHmm format.");
+            updateTaskList();
         }
+    }
+
+    private static void handleInputEvent(String inputEvent) throws DukeException {
+        if (inputEvent.length() == 5) {
+            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+        } else {
+            int slashLocation = slashLocator(inputEvent);
+            int firstIndex = slashLocation - 1;
+            int secondIndex = slashLocation + 4;
+            String eventDescription = inputEvent.substring(6, firstIndex);
+            String eventAt = inputEvent.substring(secondIndex);
+            Task t = new Event(eventDescription, eventAt);
+            dukeList.add(t);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(t);
+            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
+        }
+    }
+
+    private static void handleInputUnrecognised(String inputUnrecognised) throws DukeException {
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 }

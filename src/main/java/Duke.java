@@ -76,17 +76,10 @@ public class Duke {
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("     ☹ OOPS!!! The description of a " + type + " cannot be empty.");
-            /*
-            if (type.equalsIgnoreCase("todo")) {
-                throw new DukeException("     ☹ OOPS!!! The description of a " + type + " cannot be empty.");
-            } else if (type.equalsIgnoreCase("deadline")) {
-                throw new DukeException("     ☹ OOPS!!! Format is wrong. Input format: \"deadline (description) /by DD/MM/YYYY 2359\".");
-            } else {
-                throw new DukeException("     ☹ OOPS!!! Format is wrong. Input format: \"event (description) /at DD/MM/YYYY 2359\".");
-            }
-            */
         } catch (IllegalArgumentException e) {
             throw new DukeException("     ☹ OOPS!!! The task type does not exist. Three types available: Todo, Deadline, Event.");
+        } catch (DukeException e) {
+            throw e;
         }
     }
 

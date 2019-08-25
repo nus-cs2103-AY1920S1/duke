@@ -2,9 +2,26 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
+    protected int date;
+    protected int month;
+    protected int year;
+    protected int time;
+
+    public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
+
+        try {
+            date = Integer.valueOf(at.substring(0, 2));
+            month = Integer.valueOf(at.substring(3, 5));
+            year = Integer.valueOf(at.substring(6, 10));
+            String[] temp = at.split(" ");
+            time = Integer.valueOf(temp[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("     ☹ OOPS!!! Wrong input format. \"Event <description> /at <DD/MM/YYYY> <XX:XX>\"");
+        } catch (NumberFormatException e) {
+            throw new DukeException("     ☹ OOPS!!! Wrong input format. \"Event <description> /at <DD/MM/YYYY> <XX:XX>\"");
+        }
     }
 
     @Override

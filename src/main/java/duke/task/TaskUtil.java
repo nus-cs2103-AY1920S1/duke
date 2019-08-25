@@ -7,13 +7,23 @@ import java.time.LocalTime;
 
 import duke.DukeInvalidArgumentException;
 
-class TaskUtil {
+public class TaskUtil {
     private static String DATE_FORMAT = "dd/MM/yyyy HHmm";
     private static String TIME_FORMAT = "HHmm";
     private static String DISPLAY_FORMAT = "EEE, d MMM y h:mma";
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
     private static DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
+
+    public static void validateTaskDescription(String description)
+            throws DukeInvalidArgumentException {
+
+        if (description.length() == 0) {
+            throw new DukeInvalidArgumentException(
+                    "User specified description of task is empty",
+                    " \u2639 OOPS!!! The description of a task cannot be empty.");
+        }
+    }
 
     static LocalDateTime getDateFromString(String dateString) throws DukeInvalidArgumentException {
         try {

@@ -2,9 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
 
-    static String HORIZONTAL_LINE = "________________________________________________________________\n";
+    private static String HORIZONTAL_LINE = "________________________________________________________________\n";
 
     private static String greetingMsg = HORIZONTAL_LINE
             + " Hello! I'm Duke\n"
@@ -22,17 +22,26 @@ class Ui {
     }
 
     void displayDukeException(DukeExceptions ex) {
-        printLineDivider();
-        System.out.println(ex.getDisplayMsg());
-        printLineDivider();
-        System.out.println();
+        printMsgLine(ex.getDisplayMsg());
     }
 
     void printGreetingMsg() {
         System.out.println(greetingMsg);
     }
 
-    void printLineDivider() {
+    void printMsg(String msg) {
+        System.out.print(msg);
+    }
+
+    public void printMsgLine(String msg) {
+        System.out.println(msg);
+    }
+
+    void printEmptyLine() {
+        System.out.println();
+    }
+
+    public void printLineDivider() {
         System.out.print(HORIZONTAL_LINE);
     }
 

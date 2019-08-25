@@ -5,22 +5,34 @@ import duke.task.Task;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-class TaskList {
-    ArrayList<Task> tasks;
+public class TaskList {
+    private ArrayList<Task> tasks;
+    private int size;
 
     TaskList() {
-        tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
+        this.size = 0;
     }
 
-    TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
-    void setTaskDone(boolean isDone, int index) {
-        tasks.get(index).setDone(isDone);
+    public int getSize() {
+        return size;
+    }
+
+    public Task getTaskByIndex(int index) {
+        return tasks.get(index);
+    }
+
+    public Task deleteTaskByIndex(int index) {
+        size--;
+        return tasks.remove(index);
+    }
+
+    public void addTask(Task task) {
+        size++;
+        tasks.add(task);
     }
 }

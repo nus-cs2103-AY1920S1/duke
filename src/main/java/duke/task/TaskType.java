@@ -5,7 +5,7 @@ public enum TaskType {
     deadline(true),
     event(true);
 
-    boolean hasTime;
+    private boolean hasTime;
 
     TaskType(boolean hasTime) {
         this.hasTime = hasTime;

@@ -99,7 +99,7 @@ public class Duke {
                 if (theTask == null) {
                     taskByWhen = new String[] {null, null};
                 } else {
-                    taskByWhen = Arrays.copyOf(theTask.split(" /", 2), 2);
+                    taskByWhen = Arrays.copyOf(theTask.split(" /by ", 2), 2);
                 }
                 String deadlineTask = taskByWhen[0];
                 String byWhen = taskByWhen[1];
@@ -112,7 +112,7 @@ public class Duke {
                 if (theTask == null) {
                     taskAtTime = new String[] {null, null};
                 } else {
-                    taskAtTime = Arrays.copyOf(theTask.split(" /", 2), 2);
+                    taskAtTime = Arrays.copyOf(theTask.split(" /at ", 2), 2);
                 }
                 String eventTask = taskAtTime[0];
                 String atTime = taskAtTime[1];

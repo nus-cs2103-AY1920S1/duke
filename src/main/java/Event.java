@@ -1,5 +1,5 @@
 public class Event extends Task {
-    private String atTime;
+    private DateTime atTime;
 
     public Event(String name, String atTime) throws EmptyTaskDukeException, InvalidTaskDukeException {
         super(name);
@@ -9,16 +9,16 @@ public class Event extends Task {
         if (atTime == null) {
             throw new InvalidTaskDukeException("event");
         }
-        // to add the colon
-        String arr[] = atTime.split(" ", 2);
-        this.atTime = arr[0] + ": " + arr[1];
+        this.atTime = DateTime.create(atTime);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("[E]");
         stringBuilder.append(super.toString());
-        stringBuilder.append(" (" + atTime + ")");
+        stringBuilder.append(" (");
+        stringBuilder.append(atTime);
+        stringBuilder.append(")");
         return stringBuilder.toString();
     }
 }

@@ -16,6 +16,15 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a string representation of the task to be stored in file.
+     * @return a string representation of the task to be stored in file, consisting of the task type,
+     *         status, description and time.
+     */
+    public String toStringForFile() {
+        return super.toStringForFile() + " | " + time;
+    }
+
+    /**
      * Returns a string representaion of the task.
      * @return a string representation of the task consisting of the task type,
      *         status, description and time.

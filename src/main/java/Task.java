@@ -32,6 +32,15 @@ public class Task {
     }
 
     /**
+     * Returns a string representation of the task to be stored in file.
+     * @return a string representation of the task to be stored in file, consisting of the task type,
+     *         status, description.
+     */
+    public String toStringForFile() {
+        return String.format("%s | %d | %s", getClass().getName().substring(0,1), isDone ? 1 : 0, description);
+    }
+
+    /**
      * Returns a String representation of the task.
      * @return a String representation of the task, consisting of status icon
      *         and description.

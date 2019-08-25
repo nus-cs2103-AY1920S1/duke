@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.*;
-import duke.exception.*;
+import duke.task.TaskList;
+import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
 import duke.ui.Ui;

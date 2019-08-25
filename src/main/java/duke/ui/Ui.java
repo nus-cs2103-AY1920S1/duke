@@ -104,7 +104,7 @@ public class Ui {
     public void listTasks() {
         sendLine();
         sendMessage("Here are the tasks in your list:");
-        for (int tasknum = 0; tasknum < TaskList.getNumberOfTasks(); tasknum ++) {
+        for (int tasknum = 0; tasknum < TaskList.getNumberOfTasks(); tasknum++) {
             Task task = TaskList.getTask(tasknum);
             String todo = task.toString();
             if (task.isCompleted) {

@@ -1,7 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
-import duke.exception.*;
+import duke.exception.InvalidTaskIndexException;
 
 /**
  * A Class that represents a list of all completed and uncompleted Tasks.
@@ -61,7 +61,7 @@ public class TaskList {
      * @param taskDate The date of the Deadline Task.
      * @return The index of the new task.
      */
-    public int addEventTask(String taskName, String taskDate){
+    public int addEventTask(String taskName, String taskDate) {
         EventTask newTask = new EventTask(taskName, taskDate);
         tasks.add(newTask);
 
@@ -79,7 +79,7 @@ public class TaskList {
             throw new InvalidTaskIndexException();
         } else {
             Task task = tasks.get(index);
-            task.isCompleted= true;
+            task.isCompleted = true;
         }
     }
 

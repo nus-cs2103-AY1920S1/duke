@@ -5,6 +5,6 @@ public abstract class Command {
         return commandType;
     }
 
-    public abstract void execute();
+    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
 
 }

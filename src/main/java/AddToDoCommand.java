@@ -5,7 +5,7 @@ public class AddToDoCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
 
     }
 }

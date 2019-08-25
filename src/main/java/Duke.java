@@ -21,7 +21,6 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showErrorMessage(e);
             }
-            this.ui.showByeMessage();
         }
     }
 

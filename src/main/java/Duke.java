@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -8,6 +10,7 @@ import java.io.FileWriter;
 
 public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
+    public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
     private static String indent = "    ";
     private static String line = "____________________________________________________________";
     private static String greeting = "    ____________________________________________________________\n" +
@@ -30,7 +33,7 @@ public class Duke {
         readData();
     }
 
-    private static void loadData() throws FileNotFoundException{
+    private static void loadData() throws FileNotFoundException, ParseException {
         File f = new File("duke.txt"); // create a File for the given file path
         Scanner sc = new Scanner(f); // create a Scanner using the File as the source
         while (sc.hasNext()) {

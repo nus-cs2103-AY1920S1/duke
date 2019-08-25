@@ -10,7 +10,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return this.getAt();
+        return Duke.formatter.format(at);
     }
 
     @Override

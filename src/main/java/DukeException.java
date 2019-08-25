@@ -6,12 +6,8 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        StringBuilder errMessage = new StringBuilder();
-        String horizontal_line = "\t____________________________________________________________";
-        errMessage.append(horizontal_line +"\n");
-        errMessage.append("\t " + this.getMessage() + "\n");
-        errMessage.append(horizontal_line);
+        String errMessage = "\t " + this.getMessage();
 
-        return errMessage.toString();
+        return errMessage;
     }
 }

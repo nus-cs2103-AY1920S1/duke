@@ -11,8 +11,13 @@ public class Main {
         System.out.println("\t  What can I do for you?");
         printLine();
 
-        //store the list
-        ArrayList<Task> strArr = new ArrayList<>();
+        //directory for task list
+        String dir = "./data/";
+        String fileName = "duke.txt";
+
+        //load previous task list
+        LoadFile prevTaskList = new LoadFile(dir, fileName);
+        ArrayList<Task> taskArr = prevTaskList.loadTaskFromFile();
 
         //take in inputs
         while (sc.hasNext()) {
@@ -23,26 +28,29 @@ public class Main {
                 printLine();
                 if (inputArr[0].equals("bye")) {
                     System.out.println("\t  Bye. Hope to see you again soon!");
+
+                    WriteFile wf = new WriteFile(dir, fileName);
+                    wf.writeTaskToFile(taskArr);
                     break;
                 } else if (inputArr[0].equals("list")) {
                     System.out.println("\t  Here are the tasks in your list:");
-                    for (int i = 0; i < strArr.size(); i++) {
-                        System.out.println("\t  " + (i + 1) + ". " + strArr.get(i));
+                    for (int i = 0; i < taskArr.size(); i++) {
+                        System.out.println("\t  " + (i + 1) + ". " + taskArr.get(i));
                     }
                 } else if (inputArr[0].equals("done")) {
                     Integer indexDone = Integer.valueOf(inputArr[1]);
-                    strArr.get(indexDone - 1).markAsDone();
+                    taskArr.get(indexDone - 1).markAsDone();
 
                     System.out.println("\t  Nice! I've marked this task as done:");
-                    System.out.println("\t    " + strArr.get(indexDone - 1));
+                    System.out.println("\t    " + taskArr.get(indexDone - 1));
                 } else if (inputArr[0].equals("delete")) {
                     Integer indexRemove = Integer.valueOf(inputArr[1]);
-                    Task deletedTask = strArr.get(indexRemove - 1);
-                    strArr.remove(indexRemove - 1);
+                    Task deletedTask = taskArr.get(indexRemove - 1);
+                    taskArr.remove(indexRemove - 1);
 
                     System.out.println("\t  Noted. I've removed this task:");
                     System.out.println("\t    " + deletedTask);
-                    System.out.println("\t  Now you have " + strArr.size() +" tasks in the list.");
+                    System.out.println("\t  Now you have " + taskArr.size() +" tasks in the list.");
                 } else if (inputArr[0].equals("todo")) {
                     // todo event
                     if (inputArr.length == 1) {
@@ -59,8 +67,8 @@ public class Main {
                     }
 
                     Task todoTask = new Todo(newStr.toString());
-                    strArr.add(todoTask);
-                    printAddedTask(todoTask, strArr.size());
+                    taskArr.add(todoTask);
+                    printAddedTask(todoTask, taskArr.size());
                 } else if (inputArr[0].equals("deadline")) {
                     // deadline
                     StringBuilder desc = new StringBuilder();
@@ -76,7 +84,7 @@ public class Main {
                             }
                             break;
                         } else {
-                            if (x == inputArr.length - 1) {
+                            if (inputArr[x + 1].charAt(0) == '/') {
                                 desc.append(inputArr[x]);
                             } else {
                                 desc.append(inputArr[x] + " ");
@@ -85,8 +93,8 @@ public class Main {
                     }
 
                     Task deadlineTask = new Deadline(desc.toString(), by.toString());
-                    strArr.add(deadlineTask);
-                    printAddedTask(deadlineTask, strArr.size());
+                    taskArr.add(deadlineTask);
+                    printAddedTask(deadlineTask, taskArr.size());
                 } else if (inputArr[0].equals("event")) {
                     // event
                     StringBuilder desc = new StringBuilder();
@@ -102,7 +110,7 @@ public class Main {
                             }
                             break;
                         } else {
-                            if (x == inputArr.length - 1) {
+                            if (inputArr[x + 1].charAt(0) == '/') {
                                 desc.append(inputArr[x]);
                             } else {
                                 desc.append(inputArr[x] + " ");
@@ -111,14 +119,15 @@ public class Main {
                     }
 
                     Task eventTask = new Event(desc.toString(), at.toString());
-                    strArr.add(eventTask);
-                    printAddedTask(eventTask, strArr.size());
+                    taskArr.add(eventTask);
+                    printAddedTask(eventTask, taskArr.size());
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                printLine();
             } catch (DukeException d) {
-                System.err.println(d);
+                System.out.println(d);
+            } finally {
+                printLine();
             }
         }
     }

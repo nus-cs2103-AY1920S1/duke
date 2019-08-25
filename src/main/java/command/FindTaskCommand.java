@@ -7,14 +7,26 @@ import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.ui.Ui;
 
+/** 
+ * Represents a Command to find a Task.
+ */
 public class FindTaskCommand extends Command {
 
+    /** Keyword to search Tasks for. */
     protected String keyword;
 
+    /**
+     * Constructs a FindTaskCommand from a keyword.
+     *
+     * @param keyword Keyword to search Tasks for.
+     */
     public FindTaskCommand(String keyword) {
         this.keyword = keyword.toUpperCase();
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine("Here are the matching tasks in your list:");

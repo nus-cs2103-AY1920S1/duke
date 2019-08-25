@@ -117,7 +117,7 @@ public class Parser  {
                             }
                         }
 
-                        eventTaskDateAndTimeString = convertStringToDate(eventTaskDateAndTimeString);
+                        eventTaskDateAndTimeString = convertStringToDateEvent(eventTaskDateAndTimeString);
                         storeTaskList.addEventTask(eventTaskDescriptionString.trim(), eventTaskDateAndTimeString.trim());
                         //argument = myScanner.nextLine();
                     } catch (DukeException e) {
@@ -256,5 +256,29 @@ public class Parser  {
         }else {
             return String.valueOf(temp) + "th";
         }
+    }
+
+    private static String convertStringToDateEvent(String dateAndTimeString) {
+       try { // format of input 2/12/2019 1400-1500
+           String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
+           String date = arrayOfDateAndTime[0];
+
+           String temp = arrayOfDateAndTime[1];
+           String[] arrayOfTime = temp.split("-");
+           String timeStarting = arrayOfTime[0];
+           String timeEnding = arrayOfTime[1];
+           date = formatString(date);
+           timeStarting = convertTime(Integer.valueOf(timeStarting));
+           timeEnding = convertTime(Integer.valueOf(timeEnding));
+
+           dateAndTimeString = date + ", " + timeStarting + "-" +timeEnding;
+           return dateAndTimeString;
+       } catch (IndexOutOfBoundsException e) {
+           System.out.println("invalid date and time supplied: try d/mm/yyyy 0000 format");
+       } catch (DukeException e ) {
+           System.out.println(e);
+       }
+
+        return " ";
     }
 }

@@ -1,5 +1,4 @@
 import java.text.ParseException;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;

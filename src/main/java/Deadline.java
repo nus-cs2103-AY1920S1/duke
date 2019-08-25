@@ -8,6 +8,7 @@ public class Deadline extends Task {
     protected SimpleDateFormat fileDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected SimpleDateFormat fileTimeFormat = new SimpleDateFormat("HHmm");
     protected Date date, time;
+
     public Deadline(String description, Date date, Date time) {
         super(description);
         this.date = date;

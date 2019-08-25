@@ -16,7 +16,7 @@ public abstract class Command {
      *
      * @param tasks List of tasks.
      * @param ui User interface to interact with the user.
-     * @param Storage Storage to handle serialization and deserialization of tasks.
+     * @param storage Storage to handle serialization and deserialization of tasks.
      * @throws CommandExecuteException If there was an error executing the command.
      * @throws StorageException If there was an error interacting with storage.
      */

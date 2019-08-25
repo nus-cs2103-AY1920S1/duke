@@ -15,6 +15,10 @@ public class Duke {
     private Parser parser;
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
+    /**
+     * Constructor for Duke instance
+     * @param filepath file path giving the location of the file
+     */
     public Duke(String filepath) {
         storage = new Storage(filepath);
         //initialise an arraylist to store Tasks
@@ -22,10 +26,22 @@ public class Duke {
         this.parser = new Parser(store);
     }
 
+    /**
+     * Driver method for Duke instance
+     * calls parser to parse user input accordingly
+     */
+
     public void run() {
         parser.readUserInput();
     }
 
+    /**
+     * Entry point of program, instantiates Duke instance
+     * file input/output is loaded from data/duke.txt
+     * @param
+     * @return void
+     *
+     */
     public static void main(String[] args) {
         Duke temp = new Duke("data/duke.txt");
         Ui.showGreeting();

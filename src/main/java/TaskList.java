@@ -4,6 +4,14 @@ public class TaskList {
     ArrayList<Task> store;
     Storage storage;
 
+    /**
+     * wrapper class for Task
+     * only responsible for actions that directly manipulates the actual list of task.
+     * Does not deal with saving or loading of tasks from storage
+     * @param listOfTasks
+     * @param storage
+     */
+
     public TaskList(ArrayList<Task> listOfTasks, Storage storage) {
         this.store = listOfTasks;
         this.storage = storage;
@@ -13,6 +21,9 @@ public class TaskList {
     public TaskList(ArrayList<Task> listOfTasks) {
     }
 
+    /**
+     * Method that displays the tasks on the current list to users
+     */
     public void listTask() {
         int num = 1;
         System.out.println("Here are the tasks in your list:");
@@ -22,6 +33,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Create a done version of task at index
+     * @param index refers to the position of specified task that user inputs
+     */
+
     public void doneTask(int index) {
         Task taskToModify = store.get(index);
         taskToModify.markAsDone();
@@ -30,6 +46,11 @@ public class TaskList {
         storage.saveTaskToFile(store);
 
     }
+
+    /**
+     * Creates a todo task based on user input
+     * @param toDoTaskString user input
+     */
 
     public void addToDoTask(String toDoTaskString) {
         //.trim() to remove trailing space
@@ -41,6 +62,12 @@ public class TaskList {
         Ui.printNow(store.size());
     }
 
+    /**
+     * Creates a deadline task based on user input
+     * @param deadlineTaskDescriptionString User input for description of task
+     * @param deadlineTaskDateAndTimeString date and time specified. should be in d/mm/yyyy HHmm format
+     */
+
     public void addDeadlineTask(String deadlineTaskDescriptionString, String deadlineTaskDateAndTimeString) {
         Task deadlineTask = new Deadline(deadlineTaskDescriptionString, deadlineTaskDateAndTimeString);
         store.add(deadlineTask);
@@ -49,6 +76,12 @@ public class TaskList {
         System.out.println(" " + deadlineTask.toString());
         Ui.printNow(store.size());
     }
+
+    /**
+     * Creates event task based on user input
+     * @param eventTaskDescriptionString user input for description of task
+     * @param eventTaskDateAndTimeString date and time specified. should be in d/mm/yyyy HHmm format
+     */
 
     public void addEventTask(String eventTaskDescriptionString, String eventTaskDateAndTimeString) {
         //use of .trim() to avoid trailing whitespace
@@ -59,6 +92,11 @@ public class TaskList {
         System.out.println(" " + eventTask.toString());
         Ui.printNow(store.size());
     }
+
+    /**
+     * Delete task in list at specified position
+     * @param index position of task to be deleted
+     */
     public void deleteTask(int index) {
         Task removed = store.remove(index);
         storage.saveTaskToFile(store);

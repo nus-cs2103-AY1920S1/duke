@@ -1,7 +1,11 @@
 public class Deadline extends Task {
     String dateAndTime;
 
-
+    /**
+     * Deadline task
+     * @param description user input of the title of the task
+     * @param dateAndTime user input of date and time in the format d/mm/yyyy HHmm
+     */
     public Deadline(String description, String dateAndTime) {
         super(description);
         this.dateAndTime = dateAndTime;

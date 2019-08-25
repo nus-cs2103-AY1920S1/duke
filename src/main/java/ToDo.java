@@ -1,5 +1,10 @@
 public class ToDo extends Task {
 
+    /**
+     * ToDo task
+     * @param description user input of title of the task
+     */
+
     public ToDo(String description) {
         super(description);
     }

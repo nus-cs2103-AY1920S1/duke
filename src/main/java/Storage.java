@@ -11,6 +11,10 @@ public class Storage {
     File tempFile;
     ArrayList<String> storingStrings = new ArrayList<>();
 
+    /**
+     * Object that deals with saving data to the files and reading from them
+     * @param filePath file to be saved to
+     */
     public Storage(String filePath) {
         try{
             this.tempFile = new File(filePath);
@@ -22,7 +26,10 @@ public class Storage {
     }
 
 
-
+    /**
+     * Saves given arrayList of Tasks to file
+     * @param list ArrayList of Task
+     */
     public void saveTaskToFile(ArrayList<Task> list) {
         try {
             FileWriter fileWriter = new FileWriter(this.tempFile);
@@ -37,6 +44,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates an arrayList of Taks from file
+     * @return ArrayList of Task
+     */
     public ArrayList<Task> createTasksFromFile() {
         ArrayList<Task> store = new ArrayList<>();
         for (int i = 0; i < this.storingStrings.size(); i++) {

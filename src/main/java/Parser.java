@@ -290,4 +290,12 @@ public class Parser  {
 
         return " ";
     }
+
+    public static String accessConvertStringToDate(String test) {
+        return convertStringToDate(test);
+    }
+
+    public static String accessConvertTime(int convertedTime) throws DukeException {
+        return convertTime(convertedTime);
+    }
 }

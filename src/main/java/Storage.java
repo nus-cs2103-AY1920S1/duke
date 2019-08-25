@@ -5,9 +5,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+/**
+ * Storage class.
+ * Instances can write to "../data/duke.txt" and are
+ * responsible for writing to the file for storage purposes.
+ */
 public class Storage {
+    /** Given path to the duke.txt which holds the data. */
     private static final String PATH = "../data/duke.txt";
 
+    /**
+     * Constructor.
+     * Tries to create duke.txt if it does not exist.
+     */
     public Storage() {
         File f = new File(PATH);
         try {
@@ -17,6 +27,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes down all tasks and their state and data to duke.txt.
+     * @param tasklist Tasklist that provides the relevant data.
+     */
     public void write(TaskList tasklist) {
         try {
             FileWriter fw = new FileWriter(PATH);
@@ -57,6 +71,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Read duke.txt and gets all the tasks written on it.
+     * @return ArrayList of Tasks recorded on duke.txt.
+     */
     public ArrayList<Task> parseFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {

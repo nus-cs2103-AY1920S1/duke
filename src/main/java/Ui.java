@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Ui {
-    Scanner in = new Scanner(System.in);
+    private Scanner in = new Scanner(System.in);
 
     public void show(String str) {
         if (!str.endsWith("\n"))

@@ -43,8 +43,8 @@ class LoadFileFailDukeException extends DukeException {
     }
 }
 
-class ReadFileFailDukeException extends DukeException {
-    public ReadFileFailDukeException() {
+class WriteFileFailDukeException extends DukeException {
+    public WriteFileFailDukeException() {
         super("Oops... Something went wrong with file writing.\"\nPlease ");
     }
 }

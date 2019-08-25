@@ -1,13 +1,13 @@
 public class Parser {
 
-    public static Command parse(String str) throws DukeException{
+    public static Command parse(String str) throws DukeException {
         str = str.trim();
         int lastIndex = str.indexOf(' ');
-        if(lastIndex < 0){
+        if (lastIndex < 0) {
             lastIndex = str.length();
         }
         String[] temp;
-        switch(str.substring(0, lastIndex)){
+        switch (str.substring(0, lastIndex)) {
             case "bye":
                 return new ExitCommand();
             case "delete":

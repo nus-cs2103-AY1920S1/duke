@@ -33,17 +33,19 @@ public abstract class Task {
                 this.description;
     }
 
-    protected String toFileString(){
+    protected String toFileString() {
         return (char) 31 + (this.isDone ? "1" : "0") + (char) 31 +
                 this.description;
-    };
+    }
+
+    ;
 
     abstract protected String childClass();
 
-    public static Task parseFileTask(String str) throws DukeException{
+    public static Task parseFileTask(String str) throws DukeException {
         String[] prop = str.split("\\x1f");
         Task t = null;
-        switch (prop[0]){
+        switch (prop[0]) {
             case "D":
                 t = new Deadline(prop[2], prop[3]);
                 break;
@@ -54,7 +56,7 @@ public abstract class Task {
                 t = new Todo(prop[2]);
                 break;
         }
-        if(t != null && prop[1].equals("1"))
+        if (t != null && prop[1].equals("1"))
             t.setDone();
         return t;
     }
@@ -95,7 +97,7 @@ class Deadline extends Task {
         return "deadline";
     }
 
-    public String toFileString(){
+    public String toFileString() {
         return "D" + super.toFileString() + (char) 31 + this.by.format(super.fileDTF);
     }
 }
@@ -123,7 +125,7 @@ class Event extends Task {
     }
 
     @Override
-    public String toFileString(){
+    public String toFileString() {
         return "E" + super.toFileString() + (char) 31 + this.at.format(super.fileDTF);
     }
 }
@@ -144,7 +146,7 @@ class Todo extends Task {
     }
 
     @Override
-    public String toFileString(){
+    public String toFileString() {
         return "T" + super.toFileString();
     }
 }

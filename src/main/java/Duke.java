@@ -18,7 +18,7 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
-    private void run() {
+    public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

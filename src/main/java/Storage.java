@@ -22,13 +22,13 @@ public class Storage {
         }
     }
 
-    public void rewrite(String content) throws ReadFileFailDukeException {
+    public void rewrite(String content) throws WriteFileFailDukeException {
         try {
             FileWriter fw = new FileWriter(filePath, false);
             fw.write(content);
             fw.close();
         } catch (Exception e) {
-            throw new ReadFileFailDukeException();
+            throw new WriteFileFailDukeException();
         }
     }
 }

@@ -9,6 +9,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        Parser.setFilePath(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
@@ -22,12 +23,19 @@ public class Duke {
     }
 
     public void run() {
-        ui.printStartScreen();
-        Parser parser = new Parser(ui, tasks, storage);
-        String userInput = ui.readLineInput();
-        while (!"bye".equals(userInput)) {
-            parser.process(userInput);
-            userInput = ui.readLineInput();
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readLineInput();
+                Command c = Parser.parse(fullCommand);
+                if (c != null) {
+                    c.execute(tasks, ui, storage);
+                    isExit = c.isExit();
+                }
+            } catch (DukeException de) {
+                ui.printError(de.getMessage());
+            }
         }
         ui.printExitMessage();
     }

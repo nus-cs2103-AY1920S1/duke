@@ -40,9 +40,27 @@ public class Storage {
     }
 
 
-    public void writeToFile(String filePath, String textToAdd, boolean isAppend) throws IOException {
-        FileWriter fw = isAppend ? new FileWriter(filePath, true) : new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
+    public void writeToFile(String filePath, String textToAdd, boolean isAppend) {
+        try {
+            FileWriter fw = isAppend ? new FileWriter(filePath, true) : new FileWriter(filePath);
+            fw.write(textToAdd);
+            fw.close();
+        } catch (IOException ioe) {
+            new Ui().printError("Failed to save changes to file. Please try again.");
+        }
+    }
+
+    public void overwriteFile(ArrayList<Task> listOfTasks) {
+        String saveToFile = "";
+        for (Task t : listOfTasks) {
+            saveToFile += String.format("%s %d %s", t.type, t.isDone, t.description);
+            if ("D".equals(t.type)) {
+                saveToFile += " | " + ((Deadline) t).endTime;
+            } else if ("E".equals(t.type)) {
+                saveToFile += " | " + ((Event) t).eventPeriod;
+            }
+            saveToFile += "\n";
+        }
+        writeToFile(filePath, saveToFile, false);
     }
 }

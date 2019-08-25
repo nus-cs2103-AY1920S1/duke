@@ -10,7 +10,7 @@ public class Ui {
         separationLine = "    ____________________________________________________________";
     }
 
-    public void printStartScreen() {
+    public void showWelcome() {
         String logo = "      ____        _        \n"
                 + "     |  _ \\ _   _| | _____ \n"
                 + "     | | | | | | | |/ / _ \\\n"
@@ -28,7 +28,7 @@ public class Ui {
         System.out.println("Error loading from file. Initiating with empty Task list.");
     }
 
-    public void printErrorMessage(String message) {
+    public void printError(String message) {
         System.err.println(message);
     }
 

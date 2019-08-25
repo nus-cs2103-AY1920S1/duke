@@ -11,14 +11,15 @@ public class Parser {
             return new ExitCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
-        } else if (command.startsWith("done ")){
+        } else if (command.startsWith("done ")) {
             try {
                 int id = Integer.parseInt(command.substring(5));
                 return new DoneCommand(id);
-            } catch  (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Invalid index provided!");
             }
-
+        } else if (command.startsWith("find ")) {
+            return new FindCommand(command.substring(5));
         } else if (command.startsWith("delete ")) {
             try {
                 int id = Integer.parseInt(command.substring(7));

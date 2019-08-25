@@ -40,4 +40,14 @@ public class TaskList {
     public int getListSize() {
         return this.tasks.size();
     }
+
+    public LinkedList<Task> findTasks(String keywords) {
+        LinkedList<Task> results = new LinkedList<>();
+        for (Task t : this.tasks) {
+            if (t.toString().contains(keywords)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
 }

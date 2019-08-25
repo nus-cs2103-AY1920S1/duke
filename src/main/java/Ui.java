@@ -28,8 +28,15 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
     public void showList(LinkedList<Task> tasks) {
-        int i = 1;
         System.out.println("Here are the tasks in your list:");
+        showGivenList(tasks);
+    }
+    public void showMatch(LinkedList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        showGivenList(tasks);
+    }
+    private void showGivenList(LinkedList<Task> tasks) {
+        int i = 1;
         for (Task t : tasks) {
             System.out.println(i + ". " + t);
             i++;

@@ -285,17 +285,20 @@ public class Duke {
         }
     }
 
-    private static void addAndPrintTask(ArrayList<Task> tasks, Task task)
-            throws DukeInvalidArgumentException {
-
+    private static void addAndPrintTask(ArrayList<Task> tasks, Task task) {
         tasks.add(task);
 
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + task.getStatusText());
         System.out.printf(" Now you have %d tasks in the list.\n", tasks.size());
         System.out.println(Duke.HORIZONTAL_LINE);
-    }
 
+        try {
+            DukeFileUtil.writeTasksToDisk(tasks);
+        } catch (DukeFileWriteException ex) {
+            displayDukeException(ex);
+        }
+    }
 
     private static void displayDukeException(DukeExceptions ex) {
         System.out.println(ex.getDisplayMsg());

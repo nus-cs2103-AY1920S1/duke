@@ -8,7 +8,7 @@ public class ToDoList {
     private int counter;
 
     public ToDoList() {
-        this.todoList = new ArrayList();
+        this.todoList = new ArrayList<>();
         this.counter = 0;
     }
 
@@ -39,19 +39,19 @@ public class ToDoList {
         Task newTask = new Task("");
 
         switch (taskType) {
-            case "todo":
-                newTask = new Todo(description);
-                break;
-            case "deadline":
-                String deadline = inputTask[1].substring(2);
-                newTask = new Deadline(description, deadline);
-                break;
-            case "event":
-                String date = inputTask[1].substring(2);
-                newTask = new Event(description, date);
-                break;
-            default:
-                break;
+        case "todo":
+            newTask = new Todo(description);
+            break;
+        case "deadline":
+            String deadline = inputTask[1].substring(2);
+            newTask = new Deadline(description, deadline);
+            break;
+        case "event":
+            String date = inputTask[1].substring(2);
+            newTask = new Event(description, date);
+            break;
+        default:
+            break;
         }
 
         todoList.add(newTask);

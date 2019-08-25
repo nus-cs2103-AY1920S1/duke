@@ -1,11 +1,26 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import todo.ToDoList;
 
 public class Duke {
     public static void main(String[] args) {
+        Duke duke = new Duke();
+        Duke.run();
+    }
+
+    private static void run() {
         Scanner sc = new Scanner(System.in);
         ToDoList todo = new ToDoList();
         String input = "";
+
+        File file = new File("/data/duke.txt");
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Error in accessing data file");
+        }
 
         printFormattedText("    Hello! I'm Duke\n" +
                 "    What can I do for you?");

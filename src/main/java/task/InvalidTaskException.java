@@ -1,4 +1,4 @@
-package main.task;
+package task;
 import java.lang.Exception;
 
 public class InvalidTaskException extends Exception {

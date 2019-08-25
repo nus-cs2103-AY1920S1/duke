@@ -1,4 +1,4 @@
-package main.task;
+package task;
 
 public class Deadline extends Task {
     Date date;

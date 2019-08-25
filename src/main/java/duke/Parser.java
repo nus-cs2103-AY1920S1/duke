@@ -6,6 +6,7 @@ import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.FinishCommand;
 import duke.command.ListCommand;
 
@@ -90,6 +91,9 @@ public class Parser {
         case "delete":
             validateIsPositiveInteger(parsedCommand.args, "The argument for delete should be a positive whole number.");
             return new DeleteCommand(Integer.parseInt(parsedCommand.args) - 1);
+        case "find":
+            validateNotNull(parsedCommand.args, "The search keyword should not be empty.");
+            return new FindCommand(parsedCommand.args);
         case "todo":
             validateNotNull(parsedCommand.args, "The description of a todo cannot be empty.");
             return new AddTodoCommand(parsedCommand.args);

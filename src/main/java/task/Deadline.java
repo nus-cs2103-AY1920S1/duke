@@ -9,12 +9,25 @@ public class Deadline extends Task {
     protected String by;
     protected Date date;
 
+    /**
+     * Use this constructor when reading input from user.
+     * 
+     * @param description Description of deadline.
+     * @param by          Date of deadline.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
         this.date = formatDate();
     }
 
+    /**
+     * Use this constructor when reading input from data file.
+     * 
+     * @param description Description of deadline.
+     * @param by          Date of deadline.
+     * @param isDone      If deadline is completed/over.
+     */
     public Deadline(String description, String by, int isDone) {
         super(description, isDone);
         this.by = by;

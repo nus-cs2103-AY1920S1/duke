@@ -9,12 +9,25 @@ public class Event extends Task {
     protected String at;
     protected Date date;
 
+    /**
+     * Use this constructor when reading input from user.
+     * 
+     * @param description Description of deadline.
+     * @param at          Date of deadline.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
         this.date = formatDate();
     }
 
+    /**
+     * Use this constructor when reading input from data file.
+     * 
+     * @param description Description of deadline.
+     * @param at          Date of deadline.
+     * @param isDone      If deadline is completed/over.
+     */
     public Event(String description, String at, int isDone) {
         super(description, isDone);
         this.at = at;

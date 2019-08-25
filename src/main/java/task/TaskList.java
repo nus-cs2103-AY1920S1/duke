@@ -22,6 +22,12 @@ public class TaskList {
         this.counter = counter;
     }
 
+    /**
+     * Adds task into the current list of tasks.
+     * 
+     * @param t Task to be added.
+     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
+     */
     public TaskList addTask(Task t) {
         task.add(t);
         Ui.printAddedTask(t, counter);
@@ -29,6 +35,12 @@ public class TaskList {
         return new TaskList(task, counter);
     }
 
+    /**
+     * Deletes task into the current list of tasks.
+     * 
+     * @param index Index of task to be deleted.
+     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
+     */
     public TaskList deleteTask(int index) {
         Task deletedTask = task.remove(index);
         counter--;
@@ -36,6 +48,12 @@ public class TaskList {
         return new TaskList(task, counter);
     }
 
+    /**
+     * Mark the task that is in the list as done.
+     * 
+     * @param index Index of task to be marked as done.
+     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
+     */
     public TaskList doneTask(int index) {
         Task markAsDoneTask = task.get(index);
         markAsDoneTask.markAsDone();

@@ -15,6 +15,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads data from data file.
+     * 
+     * @return New TaskList that contains an ArrayList of tasks and number of tasks.
+     * @throws FileNotFoundException Occurs when path of file is invalid.
+     */
     public TaskList readData() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
@@ -32,6 +38,7 @@ public class Storage {
             case "D":
                 task.add(new Deadline(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
                 break;
+            default:
             }
         }
 
@@ -41,6 +48,13 @@ public class Storage {
         return new TaskList(task);
     }
 
+    /**
+     * Write data from taskList into data file.
+     * 
+     * @param taskList A TaskList that contains an ArrayList of tasks and number of
+     *                 tasks.
+     * @throws IOException Occurs when path of file is invalid.
+     */
     public void writeData(TaskList taskList) throws IOException {
         ArrayList<Task> task = taskList.getTasks();
         FileWriter fw = new FileWriter(filePath);

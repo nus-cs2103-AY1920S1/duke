@@ -12,6 +12,11 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints the list of tasks in taskList.
+     * 
+     * @param taskList Contains the list of tasks and number of tasks.
+     */
     public static void printList(TaskList taskList) {
         ArrayList<Task> task = taskList.getTasks();
         int counter = taskList.getCounter();
@@ -28,6 +33,12 @@ public class Ui {
         System.out.println(task);
     }
 
+    /**
+     * Prints the task that was last added.
+     * 
+     * @param t       Last added task.
+     * @param counter Remaining number of tasks in the list.
+     */
     public static void printAddedTask(Task t, int counter) {
         System.out.println("Got it. I've added this task:\n" + t);
         counter++;
@@ -35,6 +46,12 @@ public class Ui {
         System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
     }
 
+    /**
+     * Prints the task that was last deleted.
+     * 
+     * @param task    Last deleted task.
+     * @param counter Remaining number of tasks in the list.
+     */
     public static void printDeleteTask(Task task, int counter) {
         String taskIfPlural = counter <= 1 ? "task" : "tasks";
         System.out.println("Noted. I've removed this task:");
@@ -42,6 +59,11 @@ public class Ui {
         System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
     }
 
+    /**
+     * Prints the customized DukeException message or general exception message.
+     * 
+     * @param e Exception to be printed.
+     */
     public static void printException(Exception e) {
         if (e instanceof DukeException) {
             System.err.println(e);

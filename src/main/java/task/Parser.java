@@ -61,6 +61,13 @@ public class Parser {
                     }
 
                     taskList = taskList.deleteTask(deletedIndex);
+                } else if (textInput.startsWith("find")) {
+                    if (textInput.equals("find") || textInput.equals("find ")) {
+                        throw new DukeException("OOPS!!! Keyword required!");
+                    }
+
+                    String keyWord = textInput.replaceFirst("find ", "");
+                    taskList.findTask(keyWord);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

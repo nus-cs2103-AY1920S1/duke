@@ -42,6 +42,17 @@ public class Ui {
         System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
     }
 
+    public static void printFoundTask(TaskList taskList) {
+        ArrayList<Task> task = taskList.getTasks();
+        int counter = taskList.getCounter();
+        String isPlural = counter == 1 ? "is" : "are";
+        String taskIfPlural = counter == 1 ? "task" : "tasks";
+        System.out.println("Here " + isPlural + " the matching " + taskIfPlural + " in your list:");
+        for (int i = 1; i <= counter; i++) {
+            System.out.println(i + "." + task.get(i - 1));
+        }
+    }
+
     public static void printException(Exception e) {
         if (e instanceof DukeException) {
             System.err.println(e);

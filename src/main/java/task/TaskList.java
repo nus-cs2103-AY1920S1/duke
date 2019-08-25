@@ -43,6 +43,16 @@ public class TaskList {
         return new TaskList(task, counter);
     }
 
+    public void findTask(String keyWord) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : this.task) {
+            if (t.getDescription().contains(keyWord)) {
+                foundTasks.add(t);
+            }
+        }
+        Ui.printFoundTask(new TaskList(foundTasks));
+    }
+
     public ArrayList<Task> getTasks() {
         return this.task;
     }

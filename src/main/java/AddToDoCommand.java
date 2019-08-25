@@ -1,11 +1,23 @@
+import java.text.Normalizer;
+
 public class AddToDoCommand extends Command{
 
-    public AddToDoCommand(){
+    String task;
+    ToDo toDoTask;
+
+    public AddToDoCommand(String task){
         this.commandType = CommandType.ADDTODO;
+        this.task = task;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-
+        this.toDoTask = new ToDo(this.task, taskList.getSize() + 1);
+        taskList.addToList(this.toDoTask);
+        Formatter.printLine();
+        System.out.println(Formatter.indentLine("Got it. I've added this task:"));
+        System.out.println(Formatter.indentLine("  " + this.toDoTask));
+        System.out.println(Formatter.indentLine("Now you have " + taskList.getSize() + " tasks in the list."));
+        Formatter.printLine();
     }
 }

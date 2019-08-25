@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Parser {
 
     public static Command parse(String fullCommand){
@@ -11,15 +9,21 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "done":
-                return new DoneCommand();
+                return new DoneCommand(Integer.parseInt(tokens[1]));
             case "delete":
-                return new DeleteCommand();
+                return new DeleteCommand(Integer.parseInt(tokens[1]));
             case "todo":
-                return new AddToDoCommand();
+                return new AddToDoCommand(fullCommand.substring(5));
             case "deadline":
-                return new AddDeadlineCommand();
+                String[] deadlineSplit = fullCommand.split(" /by ");
+                String deadlineDesc = deadlineSplit[0].substring(9);
+                String deadlineDate = deadlineSplit[deadlineSplit.length - 1];
+                return new AddDeadlineCommand(deadlineDesc, deadlineDate);
             case "event":
-                return new AddEventCommand();
+                String[] eventSplit = fullCommand.split(" /at ");
+                String eventDesc = eventSplit[0].substring(6);
+                String eventDate = eventSplit[eventSplit.length - 1];
+                return new AddEventCommand(eventDesc, eventDate);
             default:
                 return new NullCommand();
         }

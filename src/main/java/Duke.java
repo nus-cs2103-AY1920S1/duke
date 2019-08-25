@@ -107,17 +107,6 @@ public class Duke {
         exitMessage();
     }
 
-    private static void addToDo(String task){
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(formatText("Got it. I've added this task:"));
-        ToDo toDoTask = new ToDo(task);
-        taskList.add(toDoTask);
-        System.out.println(formatText("  " + toDoTask ));
-        System.out.println(formatText("Now you have " + taskList.size() + " tasks in the list."));
-        System.out.println(HORIZONTAL_LINE);
-
-    }
-
     private static void addDeadline(String task, String by){
         System.out.println(HORIZONTAL_LINE);
         System.out.println(formatText("Got it. I've added this task:"));

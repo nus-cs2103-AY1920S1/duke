@@ -4,7 +4,7 @@ public class Ui {
 
     public void showWelcomeMessage(){
         String message = "Hello! I'm Slave! Your very own productivity application.\n" +
-                "What can I do for you?";
+                "     What can I do for you?";
         System.out.println(Formatter.formatMessage(message));
     }
 
@@ -17,7 +17,7 @@ public class Ui {
         System.out.println(Formatter.formatMessage(e.getMessage()));
     }
 
-    public String readCommand(Command command){
+    public String readCommand(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }

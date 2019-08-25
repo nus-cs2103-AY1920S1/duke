@@ -29,14 +29,18 @@ public class Parser {
             String inputBeforeSlash = input.split("\\s+/", 2)[0];
             String inputAfterSlash = input.split("\\s+/").length >= 2 ? input.split("\\s+/", 2)[1] : null;
 
-            this.beforeSlashArgs = inputBeforeSlash.split("\\s+").length >= 2 ? inputBeforeSlash.split("\\s+", 2)[1] : null;
+            this.beforeSlashArgs = inputBeforeSlash.split("\\s+").length >= 2
+                    ? inputBeforeSlash.split("\\s+", 2)[1]
+                    : null;
 
             if (inputAfterSlash == null) {
                 this.slashKeyword = null;
                 this.slashArgs = null;
             } else {
                 this.slashKeyword = inputAfterSlash.split("\\s+", 2)[0];
-                this.slashArgs = inputAfterSlash.split("\\s+").length >= 2 ? inputAfterSlash.split("\\s+", 2)[1] : null;
+                this.slashArgs = inputAfterSlash.split("\\s+").length >= 2
+                        ? inputAfterSlash.split("\\s+", 2)[1]
+                        : null;
             }
         }
     }

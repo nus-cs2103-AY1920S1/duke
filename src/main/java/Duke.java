@@ -30,7 +30,7 @@ public class Duke {
             task = storage.readData();
             counter = task.size();
         } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
+            ui.printException(e);
         }
 
         Scanner sc = new Scanner(System.in);
@@ -95,7 +95,7 @@ public class Duke {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                System.err.println(e);
+                ui.printException(e);
             } finally {
                 textInput = sc.nextLine();
             }
@@ -105,7 +105,7 @@ public class Duke {
         try {
             storage.writeData(task);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            ui.printException(e);
         }
 
         // Close the scanner

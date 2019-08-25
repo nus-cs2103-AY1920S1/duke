@@ -38,4 +38,12 @@ public class Ui {
         System.out.println(task);
         System.out.println("Now you have " + counter + " " + taskIfPlural + " in the list.");
     }
+
+    public void printException(Exception e) {
+        if (e instanceof DukeException) {
+            System.err.println(e);
+        } else {
+            System.err.println(e.getMessage());
+        }
+    }
 }

@@ -44,6 +44,11 @@ public class Parser {
                 }
                 return new EventCommand(temp[0], temp[1]);
             }
+        case "find":
+            if (arg.length < 2) {
+                throw new DukeEmptyDescException(arg[0]);
+            }
+            return new FindCommand(arg[1]);
         default:
             throw new DukeException();
         }

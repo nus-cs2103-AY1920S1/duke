@@ -24,4 +24,15 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + formatter.format(dueDateTime) + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline another = (Deadline) obj;
+            return this.description.equals(another.description) && this.dueDateTime.equals(another.dueDateTime)
+                    && this.isDone == another.isDone;
+        } else {
+            return false;
+        }
+    }
 }

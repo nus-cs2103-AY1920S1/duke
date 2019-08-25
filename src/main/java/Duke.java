@@ -15,7 +15,11 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
-    public void run() {
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    private void setUp() {
         ui.showWelcome();
 
         try {
@@ -30,6 +34,11 @@ public class Duke {
         } else {
             ui.showNoTask();
         }
+    }
+
+    public void run() {
+
+        setUp();
 
         boolean isExist = false;
         while (!isExist) {

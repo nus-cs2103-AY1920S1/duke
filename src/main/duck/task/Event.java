@@ -32,4 +32,15 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + formatter.format(startDateTime) + " - " + endTime + ")";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event another = (Event) obj;
+            return this.description.equals(another.description) && this.startDateTime.equals(another.startDateTime)
+                    && this.endTime.equals(another.endTime) && this.isDone == another.isDone;
+        } else {
+            return false;
+        }
+    }
 }

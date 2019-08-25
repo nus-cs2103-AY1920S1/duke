@@ -51,4 +51,21 @@ public class AddCommand extends Command {
         taskList.add(newTask);
         ui.showTaskAdded(taskList.getTotalTask(), newTask);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddCommand) {
+            AddCommand another = (AddCommand) obj;
+            if (taskType.equals(another.taskType)) {
+                return description.equals(another.description)
+                        && (dateTime == null || dateTime.equals(another.dateTime))
+                        && (time == null || time.equals(another.time));
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+    }
 }

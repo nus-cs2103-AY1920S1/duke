@@ -13,7 +13,7 @@ public class Parser {
 
     public static Command parseCommand(String info) throws DukeException{
 
-        String[] infos = info.trim().split(" ", 2);
+        String[] infos = info.trim().split("\\s+", 2);
         if(infos[0].equals("list")) {
             return new ListCommand();
         } else if (infos[0].equals("bye")) {
@@ -27,9 +27,6 @@ public class Parser {
             case "done":
                 try {
                     int order = Integer.valueOf(infos[1]);
-                    if (order < 0 || order >= TaskList.getTotalTask()) {
-                        throw new DukeException("The task number is invalid!");
-                    }
                     return new DoneCommand(order - 1);
                 } catch (NumberFormatException e) {
                     throw new DukeException("☹ OOPS!!! The task number is not a number!");
@@ -37,9 +34,6 @@ public class Parser {
             case "delete":
                 try {
                     int order = Integer.valueOf(infos[1]);
-                    if (order <= 0 || order > TaskList.getTotalTask()) {
-                        throw new DukeException("The task number is invalid!");
-                    }
                     return new DeleteCommand(order - 1);
                 } catch (NumberFormatException e) {
                     throw new DukeException("☹ OOPS!!! The task number is not a number!");
@@ -47,7 +41,7 @@ public class Parser {
             case "todo":
                 return new AddCommand("todo", infos[1]);
             case "deadline":
-                if (!infos[1].contains("/by")) {
+                if (!infos[1].contains(" /by ")) {
                     throw new DukeException ("☹ OOPS!!! The description of a deadline is not enough.");
                 }
                 try {
@@ -58,7 +52,7 @@ public class Parser {
                     throw new DukeException("The deadline is in invalid format");
                 }
             case "event":
-                if (!infos[1].contains("/at")) {
+                if (!infos[1].contains(" /at ")) {
                     throw new DukeException ("☹ OOPS!!! The description of a event is not enough.");
                 }
                 try {

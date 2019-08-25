@@ -9,13 +9,18 @@ public class Ui {
     private static final String separator = "    ____________________________________________________________\n";
     private static final String welcomeSentence = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String endingSentence = "Bye. Hope to see you again soon!";
+    private Scanner scanner;
+
+    public Ui() {
+        scanner = new Scanner(System.in);
+    }
 
     private String showFormattedStr(String str) {
         return separator + indentation + str.replace("\n", "\n" + indentation)
                 + "\n" + separator;
     }
 
-    private String showFormattedList(TaskList taskList) {
+    public String showFormattedList(TaskList taskList) {
         String formattedList = separator;
         formattedList = formattedList + indentation + "Here are the tasks in your list:\n";
         if (taskList.getTotalTask() == 0) {
@@ -72,7 +77,6 @@ public class Ui {
     }
 
     public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 

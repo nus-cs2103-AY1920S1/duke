@@ -8,7 +8,6 @@ import java.util.List;
 public class TaskList {
 
     private List<Task> tasks;
-    private static int total;
 
     public TaskList() {
         tasks = new ArrayList<>();
@@ -16,23 +15,46 @@ public class TaskList {
 
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
-        total = tasks.size();
     }
 
-    public static int getTotalTask() {
-        return total;
+    public int getTotalTask() {
+        return tasks.size();
     }
 
     public Task getTaskAt(int index) {
         return tasks.get(index);
     }
+
     public void add(Task task) {
-        total++;
         tasks.add(task);
     }
 
+    public void addAll(TaskList another) {
+        for (int i = 0; i < another.getTotalTask(); i++) {
+            tasks.add(another.getTaskAt(i));
+        }
+    }
+
     public Task removeTaskAt(int index) {
-        total--;
         return tasks.remove(index);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TaskList) {
+            TaskList another = (TaskList) obj;
+            if (another.getTotalTask() != this.getTotalTask()) {
+                return false;
+            } else {
+                for (int i = 0; i < this.getTotalTask(); i++) {
+                    if (!this.getTaskAt(i).equals(another.getTaskAt(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 }

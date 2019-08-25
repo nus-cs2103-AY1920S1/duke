@@ -22,6 +22,7 @@ public class Duke {
 	private static final String SAY_HORIZONTAL_LINE = "============================================================";
 
 	private Scanner scanner;
+	private Storage storage;
 	private ArrayList<Task> tasks;
 
 	public static void main(String[] args) {
@@ -39,8 +40,17 @@ public class Duke {
 		// Scanner to read stdin
 		this.scanner = new Scanner(System.in);
 
+		// Initialize storage for saving and loading tasks.
+		this.storage = new Storage("data/tasks");
+
 		// Initialize tasks ArrayList
-		this.tasks = new ArrayList<>();
+		try {
+			this.tasks = this.storage.load();
+			say("Loaded tasks from disk.");
+		} catch (StorageException e) {
+			say("\u2639 OOPS!!! " + e.getMessage());
+			this.tasks = new ArrayList<>();
+		}
 
 		// Greet user
 		say("Hello! I'm Duke", "What can I do for you?");
@@ -55,7 +65,7 @@ public class Duke {
 		}
 	}
 
-	private boolean run() throws InvalidParameterException, UnknownCommandException {
+	private boolean run() throws DukeException {
 		// Ensure stdin has next line
 		if (!this.scanner.hasNextLine()) {
 			return false;
@@ -172,6 +182,8 @@ public class Duke {
 				}
 
 				say("Nice! I've marked this task as done:", task.toString());
+
+				this.storage.save(this.tasks);
 			}
 			break;
 
@@ -205,6 +217,8 @@ public class Duke {
 				say("Noted. I've removed this task:",
 						task.toString(),
 						String.format("Now you have %d task(s) in the list.", this.tasks.size()));
+
+				this.storage.save(this.tasks);
 			}
 			break;
 
@@ -229,10 +243,12 @@ public class Duke {
 		System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
 	}
 
-	private void addTask(Task task) {
+	private void addTask(Task task) throws StorageException {
 		this.tasks.add(task);
 		say("Got it. I've added this task:",
 				task.toString(),
 				String.format("Now you have %d task(s) in the list.", this.tasks.size()));
+
+		this.storage.save(this.tasks);
 	}
 }

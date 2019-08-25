@@ -13,3 +13,6 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# Duke
+data/

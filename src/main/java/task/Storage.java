@@ -32,6 +32,7 @@ public class Storage {
             case "D":
                 task.add(new Deadline(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
                 break;
+            default:
             }
         }
 

@@ -1,9 +1,13 @@
+package duke.calendar;
+
+import duke.exception.DukeException;
+
 public class Time {
     protected String unprocessedTime;
     protected String processedTime;
     protected boolean isAfternoon = false;
 
-    public Time(String unprocessedTime) throws DukeException{
+    public Time(String unprocessedTime) throws DukeException {
         this.unprocessedTime = unprocessedTime;
         processTime();
     }

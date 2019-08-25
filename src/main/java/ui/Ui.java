@@ -10,8 +10,11 @@ public class Ui {
     }
 
     public String readCommand() {
-        if (sc.hasNextLine()) return sc.nextLine();
-        else return "";
+        if (sc.hasNextLine()) {
+            return sc.nextLine();
+        } else {
+            return "";
+        }
     }
 
     public void showWelcome() {

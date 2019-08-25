@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Arrays;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -63,7 +64,8 @@ public class Duke {
                     list.add(todo);
                     break;
                 case "D":
-                    Task deadline = new Deadline(arr[2], arr[3]);
+                    String datetime[] = arr[3].split(" ", 2);
+                    Task deadline = new Deadline(arr[2], datetime[0], datetime[1]);
                     if (isDone) {
                         deadline.markAsDone();
                     }
@@ -146,15 +148,20 @@ public class Duke {
                             if (arr.length < 2) {
                                 throw new DukeException("Invalid format for Deadline Task.");
                             }
-                            String[] deadlineContent = arr[1].split(" /by ", 2);
-                            if (deadlineContent.length < 2) {
+                            String deadline_content[] = arr[1].split(" /by ", 2);
+                            String datetime[] = deadline_content[1].split(" ", 2);
+                            if (deadline_content.length < 2 || datetime.length < 2) {
                                 throw new DukeException("Invalid format for Deadline Task.");
                             }
-                            Task deadline = new Deadline(deadlineContent[0], deadlineContent[1]);
-                            list.add(deadline);
-                            printStatement("got it. i've added this task:",
-                                    format("  %s", deadline),
-                                    format("Now you have %d tasks in the list.", list.size()));
+                            try {
+                                Task deadline = new Deadline(deadline_content[0], datetime[0], datetime[1]);
+                                list.add(deadline);
+                                printStatement("got it. i've added this task:",
+                                        String.format("  %s", deadline),
+                                        String.format("Now you have %d tasks in the list.", list.size()));
+                            } catch (DateTimeParseException e) {
+                                printDukeException(new DukeException("Invalid Date Time format input"));
+                            }
                             updateData(list, path);
                         } catch (DukeException e) {
                             printDukeException(e);
@@ -189,6 +196,7 @@ public class Duke {
                             task.markAsDone();
                             printStatement("Nice! I've marked this task as done:",
                                     format("  %s", task.toString()));
+                            updateData(list, path);
                         } catch (DukeException e) {
                             printDukeException(e);
                         }

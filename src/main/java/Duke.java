@@ -1,9 +1,13 @@
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.util.*;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

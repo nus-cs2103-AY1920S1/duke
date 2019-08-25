@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -22,7 +26,7 @@ public class Storage {
         }
     }
 
-    ArrayList<String> load() {
+    public ArrayList<String> load() {
         while (sc.hasNext()) {
             String s = sc.nextLine();
             contentList.add(s);
@@ -30,7 +34,7 @@ public class Storage {
         return contentList;
     }
 
-    void save(ArrayList<Task> list) {
+    public void save(ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter("data/task.txt");
             String fileContent = "";

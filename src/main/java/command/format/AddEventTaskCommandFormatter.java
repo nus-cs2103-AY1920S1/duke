@@ -27,7 +27,7 @@ public class AddEventTaskCommandFormatter extends CommandFormatter {
             }
             return new AddEventTaskCommand(title, at);
         } else {
-            throw new CommandParseException("Unhandled command.");
+            throw new UnsupportedCommandException("Unknown command.");
         }
     }
 }

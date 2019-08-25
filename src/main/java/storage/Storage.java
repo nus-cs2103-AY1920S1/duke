@@ -52,7 +52,7 @@ public class Storage {
                 tasks.add(task);
             }
         } catch (FileNotFoundException e) {
-
+            throw new StorageException("Tasks file not found.");
         } finally {
             if (scanner != null) {
                 scanner.close();

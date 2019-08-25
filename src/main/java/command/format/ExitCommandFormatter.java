@@ -12,7 +12,7 @@ public class ExitCommandFormatter extends CommandFormatter {
         if (Pattern.matches("^bye$", text)) {
             return new ExitCommand();
         } else {
-            throw new CommandParseException("Unknown command.");
+            throw new UnsupportedCommandException("Unknown command.");
         }
     }
 }

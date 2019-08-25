@@ -15,7 +15,7 @@ public class DeleteTaskCommandFormatter extends CommandFormatter {
             int index = Integer.parseInt(text.split(" ")[1]);
             return new DeleteTaskCommand(index);
         } else {
-            throw new CommandParseException("Unknown command.");
+            throw new UnsupportedCommandException("Unknown command.");
         }
     }
 }

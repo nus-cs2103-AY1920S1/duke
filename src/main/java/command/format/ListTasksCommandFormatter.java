@@ -12,7 +12,7 @@ public class ListTasksCommandFormatter extends CommandFormatter {
         if (Pattern.matches("^list$", text)) {
             return new ListTasksCommand();
         } else {
-            throw new CommandParseException("Unknown command.");
+            throw new UnsupportedCommandException("Unknown command.");
         }
     }
 }

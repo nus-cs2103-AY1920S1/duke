@@ -15,7 +15,7 @@ public class AddTodoTaskCommandFormatter extends CommandFormatter {
             String title = text.split("todo ", 2)[1];
             return new AddTodoTaskCommand(title);
         } else {
-            throw new CommandParseException("Unhandled command.");
+            throw new UnsupportedCommandException("Unknown command.");
         }
     }
 }

@@ -26,13 +26,15 @@ public class Parser {
             try {
                 command = commandFormatter.parse(text);
                 break;
-            } catch (CommandParseException e) {
+            } catch (UnsupportedCommandException e) {
 
+            } catch (CommandParseException e) {
+                throw e;
             }
         }
 
         if (command == null) {
-            throw new CommandParseException("Unknown command.");
+            throw new UnsupportedCommandException("Unknown command.");
         }
 
         return command;

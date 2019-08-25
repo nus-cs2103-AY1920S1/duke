@@ -27,7 +27,7 @@ public class AddDeadlineTaskCommandFormatter extends CommandFormatter {
             }
             return new AddDeadlineTaskCommand(title, by);
         } else {
-            throw new CommandParseException("Unhandled command.");
+            throw new UnsupportedCommandException("Unhandled command.");
         }
     }
 }

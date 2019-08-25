@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +13,11 @@ public class Duke {
     private void run() {
         boolean canEnd;
 
+        try {
+            TaskFileReader reader = new TaskFileReader();
+            reader.loadTaskContents("data/duke.txt", myList);
+        } catch (FileNotFoundException e) {
+        }
         Scanner myScanner = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         canEnd = false;
@@ -40,6 +47,12 @@ public class Duke {
                 }
                 break;
             }
+        }
+        TaskFileWriter writer = new TaskFileWriter();
+        try {
+            writer.writeToFile("data/duke.txt", myList);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

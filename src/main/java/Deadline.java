@@ -14,7 +14,7 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-    private String getDate() {
+    String getDate() {
         return this.date;
     }
 

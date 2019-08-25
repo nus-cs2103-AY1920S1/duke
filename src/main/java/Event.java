@@ -14,7 +14,7 @@ public class Event extends Task{
         this.dateTime = dateTime;
     }
 
-    private String getDateTime() {
+    String getDateTime() {
         return this.dateTime;
     }
 

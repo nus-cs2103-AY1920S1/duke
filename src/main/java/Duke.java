@@ -1,8 +1,12 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
+    private static String filePath = "data/duke.txt";
 
     private static void printStandard(LinkedList<String> toPrint) {
         String line = "    ____________________________________________________________";
@@ -25,8 +29,90 @@ public class Duke {
         printStandard(taskToAdd);
     }
 
-    public static void main(String[] args) {
+    private static LinkedList<Task> readFile() throws IOException, DukeException {
+        File f = new File(filePath);
+        LinkedList<Task> lst = new LinkedList<>();
+
+        if (f.exists()) {
+            Scanner fs = new Scanner(f);
+
+            while (fs.hasNext()) {
+                String next = fs.nextLine();
+                String[] arr = next.split("/");
+                String task = arr[0];
+                int done = Integer.parseInt(arr[1]);
+                String desc = arr[2];
+                switch (task) {
+                    case "D":
+                        Deadline deadline = Deadline.of(desc, arr[3]);
+                        if (done == 1) {
+                            deadline.markAsDone();
+                        }
+                        lst.addLast(deadline);
+                        break;
+                    case "T":
+                        Todo todo = Todo.of(desc);
+                        if (done == 1) {
+                            todo.markAsDone();
+                        }
+                        lst.addLast(todo);
+                        break;
+                    case "E":
+                        Event event = Event.of(desc, arr[3]);
+                        if (done == 1) {
+                            event.markAsDone();
+                        }
+                        lst.addLast(event);
+                        break;
+                }
+            }
+            fs.close();
+        } else {
+            f.getParentFile().mkdir();
+        }
+        return lst;
+    }
+
+    private static void saveTasksAsFile(LinkedList<Task> list) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : list) {
+            fw.write(taskToString(task) + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    private static String taskToString(Task task) {
+        boolean isAdditional = false;
+        char event = task.toString().charAt(3);
+        int done = task.getStatusIcon().equals("\u2713") ? 1 : 0;
+        String description = task.getDescription();
+        String date = "";
+        if (task instanceof Event) {
+            date = ((Event) task).getDateTime();
+            isAdditional = true;
+        } else if (task instanceof Deadline) {
+            date = ((Deadline) task).getDate();
+            isAdditional = true;
+        }
+
+        if (isAdditional) {
+            return String.format("%c/%d/%s/%s", event, done, description, date);
+        }
+        return String.format("%c/%d/%s", event, done, description);
+    }
+
+    public static void main(String[] args) throws IOException {
+        LinkedList<Task> lst = new LinkedList<>();
+        LinkedList<String> def = new LinkedList<>();
+        LinkedList<String> error = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
+
+        try {
+            lst.addAll(readFile());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -37,9 +123,6 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
-        LinkedList<Task> lst = new LinkedList<>();
-        LinkedList<String> def = new LinkedList<>();
-        LinkedList<String> error = new LinkedList<>();
         LinkedList<String> hello = new LinkedList<>();
         hello.addLast("Hello! I'm Duke");
         hello.addLast("What can I do for you?");
@@ -54,11 +137,17 @@ public class Duke {
             String next = String.join(" ", arr).replace(command, "");
             switch (command) {
                 case "bye":
-                    LinkedList<String> bye = new LinkedList<>();
-                    bye.addLast("Bye. Hope to see you again soon!");
-                    printStandard(bye);
-                    System.exit(0);
-                    break;
+                    try {
+                        saveTasksAsFile(lst);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        LinkedList<String> bye = new LinkedList<>();
+                        bye.addLast("Bye. Hope to see you again soon!");
+                        printStandard(bye);
+                        System.exit(0);
+                        break;
+                    }
                 case "list":
                     LinkedList<String> list = new LinkedList<>();
                     list.addLast("Here are the tasks in your list:");
@@ -114,6 +203,10 @@ public class Duke {
                         error.addLast(e.getMessage());
                         printStandard(error);
                         error.removeFirst();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        error.addLast("☹ OOPS!!! Please follow correct format of \"deadline [Description] /by [Date]\".");
+                        printStandard(error);
+                        error.removeFirst();
                     }
                     break;
                 case "event":
@@ -124,6 +217,10 @@ public class Duke {
                         generateTaskMessage(addString, String.format("%s", eventTask), lst);
                     } catch (DukeException e) {
                         error.addLast(e.getMessage());
+                        printStandard(error);
+                        error.removeFirst();
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        error.addLast("☹ OOPS!!! Please follow correct format of \"event [Description] /at [Date]\".");
                         printStandard(error);
                         error.removeFirst();
                     }

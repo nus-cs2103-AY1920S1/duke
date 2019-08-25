@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,11 +13,88 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
     */
+
     private ArrayList<Task> store = new ArrayList<>();
     private static boolean flag = true;
+    private static String filePath = "/Users/auxin/duke/data/Tasks.txt";
 
     private void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    }
+
+    private void createFolder() {
+        String folderPath = "/Users/auxin/duke/data";
+        File newFolder = new File(folderPath);
+        if (newFolder.mkdir()) {
+            System.out.println("Folder is created.");
+        }
+    }
+
+    private void createFile() {
+        try {
+            File file = new File(filePath);
+            if (file.createNewFile()) {
+                System.out.println("File is created to save tasks.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void appendToFile(String filePath, String textToAppend, boolean flag) {
+        try {
+            FileWriter fw = new FileWriter(filePath, flag);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(textToAppend + "\n");
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void readFile() {
+        File file = new File(filePath);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String currLine;
+            while ((currLine = br.readLine()) != null) {
+                String[] arr = currLine.split(" - ");
+                String type = arr[0];
+                String isDone = arr[1];
+                String action = arr[2];
+                switch(type) {
+                    case "T":
+                        Task todo = new Todo(action);
+                        if (isDone.equals("\u2713")) {
+                            todo.markAsDone();
+                        }
+                        store.add(todo);
+                        break;
+                    case "D":
+                        String by = arr[3];
+                        Task deadline = new Deadline(action, by);
+                        if (isDone.equals("\u2713")) {
+                            deadline.markAsDone();
+                        }
+                        store.add(deadline);
+                        break;
+                    case "E":
+                        String at = arr[3];
+                        Task event = new Event(action, at);
+                        if (isDone.equals("\u2713")) {
+                            event.markAsDone();
+                        }
+                        store.add(event);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void run() throws DukeIllegalDescriptionException, DukeIllegalInputException {
@@ -44,6 +122,13 @@ public class Duke {
                         store.set(num - 1, newTask);
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(store.get(num - 1));
+                        boolean isAppend = false;
+                        for (Task task : store) {
+                            appendToFile(filePath, task.toString(), isAppend);
+                            if (!isAppend) {
+                                isAppend = true;
+                            }
+                        }
                         break;
                     case todo:
                         try {
@@ -52,6 +137,7 @@ public class Duke {
                             printAddTask();
                             System.out.println(todo);
                             printCountTasks();
+                            appendToFile(filePath, todo.toString(), true);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(head[0]);
                         }
@@ -64,6 +150,7 @@ public class Duke {
                             printAddTask();
                             System.out.println(deadline);
                             printCountTasks();
+                            appendToFile(filePath, deadline.toString(), true);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(head[0]);
                         }
@@ -76,6 +163,7 @@ public class Duke {
                             printAddTask();
                             System.out.println(event);
                             printCountTasks();
+                            appendToFile(filePath, event.toString(), true);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(head[0]);
                         }
@@ -86,6 +174,13 @@ public class Duke {
                         store.remove(delNum);
                         System.out.println("Noted. I've removed this task:\n" + delTask.toString());
                         printCountTasks();
+                        boolean isAppendDel = false;
+                        for (Task task : store) {
+                            appendToFile(filePath, task.toString(), isAppendDel);
+                            if (!isAppendDel) {
+                                isAppendDel = true;
+                            }
+                        }
                         break;
                 }
                 if (!flag) {
@@ -106,9 +201,16 @@ public class Duke {
         System.out.println("Now you have " + store.size() + " tasks in the list.");
     }
 
+    private void startDuke() {
+        greet();
+        createFolder();
+        createFile();
+        readFile();
+    }
+
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.greet();
+        duke.startDuke();
         while (flag) {
             try {
                 duke.run();

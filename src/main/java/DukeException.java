@@ -8,6 +8,10 @@ public class DukeException extends Exception {
      */
     public static final String PREFIX =  "\u2639  OOPS!!!";
 
+    public DukeException() {
+        super(String.format("%s DukeException occurs!", PREFIX));
+    }
+
     /**
      * Constructs a DukeException object.
      *

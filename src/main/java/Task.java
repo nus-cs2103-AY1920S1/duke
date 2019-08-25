@@ -5,10 +5,10 @@
 public abstract class Task {
     private String title;
     protected String type; // T for to do, E for event, and D for Deadline.
-    private boolean done;
+    private boolean isDone;
     private String status;
-    // varies according to the actual type, definitely includes topic, other optional included fields are date.
-    protected String details;
+    protected String details; // The details of this task, varies according to the actual type of the task.
+    protected String detailsForDatabase; // data summary used to write the task into the database of Duke.
 
     /**
      * Construct a task object.
@@ -23,9 +23,20 @@ public abstract class Task {
     /**
      * Mark a task as done.
      */
-    public void markAsDone() {
-        done = true;
+    public Task markAsDone() {
+        isDone = true;
         status = "\u2713";
+
+        return this;
+    }
+
+    /**
+     * Returns the data summary of this task to record this task in the database.
+     * @return the data summary of this task.
+     */
+    protected String getSummaryForDatabase() {
+        int status = isDone ? 1 : 0;
+        return String.format("%s | %d | %s", type, status, detailsForDatabase);
     }
 
     /**

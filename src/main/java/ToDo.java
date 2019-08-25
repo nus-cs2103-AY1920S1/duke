@@ -11,5 +11,6 @@ public class ToDo extends Task {
         super(topic);
         this.type = "T";
         this.details = topic;
+        this.detailsForDatabase = topic;
     }
 }

@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String INDENTATION_LVL1 = "     "; // 5 spaces, for first level indentation.
     private static final String INDENTATION_LVL2 = "       "; // 7 spaces, for second level indentation (i.e. more inner).
+    private DukeDatabase database;
     private List<Task> taskList;
 
     // 79 characters, excluding \n. Line is of length 75 characters.
@@ -36,8 +37,25 @@ public class Duke {
      * Start the Duke chat bot.
      */
     public void start() {
+        initialise();
         printWelcomeMessage();
         receiveCommand();
+    }
+
+    /**
+     * Initialise the essential components of Duke bot.
+     */
+    private void initialise() {
+        database = DukeDatabase.getDukeDatabaseInstance();
+        taskList = database.getAllTasks();
+    }
+
+    /**
+     * Clean up the essential components of Duke bot before exiting the program.
+     */
+    public void quit() {
+        echo("Bye. Hope to see you again!");
+        database.update(taskList);
     }
 
     private void printWelcomeMessage() {
@@ -73,7 +91,7 @@ public class Duke {
                 } else if (command.startsWith("delete")) {
                     deleteTask(command);
                 } else if ("bye".equals(command)) {
-                    echo("Bye. Hope to see you again!");
+                    quit();
                     break;
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -124,7 +142,6 @@ public class Duke {
     // add Task entries(to do, deadline & event) to the taskList.
     private void addTask(Task task) {
         taskList.add(task);
-
         echo(() -> {
             System.out.printf("%sGot it. I've added this task:\n", INDENTATION_LVL1);
             System.out.printf(indentAndSplit(task.toString(), INDENTATION_LVL2));

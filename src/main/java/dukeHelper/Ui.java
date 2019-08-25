@@ -1,3 +1,7 @@
+package dukeHelper;
+
+import dukeTask.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +60,6 @@ public class Ui {
     }
 
     public void printExitMessage() {
-        System.out.println(separationLine +"\n     Bye. Hope to see you again soon!\n"+separationLine);
+        System.out.println(separationLine + "\n     Bye. Hope to see you again soon!\n" + separationLine);
     }
 }

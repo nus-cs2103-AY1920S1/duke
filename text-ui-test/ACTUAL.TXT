@@ -10,19 +10,19 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this dukeTask:
        [T][ ] borrow book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this dukeTask:
        [D][ ] return book (by: Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this dukeTask:
        [E][ ] project meeting (at: Mon 2-4pm)
      Now you have 3 tasks in the list.
     ____________________________________________________________
@@ -35,7 +35,7 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     Nice! I've marked this dukeTask as done:
        [D][+] return book (by: Sunday)
     ____________________________________________________________
 
@@ -47,7 +47,7 @@
     ____________________________________________________________
 
     ____________________________________________________________
-     Noted. I've removed this task:
+     Noted. I've removed this dukeTask:
        [D][+] return book (by: Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________

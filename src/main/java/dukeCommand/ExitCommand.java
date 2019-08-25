@@ -1,3 +1,9 @@
+package dukeCommand;
+
+import dukeHelper.Storage;
+import dukeHelper.Ui;
+import dukeTask.TaskList;
+
 public class ExitCommand extends Command {
 
     public ExitCommand(String filePath, String inputSplit[]) {

@@ -1,3 +1,7 @@
+package dukeHelper;
+
+import dukeTask.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,7 +43,6 @@ public class Storage {
         return tasks;
     }
 
-
     public void writeToFile(String filePath, String textToAdd, boolean isAppend) {
         try {
             FileWriter fw = isAppend ? new FileWriter(filePath, true) : new FileWriter(filePath);
@@ -53,11 +56,11 @@ public class Storage {
     public void overwriteFile(ArrayList<Task> listOfTasks) {
         String saveToFile = "";
         for (Task t : listOfTasks) {
-            saveToFile += String.format("%s %d %s", t.type, t.isDone, t.description);
-            if ("D".equals(t.type)) {
-                saveToFile += " | " + ((Deadline) t).endTime;
-            } else if ("E".equals(t.type)) {
-                saveToFile += " | " + ((Event) t).eventPeriod;
+            saveToFile += String.format("%s %d %s", t.getType(), t.getIsDone(), t.getDescription());
+            if ("D".equals(t.getType())) {
+                saveToFile += " | " + ((Deadline) t).getEndTime();
+            } else if ("E".equals(t.getType())) {
+                saveToFile += " | " + ((Event) t).getEventPeriod();
             }
             saveToFile += "\n";
         }

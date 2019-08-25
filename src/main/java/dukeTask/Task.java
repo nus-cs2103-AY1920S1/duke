@@ -1,3 +1,5 @@
+package dukeTask;
+
 public class Task {
     protected String type;
     protected String description;
@@ -10,6 +12,18 @@ public class Task {
 
     public void setDone() {
         this.isDone = 1;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getIsDone() {
+        return isDone;
     }
 
     @Override

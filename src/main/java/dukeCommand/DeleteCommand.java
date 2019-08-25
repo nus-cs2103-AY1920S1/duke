@@ -1,3 +1,11 @@
+package dukeCommand;
+
+import dukeCore.DukeException;
+import dukeHelper.Storage;
+import dukeHelper.Ui;
+import dukeTask.Task;
+import dukeTask.TaskList;
+
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String filePath, String[] inputSplit) {

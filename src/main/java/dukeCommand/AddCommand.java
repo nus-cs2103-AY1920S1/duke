@@ -1,3 +1,9 @@
+package dukeCommand;
+
+import dukeCore.DukeException;
+import dukeHelper.*;
+import dukeTask.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,7 +29,7 @@ public class AddCommand extends Command {
             }
             ToDo todo = new ToDo(userInput.replace("todo ", ""), 0);
             tasks.addToList(todo);
-            String writeStringT = todo.type + " " + 0 + " " + todo.description + "\n";
+            String writeStringT = todo.getType() + " " + 0 + " " + todo.getDescription() + "\n";
             storage.writeToFile(filePath, writeStringT, true);
             ui.printAddNotification(todo.toString(), tasks.getSize());
             break;
@@ -42,8 +48,8 @@ public class AddCommand extends Command {
             Deadline deadline = new Deadline(splitStringD[0].replace("deadline ", ""), 0,
                     inputDateStrD);
             tasks.addToList(deadline);
-            String writeStringD = deadline.type + " 0" + " " + deadline.description + " | " + deadline.endTime
-                    + "\n";
+            String writeStringD = deadline.getType() + " 0" + " " + deadline.getDescription() + " | "
+                    + deadline.getEndTime() + "\n";
             storage.writeToFile(filePath, writeStringD, true);
             ui.printAddNotification(deadline.toString(), tasks.getSize());
             break;
@@ -56,10 +62,13 @@ public class AddCommand extends Command {
                         + ui.separationLine + "\n");
             }
             String[] splitStringE = userInput.split(" /at ");
+            Date inputDateE = Parser.convertToDate(splitStringE[1], Parser.dateFormats);
+            String inputDateStrE = inputDateE == null ? splitStringE[1]
+                    : new SimpleDateFormat("dd MMM yyyy, hh:mm a").format(inputDateE);
             Event event = new Event(splitStringE[0].replace("event ", ""), 0,
-                    splitStringE[1]);
+                    inputDateStrE);
             tasks.addToList(event);
-            String writeStringE = event.type + " 0" + " " + event.description + " | " + event.eventPeriod
+            String writeStringE = event.getType() + " 0" + " " + event.getDescription() + " | " + event.getEventPeriod()
                     + "\n";
             storage.writeToFile(filePath, writeStringE, true);
             ui.printAddNotification(event.toString(), tasks.getSize());

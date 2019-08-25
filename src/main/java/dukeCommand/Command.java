@@ -1,3 +1,9 @@
+package dukeCommand;
+
+import dukeHelper.Storage;
+import dukeHelper.Ui;
+import dukeTask.TaskList;
+
 public abstract class Command {
     protected String filePath;
     protected String[] inputSplit;

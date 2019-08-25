@@ -1,3 +1,11 @@
+package dukeCommand;
+
+import dukeCore.DukeException;
+import dukeHelper.Storage;
+import dukeHelper.Ui;
+import dukeTask.Task;
+import dukeTask.TaskList;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String filePath, String[] inputSplit) {

@@ -7,8 +7,45 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
+    public Duke(String filePath) throws FileNotFoundException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+
+        tasks = new TaskList(storage.load());
+
+    }
+
+    public void run() throws IOException, DukeException {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws DukeException,IOException {
+        Duke duke = new Duke("data/tasks.txt");
+        duke.run();
+    }
+
+}
+/*
 public class Duke {
 
     private static ArrayList<Task> arr;
@@ -16,11 +53,8 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
 
-
         arr = new ArrayList<>();
-
         readFile();
-
         readCommand();
 
     }
@@ -160,9 +194,9 @@ public class Duke {
     }
 
     private static void printAddedTask() {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(String.format("    %s", arr.get(arr.size()-1).toString()));
-        System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
+            System.out.println("Got it. I've added this task: ");
+            System.out.println(String.format("    %s", arr.get(arr.size()-1).toString()));
+            System.out.println(String.format("Now you have %d tasks in the list.", arr.size()));
     }
 
     private static void printDeletedTask(Task t) {
@@ -173,23 +207,21 @@ public class Duke {
 
    private static void addDeadline(String taskName, String datetime) {
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
         LocalDateTime dateTimeObj =  LocalDateTime.parse(datetime, dtf);
         Deadline deadline = new Deadline(taskName, dateTimeObj);
 
         arr.add(deadline);
 
-
    }
 
    private static void addEvent(String taskName, String datetime) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
         LocalDateTime dateTimeObj =  LocalDateTime.parse(datetime, dtf);
 
         Event e = new Event(taskName, dateTimeObj);
 
         arr.add(e);
-
 
    }
 
@@ -244,4 +276,4 @@ public class Duke {
         return strNum.matches("-?\\d+(\\.\\d+)?");
     }
 
-}
+}*/

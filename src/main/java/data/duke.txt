@@ -1,4 +1,5 @@
 T | 1 | read book
 D | 0 | return book | 06 Jun 2019 0000
-E | 1 | project meeting | 06 Aug 2019 1800
-T | 1 | join sports club
+D | 1 | submit assignment | 12 Jun 2019 0000
+T | 0 | run 2.4km
+T | 0 | chiong level-8

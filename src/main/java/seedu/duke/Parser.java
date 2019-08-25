@@ -28,13 +28,13 @@ public class Parser {
             Date date = toDate(dateTimeArr[0]);
             Date time = toTime(dateTimeArr[1]);
             Event event = new Event(stringArr[2], date, time);
-            if (stringArr[1] == "1") {
+            if (stringArr[1].equals("1")) {
                 event.markAsDone();
             }
             return event;
         } else if (stringArr[0].equals("T")) {
             Todo td = new Todo(stringArr[2]);
-            if (stringArr[1] == "1") {
+            if (stringArr[1].equals("1")) {
                 td.markAsDone();
             }
             return td;
@@ -43,7 +43,7 @@ public class Parser {
             Date date = toDate(dateTimeArr[0]);
             Date time = toTime(dateTimeArr[1]);
             Deadline dl = new Deadline(stringArr[2], date, time);
-            if (stringArr[1] == "1") {
+            if (stringArr[1] .equals("1")) {
                 dl.markAsDone();
             }
             return dl;

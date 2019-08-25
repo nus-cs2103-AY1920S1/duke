@@ -1,5 +1,6 @@
 package weomucat.duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -20,6 +21,9 @@ public class Duke {
 
 	private static final String SAY_INDENTATION = "\t";
 	private static final String SAY_HORIZONTAL_LINE = "============================================================";
+
+	public static final String DATETIME_PARSE_PATTERN = "dd/MM/yy HHmm";
+	public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
 
 	private Scanner scanner;
 	private Storage storage;
@@ -133,7 +137,11 @@ public class Duke {
 					throw new InvalidParameterException("The date of a deadline cannot be empty.");
 				}
 
-				addTask(new DeadlineTask(description, by));
+				try {
+					addTask(new DeadlineTask(description, by));
+				} catch (DateTimeParseException e) {
+					throw new InvalidParameterException(String.format("I do not understand the date. Please enter in '%s' format.", DATETIME_PARSE_PATTERN));
+				}
 			}
 			break;
 

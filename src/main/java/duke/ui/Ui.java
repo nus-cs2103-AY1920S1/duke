@@ -74,7 +74,7 @@ public class Ui {
 
     /**
      * Sends a message to the user.
-     * @param input The text of the message.
+     * @param taskIndexes Represents the list of matching tasks indexes.
      */
     public void showMatchingTasks(ArrayList<Integer> taskIndexes) {
         sendLine();

@@ -1,4 +1,5 @@
 package duke.exception;
+
 /**
  * Represents an Exception that is thrown when the input does not result in the execution of a command.
  */

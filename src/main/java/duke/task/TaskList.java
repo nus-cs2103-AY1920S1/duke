@@ -9,7 +9,7 @@ import duke.exception.InvalidTaskIndexException;
 public class TaskList {
 
     /**
-     * Represents the list of takss
+     * Represents the list of tasks.
      */
     private static ArrayList<Task> tasks;
 
@@ -21,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Constructs a new Task List which reads in a list of tasks
+     * Constructs a new Task List which reads in a list of tasks.
      * @param tasks The loaded list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {

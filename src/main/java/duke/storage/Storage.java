@@ -56,6 +56,7 @@ public class Storage {
             tasks.add(new DeadlineTask(nameOfTask, false, deadline));
         }
     }
+
     /**
      * Loads back the Event Task based on the task data loaded from the file.
      * @param task the data from the file.
@@ -72,6 +73,7 @@ public class Storage {
             tasks.add(new EventTask(nameOfTask, false, time));
         }
     }
+
     /**
      * Loads back the ToDo Task based on the task data loaded from the file.
      * @param task the data from the file.

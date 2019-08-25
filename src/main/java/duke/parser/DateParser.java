@@ -16,7 +16,7 @@ public class DateParser {
     private Calendar calendar = Calendar.getInstance();
 
     /**
-     * Reads the input and stores it in the parser
+     * Reads the input and stores it in the parser.
      * @param input The input provided by the user.
      */
     public void readInput(String input) {

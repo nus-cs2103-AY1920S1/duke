@@ -28,7 +28,7 @@ public class DataParser {
     private String input;
 
     /**
-     * Constructs a new DataParser to read in the user input/
+     * Constructs a new DataParser to read in the user input.
      */
     public DataParser() {
         this.sc = new Scanner(System.in);

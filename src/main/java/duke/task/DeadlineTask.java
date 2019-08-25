@@ -3,7 +3,7 @@ package duke.task;
 /**
  * A Class that represents a Task in which the user wishes to complete by a certain deadline.
  */
-public class DeadlineTask extends Task{
+public class DeadlineTask extends Task {
 
     public String deadline;
 

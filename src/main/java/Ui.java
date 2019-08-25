@@ -131,7 +131,32 @@ class Ui implements TaskObserver {
         Ui.printSection(message);
     }        
 
+    public static <T> void 
+        printAllTasks(Stream<T> taskStream) {
 
+        List<T> taskList = taskStream
+            .collect(Collectors.toCollection(ArrayList::new));
+        Iterator<T> iter = taskList.listIterator();
+
+        ArrayList<String> printxs = new ArrayList<>();
+        //String headermsg = "Here are the tasks in your list:";
+        String headermsg = "hewe awe the tasks in youw wist:";
+        printxs.add(headermsg);
+
+        int counter = 1;
+
+        while (iter.hasNext()) {
+            String taskLine = "" + counter + "." 
+                + iter.next();
+            printxs.add(taskLine);
+
+            ++counter;
+        }
+        Ui.printSection(printxs);
+    }
+
+
+    /*
     public static void 
         //printAllTasks(Iterator<TaskInterface> iter) {
         printAllTasks(Stream<TaskInterface> taskStream) {
@@ -157,6 +182,7 @@ class Ui implements TaskObserver {
         }
         Ui.printSection(printxs);
     }
+    */
 
     public void update(TaskModelInterface model){
     /* TaskModel's most recent change here */

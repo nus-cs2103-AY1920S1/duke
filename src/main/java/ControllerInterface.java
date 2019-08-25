@@ -7,4 +7,5 @@ public interface ControllerInterface {
     void whatsGoingOn(String command);
     boolean isEndCommand(String command);
     void listTasks();
+    void findTasks(String command);
 }

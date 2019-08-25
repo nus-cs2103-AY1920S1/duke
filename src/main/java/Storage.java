@@ -13,7 +13,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> readData() throws FileNotFoundException {
+    public TaskList readData() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
         ArrayList<Task> task = new ArrayList<>();
@@ -36,10 +36,11 @@ public class Storage {
         // Close the scanner
         sc.close();
 
-        return task;
+        return new TaskList(task);
     }
 
-    public void writeData(ArrayList<Task> task) throws IOException {
+    public void writeData(TaskList taskList) throws IOException {
+        ArrayList<Task> task = taskList.getTasks();
         FileWriter fw = new FileWriter(filePath);
         String stringToWrite = "";
         int counter = task.size();

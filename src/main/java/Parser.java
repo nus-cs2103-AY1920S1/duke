@@ -152,6 +152,9 @@ public class Parser  {
                     }
 
 
+                } else if (argumentArray[0].equals("find")) {
+                    storeTaskList.findTask(argumentArray[1]);
+                    argument = myScanner.nextLine();
                 } else {
                     try {
                         //handles error for not recognized command

@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
     public Deadline(String description, String by) {
         super(description);
@@ -9,5 +9,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public String fileFormat() {
+        return String.format("D | %s | %s | %s", isDoneString(), getDescription(), this.by);
     }
 }

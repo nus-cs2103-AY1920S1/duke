@@ -20,37 +20,29 @@ public class Main {
                 String inputStr = sc.nextLine();
                 String[] inputArr = inputStr.split(" ");
 
+                printLine();
                 if (inputArr[0].equals("bye")) {
-                    printLine();
                     System.out.println("\t  Bye. Hope to see you again soon!");
-                    printLine();
                     break;
                 } else if (inputArr[0].equals("list")) {
-                    printLine();
                     System.out.println("\t  Here are the tasks in your list:");
                     for (int i = 0; i < strArr.size(); i++) {
                         System.out.println("\t  " + (i + 1) + ". " + strArr.get(i));
                     }
-                    printLine();
                 } else if (inputArr[0].equals("done")) {
                     Integer indexDone = Integer.valueOf(inputArr[1]);
                     strArr.get(indexDone - 1).markAsDone();
 
-                    printLine();
                     System.out.println("\t  Nice! I've marked this task as done:");
                     System.out.println("\t    " + strArr.get(indexDone - 1));
-                    printLine();
                 } else if (inputArr[0].equals("delete")) {
                     Integer indexRemove = Integer.valueOf(inputArr[1]);
                     Task deletedTask = strArr.get(indexRemove - 1);
                     strArr.remove(indexRemove - 1);
 
-                    printLine();
                     System.out.println("\t  Noted. I've removed this task:");
                     System.out.println("\t    " + deletedTask);
                     System.out.println("\t  Now you have " + strArr.size() +" tasks in the list.");
-                    printLine();
-
                 } else if (inputArr[0].equals("todo")) {
                     // todo event
                     if (inputArr.length == 1) {
@@ -124,6 +116,7 @@ public class Main {
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                printLine();
             } catch (DukeException d) {
                 System.err.println(d);
             }
@@ -131,11 +124,9 @@ public class Main {
     }
 
     public static void printAddedTask(Task taskAdded, int totalTask) {
-        printLine();
         System.out.println("\t  Got it. I've added this task:");
         System.out.println("\t    " + taskAdded);
         System.out.println("\t  Now you have " + totalTask +" tasks in the list.");
-        printLine();
     }
 
     public static void printLine() {

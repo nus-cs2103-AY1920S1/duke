@@ -1,6 +1,11 @@
+package duke.main;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
     private ArrayList<Task> tasks;
 
     TaskList() {
@@ -11,23 +16,23 @@ class TaskList {
         this.tasks = tasks;
     }
 
-    ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
         return tasks;
     }
 
-    Task get(int zeroBasedIndex) {
+    public Task get(int zeroBasedIndex) {
         return tasks.get(zeroBasedIndex);
     }
 
-    void markTaskAsDone(int zeroBasedIndex) {
+    public void markTaskAsDone(int zeroBasedIndex) {
         tasks.get(zeroBasedIndex).markAsDone();
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         tasks.add(task);
     }
 
-    void delete(int zeroBasedIndex) throws DukeException {
+    public void delete(int zeroBasedIndex) throws DukeException {
         if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
             throw new DukeException("\u2639 OOPS!!! The index to remove cannot be less than 0 or "
                     + "greater than the length of the list.");
@@ -36,7 +41,7 @@ class TaskList {
         tasks.remove(zeroBasedIndex);
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 }

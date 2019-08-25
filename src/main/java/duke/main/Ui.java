@@ -1,7 +1,11 @@
+package duke.main;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
     private Scanner sc;
 
     Ui() {
@@ -15,7 +19,7 @@ class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
-    void printAddSuccessMessage(Task task, int size) {
+    public void printAddSuccessMessage(Task task, int size) {
         showLine();
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t\t" + task);
@@ -23,7 +27,7 @@ class Ui {
         showLine();
     }
 
-    void printDeleteSuccessMessage(Task task, int size) {
+    public void printDeleteSuccessMessage(Task task, int size) {
         showLine();
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t\t" + task);
@@ -31,7 +35,7 @@ class Ui {
         showLine();
     }
 
-    void printList(ArrayList<Task> tasks) {
+    public void printList(ArrayList<Task> tasks) {
         showLine();
         System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -45,7 +49,7 @@ class Ui {
         printMessage("Hello, I'm Duke\n\tWhat can I do for you?");
     }
 
-    void printExitMessage() {
+    public void printExitMessage() {
         printMessage("Bye. Hope to see you again soon!");
     }
 
@@ -57,7 +61,7 @@ class Ui {
         printMessage("An error occurred during file loading " + error);
     }
 
-    void printMessage(String message) {
+    public void printMessage(String message) {
         showLine();
         System.out.println("\t" + message);
         showLine();

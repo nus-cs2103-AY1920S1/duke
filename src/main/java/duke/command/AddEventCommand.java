@@ -1,22 +1,30 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Event;
+
 import java.util.Date;
 
-class AddEventCommand extends Command {
+public class AddEventCommand extends Command {
     private String description;
     private String eventAt;
     private Date eventDate;
 
-    AddEventCommand(String description, String deadlineBy) {
+    public AddEventCommand(String description, String deadlineBy) {
         this.description = description;
         this.eventAt = deadlineBy;
     }
 
-    AddEventCommand(String description, Date deadlineDate) {
+    public AddEventCommand(String description, Date deadlineDate) {
         this.description = description;
         this.eventDate = deadlineDate;
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Event event;
         if (eventDate == null) {
             event = new Event(description, eventAt);

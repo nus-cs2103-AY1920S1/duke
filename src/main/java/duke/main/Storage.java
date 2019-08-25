@@ -1,3 +1,11 @@
+package duke.main;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,7 +15,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-class Storage {
+public class Storage {
     private String filePath;
 
     Storage(String filePath) {
@@ -57,7 +65,7 @@ class Storage {
         return tasks;
     }
 
-    void save(ArrayList<Task> list) throws DukeException {
+    public void save(ArrayList<Task> list) throws DukeException {
         try {
             File file = new File(filePath);
             file.getParentFile().mkdirs();

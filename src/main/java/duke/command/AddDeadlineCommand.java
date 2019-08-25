@@ -1,22 +1,30 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Deadline;
+
 import java.util.Date;
 
-class AddDeadlineCommand extends Command {
+public class AddDeadlineCommand extends Command {
     private String description;
     private String deadlineBy;
     private Date deadlineDate;
 
-    AddDeadlineCommand(String description, String deadlineBy) {
+    public AddDeadlineCommand(String description, String deadlineBy) {
         this.description = description;
         this.deadlineBy = deadlineBy;
     }
 
-    AddDeadlineCommand(String description, Date deadlineDate) {
+    public AddDeadlineCommand(String description, Date deadlineDate) {
         this.description = description;
         this.deadlineDate = deadlineDate;
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Deadline deadline;
         if (deadlineDate == null) {
             deadline = new Deadline(description, deadlineBy);

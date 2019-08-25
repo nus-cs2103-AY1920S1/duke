@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,12 +8,12 @@ public class Deadline extends Task {
     private String deadlineBy;
     private Date deadlineDate;
 
-    Deadline(String description, String deadlineBy) {
+    public Deadline(String description, String deadlineBy) {
         super(description);
         this.deadlineBy = deadlineBy;
     }
 
-    Deadline(String description, Date deadlineDate) {
+    public Deadline(String description, Date deadlineDate) {
         super(description);
         this.deadlineDate = deadlineDate;
     }

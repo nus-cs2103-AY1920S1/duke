@@ -1,14 +1,22 @@
-class DeleteCommand extends Command {
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Task;
+
+public class DeleteCommand extends Command {
     private int zeroBasedIndex;
 
-    DeleteCommand(int oneBasedIndex) {
+    public DeleteCommand(int oneBasedIndex) {
         this.zeroBasedIndex = oneBasedIndex - 1;
     }
 
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (zeroBasedIndex < 0 || zeroBasedIndex >= tasks.size()) {
-            throw new DukeException("\u2639 OOPS!!! The index to delete cannot be less than 0 or "
+            throw new DukeException("\u2639 OOPS!!! The index to remove cannot be less than 0 or "
                     + "greater than the length of the list.");
         }
 

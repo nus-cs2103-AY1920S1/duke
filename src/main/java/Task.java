@@ -1,8 +1,9 @@
 public class Task{
     boolean done = false;
     String content;
-    public Task(String content){
+    public Task(String content, int status){
         this.content = content;
+        done = status == 1 ? true : false;
     }
     public String toString(){
         String res = "[";

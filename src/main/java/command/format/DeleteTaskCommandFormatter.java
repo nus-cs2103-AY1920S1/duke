@@ -5,8 +5,14 @@ import com.leeyiyuan.command.Command;
 import com.leeyiyuan.command.DeleteTaskCommand;
 import java.util.regex.Pattern;
 
+/** 
+ * Represents a formatter for a DeleteTaskCommand.
+ */
 public class DeleteTaskCommandFormatter extends CommandFormatter {
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public Command parse(String text) throws CommandParseException {
         if (Pattern.matches("^delete ?$", text)) {

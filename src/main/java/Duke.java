@@ -12,8 +12,14 @@ import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.ui.Ui;
 import com.leeyiyuan.ui.UiException;
 
+/**
+ * Main class of the Duke program.
+ */
 public class Duke {
 
+    /**
+     * Main entry point of the Duke program.
+     */
     public static void main(String[] args) {
         Storage storage = new Storage("/home/leeyiyuan/Projects/duke/data/duke.txt");
         Parser parser = new Parser();

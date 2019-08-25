@@ -8,8 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a formatter for an AddEventTaskCommand. 
+ */
 public class AddEventTaskCommandFormatter extends CommandFormatter {
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public Command parse(String text) throws CommandParseException {
         if (Pattern.matches("^event ?/at.*$", text)) {

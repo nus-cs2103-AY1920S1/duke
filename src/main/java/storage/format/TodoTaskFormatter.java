@@ -5,8 +5,14 @@ import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TodoTask;
 import java.util.regex.Pattern;
 
+/** 
+ * Represents a formatter for a TodoTask.
+ */
 public class TodoTaskFormatter extends TaskFormatter {
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public TodoTask parse(String text) throws TaskParseException {
         if (!Pattern.matches("^T \\| [01] \\| .+$", text)) {
@@ -20,6 +26,9 @@ public class TodoTaskFormatter extends TaskFormatter {
         return task;
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public String format(Task task) throws TaskFormatException {
         if (!(task instanceof TodoTask)) {

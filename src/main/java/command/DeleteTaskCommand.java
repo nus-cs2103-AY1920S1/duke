@@ -7,14 +7,26 @@ import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.ui.Ui;
 
+/** 
+ * Represents a Command to delete an existing Task. 
+ */
 public class DeleteTaskCommand extends Command {
 
+    /** Index of the Task to delete. */
     protected int index;
 
+    /**
+     * Constructs a DeleteTaskCommand from an index.
+     *
+     * @param index The index of the Task to delete.
+     */
     public DeleteTaskCommand(int index) {
         this.index = index;
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws CommandExecuteException, StorageException {

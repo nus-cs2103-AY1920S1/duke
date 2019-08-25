@@ -1,9 +1,16 @@
+import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+
 public class Duke {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Scanner fileInput;
         ArrayList<Task> tasks = new ArrayList<Task>(100);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -11,6 +18,53 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        File dataSource = new File( "data/tasks.txt");
+        try {
+            fileInput = new Scanner(dataSource);
+            while(fileInput.hasNextLine()) {
+                String task = fileInput.next();
+                switch(task) {
+                    case "T":
+                        String[] contents = fileInput.nextLine().trim().split("-");
+                        Task current = new Todo(contents[2].trim());
+                        if(contents[1].trim().equals("done")) {
+                            current.markAsDone();
+                        }
+                        tasks.add(current);
+                        break;
+
+                    case "D":
+                        contents = fileInput.nextLine().trim().split("-");
+                        current = new Deadline(contents[2].trim(), contents[3].trim());
+                        if(contents[1].trim().equals("done")) {
+                            current.markAsDone();
+                        }
+                        tasks.add(current);
+                        break;
+
+                    case "E":
+                        contents = fileInput.nextLine().trim().split("-");
+                        current = new Event(contents[2].trim(), contents[3].trim());
+                        if(contents[1].trim().equals("done")) {
+                            current.markAsDone();
+                        }
+                        tasks.add(current);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                dataSource.createNewFile();
+                System.out.println("No past data found.");
+                System.out.println("Creating new save file.");
+            } catch (IOException f) {
+                System.out.println("Wrong Directory");
+            }
+        }
+
         while(input.hasNext()) {
             String command = input.next();
 
@@ -30,6 +84,25 @@ public class Duke {
                         current.markAsDone();
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(current.toString());
+                        BufferedReader reader = new BufferedReader(new FileReader(dataSource));
+                        String line = reader.readLine();
+                        String old = "";
+                        int checker = 1;
+                        while(line != null) {
+                            if(checker != taskNumber) {
+                                old += line + System.lineSeparator();
+                                line = reader.readLine();
+                                checker += 1;
+                            } else {
+                                old += line.replace("not done", "done") + System.lineSeparator();
+                                line = reader.readLine();
+                                checker += 1;
+                            }
+                        }
+                        FileWriter writer = new FileWriter(dataSource);
+                        writer.write(old);
+                        writer.close();
+                        reader.close();
                     } catch (InputMismatchException e) {
                         System.out.println("OOPS!!! Number of completed task required.");
                         input.nextLine();
@@ -37,6 +110,10 @@ public class Duke {
                         System.out.println("OOPS!!! Input is an invalid task number.");
                     } catch (DukeTaskDoneException e) {
                         System.out.println(e.getMessage());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     break;
 
@@ -48,11 +125,34 @@ public class Duke {
                         System.out.println("Noted. I've removed this task:");
                         System.out.println(current.toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        BufferedReader reader = new BufferedReader(new FileReader(dataSource));
+                        String line = reader.readLine();
+                        String old = "";
+                        int checker = 1;
+                        while(line != null) {
+                            if(checker != taskNumber) {
+                                old += line + System.lineSeparator();
+                                line = reader.readLine();
+                                checker += 1;
+                            } else {
+                                old += "";
+                                line = reader.readLine();
+                                checker += 1;
+                            }
+                        }
+                        FileWriter writer = new FileWriter(dataSource);
+                        writer.write(old);
+                        writer.close();
+                        reader.close();
                     } catch (InputMismatchException e) {
                         System.out.println("OOPS!!! Number of task to delete required.");
                         input.nextLine();
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("OOPS!!! Input is an invalid task number.");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     break;
 
@@ -75,8 +175,11 @@ public class Duke {
                             tasks.add(current);
                             System.out.println(current.toString());
                             System.out.println("Now you have " + tasks.size() +" task in the list.");
+                            FileWriter writer = new FileWriter(dataSource, true);
+                            writer.write("T - not done - " + current.getDescription() + "\n");
+                            writer.close();
                         }
-                    } catch (DukeEmptyDescriptionException e) {
+                    } catch (DukeEmptyDescriptionException | IOException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
@@ -91,15 +194,20 @@ public class Duke {
                             throw new DukeMissingDescriptionException(("deadline"));
                         } else {
                             System.out.println("Got it. I've added this task:");
-                            Task current = new Deadline(information[0].trim(), information[1].trim());
+                            Deadline current = new Deadline(information[0].trim(), information[1].trim());
                             tasks.add(current);
                             System.out.println(current.toString());
                             System.out.println("Now you have " + tasks.size() + " task in the list.");
+                            FileWriter writer = new FileWriter(dataSource, true);
+                            writer.write("D - not done - " + current.getDescription() + " - " + current.getTime() + "\n");
+                            writer.close();
                         }
                     } catch (DukeEmptyDescriptionException e) {
                         System.out.println(e.getMessage());
                     } catch (DukeMissingDescriptionException e) {
                         System.out.println(e.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     break;
 
@@ -113,15 +221,20 @@ public class Duke {
                             throw new DukeMissingDescriptionException("event");
                         } else {
                             System.out.println("Got it. I've added this task:");
-                            Task current = new Event(information[0].trim(), information[1].trim());
+                            Event current = new Event(information[0].trim(), information[1].trim());
                             tasks.add(current);
                             System.out.println(current.toString());
                             System.out.println("Now you have " + tasks.size() + " task in the list.");
+                            FileWriter writer = new FileWriter(dataSource, true);
+                            writer.write("E - not done - " + current.getDescription() + " - " + current.getPeriod() + "\n");
+                            writer.close();
                         }
                     } catch (DukeEmptyDescriptionException e) {
                         System.out.println(e.getMessage());
                     } catch (DukeMissingDescriptionException e) {
                         System.out.println(e.getMessage());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                     break;
 

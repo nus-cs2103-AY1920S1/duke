@@ -1,12 +1,14 @@
 package duke.task;
 
+import java.util.Date;
+
 public class Deadline extends Task {
-    String time;
+    Date time;
 
     /**
      * Constructor.
      */
-    public Deadline(String name, String time) {
+    public Deadline(String name, Date time) {
         super(name);
         this.time = time;
     }

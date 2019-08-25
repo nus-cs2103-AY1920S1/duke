@@ -1,6 +1,6 @@
 todo Eat
 todo Sleep
-event project meeting /at Mon 2-4pm
+event project meeting /at 29/11/2018 1900
 event fake event
 list
 done 1

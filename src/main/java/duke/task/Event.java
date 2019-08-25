@@ -1,12 +1,14 @@
 package duke.task;
 
+import java.util.Date;
+
 public class Event extends Task {
-    String time;
+    Date time;
 
     /**
      * Constructor.
      */
-    public Event(String name, String time) {
+    public Event(String name, Date time) {
         super(name);
         this.time = time;
     }

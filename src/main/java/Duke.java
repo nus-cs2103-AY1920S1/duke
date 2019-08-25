@@ -1,7 +1,10 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.IllegalArgumentException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Duke {
     List<Task> toDoList;
@@ -18,26 +21,28 @@ public class Duke {
 
     /**
      * Lists items in To Do List.
+     * @return List as a string
      */
-    public void list() {
-        System.out.println("____________________________________________________________");
+    public String list() {
+        StringJoiner result = new StringJoiner("\n");
         for (int i = 0; i < toDoList.size(); i++) {
             Task t = toDoList.get(i);
-            System.out.println(String.format("%d.%s", i + 1, t));
+            result.add(String.format("%d.%s", i + 1, t));
         }
-        System.out.println("____________________________________________________________");
+        return padMessage(result.toString());
     }
 
     /**
      * Set index of To Do List as done. (one based numbering)
      * @param i Index
+     * @return Done message as a string
      */
-    public void done(int i) {
+    public String done(int i) {
         toDoList.get(i - 1).setDone(true);
-        System.out.println("____________________________________________________________");
-        System.out.println(doneMessage);
-        System.out.println(toDoList.get(i - 1));
-        System.out.println("____________________________________________________________");
+        StringJoiner result = new StringJoiner("\n");
+        result.add(doneMessage);
+        result.add(toDoList.get(i - 1).toString());
+        return padMessage(result.toString());
     }
 
     /**
@@ -81,12 +86,31 @@ public class Duke {
         this.printAddedMessage();
     }
 
+    /**
+     * Saves tasks printed in list() in specified path.
+     * @param filePath Path wherein text will be saved
+     * @param textToAdd Text to add
+     */
+    public void save(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
     private void printAddedMessage() {
         System.out.println("____________________________________________________________");
         System.out.println(addedMessage);
         System.out.println(toDoList.get(toDoList.size() - 1));
         System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
         System.out.println("____________________________________________________________");
+    }
+
+    private String padMessage(String message) {
+        StringJoiner result = new StringJoiner("\n");
+        result.add("____________________________________________________________");
+        result.add(message);
+        result.add("____________________________________________________________");
+        return result.toString();
     }
 
     /**
@@ -121,13 +145,16 @@ public class Duke {
                     this.addEvent(taskEvent, dateEvent);
                     break;
                 case "list":
-                    this.list();
+                    System.out.println(this.list());
                     break;
                 case "done":
-                    this.done(sc.nextInt());
+                    System.out.println(this.done(sc.nextInt()));
                     break;
                 case "delete":
                     this.delete(sc.nextInt());
+                    break;
+                case "save":
+                    this.save("./Data/duke.txt", "this.list()");
                     break;
                 case "bye":
                     exit = true;

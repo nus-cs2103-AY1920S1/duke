@@ -3,7 +3,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
 
 import static java.time.temporal.ChronoField.*;
 
@@ -65,35 +64,12 @@ public abstract class Task {
         return new DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
                 .appendPattern("[MMMM][MMM][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ ]['T'][HH[':']mm]")
-                .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+                .parseDefaulting(ChronoField.HOUR_OF_DAY, dt.getHour())
+                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, dt.getMinute())
                 .parseDefaulting(ChronoField.YEAR_OF_ERA, dt.getYear())
                 .parseDefaulting(MONTH_OF_YEAR, dt.getMonthValue())
                 .parseDefaulting(ChronoField.DAY_OF_MONTH, dt.getDayOfMonth())
                 .toFormatter();
-    }
-
-    public static Task parseTask(String str) throws DukeException {
-        if (str.startsWith("deadline")) {
-            String[] temp = str.substring(8).split(" /by ");
-            if (temp.length < 1 || temp[0].isBlank())
-                throw new EmptyFieldDukeException("description", "deadline");
-            if (temp.length < 2 || temp[1].isBlank())
-                throw new EmptyFieldDukeException("time", "deadline");
-            return new Deadline(temp[0], temp[1]);
-        }
-        if (str.startsWith("event")) {
-            String[] temp = str.substring(5).split(" /at ");
-            if (temp.length < 1 || temp[0].isBlank())
-                throw new EmptyFieldDukeException("description", "event");
-            if (temp.length < 2 || temp[1].isBlank())
-                throw new EmptyFieldDukeException("time", "event");
-            return new Event(temp[0], temp[1]);
-        }
-        if (str.startsWith("todo")) {
-            return new Todo(str.substring(4));
-        }
-        return null;
     }
 }
 

@@ -1,5 +1,8 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -50,10 +53,20 @@ public class Duke {
                     addTodoToList(todo);
                 } else if (isAddDeadlineCommand(input)) {
                     String[] deadline = validateEventOrDeadline(input, "deadline", "/by");
-                    addDeadlineToList(deadline[0], deadline[1]);
+                    if (isDate(deadline[1])) {
+                        Date deadlineDate = parseDate(deadline[1]);
+                        addDeadlineToList(deadline[0], deadlineDate);
+                    } else {
+                        addDeadlineToList(deadline[0], deadline[1]);
+                    }
                 } else if (isAddEventCommand(input)) {
                     String[] event = validateEventOrDeadline(input, "event", "/at");
-                    addEventToList(event[0], event[1]);
+                    if (isDate(event[1])) {
+                        Date eventDate = parseDate(event[1]);
+                        addEventToList(event[0], eventDate);
+                    } else {
+                        addEventToList(event[0], event[1]);
+                    }
                 } else if (isDeleteCommand(input)) {
                     String newInput = input.replaceFirst("delete", "").trim();
                     int oneBasedIndex = validateDoneOrDeleteIndex(newInput);
@@ -69,6 +82,30 @@ public class Duke {
         }
 
         printExitMessage();
+    }
+
+    private Date parseDate(String date) throws DukeException {
+        try {
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            return dateFormatter.parse(date);
+        } catch (ParseException e) {
+            throw new DukeException("An error occurred while parsing date: " + e);
+        }
+    }
+
+    private boolean isDate(String input) {
+        // Assume date is in the format 2/12/2019 1800
+        String[] splitInput = input.split("/");
+        if (splitInput.length != 3 || !isNumeric(splitInput[0]) || !isNumeric(splitInput[1])) {
+            return false;
+        }
+
+        String[] yearAndTime = splitInput[2].split(" ");
+        if (yearAndTime.length != 2 || !isNumeric(yearAndTime[0]) || !isNumeric(yearAndTime[1])) {
+            return false;
+        }
+
+        return true;
     }
 
     private void loadTodoList() throws DukeException {
@@ -131,7 +168,7 @@ public class Duke {
 
     private int validateDoneOrDeleteIndex(String doneInput) throws DukeException {
         // Checks that the string is not empty and is an integer
-        if (doneInput.isEmpty() || !doneInput.matches("-?(0|[1-9]\\d*)")) {
+        if (doneInput.isEmpty() || !isNumeric(doneInput)) {
             throw new DukeException("\u2639 OOPS!!! The index to remove cannot be blank or not an integer.");
         }
 
@@ -141,6 +178,10 @@ public class Duke {
                     + "greater than the length of the list.");
         }
         return oneBasedIndex;
+    }
+
+    private boolean isNumeric(String input) {
+        return input.matches("-?\\d+(\\.\\d+)?");
     }
 
     private void validateTodo(String todo) throws DukeException {
@@ -193,8 +234,20 @@ public class Duke {
         printAddSuccessMessage(newDeadline);
     }
 
+    private void addDeadlineToList(String description, Date deadlineDate) {
+        Deadline newDeadline = new Deadline(description, deadlineDate);
+        list.add(newDeadline);
+        printAddSuccessMessage(newDeadline);
+    }
+
     private void addEventToList(String description, String eventTime) {
         Event newEvent = new Event(description, eventTime);
+        list.add(newEvent);
+        printAddSuccessMessage(newEvent);
+    }
+
+    private void addEventToList(String description, Date eventDate) {
+        Event newEvent = new Event(description, eventDate);
         list.add(newEvent);
         printAddSuccessMessage(newEvent);
     }

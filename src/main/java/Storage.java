@@ -81,9 +81,14 @@ class Storage implements TaskObserver, StorageInterface {
             fw.close();
 
         } catch (IOException e) {
+            String writeFileErrorMsg = "OHNyO OMO owo ^w^\n"
+                + "OwO cant wwite taskwist to fiwe,\n"
+                + "you nyeed to cweate a fowdew cawwed 'data'\n"
+                + "in the 'woot' pwoject diwectowy";
             System.out.println(e);
-            System.out.println("you need to create a folder" 
-                    + " called 'data' in 'duke' dir");
+            Ui.printErrorSection(writeFileErrorMsg);
+            //System.out.println("you need to create a folder" 
+             //       + " called 'data' in 'duke' dir");
         }
                 
     }

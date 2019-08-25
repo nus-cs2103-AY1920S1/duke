@@ -3,6 +3,7 @@ package jermi.component;
 import jermi.task.Task;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private List<Task> list;
@@ -29,5 +30,13 @@ public class TaskList {
 
     public void remove(int ordering) {
         this.list.remove(ordering - 1);
+    }
+
+    public List<String> find(String keyword) {
+        return this.list
+                .stream()
+                .map(Task::toString)
+                .filter(task -> task.contains(keyword))
+                .collect(Collectors.toList());
     }
 }

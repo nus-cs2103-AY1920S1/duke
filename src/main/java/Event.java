@@ -1,18 +1,20 @@
-public class Event extends Task {
-    private String time;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
-    public Event(String description) {
+public class Event extends Task {
+    private Date date;
+
+    Event(String description) {
         super(description);
         this.type = "E";
-        this.time = "";
     }
-
-    public void setTime(String time) {
-        this.time = " (at: " + time.substring(3) + ")";
+    void parseTime(String time) throws ParseException {
+        this.date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(time);
     }
 
     @Override
     public String toString() {
-        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + this.time;
+        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + this.date;
     }
 }

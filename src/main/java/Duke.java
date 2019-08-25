@@ -1,20 +1,24 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.lang.IllegalArgumentException;;
+import java.lang.IllegalArgumentException;
 
 public class Duke {
     List<Task> toDoList;
     String doneMessage = "Nice! I've marked this task as done:";
     String addedMessage = "Got it. I've added this task:";
     String deleteMessage = "Noted. I've removed this task: ";
+    String exitMessage = "Bye. Hope to see you again soon!";
     String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "☹ OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
     String illegalArgumentMessage = "____________________________________________________________\n"
-    + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-    + "____________________________________________________________";
+        + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+        + "____________________________________________________________";
 
+    /**
+     * Lists items in To Do List.
+     */
     public void list() {
         System.out.println("____________________________________________________________");
         for (int i = 0; i < toDoList.size(); i++) {
@@ -24,6 +28,10 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Set index of To Do List as done. (one based numbering)
+     * @param i Index
+     */
     public void done(int i) {
         toDoList.get(i - 1).setDone(true);
         System.out.println("____________________________________________________________");
@@ -32,6 +40,10 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Delete index of To Do List. (one based numbering)
+     * @param i Index
+     */
     public void delete(int i) {
         System.out.println("____________________________________________________________");
         System.out.println(deleteMessage);
@@ -40,22 +52,36 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Appends task to To Do List. (one based numbering)
+     * @param task Task description
+     */
     public void addToDo(String task) {
         toDoList.add(new ToDo(task));
         this.printAddedMessage();
     }
 
+    /**
+     * Appends deadline to To Do List. (one based numbering)
+     * @param task Task description
+     * @param date Deadline
+     */
     public void addDeadline(String task, String date) {
         toDoList.add(new Deadline(task, date));
         this.printAddedMessage();
     }
 
+    /**
+     * Appends event to To Do List. (one based numbering)
+     * @param task Task description
+     * @param date Date
+     */
     public void addEvent(String task, String date) {
         toDoList.add(new Event(task, date));
         this.printAddedMessage();
     }
 
-    public void printAddedMessage() {
+    private void printAddedMessage() {
         System.out.println("____________________________________________________________");
         System.out.println(addedMessage);
         System.out.println(toDoList.get(toDoList.size() - 1));
@@ -63,10 +89,12 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Driver method.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
-        String exitMessage = "Bye. Hope to see you again soon!";
         toDoList = new ArrayList<>();
         while (!exit) {
             try {
@@ -117,6 +145,9 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Main method.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";

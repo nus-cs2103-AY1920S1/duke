@@ -8,6 +8,7 @@ import duke.command.CompleteTaskCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.EndCommand;
 import duke.command.ListTaskCommand;
+import duke.command.FindTaskCommand;
 
 import java.util.Scanner;
 import duke.exception.DukeException;
@@ -16,6 +17,7 @@ import duke.exception.InvalidTaskIndexException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEventException;
 import duke.exception.InvalidToDoException;
+import duke.exception.InvalidKeywordException;
 
 /**
  * Represents a Data Parser to parse in all user input provided.
@@ -70,6 +72,8 @@ public class DataParser {
             return new AddDeadlineTaskCommand();
         } else if (shouldAddEventTask()) {
             return new AddEventTaskCommand();
+        } else if (shouldFindTask()) {
+            return new FindTaskCommand();
         } else {
             throw new UnknownCommandException();
         }
@@ -178,6 +182,15 @@ public class DataParser {
      * Checks if the user input indicates that the data parser should end the parsing of user input.
      * @return Returns true if input is "bye".
      */
+    public String findKeyWord() throws InvalidKeywordException {
+        String data = this.input.substring(5).trim();
+        if (data.equals("")) {
+            throw new InvalidKeywordException();
+        } else {
+            return data;
+        }
+    }
+
     public boolean shouldEndParsing() {
         return input.equals("bye");
     }
@@ -228,6 +241,10 @@ public class DataParser {
      */
     public boolean shouldAddEventTask() {
         return input.startsWith("event");
+    }
+
+    public boolean shouldFindTask() {
+        return input.startsWith("find");
     }
 
 }

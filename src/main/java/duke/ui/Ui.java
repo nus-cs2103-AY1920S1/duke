@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -75,6 +76,16 @@ public class Ui {
      * Sends a message to the user.
      * @param input The text of the message.
      */
+    public void showMatchingTasks(ArrayList<Integer> taskIndexes) {
+        sendLine();
+        sendMessage("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskIndexes.size(); i++) {
+            Task task = TaskList.getTask(taskIndexes.get(i));
+            sendMessage(" " + task.toString());
+        }
+        sendLine();
+    }
+
     public void sendMessage(String input) {
         System.out.println(" " + input);
     }

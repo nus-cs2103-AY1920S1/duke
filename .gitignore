@@ -13,5 +13,6 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# Java class files created while testing
+# Files created while testing
 src/main/java/*.class
+data/duke.txt

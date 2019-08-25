@@ -90,7 +90,18 @@ public class Ui {
         } else {
             showMessage("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + "." + tasks.get(i));
+                Task task = tasks.get(i);
+                showMessage((i + 1) + "." + task);
+            }
+        }
+    }
+
+    public void showFilteredTasks(List<Task> tasks, String filter) {
+        showMessage("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.toString().contains(filter)) {
+                showMessage((i + 1) + "." + task);
             }
         }
     }

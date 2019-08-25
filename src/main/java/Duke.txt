@@ -1,0 +1,8 @@
+T | 0 |  read book
+D | 1 |  work  |  monday
+E | 0 |  project  |  sunday
+T | 1 |  work
+D | 0 |  work  |  sunday
+T | 0 |  lol
+T | 0 |  work
+D | 0 |  event  |  tues

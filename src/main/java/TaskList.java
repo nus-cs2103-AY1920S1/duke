@@ -15,6 +15,16 @@ public class TaskList {
     }
 
     /**
+     * Loads the tasks from storage.
+     * @param storage Storage instance to load files.
+     */
+    public void load(Storage storage) {
+        ArrayList<Task> tasks = storage.parseFile();
+        list.clear();
+        tasks.forEach(task -> list.add(task));
+    }
+
+    /**
      * Gets the total number of tasks in this list.
      * @return Total number of tasks in the list.
      */
@@ -64,6 +74,16 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return list.get(index - 1);
+    }
+
+    /**
+     * Gets an arraylist of all tasks in the tasklist.
+     * @return ArrayList of all tasks in the tasklist.
+     */
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<Task> newList = new ArrayList<>();
+        list.forEach(x -> newList.add(x));
+        return newList;
     }
 
     /**

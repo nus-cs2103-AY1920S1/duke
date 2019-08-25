@@ -16,6 +16,14 @@ public class Event extends Task {
     }
 
     /**
+     * Gets the timing of the event.
+     * @return String time;
+     */
+    public String getAt() {
+        return at;
+    }
+
+    /**
      * String representation of the Event.
      * @return String representation of the Event.
      */

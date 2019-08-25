@@ -6,6 +6,8 @@ import java.io.IOException;
  * Duke Class.
  */
 public class Duke {
+    /** Storage. */
+    private static Storage storage = new Storage();
     /** TaskList to store user input. */
     private static TaskList taskList = new TaskList();
     /** Line for responses. */
@@ -38,6 +40,8 @@ public class Duke {
      * @param br BufferedReader to read user commands.
      */
     private static void run(BufferedReader br) throws IOException {
+        taskList.load(storage);
+        taskList.getAllTasks().forEach(task -> System.out.println(task));
         greeting();
         String input = br.readLine();
         Command cmd = Command.lookup(input);
@@ -70,6 +74,7 @@ public class Duke {
                     addTask(input);
                 }
             }
+            storage.write(taskList);
             input = br.readLine();
             cmd = Command.lookup(input);
         }

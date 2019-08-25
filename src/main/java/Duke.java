@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,6 +11,37 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>(100);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
+        try {
+            Path filePath = new File("CurrentTaskList.txt").toPath();
+            List<String> savedList = Files.readAllLines(filePath);
+            for (String line : savedList) {
+                String[] lineElements = line.split(" \\| ");
+                String lineType = lineElements[0];
+                if (lineType.equals("T")) {
+                    Task currentTask = new ToDoTask(lineElements[2]);
+                    if (lineElements[1].equals("1")) {
+                        currentTask.markAsDone();
+                    }
+                    taskList.add(currentTask);
+                } else if (lineType.equals("D")) {
+                    Task currentTask = new DeadlineTask(lineElements[2], lineElements[3]);
+                    if (lineElements[1].equals("1")) {
+                        currentTask.markAsDone();
+                    }
+                    taskList.add(currentTask);
+                } else if (lineType.equals("E")) {
+                    Task currentTask = new EventTask(lineElements[2], lineElements[3]);
+                    if (lineElements[1].equals("1")) {
+                        currentTask.markAsDone();
+                    }
+                    taskList.add(currentTask);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         while (true) {
             try {
                 String input = scanner.nextLine();

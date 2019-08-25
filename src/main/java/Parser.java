@@ -12,6 +12,8 @@ public class Parser {
     private static Date dateTime;
 
     public Parser() {
+        indexOfByAt = 0;
+        dateTime = null;
     }
 
     public static Date dateParse(String str) throws ParseException {
@@ -60,7 +62,7 @@ public class Parser {
     }
 
 
-    private static void getDate(String[] detailsArray) throws ParseException {
+    private static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
         //Date dateTime = null;
         if (detailsArray[0].equals("deadline")) {
             for (int i = 0; i < detailsArray.length; i++) {
@@ -68,18 +70,20 @@ public class Parser {
                     dateTime = dateParse(String.join(" ",
                             Arrays.copyOfRange(detailsArray, i + 1, detailsArray.length)));
                     indexOfByAt = i;
-                    break;
+                    return;
                 }
             }
+            throw new MissingTimeStampException("☹ OOPS!!! Missing timestamp!");
         } else {
             for (int i = 0; i < detailsArray.length; i++) {
                 if (detailsArray[i].equals("/at")) {
                     dateTime = dateParse(String.join(" ",
                             Arrays.copyOfRange(detailsArray, i + 1, detailsArray.length)));
                     indexOfByAt = i;
-                    break;
+                    return;
                 }
             }
+            throw new MissingTimeStampException("☹ OOPS!!! Missing timestamp!");
         }
     }
 

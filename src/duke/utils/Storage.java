@@ -1,4 +1,6 @@
-package main.java;
+package duke.utils;
+
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +14,7 @@ public class Storage {
 
     private static File file;
 
-    Storage(String absolutePathName) throws FileNotFoundException, ParseException {
+    public Storage(String absolutePathName) throws FileNotFoundException, ParseException {
         file = new File(absolutePathName);
         if (file.exists()) {
             loadData();
@@ -26,7 +28,7 @@ public class Storage {
         }
     }
 
-    void clearData() {
+    public void clearData() {
         file.delete();
     }
 
@@ -53,7 +55,7 @@ public class Storage {
     }
 
 
-    void updateData() throws IOException {
+    public void updateData() throws IOException {
         FileWriter fw = new FileWriter(file.getAbsolutePath());
         TaskList taskList = TaskList.newInstance();
         StringBuilder sb = new StringBuilder();

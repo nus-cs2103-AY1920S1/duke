@@ -15,7 +15,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin main.java.Duke < input.txt > ACTUAL.txt
+java -classpath ..\bin duke.main.Duke < input.txt > ACTUAL.txt
 
 REM Check for differences in the two text files
 FC ACTUAL.txt EXPECTED.txt

@@ -1,7 +1,7 @@
-package main.java;
+package duke.exception;
 
 public class EmptyDescriptionException extends DukeException {
-    EmptyDescriptionException() {
+    public EmptyDescriptionException() {
         super("Empty Description");
     }
 }

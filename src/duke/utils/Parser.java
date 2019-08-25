@@ -1,16 +1,18 @@
-package main.java;
+package duke.utils;
+
+import duke.exception.EmptyDescriptionException;
+import duke.task.TaskList;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Parser {
 
     private Scanner sc;
 
-    Parser() {
+    public Parser() {
         sc = new Scanner(System.in);
     }
 
@@ -18,15 +20,15 @@ public class Parser {
         sc.nextLine();
     }
 
-    boolean hasNext() {
+    public boolean hasNext() {
         return sc.hasNext();
     }
 
-    String getNextAction() {
+    public String getNextAction() {
         return sc.next();
     }
 
-    String[] parseEventDetail() {
+    public String[] parseEventDetail() {
         try {
             String taskName = sc.nextLine().trim();
             String[] taskInfo = taskName.split("\\s*/at\\s*");
@@ -44,7 +46,7 @@ public class Parser {
         }
     }
 
-    String[] parseDeadlineDetail() {
+    public String[] parseDeadlineDetail() {
         try {
             String taskName = sc.nextLine().trim();
             String[] taskInfo = taskName.split("\\s*/by\\s*");
@@ -74,7 +76,7 @@ public class Parser {
     }
 
 
-    String parseTodoDetail() {
+    public String parseTodoDetail() {
         try {
             String taskName = sc.nextLine().trim();
             if (taskName.isEmpty()) {
@@ -87,7 +89,7 @@ public class Parser {
         }
     }
 
-    Integer getTaskIdx() {
+    public Integer getTaskIdx() {
 
         TaskList taskList = TaskList.newInstance();
         try {

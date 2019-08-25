@@ -1,4 +1,12 @@
-package main.java;
+package duke.main;
+
+import duke.command.Command;
+import duke.command.CommandCentre;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +17,7 @@ public class Duke {
 
     private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
     private static final String STORAGE_PATH = "\\data\\duke.txt";
-    private static final boolean resetTaskList = true;
+    private static final boolean resetTaskList = false;
 
     private final TaskList taskList;
     private final Storage storage;

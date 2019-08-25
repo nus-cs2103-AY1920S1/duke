@@ -1,4 +1,6 @@
-package main.java;
+package duke.command;
+
+import duke.exception.InvalidCommandException;
 
 import java.io.IOException;
 import java.util.HashMap;

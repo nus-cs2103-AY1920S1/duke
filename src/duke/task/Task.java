@@ -1,4 +1,4 @@
-package main.java;
+package duke.task;
 
 public abstract class Task {
     private static int NOT_DONE = 0;
@@ -13,7 +13,7 @@ public abstract class Task {
     }
 
     protected abstract String getTypeSymbol();
-    protected abstract String getAdditionalInfo();
+    public abstract String getAdditionalInfo();
     protected abstract String displayAdditionalInfo();
 
     protected void setDone() {
@@ -24,11 +24,11 @@ public abstract class Task {
         this.status = NOT_DONE;
     }
 
-    protected  String getName() {
+    public String getName() {
         return name;
     }
 
-    protected int getStatus() {
+    public int getStatus() {
         return status;
     }
 

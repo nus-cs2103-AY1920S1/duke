@@ -1,10 +1,6 @@
-package main.java;
+package duke.task;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.InputMismatchException;
 import java.util.List;
 
 public class TaskList {
@@ -20,27 +16,27 @@ public class TaskList {
         return new TaskList();
     }
 
-    Task get(int idx) {
+    public Task get(int idx) {
         return tasks.get(idx);
     }
 
-    List<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    void clear() {
+    public void clear() {
         tasks.clear();
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 
-    Task addNewTodoTask(String taskName, boolean isDone) {
+    public Task addNewTodoTask(String taskName, boolean isDone) {
         Task newTask = new Todo(taskName);
         if (isDone) {
             newTask.setDone();
@@ -51,7 +47,7 @@ public class TaskList {
         return newTask;
     }
 
-    Task addNewEventTask(String taskName, String additionalInfo, boolean isDone) {
+    public Task addNewEventTask(String taskName, String additionalInfo, boolean isDone) {
         Task newTask = new Event(taskName, additionalInfo);
         if (isDone) {
             newTask.setDone();
@@ -62,7 +58,7 @@ public class TaskList {
         return newTask;
     }
 
-    Task addNewDeadlineTask(String taskName, String additionalInfo, boolean isDone) {
+    public Task addNewDeadlineTask(String taskName, String additionalInfo, boolean isDone) {
 
         Task newTask = new Deadline(taskName, additionalInfo);
         if (isDone) {
@@ -74,12 +70,12 @@ public class TaskList {
         return newTask;
     }
 
-    Task deleteTask(int idx) {
+    public Task deleteTask(int idx) {
         Task task = tasks.remove(idx);
         return task;
     }
 
-    void markAsDone(int idx) {
+    public void markAsDone(int idx) {
         tasks.get(idx).setDone();
     }
 

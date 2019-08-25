@@ -1,7 +1,7 @@
-package main.java;
+package duke.exception;
 
 public class InvalidCommandException extends DukeException {
-    InvalidCommandException() {
+    public InvalidCommandException() {
         super("Invalid Command");
     }
 }

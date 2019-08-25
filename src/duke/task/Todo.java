@@ -1,4 +1,4 @@
-package main.java;
+package duke.task;
 
 public class Todo extends Task {
 
@@ -7,7 +7,7 @@ public class Todo extends Task {
     }
 
     @Override
-    protected String getAdditionalInfo() {
+    public String getAdditionalInfo() {
         return "";
     }
 

@@ -1,6 +1,6 @@
 public class Task {
-    private String description;
-    private boolean isDone;
+    String description;
+    boolean isDone;
 
     Task(String description) {
         this.description = description;
@@ -13,6 +13,10 @@ public class Task {
 
     void markAsDone() {
         this.isDone = true;
+    }
+
+    public String getOutputFormat() {
+        return String.format("X | %d | %s", isDone ? 1 : 0, description);
     }
 
     public String toString() {

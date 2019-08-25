@@ -149,5 +149,22 @@ class DoneCommand extends Command {
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + t);
     }
+}
 
+class FindCommand extends Command {
+    private String keyword;
+    FindCommand(String keyword) {
+        this.keyword = keyword;
+    }
+    /**
+     * prints out the list of tasks with the keyword
+     * @param tasks is the list of tasks.
+     * @param ui is the UI class.
+     * @param storage is the Storage class.
+     */
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        System.out.println("     Here are the matching tasks in your list:");
+        tasks.printListWithKeyword(keyword);
+    }
 }

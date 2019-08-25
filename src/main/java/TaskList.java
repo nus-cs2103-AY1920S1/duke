@@ -58,4 +58,14 @@ class TaskList {
         }
     }
 
+    void printListWithKeyword(String keyword) {
+        int counter = 1;
+        for (Task t: taskList) {
+            if (t.getDescription().indexOf(keyword) != -1) {
+                System.out.println("      " + counter + "." + t) ;
+                counter++;
+            }
+        }
+    }
+
 }

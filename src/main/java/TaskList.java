@@ -1,13 +1,31 @@
-import java.io.PrintStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> listItems;
-    private PrintStream ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+    private PrintStream ps;
+    private String saveFilePath;
 
     protected TaskList() {
         this.listItems = new ArrayList<>();
+        this.ps = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+        this.saveFilePath = "D:/Marcus Folder/SCHOOL STUFF/YEAR 2/CS2103T/duke/data/duke.txt";
+    }
+
+    void load() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File(saveFilePath)));
+            while(br.ready()){
+                String item = br.readLine();
+                Task newTask = Task.createFromFile(item);
+                listItems.add(newTask);
+            }
+        } catch (IOException e){ // this should not occur as the file is hard-coded.
+            ps.println("Error occurred while loading file: \n" + e + "\nExiting program...");
+            ps.close();
+            System.exit(1);
+        }
     }
 
     /**
@@ -30,6 +48,13 @@ public class TaskList {
      */
     protected void addTask(String command) throws DukeException {
         Task newTask = Task.create(command);
+        try {
+            FileWriter fw = new FileWriter(new File(saveFilePath), true); // append mode: true
+            fw.write(newTask.toFileString() + "\n");
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Error occurred while adding new task!");
+        }
         listItems.add(newTask);
         String taskSingular = listItems.size() == 1 ? "task" : "tasks";
         ps.println("\t" + "Got it. I've added this task: \n"
@@ -48,6 +73,7 @@ public class TaskList {
         }
         Task task = listItems.get(id - 1);
         task.setDone();
+        updateSaveFileLine(task.toFileString(), id);
         ps.println("\tNice! I've marked this task as done: \n"
                 + "\t  " + task);
     }
@@ -61,9 +87,43 @@ public class TaskList {
         if (id > listItems.size() || id <= 0) {
             throw new DukeException("The ID that you have entered is not a valid task ID");
         }
+        updateSaveFileLine("delete", id);
         Task task = listItems.remove(id - 1);
         ps.println("\tNoted. I've removed this task:\n"
                 + "\t  " + task + "\n"
                 + "Now you have " + listItems.size() + " tasks in the list.");
+    }
+
+    /**
+     * Updates a task in the list as specified in the arguments, and given its ID.
+     * The ID is the line number of the task in the file, and is thus used to update the file.
+     * If the task parameter is "delete", this will delete the specified line.
+     * @param task The String representation of the task, that can be processed by the program.
+     *             If this is "delete", then the function will delete the line instead.
+     * @param id The ID of the task (1-indexed).
+     */
+    protected void updateSaveFileLine(String task, int id) throws DukeException {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File(saveFilePath)));
+            int i = 1;
+            StringBuilder fileContent = new StringBuilder();
+            while (br.ready()) {
+                String line = br.readLine();
+                if (i == id) {
+                    if (task.equals("delete")) {
+                        i++;
+                        continue;
+                    }
+                    line = task;
+                }
+                fileContent.append(line).append("\n");
+                i++;
+            }
+            FileWriter fw = new FileWriter(new File(saveFilePath));
+            fw.write(fileContent.toString());
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Error while updating task in save file: File not found!\n" + e);
+        }
     }
 }

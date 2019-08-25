@@ -4,6 +4,12 @@ public class ToDoTask extends Task {
     }
 
     @Override
+    protected String toFileString() {
+        int done = isDone ? 1 : 0;
+        return "T" + " | " + done + " | " + details;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

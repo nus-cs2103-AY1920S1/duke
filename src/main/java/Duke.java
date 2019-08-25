@@ -16,6 +16,7 @@ public class Duke {
     public static void main(String[] args) {
         welcomeMessage();
         String command = "";
+        taskList.load();
 
         while (!command.equals("bye")) {
             try {

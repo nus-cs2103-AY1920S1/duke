@@ -1,5 +1,6 @@
 public class DukeInvalidTaskException extends DukeException {
     String task;
+
     DukeInvalidTaskException (String task) {
         this.task = task;
     }

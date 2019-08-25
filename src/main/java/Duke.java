@@ -1,15 +1,17 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static final String filePath = "C:/Users/jxken/Desktop/Github/duke/data/duke.txt";
+    public static final String filePath = "C:/Users/jxken/Desktop/Github/duke/data/duke.txt";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
         LocalStorage storage = new LocalStorage(filePath);
+        TaskList tasks = new TaskList(storage);
         CommandHandler commandHandler = new CommandHandler(tasks, storage);
+        OutputUtilities outputUtilities = new OutputUtilities(tasks, storage);
 
-        OutputUtilities.sayHi();
+        outputUtilities.sayHi();
+
 
         while (true) {
             String input = sc.nextLine();
@@ -19,6 +21,7 @@ public class Duke {
             // " borrow books" => "borrow books"
             String text = input.substring(cmd.length()).replaceFirst("\\s", "");
             commandHandler.executeCommand(cmd, text);
+            if (cmd.equals("bye")) System.exit(0);
         }
 
 

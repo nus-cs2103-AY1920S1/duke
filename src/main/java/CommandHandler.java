@@ -15,19 +15,18 @@ public class CommandHandler {
             switch (cmd) {
                 case "bye":
                     OutputUtilities.sayBye();
-                    OutputUtilities.printLine();
-                    System.exit(0);
+                    break;
                 case "list":
                     tasks.printTasks();
                     break;
                 case "done":
                     int taskNumber = Integer.parseInt(input);
-                    tasks.markTaskAsCompleted(taskNumber);
+                    tasks.markTaskAsCompleted(taskNumber, true);
                     storage.writeToTasksFile(tasks);
                     break;
                 case "todo":
                     String todoText = input;
-                    tasks.addTask(new Todo(todoText));
+                    tasks.addTask(new Todo(todoText),true);
                     storage.writeToTasksFile(tasks);
                     break;
                 case "deadline":
@@ -35,7 +34,7 @@ public class CommandHandler {
                     String[] deadlineParts = deadline.split(" /by ");
                     String deadLineText = deadlineParts[0];
                     String by = deadlineParts[1];
-                    tasks.addTask(new Deadline(deadLineText, by));
+                    tasks.addTask(new Deadline(deadLineText, by), true);
                     storage.writeToTasksFile(tasks);
                     break;
                 case "event":
@@ -43,12 +42,12 @@ public class CommandHandler {
                     String[] eventParts = event.split(" /at ");
                     String eventText = eventParts[0];
                     String at = eventParts[1];
-                    tasks.addTask(new Event(eventText, at));
+                    tasks.addTask(new Event(eventText, at), true);
                     storage.writeToTasksFile(tasks);
                     break;
                 case "delete":
                     int taskNumberToRemove = Integer.parseInt(input);
-                    tasks.deleteTask(taskNumberToRemove);
+                    tasks.deleteTask(taskNumberToRemove, true);
                     storage.writeToTasksFile(tasks);
                     break;
                 default:

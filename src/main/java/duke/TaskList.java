@@ -1,5 +1,9 @@
+package duke;
+
+import exception.DukeException;
+import task.Task;
+
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TaskList {

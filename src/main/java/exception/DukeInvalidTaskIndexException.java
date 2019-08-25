@@ -1,3 +1,5 @@
+package exception;
+
 public class DukeInvalidTaskIndexException extends DukeException {
 
     public DukeInvalidTaskIndexException (String msg, int n) {

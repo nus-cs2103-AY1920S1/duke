@@ -1,19 +1,26 @@
+package command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import exception.DukeException;
+import task.Task;
+import task.ToDoTask;
+
 import java.io.IOException;
 
-public class EventCommand extends Command {
+public class ToDoCommand extends Command {
     private String description;
-    private String time;
 
-    public EventCommand(String description, String time) {
+    public ToDoCommand(String description) {
         this.description = description;
-        this.time = time;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        Task task = new EventTask(description, time);
+        Task task = new ToDoTask(description);
         tasks.addTask(task);
         ui.print("Got it. I've added this task:\n " + task + "\n" + "Now you have " + tasks.getSize() + " task"
-                + (tasks.getSize()==1?" ":"s ") + "in the list");
+            + (tasks.getSize()==1?" ":"s ") + "in the list.");
         storage.save(tasks);
     }
 

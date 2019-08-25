@@ -1,3 +1,5 @@
+package exception;
+
 public class DukeInvalidTaskDescriptionException extends DukeException {
 
     public DukeInvalidTaskDescriptionException(String msg) {

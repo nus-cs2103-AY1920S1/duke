@@ -5,17 +5,22 @@
  * @author Fabian Chia Hup Peng
  */
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
+    private static final String taskListPath = "data/duke.txt";
     private static final Scanner sc = new Scanner(System.in);
 
     private static final ArrayList<Task> taskList = new ArrayList<Task>();
 
     private static final String indentLine = "---------------------------------------------";
-    private static final String introMessage = "Hello! I'm Duke\n" + "What can I do for you?";
+    private static final String introMessage = "Hello! I'm Duke!\n" + "What can I do for you?";
     private static final String goodbyeMessage = "Bye. Hope to see you again soon!";
     private static final String addMessage = "Got it. I've added this task:";
     private static final String doneMessage = "Nice! I've marked this task as done:";
@@ -29,8 +34,165 @@ public class Duke {
 
         printIntroMessage();
 
+        printTaskListContentsWrapper();
+
+        transferContentsToListWrapper();
+
         processUserInput();
 
+    }
+
+    /**
+     * Hides the try catch block whilst executing the method
+     * transferContentsToList.
+     */
+    private static void transferContentsToListWrapper() {
+        try {
+            transferContentsToList(taskListPath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    /**
+     * Transfers the contents of the file to a static array list.
+     * @param filePath The path to the source text file.
+     * @throws FileNotFoundException The exception to be thrown if no such file is found.
+     */
+    private static void transferContentsToList(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner fileReader = new Scanner(file);
+        while (fileReader.hasNext()) {
+            processNextLine(fileReader.nextLine());
+        }
+    }
+
+    /**
+     * Processes the next line into proper format.
+     * @param nextLine The line to be processed.
+     */
+    private static void processNextLine(String nextLine) {
+        String[] splitString = nextLine.split(" ");
+
+        String taskType = splitString[0];
+        String doneStatus = splitString[2];
+
+        if(taskType.equals("T")) {
+
+            String taskDescription = splitString[4];
+
+            for(int i = 5; i < splitString.length; i++) {
+                taskDescription += " " + splitString[i];
+            }
+
+            ToDo toDo = new ToDo(taskDescription);
+
+            if(doneStatus.equals("1")) {
+                toDo.setDone();
+            }
+
+            taskList.add(toDo);
+
+        } else {
+
+            int counter = 5;
+            String taskDescription = splitString[4];
+
+            for(int i = 5; i < splitString.length && !splitString[i].equals("|"); i++) {
+                taskDescription += " " + splitString[i];
+                counter++;
+            }
+
+            String dateTime = splitString[++counter];
+
+            for(int j = counter + 1; j < splitString.length; j++) {
+                dateTime += " " + splitString[j];
+            }
+
+
+            if(taskType.equals("D")) {
+                Deadline deadline = new Deadline(taskDescription, dateTime);
+
+                if(doneStatus.equals("1")) {
+                    deadline.setDone();
+                }
+
+                taskList.add(deadline);
+            } else {
+                Event event = new Event(taskDescription, dateTime);
+
+                if(doneStatus.equals("1")) {
+                    event.setDone();
+                }
+
+                taskList.add(event);
+            }
+
+        }
+    }
+
+    /**
+     * Hides the try catch block whilst executing the method
+     * printTaskListContents.
+     */
+    private static void printTaskListContentsWrapper() {
+        try {
+            printTaskListContents(taskListPath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    /**
+     * Prints the stored contents of a task list, if any.
+     * @param filePath The path to the text file to be printed.
+     * @throws FileNotFoundException The exception to be thrown if no such file is found.
+     */
+    private static void printTaskListContents(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner fileReader = new Scanner(file);
+        while (fileReader.hasNext()) {
+            System.out.println(fileReader.nextLine());
+        }
+    }
+
+    /**
+     * Writes the current task list contents to file.
+     */
+    private static void writeContentsToFile() {
+        String formattedTask = "";
+
+        for(Task task : taskList) {
+            formattedTask += task.formatForFile() + "\n";
+        }
+
+        writeToFileWrapper(formattedTask);
+    }
+
+
+    /**
+     * Hides the try catch block whilst executing the method
+     * writeToFile.
+     * @param textToAdd The text to be added to the task list.
+     */
+    private static void writeToFileWrapper(String textToAdd) {
+        try {
+            writeToFile(taskListPath, textToAdd);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Writes given input to given file path.
+     * @param filePath The path to the text file to be written to.
+     * @param textToAdd The text to be added to the text file.
+     * @throws IOException The IO Exception.
+     */
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(textToAdd + "\n");
+        fileWriter.close();
     }
 
     /**
@@ -175,6 +337,8 @@ public class Duke {
                 String input = sc.nextLine();
 
                 if (isBye(input)) {
+                    writeContentsToFile();
+
                     printGoodbyeMessage();
                     break;
                 }

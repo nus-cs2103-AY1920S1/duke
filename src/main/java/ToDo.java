@@ -15,6 +15,25 @@ public class ToDo extends Task {
     }
 
     /**
+     * Formats the task in suitable String representation for
+     * writing to file.
+     */
+    @Override
+    public String formatForFile() {
+        String formattedTask = "T | ";
+
+        if(isDone) {
+            formattedTask += "1 | ";
+        } else {
+            formattedTask += "0 | ";
+        }
+
+        formattedTask += description;
+
+        return formattedTask;
+    }
+
+    /**
      * Returns a string representation of a ToDo task.
      * @return The task's status icon and description.
      */

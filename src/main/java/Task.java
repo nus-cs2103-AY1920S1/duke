@@ -4,7 +4,7 @@
  * @author Fabian Chia Hup Peng
  */
 
-public class Task {
+public abstract class Task {
 
     protected String description;
     protected boolean isDone;
@@ -37,6 +37,12 @@ public class Task {
     public void setDone() {
         isDone = true;
     }
+
+    /**
+     * Formats the task in suitable String representation for
+     * writing to file.
+     */
+    public abstract String formatForFile();
 
     /**
      * Returns a string representation of a task.

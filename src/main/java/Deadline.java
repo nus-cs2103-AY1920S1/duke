@@ -1,17 +1,20 @@
-public class Deadline extends Task {
-    private String by;
+import java.text.ParseException;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private Date by;
+
+    public Deadline(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
+        this.by = Duke.formatter.parse(by);
     }
 
     public String getBy() {
-        return this.by;
+        return Duke.formatter.format(by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + Duke.formatter.format(by) + ")";
     }
 }

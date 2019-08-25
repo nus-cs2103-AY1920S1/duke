@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,7 @@ public class Duke {
     private static String input;
     private static boolean running;
     private static List<Task> list;
+    private static Storage storage;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -28,7 +30,8 @@ public class Duke {
 
     public static void setupResources() {
         running = true;
-        list = new ArrayList<>();
+        storage = new Storage();
+        list = Storage.loadList();
     }
 
     public static void greet() {
@@ -99,7 +102,7 @@ public class Duke {
                 if (theTask == null) {
                     taskByWhen = new String[] {null, null};
                 } else {
-                    taskByWhen = Arrays.copyOf(theTask.split(" /", 2), 2);
+                    taskByWhen = Arrays.copyOf(theTask.split(" /by ", 2), 2);
                 }
                 String deadlineTask = taskByWhen[0];
                 String byWhen = taskByWhen[1];
@@ -112,7 +115,7 @@ public class Duke {
                 if (theTask == null) {
                     taskAtTime = new String[] {null, null};
                 } else {
-                    taskAtTime = Arrays.copyOf(theTask.split(" /", 2), 2);
+                    taskAtTime = Arrays.copyOf(theTask.split(" /at ", 2), 2);
                 }
                 String eventTask = taskAtTime[0];
                 String atTime = taskAtTime[1];
@@ -177,6 +180,7 @@ public class Duke {
     }
 
     public static void sayGoodbye() {
+        Storage.saveList(list);
         System.out.println(
                 "    ____________________________________________________________\n" +
                         "     Bye. Hope to see you again soon!\n" +

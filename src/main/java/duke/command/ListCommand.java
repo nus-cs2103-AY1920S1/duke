@@ -15,4 +15,13 @@ public class ListCommand extends Command {
   public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
     Ui.printLine(tasks.printAllTasks());
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    else if (obj instanceof ListCommand)
+      return true;
+    return false;
+  }
 }

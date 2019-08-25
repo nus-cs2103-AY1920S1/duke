@@ -19,6 +19,14 @@ public class Deadlines extends Task {
         Integer.parseInt(dateandtime[1].substring(0, 2)), Integer.parseInt(dateandtime[1].substring(2, 4)));
   }
 
+  public Calendar getDatetime() {
+    return datetime;
+  }
+
+  public String getDatetimeString() {
+    return datetimeString;
+  }
+
   @Override
   public String storageString() {
     return "D," + (super.getDone() ? "1," : "0,") + super.getName() + "," + this.datetimeString;
@@ -27,5 +35,17 @@ public class Deadlines extends Task {
   @Override
   public String toString() {
     return "[D]" + super.toString() + " (by: " + datetimeString + ")";
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    else if (obj instanceof Deadlines) {
+      Deadlines other = (Deadlines) obj;
+      return this.getDone() == other.getDone() && this.getName().equals(other.getName())
+              && this.getDatetimeString().equals(other.getDatetimeString());
+    }
+    return false;
   }
 }

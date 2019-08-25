@@ -15,4 +15,14 @@ public class ByeCommand extends Command {
   public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
     Ui.printLine("Bye. Hope to see you again soon!");
   }
+
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    else if (obj instanceof ByeCommand)
+      return true;
+    return false;
+  }
 }

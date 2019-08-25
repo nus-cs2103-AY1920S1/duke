@@ -26,4 +26,16 @@ public class DeleteCommand extends Command {
     Ui.printLine("  " + deleted);
     Ui.printLine("Now you have " + tasks.size() + " tasks in the list.");
   }
+
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    else if (obj instanceof DeleteCommand) {
+      DeleteCommand other = (DeleteCommand) obj;
+      return other.index == this.index;
+    }
+    return false;
+  }
 }

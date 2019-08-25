@@ -23,4 +23,15 @@ public class DoneCommand extends Command {
     String res = tasks.get(index).storageString();
     storage.replaceLine(current, res);
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    else if (obj instanceof DoneCommand) {
+      DoneCommand other = (DoneCommand) obj;
+      return other.index == this.index;
+    }
+    return false;
+  }
 }

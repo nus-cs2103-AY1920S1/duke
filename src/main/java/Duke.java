@@ -1,10 +1,22 @@
-public class Duke {
-    private UserInterface ui;
-    private TaskList taskList;
+import java.util.ArrayList;
+import java.util.List;
 
-    private Duke() {
+public class Duke {
+    private Storage storage;
+    private TaskList taskList;
+    private UserInterface ui;
+    private static final String DEFAULT_STORAGE_FILEPATH = "data/tasks.txt";
+
+    public Duke(String filePath) {
         ui = new UserInterface();
-        taskList = new TaskList();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showExceptionMessage(e.getMessage());
+            taskList = new TaskList();
+            ui.exitProgram();
+        }
     }
 
     private void run() {
@@ -14,6 +26,7 @@ public class Duke {
         while (!isTerminated) {
             try {
                 String inputLine = ui.readLine();
+                ui.echo(inputLine);
                 String command = getCommandFrom(inputLine);
                 ui.showLine();
                 switch (command) {
@@ -26,28 +39,33 @@ public class Duke {
                         break;
                     case "done":
                         task = taskList.markDone(getIndexFrom(inputLine));
+                        storage.save(taskList.getSimplifiedTaskRepresentations());
                         ui.showMarkDone(task);
                         break;
                     case "todo":
                         task = createTodoFrom(inputLine);
                         taskList.addTask(task);
+                        storage.save(task.getSimplifiedRepresentation());
                         ui.showAddition(task);
                         ui.showTaskSize(taskList);
                         break;
                     case "deadline":
                         task = createDeadlineFrom(inputLine);
                         taskList.addTask(task);
+                        storage.save(task.getSimplifiedRepresentation());
                         ui.showAddition(task);
                         ui.showTaskSize(taskList);
                         break;
                     case "event":
                         task = createEventFrom(inputLine);
                         taskList.addTask(task);
+                        storage.save(task.getSimplifiedRepresentation());
                         ui.showAddition(task);
                         ui.showTaskSize(taskList);
                         break;
                     case "delete":
                         task = taskList.delete(getIndexFrom(inputLine));
+                        storage.save(taskList.getSimplifiedTaskRepresentations());
                         ui.showDeletion(task);
                         ui.showTaskSize(taskList);
                         break;
@@ -113,7 +131,6 @@ public class Duke {
     }
 
     public static void main (String[] args){
-        Duke duke = new Duke();
-        duke.run();
+        new Duke(DEFAULT_STORAGE_FILEPATH).run();
     }
 }

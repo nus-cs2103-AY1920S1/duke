@@ -9,9 +9,11 @@ public class Event extends Task {
         if (atTime == null) {
             throw new InvalidTaskDukeException("event");
         }
-        // to add the colon
-        String arr[] = atTime.split(" ", 2);
-        this.atTime = arr[0] + ": " + arr[1];
+        this.atTime = atTime;
+    }
+
+    public String getAtTime() {
+        return atTime;
     }
 
     @Override

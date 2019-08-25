@@ -1,6 +1,10 @@
 public class Deadline extends Task {
     private String byWhen;
 
+    public String getByWhen() {
+        return byWhen;
+    }
+
     public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException  {
         super(name);
         if (name == null) {
@@ -11,7 +15,7 @@ public class Deadline extends Task {
         }
         // to add the colon
         String arr[] = byWhen.split(" ", 2);
-        this.byWhen = arr[0] + ": " + arr[1];
+        this.byWhen = byWhen;
     }
 
     @Override

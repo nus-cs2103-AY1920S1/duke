@@ -7,6 +7,18 @@ public abstract class Task {
         this.done = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
     public void done() {
         done = true;
     }

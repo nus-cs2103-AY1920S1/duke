@@ -1,7 +1,7 @@
 public class Deadline extends Task {
-    private String byWhen;
+    private DateTime byWhen;
 
-    public String getByWhen() {
+    public DateTime getByWhen() {
         return byWhen;
     }
 
@@ -13,16 +13,16 @@ public class Deadline extends Task {
         if (byWhen == null) {
             throw new InvalidTaskDukeException("deadline");
         }
-        // to add the colon
-        String arr[] = byWhen.split(" ", 2);
-        this.byWhen = byWhen;
+        this.byWhen = DateTime.create(byWhen);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("[D]");
         stringBuilder.append(super.toString());
-        stringBuilder.append(" (" + byWhen + ")");
+        stringBuilder.append(" (");
+        stringBuilder.append(byWhen);
+        stringBuilder.append(")");
         return stringBuilder.toString();
     }
 }

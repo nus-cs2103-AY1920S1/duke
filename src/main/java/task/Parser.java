@@ -7,7 +7,13 @@ public class Parser {
     public TaskList parse(TaskList taskList) {
         Scanner sc = new Scanner(System.in);
 
-        String textInput = sc.nextLine();
+        String textInput;
+        if (sc.hasNext()) {
+            textInput = sc.nextLine();
+        } else {
+            textInput = "bye";
+        }
+
         while (!textInput.equals("bye")) {
             try {
                 if (textInput.equals("list")) {

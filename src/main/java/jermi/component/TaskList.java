@@ -3,6 +3,7 @@ package jermi.component;
 import jermi.task.Task;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A class to represent a list of tasks.
@@ -63,5 +64,13 @@ public class TaskList {
      */
     public void remove(int index) {
         this.list.remove(index - 1);
+    }
+
+    public List<String> find(String keyword) {
+        return this.list
+                .stream()
+                .map(Task::toString)
+                .filter(task -> task.contains(keyword))
+                .collect(Collectors.toList());
     }
 }

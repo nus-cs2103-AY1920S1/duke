@@ -2,10 +2,11 @@ package jermi.component;
 
 import jermi.command.Command;
 import jermi.command.AddCommand;
-import jermi.command.ListCommand;
 import jermi.command.DeleteCommand;
 import jermi.command.DoneCommand;
 import jermi.command.ExitCommand;
+import jermi.command.FindCommand;
+import jermi.command.ListCommand;
 import jermi.exception.EmptyDescriptionException;
 import jermi.exception.InvalidCommandException;
 import jermi.exception.JermiException;
@@ -42,6 +43,7 @@ public class Parser {
         case "done":
             //Fallthrough
         case "delete":
+        case "find":
             if (inputDetails.isEmpty()) {
                 throw new EmptyDescriptionException(inputCommand);
             }
@@ -61,6 +63,8 @@ public class Parser {
             case "delete":
                 command = new DeleteCommand(inputDetails);
                 break;
+            case "find":
+                command = new FindCommand(inputDetails);
             }
             break;
         default:

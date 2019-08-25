@@ -41,6 +41,8 @@ public class Database {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Data file does not exist.");
+        } catch (DukeException e) {
+            System.err.println(e);
         }
 
         return list;

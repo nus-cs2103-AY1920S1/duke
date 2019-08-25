@@ -78,8 +78,6 @@ public class Duke {
             throw new DukeException("     ☹ OOPS!!! The description of a " + type + " cannot be empty.");
         } catch (IllegalArgumentException e) {
             throw new DukeException("     ☹ OOPS!!! The task type does not exist. Three types available: Todo, Deadline, Event.");
-        } catch (DukeException e) {
-            throw e;
         }
     }
 

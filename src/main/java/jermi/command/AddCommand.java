@@ -43,6 +43,7 @@ public class AddCommand extends Command {
             task = new ToDo(this.description);
             break;
         case DEADLINE:
+            //Fallthrough
         case EVENT:
             String[] activityAndDateTime = this.description.split("/", 2);
             String activity = activityAndDateTime[0].trim();

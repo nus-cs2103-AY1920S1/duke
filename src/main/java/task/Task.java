@@ -5,7 +5,9 @@ public class Task {
     protected String title;
     protected boolean isDone;
 
-    public Task() {}
+    public Task() {
+
+    }
 
     public String getTitle() {
         return this.title;

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.diffplug.gradle.spotless' version '3.24.2'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
@@ -19,6 +20,10 @@ spotless {
         removeUnusedImports()
         importOrder()
     }
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }
 
 group 'leeyiyuan'

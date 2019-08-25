@@ -1,10 +1,14 @@
-import DukeTask.*;
+package duke;
+
+import duke.task.*;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static String HORIZONTAL_LINE = "____________________________________________________________\n";
+    private static String TASK_DATA_PATH = "../data/taskData.txt";
+
+    static String HORIZONTAL_LINE = "________________________________________________________________\n";
 
     private enum Input {
         list,
@@ -25,7 +29,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = DukeFileUtil.loadTasksFromDisk(TASK_DATA_PATH);
         String[] inputs;
         String input;
 
@@ -210,6 +214,7 @@ public class Duke {
 
             task.setDone(true);
             printTaskDone(task);
+            saveTasksToDisk(tasks);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
@@ -245,6 +250,7 @@ public class Duke {
             Task task = tasks.remove(--taskIndex);
 
             printTaskDeleted(task, tasks.size());
+            saveTasksToDisk(tasks);
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
@@ -264,7 +270,7 @@ public class Duke {
         System.out.println(Duke.HORIZONTAL_LINE);
     }
 
-    private static void validateTaskDescription(String description)
+    static void validateTaskDescription(String description)
             throws DukeInvalidArgumentException {
 
         if (description.length() == 0) {
@@ -276,7 +282,7 @@ public class Duke {
 
     //only performs basic empty timing validation for now since timings are to be treated
     //as strings as stated
-    private static void validateTaskTiming(String timing)
+    static void validateTaskTiming(String timing)
             throws DukeInvalidArgumentException {
         if (timing.length() == 0) {
             throw new DukeInvalidArgumentException(
@@ -285,17 +291,24 @@ public class Duke {
         }
     }
 
-    private static void addAndPrintTask(ArrayList<Task> tasks, Task task)
-            throws DukeInvalidArgumentException {
-
+    private static void addAndPrintTask(ArrayList<Task> tasks, Task task) {
         tasks.add(task);
 
         System.out.println(" Got it. I've added this task:");
         System.out.println("   " + task.getStatusText());
         System.out.printf(" Now you have %d tasks in the list.\n", tasks.size());
         System.out.println(Duke.HORIZONTAL_LINE);
+
+        saveTasksToDisk(tasks);
     }
 
+    private static void saveTasksToDisk(ArrayList<Task> tasks) {
+        try {
+            DukeFileUtil.writeTasksToDisk(tasks, TASK_DATA_PATH);
+        } catch (DukeFileWriteException ex) {
+            displayDukeException(ex);
+        }
+    }
 
     private static void displayDukeException(DukeExceptions ex) {
         System.out.println(ex.getDisplayMsg());

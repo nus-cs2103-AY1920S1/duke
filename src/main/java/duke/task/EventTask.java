@@ -1,8 +1,9 @@
-package DukeTask;
+package duke.task;
 
 public class EventTask extends Task {
     public EventTask(String description, String timing) {
         super(description, timing);
+        this.taskType = TaskType.event;
     }
 
     public String getStatusText() {

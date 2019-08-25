@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeUtil {
     public static String concatStrings(String[] strings, String delimiter, int from, int to) {
         StringBuilder output = new StringBuilder();

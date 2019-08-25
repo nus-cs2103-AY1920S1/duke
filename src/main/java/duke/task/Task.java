@@ -1,8 +1,9 @@
-package DukeTask;
+package duke.task;
 
 abstract public class Task {
     String description, timing;
     boolean isDone;
+    TaskType taskType;
 
     Task(String description) {
         this.description = description;
@@ -20,6 +21,18 @@ abstract public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getTiming() {
+        return this.timing;
     }
 
     //setDone so that if the user accidentally marks something to done, it can be undone

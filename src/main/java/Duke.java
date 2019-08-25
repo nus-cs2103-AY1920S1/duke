@@ -21,7 +21,7 @@ public class Duke {
             "     Bye. Hope to see you again soon!\n" +
             "    ____________________________________________________________\n";
 
-    public static void main(String[] args) throws FileNotFoundException, IOException{
+    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -35,7 +35,7 @@ public class Duke {
 
     private static void loadData() throws FileNotFoundException, ParseException {
         File f = new File("duke.txt"); // create a File for the given file path
-        Scanner sc = new Scanner(f); // create a Scanner using the File as the source
+        Scanner sc = new Scanner(f); // create a ScanneZZ:1q!r using the File as the source
         while (sc.hasNext()) {
             Task t = new Task(""); // dummie task
             String type = sc.next();
@@ -65,7 +65,7 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    private static void readData() throws IOException{
+    private static void readData() throws IOException, ParseException{
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {

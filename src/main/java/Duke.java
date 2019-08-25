@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ public class Duke {
         try {
             readData();
         } catch (FileNotFoundException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
 
         Scanner sc = new Scanner(System.in);
@@ -105,6 +107,12 @@ public class Duke {
         }
         System.out.println("Bye. Hope to see you again soon!");
 
+        try {
+            writeData();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
         // Close the scanner
         sc.close();
     }
@@ -133,6 +141,46 @@ public class Duke {
 
         // Close the scanner
         sc.close();
+    }
+
+    private void writeData() throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        String stringToWrite = "";
+        for (int i = 0; i < counter; i++) {
+            Task taskToWrite = task.get(i);
+            if (taskToWrite instanceof Todo) {
+                stringToWrite += "T:";
+                stringToWrite += writeStatus(taskToWrite);
+                stringToWrite += taskToWrite.getDescription();
+            } else if (taskToWrite instanceof Event) {
+                stringToWrite += "E:";
+                stringToWrite += writeStatus(taskToWrite);
+                stringToWrite += taskToWrite.getDescription() + ":";
+                Event e = (Event) taskToWrite;
+                stringToWrite += e.getTime();
+            } else if (taskToWrite instanceof Deadline) {
+                stringToWrite += "D:";
+                stringToWrite += writeStatus(taskToWrite);
+                stringToWrite += taskToWrite.getDescription() + ":";
+                Deadline d = (Deadline) taskToWrite;
+                stringToWrite += d.getTime();
+            }
+
+            if (i != counter - 1) {
+                stringToWrite += System.lineSeparator();
+            }
+        }
+        fw.write(stringToWrite);
+        fw.close();
+    }
+
+    private String writeStatus(Task t) {
+        String statusIcon = t.getStatusIcon();
+        if (statusIcon.equals("O")) {
+            return "1:";
+        } else {
+            return "0:";
+        }
     }
 
     private int printAddedTask(ArrayList<Task> task, int counter) {

@@ -1,0 +1,3 @@
+T 0 do tutorials
+D 1 finish this | today
+D 0 homework | week 3

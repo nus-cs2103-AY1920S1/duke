@@ -5,31 +5,36 @@ import java.util.Scanner;
 
 public class Duke {
 
+    static List<Task> list;
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        list = Database.retrieveData();
+
         printWelcomeMsg();
 
-        List<Task> list = new LinkedList<>();
         String command = sc.nextLine();
 
         while (!command.equals("")) {
             printHorizontalLine();
             try {
-                if (command.equals("bye")) {
+                if (command.equalsIgnoreCase("bye")) {
                     System.out.println("     Bye. Hope to see you again soon!");
-                } else if (command.equals("list")) {
-                    printTasks(list);
-                } else if (command.length() > 4 && command.substring(0, 4).equals("done")) {
-                    doneTask(list, command);
-                } else if (command.length() > 6 && command.substring(0, 6).equals("delete")) {
-                    deleteTask(list, command);
+                } else if (command.equalsIgnoreCase("list")) {
+                    printTasks();
+                } else if (command.length() > 4 && command.substring(0, 4).equalsIgnoreCase("done")) {
+                    doneTask(command);
+                } else if (command.length() > 6 && command.substring(0, 6).equalsIgnoreCase("delete")) {
+                    deleteTask(command);
                 } else {  // add task or wrong command
                     String[] temp = command.split(" ");
-                    if (!temp[0].equals("deadline") && !temp[0].equals("event") && !temp[0].equals("todo")) {
+                    if (!temp[0].equalsIgnoreCase("deadline")
+                            && !temp[0].equalsIgnoreCase("event")
+                            && !temp[0].equalsIgnoreCase("todo")) {
                         throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     } else {
-                        addTask(list, command);
+                        addTask(command);
                     }
                 }
             } catch (DukeException e) {
@@ -37,6 +42,7 @@ public class Duke {
             } finally {
                 printHorizontalLine();
                 if (command.equals("bye")) {
+                    Database.updateData(list);
                     break;
                 }
                 command = sc.nextLine();
@@ -46,20 +52,22 @@ public class Duke {
         sc.close();
     }
 
-    private static void addTask(List<Task> list, String command) throws DukeException {
+    private static void addTask(String command) throws DukeException {
         String[] words = command.split(" ");
         String type = words[0];
         Task task;
 
         try {
-            if (type.equals("todo")) {
+            if (type.equalsIgnoreCase("todo")) {
                 task = new Todo(command.substring(5));
             } else {
                 int index = command.indexOf('/');
-                if (type.equals("deadline")) {
+                if (type.equalsIgnoreCase("deadline")) {
                     task = new Deadline(command.substring(9, index - 1), command.substring(index + 4));
-                } else {
+                } else if (type.equalsIgnoreCase("event")) {
                     task = new Event(command.substring(6, index - 1), command.substring(index + 4));
+                } else {
+                    throw new IllegalArgumentException("No such task type.");
                 }
             }
             list.add(task);
@@ -68,10 +76,21 @@ public class Duke {
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("     ☹ OOPS!!! The description of a " + type + " cannot be empty.");
+            /*
+            if (type.equalsIgnoreCase("todo")) {
+                throw new DukeException("     ☹ OOPS!!! The description of a " + type + " cannot be empty.");
+            } else if (type.equalsIgnoreCase("deadline")) {
+                throw new DukeException("     ☹ OOPS!!! Format is wrong. Input format: \"deadline (description) /by DD/MM/YYYY 2359\".");
+            } else {
+                throw new DukeException("     ☹ OOPS!!! Format is wrong. Input format: \"event (description) /at DD/MM/YYYY 2359\".");
+            }
+            */
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("     ☹ OOPS!!! The task type does not exist. Three types available: Todo, Deadline, Event.");
         }
     }
 
-    private static void doneTask(List<Task> list, String command) throws DukeException {
+    private static void doneTask(String command) throws DukeException {
         try {
             String[] done = command.split(" ");
             int number = Integer.valueOf(done[1]);
@@ -85,7 +104,7 @@ public class Duke {
         }
     }
 
-    private static void deleteTask(List<Task> list, String command) throws DukeException {
+    private static void deleteTask(String command) throws DukeException {
         try {
             String[] done = command.split(" ");
             int number = Integer.valueOf(done[1]);
@@ -101,7 +120,7 @@ public class Duke {
         }
     }
 
-    private static void printTasks(List<Task> list) throws DukeException {
+    private static void printTasks() throws DukeException {
         if (list.isEmpty()) {
             throw new DukeException("     ☹ OOPS!!! The list is empty.");
         }
@@ -115,7 +134,15 @@ public class Duke {
 
     private static void printWelcomeMsg() {
         printHorizontalLine();
-        System.out.println("     Hello! I'm Duke\n" + "     What can I do for you?");
+        System.out.println("     Hello! I'm Duke\n" + "     What can I do for you?\n");
+
+        if (!list.isEmpty()) {
+            printTasks();
+        } else {
+            System.out.println("     There are no tasks in the list right now.");
+        }
+
+
         printHorizontalLine();
     }
 

@@ -1,17 +1,25 @@
 import java.util.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class Duke {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String[] token;
     String tokenString;
-    String logo = " ____        _        \n"
+    String logo = "  _   _           _      \n" +
+            " | \\ | |_   _  __| | ___ \n" +
+            " |  \\| | | | |/ _` |/ _ \\\n" +
+            " | |\\  | |_| | (_| |  __/\n" +
+            " |_| \\_|\\__,_|\\__,_|\\___|\n";
+    String dukeLogo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     String underline = "____________________________________________________________\n";
     ArrayList<Task> tasks = new ArrayList<Task>();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private String doubleLine(String msg) {
         return underline + msg + "\n" + underline;
@@ -60,6 +68,33 @@ public class Duke {
             }
         } catch (DukeException e) {
             System.out.print(doubleLine(e.getMessage()));
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private String understandTime(String time) throws ParseException {
+        Date temp = sdf.parse(time);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(temp);
+        String dayNumberSuffix = getDayNumberSuffix(cal.DATE);
+        SimpleDateFormat changeFormat = new SimpleDateFormat("d'" + dayNumberSuffix + "' 'of' MMMM yyyy',' haa");
+        return changeFormat.format(temp);
+    }
+
+    private String getDayNumberSuffix(int day) {
+        if(day >= 11 && day <=13) {
+            return "th";
+        }
+        switch (day%10) {
+        case 1:
+            return "st";
+        case 2:
+            return "nd";
+        case 3:
+            return "rd";
+        default:
+            return "th";
         }
     }
 
@@ -69,7 +104,6 @@ public class Duke {
                 throw new DukeException("Give me a goddamn numbered task to do.");
             }
             int taskDone = Integer.parseInt(token[1]) - 1;
-
             if(tasks.size() == 0) {
                 throw new DukeException("You have no tasks to be done.");
             } else if(taskDone >= tasks.size() || taskDone < 0) {

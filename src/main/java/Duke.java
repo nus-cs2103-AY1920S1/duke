@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Duke {
             try {
                 String[] inputs = sc.nextLine().split(" ");
                 String name = "";
-                String time = "";
+                String[] time;
 
                 if(inputs[0].equals("bye")) {
                     printMessage("Bye. Hope to see you again soon!");
@@ -80,14 +81,24 @@ public class Duke {
                     }
 
                     name = inputs[0].substring(0, inputs[0].length() - 1);
-                    time = inputs[1].substring(0, inputs[1].length() - 1);
+                    time = inputs[1].substring(0, inputs[1].length() - 1).split(" ");
+
+                    String[] dateInString = time[0].split("\\/");
+
+                    LocalDateTime dateAndTime = LocalDateTime.of(Integer.parseInt(dateInString[2]),
+                                                    Integer.parseInt(dateInString[1]),
+                                                        Integer.parseInt(dateInString[0]),
+                                                            Integer.parseInt(time[1]) / 100,
+                                                                    Integer.parseInt(time[1]) % 100);
+
+                    System.out.println(dateAndTime.getYear());
 
                     Task newTask;
 
                     if (inputType.equals("deadline")) {
-                        newTask = new Deadline(name, time);
+                        newTask = new Deadline(name, dateAndTime);
                     } else {
-                        newTask = new Event(name, time);
+                        newTask = new Event(name, dateAndTime);
                     }
                     taskList.add(newTask);
                     printMessage("Got it. I've added this task: " +

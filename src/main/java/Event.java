@@ -1,12 +1,15 @@
-public class Event extends Task {
-    private String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String name, String time) {
+public class Event extends Task {
+    private LocalDateTime time;
+
+    public Event(String name, LocalDateTime time) {
         super(name, false);
         this.time = time;
     }
 
-    public Event(String name, String deadLine, boolean done) {
+    public Event(String name, LocalDateTime deadLine, boolean done) {
         super(name, done);
         this.time = deadLine;
     }
@@ -18,6 +21,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
         if(done) {
             s = s + "[E][✓]";
@@ -25,6 +30,6 @@ public class Event extends Task {
             s = s + "[E][✗]";
         }
 
-        return s + " " + name + " (at: " + time + ")";
+        return s + " " + name + " (at: " + time.format(formatter) + ")";
     }
 }

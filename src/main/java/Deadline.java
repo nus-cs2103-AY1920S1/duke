@@ -1,12 +1,15 @@
-public class Deadline extends Task {
-    private String deadLine;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String name, String deadLine) {
+public class Deadline extends Task {
+    private LocalDateTime deadLine;
+
+    public Deadline(String name, LocalDateTime deadLine) {
         super(name, false);
         this.deadLine = deadLine;
     }
 
-    public Deadline(String name, String deadLine, boolean done) {
+    public Deadline(String name, LocalDateTime deadLine, boolean done) {
         super(name, done);
         this.deadLine = deadLine;
     }
@@ -18,6 +21,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
         if(done) {
             s = s + "[D][✓]";
@@ -25,6 +30,6 @@ public class Deadline extends Task {
             s = s + "[D][✗]";
         }
 
-        return s + " " + name + " (by: " + deadLine + ")";
+        return s + " " + name + " (by: " + deadLine.format(formatter) + ")";
     }
 }

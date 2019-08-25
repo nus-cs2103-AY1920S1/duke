@@ -1,8 +1,14 @@
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
 public class Event extends Task {
-    protected String time;
-    public Event (String description, String time) {
+    protected Date time;
+
+    public Event (String description, String time) throws ParseException {
         super(description);
-        this.time = time;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        this.time = format.parse(time);
     }
 
     public String toFileString() {

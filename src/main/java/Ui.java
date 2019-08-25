@@ -1,33 +1,48 @@
 import java.util.Scanner;
 
-public class Ui {
+class Ui {
+    /**
+     * interacting with the user. Scanning input from user.
+     */
     private Scanner sc;
 
-    public Ui() {
+    /**
+     * constructor.
+     */
+    Ui() {
         this.sc = new Scanner(System.in);
     }
 
-    public void showWelcome() {
+    /**
+     * prints welcome message to user.
+     */
+    void showWelcome() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
     }
 
-
-//    public void showLoadingError() {
-//
-//    }
-
-    public String readCommand() {
+    /**
+     * scans the whole line of command.
+     * @return the line of command.
+     */
+    String readCommand() {
         return sc.nextLine();
     }
 
-    public void showLine() {
+    /**
+     * prints a line.
+     */
+    void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
-    public void showError(String message) {
+    /**
+     * print the error
+     * @param message is the error message.
+     */
+    void showError(String message) {
         System.out.println("    " + message);
     }
 }

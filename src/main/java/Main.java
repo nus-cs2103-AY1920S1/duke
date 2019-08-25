@@ -2,15 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
-    static String horizontal_line = "\t____________________________________________________________";
 
     public static void main(String[] args) {
         //start Duke program
         Scanner sc = new Scanner(System.in);
-        System.out.println(horizontal_line);
+        printLine();
         System.out.println("\t  Hello! I'm Duke");
         System.out.println("\t  What can I do for you?");
-        System.out.println(horizontal_line);
+        printLine();
 
         //store the list
         ArrayList<Task> strArr = new ArrayList<>();
@@ -22,35 +21,35 @@ public class Main {
                 String[] inputArr = inputStr.split(" ");
 
                 if (inputArr[0].equals("bye")) {
-                    System.out.println(horizontal_line);
+                    printLine();
                     System.out.println("\t  Bye. Hope to see you again soon!");
-                    System.out.println(horizontal_line);
+                    printLine();
                     break;
                 } else if (inputArr[0].equals("list")) {
-                    System.out.println(horizontal_line);
+                    printLine();
                     System.out.println("\t  Here are the tasks in your list:");
                     for (int i = 0; i < strArr.size(); i++) {
                         System.out.println("\t  " + (i + 1) + ". " + strArr.get(i));
                     }
-                    System.out.println(horizontal_line);
+                    printLine();
                 } else if (inputArr[0].equals("done")) {
                     Integer indexDone = Integer.valueOf(inputArr[1]);
                     strArr.get(indexDone - 1).markAsDone();
 
-                    System.out.println(horizontal_line);
+                    printLine();
                     System.out.println("\t  Nice! I've marked this task as done:");
                     System.out.println("\t    " + strArr.get(indexDone - 1));
-                    System.out.println(horizontal_line);
+                    printLine();
                 } else if (inputArr[0].equals("delete")) {
                     Integer indexRemove = Integer.valueOf(inputArr[1]);
                     Task deletedTask = strArr.get(indexRemove - 1);
                     strArr.remove(indexRemove - 1);
 
-                    System.out.println(horizontal_line);
+                    printLine();
                     System.out.println("\t  Noted. I've removed this task:");
                     System.out.println("\t    " + deletedTask);
                     System.out.println("\t  Now you have " + strArr.size() +" tasks in the list.");
-                    System.out.println(horizontal_line);
+                    printLine();
 
                 } else if (inputArr[0].equals("todo")) {
                     // todo event
@@ -132,10 +131,15 @@ public class Main {
     }
 
     public static void printAddedTask(Task taskAdded, int totalTask) {
-        System.out.println(horizontal_line);
+        printLine();
         System.out.println("\t  Got it. I've added this task:");
         System.out.println("\t    " + taskAdded);
         System.out.println("\t  Now you have " + totalTask +" tasks in the list.");
+        printLine();
+    }
+
+    public static void printLine() {
+        String horizontal_line = "\t____________________________________________________________";
         System.out.println(horizontal_line);
     }
 }

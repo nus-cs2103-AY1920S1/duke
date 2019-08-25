@@ -4,6 +4,8 @@
 public class Deadline extends Task {
     /** Deadline date for the deadline. */
     private String by;
+    /** DateTime of deadline. */
+    private DateTime datetime;
 
     /**
      * Constructor.
@@ -13,6 +15,11 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        try {
+            datetime = new DateTime(by);
+        } catch (InvalidDateTimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -21,6 +28,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), by);
+        return String.format("[D]%s (by: %s)", super.toString(), datetime);
     }
 }

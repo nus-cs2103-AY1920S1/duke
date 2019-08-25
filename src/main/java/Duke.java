@@ -23,9 +23,9 @@ public class Duke {
         System.out.println("     Hello from! I'm Duke\n" + "     What can I do for you?");
         System.out.println(horizontalLine + "\n");
 
-        //Setup Scanner and List
+        //Setup Scanner and read in task list
+        Task.instantiate();
         Scanner sc = new Scanner(System.in);
-        List<Task> store = new ArrayList<Task>();
 
         //Scanner reading
         String userInput = sc.next();
@@ -35,7 +35,7 @@ public class Duke {
                 System.out.println(horizontalLine);
                 System.out.println("     Here are the tasks in your list:");
                 int i = 1;
-                for (Task task : store) {
+                for (Task task : Task.store) {
                     System.out.println("     " + i + ". " + task);
                     i++;
                 }
@@ -48,13 +48,13 @@ public class Duke {
                     System.out.println(horizontalLine + "\n");
                 } else {
                     int taskToBeDone = Integer.parseInt(argument);
-                    if (store.size() < taskToBeDone) {
+                    if (Task.store.size() < taskToBeDone) {
                         System.out.println(horizontalLine);
                         System.err.println("     " + new DoneException("OOPS!!! There is no such task in your list!"));
-                        System.out.println("     " + "Current number of tasks = " + store.size());
+                        System.out.println("     " + "Current number of tasks = " + Task.store.size());
                         System.out.println(horizontalLine + "\n");
                     } else {
-                        Task task = store.get(taskToBeDone - 1);
+                        Task task = Task.store.get(taskToBeDone - 1);
                         if (task.isDone()) {
                             System.out.println(horizontalLine);
                             System.out.println("     Hey! I've already marked this task as done :)");
@@ -77,14 +77,14 @@ public class Duke {
                     System.out.println(horizontalLine + "\n");
                 } else {
                     Task newToDoTask = new ToDo(argument);
-                    store.add(newToDoTask);
+                    Task.store.add(newToDoTask);
                     System.out.println(horizontalLine);
                     System.out.println("     Got it. I've added this task:");
                     System.out.println("       " + newToDoTask);
-                    if (store.size() > 1) {
-                        System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                    if (Task.store.size() > 1) {
+                        System.out.println("     Now you have " + Task.store.size() + " tasks in the list.");
                     } else {
-                        System.out.println("     Now you have " + store.size() + " task in the list.");
+                        System.out.println("     Now you have " + Task.store.size() + " task in the list.");
                     }
                     System.out.println(horizontalLine + "\n");
                 }
@@ -103,14 +103,14 @@ public class Duke {
                         System.out.println(horizontalLine + "\n");
                     } else {
                         Task newDeadlineTask = new Deadline(splitResult[0].strip(), splitResult[1].strip());
-                        store.add(newDeadlineTask);
+                        Task.store.add(newDeadlineTask);
                         System.out.println(horizontalLine);
                         System.out.println("     Got it. I've added this task:");
                         System.out.println("       " + newDeadlineTask);
-                        if (store.size() > 1) {
-                            System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                        if (Task.store.size() > 1) {
+                            System.out.println("     Now you have " + Task.store.size() + " tasks in the list.");
                         } else {
-                            System.out.println("     Now you have " + store.size() + " task in the list.");
+                            System.out.println("     Now you have " + Task.store.size() + " task in the list.");
                         }
                         System.out.println(horizontalLine + "\n");
                     }
@@ -130,14 +130,14 @@ public class Duke {
                         System.out.println(horizontalLine + "\n");
                     } else {
                         Task newEventTask = new Event(splitResult[0].strip(), splitResult[1].strip());
-                        store.add(newEventTask);
+                        Task.store.add(newEventTask);
                         System.out.println(horizontalLine);
                         System.out.println("     Got it. I've added this task:");
                         System.out.println("       " + newEventTask);
-                        if (store.size() > 1) {
-                            System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                        if (Task.store.size() > 1) {
+                            System.out.println("     Now you have " + Task.store.size() + " tasks in the list.");
                         } else {
-                            System.out.println("     Now you have " + store.size() + " task in the list.");
+                            System.out.println("     Now you have " + Task.store.size() + " task in the list.");
                         }
                         System.out.println(horizontalLine + "\n");
                     }
@@ -150,21 +150,21 @@ public class Duke {
                     System.out.println(horizontalLine + "\n");
                 } else {
                     int taskToDelete = Integer.parseInt(argument);
-                    if (store.size() < taskToDelete) { //check if it's a valid delete
+                    if (Task.store.size() < taskToDelete) { //check if it's a valid delete
                         System.out.println(horizontalLine);
                         System.err.println("     " + new DeleteException("OOPS!!! There is no such task in your list!"));
-                        System.out.println("     " + "Current number of tasks = " + store.size());
+                        System.out.println("     " + "Current number of tasks = " + Task.store.size());
                         System.out.println(horizontalLine + "\n");
                     } else {
-                        Task task = store.get(taskToDelete - 1);
-                        store.remove(taskToDelete - 1);
+                        Task task = Task.store.get(taskToDelete - 1);
+                        Task.store.remove(taskToDelete - 1);
                         System.out.println(horizontalLine);
                         System.out.println("     Noted I've removed this task:");
                         System.out.println("       " + task);
-                        if (store.size() > 1) {
-                            System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                        if (Task.store.size() > 1) {
+                            System.out.println("     Now you have " + Task.store.size() + " tasks in the list.");
                         } else {
-                            System.out.println("     Now you have " + store.size() + " task in the list.");
+                            System.out.println("     Now you have " + Task.store.size() + " task in the list.");
                         }
                         System.out.println(horizontalLine + "\n");
                     }
@@ -177,6 +177,8 @@ public class Duke {
             userInput = sc.next();
         }
 
+        //Store data before clean up
+        Task.storeToDatabase();
         //Bye message
         System.out.println(horizontalLine);
         System.out.println("     Bye. Hope to see you again soon!");

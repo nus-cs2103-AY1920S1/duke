@@ -7,14 +7,26 @@ import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.task.TodoTask;
 import com.leeyiyuan.ui.Ui;
 
+/** 
+ * Represents a Command to add a TodoTask. 
+ */
 public class AddTodoTaskCommand extends Command {
 
+    /** Title for the new TodoTask. */
     protected String title;
 
+    /**
+     * Constructs an AddTodoTaskCommand from a title.
+     *
+     * @param title The title for the new DeadlineTask.
+     */
     public AddTodoTaskCommand(String title) {
         this.title = title;
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws CommandExecuteException, StorageException {

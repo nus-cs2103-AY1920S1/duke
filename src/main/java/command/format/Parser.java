@@ -4,10 +4,17 @@ package com.leeyiyuan.command.format;
 import com.leeyiyuan.command.Command;
 import java.util.ArrayList;
 
+/** 
+ * Represents a parser to parse Commands using a fixed list of CommandFormatters. 
+ */
 public class Parser {
 
+    /** Fixed list of CommandFormatters used by Parser. */
     protected ArrayList<CommandFormatter> commandFormatters;
 
+    /** 
+     * Constructs a Parser using a fixed list of CommandFormatters. 
+     */
     public Parser() {
         this.commandFormatters = new ArrayList<CommandFormatter>();
         this.commandFormatters.add(new AddDeadlineTaskCommandFormatter());
@@ -19,6 +26,13 @@ public class Parser {
         this.commandFormatters.add(new TaskDoneCommandFormatter());
     }
 
+    /**
+     * Returns a Command parsed from a string of text.
+     *
+     * @param text Text to parse Command from.
+     * @return Command parsed from text.
+     * @throws CommandParseException If Command cannot be parsed from text.
+     */
     public Command parse(String text) throws CommandParseException {
         Command command = null;
 

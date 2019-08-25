@@ -6,8 +6,14 @@ import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.ui.Ui;
 
+/** 
+ * Represents a Command to list existing tasks. 
+ */
 public class ListTasksCommand extends Command {
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println("Here are the tasks in your list:");

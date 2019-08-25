@@ -7,8 +7,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
+/** 
+ * Represents a formatter for a DeadlineTask.
+ */
 public class DeadlineTaskFormatter extends TaskFormatter {
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public DeadlineTask parse(String text) throws TaskParseException {
         if (!Pattern.matches("^D \\| [01] \\| .+ \\| .+$", text)) {
@@ -23,6 +29,9 @@ public class DeadlineTaskFormatter extends TaskFormatter {
         return task;
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public String format(Task task) throws TaskFormatException {
         if (!(task instanceof DeadlineTask)) {

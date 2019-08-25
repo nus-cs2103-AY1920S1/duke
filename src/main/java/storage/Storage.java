@@ -15,12 +15,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage for tasks persistence.
+ */
 public class Storage {
 
+    /** Path of file used to back Storage. */
     protected String filePath;
 
+    /** Fixed list of TaskFormatters. */
     protected ArrayList<TaskFormatter> taskFormatters;
 
+    /**
+     * Constructs a Storage using a file path.
+     *
+     * @param filePath Path of file used to back Storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.taskFormatters = new ArrayList<TaskFormatter>();
@@ -29,6 +39,12 @@ public class Storage {
         this.taskFormatters.add(new EventTaskFormatter());
     }
 
+    /**
+     * Returns a list of task persisted by the Storage.
+     *
+     * @return List of task persisted by the Storage.
+     * @throws StorageException If there was an error loading the tasks.
+     */
     public ArrayList<Task> load() throws StorageException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner scanner = null;
@@ -62,6 +78,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Persists a list of tasks into the Storage.
+     *
+     * @param tasks List of tasks to persist.
+     * @throws StorageException If tasks cannot be persisted into Storage.
+     */
     public void save(ArrayList<Task> tasks) throws StorageException {
         FileWriter fileWriter = null;
 

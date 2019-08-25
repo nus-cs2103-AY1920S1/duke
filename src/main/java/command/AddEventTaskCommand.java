@@ -8,17 +8,31 @@ import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.ui.Ui;
 import java.time.LocalDateTime;
 
+/** 
+ * Represents a Command to add an EventTask. 
+ */
 public class AddEventTaskCommand extends Command {
 
+    /** Title for new EventTask. */
     protected String title;
 
+    /** At value for the new DeadlineTask. */
     protected LocalDateTime at;
 
+    /**
+     * Constructs an AddEventTaskCommand from a title and an at value.
+     *
+     * @param title The title for the new EventTask.
+     * @param at The at value for the new EventTask.
+     */
     public AddEventTaskCommand(String title, LocalDateTime at) {
         this.title = title;
         this.at = at;
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws CommandExecuteException, StorageException {

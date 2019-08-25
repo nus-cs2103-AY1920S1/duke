@@ -7,14 +7,26 @@ import com.leeyiyuan.task.Task;
 import com.leeyiyuan.task.TaskList;
 import com.leeyiyuan.ui.Ui;
 
+/** 
+ * Represents a Command to mark an existing Task as done. 
+ */
 public class TaskDoneCommand extends Command {
 
+    /** Index of the Task to mark as done. */
     protected int index;
 
+    /**
+     * Constructs a TaskDoneCommand from an index.
+     *
+     * @param index The index of the Task to mark as done.
+     */
     public TaskDoneCommand(int index) {
         this.index = index;
     }
 
+    /** 
+     * {@inheritDoc} 
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws CommandExecuteException, StorageException {

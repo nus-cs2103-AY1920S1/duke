@@ -7,6 +7,10 @@ public class DeadLine extends Task {
     this.by = by;
   }
 
+  public String getDeadLine() {
+    return this.by;
+  }
+
   @Override
   public String toString() {
     return "[D] " + super.toString() + " (by:" + by + ")";

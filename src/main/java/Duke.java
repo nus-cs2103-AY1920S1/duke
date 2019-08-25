@@ -158,7 +158,7 @@ public class Duke {
                     System.out.println("\t____________________________________________________________\n");
 
                     // Save the command in taskList.txt
-                    String text = "done " + str + "\n";
+                    String text = "todo " + str + "\n";
                     appendToFile(f.getAbsolutePath(), text);
                 } else if (command.equals("deadline")) {
 
@@ -181,7 +181,7 @@ public class Duke {
                     System.out.println("\n\tNow you have " + taskList.size() + " tasks in the list.");
                     System.out.println("\t____________________________________________________________\n");
                     // Save the command in taskList.txt
-                    String text = "deadline " + wordArr[0] + " /by " + wordArr[1] + "\n";
+                    String text = "deadline " + wordArr[0] + " /by " + date + "\n";
                     appendToFile(f.getAbsolutePath(), text);
                 } else if (command.equals("event")) {
 
@@ -205,7 +205,7 @@ public class Duke {
                     System.out.println("\t____________________________________________________________\n");
 
                     // Save the command in taskList.txt
-                    String text = "event " + wordArr[0] + " /at " + wordArr[1] + "\n";
+                    String text = "event " + wordArr[0] + " /at " + date + "\n";
                     appendToFile(f.getAbsolutePath(), text);
 
                 } else if (command.equals("delete")) {

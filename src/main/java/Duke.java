@@ -50,6 +50,7 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n");
         while (!input.equalsIgnoreCase("bye")) {
+            System.out.println(input);
             if (input.length() == 4 && input.substring(0, 4).equals("list")) {
                 String result = "";
                 for (int i = 0; i < tasks.size(); i = i + 1) {

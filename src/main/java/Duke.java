@@ -1,8 +1,11 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static void main(String[] args) throws ParseException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

@@ -1,6 +1,6 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Duke {
     // String Constants used for Duke output
@@ -143,7 +143,7 @@ public class Duke {
                 }
 
                 System.out.println(ADD_TASK);
-                System.out.print("       "); //indentation
+                System.out.print("       "); // indentation
                 System.out.println(list.get(n));
 
                 //After storing user input into array, increment index

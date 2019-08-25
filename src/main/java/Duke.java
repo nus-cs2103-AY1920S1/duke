@@ -1,27 +1,68 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Duke {
-    public static void main(String[] args) {
+    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static String indent = "    ";
+    private static String line = "____________________________________________________________";
+    private static String greeting = "    ____________________________________________________________\n" +
+            "     Hello! I'm Duke\n" +
+            "     What can I do for you?\n" +
+            "    ____________________________________________________________\n";
+    private static String bye = "    ____________________________________________________________\n" +
+            "     Bye. Hope to see you again soon!\n" +
+            "    ____________________________________________________________\n";
+
+    public static void main(String[] args) throws FileNotFoundException, IOException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String indent = "    ";
-        String line = "____________________________________________________________";
-        String greeting = "    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n";
-        String bye = "    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________\n";
+        greet();
+        loadData();
+        readData();
+    }
 
+    private static void loadData() throws FileNotFoundException{
+        File f = new File("duke.txt"); // create a File for the given file path
+        Scanner sc = new Scanner(f); // create a Scanner using the File as the source
+        while (sc.hasNext()) {
+            Task t = new Task(""); // dummie task
+            String type = sc.next();
+            int done = sc.nextInt();
+            String name = sc.next();
+
+            switch(type) {
+                case "T":
+                    t = new Todo(name);
+                    break;
+                case "D":
+                    t = new Deadline(name, sc.next());
+                    break;
+                case "E":
+                    t = new Event(name, sc.next());
+                    break;
+            }
+
+            if (done == 1) {
+                t.markAsDone();
+            }
+            taskList.add(t);
+        }
+    }
+
+    private static void greet() {
         System.out.println(greeting);
+    }
+
+    private static void readData() throws IOException{
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<>();
 
         while (sc.hasNext()) {
             String command = sc.next();
@@ -134,8 +175,24 @@ public class Duke {
                 System.out.println(indent + " Now you have "  + taskList.size() + " tasks in the list.");
                 System.out.println(indent + line + "\n");
             }
+            saveData();
         }
         sc.close();
+    }
 
+    private static void saveData() throws IOException {
+        FileWriter fw = new FileWriter("duke.txt");
+        for (Task task : taskList) {
+            String name = task.getDescription();
+            int status = task.getStatus()? 1 : 0;
+            if (task instanceof Todo) {
+                fw.write("T " + status + " " + name + "\n");
+            } else if (task instanceof Deadline) {
+                fw.write("D " + status + " " + name + " " + ((Deadline) task).getBy() + "\n");
+            } else {
+                fw.write("E " + status + " " + name + " " +((Event) task).getAt() + "\n");
+            }
+        }
+        fw.close();
     }
 }

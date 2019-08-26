@@ -45,25 +45,17 @@ list
     2. [D][-] CS2103 Project (by: 12nd August 2019)
     3. [E][+] birthday partyy (at: 15th August 2019 6pm)
     ____________________________________________________________
-delete 2
+find CS
     ____________________________________________________________
-     Noted. I've removed this task: 
-       [E][+] birthday partyy (at: 15th August 2019 6pm)
-     Now you have 2 tasks in the list.
-    ____________________________________________________________
-e
-    ____________________________________________________________
-    Sorry! I don't know what this command does: e
-    ____________________________________________________________
-somewhat
-    ____________________________________________________________
-    Sorry! I don't know what this command does: somewhat
+    Here are the matching tasks in your list:
+    2. [D][-] CS2103 Project (by: 12nd August 2019)
     ____________________________________________________________
 list
     ____________________________________________________________
     Here are the tasks in your list:
     1. [T][+] read book
     2. [D][-] CS2103 Project (by: 12nd August 2019)
+    3. [E][+] birthday partyy (at: 15th August 2019 6pm)
     ____________________________________________________________
 bye
     ____________________________________________________________

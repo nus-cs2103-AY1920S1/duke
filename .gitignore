@@ -15,3 +15,6 @@ bin/
 
 # All class files
 *.class
+
+# duke.txt file
+data/duke.txt

@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
 
     protected String toExportFormat() {
-        return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + this.by;
+        return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + Duke.formatDate(this.by);
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Event extends Task {
     }
 
     protected String toExportFormat() {
-        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + this.at;
+        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + Duke.formatDate(this.at);
     }
 
     @Override

@@ -1,18 +1,22 @@
-public class DeadlineTask extends Task {
-    protected String time;
+import java.util.Calendar;
 
-    public DeadlineTask(String description, String time) {
+public class DeadlineTask extends Task {
+    protected Calendar time;
+
+    public DeadlineTask(String description, Calendar time) {
         super(description);
         this.time = time;
     }
 
     @Override
     public String formattedString() {
-        return "D | " + super.formattedString() + " | " + this.time + "\n";
+        return "D | " + super.formattedString() + " | "
+                + String.format("%1$te/%1$tm/%1$tY %1$tH%1$tM", this.time) + "\n";
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.time + ")";
+        return "[D]" + super.toString() + " (by: "
+                + String.format("%1$te of %1$tB, %1$tY, at %1$tH%1$tM hrs", this.time) + ")";
     }
 }

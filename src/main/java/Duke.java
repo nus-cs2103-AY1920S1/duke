@@ -2,9 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -27,13 +25,21 @@ public class Duke {
                     }
                     taskList.add(currentTask);
                 } else if (lineType.equals("D")) {
-                    Task currentTask = new DeadlineTask(lineElements[2], lineElements[3]);
+                    String[] taskTimeParsed = lineElements[3].split("[ /]");
+                    Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
+                            Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
+                            Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
+                    Task currentTask = new DeadlineTask(lineElements[2], taskTime);
                     if (lineElements[1].equals("+")) {
                         currentTask.markAsDone();
                     }
                     taskList.add(currentTask);
                 } else if (lineType.equals("E")) {
-                    Task currentTask = new EventTask(lineElements[2], lineElements[3]);
+                    String[] taskTimeParsed = lineElements[3].split("[ /]");
+                    Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
+                            Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
+                            Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
+                    Task currentTask = new EventTask(lineElements[2], taskTime);
                     if (lineElements[1].equals("+")) {
                         currentTask.markAsDone();
                     }
@@ -67,9 +73,9 @@ public class Duke {
                         int index = Integer.parseInt(input.split(" ", 2)[1]);
                         taskList.get(index - 1).markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
-                    } catch (NumberFormatException error) { // if not a number is entered after 'done'
+                    } catch (NumberFormatException e) { // if not a number is entered after 'done'
                         throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
-                    } catch (IndexOutOfBoundsException error) { // if an invalid number is entered after 'done'
+                    } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'done'
                         throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
                     }
                 } else if (instruction.equals("delete")) { // Then, check if task is marked delete
@@ -81,9 +87,9 @@ public class Duke {
                         Task currentTask = taskList.remove(index - 1);
                         System.out.println("Noted. I've removed this task:\n  " + currentTask);
                         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                    } catch (NumberFormatException error) { // if not a number is entered after 'delete'
+                    } catch (NumberFormatException e) { // if not a number is entered after 'delete'
                         throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
-                    } catch (IndexOutOfBoundsException error) { // if an invalid number is entered after 'delete'
+                    } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'delete'
                         throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
                     }
                 } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")) {
@@ -102,12 +108,16 @@ public class Duke {
                                 throw new IncorrectTaskTimeFormatException("OOPS!!! No ' /by ' or ' /at ' detected! Please use the correct format!");
                             }
                             String taskContent = taskDescription.split("/by|/at", 2)[0].strip();
-                            String taskTime = taskDescription.split("/by|/at", 2)[1].strip(); // time must be parsed via '/by' or '/at'
+                            String taskTimeBeforeParse = taskDescription.split("/by|/at", 2)[1].strip(); // time must be parsed via '/by' or '/at'
+                            String[] taskTimeParsed = taskTimeBeforeParse.split("[ /]");
+                            Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
+                                    Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
+                                    Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
                             if (taskContent.matches("\\s*")) { // if the task's description is only whitespace
                                 throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
-                            } else if (taskTime.matches("\\s*")) { // if the task's time listed is only whitespace
+                            } /* else if (taskTime.matches("\\s*")) { // if the task's time listed is only whitespace
                                 throw new EmptyTaskTimeException("OOPS!!! Please include a time for your task!");
-                            }
+                            }*/
                             if (instruction.equals("deadline")) {
                                 Task currentTask = new DeadlineTask(taskContent, taskTime);
                                 taskList.add(currentTask);
@@ -118,15 +128,15 @@ public class Duke {
                                 System.out.println("Got it. I've added this task:\n  " + currentTask);
                             }
                         }
-                    } catch (IndexOutOfBoundsException error) { // if the task description is empty
+                    } catch (IndexOutOfBoundsException e) { // if the task description is empty
                         throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
                     }
                     System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 } else { // if an invalid instruction is entered
                     throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException error) {
-                System.out.println(error.getMessage());
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
 

@@ -1,13 +1,13 @@
 public class Events extends Task {
 
-    protected String date;
+    protected DateTime date;
 
-    public Events(String description, String date, boolean isDone) {
+    public Events(String description, DateTime date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }
 
-    public String getDate() {
+    public DateTime getDate() {
         return this.date;
     }
 

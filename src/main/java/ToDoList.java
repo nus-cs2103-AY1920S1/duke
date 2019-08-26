@@ -33,17 +33,22 @@ public class ToDoList {
                 done = false;
             }
 
-            switch (inputArr[0]) {
-            case "T":
-                clone.add(new ToDos(inputArr[2], done));
-                break;
-            case "D":
-                clone.add(new Deadlines(inputArr[2], inputArr[3], done));
-                break;
-            case "E":
-                clone.add(new Events(inputArr[2], inputArr[3], done));
-                break;
+            try {
+                switch (inputArr[0]) {
+                case "T":
+                    clone.add(new ToDos(inputArr[2], done));
+                    break;
+                case "D":
+                    clone.add(new Deadlines(inputArr[2], new DateTime(inputArr[3]), done));
+                    break;
+                case "E":
+                    clone.add(new Events(inputArr[2], new DateTime(inputArr[3]), done));
+                    break;
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
             }
+
         }
 
         return clone;
@@ -55,16 +60,18 @@ public class ToDoList {
         whereToAdd.add(new ToDos(message, isDone));
     }
 
-    private void addEvent(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) {
-        String date, message;
-        date = whatToAdd.substring(whatToAdd.indexOf("/") + 4);
+    private void addEvent(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) throws DukeException, NumberFormatException {
+        String message;
+        DateTime date;
+        date = new DateTime(whatToAdd.substring(whatToAdd.indexOf("/") + 4));
         message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1, whatToAdd.indexOf("/") - 1);
         whereToAdd.add(new Events(message, date, isDone));
     }
 
-    private void addDeadline(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) {
-        String date, message;
-        date = whatToAdd.substring(whatToAdd.indexOf("/") + 4);
+    private void addDeadline(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) throws DukeException, NumberFormatException {
+        String message;
+        DateTime date;
+        date = new DateTime(whatToAdd.substring(whatToAdd.indexOf("/") + 4));
         message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1, whatToAdd.indexOf("/") - 1);
         whereToAdd.add(new Deadlines(message, date, isDone));
     }
@@ -117,7 +124,11 @@ public class ToDoList {
                 System.out.println(border);
             } else {
                 String[] temp = input.split(" ");
-                if (temp[0].equals("done")) {
+                if (temp.length == 0) {
+                    System.out.println(border);
+                    System.out.println("     Please input something :(.");
+                    System.out.println(border);
+                } else if (temp[0].equals("done")) {
                     try {
                         int done = Integer.parseInt(temp[1]) - 1;
                         arr.get(done).markAsDone();
@@ -152,6 +163,8 @@ public class ToDoList {
                     }
                 } else { //command to add task to list
 
+                    DateTime date;
+                    String message;
                     boolean added = false;
 
                     try {
@@ -191,6 +204,14 @@ public class ToDoList {
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println(border);
                         System.out.println("     Please input a task and date.");
+                        System.out.println(border);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(border);
+                        System.out.println("     Please input a valid date and time.");
+                        System.out.println(border);
+                    } catch (NumberFormatException e) {
+                        System.out.println(border);
+                        System.out.println("     Please input a valid date and time.");
                         System.out.println(border);
                     }
 

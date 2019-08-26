@@ -1,13 +1,14 @@
 public class Deadlines extends Task {
 
-    protected String date;
+    protected DateTime date;
 
-    public Deadlines(String description, String date, boolean isDone) {
+
+    public Deadlines(String description, DateTime date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }
 
-    public String getDate() {
+    public DateTime getDate() {
         return this.date;
     }
 

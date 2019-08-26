@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList stores ArrayList of Task(s).
+ */
 public class TaskList {
 
     private ArrayList<Task> arr;
@@ -33,7 +36,7 @@ public class TaskList {
     }
 
     public int getSize() {
-       return this.arr.size();
+        return this.arr.size();
     }
 
     public void markAsDone(int index) {
@@ -43,7 +46,5 @@ public class TaskList {
     public Task getTask(int index) {
         return this.arr.get(index);
     }
-
-
 
 }

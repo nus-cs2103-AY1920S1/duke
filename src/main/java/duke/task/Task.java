@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Task object class.
+ * Inherited by Event, Deadline and ToDo.
+ */
+
 public class Task {
 
     protected String taskName;

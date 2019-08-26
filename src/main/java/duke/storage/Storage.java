@@ -14,6 +14,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Deals with saving and loading of tasks in duke.txt.
+ */
+
 public class Storage {
 
     private File f;
@@ -24,6 +28,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads the ArrayList of Task(s) from duke.txt.
+     * @return ArrayList of Task(s)
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
 
         ArrayList<Task> arr = new ArrayList<>();
@@ -53,6 +62,11 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Writes taskList to duke.txt.
+     * @param taskList
+     * @throws IOException
+     */
     public void writeListToFile(TaskList taskList) throws IOException {
         ArrayList<Task> arr = taskList.getArr();
 

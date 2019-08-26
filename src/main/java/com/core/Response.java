@@ -113,7 +113,7 @@ public enum Response {
     }
 
     /**
-     * Given an index and state object, check if index in bounds of list in state object
+     * Given an index and state object, check if index in bounds of list in state object.
      *
      * @param index index to check
      * @param s     state object
@@ -128,7 +128,7 @@ public enum Response {
     }
 
     /**
-     * Assuming input is "<head>.*<mid>.*" returns the two texts between them
+     * Assuming input is "(head).*(mid).*" returns the two texts between them.
      *
      * @param input input string
      * @param head  head regex match
@@ -142,7 +142,7 @@ public enum Response {
     }
 
     /**
-     * Insert task into list and prints message string
+     * Insert task into list and prints message string.
      *
      * @param t task to be added
      * @param s state object

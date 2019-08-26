@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class representing a list of tasks.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -22,8 +21,9 @@ public class TaskList {
         return tasks.get(index - 1);
     }
 
-    public void setTaskAtIndexDone(int index) throws IndexOutOfBoundsException{
+    public Task setTaskAtIndexDone(int index) throws IndexOutOfBoundsException{
         tasks.get(index - 1).setDone();
+        return tasks.get(index - 1);
     }
 
     public Task removeTaskAtIndex(int index) {
@@ -34,4 +34,7 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
 }

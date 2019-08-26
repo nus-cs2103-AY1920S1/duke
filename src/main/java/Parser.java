@@ -13,18 +13,20 @@ public class Parser {
         return command.equals("bye");
     }
     /**
-     * Parses the command that typed by the user.
+     * Returns the command by parsing the command string that typed by the user.
      * @param command the command typed by the user
      * @param taskList a list stores all the tasks
      * @param ui user interface to show messages
+     * @return the command by parsing the command string that typed by the user.
      * @throws IllegalDescriptionException If the description of the task is illegal.
      * @throws IllegalCommandException If the command is illegal.
      * @throws IllegalIndexOfTaskException If the index provided is illegal.
      */
-    public void parseCommand(String command, TaskList taskList, Ui ui)
+    public Command parseCommand(String command, TaskList taskList, Ui ui)
             throws IllegalIndexOfTaskException, IllegalDescriptionException, IllegalCommandException {
-        if (command.equals("list")) {
-            ui.showTasks(taskList);
+        Command cmd;
+        if (command.equals(ListCommand.COMMAND_WORD)) {
+            cmd = new ListCommand();
         } else {
             int indexOfSpace = command.indexOf(' ');
             //if there is no space, assume that the string is a command type
@@ -35,51 +37,32 @@ public class Parser {
             String type = command.substring(0, indexOfSpace);
             String description = command.substring(indexOfSpace).strip();
 
-            if (type.equals("done")) {
-                try {
-                    int index = Integer.valueOf(description);
-                    taskList.setTaskAtIndexDone(index);
-                    ui.showDoneTask(taskList.getTaskAtIndex(index));
-                } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new IllegalIndexOfTaskException(
-                            "Please provide an valid index of the task.");
-                }
-            } else if (type.equals("delete")) {
-                try {
-                    int index = Integer.valueOf(description);
-                    Task removedTask = taskList.removeTaskAtIndex(index);
-                    ui.showRemovedTask(removedTask, taskList.getSize());
-                } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new IllegalIndexOfTaskException(
-                            "Please provide an valid index of the task.");
-                }
-            } else if (type.equals("todo")) {
-                Task task = new ToDo(description.strip());
-                taskList.addTask(task);
-                ui.showAddedTask(task, taskList.getSize());
-            } else if (type.equals("deadline")) {
+            if (type.equals(DoneCommand.COMMAND_WORD)) {
+                cmd = new DoneCommand(Integer.parseInt(description));
+            } else if (type.equals(DeleteCommand.COMMAND_WORD)) {
+                cmd = new DeleteCommand(Integer.parseInt(description));
+            } else if (type.equals(ToDoCommand.COMMAND_WORD)) {
+                cmd = new ToDoCommand(description.strip());
+            } else if (type.equals(DeadlineCommand.COMMAND_WORD)) {
                 int sep = description.indexOf("/by");
                 if (sep == -1) {
                     throw new IllegalDescriptionException("The format of deadline task is wrong.");
                 }
-                Task task = new Deadline(description.substring(0, sep).strip(),
+                cmd = new DeadlineCommand(description.substring(0, sep).strip(),
                                 parseDate(description.substring(sep + 3).strip()));
-                taskList.addTask(task);
-                ui.showAddedTask(task, taskList.getSize());
-            } else if (type.equals("event")) {
+            } else if (type.equals(EventCommand.COMMAND_WORD)) {
                 int sep = description.indexOf("/at");
                 if (sep == -1) {
                     throw new IllegalDescriptionException("The format of event task is wrong.");
                 }
-                Task task = new Event(description.substring(0, sep).strip(),
+                cmd = new EventCommand(description.substring(0, sep).strip(),
                                 parseDate(description.substring(sep + 3).strip()));
-                taskList.addTask(task);
-                ui.showAddedTask(task, taskList.getSize());
             } else {
                 throw new IllegalCommandException(
                         "I'm sorry, but I don't know what that means :-(");
             }
         }
+        return cmd;
     }
 
     /**

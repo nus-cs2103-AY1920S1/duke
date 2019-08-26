@@ -26,9 +26,24 @@ public class Parser {
                 return new IncorrectCommand();
             }
             return new ToDoCommand(description);
-
+        case "deadline":
+            if (userInput.indexOf("/by") == -1) {
+                return new IncorrectCommand();
+            } else {
+                String[] arguments = userInput.trim().substring(separatedInputs[0].length()).trim().
+                        split("/by");
+                return new DeadlineCommand(arguments);
+            }
+        case "event":
+            if (userInput.indexOf("/at") == -1) {
+                return new IncorrectCommand();
+            } else {
+                String[] arguments = userInput.trim().substring(separatedInputs[0].length()).trim().
+                        split("/at");
+                return new EventCommand(arguments);
+            }
+        default:
+            return new IncorrectCommand();
         }
-
-        return new IncorrectCommand();
     }
 }

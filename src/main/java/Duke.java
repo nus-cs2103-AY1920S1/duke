@@ -1,8 +1,11 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws ParseException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -55,13 +58,15 @@ public class Duke {
                     } else if (next.equals("deadline")) {
                         int index = description.indexOf("/");
                         String byWhen = description.substring(index + 4, description.length());
+                        Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(byWhen);
                         String desc = description.substring(1, index - 1);
-                        t = new Deadline(desc, byWhen);
+                        t = new Deadline(desc, date);
                     } else {
                         int index = description.indexOf("/");
                         String at = description.substring(index + 4, description.length());
+                        Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
                         String desc = description.substring(1, index - 1);
-                        t = new Event(desc, at);
+                        t = new Event(desc, date);
                     }
                     list.add(t);
                     printTask(count, t);

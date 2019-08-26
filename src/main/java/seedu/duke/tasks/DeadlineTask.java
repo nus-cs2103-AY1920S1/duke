@@ -1,6 +1,7 @@
 package seedu.duke.tasks;
 
 public class DeadlineTask extends Task {
+    private static final long serialVersionUID = -2528903469087431L;
     private final String deadline;
 
     public DeadlineTask(String description, String deadline) {

@@ -8,14 +8,11 @@ import java.lang.System;
 import java.util.List;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 /**
  *  Deals with loading data onto file or reading from file
  *  this class is called by TaskList to save list of tasks locally
  *  for the next session
  */
-=======
->>>>>>> branch-A-CodingStandard
 class Storage implements TaskObserver, StorageInterface {
 
 

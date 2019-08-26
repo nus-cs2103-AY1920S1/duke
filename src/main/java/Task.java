@@ -7,15 +7,20 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 
-    public void markAsDone() {
+    protected void markAsDone() {
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

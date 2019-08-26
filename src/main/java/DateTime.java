@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class DateTime {
 
     public DateTime() {}
@@ -9,11 +7,8 @@ public class DateTime {
      */
     public static String getDate(String date) throws DateException {
         String[] ddmmyy = date.split("/");
-        //need to add suffix
         String dd = addDaySuffix(ddmmyy[0]) + " of ";
-        //need to change to words
         String mm = wordMonth(ddmmyy[1]) + " ";
-        //no change needed
         String yy = ddmmyy[2] + ", ";
         return dd + mm + yy;
     }
@@ -123,5 +118,4 @@ public class DateTime {
             return "";
         }
     }
-
 }

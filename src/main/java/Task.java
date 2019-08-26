@@ -20,6 +20,9 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /*
+    This method changes the task to be done when the task has yet to be done.
+     */
     public void markAsDone() throws DukeException {
         if (this.isDone == true) {
             throw new DukeException("This task has already been done!");
@@ -28,6 +31,9 @@ public class Task {
         }
     }
 
+    /*
+    This method records the loaded task as done.
+     */
     public void recordDone() {
         this.isDone = true;
     }

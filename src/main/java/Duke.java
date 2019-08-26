@@ -107,6 +107,9 @@ public class Duke {
         return toReturn;
     }
 
+    /*
+    This method generates the Todo task that was loaded from the hard drive.
+     */
     private static ToDo remakeTodo(String[] info) {
         //System.out.println(info[1]);
         ToDo ret = new ToDo(info[2].trim());
@@ -116,6 +119,9 @@ public class Duke {
         return ret;
     }
 
+    /*
+    This method generates the Deadline task that was loaded from the hard drive.
+     */
     private static Deadline remakeDeadline(String[] info) {
         //System.out.println(info[1]);
         Deadline ret = new Deadline(info[2].trim(), info[3].trim());
@@ -125,6 +131,9 @@ public class Duke {
         return ret;
     }
 
+    /*
+    This method generates the Event task that was loaded from the hard drive.
+     */
     private static Event remakeEvent(String[] info) {
         //System.out.println(info[1]);
         Event ret = new Event(info[2].trim(), info[3].trim());
@@ -174,7 +183,7 @@ public class Duke {
     }
 
     /*
-    This method overwrites the information from Duke to the hard disk. This is done to automatically update all
+    This method overwrites the information from Duke to the hard disk. This is done to automatically update all tasks in the hard disk.
      */
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -245,7 +254,6 @@ public class Duke {
                     throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as 29/2/2019 1800-2000");
                 }
             }
-
         }
     }
 
@@ -272,7 +280,6 @@ public class Duke {
                     throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as 29/2/2019 1800");
                 }
             }
-
         }
     }
 

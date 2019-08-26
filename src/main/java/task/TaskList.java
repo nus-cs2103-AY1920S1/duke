@@ -1,9 +1,11 @@
 package task;
 
-import task.Task;
-
 import java.util.ArrayList;
 
+/**
+ * Encapsulates tasks into a TaskList.
+ * Responsible for recording all tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;

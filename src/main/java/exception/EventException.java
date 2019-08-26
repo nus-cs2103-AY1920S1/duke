@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Responsible for problems occured during Event task handling.
+ */
 public class EventException extends DukeException {
 
     public EventException() {

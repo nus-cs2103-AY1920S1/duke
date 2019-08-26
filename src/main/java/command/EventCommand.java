@@ -17,6 +17,13 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Execute creating Event task.
+     * Output what is needed.
+     * @param tasks the TaskList.
+     * @param ui the User Interface which responsible for every output printing.
+     * @param storage user's hard disk storage.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeParseException, EventException {
         if (input.length <= 1) {
             throw new EventException();

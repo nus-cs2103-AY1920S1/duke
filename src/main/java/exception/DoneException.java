@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Responsible for problems occured during Done task handling.
+ */
 public class DoneException extends DukeException {
 
     public DoneException() {

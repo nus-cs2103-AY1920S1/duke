@@ -1,7 +1,25 @@
-import command.*;
+import command.Command;
+import command.ListCommand;
+import command.DoneCommand;
+import command.DeleteCommand;
+import command.ByeCommand;
+import command.ToDoCommand;
+import command.EventCommand;
+import command.DeadlineCommand;
+import command.InvalidCommand;
 
+/**
+ * Parser to understand user inputs.
+ */
 public class Parser {
 
+    /**
+     * Parser is responsible for understanding the user's input.
+     * It will parse the input and react with a suitable command.
+     * @param userInput users's input as String
+     * @return a Command
+     * @See Command
+     */
     public static Command parse(String userInput) {
         String[] input = userInput.split(" ");
         if (input[0].equals("list")) { //list out

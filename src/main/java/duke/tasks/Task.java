@@ -1,6 +1,8 @@
 /*
 A child class of Object which contains the description of the Task and whether the Task has been done.
  */
+package duke.tasks;
+import duke.exceptions.DukeException;
 public class Task {
     protected String description;
     protected boolean isDone;

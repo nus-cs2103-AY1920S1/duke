@@ -1,3 +1,6 @@
+package duke.commands;
+import duke.exceptions.*;
+import duke.managers.*;
 import java.io.IOException;
 
 public class ListCommand extends Command {

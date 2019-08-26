@@ -1,5 +1,7 @@
+package duke.managers;
+import duke.tasks.*;
+import duke.exceptions.DukeException;
 import java.util.ArrayList;
-
 /*
 The class contains the task list.
  */
@@ -35,11 +37,4 @@ public class TaskList {
     public void addTask(Task task) {
         allTasks.add(task);
     }
-
-
-
-    //add all tasks (3)
-    //delete any task
-    //printing of the task that has been removed
-
 }

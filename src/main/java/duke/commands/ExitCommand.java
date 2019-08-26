@@ -1,3 +1,6 @@
+package duke.commands;
+import duke.managers.*;
+
 public class ExitCommand extends Command {
     private Storage storage;
     private TaskList tasks;

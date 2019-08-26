@@ -1,7 +1,9 @@
 /*
 This method deals with loading tasks from the file and saving tasks in the file.
  */
-
+package duke.managers;
+import duke.exceptions.*;
+import duke.tasks.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

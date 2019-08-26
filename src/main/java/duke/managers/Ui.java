@@ -1,7 +1,7 @@
 /*
 This class deals with the interactions with the user.
  */
-
+package duke.managers;
 import java.util.Scanner;
 public class Ui {
     static Scanner sc = new Scanner(System.in);

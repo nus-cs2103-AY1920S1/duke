@@ -9,11 +9,11 @@ import com.tasks.Event;
 import com.tasks.Todo;
 
 public enum Response {
-    BYE("(?i)^bye\\s*", (ignored, s) -> {
+    BYE("(?i)^bye\\s*", (i, s) -> {
         Printer.printString("Bye. Hope to see you again soon!");
         s.toExit = true;
     }),
-    LIST("(?i)^list\\s*", (ignored, s) -> {
+    LIST("(?i)^list\\s*", (j, s) -> {
         StringBuilder formattedList = new StringBuilder();
         for (int i = 0; i < s.list.size(); i++) {
             if (i > 0) {
@@ -47,7 +47,7 @@ public enum Response {
             s.list.remove(index);
         }
     }),
-    TODO_NO_NAME("(?i)^todo\\s*", (ignored1, ignored2) -> {
+    TODO_NO_NAME("(?i)^todo\\s*", (i, s) -> {
         Printer.printError("The description of a todo cannot be empty");
     }),
     TODO("(?i)^todo .+", (i, s) -> {

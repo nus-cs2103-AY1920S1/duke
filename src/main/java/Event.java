@@ -1,8 +1,10 @@
+import java.util.Date;
+
 public class Event extends Task {
 
-    protected String at;
+    private Date at;
 
-    public Event(String description, String at) throws DukeException {
+    public Event(String description, Date at) throws DukeException {
         super(description);
         if (at.equals("")) {
             throw new DukeException("The date/time of " + this.getTypeNameWithQuantifier() + " cannot be empty.");
@@ -20,6 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + Duke.formatDate(at) + ")";
     }
 }

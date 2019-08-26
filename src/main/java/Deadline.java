@@ -1,8 +1,10 @@
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    protected String by;
+    private Date by;
 
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, Date by) throws DukeException {
         super(description);
         if (by.equals("")) {
             throw new DukeException("The date/time of " + this.getTypeNameWithQuantifier() + " cannot be empty.");
@@ -20,6 +22,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + Duke.formatDate(by) + ")";
     }
 }

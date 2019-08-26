@@ -82,7 +82,7 @@ public class Parser {
 
         // Otherwise entire argString is the description of the Todo task
         String argString = command.split(" ", 2)[1];
-        return tasks.addTask(new Todo(argString));
+        return tasks.addTask(new TodoTask(argString));
     }
 
     public static String parseDeadline(TaskList tasks, String command) throws DukeException {
@@ -98,7 +98,7 @@ public class Parser {
         if (args.length != 2) {
             throw new DukeIncorrectArgumentsException(2, DEADLINE_TEMPLATE, args.length, command);
         }
-        return tasks.addTask(new Deadline(args[0], args[1]));
+        return tasks.addTask(new DeadlineTask(args[0], args[1]));
     }
 
     public static String parseEvent(TaskList tasks, String command) throws DukeException {
@@ -114,6 +114,6 @@ public class Parser {
         if (args.length != 2) {
             throw new DukeIncorrectArgumentsException(2, EVENT_TEMPLATE, args.length, command);
         }
-        return tasks.addTask(new Event(args[0], args[1]));
+        return tasks.addTask(new EventTask(args[0], args[1]));
     }
 }

@@ -6,7 +6,7 @@ import time.DateTime;
 public class Deadline extends Task {
     private String deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) throws DukeUnknownInputException {
         super(description);
         // enforce example format 2/12/2019 1800
         if (deadline.split(" ").length != 2

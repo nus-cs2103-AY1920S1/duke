@@ -96,7 +96,6 @@ public class Duke {
                     | DukeMissingDescriptionException
                     | DukeIndexOutOfBoundsException
                     | DukeIllegalStateException e) {
-                System.err.println("EXCEPTION!");
                 System.out.println(pp.addSeparatorsAddIndent(e.getMessage()));
             }
         }

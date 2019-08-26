@@ -96,6 +96,7 @@ public class Duke {
                 targetTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(targetTask);
+                updateTaskList();
             } else if (inputSplit[0].equals("todo")) {
                 try {
                     handleInputTodo(input);
@@ -122,6 +123,7 @@ public class Duke {
                 System.out.println(toBeRemoved);
                 dukeList.remove(actualIndex);
                 System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+                updateTaskList();
             } else {
                 try {
                     handleInputUnrecognised(input);
@@ -154,6 +156,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
         }
     }
 
@@ -171,6 +174,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
         }
     }
 
@@ -188,6 +192,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
         }
     }
 

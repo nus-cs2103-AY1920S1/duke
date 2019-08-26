@@ -14,7 +14,7 @@ fi
 
 # From: https://stackoverflow.com/questions/6623161/javac-option-to-compile-all-java-files-under-a-given-directory-recursively
 # Get all of our java files
-find .. -name *.java > sources.txt
+find ../src/main -name *.java > sources.txt
 
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin @sources.txt
@@ -24,7 +24,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin duke/Duke < input.txt > ACTUAL.TXT
 
 # Delete the data file after each to run to prevent state from persisting
 rm ../data/duke.txt && touch ../data/duke.txt

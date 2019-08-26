@@ -42,7 +42,7 @@ public class TaskList {
      * @return Task
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return this.list.get(index - 1);
     }
 
     /**

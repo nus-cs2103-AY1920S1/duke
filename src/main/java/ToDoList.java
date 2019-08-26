@@ -21,7 +21,11 @@ public class ToDoList {
                 System.out.println(border);
             } else {
                 String[] temp = input.split(" ");
-                if (temp[0].equals("done")) {
+                if (temp.length == 0) {
+                    System.out.println(border);
+                    System.out.println("     Please input something :(.");
+                    System.out.println(border);
+                } else if (temp[0].equals("done")) {
                     try {
                         int done = Integer.parseInt(temp[1]) - 1;
                         arr.get(done).markAsDone();
@@ -53,21 +57,21 @@ public class ToDoList {
                     }
                 } else { //command to add task to list
 
-                    String date;
+                    DateTime date;
                     String message;
                     boolean added = false;
 
                     try {
                         switch (temp[0]) {
                         case "deadline":
-                            date = input.substring(input.indexOf("/") + 4);
                             message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                            date = new DateTime(input.substring(input.indexOf("/") + 4));
                             arr.add(new Deadlines(message, date));
                             added = true;
                             break;
                         case "event":
-                            date = input.substring(input.indexOf("/") + 4);
                             message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                            date = new DateTime(input.substring(input.indexOf("/") + 4));
                             arr.add(new Events(message, date));
                             added = true;
                             break;
@@ -96,6 +100,10 @@ public class ToDoList {
                     } catch (StringIndexOutOfBoundsException e) {
                         System.out.println(border);
                         System.out.println("     Please input a task and date.");
+                        System.out.println(border);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(border);
+                        System.out.println("     Please input a valid date and time.");
                         System.out.println(border);
                     }
 

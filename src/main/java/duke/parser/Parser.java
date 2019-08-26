@@ -33,21 +33,21 @@ public class Parser {
                         Command c = new DoCommand(Integer.parseInt(tokens[1]));
                         return c;
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException();
+                        throw new DukeException("Invalid done command.");
                     }
                 case "delete":
                     try {
                         Command c = new DeleteCommand(Integer.parseInt(tokens[1]));
                         return c;
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException();
+                        throw new DukeException("Invalid delete command.");
                     }
                 case "find":
                     try {
                         Command c = new FindCommand(tokens[1]);
                         return c;
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException();
+                        throw new DukeException("Invalid find command.");
                     }
                 default:
                     return new AddCommand(string);

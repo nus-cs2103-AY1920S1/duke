@@ -84,7 +84,7 @@ public class Ui {
      * Prints error.
      */
     public void showError(String errMessage) {
-        System.out.println(errMessage);
+        System.out.println(indent + errMessage);
     }
 
     /**

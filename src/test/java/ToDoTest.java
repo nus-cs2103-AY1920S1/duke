@@ -3,9 +3,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ToDoTest {
+class ToDoTest {
     @Test
-    public void ToDoTest() {
+    void ToDoTest() {
         System.out.println("TodoTest starts");
         ToDo todo = new ToDo("testing");
         assertEquals("[T][✘] testing", todo.toString());

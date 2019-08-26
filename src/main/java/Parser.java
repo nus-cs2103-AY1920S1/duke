@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 
 class Parser {
@@ -11,12 +10,11 @@ class Parser {
         }
         return 0;
     }
-    private static Task construct(String[] input_split)
-            throws EmptyDescriptionException, EmptyTimeDueException {
+    private static Task construct(String[] input_split) throws InvalidInputFormatException {
         if (input_split.length < 2) {
-            // System.out.println("what's the " + type);
-            throw new EmptyDescriptionException();
+            throw new InvalidInputFormatException();
         }
+        checkValidSpacing(input_split);
         Task task;
         int prepAt = getPrepositionPos(input_split);
         StringBuilder description = new StringBuilder();
@@ -26,7 +24,7 @@ class Parser {
 
         if (prepRequired && prepAt == 0) {
             // System.out.println("what's the date due?");
-            throw new EmptyTimeDueException();
+            throw new InvalidInputFormatException();
         }
         if (prepRequired) {
             for (int k = 1; k < prepAt; k++) {
@@ -58,18 +56,24 @@ class Parser {
         return task;
     }
 
-    void checkValidTaskIndex(String[] input_split) throws EmptyListIndexException {
+    static void checkValidTaskIndex(String[] input_split) throws InvalidInputFormatException {
         if (input_split.length < 2) {
-            throw new EmptyListIndexException();
+            throw new InvalidInputFormatException();
         }
         try {
             Integer.parseInt(input_split[1]);
         } catch (NumberFormatException e) {
-            throw new EmptyListIndexException();
+            throw new InvalidInputFormatException();
         }
     }
 
-    boolean parse(String input, TaskList tasks, Ui ui, Storage storage) {
+    static void checkValidSpacing(String[] input_split) throws InvalidInputFormatException {
+        for (String s : input_split) {
+            if (s.length() == 0) throw new InvalidInputFormatException();
+        }
+    }
+
+    static boolean parse(String input, TaskList tasks, Ui ui, Storage storage) {
         String[] input_split = input.split(" ");
         String command = input_split[0];
 
@@ -108,6 +112,10 @@ class Parser {
                 checkValidTaskIndex(input_split);
                 Task removedTask = tasks.remove(Integer.parseInt(input_split[1]) - 1);
                 ui.printRemoved(removedTask, tasks);
+                return true;
+
+            case "formats":
+                ui.printFormatHelp();
                 return true;
 
             default:

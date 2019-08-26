@@ -20,11 +20,10 @@ class Storage {
         return 0;
     }
 
-    private static Task construct(String[] input_split)
-            throws EmptyDescriptionException, EmptyTimeDueException {
+    private static Task construct(String[] input_split) throws InvalidInputFormatException {
         if (input_split.length < 2) {
             // System.out.println("what's the " + type);
-            throw new EmptyDescriptionException();
+            throw new InvalidInputFormatException();
         }
         Task task;
         int prepAt = getPrepositionPos(input_split);
@@ -35,7 +34,7 @@ class Storage {
 
         if (prepRequired && prepAt == 0) {
             // System.out.println("what's the date due?");
-            throw new EmptyTimeDueException();
+            throw new InvalidInputFormatException();
         }
         if (prepRequired) {
             for (int k = 1; k < prepAt; k++) {
@@ -68,7 +67,7 @@ class Storage {
     }
 
     private static Task construct(String[] input_string, boolean completed)
-            throws EmptyDescriptionException, EmptyTimeDueException{
+            throws InvalidInputFormatException {
         Task task = construct(input_string);
         task.isDone = completed;
         return task;
@@ -86,7 +85,7 @@ class Storage {
 //        System.out.println("Finished Saving");
     }
 
-    TaskList load() throws FileNotFoundException, EmptyDescriptionException, EmptyTimeDueException {
+    TaskList load() throws FileNotFoundException, InvalidInputFormatException {
         Scanner s = new Scanner(saveFile);
         TaskList tasks = new TaskList();
         while (s.hasNextLine()) {

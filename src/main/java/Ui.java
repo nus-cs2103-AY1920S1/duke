@@ -39,4 +39,20 @@ class Ui {
         System.out.println("  " + removedTask.getStatus());
         printCount(tasks);
     }
+    void printFormatHelp() {
+        System.out.println("Here are the valid formats of the inputs:\n" +
+                "todo<space>description\n" +
+                "   eg. todo sweep the floor\n" +
+                "   (creates a 'todo' with description 'sweep the floor'\n" +
+                "deadline<space>description<space>/preposition<space>time\n" +
+                "   eg. deadline assignment submission /at exam venue\n" +
+                "   (creates an 'assignment submission' deadline that is (at: exam venue)\n" +
+                "event<space>description<space>/preposition<space>time\n" +
+                "   eg. event happy new year /on 31/12/2019 2359\n" +
+                "   (creates a 'happy new year' event that is (on: 31 Dec 2019 2359)\n" +
+                "done<space>list_index\n" +
+                "   eg. done 6 (deletes Task number 6)\n" +
+                "delete<space>list_index\n" +
+                "   eg. delete 3 (deletes Task number 3)");
+    }
 }

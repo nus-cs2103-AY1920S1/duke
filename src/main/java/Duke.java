@@ -148,6 +148,8 @@ public class Duke {
                 + "     What can I do for you?\n";
         greet = frontSpace + upperLine + greet + frontSpace + lowerLine;
         System.out.println(greet);
+        ReadAndWrite.updateProjectDir();
+        ReadAndWrite.readFile(myList);
         while (true) {
             try {
                 String cmd = sc.nextLine();

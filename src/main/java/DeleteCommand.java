@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.Normalizer;
 
 public class DeleteCommand extends Command {
@@ -10,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         try {
             taskList.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {

@@ -1,14 +1,20 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Duke {
 
     private Ui ui;
+    private Storage storage;
     private TaskList taskList;
 
-    public Duke() {
+    public Duke() throws IOException, DukeException {
         this.ui = new Ui();
-        this.taskList = new TaskList();
-    }
+        this.storage = new Storage("./data/duke.txt");
+        this.taskList = new TaskList(this.storage.load(), this.storage);
+        }
 
-    private void run() {
+
+    private void run() throws IOException {
         this.ui.showWelcomeMessage();
         while (true) {
             try {
@@ -24,7 +30,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DukeException{
         new Duke().run();
     }
 }

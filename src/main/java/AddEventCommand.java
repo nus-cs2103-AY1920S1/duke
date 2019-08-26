@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class AddEventCommand extends Command{
 
     String task;
@@ -11,7 +13,7 @@ public class AddEventCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         this.eventTask = new Event(this.task, taskList.getSize() + 1, this.date);
         taskList.addToList(this.eventTask);
         ui.printAddEventCommand(eventTask, taskList);

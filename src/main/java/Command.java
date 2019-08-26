@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public abstract class Command {
     CommandType commandType;
 
@@ -5,6 +7,6 @@ public abstract class Command {
         return commandType;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui) throws DukeException, IOException;
 
 }

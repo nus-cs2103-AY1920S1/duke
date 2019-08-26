@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.Normalizer;
 
 public class AddToDoCommand extends Command{
@@ -11,7 +12,7 @@ public class AddToDoCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         this.toDoTask = new ToDo(this.task, taskList.getSize() + 1);
         taskList.addToList(this.toDoTask);
         ui.printAddToDoCommand(toDoTask, taskList);

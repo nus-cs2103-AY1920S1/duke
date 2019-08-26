@@ -1,242 +1,48 @@
-import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Scanner;
-
 public class Duke {
-    /*
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    private Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            create();
+        }
     }
-    */
 
-    private ArrayList<Task> store = new ArrayList<>();
-    private static boolean flag = true;
-    private static String filePath = "/Users/auxin/duke/data/Tasks.txt";
-    private static SimpleDateFormat newFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm a", Locale.ENGLISH);
-
+    private void create() {
+        storage.createFolder();
+        storage.createFile();
+        tasks = new TaskList();
+    }
 
     private void greet() {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        ui.greet();
     }
 
-    private void createFolder() {
-        String folderPath = "/Users/auxin/duke/data";
-        File newFolder = new File(folderPath);
-        if (newFolder.mkdir()) {
-            System.out.println("Folder is created.");
-        }
-    }
-
-    private void createFile() {
+    private void run() {
         try {
-            File file = new File(filePath);
-            if (file.createNewFile()) {
-                System.out.println("File is created to save tasks.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            ui.scan();
+        } catch (DukeIllegalInputException | DukeIllegalDescriptionException e) {
+            System.out.println(e.getMessage());
         }
-    }
-
-    private void appendToFile(String filePath, String textToAppend, boolean flag) {
-        try {
-            FileWriter fw = new FileWriter(filePath, flag);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(textToAppend + "\n");
-            bw.close();
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readFile() {
-        File file = new File(filePath);
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String currLine;
-            while ((currLine = br.readLine()) != null) {
-                String[] arr = currLine.split(" - ");
-                String type = arr[0];
-                String isDone = arr[1];
-                String action = arr[2];
-                switch(type) {
-                    case "T":
-                        Task todo = new Todo(action);
-                        if (isDone.equals("\u2713")) {
-                            todo.markAsDone();
-                        }
-                        store.add(todo);
-                        break;
-                    case "D":
-                        String by = arr[3];
-                        Task deadline = new Deadline(action, by);
-                        if (isDone.equals("\u2713")) {
-                            deadline.markAsDone();
-                        }
-                        store.add(deadline);
-                        break;
-                    case "E":
-                        String at = arr[3];
-                        Task event = new Event(action, at);
-                        if (isDone.equals("\u2713")) {
-                            event.markAsDone();
-                        }
-                        store.add(event);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void run() throws DukeIllegalDescriptionException, DukeIllegalInputException {
-
-        Scanner sc = new Scanner(System.in);
-        while(sc.hasNextLine()) {
-            String cmd = sc.nextLine(); //Read the command
-            String[] head = cmd.split(" ", 2); /* Break the command into array with two parts */
-            try {
-                switch (Command.valueOf(head[0])) { //Read the first key word
-                    case bye:
-                        System.out.println("Bye. Hope to see you again soon!");
-                        flag = false;
-                        break;
-                    case list:
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < store.size(); ++i) {
-                            System.out.println(i + 1 + "." + store.get(i));
-                        }
-                        break;
-                    case done:
-                        int num = Integer.parseInt(head[1]);
-                        Task newTask = store.get(num - 1);
-                        newTask.markAsDone();
-                        store.set(num - 1, newTask);
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(store.get(num - 1));
-                        boolean isAppend = false;
-                        for (Task task : store) {
-                            appendToFile(filePath, task.toString(), isAppend);
-                            if (!isAppend) {
-                                isAppend = true;
-                            }
-                        }
-                        break;
-                    case todo:
-                        try {
-                            Task todo = new Todo(head[1]);
-                            store.add(todo);
-                            printAddTask();
-                            System.out.println(todo);
-                            printCountTasks();
-                            appendToFile(filePath, todo.toString(), true);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeIllegalDescriptionException(head[0]);
-                        }
-                        break;
-                    case deadline:
-                        try {
-                            String[] dl = head[1].split(" /by ");
-                            String ddlTime = dl[1];
-                            SimpleDateFormat ddlFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                            Date ddlDate = ddlFormat.parse(ddlTime);
-                            Task deadline = new Deadline(dl[0], newFormat.format(ddlDate));
-                            store.add(deadline);
-                            printAddTask();
-                            System.out.println(deadline);
-                            printCountTasks();
-                            appendToFile(filePath, deadline.toString(), true);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeIllegalDescriptionException(head[0]);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case event:
-                        try {
-                            String[] ev = head[1].split(" /at ");
-                            String eventTime = ev[1];
-                            SimpleDateFormat eventFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                            Date eventDate = eventFormat.parse(eventTime);
-                            Task event = new Event(ev[0], newFormat.format(eventDate));
-                            store.add(event);
-                            printAddTask();
-                            System.out.println(event);
-                            printCountTasks();
-                            appendToFile(filePath, event.toString(), true);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeIllegalDescriptionException(head[0]);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case delete:
-                        int delNum = Integer.parseInt(head[1]) - 1;
-                        Task delTask = store.get(delNum);
-                        store.remove(delNum);
-                        System.out.println("Noted. I've removed this task:\n" + delTask.toString());
-                        printCountTasks();
-                        boolean isAppendDel = false;
-                        for (Task task : store) {
-                            appendToFile(filePath, task.toString(), isAppendDel);
-                            if (!isAppendDel) {
-                                isAppendDel = true;
-                            }
-                        }
-                        break;
-                }
-                if (!flag) {
-                    break;
-                }
-            } catch (IllegalArgumentException e) {
-                throw new DukeIllegalInputException();
-            }
-        }
-        sc.close();
-    }
-
-    private void printAddTask() {
-        System.out.println("Got it. I've added this task:");
-    }
-
-    private void printCountTasks() {
-        System.out.println("Now you have " + store.size() + " tasks in the list.");
-    }
-
-    private void startDuke() {
-        greet();
-        createFolder();
-        createFile();
-        readFile();
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.startDuke();
-        while (flag) {
-            try {
-                duke.run();
-            } catch (DukeIllegalInputException | DukeIllegalDescriptionException e) {
-                System.out.println(e.getMessage());
-            }
+        Duke duke = new Duke("/Users/auxin/duke/data/Tasks.txt");
+        duke.greet();
+        while (Ui.getFlag()) {
+            duke.run();
         }
     }
-}
 
-enum Command {
-    bye, list, done, todo, deadline, event, delete
+
+    enum Command {
+        bye, list, done, todo, deadline, event, delete
+    }
 }

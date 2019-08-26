@@ -1,6 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * event is a type of task with from and to datetimes
+ */
 public class Event extends Task{
     LocalDateTime at, to;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

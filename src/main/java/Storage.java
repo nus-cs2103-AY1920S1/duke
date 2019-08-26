@@ -5,17 +5,24 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
+/**
+ * Storage class deals with file input/output
+ */
 public class Storage {
     File file;
     Scanner sFile;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     FileWriter fw;
-
+    /**
+     * file path is hardcoded
+     */
     public Storage() {
         file = new File("data/duke.txt");
     }
-
+    /**
+     * reads in tasks from the file if it exists and populates the task list
+     * @param list task list to be populated
+     */
     public void readFile(TaskList list) {
         if (!file.exists()) {
             return;
@@ -38,7 +45,12 @@ public class Storage {
             }
         }
     }
-
+    /**
+     * at the end of the program logic, 
+     * replaces the content of the file (if it exists)
+     * with the final task list
+     * @param list the task list to be written to file
+     */
     public void writeFile(TaskList list) {
         try {
             file.createNewFile();

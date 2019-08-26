@@ -1,6 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * a deadline is a type of class with a by datetime
+ */
 public class Deadline extends Task {
     LocalDateTime by;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

@@ -1,17 +1,23 @@
-public class Deadline extends Task{
-    private String by;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+
+public class Deadline extends Task{
+    private Date by;
+
+    public Deadline(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
+        Date date=new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
+        this.by = date;
     }
 
-    public String getBy() {
+    public Date getBy() {
         return this.by;
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + this.by + ")";
+        return "[D]" + super.toString() + "(by: " + this.by + ")";
     }
 
 }

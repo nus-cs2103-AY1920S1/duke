@@ -1,4 +1,4 @@
 todo run
 done 1
-event party /at 10th Jan
-deadline do tut /by 10pm
+event party /at12/12/2012 1800
+done 2

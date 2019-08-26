@@ -1,19 +1,23 @@
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.File;
 public class Duke {
+
     public static File getFile(String filePath) {
         File f = new File(filePath);
         return f;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         String filePath = "C:\\Users\\johnn\\CS2103\\Week2\\tasks.txt";
         File source = getFile(filePath);
-
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -136,7 +140,7 @@ public class Duke {
                 Deadline deadline = (Deadline) task;
                 String description = deadline.getDescription();
                 Boolean isDone = deadline.getStatus();
-                String by = deadline.getBy();
+                String by = dateToStringConverter(deadline.getBy());
                 result += "deadline" + " " + description + "/by" + by + "\n";
                 if (isDone) {
                     result += "done " + (i + 1) + "\n";
@@ -145,7 +149,7 @@ public class Duke {
                 Event event = (Event) task;
                 String description = event.getDescription();
                 Boolean isDone = event.getStatus();
-                String by = event.getAt();
+                String by = dateToStringConverter(event.getAt());
                 result += "event" + " " + description + "/at" + by + "\n";
                 if (isDone) {
                     result += "done " + (i + 1) + "\n";
@@ -157,7 +161,13 @@ public class Duke {
 
     }
 
-    public static ArrayList<Task> getTasks(File file) throws FileNotFoundException {
+    public static String dateToStringConverter(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy HHmm");
+        String sDate = sdf.format(date);
+        return sDate;
+    }
+
+    public static ArrayList<Task> getTasks(File file) throws FileNotFoundException, ParseException {
         Scanner sc = new Scanner(file);
         ArrayList<Task> list = new ArrayList<>();
 

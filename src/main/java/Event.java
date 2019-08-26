@@ -1,16 +1,21 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
-    private String at;
-    public Event(String description, String at) {
+    private Date at;
+    public Event(String description, String at) throws ParseException {
         super(description);
-        this.at = at;
+        Date date=new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
+        this.at = date;
     }
 
-    public String getAt() {
+    public Date getAt() {
         return this.at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + this.at + ")";
+        return "[E]" + super.toString() + "(at: " + this.at + ")";
     }
 }

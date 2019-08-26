@@ -3,6 +3,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialise Duke.
+     *
+     * @param filePath filePath to read and save list data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +23,10 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+
+    /**
+     * Main loop of Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

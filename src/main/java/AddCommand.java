@@ -5,6 +5,10 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Executes add command which add task to TaskList.
+     * Then Storage rewrite using TaskList.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(task);
         storage.rewrite(tasks.getSerialized());

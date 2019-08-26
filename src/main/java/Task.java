@@ -9,20 +9,43 @@ import static java.time.temporal.ChronoField.*;
 public abstract class Task {
     private String description;
     private boolean isDone;
+
+
+    /**
+     * DateTimeFormatter meant for Ui output.
+     */
     protected static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");
+
+
+    /**
+     * DateTimeFormatter meant for File output.
+     */
     protected static DateTimeFormatter fileDTF = DateTimeFormatter.ofPattern("d/M/y'T'HHmm");
 
-    public Task(String description) throws DukeException {
+
+    /**
+     * @param description Initialise General Task
+     * @throws EmptyFieldDukeException
+     */
+    public Task(String description) throws EmptyFieldDukeException {
         this.description = description.trim();
         if (this.description.isBlank())
             throw new EmptyFieldDukeException("description", this.childClass());
         this.isDone = false;
     }
 
+
+    /**
+     * @return Gets done status icon character
+     */
     protected char getStatusIcon() {
-        return this.isDone ? '\u2713' : '\u2718'; //return tick or X symbols
+        return this.isDone ? '\u2713' : '\u2718';
     }
 
+
+    /**
+     * Mark Task as Done.
+     */
     public void setDone() {
         this.isDone = true;
     }
@@ -33,15 +56,30 @@ public abstract class Task {
                 this.description;
     }
 
-    protected String toFileString() {
+
+    /**
+     * Gets serialized Task.
+     *
+     * @return String from serializing Task
+     */
+    protected String serialized() {
         return (char) 31 + (this.isDone ? "1" : "0") + (char) 31 +
                 this.description;
     }
 
-    ;
 
+    /**
+     * @return name of childClass as String
+     */
     abstract protected String childClass();
 
+    /**
+     * Parse Serialised Task into Task objects
+     *
+     * @param str serialised task to be parsed
+     * @return Task as parsed
+     * @throws DukeException if parsing goes wrong
+     */
     public static Task parseFileTask(String str) throws DukeException {
         String[] prop = str.split("\\x1f");
         Task t = null;
@@ -61,6 +99,10 @@ public abstract class Task {
         return t;
     }
 
+
+    /**
+     * @return DateTimeFormatter with current system time as default
+     */
     protected static DateTimeFormatter inDTF() {
         LocalDateTime dt = LocalDateTime.now();
         return new DateTimeFormatterBuilder()
@@ -97,8 +139,9 @@ class Deadline extends Task {
         return "deadline";
     }
 
-    public String toFileString() {
-        return "D" + super.toFileString() + (char) 31 + this.by.format(super.fileDTF);
+    @Override
+    public String serialized() {
+        return "D" + super.serialized() + (char) 31 + this.by.format(super.fileDTF);
     }
 }
 
@@ -125,8 +168,8 @@ class Event extends Task {
     }
 
     @Override
-    public String toFileString() {
-        return "E" + super.toFileString() + (char) 31 + this.at.format(super.fileDTF);
+    public String serialized() {
+        return "E" + super.serialized() + (char) 31 + this.at.format(super.fileDTF);
     }
 }
 
@@ -146,7 +189,7 @@ class Todo extends Task {
     }
 
     @Override
-    public String toFileString() {
-        return "T" + super.toFileString();
+    public String serialized() {
+        return "T" + super.serialized();
     }
 }

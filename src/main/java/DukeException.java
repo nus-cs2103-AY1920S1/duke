@@ -7,7 +7,7 @@ public class DukeException extends Exception {
 class EmptyFieldDukeException extends DukeException {
     public EmptyFieldDukeException(String attrib, String task) {
         super("\u2639 OOPS!!! The " + attrib + " of a" +
-                (task.startsWith("a|e|i|o|u") ? "n " + task : ' ' + task) + " cannot be empty.");
+                (task.matches("^[aeiou].*") ? "n " : ' ') + task + " cannot be empty.");
     }
 }
 
@@ -45,6 +45,6 @@ class LoadFileFailDukeException extends DukeException {
 
 class WriteFileFailDukeException extends DukeException {
     public WriteFileFailDukeException() {
-        super("Oops... Something went wrong with file writing.\"\nPlease ");
+        super("Oops... Something went wrong with file writing.");
     }
 }

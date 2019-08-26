@@ -6,7 +6,7 @@ class ToDo extends Task {
 
     @Override
     public String toString() {
-        String iconForDone = done ? "v" : "x";
+        String iconForDone = done ? "\u2713" : "\u2718";
         return String.format("[T][%s] %s", iconForDone, this.task);
     }
 }

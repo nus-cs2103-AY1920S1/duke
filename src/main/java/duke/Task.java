@@ -1,8 +1,9 @@
+package duke;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected String time;
 
     public Task(String description) {
         this.description = description;
@@ -17,4 +18,5 @@ public class Task {
     public void markDone() {
         this.isDone = true;
     }
+
 }

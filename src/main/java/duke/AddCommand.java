@@ -1,7 +1,9 @@
+package duke;
+
 public class AddCommand extends Command {
     private Task task;
 
-    AddCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -19,6 +21,15 @@ public class AddCommand extends Command {
 
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof AddCommand) {
+            AddCommand addCommand = (AddCommand) o;
+            return this.task.equals(addCommand.task);
+        }
         return false;
     }
 }

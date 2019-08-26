@@ -1,8 +1,10 @@
+package duke;
+
 import java.text.ParseException;
 
-class Parser {
+public class Parser {
 
-    static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand) throws DukeException {
         String[] arr = fullCommand.split(" ", 2);
         String firstWord = arr[0];
         switch (firstWord) {

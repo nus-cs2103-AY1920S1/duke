@@ -1,9 +1,12 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import duke.task.Task;
 import duke.task.Event;
 import duke.task.Deadline;
@@ -81,6 +84,9 @@ public class Duke {
         } catch (DukeException e) {
             this.printStream.println(e);
             return false;
+        } catch (ParseException e) {
+            System.out.println("Error parsing the date in the command");
+            return false;
         }
     }
 
@@ -143,13 +149,15 @@ public class Duke {
      * Handle Deadline command.
      * @param command String
      * @throws InvalidTaskArgumentException if Deadline arguments are invalid
+     * @throws ParseException if it fails to parse the date
      */
-    private void handleDeadlineCommand(String command) throws InvalidTaskArgumentException {
+    private void handleDeadlineCommand(String command) 
+        throws InvalidTaskArgumentException, ParseException {
         String[] commandArr = command.replace("deadline", "").trim().split("/by ");
         if (commandArr.length != 2) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! Deadline must have a description and date");
         }
-        Task taskToAdd = new Deadline(commandArr[0].trim(), commandArr[1].trim());
+        Task taskToAdd = new Deadline(commandArr[0].trim(), this.parseStringToDate(commandArr[1].trim()));
         this.addToList(taskToAdd);
     }
 
@@ -157,13 +165,15 @@ public class Duke {
      * Handle Event command.
      * @param command String
      * @throws InvalidTaskArgumentException if Event arguments are invalid
+     * @throws ParseException if it fails to parse the date
      */
-    private void handleEventCommand(String command) throws InvalidTaskArgumentException {
+    private void handleEventCommand(String command) 
+        throws InvalidTaskArgumentException, ParseException {
         String[] commandArr = command.replace("event", "").trim().split("/at ");
         if (commandArr.length != 2) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! Event must have a description and date");
         }
-        Task taskToAdd = new Event(commandArr[0].trim(), commandArr[1].trim());
+        Task taskToAdd = new Event(commandArr[0].trim(), this.parseStringToDate(commandArr[1].trim()));
         this.addToList(taskToAdd);
     }
 
@@ -235,4 +245,13 @@ public class Duke {
             System.out.println("Failed to write to disk");
         }
     }
+
+    /**
+     * Parse String into Date.
+     * @param strDate the date in the form of a String
+     * @throws ParseException if it fails to parse the date
+     */
+    private Date parseStringToDate(String strDate) throws ParseException {
+        return new SimpleDateFormat("dd/mm/yy HHmm").parse(strDate);
+    } 
 }

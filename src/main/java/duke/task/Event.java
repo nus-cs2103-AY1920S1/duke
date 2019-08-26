@@ -1,19 +1,20 @@
 package duke.task;
 
+import java.util.Date;
 import java.util.Optional;
 
 public class Event extends Task {
     /**
      * Constructor.
      */
-    public Event(String name, String time) {
+    public Event(String name, Date time) {
         super(name, Optional.of(time), TaskType.EVENT, false);
     }
     
     /**
      * Constructor with isDone.
      */
-    public Event(String name, String time, boolean isDone) {
+    public Event(String name, Date time, boolean isDone) {
         super(name, Optional.of(time), TaskType.EVENT, isDone);
     }
 

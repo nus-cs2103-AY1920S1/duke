@@ -1,10 +1,81 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
 
+    private static void loadSavedTasks(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String savedTask = s.nextLine();
+            String[] savedTaskSplit = savedTask.split("\\|");
+            if (savedTaskSplit[0].equals("T")) {
+                String description = savedTaskSplit[2];
+                Task todoTask = new Todo(description);
+                if (savedTaskSplit[1].equals("1")) {
+                    todoTask.markAsDone();
+                }
+                dukeList.add(todoTask);
+            } else if (savedTaskSplit[0].equals("E")) {
+                String description = savedTaskSplit[2];
+                String at = savedTaskSplit[3];
+                Task eventTask = new Event(description, at);
+                if (savedTaskSplit[1].equals("1")) {
+                    eventTask.markAsDone();
+                }
+                dukeList.add(eventTask);
+            } else {
+                String description = savedTaskSplit[2];
+                String by = savedTaskSplit[3];
+                Task deadlineTask = new Deadline(description, by);
+                if (savedTaskSplit[1].equals("1")) {
+                    deadlineTask.markAsDone();
+                }
+                dukeList.add(deadlineTask);
+            }
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void updateTaskList() {
+        String file = "data/taskList.txt";
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            for (int i = 0; i < dukeList.size(); i++) {
+                if (i == dukeList.size() - 1) {
+                    sb.append(dukeList.get(i).toTextFileString());
+                } else {
+                    sb.append(dukeList.get(i).toTextFileString());
+                    sb.append("\n");
+                }
+            }
+            String content = sb.toString();
+            writeToFile(file, content);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
+        File f = new File("data");
+        f.mkdir();
+        try {
+            loadSavedTasks("data/taskList.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         String initialMessage = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(initialMessage);
 
@@ -26,6 +97,7 @@ public class Duke {
                 targetTask.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(targetTask);
+                updateTaskList();
             } else if (inputSplit[0].equals("todo")) {
                 try {
                     handleInputTodo(input);
@@ -52,6 +124,7 @@ public class Duke {
                 System.out.println(toBeRemoved);
                 dukeList.remove(actualIndex);
                 System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+                updateTaskList();
             } else {
                 try {
                     handleInputUnrecognised(input);
@@ -79,11 +152,12 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             String todoDescription = inputTodo.substring(5);
-            Task t = new Todo(todoDescription);
+            Todo t = new Todo(todoDescription);
             dukeList.add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
         }
     }
 
@@ -96,11 +170,12 @@ public class Duke {
             int secondIndex = slashLocation + 4;
             String deadlineDescription = inputDeadline.substring(9, firstIndex);
             String deadlineBy = inputDeadline.substring(secondIndex);
-            Task t = new Deadline(deadlineDescription, deadlineBy);
-            dukeList.add(t);
+            Deadline d = new Deadline(deadlineDescription, deadlineBy);
+            dukeList.add(d);
             System.out.println("Got it. I've added this task:");
-            System.out.println(t);
+            System.out.println(d);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
         }
     }
 
@@ -113,11 +188,12 @@ public class Duke {
             int secondIndex = slashLocation + 4;
             String eventDescription = inputEvent.substring(6, firstIndex);
             String eventAt = inputEvent.substring(secondIndex);
-            Task t = new Event(eventDescription, eventAt);
-            dukeList.add(t);
+            Event e = new Event(eventDescription, eventAt);
+            dukeList.add(e);
             System.out.println("Got it. I've added this task:");
-            System.out.println(t);
+            System.out.println(e);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            updateTaskList();
         }
     }
 

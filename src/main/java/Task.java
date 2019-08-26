@@ -24,4 +24,15 @@ public class Task {
         String output = "[" + this.getStatusIcon() + "] " + this.getDescription();
         return output;
     }
+
+    public String toTextFileString() {
+        String status = "";
+        if (this.isDone == true) {
+            status = "1|";
+        } else {
+            status = "0|";
+        }
+        String output = status + this.getDescription();
+        return output;
+    }
 }

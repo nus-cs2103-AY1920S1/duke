@@ -6,6 +6,7 @@ import command.AddTaskCommand;
 import command.Command;
 import command.DoneTaskCommand;
 import command.ListTasksCommand;
+import exception.DukeIllegalArgumentException;
 import exception.EmptyFieldException;
 import exception.InvalidCommandFormatException;
 import exception.InvalidIndexException;
@@ -23,7 +24,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
 public class Parser {
-    public static Command parse(String command) throws EmptyFieldException,
+    public static Command parse(String command) throws EmptyFieldException, DukeIllegalArgumentException,
             InvalidCommandFormatException, UnknownCommandException, InvalidIndexException {
         if (command.equalsIgnoreCase("list")) {
 

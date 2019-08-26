@@ -1,6 +1,7 @@
 package core;
 
 import exception.DukeIOException;
+import exception.DukeIllegalArgumentException;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -69,7 +70,7 @@ public class Storage {
     }
 
     /** Loads tasks from hard disk */
-    public ArrayList<Task> load() throws DukeIOException {
+    public ArrayList<Task> load() throws DukeIOException, DukeIllegalArgumentException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {

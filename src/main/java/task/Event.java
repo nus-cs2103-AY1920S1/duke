@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeIllegalArgumentException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -31,16 +33,23 @@ public class Event extends Task {
         this.isAllDay = isAllDay;
     }
 
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) throws
+            DukeIllegalArgumentException {
         super(description, TaskType.EVENT);
+        if (endDateTime.isBefore(startDateTime)) {
+            throw new DukeIllegalArgumentException("End date should be before start date!");
+        }
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.isAllDay = false;
     }
 
     public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime,
-                 boolean isAllDay) {
+                 boolean isAllDay) throws DukeIllegalArgumentException {
         super(description, TaskType.EVENT);
+        if (endDateTime.isBefore(startDateTime)) {
+            throw new DukeIllegalArgumentException("End date should be before start date!");
+        }
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.isAllDay = isAllDay;
@@ -50,7 +59,13 @@ public class Event extends Task {
         return startDateTime;
     }
 
-    public void setStartDateTime(LocalDateTime startDateTime) {
+    public void setStartDateTime(LocalDateTime startDateTime) throws DukeIllegalArgumentException {
+        if (this.endDateTime.isEqual(this.startDateTime)) {
+            this.endDateTime = startDateTime;
+        }
+        if (this.endDateTime.isBefore(startDateTime)) {
+            throw new DukeIllegalArgumentException("End date should be before start date!");
+        }
         this.startDateTime = startDateTime;
     }
 
@@ -58,7 +73,10 @@ public class Event extends Task {
         return endDateTime;
     }
 
-    public void setEndDateTime(LocalDateTime endDateTime) {
+    public void setEndDateTime(LocalDateTime endDateTime) throws DukeIllegalArgumentException {
+        if (endDateTime.isBefore(this.startDateTime)) {
+            throw new DukeIllegalArgumentException("End date should be before start date!");
+        }
         this.endDateTime = endDateTime;
     }
 
@@ -79,9 +97,13 @@ public class Event extends Task {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
                     startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                     endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-        } else if (startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
+        } else if (startDateTime.isEqual(endDateTime)) {
             return String.format("[%s]%s (at: %s)", TaskType.EVENT.getTag(), super.toString(),
                     startDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
+        } else if (startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
+            return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
+                    startDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),
+                    endDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM)));
         } else {
             return String.format("[%s]%s (at: %s - %s)", TaskType.EVENT.getTag(), super.toString(),
                     startDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)),

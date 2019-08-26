@@ -58,5 +58,17 @@ public abstract class Task {
      */
     public abstract Date getDate();
 
+    /**
+     * Returns a string corresponding to date stored in task object.
+     * @return String
+     */
+    public String getDesc() {
+        return this.taskDesc;
+    }
+
 }
+
+
+
+
 

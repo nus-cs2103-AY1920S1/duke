@@ -46,6 +46,14 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
 
+            case "find":
+                if (commandSplit.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please indicate the keyword " +
+                                            "you are looking for!");
+                }
+
+                return new KeyCommand(commandSplit[1]);
+
             case "todo":
             case "deadline":
             case "event":

@@ -1,6 +1,7 @@
 package duke.command.add;
 
 import duke.command.Command;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
@@ -14,7 +15,7 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Todo newTodo = new Todo(this.detail);
         tasks.add(newTodo);
         ui.printAddSuccess(tasks.getTasks(), newTodo);

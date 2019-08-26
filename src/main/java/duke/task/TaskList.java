@@ -33,8 +33,8 @@ public class TaskList {
     }
 
     public Task doDeleteTask(int chosenTaskNo) {
-        Task deletedTask = this.tasks.get(chosenTaskNo);
-        this.tasks.remove(chosenTaskNo);
+        Task deletedTask = this.tasks.get(chosenTaskNo - 1);
+        this.tasks.remove(chosenTaskNo - 1);
         return deletedTask;
     }
 

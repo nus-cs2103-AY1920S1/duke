@@ -5,7 +5,7 @@ public class Event extends Task {
     private String eventTimeTo;
     private String eventTimeFrom;
 
-    public Event(String eventName, String eventTimeTo, String eventTimeFrom) {
+    public Event(String eventName, String eventTimeFrom, String eventTimeTo) {
         super(eventName);
         this.eventTimeFrom = eventTimeFrom;
         this.eventTimeTo = eventTimeTo;
@@ -19,6 +19,11 @@ public class Event extends Task {
     @Override
     public char getRepLetter() {
         return 'E';
+    }
+
+    @Override
+    public String toDelimitedString() {
+        return String.format("%c | %c | %s | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(), this.eventTimeFrom, this.eventTimeTo);
     }
 
 }

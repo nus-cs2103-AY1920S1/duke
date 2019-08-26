@@ -19,7 +19,7 @@ public class Ui {
     static final Scanner SCANNER = new Scanner(System.in);
 
     public static void printWelcomeMsg() {
-        System.out.println("Hello from\n" + LOGO);
+        System.out.println("\nHello from\n" + LOGO);
         CmdUx.printHBars(WELCOME_MSG);
     }
 

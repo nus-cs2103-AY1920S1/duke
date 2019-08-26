@@ -19,4 +19,8 @@ public class Deadline extends Task {
         return 'D';
     }
 
+    @Override
+    public String toDelimitedString() {
+        return String.format("%c | %c | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(), this.deadlineTime);
+    }
 }

@@ -32,6 +32,10 @@ public class Task {
         return ' ';
     }
 
+    public String toDelimitedString() {
+        return String.format("%c | %c | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', this.taskName);
+    }
+
     @Override
     public String toString() {
         String checkbox = this.isDone() ? Checkbox.TICK.icon : Checkbox.CROSS.icon;

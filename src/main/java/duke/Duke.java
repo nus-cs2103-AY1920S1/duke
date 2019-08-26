@@ -30,9 +30,13 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String input = ui.readCommand();
+                if (input == null) {
+                    break;
+                }
+
                 ui.showLine();
-                Command c = CommandParser.parse(fullCommand);
+                Command c = CommandParser.parse(input);
                 c.execute(tasks, ui, storage);
 
                 isExit = c.isExit();

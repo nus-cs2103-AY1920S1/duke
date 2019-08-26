@@ -3,7 +3,7 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * Manages everything related to the UI.
+ * Manages UI related functions such as input and output.
  */
 public class Ui {
     private Scanner scanner;
@@ -12,8 +12,16 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Reads a command from system input.
+     *
+     * @return Input string. null if there is no input.
+     */
     public String readCommand() {
-        return scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine();
+        }
+        return null;
     }
 
     public void showLine() {

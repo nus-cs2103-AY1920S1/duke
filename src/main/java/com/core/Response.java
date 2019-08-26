@@ -1,6 +1,6 @@
 package com.core;
 
-import java.lang.StringBuilder;
+import java.util.stream.IntStream;
 
 import com.util.Printer;
 import com.tasks.Deadline;
@@ -14,17 +14,11 @@ public enum Response {
         s.toExit = true;
     }),
     LIST("(?i)^list\\s*", (j, s) -> {
-        StringBuilder formattedList = new StringBuilder();
-        for (int i = 0; i < s.list.size(); i++) {
-            if (i > 0) {
-                formattedList.append("\n");
-            }
-            formattedList.append(i + 1);
-            formattedList.append(".");
-            formattedList.append(s.list.get(i).toString());
-        }
-
-        String finalString = formattedList.toString();
+        String finalString = IntStream.range(0, s.list.size()).boxed().reduce("",
+                (acc, ti) -> acc + ((acc.equalsIgnoreCase("") ? "" : "\n")
+                        + (ti + 1) + "." + s.list.get(ti).toString()),
+                String::concat
+        );
         finalString = finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString;
         Printer.printString(finalString);
     }),

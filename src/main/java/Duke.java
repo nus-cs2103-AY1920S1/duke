@@ -8,6 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Scanner;
 
+
+/**
+ * Models a personal assistant chatbot for tracking tasks.
+ * Allows the user to add, remove, and mark as done different kinds of tasks,
+ * and stores them in a local text file.
+ */
 public class Duke {
     public static void main(String[] args) {
         TaskList taskList;

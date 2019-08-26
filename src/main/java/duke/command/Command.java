@@ -10,7 +10,7 @@ import duke.storage.Storage;
  * Validates the inputs provided then runs it.
  */
 abstract public class Command {
-    /** Commands enum type of the command */
+    /** Commands enum type of the command. */
     public Commands commandType;
 
     /** String array of arguments provided to the command. */

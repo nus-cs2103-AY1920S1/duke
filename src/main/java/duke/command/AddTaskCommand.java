@@ -9,7 +9,7 @@ import duke.task.Task;
  * Abstraction of command that adds a task to the list.
  */
 abstract class AddTaskCommand extends WritableCommand {
-    /** The task to add to the list */
+    /** The task to add to the list. */
     Task taskToAdd;
 
     /**

@@ -9,7 +9,7 @@ import duke.task.Task;
  * Abstraction of the Done command to mark a task as done in the task list.
  */
 class DoneCommand extends WritableCommand {
-    /** The task to mark as done as checked by validate */
+    /** The task to mark as done as checked by validate. */
     private Task task;
 
     /**

@@ -4,7 +4,7 @@ package duke;
  * Generic abstraction for exceptions related to duke operations.
  */
 public class DukeExceptions extends Exception {
-    /** Message to display to the user interface */
+    /** Message to display to the user interface. */
     private String displayMsg;
 
     /**

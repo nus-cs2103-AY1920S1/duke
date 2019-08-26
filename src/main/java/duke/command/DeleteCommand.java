@@ -9,7 +9,7 @@ import duke.task.Task;
  * Abstraction of the delete command for deleting a task from the task list.
  */
 class DeleteCommand extends WritableCommand {
-    /** Index of the task in the list as checked by validate */
+    /** Index of the task in the list as checked by validate. */
     private int taskIndex;
 
     /**

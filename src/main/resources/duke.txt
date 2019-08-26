@@ -1,5 +1,7 @@
 T | 1 | read book
 D | 0 | return book | 06 Jun 2019 0000
 D | 1 | submit assignment | 12 Jun 2019 0000
-T | 0 | run 2.4km
-T | 0 | chiong level-8
+T | 1 | chiong level-8
+T | 0 | splashdown
+D | 0 | complete tutorial | 07 Sep 2019 0000
+T | 0 | hello

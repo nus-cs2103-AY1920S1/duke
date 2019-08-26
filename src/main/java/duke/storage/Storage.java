@@ -1,5 +1,7 @@
-package duke.logic;
+package duke.storage;
 
+import duke.logic.Parser;
+import duke.logic.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,7 +19,9 @@ public class Storage {
     private File f;
 
     public Storage(String filePath) {
-        f = new File("data/duke.txt");
+
+        f = new File(filePath);
+
     }
 
     public ArrayList<Task> load() throws FileNotFoundException {
@@ -52,7 +56,7 @@ public class Storage {
     public void writeListToFile(TaskList taskList) throws IOException {
         ArrayList<Task> arr = taskList.getArr();
 
-        FileWriter fw = new FileWriter("data/duke.txt");
+        FileWriter fw = new FileWriter("resources/duke.txt");
         StringBuilder sb = new StringBuilder();
         for (Task entry : arr) {
             if (entry instanceof Deadline) {

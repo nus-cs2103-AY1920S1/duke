@@ -1,7 +1,7 @@
 import duke.command.Command;
 import duke.logic.DukeException;
 import duke.logic.Parser;
-import duke.logic.Storage;
+import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
 
@@ -42,7 +42,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException,IOException {
-        Duke duke = new Duke("data/tasks.txt");
+        Duke duke = new Duke("../resources/duke.txt");
         duke.run();
     }
 

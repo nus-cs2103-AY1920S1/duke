@@ -28,4 +28,18 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + getDateString()  + " "
                 + getTimeString() + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Event)) {
+            return false;
+        }
+
+        Event other = (Event) o;
+        return this.description == ((Event) o).description;
+    }
 }

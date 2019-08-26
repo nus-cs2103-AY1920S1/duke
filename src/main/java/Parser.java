@@ -61,7 +61,7 @@ public class Parser {
         if (ss1Arr.length == 1) {
             throw new DukeException("OOPS!!! The description of deadline cannot be empty.");
         }
-        if (ss2Arr.length == 1) {
+        if (ss2Arr.length < 3) {
             throw new DukeException("OOPS!!! The date/time of deadline cannot be empty.");
         }
 
@@ -99,7 +99,7 @@ public class Parser {
         if (ss1Arr.length == 1) {
             throw new DukeException("OOPS!!! The description of event cannot be empty.");
         }
-        if (ss2Arr.length == 1) {
+        if (ss2Arr.length < 3) {
             throw new DukeException("OOPS!!! The date/time of event cannot be empty.");
         }
 

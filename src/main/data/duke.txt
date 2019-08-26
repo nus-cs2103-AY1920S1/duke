@@ -3,3 +3,4 @@
 [E][✓] lunch (at: 26-Aug-2019 12:00PM)
 [D][✓] tutorial (by: 26-Aug-2019 10:00AM)
 [T][✓] JUnit testing
+[D][✘] lab (by: 08-Feb-2021 12:00PM)

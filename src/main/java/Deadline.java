@@ -28,4 +28,18 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + getDateString()  + " "
                 + getTimeString() + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline other = (Deadline) o;
+        return this.description == ((Deadline) o).description;
+    }
 }

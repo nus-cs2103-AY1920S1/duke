@@ -7,4 +7,18 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Todo)) {
+            return false;
+        }
+
+        Todo other = (Todo) o;
+        return this.description == ((Todo) o).description;
+    }
 }

@@ -22,81 +22,85 @@ public class Duke {
 
             boolean readingCommands = true;
             while (readingCommands) {
-                String input = sc.nextLine();
-                String[] inputWords = input.split(" ", 2);
-                String command = inputWords[0];
+                try {
+                    String input = sc.nextLine();
+                    String[] inputWords = input.split(" ", 2);
+                    String command = inputWords[0];
 
-                switch (command) {
-                    case "todo": {
-                        try {
-                            String description = inputWords[1];
-                            storage.addTask(new ToDo(description));
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("The description of a todo cannot be empty.");
+                    switch (command) {
+                        case "todo": {
+                            try {
+                                String description = inputWords[1];
+                                storage.addTask(new ToDo(description));
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            }
+                            break;
                         }
-                        break;
-                    }
 
-                    case "deadline": {
-                        try {
-                            String[] params = inputWords[1].split(" /by ");
-                            String description = params[0];
-                            String by = params[1];
-                            storage.addTask(new Deadline(description, by));
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("Creating a Deadline failed: Insufficient parameters provided");
+                        case "deadline": {
+                            try {
+                                String[] params = inputWords[1].split(" /by ");
+                                String description = params[0];
+                                String by = params[1];
+                                storage.addTask(new Deadline(description, by));
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new DukeException("Creating a Deadline failed: Insufficient params provided");
+                            }
+                            break;
                         }
-                        break;
-                    }
 
-                    case "event": {
-                        try {
-                            String[] params = inputWords[1].split(" /at ");
-                            String description = params[0];
-                            String at = params[1];
-                            storage.addTask(new Event(description, at));
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("Creating an Event failed: Insufficient parameters provided");
+                        case "event": {
+                            try {
+                                String[] params = inputWords[1].split(" /at ");
+                                String description = params[0];
+                                String at = params[1];
+                                storage.addTask(new Event(description, at));
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new DukeException("Creating an Event failed: Insufficient params provided");
+                            }
+                            break;
                         }
-                        break;
-                    }
 
-                    case "list": {
-                        for (int i = 1; i <= tasks.size(); i++) {
-                            Task task = tasks.get(i - 1);
-                            System.out.println(i + ". " + task);
+                        case "list": {
+                            for (int i = 1; i <= tasks.size(); i++) {
+                                Task task = tasks.get(i - 1);
+                                System.out.println(i + ". " + task);
+                            }
+                            break;
                         }
-                        break;
-                    }
 
-                    case "done": {
-                        int id = Integer.parseInt(inputWords[1]) - 1;
-                        try {
-                            Task task = tasks.get(id);
-                            task.markAsDone();
-                            System.out.println("Nice! I've marked this task as done:");
-                            System.out.println(task);
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("Marking task with ID " + id + " failed: Invalid ID");
+                        case "done": {
+                            int id = Integer.parseInt(inputWords[1]) - 1;
+                            try {
+                                Task task = tasks.get(id);
+                                task.markAsDone();
+                                System.out.println("Nice! I've marked this task as done:");
+                                System.out.println(task);
+                            } catch (IndexOutOfBoundsException e) {
+                                throw new DukeException("Marking task with ID " + id + " failed: Invalid ID");
+                            }
+                            break;
                         }
-                        break;
-                    }
 
-                    case "delete": {
-                        int id = Integer.parseInt(inputWords[1]) - 1;
-                        storage.deleteTask(id);
-                        break;
-                    }
+                        case "delete": {
+                            int id = Integer.parseInt(inputWords[1]) - 1;
+                            storage.deleteTask(id);
+                            break;
+                        }
 
-                    case "bye": {
-                        readingCommands = false;
-                        System.out.println("Bye. Hope to see you again soon!");
-                        break;
-                    }
+                        case "bye": {
+                            readingCommands = false;
+                            System.out.println("Bye. Hope to see you again soon!");
+                            break;
+                        }
 
-                    default: {
-                        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        default: {
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        }
                     }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         } catch (DukeException e) {

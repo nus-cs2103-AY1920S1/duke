@@ -60,7 +60,7 @@ public enum Response {
         Printer.printError("The date range of an event cannot be empty");
     }),
     EVENT("(?i)^event .+ /at .+", (i, s) -> {
-        String[] parts = splitTwoDelimeters(i, "(?i)^event ", "(?i)/at ");
+        String[] parts = splitTwoDelimiters(i, "(?i)^event ", "(?i)/at ");
         addTask(new Event(parts[0], parts[1]), s);
     }),
     DEADLINE_NO_NAME("(?i)^deadline\\s*", (i, s) -> {
@@ -70,7 +70,7 @@ public enum Response {
         Printer.printError("The due date of a deadline cannot be empty");
     }),
     DEADLINE("(?i)^deadline .+ /by .+", (i, s) -> {
-        String[] parts = splitTwoDelimeters(i, "(?i)^deadline ", "(?i)/by ");
+        String[] parts = splitTwoDelimiters(i, "(?i)^deadline ", "(?i)/by ");
         addTask(new Deadline(parts[0], parts[1]), s);
     }),
     UNKNOWN(".*", (i, s) -> {
@@ -135,7 +135,7 @@ public enum Response {
      * @param mid   mid regex match
      * @return array of two text parts
      */
-    private static String[] splitTwoDelimeters(String input, String head, String mid) {
+    private static String[] splitTwoDelimiters(String input, String head, String mid) {
         String[] parts = input.split(mid, 2);
         parts[0] = parts[0].split(head)[1];
         return parts;

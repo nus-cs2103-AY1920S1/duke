@@ -97,7 +97,7 @@ public class Storage {
         printTaskCount();
 
         try {
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(file, true);
             if (tasks.size() > 1) {
                 fw.append(System.lineSeparator());
             }

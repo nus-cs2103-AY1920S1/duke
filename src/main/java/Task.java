@@ -18,4 +18,8 @@ public abstract class Task implements Serializable {
     protected char getStatusIcon() {
         return isDone ? UNICODE_TICK : UNICODE_CROSS;
     }
+
+    protected boolean descriptionContainsTerm(String searchTerm) {
+        return description.contains(searchTerm);
+    }
 }

@@ -57,6 +57,25 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
+    public String getMatchingTasksAsString (String searchTerm) {
+        StringBuilder sb = new StringBuilder();
+        int iterator = 1;
+
+        for(Task t : tasks) {
+            //For each Task t, print out one line of "X.[<Status>] Description", if it matches the search term
+            if(t.descriptionContainsTerm(searchTerm)) {
+                sb.append(String.format("%d.%s\n", iterator++, t.toString()));
+            }
+        }
+
+        String retval = sb.toString();
+        if(retval.equals("")) {
+            retval = DukeUi.FEEDBACK_FIND_NOTHING;
+        }
+
+        return retval;
+    }
+
     @Override
     //Converts the TaskList into a human-readable String
     public String toString() {

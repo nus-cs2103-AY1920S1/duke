@@ -9,6 +9,8 @@ public class DukeUi {
     public final static String FEEDBACK_TASK_DONE = "Good job! I've marked this task as done:\n  %s";
     public final static String FEEDBACK_TASK_DELETE = "No problem! I've deleted the task:\n %s\nYou've got %d tasks in your list.";
     public final static String FEEDBACK_NUKE = "Boom! I've deleted all of your tasks!";
+    public final static String FEEDBACK_FIND = "Scan complete! I've got your tasks right here: \n%s";
+    public final static String FEEDBACK_FIND_NOTHING = "It's absolutely nothing!";
     
     //Error Messages
     public final static String ERROR_UNDECIPHERABLE_MESSAGE = "Hmm, yes. I totally get it!\n(Doesn't get it at all.)";

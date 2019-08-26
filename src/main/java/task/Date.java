@@ -6,6 +6,12 @@ public class Date {
     protected int day;
     protected String origin;
 
+    /**
+     * Constructor for Date object.
+     * @param year int. The year.
+     * @param mth int, The month.
+     * @param day int, The day.
+     */
     public Date(int year, int mth, int day) {
         this.year = year;
         this.day = day;
@@ -13,6 +19,10 @@ public class Date {
         this.origin = day + "/" + mth + "/" + year;
     }
 
+    /**
+     * Alternative constructor for Date object.
+     * @param date String input must have the format (dd/mm/yyyy);
+     */
     public Date(String date) {
         String[] dateComponents = date.split("/");
         this.day = Integer.parseInt(dateComponents[0]);
@@ -21,6 +31,11 @@ public class Date {
         this.origin = date;
     }
 
+    /**
+     * Returns the String that corresponds to the date object. (Example:
+     * 18/08/2019 -> 18th August 2019).
+     * @return String.
+     */
     public String toString() {
         if (day % 10 == 1) {
             return this.day + "st " + this.month.toString() + " " + this.year;
@@ -33,6 +48,10 @@ public class Date {
         }
     }
 
+    /**
+     * String returns the original date format (dd/mm/yyyy).
+     * @return String.
+     */
     public String origin() {
         return this.origin;
     }

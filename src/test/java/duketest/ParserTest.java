@@ -12,6 +12,9 @@ import command.*;
 
 public class ParserTest {
     @Test
+    /**
+     * Checks if Parser.parse executes the command deadline correctly.
+     */
     public void parseTest1() {
         ArrayList<String> args = new ArrayList<>();
         args.add("CS2103 Project");
@@ -27,6 +30,9 @@ public class ParserTest {
     }
 
     @Test
+    /**
+     * Checks if Parser.parse executes an unknown command correctly.
+     */
     public void parseTest2() {
         String res = "";
         try {

@@ -5,6 +5,12 @@ import command.*;
 import java.util.ArrayList;
 
 public class Parser {
+    /**
+     * Parser.parse parses the full input command and returns the appropriate command for execution.
+     * @param fullCommand String. One full command from the user input. (Example: todo Fix broken laptop).
+     * @return Command that will be executed.
+     * @throws DukeException if the full command does not match any command type.
+     */
     public static Command parse(String fullCommand) throws DukeException{
         String[] commandComponents = fullCommand.split(" ");
         Command c = null;

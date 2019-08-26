@@ -7,6 +7,7 @@ import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Drives the Duke bot
@@ -26,7 +27,7 @@ public class Duke {
         } catch (FileNotFoundException fnfe) {
             tasks = new TaskList();
             ui.exposeError("File not found at " + filePath + ", starting with a clean slate.");
-        } catch (IOException ioe) {
+        } catch (IOException|ParseException e) {
             tasks = new TaskList();
             ui.exposeError("Unable to read file at " + filePath + ", starting with a clean slade");
         }

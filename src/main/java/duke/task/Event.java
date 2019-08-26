@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.Command;
+
 import java.util.Date;
 
 public class Event extends Task {
@@ -26,7 +28,9 @@ public class Event extends Task {
 
     @Override
     public String toDelimitedString() {
-        return String.format("%c | %c | %s | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(), this.eventTimeFrom, this.eventTimeTo);
+        return String.format("%c | %c | %s | %s | %s",
+                this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(),
+                Command.DATE_FORMAT.format(this.eventTimeFrom), Command.DATE_FORMAT.format(this.eventTimeTo));
     }
 
 }

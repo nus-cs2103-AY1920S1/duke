@@ -1,3 +1,2 @@
-E | F | gay | fish | ball
-T | F | gay
-D | F | homework | never
+E | F | hi | 12/12/1990 18:30 | 12/12/1990 18:30
+D | T | homework | 19/12/1990 18:30

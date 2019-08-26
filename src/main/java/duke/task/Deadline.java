@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.Command;
+
 import java.util.Date;
 
 public class Deadline extends Task {
@@ -23,6 +25,6 @@ public class Deadline extends Task {
 
     @Override
     public String toDelimitedString() {
-        return String.format("%c | %c | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(), this.deadlineTime);
+        return String.format("%c | %c | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(), Command.DATE_FORMAT.format(this.deadlineTime));
     }
 }

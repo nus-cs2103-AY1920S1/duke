@@ -4,11 +4,11 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = at.trim();
     }
 
     public Event(String description, String at, String isDone) {
-        super(description.trim(), isDone.trim());
+        super(description, isDone);
         this.at = at;
     }
     @Override

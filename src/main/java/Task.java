@@ -9,8 +9,8 @@ public abstract class Task {
 
     public Task(String description, String done) {
 
-        this.description = description;
-        if (done.equals("1")) {
+        this.description = description.trim();
+        if (done.trim().equals("1")) {
             this.isDone = true;
         }
     }

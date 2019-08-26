@@ -150,7 +150,15 @@ public class Duke {
         try{
             ReadAndWrite.readFile(myList);
         }catch (Exception e){
-            System.out.println("duke.txt is not found +++");
+            System.out.println(frontSpace + " duke.txt has problem");
+        }
+    }
+
+    public static void tryToWriteFile() {
+        try{
+            ReadAndWrite.writeFile(myList);
+        }catch (Exception e){
+            System.out.println(frontSpace + " duke.txt has problem");
         }
     }
 
@@ -173,11 +181,14 @@ public class Duke {
                     listFeature();
                 } else if (firstWord.equals("done")) {
                     doneFeature();
+                    tryToWriteFile();
                 } else if (firstWord.equals("delete")) {
                     deleteFeature();
+                    tryToWriteFile();
                 } else if (firstWord.equals("todo") || firstWord.equals("deadline")
                         || firstWord.equals("event")) {
                     childFeature();
+                    tryToWriteFile();
                 } else {
                     //situation of firstWord is invalid
                     System.out.print(frontSpace + upperLine);

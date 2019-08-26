@@ -5,12 +5,12 @@ public class Todo extends Task {
     }
 
     public Todo(String description, String isDone) {
-        super(description.trim(), isDone.trim());
+        super(description, isDone);
     }
 
     @Override
     public String getFormatToFile() {
-        return String.format("E | %d | %s \n", (isDone ? 1 : 0), description);
+        return String.format("T | %d | %s \n", (isDone ? 1 : 0), description);
     }
 
     @Override

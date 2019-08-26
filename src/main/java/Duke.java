@@ -41,6 +41,32 @@ public class Duke {
         }
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void updateTaskList() {
+        String file = "data/taskList.txt";
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            for (int i = 0; i < dukeList.size(); i++) {
+                if (i == dukeList.size() - 1) {
+                    sb.append(dukeList.get(i).toTextFileString());
+                } else {
+                    sb.append(dukeList.get(i).toTextFileString());
+                    sb.append("\n");
+                }
+            }
+            String content = sb.toString();
+            writeToFile(file, content);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
 
         try {

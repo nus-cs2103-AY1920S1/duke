@@ -1,3 +1,6 @@
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,6 +39,10 @@ public class Duke {
                 System.out.println(ex.getMessage());
                 userInput = input.nextLine();
                 continue;
+            } catch (ParseException ex) {
+                System.out.println("☹ OOPS!!! The Date/Time field is invalid");
+                userInput = input.nextLine();
+                continue;
             }
 
             if (userInput.startsWith("done")) {
@@ -51,32 +58,41 @@ public class Duke {
                 addTaskToTaskList(taskList, new ToDo(description));
             } else if (userInput.startsWith("deadline")) {
                 String description = userInput.substring(9, userInput.indexOf('/') - 1);
-                String by = userInput.substring(13 + description.length());
+                String by = userInput.substring(13 + description.length()).trim();
+
                 try {
                     handleInput("by", by);
                 } catch (DukeException ex) {
                     System.out.println(ex.getMessage());
                     userInput = input.nextLine();
                     continue;
+                } catch (ParseException ex) {
+                    System.out.println("☹ OOPS!!! The Date/Time field is invalid");
+                    userInput = input.nextLine();
+                    continue;
                 }
-                addTaskToTaskList(taskList, new Deadline(description, by.trim()));
+                addTaskToTaskList(taskList, new Deadline(description, new DateTime(by)));
             } else if (userInput.startsWith("event")) {
                 String description = userInput.substring(6, userInput.indexOf('/') - 1);
-                String at = userInput.substring(10 + description.length());
+                String at = userInput.substring(10 + description.length()).trim();
                 try {
                     handleInput("at", at);
                 } catch (DukeException ex) {
                     System.out.println(ex.getMessage());
                     userInput = input.nextLine();
                     continue;
+                } catch (ParseException ex) {
+                    System.out.println("☹ OOPS!!! The Date/Time field is invalid");
+                    userInput = input.nextLine();
+                    continue;
                 }
-                addTaskToTaskList(taskList, new Event(description, at.trim()));
+                addTaskToTaskList(taskList, new Event(description, new DateTime(at)));
             }
             userInput = input.nextLine();
         }
     }
 
-    public static void handleInput(String type, String userInput) throws EmptyFieldException, InvalidInputException{
+    public static void handleInput(String type, String userInput) throws EmptyFieldException, InvalidInputException, ParseException {
         if (type.equals("done")) {
             if (userInput.substring(4).isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! The task number cannot be empty.");
@@ -115,6 +131,10 @@ public class Duke {
             if (userInput.isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! The deadline of a deadline cannot be empty.");
             }
+            String formatString = "dd/mm/yyyy";
+            SimpleDateFormat format = new SimpleDateFormat(formatString);
+            format.setLenient(false);
+            format.parse(userInput.split(" ")[0]);
         } else if (type.equals("event")) {
             if (userInput.substring(5).isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! The new event cannot be empty.");
@@ -129,6 +149,10 @@ public class Duke {
             if (userInput.isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! The 'at' field of an event cannot be empty.");
             }
+            String formatString = "dd/mm/yyyy";
+            SimpleDateFormat format = new SimpleDateFormat(formatString);
+            format.setLenient(false);
+            format.parse(userInput.split(" ")[0]);
         } else if (type.isBlank() && userInput.isBlank()) {
             throw new EmptyFieldException("☹ OOPS!!! I'm sorry, but you have to input something");
         } else {

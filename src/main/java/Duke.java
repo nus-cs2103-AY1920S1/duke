@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class Duke {
     static ArrayList<Task> memory = new ArrayList<>();
+    static DateTime DT = new DateTime();
     static int index;
     static String filePath = "../duke/data/duke.txt";
 
@@ -38,25 +39,25 @@ public class Duke {
                     doneTask(taskNum);
                 } else if (input.equals("todo")) {
                     String TodoTask = sc.nextLine();
-                        if (TodoTask.equals("")) {
-                            throw new DukeException("Oops! The description of a todo cannot be empty.");
-                        } else {
-                            toDoTask(TodoTask);
-                        }
+                    if (TodoTask.equals("")) {
+                        throw new DukeException("Oops! The description of a todo cannot be empty.");
+                    } else {
+                        toDoTask(TodoTask);
+                    }
                 } else if (input.equals("event")) {
                     String EventTask = sc.nextLine();
-                        if (EventTask.equals("")) {
-                            throw new DukeException("Oops! The description of an event cannot be empty.");
-                        } else {
-                            eventTask(EventTask);
-                        }
+                    if (EventTask.equals("")) {
+                        throw new DukeException("Oops! The description of an event cannot be empty.");
+                    } else {
+                        eventTask(EventTask);
+                    }
                 } else if (input.equals("deadline")) {
                     String DeadlineTask = sc.nextLine();
-                        if (DeadlineTask.equals("")) {
-                            throw new DukeException("Oops! The description of a deadline cannot be empty.");
-                        } else {
-                            deadlineTask(DeadlineTask);
-                        }
+                    if (DeadlineTask.equals("")) {
+                        throw new DukeException("Oops! The description of a deadline cannot be empty.");
+                    } else {
+                        deadlineTask(DeadlineTask);
+                    }
                 } else if (input.equals("delete")) {
                     int deleteNum = sc.nextInt();
                     deleteTask(deleteNum);
@@ -228,10 +229,23 @@ public class Duke {
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the event timing and resubmit that command.");
         } else {
-            Event newEvent = new Event(details[0], details[1]);
-            memory.add(newEvent);
-            printTask(newEvent);
-            saveToDrive();
+            String[] eventTime = details[1].trim().split(" ");
+            if (eventTime.length < 2) {
+                throw new DukeException("Oops! Please write the event timing such as 29/2/2019 1800-2000");
+            } else {
+                try {
+                    String[] hoursMin = eventTime[1].split("-");
+                    String hM = DT.getTime(hoursMin[0]) + "-" + DT.getTime(hoursMin[1]);
+                    String formattedTime = DT.getDate(eventTime[0]) + hM;
+                    Event newEvent = new Event(details[0], formattedTime);
+                    memory.add(newEvent);
+                    printTask(newEvent);
+                    saveToDrive();
+                } catch (DateException e) {
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as 29/2/2019 1800-2000");
+                }
+            }
+
         }
     }
 
@@ -244,10 +258,21 @@ public class Duke {
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the deadline and resubmit that command.");
         } else {
-            Deadline newDeadline = new Deadline(details[0], details[1]);
-            memory.add(newDeadline);
-            printTask(newDeadline);
-            saveToDrive();
+            String[] time = details[1].trim().split(" ");
+            if (time.length < 2) {
+                throw new DukeException("Oops! Please write the deadline such as 29/2/2019 1800");
+            } else {
+                try {
+                    String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
+                    Deadline newDeadline = new Deadline(details[0], formattedTime);
+                    memory.add(newDeadline);
+                    printTask(newDeadline);
+                    saveToDrive();
+                } catch (DateException e) {
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as 29/2/2019 1800");
+                }
+            }
+
         }
     }
 

@@ -35,6 +35,7 @@ public class OutputUtilities {
                 System.out.println("\t Reading file...");
             } catch (IOException ioe) {
                 System.out.println("\t File creation was not successful. " + ioe);
+                return;
             }
 
         }

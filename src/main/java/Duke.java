@@ -7,6 +7,7 @@ import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 
 
 public class Duke {
@@ -42,7 +43,13 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException,IOException {
-        Duke duke = new Duke("../resources/duke.txt");
+        Class dukeClass = Duke.class;
+        ClassLoader loader = dukeClass.getClassLoader();
+        URL myURL = loader.getResource("resources/duke.txt");
+        String path = myURL.getPath();
+        path = path.replaceAll("%20", " ");
+
+        Duke duke = new Duke(path);
         duke.run();
     }
 

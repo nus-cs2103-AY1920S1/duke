@@ -11,6 +11,8 @@ public abstract class Task {
         this.isDone = status;
     }
 
+    public abstract String getSimplifiedRepresentation();
+
     @Override
     public String toString() {
         return (isDone ? "[\u2713] " : "[\u2718] ") + this.taskName;

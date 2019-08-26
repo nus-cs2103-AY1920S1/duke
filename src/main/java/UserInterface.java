@@ -14,9 +14,10 @@ public class UserInterface {
     public final String MESSAGE_INVALID_COMMAND_FORMAT = "I'm sorry, but I don't know what that means :-(";
     public final String MESSAGE_INVALID_TODO_FORMAT = "The description of a todo cannot be empty.";
     public final String MESSAGE_INVALID_DEADLINE_FORMAT =
-            "The description of a deadline must have /by and cannot be empty. E.g. deadline return book /by Sunday";
+            "Deadlines must have /by and cannot be empty. E.g. deadline return book /by 2/12/2019 1800";
     public final String MESSAGE_INVALID_EVENT_FORMAT =
-            "The description of a event must have /at and cannot be empty. E.g. event project meeting /at Mon 2-4pm";
+            "Events must have /at and cannot be empty. E.g. event project meeting /at 2/12/2019 1800";
+    public final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date. Follow d/M/yyyy HHmm format. E.g. 2/12/2019 1800";
     public final String MESSAGE_INVALID_TASK_INDEX = "Invalid task number. Task numbers are 1-based.";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private static final String LOGO = " ____        _        \n"

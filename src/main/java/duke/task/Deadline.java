@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.Duke;
+import duke.DukeException;
+
 import java.util.Date;
 
 public class Deadline extends Task {
@@ -16,7 +21,7 @@ public class Deadline extends Task {
         return "a deadline";
     }
 
-    protected String toExportFormat() {
+    public String toExportFormat() {
         return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + Duke.formatDate(this.by);
     }
 

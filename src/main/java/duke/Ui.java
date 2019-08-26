@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -26,7 +28,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        printMessage("Hello! I'm Duke\nWhat can I do for you?");
+        printMessage("Hello! I'm duke.Duke\nWhat can I do for you?");
     }
 
     public static String pluralize(String item, Integer quantity) {

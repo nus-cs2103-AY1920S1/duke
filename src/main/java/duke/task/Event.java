@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.Duke;
+import duke.DukeException;
+
 import java.util.Date;
 
 public class Event extends Task {
@@ -16,7 +21,7 @@ public class Event extends Task {
         return "an event";
     }
 
-    protected String toExportFormat() {
+    public String toExportFormat() {
         return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + Duke.formatDate(this.at);
     }
 

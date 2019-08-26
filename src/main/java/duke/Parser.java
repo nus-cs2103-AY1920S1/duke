@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 public class Parser {
     public static Command parse(String rawCommand) throws DukeException {
         String[] words = rawCommand.split(" ");

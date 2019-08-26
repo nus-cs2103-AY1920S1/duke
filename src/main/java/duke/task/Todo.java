@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Todo extends Task {
 
     public Todo(String description) throws DukeException {
@@ -8,7 +12,7 @@ public class Todo extends Task {
         return "a todo";
     }
 
-    protected String toExportFormat() {
+    public String toExportFormat() {
         return "T | " + (this.isDone ? "1" : "0") + " | " + this.description;
     }
 

@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Duke;
+import duke.DukeException;
 
 public abstract class Task {
     protected String description;
@@ -25,7 +29,7 @@ public abstract class Task {
 
     protected abstract String getTypeNameWithQuantifier();
 
-    protected abstract String toExportFormat();
+    public abstract String toExportFormat();
 
     public static Task fromImportFormat(String text) throws DukeException {
         String[] stringArray = text.split(" \\| ");

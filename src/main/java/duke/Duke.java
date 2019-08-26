@@ -1,8 +1,11 @@
+package duke;
+
+import duke.command.Command;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -42,7 +45,7 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
-    protected static Date parseDate(String rawDate) throws DukeException {
+    public static Date parseDate(String rawDate) throws DukeException {
         try {
             Date newDate = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(rawDate);
             return newDate;
@@ -51,7 +54,7 @@ public class Duke {
         }
     }
 
-    protected static String formatDate(Date date) {
+    public static String formatDate(Date date) {
         return new SimpleDateFormat("dd/MM/yyyy HHmm").format(date);
     }
 }

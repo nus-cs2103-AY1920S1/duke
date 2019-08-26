@@ -125,6 +125,13 @@ public class Ui {
         }
     }
 
+    public void showFoundTask(ArrayList<Task> foundTaskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < foundTaskList.size(); i++) {
+            System.out.println(i + 1 + "." + foundTaskList.get(i));
+        }
+    }
+
     private String display(String text) {
         return LINES + text + LINES;
     }

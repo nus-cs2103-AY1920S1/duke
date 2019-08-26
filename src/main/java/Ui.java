@@ -64,6 +64,15 @@ public class Ui {
         System.out.println(line);
     }
 
+    public void showFindTasksMessage(TaskList tasks) {
+        System.out.println(line);
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.taskListSize(); i++) {
+            System.out.println("     " + (i + 1) + "." + tasks.getTask(i));
+        }
+        System.out.println(line);
+    }
+
     public String getLine() {
         return line;
     }

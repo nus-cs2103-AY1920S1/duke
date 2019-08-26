@@ -1,2 +1,5 @@
-T|0|nothinf
+T|1|nothinf
 E|0|test event|1/1/2019 1800
+T|1|read book
+D|0|return book|1/1/2019 1200
+E|0|boo k bookk|12/12/2012 1900

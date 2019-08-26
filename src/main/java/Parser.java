@@ -21,6 +21,15 @@ public class Parser {
                 throw new InvalidCommandDukeException("☹ OOF!!! Please enter a task number!!");
             }
 
+        } else if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("find")) {
+            String keyWord = fullCommand.substring(5);
+            if (keyWord.trim().equals("")) {
+                throw new InvalidCommandDukeException("☹ OOF!!! Please enter a keyword!!");
+            } else {
+                return new FindCommand(keyWord);
+            }
+
+
         } else if (fullCommand.trim().equals("")) {
             throw new InvalidCommandDukeException("☹ OOF!!! I'm sorry, but I don't know what that means :-(");
         } else {

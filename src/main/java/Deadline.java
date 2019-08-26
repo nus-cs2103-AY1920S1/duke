@@ -1,13 +1,26 @@
 public class Deadline extends Task {
-    protected String by;
+    protected String deadlineTime;
+    final String TASK_TYPE = "[D]";
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.deadlineTime = by;
+    }
+
+    public String getTime(){
+        return deadlineTime;
+    }
+
+    public String getDescription(){
+        return this.description + "|" + this.deadlineTime;
+    }
+
+    public String getType() {
+        return TASK_TYPE;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.getStatusIcon() + " " + super.toString() + " (by: " + by + ")";
+        return  TASK_TYPE + super.getStatusIcon() + " " + super.toString() + " (by: " + deadlineTime + ")";
     }
 }

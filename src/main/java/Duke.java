@@ -1,5 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
     private ArrayList<Task> textEntered;
 
@@ -9,6 +12,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke dukebot = new Duke();
+        dukebot.loadFile();
         dukebot.greetUser();
         dukebot.echoUser();
     }
@@ -36,6 +40,7 @@ public class Duke {
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                writeTask();
             } catch (DukeException e) {
                 System.out.println(e.getMessage() + "\n");
             } finally {
@@ -47,6 +52,18 @@ public class Duke {
 
     }
 
+    private void loadFile() {
+        try {
+            textEntered = new TaskReader().outputFileContents();
+        } catch (DukeException e){
+            e.getMessage();
+        }
+    }
+
+    private void writeTask(){
+        TaskWriter taskWrite = new TaskWriter(textEntered);
+        taskWrite.writeToFile();
+    }
     private void handleDone(String doneInfo) throws DukeException {
         String[] inputsplit = doneInfo.split(" ", 2);
         if(inputsplit.length <= 1) {
@@ -80,7 +97,7 @@ public class Duke {
         }
         Task taskToAdd;
         if (typeTask.equalsIgnoreCase("todo")) {
-             taskToAdd = new toDo(inputsplit[1]);
+             taskToAdd = new ToDo(inputsplit[1]);
         } else if (typeTask.equalsIgnoreCase("deadline")) {
             String[] descripSplit = inputsplit[1].split(" /by ", 2);
              taskToAdd = new Deadline(descripSplit[0], descripSplit[1]);
@@ -101,7 +118,7 @@ public class Duke {
         Task t =  textEntered.get(num - 1);
         t.markIsDone();
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + t.getStatusIcon() + " " +  t.getDescription() + "\n");
+        System.out.println("  " + t.toString() + "\n");
     }
 
     private void printRecord(){

@@ -7,8 +7,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public String getDescription(){
-        return this.description;
+    public boolean getIsDone(){
+        return this.isDone;
     }
 
     public void markIsDone(){
@@ -22,4 +22,9 @@ public abstract class Task {
     public String toString(){
         return this.description;
     }
+
+    public abstract String getType();
+
+    public abstract String getDescription();
+
 }

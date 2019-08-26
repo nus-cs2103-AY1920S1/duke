@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-abstract class Task {
+abstract class TaskList {
     private int taskNumber;
     private String taskCheck;
     private String taskName;
     private String type;
 
-    public Task(int i, String tC, String tN, String t) {
+    public TaskList(int i, String tC, String tN, String t) {
         taskNumber = i;
         taskCheck = tC;
         taskName = tN;
@@ -36,20 +36,20 @@ abstract class Task {
     }
 
     //when input is "list"
-    static void printList(ArrayList<Task> a) {
+    static void printList(ArrayList<TaskList> a) {
         System.out.println("Here are the tasks in your list:");
-        for (Task t : a) {
+        for (TaskList t : a) {
             System.out.println(t);
         }
     }
 
     //when input is "done"
-    static void markAsDone(int i, ArrayList<Task> a) {
+    static void markAsDone(int i, ArrayList<TaskList> a) {
         System.out.println("Nice! I've marked this task as done:");
-        Task t = a.get(i - 1);
+        TaskList t = a.get(i - 1);
         String currentTask = t.getTaskName();
         String getType = t.getType();
-        Task doneTask;
+        TaskList doneTask;
         if(getType.equals("todo")) {
             doneTask = new Todo(i, "[✓]", currentTask, getType);
             a.set(i - 1, doneTask);
@@ -64,7 +64,7 @@ abstract class Task {
     }
 
     //to add task
-    void addList(Task t, ArrayList<Task> a, int n) {
+    void addList(TaskList t, ArrayList<TaskList> a, int n) {
         System.out.println("Got it. I've added this task:");
         a.add(t);
         System.out.println(t);
@@ -72,7 +72,7 @@ abstract class Task {
     }
 
     //to delete task
-    void deleteTask(Task t, ArrayList<Task> a) {
+    void deleteTask(TaskList t, ArrayList<TaskList> a) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(t);
         int taskNumber = t.getTaskNumber();

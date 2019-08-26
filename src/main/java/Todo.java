@@ -1,4 +1,4 @@
-public class Todo extends Task {
+public class Todo extends TaskList {
 
     public Todo(int taskNumber, String taskCheck, String taskName, String type) {
         super(taskNumber, taskCheck, taskName, type);

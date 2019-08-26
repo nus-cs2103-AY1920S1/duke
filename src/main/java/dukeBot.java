@@ -8,7 +8,7 @@ public class dukeBot {
 
         Task t;
 
-        if(cmd.startsWith("done")) {
+        if (cmd.startsWith("done")) {
             int index = Integer.valueOf(cmd.substring(5, 6));
             list.get(index - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
@@ -42,9 +42,9 @@ public class dukeBot {
         ArrayList<Task> list = new ArrayList<>();
         int cnt = 0;
 
-        while(true) {
+        while (true) {
             String input = sc.nextLine();
-            switch(input) {
+            switch (input) {
                 case "bye":
                 case "Bye":
                     System.out.println("Bye. Hope to see you again soon!"); return;

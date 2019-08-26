@@ -73,12 +73,12 @@ public class Duke {
                         throw new DukeException("The description of a " + input+ " cannot be empty.");
                     }
                     if (input.equals("todo")) {
-                        t = new Todo(desc);
+                        t = new Todo(desc.trim());
                     } else if (input.equals("deadline")) {
-                        String[] str = desc.split("/");
+                        String[] str = desc.trim().split("/");
                         t = new Deadline(str[0], str[1].substring(3));
                     } else if (input.equals("event")) {
-                        String[] str = desc.split("/");
+                        String[] str = desc.trim().split("/", 2);
                         t = new Event(str[0], str[1].substring(3));
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");

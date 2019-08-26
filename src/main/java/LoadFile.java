@@ -26,10 +26,7 @@ public class LoadFile {
             return taskArr;
         } catch (IOException err) {
             throw new DukeException("Unable to load file.");
-        } finally {
-            return taskArr;
         }
-
     }
 
     private ArrayList<Task> changeTextToTask(ArrayList<Task> taskArr, Scanner sc) throws IOException {

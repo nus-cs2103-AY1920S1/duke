@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Create a TaskList to store Task objects.
  */
 public class TaskList {
-    public ArrayList<Task> list = new ArrayList<Task>();
+    public ArrayList<Task> tasks = new ArrayList<Task>();
 
     /**
      * TaskList to store.
@@ -49,6 +49,6 @@ public class TaskList {
         if (strArr[1].equals("1")) {
             t.markAsDone();
         }
-        list.add(t);
+        tasks.add(t);
     }
 }

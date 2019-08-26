@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
     @Test
-    void deadlineTest() {
+    void deadline_formattedInput() {
         System.out.println("DeadlineTest starts");
         Deadline deadline = new Deadline("testing", "11/11/11 11:11");
         assertEquals("[D][N] testing (by: Fri Nov 11 11:11:00 SGT 2011)", deadline.toString());

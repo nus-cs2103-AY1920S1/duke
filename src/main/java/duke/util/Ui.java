@@ -112,13 +112,13 @@ public class Ui {
     /**
      * Prints the tasks within TaskList.
      *
-     * @param tasks TaskList object.
+     * @param list TaskList object.
      */
-    public void printList(TaskList tasks) {
+    public void printList(TaskList list) {
         try {
             System.out.println("Here are the task in your list:");
-            for (int i = 0; i < tasks.list.size(); i++) {
-                System.out.println(i + 1 + "." + tasks.list.get(i));
+            for (int i = 0; i < list.tasks.size(); i++) {
+                System.out.println(i + 1 + "." + list.tasks.get(i));
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.print("Your list is empty.");

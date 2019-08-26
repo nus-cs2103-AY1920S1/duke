@@ -21,7 +21,7 @@ public class AddCommand extends Command {
      * @param storage Storage to read and write files.
      */
     public void execute(TaskList t, Ui ui, Storage storage) {
-        t.list.add(task);
-        ui.showAddedTask(task, t.list.size());
+        t.tasks.add(task);
+        ui.showAddedTask(task, t.tasks.size());
     }
 }

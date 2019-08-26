@@ -8,7 +8,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, Date at) {
         super(description, isDone);
         this.at = at;
     }
@@ -20,6 +20,6 @@ public class Event extends Task {
 
     @Override
     public String toStorageString() {
-        return "E`" + super.toStorageString() + '`' + at;
+        return "E`" + super.toStorageString() + '`' + at.toString();
     }
 }

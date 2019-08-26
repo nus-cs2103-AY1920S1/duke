@@ -8,7 +8,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, Date by) {
         super(description, isDone);
         this.by = by;
     }
@@ -20,6 +20,6 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageString() {
-        return "D`" + super.toStorageString() + '`' + by;
+        return "D`" + super.toStorageString() + '`' + by.toString();
     }
 }

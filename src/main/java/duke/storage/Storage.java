@@ -1,5 +1,7 @@
-package duke;
+package duke.storage;
 
+import duke.command.DukeInvalidArgumentException;
+import duke.ui.Ui;
 import duke.task.*;
 
 import java.io.File;
@@ -21,18 +23,18 @@ public class Storage {
     private static String PARSE_ERROR_MSG =
             " \u2639 Oops! I encountered an error while reading your previous tasks,\n"
                     + " I ignored that line of input but you should check it out...\n";
-    private static String FALLBACK_FILE_PATH = "../data";
-    private static String DATA_FILE_NAME = "taskData.txt";
-    private static int DIRECTORY_SEARCH_LIMIT = 5;
+    private static final String FALLBACK_FILE_PATH = "../data";
+    private static final String DATA_FILE_NAME = "taskData.txt";
+    private static final int DIRECTORY_SEARCH_LIMIT = 5;
     private String filePath;
     private Ui ui;
 
-    Storage(String dirName, Ui ui) {
+    public Storage(String dirName, Ui ui) {
         setFilePath(dirName);
         this.ui = ui;
     }
 
-    void loadTasksToList(TaskList taskList) {
+    public void loadTasksToList(TaskList taskList) {
         Scanner dataScanner;
 
         try {
@@ -60,15 +62,12 @@ public class Storage {
             lineNumber++;
 
             try {
-                inputs = Parser.parseJsonLine(input);
+                inputs = StorageParser.parseJsonLine(input);
 
                 taskType = getTaskType(inputs.get(StorageKey.type));
                 isTaskDone = getDoneStatus(inputs.get(StorageKey.done));
                 taskDescription = getDescription(inputs.get(StorageKey.description));
-
-                if (taskType.hasTime()) {
-                    taskTiming = inputs.get(StorageKey.time);
-                }
+                taskTiming = inputs.get(StorageKey.time);
 
                 Task taskToAdd;
 
@@ -95,7 +94,6 @@ public class Storage {
                 ui.printMsgLine(ex.getDisplayMsg());
                 ui.printMsgLine(String.format("   Error in storage file line number: %d", lineNumber));
                 ui.printLineDivider();
-                continue;
             }
         }
     }
@@ -103,19 +101,17 @@ public class Storage {
     public void saveTasksToDisk(TaskList tasks) throws DukeFileWriteException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            TaskType taskType;
 
             for (Task task : tasks.getAllTasks()) {
-                taskType = task.getTaskType();
                 String jsonLineStart = String.format(
                         "{ %s: %s, %s: %s, %s: %s",
-                        StorageKey.type.toString(), taskType.toString(),
+                        StorageKey.type.toString(), task.getTaskType().toString(),
                         StorageKey.done.toString(), ((Boolean) task.isDone()).toString(),
                         StorageKey.description.toString(), task.getDescription());
 
                 fileWriter.write(jsonLineStart);
 
-                if (taskType.hasTime()) {
+                if (task.getTiming() != null) {
                     fileWriter.write(
                             String.format(", %s: %s",
                                     StorageKey.time.toString(),
@@ -134,8 +130,7 @@ public class Storage {
 
     private TaskType getTaskType(String input) throws DukeTaskFileParseException {
         try {
-            TaskType taskType = TaskType.valueOf(input);
-            return taskType;
+            return TaskType.valueOf(input);
         } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",

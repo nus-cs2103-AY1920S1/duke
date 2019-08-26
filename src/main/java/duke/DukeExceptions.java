@@ -1,13 +1,13 @@
 package duke;
 
 public class DukeExceptions extends Exception {
-    String displayMsg;
+    private String displayMsg;
 
-    DukeExceptions(String message) {
+    private DukeExceptions(String message) {
         super(message);
     }
 
-    DukeExceptions(String message, String displayMsg) {
+    protected DukeExceptions(String message, String displayMsg) {
         this(message);
         this.displayMsg = displayMsg;
     }

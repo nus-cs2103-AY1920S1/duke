@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.*;
+import duke.ui.Ui;
+import duke.task.TaskList;
+import duke.storage.DukeFileWriteException;
+import duke.storage.Storage;
 
 /**
  * Abstraction of an executable command.
@@ -22,5 +25,5 @@ abstract public class Command {
             throws DukeInvalidArgumentException, DukeFileWriteException {
         validate(tasks, ui, storage);
         run(tasks, ui, storage);
-    };
+    }
 }

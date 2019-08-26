@@ -1,15 +1,13 @@
-package duke;
+package duke.task;
 
-import duke.task.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
     private int size;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
         this.size = 0;
     }

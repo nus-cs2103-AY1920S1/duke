@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import duke.DukeInvalidArgumentException;
+import duke.command.DukeInvalidArgumentException;
 
 public class EventTask extends Task {
     private LocalDateTime startDate;

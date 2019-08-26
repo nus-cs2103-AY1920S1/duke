@@ -1,43 +1,37 @@
-package duke;
+package duke.ui;
+
+import duke.DukeExceptions;
 
 import java.util.Scanner;
 
 public class Ui {
 
-    private static String HORIZONTAL_LINE = "________________________________________________________________\n";
+    private static final String HORIZONTAL_LINE = "________________________________________________________________\n";
 
-    private static String greetingMsg = HORIZONTAL_LINE
+    private static final String greetingMsg = HORIZONTAL_LINE
             + " Hello! I'm Duke\n"
             + " What can I do for you?\n"
             + HORIZONTAL_LINE;
 
-    Scanner scanner;
-
-    public Ui() {
-
-    }
+    private Scanner scanner;
 
     public Ui(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    void displayDukeException(DukeExceptions ex) {
+    public void displayDukeException(DukeExceptions ex) {
         printMsgLine(ex.getDisplayMsg());
     }
 
-    void printGreetingMsg() {
+    public void printGreetingMsg() {
         System.out.println(greetingMsg);
-    }
-
-    void printMsg(String msg) {
-        System.out.print(msg);
     }
 
     public void printMsgLine(String msg) {
         System.out.println(msg);
     }
 
-    void printEmptyLine() {
+    public void printEmptyLine() {
         System.out.println();
     }
 
@@ -45,7 +39,7 @@ public class Ui {
         System.out.print(HORIZONTAL_LINE);
     }
 
-    String readLine() {
+    public String readLine() {
         return scanner.nextLine();
     }
 

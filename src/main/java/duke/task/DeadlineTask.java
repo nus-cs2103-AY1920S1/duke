@@ -2,10 +2,10 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
-import duke.DukeInvalidArgumentException;
+import duke.command.DukeInvalidArgumentException;
 
 public class DeadlineTask extends Task {
-    LocalDateTime deadlineDate;
+    private LocalDateTime deadlineDate;
 
     public DeadlineTask(String description, String deadlineDate) throws DukeInvalidArgumentException {
         super(description, deadlineDate);

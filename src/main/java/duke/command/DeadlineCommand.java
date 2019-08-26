@@ -1,16 +1,15 @@
 package duke.command;
 
 import duke.DukeUtil;
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeInvalidArgumentException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 import duke.task.DeadlineTask;
 import duke.task.TaskUtil;
 
 import java.util.Arrays;
 
-public class DeadlineCommand extends AddTaskCommand {
+class DeadlineCommand extends AddTaskCommand {
     public DeadlineCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.deadline;
@@ -35,8 +34,7 @@ public class DeadlineCommand extends AddTaskCommand {
                 " ");
 
         TaskUtil.validateTaskDescription(description);
-        DeadlineTask deadlineTask = new DeadlineTask(description, timing);
 
-        taskToAdd = deadlineTask;
+        taskToAdd = new DeadlineTask(description, timing);
     }
 }

@@ -1,14 +1,13 @@
 package duke.command;
 
-import duke.DukeInvalidArgumentException;
 import duke.DukeUtil;
-import duke.Storage;
-import duke.Ui;
-import duke.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.TaskList;
 import duke.task.TaskUtil;
 import duke.task.TodoTask;
 
-public class TodoCommand extends AddTaskCommand {
+class TodoCommand extends AddTaskCommand {
     public TodoCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.todo;

@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.DukeInvalidArgumentException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.task.Task;
 
-public class DeleteCommand extends WritableCommand {
+class DeleteCommand extends WritableCommand {
     private int taskIndex;
 
     public DeleteCommand(String[] commandArgs) {

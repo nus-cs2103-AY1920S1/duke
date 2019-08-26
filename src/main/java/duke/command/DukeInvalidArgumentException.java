@@ -1,4 +1,6 @@
-package duke;
+package duke.command;
+
+import duke.DukeExceptions;
 
 public class DukeInvalidArgumentException extends DukeExceptions {
     public DukeInvalidArgumentException(String displayMsg) {

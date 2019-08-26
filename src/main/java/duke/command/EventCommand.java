@@ -1,16 +1,15 @@
 package duke.command;
 
 import duke.DukeUtil;
-import duke.TaskList;
-import duke.Ui;
-import duke.Storage;
-import duke.DukeInvalidArgumentException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 import duke.task.EventTask;
 import duke.task.TaskUtil;
 
 import java.util.Arrays;
 
-public class EventCommand extends AddTaskCommand {
+class EventCommand extends AddTaskCommand {
     public EventCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.event;
@@ -35,8 +34,7 @@ public class EventCommand extends AddTaskCommand {
                 " ");
 
         TaskUtil.validateTaskDescription(description);
-        EventTask eventTask = new EventTask(description, timing);
 
-        taskToAdd = eventTask;
+        taskToAdd = new EventTask(description, timing);
     }
 }

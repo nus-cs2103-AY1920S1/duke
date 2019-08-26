@@ -1,13 +1,11 @@
 package duke.command;
 
-import duke.DukeInvalidArgumentException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.task.Task;
 
-public class DoneCommand extends WritableCommand {
-    private int taskIndex;
+class DoneCommand extends WritableCommand {
     private Task task;
 
     public DoneCommand(String[] commandArgs) {

@@ -1,6 +1,8 @@
-package duke;
+package duke.storage;
 
-public class DukeTaskFileParseException extends DukeExceptions {
+import duke.DukeExceptions;
+
+class DukeTaskFileParseException extends DukeExceptions {
     public DukeTaskFileParseException(String displayMsg) {
         super("Error encountered while parsing task data file", displayMsg);
     }

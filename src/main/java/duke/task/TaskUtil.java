@@ -5,15 +5,15 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import duke.DukeInvalidArgumentException;
+import duke.command.DukeInvalidArgumentException;
 
 public class TaskUtil {
-    private static String DATE_FORMAT = "d/M/y HHmm";
-    private static String TIME_FORMAT = "HHmm";
-    private static String DISPLAY_FORMAT = "EEE, d MMM y h:mma";
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
-    private static DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
+    private static final String DATE_FORMAT = "d/M/y HHmm";
+    private static final String TIME_FORMAT = "HHmm";
+    private static final String DISPLAY_FORMAT = "EEE, d MMM y h:mma";
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
 
     public static void validateTaskDescription(String description)
             throws DukeInvalidArgumentException {

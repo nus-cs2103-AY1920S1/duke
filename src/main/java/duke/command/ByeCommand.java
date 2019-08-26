@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.DukeInvalidArgumentException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
-public class ByeCommand extends Command {
+class ByeCommand extends Command {
     public ByeCommand(String[] args) {
         super(args);
         commandType = Commands.bye;

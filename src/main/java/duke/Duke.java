@@ -1,16 +1,18 @@
 package duke;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import duke.command.Command;
+import duke.command.CommandParser;
 import duke.command.Commands;
-import duke.task.Task;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 
-public class Duke {
-    private static String RECURSIVE_PARENT_DIR_NAME = "data";
+class Duke {
 
+    private static final String RECURSIVE_PARENT_DIR_NAME = "data";
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -34,7 +36,7 @@ public class Duke {
             try {
                 String input = ui.readLine();
                 ui.printLineDivider();
-                Command command = Parser.parseCommand(input);
+                Command command = CommandParser.parseCommand(input);
                 command.execute(tasks, ui, storage);
 
                 if (command.commandType == Commands.bye) {

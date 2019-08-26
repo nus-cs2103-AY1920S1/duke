@@ -14,4 +14,17 @@ public class ListCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showTaskList(taskList);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof ListCommand)) {
+            return false;
+        }
+
+        return true;
+
+    }
 }

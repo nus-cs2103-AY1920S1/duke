@@ -1,5 +1,6 @@
 [T][✘] sleep
-[D][✓] work (by: friday)
-[T][✘] train
-[D][✘] call (by: sunday)
-[E][✓] read (at: saturday)
+[T][✓] read
+[D][✘] walk to park (by: 21st January 2)
+[D][✓] walk to park (by: 23rd November 2019, 11:59pm)
+[D][✘] play basketball alone (by: 12th March 2019, 04:13am)
+[E][✘] swim away (at: 23rd November 2019, 02:41am-2:51pm)

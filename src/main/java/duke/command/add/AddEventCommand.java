@@ -1,6 +1,7 @@
 package duke.command.add;
 
 import duke.command.Command;
+import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -18,7 +19,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Event newEvent = new Event(detail, datetimeFrom, datetimeTo);
         tasks.add(newEvent);
         duke.ui.Ui.printAddSuccess(tasks.getTasks(), newEvent);

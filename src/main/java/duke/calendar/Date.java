@@ -107,6 +107,10 @@ public class Date {
         return year;
     }
 
+    public String getUnprocessedDate() {
+        return unprocessedDate;
+    }
+
     @Override
     public String toString() {
         if (month == null) {
@@ -120,8 +124,4 @@ public class Date {
             return day + "th of " + month + " " + year;
         }
     }
-    public String getUnprocessedDate() {
-        return unprocessedDate;
-    }
-
 }

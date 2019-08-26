@@ -6,7 +6,7 @@ import duke.task.Task;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner userInput = new Scanner(System.in);
+    protected Scanner userInput = new Scanner(System.in);
 
     public void greetUser() {
         String logo = " ____        _        \n"

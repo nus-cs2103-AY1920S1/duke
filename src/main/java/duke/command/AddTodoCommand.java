@@ -49,6 +49,4 @@ public class AddTodoCommand extends Command {
             return false;
         }
     }
-
-
 }

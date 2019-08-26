@@ -45,6 +45,10 @@ public class Time {
         }
     }
 
+    public String getUnprocessedTime() {
+        return unprocessedTime;
+    }
+
     @Override
     public String toString() {
         if (processedTime == null) {
@@ -55,9 +59,5 @@ public class Time {
         } else {
             return processedTime + "am";
         }
-    }
-
-    public String getUnprocessedTime() {
-        return unprocessedTime;
     }
 }

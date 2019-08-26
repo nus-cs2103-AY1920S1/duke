@@ -1,11 +1,21 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
-    private static Integer totalTask = 0;
+    final static String FILE_LOCATION = System.getProperty("user.dir") + "/data/duke.txt";
+    static TaskManager taskManager;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
         List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline", "delete");
+
+        try {
+            taskManager = new TaskManager(FILE_LOCATION);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         greet();
 
@@ -24,14 +34,15 @@ public class Duke {
                     String[] words = command.split("\\s");
                     int index = Integer.parseInt(words[1]);
                     doneTask(taskManager, index);
+                    taskManager.saveTask();
                 } else if (command.startsWith("delete")){
-                    totalTask--;
                     String[] words = command.split("\\s");
                     int index = Integer.parseInt(words[1]);
                     deleteTask(taskManager, index);
+                    taskManager.saveTask();
                 } else {
-                    totalTask++;
                     addTask(taskManager, command);
+                    taskManager.saveTask();
                 }
             } catch (DukeException e) {
                 horizontalLine();
@@ -70,10 +81,10 @@ public class Duke {
         if (stringHolder.startsWith("todo")) {
             stringHolder = (String.join(" ", commandList));
             if (!stringHolder.isEmpty()) {
-                taskManager.addTask(new ToDo(stringHolder));
+                taskManager.addTask(new ToDo(stringHolder, false));
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  [T][\u2718] " + stringHolder);
-                System.out.println("Now you have " + totalTask + " tasks in the list.");
+                System.out.println("Now you have " + taskManager.getSize() + " tasks in the list.");
             } else {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
@@ -96,11 +107,11 @@ public class Duke {
                 date = date + " " + commandList.remove(0);
             }
 
-            taskManager.addTask(new Deadline(stringHolder, date));
+            taskManager.addTask(new Deadline(stringHolder, date, false));
 
             System.out.println("Got it. I've added this task:");
             System.out.println("  [D][\u2718] " + stringHolder + " (by: " + date + ")");
-            System.out.println("Now you have " + totalTask + " tasks in the list.");
+            System.out.println("Now you have " + taskManager.getSize() + " tasks in the list.");
         } else {
             stringHolder = commandList.remove(0);
             listHolder.remove(0);
@@ -120,10 +131,10 @@ public class Duke {
                 date = date + " " + commandList.remove(0);
             }
 
-            taskManager.addTask(new Event(stringHolder, date));
+            taskManager.addTask(new Event(stringHolder, date, false));
             System.out.println("Got it. I've added this task:");
             System.out.println("  [E][\u2718] " + stringHolder + " (at: " + date + ")");
-            System.out.println("Now you have " + totalTask + " tasks in the list.");
+            System.out.println("Now you have " + taskManager.getSize() + " tasks in the list.");
         }
         horizontalLine();
         System.out.println();
@@ -132,14 +143,14 @@ public class Duke {
     public static void printList(TaskManager taskManager) {
         horizontalLine();
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < totalTask; i++) {
+        for (int i = 0; i < taskManager.getSize(); i++) {
             System.out.println(i+1 + ".[" + taskManager.getTask(i).getType() + "]"+ "[" + taskManager.getTask(i).getStatusIcon() + "] " + taskManager.getTask(i).getDescription() + taskManager.getTask(i).getDate());
         }
         horizontalLine();
         System.out.println();
     }
 
-    public static void doneTask(TaskManager taskManager, int index) {
+    public static void doneTask(TaskManager taskManager, int index) throws DukeException {
         index = index - 1;
         taskManager.doneTask(index);
         horizontalLine();
@@ -149,7 +160,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void deleteTask(TaskManager taskManager, int index) {
+    public static void deleteTask(TaskManager taskManager, int index) throws DukeException {
         index = index - 1;
         Task taskHolder = taskManager.deleteTask(index);
         horizontalLine();

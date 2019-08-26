@@ -2,8 +2,8 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
         this.at = at;
     }
 
@@ -15,5 +15,14 @@ public class Event extends Task {
     @Override
     public String getDate() {
         return " (at: " + at + ")";
+    }
+
+    @Override
+    public boolean getStatus() {
+        return isDone;
+    }
+
+    public String getAt() {
+        return at;
     }
 }

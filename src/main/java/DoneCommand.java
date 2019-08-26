@@ -1,0 +1,17 @@
+public class DoneCommand extends Command {
+
+    protected int index;
+
+    public DoneCommand(String command, int index) {
+        super(command);
+        this.index = index;
+    }
+
+    public int getIndex() {
+        return this.index;
+    }
+
+    public void execute() {
+
+    }
+}

@@ -1,9 +1,20 @@
+import java.util.Scanner;
+
 public class UI {
 
-    private static String divider = "\t____________________________________________________________";
+    public static final String divider = "\t____________________________________________________________";
+    public static final String messageFrontInden = "\t  ";
+
+    private Scanner sc;
 
     public UI() {
+        this.sc = new Scanner(System.in);
+    }
 
+    public String readCommand() {
+        String inputStr = sc.nextLine();
+
+        return inputStr;
     }
 
     public void showWelcome() {
@@ -14,8 +25,8 @@ public class UI {
                 + "\t  | |_| | |_| |   <  __/\n"
                 + "\t  |____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        System.out.println("\t  Hello! I'm Duke");
-        System.out.println("\t  What can I do for you?");
+        printWithInden("Hello! I'm Duke");
+        printWithInden("What can I do for you?");
         this.showLine();
     }
 
@@ -29,5 +40,13 @@ public class UI {
 
     public void showLoadingSuccessful() {
         System.out.println("Previous task list loaded successfully.");
+    }
+
+    public void showError(String message) {
+        printWithInden(message);
+    }
+
+    public void printWithInden(String message) {
+        System.out.println(messageFrontInden + message);
     }
 }

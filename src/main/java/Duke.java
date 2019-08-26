@@ -19,8 +19,6 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (IllegalStateException e) {
                 break;
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -28,7 +26,6 @@ public class Duke {
     private static String basePath = new File("").getAbsolutePath();
     private static void run() throws DukeIllegalActionException, DukeIllegalDescriptionException, FileNotFoundException {
         Scanner sc = new Scanner(System.in);
-
         while(sc.hasNext()) {
             String act = sc.next();
             try {
@@ -66,7 +63,7 @@ public class Duke {
                         int dlDivision = dlDetail.indexOf("/");
                         try {
                             String dlDescription = dlDetail.substring(0, dlDivision - 1);
-                            String by = dlDetail.substring(dlDivision + 3, dlDetail.length());
+                            String by = dlDetail.substring(dlDivision + 4, dlDetail.length());
                             Task dl = new Deadline(dlDescription, by);
                             tasks.add(dl);
                             System.out.println("Got it. I've added this task: \n" + dl.toString()
@@ -81,7 +78,7 @@ public class Duke {
                         int eventDivision = eventDetail.indexOf("/");
                         try {
                             String eventDescription = eventDetail.substring(0, eventDivision - 1);
-                            String at = eventDetail.substring(eventDivision + 3, eventDetail.length());
+                            String at = eventDetail.substring(eventDivision + 4, eventDetail.length());
                             Task event = new Event(eventDescription, at);
                             tasks.add(event);
                             System.out.println("Got it. I've added this task: \n" + event.toString()
@@ -106,50 +103,53 @@ public class Duke {
         }
     }
 
-    private static void readData() throws IOException {
-        FileReader in = new FileReader(basePath + "/data/duke.txt");
-        BufferedReader br = new BufferedReader(in);
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            String type = line.substring(line.indexOf(".") + 2, line.indexOf(".") + 3);
-            String state = line.substring(line.indexOf(".") + 5, line.indexOf(".") + 6);
-            String content = line.substring(line.indexOf(".") + 8);
-            String time = "0";
-            if(line.indexOf("(") > 0) {
-                content = line.substring(line.indexOf(".") + 8, line.indexOf("(") - 2);
-                time = line.substring(line.indexOf("(")+2, line.indexOf(")")-1);
+    private static void readData() {
+        try {
+            FileReader in = new FileReader(new File(basePath + "/data/duke.txt"));
+            BufferedReader br = new BufferedReader(in);
+            String line;
+            while ( (line = br.readLine()) != null) {
+                String type = line.substring(line.indexOf(".") + 2, line.indexOf(".") + 3);
+                String state = line.substring(line.indexOf(".") + 5, line.indexOf(".") + 6);
+                String content = line.substring(line.indexOf(".") + 8);
+                String time = "0";
+                if (line.indexOf("(") > 0) {
+                    content = line.substring(line.indexOf(".") + 8, line.indexOf("(") - 1);
+                    time = line.substring(line.indexOf(":") + 2, line.indexOf(")"));
+                }
+                switch (type) {
+                    case "T":
+                        Task todo = new ToDo(content);
+                        if (state.contentEquals("Y")) {
+                            todo.setDone();
+                        }
+                        tasks.add(todo);
+                        break;
+                    case "D":
+                        Task deadline = new Deadline(content, time);
+                        if (state.contentEquals("Y")) {
+                            deadline.setDone();
+                        }
+                        tasks.add(deadline);
+                        break;
+                    case "E":
+                        Task event = new Event(content, time);
+                        if (state.contentEquals("Y")) {
+                            event.setDone();
+                        }
+                        tasks.add(event);
+                        break;
+                }
             }
-            switch(type) {
-                case "T":
-                    Task todo = new ToDo(content);
-                    if(state.contentEquals("Y")) {
-                        todo.setDone();
-                    }
-                    tasks.add(todo);
-                    break;
-                case "D":
-                    Task deadline = new Deadline(content, time);
-                    if(state.contentEquals("Y")) {
-                        deadline.setDone();
-                    }
-                    tasks.add(deadline);
-                    break;
-                case "E":
-                    Task event = new Event(content, time);
-                    if(state.contentEquals("Y")) {
-                        event.setDone();
-                    }
-                    tasks.add(event);
-            }
+        } catch(IOException e) {
+            e.printStackTrace();
         }
-        in.close();
     }
 
     private static void saveData() throws FileNotFoundException {
         File folder = new File(basePath + "/data");
         File file = new File(basePath + "/data/duke.txt");
-        try (PrintWriter out = new PrintWriter("duke.txt")) {
+        try (PrintWriter out = new PrintWriter(file)) {
             for(Task task:tasks) {
                 out.println(task.toString());
             }

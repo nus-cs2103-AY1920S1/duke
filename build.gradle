@@ -15,7 +15,15 @@ application {
     mainClassName = "weomucat.duke.Duke"
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
 run {
     standardInput = System.in
     systemProperty "file.encoding", "UTF-8"
+}
+
+test {
+    useJUnitPlatform()
 }

@@ -63,14 +63,17 @@ public class UserInputProcessor {
     };
 
     private static DukeReply processByeCase () {
-        return new DukeReply(true, false, DukeTextFormatter.makeFormattedText(DukeUi.GREET_BYE));
+        String dukeFeedback = DukeTextFormatter.makeFormattedText(DukeUi.GREET_BYE);
+        return new DukeReply(true, false, dukeFeedback);
     }
 
     private static DukeReply processListCase(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return new DukeReply(false, false, DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_EMPTY_LIST));
+            String dukeFeedback = DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_EMPTY_LIST);
+            return new DukeReply(false, false, dukeFeedback);
         } else {
-            return new DukeReply(false, false, DukeTextFormatter.makeFormattedText(tasks.toString()));
+            String dukeFeedback = DukeTextFormatter.makeFormattedText(tasks.toString());
+            return new DukeReply(false, false, dukeFeedback);
         }
     }
 
@@ -81,15 +84,24 @@ public class UserInputProcessor {
             String [] splitString = userInputString.split(" ");
 
             if(splitString.length == 1) {
-                throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "done")));
+                String exceptionMessage 
+                    = DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "done"));
+                throw new DukeException(exceptionMessage);
             }
+
             indexString = splitString[1];
             int userSpecifiedIndex = Integer.parseInt(splitString[1]);
-    
             Task newlyFinishedTask = tasks.markAsDone(userSpecifiedIndex);
-            return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_DONE, newlyFinishedTask.toString(), tasks.size()))); 
+
+            String dukeFeedback 
+                = DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_DONE,
+                                                                    newlyFinishedTask.toString(),
+                                                                    tasks.size()));
+            return new DukeReply(false, true, dukeFeedback); 
         } catch (NumberFormatException e) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_NOT_NUMBER, indexString)));
+            String exceptionMessage 
+                = DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_NOT_NUMBER, indexString));
+            throw new DukeException(exceptionMessage);
         }
         
     }
@@ -101,38 +113,60 @@ public class UserInputProcessor {
             String [] splitString = userInputString.split(" ");
 
             if(splitString.length == 1) {
-                throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "done")));
+                String exceptionMessage 
+                    = DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "done"));
+                throw new DukeException(exceptionMessage);
             }
+
             indexString = splitString[1];
             int userSpecifiedIndex = Integer.parseInt(splitString[1]);
-
             Task newlyDeletedTask = tasks.deleteAt(userSpecifiedIndex);
-            return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_DELETE, newlyDeletedTask.toString(), tasks.size())));         
+            
+            String dukeFeedback 
+                = DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_DELETE,
+                                                                    newlyDeletedTask.toString(),
+                                                                    tasks.size()));
+            return new DukeReply(false, true, dukeFeedback);         
         } catch(NumberFormatException e) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_NOT_NUMBER, indexString)));
+            String exceptionMessage 
+                = DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_NOT_NUMBER, indexString));
+            throw new DukeException(exceptionMessage);
         }
     }
 
     private static DukeReply processNukeCase(String userInputString, TaskList tasks) {
         tasks.deleteAllTasks();
-        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_NUKE));
+        String dukeFeedback = DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_NUKE);
+        return new DukeReply(false, true, dukeFeedback);
     }
 
     private static DukeReply processToDoCase(String userInputString, TaskList tasks) throws DukeException {
         Task newlyAddedTask = TextToTaskTranslator.translateToDoTask(userInputString);
         tasks.add(newlyAddedTask);
-        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_ADDED, newlyAddedTask.toString(), tasks.size())));
+
+        String dukeFeedback = DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_ADDED,
+                                                                                newlyAddedTask.toString(),
+                                                                                tasks.size()));
+        return new DukeReply(false, true, dukeFeedback);
     }
 
     private static DukeReply processDeadlineCase(String userInputString, TaskList tasks) throws DukeException {
         Task newlyAddedTask = TextToTaskTranslator.translateDeadlineTask(userInputString);
         tasks.add(newlyAddedTask);
-        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_ADDED, newlyAddedTask.toString(), tasks.size())));
+
+        String dukeFeedback = DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_ADDED,
+                                                                                newlyAddedTask.toString(),
+                                                                                tasks.size()));
+        return new DukeReply(false, true, dukeFeedback);
     }
 
     private static DukeReply processEventCase(String userInputString, TaskList tasks) throws DukeException {
         Task newlyAddedTask = TextToTaskTranslator.translateEventTask(userInputString);
         tasks.add(newlyAddedTask);
-        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_ADDED, newlyAddedTask.toString(), tasks.size())));
+
+        String dukeFeedback = DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_TASK_ADDED,
+                                                                                newlyAddedTask.toString(),
+                                                                                tasks.size()));
+        return new DukeReply(false, true, dukeFeedback);
     }
 }

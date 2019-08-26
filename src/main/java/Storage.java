@@ -25,7 +25,7 @@ public class Storage {
 
             BufferedWriter writer = Files.newBufferedWriter(path);
             StringBuilder sb = new StringBuilder();
-            ArrayList<Task> tasks = taskList.getTasks();
+            ArrayList<Task> tasks = taskList.toList();
 
             // write tasks into file
             for (int i = 0; i < tasks.size(); i++) {

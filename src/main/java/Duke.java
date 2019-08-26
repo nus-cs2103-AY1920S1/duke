@@ -5,7 +5,6 @@ import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -68,8 +67,9 @@ public class Duke {
     public static void main(String[] args) throws DukeException,IOException {
         Class dukeClass = Duke.class;
         ClassLoader loader = dukeClass.getClassLoader();
-        URL myURL = loader.getResource("resources/duke.txt");
+        URL myURL = loader.getResource("/resources/duke.txt");
         String path = myURL.getPath();
+
         path = path.replaceAll("%20", " ");
 
 

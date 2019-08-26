@@ -2,12 +2,12 @@
  * Represents a Task with type Event
  */
 public class Event extends Task {
-    private String dateTime;
+    private DateTime dateTime;
 
-    Event(String name, String dateTime) {
+    Event(String name, String dateTime) throws DukeException {
         super(name);
-        String[] arr = dateTime.split(" ", 2);
-        this.dateTime = arr[1];
+        //String[] arr = dateTime.trim().split(" ", 2);
+        this.dateTime = new DateTime(dateTime.trim());
     }
 
     @Override

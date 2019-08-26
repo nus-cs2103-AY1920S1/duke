@@ -18,6 +18,6 @@ public class Event extends Task {
 
     @Override
     public String toStorageString() {
-        return "E|" + super.toStorageString() + '|' + at;
+        return "E`" + super.toStorageString() + '`' + at;
     }
 }

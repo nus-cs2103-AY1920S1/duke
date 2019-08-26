@@ -14,6 +14,6 @@ public class ToDo extends Task {
 
     @Override
     public String toStorageString() {
-        return "T|" + super.toStorageString();
+        return "T`" + super.toStorageString();
     }
 }

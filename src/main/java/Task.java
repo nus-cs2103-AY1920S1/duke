@@ -27,6 +27,6 @@ public class Task {
 
     public String toStorageString() {
         String isDoneString = isDone ? "1" : "0";
-        return isDoneString + "|" + description;
+        return isDoneString + "`" + description;
     }
 }

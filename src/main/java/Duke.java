@@ -1,3 +1,6 @@
+import javax.imageio.stream.FileImageOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,29 +14,34 @@ public class Duke {
         Boolean exit = false;
 
         // Retrieve existing tasks
-        Scanner fileSc = new Scanner("tasks.txt");
-        String[] nextLine = fileSc.nextLine().split("|");
-        while (fileSc.hasNextLine()) {
-            Task newTask;
-            boolean isDone = nextLine[1].equals("1");
-            switch (nextLine[0]) {
-            case ("T"):
-                newTask = new ToDo(nextLine[2], isDone);
-                break;
-            case ("D"):
-                newTask = new Deadline(nextLine[2], isDone, nextLine[3]);
-                break;
-            case ("E"):
-                newTask = new Event(nextLine[2], isDone, nextLine[3]);
-                break;
-            default:
-                newTask = new ToDo("Unknown task");
-                break;
+        File file = new File("tasks.txt");
+        Scanner fileSc;
+        try {
+            fileSc = new Scanner(file);
+            while (fileSc.hasNextLine()) {
+                String[] nextLine = fileSc.nextLine().strip().split("`");
+                Task newTask;
+                boolean isDone = nextLine[1].equals("1");
+                switch (nextLine[0]) {
+                case ("T"):
+                    newTask = new ToDo(nextLine[2], isDone);
+                    break;
+                case ("D"):
+                    newTask = new Deadline(nextLine[2], isDone, nextLine[3]);
+                    break;
+                case ("E"):
+                    newTask = new Event(nextLine[2], isDone, nextLine[3]);
+                    break;
+                default:
+                    newTask = new ToDo("Unknown task");
+                    break;
+                }
+                tasks.add(newTask);
             }
-            tasks.add(newTask);
-            nextLine = fileSc.nextLine().split("|");
+            fileSc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.toString());
         }
-        fileSc.close();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

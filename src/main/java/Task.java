@@ -1,5 +1,5 @@
 public class Task {
-    public String command; public Boolean done;
+    protected String command; protected Boolean done;
     public Task(String command){
         this.command = command;
         this.done = false;

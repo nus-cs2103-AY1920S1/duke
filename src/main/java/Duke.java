@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Duke {
 
-    private static List<String> userInputs = new ArrayList<>(100);
+    private static List<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -24,21 +24,23 @@ public class Duke {
                 userInput.close();
                 break;
             } else if (s.equals("list")){
-                printUserInputs();
+                printTasks();
             } else {
-                setUserInputs(s);
+                addTask(s);
             }
         }
     }
 
-    private static void setUserInputs(String input) {
-        userInputs.add(input);
-        System.out.println("added: " + input);
+    private static void addTask(String description) {
+        tasks.add(new Task(description));
+        System.out.println("added: " + description);
     }
 
-    private static void printUserInputs() {
-        for (int i = 0; i < userInputs.size(); i++) {
-            System.out.println((i + 1) + ". " + userInputs.get(i));
+    private static void printTasks() {
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            System.out.println((i + 1) + ".[" + t.getStatusIcon() + "] " + t.getDescription());
         }
     }
 }

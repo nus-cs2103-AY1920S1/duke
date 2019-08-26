@@ -44,6 +44,7 @@ public class Storage {
                 arr.add(Parser.getEvent(stringArr[2].trim(), stringArr[3].trim()));
             }
 
+            //Mark the last task as done.
             if (stringArr[1].trim().equals("1")) {
                 arr.get(arr.size()-1).markAsDone();
             }
@@ -55,10 +56,11 @@ public class Storage {
 
     public void writeListToFile(TaskList taskList) throws IOException {
         ArrayList<Task> arr = taskList.getArr();
-
         FileWriter fw = new FileWriter("resources/duke.txt");
         StringBuilder sb = new StringBuilder();
+
         for (Task entry : arr) {
+
             if (entry instanceof Deadline) {
                 sb.append(String.format("D | %s | %s | %s", entry.isDone() ? "1" : "0",
                         entry.getTaskName(), ((Deadline) entry).getDateTime() ));
@@ -76,6 +78,5 @@ public class Storage {
         }
 
         fw.close();
-
     }
 }

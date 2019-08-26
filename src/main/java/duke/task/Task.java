@@ -22,6 +22,10 @@ public class Task {
         return this;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String toWriteFile() {
         return "T | " + getDoneStatus() + " | " + description;
     }

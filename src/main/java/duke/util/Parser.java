@@ -14,6 +14,7 @@ public class Parser {
         String action = strArr[0].toLowerCase();
         Command c;
         String description;
+        String keyword;
         Task task;
         int n;
 
@@ -36,6 +37,14 @@ public class Parser {
             }
             n = Integer.parseInt(strArr[1]) - 1;
             c = new DeleteCommand(n);
+            break;
+
+        case "find":
+            if (s.length() < 6) {
+                throw new DukeException("Please write in this format: find X\nWhere X is the string to find");
+            }
+            keyword = s.substring(5).toLowerCase();
+            c = new FindCommand(keyword);
             break;
 
         case "todo":

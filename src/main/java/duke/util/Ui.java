@@ -125,6 +125,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the tasks that contains the given keyword.
+     *
+     * @param foundTaskList TaskList with filtered keyword.
+     */
     public void showFoundTask(ArrayList<Task> foundTaskList) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < foundTaskList.size(); i++) {

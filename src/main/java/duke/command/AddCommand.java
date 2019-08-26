@@ -51,4 +51,24 @@ public class AddCommand extends Command {
         }
         storage.save(tasks);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof AddCommand)) {
+            return false;
+        }
+        AddCommand command = (AddCommand) other;
+        if (this.commandName.equals("todo")) {
+            return this.commandName.equals(command.commandName)
+                    && this.argument.equals(command.argument);
+        } else {
+            return this.commandName.equals(command.commandName)
+                    && this.argument.equals(command.argument)
+                    && this.optionArgument.equals(command.optionArgument)
+                    && this.optionName.equals(command.optionName);
+        }
+    }
 }

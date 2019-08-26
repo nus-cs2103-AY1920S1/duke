@@ -1,22 +1,37 @@
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+        String filePath = "Duke_List.txt";
+        try {
+            loadFileContents(filePath, list);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         String[] arr = sc.nextLine().split(" ");
         String next = arr[0];
-        int count = 0;
+        int count = list.size();
+        File f = new File(filePath);
+
         while (!next.equals("bye")) {
+            boolean changed = true;
             if (next.equals("list")) {
+                changed = false;
                 System.out.println("Here are the tasks in your list:");
                 int listCount = 1;
                 for (Task task : list) {
@@ -54,12 +69,12 @@ public class Duke {
                         t = new Todos(description.trim());
                     } else if (next.equals("deadline")) {
                         int index = description.indexOf("/");
-                        String byWhen = description.substring(index + 4, description.length());
+                        String byWhen = description.substring(index + 4);
                         String desc = description.substring(1, index - 1);
                         t = new Deadline(desc, byWhen);
                     } else {
                         int index = description.indexOf("/");
-                        String at = description.substring(index + 4, description.length());
+                        String at = description.substring(index + 4);
                         String desc = description.substring(1, index - 1);
                         t = new Event(desc, at);
                     }
@@ -71,15 +86,43 @@ public class Duke {
             }
             arr = sc.nextLine().split(" ");
             next = arr[0];
+            FileWriter fw = new FileWriter(filePath);
+            String textToAdd = "";
+            for (Task task : list) {
+                textToAdd += task.print() + "\n";
+            }
+            fw.write(textToAdd);
+            fw.close();
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void printTask(int count, Task t) {
+    private static void printTask(int count, Task t) {
         if (count == 1) {
             System.out.println("  " + t + "\nNow you have " + count + " task in the list.");
         } else {
             System.out.println("  " + t + "\nNow you have " + count + " tasks in the list.");
+        }
+    }
+
+    private static void loadFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner sc = new Scanner(f); // create a Scanner using the File as the source
+        Task t;
+        while (sc.hasNext()) {
+            String next = sc.nextLine();
+            String[] arr = next.split("@");
+            boolean isDone = arr[1].equals("1");
+            String description = arr[2];
+            if (arr[0].contains("T")) {
+                t = new Todos(description.trim(), isDone);
+            } else if (arr[0].contains("D")) {
+                t = new Deadline(description.trim(), isDone, arr[3].trim());
+            } else {
+                t = new Event(description.trim(), isDone, arr[3].trim());
+            }
+
+            list.add(t);
         }
     }
 

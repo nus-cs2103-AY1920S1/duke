@@ -1,7 +1,9 @@
+package duke.task;
+
 public class Event extends Task {
     private String dateTime;
     // Constructor
-    protected Event(String description, String dateTime) {
+    public Event(String description, String dateTime) {
         super(description);
         this.dateTime = dateTime;
     }

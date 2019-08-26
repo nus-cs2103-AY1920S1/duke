@@ -9,9 +9,7 @@ import java.util.ArrayList;
 
 public class Ui {
     private String underline = "____________________________________________________________\n";
-    private String doubleLine(String msg) {
-        return underline + msg + "\n" + underline;
-    }
+
     private BufferedReader br;
 
     /**
@@ -42,13 +40,13 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(underline + "Hello from\n" + nudeLogo);
-        //System.out.println("You have " + tasks.getSize() + " task"
-        //        + (tasks.getSize()==1?" ":"s ") + "in the list.\n");
-        //for (int i = 0; i < tasks.getSize(); i++) {
-        //    System.out.println((i + 1) + "." + tasks.getTask(i));
-        //}
-        System.out.println(tasks);
-        System.out.println("What can i do for you?\n" + underline);
+
+        System.out.println("You have " + tasks.getSize() + " task"
+                + (tasks.getSize() == 1 ? " " : "s ") + "in the list.\n");
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println((i + 1) + "." + tasks.getTask(i));
+        }
+        System.out.println("\nWhat can i do for you?\n" + underline);
     }
 
     /**

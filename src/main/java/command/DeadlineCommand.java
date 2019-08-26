@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
         Task task = new DeadlineTask(description, time);
         tasks.addTask(task);
         ui.print("Got it. I've added this task:\n " + task + "\n" + "Now you have " + tasks.getSize() + " task"
-                + (tasks.getSize()==1?" ":"s ") + "in the list.");
+                + (tasks.getSize() == 1 ? " " : "s ") + "in the list.");
         storage.save(tasks);
     }
 

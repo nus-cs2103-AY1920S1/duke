@@ -28,7 +28,7 @@ public class DeadlineTask extends Task {
     }
 
     public String toFileString() {
-        return "D||" + (this.isDone?"1||":"0||")  + this.description + "||" + format.format(this.time);
+        return "D||" + (this.isDone ? "1||" : "0||")  + this.description + "||" + format.format(this.time);
     }
 
     @Override

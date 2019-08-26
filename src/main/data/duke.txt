@@ -1,3 +1,5 @@
-[D][✓] homework (by: 31-Dec-2019 06:00PM)
-[E][✓] meeting (at: 31-Dec-2019 11:59PM)
-[D][✘] assignment (by: 04-Apr-2019 05:00PM)
+[E][✓] splashdown (at: 28-Aug-2019 06:00PM)
+[T][✓] individual project
+[E][✓] lunch (at: 26-Aug-2019 12:00PM)
+[D][✓] tutorial (by: 26-Aug-2019 10:00AM)
+[T][✓] JUnit testing

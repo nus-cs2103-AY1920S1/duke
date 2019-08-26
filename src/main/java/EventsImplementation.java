@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.text.SimpleDateFormat;
+
 class EventsImplementation implements TaskInterface,  
     TypedTaskInterface {
     private final String name;
@@ -30,7 +31,7 @@ class EventsImplementation implements TaskInterface,
         }
     }
 
-    public TaskInterface completeTask(){
+    public TaskInterface completeTask() {
         return 
             new EventsImplementation(this.name, this.date, true);
     }
@@ -65,7 +66,7 @@ class EventsImplementation implements TaskInterface,
 
     // Override
     @Override
-    public String toString(){
+    public String toString() {
         return this.formatter.formatText();
     }
 

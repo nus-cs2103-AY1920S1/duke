@@ -29,7 +29,7 @@ class BasicTaskCreator implements TaskCreator {
             new LinkedList<String>(Arrays.asList(cmdList));
         xs.remove(0);
         String taskName = listToString(xs);
-        return new ToDosImplementation(taskName ,false);
+        return new ToDosImplementation(taskName, false);
     }
 
     private TaskInterface createDeadLine(String command)
@@ -83,7 +83,6 @@ class BasicTaskCreator implements TaskCreator {
                 + "OwO is sowwy,\n"
                 + "but OwO doesn't knyow what that means");
         } 
-//        return new ToDosImplementation("ERROR",false);
     }
 
     public static boolean checkCommand(String cmd, String task) 

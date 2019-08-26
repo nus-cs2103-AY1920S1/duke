@@ -117,8 +117,6 @@ class Parser implements ControllerInterface {
      * tasks in tasklist
      */
     public void listTasks() {
-//        Iterator<TaskInterface> iter = 
-//            this.model.getTaskListIterator();
         Stream<TaskInterface> taskStream = 
             this.model.getTaskStream();
 

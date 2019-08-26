@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.Stream;
+
 class StubTaskModel implements TaskModelInterface {
 
     public void initialize() {}
@@ -25,4 +26,3 @@ class StubTaskModel implements TaskModelInterface {
     }
 
 }
-

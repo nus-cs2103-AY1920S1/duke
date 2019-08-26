@@ -101,7 +101,7 @@ class TaskList implements TaskModelInterface {
     /**
      * deprecated to be removed
      */
-    public Iterator<TaskInterface> getTaskListIterator(){
+    public Iterator<TaskInterface> getTaskListIterator() {
         return this.taskList.listIterator();
     }
 

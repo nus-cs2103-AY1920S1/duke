@@ -33,11 +33,8 @@ class Ui implements TaskObserver {
             + "its a wowk in pwogwess, wike me\n"
         //    + "Mistew Stawk wuvd his acwonyms.\n"
             + "what can OwO do fow you today?";
-        //ArrayList<String> printxs = new ArrayList<>();
-        //printxs.add(greeting1);
-        //printxs.add(greeting2);
-            //Display.printSection(printxs);
-            Ui.printSection(greeting1);
+        //Display.printSection(printxs);
+        Ui.printSection(greeting1);
     }
 
     private static void printExitMessage() {
@@ -85,7 +82,7 @@ class Ui implements TaskObserver {
         }
     }
 
-    private static void printSection(List<String> printJobs){
+    private static void printSection(List<String> printJobs) {
         Ui.printHeader();
         Ui.printList(printJobs);
         Ui.printFooter();
@@ -126,7 +123,7 @@ class Ui implements TaskObserver {
     public static void printDoneTaskSection(String taskDetails) {
         ArrayList<String> printxs = new ArrayList<>();
         String headermsg = "Nyice ;;w;;  "
-            + "OwO has mawked this task as donye";
+             + "OwO has mawked this task as donye";
         //String headermsg = "Nice! I've marked this task as done:";
         printxs.add(headermsg);
         printxs.add(taskDetails);
@@ -143,7 +140,7 @@ class Ui implements TaskObserver {
             taskDetails, int totalTasks) {
         String header = "nyoted. OwO has wemuvd this task:\n";
         String footer = "nyow you have "
-           + totalTasks + " tasks in the wist";
+            + totalTasks + " tasks in the wist";
         Ui.printSection(header + footer);
     }
 
@@ -190,10 +187,10 @@ class Ui implements TaskObserver {
      * Returns void, prints a list of task given input
      *  @param Stream of tasks to be printed
      */
-    public void update(TaskModelInterface model){
-    /* TaskModel's most recent change here */
-    /* model.getUpdate */
-    /* display in section */
+    public void update(TaskModelInterface model) {
+        /* TaskModel's most recent change here */
+        /* model.getUpdate */
+        /* display in section */
         this.totalTasks = model.getTotalTasks();
     }
 

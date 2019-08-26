@@ -14,7 +14,7 @@ class TaskImplementation implements TaskInterface {
         return new TaskImplementation(name, false);
     }        
 
-    public TaskInterface completeTask(){
+    public TaskInterface completeTask() {
         return new TaskImplementation(this.name, true);
     }
 

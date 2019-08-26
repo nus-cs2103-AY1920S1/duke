@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.text.SimpleDateFormat;
+
 class DeadLinesImplementation implements TaskInterface,
     TypedTaskInterface {
     private final String name;
@@ -31,7 +32,7 @@ class DeadLinesImplementation implements TaskInterface,
         
     }
 
-    public TaskInterface completeTask(){
+    public TaskInterface completeTask() {
         return new DeadLinesImplementation(this.name, date, true);
     }
 

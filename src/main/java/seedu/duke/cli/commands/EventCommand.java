@@ -8,6 +8,7 @@ import seedu.duke.tasks.EventTask;
 import seedu.duke.tasks.Task;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class EventCommand extends AddCommand {
     private final String description;
@@ -27,5 +28,25 @@ public class EventCommand extends AddCommand {
         }
 
         return new EventTask(description, time);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        EventCommand that = (EventCommand) o;
+        return Objects.equals(description, that.description) &&
+                Objects.equals(time, that.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, time);
     }
 }

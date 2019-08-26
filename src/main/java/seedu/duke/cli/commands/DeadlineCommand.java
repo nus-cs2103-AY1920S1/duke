@@ -8,6 +8,7 @@ import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TodoTask;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class DeadlineCommand extends AddCommand {
     private final String description;
@@ -27,5 +28,25 @@ public class DeadlineCommand extends AddCommand {
         }
 
         return new DeadlineTask(description, deadline);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        DeadlineCommand that = (DeadlineCommand) o;
+        return Objects.equals(description, that.description) &&
+                Objects.equals(deadline, that.deadline);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, deadline);
     }
 }

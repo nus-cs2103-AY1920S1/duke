@@ -6,6 +6,7 @@ import seedu.duke.cli.CommandException;
 import seedu.duke.cli.annotations.CommandConstructor;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DoneCommand implements Command {
     private final int id;
@@ -25,5 +26,24 @@ public class DoneCommand implements Command {
         t.setDone(true);
         System.out.printf("Nice! I've marked this task as done:%n%s%n", t);
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        DoneCommand that = (DoneCommand) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

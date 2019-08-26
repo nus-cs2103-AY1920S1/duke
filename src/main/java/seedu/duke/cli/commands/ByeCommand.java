@@ -14,4 +14,9 @@ public class ByeCommand implements Command {
     public boolean execute(List<Task> taskList) {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this || obj instanceof ByeCommand;
+    }
 }

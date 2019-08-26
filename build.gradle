@@ -10,7 +10,18 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
+}
+
 application {
     // Change this to your main class.
     mainClassName = "seedu.duke.Duke"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }

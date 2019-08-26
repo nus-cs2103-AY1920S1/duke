@@ -17,4 +17,9 @@ public class ListCommand implements Command {
         }
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this || obj instanceof ListCommand;
+    }
 }

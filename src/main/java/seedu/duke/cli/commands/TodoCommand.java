@@ -6,6 +6,8 @@ import seedu.duke.cli.annotations.CommandConstructor;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TodoTask;
 
+import java.util.Objects;
+
 public class TodoCommand extends AddCommand {
     private final String description;
 
@@ -21,5 +23,24 @@ public class TodoCommand extends AddCommand {
         }
 
         return new TodoTask(description);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        TodoCommand that = (TodoCommand) o;
+        return Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }

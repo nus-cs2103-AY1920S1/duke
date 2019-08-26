@@ -7,13 +7,15 @@ import seedu.duke.tasks.DeadlineTask;
 import seedu.duke.tasks.EventTask;
 import seedu.duke.tasks.Task;
 
+import java.time.LocalDateTime;
+
 public class EventCommand extends AddCommand {
     private final String description;
-    private final String time;
+    private final LocalDateTime time;
 
     @CommandConstructor("event")
     public EventCommand(@Argument(trailing = true) String description,
-                        @Argument(trailing = true, prefix = "/at") String time) {
+                        @Argument(trailing = true, prefix = "/at") LocalDateTime time) {
         this.description = description;
         this.time = time;
     }

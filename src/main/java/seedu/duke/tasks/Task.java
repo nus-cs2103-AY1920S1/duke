@@ -1,9 +1,11 @@
 package seedu.duke.tasks;
 
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Task implements Serializable {
     private static final long serialVersionUID = -2528903467902347L;
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("EEE, dd LLL uuuu HH:mm");
 
     private final String description;
     private boolean done;

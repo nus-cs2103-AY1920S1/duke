@@ -14,6 +14,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -22,6 +25,7 @@ public class Parser {
     private Parser() {}
 
     private static HashMap<String, ConstructorCache> constructors;
+    private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
 
     static {
         constructors = new HashMap<>();
@@ -84,7 +88,7 @@ public class Parser {
             Argument me = paramAnns[i];
             if (tok.length < 2) {
                 if (me.trailing()) {
-                    params[i] = "";
+                    params[i] = null;
                     continue;
                 } else {
                     // We have a new argument, but there are no more tokens
@@ -121,6 +125,12 @@ public class Parser {
                 }
             } else if (paramTypes[i].equals(String.class)) {
                 params[i] = value;
+            } else if (paramTypes[i].equals(LocalDateTime.class)) {
+                try {
+                    params[i] = LocalDateTime.parse(value, DATE_FORMAT);
+                } catch (DateTimeParseException ex) {
+                    throw new CommandException("Invalid date \"" + value + "\"; format is d/m/yyyy hh:mm", ex);
+                }
             } else {
                 throw new RuntimeException("Unhandled argument type");
             }

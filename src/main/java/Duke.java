@@ -1,9 +1,14 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     static ArrayList<Task> memory = new ArrayList<>();
     static int index;
+    static String filePath = "../duke/data/duke.txt";
 
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -20,6 +25,7 @@ public class Duke {
     This method queries for user input and returns the desired result.
      */
     public static void activeChat() {
+        loadInfoFromDrive();
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
 
@@ -59,21 +65,126 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e2) {
+                System.out.println("Something went wrong: "  + e2.getMessage());
             } finally {
                 input = sc.next();
             }
         }
-
-        //end of the loop before Duke encounters BYE
         if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
         }
     }
 
     /*
+    This method loads the previously saved information on the hard disk onto Duke.
+     */
+    private static void loadInfoFromDrive() {
+        try {
+            Scanner s = new Scanner(new File(filePath));
+            while (s.hasNext()) {
+                Task newTask = convertToTask(s.nextLine());
+                memory.add(newTask);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    private static Task convertToTask(String taskLine) {
+        String[] allInfo = taskLine.split("[|]", 4);
+        Task toReturn;
+        if (taskLine.charAt(0) == 'T') {
+            toReturn = remakeTodo(allInfo);
+        } else if (taskLine.charAt(0) == 'D') {
+            allInfo = taskLine.split("[|]", 5);
+            toReturn = remakeDeadline(allInfo);
+        } else {
+            allInfo = taskLine.split("[|]", 7);
+            toReturn = remakeEvent(allInfo);
+        }
+        return toReturn;
+    }
+
+    private static ToDo remakeTodo(String[] info) {
+        //System.out.println(info[1]);
+        ToDo ret = new ToDo(info[2].trim());
+        if (info[1].equals(" 1 ")) {
+            ret.recordDone();
+        }
+        return ret;
+    }
+
+    private static Deadline remakeDeadline(String[] info) {
+        //System.out.println(info[1]);
+        Deadline ret = new Deadline(info[2].trim(), info[3].trim());
+        if (info[1].equals(" 1 ")) {
+            ret.recordDone();
+        }
+        return ret;
+    }
+
+    private static Event remakeEvent(String[] info) {
+        //System.out.println(info[1]);
+        Event ret = new Event(info[2].trim(), info[3].trim());
+        if (info[1].equals(" 1 ")) {
+            ret.recordDone();
+        }
+        return ret;
+    }
+
+    /*
+    This method generates the string of the data to be saved into the hard disk.
+     */
+    private static void saveToDrive() throws IOException {
+        if (memory.size() > 0) {
+            String text = "";
+            Task firstTask = memory.get(0);
+            if (firstTask instanceof ToDo) {
+                ToDo first = (ToDo) firstTask;
+                text = first.format();
+            } else if (firstTask instanceof Deadline) {
+                Deadline first = (Deadline) firstTask;
+                text = first.format();
+            } else {
+                Event first = (Event) firstTask;
+                text = first.format();
+            }
+            int numTasks = memory.size();
+            for (int i = 1; i < numTasks; i++) {
+                String text2 = "";
+                Task specTask = memory.get(i);
+                if (specTask instanceof ToDo) {
+                    ToDo spec = (ToDo) specTask;
+                    text2 = spec.format();
+                } else if (specTask instanceof Deadline) {
+                    Deadline spec = (Deadline) specTask;
+                    text2 = spec.format();
+                } else {
+                    Event spec = (Event) specTask;
+                    text2 = spec.format();
+                }
+                text += System.lineSeparator() + text2;
+            }
+            writeToFile(filePath, text);
+        } else {
+            writeToFile(filePath, "");
+        }
+    }
+
+    /*
+    This method overwrites the information from Duke to the hard disk. This is done to automatically update all
+     */
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    /*
     This method marks the targeted task as done and provides confirmation to the user through output.
      */
-    public static void doneTask(int taskNum) throws DukeException {
+    public static void doneTask(int taskNum) throws DukeException, IOException {
         index = memory.size();
         if (taskNum > index) {
             throw new DukeException("Oops! This task number does not exist.");
@@ -82,6 +193,7 @@ public class Duke {
             target.markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(target);
+            saveToDrive();
         }
     }
 
@@ -100,17 +212,18 @@ public class Duke {
     /*
     This method creates a ToDo object and adds it into memory.
      */
-    public static void toDoTask(String a) {
+    public static void toDoTask(String a) throws IOException {
         ToDo newTodo = new ToDo(a);
         memory.add(newTodo);
         printTask(newTodo);
+        saveToDrive();
     }
 
     /*
     This method creates an Event object and adds it into memory.
     If command does not include a timing, then user is prompted to enter the command again.
      */
-    public static void eventTask(String b) throws DukeException {
+    public static void eventTask(String b) throws DukeException, IOException {
         String[] details = b.split("/at");
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the event timing and resubmit that command.");
@@ -118,6 +231,7 @@ public class Duke {
             Event newEvent = new Event(details[0], details[1]);
             memory.add(newEvent);
             printTask(newEvent);
+            saveToDrive();
         }
     }
 
@@ -125,7 +239,7 @@ public class Duke {
     This method creates a deadlineTask and adds it into memory.
     If command does not include a deadline, then user is prompted to enter the command again.
      */
-    public static void deadlineTask(String c) throws DukeException {
+    public static void deadlineTask(String c) throws DukeException, IOException {
         String[] details = c.split("/by");
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the deadline and resubmit that command.");
@@ -133,14 +247,25 @@ public class Duke {
             Deadline newDeadline = new Deadline(details[0], details[1]);
             memory.add(newDeadline);
             printTask(newDeadline);
+            saveToDrive();
         }
+    }
+
+    /*
+    This method prints the task that was just added to the list.
+    */
+    public static void printTask(Task task) {
+        index = memory.size();
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + index + " tasks in the list.");
     }
 
     /*
     This method removes the target task from the list and prompts the user the number of remaining tasks saved.
     @param int deleteNum the index of the task to be deleted
      */
-    public static void deleteTask(int deleteNum) throws DukeException {
+    public static void deleteTask(int deleteNum) throws DukeException, IOException {
         index = memory.size();
         if (deleteNum > index) {
             throw new DukeException("Oops! This task number does not exist.");
@@ -150,14 +275,8 @@ public class Duke {
             System.out.println(removed);
             index = memory.size();
             System.out.println("Now you have " + index + " tasks in the list.");
+            saveToDrive();
         }
-    }
-
-    public static void printTask(Task task) {
-        index = memory.size();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + index + " tasks in the list.");
     }
 }
 

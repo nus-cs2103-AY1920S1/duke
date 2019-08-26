@@ -5,36 +5,34 @@ public class dukeBot {
     // a utility function for performing actions based on commands
     public static void action(String cmd, ArrayList<Task> list, int cnt) {
         if (cmd.equals("")) return;
+
+        Task t;
+
         if(cmd.startsWith("done")) {
             int index = Integer.valueOf(cmd.substring(5, 6));
             list.get(index - 1).markAsDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(list.get(index - 1).toString());
+            return;
         } else if (cmd.startsWith("deadline")) {
             int index = cmd.indexOf("/"); // finding the position of "/"
-            String task = cmd.substring(9, index - 1);
+            String desc = cmd.substring(9, index - 1);
             String ddl = cmd.substring(index + 4);
-            Deadline d = new Deadline(task, ddl);
-            list.add(cnt++, d);
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + d);
-            System.out.printf("Now you have %d tasks in the list.\n", list.size());
+            t = new Deadline(desc, ddl);
+            list.add(cnt++, t);
         } else if (cmd.startsWith("event")) {
             int index = cmd.indexOf("/");
-            String task = cmd.substring(6, index - 1);
+            String desc = cmd.substring(6, index - 1);
             String dt = cmd.substring(index + 4);
-            Event e = new Event(task, dt);
-            list.add(cnt++, e);
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + e);
-            System.out.printf("Now you have %d tasks in the list.\n", list.size());
+            t = new Event(desc, dt);
+            list.add(cnt++, t);
         } else {
-            toDo td = new toDo(cmd.substring(5));
-            list.add(cnt++, td);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(td);
-            System.out.printf("Now you have %d tasks in the list.\n", list.size());
+            t = new toDo(cmd.substring(5));
+            list.add(cnt++, t);
         }
+        System.out.println("Got it. I've added this task:");
+        System.out.println(t);
+        System.out.printf("Now you have %d tasks in the list.\n", list.size());
     }
 
     public void start() {
@@ -46,7 +44,6 @@ public class dukeBot {
 
         while(true) {
             String input = sc.nextLine();
-
             switch(input) {
                 case "bye":
                 case "Bye":

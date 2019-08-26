@@ -2,13 +2,8 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.task.Task;
-
-import java.util.ArrayList;
 
 public class Duke {
-    public static ArrayList<Task> actions = new ArrayList<>();
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

@@ -48,6 +48,4 @@ public class FindCommand extends Command {
             return false;
         }
     }
-
-
 }

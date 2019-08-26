@@ -6,6 +6,7 @@ import seedu.duke.cli.commands.DeadlineCommand;
 import seedu.duke.cli.commands.DeleteCommand;
 import seedu.duke.cli.commands.DoneCommand;
 import seedu.duke.cli.commands.EventCommand;
+import seedu.duke.cli.commands.FindCommand;
 import seedu.duke.cli.commands.ListCommand;
 import seedu.duke.cli.commands.TodoCommand;
 
@@ -59,5 +60,10 @@ public class ParserTest {
     public void eventWithDateTest() throws CommandException {
         assertEquals(Parser.parse("event abcdefg /at 1/1/2019 00:00"),
                 new EventCommand("abcdefg", LocalDateTime.of(2019, 1, 1, 0, 0)));
+    }
+
+    @Test
+    public void findTest() throws CommandException {
+        assertEquals(Parser.parse("find asdasd"), new FindCommand("asdasd"));
     }
 }

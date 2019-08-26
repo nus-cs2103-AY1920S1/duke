@@ -17,6 +17,11 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Constructor. Creates Ui, Storage and TaskList object.
+     * If the file does not exist, an error will be shown.
+     * @param filePath Directory to the data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath, ui);
@@ -28,8 +33,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Shows the welcome message and gets Ui to show the current tasks in the list.
+     * Reads in the command line by line, parse it and executes it.
+     */
     public void run() {
-
         ui.showWelcome(taskList.getTasks());
         boolean isExit = false;
         while (!isExit) {

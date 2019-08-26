@@ -10,6 +10,12 @@ import duke.exception.DukeException;
 
 public class Parser {
 
+    /**
+     * Parses the user's commands.
+     * @param command User's command.
+     * @return Command object.
+     * @throws DukeException If the input cannot be recognised.
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equalsIgnoreCase("bye")) {
             return new ExitCommand();

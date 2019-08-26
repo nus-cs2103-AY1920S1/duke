@@ -10,6 +10,12 @@ public class Event extends Task {
     int year;
     int time;
 
+    /**
+     * Constructor to create the Event object.
+     * @param description The task description.
+     * @param at The date and time it is due.
+     * @throws DukeException If the input format is incorrect.
+     */
     public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
@@ -27,11 +33,19 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets the description of the Event task.
+     * @return The description of the Event task.
+     */
     @Override
     public String getDescription() {
         return super.description + " | " + at;
     }
 
+    /**
+     * The proper representation of the task, with [E], icon and description.
+     * @return The output representation of the Event task.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

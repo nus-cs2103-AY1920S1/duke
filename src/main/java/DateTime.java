@@ -23,7 +23,6 @@ public class DateTime {
      */
     public static String addDaySuffix(String day) {
         int dayNum = Integer.parseInt(day);
-        System.out.println(dayNum);
         String dayWithSuffix = day;
         if (dayNum == 1) {
             dayWithSuffix += "st";

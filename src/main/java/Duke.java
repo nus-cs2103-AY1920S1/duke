@@ -114,17 +114,19 @@ public class Duke {
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the event timing and resubmit that command.");
         } else {
-            String[] time = details[1].trim().split(" ");
-            if (time.length < 2) {
-                throw new DukeException("Oops! Please write the event timing in: ddmmyy time(military)");
+            String[] eventTime = details[1].trim().split(" ");
+            if (eventTime.length < 2) {
+                throw new DukeException("Oops! Please write the event timing such as 29/2/2019 1800-2000");
             } else {
                 try {
-                    String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
+                    String[] hoursMin = eventTime[1].split("-");
+                    String hM = DT.getTime(hoursMin[0]) + "-" + DT.getTime(hoursMin[1]);
+                    String formattedTime = DT.getDate(eventTime[0]) + hM;
                     Event newEvent = new Event(details[0], formattedTime);
                     memory.add(newEvent);
                     printTask(newEvent);
                 } catch (DateException e) {
-                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing in: ddmmyy time(military)");
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as 29/2/2019 1800-2000");
                 }
             }
         }
@@ -141,7 +143,7 @@ public class Duke {
         } else {
             String[] time = details[1].trim().split(" ");
             if (time.length < 2) {
-                throw new DukeException("Oops! Please write the deadline in: ddmmyy time(military)");
+                throw new DukeException("Oops! Please write the deadline such as 29/2/2019 1800");
             } else {
                 try {
                     String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
@@ -149,7 +151,7 @@ public class Duke {
                     memory.add(newDeadline);
                     printTask(newDeadline);
                 } catch (DateException e) {
-                    throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing in: ddmmyy time(military)");
+                    throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as 29/2/2019 1800");
                 }
             }
         }

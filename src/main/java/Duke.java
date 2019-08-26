@@ -196,8 +196,7 @@ public class Duke {
             System.out.println("FILE NOT SAVED PROPERLY");
         }
     }
-
-    // String path = "/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt"
+    
     private static ArrayList<Task> loadTasksFromFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner scanner = new Scanner(f); // create a Scanner using the File as the source

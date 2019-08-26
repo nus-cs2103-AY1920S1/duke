@@ -22,6 +22,13 @@ public class DataStorage {
         return textStorage.get(index).completed();
     }
 
+    public Task delete(int index) throws DukeException {
+        --index;
+        if (index < 0 | index >= textStorage.size())
+            throw new DukeException("There's no Task attached to that number");
+        return textStorage.remove(index);
+    }
+
     public ArrayList<Task> getList() {
         return textStorage;
     }

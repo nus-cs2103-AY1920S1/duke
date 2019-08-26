@@ -43,7 +43,10 @@ public class UI {
                     return;
 
                 case "list":
-                    wrapList(dataStorage.getList());
+                    ArrayList<Task> list = dataStorage.getList();
+                    if (list.isEmpty())
+                        throw new DukeException("Oh looks like there's nothing in your list so far.");
+                    wrapList(list);
                     break;
 
                 case "done":
@@ -55,6 +58,19 @@ public class UI {
                     }
                     else {
                         throw new DukeException("I'm sorry, you didn't specify which index of the list you've done.");
+                    }
+                    break;
+
+                case "delete":
+                    if (moreThanOne) {
+                        String secondWord = words[1];
+                        int index = Integer.parseInt(secondWord);
+                        wrapper(dataStorage.delete(index).toString(),
+                                "Noted. I've removed this task:",
+                                 "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                    }
+                    else {
+                        throw new DukeException("I'm sorry, you didn't specify which index of the list you want to delete.");
                     }
                     break;
 
@@ -100,6 +116,8 @@ public class UI {
                 }
             } catch (DukeException d) {
                 wrapper(d.getMessage());
+            } catch (NumberFormatException e) {
+                wrapper("I'm sorry please give a number instead.");
             }
         }
     }
@@ -123,7 +141,7 @@ public class UI {
         System.out.println(Constants.HORIZONTAL_LINE + Constants.INDENTATION + "Here are the tasks in your list:");
         int i = 1;
         while( i < tasks.size()) {
-            System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1) + "\n");
+            System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));
             i++;
         }
         System.out.println(Constants.INDENTATION + i + ". " + tasks.get(i - 1));

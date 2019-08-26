@@ -101,4 +101,15 @@ public class TaskList {
     public boolean equals(Object obj) {
         return tasks.equals(((TaskList)obj).getTasks());
     }
+
+    public List<Task> generateListByKeyword(String keyword) {
+        List<Task> findResult = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getName().contains(keyword) ||
+                    tasks.get(i).getAdditionalInfo().contains(keyword)) {
+                findResult.add(tasks.get(i));
+            }
+        }
+        return findResult;
+    }
 }

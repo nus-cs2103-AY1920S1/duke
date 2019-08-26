@@ -5,6 +5,10 @@ import task.Task;
 import java.util.List;
 
 public class Ui {
+    public static final String LIST_ACTION_TITLE =
+            "     Here are the tasks in your list:\n";
+    public static final String FIND_ACTION_TITLE =
+            "     Here are the matching tasks in your list:\n";
     private static final String LOGO =
               " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -37,7 +41,7 @@ public class Ui {
         System.out.print("     deadline taskName /by DD/MM/YYYY HHmm :\n" +
                 "               Adds a new Deadline task with the deadline in the\n" +
                 "               given format.\n");
-        System.out.print("     search keyword :\n" +
+        System.out.print("     find keyword :\n" +
                 "               Returns a list of task with names containing the\n" +
                 "               keyword.\n");
     }
@@ -55,7 +59,8 @@ public class Ui {
         System.out.print("    You have no task at the moment.\n");
     }
 
-    public void printTaskList(List<Task> taskList) {
+    public void printTaskList(List<Task> taskList, String title) {
+        System.out.print(title);
         for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("    %d.", i+1);
             System.out.printf("%s\n", taskList.get(i));

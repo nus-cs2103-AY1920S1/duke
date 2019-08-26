@@ -20,4 +20,4 @@ bin/
 text-ui-test/ACTUAL.TXT
 
 # data
-/data/duke.txt
+data/duke.txt

@@ -8,6 +8,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String serialize() {
+        return String.format("E | %d | %s | %s", getStatusCode(), description , at);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

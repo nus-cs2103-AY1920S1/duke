@@ -11,6 +11,10 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    protected int getStatusCode() {
+        return isDone ? 1 : 0;
+    }
+
     public void markAsDone() throws DukeException {
         if (isDone) {
             throw new DukeException("This task was marked as done before.");
@@ -22,4 +26,6 @@ public abstract class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
+
+    public abstract String serialize();
 }

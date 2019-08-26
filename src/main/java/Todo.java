@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String serialize() {
+        return String.format("T | %d | %s", getStatusCode(), description);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

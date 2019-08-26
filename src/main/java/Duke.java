@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -45,6 +46,11 @@ public class Duke {
         }
 
         scanner.close();
+        try {
+            exportTasks("../data/duke.txt");
+        } catch (IOException e) {
+            System.out.println("Failed to save tasks.");
+        }
     }
 
     private static void importTasks(String filePath) throws FileNotFoundException, DukeException {
@@ -75,6 +81,15 @@ public class Duke {
             ALL_TASKS.add(task);
         }
         scanner.close();
+    }
+
+    private static void exportTasks(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : ALL_TASKS) {
+            fw.write(task.serialize());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
     }
 
     private static void run(String command) throws DukeException {

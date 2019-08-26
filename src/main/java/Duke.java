@@ -148,8 +148,8 @@ public class Duke {
             count--;
             String message =
                     count == 1
-                            ? "     Now you have 1 task in the taskList"
-                            : "     Now you have " + count + " tasks in the taskList";
+                            ? "     Now you have 1 task in the list"
+                            : "     Now you have " + count + " tasks in the list";
             System.out.println(message);
             drawLine();
             System.out.println("\n");
@@ -167,7 +167,7 @@ public class Duke {
 
     static void displayList() {
         drawLine();
-        System.out.println("    Here are the tasks in your taskList:");
+        System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < count; i++) {
             int taskListNumber = i + 1;
             System.out.println("    " + taskListNumber + "." + taskList.get(i));
@@ -213,7 +213,7 @@ public class Duke {
             taskList.add(new Deadline(
                     parts[0].substring(0, parts[0].length() - 1),
                     count + 1,
-                    parts[1].substring(1)
+                    createDateAndTime(parts[1].substring(1))
             ));
         } else if (type.equals("event")) {
             String[] parts = s.split("\\/" + "at");
@@ -228,11 +228,91 @@ public class Duke {
             taskList.add(new Event(
                     parts[0].substring(0, parts[0].length() - 1),
                     count + 1,
-                    parts[1].substring(1)
+                    createDateAndTime(parts[1].substring(1))
             ));
         }
         count++;
         return taskList.get(count - 1);
+    }
+
+    static String createDateAndTime(String s) {
+        String[] parts = s.split("\\s+");
+        for (int i = 0; i < parts.length; i++) {
+            if (parts[i].contains("/")) {
+                parts[i] = createDate(parts[i]);
+            } else if (is24hrFormat(parts[i])) {
+                parts[i] = createTime(parts[i]);
+            }
+        }
+        String result = "";
+        for (String part : parts) {
+            result += " " + part;
+        }
+        return result.substring(1);
+    }
+
+    static boolean is24hrFormat(String time) {
+        return isInteger(time) && time.length() == 4 && Integer.parseInt(time) < 2400;
+    }
+
+    static String createTime(String time) {
+        int hour = Integer.parseInt(time.substring(0, 2));
+        String min = time.substring(2, 4);
+        String timeOfDay = hour > 11 ? "pm" : "am";
+        hour = (hour > 12)
+                ? (hour - 12)
+                : ((hour == 0) ? 12 : hour);
+        return hour + ":" + min + timeOfDay;
+    }
+
+    static String createDate(String date) {
+        String[] parts = date.split("/");
+        String[] month = {
+                "",
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+        };
+        boolean validDate = true;
+        if (parts.length == 3) {
+            for (int i = 0; i < 3; i++) {
+                if (!isInteger(parts[i])) {
+                    validDate = false;
+                } else if (i == 1
+                        && (Integer.parseInt(parts[i]) < 1 || Integer.parseInt(parts[i]) > 12)) {
+                    validDate = false;
+                }
+            }
+        } else {
+            validDate = false;
+        }
+        if (validDate) {
+            if (parts[2].length() == 4) {
+                return parts[0] + " " + month[Integer.parseInt(parts[1])] + " " + parts[2];
+            } else {
+                return parts[2] + " " + month[Integer.parseInt(parts[1])] + " " + parts[0];
+            }
+        } else {
+            return date;
+        }
+    }
+
+    static boolean isInteger(String n) {
+        try {
+            Integer.parseInt(n);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     static void welcomeMessage() {
@@ -260,9 +340,9 @@ public class Duke {
         System.out.println("     Got it. I've added this task:");
         System.out.println("      " + t);
         if (count == 1) {
-            System.out.println("     Now you have 1 task in the taskList.");
+            System.out.println("     Now you have 1 task in the list.");
         } else {
-            String message = "     Now you have " + count + " tasks in the taskList.";
+            String message = "     Now you have " + count + " tasks in the list.";
             System.out.println(message);
         }
         drawLine();

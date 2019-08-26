@@ -1,5 +1,8 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -10,7 +13,7 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,6 +32,13 @@ public class Duke {
         String by;
         String desc;
         String at;
+
+
+        try {
+            FileReading.checkFileExists(taskList);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while (!input.equals("bye")) {
             input = scan.nextLine();

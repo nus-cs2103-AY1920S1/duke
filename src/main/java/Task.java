@@ -26,4 +26,8 @@ class Task{
         }
         return type + doneString + " " + message;
     }
+
+    public String toFileFormat(){
+        return "dummy";
+    }
 }

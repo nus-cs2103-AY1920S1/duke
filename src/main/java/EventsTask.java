@@ -1,10 +1,14 @@
 class EventsTask extends Task{
 
-    String deadline;
+    DateTime startingDateTime ; 
+    DateTime endingDateTime;
 
-    public EventsTask (Boolean status, String message, String deadline){
+    public EventsTask (Boolean status, String message, 
+    DateTime startingDateTime, DateTime endingDateTime){
         super(status, message, "[E]");
-        this.deadline = deadline;
+
+        this.startingDateTime = startingDateTime;
+        this.endingDateTime = endingDateTime;
     }
 
     @Override
@@ -15,6 +19,16 @@ class EventsTask extends Task{
         }else{
             doneString = "[X]";
         }
-        return super.type + doneString + " " + super.message + deadline;
+        return super.type + doneString + " " + super.message +" (at: " + startingDateTime  + " to " +endingDateTime + ")";
+    }
+
+    public String toFileFormat(){
+        String doneString;
+        if(super.status){
+            doneString = "[✓]";
+        }else{
+            doneString = "[X]";
+        }
+        return "T|" +doneString + super.message+ "/at " + startingDateTime.toFileString() +" "+ endingDateTime.toFileString() + "\n";
     }
 }

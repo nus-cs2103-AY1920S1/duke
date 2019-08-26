@@ -5,12 +5,18 @@ import java.util.Arrays;
 
 public class Duke {
 
+    
     public static void main(String[] args){
+        String filepath = "../resources/data/duke.txt";
+
         String startingMessage = "Hello! I'm Duke\nWhat can I do for you?" ;
         System.out.println(startingMessage);
-        List <Task> listOfStuff = new ArrayList <Task>();
+
+        Storage storage = new Storage(filepath);
+        TaskList taskList = storage.loadStorage();
         
         boolean flag = true;
+        
         while(flag){
             Scanner in = new Scanner(System.in);
             String line = in.nextLine();
@@ -18,11 +24,7 @@ public class Duke {
                 flag = false;
                 System.out.println("Bye. Hope to see you again soon!");
             }else if(line.equals("list")){
-                for (int i = 0; i < listOfStuff.size(); i++) {
-                    Integer number = i + 1;
-                    String message = number + ". " + listOfStuff.get(i);
-                    System.out.println(message);
-                  }
+                taskList.printTaskList();
             }else{ 
                 String inputnoun = line.split(" ")[0];
 
@@ -40,61 +42,71 @@ public class Duke {
         
                         String taskName = line.split(" ", 2) [1];
                         
-                        taskName = line.split(" ", 2)[1];
                         if(inputnoun.equals("done")){
-                            for (int i = 0; i < listOfStuff.size(); i++) {
-                                Integer indexOfTask = i + 1;
-                                String stringFromUser = line.replaceAll("\\D+","");
-                                Integer indexFromUser = Integer.parseInt(stringFromUser);
-                                if(indexOfTask == indexFromUser ){
-                                    Task currentTask = listOfStuff.get(i);
-                                    currentTask.setStatus(true);
-                                    String message = "Nice! I've marked this task as done:\n" + currentTask;
-                                    System.out.println(message);
-                                    }
-                                }
+                            String stringFromUser = line.replaceAll("\\D+","");
+                            Integer indexFromUser = Integer.parseInt(stringFromUser);
+                            taskList.doneTask(indexFromUser - 1);
+                            storage.save();
+                                
                         }else if (inputnoun.equals("todo")){
                             ToDoTask newTask = new ToDoTask (false, taskName);
-                            listOfStuff.add(newTask);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(newTask);
-                            System.out.println(String.format("Now you have %d tasks in the list.", listOfStuff.size() ));
+                            taskList.add(newTask);
+                            storage.save();
+
                         }else if (inputnoun.equals("deadline")){
                             String [] deadlineArray = line.split("/");
                             if(deadlineArray.length < 2){
                                 throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty."); 
                             }
-                            String deadline = deadlineArray[1];
-                            String newDeadLine = "(by:" +deadline.replace("by", "")  + ")";
+                            
+                            int date =  Integer.parseInt(deadlineArray[1].replace("by ", ""));
+                            String month = deadlineArray[2];
+                            int year = Integer.parseInt(deadlineArray[3]);
+                            int hour = Integer.parseInt(deadlineArray[4]);
+                            int min = Integer.parseInt(deadlineArray[5]);
+
+                            DateTime deadlineDateTime = new DateTime(hour, min, date, month, year);
                             String newTaskName = taskName.split("/")[0];
-                            DeadlinesTask newTask = new DeadlinesTask (false, newTaskName, newDeadLine);
-                            listOfStuff.add(newTask);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(newTask);
-                            System.out.println(String.format("Now you have %d tasks in the list.", listOfStuff.size() ));
+                            
+                            DeadlinesTask newTask = new DeadlinesTask (false, newTaskName, deadlineDateTime);
+                            taskList.add(newTask);
+                            storage.save();
+                        
                         }else if (inputnoun.equals("event")){
                             String [] deadlineArray = line.split("/");
                             if(deadlineArray.length < 2){
                                 throw new DukeException("☹ OOPS!!! The date of an event cannot be empty."); 
                             }
-                            String deadline = deadlineArray[1];
-                            String newDeadLine = "(at:" +deadline.replace("at", "")  + ")";                    
                             String newTaskName = taskName.split("/")[0];
-                            EventsTask newTask = new EventsTask (false, newTaskName, newDeadLine);
-                            listOfStuff.add(newTask);
-                            System.out.println(newTask);
-                            System.out.println(String.format("Now you have %d tasks in the list.", listOfStuff.size() ));
+
+                            int startingDate =  Integer.parseInt(deadlineArray[1].replace("at ", ""));
+                            String startingMonth = deadlineArray[2];
+                            int startingYear = Integer.parseInt(deadlineArray[3]);
+                            int startingHour = Integer.parseInt(deadlineArray[4]);
+                            int startingMin = Integer.parseInt(deadlineArray[5]);
+
+                            DateTime startingDateTime = new DateTime(startingHour, startingMin, startingDate, startingMonth, startingYear);
+
+                            int endingDate =  Integer.parseInt(deadlineArray[6]);
+                            String endingMonth = deadlineArray[7];
+                            int endingYear = Integer.parseInt(deadlineArray[8]);
+                            int endingHour = Integer.parseInt(deadlineArray[9]);
+                            int endingMin = Integer.parseInt(deadlineArray[10]);
+
+                            DateTime endingDateTime = new DateTime(endingHour, endingMin, endingDate, endingMonth, endingYear);
+
+                            EventsTask newTask = new EventsTask (false, newTaskName, startingDateTime, endingDateTime);
+                            taskList.add(newTask);
+                            storage.save();
+
                         }else{
                             int offset = Integer.parseInt(taskName) - 1;
-                            if(offset > listOfStuff.size() - 1){
+                            if(offset > taskList.size() - 1){
                                 throw new DukeException("☹ OOPS!!! There aren't so many tasks!"); 
                             }else{
-
-                                System.out.println("Noted. I've removed this task:");
-                                System.out.println(listOfStuff.get(offset));
-                                listOfStuff.remove(offset);
-                                System.out.println(String.format("Now you have %d tasks in the list.", listOfStuff.size() ));
+                                taskList.deleteTask(offset);
                             }
+                            storage.save();
                         }
                     }
                 }catch(DukeException e){

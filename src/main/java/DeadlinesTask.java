@@ -1,10 +1,12 @@
 class DeadlinesTask extends Task{
+    
+    // Note that the endingDateTime may have null values for
+    // its time 
+    DateTime endingDateTime;
 
-    String deadline;
-
-    public DeadlinesTask (Boolean status, String message, String deadline){
+    public DeadlinesTask (Boolean status, String message, DateTime endingDateTime){
         super(status, message, "[D]");
-        this.deadline = deadline;
+        this.endingDateTime = endingDateTime;
     }
 
     @Override
@@ -15,6 +17,16 @@ class DeadlinesTask extends Task{
         }else{
             doneString = "[X]";
         }
-        return super.type + doneString + " " + super.message + deadline;
+        return  super.type + doneString + " " + super.message + " (by: " +endingDateTime + ")";
+    }
+
+    public String toFileFormat(){
+        String doneString;
+        if(super.status){
+            doneString = "[✓]";
+        }else{
+            doneString = "[X]";
+        }
+        return "T|" +doneString + super.message +"/by "+ endingDateTime.toFileString() + "\n";
     }
 }

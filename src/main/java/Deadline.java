@@ -1,4 +1,4 @@
-public class Deadline extends Task {
+public class Deadline extends TaskList {
     private String by;
 
     public Deadline(int taskNumber, String taskCheck, String taskName, String type, String b) {

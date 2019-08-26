@@ -27,7 +27,7 @@ public class TaskUtil {
 
     static LocalDateTime getDateFromString(String dateString) throws DukeInvalidArgumentException {
         try {
-            return LocalDateTime.parse(dateString, dateFormatter);
+            return LocalDateTime.parse(dateString.trim(), dateFormatter);
         } catch (DateTimeParseException ex) {
             throw new DukeInvalidArgumentException(
                     "Invalid date format inputted by user",
@@ -38,7 +38,7 @@ public class TaskUtil {
 
     static LocalTime getTimeFromString(String timeString) throws DukeInvalidArgumentException {
         try {
-            return LocalTime.parse(timeString, timeFormatter);
+            return LocalTime.parse(timeString.trim(), timeFormatter);
         } catch (DateTimeParseException ex) {
             throw new DukeInvalidArgumentException(
                     "Invalid time format inputted by user",

@@ -13,3 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 *.class
+data/history.txt
+gradle/wrapper/gradle-wrapper.properties

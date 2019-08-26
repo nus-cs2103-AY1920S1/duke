@@ -1,6 +1,40 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
+
 public class Duke {
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void rewriteFile(String filePath, ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        String textToAdd = "";
+        for (Task t : tasks) {
+            String type = "";
+            String time = "";
+            if (t instanceof Event) {
+                type = "E";
+                time = ((Event) t).getTime();
+            } else if (t instanceof ToDo) {
+                type = "T";
+            } else if (t instanceof Deadline) {
+                type = "D";
+                time = ((Deadline) t).getTime();
+            }
+            textToAdd += "[" + type + "] -- " + "[" + t.getStatusIcon() + "] -- " + t.getDescription();
+            if (t instanceof Event || t instanceof Deadline) {
+                textToAdd += " -- " + time;
+            }
+            textToAdd += "\n";
+        }
+        fw.write(textToAdd);
+        fw.close();
+    }
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         //hr is horizontal row
@@ -15,6 +49,31 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         System.out.println(hr);
         ArrayList<Task> arr = new ArrayList<>();
+        try {
+            File f = new File("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
+                    "dukerepo/data/history.txt");
+            Scanner reader = new Scanner(f);
+            while(reader.hasNextLine()) {
+                String s = reader.nextLine();
+                String[] tempArray = s.split(" -- ");
+                Task t;
+                if (tempArray[0].equals("[E]")) {
+                    t = new Event(tempArray[2], tempArray[3]);
+                } else if (tempArray[0].equals("[T]")) {
+                    t = new ToDo(tempArray[2]);
+                } else if (tempArray[0].equals("[D]")) {
+                    t = new Deadline(tempArray[2], tempArray[3]);
+                } else {
+                    throw new DukeException("Not a valid Task type");
+                }
+                if (tempArray[1].equals("[+]")) {
+                    t.markAsDone();
+                }
+                arr.add(t);
+            }
+        } catch (IOException | DukeException e) {
+            System.err.println(e.getMessage());
+        }
         while(true) {
             String command = sc.nextLine();
             System.out.println(hr);
@@ -30,7 +89,10 @@ public class Duke {
                     temp.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + temp);
-                } catch (DukeException de) {
+                    rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
+                            "dukerepo/data/history.txt",
+                            arr);
+                } catch (DukeException | IOException de) {
                     System.err.println(de.getMessage());
                 } catch (NumberFormatException nfe) {
                     System.err.println(" :( OOPS!!! Invalid format. Enter number of task to be marked as done.");
@@ -59,7 +121,10 @@ public class Duke {
                             System.out.println(" " + temp);
                             System.out.println("Now you have " + arr.size() + " tasks in the list.");
                         }
-                    } catch (DukeException de) {
+                        rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
+                                "dukerepo/data/history.txt",
+                                arr);
+                    } catch (DukeException | IOException de) {
                         System.err.println(de.getMessage());
                     } finally {
                         System.out.println(hr);
@@ -80,8 +145,11 @@ public class Duke {
                                 System.out.println(" " + temp);
                                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
                             }
+                            rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
+                                    "dukerepo/data/history.txt",
+                                    arr);
                         }
-                    } catch (DukeException de) {
+                    } catch (DukeException | IOException de) {
                         System.err.println(de.getMessage());
                     } finally {
                         System.out.println(hr);
@@ -102,8 +170,11 @@ public class Duke {
                                 System.out.println(" " + temp);
                                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
                             }
+                            rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
+                                    "dukerepo/data/history.txt",
+                                    arr);
                         }
-                    } catch (DukeException de) {
+                    } catch (DukeException | IOException de) {
                         System.err.println(de.getMessage());
                     } finally {
                         System.out.println(hr);
@@ -123,7 +194,10 @@ public class Duke {
                                 System.out.println("Now you have " + arr.size() + " tasks in the list.");
                             }
                         }
-                    } catch (DukeException de) {
+                        rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
+                                "dukerepo/data/history.txt",
+                                arr);
+                    } catch (DukeException | IOException de) {
                         System.err.println(de.getMessage());
                     } catch (NumberFormatException nfe) {
                         System.err.println(" :( OOPS!!! Invalid format. Enter number of task to be deleted");

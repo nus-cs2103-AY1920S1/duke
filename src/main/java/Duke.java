@@ -1,54 +1,12 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        FileWriter fileWriter;
-        ArrayList<Task> taskList = new ArrayList<>(100);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
-        try {
-            File file = new File("CurrentTaskList.txt");
-            file.createNewFile();
-            List<String> savedList = Files.readAllLines(file.toPath());
-            for (String line : savedList) {
-                String[] lineElements = line.split(" \\| ");
-                String lineType = lineElements[0];
-                if (lineType.equals("T")) {
-                    Task currentTask = new ToDoTask(lineElements[2]);
-                    if (lineElements[1].equals("+")) {
-                        currentTask.markAsDone();
-                    }
-                    taskList.add(currentTask);
-                } else if (lineType.equals("D")) {
-                    String[] taskTimeParsed = lineElements[3].split("[ /]");
-                    Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
-                            Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
-                            Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
-                    Task currentTask = new DeadlineTask(lineElements[2], taskTime);
-                    if (lineElements[1].equals("+")) {
-                        currentTask.markAsDone();
-                    }
-                    taskList.add(currentTask);
-                } else if (lineType.equals("E")) {
-                    String[] taskTimeParsed = lineElements[3].split("[ /]");
-                    Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
-                            Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
-                            Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
-                    Task currentTask = new EventTask(lineElements[2], taskTime);
-                    if (lineElements[1].equals("+")) {
-                        currentTask.markAsDone();
-                    }
-                    taskList.add(currentTask);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        Storage storage = new Storage("CurrentTaskList.txt");
+        ArrayList<Task> taskList = storage.loadSavedList();
 
         while (true) {
             try {
@@ -139,15 +97,6 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
-
-        try {
-            fileWriter = new FileWriter("CurrentTaskList.txt");
-            for (Task task : taskList) {
-                fileWriter.write(task.formattedString());
-            }
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        storage.writeSavedList(taskList);
     }
 }

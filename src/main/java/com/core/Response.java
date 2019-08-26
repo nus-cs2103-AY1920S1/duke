@@ -19,8 +19,7 @@ public enum Response {
                         + (ti + 1) + "." + s.list.get(ti).toString()),
                 String::concat
         );
-        finalString = finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString;
-        Printer.printString(finalString);
+        Printer.printString(finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString);
     }),
     DONE("(?i)^done [0-9]+", (i, s) -> {
         int index = getNumber(i) - 1;

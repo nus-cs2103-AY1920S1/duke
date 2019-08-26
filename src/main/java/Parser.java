@@ -16,8 +16,10 @@ public class Parser {
             return new EventCommand(input);
         } else if (input[0].equals("delete")) { //delete
             return new DeleteCommand(input);
-        } else if (input[0].equals("bye")){ //bye
+        } else if (input[0].equals("bye")) { //bye
             return new ByeCommand();
+        } else if (input[0].equals("find")) { //find
+            return new FindCommand(input);
         } else {
             return new InvalidCommand();
         }

@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -24,6 +26,22 @@ public class Deadline extends Task {
         super(description, TaskType.DEADLINE);
         this.by = by;
         this.isAllDay = isAllDay;
+    }
+
+    public LocalDateTime getBy() {
+        return by;
+    }
+
+    public void setBy(LocalDateTime by) {
+        this.by = by;
+    }
+
+    public boolean isAllDay() {
+        return isAllDay;
+    }
+
+    public void setAllDay(boolean allDay) {
+        isAllDay = allDay;
     }
 
     @Override

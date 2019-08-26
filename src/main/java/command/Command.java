@@ -1,4 +1,11 @@
-abstract class Command {
+package command;
+
+import core.Storage;
+import core.Ui;
+import exception.DukeException;
+import task.TaskList;
+
+public abstract class Command {
     private String commandString;
     private boolean exit;
 

@@ -1,3 +1,9 @@
+package command;
+
+import core.Storage;
+import core.Ui;
+import task.TaskList;
+
 public class ExitCommand extends Command {
     public ExitCommand(String commandString) {
         super(commandString);

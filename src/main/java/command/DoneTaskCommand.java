@@ -1,3 +1,12 @@
+package command;
+
+import core.Storage;
+import core.Ui;
+import exception.DukeIOException;
+import exception.InvalidIndexException;
+import task.Task;
+import task.TaskList;
+
 public class DoneTaskCommand extends Command {
     private int taskIndex;
 

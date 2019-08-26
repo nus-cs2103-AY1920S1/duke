@@ -1,3 +1,13 @@
+package core;
+
+import exception.DukeIOException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.TaskType;
+import task.Todo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -32,19 +42,19 @@ public class Storage {
                 Task task = tasks.get(i);
 
                 StringBuilder rowBuilder = new StringBuilder(
-                        String.format("%s|%s|%s", task.type.getTag(), task.isDone ? "1" : "0", task.description));
+                        String.format("%s|%s|%s", task.getType().getTag(), task.isDone() ? "1" : "0", task.getDescription()));
 
                 if (task instanceof Deadline) {
                     rowBuilder.append(String.format("|%s",
-                            ((Deadline) task).by.format(DateTimeFormatter.ISO_DATE_TIME)));
+                            ((Deadline) task).getBy().format(DateTimeFormatter.ISO_DATE_TIME)));
                     rowBuilder.append(String.format("|%s",
-                            ((Deadline) task).isAllDay ? "1" : "0"));
+                            ((Deadline) task).isAllDay() ? "1" : "0"));
                 } else if (task instanceof Event) {
                     rowBuilder.append(String.format("|%s|%s",
-                            ((Event) task).startDateTime.format(DateTimeFormatter.ISO_DATE_TIME),
-                            ((Event) task).endDateTime.format(DateTimeFormatter.ISO_DATE_TIME)));
+                            ((Event) task).getStartDateTime().format(DateTimeFormatter.ISO_DATE_TIME),
+                            ((Event) task).getEndDateTime().format(DateTimeFormatter.ISO_DATE_TIME)));
                     rowBuilder.append(String.format("|%s",
-                            ((Event) task).isAllDay ? "1" : "0"));
+                            ((Event) task).isAllDay() ? "1" : "0"));
                 }
 
                 rowBuilder.append("\n");

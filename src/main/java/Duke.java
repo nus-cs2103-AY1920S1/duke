@@ -227,8 +227,9 @@ public class Duke {
      */
     public void spin() {
         boolean continueChat;
-        Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
+        FileReaderWriter.tryReadFromDataBase(this.taskList);
 
+        Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
         printResponse("Hello! I'm Duke\n" + MESSAGE_PADDING + "What can I do for you?");
 
         do {
@@ -240,6 +241,8 @@ public class Duke {
 
         } while (continueChat);
         myScanner.close();
+
+        FileReaderWriter.tryWriteToFile(this.taskList);
     }
 
 

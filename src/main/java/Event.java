@@ -12,6 +12,6 @@ public class Event extends Task {
         } else {
             doneSymbol = "✗";
         }
-        return "  [E]" + "[" + doneSymbol + "] " + getTaskName() + " (at: " + eventDate + ")";
+        return "[E]" + "[" + doneSymbol + "] " + getTaskName() + " (at: " + eventDate + ")";
     }
 }

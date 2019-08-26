@@ -14,7 +14,7 @@ public class Duke {
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if (line.equals("bye")) {
-                System.out.println("  Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (line.equals("list")) {
                 tasksHolder.printTasks();
@@ -43,9 +43,9 @@ public class Duke {
                 tasksHolder.addTask(currTask);
             } else {
                 if(line.equals("todo")){
-                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 } else {
-                    System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         }

@@ -12,6 +12,6 @@ public class Deadline extends Task {
         } else {
             doneSymbol = "✗";
         }
-        return "  [D]" + "[" + doneSymbol + "] " + getTaskName() + " (by: " + endDate + ")";
+        return "[D]" + "[" + doneSymbol + "] " + getTaskName() + " (by: " + endDate + ")";
     }
 }

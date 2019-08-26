@@ -10,7 +10,7 @@ public class Todo extends Task {
         } else {
             doneSymbol = "✗";
         }
-        return "  [T]" + "[" + doneSymbol + "] " + getTaskName();
+        return "[T]" + "[" + doneSymbol + "] " + getTaskName();
     }
 
 }

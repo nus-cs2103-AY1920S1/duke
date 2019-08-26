@@ -1,3 +1,8 @@
+package parser;
+
+import command.*;
+import exception.DukeException;
+
 import java.util.Scanner;
 
 public class Parser {

@@ -1,9 +1,17 @@
+package command;
+
+import converter.StringDateConverter;
+import parser.Storage;
+import task.Event;
+import task.TaskList;
+import ui.Ui;
+
 import java.util.Date;
 
-public class DeadlineCommand extends Command {
+public class EventCommand extends Command {
     private String[] arguments;
 
-    public DeadlineCommand(String[] arguments) {
+    public EventCommand(String[] arguments) {
         this.arguments = arguments;
     }
 
@@ -11,8 +19,8 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringDateConverter converter = new StringDateConverter();
-            Date by = converter.convertStringToDate(arguments[1].trim());
-            tasks.getTasks().add(new Deadline(arguments[0], by));
+            Date at = converter.convertStringToDate(arguments[1]);
+            tasks.getTasks().add(new Event(arguments[0], at));
             System.out.println("Got it. I've added this task:");
             System.out.println(tasks.getTasks().get(tasks.getTasks().size() - 1));
             System.out.println("Now you have " + tasks.getTasks().size()

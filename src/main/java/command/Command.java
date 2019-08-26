@@ -1,3 +1,9 @@
+package command;
+
+import parser.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public abstract class Command {
     public boolean canEnd() {
         return false;

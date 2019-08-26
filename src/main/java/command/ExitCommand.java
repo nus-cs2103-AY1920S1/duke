@@ -1,3 +1,9 @@
+package command;
+
+import parser.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public class ExitCommand extends Command {
     @Override
     public boolean canEnd() {

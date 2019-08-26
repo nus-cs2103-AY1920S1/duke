@@ -1,9 +1,16 @@
+package main;
+
+import command.Command;
+import exception.DukeException;
+import parser.Parser;
+import parser.Storage;
+import task.TaskList;
+import ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Duke {
-    private ArrayList<Task> myList;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -16,9 +23,6 @@ public class Duke {
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-        } finally {
-            //remove in future
-            myList = tasks.getTasks();
         }
     }
 

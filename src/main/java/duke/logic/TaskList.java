@@ -47,4 +47,20 @@ public class TaskList {
         return this.arr.get(index);
     }
 
+    public ArrayList<Task> getMatchingWordsList(String findText) {
+
+        ArrayList<Task> matchingWordsList = new ArrayList<>();
+        String[] stringArr = findText.split(" ");
+        for (Task t : arr) {
+            for (String str: stringArr) {
+                if (t.getTaskName().contains(str)) {
+                    matchingWordsList.add(t);
+                    break;
+                }
+            }
+        }
+        return matchingWordsList;
+    }
+
+
 }

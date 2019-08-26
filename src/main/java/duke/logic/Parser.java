@@ -60,6 +60,10 @@ public class Parser {
         } else if (command.split(" ")[0].equals("delete")) {
 
             return new DeleteCommand(Integer.parseInt(command.split(" ")[1]));
+        } else if (command.split(" ")[0].equals("find")) {
+            int spaceIndex = command.indexOf(" ");
+
+            return new FindCommand(command.substring(spaceIndex+1));
         }
 
         return new ListCommand();
@@ -96,8 +100,9 @@ public class Parser {
                 str.split(" ")[0].equals("deadline") ||
                 str.split(" ")[0].equals("event") ||
                 str.split(" ")[0].equals("delete") ||
-                str.split(" ")[0].equals("done")
+                str.split(" ")[0].equals("find")
         )) {
+
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         } else if (! str.split(" ")[0].equals("list") && str.split(" ").length == 1) {

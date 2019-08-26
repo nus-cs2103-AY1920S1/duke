@@ -56,6 +56,16 @@ public class Ui {
         }
     }
 
+
+    public void showFoundTasks(ArrayList<Task> arr) {
+        System.out.println("Here are the matching tasks in your list:");
+        int index  = 1;
+        for (Task task : arr) {
+            System.out.println(String.format("%d. %s", index , task.toString()));
+            index++;
+        }
+    }
+
     /**
      * Prints out the task that is recently deleted.
      * @param taskList

@@ -1,17 +1,17 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /** A class representing a event task. */
 public class Event extends Task {
-    private String time;
+    private LocalDateTime time;
 
     /**
      * Constructor for the event task.
      * @param description the description of the event.
      * @param time the time at which the event starts.
      */
-    public Event(String description, String time) throws IllegalDescriptionException {
+    public Event(String description, LocalDateTime time) throws IllegalDescriptionException {
         super(description);
-        if (time.isEmpty()) {
-            throw new IllegalDescriptionException("The time cannot be empty.");
-        }
         this.time = time;
     }
 
@@ -31,6 +31,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        String dateTime = formatter.format(time);
+        return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
 }

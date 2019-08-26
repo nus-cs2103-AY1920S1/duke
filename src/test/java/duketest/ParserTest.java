@@ -1,3 +1,5 @@
+package duketest;
+
 import command.AddCommand;
 import org.junit.jupiter.api.Test;
 

@@ -2,10 +2,9 @@ package weomucat.duke;
 
 import java.util.*;
 
-public class Parser {
-	// Default parameter is ""
-	public static final String PARAMETER_DEFAULT = "";
+import static weomucat.duke.Command.PARAMETER_DEFAULT;
 
+public class Parser {
 	private Scanner scanner;
 
 	public Parser(String line) {
@@ -34,11 +33,7 @@ public class Parser {
 
 			// Put (param, line) into out, if current token is a parameter
 			if (in.contains(token)) {
-
-				// Ensure line has at least one word.
-				if (line.size() != 0) {
-					out.put(param, String.join(" ", line));
-				}
+				out.put(param, String.join(" ", line));
 
 				// Set to next parameter.
 				param = token;
@@ -49,10 +44,7 @@ public class Parser {
 		}
 
 		// Put last (param, line) into out.
-		// Ensure line has at least one word.
-		if (line.size() != 0) {
-			out.put(param, String.join(" ", line));
-		}
+		out.put(param, String.join(" ", line));
 
 		return out;
 	}

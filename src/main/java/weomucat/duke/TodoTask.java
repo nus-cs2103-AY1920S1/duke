@@ -1,8 +1,12 @@
 package weomucat.duke;
 
 public class TodoTask extends Task {
-	public TodoTask(String description) {
+	public TodoTask(String description) throws InvalidParameterException {
 		super(description);
+
+		if (description.equals("")) {
+			throw new InvalidParameterException("The description of a todo cannot be empty.");
+		}
 	}
 
 	@Override

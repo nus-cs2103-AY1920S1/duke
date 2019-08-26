@@ -9,7 +9,8 @@ public class DeadlineTaskTest {
 
     @Test
     public void testToFileString() throws DukeException {
-        assertEquals("D||0||deadlineTest||01/01/2000 2359",new DeadlineTask("deadlineTest", "01/01/2000 2359").toFileString());
+        assertEquals("D||0||deadlineTest||01/01/2000 2359",
+                new DeadlineTask("deadlineTest", "01/01/2000 2359").toFileString());
     }
 
     @Test

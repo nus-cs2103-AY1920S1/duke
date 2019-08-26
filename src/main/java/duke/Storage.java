@@ -21,7 +21,7 @@ public class Storage {
      * Initialises a storage object which handles with loading tasks from the file
      * and saving tasks in the file.
      * @param filePath a string storing the location of the text file which stores the tasks' data.
-     * @throws IOException
+     * @throws IOException IOException if an I/O error occurs opening the source
      */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
@@ -33,7 +33,12 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException, DukeException {
+    /**
+     * Loads a list of tasks in the text file.
+     * @return an ArrayList of tasks.
+     * @throws DukeException DukeException that may arise from invalid inputs.
+     */
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (sc.hasNext()) {
             String tokenString = sc.nextLine();
@@ -64,6 +69,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks in the text file given a TaskList.
+     * @param tasks TaskList to be saved into the text file.
+     * @throws IOException IOException if an I/O error occurs when writing onto the file.
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw1 = new FileWriter(filePath);
         fw1.write("");

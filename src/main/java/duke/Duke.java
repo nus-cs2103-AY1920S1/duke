@@ -14,7 +14,7 @@ public class Duke {
     /**
      * Creates an instance of Duke, a task manager.
      * @param filePath a string storing the location of the text file which stores the tasks' data.
-     * @throws IOException
+     * @throws IOException IOException if an I/O error occurs opening the source
      */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
@@ -28,7 +28,7 @@ public class Duke {
 
     /**
      * Initializes the program which users can input commands to interact with Duke.
-     * @throws IOException
+     * @throws IOException IOException if an I/O error occurs opening the source.
      */
     public void run() throws IOException {
         ui.showWelcome(tasks);
@@ -41,8 +41,6 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.print(e.getMessage());
-            } finally {
-
             }
         }
         ui.showLine();

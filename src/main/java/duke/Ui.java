@@ -24,16 +24,16 @@ public class Ui {
      * @param tasks tasks currently in the list.
      */
     public void showWelcome(TaskList tasks) {
-        String nudeLogo = "  _   _           _      \n" +
-                " | \\ | |_   _  __| | ___ \n" +
-                " |  \\| | | | |/ _` |/ _ \\\n" +
-                " | |\\  | |_| | (_| |  __/\n" +
-                " |_| \\_|\\__,_|\\__,_|\\___|\n";
-        String nukeLogo = "  _   _       _        \n" +
-                " | \\ | |_   _| | _____ \n" +
-                " |  \\| | | | | |/ / _ \\\n" +
-                " | |\\  | |_| |   <  __/\n" +
-                " |_| \\_|\\__,_|_|\\_\\___|\n";
+        String nudeLogo = "  _   _           _      \n"
+                + " | \\ | |_   _  __| | ___ \n"
+                + " |  \\| | | | |/ _` |/ _ \\\n"
+                + " | |\\  | |_| | (_| |  __/\n"
+                + " |_| \\_|\\__,_|\\__,_|\\___|\n";
+        String nukeLogo = "  _   _       _        \n"
+                + " | \\ | |_   _| | _____ \n"
+                + " |  \\| | | | | |/ / _ \\\n"
+                + " | |\\  | |_| |   <  __/\n"
+                + " |_| \\_|\\__,_|_|\\_\\___|\n";
         String dukeLogo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -52,7 +52,7 @@ public class Ui {
     /**
      * Returns the command read from input.
      * @return the command read from input.
-     * @throws IOException
+     * @throws IOException IOException if an I/O error occurs opening the source.
      */
     public String readCommand() throws IOException {
         return br.readLine();

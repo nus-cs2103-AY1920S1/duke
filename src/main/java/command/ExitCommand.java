@@ -9,6 +9,12 @@ import duke.Ui;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Prompts Ui to print a concluding message.
+     * @param tasks TaskList which stores the list of tasks.
+     * @param ui Ui which feedbacks to user about success of command.
+     * @param storage Storage which saves the task into the text file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.print("Bye. Hope to see you again soon!");
     }
@@ -17,3 +23,4 @@ public class ExitCommand extends Command {
         return true;
     }
 }
+

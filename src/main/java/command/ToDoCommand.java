@@ -22,6 +22,14 @@ public class ToDoCommand extends Command {
         this.description = description;
     }
 
+    /**
+     * Adds a ToDoTask to the TaskList.
+     * @param tasks TaskList which stores the list of tasks.
+     * @param ui Ui which feedbacks to user about success of command.
+     * @param storage Storage which saves the task into the text file.
+     * @throws DukeException DukeException that may arise from invalid inputs.
+     * @throws IOException IOException if an I/O error occurs when writing onto the file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         Task task = new ToDoTask(description);
         tasks.addTask(task);

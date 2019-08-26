@@ -43,12 +43,16 @@ public class TaskList {
         tasks.get(index).markAsDone();
     }
 
+    /**
+     * Returns a string for printing a list of all tasks to the user.
+     * @return a string of all tasks in the list.
+     */
     public String toString() {
         String res;
-        if(tasks.size() == 0) {
+        if (tasks.size() == 0) {
             return "You have no tasks in the list.";
         } else {
-            res = "You have " + tasks.size() + " task"
+            res = "I can find " + tasks.size() + " task"
                     + (tasks.size() == 1 ? " " : "s ") + "in the list.";
         }
         for (int i = 0; i < tasks.size(); i++) {

@@ -9,7 +9,7 @@ public abstract class Task {
 
     /**
      * Task Constructor used by classes extending Task.
-     * @param description
+     * @param description Task description.
      */
     public Task(String description) {
         this.description = description;
@@ -17,6 +17,10 @@ public abstract class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void markAsDone() {

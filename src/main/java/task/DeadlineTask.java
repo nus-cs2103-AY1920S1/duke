@@ -23,7 +23,7 @@ public class DeadlineTask extends Task {
         try {
             this.time = format.parse(time);
         } catch (ParseException e) {
-             throw new DukeInvalidTaskDateFormatException(time);
+            throw new DukeInvalidTaskDateFormatException(time);
         }
     }
 

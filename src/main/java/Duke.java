@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ class DukeException extends Exception {}
 class InputUnknownException extends DukeException {
     @Override
     public String getMessage() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }
 class EmptyDescriptionException extends DukeException {
@@ -153,7 +154,7 @@ public class Duke {
     public static void main(String[] args) {
         
         try(Scanner scanner = new Scanner(System.in);
-            PrintStream out = new PrintStream(System.out, true, "UTF-8");
+            PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8)
             ) {
 
             System.setOut(out);
@@ -243,8 +244,6 @@ public class Duke {
                 }
 
             }
-        } catch (UnsupportedEncodingException e) {
-            System.out.println("whoops unsupported encoding: " + e.getMessage());
         }
         
     }

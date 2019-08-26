@@ -12,7 +12,7 @@ public class Task {
      *
      * @param description The string description of the task created.
      */
-    public Task (String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }

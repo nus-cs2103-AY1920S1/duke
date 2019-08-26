@@ -35,5 +35,3 @@ shadowJar {
 checkstyle {
     toolVersion = '8.23'
 }
-
-

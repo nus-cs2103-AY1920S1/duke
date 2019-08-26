@@ -1,11 +1,12 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
  * Represents a deadline, which is a type of task.
  * An deadline has a description and is due by a specific date/time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected Date byDate;
     protected String day;
@@ -39,7 +40,10 @@ public class Deadline extends Task{
             this.minute = dateTime[1].substring(2);
 
             this.byDate = format.parse(day + "/" + month + "/" + year + " " + hour + ":" + minute);
-        } catch (Exception e) { throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of deadline timing is invalid.");}
+        } catch (Exception e) {
+            throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of deadline timing is invalid.");
+        }
+
     }
 
     /**

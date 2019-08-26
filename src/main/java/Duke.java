@@ -44,6 +44,11 @@ public class Duke {
 
     }
 
+    /**
+     * Main Method of Duke object.
+     *
+     * @param args argument of main method.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

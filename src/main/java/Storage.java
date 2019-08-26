@@ -32,7 +32,8 @@ public class Storage {
      *
      * @param taskList Tasks extracted from file will be added to this TaskList object
      * @throws FileNotFoundException Thrown when the file specified by the filepath does not exist.
-     * @throws InvalidTaskArgumentDukeException Thrown when the file contains invalid information to create task objects.
+     * @throws InvalidTaskArgumentDukeException Thrown when the file contains invalid information
+     *     to create task objects.
      */
     public void getTasksFromFile(TaskList taskList) throws FileNotFoundException, InvalidTaskArgumentDukeException {
         File taskFile = new File(filePath);
@@ -76,7 +77,7 @@ public class Storage {
      * @param text String input in required format.
      * @return Task object created from processing the input text.
      * @throws InvalidTaskArgumentDukeException Thrown when the String text is in an invalid format so
-     * the argument entered when creating a task object is invalid.
+     *     the argument entered when creating a task object is invalid.
      */
     public Task stringToTask(String text) throws InvalidTaskArgumentDukeException {
         String[] textSplit = text.split("\\|");

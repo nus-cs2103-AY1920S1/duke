@@ -1,4 +1,4 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Represents a to-do, which is a type of task.

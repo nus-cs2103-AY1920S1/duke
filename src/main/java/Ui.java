@@ -26,7 +26,11 @@ public class Ui {
     }
 
     /**
+<<<<<<< HEAD
      * Displays the welcome message when a Duke object is started
+=======
+     * Displays the welcome message when a Duke object is started.
+>>>>>>> branch-A-CodingStandard
      */
     public void showWelcomeMessage() {
         System.out.println(line);
@@ -69,7 +73,8 @@ public class Ui {
         System.out.println(line);
         System.out.println("     Got it. I've added this task: ");
         System.out.println("       " + task);
-        System.out.println("     Now you have " + taskListSize + (taskListSize > 1 ? " tasks in the list." : " task in the list."));
+        System.out.println("     Now you have " + taskListSize
+                + (taskListSize > 1 ? " tasks in the list." : " task in the list."));
         System.out.println(line);
     }
 
@@ -89,13 +94,18 @@ public class Ui {
      * Displays message when a Task object is deleted.
      *
      * @param task Task object deleted from the TaskList object of a Duke Object.
+<<<<<<< HEAD
      * @param taskListSize
+=======
+     * @param taskListSize Number of Task objects in TaskList object after the Task object is deleted.
+>>>>>>> branch-A-CodingStandard
      */
     public void showDeleteTaskMessage(Task task, int taskListSize) {
         System.out.println(line);
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + task);
-        System.out.println("     Now you have " + taskListSize + (taskListSize > 1 ? " tasks in the list." : " task in the list."));
+        System.out.println("     Now you have " + taskListSize
+                + (taskListSize > 1 ? " tasks in the list." : " task in the list."));
         System.out.println(line);
     }
 

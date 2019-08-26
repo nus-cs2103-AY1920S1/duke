@@ -46,7 +46,8 @@ public class Parser {
                     currentTask = new ToDo(description);
                     return new AddCommand(currentTask);
                 } else {
-                    throw new InvalidTaskDescriptionDukeException("☹ OOF!!! The description of a todo cannot be empty!!");
+                    throw new InvalidTaskDescriptionDukeException("☹ OOF!!! "
+                            + "The description of a todo cannot be empty!!");
                 }
 
             } else if (splitCommand[0].equals("deadline")) {
@@ -59,9 +60,9 @@ public class Parser {
                         if (i + 1 < splitCommand.length && !splitCommand[i + 1].equals("/by")) {
                             description += " ";
                         }
-                    } else if (splitCommand[i].equals("/by") && !descriptionRecorded){
+                    } else if (splitCommand[i].equals("/by") && !descriptionRecorded) {
                         descriptionRecorded = true;
-                    } else if (!splitCommand[i].equals("/by") && descriptionRecorded){
+                    } else if (!splitCommand[i].equals("/by") && descriptionRecorded) {
                         by += splitCommand[i];
                         if (i != splitCommand.length - 1) {
                             by += " ";
@@ -73,7 +74,8 @@ public class Parser {
                     currentTask = new Deadline(description, by);
                     return new AddCommand(currentTask);
                 } else {
-                    throw new InvalidTaskDescriptionDukeException("☹ OOF!!! The description/timing of a deadline cannot be empty!!");
+                    throw new InvalidTaskDescriptionDukeException("☹ OOF!!! "
+                            + "The description/timing of a deadline cannot be empty!!");
                 }
 
             } else if (splitCommand[0].equals("event")) {
@@ -86,9 +88,9 @@ public class Parser {
                         if (i + 1 < splitCommand.length && !splitCommand[i + 1].equals("/at")) {
                             description += " ";
                         }
-                    } else if (splitCommand[i].equals("/at") && !descriptionRecorded){
+                    } else if (splitCommand[i].equals("/at") && !descriptionRecorded) {
                         descriptionRecorded = true;
-                    } else if (!splitCommand[i].equals("/at") && descriptionRecorded){
+                    } else if (!splitCommand[i].equals("/at") && descriptionRecorded) {
                         at += splitCommand[i];
                         if (i != splitCommand.length - 1) {
                             at += " ";
@@ -100,7 +102,8 @@ public class Parser {
                     currentTask = new Event(description, at);
                     return new AddCommand(currentTask);
                 } else {
-                    throw new InvalidTaskDescriptionDukeException("☹ OOF!!! The description/timing of an event cannot be empty!!");
+                    throw new InvalidTaskDescriptionDukeException("☹ OOF!!! "
+                            + "The description/timing of an event cannot be empty!!");
                 }
 
             } else {

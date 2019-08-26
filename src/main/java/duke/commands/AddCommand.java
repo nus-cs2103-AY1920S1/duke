@@ -1,11 +1,9 @@
 package duke.commands;
 
 import duke.*;
-import duke.tasks.DeadlineTask;
-import duke.tasks.EventTask;
-import duke.tasks.Task;
-import duke.tasks.TodoTask;
+import duke.tasks.*;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -18,18 +16,18 @@ public class AddCommand extends Command {
     private static final String ADDED_TASK_STRING = "Got it. I've added this task:";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
-    private String taskType;
+    private String input;
 
-    public AddCommand(Duke duke, String input) {
-        super(duke, input);
-        String[] args = input.split(" ");
-        this.taskType = args[0];
+    public AddCommand(String input) {
+        super();
+        this.input = input;
     }
 
-    public void execute() {
+    public void execute(Storage storage, Ui ui, TaskList tasklist) {
+        String[] args = input.split(" ");
         Task newTask;
         try {
-            switch (taskType) {
+            switch (args[0]) {
                 case TODO_COMMAND:
                     newTask = new TodoTask(
                             input.split(TODO_COMMAND)[1]);
@@ -52,12 +50,15 @@ public class AddCommand extends Command {
                 default:
                     return;
             }
-            duke.getTasks().addTask(newTask);
-            duke.say(
+            tasklist.addTask(newTask);
+            ui.say(
                     String.format("%s\n\t%s\nNow you have %d tasks in the list.",
-                            ADDED_TASK_STRING, newTask, duke.getTasks().numTasks())
+                            ADDED_TASK_STRING, newTask, tasklist.numTasks())
             );
+            storage.write(tasklist.getFormattedStrings());
         } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

@@ -1,20 +1,8 @@
-package duke;
+package duke.tasks;
 
-import duke.tasks.DeadlineTask;
-import duke.tasks.EventTask;
-import duke.tasks.Task;
-import duke.tasks.TodoTask;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class TaskList {
     private static final String FILE_PATH = "data/duke.txt";
@@ -22,20 +10,11 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    public static TaskList create(int num) {
-        try {
-            ArrayList<String> storage = read();
-            return new TaskList(num, storage);
-        } catch (FileNotFoundException e) {
-            return new TaskList(num);
-        }
-    }
-
-    private TaskList(int num) {
+    public  TaskList(int num) {
         this.tasks = new ArrayList<>(num);
     }
 
-    private TaskList(int num, ArrayList<String> storage) {
+    public TaskList(int num, ArrayList<String> storage) {
         this.tasks = new ArrayList<>(num);
         for (String s : storage) {
             try {
@@ -71,22 +50,10 @@ public class TaskList {
 
     public void addTask(Task task) {
         tasks.add(task);
-
-        try {
-            write();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void deleteTask(int index) {
         tasks.remove(index - 1);
-
-        try {
-            write();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public Task getTask(int index) {
@@ -100,12 +67,6 @@ public class TaskList {
     public void markDone(int index) {
         Task doneTask = tasks.get(index - 1);
         doneTask.markDone();
-
-        try {
-            write();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -131,26 +92,11 @@ public class TaskList {
         }
     }
 
-    private ArrayList<String> formatStrings() {
+    public ArrayList<String> getFormattedStrings() {
         ArrayList<String> al = new ArrayList<>();
         for (Task task : tasks) {
             al.add(task.formatString());
         }
         return al;
-    }
-
-    private void write() throws IOException {
-        Path path = Paths.get(FILE_PATH);
-        Files.write(path, formatStrings());
-    }
-
-    private static ArrayList<String> read() throws FileNotFoundException {
-        File f = new File(FILE_PATH);
-        Scanner sc = new Scanner(f);
-        ArrayList<String> input = new ArrayList<>();
-        while(sc.hasNextLine()) {
-            input.add(sc.nextLine());
-        }
-        return input;
     }
 }

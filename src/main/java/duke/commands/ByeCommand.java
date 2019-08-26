@@ -1,25 +1,27 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.tasks.TaskList;
 
 public class ByeCommand extends Command{
 
-    private static final String TOO_MANY_ARGUMENTS = "☹ OOPS!!! The bye command takes no arguments.";
+    private static final String TOO_MANY_ARGUMENTS = "The bye command takes no arguments.";
 
-    public static ByeCommand create(Duke duke, String input, String[] args) throws DukeException {
+    public static ByeCommand create(String input, String[] args) throws DukeException {
         int numArgs = args.length;
         if (numArgs > 1) {
             throw new DukeException(TOO_MANY_ARGUMENTS);
         }
-        return new ByeCommand(duke, input);
+        return new ByeCommand();
     }
 
-    private ByeCommand(Duke duke, String input) {
-        super(duke, input);
+    private ByeCommand() {
+        super();
     }
 
-    public void execute() {
-        this.duke.exit();
+    public void execute(Storage s, Ui ui, TaskList tasklist) {
+        this.isExit = true;
     }
 }

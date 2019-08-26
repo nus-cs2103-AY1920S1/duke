@@ -2,50 +2,59 @@ package duke.commands;
 
 import duke.Duke;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
+
+import java.io.IOException;
 
 public class DeleteCommand extends Command {
     private static final String DELETE_TASK_STRING = "Noted. I've removed this task:";
-    private static final String TOO_MANY_ARGUMENTS = "☹ OOPS!!! The delete command needs only one argument.";
-    private static final String WRONG_ARGUMENTS = "☹ OOPS!!! The delete command needs an integer argument.";
-    private static final String WRONG_INDEX = "☹ OOPS!!! There is no task with index: ";
+    private static final String TOO_MANY_ARGUMENTS = "The delete command needs only one argument.";
+    private static final String WRONG_ARGUMENTS = "The delete command needs an integer argument.";
+    private static final String WRONG_INDEX = "There is no task with index: ";
 
-    private int index;
+    private String[] args;
 
-    public static DeleteCommand create(Duke duke, String input, String[] args) throws DukeException {
+    public static DeleteCommand create(String input, String[] args) throws DukeException {
         int numArgs = args.length;
         if (numArgs > 2) {
             throw new DukeException(TOO_MANY_ARGUMENTS);
         } else if (numArgs == 1) {
             throw new DukeException(WRONG_ARGUMENTS);
         } else {
-            try {
-                int index = Integer.parseInt(args[1]);
-                int numTasks = duke.getTasks().numTasks();
-                if (index > numTasks || index < 1) {
-                    throw new DukeException(
-                            String.format("%s%d", WRONG_INDEX, index)
-                    );
-                }
-                return new DeleteCommand(duke, input, index);
-            } catch (NumberFormatException e) {
-                throw new DukeException(WRONG_ARGUMENTS);
-            }
-
+            return new DeleteCommand(args);
         }
     }
 
-    private DeleteCommand(Duke duke, String input, int index) {
-        super(duke, input);
-        this.index = index;
+    private DeleteCommand(String[] args) {
+        super();
+        this.args = args;
     }
 
-    public void execute() {
-        Task deletedTask = duke.getTasks().getTask(index);
-        duke.getTasks().deleteTask(index);
-        duke.say(
-                String.format("%s\n\t%s\nNow you have %d tasks in the list.",
-                        DELETE_TASK_STRING, deletedTask, duke.getTasks().numTasks())
-        );
+    public void execute(Storage storage, Ui ui, TaskList tasklist) throws DukeException {
+        int index;
+        Task task;
+        int numTasks = tasklist.numTasks();
+
+        try {
+            index = Integer.parseInt(args[1]);
+            if (index > numTasks || index < 1) {
+                throw new DukeException(
+                        String.format("%s%d", WRONG_INDEX, index)
+                );
+            }
+            task = tasklist.getTask(index);
+            tasklist.deleteTask(index);
+            String message = String.format("%s\n\t%s\nNow you have %d tasks in the list.",
+                    DELETE_TASK_STRING, task, tasklist.numTasks());
+            ui.say(message);
+            storage.write(tasklist.getFormattedStrings());
+        } catch (NumberFormatException e) {
+            ui.sayError(WRONG_ARGUMENTS);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

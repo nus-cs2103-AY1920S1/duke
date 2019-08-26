@@ -1,55 +1,20 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.tasks.TaskList;
 
 public abstract class Command {
+    protected boolean isExit;
 
-    private static final String EMPTY_TODO_STRING = "☹ OOPS!!! The description of a todo cannot be empty.";
-    private static final String EMPTY_EVENT_STRING = "☹ OOPS!!! The description of a event cannot be empty.";
-    private static final String EMPTY_DEADLINE_STRING = "☹ OOPS!!! The description of a deadline cannot be empty.";
-    private static final String UNKNOWN_COMMAND_STRING = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-
-    protected Duke duke;
-    protected String input;
-    protected String[] args;
-
-    public Command(Duke duke, String input) {
-        this.duke = duke;
-        this.input = input;
+    protected Command() {
+        this.isExit = false;
     }
 
-    public abstract void execute();
-
-    public static Command create(Duke duke, String input) throws DukeException {
-        String[] args = input.split(" ");
-        int numArgs = args.length;
-        switch(args[0]) {
-            case "bye":
-                return ByeCommand.create(duke, input, args);
-            case "list":
-                return ListCommand.create(duke, input, args);
-            case "done":
-                return DoneCommand.create(duke, input, args);
-            case "delete":
-                return DeleteCommand.create(duke, input, args);
-            case "todo":
-                if (numArgs == 1) {
-                    throw new DukeException(EMPTY_TODO_STRING);
-                }
-                return new AddCommand(duke, input);
-            case "event":
-                if (numArgs == 1) {
-                    throw new DukeException(EMPTY_EVENT_STRING);
-                }
-                return new AddCommand(duke, input);
-            case "deadline":
-                if (numArgs == 1) {
-                    throw new DukeException(EMPTY_DEADLINE_STRING);
-                }
-                return new AddCommand(duke, input);
-            default:
-                throw new DukeException(UNKNOWN_COMMAND_STRING);
-        }
+    public boolean isExit() {
+        return isExit;
     }
+
+    public abstract void execute(Storage storage, Ui ui, TaskList tasklist) throws DukeException;
 }

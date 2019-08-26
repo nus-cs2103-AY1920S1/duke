@@ -1,57 +1,57 @@
 package duke;
 
 import duke.commands.Command;
+import duke.tasks.TaskList;
 
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Duke {
+    private static final String FILE_PATH = "data/duke.txt";
+    private static final String TASK_LOAD_ERR = "Error loading files, starting a new list...";
     private static final int NUMBER_TASKS = 100;
-    private static final String LINE_BREAK = "______________________________________________________________________";
-    private static final String HELLO_STRING = "Hello! I'm duke.Duke\nWhat can I do for you?";
-    private static final String BYE_STRING = "Bye. Hope to see you again soon!";
 
-    private Scanner scanner;
-    private boolean running;
+    private Storage storage;
+    private Ui ui;
     private TaskList tasks;
+    private boolean running;
 
-    public Duke() {
-        scanner = new Scanner(System.in);
+    public Duke(String path) {
+        storage = new Storage(path);
+        ui = new Ui();
         running = true;
-        tasks = TaskList.create(NUMBER_TASKS);
+        try {
+            tasks = new TaskList(NUMBER_TASKS, storage.read());
+        } catch (FileNotFoundException e) {
+            ui.sayError(TASK_LOAD_ERR);
+            tasks = new TaskList(NUMBER_TASKS);
+        }
     }
 
-    public void start() {
+    private void start() {
         String input;
-        say(HELLO_STRING);
+        ui.greet();
         while (running) {
-            input = scanner.nextLine().trim();
+            input = ui.readLine();
             try {
-                Command command = Command.create(this, input);
-                command.execute();
+                Command command = Parser.parse(input);
+                command.execute(storage, ui, tasks);
+                if(command.isExit())
+                    exit();
             } catch (DukeException e) {
-                say(e.getMessage());
+                ui.sayError(e.getMessage());
             }
         }
     }
 
-    public void exit() {
+    private void exit() {
+        ui.farewell();
+        ui.close();
         this.running = false;
-        scanner.close();
-        say(BYE_STRING);
     }
 
-    public void say(String sequence) {
-        String indented = sequence.replaceAll("(?m)^", "\t\t");
-        System.out.printf(
-                "\t%s\n%s\n\t%s\n",
-                LINE_BREAK,
-                indented,
-                LINE_BREAK
-        );
-    }
-
-    public TaskList getTasks() {
-        return this.tasks;
+    public static void main(String[] args) {
+        Duke duke = new Duke(FILE_PATH);
+        duke.start();
     }
 }
 

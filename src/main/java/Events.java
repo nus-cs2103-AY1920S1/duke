@@ -6,7 +6,7 @@ public class Events extends Task{
     protected String timeDesc;
     protected Date date;
 
-    public Events(String desc, String timeDesc) {
+    public Events(String desc, String timeDesc) throws DukeException {
         super(desc);
         this.timeDesc = timeDesc;
 
@@ -14,13 +14,13 @@ public class Events extends Task{
             SimpleDateFormat deadlineFormatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
             this.date = deadlineFormatter.parse(timeDesc);
         } catch (ParseException e) {
-            e.printStackTrace();
+            throw new DukeException("Please enter deadline in format dd/mm/yyyy hhmm");
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + timeDesc + ")";
+        return "[E]" + super.toString() + "(at: " + date + ")";
     }
 
     public String toFileFormat() {

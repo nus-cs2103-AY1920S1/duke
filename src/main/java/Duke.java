@@ -6,12 +6,6 @@ import java.util.*;
  */
 public class Duke {
     public static void main(String[] args) {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
         Scanner sc = new Scanner(System.in);
         boolean hi = true;
         String input = "";
@@ -69,15 +63,19 @@ public class Duke {
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! The description of a task cannot be empty! :(");
-                continue;
             } catch (UnsupportedOperationException e) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means! :(");
-                continue;
             }
         }
         sc.close();
     }
 
+    /**
+     * Processes Input String to Description & Details
+     * @param input Task String
+     * @return Array. Index 0 = Description. Index 1  = Details
+     * @throws ArrayIndexOutOfBoundsException
+     */
     private static String[] process(String input) throws ArrayIndexOutOfBoundsException {
         String desc[] = input.split("/");
         String temp[] = desc[1].split(" ");

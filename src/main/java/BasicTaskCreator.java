@@ -2,12 +2,19 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 /*
  * Look, if we need to have a list of commands to be more 
  * modular, we can 
  * 1. Wrapper class for BasicTaskCreator
  * 2. Facade to limit BasicTaskCreator
  * 3. Make a compositeTaskCreator and accept ToDoTaskCreator et al
+ */
+
+/**
+ * Factory class which takes in string of details of what to make each class
+ * returns TaskInterface implemented class eg ToDo, Event, Deadline
+ * called by Parser addCommand
  */
 class BasicTaskCreator implements TaskCreator {
     public BasicTaskCreator() {
@@ -51,6 +58,13 @@ class BasicTaskCreator implements TaskCreator {
         return new EventsImplementation(taskName, date,false);
     }
 
+    /**
+     * Returns TaskInterface, factory method to create 
+     *  TaskInterface class based on input command
+     * @param command Command from caller class, "Parser.java"
+     * @return TaskInterface object, ToDo, Deadline, Event etc
+     * @throws OWOException if command is not supported
+     */
     public TaskInterface createTask(String command) 
         throws OWOException {
 

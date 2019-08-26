@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
+/**
+ * Deals with printing to output for user to see
+ * Other classes should call on this class' methods to 
+ * interact with user
+ */
 class Ui implements TaskObserver {
     private ControllerInterface controller; 
     private TaskModelInterface model;
@@ -93,6 +98,11 @@ class Ui implements TaskObserver {
         Ui.printSection(printxs);
     }
 
+    /**
+     * Return void, prints section to indicate a task is added
+     *  @param taskDetails Details of Task to print
+     *  @param totalTasks total number of tasks in the tasklist
+     */
     public static void printAddTaskSection(String taskDetails,
             int totalTasks) {
         ArrayList<String> printxs = new ArrayList<>();
@@ -108,6 +118,11 @@ class Ui implements TaskObserver {
         Ui.printSection(printxs);
     }        
 
+    /**
+     * Return void, prints section to indicate a task is done
+     *  @param taskDetails Details of Task to print
+     *  @param totalTasks total number of tasks in the tasklist
+     */
     public static void printDoneTaskSection(String taskDetails) {
         ArrayList<String> printxs = new ArrayList<>();
         String headermsg = "Nyice ;;w;;  "
@@ -119,6 +134,11 @@ class Ui implements TaskObserver {
 
     }
 
+    /**
+     * Return void, prints section to indicate a task is delete
+     *  @param taskDetails Details of Task to print
+     *  @param totalTasks total number of tasks in the tasklist
+     */
     public static void printDeleteTaskSection(String 
             taskDetails, int totalTasks) {
         String header = "nyoted. OwO has wemuvd this task:\n";
@@ -127,11 +147,19 @@ class Ui implements TaskObserver {
         Ui.printSection(header + footer);
     }
 
+    /**
+     * Returns void, prints an error section to screen
+     *  @param message Error message to be printed
+     */
     public static void printErrorSection(String message) {
         Ui.printSection(message);
     }        
 
 
+    /**
+     * Returns void, prints a list of task given input
+     *  @param Stream of tasks to be printed
+     */
     public static void 
         //printAllTasks(Iterator<TaskInterface> iter) {
         printAllTasks(Stream<TaskInterface> taskStream) {
@@ -158,6 +186,10 @@ class Ui implements TaskObserver {
         Ui.printSection(printxs);
     }
 
+    /**
+     * Returns void, prints a list of task given input
+     *  @param Stream of tasks to be printed
+     */
     public void update(TaskModelInterface model){
     /* TaskModel's most recent change here */
     /* model.getUpdate */
@@ -165,6 +197,9 @@ class Ui implements TaskObserver {
         this.totalTasks = model.getTotalTasks();
     }
 
+    /**
+     * Returns nothing, starts user session and maintains loop
+     */
     public void instance() {
         Ui.printGreeting();
         String command = this.sc.nextLine();
@@ -176,6 +211,9 @@ class Ui implements TaskObserver {
         Ui.printExitMessage();
     }
 
+    /**
+     * Returns void, prints welcome banner and logo
+     */
     public static void printBanner() {
         String logo = "        \u2606                     \u273f\n"
             + "                                    \u2606 \u273f\n"

@@ -1,15 +1,18 @@
-import javax.imageio.stream.FileImageOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+
         Scanner sc;
         Boolean exit = false;
 
@@ -96,7 +99,7 @@ public class Duke {
                 case ("deadline"):
                     response = sc.nextLine().trim();
                     Deadline newDeadline = new Deadline(response.split(" /by ")[0],
-                            response.split(" /by ")[1]);
+                            dateFormatter.parse(response.split(" /by ")[1]));
                     tasks.add(newDeadline);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newDeadline.toString());
@@ -106,7 +109,7 @@ public class Duke {
                 case ("event"):
                     response = sc.nextLine().trim();
                     Event newEvent = new Event(response.split(" /at ")[0],
-                            response.split(" /at ")[1]);
+                            dateFormatter.parse(response.split(" /by ")[1]));
                     tasks.add(newEvent);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newEvent.toString());
@@ -124,8 +127,7 @@ public class Duke {
                 default:
                     throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-
-            } catch (InvalidCommandException e) {
+            } catch (InvalidCommandException | ParseException e) {
                 System.out.println(e.toString());
                 response = sc.next();
             }

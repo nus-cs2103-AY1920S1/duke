@@ -1,19 +1,26 @@
-public class Deadline extends Task {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Deadline(String taskName, String by) {
+public class Deadline extends Task {
+    protected Date byDate;
+
+    public Deadline(String taskName, String by) throws ParseException {
         super(taskName);
         this.taskType = TypeOfTask.DEADLINE;
 
-        if ( by.contains("(by: ") ) this.details = by;
-        else this.details = "(by: " + by + ")";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        this.byDate = formatter.parse(by);
+        this.details = "(by: " + by + ")";
     }
 
-    public Deadline(String taskName, String by, boolean isCompleted) {
+    public Deadline(String taskName, String by, boolean isCompleted) throws ParseException {
         super(taskName, isCompleted);
         this.taskType = TypeOfTask.DEADLINE;
 
-        if ( by.contains("(by: ") ) this.details = by;
-        else this.details = "(by: " + by + ")";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        this.byDate = formatter.parse(by);
+        this.details = "(by: " + by;
     }
 
 

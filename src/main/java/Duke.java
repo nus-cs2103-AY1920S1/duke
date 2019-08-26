@@ -17,9 +17,7 @@ public class Duke {
             String input = sc.nextLine();
             String[] parts = input.split("\\s");
             String cmd = parts[0];
-            // remove leading white space
-            // " borrow books" => "borrow books"
-            String text = input.substring(cmd.length()).replaceFirst("\\s", "");
+            String text = input.substring(cmd.length()).stripLeading();
             commandHandler.executeCommand(cmd, text);
             if (cmd.equals("bye")) System.exit(0);
         }

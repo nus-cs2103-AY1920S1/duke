@@ -21,21 +21,26 @@ public class OutputUtilities {
     }
 
    public void sayHi() {
-        System.out.println("\t Hello! I'm Duke. This is where you left off previously: ");
-        printLine();
+        System.out.println("\t Hello! I'm Duke.");
+
         try {
             storage.readFromTasksFileToList(tasks);
+            System.out.println("\t This is where you left off previously: ");
+            printLine();
         } catch (FileNotFoundException e) {
-            System.out.println("\t " + e.getMessage());
+            System.out.println("\t Fetching failed. " + e.getMessage());
             System.out.println("\t Creating file now...");
             File dukeTxt = new File(Duke.filePath);
             try {
                 dukeTxt.createNewFile();
                 System.out.println("\t File created! " + dukeTxt.getAbsolutePath());
                 System.out.println("\t Reading file...");
+                printLine();
             } catch (IOException ioe) {
                 System.out.println("\t File creation was not successful. " + ioe);
-                return;
+                System.out.println("Exiting system.");
+                printLine();
+                System.exit(-1);
             }
 
         }

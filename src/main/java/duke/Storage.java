@@ -15,13 +15,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage in the hard disk.
+ * A <code>Storage</code> object corresponds to a specific file in the hard disk that stores the information
+ * of the corresponding <code>TaskList</code> object.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Constructor for <code>Storage</code>.
+     * @param filePath File path of the file stored in the hard disk.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task information from the hard disk.
+     * @return A list of <code>Task</code> objects that can be used to create a new <code>TaskList</code> object.
+     * @throws DukeException If the file in the hard disk cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -68,6 +82,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the information of the <code>Task</code> objects in a <code>TaskList</code> to the file in the hard disk.
+     * @param tasks Tasks that have been updated through various commands.
+     * @throws DukeException If information cannot be written to the file.
+     */
     public void writeToHardDisk(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);

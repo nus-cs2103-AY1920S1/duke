@@ -208,10 +208,9 @@ public class Duke {
             String keyword = scanner.next();
             switch (keyword) {
                 case "T":
-                    scanner.next(); // skip the pipe
-                    boolean isDoneTodo = Boolean.parseBoolean(scanner.next());
-                    scanner.next(); // skip the pipe
-                    String todoDescription = scanner.next();
+                    String[] todoLine = scanner.nextLine().split(" \\| ");
+                    boolean isDoneTodo = Boolean.parseBoolean(todoLine[1]);
+                    String todoDescription = todoLine[2];
                     Task todoTask = new Task(todoDescription, TaskType.TODO);
                     if (isDoneTodo) {
                         todoTask.markAsDone();
@@ -219,12 +218,10 @@ public class Duke {
                     result.add(todoTask);
                     break;
                 case "D":
-                    scanner.next(); // skip the pipe
-                    boolean isDoneDeadline = Boolean.parseBoolean(scanner.next());
-                    scanner.next(); // skip the pipe
-                    String deadlineDescription = scanner.next();
-                    scanner.next(); // skip the pipe
-                    String deadlineTime = scanner.next();
+                    String[] deadlineLine = scanner.nextLine().split(" \\| ");
+                    boolean isDoneDeadline = Boolean.parseBoolean(deadlineLine[1]);
+                    String deadlineDescription = deadlineLine[2];
+                    String deadlineTime = deadlineLine[3];
                     Task deadlineTask = new Task(deadlineDescription, TaskType.DEADLINE);
                     Calendar deadlineCalendar = new Calendar.Builder().setInstant(Long.parseLong(deadlineTime)).build();
                     deadlineTask.setTime(deadlineCalendar);
@@ -234,12 +231,10 @@ public class Duke {
                     result.add(deadlineTask);
                     break;
                 case "E":
-                    scanner.next(); // skip the pipe
-                    boolean isDoneEvent = Boolean.parseBoolean(scanner.next());
-                    scanner.next(); // skip the pipe
-                    String eventDescription = scanner.next();
-                    scanner.next(); // skip the pipe
-                    String eventTime = scanner.next();
+                    String[] eventLine = scanner.nextLine().split(" \\| ");
+                    boolean isDoneEvent = Boolean.parseBoolean(eventLine[1]);
+                    String eventDescription = eventLine[2];
+                    String eventTime = eventLine[3];
                     Task eventTask = new Task(eventDescription, TaskType.EVENT);
                     Calendar eventCalendar = new Calendar.Builder().setInstant(Long.parseLong(eventTime)).build();
                     eventTask.setTime(eventCalendar);

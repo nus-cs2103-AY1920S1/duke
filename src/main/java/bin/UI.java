@@ -28,56 +28,78 @@ public class UI {
             boolean moreThanOne;
             if (input.contains(" ")) {
                 command = words[0];
-                moreThanOne = false;
+                moreThanOne = true;
             } else {
                 command = input;
-                moreThanOne = true;
+                moreThanOne = false;
             }
 
             Task temp;
+            try {
+                switch(command) {
 
-            switch (command) {
+                case "bye":
+                    wrapper("Bye. Hope to see you again soon!");
+                    return;
 
-            case "bye":
-                wrapper("Bye. Hope to see you again soon!");
-                return;
+                case "list":
+                    wrapList(dataStorage.getList());
+                    break;
 
-            case "list":
-                wrapList(dataStorage.getList());
-                break;
+                case "done":
+                    if (moreThanOne) {
+                        String secondWord = words[1];
+                        int index = Integer.parseInt(secondWord);
+                        wrapper(dataStorage.markAsDone(index).toString(),
+                                "Nice! I've marked this task as done:");
+                    }
+                    else {
+                        throw new DukeException("I'm sorry, you didn't specify which index of the list you've done.");
+                    }
+                    break;
 
-            case "done":
-                if (moreThanOne) {
-                    String secondWord = words[1];
-                    int index = Integer.parseInt(secondWord);
-                    wrapper(dataStorage.markAsDone(index).toString(),
-                            "Nice! I've marked this task as done:");
+                case "todo":
+                    if (moreThanOne) {
+                        temp = new ToDo(words[1]);
+                        dataStorage.store(temp);
+                        wrapper(temp.toString(), "Got it. I've added this task:",
+                                "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                    } else {
+                        throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
+                    }
+                    break;
+
+                case "deadline":
+                    if (moreThanOne) {
+                        String[] spl = words[1].split(" /by ", 2);
+                        String time = spl.length > 1 ? spl[1]: "NA";
+                        temp = new Deadline(spl[0], time);
+                        dataStorage.store(temp);
+                        wrapper(temp.toString(), "Got it. I've added this task:",
+                                "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                    } else {
+                        throw new DukeException("I'm sorry, the description of your DeadLine cannot be empty.");
+                    }
+                    break;
+
+                case "event":
+                    if (moreThanOne) {
+                    String[] split = words[1].split(" /at ", 2);
+                    String time = split.length > 1 ? split[1]: "NA";
+                    temp = new Event(split[0], time);
+                    dataStorage.store(temp);
+                    wrapper(temp.toString(), "Got it. I've added this task:",
+                            "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                    } else {
+                        throw new DukeException("I'm sorry, the description of your Event cannot be empty.");
+                    }
+                    break;
+
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :(");
                 }
-                break;
-
-            case "todo":
-                temp = new ToDo(words[1]);
-                dataStorage.store(temp);
-                wrapper(temp.toString(), "Got it. I've added this task:",
-                        "Now you have " + dataStorage.getSize() + " tasks in the list.");
-                break;
-
-            case "deadline":
-                String[] spl = words[1].split(" /by ", 2);
-                temp = new Deadline(spl[0], spl[1]);
-                dataStorage.store(temp);
-                wrapper(temp.toString(), "Got it. I've added this task:",
-                        "Now you have " + dataStorage.getSize() + " tasks in the list.");
-                break;
-
-            case "event":
-                String[] split = words[1].split(" /at ", 2);
-                temp = new Event(split[0], split[1]);
-                dataStorage.store(temp);
-                wrapper(temp.toString(), "Got it. I've added this task:",
-                        "Now you have " + dataStorage.getSize() + " tasks in the list.");
-                break;
-
+            } catch (DukeException d) {
+                wrapper(d.getMessage());
             }
         }
     }

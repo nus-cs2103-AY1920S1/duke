@@ -15,8 +15,11 @@ public class DataStorage {
         return textStorage.size();
     }
 
-    public Task markAsDone(int index) {
-        return textStorage.get(--index).completed();
+    public Task markAsDone(int index) throws DukeException {
+        --index;
+        if (index < 0 | index >= textStorage.size())
+            throw new DukeException("There's no Task attached to that number");
+        return textStorage.get(index).completed();
     }
 
     public ArrayList<Task> getList() {

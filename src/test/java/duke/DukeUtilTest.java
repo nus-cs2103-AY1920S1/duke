@@ -33,7 +33,10 @@ class DukeUtilTest {
     void getIndexOfPattern() {
         String[] testPrimeStringStream = IntStream
                 .range(2, 30)
-                .filter(x -> IntStream.range(2, x).noneMatch(y -> { return (double) x/y ==  x/y; }))
+                .filter(
+                        x -> IntStream
+                                .range(2, x)
+                                .noneMatch(y -> { return (double) x/y ==  x/y; }))
                 .mapToObj(primeNum -> primeNum + "")
                 .toArray(size -> new String[15]);
 

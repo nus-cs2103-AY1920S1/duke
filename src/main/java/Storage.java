@@ -1,46 +1,20 @@
 import java.io.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class TaskManager {
+public class Storage {
     final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
-    private Integer totalTask = 0;
-    private List<Task> taskList;
-    private String fileName;
+    private String filePath;
+    private TaskList taskList;
 
-    public TaskManager(String fileName) throws DukeException {
-        this.taskList = new ArrayList<>();
-        this.fileName = fileName;
-        readTask();
+    public Storage(TaskList taskList, String filePath) {
+        this.filePath = filePath;
+        this.taskList = taskList;
     }
 
-    public void addTask(Task task) {
-        taskList.add(task);
-    }
-
-    public Task getTask(int i) {
-        return taskList.get(i);
-    }
-
-    public int getSize() {
-        return taskList.size();
-    }
-
-    public void doneTask(int i) {
-        taskList.get(i).changeStatusTrue();
-    }
-
-    public Task deleteTask(int i) {
-        return taskList.remove(i);
-    }
-
-    public void readTask() throws DukeException{
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+    public void readTask() throws IODukeException{
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = null;
 
             while((line = br.readLine()) != null) {
@@ -66,24 +40,20 @@ public class TaskManager {
                     }
                 }
 
-
                 switch (tokens[0]) {
                 case "T":
-                    totalTask++;
                     taskHolder = new ToDo(description, isDone);
                     break;
                 case "D":
-                    totalTask++;
                     taskHolder = new Deadline(description, date, isDone);
                     break;
                 case "E":
-                    totalTask++;
                     taskHolder = new Event(description, date, isDone);
                     break;
                 default:
                     throw new IODukeException("Invalid task");
                 }
-                taskList.add(taskHolder);
+                taskList.addTask(taskHolder);
             }
 
         } catch (FileNotFoundException e) {
@@ -96,9 +66,30 @@ public class TaskManager {
     public void saveTask() throws DukeException{
         PrintWriter pr = null;
         try {
-            pr = new PrintWriter(new BufferedWriter(new FileWriter(fileName)));
+            pr = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
 
-            for (Task task : taskList) {
+            for (int j = 0; j < taskList.getSize(); j ++) {
+
+                int statusHolder = 0;
+
+                if (taskList.getTask(j).getStatus()) {
+                    statusHolder = 1;
+                }
+
+                String store = String.format("%s | %d | %s", taskList.getTask(j).getType(), statusHolder, taskList.getTask(j).getDescription());
+                if (taskList.getTask(j) instanceof Deadline) {
+                    store += " | " + ((Deadline) taskList.getTask(j)).getBy();
+                } else if (taskList.getTask(j) instanceof Event) {
+                    store += " | " + ((Event) taskList.getTask(j)).getAt();
+                }
+
+                store += "\n";
+
+                pr.write(store);
+
+            }
+
+            /*for (Task task : taskList) {
                 int statusHolder = 0;
 
                 if (task.getStatus() == true) {
@@ -115,7 +106,7 @@ public class TaskManager {
                 store += "\n";
 
                 pr.write(store);
-            }
+            }*/
         } catch (IOException e){
             throw new IODukeException("File could not be saved");
         } finally {
@@ -124,4 +115,7 @@ public class TaskManager {
             }
         }
     }
+
+
+
 }

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.command.ToDoCommand;
 
-class MyFirstJUnitJupiterTests {
+class ParserTest {
     @Test
     void parseToDoCommand() {
         try {

@@ -24,7 +24,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task.
+     * Deletes a task from the list and returns it.
      *
      * @param index Index of the task.
      * @return The task after being removed from the list.
@@ -55,6 +55,9 @@ public class TaskList {
 
     /**
      * Finds tasks based on given keywords.
+     * The entire task description is checked if it contains the keyword,
+     * and is then added to a new list.
+     *
      * @param keyword For matching tasks.
      * @return List of tasks based on the given keywords.
      */

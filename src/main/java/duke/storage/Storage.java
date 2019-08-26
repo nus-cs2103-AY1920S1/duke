@@ -14,6 +14,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -90,6 +93,13 @@ public class Storage {
     public void save(TaskList tasks) throws DukeException {
         PrintWriter writer = null;
         try {
+            Path path = Paths.get(filePath);
+
+            // Create directories if necessary
+            if (path.getParent() != null) {
+                Files.createDirectories(path.getParent().getFileName());
+            }
+
             writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
             for (Task task : tasks.getTaskList()) {
                 String output = String.format("%s|%b|%s",

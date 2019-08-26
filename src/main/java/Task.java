@@ -37,6 +37,10 @@ public class Task {
         printLine();
     }
 
+    public static void addToTaskList(Task task) {
+        taskList.add(task);
+    }
+
     public void done() {
         this.isDone = true;
     }
@@ -131,9 +135,33 @@ public class Task {
         System.out.print("    ");
     }
 
+    public static String formatToFile() {
+        ListIterator<Task> iter = taskList.listIterator();
+        StringBuilder taskListFileFormat = new StringBuilder();
+
+        while (iter.hasNext()) {
+            Task current = iter.next();
+            taskListFileFormat.append(current.toFileFormat());
+
+            if (iter.hasNext()) {
+                taskListFileFormat.append("\n");
+            }
+        }
+
+        return taskListFileFormat.toString();
+    }
+
     @Override
     public String toString() {
         String task = "[" + this.getStatusIcon() + "] " + description;
         return task;
+    }
+
+    public static LinkedList<Task> getTaskList() {
+        return Task.taskList;
+    }
+
+    public String toFileFormat() {
+        return "";
     }
 }

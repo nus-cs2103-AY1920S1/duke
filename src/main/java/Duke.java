@@ -1,15 +1,25 @@
+import java.io.File;
+import java.io.FileWriter;
+
 import java.util.Scanner;
+
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import java.io.IOException;
+
 public class Duke {
     public static void main(String[] args) {
-        run();
+            run();
     }
 
     public static void run() throws DukeException {
         Scanner sc = new Scanner(System.in);
         LinkedList<String> inputList = new LinkedList<>();
+
+        File dukeTaskList = new File("dukeTaskList.txt");
+        TaskFile fileUpdater = new TaskFile(dukeTaskList);
+        fileUpdater.checkForExistingTasks(dukeTaskList);
 
         greet();
         String input = sc.nextLine();
@@ -28,56 +38,62 @@ public class Duke {
                     break;
                 }
 
-                if (!taskType.equals("list")) {
-                    if (!taskType.equals("done") && !taskType.equals("delete")) {
-                        if (inputArr.length == 1) {
-                            throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
-                        }
+                if (taskType.equals("list")) {
 
-                        if (inputArr.length != 1) {
-                            if (taskType.equals("todo")) {
-                                Task newTodo = new Todo(taskDesc);
-                                Task.addTask(newTodo);
-
-                                input = sc.nextLine();
-
-                            } else if (taskType.equals("deadline")) {
-                                String[] taskDescArr = taskDesc.split(" /");
-
-                                Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1]);
-
-                                Task.addTask(newDeadline);
-
-                                input = sc.nextLine();
-
-                            } else {
-                                String[] taskDescArr = taskDesc.split(" /");
-
-                                Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
-
-                                Task.addTask(newEvent);
-
-                                input = sc.nextLine();
-                            }
-                        } else {
-                            throw new NoDescriptionException(":( OOPS!!! The description of " + input + " cannot be empty");
-                        }
-                    } else if (taskType.equals("delete")) {
-                        int taskNum = Integer.parseInt(taskDesc);
-                        Task.deleteTask(taskNum);
-
-                        input = sc.nextLine();
-                    } else {
-                        int taskNum = Integer.parseInt(taskDesc);
-                        Task.doTask(taskNum);
-
-                        input = sc.nextLine();
-                    }
-                } else {
                     Task.printTaskList();
+                    input = sc.nextLine();
 
+                } else if (taskType.equals("done")) {
+
+                    int taskNum = Integer.parseInt(taskDesc);
+                    Task.doTask(taskNum);
+
+                    fileUpdater.update();
+                    input = sc.nextLine();
+
+                } else if (taskType.equals("delete")) {
+
+                    int taskNum = Integer.parseInt(taskDesc);
+                    Task.deleteTask(taskNum);
+
+                    fileUpdater.update();
+                    input = sc.nextLine();
+
+                } else if (inputArr.length == 1){
+
+                    throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
+
+                } else if (taskType.equals("todo")) {
+
+                    Task newTodo = new Todo(taskDesc);
+                    Task.addTask(newTodo);
+
+                    fileUpdater.update();
+                    input = sc.nextLine();
+
+                } else if (taskType.equals("deadline")) {
+
+                    String[] taskDescArr = taskDesc.split(" /");
+
+                    Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1]);
+
+                    Task.addTask(newDeadline);
+
+                    fileUpdater.update();
+                    input = sc.nextLine();
+
+                } else {
+                    String[] taskDescArr = taskDesc.split(" /");
+
+                    Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
+
+                    Task.addTask(newEvent);
+
+                    fileUpdater.update();
                     input = sc.nextLine();
                 }
+
+
             } catch (DukeException e) {
                 printLine();
 
@@ -87,6 +103,8 @@ public class Duke {
                 printLine();
 
                 input = sc.nextLine();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
             }
         }
 

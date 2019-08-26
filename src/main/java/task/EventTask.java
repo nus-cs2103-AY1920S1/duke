@@ -21,7 +21,7 @@ public class EventTask extends Task {
     }
 
     public String toFileString() {
-        return "E||" + (this.isDone?"1||":"0||")  + this.description + "||" + format.format(this.time);
+        return "E||" + (this.isDone ? "1||" : "0||")  + this.description + "||" + format.format(this.time);
     }
 
     @Override

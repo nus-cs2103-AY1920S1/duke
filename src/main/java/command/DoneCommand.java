@@ -10,12 +10,13 @@ import java.io.IOException;
 
 public class DoneCommand extends Command {
     private int index;
+
     public DoneCommand(int index) {
         this.index = index - 1;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        if(tasks.getSize() == 0) {
+        if (tasks.getSize() == 0) {
             throw new DukeException("You have no tasks to do.");
         } else if (index < 0 || index >= tasks.getSize()) {
             throw new DukeInvalidTaskIndexException("do", tasks.getSize());

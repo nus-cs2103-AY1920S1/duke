@@ -16,12 +16,12 @@ public class DeadlineTask extends Task {
         try {
             this.time = format.parse(time);
         } catch (ParseException e) {
-             throw new DukeInvalidTaskDateException(time);
+            throw new DukeInvalidTaskDateException(time);
         }
     }
 
     public String toFileString() {
-        return "D||" + (this.isDone?"1||":"0||")  + this.description + "||" + format.format(this.time);
+        return "D||" + (this.isDone ? "1||" : "0||")  + this.description + "||" + format.format(this.time);
     }
 
     @Override

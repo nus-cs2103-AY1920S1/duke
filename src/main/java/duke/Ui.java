@@ -9,19 +9,16 @@ import java.util.ArrayList;
 
 public class Ui {
     String underline = "____________________________________________________________\n";
-    private String doubleLine(String msg) {
-        return underline + msg + "\n" + underline;
-    }
-    String nudeLogo = "  _   _           _      \n" +
-            " | \\ | |_   _  __| | ___ \n" +
-            " |  \\| | | | |/ _` |/ _ \\\n" +
-            " | |\\  | |_| | (_| |  __/\n" +
-            " |_| \\_|\\__,_|\\__,_|\\___|\n";
-    String nukeLogo = "  _   _       _        \n" +
-            " | \\ | |_   _| | _____ \n" +
-            " |  \\| | | | | |/ / _ \\\n" +
-            " | |\\  | |_| |   <  __/\n" +
-            " |_| \\_|\\__,_|_|\\_\\___|\n";
+    String nudeLogo = "  _   _           _      \n"
+            + " | \\ | |_   _  __| | ___ \n"
+            + " |  \\| | | | |/ _` |/ _ \\\n"
+            + " | |\\  | |_| | (_| |  __/\n"
+            + " |_| \\_|\\__,_|\\__,_|\\___|\n";
+    String nukeLogo = "  _   _       _        \n"
+            + " | \\ | |_   _| | _____ \n"
+            + " |  \\| | | | | |/ / _ \\\n"
+            + " | |\\  | |_| |   <  __/\n"
+            + " |_| \\_|\\__,_|_|\\_\\___|\n";
     String dukeLogo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -32,7 +29,7 @@ public class Ui {
     public void showWelcome(TaskList tasks) {
         System.out.println(underline + "Hello from\n" + nudeLogo);
         System.out.println("You have " + tasks.getSize() + " task"
-                + (tasks.getSize()==1?" ":"s ") + "in the list.\n");
+                + (tasks.getSize() == 1 ? " " : "s ") + "in the list.\n");
         for (int i = 0; i < tasks.getSize(); i++) {
             System.out.println((i + 1) + "." + tasks.getTask(i));
         }

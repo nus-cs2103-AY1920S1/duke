@@ -19,33 +19,33 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            if (token.length<=1) {
+            if (token.length <= 1) {
                 throw new DukeException("Give me a goddamn numbered task to do.");
             }
             return new DoneCommand(Integer.parseInt(token[1]));
         case "delete" :
-            if (token.length<=1) {
-               throw new DukeException("Give me a goddamn numbered task to delete.");
+            if (token.length <= 1) {
+                throw new DukeException("Give me a goddamn numbered task to delete.");
             }
             return new DeleteCommand(Integer.parseInt(token[1]));
         case "todo":
-            if (token.length<=1) {
+            if (token.length <= 1) {
                 throw new DukeInvalidTaskDescriptionException("ToDo");
             }
             return new ToDoCommand(token[1]);
         case "deadline":
             temp = command.split("/by");
             taskDesc = temp[0].substring(8).trim();
-            if(taskDesc.equals("")) {
+            if (taskDesc.equals("")) {
                 throw new DukeInvalidTaskDescriptionException("Deadline");
-            } else if(temp.length < 2) {
+            } else if (temp.length < 2) {
                 throw new DukeInvalidTaskTimeException("deadline");
             }
             return new DeadlineCommand(taskDesc, temp[1].trim());
         case "event":
             temp = command.split("/at");
             taskDesc = temp[0].substring(5).trim();
-            if(taskDesc.equals("")) {
+            if (taskDesc.equals("")) {
                 throw new DukeInvalidTaskDescriptionException("Event");
             } else if (temp.length < 2) {
                 throw new DukeInvalidTaskTimeException("event");

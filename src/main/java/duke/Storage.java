@@ -21,7 +21,7 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         File file = new File(filePath);
-        if(file.exists()) {
+        if (file.exists()) {
             sc = new Scanner(file);
         } else {
             file.createNewFile();
@@ -36,23 +36,23 @@ public class Storage {
             String time;
             Task task;
             switch (token[0].trim()) {
-                case "T":
-                    task = new ToDoTask(token[2].trim());
-                    break;
-                case "D":
-                    time = token[3];
-                    task = new DeadlineTask(token[2].trim(), time);
-                    break;
-                case "E":
-                    time = token[3];
-                    task = new EventTask(token[2].trim(), time);
-                    break;
-                default:
-                    System.out.println(tokenString);
-                    throw new DukeException("Corrupted file");
+            case "T":
+                task = new ToDoTask(token[2].trim());
+                break;
+            case "D":
+                time = token[3];
+                task = new DeadlineTask(token[2].trim(), time);
+                break;
+            case "E":
+                time = token[3];
+                task = new EventTask(token[2].trim(), time);
+                break;
+            default:
+                System.out.println(tokenString);
+                throw new DukeException("Corrupted file");
             }
             tasks.add(task);
-            if(token[1].trim().equals("1")) {
+            if (token[1].trim().equals("1")) {
                 task.markAsDone();
             }
         }

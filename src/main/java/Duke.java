@@ -152,7 +152,7 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             String todoDescription = inputTodo.substring(5);
-            Task t = new Todo(todoDescription);
+            Todo t = new Todo(todoDescription);
             dukeList.add(t);
             System.out.println("Got it. I've added this task:");
             System.out.println(t);
@@ -170,10 +170,10 @@ public class Duke {
             int secondIndex = slashLocation + 4;
             String deadlineDescription = inputDeadline.substring(9, firstIndex);
             String deadlineBy = inputDeadline.substring(secondIndex);
-            Task t = new Deadline(deadlineDescription, deadlineBy);
-            dukeList.add(t);
+            Deadline d = new Deadline(deadlineDescription, deadlineBy);
+            dukeList.add(d);
             System.out.println("Got it. I've added this task:");
-            System.out.println(t);
+            System.out.println(d);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
             updateTaskList();
         }
@@ -188,10 +188,10 @@ public class Duke {
             int secondIndex = slashLocation + 4;
             String eventDescription = inputEvent.substring(6, firstIndex);
             String eventAt = inputEvent.substring(secondIndex);
-            Task t = new Event(eventDescription, eventAt);
-            dukeList.add(t);
+            Event e = new Event(eventDescription, eventAt);
+            dukeList.add(e);
             System.out.println("Got it. I've added this task:");
-            System.out.println(t);
+            System.out.println(e);
             System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
             updateTaskList();
         }

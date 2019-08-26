@@ -48,7 +48,7 @@ public class Duke {
                 case "todo":
                     task = sc.nextLine().trim();
                     if (!task.isEmpty()) {
-                        toDoList.addToDo(sc.nextLine().trim());
+                        toDoList.addToDo(task);
                     } else {
                         throw new IllegalArgumentException(emptyToDoErrorMessage);
                     }

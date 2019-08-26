@@ -10,6 +10,15 @@ public class DeadlineTask extends Task {
         return this.byDeadline;
     }
 
+    public String toEncodedString() {
+        return String.format(
+            "D | %d | %s | %s",
+            this.isComplete ? 1 : 0,
+            this.description,
+            this.byDeadline
+        );
+    }
+
     @Override
     public String toString() {
         // Adds the type of the Task and its deadline to the base toString() representation

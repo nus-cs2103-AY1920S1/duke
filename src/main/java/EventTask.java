@@ -10,6 +10,15 @@ public class EventTask extends Task {
         return this.atTime;
     }
 
+    public String toEncodedString() {
+        return String.format(
+            "E | %d | %s | %s",
+            this.isComplete ? 1 : 0,
+            this.description,
+            this.atTime
+        );
+    }
+
     @Override
     public String toString() {
         // Adds the type of the Task and its time period to the base toString() representation

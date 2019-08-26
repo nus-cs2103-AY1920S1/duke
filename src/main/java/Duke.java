@@ -39,13 +39,16 @@ public class Duke {
                 todoT.addList(todoT, array, num);
                 num++;
             } else if (word.contains(("event"))) {
-                String arr2[] = word.split("/");
-                Task eventT = new Event(num, "[✗]", arr2[0], "event", arr2[1]);
+                String arr2[] = word.split("/at");
+                DateTime dT1 = new DateTime(arr2[1]);
+                Task eventT = new Event(num, "[✗]", arr2[0], "event", dT1);
                 eventT.addList(eventT, array, num);
                 num++;
             } else if (word.contains("deadline")) {
-                String arr3[] = word.split("/");
-                Task deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", arr3[1]);
+                String arr3[] = word.split("/by");
+                String list[] = arr3[1].split(" ");
+                DateTime dT2 = new DateTime(arr3[1]);
+                Task deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", dT2);
                 deadlineT.addList(deadlineT, array, num);
                 num++;
             } else if (word.contains("delete")) {
@@ -72,6 +75,7 @@ public class Duke {
                     }
                 }
             }
+            System.out.println("What can I do for you?");
         }
     }
 }

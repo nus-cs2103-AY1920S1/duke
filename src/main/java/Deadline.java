@@ -1,18 +1,20 @@
-public class Deadline extends Task {
-    private String by;
+import java.util.Date;
 
-    public Deadline(int taskNumber, String taskCheck, String taskName, String type, String b) {
+public class Deadline extends Task {
+    private DateTime by;
+
+    public Deadline(int taskNumber, String taskCheck, String taskName, String type, DateTime b) {
         super(taskNumber, taskCheck, taskName, type);
         by = b;
     }
 
-    public String getAB() {
+    public DateTime getAB() {
         return by;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(getTaskNumber()) + ".[D]" + getTaskCheck() + " " + getTaskName() + by;
+        return Integer.toString(getTaskNumber()) + ".[D]" + getTaskCheck() + getTaskName() + "by "+ by;
     }
 
 }

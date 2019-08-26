@@ -5,7 +5,7 @@ public class Duke {
     private static Parser parser;
 
     public static void init() {
-        taskList = new TaskList();
+        taskList = DataStorage.getStoredTaskList();
         parser = new Parser();
     }
 
@@ -15,13 +15,13 @@ public class Duke {
         System.out.println("What can I do for you?");
         runEvents();
         System.out.println("Bye. Hope to see you again soon!");
+        DataStorage.storeTaskList(taskList);
     }
 
     /**
      * Adds commands to lists and runs required commands
      */
     private static void runEvents() {
-        taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine().trim();
         while (!command.toLowerCase().equals("bye")) {

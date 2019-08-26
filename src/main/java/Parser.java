@@ -18,6 +18,7 @@ public class Parser {
                     break;
                 case "todo":
                     this.addTaskWithoutDate(commandDescription);
+                    Message.printSuccessfulAddMessage(this.taskList.get(taskList.size()-1), this.taskList.size());
                     break;
                 case "deadline":
                 case "event":

@@ -13,7 +13,6 @@ public class TaskList {
      */
     public void add(String taskName) {
         this.list.add(new ToDoTask(taskName));
-        Message.printSuccessfulAddMessage(this.list.get(list.size()-1), this.size());
     }
 
     /**
@@ -23,6 +22,7 @@ public class TaskList {
      * @param date - Date of which the task needs to be completed
      */
     public void add(String taskType, String taskName, String date) {
+        taskType = taskType.toLowerCase();
         switch (taskType) {
             case "deadline":
                 this.list.add(new DeadlineTask(taskName, date));
@@ -31,7 +31,6 @@ public class TaskList {
                 this.list.add(new EventTask(taskName, date));
                 break;
         }
-        Message.printSuccessfulAddMessage(this.list.get(list.size()-1), this.size());
     }
 
     /**
@@ -52,6 +51,15 @@ public class TaskList {
         Task task = this.list.get(idx);
         this.list.remove(idx);
         Message.printSuccessDeleteTaskMessage(task, this.size());
+    }
+
+    /**
+     * Returns task at index idx
+     * @param idx - index of task
+     * @return Task at index idx
+     */
+    public Task get(int idx) {
+        return this.list.get(idx);
     }
 
     /**

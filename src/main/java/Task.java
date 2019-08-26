@@ -1,12 +1,15 @@
 public class Task implements ITask {
+    private static final String DEFAULT_TASK_TYPE = "Default";
     private String taskName;
     private String taskIcon;
+    private String taskType;
     private boolean isDone;
 
-    public Task(String taskName, String taskIcon) {
+    public Task(String taskName, String taskIcon, String taskType) {
         this.taskName = taskName;
         this.isDone = false;
         this.taskIcon = taskIcon;
+        this.taskType = taskType;
     }
 
     /**
@@ -35,6 +38,14 @@ public class Task implements ITask {
             return "✓";
         }
         return "✗";
+    }
+
+    public String getTaskType() {
+        return this.taskType;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     private String getTaskIcon() {

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -12,16 +13,20 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         while (true) {
             try {
+                readData();
                 run();
-            } catch (DukeIllegalActionException | DukeIllegalDescriptionException e) {
+            } catch (DukeIllegalActionException | DukeIllegalDescriptionException | FileNotFoundException e) {
                 System.out.println(e.getMessage());
             } catch (IllegalStateException e) {
                 break;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
     private static LinkedList<Task> tasks = new LinkedList<>();
-    private static void run() throws DukeIllegalActionException, DukeIllegalDescriptionException {
+    private static String basePath = new File("").getAbsolutePath();
+    private static void run() throws DukeIllegalActionException, DukeIllegalDescriptionException, FileNotFoundException {
         Scanner sc = new Scanner(System.in);
 
         while(sc.hasNext()) {
@@ -42,6 +47,7 @@ public class Duke {
                         int n = sc.nextInt();
                         tasks.get(n - 1).setDone();
                         System.out.println("Nice! I've marked this task as done:\n" + tasks.get(n - 1).toString());
+                        saveData();
                         break;
                     case todo:
                         String tdDescription = sc.nextLine();
@@ -52,6 +58,7 @@ public class Duke {
                             tasks.add(todo);
                             System.out.println("Got it. I've added this task: \n" + todo.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
+                            saveData();
                         }
                         break;
                     case deadline:
@@ -64,6 +71,7 @@ public class Duke {
                             tasks.add(dl);
                             System.out.println("Got it. I've added this task: \n" + dl.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
+                            saveData();
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(act);
                         }
@@ -78,6 +86,7 @@ public class Duke {
                             tasks.add(event);
                             System.out.println("Got it. I've added this task: \n" + event.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
+                            saveData();
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(act);
                         }
@@ -88,10 +97,61 @@ public class Duke {
                         tasks.remove(d);
                         System.out.println("Noted. I've removed this task: \n" + temp.toString()
                                 + "\nNow you have " + (tasks.size()) + " tasks in the list.");
+                        saveData();
                         break;
                 }
             } catch(IllegalArgumentException e) {
                 throw new DukeIllegalActionException();
+            }
+        }
+    }
+
+    private static void readData() throws IOException {
+        FileReader in = new FileReader(basePath + "/data/duke.txt");
+        BufferedReader br = new BufferedReader(in);
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            String type = line.substring(line.indexOf(".") + 2, line.indexOf(".") + 3);
+            String state = line.substring(line.indexOf(".") + 5, line.indexOf(".") + 6);
+            String content = line.substring(line.indexOf(".") + 8);
+            String time = "0";
+            if(line.indexOf("(") > 0) {
+                content = line.substring(line.indexOf(".") + 8, line.indexOf("(") - 2);
+                time = line.substring(line.indexOf("(")+2, line.indexOf(")")-1);
+            }
+            switch(type) {
+                case "T":
+                    Task todo = new ToDo(content);
+                    if(state.contentEquals("Y")) {
+                        todo.setDone();
+                    }
+                    tasks.add(todo);
+                    break;
+                case "D":
+                    Task deadline = new Deadline(content, time);
+                    if(state.contentEquals("Y")) {
+                        deadline.setDone();
+                    }
+                    tasks.add(deadline);
+                    break;
+                case "E":
+                    Task event = new Event(content, time);
+                    if(state.contentEquals("Y")) {
+                        event.setDone();
+                    }
+                    tasks.add(event);
+            }
+        }
+        in.close();
+    }
+
+    private static void saveData() throws FileNotFoundException {
+        File folder = new File(basePath + "/data");
+        File file = new File(basePath + "/data/duke.txt");
+        try (PrintWriter out = new PrintWriter("duke.txt")) {
+            for(Task task:tasks) {
+                out.println(task.toString());
             }
         }
     }

@@ -1,9 +1,14 @@
 import java.io.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TaskManager {
+    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
     private Integer totalTask = 0;
     private List<Task> taskList;
     private String fileName;
@@ -41,20 +46,24 @@ public class TaskManager {
             while((line = br.readLine()) != null) {
                 String[] tokens = line.split(" \\| ");
                 if (tokens.length < 3) {
-                    throw new IODukeException("Invalid file format");
+                    throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
                 }
 
                 Task taskHolder = null;
                 boolean isDone;
                 String description = tokens[2];
-                String date =null;
+                Date date =null;
                 if (tokens[1].equals("1")) {
                     isDone = true;
                 } else {
                     isDone = false;
                 }
                 if (tokens.length == 4) {
-                    date = tokens[3];
+                    try {
+                        date = DATE_FORMAT.parse(tokens[3]);
+                    } catch (ParseException e) {
+                        throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
+                    }
                 }
 
 

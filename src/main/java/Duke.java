@@ -1,9 +1,13 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
+import java.text.SimpleDateFormat;
 public class Duke {
+    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
     final static String FILE_LOCATION = System.getProperty("user.dir") + "/data/duke.txt";
     static TaskManager taskManager;
     public static void main(String[] args) {
@@ -107,7 +111,14 @@ public class Duke {
                 date = date + " " + commandList.remove(0);
             }
 
-            taskManager.addTask(new Deadline(stringHolder, date, false));
+            Date dateHolder;
+            try {
+                dateHolder = DATE_FORMAT.parse(date);
+            } catch (ParseException e) {
+                throw new IODukeException("Please enter date in this format: d/m/y HHmm");
+            }
+
+            taskManager.addTask(new Deadline(stringHolder, dateHolder, false));
 
             System.out.println("Got it. I've added this task:");
             System.out.println("  [D][\u2718] " + stringHolder + " (by: " + date + ")");
@@ -131,7 +142,14 @@ public class Duke {
                 date = date + " " + commandList.remove(0);
             }
 
-            taskManager.addTask(new Event(stringHolder, date, false));
+            Date dateHolder;
+            try {
+                dateHolder = DATE_FORMAT.parse(date);
+            } catch (ParseException e) {
+                throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
+            }
+
+            taskManager.addTask(new Event(stringHolder, dateHolder, false));
             System.out.println("Got it. I've added this task:");
             System.out.println("  [E][\u2718] " + stringHolder + " (at: " + date + ")");
             System.out.println("Now you have " + taskManager.getSize() + " tasks in the list.");

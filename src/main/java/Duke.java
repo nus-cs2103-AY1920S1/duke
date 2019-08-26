@@ -1,12 +1,24 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    protected static String filepath = "data/duke.txt";
+    static int idleCount;
     static ArrayList<Task> list;
     static String line = "____________________________________________________________";
 
     public static void main(String[] args) {
         intro();
+        try {
+            findFile();
+        } catch (IOException e) {
+            System.out.println(format("Something went wrong"));
+        }
+
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
@@ -24,6 +36,11 @@ public class Duke {
             //handles done commands using markAsDone method
             if (s.equals("done")) {
                 markAsDone(Integer.valueOf(arr[1]) - 1);
+                try {
+                    update (false, "");
+                } catch (IOException e) {
+                    System.out.println("Something went wrong");
+                }
             }
 
             else if (s.equals("delete")) {
@@ -54,6 +71,7 @@ public class Duke {
     }
 
     public static void intro() {
+        idleCount = 0;
         list = new ArrayList();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -61,6 +79,56 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(format(logo + "\n Hello! I'm Duke\n What can I do for you?"));
+    }
+
+    public static void findFile() throws IOException {
+        File f = new File(filepath);
+        f.getParentFile().mkdir();
+        f.createNewFile();
+        load();
+    }
+
+    public static void update(Boolean append, String nextTask) throws IOException {
+        FileWriter fw;
+        if (append == false) {
+            fw = new FileWriter(filepath);
+            String tasks = "";
+            for (Task t: list) {
+                int done = t.isDone? 1 : 0;
+                tasks += t.getType() + " . " + done + " . " + t.getFullDescription() + "\n";
+            }
+            fw.write(tasks);
+            fw.close();
+        } else {
+            fw = new FileWriter(filepath, true);
+            fw.append(nextTask);
+            fw.close();
+        }
+    }
+
+    public static void load() throws FileNotFoundException {
+        File f = new File(filepath);
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String full = sc.nextLine();
+            String[] arr = full.split(" . ");
+            Task t;
+            String type = arr[0];
+            int done = Integer.parseInt(arr[1]);
+            if (type.equals("T")) {
+                t = new ToDo(arr[2]);
+            } else {
+                if (type.equals("D")) {
+                    t = new Deadline(arr[2], arr[3]);
+                } else {
+                    t = new Event(arr[2], arr[3]);
+                }
+            }
+            if (done == 1) {
+                t.done();
+            }
+            list.add(t);
+        }
     }
 
     public static String format(String s) {
@@ -79,6 +147,12 @@ public class Duke {
             task = new Event(arr[0].trim(), arr[1].trim());
         }
         list.add(task);
+        try {
+            String text = task.getType() + " . 0 . " + task.getFullDescription() + "\n";
+            update(true, text);
+        } catch (IOException e) {
+            System.out.println("Something went wrong");
+        }
         printTask(task);
     }
 
@@ -98,6 +172,19 @@ public class Duke {
         list.remove(i);
         System.out.println(format("Noted. I've removed this task: \n   " + t.toString() + "\n Now you have " +
                 list.size() + " tasks in the list."));
+    }
+
+    public static void exchangingMeaninglessPleasantries() {
+        idleCount += 1;
+        if (idleCount >= 5 && (idleCount % 2 == 1)) {
+            System.out.println(format("You should be doing your work, really. Would you like me to list your tasks?"));
+        } else if (idleCount >= 5 && (idleCount % 2 == 0)) {
+            if (list.size() > 4) {
+                System.out.println(format("You seem a little free for someone who has " + list.size() + " tasks."));
+            } else {
+                System.out.println(format("Aren't you a bit too free? Maybe you should take up a hobby."));
+            }
+        }
     }
 
     public static void validateInput(String input) throws DukeException {

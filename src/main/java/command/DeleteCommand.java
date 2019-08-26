@@ -29,4 +29,9 @@ public class DeleteCommand implements Command {
                             "    ____________________________________________________________");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Command: delete, Argument: " + taskNumber;
+    }
 }

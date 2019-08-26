@@ -47,4 +47,12 @@ public class AdminCommand implements Command {
             return ;
         }
     }
+    @Override
+    public String toString() {
+        if (commandArg == -1) {
+            return "Command: " + commandType;
+        } else {
+            return "Command: " + commandType + ", Arguments: " + commandArg;
+        }
+    }
 }

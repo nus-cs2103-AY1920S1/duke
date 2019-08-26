@@ -14,7 +14,7 @@ public class Event extends Task {
     public String toString() {
         String displayDate = "at: " + this.date.toString();
         return "[E][" + super.getStatusIcon() + "] "
-                + super.description + " (" + displayDate + ")";
+                + super.description + " (" + displayDate + " " + this.time.toString() + ")";
     }
 
     public String toDataFormat() {

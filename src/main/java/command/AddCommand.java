@@ -47,4 +47,14 @@ public class AddCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        String args = "";
+        for (int i = 0; i < arguments.size(); i++) {
+            args = args + arguments.get(i) + " ";
+        }
+        args = args.trim();
+        return "Command: " + taskType + ", Arguments: " + args;
+    }
 }

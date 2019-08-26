@@ -17,4 +17,9 @@ public class ExitCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         return ;
     }
+
+    @Override
+    public String toString() {
+        return "Command: exit";
+    }
 }

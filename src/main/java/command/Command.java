@@ -8,4 +8,5 @@ import task.InvalidTaskException;
 public interface Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException, InvalidTaskException;
     public boolean isExit();
+    public String toString();
 }

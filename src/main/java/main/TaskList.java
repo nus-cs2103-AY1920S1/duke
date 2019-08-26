@@ -34,4 +34,16 @@ public class TaskList {
         tasks.add(t);
         return t;
     }
+
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i == tasks.size() - 1) {
+                result = tasks.get(i).toString();
+            } else {
+                result = tasks.get(i).toString() + "\n";
+            }
+        }
+        return result;
+    }
 }

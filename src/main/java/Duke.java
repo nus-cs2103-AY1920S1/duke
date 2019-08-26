@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+/**
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -222,4 +225,136 @@ public class Duke {
         }
     }
 
+}
+*/
+
+public class Duke {
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        Scanner sc = new Scanner(System.in);
+
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
+            String[] inputSplit = input.split(" ");
+            if (input.equals("bye")) {
+                ui.exit();
+            } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                tasks.displayFullList();
+            } else if (inputSplit[0].equals("done")) {
+                int inputIndex = Integer.parseInt(inputSplit[1]);
+                int actualListIndex = inputIndex - 1;
+                Task targetTask = tasks.getTask(actualListIndex);
+                targetTask.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(targetTask);
+                storage.updateChanges(tasks.getDukeTaskList());
+            } else if (inputSplit[0].equals("todo")) {
+                try {
+                    handleInputTodo(input);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (inputSplit[0].equals("deadline")) {
+                try {
+                    handleInputDeadline(input);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (inputSplit[0].equals("event")) {
+                try {
+                    handleInputEvent(input);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else if (inputSplit[0].equals("delete")) {
+                int inputIndex = Integer.parseInt(inputSplit[1]);
+                int actualIndex = inputIndex - 1;
+                Task toBeRemoved = tasks.getTask(actualIndex);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(toBeRemoved);
+                tasks.removeTask(actualIndex);
+                System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+                storage.updateChanges(tasks.getDukeTaskList());
+            } else {
+                try {
+                    handleInputUnrecognised(input);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
+    public static int slashLocator(String sentence) {
+        return sentence.indexOf("/");
+    }
+
+    public void handleInputTodo(String inputTodo) throws DukeException {
+        if (inputTodo.length() == 4) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        } else {
+            String todoDescription = inputTodo.substring(5);
+            Todo t = new Todo(todoDescription);
+            tasks.addTask(t);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(t);
+            System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+            storage.updateChanges(tasks.getDukeTaskList());
+        }
+    }
+
+    public void handleInputDeadline(String inputDeadline) throws DukeException {
+        if (inputDeadline.length() == 8) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else {
+            int slashLocation = slashLocator(inputDeadline);
+            int firstIndex = slashLocation - 1;
+            int secondIndex = slashLocation + 4;
+            String deadlineDescription = inputDeadline.substring(9, firstIndex);
+            String deadlineBy = inputDeadline.substring(secondIndex);
+            Deadline d = new Deadline(deadlineDescription, deadlineBy);
+            tasks.addTaskAfterValidation(deadlineBy, d);
+            storage.updateChanges(tasks.getDukeTaskList());
+        }
+    }
+
+    public void handleInputEvent(String inputEvent) throws DukeException {
+        if (inputEvent.length() == 5) {
+            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+        } else {
+            int slashLocation = slashLocator(inputEvent);
+            int firstIndex = slashLocation - 1;
+            int secondIndex = slashLocation + 4;
+            String eventDescription = inputEvent.substring(6, firstIndex);
+            String eventAt = inputEvent.substring(secondIndex);
+            Event e = new Event(eventDescription, eventAt);
+            tasks.addTaskAfterValidation(eventAt, e);
+            storage.updateChanges(tasks.getDukeTaskList());
+        }
+    }
+
+    public static void handleInputUnrecognised(String inputUnrecognised) throws DukeException {
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
 }

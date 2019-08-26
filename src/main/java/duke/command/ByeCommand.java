@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Bye Command
+ */
+
 public class ByeCommand extends Command {
 
     public ByeCommand() {

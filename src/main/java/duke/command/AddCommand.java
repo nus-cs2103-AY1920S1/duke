@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Add Command
+ */
 public class AddCommand extends Command {
 
     public Task taskToAdd;

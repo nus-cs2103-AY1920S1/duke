@@ -9,8 +9,17 @@ import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parser parses the commands in Ui.
+ */
 public class Parser {
 
+    /**
+     * Returns the correct command from given String command.
+     * @param command
+     * @return approriate command.
+     * @throws DukeException
+     */
     public static Command parse(String command) throws DukeException{
 
 

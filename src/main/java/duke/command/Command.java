@@ -6,6 +6,10 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Command abstract class inherited by AddCommand, ByeCommand, DeleteCommand, DoneCommand, ListCommand.
+ */
+
 public abstract class Command {
 
     private boolean isExit;

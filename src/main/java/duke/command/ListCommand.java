@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
 
+/**
+ * List Command.
+ */
 public class ListCommand extends Command {
 
     public ListCommand() {

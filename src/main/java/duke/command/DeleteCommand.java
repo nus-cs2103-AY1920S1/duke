@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Delete Command.
+ */
 public class DeleteCommand extends Command {
 
     private int index;

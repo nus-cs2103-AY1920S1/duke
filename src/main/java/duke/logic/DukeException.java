@@ -1,5 +1,9 @@
 package duke.logic;
 
+/**
+ * Exception to be thrown in Duke application.
+ */
+
 public class DukeException extends Exception {
 
 	private String mesg;

@@ -6,6 +6,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Done Command.
+ */
 public class DoneCommand extends Command {
 
     private int index;

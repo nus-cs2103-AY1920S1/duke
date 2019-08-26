@@ -4,7 +4,12 @@ public class ExitCommand extends Command {
         super(command);
     }
 
-    public void execute() {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        ui.showExitMessage();
+        storage.save(tasks);
+    }
 
+    public boolean isExit() {
+        return true;
     }
 }

@@ -17,4 +17,9 @@ public class Storage {
         ArrayList<Task> taskArr = lf.loadTaskFromFile();
         return taskArr;
     }
+
+    public void save(TaskList tasks) throws DukeException {
+        WriteFile wf = new WriteFile(this.getFilePath());
+        wf.writeTaskToFile(tasks.getTaskArr());
+    }
 }

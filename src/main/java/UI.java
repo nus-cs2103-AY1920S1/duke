@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class UI {
 
@@ -48,5 +49,33 @@ public class UI {
 
     public void printWithInden(String message) {
         System.out.println(messageFrontInden + message);
+    }
+
+    public void showList(TaskList tasks) {
+        printWithInden("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.getTaskCount(); i++) {
+            printWithInden((i + 1) + ". " + tasks.getTask(i));
+        }
+    }
+
+    public void showExitMessage() {
+        printWithInden("Bye. Hope to see you again soon!");
+    }
+
+    public void showDoneMessage(Task doneTask) {
+        printWithInden("Nice! I've marked this task as done:");
+        printWithInden("  " + doneTask);
+    }
+
+    public void showDeleteMessage(Task deletedTask, TaskList tasks) {
+        printWithInden("Noted. I've removed this task:");
+        printWithInden("  " + deletedTask);
+        printWithInden("Now you have " + tasks.getTaskCount() +" tasks in the list.");
+    }
+
+    public void showAddMessage(Task addedTask, TaskList tasks) {
+        printWithInden("Got it. I've added this task:");
+        printWithInden("  " + addedTask);
+        printWithInden("Now you have " + tasks.getTaskCount() +" tasks in the list.");
     }
 }

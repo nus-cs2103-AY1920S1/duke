@@ -41,7 +41,7 @@ public class Parser {
     private static String getDesc(String[] inputArr) {
         String desc = "";
         for (int i = 1; i < inputArr.length; i++) {
-            if (inputArr[i + 1].charAt(0) == '/' || i == inputArr.length - 1) {
+            if (i == inputArr.length - 1 || inputArr[i + 1].charAt(0) == '/') {
                 desc += inputArr[i];
                 break;
             } else {

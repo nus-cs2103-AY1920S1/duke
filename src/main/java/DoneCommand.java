@@ -8,10 +8,16 @@ public class DoneCommand extends Command {
     }
 
     public int getIndex() {
-        return this.index;
+        return this.index - 1;
     }
 
-    public void execute() {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
+        Task doneTask = tasks.getTask(this.getIndex());
+        tasks.markTaskDone(this.getIndex());
+        ui.showDoneMessage(doneTask);
+    }
 
+    public boolean isExit() {
+        return false;
     }
 }

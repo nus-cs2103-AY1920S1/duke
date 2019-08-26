@@ -4,7 +4,11 @@ public class ShowCommand extends Command {
         super(cmd);
     }
 
-    public void execute() {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
+        ui.showList(tasks);
+    }
 
+    public boolean isExit() {
+        return false;
     }
 }

@@ -8,10 +8,16 @@ public class DeleteCommand extends Command {
     }
 
     public int getIndex() {
-        return this.index;
+        return this.index - 1;
     }
 
-    public void execute() {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
+        Task deletedTask = tasks.getTask(this.getIndex());
+        tasks.deleteTask(this.getIndex());
+        ui.showDeleteMessage(deletedTask, tasks);
+    }
 
+    public boolean isExit() {
+        return false;
     }
 }

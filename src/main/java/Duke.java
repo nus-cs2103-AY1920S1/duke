@@ -24,10 +24,9 @@ public class Duke {
             try {
                 String inputStr = ui.readCommand();
                 ui.showLine();
-
-                //temp
-                isExit = true;
-                throw new DukeException("");
+                Command c = Parser.parse(inputStr);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {

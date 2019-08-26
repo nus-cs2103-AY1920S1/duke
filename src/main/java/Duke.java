@@ -1,5 +1,8 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -39,7 +42,7 @@ public class Duke {
                     } else {
                         param = "";
                     }
-                    addTask(new Deadline(taskName, param));
+                    addTask(new Deadline(taskName, parseDate(param)));
                 } else if (input.contains("event")) {
                     String taskName;
                     try {
@@ -57,7 +60,7 @@ public class Duke {
                     } else {
                         param = "";
                     }
-                    addTask(new Event(taskName, param));
+                    addTask(new Event(taskName, parseDate(param)));
                 } else if (input.equals("list")) {
                     listTask();
                 } else if (input.contains("done")) {
@@ -168,5 +171,18 @@ public class Duke {
         } catch (DukeException e) {
             printException(new DukeException("Load file failed :-("));
         }
+    }
+
+    protected static Date parseDate(String rawDate) throws DukeException {
+        try {
+            Date newDate = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(rawDate);
+            return newDate;
+        } catch (ParseException e) {
+            throw new DukeException("Cannot parse date/time.");
+        }
+    }
+
+    protected static String formatDate(Date date) {
+        return new SimpleDateFormat("dd/MM/yyyy HHmm").format(date);
     }
 }

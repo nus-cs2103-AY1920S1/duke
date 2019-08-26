@@ -1,7 +1,12 @@
 import java.io.IOException;
 
 class Parser {
-
+    /**
+     * Returns the index of the preposition in the String array
+     * If preposition is not found, return 0
+     * @param inputSplit given String array
+     * @return index position or 0
+     */
     private int getPrepositionPos(String[] inputSplit) {
         for (int i = 0; i < inputSplit.length; i++) {
             if (inputSplit[i].charAt(0) == '/') {
@@ -11,6 +16,12 @@ class Parser {
         return 0;
     }
 
+    /**
+     * Returns the Task constructed from the input String array
+     * @param inputSplit given String array
+     * @return Task generated
+     * @throws InvalidInputFormatException If the input is not in the required format
+     */
     private Task construct(String[] inputSplit) throws InvalidInputFormatException {
         if (inputSplit.length < 2) {
             throw new InvalidInputFormatException();
@@ -53,7 +64,6 @@ class Parser {
         default:
             task = null;
         }
-
         return task;
     }
 

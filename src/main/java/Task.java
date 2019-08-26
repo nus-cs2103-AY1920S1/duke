@@ -15,10 +15,18 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Returns a printable String that represents the state of this Task
+     * @return String for display
+     */
     public String getStatus() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Returns a formatted String that represents the state of this Task
+     * @return String for saving
+     */
     public String saveFormat() {
         return (isDone ? "1" : "0") + " " + description;
     }

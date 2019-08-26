@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Deals with printing to output for user to see
  * Other classes should call on this class' methods to 
- * interact with user
+ * interact with user.
  */
 class Ui implements TaskObserver {
     private ControllerInterface controller; 
@@ -31,7 +31,7 @@ class Ui implements TaskObserver {
             + "Mistew Stawk's augmented weawity gwocewy wist\n"
             + "OwO stands fow \"Owways With Owws\"\n"
             + "its a wowk in pwogwess, wike me\n"
-        //    + "Mistew Stawk wuvd his acwonyms.\n"
+            //+ "Mistew Stawk wuvd his acwonyms.\n"
             + "what can OwO do fow you today?";
         //Display.printSection(printxs);
         Ui.printSection(greeting1);
@@ -96,7 +96,7 @@ class Ui implements TaskObserver {
     }
 
     /**
-     * Return void, prints section to indicate a task is added
+     * Return void, prints section to indicate a task is added.
      *  @param taskDetails Details of Task to print
      *  @param totalTasks total number of tasks in the tasklist
      */
@@ -107,7 +107,7 @@ class Ui implements TaskObserver {
             + "OwO has added this task:";
         String outputMsg = "  " + taskDetails;
         String footerMsg = "Nyow you have "
-           + totalTasks + " tasks in the wist";
+            + totalTasks + " tasks in the wist";
 
         printxs.add(headerMsg);
         printxs.add(outputMsg);
@@ -116,7 +116,7 @@ class Ui implements TaskObserver {
     }        
 
     /**
-     * Return void, prints section to indicate a task is done
+     * Return void, prints section to indicate a task is done.
      *  @param taskDetails Details of Task to print
      *  @param totalTasks total number of tasks in the tasklist
      */
@@ -132,7 +132,7 @@ class Ui implements TaskObserver {
     }
 
     /**
-     * Return void, prints section to indicate a task is delete
+     * Return void, prints section to indicate a task is delete.
      *  @param taskDetails Details of Task to print
      *  @param totalTasks total number of tasks in the tasklist
      */
@@ -145,7 +145,7 @@ class Ui implements TaskObserver {
     }
 
     /**
-     * Returns void, prints an error section to screen
+     * Returns void, prints an error section to screen.
      *  @param message Error message to be printed
      */
     public static void printErrorSection(String message) {
@@ -153,7 +153,7 @@ class Ui implements TaskObserver {
     }        
 
     /**
-     * Returns void, prints a list of task given input
+     * Returns void, prints a list of task given input.
      *  @param Stream of tasks to be printed
      */
     public static <T> void 
@@ -211,7 +211,7 @@ class Ui implements TaskObserver {
     */
 
     /**
-     * Returns void, prints a list of task given input
+     * Returns void, prints a list of task given input.
      *  @param Stream of tasks to be printed
      */
     public void update(TaskModelInterface model) {
@@ -222,7 +222,7 @@ class Ui implements TaskObserver {
     }
 
     /**
-     * Returns nothing, starts user session and maintains loop
+     * Returns nothing, starts user session and maintains loop.
      */
     public void instance() {
         Ui.printGreeting();
@@ -236,7 +236,7 @@ class Ui implements TaskObserver {
     }
 
     /**
-     * Returns void, prints welcome banner and logo
+     * Returns void, prints welcome banner and logo.
      */
     public static void printBanner() {
         String logo = "        \u2606                     \u273f\n"

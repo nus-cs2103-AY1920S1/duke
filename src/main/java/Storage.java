@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  *  Deals with loading data onto file or reading from file
  *  this class is called by TaskList to save list of tasks locally
- *  for the next session
+ *  for the next session.
  */
 class Storage implements TaskObserver, StorageInterface {
 
@@ -31,7 +31,7 @@ class Storage implements TaskObserver, StorageInterface {
     /**
      * Returns vpid, paired with TaskModelInterface
      *  the "Pbservable" pattern such that any changes
-     *  this classw ill be notified
+     *  this classw ill be notified.
      */
     public void registerModel(TaskModelInterface model) {
         this.model.registerObserver(this);
@@ -40,7 +40,7 @@ class Storage implements TaskObserver, StorageInterface {
     /**
      * Returns void, method for tasklist to call each time
      *  a new task is added, this prompts Storage to write
-     *  any changes in the list to file.
+     *  any changes in the list to file..
      *  @param model basically TaskList to pull info to save
      */
     public void update(TaskModelInterface model) {
@@ -52,9 +52,9 @@ class Storage implements TaskObserver, StorageInterface {
 
 
     /**
-     * Returns stream of tasks saved in previous session
+     * Returns stream of tasks saved in previous session.
      * @return Stream of Tasks, you can collect this into
-     * a List and update TaskModel with this
+     *     a List and update TaskModel with this
      */
     public Stream<TaskInterface> loadData() {
         List<TaskInterface> taskList = new ArrayList<>();
@@ -85,9 +85,9 @@ class Storage implements TaskObserver, StorageInterface {
     }
 
     /**
-     * Returns a string to be written into file
+     * Returns a string to be written into file.
      * @param taskStream tasks to be converted to string
-     *  to be written into save file
+     *     to be written into save file
      * @return String formatted for save file that can be loaded
      */
     public static String 

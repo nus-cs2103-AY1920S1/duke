@@ -1,6 +1,6 @@
 public class Duke {
     /**
-     * Returns and initiates Duke program
+     * Returns and initiates Duke program.
      *
      *
      */

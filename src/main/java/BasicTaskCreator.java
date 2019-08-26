@@ -14,7 +14,7 @@ import java.util.Arrays;
 /**
  * Factory class which takes in string of details of what to make each class
  * returns TaskInterface implemented class eg ToDo, Event, Deadline
- * called by Parser addCommand
+ * called by Parser addCommand.
  */
 class BasicTaskCreator implements TaskCreator {
     public BasicTaskCreator() {
@@ -60,7 +60,7 @@ class BasicTaskCreator implements TaskCreator {
 
     /**
      * Returns TaskInterface, factory method to create 
-     *  TaskInterface class based on input command
+     *  TaskInterface class based on input command.
      * @param command Command from caller class, "Parser.java"
      * @return TaskInterface object, ToDo, Deadline, Event etc
      * @throws OWOException if command is not supported

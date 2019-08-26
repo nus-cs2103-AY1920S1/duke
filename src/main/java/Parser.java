@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 /**
  * Class which contains logic to deterime what commands to be executed
- * given an input by user
+ * given an input by user.
  */
 class Parser implements ControllerInterface {
     private TaskModelInterface model;
@@ -23,7 +23,7 @@ class Parser implements ControllerInterface {
     }
 
     /**
-     * Returns void, call UI to generate UI and start session
+     * Returns void, call UI to generate UI and start session.
      *  for user
      */
     public void start() {
@@ -37,7 +37,7 @@ class Parser implements ControllerInterface {
     /**
      * Returns nothing, this command evaluates user command
      *   and executes what needs to be done
-     *   individual command relies on TaskCreator implementation
+     *   individual command relies on TaskCreator implementation.
      *
      * @param command Input user command
      * @return void
@@ -62,9 +62,9 @@ class Parser implements ControllerInterface {
 
     /**
      * Returns boolean, allows customization of how to end
-     *   the OWO program to be used by Ui
+     *   the OWO program to be used by Ui.
      *  @param cmd Command text to test if it matches preselected
-     *    command to end OWO program
+     *       command to end OWO program
      *   @return boolean if input matches preselected bye command
      */
     public boolean isEndCommand(String cmd) {
@@ -74,7 +74,7 @@ class Parser implements ControllerInterface {
 
     /**
      * Returns void, interprets and calls requisite classes and housekeeping methods
-     * when a new Task is to be added to TaskList
+     * when a new Task is to be added to TaskList.
      * @param command Command input by user to be passed here to be interpreted
      */
     public void addTask(String command) {
@@ -93,7 +93,7 @@ class Parser implements ControllerInterface {
 
     /**
      * Returns void, interprets and calls requisite classes and housekeeping methods
-     * when a new Task is to be marked as done
+     * when a new Task is to be marked as done.
      * @param command Command input by user to be passed here to be interpreted
      */
     public void doneTask(String command) {
@@ -106,7 +106,7 @@ class Parser implements ControllerInterface {
 
     /**
      * Returns void, interprets and calls requisite classes and housekeeping methods
-     * when a new Task is to be deleted from tasklist
+     * when a new Task is to be deleted from tasklist.
      * @param command Command input by user to be passed here to be interpreted
      */
     public void deleteTask(String command) {
@@ -120,7 +120,7 @@ class Parser implements ControllerInterface {
 
     /**
      * Returns void, calls requisite classes methods to print a list of all
-     * tasks in tasklist
+     * tasks in tasklist.
      */
     public void listTasks() {
         Stream<TaskInterface> taskStream = 
@@ -132,7 +132,7 @@ class Parser implements ControllerInterface {
 
     public void findTasks(String command) {
         String[] cmdList = command.split(" ");
-        if (cmdList.length <= 1 ) {
+        if (cmdList.length <= 1) {
             this.listTasks();
             return;
         }

@@ -10,6 +10,15 @@ public class Task {
         this.complete = false;
     }
 
+    public Task(String task, boolean isPending) {
+        this.task = task;
+        this.complete = isPending;
+    }
+
+    public String toStringForFile () {
+        return "wrong because of this";
+    }
+
     @Override
     public String toString() {
         if (this.complete) {

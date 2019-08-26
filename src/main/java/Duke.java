@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -13,6 +17,30 @@ public class Duke {
         }
     }
 
+    public static Task createTaskFromFile (String s) throws DukeException{
+        String[] command = s.split(" \\| ");
+        boolean isPending = command[1].equals("1") ? true : false;
+        switch (command[0]) {
+        case "T":
+            return new ToDos(command[2], isPending);
+        
+        case "D":
+            return new Deadline(command[2], command[3], isPending);
+        case "E":
+            return new Event(command[2], command[3], isPending);
+        default:
+            throw new DukeException("Uncategorizable task.");
+        }
+    }
+
+    public static void readFile(File file, ArrayList<Task> list) throws FileNotFoundException, DukeException{
+        Scanner scan = new Scanner(file);
+        while (scan.hasNextLine()) {
+            list.add(createTaskFromFile(scan.nextLine()));
+        }
+        scan.close();
+    }
+
     public static void taskDone(int i, ArrayList<Task> list) throws Exception {
         try {
             list.get(i - 1).markAsDone();
@@ -20,23 +48,34 @@ public class Duke {
         catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
-        
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(list.get(i - 1).toString());
-
     }
 
-    public static void deleteTask(int i, ArrayList<Task> list) throws Exception {
+    private static void writeToFile(File file, ArrayList<Task> list) throws IOException {
+        FileWriter fw = new FileWriter(file.getAbsolutePath());
+        for (Task t : list) {
+            fw.write(t.toStringForFile() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void addTaskToFile(File file, Task task) throws IOException {
+        String name = file.getName();
+        FileWriter fw = new FileWriter(name, true);
+        fw.write(task.toStringForFile());
+        fw.close();
+    }
+
+    public static void deleteTask(int i, ArrayList<Task> list, File file) throws Exception {
         try {
             list.get(i - 1);
         }
         catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
         }
-        
         System.out.println("Noted. I've removed this task: ");
         System.out.println(list.get(i - 1).toString());
         list.remove(i - 1);
+        writeToFile(file, list);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -62,14 +101,9 @@ public class Duke {
         }
     }
 
-    public static void addTask(String input, ArrayList<Task> list) throws Exception {
+    public static void addTask(String input, ArrayList<Task> list, File file) throws Exception {
         Task task;
         String detail;
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
         String dueDetail;
         String[] inputAsArr = input.split(" ");
         validateDetail(inputAsArr);
@@ -105,6 +139,8 @@ public class Duke {
 
     public static void main(String[] args) throws Exception {
         ArrayList<Task> list = new ArrayList<>();
+        File dukeTaskFiles = new File("/Users/abhimanyadav/Desktop/Duke/duke/src/main/java/dukeTasks.txt");
+        readFile(dukeTaskFiles, list);
         String input;
         Scanner scanner = new Scanner(System.in);
         
@@ -126,7 +162,7 @@ public class Duke {
                         try {
                             taskDone(Integer.parseInt(command[1]), list);
                         } 
-                        catch (NumberFormatException nfe) {
+                        catch (NumberFormatException e) {
                             throw new DukeException("☹ OOPS!!! The completed task's index must be a number.");
                         }
                     }
@@ -135,14 +171,14 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The index of task to be deleted must be mentioned.");
                     } else {
                         try {
-                            deleteTask(Integer.parseInt(command[1]), list);
+                            deleteTask(Integer.parseInt(command[1]), list, dukeTaskFiles);
                         } 
-                        catch (NumberFormatException nfe) {
+                        catch (NumberFormatException e) {
                             throw new DukeException("☹ OOPS!!! The index of task to be deleted must be a number.");
                         }
                     }
                 } else {
-                   addTask(input, list); 
+                   addTask(input, list, dukeTaskFiles); 
                 }
             } 
             catch (Exception e) {
@@ -153,6 +189,7 @@ public class Duke {
             }
         }
 
+        writeToFile(dukeTaskFiles, list);
         System.out.println("Bye. Hope to see you again soon!");
 
     }

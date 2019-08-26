@@ -59,12 +59,12 @@ public class Storage {
                 tasks.add(task);
             }
         } catch (FileNotFoundException e) {
-            // First time setup
+            file.getParentFile().mkdirs();
             try {
                 FileWriter fw = new FileWriter(file);
                 fw.close();
             } catch (IOException ex) {
-                throw new DukeException("An error occurred when setting up the storage file");
+                throw new DukeException("An error occurred when setting up the storage file: " + ex.getMessage());
             }
         }
         return tasks;

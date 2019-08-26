@@ -109,6 +109,23 @@ public class TaskList {
     }
 
     /**
+     * Filters out all tasks, whose description contains the substring,
+     * and returns a new task list with those tasks.
+     *
+     * @param substring Substring that is to be tested against all tasks' description.
+     * @return Returns a new TaskList with tasks' descriptions contains the substring.
+     */
+    public TaskList filterByString(String substring) {
+        TaskList tasklist = new TaskList();
+        list.forEach(task -> {
+            if (task.getDescription().contains(substring)) {
+                tasklist.addTask(task);
+            }
+        });
+        return tasklist;
+    }
+
+    /**
      * Returns String representation of the task list.
      *
      * @return String representation.

@@ -55,6 +55,37 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the tasks that match the user's keyword.
+     * @param tasks The list of tasks.
+     * @param keyword User's keyword.
+     * @throws DukeException If there are no tasks in the list or no search results.
+     */
+    public void printMatchingTasks(List<Task> tasks, String keyword) throws DukeException {
+        try {
+            keyword = keyword.substring(4).trim();
+            if (keyword.isEmpty()) {
+                throw new DukeException("     ☹ OOPS!!! Search keyword cannot be empty.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("     ☹ OOPS!!! Search keyword cannot be empty.");
+        }
+        if (tasks.isEmpty()) {
+            throw new DukeException("     ☹ OOPS!!! The list is empty.");
+        }
+        System.out.println("     Here are the tasks in your list:");
+        int count = 0;
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                count++;
+                System.out.println("     " + count + "." + task);
+            }
+        }
+        if (count == 0) {
+            throw new DukeException("     ☹ OOPS!!! There are no matching tasks.");
+        }
+    }
+
     public void showLoadingError() {
         System.out.println("     No existing task list available!");
     }

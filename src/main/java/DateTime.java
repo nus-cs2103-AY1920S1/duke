@@ -13,10 +13,18 @@ public class DateTime {
         if (time > 2359 || time < 0) {
             throw new DukeException("Please enter a valid time");
         }
+
+        if (day < 1 || day > 31) {
+            throw new DukeException("Please enter a valid day");
+        }
+
+        if (month < 1 || month > 12) {
+            throw new DukeException("Please enter a valid month");
+        }
     }
 
     @Override
     public String toString() {
-        return this.day + "/" + this.month + "/" + "/" + this.year + " " + this.time;
+        return this.day + "/" + this.month + "/" + this.year + " " + this.time;
     }
 }

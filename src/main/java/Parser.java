@@ -6,6 +6,8 @@ public class Parser {
         switch (separatedInputs[0].toLowerCase()) {
         case "bye":
             return new ExitCommand();
+        case "list":
+            return new ListCommand();
         case "done":
             //fallthrough
         case "delete":
@@ -18,6 +20,13 @@ public class Parser {
             } else {
                 return new DeleteCommand(s.nextInt() - 1);
             }
+        case "todo":
+            String description = userInput.trim().substring(separatedInputs[0].length()).trim();
+            if (description.equals("")) {
+                return new IncorrectCommand();
+            }
+            return new ToDoCommand(description);
+
         }
 
         return new IncorrectCommand();

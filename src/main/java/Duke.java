@@ -8,14 +8,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Duke {
-    private ArrayList<Task> listOfInputs;
+    // private ArrayList<Task> listOfInputs;
     private Storage storage;
     private Ui ui;
+    private TaskList tasks;
 
     private Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        this.listOfInputs = new ArrayList<>(100);
     }
 
     private void todoCheck(String[] tasks) throws DukeException {
@@ -48,7 +48,7 @@ public class Duke {
 
     private void run() {
         try {
-            this.listOfInputs = this.storage.loadFromFile();
+            this.tasks = new TaskList(this.storage.loadFromFile());
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
@@ -59,18 +59,21 @@ public class Duke {
                 ui.printBye();
                 break;
             } else if (userInput.equals("list")) {
-                ui.printTaskList(this.listOfInputs);
+                ui.printTaskList(this.tasks.getAllTasks());
             } else {
                 String[] task = userInput.split(" ");
                 String instruction = task[0];
                 if (instruction.equals("done")) {
                     int taskNumber = Integer.parseInt(task[1]);
-                    listOfInputs.get(taskNumber - 1).markedAsDone();
-                    ui.printDone(listOfInputs.get(taskNumber - 1).toString());
+                    this.tasks.markAsDone(taskNumber - 1);
+                    ui.printDone(this.tasks.get(taskNumber - 1).toString());
                 } else if (instruction.equals("delete")) {
                     int taskNumber = Integer.parseInt(task[1]);
-                    ui.printRemoveMessage(this.listOfInputs.remove(taskNumber - 1).toString(),
-                            this.listOfInputs.size());
+                    try {
+                        ui.printRemoveMessage(this.tasks.delete(taskNumber - 1), this.tasks.size());
+                    } catch (DukeException e) {
+                        System.err.println("Something went wrong: " + e.getMessage());
+                    }
                 } else {
                     try {
                         switch (instruction) {
@@ -78,10 +81,10 @@ public class Duke {
                             try {
                                 todoCheck(task);
                                 Task todo = new Todo(userInput.substring(5));
-                                listOfInputs.add(todo);
-                                ui.printAddTaskMessage(todo.toString(), this.listOfInputs.size());
-                            } catch (DukeException ex) {
-                                System.out.println(ex.getMessage());
+                                this.tasks.add(todo);
+                                ui.printAddTaskMessage(todo.toString(), this.tasks.size());
+                            } catch (DukeException e) {
+                                System.err.println("Something went wrong: " + e.getMessage());
                             } finally {
                                 break;
                             }
@@ -91,10 +94,10 @@ public class Duke {
                                 deadlineCheck(task, userInput);
                                 Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by")),
                                         dateFormatter(userInput.substring(userInput.indexOf("/by") + 4)));
-                                listOfInputs.add(deadline);
-                                ui.printAddTaskMessage(deadline.toString(), this.listOfInputs.size());
-                            } catch (DukeException ex) {
-                                System.out.println(ex.getMessage());
+                                this.tasks.add(deadline);
+                                ui.printAddTaskMessage(deadline.toString(), this.tasks.size());
+                            } catch (DukeException e) {
+                                System.err.println("Something went wrong: " + e.getMessage());
                             } finally {
                                 break;
                             }
@@ -104,10 +107,10 @@ public class Duke {
                                 eventCheck(task, userInput);
                                 Task event = new Event(userInput.substring(6, userInput.indexOf("/at")),
                                         dateFormatter(userInput.substring(userInput.indexOf("/at") + 4)));
-                                listOfInputs.add(event);
-                                ui.printAddTaskMessage(event.toString(), this.listOfInputs.size());
-                            } catch (DukeException ex) {
-                                System.out.println(ex.getMessage());
+                                this.tasks.add(event);
+                                ui.printAddTaskMessage(event.toString(), this.tasks.size());
+                            } catch (DukeException e) {
+                                System.err.println("Something went wrong: " + e.getMessage());
                             } finally {
                                 break;
                             }
@@ -116,14 +119,14 @@ public class Duke {
                             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
                         }
-                    } catch (DukeException ex) {
-                        System.out.println(ex.getMessage());
+                    } catch (DukeException e) {
+                        System.err.println("Something went wrong: " + e.getMessage());
                     }
                 }
             }
         }
         try {
-            this.storage.saveToFile(this.listOfInputs);
+            this.storage.saveToFile(this.tasks.getAllTasks());
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }

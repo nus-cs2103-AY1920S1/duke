@@ -3,12 +3,20 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Represents a personal assistant chat bot. A <code>Duke</code> object corresponds to a specific <code>Storage</code>,
+ * <code>TaskList</code> and <code>Ui</code>.
+ */
 public class Duke {
 
 	private Storage storage;
 	private TaskList tasks;
 	private Ui ui;
 
+	/**
+	 * Constructor for <code>Duke</code>.
+	 * @param filePath Path to file that should be written to and loaded from.
+	 */
 	public Duke(String filePath) {
 		ui = new Ui();
 		storage = new Storage(filePath);
@@ -20,6 +28,9 @@ public class Duke {
 		}
 	}
 
+	/**
+	 * Runs the chat bot.
+	 */
 	public void run() {
 		ui.printLogo();
 		ui.greetUser();

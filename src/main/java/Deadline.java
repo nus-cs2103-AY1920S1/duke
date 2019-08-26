@@ -6,12 +6,17 @@ public class Deadline extends Task {
 
     Deadline(String name, String dateTime) {
         super(name);
-        this.dateTime = dateTime;
+        String[] arr = dateTime.split(" ", 2);
+        this.dateTime = arr[1];
     }
 
     @Override
     public String toString() {
-        String[] arr = this.dateTime.split(" ", 2);
-        return "[D]" + super.toString() + "(" + arr[0] + ": " + arr[1] + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateTime + ")";
+    }
+
+    @Override
+    String publishTask() {
+        return "D | " + super.publishTask() + " | " + this.dateTime;
     }
 }

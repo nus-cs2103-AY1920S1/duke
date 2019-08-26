@@ -1,14 +1,22 @@
+/**
+ * Represents a Task with type Event
+ */
 public class Event extends Task {
     private String dateTime;
 
     Event(String name, String dateTime) {
         super(name);
-        this.dateTime = dateTime;
+        String[] arr = dateTime.split(" ", 2);
+        this.dateTime = arr[1];
     }
 
     @Override
     public String toString() {
-        String[] arr = this.dateTime.split(" ", 2);
-        return "[E]" + super.toString() + "(" + arr[0] + ": " + arr[1] + ")";
+        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+    }
+
+    @Override
+    String publishTask() {
+        return "E | " + super.publishTask() + " | " + this.dateTime;
     }
 }

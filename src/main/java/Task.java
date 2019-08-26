@@ -29,8 +29,7 @@ import java.util.Date;
             }
         }
 
-
-
+        public abstract String toFileFormat();
         public abstract Date getDate();
 
     }

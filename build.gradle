@@ -19,6 +19,14 @@ application {
     mainClassName = "duke.Duke"
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1.3"

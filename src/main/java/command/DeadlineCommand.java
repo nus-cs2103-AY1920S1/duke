@@ -6,13 +6,20 @@ import duke.Ui;
 import exception.DukeException;
 import task.DeadlineTask;
 import task.Task;
-
 import java.io.IOException;
 
+/**
+ * Represents a Command which adds a DeadlineTask to the TaskList.
+ */
 public class DeadlineCommand extends Command {
     private String description;
     private String time;
 
+    /**
+     * Creates a DeleteCommand with a given description and time.
+     * @param description Task description.
+     * @param time Task deadline date and time in the format of "dd/mm/yyyy hhmm".
+     */
     public DeadlineCommand(String description, String time) {
         this.description = description;
         this.time = time;

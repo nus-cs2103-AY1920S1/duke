@@ -10,6 +10,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates an instance of Duke, a task manager.
+     * @param filePath a string storing the location of the text file which stores the tasks' data.
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +25,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Initializes the program which users can input commands to interact with Duke.
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.showWelcome(tasks);
         boolean isExit = false;
@@ -32,7 +41,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.print(e.getMessage());
             } finally {
-                //ui.showLine();
+
             }
         }
         ui.showLine();

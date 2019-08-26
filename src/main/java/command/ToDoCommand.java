@@ -6,12 +6,18 @@ import duke.Ui;
 import exception.DukeException;
 import task.Task;
 import task.ToDoTask;
-
 import java.io.IOException;
 
+/**
+ * Represents a Command which adds an ToDoTask to the TaskList.
+ */
 public class ToDoCommand extends Command {
     private String description;
 
+    /**
+     * Creates a ToDoCommand with a given description.
+     * @param description Task description.
+     */
     public ToDoCommand(String description) {
         this.description = description;
     }

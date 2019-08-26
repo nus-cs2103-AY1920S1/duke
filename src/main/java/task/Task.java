@@ -1,9 +1,16 @@
 package task;
 
+/**
+ * Represents a task that the user can add into the TaskList.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Task Constructor used by classes extending Task.
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
     }

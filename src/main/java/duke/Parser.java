@@ -8,8 +8,14 @@ import task.Task;
 
 public class Parser {
 
-    public static Command parse(String command) throws DukeException {
-        String[] token = command.split(" ");
+    /**
+     * Returns a Command that is converted from user's input.
+     * @param input a string that contains the user input
+     * @return a Command
+     * @throws DukeException
+     */
+    public static Command parse(String input) throws DukeException {
+        String[] token = input.split(" ");
         String[] temp;
         String taskDesc;
         Task t;
@@ -34,7 +40,7 @@ public class Parser {
             }
             return new ToDoCommand(token[1]);
         case "deadline":
-            temp = command.split("/by");
+            temp = input.split("/by");
             taskDesc = temp[0].substring(8).trim();
             if(taskDesc.equals("")) {
                 throw new DukeInvalidTaskDescriptionException("Deadline");
@@ -43,7 +49,7 @@ public class Parser {
             }
             return new DeadlineCommand(taskDesc, temp[1].trim());
         case "event":
-            temp = command.split("/at");
+            temp = input.split("/at");
             taskDesc = temp[0].substring(5).trim();
             if(taskDesc.equals("")) {
                 throw new DukeInvalidTaskDescriptionException("Event");
@@ -56,5 +62,3 @@ public class Parser {
         }
     }
 }
-
-

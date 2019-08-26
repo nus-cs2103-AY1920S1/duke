@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents a Command which signals the end of the program.
+ */
 public class ExitCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {

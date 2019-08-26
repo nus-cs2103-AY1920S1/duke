@@ -14,10 +14,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-
     public String filePath;
     private Scanner sc;
 
+    /**
+     * Initialises a storage object which handles with loading tasks from the file
+     * and saving tasks in the file.
+     * @param filePath a string storing the location of the text file which stores the tasks' data.
+     * @throws IOException
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         File file = new File(filePath);
@@ -60,15 +65,11 @@ public class Storage {
     }
 
     public void save(TaskList tasks) throws IOException {
-        save(tasks.getList());
-    }
-
-    public void save(ArrayList<Task> tasks) throws IOException {
         FileWriter fw1 = new FileWriter(filePath);
         fw1.write("");
         fw1.close();
         FileWriter fw2 = new FileWriter(filePath);
-        for (Task task : tasks) {
+        for (Task task : tasks.getList()) {
             String s = task.toFileString() + "\n";
             fw2.write(s);
         }

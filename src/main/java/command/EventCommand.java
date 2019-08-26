@@ -6,13 +6,20 @@ import duke.Ui;
 import exception.DukeException;
 import task.EventTask;
 import task.Task;
-
 import java.io.IOException;
 
+/**
+ * Represents a Command which adds an EventTask to the TaskList.
+ */
 public class EventCommand extends Command {
     private String description;
     private String time;
 
+    /**
+     * Creates a EventCommand with a given description and time.
+     * @param description Task description.
+     * @param time Task event date and time in the format of "dd/mm/yyyy hhmm".
+     */
     public EventCommand(String description, String time) {
         this.description = description;
         this.time = time;

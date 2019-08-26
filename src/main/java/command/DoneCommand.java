@@ -5,11 +5,18 @@ import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 import exception.DukeInvalidTaskIndexException;
-
 import java.io.IOException;
 
+/**
+ * Represents a Command which marks a task from the TaskList as done.
+ */
 public class DoneCommand extends Command {
     private int index;
+
+    /**
+     * Creates a DoneCommand with a given index to mark a task from the TaskList as done.
+     * @param index Task index to be marked as done.
+     */
     public DoneCommand(int index) {
         this.index = index - 1;
     }

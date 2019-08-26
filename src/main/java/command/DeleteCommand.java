@@ -5,11 +5,18 @@ import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
 import exception.DukeInvalidTaskIndexException;
-
 import java.io.IOException;
 
+/**
+ * Represents a Command which deletes a task from the TaskList.
+ */
 public class DeleteCommand extends Command {
     private int index;
+
+    /**
+     * Creates a DeleteCommand with a given index to delete from the TaskList.
+     * @param index Task index to be deleted.
+     */
     public DeleteCommand(int index) {
         this.index = index - 1;
     }

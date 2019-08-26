@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Constructor to create a Storage object.
+     *
      * @param filePath The directory of our database.
      * @param ui The Ui object we are currently using.
      */
@@ -35,6 +36,7 @@ public class Storage {
 
     /**
      * Gets the current task list in the database if any.
+     *
      * @return Returns a list of tasks.
      */
     public List<Task> load() {
@@ -75,6 +77,7 @@ public class Storage {
 
     /**
      * Updates the database.
+     *
      * @param list The most updated list of tasks.
      */
     public void updateData(List<Task> list) {

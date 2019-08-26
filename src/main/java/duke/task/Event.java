@@ -12,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Constructor to create the Event object.
+     *
      * @param description The task description.
      * @param at The date and time it is due.
      * @throws DukeException If the input format is incorrect.
@@ -35,6 +36,7 @@ public class Event extends Task {
 
     /**
      * Gets the description of the Event task.
+     *
      * @return The description of the Event task.
      */
     @Override
@@ -44,6 +46,7 @@ public class Event extends Task {
 
     /**
      * The proper representation of the task, with [E], icon and description.
+     *
      * @return The output representation of the Event task.
      */
     @Override

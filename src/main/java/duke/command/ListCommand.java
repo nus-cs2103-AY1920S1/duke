@@ -10,6 +10,7 @@ public class ListCommand extends Command {
 
     /**
      * Get the TaskList object to list out all the tasks in the list.
+     *
      * @param taskList TaskList object containing the current tasks list.
      * @param ui The Ui object we are currently using.
      * @param storage The Storage object we are currently using.
@@ -21,6 +22,7 @@ public class ListCommand extends Command {
 
     /**
      * Checks if the command is an ExitCommand.
+     *
      * @return False.
      */
     @Override

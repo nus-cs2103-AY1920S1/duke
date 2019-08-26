@@ -14,6 +14,7 @@ public class Parser {
 
     /**
      * Parses the user's commands.
+     *
      * @param command User's command.
      * @return Command object.
      * @throws DukeException If the input cannot be recognised.

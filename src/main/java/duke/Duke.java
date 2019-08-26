@@ -25,6 +25,7 @@ public class Duke {
     /**
      * Constructor. Creates Ui, Storage and TaskList object.
      * If the file does not exist, an error will be shown.
+     *
      * @param filePath Directory to the data file.
      */
     public Duke(String filePath) {

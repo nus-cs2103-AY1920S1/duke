@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor to create the Deadline object.
+     *
      * @param description The task description.
      * @param by The date and time it is due.
      * @throws DukeException If the input format is incorrect.
@@ -36,6 +37,7 @@ public class Deadline extends Task {
 
     /**
      * Gets the description of the Deadline task.
+     *
      * @return The description of the Deadline task.
      */
     @Override
@@ -45,6 +47,7 @@ public class Deadline extends Task {
 
     /**
      * The proper representation of the task, with [D], icon and description.
+     *
      * @return The output representation of the Deadline task.
      */
     @Override

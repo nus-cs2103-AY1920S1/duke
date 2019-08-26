@@ -19,6 +19,7 @@ public class Ui {
 
     /**
      * Reads the user input and returns it.
+     *
      * @return The user command.
      */
     public String readCommand() {
@@ -27,6 +28,7 @@ public class Ui {
 
     /**
      * Prints error message.
+     *
      * @param error Error message to be reflected to the user.
      */
     public void showError(String error) {
@@ -35,6 +37,7 @@ public class Ui {
 
     /**
      * Prints the welcome message and the existing tasks if any.
+     *
      * @param tasks The existing task list in the database.
      */
     public void showWelcome(List<Task> tasks) {
@@ -63,6 +66,7 @@ public class Ui {
 
     /**
      * Prints the available tasks.
+     *
      * @param tasks Current task list to be printed.
      * @throws DukeException If the current task list is empty.
      */
@@ -81,6 +85,7 @@ public class Ui {
 
     /**
      * Prints the tasks that match the user's keyword.
+     *
      * @param tasks The list of tasks.
      * @param keyword User's keyword.
      * @throws DukeException If there are no tasks in the list or no search results.
@@ -119,6 +124,7 @@ public class Ui {
 
     /**
      * Prints the set of sentences after successfully adding a task.
+     *
      * @param task The task that was added.
      * @param size The current number of tasks in the list.
      */
@@ -130,6 +136,7 @@ public class Ui {
 
     /**
      * Prints the set of sentences after successfully deleting a task.
+     *
      * @param task The task that was deleted.
      * @param size The current number of tasks in the list.
      */
@@ -141,6 +148,7 @@ public class Ui {
 
     /**
      * Prints the set of sentences after successfully marking a task as done.
+     *
      * @param tasks The task that was marked as done.
      * @param number The index of the task in the list.
      */

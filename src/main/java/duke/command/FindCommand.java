@@ -12,6 +12,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor to create a FindCommand object.
+     *
      * @param keyword The user's search keyword.
      */
     public FindCommand(String keyword) {
@@ -20,6 +21,7 @@ public class FindCommand extends Command {
 
     /**
      * Get Ui to print the matching tasks.
+     *
      * @param taskList The TaskList object containing the list of tasks.
      * @param ui The Ui object we are currently using.
      * @param storage The Storage object we are currently using.
@@ -31,6 +33,7 @@ public class FindCommand extends Command {
 
     /**
      * Check if it is a ExitCommand object.
+     *
      * @return False.
      */
     @Override

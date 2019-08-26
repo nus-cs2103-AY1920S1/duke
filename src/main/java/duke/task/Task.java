@@ -6,6 +6,7 @@ public class Task {
 
     /**
      * Constructor to create a Task object.
+     *
      * @param description The task description.
      */
     public Task(String description) {
@@ -15,6 +16,7 @@ public class Task {
 
     /**
      * Gets the tick / cross icon for the status.
+     *
      * @return The current status icon of the task.
      */
     public String getStatusIcon() {
@@ -30,6 +32,7 @@ public class Task {
 
     /**
      * Gets the current completion status of the task.
+     *
      * @return True if done, false if the task is yet to be completed.
      */
     public boolean isCompleted() {
@@ -38,6 +41,7 @@ public class Task {
 
     /**
      * Gets the description of the task.
+     *
      * @return The description of the task.
      */
     public String getDescription() {
@@ -46,6 +50,7 @@ public class Task {
 
     /**
      * The proper representation of the task, with Task type, icon and description.
+     *
      * @return The output representation of the task.
      */
     public String toString() {

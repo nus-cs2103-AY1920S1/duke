@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor to create an DoneCommand object.
+     *
      * @param command User's command.
      */
     public DoneCommand(String command) {
@@ -20,6 +21,7 @@ public class DoneCommand extends Command {
 
     /**
      * Get the TaskList object to mark the task in the list as done.
+     *
      * @param taskList TaskList object containing the current tasks list.
      * @param ui The Ui object we are currently using.
      * @param storage The Storage object we are currently using.
@@ -31,6 +33,7 @@ public class DoneCommand extends Command {
 
     /**
      * Checks if the command is an ExitCommand.
+     *
      * @return False.
      */
     @Override

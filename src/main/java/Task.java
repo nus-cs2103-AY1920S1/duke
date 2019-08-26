@@ -14,6 +14,14 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public int getStatusNumber() {
+        if (isDone) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     public  String getTaskType() {
         return this.taskType;
     }
@@ -29,5 +37,9 @@ public class Task {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String toString() {
+        return this.taskType;
     }
 }

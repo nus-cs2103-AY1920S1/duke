@@ -3,10 +3,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 public class Duke {
 
     private static ArrayList<Task> list = new ArrayList<>(100);
+    private static String file = "/Users/jhchen/Documents/GitHub/duke/src/main/java/duke.txt";
 
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
@@ -93,6 +95,15 @@ public class Duke {
         }
         list.remove(taskNo - 1);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
+
+        try {
+            writeToFile(file, list.get(0).toString() + System.lineSeparator());
+            for (int i = 1; i < list.size(); i++) {
+                appendToFile(file, list.get(taskNo - 1).toString()+ System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.out.println("Something went wrong:" + e.getMessage());
+        }
     }
 
     private static void readList() {
@@ -121,7 +132,16 @@ public class Duke {
         }
         System.out.println("Now you have " + list.size() + " tasks in the list");
 
-    }
+        try {
+            writeToFile(file, list.get(0).toString() + System.lineSeparator());
+            for (int i = 1; i < list.size(); i++) {
+                appendToFile(file, t.toString() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+                System.out.println("Something went wrong:" + e.getMessage());
+            }
+        }
+
 
 
     private static void exit() {
@@ -131,6 +151,18 @@ public class Duke {
 
     private static void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter((filePath));
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 
     private static String getFirstWord(String input) {

@@ -3,4 +3,8 @@ public class ToDos extends Task {
         super(description);
     }
 
+    @Override
+    public String toString() {
+        return "T | " + this.getStatusNumber() + " | " + this.description;
+    }
 }

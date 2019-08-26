@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Parser {
     private TaskList taskList;
     public void executeCommand(TaskList taskList, String command) {
@@ -18,7 +20,6 @@ public class Parser {
                     break;
                 case "todo":
                     this.addTaskWithoutDate(commandDescription);
-                    Message.printSuccessfulAddMessage(this.taskList.get(taskList.size()-1), this.taskList.size());
                     break;
                 case "deadline":
                 case "event":
@@ -44,6 +45,7 @@ public class Parser {
     private void addTaskWithoutDate(String[] commandDescription) throws IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
         this.taskList.add(commandDescription[1]);
+        Message.printSuccessfulAddMessage(this.taskList.get(taskList.size()-1), this.taskList.size());
     }
 
     /**
@@ -66,7 +68,9 @@ public class Parser {
                     EventTask.verifyTaskStatement(statementAndDate[0].toLowerCase());
                     break;
             }
+            DateTimeParser.validateDateFormat(statementAndDate[1]);
             this.taskList.add(commandDescription[0], taskName, statementAndDate[1]);
+            Message.printSuccessfulAddMessage(this.taskList.get(taskList.size()-1), this.taskList.size());
         } catch (IndexOutOfBoundsException e) {
             throw new IncompleteCommandError("incomplete", commandDescription[0]);
         }
@@ -92,7 +96,9 @@ public class Parser {
     private void markTaskDone(String[] commandDescription) throws RuntimeException, IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
         int idx = Integer.parseInt(commandDescription[1]);
+        Task task = this.taskList.get(idx-1);
         this.taskList.done(idx-1);
+        Message.printSuccessfulDoneMessage(task);
     }
 
     /**

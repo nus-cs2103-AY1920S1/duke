@@ -1,4 +1,8 @@
-Todo|0|read book
+Todo|1|read book
 Deadline|0|return book|June 6th
-Todo|0|join sports club
+Todo|1|join sports club
 Event|0|assignment|today
+Todo|0|add this
+Deadline|0|return book|2/12/2019 120
+Event|0|sales|25/5/1997 2359
+Event|0|do this|1/1/1991 1234

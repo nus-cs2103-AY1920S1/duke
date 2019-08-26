@@ -1,11 +1,70 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     public static final String LINE = "    ____________________________________________________________";
     public static final String TABS = "     ";
 
+    public static final String FILE_NAME = "/Users/chowjiaying/Github/2103T-iP/duke/data/duke.txt";
     static ArrayList<Task> taskList = new ArrayList<Task>();
+
+    //Parses text file contents to a Task object
+    private static Task convertToTask(String line) {
+        String[] taskInformation = line.split("\\|");
+        String typeOfTask = taskInformation[0];
+        String completionStatus = taskInformation[1];
+        String taskDescription = taskInformation[2];
+        Task convertedTask;
+        if (typeOfTask.equals("[T]")) {
+            convertedTask = new ToDo(taskDescription);
+        } else if (typeOfTask.equals("[E]")) {
+            convertedTask = new Event(taskDescription, taskInformation[3]);
+        } else {
+            convertedTask = new Deadline(taskDescription, taskInformation[3]);
+        }
+
+        if (completionStatus.equals("1")) {
+            convertedTask.markAsDone();
+        }
+
+        return convertedTask;
+    }
+
+    //Loads tasks from the file to the taskList array
+    public static void loadTask(String fileName) {
+        try {
+            File taskFile = new File(fileName);
+            Scanner sc = new Scanner(taskFile);
+
+            //Loads tasks from text file to taskList array
+            while (sc.hasNextLine()) {
+                taskList.add(convertToTask(sc.nextLine()));
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(fileName + " cannot be found!");
+        }
+    }
+
+    //Writes a task to the file each time the task list changes
+    public static void writeTaskToFile(String fileName) {
+        try {
+            FileWriter taskFile = new FileWriter(fileName);
+            for (Task taskToWrite : taskList) {
+                taskFile.write(taskToWrite.writeToFile() + "\n");
+            }
+
+            taskFile.close();
+        } catch (IOException ex) {
+            System.out.println(fileName + " cannot be found!");
+        }
+    }
+
 
     public static void welcomeMessage() {
         System.out.println(LINE);
@@ -23,6 +82,7 @@ public class Duke {
 
     public static void main(String[] args) {
         welcomeMessage();
+        loadTask(FILE_NAME);
         Scanner sc = new Scanner(System.in); //gets commands from user
         String userCommand = sc.nextLine();
 
@@ -52,6 +112,7 @@ public class Duke {
                     Task taskCompleted = taskList.get(taskNumber - 1);
                     taskCompleted.markAsDone();
                     System.out.println(TABS + "  " + taskCompleted.toString());
+                    writeTaskToFile(FILE_NAME);
                 } else if (userCommand.startsWith("delete")){
                     //program deletes a Task from taskList
                     int taskNumber = Character.getNumericValue(userCommand.charAt(7));
@@ -59,6 +120,7 @@ public class Duke {
                     System.out.println(TABS + "Noted. I've removed this task: ");
                     System.out.println(TABS + "  " + taskToDelete.toString());
                     displayNumberOfTasks();
+                    writeTaskToFile(FILE_NAME);
                 } else {
                     //program checks what type of task it is
                     Task userTask;
@@ -83,6 +145,7 @@ public class Duke {
                         throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
                     }
                     taskList.add(userTask);
+                    writeTaskToFile(FILE_NAME);
                     System.out.println(TABS + "Got it. I've added this task: ");
                     System.out.println(TABS + "  " + userTask.toString());
 

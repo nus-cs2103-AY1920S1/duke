@@ -20,4 +20,9 @@ public class Task {
         String statusIcon = isDone ? "[\u2713]" : "[\u2718]";
         return String.format("%s%s %s", typeOfTask, statusIcon, description);
     }
+
+    public String writeToFile() {
+        String status = isDone ? "1" : "0";
+        return String.format("%s|%s|%s", typeOfTask, status, description);
+    }
 }

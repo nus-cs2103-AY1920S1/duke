@@ -1,11 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 /**
@@ -45,6 +40,13 @@ public class Parser {
                         Command c = new DeleteCommand(Integer.parseInt(tokens[1]));
                         return c;
                     } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException();
+                    }
+                case "find":
+                    try {
+                        Command c = new FindCommand(tokens[1]);
+                        return c;
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException();
                     }
                 default:

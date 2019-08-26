@@ -14,4 +14,6 @@ public interface ControllerInterface {
     boolean isEndCommand(String command);
 
     void listTasks();
+
+    void findTasks(String command);
 }

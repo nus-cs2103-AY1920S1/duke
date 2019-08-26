@@ -1,7 +1,10 @@
 // java -Dfile.encoding=UTF8 classname
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.lang.String;
 import java.util.stream.Stream;
 import java.util.Iterator;
-
 
 /**
  * Class which contains logic to deterime what commands to be executed
@@ -49,6 +52,9 @@ class Parser implements ControllerInterface {
         } else if 
             (commandlist[0].toUpperCase().equals("DELETE")) {
             this.deleteTask(command);
+        } else if 
+            (commandlist[0].toUpperCase().equals("FIND")) {
+            this.findTasks(command);
         } else {
             this.addTask(command);
         }
@@ -123,4 +129,28 @@ class Parser implements ControllerInterface {
         //this.display.printAllTasks(iter);
         this.display.printAllTasks(taskStream);
     }
+
+    public void findTasks(String command) {
+        String[] cmdList = command.split(" ");
+        if (cmdList.length <= 1 ) {
+            this.listTasks();
+            return;
+        }
+
+        List<String> cmdxs = 
+            new LinkedList<String>(Arrays.asList(cmdList));
+        cmdxs.remove(0);
+        //String searchTerm = String.join(" ",cmdxs.toArray());
+        String searchTerm = String.join(" ",cmdxs);
+
+
+        Stream<TaskInterface> taskStream = 
+            this.model.getTaskStream();
+
+        Stream<String> filteredStream = taskStream
+            .map(x -> x.toString())
+            .filter(x -> x.contains(searchTerm)); 
+        this.display.printAllTasks(filteredStream);
+    }
+
 }

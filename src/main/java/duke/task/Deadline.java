@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DateUtil;
 import duke.Duke;
 import duke.DukeException;
 
@@ -22,11 +23,11 @@ public class Deadline extends Task {
     }
 
     public String toExportFormat() {
-        return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + Duke.formatDate(this.by);
+        return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + DateUtil.formatDate(this.by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Duke.formatDate(by) + ")";
+        return "[D]" + super.toString() + " (by: " + DateUtil.formatDate(by) + ")";
     }
 }

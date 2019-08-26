@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DateUtil;
 import duke.Duke;
 import duke.DukeException;
 
@@ -42,13 +43,13 @@ public abstract class Task {
             }
             return t;
         case "E":
-            t = new Event(stringArray[2], Duke.parseDate(stringArray[3]));
+            t = new Event(stringArray[2], DateUtil.parseDate(stringArray[3]));
             if (stringArray[1].equals("1")) {
                 t.markAsDone();
             }
             return t;
         case "D":
-            t = new Deadline(stringArray[2], Duke.parseDate(stringArray[3]));
+            t = new Deadline(stringArray[2], DateUtil.parseDate(stringArray[3]));
             if (stringArray[1].equals("1")) {
                 t.markAsDone();
             }

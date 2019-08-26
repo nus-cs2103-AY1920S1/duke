@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DateUtil;
 import duke.Duke;
 import duke.DukeException;
 
@@ -22,11 +23,11 @@ public class Event extends Task {
     }
 
     public String toExportFormat() {
-        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + Duke.formatDate(this.at);
+        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + DateUtil.formatDate(this.at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Duke.formatDate(at) + ")";
+        return "[E]" + super.toString() + " (at: " + DateUtil.formatDate(at) + ")";
     }
 }

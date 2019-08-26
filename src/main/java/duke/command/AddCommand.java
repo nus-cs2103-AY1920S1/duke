@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             if (!this.optionName.equals("by") || this.optionArgument.equals("")) {
                 throw new DukeException("The date/time of a deadline cannot be empty.");
             }
-            myTask = new Deadline(this.argument, Duke.parseDate(optionArgument));
+            myTask = new Deadline(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
             ui.printMessage("Got it. I've added this duke.task: \n  " + myTask + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             if (!this.optionName.equals("at") || this.optionArgument.equals("")) {
                 throw new DukeException("The date/time of an event cannot be empty.");
             }
-            myTask = new Event(this.argument, Duke.parseDate(optionArgument));
+            myTask = new Event(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
             ui.printMessage("Got it. I've added this duke.task: \n  " + myTask + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;

@@ -1,3 +1,8 @@
-todo | 1 | just a todo
-todo | 0 | just a todo
-todo | 0 | another todo
+{ type: todo, done: true, description: ohnoz. }
+{ type: todo, done: false, description: ohnooooo }
+{ type: deadline, done: false, description: 2103ip, time: 01/12/1997 0000 }
+{ type: deadline, done: true, description: anotherip, time: 29/01/1997 2359 }
+{ type: deadline, done: false, description: yet another ip, time: 1/12/1997 2359 }
+{ type: event, done: false, description: yet another event, time: 09/2/2010 1200 to 09/2/2010 1400 }
+{ type: event, done: false, description: yet another event, time: 09/2/2010 1200 to 1400 }
+{ type: event, done: false, description: yet another event, time: 09/2/2010 1200 to 1100 }

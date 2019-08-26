@@ -48,9 +48,10 @@ public class Storage {
 
         String input;
         Map<StorageKey, String> inputs;
+
         TaskType taskType;
         boolean isTaskDone;
-        String taskDescription;
+        String taskDescription = "";
         String taskTiming = "";
         int lineNumber = 0;
 
@@ -60,6 +61,7 @@ public class Storage {
 
             try {
                 inputs = Parser.parseJsonLine(input);
+
                 taskType = getTaskType(inputs.get(StorageKey.type));
                 isTaskDone = getDoneStatus(inputs.get(StorageKey.done));
                 taskDescription = getDescription(inputs.get(StorageKey.description));
@@ -106,7 +108,7 @@ public class Storage {
             for (Task task : tasks.getAllTasks()) {
                 taskType = task.getTaskType();
                 String jsonLineStart = String.format(
-                        "{ %s:%s, %s:%s, %s:%s",
+                        "{ %s: %s, %s: %s, %s: %s",
                         StorageKey.type.toString(), taskType.toString(),
                         StorageKey.done.toString(), ((Boolean) task.isDone()).toString(),
                         StorageKey.description.toString(), task.getDescription());
@@ -115,8 +117,7 @@ public class Storage {
 
                 if (taskType.hasTime()) {
                     fileWriter.write(
-                            String.format(
-                                    ", %s:%s",
+                            String.format(", %s: %s",
                                     StorageKey.time.toString(),
                                     task.getTiming()));
                 }
@@ -135,7 +136,7 @@ public class Storage {
         try {
             TaskType taskType = TaskType.valueOf(input);
             return taskType;
-        } catch (IllegalArgumentException ex) {
+        } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",
                     " \u2639 Oops! I encountered an invalid task type value while\n"
@@ -144,23 +145,25 @@ public class Storage {
     }
 
     private boolean getDoneStatus(String status) throws DukeTaskFileParseException {
-        if (status.equalsIgnoreCase("true")) {
-            return true;
-        } else if (status.equalsIgnoreCase("false")) {
-            return false;
-        } else {
-            throw new DukeTaskFileParseException(
-                    "Invalid done status number encountered while parsing task file",
-                    " \u2639 Oops! I encountered an invalid done value while\n"
-                            + "   reading your file.");
+        if (status != null) {
+            if (status.equalsIgnoreCase("true")) {
+                return true;
+            } else if (status.equalsIgnoreCase("false")) {
+                return false;
+            }
         }
+
+        throw new DukeTaskFileParseException(
+                "Invalid done status number encountered while parsing task file",
+                " \u2639 Oops! I encountered an invalid or missing done value\n"
+                        + "   while reading your file.");
     }
 
     private String getDescription(String description) throws DukeTaskFileParseException {
         try {
             TaskUtil.validateTaskDescription(description);
             return description;
-        } catch (DukeInvalidArgumentException ex) {
+        } catch (DukeInvalidArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task description encountered when parsing task file",
                     " \u2639 Oops! I encountered an empty description while\n"

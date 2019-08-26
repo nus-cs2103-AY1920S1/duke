@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import duke.DukeInvalidArgumentException;
 
 public class TaskUtil {
-    private static String DATE_FORMAT = "dd/MM/yyyy HHmm";
+    private static String DATE_FORMAT = "d/M/y HHmm";
     private static String TIME_FORMAT = "HHmm";
     private static String DISPLAY_FORMAT = "EEE, d MMM y h:mma";
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);

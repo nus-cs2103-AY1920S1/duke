@@ -45,7 +45,6 @@ public class Duke {
             } finally {
                 ui.printLineDivider();
                 ui.printEmptyLine();
-                continue;
             }
         }
     }

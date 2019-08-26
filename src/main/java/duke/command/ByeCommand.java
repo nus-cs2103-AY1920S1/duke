@@ -14,7 +14,6 @@ public class ByeCommand extends Command {
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         ui.printMsgLine(" Bye. Hope to see you again soon!");
-        ui.printLineDivider();
     }
 
     @Override

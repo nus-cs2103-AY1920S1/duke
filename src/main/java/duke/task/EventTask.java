@@ -55,5 +55,11 @@ public class EventTask extends Task {
         } else {
             this.endDate = TaskUtil.getDateFromString(splitTimings[1]);
         }
+
+        if (this.endDate.isBefore(this.startDate)) {
+            throw new DukeInvalidArgumentException(
+                    "Invalid date format inputted by user",
+                    " \u2639 OOPS!!! The second timing is not after the first one!");
+        }
     }
 }

@@ -80,21 +80,23 @@ class Parser {
             switch (c) {
             case '{':
                 break;
-            case '}':
-                break;
             case ':':
                 isKey = false;
                 break;
             case ',':
+            case '}':
                 isKey = true;
                 try {
                     StorageKey key = StorageKey.valueOf(currentKey.toString().trim());
                     lineMap.put(key, currentValue.toString().trim());
+                    currentKey = new StringBuilder();
+                    currentValue = new StringBuilder();
                 } catch (IllegalArgumentException ex) {
                     throw new DukeTaskFileParseException(
                             "Invalid key found in storage file (line will be skipped)",
                             " \u2639 OOPS!!! I found an invalid storage key in your storage file,\n"
-                                    + "   I'll skip that line!");
+                                    + " I'll skip that line!\n"
+                                    + String.format("   Invalid Key: \'%s\'", currentKey.toString()));
                 }
                 break;
             default:

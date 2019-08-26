@@ -1,7 +1,8 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

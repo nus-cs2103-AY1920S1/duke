@@ -6,15 +6,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Database {
+public class Storage {
 
-    static final String FILEPATH = "data/duke.txt";
+    String filePath;
+    Ui ui;
 
-    public Database() {}
+    public Storage(String filePath, Ui ui) {
+        this.filePath = filePath;
+        this.ui = ui;
+    }
 
-    public static List<Task> retrieveData() {
+    public List<Task> load() {
 
-        File file = new File(FILEPATH);
+        File file = new File(filePath);
         List<Task> list = new LinkedList<>();
 
         try {
@@ -40,18 +44,18 @@ public class Database {
                 list.add(task);
             }
         } catch (FileNotFoundException e) {
-            System.err.println("Data file does not exist.");
+            ui.showError("Data file does not exist.");
         } catch (DukeException e) {
-            System.err.println(e);
+            ui.showError(e.getMessage());
         }
 
         return list;
     }
 
-    public static void updateData(List<Task> list) {
+    public void updateData(List<Task> list) {
 
         try {
-            FileWriter fw = new FileWriter(FILEPATH);
+            FileWriter fw = new FileWriter(filePath);
             while (!list.isEmpty()) {
                 Task task = list.remove(0);
                 StringBuilder sb = new StringBuilder();
@@ -72,7 +76,7 @@ public class Database {
             }
             fw.close();
         } catch (IOException e) {
-            System.err.println("Data file does not exist.");
+            ui.showError("Data file does not exist.");
         } finally {
         }
     }

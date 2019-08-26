@@ -14,7 +14,7 @@ fi
 
 # From: https://stackoverflow.com/questions/6623161/javac-option-to-compile-all-java-files-under-a-given-directory-recursively
 # Get all of our java files
-find .. -name *.java > sources.txt
+find ../src/main -name *.java > sources.txt
 
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin @sources.txt

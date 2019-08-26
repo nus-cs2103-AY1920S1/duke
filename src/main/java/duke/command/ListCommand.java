@@ -19,8 +19,8 @@ public class ListCommand implements Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.prettyPrint4("Here are the tasks in your list");
         int length = tasks.getSize();
-        for (int i = 0; i < length; i++) {
-            ui.prettyPrint4(String.format("%d.%s\n", i + 1, tasks.get(i)));
+        for (int i = 1; i <= length; i++) {
+            ui.prettyPrint4(String.format("%d.%s\n", i, tasks.get(i)));
         }
     }
 }

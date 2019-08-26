@@ -3,6 +3,7 @@ package duke;
 import java.util.List;
 import java.util.ArrayList;
 import duke.task.Task;
+import duke.util.Ui;
 
 public class TaskList {
     private List<Task> list;
@@ -42,7 +43,7 @@ public class TaskList {
      * @return Task
      */
     public Task get(int index) {
-        return this.list.get(index);
+        return this.list.get(index - 1);
     }
 
     /**

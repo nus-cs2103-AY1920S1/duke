@@ -2,10 +2,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Checks all the possible errors that can occur
+ * during entry of command and throws DukeException with message
+ */
 public class Verify {
     public Verify() {
     }
-
+    /**
+     * 
+     * @param str the input string
+     * @return returns if the string is a number
+     */
     public static boolean isNum(String str) {
         try {
             int i = Integer.parseInt(str);
@@ -15,6 +23,13 @@ public class Verify {
         return true;
     }
 
+    /**
+     * 
+     * @param command the string command entered by user
+     * @param list the task list to compare with for checking validity
+     * @param formatter date formatter to catch wrong date format exceptions
+     * @throws DukeException in the case of invalid input
+     */
     public static void validCommand(String command, TaskList list, DateTimeFormatter formatter) throws DukeException {
         if (command.startsWith("done")) {
             if (command.split(" ").length < 2) {

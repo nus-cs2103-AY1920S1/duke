@@ -1,6 +1,8 @@
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
+/**
+ * main class, calls functions and other classes as needed
+ */
 public class Duke {
 
     public static void main(String[] args) {

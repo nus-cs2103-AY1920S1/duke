@@ -5,7 +5,14 @@ public class Parser {
     public Ui ui = new Ui();
 
     public Parser() {}
-
+    /**
+     * parses and excecutes the command user enters
+     * @param command entered command
+     * @param list task list
+     * @param formatter datetime formatter
+     * @return false if user wishes to terminate program, true otherwise
+     * @throws DukeException due to checking validity of command
+     */
     public boolean parse(String command, TaskList list, DateTimeFormatter formatter) throws DukeException {
         Verify.validCommand(command, list, formatter);
         if (command.equals("bye")) {

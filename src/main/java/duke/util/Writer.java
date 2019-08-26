@@ -1,11 +1,5 @@
 package duke.util;
 
-import duke.task.Task;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.ToDo;
-import duke.task.TaskType;
-import duke.error.InvalidFileException;
 import java.util.List;
 import java.util.ArrayList;
 //CHECKSTYLE:OFF - Doing this because Paths need the * import
@@ -13,6 +7,13 @@ import java.nio.file.*;
 //CHECKSTYLE:ON
 import java.lang.IndexOutOfBoundsException;
 import java.io.IOException;
+import java.text.ParseException;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.ToDo;
+import duke.task.TaskType;
+import duke.error.InvalidFileException;
 
 public class Writer {
     private Path path;
@@ -59,10 +60,9 @@ public class Writer {
             String name = task.getName();
             TaskType type = task.getType();
             String isDone = task.getIsDone() ? "1" : "0";
-            String timeUnformatted = task.getTime().orElse("");
-            String time = timeUnformatted.equals("") 
-                            ? "" 
-                            : String.format(" | %s", timeUnformatted);
+            String time = task.getTime().isPresent()
+                            ? String.format(" | %s", task.getTime().get())
+                            : "";
             result += String.format("%s | %s | %s%s\n", type, isDone, name, time);
         }
         return result;
@@ -81,18 +81,24 @@ public class Writer {
                 String[] lineArr = line.split(" \\| ");
                 switch (lineArr[0]) {
                 case "EVENT":
-                    result.add(new Event(lineArr[2], lineArr[3], lineArr[1].equals("1")));
+                    result.add(new Event(lineArr[2],
+                               DateUtil.parseFileStringToDate(lineArr[3]),
+                               lineArr[1].equals("1")));
                     break;
                 case "TODO":
                     result.add(new ToDo(lineArr[2], lineArr[1].equals("1")));
                     break;
                 case "DEADLINE":
-                    result.add(new Deadline(lineArr[2], lineArr[3], lineArr[1].equals("1")));
+                    result.add(new Deadline(lineArr[2], 
+                               DateUtil.parseFileStringToDate(lineArr[3]), 
+                               lineArr[1].equals("1")));
                     break;
                 default:
                 }
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Error decoding data from file");
+            } catch (ParseException e) {
+                System.out.println("Error decoding the date from the file");
             }            
         } 
         return result;

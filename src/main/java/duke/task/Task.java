@@ -1,18 +1,19 @@
 package duke.task; 
 
 import java.util.Optional;
+import java.util.Date;
 
 public abstract class Task {
     String name;
     TaskType type;
-    Optional<String> time;
+    Optional<Date> time;
     boolean isDone;
 
     /**
      * Constructor.
      * @param name String
      */
-    public Task(String name, Optional<String> time, TaskType type, boolean isDone) {
+    public Task(String name, Optional<Date> time, TaskType type, boolean isDone) {
         this.name = name;
         this.time = time;
         this.type = type;
@@ -38,7 +39,7 @@ public abstract class Task {
      * Get time.
      * @return Optional of String
      */
-    public Optional<String> getTime() {
+    public Optional<Date> getTime() {
         return this.time;
     }
 

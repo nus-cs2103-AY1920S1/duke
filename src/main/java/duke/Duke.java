@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -10,48 +11,53 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> tasks;
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        tasks = new ArrayList<>();
+        try {
+            Storage storage = new Storage("data/duke.txt");
+            ArrayList<Task> tasks = storage.load();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello! I'm Duke");
+            System.out.println("What can I do for you?");
 
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-
-        boolean readingCommands = true;
-        while (readingCommands) {
-            try {
+            boolean readingCommands = true;
+            while (readingCommands) {
                 String input = sc.nextLine();
                 String[] inputWords = input.split(" ", 2);
                 String command = inputWords[0];
 
                 switch (command) {
                     case "todo": {
-                        String description = inputWords[1];
-                        addTask(new ToDo(description));
+                        try {
+                            String description = inputWords[1];
+                            storage.addTask(new ToDo(description));
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("The description of a todo cannot be empty.");
+                        }
                         break;
                     }
 
                     case "deadline": {
-                        String[] params = inputWords[1].split(" /by ");
-                        String description = params[0];
-                        String by = params[1];
-                        addTask(new Deadline(description, by));
+                        try {
+                            String[] params = inputWords[1].split(" /by ");
+                            String description = params[0];
+                            String by = params[1];
+                            storage.addTask(new Deadline(description, by));
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("Creating a Deadline failed: Insufficient parameters provided");
+                        }
                         break;
                     }
 
                     case "event": {
-                        String[] params = inputWords[1].split(" /at ");
-                        String description = params[0];
-                        String at = params[1];
-                        addTask(new Event(description, at));
+                        try {
+                            String[] params = inputWords[1].split(" /at ");
+                            String description = params[0];
+                            String at = params[1];
+                            storage.addTask(new Event(description, at));
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("Creating an Event failed: Insufficient parameters provided");
+                        }
                         break;
                     }
 
@@ -65,16 +71,20 @@ public class Duke {
 
                     case "done": {
                         int id = Integer.parseInt(inputWords[1]) - 1;
-                        Task task = tasks.get(id);
-                        task.markAsDone();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(task);
+                        try {
+                            Task task = tasks.get(id);
+                            task.markAsDone();
+                            System.out.println("Nice! I've marked this task as done:");
+                            System.out.println(task);
+                        } catch (IndexOutOfBoundsException e) {
+                            throw new DukeException("Marking task with ID " + id + " failed: Invalid ID");
+                        }
                         break;
                     }
 
                     case "delete": {
                         int id = Integer.parseInt(inputWords[1]) - 1;
-                        deleteTask(id);
+                        storage.deleteTask(id);
                         break;
                     }
 
@@ -85,39 +95,14 @@ public class Duke {
                     }
 
                     default: {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
             }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         sc.close();
-    }
-
-    private static void printTaskCount() {
-        if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
-        } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        }
-    }
-
-    private static void addTask(Task task) {
-        tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        printTaskCount();
-    }
-
-    private static void deleteTask(int id) {
-        Task task = tasks.get(id);
-        tasks.remove(id);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        printTaskCount();
     }
 }
 

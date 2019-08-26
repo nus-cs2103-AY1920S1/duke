@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.tasks.Task;
+import seedu.duke.tasks.TaskList;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 public class Serialisation {
     public final static String DATA_FILE_PATH = "duke.dat";
@@ -16,15 +15,14 @@ public class Serialisation {
     private Serialisation() {
     }
 
-    @SuppressWarnings("unchecked")
-    public static ArrayList<Task> deserialise() {
+    public static TaskList deserialise() {
         if (!new File(DATA_FILE_PATH).exists()) {
             return null;
         }
 
         try (FileInputStream file = new FileInputStream(DATA_FILE_PATH);
              ObjectInputStream ois = new ObjectInputStream(file)) {
-            return (ArrayList<Task>) ois.readObject();
+            return (TaskList) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error while loading data file.");
             e.printStackTrace();
@@ -33,7 +31,7 @@ public class Serialisation {
         return null;
     }
 
-    public static void serialise(ArrayList<Task> tasks) {
+    public static void serialise(TaskList tasks) {
         try (FileOutputStream file = new FileOutputStream(DATA_FILE_PATH);
              ObjectOutputStream ois = new ObjectOutputStream(file)) {
             ois.writeObject(tasks);

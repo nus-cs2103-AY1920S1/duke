@@ -5,6 +5,7 @@ import seedu.duke.cli.CommandException;
 import seedu.duke.cli.Parser;
 import seedu.duke.cli.commands.ByeCommand;
 import seedu.duke.tasks.Task;
+import seedu.duke.tasks.TaskList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,10 +24,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?\n");
 
-        ArrayList<Task> taskList = Serialisation.deserialise();
+        TaskList taskList = Serialisation.deserialise();
         if (taskList == null) {
             System.out.println("No saved list loaded.");
-            taskList = new ArrayList<>();
+            taskList = new TaskList();
         } else {
             System.out.printf("Loaded tasks from %s.%n", Serialisation.DATA_FILE_PATH);
         }

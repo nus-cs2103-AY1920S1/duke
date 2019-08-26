@@ -2,9 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a personal assistant chatbot that keeps track of tasks.

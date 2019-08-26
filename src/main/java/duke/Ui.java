@@ -10,7 +10,7 @@ import java.util.Scanner;
  * A <code>Ui</code> object handles interaction between the user and the chatbot by reading and outputting messages.
  */
 public class Ui {
-    Scanner userInput = new Scanner(System.in);
+    protected Scanner userInput = new Scanner(System.in);
 
     /**
      * Prints the Duke logo and greets the user for the first time the program is run.

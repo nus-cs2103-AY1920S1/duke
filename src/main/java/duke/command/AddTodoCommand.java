@@ -33,6 +33,7 @@ public class AddTodoCommand extends Command {
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
      * @throws DukeException If insufficient or incorrect details are provided.
      */
+
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (details.trim().length() == 0) {
             throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
@@ -75,6 +76,4 @@ public class AddTodoCommand extends Command {
             return false;
         }
     }
-
-
 }

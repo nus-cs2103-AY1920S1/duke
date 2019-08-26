@@ -6,7 +6,6 @@ package duke.exception;
  * have the wrong format.
  */
 public class DukeException extends Exception {
-
     protected String message;
 
     /**

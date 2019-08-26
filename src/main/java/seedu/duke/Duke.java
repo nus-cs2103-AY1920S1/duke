@@ -15,6 +15,11 @@ import java.util.ArrayList;
 public class Duke {
     private static final String PROMPT = "> ";
 
+    /**
+     * The main method.
+     *
+     * @param args the command line
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

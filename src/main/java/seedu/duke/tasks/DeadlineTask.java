@@ -7,11 +7,22 @@ public class DeadlineTask extends Task {
 
     private final LocalDateTime deadline;
 
+    /**
+     * Create a deadline with a deadline.
+     *
+     * @param description the deadline description
+     * @param deadline the deadline
+     */
     public DeadlineTask(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
+    /**
+     * Get the deadline's deadline.
+     *
+     * @return the deadline
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }

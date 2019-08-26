@@ -34,18 +34,36 @@ public class Duke {
         this.greetHello();
         do {
             String input = sc.nextLine();
-            switch (input) {
+            String firstWord = input.split(" ", 2)[0];
+            switch (firstWord) {
             case "bye":
                 notShutdown = false;
                 break;
             case "list":
                 this.printList();
                 break;
+            case "done":
+                String secondWord = input.split(" ")[1];
+                int taskIndex = Integer.parseInt(secondWord);
+                this.markTaskAsDone(taskIndex);
+                break;
             default:
                 this.addToList(input);
             }
         } while (notShutdown);
         this.greetGoodbye();
+    }
+
+    private void markTaskAsDone(int taskIndex) {
+        if (taskIndex < 0 || taskIndex > this.list.size()) {
+            this.formattedPrintln("Hey! There's no such task!\n");
+            return;
+        }
+        taskIndex--; // convert to zero-indexing
+        this.list.get(taskIndex).markAsDone();
+
+        this.formattedPrintln("Nice! I've marked this task as done:\n  "
+                + this.list.get(taskIndex));
     }
 
     // Add a description to the current list
@@ -64,9 +82,11 @@ public class Duke {
             Iterator iter = this.list.iterator();
             StringBuilder output = new StringBuilder();
 
+            output.append("Here are the tasks in your list:\n");
             while (iter.hasNext()) {
+                output.append("  ");
                 output.append(index);
-                output.append(". ");
+                output.append(".");
                 output.append(iter.next());
                 output.append("\n");
                 index++;

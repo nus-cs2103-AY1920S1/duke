@@ -35,3 +35,7 @@ shadowJar {
 checkstyle {
     toolVersion = '8.23'
 }
+
+run {
+    standardInput = System.in
+}

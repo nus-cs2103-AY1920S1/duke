@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents the list of Tasks in a Duke object.
@@ -44,6 +46,21 @@ public class TaskList {
 
     public int taskListSize() {
         return this.tasks.size();
+    }
+
+    public TaskList findTasks(String keyWord) {
+        TaskList tasksWithKeyWord = new TaskList();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            String[] descriptionSplit = currentTask.getDescription().split(" ");
+            List<String> descriptionWords = Arrays.asList(descriptionSplit);
+            if (descriptionWords.contains(keyWord)) {
+                tasksWithKeyWord.addTask(currentTask);
+            }
+        }
+
+        return tasksWithKeyWord;
     }
 
 }

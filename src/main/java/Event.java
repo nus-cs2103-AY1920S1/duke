@@ -1,35 +1,35 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 /**
  * Encapsulates an Task object of the type Event.
  * Represents a Event task that has a specific duration.
  */
 public class Event extends Task {
-    protected String duration;
+    protected Date start;
+    protected Date end;
 
     /**
      * Constructs an Event object.
      *
      * @param description This is the short description of the task.
-     * @param duration This represents the duration of the Event will last.
-     *                 It should include the day the event is held
-     *                 and the time frame of the event.
-     *                 The format should follow "at: Day Time period".
-     *                 E.g. at: Sunday 2 - 4pm
-     *                 Alternatively, the user has
-     *                 the freedom to specify their own duration of
-     *                 the event such as "by no idea :-P"
+     * @param start This represents the start of the event.
+     * @param end This represents the end time of the event.
      */
-    public Event(String description, String duration) {
+    public Event(String description, Date start, Date end) {
         super(description);
         this.typeOfTask = "E";
-        this.duration = duration;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String toString() {
-        String[] prepositionSplit = duration.split(" ",2);
         String statusIcon = this.getStatusIcon();
+        SimpleDateFormat startFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        SimpleDateFormat endFormat = new SimpleDateFormat(" - HHmm");
         return ("[" + typeOfTask + "]" + "[" + statusIcon + "] "
-                + description + "(" + prepositionSplit[0] + ": "
-                + prepositionSplit[1] + ")");
+                + description + "(at: "
+                + startFormat.format(start) + endFormat.format(end) + ")");
     }
 }

@@ -1,5 +1,9 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.Date;
 
 /**
  * Entry point of this project Duke. Duke is a Task manager that aims
@@ -40,10 +44,10 @@ public class Duke {
                      continue;
                  }
 
-                 String[] dueSplit = input.split("/");
+                 String[] dueSplit = input.split("/", 2);
                  String due = "dummy";
                  if (dueSplit.length > 1) {
-                     due = dueSplit[1];
+                     due = dueSplit[1].split(" ", 2)[1];
                  }
                  String[] doneMarkers = dueSplit[0].split(" ", 2);
                  String userCommand = doneMarkers[0].toLowerCase();
@@ -87,20 +91,27 @@ public class Duke {
                          t = new Todo(taskDescription);
                          taskStorage.add(t);
                      } else if (userCommand.equals("deadline")) {
+                         Date dateDue = convertStringToDate(due);
+//                         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//                         System.out.println(format.format(dateDue));
                          if (taskDescription.equals("dummy")) {
                              throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
                          } else if (due.equals("dummy")) {
                              throw new EmptyDueDateException("The due date and time of this deadline is not specified.");
                          }
-                         t = new Deadline(taskDescription, due);
+                         t = new Deadline(taskDescription, dateDue);
                          taskStorage.add(t);
                      } else if (userCommand.equals("event")) {
+                         String[] eventStartEnd = due.split("-", 2);
+                         Date start = convertStringToDate(eventStartEnd[0]);
+                         Date end = convertStringToDate(eventStartEnd[1]);
+
                          if (taskDescription.equals("dummy")) {
                              throw new EmptyDescriptionException("The description of a event cannot be empty.");
                          } else if (due.equals("dummy")) {
                              throw new EmptyDueDateException("The due date and time of this task are not specified.");
                          }
-                         t = new Event(taskDescription, due);
+                         t = new Event(taskDescription, start, end);
                          taskStorage.add(t);
                      } else {
                          throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
@@ -140,5 +151,24 @@ public class Duke {
      */
     private static void removeTask(ArrayList taskStorage, int index) {
         taskStorage.remove(index);
+    }
+
+    private static Date convertStringToDate(String input) {
+        Date date = new Date();
+        try {
+            if (input.length() <= 5) {
+                SimpleDateFormat formatTimeOnly = new SimpleDateFormat("HHmm");
+                date = formatTimeOnly.parse(input.trim());
+                return date;
+            } else {
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm", Locale.ENGLISH);
+                date = format.parse(input);
+                return date;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+//            System.out.println("The format of your due date seems to be incorrect.");
+        }
+        return date;
     }
 }

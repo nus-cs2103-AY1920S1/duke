@@ -1,9 +1,12 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Encapsulates a Task object of the type Deadline.
  * Represents a Deadline task that has specific due date/ due time.
  */
 public class Deadline extends Task {
-    protected String endDate;
+    protected Date endDate;
 
     /**
      * Constructs a new Deadline task.
@@ -17,7 +20,7 @@ public class Deadline extends Task {
      *                the freedom to specify their own duration of
      *                the event such as "by no idea :-P"
      */
-    public Deadline(String description, String endDate) {
+    public Deadline(String description, Date endDate) {
         super(description);
         this.endDate = endDate;
         this.typeOfTask = "D";
@@ -25,10 +28,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String[] prepositionSplit = endDate.split(" ", 2);
         String statusIcon = this.getStatusIcon();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         return ("[" + typeOfTask + "]" + "[" + statusIcon + "] "
-                + description + "(" + prepositionSplit[0] + ": "
-                + prepositionSplit[1] + ")");
+                + description + "(by: "
+                + format.format(endDate) + ")");
     }
 }

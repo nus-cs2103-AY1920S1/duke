@@ -8,6 +8,11 @@ public abstract class Task {
         this.taskName = taskName;
     }
 
+    public Task(Status status, String taskName) {
+        this.completed = status;
+        this.taskName = taskName;
+    }
+
     public boolean markAsComplete() {
         if (this.completed == Status.INCOMPLETE) {
             completed = Status.COMPLETE;
@@ -21,5 +26,7 @@ public abstract class Task {
     public String toString() {
         return "[" + (this.completed == Status.COMPLETE ? "✓" : "✗") + "] " + taskName;
     }
+
+    abstract public String toSaveString();
 
 }

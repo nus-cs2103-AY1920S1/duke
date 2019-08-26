@@ -2,15 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.Exception;
 
-/*
-public class runDuke{
-    public static void main(String[] args) throws CommandNotRecognizedException {
-        Duke duke = new Duke();
-        duke.runDuke();
-    }
-}
-*/
-
 enum Command{
     LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, ECHO;
 }
@@ -50,9 +41,7 @@ public class Duke {
                 if(cmd == Command.BYE){
                     System.out.println(processText(goodbye));
                     break;
-                }
-
-                else if (cmd == Command.LIST){
+                } else if (cmd == Command.LIST){
                     // Error Handling: ListEmpty
                     if(listCounter == 0){
                         // Clear buffer of scanner
@@ -68,13 +57,9 @@ public class Duke {
                         printList = printList + temp;
                         if (i != listCounter - 1) printList = printList + "\n";
                     }
-
                     System.out.println(processText(printList));
-                }
-
-                else if (cmd == Command.TODO){
+                } else if (cmd == Command.TODO){
                     String toDoItem = sc.nextLine().trim();
-
                     // Implies only word "deadline"
                     if(toDoItem.equals("")) {
                         throw new EmptyCommandField("todo");
@@ -85,9 +70,7 @@ public class Duke {
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
-                }
-
-                else if (cmd == Command.EVENT){
+                } else if (cmd == Command.EVENT){
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
 
@@ -106,9 +89,7 @@ public class Duke {
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
-                }
-
-                else if (cmd == Command.DEADLINE){
+                } else if (cmd == Command.DEADLINE){
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
 
@@ -128,9 +109,7 @@ public class Duke {
                     String tempPrint = addedTaskText();
 
                     System.out.println(processText(tempPrint));
-                }
-
-                else if (cmd == Command.DONE){
+                } else if (cmd == Command.DONE){
                     // Cannot perform done in zero list
                     if(listCounter == 0){
                         // Clear buffer of scanner
@@ -150,14 +129,7 @@ public class Duke {
 
                     String doneMessage = "Nice! I've marked this task as done: \n\t\t";
                     System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
-                }
-
-                /*
-                README:
-                ECHO FUNCTION HAS BEEN REPLACED WITH COMMAND ECHO,
-                TO FACILITATE COMMANDS THAT ARE NOT RECOGNIZABLE.
-                 */
-                else if (cmd == Command.ECHO){
+                } else if (cmd == Command.ECHO){
                     // Read any remaining lines
                     String echoInput = sc.nextLine().trim();
 
@@ -171,9 +143,8 @@ public class Duke {
 
                     String processedInput = Duke.processText(echoInput);
                     System.out.println(processedInput);
-                }
 
-                else if (cmd == Command.DELETE){
+                } else if (cmd == Command.DELETE){
                     // Incorrect format for delete
                     if(!sc.hasNextInt()){
                         sc.nextLine();
@@ -190,32 +161,22 @@ public class Duke {
                     Task deletedTask = list.remove(numberToDelete - 1);
                     listCounter--;
                     String tempPrint = "Noted. I've removed this task:\n\t\t" +
-                            deletedTask.getItemInfo() +
-                            "\n\tNow you have "+ listCounter + " tasks in the list.";
+                            deletedTask.getItemInfo() + "\n\tNow you have "+ listCounter + " tasks in the list.";
                     System.out.println(processText(tempPrint));
                 }
-            }
 
-            catch (CommandNotRecognizedException c) {
+            } catch (CommandNotRecognizedException c) {
                 // Clear buffer of scanner
                 String i = sc.nextLine();
 
                 System.out.println(processText("\u263A OOPS!!! I'm sorry, but I don't know what that means :-("));
-            }
-
-            catch (EmptyCommandField e){
+            } catch (EmptyCommandField e){
                 System.out.println(processText("\u263A The description of " + e.getMessage() + " cannot be empty."));
-            }
-
-            catch (EmptyListException l){
+            } catch (EmptyListException l){
                 System.out.println(processText("\u263A List is empty! " + l.getMessage()));
-            }
-
-            catch (CommandFieldFormatException f){
+            } catch (CommandFieldFormatException f){
                 System.out.println(processText("\u263A Description format is incorrect for " + f.getMessage() + "."));
-            }
-
-            catch (InvalidNumberException n){
+            } catch (InvalidNumberException n){
                 System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
             }
         }

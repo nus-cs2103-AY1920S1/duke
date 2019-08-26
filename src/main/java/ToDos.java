@@ -1,11 +1,11 @@
 public class ToDos extends Task {
 
-    public ToDos(String description){
+    public ToDos(String description) {
         super(description);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + "[" + getStatusIcon() + "] " + getDescription();
     }
 }

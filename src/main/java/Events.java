@@ -1,18 +1,18 @@
-public class Events extends Task{
+public class Events extends Task {
 
     protected String date;
 
-    public Events(String description, String date){
+    public Events(String description, String date) {
         super(description);
         this.date = date;
     }
 
-    public String getDate(){
+    public String getDate() {
         return this.date;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at: " + date + ")";
     }
 }

@@ -2,7 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class ToDoList {
-    public void run(){
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         String border = "    ____________________________________________________________";
         ArrayList<Task> arr = new ArrayList<Task>();
@@ -10,32 +11,31 @@ public class ToDoList {
 
         String input = sc.nextLine();
 
-        while (!input.equals("bye")){ //first check for bye command
-            if(input.equals("list")){ //check if list command
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
                 System.out.println(border);
                 System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < counter; i++){
+                for (int i = 0; i < counter; i++) {
                     System.out.println("     " + (i + 1) + "." + arr.get(i));
                 }
                 System.out.println(border);
             } else {
                 String[] temp = input.split(" ");
-                if (temp[0].equals("done")){ //command to add task as done
-                    try{
+                if (temp[0].equals("done")) {
+                    try {
                         int done = Integer.parseInt(temp[1]) - 1;
                         arr.get(done).markAsDone();
                         System.out.println(border);
                         System.out.println("     Nice! I've marked this task as done: ");
                         System.out.println("       " + arr.get(done));
                         System.out.println(border);
-                    }
-                    catch (NullPointerException e){
+                    } catch (NullPointerException e) {
                         System.out.println(border);
                         System.out.println("     Please input a valid task number.");
                         System.out.println(border);
                     }
 
-                } else if (temp[0].equals("delete")){ //command to delete task
+                } else if (temp[0].equals("delete")) { //command to delete task
                     try {
                         Task toRemove = arr.get(Integer.parseInt(temp[1]) - 1);
                         counter--;
@@ -55,32 +55,34 @@ public class ToDoList {
 
                     String date;
                     String message;
-                    Boolean added = false;
+                    boolean added = false;
 
                     try {
-                        switch (temp[0]){
-                            case "deadline":
-                                date = input.substring(input.indexOf("/") + 4);
-                                message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                                arr.add(new Deadlines(message, date));
-                                added = true;
-                                break;
-                            case "event":
-                                date = input.substring(input.indexOf("/") + 4);
-                                message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                                arr.add(new Events(message, date));
-                                added = true;
-                                break;
-                            case "todo":
-                                if (temp.length < 2) throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
-                                message = input.substring(input.indexOf(' ') + 1);
-                                arr.add(new ToDos(message));
-                                added = true;
-                                break;
+                        switch (temp[0]) {
+                        case "deadline":
+                            date = input.substring(input.indexOf("/") + 4);
+                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                            arr.add(new Deadlines(message, date));
+                            added = true;
+                            break;
+                        case "event":
+                            date = input.substring(input.indexOf("/") + 4);
+                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
+                            arr.add(new Events(message, date));
+                            added = true;
+                            break;
+                        case "todo":
+                            if (temp.length < 2) {
+                                throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            message = input.substring(input.indexOf(' ') + 1);
+                            arr.add(new ToDos(message));
+                            added = true;
+                            break;
                         }
 
                         if (added) {
-                            counter ++;
+                            counter++;
                             System.out.println(border);
                             System.out.println("     Got it. I've added this task: ");
                             System.out.println("       " + arr.get(counter - 1));
@@ -89,11 +91,9 @@ public class ToDoList {
                         } else {
                             throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
-                    }
-                    catch (DukeException e){
+                    } catch (DukeException e) {
                         System.out.println(e);
-                    }
-                    catch (StringIndexOutOfBoundsException e){
+                    } catch (StringIndexOutOfBoundsException e) {
                         System.out.println(border);
                         System.out.println("     Please input a task and date.");
                         System.out.println(border);
@@ -104,8 +104,8 @@ public class ToDoList {
 
             input = sc.nextLine();
         }
-        if (input.equals("bye")){
-            System.out.println(border + "\n" + "     Bye. Hope to see you again soon!" + "\n" +border);
+        if (input.equals("bye")) {
+            System.out.println(border + "\n" + "     Bye. Hope to see you again soon!" + "\n" + border);
         }
     }
 }

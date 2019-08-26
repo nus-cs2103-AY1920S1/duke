@@ -4,13 +4,11 @@ import seedu.duke.cli.Command;
 import seedu.duke.cli.CommandException;
 import seedu.duke.cli.Parser;
 import seedu.duke.cli.commands.ByeCommand;
-import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Duke {
     private static final String PROMPT = "> ";

@@ -13,7 +13,6 @@ import seedu.duke.cli.commands.TodoCommand;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,11 +20,8 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Parser {
-    // This class is to be used statically only.
-    private Parser() {}
-
-    private static HashMap<String, ConstructorCache> constructors;
     private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
+    private static HashMap<String, ConstructorCache> constructors;
 
     static {
         constructors = new HashMap<>();
@@ -36,6 +32,10 @@ public class Parser {
         addConstructors(EventCommand.class);
         addConstructors(DeadlineCommand.class);
         addConstructors(DeleteCommand.class);
+    }
+
+    // This class is to be used statically only.
+    private Parser() {
     }
 
     @SuppressWarnings("unchecked")
@@ -71,7 +71,7 @@ public class Parser {
      * @return An object representing the parsed command, or {@code null} if no matching command was
      * found
      * @throws CommandException if there were insufficient arguments or some arguments were invalid
-     * for their type
+     *                          for their type
      */
     public static Command parse(String in) throws CommandException {
         String[] tok = in.split("\\s", 2);

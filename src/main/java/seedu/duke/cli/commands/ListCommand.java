@@ -1,14 +1,15 @@
 package seedu.duke.cli.commands;
 
-import seedu.duke.tasks.Task;
 import seedu.duke.cli.Command;
 import seedu.duke.cli.annotations.CommandConstructor;
+import seedu.duke.tasks.Task;
 
 import java.util.List;
 
 public class ListCommand implements Command {
     @CommandConstructor("list")
-    public ListCommand() {}
+    public ListCommand() {
+    }
 
     @Override
     public boolean execute(List<Task> taskList) {

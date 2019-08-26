@@ -20,18 +20,16 @@ import java.util.Map;
  */
 public class Storage {
 
-    private static String PARSE_ERROR_MSG =
-            " \u2639 Oops! I encountered an error while reading your previous tasks,\n"
-                    + " I ignored that line of input but you should check it out...\n";
-    private static final String FALLBACK_FILE_PATH = "../data";
     private static final String DATA_FILE_NAME = "taskData.txt";
     private static final int DIRECTORY_SEARCH_LIMIT = 5;
+    private String dirName;
     private String filePath;
     private Ui ui;
 
     public Storage(String dirName, Ui ui) {
-        setFilePath(dirName);
+        this.dirName = dirName;
         this.ui = ui;
+        setFilePath();
     }
 
     public void loadTasksToList(TaskList taskList) {
@@ -42,7 +40,7 @@ public class Storage {
         } catch (FileNotFoundException ex) {
             ui.printLineDivider();
             ui.printMsgLine(" I did not find any previous data in your data directory\n"
-                    + " I'll create one when you save something!");
+                    + " I'll try to create one when you save something!");
             ui.printLineDivider();
             ui.printEmptyLine();
             return;
@@ -166,7 +164,7 @@ public class Storage {
         }
     }
 
-    private void setFilePath(String dirName) {
+    private void setFilePath() {
         String workingDir = System.getProperty("user.dir");
         Path currentDir = Paths.get(workingDir);
 
@@ -179,9 +177,33 @@ public class Storage {
         }
 
         if (recursiveSearchCount > 5) {
-            this.filePath = Paths.get(FALLBACK_FILE_PATH, DATA_FILE_NAME).toString();
+            //create directory in pwd since it dosen't exist
+            Path fallbackDirPath = Paths.get(workingDir, dirName);
+
+            try {
+                if (!Files.isDirectory(fallbackDirPath)) {
+                    Files.createDirectory(fallbackDirPath);
+                }
+            } catch (IOException ex) {
+                printNoStorageMsg();
+            }
+
+            this.filePath = Paths.get(fallbackDirPath.toString(), DATA_FILE_NAME).toString();
         } else {
             this.filePath = Paths.get(currentDir.toString(), dirName, DATA_FILE_NAME).toString();
         }
+    }
+
+    private void printNoStorageMsg() {
+        ui.printLineDivider();
+        ui.printMsgLine(" \u2639 Oops! I failed to find a "
+                + dirName
+                + "   directory upwards\n"
+                + "   and could not create one!");
+        ui.printMsgLine(
+                " You can still run the application, but note your data\n"
+                    + "   will not be here the next time you restart the app!");
+        ui.printLineDivider();
+        ui.printEmptyLine();
     }
 }

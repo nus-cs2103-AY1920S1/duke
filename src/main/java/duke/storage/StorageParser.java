@@ -59,9 +59,7 @@ abstract class StorageParser {
         String jsonLine = line.trim();
         int lineLength = jsonLine.length();
 
-        boolean hasOpeningBracket = lineLength > 0
-                ? jsonLine.charAt(0) == '{'
-                : false;
+        boolean hasOpeningBracket = lineLength > 0 && jsonLine.charAt(0) == '{';
 
         if (!hasOpeningBracket) {
             throw new DukeTaskFileParseException(

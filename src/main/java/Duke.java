@@ -1,13 +1,8 @@
 import duke.command.Command;
 import duke.command.Parser;
-import duke.exception.*;
-import duke.task.Task;
+import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.ui.CmdUx;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Drives the Duke bot

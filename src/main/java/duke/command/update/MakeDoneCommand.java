@@ -3,8 +3,6 @@ package duke.command.update;
 import duke.command.Command;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Checkbox;
-import duke.ui.CmdUx;
 import duke.ui.Ui;
 
 public class MakeDoneCommand extends Command {

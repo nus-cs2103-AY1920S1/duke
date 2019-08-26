@@ -1,10 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeDeadlineException;
-import duke.exception.DukeEventException;
-import duke.exception.DukeTodoException;
-import duke.ui.CmdUx;
-
 import java.util.ArrayList;
 
 public class TaskList {

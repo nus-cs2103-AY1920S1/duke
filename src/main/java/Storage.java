@@ -1,19 +1,31 @@
 import java.io.*;
 import java.util.LinkedList;
 
-public class Storage {
+class Storage {
 
-    private String filepath;
-    private LinkedList<Task> allTasks = new LinkedList<>();
+    private final String filepath;
+    private final LinkedList<Task> allTasks = new LinkedList<>();
 
+    /**
+     * Initialises a Storage session.
+     *
+     * @param filepath
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Reads the input file line by line to add tasks into the TaskList.
+     *
+     * @return The LinkedList containing all loaded tasks.
+     * @throws DukeException In the event that the file cannot be read properly.
+     */
     public LinkedList<Task> load() throws DukeException {
         try {
             File f = new File(filepath);
             if (f.exists()) {
+
             } else {
                 f.createNewFile();
             }
@@ -38,7 +50,6 @@ public class Storage {
                 }
                 if (formatted_text[1].equals("1")) {
                     t.markAsDone();
-                } else {
                 }
                 allTasks.add(t);
             }
@@ -48,18 +59,27 @@ public class Storage {
         return allTasks;
     }
 
-    public boolean appendTaskToFile(Task t) {
+    /**
+     * Append a new task to the end of the file.
+     *
+     * @param t The task to be added.
+     */
+    public void appendTaskToFile(Task t) {
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(filepath, true));
-            output.append(t.toStore() + "\n");
+            output.append(t.toStore()).append("\n");
             output.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
     }
 
-    public boolean deleteTaskFromFile(Task t) {
+    /**
+     * Deletes a task from the file.
+     *
+     * @param t The task to be deleted.
+     */
+    public void deleteTaskFromFile(Task t) {
         File inputFile = new File(filepath);
         File tempFile = new File("temp.txt");
         try {
@@ -81,6 +101,6 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return tempFile.renameTo(inputFile);
+        tempFile.renameTo(inputFile);
     }
 }

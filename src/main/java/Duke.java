@@ -1,19 +1,14 @@
-import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Scanner;
-
-public class Duke {
-    private Storage storage;
+class Duke {
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
-    public Duke(String filePath) {
+    /**
+     * Initialise new Duke session.
+     */
+    private Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -22,7 +17,10 @@ public class Duke {
         }
     }
 
-    public void run() {
+    /**
+     * Starts the session and parses user input.
+     */
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -41,6 +39,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 }

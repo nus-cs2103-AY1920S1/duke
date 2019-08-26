@@ -1,5 +1,12 @@
-public class Parser {
+class Parser {
 
+    /**
+     * Parses any user inputs and determines the type of command that was entered.
+     *
+     * @param fullCommand The command input by user
+     * @return The type of command entered
+     * @throws DukeException In the event that a command has an incorrect format/ empty description.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         //Parse the string to check which command it is referring to
         String[] details = fullCommand.trim().split("\\s+");
@@ -22,7 +29,7 @@ public class Parser {
                     throw new DukeException("I'm sorry, but I don't know what that means :-( ");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Incorrect format. Missing a task index. for e.g. " + details[0] + " 3");
+            throw new DukeException("Incorrect format. Missing a task index. \nPlease try again with the following format: " + details[0] + " 3");
         }
     }
 }

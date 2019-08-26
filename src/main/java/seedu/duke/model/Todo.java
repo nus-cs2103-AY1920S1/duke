@@ -1,11 +1,15 @@
 package seedu.duke.model;
 
-import seedu.duke.model.Task;
-
 public class Todo extends Task{
 
     public Todo(String description) {
         super(description);
+        this.type = "T";
+    }
+
+    public Todo(String description, int status) {
+        super(description, status);
+        this.type = "T";
     }
 
     @Override

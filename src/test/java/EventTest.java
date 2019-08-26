@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class EventTest {
     @Test
-    public void testStringConversion() throws Exception{
-        assertEquals("[E][\u2718] test event (at: 1st of January 2019, 06:00PM)", (new Event("test event","1/1/2019 1800")).toString());
+    public void testStringConversion() throws Exception {
+        assertEquals("[E][\u2718] test event (at: 1st of January 2019, 06:00PM)",
+                (new Event("test event","1/1/2019 1800")).toString());
     }
 
     @Test

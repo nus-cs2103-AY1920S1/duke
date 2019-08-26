@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeadlineTest {
     @Test
-    public void testStringConversion() throws Exception{
-        assertEquals("[D][\u2718] test deadline (by: 1st of January 2019, 06:00PM)", (new Deadline("test deadline","1/1/2019 1800")).toString());
+    public void testStringConversion() throws Exception {
+        assertEquals("[D][\u2718] test deadline (by: 1st of January 2019, 06:00PM)",
+                (new Deadline("test deadline","1/1/2019 1800")).toString());
     }
 
     @Test

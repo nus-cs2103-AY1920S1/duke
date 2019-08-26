@@ -1,7 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String by;
     protected Date byDate;
     protected String day;
@@ -10,6 +10,10 @@ public class Deadline extends Task{
     protected String hour;
     protected String minute;
 
+    /**
+     * Represents a deadline, which is a type of task.
+     * An deadline has a description and is due by a specific date/time.
+     */
     public Deadline(String description, String by) throws InvalidTaskArgumentDukeException {
         super(description);
         this.by = by;
@@ -26,9 +30,17 @@ public class Deadline extends Task{
             this.minute = dateTime[1].substring(2);
 
             this.byDate = format.parse(day + "/" + month + "/" + year + " " + hour + ":" + minute);
-        } catch (Exception e) { throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of deadline timing is invalid.");}
+        } catch (Exception e) {
+            throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of deadline timing is invalid.");
+        }
+
     }
 
+    /**
+     * Converts the deadline's date object into the required format.
+     *
+     * @return The String of the deadline's date/time in the required format.
+     */
     public String dateToString() {
         SimpleDateFormat format;
 

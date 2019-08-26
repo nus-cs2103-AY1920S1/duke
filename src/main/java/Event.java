@@ -11,6 +11,15 @@ public class Event extends Task {
     protected String hour;
     protected String minute;
 
+    /**
+     * Creates an event object.
+     * Converts the String argument for the event date/time into a date object.
+     * If the event date/time argument is not in the required format, an exception is thrown.
+     *
+     * @param description The string description of the event created.
+     * @param at The String of the event time/date.
+     * @throws InvalidTaskArgumentDukeException if "at" contains invalid information.
+     */
     public Event(String description, String at) throws InvalidTaskArgumentDukeException {
         super(description);
         this.at = at;
@@ -32,6 +41,11 @@ public class Event extends Task {
 
     }
 
+    /**
+     * Converts the event's date object into the required format.
+     *
+     * @return The String of the event's date/time in the required format.
+     */
     public String dateToString() {
         SimpleDateFormat format;
 

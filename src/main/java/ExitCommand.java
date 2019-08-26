@@ -1,7 +1,7 @@
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         storage.loadTasksToFile(tasks);
         ui.showByeMessage();
     }

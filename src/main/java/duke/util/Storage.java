@@ -8,30 +8,30 @@ import java.nio.file.*;
 import java.lang.IndexOutOfBoundsException;
 import java.io.IOException;
 import java.text.ParseException;
+import duke.TaskList;
 import duke.task.Task;
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.ToDo;
 import duke.task.TaskType;
-import duke.error.InvalidFileException;
 
-public class Writer {
+public class Storage {
     private Path path;
     
     /**
      * Constructor.
      */
-    public Writer(String path) {
+    public Storage(String path) {
         this.path = Paths.get(path);
     }  
     
     /**
-     * Write data to file and assumes that this destination is fixed.
+     * Save data to file and assumes that this destination is fixed.
      * Also overwrite file if it already exists.
      * @param data List of Task
      * @throws IOException if an error appears
      */
-    public void writeFile(List<Task> data) throws IOException {
+    public void save(TaskList data) throws IOException {
         String dataString = encodeData(data);
         Files.write(this.path, 
                     dataString.getBytes(), 
@@ -41,11 +41,11 @@ public class Writer {
     }
 
     /**
-     * Read data from file.
+     * Load data from file.
      * @return List of Task
      * @throws IOException if an error appears
      */
-    public List<Task> readFile() throws IOException {
+    public TaskList load() throws IOException {
         return this.decodeData(Files.readAllLines(this.path));
     }
 
@@ -54,9 +54,10 @@ public class Writer {
      * @param data List of Task
      * @return String
      */
-    private String encodeData(List<Task> data) {
+    private String encodeData(TaskList data) {
         String result = "";
-        for (Task task: data) {
+        for (int i = 1; i <= data.getSize(); i++) {
+            Task task = data.get(i);
             String name = task.getName();
             TaskType type = task.getType();
             String isDone = task.getIsDone() ? "1" : "0";
@@ -73,8 +74,8 @@ public class Writer {
      * @param data List of String
      * @return List of Task
      */
-    private List<Task> decodeData(List<String> data) {
-        List<Task> result = new ArrayList<>();
+    private TaskList decodeData(List<String> data) {
+        TaskList result = new TaskList();
         for (String line: data) {
             try {
                 // Need special character here or the split will mess up

@@ -2,25 +2,26 @@ import java.io.IOException;
 
 class Parser {
 
-    private static int getPrepositionPos(String[] input_split) {
-        for (int i = 0; i < input_split.length; i++) {
-            if (input_split[i].charAt(0) == '/') {
+    private int getPrepositionPos(String[] inputSplit) {
+        for (int i = 0; i < inputSplit.length; i++) {
+            if (inputSplit[i].charAt(0) == '/') {
                 return i;
             }
         }
         return 0;
     }
-    private static Task construct(String[] input_split) throws InvalidInputFormatException {
-        if (input_split.length < 2) {
+
+    private Task construct(String[] inputSplit) throws InvalidInputFormatException {
+        if (inputSplit.length < 2) {
             throw new InvalidInputFormatException();
         }
-        checkValidSpacing(input_split);
+        checkValidSpacing(inputSplit);
         Task task;
-        int prepAt = getPrepositionPos(input_split);
+        int prepAt = getPrepositionPos(inputSplit);
         StringBuilder description = new StringBuilder();
-        String preposition = input_split[prepAt].substring(1);
+        String preposition = inputSplit[prepAt].substring(1);
         StringBuilder memo = new StringBuilder();
-        boolean prepRequired = input_split[0].equals("deadline") || input_split[0].equals("event");
+        boolean prepRequired = inputSplit[0].equals("deadline") || inputSplit[0].equals("event");
 
         if (prepRequired && prepAt == 0) {
             // System.out.println("what's the date due?");
@@ -28,18 +29,18 @@ class Parser {
         }
         if (prepRequired) {
             for (int k = 1; k < prepAt; k++) {
-                description.append(" ").append(input_split[k]);
+                description.append(" ").append(inputSplit[k]);
             }
         } else {
-            for (int k = 1; k < input_split.length; k++) {
-                description.append(" ").append(input_split[k]);
+            for (int k = 1; k < inputSplit.length; k++) {
+                description.append(" ").append(inputSplit[k]);
             }
         }
-        for (int i = prepAt + 1; i < input_split.length; i++) {
-            memo.append(" ").append(input_split[i]);
+        for (int i = prepAt + 1; i < inputSplit.length; i++) {
+            memo.append(" ").append(inputSplit[i]);
         }
 
-        switch (input_split[0]) {
+        switch (inputSplit[0]) {
         case "todo":
             task = new ToDo(description.deleteCharAt(0).toString());
             break;
@@ -56,26 +57,28 @@ class Parser {
         return task;
     }
 
-    static void checkValidTaskIndex(String[] input_split) throws InvalidInputFormatException {
-        if (input_split.length < 2) {
+    void checkValidTaskIndex(String[] inputSplit) throws InvalidInputFormatException {
+        if (inputSplit.length < 2) {
             throw new InvalidInputFormatException();
         }
         try {
-            Integer.parseInt(input_split[1]);
+            Integer.parseInt(inputSplit[1]);
         } catch (NumberFormatException e) {
             throw new InvalidInputFormatException();
         }
     }
 
-    static void checkValidSpacing(String[] input_split) throws InvalidInputFormatException {
-        for (String s : input_split) {
-            if (s.length() == 0) throw new InvalidInputFormatException();
+    void checkValidSpacing(String[] inputSplit) throws InvalidInputFormatException {
+        for (String s : inputSplit) {
+            if (s.length() == 0) {
+                throw new InvalidInputFormatException();
+            }
         }
     }
 
-    static boolean parse(String input, TaskList tasks, Ui ui, Storage storage) {
-        String[] input_split = input.split(" ");
-        String command = input_split[0];
+    boolean parse(String input, TaskList tasks, Ui ui, Storage storage) {
+        String[] inputSplit = input.split(" ");
+        String command = inputSplit[0];
 
         try {
             switch (command) {
@@ -92,8 +95,8 @@ class Parser {
                 return true;
 
             case "done":
-                checkValidTaskIndex(input_split);
-                Task theTask = tasks.get(Integer.parseInt(input_split[1]) - 1);
+                checkValidTaskIndex(inputSplit);
+                Task theTask = tasks.get(Integer.parseInt(inputSplit[1]) - 1);
                 theTask.isDone = true;
                 ui.printDone(theTask);
                 return true;
@@ -101,7 +104,7 @@ class Parser {
             case "todo":
             case "deadline":
             case "event":
-                Task task = construct(input_split);
+                Task task = construct(inputSplit);
                 if (task != null) {
                     tasks.add(task);
                     ui.printCreated(task, tasks);
@@ -109,8 +112,8 @@ class Parser {
                 return true;
 
             case "delete":
-                checkValidTaskIndex(input_split);
-                Task removedTask = tasks.remove(Integer.parseInt(input_split[1]) - 1);
+                checkValidTaskIndex(inputSplit);
+                Task removedTask = tasks.remove(Integer.parseInt(inputSplit[1]) - 1);
                 ui.printRemoved(removedTask, tasks);
                 return true;
 

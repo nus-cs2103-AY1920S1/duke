@@ -8,10 +8,10 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
-//    @Test
-//    public void dummyFailTest() {
-//        assertEquals("lalala", "placeholder");
-//    }
+    // @Test
+    // public void dummyFailTest() {
+    //    assertEquals("lalala", "placeholder");
+    // }
 
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private static final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -34,6 +34,7 @@ public class DukeTest {
     void dummyPassTest() {
         assertEquals("lalala", "lalala");
     }
+
     @Test
     void uiHelloTest() {
         new Ui().printHello();
@@ -45,11 +46,13 @@ public class DukeTest {
         Deadline d = new Deadline("123", "2", "14 2 2");
         assertEquals("[D][\u2718] 123 (2: 14 2 2)", d.getStatus());
     }
+
     @Test
     void todoGetStatusTest() {
         ToDo t = new ToDo("12n2nl2");
         assertEquals("[T][\u2718] 12n2nl2", t.getStatus());
     }
+
     @Test
     void taskIsDoneTest() {
         Task t = new Task("desc");

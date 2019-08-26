@@ -29,6 +29,7 @@ class ToDo extends Task {
     ToDo(String description) {
         super(description);
     }
+
     @Override
     public String getStatus() {
         return "[T][" + getStatusIcon() + "] " + description;
@@ -53,7 +54,7 @@ class Deadline extends Task {
             // deadline 12 /by 12/12/2012 2359
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             date = LocalDate.parse(memo, formatter);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             System.out.println("parse failed");
             // do nothing
         }
@@ -67,6 +68,7 @@ class Deadline extends Task {
     public String getStatus() {
         return "[D][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + memo + ")";
     }
+
     @Override
     public String saveFormat() {
         return "D" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + memo;
@@ -86,11 +88,12 @@ class Event extends Task {
             // deadline 12 /by 12/12/2012 2359
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             date = LocalDate.parse(memo, formatter);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             System.out.println("parse failed");
             // do nothing
         }
     }
+
     public String getMemo() {
         return date != null ? date.toString() : memo;
     }
@@ -99,6 +102,7 @@ class Event extends Task {
     public String getStatus() {
         return "[E][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + memo + ")";
     }
+
     @Override
     public String saveFormat() {
         return "E" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + memo;

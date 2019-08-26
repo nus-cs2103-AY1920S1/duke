@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
@@ -24,8 +24,8 @@ public class Duke {
     }
 
     private void run() {
-        try(Scanner scanner = new Scanner(System.in);
-            PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8)
+        try (Scanner scanner = new Scanner(System.in);
+             PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8)
         ) {
             System.setOut(out);
             boolean active = true;

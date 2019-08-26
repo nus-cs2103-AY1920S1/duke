@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Duke {
@@ -107,7 +108,8 @@ public class Duke {
                         throw new DukeException("A deadline requires the '/by' keyword.");
                     }
                     Task newTaskDeadline = new Task(messageDeadline, TaskType.DEADLINE);
-                    newTaskDeadline.setTime(deadlineMessageAndTime[1]);
+                    Calendar deadlineCalendar = convertStringToCalendar(deadlineMessageAndTime[1]);
+                    newTaskDeadline.setTime(deadlineCalendar);
                     tasks.add(newTaskDeadline);
                     System.out.print(LINE);
                     System.out.println(addTaskMessage);
@@ -138,7 +140,8 @@ public class Duke {
                         throw new DukeException("An event requires the '/at' keyword.");
                     }
                     Task newTaskEvent = new Task(messageEvent, TaskType.EVENT);
-                    newTaskEvent.setTime(eventMessageAndTime[1]);
+                    Calendar eventCalendar = convertStringToCalendar(eventMessageAndTime[1]);
+                    newTaskEvent.setTime(eventCalendar);
                     tasks.add(newTaskEvent);
                     System.out.print(LINE);
                     System.out.println(addTaskMessage);
@@ -197,7 +200,6 @@ public class Duke {
         }
     }
 
-    // String path = "/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt"
     private static ArrayList<Task> loadTasksFromFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
@@ -224,7 +226,8 @@ public class Duke {
                     scanner.next(); // skip the pipe
                     String deadlineTime = scanner.next();
                     Task deadlineTask = new Task(deadlineDescription, TaskType.DEADLINE);
-                    deadlineTask.setTime(deadlineTime);
+                    Calendar deadlineCalendar = new Calendar.Builder().setInstant(Long.parseLong(deadlineTime)).build();
+                    deadlineTask.setTime(deadlineCalendar);
                     if (isDoneDeadline) {
                         deadlineTask.markAsDone();
                     }
@@ -238,7 +241,8 @@ public class Duke {
                     scanner.next(); // skip the pipe
                     String eventTime = scanner.next();
                     Task eventTask = new Task(eventDescription, TaskType.EVENT);
-                    eventTask.setTime(eventTime);
+                    Calendar eventCalendar = new Calendar.Builder().setInstant(Long.parseLong(eventTime)).build();
+                    eventTask.setTime(eventCalendar);
                     if (isDoneEvent) {
                         eventTask.markAsDone();
                     }
@@ -310,5 +314,23 @@ public class Duke {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
+    }
+
+    private static Calendar convertStringToCalendar(String dateString) {
+        String[] dateAndTime = dateString.split("\\s");
+        String date = dateAndTime[0];
+        String time = dateAndTime[1];
+        int hour = Integer.parseInt(time) / 100;
+        int minute = Integer.parseInt(time) % 100;
+
+        String[] dateComponents = date.split("/");
+        int day = Integer.parseInt(dateComponents[0]);
+        int month = Integer.parseInt(dateComponents[1]);
+        int year = Integer.parseInt(dateComponents[2]);
+
+        Calendar calendar = new Calendar.Builder().setDate(year, month - 1, day)
+                .setTimeOfDay(hour, minute, 0).build();
+
+        return calendar;
     }
 }

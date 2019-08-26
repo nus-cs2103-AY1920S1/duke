@@ -1,8 +1,11 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType type;
-    protected String time;
+    protected Calendar time;
 
     public Task(String description, TaskType type) {
         this.description = description;
@@ -10,7 +13,7 @@ public class Task {
         this.type = type;
     }
 
-    public void setTime(String time) {
+    public void setTime(Calendar time) {
         this.time = time;
     }
 
@@ -23,7 +26,7 @@ public class Task {
     }
 
     public String getTime() {
-        return time;
+        return time.getTimeInMillis() + "";
     }
 
     public String getStatusIcon() {
@@ -53,13 +56,19 @@ public class Task {
 
     @Override
     public String toString() {
+        String timeString = "";
+        if (time != null) {
+            SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss z");
+            timeString = formatter.format(time.getTime());
+        }
+
         switch (type) {
             case TODO:
                 return description;
             case DEADLINE:
-                return description + " (by: " + time + ")";
+                return description + " (by: " + timeString + ")";
             case EVENT:
-                return description + " (at: " + time + ")";
+                return description + " (at: " + timeString + ")";
             default:
                 return description;
         }

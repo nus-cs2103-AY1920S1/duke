@@ -27,7 +27,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String input = sc.nextLine();
-                String[] params = input.split(" | ");
+                String[] params = input.split("\\s\\|\\s");
                 String type = params[0];
                 Boolean done = params[1].equals("1");
                 String description = params[2];

@@ -1,5 +1,6 @@
 package duke.datetime;
 
+import java.util.Map;
 import java.util.HashMap;
 
 import duke.exception.InvalidDateTimeException;
@@ -23,25 +24,25 @@ public class DateTime {
     /** AM or PM. */
     private String sign;
     /** Month Mapping from 1-12 to Jan-Dec. */
-    private static HashMap<String, String> monthMap = new HashMap<>();
+    private static Map<Integer, String> monthMap = new HashMap<>();
 
     /**
      * Adds all the mappings from numbers to month names.
      * Executes when class is loaded.
      */
     static {
-        monthMap.put("1", "January");
-        monthMap.put("2", "February");
-        monthMap.put("3", "March");
-        monthMap.put("4", "April");
-        monthMap.put("5", "May");
-        monthMap.put("6", "June");
-        monthMap.put("7", "July");
-        monthMap.put("8", "August");
-        monthMap.put("9", "September");
-        monthMap.put("10", "October");
-        monthMap.put("11", "November");
-        monthMap.put("12", "December");
+        monthMap.put(1, "January");
+        monthMap.put(2, "February");
+        monthMap.put(3, "March");
+        monthMap.put(4, "April");
+        monthMap.put(5, "May");
+        monthMap.put(6, "June");
+        monthMap.put(7, "July");
+        monthMap.put(8, "August");
+        monthMap.put(9, "September");
+        monthMap.put(10, "October");
+        monthMap.put(11, "November");
+        monthMap.put(12, "December");
     }
 
     /**
@@ -58,7 +59,7 @@ public class DateTime {
             parseDate(date);
             parseTime(time);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidDateTimeException("Bad String");
+            throw new InvalidDateTimeException("Invalid DateTime");
         }
     }
 
@@ -78,12 +79,16 @@ public class DateTime {
             if (d < 0 || d > 31) {
                 throw new InvalidDateTimeException("Invalid Date");
             }
-            if (monthMap.get(tokens[1]) == null) {
+            int m = Integer.parseInt(tokens[1]);
+            if (monthMap.get(m) == null) {
                 throw new InvalidDateTimeException("Invalid Date");
             }
             int y = Integer.parseInt(tokens[2]);
+            if (y < 0) {
+                throw new InvalidDateTimeException("Invalid Date");
+            }
             day = tokens[0];
-            month = monthMap.get(tokens[1]);
+            month = monthMap.get(m);
             year = tokens[2];
         } catch (NumberFormatException e) {
             throw new InvalidDateTimeException("Invalid Date");
@@ -100,11 +105,17 @@ public class DateTime {
         try {
             int t = Integer.parseInt(time);
             int hrs = t / 100;
+            if (hrs > 23 || hrs < 0) {
+                throw new InvalidDateTimeException("Invalid Time");
+            }
             boolean isAft = hrs > 12;
             hrs = isAft ? hrs - 12 : hrs;
             sign = isAft ? "pm" : "am";
             hours = String.format("%d", hrs);
             int mins = t % 100;
+            if (mins > 60 || mins < 0) {
+                throw new InvalidDateTimeException("Invalid Time");
+            }
             minutes = String.format("%02d", mins);
         } catch (NumberFormatException e) {
             throw new InvalidDateTimeException("Invalid Time");

@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import duke.task.Task;
 import duke.task.Event;
 import duke.task.Deadline;
@@ -11,10 +12,12 @@ import duke.error.DukeException;
 import duke.error.InvalidCommandException;
 import duke.error.InvalidTaskArgumentException;
 import duke.error.InvalidIndexException;
+import duke.util.Writer;
 
 public class Duke {
     private List<Task> list;
     private PrintStream printStream;
+    private Writer writer;
 
     /**
      * Main method.
@@ -35,22 +38,10 @@ public class Duke {
      * Constructor.
      */
     public Duke() {
-        this.list = new ArrayList<Task>();
         this.printStream = this.initPrintStream();
-    }
-
-    /**
-     * Initialize printStream.
-     * @return printStream PrintStream
-     */
-    PrintStream initPrintStream() {
-        PrintStream printStream; 
-        try {
-            printStream = new PrintStream(System.out, true, "UTF-8");
-        } catch (UnsupportedEncodingException error) {
-            printStream = new PrintStream(System.out, true);
-        }
-        return printStream;
+        // TODO: Don't hardcode
+        this.writer = new Writer("/Users/joshuawong/Documents/NUS/Y2S1/CS2103/duke/data/duke.txt"); 
+        this.list = this.getListFromDisk();
     }
 
     /**
@@ -58,7 +49,7 @@ public class Duke {
      * @param command String
      * @return boolean
      */
-    boolean handleCommand(String command) { 
+    private boolean handleCommand(String command) { 
         try {
             String keyword = command.split(" ")[0];
             switch (keyword) {
@@ -94,18 +85,9 @@ public class Duke {
     }
 
     /**
-     * Send addTask acknowledgement.
-     */
-    void sendAddTaskAck() {
-        System.out.println("    Got it. I've added this task:");
-        this.printStream.printf("      %s\n", this.list.get(this.list.size() - 1));
-        System.out.printf("    Now you have %d tasks in the list.\n", this.list.size());
-    }
-
-    /**
      * Handle List command.
      */
-    void handleListCommand() {
+    private void handleListCommand() {
         System.out.printf("    Here are the tasks in your list:\n");
         int length = this.list.size();
         for (int i = 0; i < length; i++) {
@@ -119,7 +101,7 @@ public class Duke {
      * @throws InvalidIndexException if the task to modify is invalid
      * @throws InvalidCommandException if the Done command is not correct
      */
-    void handleDoneCommand(String command) throws InvalidIndexException, InvalidCommandException {
+    private void handleDoneCommand(String command) throws InvalidIndexException, InvalidCommandException {
         String[] doneArr = command.split(" ");
         if (doneArr.length != 2) {
             throw new InvalidCommandException("☹ OOPS!!! Done command should only have a valid index");
@@ -132,6 +114,7 @@ public class Duke {
         task.markDone();
         System.out.printf("    Nice! I've marked this task as done:\n");
         this.printStream.printf("      %s\n", task); 
+        this.writeListToDisk();
     }
 
     /**
@@ -140,7 +123,7 @@ public class Duke {
      * @throws InvalidIndexException if the index provided is invalid
      * @throws InvalidCommandException if the arguments provided are invalid
      */
-    void handleDeleteCommand(String command) throws InvalidIndexException, InvalidCommandException {
+    private void handleDeleteCommand(String command) throws InvalidIndexException, InvalidCommandException {
         String[] deleteArr = command.split(" ");
         if (deleteArr.length != 2) {
             throw new InvalidCommandException("☹ OOPS!!! Done command should only have a valid index");
@@ -153,6 +136,7 @@ public class Duke {
         System.out.println("    Noted. I've removed the task:");
         this.printStream.printf("      %s\n", removedTask); 
         System.out.printf("    Now you have %d tasks in the list.\n", this.list.size()); 
+        this.writeListToDisk();
     }
 
     /**
@@ -160,14 +144,13 @@ public class Duke {
      * @param command String
      * @throws InvalidTaskArgumentException if Deadline arguments are invalid
      */
-    void handleDeadlineCommand(String command) throws InvalidTaskArgumentException {
+    private void handleDeadlineCommand(String command) throws InvalidTaskArgumentException {
         String[] commandArr = command.replace("deadline", "").trim().split("/by ");
         if (commandArr.length != 2) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! Deadline must have a description and date");
         }
-        Task taskToAdd = new Deadline(commandArr[0], commandArr[1]);
-        this.list.add(taskToAdd);
-        this.sendAddTaskAck();        
+        Task taskToAdd = new Deadline(commandArr[0].trim(), commandArr[1].trim());
+        this.addToList(taskToAdd);
     }
 
     /**
@@ -175,14 +158,13 @@ public class Duke {
      * @param command String
      * @throws InvalidTaskArgumentException if Event arguments are invalid
      */
-    void handleEventCommand(String command) throws InvalidTaskArgumentException {
+    private void handleEventCommand(String command) throws InvalidTaskArgumentException {
         String[] commandArr = command.replace("event", "").trim().split("/at ");
         if (commandArr.length != 2) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! Event must have a description and date");
         }
-        Task taskToAdd = new Event(commandArr[0], commandArr[1]);
-        this.list.add(taskToAdd);
-        this.sendAddTaskAck();        
+        Task taskToAdd = new Event(commandArr[0].trim(), commandArr[1].trim());
+        this.addToList(taskToAdd);
     }
 
     /**
@@ -190,12 +172,67 @@ public class Duke {
      * @param command String
      * @throws InvalidTaskArgumentException if ToDo arguments are invalid
      */
-    void handleTodoCommand(String command) throws InvalidTaskArgumentException {
+    private void handleTodoCommand(String command) throws InvalidTaskArgumentException {
         String name = command.replace("todo", "").trim();
         if ("".equals(name)) {
             throw new InvalidTaskArgumentException("☹ OOPS!!! The description of a todo cannot be empty."); 
         }
-        this.list.add(new ToDo(name));
+        this.addToList(new ToDo(name));
+    }
+
+    /**
+     * Initialize printStream.
+     * @return printStream PrintStream
+     */
+    private PrintStream initPrintStream() {
+        PrintStream printStream; 
+        try {
+            printStream = new PrintStream(System.out, true, "UTF-8");
+        } catch (UnsupportedEncodingException error) {
+            printStream = new PrintStream(System.out, true);
+        }
+        return printStream;
+    }
+
+    /**
+     * Send addTask acknowledgement.
+     */
+    private void sendAddTaskAck() {
+        System.out.println("    Got it. I've added this task:");
+        this.printStream.printf("      %s\n", this.list.get(this.list.size() - 1));
+        System.out.printf("    Now you have %d tasks in the list.\n", this.list.size());
+    }
+
+    /**
+     * Adds task to list and performs other actions.
+     */
+    private void addToList(Task task) {
+        this.list.add(task);
         this.sendAddTaskAck();
+        this.writeListToDisk();
+    }
+
+    /**
+     * Get data from disk.
+     * @return List of Task
+     */
+    private List<Task> getListFromDisk() {
+        try {
+            return this.writer.readFile();
+        } catch (IOException e) {
+            System.out.println("Failed to read from disk");
+            return new ArrayList<Task>();
+        }
+    }
+
+    /**
+     * Write List to disk.
+     */
+    private void writeListToDisk() {
+        try {
+            this.writer.writeFile(this.list);
+        } catch (IOException e) {
+            System.out.println("Failed to write to disk");
+        }
     }
 }

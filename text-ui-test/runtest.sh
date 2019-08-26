@@ -26,6 +26,9 @@ fi
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
 java -classpath ../bin Duke < input.txt > ACTUAL.TXT
 
+# Delete the data file after each to run to prevent state from persisting
+rm ../data/duke.txt && touch ../data/duke.txt
+
 # compare the output to the expected output
 diff ACTUAL.TXT EXPECTED.TXT
 if [ $? -eq 0 ]

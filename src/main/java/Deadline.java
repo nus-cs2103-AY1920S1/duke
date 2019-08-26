@@ -1,6 +1,10 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a deadline, which is a type of task.
+ * An deadline has a description and is due by a specific date/time.
+ */
 public class Deadline extends Task{
     protected String by;
     protected Date byDate;
@@ -10,6 +14,15 @@ public class Deadline extends Task{
     protected String hour;
     protected String minute;
 
+    /**
+     * Creates a deadline object.
+     * Converts the String argument for the deadline date/time into a date object.
+     * If the deadline date/time argument is not in the required format, an exception is thrown.
+     *
+     * @param description The string description of the deadline created.
+     * @param by The String of the deadline time/date.
+     * @throws InvalidTaskArgumentDukeException if "by" contains invalid information.
+     */
     public Deadline(String description, String by) throws InvalidTaskArgumentDukeException {
         super(description);
         this.by = by;
@@ -29,6 +42,11 @@ public class Deadline extends Task{
         } catch (Exception e) { throw new InvalidTaskArgumentDukeException("☹ OOPS!!! The format of deadline timing is invalid.");}
     }
 
+    /**
+     * Converts the deadline's date object into the required format.
+     *
+     * @return The String of the deadline's date/time in the required format.
+     */
     public String dateToString() {
         SimpleDateFormat format;
 

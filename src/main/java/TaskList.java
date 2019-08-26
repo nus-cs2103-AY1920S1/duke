@@ -1,8 +1,14 @@
 import java.util.ArrayList;
 
+/**
+ * Represents the list of Tasks in a Duke object.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
+    /**
+     * Creates a TaskList object that stores the list of tasks of a Duke object in an ArrayList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
@@ -27,6 +33,11 @@ public class TaskList {
         this.tasks.remove(taskNumber);
     }
 
+    /**
+     * Marks the task at the given index in the ArrayList as done.
+     *
+     * @param taskNumber index of the task in the ArrayList.
+     */
     public void markAsDone(int taskNumber) {
         this.tasks.get(taskNumber).markAsDone();
     }

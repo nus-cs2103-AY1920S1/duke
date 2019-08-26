@@ -39,7 +39,7 @@ public class Duke {
     }
     public static void main(String[] args) {
         //More OOP
-        Duke d = new Duke("../src/main/java/Dukedata.txt");
+        Duke d = new Duke("./src/main/java/Dukedata.txt");
         d.run();
     }
 }

@@ -48,6 +48,14 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Given a String keyword, searches all tasks which has a description containing the keyword.
+     * Tasks that contains the keyword are added to a newly created TaskList object and
+     * this TaskList object is returned.
+     *
+     * @param keyWord keyword to search for in list of tasks
+     * @return TaskList object containing all tasks that contain the keyword.
+     */
     public TaskList findTasks(String keyWord) {
         TaskList tasksWithKeyWord = new TaskList();
 

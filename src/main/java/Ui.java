@@ -26,11 +26,7 @@ public class Ui {
     }
 
     /**
-<<<<<<< HEAD
-     * Displays the welcome message when a Duke object is started
-=======
      * Displays the welcome message when a Duke object is started.
->>>>>>> branch-A-CodingStandard
      */
     public void showWelcomeMessage() {
         System.out.println(line);
@@ -93,12 +89,7 @@ public class Ui {
     /**
      * Displays message when a Task object is deleted.
      *
-     * @param task Task object deleted from the TaskList object of a Duke Object.
-<<<<<<< HEAD
-     * @param taskListSize
-=======
      * @param taskListSize Number of Task objects in TaskList object after the Task object is deleted.
->>>>>>> branch-A-CodingStandard
      */
     public void showDeleteTaskMessage(Task task, int taskListSize) {
         System.out.println(line);
@@ -110,7 +101,7 @@ public class Ui {
     }
 
     /**
-     * Dsiplaus exit message when a Duke object stops running.
+     * Dsiplays exit message when a Duke object stops running.
      */
     public void showByeMessage() {
         System.out.println(line);
@@ -118,6 +109,12 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Displays the list of tasks in the TaskList object argument.
+     * The tasks in the TaskList object argument contains the keyword entered by the user.
+     *
+     * @param tasks TaskList object with tasks to be displayed to the user in a list.
+     */
     public void showFindTasksMessage(TaskList tasks) {
         System.out.println(line);
         System.out.println("     Here are the matching tasks in your list:");

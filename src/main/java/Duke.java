@@ -74,7 +74,7 @@ public class Duke {
                     System.out.println(toDoList.done(sc.nextInt()));
                     break;
                 case "delete":
-                    toDoList.delete(sc.nextInt());
+                    System.out.println(toDoList.delete(sc.nextInt()));
                     break;
                 case "save":
                     toDoList.save("./Data/duke.txt");

@@ -43,12 +43,13 @@ public class TaskList {
      * 
      * @param i Index
      */
-    public void delete(int i) {
-        System.out.println("____________________________________________________________");
-        System.out.println(deleteMessage);
-        System.out.println(toDoList.get(i - 1));
-        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
-        System.out.println("____________________________________________________________");
+    public String delete(int i) {
+        StringJoiner result = new StringJoiner("\n");
+        result.add(deleteMessage);
+        result.add(toDoList.get(i - 1).toString());
+        toDoList.remove(i - 1);
+        result.add(String.format("Now you have %d tasks in the list.", toDoList.size()));
+        return padMessage(result.toString());
     }
 
     /**
@@ -87,7 +88,6 @@ public class TaskList {
      * Saves tasks in specified path.
      * 
      * @param filePath  Path wherein text will be saved
-     * @param textToAdd Text to add
      */
     public void save(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);

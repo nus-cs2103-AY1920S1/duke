@@ -32,7 +32,7 @@ public class Task {
      * Gets the current completion status of the task.
      * @return True if done, false if the task is yet to be completed.
      */
-    public boolean getIsDone() {
+    public boolean isCompleted() {
         return this.isDone;
     }
 

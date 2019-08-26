@@ -37,7 +37,6 @@ public class TaskList {
     public void load(Storage storage) {
         ArrayList<Task> tasks = storage.parseFile();
         list.clear();
-        tasks.forEach(task -> list.add(task));
         tasks.forEach(task -> {
             list.add(task);
             Task.addToTotalTasks();

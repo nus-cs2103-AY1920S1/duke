@@ -113,7 +113,7 @@ public class Ui {
         } else if (command.contains(" /at ")) {
             String[] arr = command.split(" /at ", 2);
             if (arr[0].length() == 5) {
-                String error = "\u2639 OOPS!!! The description of event cannot be empty.";
+                String error = "\u2639 OOPS!!! The description of event cannot be empty.\n";
                 throw new DukeException(error);
             }
         }
@@ -149,7 +149,7 @@ public class Ui {
         } else if (command.contains(" /by ")) {
             String[] arr = command.split(" /by ", 2);
             if (arr[0].length() == 8) {
-                String error = "\u2639 OOPS!!! The description of event cannot be empty.";
+                String error = "\u2639 OOPS!!! The description of deadline cannot be empty.\n";
                 throw new DukeException(error);
             }
         }
@@ -201,7 +201,7 @@ public class Ui {
 
     public void showParseError() {
         System.out.println("\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
-                "and time in 24hr format, separated by a space.");
+                "and time in 24hr format, separated by a space.\n");
     }
 
     public void showExceptionMsg(Exception e) {

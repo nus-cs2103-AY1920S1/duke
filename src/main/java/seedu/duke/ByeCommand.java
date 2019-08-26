@@ -15,4 +15,10 @@ public class ByeCommand extends Command {
         ui.printGoodbyeMsg();
         return true;
     }
+
+    @Override
+    public String toString() {
+        //for testing purposes
+        return "ByeCommand";
+    }
 }

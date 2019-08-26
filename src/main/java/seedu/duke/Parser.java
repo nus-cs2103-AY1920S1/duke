@@ -7,6 +7,9 @@ import java.util.Date;
 public class Parser {
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected static SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
+
+
+
     public Parser() {
 
     }
@@ -84,7 +87,7 @@ public class Parser {
     public static Deadline createDeadline(String command) throws ParseException {
         String[] arr = command.split(" /by ", 2);
         String[] dateTimeArr = (arr[1]).split(" ", 2);
-        //throw error if user never input time or date...
+        //throw error if user never input time or date
         Date date = dateFormat.parse(dateTimeArr[0]);
         Date time = timeFormat.parse(dateTimeArr[1]);
         return new Deadline(arr[0].substring(9), date, time);

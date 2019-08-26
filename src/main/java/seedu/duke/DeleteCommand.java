@@ -19,4 +19,10 @@ public class DeleteCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        //for testing purposes
+        return "DeleteCommand";
+    }
 }

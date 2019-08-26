@@ -17,4 +17,10 @@ public class EventCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        //for testing purposes
+        return "EventCommand";
+    }
 }

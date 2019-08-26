@@ -32,7 +32,7 @@ public class Duke {
                 System.out.println(horLine);
                 if(taskList.isEmpty()) {
                     System.out.println("Sorry, there are no tasks in the list");
-                } else {
+                } else { testing testing testing
                     System.out.println("     Here are the tasks in your list:");
                     int counter = 1;
                     for (Task task : taskList) {

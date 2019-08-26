@@ -6,12 +6,6 @@ class InputUnknownException extends DukeException {
         return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }
-class EmptyDescriptionException extends DukeException {
-    @Override
-    public String getMessage() {
-        return "What's the description of the item?";
-    }
-}
 class EmptyListIndexException extends DukeException {
     @Override
     public String getMessage() {
@@ -24,9 +18,18 @@ class ListItemEmptyException extends DukeException {
         return "No such item in list!";
     }
 }
-class EmptyTimeDueException extends DukeException {
+
+class DukeTaskException extends DukeException {}
+
+class EmptyTimeDueException extends DukeTaskException {
     @Override
     public String getMessage() {
         return "When is it due? eg. /by 2359 sunday";
+    }
+}
+class EmptyDescriptionException extends DukeTaskException {
+    @Override
+    public String getMessage() {
+        return "What's the description of the item?";
     }
 }

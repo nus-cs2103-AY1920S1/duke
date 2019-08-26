@@ -1,0 +1,6 @@
+class Ui {
+
+    void showLoadingError() {
+
+    }
+}

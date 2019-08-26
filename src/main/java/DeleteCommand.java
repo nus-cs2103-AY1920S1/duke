@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * @param ui Duke object's Ui object to display delete task message.
      * @param storage Duke object's Storage object to access file for loading/saving tasks.
      * @throws InvalidCommandDukeException Thrown when an invalid task number index is given so no Task
-     * object can be retrieved from the TaskList object.
+     *     object can be retrieved from the TaskList object.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidCommandDukeException {
@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
         }
 
     }
+
     /**
      * Indicates the exit condition of the running Duke object.
      *

@@ -82,7 +82,7 @@ public class Duke {
         return sb.toString();
     }
 
-    private String markTask(int taskNum) { //mark as done
+    private String markTask(int taskNum) throws DukeException { //mark as done. Need to check if already done, and if so throw exception
         StringBuilder sb = new StringBuilder();
         Task task = taskList.get(taskNum - 1);
         task.markDone();
@@ -91,12 +91,26 @@ public class Duke {
         return sb.toString();
     }
 
+    private int parseTaskInt(String str) throws DukeException {
+        int taskInt;
+        try {
+            taskInt = Integer.parseInt(str);
+            if (taskInt > taskList.size() || taskInt < 0) {
+                throw new DukeException("That task number does not exist, please try again");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please state a valid task number");
+        }
+
+        return taskInt;
+    }
+
     void executeCommand(String command, String[] inputSplit) throws DukeException {
         if (command.equals("list")) {
             System.out.println(lineWrap(getList()));
         } else if (command.equals("done")) {
-            int taskNumber = Integer.parseInt(inputSplit[1]);
-            System.out.println(lineWrap(markTask(taskNumber)));
+            int taskInt = parseTaskInt(inputSplit[1]);
+            System.out.println(lineWrap(markTask(taskInt)));
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             if (inputSplit.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
@@ -104,15 +118,8 @@ public class Duke {
             Task task = createTask(inputSplit[1], command);
             System.out.println(lineWrap(addTask(task)));
         } else if (command.equals("delete")) {
-            if (inputSplit.length == 1) {
-                throw new DukeException("Invalid format, please state a number");
-            }
-            try {
-                int taskNum = Integer.parseInt(inputSplit[1]);
-                System.out.println(lineWrap(deleteTask(taskNum)));
-            } catch (NumberFormatException e) {
-                throw new DukeException("Please state a valid task number (integer).");
-            }
+            int taskInt = parseTaskInt(inputSplit[1]);
+            System.out.println(lineWrap(deleteTask(taskInt)));
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

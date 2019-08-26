@@ -7,8 +7,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void markDone() {
-        this.isDone = true;
+    public void markDone() throws DukeException {
+        if(isDone) {
+            throw new DukeException("Task is already done!");
+        } else {
+            this.isDone = true;
+        }
     }
 
     public abstract String toString();

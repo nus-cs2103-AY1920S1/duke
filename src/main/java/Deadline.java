@@ -26,6 +26,11 @@ public class Deadline extends Task {
         this.typeOfTask = "D";
     }
 
+    public String getDueInString() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        return format.format(endDate);
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();

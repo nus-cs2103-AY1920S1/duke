@@ -23,6 +23,12 @@ public class Event extends Task {
         this.end = end;
     }
 
+    public String getDueInString() {
+        SimpleDateFormat startFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        SimpleDateFormat endFormat = new SimpleDateFormat(" - HHmm");
+        return startFormat.format(start) + endFormat.format(end);
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();

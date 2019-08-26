@@ -11,9 +11,7 @@ public class TextToTaskTranslator {
     private static final Pattern TIME_FORMAT_PATTERN = Pattern.compile("(?<!\\/)\\d{4}\\b");
 
     private static final int [] daysInEachMonth = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    private static final String [] namesOfTheMonth 
-        = { "January", "Februrary", "March", "April", "May", "June", 
-            "July", "August",  "September", "October", "November", "December"};
+    private static final String [] namesOfTheMonth = { "January", "Februrary", "March", "April", "May", "June", "July", "August",  "September", "October", "November", "December"};
 
     public static Task translateToDoTask(String userInputString) throws DukeException {
         String description = userInputString.substring(4).trim();
@@ -42,9 +40,7 @@ public class TextToTaskTranslator {
 
             return new DeadlineTask(description, new DukeDateTime(deadlineDate, deadlineTime));
         } else {
-            String exceptionMessage
-                = DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "deadline"));
-            throw new DukeException(exceptionMessage);
+            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "deadline")));
         }
     }
 
@@ -78,14 +74,9 @@ public class TextToTaskTranslator {
                 }
             }
 
-            DukeDateTime startDateTime = new DukeDateTime(startDate, startTime);
-            DukeDateTime endDateTime = new DukeDateTime(endDate, endTime);
-            DukeDuration EventDuration = new DukeDuration(startDateTime, endDateTime);
-            return new EventTask(description, EventDuration);
+            return new EventTask(description, new DukeDuration(new DukeDateTime(startDate, startTime), new DukeDateTime(endDate, endTime)));
         } else {
-            String exceptionMessage
-                = DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "event"));
-            throw new DukeException(exceptionMessage);
+            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "event")));
         }
     }
     
@@ -144,8 +135,7 @@ public class TextToTaskTranslator {
         }
 
         if(daysInEachMonth[month - 1] < day) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_DAY_BIG,
-                                                                                      namesOfTheMonth[month - 1])));
+            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_DAY_BIG, namesOfTheMonth[month - 1])));
         }
     }
 

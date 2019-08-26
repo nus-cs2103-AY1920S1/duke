@@ -3,12 +3,12 @@ todo read book
 deadline return book /by June 6th
 event project meeting /at Aug 6th 2-4pm
 list
-done 2
+done 5
 list
-done 4
-delete 2
+done 8
+delete 5
 list
-delete 4
+delete 8
 todo
 deadline
 deadline /by June 6th

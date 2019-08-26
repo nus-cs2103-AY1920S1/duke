@@ -1,0 +1,3 @@
+T | 1 | join sports club
+D | 0 | oral presentation preparation | September 18th
+E | 0 | coding workshop | Oct 11th 10-11am

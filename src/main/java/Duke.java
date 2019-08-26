@@ -1,11 +1,24 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Duke {
 
     private final static ArrayList<Task> ALL_TASKS = new ArrayList<>();
 
     public static void main(String[] args) {
+        try {
+            importTasks("../data/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            return;
+        } catch (DukeException e) {
+            System.out.println(e);
+            return;
+        }
+
         // Greet
         String greeting = "Hello! I'm Duke\nWhat can I do for you?\n";
         System.out.println(greeting);
@@ -31,6 +44,36 @@ public class Duke {
             System.out.println();
         }
 
+        scanner.close();
+    }
+
+    private static void importTasks(String filePath) throws FileNotFoundException, DukeException {
+        File file = new File(filePath);
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String[] data = scanner.nextLine().split(" \\| ");
+            Task task;
+
+            switch (data[0]) {
+                case "T":
+                    task = new Todo(data[2]);
+                    break;
+                case "D":
+                    task = new Deadline(data[2], data[3]);
+                    break;
+                case "E":
+                    task = new Event(data[2], data[3]);
+                    break;
+                default:
+                    throw new DukeException("Failed to load tasks.");
+            }
+
+            if (data[1].equals("1")) {
+                task.markAsDone();
+            }
+
+            ALL_TASKS.add(task);
+        }
         scanner.close();
     }
 

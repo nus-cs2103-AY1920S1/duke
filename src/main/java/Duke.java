@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.FileReader;
 
 public class Duke {
     public static void main(String[] args) throws Exception {
@@ -15,8 +17,10 @@ public class Duke {
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
         System.out.println(lines);
+        FileReader fr = new FileReader("../Data/Duke.txt");
+        BufferedReader brFile = new BufferedReader(fr);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<Task> inputList = new ArrayList<Task>();
+        ArrayList<Task> inputList = obtainTasks(brFile);
         boolean programRunning = true;
         while (programRunning) {
             String[] inputMessage = br.readLine().split(" ");
@@ -51,6 +55,7 @@ public class Duke {
                             throw new DukeException("     Such task does not exist!");
                         }
                         inputList.get(index - 1).completeTask();
+                        writeToFile(inputList);
                         System.out.println("     Nice! I've marked this task as done:");
                         System.out.println("       " + inputList.get(index - 1));
                         System.out.println(lines);
@@ -71,6 +76,7 @@ public class Duke {
                             }
                         }
                         inputList.add(new Todo(item));
+                        writeToFile(inputList);
                         System.out.println("       " + inputList.get(inputList.size() - 1));
                         System.out.println("     Now you have " + inputList.size() + " " + taskCount + " in the list.");
                         System.out.println(lines);
@@ -116,6 +122,7 @@ public class Duke {
                             }
                             inputList.add(new Event(input, extraInfo));
                         }
+                        writeToFile(inputList);
                         System.out.println("     Got it. I've added this task:");
                         System.out.println("       " + inputList.get(inputList.size() - 1));
                         System.out.println("     Now you have " + inputList.size() + " " + taskCount + " in the list.");
@@ -136,6 +143,7 @@ public class Duke {
                         } else {
                             taskCount = "tasks";
                         }
+                        writeToFile(inputList);
                         System.out.println("     Now you have " + inputList.size() + " " + taskCount + " in the list.");
                         System.out.println(lines);
                         System.out.println();
@@ -149,5 +157,64 @@ public class Duke {
                 System.out.println();
             }
         }
+    }
+    public static ArrayList<Task> obtainTasks(BufferedReader reader) throws Exception {
+        ArrayList<Task> output = new ArrayList<Task>();
+        String next = reader.readLine();
+        while(next != null) {
+            String[] input = next.split(" ");
+            String status = input[1];
+            String type = input[0];
+            String description = "";
+            String extraInfo = "";
+            for (int i = 2; i < input.length; i ++) {
+                if (i == input.length - 1) {
+                    description += input[i];
+                } else {
+                    description += input[i];
+                    description += " ";
+                }
+            }
+            if (type.equals("todo")) {
+                output.add(new Todo(description));
+            } else if (type.equals("event")){
+                extraInfo = reader.readLine();
+                output.add(new Event(description, extraInfo));
+            } else if (type.equals("deadline")) {
+                extraInfo = reader.readLine();
+                output.add(new Deadline(description, extraInfo));
+            }
+            if (status.equals("done")) {
+                output.get(output.size() - 1).completeTask();
+
+            }
+            next = reader.readLine();
+        }
+        return output;
+    }
+    public static void writeToFile(ArrayList<Task> input) throws Exception {
+        FileWriter fw = new FileWriter("../Data/Duke.txt");
+        for (Task task : input) {
+            String output = "";
+            String status = "";
+            if (task.getStatus()) {
+                status = "done";
+            } else {
+                status = "pending";
+            }
+            if (task.getClass().getName().equals("Todo")) {
+                output = "todo " + status + " " + task.getDescription();
+                fw.write(output + "\n");
+            } else if (task.getClass().getName().equals("Event")){
+                output = "event " + status + " " + task.getDescription();
+                fw.write(output + "\n");
+                fw.write(task.getExtraInfo() + "\n");
+            } else {
+                output = "deadline " + status + " " + task.getDescription();
+                fw.write(output + "\n");
+                fw.write(task.getExtraInfo() + "\n");
+            }
+        }
+        fw.close();
     }
 }

@@ -31,12 +31,17 @@ public class Duke {
             command.execute(tasks, ui, storage);
             canEnd = command.canEnd();
         }
-        TaskFileWriter writer = new TaskFileWriter();
         try {
-            writer.writeToFile("data/duke.txt", myList);
+            storage.save(tasks);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+//        TaskFileWriter writer = new TaskFileWriter();
+//        try {
+//            writer.writeToFile("data/duke.txt", myList);
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
     public static void main(String[] args) {

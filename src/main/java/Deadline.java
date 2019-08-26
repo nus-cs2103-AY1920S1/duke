@@ -7,6 +7,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    // [Level-7] Converts task to String format to write to hard disk
+    public String convertTaskToString() {
+        return String.format("D | %s | %s | %s", this.getStatus(), this.description, this.by);
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

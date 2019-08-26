@@ -7,6 +7,12 @@ public class Event extends Task {
     }
 
     @Override
+    // [Level-7] Converts task to String format to write to hard disk
+    public String convertTaskToString() {
+        return String.format("E | %s | %s | %s", this.getStatus(), this.description, this.at);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

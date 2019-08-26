@@ -1,7 +1,9 @@
 package duke.task;
 
 import duke.ui.Ui;
+
 import duke.exception.DukeException;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,7 +68,7 @@ public class TaskList {
         try {
             String[] done = command.split(" ");
             int number = Integer.valueOf(done[1]);
-            if (tasks.get(number - 1).getIsDone()) {
+            if (tasks.get(number - 1).isCompleted()) {
                 throw new DukeException("     ☹ OOPS!!! The task is already marked as done.");
             } else {
                 tasks.get(number - 1).markAsDone();

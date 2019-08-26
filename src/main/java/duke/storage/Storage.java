@@ -4,12 +4,16 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
+
 import duke.ui.Ui;
+
 import duke.exception.DukeException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -74,7 +78,7 @@ public class Storage {
                 } else {
                     sb.append("E ");
                 }
-                if (task.getIsDone()) {
+                if (task.isCompleted()) {
                     sb.append("1 ");
                 } else {
                     sb.append("0 ");

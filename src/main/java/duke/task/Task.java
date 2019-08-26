@@ -17,7 +17,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public boolean getIsDone() {
+    public boolean isCompleted() {
         return this.isDone;
     }
 

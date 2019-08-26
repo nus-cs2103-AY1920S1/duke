@@ -36,16 +36,15 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.deleteTask(index);
+        Task.minusFromTotalTasks();
         String indent = ui.getIndent();
         String message;
         if (task == null) {
             message = indent + "Index out of range, no task found.";
         } else {
-            message = new StringBuilder()
-                    .append(indent + "Noted. I've removed this task:\n")
-                    .append(indent + "  " + task + "\n")
-                    .append(indent + "Now you have " + taskList.getTotalTasks() + " tasks in the list.")
-                    .toString();
+            message = indent + "Noted. I've removed this task:\n"
+                    + indent + "  " + task + "\n"
+                    + indent + "Now you have " + taskList.getTotalTasks() + " tasks in the list.";
         }
         System.out.println(message);
         storage.write(taskList);

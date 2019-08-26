@@ -19,7 +19,6 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        ++totalTasks;
     }
 
     /**
@@ -38,6 +37,20 @@ public class Task {
      */
     public static int getTotalTasks() {
         return totalTasks;
+    }
+
+    /**
+     * Increases total tasks by 1.
+     */
+    public static void addToTotalTasks() {
+        ++totalTasks;
+    }
+
+    /**
+     * Decreases total tasks by 1.
+     */
+    public static void minusFromTotalTasks() {
+        --totalTasks;
     }
 
     /**

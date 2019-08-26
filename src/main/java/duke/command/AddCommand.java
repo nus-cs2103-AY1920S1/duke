@@ -41,6 +41,7 @@ public class AddCommand extends Command {
         String indent = ui.getIndent();
         try {
             Task task = TaskFactory.create(description);
+            Task.addToTotalTasks();
             taskList.addTask(task);
             message = task.message();
         } catch (TaskException e) {

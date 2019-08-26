@@ -5,12 +5,12 @@ public class Duke {
 
     protected static Scanner sc;
     protected static ArrayList<Task> taskList;
-    protected static int byeFlag = 0;
+    protected static boolean byeFlag = false;
 
     public static void main(String[] args) {
         taskList = new ArrayList<Task>();
         sc = new Scanner(System.in);
-        while (byeFlag == 0) {
+        while (!byeFlag) {
             try {
                 duke();
             } catch (DukeException ex) {
@@ -52,7 +52,7 @@ public class Duke {
         }
 
         System.out.println("Bye. Hope to see you again soon!");
-        byeFlag = 1;
+        byeFlag = true;
     }
 
     public static String getCommand(String input) {

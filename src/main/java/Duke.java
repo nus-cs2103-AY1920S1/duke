@@ -73,29 +73,31 @@ public class Duke {
                                     break;
 
                                 case DEADLINE: {
-                                    String[] timeSplit = command.split("/");
+                                    String[] timeSplit = command.split("/by");
                                     if (timeSplit.length == 1) {
                                         throw new DukeException(" ☹ OOPS!!! Please enter a deadline for your task.");
                                     } else {
-                                        Task newTask = new Deadline(timeSplit[0].substring(9), timeSplit[1].substring(3));
+                                        Task newTask = new Deadline(timeSplit[0].substring(9), timeSplit[1].substring(0));
                                         taskList.add(newTask);
                                         int numTasks = taskList.size();
                                         System.out.println("Got it. I've added this task:" + "\n" + newTask.toString()
                                                 + "\n" + "Now you have " + numTasks + " tasks in the list.");
+                                        System.out.println(newTask.getDate());
                                     }
                                 }
                                     break;
 
                                 case EVENT:
-                                    String[] timeSplit = command.split("/");
+                                    String[] timeSplit = command.split("/at");
                                     if (timeSplit.length == 1) {
                                         throw new DukeException(" ☹ OOPS!!! Please enter a time for your task.");
                                     } else {
-                                        Task newTask = new Events(timeSplit[0].substring(6), timeSplit[1].substring(3));
+                                        Task newTask = new Events(timeSplit[0].substring(6), timeSplit[1].substring(0));
                                         taskList.add(newTask);
                                         int numTasks = taskList.size();
                                         System.out.println("Got it. I've added this task:" + "\n" + newTask.toString()
                                                 + "\n" + "Now you have " + numTasks + " tasks in the list.");
+                                        System.out.println(newTask.getDate());
                                     }
                                     break;
                             }

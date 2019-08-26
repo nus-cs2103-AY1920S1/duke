@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
     public abstract class Task {
         protected String taskDesc;
@@ -27,6 +29,9 @@
             }
         }
 
-        public abstract String toFileFormat();
+
+
+        public abstract Date getDate();
+
     }
 

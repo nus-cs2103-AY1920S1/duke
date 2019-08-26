@@ -1,3 +1,7 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
+
 public class Todo extends Task{
 
     public Todo(String desc) {
@@ -10,12 +14,16 @@ public class Todo extends Task{
     }
 
     public String toFileFormat() {
-        if(isDone) {
+        if (isDone) {
             String format = "T | [✓] | " + taskDesc + "\n";
             return format;
         } else {
             String format = "T | [✗] | " + taskDesc + "\n";
             return format;
         }
+    }
+
+    public Date getDate () {
+        return null;
     }
 }

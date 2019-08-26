@@ -1,4 +1,10 @@
 /* introduced in L4 */
+
+/**
+ * class which takes in a Task implementing relevant TypedTaskInterface
+ * and has methods which returns the formatted string based on details of the Task
+ * and type of format to save or to print
+ */
 class TypedTaskFormatter implements TaskFormatInterface {
 
     private final TypedTaskInterface task;

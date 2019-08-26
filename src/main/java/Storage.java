@@ -7,6 +7,12 @@ import java.util.stream.Stream;
 import java.lang.System;
 import java.util.List;
 import java.util.ArrayList;
+
+/**
+ *  Deals with loading data onto file or reading from file
+ *  this class is called by TaskList to save list of tasks locally
+ *  for the next session
+ */
 class Storage implements TaskObserver, StorageInterface {
 
 
@@ -22,10 +28,21 @@ class Storage implements TaskObserver, StorageInterface {
         model.registerObserver(this);
     }
 
+    /**
+     * Returns vpid, paired with TaskModelInterface
+     *  the "Pbservable" pattern such that any changes
+     *  this classw ill be notified
+     */
     public void registerModel(TaskModelInterface model) {
         this.model.registerObserver(this);
     }
 
+    /**
+     * Returns void, method for tasklist to call each time
+     *  a new task is added, this prompts Storage to write
+     *  any changes in the list to file.
+     *  @param model basically TaskList to pull info to save
+     */
     public void update(TaskModelInterface model) {
         //System.out.println("Flag 1");
         String toWrite = saveFormat(model.getTaskStream());
@@ -33,6 +50,12 @@ class Storage implements TaskObserver, StorageInterface {
         writeData(toWrite);
     }
 
+
+    /**
+     * Returns stream of tasks saved in previous session
+     * @return Stream of Tasks, you can collect this into
+     * a List and update TaskModel with this
+     */
     public Stream<TaskInterface> loadData() {
         List<TaskInterface> taskList = new ArrayList<>();
         try {
@@ -60,6 +83,12 @@ class Storage implements TaskObserver, StorageInterface {
         return taskList.stream();
     }
 
+    /**
+     * Returns a string to be written into file
+     * @param taskStream tasks to be converted to string
+     *  to be written into save file
+     * @return String formatted for save file that can be loaded
+     */
     public static String 
         saveFormat(Stream<TaskInterface> taskStream) {
         return taskStream
@@ -73,7 +102,7 @@ class Storage implements TaskObserver, StorageInterface {
     private void writeData(String textToAdd) {
 //        File f = new File(this.path);
  //       System.out.println("file exists?: " + f.exists());
-        System.out.println("Attempting to write");
+        //System.out.println("Attempting to write");
         try {
 
             FileWriter fw = new FileWriter(this.path);

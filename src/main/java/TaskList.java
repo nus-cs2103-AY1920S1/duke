@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
+/**
+ * Class which stores all the tasks 
+ */
 class TaskList implements TaskModelInterface {
     private List<TaskObserver> observers;
     private List<TaskInterface> taskList;
@@ -18,11 +21,19 @@ class TaskList implements TaskModelInterface {
         this.taskList = taskStream.collect(Collectors.toList());
     }
 
+    /**
+     * returns void, takes in Stream of TaskInterfaces adds them to 
+     * internal task list
+     */
     public void loadData(Stream<TaskInterface> taskStream) {
         taskStream.forEach(x -> this.taskList.add(x));
         this.notifyObservers();
     }
 
+    /**
+     * Returns void, provides interface method to register observer classes
+     * to be notified whenever TaskList changes
+     */
     public void registerObserver(TaskObserver observer) {
         this.observers.add(observer);
     }
@@ -35,11 +46,18 @@ class TaskList implements TaskModelInterface {
         /* TODO another arraylist to keep track of tasks */
     }
 
+    /**
+     * Returns total Tasks in the tasklist currently
+     */
     public int getTotalTasks() {
         /* TODO arraylist.size()*/
         return this.taskList.size();
     }
 
+    /**
+     * Returns void, adds input TaskInterface task to tasklist
+     * @param task implements TaskInterface, task to add to taskList
+     */
     public void addTask(TaskInterface task) {
         this.taskList.add(task);
         this.notifyObservers();
@@ -47,6 +65,14 @@ class TaskList implements TaskModelInterface {
 
     // returns TaskInterface so task details can be printed
     // by the Display GUI
+    /**
+     * Returns TaskInterface, replaces TaskInterface at an index in TaskList with a,
+     *  generates a completed version of the Task and replaces it in the same
+     *  location in TaskList, returns the newly generated TaskInterface to be 
+     *  printed into onto Ui
+     * @param refNum which number in the tasklist to mark as completed
+     * @return TaskInterface class Task which is marked as completed.
+     */
     public TaskInterface doneTask(int refNum) {
         //the datastructure list is index0 
         //the GUI list is index1
@@ -58,6 +84,12 @@ class TaskList implements TaskModelInterface {
         return doneTask;
     }
 
+    /**
+     * Return TaskInterface, removes a TaskInterface at an index in TaskList
+     *  this would cause other Tasks to be pushed forward to fill the gap
+     * @param refNum number in tasklist to remove task
+     * @return TaskInterface class Task which is marked as completed.
+     */
     public TaskInterface deleteTask(int refNum) {
         int indexNum = refNum - 1;
         TaskInterface deletedTask = 
@@ -66,15 +98,27 @@ class TaskList implements TaskModelInterface {
         return deletedTask;
     }
 
+    /**
+     * deprecated to be removed
+     */
     public Iterator<TaskInterface> getTaskListIterator(){
         return this.taskList.listIterator();
     }
 
+    /**
+     * Return Stream of TaskInterfaces of Tasks that are stored in tasklist
+     * this ensures integrity of internally stored list
+     * @return Stream of TaskInterface classes
+     */
     public Stream<TaskInterface> getTaskStream() {
         return this.taskList.stream();
     }
 
     /* when do we notify the task again? */
+    /**
+     * Return void, notifies all registered Observer classes that tasklist has 
+     * changed
+     */
     public void notifyObservers() {
         //System.out.println("Notifying... ");
         for (TaskObserver observer : observers) {

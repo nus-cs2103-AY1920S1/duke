@@ -183,65 +183,7 @@ public class Duke {
             }
         }
     }
-    public static ArrayList<Task> obtainTasks(BufferedReader reader) throws Exception {
-        ArrayList<Task> output = new ArrayList<Task>();
-        String next = reader.readLine();
-        while(next != null) {
-            String[] input = next.split(" ");
-            String status = input[1];
-            String type = input[0];
-            String description = "";
-            String extraInfo = "";
-            for (int i = 2; i < input.length; i ++) {
-                if (i == input.length - 1) {
-                    description += input[i];
-                } else {
-                    description += input[i];
-                    description += " ";
-                }
-            }
-            if (type.equals("todo")) {
-                output.add(new Todo(description));
-            } else if (type.equals("event")){
-                extraInfo = reader.readLine();
-                output.add(new Event(description, extraInfo));
-            } else if (type.equals("deadline")) {
-                extraInfo = reader.readLine();
-                output.add(new Deadline(description, extraInfo));
-            }
-            if (status.equals("done")) {
-                output.get(output.size() - 1).completeTask();
 
-            }
-            next = reader.readLine();
-        }
-        return output;
-    }
-    public static void writeToFile(ArrayList<Task> input) throws Exception {
-        FileWriter fw = new FileWriter("../Data/Duke.txt");
-        for (Task task : input) {
-            String output = "";
-            String status = "";
-            if (task.getStatus()) {
-                status = "done";
-            } else {
-                status = "pending";
-            }
-            if (task.getClass().getName().equals("Todo")) {
-                output = "todo " + status + " " + task.getDescription();
-                fw.write(output + "\n");
-            } else if (task.getClass().getName().equals("Event")){
-                output = "event " + status + " " + task.getDescription();
-                fw.write(output + "\n");
-                fw.write(task.getExtraInfo() + "\n");
-            } else {
-                output = "deadline " + status + " " + task.getDescription();
-                fw.write(output + "\n");
-                fw.write(task.getExtraInfo() + "\n");
-            }
-        }
-        fw.close();
-    }
     public static ArrayList<Task> obtainTasks(BufferedReader reader) throws Exception {
         ArrayList<Task> output = new ArrayList<Task>();
         String next = reader.readLine();

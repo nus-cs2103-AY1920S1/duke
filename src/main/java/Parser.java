@@ -21,6 +21,13 @@ class Parser implements ControllerInterface {
         //this.display.
     }
 
+    /**
+     * Returns nothing, this command evaluates user command
+     *   and executes what needs to be done
+     *
+     * @param command Input user command
+     * @return void
+     */
     public void whatsGoingOn(String command) {
         String[] commandlist = command.split(" ");
         if (commandlist[0].toUpperCase().equals("LIST")) {
@@ -36,6 +43,13 @@ class Parser implements ControllerInterface {
         }
     }
 
+    /**
+     * Returns boolean, allows customization of how to end
+     *   the OWO program to be used by Ui
+     *  @param cmd Command text to test if it matches preselected
+     *    command to end OWO program
+     *   @return boolean if input matches preselected bye command
+     */
     public boolean isEndCommand(String cmd) {
         String[] cmdlist = cmd.split(" ");
         return cmdlist[0].toUpperCase().equals("BYE");

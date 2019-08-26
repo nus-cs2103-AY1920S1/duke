@@ -86,7 +86,6 @@ public class DateTime {
             timeString += "pm";
         }
         return timeString;
-
     }
 
     /*
@@ -98,7 +97,13 @@ public class DateTime {
         if (hourNum > 24) {
             throw new DateException("Invalid time entered!");
         } else if (hourNum < 12) {
-            numHour = hours;
+            if (hourNum == 0) {
+                numHour = "12";
+            } else if (hourNum < 10) {
+                numHour = hours.substring(1,2);
+            } else {
+                numHour = hours;
+            }
         } else {
             numHour = hourNum%12 + "";
         }

@@ -237,7 +237,7 @@ public class Duke {
                     String[] hoursMin = eventTime[1].split("-");
                     String hM = DT.getTime(hoursMin[0]) + "-" + DT.getTime(hoursMin[1]);
                     String formattedTime = DT.getDate(eventTime[0]) + hM;
-                    Event newEvent = new Event(details[0], formattedTime);
+                    Event newEvent = new Event(details[0].trim(), formattedTime);
                     memory.add(newEvent);
                     printTask(newEvent);
                     saveToDrive();
@@ -264,7 +264,7 @@ public class Duke {
             } else {
                 try {
                     String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
-                    Deadline newDeadline = new Deadline(details[0], formattedTime);
+                    Deadline newDeadline = new Deadline(details[0].trim(), formattedTime);
                     memory.add(newDeadline);
                     printTask(newDeadline);
                     saveToDrive();

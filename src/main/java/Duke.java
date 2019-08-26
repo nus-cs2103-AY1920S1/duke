@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.time.*;
 
 public class Duke {
     public static void main(String[] args) throws ClassNotFoundException, FileNotFoundException, IOException {
@@ -60,11 +61,12 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask);
                     System.out.println(String.format("Now you have %d tasks in the list.", Task.getNumberOfTasks()));
-                } catch (DukeException ex) {
-                    System.err.println(ex);
+                } catch (DukeException e) {
+                    System.err.println(e);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.err.println("Improper formatting of task description!");
                 }
             }
-
             FileOutputStream fos = new FileOutputStream("data/tasks.tmp");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(ls);

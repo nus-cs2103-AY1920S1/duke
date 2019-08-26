@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 import java.io.*;
-=======
+
 import java.text.ParseException;
->>>>>>> Level-8
+
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -67,11 +66,8 @@ public class Duke {
                         int dlDivision = dlDetail.indexOf("/");
                         try {
                             String dlDescription = dlDetail.substring(0, dlDivision - 1);
-<<<<<<< HEAD
-                            String by = dlDetail.substring(dlDivision + 4, dlDetail.length());
-=======
+
                             String by = dlDetail.substring(dlDivision + 3);
->>>>>>> Level-8
                             Task dl = new Deadline(dlDescription, by);
                             tasks.add(dl);
                             System.out.println("Got it. I've added this task: \n" + dl.toString()
@@ -88,11 +84,8 @@ public class Duke {
                         int eventDivision = eventDetail.indexOf("/");
                         try {
                             String eventDescription = eventDetail.substring(0, eventDivision - 1);
-<<<<<<< HEAD
-                            String at = eventDetail.substring(eventDivision + 4, eventDetail.length());
-=======
                             String at = eventDetail.substring(eventDivision + 3);
->>>>>>> Level-8
+
                             Task event = new Event(eventDescription, at);
                             tasks.add(event);
                             System.out.println("Got it. I've added this task: \n" + event.toString()
@@ -157,7 +150,7 @@ public class Duke {
                         break;
                 }
             }
-        } catch(IOException e) {
+        } catch(IOException | ParseException e) {
             e.printStackTrace();
         }
     }

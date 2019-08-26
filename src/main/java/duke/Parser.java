@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Task;
+import duke.task.TaskEnum;
+
 public class Parser {
     public static Command parse(String input) {
         // ADD TODO, DEADLINE, EVENT TASKS
@@ -65,7 +71,7 @@ public class Parser {
             return new ListCommand();
         } else if (input.equals("bye")) { // Exit application
             return new ExitCommand();
-        } else { // Invalid Command
+        } else { // Invalid duke.command.Command
             new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 

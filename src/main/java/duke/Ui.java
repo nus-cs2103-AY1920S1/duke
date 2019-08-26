@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -6,7 +7,7 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     public Ui(){
-        printOutput("Hello! I'm Duke\nWhat can i do for you?");
+        printOutput("Hello! I'm duke.Duke\nWhat can i do for you?");
     }
 
     public String readCommand(){

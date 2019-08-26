@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskEnum;
+
 public class AddCommand extends Command {
 
     private String description = "";

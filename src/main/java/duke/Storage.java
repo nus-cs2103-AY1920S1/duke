@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,11 +31,11 @@ public class Storage {
                 Task task = tasks.get(i);
 
                 if(task instanceof Todo){
-                    text += "T|" + task.isDone + "|" + task.description;
+                    text += "T|" + task.getIsDone() + "|" + task.getDescription();
                 } else if(task instanceof Deadline){
-                    text += "D|" + task.isDone + "|" + task.description + "|" + ((Deadline)task).getDate();
+                    text += "D|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Deadline)task).getDate();
                 } else if(task instanceof Event){
-                    text += "D|" + task.isDone + "|" + task.description + "|" + ((Event)task).getDate();
+                    text += "D|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Event)task).getDate();
                 }
 
                 if (i + 1 != tasks.size()) {

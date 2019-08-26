@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,7 +19,7 @@ public class TaskList {
     }
 
     public Task add(String description, TaskEnum type){
-        // Event and Deadline default date is based on the system clock
+        // duke.task.Event and duke.task.Deadline default date is based on the system clock
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
         switch(type){
         case TODO:
@@ -77,7 +81,7 @@ public class TaskList {
     public Task done(int taskNo){
         try {
             Task task = tasks.get(taskNo - 1); //Minus 1 because the displayed list starts at 1
-            if(task.isDone){
+            if(task.getIsDone()){
                 throw new DukeException("This item has already been checked.");
             }
             else {

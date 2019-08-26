@@ -1,12 +1,19 @@
 todo read book
 deadline return book /by 2/12/2019 1800
+blah
+event project meeting /at 6/13/2019 1400 to 6/8/2019 1600
 event project meeting /at 6/8/2019 1400 to 6/8/2019 1600
+todo
 todo join sports club
+done
 done 1
 done 4
 todo borrow book
 list
+done 27
+deadline
 deadline return book /by 25/8/2019 1100
 event project meeting /at 3/9/2019 1400 to 3/9/2019 1600
+event
 deadline do homework /by 8/9/2019 1800
 bye

@@ -1,7 +1,15 @@
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     private static Integer totalTask = 0;
+    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
@@ -96,7 +104,15 @@ public class Duke {
                 date = date + " " + commandList.remove(0);
             }
 
-            taskManager.addTask(new Deadline(stringHolder, date));
+            Date dateHolder;
+            try {
+                dateHolder = DATE_FORMAT.parse(date);
+            } catch (ParseException e) {
+                totalTask--;
+                throw new DukeException("Please enter date in this format: 2/12/2019 1800");
+            }
+
+            taskManager.addTask(new Deadline(stringHolder, dateHolder));
 
             System.out.println("Got it. I've added this task:");
             System.out.println("  [D][\u2718] " + stringHolder + " (by: " + date + ")");
@@ -120,7 +136,15 @@ public class Duke {
                 date = date + " " + commandList.remove(0);
             }
 
-            taskManager.addTask(new Event(stringHolder, date));
+            Date dateHolder;
+            try {
+                dateHolder = DATE_FORMAT.parse(date);
+            } catch (ParseException e) {
+                totalTask--;
+                throw new DukeException("Please enter date in this format: 2/12/2019 1800");
+            }
+
+            taskManager.addTask(new Event(stringHolder, dateHolder));
             System.out.println("Got it. I've added this task:");
             System.out.println("  [E][\u2718] " + stringHolder + " (at: " + date + ")");
             System.out.println("Now you have " + totalTask + " tasks in the list.");

@@ -1,5 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +19,7 @@ public class TaskList {
 
     /**
      * Lists items in To Do List.
-     * 
+     *
      * @return List as a string
      */
     public String list() {
@@ -26,7 +28,7 @@ public class TaskList {
 
     /**
      * Set index of To Do List as done. (one based numbering)
-     * 
+     *
      * @param i Index
      * @return Done message as a string
      */
@@ -40,8 +42,9 @@ public class TaskList {
 
     /**
      * Delete index of To Do List. (one based numbering)
-     * 
+     *
      * @param i Index
+     * @return message to print
      */
     public String delete(int i) {
         StringJoiner result = new StringJoiner("\n");
@@ -54,40 +57,57 @@ public class TaskList {
 
     /**
      * Appends task to To Do List. (one based numbering)
-     * 
+     *
      * @param task Task description
+     * @return message to print
      */
-    public void addToDo(String task) {
+    public String addToDo(String task) {
         toDoList.add(new ToDo(task));
-        this.addedMessage();
+        return addedMessage();
     }
 
     /**
      * Appends deadline to To Do List. (one based numbering)
-     * 
-     * @param task Task description
-     * @param date Deadline in date format
+     *
+     * @param task   Task description
+     * @param date   Deadline
+     * @param format Format to parse date
+     * @return message to print
      */
-    public void addDeadline(String task, Date date) {
-        toDoList.add(new Deadline(task, date));
-        this.addedMessage();
+    public String addDeadline(String task, String date, String format) {
+        String message;
+        try {
+            SimpleDateFormat readFormat = new SimpleDateFormat(format);
+            toDoList.add(new Deadline(task, readFormat.parse(date)));
+            message = addedMessage();
+        } catch (ParseException pe) {
+            message = pe.getMessage();
+        }
+        return message;
     }
 
     /**
      * Appends event to To Do List. (one based numbering)
-     * 
+     *
      * @param task Task description
      * @param date Date
      */
-    public void addEvent(String task, Date date) {
-        toDoList.add(new Event(task, date));
-        this.addedMessage();
+    public String addEvent(String task, String date, String format) {
+        String message;
+        try {
+            SimpleDateFormat readFormat = new SimpleDateFormat(format);
+            toDoList.add(new Event(task, readFormat.parse(date)));
+            message = addedMessage();
+        } catch (ParseException pe) {
+            message = pe.getMessage();
+        }
+        return message;
     }
 
     /**
      * Saves tasks in specified path.
-     * 
-     * @param filePath  Path wherein text will be saved
+     *
+     * @param filePath Path wherein text will be saved
      */
     public void save(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);

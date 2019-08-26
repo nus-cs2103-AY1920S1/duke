@@ -1,5 +1,6 @@
 import java.lang.IllegalArgumentException;
 import java.text.SimpleDateFormat;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 /**
@@ -10,15 +11,18 @@ import java.util.Scanner;
  * Abstract out as storage.load and constructor for TaskList. --> Requires TaskList to be done...
  * Handle wrong file path or empty file path.
  * Saving tasks (storage.save(TaskList, filePath))
- * 
+ * <p>
  * TaskList.
  * Abstract out TaskList.
  * Add constructor which parses storage Stores it as a list.
  * Internally Contains all methods to manipulate list.
- * 
+ * <p>
  * ui - Deals with user interaction (readLine, showWelcome etc)
- * 
- * Parser - read entire line, and output hashtable of details
+ * <p>
+ * Parser - read entire line, and output Hashtable of details
+ * Parser.parse(line) returns hashtable of details
+ * Unit test parser
+ * Refactor to take in string...
  */
 
 public class Duke {
@@ -27,63 +31,46 @@ public class Duke {
             + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
     private final String exitMessage = "Bye. Hope to see you again soon!";
-    private final String illegalArgumentMessage = "____________________________________________________________\n"
-            + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-            + "____________________________________________________________";
 
     /**
      * Driver method.
      */
     public void run() {
-        Scanner sc = new Scanner(System.in);
         String[] arr;
+        Hashtable<String, String> toDo;
         String task, date;
         SimpleDateFormat readFormat;
+        Scanner sc = new Scanner(System.in);
         boolean exit = false;
         toDoList = new TaskList();
         while (!exit) {
             try {
-                String command = sc.next();
-                switch (command) {
+                toDo = Parser.parse(sc.nextLine());
+                switch (toDo.get("command")) {
                 case "todo":
-                    task = sc.nextLine().trim();
-                    if (!task.isEmpty()) {
-                        toDoList.addToDo(task);
-                    } else {
-                        throw new IllegalArgumentException(emptyToDoErrorMessage);
-                    }
+                    System.out.println(toDoList.addToDo(toDo.get("task")));
                     break;
                 case "deadline":
-                    arr = sc.nextLine().split("/by");
-                    task = arr[0].trim();
-                    date = arr[1].trim();
-                    readFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                    toDoList.addDeadline(task, readFormat.parse(date));
+                    System.out.println(toDoList.addDeadline(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
                     break;
                 case "event":
-                    arr = sc.nextLine().split("/at");
-                    task = arr[0].trim();
-                    date = arr[1].trim();
-                    readFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                    toDoList.addEvent(task, readFormat.parse(date));
+                    System.out.println(toDoList.addEvent(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
                     break;
                 case "list":
                     System.out.println(toDoList.list());
                     break;
                 case "done":
-                    System.out.println(toDoList.done(sc.nextInt()));
+                    System.out.println(toDoList.done(Integer.parseInt(toDo.get("index"))));
                     break;
                 case "delete":
-                    System.out.println(toDoList.delete(sc.nextInt()));
+                    System.out.println(toDoList.delete(Integer.parseInt(toDo.get("index"))));
                     break;
                 case "save":
-                    toDoList.save("./Data/duke.txt");
+                    toDoList.save(toDo.get("path"));
                     break;
                 case "bye":
                     exit = true;
                     break;
-                default:
-                    throw new IllegalArgumentException(illegalArgumentMessage);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());

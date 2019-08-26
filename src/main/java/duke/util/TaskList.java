@@ -8,9 +8,18 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Create a TaskList to store Task objects.
+ */
 public class TaskList {
     public ArrayList<Task> list = new ArrayList<Task>();
 
+    /**
+     * TaskList to store.
+     *
+     * @param content Input an ArrayList of String for TaskList to read inputs line by line
+     * @throws DukeException If input is not formatted properly.
+     */
     public TaskList(ArrayList<String> content) throws DukeException {
         for (String s : content) {
             loadTask(s);

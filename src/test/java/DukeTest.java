@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    void dummyTest(){
+    void dummyTest() {
         System.out.println("DummyTest starts");
         assertEquals(2, 2);
         System.out.println("DummyTest Pass");

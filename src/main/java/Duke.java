@@ -25,10 +25,20 @@ public class Duke {
                 break;
             } else if (s.equals("list")){
                 printTasks();
+            } else if (s.matches("done ([1-9]|[1-9][0-9]|100)")) {
+                int displayNumber = Integer.parseInt(s.substring(5));
+                markTaskAsDone(displayNumber - 1);
             } else {
                 addTask(s);
             }
         }
+    }
+
+    private static void markTaskAsDone(int index) {
+        Task t = tasks.get(index);
+        t.markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[" + t.getStatusIcon() + "] " + t.getDescription());
     }
 
     private static void addTask(String description) {

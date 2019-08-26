@@ -15,29 +15,29 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-            myList = tasks.getTasks();
-            throw new DukeException("what is this");
-        } catch (DukeException | FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+        } finally {
+            //remove in future
+            myList = tasks.getTasks();
         }
     }
 
     private void run() {
-        Scanner myScanner = new Scanner(System.in);
         ui.showWelcome();
         boolean canEnd = false;
         while (!canEnd) {
-            String input;
-            input = myScanner.nextLine();
-            if (isDone(input) || isRemove(input)) {
+            String fullCommand = ui.readCommand();
+            Command command = new Parser().parse(fullCommand);
+            command.execute(tasks, ui, storage);
+            canEnd = command.canEnd();
+
+            String input = fullCommand;
+            if (isRemove(input)) {
                 continue;
             }
             switch (input) {
-            case "bye":
-                System.out.println("Bye. Hope to see you again soon!");
-                canEnd = true;
-                break;
             case "list":
                 System.out.println("Here are the tasks in your list");
                 for (int i = 0; i < myList.size(); i = i + 1) {
@@ -77,31 +77,6 @@ public class Duke {
                     System.out.println(myList.get(index));
                     myList.remove(index);
                     System.out.println("Now you have " + myList.size());
-                }
-                else {
-                    System.out.println("Please enter a valid number");
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns true if input is of the form "done <int>"
-     * @param input
-     */
-    private boolean isDone(String input) {
-        String[] keywords = input.split(" ");
-        if (keywords[0].equals("done") && keywords.length == 2) {
-            Scanner s = new Scanner(keywords[1]);
-            if (s.hasNextInt()) {
-                int index = s.nextInt() - 1;
-                if (index >=0 && index < myList.size()) {
-                    myList.get(index).setStatus(true);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[" + myList.get(index).getStatusIcon()
-                            + "]" + myList.get(index).getDescription());
                 }
                 else {
                     System.out.println("Please enter a valid number");

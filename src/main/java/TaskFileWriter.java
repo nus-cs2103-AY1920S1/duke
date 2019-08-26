@@ -22,7 +22,7 @@ public class TaskFileWriter {
             } else {
                 textToAdd += "T";
             }
-            if (task.getStatusIcon().equals("\u2713")) {
+            if (task.getDoneIcon().equals("\u2713")) {
                 textToAdd += " | Done";
             } else {
                 textToAdd += " | Not done";

@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.ui.Ui;
+import duke.exception.DukeException;
 import java.util.LinkedList;
 import java.util.List;
 

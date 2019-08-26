@@ -1,11 +1,14 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 public class Event extends Task {
 
-    protected String at;
-
-    protected int date;
-    protected int month;
-    protected int year;
-    protected int time;
+    String at;
+    int date;
+    int month;
+    int year;
+    int time;
 
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -33,4 +36,5 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
 }

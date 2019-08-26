@@ -1,14 +1,20 @@
-public class AddCommand extends Command {
+package duke.command;
+
+import duke.ui.Ui;
+import duke.task.TaskList;
+import duke.storage.Storage;
+
+public class DoneCommand extends Command {
 
     String command;
 
-    public AddCommand(String command) {
+    public DoneCommand(String command) {
         this.command = command;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.addTask(command, ui);
+        taskList.doneTask(command, ui);
     }
 
     @Override

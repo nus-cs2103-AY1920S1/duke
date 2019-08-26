@@ -14,6 +14,10 @@ public class Event extends Task {
         return "an event";
     }
 
+    protected String toExportFormat() {
+        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

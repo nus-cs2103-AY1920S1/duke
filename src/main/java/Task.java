@@ -1,3 +1,4 @@
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -23,6 +24,35 @@ public abstract class Task {
     }
 
     protected abstract String getTypeNameWithQuantifier();
+
+    protected abstract String toExportFormat();
+
+    public static Task fromImportFormat(String text) throws DukeException {
+        String[] stringArray = text.split(" \\| ");
+        Task t;
+        switch (stringArray[0]) {
+        case "T":
+            t = new Todo(stringArray[2]);
+            if (stringArray[1].equals("1")) {
+                t.markAsDone();
+            }
+            return t;
+        case "E":
+            t = new Event(stringArray[2], stringArray[3]);
+            if (stringArray[1].equals("1")) {
+                t.markAsDone();
+            }
+            return t;
+        case "D":
+            t = new Deadline(stringArray[2], stringArray[3]);
+            if (stringArray[1].equals("1")) {
+                t.markAsDone();
+            }
+            return t;
+        default:
+            throw new DukeException("Invalid format");
+        }
+    }
 
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();

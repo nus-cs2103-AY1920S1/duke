@@ -1,17 +1,17 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /** A class representing a task with a deadline. */
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     /**
      * Constructor for the deadline task class.
      * @param description the description of the task.
      * @param by the deadline of the task.
      */
-    public Deadline(String description, String by) throws IllegalDescriptionException {
+    public Deadline(String description, LocalDateTime by) throws IllegalDescriptionException {
         super(description);
-        if (by.isEmpty()) {
-            throw new IllegalDescriptionException("The deadline cannot be empty.");
-        }
         this.by = by;
     }
 
@@ -22,6 +22,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+        String dateTime = formatter.format(by);
+        return "[D]" + super.toString() + " (by: " + dateTime + ")";
     }
 }

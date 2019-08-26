@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,7 +85,7 @@ public class Duke {
                     throw new IllegalDescriptionException("The format of deadline task is wrong.");
                 }
                 addTask(new Deadline(description.substring(0, sep).strip(),
-                                description.substring(sep + 3).strip()),
+                                parseDate(description.substring(sep + 3).strip())),
                         list);
             } else if (type.equals("event")) {
                 int sep = description.indexOf("/at");
@@ -92,12 +93,40 @@ public class Duke {
                     throw new IllegalDescriptionException("The format of event task is wrong.");
                 }
                 addTask(new Event(description.substring(0, sep).strip(),
-                                description.substring(sep + 3).strip()),
+                                parseDate(description.substring(sep + 3).strip())),
                         list);
             } else {
                 throw new IllegalCommandException(
                         "I'm sorry, but I don't know what that means :-(");
             }
+        }
+    }
+
+    /**
+     * Returns a LocalDateTime object representing the date and time of String date.
+     * @param date a String that is to be parsed into date and time
+     * @return a LocalDateTime object representing the date and time of String date.
+     * @throws IllegalDescriptionException
+     */
+    private static LocalDateTime parseDate(String date) throws IllegalDescriptionException {
+        int indexOfSpace = date.indexOf(" ");
+        String time = "";
+        try {
+            if (indexOfSpace != -1) {
+                time = date.substring(indexOfSpace + 1).strip();
+                date = date.substring(0, indexOfSpace).strip();
+            } else {
+                throw new IllegalDescriptionException("The format of date and time is wrong!");
+            }
+
+            String[] dayMonthYear = date.split("/");
+            LocalDateTime dateTime = LocalDateTime.of(Integer.valueOf(dayMonthYear[2]), Integer.valueOf(dayMonthYear[1]),
+                    Integer.valueOf(dayMonthYear[0]),
+                    Integer.valueOf(time.substring(0, 2)), Integer.valueOf(time.substring(2)));
+
+            return dateTime;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalDescriptionException("The format of date and time is wrong");
         }
     }
 

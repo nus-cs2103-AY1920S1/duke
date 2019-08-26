@@ -7,7 +7,7 @@ class Task {
         this.isDone = false;
     }
 
-    //Invalid task throws DukeException
+    // Invalid task throws DukeException
     public Task(String action, int size) throws DukeException {
         if (size == 0) {
             throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-("); //no valid command given

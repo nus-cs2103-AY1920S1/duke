@@ -54,11 +54,9 @@ public class Task {
      */
     public String message() {
         String indent = String.format("%4s", "");
-        return new StringBuilder()
-                .append(indent + " Got it. I've added this task:\n")
-                .append(indent + "   " + this + "\n")
-                .append(indent + " Now you have " + totalTasks + " tasks in the list.")
-                .toString();
+        return indent + " Got it. I've added this task:\n"
+                + indent + "   " + this + "\n"
+                + indent + " Now you have " + totalTasks + " tasks in the list.";
     }
 
     /**

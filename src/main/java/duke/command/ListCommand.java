@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.task.Task;
 
 class ListCommand extends Command {
-    public ListCommand(String[] commandArgs) {
+    ListCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.list;
     }

@@ -30,7 +30,7 @@ public abstract class CommandParser {
             command = new ListCommand(inputs);
             break;
         case find:
-            command = new FindCommand(inputs);
+            command = new FindCommand(commandString, inputs);
             break;
         case done:
             command = new DoneCommand(inputs);

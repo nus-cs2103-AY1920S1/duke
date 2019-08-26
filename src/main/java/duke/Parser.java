@@ -6,6 +6,8 @@ import exception.DukeInvalidTaskDescriptionException;
 import exception.DukeInvalidTaskTimeException;
 import task.Task;
 
+import java.text.spi.NumberFormatProvider;
+
 public class Parser {
 
     public static Command parse(String command) throws DukeException {
@@ -22,12 +24,22 @@ public class Parser {
             if (token.length<=1) {
                 throw new DukeException("Give me a goddamn numbered task to do.");
             }
-            return new DoneCommand(Integer.parseInt(token[1]));
+            try {
+                int index = Integer.parseInt(token[1]);
+                return new DoneCommand(index);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Give me a goddamn numbered task to do.");
+            }
         case "delete" :
             if (token.length<=1) {
                throw new DukeException("Give me a goddamn numbered task to delete.");
             }
-            return new DeleteCommand(Integer.parseInt(token[1]));
+            try {
+                int index = Integer.parseInt(token[1]);
+                return new DeleteCommand(index);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Give me a goddamn numbered task to delete.");
+            }
         case "todo":
             if (token.length<=1) {
                 throw new DukeInvalidTaskDescriptionException("ToDo");
@@ -45,12 +57,17 @@ public class Parser {
         case "event":
             temp = command.split("/at");
             taskDesc = temp[0].substring(5).trim();
-            if(taskDesc.equals("")) {
+            if (taskDesc.equals("")) {
                 throw new DukeInvalidTaskDescriptionException("Event");
             } else if (temp.length < 2) {
                 throw new DukeInvalidTaskTimeException("event");
             }
             return new EventCommand(taskDesc, temp[1].trim());
+        case "find":
+            if (token.length <= 1) {
+                throw new DukeException("Give me a goddamn keyword to find.");
+            }
+            return new FindCommand(command.substring(4).trim());
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

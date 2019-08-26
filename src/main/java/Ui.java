@@ -64,4 +64,9 @@ class Ui {
                 "delete<space>list_index\n" +
                 "   eg. delete 3 (deletes Task number 3)");
     }
+
+    void printFind(String input, TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks.find(input));
+    }
 }

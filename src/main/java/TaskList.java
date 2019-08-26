@@ -37,6 +37,17 @@ class TaskList {
         return sb.toString();
     }
 
+    String find(String s) {
+        StringBuilder sb = new StringBuilder();
+        int counter = 0;
+        for (Task item : list) {
+            if (item.description.contains(s)) {
+                sb.append(++counter).append(".").append(item.getStatus()).append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
     String saveFormat() {
         StringBuilder sb = new StringBuilder();
         for (Task item : list) {

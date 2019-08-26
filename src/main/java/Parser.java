@@ -121,6 +121,15 @@ class Parser {
                 ui.printFormatHelp();
                 return true;
 
+            case "find":
+                checkValidSpacing(inputSplit);
+                StringBuilder sb = new StringBuilder();
+                for (String s : inputSplit) {
+                    sb.append(s).append(" ");
+                }
+                ui.printFind(sb.substring(5).trim(), tasks);
+                return true;
+
             default:
                 throw new InputUnknownException();
             }

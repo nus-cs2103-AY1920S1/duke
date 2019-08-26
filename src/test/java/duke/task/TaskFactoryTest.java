@@ -6,7 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test for TaskFactory Class.
+ */
 public class TaskFactoryTest {
+    /**
+     * Tests construction of a todo task.
+     */
     @Test
     public void test_newToDo() {
         try {
@@ -18,6 +24,9 @@ public class TaskFactoryTest {
         }
     }
 
+    /**
+     * Tests construction of a deadline task.
+     */
     @Test
     public void test_newDeadline() {
         try {
@@ -29,6 +38,9 @@ public class TaskFactoryTest {
         }
     }
 
+    /**
+     * Tests construction of a event task.
+     */
     @Test
     public void test_newEvent() {
         try {

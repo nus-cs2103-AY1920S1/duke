@@ -73,6 +73,12 @@ class Storage {
         return task;
     }
 
+    /**
+     * Writes to saveFile the given text
+     * Given text should have been formatted to make loading correct
+     * @param saveText Text to be written on the file
+     * @throws IOException If the file cannot be written
+     */
     void save(String saveText) throws IOException {
         //        how do you work around this? it always still exists
         //        if (f.exists()) {
@@ -85,6 +91,12 @@ class Storage {
         //        System.out.println("Finished Saving");
     }
 
+    /**
+     * Returns a TaskList filled with Tasks generated from the saveFile
+     * @return TaskList
+     * @throws FileNotFoundException If the File is not found
+     * @throws InvalidInputFormatException If the File is corrupted / not parsed correctly
+     */
     TaskList load() throws FileNotFoundException, InvalidInputFormatException {
         Scanner s = new Scanner(saveFile);
         TaskList tasks = new TaskList();

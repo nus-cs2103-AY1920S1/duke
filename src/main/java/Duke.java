@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -59,13 +60,15 @@ public class Duke {
                         int dlDivision = dlDetail.indexOf("/");
                         try {
                             String dlDescription = dlDetail.substring(0, dlDivision - 1);
-                            String by = dlDetail.substring(dlDivision + 3, dlDetail.length());
+                            String by = dlDetail.substring(dlDivision + 3);
                             Task dl = new Deadline(dlDescription, by);
                             tasks.add(dl);
                             System.out.println("Got it. I've added this task: \n" + dl.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(act);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                         break;
                     case event:
@@ -73,13 +76,15 @@ public class Duke {
                         int eventDivision = eventDetail.indexOf("/");
                         try {
                             String eventDescription = eventDetail.substring(0, eventDivision - 1);
-                            String at = eventDetail.substring(eventDivision + 3, eventDetail.length());
+                            String at = eventDetail.substring(eventDivision + 3);
                             Task event = new Event(eventDescription, at);
                             tasks.add(event);
                             System.out.println("Got it. I've added this task: \n" + event.toString()
                                     + "\nNow you have " + (tasks.size()) + " tasks in the list.");
                         } catch (StringIndexOutOfBoundsException e) {
                             throw new DukeIllegalDescriptionException(act);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                         break;
                     case delete:

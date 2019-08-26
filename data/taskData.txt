@@ -1,5 +1,4 @@
 { type: deadline, done: false, description: 2103ip, time: 01/12/1997 0000 }
-{ type: deadline, done: true, description: anotherip, time: 29/01/1997 2359 }
 { type: deadline, done: true, description: yet another ip, time: 1/12/1997 2359 }
 { type: event, done: false, description: yet another event, time: 09/2/2010 1200 to 09/2/2010 1400 }
 { type: event, done: true, description: yet another event, time: 09/2/2010 1200 to 1400 }

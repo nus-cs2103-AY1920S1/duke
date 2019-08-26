@@ -7,6 +7,13 @@ import java.util.Arrays;
  */
 public abstract class CommandParser {
 
+    /**
+     * Method for parsing an input string an returning a command.
+     *
+     * @param commandString The input command string to parse.
+     * @return The executable command.
+     * @throws DukeInvalidCommandException If parsed command type is invalid.
+     */
     public static Command parseCommand(String commandString)
             throws DukeInvalidCommandException {
 

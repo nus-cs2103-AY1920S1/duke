@@ -20,7 +20,7 @@ public class Duke {
         this.tasks = new ArrayList<>();
     }
 
-    private void dukeEcho(String... messages){
+    public static void dukeEcho(String... messages){
         System.out.println(DIVIDER);
         for (String msg : messages) {
             System.out.println(BLANKSPACE + msg);
@@ -40,6 +40,9 @@ public class Duke {
             String firstWord = arr[0].toLowerCase();
 
             switch (firstWord) {
+            case "help":
+                Helper.printAllowableInputFormats();
+                break;
             case "list":
                 listTasks();
                 break;
@@ -89,20 +92,26 @@ public class Duke {
             newTask = new ToDo(taskDetails);
             break;
         case "deadline":
-            String[] deadlineTask = taskDetails.split("/");
+            String[] deadlineTask = taskDetails.split("/",2);
             try {
                 newTask = new Deadline(deadlineTask[0], deadlineTask[1]);
             } catch (IndexOutOfBoundsException e) {
                 dukeEcho("OOPS!!! No deadline found");
                 return;
+            } catch (DukeException e) {
+                dukeEcho(e.getMessage());
+                return;
             }
             break;
         case "event":
-            String[] eventTask = taskDetails.split("/");
+            String[] eventTask = taskDetails.split("/",2);
             try {
                 newTask = new Event(eventTask[0], eventTask[1]);
             } catch (IndexOutOfBoundsException e) {
                 dukeEcho("OOPS!!! Event timing not found!");
+                return;
+            } catch (DukeException e) {
+                dukeEcho(e.getMessage());
                 return;
             }
             break;

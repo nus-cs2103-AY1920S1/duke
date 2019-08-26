@@ -167,7 +167,7 @@ public class Duke {
 
     public static Task delete(String position) throws DukeException {
         int index = Integer.parseInt(position) - 1;
-        Task task = new Task("");
+        Task task;
 
         if (index < taskList.size()) {
             task = taskList.get(index);

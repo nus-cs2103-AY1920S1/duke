@@ -7,6 +7,9 @@ import task.TaskList;
 import task.ToDo;
 import ui.Ui;
 
+/**
+ * Command for creating a ToDo Task.
+ */
 public class ToDoCommand extends Command {
 
     protected String[] input;
@@ -15,6 +18,13 @@ public class ToDoCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Execute creating ToDo task.
+     * Output what is needed.
+     * @param tasks the TaskList.
+     * @param ui the User Interface which responsible for every output printing.
+     * @param storage user's hard disk storage.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (input.length <= 1) {
             System.err.println("      " + new ToDoException());

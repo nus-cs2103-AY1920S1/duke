@@ -10,6 +10,9 @@ import ui.Ui;
 
 import java.text.ParseException;
 
+/**
+ * Command for creating a Deadline task.
+ */
 public class DeadlineCommand extends Command {
 
     protected String[] input;
@@ -18,6 +21,13 @@ public class DeadlineCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Execute creating Deadline task.
+     * Output what is needed.
+     * @param tasks the TaskList.
+     * @param ui the User Interface which responsible for every output printing.
+     * @param storage user's hard disk storage.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeParseException, DeadlineException {
         if (input.length <= 1) {
             throw new DeadlineException();

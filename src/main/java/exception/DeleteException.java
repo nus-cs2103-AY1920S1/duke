@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Responsible for problems occured during Delete task handling.
+ */
 public class DeleteException extends DukeException {
 
     public DeleteException() {

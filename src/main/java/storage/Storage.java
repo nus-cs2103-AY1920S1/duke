@@ -10,11 +10,18 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage responsible for interacting with user's hard disk storage.
+ */
 public class Storage {
 
     private Scanner sc;
     private String filepath;
 
+    /**
+     * Storage Constructor.
+     * @param filepath the file location in local pc.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         try {
@@ -24,6 +31,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Read data from hard disk storage.
+     * @return an array list of tasks, which will be passed into TaskList.
+     * @throws DukeException is thrown if problems occur during file reading.
+     * @see TaskList
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<Task>();
@@ -49,6 +62,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Store tasks list into hard disk storage.
+     * @param tasks the tasks list to store.
+     */
     public void save(TaskList tasks) {
         try {
             PrintWriter pw = new PrintWriter(filepath);

@@ -6,6 +6,9 @@ import task.Task;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * Command for specifying that a task is done.
+ */
 public class DoneCommand extends Command {
 
     protected String[] input;
@@ -14,6 +17,13 @@ public class DoneCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Execute 'ticking' a task in user's tasks list.
+     * Output what is needed.
+     * @param tasks the TaskList.
+     * @param ui the User Interface which responsible for every output printing.
+     * @param storage user's hard disk storage.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (input.length <= 1) {
             System.err.println("     " + new DoneException());

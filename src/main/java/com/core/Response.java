@@ -149,6 +149,9 @@ public enum Response {
      */
     private static void addTask(DoableTask t, State s) {
         s.list.add(t);
-        Printer.addTaskMessage(t.toString(), s.list.size());
+        Printer.printString("Got it. I've added this task:\n  "
+                + t.toString()
+                + "\nNow you have " + s.list.size()
+                + " tasks in the list.");
     }
 }

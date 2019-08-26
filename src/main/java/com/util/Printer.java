@@ -40,19 +40,6 @@ public class Printer {
     }
 
     /**
-     * Prints an added message for a given task toString().
-     *
-     * @param taskString a task's toString()
-     * @param length     length of list new size()
-     */
-    public static void addTaskMessage(String taskString, int length) {
-        printString("Got it. I've added this task:\n  "
-                + taskString
-                + "\nNow you have " + length
-                + " tasks in the list.");
-    }
-
-    /**
      * Print with error decorator prefixing the string.
      *
      * @param str string to be printed

@@ -14,20 +14,20 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+
     /**
      * Returns the correct command from given String command.
      * @param command
      * @return approriate command.
      * @throws DukeException
      */
-    public static Command parse(String command) throws DukeException{
-
+    public static Command parse(String command) throws DukeException {
 
         if (command.equals("bye")) {
             return new ByeCommand();
         }
-        isCommandValid(command);
 
+        isCommandValid(command);
 
         if (command.split(" ")[0].equals("done")) {
 
@@ -45,7 +45,8 @@ public class Parser {
 
             int spaceIndex = command.indexOf(" ");
             int slashIndex = command.indexOf("/");
-            Deadline deadline = getDeadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+            Deadline deadline = getDeadline(command.substring(spaceIndex + 1, slashIndex - 1),
+                    command.substring(slashIndex + 4));
 
             return new AddCommand(deadline);
 
@@ -96,11 +97,12 @@ public class Parser {
                 str.split(" ")[0].equals("event") ||
                 str.split(" ")[0].equals("delete") ||
                 str.split(" ")[0].equals("done")
-        )
-        ) {
+        )) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
         } else if (! str.split(" ")[0].equals("list") && str.split(" ").length == 1) {
-            throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", str.split(" ")[0]));
+            throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.",
+                    str.split(" ")[0]));
 
         } else if (str.split(" ")[0].equals("deadline") && ! str.contains("/by")) {
             throw new DukeException("OOPS!!! The description of a deadline has to be followed by '/by'.");
@@ -116,9 +118,11 @@ public class Parser {
 
         } else if (str.split(" ")[0].equals("delete") &&  ! isNumeric(str.split(" ")[1])) {
             throw new DukeException("OOPS!!! The index of the array has to be specified.");
+
         } else if (str.split(" ")[0].equals("delete") && isNumeric(str.split(" ")[1])
                 && (Integer.parseInt(str.split(" ")[1]) <= 0 )) {
             throw new DukeException("OOPS!!! Index out of bounds. It is larger or smaller than size of list.");
+
         } else if (str.split(" ")[0].equals("delete") && str.split(" ").length > 2) {
             throw new DukeException("OOPS!!! Please key in 'delete x', where x is the index that you want to delete!");
         }

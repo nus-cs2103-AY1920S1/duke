@@ -36,11 +36,9 @@ public class Ui {
      * @param taskList
      */
     public void showAddedTask(TaskList taskList) {
-
         System.out.println("Got it. I've added this task: ");
         System.out.println(String.format("    %s", taskList.getLast().toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", taskList.getSize()));
-
     }
 
     /**
@@ -49,6 +47,7 @@ public class Ui {
      */
     public void showTaskList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
+
         ArrayList<Task> arr = taskList.getArr();
         int index  = 1;
         for (Task task : arr) {
@@ -89,8 +88,8 @@ public class Ui {
      * @param  t
      */
     public void showDoneTask(Task t) {
-            System.out.println("Nice! I've marked this task as done");
-            System.out.println(String.format("    %s", t));
+        System.out.println("Nice! I've marked this task as done");
+        System.out.println(String.format("    %s", t));
     }
 
     /**

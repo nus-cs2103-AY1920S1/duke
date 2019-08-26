@@ -5,6 +5,7 @@ import duke.storage.Storage;
 import duke.logic.TaskList;
 import duke.ui.Ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -30,9 +31,7 @@ public class Duke {
     public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         storage = new Storage(filePath);
-
         tasks = new TaskList(storage.load());
-
     }
 
     /**

@@ -7,11 +7,24 @@ public class AddCommand implements Command {
     ArrayList<String> arguments;
     String taskType;
 
+    /**
+     * Constructor to construct a AddCommand.
+     * @param taskType String taskType to be added into the app (Example: ToDo, Event, Deadline).
+     * @param arguments ArrayList<String> contains the arguments for a particular taskType.
+     */
     public AddCommand(String taskType, ArrayList<String> arguments) {
         this.arguments = arguments;
         this.taskType = taskType;
     }
 
+    /**
+     * execute performs the command in the Duke app.
+     * @param tasks TaskList that contains the list of tasks that is tracked.
+     * @param ui Ui of the app.
+     * @param storage Storage is the class that manages file reading and file writing of the data passed into the app.
+     * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
+     * @throws InvalidTaskException exception thrown when task is invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException, InvalidTaskException {
         Task task = null;
@@ -43,11 +56,19 @@ public class AddCommand implements Command {
         storage.updateTasks(tasks);
     }
 
+    /**
+     * isExit checks if the command is an exit command.
+     * @return boolean whether if the command is an exit command.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * toString() returns the command and its arguments.
+     * @return String.
+     */
     @Override
     public String toString() {
         String args = "";

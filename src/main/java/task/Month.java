@@ -3,10 +3,18 @@ package task;
 public class Month {
     protected int monthNumber;
 
+    /**
+     * Constructor for Month objects.
+     * @param monthNumber int month number.
+     */
     public Month(int monthNumber) {
         this.monthNumber = monthNumber;
     }
 
+    /**
+     * Returns the corresponding month name from the given month number.
+     * @return String month name.
+     */
     public String toString() {
         if (this.monthNumber == 1) {
             return "January";

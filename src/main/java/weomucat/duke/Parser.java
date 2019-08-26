@@ -2,7 +2,7 @@ package weomucat.duke;
 
 import java.util.*;
 
-import static weomucat.duke.Command.PARAMETER_DEFAULT;
+import static weomucat.duke.command.Command.PARAMETER_DEFAULT;
 
 public class Parser {
 	private Scanner scanner;

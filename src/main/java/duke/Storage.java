@@ -1,121 +1,128 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.Commands;
 import duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.Map;
 
+/**
+ * Abstraction of the file storage of tasks.
+ * Requires a root folder dirName to search for recursively upwards.
+ */
 public class Storage {
 
     private static String PARSE_ERROR_MSG =
             " \u2639 Oops! I encountered an error while reading your previous tasks,\n"
                     + " I ignored that line of input but you should check it out...\n";
-    private static String DELIMITER = "|";
-    private static String DELIMITER_REGEX = "\\|";
-    private static int MIN_TASK_ARGUMENTS = 3;
-    private static int MAX_TASK_ARGUMENTS = 4;
-
+    private static String FALLBACK_FILE_PATH = "../data";
+    private static String DATA_FILE_NAME = "taskData.txt";
+    private static int DIRECTORY_SEARCH_LIMIT = 5;
     private String filePath;
     private Ui ui;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
-        ui = new Ui();
+    Storage(String dirName, Ui ui) {
+        setFilePath(dirName);
+        this.ui = ui;
     }
 
     void loadTasksToList(TaskList taskList) {
-        ArrayList<Task> existingTasks = new ArrayList<Task>();
+        Scanner dataScanner;
 
         try {
-            Scanner dataScanner = new Scanner(new File(filePath));
-            String input;
-            String inputs[];
-            int lineNumber = 0;
-
-
-            while (dataScanner.hasNextLine()) {
-                lineNumber++;
-
-                try {
-                    inputs = dataScanner.nextLine().split(DELIMITER_REGEX);
-                    validateDelimiter(inputs, lineNumber);
-
-                    // validate respective inputs
-                    TaskType taskType = getTaskType(inputs[0].trim(), lineNumber);
-                    boolean isDone = getDoneStatus(inputs[1].trim(), lineNumber);
-                    String description = getDescription(inputs[2].trim(), lineNumber);
-
-                    String timing = null;
-                    if (taskType.hasTime()) {
-                        timing = getTime("", lineNumber);
-                    }
-
-                    Task taskToAdd = null;
-                    switch (taskType) {
-                        case todo:
-                            taskToAdd = new TodoTask(description);
-                            break;
-                        case deadline:
-                            taskToAdd = new DeadlineTask(description, timing);
-                            break;
-                        case event:
-                            taskToAdd = new EventTask(description, timing);
-                            break;
-                    }
-                    taskToAdd.setDone(isDone);
-
-                    existingTasks.add(taskToAdd);
-
-                } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
-                    ui.printLineDivider();
-                    ui.printMsgLine(ex.getDisplayMsg());
-                    ui.printLineDivider();
-                    continue;
-                }
-            }
-
+            dataScanner = new Scanner(new File(filePath));
         } catch (FileNotFoundException ex) {
-            throw new DukeTaskFileParseException(
-                    "No existing file found in specified data directory",
-                    " I did not find any previous data in your data directory,\n"
-                            + "Creating one...");
+            ui.printLineDivider();
+            ui.printMsgLine(" I did not find any previous data in your data directory\n"
+                    + " creating one...");
+            ui.printLineDivider();
+            ui.printEmptyLine();
+            return;
         }
 
-        return existingTasks;
-    }
+        String input;
+        Map<StorageKey, String> inputs;
+        TaskType taskType;
+        boolean isTaskDone;
+        String taskDescription;
+        String taskTiming = "";
+        int lineNumber = 0;
 
-    public void saveTasksToDisk(TaskList tasks)
-        throws DukeFileWriteException {
+        while (dataScanner.hasNextLine()) {
+            input = dataScanner.nextLine();
+            lineNumber++;
 
-        FileWriter fileWriter;
-        try {
-            fileWriter = new FileWriter(filePath);
-            TaskType taskType;
-
-            //append tasks to disk
-            for (Task task : tasks.getAllTasks()) {
-                taskType = task.getTaskType();
-
-                fileWriter.write(taskType.toString());
-                fileWriter.write(String.format(" %s ", DELIMITER));
-                fileWriter.write(task.isDone() ? "1" : "0");
-                fileWriter.write(String.format(" %s ", DELIMITER));
-                fileWriter.write(task.getDescription());
+            try {
+                inputs = Parser.parseJsonLine(input);
+                taskType = getTaskType(inputs.get(StorageKey.type));
+                isTaskDone = getDoneStatus(inputs.get(StorageKey.done));
+                taskDescription = getDescription(inputs.get(StorageKey.description));
 
                 if (taskType.hasTime()) {
-                    fileWriter.write(String.format(" %s ", DELIMITER));
-                    fileWriter.write(task.getTiming());
+                    taskTiming = inputs.get(StorageKey.time);
                 }
 
-                fileWriter.write("\n");
-            }
+                Task taskToAdd;
 
+                switch (taskType) {
+                case todo:
+                    taskToAdd = new TodoTask(taskDescription);
+                    break;
+                case deadline:
+                    taskToAdd = new DeadlineTask(taskDescription, taskTiming);
+                    break;
+                case event:
+                    taskToAdd = new EventTask(taskDescription, taskTiming);
+                    break;
+                default:
+                    throw new DukeTaskFileParseException(
+                            "Unhandled taskType encountered",
+                            " \u2639 Oops! I am not trained to handle this type of Tasks...\n");
+                }
+
+                taskToAdd.setDone(isTaskDone);
+                taskList.addTask(taskToAdd);
+            } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
+                ui.printLineDivider();
+                ui.printMsgLine(ex.getDisplayMsg());
+                ui.printMsgLine(String.format("   Error in storage file line number: %d", lineNumber));
+                ui.printLineDivider();
+                continue;
+            }
+        }
+    }
+
+    public void saveTasksToDisk(TaskList tasks) throws DukeFileWriteException {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            TaskType taskType;
+
+            for (Task task : tasks.getAllTasks()) {
+                taskType = task.getTaskType();
+                String jsonLineStart = String.format(
+                        "{ %s:%s, %s:%s, %s:%s",
+                        StorageKey.type.toString(), taskType.toString(),
+                        StorageKey.done.toString(), ((Boolean) task.isDone()).toString(),
+                        StorageKey.description.toString(), task.getDescription());
+
+                fileWriter.write(jsonLineStart);
+
+                if (taskType.hasTime()) {
+                    fileWriter.write(
+                            String.format(
+                                    ", %s:%s",
+                                    StorageKey.time.toString(),
+                                    task.getTiming()));
+                }
+
+                fileWriter.write(" }\n");
+            }
             fileWriter.close();
         } catch (IOException ex) {
             throw new DukeFileWriteException(
@@ -124,82 +131,59 @@ public class Storage {
         }
     }
 
-    private void validateDelimiter(String[] inputs, int lineNumber)
-            throws DukeTaskFileParseException {
-
-        if (inputs.length < MIN_TASK_ARGUMENTS || inputs.length > MAX_TASK_ARGUMENTS) {
-            throw new DukeTaskFileParseException(
-                    "Missing delimiter or invalid number of delimiters encountered while parsing task file",
-                    PARSE_ERROR_MSG
-                            + String.format("  lineNumber: %d\n", lineNumber)
-                            + String.format(
-                                    "  Error Type: Invalid delimiter or number of delimiters \"%s\"",
-                                    Storage.DELIMITER));
-        }
-    }
-
-    private TaskType getTaskType(String input, int lineNumber)
-            throws DukeTaskFileParseException {
+    private TaskType getTaskType(String input) throws DukeTaskFileParseException {
         try {
             TaskType taskType = TaskType.valueOf(input);
             return taskType;
         } catch (IllegalArgumentException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",
-                    PARSE_ERROR_MSG
-                            + String.format("  lineNumber: %d\n", lineNumber)
-                            + "  Error Type: Invalid Task Type");
+                    " \u2639 Oops! I encountered an invalid task type value while\n"
+                            + "   reading your file.");
         }
     }
 
-    private boolean getDoneStatus(String status, int lineNumber)
-            throws DukeTaskFileParseException {
-        try {
-            int doneNumber = Integer.parseInt(status);
-
-            if (doneNumber != 1 && doneNumber != 0) {
-                throw new NumberFormatException();
-            }
-
-            return doneNumber == 1;
-        } catch (NumberFormatException ex) {
+    private boolean getDoneStatus(String status) throws DukeTaskFileParseException {
+        if (status.equalsIgnoreCase("true")) {
+            return true;
+        } else if (status.equalsIgnoreCase("false")) {
+            return false;
+        } else {
             throw new DukeTaskFileParseException(
                     "Invalid done status number encountered while parsing task file",
-                    PARSE_ERROR_MSG
-                            + String.format("  lineNumber: %d\n", lineNumber)
-                            + "  Error Type: Your done status should only be a 0 or 1!");
+                    " \u2639 Oops! I encountered an invalid done value while\n"
+                            + "   reading your file.");
         }
     }
 
-    private String getDescription(String description, int lineNumber)
-        throws DukeTaskFileParseException {
-
+    private String getDescription(String description) throws DukeTaskFileParseException {
         try {
             TaskUtil.validateTaskDescription(description);
+            return description;
         } catch (DukeInvalidArgumentException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task description encountered when parsing task file",
-                    PARSE_ERROR_MSG
-                            + String.format("  lineNumber: %d\n", lineNumber)
-                            + "  Error Type: Invalid task description");
+                    " \u2639 Oops! I encountered an empty description while\n"
+                            + "   reading your file.");
         }
-
-        return description;
     }
 
-    private String getTime(String input, int lineNumber)
-            throws DukeTaskFileParseException {
+    private void setFilePath(String dirName) {
+        String workingDir = System.getProperty("user.dir");
+        Path currentDir = Paths.get(workingDir);
 
-        try {
+        int recursiveSearchCount = 1;
 
-        } catch (IndexOutOfBoundsException ex)
-            throw new DukeTaskFileParseException(
-                    "Missing time information encountered when parsing task file",
-                    PARSE_ERROR_MSG
-                            + String.format("  lineNumber: %d\n", lineNumber)
-                            + "  Error Type: " + "Empty time information for task requiring it");
+        while (!Files.isDirectory(Paths.get(currentDir.toString(), dirName))
+                && recursiveSearchCount <= DIRECTORY_SEARCH_LIMIT) {
+            currentDir = currentDir.getParent();
+            recursiveSearchCount++;
         }
 
-        return inputs[3].trim();
+        if (recursiveSearchCount > 5) {
+            this.filePath = Paths.get(FALLBACK_FILE_PATH, DATA_FILE_NAME).toString();
+        } else {
+            this.filePath = Paths.get(currentDir.toString(), dirName, DATA_FILE_NAME).toString();
+        }
     }
 }

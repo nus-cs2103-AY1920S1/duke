@@ -30,10 +30,16 @@ public class EventTask extends Task {
     }
 
     private void initDates(String timing) throws DukeInvalidArgumentException {
+        if (timing == null) {
+            throw new DukeInvalidArgumentException(
+                    "Null reference provided to task constructor",
+                    "\u2639 OOPS!!! The timing for this task cannot be empty!");
+        }
+
         String[] splitTimings = timing.split(" to ");
         if (splitTimings.length != 2) {
             throw new DukeInvalidArgumentException(
-                    "Missing or more than one to delimiters in event task arguments",
+                    "Missing to delimiter in event task arguments",
                     "\u2639 OOPS!!! The format of the timing is invalid!\n"
                             + " Enter your time with \"dd/MM/yyyy HHmm to HHmm\"\n"
                             + "  or \"dd/MM/yyyy HHmm to dd/MM/yyyy HHmm\"");

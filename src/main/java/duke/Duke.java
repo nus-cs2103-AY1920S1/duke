@@ -9,20 +9,20 @@ import duke.task.Task;
 
 
 public class Duke {
-    private static String TASK_DATA_PATH = "../data/taskData.txt";
+    private static String RECURSIVE_PARENT_DIR_NAME = "data";
 
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
 
     public static void main(String[] args) {
-        Duke duke = new Duke(TASK_DATA_PATH);
+        Duke duke = new Duke(RECURSIVE_PARENT_DIR_NAME);
         duke.run();
     }
 
-    private Duke(String dataFilePath) {
-        storage = new Storage(dataFilePath);
+    private Duke(String dirName) {
         ui = new Ui(new Scanner(System.in));
+        storage = new Storage(dirName, ui);
         tasks = new TaskList();
         storage.loadTasksToList(tasks);
     }

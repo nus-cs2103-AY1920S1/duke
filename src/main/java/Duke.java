@@ -13,24 +13,35 @@ public class Duke {
         duke.start();
     }
 
+    /**
+     * Main driver function for the program -
+     * Greets user, then repeatedly takes in
+     * user input and processes them.
+     */
     private void start() {
         boolean notShutdown = true;
+        Scanner sc = new Scanner(System.in);
 
         this.greetHello();
         do {
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
-            switch (input) {
-                case "bye":
-                    this.greetGoodbye();
-                    notShutdown = false;
-                    break;
-                default:
-                    this.formattedPrintln(input);
+
+            if (input.equals("bye")) {
+                notShutdown = false;
+            } else {
+                this.formattedPrintln(input);
             }
         } while (notShutdown);
+        this.greetGoodbye();
     }
 
+
+    /**
+     * Prints the target string between two horizontal
+     * bars.
+     *
+     * @param output  The string to be printed
+     */
     private void formattedPrintln(String output) {
         System.out.println("____________________________________________________________\n"
                 + output
@@ -38,12 +49,22 @@ public class Duke {
                 + "____________________________________________________________\n");
     }
 
+    /**
+     * Prints out a formatted hello greeting on the
+     * screen. It is a implemented as a thin wrapper
+     * around duke.formattedPrintln()
+     */
     private void greetHello() {
         String hello = "Hello! I'm Duke\n"
                 + "What can I do for you?";
         this.formattedPrintln(hello);
     }
 
+    /**
+     * Prints out a formatted goodbye greeting on the
+     * screen. It is a implemented as a thin wrapper
+     * around duke.formattedPrintln()
+     */
     private void greetGoodbye() {
         String goodbye = "Bye. Hope to see you again soon!";
         this.formattedPrintln(goodbye);

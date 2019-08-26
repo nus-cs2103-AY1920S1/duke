@@ -10,7 +10,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        String iconForDone = done ? "v" : "x";
+        String iconForDone = done ? "\u2713" : "\u2718";
         return String.format("[E][%s] %s (at: %s)", iconForDone, this.task, this.date.toString());
     }
 }

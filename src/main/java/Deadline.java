@@ -10,7 +10,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        String iconForDone = done ? "v" : "x";
+        String iconForDone = done ? "\u2713" : "\u2718";
         return String.format("[D][%s] %s (by: %s)", iconForDone, this.task, this.date.toString());
     }
 }

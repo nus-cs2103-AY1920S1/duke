@@ -1,119 +1,35 @@
-import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.IllegalArgumentException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
-import java.util.StringJoiner;
+
+/**
+ * Storage.
+ * Remove line breaks from duke.txt. Done
+ * Add constructor for duke for file path.
+ * Initialise list with file path or new array list.
+ * Abstract out as storage.load and constructor for TaskList. --> Requires TaskList to be done...
+ * Handle wrong file path or empty file path.
+ * Saving tasks (storage.save(TaskList, filePath))
+ * 
+ * TaskList.
+ * Abstract out TaskList.
+ * Add constructor which parses storage Stores it as a list.
+ * Internally Contains all methods to manipulate list.
+ * 
+ * ui - Deals with user interaction (readLine, showWelcome etc)
+ * 
+ * Parser - read entire line, and output hashtable of details
+ */
 
 public class Duke {
-    List<Task> toDoList;
-    final String doneMessage = "Nice! I've marked this task as done:";
-    final String addedMessage = "Got it. I've added this task:";
-    final String deleteMessage = "Noted. I've removed this task: ";
-    final String exitMessage = "Bye. Hope to see you again soon!";
-    final String emptyToDoErrorMessage = "____________________________________________________________\n"
-            + "☹ OOPS!!! The description of a todo cannot be empty.\n"
+    private TaskList toDoList;
+    private final String emptyToDoErrorMessage = "____________________________________________________________\n"
+            + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
-    final String illegalArgumentMessage = "____________________________________________________________\n"
-        + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-        + "____________________________________________________________";
-
-    /**
-     * Lists items in To Do List.
-     * @return List as a string
-     */
-    public String list() {
-        StringJoiner result = new StringJoiner("\n");
-        for (int i = 0; i < toDoList.size(); i++) {
-            Task t = toDoList.get(i);
-            result.add(String.format("%d.%s", i + 1, t));
-        }
-        return padMessage(result.toString());
-    }
-
-    /**
-     * Set index of To Do List as done. (one based numbering)
-     * @param i Index
-     * @return Done message as a string
-     */
-    public String done(int i) {
-        toDoList.get(i - 1).setDone(true);
-        StringJoiner result = new StringJoiner("\n");
-        result.add(doneMessage);
-        result.add(toDoList.get(i - 1).toString());
-        return padMessage(result.toString());
-    }
-
-    /**
-     * Delete index of To Do List. (one based numbering)
-     * @param i Index
-     */
-    public void delete(int i) {
-        System.out.println("____________________________________________________________");
-        System.out.println(deleteMessage);
-        System.out.println(toDoList.get(i - 1));
-        System.out.println(String.format("Now you have %d tasks in the list.", toDoList.size()));
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Appends task to To Do List. (one based numbering)
-     * @param task Task description
-     */
-    public void addToDo(String task) {
-        toDoList.add(new ToDo(task));
-        this.addedMessage();
-    }
-
-    /**
-     * Appends deadline to To Do List. (one based numbering)
-     * @param task Task description
-     * @param date Deadline in date format
-     */
-    public void addDeadline(String task, Date date) {
-        toDoList.add(new Deadline(task, date));
-        this.addedMessage();
-    }
-
-    /**
-     * Appends event to To Do List. (one based numbering)
-     * @param task Task description
-     * @param date Date
-     */
-    public void addEvent(String task, Date date) {
-        toDoList.add(new Event(task, date));
-        this.addedMessage();
-    }
-
-    /**
-     * Saves tasks printed in list() in specified path.
-     * @param filePath Path wherein text will be saved
-     * @param textToAdd Text to add
-     */
-    public void save(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private String addedMessage() {
-        StringJoiner result = new StringJoiner("\n");
-        result.add(addedMessage);
-        result.add(toDoList.get(toDoList.size() - 1).toString());
-        result.add(String.format("Now you have %d tasks in the list.", toDoList.size()));
-        return padMessage(result.toString());
-    }
-
-    private String padMessage(String message) {
-        StringJoiner result = new StringJoiner("\n");
-        result.add("____________________________________________________________");
-        result.add(message);
-        result.add("____________________________________________________________");
-        return result.toString();
-    }
+    private final String exitMessage = "Bye. Hope to see you again soon!";
+    private final String illegalArgumentMessage = "____________________________________________________________\n"
+            + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+            + "____________________________________________________________";
 
     /**
      * Driver method.
@@ -124,7 +40,7 @@ public class Duke {
         String task, date;
         SimpleDateFormat readFormat;
         boolean exit = false;
-        toDoList = new ArrayList<>();
+        toDoList = new TaskList();
         while (!exit) {
             try {
                 String command = sc.next();
@@ -132,7 +48,7 @@ public class Duke {
                 case "todo":
                     task = sc.nextLine().trim();
                     if (!task.isEmpty()) {
-                        this.addToDo(sc.nextLine().trim());
+                        toDoList.addToDo(sc.nextLine().trim());
                     } else {
                         throw new IllegalArgumentException(emptyToDoErrorMessage);
                     }
@@ -142,26 +58,26 @@ public class Duke {
                     task = arr[0].trim();
                     date = arr[1].trim();
                     readFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                    this.addDeadline(task, readFormat.parse(date));
+                    toDoList.addDeadline(task, readFormat.parse(date));
                     break;
                 case "event":
                     arr = sc.nextLine().split("/at");
                     task = arr[0].trim();
                     date = arr[1].trim();
                     readFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                    this.addEvent(task, readFormat.parse(date));
+                    toDoList.addEvent(task, readFormat.parse(date));
                     break;
                 case "list":
-                    System.out.println(this.list());
+                    System.out.println(toDoList.list());
                     break;
                 case "done":
-                    System.out.println(this.done(sc.nextInt()));
+                    System.out.println(toDoList.done(sc.nextInt()));
                     break;
                 case "delete":
-                    this.delete(sc.nextInt());
+                    toDoList.delete(sc.nextInt());
                     break;
                 case "save":
-                    this.save("./Data/duke.txt", this.list());
+                    toDoList.save("./Data/duke.txt");
                     break;
                 case "bye":
                     exit = true;
@@ -188,6 +104,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
         Duke d = new Duke();
+        // Duke d = new Duke("Data/duke.txt");
         d.run();
     }
 }

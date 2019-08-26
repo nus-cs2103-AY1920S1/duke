@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.*;
 public class Duke {
     public static void main(String[] args) {
@@ -71,7 +72,17 @@ public class Duke {
                         }
                     }
                 }
+                try {
+                    PrintWriter savingAdd = new PrintWriter("/Users/hualun/Desktop/test.txt");
+                    for(Task task: array) {
+                        savingAdd.println(task);
+                    }
+                    savingAdd.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            System.out.println("What can I do for you?");
         }
     }
 }

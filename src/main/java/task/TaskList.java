@@ -3,6 +3,12 @@ package task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>
+ *     A singleton that helps to manage the list of task and provides
+ *     various operations on tasks.
+ * </p>
+ */
 public class TaskList {
     private static List<Task> tasks;
 
@@ -12,6 +18,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * <p>
+     *     Returns a new TaskList object that holds a reference to the
+     *     working list.
+     * </p>
+     *
+     * @return an instance of a TaskList object
+     */
     public static TaskList newInstance() {
         return new TaskList();
     }

@@ -45,20 +45,24 @@ public class Storage {
             String[] taskInfo = sc.nextLine().split("\\s*\\|\\s*");
             switch (taskInfo[0]) {
                 case "T":
-                    taskList.addNewTodoTask(taskInfo[2], taskInfo[1].equals("1"));
+                    taskList.addNewTodoTask(taskInfo[2],
+                                            taskInfo[1].equals("1"));
                     break;
 
                 case "D":
-                    taskList.addNewDeadlineTask(taskInfo[2], taskInfo[3], taskInfo[1].equals("1"));
+                    taskList.addNewDeadlineTask(taskInfo[2],
+                                                taskInfo[3],
+                                                taskInfo[1].equals("1"));
                     break;
 
                 case "E":
-                    taskList.addNewEventTask(taskInfo[2], taskInfo[3], taskInfo[1].equals("1"));
+                    taskList.addNewEventTask(taskInfo[2],
+                                             taskInfo[3],
+                                             taskInfo[1].equals("1"));
                     break;
             }
         }
     }
-
 
     public void updateData()  {
         try {

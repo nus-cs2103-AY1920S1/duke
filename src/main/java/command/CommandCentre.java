@@ -2,15 +2,14 @@ package command;
 
 import exception.InvalidCommandException;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class CommandCentre {
 
     /**
      * <p>
-     * A collection to store and map command names to their
-     * respective Command.
+     *     A collection to store and map command names to their
+     *     respective Command.
      * </p>
      */
     private HashMap<String, Command> commands;
@@ -37,7 +36,6 @@ public class CommandCentre {
      *
      * @param commandName The name of the command to be executed.
      * @return boolean Whether the command is valid or not.
-     * @throws IOException If
      */
     public boolean execute(String commandName) {
         try {

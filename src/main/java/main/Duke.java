@@ -8,8 +8,8 @@ import utils.Parser;
 import utils.Storage;
 import utils.Ui;
 
-public class Duke {
 
+public class Duke {
 
     private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
     private static final String STORAGE_PATH = "\\data\\duke.txt";
@@ -36,6 +36,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main entry point for the Duke Chatbot.
+     */
     private void run()  {
         ui.printHelloMessage();
 
@@ -58,12 +61,23 @@ public class Duke {
     }
 
 
+    /**
+     * Initialize all commands with their command names and store
+     * them to command centre.
+     */
     private void initializeCommands() {
         commandCentre.register("bye", new Command() {
             @Override
             public void execute() {
                 ui.printByeMessage();
                 isExiting = true;
+            }
+        });
+
+        commandCentre.register("help", new Command() {
+            @Override
+            protected void execute() {
+                ui.printHelpMessage();
             }
         });
 

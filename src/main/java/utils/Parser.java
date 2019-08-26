@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 
+
 public class Parser {
 
     private Scanner sc;
@@ -20,13 +21,16 @@ public class Parser {
         this.sc = sc;
     }
 
+
     public void nextLine() {
         sc.nextLine();
     }
 
+
     public boolean hasNext() {
         return sc.hasNext();
     }
+
 
     public String getNextAction() {
         return sc.next();
@@ -49,6 +53,7 @@ public class Parser {
             return null;
         }
     }
+
 
     public String[] parseDeadlineDetail() {
         try {
@@ -94,6 +99,19 @@ public class Parser {
         }
     }
 
+    /**
+     * <p>
+     *     Reads the next integer from user input where the integer must be
+     *     a valid index for the tasks in TaskList.
+     * </p>
+     *
+     * @return <p>
+     *     If successful, an Integer representing the task index.
+     *
+     *     Else, a null object.
+     * </p>
+     *
+     */
     public Integer getTaskIdx() {
 
         TaskList taskList = TaskList.newInstance();

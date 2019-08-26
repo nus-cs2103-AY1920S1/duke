@@ -49,7 +49,7 @@ public class Printer {
         printString("Got it. I've added this task:\n  "
                 + taskString
                 + "\nNow you have " + length
-                + "tasks in the list.");
+                + " tasks in the list.");
     }
 
     /**

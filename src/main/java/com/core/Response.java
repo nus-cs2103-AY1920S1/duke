@@ -50,6 +50,16 @@ public enum Response {
     TODO("(?i)^todo .+", (i, s) -> {
         addTask(new Todo(i.split("todo ", 2)[1]), s);
     }),
+    EVENT_NO_NAME("(?i)^event\\s*", (i, s) -> {
+        Printer.printError("The description of an event cannot be empty");
+    }),
+    EVENT_NO_TIME("^event (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
+        Printer.printError("The date range of an event cannot be empty");
+    }),
+    EVENT("(?i)^event .+ /at .+", (i, s) -> {
+        String[] parts = splitTwoDelimeters(i, "(?i)^event ", "(?i)/at ");
+        addTask(new Event(parts[0], parts[1]), s);
+    }),
     UNKNOWN(".*", (i, s) -> {
         Printer.printError("I'm sorry but I don't know what that means :-(");
     });
@@ -86,6 +96,12 @@ public enum Response {
             return false;
         }
         return true;
+    }
+
+    private static String[] splitTwoDelimeters(String input, String head, String mid) {
+        String[] parts = input.split(mid, 2);
+        parts[0] = parts[0].split(head)[1];
+        return parts;
     }
 
     private static void addTask(DoableTask t, State s) {

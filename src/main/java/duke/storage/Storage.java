@@ -42,7 +42,7 @@ public class Storage {
         } catch (FileNotFoundException ex) {
             ui.printLineDivider();
             ui.printMsgLine(" I did not find any previous data in your data directory\n"
-                    + " creating one...");
+                    + " I'll create one when you save something!");
             ui.printLineDivider();
             ui.printEmptyLine();
             return;

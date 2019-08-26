@@ -11,6 +11,7 @@ abstract class StorageParser {
             throws DukeTaskFileParseException {
         Map<StorageKey, String> lineMap = new EnumMap<StorageKey, String>(StorageKey.class);
 
+        checkOutermostBrackets(line);
         char[] lineArr = line.toCharArray();
 
         //first word should be a key
@@ -52,5 +53,30 @@ abstract class StorageParser {
         }
 
         return lineMap;
+    }
+
+    private static void checkOutermostBrackets(String line) throws DukeTaskFileParseException {
+        String jsonLine = line.trim();
+        int lineLength = jsonLine.length();
+
+        boolean hasOpeningBracket = lineLength > 0
+                ? jsonLine.charAt(0) == '{'
+                : false;
+
+        if (!hasOpeningBracket) {
+            throw new DukeTaskFileParseException(
+                    "Missing opening bracket while parsing file line.",
+                    " \u2639 OOPS!!! I found line without an opening bracket in your storage file,\n"
+                            + " I'll skip that line!\n");
+        }
+
+        boolean hasClosingBracket = jsonLine.charAt(lineLength - 1) == '}';
+
+        if (!hasClosingBracket) {
+            throw new DukeTaskFileParseException(
+                    "Missing closing bracket while parsing file line.",
+                    " \u2639 OOPS!!! I found a line without an closing bracket in your storage file,\n"
+                            + " I'll skip that line!\n");
+        }
     }
 }

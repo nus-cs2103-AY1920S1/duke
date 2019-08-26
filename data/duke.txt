@@ -1,3 +1,0 @@
-T @ borrow book @ false
-D @ return book @ true @ Sunday
-E @ project meeting @ false @ Mon 2-4pm

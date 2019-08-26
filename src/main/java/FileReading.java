@@ -7,6 +7,10 @@ import java.util.Scanner;
 public class FileReading {
 
     public static void checkFileExists(ArrayList<Task> taskList) throws IOException {
+        File directory = new File("data");
+        if (! directory.exists()){
+            directory.mkdir();
+        }
         File f = new File("data/duke.txt");
         if (!f.createNewFile()){loadFileContents(taskList, f);}
     }
@@ -54,6 +58,7 @@ public class FileReading {
                 break;
             }
         }
+        s.close();
     }
 
 }

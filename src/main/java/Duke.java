@@ -37,7 +37,7 @@ public class Duke {
         try {
             FileReading.checkFileExists(taskList);
         }  catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Oops. something went wrong with the duke.txt file");
         }
 
         while (!input.equals("bye")) {
@@ -66,7 +66,7 @@ public class Duke {
                     by = input.split(" /by ")[1];
                     desc = input.split(" /by ")[0].split(" ", 2)[1];
                 } catch (IndexOutOfBoundsException err) {
-                    System.out.println("OOPS!!! The description of a deadline cannot be empty.\n");
+                    System.out.println("OOPS!!! Incorrect description for event; remember to use the /by keyword.\n");
                     break;
                 }
                 Deadline d = new Deadline(desc, by);
@@ -78,7 +78,7 @@ public class Duke {
                     at = input.split(" /at ")[1];
                     desc = input.split(" /at ")[0].split(" ", 2)[1];
                 } catch (IndexOutOfBoundsException err) {
-                    System.out.println("OOPS!!! The description of an event cannot be empty.\n");
+                    System.out.println("OOPS!!! Incorrect description for event; remember to use the /at keyword.\n");
                     break;
                 }
                 Event e = new Event(desc, at);

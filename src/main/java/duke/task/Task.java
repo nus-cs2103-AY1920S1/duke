@@ -8,9 +8,9 @@ public class Task {
     /** Total tasks created. */
     private static int totalTasks = 0;
     /** Whether task is done. */
-    private boolean isDone;
+    protected boolean isDone;
     /** String of the task. */
-    private String description;
+    protected String description;
 
     /**
      * Creates an instance of Task.
@@ -70,6 +70,15 @@ public class Task {
         return indent + " Got it. I've added this task:\n"
                 + indent + "   " + this + "\n"
                 + indent + " Now you have " + totalTasks + " tasks in the list.";
+    }
+
+    /**
+     * Returns the string representation for data file.
+     *
+     * @return Returns String representation for data file.
+     */
+    public String toFileAsString() {
+        return String.format("Task - %s - %s", isDone ? "1" : "0", description);
     }
 
     /**

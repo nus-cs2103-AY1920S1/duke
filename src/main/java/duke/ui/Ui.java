@@ -34,7 +34,8 @@ public class Ui {
      */
     public String readCommand() throws DukeException {
         try {
-            return br.readLine();
+            String line = br.readLine();
+            return line == null ? "" : line;
         } catch (IOException e) {
             throw new DukeException();
         }

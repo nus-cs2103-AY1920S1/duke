@@ -27,6 +27,16 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the string representation for data file.
+     *
+     * @return Returns String representation for data file.
+     */
+    @Override
+    public String toFileAsString() {
+        return String.format("E - %s - %s - %s", isDone ? "1" : "0", description, at);
+    }
+
+    /**
      * Returns the timing of the event.
      * @return String time;
      */

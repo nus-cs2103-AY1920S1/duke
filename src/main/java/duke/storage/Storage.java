@@ -20,7 +20,7 @@ import duke.task.Event;
  */
 public class Storage {
     /** Given path to the which holds the data. */
-    private String filePath = "../data/duke.txt";
+    private String filePath = "./data/duke.txt";
 
     /**
      * Creates an instance of Storage.
@@ -29,6 +29,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         File f = new File(filePath);
+        (new File("data")).mkdir();
         try {
             f.createNewFile();
         } catch (IOException e) {
@@ -46,34 +47,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             ArrayList<Task> tasks = tasklist.getAllTasks();
             for (Task task : tasks) {
-                if (task instanceof ToDo) {
-                    fw.write("T");
-                    fw.write(" - ");
-                    fw.write(task.isDone() ? "1" : "0");
-                    fw.write(" - ");
-                    fw.write(task.getDescription());
-                    fw.write("\n");
-                } else if (task instanceof Deadline) {
-                    fw.write("D");
-                    fw.write(" - ");
-                    fw.write(task.isDone() ? "1" : "0");
-                    fw.write(" - ");
-                    fw.write(task.getDescription());
-                    fw.write(" - ");
-                    fw.write(((Deadline) task).getBy());
-                    fw.write("\n");
-                } else if (task instanceof Event) {
-                    fw.write("E");
-                    fw.write(" - ");
-                    fw.write(task.isDone() ? "1" : "0");
-                    fw.write(" - ");
-                    fw.write(task.getDescription());
-                    fw.write(" - ");
-                    fw.write(((Event) task).getAt());
-                    fw.write("\n");
-                } else {
-                    System.out.println("Unknown task");
-                }
+                fw.write(task.toFileAsString() + "\n");
             }
             fw.close();
         } catch (IOException e) {

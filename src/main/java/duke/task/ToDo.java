@@ -14,6 +14,16 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns the string representation for data file.
+     *
+     * @return Returns String representation for data file.
+     */
+    @Override
+    public String toFileAsString() {
+        return String.format("T - %s - %s", isDone ? "1" : "0", description);
+    }
+
+    /**
      * Returns String representation of a todo task.
      *
      * @return String representation of a todo task.

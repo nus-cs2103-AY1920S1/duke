@@ -27,6 +27,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the string representation for data file.
+     *
+     * @return Returns String representation for data file.
+     */
+    @Override
+    public String toFileAsString() {
+        return String.format("D - %s - %s - %s", isDone ? "1" : "0", description, by);
+    }
+
+    /**
      * Gets the deadline for this deadline.
      * @return String deadline.
      */

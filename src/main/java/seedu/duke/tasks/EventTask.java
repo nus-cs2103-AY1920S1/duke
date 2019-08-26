@@ -1,6 +1,8 @@
 package seedu.duke.tasks;
 
 public class EventTask extends Task {
+    private static final long serialVersionUID = -252890583907902347L;
+
     private final String time;
 
     public EventTask(String description, String time) {

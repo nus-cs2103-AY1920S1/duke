@@ -23,7 +23,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?\n");
 
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = Serialisation.deserialise();
+        if (taskList == null) {
+            System.out.println("No saved list loaded.");
+            taskList = new ArrayList<>();
+        } else {
+            System.out.printf("Loaded tasks from %s.%n", Serialisation.DATA_FILE_PATH);
+        }
 
         try (InputStreamReader isr = new InputStreamReader(System.in);
              BufferedReader br = new BufferedReader(isr)) {
@@ -55,5 +61,8 @@ public class Duke {
             System.err.println("IO error.");
             e.printStackTrace();
         }
+
+        Serialisation.serialise(taskList);
+        System.out.printf("Saved tasks to %s.%n", Serialisation.DATA_FILE_PATH);
     }
 }

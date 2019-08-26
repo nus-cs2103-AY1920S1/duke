@@ -1,6 +1,10 @@
 package seedu.duke.tasks;
 
-public abstract class Task {
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
+    private static final long serialVersionUID = -2528903467902347L;
+
     private final String description;
     private boolean done;
 

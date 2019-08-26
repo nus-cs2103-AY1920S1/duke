@@ -19,7 +19,7 @@ public class Duke {
     }
 
     private void run() {
-        ui.showWelcome(tasks.list);
+        ui.showWelcome(tasks.tasks);
         boolean isExit = false;
         while (!isExit) {
             try {

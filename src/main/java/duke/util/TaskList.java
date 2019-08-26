@@ -9,7 +9,7 @@ import duke.task.ToDo;
 import java.util.ArrayList;
 
 public class TaskList {
-    public ArrayList<Task> list = new ArrayList<Task>();
+    public ArrayList<Task> tasks = new ArrayList<Task>();
 
     public TaskList(ArrayList<String> content) throws DukeException {
         for (String s : content) {
@@ -40,6 +40,6 @@ public class TaskList {
         if (strArr[1].equals("1")) {
             t.markAsDone();
         }
-        list.add(t);
+        tasks.add(t);
     }
 }

@@ -66,8 +66,8 @@ public class Ui {
     public void printList(TaskList t) {
         try {
             System.out.println("Here are the task in your list:");
-            for (int i = 0; i < t.list.size(); i++) {
-                System.out.println(i + 1 + "." + t.list.get(i));
+            for (int i = 0; i < t.tasks.size(); i++) {
+                System.out.println(i + 1 + "." + t.tasks.get(i));
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.print("Your list is empty.");

@@ -10,6 +10,13 @@ public class AddDeadlineCommand extends Command {
         this.date = date;
     }
 
+    public AddDeadlineCommand(String task, Date date){
+        this.commandType = CommandType.ADDDEADLINE;
+        this.task = task;
+        this.date = date.toString();
+    }
+
+
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         this.deadlineTask = new Deadline(this.task, taskList.getSize() + 1, this.date);

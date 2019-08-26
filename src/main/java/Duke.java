@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Duke {
     static ArrayList<Task> memory = new ArrayList<>();
-    static int index;
     static DateTime DT = new DateTime();
+    static int index;
 
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -51,7 +51,6 @@ public class Duke {
                         throw new DukeException("Oops! The description of a deadline cannot be empty.");
                     } else {
                         deadlineTask(DeadlineTask);
-                        System.out.println("deadline created");
                     }
                 } else if (input.equals("delete")) {
                     int deleteNum = sc.nextInt();

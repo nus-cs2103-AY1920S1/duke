@@ -35,6 +35,9 @@ public class Parser {
             String listActionIndex = deleteDetails[1].trim();
             int arrayActionIndex = Integer.parseInt(listActionIndex) - 1;
             return new DeleteCommand(arrayActionIndex);
+        } else if (userInput.contains("find")) {
+            String details = userInput.replaceFirst("find", "");
+            return new FindCommand(details.trim());
         } else {
             throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

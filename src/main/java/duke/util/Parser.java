@@ -1,13 +1,28 @@
 package duke.util;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Create a Parser file to parse user input into Commands understood by the programme.
+ */
 public class Parser {
+    /**
+     * Parse user input into Commands understood by the programme.
+     *
+     * @param s Input string.
+     * @return A specific Command which will be executed.
+     * @throws DukeException If an input is not formatted properly.
+     */
     public static Command parse(String s) throws DukeException {
         String[] strArr = s.split(" ");
         String[] temp;

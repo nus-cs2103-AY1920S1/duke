@@ -6,8 +6,11 @@ import duke.util.TaskList;
 import duke.util.Ui;
 import duke.task.Task;
 
+/**
+ * Generic command class, to be inherited by specific commands.
+ */
 public abstract class Command {
-    int n;
+    int pos;
     protected Task task;
     boolean exit = false;
 
@@ -17,3 +20,4 @@ public abstract class Command {
         return this.exit;
     }
 }
+

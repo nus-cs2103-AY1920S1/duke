@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ToDoTest {
     @Test
-    void ToDoTest() {
+    void toDoTest() {
         System.out.println("TodoTest starts");
         ToDo todo = new ToDo("testing");
-        assertEquals("[T][✘] testing", todo.toString());
+        assertEquals("[T][N] testing", todo.toString());
         assertEquals("T | 0 | testing", todo.toWriteFile());
         System.out.println("TodoTest Pass");
     }

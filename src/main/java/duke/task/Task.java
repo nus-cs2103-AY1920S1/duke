@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Create a Task.
+ */
 public class Task {
     String description;
     private boolean isDone;
@@ -10,7 +13,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]");
+        return (isDone ? "[Y]" : "[N]");
     }
 
     String getDoneStatus() {

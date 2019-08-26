@@ -11,12 +11,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Create a Storage class to read and write user's tasks.
+ */
 public class Storage {
     private Scanner sc;
     private ArrayList<String> contentList = new ArrayList<String>();
     private static final String DUKE_DATA_DIR = System.getProperty("user.home") + File.separator + "data";
     private static final String DUKE_DATA_PATH = DUKE_DATA_DIR + File.separator + "task.txt";
 
+    /**
+     * Create a Storate class to read and write user's tasks.
+     */
     public Storage() {
         try {
             if (!Paths.get(DUKE_DATA_PATH).toFile().exists()) {
@@ -33,6 +39,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads user's task from disk.
+     *
+     * @return ArrayList of String
+     */
     public ArrayList<String> load() {
         try {
             while (sc.hasNext()) {
@@ -47,6 +58,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves user's task into disk.
+     *
+     * @param list ArrayList of Task object to be read.
+     */
     public void save(ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter(DUKE_DATA_PATH);

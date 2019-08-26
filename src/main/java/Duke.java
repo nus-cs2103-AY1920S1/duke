@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static void printList(ArrayList<Task> list) {
@@ -43,6 +47,52 @@ public class Duke {
         }
     }
 
+    public static void loadTasks(ArrayList<Task> tasks) {
+        try {
+            File duke = new File("../../../data/duke.txt");
+            Scanner fs = new Scanner(duke);
+            while (fs.hasNext()) {
+                String nextLine = fs.nextLine();
+                String[] words = nextLine.split(" \\| ");
+                if (words[0].equals("T")) {
+                    Task t = new ToDo(words[2]);
+                    if (words[1].equals("\u2713")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                }
+                if (words[0].equals("D")) {
+                    Task t = new Deadline(words[2], words[3]);
+                    if (words[1].equals("\u2713")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                } 
+                if (words[0].equals("E")) {
+                    Task t = new Event(words[2], words[3]);
+                    if (words[1].equals("\u2713")) {
+                        t.markAsDone();
+                    }
+                    tasks.add(t);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
+
+    public static void writeToDuke(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter("../../../data/duke.txt");
+            for (Task t : list) {
+                fw.write(t.format() + System.lineSeparator());
+            } 
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());   
+        }
+    }
+
     public static void checkIllegalInstruction(String[] words) throws DukeException {
         String fw = words[0];
         if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event")
@@ -64,6 +114,7 @@ public class Duke {
     public static void processor(){
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
+        loadTasks(tasks);
         String command;
         while(!(command = sc.nextLine()).equals("bye")) {
             if(command.equals("list")) {
@@ -77,17 +128,20 @@ public class Duke {
                         Task t = tasks.get(i - 1);
                         t.markAsDone();
                         System.out.println("Nice! I've marked this task as done: \n  " + t);
+                        writeToDuke(tasks);
                     } else if (words[0].equals("delete")) {
                         int i = Integer.parseInt(words[1]);
                         Task t = tasks.get(i - 1);
                         tasks.remove (i - 1);
                         System.out.println("Noted. I've removed this task: \n  " + t + "\nNow you have "
                                 + tasks.size() + " tasks in the list.");
+                        writeToDuke(tasks);
                     } else {
                         Task t = parseTask(words);
                         tasks.add(t);
                         System.out.println("Got it. I've added this task: \n  " + t + "\nNow you have "
                                 + tasks.size() + " tasks in the list.");
+                        writeToDuke(tasks);
                     }
                 }
                 catch(DukeException e) {

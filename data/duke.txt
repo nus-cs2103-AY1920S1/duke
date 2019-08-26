@@ -1,0 +1,8 @@
+T | ✓ | read books
+D | ✓ | submit proposal | weekend
+E | ✘ | return books | tomorrow 5pm
+T | ✘ | do sports
+E | ✓ | group meeting | Thursday 2pm
+T | ✘ | watch movie
+T | ✓ | go to USS
+T | ✓ | shopping

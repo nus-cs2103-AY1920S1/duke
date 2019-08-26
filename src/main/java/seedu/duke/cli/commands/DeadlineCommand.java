@@ -7,13 +7,15 @@ import seedu.duke.tasks.DeadlineTask;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TodoTask;
 
+import java.time.LocalDateTime;
+
 public class DeadlineCommand extends AddCommand {
     private final String description;
-    private final String deadline;
+    private final LocalDateTime deadline;
 
     @CommandConstructor("deadline")
     public DeadlineCommand(@Argument(trailing = true) String description,
-                           @Argument(trailing = true, prefix = "/by") String deadline) {
+                           @Argument(trailing = true, prefix = "/by") LocalDateTime deadline) {
         this.description = description;
         this.deadline = deadline;
     }

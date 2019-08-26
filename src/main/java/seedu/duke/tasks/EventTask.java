@@ -1,14 +1,16 @@
 package seedu.duke.tasks;
 
-public class EventTask extends Task {
-    private final String time;
+import java.time.LocalDateTime;
 
-    public EventTask(String description, String time) {
+public class EventTask extends Task {
+    private final LocalDateTime time;
+
+    public EventTask(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
@@ -16,8 +18,8 @@ public class EventTask extends Task {
     public String toString() {
         return String.format(
                 "[E]%s%s", super.toString(),
-                time != null && !time.isBlank()
-                        ? String.format(" (at: %s)", time)
+                time != null
+                        ? String.format(" (at: %s)", time.format(DATE_TIME_FORMATTER))
                         : ""
         );
     }

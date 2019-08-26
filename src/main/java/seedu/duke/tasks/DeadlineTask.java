@@ -1,14 +1,16 @@
 package seedu.duke.tasks;
 
-public class DeadlineTask extends Task {
-    private final String deadline;
+import java.time.LocalDateTime;
 
-    public DeadlineTask(String description, String deadline) {
+public class DeadlineTask extends Task {
+    private final LocalDateTime deadline;
+
+    public DeadlineTask(String description, LocalDateTime deadline) {
         super(description);
         this.deadline = deadline;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
@@ -16,8 +18,8 @@ public class DeadlineTask extends Task {
     public String toString() {
         return String.format(
                 "[D]%s%s", super.toString(),
-                deadline != null && !deadline.isBlank()
-                        ? String.format(" (by: %s)", deadline)
+                deadline != null
+                        ? String.format(" (by: %s)", deadline.format(DATE_TIME_FORMATTER))
                         : ""
                 );
     }

@@ -1,6 +1,10 @@
 package seedu.duke.tasks;
 
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("EEE, dd LLL uuuu HH:mm");
+
     private final String description;
     private boolean done;
 

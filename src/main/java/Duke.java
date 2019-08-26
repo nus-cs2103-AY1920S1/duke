@@ -147,6 +147,10 @@ public class Duke {
                 System.out.println(error);
                 System.out.println(lines);
                 System.out.println();
+            } catch (Exception error) {
+                System.out.println("     Something went wrong" + error.getMessage());
+                System.out.println(lines);
+                System.out.println();
             }
         }
     }

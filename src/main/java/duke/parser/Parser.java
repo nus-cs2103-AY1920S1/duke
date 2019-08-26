@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDescriptionException;
+import duke.exception.IllegalIndexOfTaskException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 
 /**

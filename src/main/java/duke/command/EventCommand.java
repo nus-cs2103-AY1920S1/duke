@@ -1,3 +1,7 @@
+package duke.command;
+import duke.exception.IllegalDescriptionException;
+import duke.task.Event;
+
 import java.time.LocalDateTime;
 
 /**

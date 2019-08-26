@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.IllegalDescriptionException;
+
 /** A class that represents a task. */
 public class Task {
     protected String description;

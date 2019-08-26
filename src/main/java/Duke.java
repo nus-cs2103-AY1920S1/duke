@@ -1,3 +1,10 @@
+import duke.command.Command;
+import duke.exception.IllegalDescriptionException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,7 +22,7 @@ public class Duke {
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException|IllegalDescriptionException e) {
+        } catch (FileNotFoundException| IllegalDescriptionException e) {
             ui.showLoadingError(e);
             tasks = new TaskList();
         }

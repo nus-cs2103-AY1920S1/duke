@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.IllegalDescriptionException;
+import duke.task.ToDo;
+
 /**
  * A class representing add a todo task command.
  */

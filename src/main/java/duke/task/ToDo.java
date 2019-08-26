@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.IllegalDescriptionException;
+
 /** A class representing a todo task. */
 public class ToDo extends Task {
     /**

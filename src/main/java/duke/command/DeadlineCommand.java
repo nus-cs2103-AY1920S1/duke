@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.IllegalDescriptionException;
+import duke.task.Deadline;
+
 import java.time.LocalDateTime;
 
 /**

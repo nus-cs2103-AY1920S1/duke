@@ -6,7 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Test for DateTime Class.
+ */
 public class DateTimeTest {
+    /**
+     * Tests exception handling if DateTime object is created with invalid date.
+     */
     @Test
     public void test_newDateTime_exceptionThrown_invalidDate() {
         try {
@@ -17,6 +23,9 @@ public class DateTimeTest {
         }
     }
 
+    /**
+     * Tests exception handling if DateTime object is created with invalid time.
+     */
     @Test
     public void test_newDateTime_exceptionThrown_invalidTime() {
         try {
@@ -27,6 +36,9 @@ public class DateTimeTest {
         }
     }
 
+    /**
+     * Tests exception handling if DateTime object is created with invalid format.
+     */
     @Test
     public void test_newDateTime_exceptionThrown_invalidFormatOne() {
         try {
@@ -37,6 +49,9 @@ public class DateTimeTest {
         }
     }
 
+    /**
+     * Tests exception handling if DateTime object is created with invalid format.
+     */
     @Test
     public void test_newDateTime_exceptionThrown_invalidFormatTwo() {
         try {
@@ -47,6 +62,9 @@ public class DateTimeTest {
         }
     }
 
+    /**
+     * Tests DateTime toString() method.
+     */
     @Test
     public void test_dateTimeToString() {
         try {

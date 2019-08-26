@@ -30,6 +30,7 @@ public class Ui {
      * Reads the user command from CLI.
      *
      * @return String command from user.
+     * @throws DukeException If there is any IOException from bufferedreader.
      */
     public String readCommand() throws DukeException {
         try {

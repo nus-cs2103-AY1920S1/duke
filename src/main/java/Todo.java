@@ -1,14 +1,18 @@
 public class Todo extends Task {
+
     public Todo(String taskName) {
         super(taskName);
-        this.prefix = "[T]";
+        this.taskType = TypeOfTask.TODO;
         this.details = "";
     }
 
 
-    @Override
-    public String toString() {
-        char symbol = this.isCompleted ? '✓' : '✗';
-        return prefix + "[" + symbol + "] " + taskName;
+
+    public Todo(String taskName, boolean isCompleted) {
+        super(taskName, isCompleted);
+        this.taskType = TypeOfTask.TODO;
+        this.details = "";
     }
+
+
 }

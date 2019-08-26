@@ -1,15 +1,21 @@
 public class Deadline extends Task {
 
-
     public Deadline(String taskName, String by) {
         super(taskName);
-        this.prefix = "[D]";
-        this.details = "(by: " + by + ")";
+        this.taskType = TypeOfTask.DEADLINE;
+
+        if ( by.contains("(by: ") ) this.details = by;
+        else this.details = "(by: " + by + ")";
     }
 
-    @Override
-    public String toString() {
-        char symbol = this.isCompleted ? '✓' : '✗';
-        return prefix + "[" + symbol + "] " + taskName + " " + details;
+    public Deadline(String taskName, String by, boolean isCompleted) {
+        super(taskName, isCompleted);
+        this.taskType = TypeOfTask.DEADLINE;
+
+        if ( by.contains("(by: ") ) this.details = by;
+        else this.details = "(by: " + by + ")";
     }
+
+
+
 }

@@ -1,3 +1,4 @@
-public enum Command {
-    done, todo, deadline, event, delete
+package PACKAGE_NAME;
+
+public class Command {
 }

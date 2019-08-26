@@ -13,57 +13,9 @@ public class Duke {
 
     public static final String FILE_NAME = "/Users/chowjiaying/Github/2103T-iP/duke/data/duke.txt";
     static ArrayList<Task> taskList = new ArrayList<Task>();
+    private Storage storage;
 
-    //Parses text file contents to a Task object
-    private static Task convertToTask(String line) {
-        String[] taskInformation = line.split("\\|");
-        String typeOfTask = taskInformation[0];
-        String completionStatus = taskInformation[1];
-        String taskDescription = taskInformation[2];
-        Task convertedTask;
-        if (typeOfTask.equals("[T]")) {
-            convertedTask = new ToDo(taskDescription);
-        } else if (typeOfTask.equals("[E]")) {
-            convertedTask = new Event(taskDescription, taskInformation[3]);
-        } else {
-            convertedTask = new Deadline(taskDescription, taskInformation[3]);
-        }
 
-        if (completionStatus.equals("1")) {
-            convertedTask.markAsDone();
-        }
-
-        return convertedTask;
-    }
-
-    //Loads tasks from the file to the taskList array
-    public static void loadTask(String fileName) {
-        try {
-            File taskFile = new File(fileName);
-            Scanner sc = new Scanner(taskFile);
-
-            //Loads tasks from text file to taskList array
-            while (sc.hasNextLine()) {
-                taskList.add(convertToTask(sc.nextLine()));
-            }
-        } catch (FileNotFoundException ex) {
-            System.out.println(fileName + " cannot be found!");
-        }
-    }
-
-    //Writes a task to the file each time the task list changes
-    public static void writeTaskToFile(String fileName) {
-        try {
-            FileWriter taskFile = new FileWriter(fileName);
-            for (Task taskToWrite : taskList) {
-                taskFile.write(taskToWrite.writeToFile() + "\n");
-            }
-
-            taskFile.close();
-        } catch (IOException ex) {
-            System.out.println(fileName + " cannot be found!");
-        }
-    }
 
 
     public static void welcomeMessage() {
@@ -81,8 +33,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        new Duke(FILE_NAME);
+    }
+
+    public Duke(String filePath) {
         welcomeMessage();
-        loadTask(FILE_NAME);
+        storage = new Storage(filePath);
+        storage.load();
+
         Scanner sc = new Scanner(System.in); //gets commands from user
         String userCommand = sc.nextLine();
 

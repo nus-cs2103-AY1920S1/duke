@@ -1,6 +1,6 @@
 package duke.tasks;
 public class Event extends Task {
-    protected String eventTime;
+    private String eventTime;
 
     public Event(String description, String eventTime) {
         super(description);

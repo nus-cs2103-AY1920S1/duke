@@ -6,7 +6,7 @@ import java.util.ArrayList;
 The class contains the task list.
  */
 public class TaskList {
-    static ArrayList<Task> allTasks;
+    private static ArrayList<Task> allTasks;
 
     //constructor one for when loaded from hard disk
     public TaskList(ArrayList<Task> loadedTasks) throws DukeException {

@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    static String filePath;
-    static ArrayList<Task> memory = new ArrayList<>();
+    private static String filePath;
+    private static ArrayList<Task> memory = new ArrayList<>();
 
     public Storage(String filePath) {
         this.filePath = filePath;

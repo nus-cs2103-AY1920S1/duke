@@ -44,11 +44,10 @@ public class AddCommand extends Command {
         return false;
     }
 
-    //todo: HERE ONWARDS IS ALL FROM DUKE.JAVA
     /*
     This method creates a TD object and adds it into memory.
      */
-    public void toDoTask(String a) throws IOException {
+    private void toDoTask(String a) throws IOException {
         ToDo newTodo = new ToDo(a);
         tasks.addTask(newTodo);
         printTask(newTodo);
@@ -59,7 +58,7 @@ public class AddCommand extends Command {
     This method creates an Event object and adds it into memory.
     If command does not include a timing, then user is prompted to enter the command again.
      */
-    public void eventTask(String b) throws DukeException, IOException {
+    private void eventTask(String b) throws DukeException, IOException {
         String[] details = b.split("/at");
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the event timing and resubmit that command.");
@@ -91,7 +90,7 @@ public class AddCommand extends Command {
     This method creates a deadlineTask and adds it into memory.
     If command does not include a deadline, then user is prompted to enter the command again.
      */
-    public void deadlineTask(String c) throws DukeException, IOException {
+    private void deadlineTask(String c) throws DukeException, IOException {
         String[] details = c.split("/by");
         if (details.length < 2) {
             throw new DukeException("Oops! Please include the deadline and resubmit that command.");
@@ -116,7 +115,7 @@ public class AddCommand extends Command {
     /*
     This method prints the task that was just added to the list.
     */
-    public void printTask(Task task) {
+    private void printTask(Task task) {
         int numTasks = tasks.totalNumTasks();
         this.ui.printLine("Got it. I've added this task:");
         this.ui.printLine(task.toString());

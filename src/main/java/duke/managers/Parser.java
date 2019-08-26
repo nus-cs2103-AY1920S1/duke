@@ -4,7 +4,6 @@ This class deals with making sense of the user command.
 package duke.managers;
 import duke.commands.*;
 import duke.exceptions.*;
-
 public class Parser {
 
     public Parser() {}

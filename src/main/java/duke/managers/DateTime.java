@@ -18,7 +18,7 @@ public class DateTime {
     /*
     This method adds the suffix for the day in the date String. This method is used in the getDate method.
      */
-    public static String addDaySuffix(String day) {
+    private static String addDaySuffix(String day) {
         int dayNum = Integer.parseInt(day);
         String dayWithSuffix = day;
         if (dayNum == 1) {
@@ -36,7 +36,7 @@ public class DateTime {
     /*
     This method changes the month number to its name in the date String. This method is used in the getDate method.
      */
-    public static String wordMonth(String month) throws DateException {
+    private static String wordMonth(String month) throws DateException {
         int monthNum = Integer.parseInt(month);
         switch (monthNum) {
             case 1:
@@ -88,7 +88,7 @@ public class DateTime {
     /*
     This method returns the hour component of time. This method is used in the getTime method.
      */
-    public static String getHours(String hours) throws DateException {
+    private static String getHours(String hours) throws DateException {
         int hourNum = Integer.parseInt(hours);
         String numHour;
         if (hourNum > 24) {
@@ -110,7 +110,7 @@ public class DateTime {
     /*
     This method returns the minute component of time. This method is used in the getTime method.
      */
-    public static String getMinutes(String minutes) throws DateException {
+    private static String getMinutes(String minutes) throws DateException {
         int minNum = Integer.parseInt(minutes);
         if (minNum > 60) {
             throw new DateException("Invalid time entered!");

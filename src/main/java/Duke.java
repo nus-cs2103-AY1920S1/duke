@@ -34,104 +34,31 @@ class EmptyTimeDueException extends DukeException {
     }
 }
 
-class Task {
-    protected String description;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-    }
-
-    public String getStatus() {
-        return "[" + getStatusIcon() + "] " + description;
-    }
-
-    public String saveFormat() {
-        return (isDone ? "1" : "0") + " " + description;
-    }
-
-}
-
-class ToDo extends Task {
-    public ToDo(String description) {
-        super(description);
-    }
-    @Override
-    public String getStatus() {
-        return "[T][" + getStatusIcon() + "] " + description;
-    }
-
-    @Override
-    public String saveFormat() {
-        return "T" + (isDone ? "1" : "0") + " " + description;
-    }
-}
-
-class Deadline extends Task {
-    protected String timeDue;
-    protected String preposition;
-    public Deadline(String description, String preposition, String timeDue) {
-        super(description);
-        this.timeDue = timeDue;
-        this.preposition = preposition;
-    }
-    @Override
-    public String getStatus() {
-        return "[D][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + timeDue + ")";
-    }
-    @Override
-    public String saveFormat() {
-        return "D" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + timeDue;
-    }
-}
-
-class Event extends Task {
-    protected String startEndTime;
-    protected String preposition;
-    public Event(String description, String preposition, String startEndTime) {
-        super(description);
-        this.startEndTime = startEndTime;
-        this.preposition = preposition;
-    }
-    @Override
-    public String getStatus() {
-        return "[E][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + startEndTime + ")";
-    }
-    @Override
-    public String saveFormat() {
-        return "E" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + startEndTime;
-    }
-}
-
 public class Duke {
     private static final String saveLoadFilePath = "listSaveData.txt";
 
-    private static ArrayList<Task> list =  new ArrayList<Task>();
-    public static void showList() {
+    private static ArrayList<Task> list = new ArrayList<>();
+
+    private static void showList() {
         int counter = 0;
         for (Task item : list) {
             System.out.println(++counter + "." + item.getStatus());
         }
     }
-    public static void countList() {
+    private static void countList() {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
-    public static int getPrepositionPos(String[] input_split) {
+    private static int getPrepositionPos(String[] input_split) {
         for (int i = 0; i < input_split.length; i++) {
             if (input_split[i].charAt(0) == '/') {
                 return i;
-            };
+            }
         }
         return 0;
     }
 
-    public static Task construct(String[] input_split)
+    private static Task construct(String[] input_split)
         throws EmptyDescriptionException, EmptyTimeDueException {
         if (input_split.length < 2) {
             // System.out.println("what's the " + type);
@@ -150,15 +77,15 @@ public class Duke {
         }
         if (prepRequired) {
             for (int k = 1; k < prepAt; k++) {
-                description.append(" " + input_split[k]);
+                description.append(" ").append(input_split[k]);
             }
         } else {
             for (int k = 1; k < input_split.length; k++) {
-                description.append(" " + input_split[k]);
+                description.append(" ").append(input_split[k]);
             }
         }
         for (int i = prepAt + 1; i < input_split.length; i++) {
-            memo.append(" " + input_split[i]);
+            memo.append(" ").append(input_split[i]);
         }
 
         switch (input_split[0]) {
@@ -177,13 +104,13 @@ public class Duke {
 
         return task;
     }
-    public static Task construct(String[] input_string, boolean completed)
+    private static Task construct(String[] input_string, boolean completed)
             throws EmptyDescriptionException, EmptyTimeDueException{
         Task task = construct(input_string);
         task.isDone = completed;
         return task;
     }
-    public static void saveList() throws IOException {
+    private static void saveList() throws IOException {
         File f = new File(saveLoadFilePath);
 
         // how do you work around this? it always still exists
@@ -199,7 +126,7 @@ public class Duke {
         fw.close();
         System.out.println("Finished Saving");
     }
-    public static void loadList() throws FileNotFoundException, EmptyDescriptionException, EmptyTimeDueException {
+    private static void loadList() throws FileNotFoundException, EmptyDescriptionException, EmptyTimeDueException {
         File f = new File(saveLoadFilePath);
         Scanner s = new Scanner(f);
         while (s.hasNextLine()) {
@@ -276,7 +203,7 @@ public class Duke {
                     if (input_split.length < 2) {
                         throw new EmptyListIndexException();
                     }
-                    Task theTask = list.get(Integer.valueOf(input_split[1]) - 1);
+                    Task theTask = list.get(Integer.parseInt(input_split[1]) - 1);
                     theTask.isDone = true;
                     System.out.println("Nice! I've marked this task as done: \n" +
                         "  " + theTask.getStatus());
@@ -318,7 +245,7 @@ public class Duke {
             }
         } catch (UnsupportedEncodingException e) {
             System.out.println("whoops unsupported encoding: " + e.getMessage());
-        };
+        }
         
     }
 }

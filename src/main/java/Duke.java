@@ -1,13 +1,15 @@
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws ParseException, IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -105,7 +107,7 @@ public class Duke {
         }
     }
 
-    private static void loadFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException {
+    private static void loadFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException, ParseException {
         File f = new File(filePath); // create a File for the given file path
         Scanner sc = new Scanner(f); // create a Scanner using the File as the source
         Task t;

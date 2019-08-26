@@ -1,19 +1,28 @@
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class Event extends Task {
+    protected Date date;
     protected String at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws ParseException {
         super(description);
         this.at = at;
+        this.date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String at) throws ParseException {
         super(description, isDone);
         this.at = at;
+        this.date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy, hmma");
+        String formattedDate = formatter.format(this.date);
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
     @Override

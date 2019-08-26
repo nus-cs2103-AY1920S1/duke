@@ -11,8 +11,8 @@ public class Task {
         return (isDone ? "+" : "-"); //return tick or X symbols
     }
 
-    public void setStatus() {
-        this.isDone = true;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override

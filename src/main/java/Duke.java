@@ -10,6 +10,8 @@ public class Duke {
         System.out.println(startingMessage);
         List <Task> listOfStuff = new ArrayList <Task>();
         
+        System.out.println("hello");
+        
         boolean flag = true;
         while(flag){
             Scanner in = new Scanner(System.in);

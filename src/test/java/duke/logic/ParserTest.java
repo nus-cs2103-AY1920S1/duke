@@ -1,3 +1,5 @@
+package duke.logic;
+
 import duke.command.ByeCommand;
 import duke.command.ListCommand;
 import duke.logic.DukeException;
@@ -5,7 +7,7 @@ import duke.logic.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 class ParserTest {
 

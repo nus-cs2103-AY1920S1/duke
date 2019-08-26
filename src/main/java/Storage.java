@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class Storage {
     FileWriter fw;
 
     public Storage() {
-        file = new File("../../../data/duke.txt");
+        file = new File("data/duke.txt");
     }
 
     public void readFile(TaskList list) {

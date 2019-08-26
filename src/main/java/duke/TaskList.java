@@ -11,11 +11,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
     private static final String FILE_PATH = "data/duke.txt";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     private ArrayList<Task> tasks;
 
@@ -35,28 +38,33 @@ public class TaskList {
     private TaskList(int num, ArrayList<String> storage) {
         this.tasks = new ArrayList<>(num);
         for (String s : storage) {
-            String[] args = s.split("\\|");
-            switch(args[0]) {
-                case "T":
-                    Task todo = new TodoTask(args[2]);
-                    if(args[1].equals("1"))
-                        todo.markDone();
-                    tasks.add(todo);
-                    break;
-                case "E":
-                    Task event = new EventTask(args[2], args[3]);
-                    if(args[1].equals("1"))
-                        event.markDone();
-                    tasks.add(event);
-                    break;
-                case "D":
-                    Task deadline = new DeadlineTask(args[2], args[3]);
-                    if(args[1].equals("1"))
-                        deadline.markDone();
-                    tasks.add(deadline);
-                    break;
-                default:
-                    break;
+            try {
+                String[] args = s.split("\\|");
+                switch (args[0]) {
+                    case "T":
+                        Task todo = new TodoTask(args[2]);
+                        if (args[1].equals("1"))
+                            todo.markDone();
+                        tasks.add(todo);
+                        break;
+                    case "E":
+                        Task event = new EventTask(args[2], args[3]);
+                        if (args[1].equals("1"))
+                            event.markDone();
+                        tasks.add(event);
+                        break;
+                    case "D":
+                        Task deadline = new DeadlineTask(args[2],
+                                DATE_FORMAT.parse(args[3]));
+                        if (args[1].equals("1"))
+                            deadline.markDone();
+                        tasks.add(deadline);
+                        break;
+                    default:
+                        break;
+                }
+            } catch(ParseException e) {
+                this.tasks = new ArrayList<>(num);
             }
         }
     }

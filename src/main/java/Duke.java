@@ -19,9 +19,7 @@ public class Duke {
     public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         storage = new Storage(filePath);
-
         tasks = new TaskList(storage.load());
-
     }
 
     public void run() throws IOException, DukeException {

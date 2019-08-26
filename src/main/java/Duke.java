@@ -6,6 +6,7 @@ public class Duke {
     private static ArrayList<Task> myList = new ArrayList<>();
 
     public static void main(String[] args) {
+        loadTaskList();
         Scanner in = new Scanner(System.in);
         printMessage("Hello! I'm Duke\nWhat can I do for you?");
         while (true) {
@@ -89,6 +90,7 @@ public class Duke {
 
     private static void addTask(Task myTask) {
         myList.add(myTask);
+        saveTaskList();
         printMessage("Got it. I've added this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size()) + " in the list.");
     }
 
@@ -97,6 +99,7 @@ public class Duke {
             Task myTask = myList.get(myNum - 1);
             printMessage("Noted. I've removed this task: \n  " + myTask + "\nNow you have " + pluralize("task", myList.size() - 1) + " in the list.");
             myList.remove(myNum - 1);
+            saveTaskList();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index is out of bounds.");
         }
@@ -107,6 +110,7 @@ public class Duke {
             Task myTask = myList.get(myNum - 1);
             myTask.markAsDone();
             printMessage("Nice! I've marked this task as done:\n  " + myTask);
+            saveTaskList();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index is out of bounds.");
         }

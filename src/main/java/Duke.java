@@ -3,15 +3,16 @@ import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Duke {
     private ArrayList<Task> listOfInputs;
+    private Storage storage;
 
-    private Duke() {
+    private Duke(String filePath) {
+        this.storage = new Storage(filePath);
         this.listOfInputs = new ArrayList<>(100);
     }
 
@@ -43,73 +44,75 @@ public class Duke {
         }
     }
 
-    private void updateInputList() throws DukeException {
-        try {
-            File f = new File("./data/duke.txt");
-            if (!f.exists()) {
-                f.getParentFile().mkdirs();
-            } else {
-                BufferedReader br = new BufferedReader(new FileReader(f));
-                String text;
-                while ((text = br.readLine()) != null) {
-                    String taskType = text.charAt(1) + "";
-                    switch (taskType) {
-                    case "T": {
-                        Task todo = new Todo(text.substring(7));
-                        if (text.substring(4, 5).equals("V")) {
-                            todo.markedAsDone();
-                        }
-                        listOfInputs.add(todo);
-                        break;
-                    }
-                    case "D": {
-                        Task deadline = new Deadline(text.substring(7, text.indexOf("by") - 2),
-                                fileTaskDateConverter(text.substring(text.indexOf("by") + 4, text.length() - 1)));
-                        if (text.substring(4, 5).equals("V")) {
-                            deadline.markedAsDone();
-                        }
-                        listOfInputs.add(deadline);
-                        break;
-                    }
-                    case "E": {
-                        Task event = new Event(text.substring(7, text.indexOf("at") - 2),
-                                fileTaskDateConverter(text.substring(text.indexOf("at") + 4, text.length() - 1)));
-                        if (text.substring(4, 5).equals("V")) {
-                            event.markedAsDone();
-                        }
-                        listOfInputs.add(event);
-                        break;
-                    }
-                    default: {
-                        throw new DukeException("Error occurred, invalid Task type found.");
-                    }
-                    }
-                }
-            }
-        } catch (IOException e) {
-            throw new DukeException(e.getMessage());
-        }
+    // private void updateInputList() throws DukeException {
+    // try {
+    // File f = new File("./data/duke.txt");
+    // if (!f.exists()) {
+    // f.getParentFile().mkdirs();
+    // } else {
+    // BufferedReader br = new BufferedReader(new FileReader(f));
+    // String text;
+    // while ((text = br.readLine()) != null) {
+    // String taskType = text.charAt(1) + "";
+    // switch (taskType) {
+    // case "T": {
+    // Task todo = new Todo(text.substring(7));
+    // if (text.substring(4, 5).equals("V")) {
+    // todo.markedAsDone();
+    // }
+    // listOfInputs.add(todo);
+    // break;
+    // }
+    // case "D": {
+    // Task deadline = new Deadline(text.substring(7, text.indexOf("by") - 2),
+    // fileTaskDateConverter(text.substring(text.indexOf("by") + 4, text.length() -
+    // 1)));
+    // if (text.substring(4, 5).equals("V")) {
+    // deadline.markedAsDone();
+    // }
+    // listOfInputs.add(deadline);
+    // break;
+    // }
+    // case "E": {
+    // Task event = new Event(text.substring(7, text.indexOf("at") - 2),
+    // fileTaskDateConverter(text.substring(text.indexOf("at") + 4, text.length() -
+    // 1)));
+    // if (text.substring(4, 5).equals("V")) {
+    // event.markedAsDone();
+    // }
+    // listOfInputs.add(event);
+    // break;
+    // }
+    // default: {
+    // throw new DukeException("Error occurred, invalid Task type found.");
+    // }
+    // }
+    // }
+    // }
+    // } catch (IOException e) {
+    // throw new DukeException(e.getMessage());
+    // }
 
-    }
+    // }
 
-    private void updateToDo() throws DukeException {
-        try {
-            File f = new File("./data/duke.txt");
-            f.getParentFile().mkdirs();
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-            for (Task task : listOfInputs) {
-                bw.append(task.toString());
-                bw.append("\n");
-            }
-            bw.close();
-        } catch (IOException e) {
-            throw new DukeException("Something went wrong: " + e.getMessage());
-        }
-    }
+    // private void updateToDo() throws DukeException {
+    // try {
+    // File f = new File("./data/duke.txt");
+    // f.getParentFile().mkdirs();
+    // BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+    // for (Task task : listOfInputs) {
+    // bw.append(task.toString());
+    // bw.append("\n");
+    // }
+    // bw.close();
+    // } catch (IOException e) {
+    // throw new DukeException("Something went wrong: " + e.getMessage());
+    // }
+    // }
 
     private void run() {
         try {
-            updateInputList();
+            this.listOfInputs = this.storage.loadFromFile();
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
@@ -199,7 +202,7 @@ public class Duke {
             }
         }
         try {
-            updateToDo();
+            this.storage.saveToFile(this.listOfInputs);
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
@@ -215,18 +218,8 @@ public class Duke {
         }
     }
 
-    private Date fileTaskDateConverter(String date) throws DukeException {
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd 'of' MMMM yyyy, hh:mm a");
-            Date parseDate = formatter.parse(date);
-            return parseDate;
-        } catch (ParseException e) {
-            throw new DukeException("Something went wrong: " + e.getMessage());
-        }
-    }
-
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("./data/duke.txt");
         duke.run();
     }
 

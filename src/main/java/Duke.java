@@ -10,17 +10,19 @@ public class Duke {
     private static final String MESSAGE_ADD      = "Got it. I've added this task:\n  %s\n"
             + "Now you have %d %s in the list.";
     private static final String MESSAGE_LIST     = "Here are the tasks in your list:\n";
+    private static final String MESSAGE_NO_TASKS = "You have no tasks in your list yet!";
     private static final String MESSAGE_DONE     = "Nice! I've marked this task as done:\n  %s";
     private static final String MESSAGE_DELETE   = "Noted. I've removed this task:\n  %s\n"
             + "Now you have %d %s in the list.";
 
     // Errors
     private static final String ERROR_INVALID_INPUT = "I'm sorry, but I don't know what that means :-(";
-    private static final String ERROR_MISSING_DESCRIPTION = "The description of a %s cannot be empty.";
+    private static final String ERROR_MISSING_DESCRIPTION = "The description cannot be empty.";
+    private static final String ERROR_MISSING_DESCRIPTION_AND_TIME = "The description and time cannot be empty.";
     private static final String ERROR_MISSING_TASK_ID = "The id of the task must be provided.";
     private static final String ERROR_INVALID_TASK_ID = "The id of the task must be a number. e.g. done 1";
     private static final String ERROR_MISSING_DEADLINE = "The deadline must be present. e.g. task /by Monday";
-    private static final String ERROR_MISSING_EVENT_TIME = "The event time must be present. e.g. event /at Monday";
+    private static final String ERROR_MISSING_EVENT_TIME = "The event time must be present. e.g. meeting /at Monday";
     private static final String ERROR_TOO_MANY_ARGUMENTS = "There are too many arguments for this command.";
 
     /**
@@ -50,7 +52,7 @@ public class Duke {
                 case "deadline":
                 case "event":
                     if (line.length == 1) {
-                        throw new DukeException(String.format(ERROR_MISSING_DESCRIPTION, line[0]));
+                        throw new DukeException(ERROR_MISSING_DESCRIPTION);
                     }
                     addTask(line[0], line[1]);
                     break;
@@ -124,18 +126,34 @@ public class Duke {
         Task task;
         switch (command) {
         case "event": {
-            String[] desc = description.split(" /at ");
-            if (desc.length == 1) {
-                throw new DukeException(ERROR_MISSING_EVENT_TIME);
+            if (!description.matches(".+\\s/at\\s.+$")) {
+                if (description.length() == 0 || description.matches("^\\s?/at\\s?$")) {
+                    throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_TIME);
+                }
+                if (description.matches("^\\s?/at.*")) {
+                    throw new DukeException(ERROR_MISSING_DESCRIPTION);
+                }
+                if (!description.contains("/at") || description.matches(".*/at\\s?")) {
+                    throw new DukeException(ERROR_MISSING_EVENT_TIME);
+                }
             }
+            String[] desc = description.split(" /at ");
             task = new Event(desc[0], desc[1]);
             break;
         }
         case "deadline": {
-            String[] desc = description.split(" /by ");
-            if (desc.length == 1) {
-                throw new DukeException(ERROR_MISSING_DEADLINE);
+            if (!description.matches(".+\\s/by\\s.+$")) {
+                if (description.length() == 0 || description.matches("^\\s?/by\\s?$")) {
+                    throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_TIME);
+                }
+                if (description.matches("^\\s?/by.*")) {
+                    throw new DukeException(ERROR_MISSING_DESCRIPTION);
+                }
+                if (!description.contains("/by") || description.matches(".*/by\\s?")) {
+                    throw new DukeException(ERROR_MISSING_DEADLINE);
+                }
             }
+            String[] desc = description.split(" /by ");
             task = new Deadline(desc[0], desc[1]);
             break;
         }
@@ -152,11 +170,14 @@ public class Duke {
      */
     private void printTasks() {
         StringBuilder lines = new StringBuilder();
-        int counter = 0;
+        if (this.tasks.isEmpty()) {
+            lines.append(MESSAGE_NO_TASKS);
+            printFormatted(lines.toString());
+            return;
+        }
         lines.append(MESSAGE_LIST);
-        for (Task task : this.tasks) {
-            counter++;
-            lines.append(String.format("%d. %s\n", counter, task.toString()));
+        for (int i = 0; i < this.tasks.size(); i++) {
+            lines.append(String.format("%d. %s\n", i + 1, this.tasks.get(i).toString()));
         }
         printFormatted(lines.toString());
     }
@@ -192,10 +213,13 @@ public class Duke {
         if (input.length == 1) {
             throw new DukeException(ERROR_MISSING_TASK_ID);
         }
-        int taskId = -1;
+        int taskId;
         try {
             taskId = Integer.parseInt(input[1]);
         } catch (NumberFormatException ex) {
+            throw new DukeException(ERROR_INVALID_TASK_ID);
+        }
+        if (taskId < 1 || taskId > this.tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
         return taskId;

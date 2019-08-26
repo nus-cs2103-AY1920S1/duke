@@ -1,5 +1,9 @@
 deadline return book /by Monday
 event project /at Tuesday
 done 2
+randomcommand
+event /at Tuesday
+deadline /by
+deadline return /by Monday
 list
 bye

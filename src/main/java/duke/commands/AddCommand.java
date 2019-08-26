@@ -6,6 +6,9 @@ import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.TodoTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class AddCommand extends Command {
     private static final String AT_DELIMITER = "/at";
     private static final String BY_DELIMITER = "/by";
@@ -13,6 +16,7 @@ public class AddCommand extends Command {
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String ADDED_TASK_STRING = "Got it. I've added this task:";
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     private String taskType;
 
@@ -24,32 +28,38 @@ public class AddCommand extends Command {
 
     public void execute() {
         Task newTask;
-        switch (taskType) {
-            case TODO_COMMAND:
-                newTask = new TodoTask(
-                        input.split(TODO_COMMAND)[1]);
-                break;
-            case "event":
-                String[] eventArgs =
-                        input.split(EVENT_COMMAND)[1]
-                             .split(AT_DELIMITER);
-                newTask = new EventTask(
-                        eventArgs[0], eventArgs[1]);
-                break;
-            case "deadline":
-                String[] deadlineArgs =
-                        input.split(DEADLINE_COMMAND)[1]
-                                .split(BY_DELIMITER);
-                newTask = new DeadlineTask(
-                        deadlineArgs[0], deadlineArgs[1]);
-                break;
-            default:
-                return;
+        try {
+            switch (taskType) {
+                case TODO_COMMAND:
+                    newTask = new TodoTask(
+                            input.split(TODO_COMMAND)[1]);
+                    break;
+                case "event":
+                    String[] eventArgs =
+                            input.split(EVENT_COMMAND)[1]
+                                    .split(AT_DELIMITER);
+                    newTask = new EventTask(
+                            eventArgs[0], eventArgs[1]);
+                    break;
+                case "deadline":
+                    String[] deadlineArgs =
+                            input.split(DEADLINE_COMMAND)[1]
+                                    .split(BY_DELIMITER);
+                    newTask = new DeadlineTask(
+                            deadlineArgs[0],
+                            DATE_FORMAT.parse(deadlineArgs[1]));
+                    break;
+                default:
+                    return;
+            }
+            duke.getTasks().addTask(newTask);
+            duke.say(
+                    String.format("%s\n\t%s\nNow you have %d tasks in the list.",
+                            ADDED_TASK_STRING, newTask, duke.getTasks().numTasks())
+            );
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        duke.getTasks().addTask(newTask);
-        duke.say(
-                String.format("%s\n\t%s\nNow you have %d tasks in the list.",
-                        ADDED_TASK_STRING, newTask, duke.getTasks().numTasks())
-        );
+
     }
 }

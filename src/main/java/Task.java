@@ -14,6 +14,18 @@ public class Task {
         this.time = time;
     }
 
+    public TaskType getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }

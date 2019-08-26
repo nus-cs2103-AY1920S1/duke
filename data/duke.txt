@@ -1,0 +1,3 @@
+T | false | hi
+E | true | breakfast | 7pm
+D | false | hfdifho | tmr

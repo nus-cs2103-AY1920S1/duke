@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,8 +19,9 @@ public class Duke {
 //        System.out.println("Hello from\n" + logo);
 
         // initialise tasks list
-        tasks = new ArrayList<>();
+        // tasks = new ArrayList<>();
 
+        startDuke();
         greet();
         getUserInput();
     }
@@ -40,6 +46,7 @@ public class Duke {
                         + "     Bye. Hope to see you again soon!\n"
                         + LINE;
                 System.out.print(farewellMessage);
+                exitDuke();
                 break;
             case "list":
                 System.out.print(LINE);
@@ -178,5 +185,130 @@ public class Duke {
                     getUserInput();
                 }
         }
+    }
+
+    private static void exitDuke() {
+        String toSave = convertTasksToString(tasks);
+        try {
+            writeToFile("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt", toSave);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("FILE NOT SAVED PROPERLY");
+        }
+    }
+
+    // String path = "/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt"
+    private static ArrayList<Task> loadTasksFromFile(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
+        ArrayList<Task> result = new ArrayList<>();
+        while (scanner.hasNext()) {
+            String keyword = scanner.next();
+            switch (keyword) {
+                case "T":
+                    scanner.next(); // skip the pipe
+                    boolean isDoneTodo = Boolean.parseBoolean(scanner.next());
+                    scanner.next(); // skip the pipe
+                    String todoDescription = scanner.next();
+                    Task todoTask = new Task(todoDescription, TaskType.TODO);
+                    if (isDoneTodo) {
+                        todoTask.markAsDone();
+                    }
+                    result.add(todoTask);
+                    break;
+                case "D":
+                    scanner.next(); // skip the pipe
+                    boolean isDoneDeadline = Boolean.parseBoolean(scanner.next());
+                    scanner.next(); // skip the pipe
+                    String deadlineDescription = scanner.next();
+                    scanner.next(); // skip the pipe
+                    String deadlineTime = scanner.next();
+                    Task deadlineTask = new Task(deadlineDescription, TaskType.DEADLINE);
+                    deadlineTask.setTime(deadlineTime);
+                    if (isDoneDeadline) {
+                        deadlineTask.markAsDone();
+                    }
+                    result.add(deadlineTask);
+                    break;
+                case "E":
+                    scanner.next(); // skip the pipe
+                    boolean isDoneEvent = Boolean.parseBoolean(scanner.next());
+                    scanner.next(); // skip the pipe
+                    String eventDescription = scanner.next();
+                    scanner.next(); // skip the pipe
+                    String eventTime = scanner.next();
+                    Task eventTask = new Task(eventDescription, TaskType.EVENT);
+                    eventTask.setTime(eventTime);
+                    if (isDoneEvent) {
+                        eventTask.markAsDone();
+                    }
+                    result.add(eventTask);
+                    break;
+            }
+        }
+
+        return result;
+    }
+
+    private static void startDuke() {
+        try {
+            tasks = loadTasksFromFile("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND");
+            tasks = new ArrayList<>();
+        }
+    }
+
+    private static String convertTasksToString(ArrayList<Task> tasks) {
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+        }
+
+        StringBuilder result = new StringBuilder("");
+
+        for (Task task : tasks) {
+            TaskType type = task.getType();
+            switch (type) {
+                case TODO:
+                    result.append("T | ");
+                    result.append(task.isDone);
+                    result.append(" | ");
+                    result.append(task.getDescription());
+                    result.append("\n");
+                    break;
+                case DEADLINE:
+                    result.append("D | ");
+                    result.append(task.isDone);
+                    result.append(" | ");
+                    result.append(task.getDescription());
+                    result.append(" | ");
+                    result.append(task.getTime());
+                    result.append("\n");
+                    break;
+                case EVENT:
+                    result.append("E | ");
+                    result.append(task.isDone);
+                    result.append(" | ");
+                    result.append(task.getDescription());
+                    result.append(" | ");
+                    result.append(task.getTime());
+                    result.append("\n");
+                    break;
+            }
+        }
+
+        return result.toString();
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 }

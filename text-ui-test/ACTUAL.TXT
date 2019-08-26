@@ -5,17 +5,17 @@
     ____________________________________________________________
      Got it. I've added this task: 
        [T][✘] read book
-     Now you have 1 task in the list.
+     Now you have 15 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
        [D][✘] return book (by: June 6th)
-     Now you have 2 tasks in the list.
+     Now you have 16 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
        [E][✘] project meeting (at: Aug 6th 2-4pm)
-     Now you have 3 tasks in the list.
+     Now you have 17 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done: 
@@ -24,12 +24,12 @@
     ____________________________________________________________
      Got it. I've added this task: 
        [T][✘] join sports club
-     Now you have 4 tasks in the list.
+     Now you have 18 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
        [T][✘] borrow book
-     Now you have 5 tasks in the list.
+     Now you have 19 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Nice! I've marked this task as done: 
@@ -42,16 +42,30 @@
      3.[E][✘] project meeting (at: Aug 6th 2-4pm)
      4.[T][✓] join sports club
      5.[T][✘] borrow book
+     6.[D][✘] return book (by: Sunday)
+     7.[E][✘] project meeting (at: Mon 2-4pm)
+     8.[T][✘] read book
+     9.[D][✘] return book (by: June 6th)
+     10.[E][✘] project meeting (at: Aug 6th 2-4pm)
+     11.[T][✘] join sports club
+     12.[T][✘] borrow book
+     13.[D][✘] return book (by: Sunday)
+     14.[E][✘] project meeting (at: Mon 2-4pm)
+     15.[T][✘] read book
+     16.[D][✘] return book (by: June 6th)
+     17.[E][✘] project meeting (at: Aug 6th 2-4pm)
+     18.[T][✘] join sports club
+     19.[T][✘] borrow book
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
        [D][✘] return book (by: Sunday)
-     Now you have 6 tasks in the list.
+     Now you have 20 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Got it. I've added this task: 
        [E][✘] project meeting (at: Mon 2-4pm)
-     Now you have 7 tasks in the list.
+     Now you have 21 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
      Bye. Hope to see you again soon!

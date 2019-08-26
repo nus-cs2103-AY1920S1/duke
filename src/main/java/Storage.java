@@ -8,13 +8,25 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Deals with reading from and writing to file based on inputted file path.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Creates a Storage object.
+     * @param filePath indicates where to read / write the file from / to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an Array:ist of String pertaining to task objects in their string format.
+     * @return an Array:ist of String
+     * @throws DukeException if the file cannot be found
+     */
     public ArrayList<String> load() throws DukeException {
         ArrayList<String> fileList = new ArrayList<String>();
         try {
@@ -33,6 +45,10 @@ public class Storage {
 
     }
 
+    /**
+     * Reads and saves the tasks from the taskList to specified file.
+     * @param taskList existing taskList
+     */
     public void save(ArrayList<Task> taskList) {
 
         try {

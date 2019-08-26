@@ -1,16 +1,32 @@
-import java.util.*;
-
+/**
+ * Command corresponding to user input starting with either "todo", "deadline" or "event".
+ * Executes the command input by using UI and adds the corresponding tasks to the tasklist.
+ */
 public class AddCommand extends Command {
     protected Type enumType;
     protected String taskDesc;
     protected String timeDesc;
 
+    /**
+     * Constructs a AddCommand object.
+     * @param enumType indicates the type of add command
+     * @param taskDesc description of the task by user
+     * @param timeDesc inputted time of the task
+     */
     public AddCommand(Type enumType, String taskDesc, String timeDesc) {
         this.enumType = enumType;
         this.taskDesc = taskDesc;
         this.timeDesc = timeDesc;
     }
 
+    /**
+     * Adds the program task inputted by the user to the task list.
+     * and prints out corresponding response
+     * @param tasks holds the list of tasks currently in the program
+     * @param ui displays the output from execution
+     * @param storage stores the added task to the specified file
+     * @throws DukeException if task requirements is not met
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (enumType) {
             case TODO: {
@@ -45,6 +61,10 @@ public class AddCommand extends Command {
         storage.save(tasks.getTaskList());
     }
 
+    /**
+     * Determines whether the program stops running.
+     * @return boolean value false so the program continues to run
+     */
     public boolean isExit() {
         return false;
     }

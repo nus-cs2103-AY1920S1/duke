@@ -1,9 +1,17 @@
+/**
+ * Represents main running class of the Duke program.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object with Ui, storage and taskList objects created.
+     * to facilitate running of the program
+     * @param filePath specifies the file to be read from and written into
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the Duke object.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

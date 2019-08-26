@@ -1,8 +1,21 @@
+/**
+ * Deals with making sense of user input.
+ */
 public class Parser {
 
+    /**
+     * Creates a Parser object.
+     */
     public Parser() {
     }
 
+    /**
+     * Returns differnt types of Command objects depending on user input.
+     * @param command
+     * @return Command object according to what the user inputs
+     * @throws DukeException when the input is missing information or
+     *                       in the wrong format
+     */
     public static Command parse(String command) throws DukeException {
         String[] commandSplit = command.split(" ");
         String type = commandSplit[0];

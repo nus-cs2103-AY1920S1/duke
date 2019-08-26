@@ -3,10 +3,19 @@ import java.time.LocalTime;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline to be completed.
+ */
 public class Deadline extends Task {
     private Date date;
     private LocalTime time;
 
+    /**
+     * Creates a new Deadline with given description, date and time.
+     * @param description The description of Deadline.
+     * @param date The date of Deadline.
+     * @param time The time of Deadline.
+     */
     public Deadline(String description, Date date, LocalTime time) {
         super(description);
         this.date = date;
@@ -40,6 +49,6 @@ public class Deadline extends Task {
         }
 
         Deadline other = (Deadline) o;
-        return this.description == ((Deadline) o).description;
+        return this.description == other.description;
     }
 }

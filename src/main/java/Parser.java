@@ -2,10 +2,20 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 
+/**
+ * Represents a Parser that deals with making sense of the user command.
+ */
 public class Parser {
 
     private Ui ui = new Ui();
 
+    /**
+     * Making sense of done command.
+     * @param str The String of command.
+     * @param list The list of Task in TaskList.
+     * @return The TaskList that has been changed.
+     * @throws Exception If user do not input index.
+     */
     public TaskList parseDone(String str, TaskList list) throws Exception{
         String[] strArr = str.split(" ");
 
@@ -29,6 +39,13 @@ public class Parser {
         return list;
     }
 
+    /**
+     * Making sense of Todo command.
+     * @param str The String of command.
+     * @param list The list of Task in TaskList.
+     * @return The TaskList that has been changed.
+     * @throws Exception If user do not input description of Todo.
+     */
     public TaskList parseTodo(String str, TaskList list) throws Exception {
         String[] strArr = str.split(" ");
         if (strArr.length == 1) {
@@ -43,6 +60,13 @@ public class Parser {
         return list;
     }
 
+    /**
+     * Making sense of Deadline command.
+     * @param str The String of command.
+     * @param list The list of Task in TaskList.
+     * @return The TaskList that has been changed.
+     * @throws Exception If user do not input description, date or time.
+     */
     public TaskList parseDeadline(String str, TaskList list) throws Exception {
         String[] strArr = str.split(" ");
         if (strArr.length == 1) {
@@ -81,6 +105,13 @@ public class Parser {
         return list;
     }
 
+    /**
+     * Making sense of Event command.
+     * @param str The String of command.
+     * @param list The list of Task in TaskList.
+     * @return The TaskList that has been changed.
+     * @throws Exception If user do not input description, date or time.
+     */
     public TaskList parseEvent(String str, TaskList list) throws Exception {
         String[] strArr = str.split(" ");
         if (strArr.length == 1) {
@@ -119,6 +150,13 @@ public class Parser {
         return list;
     }
 
+    /**
+     * Making sense of Delete command.
+     * @param str The String of command.
+     * @param list The list of Task in TaskList.
+     * @return The TaskList that has been changed.
+     * @throws Exception If user do not input description, date or time.
+     */
     public TaskList parseDelete(String str, TaskList list) throws Exception {
         String[] strArr = str.split(" ");
 

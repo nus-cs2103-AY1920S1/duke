@@ -9,13 +9,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Represents a Storage that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String fileName;
 
+    /**
+     * Creates a new Storage with given filename.
+     * @param fileName The tasks will load and save from the given file.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Load tasks from the file saved in hard drive.
+     * @return The list of tasks.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> arr = new ArrayList<>();
 
@@ -75,6 +86,10 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Save the tasks into the hard drive.
+     * @param arr The list of tasks.
+     */
     public void save(ArrayList<Task> arr) {
         try {
             FileWriter writer = new FileWriter(fileName, false);

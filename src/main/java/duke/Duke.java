@@ -6,8 +6,10 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.util.DateUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -42,7 +44,7 @@ public class Duke {
                             try {
                                 String[] params = inputWords[1].split(" /by ");
                                 String description = params[0];
-                                String by = params[1];
+                                Date by = DateUtil.parse(params[1]);
                                 storage.addTask(new Deadline(description, by));
                             } catch (IndexOutOfBoundsException e) {
                                 throw new DukeException("Creating a Deadline failed: Insufficient params provided");
@@ -54,7 +56,7 @@ public class Duke {
                             try {
                                 String[] params = inputWords[1].split(" /at ");
                                 String description = params[0];
-                                String at = params[1];
+                                Date at = DateUtil.parse(params[1]);
                                 storage.addTask(new Event(description, at));
                             } catch (IndexOutOfBoundsException e) {
                                 throw new DukeException("Creating an Event failed: Insufficient params provided");

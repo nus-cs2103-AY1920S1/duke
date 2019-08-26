@@ -5,12 +5,14 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.util.DateUtil;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
@@ -35,12 +37,12 @@ public class Storage {
                 Task task;
                 switch (type) {
                 case "D":
-                    String by = params[3];
+                    Date by = DateUtil.parse(params[3]);
                     task = new Deadline(description, by);
                     break;
 
                 case "E":
-                    String at = params[3];
+                    Date at = DateUtil.parse(params[3]);
                     task = new Event(description, at);
                     break;
 

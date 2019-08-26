@@ -32,7 +32,7 @@ public class FindCommand implements Command {
         for (int i = 1; i <= tasks.getSize(); i++) {
             Task task = tasks.get(i);
             if (task.getName().contains(this.keyword)) {
-                ui.prettyPrint4(String.format("%d.%s\n", counter, task));
+                ui.prettyPrint4(String.format("%d.%s", counter, task));
                 counter++;
             }
         }

@@ -34,10 +34,10 @@ public class DeleteCommand implements Command {
             if (index > tasks.getSize() || index < 1) {
                 throw new InvalidIndexException("\u2639 OOPS!!! Trying to delete invalid task");
             }
-            Task removedTask = tasks.remove(index - 1);
+            Task removedTask = tasks.remove(index);
             ui.prettyPrint4("Noted. I've removed the task:");
-            ui.prettyPrint6(String.format("%s\n", removedTask)); 
-            ui.prettyPrint4(String.format("Now you have %d tasks in the list.\n", tasks.getSize())); 
+            ui.prettyPrint6(String.format("%s", removedTask)); 
+            ui.prettyPrint4(String.format("Now you have %d tasks in the list.", tasks.getSize())); 
             storage.save(tasks);
         } catch (IOException e) {
             ui.printWriteError();

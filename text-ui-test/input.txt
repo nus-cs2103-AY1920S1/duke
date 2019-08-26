@@ -8,4 +8,5 @@ list
 delete 5
 delete 2
 list
+find Ea
 bye

@@ -24,7 +24,7 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin duke/Duke < input.txt > ACTUAL.TXT
 
 # Delete the data file after each to run to prevent state from persisting
 rm ../data/duke.txt && touch ../data/duke.txt

@@ -125,7 +125,7 @@ public class Parser {
     private static Command parseFindCommand(String command) throws InvalidTaskArgumentException {
         String keyword = command.replace("find", "").trim();
         if ("".equals(keyword)) {
-            throw new InvalidTaskArgumentException("\u2639 OOPS!!! The description of a todo cannot be empty."); 
+            throw new InvalidTaskArgumentException("\u2639 OOPS!!! The description of a find cannot be empty."); 
         }
         return new FindCommand(keyword);
     }

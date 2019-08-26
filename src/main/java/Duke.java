@@ -29,53 +29,30 @@ public class Duke {
                 } else if (keywords[0].equals("list")) {
                     outputList(taskList);
                 } else if (keywords[0].equals("done")) {
-                    try {
-                        System.out.println(doneTask(Integer.parseInt(keywords[1])));
-                    } catch (ArrayIndexOutOfBoundsException ex) {
-                        System.out.println(upperBorder
-                                + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
-                    }
+                    System.out.println(doneTask(Integer.parseInt(keywords[1])));
                 } else if (keywords[0].equals("todo")) {
-                    try {
-                        String temp = parseTodo(keywords);
-                        System.out.println(todo(temp.strip()));
-                        pointer++;
-                    } catch (DukeException ex) {
-                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
-                    }
+                    String temp = parseTodo(keywords);
+                    System.out.println(todo(temp.strip()));
+                    pointer++;
                 } else if (keywords[0].equals("deadline")) {
-                    try {
-                        String[] temp = parseTaskTime(keywords, "deadline");
-                        System.out.println(deadline(temp[0].strip(), temp[1].strip()));
-                        pointer++;
-                    } catch (DukeException ex) {
-                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
-                    }
+                    String[] temp = parseTaskTime(keywords, "deadline");
+                    System.out.println(deadline(temp[0].strip(), temp[1].strip()));
+                    pointer++;
                 } else if (keywords[0].equals("event")) {
-                    try {
-                        String[] temp = parseTaskTime(keywords, "event");
-                        System.out.println(event(temp[0].strip(), temp[1].strip()));
-                        pointer++;
-                    } catch (DukeException ex) {
-                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
-                    }
+                    String[] temp = parseTaskTime(keywords, "event");
+                    System.out.println(event(temp[0].strip(), temp[1].strip()));
+                    pointer++;
                 } else if (keywords[0].equals("delete")) {
-                    try {
-                        System.out.println(deleteTask(Integer.parseInt(keywords[1])));
-                        pointer--;
-                    } catch (DukeException ex) {
-                        System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
-                    } catch (ArrayIndexOutOfBoundsException ex) {
-                        System.out.println(upperBorder
-                                + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
-                    }
+                    System.out.println(deleteTask(Integer.parseInt(keywords[1])));
+                    pointer--;
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException ex) {
                 System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
             } catch (ArrayIndexOutOfBoundsException ex) {
-                System.out.println(upperBorder + "☹ OOPS!!! Please input something! :-(" + "\n" + lowerBorder);
+                System.out.println(upperBorder
+                        + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
             }
         }
 
@@ -98,10 +75,14 @@ public class Duke {
         System.out.println(lowerBorder);
     }
 
-    public static String doneTask(int pointer) {
-        taskList.get(pointer - 1).setDone();
-        return upperBorder + "Nice! I've marked this task as done:\n"
-            + taskList.get(pointer - 1) + "\n" + lowerBorder;
+    public static String doneTask(int pointer) throws DukeException {
+        try {
+            taskList.get(pointer - 1).setDone();
+            return upperBorder + "Nice! I've marked this task as done:\n"
+                    + taskList.get(pointer - 1) + "\n" + lowerBorder;
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
+        }
     }
 
     public static String todo(String string) {

@@ -160,6 +160,10 @@ public class ToDoList {
                         System.out.println(border);
                         System.out.println("     Please input a valid task number to delete.");
                         System.out.println(border);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(border);
+                        System.out.println("     Please input a valid task number to delete.");
+                        System.out.println(border);
                     }
                 } else { //command to add task to list
 

@@ -1,6 +1,8 @@
+package duke.tasks;
+
 import java.util.LinkedList;
 
-class TaskList {
+public class TaskList {
     public final LinkedList<Task> allTasks;
 
     /**

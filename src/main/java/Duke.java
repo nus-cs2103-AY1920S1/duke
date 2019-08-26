@@ -1,3 +1,10 @@
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.parser.Parser;
+
 class Duke {
     private final Storage storage;
     private TaskList tasks;

@@ -1,10 +1,16 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
     private final int index;
 
     /**
      * Initialises a DoneCommand.
      *
-     * @param index
+     * @param index The index of the task to be marked as done.
      */
     public DoneCommand(int index) {
         this.index = index;

@@ -1,15 +1,22 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.Event;
+
 import java.io.*;
 import java.util.LinkedList;
 
-class Storage {
+public class Storage {
 
     private final String filepath;
-    private final LinkedList<Task> allTasks = new LinkedList<>();
 
     /**
      * Initialises a Storage session.
      *
-     * @param filepath
+     * @param filepath The file to store tasks to.
      */
     public Storage(String filepath) {
         this.filepath = filepath;
@@ -22,6 +29,7 @@ class Storage {
      * @throws DukeException In the event that the file cannot be read properly.
      */
     public LinkedList<Task> load() throws DukeException {
+        LinkedList<Task> allTasks = new LinkedList<>();
         try {
             File f = new File(filepath);
             if (f.exists()) {
@@ -81,7 +89,7 @@ class Storage {
      */
     public void deleteTaskFromFile(Task t) {
         File inputFile = new File(filepath);
-        File tempFile = new File("temp.txt");
+        File tempFile = new File("data/temp.txt");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));

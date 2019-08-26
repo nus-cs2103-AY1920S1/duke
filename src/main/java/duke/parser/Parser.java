@@ -1,4 +1,9 @@
-class Parser {
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+
+public class Parser {
 
     /**
      * Parses any user inputs and determines the type of command that was entered.

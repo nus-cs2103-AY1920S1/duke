@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     private final int index;
 
@@ -11,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the Delete Command and removes the task from the Linkedlist and file.
+     * Executes the Delete Command and removes the task from the Linked List and file.
      *
      * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.

@@ -8,7 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 
-
+/**
+ * <p>
+ *     Helps to scan user input and process them into information.
+ * </p>
+ */
 public class Parser {
 
     private Scanner sc;
@@ -21,21 +25,46 @@ public class Parser {
         this.sc = sc;
     }
 
-
+    /**
+     * Clears the current line the scanner is on.
+     */
     public void nextLine() {
         sc.nextLine();
     }
 
-
+    /**
+     * Checks whether there is more content for the scanner to read.
+     *
+     * @return Whether there is next or not.
+     */
     public boolean hasNext() {
         return sc.hasNext();
     }
 
-
+    /**
+     * Reads and returns the next action in the user input.
+     *
+     * @return The next action string.
+     */
     public String getNextAction() {
         return sc.next();
     }
 
+    /**
+     * <p>
+     *     Reads and breaks down the content after the "event" action keyword.
+     *     Invalid input argument types or format will be highlighted to the
+     *     user.
+     * </p>
+     *
+     * @return <p>
+     *     If successful, an array of String of length 2 consisting of the Event's
+     *     name and additional info.
+     *
+     *     Else, a null object.
+     * </p>
+     *
+     */
     public String[] parseEventDetail() {
         try {
             String taskName = sc.nextLine().trim();
@@ -54,7 +83,20 @@ public class Parser {
         }
     }
 
-
+    /**
+     * <p>
+     *     Reads and breaks down the content after the "deadline" action keyword.
+     *     Invalid input argument types or format will be highlighted to the user.
+     * </p>
+     *
+     * @return <p>
+     *     If successful, an array of String of length 2 consisting of the Deadline
+     *     Task's name and deadline, a String in the format "DD/MM/YYYY HHmm".
+     *
+     *     Else, a null object.
+     * </p>
+     *
+     */
     public String[] parseDeadlineDetail() {
         try {
             String taskName = sc.nextLine().trim();
@@ -85,7 +127,20 @@ public class Parser {
         }
     }
 
-
+    /**
+     * <p>
+     *     Reads and breaks down the content after the "todo" action keyword.
+     *     Invalid input argument types or format will be highlighted to the
+     *     user.
+     * </p>
+     *
+     * @return <p>
+     *     If successful, a String representing the Task's name.
+     *
+     *     Else, a null object.
+     * </p>
+     *
+     */
     public String parseTodoDetail() {
         try {
             String taskName = sc.nextLine().trim();

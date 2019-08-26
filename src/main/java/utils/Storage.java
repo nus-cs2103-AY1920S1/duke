@@ -8,11 +8,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * <p>
+ *     Manages the I/O for accessing and updating of a stored task list in
+ *     the file directory.
+ * </p>
+ */
 public class Storage {
     private static final String SEPARATOR = " | ";
 
     private static File file;
 
+    /**
+     * <p>
+     *     Loads data into the TaskList if the storage file already exists. Else
+     *     creates a new file.
+     * </p>
+     *
+     * @param absolutePathName The full path name of the file to specify its
+     *                         stored location.
+     */
     public Storage(String absolutePathName) {
         file = new File(absolutePathName);
         if (file.exists()) {
@@ -27,10 +42,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes the storage file from its directory.
+     */
     public void clearData() {
         file.delete();
     }
 
+    /**
+     * <p>
+     *     Parse the storage file and stores all the tasks listed within it
+     *     into TaskList.
+     * </p>
+     */
     void loadData()  {
         Scanner sc;
         try {
@@ -46,24 +70,30 @@ public class Storage {
             switch (taskInfo[0]) {
                 case "T":
                     taskList.addNewTodoTask(taskInfo[2],
-                                            taskInfo[1].equals("1"));
+                            taskInfo[1].equals("1"));
                     break;
 
                 case "D":
                     taskList.addNewDeadlineTask(taskInfo[2],
-                                                taskInfo[3],
-                                                taskInfo[1].equals("1"));
+                            taskInfo[3],
+                            taskInfo[1].equals("1"));
                     break;
 
                 case "E":
                     taskList.addNewEventTask(taskInfo[2],
-                                             taskInfo[3],
-                                             taskInfo[1].equals("1"));
+                            taskInfo[3],
+                            taskInfo[1].equals("1"));
                     break;
             }
         }
     }
 
+    /**
+     * <p>
+     *     Rewrites the whole storage file based on the current TaskList
+     *     contents.
+     * </p>
+     */
     public void updateData()  {
         try {
             FileWriter fw = new FileWriter(file.getAbsolutePath());

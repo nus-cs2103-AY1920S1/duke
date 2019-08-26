@@ -1,14 +1,27 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 public class Duke {
-    public static void main(String[] args) {
+    public static File getFile(String filePath) {
+        File f = new File(filePath);
+        return f;
+    }
+
+    public static void main(String[] args) throws IOException {
+        String filePath = "C:\\Users\\johnn\\CS2103\\Week2\\tasks.txt";
+        File source = getFile(filePath);
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> list = getTasks(source);
+
         System.out.println("Hello from\n" + logo + "\n What can I do for you? \n" );
 
         while (sc.hasNext()) {
@@ -100,5 +113,99 @@ public class Duke {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
+
+        updateTasks(filePath, list);
+
+
+    }
+
+    public static void updateTasks(String filePath, ArrayList<Task> list) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+        String result = "";
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            String c = task.getClass().toString();
+            if (c.equals("class Todo")) {
+                String description = task.getDescription();
+                Boolean isDone = task.getStatus();
+                result += "todo" + " " + description + "\n";
+                if (isDone) {
+                    result += "done " + (i + 1) + "\n";
+                }
+            } else if (c.equals("class Deadline")) {
+                Deadline deadline = (Deadline) task;
+                String description = deadline.getDescription();
+                Boolean isDone = deadline.getStatus();
+                String by = deadline.getBy();
+                result += "deadline" + " " + description + "/by" + by + "\n";
+                if (isDone) {
+                    result += "done " + (i + 1) + "\n";
+                }
+            } else if (c.equals("class Event")) {
+                Event event = (Event) task;
+                String description = event.getDescription();
+                Boolean isDone = event.getStatus();
+                String by = event.getAt();
+                result += "event" + " " + description + "/at" + by + "\n";
+                if (isDone) {
+                    result += "done " + (i + 1) + "\n";
+                }
+            }
+        }
+        fw.write(result);
+        fw.close();
+
+    }
+
+    public static ArrayList<Task> getTasks(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        ArrayList<Task> list = new ArrayList<>();
+
+        while (sc.hasNext()) {
+
+            String userInput = sc.nextLine();
+            String[] words = userInput.split(" ");
+            String firstWord = words[0];
+            //remove first word
+            String line = "";
+            for (int i = 1; i < words.length; i++) {
+                if (i == words.length - 1) {
+                    line += words[i];
+                } else {
+                    line += words[i] + " ";
+                }
+            }
+            switch (firstWord) {
+                case "todo":
+                    Todo task = new Todo(line);
+                    list.add(task);
+                    break;
+                case "deadline": {
+                    //split the string by /
+                    String[] halves = line.split("/by");
+                    String event = halves[0];
+                    String by = halves[1];
+                    Deadline deadline = new Deadline(event, by);
+                    list.add(deadline);
+                    break;
+                }
+                case "event": {
+                    //split the string by /
+                    String[] halves = line.split("/at");
+                    String event = halves[0];
+                    String at = halves[1];
+                    Event myEvent = new Event(event, at);
+                    list.add(myEvent);
+                    break;
+                }
+                case "done": {
+                    int position = Integer.parseInt(words[1]) - 1;
+                    Task currTask = list.get(position);
+                    currTask.doTask();
+                    break;
+                }
+            }
+        }
+        return list;
     }
 }

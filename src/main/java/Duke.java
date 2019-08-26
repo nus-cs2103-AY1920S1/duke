@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 import com.util.Printer;
 
+import com.tasks.DoableTask;
+import com.tasks.Todo;
+import com.tasks.Deadline;
+import com.tasks.Event;
+
 public class Duke {
     public static void main(String[] args) {
         Printer.printString("Hello! I'm Duke\nWhat can I do for you?");
@@ -104,74 +109,5 @@ public class Duke {
                 }
             }
         }
-    }
-}
-
-class Task {
-    private String name;
-
-    public Task(String taskName) {
-        name = taskName;
-    }
-
-    public String toString() {
-        return name;
-    }
-}
-
-class DoableTask extends Task {
-    private boolean isDone;
-
-    public DoableTask(String taskName) {
-        super(taskName);
-        isDone = false;
-    }
-
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
-    }
-
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + super.toString();
-    }
-}
-
-class Todo extends DoableTask {
-    public Todo(String taskName) {
-        super(taskName);
-    }
-
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class Deadline extends DoableTask {
-    private String deadline;
-
-    public Deadline(String taskName, String due) {
-        super(taskName);
-        deadline = due;
-    }
-
-    public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline + ")";
-    }
-}
-
-class Event extends DoableTask {
-    private String dateRange;
-
-    public Event(String taskName, String range) {
-        super(taskName);
-        dateRange = range;
-    }
-
-    public String toString() {
-        return "[E]" + super.toString() + "(at: " + dateRange + ")";
     }
 }

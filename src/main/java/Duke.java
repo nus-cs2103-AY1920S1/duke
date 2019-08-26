@@ -68,7 +68,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-
+        File f = new File("data");
+        f.mkdir();
         try {
             loadSavedTasks("data/taskList.txt");
         } catch (FileNotFoundException e) {

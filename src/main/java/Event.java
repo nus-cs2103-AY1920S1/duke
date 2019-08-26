@@ -8,8 +8,8 @@ public class Event extends Task {
     LocalDateTime at, to;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
-    public Event(String content, int status, LocalDateTime at, LocalDateTime to) {
-        super(content, status);
+    public Event(String content, int status, LocalDateTime at, LocalDateTime to, int order) {
+        super(content, status, order);
         this.at = at;
         this.to = to;
     }

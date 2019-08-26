@@ -31,7 +31,8 @@ public class Verify {
      * @param formatter date formatter to catch wrong date format exceptions
      * @throws DukeException in the case of invalid input
      */
-    public static void validCommand(String command, TaskList list, DateTimeFormatter formatter) throws DukeException {
+    public static void checkCommandValidity(String command, TaskList list, DateTimeFormatter formatter)
+            throws DukeException {
         if (command.startsWith("done")) {
             if (command.split(" ").length < 2) {
                 throw new DukeException("whoops! please enter a number after done");

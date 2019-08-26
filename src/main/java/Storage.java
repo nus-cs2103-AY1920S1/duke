@@ -36,13 +36,13 @@ public class Storage {
             String ln = sFile.nextLine();
             String[] lnSplit = ln.split(",");
             if (lnSplit[0].equals("T")) {
-                list.add(new Todo(lnSplit[2], Integer.parseInt(lnSplit[1])));
+                list.add(new Todo(lnSplit[2], Integer.parseInt(lnSplit[1]), list.list.size() + 1));
             } else if (lnSplit[0].equals("E")) {
                 list.add(new Event(lnSplit[2], Integer.parseInt(lnSplit[1]), LocalDateTime.parse(lnSplit[3], formatter),
-                        LocalDateTime.parse(lnSplit[4], formatter)));
+                        LocalDateTime.parse(lnSplit[4], formatter), list.list.size() + 1));
             } else if (lnSplit[0].equals("D")) {
                 list.add(new Deadline(lnSplit[2], Integer.parseInt(lnSplit[1]),
-                        LocalDateTime.parse(lnSplit[3], formatter)));
+                        LocalDateTime.parse(lnSplit[3], formatter), list.list.size() + 1));
             }
         }
     }

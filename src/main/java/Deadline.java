@@ -7,8 +7,8 @@ public class Deadline extends Task {
     LocalDateTime by;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
-    public Deadline(String content, int status, LocalDateTime by) {
-        super(content, status);
+    public Deadline(String content, int status, LocalDateTime by, int order) {
+        super(content, status, order);
         this.by = by;
     }
 

@@ -9,13 +9,13 @@ public class DukeTest{
 
     @Test
     public void testAddGet(){
-        taskList.add(new Todo("eat salad", 0));
-        assertEquals(taskList.get(0), new Todo("eat salad", 0));
+        taskList.add(new Todo("eat salad", 0, 1));
+        assertEquals(taskList.get(0), new Todo("eat salad", 0, 1));
     }
     @Test
     public void testRemove(){
         Task t = taskList.remove(0);
-        assertEquals(t, new Todo("eat salad", 0));
+        assertEquals(t, new Todo("eat salad", 0, 1));
     }
     @Test
     public void testVerify(){

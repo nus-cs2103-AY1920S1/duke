@@ -28,8 +28,19 @@ public class Task {
         }
     }
 
+    public void recordDone() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    /*
+    This method returns an empty String as it will be overridden in its child classes for more specific format of each type of task.
+     */
+    public String format() {
+        return "wrong format method used";
     }
 }

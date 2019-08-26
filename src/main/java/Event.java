@@ -10,4 +10,15 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventTime + ")";
     }
+
+    @Override
+    public String format() {
+        String formatted = "E | ";
+        int binary = 0;
+        if (super.isDone == true) {
+            binary = 1;
+        }
+        formatted += binary + " | " + super.description + " | " + this.eventTime;
+        return formatted;
+    }
 }

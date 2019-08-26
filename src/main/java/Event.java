@@ -8,6 +8,10 @@ public class Event extends Task {
 		this.at = at;
 	}
 
+	public String getVenue() {
+		return at;
+	}
+
 	@Override
 	public String toString() {
 

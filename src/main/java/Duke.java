@@ -10,8 +10,10 @@ import java.nio.file.Paths;
 public class Duke {
     private ArrayList<Task> listOfInputs;
     private Storage storage;
+    private Ui ui;
 
     private Duke(String filePath) {
+        this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.listOfInputs = new ArrayList<>(100);
     }
@@ -44,106 +46,31 @@ public class Duke {
         }
     }
 
-    // private void updateInputList() throws DukeException {
-    // try {
-    // File f = new File("./data/duke.txt");
-    // if (!f.exists()) {
-    // f.getParentFile().mkdirs();
-    // } else {
-    // BufferedReader br = new BufferedReader(new FileReader(f));
-    // String text;
-    // while ((text = br.readLine()) != null) {
-    // String taskType = text.charAt(1) + "";
-    // switch (taskType) {
-    // case "T": {
-    // Task todo = new Todo(text.substring(7));
-    // if (text.substring(4, 5).equals("V")) {
-    // todo.markedAsDone();
-    // }
-    // listOfInputs.add(todo);
-    // break;
-    // }
-    // case "D": {
-    // Task deadline = new Deadline(text.substring(7, text.indexOf("by") - 2),
-    // fileTaskDateConverter(text.substring(text.indexOf("by") + 4, text.length() -
-    // 1)));
-    // if (text.substring(4, 5).equals("V")) {
-    // deadline.markedAsDone();
-    // }
-    // listOfInputs.add(deadline);
-    // break;
-    // }
-    // case "E": {
-    // Task event = new Event(text.substring(7, text.indexOf("at") - 2),
-    // fileTaskDateConverter(text.substring(text.indexOf("at") + 4, text.length() -
-    // 1)));
-    // if (text.substring(4, 5).equals("V")) {
-    // event.markedAsDone();
-    // }
-    // listOfInputs.add(event);
-    // break;
-    // }
-    // default: {
-    // throw new DukeException("Error occurred, invalid Task type found.");
-    // }
-    // }
-    // }
-    // }
-    // } catch (IOException e) {
-    // throw new DukeException(e.getMessage());
-    // }
-
-    // }
-
-    // private void updateToDo() throws DukeException {
-    // try {
-    // File f = new File("./data/duke.txt");
-    // f.getParentFile().mkdirs();
-    // BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-    // for (Task task : listOfInputs) {
-    // bw.append(task.toString());
-    // bw.append("\n");
-    // }
-    // bw.close();
-    // } catch (IOException e) {
-    // throw new DukeException("Something went wrong: " + e.getMessage());
-    // }
-    // }
-
     private void run() {
         try {
             this.listOfInputs = this.storage.loadFromFile();
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        ui.showWelcome();
         while (true) {
-            Scanner input = new Scanner(System.in);
-            String userInput = input.nextLine();
+            String userInput = ui.userInput();
             if (userInput.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                ui.printBye();
                 break;
             } else if (userInput.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                int counter = 0;
-                for (Task item : listOfInputs) {
-                    counter++;
-                    System.out.println(counter + "." + item.toString());
-                }
+                ui.printTaskList(this.listOfInputs);
             } else {
                 String[] task = userInput.split(" ");
                 String instruction = task[0];
                 if (instruction.equals("done")) {
                     int taskNumber = Integer.parseInt(task[1]);
                     listOfInputs.get(taskNumber - 1).markedAsDone();
-                    System.out.println("Nice! I've marked this task as done: ");
-                    System.out.println(listOfInputs.get(taskNumber - 1));
+                    ui.printDone(listOfInputs.get(taskNumber - 1).toString());
                 } else if (instruction.equals("delete")) {
                     int taskNumber = Integer.parseInt(task[1]);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(listOfInputs.remove(taskNumber - 1));
-                    System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
+                    ui.printRemoveMessage(this.listOfInputs.remove(taskNumber - 1).toString(),
+                            this.listOfInputs.size());
                 } else {
                     try {
                         switch (instruction) {
@@ -152,9 +79,7 @@ public class Duke {
                                 todoCheck(task);
                                 Task todo = new Todo(userInput.substring(5));
                                 listOfInputs.add(todo);
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(todo);
-                                System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
+                                ui.printAddTaskMessage(todo.toString(), this.listOfInputs.size());
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
                             } finally {
@@ -167,9 +92,7 @@ public class Duke {
                                 Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by")),
                                         dateFormatter(userInput.substring(userInput.indexOf("/by") + 4)));
                                 listOfInputs.add(deadline);
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(deadline);
-                                System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
+                                ui.printAddTaskMessage(deadline.toString(), this.listOfInputs.size());
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
                             } finally {
@@ -182,9 +105,7 @@ public class Duke {
                                 Task event = new Event(userInput.substring(6, userInput.indexOf("/at")),
                                         dateFormatter(userInput.substring(userInput.indexOf("/at") + 4)));
                                 listOfInputs.add(event);
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(event);
-                                System.out.println("Now you have " + listOfInputs.size() + " tasks in the list.");
+                                ui.printAddTaskMessage(event.toString(), this.listOfInputs.size());
                             } catch (DukeException ex) {
                                 System.out.println(ex.getMessage());
                             } finally {

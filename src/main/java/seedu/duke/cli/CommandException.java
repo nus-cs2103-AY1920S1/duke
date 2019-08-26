@@ -1,7 +1,8 @@
 package seedu.duke.cli;
 
 public class CommandException extends Exception {
-    public CommandException() {}
+    public CommandException() {
+    }
 
     public CommandException(String message) {
         super(message);

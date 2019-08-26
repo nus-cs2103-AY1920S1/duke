@@ -34,6 +34,6 @@ public class DeadlineTask extends Task {
                 deadline != null
                         ? String.format(" (by: %s)", deadline.format(DATE_TIME_FORMATTER))
                         : ""
-                );
+        );
     }
 }

@@ -5,7 +5,6 @@ import seedu.duke.cli.annotations.Argument;
 import seedu.duke.cli.annotations.CommandConstructor;
 import seedu.duke.tasks.DeadlineTask;
 import seedu.duke.tasks.Task;
-import seedu.duke.tasks.TodoTask;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

@@ -9,5 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Argument {
     String prefix() default "";
+
     boolean trailing() default false;
 }

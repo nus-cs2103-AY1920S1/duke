@@ -3,7 +3,6 @@ package seedu.duke.cli.commands;
 import seedu.duke.cli.CommandException;
 import seedu.duke.cli.annotations.Argument;
 import seedu.duke.cli.annotations.CommandConstructor;
-import seedu.duke.tasks.DeadlineTask;
 import seedu.duke.tasks.EventTask;
 import seedu.duke.tasks.Task;
 

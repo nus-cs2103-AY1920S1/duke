@@ -10,13 +10,13 @@ public class Duke {
         Parser p = new Parser();
         Storage storage = new Storage();
         storage.readFile(list);
-        boolean keepGoing = true;
+        boolean isContinue = true;
         p.ui.welcome();
-        while (keepGoing) {
+        while (isContinue) {
             String echo = s.nextLine();
             try {
-                Verify.validCommand(echo, list, formatter);
-                keepGoing = p.parse(echo, list, formatter);
+                Verify.checkCommandValidity(echo, list, formatter);
+                isContinue = p.parse(echo, list, formatter);
             } catch (DukeException e) {
             }
         }

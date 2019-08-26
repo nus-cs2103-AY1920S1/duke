@@ -1,36 +1,43 @@
-public class Task{
+public class Task {
     boolean done = false;
     String content;
-    public Task(String content, int status){
+
+    public Task(String content, int status) {
         this.content = content;
         done = status == 1 ? true : false;
     }
-    public String toString(){
+
+    public String toString() {
         String res = "[";
-        if(done){
+        if (done) {
             res += "\u2713";
-        }
-        else{
+        } else {
             res += "\u2718";
         }
         res += "] " + content;
         return res;
     }
-    public void setAsDone(){
+
+    public void setAsDone() {
         done = true;
     }
-    public String toFile(){
+
+    public String toFile() {
         int d;
-        if(done){d = 1;}
-        else{d = 0;}
-        return d+","+content;
+        if (done) {
+            d = 1;
+        } else {
+            d = 0;
+        }
+        return d + "," + content;
     }
+
     @Override
-    public boolean equals(Object o){
-        if (o == null || !(o instanceof Task)){
+    public boolean equals(Object o) {
+        if (o == null || !(o instanceof Task)) {
             return false;
         }
         Task t = (Task) o;
-        return content.equals(t.content) && done==t.done;
+        return content.equals(t.content) && done == t.done;
     }
 }

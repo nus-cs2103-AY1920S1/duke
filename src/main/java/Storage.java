@@ -34,7 +34,8 @@ public class Storage {
                 list.add(new Event(lnSplit[2], Integer.parseInt(lnSplit[1]), LocalDateTime.parse(lnSplit[3], formatter),
                         LocalDateTime.parse(lnSplit[4], formatter)));
             } else if (lnSplit[0].equals("D")) {
-                list.add(new Deadline(lnSplit[2], Integer.parseInt(lnSplit[1]), LocalDateTime.parse(lnSplit[3], formatter)));
+                list.add(new Deadline(lnSplit[2], Integer.parseInt(lnSplit[1]),
+                        LocalDateTime.parse(lnSplit[3], formatter)));
             }
         }
     }

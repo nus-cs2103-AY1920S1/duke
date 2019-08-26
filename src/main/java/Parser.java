@@ -7,7 +7,7 @@ public class Parser {
     public Parser() {}
 
     public boolean parse(String command, TaskList list, DateTimeFormatter formatter) throws DukeException {
-        Verify.validCommand(command, list, formatter);
+        Verify.checkCommandValidity(command, list, formatter);
         if (command.equals("bye")) {
             ui.exit();
             return false;

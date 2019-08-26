@@ -1,8 +1,7 @@
-import task.TaskList;
-import task.Task;
-import task.Deadline;
-import task.Todo;
-import task.Event;
+package memory;
+
+import task.*;
+import time.DateTime;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,10 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
+import static task.TaskType.*;
 
 public class Memory {
     private Path path;
@@ -34,13 +35,13 @@ public class Memory {
                 String[] args = line.split(" \\| ");
                 String code = args[0];
                 boolean isDone = args[1].equals("1");
-                String desc = args[2];
+                String[] taskArgs = Arrays.copyOfRange(args, 2, args.length);
                 if (code.equals("T")) {
-                    taskList.add(new Todo(desc, isDone));
+                    taskList.add(TaskFactory.getTask(TODO, taskArgs, isDone));
                 } else if (code.equals("D")) {
-                    taskList.add(new Deadline(desc, args[3], isDone));
+                    taskList.add(TaskFactory.getTask(DEADLINE, taskArgs, isDone));
                 } else if (code.equals("E")) {
-                    taskList.add(new Event(desc, args[3], isDone));
+                    taskList.add(TaskFactory.getTask(EVENT, taskArgs, isDone));
                 } else {
                     throw new IOException("Attempting to read unknown task from disk!");
                 }

@@ -2,6 +2,7 @@ import exception.DukeIllegalStateException;
 import exception.DukeIndexOutOfBoundsException;
 import exception.DukeMissingDescriptionException;
 import exception.DukeUnknownInputException;
+import memory.Memory;
 import task.Task;
 import task.TaskList;
 import task.TaskFactory;
@@ -36,7 +37,6 @@ public class Duke {
     public Duke() {
         this.memory = new Memory("data/duke.txt");
         this.taskList = memory.readFromDisk(); // leave index 0 empty for clarity
-        this.factory = new TaskFactory();
         this.pp = new PrettyPrinter();
     }
 
@@ -52,12 +52,12 @@ public class Duke {
             try {
                 switch (commands[0]) {
                 case "event":
-                    Task eventTask = taskList.add(factory.getTask(EVENT, args));
+                    Task eventTask = taskList.add(TaskFactory.getTask(EVENT, args));
                     System.out.println(pp.formatAddTask(eventTask, taskList));
                     memory.writeToDisk(taskList);
                     break;
                 case "deadline":
-                    Task deadlineTask = taskList.add(factory.getTask(DEADLINE, args));
+                    Task deadlineTask = taskList.add(TaskFactory.getTask(DEADLINE, args));
                     System.out.println(pp.formatAddTask(deadlineTask, taskList));
                     memory.writeToDisk(taskList);
                     break;
@@ -66,7 +66,7 @@ public class Duke {
                         throw new DukeMissingDescriptionException(
                                 ":'( OOPS!!! The description of a todo cannot be empty.");
                     }
-                    Task todoTask = taskList.add(factory.getTask(TODO, args));
+                    Task todoTask = taskList.add(TaskFactory.getTask(TODO, args));
                     System.out.println(pp.formatAddTask(todoTask, taskList));
                     memory.writeToDisk(taskList);
                     break;
@@ -96,7 +96,6 @@ public class Duke {
                     | DukeMissingDescriptionException
                     | DukeIndexOutOfBoundsException
                     | DukeIllegalStateException e) {
-                System.err.println("EXCEPTION!");
                 System.out.println(pp.addSeparatorsAddIndent(e.getMessage()));
             }
         }

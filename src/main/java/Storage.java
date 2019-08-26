@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -51,10 +53,14 @@ public class Storage {
                     task = new Todo(description);
                     break;
                 case "D":
-                    task = new Deadline(description, taskPart[3].strip());
+                    LocalDateTime by = LocalDateTime.parse(taskPart[3].strip(),
+                            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                    task = new Deadline(description, by);
                     break;
                 case "E":
-                    task = new Event(description, taskPart[3].strip());
+                    LocalDateTime at = LocalDateTime.parse(taskPart[3].strip(),
+                            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                    task = new Event(description, at);
                     break;
                 default:
                     throw new DukeException(UserInterface.MESSAGE_ERROR_READING_FROM_FILE);

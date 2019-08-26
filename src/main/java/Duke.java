@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private Storage storage;
@@ -108,12 +109,16 @@ public class Duke {
         try {
             String[] deadlinePart = inputLine.substring("deadline".length()).split("/by");
             String deadlineDescription = deadlinePart[0].strip();
+            LocalDateTime by = LocalDateTime.parse(deadlinePart[1].strip(),
+                    DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
             if (deadlineDescription.isEmpty()) {
                 throw new DukeException(ui.MESSAGE_INVALID_DEADLINE_FORMAT);
             }
-            return new Deadline(deadlineDescription, deadlinePart[1].strip());
+            return new Deadline(deadlineDescription, by);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.MESSAGE_INVALID_DEADLINE_FORMAT);
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DukeException((ui.MESSAGE_INVALID_DATE_FORMAT));
         }
     }
 
@@ -121,12 +126,16 @@ public class Duke {
         try {
             String[] eventPart = inputLine.substring("event".length()).split("/at");
             String eventDescription = eventPart[0].strip();
+            LocalDateTime at = LocalDateTime.parse(eventPart[1].strip(),
+                    DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
             if (eventDescription.isEmpty()) {
                 throw new DukeException(ui.MESSAGE_INVALID_EVENT_FORMAT);
             }
-            return new Event(eventDescription, eventPart[1].strip());
+            return new Event(eventDescription, at);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.MESSAGE_INVALID_EVENT_FORMAT);
+        } catch (java.time.format.DateTimeParseException e) {
+            throw new DukeException((ui.MESSAGE_INVALID_DATE_FORMAT));
         }
     }
 

@@ -16,9 +16,8 @@ public class TaskList {
         return this.tasks.size();
     }
 
-    public Task addTask(Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
-        return task;
     }
 
     public Task markDone(int index) {
@@ -36,7 +35,7 @@ public class TaskList {
     public List<String> getTaskNames() {
         List<String> taskNames = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            taskNames.add( (i + 1) + ". " + tasks.get(i));
+            taskNames.add((i + 1) + ". " + tasks.get(i));
         }
         return taskNames;
     }

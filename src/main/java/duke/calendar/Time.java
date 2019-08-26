@@ -2,16 +2,29 @@ package duke.calendar;
 
 import duke.exception.DukeException;
 
+/**
+ * Represents a time. A <code>Time</code> object corresponds to a specified hour and minutes.
+ */
 public class Time {
     protected String unprocessedTime;
     protected String processedTime;
     protected boolean isAfternoon = false;
 
+    /**
+     * Constructor for <code>Time</code>.
+     * @param unprocessedTime User unprocessed time input.
+     * @throws DukeException If cannot process time.
+     */
     public Time(String unprocessedTime) throws DukeException {
         this.unprocessedTime = unprocessedTime;
         processTime();
     }
 
+    /**
+     * Processes the user input time.
+     * If unprocessed time is empty, the time will not be processed.
+     * @throws DukeException If time is in the wrong format or invalid.
+     */
     public void processTime() throws DukeException {
         if (unprocessedTime.equals("")) {
             return;
@@ -45,6 +58,14 @@ public class Time {
         }
     }
 
+    /**
+     * Returns the unprocessed time.
+     * @return Unprocessed time.
+     */
+    public String getUnprocessedTime() {
+        return unprocessedTime;
+    }
+
     @Override
     public String toString() {
         if (processedTime == null) {
@@ -55,9 +76,5 @@ public class Time {
         } else {
             return processedTime + "am";
         }
-    }
-
-    public String getUnprocessedTime() {
-        return unprocessedTime;
     }
 }

@@ -4,17 +4,31 @@ import duke.exception.DukeException;
 
 import java.time.Month;
 
+/**
+ * Represents a date. A <code>Date</code> object corresponds to a date on a Gregorian calendar with a day,
+ * month and year.
+ */
 public class Date {
     protected String unprocessedDate;
     protected int day;
     protected Month month;
     protected int year;
 
+    /**
+     * Constructor for <code>Date</code>.
+     * @param unprocessedDate User unprocessed date input.
+     * @throws DukeException If cannot process date.
+     */
     public Date(String unprocessedDate) throws DukeException {
         this.unprocessedDate = unprocessedDate;
         processDate();
     }
 
+    /**
+     * Processes the user input date.
+     * If unprocessed date is empty, the date will not be processed.
+     * @throws DukeException If date is in the wrong format or invalid.
+     */
     public void processDate() throws DukeException {
         if (unprocessedDate.equals("")) {
             return;
@@ -39,6 +53,11 @@ public class Date {
         }
     }
 
+    /**
+     * Checks if input month is valid.
+     * @param monthNumber Month number input by user.
+     * @return Whether the input month is valid.
+     */
     public boolean isValidMonth(int monthNumber) {
         if (monthNumber >= 1 && monthNumber <= 12) {
             return true;
@@ -47,6 +66,13 @@ public class Date {
         }
     }
 
+    /**
+     * Checks if input day is valid.
+     * @param day Day number input by user.
+     * @param monthNumber Month number input by user.
+     * @param year Year number input by user.
+     * @return Whether the input day is valid.
+     */
     public boolean isValidDay(int day, int monthNumber, int year) {
         switch(monthNumber) {
         case 1:
@@ -83,6 +109,11 @@ public class Date {
         }
     }
 
+    /**
+     * Checks if input year is a leap year.
+     * @param year Year number input by user.
+     * @return Whether the input year is a leap year.
+     */
     public boolean isLeapYear(int year) {
         if (year % 400 == 0) {
             return true;
@@ -95,16 +126,36 @@ public class Date {
         }
     }
 
+    /**
+     * Returns day number.
+     * @return Day.
+     */
     public int getDay() {
         return day;
     }
 
+    /**
+     * Returns month e.g. JANUARY.
+     * @return Month.
+     */
     public Month getMonth() {
         return month;
     }
 
+    /**
+     * Returns year number.
+     * @return Year.
+     */
     public int getYear() {
         return year;
+    }
+
+    /**
+     * Returns the unprocessed date.
+     * @return Unprocessed date.
+     */
+    public String getUnprocessedDate() {
+        return unprocessedDate;
     }
 
     @Override
@@ -120,8 +171,4 @@ public class Date {
             return day + "th of " + month + " " + year;
         }
     }
-    public String getUnprocessedDate() {
-        return unprocessedDate;
-    }
-
 }

@@ -3,7 +3,17 @@ package duke;
 import duke.command.*;
 import duke.exception.DukeException;
 
+/**
+ * Represents a parser to make sense of inputs.
+ */
 public class Parser {
+
+    /**
+     * Processes the user input and creates the corresponding commands.
+     * @param fullCommand Command input by user.
+     * @return Corresponding command that is input by user.
+     * @throws DukeException If a new command cannot be created due to invalid input parameters.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String userInput = fullCommand.replaceAll("\\s+", " ");
         if (userInput.equals("bye")) {

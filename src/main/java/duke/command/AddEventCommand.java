@@ -9,14 +9,35 @@ import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 
+/**
+ * Represents an event command.
+ * An <code>AddEventCommand</code> object corresponds to a command to add a <code>Event</code> object
+ * to a <code>TaskList</code>.
+ */
 public class AddEventCommand extends Command {
     protected String details;
 
+    /**
+     * Constructor for <code>AddEventCommand</code>.
+     * @param details Details required to create an <code>Event</code> object, which includes a task description,
+     *                a start <code>Date</code> and/or a start <code>Time</code>, an optional end <code>Date</code>
+     *                and/or end <code>Time</code>.
+     */
     public AddEventCommand(String details) {
         super();
         this.details = details;
     }
 
+    /**
+     * Creates a new <code>Event</code> object and adds it into input <code>TaskList</code>.
+     * Calls the method in the <code>Ui</code> object to output a message.
+     * Calls the method in the <code>Storage</code> object to write all <code>Task</code> objects
+     * in the <code>TaskList</code> to the hard disk.
+     * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
+     * @param ui Instance of <code>Ui</code> which handles user input and outputs.
+     * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
+     * @throws DukeException If insufficient or incorrect details are provided.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] detailsSplit = details.split( "/at");
         if (detailsSplit.length == 0 || detailsSplit[0].trim().length() == 0) {
@@ -68,10 +89,18 @@ public class AddEventCommand extends Command {
         }
     }
 
+    /**
+     * Checks if this object is an <code>ExitCommand</code>.
+     * @return Whether this command is an exit command.
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns the input details for the <code>AddEventCommand</code>.
+     * @return Details for command.
+     */
     public String getDetails() {
         return details;
     }

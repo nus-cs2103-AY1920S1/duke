@@ -6,13 +6,19 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a personal assistant chatbot that keeps track of tasks.
+ * An <code>Duke</code> object corresponds to a new chatbot with its own <code>Storage</code> and <code>TaskList</code>.
+ */
 public class Duke {
-    public static ArrayList<Task> actions = new ArrayList<>();
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for <code>Duke</code>.
+     * @param filePath File path of file to store the information in the task list.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chatbot.
+     */
     public void run() {
         ui.greetUser();
         boolean isExit = false;

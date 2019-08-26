@@ -53,12 +53,22 @@ public enum Response {
     EVENT_NO_NAME("(?i)^event\\s*", (i, s) -> {
         Printer.printError("The description of an event cannot be empty");
     }),
-    EVENT_NO_TIME("^event (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
+    EVENT_NO_TIME("^(?i)event (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
         Printer.printError("The date range of an event cannot be empty");
     }),
     EVENT("(?i)^event .+ /at .+", (i, s) -> {
         String[] parts = splitTwoDelimeters(i, "(?i)^event ", "(?i)/at ");
         addTask(new Event(parts[0], parts[1]), s);
+    }),
+    DEADLINE_NO_NAME("(?i)^deadline\\s*", (i, s) -> {
+        Printer.printError("The description of a deadline cannot be empty");
+    }),
+    DEADLINE_NO_TIME("(?i)^deadline (((?!/by).)+$)|(.+ /by\\s*$)", (i, s) -> {
+        Printer.printError("The due date of a deadline cannot be empty");
+    }),
+    DEADLINE("(?i)^deadline .+ /by .+", (i, s) -> {
+        String[] parts = splitTwoDelimeters(i, "(?i)^deadline ", "(?i)/by ");
+        addTask(new Deadline(parts[0], parts[1]), s);
     }),
     UNKNOWN(".*", (i, s) -> {
         Printer.printError("I'm sorry but I don't know what that means :-(");

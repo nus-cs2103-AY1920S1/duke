@@ -1,13 +1,18 @@
 package bin;
 
+import bin.task.Task;
+
 import java.util.ArrayList;
 
 public class DataStorage {
     private ArrayList<Task> textStorage = new ArrayList<>();
 
-    public String store(String task) {
-        textStorage.add(new Task(task));
-        return Constants.INDENTATION + "ADDED: " + task;
+    public void store(Task task) {
+        textStorage.add(task);
+    }
+
+    public int getSize() {
+        return textStorage.size();
     }
 
     public Task markAsDone(int index) {

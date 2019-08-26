@@ -1,4 +1,4 @@
-package bin;
+package bin.task;
 
 public class Task {
     protected boolean isDone;

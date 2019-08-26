@@ -1,11 +1,14 @@
 package duke.task;
 
+import java.util.Date;
+
 public class Event extends Task {
 
-    private String eventTimeTo;
-    private String eventTimeFrom;
+    private Date eventTimeTo;
+    private Date eventTimeFrom;
 
-    public Event(String eventName, String eventTimeFrom, String eventTimeTo) {
+
+    public Event(String eventName, Date eventTimeTo, Date eventTimeFrom) {
         super(eventName);
         this.eventTimeFrom = eventTimeFrom;
         this.eventTimeTo = eventTimeTo;

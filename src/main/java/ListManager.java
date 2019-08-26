@@ -4,59 +4,44 @@ import java.util.Scanner;
 
 public class ListManager {
     ArrayList<Task> actualList;
-    String startMessage;
-    String exitMessage;
-    String bar;
-    Scanner scanner;
 
-    public ListManager(Scanner sc) {
-        this.startMessage = "\tHello! I'm Duke \n\tWhat can I do for you?";
-        this.exitMessage = "\tBye. Hope to see you again soon!";
-        this.bar = "\t______________________________";
+    public ListManager() {
         this.actualList = new ArrayList<>();
-        this.scanner = sc;
     }
 
-    public void add(String input) {
-        String[] strArray = input.split(" ", 0);
-        if(strArray[0].equals("todo")) {
-            String[] stringBreaker = input.split("todo",2);
+    public ListManager(ArrayList<Task> taskList) {
+        this.actualList = taskList;
+    }
+
+    public void add(String fullCommand, String[] splitCommand) {
+        if(splitCommand[0].equals("todo")) {
+            String[] stringBreaker = fullCommand.split("todo",2);
             if (!stringBreaker[1].equals("")) {
                 ToDos todo = new ToDos(stringBreaker[1]);
                 actualList.add(todo);
-                this.successfulAdd();
             } else {
+                //Should throw exception here
                 System.out.println("\t☹ OOPS!!! The description of a todo cannot be empty.");
-                System.out.println(bar);
             }
-        } else if (strArray[0].equals("deadline")) {
-            String newString = input.substring(9);
+        } else if (splitCommand[0].equals("deadline")) {
+            String newString = fullCommand.substring(9);
             String[] stringBreaker = newString.split("/by",2);
             Deadlines deadline = new Deadlines(stringBreaker[0], stringBreaker[1]);
             actualList.add(deadline);
-            this.successfulAdd();
-        } else if (strArray[0].equals("event")) {
-            String newString = input.substring(6);
+        } else if (splitCommand[0].equals("event")) {
+            String newString = fullCommand.substring(6);
             String[] stringBreaker = newString.split("/at",2);
             Events event = new Events(stringBreaker[0], stringBreaker[1]);
             actualList.add(event);
-            this.successfulAdd();
         } else {
+            //Throw exception here
             System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            System.out.println(bar);
         }
     }
 
-    public void successfulAdd() {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + actualList.get(actualList.size() - 1));
-        System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
-        System.out.println(bar);
-    }
     public void iterate() {
         if (this.actualList.isEmpty()) {
             System.out.println("\tYou have nothing on your to-do list!");
-            System.out.println(bar);
         } else {
             System.out.println("\tHere are the tasks in your list:");
             for(int i = 0; i < actualList.size(); i++) {
@@ -64,7 +49,6 @@ public class ListManager {
                 System.out.print(i+1 + ".");
                 System.out.println(actualList.get(i));
             }
-            System.out.println(bar);
         }
     }
 
@@ -76,7 +60,6 @@ public class ListManager {
         } else {
             System.out.println("\tTask does not exist!");
         }
-        System.out.println(bar);
     }
 
     public void delete(int index) {
@@ -84,6 +67,5 @@ public class ListManager {
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t  " + removed);
         System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
-        System.out.println(bar);
     }
 }

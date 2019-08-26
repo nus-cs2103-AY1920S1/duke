@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     /*
@@ -12,10 +16,78 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
      */
+    private static ArrayList<Task> arrlist = new ArrayList<>();
+    private static void loadtxt(String filePath) throws FileNotFoundException {
+        File txtfile = new File(filePath);
+        Scanner s = new Scanner(txtfile);
+        while (s.hasNext()) {
+            String txttasks = s.nextLine();
+            String[] txtsplit = txttasks.split(",");
+            if (txtsplit[0].equals("T")) {
+                String description = txtsplit[2];
+                Task todo = new Todo(description);
+                if (txtsplit[1].equals("1")) {
+                    todo.setDone();
+                }
+                arrlist.add(todo);
+            } else if (txtsplit[0].equals("E")) {
+                String description = txtsplit[2];
+                String at = txtsplit[3];
+                Task event = new Event(description, at);
+                if (txtsplit[1].equals("1")) {
+                    event.setDone();
+                }
+                arrlist.add(event);
+            } else {
+                String description = txtsplit[2];
+                String by = txtsplit[3];
+                Task deadline = new Deadline(description, by);
+                if (txtsplit[1].equals("1")) {
+                    deadline.setDone();;
+                }
+                arrlist.add(deadline);
+            }
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+        writer.write(textToAdd);
+        writer.close();
+    }
+
+    private static void addtask() {
+        String file = "data/task.txt";
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            for (int i = 0; i < arrlist.size(); i++) {
+                if (i == arrlist.size() - 1) {
+                    sb.append(arrlist.get(i).toStringintxt());
+                } else {
+                    sb.append(arrlist.get(i).toStringintxt());
+                    sb.append("\n");
+                }
+            }
+            String text = sb.toString();
+            writeToFile(file, text);
+        } catch (IOException e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
+
+
     public static void main(String[] args) {
 
+        File file = new File("data");
+        file.mkdir();
+        try {
+            loadtxt("data/task.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
         boolean flag = true;
         drawline();
         System.out.println("     Hello! I'm Duke\n" +
@@ -30,15 +102,15 @@ public class Duke {
                     flag = false;
                     break;
                 case "list" :
-                    list(list);
+                    list(arrlist);
                     break;
                 case "done":
                     int n = Integer.parseInt(a[1]);
-                    done(list, n-1);
+                    done(arrlist, n-1);
                     break;
                 case "todo":
                     try{
-                        todo(list,s);
+                        todo(arrlist,s);
                     }
                     catch (ErrorException e) {
                         System.out.println(e.getMessage());
@@ -47,7 +119,7 @@ public class Duke {
                     break;
                 case "event":
                     try{
-                        event(list,s);
+                        event(arrlist,s);
                     }
                     catch (ErrorException e) {
                         System.out.println(e.getMessage());
@@ -57,7 +129,7 @@ public class Duke {
                 case "deadline":
 
                     try{
-                        deadline(list,s);
+                        deadline(arrlist,s);
                     }
                     catch (ErrorException e) {
                         System.out.println(e.getMessage());
@@ -65,7 +137,7 @@ public class Duke {
                     break;
                 case "delete":
                     int m = Integer.parseInt(a[1]);
-                    delete(list, m-1);
+                    delete(arrlist, m-1);
                     break;
 
 
@@ -108,10 +180,11 @@ public class Duke {
     }
     public static void done(ArrayList<Task>list,int k){
         drawline();
-        list.get(k).setDone(true);
+        list.get(k).setDone();
         System.out.println("     Nice! I've marked this task as done:");
         System.out.println("     [✓]"+list.get(k).getName());
         drawline();
+        addtask();
     }
     public static void todo(ArrayList<Task>list,String s) throws ErrorException{
         if (s.length() == 4) {
@@ -125,7 +198,8 @@ public class Duke {
             System.out.println("     Got it. I've added this task:");
             System.out.println("     " + t);
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
-            drawline(); 
+            drawline();
+            addtask();
         }
     }
     public static void deadline(ArrayList<Task>list,String s) throws ErrorException{
@@ -145,6 +219,7 @@ public class Duke {
             System.out.println("     " + t);
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
             drawline();
+            addtask();
         }
     }
     public static void event(ArrayList<Task>list,String s) throws ErrorException{
@@ -164,6 +239,7 @@ public class Duke {
             System.out.println("     " + t);
             System.out.println("     Now you have " + list.size() + " tasks in the list.");
             drawline();
+            addtask();
         }
     }
     public static void other(String s) throws ErrorException{
@@ -177,6 +253,7 @@ public class Duke {
         list.remove(p);
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
         drawline();
+        addtask();
     }
 
 }

@@ -13,8 +13,8 @@ public class Task {
         return done;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone() {
+        this.done = true;
     }
 
     public String getName() {
@@ -41,5 +41,11 @@ public class Task {
     public String toString() {
         String s = "[" + getStatusIcon() + "] " + getName();
         return s;
+    }
+
+    public String toStringintxt() {
+        String check = this.done==true ? "1," : "0,";
+        String str = check + this.getName();
+        return str;
     }
 }

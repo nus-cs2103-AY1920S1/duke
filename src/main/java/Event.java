@@ -10,6 +10,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public void setDateTimeAt(LocalDateTime dateTimeAt) {
+        this.dateTimeAt = dateTimeAt;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

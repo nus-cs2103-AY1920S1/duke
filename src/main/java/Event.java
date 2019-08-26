@@ -14,8 +14,7 @@ public class Event extends Task {
         super(description);
         this.at = at;
         super.symbol = "E";
-<<<<<<< HEAD
-=======
+
     }
 
     public void getDate() throws ParseException{
@@ -27,7 +26,7 @@ public class Event extends Task {
         date1.setMinutes(Integer.parseInt(date_arr[1])%100);
         date2.setHours(Integer.parseInt(date_arr[2])/100);
         date2.setMinutes(Integer.parseInt(date_arr[2])%100);
->>>>>>> branch-level-8
+
     }
 
     @Override

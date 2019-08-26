@@ -12,15 +12,14 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
         super.symbol = "D";
-<<<<<<< HEAD
-=======
+
     }
 
     public Date getDate() throws ParseException {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy hhmm");
         Date date = format.parse(by);
         return date;
->>>>>>> branch-level-8
+
     }
 
     @Override

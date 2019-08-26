@@ -5,7 +5,7 @@ class DukeException  extends Exception {
         this.msg = msg;
     }
 
-    public String toString() {
+    public String getMessage() {
         return "OOPS!!! " + msg;
     }
 }

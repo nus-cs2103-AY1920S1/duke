@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Parser {
-    public Command parse(String userInput) {
+    public Command parse(String userInput) throws DukeException {
         String[] separatedInputs = userInput.trim().split("\\s+");
         switch (separatedInputs[0].toLowerCase()) {
         case "bye":
@@ -13,7 +13,7 @@ public class Parser {
         case "delete":
             Scanner s = new Scanner(separatedInputs[1]);
             if (separatedInputs.length > 2 || !s.hasNextInt()) {
-                return new IncorrectCommand();
+                throw new DukeException("invalid number");
             }
             if (separatedInputs[0].toLowerCase().equals("done")) {
                 return new DoneCommand(s.nextInt() - 1);
@@ -23,12 +23,12 @@ public class Parser {
         case "todo":
             String description = userInput.trim().substring(separatedInputs[0].length()).trim();
             if (description.equals("")) {
-                return new IncorrectCommand();
+                throw new DukeException("empty todo");
             }
             return new ToDoCommand(description);
         case "deadline":
             if (userInput.indexOf("/by") == -1) {
-                return new IncorrectCommand();
+                throw new DukeException("empty deadline date");
             } else {
                 String[] arguments = userInput.trim().substring(separatedInputs[0].length()).trim().
                         split("/by");
@@ -36,14 +36,14 @@ public class Parser {
             }
         case "event":
             if (userInput.indexOf("/at") == -1) {
-                return new IncorrectCommand();
+                throw new DukeException("empty event date");
             } else {
                 String[] arguments = userInput.trim().substring(separatedInputs[0].length()).trim().
                         split("/at");
                 return new EventCommand(arguments);
             }
         default:
-            return new IncorrectCommand();
+            throw new DukeException("invalid input");
         }
     }
 }

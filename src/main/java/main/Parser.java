@@ -52,6 +52,8 @@ public class Parser {
             c = new DeleteCommand(Integer.parseInt(commandComponents[1]));
         } else if (commandComponents[0].equals("bye")) {
             c = new ExitCommand();
+        } else if (commandComponents[0].equals("find")) {
+            c = new FindCommand(commandComponents[1]);
         } else {
             throw new DukeException("Sorry! I don't know what this command does: " + fullCommand);
         }

@@ -80,4 +80,14 @@ public class TaskList {
         }
         return result;
     }
+
+    public ArrayList<String> findAllMatches(String desc) {
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).hasDescription(desc)) {
+                result.add("    " + (i + 1) + ". " + tasks.get(i).toString());
+            }
+        }
+        return result;
+    }
 }

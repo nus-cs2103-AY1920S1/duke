@@ -7,68 +7,57 @@ todo read book
     ____________________________________________________________
      Got it. I've added this task: 
        [T][-] read book
-     Now you have 3 tasks in the list.
+     Now you have 2 tasks in the list.
     ____________________________________________________________
 deadline CS2103 Project /by 12/08/2019
     ____________________________________________________________
      Got it. I've added this task: 
        [D][-] CS2103 Project (by: 12nd August 2019)
-     Now you have 4 tasks in the list.
+     Now you have 3 tasks in the list.
     ____________________________________________________________
 event birthday partyy /at 15/08/2019 1800
     ____________________________________________________________
      Got it. I've added this task: 
        [E][-] birthday partyy (at: 15th August 2019 6pm)
-     Now you have 5 tasks in the list.
+     Now you have 4 tasks in the list.
     ____________________________________________________________
 list
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][+] read book
-    2. [E][+] birthday partyy (at: 15th August 2019 6pm)
-    3. [T][-] read book
-    4. [D][-] CS2103 Project (by: 12nd August 2019)
-    5. [E][-] birthday partyy (at: 15th August 2019 6pm)
+    1. [T][-] run 2km
+    2. [T][-] read book
+    3. [D][-] CS2103 Project (by: 12nd August 2019)
+    4. [E][-] birthday partyy (at: 15th August 2019 6pm)
     ____________________________________________________________
 done 1
     ____________________________________________________________
      Nice! I've marked this task as done: 
-       [T][+] read book
+       [T][+] run 2km
     ____________________________________________________________
 done 3
     ____________________________________________________________
      Nice! I've marked this task as done: 
-       [T][+] read book
+       [D][+] CS2103 Project (by: 12nd August 2019)
     ____________________________________________________________
 list
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][+] read book
-    2. [E][+] birthday partyy (at: 15th August 2019 6pm)
-    3. [T][+] read book
-    4. [D][-] CS2103 Project (by: 12nd August 2019)
-    5. [E][-] birthday partyy (at: 15th August 2019 6pm)
+    1. [T][+] run 2km
+    2. [T][-] read book
+    3. [D][+] CS2103 Project (by: 12nd August 2019)
+    4. [E][-] birthday partyy (at: 15th August 2019 6pm)
     ____________________________________________________________
-delete 2
+find CS
     ____________________________________________________________
-     Noted. I've removed this task: 
-       [E][+] birthday partyy (at: 15th August 2019 6pm)
-     Now you have 4 tasks in the list.
-    ____________________________________________________________
-e
-    ____________________________________________________________
-    Sorry! I don't know what this command does: e
-    ____________________________________________________________
-somewhat
-    ____________________________________________________________
-    Sorry! I don't know what this command does: somewhat
+    Here are the matching tasks in your list:
+    3. [D][+] CS2103 Project (by: 12nd August 2019)
     ____________________________________________________________
 list
     ____________________________________________________________
     Here are the tasks in your list:
-    1. [T][+] read book
-    2. [T][+] read book
-    3. [D][-] CS2103 Project (by: 12nd August 2019)
+    1. [T][+] run 2km
+    2. [T][-] read book
+    3. [D][+] CS2103 Project (by: 12nd August 2019)
     4. [E][-] birthday partyy (at: 15th August 2019 6pm)
     ____________________________________________________________
 bye

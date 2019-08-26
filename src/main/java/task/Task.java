@@ -45,4 +45,8 @@ public class Task {
     public String toDataFormat() {
         return "T | " + this.getStatusIcon() + " | " + this.description;
     }
+
+    public boolean hasDescription(String desc) {
+        return this.description.contains(desc);
+    }
 }

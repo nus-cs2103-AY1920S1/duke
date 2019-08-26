@@ -9,18 +9,35 @@ public class TaskList {
 
     List<Task> tasks;
 
+    /**
+     * Constructor to create a TaskList object.
+     */
     public TaskList() {
         tasks = new LinkedList<>();
     }
 
+    /**
+     * Constructor to create a TaskList object with an existing Task list.
+     * @param tasks Existing tasks list in the database.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets the current tasks list.
+     * @return The list containing the Task objects.
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Adds a Task into the list.
+     * @param command User's command.
+     * @param ui The Ui object we are currently using.
+     * @throws DukeException If the input format is incorrect.
+     */
     public void addTask(String command, Ui ui) throws DukeException {
         String[] words = command.split(" ");
         String type = words[0];
@@ -48,6 +65,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a Task in the list.
+     * @param command User's command.
+     * @param ui The Ui object we are currently using.
+     * @throws DukeException If the input format is incorrect.
+     */
     public void deleteTask(String command, Ui ui) throws DukeException {
         try {
             String[] done = command.split(" ");
@@ -62,6 +85,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Makrs a Task in the list as done.
+     * @param command User's command.
+     * @param ui The Ui object we are currently using.
+     * @throws DukeException If the input format is incorrect or if the task is already done.
+     */
     public void doneTask(String command, Ui ui) throws DukeException {
         try {
             String[] done = command.split(" ");

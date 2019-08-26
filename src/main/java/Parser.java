@@ -22,16 +22,36 @@ public class Parser {
             String[] deadlineSplit = fullCommand.split(" /by ");
             String deadlineDesc = deadlineSplit[0].substring(9);
             String deadlineDate = deadlineSplit[deadlineSplit.length - 1];
+            if (isDate(deadlineDate)){
+                String[] dateSplitter = deadlineDate.split(" ");
+                Date validDeadlineDate = new Date(dateSplitter[0], dateSplitter[1]);
+                return new AddDeadlineCommand(deadlineDesc, validDeadlineDate);
+            }
             return new AddDeadlineCommand(deadlineDesc, deadlineDate);
         case "event":
             checkValidity("event", fullCommand, tokens);
             String[] eventSplit = fullCommand.split(" /at ");
             String eventDesc = eventSplit[0].substring(6);
             String eventDate = eventSplit[eventSplit.length - 1];
+            if (isDate(eventDate)){
+                String[] eventSplitter = eventDate.split(" ");
+                Date validEventDate = new Date(eventSplitter[0], eventSplitter[1]);
+                return new AddEventCommand(eventDesc, validEventDate);
+            }
             return new AddEventCommand(eventDesc, eventDate);
         default:
             return new NullCommand();
         }
+    }
+
+    public static boolean isDate(String dateDescription){
+        String[] dateSplit = dateDescription.split(" ");
+        if (dateSplit.length != 2){
+            return false;
+        } else if (!dateSplit[0].contains("/")){
+            return false;
+        }
+        return true;
     }
 
     public static void checkValidity(String check, String input, String[] tokens) throws DukeException{

@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Optional;
+import java.util.Scanner;
+
 public class Duke {
     /* Globals */
     private static TaskList taskList;
@@ -11,10 +13,9 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke.init();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        UI.printWelcomeMessage();
         runEvents();
-        System.out.println("Bye. Hope to see you again soon!");
+        UI.printGoodbyeMessage();
         DataStorage.storeTaskList(taskList);
     }
 
@@ -23,10 +24,11 @@ public class Duke {
      */
     private static void runEvents() {
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine().trim();
-        while (!command.toLowerCase().equals("bye")) {
-            parser.executeCommand(taskList, command);
-            command = sc.nextLine().trim();
+        String inputCommand = sc.nextLine().trim();
+        while (!inputCommand.toLowerCase().equals("bye")) {
+            Optional<Command> fullCommand = parser.executeCommand(taskList, inputCommand);
+            if(fullCommand.isPresent()) { fullCommand.get().execute(taskList); }
+            inputCommand = sc.nextLine().trim();
         }
     }
 }

@@ -24,19 +24,18 @@ public class DataStorage {
                 String[] taskInfo = command.split("\\|");
                 switch(taskInfo[0]) {
                     case "Deadline":
-                        taskList.add("Deadline", taskInfo[2], taskInfo[3]);
+                        taskList.add(new DeadlineTask(taskInfo[2], taskInfo[3]));
                         break;
                     case "Event":
-                        taskList.add("Event", taskInfo[2], taskInfo[3]);
+                        taskList.add(new EventTask(taskInfo[2], taskInfo[3]));
                         break;
                     case "Todo":
-                        taskList.add(taskInfo[2]);
+                        taskList.add(new ToDoTask(taskInfo[2]));
                         break;
                 }
                 if(taskInfo[1].equals("1")) { taskList.done(idx); }
                 idx++;
             }
-
         } catch (Exception e) {
             e.getMessage();
         }

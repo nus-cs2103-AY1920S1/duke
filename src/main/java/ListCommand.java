@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+public class ListCommand extends Command {
+    public ListCommand() {
+        super(null);
+    }
 
-public class ListCommand {
+    @Override
+    public void execute(TaskList tasklist) {
+        tasklist.print();
+    }
 }

@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+public abstract class Command {
+    private Task task;
+    public Command(Task task) {
+        this.task = task;
+    }
 
-public class Command {
+    public abstract void execute(TaskList tasklist);
 }

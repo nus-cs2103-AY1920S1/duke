@@ -1,5 +1,4 @@
-public class Message {
-
+public class UI {
     /**
      * Prints once the program Duke.java is launched
      */
@@ -44,5 +43,21 @@ public class Message {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task);
         System.out.println("Now you have " + size + " tasks in the list.");
+    }
+
+    /**
+     * Prints out message after exceeding list bounds
+     * @param size - Current size of list
+     */
+    public static void printExceedListMessage(int size) {
+        System.out.println("There is/are only " + size + " item(s) in the list :( ");
+    }
+
+    /**
+     * Prints out message after invalid statement
+     * @param fullCommand - Invalid command
+     */
+    public static void printInvalidStatementMessage(String fullCommand) {
+        System.out.println("☹ OOPS!!! The statement: \"" + fullCommand + "\" is invalid. ");
     }
 }

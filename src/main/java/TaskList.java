@@ -10,28 +10,10 @@ public class TaskList {
 
     /**
      * Adds new task (without date) into list
-     * @param taskName - Name of task
+     * @param task - task to add
      */
-    public void add(String taskName) {
-        this.list.add(new ToDoTask(taskName));
-    }
-
-    /**
-     * Adds new task (without date) into list
-     * @param taskType - Type description of task
-     * @param taskName - Name of task
-     * @param date - Date of which the task needs to be completed
-     */
-    public void add(String taskType, String taskName, String date) {
-        taskType = taskType.toLowerCase();
-        switch (taskType) {
-            case "deadline":
-                this.list.add(new DeadlineTask(taskName, date));
-                break;
-            case "event":
-                this.list.add(new EventTask(taskName, date));
-                break;
-        }
+    public void add(Task task) {
+        this.list.add(task);
     }
 
     /**
@@ -51,7 +33,7 @@ public class TaskList {
     public void delete(int idx) throws IndexOutOfBoundsException {
         Task task = this.list.get(idx);
         this.list.remove(idx);
-        Message.printSuccessDeleteTaskMessage(task, this.size());
+        UI.printSuccessDeleteTaskMessage(task, this.size());
     }
 
     /**

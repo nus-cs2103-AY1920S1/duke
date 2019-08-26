@@ -65,9 +65,9 @@ public abstract class Task {
      */
     String getStatus() {
         if (this.isDone) {
-            return "\u2713";
+            return "[\u2713]";
         } else {
-            return "\u2718";
+            return "[\u2718]";
         }
     }
 }

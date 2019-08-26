@@ -1,22 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
 import java.io.IOException;
 import java.text.ParseException;
-import duke.task.Task;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.ToDo;
 import duke.error.DukeException;
-import duke.error.InvalidCommandException;
-import duke.error.InvalidTaskArgumentException;
-import duke.error.InvalidIndexException;
-import duke.util.Storage;
-import duke.util.DateUtil;
-import duke.util.Ui;
+import duke.command.Command;
+//CHECKSTYLE:OFF
+import duke.util.*;
+//CHECKSTYLE:ON
 
 public class Duke {
     private TaskList tasks;
@@ -47,29 +37,22 @@ public class Duke {
     }
 
     /**
-     * Runs the duke program
+     * Runs the duke program.
      */
     private void run() {
         this.ui.printWelcome();
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String command = sc.nextLine();
-            if (this.handleCommand(command)) {
-                break;   
-            }
+        boolean shouldRun = true;
+        while (shouldRun) {
+            try {
+                String strCommand = this.ui.readCommand();
+                Command c = Parser.parse(strCommand);
+                c.execute(this.tasks, this.ui, this.storage);
+                shouldRun = !c.isExit();
+            } catch (DukeException e) {
+                ui.printError(e);
+            } catch (ParseException e) {
+                ui.print("Passed in an invalid date");
+            } 
         }
     }
-
-
-    /**
-     * Write List to disk.
-     */
-    private void writeListToDisk() {
-        try {
-            this.storage.save(this.tasks);
-        } catch (IOException e) {
-            System.out.println("Failed to write to disk");
-        }
-    }
-
 }

@@ -41,9 +41,10 @@ public class Duke {
         scan.close();
     }
 
-    public static void taskDone(int i, ArrayList<Task> list) throws Exception {
+    public static void taskDone(int i, ArrayList<Task> list, File file) throws Exception {
         try {
             list.get(i - 1).markAsDone();
+            writeToFile(file, list);
         } 
         catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The item specified does not exist.");
@@ -109,7 +110,6 @@ public class Duke {
         validateDetail(inputAsArr);
         String command = inputAsArr[0];
         String rest = input.substring(input.indexOf(" ") + 1);
-
         if (command.equals("todo")) {
             task = new ToDos(rest);
             list.add(task);
@@ -134,6 +134,7 @@ public class Duke {
             System.out.println("Got it. I've added this task:");
             System.out.println("\t" + task);
         }
+        addTaskToFile(file, task);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -160,7 +161,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The completed task's index must be mentioned.");
                     } else {
                         try {
-                            taskDone(Integer.parseInt(command[1]), list);
+                            taskDone(Integer.parseInt(command[1]), list, dukeTaskFiles);
                         } 
                         catch (NumberFormatException e) {
                             throw new DukeException("☹ OOPS!!! The completed task's index must be a number.");
@@ -188,9 +189,6 @@ public class Duke {
                 input = scanner.nextLine();
             }
         }
-
-        writeToFile(dukeTaskFiles, list);
         System.out.println("Bye. Hope to see you again soon!");
-
     }
 }

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Duke {
     /*
@@ -17,6 +19,7 @@ public class Duke {
     }
      */
     private static ArrayList<Task> arrlist = new ArrayList<>();
+    private static DateTimeFormatter time = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private static void loadtxt(String filePath) throws FileNotFoundException {
         File txtfile = new File(filePath);
         Scanner s = new Scanner(txtfile);
@@ -212,14 +215,8 @@ public class Duke {
             int secondIndex = sIndex + 4;
             String deadlineDescription = s.substring(9, firstIndex);
             String deadlineBy = s.substring(secondIndex);
-            Task t = new Deadline(deadlineDescription, deadlineBy);
-            list.add(t);
-            drawline();
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("     " + t);
-            System.out.println("     Now you have " + list.size() + " tasks in the list.");
-            drawline();
-            addtask();
+            Deadline d = new Deadline(deadlineDescription, deadlineBy);
+            timeform(deadlineBy,d);
         }
     }
     public static void event(ArrayList<Task>list,String s) throws ErrorException{
@@ -232,14 +229,11 @@ public class Duke {
             int secondIndex = sIndex + 4;
             String eventDescription = s.substring(6, firstIndex);
             String eventAt = s.substring(secondIndex);
-            Task t = new Event(eventDescription, eventAt);
-            list.add(t);
-            drawline();
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("     " + t);
-            System.out.println("     Now you have " + list.size() + " tasks in the list.");
-            drawline();
-            addtask();
+            Event event = new Event(eventDescription, eventAt);
+            timeform(eventAt,event);
+
+
+
         }
     }
     public static void other(String s) throws ErrorException{
@@ -254,6 +248,31 @@ public class Duke {
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
         drawline();
         addtask();
+    }
+
+
+    public static void timeform(String dateTimeString, Task t) {
+        try {
+            LocalDateTime ltime = LocalDateTime.parse(dateTimeString, time);
+
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                e.setDateTime(ltime);
+            } else {
+                Deadline d = (Deadline) t;
+                d.setDateTime(ltime);
+            }
+            arrlist.add(t);
+            drawline();
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("     " + t);
+            System.out.println("     Now you have " + arrlist.size() + " tasks in the list.");
+            drawline();
+            addtask();
+
+        } catch (Exception e) {
+            System.out.println("Error " + "Please enter date and time in right format.");
+        }
     }
 
 }

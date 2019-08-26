@@ -1,11 +1,15 @@
-
+import java.time.LocalDateTime;
 public class Deadline extends Task {
 
     protected String by;
+    protected LocalDateTime time = null;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+    public void setDateTime(LocalDateTime time) {
+        this.time = time;
     }
 
     @Override

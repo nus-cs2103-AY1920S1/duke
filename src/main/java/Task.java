@@ -17,9 +17,8 @@ public abstract class Task {
         return this.isComplete ? "V" : "X";
     }
 
-    public String complete() {
+    public void complete() {
         this.isComplete = true;
-        return String.format("Nice! I've marked this task as done:\n  %s", this.toString());
     }
 
     public abstract String toEncodedString();

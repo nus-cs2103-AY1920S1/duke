@@ -8,20 +8,16 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public Task getTask(int idx) {
-        return this.tasks.get(idx);
+    public Task getTask(int id) {
+        return this.tasks.get(id - 1);
     }
 
-    public String addTask(Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
-        String template = "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.";
-        return String.format(template, task.toString(), this.numberOfTasks());
     }
 
-    public String deleteTask(int idx) {
-        Task task = this.tasks.remove(idx);
-        String template = "Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.";
-        return String.format(template, task.toString(), this.numberOfTasks());
+    public Task deleteTask(int id) {
+        return this.tasks.remove(id - 1);
     }
 
     public int numberOfTasks() {

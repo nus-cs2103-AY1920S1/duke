@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,7 +62,7 @@ public class Duke {
 
     private void addNewTask(String[] arr) {
 
-        //Possible exception: command not recognized
+        //Possible error: command not recognized
         String taskType = arr[0].toLowerCase();
         boolean validTask = (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event"));
         if (!validTask) {
@@ -112,6 +114,7 @@ public class Duke {
         dukeEcho("Got it. I've added this task:",
                 newTask.toString(),
                 "Now you have " + this.tasks.size() + " tasks in the list.");
+        saveTaskList();
     }
 
     private void finishTask(String[] arr){
@@ -122,7 +125,7 @@ public class Duke {
         // No error, proceed to mark task as complete
         currTask.finishTask();
         dukeEcho("Nice! I've marked this task as done:", currTask.toString());
-
+        saveTaskList();
 
     }
 
@@ -136,6 +139,7 @@ public class Duke {
         dukeEcho("Noted. I've removed this task:",
                 currTask.toString(),
                 "Now you have " + this.tasks.size() + " tasks in the list.");
+        saveTaskList();
     }
 
     /*
@@ -190,6 +194,24 @@ public class Duke {
             System.out.println("     " + (i + 1) + ". " + this.tasks.get(i));
         }
         System.out.println(DIVIDER);
+    }
+
+    private void saveTaskList(){
+        String filePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/duke.txt";
+        try {
+            new FileWriter(filePath); //create new file
+            for (Task task : tasks) {
+                appendToFile(filePath, task.publishTask() + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            dukeEcho("Failed to save task list. Reason: " + e.getMessage());
+        }
+    }
+
+    private void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend);
+        fw.close();
     }
 
     public static void main(String[] args) {

@@ -1,11 +1,12 @@
 import java.util.Scanner;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.*;
-import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 public class Duke {
     private ArrayList<Task> listOfInputs;
@@ -47,7 +48,6 @@ public class Duke {
             File f = new File("./data/duke.txt");
             if (!f.exists()) {
                 f.getParentFile().mkdirs();
-
             } else {
                 BufferedReader br = new BufferedReader(new FileReader(f));
                 String text;
@@ -64,7 +64,7 @@ public class Duke {
                     }
                     case "D": {
                         Task deadline = new Deadline(text.substring(7, text.indexOf("by") - 2),
-                                text.substring(text.indexOf("by") + 4, text.length() - 1));
+                                fileTaskDateConverter(text.substring(text.indexOf("by") + 4, text.length() - 1)));
                         if (text.substring(4, 5).equals("V")) {
                             deadline.markedAsDone();
                         }
@@ -73,7 +73,7 @@ public class Duke {
                     }
                     case "E": {
                         Task event = new Event(text.substring(7, text.indexOf("at") - 2),
-                                text.substring(text.indexOf("at") + 4, text.length() - 1));
+                                fileTaskDateConverter(text.substring(text.indexOf("at") + 4, text.length() - 1)));
                         if (text.substring(4, 5).equals("V")) {
                             event.markedAsDone();
                         }
@@ -162,7 +162,7 @@ public class Duke {
                             try {
                                 deadlineCheck(task, userInput);
                                 Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by")),
-                                        userInput.substring(userInput.indexOf("/by") + 4));
+                                        dateFormatter(userInput.substring(userInput.indexOf("/by") + 4)));
                                 listOfInputs.add(deadline);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(deadline);
@@ -177,7 +177,7 @@ public class Duke {
                             try {
                                 eventCheck(task, userInput);
                                 Task event = new Event(userInput.substring(6, userInput.indexOf("/at")),
-                                        userInput.substring(userInput.indexOf("/at") + 4));
+                                        dateFormatter(userInput.substring(userInput.indexOf("/at") + 4)));
                                 listOfInputs.add(event);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(event);
@@ -203,7 +203,26 @@ public class Duke {
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
+    }
 
+    private Date dateFormatter(String date) throws DukeException {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date parseDate = formatter.parse(date);
+            return parseDate;
+        } catch (ParseException e) {
+            throw new DukeException("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    private Date fileTaskDateConverter(String date) throws DukeException {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd 'of' MMMM yyyy, hh:mm a");
+            Date parseDate = formatter.parse(date);
+            return parseDate;
+        } catch (ParseException e) {
+            throw new DukeException("Something went wrong: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {

@@ -1,8 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.format.DateTimeFormatter;
+
+
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
+    private static DateTimeFormatter dukeDateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     public static void main(String[] args) {
         String initialMessage = "Hello! I'm Duke\nWhat can I do for you?";

@@ -7,3 +7,7 @@ event pending make some money
 sunday
 event pending make some cash
 monday
+todo pending make some money
+todo pending get some cash
+event pending play along with friends
+12th of December 1999, 5.30pm

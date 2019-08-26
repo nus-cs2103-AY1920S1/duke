@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -18,15 +19,89 @@ public class ToDoList {
         fw.close();
     }
 
-    public void run() {
+    private static ArrayList<Task> fileInitialization() throws FileNotFoundException {
+        File f = new File("./todoList.txt");
+        Scanner s = new Scanner(f);
+        ArrayList<Task> clone = new ArrayList<Task>();
+
+        while (s.hasNext()) {
+            String input = s.nextLine();
+            String[] inputArr = input.split(" ");
+            boolean done;
+            if (inputArr[1].equals("1")) {
+                done = true;
+            } else {
+                done = false;
+            }
+
+            switch (inputArr[0]) {
+            case "T":
+                clone.add(new ToDos(inputArr[2], done));
+                break;
+            case "D":
+                clone.add(new Deadlines(inputArr[2], inputArr[3], done));
+                break;
+            case "E":
+                clone.add(new Events(inputArr[2], inputArr[3], done));
+                break;
+            }
+        }
+
+        return clone;
+    }
+
+    private void addToDo(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) {
+        String message;
+        message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1);
+        whereToAdd.add(new ToDos(message, isDone));
+    }
+
+    private void addEvent(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) {
+        String date, message;
+        date = whatToAdd.substring(whatToAdd.indexOf("/") + 4);
+        message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1, whatToAdd.indexOf("/") - 1);
+        whereToAdd.add(new Events(message, date, isDone));
+    }
+
+    private void addDeadline(String whatToAdd, ArrayList<Task> whereToAdd, boolean isDone) {
+        String date, message;
+        date = whatToAdd.substring(whatToAdd.indexOf("/") + 4);
+        message = whatToAdd.substring(whatToAdd.indexOf(' ') + 1, whatToAdd.indexOf("/") - 1);
+        whereToAdd.add(new Deadlines(message, date, isDone));
+    }
+
+    private void arrayToFile(File f, ArrayList<Task> arr) throws IOException {
+        String memo = "";
+
+        for (Task i : arr) {
+            int done;
+            if (i.isDone()) {
+                done = 1;
+            } else {
+                done = 0;
+            }
+
+            if (i instanceof ToDos) {
+                memo = memo + "T " + done + i.getDescription() + "\n";
+            } else if (i instanceof Deadlines) {
+                memo = memo + "D " + done + " " + i.getDescription() + " " + ((Deadlines) i).getDate() + "\n";
+            } else {
+                memo = memo + "E " + done + " " + i.getDescription() + " " + ((Events) i).getDate() + "\n";
+            }
+        }
+
+        writeToFile(f.getPath(), memo);
+    }
+
+
+    public void run() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         String border = "    ____________________________________________________________";
-        ArrayList<Task> arr = new ArrayList<Task>();
-        int counter = 0;
+        ArrayList<Task> arr = fileInitialization();
+
+        int counter = arr.size();
 
         String input = sc.nextLine();
-
-        File f = new File("./todoList.txt");
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
@@ -70,30 +145,23 @@ public class ToDoList {
                     }
                 } else { //command to add task to list
 
-                    String date;
-                    String message;
                     boolean added = false;
 
                     try {
                         switch (temp[0]) {
                         case "deadline":
-                            date = input.substring(input.indexOf("/") + 4);
-                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                            arr.add(new Deadlines(message, date));
+                            addDeadline(input, arr, false);
                             added = true;
                             break;
                         case "event":
-                            date = input.substring(input.indexOf("/") + 4);
-                            message = input.substring(input.indexOf(' ') + 1, input.indexOf("/") - 1);
-                            arr.add(new Events(message, date));
+                            addEvent(input, arr, false);
                             added = true;
                             break;
                         case "todo":
                             if (temp.length < 2) {
                                 throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
                             }
-                            message = input.substring(input.indexOf(' ') + 1);
-                            arr.add(new ToDos(message));
+                            addToDo(input, arr, false);
                             added = true;
                             break;
                         }

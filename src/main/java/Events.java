@@ -2,8 +2,8 @@ public class Events extends Task {
 
     protected String date;
 
-    public Events(String description, String date) {
-        super(description);
+    public Events(String description, String date, boolean isDone) {
+        super(description, isDone);
         this.date = date;
     }
 

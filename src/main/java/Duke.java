@@ -15,6 +15,8 @@ public class Duke {
         Storage storage = new Storage(filepath);
         TaskList taskList = storage.loadStorage();
         
+        System.out.println("hello");
+        
         boolean flag = true;
         
         while(flag){

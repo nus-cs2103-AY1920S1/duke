@@ -67,13 +67,13 @@ public class Duke {
      */
 
     public static void main(String[] args) throws DukeException,IOException {
-        /*Class dukeClass = Duke.class;
+        Class dukeClass = Duke.class;
         ClassLoader loader = dukeClass.getClassLoader();
-        URL myURL = loader.getResource("../resources/duke.txt");
+        URL myURL = loader.getResource("resources/duke.txt");
         String path = myURL.getPath();
-        path = path.replaceAll("%20", " ");*/
+        path = path.replaceAll("%20", " ");
 
-        Duke duke = new Duke("../resources/duke.txt");
+        Duke duke = new Duke(path);
         duke.run();
     }
 

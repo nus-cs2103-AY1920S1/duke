@@ -42,6 +42,13 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
+        try {
+            loadSavedTasks("data/taskList.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         String initialMessage = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(initialMessage);
 

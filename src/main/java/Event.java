@@ -7,6 +7,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String description, String at, String isDone) {
+        super(description.trim(), isDone.trim());
+        this.at = at;
+    }
     @Override
     public String getFormatToFile() {
         return String.format("E | %d | %s | %s \n", (isDone ? 1 : 0), description, at);
@@ -14,6 +18,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at:" + at + ")";
     }
 }

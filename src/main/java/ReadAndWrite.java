@@ -1,39 +1,45 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
-//import java.io.FileNotFoundException;
-
+import java.util.Scanner;
 
 public class ReadAndWrite {
-    public static String projectDir;
-    public static String txtFileLocation;
+    public static String txtFileLocation = "A:/CS2103T/repository/duke/data/duke.txt";
+    public static String[] oneLine;
+    public static void putToList() {
+        try {
+            String firstWord = oneLine[0].trim();
+            if (oneLine[1].trim().equals("1") || oneLine[1].trim().equals("0")) {
+                if (firstWord.equals("T") && oneLine.length == 3) {
+                    Duke.myList.add(new Todo(oneLine[2], oneLine[1]));
+                } else if (firstWord.equals("D") && oneLine.length == 4) {
+                    Duke.myList.add(new Deadline(oneLine[2], oneLine[3], oneLine[1]));
 
-    //    public class  GetParentDir{
-//        private static void dirlist(String fname){
-//            File dir = new File(fname);
-//            String parentpath = dir.getParent();
-//            System.out.println("Current Directory : "+ dir);
-//            System.out.println("parent Directory : "+ parentpath);
-//        }
-//
-//        public static void main(String[] args){
-//            String currentdir = System.getProperty("user.dir");
-//            dirlist(currentdir);
-//        }
-//    }
-    public static void updateProjectDir() {
-        String current = System.getProperty("user.dir");
-        File currentFile = new File(current);
-        projectDir = currentFile.getParent();
+                } else if (firstWord.equals("E") && oneLine.length == 4) {
+                    Duke.myList.add(new Event(oneLine[2], oneLine[3], oneLine[1]));
+                } else {
+                    throw new InvalidCommandException("debug: I'm sorry, but I don't know what that means :-(");
+                }
+            } else {
+                throw new InvalidNumberException("the description should have 0 or 1");
+            }
+        }catch(DukeException e){
+            System.out.println(e);
+        }
     }
+    public static void readFile(List<Task> myList) throws Exception {
 
-    public static void readFile(List<Task> myList) throws FileNotFoundException{
-        txtFileLocation = projectDir + "/data/duke.txt";
-        try{
-            File dataFile = new File(txtFileLocation);
+        File txtFile = new File(txtFileLocation);
+        try {
+            Scanner sc = new Scanner(txtFile);
+            while (sc.hasNextLine()) {
+                oneLine = sc.nextLine().split("\\|");
 
-        } catch (FileNotFoundException ex) {
-            System.out.println("[Warning]: Could find DB File");
+                putToList();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("duke.txt not found");
         }
     }
 }

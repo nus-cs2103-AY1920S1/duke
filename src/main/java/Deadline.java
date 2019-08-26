@@ -6,6 +6,10 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+    public Deadline(String description, String by, String isDone) {
+        super(description.trim(), isDone.trim());
+        this.by = by;
+    }
     @Override
     public String getFormatToFile() {
         return String.format("D | %d | %s | %s \n", (isDone ? 1 : 0), description, by);
@@ -13,6 +17,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by:" + by + ")";
     }
 }

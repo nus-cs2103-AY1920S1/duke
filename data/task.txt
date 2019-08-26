@@ -1,4 +1,2 @@
-T | 1 | one thing
-E | 0 |  | 11/11/11 11:11
-D | 0 | asd | 22/22/22 33:33
-T | 0 | someting
+T | 0 | something
+D | 0 | asd | 11/11/11 11:11

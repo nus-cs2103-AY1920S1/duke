@@ -7,9 +7,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    private Duke(String filePath) {
+    private Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -39,6 +39,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/task.txt").run();
+        new Duke().run();
     }
 }

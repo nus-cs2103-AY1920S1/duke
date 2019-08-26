@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner sc = new Scanner(System.in);
-    private String LINES = "____________________________________________________________\n";
+    private static final String LINES = "____________________________________________________________\n";
 
     public Ui() {
     }

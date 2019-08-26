@@ -1,9 +1,11 @@
 public class Task{
     boolean done = false;
     String content;
-    public Task(String content, int status){
+    int order;
+    public Task(String content, int status, int order){
         this.content = content;
         done = status == 1 ? true : false;
+        this.order = order;
     }
     public String toString(){
         String res = "[";

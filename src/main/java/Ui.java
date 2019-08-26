@@ -29,4 +29,14 @@ public class Ui {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t);
     }
+
+	public void found(TaskList matchingTasks) {
+        if(matchingTasks.list.size() == 0){
+            System.out.println("oh, fiddlesticks! there are no tasks matching your search!");
+        }
+        else{
+            System.out.println("Here are the matching tasks in your list:");
+            System.out.print(matchingTasks);
+        }
+	}
 }

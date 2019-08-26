@@ -4,7 +4,8 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     public Ui ui = new Ui();
 
-    public Parser() {}
+    public Parser() {
+    }
 
     public boolean parse(String command, TaskList list, DateTimeFormatter formatter) throws DukeException {
         Verify.validCommand(command, list, formatter);
@@ -14,22 +15,25 @@ public class Parser {
         } else if (command.startsWith("list")) {
             ui.list(list);
         } else if (command.startsWith("done")) {
-            list.get(Integer.parseInt(command.split(" ")[1])-1).setAsDone();
+            list.get(Integer.parseInt(command.split(" ")[1]) - 1).setAsDone();
             ui.done(list, Integer.parseInt(command.split(" ")[1]));
+        } else if (command.startsWith("find")) {
+            TaskList matchingTasks = list.search(command.split(" ")[1]);
+            ui.found(matchingTasks);
         } else if (command.startsWith("delete")) {
             Task t = list.remove(Integer.parseInt(command.split(" ")[1]));
             ui.delete(t);
         } else if (command.startsWith("todo")) {
-            list.add(new Todo(command.substring(5), 0));
+            list.add(new Todo(command.substring(5), 0, list.list.size() + 1));
             ui.taskAdded(list);
         } else if (command.startsWith("event")) {
             String[] cmdSplit = command.substring(6).split(" /at ");
             list.add(new Event(cmdSplit[0], 0, LocalDateTime.parse(cmdSplit[1].split(" to ")[0], formatter),
-                    LocalDateTime.parse(cmdSplit[1].split(" to ")[1], formatter)));
+                    LocalDateTime.parse(cmdSplit[1].split(" to ")[1], formatter), list.list.size() + 1));
             ui.taskAdded(list);
         } else if (command.startsWith("deadline")) {
-            list.add(new Deadline(command.substring(9).split(" /by ")[0], 0, 
-                    LocalDateTime.parse(command.substring(9).split(" /by ")[1], formatter)));
+            list.add(new Deadline(command.substring(9).split(" /by ")[0], 0,
+                    LocalDateTime.parse(command.substring(9).split(" /by ")[1], formatter), list.list.size() + 1));
             ui.taskAdded(list);
         }
         return true;

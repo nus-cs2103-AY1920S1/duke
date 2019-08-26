@@ -24,6 +24,10 @@ public class Verify {
             } else if ((Integer.parseInt(command.split(" ")[1])) >= list.list.size()) {
                 throw new DukeException("oh! that task doesn't exist! please enter a task within the list!");
             }
+        } else if (command.startsWith("find")) {
+            if (command.split(" ").length < 2) {
+                throw new DukeException("upsie-daisy! please enter a string to search for!");
+            }
         } else if (command.startsWith("delete")) {
             if (command.split(" ").length < 2) {
                 throw new DukeException("whoops! please enter a number after delete");

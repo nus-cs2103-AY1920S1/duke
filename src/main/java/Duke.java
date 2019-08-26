@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
@@ -74,7 +75,21 @@ public class Duke {
                             } else {
                                 String instruction = command.split("deadline ")[1];
                                 String[] details = instruction.split(" /by ");
-                                Task temp = new Deadline(details[0], details[1]);
+                                String[] dateAndTime = details[1].split(" ");
+                                Calendar date = Calendar.getInstance();
+                                String[] dateArray = dateAndTime[0].split("/");
+                                int time = Integer.parseInt(dateAndTime[1]);
+                                int hours = time / 100;
+                                int minutes = time % 100;
+                                if (dateArray.length != 3) {
+                                    throw new DukeException(" :( OOPS!!! Invalid date format.");
+                                }
+                                date.set(Integer.parseInt(dateArray[2]),
+                                        Integer.parseInt(dateArray[1]),
+                                        Integer.parseInt(dateArray[0]),
+                                        hours,
+                                        minutes);
+                                Task temp = new Deadline(details[0], date);
                                 arr.add(temp);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(" " + temp);
@@ -95,8 +110,22 @@ public class Duke {
                                 throw new DukeException(" :( OOPS!!! An event must have a time.");
                             } else {
                                 String instruction = command.split("event ")[1];
-                                String[] details = instruction.split(" /at ");
-                                Task temp = new Event(details[0], details[1]);
+                                String[] details = instruction.split(" /by ");
+                                String[] dateAndTime = details[1].split(" ");
+                                Calendar date = Calendar.getInstance();
+                                String[] dateArray = dateAndTime[0].split("/");
+                                int time = Integer.parseInt(dateAndTime[1]);
+                                int hours = time / 100;
+                                int minutes = time % 100;
+                                if (dateArray.length != 3) {
+                                    throw new DukeException(" :( OOPS!!! Invalid date format.");
+                                }
+                                date.set(Integer.parseInt(dateArray[2]),
+                                        Integer.parseInt(dateArray[1]),
+                                        Integer.parseInt(dateArray[0]),
+                                        hours,
+                                        minutes);
+                                Task temp = new Event(details[0], date);
                                 arr.add(temp);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(" " + temp);

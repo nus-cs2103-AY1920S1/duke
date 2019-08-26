@@ -32,17 +32,17 @@ public class Storage {
             String taskname = lineComponents[2];
             if (lineComponents[0].equals("T")) {
                 Task toAdd = new Todo(taskname);
-                if (finished) toAdd.set_as_finish();
+                if (finished) toAdd.setAsFinish();
                 toReturn.add(toAdd);
             } else if (lineComponents[0].equals("D")) {
                 String tasktime = lineComponents[3];
                 Task toAdd = new Deadline(taskname, tasktime);
-                if (finished) toAdd.set_as_finish();
+                if (finished) toAdd.setAsFinish();
                 toReturn.add(toAdd);
             } else {
                 String tasktime = lineComponents[3];
                 Task toAdd = new Event(taskname, tasktime);
-                if (finished) toAdd.set_as_finish();
+                if (finished) toAdd.setAsFinish();
                 toReturn.add(toAdd);
             }
             line = reader.readLine();

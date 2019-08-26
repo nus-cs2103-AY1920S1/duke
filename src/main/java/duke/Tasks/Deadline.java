@@ -22,16 +22,16 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String task_info() {
+    public String taskInfo() {
         String indicator;
         if (isFinished()) indicator = "[\u2713] ";
         else indicator = "[\u2715] ";
-        return "[D]" + indicator + get_name() + " (by: " + myFormat.format(deathTime) + ")";
+        return "[D]" + indicator + getName() + " (by: " + myFormat.format(deathTime) + ")";
     }
 
     @Override
-    public String record_info() {
-        if (isFinished()) return "D|" + "1|" + get_name() + "|" + myFormat.format(deathTime);
-        else return "D|" + "0|" + get_name() + "|" + myFormat.format(deathTime);
+    public String recordInfo() {
+        if (isFinished()) return "D|" + "1|" + getName() + "|" + myFormat.format(deathTime);
+        else return "D|" + "0|" + getName() + "|" + myFormat.format(deathTime);
     }
 }

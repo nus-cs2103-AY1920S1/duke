@@ -9,16 +9,16 @@ public class Todo extends Task {
     }
 
     @Override
-    public String task_info() {
+    public String taskInfo() {
         String indicator;
         if (isFinished()) indicator = "[\u2713] ";
         else indicator = "[\u2715] ";
-        return "[T]" + indicator + get_name();
+        return "[T]" + indicator + getName();
     }
 
     @Override
-    public String record_info() {
-        if (isFinished()) return "T|" + "1|" + get_name();
-        else return "T|" + "0|" + get_name();
+    public String recordInfo() {
+        if (isFinished()) return "T|" + "1|" + getName();
+        else return "T|" + "0|" + getName();
     }
 }

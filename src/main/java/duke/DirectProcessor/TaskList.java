@@ -25,19 +25,19 @@ public class TaskList {
     public Task deleteTask(int position) {
         Task toReturn = taskList.get(position - 1);
         taskList.remove(position - 1);
-        Task.reduce_total_number();
+        Task.reduceTotalNumber();
         return toReturn;
     }
 
     public Task finishTask(int position) {
-        taskList.get(position - 1).set_as_finish();
+        taskList.get(position - 1).setAsFinish();
         return taskList.get(position - 1);
     }
 
     public ArrayList<String> listAllTask() {
         ArrayList<String> toReturn = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
-            toReturn.add((i + 1) + "." + taskList.get(i).task_info());
+            toReturn.add((i + 1) + "." + taskList.get(i).taskInfo());
         }
         return toReturn;
     }
@@ -48,7 +48,7 @@ public class TaskList {
         BufferedWriter recorder = new BufferedWriter(
                 new FileWriter("taskfile.txt", true));
         for (Task t : taskList) {
-            recorder.write(t.record_info());
+            recorder.write(t.recordInfo());
             recorder.write("\n");
         }
         recorder.close();

@@ -36,14 +36,14 @@ public class Ui {
 
     public void showAddMessage(Task t) {
         System.out.println("     Got it. I have added this task:");
-        System.out.println("       " + t.task_info());
-        System.out.println("     You have now " + Task.get_total_number() + " tasks in the list.");
+        System.out.println("       " + t.taskInfo());
+        System.out.println("     You have now " + Task.getTotalNumber() + " tasks in the list.");
     }
 
     public void showDeleteMessage(Task t) {
         System.out.println("     Noted, Noted. I've removed this task: ");
-        System.out.println("       " + t.task_info());
-        System.out.println("     Now you have " + Task.get_total_number() + " tasks in the list");
+        System.out.println("       " + t.taskInfo());
+        System.out.println("     Now you have " + Task.getTotalNumber() + " tasks in the list");
     }
 
     public void showListMessage(ArrayList<String> tl) {
@@ -54,7 +54,7 @@ public class Ui {
 
     public void showFinishMessage(Task t) {
         System.out.println("     Nice! I have set this task as done:");
-        System.out.println("       " + t.task_info());
+        System.out.println("       " + t.taskInfo());
     }
 
     public void showExitMessage() {

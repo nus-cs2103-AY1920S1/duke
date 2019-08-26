@@ -15,7 +15,7 @@ public class FinishCommand extends Command {
 
     @Override
     public void execute(TaskList tl, Ui ui) throws DukeException{
-        if (position > Task.get_total_number() || position < 1) {
+        if (position > Task.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }
         ui.showFinishMessage(tl.finishTask(position));

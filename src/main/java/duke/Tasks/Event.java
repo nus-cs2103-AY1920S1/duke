@@ -22,16 +22,16 @@ public class Event extends Task{
     }
 
     @Override
-    public String task_info() {
+    public String taskInfo() {
         String indicator;
         if (isFinished()) indicator = "[\u2713] ";
         else indicator = "[\u2715] ";
-        return "[E]" + indicator + get_name() + " (at: " + myFormat.format(eventTime) + ")";
+        return "[E]" + indicator + getName() + " (at: " + myFormat.format(eventTime) + ")";
     }
 
     @Override
-    public String record_info() {
-        if (isFinished()) return "E|" + "1|" + get_name() + "|" + myFormat.format(eventTime);
-        else return "E|" + "0|" + get_name() + "|" + myFormat.format(eventTime);
+    public String recordInfo() {
+        if (isFinished()) return "E|" + "1|" + getName() + "|" + myFormat.format(eventTime);
+        else return "E|" + "0|" + getName() + "|" + myFormat.format(eventTime);
     }
 }

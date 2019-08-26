@@ -1,14 +1,21 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
+/**
+ * Main class
+ */
 public class Duke {
 
     public static final String DIVIDER = "    ____________________________________________________________";
     public static final String BLANKSPACE = "     ";
 
-    private ArrayList<Task> _tasks;
+    private ArrayList<Task> tasks;
 
+    /**
+     * Creates a new Duke object with an empty task list.
+     */
     public Duke() {
-        _tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     private void dukeEcho(String... messages){
@@ -31,17 +38,17 @@ public class Duke {
             String firstWord = arr[0].toLowerCase();
 
             switch (firstWord) {
-                case "list":
-                    listTasks();
-                    break;
-                case "done":
-                    finishTask(arr);
-                    break;
-                case "delete":
-                    deleteTask(arr);
-                    break;
-                default:
-                    addNewTask(arr);
+            case "list":
+                listTasks();
+                break;
+            case "done":
+                finishTask(arr);
+                break;
+            case "delete":
+                deleteTask(arr);
+                break;
+            default:
+                addNewTask(arr);
             }
             cmd = sc.nextLine();
         }
@@ -76,35 +83,35 @@ public class Duke {
         }
 
         switch(taskType) {
-            case "todo":
-                newTask = new ToDo(taskDetails);
-                break;
-            case "deadline":
-                String[] deadlineTask = taskDetails.split("/");
-                try {
-                    newTask = new Deadline(deadlineTask[0], deadlineTask[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    dukeEcho("OOPS!!! No deadline found");
-                    return;
-                }
-                break;
-            case "event":
-                String[] eventTask = taskDetails.split("/");
-                try {
-                    newTask = new Event(eventTask[0], eventTask[1]);
-                } catch (IndexOutOfBoundsException e) {
-                    dukeEcho("OOPS!!! Event timing not found!");
-                    return;
-                }
-                break;
-            default:
+        case "todo":
+            newTask = new ToDo(taskDetails);
+            break;
+        case "deadline":
+            String[] deadlineTask = taskDetails.split("/");
+            try {
+                newTask = new Deadline(deadlineTask[0], deadlineTask[1]);
+            } catch (IndexOutOfBoundsException e) {
+                dukeEcho("OOPS!!! No deadline found");
                 return;
+            }
+            break;
+        case "event":
+            String[] eventTask = taskDetails.split("/");
+            try {
+                newTask = new Event(eventTask[0], eventTask[1]);
+            } catch (IndexOutOfBoundsException e) {
+                dukeEcho("OOPS!!! Event timing not found!");
+                return;
+            }
+            break;
+        default:
+            return;
         }
 
-        _tasks.add(newTask);
+        this.tasks.add(newTask);
         dukeEcho("Got it. I've added this task:",
                 newTask.toString(),
-                "Now you have " + _tasks.size() + " tasks in the list.");
+                "Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
     private void finishTask(String[] arr){
@@ -125,15 +132,23 @@ public class Duke {
         if (currTask == null) return;
 
         // No error, proceed to delete task
-        _tasks.remove(currTask);
+        this.tasks.remove(currTask);
         dukeEcho("Noted. I've removed this task:",
                 currTask.toString(),
-                "Now you have " + _tasks.size() + " tasks in the list.");
+                "Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
     /*
     getTask takes in an array with the command at index 0 and the taskID in index 1
-    returns the Task object with the corresponding taskID if ID is valid.
+    returns the Task object with the corresponding taskID if ID is valid, null if there is an error.
+     */
+
+    /**
+     * Returns a Task object. The index of the Task (in the tasks list) should be found in arr[1].
+     * This method gets the respective task if found.
+     *
+     * @param arr an array with the task ID stored in arr[1]
+     * @return Task object with corresponding task ID if valid, else null
      */
     private Task getTask(String[] arr) {
 
@@ -156,11 +171,11 @@ public class Duke {
 
         Task currTask;
         try {
-            currTask = _tasks.get(taskNum-1);
+            currTask = this.tasks.get(taskNum-1);
         }
         //Possible error: Task ID out of bounds
         catch (IndexOutOfBoundsException e) {
-            dukeEcho("Please ensure task ID is between 1 and " + _tasks.size());
+            dukeEcho("Please ensure task ID is between 1 and " + this.tasks.size());
             return null;
         }
 
@@ -171,8 +186,8 @@ public class Duke {
     private void listTasks() {
         System.out.println(DIVIDER);
         System.out.println(BLANKSPACE + "Here are the tasks in your list:");
-        for (int i = 0; i < _tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + _tasks.get(i));
+        for (int i = 0; i < this.tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + ". " + this.tasks.get(i));
         }
         System.out.println(DIVIDER);
     }

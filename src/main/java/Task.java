@@ -1,16 +1,16 @@
 public class Task {
 
-    String _name;
-    String _status;
+    private String name;
+    private String status;
 
-    public Task(String name) {
-        _name = name;
-        _status = "✗";
+    Task(String name) {
+        this.name = name;
+        this.status = "✗";
     }
 
     @Override
-    public String toString() {  return "[" + _status + "] " + _name; }
+    public String toString() {  return "[" + this.status + "] " + this.name; }
 
-    public void finishTask() {_status = "✓";}
+    void finishTask() {this.status = "✓";}
 
 }

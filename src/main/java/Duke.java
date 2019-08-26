@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Duke {
@@ -100,7 +101,8 @@ public class Duke {
                         throw new DukeException("A deadline requires the '/by' keyword.");
                     }
                     Task newTaskDeadline = new Task(messageDeadline, TaskType.DEADLINE);
-                    newTaskDeadline.setTime(deadlineMessageAndTime[1]);
+                    Calendar deadlineCalendar = convertStringToCalendar(deadlineMessageAndTime[1]);
+                    newTaskDeadline.setTime(deadlineCalendar);
                     tasks.add(newTaskDeadline);
                     System.out.print(LINE);
                     System.out.println(addTaskMessage);
@@ -131,7 +133,8 @@ public class Duke {
                         throw new DukeException("An event requires the '/at' keyword.");
                     }
                     Task newTaskEvent = new Task(messageEvent, TaskType.EVENT);
-                    newTaskEvent.setTime(eventMessageAndTime[1]);
+                    Calendar eventCalendar = convertStringToCalendar(eventMessageAndTime[1]);
+                    newTaskEvent.setTime(eventCalendar);
                     tasks.add(newTaskEvent);
                     System.out.print(LINE);
                     System.out.println(addTaskMessage);
@@ -178,5 +181,23 @@ public class Duke {
                     getUserInput();
                 }
         }
+    }
+
+    private static Calendar convertStringToCalendar(String dateString) {
+        String[] dateAndTime = dateString.split("\\s");
+        String date = dateAndTime[0];
+        String time = dateAndTime[1];
+        int hour = Integer.parseInt(time) / 100;
+        int minute = Integer.parseInt(time) % 100;
+
+        String[] dateComponents = date.split("/");
+        int day = Integer.parseInt(dateComponents[0]);
+        int month = Integer.parseInt(dateComponents[1]);
+        int year = Integer.parseInt(dateComponents[2]);
+
+        Calendar calendar = new Calendar.Builder().setDate(year, month - 1, day)
+                .setTimeOfDay(hour, minute, 0).build();
+
+        return calendar;
     }
 }

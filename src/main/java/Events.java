@@ -11,16 +11,16 @@ public class Events extends Task{
         this.timeDesc = timeDesc;
 
         try {
-            SimpleDateFormat deadlineFormatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
+            SimpleDateFormat deadlineFormatter = new SimpleDateFormat("dd/MM/yyyy hhmm-hhmm");
             this.date = deadlineFormatter.parse(timeDesc);
         } catch (ParseException e) {
-            throw new DukeException("Please enter deadline in format dd/mm/yyyy hhmm");
+            throw new DukeException("Please enter deadline in format dd/mm/yyyy hhmm-hhmm");
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + date + ")";
+        return "[E]" + super.toString() + " (at: " + date + ")";
     }
 
     public String toFileFormat() {

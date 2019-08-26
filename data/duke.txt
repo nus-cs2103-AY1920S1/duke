@@ -1,0 +1,4 @@
+Todo|0|read book
+Deadline|0|return book|June 6th
+Todo|0|join sports club
+Event|0|assignment|today

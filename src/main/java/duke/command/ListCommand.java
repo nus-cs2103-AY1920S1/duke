@@ -24,7 +24,7 @@ class ListCommand extends Command {
 
     @Override
     void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
-        if (commandArgs.length > 1) {
+        if (commandArgs.length > 0) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after list command",
                     " \u2639 OOPS!!! There shouldn't be anything following 'list',\n"

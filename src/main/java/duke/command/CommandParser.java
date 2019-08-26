@@ -23,29 +23,37 @@ public abstract class CommandParser {
         }
 
         switch (commandType) {
-            case bye:
-                command = new ByeCommand(inputs);
-                break;
-            case list:
-                command = new ListCommand(inputs);
-                break;
-            case done:
-                command = new DoneCommand(inputs);
-                break;
-            case delete:
-                command = new DeleteCommand(inputs);
-                break;
-            case todo:
-                command = new TodoCommand(inputs);
-                break;
-            case deadline:
-                command = new DeadlineCommand(inputs);
-                break;
-            case event:
-                command = new EventCommand(inputs);
-                break;
-            default:
-                //covered in try catch above with enums
+        case bye:
+            command = new ByeCommand(inputs);
+            break;
+        case list:
+            command = new ListCommand(inputs);
+            break;
+        case find:
+            command = new FindCommand(inputs);
+            break;
+        case done:
+            command = new DoneCommand(inputs);
+            break;
+        case delete:
+            command = new DeleteCommand(inputs);
+            break;
+        case todo:
+            command = new TodoCommand(inputs);
+            break;
+        case deadline:
+            command = new DeadlineCommand(inputs);
+            break;
+        case event:
+            command = new EventCommand(inputs);
+            break;
+        default:
+            //covered in try catch above with enums, only cause will be no implementation
+            throw new DukeInvalidCommandException(
+                    String.format(
+                            "Encountered unimplemented or uncovered command type %s",
+                            commandType.toString()),
+                    " \u2639 OOPS!!! I'm sorry, but I haven't implemented it :-(");
         }
 
         return command;

@@ -14,7 +14,7 @@ public class Parser {
      * @throws DukeException due to checking validity of command
      */
     public boolean parse(String command, TaskList list, DateTimeFormatter formatter) throws DukeException {
-        Verify.validCommand(command, list, formatter);
+        Verify.checkCommandValidity(command, list, formatter);
         if (command.equals("bye")) {
             ui.exit();
             return false;

@@ -20,6 +20,6 @@ public class DukeTest{
     @Test
     public void testVerify(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        assertThrows(DukeException.class, () -> Verify.validCommand("blah", taskList, formatter));
+        assertThrows(DukeException.class, () -> Verify.checkCommandValidity("blah", taskList, formatter));
     }
 }

@@ -3,12 +3,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Checks all the possible errors that can occur
- * during entry of command and throws DukeException with message
+ * Checks all the possible errors that can occur during entry of command and
+ * throws DukeException with message
  */
 public class Verify {
     public Verify() {
     }
+
     /**
      * 
      * @param str the input string
@@ -25,8 +26,8 @@ public class Verify {
 
     /**
      * 
-     * @param command the string command entered by user
-     * @param list the task list to compare with for checking validity
+     * @param command   the string command entered by user
+     * @param list      the task list to compare with for checking validity
      * @param formatter date formatter to catch wrong date format exceptions
      * @throws DukeException in the case of invalid input
      */

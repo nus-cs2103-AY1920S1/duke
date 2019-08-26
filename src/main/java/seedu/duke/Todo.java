@@ -7,7 +7,7 @@ package seedu.duke;
 public class Todo extends Task {
 
     /**
-     * Constructor of Todo.
+     * Class constructor.
      *
      * @param description String description of the todo task.
      */

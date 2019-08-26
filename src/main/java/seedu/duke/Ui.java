@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * Constructor of Ui.
+     * Class constructor.
      */
     public Ui() {
     }

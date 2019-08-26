@@ -8,7 +8,7 @@ public class ListCommand extends Command {
     private String command;
 
     /**
-     * Constructor of TodoCommand.
+     * Class constructor.
      *
      * @param command String command of 'list'.
      */

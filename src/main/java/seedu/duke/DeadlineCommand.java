@@ -8,7 +8,7 @@ public class DeadlineCommand extends Command {
     private String command;
 
     /**
-     * Constructor of DeadlineCommand.
+     * Class constructor.
      *
      * @param command String command of 'deadline'.
      */

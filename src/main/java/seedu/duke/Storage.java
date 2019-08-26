@@ -11,7 +11,7 @@ public class Storage {
     protected String filepath;
 
     /**
-     * Constructor of ByeCommand.
+     * Class constructor.
      *
      * @param filepath String of filepath for file to be worked with.
      */

@@ -14,7 +14,7 @@ public class Parser {
     protected static SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
 
     /**
-     * Constructor of Parser.
+     * Class constructor.
      */
     public Parser() {
 

@@ -16,7 +16,7 @@ public class Deadline extends Task {
     protected Date date, time;
 
     /**
-     * Constructor of Deadline.
+     * Class constructor.
      *
      * @param description String description of the task.
      * @param date Date of the deadline as a <code>Date</code> object.

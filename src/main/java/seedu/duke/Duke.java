@@ -13,7 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor of Duke that takes in a filepath.
+     * Class constructor that takes in a filepath.
      * Creates a tasklist from  loading information from data file.
      * It is able to create an empty TaskList if there is problems loading the data file or
      * creating the data file.

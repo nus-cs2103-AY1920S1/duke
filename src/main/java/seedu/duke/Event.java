@@ -16,7 +16,7 @@ public class Event extends Task {
     protected Date date, time;
 
     /**
-     * Constructor of Event.
+     * Class constructor.
      *
      * @param description String description of the event task.
      * @param date Date of the event as a <code>Date</code> object.

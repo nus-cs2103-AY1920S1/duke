@@ -8,7 +8,7 @@ public class DeleteCommand extends Command {
     private String command;
 
     /**
-     * Constructor of EventCommand.
+     * Class constructor.
      *
      * @param command String command of 'delete'.
      */

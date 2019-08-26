@@ -7,7 +7,7 @@ public class DukeException extends Exception {
     private String errMsg;
 
     /**
-     * Constructor of DukeException that takes in a string error message.
+     * Class constructor that takes in a string error message.
      *
      * @param errMsg String of exception message that Duke should let the user know.
      */
@@ -17,7 +17,7 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Constructor of DukeException.
+     * Class constructor.
      */
     public DukeException() {
     }

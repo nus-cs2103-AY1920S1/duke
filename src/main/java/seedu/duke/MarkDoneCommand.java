@@ -8,7 +8,7 @@ public class MarkDoneCommand extends Command {
     private String command;
 
     /**
-     * Constructor of MarkDoneCommand.
+     * Class constructor.
      *
      * @param command String command of 'done'.
      */

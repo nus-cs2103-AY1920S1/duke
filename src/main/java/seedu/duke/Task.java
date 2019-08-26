@@ -9,7 +9,7 @@ public class Task {
     protected String description;
 
     /**
-     * Constructor of Task.
+     * Class constructor.
      * Task is automatically marked as undone.
      *
      * @param description String description of the task.

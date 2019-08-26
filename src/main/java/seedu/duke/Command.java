@@ -6,7 +6,7 @@ package seedu.duke;
  */
 public abstract class Command {
     /**
-     * Constructor of command.
+     * Class constructor.
      */
     public Command() {
     }

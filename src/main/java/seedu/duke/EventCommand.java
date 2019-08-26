@@ -8,7 +8,7 @@ public class EventCommand extends Command {
     private String command;
 
     /**
-     * Constructor of EventCommand.
+     * Class constructor.
      *
      * @param command String command of 'event'.
      */

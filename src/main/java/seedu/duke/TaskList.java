@@ -10,7 +10,7 @@ public class TaskList {
     protected ArrayList<Task> arr;
 
     /**
-     * Constructor of MarkDoneCommand that takes in an arraylist of tasks.
+     * Class constructor that takes in an arraylist of tasks.
      *
      * @param arr Arraylist of tasks.
      */
@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     /**
-     * Constructor of MarkDoneCommand.
+     * Class constructor.
      */
     public TaskList() {
         this.arr = new ArrayList<>();

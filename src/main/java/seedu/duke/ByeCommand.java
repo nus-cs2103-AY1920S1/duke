@@ -9,7 +9,7 @@ public class ByeCommand extends Command {
     private Ui ui;
 
     /**
-     * Constructor of ByeCommand.
+     * Class constructor.
      *
      * @param command String command of "bye".
      */

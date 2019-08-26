@@ -8,6 +8,8 @@ import utils.Parser;
 import utils.Storage;
 import utils.Ui;
 
+import java.util.List;
+
 
 public class Duke {
 
@@ -87,7 +89,7 @@ public class Duke {
                 if (taskList.isEmpty()) {
                     ui.printEmptyTaskListMessage();
                 } else {
-                    ui.printTaskList(taskList.getTasks());
+                    ui.printTaskList(taskList.getTasks(), Ui.LIST_ACTION_TITLE);
                 }
             }
         });
@@ -152,6 +154,17 @@ public class Duke {
             }
         });
 
+        commandCentre.register("find", new Command() {
+            @Override
+            public void execute() {
+                String keyword = parser.parseFindKeyword();
+                if (keyword == null) {
+                    return;
+                }
+                List<Task> findResult = taskList.generateListByKeyword(keyword);
+                ui.printTaskList(findResult, Ui.FIND_ACTION_TITLE);
+            }
+        });
     }
 
 }

@@ -193,4 +193,17 @@ public class Parser {
             return null;
         }
     }
+
+    public String parseFindKeyword() {
+        try {
+            String keyword = sc.nextLine().trim();
+            if (keyword.isEmpty()) {
+                throw new EmptyDescriptionException();
+            }
+            return keyword;
+        } catch (EmptyDescriptionException e) {
+            System.out.print("     ☹ OOPS!!! The keyword for \"find\" cannot be empty.\n");
+            return null;
+        }
+    }
 }

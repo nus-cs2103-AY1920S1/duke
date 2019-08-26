@@ -1,4 +1,4 @@
-1.[T][?] read book
-2.[T][?] borrow book
-3.[D][?] do homework (by: Mon Dec 02 18:00:00 SGT 2019)
-4.[E][?] project meeting (at: Sun Dec 15 18:00:00 SGT 2019)
+1.[T][✘] read book
+2.[T][✓] borrow book
+3.[D][✘] do homework (by: Mon Dec 02 18:00:00 SGT 2019)
+4.[E][✘] project meeting (at: Sun Dec 15 18:00:00 SGT 2019)

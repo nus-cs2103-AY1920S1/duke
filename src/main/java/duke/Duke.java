@@ -1,10 +1,13 @@
 package duke;
 
+/**
+ * Represents a Duke object. A <code>Duke</code> object corresponds to
+ * an object that stores and parses tasks for user
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
 
     private Duke(String filePath) {
         ui = new Ui();
@@ -16,6 +19,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Operates the Duke object.
+     */
     private void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,7 +43,9 @@ public class Duke {
 
     }
 
-
+    /**
+     * Creates new Duke object.
+     */
     public static void main(String[] args) {
         new Duke("/Users/Bernice/Desktop/CS2103T/duke/duke.txt").run();
     }

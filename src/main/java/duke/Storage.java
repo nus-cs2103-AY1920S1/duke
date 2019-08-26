@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a Storage object in the Duke. A <code>Storage</code> object corresponds to
+ * writing and loading data to a file.
+ */
 class Storage {
     private String filepath;
 
@@ -13,6 +17,13 @@ class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Returns the list of tasks saved previously.
+     * If there is input output exception, Duke Exception is thrown.
+     *
+     * @return ArrayList list of tasks.
+     * @throws DukeException If there is input output exception.
+     */
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> aList = new ArrayList<>();
         String line;
@@ -47,7 +58,13 @@ class Storage {
         }
         return aList;
     }
-
+    /**
+     * Saves all tasks to the file.
+     * If there is input output exception, Duke Exception is thrown.
+     *
+     * @param tasks  TaskList containing list of tasks
+     * @throws DukeException  If there is input output exception.
+     */
      void writeToHardDisk(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filepath);

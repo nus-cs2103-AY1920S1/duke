@@ -2,8 +2,20 @@ package duke;
 
 import java.text.ParseException;
 
+/**
+ * Represents a Parser object in the Duke. A <code>Parser</code> object parses
+ * string command given by user and creates new Command object.
+ */
 public class Parser {
 
+    /**
+     * Returns a new Command object.
+     * If the command is invalid, Duke Exception is thrown.
+     *
+     * @param fullCommand  String containing command from user input.
+     * @return new Command object.
+     * @throws DukeException  If command is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] arr = fullCommand.split(" ", 2);
         String firstWord = arr[0];

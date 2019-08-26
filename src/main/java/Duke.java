@@ -1,28 +1,32 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
     private ArrayList<Task> myList;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public Duke() {
-        myList = new ArrayList<Task>();
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+            myList = tasks.getTasks();
+            throw new DukeException("what is this");
+        } catch (DukeException | FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     private void run() {
-        boolean canEnd;
-
-        try {
-            TaskFileReader reader = new TaskFileReader();
-            reader.loadTaskContents("data/duke.txt", myList);
-        } catch (FileNotFoundException e) {
-        }
         Scanner myScanner = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        canEnd = false;
+        ui.showWelcome();
+        boolean canEnd = false;
         while (!canEnd) {
             String input;
             input = myScanner.nextLine();
@@ -153,7 +157,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("data/duke.txt");
         duke.run();
     }
 }

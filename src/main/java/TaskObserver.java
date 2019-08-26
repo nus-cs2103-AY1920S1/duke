@@ -1,3 +1,3 @@
-interface TaskObserver{
+interface TaskObserver {
     void update(TaskModelInterface model);
 }

@@ -1,6 +1,7 @@
 // java -Dfile.encoding=UTF8 classname
 import java.util.stream.Stream;
 import java.util.Iterator;
+
 class Parser implements ControllerInterface {
     private TaskModelInterface model;
     private Ui display;
@@ -73,8 +74,6 @@ class Parser implements ControllerInterface {
     }
 
     public void listTasks() {
-//        Iterator<TaskInterface> iter = 
-//            this.model.getTaskListIterator();
         Stream<TaskInterface> taskStream = 
             this.model.getTaskStream();
 

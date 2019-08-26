@@ -66,7 +66,7 @@ class TaskList implements TaskModelInterface {
         return deletedTask;
     }
 
-    public Iterator<TaskInterface> getTaskListIterator(){
+    public Iterator<TaskInterface> getTaskListIterator() {
         return this.taskList.listIterator();
     }
 

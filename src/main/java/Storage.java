@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import java.lang.System;
 import java.util.List;
 import java.util.ArrayList;
+
 class Storage implements TaskObserver, StorageInterface {
 
 
@@ -45,6 +46,7 @@ class Storage implements TaskObserver, StorageInterface {
                         .createTask(loadLine);
                     taskList.add(loadTask);
                 } catch (OWOException e) {
+                    System.out.println(e);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -71,8 +73,6 @@ class Storage implements TaskObserver, StorageInterface {
     }
 
     private void writeData(String textToAdd) {
-//        File f = new File(this.path);
- //       System.out.println("file exists?: " + f.exists());
         System.out.println("Attempting to write");
         try {
 
@@ -88,7 +88,7 @@ class Storage implements TaskObserver, StorageInterface {
             System.out.println(e);
             Ui.printErrorSection(writeFileErrorMsg);
             //System.out.println("you need to create a folder" 
-             //       + " called 'data' in 'duke' dir");
+            //       + " called 'data' in 'duke' dir");
         }
                 
     }

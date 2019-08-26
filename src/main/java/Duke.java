@@ -1,4 +1,9 @@
 public class Duke {
+    /**
+     * Returns and initiates Duke program
+     *
+     *
+     */
     public static void main(String[] args) {
         /* TODO: init friday and model */
 

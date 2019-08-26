@@ -2,11 +2,21 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+/**
+ * User interface has methods that interacts with the user and
+ * prints out messages of commands and exceptions.
+ */
 public class Ui {
-    public Ui() {
 
+    /**
+     * Constructor of Ui.
+     */
+    public Ui() {
     }
 
+    /**
+     * Prints the welcome message of Duke.
+     */
     public void showIntro() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,18 +30,36 @@ public class Ui {
         System.out.println(greeting);
     }
 
+    /**
+     * Prints the exception of loading data file into arraylist error.
+     */
     public void showLoadingError() {
         System.out.println("\u2639 OOPS!!! There is an error loading data file");
     }
 
+    /**
+     * Returns the exception string for a command Duke does not understand.
+     *
+     * @return String of exception message when user input cannot be understood.
+     */
     public String noSuchCommand() {
         return "\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n";
     }
 
+    /**
+     * Prints the message of the task that is deleted with its information.
+     *
+     * @param task Task that is deleted.
+     */
     public void printDeletedTaskMsg(Task task) {
         System.out.println("Noted. I've removed this task:\n" + task);
     }
 
+    /**
+     * Prints the number of tasks in the list.
+     *
+     * @param tasks TaskList of the tasks in the list currently.
+     */
     public void printNoOfTaskInList(TaskList tasks) {
         String statusOfList;
         if (tasks.size() == 1) {
@@ -42,6 +70,16 @@ public class Ui {
         System.out.println(statusOfList);
     }
 
+    /**
+     * Checks the exception for delete commands.
+     * Throws DukeException when the command is intended to delete a task but is
+     * incorrectly inputted by the user.
+     *
+     * @param command String of command that user input.
+     * @param tasks TaskList of all the tasks currently.
+     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * that is intended to delete task.
+     */
     public void checkErrorForDeleteCommand(String command, TaskList tasks) throws DukeException {
         if (command.contains(" ")) {
             //throw exception for no task number and there is just trailing whitespaces
@@ -64,6 +102,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Checks the exception for todo commands.
+     * Throws DukeException when the command is intended create a todo task but is
+     * incorrectly inputted by the user.
+     *
+     * @param command String of command that user input.
+     * @param tasks TaskList of all the tasks currently.
+     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * that is intended to create a todo task.
+     */
     public void checkErrorForTodoCommand(String command, TaskList tasks) throws DukeException {
         if (command.length() == 4) {
             //throw exception for no description
@@ -83,6 +131,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Checks the exception for event commands.
+     * Throws DukeException when the command is intended to create an event task but is
+     * incorrectly inputted by the user.
+     *
+     * @param command String of command that user input.
+     * @param tasks TaskList of all the tasks currently.
+     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * that is intended to create an event task.
+     */
     public void checkErrorForEventCommand(String command, TaskList tasks) throws DukeException {
         if (command.length() == 5) {
             //throw exception for no description
@@ -119,6 +177,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Checks the exception for deadline commands.
+     * Throws DukeException when the command is intended to create a deadline task but is
+     * incorrectly inputted by the user.
+     *
+     * @param command String of command that user input.
+     * @param tasks TaskList of all the tasks currently.
+     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * that is intended to create a deadline task.
+     */
     public void checkErrorForDeadlineCommand(String command, TaskList tasks) throws DukeException {
         if (command.length() == 8) {
             //throw exception for no description
@@ -155,11 +223,27 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the task and its information that is added to the list
+     * of tasks.
+     *
+     * @param task Task that is added to the list.
+     */
     public void printAddedTask(Task task) {
         String commandMsg = "Got it. I've added this task:\n" + task;
         System.out.println(commandMsg);
     }
 
+    /**
+     * Checks the exception for mark as done commands.
+     * Throws DukeException when the command is intended to mark a task as done but is
+     * incorrectly inputted by the user.
+     *
+     * @param command String of command that user input.
+     * @param tasks TaskList of all the tasks currently.
+     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * that is intended to mark a task as done.
+     */
     public void checkMarkDoneError(String command, TaskList tasks) throws DukeException {
         if (command.contains(" ")) {
             //throw exception for no task number and there is just trailing whitespaces
@@ -182,12 +266,22 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the task information that is marked as done.
+     *
+     * @param task Task that is marked as done.
+     */
     public void printMarkDoneMsg(Task task) {
         String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
                 "[" + task.getStatusIcon() + "] " + task.getDescription() + "\n";
         System.out.println(markAsDoneMsg);
     }
 
+    /**
+     * Prints all the tasks in the list with the information of each task.
+     *
+     * @param tasks TaskList of all the tasks currently.
+     */
     public void printAllTasks(TaskList tasks) {
         String listMsg = "Here are the tasks in your list:";
         System.out.println(listMsg);
@@ -199,25 +293,46 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints the exception message for a parse error caused by an
+     * incorrectly input date and time format.
+     */
     public void showParseError() {
         System.out.println("\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
                 "and time in 24hr format, separated by a space.\n");
     }
 
+    /**
+     * Prints the exception message for an exception with default message.
+     *
+     * @param e Exception that was thrown to be printed.
+     */
     public void showExceptionMsg(Exception e) {
         System.out.println(e);
     }
 
+    /**
+     * Prints the goodbye message of duke when the bye command is input.
+     */
     public void printGoodbyeMsg() {
         String exitMsg = "Bye. Hope to see you again soon!\n";
         System.out.println(exitMsg);
     }
 
+    /**
+     * Reads in the user input with a <code><Scanner/code>.
+     *
+     * @return String of the user input.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
+    /**
+     * Prints the line before and after a user input and message printed by
+     * Duke.
+     */
     public void showLine() {
         String line = "____________________________________________"
                 + "______________________________________________";

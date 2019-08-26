@@ -17,7 +17,7 @@ public class Duke {
     public Duke() {
         scanner = new Scanner(System.in);
         running = true;
-        tasks = new TaskList(NUMBER_TASKS);
+        tasks = TaskList.create(NUMBER_TASKS);
     }
 
     public void start() {

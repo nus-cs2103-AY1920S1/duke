@@ -13,4 +13,9 @@ public class EventTask extends Task {
         return String.format("[E]%s(at:%s)", super.toString(), location);
     }
 
+    @Override
+    public String formatString() {
+        return String.format(
+                "E|%s|%s", super.formatString(), location);
+    }
 }

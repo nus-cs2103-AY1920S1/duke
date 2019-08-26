@@ -3,7 +3,10 @@ package com.core;
 import java.lang.StringBuilder;
 
 import com.util.Printer;
-import com.tasks.*;
+import com.tasks.Deadline;
+import com.tasks.DoableTask;
+import com.tasks.Event;
+import com.tasks.Todo;
 
 public enum Response {
     BYE("(?i)^bye\\s*", (ignored, s) -> {
@@ -76,17 +79,19 @@ public enum Response {
 
     private String regex;
     private ResponseFunc func;
+
     Response(String r, ResponseFunc f) {
         regex = r;
         func = f;
     }
 
     /**
-     * Given a string and program state, if string matches regex this enum will
-     * call its response function.
+     * Given a string and program state, if string matches regex this enum will call its response
+     * function.
+     *
      * @param i input string
      * @param s state object
-     * @return  boolean if the string has matched
+     * @return boolean if the string has matched
      */
     public boolean call(String i, State s) {
         if (i.matches(regex)) {
@@ -96,10 +101,22 @@ public enum Response {
         return false;
     }
 
+    /**
+     * Assuming input is ".+ [0-9]+", it splits at whitespace and returns
+     * an Integer of the second part of the string.
+     * @param input input string
+     * @return      integer of second part of string
+     */
     private static int getNumber(String input) {
         return Integer.parseInt(input.split(" ", 2)[1]);
     }
 
+    /**
+     * Given an index and state object, check if index in bounds of list in state object
+     * @param index index to check
+     * @param s     state object
+     * @return      False if out of bounds
+     */
     private static boolean checkValidIndex(int index, State s) {
         if (index < 0 || index > s.list.size() - 1) {
             Printer.printError("That is not a valid task index");
@@ -108,12 +125,24 @@ public enum Response {
         return true;
     }
 
+    /**
+     * Assuming input is "<head>.*<mid>.*" returns the two texts between them
+     * @param input input string
+     * @param head  head regex match
+     * @param mid   mid regex match
+     * @return      array of two text parts
+     */
     private static String[] splitTwoDelimeters(String input, String head, String mid) {
         String[] parts = input.split(mid, 2);
         parts[0] = parts[0].split(head)[1];
         return parts;
     }
 
+    /**
+     * Insert task into list and prints message string
+     * @param t task to be added
+     * @param s state object
+     */
     private static void addTask(DoableTask t, State s) {
         s.list.add(t);
         Printer.addTaskMessage(t.toString(), s.list.size());

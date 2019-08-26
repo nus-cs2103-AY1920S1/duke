@@ -1,11 +1,49 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        FileWriter fileWriter;
         ArrayList<Task> taskList = new ArrayList<>(100);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
+        try {
+            File file = new File("CurrentTaskList.txt");
+            file.createNewFile();
+            List<String> savedList = Files.readAllLines(file.toPath());
+            for (String line : savedList) {
+                String[] lineElements = line.split(" \\| ");
+                String lineType = lineElements[0];
+                if (lineType.equals("T")) {
+                    Task currentTask = new ToDoTask(lineElements[2]);
+                    if (lineElements[1].equals("+")) {
+                        currentTask.markAsDone();
+                    }
+                    taskList.add(currentTask);
+                } else if (lineType.equals("D")) {
+                    Task currentTask = new DeadlineTask(lineElements[2], lineElements[3]);
+                    if (lineElements[1].equals("+")) {
+                        currentTask.markAsDone();
+                    }
+                    taskList.add(currentTask);
+                } else if (lineType.equals("E")) {
+                    Task currentTask = new EventTask(lineElements[2], lineElements[3]);
+                    if (lineElements[1].equals("+")) {
+                        currentTask.markAsDone();
+                    }
+                    taskList.add(currentTask);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         while (true) {
             try {
                 String input = scanner.nextLine();
@@ -90,6 +128,16 @@ public class Duke {
             } catch (DukeException error) {
                 System.out.println(error.getMessage());
             }
+        }
+
+        try {
+            fileWriter = new FileWriter("CurrentTaskList.txt");
+            for (Task task : taskList) {
+                fileWriter.write(task.formattedString());
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -16,6 +16,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a string representation of the task to be stored in file.
+     * @return a string representation of the task to be stored in file, consisting of the task type,
+     *         status, description and deadline.
+     */
+    public String toStringForFile() {
+        return super.toStringForFile() + " | " + by;
+    }
+
+    /**
      * Returns a string representaion of the task.
      * @return a string representation of the task consisting of the task type,
      *         status, description and deadline.

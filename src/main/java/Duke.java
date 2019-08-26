@@ -1,7 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String FILEPATH = "/Users/jiangyuxin/Documents/sem1/cs2103/duke/data/duke.txt";
+
     /**
      * Prints a block which contains all the lines given.
      * @param text a list of lines to be printed inside the block
@@ -101,17 +107,72 @@ public class Duke {
         }
     }
 
-    /** main method*/
+    /**
+     * Returns a list of tasks that are stored in disk.
+     * @return a list of tasks that are stored in disk.
+     */
+    private static ArrayList<Task> loadTaskData() {
+        File f = new File(FILEPATH);
+        ArrayList<Task> list = new ArrayList<>();
+        try {
+            Scanner in = new Scanner(f);
+            while (in.hasNextLine()) {
+                String[] str = in.nextLine().split(" \\| ");
+                Task task;
+                switch (str[0]) {
+                case "T":
+                    task = new ToDo(str[2]);
+                    break;
+                case "E":
+                    task = new Event(str[2], str[3]);
+                    break;
+                case "D":
+                    task = new Deadline(str[2], str[3]);
+                    break;
+                default:
+                    continue;
+                }
+                if (str[1].equals("1")) {
+                    task.setDone();
+                }
+                list.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            return list;
+        } catch (IllegalDescriptionException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    /**
+     * Writes a list of tasks to disk.
+     * @param list a list of tasks.
+     */
+    private static void storeTaskData(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter(FILEPATH);
+            for (Task task : list) {
+                fw.write(task.toStringForFile() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /** Main method*/
     public static void main(String[] args) {
+        ArrayList<Task> list = loadTaskData();
         String greeting = "Hello! I'm Duke";
         String question = "What can I do for you?";
         printBlock(greeting, question);
 
-        ArrayList<Task> list = new ArrayList<>();
         Scanner in = new Scanner(System.in);
         while (true) {
             String command = in.nextLine();
             if (command.equals("bye")) {
+                storeTaskData(list);
                 printBlock("Bye. Hope to see you again soon!");
                 break;
             }

@@ -1,7 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 public class AddCommand extends Command {
@@ -10,28 +9,20 @@ public class AddCommand extends Command {
 
     public AddCommand(String type, String[] description) throws DukeException {
         this.description = description;
+
         try {
+            String[] details;
             switch (type) {
                 case "todo":
-                    t = new ToDo(description[1]);
+                    t = new ToDo(parseDescription(description[1].trim()));
                     break;
                 case "deadline":
-                    String[] details = description[1].trim().split("/by");
-                    if (details.length == 1) {
-                        if (details[0].length() != 0) {
-                            throw new DukeException("Incorrect format. \nPlease follow this format below: \n[deadline (task_name) /by (date/day)]");
-                        }
-                    }
+                    details = parseDescription(description[1].trim(), "/by", type);
                     t = new Deadline(details[0], parseDate(details[1]));
                     break;
                 case "event":
-                    String[] details2 = description[1].trim().split("/at");
-                    if (details2.length == 1) {
-                        if (details2[0].length() != 0) {
-                            throw new DukeException("Incorrect format. \nPlease follow this format below: \n[event (task_name) /at (date/day)]");
-                        }
-                    }
-                    t = new Event(details2[0], parseDate(details2[1]));
+                    details = parseDescription(description[1].trim(), "/at", type);
+                    t = new Event(details[0], parseDate(details[1]));
                     break;
                 default:
                     break;
@@ -59,16 +50,35 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private static String parseDate(String s) {
+    private String parseDate(String s) {
         ArrayList<SimpleDateFormat> allDateFormats = new ArrayList<>();
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
             Date myDate = sdf.parse(s.replaceAll("-", "/"));
             sdf.applyPattern("EEE, d MMM yyyy, hh:mm a");
-            String sMyDate = sdf.format(myDate);
-            return sMyDate;
+            return sdf.format(myDate);
         } catch (ParseException e) {
             return s;
         }
+    }
+
+    private String parseDescription(String description) {
+        if (description.length() < 1) {
+            throw new ArrayIndexOutOfBoundsException();
+        } else {
+            return description;
+        }
+    }
+
+    private String[] parseDescription(String description, String delimiter, String type) throws DukeException {
+        String[] details = description.split(delimiter);
+        if (details.length == 1) {
+            if (details[0].length() != 0) {
+                throw new DukeException("Incorrect format. \nPlease try again with the format below: \n" +
+                        type + " ($task_name) " + delimiter + " ($date/day)");
+            }
+        }
+        return details;
+
     }
 }

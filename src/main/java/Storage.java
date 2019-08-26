@@ -81,7 +81,6 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        boolean successful = tempFile.renameTo(inputFile);
-        return successful;
+        return tempFile.renameTo(inputFile);
     }
 }

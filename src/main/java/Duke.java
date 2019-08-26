@@ -24,7 +24,6 @@ public class Duke {
     }
 
     private void run() {
-
         try(Scanner scanner = new Scanner(System.in);
             PrintStream out = new PrintStream(System.out, true, StandardCharsets.UTF_8)
         ) {

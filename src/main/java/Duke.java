@@ -1,12 +1,39 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc;
         Boolean exit = false;
+
+        // Retrieve existing tasks
+        Scanner fileSc = new Scanner("tasks.txt");
+        String[] nextLine = fileSc.nextLine().split("|");
+        while (fileSc.hasNextLine()) {
+            Task newTask;
+            boolean isDone = nextLine[1].equals("1");
+            switch (nextLine[0]) {
+            case ("T"):
+                newTask = new ToDo(nextLine[2], isDone);
+                break;
+            case ("D"):
+                newTask = new Deadline(nextLine[2], isDone, nextLine[3]);
+                break;
+            case ("E"):
+                newTask = new Event(nextLine[2], isDone, nextLine[3]);
+                break;
+            default:
+                newTask = new ToDo("Unknown task");
+                break;
+            }
+            tasks.add(newTask);
+            nextLine = fileSc.nextLine().split("|");
+        }
+        fileSc.close();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,8 +48,11 @@ public class Duke {
         String response = sc.next();
         while (!exit) {
             try {
-                if (response.equals("bye")) exit = true;
-                else if (response.equals("list")) {
+                switch (response) {
+                case ("bye"):
+                    exit = true;
+                    break;
+                case ("list"):
                     Iterator<Task> iter = tasks.iterator();
                     int i = 1;
                     while (iter.hasNext()) {
@@ -31,14 +61,16 @@ public class Duke {
                         i++;
                     }
                     response = sc.next();
-                } else if (response.equals("done")) {
+                    break;
+                case ("done"):
                     int taskNo = Integer.parseInt(sc.next());
                     Task task = tasks.get(taskNo - 1);
                     task.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("[" + task.getStatusIcon() + "] " + task.description);
                     response = sc.next();
-                } else if (response.equals("todo")) {
+                    break;
+                case ("todo"):
                     try {
                         String description = sc.nextLine().trim();
                         if (description.equals("")) throw new EmptyDescriptionException(
@@ -52,7 +84,8 @@ public class Duke {
                         System.out.println(e.toString());
                     }
                     response = sc.next();
-                } else if (response.equals("deadline")) {
+                    break;
+                case ("deadline"):
                     response = sc.nextLine().trim();
                     Deadline newDeadline = new Deadline(response.split(" /by ")[0],
                             response.split(" /by ")[1]);
@@ -61,7 +94,8 @@ public class Duke {
                     System.out.println(newDeadline.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     response = sc.next();
-                } else if (response.equals("event")) {
+                    break;
+                case ("event"):
                     response = sc.nextLine().trim();
                     Event newEvent = new Event(response.split(" /at ")[0],
                             response.split(" /at ")[1]);
@@ -70,19 +104,39 @@ public class Duke {
                     System.out.println(newEvent.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     response = sc.next();
-                } else if (response.equals("delete")) {
+                    break;
+                case ("delete"):
                     int index = Integer.parseInt(sc.nextLine().trim()) - 1;
                     Task removedTask = tasks.remove(index);
                     System.out.println("Got it. I've removed this task:");
                     System.out.println(removedTask.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     response = sc.next();
-                } else {
+                    break;
+                default:
                     throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+
             } catch (InvalidCommandException e) {
                 System.out.println(e.toString());
                 response = sc.next();
+            }
+
+            // write all tasks to file
+            FileWriter fw;
+            try {
+                fw = new FileWriter("tasks.txt");
+                String dataStr = "";
+                for (Task task : tasks) {
+                    String isDone = task.isDone
+                            ? "1"
+                            : "0";
+                    dataStr += task.toStorageString() + System.lineSeparator();
+                }
+                fw.write(dataStr);
+                fw.close();
+            } catch (IOException e) {
+                System.out.println(e.toString());
             }
         }
         System.out.println("Bye. Hope to see you again soon!");

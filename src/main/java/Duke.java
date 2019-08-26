@@ -5,8 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+
 public class Duke {
     private static ArrayList<Task> dukeList = new ArrayList<>();
+    private static DateTimeFormatter dukeDateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     private static void loadSavedTasks(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
@@ -171,10 +176,7 @@ public class Duke {
             String deadlineDescription = inputDeadline.substring(9, firstIndex);
             String deadlineBy = inputDeadline.substring(secondIndex);
             Deadline d = new Deadline(deadlineDescription, deadlineBy);
-            dukeList.add(d);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(d);
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            addTaskToListAfterValidation(deadlineBy, d);
             updateTaskList();
         }
     }
@@ -189,16 +191,35 @@ public class Duke {
             String eventDescription = inputEvent.substring(6, firstIndex);
             String eventAt = inputEvent.substring(secondIndex);
             Event e = new Event(eventDescription, eventAt);
-            dukeList.add(e);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(e);
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+            addTaskToListAfterValidation(eventAt, e);
             updateTaskList();
         }
     }
 
     public static void handleInputUnrecognised(String inputUnrecognised) throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public static void addTaskToListAfterValidation(String dateTimeString, Task t) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dukeDateTimeFormatter);
+
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                e.setDateTimeAt(dateTime);
+            } else {
+                Deadline d = (Deadline) t;
+                d.setDateTimeBy(dateTime);
+            }
+
+            dukeList.add(t);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(t);
+            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            System.out.println("Task not added to list because the input format for date and time is unrecognised. " +
+                    "Please enter date and time in dd/MM/yyyy HHmm format.");
+        }
     }
 
 }

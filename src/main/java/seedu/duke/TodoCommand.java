@@ -1,22 +1,22 @@
-import java.io.IOException;
-import java.util.Date;
+package seedu.duke;
 
-public class DeadlineCommand extends Command {
+import java.io.IOException;
+
+public class TodoCommand extends Command {
 
     String command;
-    Date dateTime;
 
-    public DeadlineCommand(String command, Date dateTime) {
+    public TodoCommand(String command) {
         this.command = command;
-        this.dateTime = dateTime;
     }
 
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
-        list.addTask(new Deadline(command, dateTime));
+        list.addTask(new Todo(command));
         ui.printAddMsg();
         ui.printLatest(list);
         ui.printNumTask(list);
         storage.appendToFile(list);
     }
+
 }

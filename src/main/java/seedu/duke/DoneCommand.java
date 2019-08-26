@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {

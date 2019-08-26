@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,7 +64,7 @@ public class Parser {
     }
 
 
-    private static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
+    public static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
         //Date dateTime = null;
         if (detailsArray[0].equals("deadline")) {
             for (int i = 0; i < detailsArray.length; i++) {
@@ -85,6 +87,14 @@ public class Parser {
             }
             throw new MissingTimeStampException("☹ OOPS!!! Missing timestamp!");
         }
+    }
+
+    public Date getDateTime() {
+        return this.dateTime;
+    }
+
+    public int getIndexOfByAt() {
+        return this.indexOfByAt;
     }
 
 }

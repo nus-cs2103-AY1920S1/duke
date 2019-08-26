@@ -1,6 +1,5 @@
 package task;
 
-import exception.DukeIllegalStateException;
 import exception.DukeIndexOutOfBoundsException;
 
 import java.util.ArrayList;

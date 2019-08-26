@@ -1,10 +1,15 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
 
-public class ListOfInput {
+public class TaskList {
     private List<Task> list;
 
-    public ListOfInput() {
+    public TaskList() {
         list = new ArrayList<>();
     }
 
@@ -64,6 +69,46 @@ public class ListOfInput {
             System.out.println("    " + i + ". " + task);
             i++;
         }
+    }
+
+    public void loadTasks(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String task = sc.nextLine();
+            String[] arr = task.split(" \\| ");
+            switch (arr[0]) {
+            case "T":
+                list.add(new ToDo(arr[2]));
+                break;
+            case "D":
+                list.add(new Deadline(arr[2], arr[3]));
+                break;
+            case "E":
+                list.add(new Event(arr[2], arr[3]));
+                break;
+            }
+            if (arr[1].equals("1")) {
+                list.get(list.size() - 1).setDone();
+            }
+        }
+    }
+
+    public void saveTasks(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : list) {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                fw.write("D | " + d.isDone() + " | " + d.getDescription() + " | " + d.getBy() + "\n"); // need to overwrite getdescrition?
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
+                fw.write("E | " + e.isDone() + " | " + e.getDescription() + " | " + e.getAt() + "\n");
+            } else if (task instanceof ToDo) {
+                ToDo t = (ToDo) task;
+                fw.write("T | " + t.isDone() + " | " + t.getDescription() + "\n");
+            }
+        }
+        fw.close();
     }
 
     private void print(String x) {

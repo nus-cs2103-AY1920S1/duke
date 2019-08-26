@@ -1,10 +1,10 @@
-package duke.task;
+package task;
 
-public class Deadline extends Task {
+public class Event extends Task {
 
     private String additionalInfo;
 
-    Deadline(String name, String additionalInfo) {
+    Event(String name, String additionalInfo) {
         super(name);
         this.additionalInfo = additionalInfo;
     }
@@ -16,12 +16,11 @@ public class Deadline extends Task {
 
     @Override
     protected String getTypeSymbol() {
-        return "[D]";
+        return "[E]";
     }
 
     @Override
     protected String displayAdditionalInfo() {
-        return String.format("(by: %s)", additionalInfo);
+        return String.format("(at: %s)", additionalInfo);
     }
-
 }

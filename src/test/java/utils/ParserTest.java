@@ -1,8 +1,6 @@
 package utils;
 
-import duke.utils.Parser;
 import org.junit.jupiter.api.Test;
-
 
 import java.util.Scanner;
 

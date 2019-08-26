@@ -1,12 +1,12 @@
-package duke.main;
+package main;
 
-import duke.command.Command;
-import duke.command.CommandCentre;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.utils.Parser;
-import duke.utils.Storage;
-import duke.utils.Ui;
+import command.Command;
+import command.CommandCentre;
+import task.Task;
+import task.TaskList;
+import utils.Parser;
+import utils.Storage;
+import utils.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

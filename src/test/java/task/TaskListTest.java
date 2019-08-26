@@ -1,7 +1,5 @@
 package task;
 
-import duke.task.Task;
-import duke.task.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

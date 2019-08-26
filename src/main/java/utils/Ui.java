@@ -1,6 +1,6 @@
-package duke.utils;
+package utils;
 
-import duke.task.Task;
+import task.Task;
 
 import java.util.List;
 

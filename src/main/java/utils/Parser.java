@@ -1,7 +1,7 @@
-package duke.utils;
+package utils;
 
-import duke.exception.EmptyDescriptionException;
-import duke.task.TaskList;
+import exception.EmptyDescriptionException;
+import task.TaskList;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -3,7 +3,7 @@ package seedu.duke.tasks;
 import java.time.LocalDateTime;
 
 public class DeadlineTask extends Task {
-    private static final long serialVersionUID = -2528903469087431L;
+    private static final long serialVersionUID = -2528903469387431L;
 
     private final LocalDateTime deadline;
 

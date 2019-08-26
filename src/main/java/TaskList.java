@@ -1,17 +1,14 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.File;
 import java.util.Scanner;
 
 public class TaskList {
 
   private ArrayList<Task> taskList = new ArrayList<>();
-  private Storage s;
 
   public TaskList(Storage s) throws FileNotFoundException, DukeException, IOException {
     try {
-      this.s = s;
       Scanner sc = new Scanner(s.load());
       while (sc.hasNextLine()) {
         String command = sc.next();
@@ -20,6 +17,7 @@ public class TaskList {
         Parser p = new Parser(command, description);
         p.executeOnly(this);
       }
+      sc.close();
     } catch (FileNotFoundException e) {
       System.out.println("File is not found!");
     } catch (DukeException e) {

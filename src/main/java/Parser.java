@@ -6,6 +6,13 @@ import java.util.ArrayList;
 
 public class Parser {
 
+  private String command;
+  private String taskDescription;
+  private int taskNum;
+  private boolean taskNumChanged = false;
+  private String date;
+  private String dateBeforeFormat;
+
   private static String getSuffix(LocalDateTime dateTime) {
     int day = dateTime.getDayOfMonth();
     int remainder = day % 10;
@@ -30,21 +37,6 @@ public class Parser {
     return formattedDate;
   }
 
-  private static void printTasks(ArrayList<Task> t) {
-    System.out.println("\t____________________________________________________________");
-    System.out.println("\n\tHere are the tasks in your list: ");
-    for (int i = 0; i < t.size(); i++) {
-      System.out.println("\n\t" + (i + 1) + ". " + t.get(i).toString());
-    }
-    System.out.println("\t____________________________________________________________\n");
-  }
-
-  private String command;
-  private String taskDescription;
-  private int taskNum;
-  private String date;
-  private String dateBeforeFormat;
-
   public Parser(String command, String description)
       throws DukeException, NumberFormatException, DateTimeParseException {
 
@@ -55,6 +47,7 @@ public class Parser {
       } else if (command.equals("done")) {
         this.command = command;
         this.taskNum = Integer.valueOf(description);
+        this.taskNumChanged = true;
       } else if (command.equals("bye")) {
         this.command = command;
       } else if (command.equals("todo")) {
@@ -81,15 +74,22 @@ public class Parser {
       } else if (command.equals("delete")) {
         this.command = command;
         this.taskNum = Integer.valueOf(description);
+        this.taskNumChanged = true;
       } else {
         throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
       }
     } catch (DukeException e) {
-      System.out.println(e.getMessage());
+      System.out.println("\t____________________________________________________________");
+      System.out.println("\n\t" + e.getMessage());
+      System.out.println("\t____________________________________________________________\n");
     } catch (NumberFormatException e) {
-      System.out.println("OOPS! An integer is expected after done / delete!");
+      System.out.println("\t____________________________________________________________");
+      System.out.println("\n\tOOPS! An integer is expected after done / delete.");
+      System.out.println("\t____________________________________________________________\n");
     } catch (DateTimeParseException e) {
+      System.out.println("\t____________________________________________________________");
       System.out.println("OOPS! Dates should be in the format mm/dd/yyyy (24-hour time format)");
+      System.out.println("\t____________________________________________________________\n");
     }
   }
 
@@ -115,10 +115,11 @@ public class Parser {
       tasks.add(task);
 
     } else if (command.equals("delete")) {
+
       if (taskNum < 0 || taskNum >= tasks.size()) {
         throw new DukeException("OOPS! Integer is out of range of list.");
       }
-      Task removed = tasks.get(taskNum);
+
       tasks.remove(taskNum);
 
     } else if (command.equals("done")) {
@@ -194,32 +195,38 @@ public class Parser {
       if (taskNum < 0 || taskNum >= tasks.size()) {
         throw new DukeException("OOPS! Integer is out of range of list.");
       }
-      Task removed = tasks.get(taskNum);
-      tasks.remove(taskNum);
 
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tNoted. I have removed this task: ");
-      System.out.println("\n\t" + removed);
-      System.out.println("\n\tNow you have " + tasks.size() + " tasks in the list.");
-      System.out.println("\t____________________________________________________________\n");
+      if (taskNumChanged) {
+        Task removed = tasks.get(taskNum);
+        tasks.remove(taskNum);
 
-      // Save the command in taskList.txt
-      String text = "delete " + taskNum + "\n";
-      s.appendToFile(text);
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\n\tNoted. I have removed this task: ");
+        System.out.println("\n\t" + removed);
+        System.out.println("\n\tNow you have " + tasks.size() + " tasks in the list.");
+        System.out.println("\t____________________________________________________________\n");
+
+        // Save the command in taskList.txt
+        String text = "delete " + taskNum + "\n";
+        s.appendToFile(text);
+      }
 
     } else if (command.equals("done")) {
       if (taskNum < 0 || taskNum >= tasks.size()) {
         throw new DukeException("OOPS! Integer is out of range of list.");
       }
-      tasks.get(taskNum).setAsDone();
-      System.out.println("\t____________________________________________________________");
-      System.out.println("\n\tNice! I have marked this task as done: ");
-      System.out.println("\n\t" + tasks.get(taskNum));
-      System.out.println("\t____________________________________________________________\n");
 
-      // Save the command in taskList.txt
-      String text = "done " + taskNum + "\n";
-      s.appendToFile(text);
+      if (taskNumChanged) {
+        tasks.get(taskNum).setAsDone();
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\n\tNice! I have marked this task as done: ");
+        System.out.println("\n\t" + tasks.get(taskNum));
+        System.out.println("\t____________________________________________________________\n");
+
+        // Save the command in taskList.txt
+        String text = "done " + taskNum + "\n";
+        s.appendToFile(text);
+      }
 
     } else if (command.equals("bye")) {
       System.out.println("\t____________________________________________________________");

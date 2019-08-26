@@ -2,6 +2,9 @@ todo borrow book
 todo return book
 event project meeting  /at  28/08/2019 1430
 deadline submit CS2103T quiz  /by  25/08/2019 2359
-done 1
-delete 1
+done 2
+delete 3
+delete 2
+event project meeting  /at  27/08/2019 1430
+todo sign book
 done 2

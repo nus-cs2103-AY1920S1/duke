@@ -25,7 +25,12 @@ public class EventCommand extends Command {
                     + "     Make sure to type </at> and state the datetime in 'dd/M/yyyy hh:mm' format!");
         } else {
             try {
-                Task newEventTask = new Event(input[1].strip(), input[4].strip());
+                String description = input[1];
+                for (int i = 2; i < input.length - 3; i++) {
+                    description += " " + input[i];
+                }
+                String time = input[input.length - 2] + " " + input[input.length - 1];
+                Task newEventTask = new Event(description, time);
                 tasks.getTaskList().add(newEventTask);
                 System.out.println("     Got it. I've added this task:");
                 System.out.println("       " + newEventTask);

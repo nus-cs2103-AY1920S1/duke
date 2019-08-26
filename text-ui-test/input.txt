@@ -1,7 +1,7 @@
 list
-todo return book
-deadline homework /by Monday
-event project meeting /at Mon 2-4pm
+todo returnbook
+deadline homework /by 26/8/2019 3:00
+event projectmeeting /at 27/8/2019 4:00
 list
 done 1
 done 2

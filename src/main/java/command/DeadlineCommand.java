@@ -26,7 +26,12 @@ public class DeadlineCommand extends Command {
                     + "     Make sure to type </by> and state the datetime in 'dd/M/yyyy hh:mm' format!");
         } else {
             try {
-                Task newDeadlineTask = new Deadline(input[1].strip(), input[4].strip());
+                String description = input[1];
+                for (int i = 2; i < input.length - 3; i++) {
+                    description += " " + input[i];
+                }
+                String time = input[input.length - 2] + " " + input[input.length - 1];
+                Task newDeadlineTask = new Deadline(description, time);
                 tasks.getTaskList().add(newDeadlineTask);
                 System.out.println("     Got it. I've added this task:");
                 System.out.println("       " + newDeadlineTask);

@@ -19,7 +19,11 @@ public class ToDoCommand extends Command {
         if (input.length <= 1) {
             System.err.println("      " + new ToDoException());
         } else {
-            Task newToDoTask = new ToDo(input[1]);
+            String description = input[1];
+            for (int i = 2; i < input.length; i++) {
+                description += " " + input[i];
+            }
+            Task newToDoTask = new ToDo(description);
             tasks.getTaskList().add(newToDoTask);
             System.out.println("     Got it. I've added this task:");
             System.out.println("       " + newToDoTask);

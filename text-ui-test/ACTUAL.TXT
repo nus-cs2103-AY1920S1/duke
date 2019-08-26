@@ -5,55 +5,47 @@
 
     ____________________________________________________________
      Here are the tasks in your list:
+     1. [T][✓] play
+     2. [D][✘] submission (by: 20/8/2019 03:00)
+     3. [E][✓] dota (at: 20/1/2019 03:00)
     ____________________________________________________________
-
-    ____________________________________________________________
-     Got it. I've added this task:
-       [T][✘] return book
-     Now you have 1 task in the list.
-    ____________________________________________________________
-
     ____________________________________________________________
      Got it. I've added this task:
-       [D][✘] homework (by: Monday)
-     Now you have 2 tasks in the list.
+       [T][✘] returnbook
+     Now you have 4 tasks in the list.
     ____________________________________________________________
-
     ____________________________________________________________
-     Got it. I've added this task:
-       [E][✘] project meeting (at: Mon 2-4pm)
-     Now you have 3 tasks in the list.
+     OOPS!!! Please key in date and time in the format of <dd/M/yyyy hh:mm>
     ____________________________________________________________
-
+    ____________________________________________________________
+     OOPS!!! Please key in date and time in the format of <dd/M/yyyy hh:mm>
+    ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1. [T][✘] return book
-     2. [D][✘] homework (by: Monday)
-     3. [E][✘] project meeting (at: Mon 2-4pm)
+     1. [T][✓] play
+     2. [D][✘] submission (by: 20/8/2019 03:00)
+     3. [E][✓] dota (at: 20/1/2019 03:00)
+     4. [T][✘] returnbook
     ____________________________________________________________
-
     ____________________________________________________________
-     Nice! I've marked this task as done:
-       [T][✓] return book
+     Hey! I've already marked this task as done :)
+       [T][✓] play
     ____________________________________________________________
-
-    ____________________________________________________________
-     Nice! I've marked this task as done:
-       [D][✓] homework (by: Monday)
-    ____________________________________________________________
-
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [E][✓] project meeting (at: Mon 2-4pm)
+       [D][✓] submission (by: 20/8/2019 03:00)
     ____________________________________________________________
-
+    ____________________________________________________________
+     Hey! I've already marked this task as done :)
+       [E][✓] dota (at: 20/1/2019 03:00)
+    ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
-     1. [T][✓] return book
-     2. [D][✓] homework (by: Monday)
-     3. [E][✓] project meeting (at: Mon 2-4pm)
+     1. [T][✓] play
+     2. [D][✓] submission (by: 20/8/2019 03:00)
+     3. [E][✓] dota (at: 20/1/2019 03:00)
+     4. [T][✘] returnbook
     ____________________________________________________________
-
     ____________________________________________________________
      Bye. Hope to see you again soon!
     ____________________________________________________________

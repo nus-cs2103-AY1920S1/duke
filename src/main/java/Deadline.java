@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Deadline extends Task {
-    protected final String byDate;
+    protected final DukeDateTime byDate;
 
     public Deadline(String description, String by) {
         super(description);
-        this.byDate = by;
+        this.byDate = new DukeDateTime(by);
     }
 
     /**

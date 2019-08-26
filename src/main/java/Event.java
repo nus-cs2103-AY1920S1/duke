@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Event extends Task {
-    protected final String at;
+    protected final DukeDateTime at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = new DukeDateTime(at);
     }
 
     /**

@@ -1,6 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
+import java.lang.StringBuilder;
 
 public class Duke {
+    private List<Task> list; // List of all tasks
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -13,11 +18,15 @@ public class Duke {
         duke.start();
     }
 
-    /**
-     * Main driver function for the program -
-     * Greets user, then repeatedly takes in
-     * user input and processes them.
-     */
+    private Duke() {
+        this.list = new ArrayList<Task>();
+    }
+
+    /*
+     Main driver function for the program -
+     Greets user, then repeatedly takes in
+     user input and processes them.
+    */
     private void start() {
         boolean notShutdown = true;
         Scanner sc = new Scanner(System.in);
@@ -25,23 +34,54 @@ public class Duke {
         this.greetHello();
         do {
             String input = sc.nextLine();
-
-            if (input.equals("bye")) {
+            switch (input) {
+            case "bye":
                 notShutdown = false;
-            } else {
-                this.formattedPrintln(input);
+                break;
+            case "list":
+                this.printList();
+                break;
+            default:
+                this.addToList(input);
             }
         } while (notShutdown);
         this.greetGoodbye();
     }
 
+    // Add a description to the current list
+    private void addToList(String description) {
+        Task t = new Task(description);
+        this.list.add(t);
+        this.formattedPrintln("added: " + description);
+    }
 
-    /**
-     * Prints the target string between two horizontal
-     * bars.
-     *
-     * @param output  The string to be printed
-     */
+    // Print out all tasks in the current list
+    private void printList() {
+        if (list.size() == 0) {
+            this.formattedPrintln("Hey! There's nothing in your list!");
+        } else {
+            int index = 1;
+            Iterator iter = this.list.iterator();
+            StringBuilder output = new StringBuilder();
+
+            while (iter.hasNext()) {
+                output.append(index);
+                output.append(". ");
+                output.append(iter.next());
+                output.append("\n");
+                index++;
+            }
+            this.formattedPrint(output.toString());
+        }
+    }
+
+    /*
+     Prints the target string between two horizontal
+     bars. Adds a newline to the input string
+     before printing.
+
+     @param output  The string to be printed
+    */
     private void formattedPrintln(String output) {
         System.out.println("____________________________________________________________\n"
                 + output
@@ -49,22 +89,34 @@ public class Duke {
                 + "____________________________________________________________\n");
     }
 
-    /**
-     * Prints out a formatted hello greeting on the
-     * screen. It is a implemented as a thin wrapper
-     * around duke.formattedPrintln()
-     */
+    /*
+     Prints the target string between two horizontal
+     bars. Newline is not added to input string.
+
+     @param output  The string to be printed
+    */
+    private void formattedPrint(String output) {
+        System.out.println("____________________________________________________________\n"
+                + output
+                + "____________________________________________________________\n");
+    }
+
+    /*
+     Prints out a formatted hello greeting on the
+     screen. It is a implemented as a thin wrapper
+     around duke.formattedPrintln()
+    */
     private void greetHello() {
         String hello = "Hello! I'm Duke\n"
                 + "What can I do for you?";
         this.formattedPrintln(hello);
     }
 
-    /**
-     * Prints out a formatted goodbye greeting on the
-     * screen. It is a implemented as a thin wrapper
-     * around duke.formattedPrintln()
-     */
+    /*
+     Prints out a formatted goodbye greeting on the
+     screen. It is a implemented as a thin wrapper
+     around duke.formattedPrintln()
+    */
     private void greetGoodbye() {
         String goodbye = "Bye. Hope to see you again soon!";
         this.formattedPrintln(goodbye);

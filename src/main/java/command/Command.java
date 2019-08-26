@@ -1,9 +1,10 @@
 package command;
 
-import java.io.IOException;
-
+/**
+ * Represents a single command that can only execute a single action.
+ */
 public abstract class Command {
-    protected abstract void execute() throws IOException;
+    protected abstract void execute();
 }
 
 

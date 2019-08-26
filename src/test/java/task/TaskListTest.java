@@ -8,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
-    // whatIsBeingTested_descriptionOfTestInputs_expectedOutcome
-    // e.g., intDivision_zeroDivisor_exceptionThrown
-
     @Test
     public void newInstance_sameTaskList() {
         TaskList taskList = TaskList.newInstance();

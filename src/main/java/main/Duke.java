@@ -8,10 +8,6 @@ import utils.Parser;
 import utils.Storage;
 import utils.Ui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
-
 public class Duke {
 
 
@@ -24,13 +20,15 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
     private final CommandCentre commandCentre;
+    private boolean isExiting;
 
-    public Duke() throws FileNotFoundException, ParseException {
+    public Duke() {
         taskList = TaskList.newInstance();
         storage = new Storage(ROOT + STORAGE_PATH);
         ui = new Ui();
         parser = new Parser();
         commandCentre = new CommandCentre();
+        isExiting = false;
         initializeCommands();
         if (resetTaskList) {
             taskList.clear();
@@ -38,19 +36,24 @@ public class Duke {
         }
     }
 
-    private void run() throws IOException {
+    private void run()  {
         ui.printHelloMessage();
 
         while (parser.hasNext()) {
             String action = parser.getNextAction();
             ui.printDivider();
             boolean isSuccessful = commandCentre.execute(action);
-            if (!isSuccessful) parser.nextLine();
+            if (!isSuccessful) {
+                parser.nextLine();
+            }
             ui.printDivider();
+            if (isExiting) {
+                break;
+            }
         }
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) {
         new Duke().run();
     }
 
@@ -60,6 +63,7 @@ public class Duke {
             @Override
             public void execute() {
                 ui.printByeMessage();
+                isExiting = true;
             }
         });
 
@@ -76,7 +80,7 @@ public class Duke {
 
         commandCentre.register("done", new Command() {
             @Override
-            public void execute() throws IOException {
+            public void execute() {
                 Integer idx = parser.getTaskIdx();
                 if (idx != null) {
                     taskList.markAsDone(idx);
@@ -88,7 +92,7 @@ public class Duke {
 
         commandCentre.register("delete", new Command() {
             @Override
-            public void execute() throws IOException {
+            public void execute() {
                 Integer idx = parser.getTaskIdx();
                 if (idx != null) {
                     Task task = taskList.deleteTask(idx);
@@ -100,7 +104,7 @@ public class Duke {
 
         commandCentre.register("todo", new Command() {
             @Override
-            public void execute() throws IOException {
+            public void execute() {
                 String taskName = parser.parseTodoDetail();
                 if (taskName != null) {
                     Task newTask = taskList.addNewTodoTask(taskName, false);
@@ -112,7 +116,7 @@ public class Duke {
 
         commandCentre.register("deadline", new Command() {
             @Override
-            public void execute() throws IOException {
+            public void execute() {
                 String[] taskInfo = parser.parseDeadlineDetail();
                 if (taskInfo != null) {
                     Task newTask = taskList.addNewDeadlineTask(taskInfo[0], taskInfo[1], false);
@@ -124,7 +128,7 @@ public class Duke {
 
         commandCentre.register("event", new Command() {
             @Override
-            public void execute() throws IOException {
+            public void execute() {
                 String[] taskInfo = parser.parseEventDetail();
                 if (taskInfo != null) {
                     Task newTask = taskList.addNewEventTask(taskInfo[0], taskInfo[1], false);

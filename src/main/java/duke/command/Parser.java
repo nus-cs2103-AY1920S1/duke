@@ -30,13 +30,13 @@ public class Parser {
 
         } else if (input.matches("deadline.*")) {
             if (input.equals("deadline")) {
-                throw new DukeDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeDeadlineException(DukeDeadlineException.EMPTY_DETAILS_ERROR_MSG);
             } else if (input.charAt(8) == ' ') {
                 String detail = input.substring(9);
                 if (detail.length() < 1) {
-                    throw new DukeDeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeDeadlineException(DukeDeadlineException.EMPTY_DETAILS_ERROR_MSG);
                 } else if (!detail.contains("/by")) {
-                    throw new DukeDeadlineException("☹ OOPS!!! The format of deadline is wrong!");
+                    throw new DukeDeadlineException(DukeDeadlineException.FORMAT_ERROR_MSG);
                 } else {
                     String[] detailSplit = detail.split(" /by ");
                     return new AddDeadlineCommand(detailSplit[0], detailSplit[1]);
@@ -46,13 +46,13 @@ public class Parser {
             }
         } else if (input.matches("event.*")) {
             if (input.equals("event")) {
-                throw new DukeEventException("☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeEventException(DukeEventException.EMPTY_DETAILS_ERROR_MSG);
             } else if (input.charAt(5) == ' ') {
                 String detail = input.substring(6);
                 if (detail.length() < 1) {
-                    throw new DukeEventException("☹ OOPS!!! The description of a event cannot be empty.");
+                    throw new DukeEventException(DukeEventException.EMPTY_DETAILS_ERROR_MSG);
                 } else if (!detail.contains("/at") || !detail.contains(" - ")) {
-                    throw new DukeEventException("☹ OOPS!!! The format of event is wrong!");
+                    throw new DukeEventException(DukeEventException.FORMAT_ERROR_MSG);
                 } else {
                     String[] detailSplit = detail.split(" /at ");
                     String[] dateSplit = detailSplit[1].split(" - ");

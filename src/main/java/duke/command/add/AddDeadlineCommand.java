@@ -1,9 +1,13 @@
 package duke.command.add;
 
 import duke.command.Command;
+import duke.exception.DukeDeadlineException;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
+import java.text.ParseException;
+import java.util.Date;
 
 public class AddDeadlineCommand extends Command {
 
@@ -17,9 +21,14 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        Deadline newDeadline = new Deadline(detail, datetime);
-        tasks.add(newDeadline);
-        ui.printAddSuccess(tasks.getTasks(), newDeadline);
+        try {
+            Date datetimeDate = super.DATE_FORMAT.parse(datetime);
+            Deadline newDeadline = new Deadline(detail, datetimeDate);
+            tasks.add(newDeadline);
+            ui.printAddSuccess(tasks.getTasks(), newDeadline);
+        } catch (ParseException e) {
+            ui.exposeError(new DukeDeadlineException(DukeDeadlineException.FORMAT_ERROR_MSG).getMessage());
+        }
     }
 
     @Override

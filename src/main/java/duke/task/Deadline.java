@@ -1,10 +1,12 @@
 package duke.task;
 
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    private String deadlineTime;
+    private Date deadlineTime;
 
-    public Deadline(String deadlineName, String deadlineTime) {
+    public Deadline(String deadlineName, Date deadlineTime) {
         super(deadlineName);
         this.deadlineTime = deadlineTime;
     }

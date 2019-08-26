@@ -1,4 +1,4 @@
-package PACKAGE_NAME;
+package duke.Tasks;
 
 public class TaskListTest {
 }

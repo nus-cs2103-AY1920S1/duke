@@ -1,6 +1,6 @@
-package DirectProcessor;
+package duke.DirectProcessor;
 
-import Tasks.Task;
+import duke.Tasks.Task;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

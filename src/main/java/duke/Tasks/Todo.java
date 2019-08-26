@@ -1,8 +1,10 @@
-package Tasks;
+package duke.Tasks;
+
+import duke.DukeException;
 
 public class Todo extends Task {
 
-    public Todo(String task_name) {
+    public Todo(String task_name) throws DukeException {
         super(task_name);
     }
 

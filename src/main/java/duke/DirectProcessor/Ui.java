@@ -1,6 +1,6 @@
-package DirectProcessor;
+package duke.DirectProcessor;
 
-import Tasks.Task;
+import duke.Tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,7 +21,7 @@ public class Ui {
 
     public void showWelcome() {
         drawLine();
-        System.out.println("     Hello, I'm Duke.");
+        System.out.println("     Hello, I'm duke.Duke.");
         System.out.println("     What can I do for you?");
         drawLine();
     }

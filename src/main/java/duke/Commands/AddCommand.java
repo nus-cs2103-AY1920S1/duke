@@ -1,14 +1,12 @@
-package Commands;
+package duke.Commands;
 
-import DirectProcessor.Storage;
-import DirectProcessor.Ui;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import DirectProcessor.TaskList;
-import Tasks.Todo;
-
-import java.util.ArrayList;
+import duke.DirectProcessor.Ui;
+import duke.DukeException;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.DirectProcessor.TaskList;
+import duke.Tasks.Todo;
 
 public class AddCommand extends Command {
 
@@ -26,7 +24,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui) {
+    public void execute(TaskList tl, Ui ui) throws DukeException {
         Task toAdd;
         if (taskType.equals("T")) {
             toAdd = new Todo(taskName);

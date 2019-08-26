@@ -1,7 +1,7 @@
-package Commands;
+package duke.Commands;
 
-import DirectProcessor.TaskList;
-import DirectProcessor.Ui;
+import duke.DirectProcessor.TaskList;
+import duke.DirectProcessor.Ui;
 
 public class ListCommand extends Command{
 

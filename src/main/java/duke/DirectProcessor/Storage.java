@@ -1,9 +1,10 @@
-package DirectProcessor;
+package duke.DirectProcessor;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import duke.DukeException;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.Todo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class Storage {
     private static BufferedReader reader;
 
     // Reload the previous task list.
-    public static ArrayList<Task> reload() throws IOException{
-        reader = new BufferedReader(new FileReader("taskfile.txt"));
+    public static ArrayList<Task> reload(String fileName) throws IOException, DukeException {
+        reader = new BufferedReader(new FileReader(fileName));
         ArrayList<Task> toReturn = new ArrayList<>();
         if (reader == null) return toReturn;
         String line = reader.readLine();

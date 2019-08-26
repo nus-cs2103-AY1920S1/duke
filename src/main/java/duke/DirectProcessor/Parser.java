@@ -1,6 +1,6 @@
-package DirectProcessor;
+package duke.DirectProcessor;
 
-import Commands.*;
+import duke.Commands.*;
 
 public class Parser {
 

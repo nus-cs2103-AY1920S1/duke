@@ -1,4 +1,6 @@
-package Tasks;
+package duke.Tasks;
+
+import duke.DukeException;
 
 public abstract class Task {
 
@@ -6,7 +8,10 @@ public abstract class Task {
     private String task_name;
     private static int task_numbers = 0;
 
-    public Task(String task_name) {
+    public Task(String task_name) throws DukeException {
+        if (task_name.equals("")) {
+            throw new DukeException("Input task name cannot be empty.");
+        }
         this.task_name = task_name;
         this.finished = false;
         task_numbers++;

@@ -1,8 +1,9 @@
-package Commands;
+package duke.Commands;
 
-import DirectProcessor.Storage;
-import DirectProcessor.TaskList;
-import DirectProcessor.Ui;
+import duke.DirectProcessor.TaskList;
+import duke.DirectProcessor.Ui;
+import duke.DukeException;
+import duke.Tasks.Task;
 
 public class DeleteCommand extends Command{
 
@@ -13,7 +14,10 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui) {
+    public void execute(TaskList tl, Ui ui) throws DukeException{
+        if (position > Task.get_total_number() || position < 1) {
+            throw new DukeException("There is no such task in the list. Please input a valid task number.");
+        }
         ui.showDeleteMessage(tl.deleteTask(position));
     }
 

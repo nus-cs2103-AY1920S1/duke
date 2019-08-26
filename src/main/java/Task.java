@@ -29,8 +29,13 @@ import java.util.Date;
             }
         }
 
+        public String getDesc() {
+            return this.taskDesc;
+        }
+
         public abstract String toFileFormat();
         public abstract Date getDate();
+
 
     }
 

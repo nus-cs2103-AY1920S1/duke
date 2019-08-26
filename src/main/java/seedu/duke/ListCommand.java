@@ -30,7 +30,7 @@ public class ListCommand extends Command {
     /**
      * Returns false to continue Duke.
      *
-     * @return false
+     * @return False
      */
     public boolean isExit() {
         return false;

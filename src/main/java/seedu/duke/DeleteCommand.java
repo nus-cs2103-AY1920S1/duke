@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList currently.
      * @param ui Ui initialized in <code>Duke</code> to interact with user.
      * @param storage Storage to append to data file after updating tasks.
-     * @throws DukeException Exception for incorrect user input.
-     * @throws Exception Exception for being unable to overwrite data file
+     * @throws DukeException If there is incorrect user input.
+     * @throws Exception If unable to overwrite data file
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         //deleting task
@@ -40,12 +40,17 @@ public class DeleteCommand extends Command {
     /**
      * Returns false to continue Duke.
      *
-     * @return false
+     * @return False
      */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns type of command.
+     *
+     * @return String of command type.
+     */
     @Override
     public String toString() {
         //for testing purposes

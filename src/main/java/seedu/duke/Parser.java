@@ -24,8 +24,8 @@ public class Parser {
      * Creates a date object, taking in the format of dd/MM/yyyy for the string date input..
      *
      * @param s String of the date input.
-     * @returrn Date of the task which is a <code>Date</code> object.
-     * @throws ParseException Exception for incorrect date user input format.
+     * @return Date of the task which is a <code>Date</code> object.
+     * @throws ParseException If there is incorrect date user input format.
      */
     public static Date toDate(String s) throws ParseException {
         Date date = dateFormat.parse(s);
@@ -36,8 +36,8 @@ public class Parser {
      * Creates a date object, taking in format of HHmm (24hr) for the string time input.
      *
      * @param s String of the time input.
-     * @returrn Time of the task which is a <code>Date</code> object.
-     * @throws ParseException Exception for incorrect time user input format.
+     * @return Time of the task which is a <code>Date</code> object.
+     * @throws ParseException If there is incorrect time user input format.
      */
     public static Date toTime(String s) throws ParseException {
         Date time = timeFormat.parse(s);
@@ -48,8 +48,8 @@ public class Parser {
      * Creates a <code>Task</code> object by reading in a line of input in data file format.
      *
      * @param line String of a line of input in the data file format.
-     * @returrn <code>Deadline</code> , <code>Event</code> or <code>Todo</code >object created from the input in data file format.
-     * @throws ParseException Exception for incorrect input format, different from standard data file format.
+     * @return <code>Deadline</code> , <code>Event</code> or <code>Todo</code >object created from the input in data file format.
+     * @throws ParseException If there is incorrect input format, different from standard data file format.
      */
     public static Task readInFileLine(String line) throws ParseException {
         String[] stringArr = line.split(" [|] ", 0);
@@ -84,7 +84,7 @@ public class Parser {
      * Identifies if the command intended to be a delete command to delete task.
      *
      * @param command String of the command user input.
-     * @returrn boolean if the command is intended to be a delete command.
+     * @return Boolean if the command is intended to be a delete command.
      */
     public static boolean isDeleteCommand(String command) {
         return (command.length() >= 6 && command.substring(0, 6).equals("delete"));
@@ -95,7 +95,7 @@ public class Parser {
      * Identifies the index of task to be deleted from the user command input.
      *
      * @param command String of the command user input.
-     * @returrn integer index of the task to be a deleted.
+     * @return Integer index of the task to be a deleted.
      */
     public static int taskToDelete(String command) {
         return Integer.parseInt(command.substring(7));
@@ -105,7 +105,7 @@ public class Parser {
      * Identifies if the command intended to be a todo command to create a todo task.
      *
      * @param command String of the command user input.
-     * @returrn boolean if the command is intended to be a todo command.
+     * @return Boolean if the command is intended to be a todo command.
      */
     public static boolean isTodo(String command) {
         return (command.length() >= 4 && command.substring(0, 4).equals("todo"));
@@ -115,7 +115,7 @@ public class Parser {
      * Creates a new todo task according to the user input command.
      *
      * @param command String of the command user input.
-     * @returrn <code>Todo</code> object created from user input command.
+     * @return <code>Todo</code> object created from user input command.
      */
     public static Todo createTodo(String command) {
         return new Todo(command.substring(5));
@@ -125,7 +125,7 @@ public class Parser {
      * Identifies if the command intended to be a event command to create a event task.
      *
      * @param command String of the command user input.
-     * @returrn boolean if the command is intended to be a event command.
+     * @return Boolean if the command is intended to be a event command.
      */
     public static boolean isEvent(String command) {
         return (command.length() >= 5 && command.substring(0, 5).equals("event"));
@@ -135,8 +135,8 @@ public class Parser {
      * Creates a new event task according to the user input command.
      *
      * @param command String of the command user input.
-     * @returrn <code>Event</code> object created from user input command.
-     * @throws ParseException Exception if the date or time input of the user is incorrect.
+     * @return <code>Event</code> object created from user input command.
+     * @throws ParseException If the date or time input of the user is incorrect.
      */
     public static Event createEvent(String command) throws ParseException {
         String[] arr = command.split(" /at ", 2);
@@ -151,7 +151,7 @@ public class Parser {
      * Identifies if the command intended to be a deadline command to create a deadline task.
      *
      * @param command String of the command user input.
-     * @returrn boolean if the command is intended to be a deadline command.
+     * @returrn Boolean if the command is intended to be a deadline command.
      */
     public static boolean isDeadline(String command) {
         return (command.length() >= 8 && command.substring(0, 8).equals("deadline"));
@@ -162,7 +162,7 @@ public class Parser {
      *
      * @param command String of the command user input.
      * @returrn <code>Deadline</code> object created from user input command.
-     * @throws ParseException Exception if the date or time input of the user is incorrect.
+     * @throws ParseException If the date or time input of the user is incorrect.
      */
     public static Deadline createDeadline(String command) throws ParseException {
         String[] arr = command.split(" /by ", 2);
@@ -177,7 +177,7 @@ public class Parser {
      * Identifies if the command intended to be a mark as done command to mark a task as done.
      *
      * @param command String of the command user input.
-     * @returrn boolean if the command is intended to be a mark as done command.
+     * @return Boolean if the command is intended to be a mark as done command.
      */
     public static boolean isMarkDone(String command) {
         return (command.length() >= 4 && command.substring(0, 4).equals("done"));
@@ -187,7 +187,7 @@ public class Parser {
      * Identifies the index of task to be marked as done from the user command input.
      *
      * @param command String of the command user input.
-     * @returrn integer index of the task to be marked as done.
+     * @return Integer index of the task to be marked as done.
      */
     public static int taskToMarkDone(String command) {
         int curr = Integer.parseInt(command.substring(5));
@@ -198,7 +198,7 @@ public class Parser {
      * Identifies if the command intended to be a list command to list out all tasks.
      *
      * @param command String of the command user input.
-     * @returrn boolean if the command is intended to be a list command.
+     * @return Boolean if the command is intended to be a list command.
      */
     public static boolean isListCommand(String command) {
         return (command.length() == 4 && command.equals("list"));
@@ -210,8 +210,8 @@ public class Parser {
      *
      * @param command String of the command user input.
      * @param ui Ui initialized in duke.
-     * @returrn Command according to the command from user.
-     * @throws DukeException Exception if the command is incorrect and not understood by Duke.
+     * @return Command according to the command from user.
+     * @throws DukeException If the command is incorrect and not understood by Duke.
      */
     public static Command parse(String command, Ui ui) throws DukeException {
         if (command.equals("bye")) {

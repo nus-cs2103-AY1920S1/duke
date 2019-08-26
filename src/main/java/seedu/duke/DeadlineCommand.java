@@ -24,8 +24,8 @@ public class DeadlineCommand extends Command {
      * @param ui Ui initialized in <code>Duke</code> to interact with user.
      * @param storage Storage to append to data file after updating tasks.
      * @throws DukeException Exception for incorrect user input.
-     * @throws java.text.ParseException Exception for incorrect date and time input.
-     * @throws Exception Exception for being unable to append to data file.
+     * @throws java.text.ParseException If there is incorrect date and time input.
+     * @throws Exception If unable to append to data file.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         ui.checkErrorForDeadlineCommand(command, tasks);
@@ -38,12 +38,17 @@ public class DeadlineCommand extends Command {
     /**
      * Returns false to continue Duke.
      *
-     * @return false
+     * @return False
      */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns type of command.
+     *
+     * @return String of command type.
+     */
     @Override
     public String toString() {
         //for testing purposes

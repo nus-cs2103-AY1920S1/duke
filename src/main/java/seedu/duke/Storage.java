@@ -1,10 +1,14 @@
 package seedu.duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Does the execution of loading tasks from the file and saving tasks in the file.
+ * Executes loading tasks from the file and saving tasks in the file.
  * Able to load from existing file or create new file, overwrite existing file or append to existing file.
  */
 public class Storage {
@@ -24,7 +28,7 @@ public class Storage {
      * Else, creates data file if it does not exist.
      *
      * @return ArrayList of tasks that is loaded from data file
-     * @throws Exception Exception if file cannot be loaded or created thrown by <code>BufferedReader</code> or <code>File</code>.
+     * @throws Exception If file cannot be loaded or created thrown by <code>BufferedReader</code> or <code>File</code>.
      * In addition, if the format of the tasks in the data file is incorrect.
      */
     public ArrayList<Task> load() throws Exception {
@@ -48,7 +52,7 @@ public class Storage {
      * <code>Event</code> or <code>Todo</code>.
      *
      * @return ArrayList of tasks that is loaded from data file
-     * @throws IOException Exception if file cannot be written into thrown by <code>FileWriter</code>.
+     * @throws IOException If file cannot be written into thrown by <code>FileWriter</code>.
      */
     public void writeFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filepath);
@@ -70,7 +74,7 @@ public class Storage {
      * <code>Event</code> or <code>Todo</code>.
      *
      * @return ArrayList of tasks that is loaded from data file
-     * @throws IOException Exception if file cannot be appended to thrown by <code>FileWriter</code>.
+     * @throws IOException If file cannot be appended to thrown by <code>FileWriter</code>.
      */
     public void appendFile(TaskList tasks) throws IOException {
         String textFileMsg = System.lineSeparator() + tasks.get(tasks.size() - 1).toWriteIntoFile();

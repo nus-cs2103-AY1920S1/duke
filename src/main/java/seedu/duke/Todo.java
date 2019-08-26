@@ -16,7 +16,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of the todo task with its description.
+     * Returns string representation of the todo task with its description.
      *
      * @return String with the type of [task] [tick or cross] description.
      */
@@ -26,7 +26,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of the todo task with its description
+     * Returns string representation of the todo task with its description
      * to write into the data file.
      *
      * @return String with the type of task | boolean of whether done | description.

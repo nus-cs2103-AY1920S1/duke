@@ -10,7 +10,7 @@ public class Task {
 
     /**
      * Class constructor.
-     * Task is automatically marked as undone.
+     * Marks task is automatically as undone.
      *
      * @param description String description of the task.
      */
@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Marked task as done.
+     * Marks task as done.
      */
     public void markAsDone() {
         isDone = true;
@@ -64,7 +64,7 @@ public class Task {
     }
 
     /**
-     * String representation of the task to be written into data file.
+     * Returns string representation of the task to be written into data file.
      *
      * @return String representation of task as | 1 or 0 | task description.
      */

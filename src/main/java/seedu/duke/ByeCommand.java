@@ -32,13 +32,18 @@ public class ByeCommand extends Command {
      * Returns true to end Duke.
      * Prints goodbye message before returning.
      *
-     * @return true to end Duke
+     * @return True to end Duke
      */
     public boolean isExit() {
         ui.printGoodbyeMsg();
         return true;
     }
 
+    /**
+     * Returns type of command.
+     *
+     * @return String of command type.
+     */
     @Override
     public String toString() {
         //for testing purposes

@@ -1,7 +1,7 @@
 package seedu.duke;
 
 /**
- * Is the parent class of all commands.
+ * Executes command and is the parent class of all duke commands.
  * Abstract class with no method implementations.
  */
 public abstract class Command {
@@ -25,5 +25,10 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
 
+    /**
+     * Returns if duke should end.
+     *
+     * @return Boolean if duke should end.
+     */
     public abstract boolean isExit();
 }

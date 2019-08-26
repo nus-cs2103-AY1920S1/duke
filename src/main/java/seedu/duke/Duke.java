@@ -3,9 +3,9 @@ package seedu.duke;
 import java.text.ParseException;
 
 /**
- * Duke is able to run as a chat bot that helps to manage tasks.
- * Duke will load task information from data file from hard drive when Duke is initialized
- * or create file in hard drive if it does not exist.
+ * Runs as a chat bot that helps to manage tasks.
+ * Loads task information from data file in hard drive when initialized
+ * or creates file in hard drive if it does not exist.
  */
 public class Duke {
     private Storage storage;
@@ -14,12 +14,12 @@ public class Duke {
 
     /**
      * Class constructor that takes in a filepath.
-     * Creates a tasklist from  loading information from data file.
+     * Creates a task list from  loading information from data file.
      * It is able to create an empty TaskList if there is problems loading the data file or
      * creating the data file.
      *
      * @param filePath String of file path to create data file or load data file from.
-     * @throws Exception Exception if file cannot be created or loaded from correctly.
+     * @throws Exception If file cannot be created or loaded from correctly.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -61,6 +61,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Drives duke class as main method.
+     *
+     * @param args String[]
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

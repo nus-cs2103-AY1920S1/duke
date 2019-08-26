@@ -3,7 +3,8 @@ package seedu.duke;
 import java.util.ArrayList;
 
 /**
- * Represents the list of tasks in Duke. <code>TaskList</code> allows tasks to be added, removed and retrieved.
+ * Represents the list of tasks in Duke. <code>TaskList</code> allows tasks to be added,
+ * removed and retrieved.
  * It can also return the size of the list of tasks.
  */
 public class TaskList {
@@ -28,7 +29,7 @@ public class TaskList {
     /**
      * Returns integer number of tasks in list.
      *
-     * @return size of the list of tasks.
+     * @return Integer size of the list of tasks.
      */
     public int size() {
         return arr.size();
@@ -39,7 +40,7 @@ public class TaskList {
      * The first task in the list starts with index 0.
      *
      * @param index Index of task to retrieve from list.
-     * @return task from list at index.
+     * @return Task from list at index.
      */
     public Task get(int index) {
         return arr.get(index);

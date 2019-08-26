@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of the deadline task.
+     * Returns string representation of the deadline task.
      *
      * @return String with the type of [task] [tick or cross] description (by:date time).
      */
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of the deadline task with its description, date and time
+     * Returns string representation of the deadline task with its description, date and time
      * to write into the data file.
      *
      * @return String with the type of task | boolean of whether done | description | date time.

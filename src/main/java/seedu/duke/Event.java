@@ -29,7 +29,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the event task with its description, date and time.
+     * Returns string representation of the event task with its description, date and time.
      *
      * @return String with the type of [task] [tick or cross] description (at:date time).
      */
@@ -39,7 +39,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the event task with its description, date and time
+     * Returns string representation of the event task with its description, date and time
      * to write into the data file.
      *
      * @return String with the type of task | boolean of whether done | description | date time.

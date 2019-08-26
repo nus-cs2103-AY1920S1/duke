@@ -24,8 +24,8 @@ public class MarkDoneCommand extends Command {
      * @param tasks TaskList currently.
      * @param ui Ui initialized in <code>Duke</code> to interact with user.
      * @param storage Storage to overwrite data file after updating task as done.
-     * @throws DukeException Exception for incorrect user input.t.
-     * @throws Exception Exception for being unable to overwrite data file.
+     * @throws DukeException If there is incorrect user input.
+     * @throws Exception If unable to overwrite data file.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         ui.checkMarkDoneError(command, tasks);
@@ -38,7 +38,7 @@ public class MarkDoneCommand extends Command {
     /**
      * Returns false to continue Duke.
      *
-     * @return false
+     * @return False
      */
     public boolean isExit() {
         return false;

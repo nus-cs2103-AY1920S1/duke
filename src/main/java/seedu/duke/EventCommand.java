@@ -38,12 +38,17 @@ public class EventCommand extends Command {
     /**
      * Returns false to continue Duke.
      *
-     * @return false
+     * @return False
      */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns type of command.
+     *
+     * @return String of command type.
+     */
     @Override
     public String toString() {
         //for testing purposes

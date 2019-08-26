@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 
 /**
- * User interface has methods that interacts with the user and
+ * Represents user interface that has methods that interacts with the user and
  * prints out messages of commands and exceptions.
  */
 public class Ui {
@@ -77,7 +77,7 @@ public class Ui {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * @throws DukeException If there is a incorrectly inputted user command
      * that is intended to delete task.
      */
     public void checkErrorForDeleteCommand(String command, TaskList tasks) throws DukeException {
@@ -109,7 +109,7 @@ public class Ui {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * @throws DukeException If there is a incorrectly inputted user command
      * that is intended to create a todo task.
      */
     public void checkErrorForTodoCommand(String command, TaskList tasks) throws DukeException {
@@ -138,7 +138,7 @@ public class Ui {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * @throws DukeException If there is a incorrectly inputted user command
      * that is intended to create an event task.
      */
     public void checkErrorForEventCommand(String command, TaskList tasks) throws DukeException {
@@ -184,7 +184,7 @@ public class Ui {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * @throws DukeException If there is a incorrectly inputted user command
      * that is intended to create a deadline task.
      */
     public void checkErrorForDeadlineCommand(String command, TaskList tasks) throws DukeException {
@@ -241,7 +241,7 @@ public class Ui {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException Exception if there is a incorrectly inputted user command
+     * @throws DukeException If there is a incorrectly inputted user command
      * that is intended to mark a task as done.
      */
     public void checkMarkDoneError(String command, TaskList tasks) throws DukeException {

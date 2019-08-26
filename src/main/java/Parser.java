@@ -1,4 +1,12 @@
-import command.*;
+import command.Command;
+import command.DoneCommand;
+import command.ListCommand;
+import command.ToDoCommand;
+import command.DeadlineCommand;
+import command.EventCommand;
+import command.DeleteCommand;
+import command.ByeCommand;
+import command.InvalidCommand;
 
 public class Parser {
 

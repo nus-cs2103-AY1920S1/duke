@@ -102,10 +102,11 @@ public enum Response {
     }
 
     /**
-     * Assuming input is ".+ [0-9]+", it splits at whitespace and returns
-     * an Integer of the second part of the string.
+     * Assuming input is ".+ [0-9]+", it splits at whitespace and returns an Integer of the second
+     * part of the string.
+     *
      * @param input input string
-     * @return      integer of second part of string
+     * @return integer of second part of string
      */
     private static int getNumber(String input) {
         return Integer.parseInt(input.split(" ", 2)[1]);
@@ -113,9 +114,10 @@ public enum Response {
 
     /**
      * Given an index and state object, check if index in bounds of list in state object
+     *
      * @param index index to check
      * @param s     state object
-     * @return      False if out of bounds
+     * @return False if out of bounds
      */
     private static boolean checkValidIndex(int index, State s) {
         if (index < 0 || index > s.list.size() - 1) {
@@ -127,10 +129,11 @@ public enum Response {
 
     /**
      * Assuming input is "<head>.*<mid>.*" returns the two texts between them
+     *
      * @param input input string
      * @param head  head regex match
      * @param mid   mid regex match
-     * @return      array of two text parts
+     * @return array of two text parts
      */
     private static String[] splitTwoDelimeters(String input, String head, String mid) {
         String[] parts = input.split(mid, 2);
@@ -140,6 +143,7 @@ public enum Response {
 
     /**
      * Insert task into list and prints message string
+     *
      * @param t task to be added
      * @param s state object
      */

@@ -6,6 +6,7 @@ import com.core.State;
 import com.core.Response;
 
 public class Duke {
+
     public static void main(String[] args) {
         Printer.printString("Hello! I'm Duke\nWhat can I do for you?");
         // greet

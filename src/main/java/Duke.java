@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 
 public class Duke {
@@ -127,6 +128,28 @@ public class Duke {
 
     public static void handleInputUnrecognised(String inputUnrecognised) throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public static void addTaskToListAfterValidation(String dateTimeString, Task t) {
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, dukeDateTimeFormatter);
+
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                e.setDateTimeAt(dateTime);
+            } else {
+                Deadline d = (Deadline) t;
+                d.setDateTimeBy(dateTime);
+            }
+
+            dukeList.add(t);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(t);
+            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+        } catch (Exception e) {
+            System.out.println("Task not added to list because the input format for date and time is unrecognised. " +
+                    "Please enter date and time in dd/MM/yyyy HHmm format.");
+        }
     }
 
 }

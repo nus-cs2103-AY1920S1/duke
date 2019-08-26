@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 D | 1 |  work  |  monday
 E | 0 |  project  |  sunday
 T | 1 |  work
 T | 0 |  lol
 T | 0 |  work
+=======
+T | 0 |  read book
+E | 1 |  project  |  02/09/2019 20:00
+>>>>>>> branch-Level-8

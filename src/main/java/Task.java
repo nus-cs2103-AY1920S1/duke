@@ -1,4 +1,3 @@
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -38,11 +37,11 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if(isDone) {
+        if (isDone) {
             String printable = "[✓] " + taskDesc;
             return printable;
         } else {
-            String printable ="[✗] " + taskDesc;
+            String printable = "[✗] " + taskDesc;
             return printable;
         }
     }

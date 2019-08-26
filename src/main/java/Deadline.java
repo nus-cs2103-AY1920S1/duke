@@ -5,7 +5,7 @@ import java.text.ParseException;
 /**
  * Represents a "Deadline" task inputted by the user.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String timeDesc;
     protected Date date;
 
@@ -43,7 +43,7 @@ public class Deadline extends Task{
      * @return String format of the object
      */
     public String toFileFormat() {
-        if(isDone) {
+        if (isDone) {
             String format = "D | [✓] | " + taskDesc + " | " + timeDesc + "\n";
             return format;
         } else {

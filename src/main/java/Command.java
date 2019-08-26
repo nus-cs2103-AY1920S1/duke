@@ -18,11 +18,14 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
+<<<<<<< HEAD
 
     /**
      * Determines whether the program stops running.
      * @return boolean value to determine whether the program terminates
      */
+=======
+>>>>>>> branch-A-CodingStandard
     public abstract boolean isExit();
 }
 

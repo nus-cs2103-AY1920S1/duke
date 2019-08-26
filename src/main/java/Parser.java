@@ -11,7 +11,7 @@ public class Parser {
 
     /**
      * Returns differnt types of Command objects depending on user input.
-     * @param command
+     * @param command represents the input by the user
      * @return Command object according to what the user inputs
      * @throws DukeException when the input is missing information or
      *                       in the wrong format
@@ -29,14 +29,16 @@ public class Parser {
 
             case "done":
                 if (commandSplit.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please indicate which task you have completed.");
+                    throw new DukeException("☹ OOPS!!! Please indicate which " +
+                                            "task you have completed.");
                 }
 
                 return new DoneCommand(commandSplit[1]);
 
             case "delete":
                 if (commandSplit.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please indicate which task you would like to delete.");
+                    throw new DukeException("☹ OOPS!!! Please indicate which task " +
+                                            "you would like to delete.");
                 }
 
                 return new DeleteCommand(commandSplit[1]);
@@ -48,7 +50,8 @@ public class Parser {
             case "deadline":
             case "event":
                 if (commandSplit.length == 1) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                    throw new DukeException("☹ OOPS!!! The description of a " +
+                                            command + " cannot be empty.");
                 }
 
                 switch (type) {
@@ -59,9 +62,9 @@ public class Parser {
                     case "deadline": {
                         String[] timeSplit = command.split("/by");
 
-
                         if (timeSplit.length == 1) {
-                            throw new DukeException(" ☹ OOPS!!! Please enter a deadline for your task.");
+                            throw new DukeException(" ☹ OOPS!!! Please enter a " +
+                                                    "deadline for your task.");
                         }
 
                         timeDesc = timeSplit[1];
@@ -75,7 +78,8 @@ public class Parser {
                         enumType = Type.valueOf(type.toUpperCase());
 
                         if (timeSplit.length == 1) {
-                            throw new DukeException(" ☹ OOPS!!! Please enter a time for your task.");
+                            throw new DukeException(" ☹ OOPS!!! Please enter a time " +
+                                                    "for your task.");
                         }
 
                         timeDesc = timeSplit[1];
@@ -85,7 +89,8 @@ public class Parser {
                 }
 
             default:
-                throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't " +
+                                        "know what that means :-(");
         }
 
     }

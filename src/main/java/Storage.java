@@ -1,12 +1,10 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.FileNotFoundException;
 
 /**
  * Deals with reading from and writing to file based on inputted file path.
@@ -33,7 +31,7 @@ public class Storage {
             File file = new File(this.filePath);
             Scanner sc = new Scanner(file);
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 fileList.add(sc.nextLine());
             }
 

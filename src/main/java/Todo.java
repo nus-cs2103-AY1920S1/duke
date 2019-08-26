@@ -3,8 +3,7 @@ import java.util.Date;
 /**
  * Represents a "Todo" task inputted by the user.
  */
-public class Todo extends Task{
-
+public class Todo extends Task {
     /**
      * Constructs a Todo task object.
      * @param desc description of the task by user
@@ -42,7 +41,7 @@ public class Todo extends Task{
      * Retrieves the time description of the object.
      * @return null because Todo tasks do not have a time description
      */
-    public Date getDate () {
+    public Date getDate() {
         return null;
     }
 }

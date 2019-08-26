@@ -33,8 +33,8 @@ public class AddCommand extends Command {
                 Task newTask = new Todo(this.taskDesc);
                 tasks.add(newTask);
                 int numTasks = tasks.size();
-                ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString() + "\n" + "Now you have " + numTasks
-                        + " tasks in the list.");
+                ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString() +
+                            "\n" + "Now you have " + numTasks + " tasks in the list.");
             }
             break;
 
@@ -42,8 +42,8 @@ public class AddCommand extends Command {
                 Task newTask = new Deadline(this.taskDesc, this.timeDesc);
                 tasks.add(newTask);
                 int numTasks = tasks.size();
-                ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString() + "\n" + "Now you have "
-                        + numTasks + " tasks in the list.");
+                ui.showLine("Got it. I've added this task:" + "\n" + newTask.toString() +
+                            "\n" + "Now you have " + numTasks + " tasks in the list.");
 
             }
             break;
@@ -52,10 +52,13 @@ public class AddCommand extends Command {
                 Task newTask = new Events(this.taskDesc, this.timeDesc);
                 tasks.add(newTask);
                 int numTasks = tasks.size();
-                System.out.println("Got it. I've added this task:" + "\n" + newTask.toString() + "\n" + "Now you have "
-                        + numTasks + " tasks in the list.");
+                System.out.println("Got it. I've added this task:" + "\n" + newTask.toString() +
+                        "\n" + "Now you have " + numTasks + " tasks in the list.");
 
                 break;
+
+            default:
+                throw new DukeException("This doesn't make sense!");
         }
 
         storage.save(tasks.getTaskList());

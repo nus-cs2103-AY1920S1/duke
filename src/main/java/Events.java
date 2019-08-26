@@ -3,9 +3,9 @@ import java.util.Date;
 import java.text.ParseException;
 
 /**
- * Represents a "Deadline" task inputted by the user.
+ * Represents an "Event" task inputted by the user.
  */
-public class Events extends Task{
+public class Events extends Task {
     protected String timeDesc;
     protected Date date;
 
@@ -58,6 +58,5 @@ public class Events extends Task{
      */
     public Date getDate() {
         return date;
-
     }
 }

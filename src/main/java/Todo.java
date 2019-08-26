@@ -6,6 +6,7 @@ public class Todo extends Task {
     }
 
 
+
     @Override
     public String toString() {
         char symbol = this.isCompleted ? '✓' : '✗';

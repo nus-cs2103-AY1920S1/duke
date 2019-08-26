@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.List;
 
 public class CommandHandler {
@@ -31,14 +32,24 @@ public class CommandHandler {
                     String[] deadlineParts = deadline.split(" /by ");
                     String deadLineText = deadlineParts[0];
                     String by = deadlineParts[1];
-                    tasks.addTask(new Deadline(deadLineText, by));
+                    try {
+                        tasks.addTask(new Deadline(deadLineText, by));
+                    } catch (ParseException e) {
+                        System.out.println(e.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM");
+                    }
+
                     break;
                 case "event":
                     String event = input;
                     String[] eventParts = event.split(" /at ");
                     String eventText = eventParts[0];
                     String at = eventParts[1];
-                    tasks.addTask(new Event(eventText, at));
+                    try {
+                        tasks.addTask(new Event(eventText, at));
+                    } catch (ParseException e) {
+                        System.out.println(e.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM");
+                    }
+
                     break;
                 case "delete":
                     int taskNumberToRemove = Integer.parseInt(input);

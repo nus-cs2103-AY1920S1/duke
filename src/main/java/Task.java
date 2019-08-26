@@ -1,8 +1,12 @@
+import java.util.Date;
+
 public abstract class Task {
     protected String taskName;
     protected boolean isCompleted;
     protected String prefix;
     protected String details;
+    protected Date time;
+
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -16,7 +20,6 @@ public abstract class Task {
     public String getTaskName() {
         return taskName;
     }
-
 
     public String getDetails() {
         return details;

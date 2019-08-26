@@ -7,6 +7,7 @@ import seedu.duke.cli.commands.DeadlineCommand;
 import seedu.duke.cli.commands.DeleteCommand;
 import seedu.duke.cli.commands.DoneCommand;
 import seedu.duke.cli.commands.EventCommand;
+import seedu.duke.cli.commands.FindCommand;
 import seedu.duke.cli.commands.ListCommand;
 import seedu.duke.cli.commands.TodoCommand;
 
@@ -32,6 +33,7 @@ public class Parser {
         addConstructors(EventCommand.class);
         addConstructors(DeadlineCommand.class);
         addConstructors(DeleteCommand.class);
+        addConstructors(FindCommand.class);
     }
 
     // This class is to be used statically only.

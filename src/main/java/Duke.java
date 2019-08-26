@@ -35,7 +35,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\dukenew\\src\\main\\java\\TaskList").run();
+        new Duke("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\" +
+                    "dukenew\\src\\main\\java\\TaskList").run();
     }
 }
 

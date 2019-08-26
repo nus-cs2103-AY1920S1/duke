@@ -1,12 +1,10 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.FileNotFoundException;
 
 public class Storage {
     protected String filePath;
@@ -21,7 +19,7 @@ public class Storage {
             File file = new File(this.filePath);
             Scanner sc = new Scanner(file);
 
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 fileList.add(sc.nextLine());
             }
 

@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String timeDesc;
     protected Date date;
 
@@ -24,7 +24,7 @@ public class Deadline extends Task{
     }
 
     public String toFileFormat() {
-        if(isDone) {
+        if (isDone) {
             String format = "D | [✓] | " + taskDesc + " | " + timeDesc + "\n";
             return format;
         } else {

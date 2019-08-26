@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
-public class Events extends Task{
+public class Events extends Task {
     protected String timeDesc;
     protected Date date;
 

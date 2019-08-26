@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
     public Todo(String desc) {
         super(desc);
@@ -23,7 +23,7 @@ public class Todo extends Task{
         }
     }
 
-    public Date getDate () {
+    public Date getDate() {
         return null;
     }
 }

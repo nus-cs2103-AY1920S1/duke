@@ -1,21 +1,21 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class TaskList {
     protected ArrayList<Task> taskList;
     protected ArrayList<String> fileList;
 
-    public TaskList(ArrayList<String> fileList) throws DukeException{
+    public TaskList(ArrayList<String> fileList) throws DukeException {
         this.fileList = fileList;
         this.taskList = new ArrayList<Task>();
 
-        for(int i=0; i<fileList.size(); i++) {
+        for (int i = 0; i < fileList.size(); i++) {
             String[] listItem = fileList.get(i).split(" \\| ");
             String type = listItem[0];
 
             if (type.equals("T")) {
                 Task add = new Todo(listItem[2]);
                 this.taskList.add(add);
-            } else if(type.equals("D")) {
+            } else if (type.equals("D")) {
                 Task addTask = new Deadline(listItem[2], listItem[3]);
                 this.taskList.add(addTask);
             } else {

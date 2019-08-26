@@ -7,9 +7,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void setDone(boolean status) {
-        this.isDone = status;
+    public void setDone(boolean doneStatus) {
+        this.isDone = doneStatus;
     }
+
+    public abstract String getSimplifiedRepresentation();
 
     @Override
     public String toString() {

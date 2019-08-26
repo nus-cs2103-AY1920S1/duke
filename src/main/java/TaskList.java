@@ -40,4 +40,12 @@ public class TaskList {
         }
         return taskNames;
     }
+
+    public List<String> getSimplifiedTaskRepresentations() {
+        List<String> simplifiedTaskRepresentations = new ArrayList<>();
+        for (Task task : tasks) {
+            simplifiedTaskRepresentations.add(task.getSimplifiedRepresentation());
+        }
+        return simplifiedTaskRepresentations;
+    }
 }

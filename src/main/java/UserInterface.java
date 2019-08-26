@@ -17,7 +17,9 @@ public class UserInterface {
             "The description of a deadline must have /by and cannot be empty. E.g. deadline return book /by Sunday";
     public final String MESSAGE_INVALID_EVENT_FORMAT =
             "The description of a event must have /at and cannot be empty. E.g. event project meeting /at Mon 2-4pm";
-    public final String MESSAGE_INVALID_TASK_INDEX = "Invalid task number. Task numbers are 1-based.";
+    public final String MESSAGE_INVALID_TASK_INDEX = "Invalid task number. Task numbers follow 1-based indexing.";
+    public static final String MESSAGE_ERROR_MISSING_STORAGE_FILE = "Missing storage file: %1$s";
+    public static final String MESSAGE_ERROR_READING_FROM_FILE = "Error when reading file";
     private static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -27,8 +29,11 @@ public class UserInterface {
 
     public String readLine() {
         String nextLine = SCANNER.nextLine().strip();
-        System.out.println(nextLine);
         return nextLine;
+    }
+
+    public void echo(String inputLine) {
+        System.out.println(inputLine);
     }
 
     public void showToUser(String line) {
@@ -45,6 +50,7 @@ public class UserInterface {
 
     public void exitProgram() {
         showToUser(MESSAGE_BYE);
+        System.exit(0);
     }
 
     public void showAddition(Task task) {

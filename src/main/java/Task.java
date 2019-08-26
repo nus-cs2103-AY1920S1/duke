@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     String description;
     boolean isDone;
@@ -37,39 +41,67 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
-    private String timeDue;
+    private String memo;
     private String preposition;
+    private LocalDate date;
 
-    Deadline(String description, String preposition, String timeDue) {
+    Deadline(String description, String preposition, String memo) {
         super(description);
-        this.timeDue = timeDue;
+        this.memo = memo;
         this.preposition = preposition;
+        try {
+            // deadline 12 /by 12/12/2012 2359
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            date = LocalDate.parse(memo, formatter);
+        } catch (DateTimeParseException e){
+            System.out.println("parse failed");
+            // do nothing
+        }
     }
+
+    public String getMemo() {
+        return date != null ? date.toString() : memo;
+    }
+
     @Override
     public String getStatus() {
-        return "[D][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + timeDue + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + memo + ")";
     }
     @Override
     public String saveFormat() {
-        return "D" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + timeDue;
+        return "D" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + memo;
     }
 }
 
 class Event extends Task {
-    private String startEndTime;
+    private String memo;
     private String preposition;
-    Event(String description, String preposition, String startEndTime) {
+    private LocalDate date;
+
+    Event(String description, String preposition, String memo) {
         super(description);
-        this.startEndTime = startEndTime;
+        this.memo = memo;
         this.preposition = preposition;
+        try {
+            // deadline 12 /by 12/12/2012 2359
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            date = LocalDate.parse(memo, formatter);
+        } catch (DateTimeParseException e){
+            System.out.println("parse failed");
+            // do nothing
+        }
     }
+    public String getMemo() {
+        return date != null ? date.toString() : memo;
+    }
+
     @Override
     public String getStatus() {
-        return "[E][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + startEndTime + ")";
+        return "[E][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + memo + ")";
     }
     @Override
     public String saveFormat() {
-        return "E" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + startEndTime;
+        return "E" + (isDone ? "1" : "0") + " " + description + " /" + preposition + " " + memo;
     }
 }
 

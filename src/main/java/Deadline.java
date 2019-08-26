@@ -11,10 +11,6 @@ public class Deadline extends Task {
         this.by = by;
     }
     
-    public String getBy() {
-        return this.by;
-    }
-
     @Override
     public String toString() {
         format = new SimpleDateFormat("EEEE, MMM d, HH:mm");

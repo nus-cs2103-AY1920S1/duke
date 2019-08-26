@@ -1,9 +1,12 @@
 public class Todo extends Task {
 
-    protected String by;
+    //protected String by;
+    //protected String symbol = "T";
+
 
     public Todo(String description) {
         super(description);
+        super.symbol = "T";
     }
 
     @Override

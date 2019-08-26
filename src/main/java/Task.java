@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String symbol;
 
     public Task(String description) {
         this.description = description;
@@ -16,9 +17,20 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "]" + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
+    public String getExtraInfo() {
+        if (symbol.equals("T")) {
+            return "";
+        } else if (symbol.equals("E")) {
+            Event t = (Event) this;
+            return t.at;
+        } else {
+            Deadline t = (Deadline) this;
+            return t.by;
+        }
+    }
 
     public void markAsDone() {
         isDone = true;

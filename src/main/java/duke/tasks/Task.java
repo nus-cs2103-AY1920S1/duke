@@ -1,8 +1,9 @@
-/*
-A child class of Object which contains the description of the Task and whether the Task has been done.
+/**
+ * A child class of Object which contains the description of the Task and whether the Task has been done.
  */
 package duke.tasks;
 import duke.exceptions.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -12,18 +13,12 @@ public class Task {
         this.isDone = false;
     }
 
-    //for the purpose of text-ui-testing
-    /*
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "?");
-    } */
-
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
-    /*
-    This method changes the task to be done when the task has yet to be done.
+    /**
+     * This method changes the task to be done when the task has yet to be done.
      */
     public void markAsDone() throws DukeException {
         if (this.isDone == true) {
@@ -33,8 +28,8 @@ public class Task {
         }
     }
 
-    /*
-    This method records the loaded task as done.
+    /**
+     * This method records the loaded task as done.
      */
     public void recordDone() {
         this.isDone = true;
@@ -45,10 +40,11 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    /*
-    This method returns an empty String as it will be overridden in its child classes for more specific format of each type of task.
+    /**
+     * This method returns an empty String as it will be overridden in its child classes for more specific format of
+     * each type of task.
      */
     public String format() {
-        return "wrong format method used";
+        return "";
     }
 }

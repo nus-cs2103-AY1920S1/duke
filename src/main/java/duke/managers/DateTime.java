@@ -1,11 +1,19 @@
+/**
+ * This class contains methods to process Dates and Times entered into Duke.
+ */
 package duke.managers;
-import duke.exceptions.*;
+import duke.exceptions.DateException;
+
 public class DateTime {
 
-    public DateTime() {}
+    public DateTime() {
 
-    /*
-    This method returns the date in the desired convention.
+    }
+
+    /**
+     * This method returns the date in the desired convention.
+     * @param date a String containing the date that was in the command to Duke
+     * @exception DateException if the month number is invalid
      */
     public static String getDate(String date) throws DateException {
         String[] ddmmyy = date.split("/");
@@ -15,8 +23,9 @@ public class DateTime {
         return dd + mm + yy;
     }
 
-    /*
-    This method adds the suffix for the day in the date String. This method is used in the getDate method.
+    /**
+     * This method adds the suffix for the day in the date String. It is used in the getDate method.
+     * @param day a String containing the day number
      */
     private static String addDaySuffix(String day) {
         int dayNum = Integer.parseInt(day);
@@ -33,8 +42,10 @@ public class DateTime {
         return dayWithSuffix;
     }
 
-    /*
-    This method changes the month number to its name in the date String. This method is used in the getDate method.
+    /**
+     * This method changes the month number to its name in the date String. It is used in the getDate method.
+     * @param month a String containing the month number
+     * @exception DateException if the month number is invalid
      */
     private static String wordMonth(String month) throws DateException {
         int monthNum = Integer.parseInt(month);
@@ -68,8 +79,10 @@ public class DateTime {
         }
     }
 
-    /*
-    This method returns the time in the desired convention.
+    /**
+     * This method returns the time in the desired convention.
+     * @param time a String containing the time in military format
+     * @exception DateException if the month number is invalid
      */
     public static String getTime(String time) throws DateException {
         String timeString = "";
@@ -85,8 +98,10 @@ public class DateTime {
         return timeString;
     }
 
-    /*
-    This method returns the hour component of time. This method is used in the getTime method.
+    /**
+     * This method returns the hour component of time. It is used in the getTime method.
+     * @param hours a String containing the hour number
+     * @exception DateException if the month number is invalid
      */
     private static String getHours(String hours) throws DateException {
         int hourNum = Integer.parseInt(hours);
@@ -107,8 +122,10 @@ public class DateTime {
         return numHour;
     }
 
-    /*
-    This method returns the minute component of time. This method is used in the getTime method.
+    /**
+     * This method returns the minute component of time. It is used in the getTime method.
+     * @param minutes a String containing the minute number
+     * @exception DateException if the month number is invalid
      */
     private static String getMinutes(String minutes) throws DateException {
         int minNum = Integer.parseInt(minutes);

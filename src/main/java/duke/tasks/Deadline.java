@@ -1,4 +1,9 @@
+/**
+ * This child class of Task contains the same attributes as its parent class but with an additional field (the deadline
+ * of that task, which is stored as 'by').
+ */
 package duke.tasks;
+
 public class Deadline extends Task {
     private String by;
 

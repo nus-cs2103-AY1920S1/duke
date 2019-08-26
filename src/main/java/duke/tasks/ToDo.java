@@ -1,5 +1,10 @@
+/**
+ * This child class of Task contains the same attributes as its parent class.
+ */
 package duke.tasks;
+
 public class ToDo extends Task {
+
     public ToDo(String description) {
         super(description);
     }

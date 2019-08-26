@@ -1,24 +1,33 @@
-/*
-This class deals with making sense of the user command.
+/**
+ * This class deals with making sense of the user command. Commands are processed individually and specifically.
  */
 package duke.managers;
-import duke.commands.*;
-import duke.exceptions.*;
+import duke.exceptions.DukeException;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+
 public class Parser {
 
-    public Parser() {}
+    public Parser() {
 
-    /*
-    This method generates the corresponding command according to the entire String that has been taken in.
+    }
+
+    /**
+     * This method generates and returns the corresponding command according to the entire String that has been taken
+     * in.
+     * @param c a String containing the unprocessed input command to Duke
+     * @exception DukeException is thrown when there is an error with the input
      */
     public static Command parse(String c) throws DukeException {
         String[] comm = c.split(" ");
         String key = comm[0];
         if (key.equals("delete")) {
-            //assumption: after delete it is always numeric
             return new DeleteCommand(Integer.parseInt(comm[1]));
         } else if (key.equals("done")) {
-            //assumption: after delete it is always numeric
             return new DoneCommand(Integer.parseInt(comm[1]));
         } else if (key.equals("list")) {
             return new ListCommand();

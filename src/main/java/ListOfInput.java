@@ -1,5 +1,8 @@
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 public class ListOfInput {
     private List<Task> list;
@@ -12,6 +15,8 @@ public class ListOfInput {
         String[] arrOfWords = input.split(" ");
         String taskWithoutType = input.replace(arrOfWords[0], "").trim();
         Task task = new Task(input);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
         try {
             if (taskWithoutType.isEmpty()) {
                 throw new DukeException();
@@ -23,12 +28,14 @@ public class ListOfInput {
                 break;
             case "deadline":
                 String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
-                task = new Deadline(arrOfWordsDeadline[0], arrOfWordsDeadline[1]);
+                Date formattedDeadline = format.parse(arrOfWordsDeadline[1]);
+                task = new Deadline(arrOfWordsDeadline[0], formatter.format(formattedDeadline));
                 list.add(task);
                 break;
             case "event":
                 String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
-                task = new Event(arrOfWordsEvent[0], arrOfWordsEvent[1]);
+                Date formattedEventTime = format.parse(arrOfWordsEvent[1]);
+                task = new Event(arrOfWordsEvent[0], formatter.format(formattedEventTime));
                 list.add(task);
                 break;
             }
@@ -39,6 +46,8 @@ public class ListOfInput {
             print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " cannot be empty.");
         } catch (ArrayIndexOutOfBoundsException e) {
             print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " does not follow the specified format.");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

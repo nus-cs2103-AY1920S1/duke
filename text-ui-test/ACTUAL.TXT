@@ -1,4 +1,3 @@
-    Previous file not found. Creating a new file
     ____________________________________________________________
      Hello! I'm Duke
      What can I do for you?

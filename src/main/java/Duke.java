@@ -1,13 +1,87 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static String fileName;
+
+    public Duke(String fileName) {
+        this.fileName = fileName;
+    }
 
     public static void main(String[] args) {
+        Duke duke = new Duke("data/duke.txt");
+        duke.run();
+    }
+
+    public static void run() {
         greet();
+        readFromFile();
         readInput();
         goodbye();
+    }
+
+    public static void readFromFile() {
+        String line = null;
+        try {
+            FileReader fReader = new FileReader(fileName);
+            BufferedReader bReader = new BufferedReader(fReader);
+
+            while((line = bReader.readLine()) != null) {
+                char taskType = line.charAt(1);
+                char isDone = line.charAt(4);
+                if (taskType == 'T') {
+                    String description = line.substring(7);
+                    Task todo = new ToDo(description);
+                    if (isDone == '✘') {
+                        taskList.add(todo);
+                    } else {
+                        todo.markAsDone();
+                        taskList.add(todo);
+                    }
+                } else if (taskType == 'D') {
+                    String description = line.substring(7, line.indexOf('(') - 1);
+                    String by = line.substring(line.indexOf(':') + 2, line.indexOf(')'));
+                    Task deadline = new Deadline(description, by);
+                    if (isDone == '✘') {
+                        taskList.add(deadline);
+                    } else {
+                        deadline.markAsDone();
+                        taskList.add(deadline);
+                    }
+                } else if (taskType == 'E') {
+                    String description = line.substring(7, line.indexOf('(') - 1);
+                    String at = line.substring(line.indexOf(':') + 2, line.indexOf(')'));
+                    Task event = new Event(description, at);
+                    if (isDone == '✘') {
+                        taskList.add(event);
+                    } else {
+                        event.markAsDone();
+                        taskList.add(event);
+                    }
+                }
+            }
+            bReader.close();
+        } catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");
+        } catch(IOException ex) {
+            System.out.println("Error reading file '" + fileName + "'");
+        }
+    }
+
+    public static void writeToFile() {
+        try {
+            FileWriter fWriter = new FileWriter(fileName);
+            BufferedWriter bWriter = new BufferedWriter(fWriter);
+
+            for (Task task : taskList) {
+                bWriter.write(task + "\n");
+            }
+            bWriter.close();
+        } catch(IOException ex) {
+            System.out.println("Error writing file '" + fileName + "'");
+        }
     }
 
     public static void greet() {
@@ -72,6 +146,7 @@ public class Duke {
                 }
                 addTaskToTaskList(taskList, new Event(description, at.trim()));
             }
+            writeToFile();
             userInput = input.nextLine();
         }
     }

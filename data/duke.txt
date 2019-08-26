@@ -1,0 +1,5 @@
+[T][✘] sleep
+[D][✓] work (by: friday)
+[T][✘] train
+[D][✘] call (by: sunday)
+[E][✓] read (at: saturday)

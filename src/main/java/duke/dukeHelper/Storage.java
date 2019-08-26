@@ -1,6 +1,7 @@
-package dukeHelper;
+package duke.dukeHelper;
 
-import dukeTask.*;
+import duke.dukeTask.Deadline;
+import duke.dukeTask.*;
 
 import java.io.File;
 import java.io.FileWriter;

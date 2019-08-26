@@ -1,7 +1,8 @@
-import dukeCommand.Command;
-import dukeCore.DukeException;
-import dukeHelper.*;
-import dukeTask.TaskList;
+package duke;
+
+import duke.dukeCommand.Command;
+import duke.dukeHelper.*;
+import duke.dukeTask.TaskList;
 
 import java.io.IOException;
 

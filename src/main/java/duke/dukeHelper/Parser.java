@@ -1,6 +1,6 @@
-package dukeHelper;
+package duke.dukeHelper;
 
-import dukeCommand.*;
+import duke.dukeCommand.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

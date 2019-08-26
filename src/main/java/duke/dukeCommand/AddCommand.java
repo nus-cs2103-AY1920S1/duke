@@ -1,8 +1,8 @@
-package dukeCommand;
+package duke.dukeCommand;
 
-import dukeCore.DukeException;
-import dukeHelper.*;
-import dukeTask.*;
+import duke.DukeException;
+import duke.dukeHelper.*;
+import duke.dukeTask.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

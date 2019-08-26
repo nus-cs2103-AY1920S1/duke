@@ -1,4 +1,4 @@
-package dukeTask;
+package duke.dukeTask;
 
 public class Event extends Task {
     private String eventPeriod;

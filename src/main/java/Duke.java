@@ -102,10 +102,9 @@ public class Duke {
             String deadlineDescription = inputDeadline.substring(9, firstIndex);
             String deadlineBy = inputDeadline.substring(secondIndex);
             Deadline d = new Deadline(deadlineDescription, deadlineBy);
-            dukeList.add(d);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(d);
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+
+            addTaskToListAfterValidation(deadlineBy, d);
+
         }
     }
 
@@ -119,10 +118,9 @@ public class Duke {
             String eventDescription = inputEvent.substring(6, firstIndex);
             String eventAt = inputEvent.substring(secondIndex);
             Event e = new Event(eventDescription, eventAt);
-            dukeList.add(e);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(e);
-            System.out.println("Now you have " + dukeList.size() + " tasks in the list.");
+
+            addTaskToListAfterValidation(eventAt, e);
+
         }
     }
 

@@ -19,14 +19,13 @@ public class ToDoList {
         fw.close();
     }
 
-    private static ArrayList<Task> fileInitialization() throws FileNotFoundException {
-        File f = new File("./todoList.txt");
+    private static ArrayList<Task> fileInitialization(File f) throws FileNotFoundException {
         Scanner s = new Scanner(f);
         ArrayList<Task> clone = new ArrayList<Task>();
 
         while (s.hasNext()) {
             String input = s.nextLine();
-            String[] inputArr = input.split(" ");
+            String[] inputArr = input.split(" \\| ");
             boolean done;
             if (inputArr[1].equals("1")) {
                 done = true;
@@ -82,11 +81,11 @@ public class ToDoList {
             }
 
             if (i instanceof ToDos) {
-                memo = memo + "T " + done + i.getDescription() + "\n";
+                memo = memo + "T | " + done + " | " + i.getDescription() + "\n";
             } else if (i instanceof Deadlines) {
-                memo = memo + "D " + done + " " + i.getDescription() + " " + ((Deadlines) i).getDate() + "\n";
+                memo = memo + "D | " + done + " | " + i.getDescription() + " | " + ((Deadlines) i).getDate() + "\n";
             } else {
-                memo = memo + "E " + done + " " + i.getDescription() + " " + ((Events) i).getDate() + "\n";
+                memo = memo + "E | " + done + " | " + i.getDescription() + " | " + ((Events) i).getDate() + "\n";
             }
         }
 
@@ -94,10 +93,15 @@ public class ToDoList {
     }
 
 
-    public void run() throws FileNotFoundException {
+    public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         String border = "    ____________________________________________________________";
-        ArrayList<Task> arr = fileInitialization();
+
+        File f = new File("./todoList.txt");
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        ArrayList<Task> arr = fileInitialization(f);
 
         int counter = arr.size();
 
@@ -121,6 +125,8 @@ public class ToDoList {
                         System.out.println("     Nice! I've marked this task as done: ");
                         System.out.println("       " + arr.get(done));
                         System.out.println(border);
+                        arrayToFile(f, arr);
+
                     } catch (NullPointerException e) {
                         System.out.println(border);
                         System.out.println("     Please input a valid task number.");
@@ -137,6 +143,7 @@ public class ToDoList {
                         System.out.printf("     Now you have %s tasks in the list.\n", counter);
                         System.out.println(border);
                         arr.remove(Integer.parseInt(temp[1]) - 1);
+                        arrayToFile(f, arr);
 
                     } catch (NullPointerException e) {
                         System.out.println(border);
@@ -152,10 +159,12 @@ public class ToDoList {
                         case "deadline":
                             addDeadline(input, arr, false);
                             added = true;
+                            arrayToFile(f, arr);
                             break;
                         case "event":
                             addEvent(input, arr, false);
                             added = true;
+                            arrayToFile(f, arr);
                             break;
                         case "todo":
                             if (temp.length < 2) {
@@ -163,6 +172,7 @@ public class ToDoList {
                             }
                             addToDo(input, arr, false);
                             added = true;
+                            arrayToFile(f, arr);
                             break;
                         }
 

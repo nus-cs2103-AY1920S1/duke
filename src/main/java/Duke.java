@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -7,10 +8,10 @@ public class Duke {
 
         ToDoList work = new ToDoList();
 
-        try{
+        try {
             work.run();
-        } catch (FileNotFoundException e){
-            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
 
     }

@@ -1,9 +1,11 @@
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TaskTest {
     @Test
-    public void CreatingGoodTodoTask() {
+    public void creatingGoodTodoTask() {
         try {
             // test case 1
             Task t = Task.create("todo abc");
@@ -18,7 +20,7 @@ public class TaskTest {
     }
 
     @Test
-    public void CreatingFailTodoTask() {
+    public void creatingFailTodoTask() {
         try {
             // test case 3
             Task t = Task.create("todo");
@@ -29,20 +31,22 @@ public class TaskTest {
     }
 
     @Test
-    public void CreatingGoodEventTask() {
+    public void creatingGoodEventTask() {
         try {
             Task t = Task.create("event hello /at 01/01/2011 1500");
-            assertEquals("[E]" + "[" + (char) 0x2718 + "] " + "hello" + " (at: 1st of January 2011, 3:00pm)", t.toString());
+            assertEquals("[E]" + "[" + (char) 0x2718 + "] " + "hello"
+                    + " (at: 1st of January 2011, 3:00pm)", t.toString());
 
             t.setDone();
-            assertEquals("[E]" + "[" + (char) 0x2713 + "] " + "hello" + " (at: 1st of January 2011, 3:00pm)", t.toString());
+            assertEquals("[E]" + "[" + (char) 0x2713 + "] " + "hello"
+                    + " (at: 1st of January 2011, 3:00pm)", t.toString());
         } catch (DukeException e) {
             fail("Exception Occurred.\n" + e.toString());
         }
     }
 
     @Test
-    public void CreatingFailEventTask() {
+    public void creatingFailEventTask() {
         try {
             Task t1 = Task.create("event hello /at 01/012011 1500");
             fail("1st Exception was not thrown");
@@ -88,20 +92,22 @@ public class TaskTest {
     }
 
     @Test
-    public void CreatingGoodDeadlineTask() {
+    public void creatingGoodDeadlineTask() {
         try {
             Task t = Task.create("deadline hello /by 01/01/2011 1500");
-            assertEquals("[D]" + "[" + (char) 0x2718 + "] " + "hello" + " (by: 1st of January 2011, 3:00pm)", t.toString());
+            assertEquals("[D]" + "[" + (char) 0x2718 + "] " + "hello"
+                    + " (by: 1st of January 2011, 3:00pm)", t.toString());
 
             t.setDone();
-            assertEquals("[D]" + "[" + (char) 0x2713 + "] " + "hello" + " (by: 1st of January 2011, 3:00pm)", t.toString());
+            assertEquals("[D]" + "[" + (char) 0x2713 + "] " + "hello"
+                    + " (by: 1st of January 2011, 3:00pm)", t.toString());
         } catch (DukeException e) {
             fail("Exception Occurred.\n" + e.toString());
         }
     }
 
     @Test
-    public void CreatingFailDeadlineTask() {
+    public void creatingFailDeadlineTask() {
         try {
             Task t1 = Task.create("deadline hello /by 01/012011 1500");
             fail("1st Exception was not thrown");
@@ -156,10 +162,12 @@ public class TaskTest {
             assertEquals("[T][" + (char) 0x2713 + "] join sports club", t2.toString());
 
             Task t3 = Task.createFromFile("D | 0 | don't die | 22/01/2019 2234");
-            assertEquals("[D][" + (char) 0x2718 + "] don't die (by: 22nd of January 2019, 10:34pm)", t3.toString());
+            assertEquals("[D][" + (char) 0x2718
+                    + "] don't die (by: 22nd of January 2019, 10:34pm)", t3.toString());
 
             Task t4 = Task.createFromFile("E | 1 | don't die | 22/11/2019 2234");
-            assertEquals("[E][" + (char) 0x2713 + "] don't die (at: 22nd of November 2019, 10:34pm)", t4.toString());
+            assertEquals("[E][" + (char) 0x2713
+                    + "] don't die (at: 22nd of November 2019, 10:34pm)", t4.toString());
         } catch (DukeException e) {
             fail(e.toString());
         }

@@ -71,4 +71,20 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
     }
+
+    /**
+     * Finds all tasks in list which contains searchString in its description.
+     *
+     * @param searchString Search string to match in a Task description.
+     * @return TaskList containing Tasks which contains searchString in their description.
+     */
+    public TaskList find(String searchString) {
+        TaskList matchingTasks = new TaskList();
+        for (Task t : tasks) {
+            if (t.getDescription().toLowerCase().contains(searchString.toLowerCase())) {
+                matchingTasks.add(t);
+            }
+        }
+        return matchingTasks;
+    }
 }

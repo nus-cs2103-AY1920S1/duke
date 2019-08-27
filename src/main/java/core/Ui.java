@@ -86,7 +86,28 @@ public class Ui {
             }
             messageBuilder.setLength(messageBuilder.length() - 2); // strip trailing \n\t
         } else {
-            messageBuilder.append("No tasks in your list. Add some tasks and get to work mate!");
+            messageBuilder.append("Can't see any tasks in the list, start adding tasks mate!");
+        }
+
+        show(messageBuilder.toString());
+    }
+
+    /**
+     * Prints out list of tasks matching search string.
+     *
+     * @param matchingTasks TaskList to print out.
+     */
+    public void showFoundTasks(TaskList matchingTasks) {
+        StringBuilder messageBuilder = new StringBuilder();
+
+        if (matchingTasks.size() > 0) {
+            messageBuilder.append("Here are the matching tasks in your list:\n\t");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                messageBuilder.append((i + 1) + ". " + matchingTasks.get(i) + "\n\t");
+            }
+            messageBuilder.setLength(messageBuilder.length() - 2); // strip trailing \n\t
+        } else {
+            messageBuilder.append("Mate, I found no matching tasks. Try something else.");
         }
 
         show(messageBuilder.toString());
@@ -128,4 +149,5 @@ public class Ui {
     public void showError(String message) {
         show(message);
     }
+
 }

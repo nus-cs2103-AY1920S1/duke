@@ -1,11 +1,6 @@
 package core;
 
-import command.DeleteTaskCommand;
-import command.ExitCommand;
-import command.AddTaskCommand;
-import command.Command;
-import command.DoneTaskCommand;
-import command.ListTasksCommand;
+import command.*;
 import exception.DukeIllegalArgumentException;
 import exception.EmptyFieldException;
 import exception.InvalidCommandFormatException;
@@ -49,7 +44,7 @@ public class Parser {
         } else if (command.toLowerCase().startsWith("todo")) {
             try {
                 //parse description from command string
-                int commandLength = "todo ".length();
+                int commandLength = "todo".length();
                 String description = command.substring(commandLength).trim();
                 if (description.isEmpty()) {
                     throw new EmptyFieldException("OOPS!!! The description of a task cannot be empty mate.");
@@ -65,7 +60,7 @@ public class Parser {
         } else if (command.toLowerCase().startsWith("deadline")) {
             try {
                 int byLength = "/by".length();
-                int commandLength = "deadline ".length();
+                int commandLength = "deadline".length();
                 int byIndex = command.indexOf("/by"); // look for '/by' keyword from command
 
                 // parse description from command
@@ -101,7 +96,7 @@ public class Parser {
         } else if (command.toLowerCase().startsWith("event")) {
             try {
                 int atLength = "/at".length();
-                int commandLength = "event ".length();
+                int commandLength = "event".length();
                 int atIndex = command.indexOf("/at"); // look for '/at' keyword from command
 
                 // parse description from command
@@ -162,6 +157,20 @@ public class Parser {
                 return new DeleteTaskCommand(command, taskIndex);
             } catch (NumberFormatException e) {
                 throw new InvalidIndexException("OOPS!!! I can't do that, please gimme a valid task ID mate.");
+            }
+        } else if (command.toLowerCase().startsWith("find")) {
+            try {
+                //parse searchString from command string
+                int commandLength = "find".length();
+                String searchString = command.substring(commandLength).trim();
+                if (searchString.isEmpty()) {
+                    throw new EmptyFieldException("OOPS!!! Can't search for somethin' with nothin' mate.");
+                }
+
+                return new FindTaskCommand(command, searchString);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new InvalidCommandFormatException("OOPS!!! Please gimme the right format for searching: "
+                        + "'find [keyword]'");
             }
         } else if (command.equalsIgnoreCase("bye")) {
             return new ExitCommand(command);

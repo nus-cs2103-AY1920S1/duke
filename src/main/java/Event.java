@@ -1,9 +1,20 @@
-public class Event extends Task {
-    private String at;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    protected Event(String description, String at) {
+public class Event extends Task {
+    private Date at;
+
+    protected Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date date = formatter.parse(at);
+            this.at = date;
+        } catch (ParseException e) {
+            throw new DukeException("Failed to parse date.");
+        }
     }
     protected Event(String description, boolean isDone, String at) {
         super(description, isDone);

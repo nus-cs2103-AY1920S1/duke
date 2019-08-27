@@ -1,6 +1,6 @@
-import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Duke {
@@ -15,13 +15,13 @@ public class Duke {
         final String lineSpace = "_______________________________\n";
         String startMessage = lineSpace + "Hello! I'm Duke\nWhat can I do for you?\n" + lineSpace;
         System.out.println(startMessage);
-        //Time
-        final String timePattern = "d MMMM yyyy, h:mma";
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(timePattern);
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList();
         String taskName;
         Task task;
+        //Time
+        final String timePattern = "d MMMM yyyy, h:mma";
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(timePattern);
         while (sc.hasNext()) {
             try {
                 String userCmd = sc.next();

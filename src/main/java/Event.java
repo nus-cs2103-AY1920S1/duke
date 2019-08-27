@@ -11,6 +11,14 @@ class Event extends Task {
     // List of acceptable date formats (for this case, just choosing two common patterns)
     protected List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
 
+    /**
+     * Instantiates a new Event Task.
+     * Convert the date/time provided to a SimpleDateFormat object.
+     * Can only convert for certain date & time formats.
+     *
+     * @param description The description of the event
+     * @param at          The date & time of which the event is held at
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;

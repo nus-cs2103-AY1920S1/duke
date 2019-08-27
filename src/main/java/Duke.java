@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     // String Constants used for Duke output
@@ -20,6 +21,11 @@ public class Duke {
             ui.createFile();
             ArrayList<Task> list = new ArrayList<>();
             tasks = new TaskList(list);
+            File file = new File(filePath); // create new .txt file with provided filepath
+            try {
+                file.createNewFile();
+            }
+            catch (Exception err){}
         }
     }
 

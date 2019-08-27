@@ -101,7 +101,8 @@ public class Storage {
      * the memory, an empty string is added into the hard disk.
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */
-    public static void save() throws IOException {
+    public static void save(TaskList allTasks) throws IOException {
+        memory = allTasks.getAllTasks();
         if (memory.size() > 0) {
             String text = "";
             Task firstTask = memory.get(0);

@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             this.ui.printLine(deleted.toString());
             maxNum = tasks.totalNumTasks();
             this.ui.printLine("Now you have " + maxNum + " tasks in the list.");
-            storage.save();
+            storage.save(tasks);
         }
     }
 

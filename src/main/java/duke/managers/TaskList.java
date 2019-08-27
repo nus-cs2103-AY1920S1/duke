@@ -31,6 +31,10 @@ public class TaskList {
         allTasks = new ArrayList<>();
     }
 
+    public ArrayList<Task> getAllTasks() {
+        return allTasks;
+    }
+
     public int totalNumTasks() {
         return allTasks.size();
     }

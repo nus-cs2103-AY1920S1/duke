@@ -18,7 +18,7 @@ public class AddCommand extends Command {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private DateTime DT = new DateTime();
+    private DateTime dateTime = new DateTime();
     private String[] allDetails;
 
     /**
@@ -70,8 +70,8 @@ public class AddCommand extends Command {
     private void toDoTask(String a) throws IOException {
         ToDo newTodo = new ToDo(a);
         tasks.addTask(newTodo);
-        printAddedTask(newTodo);
-        storage.save();
+        //printAddedTask(newTodo);
+        storage.save(tasks);
     }
 
     /**
@@ -91,11 +91,11 @@ public class AddCommand extends Command {
                 throw new DukeException("Oops! Please write the deadline such as 29/2/2019 1800");
             } else {
                 try {
-                    String formattedTime = DT.getDate(time[0]) + DT.getTime(time[1]);
+                    String formattedTime = dateTime.getDate(time[0]) + dateTime.getTime(time[1]);
                     Deadline newDeadline = new Deadline(details[0].trim(), formattedTime);
                     tasks.addTask(newDeadline);
                     printAddedTask(newDeadline);
-                    storage.save();
+                    storage.save(tasks);
                 } catch (DateException e) {
                     throw new DukeException("Oops! " + e.getMessage() + " Please write the deadline such as 29/2/2019 1800");
                 }
@@ -124,12 +124,12 @@ public class AddCommand extends Command {
                     if (hoursMin.length < 2) {
                         throw new DukeException("Oops! Please write the event timing such as 29/2/2019 1800-2000");
                     } else {
-                        String hM = DT.getTime(hoursMin[0]) + "-" + DT.getTime(hoursMin[1]);
-                        String formattedTime = DT.getDate(eventTime[0]) + hM;
+                        String hM = dateTime.getTime(hoursMin[0]) + "-" + dateTime.getTime(hoursMin[1]);
+                        String formattedTime = dateTime.getDate(eventTime[0]) + hM;
                         Event newEvent = new Event(details[0].trim(), formattedTime);
                         tasks.addTask(newEvent);
                         printAddedTask(newEvent);
-                        storage.save();
+                        storage.save(tasks);
                     }
                 } catch (DateException e) {
                     throw new DukeException("Oops! " + e.getMessage() + " Please write the event timing such as 29/2/2019 1800-2000");

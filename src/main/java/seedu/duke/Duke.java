@@ -2,16 +2,25 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Main class of Duke application.
  */
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private Storage storage;
     private Parser parser;
     private Scanner sc;
 
-    Duke(String filePath) {
+    public Duke() {
+
+    }
+
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         sc = new Scanner(System.in);
@@ -36,7 +45,12 @@ public class Duke {
         } while (response != -1);
     }
 
-    public static void main(String[] args) {
-        new Duke("./duke_data.txt").run();
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }

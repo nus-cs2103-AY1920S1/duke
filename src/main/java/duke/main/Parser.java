@@ -45,7 +45,7 @@ public class Parser {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    private static boolean isTask(String directive) {
+    public static boolean isTask(String directive) {
         return directive.equals("todo") || directive.equals("deadline") || directive.equals("event");
     }
 }

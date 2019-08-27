@@ -78,7 +78,7 @@ public class Parser {
                     }
                     int index = 1;
                     for (Task task : tasks) {
-                        ui.printLine(String.format("%d.%s\n", index, task));
+                        ui.printLine(String.format("%d.%s", index, task));
                         index++;
                     }
                 }
@@ -93,7 +93,7 @@ public class Parser {
                         storage.saveTasks(tasks);
 
                         ui.printLine("Nice! I've marked this task as done:");
-                        ui.printLine(String.format("%s\n", taskDone));
+                        ui.printLine(String.format("%s", taskDone));
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Your task cannot be found!");
                     }
@@ -108,8 +108,8 @@ public class Parser {
                         storage.saveTasks(tasks);
 
                         ui.printLine("Got it. I've removed this task:");
-                        ui.printLine(String.format("%s\n", taskRemoved));
-                        ui.printLine(String.format("Now you have %d tasks in the list.\n", tasks.size()));
+                        ui.printLine(String.format("%s", taskRemoved));
+                        ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Your task cannot be found!");
                     }
@@ -136,7 +136,7 @@ public class Parser {
 
                         int index = 1;
                         for (Task task : tasks) {
-                            ui.printLine(String.format("%d.%s\n", index, task));
+                            ui.printLine(String.format("%d.%s", index, task));
                             index++;
                         }
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -164,7 +164,7 @@ public class Parser {
 
     private static void echoTaskAdded(Task task, TaskList tasks, Ui ui) {
         ui.printLine("Got it. I've added this task:");
-        ui.printLine(String.format("%s\n", task));
-        ui.printLine(String.format("Now you have %d tasks in the list.\n", tasks.size()));
+        ui.printLine(String.format("%s", task));
+        ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 }

@@ -1,12 +1,21 @@
 package seedu.duke;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected Date by;
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public Deadline(String task, String by) {
+    public Deadline(String task, String by) throws DukeException {
         super(task);
-        this.by = by;
+        try {
+            this.by = dateFormatter.parse(by);
+        } catch (ParseException e) {
+            throw new DukeWrongDateFormatException();
+        }
     }
 
     public Deadline(String task, String done, String by) {
@@ -30,6 +39,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormatter.format(by) + ")";
     }
 }

@@ -1,12 +1,21 @@
 package seedu.duke;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class Event extends Task {
 
-    protected String at;
+    private Date at;
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public Event(String task, String at) {
+    public Event(String task, String at) throws DukeException {
         super(task);
-        this.at = at;
+        try {
+            this.at = dateFormatter.parse(at);
+        } catch (ParseException e) {
+            throw new DukeWrongDateFormatException();
+        }
     }
 
     public Event(String task, String done, String at) {
@@ -30,6 +39,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + dateFormatter.format(at) + ")";
     }
 }

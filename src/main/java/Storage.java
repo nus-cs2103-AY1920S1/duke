@@ -2,9 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Storage {
@@ -16,14 +15,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> loadSavedList() {
-        try {
-            File file = new File(filePath);
-            file.createNewFile();
-            this.savedList = Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    ArrayList<Task> loadSavedList() throws IOException {
+        File file = new File(filePath);
+        file.createNewFile();
+        this.savedList = Files.readAllLines(file.toPath());
         for (String line : savedList) {
             String[] lineElements = line.split(" \\| ");
             String lineType = lineElements[0];
@@ -35,8 +30,9 @@ public class Storage {
                 returnTaskList.add(currentTask);
             } else if (lineType.equals("D") || (lineType.equals("E"))) {
                 String[] taskTimeParsed = lineElements[3].split("[ /]");
-                Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
-                        Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
+                LocalDateTime taskTime = LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]),
+                        Integer.parseInt(taskTimeParsed[1]), Integer.parseInt(taskTimeParsed[0]),
+                        Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
                         Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
                 if (lineType.equals("D")) {
                     Task currentTask = new DeadlineTask(lineElements[2], taskTime);
@@ -56,15 +52,11 @@ public class Storage {
         return returnTaskList;
     }
 
-    void writeSavedList(ArrayList<Task> workingTaskList) {
-        try {
-            FileWriter fileWriter = new FileWriter(this.filePath);
-            for (Task task : workingTaskList) {
-                fileWriter.write(task.formattedString());
-            }
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+    void writeSavedList(ArrayList<Task> workingTaskList) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath);
+        for (Task task : workingTaskList) {
+            fileWriter.write(task.formattedString());
         }
+        fileWriter.close();
     }
 }

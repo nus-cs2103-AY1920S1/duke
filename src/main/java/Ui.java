@@ -1,5 +1,5 @@
 public class Ui {
-    void showError(DukeException e) {
+    void showError(Exception e) {
         System.out.println(e.getMessage());
     }
 

@@ -1,8 +1,13 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class TaskList {
     private ArrayList<Task> taskList;
+
+    public TaskList() {
+        this.taskList = new ArrayList<>(100);
+    }
+
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
@@ -25,7 +30,7 @@ public class TaskList {
         }
     }
 
-    void markElementAsDone(int index) throws DukeException {
+    void markTask(int index) throws DukeException {
         if (taskList.size() == 0) { // if 'list' is empty, 'done' cannot be called
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
         }
@@ -39,7 +44,7 @@ public class TaskList {
         }
     }
 
-    void deleteElement(int index) throws DukeException {
+    void deleteTask(int index) throws DukeException {
         if (taskList.size() == 0) { // if 'list' is empty, 'delete' cannot be called
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
         }
@@ -54,21 +59,23 @@ public class TaskList {
         }
     }
 
+    void addTask(Task currentTask) {
+        taskList.add(currentTask);
+        System.out.println("Got it. I've added this task:\n  " + currentTask);
+    }
+
     void createToDo(String taskContent) {
         Task currentTask = new ToDoTask((taskContent));
-        taskList.add(currentTask);
-        System.out.println("Got it. I've added this task:\n  " + currentTask);
+        this.addTask(currentTask);
     }
 
-    void createDeadline(String taskContent, Calendar taskTime) {
+    void createDeadline(String taskContent, LocalDateTime taskTime) {
         Task currentTask = new DeadlineTask(taskContent, taskTime);
-        taskList.add(currentTask);
-        System.out.println("Got it. I've added this task:\n  " + currentTask);
+        this.addTask(currentTask);
     }
 
-    void createEvent(String taskContent, Calendar taskTime) {
+    void createEvent(String taskContent, LocalDateTime taskTime) {
         Task currentTask = new EventTask(taskContent, taskTime);
-        taskList.add(currentTask);
-        System.out.println("Got it. I've added this task:\n  " + currentTask);
+        this.addTask(currentTask);
     }
 }

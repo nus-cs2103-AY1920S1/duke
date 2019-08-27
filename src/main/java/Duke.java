@@ -49,15 +49,16 @@ public class Duke {
 
         do {
             String input = sc.nextLine();
-            // if first word of input is not "bye", end loop and program
-            // Level 5 will use exceptions to handle shutdown case from
-            // inside the parseInstruction function using a
-            // ShutDownException
-            if (input.split(" ", 2)[0].equals("bye")) {
-                isNotShutdown = false;
-            } else {
-                this.parseInstruction(input);
-            }
+                try {
+                    this.parseInstruction(input);
+                } catch (DukeShutDownException e) {
+                    isNotShutdown = false; // sets flag to end loop
+                } catch (NumberFormatException e) {
+                    this.formattedPrintln("You need to provide me " +
+                            "with a valid task index!");
+                } catch (DukeException e) {
+                    this.formattedPrintln(e.getMessage());
+                }
         } while (isNotShutdown);
 
         this.greetGoodbye(); // greet user before exiting
@@ -69,7 +70,8 @@ public class Duke {
 
       @param input string input by the user.
      */
-    private void parseInstruction(String input) {
+    private void parseInstruction(String input) throws DukeException,
+            NumberFormatException {
         String[] parsedStr = input.split(" ", 2);
         String command = parsedStr[0];
         switch (command) {
@@ -77,20 +79,31 @@ public class Duke {
                 this.printList();
                 break;
             case "done":
+                if (parsedStr.length < 2) {
+                    throw new DukeException("I'm not psychic! You need"
+                            + " to tell me which task you completed!");
+                }
                 String secondWord = input.split(" ")[1];
                 int taskIndex = Integer.parseInt(secondWord);
                 this.markTaskAsDone(taskIndex);
                 break;
+            case "bye":
+                throw new DukeShutDownException("User has requested shutdown.");
             case "todo":
             case "event":
             case "deadline":
                 String taskType = command;
+                if (parsedStr.length < 2) {
+                    throw new DukeException("☹ OOPS!!! The description of a "
+                            + taskType
+                            + " cannot be empty.");
+                }
                 String description = parsedStr[1];
                 this.addToList(taskType, description);
                 break;
             default:
-                this.formattedPrintln("Command not recognized! I will be programmed "
-                        + "to handle\nthis exception in Level 5 soon though (:");
+                throw new DukeException("☹ OOPS!!! I'm sorry, "
+                        + "but I don't know what that means :-(");
         }
     }
 
@@ -99,10 +112,9 @@ public class Duke {
      * completed.
      * @param taskIndex index of task. uses 1-indexing as per list display.
      */
-    private void markTaskAsDone(int taskIndex) {
+    private void markTaskAsDone(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex > this.list.size()) {
-            this.formattedPrintln("Hey! There's no such task!\n");
-            return;
+            throw new DukeException("Hey! There's no such task!");
         }
         taskIndex--; // convert to zero-indexing
         this.list.get(taskIndex).markAsDone();
@@ -111,10 +123,14 @@ public class Duke {
                 + this.list.get(taskIndex));
     }
 
-    // Creates
-    // @param eventType the type of task to be created
-    // @param parameters the parameters for describing the task
-    private void addToList(String taskType, String parameters) {
+    /*
+     Creates a task of the specified type and adds
+     it to the current list.
+
+     @param eventType the type of task to be created
+     @param parameters the parameters for describing the task
+    */
+    private void addToList(String taskType, String parameters) throws DukeException {
         Task task;
         String description;
         String[] splitStr;
@@ -126,12 +142,20 @@ public class Duke {
                 break;
             case "event":
                 splitStr = parameters.split(" /at ", 2);
+                if (splitStr.length < 2) {
+                    throw new DukeException("You need to specify a time"
+                            + " to create an event task!");
+                }
                 description = splitStr[0];
                 String at = splitStr[1];
                 task = new Event(description, at);
                 break;
             case "deadline":
                 splitStr = parameters.split(" /by ", 2);
+                if (splitStr.length < 2) {
+                    throw new DukeException("You need to specify a time"
+                            + " to create an deadline task!");
+                }
                 description = splitStr[0];
                 String by = splitStr[1];
                 task = new Deadline(description, by);

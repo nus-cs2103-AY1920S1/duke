@@ -62,7 +62,7 @@ public class AddCommandTest {
             assertEquals(wrongExpected, outContent.toString());
             fail();
         } catch (DukeException de) {
-            String correctExpected = separationLine + "\n     \u2639 OOPS!!! The description of a todo cannot be empty."
+            String correctExpected = separationLine + "\n     :( OOPS!!! The description of a todo cannot be empty."
                     + "\n" + separationLine + "\n";
             assertEquals(correctExpected, de.getMessage());
         }
@@ -80,7 +80,7 @@ public class AddCommandTest {
             assertEquals(wrongExpected, outContent.toString());
             fail();
         } catch (DukeException de) {
-            String correctExpected = separationLine + "\n     \u2639 OOPS!!! For deadline please use the format\n"
+            String correctExpected = separationLine + "\n     :( OOPS!!! For deadline please use the format\n"
                     + "               \"deadline description /by end time\"\n" + separationLine + "\n";
             assertEquals(correctExpected, de.getMessage());
         }
@@ -99,7 +99,7 @@ public class AddCommandTest {
             assertEquals(wrongExpected, outContent.toString());
             fail();
         } catch (DukeException de) {
-            String correctExpected = separationLine + "\n     \u2639 OOPS!!! For event please use the format\n"
+            String correctExpected = separationLine + "\n     :( OOPS!!! For event please use the format\n"
                     + "               \"event description /at period\"\n" + separationLine + "\n";
             assertEquals(correctExpected, de.getMessage());
         }

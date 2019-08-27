@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import java.text.ParseException;
@@ -13,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Processes user input into Commands.
+ */
 public class Parser {
     public static String filePath;
     public static ArrayList<SimpleDateFormat> dateFormats = new ArrayList<>() {
@@ -48,7 +52,14 @@ public class Parser {
         }
     };
 
-    public static Command parse(String userInput) {
+    /**
+     * Converts user input into their relevant Command subclasses for processing.
+     *
+     * @param userInput Input from the user.
+     * @return Command object to process input.
+     * @throws DukeException If first word of input is not "list", "done", "todo", "deadline", "event", "delete", "bye".
+     */
+    public static Command parse(String userInput) throws DukeException {
         if ("bye".equals(userInput)) {
             return new ExitCommand(filePath, null);
         }
@@ -66,6 +77,8 @@ public class Parser {
             return new AddCommand("event", userInput, inputSplit, filePath);
         case "delete":
             return new DeleteCommand(filePath, inputSplit);
+        case "find":
+            return new FindCommand(filePath, null, userInput.replaceFirst("find ", ""));
         default:
             // Exception if invalid instruction
             Ui ui = new Ui();
@@ -75,6 +88,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts String of certain formats to Date object.
+     *
+     * @param dateString String to be converted to Date.
+     * @param dateFormats List of valid SimpleDateFormat objects that correspond to convertible String formats.
+     * @return Date converted from String.
+     */
     public static Date convertToDate(String dateString, ArrayList<SimpleDateFormat> dateFormats) {
         Date date = null;
         for (SimpleDateFormat sdf : dateFormats) {

@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task with corresponding description and completion status (isDone).
+ */
 public class Task {
     protected String type;
     protected String description;

@@ -1,8 +1,29 @@
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Ui {
+    private Scanner sc;
     private static final String horizontalLine =
             "    ____________________________________________________________";
+
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
+
+    public boolean hasInput() {
+        return sc.hasNext();
+    }
+
+    public String readInput() {
+        return sc.nextLine();
+    }
+
+    public void printError(DukeException e) {
+        System.out.println(horizontalLine);
+        System.out.println("     \u2639 OOPS!!! " + e.getMessage());
+        System.out.println(horizontalLine);
+        System.out.println();
+    }
 
     public void printGreeting() {
         // Greet

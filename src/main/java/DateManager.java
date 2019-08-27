@@ -9,7 +9,7 @@ public class DateManager {
         try {
             return formatter.parse(dateString);
         } catch (ParseException e) {
-            throw new DukeException("Please specify the date in the correct format:\n     DD/MM/YY HHMM");
+            throw new DukeException("Please specify the date in the correct format:\n     DD/MM/YYYY HHMM");
         }
     }
 

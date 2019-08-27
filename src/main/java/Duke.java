@@ -1,38 +1,41 @@
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+
 import java.util.ArrayList;
 
 public class Duke {
-    private static Scanner sc;
-    private static Storage storage;
-    private static Ui ui;
-    private static ArrayList<Task> tasks;
-    public static String horizontalLine =
-            "    ____________________________________________________________";
+    private Ui ui;
+    private Storage storage;
+    private ArrayList<Task> tasks;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
 
     public static void main(String[] args) {
-        storage = new Storage("data/duke.txt");
-        ui = new Ui();
-        sc = new Scanner(System.in);
+        new Duke("data/duke.txt").run();
+    }
 
+    public void run() {
         try {
             tasks = storage.getTasks();
         } catch (FileNotFoundException e) {
             tasks = new ArrayList<>();
         } catch (DukeException e) {
-            System.err.println(e);
+            ui.printError(e);
+            tasks = new ArrayList<>();
         }
 
         ui.printGreeting();
 
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
+        while (ui.hasInput()) {
+            String input = ui.readInput();
 
             if (input.equals("bye")) {
                 try {
                     storage.saveTasks(tasks);
                 } catch (DukeException e) {
-                    System.err.println(e);
+                    ui.printError(e);
                 }
 
                 ui.printExit();
@@ -93,12 +96,12 @@ public class Duke {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                System.err.println(e);
+                ui.printError(e);
             }
         }
     }
 
-    private static void handleDone(int taskIndex) throws DukeException {
+    private void handleDone(int taskIndex) throws DukeException {
         if (taskIndex >= tasks.size()) {
             throw new DukeException("Task not found!");
         }
@@ -108,7 +111,7 @@ public class Duke {
         ui.printMarkTaskAsDone(task);
     }
 
-    private static void handleDelete(int taskIndex) throws DukeException {
+    private void handleDelete(int taskIndex) throws DukeException {
         if (taskIndex >= tasks.size()) {
             throw new DukeException("Task not found!");
         }
@@ -118,7 +121,7 @@ public class Duke {
     }
 
 
-    private static void handleAddTask(Task task) {
+    private void handleAddTask(Task task) {
         tasks.add(task);
 
         ui.printAddTask(task, tasks.size());

@@ -1,16 +1,6 @@
 package slave.elements;
 
-import slave.command.Command;
-import slave.command.AddDeadlineCommand;
-import slave.command.AddEventCommand;
-import slave.command.AddToDoCommand;
-import slave.command.ClearCommand;
-import slave.command.DeleteCommand;
-import slave.command.DoneCommand;
-import slave.command.ExitCommand;
-import slave.command.HelpCommand;
-import slave.command.ListCommand;
-import slave.command.NullCommand;
+import slave.command.*;
 
 import slave.exception.DukeException;
 import slave.exception.MissingDateException;
@@ -40,6 +30,8 @@ public class Parser {
             return new HelpCommand();
         case "clear":
             return new ClearCommand();
+        case "find":
+            return new FindCommand(fullCommand.substring(5));
         case "done":
             checkValidity("done", fullCommand, tokens);
             return new DoneCommand(Integer.parseInt(tokens[1]));

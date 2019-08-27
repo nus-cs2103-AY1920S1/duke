@@ -5,7 +5,7 @@ public class ToDoCommand extends Command {
         this.td = td;
     }
 
-    public void execute(TaskList tasks, UI ui) {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
         String taskMessage = tasks.addToDo(td);
         ui.showAddedMessage(taskMessage, tasks.getTasksSize());
     }

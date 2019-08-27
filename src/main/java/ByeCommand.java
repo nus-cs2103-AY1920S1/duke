@@ -1,6 +1,6 @@
 public class ByeCommand extends Command {
 
-    public void execute(TaskList tasks, UI ui) {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.showByeMessage();
     }
 

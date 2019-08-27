@@ -7,7 +7,7 @@ public class DeadlineCommand extends Command {
         this.dl = dl;
     }
 
-    public void execute(TaskList tasks, UI ui) {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
         String taskMessage = tasks.addDeadline(dl);
         ui.showAddedMessage(taskMessage, tasks.getTasksSize());
     }

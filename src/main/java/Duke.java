@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Storage.
- * Remove line breaks from duke.txt. Done
+ * Saving function
  * Add constructor for duke for file path.
  * Initialise list with file path or new array list.
  * Abstract out as storage.load and constructor for TaskList. --> Requires TaskList to be done...
@@ -17,10 +17,10 @@ import java.util.Scanner;
  * Sort directory out...
  */
 
-// TODO: update run method
 public class Duke {
     private TaskList tasks;
     private UI ui;
+    private Storage storage;
 
     /**
      * Driver method.
@@ -31,13 +31,14 @@ public class Duke {
         boolean exit = false;
         tasks = new TaskList();
         ui = new UI();
+        storage = new Storage();
 
         ui.showWelcomeMessage();
 
         while (!exit) {
             try {
                 command = Parser.parse(sc.nextLine());
-                command.execute(tasks, ui);
+                command.execute(tasks, ui, storage);
                 exit = command.isExit();
             } catch (Exception e) {
                 ui.showMessage(e.getMessage());

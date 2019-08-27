@@ -2,9 +2,9 @@ import java.io.IOException;
 
 public class SaveCommand extends Command {
 
-    public void execute(TaskList tasks, UI ui) {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
-            tasks.save("./Data/duke.txt");
+            storage.save("./Data/duke.txt", tasks.getTasks());
         } catch (IOException e) {
             ui.showMessage(e.getMessage());
         }

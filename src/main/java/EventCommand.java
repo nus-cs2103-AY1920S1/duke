@@ -7,7 +7,7 @@ public class EventCommand extends Command {
         this.e = e;
     }
 
-    public void execute(TaskList tasks, UI ui) {
+    public void execute(TaskList tasks, UI ui, Storage storage) {
         String taskMessage = tasks.addEvent(e);
         ui.showAddedMessage(taskMessage, tasks.getTasksSize());
     }

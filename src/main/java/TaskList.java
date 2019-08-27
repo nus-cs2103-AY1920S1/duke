@@ -109,7 +109,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    private String getTasks() {
+    public String getTasks() {
         StringJoiner result = new StringJoiner("\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);

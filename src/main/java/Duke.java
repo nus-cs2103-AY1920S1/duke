@@ -1,14 +1,12 @@
-import java.util.ArrayList;
-
 public class Duke {
-    protected static ArrayList<Task> listOfTasks;
     private static Storage storage;
+    private static TaskList tasks;
     private static Ui ui;
 
     public static void main(String[] args) {
         ui = Ui.getInstance();
         storage = new Storage("data/duke.txt");
-        listOfTasks = storage.loadTasks();
+        tasks = storage.loadTasks();
 
         ui.printLine("Hello! I'm Duke\nWhat can I do for you?");
 
@@ -18,7 +16,7 @@ public class Duke {
 
             try {
                 Command c = Parser.parse(input);
-                c.execute(listOfTasks, ui, storage);
+                c.execute(tasks, ui, storage);
                 isRunning = !c.isExit();
             } catch (DukeException e) {
                 ui.printLine(e.getMessage());

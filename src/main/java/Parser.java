@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 class Parser {
     public static Command parse(String input) {
         String[] inputs = input.trim().split(" ", 2);
@@ -8,7 +6,7 @@ class Parser {
         switch (command) {
         case "todo":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         Task task = new Todo(inputs[1]);
                         tasks.add(task);
@@ -21,7 +19,7 @@ class Parser {
             };
         case "deadline":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -38,7 +36,7 @@ class Parser {
             };
         case "event":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -55,7 +53,7 @@ class Parser {
             };
         case "list":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     if (tasks.isEmpty()) {
                         throw new DukeException("Oops! You have no tasks yet.");
                     }
@@ -68,7 +66,7 @@ class Parser {
             };
         case "done":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskDone = tasks.get(taskNumber - 1);
@@ -84,7 +82,7 @@ class Parser {
             };
         case "delete":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskRemoved = tasks.remove(taskNumber - 1);
@@ -102,7 +100,7 @@ class Parser {
             };
         case "bye":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
+                public void execute(TaskList tasks, Ui ui, Storage storage) {
                 }
 
                 public boolean isExit() {
@@ -111,14 +109,14 @@ class Parser {
             };
         default:
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
                     throw new DukeException("Oops! You entered an invalid command.");
                 }
             };
         }
     }
 
-    private static void echoTaskAdded(Task task, ArrayList<Task> tasks, Ui ui) {
+    private static void echoTaskAdded(Task task, TaskList tasks, Ui ui) {
         ui.printLine("Got it. I've added this task:");
         ui.printLine(String.format("%s\n", task));
         ui.printLine(String.format("Now you have %d tasks in the list.\n", tasks.size()));

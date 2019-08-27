@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class Storage {
@@ -12,7 +11,7 @@ class Storage {
         this.file = new File(pathname);
     }
 
-    protected void saveTasks(ArrayList<Task> tasks) {
+    protected void saveTasks(TaskList tasks) {
         try {
             if (!file.exists()) {
                 File directory = new File(file.getParent());
@@ -45,8 +44,8 @@ class Storage {
 
     }
 
-    protected ArrayList<Task> loadTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    protected TaskList loadTasks() {
+        TaskList tasks = new TaskList();
         try {
             Scanner sc = new Scanner(file);
 

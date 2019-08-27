@@ -4,17 +4,18 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
+        Ui ui = new Ui();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Storage storage = new Storage("CurrentTaskList.txt");
         TaskList taskList = new TaskList(storage.loadSavedList());
 
+        ui.printHello();
         while (true) {
             try {
                 String input = scanner.nextLine();
                 String instruction = input.split(" ", 2)[0];
                 if (instruction.equals("bye")) { // First, check if 'bye' is called
-                    System.out.println("Bye. Hope to see you again soon!");
+                    ui.printBye();
                     break;
                 } else if (instruction.equals("list")) { // Then, check if 'list' is called
                     taskList.printList();
@@ -59,12 +60,12 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) { // if the task description is empty
                         throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
                     }
-                    System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+                    ui.printSize(taskList.getSize());
                 } else { // if an invalid instruction is entered
                     throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e);
             }
         }
     }

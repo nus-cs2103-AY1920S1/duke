@@ -15,54 +15,42 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    void printList() {
-        try {
-            if (taskList.size() == 0) { // if 'list' is called with no tasks currently stored
-                throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-            }
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + ". " + taskList.get(i));
-            }
-        } catch (EmptyTaskListException e) {
-            System.out.println(e.getMessage());
+    void printList() throws EmptyTaskListException {
+        if (taskList.size() == 0) { // if 'list' is called with no tasks currently stored
+            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
+        }
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println((i + 1) + ". " + taskList.get(i));
         }
     }
 
-    void markElementAsDone(int index) {
+    void markElementAsDone(int index) throws DukeException {
+        if (taskList.size() == 0) { // if 'list' is empty, 'done' cannot be called
+            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
+        }
         try {
-            if (taskList.size() == 0) { // if 'list' is empty, 'done' cannot be called
-                throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-            }
-            try {
-                taskList.get(index - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
-            } catch (NumberFormatException e) { // if not a number is entered after 'done'
-                throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
-            } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'done'
-                throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            taskList.get(index - 1).markAsDone();
+            System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
+        } catch (NumberFormatException e) { // if not a number is entered after 'done'
+            throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
+        } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'done'
+            throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
         }
     }
 
-    void deleteElement(int index) {
+    void deleteElement(int index) throws DukeException {
+        if (taskList.size() == 0) { // if 'list' is empty, 'delete' cannot be called
+            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
+        }
         try {
-            if (taskList.size() == 0) { // if 'list' is empty, 'delete' cannot be called
-                throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-            }
-            try {
-                Task currentTask = taskList.remove(index - 1);
-                System.out.println("Noted. I've removed this task:\n  " + currentTask);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-            } catch (NumberFormatException e) { // if not a number is entered after 'delete'
-                throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
-            } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'delete'
-                throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            Task currentTask = taskList.remove(index - 1);
+            System.out.println("Noted. I've removed this task:\n  " + currentTask);
+            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        } catch (NumberFormatException e) { // if not a number is entered after 'delete'
+            throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
+        } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'delete'
+            throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
         }
     }
 

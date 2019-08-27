@@ -69,6 +69,8 @@ public class Ui {
             return input.nextLine();
         } else {
             throw new UnrecognizedException("☹ OOPS!!! no input.");
+            //System.exit(0);
+            //return "";
         }
     }
 }

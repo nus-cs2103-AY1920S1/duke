@@ -117,7 +117,7 @@ public class Parser {
         }
     }
 
-    private static String formatTime(String input) {
+    static String formatTime(String input) {
         String date_time[] = input.split(" ");
         String date[] = date_time[0].split("/");
         int day = Integer.parseInt(date[0]);

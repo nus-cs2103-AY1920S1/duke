@@ -1,4 +1,5 @@
-import dukepkg.*;
+package dukepkg;
+
 import dukepkg.commands.Command;
 import dukepkg.exceptions.DukeException;
 

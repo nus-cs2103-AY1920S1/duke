@@ -1,9 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     private static Scanner sc;
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks;
     public static String horizontalLine =
             "    ____________________________________________________________";
 
@@ -11,12 +12,24 @@ public class Duke {
         sc = new Scanner(System.in);
         String input;
 
+        try {
+            tasks = Storage.getTasks();
+        } catch (FileNotFoundException e) {
+            tasks = new ArrayList<>();
+        }
+
         printGreeting();
 
         while (sc.hasNext()) {
             input = sc.nextLine();
 
             if (input.equals("bye")) {
+                try {
+                    Storage.saveTasks(tasks);
+                } catch (DukeException e) {
+                    System.err.println(e);
+                }
+
                 printExit();
                 break;
             }

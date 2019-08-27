@@ -29,20 +29,21 @@ public class Task {
         // To-Do
         if (line.charAt(0) == 'T') {
             Task task = new ToDo(parameters[2].trim());
-            if (parameters[1].trim().equals("1"))
+            if (parameters[1].trim().equals("1")) {
                 task.markAsDone();
+            }
             return task;
-        } // Deadline
-        else if (line.charAt(0) == 'D') {
+        } else if (line.charAt(0) == 'D') { // Deadline
             Task task = new Deadline(parameters[2].trim(), parameters[3].trim());
-            if (parameters[1].trim().equals("1"))
+            if (parameters[1].trim().equals("1")) {
                 task.markAsDone();
+            }
             return task;
-        } // Event
-        else if (line.charAt(0) == 'E') {
+        } else if (line.charAt(0) == 'E') { // Event
             Task task = new Event(parameters[2].trim(), parameters[3].trim());
-            if (parameters[1].trim().equals("1"))
+            if (parameters[1].trim().equals("1")) {
                 task.markAsDone();
+            }
             return task;
         }
         return null;

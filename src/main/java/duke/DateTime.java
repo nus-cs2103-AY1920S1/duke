@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 public class DateTime {
-    private static String[] suffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th",
-            "th", "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th",
-            "th", "th", "st" };
+    private static String[] suffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th",
+        "th", "th", "st" };
 
     public static String parse(String input) {
         Date dateTime = null;
@@ -19,8 +19,8 @@ public class DateTime {
         } catch (ParseException e) {
             return input;
         }
-        SimpleDateFormat DayOfMonth = new SimpleDateFormat("d");
-        int day = Integer.parseInt(DayOfMonth.format(dateTime));
+        SimpleDateFormat dayOfMonth = new SimpleDateFormat("d");
+        int day = Integer.parseInt(dayOfMonth.format(dateTime));
         String dayWithSuffix = day + suffixes[day];
         output = outputFormat.format(dateTime);
         return (dayWithSuffix + " of " + output);

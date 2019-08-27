@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
+
 public class EventCommand extends AddCommand {
     public EventCommand(String desc) {
         super(desc);

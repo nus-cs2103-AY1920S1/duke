@@ -1,6 +1,10 @@
+package duke;
+
+import duke.command.*;
+
 public class Parser {
 
-    static Command parse(String input) throws DukeException {
+    public static Command parse(String input) throws DukeException {
         String[] strArr = input.split(" ");
         String command = strArr[0];
         String next = String.join(" ", strArr).replace(command, "");

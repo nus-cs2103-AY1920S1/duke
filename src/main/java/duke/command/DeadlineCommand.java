@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+
 public class DeadlineCommand extends AddCommand {
     public DeadlineCommand(String desc) {
         super(desc);

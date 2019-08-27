@@ -1,4 +1,4 @@
 T | 0 | sleep
 D | 0 | 2103T ip| 28 of August 2019, 11:59 PM
 E | 1 | project meeting| Friday 2101 classroom
-T | 0 | run
+T | 1 | run

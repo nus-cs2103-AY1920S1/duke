@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 import java.util.InputMismatchException;
 
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
     private String index;
 
-    public DeleteCommand(String index) {
+    public DoneCommand(String index) {
         this.index = index.trim();
     }
 
@@ -14,18 +21,18 @@ public class DeleteCommand extends Command {
                 throw new InputMismatchException();
             }
 
-            int del = Integer.parseInt(index);
-            if (taskList.getNumTasks() > del) {
+            int done = Integer.parseInt(index);
+            if (taskList.getNumTasks() > done) {
                 throw new IndexOutOfBoundsException();
             }
 
-            ui.showDeletedTask(taskList.deleteTask(del - 1), taskList.getNumTasks());
-        } catch (InputMismatchException e) {
-            throw new DukeException("☹ OOPS!!! Please enter a single number.");
+            ui.showDoneTask(taskList.doneTask(done - 1));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The index of the task to delete is not within the task list size.");
+            throw new DukeException("☹ OOPS!!! The index is not within the task list size.");
         } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Please enter a valid number.");
+        } catch (InputMismatchException e) {
+            throw new DukeException("☹ OOPS!!! Please enter a single number.");
         }
     }
 }

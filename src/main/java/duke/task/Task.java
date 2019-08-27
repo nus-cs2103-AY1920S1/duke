@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -8,7 +10,7 @@ public abstract class Task {
         this.description = description.trim();
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 

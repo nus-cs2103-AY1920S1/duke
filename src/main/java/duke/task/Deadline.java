@@ -1,6 +1,10 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Deadline extends DatedTask {
 
-    static Deadline of(String description, String date) throws DukeException {
+    public static Deadline of(String description, String date) throws DukeException {
         if (description.length() == 0 || date.length() == 0) {
             throw new DukeException("☹ OOPS!!! The description or date/time of a deadline cannot be empty.");
         } else {

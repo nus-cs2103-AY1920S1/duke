@@ -167,7 +167,7 @@ public class Duke {
         tasks.add(d);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                "       [D][ ] " + d + " (by: " + date + ")\n" +
+                "       [D][ ] " + d + " (by: " + dt + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");
         appendToFile("D | 0 | " + taskName + " | " + date + '\n');
@@ -182,7 +182,7 @@ public class Duke {
         tasks.add(e);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                "       [E][ ] " + e + " (at: " + date + ")\n" +
+                "       [E][ ] " + e + " (at: " + dt + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");
         appendToFile("E | 0 | " + taskName + " | " + date + '\n');

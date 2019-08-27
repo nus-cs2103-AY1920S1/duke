@@ -1,8 +1,11 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 public class Duke {
     private ArrayList<Task> taskList = new ArrayList<>();
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private void run(Scanner sc) {
         printWelcome();
@@ -36,7 +39,7 @@ public class Duke {
                 default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | ParseException e) {
                 System.out.println(e);
             }
         }
@@ -108,7 +111,7 @@ public class Duke {
         }
     }
 
-    private void addDeadline(String input) throws DukeException {
+    private void addDeadline(String input) throws DukeException, ParseException {
         if (input.split(" ", 2).length > 1) {
             String[] desc = input.split(" ", 2)[1].split(" /by ");
             if (desc.length > 2) {
@@ -116,7 +119,7 @@ public class Duke {
             } else if (desc.length < 2) {
                 throw new DukeException("The description of the deadline is insufficient.");
             }
-            Deadline deadline = new Deadline(desc[0], desc[1]);
+            Deadline deadline = new Deadline(desc[0], formatter.parse(desc[1]));
             taskList.add(deadline);
             printAddedTask();
         } else {
@@ -124,7 +127,7 @@ public class Duke {
         }
     }
 
-    private void addEvent(String input) throws DukeException {
+    private void addEvent(String input) throws DukeException, ParseException {
         if (input.split(" ", 2).length > 1) {
             String[] desc = input.split(" ", 2)[1].split(" /at ");
             if (desc.length > 2) {
@@ -132,7 +135,7 @@ public class Duke {
             } else if (desc.length < 2) {
                 throw new DukeException("The description of the deadline is insufficient.");
             }
-            Event event = new Event(desc[0], desc[1]);
+            Event event = new Event(desc[0], formatter.parse(desc[1]));
             taskList.add(event);
             printAddedTask();
         } else {

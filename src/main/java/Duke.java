@@ -4,9 +4,17 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
         tasks = new TaskList();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+            ui.list(tasks.getTasks());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public void run() {
@@ -25,11 +33,16 @@ public class Duke {
             //    ui.showLine();
             //}
         }
+        try {
+            storage.save();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
         return;
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("C:/Users/Low Cheng Yi/Desktop/CS2103/duke/src/data/tasks.txt").run();
     }
 
 }

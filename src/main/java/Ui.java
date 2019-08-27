@@ -52,4 +52,8 @@ public class Ui {
         System.out.println("  " + task.toString());
         System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
     }
+
+    public void showLoadingError() {
+        System.out.println("There is a problem loading the file. :(");
+    }
 }

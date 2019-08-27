@@ -71,7 +71,7 @@ public class Duke {
                 return;
             }
 
-        } else if (command.equals("done")) {
+        } else if (command.equals("done") || command.equals("delete")) {
             int taskNumber;
 
             if (userInput.hasNextInt()) {
@@ -84,7 +84,16 @@ public class Duke {
                 } else if (taskNumber > tasks.size()) {
                     errorMessage = String.format("%sYou don't have that many tasks!", makeSpace(5));
                 } else {
-                    markTaskAsDone(taskNumber - 1);
+                    switch (command) {
+                    case "done":
+                        markTaskAsDone(taskNumber - 1);
+                        break;
+                    case "delete":
+                        delete(taskNumber - 1);
+                        break;
+                    default:
+                        break;
+                    }
                 }
 
             } else {
@@ -225,4 +234,12 @@ public class Duke {
         System.out.printf("%s%s\n\n", makeSpace(7), currentEvent);
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
+
+    private void delete(int taskNumber) {
+        Task removedTask = tasks.remove(taskNumber);
+
+        System.out.println(makeSpace(5) + "Noted. I've removed this task:\n"
+                + makeSpace(7) + removedTask + "\n\n"
+                + makeSpace(5) + String.format("Now you have %d task(s) in your list.", tasks.size()));
+        }
 }

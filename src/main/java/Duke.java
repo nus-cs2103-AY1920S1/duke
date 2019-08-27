@@ -17,7 +17,7 @@ public class Duke {
 
     /**
      * Construct Duke with specified file path for storage.
-     * @param filePath
+     * @param filePath filepath in local pc.
      */
     public Duke(String filePath) {
         ui = new Ui();

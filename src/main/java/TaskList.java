@@ -27,7 +27,8 @@ public class TaskList implements Serializable {
         }
 
         if(realIndex >= tasks.size()) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
+            throw new DukeException(DukeTextFormatter.makeFormattedText(
+                String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
         }
 
         Task deletedTask = tasks.get(realIndex);
@@ -55,7 +56,8 @@ public class TaskList implements Serializable {
         }
 
         if(realIndex >= tasks.size()) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
+            throw new DukeException(DukeTextFormatter.makeFormattedText(
+                String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
         }
 
         tasks.set(realIndex, tasks.get(realIndex).getTaskMarkedAsDone());

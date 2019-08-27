@@ -55,16 +55,17 @@ public class Storage {
     }
 
     //Writes a task to the file each time the task list changes
-    public static void writeTaskToFile(String fileName) {
+    public void writeTaskToFile(TaskList taskList) {
         try {
-            FileWriter taskFile = new FileWriter(fileName);
-            for (Task taskToWrite : taskList) {
+            FileWriter taskFile = new FileWriter(filePath);
+            ArrayList<Task> taskArrayList = taskList.getTaskList();
+            for (Task taskToWrite : taskArrayList) {
                 taskFile.write(taskToWrite.writeToFile() + "\n");
             }
 
             taskFile.close();
         } catch (IOException ex) {
-            System.out.println(fileName + " cannot be found!");
+            System.out.println(filePath + " cannot be found!");
         }
     }
 }

@@ -8,7 +8,7 @@ public class DateTime {
     private Integer hours;
     private Integer minutes;
     private String rawForm;
-    
+
     public DateTime(String date) {
         rawForm = date;
         String[] dateComponents = date.split(" ");

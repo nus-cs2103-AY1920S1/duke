@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.DateUtil;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -12,11 +16,25 @@ public class AddCommand extends Command {
     String optionName;
     String optionArgument;
 
+    /**
+     * Constructs a command to add a task.
+     *
+     * @param commandName the name of the command.
+     * @param argument the argument supplied to the command.
+     */
     public AddCommand(String commandName, String argument) {
         this.commandName = commandName;
         this.argument = argument;
     }
 
+    /**
+     * Constructs a command to add a task with an option.
+     *
+     * @param commandName the name of the command.
+     * @param argument the argument supplied to the command.
+     * @param optionName the name of the option supplied to the command.
+     * @param optionArgument the argument of the option supplied to the command.
+     */
     public AddCommand(String commandName, String argument, String optionName, String optionArgument) {
         this.commandName = commandName;
         this.argument = argument;
@@ -24,13 +42,22 @@ public class AddCommand extends Command {
         this.optionArgument = optionArgument;
     }
 
+    /**
+     * Executes an add command using the given task list, UI and file storage.
+     *
+     * @param tasks the task list supplied.
+     * @param ui the UI supplied.
+     * @param storage the file storage supplied.
+     * @throws DukeException if the command fails to execute.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task myTask;
         switch (this.commandName) {
         case "todo":
             myTask = new Todo(this.argument);
             tasks.addTask(myTask);
-            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask
+                    + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;
         case "deadline":
             if (!this.optionName.equals("by") || this.optionArgument.equals("")) {
@@ -38,7 +65,8 @@ public class AddCommand extends Command {
             }
             myTask = new Deadline(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
-            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask
+                    + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
             break;
         case "event":
             if (!this.optionName.equals("at") || this.optionArgument.equals("")) {
@@ -46,7 +74,10 @@ public class AddCommand extends Command {
             }
             myTask = new Event(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
-            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            ui.printMessage("Got it. I've added this duke.task: \n  " + myTask
+                    + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            break;
+        default:
             break;
         }
         storage.save(tasks);

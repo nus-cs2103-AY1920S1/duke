@@ -8,6 +8,12 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructs a task with the given description.
+     *
+     * @param description the description of the task.
+     * @throws DukeException if no description is supplied.
+     */
     public Task(String description) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of " + this.getTypeNameWithQuantifier() + " cannot be empty.");
@@ -16,22 +22,47 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Gets the status icon of the task, representing whether the task is done.
+     *
+     * @return the status icon of the task.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Gets the description of the task.
+     *
+     * @return the description of the task.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
     protected abstract String getTypeNameWithQuantifier();
 
+    /**
+     * Converts a task to its export format.
+     *
+     * @return the converted string in export format.
+     */
     public abstract String toExportFormat();
 
+    /**
+     * Constructs a task from imported raw string.
+     *
+     * @param text the raw string to be imported.
+     * @return the task constructed from the raw string.
+     * @throws DukeException if the raw string cannot be converted to a task.
+     */
     public static Task fromImportFormat(String text) throws DukeException {
         String[] stringArray = text.split(" \\| ");
         Task t;

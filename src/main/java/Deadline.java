@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
-    protected Date by;
+    private Date by;
 
-    public Deadline(String description, String by) throws ParseException {
+    Deadline(String description, String by) throws ParseException {
         super(description);
-        this.by = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse(by);
+        this.by = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + new SimpleDateFormat("yyyy/MM/dd hh:mm").format(by) + ")";
+        return "[D]" + super.toString() + " (by: " + new SimpleDateFormat("yyyy/MM/dd HH:mm").format(by) + ")";
     }
 }

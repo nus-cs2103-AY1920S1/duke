@@ -9,16 +9,24 @@ import duke.Tasks.Todo;
 import java.io.*;
 import java.util.ArrayList;
 
-/** This class is in charge of recording the current task list to the hard disk as well as reloading,
- * It saves the task list to the file dukedata/datafile.txt,
- * In this file, each line is a task.*/
-
+/**
+ * This class is in charge of reloading previous task list from the hard disk.
+ *  It reads the task list from the file from a given file name,
+ *  In this file, each line is a task.
+ *  Its only method is static, so there is no necessity to initialize one.
+ */
 public class Storage {
 
     private static BufferedWriter recorder;
     private static BufferedReader reader;
 
-    // Reload the previous task list.
+    /**
+     * Reload the task list as an array list of tasks from the target file.
+     * @param fileName The path of the file.
+     * @return an array list of tasks saved in the file.
+     * @throws IOException If loading process is wrong.
+     * @throws DukeException If the message read from the file is invalid, although not likely.
+     */
     public static ArrayList<Task> reload(String fileName) throws IOException, DukeException {
         reader = new BufferedReader(new FileReader(fileName));
         ArrayList<Task> toReturn = new ArrayList<>();

@@ -2,12 +2,26 @@ package duke.Tasks;
 
 import duke.DukeException;
 
+/**
+ * The Todo subclass of the Task superclass.
+ * @Extends duke.Tasks.Task
+ */
 public class Todo extends Task {
 
-    public Todo(String task_name) throws DukeException {
-        super(task_name);
+    /**
+     * Constructor of the class, same as its super class.
+     * @param taskName the task name.
+     * @throws DukeException If the task name is empty.
+     */
+    public Todo(String taskName) throws DukeException {
+        super(taskName);
     }
 
+    /**
+     * This method returns the information of the task FOR THE USER to see.
+     * Output of this method is usually handled by Ui class.
+     * @return The information of the task, in form [type][finished] task name. For example, [T][X] Eat dinner.
+     */
     @Override
     public String taskInfo() {
         String indicator;
@@ -16,6 +30,11 @@ public class Todo extends Task {
         return "[T]" + indicator + getName();
     }
 
+    /**
+     * This method returns the information of the task FOR SAVING INTO A FILE.
+     * Output of this method is usually handled by the task list.
+     * @return The information of the task, in form type|finished|task name. For example, T|0|Eat dinner.
+     */
     @Override
     public String recordInfo() {
         if (isFinished()) return "T|" + "1|" + getName();

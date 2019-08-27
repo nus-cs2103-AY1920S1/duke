@@ -2,8 +2,18 @@ package duke.DirectProcessor;
 
 import duke.Commands.*;
 
+/**
+ * This is a class that recognizes the user's input and calls the corresponding command.
+ * It only recognizes the first word of the user input and key words like "/at", "/by".
+ * Both its methods are static, so there is no necessity to initialize one.
+ */
 public class Parser {
 
+    /**
+     * It recognizes the user input and call the corresponding method.
+     * @param s The user's input as a string.
+     * @return The recognized command.
+     */
     public static Command parse(String s) {
         String[] splitInput = splitInput(s);
 

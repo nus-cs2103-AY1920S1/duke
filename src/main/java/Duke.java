@@ -31,7 +31,7 @@ public class Duke {
             } else if (sc.hasNext("todo")) {
                 try {
                     String dummy = sc.next();
-                    String description = sc.nextLine();
+                    String description = sc.nextLine().trim();
                     if (description.equals("")) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -47,7 +47,7 @@ public class Duke {
             } else if (sc.hasNext("deadline")) {
                 String dummy = sc.next();
                 String[] split = new String[2];
-                split = sc.nextLine().split("/by");
+                split = sc.nextLine().trim().split(" /by ");
                 Task curr = new Deadline(split[0], split[1]);
                 list.add(curr);
                 pos++;
@@ -57,7 +57,7 @@ public class Duke {
             } else if (sc.hasNext("event")) {
                 String dummy = sc.next();
                 String[] split = new String[2];
-                split = sc.nextLine().split("/at");
+                split = sc.nextLine().trim().split(" /at ");
                 Task curr = new Event(split[0], split[1]);
                 list.add(curr);
                 pos++;

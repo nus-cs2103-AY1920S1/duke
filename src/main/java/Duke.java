@@ -1,6 +1,11 @@
+import duke_interface.Tasklist;
 import textfiles.ReadFile;
 import textfiles.WriteFile;
 import textfiles.Storage;
+
+import duke_interface.DukeException;
+import duke_interface.Parser;
+import duke_interface.Ui;
 
 import duke_task.Task;
 import duke_task.Deadline;

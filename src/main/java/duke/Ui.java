@@ -1,10 +1,8 @@
 package duke;
 
 import duke.exception.DukeException;
-import duke.exception.DukeUnknownInputException;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.TaskType;
 
 import java.io.InputStream;
 import java.io.PrintStream;

@@ -12,8 +12,7 @@ public class Deadline extends Task {
         return time;
     }
 
-    @Override
-    public String toString() {
+    public String printTime() {
         String jargon = "";
         switch (time.get(Calendar.DAY_OF_MONTH) % 10) {
         case 1 : jargon = "st ";
@@ -61,10 +60,16 @@ public class Deadline extends Task {
         } else {
             hoursAndMinutes += "pm";
         }
-        return "[D]" + super.toString() + " (by: " + time.get(Calendar.DAY_OF_MONTH) + jargon
+        return time.get(Calendar.DAY_OF_MONTH) + jargon
                 + nameOfMonth + ", "
                 + time.get(Calendar.YEAR) + ". "
-                + hoursAndMinutes
-                + ")";
+                + hoursAndMinutes;
+    }
+
+    @Override
+    public String toString() {
+
+        return "[D]" + super.toString() + " (by: "
+                + this.printTime() +  ")";
     }
 }

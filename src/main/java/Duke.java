@@ -1,5 +1,9 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -24,6 +28,11 @@ public class Duke {
     private static final String ERROR_MISSING_DEADLINE = "The deadline must be present. e.g. task /by Monday";
     private static final String ERROR_MISSING_EVENT_TIME = "The event time must be present. e.g. meeting /at Monday";
     private static final String ERROR_TOO_MANY_ARGUMENTS = "There are too many arguments for this command.";
+    private static final String ERROR_WRONG_DATE_FORMAT  = "The date time provided is in the wrong format. " +
+            "Expected d/m/yyyy hh:mm.";
+
+    // Constants
+    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
 
     /**
      * Setups Duke.
@@ -138,7 +147,14 @@ public class Duke {
                 }
             }
             String[] desc = description.split(" /at ");
-            task = new Event(desc[0], desc[1]);
+            LocalDateTime time;
+            try {
+                System.out.println(desc[1]);
+                time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
+            } catch (DateTimeParseException ex) {
+                throw new DukeException(ERROR_WRONG_DATE_FORMAT);
+            }
+            task = new Event(desc[0], time);
             break;
         }
         case "deadline": {
@@ -154,7 +170,13 @@ public class Duke {
                 }
             }
             String[] desc = description.split(" /by ");
-            task = new Deadline(desc[0], desc[1]);
+            LocalDateTime time;
+            try {
+                time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
+            } catch (DateTimeParseException ex) {
+                throw new DukeException(ERROR_WRONG_DATE_FORMAT);
+            }
+            task = new Deadline(desc[0], time);
             break;
         }
         default:

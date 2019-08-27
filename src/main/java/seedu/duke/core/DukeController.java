@@ -33,7 +33,6 @@ public class DukeController {
             } catch(ParseException e) {
                 System.out.println(e);
             }
-            ui.printLine();
         }
     }
 

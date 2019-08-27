@@ -3,7 +3,15 @@ package seedu.duke.model;
 public class Task {
     protected String type;
     protected String description;
+    protected String errorMsg;
     protected boolean isDone;
+
+    public Task() {
+        this.type = "";
+        this.description = "";
+        this.isDone = false;
+        this.errorMsg = "";
+    }
 
     public Task(String description) {
         this.type = "";
@@ -24,7 +32,10 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isDone() {
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+    public boolean getIsDone() {
         return isDone;
     }
 
@@ -45,6 +56,14 @@ public class Task {
     public String toTextFileString() {
         int status = (isDone ? 1 : 0);
         return type + "," + status + "," + description;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
     @Override

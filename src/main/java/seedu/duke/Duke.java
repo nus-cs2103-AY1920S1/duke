@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke{
+    private static String DIRECTORY_PATH = "D:/project/CS2103T/duke/data";
+    private static String FILEPATH = DIRECTORY_PATH + "/duke.txt";
 
     private void run() throws DukeException, IOException, ParseException {
         Scanner sc = new Scanner(System.in);
@@ -23,10 +25,12 @@ public class Duke{
         Command command = new Command();
 
         File file = storage.initFile();
-        List<Task> list = storage.loadTask();
+        List<Task> list = storage.loadTask(FILEPATH);
 
         ui.showWelcome();
         controller.execute(ui, list, storage, command, sc);
+
+        ui.printLine();
         ui.printByeMessage();
         ui.printLine();
     }

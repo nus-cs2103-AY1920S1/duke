@@ -36,8 +36,8 @@ public class Storage {
     }
 
     //Future exception implementation required
-    public List<Task> loadTask() throws IOException, ParseException {
-        FileReader fileReader = new FileReader(FILEPATH);
+    public List<Task> loadTask(String filePath) throws IOException, ParseException {
+        FileReader fileReader = new FileReader(filePath);
         BufferedReader reader = new BufferedReader(fileReader);
         List<Task> list = new ArrayList<>();
 
@@ -65,17 +65,16 @@ public class Storage {
         return list;
     }
 
-    public void addTask(List<Task> list, String cmd, String desc, String time) throws DukeException,
+    public Task addTask(List<Task> list, String cmd, String desc, String time) throws DukeException,
             IOException, ParseException {
         DukeController controller = new DukeController();
+        Task task = new Task();
 
         if (cmd == null || desc == null || time == null) {
             throw new DukeException("oops! cmd/desc/time is null..");
         } else if (cmd.equals("") || desc.equals("") || time.equals("")) {
             throw new DukeException("oops! you entered cmd/desc/time empty..");
         } else {
-
-            Task task = null;
             if (cmd.equals("todo")) {
                 task = new Todo(desc);
             } else if (cmd.equals("deadline")) {
@@ -89,6 +88,7 @@ public class Storage {
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + task);
             System.out.println("Now you have " + list.size() + " tasks in the list.");
+            return task;
         }
     }
 

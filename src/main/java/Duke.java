@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Duke {
@@ -73,10 +75,12 @@ public class Duke {
             task = new ToDo(des);
         } else if (s.equals("deadline")) {
             String[] arr = des.split("/by");
-            task = new Deadline(arr[0].trim(), arr[1].trim());
+            Date date = convertToDate(arr[1].trim());
+            task = new Deadline(arr[0].trim(), date);
         } else if (s.equals("event")) {
             String[] arr = des.split("/at");
-            task = new Event(arr[0].trim(), arr[1].trim());
+            Date date = convertToDate(arr[1].trim());
+            task = new Event(arr[0].trim(), date);
         }
         list.add(task);
         printTask(task);
@@ -98,6 +102,20 @@ public class Duke {
         list.remove(i);
         System.out.println(format("Noted. I've removed this task: \n   " + t.toString() + "\n Now you have " +
                 list.size() + " tasks in the list."));
+    }
+
+    public static Date convertToDate(String s) {
+        String[] arr = s.split(" ");
+        String date = arr[0];
+        String time = arr[1];
+        String[] dateArray = date.split("/");
+        int day = Integer.parseInt(dateArray[0]);
+        int month = Integer.parseInt(dateArray[1]) - 1;
+        int year = Integer.parseInt(dateArray[2]);
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(2));
+        Date d = new GregorianCalendar(year, month, day, hour, minute).getTime();
+        return d;
     }
 
     public static void validateInput(String input) throws DukeException {

@@ -1,3 +1,7 @@
+/**
+ * Task object is defined by a description. It has a field isDone to indicate
+ * whether the task is completed or not.
+ */
 public class Task {
 
   private String description;
@@ -9,6 +13,9 @@ public class Task {
     this.isDone = false;
   }
 
+  /**
+   * Sets the task to be done.
+   */
   public void setAsDone() {
     this.isDone = true;
   }
@@ -17,6 +24,11 @@ public class Task {
     return "[" + this.getStatusIcon() + "] " + this.description;
   }
 
+  /**
+   * Returns a StatusIcon, based on whether the task is completed or not.
+   * 
+   * @return StatusIcon
+   */
   public String getStatusIcon() {
     // X to represent done, nothing to represent not done
     return (isDone ? "X" : " ");

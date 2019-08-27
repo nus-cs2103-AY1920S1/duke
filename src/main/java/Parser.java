@@ -4,6 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Parser object handles all input reading and prints the respective output.
+ */
 public class Parser {
 
   private String command;
@@ -93,6 +96,13 @@ public class Parser {
     }
   }
 
+  /**
+   * Executes the commands only.
+   * 
+   * @param taskList
+   * @throws DukeException
+   * @throws IOException
+   */
   public void executeOnly(TaskList taskList) throws DukeException, IOException {
 
     ArrayList<Task> tasks = taskList.getTaskList();
@@ -139,6 +149,14 @@ public class Parser {
     taskList.setTaskList(tasks);
   }
 
+  /**
+   * Executes the commands and save them into the file in Storage
+   * 
+   * @param taskList TaskList containing all tasks.
+   * @param s        Storage object.
+   * @throws DukeException
+   * @throws IOException
+   */
   public void executeAndSave(TaskList taskList, Storage s) throws DukeException, IOException {
 
     ArrayList<Task> tasks = taskList.getTaskList();

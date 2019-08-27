@@ -1,21 +1,33 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
  */
 
-class Storage {
+public class Storage {
+    String filePath;
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
 
     /**
      * Saves tasks in specified path
      *
-     * @param filePath
      * @param tasks
      */
-    public void save(String filePath, String tasks) throws IOException {
+    public void save(String tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(tasks);
         fw.close();
     }
+
+    /**
+     * Loads task
+     */
+
+//    public List<Task> load() {
+//
+//    }
 }

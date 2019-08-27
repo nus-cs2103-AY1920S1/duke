@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
         try {
             String taskMessage = tasks.done(i);
             ui.showDoneMessage(taskMessage);
-            storage.save("./Data/duke.txt", tasks.getTasks());
+            storage.save(tasks.getTasks());
         } catch (IOException e) {
             ui.showMessage(e.getMessage());
         }

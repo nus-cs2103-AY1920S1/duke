@@ -11,7 +11,7 @@ public class EventCommand extends Command {
         try {
             String taskMessage = tasks.addEvent(e);
             ui.showAddedMessage(taskMessage, tasks.getTasksSize());
-            storage.save("./Data/duke.txt", tasks.getTasks());
+            storage.save(tasks.getTasks());
         } catch (IOException e) {
             ui.showMessage(e.getMessage());
         }

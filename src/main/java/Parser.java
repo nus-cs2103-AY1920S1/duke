@@ -56,9 +56,6 @@ class Parser {
             i = Integer.parseInt(arr[1]);
             command = new DeleteCommand(i);
             break;
-        case "save":
-            command = new SaveCommand();
-            break;
         default:
             command = new IllegalCommand();
         }

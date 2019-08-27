@@ -31,7 +31,7 @@ public class Duke {
         boolean exit = false;
         tasks = new TaskList();
         ui = new UI();
-        storage = new Storage();
+        storage = new Storage("./Data/duke.txt");
 
         ui.showWelcomeMessage();
 

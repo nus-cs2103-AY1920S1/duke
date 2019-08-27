@@ -112,8 +112,6 @@ public class Parser {
                         ui.printLine(String.format("Now you have %d tasks in the list.\n", tasks.size()));
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Your task cannot be found!");
-                    } catch (Exception e) {
-                        throw new DukeException("Oops! Please write in this format: delete <number>");
                     }
                 }
             };

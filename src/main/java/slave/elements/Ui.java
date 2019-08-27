@@ -7,21 +7,33 @@ import slave.task.Task;
 import slave.task.ToDo;
 import java.util.Scanner;
 
+/**
+ * User Interface that prints to user
+ */
 public class Ui {
 
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Prints welcome Message on application start-up
+     */
     public void showWelcomeMessage(){
         String message = "Hello! I'm Slave! Your very own productivity application.\n" +
                 "     What can I do for you? Type 'help' for commands!";
         System.out.println(Formatter.formatMessage(message));
     }
 
+    /**
+     * Displays goodbye message when exiting program
+     */
     public void showByeMessage(){
         String message = "Bye! Thanks for using me! Will be right here when you need me.";
         System.out.println(Formatter.formatMessage(message));
     }
 
+    /**
+     * Displays help message when prompted
+     */
     public void showHelpMessage(){
         String message = "Commands:\n" +
                 "     todo <task description> : To add task to list\n" +
@@ -37,20 +49,36 @@ public class Ui {
         System.out.println(Formatter.formatMessage(message));
     }
 
+    /**
+     * Prints error message to the user
+     * @param e Error to be broadcasted
+     */
     public void showErrorMessage(DukeException e){
         System.out.println(Formatter.formatMessage(e.getMessage()));
     }
 
+    /**
+     * Read input from user
+     * @return returns user input
+     */
     public String readCommand(){
         return scanner.nextLine();
     }
 
+    /**
+     * prints clear command message
+     */
     public void printClearCommand(){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Clearing List..."));
         Formatter.printLine();
     }
 
+    /**
+     * prints add deadline command
+     * @param deadlineTask deadline task to be added
+     * @param taskList current task list
+     */
     public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
@@ -59,6 +87,11 @@ public class Ui {
         Formatter.printLine();
     }
 
+    /**
+     * prints add event command
+     * @param eventTask event task to be added
+     * @param taskList current task list
+     */
     public void printAddEventCommand(Event eventTask, TaskList taskList){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
@@ -67,6 +100,11 @@ public class Ui {
         Formatter.printLine();
     }
 
+    /**
+     * prints add to-do command
+     * @param toDoTask to-do task to be added
+     * @param taskList current task list
+     */
     public void printAddToDoCommand(ToDo toDoTask, TaskList taskList){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
@@ -75,6 +113,11 @@ public class Ui {
         Formatter.printLine();
     }
 
+    /**
+     * prints delete command
+     * @param toRemove task to be removed
+     * @param taskList current task list
+     */
     public void printDeleteCommand(Task toRemove, TaskList taskList){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Noted. I've removed this task:"));
@@ -83,6 +126,11 @@ public class Ui {
         Formatter.printLine();
     }
 
+    /**
+     * prints done command
+     * @param task task to be set as done
+     * @param taskList current task list
+     */
     public void printDoneCommand(Task task, TaskList taskList){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Nice! I've marked this task as done:"));
@@ -90,6 +138,10 @@ public class Ui {
         Formatter.printLine();
     }
 
+    /**
+     * prints a list of current tasks
+     * @param taskList current task list
+     */
     public void printListCommand(TaskList taskList){
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Here are the tasks in your list:"));

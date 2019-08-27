@@ -14,16 +14,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.nio.file.Files;
 
+/**
+ * Storage class that writes and loads data from local .txt file
+ */
 public class Storage{
 
     private File file;
     private String filePath;
 
+    /**
+     * Constructor that initialises a File object
+     * @param filePath filePath of .txt file to write/load
+     */
     public Storage(String filePath){
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Clears storage of data
+     * @throws NoStorageFileDetectedException storagefile not found
+     */
     public void clearStorage() throws NoStorageFileDetectedException {
         try {
             PrintWriter writer = new PrintWriter(this.file);
@@ -33,6 +44,11 @@ public class Storage{
         }
     }
 
+    /**
+     * Method which loads tasks from .txt file
+     * @return An arraylist of tasks parsed from .txt file
+     * @throws DukeException Throws if file cannot be found or input went wrong
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList;
         try {
@@ -49,6 +65,11 @@ public class Storage{
         return taskList;
     }
 
+    /**
+     * Refreshes storage and updates list of tasks to the stored local .txt file
+     * @param taskList current task list
+     * @throws DukeException throws if file cannot be found
+     */
     void refreshStorage(ArrayList<Task> taskList) throws DukeException{
         try {
             PrintWriter writer = new PrintWriter(this.file);
@@ -61,6 +82,11 @@ public class Storage{
         }
     }
 
+    /**
+     * Method to encode task and add it to .txt file
+     * @param task task to store in .txt file
+     * @throws DukeException throws if input went wrong in writing file
+     */
     void addTask(Task task) throws DukeException{
         try {
             FileWriter fw = new FileWriter(this.file, true);
@@ -96,7 +122,14 @@ public class Storage{
         }
     }
 
-
+    /**
+     * Method which parses the line from local storage .txt file
+     * to a task to be added into current program's taskList
+     * @param line line to parse
+     * @param index current line of file
+     * @return Task that has been parsed
+     * @throws DukeException
+     */
     private Task formatFileToTask(String line, int index) throws DukeException{
         String[] tokens = line.split(" ~ ");
         switch(tokens[1]){

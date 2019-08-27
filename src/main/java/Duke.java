@@ -117,7 +117,6 @@ public class Duke {
                             if (index > 1)
                                 bufferedWriter.write("\n");
                             task = (Task) iterator.next();
-                            System.out.println(task.convertTaskToString());
                             bufferedWriter.write(task.convertTaskToString());
                         }
                         bufferedWriter.close();

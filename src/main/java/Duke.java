@@ -6,18 +6,13 @@ import java.util.ArrayList;
 public class Duke {
     public ArrayList<Task> tasks = new ArrayList<>();
     public Storage storage;
+    public UI ui;
 
     public Duke() {
         storage = new Storage(tasks);
+        ui = new UI();
     }
 
-    public void greet() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
 
     //Lists out all the tasks in Duke
     public void list() throws IllegalArgumentException {
@@ -63,11 +58,19 @@ public class Duke {
         storage.rewriteData();
     }
 
+    public void run() {
+        ui.greet();
+        storage.readData();
+    }
+
+    public void end() {
+        ui.bye();
+        storage.readData();
+    }
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.greet();
-        duke.storage.readData();
+        duke.run();
 
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
@@ -124,7 +127,7 @@ public class Duke {
             }
             command = scanner.nextLine();
         }
-        duke.bye();
+        duke.end();
 
     }
 }

@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.by = LocalDateTime.parse(by, Task.TIME_FORMATTER);
     }
 
     @Override

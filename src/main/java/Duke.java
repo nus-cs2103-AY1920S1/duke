@@ -1,19 +1,22 @@
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 
 public class Duke {
 
     private Ui ui;
     private Storage storage;
     private ListManager listManager;
+    private SimpleDateFormat formatter;
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, formatter);
+        formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
-            listManager = new ListManager(storage.load());
+            listManager = new ListManager(storage.load(), formatter);
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
-            listManager = new ListManager();
+            listManager = new ListManager(formatter);
         }
 
     }

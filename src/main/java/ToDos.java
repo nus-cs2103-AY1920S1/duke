@@ -1,7 +1,9 @@
+import java.text.SimpleDateFormat;
+
 public class ToDos extends Task {
 
-    public ToDos(String name) {
-        super(name);
+    public ToDos(String name, SimpleDateFormat formatter) {
+        super(name, formatter);
         this.type = "[T]";
     }
 

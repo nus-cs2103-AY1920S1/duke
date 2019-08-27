@@ -1,2 +1,3 @@
 list
 bye
+event project meeting /at 20/02/1997 1610

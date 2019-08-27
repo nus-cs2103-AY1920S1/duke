@@ -17,7 +17,7 @@ public class Deadline extends Task {
     @Override
     public String getSaveString() {
         StringJoiner sj = new StringJoiner("|");
-        sj.add("[T]");
+        sj.add("D");
         sj.add(isDone ? "1" : "0");
         sj.add(description);
         sj.add(by);

@@ -17,7 +17,7 @@ public class Event extends Task {
     @Override
     public String getSaveString() {
         StringJoiner sj = new StringJoiner("|");
-        sj.add("[T]");
+        sj.add("E");
         sj.add(isDone ? "1" : "0");
         sj.add(description);
         sj.add(at);

@@ -8,10 +8,10 @@ import java.util.StringJoiner;
 
 public final class DataManager {
     public static void save(List<Task> tasks) throws IOException {
-        String directoryName = "data";
+        String directoryName = "/home/yuan/cs2103t/duke/data";
         File directory = new File(directoryName);
         directory.mkdir();
-        FileWriter writer = new FileWriter("./" + directoryName + "/duke.txt");
+        FileWriter writer = new FileWriter(directoryName + "/duke.txt");
         StringJoiner sj = new StringJoiner("\n");
         for (Task task : tasks) {
             sj.add(task.getSaveString());

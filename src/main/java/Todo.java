@@ -14,7 +14,7 @@ public class Todo extends Task {
     @Override
     public String getSaveString() {
         StringJoiner sj = new StringJoiner("|");
-        sj.add("[T]");
+        sj.add("T");
         sj.add(isDone ? "1" : "0");
         sj.add(description);
         return sj.toString();

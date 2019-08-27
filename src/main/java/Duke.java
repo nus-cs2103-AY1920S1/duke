@@ -1,14 +1,25 @@
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Ui ui = new Ui();
-        Scanner scanner = new Scanner(System.in);
-        Storage storage = new Storage("CurrentTaskList.txt");
-        TaskList taskList = new TaskList(storage.loadSavedList());
+    private TaskList taskList;
+    private Storage storage;
+    private Ui ui;
 
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.loadSavedList());
+        } catch (IOException e) {
+            ui.showError(e);
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
         ui.printHello();
         while (true) {
             try {
@@ -21,11 +32,11 @@ public class Duke {
                     taskList.printList();
                 } else if (instruction.equals("done")) { // Then, check if task is marked done
                     int index = Integer.parseInt(input.split(" ", 2)[1]);
-                    taskList.markElementAsDone(index);
+                    taskList.markTask(index);
                     storage.writeSavedList(taskList.getList());
                 } else if (instruction.equals("delete")) { // Then, check if task is marked delete
                     int index = Integer.parseInt(input.split(" ", 2)[1]);
-                    taskList.deleteElement(index);
+                    taskList.deleteTask(index);
                     storage.writeSavedList(taskList.getList());
                 } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")) {
                     try {
@@ -44,8 +55,9 @@ public class Duke {
                             String taskContent = taskDescription.split("/by|/at", 2)[0].strip();
                             String taskTimeBeforeParse = taskDescription.split("/by|/at", 2)[1].strip(); // time must be parsed via '/by' or '/at'
                             String[] taskTimeParsed = taskTimeBeforeParse.split("[ /]");
-                            Calendar taskTime = new GregorianCalendar(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]) - 1,
-                                    Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
+                            LocalDateTime taskTime = LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]),
+                                    Integer.parseInt(taskTimeParsed[1]), Integer.parseInt(taskTimeParsed[0]),
+                                    Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
                                     Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
                             if (taskContent.matches("\\s*")) { // if the task's description is only whitespace
                                 throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
@@ -64,9 +76,13 @@ public class Duke {
                 } else { // if an invalid instruction is entered
                     throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+            } catch (IOException | DukeException e) {
                 ui.showError(e);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("CurrentTaskList.txt").run();
     }
 }

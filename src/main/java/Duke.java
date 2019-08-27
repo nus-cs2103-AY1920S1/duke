@@ -1,4 +1,8 @@
 import java.util.*;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 
 public class Duke {
   private static ArrayList<Task> storage = new ArrayList<>();
@@ -10,9 +14,34 @@ public class Duke {
     );
   }
 
+  private static void saveTasks() {
+      try {
+      FileOutputStream fs = new FileOutputStream("save.dmp");
+      ObjectOutputStream oos = new ObjectOutputStream(fs);
+      oos.writeObject(storage);
+      oos.close();
+      } catch(Exception e) {
+          // Either FileNotFoundException or IOException which should not occur
+          System.out.println("Can't save! " + e.toString());
+      }
+  }
+
+  private static void loadTasks() {
+      try {
+      FileInputStream fs = new FileInputStream("save.dmp");
+      ObjectInputStream ois = new ObjectInputStream(fs);
+      storage = (ArrayList<Task>) ois.readObject();
+      ois.close();
+      } catch(Exception e){
+          // Either FileNotFoundException or IOException which should not occur
+          System.out.println("Couldn't load saved tasks! " + e.toString());
+      }
+  }
+
   private static void addTask(Task t) {
     System.out.println("Got it. I've added this task:\n" + t.toString());
     storage.add(t);
+    saveTasks();
     printStorageSize();
   }
 
@@ -88,6 +117,7 @@ public class Duke {
   }
 
   public static void main(String[] args) {
+    loadTasks();
     String logo = " ____        _        \n" +
       "|  _ \\ _   _| | _____ \n" +
       "| | | | | | | |/ / _ \\\n" +

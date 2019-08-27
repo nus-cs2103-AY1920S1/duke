@@ -94,6 +94,16 @@ public abstract class Command {
     }
 
     /**
+     * Instantiates a FindCommand Object
+     *
+     * @param details the keyWord to use in finding tasks
+     * @return a FindCommand Object
+     */
+    public static Command addFindCommand(String details) {
+        return new FindCommand(details);
+    }
+
+    /**
      * Instantiates a Command Object
      *
      * @param details is the details to be stored in the Command Object.

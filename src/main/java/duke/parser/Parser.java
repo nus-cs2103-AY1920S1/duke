@@ -48,8 +48,12 @@ public class Parser {
         case "bye":
             return Command.addByeCommand();
 
+        case "find":
+            return Command.addFindCommand(detailsOfCommand);
+
         default:
             throw new DukeWrongInputException();
+
         }
     }
 }

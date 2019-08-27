@@ -1,15 +1,22 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Deadline type task with a deadline time.
+ */
 public class Deadline extends Task {
 
     private Date by;
 
+    /**
+     *
+     * @param description description of deadline task
+     * @param by time of deadline
+     * @throws ParseException
+     */
     public Deadline(String description, String by) throws ParseException {
         super(description);
         this.by = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(by);

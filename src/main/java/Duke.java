@@ -4,11 +4,18 @@ import duke.tasklist.TaskList;
 
 import java.io.*;
 
+/**
+ * Main class of DukeBot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     *
+     * @param filePath relative file path to the designated file of storing list of tasks.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui(storage);

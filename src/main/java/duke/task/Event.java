@@ -4,10 +4,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Event type task with a time spot.
+ */
 public class Event extends Task {
 
     private Date at;
 
+    /**
+     *
+     * @param description description of event
+     * @param at time spot of happening
+     * @throws ParseException
+     */
     public Event(String description, String at) throws ParseException {
         super(description);
         this.at = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(at);

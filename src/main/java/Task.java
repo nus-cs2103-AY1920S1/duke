@@ -1,19 +1,19 @@
 public abstract class Task {
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        String doneIcon = done ? "+" : " ";
+        String doneIcon = isDone ? "+" : " ";
         return String.format("[%s] %s", doneIcon, description);
     }
 }

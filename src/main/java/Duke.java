@@ -11,48 +11,36 @@ public class Duke {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        String input;
-        String command;
-
         while (true) {
-            input = sc.nextLine();
-            command = input.split(" ")[0].toLowerCase();
+            String input = sc.nextLine();
+            String command = input.split(" ")[0].toLowerCase();
 
             if (command.equalsIgnoreCase("bye")) {
                 break;
             }
 
-            switch (command) {
+            try {
+                switch (command) {
                 case "list":
                     PrintTasks(tasks);
                     break;
                 case "done":
-                    try {
-                        MarkTaskDone(tasks, input);
-                    } catch (Exception e) {
-                        System.out.println("" + e);
-                    }
+                    MarkTaskDone(tasks, input);
                     break;
                 case "delete":
-                    try {
-                        DeleteTask(tasks, input);
-                    } catch (Exception e) {
-                        System.out.println("" + e);
-                    }
+                    DeleteTask(tasks, input);
                     break;
                 case "todo":
                 case "deadline":
                 case "event":
-                    try {
-                        AddTask(tasks, input, command);
-                    } catch (Exception e) {
-                        System.out.println("" + e);
-                        continue;
-                    }
+                    AddTask(tasks, input, command);
                     break;
                 default:
                     System.out.println("I'm sorry, but I don't know what that means :(");
                     break;
+                }
+            } catch (DukeException e) {
+                System.err.println("" + e);
             }
         }
 
@@ -112,23 +100,23 @@ public class Duke {
 
         // create new task of specified type
         switch (type) {
-            case "todo":
-                newTask = new ToDo(description);
-                break;
-            case "deadline":
-                String[] descriptionDeadline = description.split(" /by ", 2);
-                if (descriptionDeadline.length < 2) {
-                    throw new DukeException("Deadline format incorrect, should be e.g. deadline task /by time");
-                }
-                newTask = new Deadline(descriptionDeadline[0], descriptionDeadline[1]);
-                break;
-            case "event":
-                String[] descriptionTime = description.split(" /at ", 2);
-                if (descriptionTime.length < 2) {
-                    throw new DukeException("Event format incorrect, should be e.g. event task /at time");
-                }
-                newTask = new Event(descriptionTime[0], descriptionTime[1]);
-                break;
+        case "todo":
+            newTask = new ToDo(description);
+            break;
+        case "deadline":
+            String[] descriptionDeadline = description.split(" /by ", 2);
+            if (descriptionDeadline.length < 2) {
+                throw new DukeException("Deadline format incorrect, should be e.g. deadline task /by time");
+            }
+            newTask = new Deadline(descriptionDeadline[0], descriptionDeadline[1]);
+            break;
+        case "event":
+            String[] descriptionTime = description.split(" /at ", 2);
+            if (descriptionTime.length < 2) {
+                throw new DukeException("Event format incorrect, should be e.g. event task /at time");
+            }
+            newTask = new Event(descriptionTime[0], descriptionTime[1]);
+            break;
         }
 
         tasks.add(newTask);

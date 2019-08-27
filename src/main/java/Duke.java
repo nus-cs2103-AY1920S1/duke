@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class Duke {
-    private final String CUSTOM_CONFIG_FILE_PATH = "";
+    private final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
 
     private Queue<Command> commands;
     private TaskListController taskListController;

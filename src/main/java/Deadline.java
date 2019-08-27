@@ -5,25 +5,26 @@ import java.util.Date;
 public class Deadline extends Task {
 
     Date by;
+    String deadLine;
 
     public Deadline(String description, String deadLine) throws DukeException {
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             this.by = dateFormat.parse(deadLine);
-            System.out.println(this.by);
+            this.deadLine = deadLine;
         } catch (Exception e){
-            throw new DukeException("Wrong date and time format");
+            this.deadLine = deadLine;
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + deadLine + ")";
     }
 
     @Override
     public String stringForAppend() {
-        return "D | " + super.getStatusIcon() + " | " + description + " | " + by;
+        return "D | " + super.getStatusIcon() + " | " + description + " | " + deadLine;
     }
 }

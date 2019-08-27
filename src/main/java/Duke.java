@@ -32,18 +32,22 @@ public class Duke {
             while (fileReader.hasNext()) {
                 String readNewLine = fileReader.nextLine();
                 String[] arrayInput = readNewLine.split(" \\| ");
-                if (arrayInput[0].equals("T")){
-                    Todo newTodo = new Todo(arrayInput[2]);
-                    taskList.add(newTodo);
-                } else if (arrayInput[0].equals("D")){
-                    Deadline newDeadline = new Deadline(arrayInput[2], arrayInput[3]);
-                    taskList.add(newDeadline);
-                } else {
-                    Event newEvent = new Event(arrayInput[2], arrayInput[3]);
-                    taskList.add(newEvent);
-                }
-                if (arrayInput[1].equals("\u2713")){
-                    taskList.get(taskList.size()-1).markAsDone();
+                try {
+                    if (arrayInput[0].equals("T")){
+                        Todo newTodo = new Todo(arrayInput[2]);
+                        taskList.add(newTodo);
+                    } else if (arrayInput[0].equals("D")){
+                        Deadline newDeadline = new Deadline(arrayInput[2], arrayInput[3]);
+                        taskList.add(newDeadline);
+                    } else {
+                        Event newEvent = new Event(arrayInput[2], arrayInput[3]);
+                        taskList.add(newEvent);
+                    }
+                    if (arrayInput[1].equals("\u2713")){
+                        taskList.get(taskList.size()-1).markAsDone();
+                    }
+                } catch (DukeException err){
+                    System.out.println(err.getMessage());
                 }
             }
             fileReader.close();

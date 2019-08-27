@@ -7,33 +7,29 @@ import java.util.Scanner;
  ADD EXCEPTION SUPPORT
  */
 public class Duke {
-    private ArrayList<Task> taskArr = new ArrayList<Task>();
+    // define arraylist to store tasks
+    private ArrayList<Task> taskArr = new ArrayList<>();
 
     public Duke() {
-        /*
-        description: Constructor for duke, greets user.
-        expects: No input
-        outputs: returns nothing
+        /**
+         *  prints Intro message in between 2 solid lines
+         *  @return none
          */
         printLine();
         System.out.println("Hello, I'm Duke\nWhat can I do for you?");
         printLine();
     }
     private void printLine() {
-        /*
-        Prints line of dashes with \n at end.
-        looks nice tee hee
-        expects: No input
-        outputs: returns nothing
+        /**
+         *  helper function, prints formatted solid line
+         *  @return none
          */
         System.out.println("____________________________________________________________");
     }
     private String list() {
-        /*
-        stores all tasks in printable format
-        then returns it.
-        expects: nothing, but taskArr must exist
-        outputs: printable string that is all tasks.
+        /**
+         *  returns all tasks in readable, formatted string
+         *  @return string of all tasks with new line and spaces as required
          */
         String s = "Here are the tasks in your list:\n";
 
@@ -46,8 +42,15 @@ public class Duke {
         return s;
     }
     private void todo(String taskInfo) {
-        /*
-
+        // TODO add DukeException for this
+        /**
+         *  creates new To Do, add to tasklist
+         *  prints confirmation message
+         *  and prints formatted to do string
+         *  then total num of current tasks
+         *  @params String that describes task
+         *  @return none
+         *  @throws DukeException if taskInfo is empty
          */
         if (taskInfo.equals("")) {
             // error handling
@@ -61,8 +64,15 @@ public class Duke {
         System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
     private void deadline(String taskInfo) {
-        /*
-
+        // TODO add DukeException for this
+        /**
+         *  creates new Deadline, add to tasklist
+         *  prints confirmation message
+         *  and prints formatted deadline string
+         *  then total num of current tasks
+         *  @param String that describes task
+         *  @return none
+         *  @throws DukeException if taskInfo is empty
          */
         int sep = taskInfo.indexOf('/');
         // use sep to split string
@@ -76,8 +86,15 @@ public class Duke {
         System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
     private void event(String taskInfo) {
-        /*
-
+        // TODO add DukeException for this
+        /**
+         *  creates new event, add to tasklist
+         *  prints confirmation message
+         *  and prints formatted event string
+         *  then total num of current tasks
+         *  @params String that describes task
+         *  @return none
+         *  @throws DukeException if taskInfo is empty
          */
         int sep = taskInfo.indexOf('/');
         // use sep to split string
@@ -91,6 +108,13 @@ public class Duke {
         System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
     private void done(int t) {
+        /**
+         *  helper function, marks tasks as done
+         *  then prints confirmation,
+         *  then prints the done task in formatted string
+         *  (formatted string from task itself)
+         *  @return none
+         */
         Task doneTask = taskArr.get(t-1);
         doneTask.markDone();
         System.out.print("Nice! I've marked this task as done:\n");
@@ -98,6 +122,15 @@ public class Duke {
 
     }
     private void delete(int taskNum) {
+        /**
+         *  helper function, deletes task
+         *  based on number provided
+         *  prints confirmation and formatted task
+         *  as per specified within task printTask method
+         *  then prints number of remaining tasks
+         *
+         *  @return none
+         */
         Task doneTask = taskArr.get(taskNum-1);
 
         System.out.print("Noted. I've removed this task: \n");
@@ -106,11 +139,16 @@ public class Duke {
         System.out.println("Now you have " + taskArr.size() + " tasks in the list.");
     }
     private void run() {
-        /*
-        Main method for duke, will run until
-        bye is read, then will exit
-        expects: No input
-        outputs: returns nothing
+        // TODO add DukeException for this
+        /**
+         *  main run method
+         *  scans input and turns it
+         *  into task: event, deadline or to do
+         *  every print statement wrapped with
+         *  2 solid lines
+         *  @params String that describes task
+         *  @return none
+         *  @throws DukeException if command unknown
          */
         Scanner sc = new Scanner(System.in);
         String input = sc.next();

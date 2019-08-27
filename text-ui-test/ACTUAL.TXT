@@ -11,15 +11,16 @@ Now you have 1 tasks in your list.
 Got it. I've added this task:
 [D][✘] return book (by: Sunday)
 Now you have 2 tasks in your list.
+Your date needs to be in dd/mm/yyyy hhmm format!
 Got it. I've added this task:
-[E][✘] project meeting (at: Mon 2-4pm)
+[E][✘] project meeting (at: 27 Aug 2019, 08:14 PM)
 Now you have 3 tasks in your list.
 Here are the tasks in your list:
 1. [T][✘] borrow book
 2. [D][✘] return book (by: Sunday)
-3. [E][✘] project meeting (at: Mon 2-4pm)
+3. [E][✘] project meeting (at: 27 Aug 2019, 08:14 PM)
 Noted. I've removed this task:
-  [E][✘] project meeting (at: Mon 2-4pm)
+  [E][✘] project meeting (at: 27 Aug 2019, 08:14 PM)
 Now you have 2 tasks in your list.
 Here are the tasks in your list:
 1. [T][✘] borrow book

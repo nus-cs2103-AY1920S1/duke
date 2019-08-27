@@ -1,5 +1,11 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class ByeCommand extends Command {
-    ByeCommand() {
+    public ByeCommand() {
         super();
     }
 

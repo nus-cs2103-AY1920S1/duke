@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 public class Parser {
     public Command parse(String input) throws DukeException {
         if (input.equals("bye")) {

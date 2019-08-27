@@ -1,6 +1,8 @@
+package duke;
+
+import duke.command.Command;
+
 import java.lang.String;
-import java.util.Collections;
-import java.util.List;
 
 public class Duke {
     protected static final String DUKE_FILE = "duke.txt";

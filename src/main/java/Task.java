@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected possibleTaskTypes taskType;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.taskType = possibleTaskTypes.DEFAULT;
     }
 
     public String getStatusIcon() {
@@ -20,6 +22,32 @@ public class Task {
 
     public String toString(){
         return ( "[" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    public String toSaveString(){
+        int booleanNum = (this.isDone ? 1 : 0);
+
+        return ( " | " + booleanNum + " | " + this.description );
+    }
+
+    public Boolean isDefault(){
+        return this.taskType.equals(possibleTaskTypes.DEFAULT) ;
+    }
+
+    public Boolean isTodo(){
+        return this.taskType.equals(possibleTaskTypes.TODO) ;
+    }
+
+    public Boolean isEvent(){
+        return this.taskType.equals(possibleTaskTypes.EVENT) ;
+    }
+
+    public Boolean isDeadline(){
+        return this.taskType.equals(possibleTaskTypes.DEADLINE) ;
+    }
+
+    enum possibleTaskTypes {
+        DEFAULT, DEADLINE, EVENT, TODO
     }
 }
 

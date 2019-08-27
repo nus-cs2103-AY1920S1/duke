@@ -1,4 +1,7 @@
+import java.time.LocalDateTime;
+
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
     protected TaskType type;
@@ -18,7 +21,7 @@ public abstract class Task {
     // Serialise
     public abstract String serialise();
 
-    // Deserialise
+    // Deserialize
     static public Task deserialize(String s) {
         String[] parsedLine = s.split(" \\| ");
         switch (parsedLine[0]) {
@@ -39,6 +42,17 @@ public abstract class Task {
 
     protected void setDone() {
         isDone = true;
+    }
+
+    protected LocalDateTime parseDateTime(String dateTime) {
+        String[] parsedDateTime = dateTime.split(" ");
+        String[] parsedDate = parsedDateTime[0].split("\\/");
+        return LocalDateTime.of(
+                Integer.parseInt(parsedDate[2]),
+                Integer.parseInt(parsedDate[1]),
+                Integer.parseInt(parsedDate[0]),
+                Integer.parseInt(parsedDateTime[1]) / 100,
+                Integer.parseInt(parsedDateTime[1]) % 100);
     }
 
     @Override

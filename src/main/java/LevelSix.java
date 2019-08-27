@@ -25,16 +25,15 @@ public class LevelSix {
                         deleteTask(sc.nextInt());
                         break;
                     case "todo":
-                        createTodo(sc.nextLine());
+                        createTodo(sc.nextLine().trim());
                         break;
                     case "deadline":
-                        createDeadline(sc.nextLine());
+                        createDeadline(sc.nextLine().trim());
                         break;
                     case "event":
-                        createEvent(sc.nextLine());
+                        createEvent(sc.nextLine().trim());
                         break;
                     default:
-                        System.out.println(input);
                         sc.nextLine();
                         handleDefault();
                 }

@@ -59,6 +59,14 @@ public class UI {
         System.out.println(message);
     }
 
+    public void showFoundMessage(String taskMessage) {
+        String foundMessage = "Here are the matching tasks in your list:";
+        StringJoiner result = new StringJoiner("\n");
+        result.add(foundMessage);
+        result.add(taskMessage);
+        showMessage(padMessage(result.toString()));
+    }
+
     public String padMessage(String message) {
         StringJoiner result = new StringJoiner("\n");
         result.add("____________________________________________________________");

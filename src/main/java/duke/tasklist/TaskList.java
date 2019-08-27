@@ -88,4 +88,16 @@ public class TaskList {
 
         return result.toString();
     }
+
+    public String find(String kw) {
+        StringJoiner result = new StringJoiner("\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.toString().contains(kw)) {
+                result.add(String.format("%d.%s", i + 1, t));
+            }
+        }
+
+        return result.toString();
+    }
 }

@@ -161,7 +161,7 @@ public class Duke {
                         case "deadline": {
                             try {
                                 deadlineCheck(task, userInput);
-                                Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by")),
+                                Task deadline = new Deadline(userInput.substring(9, userInput.indexOf("/by") - 1),
                                         userInput.substring(userInput.indexOf("/by") + 4));
                                 listOfInputs.add(deadline);
                                 System.out.println("Got it. I've added this task:");
@@ -176,7 +176,7 @@ public class Duke {
                         case "event": {
                             try {
                                 eventCheck(task, userInput);
-                                Task event = new Event(userInput.substring(6, userInput.indexOf("/at")),
+                                Task event = new Event(userInput.substring(6, userInput.indexOf("/at") - 1),
                                         userInput.substring(userInput.indexOf("/at") + 4));
                                 listOfInputs.add(event);
                                 System.out.println("Got it. I've added this task:");

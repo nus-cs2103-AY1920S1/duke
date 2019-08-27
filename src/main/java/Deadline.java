@@ -6,6 +6,7 @@ public class Deadline extends Task {
     public Deadline(String description, String date) {
         super(description);
         this.date = date;
+        this.identity = 'D';
     }
 
 

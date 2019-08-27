@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 public class Duke {
 
@@ -102,13 +104,13 @@ public class Duke {
                 throw new IllegalArgumentException();
             }
 
-            Task newDeadline = new Deadline(taskDescription, taskBy);
+            Task newDeadline = new Deadline(taskDescription, dateTimeConverter(taskBy));
             list.add(newDeadline);
             printAddTask(newDeadline);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! Task description/Task by can not be empty");
         } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: deadline [task description] /by [task deadline]");
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: deadline [task description] /by [dd/mm/yyyy HHmm]");
         }
     }
 
@@ -122,14 +124,24 @@ public class Duke {
                 throw new IllegalArgumentException();
             }
 
-            Task newEvent = new Event(taskDescription, taskAt);
+            Task newEvent = new Event(taskDescription, dateTimeConverter(taskAt));
             list.add(newEvent);
             printAddTask(newEvent);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! Task description/Task at can not be empty");
         } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: event [task description] /at [task at]");
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: event [task description] /at [dd/mm/yyyy HHmm]");
         }
+    }
+
+    private static LocalDateTime dateTimeConverter(String str) throws ArrayIndexOutOfBoundsException{
+            String[] dateTime = str.split(" ");
+            String[] date = dateTime[0].split("/");
+            String time = dateTime[1];
+            return LocalDateTime.of(Integer.parseInt(date[2]),
+                    Integer.parseInt(date[1]), Integer.parseInt(date[0]),
+                            Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
+
     }
 
     public static void handleDoneCommand() throws DukeException {

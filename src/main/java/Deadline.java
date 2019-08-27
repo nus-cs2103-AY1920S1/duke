@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Deadline isDone() {
+    public Deadline changeToCompletedStatus() {
         return new Deadline(super.name, this.deadLine, true);
     }
 

@@ -12,7 +12,7 @@ public class Task {
         this.done = done;
     }
 
-    public Task isDone() {
+    public Task changeToCompletedStatus() {
         return new Task(this.name, true);
     }
 

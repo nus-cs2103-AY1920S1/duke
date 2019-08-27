@@ -9,7 +9,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public Todo isDone() {
+    public Todo changeToCompletedStatus() {
         return new Todo(super.name, true);
     }
 

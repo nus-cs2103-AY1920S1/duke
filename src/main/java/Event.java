@@ -15,7 +15,7 @@ public class Event extends Task {
     }
 
     @Override
-    public Event isDone() {
+    public Event changeToCompletedStatus() {
         return new Event(super.name, this.time, true);
     }
 

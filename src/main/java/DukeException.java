@@ -5,11 +5,6 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String result = "\t____________________________________________________________";
-        result = result
-                + "\n\t ☹ OOPS!!! "
-                + getMessage()
-                + "\n\t____________________________________________________________";
-        return result;
+        return "☹ OOPS!!! " + getMessage();
     }
 }

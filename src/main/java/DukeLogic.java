@@ -168,6 +168,11 @@ class DukeLogic {
      */
      void runApplication() {
         DukeFormatter.printWelcomeMessage();
+        try {
+            DukeFileHandler.readTasksFromFile(taskList);
+        } catch (DukeException e) {
+            DukeFormatter.printErrorMessage(e);
+        }
         while (SCANNER.hasNext()) {
             String userInput = SCANNER.nextLine();
             userInput = userInput.strip();
@@ -179,7 +184,7 @@ class DukeLogic {
                 validate(userInput);
                 process(userInput);
             } catch (DukeException e) {
-                DukeFormatter.prettyPrint("Sorry, " + e.getMessage());
+                DukeFormatter.printErrorMessage(e);
                 // TODO: Add "help" feature: list all supported commands
             }
         }

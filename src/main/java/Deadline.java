@@ -12,6 +12,17 @@ class Deadline extends Task {
     }
 
     /**
+     * Creates a new Deadline with the given description, due date and status.
+     * @param description       Task to be completed.
+     * @param by                Due date for the Deadline.
+     * @param isDone            Whether the Deadline is completed or not.
+     */
+    Deadline(String description, String by, boolean isDone) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    /**
      * Returns the letter "D", representing the type Deadline.
      * @return  "D"
      */

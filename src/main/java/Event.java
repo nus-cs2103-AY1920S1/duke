@@ -12,6 +12,17 @@ class Event extends Task {
     }
 
     /**
+     * Creates a new Event with the given description, timing and status.
+     * @param description       Description of Event.
+     * @param time              Timing of the Event.
+     * @param isDone            Whether the Event is done or not.
+     */
+    Event(String description, String time, boolean isDone) {
+        super(description, isDone);
+        this.time = time;
+    }
+
+    /**
      * Returns the letter "E", representing the type Event.
      * @return  "E"
      */

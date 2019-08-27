@@ -65,4 +65,12 @@ class DukeFormatter {
                  + "Hello! I'm Duke\n"
                  + "What can I do for you?");
      }
+
+    /**
+     * Prints an apology followed by details of the given exception.
+     * @param exception     Exception that caused the error
+     */
+    static void printErrorMessage(Exception exception) {
+         prettyPrint("Sorry, " + exception.getMessage());
+     }
 }

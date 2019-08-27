@@ -8,8 +8,17 @@ class Task {
      *                      be at most 50 characters (for now).
      */
     Task(String description) {
+        this(description, false);
+    }
+
+    /**
+     * Creates a new Task with the given description and isDone status.
+     * @param description   Description of the Task. Description length should
+     *                      be at most 50 characters (for now).
+     */
+    Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**

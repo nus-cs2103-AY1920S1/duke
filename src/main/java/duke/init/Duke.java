@@ -1,6 +1,7 @@
 package duke.init;
 
 import java.lang.StringBuilder;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,7 +78,7 @@ public class Duke {
             storeEvent(input);
             break;
         default:
-            System.out.println("\u2639 OOPS!!! I'm sorry, but I don't"
+            System.out.println("\t\u2639 OOPS!!! I'm sorry, but I don't"
                     + " know what that means :-(");
             break;
         }
@@ -157,9 +158,12 @@ public class Duke {
             String description = input.substring(9);
             String[] taskInformation = description.split(" /by ");
             storeTask(new Deadline(taskInformation[0], taskInformation[1]));
-    } catch (ArrayIndexOutOfBoundsException
+        } catch (ArrayIndexOutOfBoundsException
                 | StringIndexOutOfBoundsException e) {
             System.out.println("\tdeadline command format: deadline <description> /by <date>");
+        } catch (ParseException | IllegalArgumentException e) {
+            System.out.println("\tPlease enter a valid date format.");
+            System.out.println("\tDate and time: dd/mm/YYYY HH:mm:ss");
         }
     }
 
@@ -175,6 +179,9 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException
                 | StringIndexOutOfBoundsException e) {
             System.out.println("\tevent command format: event <description> /at <dateAndTime>");
+        } catch (ParseException e) {
+            System.out.println("\tPlease enter a valid date format.");
+            System.out.println("\tDate and time: dd/mm/YYYY HH:mm:ss");
         }
     }
 

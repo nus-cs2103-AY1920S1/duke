@@ -1,8 +1,10 @@
 public abstract class Task {
     private String description;
     private boolean isDone;
+    private String icon;
 
-    Task(String description) {
+    Task(String icon, String description) {
+        this.icon = icon;
         this.description = description;
     }
 
@@ -18,6 +20,16 @@ public abstract class Task {
         return this.description;
     }
 
+    String getIcon() {
+        return this.icon;
+    }
+
+    public String toSaveFormat() {
+        return String.format("%s|%d|%s", icon, isDone ? 1 : 0, getDescription());
+    }
+
     @Override
-    public abstract String toString();
+    public String toString() {
+        return String.format("  [%s][%s]%s", getStatusIcon(), getDescription());
+    }
 }

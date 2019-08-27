@@ -1,5 +1,4 @@
-public class Deadline extends Task {
-    private String date;
+public class Deadline extends DatedTask {
 
     static Deadline of(String description, String date) throws DukeException {
         if (description.length() == 0 || date.length() == 0) {
@@ -10,16 +9,11 @@ public class Deadline extends Task {
     }
 
     private Deadline(String description, String date) {
-        super(description);
-        this.date = date;
-    }
-
-    String getDate() {
-        return this.date;
+        super("D", description, date);
     }
 
     @Override
     public String toString() {
-        return String.format("  [D][%s]%s(by:%s)", getStatusIcon(), getDescription(), getDate());
+        return super.toString().concat(String.format("(by:%s)", getDateTime()));
     }
 }

@@ -1,5 +1,4 @@
-public class Event extends Task{
-    private String dateTime;
+public class Event extends DatedTask {
 
     static Event of(String description, String dateTime) throws DukeException {
         if (description.length() == 0 || dateTime.length() == 0) {
@@ -10,16 +9,11 @@ public class Event extends Task{
     }
 
     private Event(String description, String dateTime) {
-        super(description);
-        this.dateTime = dateTime;
-    }
-
-    String getDateTime() {
-        return this.dateTime;
+        super("E", description, dateTime);
     }
 
     @Override
     public String toString() {
-        return String.format("  [E][%s]%s(at:%s)", getStatusIcon(), getDescription(), getDateTime());
+        return super.toString().concat(String.format("(at:%s)", getDateTime()));
     }
 }

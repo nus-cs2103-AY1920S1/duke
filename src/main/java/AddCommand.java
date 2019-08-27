@@ -18,6 +18,7 @@ public class AddCommand extends Command {
 		this.commandType = command;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Execute the saving of tasks into TaskList and printing out a confirmation or error message through Ui object
 	 * @param tasks represents all the tasks the user has input in memory
@@ -27,6 +28,10 @@ public class AddCommand extends Command {
 	 */
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
 		if(!inFullCommandScanner.hasNext()) {
+=======
+	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+		if (!inFullCommandScanner.hasNext()) {
+>>>>>>> A-CodingStandard
 			throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
 		} else {
 			if (commandType.equals("todo")) {
@@ -38,7 +43,7 @@ public class AddCommand extends Command {
 				StringBuilder deadLineTaskDateTime = new StringBuilder();
 				String currentWord;
 				Boolean reachedDateTimePortion = false;
-				while(inFullCommandScanner.hasNext()) {
+				while (inFullCommandScanner.hasNext()) {
 					currentWord = inFullCommandScanner.next();
 					if (currentWord.equals("/by")) {
 						//set switch to true but do not append
@@ -67,7 +72,7 @@ public class AddCommand extends Command {
 				StringBuilder eventDateTime = new StringBuilder();
 				String currentWord;
 				Boolean reachedDateTimePortion = false;
-				while(inFullCommandScanner.hasNext()) {
+				while (inFullCommandScanner.hasNext()) {
 					currentWord = inFullCommandScanner.next();
 					if (currentWord.equals("/at")) {
 						//set switch to true but do not append

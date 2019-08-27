@@ -29,10 +29,13 @@ public class Ui {
 		System.out.println("Welcome to Duke. What can I do for you today?");
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Displays messages to the user
 	 * @param toShow the string to be displayed to the user
 	 */
+=======
+>>>>>>> A-CodingStandard
 	public void displayLine(String toShow) {
 		System.out.println(toShow);
 	}

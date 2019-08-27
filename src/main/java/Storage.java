@@ -51,6 +51,7 @@ public class Storage {
 		}
 	}
 
+<<<<<<< HEAD
 	/**
 	 * readAndUpdateArchivalList reads from the file and appends each task into the taskArrayList specified
 	 * @param taskArrayList the arrayList of tasks to append to
@@ -60,6 +61,9 @@ public class Storage {
 	 */
 	private static ArrayList<Task> readAndUpdateArchivalList(ArrayList<Task> taskArrayList, File file)
 			throws DukeException{
+=======
+	private static ArrayList<Task> readAndUpdateArchivalList(ArrayList<Task> taskArrayList, File file) throws DukeException{
+>>>>>>> A-CodingStandard
 		Scanner fileScanner;
 		try {
 			fileScanner = new Scanner(file);

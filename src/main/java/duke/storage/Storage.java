@@ -1,3 +1,5 @@
+package duke.storage;
+
 import duke.task.*;
 
 import java.io.File;
@@ -6,14 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     private File file;
 
-    protected Storage(String pathname) {
+    public Storage(String pathname) {
         this.file = new File(pathname);
     }
 
-    protected void saveTasks(TaskList tasks) {
+    public void saveTasks(TaskList tasks) {
         try {
             if (!file.exists()) {
                 File directory = new File(file.getParent());
@@ -46,7 +48,7 @@ class Storage {
 
     }
 
-    protected TaskList loadTasks() {
+    public TaskList loadTasks() {
         TaskList tasks = new TaskList();
         try {
             Scanner sc = new Scanner(file);

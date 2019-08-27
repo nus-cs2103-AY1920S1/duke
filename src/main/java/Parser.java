@@ -1,4 +1,5 @@
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
 

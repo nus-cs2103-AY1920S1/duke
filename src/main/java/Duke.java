@@ -29,7 +29,8 @@ public class Duke {
                         p.executeAndSave(t, s);
                         break;
                     } else if (command.equals("list") || command.equals("deadline") || command.equals("todo")
-                            || command.equals("event") || command.equals("done") || command.equals("delete")) {
+                            || command.equals("event") || command.equals("done") || command.equals("delete")
+                            || command.equals("find")) {
                         String description = sc.nextLine().stripLeading();
                         Parser p = new Parser(command, description);
                         p.executeAndSave(t, s);

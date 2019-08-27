@@ -1,6 +1,9 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
@@ -17,7 +20,9 @@ public class Storage {
         ArrayList<Task> oldList = new ArrayList<>();
         while (s.hasNextLine()) {
             String task = s.nextLine();
-            String[] splitTask = task.split("|", 0);
+            System.out.println(task);
+            String[] splitTask = task.split("\\|");
+            System.out.println(Arrays.toString(splitTask));
             switch(splitTask[0]) {
                 case "T":
                     ToDos todo = new ToDos(splitTask[2]);
@@ -42,6 +47,11 @@ public class Storage {
         return oldList;
     }
 
+    public void save(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
     public boolean isDone(int num) {
         if (num == 1) {
             return true;

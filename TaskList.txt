@@ -1,1 +1,5 @@
-Taiping is the cutest bear
+todo`✓`read book`
+deadline`✘`return book`null
+event`✘`meeting`null
+todo`✓`join cca`
+todo`✘`hug taiping`

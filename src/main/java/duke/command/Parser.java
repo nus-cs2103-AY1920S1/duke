@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -11,8 +12,9 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 
 class Parser {
-    static void parse(String act, Storage storage) throws FileNotFoundException, DukeIllegalDescriptionException {
-
+    static void parse(String act, Storage storage) throws FileNotFoundException,
+            DukeIllegalDescriptionException, DukeIllegalActionException {
+            try {
                 switch (Action.valueOf(act)) {
                     case list:
                         System.out.println("Here are the tasks in your list:\n");
@@ -87,7 +89,9 @@ class Parser {
                         storage.saveData();
                         break;
                 }
-
+            } catch(IllegalArgumentException e) {
+                throw new DukeIllegalActionException();
+            }
 
     }
 }

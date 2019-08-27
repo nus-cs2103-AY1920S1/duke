@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
 
 import java.io.FileNotFoundException;
@@ -34,7 +35,7 @@ public class Ui {
             String act = sc.next();
                 try {
                     Parser.parse(act, storage);
-                } catch (DukeIllegalDescriptionException e) {
+                } catch (DukeIllegalDescriptionException | DukeIllegalActionException e) {
                     System.out.println(e.getMessage());
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

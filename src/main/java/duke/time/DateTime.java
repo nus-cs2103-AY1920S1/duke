@@ -1,6 +1,6 @@
-package time;
+package duke.time;
 
-import exception.DukeUnknownInputException;
+import duke.exception.DukeUnknownInputException;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 
 /**
- * Handles date and time formatting using the java.time buil-in package.
+ * Handles date and duke.time formatting using the java.duke.time buil-in package.
  */
 public class DateTime {
     private OffsetDateTime dateTime;

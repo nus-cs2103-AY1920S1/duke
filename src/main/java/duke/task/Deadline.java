@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
-import exception.DukeUnknownInputException;
-import time.DateTime;
+import duke.exception.DukeUnknownInputException;
+import duke.time.DateTime;
 
 public class Deadline extends Task {
     private String deadline;

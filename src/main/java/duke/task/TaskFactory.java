@@ -1,9 +1,6 @@
-package task;
+package duke.task;
 
-import exception.DukeUnknownInputException;
-import time.DateTime;
-
-import static task.TaskType.TODO;
+import duke.exception.DukeUnknownInputException;
 
 public class TaskFactory {
     public static Task getTask(TaskType taskType, String[] args) throws DukeUnknownInputException {

@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Ui {
     private Scanner sc;
@@ -41,7 +40,7 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
-    public void printTasks(ArrayList<Task> tasks) {
+    public void printTasks(TaskList tasks) {
         System.out.println(horizontalLine);
         System.out.println("     Here are the tasks in your list:");
 

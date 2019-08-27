@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Storage {
@@ -14,8 +13,8 @@ public class Storage {
         file = new File(filePath);
     }
 
-    public ArrayList<Task> getTasks() throws FileNotFoundException, DukeException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList getTasks() throws FileNotFoundException, DukeException {
+        TaskList tasks = new TaskList();
         Scanner sc = new Scanner(file);
 
         while (sc.hasNext()) {
@@ -53,7 +52,7 @@ public class Storage {
         return tasks;
     }
 
-    public void saveTasks(ArrayList<Task> tasks) throws DukeException {
+    public void saveTasks(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
             StringBuilder fileStringBuilder = new StringBuilder();

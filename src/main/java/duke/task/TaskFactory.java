@@ -2,7 +2,18 @@ package duke.task;
 
 import duke.exception.DukeUnknownInputException;
 
+/**
+ * Implements the Factory pattern. Handles all types of task creation.
+ */
 public class TaskFactory {
+    /**
+     * Creates a specific task.
+     *
+     * @param taskType the type of task to create.
+     * @param args the required arguments to initialise the task.
+     * @return the created task.
+     * @throws DukeUnknownInputException if an unknown TaskType is passed as argument.
+     */
     public static Task getTask(TaskType taskType, String[] args) throws DukeUnknownInputException {
         switch (taskType) {
         case TODO:
@@ -21,6 +32,15 @@ public class TaskFactory {
         }
     }
 
+    /**
+     * Creates a specific task with specific completion status.
+     *
+     * @param taskType the type of task to create.
+     * @param args the required arguments to initialise the task.
+     * @param isDone the completion status of the task.
+     * @return the created task.
+     * @throws DukeUnknownInputException if an unknown TaskType is passed as argument.
+     */
     public static Task getTask(TaskType taskType, String[] args, boolean isDone) throws DukeUnknownInputException {
         switch (taskType) {
         case TODO:

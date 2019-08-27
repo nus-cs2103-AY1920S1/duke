@@ -11,7 +11,7 @@ import java.util.Arrays;
 import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 
 /**
- * Handles date and duke.time formatting using the java.duke.time buil-in package.
+ * Handles date and time formatting using the java.time built-in package.
  */
 public class DateTime {
     private OffsetDateTime dateTime;
@@ -22,6 +22,12 @@ public class DateTime {
                 .atOffset(ZoneOffset.ofHours(0));
     }
 
+    /**
+     * Creates a DateTime object from format DD/MM/YYYY TTTT, where time T follows the 24-hour format.
+     *
+     * @param dateTime the string in specified format.
+     * @return the DateTime instance.
+     */
     public static DateTime of(String dateTime) {
         String[] dateTimeArgs = dateTime.split(" ");
         // enforced format: 2/12/2019 1800

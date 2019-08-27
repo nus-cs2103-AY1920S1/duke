@@ -13,6 +13,13 @@ import static duke.task.TaskType.*;
  * Deals with making sense of commands.
  */
 public class Parser {
+    /**
+     * Parses the full command and returns the corresponding Command instance.
+     *
+     * @param command the full command to parse.
+     * @return the command corresponding to the input.
+     * @throws DukeException an exception generated when parsing the input.
+     */
     public static Command parse(String command) throws DukeException {
         // remove trailing/leading whitespace and split by whitespace(s)
         command = command.strip();

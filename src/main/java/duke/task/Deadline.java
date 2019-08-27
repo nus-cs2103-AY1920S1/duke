@@ -3,6 +3,9 @@ package duke.task;
 import duke.exception.DukeUnknownInputException;
 import duke.time.DateTime;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
     private String deadline;
 

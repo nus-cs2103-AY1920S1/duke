@@ -7,7 +7,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
-    int argument;
+    private int argument;
 
     public DoneCommand(int argument) {
         this.argument = argument;

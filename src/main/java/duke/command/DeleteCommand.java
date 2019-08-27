@@ -7,7 +7,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    int argument;
+    private int argument;
 
     public DeleteCommand(int argument) {
         this.argument = argument;

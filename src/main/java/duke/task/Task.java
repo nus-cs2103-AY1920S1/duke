@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.DateUtil;
-import duke.Duke;
 import duke.DukeException;
 
 public abstract class Task {

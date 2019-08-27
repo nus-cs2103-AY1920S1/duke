@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
 
     public Duke() {
         tasks = new ArrayList<>();
@@ -28,8 +29,8 @@ public class Duke {
 
         String welcomeMessage = String.format("%s\n%sHello! I'm Duke!\n%sWhat can I do for you?", logo, makeSpace(5), 
                 makeSpace(5));
-        System.out.println(welcomeMessage);
-        System.out.println(HORIZONTAL_LINE);
+        
+        System.out.printf("%s\n%s\n", welcomeMessage, HORIZONTAL_LINE);
     }
 
     public void exit() {
@@ -38,18 +39,37 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public void evaluate(String action) {
+    public void evaluate(String instruction) {
         System.out.println(HORIZONTAL_LINE);
 
-        if (action.equals("list")) {
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%s%d. %s\n", makeSpace(5), i + 1, tasks.get(i));
-            }
+        Scanner userInput = new Scanner(instruction);
+        String command = userInput.next();
+
+        if (command.equals("list")) {
+            listAllTasks();
+        } else if (command.equals("done")) {
+            int taskNumber = userInput.nextInt();
+            markTaskAsDone(taskNumber - 1);
         } else {
-            System.out.printf("%sadded: %s\n", makeSpace(5), action);
-            tasks.add(action);
+            System.out.printf("%sadded: %s\n", makeSpace(5), instruction);
+            tasks.add(new Task(instruction));
         }
         
         System.out.println(HORIZONTAL_LINE);
+    }
+
+    private void markTaskAsDone(int taskNumber) {
+        tasks.get(taskNumber).isDone = true;
+        
+        System.out.printf("%sNice! I've marked this task as done:\n", makeSpace(5));
+        System.out.printf("%s%s\n", makeSpace(7), tasks.get(taskNumber));
+    }
+
+    private void listAllTasks() {
+        System.out.printf("%sHere are the tasks in your list:\n", makeSpace(5));
+
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%s%d. %s\n", makeSpace(7), i + 1, tasks.get(i));
+        }
     }
 }

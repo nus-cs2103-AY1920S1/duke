@@ -10,8 +10,10 @@ class Parser {
             return new Command() {
                 public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
                     try {
-                        tasks.add(new Todo(inputs[1]));
+                        Task task = new Todo(inputs[1]);
+                        tasks.add(task);
                         SaveManager.saveTasks(tasks);
+                        echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Todo task description cannot be blank.");
                     }
@@ -25,8 +27,10 @@ class Parser {
                         String desc = strings[0].trim();
                         String by = strings[1].trim();
 
-                        tasks.add(new Deadline(desc, by));
+                        Task task = new Deadline(desc, by);
+                        tasks.add(task);
                         SaveManager.saveTasks(tasks);
+                        echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
                     }
@@ -40,8 +44,10 @@ class Parser {
                         String desc = strings[0].trim();
                         String at = strings[1].trim();
 
-                        tasks.add(new Event(desc, at));
+                        Task task = new Event(desc, at);
+                        tasks.add(task);
                         SaveManager.saveTasks(tasks);
+                        echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Event task description or start time cannot be blank.");
                     }
@@ -110,5 +116,11 @@ class Parser {
                 }
             };
         }
+    }
+
+    private static void echoTaskAdded(Task task, ArrayList<Task> tasks, Ui ui) {
+        ui.printLine("Got it. I've added this task:");
+        ui.printLine(String.format("%s\n", task));
+        ui.printLine(String.format("Now you have %d tasks in the list.\n", tasks.size()));
     }
 }

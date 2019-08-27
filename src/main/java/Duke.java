@@ -116,7 +116,7 @@ public class Duke {
                         break;
 
                     case "event":
-                        String eventAndDate = sc.nextLine();
+                        String eventAndDate = sc.nextLine().trim();
                         int index2 = eventAndDate.indexOf('/');
                         if(index2 > 0) {
                             //what the task is
@@ -145,6 +145,21 @@ public class Duke {
                     case "done":
                         int taskNumber = sc.nextInt() - 1;
                         this.taskList.completeTask(taskNumber);
+                        break;
+
+                    case "find":
+                        String keyword = sc.nextLine().trim();
+                        ArrayList<Task> found = this.taskList.find(keyword);
+                        int n = 1;
+
+                        if(found.isEmpty()){
+                            System.out.println("None found");
+                        } else {
+                            for (Task item : found) {
+                                System.out.println(n + "." + item);
+                                n++;
+                            }
+                        }
                         break;
 
                     default:

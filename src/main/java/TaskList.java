@@ -65,4 +65,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> list = new ArrayList<>();
+        for(Task current : this.list) {
+            String taskInString = current.description;
+
+            if(taskInString.toLowerCase().contains(keyword.toLowerCase())){
+                list.add(current);
+            }
+        }
+        return list;
+    }
+
 }

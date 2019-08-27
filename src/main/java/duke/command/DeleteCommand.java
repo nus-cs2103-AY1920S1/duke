@@ -1,7 +1,11 @@
 package duke.command;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 public class DeleteCommand extends Command{
     private int taskNumber;
 
@@ -10,7 +14,7 @@ public class DeleteCommand extends Command{
         this.taskNumber = Integer.valueOf(details);
     }
 
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         try {
             tasks.delete(this.taskNumber, ui);
             storage.deleteTaskInData(this.taskNumber);

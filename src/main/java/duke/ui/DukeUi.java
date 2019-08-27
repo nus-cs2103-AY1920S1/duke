@@ -1,8 +1,14 @@
 package duke.ui;
-import duke.task.*;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import duke.tasklist.TaskList;
-public class DukeUI {
-    public DukeUI() {
+
+public class DukeUi {
+    public DukeUi() {
 
     }
 
@@ -50,7 +56,7 @@ public class DukeUI {
         }
     }
 
-    public void printAddTodoMessage(Todo current, int numberOfTasks) {
+    public void printAddToDoMessage(ToDo current, int numberOfTasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println(current.toString());
         System.out.println("Now you have " + numberOfTasks + " tasks in the list.");

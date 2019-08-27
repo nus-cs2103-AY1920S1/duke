@@ -1,8 +1,13 @@
 package duke.tasklist;
+
 import duke.task.Task;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.exception.DukeTaskDoneException;
+
 import java.util.ArrayList;
+
 public class TaskList {
     ArrayList<Task> tasks;
 
@@ -26,7 +31,7 @@ public class TaskList {
         tasks.add(current);
     }
 
-    public void delete(int taskNumber, DukeUI ui) throws IndexOutOfBoundsException{
+    public void delete(int taskNumber, DukeUi ui) throws IndexOutOfBoundsException{
         Task current = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
         ui.printTaskDeletedMessage(current, tasks.size());
@@ -34,7 +39,7 @@ public class TaskList {
 
     public void done (int taskNumber) throws DukeTaskDoneException, IndexOutOfBoundsException{
         Task current = tasks.get(taskNumber - 1);
-        if(current.getStatus()) {
+        if (current.getStatus()) {
             throw new DukeTaskDoneException();
         } else {
             current.markAsDone();

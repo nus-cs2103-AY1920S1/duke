@@ -17,7 +17,6 @@ public class Duke {
         while (true) {
             String next = sc.nextLine();
             String firstWord = next.split(" ")[0];
-            //String remaining = next.split(" ", 2)[1];
             if (next.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
             } else if (next.equals("list")) {

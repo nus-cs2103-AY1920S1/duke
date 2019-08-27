@@ -16,7 +16,7 @@ public class DateReader {
 
     	String dd = arr[0];
     	String mm = arr[1];
-    	String yy = arr[2].split(" ")[0];
+    	String yyyy = arr[2].split(" ")[0];
         String time = arr[2].split(" ")[1];
 
         if (Integer.parseInt(dd) > 31 || Integer.parseInt(dd) < 1) {
@@ -97,25 +97,25 @@ public class DateReader {
     		break;
     	}
 
-        String timeinampm;
+        String timeInAmPm;
         if (time.equals("1200") || time.equals("0000") || time.substring(0, 2).equals("12")) {
-            timeinampm = "12";
+            timeInAmPm = "12";
         } else {
-            timeinampm = Integer.toString((Integer.parseInt(time)/100)%12);
+            timeInAmPm = Integer.toString((Integer.parseInt(time)/100)%12);
         }
 
-        String dateandtime = dd + " of " + mm + " " + yy + ", " + timeinampm;
+        String dateAndTime = dd + " of " + mm + " " + yyyy + ", " + timeInAmPm;
 
         if (!time.substring(2).equals("00")) {
-            dateandtime += time.substring(2);
+            dateAndTime += time.substring(2);
         } else {}
 
         if (Integer.parseInt(time) >= 1200) {
-            dateandtime += "pm";
+            dateAndTime += "pm";
         } else {
-            dateandtime += "am";
+            dateAndTime += "am";
         }
-    	return dateandtime;
+    	return dateAndTime;
 
     }
 }

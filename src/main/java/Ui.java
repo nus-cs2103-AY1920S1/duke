@@ -16,8 +16,8 @@ public class Ui {
      * prints a indented line.
      */
     public static void showLine() {
-        String indentedline = "    ____________________________________________________________";
-        System.out.println(indentedline);
+        String indentedLine = "    ____________________________________________________________";
+        System.out.println(indentedLine);
     }
 
     /**
@@ -62,19 +62,19 @@ public class Ui {
 
     /**
      * prints the current list of tasks.
-     * @param tasklist the list of tasks to be printed.
+     * @param taskList the list of tasks to be printed.
      */
-    public static void printList(TaskList tasklist) {
-        Task[] tasks = tasklist.getTasks();
+    public static void printList(TaskList taskList) {
+        Task[] tasks = taskList.getTasks();
         showLine();
         if (tasks[0] == null) {
             System.out.println("     There are no tasks in your list.");
         } else {
             System.out.println("     Here are the tasks in your list:");
-            int y = 0;
-            while (tasks[y] != null) {
-                System.out.println("     " + (y + 1) + ". " + tasks[y]);
-                y++;
+            int taskIndex = 0;
+            while (tasks[taskIndex] != null) {
+                System.out.println("     " + (taskIndex + 1) + ". " + tasks[taskIndex]);
+                taskIndex++;
             }
         }
         showLine();
@@ -94,16 +94,16 @@ public class Ui {
     /**
      * prints out a response when a task is deleted.
      * @param t the deleted task.
-     * @param x number of tasks left in the list.
+     * @param numOfTasksLeft number of tasks left in the list.
      */
-    public static void printDeleted(Task t, int x) {
+    public static void printDeleted(Task t, int numOfTasksLeft) {
         showLine();
         System.out.println("     Noted. I've removed this task:");
         System.out.println("       " + t);
-        if (x == 1) {
-            System.out.println("     Now you have " + x + " task in the list.");
+        if (numOfTasksLeft == 1) {
+            System.out.println("     Now you have " + numOfTasksLeft + " task in the list.");
         } else {
-            System.out.println("     Now you have " + x + " tasks in the list.");
+            System.out.println("     Now you have " + numOfTasksLeft + " tasks in the list.");
         }
         showLine();
     }

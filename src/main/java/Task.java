@@ -24,7 +24,6 @@ public class Task {
         this.isDone = true;
     }
 
-
     /**
      * the method reads the strings from the saved txt file and converts them to Task Object form.
      * @param s string in the txt file.

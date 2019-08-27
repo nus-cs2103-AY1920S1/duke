@@ -20,10 +20,10 @@ public class Storage {
 
     /**
      * Saves the current task list into the specified txt file.
-     * @param tasklist current list of tasks to be saved.
+     * @param taskList current list of tasks to be saved.
      */
-    public static void save(TaskList tasklist) {
-        Task[] arr = tasklist.getTasks();
+    public static void save(TaskList taskList) {
+        Task[] arr = taskList.getTasks();
         String file2 = "DukeList.txt";
         StringBuilder sb = new StringBuilder();
         if (arr[0] != null) {
@@ -45,19 +45,19 @@ public class Storage {
     /**
      * read the saved tasks in the file and update the tasklist.
      * @param filePath location of file to be read.
-     * @param tasklist tasklist to be updated with the tasks read in the file.
+     * @param taskList tasklist to be updated with the tasks read in the file.
      * @throws FileNotFoundException If the saved file does not exist.
      */
-    public static void readFileContents(String filePath, TaskList tasklist) throws FileNotFoundException {
+    public static void readFileContents(String filePath, TaskList taskList) throws FileNotFoundException {
         try {
-            Task[] tasks = tasklist.getTasks();
+            Task[] tasks = taskList.getTasks();
             File f = new File(filePath);
             Scanner s = new Scanner(f);
-            int x = 0;
+            int taskIndex = 0;
             while (s.hasNext()) {
                 String currtask = s.nextLine();
-                tasks[x] = Task.readString(currtask);
-                x++;
+                tasks[taskIndex] = Task.readString(currtask);
+                taskIndex++;
             }
         } catch (UnknownInputException e) {
             System.out.println(e.getMessage());

@@ -1,5 +1,5 @@
 public class Duke {
-    private static TaskList tasklist;
+    private static TaskList taskList;
 
     public static void main(String[] args) throws DukeException {
         run();
@@ -10,15 +10,13 @@ public class Duke {
      */
     public static void run() {
         Task[] tasks = new Task[100];
-        tasklist = new TaskList(tasks);
-
-        Storage.readSavedList(tasklist);
+        taskList = new TaskList(tasks);
+        Storage.readSavedList(taskList);
 
         Ui.greet();
 
         String input = Ui.readCommand();
-
-        Parser.Parse(input, tasklist);
+        Parser.Parse(input, taskList);
 
         Ui.exit();
     }

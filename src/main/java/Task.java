@@ -21,5 +21,4 @@ public abstract class Task {
     }
 
     public abstract String getSaveString();
-    public abstract Task parseSaveString(String saveString);
 }

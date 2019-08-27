@@ -20,9 +20,8 @@ public class Todo extends Task {
         return sj.toString();
     }
 
-    @Override
-    public Todo parseSaveString(String saveString) {
-        String[] saveStringArr = saveString.split("|");
+    public static Todo parseSaveString(String saveString) {
+        String[] saveStringArr = saveString.split("\\|");
         boolean isDone = saveStringArr[1].equals("1");
         String description = saveStringArr[2];
         Todo todo = new Todo(description);

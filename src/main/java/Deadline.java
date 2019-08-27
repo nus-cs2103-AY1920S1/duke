@@ -24,9 +24,8 @@ public class Deadline extends Task {
         return sj.toString();
     }
 
-    @Override
-    public Deadline parseSaveString(String saveString) {
-        String[] saveStringArr = saveString.split("|");
+    public static Deadline parseSaveString(String saveString) {
+        String[] saveStringArr = saveString.split("\\|");
         boolean isDone = saveStringArr[1].equals("1");
         String description = saveStringArr[2];
         String by = saveStringArr[3];

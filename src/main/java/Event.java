@@ -24,9 +24,8 @@ public class Event extends Task {
         return sj.toString();
     }
 
-    @Override
-    public Event parseSaveString(String saveString) {
-        String[] saveStringArr = saveString.split("|");
+    public static Event parseSaveString(String saveString) {
+        String[] saveStringArr = saveString.split("\\|");
         boolean isDone = saveStringArr[1].equals("1");
         String description = saveStringArr[2];
         String at = saveStringArr[3];

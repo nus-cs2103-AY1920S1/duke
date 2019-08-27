@@ -3,7 +3,7 @@ package task;
 /**
  * Todo Class.
  *
- * Represents the todo-type task.
+ * <p>Represents the todo-type task.
  *
  * @author Marcus Ong
  */

@@ -24,23 +24,29 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
 public class Parser {
+    /**
+     * Parses user input and returns a Command object.
+     *
+     * @param command User string input.
+     * @return executable Command object.
+     * @throws EmptyFieldException           If input does not provide a required field value.
+     * @throws DukeIllegalArgumentException  If input has invalid field value.
+     * @throws InvalidCommandFormatException If input is not in the right format.
+     * @throws UnknownCommandException       If a command cannot be understood.
+     * @throws InvalidIndexException         If input provides an out-of-bound index.
+     */
     public static Command parse(String command) throws EmptyFieldException, DukeIllegalArgumentException,
             InvalidCommandFormatException, UnknownCommandException, InvalidIndexException {
         if (command.equalsIgnoreCase("list")) {
-
             return new ListTasksCommand(command);
-
         } else if (command.toLowerCase().startsWith("done")) {
-
             try {
                 int taskIndex = Integer.parseInt(command.split(" ")[1]);
                 return new DoneTaskCommand(command, taskIndex);
             } catch (NumberFormatException e) {
                 throw new InvalidIndexException("OOPS!!! I can't do that, please gimme a valid task ID mate.");
             }
-
         } else if (command.toLowerCase().startsWith("todo")) {
-
             try {
                 //parse description from command string
                 int commandLength = "todo ".length();
@@ -53,12 +59,10 @@ public class Parser {
 
                 return new AddTaskCommand(command, task);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("OOPS!!! Please gimme a todo with the right format: " +
-                        "'todo [description]'");
+                throw new InvalidCommandFormatException("OOPS!!! Please gimme a todo with the right format: "
+                        + "'todo [description]'");
             }
-
         } else if (command.toLowerCase().startsWith("deadline")) {
-
             try {
                 int byLength = "/by".length();
                 int commandLength = "deadline ".length();
@@ -90,12 +94,11 @@ public class Parser {
                 return new AddTaskCommand(command, task);
 
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("OOPS!!! Please gimme a deadline with the right format: " +
-                        "'deadline [description] /by [datetime]'\n\t" +
-                        "datetime format: d/M/yyyy[ HHmm]");
+                throw new InvalidCommandFormatException("OOPS!!! Please gimme a deadline with the right format: "
+                        + "'deadline [description] /by [datetime]'\n\t"
+                        + "datetime format: d/M/yyyy[ HHmm]");
             }
         } else if (command.toLowerCase().startsWith("event")) {
-
             try {
                 int atLength = "/at".length();
                 int commandLength = "event ".length();
@@ -133,36 +136,33 @@ public class Parser {
                                 ((LocalTime) parsedEnd).atDate((LocalDate) parsedStart), true);
                     } else {
                         throw new InvalidCommandFormatException(
-                                "OOPS!!! Please gimme an event with the right format: \n\t\t" +
-                                "'event [description] /at [start datetime] - [end datetime]'\n\t" +
-                                "datetime format: d/M/yyyy HHmm");
+                                "OOPS!!! Please gimme an event with the right format: \n\t\t"
+                                        + "'event [description] /at [start datetime] - [end datetime]'\n\t"
+                                        + "datetime format: d/M/yyyy HHmm");
                     }
                 } else {
                     TemporalAccessor parsedStart = fmt.parseBest(at, LocalDateTime::from, LocalDate::from);
                     if (parsedStart instanceof LocalDateTime) {
                         task = new Event(description, (LocalDateTime) parsedStart);
                     } else if (parsedStart instanceof LocalDate) {
-                        task = new Event(description, ((LocalDate) parsedStart).atStartOfDay(), true );
+                        task = new Event(description, ((LocalDate) parsedStart).atStartOfDay(), true);
                     }
                 }
 
                 return new AddTaskCommand(command, task);
 
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
-                throw new InvalidCommandFormatException("OOPS!!! Please gimme an event with the right format: \n\t\t" +
-                        "'event [description] /at [start datetime] - [end datetime]'\n\t" +
-                        "datetime format: d/M/yyyy HHmm");
+                throw new InvalidCommandFormatException("OOPS!!! Please gimme an event with the right format: \n\t\t"
+                        + "'event [description] /at [start datetime] - [end datetime]'\n\t"
+                        + "datetime format: d/M/yyyy HHmm");
             }
-
         } else if (command.toLowerCase().startsWith("delete")) {
-
             try {
                 int taskIndex = Integer.parseInt(command.split(" ")[1]);
                 return new DeleteTaskCommand(command, taskIndex);
             } catch (NumberFormatException e) {
                 throw new InvalidIndexException("OOPS!!! I can't do that, please gimme a valid task ID mate.");
             }
-
         } else if (command.equalsIgnoreCase("bye")) {
             return new ExitCommand(command);
         } else {

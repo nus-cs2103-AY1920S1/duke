@@ -3,7 +3,7 @@ package task;
 /**
  * Task Class.
  *
- * Represents a single task.
+ * <p>Represents a single task.
  *
  * @author Marcus Ong
  */
@@ -12,20 +12,41 @@ public abstract class Task {
     protected boolean isDone;
     protected TaskType type;
 
+    /**
+     * Task constructor.
+     *
+     * @param description Description of task.
+     * @param type Type of task.
+     */
     public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
         this.type = type;
     }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public TaskType getType() { return type; }
-    public void setType(TaskType type) { this.type = type; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public boolean isDone() { return isDone; }
-    public void setDone(boolean isDone) { this.isDone = isDone; }
+    public TaskType getType() {
+        return type;
+    }
+
+    public void setType(TaskType type) {
+        this.type = type;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
 
     /**
      * Get a status symbol for the task.

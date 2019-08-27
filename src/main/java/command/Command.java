@@ -5,6 +5,13 @@ import core.Ui;
 import exception.DukeException;
 import task.TaskList;
 
+/**
+ * Command class.
+ *
+ * <p>Parent class for all Duke commands.
+ *
+ * @author Marcus Ong
+ */
 public abstract class Command {
     private String commandString;
     private boolean exit;

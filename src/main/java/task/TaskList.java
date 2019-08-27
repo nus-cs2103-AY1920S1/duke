@@ -4,6 +4,13 @@ import exception.InvalidIndexException;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList Class.
+ *
+ * <p>Represents a list of Tasks.
+ *
+ * @author Marcus Ong
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -20,7 +27,13 @@ public class TaskList {
         return tasks;
     }
 
-    /** Marks a task as done */
+    /**
+     * Marks a task as done.
+     *
+     * @param taskIndex Index of task to set as done.
+     * @return Task set as done.
+     * @throws InvalidIndexException Index is out-of-bounds.
+     */
     public Task done(int taskIndex) throws InvalidIndexException {
         try {
             Task task = tasks.get(taskIndex - 1);
@@ -31,7 +44,13 @@ public class TaskList {
         }
     }
 
-    /** Deletes a task from the list permanently */
+    /**
+     * Deletes a task from the list permanently.
+     *
+     * @param taskIndex Index of task to delete.
+     * @return Task that was deleted.
+     * @throws InvalidIndexException Index is out-of-bounds.
+     */
     public Task delete(int taskIndex) throws InvalidIndexException {
         try {
             Task task = tasks.remove(taskIndex - 1);

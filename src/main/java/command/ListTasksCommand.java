@@ -4,6 +4,13 @@ import core.Storage;
 import core.Ui;
 import task.TaskList;
 
+/**
+ * ListTaskCommand class.
+ *
+ * <p>Command to show all tasks in list.
+ *
+ * @author Marcus Ong
+ */
 public class ListTasksCommand extends Command {
 
     public ListTasksCommand(String commandString) {

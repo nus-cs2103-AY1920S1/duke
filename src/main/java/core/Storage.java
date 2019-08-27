@@ -1,6 +1,6 @@
 package core;
 
-import exception.DukeIOException;
+import exception.DukeIoException;
 import exception.DukeIllegalArgumentException;
 import task.Deadline;
 import task.Event;
@@ -27,8 +27,13 @@ public class Storage {
         this.path = Paths.get(filePath);
     }
 
-    /** Saves tasks to hard disk */
-    public void save(TaskList taskList) throws DukeIOException {
+    /**
+     * Saves tasks into a file on hard disk.
+     *
+     * @param taskList TaskList to save.
+     * @throws DukeIoException If file cannot be opened/modified.
+     */
+    public void save(TaskList taskList) throws DukeIoException {
         try {
             if (!Files.exists(path)) {
                 Files.createFile(path);
@@ -43,7 +48,8 @@ public class Storage {
                 Task task = tasks.get(i);
 
                 StringBuilder rowBuilder = new StringBuilder(
-                        String.format("%s|%s|%s", task.getType().getTag(), task.isDone() ? "1" : "0", task.getDescription()));
+                        String.format("%s|%s|%s", task.getType().getTag(),
+                                task.isDone() ? "1" : "0", task.getDescription()));
 
                 if (task instanceof Deadline) {
                     rowBuilder.append(String.format("|%s",
@@ -65,12 +71,18 @@ public class Storage {
 
             writer.close();
         } catch (IOException e) {
-            throw new DukeIOException("OOPS!!! Error trying to save data to file.");
+            throw new DukeIoException("OOPS!!! Error trying to save data to file.");
         }
     }
 
-    /** Loads tasks from hard disk */
-    public ArrayList<Task> load() throws DukeIOException, DukeIllegalArgumentException {
+    /**
+     * Loads tasks from hard disk.
+     *
+     * @return An ArrayList of Tasks.
+     * @throws DukeIoException              If file cannot be opened/read.
+     * @throws DukeIllegalArgumentException If file data is corrupted and invalid values are read.
+     */
+    public ArrayList<Task> load() throws DukeIoException, DukeIllegalArgumentException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
@@ -88,7 +100,7 @@ public class Storage {
                         Task task = new Todo(description);
                         task.setDone(isDone);
                         tasks.add(task);
-                    } else if(type.equalsIgnoreCase(TaskType.DEADLINE.getTag())) {
+                    } else if (type.equalsIgnoreCase(TaskType.DEADLINE.getTag())) {
                         LocalDateTime byDate = LocalDateTime.parse(parts[3], DateTimeFormatter.ISO_DATE_TIME);
                         boolean isAllDay = "1".equals(parts[4]);
                         Task task = new Deadline(description, byDate, isAllDay);
@@ -107,7 +119,7 @@ public class Storage {
                 reader.close();
             }
         } catch (IOException e) {
-            throw new DukeIOException("OOPS!!! Error trying to load data from file.");
+            throw new DukeIoException("OOPS!!! Error trying to load data from file.");
         }
 
         return tasks;

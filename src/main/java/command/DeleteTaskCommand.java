@@ -2,11 +2,18 @@ package command;
 
 import core.Storage;
 import core.Ui;
-import exception.DukeIOException;
+import exception.DukeIoException;
 import exception.InvalidIndexException;
 import task.Task;
 import task.TaskList;
 
+/**
+ * DeleteTaskCommand class.
+ *
+ * <p>Command to delete Task.
+ *
+ * @author Marcus Ong
+ */
 public class DeleteTaskCommand extends Command {
     private int taskIndex;
 
@@ -16,9 +23,9 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, DukeIOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, DukeIoException {
         Task task = tasks.delete(taskIndex);
-        ui.replyDeleteTask(task, tasks.size());
+        ui.showDeleteTask(task, tasks.size());
         storage.save(tasks);
     }
 }

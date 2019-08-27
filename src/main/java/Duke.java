@@ -8,7 +8,7 @@ import task.TaskList;
 /**
  * Duke Chat Class.
  *
- * A Personal Assistant Chatbot that helps to keep track of various things.
+ * <p>A Personal Assistant Chatbot that helps to keep track of various things.
  *
  * @author Marcus Ong
  */
@@ -18,6 +18,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke Constructor.
+     *
+     * @param filePath String containing path of data file for Duke.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -33,11 +38,13 @@ public class Duke {
         new Duke(System.getProperty("user.dir") + "/data/duke.txt").run();
     }
 
-    /** Handles chat bot interaction */
+    /**
+     * Runs chat bot interaction.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);

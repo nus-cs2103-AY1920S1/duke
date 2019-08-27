@@ -228,6 +228,7 @@ public class Duke {
 }
 */
 
+/**
 public class Duke {
 
     private Storage storage;
@@ -356,5 +357,43 @@ public class Duke {
 
     public static void handleInputUnrecognised(String inputUnrecognised) throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+}
+ */
+
+
+public class Duke {
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            try {
+                String input = sc.nextLine();
+                Command c = Parser.parse(input);
+                c.execute(tasks, ui, storage);
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

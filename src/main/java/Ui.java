@@ -5,12 +5,15 @@ public class Ui {
     }
 
     public void showWelcome() {
-        String initialMessage = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(initialMessage);
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
-        return;
+        System.exit(0);
+    }
+
+    public void showError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 }

@@ -11,14 +11,14 @@ public class AddCommand extends Command {
     private TaskType type;
     private String[] args;
 
-    protected AddCommand(TaskType type, String[] args, boolean isExit) {
+    public AddCommand(TaskType type, String[] args, boolean isExit) {
         super(isExit);
         this.type = type;
         this.args = args;
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         // create the appropriate task, add to the list and write to disk
         Task task = taskList.add(TaskFactory.getTask(type, args));
 
@@ -27,5 +27,9 @@ public class AddCommand extends Command {
 
         // update hard disk
         storage.writeToDisk(taskList);
+    }
+
+    public String[] getArgs() {
+        return this.args;
     }
 }

@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         // mark the task corresponding to index as done
         Task task = taskList.markAsDone(idx);
 

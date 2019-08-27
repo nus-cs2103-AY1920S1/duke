@@ -12,7 +12,7 @@ public class Ui {
         System.out.println(border);
     }
 
-    public void printAdd(ArrayList<Task> arr){
+    public void printAdd(ArrayList<Task> arr) {
         System.out.println(border);
         System.out.println("     Got it. I've added this task: ");
         System.out.println("       " + arr.get(arr.size() - 1));
@@ -36,7 +36,7 @@ public class Ui {
         System.out.println(border);
     }
 
-    public void printBye(){
+    public void printBye() {
         System.out.println(border + "\n" + "     Bye. Hope to see you again soon!" + "\n" + border);
     }
 
@@ -46,7 +46,7 @@ public class Ui {
         System.out.println(border);
     }
 
-    public void printMessage(String message){
+    public void printMessage(String message) {
         System.out.println(border);
         System.out.println("     " + message);
         System.out.println(border);

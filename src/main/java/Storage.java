@@ -10,7 +10,7 @@ public class Storage {
     String filePath;
     File f;
 
-    public Storage(String filePath) throws IOException{
+    public Storage(String filePath) throws IOException {
         this.filePath = filePath;
 
         File f = new File(filePath);

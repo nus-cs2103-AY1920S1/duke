@@ -94,6 +94,10 @@ public class Ui {
 				+ "in the " + "list.");
 	}
 
+	/**
+	 * Prints a message when a <code>FindCommand</code> is executed.
+	 * @param matchingTasks Tasks that contain the provided key word.
+	 */
 	public void printFindMessage(ArrayList<Task> matchingTasks) {
 		System.out.println("\t Here are the matching tasks in your list:");
 		int i = 1;

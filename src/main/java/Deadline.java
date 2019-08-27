@@ -1,6 +1,10 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+/**
+ * Tasks that are used for deadlines.
+ */
 public class Deadline extends Task {
     static String[] suffixes =
         {  "0th",  "1st",  "2nd",  "3rd",  "4th",  "5th",  "6th",  "7th",  "8th",  "9th",

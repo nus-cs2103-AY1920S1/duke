@@ -6,6 +6,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Manages all the tasks.
+ */
+
 public class TaskList {
     final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
     private List<Task> taskList;
@@ -16,10 +20,6 @@ public class TaskList {
         this.ui = ui;
     }
 
-    public void addTask(Task task) {
-        taskList.add(task);
-    }
-
     public Task getTask(int i) {
         return taskList.get(i);
     }
@@ -28,6 +28,19 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Add task into the list if information is given as a Task.
+     * @param task A task object
+     */
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
+    /**
+     * Add task into the list if information is given as a string of commands.
+     * @param command Information to be used
+     * @throws DukeException throws duke exception
+     */
     public void addTask(String command) throws DukeException{
         ui.horizontalLine();
         List<String> commandList = new ArrayList<>(Arrays.asList(command.split(" ")));
@@ -113,6 +126,10 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * Changes the status of the task from undone to done
+     * @param index Index of the task
+     */
     public void doneTask(int index) {
         index = index - 1;
         taskList.get(index).changeStatusTrue();
@@ -123,6 +140,10 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * Deletes the task from the list
+     * @param index Index of the task
+     */
     public void deleteTask(int index) {
         index = index - 1;
         Task taskHolder = taskList.remove(index);

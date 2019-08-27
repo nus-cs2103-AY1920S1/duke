@@ -3,6 +3,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Manages information by store and reading them.
+ */
+
 public class Storage {
     final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
     private String filePath;
@@ -13,6 +17,10 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /**
+     * Reads information from a text file into the list.
+     * @throws IODukeException throws IO related duke exception
+     */
     public void readTask() throws IODukeException{
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = null;
@@ -63,6 +71,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all the current tasks in the list into a local text file.
+     * @throws IODukeException throws IO related duke exception
+     */
     public void saveTask() throws IODukeException{
         PrintWriter pr = null;
         try {

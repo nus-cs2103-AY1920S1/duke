@@ -7,11 +7,17 @@ public class Duke {
      * @param args Command-line arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage();
-
         final String welcome = "Hello! I'm Duke. What can I do for you?";
         final String farewell = "Bye. Hope to see you again soon!";
+
+        final String separator = System.getProperty("file.separator");
+        final String saveFilePath = String.format(
+                "%s%sdata%sduke.txt",
+                System.getProperty("user.dir"), separator, separator
+        );
+
+        Scanner sc = new Scanner(System.in);
+        Storage storage = new Storage(saveFilePath);
 
         print(welcome);
         prompt();
@@ -133,6 +139,8 @@ public class Duke {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         }
+
+        storage.writeSaveData();
     }
 
     private static void prompt() {

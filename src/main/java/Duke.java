@@ -1,9 +1,10 @@
-
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.lang.reflect.Array;
+
 
 public class Duke {
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,7 +33,7 @@ public class Duke {
                 System.out.println(horLine);
                 if(taskList.isEmpty()) {
                     System.out.println("Sorry, there are no tasks in the list");
-                } else { testing testing testing
+                } else {
                     System.out.println("     Here are the tasks in your list:");
                     int counter = 1;
                     for (Task task : taskList) {
@@ -105,5 +106,4 @@ public class Duke {
             }
         }
     }
-
 }

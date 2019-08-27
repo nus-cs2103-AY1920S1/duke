@@ -53,7 +53,7 @@ class Storage {
                 }
             }
             br.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new DukeException(ex.getMessage());
         }
         return aList;
@@ -68,7 +68,7 @@ class Storage {
      void writeToHardDisk(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filepath);
-            for(Task t: tasks.taskList) {
+            for (Task t: tasks.taskList) {
                 fileWriter.write(t.toString() + "\n");
             }
             fileWriter.flush();

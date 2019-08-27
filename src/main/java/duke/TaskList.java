@@ -12,7 +12,7 @@ public class TaskList {
     TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
-    TaskList() {}
+    TaskList() { }
 
     /**
      * Removes task from the task list.
@@ -47,6 +47,6 @@ public class TaskList {
      * @return Task from corresponding index of the task list.
      */
     Task getTask(int index) {
-        return taskList.get(index -1);
+        return taskList.get(index - 1);
     }
 }

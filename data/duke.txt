@@ -1,0 +1,4 @@
+T|1|teach junior how to skate
+D|0|return book|Sunday
+T|1|skateeeeee
+T|0|math tut

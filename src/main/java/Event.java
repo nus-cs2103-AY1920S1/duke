@@ -1,13 +1,22 @@
-public class Event extends Task {
-    protected String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    protected LocalDateTime time;
+
+    public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), time);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, h:mma");
+        return String.format(
+                "[E][%s] %s (at: %s)",
+                isDone ? "+" : " ",
+                description,
+                time.format(dateTimeFormatter)
+        );
     }
 }

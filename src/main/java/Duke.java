@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +8,10 @@ public class Duke {
     private static String TASKS_FILE_NAME = System.getProperty("user.dir") + "\\data\\duke.txt";
 
     public static void main(String[] args) {
-        String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
+        String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?";
+        String mainMenuMessage = "To input dates and times for deadlines and events, " +
+                "please use the format: 29/03/2019 6:05PM";
+
         System.out.println(welcomeMessage);
 
         ArrayList<Task> tasks = new ArrayList<>();
@@ -20,6 +24,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            System.out.println(mainMenuMessage);
+
             String input = sc.nextLine();
             String command = getNthWordFromString(input, 0).toLowerCase();
 
@@ -128,14 +134,14 @@ public class Duke {
             if (descriptionDeadline.length < 2) {
                 throw new DukeException("Deadline format incorrect, should be e.g. deadline task /by time");
             }
-            newTask = new Deadline(descriptionDeadline[0], descriptionDeadline[1]);
+            newTask = new Deadline(descriptionDeadline[0], convertInputDateTime(descriptionDeadline[1]));
             break;
         case "event":
             String[] descriptionTime = description.split(" /at ", 2);
             if (descriptionTime.length < 2) {
                 throw new DukeException("Event format incorrect, should be e.g. event task /at time");
             }
-            newTask = new Event(descriptionTime[0], descriptionTime[1]);
+            newTask = new Event(descriptionTime[0], convertInputDateTime(descriptionTime[1]));
             break;
         }
 
@@ -180,7 +186,7 @@ public class Duke {
                     deadline = deadline.substring(0, deadline.length() - 1);
 
                     // read task with deadline
-                    taskToRead = new Deadline(taskDescription, deadline);
+                    taskToRead = new Deadline(taskDescription, convertInputDateTime(deadline));
                     break;
                 case "E":
                     // get description
@@ -194,7 +200,7 @@ public class Duke {
                     time = time.substring(0, time.length() - 1);
 
                     // read task with deadline
-                    taskToRead = new Event(taskDescription, time);
+                    taskToRead = new Event(taskDescription, convertInputDateTime(time));
                     break;
                 }
 
@@ -208,7 +214,7 @@ public class Duke {
                 // go to next line (task) in file
                 line = reader.readLine();
             }
-        } catch (IOException e) {
+        } catch (IOException|DukeException e) {
             System.err.println(e + "");
         } finally {
             // close reader
@@ -250,6 +256,38 @@ public class Duke {
                     System.err.println(e + "");
                 }
             }
+        }
+    }
+
+    private static LocalDateTime convertInputDateTime(String dateTime) throws DukeException {
+        // ensure that dateTime string is in the format: "12/02/2019 6:05pm"
+        try {
+            // get day of month, month, and year
+            String[] dateArray = dateTime.split(" ")[0].split("/");
+            int dayOfMonth = Integer.parseInt(dateArray[0]);
+            int month = Integer.parseInt(dateArray[1]);
+            int year = Integer.parseInt(dateArray[2]);
+
+            // get minute and hour
+            String time = dateTime.split(" ")[1];
+            int minute = Integer.parseInt(time.split(":")[1].substring(0, 2));
+            int hour = Integer.parseInt(time.split(":")[0]);
+            if (hour <= 0) {
+                throw new DukeException("Hour cannot be less than or equal to 0");
+            }
+            boolean isPastNoon = time.substring(time.length() - 2).equalsIgnoreCase("pm");
+            if (isPastNoon && hour != 12) {
+                // convert to 24 hour format (except for 12pm)
+                hour += 12;
+            } else if (hour == 12) {
+                // edge case: 12am to 12:59am
+                hour = 0;
+            }
+
+            return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
+        } catch (Exception e) {
+            System.err.println(e + "");
+            throw new DukeException("DateTime \"" + dateTime + "\" format incorrect");
         }
     }
 }

@@ -1,3 +1,5 @@
+import duke.exception.DukeException;
+
 public class Duke {
     private static Storage storage;
     private static TaskList tasks;

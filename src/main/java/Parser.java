@@ -1,3 +1,4 @@
+import duke.exception.DukeException;
 import duke.task.*;
 
 class Parser {

@@ -20,7 +20,7 @@ public class Ui {
         System.out.println("Bye. Hope to see you again!");
     }
 
-    public void printList(TaskList t) {
+    public void printList(TaskList t,Storage s) {
         System.out.println("Here are the tasks in your list:");
         int size = t.getCommandList().size();
         for (int i = 1; i < size + 1; i++) {

@@ -10,7 +10,7 @@ public class Command {
             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else {
             if (input.equals("list")) {
-                ui.printList(t);
+                ui.printList(t,s);
             } else if (input.substring(0, 4).equals("done")) {
                 Parser.parseDone(input,t,s);
             } else {

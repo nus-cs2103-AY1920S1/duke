@@ -13,7 +13,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-  public ArrayList<Task> load() throws DukeException {
+   public ArrayList<Task> load() throws DukeException {
         planner = new File(filePath);
         setPlannerPermissions(planner);
         ArrayList<Task> taskArrayList = createTaskList(planner);

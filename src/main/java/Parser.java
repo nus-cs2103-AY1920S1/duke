@@ -1,11 +1,12 @@
 public class Parser {
     public static void parseDeadline(String input, TaskList t,Ui ui,Storage s) throws DukeException {
         String deadlineDetails = input.substring(9);
-        String[] arr = deadlineDetails.split("/");
         try {
-            String details = arr[1].substring(2);
-            Deadline deadline = new Deadline(arr[0], details);
-            if (arr[1].length() == 0) {
+            int index = deadlineDetails.indexOf("/");
+            String name = deadlineDetails.substring(0,index);
+            String details = deadlineDetails.substring(index+1);
+            Deadline deadline = new Deadline(name, details);
+            if (details.length() == 0) {
                 throw new DeadlineDetailsEmptyException("OOPS!!! Deadline details cannot be empty");
             }
             t.addTask(deadline);
@@ -19,12 +20,12 @@ public class Parser {
 
     public static void parseEvent(String input, TaskList t,Ui ui,Storage s) throws DukeException {
         String eventDetails = input.substring(6);
-        String[] arr = eventDetails.split("/");
         try {
-            String details = arr[1].substring(2);
-            Event event = new Event(arr[0],details);
-
-            if (arr[1].length() == 0) {
+            int index = eventDetails.indexOf("/");
+            String name = eventDetails.substring(0,index);
+            String details = eventDetails.substring(index+1);
+            Event event = new Event(name, details);
+            if (details.length() == 0) {
                 throw new EventDetailsEmptyException("OOPS!!! Event details cannot be empty.");
             }
             t.addTask(event);

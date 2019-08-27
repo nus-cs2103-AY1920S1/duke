@@ -10,6 +10,13 @@ public class Deadline extends Task {
 
     private Date by;
 
+    /**
+     * Constructs a deadline with the given description and due date.
+     *
+     * @param description the description of the deadline.
+     * @param by the due date of the deadline.
+     * @throws DukeException if the deadline has no due date.
+     */
     public Deadline(String description, Date by) throws DukeException {
         super(description);
         if (by.equals("")) {

@@ -10,6 +10,13 @@ public class Event extends Task {
 
     private Date at;
 
+    /**
+     * Constructs an event with the given description and date/time.
+     *
+     * @param description the description of the event.
+     * @param at the date/time of the event.
+     * @throws DukeException if the event has no date/time.
+     */
     public Event(String description, Date at) throws DukeException {
         super(description);
         if (at.equals("")) {

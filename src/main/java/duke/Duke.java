@@ -2,7 +2,7 @@ package duke;
 
 import duke.command.Command;
 
-import java.io.*;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
@@ -10,6 +10,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a new instance of the Duke assistant which stores the task list in the given file path.
+     *
+     * @param filePath the file path to the task list file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts an instance to receive and execute prompts from the user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

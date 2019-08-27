@@ -1,8 +1,20 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 
 public class Parser {
+    /**
+     * Parses a rawCommand string into the corresponding Command object.
+     *
+     * @param rawCommand the raw command string.
+     * @return the Command object parsed from the raw command string supplied.
+     * @throws DukeException if the raw command string cannot be parsed into any Command objects.
+     */
     public static Command parse(String rawCommand) throws DukeException {
         String[] words = rawCommand.split(" ");
         switch (words[0]) {

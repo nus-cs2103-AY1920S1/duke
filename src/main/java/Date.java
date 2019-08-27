@@ -46,7 +46,7 @@ public class Date {
     public String toString(){
         return this.day + daySuffixes[this.day] +
                 " of " + monthString[this.month] +
-                " " + this.year + " , " + timeFormat;
+                " " + this.year + ", " + timeFormat;
     }
 
 

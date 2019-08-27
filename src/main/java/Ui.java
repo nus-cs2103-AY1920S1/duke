@@ -6,12 +6,26 @@ public class Ui {
 
     public void showWelcomeMessage(){
         String message = "Hello! I'm Slave! Your very own productivity application.\n" +
-                "     What can I do for you?";
+                "     What can I do for you? Type 'help' for commands!";
         System.out.println(Formatter.formatMessage(message));
     }
 
     public void showByeMessage(){
         String message = "Bye! Thanks for using me! Will be right here when you need me.";
+        System.out.println(Formatter.formatMessage(message));
+    }
+
+    public void showHelpMessage(){
+        String message = "Commands:\n" +
+                "     todo <task description> : To add task to list\n" +
+                "     event <task description> /at <date> : To add event to list\n" +
+                "     deadline <task description> /by <date> : To add deadline to list\n" +
+                "     list : Retrieves all the tasks you have so far\n" +
+                "     done <task index> : Checks task as done\n" +
+                "     delete <task index> : Deletes task at a particular index\n" +
+                "     bye : Exit program\n" +
+                "     Note: Currently, Slave can only read date in the form 'DD/MM/YYYY HHMM'\n" +
+                "     (E.g. 2/1/2020 1254 will be read as 2nd of January 2020 12.54pm)";
         System.out.println(Formatter.formatMessage(message));
     }
 

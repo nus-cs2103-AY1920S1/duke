@@ -7,14 +7,14 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
-    public Duke() throws IOException, DukeException {
+    public Duke() throws DukeException {
         this.ui = new Ui();
         this.storage = new Storage("./data/duke.txt");
         this.taskList = new TaskList(this.storage.load(), this.storage);
         }
 
 
-    private void run() throws IOException {
+    private void run() {
         this.ui.showWelcomeMessage();
         while (true) {
             try {
@@ -30,7 +30,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException, DukeException{
+    public static void main(String[] args) throws DukeException{
         new Duke().run();
     }
 }

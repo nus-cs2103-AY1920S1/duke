@@ -19,7 +19,7 @@ public class AddEventCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         this.eventTask = new Event(this.task, taskList.getSize() + 1, this.date);
         taskList.addToList(this.eventTask);
         ui.printAddEventCommand(eventTask, taskList);

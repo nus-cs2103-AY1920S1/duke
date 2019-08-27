@@ -1,10 +1,7 @@
-public class DukeException extends Exception {
+public abstract class DukeException extends Exception {
 
-    protected DukeExceptionType type;
-
-    public DukeException(String message, DukeExceptionType type){
-        super(message);
-        this.type = type;
+    public DukeException(String message){
+        super(message + " The Slave is sad.");
     }
 
 }

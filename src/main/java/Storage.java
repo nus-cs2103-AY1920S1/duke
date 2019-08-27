@@ -15,56 +15,71 @@ public class Storage{
         this.file = new File(filePath);
     }
 
-    ArrayList<Task> load() throws DukeException, IOException {
-        ArrayList<Task> taskList = new ArrayList<>();
-        List<String> list = Files.readAllLines(this.file.toPath());
-        for (String line : list) {
-            taskList.add(formatFileToTask(line));
-        }
+    ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> taskList;
+        try {
+            taskList = new ArrayList<>();
+            List<String> list = Files.readAllLines(this.file.toPath());
+            int index = 1;
+            for (String line : list) {
+                taskList.add(formatFileToTask(line, index));
+                index++;
+            }
+        } catch ( IOException e ) {
+            throw new IOWentWrongException();
+            }
         return taskList;
     }
 
-    void refreshStorage(ArrayList<Task> taskList) throws IOException{
-        PrintWriter writer = new PrintWriter(this.file);
-        writer.close();
-        for (Task task: taskList){
-            addTask(task);
+    void refreshStorage(ArrayList<Task> taskList) throws DukeException{
+        try {
+            PrintWriter writer = new PrintWriter(this.file);
+            writer.close();
+            for (Task task : taskList) {
+                addTask(task);
+            }
+        } catch ( FileNotFoundException e ) {
+            throw new NoStorageFileDetectedException();
         }
     }
 
-    void addTask(Task task) throws IOException{
-        FileWriter fw = new FileWriter(this.file, true);
-        switch (task.getType()){
-        case TODO:
-            fw.write(task.id + " ~ " +
-                    "ToDo" + " ~ " +
-                    task.getStatusIcon() + " ~ " +
-                    task.getDescription() +
-                    System.lineSeparator());
-            fw.close();
-            break;
-        case DEADLINE:
-            fw.write(task.id + " ~ " +
-                    "Deadline" + " ~ " +
-                    task.getStatusIcon() + " ~ " +
-                    task.getDescription() + " ~ " +
-                    task.getDate() +
-                    System.lineSeparator());
-            fw.close();
-            break;
-        case EVENT:
-            fw.write(task.id + " ~ " +
-                    "Event" + " ~ " +
-                    task.getStatusIcon() + " ~ " +
-                    task.getDescription() + " ~ " +
-                    task.getDate() +
-                    System.lineSeparator());
-            fw.close();
+    void addTask(Task task) throws DukeException{
+        try {
+            FileWriter fw = new FileWriter(this.file, true);
+            switch (task.getType()) {
+            case TODO:
+                fw.write(task.id + " ~ " +
+                        "ToDo" + " ~ " +
+                        task.getStatusIcon() + " ~ " +
+                        task.getDescription() +
+                        System.lineSeparator());
+                fw.close();
+                break;
+            case DEADLINE:
+                fw.write(task.id + " ~ " +
+                        "Deadline" + " ~ " +
+                        task.getStatusIcon() + " ~ " +
+                        task.getDescription() + " ~ " +
+                        task.getDate() +
+                        System.lineSeparator());
+                fw.close();
+                break;
+            case EVENT:
+                fw.write(task.id + " ~ " +
+                        "Event" + " ~ " +
+                        task.getStatusIcon() + " ~ " +
+                        task.getDescription() + " ~ " +
+                        task.getDate() +
+                        System.lineSeparator());
+                fw.close();
+            }
+        } catch ( IOException error) {
+            throw new IOWentWrongException();
         }
     }
 
 
-    private Task formatFileToTask(String line) throws DukeException{
+    private Task formatFileToTask(String line, int index) throws DukeException{
         String[] tokens = line.split(" ~ ");
         switch(tokens[1]){
         case "ToDo":
@@ -86,7 +101,7 @@ public class Storage{
             }
             return eventTask;
         default:
-            throw new DukeException("Unknown task? Something is wrong.", DukeExceptionType.TASKNOTFOUND);
+            throw new UnableToReadFileException(index);
         }
     }
 

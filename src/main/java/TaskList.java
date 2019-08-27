@@ -16,7 +16,7 @@ public class TaskList {
         this.storage = storage;
     }
 
-    public void addToList(Task task) throws DukeException, IOException {
+    public void addToList(Task task) throws DukeException {
         this.taskList.add(task);
         this.storage.addTask(task);
     }
@@ -29,7 +29,7 @@ public class TaskList {
         return this.taskList.get(index - 1);
     }
 
-    public void removeFromList(int index) throws IOException {
+    public void removeFromList(int index) throws DukeException {
         this.taskList.remove(index - 1);
         if (this.getSize() == index - 1){
             this.storage.refreshStorage(taskList);
@@ -39,7 +39,7 @@ public class TaskList {
         this.storage.refreshStorage(taskList);
     }
 
-    public void setDoneInList(int index) throws IOException {
+    public void setDoneInList(int index) throws DukeException {
         this.taskList.get(index - 1).setDone();
         this.storage.refreshStorage(taskList);
     }
@@ -48,7 +48,7 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    private void reorderIndex(int index) throws IOException{
+    private void reorderIndex(int index){
         if (this.taskList.size() == 0){
             return;
         }

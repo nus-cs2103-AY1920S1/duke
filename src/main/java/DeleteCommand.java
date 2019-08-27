@@ -11,11 +11,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         try {
             taskList.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
-            throw new DukeException("Oh no! Task not found!", DukeExceptionType.TASKNOTFOUND);
+            throw new TaskNotFoundException("Task " + this.index );
         }
         Task toRemove = taskList.getTaskByIndex(this.index);
         taskList.removeFromList(this.index);

@@ -11,14 +11,14 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         try {
             taskList.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
-            throw new DukeException("Oh no! Task not found!", DukeExceptionType.TASKNOTFOUND);
+            throw new TaskNotFoundException("Task " + this.index );
         }
         if (taskList.getTaskByIndex(this.index).getIsDone()){
-            throw new DukeException("Task has already been done!", DukeExceptionType.TASKALREADYDONE);
+            throw new TaskAlreadyDoneException("Task " + this.index );
         }
         taskList.setDoneInList(this.index);
         Task task = taskList.getTaskByIndex(this.index);

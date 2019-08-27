@@ -8,6 +8,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
+        case "help":
+            return new HelpCommand();
         case "done":
             checkValidity("done", fullCommand, tokens);
             return new DoneCommand(Integer.parseInt(tokens[1]));
@@ -40,7 +42,7 @@ public class Parser {
             }
             return new AddEventCommand(eventDesc, eventDate);
         default:
-            return new NullCommand();
+            return new NullCommand(firstWord);
         }
     }
 
@@ -58,27 +60,27 @@ public class Parser {
         switch(check){
         case "deadline":
             if (tokens.length <= 1){
-                throw new DukeException("Oh no! Missing description!", DukeExceptionType.MISSINGDESCRIPTION);
+                throw new MissingDescriptionException();
             } else if (!input.contains(" /by ")){
-                throw new DukeException("Oh no! Missing date!", DukeExceptionType.MISSINGDATE);
+                throw new MissingDateException();
             }
             return;
         case "event":
             if (tokens.length <= 1){
-                throw new DukeException("Oh no! Missing description!", DukeExceptionType.MISSINGDESCRIPTION);
+                throw new MissingDescriptionException();
             } else if (!input.contains(" /at ")){
-                throw new DukeException("Oh no! Missing date!", DukeExceptionType.MISSINGDATE);
+                throw new MissingDateException();
             }
             return;
         case "todo":
             if (tokens.length <= 1){
-                throw new DukeException("Oh no! Missing description!", DukeExceptionType.MISSINGDESCRIPTION);
+                throw new MissingDescriptionException();
             }
             return;
         case "done":
         case "delete":
             if (tokens.length <= 1){
-                throw new DukeException("Oh no! No task specified!", DukeExceptionType.MISSINGTASK);
+                throw new MissingTaskException();
             }
             return;
         default:

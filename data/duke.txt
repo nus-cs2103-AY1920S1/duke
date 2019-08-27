@@ -1,1 +1,7 @@
 1 ~ ToDo ~ X ~ 5
+2 ~ Event ~ Done ~ lol ~ 12pm
+3 ~ Event ~ X ~ fuck ~ 1st of January 1111 , 7.00pm
+4 ~ ToDo ~ Done ~ 4
+5 ~ ToDo ~ X ~ 3
+6 ~ Deadline ~ Done ~ fuck this shit ~ friday
+7 ~ Deadline ~ Done ~ lol ~ 2nd of January 2020 , 12.54pm

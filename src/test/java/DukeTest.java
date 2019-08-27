@@ -8,15 +8,25 @@ import slave.elements.Date;
 import slave.elements.Parser;
 import slave.exception.*;
 
-
+/**
+ * Test method for Duke
+ */
 public class DukeTest {
 
+    /**
+     * Test if the date has been converted properly as intended
+     * @throws DukeException for invalid dates
+     */
     @Test
     void testDate() throws DukeException {
         Date date = new Date("1/12/2000","0033");
         assertEquals("1st of December 2000, 12.33am", date.convertToString());
     }
 
+    /**
+     * Test if the commands return the appropriate command type
+     * @throws DukeException any exception that is thrown from doing any valid commands
+     */
     @Test
     void testCommands() throws DukeException {
         String command1 = "list";
@@ -39,6 +49,10 @@ public class DukeTest {
         assertTrue(Parser.parse(command9) instanceof DoneCommand);
     }
 
+    /**
+     * Test if the correct exceptions are thrown for invalid inputs
+     * @throws DukeException any exceptions that are thrown from doing any invalid commands
+     */
     @Test
     void testExceptions() throws DukeException {
         String command1 = "todo";

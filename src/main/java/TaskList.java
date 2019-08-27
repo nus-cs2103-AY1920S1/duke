@@ -1,13 +1,5 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.Scanner;
-import java.text.SimpleDateFormat;
 
 public class TaskList {
     private List<Task> list;
@@ -16,44 +8,50 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
-    public void addToList(String input) {
-        String[] arrOfWords = input.split(" ");
-        String taskWithoutType = input.replace(arrOfWords[0], "").trim();
-        Task task = new Task(input);
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
-        try {
-            if (taskWithoutType.isEmpty()) {
-                throw new DukeException();
-            }
-            switch (arrOfWords[0]) {
-            case "todo":
-                task = new ToDo(taskWithoutType);
-                list.add(task);
-                break;
-            case "deadline":
-                String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
-                Date formattedDeadline = format.parse(arrOfWordsDeadline[1]);
-                task = new Deadline(arrOfWordsDeadline[0], formatter.format(formattedDeadline));
-                list.add(task);
-                break;
-            case "event":
-                String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
-                Date formattedEventTime = format.parse(arrOfWordsEvent[1]);
-                task = new Event(arrOfWordsEvent[0], formatter.format(formattedEventTime));
-                list.add(task);
-                break;
-            }
-            print("    Got it. I've added this task:");
-            System.out.println("        " + task);
-            print("    Now you have " + list.size() + " tasks in the list.");
-        } catch (DukeException a) {
-            print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " cannot be empty.");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            print("    ☹ OOPS!!! The description of a " + arrOfWords[0] + " does not follow the specified format.");
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public TaskList(List<String[]> tasks) throws DukeException {
+        list = new ArrayList<>();
+        if (tasks.isEmpty()) {
+            throw new DukeException();
         }
+        for (String[] task : tasks) {
+            switch (task[0]) {
+            case "T":
+                list.add(new ToDo(task[2]));
+                break;
+            case "D":
+                list.add(new Deadline(task[2], task[3]));
+                break;
+            case "E":
+                list.add(new Event(task[2], task[3]));
+                break;
+            }
+            if (task[1].equals("1")) {
+                list.get(list.size() - 1).setDone();
+            }
+        }
+    }
+
+    public void addToList(String[] input) {
+        Task task;
+        switch (input[0]) {
+        case "todo":
+            task = new ToDo(input[1]);
+            list.add(task);
+            break;
+        case "deadline":
+            task = new Deadline(input[1], input[2]);
+            list.add(task);
+            break;
+        case "event":
+            task = new Event(input[1], input[2]);
+            list.add(task);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + input[0]);
+        }
+        print("    Got it. I've added this task:");
+        System.out.println("        " + task);
+        print("    Now you have " + list.size() + " tasks in the list.");
     }
 
     public void markAsDone(int num) {
@@ -80,44 +78,8 @@ public class TaskList {
         }
     }
 
-    public void loadTasks(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner sc = new Scanner(f);
-        while (sc.hasNext()) {
-            String task = sc.nextLine();
-            String[] arr = task.split(" \\| ");
-            switch (arr[0]) {
-            case "T":
-                list.add(new ToDo(arr[2]));
-                break;
-            case "D":
-                list.add(new Deadline(arr[2], arr[3]));
-                break;
-            case "E":
-                list.add(new Event(arr[2], arr[3]));
-                break;
-            }
-            if (arr[1].equals("1")) {
-                list.get(list.size() - 1).setDone();
-            }
-        }
-    }
-
-    public void saveTasks(String filePath) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task : list) {
-            if (task instanceof Deadline) {
-                Deadline d = (Deadline) task;
-                fw.write("D | " + d.isDone() + " | " + d.getDescription() + " | " + d.getBy() + "\n"); // need to overwrite getdescrition?
-            } else if (task instanceof Event) {
-                Event e = (Event) task;
-                fw.write("E | " + e.isDone() + " | " + e.getDescription() + " | " + e.getAt() + "\n");
-            } else if (task instanceof ToDo) {
-                ToDo t = (ToDo) task;
-                fw.write("T | " + t.isDone() + " | " + t.getDescription() + "\n");
-            }
-        }
-        fw.close();
+    public List<Task> getList() {
+        return list;
     }
 
     private void print(String x) {

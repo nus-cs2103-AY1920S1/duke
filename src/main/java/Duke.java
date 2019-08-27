@@ -1,8 +1,13 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Array;
+<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Paths;
+=======
+import java.time.format.DateTimeFormatter;
+import java.util.GregorianCalendar;
+>>>>>>> branch-level-8
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -141,6 +146,23 @@ public class Duke {
         }
     }
 
+//    private static String parseTime(String toBeParsed){
+//        String[] dateAndTime = toBeParsed.split(" ");
+//        String date = dateAndTime[1];
+//        String time = dateAndTime[2];
+//        String[] dayMonthYear = date.split("/");
+//        int day = Integer.valueOf(dayMonthYear[0]);
+//        int month = Integer.valueOf(dayMonthYear[1]);
+//        int year = Integer.valueOf(dayMonthYear[2]);
+//        int timeInInteger = Integer.valueOf(time);
+//        int minutes = timeInInteger % 100;
+//        int twentyFourHour = (timeInInteger - minutes)/ 100;
+//        int hours = twentyFourHour % 12 == 0 ? 12 : twentyFourHour;
+//        GregorianCalendar gregorianCalendar = new GregorianCalendar(year, month,
+//                day, hours, minutes);
+//
+//    }
+
     private static void doneTask() throws DukeException{
         if(!sc.hasNextInt()){
             throw new DukeException("☹ OOPS!!! The index of the task to mark as complete " +
@@ -190,7 +212,8 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The deadline must be specified.");
         }
         String deadline = stringSplit[1];
-        Deadline newDeadline = new Deadline(deadlineName, false, deadline);
+        DateTime dateTime = new DateTime(deadline);
+        Deadline newDeadline = new Deadline(deadlineName, false, dateTime.toString());
         tasksList.add(newDeadline);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newDeadline);
@@ -214,7 +237,8 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The event timing must be specified.");
         }
         String duration = stringSplit[1];
-        Event newEvent = new Event(eventName, false, duration);
+        DateTime dateTime = new DateTime(duration);
+        Event newEvent = new Event(eventName, false, dateTime.toString());
         tasksList.add(newEvent);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newEvent);

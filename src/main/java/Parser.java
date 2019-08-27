@@ -17,10 +17,13 @@ public class Parser {
         } else if (input[0].equals("delete")) {
             int num = Integer.parseInt(input[1]);
             return new DeleteCommand(num);
+        } else if (input[0].equals("find")) {
+            return new FindCommand(input[1].trim());
         } else {
             if (input[1].equals("")) {
                 throw new DukeException("The description of a " + input[0] + " cannot be empty.");
             }
+            Task t;
             switch (input[0]) {
                 case "todo":
                     t = new Todo(input[1].trim());

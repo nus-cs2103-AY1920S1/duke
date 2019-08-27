@@ -64,7 +64,10 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     throw new DukeException("The duration is in invalid format");
                 }
+            case "find":
+                return new FindCommand(infos[1]);
             }
+
         }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

@@ -20,7 +20,7 @@ public class Ui {
                 + "\n" + separator;
     }
 
-    public String showFormattedList(TaskList taskList) {
+    private String showFormattedList(TaskList taskList) {
         String formattedList = separator;
         formattedList = formattedList + indentation + "Here are the tasks in your list:\n";
         if (taskList.getTotalTask() == 0) {

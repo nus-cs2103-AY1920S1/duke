@@ -21,6 +21,8 @@ public class ObjectsForTest {
     public static final String timeDateStr = "31/5/2020 11:00";
     public static final String timeSTr = "23:00";
 
+    public static final String filePath = "/Users/xiaoyu/duke/data/duke.txt";
+
     public static final Todo todo = new Todo("Sleep early");
     public static final Deadline deadline = new Deadline("Sleep",
             Parser.parseDateTime("31/5/2020 11:00"));

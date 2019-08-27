@@ -1,20 +1,29 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.File;
 
 public class Duke {
     private ArrayList<Task> taskList = new ArrayList<>();
+    private static String filePath = "data/duke.txt";
 
-    private void run(Scanner sc) {
+    private void run(Scanner sc, File file) throws IOException {
+        boolean bye = false;
+
         printWelcome();
 
-        while(sc.hasNextLine()) {
+        writeFromFile(file);
+
+        while(!bye) {
             String input = sc.nextLine();
             String[] command = input.split(" ");
             try {
                 switch (command[0]) {
                 case "bye":
                 printBye();
-                return;
+                bye = true;
+                break;
                 case "list":
                 printList();
                 break;
@@ -40,13 +49,20 @@ public class Duke {
                 System.out.println(e);
             }
         }
+        writeToFile();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+        File file = new File(filePath);
         Duke duke = new Duke();
-        duke.run(sc);
-        sc.close();
+        try {
+            duke.run(sc, file);
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            sc.close();
+        }
     }
 
     private void printWelcome() {
@@ -82,13 +98,13 @@ public class Duke {
     private void completeTask(String input) throws DukeException {
         if (input.split(" ").length > 1) {
             try {
-            int itemIndex = Integer.parseInt(input.split(" ")[1]);
-            if(itemIndex > taskList.size() || itemIndex < 1) {
-                throw new DukeException("The task number specified is not within the list.");
-            } else {
-                Task currTask = taskList.get(itemIndex - 1);
-                currTask.doTask();
-            }
+                int itemIndex = Integer.parseInt(input.split(" ")[1]);
+                if(itemIndex > taskList.size() || itemIndex < 1) {
+                    throw new DukeException("The task number specified is not within the list.");
+                } else {
+                    Task currTask = taskList.get(itemIndex - 1);
+                    currTask.doTask();
+                }
             } catch (NumberFormatException e) {
                 throw new DukeException("The task specified is not a number.");
             }
@@ -172,5 +188,62 @@ public class Duke {
         System.out.printf("\t   %s\n", task);
         System.out.printf("\t Now you have %d task(s) in the list.\n", taskList.size());
         System.out.println("\t____________________________________________________________");
+    }
+
+    private void writeFromFile(File file) throws IOException {
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNextLine()) {
+            String[] line = sc.nextLine().split(" \\| ");
+            switch (line[0]) {
+            case "T":
+            Todo todo = new Todo(line[2]);
+            if (line[1].equals("1")) {
+                todo.markDone();
+                taskList.add(todo);
+            } else {
+                taskList.add(todo);
+            }
+            break;
+            case "D":
+            Deadline deadline = new Deadline(line[2], line[3]);
+            if (line[1].equals("1")) {
+                deadline.markDone();
+                taskList.add(deadline);
+            } else {
+                taskList.add(deadline);
+            }
+            break;
+            case "E":
+            Event event = new Event(line[2], line[3]);
+            if (line[1].equals("1")) {
+                event.markDone();
+                taskList.add(event);
+            } else {
+                taskList.add(event);
+            }
+            break;
+            default:
+            break;
+            }
+        }
+    }
+
+    private void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        boolean first = true;
+        String textToAdd = "";
+
+        for (Task task: taskList) {
+            if (first) {
+                textToAdd = task.formatToWrite();
+                first = false;
+            } else {
+                textToAdd = String.format("%s\n%s", textToAdd, task.formatToWrite());
+            }
+        }
+        System.out.print(textToAdd);
+        fw.write(textToAdd);
+        fw.close();
     }
 }

@@ -1,21 +1,25 @@
-public class Events extends Task{
-    private String at;
+import java.time.LocalDateTime;
 
-    public Events(String description, String at) {
+public class Events extends Task {
+    private LocalDateTime start;
+    private LocalDateTime end;
+
+    public Events(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
-        this.at = at;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[E]");
-        if(isDone) {
+        if (isDone) {
             sb.append("[✓] ");
         } else {
             sb.append("[✗] ");
         }
         sb.append(description);
-        sb.append(" (at: " + at + ")");
+        sb.append(" (" + Parser.printDate(start) + " - " + Parser.printDate(end) + ")");
         return sb.toString();
     }
 }

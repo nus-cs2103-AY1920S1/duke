@@ -67,11 +67,11 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! You must include an index.
+    ? OOPS!!! Please include the index of the task.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! You must include an index.
+    ? OOPS!!! Please include the index of the task.
     ____________________________________________________________
 
     ____________________________________________________________
@@ -79,47 +79,47 @@
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of a todo cannot be empty.
+    ? OOPS!!! The description of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of a todo cannot be empty.
+    ? OOPS!!! The description of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of a deadline cannot be empty.
+    ? OOPS!!! Description and dates of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of a deadline cannot be empty.
+    ? OOPS!!! The description of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of a deadline cannot be empty.
+    ? OOPS!!! The description of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! Deadline dates must be specified with /by.
+    ? OOPS!!! Deadline dates must be specified after "/by."
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of an event cannot be empty.
+    ? OOPS!!! Description and dates of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! The description of an event cannot be empty.
+    ? OOPS!!! The description of a task cannot be empty.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! Event dates must be specified with /at.
+    ? OOPS!!! Deadline dates must be specified after "/at."
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! You have less than 9 tasks.
+    ? OOPS!!! Currently there are only 4 tasks.
     ____________________________________________________________
 
     ____________________________________________________________
-    ? OOPS!!! You have less than 7 tasks.
+    ? OOPS!!! Currently there are only 4 tasks.
     ____________________________________________________________
 
     ____________________________________________________________

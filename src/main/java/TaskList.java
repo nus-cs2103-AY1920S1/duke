@@ -14,7 +14,7 @@ public class TaskList {
         if (index < 1) {
             message = "☹ OOPS!!! Index has to be greater than zero.";
         } else {
-            message = String.format("☹ OOPS!!! You have less than %d tasks.", index);
+            message = String.format("☹ OOPS!!! Currently there are only %d tasks.", this.taskList.size());
         }
         return message;
     }
@@ -29,9 +29,8 @@ public class TaskList {
     }
 
     // Add task to the back of list and return added Task object
-    protected Task addTask(Task task) {
+    protected void addTask(Task task) {
         this.taskList.add(task);
-        return task;
     }
 
     // Index starts from 1

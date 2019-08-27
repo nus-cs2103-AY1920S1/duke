@@ -4,13 +4,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
+/**
+ * Parses user input and carries out corresponding actions.
+ * Creates, deletes, marks as done, or lists all tasks as per user input,
+ */
 public class Parser {
 
     private static Scanner sc;
 
+    /**
+     * Constructor method for parser.
+     */
     public Parser() {
     }
 
+    /**
+     * Parses user input and carries out appropriate actions.
+     *
+     * @param inputString Line of input from user.
+     * @param taskList Existing list of tasks to be modified.
+     * @return "continue" or "exit", depending on whether the user quit the program.
+     */
     public static String parseInput(String inputString, TaskList taskList) {
         sc = new Scanner(inputString);
         String command = sc.next();

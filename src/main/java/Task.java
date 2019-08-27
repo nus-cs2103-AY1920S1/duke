@@ -1,21 +1,27 @@
-public abstract class Task {
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDateTime pattern;
+    protected final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-
-    public Task(String description, String done) {
-
-        this.description = description.trim();
-        if (done.trim().equals("1")) {
-            this.isDone = true;
-        }
+    public Task(String description, String time) {
+//        LocalDateTime convert = LocalDateTime.parse(time.trim(), dateTimeFormatter);
+//        new Task(description.trim(), convert);
+        this.description = description;
+        pattern = LocalDateTime.parse(time, dateTimeFormatter);
     }
 
-    public void markAsDone() {
+    public void markAsDone(){
         this.isDone = true;
     }
 
@@ -23,7 +29,9 @@ public abstract class Task {
         return (isDone ? "V" : "X"); //return tick or X symbols
     }
 
-    public abstract String getFormatToFile();
+    public String getTime() {
+        return  pattern.format(formatter2);
+    }
 
     @Override
     public String toString() {

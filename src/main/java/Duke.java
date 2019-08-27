@@ -1,18 +1,68 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+import java.io.File;
 
 public class Duke {
-    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+
+    private static ArrayList<Task> list = new ArrayList<>();
+
+    private static void writeToFile(ArrayList<Task> list) throws IOException, IndexOutOfBoundsException {
+        FileWriter fw = new FileWriter("data/duke.txt");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(i).getFileStringFormat()).append("\r\n");
+        }
+        fw.write(sb.toString());
+        fw.close();
+    }
+
+    private static void readFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] items = line.split("[|]");
+            for (int i = 0; i < items.length; i++) {
+                items[i] = items[i].trim();
+            }
+
+            if (line.charAt(0) == 'T') {
+                Task todo = new ToDo(items[2], items[1].equals("1"));
+                list.add(todo);
+            } else if (line.charAt(0) == 'E') {
+                Task event = new Event(items[2], items[1].equals("1"), items[3]);
+                list.add(event);
+            } else if (line.charAt(0) == 'D') {
+                Task deadline = new Deadline(items[2], items[1].equals("1"), items[3]);
+                list.add(deadline);
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        // check for directory existence
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        // check for text file existence
+        String filePath = "data/duke.txt";
+        File f = new File(filePath);
+        if (!f.exists()) {
+            f.createNewFile();
+        } else {
+            readFileContents(filePath);
+        }
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -89,6 +139,13 @@ public class Duke {
             } finally {
                 text = sc.nextLine();
             }
+        }
+
+        // saving to file`
+        try {
+            writeToFile(list);
+        } catch (IOException e) {
+            System.out.println("Something went wrong when saving: " + e.getMessage());
         }
         System.out.println("Bye. Hope to see you again soon!");
     }

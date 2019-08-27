@@ -1,4 +1,5 @@
-import java.text.ParseException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,9 +26,6 @@ public class Duke {
 
         if (oneLine.length == 2 && !oneLine[1].isBlank()) {
             System.out.println(frontSpace + " Got it. I've added this task: ");
-            //todo with description
-            //deadline may not have /by
-            //event may not have /at
             if (firstWord.equals("todo")) {
                 myList.add(new Todo(oneLine[1].trim()));
             } else if (firstWord.equals("deadline")) {
@@ -66,7 +64,6 @@ public class Duke {
             return false;
         }
     }
-
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
@@ -141,7 +138,6 @@ public class Duke {
                     System.out.println(frontSpace + " " + (i + 1) + ". " + myList.get(i));
                 }else{
                     System.out.println(frontSpace + " " + (i + 1) + "." + myList.get(i));
-
                 }
             }
         } else {

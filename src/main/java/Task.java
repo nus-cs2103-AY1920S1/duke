@@ -2,11 +2,11 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected LocalDateTime pattern;
-    protected final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    public DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     protected final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
 
 
@@ -16,12 +16,12 @@ public class Task {
     }
 
     public Task(String description, String done) {
-
         this.description = perfectDescription(description);
         if (done.trim().equals("1")) {
             this.isDone = true;
         }
     }
+
 
     public String perfectDescription(String description){
         String[] temp = description.split(" ");
@@ -41,6 +41,8 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "V" : "X"); //return tick or X symbols
     }
+
+    public abstract String getFormatToFile();
 
     public String getTime() {
         return  pattern.format(formatter2);

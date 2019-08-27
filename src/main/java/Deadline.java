@@ -1,11 +1,24 @@
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    protected LocalDateTime byFormat;
+
     protected String by;
 
     public Deadline(String description, String by) {
-        super(description, by);
+        super(description);
+        this.by = by;
+        this.pattern = LocalDateTime.parse(by.trim(), dateTimeFormatter);
+
+    }
+    public Deadline(String description, String by, String isDone) {
+        super(description, isDone);
+        this.by = by;
+        this.pattern = LocalDateTime.parse(by.trim(), dateTimeFormatter);
+    }
+
+    @Override
+    public String getFormatToFile() {
+        return String.format("D | %d | %s | %s \n", (isDone ? 1 : 0), description, by);
     }
     public Deadline(String description, String by, String isDone) {
         super(description, isDone);

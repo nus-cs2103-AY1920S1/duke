@@ -22,27 +22,30 @@ public class TaskList {
 
 
     //Add and print the added notes
-    public void addTasks(String addedTask)  {
+    public void addTasks(String addedTask) throws DukeException {
         Task temp;
-        if(addedTask.contains("todo")) {
+        if(addedTask.contains("todo")&&(addedTask.length()>4)) {
             String replaced = addedTask.replace("todo ","");
             temp = new todoTask(replaced);
             myTaskList.add(temp);
             spacerForTasks(temp);
-        } else if(addedTask.contains("deadline")) {
+        } else if(addedTask.contains("deadline")&&(addedTask.length()>8)) {
             String replaced = addedTask.replace("deadline ","");
             String[] deadLines = replaced.split("/");
             String endTime = deadLines[1].replace("by ", "");
             temp = new deadlineTask(deadLines[0],endTime);
             myTaskList.add(temp);
             spacerForTasks(temp);
-        } else if (addedTask.contains("event")) {
+        } else if (addedTask.contains("event")&&(addedTask.length()>5)) {
             String replaced = addedTask.replace("event ","");
             String[] events = replaced.split("/");
             String eventTime = events[1].replace("at ", "");
             temp = new eventTask(events[0],eventTime);
             myTaskList.add(temp);
             spacerForTasks(temp);
+        }
+        else {
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         }
 

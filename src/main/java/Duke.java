@@ -33,18 +33,31 @@ public class Duke {
 
 
         while (!userInput.equalsIgnoreCase("bye")) {
-            if (userInput.equalsIgnoreCase("list")) {
-                myTaskList.printTasks();
-            } else if (userInput.contains("done")) {
-                String[] numTasks = userInput.split(" ");
-                String numberAsString = numTasks[1];
-                int number = Integer.parseInt(numberAsString);
-                spacer(myTaskList.taskDone(number-1));
-            } else {
-                //Adding is handled in tasklist
-                myTaskList.addTasks(userInput);
-            }
-            userInput = myInputReader.nextLine();
+           try {
+
+
+               if (userInput.equalsIgnoreCase("list")) {
+                   myTaskList.printTasks();
+
+               } else if (userInput.contains("done")) {
+                   String[] numTasks = userInput.split(" ");
+                   String numberAsString = numTasks[1];
+                   int number = Integer.parseInt(numberAsString);
+                   spacer(myTaskList.taskDone(number - 1));
+
+               } else {
+                   //Adding is handled in tasklist
+                   myTaskList.addTasks(userInput);
+               }
+           } catch (DukeException err) {
+               String separator = "    ____________________________________________________________";
+               System.out.println(separator);
+               System.out.println("    " + err.getMessage());
+               System.out.println(separator + "\n");
+           }
+           finally {
+               userInput = myInputReader.nextLine();
+           }
 
         }
 

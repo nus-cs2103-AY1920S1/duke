@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.util.Date;
+
 
 /**
  * A Task class representing a task with a isDone component.
@@ -40,9 +42,9 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
-    private String deadline;
+    private Date deadline;
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, Date deadline) {
         super(description);
         this.deadline = deadline;
     }
@@ -54,9 +56,9 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    private String timeframe;
+    private Date timeframe;
 
-    public Event(String description, String timeframe) {
+    public Event(String description, Date timeframe) {
         super(description);
         this.timeframe = timeframe;
     }
@@ -69,38 +71,38 @@ class Event extends Task {
 
 class TaskBuilder {
     private String description;
-    private String deadline;
-    private String timeframe;
+    private Date deadline;
+    private Date timeframe;
     private TaskType type;
 
-    public TaskBuilder type(TaskType t) {
+    TaskBuilder type(TaskType t) {
         this.type = t;
         return this;
     }
 
-    public TaskBuilder description(String d) {
+    TaskBuilder description(String d) {
         description = d;
         return this;
     }
 
-    public TaskBuilder deadline(String d) {
+    TaskBuilder deadline(Date d) {
         deadline = d;
         return this;
     }
 
-    public TaskBuilder timeframe(String t) {
+    TaskBuilder timeframe(Date t) {
         timeframe = t;
         return this;
     }
 
-    public Task build() {
+    Task build() {
         switch (type) {
             case TODO:
                 return new ToDo(description);
             case EVENT:
                 return new Event(description, timeframe);
             case DEADLINE:
-                return new Deadline(description,deadline);
+                return new Deadline(description, deadline);
         }
         return null;
     }

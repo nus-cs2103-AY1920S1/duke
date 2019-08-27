@@ -61,21 +61,21 @@ public abstract class Task {
      * @throws DukeException Exception thrown if the line does not follow the format for some reason.
      */
     protected static Task createFromFile(String item) throws DukeException {
-            String[] args = item.split(" \\| ");
-            String taskType = args[0];
-            boolean isAlreadyDone = Integer.parseInt(args[1]) == 1;
-            Task newTask;
-            if (taskType.equals("D")) {
-                newTask = new DeadlineTask(args[2], TimedTask.parseDateTime(args[3]));
-            } else if (taskType.equals("E")) {
-                newTask = new EventTask(args[2], TimedTask.parseDateTime(args[3]));
-            } else {
-                newTask = new ToDoTask(args[2]);
-            }
-            if (isAlreadyDone) {
-                newTask.setDone();
-            }
-            return newTask;
+        String[] args = item.split(" \\| ");
+        String taskType = args[0];
+        boolean isAlreadyDone = Integer.parseInt(args[1]) == 1;
+        Task newTask;
+        if (taskType.equals("D")) {
+            newTask = new DeadlineTask(args[2], TimedTask.parseDateTime(args[3]));
+        } else if (taskType.equals("E")) {
+            newTask = new EventTask(args[2], TimedTask.parseDateTime(args[3]));
+        } else {
+            newTask = new ToDoTask(args[2]);
+        }
+        if (isAlreadyDone) {
+            newTask.setDone();
+        }
+        return newTask;
     }
 
     /**
@@ -85,7 +85,6 @@ public abstract class Task {
     protected abstract String toFileString();
 
     /**
-
      * String representing the Task object.
      * @return String representation of the Task object.
      */

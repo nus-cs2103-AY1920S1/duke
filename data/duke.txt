@@ -1,0 +1,6 @@
+T | 1 | read book
+T | 0 | join sports club
+T | 1 | read book
+T | 0 | join sports club
+D | 0 | do homework | 19th of May 2018, 11:59pm
+T | 0 | read book /by 22/01/2018

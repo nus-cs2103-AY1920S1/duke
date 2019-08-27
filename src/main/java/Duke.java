@@ -81,12 +81,12 @@ public class Duke {
                             //what the task is
                             String eventDescr = eventAndDate.substring(0, index2).trim();
                             //when it is due by
-                            String date2 = eventAndDate.substring(index2 + 4).trim();
-                            if(eventDescr.isEmpty() || date2.isEmpty()) {
+                            String dateAndTime = eventAndDate.substring(index2 + 4).trim();
+                            if(eventDescr.isEmpty() || dateAndTime.isEmpty()) {
                                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
                                         " It must be in the format <description> /at <start and end of specific time> ");
                             } else {
-                                Event newEventTask = new Event(eventDescr, date2);
+                                Event newEventTask = new Event(eventDescr, dateAndTime);
                                 this.taskList.addTask(newEventTask);
                             }
                         } else {

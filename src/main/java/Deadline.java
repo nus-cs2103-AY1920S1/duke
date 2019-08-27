@@ -2,10 +2,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline, with a given date/time/both 
+ * which indicates when the user needs to complete it by.
+ */
 class Deadline extends Task {
     private LocalDate date;
     private LocalTime time;
 
+    /**
+     * Constructor for Deadline, which converts the dateTime String into 
+     * a LocalDate, LocalTime or both.
+     * 
+     * @param task A String of the user's inputted task.
+     * @param dateTime A String of the user's inputted date, time, or both.
+     * @throws DukeException When the user inputs a illegitamate date, time, both or wrong format.
+     */
     public Deadline(String task, String dateTime) throws DukeException {
         super(task);
         String[] dateTimeArr = dateTime.split(" ", 2);
@@ -37,6 +49,11 @@ class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a String of the deadline, which includes the date, time or both.
+     * 
+     * @return a String of the deadline, which includes the date, time or both.
+     */
     @Override
     public String toString() {
         if (this.date == null) {

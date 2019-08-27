@@ -46,7 +46,7 @@ class Deadline extends Task {
      */
     Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        parse(by);
     }
 
     /**
@@ -65,7 +65,8 @@ class Deadline extends Task {
      */
     @Override
     String formatAsData() {
-        return super.formatAsData() + " | " + by;
+        return super.formatAsData() + " | "
+                + String.format("%1$ta, %1$td %1$tb %1$ty, %1$tR", by);
     }
 
     /**

@@ -45,7 +45,7 @@ class Event extends Task {
      */
     Event(String description, String time, boolean isDone) {
         super(description, isDone);
-        this.time = time;
+        parse(time);
     }
 
     /**
@@ -64,7 +64,8 @@ class Event extends Task {
      */
     @Override
     String formatAsData() {
-        return super.formatAsData() + " | " + time;
+        return super.formatAsData() + " | "
+                + String.format("%1$ta, %1$td %1$tb %1$ty, %1$tR", time);
     }
 
     /**

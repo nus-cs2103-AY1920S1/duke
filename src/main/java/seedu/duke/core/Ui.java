@@ -1,4 +1,4 @@
-package seedu.duke.model;
+package seedu.duke.core;
 
 public class Ui {
     private static String LOGO =

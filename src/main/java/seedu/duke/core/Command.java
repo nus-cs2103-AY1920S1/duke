@@ -1,7 +1,8 @@
-package seedu.duke.model;
+package seedu.duke.core;
 
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.TaskListEmptyException;
+import seedu.duke.model.Task;
 
 import java.io.IOException;
 import java.text.ParseException;

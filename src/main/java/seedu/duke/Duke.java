@@ -1,10 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.core.DukeController;
 import seedu.duke.exception.DukeException;
-import seedu.duke.model.Command;
-import seedu.duke.model.Storage;
+import seedu.duke.core.Command;
+import seedu.duke.core.Storage;
 import seedu.duke.model.Task;
-import seedu.duke.model.Ui;
+import seedu.duke.core.Ui;
 
 import java.io.File;
 import java.io.IOException;

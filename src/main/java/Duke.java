@@ -12,12 +12,20 @@ import duke.storagedata.StorageData;
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.exception.*;
-
+/**
+ * Represents a Duke App that stores a list of tasks.
+ * Users can add three types of tasks: Todo, Deadline or Event.
+ * Users can marked tasks as done, or delete them.
+ */
 public class Duke {
     private DukeUI dukeUI;
     private StorageData storage;
     private TaskList tasks;
 
+    /**
+     * Instantiates a Duke Object.
+     * @param filePath This is the File that is used to load data from and save into.
+     */
     public Duke(String filePath) {
         this.dukeUI = new DukeUI();
         this.storage = new StorageData(new File(filePath));
@@ -28,6 +36,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke Application.
+     * Prints out a welcome message and waits for user input.
+     * User input is then passed through the Parser object in the Duke object, creating a Command object.
+     * Command object is then executed accordingly.
+     */
     public void run() {
         Scanner input = new Scanner(System.in);
         dukeUI.printWelcomeMessage();

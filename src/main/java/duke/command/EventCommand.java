@@ -5,10 +5,18 @@ import duke.storagedata.StorageData;
 import duke.task.Event;
 import duke.exception.DukeMissingDescriptionException;
 import duke.exception.DukeEmptyDescriptionException;
+/**
+ * Represents a Event which contains a description of the Event and when it occurs at.
+ */
 public class EventCommand extends Command{
     private String description;
     private String duringWhen;
-
+    /**
+     * Instantiates a Event Object
+     * @param details contains both the description of the Event and when the Event occurs.
+     * @throws DukeEmptyDescriptionException when details is an empty string.
+     * @throws DukeMissingDescriptionException when details contains missing information or is in a wrong format.
+     */
     public EventCommand(String details) throws DukeMissingDescriptionException, DukeEmptyDescriptionException {
         super(details);
         if(details.isEmpty()) {
@@ -30,7 +38,13 @@ public class EventCommand extends Command{
             }
         }
     }
-
+    /**
+     * Adds the Event Object to the TaskList of the Duke Object.
+     * Stores the Event in the StorageData and prints out a message to confirm that it has been added.
+     * @param tasks TaskList of Duke Object
+     * @param ui DukeUI of Duke Object
+     * @param storage StorageData of Duke Object
+     */
     public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
         Event current = new Event(this.description, this.duringWhen);
         tasks.add(current);

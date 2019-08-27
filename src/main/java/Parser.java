@@ -24,6 +24,7 @@ public class Parser {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         } else if (command.equals("bye")) {
             ui.exit();
+            System.exit(0);
         } else if (command.equals("list")) {
             ui.printList(taskList);
         } else if (command.startsWith("done")) {

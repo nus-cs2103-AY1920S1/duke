@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,29 +9,31 @@ public class Duke {
 
     private TaskList taskList;
     private UI ui;
+    private Storage storage;
 
-    public Duke() {
+    public Duke() throws FileNotFoundException, IOException {
+
         this.ui = new UI();
-        this.taskList = new TaskList();
+        this.storage = new Storage("../duke.txt");
+
+        ArrayList<Task> existing = storage.readFileContents();
+        this.taskList = new TaskList(existing);
+        this.storage.writeToFile("");
+
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException  {
 
-        new Duke().run();
+       new Duke().run();
 
-    }
-
-
-    public static void printCommand(String command) {
-        System.out.println(command);
     }
 
     public static String promptEntry() {
        return sc.next();
     }
 
-    public void run() {
+    public void run() throws IOException {
 
         this.ui.welcome();
 
@@ -54,7 +59,7 @@ public class Duke {
                         break;
 
                     case "deadline":
-                        String wholeTask = sc.nextLine();
+                        String wholeTask = sc.nextLine().trim();
                         int index = wholeTask.indexOf('/');
                         if(index > 0) {
                             //what the task is
@@ -120,20 +125,21 @@ public class Duke {
 
 
         }
+        //after all commands are done, we will save the updated list into the txt file.
+        ArrayList<Task> updated = this.taskList.getList();
+
+        if(!updated.isEmpty()) {
+            for (Task task : updated) {
+                if(storage.isFileEmpty()) {
+                        storage.writeToFile(task.toTextFile());
+                } else {
+                    storage.appendToFile(task.toTextFile());
+                }
+            }
+        }
+
         this.ui.goodbye();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -9,6 +9,14 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> currentList) {
+        this.list = currentList;
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
+    }
+
     public void addTask(Task current) {
         list.add(current);
         if(list.size() >1) {

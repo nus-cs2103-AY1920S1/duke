@@ -36,8 +36,7 @@ public class Duke {
             } catch (DukeException de){
                 ui.printTaskError(de.getMessage());
             }
-            if(!isDone)
-            command = ui.readLine();
+            if(!isDone) command = ui.readLine();
 
         }
         //exit program

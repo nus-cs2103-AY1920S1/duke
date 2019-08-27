@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.lang.Exception;
 import java.io.File;
 //import java.io.FileWriter;
@@ -14,9 +15,15 @@ public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
     private static int listCounter = 0;
 
+    private static HashMap<String, String> map = new HashMap<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         File dukeInput = new File("data/Duke.txt");
+
+        map.put("T", "TODO");
+        map.put("E", "EVENT");
+        map.put("D", "DEADLINE");
 
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
         String goodbye = "Bye. Hope to see you again soon!";
@@ -190,8 +197,52 @@ public class Duke {
     private static void processInputFile(File f) {
         try {
             Scanner sc = new Scanner(f);
-            while (sc.hasNextLine()) {
-                //System.out.println(sc.nextLine());
+            while(sc.hasNextLine()){
+                String line = sc.nextLine();
+                String[] lineData = line.split("\\|");
+                for(int i = 0; i < lineData.length; i++) lineData[i] = lineData[i].trim();
+
+                try {
+                    if(lineData.length == 0) throw new CommandFieldFormatException("Empty fields");
+
+                    String commandName = map.get(lineData[0]);
+                    Command cmd = verifyCommandValue(commandName);
+                    boolean isDone = false;
+
+                    if(cmd == Command.TODO){
+                        if(lineData.length < 3) throw new CommandFieldFormatException("Less that 2 fields");
+
+                        if(lineData[1].equals("1")) isDone = true;
+                        else if(!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+
+                        list.add(new ToDo(lineData[2], isDone));
+                        listCounter++;
+
+                    } else if (cmd == Command.EVENT){
+                        if(lineData.length < 4) throw new CommandFieldFormatException("Less that 3 fields");
+
+                        if(lineData[1].equals("1")) isDone = true;
+                        else if(!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+
+                        list.add(new Event(lineData[2], lineData[3], isDone));
+                        listCounter++;
+
+                    } else if (cmd == Command.DEADLINE){
+                        if(lineData.length < 4) throw new CommandFieldFormatException("Less that 2 fields");
+
+                        if(lineData[1].equals("1")) isDone = true;
+                        else if(!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+
+                        list.add(new Event(lineData[2], lineData[3], isDone));
+                        listCounter++;
+                    }
+
+                } catch(CommandNotRecognizedException e){
+                    System.out.println("Command not recognized!");
+
+                } catch (CommandFieldFormatException e1){
+                    System.out.println("Command field format incorrect!");
+                }
             }
 
         } catch (FileNotFoundException e) {

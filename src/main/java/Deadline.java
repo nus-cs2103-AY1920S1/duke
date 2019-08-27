@@ -19,6 +19,10 @@ public class Deadline extends Task {
 
     }
 
+    public String getEndDate() {
+        return this.endDate;
+    }
+
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {

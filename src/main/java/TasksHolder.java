@@ -7,6 +7,10 @@ public class TasksHolder {
     TasksHolder(){
     }
 
+    public ArrayList<Task> getTasks() {
+        return this.tasksArr;
+    }
+
     public void addTask(Task task) {
         System.out.println("Got it. I've added this task: ");
         System.out.println(task.getTaskDetails());

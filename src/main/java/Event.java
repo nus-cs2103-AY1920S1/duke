@@ -10,6 +10,10 @@ public class Event extends Task {
 
     }
 
+    public String getEventDate(){
+        return this.eventDate;
+    }
+
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {

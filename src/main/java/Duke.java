@@ -11,10 +11,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
         TasksHolder tasksHolder = new TasksHolder();
+        FileManager fileManager = new FileManager();
+        fileManager.populateTasksHolder(tasksHolder);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if (line.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                fileManager.populateDukeTxt(tasksHolder);
                 break;
             } else if (line.equals("list")) {
                 tasksHolder.printTasks();

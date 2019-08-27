@@ -22,7 +22,6 @@ public class Duke {
 
     public Duke() {
         this.tasks = new ArrayList<Task>();
-        initDuke();
     }
 
     /**
@@ -32,7 +31,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Duke duke = new Duke();
-        duke.loadData();
+        duke.initDuke();
         String cmd = "";
         Scanner sc = new Scanner(System.in);
 
@@ -81,24 +80,20 @@ public class Duke {
             printLine();
             cmd = sc.nextLine();
         }
-        duke.saveData();
-        closeDuke();
+        duke.closeDuke();
     }
 
-    private void saveData() {
-        File file = new File("./data/duke.txt");
-        FileWriter writer;
-        try {
-            writer = new FileWriter(file);
-            PrintWriter printer = new PrintWriter(writer);
-            for (Task t : this.tasks) {
-                printer.append(t.toDataFormat() + "\n");
-            }
-            printer.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    private void initDuke() {
+        this.loadData();
+        printLine();
+        System.out.println("Hello, I'm Duke");
+        System.out.println("What can I do for you?");
+        printLine();
+    }
+
+    private static void printLine() {
+        String line = "____________________________________________________________";
+        System.out.println(line);
     }
 
     private void loadData() {
@@ -167,24 +162,28 @@ public class Duke {
         }
     }
 
-    private static void printLine() {
-        String line = "____________________________________________________________";
-        System.out.println(line);
-    }
-
-    private static void initDuke() {
-        printLine();
-        System.out.println("Hello, I'm Duke");
-        System.out.println("What can I do for you?");
-        printLine();
-    }
-
-    private static void closeDuke() {
-
+    private void closeDuke() {
+        this.saveData();
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
+
+    private void saveData() {
+        File file = new File("./data/duke.txt");
+        FileWriter writer;
+        try {
+            writer = new FileWriter(file);
+            PrintWriter printer = new PrintWriter(writer);
+            for (Task t : this.tasks) {
+                printer.append(t.toDataFormat() + "\n");
+            }
+            printer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private Task handleNewTask(String keyword, String cmd) throws InputMismatchException {
         String date = "";

@@ -7,10 +7,6 @@ public class Task {
         this.isDone = false;
     }
 
-    public void setIsDone(String value) {
-        this.isDone = Boolean.valueOf(value);
-    }
-
     public void markAsDone() {
         this.isDone = true;
     }

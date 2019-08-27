@@ -24,8 +24,6 @@ public class Event extends Task {
         Task.totalTasks++;
     }
 
-
-
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.toString() + ", " + timing.toString() + ")";

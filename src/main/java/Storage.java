@@ -63,7 +63,7 @@ public class Storage {
         }
     }
 
-    public void saveTask() throws DukeException{
+    public void saveTask() throws IODukeException{
         PrintWriter pr = null;
         try {
             pr = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
@@ -88,25 +88,6 @@ public class Storage {
                 pr.write(store);
 
             }
-
-            /*for (Task task : taskList) {
-                int statusHolder = 0;
-
-                if (task.getStatus() == true) {
-                    statusHolder = 1;
-                }
-
-                String store = String.format("%s | %d | %s", task.getType(), statusHolder, task.getDescription());
-                if (task instanceof Deadline) {
-                    store += " | " + ((Deadline) task).getBy();
-                } else if (task instanceof Event) {
-                    store += " | " + ((Event) task).getAt();
-                }
-
-                store += "\n";
-
-                pr.write(store);
-            }*/
         } catch (IOException e){
             throw new IODukeException("File could not be saved");
         } finally {

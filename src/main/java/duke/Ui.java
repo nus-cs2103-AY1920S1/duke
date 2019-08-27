@@ -99,6 +99,7 @@ public class Ui {
 		int i = 1;
 		for (Task matchingTask : matchingTasks) {
 			System.out.println("\t " + i + ". " + matchingTask);
+			i++;
 		}
 	}
 

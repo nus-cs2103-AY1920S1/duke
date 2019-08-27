@@ -19,11 +19,7 @@ public abstract class Task {
 
     protected abstract Optional<String> getTaskExtraDetails();
 
-    String getTaskDescription() {
-        return description;
-    }
-
-    String getStatusIcon() {
+    private String getStatusIcon() {
         return done ? "\u2713" : "\u2718";
     }
 
@@ -35,7 +31,7 @@ public abstract class Task {
         String message = String.format("[%s][%s] %s",
                 getTaskStringCode(),
                 getStatusIcon(),
-                getTaskDescription());
+                description);
 
         return getTaskExtraDetails()
                 .map(details -> String.format("%s (%s)", message, details))

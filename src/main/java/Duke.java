@@ -42,38 +42,38 @@ public class Duke {
             );
             // Identify command by first word
             switch (userInputArr.get(0)) {
-                case ("bye"):
+            case ("bye"):
                 displaySentence("Bye. Hope to see you again soon!");
                 //Exit program
                 inProgram = false;
                 break;
-                case ("list"):
+            case ("list"):
                 if (taskList.isEmpty()) {
                     displaySentence("You have no tasks yet!");
                 } else {
                     displayTasks();
                 }
                 break;
-                case ("todo"):
+            case ("todo"):
                 // Empty description
                 if (userInputArr.size() == 1) {
                     throw new EmptyDescriptionException("todo");
                 } else {
                     // Splice back the description
                     taskDescription = String.join(" ",
-                        userInputArr.subList(1, userInputArr.size()));
+                            userInputArr.subList(1, userInputArr.size()));
                     newTask = new ToDo(taskDescription);
                     taskList.add(newTask);
                     addTaskResponse(newTask);
                 }
                 break;
-                case ("deadline"):
+            case ("deadline"):
                 addTaskWithSubcommand("deadline", userInputArr);
                 break;
-                case ("event"):
+            case ("event"):
                 addTaskWithSubcommand("event",userInputArr);
                 break;
-                case ("done"):
+            case ("done"):
                 // Empty/no list index of task provided
                 if (userInputArr.size() == 1 || userInputArr.size() > 2) {
                     throw new DukeException("Please put the list index of the " +
@@ -94,11 +94,11 @@ public class Duke {
                     }
                 }
                 break;
-                case ("delete"):
+            case ("delete"):
                 // Empty/no list index of task provided
                 if (userInputArr.size() == 1 || userInputArr.size() > 2) {
-                        throw new DukeException("Please put the list index of the " +
-                                "completed task after \"delete\" and nothing else.");
+                    throw new DukeException("Please put the list index of the " +
+                            "completed task after \"delete\" and nothing else.");
                 } else {
                     // Check if integer is provided
                     try {
@@ -115,7 +115,7 @@ public class Duke {
                     }
                 }
                 break;
-                default:
+            default:
                 throw new UnknownCommandException();
             }
         }
@@ -139,7 +139,7 @@ public class Duke {
             // No "/by" or multiple "/by"s provided
             if (firstByIdx == -1 || firstByIdx != lastByIdx) {
                 throw new IncorrectInfoInputException(subCommand);
-            // No description of "/by" or "/at"
+                // No description of "/by" or "/at"
             } else if (firstByIdx == userInputArr.size()-1) {
                 throw new EmptyDescriptionException(subCommand);
             } else {

@@ -1,6 +1,5 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file

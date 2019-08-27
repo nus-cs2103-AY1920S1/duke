@@ -1,20 +1,26 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
-    protected String at;
+
+    protected Date on;
 
 
-
-    public Event(String description, String at, boolean b){
+    public Event(String description, Date on, boolean b){
         super(description);
-        this.at = at;
+        this.on = on;
         this.isDone = b;
     }
-    public Event(String description, String at){
+    public Event(String description, Date on){
         super(description);
-        this.at = at;
+        this.on = on;
     }
+
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
+        return "[E]" + super.toString() + " (at: " + df.format(on) + ")";
     }
 
 }

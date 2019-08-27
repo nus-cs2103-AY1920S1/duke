@@ -1,7 +1,10 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,34 +14,37 @@ public class Duke {
         list = new TaskList();
 
     }
-    private void Greet() throws FileNotFoundException {
+    private void Greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
 
     }
-    public static void readTask(String s, TaskList t){
+    public static void readTask(String s, TaskList t) throws ParseException {
+        DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
+
         if(s.contains("[T]")){
             if(s.contains( "["+"\u2713"+"]")){
-                t.Add(new ToDo(s.substring(8), true));
+                t.Add(new ToDo(s.substring(7), true));
             }
             else{
-                t.Add(new ToDo(s.substring(8)));
+                t.Add(new ToDo(s.substring(7)));
             }
         }
         else if(s.contains("[E]")){
 
-            int slash = s.indexOf('/');
-            String e = s.substring(8,slash-1);
-            String dl = s.substring(slash+4);
+            int start = s.indexOf('(');
+            String e = s.substring(7,start-1);
+            String dl = s.substring(start+5, start+27);
+            Date at = df.parse(dl);
             if(s.contains( "["+"\u2713"+"]")){
-                t.Add(new Event(e,dl, true));
+                t.Add(new Event(e,at, true));
             }
             else{
-                t.Add(new Event(e,dl));
+                t.Add(new Event(e,at));
             }
         }
         else{
             int sl = s.indexOf('/');
-            String d = s.substring(8,sl-1);
+            String d = s.substring(7,sl-1);
             String by = s.substring(sl+4);
             if(s.contains( "["+"\u2713"+"]")){
                 t.Add(new Deadline(d,by,true));
@@ -59,7 +65,7 @@ public class Duke {
         fw.write(content);
         fw.close();
     }
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException, IOException, ParseException {
         Duke d = new Duke();
         Scanner scan = new Scanner(System.in);
         d.Greet();
@@ -95,8 +101,10 @@ public class Duke {
                 } else {
                     int first = b.indexOf('/');
                     String desc = b.substring(0, first - 1);
-                    String byTime = b.substring(first + 4);
-                    Task t1 = new Event(desc, byTime, false);
+                    String on = b.substring(first + 4);
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    Date at = df.parse(on);
+                    Task t1 = new Event(desc, at, false);
                     d.list.Add(t1);
                     d.list.addMessage();
                 }

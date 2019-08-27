@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
 
-    Ui() {}
+    Ui() { }
 
     void showWelcome() {
         String logo = " ____        _        \n"
@@ -36,6 +36,10 @@ public class Ui {
 
     void printListMessage() {
         System.out.println("Here are the tasks in your list:\n");
+    }
+
+    void printFindMessage() {
+        System.out.println("Here are the matching tasks in your list:\n");
     }
 
     void printDeleteMessage(Task task, TaskList tasks) {

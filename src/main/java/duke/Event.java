@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 
 public class Event extends Task {
     private Date date;
-    private String description;
 
     public Event(String description) {
         super(description);

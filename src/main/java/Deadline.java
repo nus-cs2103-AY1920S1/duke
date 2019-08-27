@@ -17,6 +17,6 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
-        return super.writeToFile() + "|" + deadline.toString();
+        return super.writeToFile() + "|" + deadline.getRawForm();
     }
 }

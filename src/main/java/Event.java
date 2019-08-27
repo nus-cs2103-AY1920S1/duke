@@ -1,14 +1,14 @@
 public class Event extends Task {
 
-    protected String time;
+    protected DateTime dateTime;
 
-    public Event(String description, String time) {
+    public Event(String description, String dateTimeString) {
         super(description);
-        this.time = time;
+        this.dateTime = dateTime.create(dateTimeString);
     }
 
     @Override
     public String toString() {
-        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + time + ")";
+        return "[E][" + super.getStatusIcon() + "] " + super.description + " (at: " + dateTime + ")";
     }
 }

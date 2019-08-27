@@ -123,7 +123,7 @@ public class Duke {
         validCommands.add("bye");
         validCommands.add("delete");
         if (!validCommands.contains(command)) {
-            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    ____________________________________________________________\n" + "\n");
+            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    ____________________________________________________________\n" + "\n");
         }
     }
 
@@ -133,25 +133,25 @@ public class Duke {
         taskTypes.add("deadline");
         taskTypes.add("event");
         if (taskTypes.contains(currArray[0]) && currArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! The description of a " + currArray[0] + " cannot be empty.\n" + "    ____________________________________________________________\n" +"\n");
+            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! The description of a " + currArray[0] + " cannot be empty.\n" + "    ____________________________________________________________\n" +"\n");
         }
     }
 
     public static void checkDone(String[] currArray) throws DukeException {
         if (currArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! Please specify a task number! :-)\n" + "    ____________________________________________________________" + "\n");
+            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! Please specify a task number! :-)\n" + "    ____________________________________________________________" + "\n");
         } 
         int currStep = Integer.parseInt(currArray[1]);
         if (currStep == 0 || currStep > taskCount) {
             throw new DukeException("    ____________________________________________________________\n"
-                    + "     ☹ OOPS!!! Your specified task number is out of range :-(\n"
+                    + "     OOPS!!! Your specified task number is out of range :-(\n"
                     + "    ____________________________________________________________" + "\n");
         }
     }
 
     public static void checkTime(String[] currArray, String taskType) throws DukeException {
         if (currArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n" + "     ☹ OOPS!!! Your " + taskType + " needs a specific date/time! Please re-enter your " + taskType + " :-)\n" + "    ____________________________________________________________" + "\n");        
+            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! Your " + taskType + " needs a specific date/time! Please re-enter your " + taskType + " :-)\n" + "    ____________________________________________________________" + "\n");
         }
     }    
 

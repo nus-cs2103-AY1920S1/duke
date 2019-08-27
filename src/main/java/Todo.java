@@ -8,6 +8,15 @@ class Todo extends Task {
     }
 
     /**
+     * Returns the letter "T", representing the type Todo.
+     * @return  "T"
+     */
+    @Override
+    String getType() {
+        return "T";
+    }
+
+    /**
      * Returns a string containing the type of Task, done status, and
      * description.
      * @return  String describing the Todo.

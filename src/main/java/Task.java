@@ -23,6 +23,14 @@ class Task {
     }
 
     /**
+     * Returns a String of length 1 that indicates the current Task type.
+     * @return  String indicating Task type
+     */
+    String getType() {
+        return "-";
+    }
+
+    /**
      * Indicates that the current Task has been completed.
      */
     void markAsDone() {
@@ -34,6 +42,15 @@ class Task {
      */
     void markAsUndone() {
         this.isDone = false;
+    }
+
+    /**
+     * Returns a representation of the current Task in an appropriate
+     * format for data storage.
+     * @return  String representing the current Task.
+     */
+    String formatAsData() {
+        return getType() + " | " + getStatusIcon() + " | " + description;
     }
 
     /**

@@ -10,7 +10,7 @@ class DukeFileHandler {
     static void writeToFile(List<Task> taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(dataFile);
         for (Task task : taskList) {
-            fileWriter.append(task.toString() + "\n");
+            fileWriter.append(task.formatAsData() + "\n");
         }
         fileWriter.close();
     }

@@ -1,18 +1,21 @@
+package duke.task;
+
 import java.util.ArrayList;
 import java.lang.IndexOutOfBoundsException;
+import duke.exception.*;
 
-class TaskList {
+public class TaskList {
     private ArrayList<Task> tasks;
 
-    TaskList(ArrayList<Task> loadedTasks) {
+    public TaskList(ArrayList<Task> loadedTasks) {
         this.tasks = loadedTasks;
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         this.tasks.add(task);
     }
 
-    String delete(int index) throws DukeException {
+    public String delete(int index) throws DukeException {
         try {
             return this.tasks.remove(index).toString();
         } catch (IndexOutOfBoundsException e) {
@@ -20,19 +23,19 @@ class TaskList {
         }
     }
 
-    int size() {
+    public int size() {
         return this.tasks.size();
     }
 
-    Task get(int index) {
+    public Task get(int index) {
         return this.tasks.get(index);
     }
 
-    void markAsDone(int taskNumber) {
+    public void markAsDone(int taskNumber) {
         this.tasks.get(taskNumber).markedAsDone();
     }
 
-    ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks() {
         return this.tasks;
     }
 }

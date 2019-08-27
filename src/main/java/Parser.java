@@ -1,4 +1,16 @@
-class Parser {
+package duke.parser;
+
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import duke.command.*;
+import duke.exception.*;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
+public class Parser {
     private static void todoCheck(String[] tasks) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -27,7 +39,17 @@ class Parser {
         }
     }
 
-    static Command parse(String command) throws DukeException {
+    private static Date dateFormatter(String date) throws DukeException {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date parseDate = formatter.parse(date);
+            return parseDate;
+        } catch (ParseException e) {
+            throw new DukeException("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("list")) {
@@ -62,7 +84,7 @@ class Parser {
                     try {
                         deadlineCheck(task, command);
                         Task deadline = new Deadline(command.substring(9, command.indexOf("/by")),
-                                Duke.dateFormatter(command.substring(command.indexOf("/by") + 4)));
+                                dateFormatter(command.substring(command.indexOf("/by") + 4)));
                         return new AddCommand(deadline);
                     } catch (DukeException e) {
                         System.err.println("Something went wrong: " + e.getMessage());
@@ -73,7 +95,7 @@ class Parser {
                     try {
                         eventCheck(task, command);
                         Task event = new Event(command.substring(9, command.indexOf("/at")),
-                                Duke.dateFormatter(command.substring(command.indexOf("/at") + 4)));
+                                dateFormatter(command.substring(command.indexOf("/at") + 4)));
                         return new AddCommand(event);
                     } catch (DukeException e) {
                         System.err.println("Something went wrong: " + e.getMessage());

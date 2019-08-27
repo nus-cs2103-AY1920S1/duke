@@ -60,4 +60,13 @@ public class UI {
     public static void printInvalidStatementMessage(String fullCommand) {
         System.out.println("☹ OOPS!!! The statement: \"" + fullCommand + "\" is invalid. ");
     }
+
+    public static void printFoundKeywordMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public static void printNoKeywordMessage(String taskName) {
+        System.out.println("☹ OOPS!!! There are no matching tasks in the list with the keyword: \"" +
+                taskName + "\".");
+    }
 }

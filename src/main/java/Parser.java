@@ -20,6 +20,8 @@ public class Parser {
                 case "deadline":
                 case "event":
                     return this.addTaskWithDate(commandDescription);
+                case "find":
+                    return Optional.of(new FindCommand(commandDescription[1]));
                 default:
                     throw new UnknownCommandException(commandDescription[0]);
             }

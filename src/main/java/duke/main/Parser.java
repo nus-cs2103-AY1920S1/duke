@@ -8,8 +8,19 @@ import duke.command.ReadCommand;
 import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 
+/**
+ * Represents a parser for user input. A Parser is able to understand user input and validates
+ * against poor command formats from users to direct appropriate Command response.
+ */
 public class Parser {
 
+    /**
+     * Returns appropriate Command object as specified by the user.
+     * Flags error when user command is invalid or error occurs.
+     *
+     * @param command  The input as specified by the user.
+     * @throws DukeException  Error while executing command.
+     */
     public static Command parse(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         String directive = commandArr[0];

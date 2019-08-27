@@ -2,5 +2,6 @@ E | - | ada ad | a ad
 D | - | 242eeda | 2e qd
 D | - | aa a | a/at 232 das
 D | - | 232 ca a | 242 23 24 2
-D | - | go home | 2am
+D | + | go home | 2am
 T | - | adas
+D | - | mon | 23rd of February 2222, 1.00pm

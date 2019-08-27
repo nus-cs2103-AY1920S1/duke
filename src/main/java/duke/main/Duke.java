@@ -3,6 +3,10 @@ package duke.main;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Represents core of the Duke program.
+ * Acts as a planner for the Duke user by allowing for CRUD functionality on Tasks specified by user.
+ */
 public class Duke {
 
     private static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";
@@ -22,6 +26,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main driver of Duke program. Uses list of tasks to store user specified activities.
+     * Able to perform CRUD functionality when queried by user.
+     *
+     */
     public void run() {
         ui.greetings();
         boolean isExit = false;

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represents an Task object of type Deadline. A <code>Deadline</code> object
+ * specifies when it is to be completed by and its item description.
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -10,6 +14,10 @@ public class Deadline extends Task {
         humanizeDeadline();
     }
 
+    /**
+     * Humanized deadline of a Deadline object if deadline matches specified date format dd/mm/yyyy hhmm.
+     *
+     */
     //Regex below adapted from https://stackoverflow.com/questions/23360599/regular-expression-for-dd-mm-yyyy-hhmm
     public void humanizeDeadline() {
         String dateRegex = "^([1-9]|([012][0-9])|(3[01]))/([0]{0,1}[1-9]|1[012])/\\d\\d\\d\\d [012]{0,1}[0-9][0-6][0-9]$";

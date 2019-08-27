@@ -4,6 +4,11 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Task objects. A <code>TaskList</code> object corresponds to
+ * a list of Task objects of form ToDo, Event and Deadline and specifies operations
+ * that can be performed on the list.
+ */
 public class TaskList {
     private ArrayList<Task> tasksList;
 

@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Represents an Task object. A <code>Task</code> object
+ * specifies whether it has been completed and its item description.
+ */
 public class Task {
 
     private String description;

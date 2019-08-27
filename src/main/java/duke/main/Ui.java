@@ -4,6 +4,10 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Represents an interface for user interaction. A <code>Ui</code> object is
+ * able to print and read user inputs, notifying Duke user of program status.
+ */
 public class Ui {
 
     private String lastCommand;

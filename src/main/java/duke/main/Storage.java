@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents an interface for interaction with files. A <code>Storage</code> object
+ * is able to read and write to files that are specified.
+ */
 public class Storage {
     private String filePath;
     private File planner;
@@ -28,6 +32,13 @@ public class Storage {
         return tasksList;
     }
 
+    /**
+     * Returns an ArrayList of tasks in the specified file.
+     * Throws DukeException when error occurs parsing the file or in incorrect format.
+     *
+     * @param file  File object containing string representation of Task objects.
+     * @throws DukeException  If error occurs while parsing the file.
+     */
     public ArrayList<Task> createTasksList(File file) throws DukeException {
         ArrayList<Task> tasksList = new ArrayList<>();
         try {
@@ -74,6 +85,12 @@ public class Storage {
         planner.setWritable(true);
     }
 
+    /**
+     * Overwrites specified text to a file, throws DukeException if error occurs.
+     *
+     * @param textToAdd  String of text to write to file.
+     * @throws DukeException  If error occurs while reading and writing to file.
+     */
     public void writeStringToFile(String textToAdd) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner); //creates FileWriter in overwrite mode
@@ -85,6 +102,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites file with String representation of a tasks in TaskList object,
+     * throws DukeException if error occurs.
+     *
+     * @param taskList  List of tasks to write to file.
+     * @throws DukeException  If error occurs while reading and writing to file.
+     */
     public void writeListToFile(TaskList taskList) throws DukeException {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> tasks = taskList.getTasksList();
@@ -95,6 +119,12 @@ public class Storage {
         writeStringToFile(sb.toString().trim());
     }
 
+    /**
+     * Adds to text of a file, throws DukeException if error occurs.
+     *
+     * @param task  Task to add to the file.
+     * @throws DukeException  If error occurs while reading and writing to file.
+     */
     public void addTaskToFile(Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner, true); // create a FileWriter in append mode

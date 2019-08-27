@@ -17,3 +17,5 @@ src/main/java/Duke_BASE_21128.java
 src/main/java/Duke_LOCAL_21128.java
 src/main/java/Duke_REMOTE_21128.java
 src/production/duke/META-INF/duke.kotlin_module
+src/artifacts/duke_jar/duke.jar
+src/production/duke/META-INF/MANIFEST.MF

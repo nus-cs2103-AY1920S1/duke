@@ -9,6 +9,10 @@ import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Represents an executable action Create. A <code>CreateCommand</code> object corresponds to
+ * a Create action for a <code>Task</code> object as specified by Duke's user and adds it to TaskList.
+ */
 public class CreateCommand extends Command {
 
     private String directive;
@@ -26,6 +30,15 @@ public class CreateCommand extends Command {
         this.addOn = addOn;
     }
 
+    /**
+     * Performs operations of type Create on Task objects and adds them to the list of tasks.
+     * Directs action of file storage and user interaction.
+     *
+     * @param taskList  List of Task objects.
+     * @param ui Interface for user interaction.
+     * @param storage Interface for read and write operations on file.
+     * @throws DukeException  Error while executing command.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         boolean isAdd = true;

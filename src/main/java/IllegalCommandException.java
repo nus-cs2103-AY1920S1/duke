@@ -6,8 +6,8 @@ public class IllegalCommandException extends Exception {
     }
 
     public String toString() {
-        return "--------------------------\n"
-                + "OOPS!!! " + this.errormessage
-                + "\n\n--------------------------";
+        return "____________________________________________________________\n"
+                + " OOPS!!! " + this.errormessage
+                + "\n____________________________________________________________";
     }
 }

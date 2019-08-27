@@ -29,7 +29,7 @@ public class EventTest {
             SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
             Date date = dateFormat.parse("24/08/2019");
             Date time = timeFormat.parse("1800");
-           Event event = new Event("abc", date, time);
+            Event event = new Event("abc", date, time);
             event.markAsDone();
             assertEquals("[E][\u2713] abc (at: 24/08/2019 18.00 PM)", event.toString());
         } catch (Exception e) {

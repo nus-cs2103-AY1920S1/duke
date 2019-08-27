@@ -166,7 +166,8 @@ public class Ui {
             throw new DukeException(error);
         } else if (!command.contains(" /at ")) {
             //throw exception for no /at
-            String error = "\u2639 OOPS!!! You would need to schedule a date and time duration for this event using '/at'.\n";
+            String error = "\u2639 OOPS!!! You would need to schedule a date and time duration for"
+                    + "this event using '/at'.\n";
             throw new DukeException(error);
         } else if (command.contains(" /at ")) {
             String[] arr = command.split(" /at ", 2);

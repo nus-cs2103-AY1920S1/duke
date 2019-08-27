@@ -51,7 +51,9 @@ public class Task {
      *
      * @return String 1 or 0 of task.
      */
-    public String getIfDone() { return (isDone? "1" : "0");}
+    public String getIfDone() {
+        return (isDone? "1" : "0");
+    }
 
     /**
      * String representation of the task.

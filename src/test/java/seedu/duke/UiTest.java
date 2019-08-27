@@ -54,7 +54,8 @@ public class UiTest {
         try {
             ui.checkErrorForDeleteCommand("delete     ", tl);
         } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! Please input the task number you would like to delete.\n", e.toString());
+            assertEquals("\u2639 OOPS!!! Please input the task number you would like to delete.\n",
+                    e.toString());
         }
     }
 
@@ -65,7 +66,8 @@ public class UiTest {
         try {
             ui.checkErrorForDeleteCommand("delete", tl);
         } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! Please input the task number you would like to delete.\n", e.toString());
+            assertEquals("\u2639 OOPS!!! Please input the task number you would like to delete.\n",
+                    e.toString());
         }
     }
 
@@ -146,7 +148,8 @@ public class UiTest {
         try {
             ui.checkErrorForDeadlineCommand("deadline submit work", tl);
         } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! You would need to schedule a date/time for this deadline using '/by'.\n",  e.toString());
+            assertEquals( "\u2639 OOPS!!! You would need to schedule a date/time for this "+
+                    "deadline using '/by'.\n",  e.toString());
         }
     }
 
@@ -168,7 +171,8 @@ public class UiTest {
         try {
             ui.checkErrorForDeadlineCommand("deadline awfbwe /at 13/09/2019 1600", tl);
         } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! You would need to schedule a date/time for this deadline using '/by'.\n",  e.toString());
+            assertEquals( "\u2639 OOPS!!! You would need to schedule a date/time for this " +
+                    "deadline using '/by'.\n",  e.toString());
         }
     }
 
@@ -191,7 +195,8 @@ public class UiTest {
         try {
             ui.checkMarkDoneError("done", tl);
         } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n",  e.toString());
+            assertEquals( "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n",
+                    e.toString());
         }
     }
 
@@ -202,7 +207,8 @@ public class UiTest {
         try {
             ui.checkMarkDoneError("done     ", tl);
         } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n",  e.toString());
+            assertEquals( "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n",
+                    e.toString());
         }
     }
 

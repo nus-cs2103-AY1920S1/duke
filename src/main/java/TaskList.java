@@ -30,11 +30,14 @@ public class TaskList {
   }
 
   public void printTasks() {
+
     System.out.println("\t____________________________________________________________");
     System.out.println("\n\tHere are the tasks in your list: ");
+
     for (int i = 0; i < taskList.size(); i++) {
       System.out.println("\n\t" + (i + 1) + ". " + taskList.get(i).toString());
     }
+
     System.out.println("\t____________________________________________________________\n");
   }
 

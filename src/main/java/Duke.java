@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Duke {
-    //Function spacer takes input string and converts it tabbed format
-    // Next, print with the appropriate lines and indentation
+    //Function spacer takes input string and converts it to be
+    // printed with the appropriate lines and indentation
     protected static void spacer(String input) {
         String separator = "    ____________________________________________________________";
         String converted = "    " + input;
@@ -36,6 +36,8 @@ public class Duke {
         spacer(end);
 
     }
+
+
 
     }
 

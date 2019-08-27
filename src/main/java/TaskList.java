@@ -38,6 +38,21 @@ public class TaskList {
     }
 
     /**
+     *  Returns all <code>Task</code> objects whose descriptions contain a search string in an <code>ArrayList</code>.
+     *  @param searchString <code>String</code> to search <code>Task</code> descriptions with.
+     *  @return an <code>ArrayList</code> of <code>Task</code> objects which match the search string.
+     */
+    public ArrayList<Task> searchTask(String searchString) {
+        ArrayList<Task> results = new ArrayList<Task>();
+        for (Task task: this.tasks) {
+            if (task.getDescription().contains(searchString)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
+    /**
      *  Returns the number of tasks in this <code>TaskList</code>.
      *  @return an <code>int</code> number of tasks.
      */

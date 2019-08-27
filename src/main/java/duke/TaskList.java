@@ -8,7 +8,7 @@ public class TaskList {
     TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
-    TaskList() {}
+    TaskList() { }
 
     void deleteTask(Task task) {
         taskList.remove(task);
@@ -23,6 +23,6 @@ public class TaskList {
     }
 
     Task getTask(int index) {
-        return taskList.get(index -1);
+        return taskList.get(index - 1);
     }
 }

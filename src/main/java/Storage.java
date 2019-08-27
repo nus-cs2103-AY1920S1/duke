@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a storage for users' tasklist
+ */
 public class Storage {
     private static String filePath;
     private ArrayList<Task> taskList;
@@ -14,6 +17,12 @@ public class Storage {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Returns user's tasklist
+     *
+     * @return arraylist of tasks
+     * @throws IOException occurs when file does not exist or is corrupted
+     */
     public ArrayList<Task> load() throws IOException {
         FileReader fReader = new FileReader(filePath);
         BufferedReader bReader = new BufferedReader(fReader);
@@ -77,6 +86,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the current tasks in tasklist to the file specified by user
+     *
+     * @throws IOException occurs when file does not exist or is corrupted
+     */
     public static void save() throws IOException {
         FileWriter fWriter = new FileWriter(filePath);
         BufferedWriter bWriter = new BufferedWriter(fWriter);

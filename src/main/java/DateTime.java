@@ -1,5 +1,8 @@
-import java.text.ParseException;
-
+/**
+ * Represents a date and time object to store and convert
+ * date and time to a pleasant format e.g., 12/11/2019 1700
+ * becomes 12th November 2019, 5:00pm.
+ */
 public class DateTime {
     private String date;
     private String time;

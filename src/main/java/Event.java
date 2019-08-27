@@ -1,3 +1,7 @@
+/**
+ * Represents a task categorised as event. An Event object
+ * includes a date to specify when the event will happen
+ */
 public class Event extends Task {
     protected DateTime at;
 

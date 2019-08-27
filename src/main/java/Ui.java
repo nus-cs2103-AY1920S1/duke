@@ -2,6 +2,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * The Ui deals with interactions with the user.
+ * A Ui object includes greetings and a read input function
+ * to receive user interactions and respond accordingly.
+ */
 public class Ui {
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can i do for you?");
@@ -11,10 +16,18 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints all tasks currently in the tasklist
+     */
     public static void printTaskList() {
         TaskList.printTasks();
     }
 
+    /**
+     * Adds a task to the tasklist by calling addTask from TaskList class
+     *
+     * @param task The task to be added to the tasklist
+     */
     public static void addTaskToTaskList(Task task) {
         TaskList.addTask(task);
         System.out.println("Got it. I've added this task: ");
@@ -22,6 +35,11 @@ public class Ui {
         System.out.println("Now you have " + TaskList.getTaskListSize() + " tasks in the list.");
     }
 
+    /**
+     * Deletes a task from the tasklist by calling delTask from TaskList class
+     *
+     * @param taskNum The task number of the task to be deleted
+     */
     public static void delTaskInTaskList(int taskNum) {
         Task taskToRemove = TaskList.getTaskAt(taskNum);
         TaskList.delTask(taskNum);
@@ -30,6 +48,9 @@ public class Ui {
         System.out.println("Now you have " + TaskList.getTaskListSize() + " tasks in the list.");
     }
 
+    /**
+     * Reads users' commands and respond accordingly
+     */
     public static void readInput() {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();

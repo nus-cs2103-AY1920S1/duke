@@ -1,5 +1,7 @@
+/**
+ * Represents a task categorised as Todo.
+ */
 public class ToDo extends Task {
-
     public ToDo(String description) {
         super(description);
     }

@@ -1,3 +1,7 @@
+/**
+ * Represents a basic task. A task object includes its task description
+ * and a boolean to declare whether the task is done
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

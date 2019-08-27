@@ -1,5 +1,8 @@
-import java.util.Date;
-
+/**
+ * Represents a task categorised as deadline.
+ * A deadline object includes a date to specify
+ * when the task is due.
+ */
 public class Deadline extends Task {
     protected DateTime by;
 

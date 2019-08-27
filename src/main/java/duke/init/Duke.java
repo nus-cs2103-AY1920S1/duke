@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -204,9 +205,12 @@ public class Duke {
             String description = input.substring(9);
             String[] taskInformation = description.split(" /by ");
             storeTask(new Deadline(taskInformation[0], taskInformation[1]));
-    } catch (ArrayIndexOutOfBoundsException
+        } catch (ArrayIndexOutOfBoundsException
                 | StringIndexOutOfBoundsException e) {
             System.out.println("\tdeadline command format: deadline <description> /by <date>");
+        } catch (ParseException | IllegalArgumentException e) {
+            System.out.println("\tPlease enter a valid date format.");
+            System.out.println("\tDate and time: dd/mm/YYYY HH:mm:ss");
         }
     }
 
@@ -222,6 +226,9 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException
                 | StringIndexOutOfBoundsException e) {
             System.out.println("\tevent command format: event <description> /at <dateAndTime>");
+        } catch (ParseException e) {
+            System.out.println("\tPlease enter a valid date format.");
+            System.out.println("\tDate and time: dd/mm/YYYY HH:mm:ss");
         }
     }
 

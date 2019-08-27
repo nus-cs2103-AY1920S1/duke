@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -15,12 +16,33 @@ public class Duke {
     }
 
     /**
+     * Overwrites entire file with current items in Arr, using '***' as a separator.
+     */
+    private static void saveToFile() {
+
+        //First delete the old file
+        File file = new File("src/data/duke.txt");
+        if (file.exists()) file.delete();
+
+        //Write the objects to file
+        try (FileOutputStream fout = new FileOutputStream("src/data/duke.txt");
+             ObjectOutputStream oos = new ObjectOutputStream(fout)) {
+            for (Task task : arr) {
+                oos.writeObject(task);
+            }
+        } catch (IOException e) {
+            System.err.println("I could not save your updated list to my file :( Please try again.");
+        }
+    }
+
+    /**
      * Adds a task to the array.
      */
     private static void addTask(Task task) {
         print("Got it. I've added this task:");
         print(task.toString());
         arr.add(task);
+        saveToFile();
         print("Now you have " + arr.size() + (arr.size() > 1 ? " tasks" : " task") + " in the list.");
     }
 
@@ -30,8 +52,8 @@ public class Duke {
      * @param args takes in arguments.
      */
     public static void main(String[] args) {
-
         print("Hello! I'm Duke\nWhat can I do for you?");
+        //The name of the task, e.g todo Read book => taskName = "Read book"
         String taskName;
         Task temp;
         while (sc.hasNext()) {
@@ -45,6 +67,7 @@ public class Duke {
                         print("Noted. I've removed this task:");
                         print(removed.toString());
                         print("Now you have " + arr.size() + (arr.size() > 1 ? " tasks" : " task") + " in the list.");
+                        saveToFile();
                     } catch (InputMismatchException e) {
                         print("OOPS!!! You need to enter a natural number.");
                     }

@@ -1,9 +1,12 @@
+import java.io.Serializable;
+
 /**
  * A Task class representing a task with a isDone component.
  */
-abstract class Task {
+abstract class Task implements Serializable {
     String description;
     private boolean isDone;
+    private static final long serialVersionUID = 42L;
 
     public Task(String description) {
         this.description = description;

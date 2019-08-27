@@ -1,3 +1,7 @@
+package duke.task;
+import duke.datetime.Date;
+import duke.datetime.Timing;
+
 public class Deadline extends Task{
     Date date;
     Timing timing;

@@ -1,5 +1,10 @@
+package duke.parser;
+
+import duke.dukeexception.DukeException;
+import duke.command.*;
+
 public class Parser {
-    public static Command parse(String toParse) throws DukeException{
+    public static Command parse(String toParse) throws DukeException {
         String[] tokens = toParse.split(" ");
         String commandType = tokens[0];
         Command cToReturn = null;
@@ -44,7 +49,7 @@ public class Parser {
             boolean dateFlag = false;
             //Check if both date and time are specified
             if(toParse.split("/by")[1].trim().split(" ").length != 2){
-                throw new DukeException("☹ OOPS!!! Date and Timing not specified correctly!");
+                throw new DukeException("☹ OOPS!!! duke.datetime.Date and duke.datetime.Timing not specified correctly!");
             }
             for (int m = 1; m < tokens.length; m++) {
                 if (tokens[m].equals("/by")) {
@@ -70,7 +75,7 @@ public class Parser {
             boolean timeFlag = false;
             //Check if both date and time are specified
             if(toParse.split("/at")[1].trim().split(" ").length != 2){
-                throw new DukeException("☹ OOPS!!! Date and Timing not specified correctly!");
+                throw new DukeException("☹ OOPS!!! duke.datetime.Date and duke.datetime.Timing not specified correctly!");
             }
             for (int z = 1; z < tokens.length; z++) {
                 if (tokens[z].equals("/at")) timeFlag = true;

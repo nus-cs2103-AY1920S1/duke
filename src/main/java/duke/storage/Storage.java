@@ -1,7 +1,11 @@
+package duke.storage;
+
+import duke.dukeexception.DukeException;
+import duke.task.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
@@ -70,7 +74,7 @@ public class Storage {
             String lineToWrite = "";
             for (int k = 0; k < tasklist.size(); k++) {
                 Task curr = tasklist.get(k);
-                int doneFlag = curr.isDone ? 1 : 0;
+                int doneFlag = curr.getDoneStatus() ? 1 : 0;
                 if (curr instanceof Todo) {
                     lineToWrite = "T" + "|" + doneFlag + "|" + curr.getDescription();
                 } else if (curr instanceof Deadline) {

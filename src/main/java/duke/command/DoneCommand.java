@@ -1,3 +1,10 @@
+package duke.command;
+import duke.dukeexception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
     int toComplete;
     public DoneCommand(int toComplete){
@@ -6,7 +13,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage){
         try {
             if (toComplete >= taskList.size() || toComplete < 0) {
-                throw new DukeException("OOPS! Task " + (toComplete + 1) + " doesn't exist!");
+                throw new DukeException("OOPS! duke.task.Task " + (toComplete + 1) + " doesn't exist!");
             }
             Task curr = taskList.get(toComplete);
             taskList.get(toComplete).completeTask();

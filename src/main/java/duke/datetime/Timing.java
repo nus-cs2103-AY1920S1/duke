@@ -1,3 +1,5 @@
+package duke.datetime;
+
 public class Timing {
     private int hour;
     private int minute;

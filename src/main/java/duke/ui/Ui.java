@@ -1,9 +1,14 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ui {
-    private final static String greet = "Hello! I'm Duke\nWhat can I do for you?";
+    private final static String greet = "Hello! I'm duke.Duke\nWhat can I do for you?";
     private final static String goodbye = "Bye. Hope to see you again!";
     private final static String niceAdded = "Nice! I've marked this task as done:";
     private final static String gotIt = "Got it. I've added this task:";
@@ -11,7 +16,7 @@ public class Ui {
     private final static String tasks = "Here are your tasks in your list:";
     private BufferedReader userInput;
 
-    public Ui(){
+     public Ui(){
         this.userInput = new BufferedReader(new InputStreamReader(System.in));
     }
 

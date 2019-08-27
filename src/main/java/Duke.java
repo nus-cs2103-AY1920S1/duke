@@ -24,4 +24,16 @@ public class Duke {
         System.out.println(welcomeMessage);
         System.out.println(HORIZONTAL_LINE);
     }
+
+    public void exit() {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.printf("%sBye! Hope to see you again soon! \u263A\n", makeSpace(5));
+        System.out.println(HORIZONTAL_LINE);
+    }
+
+    public void evaluate(String action) {
+        System.out.println(HORIZONTAL_LINE);
+        System.out.println(makeSpace(5) + action);
+        System.out.println(HORIZONTAL_LINE);
+    }
 }

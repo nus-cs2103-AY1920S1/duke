@@ -3,10 +3,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
 
-// Command: Strictly takes in specified things; same for task list
-// Parser's role: Split the string up; create the tasks too
-// TODO: handle illegal commands and empty to do Command, and hard coded command initialisation
-
 /**
  * Parser has one method: parse.
  * Parsing breaks down the input full command string, and outputs its associated command.
@@ -25,10 +21,8 @@ class Parser {
         SimpleDateFormat readFormat = new SimpleDateFormat(format);;
         Command command;
 
-//        Hashtable<String, String> result = new Hashtable<>();
         String[] arr = fullCommand.split(" ", 2);
         String commandType = arr[0];
-//        result.put("command", command);
 
         switch (commandType) {
         case "list":

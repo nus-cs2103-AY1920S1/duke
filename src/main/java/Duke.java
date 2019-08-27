@@ -17,14 +17,10 @@ import java.util.Scanner;
  * Sort directory out...
  */
 
-// TODO: update run method, ui read line
-// TODO: Move exceptions to execute
+// TODO: update run method
 public class Duke {
     private TaskList tasks;
     private UI ui;
-    private final String emptyToDoErrorMessage = "____________________________________________________________\n"
-            + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
-            + "____________________________________________________________";
 
     /**
      * Driver method.
@@ -43,32 +39,6 @@ public class Duke {
                 command = Parser.parse(sc.nextLine());
                 command.execute(tasks, ui);
                 exit = command.isExit();
-//                switch (comm.get("command")) {
-//                case "todo":
-//                    System.out.println(tasks.addToDo(toDo.get("task")));
-//                    break;
-//                case "deadline":
-//                    System.out.println(tasks.addDeadline(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
-//                    break;
-//                case "event":
-//                    System.out.println(tasks.addEvent(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
-//                    break;
-//                case "list":
-//                    System.out.println(tasks.list());
-//                    break;
-//                case "done":
-//                    System.out.println(tasks.done(Integer.parseInt(toDo.get("index"))));
-//                    break;
-//                case "delete":
-//                    System.out.println(tasks.delete(Integer.parseInt(toDo.get("index"))));
-//                    break;
-//                case "save":
-//                    tasks.save(toDo.get("path"));
-//                    break;
-//                case "bye":
-//                    exit = true;
-//                    break;
-//                }
             } catch (Exception e) {
                 ui.showMessage(e.getMessage());
             }

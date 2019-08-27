@@ -16,7 +16,7 @@ public class Storage {
 
     String filePath = ""; // Default is "data/duke.txt"
 
-    public Storage(String filePath){
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -30,12 +30,15 @@ public class Storage {
                 //Get tasks
                 Task task = tasks.get(i);
 
-                if(task instanceof Todo){
+                if (task instanceof Todo) {
                     text += "T|" + task.getIsDone() + "|" + task.getDescription();
-                } else if(task instanceof Deadline){
-                    text += "D|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Deadline)task).getDate();
-                } else if(task instanceof Event){
-                    text += "D|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Event)task).getDate();
+                } else if (task instanceof Deadline) {
+                    text += "D|" + task.getIsDone() + "|" + task.getDescription() + "|"
+                        + ((Deadline) task).getDate();
+                } else if (task instanceof Event) {
+                    text +=
+                        "D|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Event) task)
+                            .getDate();
                 }
 
                 if (i + 1 != tasks.size()) {
@@ -45,8 +48,9 @@ public class Storage {
 
             fw.write(text);
             fw.close();
-        } catch(IOException ie) {
-            new DukeException("Something went wrong when saving. Please ensure the data directory is created.");
+        } catch (IOException ie) {
+            new DukeException(
+                "Something went wrong when saving. Please ensure the data directory is created.");
         }
     }
 
@@ -59,36 +63,37 @@ public class Storage {
             while (s.hasNext()) {
                 String[] input = s.nextLine().split("[|]");
 
-                switch(input[0]){
+                switch (input[0]) {
                 case "T":
                     Todo todo = new Todo(input[2]);
-                    if(input[1].equals("true")) {
+                    if (input[1].equals("true")) {
                         todo.markAsDone();
                     }
                     storage.add(todo);
                     break;
                 case "D":
                     Deadline deadline = new Deadline(input[2], input[3]);
-                    if(input[1].equals("true")) {
+                    if (input[1].equals("true")) {
                         deadline.markAsDone();
                     }
                     storage.add(deadline);
                     break;
                 case "E":
                     Event event = new Event(input[2], input[3]);
-                    if(input[1].equals("true")) {
+                    if (input[1].equals("true")) {
                         event.markAsDone();
                     }
                     storage.add(event);
                     break;
-                default:;
+                default:
+                    ;
                     break;
                 }
 
             }
-        } catch(FileNotFoundException fnfe) {
+        } catch (FileNotFoundException fnfe) {
             new DukeException("Unable to load file. Your saved data will not be loaded.");
-        } catch(ArrayIndexOutOfBoundsException aiobe) {
+        } catch (ArrayIndexOutOfBoundsException aiobe) {
             new DukeException("File corrupted. Your saved data will not be loaded.");
         }
 

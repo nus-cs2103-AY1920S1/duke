@@ -1,10 +1,17 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EmptyCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.task.Task;
 import duke.task.TaskEnum;
 
 public class Parser {
+
     public static Command parse(String input) {
         // ADD TODO, DEADLINE, EVENT TASKS
         if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
@@ -29,20 +36,24 @@ public class Parser {
                 case "deadline":
                     //Check input is valid
                     if (remaining.indexOf("/by") == -1 || (input.indexOf("/by") + 4) == -1) {
-                        throw new DukeException("Please ensure that /by and the date is included");
+                        throw new DukeException(
+                            "Please ensure that /by and the date is included");
                     } else {
                         item = remaining.substring(0, remaining.indexOf("/by") - 1);
-                        date = remaining.substring(remaining.indexOf("/by") + 4, remaining.length());
+                        date = remaining
+                            .substring(remaining.indexOf("/by") + 4, remaining.length());
                     }
 
                     return new AddCommand(item, date, TaskEnum.DEADLINE);
                 case "event":
                     //Check input is valid
                     if (remaining.indexOf("/at") == -1 || (input.indexOf("/at") + 4) == -1) {
-                        throw new DukeException("Please ensure that /at and the date is included");
+                        throw new DukeException(
+                            "Please ensure that /at and the date is included");
                     } else {
                         item = remaining.substring(0, remaining.indexOf("/at") - 1);
-                        date = remaining.substring(remaining.indexOf("/at") + 4, remaining.length());
+                        date = remaining
+                            .substring(remaining.indexOf("/at") + 4, remaining.length());
                     }
 
                     return new AddCommand(item, date, TaskEnum.EVENT);
@@ -57,14 +68,14 @@ public class Parser {
             }
         } else if (input.contains("done")) { // Mark item as complete
             int taskNo = Integer.parseInt(
-                    input.replace("done", "")
-                            .replace(" ", "")); //Removing 'done' and empty spaces
+                input.replace("done", "")
+                    .replace(" ", "")); //Removing 'done' and empty spaces
 
             return new DoneCommand(taskNo);
         } else if (input.contains("delete")) { // Delete item
             int taskNo = Integer.parseInt(
-                    input.replace("delete", "")
-                            .replace(" ", "")); //Removing 'delete' and empty spaces
+                input.replace("delete", "")
+                    .replace(" ", "")); //Removing 'delete' and empty spaces
 
             return new DeleteCommand(taskNo);
         } else if (input.equals("list")) { // List items

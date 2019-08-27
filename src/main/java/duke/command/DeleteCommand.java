@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
 
     int taskNo;
 
-    public DeleteCommand(int taskNo){
+    public DeleteCommand(int taskNo) {
         this.taskNo = taskNo;
     }
 
@@ -18,8 +18,8 @@ public class DeleteCommand extends Command {
 
         if (task != null) {
             ui.printOutput("  " + task,
-                    "Noted. I've removed this task: ",
-                    taskList.getTaskList().size());
+                "Noted. I've removed this task: ",
+                taskList.getTaskList().size());
             storage.save(taskList.getTaskList());
         }
     }

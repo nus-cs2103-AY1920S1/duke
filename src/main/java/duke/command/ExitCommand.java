@@ -5,10 +5,12 @@ import duke.TaskList;
 import duke.Ui;
 
 public class ExitCommand extends Command {
-    public void execute(Ui ui, Storage storage, TaskList taskList) {}
+
+    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    }
 
     @Override
-    public boolean shouldContinue(){
+    public boolean shouldContinue() {
         return false;
     }
 }

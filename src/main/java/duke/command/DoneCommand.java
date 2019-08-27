@@ -9,7 +9,7 @@ public class DoneCommand extends Command {
 
     int taskNo;
 
-    public DoneCommand(int taskNo){
+    public DoneCommand(int taskNo) {
         this.taskNo = taskNo;
     }
 

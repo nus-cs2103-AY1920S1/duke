@@ -25,22 +25,25 @@ public class AddCommand extends Command {
 
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         Task task = null;
-        switch(taskType){
+        switch (taskType) {
         case TODO:
             task = taskList.add(description, TaskEnum.TODO);
-        break;
+            break;
         case DEADLINE:
             task = taskList.add(description, date, TaskEnum.DEADLINE);
-        break;
+            break;
         case EVENT:
             task = taskList.add(description, date, TaskEnum.EVENT);
-        break;
+            break;
+        default:
+            ;
+            break;
         }
 
-        if(task != null) {
+        if (task != null) {
             ui.printOutput("  " + task,
-                    "Got it. I've added this task: ",
-                    taskList.getTaskList().size());
+                "Got it. I've added this task: ",
+                taskList.getTaskList().size());
             storage.save(taskList.getTaskList());
         }
     }

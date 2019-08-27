@@ -12,6 +12,10 @@ public class Event extends Task {
                 Integer.parseInt(date[2]), Integer.parseInt(dateAndTime[1]));
     }
 
+    public String getAt() {
+        return at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date + ")";

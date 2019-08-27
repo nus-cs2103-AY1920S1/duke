@@ -1,7 +1,6 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected int ID;
 
     public Task(String description) {
         this.description = description;
@@ -9,15 +8,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

@@ -80,4 +80,12 @@ public class TaskList {
         task.markAsDone();
         Ui.outputTaskDone(task);
     }
+
+    public void findTasks(String keyword) {
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                Ui.outputTaskDetails(task);
+            }
+        }
+    }
 }

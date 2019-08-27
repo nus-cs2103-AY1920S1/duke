@@ -67,6 +67,10 @@ public class Parser {
                 int index = Integer.parseInt(sc.nextLine().trim());
                 taskList.deleteTask(index);
                 break;
+            case ("find"):
+                String keyword = sc.nextLine().trim();
+                taskList.findTasks(keyword);
+                break;
             default:
                 throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

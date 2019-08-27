@@ -8,20 +8,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
     @Test
-    void deadlineTestWithString(){
+    void deadlineTestWithString() {
         Deadline test = new Deadline("deadline", "deadlineBy");
-        assertEquals("[D][✘] deadline (by: deadlineBy)", test.toString(), "toString() method works");
+        assertEquals("[D][X] deadline (by: deadlineBy)", test.toString(), "toString() method works");
 
         test.markAsDone();
-        assertEquals("[D][✓] deadline (by: deadlineBy)", test.toString(), "markAsDone() method works");
+        assertEquals("[D][O] deadline (by: deadlineBy)", test.toString(), "markAsDone() method works");
     }
 
     @Test
-    void deadlineTestWithDate(){
+    void deadlineTestWithDate() {
         Deadline test = new Deadline("deadline", new Date(0));
-        assertEquals("[D][✘] deadline (by: 01/01/1970 07:30:00)", test.toString(), "toString() method works");
+        assertEquals("[D][X] deadline (by: 01/01/1970 07:30:00)", test.toString(), "toString() method works");
 
         test.markAsDone();
-        assertEquals("[D][✓] deadline (by: 01/01/1970 07:30:00)", test.toString(), "markAsDone() method works");
+        assertEquals("[D][O] deadline (by: 01/01/1970 07:30:00)", test.toString(), "markAsDone() method works");
     }
 }

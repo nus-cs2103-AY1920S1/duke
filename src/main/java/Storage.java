@@ -19,7 +19,7 @@ public class Storage {
     ArrayList<Task> loadSavedList() {
         try {
             File file = new File(filePath);
-            //file.createNewFile();
+            file.createNewFile();
             this.savedList = Files.readAllLines(file.toPath());
         } catch (IOException e) {
             System.out.println(e.getMessage());

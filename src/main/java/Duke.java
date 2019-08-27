@@ -1,3 +1,5 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -31,6 +33,7 @@ public class Duke {
                         int index = Integer.parseInt(input.split(" ", 2)[1]);
                         taskList.get(index - 1).markAsDone();
                         System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
+                        storage.writeSavedList(taskList);
                     } catch (NumberFormatException e) { // if not a number is entered after 'done'
                         throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
                     } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'done'
@@ -45,6 +48,7 @@ public class Duke {
                         Task currentTask = taskList.remove(index - 1);
                         System.out.println("Noted. I've removed this task:\n  " + currentTask);
                         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                        storage.writeSavedList(taskList);
                     } catch (NumberFormatException e) { // if not a number is entered after 'delete'
                         throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
                     } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'delete'
@@ -59,6 +63,7 @@ public class Duke {
                             }
                             Task currentTask = new ToDoTask((taskContent));
                             taskList.add(currentTask);
+                            storage.writeSavedList(taskList);
                             System.out.println("Got it. I've added this task:\n  " + currentTask);
                         } else {
                             String taskDescription = input.split("deadline|event", 2)[1];
@@ -85,6 +90,7 @@ public class Duke {
                                 taskList.add(currentTask);
                                 System.out.println("Got it. I've added this task:\n  " + currentTask);
                             }
+                            storage.writeSavedList(taskList);
                         }
                     } catch (IndexOutOfBoundsException e) { // if the task description is empty
                         throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
@@ -97,6 +103,5 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
-        storage.writeSavedList(taskList);
     }
 }

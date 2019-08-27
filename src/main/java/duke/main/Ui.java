@@ -19,6 +19,12 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
+    /**
+     * Prints a success message after a task is successfully added to the list.
+     *
+     * @param task Task added to list.
+     * @param size Current size of list after addition.
+     */
     public void printAddSuccessMessage(Task task, int size) {
         showLine();
         System.out.println("\tGot it. I've added this task:");
@@ -27,6 +33,12 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints a success message after a task is deleted from to the list.
+     *
+     * @param task Task deleted from list.
+     * @param size Current size of list after deletion.
+     */
     public void printDeleteSuccessMessage(Task task, int size) {
         showLine();
         System.out.println("\tNoted. I've removed this task:");
@@ -35,6 +47,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints the given list with formatting.
+     *
+     * @param tasks List of tasks to be printed.
+     */
     public void printList(ArrayList<Task> tasks) {
         showLine();
         System.out.println("\tHere are the tasks in your list:");
@@ -61,6 +78,11 @@ public class Ui {
         printMessage("An error occurred during file loading " + error);
     }
 
+    /**
+     * Prints a given message with formatting.
+     *
+     * @param message The message to be printed.
+     */
     public void printMessage(String message) {
         showLine();
         System.out.println("\t" + message);

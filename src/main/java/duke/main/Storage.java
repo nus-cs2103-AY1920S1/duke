@@ -22,6 +22,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the user's hard drive.
+     *
+     * @return The list of tasks currently stored in the user's hard drive.
+     */
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -65,6 +70,12 @@ public class Storage {
         return tasks;
     }
 
+
+    /**
+     * Saves the given list to the user's hard drive.
+     *
+     * @param list The given list to be saved.
+     */
     public void save(ArrayList<Task> list) throws DukeException {
         try {
             File file = new File(filePath);

@@ -5,6 +5,7 @@ public class Ui {
     private static final String LINE = "    ____________________________________________________________";
     private static final String TABS = "     ";
     private Scanner scanner;
+
     public Ui() {
         scanner = new Scanner(System.in);
     }
@@ -31,7 +32,7 @@ public class Ui {
         System.out.println(TABS + "Got it. I've added this task: ");
     }
 
-    public void showNumberOfTasks(Integer numberOfTasks){
+    public void showNumberOfTasks(Integer numberOfTasks) {
         if (numberOfTasks == 1) {
             System.out.printf("%sNow you have %d task in the list.\n", TABS, numberOfTasks);
         } else {
@@ -61,10 +62,9 @@ public class Ui {
         System.out.println(TABS + "☹ OOPS!!! " + message);
         System.out.println(LINE);
     }
+
     public String readCommand() {
         String userCommand = scanner.nextLine();
         return userCommand;
     }
-
-
 }

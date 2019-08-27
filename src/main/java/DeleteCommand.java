@@ -1,5 +1,6 @@
 public class DeleteCommand extends Command {
     private Integer taskNumber;
+
     public DeleteCommand(Integer taskNumber) {
         super();
         isExit = false;

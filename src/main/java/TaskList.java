@@ -14,6 +14,7 @@ public class TaskList {
     public Integer getNumberOfTasks() {
         return taskList.size();
     }
+
     public Task getTask(Integer index) {
         return taskList.get(index);
     }

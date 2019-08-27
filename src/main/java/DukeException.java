@@ -4,14 +4,4 @@ public class DukeException extends Exception {
     }
 }
 
-class EmptyToDoDescriptionException extends DukeException {
-    public EmptyToDoDescriptionException(String message) {
-        super(message);
-    }
-}
 
-class UnknownCommandException extends DukeException {
-    public UnknownCommandException(String message) {
-        super(message);
-    }
-}

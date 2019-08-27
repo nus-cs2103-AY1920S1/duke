@@ -1,5 +1,6 @@
 public class AddCommand extends Command {
     private Task userTask;
+
     public AddCommand(Task userTask) {
         super();
         isExit = false;

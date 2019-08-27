@@ -9,7 +9,7 @@ public class Task {
     }
 
     /**
-     * Marks the current Task as done
+     * Marks the current Task as done.
      */
     public void markAsDone() {
         isDone = true;

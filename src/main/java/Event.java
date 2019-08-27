@@ -3,6 +3,7 @@
  */
 public class Event extends Task {
     DateTime at;
+
     public Event(String description, String at) {
         super(description);
         this.typeOfTask = "[E]";

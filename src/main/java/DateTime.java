@@ -12,17 +12,17 @@ public class DateTime {
     public DateTime(String date) {
         rawForm = date;
         String[] dateComponents = date.split(" ");
-        
-        String dayComponent = dateComponents[0];
-        String timeComponent = dateComponents[1];
+
 
         //Parsing the dayComponent, example: 2/05/2019
+        String dayComponent = dateComponents[0];
         String[] componentsOfDate = dayComponent.split("/");
         this.day = Integer.parseInt(componentsOfDate[0]);
         this.month = Integer.parseInt(componentsOfDate[1]);
         this.year = Integer.parseInt(componentsOfDate[2]);
 
         //Parsing the timeComponent, example: 1800
+        String timeComponent = dateComponents[1];
         String hoursString = timeComponent.substring(0, 2);
         String minutesString = timeComponent.substring(2);
         this.hours = Integer.parseInt(hoursString);
@@ -70,6 +70,7 @@ public class DateTime {
 
         return String.format("%s%s%s", hoursString, minutesString, noonString);
     }
+
     @Override
     public String toString() {
         return String.format("%s of %s %s, %s",

@@ -79,7 +79,7 @@ class Parser {
         return task;
     }
 
-    private static Date parseDate(String dateStr) throws DukeException {
+    static Date parseDate(String dateStr) throws DukeException {
         try {
             return Duke.dateFormatter.parse(dateStr);
         } catch (ParseException e) {

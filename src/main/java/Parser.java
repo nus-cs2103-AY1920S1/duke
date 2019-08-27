@@ -1,4 +1,10 @@
 public class Parser {
+
+    /**
+     * Returns specific Command from given user input.
+     * @param fullCommand User input string.
+     * @return Command to be executed.
+     */
     public static Command parse(String fullCommand) {
         String[] splitInput = fullCommand.split(" ");
         String command = splitInput[0];

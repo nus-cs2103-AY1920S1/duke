@@ -9,7 +9,12 @@ public class Deadline extends Task {
     private DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d MMMM Y hh:mma");
 
-    Deadline(String description, String by) {
+    /**
+     * Deadline Constructor.
+     * @param description Description of deadline.
+     * @param by Date string formatted in the form "d/M/yyyy HHmm".
+     */
+    public Deadline(String description, String by) {
         super(description);
         this.by = LocalDateTime.parse(by, inputFormat);
     }
@@ -19,6 +24,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(outputFormat) + ")";
     }
 
+    /**
+     * Used in saving of task data for storage.
+     * @return Formatted string representation of deadline.
+     */
     @Override
     public String getSaveString() {
         StringJoiner sj = new StringJoiner("|");
@@ -29,6 +38,11 @@ public class Deadline extends Task {
         return sj.toString();
     }
 
+    /**
+     * Transform string representation of deadline back to object.
+     * @param saveString String representation of deadline.
+     * @return Deadline object constructed from saved data.
+     */
     public static Deadline parseSaveString(String saveString) {
         String[] saveStringArr = saveString.split("\\|");
         boolean isDone = saveStringArr[1].equals("1");

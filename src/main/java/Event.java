@@ -9,8 +9,12 @@ public class Event extends Task {
     private DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d MMMM Y hh:mma");
 
-
-    Event(String description, String at) {
+    /**
+     * Event Constructor.
+     * @param description Description of event.
+     * @param at Date string formatted in the form "d/M/yyyy HHmm"
+     */
+    public Event(String description, String at) {
         super(description);
         this.at = LocalDateTime.parse(at, inputFormat);
     }
@@ -30,6 +34,11 @@ public class Event extends Task {
         return sj.toString();
     }
 
+    /**
+     * Transform string representation of event back to object.
+     * @param saveString String representation of event.
+     * @return Event object constructed from saved data.
+     */
     public static Event parseSaveString(String saveString) {
         String[] saveStringArr = saveString.split("\\|");
         boolean isDone = saveStringArr[1].equals("1");

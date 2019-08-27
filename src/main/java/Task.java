@@ -20,5 +20,9 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Gets string formatted to be saved.
+     * @return String to be written into save file.
+     */
     public abstract String getSaveString();
 }

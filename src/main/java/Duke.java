@@ -25,7 +25,7 @@ public class Duke {
         ArrayList<Task> toDoList = new ArrayList<>();
         while(!(msg.equals("bye") && commands.length == 1)) {
             try{
-                switch (commands[0]) {
+                switch (commands[0].toLowerCase()) {
                     case "done":
                         if( commands.length > 2){
                             throw new DukeException("☹ OOPS!!! Your command is in the wrong format.");

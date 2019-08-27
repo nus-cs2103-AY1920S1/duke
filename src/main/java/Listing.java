@@ -1,16 +1,23 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Listing {
-    private ArrayList<Task> list;
+    ArrayList<Task> list;
 
     public Listing() {
-        this.list = new ArrayList<>();
+        this.list = Files.convertToArrayList();
     }
 
+
     public void add(String msg) {
-        Task task = new Task(msg);
-        list.add(task);
-        System.out.println(String.format("added: %s", msg));
+        try {
+            Task task = new Task(msg);
+            list.add(task);
+            Files.appendToFile(task.toString());
+            System.out.println(String.format("added: %s", msg));
+        } catch (IOException e) {
+            System.out.println("Unable to write the file");
+        }
     }
 
     // msg[0] = event, msg[1] = description
@@ -18,11 +25,17 @@ public class Listing {
     // the description is empty
     public void addTodo(String[] msg) throws DukeException {
         if(msg.length == 2 && !msg[1].trim().equals("")) {
-            Task task = new Todo(msg[1]);
-            list.add(task);
-            System.out.println(String.format(
-                "Got it. I\'ve added this task:\n  "
-                + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+            try {
+                Task task = new Todo(msg[1]);
+                list.add(task);
+                Files.appendToFile(String.format("T | 0 | %s\n",
+                        task.getDescription()));
+                System.out.println(String.format(
+                        "Got it. I\'ve added this task:\n  "
+                                + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+            } catch (IOException e) {
+                System.out.println("Unable to write the file");
+            }
         }else {
             throw new DukeException("\u1F65 OOPS!!! The description of a todo cannot be empty.");
         }
@@ -37,11 +50,19 @@ public class Listing {
             String[] msgs = msg[1].split("/by");
             //check is the description correct.
             if(msgs.length == 2 && !msgs[1].equals(" ") && !msgs[0].equals("")) {
-                Task task = new Deadline(msgs[0], msgs[1]);
-                list.add(task);
-                System.out.println(String.format(
-                        "Got it. I\'ve added this task:\n  "
-                        + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+                try {
+                    Task task = new Deadline(msgs[0], msgs[1]);
+                    Files.appendToFile(
+                            String.format("D | 0 | %s | %s\n",
+                                task.getDescription(),
+                                task.getInformation()));
+                    list.add(task);
+                    System.out.println(String.format(
+                            "Got it. I\'ve added this task:\n  "
+                                    + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+                } catch (IOException e) {
+                    System.out.println("Unable to write the file");
+                }
             }else {
                 throw new DukeException("\u1F65 OOPS!!! The format of the description of a deadline is wrong");
 
@@ -60,11 +81,19 @@ public class Listing {
         if(msg.length > 1) {
             String[] msgs = msg[1].split("/at");
             if(msgs.length == 2 && !msgs[1].equals(" ") && !msgs[0].equals("")) {
-                Task task = new Event(msgs[0], msgs[1]);
-                list.add(task);
-                System.out.println(String.format(
-                        "Got it. I\'ve added this task:\n  "
-                                + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+                try {
+                    Task task = new Event(msgs[0], msgs[1]);
+                    list.add(task);
+                    Files.appendToFile(
+                            String.format("E | 0 | %s | %s\n",
+                                task.getDescription(),
+                                task.getInformation()));
+                    System.out.println(String.format(
+                            "Got it. I\'ve added this task:\n  "
+                                    + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+                } catch (IOException e) {
+                    System.out.println("Unable to write the file");
+                }
             }else {
                 throw new DukeException("\u1F65 OOPS!! The format of the description of a deadline is wrong.");
             }
@@ -91,11 +120,16 @@ public class Listing {
                 } else if (index < 1) {
                     throw new DukeException("OOPS!! The number should be larger than 0");
                 } else {
-                    Task tk = list.get(index - 1);
-                    tk.markAsDone();
-                    System.out.println(
-                            String.format("Nice! I've marked this task as done:\n"
-                                    + "  " + tk));
+                    try {
+                        Task tk = list.get(index - 1);
+                        tk.markAsDone();
+                        Files.updateFile(list);
+                        System.out.println(
+                                String.format("Nice! I've marked this task as done:\n"
+                                        + "  " + tk));
+                    } catch (IOException e) {
+                        System.out.println("Unable to write the file");
+                    }
                 }
             } catch (NumberFormatException ex) {
                 throw new DukeException("\u1F65 OOPS! Invalid number as input");
@@ -131,12 +165,17 @@ public class Listing {
                 } else if (index < 1) {
                     throw new DukeException("OOPS!! The number should be larger than 0");
                 } else {
-                    Task tk = list.get(index - 1);
-                    list.remove(index - 1);
-                    Task.reduceByOne();
-                    System.out.println(String.format(
-                            "Noted. I\'ve removed this task: \n  "
-                                    + tk + "\nNow you have %d tasks in the list.", Task.noOfTask));
+                    try {
+                        Task tk = list.get(index - 1);
+                        list.remove(index - 1);
+                        Task.reduceByOne();
+                        Files.updateFile(list);
+                        System.out.println(String.format(
+                                "Noted. I\'ve removed this task: \n  "
+                                        + tk + "\nNow you have %d tasks in the list.", Task.noOfTask));
+                    } catch (IOException e) {
+                        System.out.println("Unable to write the file");
+                    }
                 }
             } catch (NumberFormatException ex) {
                 throw new DukeException("\u1F65 OOPS! Invalid number as input");

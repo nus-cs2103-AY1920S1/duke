@@ -3,5 +3,6 @@ public class Event extends Task{
         super(description.trim());
         super.tag = "[E]";
         super.information = "(at: " + at.trim() + ")";
+        super.taskType = TaskType.EVENT;
     }
 }

@@ -3,6 +3,7 @@ public class Deadline extends Task{
         super(description.trim());
         super.tag = "[D]";
         super.information = "(by: " + by.trim() + ")";
+        super.taskType = TaskType.DEADLINE;
 
     }
 }

@@ -7,12 +7,20 @@ public class Task {
         this.isDone = false;
     }
 
+    public String toSave() {
+        return "";
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
+    public String getBinaryStatus() {
+        return (isDone ? "1" : "0");
+    }
+
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "v" : "x"); //return tick or X symbols
     }
 
 }

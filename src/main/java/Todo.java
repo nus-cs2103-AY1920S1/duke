@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toSave() {
+        return "T | " + super.getBinaryStatus() + " | " + super.description;
+    }
+
+    @Override
     public String toString() {
         return "[T][" + super.getStatusIcon() + "] " + super.description;
     }

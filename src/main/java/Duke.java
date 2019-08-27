@@ -42,8 +42,11 @@ public class Duke {
     }
     private void store(String task) {
         // converts tasks in string from storage to taskarr
+        //System.out.println(task);
+        if (task.equals("")) {
+            return;
+        }
         Scanner stringSc = new Scanner(task);
-
         String type = stringSc.next();
         stringSc.next();
         int isDone = stringSc.nextInt();
@@ -51,38 +54,44 @@ public class Duke {
         String mainInfo = "";
         String info = stringSc.next();
         while (!info.equals("|")) {
+
             mainInfo = mainInfo + info;
             info = stringSc.next();
         }
-
-        if (type == "D") {
+        if (type.equals("D")) {
             // take up empty input
-            stringSc.next();
             String by = stringSc.next();
-            Deadline newTask = new Deadline(info,"D",by);
+            Deadline newTask = new Deadline(mainInfo,"D",by);
             taskArr.add(newTask);
-        } else if (type == "E") {
-            stringSc.next();
+        } else if (type.equals("E")) {
+
             String by = stringSc.next();
-            Event newTask = new Event(info,"E",by);
+            Event newTask = new Event(mainInfo,"E",by);
             taskArr.add(newTask);
         } else {
-            ToDo newTask = new ToDo(info, "T","");
+            ToDo newTask = new ToDo(mainInfo, "T","");
             taskArr.add(newTask);
         }
     }
     private void save() {
         data.setAppend(true);
-        String mainTxt = "";
+
         for (Task t: taskArr) {
+            String mainTxt = "";
             String type = t.getType();
             String status = (t.getDone() ? "1" : "0");
             String info = t.getTaskInfo();
             String by = t.getBy();
-            mainTxt = mainTxt + type + " | " + status + " | "
-                    + info + " | " + by + " |\n ";
+            if (type == "T") {
+                mainTxt = mainTxt + type + " | " + status + " | "
+                        + info + " | " + by + " | ";
+            } else {
+                mainTxt = mainTxt + type + " | " + status + " | "
+                        + info + " | " + by + " | ";
+            }
+            data.writeToFile(mainTxt);
+
         }
-        data.writeToFile(mainTxt);
     }
     private void printLine() {
         /**

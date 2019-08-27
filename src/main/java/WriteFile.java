@@ -1,5 +1,5 @@
 import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.BufferedWriter;
 import java.io.IOException;
 
 
@@ -23,8 +23,9 @@ public class WriteFile {
          */
         try {
             FileWriter write = new FileWriter(file_path,append_to_file);
-            PrintWriter write_line = new PrintWriter(write);
-            write_line.printf("%s" + "%n",textLine);
+            BufferedWriter write_line = new BufferedWriter(write);
+            write_line.write(textLine);
+            write_line.newLine();
             write_line.close();
         } catch (IOException e) {
             System.out.println("No can do son.");

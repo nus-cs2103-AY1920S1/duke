@@ -198,7 +198,7 @@ public class Duke {
                 }
 
                 // Save changed list to hard disk, if changed
-                if(isListChanged){
+                if (isListChanged) {
                     isListChanged = false;
                     FileWriter fw = new FileWriter(dukeInput, true);
                     fw.write(processWriteTest(changedItem, cmd));
@@ -224,20 +224,20 @@ public class Duke {
             } catch (InvalidNumberException n) {
                 System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
 
-            } catch (IOException o){
+            } catch (IOException o) {
                 System.out.println("File IO exception");
             }
         }
     }
 
-    private static String processWriteTest(Task t, Command changedCommand){
+    private static String processWriteTest(Task t, Command changedCommand) {
         char commandFirstChar = changedCommand.toString().charAt(0);
-        int isDone = t.getIsDone() ? 1: 0;
+        int isDone = t.getIsDone() ? 1 : 0;
         String itemDescription = t.getTaskItem();
         String timeDate = "";
-        if(changedCommand.name().equals("EVENT") || changedCommand.name().equals("DEADLINE")){
-            if(t instanceof Deadline) timeDate = ((Deadline)t).getTimeDate();
-            else if (t instanceof Event) timeDate = ((Event)t).getTimeDate();
+        if (changedCommand.name().equals("EVENT") || changedCommand.name().equals("DEADLINE")) {
+            if (t instanceof Deadline) timeDate = ((Deadline) t).getTimeDate();
+            else if (t instanceof Event) timeDate = ((Event) t).getTimeDate();
         }
         return "\r\n" + commandFirstChar + " | " + isDone + " | " + itemDescription + " | " + timeDate;
     }
@@ -246,50 +246,50 @@ public class Duke {
     private static void processInputFile(File f) {
         try {
             Scanner sc = new Scanner(f);
-            while(sc.hasNextLine()){
+            while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] lineData = line.split("\\|");
-                for(int i = 0; i < lineData.length; i++) lineData[i] = lineData[i].trim();
+                for (int i = 0; i < lineData.length; i++) lineData[i] = lineData[i].trim();
 
                 try {
-                    if(lineData.length == 0) throw new CommandFieldFormatException("Empty fields");
+                    if (lineData.length == 0) throw new CommandFieldFormatException("Empty fields");
 
                     String commandName = map.get(lineData[0]);
                     Command cmd = verifyCommandValue(commandName);
                     boolean isDone = false;
 
-                    if(cmd == Command.TODO){
-                        if(lineData.length < 3) throw new CommandFieldFormatException("Less that 2 fields");
+                    if (cmd == Command.TODO) {
+                        if (lineData.length < 3) throw new CommandFieldFormatException("Less that 2 fields");
 
-                        if(lineData[1].equals("1")) isDone = true;
-                        else if(!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+                        if (lineData[1].equals("1")) isDone = true;
+                        else if (!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
 
                         list.add(new ToDo(lineData[2], isDone));
                         listCounter++;
 
-                    } else if (cmd == Command.EVENT){
-                        if(lineData.length < 4) throw new CommandFieldFormatException("Less that 3 fields");
+                    } else if (cmd == Command.EVENT) {
+                        if (lineData.length < 4) throw new CommandFieldFormatException("Less that 3 fields");
 
-                        if(lineData[1].equals("1")) isDone = true;
-                        else if(!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+                        if (lineData[1].equals("1")) isDone = true;
+                        else if (!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
 
                         list.add(new Event(lineData[2], lineData[3], isDone));
                         listCounter++;
 
-                    } else if (cmd == Command.DEADLINE){
-                        if(lineData.length < 4) throw new CommandFieldFormatException("Less that 2 fields");
+                    } else if (cmd == Command.DEADLINE) {
+                        if (lineData.length < 4) throw new CommandFieldFormatException("Less that 2 fields");
 
-                        if(lineData[1].equals("1")) isDone = true;
-                        else if(!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+                        if (lineData[1].equals("1")) isDone = true;
+                        else if (!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
 
                         list.add(new Event(lineData[2], lineData[3], isDone));
                         listCounter++;
                     }
 
-                } catch(CommandNotRecognizedException e){
+                } catch (CommandNotRecognizedException e) {
                     System.out.println("Command not recognized!");
 
-                } catch (CommandFieldFormatException e1){
+                } catch (CommandFieldFormatException e1) {
                     System.out.println("Command field format incorrect!");
                 }
             }
@@ -304,7 +304,7 @@ public class Duke {
         return HORIZONTAL_LINE + "\n" + "\t" + input + "\n" + HORIZONTAL_LINE + "\n";
     }
 
-    private static Command verifyCommandValue (String commandString) throws CommandNotRecognizedException {
+    private static Command verifyCommandValue(String commandString) throws CommandNotRecognizedException {
         // Check if input command exist
         boolean isExist = false;
         for (Command i : Command.values()) {
@@ -345,7 +345,7 @@ class Task {
         this.taskItem = taskItem.trim();
     }
 
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return isDone;
     }
 
@@ -405,7 +405,7 @@ class Deadline extends Task {
         return getStatusIcon() + " " + getTaskItem() + " (by: " + getTimeDate() + ")";
     }
 
-    public String getTimeDate(){
+    public String getTimeDate() {
         return deadline;
     }
 }
@@ -440,7 +440,7 @@ class Event extends Task {
         return getStatusIcon() + " " + getTaskItem() + " (at: " + getTiming() + ")";
     }
 
-    public String getTimeDate(){
+    public String getTimeDate() {
         return timing;
     }
 

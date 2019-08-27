@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,6 +13,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
+        
+        initiateTaskFile();
 
         System.out.println("___________________________________");
         System.out.println("Hello! I'm Duke\nWhat can i do for you?");

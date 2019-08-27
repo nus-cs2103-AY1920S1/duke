@@ -1,0 +1,3 @@
+[T][✓] read book
+[E][✘] project meeting  (at: aug 5th)
+[T][✓] join sports club

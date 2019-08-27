@@ -1,11 +1,22 @@
-public class toDo extends Task{
+public class ToDo extends Task {
 
-    public toDo(String description){
+    final String TASK_TYPE = "[T]";
+
+    public ToDo(String description) {
         super(description);
     }
 
-    @Override
-    public String toString(){
-        return "[T]" + super.getStatusIcon() + " " +  super.toString();
+    public String getType() {
+        return TASK_TYPE;
     }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    @Override
+    public String toString() {
+        return TASK_TYPE + super.getStatusIcon() + " " +  super.toString();
+    }
+
 }

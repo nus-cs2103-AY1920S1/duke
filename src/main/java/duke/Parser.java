@@ -22,7 +22,8 @@ public class Parser {
 	 * @throws DukeException If the raw commands are invalid, in the wrong format or are lacking required information.
 	 */
 	static Command parse(String rawCommandDetails) throws DukeException {
-		String commandDetails = rawCommandDetails.replaceAll("\\s+", " ");;
+		String commandDetails = rawCommandDetails.replaceAll("\\s+", " ");
+		;
 		if (commandDetails.equals("bye")) {
 			return new ExitCommand();
 		} else if (commandDetails.equals("list")) {
@@ -41,6 +42,12 @@ public class Parser {
 			}
 			int index = Integer.parseInt(commandSplit[1]);
 			return new DoneCommand(index);
+		} else if (commandDetails.startsWith("find")) {
+			String[] commandSplit = commandDetails.split(" ");
+			if (commandSplit.length < 2) {
+				throw new DukeException("\u2639 OOPS!!! Please specify what you want to find.");
+			}
+			return new FindCommand(commandSplit[1].trim());
 		} else {
 			String taskDetailsString;
 			if (commandDetails.startsWith("todo")) {

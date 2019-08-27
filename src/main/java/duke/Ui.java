@@ -3,6 +3,7 @@ package duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -91,6 +92,14 @@ public class Ui {
 		System.out.println("\t \t " + addedTask);
 		System.out.println("\t Now you have " + size + (size == 1 ? " task " : " tasks ")
 				+ "in the " + "list.");
+	}
+
+	public void printFindMessage(ArrayList<Task> matchingTasks) {
+		System.out.println("\t Here are the matching tasks in your list:");
+		int i = 1;
+		for (Task matchingTask : matchingTasks) {
+			System.out.println("\t " + i + ". " + matchingTask);
+		}
 	}
 
 	/**

@@ -1,10 +1,10 @@
 public class Deadline extends Task {
 
-    protected String time;
+    protected DateTime dateTime;
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, String dateTimeString) {
         super(description);
-        this.time = time;
+        this.dateTime = dateTime.create(dateTimeString);
     }
 
     @Override
@@ -14,6 +14,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + super.getStatusIcon() + "] " + super.description + " (by: " + time + ")";
+        return "[D][" + super.getStatusIcon() + "] " + super.description + " (by: " + dateTime + ")";
     }
 }

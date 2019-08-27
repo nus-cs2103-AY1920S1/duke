@@ -9,6 +9,6 @@ public class Duke {
      * @param args Main Args
      */
     public static void main(String[] args) {
-        new LevelSix().run();
+        new LevelSeven().run();
     }
 }

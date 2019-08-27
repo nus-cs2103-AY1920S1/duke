@@ -1,17 +1,43 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected TaskType type;
 
-    public Task(String description) {
+    public Task(String description, TaskType type) {
         this.description = description;
+        this.type = type;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
+    public Task(String description, TaskType type, boolean isDone) {
+        this.description = description;
+        this.type = type;
+        this.isDone = isDone;
+    }
+
+    // Serialise
+    public abstract String serialise();
+
+    // Deserialise
+    static public Task deserialize(String s) {
+        String[] parsedLine = s.split(" \\| ");
+        switch (parsedLine[0]) {
+            case "T":
+                return new Todo(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1);
+            case "D":
+                return new Deadline(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, parsedLine[3]);
+            case "E":
+                return new Event(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, parsedLine[3]);
+            default:
+                return null;
+        }
+    }
+
+    protected String getStatusIcon() {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
 
-    public void setDone() {
+    protected void setDone() {
         isDone = true;
     }
 

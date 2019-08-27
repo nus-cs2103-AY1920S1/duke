@@ -19,10 +19,7 @@ public class LevelThree {
                     completeTask(sc.nextInt());
                     break;
                 default:
-                    input += sc.nextLine();
-                    Task newTask = new Task(input);
-                    list.add(newTask);
-                    echoEntry(input);
+                    break;
             }
             input = sc.next();
         }

@@ -1,6 +1,10 @@
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected boolean isDone = false;
     protected String description;
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("EEE, d MMM uuuu, hh.mma");
     
     public Task(String description) {
         this(description, false);

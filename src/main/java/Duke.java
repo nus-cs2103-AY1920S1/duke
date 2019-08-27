@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
 
@@ -32,9 +36,12 @@ public class Duke {
     private static final String ERROR_FAILED_SAVE        = "Failed to save file.";
     private static final String ERROR_FAILED_TO_READ     = "Failed to read save data. Creating new task list.";
     private static final String ERROR_FAILED_TO_FIND     = "Failed to find save data. Creating new task list.";
+    private static final String ERROR_WRONG_DATE_FORMAT  = "The date time provided is in the wrong format. " +
+            "Expected d/m/yyyy hh:mm.";
 
     // Constants
     private static final String SAVE_LOCATION = "tasks.txt";
+    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
 
     /**
      * Setups Duke.
@@ -151,7 +158,14 @@ public class Duke {
                 }
             }
             String[] desc = description.split(" /at ");
-            task = new Event(desc[0], desc[1]);
+            LocalDateTime time;
+            try {
+                System.out.println(desc[1]);
+                time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
+            } catch (DateTimeParseException ex) {
+                throw new DukeException(ERROR_WRONG_DATE_FORMAT);
+            }
+            task = new Event(desc[0], time);
             break;
         }
         case "deadline": {
@@ -167,7 +181,13 @@ public class Duke {
                 }
             }
             String[] desc = description.split(" /by ");
-            task = new Deadline(desc[0], desc[1]);
+            LocalDateTime time;
+            try {
+                time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
+            } catch (DateTimeParseException ex) {
+                throw new DukeException(ERROR_WRONG_DATE_FORMAT);
+            }
+            task = new Deadline(desc[0], time);
             break;
         }
         default:
@@ -260,10 +280,12 @@ public class Duke {
                     task = new Todo(input[2], input[1].equals("1"));
                     break;
                 case "D":
-                    task = new Deadline(input[2], input[3], input[1].equals("1"));
+                    task = new Deadline(input[2], LocalDateTime.parse(input[3], DATE_TIME_FORMATTER),
+                            input[1].equals("1"));
                     break;
                 case "E":
-                    task = new Event(input[2], input[3], input[1].equals("1"));
+                    task = new Event(input[2], LocalDateTime.parse(input[3], DATE_TIME_FORMATTER),
+                            input[1].equals("1"));
                     break;
                 default:
                     throw new DukeException(ERROR_FAILED_TO_READ);
@@ -277,7 +299,7 @@ public class Duke {
         } catch (DukeException ex) {
             this.tasks = new ArrayList<>();
             printFormatted(ex.getMessage());
-        } catch (ArrayIndexOutOfBoundsException ex) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
             this.tasks = new ArrayList<>();
             printFormatted(ERROR_FAILED_TO_READ);
         }

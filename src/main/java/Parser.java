@@ -1,5 +1,3 @@
-import javax.swing.UIManager;
-
 class Parser {
     public Parser() {}
 
@@ -26,9 +24,9 @@ class Parser {
             case EVENT :
                 return new AddCommand(action, inputArr[1]);
             case DONE :
-                return new DoneCommand(inputArr[1]);
+                return new DoneCommand(parseToNumber(inputArr[1], "Done", uiManager));
             case DELETE :
-                return new DeleteCommand(inputArr[1]);
+                return new DeleteCommand(parseToNumber(inputArr[1], "Done", uiManager));
             default :
                 uiManager.throwGeneralError();
                 return null;
@@ -67,6 +65,18 @@ class Parser {
             return Action.DELETE;
         default :
             uiManager.throwApologyError();
+            return null;
+        }
+    }
+
+    private Integer parseToNumber(
+            String taskNumber, String action, Ui uiManager) throws DukeException {
+        Integer taskNo = null;
+        try {
+            taskNo = Integer.parseInt(taskNumber);
+            return taskNo;
+        } catch (Exception e) {
+            uiManager.throwMissingNumberError("Done");
             return null;
         }
     }

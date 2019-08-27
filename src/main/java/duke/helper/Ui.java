@@ -73,4 +73,17 @@ public class Ui {
     public void printExitMessage() {
         System.out.println(separationLine + "\n     Bye. Hope to see you again soon!\n" + separationLine);
     }
+
+    /**
+     * Displays list of tasks produced from the FindCommand.
+     *
+     * @param tasks ArrayList of Tasks to be displayed.
+     */
+    public void printSearchList(ArrayList<Task> tasks) {
+        System.out.println(separationLine + "\n     Here are the matching tasks in your list:");
+        for (Task task : tasks) {
+            System.out.println("     " + (tasks.indexOf(task) + 1) + "." + task.toString());
+        }
+        System.out.println(separationLine + "\n");
+    }
 }

@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import java.text.ParseException;
@@ -76,6 +77,8 @@ public class Parser {
             return new AddCommand("event", userInput, inputSplit, filePath);
         case "delete":
             return new DeleteCommand(filePath, inputSplit);
+        case "find":
+            return new FindCommand(filePath, null, userInput.replaceFirst("find ", ""));
         default:
             // Exception if invalid instruction
             Ui ui = new Ui();

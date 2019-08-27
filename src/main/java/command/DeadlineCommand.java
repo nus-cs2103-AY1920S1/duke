@@ -28,6 +28,7 @@ public class DeadlineCommand extends Command {
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeParseException, DeadlineException {
         if (input.length <= 1) {
             throw new DeadlineException();
@@ -43,12 +44,12 @@ public class DeadlineCommand extends Command {
                 String time = input[input.length - 2] + " " + input[input.length - 1];
                 Task newDeadlineTask = new Deadline(description, time);
                 tasks.getTaskList().add(newDeadlineTask);
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("       " + newDeadlineTask);
+                ui.println("Got it. I've added this task:");
+                ui.println("  " + newDeadlineTask);
                 if (tasks.getTaskList().size() > 1) {
-                    System.out.println("     Now you have " + tasks.getTaskList().size() + " tasks in the list.");
+                    ui.println("Now you have " + tasks.getTaskList().size() + " tasks in the list.");
                 } else {
-                    System.out.println("     Now you have " + tasks.getTaskList().size() + " task in the list.");
+                    ui.println("Now you have " + tasks.getTaskList().size() + " task in the list.");
                 }
             } catch (ParseException e) {
                 throw new DukeParseException();
@@ -56,6 +57,7 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

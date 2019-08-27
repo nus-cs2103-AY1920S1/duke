@@ -24,6 +24,7 @@ public class EventCommand extends Command {
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeParseException, EventException {
         if (input.length <= 1) {
             throw new EventException();
@@ -39,18 +40,20 @@ public class EventCommand extends Command {
                 String time = input[input.length - 2] + " " + input[input.length - 1];
                 Task newEventTask = new Event(description, time);
                 tasks.getTaskList().add(newEventTask);
-                System.out.println("     Got it. I've added this task:");
-                System.out.println("       " + newEventTask);
+                ui.println("Got it. I've added this task:");
+                ui.println("  " + newEventTask);
                 if (tasks.getTaskList().size() > 1) {
-                    System.out.println("     Now you have " + tasks.getTaskList().size() + " tasks in the list.");
+                    ui.println("Now you have " + tasks.getTaskList().size() + " tasks in the list.");
                 } else {
-                    System.out.println("     Now you have " + tasks.getTaskList().size() + " task in the list.");
+                    ui.println("Now you have " + tasks.getTaskList().size() + " task in the list.");
                 }
             } catch (ParseException e) {
                 throw new DukeParseException();
             }
         }
     }
+
+    @Override
     public boolean isExit() {
         return false;
     }

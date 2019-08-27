@@ -24,28 +24,30 @@ public class DoneCommand extends Command {
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
         if (input.length <= 1) {
-            System.err.println("     " + new DoneException());
+            throw new DoneException();
         } else {
             int taskToBeDone = Integer.parseInt(input[1]);
             if (tasks.getTaskList().size() < taskToBeDone) {
-                System.err.println("     " + new DoneException("OOPS!!! There is no such task in your list!"));
-                System.out.println("     " + "Current number of tasks = " + tasks.getTaskList().size());
+                throw new DoneException("OOPS!!! There is no such task in your list!\n" +
+                        "Current number of tasks = " + tasks.getTaskList().size());
             } else {
                 Task task = tasks.getTaskList().get(taskToBeDone - 1);
                 if (task.isDone()) {
-                    System.out.println("     Hey! I've already marked this task as done :)");
-                    System.out.println("       " + task);
+                    ui.println("Hey! I've already marked this task as done :)");
+                    ui.println("  " + task);
                 } else {
                     task.markAsDone();
-                    System.out.println("     Nice! I've marked this task as done:");
-                    System.out.println("       " + task);
+                    ui.println("Nice! I've marked this task as done:");
+                    ui.println("  " + task);
                 }
             }
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

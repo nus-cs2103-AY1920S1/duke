@@ -25,9 +25,10 @@ public class FindCommand extends Command {
      * @param ui User Interface for output printing.
      * @param storage hard disk storage.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws FindException {
         if (input.length <= 1) {
-            System.err.println("     " + new FindException());
+            throw new FindException();
         } else {
             ArrayList<Task> resultList = new ArrayList<Task>();
             for (Task task : tasks.getTaskList()) {
@@ -41,18 +42,19 @@ public class FindCommand extends Command {
             }
 
             if (resultList.isEmpty()) {
-                System.out.println("     " + "There are no matching tasks in your list");
+                ui.println("There are no matching tasks in your list");
             } else {
-                System.out.println("     " + "Here are the matching tasks in your list:");
+                ui.println("Here are the matching tasks in your list:");
                 int i = 1;
                 for (Task task : resultList) {
-                    System.out.println("     " + i + "." + task.toString());
+                    ui.println(i + "." + task.toString());
                     i++;
                 }
             }
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

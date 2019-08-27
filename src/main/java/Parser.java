@@ -7,6 +7,7 @@ import command.EventCommand;
 import command.DeleteCommand;
 import command.ByeCommand;
 import command.InvalidCommand;
+import command.FindCommand;
 
 /**
  * Parser to understand user inputs.
@@ -16,7 +17,6 @@ public class Parser {
     /**
      * Parser is responsible for understanding the user's input. It will parse the
      * input and react with a suitable command.
-     * 
      * @param userInput users's input as String
      * @return a Command
      * @See Command

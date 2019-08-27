@@ -56,4 +56,12 @@ public class Ui {
         System.out.println("     New empty file will be created.");
         System.out.println(horizontalLine + "\n");
     }
+
+    /**
+     * Used to output messages.
+     * @param msg the message for output.
+     */
+    public void println(String msg) {
+        System.out.println("     " + msg);
+    }
 }

@@ -25,6 +25,7 @@ public class ToDo extends Task {
      * Used to store into hard disk storage for easy reading.
      * @return format output for hard disk storage.
      */
+    @Override
     public String toDataBase() {
         return "[T] | " + getStatusIcon() + " | " + description;
     }

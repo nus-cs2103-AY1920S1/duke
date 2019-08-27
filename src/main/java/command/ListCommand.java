@@ -16,15 +16,17 @@ public class ListCommand extends Command {
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("     Here are the tasks in your list:");
+        ui.println("Here are the tasks in your list:");
         int i = 1;
         for (Task task : tasks.getTaskList()) {
-            System.out.println("     " + i + ". " + task);
+            ui.println(i + ". " + task);
             i++;
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

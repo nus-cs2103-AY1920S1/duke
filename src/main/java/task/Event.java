@@ -39,6 +39,7 @@ public class Event extends Task {
      * Used to store into hard disk storage for easy reading.
      * @return format output for hard disk storage.
      */
+    @Override
     public String toDataBase() {
         return "[E] | " + getStatusIcon() + " | " + description + " | " + formatter.format(date);
     }

@@ -17,10 +17,12 @@ public class InvalidCommand extends Command {
      * @param storage user's hard disk storage.
      * @see InvalidInstructionException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.err.println("     " + new InvalidInstructionException());
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInstructionException {
+        throw new InvalidInstructionException();
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

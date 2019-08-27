@@ -25,9 +25,10 @@ public class ToDoCommand extends Command {
      * @param ui the User Interface which responsible for every output printing.
      * @param storage user's hard disk storage.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ToDoException {
         if (input.length <= 1) {
-            System.err.println("      " + new ToDoException());
+            throw new ToDoException();
         } else {
             String description = input[1];
             for (int i = 2; i < input.length; i++) {
@@ -35,16 +36,17 @@ public class ToDoCommand extends Command {
             }
             Task newToDoTask = new ToDo(description);
             tasks.getTaskList().add(newToDoTask);
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + newToDoTask);
+            ui.println("Got it. I've added this task:");
+            ui.println("  " + newToDoTask);
             if (tasks.getTaskList().size() > 1) {
-                System.out.println("     Now you have " + tasks.getTaskList().size() + " tasks in the list.");
+                ui.println("Now you have " + tasks.getTaskList().size() + " tasks in the list.");
             } else {
-                System.out.println("     Now you have " + tasks.getTaskList().size() + " task in the list.");
+                ui.println("Now you have " + tasks.getTaskList().size() + " task in the list.");
             }
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

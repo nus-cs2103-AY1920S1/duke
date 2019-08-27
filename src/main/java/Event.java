@@ -12,8 +12,8 @@ public class Event extends Task {
                 Integer.parseInt(date[2]), Integer.parseInt(dateAndTime[1]));
     }
 
-    public String getAt() {
-        return at;
+    public Date getAt() {
+        return date;
     }
 
     @Override

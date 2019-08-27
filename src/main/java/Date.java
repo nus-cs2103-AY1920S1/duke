@@ -63,6 +63,8 @@ public class Date {
             int PMtime = (time - 1200) / 100;
             if (minutes == 0) {
                 str = str + PMtime + "pm";
+            } else if (minutes < 10) {
+                str = str + PMtime + ".0" + minutes + "pm";
             } else {
                 str = str + PMtime + "." + minutes + "pm";
             }
@@ -71,6 +73,8 @@ public class Date {
             int AMtime = time / 100;
             if (minutes == 0) {
                 str = str + AMtime + "am";
+            } else if (minutes < 10){
+                str = str + AMtime + ".0" + minutes + "am";
             } else {
                 str = str + AMtime + "." + minutes + "am";
             }
@@ -79,6 +83,8 @@ public class Date {
             int noonTime = time / 100;
             if (minutes == 0) {
                 str = str + noonTime + "pm";
+            } else if (minutes < 10){
+                str = str + noonTime + ".0" + minutes + "pm";
             } else {
                 str = str + noonTime + "." + minutes + "pm";
             }

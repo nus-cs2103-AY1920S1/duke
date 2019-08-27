@@ -42,12 +42,79 @@ public class Duke {
                     }
                     break;
                 case "D":
+                    String day;
+                    String month;
+                    String year;
+                    String time;
+
                     fileSc.next();
                     status = fileSc.nextInt();
                     fileSc.next();
                     String[] split1 = new String[2];
                     split1 = fileSc.nextLine().trim().split(" \\| ");
-                    Task curr1 = new Deadline(split1[0], split1[1]);
+                    String[] dateTime = new String[2];
+                    dateTime = split1[1].trim().split(", ");
+                    String[] date = new String[4];
+                    date = dateTime[0].trim().split(" ");
+                    // day
+                    if (date[0].length() == 3) {
+                        day = date[0].substring(0, 0);
+                    } else {
+                        day = date[0].substring(0, 1);
+                    }
+                    // month
+                    switch (date[2]) {
+                        case "January":
+                            month = "1";
+                            break;
+                        case "February":
+                            month = "2";
+                            break;
+                        case "March":
+                            month = "3";
+                            break;
+                        case "April":
+                            month = "4";
+                            break;
+                        case "May":
+                            month = "5";
+                            break;
+                        case "June":
+                            month = "6";
+                            break;
+                        case "July":
+                            month = "7";
+                            break;
+                        case "August":
+                            month = "8";
+                            break;
+                        case "September":
+                            month = "9";
+                            break;
+                        case "October":
+                            month = "10";
+                            break;
+                        case "November":
+                            month = "11";
+                            break;
+                        default:
+                            month = "12";
+                            break;
+                    }
+                    // year
+                    year = date[3];
+                    // time
+                    if (dateTime[1].contains("pm")) {
+                        int timing = Integer.parseInt(dateTime[1].substring(0, 1) + dateTime[1].substring(3, 4)) + 1200;
+                        time = timing + "";
+                    } else {
+                        int timing = Integer.parseInt(dateTime[1].substring(0, 1) + dateTime[1].substring(3, 4));
+                        time = timing + "";
+                    }
+                    // forming date string
+                    String dateInput = day + "/" + month + "/" + year + " " + time;
+
+                    Task curr1 = new Deadline(split1[0], dateInput);
                     list.add(curr1);
                     pos++;
                     if (status == 1) {

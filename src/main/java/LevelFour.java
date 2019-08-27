@@ -37,11 +37,7 @@ public class LevelFour {
                     echoEntry(newEvent.toString());
                     break;
                 default:
-                    input += sc.nextLine();
-                    Task newPlainTask = new PlainTask(input);
-                    list.add(newPlainTask);
-                    echoEntry(newPlainTask.toString());
-
+                    break;
             }
             input = sc.next();
         }

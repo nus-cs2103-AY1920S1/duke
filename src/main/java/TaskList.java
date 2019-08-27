@@ -39,7 +39,7 @@ public class TaskList {
     }
     protected void Find(String s){
         int count = 0;
-        System.out.println("Here are the matching tasks in your list");
+        System.out.println("Here are the matching tasks in your list:");
         for(Task t : taskList){
             if(t.description.contains(s)){
                 System.out.println(t);

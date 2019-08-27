@@ -22,6 +22,7 @@ public abstract class Command {
      * @param ui  User interface of chat bot.
      * @throws DukeException  If data file pointed to by storage cannot be updated.
      */
+
     public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
 
     /**

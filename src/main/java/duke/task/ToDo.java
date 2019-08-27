@@ -1,22 +1,22 @@
 package duke.task;
 
 /**
- * Encapsulates a todo task.
+ * Encapsulates a to-do task.
  */
 public class ToDo extends Task {
     /**
-     * Constructs a ToDo object with description.
+     * Constructs a To-Do object with description.
      *
-     * @param description  Description of todo task.
+     * @param description  Description of to-do task.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * Converts the todo task to String format to write to hard disk.
+     * Converts the to-do task to String format to write to hard disk.
      *
-     * @return Todo task in String format.
+     * @return To-do task in String format.
      */
     @Override
     public String convertTaskToString() {
@@ -24,9 +24,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Converts the todo task to String format for output.
+     * Converts the to-do task to String format for output.
      *
-     * @return Todo task in String format.
+     * @return To-do task in String format.
      */
     @Override
     public String toString() {

@@ -311,7 +311,7 @@ public class Duke {
     }
 
     public void handleInputTodo(String inputTodo) throws DukeException {
-        if (inputTodo.length() == 4) {
+        if (inputTodo.trim().length() == 4) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
             String todoDescription = inputTodo.substring(5);
@@ -325,7 +325,7 @@ public class Duke {
     }
 
     public void handleInputDeadline(String inputDeadline) throws DukeException {
-        if (inputDeadline.length() == 8) {
+        if (inputDeadline.trim().length() == 8) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         } else {
             int slashLocation = slashLocator(inputDeadline);
@@ -340,7 +340,7 @@ public class Duke {
     }
 
     public void handleInputEvent(String inputEvent) throws DukeException {
-        if (inputEvent.length() == 5) {
+        if (inputEvent.trim().length() == 5) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         } else {
             int slashLocation = slashLocator(inputEvent);

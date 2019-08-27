@@ -1,13 +1,23 @@
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    public static void main(String[] args) throws IOException {
+        String logo = "   _     _      _     _      _     _       _     _      _     _      _     _      _     _   \n" +
+                "  (c).-.(c)    (c).-.(c)    (c).-.(c)     (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)  \n" +
+                "   / ._. \\      / ._. \\      / ._. \\       / ._. \\      / ._. \\      / ._. \\      / ._. \\   \n" +
+                " __\\( Y )/__  __\\( Y )/__  __\\( Y )/__   __\\( Y )/__  __\\( Y )/__  __\\( Y )/__  __\\( Y )/__ \n" +
+                "(_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._) (_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._)\n" +
+                "   || T ||      || A ||      || I ||       || P ||      || I ||      || N ||      || G ||   \n" +
+                " _.' `-' '._  _.' `-' '._  _.' `-' '._   _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._ \n" +
+                "(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.) (.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)\n" +
+                " `-'     `-'  `-'     `-'  `-'     `-'   `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-' ";
         System.out.println("Hello from\n" + logo);
         String greet = "____________________________________________________________\n" +
                 "     Hello! I'm Tai Ping\n" +
@@ -18,16 +28,25 @@ public class Duke {
                 "____________________________________________________________\n";
         System.out.println(greet);
 
+        BufferedReader TasksFile = new BufferedReader(new FileReader("TaskList.txt"));
+        String LineFile = "";
+        while ((LineFile = TasksFile.readLine()) != null) {
+            String[] WordsFile = LineFile.split("");
+        }
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<Task>();
-        String echo = sc.nextLine();
+        String TaskLine = sc.nextLine();
 
-        while (echo != null) {
-            if (echo.equals("bye")) {
+        outLoop:
+        while (TaskLine != null) {
+            String[] words = TaskLine.split(" ");
+            //ErrorCheck(words);
+            switch (words[0]) {
+            case ("bye") :
                 System.out.println(bye);
-                break;
+                break outLoop;
 
-            } else if (echo.equals("list")) {
+            case ("list") :
                 System.out.println("____________________________________________________________\n" +
                         "Here are the tasks in your list:");
                 int count = 1;
@@ -37,41 +56,44 @@ public class Duke {
                     count++;
                 }
                 System.out.println("____________________________________________________________\n");
-                echo = sc.nextLine();
+                TaskLine = sc.nextLine();
+                break;
 
-            } else if (echo.startsWith("done")) {
-                int taskNo = Character.getNumericValue(echo.charAt(echo.length() - 1));
+            case ("done") :
+                int taskNo = Character.getNumericValue(TaskLine.charAt(TaskLine.length() - 1));
                 System.out.println("____________________________________________________________\n" +
-                        "Nice! I've marked this task as done: ");
+                        "Congratulations! I've marked this task as done: ");
                 taskList.get(taskNo - 1).markAsDone(taskList.get(taskNo - 1));
                 System.out.println("[" + taskList.get(taskNo - 1).getStatusIcon() + "] " + taskList.get(taskNo - 1).getDescription());
                 System.out.println("____________________________________________________________\n");
-                echo = sc.nextLine();
+                TaskLine = sc.nextLine();
+                break;
 
-            } else if (echo.startsWith("todo")) {
-                if (echo.length() == 4) {
+            case ("todo") :
+                if (TaskLine.length() == 4) {
                     System.out.println("____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
                             "____________________________________________________________");
                 } else {
                     System.out.println("____________________________________________________________\n" +
                             "Got it. I've added this task: ");
-                    Task todoTask = new Todo(echo.substring(5));
+                    Task todoTask = new Todo(TaskLine.substring(5));
                     taskList.add(todoTask);
                     System.out.println(todoTask.toString());
                     System.out.println("Now you have " +  taskList.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________\n");
                 }
-                echo = sc.nextLine();
+                TaskLine = sc.nextLine();
+                break;
 
-            } else if (echo.startsWith("deadline")) {
-                if (echo.length() == 8) {
+            case ("deadline") :
+                if (TaskLine.length() == 8) {
                     System.out.println("____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
                             "____________________________________________________________");
                 } else {
-                    int indexOfSlash = echo.indexOf("/");
-                    Task deadlineTask = new Deadline(echo.substring(9, indexOfSlash - 1), echo.substring(indexOfSlash + 4));
+                    int indexOfSlash = TaskLine.indexOf("/");
+                    Task deadlineTask = new Deadline(TaskLine.substring(9, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
                     taskList.add(deadlineTask);
                     System.out.println("____________________________________________________________\n" +
                             "Got it. I've added this task: ");
@@ -79,16 +101,17 @@ public class Duke {
                     System.out.println("Now you have " +  taskList.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________\n");
                 }
-                echo = sc.nextLine();
+                TaskLine = sc.nextLine();
+                break;
 
-            } else if (echo.startsWith("event")) {
-                if (echo.length() == 5) {
+            case ("event") :
+                if (TaskLine.length() == 5) {
                     System.out.println("____________________________________________________________\n" +
                             "     ☹ OOPS!!! The description of an event cannot be empty.\n" +
                             "____________________________________________________________");
                 } else {
-                    int indexOfSlash = echo.indexOf("/");
-                    Task eventTask = new Event(echo.substring(6, indexOfSlash - 1), echo.substring(indexOfSlash + 4));
+                    int indexOfSlash = TaskLine.indexOf("/");
+                    Task eventTask = new Event(TaskLine.substring(6, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
                     taskList.add(eventTask);
                     System.out.println("____________________________________________________________\n" +
                             "Got it. I've added this task: ");
@@ -96,23 +119,48 @@ public class Duke {
                     System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________\n");
                 }
-                echo = sc.nextLine();
-            } else if (echo.startsWith("delete")) {
-                int taskNo = Character.getNumericValue(echo.charAt(echo.length() - 1));
+                TaskLine = sc.nextLine();
+                break;
+
+            case ("delete") :
+                int taskNoDelete = Character.getNumericValue(TaskLine.charAt(7));
                 System.out.println("____________________________________________________________\n" +
                         "Noted. I've removed this task: \n" +
-                        taskList.get(taskNo - 1).toString() + "\n" +
+                        taskList.get(taskNoDelete - 1).toString() + "\n" +
                         "Now you have " + (taskList.size() - 1) + " tasks in the list.\n" +
                         "____________________________________________________________");
-                taskList.remove(taskNo - 1);
-                echo = sc.nextLine();
+                taskList.remove(taskNoDelete - 1);
+                TaskLine = sc.nextLine();
+                break;
 
-            } else {
+            default :
                 System.out.println("____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "____________________________________________________________");
+                TaskLine = sc.nextLine();
                 break;
             }
         }
+        try (PrintStream out = new PrintStream(new FileOutputStream("TaskList.txt"))) {
+            for (Task t : taskList) {
+                out.print(t.getType() + "|" + t.getStatusIcon() + "|" + t.getDescription() + "|" + "\n" );
+                //out.print(t.toString() + "\n");
+            }
+        }
     }
+    /*public static void ErrorCheck(String[] words ) throws IOException {
+        if (words[0] == "" && words.length == 1) {
+            System.out.println("____________________________________________________________\n" +
+                    "     ☹ Hey! Empty input does not lead me anywhere :-(\n" +
+                    "____________________________________________________________");
+        } else if (words[0] == "done" && words.length == 1) {
+            System.out.println("____________________________________________________________\n" +
+                    "     ☹ Hey! You done nothing? :-(\n" +
+                    "____________________________________________________________");
+        } else if (words[0] == "delete" && words.length == 1) {
+            System.out.println("____________________________________________________________\n" +
+                    "     ☹ Hey! Delete nothing? :-(\n" +
+                    "____________________________________________________________");
+        }
+    }*/
 }

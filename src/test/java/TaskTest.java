@@ -162,10 +162,12 @@ public class TaskTest {
             assertEquals("[T][" + (char) 0x2713 + "] join sports club", t2.toString());
 
             Task t3 = Task.createFromFile("D | 0 | don't die | 22/01/2019 2234");
-            assertEquals("[D][" + (char) 0x2718 + "] don't die (by: 22nd of January 2019, 10:34pm)", t3.toString());
+            assertEquals("[D][" + (char) 0x2718
+                    + "] don't die (by: 22nd of January 2019, 10:34pm)", t3.toString());
 
             Task t4 = Task.createFromFile("E | 1 | don't die | 22/11/2019 2234");
-            assertEquals("[E][" + (char) 0x2713 + "] don't die (at: 22nd of November 2019, 10:34pm)", t4.toString());
+            assertEquals("[E][" + (char) 0x2713
+                    + "] don't die (at: 22nd of November 2019, 10:34pm)", t4.toString());
         } catch (DukeException e) {
             fail(e.toString());
         }

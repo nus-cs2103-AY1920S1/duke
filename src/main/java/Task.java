@@ -1,4 +1,4 @@
-import jdk.jfr.EventType;
+import java.util.Date;
 
 public class Task {
     protected  String description;
@@ -6,6 +6,7 @@ public class Task {
     protected String tag = "";
     protected String information = "";
     protected static int noOfTask = 0;
+    protected Date date;
     protected TaskType taskType;
 
     public Task(String description) {

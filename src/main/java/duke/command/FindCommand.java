@@ -42,7 +42,7 @@ public class FindCommand extends Command {
             }
 
             if (i + 1 == taskArrList.size() && counter != 1) { // Remove extra break line
-                listOutput = listOutput.substring(0, listOutput.length() - 2);
+                listOutput = listOutput.substring(0, listOutput.length() - 1);
             }
         }
         ui.printOutput(listOutput);

@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class ToDoCommand extends Command {
     ToDo td;
 
@@ -6,8 +8,13 @@ public class ToDoCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        String taskMessage = tasks.addToDo(td);
-        ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+        try {
+            String taskMessage = tasks.addToDo(td);
+            ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+            storage.save("./Data/duke.txt", tasks.getTasks());
+        } catch (IOException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public boolean isExit() {

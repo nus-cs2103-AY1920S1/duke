@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.io.IOException;
 
 public class EventCommand extends Command {
     Event e;
@@ -8,8 +8,13 @@ public class EventCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        String taskMessage = tasks.addEvent(e);
-        ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+        try {
+            String taskMessage = tasks.addEvent(e);
+            ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+            storage.save("./Data/duke.txt", tasks.getTasks());
+        } catch (IOException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public boolean isExit() {

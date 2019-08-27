@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DoneCommand extends Command {
     int i;
 
@@ -6,8 +8,13 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        String taskMessage = tasks.done(i);
-        ui.showDoneMessage(taskMessage);
+        try {
+            String taskMessage = tasks.done(i);
+            ui.showDoneMessage(taskMessage);
+            storage.save("./Data/duke.txt", tasks.getTasks());
+        } catch (IOException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public boolean isExit() {

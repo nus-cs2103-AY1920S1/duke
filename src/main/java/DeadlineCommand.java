@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.io.IOException;
 
 public class DeadlineCommand extends Command {
     Deadline dl;
@@ -8,8 +8,13 @@ public class DeadlineCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        String taskMessage = tasks.addDeadline(dl);
-        ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+        try {
+            String taskMessage = tasks.addDeadline(dl);
+            ui.showAddedMessage(taskMessage, tasks.getTasksSize());
+            storage.save("./Data/duke.txt", tasks.getTasks());
+        } catch (IOException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public boolean isExit() {

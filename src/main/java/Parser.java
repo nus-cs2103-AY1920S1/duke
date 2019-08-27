@@ -11,7 +11,7 @@ import java.text.ParseException;
 class Parser {
     private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
-            + "____________________________________________________________";// Split by space, then check for /by
+            + "____________________________________________________________";
 
     public static Command parse(String fullCommand) throws IllegalArgumentException, ParseException {
         String task;

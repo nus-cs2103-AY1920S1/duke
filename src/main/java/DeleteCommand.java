@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DeleteCommand extends Command {
     int i;
 
@@ -6,8 +8,13 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        String taskMessage = tasks.delete(i);
-        ui.showDeleteMessage(taskMessage, tasks.getTasksSize());
+        try {
+            String taskMessage = tasks.delete(i);
+            ui.showDeleteMessage(taskMessage, tasks.getTasksSize());
+            storage.save("./Data/duke.txt", tasks.getTasks());
+        } catch (IOException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public boolean isExit() {

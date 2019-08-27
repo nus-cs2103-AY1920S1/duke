@@ -67,6 +67,9 @@ public class Parser {
             i = Integer.parseInt(arr[1]);
             command = new DeleteCommand(i);
             break;
+        case "find":
+            command = new FindCommand(arr[1]);
+            break;
         default:
             command = new IllegalCommand();
         }

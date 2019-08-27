@@ -63,8 +63,23 @@ public class UI {
         System.out.println(message);
     }
 
+
+    /**
+     * Show found message
+     *
+     * @param taskMessage
+     */
+    public void showFoundMessage(String taskMessage) {
+        String foundMessage = "Here are the matching tasks in your list:";
+        StringJoiner result = new StringJoiner("\n");
+        result.add(foundMessage);
+        result.add(taskMessage);
+        showMessage(padMessage(result.toString()));
+    }
+
     /**
      * Pads message with horizontal lines.
+     *
      * @param message
      * @return padded message
      */

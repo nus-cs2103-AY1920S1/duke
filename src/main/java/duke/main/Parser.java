@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
@@ -48,6 +49,10 @@ class Parser {
             String newInput = fullCommand.replaceFirst("delete", "").trim();
             int oneBasedIndex = validateDeleteIndex(newInput);
             return new DeleteCommand(oneBasedIndex);
+        } else if (isFindCommand(fullCommand)) {
+            String toFind = fullCommand.replaceFirst("find", "").trim();
+            validateFindInput(toFind);
+            return new FindCommand(toFind);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -104,6 +109,12 @@ class Parser {
         }
     }
 
+    private static void validateFindInput(String toFind) throws DukeException {
+        if (toFind.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The provided filter for find cannot be empty.");
+        }
+    }
+
     private static String[] validateEvent(String input) throws DukeException {
         return validateEventOrDeadline(input, "event", "/at");
     }
@@ -130,6 +141,10 @@ class Parser {
                     + "\tPlease make sure that the task description and dates are not empty!");
         }
         return splitInput;
+    }
+
+    private static boolean isFindCommand(String input) {
+        return input.startsWith("find");
     }
 
     private static boolean isExitCommand(String input) {

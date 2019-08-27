@@ -35,9 +35,9 @@ public class Ui {
         showLine();
     }
 
-    public void printList(ArrayList<Task> tasks) {
+    public void printList(ArrayList<Task> tasks, String message) {
         showLine();
-        System.out.println("\tHere are the tasks in your list:");
+        System.out.println("\t" + message);
         for (int i = 0; i < tasks.size(); i++) {
             int oneBasedIndex = i + 1;
             System.out.printf("\t%d. %s\n", oneBasedIndex, tasks.get(i));

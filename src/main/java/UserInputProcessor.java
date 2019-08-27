@@ -1,5 +1,14 @@
+/**
+ * A static class that processes the user's inputs and returns Duke's reponses to the Duke main class.
+ */
 public class UserInputProcessor {
-    //returns a DukeReply to be printed out, or a throws an error if input cannot be parsed by Duke
+    /**
+     * Takes in the user's input, identifies the type of command it is and calls upon the relevant "process" method in
+     * order to generate a <code>DukeReply</code>.
+     * 
+     * @return A <code>DukeReply</code> to be processed by the Duke main class in its <code>run</code> method
+     * @throws DukeException If the user's inputs are in the wrong format, or otherwise cannot be read by Duke
+     */
     public static DukeReply processUserInput(String userInputString, TaskList tasks) throws DukeException {
         switch(identifyUserInputType(userInputString)){
         case Bye: //Duke will close down

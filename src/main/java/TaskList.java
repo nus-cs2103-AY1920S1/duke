@@ -1,15 +1,24 @@
 import java.util.ArrayList;
 import java.io.Serializable;
 
+/**
+ * A class representing a list of <code>Tasks</code>
+ */
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    //Adds a task to the end of the TaskList
+    /**
+     * @param task The <code>Task</code> to be added to this <code>TaskList</code>
+     */
     public void add(Task task) {
         tasks.add(task);
     }
 
-    //Deletes the task at the specified index by decreasing the index of all subsequent entries by 1.
+    /**
+     * @param index The index at which a <code>Task</code> in the list will be deleted
+     * @return The deleted <code>Task</code>
+     * @throws DukeException If the chosen index does not exist in the list
+     */
     public Task deleteAt(int index) throws DukeException {
         int realIndex = index - 1;
 
@@ -26,12 +35,18 @@ public class TaskList implements Serializable {
         return deletedTask;
     }
 
-    //Deletes all the tasks in the TaskList, leaving it empty
+    /**
+     * Deletes all the elements in this list, leaving it empty.
+     */
     public void deleteAllTasks() {
         tasks = new ArrayList<Task>();
     }
     
-    //Replaces the task at the specified index with a clone marked as done
+    /**
+     * @param index The index at which a <code>Task</code> in the list will be marked as done
+     * @return The <code>Task</code> marked as done
+     * @throws DukeException If the chosen index does not exist in the list
+     */
     public Task markAsDone(int index) throws DukeException {
         int realIndex = index - 1;
 
@@ -47,18 +62,25 @@ public class TaskList implements Serializable {
         return tasks.get(realIndex);
     }
 
-    //Returns whether or not the TaskList is empty
+    /**
+     * @return <code>true</code> if the list is empty and <code>false</code> otherwise
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
-    //Returns the number of elements in the TaskList
+    /**
+     * @return The number of elements in the list
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * @return The <code>String</code> representation of this <code>TaskList</code>, containing all tasks in order of
+     * addition marked by its position in the list.
+     */
     @Override
-    //Converts the TaskList into a human-readable String
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int iterator = 1;

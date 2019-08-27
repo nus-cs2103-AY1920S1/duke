@@ -1,9 +1,23 @@
+/**
+ * A class representing a basic <code>Task</code>.
+ */
 public class ToDoTask extends Task {
+    /**
+     * Creates an instance of a <code>ToDoTask</code>. The completion status is set to <code>false</code> by default.
+     * 
+     * @param description The description of this <code>Task</code>
+     */
     public ToDoTask (String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Creates an instance of a <code>ToDoTask</code>. Allows the caller to set its completion status.
+     * 
+     * @param description The description of this <code>Task</code>
+     * @param isDone The completion status of the <code>Task</code>
+     */
     public ToDoTask (String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -21,8 +35,11 @@ public class ToDoTask extends Task {
         return new ToDoTask(description, false);
     }
 
+    /**
+     * @return The <code>String</code> representation of this <code>Task</code>, containing the type of <code>Task</code>,
+     * completion status and description
+     */
     @Override
-    //Returns a string representation of the Task, including its type, completion status and description
     public String toString() {
         return String.format(TO_STRING_FORMAT, 'T', this.getStatusIcon(), this.description);
     }

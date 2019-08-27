@@ -2,18 +2,19 @@ public abstract class Task {
     String description;
     boolean isDone;
 
-    public Task (String description) {
+    public Task(boolean isDone, String description) {
+        this.isDone = isDone;
         this.description = description;
-        this.isDone = false;
     }
 
     public void markDone() throws DukeException {
-        if(isDone) {
+        if (isDone) {
             throw new DukeException("Task is already done!");
         } else {
             this.isDone = true;
         }
     }
 
+    public abstract String toFileString();
     public abstract String toString();
 }

@@ -81,6 +81,26 @@ public class TaskList {
     }
 
     /**
+     * Retrieves list of tasks containing keyword.
+     *
+     * @param keyword  Keyword to be searched for.
+     * @return List of tasks containing keyword as a String.
+     */
+    public String find(String keyword) {
+        String message = "";
+        int i = 1;
+        int index = 1;
+        for (Iterator iterator = taskList.iterator(); iterator.hasNext(); i++) {
+            Task current = (Task) iterator.next();
+            if (current.containsKeyword(keyword)) {
+                message = message + index + "." + current + "\n";
+                index++;
+            }
+        }
+        return message;
+    }
+
+    /**
      * Returns iterator of task list.
      *
      * @return Iterator of the task list.

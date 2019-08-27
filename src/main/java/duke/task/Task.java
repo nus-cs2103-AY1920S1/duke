@@ -38,6 +38,15 @@ public class Task {
     }
 
     /**
+     * Checks whether task description contains keyword.
+     *
+     * @return True if task description contains keyword, false otherwise.
+     */
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
+    /**
      * Marks a task as done.
      */
     public void markAsDone() {

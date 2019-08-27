@@ -126,6 +126,16 @@ public class Ui {
     }
 
     /**
+     * Outputs message indicating that action of searching for a keyword was a success, and results of that search.
+     *
+     * @param taskList  Task list to be searched.
+     * @param keyword   Keyword to be searched for.
+     */
+    public void showFindMessage(TaskList taskList, String keyword) {
+        output("Here are the matching tasks in your list:\n" + taskList.find(keyword));
+    }
+
+    /**
      * Outputs message indicating a loading error.
      */
     public void showLoadingError() {

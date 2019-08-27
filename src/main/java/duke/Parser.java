@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -33,6 +28,11 @@ public class Parser {
         } else if (input.startsWith("delete")) {
             int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1; // possible error here
             return new DeleteCommand(deleteIndex);
+        } else if (input.startsWith("find")) {
+            System.out.println("here.");
+            input = input.replaceFirst("^find", "");
+            String keyword = input.substring(input.indexOf(" ") + 1);
+            return new FindCommand(keyword);
         } else { // add task
             Task task;
             if (input.startsWith("todo")) {

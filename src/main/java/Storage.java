@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public final class DataManager {
+public final class Storage {
     public static void save(List<Task> tasks) throws IOException {
         String directoryName = "/home/yuan/cs2103t/duke/data";
         File directory = new File(directoryName);

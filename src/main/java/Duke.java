@@ -1,14 +1,11 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-import java.util.StringJoiner;
 
 public class Duke {
-    private static final String indent = "    ";
-    private static List<Task> history = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
+    private Ui ui;
 
     /**
      * Entry Point of entire Program.
@@ -16,51 +13,44 @@ public class Duke {
      */
     public static void main(String[] args) {
         try {
-            history = DataManager.load();
+            tasks = Storage.load();
         } catch (FileNotFoundException ignore) {
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
 
-        Scanner sc = new Scanner(System.in);
-        String intro = "Hello! I'm Duke\n"
-                + "What can I do for you?";
+        Ui ui = new Ui();
+        ui.showWelcome();
 
-        System.out.println(indent(wrapWithHorizontalLines(intro)));
         String input;
-
-        while (!(input = sc.nextLine()).equals("bye")) {
+        while (!(input = ui.readCommand()).equals("bye")) {
             String output;
             try {
-                output = handleInput(input);
+                handleInput(input, ui);
             } catch (DukeException e) {
                 output = e.getMessage();
             }
-            System.out.println(output);
             try {
-                DataManager.save(history);
+                Storage.save(tasks);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
-
-        String endMessage = "Bye. Hope to see you again soon!";
-        System.out.println(indent(wrapWithHorizontalLines(endMessage)));
+        ui.showBye();
     }
 
     /**
      * Is called for each line of input.
      * @param input Input string.
-     * @return Formatted output.
      * @throws DukeException When input argument wrong format.
      */
-    private static String handleInput(String input) throws DukeException {
+    private static void handleInput(String input, Ui ui) throws DukeException {
         String output;
         String[] splitInput = input.split(" ");
         String command = splitInput[0];
         switch (command) {
         case "list":
-            output = historyToString(history);
+            ui.showTasks(tasks);
             break;
         case "done":
             Task taskToMarkAsDone;
@@ -71,13 +61,12 @@ public class Duke {
                 throw new DukeException("Argument passed to done must be a valid integer");
             }
             try {
-                taskToMarkAsDone = history.get(selectedIndex);
+                taskToMarkAsDone = tasks.get(selectedIndex);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Selected task number does not exist.");
             }
             taskToMarkAsDone.markAsDone();
-            output = "Nice! I've marked this task as done: \n"
-                    + indent(taskToMarkAsDone.toString());
+            ui.showMarkAsDone(taskToMarkAsDone);
             break;
         case "delete":
             Task taskToDelete;
@@ -88,12 +77,12 @@ public class Duke {
                 throw new DukeException("Argument passed to delete must be a valid integer");
             }
             try {
-                taskToDelete = history.get(deleteIndex);
+                taskToDelete = tasks.get(deleteIndex);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Selected task number does not exist.");
             }
-            history.remove(deleteIndex);
-            output = wrapWithDeleteTask(taskToDelete);
+            tasks.remove(deleteIndex);
+            ui.showDeleteTask(taskToDelete, tasks.size());
             break;
         case "deadline":
             int byIndex = input.indexOf(" /by ");
@@ -103,8 +92,8 @@ public class Duke {
             String deadlineDescription =  input.substring(9, byIndex);
             String by = input.substring(byIndex + 5);
             Deadline deadline = new Deadline(deadlineDescription, by);
-            history.add(deadline);
-            output = wrapWithAddTask(deadline);
+            tasks.add(deadline);
+            ui.showAddTask(deadline, tasks.size());
             break;
         case "event":
             int atIndex = input.indexOf(" /at ");
@@ -114,8 +103,8 @@ public class Duke {
             String eventDescription =  input.substring(6, atIndex);
             String at = input.substring(atIndex + 5);
             Event event = new Event(eventDescription, at);
-            history.add(event);
-            output = wrapWithAddTask(event);
+            tasks.add(event);
+            ui.showAddTask(event, tasks.size());
             break;
         case "todo":
             String todoDescription;
@@ -125,48 +114,11 @@ public class Duke {
                 throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
             }
             Todo todo = new Todo(todoDescription);
-            history.add(todo);
-            output = wrapWithAddTask(todo);
+            tasks.add(todo);
+            ui.showAddTask(todo, tasks.size());
             break;
         default:
-            output = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            ui.showGenericError();
         }
-        return indent(wrapWithHorizontalLines(output));
-    }
-
-    /**
-     * Formats list of history.
-     * @param history List of history.
-     * @return Formatted string.
-     */
-    private static String historyToString(List<Task> history) {
-        StringJoiner sj = new StringJoiner("\n");
-        for (int i = 0; i < history.size(); i++) {
-            sj.add((i + 1) + ". " + history.get(i));
-        }
-        return sj.toString();
-    }
-
-    private static String wrapWithHorizontalLines(String str) {
-        return "____________________________________________________________\n"
-                + str
-                + "\n" + "____________________________________________________________";
-    }
-
-    private static String wrapWithAddTask(Task task) {
-        return "Got it. I've added this task: \n"
-                + indent(task.toString())
-                + String.format("\nNow you have %d tasks in the list.", history.size());
-    }
-
-    private static String wrapWithDeleteTask(Task task) {
-        return "Noted. I've removed this task: \n"
-                + indent(task.toString())
-                + String.format("\nNow you have %d tasks in the list.", history.size());
-    }
-
-    private static String indent(String str) {
-        String[] indentedStrings = Arrays.stream(str.split("\n")).map(s -> indent + s).toArray(String[]::new);
-        return String.join("\n", indentedStrings);
     }
 }

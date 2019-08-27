@@ -7,7 +7,8 @@ public class Duke {
     public enum Action {
         ADD,
         REMOVE,
-        DONE
+        DONE,
+        FIND
     }
 
     public static void main(String[] args) throws IOException {

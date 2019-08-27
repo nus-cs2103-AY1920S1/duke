@@ -58,9 +58,9 @@ public class Duke {
                     date = dateTime[0].trim().split(" ");
                     // day
                     if (date[0].length() == 3) {
-                        day = date[0].substring(0, 0);
-                    } else {
                         day = date[0].substring(0, 1);
+                    } else {
+                        day = date[0].substring(0, 2);
                     }
                     // month
                     switch (date[2]) {
@@ -104,16 +104,25 @@ public class Duke {
                     // year
                     year = date[3];
                     // time
-                    if (dateTime[1].contains("pm")) {
-                        int timing = Integer.parseInt(dateTime[1].substring(0, 1) + dateTime[1].substring(3, 4)) + 1200;
-                        time = timing + "";
+                    if (dateTime[1].length() == 7) {
+                        if (dateTime[1].contains("pm") && (Integer.parseInt(dateTime[1].substring(0, 2)) < 12)) {
+                            int timing = Integer.parseInt(dateTime[1].substring(0, 2) + dateTime[1].substring(3, 5)) + 1200;
+                            time = timing + "";
+                        } else {
+                            int timing = Integer.parseInt(dateTime[1].substring(0, 2) + dateTime[1].substring(3, 5));
+                            time = timing + "";
+                        }
                     } else {
-                        int timing = Integer.parseInt(dateTime[1].substring(0, 1) + dateTime[1].substring(3, 4));
-                        time = timing + "";
+                        if (dateTime[1].contains("pm")) {
+                            int timing = Integer.parseInt(dateTime[1].substring(0, 1) + dateTime[1].substring(2, 4)) + 1200;
+                            time = timing + "";
+                        } else {
+                            int timing = Integer.parseInt(dateTime[1].substring(0, 1) + dateTime[1].substring(2, 4));
+                            time = timing + "";
+                        }
                     }
                     // forming date string
                     String dateInput = day + "/" + month + "/" + year + " " + time;
-
                     Task curr1 = new Deadline(split1[0], dateInput);
                     list.add(curr1);
                     pos++;

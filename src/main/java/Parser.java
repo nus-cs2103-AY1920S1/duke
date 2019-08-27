@@ -6,13 +6,16 @@ import java.text.ParseException;
 // Command: Strictly takes in specified things; same for task list
 // Parser's role: Split the string up; create the tasks too
 // TODO: handle illegal commands and empty to do Command, and hard coded command initialisation
+
+/**
+ * Parser has one method: parse.
+ * Parsing breaks down the input full command string, and outputs its associated command.
+ * Parsing detects and reports any syntax errors with the full command.
+ */
 class Parser {
     private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";// Split by space, then check for /by
-    private static final String illegalArgumentMessage = "____________________________________________________________\n"
-            + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-            + "____________________________________________________________";
 
     public static Command parse(String fullCommand) throws IllegalArgumentException, ParseException {
         String task;
@@ -20,7 +23,7 @@ class Parser {
         Date date;
         String format = "dd/MM/yyyy HHmm";
         SimpleDateFormat readFormat = new SimpleDateFormat(format);;
-        Command command = new ListCommand();
+        Command command;
 
 //        Hashtable<String, String> result = new Hashtable<>();
         String[] arr = fullCommand.split(" ", 2);
@@ -63,7 +66,7 @@ class Parser {
             command = new SaveCommand();
             break;
         default:
-            throw new IllegalArgumentException(illegalArgumentMessage);
+            command = new IllegalCommand();
         }
         return command;
     }

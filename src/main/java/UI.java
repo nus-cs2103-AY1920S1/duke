@@ -41,6 +41,13 @@ class UI {
         showMessage(padMessage(result.toString()));
     }
 
+    public void showIllegalCommandMessage() {
+        String illegalCommandMessage = "____________________________________________________________\n"
+                + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "____________________________________________________________";
+        showMessage(illegalCommandMessage);
+    }
+
     public void showMessage(String message) {
         System.out.println(message);
     }

@@ -6,6 +6,7 @@ public class Parser {
     // Command templates
     private static final String DONE_TEMPLATE = "done <id>";
     private static final String DELETE_TEMPLATE = "delete <id>";
+    private static final String FIND_TEMPLATE = "find <search_string>";
     private static final String TODO_TEMPLATE = "todo <description>";
     private static final String DEADLINE_TEMPLATE = "deadline <description> /by <date time>";
     private static final String EVENT_TEMPLATE = "event <description> /by <date time>";
@@ -37,6 +38,9 @@ public class Parser {
         // "delete" removes a given task by its task ID from the TaskList
         case "delete":
             return Parser.parseDelete(command);
+        // "find" returns all tasks whose description contains the search string
+        case "find":
+            return Parser.parseFind(command);
         // "todo": creates a Todo task (no attached date/time)
         case "todo":
             return Parser.parseTodo(command);
@@ -82,6 +86,18 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException("id", "int", command);
         }
+    }
+
+    public static Command parseFind(String command) throws DukeException {
+        // GUARD: against empty search string
+        // If the 'find' command is input with no arguments, trim() removes the trailing spaces
+        if (command.equals("find")) {
+            throw new DukeIncorrectArgumentsException(1, FIND_TEMPLATE, 0, command);
+        }
+
+        // Otherwise entire argString is the search string of the Find command
+        String argString = command.split(" ", 2)[1];
+        return new FindCommand(command, argString);
     }
 
     public static Command parseTodo(String command) throws DukeException {

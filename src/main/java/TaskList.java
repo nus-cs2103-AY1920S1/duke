@@ -20,6 +20,16 @@ public class TaskList {
         return this.tasks.remove(id - 1);
     }
 
+    public ArrayList<Task> searchTask(String searchString) {
+        ArrayList<Task> results = new ArrayList<Task>();
+        for (Task task: this.tasks) {
+            if (task.getDescription().contains(searchString)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
     public int numberOfTasks() {
         return this.tasks.size();
     }

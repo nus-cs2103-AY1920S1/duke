@@ -1,28 +1,37 @@
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.FileReader;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class StorageTest {
-    Storage s = new Storage(
+    Storage storage = new Storage(
             "D:/Marcus Folder/SCHOOL STUFF/YEAR 2/CS2103T/duke/data/duke.txt");
+
+    /**
+     * The Duke save file has to be cleared before starting any test,
+     * to ensure that the assertions are accurate.
+     */
     @BeforeEach
     public void clearDukeSaveFileBeforeTest() {
         try {
-            s.updateSaveFile(new ArrayList<Task>());
+            storage.updateSaveFile(new ArrayList<Task>());
         } catch (DukeException e) {
             fail(e.toString());
         }
     }
 
-    @AfterEach
-    public void clearDukeSaveFileAfterTest() {
+    /**
+     * The duke save file has to be cleared after all the tests to clean up the save file.
+     */
+    @AfterAll
+    public static void clearDukeSaveFileAfterTest() {
         try {
-            s.updateSaveFile(new ArrayList<Task>());
+            Storage storage = new Storage(
+                    "D:/Marcus Folder/SCHOOL STUFF/YEAR 2/CS2103T/duke/data/duke.txt");
+            storage.updateSaveFile(new ArrayList<Task>());
         } catch (DukeException e) {
             fail(e.toString());
         }
@@ -35,20 +44,20 @@ public class StorageTest {
             ArrayList<Task> tasks = new ArrayList<>();
 
             tasks.add(Task.create("todo abc"));
-            s.updateSaveFile(tasks);
-            assertEquals(tasks.get(0).toString(), s.load().get(0).toString());
+            storage.updateSaveFile(tasks);
+            assertEquals(tasks.get(0).toString(), storage.load().get(0).toString());
 
             tasks.add(Task.create("event abc /at 1/1/1997 2335"));
-            s.updateSaveFile(tasks);
-            assertEquals(tasks.get(0).toString(), s.load().get(0).toString());
+            storage.updateSaveFile(tasks);
+            assertEquals(tasks.get(0).toString(), storage.load().get(0).toString());
 
             tasks.get(0).setDone();
-            s.updateSaveFile(tasks);
-            assertEquals(tasks.get(0).toString(), s.load().get(0).toString());
+            storage.updateSaveFile(tasks);
+            assertEquals(tasks.get(0).toString(), storage.load().get(0).toString());
 
             tasks.remove(0);
-            s.updateSaveFile(tasks);
-            assertEquals(tasks.get(0).toString(), s.load().get(0).toString());
+            storage.updateSaveFile(tasks);
+            assertEquals(tasks.get(0).toString(), storage.load().get(0).toString());
 
         } catch (DukeException e) {
             fail(e.toString());
@@ -59,12 +68,12 @@ public class StorageTest {
     public void addToSaveFile() {
         try {
             Task t = Task.create("event abc /at 1/1/1997 2335");
-            s.addNew(t.toFileString());
-            assertEquals(t.toString(), s.load().get(0).toString());
+            storage.addNew(t.toFileString());
+            assertEquals(t.toString(), storage.load().get(0).toString());
 
             Task t2 = Task.create("event abcd /at 1/2/1997 2335");
-            s.addNew(t2.toFileString());
-            assertEquals(t2.toString(), s.load().get(1).toString());
+            storage.addNew(t2.toFileString());
+            assertEquals(t2.toString(), storage.load().get(1).toString());
         } catch (DukeException e) {
             fail(e.toString());
         }

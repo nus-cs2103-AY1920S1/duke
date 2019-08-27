@@ -12,7 +12,18 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.LinkedList;
 
+/**
+ * Makes sense of user's input and react in accordance.
+ */
 class Parser {
+
+    /**
+     * @param act     keyword indicating the intended operation from user input
+     * @param storage storage object to interact with
+     * @throws FileNotFoundException
+     * @throws DukeIllegalDescriptionException
+     * @throws DukeIllegalActionException
+     */
     static void parse(String act, Storage storage) throws FileNotFoundException,
             DukeIllegalDescriptionException, DukeIllegalActionException {
         try {
@@ -115,6 +126,9 @@ class Parser {
     }
 }
 
+/**
+ * Predefined commands.
+ */
 enum Action {
     list, bye, done, todo, deadline, event, delete, find
 }

@@ -16,14 +16,26 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.LinkedList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private static String basePath = new File("").getAbsolutePath();
     private String filePath;
 
+    /**
+     *
+     * @param filePath relative path of list storing file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the assigned file and parse the stored list of tasks as <code>Task</code> objects.
+     * @return Existing list of tasks
+     * @throws IOException
+     */
     public LinkedList<Task> load() throws IOException {
         LinkedList<Task> tasks = new LinkedList<>();
         try {
@@ -69,6 +81,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the tasks of <code>TaskList</code> in designated file.
+     * @throws FileNotFoundException
+     */
     void saveData() throws FileNotFoundException {
         File file = new File(basePath + filePath);
         try (PrintWriter out = new PrintWriter(file)) {

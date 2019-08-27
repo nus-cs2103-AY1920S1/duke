@@ -1,2 +1,10 @@
-todo check hotels for shengyi
+todo teach junior how to skate
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+done 1
+done 3
+list
+delete 3
+todo
+blah
 bye

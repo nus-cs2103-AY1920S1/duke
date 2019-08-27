@@ -1,5 +1,6 @@
 import duke.exception.DukeException;
 import duke.task.*;
+import duke.ui.Ui;
 
 class Parser {
     public static Command parse(String input) {

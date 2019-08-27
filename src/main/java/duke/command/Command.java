@@ -7,7 +7,7 @@ import duke.task.TaskList;
 public abstract class Command {
     private boolean isExit;
 
-    public Command(boolean isExit) {
+    Command(boolean isExit) {
         this.isExit = isExit;
     }
 

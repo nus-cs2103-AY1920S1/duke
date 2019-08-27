@@ -5,43 +5,51 @@ import java.util.Date;
 
 public class Parser {
     // Command templates
-    public static final String DONE_TEMPLATE = "done <id>";
-    public static final String DELETE_TEMPLATE = "delete <id>";
-    public static final String TODO_TEMPLATE = "todo <description>";
-    public static final String DEADLINE_TEMPLATE = "deadline <description> /by <date | time>";
-    public static final String EVENT_TEMPLATE = "event <description> /by <date | time>";
+    private static final String DONE_TEMPLATE = "done <id>";
+    private static final String DELETE_TEMPLATE = "delete <id>";
+    private static final String TODO_TEMPLATE = "todo <description>";
+    private static final String DEADLINE_TEMPLATE = "deadline <description> /by <date time>";
+    private static final String EVENT_TEMPLATE = "event <description> /by <date time>";
 
     // Date parser
-    public static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
-    public static String parse(TaskList tasks, String command, Storage fileMgr) throws DukeException {
-        // Determine the type of command from the first token
-        switch (command.split(" ")[0]) {
-        // "list": outputs all tasks in the TaskList in a formatted manner
-        case "list":
-            return tasks.toString();
-        // "done" sets the status of the task with a given task ID (its position) to completed
-        case "done":
-            return Parser.parseDone(tasks, command, fileMgr);
-        // "delete" removes a given task by its task ID from the TaskList
-        case "delete":
-            return Parser.parseDelete(tasks, command, fileMgr);
-        // "todo": creates a Todo task (no attached date/time)
-        case "todo":
-            return Parser.parseTodo(tasks, command, fileMgr);
-        // "deadline": creates a Deadline task (to be completed by a specified date/time)
-        case "deadline":
-            return Parser.parseDeadline(tasks, command, fileMgr);
-        // "event": creates a Event task (no attached date/time)
-        case "event":
-            return Parser.parseEvent(tasks, command, fileMgr);
-        // GUARD: against all unknown commands
-        default:
-            throw new DukeUnknownCommandException(command);
+    public static String parse(String command, TaskList tasks, Storage fileMgr) {
+        try {
+            // Catch empty commands (ENTER key pressed with no other input)
+            if (command.equals("")) {
+                throw new DukeNoCommandException();
+            }
+            // Determine the type of command from the first token
+            switch (command.split(" ")[0]) {
+            // "list": outputs all tasks in the TaskList in a formatted manner
+            case "list":
+                return tasks.toString();
+            // "done" sets the status of the task with a given task ID (its position) to completed
+            case "done":
+                return Parser.parseDone(command, tasks, fileMgr);
+            // "delete" removes a given task by its task ID from the TaskList
+            case "delete":
+                return Parser.parseDelete(command, tasks, fileMgr);
+            // "todo": creates a Todo task (no attached date/time)
+            case "todo":
+                return Parser.parseTodo(command, tasks, fileMgr);
+            // "deadline": creates a Deadline task (to be completed by a specified date/time)
+            case "deadline":
+                return Parser.parseDeadline(command, tasks, fileMgr);
+            // "event": creates a Event task (no attached date/time)
+            case "event":
+                return Parser.parseEvent(command, tasks, fileMgr);
+            // GUARD: against all unknown commands
+            default:
+                throw new DukeUnknownCommandException(command);
+            }
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
 
-    public static String parseDone(TaskList tasks, String command, Storage fileMgr) throws DukeException {
+    public static String parseDone(String command, TaskList tasks, Storage fileMgr) throws DukeException {
         String[] tokens = command.split(" ");
         // GUARD: against too few (e.g. done) or too many (e.g. done 5 example) arguments
         if (tokens.length != 2) {
@@ -66,7 +74,7 @@ public class Parser {
         }
     }
 
-    public static String parseDelete(TaskList tasks, String command, Storage fileMgr) throws DukeException {
+    public static String parseDelete(String command, TaskList tasks, Storage fileMgr) throws DukeException {
         String[] tokens = command.split(" ");
         // GUARD: against too few (e.g. done) or too many (e.g. done 5 example) arguments
         if (tokens.length != 2) {
@@ -91,7 +99,7 @@ public class Parser {
         }
     }
 
-    public static String parseTodo(TaskList tasks, String command, Storage fileMgr) throws DukeException {
+    public static String parseTodo(String command, TaskList tasks, Storage fileMgr) throws DukeException {
         // GUARD: against empty todo description
         // If the 'todo' command is input with no arguments, trim() removes the trailing spaces
         if (command.equals("todo")) {
@@ -101,10 +109,10 @@ public class Parser {
         // Otherwise entire argString is the description of the Todo task
         String argString = command.split(" ", 2)[1];
         Task newTodo = new TodoTask(argString);
-        return Parser.parseAddTask(tasks, newTodo, fileMgr);
+        return Parser.parseAddTask(newTodo, tasks, fileMgr);
     }
 
-    public static String parseDeadline(TaskList tasks, String command, Storage fileMgr) throws DukeException {
+    public static String parseDeadline(String command, TaskList tasks, Storage fileMgr) throws DukeException {
         // GUARD: against empty deadline description
         // If the 'deadline' command is input with no arguments, trim() removes the trailing spaces
         if (command.equals("deadline")) {
@@ -122,13 +130,13 @@ public class Parser {
         try {
             Date eventTime = Parser.DATE_PARSER.parse(args[1]);
             Task newDeadline = new DeadlineTask(args[0], eventTime);
-            return Parser.parseAddTask(tasks, newDeadline, fileMgr);
+            return Parser.parseAddTask(newDeadline, tasks, fileMgr);
         } catch (ParseException e) {
             throw new DukeInvalidArgumentException("date | time", "Date", command);
         }
     }
 
-    public static String parseEvent(TaskList tasks, String command, Storage fileMgr) throws DukeException {
+    public static String parseEvent(String command, TaskList tasks, Storage fileMgr) throws DukeException {
         // GUARD: against empty event description
         // If the 'event' command is input with no arguments, trim() removes the trailing spaces
         if (command.equals("event")) {
@@ -146,13 +154,13 @@ public class Parser {
         try {
             Date eventTime = Parser.DATE_PARSER.parse(args[1]);
             Task newEvent = new EventTask(args[0], eventTime);
-            return Parser.parseAddTask(tasks, newEvent, fileMgr);
+            return Parser.parseAddTask(newEvent, tasks, fileMgr);
         } catch (ParseException e) {
             throw new DukeInvalidArgumentException("date | time", "Date", command);
         }
     }
 
-    public static String parseAddTask(TaskList tasks, Task task, Storage fileMgr) throws DukeException {
+    public static String parseAddTask(Task task, TaskList tasks, Storage fileMgr) throws DukeException {
         tasks.addTask(task);
         try {
             fileMgr.writeTaskList(tasks);

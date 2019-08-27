@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
-    public static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private String filePath;
     private Scanner fileReader;

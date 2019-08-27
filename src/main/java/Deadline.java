@@ -2,7 +2,8 @@ public class Deadline extends Task{
     protected String  by;
 
     public Deadline(String description, String info) {
-        super(Type.DEADLINE, description, info);
+        super(description, info);
+        super.type = Type.DEADLINE;
         String[] infos = info.split(" ", 2);
         by =  infos[1];
     }

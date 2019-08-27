@@ -1,7 +1,8 @@
 public class Event extends Task{
     protected String at;
     public Event(String description, String info) {
-        super(Type.EVENT, description, info);
+        super(description, info);
+        super.type = Type.EVENT;
         String[] infos = info.split(" ", 2);
         this.at = infos[1] ;
     }

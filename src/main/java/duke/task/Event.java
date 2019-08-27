@@ -19,6 +19,6 @@ public class Event extends Task {
 
     @Override
     public String stringify() {
-        return "E | " + super.stringify() + " | " + at;
+        return "E | " + super.stringify() + " | " + DateUtil.format(at);
     }
 }

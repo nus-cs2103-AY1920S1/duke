@@ -23,6 +23,6 @@ public class Task {
     }
 
     public String stringify() {
-        return isDone ? "1" : "0" + " | " + description;
+        return (isDone ? "1" : "0") + " | " + description;
     }
 }

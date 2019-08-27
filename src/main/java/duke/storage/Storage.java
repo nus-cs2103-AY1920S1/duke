@@ -16,16 +16,15 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
-    private ArrayList<Task> tasks;
     private File file;
 
     public Storage(String pathname) {
-        this.tasks = new ArrayList<>();
         this.file = new File(pathname);
     }
 
     public ArrayList<Task> load() throws DukeException {
         try {
+            ArrayList<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String input = sc.nextLine();
@@ -60,76 +59,36 @@ public class Storage {
 
                 tasks.add(task);
             }
+            return tasks;
         } catch (FileNotFoundException e) {
             file.getParentFile().mkdirs();
             try {
                 FileWriter fw = new FileWriter(file);
                 fw.close();
+                throw new DukeException("Storage file did not exist");
             } catch (IOException ex) {
                 throw new DukeException("An error occurred when setting up the storage file: " + ex.getMessage());
             }
         }
-        return tasks;
     }
 
-    public String stringify() {
-        StringBuilder sb = new StringBuilder(tasks.get(0).stringify());
-        for (int i = 1; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            sb.append(System.lineSeparator());
-            sb.append(task.stringify());
-        }
-        return sb.toString();
-    }
-
-    public void save() throws DukeException {
+    public void save(String data) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
-            fw.write(stringify());
+            fw.write(data);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("An error occurred when saving the file");
+            throw new DukeException("An error occurred when saving data to storage");
         }
     }
 
-    public void addTask(Task task) throws DukeException {
-        tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        printTaskCount();
-
+    public void append(String data) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file, true);
-            if (tasks.size() > 1) {
-                fw.append(System.lineSeparator());
-            }
-            fw.append(task.stringify());
+            fw.append(data);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("An error occurred while saving a new task");
-        }
-
-    }
-
-    public void deleteTask(int id) throws DukeException {
-        try {
-            Task task = tasks.get(id);
-            tasks.remove(id);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(task);
-            printTaskCount();
-
-            save();
-        } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("Deleting task with ID " + id + " failed: Invalid ID");
-        }
-    }
-
-    private void printTaskCount() {
-        if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
-        } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            throw new DukeException("An error occurred while appending data to storage");
         }
     }
 }

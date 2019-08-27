@@ -19,6 +19,6 @@ public class Deadline extends Task {
 
     @Override
     public String stringify() {
-        return "D | " + super.stringify() + " | " + by;
+        return "D | " + super.stringify() + " | " + DateUtil.format(by);
     }
 }

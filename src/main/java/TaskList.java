@@ -1,5 +1,3 @@
-package duke;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -23,12 +21,15 @@ public class TaskList {
         );
     }
 
-    public static void printTasks() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= storage.size(); i++) {
-            Task t = storage.get(i - 1);
+    public static void printTasks(ArrayList<Task> a) {
+        for (int i = 1; i <= a.size(); i++) {
+            Task t = a.get(i - 1);
             System.out.println(String.format("%d. %s", i, t.toString()));
         }
+    }
+
+    public static void printTasks() {
+        printTasks(storage);
     }
 
     public static void addTask(Task t) {
@@ -48,5 +49,15 @@ public class TaskList {
         // Storage.saveTasks(storage);
         // needed?
         printStorageSize();
+    }
+
+    public static ArrayList<Task> query(String s) {
+        ArrayList<Task> res = new ArrayList<Task>();
+        for (Task t : storage) {
+            if (t.getDesc().contains(s)) {
+                res.add(t);
+            }
+        }
+        return res;
     }
 }

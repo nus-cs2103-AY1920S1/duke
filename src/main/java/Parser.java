@@ -1,5 +1,3 @@
-package duke;
-
 import java.util.Scanner;
 
 public class Parser {
@@ -11,6 +9,7 @@ public class Parser {
                 System.out.println("Bye!");
                 return false;
             case "list":
+                System.out.println("Here are the tasks in your list:");
                 TaskList.printTasks();
                 break;
             case "done":
@@ -59,6 +58,11 @@ public class Parser {
                     }
                     break;
                 }
+            case "find":
+                String s = sc.nextLine().trim();
+                System.out.println("Here are matching tasks in your list:");
+                TaskList.printTasks(TaskList.query(s));
+                break;
             default:
                 throw new DukeException("Unknown command " + in);
         }

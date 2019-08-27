@@ -15,6 +15,11 @@ public class Event extends Task {
         this.when = when;
     }
 
+    public Event(String desc, boolean isDone, String when) {
+        super(desc, isDone);
+        this.when = when;
+    }
+
     public String getWhen() {
         return this.when;
     }

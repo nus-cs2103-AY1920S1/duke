@@ -15,6 +15,12 @@ public class Task {
         setDoneSymbol();
     }
 
+    public Task(String desc, boolean isDone) {
+        this.desc = desc;
+        this.isDone = isDone;
+        setDoneSymbol();
+    }
+
     public String getTask() {
         return this.desc;
     }

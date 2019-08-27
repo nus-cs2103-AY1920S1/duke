@@ -15,6 +15,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public Deadline(String desc, boolean isDone, String deadline) {
+        super(desc, isDone);
+        this.deadline = deadline;
+    }
+
     public String getDeadline() {
         return this.deadline;
     }

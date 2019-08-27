@@ -1,10 +1,17 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Duke {
-	private static final String taskListArchivalPath = "duke.txt";
+	private static final String taskListArchivalPath = "data/duke.txt";
+	private static DateTimeFormatter dateTimeFormatter
+		= DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public static void main(String[] args) {
     	//print out the current tasks in the archival file
@@ -62,7 +69,7 @@ public class Duke {
 	}
 
 	private static Task decryptEventString(String eventString) throws DukeException {
-    	String[] taskDetails = eventString.split("|");
+    	String[] taskDetails = eventString.split(" \\| ");
     	Task taskToReturn;
     	String taskType = taskDetails[0];
     	Boolean isCompleted = taskDetails[1].equals("1");
@@ -72,11 +79,13 @@ public class Duke {
 			updateTaskCompletionStatus(isCompleted, taskToReturn);
 			return taskToReturn;
 		case "E":
-			taskToReturn = new Event(taskDetails[2].trim(), taskDetails[3].trim());
+			taskToReturn = new Event(taskDetails[2].trim(),
+					LocalDateTime.parse(taskDetails[3].trim(), dateTimeFormatter));
 			updateTaskCompletionStatus(isCompleted, taskToReturn);
 			return taskToReturn;
 		case "D":
-			taskToReturn = new DeadLine(taskDetails[2].trim(), taskDetails[3].trim());
+			taskToReturn = new DeadLine(taskDetails[2].trim(),
+					LocalDateTime.parse(taskDetails[3].trim(), dateTimeFormatter));
 			updateTaskCompletionStatus(isCompleted, taskToReturn);
 			return taskToReturn;
 		default:
@@ -101,6 +110,27 @@ public class Duke {
 			}
 		} catch (FileNotFoundException ex) {
     		System.out.println(ex.getMessage());
+		}
+	}
+
+	private static String formatDateTimeString(String eventString) throws DukeException {
+		StringBuilder formattedDateTime = new StringBuilder();
+    	try {
+			String[] splitDateAndTime = eventString.split(" ");
+			String date = splitDateAndTime[0];
+			String time = splitDateAndTime[1];
+			String[] splitDate = date.split("/");
+			formattedDateTime.append(String.format("%02d", Integer.parseInt(splitDate[0])));
+			formattedDateTime.append("/");
+			formattedDateTime.append(String.format("%02d", Integer.parseInt(splitDate[1])));
+			formattedDateTime.append("/");
+			formattedDateTime.append(splitDate[2]);
+			formattedDateTime.append(" ");
+			formattedDateTime.append(time);
+			return formattedDateTime.toString();
+		} catch (Exception ex) {
+    		throw new DukeException("the date time format entered is incorrect. " +
+				"Please enter again in the following format: dd/MM/yyyy HHmm");
 		}
 	}
 
@@ -132,27 +162,28 @@ public class Duke {
 				//check for deadline description
 				throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
 			}
-			StringBuilder deadLineName = new StringBuilder();
-			StringBuilder deadLineDate = new StringBuilder();
+			StringBuilder deadLineTaskName = new StringBuilder();
+			StringBuilder deadLineTaskDateTime = new StringBuilder();
 			String currentWord;
-			Boolean reachedDatePortion = false;
+			Boolean reachedDateTimePortion = false;
 			while(inLineScanner.hasNext()) {
 				currentWord = inLineScanner.next();
 				if (currentWord.equals("/by")) {
 					//set switch to true but do not append
-					reachedDatePortion = true;
-				} else if (reachedDatePortion == false) {
-					deadLineName.append(currentWord);
-					deadLineName.append(" ");
+					reachedDateTimePortion = true;
+				} else if (reachedDateTimePortion == false) {
+					deadLineTaskName.append(currentWord);
+					deadLineTaskName.append(" ");
 				} else {
-					deadLineDate.append(currentWord);
-					deadLineDate.append(" ");
+					deadLineTaskDateTime.append(currentWord);
+					deadLineTaskDateTime.append(" ");
 				}
 			}
-			if (deadLineDate.length() == 0) {
+			if (deadLineTaskDateTime.length() == 0) {
 				throw new DukeException("no date provided");
 			}
-			DeadLine deadline = new DeadLine(deadLineName.toString().trim(), deadLineDate.toString().trim());
+			DeadLine deadline = new DeadLine(deadLineTaskName.toString().trim(),
+					LocalDateTime.parse(formatDateTimeString(deadLineTaskDateTime.toString().trim()), dateTimeFormatter));
 			addToTaskList(deadline, taskArrayList, taskListArchivalFile);
 		} else if (command.equals("event")) {
 			if (!inLineScanner.hasNext()) {
@@ -179,7 +210,8 @@ public class Duke {
 			if (eventDate.length() == 0) {
 				throw new DukeException("no date provided");
 			}
-			Event event = new Event(eventName.toString().trim(), eventDate.toString().trim());
+			Event event = new Event(eventName.toString().trim(),
+					LocalDateTime.parse(formatDateTimeString(eventDate.toString().trim()), dateTimeFormatter));
 			addToTaskList(event, taskArrayList, taskListArchivalFile);
 		} else if (command.equals("delete")) {
 			if (!inLineScanner.hasNext()) {

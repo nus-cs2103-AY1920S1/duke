@@ -4,7 +4,7 @@ public class Parser {
 
     public static Command parse(String fullCommand) throws IllegalArgumentException{
         String[] splitCommand = fullCommand.split(" ", 0);
-        System.out.println(Arrays.toString(splitCommand));
+
         if(splitCommand[0].equals("todo") || splitCommand[0].equals("deadline")
                 || splitCommand[0].equals("event")) {
             return new AddCommand(fullCommand, splitCommand);

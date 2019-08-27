@@ -1,23 +1,28 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.Date;
+
 
 public class ListManager {
     ArrayList<Task> actualList;
+    SimpleDateFormat formatter;
 
-    public ListManager() {
+    public ListManager(SimpleDateFormat formatter) {
         this.actualList = new ArrayList<>();
+        this.formatter = formatter;
     }
 
-    public ListManager(ArrayList<Task> taskList) {
+    public ListManager(ArrayList<Task> taskList, SimpleDateFormat formatter) {
         this.actualList = taskList;
+        this.formatter = formatter;
     }
 
     public void add(String fullCommand, String[] splitCommand) {
         if(splitCommand[0].equals("todo")) {
             String[] stringBreaker = fullCommand.split("todo",2);
             if (!stringBreaker[1].equals("")) {
-                ToDos todo = new ToDos(stringBreaker[1]);
+                ToDos todo = new ToDos(stringBreaker[1], this.formatter);
                 actualList.add(todo);
             } else {
                 //Should throw exception here
@@ -26,13 +31,23 @@ public class ListManager {
         } else if (splitCommand[0].equals("deadline")) {
             String newString = fullCommand.substring(9);
             String[] stringBreaker = newString.split("/by",2);
-            Deadlines deadline = new Deadlines(stringBreaker[0], stringBreaker[1]);
-            actualList.add(deadline);
+            try {
+                Date date = formatter.parse(stringBreaker[1]);
+                Deadlines deadline = new Deadlines(stringBreaker[0], formatter, date);
+                actualList.add(deadline);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         } else if (splitCommand[0].equals("event")) {
             String newString = fullCommand.substring(6);
             String[] stringBreaker = newString.split("/at",2);
-            Events event = new Events(stringBreaker[0], stringBreaker[1]);
-            actualList.add(event);
+            try {
+                Date date = formatter.parse(stringBreaker[1]);
+                Events event = new Events(stringBreaker[0], formatter, date);
+                actualList.add(event);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         } else {
             //Throw exception here
             System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

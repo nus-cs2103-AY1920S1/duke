@@ -3,15 +3,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static final String FILE_NAME = "src/data/list.txt";
+    private String filePath;
 
-    public Storage() {
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public static List<Task> loadList() {
+    public List<Task> loadList() throws LoadingErrorDukeException{
         List<Task> loadedList = new ArrayList<>();
         try {
-            FileReader fileReader = new FileReader(FILE_NAME);
+            FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String readerLine = bufferedReader.readLine(); //initialise first line
 
@@ -23,20 +24,20 @@ public class Storage {
             }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
-            // No file found, carry on
+            throw new LoadingErrorDukeException();
         } catch (IOException | EmptyTaskDukeException | InvalidTaskDukeException e) {
             e.printStackTrace();
         }
         return loadedList;
     }
 
-    public static void saveList(List<Task> tasks) {
+    public void saveList(TaskList tasks) {
         try {
-            FileWriter fileWriter = new FileWriter(FILE_NAME);
+            FileWriter fileWriter = new FileWriter(filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             while (!tasks.isEmpty()) {
-                Task task = tasks.remove(0);
+                Task task = tasks.remove(1);
                 String line = generateLineFromTask(task);
                 bufferedWriter.write(line);
                 bufferedWriter.newLine();

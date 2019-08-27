@@ -12,7 +12,7 @@ public class DeadlineTask extends TimedTask {
     @Override
     protected String toFileString() {
         int done = isDone ? 1 : 0;
-        return "D" + " | " + done + " | " + details + " | " + dateFormat.format(date.getTime());
+        return "D" + " | " + done + " | " + details + " | " + fileDateFormat.format(date.getTime());
     }
 
     @Override

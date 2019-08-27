@@ -32,7 +32,7 @@ public abstract class TimedTask extends Task {
         DateFormatSymbols symbols = new DateFormatSymbols(Locale.getDefault());
         symbols.setAmPmStrings(new String[] { "am", "pm" });
         this.dateFormat.setDateFormatSymbols(symbols);
-        this.fileDateFormat = new SimpleDateFormat("d/M/yyyy kkm");
+        this.fileDateFormat = new SimpleDateFormat("d/M/yyyy kkmm");
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class TimedTask extends Task {
 
         return new Calendar
                 .Builder()
-                .setDate(year, month, day)
+                .setDate(year, month - 1, day)
                 .setTimeOfDay(hour, minute, 0)
                 .build();
     }

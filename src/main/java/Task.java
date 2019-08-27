@@ -49,6 +49,8 @@ public abstract class Task {
             } else {
                 return new DeadlineTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
             }
+        } else if (commandArray.length < 2) {
+            throw new DukeException("The description of a todo cannot be empty.");
         } else {
             return new ToDoTask(command);
         }

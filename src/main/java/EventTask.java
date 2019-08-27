@@ -12,7 +12,7 @@ public class EventTask extends TimedTask {
     @Override
     protected String toFileString() {
         int done = isDone ? 1 : 0;
-        return "E" + " | " + done + " | " + details + " | " + date;
+        return "E" + " | " + done + " | " + details + " | " + fileDateFormat.format(date.getTime());
     }
 
     @Override

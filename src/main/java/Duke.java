@@ -4,17 +4,9 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-/*        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-
         run();
-
     }
 
     public static void run() {
@@ -49,7 +41,7 @@ public class Duke {
                             commandList.add(todo);
                             System.out.println("Got it. I've added this task:");
                             System.out.println(todo);
-                        } else if (input.length() <= 4) {
+                        } else if (input.length() <= 5) {
                             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         } else if (input.substring(0, 5).equals("event")) {
                             String eventDetails = input.substring(6);

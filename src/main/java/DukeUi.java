@@ -24,6 +24,12 @@ public class DukeUi {
 
     public final static String FEEDBACK_NUKE
         = "Boom! I've deleted all of your tasks!";
+
+    public final static String FEEDBACK_FIND
+        = "Scan complete! I've got your tasks right here: \n%s";
+
+    public final static String FEEDBACK_FIND_NOTHING
+        = "It's absolutely nothing!";
     
     //Error Messages
     public final static String ERROR_UNDECIPHERABLE_MESSAGE

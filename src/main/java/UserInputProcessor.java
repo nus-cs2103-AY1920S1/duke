@@ -25,6 +25,10 @@ public class UserInputProcessor {
             //Fallthrough
         case Nuke:
             return processNukeCase(userInputString, tasks);
+            //Fallthrough
+        case Find:
+            return processFindCase(userInputString, tasks);
+            //Fallthrough
         case ToDo: //Duke will record a ToDo Task
             return processToDoCase(userInputString, tasks);
             //Fallthrough
@@ -55,6 +59,8 @@ public class UserInputProcessor {
             return userInputType.Delete;
         } else if (userInputString.toLowerCase().startsWith("nuke")) {
             return userInputType.Nuke;
+        } else if (userInputString.toLowerCase().startsWith("find")) {
+            return userInputType.Find;
         } else if (userInputString.toLowerCase().startsWith("todo")) {
             return userInputType.ToDo;
         } else if (userInputString.toLowerCase().startsWith("deadline")) {
@@ -68,7 +74,7 @@ public class UserInputProcessor {
 
     //Used to identify the type of command issued by the User
     private static enum userInputType {
-        Bye, List, Done, Delete, Nuke, ToDo, Deadline, Event, Invalid
+        Bye, List, Done, Delete, Nuke, Find, ToDo, Deadline, Event, Invalid
     };
 
     private static DukeReply processByeCase () {
@@ -131,6 +137,11 @@ public class UserInputProcessor {
     private static DukeReply processNukeCase(String userInputString, TaskList tasks) {
         tasks.deleteAllTasks();
         return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_NUKE));
+    }
+
+    private static DukeReply processFindCase(String userInputString, TaskList tasks) {
+        String searchTerm = userInputString.substring(4).trim();
+        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_FIND, tasks.getMatchingTasksAsString(searchTerm))));
     }
 
     private static DukeReply processToDoCase(String userInputString, TaskList tasks) throws DukeException {

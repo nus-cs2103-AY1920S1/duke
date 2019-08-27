@@ -121,7 +121,7 @@ public class Duke {
             printFileContents(fileName, li);
 
         } catch(FileNotFoundException e){
-            System.out.println("File not found");
+            //System.out.println("File not found");
         }
 
         while(true){

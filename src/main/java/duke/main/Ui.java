@@ -60,7 +60,7 @@ public class Ui {
     void showLoadingError(String error) {
         printMessage("An error occurred during file loading " + error);
     }
-
+    
     public void printMessage(String message) {
         showLine();
         System.out.println("\t" + message);

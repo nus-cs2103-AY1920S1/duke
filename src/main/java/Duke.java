@@ -3,40 +3,32 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static String divider = "\t____________________________________________________________\n";
-    private static String intro = "\t Hello! I'm Duke\n\t What can I do for you?\n";
-    private static String goodbye = "\t Bye. Hope to see you again soon!\n";
+    private Ui ui;
+    private TaskList taskList;
+    private Storage storage;
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        print(intro);
+    public void run() {
+        ui.printIntro();
 
         Scanner scanner = new Scanner(System.in);
-        Driver driver = new Driver();
 
         boolean run = true;
         int index;
 
         while (run) {
             try {
-                String[] input = scanner.nextLine().split(" ");
-                String command = input[0];
-                String[] params = Arrays.copyOfRange(input, 1, input.length);
+                String[] userInput = Parser.parseUserInput(scanner.next());
+                String command = userInput[0];
+                String[] params = Arrays.copyOfRange(userInput, 1, userInput.length);
 
                 switch (command) {
                 case "bye":
-                    print(goodbye);
+                    ui.printGoodbye();
                     run = false;
                     break;
 
                 case "list":
-                    print(driver.list());
+                    ui.printToUser(taskList.list());
                     break;
 
                 case "done":
@@ -45,7 +37,7 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("You need to specify a task ID to mark as done.");
                     }
-                    print(driver.markAsDone(index));
+                    ui.printToUser(taskList.markAsDone(index));
                     break;
 
                 case "delete":
@@ -54,19 +46,19 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeException("You need to specify a task ID to delete.");
                     }
-                    print(driver.delete(index));
+                    ui.printToUser(taskList.delete(index));
                     break;
 
                 case "todo":
-                    print(driver.createTodo(params));
+                    ui.printToUser(taskList.createTodo(params));
                     break;
 
                 case "deadline":
-                    print(driver.createDeadline(params));
+                    ui.printToUser(taskList.createDeadline(params));
                     break;
 
                 case "event":
-                    print(driver.createEvent(params));
+                    ui.printToUser(taskList.createEvent(params));
                     break;
 
                 default:
@@ -74,17 +66,20 @@ public class Duke {
 
                 }
             } catch (DukeException e) {
-                print(e.toString());
+                ui.printErrToUser(e);
             }
 
         }
-
     }
 
-    private static void print (String s) {
-        System.out.print(divider);
-        System.out.print(s);
-        System.out.print(divider);
+    public Duke (String filepath) {
+        storage = new Storage(filepath);
+        taskList = new TaskList(storage);
+        ui = new Ui();
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 
 }

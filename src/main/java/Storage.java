@@ -7,12 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Persistence {
+public class Storage {
 
     protected String fileName;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public Persistence(String fileName) {
+    public Storage(String fileName) {
         this.fileName = fileName;
     }
 

@@ -6,7 +6,7 @@ import duke.task.Deadline;
 import java.time.LocalDateTime;
 
 /**
- * A class representing a add deadline task command.
+ * A class representing an add deadline task command.
  */
 public class DeadlineCommand extends AddCommand {
     public static final String COMMAND_WORD = "deadline";

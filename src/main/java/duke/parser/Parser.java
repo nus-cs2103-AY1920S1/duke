@@ -21,6 +21,7 @@ public class Parser {
     public boolean isTerminatingCommand(String command) {
         return command.equals("bye");
     }
+
     /**
      * Returns the command by parsing the command string that typed by the user.
      * @param command the command typed by the user

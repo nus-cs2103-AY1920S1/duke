@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * A class representing the Duke App.
+ */
 public class Duke {
     private static final String FILEPATH = "/Users/jiangyuxin/Documents/sem1/cs2103/duke/data/duke.txt";
     private Storage storage;
@@ -16,18 +19,25 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Class constructor specifying the file path for storage.
+     * @param filePath the file path for storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException| IllegalDescriptionException e) {
+        } catch (FileNotFoundException | IllegalDescriptionException e) {
             ui.showLoadingError(e);
             tasks = new TaskList();
         }
     }
 
+    /**
+     * Run the app.
+     */
     public void run() {
         ui.greet();
         Scanner in = new Scanner(System.in);
@@ -52,6 +62,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke(FILEPATH).run();
     }

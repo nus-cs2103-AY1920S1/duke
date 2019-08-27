@@ -37,15 +37,13 @@ public class Deadline extends Task {
             return "23rd";
         } else if (date.equals("31")) {
             return "31st";
-        }
-        else {
+        } else {
             return date + "th";
         }
     }
 
     private String formatHour(String hour) {
         if (Integer.valueOf(hour) <= 1200) {
-            //return hour.substring(0,2) + "am";
             return String.format("%s.%s%s", hour.substring(0,2), hour.substring(2), "am");
         } else {
             if (Integer.valueOf(hour) < 1300) {

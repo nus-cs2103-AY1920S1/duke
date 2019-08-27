@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-
 public class Duke {
 
     private static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";

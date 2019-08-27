@@ -14,6 +14,6 @@ public class UpdateCommand extends Command {
         Task task = taskList.markNumberedTaskAsDone(position);
         ui.notifyMarkedAsDone(task);
         storage.writeListToFile(taskList);
-
     }
+
 }

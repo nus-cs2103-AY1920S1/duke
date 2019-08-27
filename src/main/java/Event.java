@@ -5,6 +5,10 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
+    public String getEventDate(){
+        return this.eventDate;
+    }
+
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {

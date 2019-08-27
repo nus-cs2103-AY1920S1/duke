@@ -1,3 +1,6 @@
+/**
+ * Represents a To-do Task
+ */
 public class Todo extends Task {
     protected String details;
 

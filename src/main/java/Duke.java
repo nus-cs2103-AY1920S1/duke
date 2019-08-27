@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 /**
- *  CS2103 Week 2 iP Deliverable
+ *  CS2103 Week 2 iP Deliverable, To-do List
  *  @author Ahmed Bahajjaj
  */
 public class Duke {
@@ -64,7 +64,7 @@ public class Duke {
     }
 
     /**
-     * Processes Input String to Description & Details
+     * Processes Input Event/Deadline to Description & Details
      * @param input Task String (without command)
      * @return Array. Index 0 = Description. Index 1  = Details
      * @throws ArrayIndexOutOfBoundsException Command missing details

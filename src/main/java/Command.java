@@ -72,6 +72,10 @@ public class Command {
             tasks.delete(deletionNumber);
             ui.printDelete(toDelete);
             break;
+        case "find":
+            String keyword = ui.readLine().trim();
+            ui.printFind(keyword);
+            break;
         default:
             try {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

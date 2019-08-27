@@ -36,7 +36,7 @@ public class Duke {
     }
 
     /**
-     * Run the app.
+     * Runs the app.
      */
     public void run() {
         ui.greet();

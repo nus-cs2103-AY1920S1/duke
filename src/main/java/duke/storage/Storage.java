@@ -1,7 +1,11 @@
 package duke.storage;
 
 import duke.exception.IllegalDescriptionException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,7 +69,7 @@ public class Storage {
      * @param tasks a list of tasks.
      * @throws IOException If  an input or output exception occurred.
      */
-    public void store(TaskList tasks) throws IOException{
+    public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.getSize(); i++) {
             fw.write(tasks.getTaskAtIndex(i + 1).toStringForFile() + "\n");

@@ -13,6 +13,7 @@ public class TaskTest {
         assertEquals("T | 0 | test", task.toStringForFile());
     }
 
+    /*
     @Test
     public void testStringConversion() throws IllegalDescriptionException {
         Task task = new Task("test");
@@ -31,9 +32,10 @@ public class TaskTest {
         task.setDone();
         assertEquals("\u2713", task.getStatusIcon());
     }
+    */
 
     @Test
-    public void constructor_emptyDescription_exceptionThrown (){
+    public void constructor_emptyDescription_exceptionThrown() {
         try {
             Task task = new Task("");
             fail();

@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * A class representing a done command.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     private int index;
 

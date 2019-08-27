@@ -1,6 +1,12 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDescriptionException;
 import duke.exception.IllegalIndexOfTaskException;
@@ -93,9 +99,11 @@ public class Parser {
             }
 
             String[] dayMonthYear = date.split("/");
-            LocalDateTime dateTime = LocalDateTime.of(Integer.parseInt(dayMonthYear[2]), Integer.parseInt(dayMonthYear[1]),
+            LocalDateTime dateTime = LocalDateTime.of(Integer.parseInt(dayMonthYear[2]),
+                    Integer.parseInt(dayMonthYear[1]),
                     Integer.parseInt(dayMonthYear[0]),
-                    Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
+                    Integer.parseInt(time.substring(0, 2)),
+                    Integer.parseInt(time.substring(2)));
 
             return dateTime;
         } catch (IndexOutOfBoundsException e) {

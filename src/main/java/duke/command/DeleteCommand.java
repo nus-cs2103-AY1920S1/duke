@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * A class representing a delete command.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private int index;
 

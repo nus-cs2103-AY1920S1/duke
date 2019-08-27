@@ -48,7 +48,7 @@ public class TaskList {
      * @return the task at the index.
      * @throws IndexOutOfBoundsException If the index given is out of range.
      */
-    public Task setTaskAtIndexDone(int index) throws IndexOutOfBoundsException{
+    public Task setTaskAtIndexDone(int index) throws IndexOutOfBoundsException {
         tasks.get(index - 1).setDone();
         return tasks.get(index - 1);
     }

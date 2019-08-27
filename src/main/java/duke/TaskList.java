@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * Corresponds to an <code>ArrayList</code> that contains the tasks.
  */
 public class TaskList {
-
 	protected ArrayList<Task> tasks;
 
 	/**
@@ -68,5 +67,4 @@ public class TaskList {
 	public int getSize() {
 		return tasks.size();
 	}
-
 }

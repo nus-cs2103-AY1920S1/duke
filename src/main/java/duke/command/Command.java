@@ -11,7 +11,6 @@ import duke.exception.DukeException;
  * A <code>Command</code> object corresponds to an action that can be executed.
  */
 public abstract class Command {
-
 	/**
 	 * Performs an action corresponding to the specific <code>Command</code>>.
 	 * @param tasks Instance of <code>TaskList</code> that stores <code>Task</code> objects.
@@ -25,5 +24,4 @@ public abstract class Command {
 	 * Checks if the current <code>Command</code> is an <code>ExitCommand</code>.
 	 */
 	public abstract boolean isExit();
-
 }

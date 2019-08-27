@@ -12,7 +12,6 @@ import duke.task.Event;
  * Represents a <code>Command</code> that adds a new <code>Event</code> object to the <code>TaskList</code>.
  */
 public class AddEventCommand extends Command {
-
 	String details;
 
 	/**
@@ -103,5 +102,4 @@ public class AddEventCommand extends Command {
 			return false;
 		}
 	}
-
 }

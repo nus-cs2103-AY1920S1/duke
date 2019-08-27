@@ -6,7 +6,6 @@ package duke.task;
  * A <code>Task</code> object corresponds to a task that has to be done.
  */
 public abstract class Task {
-
     protected String description;
     protected boolean isDone;
 
@@ -59,5 +58,4 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
-
 }

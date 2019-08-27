@@ -10,7 +10,6 @@ import duke.task.Task;
  * Represents a <code>Command</code> that marks a <code>Task</code> in the <code>TaskList</code> as completed.
  */
 public class DoneCommand extends Command {
-
 	int index;
 
 	/**
@@ -73,5 +72,4 @@ public class DoneCommand extends Command {
 			return false;
 		}
 	}
-
 }

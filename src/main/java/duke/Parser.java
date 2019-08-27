@@ -7,7 +7,6 @@ import duke.exception.DukeException;
  * Represents a parser that reads and parses raw command strings.
  */
 public class Parser {
-
 	/**
 	 * Parses raw commands and returns a type of <code>Command</code> correspondingly.
 	 * @param rawCommandDetails Details of the command provided by user.
@@ -57,5 +56,4 @@ public class Parser {
 			}
 		}
 	}
-
 }

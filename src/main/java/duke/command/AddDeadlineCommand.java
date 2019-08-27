@@ -12,7 +12,6 @@ import duke.task.Deadline;
  * Represents a <code>Command</code> that adds a new <code>Deadline</code> object to the <code>TaskList</code>.
  */
 public class AddDeadlineCommand extends Command {
-
 	String details;
 
 	/**
@@ -89,5 +88,4 @@ public class AddDeadlineCommand extends Command {
 			return false;
 		}
 	}
-
 }

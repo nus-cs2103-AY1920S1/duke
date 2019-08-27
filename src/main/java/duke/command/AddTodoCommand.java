@@ -10,7 +10,6 @@ import duke.task.Todo;
  * Represents a <code>Command</code> that adds a new <code>Todo</code> object to the <code>TaskList</code>.
  */
 public class AddTodoCommand extends Command {
-
 	String details;
 
 	/**
@@ -73,6 +72,5 @@ public class AddTodoCommand extends Command {
 			return false;
 		}
 	}
-
 }
 

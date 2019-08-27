@@ -8,7 +8,6 @@ import duke.calendar.Time;
  * the <code>Task</code> and the <code>Date</code> and optionally, the <code>Time</code> at which it is due.
  */
 public class Deadline extends Task {
-
 	protected Date date;
 	protected Time time;
 
@@ -52,5 +51,4 @@ public class Deadline extends Task {
 	public String toString() {
 		return "[D]" + super.toString() + " (by: " + date + (time.isNull() ? "" : ", " + time) + ")";
 	}
-
 }

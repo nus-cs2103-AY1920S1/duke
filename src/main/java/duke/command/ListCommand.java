@@ -8,7 +8,6 @@ import duke.Ui;
  * Represents a <code>Command</code> that prints every <code>Task</code> object in the <code>TaskList</code>.
  */
 public class ListCommand extends Command {
-
 	/**
 	 * Constructor for <code>ListCommand</code>.
 	 */
@@ -46,5 +45,4 @@ public class ListCommand extends Command {
 			return false;
 		}
 	}
-
 }

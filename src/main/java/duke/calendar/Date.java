@@ -8,7 +8,6 @@ import java.time.Month;
  * Represents a date. A <code>Date</code> object corresponds to a time represented by a day, month and year.
  */
 public class Date {
-
 	protected String rawDate;
 	protected int day;
 	protected int year;
@@ -145,5 +144,4 @@ public class Date {
 			return day + "th of " + month.toString() + " " + year;
 		}
 	}
-
 }

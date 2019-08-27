@@ -8,7 +8,6 @@ import duke.Ui;
  * Represents a <code>Command</code> that closes the program.
  */
 public class ExitCommand extends Command {
-
 	/**
 	 * Constructor for <code>ExitCommand</code>.
 	 */
@@ -45,5 +44,4 @@ public class ExitCommand extends Command {
 			return false;
 		}
 	}
-
 }

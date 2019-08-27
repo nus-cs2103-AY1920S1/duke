@@ -10,7 +10,6 @@ import duke.task.Task;
  * Represents a <code>Command</code> that deletes a <code>Task</code> from the <code>TaskList</code>.
  */
 public class DeleteCommand extends Command {
-
 	int index;
 
 	/**
@@ -72,5 +71,4 @@ public class DeleteCommand extends Command {
 			return false;
 		}
 	}
-
 }

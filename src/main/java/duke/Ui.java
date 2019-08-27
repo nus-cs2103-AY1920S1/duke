@@ -11,7 +11,6 @@ import java.util.Scanner;
  * user inputs.
  */
 public class Ui {
-
 	protected Scanner scanner = new Scanner(System.in);
 
 	/**
@@ -125,5 +124,4 @@ public class Ui {
 	public void closeScanner() {
 		scanner.close();
 	}
-
 }

@@ -9,7 +9,6 @@ import duke.calendar.Time;
  * <code>Date</code> and <code>Time</code> of the event.
  */
 public class Event extends Task {
-
 	protected Date startDate;
 	protected Time startTime;
 	protected Date endDate;
@@ -90,5 +89,4 @@ public class Event extends Task {
 		builder.append(")");
 		return builder.toString();
 	}
-
 }

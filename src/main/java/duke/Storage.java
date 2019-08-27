@@ -21,7 +21,6 @@ import java.util.Scanner;
  * tasks in the <code>TaskList</code> should be loaded from and written to every time a change occurs.
  */
 public class Storage {
-
 	protected String filePath;
 
 	/**
@@ -141,5 +140,4 @@ public class Storage {
 			throw new DukeException("\u2639 OOPS!!! Something went wrong: " + exception.getMessage());
 		}
 	}
-
 }

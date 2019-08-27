@@ -6,7 +6,6 @@ import duke.exception.DukeException;
  * Represents a time. A <code>Time</code> object corresponds to a specific hour and minute.
  */
 public class Time {
-
 	protected String rawTime;
 	protected boolean isPastNoon;
 	protected int hour;
@@ -95,5 +94,4 @@ public class Time {
 			return hour + ":" + (minutes < 10 ? "0" + minutes : minutes) + (isPastNoon ? "pm" : "am");
 		}
 	}
-
 }

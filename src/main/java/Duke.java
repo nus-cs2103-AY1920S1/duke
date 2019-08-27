@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+class Duke {
 
     private static final String DUKE_HELLO = "Hello! I'm Duke\n    What can I do for you?\n";
     private static final String DUKE_BYE = "Bye. Hope to see you again soon!\n";
@@ -39,7 +39,7 @@ public class Duke {
         DELETE;
     }
 
-    protected Duke() {
+    Duke() {
         this.taskList = new TaskList();
     }
 
@@ -87,7 +87,7 @@ public class Duke {
 
         StringBuilder task = new StringBuilder();
         for (int i = 1; i < command.length; i++) {
-            task.append(command[i] + " ");
+            task.append(command[i]).append(" ");
         }
         this.addTask(new TodoTask(task.toString().trim()));
     }
@@ -109,7 +109,7 @@ public class Duke {
             } else if (!hasDescription && !hasDeadlineDate && !command[i].equals("")) {
                 hasDescription = true;
             }
-            task[index].append(command[i] + " ");
+            task[index].append(command[i]).append(" ");
         }
         if (!hasDescription && !hasDeadlineDate) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_DESCRIPTION_AND_DATE);
@@ -160,7 +160,7 @@ public class Duke {
                 taskList.getSize()));
     }
 
-    protected void run() {
+    void run() {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"

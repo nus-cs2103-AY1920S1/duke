@@ -15,6 +15,7 @@ public class Duke {
             ui.showLoadingError();
             listManager = new ListManager();
         }
+
     }
 
     public void run() {
@@ -26,6 +27,7 @@ public class Duke {
             Command c = Parser.parse(fullCommand);
             c.execute(listManager, ui, storage);
             isExit = c.isExit();
+            ui.bar();
         }
     }
 

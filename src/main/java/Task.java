@@ -7,4 +7,6 @@ public abstract class Task {
         this.name = name;
         this.done = false;
     }
+
+    public abstract String saveText();
 }

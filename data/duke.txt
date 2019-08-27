@@ -1,2 +1,2 @@
-D,0,return book,Mon Aug 28 18:00:00 SGT 19
-E,0,project meeting,Wed Aug 23 12:00:00 SGT 19
+T,1,borrow book
+E,0,project meeting,23/09/0019 12:00

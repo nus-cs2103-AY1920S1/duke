@@ -21,7 +21,8 @@ public class Event extends Task{
 
     @Override
     public String toTextFileString() {
-        return super.toTextFileString() + "," + at;
+        return super.toTextFileString() + "," +
+                new SimpleDateFormat("dd/MM/yyyy HH:mm").format(at);
     }
 
     @Override

@@ -24,7 +24,8 @@ public class Deadline extends Task{
 
     @Override
     public String toTextFileString() {
-        return super.toTextFileString() + "," + by;
+        return super.toTextFileString() + "," +
+                new SimpleDateFormat("dd/MM/yyyy HH:mm").format(by);
     }
 
     @Override

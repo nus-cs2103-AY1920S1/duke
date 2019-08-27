@@ -1,7 +1,7 @@
 import duke.command.Command;
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.UI;
+import duke.component.Ui;
 import duke.component.Parser;
 import duke.exception.DukeException;
 
@@ -11,7 +11,7 @@ import duke.exception.DukeException;
  */
 public class Duke {
     private Parser parser;
-    private UI ui;
+    private Ui ui;
     private DukeDatabase database;
     private TaskList taskList;
 
@@ -30,7 +30,7 @@ public class Duke {
     public void run() {
         // initialise the essential components of duke bot.
         parser = new Parser();
-        ui = new UI();
+        ui = new Ui();
         database = DukeDatabase.getDukeDatabaseInstance();
         taskList = database.getAllTasks();
 

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.UI;
+import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -26,7 +26,7 @@ public class AddCommand extends Command {
         this.addType = addType;
     }
 
-    public void execute(TaskList tasks, UI ui, DukeDatabase database) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, DukeDatabase database) throws DukeException {
         initialise(tasks, ui, database);
 
         if (AddType.TODO.equals(addType)) {
@@ -93,9 +93,9 @@ public class AddCommand extends Command {
     private void addTask(Task task) {
         taskList.addTask(task);
         ui.echo(() -> {
-            System.out.printf("%sGot it. I've added this task:\n", UI.INDENTATION_LVL1);
-            System.out.printf(ui.indentAndSplit(task.toString(), UI.INDENTATION_LVL2));
-            System.out.printf(String.format("%sNow you have %s in the list.\n", UI.INDENTATION_LVL1,
+            System.out.printf("%sGot it. I've added this task:\n", Ui.INDENTATION_LVL1);
+            System.out.printf(ui.indentAndSplit(task.toString(), Ui.INDENTATION_LVL2));
+            System.out.printf(String.format("%sNow you have %s in the list.\n", Ui.INDENTATION_LVL1,
                     ui.getTaskPhrase(taskList.size())));
         });
     }

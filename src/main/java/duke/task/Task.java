@@ -17,7 +17,7 @@ public abstract class Task {
      *
      * @param s the title of the task.
      */
-    public Task(String s) {
+    protected Task(String s) {
         title = s;
         status = "\u2717";
     }
@@ -30,6 +30,10 @@ public abstract class Task {
         status = "\u2713";
 
         return this;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.UI;
+import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -18,7 +18,7 @@ public class UpdateCommand extends Command {
         updateType = type;
     }
 
-    public void execute(TaskList tasks, UI ui, DukeDatabase database) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, DukeDatabase database) throws DukeException {
         initialise(tasks, ui, database);
 
         if (UpdateType.DONE.equals(updateType)) {
@@ -35,8 +35,8 @@ public class UpdateCommand extends Command {
             task.markAsDone();
 
             ui.echo(() -> {
-                System.out.printf("%sNice! I've marked this task as done:\n", UI.INDENTATION_LVL1);
-                System.out.printf(ui.indentAndSplit(task.toString(), UI.INDENTATION_LVL2)); // task details
+                System.out.printf("%sNice! I've marked this task as done:\n", Ui.INDENTATION_LVL1);
+                System.out.printf(ui.indentAndSplit(task.toString(), Ui.INDENTATION_LVL2)); // task details
             });
         } catch (NumberFormatException e) {
             ui.echo(String.format("%s There can only be an integer after the word \"done\"", DukeException.PREFIX ));

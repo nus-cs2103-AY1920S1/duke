@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.UI;
+import duke.component.Ui;
 import duke.exception.DukeException;
 
 public class ExitCommand extends Command {
@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute(TaskList taskList, UI ui, DukeDatabase database) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, DukeDatabase database) throws DukeException {
         initialise(taskList, ui, database);
         exit();
     }

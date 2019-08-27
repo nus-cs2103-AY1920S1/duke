@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
-import duke.component.UI;
+import duke.component.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -20,7 +20,7 @@ public class QueryCommand extends Command {
         this.queryType = queryType;
     }
 
-    public void execute(TaskList tasks, UI ui, DukeDatabase database) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, DukeDatabase database) throws DukeException {
         initialise(tasks, ui, database);
 
         if (QueryType.LIST_ALL.equals(queryType)) {
@@ -33,13 +33,13 @@ public class QueryCommand extends Command {
     // List all the tasks in the taskList.
     private void list() {
         ui.echo(() -> {
-            System.out.print(UI.INDENTATION_LVL1 + "Here are the tasks in your list:\n");
+            System.out.print(Ui.INDENTATION_LVL1 + "Here are the tasks in your list:\n");
             ListIterator<Task> iterator = taskList.listIterator();
 
             for (int i = 0; i < taskList.size(); i++) {
                 String taskDetails = iterator.next().toString();
                 System.out.printf(ui.indentAndSplit(String.format("%d.%s", i + 1, taskDetails),
-                        UI.INDENTATION_LVL1));
+                        Ui.INDENTATION_LVL1));
             }
         });
     }

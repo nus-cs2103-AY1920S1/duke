@@ -43,6 +43,8 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(rawCommand.substring(7)));
         case "done":
             return new DoneCommand(Integer.parseInt(rawCommand.substring(5)));
+        case "find":
+            return new FindCommand(rawCommand.substring(5));
         case "bye":
             return new ExitCommand();
         default:

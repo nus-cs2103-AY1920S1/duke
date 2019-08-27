@@ -3,6 +3,11 @@ import java.util.Arrays;
 
 public class Parser {
 
+    /**
+     * The method takes in user input constantly and updated the tasklist based on the input commands.
+     * @param input the next user input which decides what the code does.
+     * @param tasklist the list of tasks currently saved.
+     */
     public static void Parse(String input, TaskList tasklist) {
         Ui ui = new Ui();
         Storage storage = new Storage();

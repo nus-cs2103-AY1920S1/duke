@@ -24,6 +24,13 @@ public class Task {
         this.isDone = true;
     }
 
+
+    /**
+     * the method reads the strings from the saved txt file and converts them to Task Object form.
+     * @param s string in the txt file.
+     * @return Task created from the string.
+     * @throws UnknownInputException If the string does not follow the format of a Task.
+     */
     public static Task readString(String s) throws UnknownInputException {
         String[] arr = s.split("~");
         boolean isDone = arr[1].equals("1");
@@ -40,6 +47,11 @@ public class Task {
         }
     }
 
+    /**
+     * This method just returns the number of current tasks saved.
+     * @param arr this is the array of tasks that the code starts with (may not be empty).
+     * @return number of tasks currently.
+     */
     public static int initialiseNumOfTasks(Task[] arr) {
         int no = 0;
         for (int i = 0; i < arr.length; i++) {
@@ -56,6 +68,10 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * formats the Task into savable format.
+     * @return String that can be saved into a txt file.
+     */
     public String toFormattedString() {
         return this.getSimpleStatusIcon() + "~" + this.description;
     }

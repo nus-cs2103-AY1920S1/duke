@@ -2,25 +2,42 @@ import java.util.Scanner;
 
 public class Ui {
 
+    /**
+     * reads the user input.
+     * @return The user input as a command.
+     */
     public static String readCommand() {
         Scanner sc = new Scanner(System.in);
         String command = sc.nextLine();
         return command;
     }
 
+    /**
+     * prints a indented line.
+     */
     public static void showLine() {
         String indentedline = "    ____________________________________________________________";
         System.out.println(indentedline);
     }
 
+    /**
+     * prints a welcome message.
+     */
     public static void greet() {
         echo("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * prints a goodbye message.
+     */
     public static void exit() {
         echo("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * prints a string in a special format.
+     * @param s String to be printed.
+     */
     public static void echo(String s) {
         String[] arr = s.split("\n");
         showLine();
@@ -30,6 +47,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Overloaded method that prints a response when a task is added.
+     * @param t Task that is added.
+     * @param x Current number of tasks in list.
+     */
     public static void echo(Task t, int x) {
         if (x == 1) {
             echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " task in the list.");
@@ -38,6 +60,10 @@ public class Ui {
         }
     }
 
+    /**
+     * prints the current list of tasks.
+     * @param tasklist the list of tasks to be printed.
+     */
     public static void printList(TaskList tasklist) {
         Task[] tasks = tasklist.getTasks();
         showLine();
@@ -54,6 +80,10 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * prints out response when a task is completed.
+     * @param t the completed task.
+     */
     public static void printDone(Task t) {
         showLine();
         System.out.println("     Nice! I've marked this task as done:");
@@ -61,6 +91,11 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * prints out a response when a task is deleted.
+     * @param t the deleted task.
+     * @param x number of tasks left in the list.
+     */
     public static void printDeleted(Task t, int x) {
         showLine();
         System.out.println("     Noted. I've removed this task:");
@@ -73,6 +108,10 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * prints out an error response.
+     * @param string the error to be printed.
+     */
     public static void showError(String string) {
         showLine();
         System.out.println("     " + string);

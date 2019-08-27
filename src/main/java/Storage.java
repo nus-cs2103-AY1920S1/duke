@@ -6,12 +6,22 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     * Writes the tasklist to the file.
+     * @param filePath Location of the file to write to.
+     * @param textToAdd What is written to the file.
+     * @throws IOException
+     */
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Saves the current task list into the specified txt file.
+     * @param tasklist current list of tasks to be saved.
+     */
     public static void save(TaskList tasklist) {
         Task[] arr = tasklist.getTasks();
         String file2 = "DukeList.txt";
@@ -32,6 +42,12 @@ public class Storage {
         }
     }
 
+    /**
+     * read the saved tasks in the file and update the tasklist.
+     * @param filePath location of file to be read.
+     * @param tasklist tasklist to be updated with the tasks read in the file.
+     * @throws FileNotFoundException If the saved file does not exist.
+     */
     public static void readFileContents(String filePath, TaskList tasklist) throws FileNotFoundException {
         try {
             Task[] tasks = tasklist.getTasks();
@@ -48,6 +64,10 @@ public class Storage {
         }
     }
 
+    /**
+     * reads the tasks in the txt file and updates the tasklist.
+     * @param tasklist tasklist that will be updated with the saved tasks.
+     */
     public static void readSavedList(TaskList tasklist) {
         try {
             readFileContents("DukeList.txt", tasklist);

@@ -16,6 +16,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+    /**
+     * formats the Task into savable format
+     * @return String that can be saved into a txt file
+     */
     public String toFormattedString() {
         return "E~" + super.toFormattedString() + "~" + at;
     }

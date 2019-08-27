@@ -4,7 +4,13 @@ public class DateReader {
     public DateReader(String date) {
         this.date = date;
     }
-    
+
+	/**
+	 * converts a date string into a formatted string in the form "1 January 2019, 12pm".
+	 * @param dr An object containing a date as a string in a different format.
+	 * @return Date in a formatted string.
+	 * @throws DateDoesNotExistException If days or months or time is out of range.
+	 */
     public static String readDate(DateReader dr) throws DateDoesNotExistException {
     	String[] arr = dr.date.split("/");
 

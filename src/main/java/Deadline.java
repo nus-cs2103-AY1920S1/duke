@@ -16,6 +16,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * formats the Task into savable format
+     * @return String that can be saved into a txt file
+     */
     public String toFormattedString() {
         return "D~" + super.toFormattedString() + "~" + by;
     }

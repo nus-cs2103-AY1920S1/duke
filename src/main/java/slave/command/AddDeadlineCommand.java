@@ -17,10 +17,10 @@ public class AddDeadlineCommand extends Command {
         this.date = date;
     }
 
-    public AddDeadlineCommand(String task, Date date){
+    public AddDeadlineCommand(String task, Date date) throws DukeException {
         this.commandType = CommandType.ADDDEADLINE;
         this.task = task;
-        this.date = date.toString();
+        this.date = date.convertToString();
     }
 
 

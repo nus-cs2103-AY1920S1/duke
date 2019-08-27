@@ -18,10 +18,10 @@ public class AddEventCommand extends Command{
         this.date = date;
     }
 
-    public AddEventCommand(String task, Date date){
+    public AddEventCommand(String task, Date date) throws DukeException {
         this.commandType = CommandType.ADDEVENT;
         this.task = task;
-        this.date = date.toString();
+        this.date = date.convertToString();
     }
 
     @Override

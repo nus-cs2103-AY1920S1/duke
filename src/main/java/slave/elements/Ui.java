@@ -5,7 +5,6 @@ import slave.task.Deadline;
 import slave.task.Event;
 import slave.task.Task;
 import slave.task.ToDo;
-
 import java.util.Scanner;
 
 public class Ui {
@@ -31,6 +30,7 @@ public class Ui {
                 "     list : Retrieves all the tasks you have so far\n" +
                 "     done <task index> : Checks task as done\n" +
                 "     delete <task index> : Deletes task at a particular index\n" +
+                "     clear : clear all tasks in the list and wipe all data\n" +
                 "     bye : Exit program\n" +
                 "     Note: Currently, Slave can only read date in the form 'DD/MM/YYYY HHMM'\n" +
                 "     (E.g. 2/1/2020 1254 will be read as 2nd of January 2020 12.54pm)";
@@ -43,6 +43,12 @@ public class Ui {
 
     public String readCommand(){
         return scanner.nextLine();
+    }
+
+    public void printClearCommand(){
+        Formatter.printLine();
+        System.out.println(Formatter.indentLine("Clearing List..."));
+        Formatter.printLine();
     }
 
     public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList){

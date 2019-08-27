@@ -24,6 +24,15 @@ public class Storage{
         this.file = new File(filePath);
     }
 
+    public void clearStorage() throws NoStorageFileDetectedException {
+        try {
+            PrintWriter writer = new PrintWriter(this.file);
+            writer.close();
+        } catch ( FileNotFoundException e ) {
+            throw new NoStorageFileDetectedException();
+        }
+    }
+
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList;
         try {

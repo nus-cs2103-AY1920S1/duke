@@ -52,6 +52,11 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public void clearList() throws DukeException {
+        this.taskList.clear();
+        this.storage.clearStorage();
+    }
+
     private void reorderIndex(int index){
         if (this.taskList.size() == 0){
             return;

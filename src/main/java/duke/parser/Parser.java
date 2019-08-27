@@ -117,6 +117,35 @@ public class Parser {
                     }
                 }
             };
+        case "find":
+            return new Command() {
+                public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+                    try {
+                        String keyword = inputs[1];
+                        TaskList matchingTasks = new TaskList();
+
+                        for (Task task : tasks) {
+                            if (task.description.matches(keyword)) {
+                                matchingTasks.add(task);
+                            }
+                        }
+
+                        if (matchingTasks.size() == 0) {
+                            throw new DukeException("Oops! There is no matching task.");
+                        }
+
+                        ui.printLine("Here are the matching tasks in your list:");
+
+                        int index = 1;
+                        for (Task task : tasks) {
+                            ui.printLine(String.format("%d.%s\n", index, task));
+                            index++;
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("Oops! I don't know what to search for.");
+                    }
+                }
+            };
         case "bye":
             return new Command() {
                 public void execute(TaskList tasks, Ui ui, Storage storage) {

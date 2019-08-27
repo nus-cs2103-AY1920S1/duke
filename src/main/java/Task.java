@@ -35,6 +35,9 @@ public class Task {
         // taken from partial soln tq prof
         return (isDone ? "\u2713" : "\u2718");
     }
+    public boolean getDone() {
+        return isDone;
+    }
     public String getType() {
         /**
          *  getter of task type

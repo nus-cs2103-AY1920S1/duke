@@ -51,9 +51,9 @@ public class Duke {
                 }
             }
         } catch (UiException e) {
-
+            // Exception within UI, possibly signalling a termination of the UI.
         } catch (AbortException e) {
-
+            // Abort exception, signalling that the user wants to terminate the program.
         }
     }
 }

@@ -1,16 +1,27 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
+    private Storage storage;
+    private TaskList taskList;
 
-    public static void main(String[] args) {
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-        String timeDate = "01/01/2019 0900";
-        LocalDateTime localDate1 = LocalDateTime.parse(timeDate, formatter1);
-//        LocalDateTime localDate2 = LocalDateTime.parse(timeDate, formatter2);
-        String localDate2 = localDate1.format(formatter2);
-        System.out.println(localDate1);
-        System.out.println(localDate2);
+
+    @Test
+    public void TaskListTest() {
+        taskList = new TaskList();
+        Task task = new Todo("task1");
+        taskList.addTask(task);
+        assertEquals(task, taskList.getTaskList().get(0));
+        taskList.addTask(new Todo("task2"));
+        assertEquals(2, taskList.size());
+    }
+
+    @Test
+    public void ExitTest() {
+        Command c = new ExitCommand();
+        assertEquals(true, c.isExit());
     }
 }

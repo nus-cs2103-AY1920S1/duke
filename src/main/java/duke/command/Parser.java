@@ -7,7 +7,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

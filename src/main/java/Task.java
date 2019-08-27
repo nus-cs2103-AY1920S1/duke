@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Task {
     private String description;
     private boolean isDone = false;
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static Database db = new Database("./data/duke.txt");
+    private static ArrayList<Task> taskList = db.load();
 
     public Task(String description) {
         this.description = description;
@@ -17,8 +18,12 @@ public class Task {
         }
     }
 
-    private void markAsDone() {
+    protected void markAsDone() {
         this.isDone = true;
+    }
+
+    public String toDataString() {
+        return (this.isDone ? 1 : 0) + " | " + this.description;
     }
 
     @Override
@@ -26,7 +31,11 @@ public class Task {
         return this.getStatusIcon() + this.description;
     }
 
-    public static void addNewTask(Task task) {
+    private static void updateDatabase() throws DukeException {
+        db.store(taskList);
+    }
+
+    public static void addNewTask(Task task) throws DukeException {
         taskList.add(task);
         Console.print("Got it! I've added this task:");
         Console.print(task.toString());
@@ -35,16 +44,18 @@ public class Task {
         } else {
             Console.print("Now you have " + taskList.size() + " tasks in the list!");
         }
+        updateDatabase();
     }
 
-    public static void doTask(int index) {
+    public static void doTask(int index) throws DukeException {
         Task task = taskList.get(index - 1);
         task.markAsDone();
         Console.print("Nice! I've marked this task as done:");
         Console.print(task.toString());
+        updateDatabase();
     }
 
-    public static void deleteTask(int index) {
+    public static void deleteTask(int index) throws DukeException {
         Task task = taskList.remove(index - 1);
         Console.print("Noted! I've removed this task:");
         Console.print(task.toString());
@@ -53,6 +64,7 @@ public class Task {
         } else {
             Console.print("Now you have " + taskList.size() + " tasks in the list!");
         }
+        updateDatabase();
     }
 
     public static void printList() {

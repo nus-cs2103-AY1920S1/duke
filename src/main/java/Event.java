@@ -9,7 +9,8 @@ public class Event extends Task {
     public Event(String name, String eT) throws DukeException{
         super(name);
         this.eventTime = eT;
-        formatEventTime(eT);
+        this.dateTime = formatDateTime(eT.substring(2).trim());
+
     }
     public void formatEventTime(String eT) throws DukeException {
         String format = eT.substring(0,2) + ":" + eT.substring(2);

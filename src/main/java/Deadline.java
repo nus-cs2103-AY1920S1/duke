@@ -9,30 +9,12 @@ public class Deadline extends Task   {
     public Deadline(String name, String dT) throws DukeException{
         super(name);
         this.deadlineTime = dT;
-        formatDeadlineTime(dT);
+        this.dateTime = formatDateTime(dT.substring(3).trim());
     }
 
     public String toString() {
-<<<<<<< HEAD
-        return "D|" + super.toString().trim() + "|" + deadlineTime.trim();
-
-    }
-
-    public void formatDeadlineTime(String dT) throws DukeException {
-        System.out.println(dT);
-        String format = dT.substring(0,2) + ":" + dT.substring(2);
-        this.deadlineTime = format;
-        System.out.println(dT.substring(2).trim());
-       //this.dateTime = formatDateTime(dT.substring(2).trim());
-=======
         return "D|" + super.toString().trim() + "|" + dateTime.trim();
-    }
 
-    public void formatDeadlineTime(String dT) throws DukeException {
-        String format = dT.substring(0,2) + ":" + dT.substring(2);
-        this.deadlineTime = format;
-        this.dateTime = formatDateTime(dT.substring(2).trim());
->>>>>>> master
     }
 
 

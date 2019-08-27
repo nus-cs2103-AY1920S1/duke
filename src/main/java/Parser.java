@@ -10,8 +10,8 @@ public class Parser {
                 throw new DeadlineDetailsEmptyException("OOPS!!! Deadline details cannot be empty");
             }
             t.addTask(deadline);
-            s.writeListToFile(t);
             ui.showAdded();
+            s.writeListToFile(t);
             System.out.println(deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.inputWrong();
@@ -29,8 +29,8 @@ public class Parser {
                 throw new EventDetailsEmptyException("OOPS!!! Event details cannot be empty.");
             }
             t.addTask(event);
-            s.writeListToFile(t);
             ui.showAdded();
+            s.writeListToFile(t);
             System.out.println(event);
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.inputWrong();
@@ -43,8 +43,8 @@ public class Parser {
         }
         ToDo todo = new ToDo(input.substring(5));
         t.addTask(todo);
-        s.writeListToFile(t);
         ui.showAdded();
+        s.writeListToFile(t);
         System.out.println(todo);
     }
 

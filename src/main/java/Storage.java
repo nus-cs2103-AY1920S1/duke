@@ -34,6 +34,7 @@ public class Storage {
                         break;
                     case "D" :
                         task = new Deadline(taskDetails[2].trim(), taskDetails[3].trim());
+                        //System.out.println(task);
                         setDoneFlag(task, taskDetails[1].trim());
                         break;
                     case "E" :
@@ -73,6 +74,7 @@ public class Storage {
         }
         writeStringToFile(sb.toString().trim());
     }
+
     public void writeStringToFile(String text) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner);

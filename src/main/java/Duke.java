@@ -17,7 +17,7 @@ public class Duke {
     public static void main(String[] args) {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         try {
-            new Duke("data.txt", tasks).run();
+            new Duke("storage.txt", tasks).run();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

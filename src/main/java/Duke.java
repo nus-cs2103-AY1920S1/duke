@@ -1,22 +1,18 @@
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
 
 public class Duke {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskList = new ArrayList<>();
-        initiateTaskFile();
+
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
         System.out.println("___________________________________");
         System.out.println("Hello! I'm Duke\nWhat can i do for you?");
         System.out.println("___________________________________");
@@ -49,7 +45,6 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(currentTask);
                 System.out.println("___________________________________");
-                updateTaskToFile(taskList);
             } else if (inputCommand.equals("todo")) {
                 try {
                     if (inputString.length() == 4 || inputString.length() == 5) {
@@ -62,7 +57,6 @@ public class Duke {
                     System.out.println("Got it. I've added this task:\n" + newTask);
                     System.out.println("Now you have " + Task.total + " tasks in the list.");
                     System.out.println("___________________________________");
-                    writeToFile(newTask + "\n");
                 } catch (Exception e) {
                     System.out.println("___________________________________");
                     System.out.println(e);
@@ -81,7 +75,6 @@ public class Duke {
                     System.out.println("Got it. I've added this task:\n" + newTask);
                     System.out.println("Now you have " + Task.total + " tasks in the list.");
                     System.out.println("___________________________________");
-                    writeToFile(newTask + "\n");
                 } catch (Exception e) {
                     System.out.println("___________________________________");
                     System.out.println(e);
@@ -100,7 +93,6 @@ public class Duke {
                     System.out.println("Got it. I've added this task:\n" + newTask);
                     System.out.println("Now you have " + Task.total + " tasks in the list.");
                     System.out.println("___________________________________");
-                    writeToFile(newTask + "\n");
                 } catch (Exception e) {
                     System.out.println("___________________________________");
                     System.out.println(e);
@@ -124,7 +116,6 @@ public class Duke {
                     Task.total--;
                     System.out.println("Now you have " + Task.total + " tasks in the list.");
                     System.out.println("___________________________________");
-                    updateTaskToFile(taskList);
                 } catch (Exception e) {
                     System.out.println("___________________________________");
                     System.out.println(e);
@@ -140,27 +131,5 @@ public class Duke {
                 }
             }
         }
-    }
-
-    private static void initiateTaskFile() throws IOException {
-        File dukeFile = new File("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt");
-        FileWriter fw = new FileWriter(dukeFile);
-        Scanner s = new Scanner(dukeFile);
-        Scanner sc = new Scanner(System.in);
-        fw.close();
-    }
-
-    private static void writeToFile(String inputString) throws IOException {
-        FileWriter fw = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt", true);
-        fw.write(inputString);
-        fw.close();
-    }
-
-    private static void updateTaskToFile(ArrayList<Task> inputTaskList) throws IOException {
-        FileWriter fileWriter = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt", false);
-        for (int i = 0; i < inputTaskList.size(); i++) {
-            fileWriter.write(inputTaskList.get(i) + System.getProperty("line.separator"));
-        }
-         fileWriter.close();
     }
 }

@@ -1,9 +1,20 @@
 package duke.command;
 
 import duke.exceptions.DukeException;
-import duke.task.*;
 
-import java.io.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 import java.util.ArrayList;
 
 public class Storage {
@@ -19,7 +30,7 @@ public class Storage {
 
     }
 
-    static String getFilePath() {
+    public String getFilePath() {
         return filePath;
     }
 
@@ -38,7 +49,7 @@ public class Storage {
                 System.out.println("File is created to save tasks.");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -94,9 +105,7 @@ public class Storage {
             bw.close();
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
-
-
 }

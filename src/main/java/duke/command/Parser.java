@@ -1,10 +1,16 @@
 package duke.command;
 
 import duke.exceptions.DukeIllegalDescriptionException;
-import duke.task.*;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 class Parser {
@@ -64,7 +70,7 @@ class Parser {
         System.out.println(TaskList.getList().get(num - 1));
         boolean isAppend = false;
         for (Task task : TaskList.getList()) {
-            storage.appendToFile(Storage.getFilePath(), task.toString(), isAppend);
+            storage.appendToFile(storage.getFilePath(), task.toString(), isAppend);
             if (!isAppend) {
                 isAppend = true;
             }
@@ -80,7 +86,7 @@ class Parser {
             ui.printAddTask();
             System.out.println(todo);
             ui.printCountTasks();
-            storage.appendToFile(Storage.getFilePath(), todo.toString(), true);
+            storage.appendToFile(storage.getFilePath(), todo.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(action[0]);
         }
@@ -99,7 +105,7 @@ class Parser {
             ui.printAddTask();
             System.out.println(deadline);
             ui.printCountTasks();
-            storage.appendToFile(Storage.getFilePath(), deadline.toString(), true);
+            storage.appendToFile(storage.getFilePath(), deadline.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(action[0]);
         } catch (ParseException e) {
@@ -126,7 +132,7 @@ class Parser {
             ui.printAddTask();
             System.out.println(event);
             ui.printCountTasks();
-            storage.appendToFile(Storage.getFilePath(), event.toString(), true);
+            storage.appendToFile(storage.getFilePath(), event.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(action[1]);
         } catch (ParseException e) {
@@ -144,7 +150,7 @@ class Parser {
         ui.printCountTasks();
         boolean isAppendDel = false;
         for (Task task : TaskList.getList()) {
-            storage.appendToFile(Storage.getFilePath(), task.toString(), isAppendDel);
+            storage.appendToFile(storage.getFilePath(), task.toString(), isAppendDel);
             if (!isAppendDel) {
                 isAppendDel = true;
             }

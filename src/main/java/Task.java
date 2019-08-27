@@ -4,8 +4,8 @@ public abstract class Task {
     private String icon;
 
     Task(String icon, String description) {
-        this.icon = icon;
-        this.description = description;
+        this.icon = icon.trim();
+        this.description = description.trim();
     }
 
     void markAsDone() {
@@ -25,11 +25,11 @@ public abstract class Task {
     }
 
     public String toSaveFormat() {
-        return String.format("%s|%d|%s", icon, isDone ? 1 : 0, getDescription());
+        return String.format("%s | %d | %s", getIcon(), isDone ? 1 : 0, getDescription());
     }
 
     @Override
     public String toString() {
-        return String.format("  [%s][%s]%s", getStatusIcon(), getDescription());
+        return String.format("  [%s][%s] %s", getIcon(), getStatusIcon(), getDescription());
     }
 }

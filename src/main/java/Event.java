@@ -14,6 +14,6 @@ public class Event extends DatedTask {
 
     @Override
     public String toString() {
-        return super.toString().concat(String.format("(at:%s)", getDateTime()));
+        return super.toString().concat(String.format(" (at: %s)", getDateTime()));
     }
 }

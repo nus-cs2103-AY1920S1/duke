@@ -45,13 +45,22 @@ public class Ui {
     public void showAddedTask(String task, int lstSize) {
         printStandard("Got it. I've added this task:");
         printStandard(task);
-        printStandard(String.format("Now you have %d tasks in the list.", lstSize));
+        showTaskSize(lstSize);
     }
 
     public void showDeletedTask(String task, int lstSize) {
         printStandard("Noted. I've removed this task:");
         printStandard(task);
-        printStandard(String.format("Now you have %d tasks in the list.", lstSize));
+        showTaskSize(lstSize);
+    }
+
+    public void showDoneTask(String task) {
+        printStandard("Nice! I've marked this task as done:");
+        printStandard(task);
+    }
+
+    private void showTaskSize(int size) {
+        printStandard(String.format("Now you have %d tasks in the list.", size));
     }
 
     public void showAllTasks(LinkedList<String> taskLst) {

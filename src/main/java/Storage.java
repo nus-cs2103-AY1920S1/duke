@@ -15,17 +15,17 @@ public class Storage {
     public LinkedList<String> load() throws DukeException {
         LinkedList<String> lst = new LinkedList<>();
 
-        try (Scanner fs = new Scanner(file)) {
-
+        try {
+            Scanner fs = new Scanner(file);
             while (fs.hasNext()) {
                 String next = fs.nextLine();
                 lst.addLast(next);
             }
-        } catch (FileNotFoundException e) {
-            throw new DukeException("");
+        } catch (Exception e) {
+//            e.printStackTrace();
+            file.getParentFile().mkdir();
+            throw new DukeException("File not found");
         }
-
-        file.getParentFile().mkdir();
 
         return lst;
     }
@@ -36,10 +36,9 @@ public class Storage {
             for (String task : lst) {
                 fw.write(task + System.lineSeparator());
             }
-
             fw.close();
-        } catch (IOException e) {
-            throw new DukeException("");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

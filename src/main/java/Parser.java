@@ -10,16 +10,13 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "done":
-                return new DoneCommand();
+                return new DoneCommand(next);
             case "deadline":
-                return new AddCommand() {
-                };
+                return new DeadlineCommand(next);
             case "event":
-                return new AddCommand() {
-                };
+                return new EventCommand(next);
             case "todo":
-                return new AddCommand() {
-                };
+                return new TodoCommand(next);
             case "delete":
                 return new DeleteCommand(next);
             default:

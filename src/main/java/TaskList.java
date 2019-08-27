@@ -3,12 +3,12 @@ import java.util.LinkedList;
 public class TaskList {
     private LinkedList<Task> lst;
 
-    public TaskList(LinkedList<String> list) {
+    public TaskList(LinkedList<String> list) throws DukeException {
         lst = new LinkedList<>();
         for (String s : list) {
-            String[] arr = s.split("/");
-            String task = arr[0];
-            int done = Integer.parseInt(arr[1]);
+            String[] arr = s.split("\\|");
+            String task = arr[0].trim();
+            int done = Integer.parseInt(arr[1].trim());
             String desc = arr[2];
             switch (task) {
                 case "D":
@@ -45,22 +45,27 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-
+        lst.addLast(task);
     }
 
-    public Task deleteTask(int index) {
-        return lst.remove(index);
+    public String deleteTask(int index) {
+        return lst.remove(index).toString();
+    }
+
+    public String doneTask(int index) {
+        Task task = lst.get(index);
+        task.markAsDone();
+        return task.toString();
     }
 
     public LinkedList<String> tasksToStringList(boolean isSaveFormat) {
         LinkedList<String> stringLst = new LinkedList<>();
-        int i = 0;
+        int i = 1;
         for (Task task : lst) {
             if (isSaveFormat) {
                 stringLst.addLast(task.toSaveFormat());
             } else {
-                stringLst.addLast(task.toSaveFormat());
-                stringLst.addLast(String.format("%d.%s", i, task));
+                stringLst.addLast(String.format("%d.%s", i, task.toString().trim()));
                 ++i;
             }
         }

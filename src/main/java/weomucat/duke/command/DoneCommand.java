@@ -6,7 +6,7 @@ import weomucat.duke.exception.InvalidParameterException;
 import java.util.HashMap;
 
 public abstract class DoneCommand implements Command {
-	private int i;
+	private int index;
 
 	@Override
 	public String[] getParameterOptions() {
@@ -14,12 +14,10 @@ public abstract class DoneCommand implements Command {
 	}
 
 	@Override
-	public void setParameters(HashMap<String, String> parameters) throws DukeException {
-		String index = parameters.get(PARAMETER_DEFAULT);
-
+	public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
 		// Get index of task
 		try {
-			this.i = Integer.parseInt(index) - 1;
+			this.index = Integer.parseInt(body) - 1;
 		} catch (NumberFormatException e) {
 			throw new InvalidParameterException("The index is not a valid number.");
 		}
@@ -27,7 +25,7 @@ public abstract class DoneCommand implements Command {
 
 	@Override
 	public void run() throws DukeException {
-		updateListeners(i);
+		updateListeners(this.index);
 	}
 
 	public abstract void updateListeners(int i) throws DukeException;

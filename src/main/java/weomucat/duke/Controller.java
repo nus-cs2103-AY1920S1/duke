@@ -121,7 +121,7 @@ public class Controller implements UserInputListener {
 		Parser parser = new Parser(userInput);
 
 		// Get the command of the user input.
-		String commandString = parser.nextCommand();
+		String commandString = parser.getCommand();
 
 		// Resolve the string command to a Command object.
 		Command command = commands.get(commandString);
@@ -135,10 +135,10 @@ public class Controller implements UserInputListener {
 		String[] parameterOptions = command.getParameterOptions();
 
 		// Parse the parameters from user input.
-		HashMap<String, String> parameters = parser.nextParameters(parameterOptions);
+		HashMap<String, String> parameters = parser.parseParameters(parameterOptions);
 
 		// Set the parameters to the Command object.
-		command.setParameters(parameters);
+		command.setParameters(parser.getBody(), parameters);
 
 		// Finally, run the command.
 		command.run();

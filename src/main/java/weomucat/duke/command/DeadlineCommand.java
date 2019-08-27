@@ -16,13 +16,13 @@ public abstract class DeadlineCommand implements Command {
 	}
 
 	@Override
-	public void setParameters(HashMap<String, String> parameters) {
-		description = parameters.get(PARAMETER_DEFAULT);
-		by = parameters.get(PARAMETER_BY);
+	public void setParameters(String body, HashMap<String, String> parameters) {
+		this.description = body;
+		this.by = parameters.get(PARAMETER_BY);
 	}
 
 	public void run() throws DukeException {
-		DeadlineTask task = new DeadlineTask(description, by);
+		DeadlineTask task = new DeadlineTask(this.description, this.by);
 		updateListeners(task);
 	}
 

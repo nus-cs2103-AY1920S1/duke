@@ -16,14 +16,14 @@ public abstract class EventCommand implements Command {
 	}
 
 	@Override
-	public void setParameters(HashMap<String, String> parameters) {
-		this.description = parameters.get(PARAMETER_DEFAULT);
+	public void setParameters(String body, HashMap<String, String> parameters) {
+		this.description = body;
 		this.at = parameters.get(PARAMETER_AT);
 	}
 
 	@Override
 	public void run() throws DukeException {
-		EventTask task = new EventTask(description, at);
+		EventTask task = new EventTask(this.description, this.at);
 		updateListeners(task);
 	}
 

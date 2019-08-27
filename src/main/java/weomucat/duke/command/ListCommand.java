@@ -11,7 +11,7 @@ public abstract class ListCommand implements Command {
 	}
 
 	@Override
-	public void setParameters(HashMap<String, String> parameters) throws DukeException {
+	public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
 
 	}
 

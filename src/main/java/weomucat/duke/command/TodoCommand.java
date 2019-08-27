@@ -15,13 +15,13 @@ public abstract class TodoCommand implements Command {
 	}
 
 	@Override
-	public void setParameters(HashMap<String, String> parameters) {
-		description = parameters.get(PARAMETER_DEFAULT);
+	public void setParameters(String body, HashMap<String, String> parameters) {
+		this.description = body;
 	}
 
 	@Override
 	public void run() throws DukeException {
-		TodoTask task = new TodoTask(description);
+		TodoTask task = new TodoTask(this.description);
 		updateListeners(task);
 	}
 

@@ -9,6 +9,10 @@ import java.nio.file.Paths;
 
 public class FileWriting {
     public static void writeToFile(ArrayList<Task> taskList) throws IOException {
+        File directory = new File("data");
+        if (! directory.exists()){
+            directory.mkdir();
+        }
         File tmp = new File("data/temp.txt");
         if(!tmp.createNewFile()){
             Files.delete(Paths.get("data/temp.txt"));

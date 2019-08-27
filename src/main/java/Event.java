@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    protected String at;
+    public String at;
     protected Date date;
 
     public Event(String description, String at) {

@@ -27,8 +27,8 @@ public class ModifyTaskList {
         }
         if (action == Duke.Action.DONE){
             try {
-                ui.taskDone(taskList, taskNumber);
                 taskList.get(taskNumber).setDone();
+                ui.taskDone(taskList, taskNumber);
                 FileWriting.writeToFile(taskList);
             }
             catch (IndexOutOfBoundsException | IOException err){

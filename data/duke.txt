@@ -1,0 +1,4 @@
+T, 0, read book
+D, 0, hello, Mon Dec 02 22:34:00 SGT 2019
+D, 0, read, Thu Dec 12 23:59:00 SGT 2019
+E, 1, yoyo, Tue Feb 12 23:43:00 SGT 2019

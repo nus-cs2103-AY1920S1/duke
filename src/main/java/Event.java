@@ -1,13 +1,19 @@
-public class Event extends Task {
-    protected String at;
+import java.util.Date;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    protected Date at;
+
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
 
+    public Date getAt() {
+        return at;
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }

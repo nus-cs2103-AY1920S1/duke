@@ -1,14 +1,13 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Storage storage = new Storage("CurrentTaskList.txt");
-        ArrayList<Task> taskList = storage.loadSavedList();
+        TaskList taskList = new TaskList(storage.loadSavedList());
 
         while (true) {
             try {
@@ -18,42 +17,15 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
                 } else if (instruction.equals("list")) { // Then, check if 'list' is called
-                    if (taskList.size() == 0) { // if 'list' is called with no tasks currently stored
-                        throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-                    }
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println((i + 1) + ". " + taskList.get(i));
-                    }
+                    taskList.printList();
                 } else if (instruction.equals("done")) { // Then, check if task is marked done
-                    if (taskList.size() == 0) { // if 'list' is empty, 'done' cannot be called
-                        throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-                    }
-                    try {
-                        int index = Integer.parseInt(input.split(" ", 2)[1]);
-                        taskList.get(index - 1).markAsDone();
-                        System.out.println("Nice! I've marked this task as done:\n  " + taskList.get(index - 1));
-                        storage.writeSavedList(taskList);
-                    } catch (NumberFormatException e) { // if not a number is entered after 'done'
-                        throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'done'!");
-                    } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'done'
-                        throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
-                    }
+                    int index = Integer.parseInt(input.split(" ", 2)[1]);
+                    taskList.markElementAsDone(index);
+                    storage.writeSavedList(taskList.getList());
                 } else if (instruction.equals("delete")) { // Then, check if task is marked delete
-                    if (taskList.size() == 0) { // if 'list' is empty, 'delete' cannot be called
-                        throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-                    }
-                    try {
-                        int index = Integer.parseInt(input.split(" ", 2)[1]);
-                        Task currentTask = taskList.remove(index - 1);
-                        System.out.println("Noted. I've removed this task:\n  " + currentTask);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                        storage.writeSavedList(taskList);
-                    } catch (NumberFormatException e) { // if not a number is entered after 'delete'
-                        throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
-                    } catch (IndexOutOfBoundsException e) { // if an invalid number is entered after 'delete'
-                        throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
-                    }
+                    int index = Integer.parseInt(input.split(" ", 2)[1]);
+                    taskList.deleteElement(index);
+                    storage.writeSavedList(taskList.getList());
                 } else if (instruction.equals("todo") || instruction.equals("deadline") || instruction.equals("event")) {
                     try {
                         if (instruction.equals("todo")) {
@@ -61,10 +33,8 @@ public class Duke {
                             if (taskContent.matches("\\s*")) { // if the task's description is only whitespace
                                 throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
                             }
-                            Task currentTask = new ToDoTask((taskContent));
-                            taskList.add(currentTask);
-                            storage.writeSavedList(taskList);
-                            System.out.println("Got it. I've added this task:\n  " + currentTask);
+                            taskList.createToDo(taskContent);
+                            storage.writeSavedList(taskList.getList());
                         } else {
                             String taskDescription = input.split("deadline|event", 2)[1];
                             if (!(taskDescription.contains(" /by ") || taskDescription.contains(" /at "))) { // if '/by' and '/at' are absent
@@ -78,24 +48,18 @@ public class Duke {
                                     Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
                             if (taskContent.matches("\\s*")) { // if the task's description is only whitespace
                                 throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
-                            } /* else if (taskTime.matches("\\s*")) { // if the task's time listed is only whitespace
-                                throw new EmptyTaskTimeException("OOPS!!! Please include a time for your task!");
-                            }*/
-                            if (instruction.equals("deadline")) {
-                                Task currentTask = new DeadlineTask(taskContent, taskTime);
-                                taskList.add(currentTask);
-                                System.out.println("Got it. I've added this task:\n  " + currentTask);
-                            } else {
-                                Task currentTask = new EventTask(taskContent, taskTime);
-                                taskList.add(currentTask);
-                                System.out.println("Got it. I've added this task:\n  " + currentTask);
                             }
-                            storage.writeSavedList(taskList);
+                            if (instruction.equals("deadline")) {
+                                taskList.createDeadline(taskContent, taskTime);
+                            } else {
+                                taskList.createEvent(taskContent, taskTime);
+                            }
+                            storage.writeSavedList(taskList.getList());
                         }
                     } catch (IndexOutOfBoundsException e) { // if the task description is empty
                         throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
                     }
-                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
                 } else { // if an invalid instruction is entered
                     throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

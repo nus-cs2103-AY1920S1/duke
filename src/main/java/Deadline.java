@@ -5,6 +5,10 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+    protected Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
 
     @Override
     public String toSaveFormat() {

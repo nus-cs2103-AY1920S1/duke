@@ -5,6 +5,10 @@ public class Task {
     protected Task(String description) {
         this.description = description;
     }
+    protected Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
 
     protected void markAsDone() {
         this.isDone = true;

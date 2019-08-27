@@ -11,7 +11,7 @@ public class EventTask extends Task {
 
     public EventTask(String description, String timing) throws DukeInvalidArgumentException {
         super(description, timing);
-        this.taskType = TaskType.event;
+        this.taskType = TaskType.EVENT;
         initDates(timing);
     }
 

@@ -9,7 +9,7 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String description, String deadlineDate) throws DukeInvalidArgumentException {
         super(description, deadlineDate);
-        this.taskType = TaskType.deadline;
+        this.taskType = TaskType.DEADLINE;
         initDates(deadlineDate);
     }
 

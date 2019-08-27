@@ -12,7 +12,7 @@ import java.util.Arrays;
 class EventCommand extends AddTaskCommand {
     public EventCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.event;
+        commandType = Commands.EVENT;
     }
 
     @Override

@@ -39,7 +39,7 @@ class Duke {
                 Command command = CommandParser.parseCommand(input);
                 command.execute(tasks, ui, storage);
 
-                if (command.commandType == Commands.bye) {
+                if (command.commandType == Commands.BYE) {
                     break;
                 }
             } catch (DukeExceptions ex) {

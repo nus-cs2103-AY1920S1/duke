@@ -10,7 +10,7 @@ class DeleteCommand extends WritableCommand {
 
     public DeleteCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.delete;
+        commandType = Commands.DELETE;
     }
 
     @Override

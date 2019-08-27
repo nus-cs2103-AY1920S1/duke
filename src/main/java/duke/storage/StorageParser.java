@@ -31,7 +31,8 @@ abstract class StorageParser {
             case '}':
                 isKey = true;
                 try {
-                    StorageKey key = StorageKey.valueOf(currentKey.toString().trim());
+                    StorageKey key = StorageKey.valueOf(
+                            currentKey.toString().toUpperCase().trim());
                     lineMap.put(key, currentValue.toString().trim());
                     currentKey = new StringBuilder();
                     currentValue = new StringBuilder();

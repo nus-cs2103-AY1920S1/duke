@@ -15,16 +15,16 @@ class StorageParserTest {
     void parseJsonLine() {
         String testCase1 = "{ type: deadline, done: false, description: 2103ip, time: 01/12/1997 0000 }";
         Map<StorageKey, String> testCase1Expected = new EnumMap<StorageKey, String>(StorageKey.class);
-        testCase1Expected.put(StorageKey.type, "deadline");
-        testCase1Expected.put(StorageKey.done, "false");
-        testCase1Expected.put(StorageKey.description, "2103ip");
-        testCase1Expected.put(StorageKey.time, "01/12/1997 0000");
+        testCase1Expected.put(StorageKey.TYPE, "deadline");
+        testCase1Expected.put(StorageKey.DONE, "false");
+        testCase1Expected.put(StorageKey.DESCRIPTION, "2103ip");
+        testCase1Expected.put(StorageKey.TIME, "01/12/1997 0000");
 
         String testCase2 = "{ type: todo, done: true, description: --129n8sk }";
         Map<StorageKey, String> testCase2Expected = new EnumMap<StorageKey, String>(StorageKey.class);
-        testCase2Expected.put(StorageKey.type, "todo");
-        testCase2Expected.put(StorageKey.done, "true");
-        testCase2Expected.put(StorageKey.description, "--129n8sk");
+        testCase2Expected.put(StorageKey.TYPE, "todo");
+        testCase2Expected.put(StorageKey.DONE, "true");
+        testCase2Expected.put(StorageKey.DESCRIPTION, "--129n8sk");
 
         String testCase3 = "}";
         String testCase4 = "{ type: todo, invalidkey: true, description: placeholder description }";

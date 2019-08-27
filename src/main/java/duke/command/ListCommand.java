@@ -8,7 +8,7 @@ import duke.task.Task;
 class ListCommand extends Command {
     public ListCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.list;
+        commandType = Commands.LIST;
     }
 
     @Override

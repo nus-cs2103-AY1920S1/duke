@@ -1,8 +1,18 @@
 package duke.storage;
 
 enum StorageKey {
-    type,
-    done,
-    description,
-    time
+    TYPE,
+    DONE,
+    DESCRIPTION,
+    TIME;
+
+    /**
+     * Overrride implementation of toString that returns the lower case version.
+     *
+     * @return Lower case string representation of enum.
+     */
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
 }

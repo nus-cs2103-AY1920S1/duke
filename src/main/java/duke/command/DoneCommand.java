@@ -10,7 +10,7 @@ class DoneCommand extends WritableCommand {
 
     public DoneCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.done;
+        commandType = Commands.DONE;
     }
 
     @Override

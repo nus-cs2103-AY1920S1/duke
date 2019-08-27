@@ -7,7 +7,7 @@ import duke.ui.Ui;
 class ByeCommand extends Command {
     public ByeCommand(String[] args) {
         super(args);
-        commandType = Commands.bye;
+        commandType = Commands.BYE;
     }
 
     @Override

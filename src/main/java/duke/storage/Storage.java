@@ -68,21 +68,21 @@ public class Storage {
             try {
                 inputs = StorageParser.parseJsonLine(input);
 
-                taskType = getTaskType(inputs.get(StorageKey.type));
-                isTaskDone = getDoneStatus(inputs.get(StorageKey.done));
-                taskDescription = getDescription(inputs.get(StorageKey.description));
-                taskTiming = inputs.get(StorageKey.time);
+                taskType = getTaskType(inputs.get(StorageKey.TYPE));
+                isTaskDone = getDoneStatus(inputs.get(StorageKey.DONE));
+                taskDescription = getDescription(inputs.get(StorageKey.DESCRIPTION));
+                taskTiming = inputs.get(StorageKey.TIME);
 
                 Task taskToAdd;
 
                 switch (taskType) {
-                case todo:
+                case TODO:
                     taskToAdd = new TodoTask(taskDescription);
                     break;
-                case deadline:
+                case DEADLINE:
                     taskToAdd = new DeadlineTask(taskDescription, taskTiming);
                     break;
-                case event:
+                case EVENT:
                     taskToAdd = new EventTask(taskDescription, taskTiming);
                     break;
                 default:
@@ -109,16 +109,16 @@ public class Storage {
             for (Task task : tasks.getAllTasks()) {
                 String jsonLineStart = String.format(
                         "{ %s: %s, %s: %s, %s: %s",
-                        StorageKey.type.toString(), task.getTaskType().toString(),
-                        StorageKey.done.toString(), ((Boolean) task.isDone()).toString(),
-                        StorageKey.description.toString(), task.getDescription());
+                        StorageKey.TYPE.toString(), task.getTaskType().toString(),
+                        StorageKey.DONE.toString(), ((Boolean) task.isDone()).toString(),
+                        StorageKey.DESCRIPTION.toString(), task.getDescription());
 
                 fileWriter.write(jsonLineStart);
 
                 if (task.getTiming() != null) {
                     fileWriter.write(
                             String.format(", %s: %s",
-                                    StorageKey.time.toString(),
+                                    StorageKey.TIME.toString(),
                                     task.getTiming()));
                 }
 
@@ -134,7 +134,7 @@ public class Storage {
 
     private TaskType getTaskType(String input) throws DukeTaskFileParseException {
         try {
-            return TaskType.valueOf(input);
+            return TaskType.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",

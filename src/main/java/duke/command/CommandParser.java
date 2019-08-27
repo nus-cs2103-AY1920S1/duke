@@ -15,7 +15,7 @@ public abstract class CommandParser {
         Command command = null;
 
         try {
-            commandType = Commands.valueOf(inputs[0]);
+            commandType = Commands.valueOf(inputs[0].toUpperCase());
             inputs = Arrays.copyOfRange(inputs, 1, inputs.length);
         } catch (IllegalArgumentException | IndexOutOfBoundsException ex) {
             throw new DukeInvalidCommandException(
@@ -23,25 +23,25 @@ public abstract class CommandParser {
         }
 
         switch (commandType) {
-        case bye:
+        case BYE:
             command = new ByeCommand(inputs);
             break;
-        case list:
+        case LIST:
             command = new ListCommand(inputs);
             break;
-        case done:
+        case DONE:
             command = new DoneCommand(inputs);
             break;
-        case delete:
+        case DELETE:
             command = new DeleteCommand(inputs);
             break;
-        case todo:
+        case TODO:
             command = new TodoCommand(inputs);
             break;
-        case deadline:
+        case DEADLINE:
             command = new DeadlineCommand(inputs);
             break;
-        case event:
+        case EVENT:
             command = new EventCommand(inputs);
             break;
         default:

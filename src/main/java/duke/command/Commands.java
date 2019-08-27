@@ -1,11 +1,11 @@
 package duke.command;
 
 public enum Commands {
-    list,
-    bye,
-    done,
-    delete,
-    todo,
-    deadline,
-    event
+    LIST,
+    BYE,
+    DONE,
+    DELETE,
+    TODO,
+    DEADLINE,
+    EVENT
 }

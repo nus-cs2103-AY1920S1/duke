@@ -1,7 +1,17 @@
 package duke.task;
 
 public enum TaskType {
-    todo,
-    deadline,
-    event
+    TODO,
+    DEADLINE,
+    EVENT;
+
+    /**
+     * Overrride implementation of toString that returns the lower case version.
+     *
+     * @return Lower case string representation of enum.
+     */
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
 }

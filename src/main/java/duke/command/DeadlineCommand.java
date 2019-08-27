@@ -12,7 +12,7 @@ import java.util.Arrays;
 class DeadlineCommand extends AddTaskCommand {
     public DeadlineCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.deadline;
+        commandType = Commands.DEADLINE;
     }
 
     @Override

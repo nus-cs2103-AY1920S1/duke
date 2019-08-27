@@ -1,16 +1,37 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static int pointer = 0;
+    private static int pointer;
     private static final String border = "____________________________________________________________";
     private static final String upperBorder = border + "\n\n";
     private static final String lowerBorder = border + "\n";
-    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static ArrayList<Task> taskList;
+    private static String savedPath = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
+    private static Storage storageHandler;
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        try {
+            storageHandler = new Storage(savedPath);
+            taskList = storageHandler.loadFromFile();
+        } catch (IOException ex) {
+            System.out.println("OOPS!!! Something went wrong with the storage.");
+        } catch (DukeException ex) {
+            System.out.println("It seems your file is corrupted. Do you want to wipe the file? Y/N");
+            String toWipe = sc.next();
+            if (toWipe.equalsIgnoreCase("y")) {
+                taskList = new ArrayList<>();
+                System.out.println("Alright! The file has been wiped!");
+            } else if (toWipe.equalsIgnoreCase("n")) {
+                taskList = new ArrayList<>();
+                System.out.println("Naw, it doesn't work like that. I'm still wiping your file!");
+            }
+        }
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,6 +40,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\n"
                 + upperBorder + "Hello! I'm Duke\n" + "What can I do for you?\n" + lowerBorder);
+
+        pointer = taskList.size();
 
         while (true) {
             try {
@@ -57,6 +80,11 @@ public class Duke {
         }
 
         System.out.println(upperBorder + "Bye. Hope to see you again soon!\n" + lowerBorder);
+        try {
+            storageHandler.writeToFile(taskList);
+        } catch (IOException ex) {
+            System.out.println("Your file could not be written. :(");
+        }
 
         sc.close();
 

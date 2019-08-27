@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗"); //return tick or X symbols
+        return (isDone ? "+" : "-"); //return + for done and nothing for not done
     }
 
     public void setDone() {

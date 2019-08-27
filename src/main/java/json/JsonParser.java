@@ -14,11 +14,11 @@ public class JsonParser {
 		try {
 			int c = this.reader.read();
 			if(c == -1) {
-				throw new ParserException("Unexpected end of input");
+				throw new JsonException("Unexpected end of input");
 			}
 			return (char) c;
 		} catch(IOException e) {
-			throw new ParserException("Unexpected end of input", e);
+			throw new JsonException("Unexpected IO error", e);
 		}
 	}
 
@@ -26,7 +26,7 @@ public class JsonParser {
 		try {
 			this.reader.unread(c);
 		} catch(IOException e) {
-			throw new ParserException("Unable to pushback character, this should not happen!", e);
+			throw new JsonException("Unable to pushback character, this should not happen!", e);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class JsonParser {
 			switch(first) {
 				case '"':
 					if(commaState == CommaState.ReadElement) {
-						throw new ParserException("Missing comma between fields");
+						throw new JsonException("Missing comma between fields");
 					}
 					String fieldName = this.readString();
 					this.eatWhitespace();
@@ -68,18 +68,18 @@ public class JsonParser {
 					break;
 				case ',':
 					if(commaState != CommaState.ReadElement) {
-						throw new ParserException("Extra commas in object");
+						throw new JsonException("Extra commas in object");
 					}
 					commaState = CommaState.ReadComma;
 					break;
 				case '}':
 					if(commaState == CommaState.ReadComma) {
-						throw new ParserException("Extra commas in object");
+						throw new JsonException("Extra commas in object");
 					}
 					reachedEnd = true;
 					break;
 				default:
-					throw new ParserException("Unknown character when reading object");
+					throw new JsonException("Unknown character when reading object");
 			}
 		}
 		return handler.handleEnd();
@@ -93,13 +93,13 @@ public class JsonParser {
 			switch(first) {
 			case ',':
 				if(commaState != CommaState.ReadElement) {
-					throw new ParserException("Extra commas in array");
+					throw new JsonException("Extra commas in array");
 				}
 				commaState = CommaState.ReadComma;
 				break;
 			case ']':
 				if(commaState == CommaState.ReadComma) {
-					throw new ParserException("Extra commas in array");
+					throw new JsonException("Extra commas in array");
 				}
 				reachedEnd = true;
 				break;
@@ -145,11 +145,11 @@ public class JsonParser {
 					int codePoint = Integer.parseInt(codeString, 16);
 					sb.append(Character.toChars(codePoint));
 				} catch(NumberFormatException e) {
-					throw new ParserException("Bad unicode escape %s", e, codeString);
+					throw new JsonException("Bad unicode escape %s", e, codeString);
 				}
 				break;
 			default:
-				throw new ParserException("Unknown escape %c", c);
+				throw new JsonException("Unknown escape %c", c);
 		}
 	}
 
@@ -194,7 +194,7 @@ public class JsonParser {
 		for(int i=0;i<target.length();i++) {
 			char c = this.next();
 			if(c != target.charAt(i)) {
-				throw new ParserException("Unexpected character %c, expected %c",c,target.charAt(i));
+				throw new JsonException("Unexpected character %c, expected %c",c,target.charAt(i));
 			}
 		}
 	}
@@ -221,7 +221,7 @@ public class JsonParser {
 			default:
 				//TODO: Avoid unicode points
 				if(!Character.isDigit(first)) {
-					throw new ParserException("Unknown character %c reading JSON value!", first);
+					throw new JsonException("Unknown character %c reading JSON value!", first);
 				}
 				this.unread(first);
 				return handler.handleNumber(this.readNumber());

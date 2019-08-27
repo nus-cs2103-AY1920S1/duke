@@ -1,28 +1,14 @@
-package duke;
+package duke.ui;
 
+import duke.DukeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Ui {
     private static final StringBuilder INDENT = new StringBuilder(" ".repeat(5));
-    private static final StringBuilder HORIZONTAL_LINE = new StringBuilder(INDENT + "_".repeat(50) + "\n");
     private StringBuilder content = new StringBuilder();
-
-    /**
-     * Read input each time the user type in.
-     * @return a string of the input
-     */
-    public String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        }
-
-        return null;
-    }
 
     /**
      * Add exception message to output string.
@@ -37,9 +23,10 @@ public class Ui {
      * Add greeting message to output string.
      */
     public void showGreeting() {
-        String greeting = "     Hello! I'm Duke\n"
-                + "     What can I do for you?";
-        System.out.println(greeting);
+        this.content.append(INDENT);
+        this.content.append("Hello! I'm Duke\n");
+        this.content.append(INDENT);
+        this.content.append("What can I do for you?");
     }
 
     /**
@@ -128,14 +115,14 @@ public class Ui {
     }
 
     /**
-     * Print the output string as a response to user.
+     * Convert the message to a string.
+     * @return a String containing all response displayed to user.
      */
-    public void print() {
+    @Override
+    public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append(HORIZONTAL_LINE);
         output.append(content);
-        output.append(HORIZONTAL_LINE);
-        System.out.print(output.toString());
         this.content = new StringBuilder();
+        return output.toString();
     }
 }

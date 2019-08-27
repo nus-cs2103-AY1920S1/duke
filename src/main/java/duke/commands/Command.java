@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DukeException;
 import duke.tasks.TaskList;
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 
 public abstract class Command {
     /**

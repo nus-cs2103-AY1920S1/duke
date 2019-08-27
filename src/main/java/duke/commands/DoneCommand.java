@@ -4,7 +4,7 @@ import duke.DukeException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     private int taskIndex;

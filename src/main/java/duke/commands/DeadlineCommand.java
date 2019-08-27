@@ -5,7 +5,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class DeadlineCommand extends Command {
     private String description;

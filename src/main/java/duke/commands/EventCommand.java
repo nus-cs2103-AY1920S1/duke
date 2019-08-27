@@ -5,7 +5,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class EventCommand extends Command {
     private String description;

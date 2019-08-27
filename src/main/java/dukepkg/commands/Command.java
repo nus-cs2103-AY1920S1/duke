@@ -4,7 +4,6 @@ import dukepkg.exceptions.FormatException;
 
 public abstract class Command {
 
-
     public static Command getModifyExistingTaskCommand(String[] arr) {
         int index = Integer.parseInt(arr[1]) - 1;
         if(arr[0].equals("done")) {

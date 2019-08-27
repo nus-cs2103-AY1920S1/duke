@@ -2,8 +2,6 @@ import dukepkg.*;
 import dukepkg.commands.Command;
 import dukepkg.exceptions.DukeException;
 
-import java.util.Scanner;
-
 public class Duke {
     private static Storage storage;
     private static Ui ui;

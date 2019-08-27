@@ -2,7 +2,6 @@ package dukepkg.commands;
 
 import dukepkg.Storage;
 
-import dukepkg.Task;
 import dukepkg.TaskList;
 import dukepkg.Ui;
 

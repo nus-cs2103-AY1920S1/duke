@@ -12,16 +12,35 @@ import duke.task.Todo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Adds a Task of type Todo, Deadline or Event to the list.
+ */
 public class AddCommand extends Command {
     private String addType;
     private String userInput;
 
+    /**
+     * Initializes instance of AddCommand.
+     *
+     * @param addType Type of Task to be added.
+     * @param userInput Input entered by the user.
+     * @param inputSplit String array of user input split by spaces.
+     * @param filePath Path of save file on hard disk to be written to.
+     */
     public AddCommand(String addType, String userInput, String[] inputSplit, String filePath) {
         super(filePath, inputSplit);
         this.addType = addType;
         this.userInput = userInput;
     }
 
+    /**
+     * Adds Task of type Todo, Deadline or Event to the list.
+     *
+     * @param tasks List of Tasks to be added to.
+     * @param ui Ui class that handles printing to user interface.
+     * @param storage Storage class that handles writing to save file on hard disk.
+     * @throws DukeException If input has invalid format.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (addType) {

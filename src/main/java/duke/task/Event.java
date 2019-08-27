@@ -3,6 +3,13 @@ package duke.task;
 public class Event extends Task {
     private String eventPeriod;
 
+    /**
+     * Initializes an Event object.
+     *
+     * @param description Description of the Event.
+     * @param isDone Completion status of the Event task.
+     * @param eventPeriod Time when the Event occurs.
+     */
     public Event(String description, int isDone, String eventPeriod) {
         super(description, isDone);
         this.type = "E";

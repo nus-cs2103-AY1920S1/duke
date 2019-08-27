@@ -6,12 +6,23 @@ import duke.helper.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Deletes a Task from the list.
+ */
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String filePath, String[] inputSplit) {
         super(filePath, inputSplit);
     }
 
+    /**
+     * Deletes Task specified with its number in the list by the user.
+     *
+     * @param tasks List of Tasks to be deleted from.
+     * @param ui Ui class that handles printing to user interface.
+     * @param storage Storage class that handles writing to save file on hard disk.
+     * @throws DukeException If command has invalid format: not "delete" followed by a single integer.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

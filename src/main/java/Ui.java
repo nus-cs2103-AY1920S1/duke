@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 
+/**
+ * The class used handle user interaction and dialogue
+ */
+
 public class Ui {
 
-    public void ui() {
-
-    }
+    /**
+     * A basic welcome message. Prints the duke logo and greeting.
+     */
 
     public void greeting(){
         String logo = " ____        _        \n"
@@ -16,9 +20,17 @@ public class Ui {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
     }
 
+    /**
+     * A basic goodbye message. Prints the goodbye.
+     */
+
     public void goodbye(){
         System.out.println("Bye. Hope to see you again soon!");
     }
+
+    /**
+     * A basic message to indicate a Task has been added to the Task array list.
+     */
 
     public void taskAdded(ArrayList<Task> taskList){
         System.out.println("Got it. I've added this task:");
@@ -26,10 +38,18 @@ public class Ui {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.\n");
     }
 
+    /**
+     * A basic message to indicate a Task has been removed from the Task array list.
+     */
+
     public void taskRemoved(ArrayList<Task> taskList, int taskNumber){
         System.out.println("Noted. I've removed this task:\n" + taskList.get(taskNumber).toString());
         System.out.println("Now you have " + (taskList.size()-1) + " tasks in the list.\n");
     }
+
+    /**
+     * A basic message to indicate a Task has been set as 'done' in the Task array list.
+     */
 
     public void taskDone(ArrayList<Task> taskList, int taskNumber){
         System.out.println("Nice! I've marked this task as done:");

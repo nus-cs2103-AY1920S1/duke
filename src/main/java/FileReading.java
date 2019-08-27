@@ -4,7 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class used to check for existing file data and to load it into the Task array list
+ */
+
 public class FileReading {
+
+    /**
+     * Used to check for an existing 'data' directory and 'duke.txt' file.
+     * If not present, create the missing directory or file.
+     * If present, call the loadFile contents method.
+     *
+     * @param taskList  Used to store task object information.
+     * @throws IOException For cases where the file or directory could not
+     * be created due to permissions.
+     */
 
     public static void checkFileExists(ArrayList<Task> taskList) throws IOException {
         File directory = new File("data");
@@ -14,6 +28,14 @@ public class FileReading {
         File f = new File("data/duke.txt");
         if (!f.createNewFile()){loadFileContents(taskList, f);}
     }
+
+    /**
+     * Loads all the data from an existing 'duke.txt' into the task array list.
+     *
+     * @param taskList  Used to store task object information.
+     * @param f File path.
+     * @throws FileNotFoundException For cases where the method is called without a file present.
+     */
 
     public static void loadFileContents(ArrayList<Task> taskList, File f) throws FileNotFoundException {
         String fullLine;

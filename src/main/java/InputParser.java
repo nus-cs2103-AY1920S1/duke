@@ -1,14 +1,31 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The class used to handle the logic for user inputs
+ */
+
 public class InputParser {
 
     private ArrayList<Task> taskList;
     private ModifyTaskList modifyTaskList = new ModifyTaskList();
 
+    /**
+     * The constructor for the InputParser class.
+     * @param taskList  Used to store task object information.
+     */
+
     protected InputParser(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
+
+    /**
+     * Used to determine which method from the {@link ModifyTaskList} class to call
+     * depending on the first word from the input.
+     *
+     * @param input  The input from the user.
+     * @see ModifyTaskList
+     */
 
     protected void actionDeterminer (String input) throws IOException {
 

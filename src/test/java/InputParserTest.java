@@ -1,11 +1,18 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class to test the {@link InputParser} class
+ */
+
 public class InputParserTest {
 
+    /**
+     * Input in random strings to see which ones the {@link InputParser} class accepts
+     * and compare the number of total Tasks in the Task array list.
+     */
 
     @Test
     public void inputTest() throws IOException {

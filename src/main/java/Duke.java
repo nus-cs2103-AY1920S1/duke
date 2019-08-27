@@ -1,9 +1,15 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
-    public static void start() throws DukeException {
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+
+    public static void start() throws DukeException, ParseException {
         String input;
         int pos;
         ArrayList<Task> arr = new ArrayList<>();
@@ -65,7 +71,7 @@ public class Duke {
                                 throw new DukeException("☹OOPS!!! Wrong format'");
                             }
                             else {
-                                Event m = new Event(description, time);
+                                Event m = new Event(description, makeDate(time));
                                 arr.add(m);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(m);
@@ -82,16 +88,16 @@ public class Duke {
                     case ("deadline") :
                         System.out.println(divider);
                         String remainingStuff2 = sc.nextLine();
-                        int endies = remainingStuff2.indexOf('/');
-                        if (endies > 0) {
+                        int end2 = remainingStuff2.indexOf('/');
+                        if (end2 > 0) {
 
                             String description2 = remainingStuff2.substring(1, remainingStuff2.indexOf('/'));
-                            String timezies = remainingStuff2.substring(endies + 4).trim();
-                            if (timezies.isEmpty()) {
+                            String time2 = remainingStuff2.substring(end2 + 4).trim();
+                            if (time2.isEmpty()) {
                                 throw new DukeException("☹OOPS!!! Wrong format'");
                             }
                             else {
-                                Deadline k = new Deadline(description2, timezies);
+                                Deadline k = new Deadline(description2, makeDate(time2));
                                 arr.add(k);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(k);
@@ -122,7 +128,38 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException{
+    static String makeDate(String input) {
+        try {
+            String ordinalIndicator;
+            Date date = DATE_FORMAT.parse(input);
+            String day = new SimpleDateFormat("dd").format(date);
+            String month = new SimpleDateFormat("MMMMMMMMMMM").format(date);
+            String year = new SimpleDateFormat("yyyy").format(date);
+            String time = new SimpleDateFormat("h:mma").format(date).toLowerCase();
+
+            int int_day = Integer.parseInt(day);
+            if (int_day >= 11 && int_day <= 13) {
+                ordinalIndicator = "th";
+            } else if (int_day % 10 == 1) {
+                ordinalIndicator = "st";
+            } else if (int_day % 10 == 2) {
+                ordinalIndicator = "nd";
+            } else if (int_day % 10 == 3) {
+                ordinalIndicator = "rd";
+            } else {
+                ordinalIndicator = "th";
+            }
+
+            String outputDate = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
+            return outputDate;
+
+        } catch (ParseException p){
+            System.out.println(p);
+        }
+        return "";
+    }
+
+    public static void main(String[] args) throws DukeException, ParseException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -136,5 +173,3 @@ public class Duke {
         Duke.start();
     }
 }
-
-

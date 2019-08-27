@@ -1,10 +1,12 @@
 import org.junit.jupiter.api.Test;
+import duke.task.Task;
+import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-public class DukeTest {
+public class TodoTest {
     @Test
     public void dummyTest(){
-        assertEquals(2, 2);
+        Task task = new Todo("read book");
+        assertTrue(task.toString().equals("[T][X] read book"));
     }
 }

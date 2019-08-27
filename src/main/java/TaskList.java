@@ -2,13 +2,15 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    public ArrayList<Task> taskList;
 
     public TaskList(){
         taskList = new ArrayList<>();
     }
     protected void Add(Task t){
         taskList.add(t);
+    }
+    protected void addMessage(){
         System.out.println(" Got it. I've added this task: " );
         System.out.println(taskList.get(taskList.size() - 1));
         if(taskList.size() == 1)
@@ -41,4 +43,6 @@ public class TaskList {
             System.out.println(i + ". " + taskList.get(i-1) );
         }
     }
+
+
 }

@@ -1,5 +1,10 @@
 public class Deadline extends Task {
     protected String by;
+    public Deadline(String description, String by, boolean b){
+        super(description);
+        this.by = by;
+        this.isDone = b;
+    }
     public Deadline(String description, String by){
         super(description);
         this.by = by;

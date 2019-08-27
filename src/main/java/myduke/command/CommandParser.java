@@ -9,25 +9,27 @@ public class CommandParser {
 
         String[] parts = query.trim().split(" ", 2);
         if (parts.length == 0 || parts[0].length() == 0) {
-            throw new DukeException("Query should not be empty");
+            throw new DukeInvalidCommandException("Query should not be empty");
         }
+
+        String arguments = (parts.length == 2) ? parts[1] : "";
 
         //Try to parse User's query
         switch (parts[0]) {
         case "todo":
-            return new AddTaskCommand(TaskType.TASK_TODO, parts[1]);
+            return new AddTaskCommand(TaskType.TASK_TODO, arguments);
 
         case "deadline":
-            return new AddTaskCommand(TaskType.TASK_DEADLINE, parts[1]);
+            return new AddTaskCommand(TaskType.TASK_DEADLINE, arguments);
 
         case "event":
-            return new AddTaskCommand(TaskType.TASK_EVENT, parts[1]);
+            return new AddTaskCommand(TaskType.TASK_EVENT, arguments);
 
         case "done":
-            return new MarkCompletedTaskCommand(parts[1]);
+            return new MarkCompletedTaskCommand(arguments);
 
         case "delete":
-            return new DeleteCommand(parts[1]);
+            return new DeleteCommand(arguments);
 
         case "list":
             if (parts.length != 1) {

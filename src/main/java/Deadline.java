@@ -1,13 +1,16 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task{
 
-    protected String by;
+    protected Date by;
 
-    public Deadline(String description, String by){
+    public Deadline(String description, Date by){
         super(description);
         this.by = by;
     }
 
-    public Deadline(String description, String by, int doner){
+    public Deadline(String description, Date by, int doner){
         super(description);
         if(doner == 1){
             super.completed();
@@ -21,11 +24,13 @@ public class Deadline extends Task{
         if(super.isDone){
             a = 1;
         }
-        return "D|" + a + "|" + super.description + "|" + by;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
+        return "D|" + a + "|" + super.description + "|" + formatter.format(by);
     }
 
     @Override
     public String toString(){
-        return "[D]" + super.toString() + "(by:" + by + ")";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy hh:mm a");
+        return "[D]" + super.toString() + "(by: " + formatter.format(by) + ")";
     }
 }

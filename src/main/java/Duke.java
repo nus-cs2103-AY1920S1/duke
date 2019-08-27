@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.io.File;
 
@@ -37,16 +40,29 @@ public class Duke {
                 newTask =  new ToDo(what[2], doner);
                 
             } else if(taskType.equals("D")){
-                newTask = new Deadline(what[2], what[3], doner);
+                newTask = new Deadline(what[2], dateTimeConversion(what[3]), doner);
 
             } else if (taskType.equals("E")){
-                newTask = new Event(what[2], what[3], doner);
+                newTask = new Event(what[2], dateTimeConversion(what[3]), doner);
             }
             li.add(newTask);
         };
     }
 
     //print the line for fromatting
+    static Date dateTimeConversion(String dateTime){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
+        String dateInString = dateTime;
+        try {
+            Date date = formatter.parse(dateInString);
+            return date;
+        } catch (ParseException e){
+            System.out.println("Not valid date and time");
+            Date date = null;
+            return date;
+        }
+    }
+
     static void printline(){
         String line =  "\t____________________________________________________________";
         System.out.println(line);
@@ -202,11 +218,12 @@ public class Duke {
                         } else {
                             time = help.substring(slashInt + 4);
                             task = help.substring(0, slashInt - 1);
+
                             if (task.equals(" ")){
                                 error = "emptyDeadline";
                             } else {
                                 //System.out.println(task);
-                                newTask = new Deadline(task, time);
+                                newTask = new Deadline(task, dateTimeConversion(time));
                             }
                         }
 
@@ -233,7 +250,7 @@ public class Duke {
                                 error = "emptyEvent";
                             } else {
                                 //System.out.println(task);
-                                newTask = new Event(task, time);
+                                newTask = new Event(task, dateTimeConversion(time));
                             }
                         }
 

@@ -61,12 +61,19 @@ public class UI {
         System.out.println("☹ OOPS!!! The statement: \"" + fullCommand + "\" is invalid. ");
     }
 
+    /**
+     * Prints out message after tasks are found matching the given keyword
+     */
     public static void printFoundKeywordMessage() {
         System.out.println("Here are the matching tasks in your list:");
     }
 
-    public static void printNoKeywordMessage(String taskName) {
+    /**
+     * Prints out message after no tasks are found matching the given keyword
+     * @param keyword - given keyword from user
+     */
+    public static void printNoKeywordMessage(String keyword) {
         System.out.println("☹ OOPS!!! There are no matching tasks in the list with the keyword: \"" +
-                taskName + "\".");
+                keyword + "\".");
     }
 }

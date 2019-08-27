@@ -4,6 +4,9 @@ import java.util.List;
 public class TaskList {
     private List<Task> list;
 
+    /**
+     * Constructor
+     */
     public TaskList() {
         this.list = new ArrayList<Task>();
     }

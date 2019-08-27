@@ -2,6 +2,13 @@ import java.util.Optional;
 
 public class Parser {
     private TaskList taskList;
+
+    /**
+     * Parse given user input and returns Optional containing null or valid command
+     * @param taskList - list containing all existing tasks
+     * @param fullCommand - command given by user input
+     * @return Optional containing either valid command or null (when exception is thrown)
+     */
     public Optional<Command> executeCommand(TaskList taskList, String fullCommand) {
         this.taskList = taskList;
         String[] commandDescription = fullCommand.trim().split("\\s+", 2);
@@ -10,18 +17,18 @@ public class Parser {
         try {
             switch (taskName) {
                 case "list":
-                    return this.printList(fullCommand);
+                    return this.parseListCommand(fullCommand);
                 case "delete":
-                    return this.deleteTask(commandDescription);
+                    return this.parseDeleteCommand(commandDescription);
                 case "done":
-                    return this.markTaskDone(commandDescription);
+                    return this.parseDoneCommand(commandDescription);
                 case "todo":
-                    return this.addTaskWithoutDate(commandDescription);
+                    return this.parseAddWithoutDateCommand(commandDescription);
                 case "deadline":
                 case "event":
-                    return this.addTaskWithDate(commandDescription);
+                    return this.parseAddWithDateCommand(commandDescription);
                 case "find":
-                    return Optional.of(new FindCommand(commandDescription[1]));
+                    return this.parseFindCommand(commandDescription);
                 default:
                     throw new UnknownCommandException(commandDescription[0]);
             }
@@ -36,21 +43,23 @@ public class Parser {
     }
 
     /**
-     * Adds new task (without date) into list
+     * Parse new task (without date) based on existing format
      * @param commandDescription - array of strings containing command description
+     * @return Optional containing either valid command or null (when exception thrown)
      * @throws IncompleteCommandError - throws error if the command is not in complete format
      */
-    private Optional<Command> addTaskWithoutDate(String[] commandDescription) throws IncompleteCommandError {
+    private Optional<Command> parseAddWithoutDateCommand(String[] commandDescription) throws IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
         return Optional.of(new AddCommand(new ToDoTask(commandDescription[1])));
     }
 
     /**
-     * Adds new task (with date) into list
+     * Parse new task (with date) based on existing format
      * @param commandDescription - array of strings containing command description
+     * @return Optional containing either valid command or null (when exception thrown)
      * @throws IncompleteCommandError - throws error if the command is not in correct format
      */
-    private Optional<Command> addTaskWithDate(String[] commandDescription) throws UnknownCommandException {
+    private Optional<Command> parseAddWithDateCommand(String[] commandDescription) throws UnknownCommandException {
         this.checkCommandEmpty(commandDescription);
         try {
             String[] taskArray = commandDescription[1].split("/", 2);
@@ -73,39 +82,52 @@ public class Parser {
     }
 
     /**
-     * Deletes existing task from list
+     * Parse delete command based on format
      * @param commandDescription - array of strings containing command description
+     * @return Optional containing either valid command or null (when exception thrown)
      * @throws RuntimeException - contains both NumberFormatException and IndexOutOfBoundsException
      * @throws IncompleteCommandError - throws error if the command is not in complete format
      */
-    private Optional<Command> deleteTask(String[] commandDescription) throws RuntimeException, IncompleteCommandError {
+    private Optional<Command> parseDeleteCommand(String[] commandDescription) throws RuntimeException, IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
-        int idx = Integer.parseInt(commandDescription[1]);
-        idx--;
+        int idx = Integer.parseInt(commandDescription[1]) - 1;
         if(idx >= this.taskList.size()) { throw new IndexOutOfBoundsException(); }
         return Optional.of(new DeleteCommand(idx));
     }
 
     /**
-     * Marks specified command as done based on idx of command
+     * Marks specified command based on idx of command and required format
      * @param commandDescription - array of strings containing command description
+     * @return Optional containing either valid command or null (when exception thrown)
      * @throws RuntimeException - contains both NumberFormatException and IndexOutOfBoundsException
+     * @throws IncompleteCommandError - throws error if the command is not in complete format
      */
-    private Optional<Command> markTaskDone(String[] commandDescription) throws RuntimeException, IncompleteCommandError {
+    private Optional<Command> parseDoneCommand(String[] commandDescription) throws RuntimeException, IncompleteCommandError {
         this.checkCommandEmpty(commandDescription);
-        int idx = Integer.parseInt(commandDescription[1]);
-        idx--;
+        int idx = Integer.parseInt(commandDescription[1]) - 1;
         if(idx >= this.taskList.size()) { throw new IndexOutOfBoundsException(); }
         return Optional.of(new DoneCommand(idx));
     }
 
     /**
-     * Prints out contents of list according to order of insertion
+     * Parse list command based on required format
+     * @return Optional containing either valid command or null (when exception thrown)
      * @throws InvalidCommandError - throws error if the command is in wrong format
      */
-    private Optional<Command> printList(String command) throws InvalidCommandError {
+    private Optional<Command> parseListCommand(String command) throws InvalidCommandError {
         if (!command.toLowerCase().equals("list")) { throw new InvalidCommandError(command); }
         return Optional.of(new ListCommand());
+    }
+
+    /**
+     * Parse find command based on required format
+     * @param commandDescription - array of strings containing command description
+     * @return Optional containing either valid command or null (when exception thrown)
+     * @throws IncompleteCommandError - throws error if the command is not in complete format
+     */
+    private Optional<Command> parseFindCommand(String[] commandDescription) throws IncompleteCommandError {
+        this.checkCommandEmpty(commandDescription);
+        return Optional.of(new FindCommand(commandDescription[1]));
     }
 
     /**

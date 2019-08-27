@@ -5,6 +5,5 @@ public interface ITask {
     boolean isDone();
     @Override
     String toString();
-
 }
 

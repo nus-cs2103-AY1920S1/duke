@@ -3,11 +3,19 @@ import java.util.List;
 
 public class FindCommand extends Command {
     private String taskName;
+    /**
+     * Constructor
+     * @param taskName - Name of task to search for
+     */
     public FindCommand(String taskName) {
         super(null);
         this.taskName = taskName;
     }
 
+    /**
+     * Execute find command on given task and save into tasklist
+     * @param taskList - list containing all existing tasks
+     */
     @Override
     public void execute(TaskList taskList) {
         List<Task> list = new ArrayList<Task>();

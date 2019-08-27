@@ -5,6 +5,12 @@ public class Task implements ITask {
     private String taskType;
     private boolean isDone;
 
+    /**
+     * Constructor
+     * @param taskName - Name of given task
+     * @param taskIcon - Icon for the task - [D]/[E] etc..
+     * @param taskType - Type of task - Deadline/Event etc..
+     */
     public Task(String taskName, String taskIcon, String taskType) {
         this.taskName = taskName;
         this.isDone = false;

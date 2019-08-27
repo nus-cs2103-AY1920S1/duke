@@ -1,6 +1,11 @@
 public class IncorrectStatementException extends InvalidCommandError {
     private String actualStatement;
     private String givenStatement;
+    /**
+     * Constructor
+     * @param givenStatement - Given message input by user
+     * @param actualStatement - Expected ouput
+     */
     public IncorrectStatementException(String givenStatement, String actualStatement) {
         super(actualStatement);
         this.actualStatement = actualStatement;

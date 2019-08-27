@@ -1,4 +1,8 @@
 public class UnknownCommandException extends Exception {
+    /**
+     * Constructor
+     * @param message - unknown command given by user
+     */
     public UnknownCommandException(String message) {
         super(message);
     }

@@ -4,6 +4,10 @@ import java.nio.file.Paths;
 public class DataStorage {
     private static final String PATH = "C:\\Users\\ellieyeewenna\\Desktop\\Ellie\\NUS\\CS2103\\IP\\data\\duke.txt";
 
+    /**
+     * Stores all tasks in tasklist into given txt file
+     * @param taskList - list containing all existing tasks
+     */
     public static void storeTaskList(TaskList taskList) {
         String content = getStringContent(taskList);
         try {
@@ -13,6 +17,10 @@ public class DataStorage {
         }
     }
 
+    /**
+     * Retrieves tasks from given txt file and stores into new TaskList
+     * @return TaskList - list containing all existing tasks
+     */
     public static TaskList getStoredTaskList() {
         File file = new File(PATH);
         TaskList taskList = new TaskList();
@@ -42,6 +50,11 @@ public class DataStorage {
         return taskList;
     }
 
+    /**
+     * Converts existing taskList into storable and easily retrievable string format
+     * @param taskList - list containing all existing tasks
+     * @return String format of taskList
+     */
     private static String getStringContent(TaskList taskList) {
         String contents = "";
         for(int i = 0; i < taskList.size(); i ++) {

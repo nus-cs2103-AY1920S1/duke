@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -25,9 +26,8 @@ public class Ui {
      * Takes in user input.
      * @return String pertaining to user input
      */
-    public String readCommand() {
+    public String readCommand() throws DukeException {
         this.nextCommand = sc.nextLine();
-
         return nextCommand;
     }
 

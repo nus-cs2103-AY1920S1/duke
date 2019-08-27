@@ -15,7 +15,7 @@ public class Duke {
 
     private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
     private static final String STORAGE_PATH = "\\data\\duke.txt";
-    private static final boolean resetTaskList = false;
+    private static final boolean RESET_TASK_LIST = false;
 
     private final TaskList taskList;
     private final Storage storage;
@@ -24,6 +24,13 @@ public class Duke {
     private final CommandCentre commandCentre;
     private boolean isExiting;
 
+    /**
+     * <p>
+     *     Initializes TaskList, Storage, Ui, Parser objects. Initializes all
+     *     commands. Clears the existing TaskList in Storage if RESET_TASK_LIST
+     *     is true.
+     * </p>
+     */
     public Duke() {
         taskList = TaskList.newInstance();
         storage = new Storage(ROOT + STORAGE_PATH);
@@ -32,7 +39,7 @@ public class Duke {
         commandCentre = new CommandCentre();
         isExiting = false;
         initializeCommands();
-        if (resetTaskList) {
+        if (RESET_TASK_LIST) {
             taskList.clear();
             storage.clearData();
         }

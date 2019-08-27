@@ -3,7 +3,7 @@ package task;
 /**
  * <p>
  *     A Task that has a deadline in the format DD/MM/YYYY HHmm
- *     as its additional info
+ *     as its additional info.
  * </p>
  */
 public class Deadline extends Task {

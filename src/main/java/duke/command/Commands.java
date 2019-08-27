@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Set of available command types.
+ */
 public enum Commands {
     list,
     bye,

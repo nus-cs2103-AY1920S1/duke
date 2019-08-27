@@ -7,14 +7,29 @@ import java.time.LocalTime;
 
 import duke.command.DukeInvalidArgumentException;
 
-public class TaskUtil {
+/**
+ * Class providing several utility methods for parsing and validating task data.
+ */
+public abstract class TaskUtil {
+    /** The required input date format to use. */
     private static final String DATE_FORMAT = "d/M/y HHmm";
+    /** The required input time format to use. */
     private static final String TIME_FORMAT = "HHmm";
+    /** The output format for displaying dates and times. */
     private static final String DISPLAY_FORMAT = "EEE, d MMM y h:mma";
+    /** The dateTime formatter that uses the DATE_FORMAT pattern. */
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+    /** The dateTime formatter that uses the TIME_FORMAT pattern. */
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    /** The dateTime formatter that uses the DISPLAY_FORMAT pattern. */
     private static final DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
 
+    /**
+     * Utility method for validating the input task description.
+     *
+     * @param description The input description string.
+     * @throws DukeInvalidArgumentException If the description is empty.
+     */
     public static void validateTaskDescription(String description)
             throws DukeInvalidArgumentException {
 
@@ -25,6 +40,14 @@ public class TaskUtil {
         }
     }
 
+    /**
+     * Method for parsing the input string using the dateFormatter.
+     * Returns the LocalDateTime representation of the string.
+     *
+     * @param dateString The input string.
+     * @return The localDateTime object.
+     * @throws DukeInvalidArgumentException If the input string format does not follow the pattern.
+     */
     static LocalDateTime getDateFromString(String dateString) throws DukeInvalidArgumentException {
         try {
             return LocalDateTime.parse(dateString.trim(), dateFormatter);
@@ -36,6 +59,14 @@ public class TaskUtil {
         }
     }
 
+    /**
+     * Method for parsing the input string using the timeFormatter.
+     * Returns the LocalTime representation of the string.
+     *
+     * @param timeString The input string.
+     * @return The LocalTime object.
+     * @throws DukeInvalidArgumentException If the input string format does not follow the pattern.
+     */
     static LocalTime getTimeFromString(String timeString) throws DukeInvalidArgumentException {
         try {
             return LocalTime.parse(timeString.trim(), timeFormatter);
@@ -47,6 +78,13 @@ public class TaskUtil {
         }
     }
 
+    /**
+     * Retrieves the string representation of the LocalDateTime object.
+     * Uses the displayFormatter and DISPLAY_FORMAT to format the string.
+     *
+     * @param dateTime The input LocalDateTime object.
+     * @return The string representation of the localDateTime.
+     */
     static String getDisplayTime(LocalDateTime dateTime) {
         return displayFormatter.format(dateTime);
     }

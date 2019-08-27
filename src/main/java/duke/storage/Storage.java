@@ -2,7 +2,13 @@ package duke.storage;
 
 import duke.command.DukeInvalidArgumentException;
 import duke.ui.Ui;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TodoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskUtil;
+import duke.task.TaskList;
+import duke.task.TaskType;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,22 +22,47 @@ import java.util.Map;
 
 /**
  * Abstraction of the file storage of tasks.
- * Requires a root folder dirName to search for recursively upwards.
+ * Saves the task data in a readable and editable json format.
  */
 public class Storage {
 
+    /** The filename of the task data file to use. */
     private static final String DATA_FILE_NAME = "taskData.txt";
+    /** The upward recursive search limit for the existing specified dirName. */
     private static final int DIRECTORY_SEARCH_LIMIT = 5;
+
+    /** The directory name to use for storing the task data file. */
     private String dirName;
+    /** The absolute filePath of the task data file to use. */
     private String filePath;
+    /** The user interface object for displaying error messages. */
     private Ui ui;
 
+    /**
+     * Constructor of the storage object.
+     * Searches recursively upward from the present working directory for
+     * the directory dirName.
+     * If it is not found, the directory is creating in
+     * the present working directory.
+     *
+     * @param dirName The directory name as a string.
+     * @param ui The user interface object to use.
+     */
     public Storage(String dirName, Ui ui) {
         this.dirName = dirName;
         this.ui = ui;
         setFilePath();
     }
 
+    /**
+     * Reads the task data file and loads the task data into the task list.
+     * Re-validates the input during construction of the task instances,
+     * skipping invalid inputs.
+     * See getTaskType/DoneStatus/Description for the validation.
+     * Also refer to the task constructors for additional info on validation.
+     *
+     * @param taskList The TaskList object to load the tasks into.
+     */
     public void loadTasksToList(TaskList taskList) {
         Scanner dataScanner;
 
@@ -96,6 +127,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the specified task list to disk.
+     * It throws a file write exception if an IOException occurs.
+     *
+     * @param tasks The task list to save to disk.
+     * @throws DukeFileWriteException If an IOException from FileWriter occurs.
+     */
     public void saveTasksToDisk(TaskList tasks) throws DukeFileWriteException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
@@ -126,6 +164,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Private method to get the TaskType enum from a string.
+     *
+     * @param input The task type string.
+     * @return The TaskType enum
+     * @throws DukeTaskFileParseException If there is no valid TaskType for the input string.
+     */
     private TaskType getTaskType(String input) throws DukeTaskFileParseException {
         try {
             return TaskType.valueOf(input);
@@ -137,6 +182,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Private method to get the boolean done status from a string.
+     * Unlike Boolean.valueOf, only accepts 'true' or 'false' as valid arguments.
+     *
+     * @param status The status input string.
+     * @return The parsed boolean value.
+     * @throws DukeTaskFileParseException If status string is invalid as described.
+     */
     private boolean getDoneStatus(String status) throws DukeTaskFileParseException {
         if (status != null) {
             if (status.equalsIgnoreCase("true")) {
@@ -152,6 +205,15 @@ public class Storage {
                         + "   while reading your file.");
     }
 
+    /**
+     * Private method for validating the description of the task.
+     * See TaskUtil for more information on validation of the description.
+     * Also returns the description again.
+     *
+     * @param description The description input string.
+     * @return The description string.
+     * @throws DukeTaskFileParseException If the description is empty.
+     */
     private String getDescription(String description) throws DukeTaskFileParseException {
         try {
             TaskUtil.validateTaskDescription(description);
@@ -164,6 +226,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Private method called in the constructor of the storage instance.
+     * Using the provided dirName, tries to search for an absolute directory path
+     * recursively upward up to the search limit.
+     * If it is not found, the absolute directory path used is the present
+     * working directory and the directory is created.
+     * If directory creation fails, the user is alerted that the app cannot
+     * save changes to disk.
+     * The absolute file path is then determined using the directory path and
+     * the DATA_FILE_NAME string constant.
+     */
     private void setFilePath() {
         String workingDir = System.getProperty("user.dir");
         Path currentDir = Paths.get(workingDir);
@@ -194,6 +267,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Private method to display the no save-to-disk function message
+     * to the user.
+     */
     private void printNoStorageMsg() {
         ui.printLineDivider();
         ui.printMsgLine(" \u2639 Oops! I failed to find a "

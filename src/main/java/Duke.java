@@ -60,13 +60,30 @@ public class Duke {
                         throw new DukeException(" ☹ OOPS!!! Events must have exactly one time");
                     }
                     addTask(new Event(arguments[0].trim(), arguments[1].trim()));
+                } else if (s.matches("delete ([1-9]|[1-9][0-9]|100)")) {
+                    int deleteIndex = Integer.parseInt(s.substring(7));
+                    delete(deleteIndex - 1);
                 } else {
                     throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
 
+    private static void delete(int index) throws DukeException {
+        try {
+            Task t = tasks.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(t);
+            if (tasks.size() == 1) {
+                System.out.println("Now you have 1 task in the list.");
+            } else {
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(" ☹ OOPS!!! There is no task number " + (index + 1));
         }
     }
 

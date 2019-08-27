@@ -18,6 +18,11 @@ public class Deadline extends Task{
         this.taskType = "D";
     }
 
+    public Deadline(String description, boolean isDone, String deadline) throws DukeException{
+        this(description, deadline);
+        this.isDone = isDone;
+    }
+
     public String getDeadline(){
         return this.deadline;
     }
@@ -34,6 +39,11 @@ public class Deadline extends Task{
     public String getTaskStatus(){
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()
                 + "(by:" + this.getDeadline() + ")" ); 
+    }
+
+    public String getStoredTaskStatus(){
+        return (this.getTaskType() + " | " + this.getStatusIcon() + " | " + this.getTaskDescription()
+                + " | " + this.getDeadline());
     }
 }
 

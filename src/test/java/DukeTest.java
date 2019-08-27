@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import duke.*;
 
 class DukeTest {
+
     public void taskListGet_success() {
         Task t = new Task("test");
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -14,11 +15,14 @@ class DukeTest {
     }
 
     public void missingFile_exceptionThrown() {
-        try{
+        try {
             Duke d = new Duke("data/notexist/asd.dmp");
             fail();
         } catch (Exception e) {
-            assertEquals("java.io.FileNotFoundException: data/notexist/asd.tmp (No such file or directory)", e.getMessage());
+            assertEquals(
+                "java.io.FileNotFoundException: data/notexist/asd.tmp (No such file or directory)",
+                e.getMessage()
+            );
         }
     }
 }

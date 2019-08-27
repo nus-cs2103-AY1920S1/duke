@@ -43,6 +43,8 @@ public class Parser {
       case "delete":
         index = Integer.parseInt(strArr[1]);
         return new DeleteCommand(index);
+      case "find":
+        return new FindCommand(line.substring(5));
       default:
         throw new DukeException(unknownCommand);
       }

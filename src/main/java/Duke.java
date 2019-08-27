@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -65,6 +67,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String taskName;
         Task task;
+        //Time
+        final String timePattern = "d MMMM yyyy, h:mma";
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(timePattern);
         while (sc.hasNext()) {
             try {
                 String userCmd = sc.next();
@@ -101,7 +106,9 @@ public class Duke {
                         if (userWords.length == 1) {
                             throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty or is wrongly typed.");
                         }
-                        task = new Deadline(userWords[0].trim(), userWords[1].trim());
+                        LocalDateTime dateObj = LocalDateTime.parse(userWords[1].trim(), DateTimeFormatter.ofPattern("d/MM/yyyy Hmm"));
+                        String date = dateObj.format(dateTimeFormat);
+                        task = new Deadline(userWords[0].trim(), date);
                         list.add(task);
                         System.out.println(lineSpace + "Got it. I've added this task:\n" + task
                                 + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);

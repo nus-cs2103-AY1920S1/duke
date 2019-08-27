@@ -16,7 +16,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
-        printLine();
+        printLine();    
         printIndentedMsg("Hello! I'm Duke");
         printIndentedMsg("What can I do for you?");
         printLine();

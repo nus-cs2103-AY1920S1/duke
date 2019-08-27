@@ -4,6 +4,9 @@ import duke.helper.Storage;
 import duke.helper.Ui;
 import duke.task.TaskList;
 
+/**
+ * Displays all existing Tasks in the list.
+ */
 public class ListCommand extends Command {
 
     public ListCommand(String filePath, String[] inputSplit) {

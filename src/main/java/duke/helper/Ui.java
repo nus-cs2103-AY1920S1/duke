@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles reading from user input and printing to user interface.
+ */
 public class Ui {
     private Scanner scan;
     public String separationLine;
@@ -14,6 +17,9 @@ public class Ui {
         separationLine = "    ____________________________________________________________";
     }
 
+    /**
+     * Displays welcome message.
+     */
     public void showWelcome() {
         String logo = "      ____        _        \n"
                 + "     |  _ \\ _   _| | _____ \n"
@@ -36,6 +42,11 @@ public class Ui {
         System.err.println(message);
     }
 
+    /**
+     * Displays list of existing tasks.
+     *
+     * @param tasks ArrayList of Tasks to be displayed.
+     */
     public void printTaskList(ArrayList<Task> tasks) {
         System.out.println(separationLine + "\n     Here are the tasks in your list:");
         for (Task task : tasks) {

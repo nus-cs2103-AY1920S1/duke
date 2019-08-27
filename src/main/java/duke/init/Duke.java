@@ -75,14 +75,20 @@ public class Duke {
                     task = new Todo(description, isDone);
                 } else if (taskType.equals("D")) {
                     task = new Deadline(description, isDone, taskInformation[3]);
-                } else {
+                } else if (taskType.equals("E")) {
                     task = new Event(description, isDone, taskInformation[3]);
+                } else {
+                    throw new IOException();
                 }
                 STORED_TASKS.add(task);
             }
             fileScanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("The given data file could not be found");
+            System.out.println("The given data file could not be found.");
+            System.exit(1);
+        } catch (IOException | ParseException e) {
+            System.out.println("Please check that the given data file's contents are valid.");
+            System.exit(1);
         }
     }
 
@@ -253,7 +259,7 @@ public class Duke {
                     dataLine = String.format("T | %s | %s\n", status, task.getDescription());
                 } else if (task.getType().equals("deadline")) {
                     dataLine = String.format("D | %s | %s | %s\n", status,
-                            task.getDescription(), ((Deadline) task).getDate());
+                            task.getDescription(), ((Deadline) task).getDateAndTime());
                 } else {
                     dataLine = String.format("E | %s | %s | %s\n", status,
                             task.getDescription(), ((Event) task).getDateAndTime());
@@ -263,6 +269,7 @@ public class Duke {
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Data could not be saved.");
+            System.exit(1);
         }
     }
 

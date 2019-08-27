@@ -17,7 +17,7 @@ public class Event extends Task {
      * Constructs an event task with the specified description.
      * @param description The specified description.
      */
-    public Event(String description, String dateAndTime) throws IllegalArgumentException, ParseException {
+    public Event(String description, String dateAndTime) throws ParseException {
         super(description);
         try {
             dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -33,17 +33,23 @@ public class Event extends Task {
      * @param description The specified description.
      * @param isDone The specified isDone status.
      */
-    public Event(String description, boolean isDone, String dateAndTime) {
+    public Event(String description, boolean isDone, String dateAndTime) throws ParseException {
         super(description, isDone);
-        this.dateAndTime = dateAndTime;
+        try {
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            dateFormat.setLenient(false);
+            this.dateAndTime = dateFormat.parse(dateAndTime);
+        } catch (ParseException e) {
+            throw e;
+        }
     }
 
     /**
      * Returns the String representation of this event task's date and time.
-     * @return The String representation od this event task's date and time.
+     * @return The String representation of this event task's date and time.
      */
     public String getDateAndTime() {
-        return dateAndTime;
+        return dateFormat.format(dateAndTime);
     }
 
     /**
@@ -60,7 +66,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), dateFormat.format(dateAndTime));
+        return String.format("[E]%s (at: %s)", super.toString(), dateFormat.format(dateAndTime));
     }
 
 }

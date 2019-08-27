@@ -10,19 +10,19 @@ import java.text.SimpleDateFormat;
  */
 public class Deadline extends Task {
 
-    private Date date;
+    private Date dateAndTime;
     private SimpleDateFormat dateFormat;
 
     /**
      * Constructs a deadline task with the specified description.
      * @param description The specified description.
      */
-    public Deadline(String description, String date) throws ParseException {
+    public Deadline(String description, String dateAndTime) throws ParseException {
         super(description);
         try {
             dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             dateFormat.setLenient(false);
-            this.date = dateFormat.parse(date);
+            this.dateAndTime = dateFormat.parse(dateAndTime);
         } catch (ParseException e) {
             throw e;
         }
@@ -33,17 +33,23 @@ public class Deadline extends Task {
      * @param description The specified description.
      * @param isDone The specified isDone status.
      */
-    public Deadline(String description, boolean isDone, String date) {
+    public Deadline(String description, boolean isDone, String dateAndTime) throws ParseException {
         super(description, isDone);
-        this.date = date;
+        try {
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            dateFormat.setLenient(false);
+            this.dateAndTime = dateFormat.parse(dateAndTime);
+        } catch (ParseException e) {
+            throw e;
+        }
     }
 
     /**
      * Returns the String representation of this deadline task's date.
-     * @return The String representation od this deadline task's date.
+     * @return The String representation of this deadline task's date.
      */
-    public String getDate() {
-        return date;
+    public String getDateAndTime() {
+        return dateFormat.format(dateAndTime);
     }
 
     /**
@@ -60,7 +66,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), dateFormat.format(date));
+        return String.format("[D]%s (by: %s)", super.toString(), dateFormat.format(dateAndTime));
     }
 
 }

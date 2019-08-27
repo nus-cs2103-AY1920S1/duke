@@ -10,6 +10,11 @@ public class Duke {
     private static TaskList tasks;
     private static Ui ui;
 
+    /**
+     * Starts up the Duke program.
+     * 
+     * @param args options. (Currently none)
+     */
     public static void main(String[] args) {
         ui = Ui.getInstance();
         storage = new Storage("data/duke.txt");

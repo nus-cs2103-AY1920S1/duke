@@ -19,6 +19,11 @@ public class Storage {
         this.file = new File(pathname);
     }
 
+    /**
+     * Attempts to save a TaskList into the specified file location.
+     * 
+     * @param tasks the TaskList to be saved.
+     */
     public void saveTasks(TaskList tasks) {
         try {
             if (!file.exists()) {
@@ -52,6 +57,12 @@ public class Storage {
 
     }
 
+    /**
+     * Loads the TaskList from the specified file. If the file is not found, an
+     * empty TaskList will be returned.
+     * 
+     * @return the TaskList that was saved in the specified file.
+     */
     public TaskList loadTasks() {
         TaskList tasks = new TaskList();
         try {

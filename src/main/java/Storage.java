@@ -59,7 +59,7 @@ public class Storage {
 
     public void setDoneFlag(Task task, String flag) {
         if (flag.equals("+")) {
-            task.complete();
+            task.changeSign();
         }
     }
 

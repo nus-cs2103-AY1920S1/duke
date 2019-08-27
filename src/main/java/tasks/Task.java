@@ -18,6 +18,10 @@ public class Task {
         return this.name;
     }
 
+    public void changeSign() {
+        completed = true;
+    }
+
     public String toString() {
         if (!this.completed) {
             return "-|" + this.name;

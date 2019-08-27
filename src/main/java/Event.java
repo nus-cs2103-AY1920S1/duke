@@ -16,13 +16,13 @@ public class Event extends Task {
     public Event(String description, String date, String time) {
         super(description);
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("d/MM/yyy"));
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHMM"));
+        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override
     public String toDataFormat() {
-        return "E | " + super.toDataFormat() + " | " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy"))
-                + ", " + time.format(DateTimeFormatter.ofPattern("h:mm a"));
+        return "E | " + super.toDataFormat() + " | " + date.format(DateTimeFormatter.ofPattern("d/MM/yyyy"))
+                + ", " + time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override

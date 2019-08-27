@@ -121,7 +121,7 @@ public class Duke {
                     dateAndTime = cmdList[3].trim();
                     String[] dateTime = dateAndTime.split("\\s*,");
                     date = dateTime[0];
-                    time = dateTime[1];
+                    time = dateTime[1].trim();
                 }
                 if (keyword.equalsIgnoreCase("D")) {
                     t = new Deadline(description, date, time);

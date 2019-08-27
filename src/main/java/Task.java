@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * An abstract class representing a task that can be recorded by Duke. Contains a description and a completion status.
+ */
 public abstract class Task implements Serializable {
     static protected final char UNICODE_TICK = (char) 0x2713;
     static protected final char UNICODE_CROSS = (char) 0x2718;
@@ -8,13 +11,19 @@ public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
-    //Returns a copy of this task but with its completion status marked as done
+    /**
+     * @return A copy of this <code>Task</code>, but with status marked as done
+     */
     public abstract Task getTaskMarkedAsDone();
     
-    //Returns a copy of this task but with its completion status marked as undone
+    /**
+     * @return A copy of this <code>Task</code>, but with status marked as undone
+     */
     public abstract Task getTaskMarkedUndone();
 
-    //Returns the character marking denoting a task as either done or undone
+    /**
+     * @return a <code>char</code> for a tick if this <code>Task</code> is done and a cross otherwise
+     */
     protected char getStatusIcon() {
         return isDone ? UNICODE_TICK : UNICODE_CROSS;
     }

@@ -1,3 +1,6 @@
+/**
+ * A class that stores all of Duke's mesages as Strings. These are split into Greetings, Feedback and Error Messages.
+ */
 public class DukeUi {
     //Greeting Messages
     public final static String GREET_HELLO = "Heya! It's friendly neighbourhood Duke at your service!\nWhat's the plan today?";

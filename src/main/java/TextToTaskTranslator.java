@@ -3,6 +3,9 @@ import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * A static class that generates Tasks based on the user's input.
+ */
 public class TextToTaskTranslator {
     //A Pattern for the format "dd/mm/yyyy" or "d/m/yy" (Day and Month have either 1 or 2 digits, Year has either 2 or 4 digits)
     private static final Pattern DATE_FORMAT_PATTERN = Pattern.compile("\\b\\d{1,2}\\/\\d{1,2}\\/(\\d{2}|\\d{4})\\b");
@@ -13,12 +16,24 @@ public class TextToTaskTranslator {
     private static final int [] daysInEachMonth = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static final String [] namesOfTheMonth = { "January", "Februrary", "March", "April", "May", "June", "July", "August",  "September", "October", "November", "December"};
 
+    /**
+     * Generates a <code>ToDoTask</code> from the user's input.
+     * 
+     * @return The generated <code>ToDoTask</code>.
+     * @throws DukeException The user's input lacks a <code>Task</code> description.
+     */
     public static Task translateToDoTask(String userInputString) throws DukeException {
         String description = userInputString.substring(4).trim();
         checkDescriptionExists(description);
         return new ToDoTask(description);
     }
 
+    /**
+     * Generates a <code>DeadlineTask</code> from the user's input.
+     * 
+     * @return The generated <code>DeadlineTask</code>.
+     * @throws DukeException The user's input command is incomplete, lacks a description or includes an invalid date.
+     */
     public static Task translateDeadlineTask(String userInputString) throws DukeException {
         String withoutCommand = userInputString.substring(8).trim();
 
@@ -44,6 +59,12 @@ public class TextToTaskTranslator {
         }
     }
 
+    /**
+     * Generates an <code>EventTask</code> from the user's input.
+     * 
+     * @return The generated <code>EventTask</code>.
+     * @throws DukeException The user's input command is incomplete, lacks a description or includes an invalid date.
+     */
     public static Task translateEventTask(String userInputString) throws DukeException {
         String withoutCommand = userInputString.substring(5).trim();
 

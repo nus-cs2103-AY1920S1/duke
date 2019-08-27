@@ -28,13 +28,43 @@ public class Duke {
                 "____________________________________________________________\n";
         System.out.println(greet);
 
+        ArrayList<Task> taskList = new ArrayList<Task>();
+
         BufferedReader TasksFile = new BufferedReader(new FileReader("TaskList.txt"));
         String LineFile = "";
         while ((LineFile = TasksFile.readLine()) != null) {
-            String[] WordsFile = LineFile.split("");
+            String[] WordsFile = LineFile.split("`");
+            switch (WordsFile[0]) {
+            case ("todo") :
+                Task todoFile = new Todo(WordsFile[2]);
+                taskList.add(todoFile);
+                if (WordsFile[1].equals("\u2713")) {
+                    todoFile.markAsDone(todoFile);
+                }
+                break;
+
+            case ("event") :
+                Task eventFile = new Event(WordsFile[2], WordsFile[3]);
+                taskList.add(eventFile);
+                if (WordsFile[1].equals("\u2713")) {
+                    eventFile.markAsDone(eventFile);
+                }
+                break;
+
+            case ("deadline") :
+                Task deadlineFile = new Deadline(WordsFile[2], WordsFile[3]);
+                taskList.add(deadlineFile);
+                if (WordsFile[1].equals("\u2713")) {
+                    deadlineFile.markAsDone(deadlineFile);
+                }
+                break;
+
+            default :
+                System.out.println(WordsFile[0] + LineFile + "error");
+            }
         }
+
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
         String TaskLine = sc.nextLine();
 
         outLoop:
@@ -143,8 +173,11 @@ public class Duke {
         }
         try (PrintStream out = new PrintStream(new FileOutputStream("TaskList.txt"))) {
             for (Task t : taskList) {
-                out.print(t.getType() + "|" + t.getStatusIcon() + "|" + t.getDescription() + "|" + "\n" );
-                //out.print(t.toString() + "\n");
+                if (t.getType().equals("todo")) {
+                    out.print(t.getType() + "`" + t.getStatusIcon() + "`" + t.getDescription() + "`" + "\n" );
+                } else {
+                    out.print(t.getType() + "`" + t.getStatusIcon() + "`" + t.getDescription() + "`" + t.getDate() + "\n" );
+                }
             }
         }
     }

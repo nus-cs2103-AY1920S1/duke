@@ -2,6 +2,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
+    protected String date;
 
     public Task(String description) {
         this.description = description;
@@ -22,6 +23,10 @@ public class Task {
 
     public String getType() {
         return type;
+    }
+
+    public String getDate() {
+        return date;
     }
 
 }

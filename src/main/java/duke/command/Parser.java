@@ -101,9 +101,9 @@ class Parser {
     }
 
     /**
-     * Action taken when the command is todo.
+     * Action taken when the command is to_do.
      *
-     * @throws DukeIllegalDescriptionException To deal with the illegal input after todo command such as no input.
+     * @throws DukeIllegalDescriptionException To deal with the illegal input after to_do command such as no input.
      */
     private void commandTodo() throws DukeIllegalDescriptionException {
         try {

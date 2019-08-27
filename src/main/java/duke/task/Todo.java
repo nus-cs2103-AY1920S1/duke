@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * The class is used to represent the task of todo type.
+ * The class is used to represent the task of to_do type.
  */
 public class Todo extends Task {
 

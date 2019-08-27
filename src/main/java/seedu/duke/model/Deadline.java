@@ -1,14 +1,30 @@
 package seedu.duke.model;
 
-import seedu.duke.model.Task;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Deadline extends Task{
 
-    protected String by;
+    protected Date by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by)
+            throws ParseException {
         super(description);
-        this.by = by;
+        this.type = "D";
+        this.by = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(by);
+    }
+
+    public Deadline(String description, String by, int status)
+            throws ParseException{
+        super(description, status);
+        this.type = "D";
+        this.by = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(by);
+    }
+
+    @Override
+    public String toTextFileString() {
+        return super.toTextFileString() + "," + by;
     }
 
     @Override

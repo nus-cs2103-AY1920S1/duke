@@ -15,6 +15,8 @@ public class Parser {
             return new EventCommand(fullCommand);
         case "todo":
             return new TodoCommand(fullCommand);
+        case "find":
+            return new FindCommand(fullCommand);
         default:
             return new ErrorCommand(fullCommand);
         }

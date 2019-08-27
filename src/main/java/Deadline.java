@@ -7,6 +7,7 @@ public class Deadline extends Task {
     public Deadline(String description, String time) {
         super(description);
         this.time = time;
+        this.type = TaskType.DEADLINE;
     }
 
     public static Deadline createDeadline(String [] tokens) {
@@ -32,6 +33,7 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    @Override
     public String toString() {
         return String.format("[D][%s] %s(by: %s)", getStatusIcon(),
                 getDescription(), getTime());

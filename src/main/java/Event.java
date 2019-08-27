@@ -7,6 +7,7 @@ public class Event extends Task {
     public Event(String description, String time) {
         super(description);
         this.time = time;
+        this.type = TaskType.EVENT;
     }
 
     public static Event createEvent(String [] tokens) {
@@ -33,6 +34,7 @@ public class Event extends Task {
         return this.time;
     }
 
+    @Override
     public String toString() {
         return String.format("[E][%s] %s(at: %s)", getStatusIcon(),
                 getDescription(), getTime());

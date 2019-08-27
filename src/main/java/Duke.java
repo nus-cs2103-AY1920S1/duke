@@ -22,7 +22,8 @@ public class Duke {
             String input = sc.nextLine();
             String[] tokens = input.split(" ");
             if (tokens[0].equals("bye")) {
-                printOneLine("Bye. Hope to see you again soon!");
+                //printOneLine("Bye. Hope to see you again soon!");
+                printOneLine(new ExitCommand());
                 break;
             } else if (tokens[0].equals("list")) {
                 printNumberList(lst);
@@ -86,9 +87,18 @@ public class Duke {
         System.out.println();
     }
 
+    //may remove soon
     public static void printOneLine(String input) {
         System.out.println(horizontalLine);
         System.out.println(String.format("     %s",input));
+        System.out.println(horizontalLine);
+        System.out.println();
+
+    }
+
+    public static void printOneLine(Command command) {
+        System.out.println(horizontalLine);
+        System.out.println(String.format("     %s",command));
         System.out.println(horizontalLine);
         System.out.println();
 

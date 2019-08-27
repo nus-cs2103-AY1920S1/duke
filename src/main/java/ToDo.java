@@ -4,6 +4,7 @@ public class ToDo extends Task{
     
     public ToDo(String description) {
         super(description);
+        this.type = TaskType.TODO;
     }
 
     public static ToDo createToDo(String [] tokens) {
@@ -16,6 +17,7 @@ public class ToDo extends Task{
         return new ToDo(builder.toString());
     }
 
+    @Override
     public String toString() {
         return String.format("[T][%s] %s", getStatusIcon(), getDescription());
     }

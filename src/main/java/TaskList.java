@@ -37,6 +37,19 @@ public class TaskList {
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         }
     }
+    protected void Find(String s){
+        int count = 0;
+        System.out.println("Here are the matching tasks in your list");
+        for(Task t : taskList){
+            if(t.description.contains(s)){
+                System.out.println(t);
+                count+=1;
+            }
+        }
+        if(count == 0)
+            System.out.println("There are no matching tasks in your list");
+    }
+
     protected void getList(){
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= taskList.size(); i+=1){

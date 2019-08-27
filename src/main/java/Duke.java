@@ -136,6 +136,10 @@ public class Duke {
                 int number = scan.nextInt();
                 d.list.deleteTask(number);
             }
+            else if(a.equals("find")){
+                String required = scan.next();
+                d.list.Find(required);
+            }
             else{
                 System.out.println("\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(");
                 String empt = scan.nextLine();

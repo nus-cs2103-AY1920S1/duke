@@ -1,6 +1,10 @@
 package utils;
 
-import task.*;
+import task.Task;
+import task.Deadline;
+import task.Event;
+import task.Todo;
+import task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -83,6 +87,9 @@ public class Storage {
                     taskList.addNewEventTask(taskInfo[2],
                             taskInfo[3],
                             taskInfo[1].equals("1"));
+                    break;
+
+                default:
                     break;
             }
         }

@@ -33,17 +33,17 @@ public class Ui {
         System.out.print("     help    : Prints the list of commands\n");
         System.out.print("     done n  : Marks the n-th task on the list as done\n");
         System.out.print("     delete n: Deletes the n-th task on the list\n");
-        System.out.print("     todo taskName :\n" +
-                "               Adds a new Todo task with the given name.\n");
-        System.out.print("     event taskName /at additionalInfo :\n" +
-                "               Adds a new Event task with the given additional\n" +
-                "               info.\n");
-        System.out.print("     deadline taskName /by DD/MM/YYYY HHmm :\n" +
-                "               Adds a new Deadline task with the deadline in the\n" +
-                "               given format.\n");
-        System.out.print("     find keyword :\n" +
-                "               Returns a list of task with names containing the\n" +
-                "               keyword.\n");
+        System.out.print("     todo taskName :\n"
+                + "               Adds a new Todo task with the given name.\n");
+        System.out.print("     event taskName /at additionalInfo :\n"
+                + "               Adds a new Event task with the given additional\n"
+                + "               info.\n");
+        System.out.print("     deadline taskName /by DD/MM/YYYY HHmm :\n"
+                + "               Adds a new Deadline task with the deadline in the\n"
+                + "               given format.\n");
+        System.out.print("     search keyword :\n"
+                + "               Returns a list of task with names containing the\n"
+                + "               keyword.\n");
     }
 
     public void printByeMessage() {
@@ -62,7 +62,7 @@ public class Ui {
     public void printTaskList(List<Task> taskList, String title) {
         System.out.print(title);
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("    %d.", i+1);
+            System.out.printf("    %d.", i + 1);
             System.out.printf("%s\n", taskList.get(i));
         }
     }

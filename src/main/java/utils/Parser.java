@@ -77,8 +77,8 @@ public class Parser {
             System.out.printf("     ☹ OOPS!!! The description of a %s cannot be empty.\n", "event");
             return null;
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n" +
-                    "     one argument after the keyword %s.\n", "/at");
+            System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n"
+                    + "     one argument after the keyword %s.\n", "/at");
             return null;
         }
     }
@@ -116,13 +116,13 @@ public class Parser {
             return null;
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n" +
-                    "     one argument after the keyword %s.\n", "/by");
+            System.out.printf("     ☹ OOPS!!! There must be exactly one argument before and\n"
+                    + "     one argument after the keyword %s.\n", "/by");
             return null;
 
         } catch (ParseException e) {
-            System.out.print("     ☹ OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\"\n + " +
-                    "     and must be valid.");
+            System.out.print("     ☹ OOPS!!! Date must be in the format \"dd/MM/yyyy HHmm\"\n + "
+                    + "     and must be valid.");
             return null;
         }
     }

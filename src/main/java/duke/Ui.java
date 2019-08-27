@@ -75,6 +75,10 @@ public class Ui {
         output("Bye. Hope to see you again soon!\n");
     }
 
+    public void showFindMessage(TaskList taskList, String keyword) {
+        output("Here are the matching tasks in your list:\n" + taskList.find(keyword));
+    }
+
     public void showLoadingError() {
         output("File not found.\n");
     }

@@ -18,6 +18,11 @@ public class Parser {
         } else if (input.startsWith("delete")) {
             int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1; // possible error here
             return new DeleteCommand(deleteIndex);
+        } else if (input.startsWith("find")) {
+            System.out.println("here.");
+            input = input.replaceFirst("^find", "");
+            String keyword = input.substring(input.indexOf(" ") + 1);
+            return new FindCommand(keyword);
         } else { // add task
             Task task;
             if (input.startsWith("todo")) {

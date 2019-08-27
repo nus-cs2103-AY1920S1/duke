@@ -42,6 +42,20 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public String find(String keyword) {
+        String message = "";
+        int i = 1;
+        int index = 1;
+        for (Iterator iterator = taskList.iterator(); iterator.hasNext(); i++) {
+            Task current = (Task) iterator.next();
+            if (current.containsKeyword(keyword)) {
+                message = message + index + "." + current + "\n";
+                index++;
+            }
+        }
+        return message;
+    }
+
     public Iterator iterator() {
         return taskList.iterator();
     }

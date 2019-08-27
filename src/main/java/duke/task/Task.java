@@ -19,6 +19,10 @@ public class Task {
         return (isDone ? "1" : "0"); // return 1 or 0
     }
 
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

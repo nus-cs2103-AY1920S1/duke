@@ -17,6 +17,7 @@ public class ParserTest {
                     "deadline This is a Deadline. 19:99", uiManager);
             Command event = parseManager.parseToCommand(
                     "event This is an Event. 19/01/2021", uiManager);
+            Command find = parseManager.parseToCommand("find A Task", uiManager);
             
             // Check if the command is of the correct type
             if(!(list instanceof ListCommand) ||
@@ -25,7 +26,8 @@ public class ParserTest {
                !(delete instanceof DeleteCommand) ||
                !(todo instanceof AddCommand) ||
                !(deadline instanceof AddCommand) ||
-               !(event instanceof AddCommand)) {
+               !(event instanceof AddCommand) ||
+               !(find instanceof FindCommand)) {
                 fail();
             }
         } catch (DukeException e) {

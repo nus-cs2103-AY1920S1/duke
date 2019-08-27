@@ -8,7 +8,7 @@ class ListCommand implements Command {
         } else {
             uiManager.printListStarter();
             for (int i = 0; i < taskList.listSize(); i++) {
-                uiManager.printTask(i, taskList.getTask(i, uiManager));
+                uiManager.printTask(i + 1, taskList.getTask(i, uiManager));
             }
         }
     }

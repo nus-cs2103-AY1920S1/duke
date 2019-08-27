@@ -14,7 +14,8 @@ public class Parser {
         if (array.length == 2) {
             String[] dateArray = array[0].split("/");
             if (dateArray.length == 3) {
-                if ((dateArray[0].equals("1") || dateArray[0].equals("21") || dateArray[0].equals("31"))) {
+                if ((dateArray[0].equals("1") || dateArray[0].equals("21") ||
+                        dateArray[0].equals("31"))) {
                     day = dateArray[0] + "st";
                 } else if ((dateArray[0].equals("2") || dateArray[0].equals("22"))) {
                     day = dateArray[0] + "nd";

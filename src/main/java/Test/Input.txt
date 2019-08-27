@@ -1,4 +1,3 @@
-list
 todo read book
 deadline do homework /by 2/12/2019 1800
 event project meeting /at 15/12/2019 1800

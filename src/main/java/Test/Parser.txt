@@ -1,2 +1,0 @@
-Parser p = new Parser();
-p.parse("todo read book");

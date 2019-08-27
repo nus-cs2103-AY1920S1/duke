@@ -7,36 +7,42 @@ Hello from
 
 What can I do for you?
 ____________________________________________________________
+1.[T][✘] read book
+2.[T][✓] borrow book
+3.[T][✘] read book
+4.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+5.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+6.[T][✘] read book
+7.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+8.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task:
 [T][✘] read book
-Now you have 1 tasks in the list.
+Now you have 9 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[T][✘] borrow book
-Now you have 2 tasks in the list.
+[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+Now you have 10 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-[D][✘] return book (by: Thu Dec 05 08:00:00 SGT 2019)
-Now you have 3 tasks in the list.
-____________________________________________________________
-____________________________________________________________
-Got it. I've added this task:
-[D][✘] do homework (by: Mon Dec 02 18:00:00 SGT 2019)
-Now you have 4 tasks in the list.
-____________________________________________________________
-____________________________________________________________
-Got it. I've added this task:
-[E][✘] project meeting (at: Sun Dec 15 18:00:00 SGT 2019)
-Now you have 5 tasks in the list.
+[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+Now you have 11 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 1.[T][✘] read book
-2.[T][✘] borrow book
-3.[D][✘] return book (by: Thu Dec 05 08:00:00 SGT 2019)
-4.[D][✘] do homework (by: Mon Dec 02 18:00:00 SGT 2019)
-5.[E][✘] project meeting (at: Sun Dec 15 18:00:00 SGT 2019)
+2.[T][✓] borrow book
+3.[T][✘] read book
+4.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+5.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+6.[T][✘] read book
+7.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+8.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+9.[T][✘] read book
+10.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+11.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -45,20 +51,32 @@ ____________________________________________________________
 ____________________________________________________________
 1.[T][✘] read book
 2.[T][✓] borrow book
-3.[D][✘] return book (by: Thu Dec 05 08:00:00 SGT 2019)
-4.[D][✘] do homework (by: Mon Dec 02 18:00:00 SGT 2019)
-5.[E][✘] project meeting (at: Sun Dec 15 18:00:00 SGT 2019)
+3.[T][✘] read book
+4.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+5.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+6.[T][✘] read book
+7.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+8.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+9.[T][✘] read book
+10.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+11.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task: 
-[D][✘] return book (by: Thu Dec 05 08:00:00 SGT 2019)
-Now you have 4 tasks in the list.
+[T][✘] read book
+Now you have 10 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 1.[T][✘] read book
 2.[T][✓] borrow book
-3.[D][✘] do homework (by: Mon Dec 02 18:00:00 SGT 2019)
-4.[E][✘] project meeting (at: Sun Dec 15 18:00:00 SGT 2019)
+3.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+4.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+5.[T][✘] read book
+6.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+7.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+8.[T][✘] read book
+9.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+10.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)
 ____________________________________________________________
 ____________________________________________________________
 ☹ OOPS!!! The description of a todo cannot be empty.

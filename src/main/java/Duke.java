@@ -1,11 +1,41 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
+
+
+
 
 
 public class Duke {
     boolean exited = false;
     List<Task> toDoList = new ArrayList<>();
+    //set a variable to store the fixed file path of duke.txt
+    static String filePath = "/Users/joannayap/Downloads/duke/src/main/data/duke.txt";
+
+
+    public void writeToFile(String textToAdd) throws IOException{
+        //Create a file writer object to represent the hard disk
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    //create a method to update a specific line in file ( when the task is marked as done)
+
+    public static void updateText(int lineNumber) throws IOException{
+        Path path = Paths.get(filePath);
+     //read all the line in the files
+        List<String>  lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        String oldText = lines.get(lineNumber);
+        lines.set(lineNumber, oldText.substring(0, 3) + " 0 " + oldText.substring(6, oldText.length()));
+        Files.write(path, lines, StandardCharsets.UTF_8);
+    }
 
     public void respond() {
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +60,11 @@ public class Duke {
         if (input.contains("done")) {
             int taskNum = Integer.parseInt(input.substring(5)) - 1;
             Task updatedTask = toDoList.get(taskNum);
+            try{
+                updateText(taskNum);
+            } catch (IOException e){
+                System.out.println("Something went wrong " + e.getMessage());
+            }
             updatedTask.markAsDone();
             System.out.println("Nice! I've marked this task as done: ");
             System.out.println(updatedTask);
@@ -42,6 +77,12 @@ public class Duke {
             } else {
 
                 String desc = input.substring(5);
+
+              try{
+                  writeToFile("T | 1 | " + desc + "\n");
+              } catch (IOException e){
+                  System.out.println("Something went wrong " + e.getMessage());
+              }
 
                 Todo newTodo = new Todo(desc);
 
@@ -66,6 +107,16 @@ public class Duke {
                 String deadline = input.substring(deadlineIndex);
                 String desc = input.substring(9, deadlineIndex - 5);
 
+
+                try{
+                    writeToFile("D | 1 | " + desc + " | " + deadline+ "\n");
+                } catch (IOException e){
+                    System.out.println("Something went wrong " + e.getMessage());
+                }
+
+
+
+
                 Deadline newDeadline = new Deadline(desc, deadline);
 
                 toDoList.add(newDeadline);
@@ -87,6 +138,15 @@ public class Duke {
                 String time = input.substring(timeIndex);
 
                 String desc = input.substring(6, timeIndex - 5);
+
+                try{
+                    writeToFile("E | 1 | " + desc + " | " + time+ "\n");
+                } catch (IOException e){
+                    System.out.println("Something went wrong " + e.getMessage());
+                }
+
+
+
 
 
                 Event newEvent = new Event(desc, time);

@@ -27,6 +27,11 @@ public class Task{
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    //save to file
+    public String save(){
+        return "Saving";
+    }
+
     @Override
     public String toString(){
         String status = getStatusIcon();

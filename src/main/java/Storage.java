@@ -6,11 +6,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-// Class of saved tasks in hard disk
-public class DukeData {
-
-    private File f;
-    private boolean isExists;
+// Deals with loading and saving tasks from and in the file
+public class Storage {
 
     // Format of file
     // T | 1 | read book
@@ -18,14 +15,19 @@ public class DukeData {
     // E | 0 | project meeting | Aug 6th 2-4pm
     // T | 1 | join sports club
 
-    public DukeData() {
-        f = new File("F:\\CS2103\\duke\\data\\duke.txt");
+    private String fp; // Filepath
+    private File f;
+    private boolean isExists;
+    public Storage (String filepath) {
+        fp = filepath;
+        f = new File(filepath);
         isExists = f.exists();
     }
 
-    // Convert contents of data to ArrayList
-    public ArrayList<Task> toArrayList() throws DukeException {
-        ArrayList<Task> taskList = new ArrayList<Task>();
+    // Converts contents of file to ArrayList
+    // If no such file, return empty AL
+    public ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> taskArr = new ArrayList<Task>();
         try {
             // Represents one line of file
             ArrayList<String> taskData;
@@ -53,18 +55,18 @@ public class DukeData {
                     break;
                 }
                 if (isTaskDone) { currTask.markDone(); }
-                taskList.add(currTask);
+                taskArr.add(currTask);
             }
         } catch (FileNotFoundException e) {
             throw new DukeDataException();
         }
-        return taskList;
+        return taskArr;
     }
 
-    // Save changes in task list to hard disk
-    public void saveData(ArrayList<Task> taskList) throws IOException {
+    // Save updated AL to file in hard disk
+    public void save(ArrayList<Task> taskList) throws IOException {
         // Note: Overwrites file if currently exists
-        FileWriter fw = new FileWriter("F:\\CS2103\\duke\\data\\duke.txt");
+        FileWriter fw = new FileWriter(fp);
         String separatorStr = " | ";
         for (Task currTask : taskList) {
             fw.write(
@@ -80,8 +82,7 @@ public class DukeData {
         fw.close();
     }
 
-    // Returns whether data in hard disk exists
-    public boolean getIsExist() { return isExists; }
+    // Returns whether file in hard disk exists
+    public boolean doesFileExist() { return isExists; }
+
 }
-
-

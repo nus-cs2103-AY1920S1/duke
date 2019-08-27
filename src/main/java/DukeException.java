@@ -1,13 +1,18 @@
 public class DukeException extends Exception {
+
+    private String message;
     public DukeException(String message) {
         super("OOPS! " + message);
+        this.message = message;
     }
+
+    public String getMessage() { return this.message; }
 }
 
 //Empty description after command (todo, event, deadline, list, done)
 class EmptyDescriptionException extends DukeException {
     public EmptyDescriptionException (String command) {
-        super("The description of a " + command +
+        super("The description of " + command +
                 " cannot be empty.");
     }
 }
@@ -30,6 +35,6 @@ class IncorrectInfoInputException extends DukeException {
 // When no existing data in hard disk
 class DukeDataException extends DukeException {
     public DukeDataException() {
-        super("Dang it! No data in hard disk yet.");
+        super("Whoops! No data in hard disk yet.");
     }
 }

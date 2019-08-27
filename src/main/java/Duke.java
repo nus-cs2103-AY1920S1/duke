@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.File;
@@ -103,27 +106,32 @@ public class Duke {
             File dataFile = createOrRetrieve("./data/duke.txt");
             ArrayList<String> stringOfTasks = readFile(dataFile);
             String keyword = "";
-            String bool = "";
+            Boolean isDone = false;
             String description = "";
+            String dateAndTime = "";
             String date = "";
+            String time = "";
             Task t;
             for (String s : stringOfTasks) {
                 String[] cmdList = s.split("\\|");
                 keyword = cmdList[0].trim();
-                bool = cmdList[1].trim();
+                isDone = Boolean.valueOf(cmdList[1].trim());
                 description = cmdList[2].trim();
-                if (cmdList.length > 3) {
-                    date = cmdList[3];
+                if (cmdList.length > 3) { //aka got dateAndTime String
+                    dateAndTime = cmdList[3].trim();
+                    String[] dateTime = dateAndTime.split("\\s*,");
+                    date = dateTime[0];
+                    time = dateTime[1];
                 }
                 if (keyword.equalsIgnoreCase("D")) {
-                    t = new Deadline(description, date);
-                    t.setIsDone(bool);
+                    t = new Deadline(description, date, time);
                 } else if (keyword.equalsIgnoreCase("E")) {
-                    t = new Event(description, date);
-                    t.setIsDone(bool);
+                    t = new Event(description, date, time);
                 } else { //(keyword.equalsIgnoreCase("T")) {
                     t = new Todo(description);
-                    t.setIsDone(bool);
+                }
+                if (isDone) {
+                    t.markAsDone();
                 }
                 this.tasks.add(t);
             }
@@ -179,13 +187,23 @@ public class Duke {
     }
 
     private Task handleNewTask(String keyword, String cmd) throws InputMismatchException {
+        String date = "";
+        String time = "";
+        String desc = "";
         if (keyword.equalsIgnoreCase("deadline")) {
             String descriptionAndTime = cmd.substring(8);
             String[] details = descriptionAndTime.trim().split(" /by");
             if (descriptionAndTime.isEmpty() || details.length <= 1) {
                 throw new InputMismatchException("The description of a deadline cannot be empty.");
             }
-            return new Deadline(details[0], details[1]);
+            String[] dateTime = details[1].trim().split(" ",2);
+            if (dateTime.length < 2) {
+                throw new InputMismatchException("Please input deadline time format.");
+            }
+            desc = details[0];
+            date = dateTime[0];
+            time = dateTime[1];
+            return new Deadline(desc, date, time);
 
         } else if (keyword.equalsIgnoreCase("event")) {
             String descriptionAndTime = cmd.substring(5);
@@ -193,16 +211,24 @@ public class Duke {
             if (descriptionAndTime.isEmpty() || details.length <= 1) {
                 throw new InputMismatchException("The description of an event cannot be empty.");
             }
-            return new Event(details[0], details[1]);
+            String[] dateTime = details[1].split(" ",2);
+            if (dateTime.length < 2) {
+                throw new InputMismatchException("Please input event time format.");
+            }
+            desc = details[0];
+            date = dateTime[0];
+            time = dateTime[1];
+            return new Event(desc, date, time);
 
         } else if (keyword.equalsIgnoreCase("todo")) {
-            String description = cmd.substring(4).trim(); //words after todo
-            if (description.isEmpty()) {
+            desc = cmd.substring(4).trim(); //words after todo
+            if (desc.isEmpty()) {
                 throw new InputMismatchException("The description of a todo cannot be empty.");
             }
-            return new Todo(description);
+            return new Todo(desc);
         } else {
             throw new InputMismatchException("I'm sorry, but I don't know what that means :-(");
         }
     }
+
 }

@@ -3,6 +3,6 @@
 /build/
 src/main/resources/docs/
 
-ACTUAL.txt
+ACTUAL.TXT
 *.class
 *.dmp

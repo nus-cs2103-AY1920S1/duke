@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
@@ -14,7 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Returns deadline of task.
-     * @return Deadline of task.
+     * @return duke.task.Deadline of task.
      */
     public String getDeadline() {
         return DATE_TIME_FORMATTER.format(this.by);

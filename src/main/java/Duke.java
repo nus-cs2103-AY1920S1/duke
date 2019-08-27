@@ -18,28 +18,55 @@ public class Duke {
 
         Scanner userInput = new Scanner(System.in);
         while (true) {
-            String s = userInput.nextLine().trim();
-            if (s.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                userInput.close();
-                break;
-            } else if (s.equals("list")){
-                printTasks();
-            } else if (s.matches("done ([1-9]|[1-9][0-9]|100)")) {
-                int displayNumber = Integer.parseInt(s.substring(5));
-                markTaskAsDone(displayNumber - 1);
-            } else if (s.startsWith("todo ")) {
-                s = s.substring(5);
-                addTask(new Todo(s));
-            } else if (s.startsWith("deadline ")) {
-                s = s.substring(9);
-                String[] arguments = s.split("/by");
-                addTask(new Deadline(arguments[0].trim(), arguments[1].trim()));
-            } else if (s.startsWith("event ")) {
-                s = s.substring(6);
-                String[] arguments = s.split("/at");
-                addTask(new Event(arguments[0].trim(), arguments[1].trim()));
+            try {
+                String s = userInput.nextLine().trim();
+                if (s.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon!");
+                    userInput.close();
+                    break;
+                } else if (s.equals("list")){
+                    printTasks();
+                } else if (s.matches("done ([1-9]|[1-9][0-9]|100)")) {
+                    int displayNumber = Integer.parseInt(s.substring(5));
+                    markTaskAsDone(displayNumber - 1);
+                } else if (s.startsWith("todo")) {
+                    try {
+                        s = s.substring(5);
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException(" ☹ OOPS!!! Todos must have a description");
+                    }
+                    addTask(new Todo(s));
+                } else if (s.startsWith("deadline")) {
+                    try {
+                        s = s.substring(9);
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException(" ☹ OOPS!!! Deadlines must have a description");
+                    }
+
+                    String[] arguments = s.split("/by");
+                    if (arguments.length != 2) {
+                        throw new DukeException(" ☹ OOPS!!! Deadlines must have exactly one deadline");
+                    }
+                    addTask(new Deadline(arguments[0].trim(), arguments[1].trim()));
+                } else if (s.startsWith("event")) {
+                    try {
+                        s = s.substring(6);
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException(" ☹ OOPS!!! Events must have a description");
+                    }
+
+                    String[] arguments = s.split("/at");
+                    if (arguments.length != 2) {
+                        throw new DukeException(" ☹ OOPS!!! Events must have exactly one time");
+                    }
+                    addTask(new Event(arguments[0].trim(), arguments[1].trim()));
+                } else {
+                    throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
+
         }
     }
 
@@ -55,11 +82,15 @@ public class Duke {
 
     }
 
-    private static void markTaskAsDone(int index) {
-        Task t = tasks.get(index);
-        t.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
+    private static void markTaskAsDone(int index) throws DukeException {
+        try {
+            Task t = tasks.get(index);
+            t.markAsDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(t);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(" ☹ OOPS!!! There is no task number " + (index + 1));
+        }
     }
 
     private static void printTasks() {

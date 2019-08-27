@@ -11,10 +11,6 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    protected String getDescription() {
-        return description;
-    }
-
     protected void markAsDone() {
         isDone = true;
     }

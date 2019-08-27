@@ -57,6 +57,9 @@ public class Parser {
                         userInput.trim().substring(separatedInputs[0].length()).trim().split("/at");
                 return new EventCommand(arguments);
             }
+        case "find":
+            String keyword = userInput.trim().substring(separatedInputs[0].length()).trim();
+            return new FindCommand(keyword);
         default:
             throw new DukeException("invalid input");
         }

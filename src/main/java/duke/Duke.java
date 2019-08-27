@@ -1,7 +1,8 @@
 package duke;
 
 import duke.command.Command;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.DukeIoException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -18,7 +19,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         try {
             this.taskList = storage.readFromDisk(); // leave index 0 empty for clarity
-        } catch (DukeIOException e) {
+        } catch (DukeIoException e) {
             ui.showError(e);
             this.taskList = new TaskList(); // only load the taskList if no error
         }

@@ -7,7 +7,9 @@ import duke.exception.DukeUnknownInputException;
 
 import java.util.Arrays;
 
-import static duke.task.TaskType.*;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.DEADLINE;
+import static duke.task.TaskType.EVENT;
 
 /**
  * Deals with making sense of commands.
@@ -36,8 +38,8 @@ public class Parser {
         case "event":
             return new AddCommand(EVENT, args, false);
         case "deadline":
-            String[] dArgs = String.join(" ", args).split(" /by ");
-            String deadline = dArgs[1];
+            String[] deadlineArgs = String.join(" ", args).split(" /by ");
+            String deadline = deadlineArgs[1];
             // enforce example format 2/12/2019 1800
             if (deadline.split(" ").length != 2
                     || deadline.split(" ")[0].split("/").length != 3
@@ -46,6 +48,13 @@ public class Parser {
                 throw new DukeUnknownInputException("Parser: Unknown deadline String format passed :(");
             }
             return new AddCommand(DEADLINE, args, false);
+        case "find":
+            if (args.length == 0) {
+                throw new DukeMissingDescriptionException(
+                        "Parser: :'( OOPS!!! The keyword of a search cannot be empty.");
+            }
+            String keyword = args[0].strip();
+            return new FindCommand(keyword, false);
         case "done":
             int doneIdx = Integer.valueOf(args[0]);
             return new DoneCommand(doneIdx, false);

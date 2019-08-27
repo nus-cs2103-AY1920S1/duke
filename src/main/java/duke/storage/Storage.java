@@ -1,8 +1,13 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
-import duke.task.*;
+import duke.exception.DukeIoException;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Todo;
+import duke.task.TaskFactory;
+import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,11 +22,10 @@ import java.util.Arrays;
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
-import static duke.task.TaskType.*;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.DEADLINE;
+import static duke.task.TaskType.EVENT;
 
-/**
- * Handles writing all tasks from Duke and reading all tasks from the hard disk.
- */
 public class Storage {
     private Path path;
 
@@ -29,13 +33,7 @@ public class Storage {
         this.path = Paths.get(uri);
     }
 
-    /**
-     * Reads all tasks from the file in the specified path.
-     *
-     * @return a TaskList instance containing the read tasks.
-     * @throws DukeIOException when an error occurs trying to read from the file.
-     */
-    public TaskList readFromDisk() throws DukeIOException {
+    public TaskList readFromDisk() throws DukeIoException {
         Charset charset = Charset.forName("ISO-8859-1");
         TaskList taskList = new TaskList();
         try {
@@ -57,18 +55,11 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
         return taskList;
     }
 
-    /**
-     * Writes all tasks in the given TaskList into a text file in the specified path.
-     *
-     * @param taskList the TaskList to write to the hard disk.
-     * @return the TaskList that was written to the hard disk.
-     * @throws DukeException when an error occurs trying to write to the file.
-     */
     public TaskList writeToDisk(TaskList taskList) throws DukeException {
         Charset charset = Charset.forName("ISO-8859-1");
         ArrayList<Task> tasks = taskList.getTaskList();
@@ -97,7 +88,7 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
         return taskList;
     }

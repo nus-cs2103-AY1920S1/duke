@@ -4,6 +4,9 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+/**
+ * Represents an instruction to list all tasks.
+ */
 public class ListCommand extends Command {
     public ListCommand(boolean isExit) {
         super(isExit);

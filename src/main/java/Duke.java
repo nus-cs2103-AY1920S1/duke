@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Duke {
@@ -118,10 +120,12 @@ public class Duke {
             if (type.equals("T")) {
                 t = new ToDo(arr[2]);
             } else {
+                long time = Long.parseLong(arr[3]);
+                Date date = new Date(time);
                 if (type.equals("D")) {
-                    t = new Deadline(arr[2], arr[3]);
+                    t = new Deadline(arr[2], date);
                 } else {
-                    t = new Event(arr[2], arr[3]);
+                    t = new Event(arr[2], date);
                 }
             }
             if (done == 1) {
@@ -141,10 +145,12 @@ public class Duke {
             task = new ToDo(des);
         } else if (s.equals("deadline")) {
             String[] arr = des.split("/by");
-            task = new Deadline(arr[0].trim(), arr[1].trim());
+            Date date = convertToDate(arr[1].trim());
+            task = new Deadline(arr[0].trim(), date);
         } else if (s.equals("event")) {
             String[] arr = des.split("/at");
-            task = new Event(arr[0].trim(), arr[1].trim());
+            Date date = convertToDate(arr[1].trim());
+            task = new Event(arr[0].trim(), date);
         }
         list.add(task);
         try {
@@ -154,6 +160,20 @@ public class Duke {
             System.out.println("Something went wrong");
         }
         printTask(task);
+    }
+
+    public static Date convertToDate(String str) {
+        String[] arr = str.split(" ");
+        String date = arr[0];
+        String time = arr[1];
+        String[] dateArray = date.split("/");
+        int day = Integer.parseInt(dateArray[0]);
+        int month = Integer.parseInt(dateArray[1]) - 1;
+        int year = Integer.parseInt(dateArray[2]);
+        int hour = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(2));
+        Date d = new GregorianCalendar(year, month, day, hour, minute).getTime();
+        return d;
     }
 
     public static void printTask(Task t) {

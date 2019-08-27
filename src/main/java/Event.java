@@ -1,8 +1,13 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
     String eventDate;
+
     Event(String taskName, String eventDate){
         super(taskName);
         this.eventDate = eventDate;
+
     }
 
     public String getTaskDetails(){
@@ -15,3 +20,4 @@ public class Event extends Task {
         return "[E]" + "[" + doneSymbol + "] " + getTaskName() + " (at: " + eventDate + ")";
     }
 }
+

@@ -27,7 +27,12 @@ public class Duke {
             } else if (line.contains("/")) {
                 String taskCat = line.split(" ")[0];
                 if (taskCat.equals("deadline")) {
-                    String endDate = line.split("/")[1].split(" ")[1];
+                    String endDate = "";
+                    if(line.split("/").length == 3) {
+                        endDate = line.split("/")[1].split(" ")[1];
+                    } else {
+                        endDate = line.split("/by ")[1];
+                    }
                     String taskName = line.split("/")[0].split("deadline ")[1];
                     Task currTask = new Deadline(taskName, endDate);
                     tasksHolder.addTask(currTask);

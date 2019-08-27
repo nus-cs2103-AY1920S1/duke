@@ -1,0 +1,4 @@
+T//fuck bitches//true
+T//fuck whores//false
+E//formal dinner//true//6.30pm
+D//IS homework//false//2359

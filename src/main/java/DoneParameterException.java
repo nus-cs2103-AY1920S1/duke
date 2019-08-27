@@ -1,3 +1,3 @@
-public class DoneParameterException extends Exception{
+public class DoneParameterException extends DukeException{
     public DoneParameterException(String exceptionMsg) { super(exceptionMsg); }
 }

@@ -3,7 +3,7 @@
  * in which the task will take place at/during.
  */
 public class Event extends Task {
-    protected String at;
+    protected DateTime at;
 
     /** Basic constructor for the Event sub-class.
      * Takes in description of the task as well
@@ -11,7 +11,7 @@ public class Event extends Task {
      * @param description details of the task.
      * @param at time period at which task occurs.
      */
-    public Event(String description, String at) {
+    public Event(String description, DateTime at) {
         super(description);
         this.at = at;
     }

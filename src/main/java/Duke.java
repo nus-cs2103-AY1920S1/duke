@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,10 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     this.formattedPrintln("You need to provide me " +
                             "with a valid task index!");
+                } catch (ParseException e) {
+                    this.formattedPrintln(("I couldn't decipher the date and time"
+                            + "you gave me...\n"
+                            + "Please write it in dd/mm/yyyy HHmm format!"));
                 } catch (DukeException e) {
                     this.formattedPrintln(e.getMessage());
                 }
@@ -71,7 +76,7 @@ public class Duke {
       @param input string input by the user.
      */
     private void parseInstruction(String input) throws DukeException,
-            NumberFormatException {
+            NumberFormatException, ParseException {
         String[] parsedStr = input.split(" ", 2);
         String command = parsedStr[0];
         String parameter;
@@ -159,7 +164,8 @@ public class Duke {
      @param eventType the type of task to be created
      @param parameters the parameters for describing the task
     */
-    private void addToList(String taskType, String parameters) throws DukeException {
+    private void addToList(String taskType, String parameters) throws DukeException,
+            ParseException {
         Task task;
         String description;
         String[] splitStr;
@@ -176,7 +182,8 @@ public class Duke {
                             + " to create an event task!");
                 }
                 description = splitStr[0];
-                String at = splitStr[1];
+                String at_str = splitStr[1];
+                DateTime at = DateTime.parseString(at_str);
                 task = new Event(description, at);
                 break;
             case "deadline":
@@ -186,7 +193,8 @@ public class Duke {
                             + " to create an deadline task!");
                 }
                 description = splitStr[0];
-                String by = splitStr[1];
+                String by_str = splitStr[1];
+                DateTime by = DateTime.parseString(by_str);
                 task = new Deadline(description, by);
                 break;
             default:

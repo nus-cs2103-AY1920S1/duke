@@ -2,6 +2,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+>>>>>>> branch-Level-8
 
 public class Duke {
     private ArrayList<Task> textEntered;
@@ -99,11 +103,13 @@ public class Duke {
         if (typeTask.equalsIgnoreCase("todo")) {
              taskToAdd = new ToDo(inputsplit[1]);
         } else if (typeTask.equalsIgnoreCase("deadline")) {
-            String[] descripSplit = inputsplit[1].split(" /by ", 2);
-             taskToAdd = new Deadline(descripSplit[0], descripSplit[1]);
+             String[] descripSplit = inputsplit[1].split(" /by ", 2);
+             LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
+             taskToAdd = new Deadline(descripSplit[0],ldt);
         } else {
             String[] descripSplit = inputsplit[1].split(" /at ", 2);
-             taskToAdd = new Event(descripSplit[0], descripSplit[1]);
+            LocalDateTime ldt = DateTimeHelper.formatInput(descripSplit[1]);
+            taskToAdd = new Event(descripSplit[0], ldt);
         }
         addToRecord(taskToAdd);
     }

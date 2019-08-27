@@ -1,17 +1,24 @@
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
     private static ArrayList<Task> arr = new ArrayList<>(100);
+    private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     /**
      * Prints a string.
      */
     private static void print(String str) {
         System.out.println(str);
+    }
+    /**
+     * Prints a string.
+     */
+    private static Date parseAsDate(String str) {
+        return dateFormatter.parse(str, new ParsePosition(0));
     }
 
     /**
@@ -45,6 +52,7 @@ public class Duke {
                         print("Noted. I've removed this task:");
                         print(removed.toString());
                         print("Now you have " + arr.size() + (arr.size() > 1 ? " tasks" : " task") + " in the list.");
+
                     } catch (InputMismatchException e) {
                         print("OOPS!!! You need to enter a natural number.");
                     }
@@ -82,8 +90,9 @@ public class Duke {
                                 taskName += s + " ";
                             }
                         }
-                        if (deadline.isBlank()) {
-                            temp = new TaskBuilder().type(TaskType.DEADLINE).description(taskName).deadline(deadline).build();
+                        if (!deadline.isBlank()) {
+                            Date date = parseAsDate(deadline);
+                            temp = new TaskBuilder().type(TaskType.DEADLINE).description(taskName).deadline(date).build();
                             addTask(temp);
                         } else {
                             print("OOPS!!! The deadline cannot be empty.");
@@ -107,7 +116,8 @@ public class Duke {
                             }
                         }
                         if (!timeframe.isBlank()) {
-                            temp = new TaskBuilder().type(TaskType.EVENT).description(taskName).timeframe(timeframe).build();
+                            Date date = parseAsDate(timeframe);
+                            temp = new TaskBuilder().type(TaskType.EVENT).description(taskName).timeframe(date).build();
                             addTask(temp);
                         } else {
                             print("OOPS!!! The timeframe of an event cannot be empty.");

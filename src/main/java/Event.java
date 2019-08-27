@@ -11,11 +11,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + at.toString() + ")";
     }
 
     @Override
     public String writeToFile() {
-        return super.writeToFile() + "|" + at;
+        return super.writeToFile() + "|" + at.toString();
     }
 }

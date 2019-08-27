@@ -12,11 +12,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + deadline + ")";
+        return super.toString() + " (by: " + deadline.toString() + ")";
     }
 
     @Override
     public String writeToFile() {
-        return super.writeToFile() + "|" + deadline;
+        return super.writeToFile() + "|" + deadline.toString();
     }
 }

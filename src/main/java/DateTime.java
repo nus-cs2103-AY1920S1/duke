@@ -87,6 +87,10 @@ public class DateTime {
             minute = time % 100;
             hour = (time - minute) / 100;
             timeSuffix = "am";
+        } else if (time <= 1259) {
+            minute = time % 100;
+            hour = 12;
+            timeSuffix = "pm";
         } else {
             minute = time % 100;
             hour = (time - minute) / 100 - 12;

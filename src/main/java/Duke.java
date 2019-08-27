@@ -9,11 +9,12 @@ public class Duke {
             "    ____________________________________________________________";
 
     public static void main(String[] args) {
+        Storage storage = new Storage("data/duke.txt");
         sc = new Scanner(System.in);
         String input;
 
         try {
-            tasks = Storage.getTasks();
+            tasks = storage.getTasks();
         } catch (FileNotFoundException e) {
             tasks = new ArrayList<>();
         } catch (DukeException e) {
@@ -27,7 +28,7 @@ public class Duke {
 
             if (input.equals("bye")) {
                 try {
-                    Storage.saveTasks(tasks);
+                    storage.saveTasks(tasks);
                 } catch (DukeException e) {
                     System.err.println(e);
                 }

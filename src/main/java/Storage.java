@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Storage {
-    private static final File file = new File("data/duke.txt");
+    private File file;
 
-    public static ArrayList<Task> getTasks() throws FileNotFoundException, DukeException {
+    public Storage(String filePath) {
+        file = new File(filePath);
+    }
+
+    public ArrayList<Task> getTasks() throws FileNotFoundException, DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(file);
 
@@ -49,7 +53,7 @@ public class Storage {
         return tasks;
     }
 
-    public static void saveTasks(ArrayList<Task> tasks) throws DukeException {
+    public void saveTasks(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
             StringBuilder fileStringBuilder = new StringBuilder();

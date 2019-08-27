@@ -4,7 +4,18 @@ import tasks.Event;
 import tasks.TaskList;
 import tasks.ToDo;
 
+/**
+ * Represents a parser that parses the information that is input by the user.
+ */
 public class Parser {
+    /**
+     * Parses a deadline that is input by the user.
+     * @param input Input given by the user.
+     * @param t List of tasks input by the user.
+     * @param ui Ui object handling interactions with the user.
+     * @param s Storage object storing data input by the user.
+     * @throws DukeException if user input is wrong.
+     */
     public static void parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         String deadlineDetails = input.substring(9);
         try {
@@ -24,6 +35,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a event that is input by the user.
+     * @param input Input given by the user.
+     * @param t List of tasks input by the user.
+     * @param ui Ui object handling interactions with the user.
+     * @param s Storage object storing data input by the user.
+     * @throws DukeException if user input is wrong.
+     */
     public static void parseEvent(String input, TaskList t,Ui ui,Storage s) throws DukeException {
         String eventDetails = input.substring(6);
         try {
@@ -43,6 +62,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a toDo that is input by the user.
+     * @param input Input given by the user.
+     * @param t List of tasks input by the user.
+     * @param ui Ui object handling interactions with the user.
+     * @param s Storage object storing data input by the user.
+     * @throws DukeException if user input is wrong.
+     */
     public static void parseToDo(String input, TaskList t,Ui ui,Storage s) throws DukeException {
         if (input.length() == 4) {
             throw new TodoEmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
@@ -54,6 +81,13 @@ public class Parser {
         System.out.println(todo);
     }
 
+    /**
+     * Parses a done command that is input by the user.
+     * @param input Input given by the user.
+     * @param t List of tasks input by the user.
+     * @param s Storage object storing data input by the user.
+     * @throws DukeException if user input is wrong.
+     */
     public static void parseDone(String input, TaskList t,Storage s) throws DukeException {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
@@ -64,6 +98,14 @@ public class Parser {
         s.writeListToFile(t);
     }
 
+    /**
+     * Parses a delete command that is input by the user.
+     * @param input Input given by the user.
+     * @param t List of tasks input by the user.
+     * @param ui Ui object handling interactions with the user.
+     * @param s Storage object storing data input by the user.
+     * @throws DukeException if user input is wrong.
+     */
     public static void parseDelete(String input, TaskList t,Ui ui, Storage s) throws DukeException {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);

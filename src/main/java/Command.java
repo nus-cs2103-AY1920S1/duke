@@ -2,13 +2,27 @@ import customexceptions.DukeException;
 import customexceptions.IncorrectInputException;
 import tasks.TaskList;
 
+/**
+ * Represents a command that is perceived by Duke.
+ */
 public class Command {
     private String input;
 
+    /**
+     * Constructor for command object.
+     * @param input The input given by the user.
+     */
     public Command(String input) {
         this.input = input;
     }
 
+    /**
+     * Executes the command that Duke receieves.
+     * @param ui Ui object.
+     * @param t TaskList object storing list of tasks.
+     * @param s Storage object storing data input by the user.
+     * @throws DukeException if there is an error with the user input.
+     */
     public void execute(Ui ui, TaskList t, Storage s) throws DukeException {
         if (input.length() <= 3) {
             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");

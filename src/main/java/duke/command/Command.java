@@ -1,5 +1,6 @@
-package duke;
+package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -14,5 +15,5 @@ public abstract class Command {
         return isExit;
     }
 
-    abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 }

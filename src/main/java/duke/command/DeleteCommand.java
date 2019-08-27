@@ -1,12 +1,9 @@
-package duke;
+package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.task.Task;
-import duke.task.TaskFactory;
 import duke.task.TaskList;
-import duke.task.TaskType;
-
-import static duke.task.TaskType.TODO;
 
 public class DeleteCommand extends Command {
     private int idx;

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.DukeMissingDescriptionException;
 import duke.exception.DukeUnknownInputException;

@@ -28,56 +28,57 @@ public class Duke {
                     break;
                 }
 
-                if (!taskType.equals("list")) {
-                    if (!taskType.equals("done") && !taskType.equals("delete")) {
-                        if (inputArr.length == 1) {
-                            throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
-                        }
+                if (taskType.equals("list")) {
 
-                        if (inputArr.length != 1) {
-                            if (taskType.equals("todo")) {
-                                Task newTodo = new Todo(taskDesc);
-                                Task.addTask(newTodo);
-
-                                input = sc.nextLine();
-
-                            } else if (taskType.equals("deadline")) {
-                                String[] taskDescArr = taskDesc.split(" /");
-
-                                Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1]);
-
-                                Task.addTask(newDeadline);
-
-                                input = sc.nextLine();
-
-                            } else {
-                                String[] taskDescArr = taskDesc.split(" /");
-
-                                Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
-
-                                Task.addTask(newEvent);
-
-                                input = sc.nextLine();
-                            }
-                        } else {
-                            throw new NoDescriptionException(":( OOPS!!! The description of " + input + " cannot be empty");
-                        }
-                    } else if (taskType.equals("delete")) {
-                        int taskNum = Integer.parseInt(taskDesc);
-                        Task.deleteTask(taskNum);
-
-                        input = sc.nextLine();
-                    } else {
-                        int taskNum = Integer.parseInt(taskDesc);
-                        Task.doTask(taskNum);
-
-                        input = sc.nextLine();
-                    }
-                } else {
                     Task.printTaskList();
+                    input = sc.nextLine();
+
+                } else if (taskType.equals("done")) {
+
+                    int taskNum = Integer.parseInt(taskDesc);
+                    Task.doTask(taskNum);
+
+                    input = sc.nextLine();
+
+                } else if (taskType.equals("delete")) {
+
+                    int taskNum = Integer.parseInt(taskDesc);
+                    Task.deleteTask(taskNum);
+
+                    input = sc.nextLine();
+
+                } else if (inputArr.length == 1){
+
+                    throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
+
+                } else if (taskType.equals("todo")) {
+
+                    Task newTodo = new Todo(taskDesc);
+                    Task.addTask(newTodo);
+
+                    input = sc.nextLine();
+
+                } else if (taskType.equals("deadline")) {
+
+                    String[] taskDescArr = taskDesc.split(" /");
+
+                    Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1]);
+
+                    Task.addTask(newDeadline);
+
+                    input = sc.nextLine();
+
+                } else {
+                    String[] taskDescArr = taskDesc.split(" /");
+
+                    Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
+
+                    Task.addTask(newEvent);
 
                     input = sc.nextLine();
                 }
+
+
             } catch (DukeException e) {
                 printLine();
 

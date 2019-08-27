@@ -1,5 +1,8 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private String eventDate;
+    private String eventDateString;
+    private LocalDateTime eventDate;
 
     public Event(String description, String eventDate) {
         super(description);
@@ -15,12 +18,13 @@ public class Event extends Task {
             temp.append(eventDateArr[i]);
         }
 
-        this.eventDate = temp.toString();
+        this.eventDateString = temp.toString();
+        this.eventDate = storeAsDateTime(eventDateString);
     }
 
     @Override
     public String toString() {
-        String task = "[E][" + this.getStatusIcon() + "] " + this.description + " (" + eventDate + ")";
+        String task = "[E][" + this.getStatusIcon() + "] " + this.description + " (" + eventDateString + ")";
         return task;
     }
 }

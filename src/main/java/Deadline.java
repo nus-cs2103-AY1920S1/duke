@@ -1,5 +1,8 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    private String deadline;
+    private String deadlineString;
+    private LocalDateTime deadlineDate;
 
     public Deadline(String description, String deadline) {
         super(description);
@@ -15,12 +18,13 @@ public class Deadline extends Task {
             temp.append(deadlineArr[i]);
         }
 
-        this.deadline = temp.toString();
+        this.deadlineString = temp.toString();
+        this.deadlineDate = storeAsDateTime(deadlineString);
     }
 
     @Override
     public String toString() {
-        String task = "[D][" + this.getStatusIcon() + "] " + description + " (" + deadline + ")";
+        String task = "[D][" + this.getStatusIcon() + "] " + description + " (" + deadlineString + ")";
         return task;
     }
 }

@@ -1,5 +1,5 @@
 public class eventTask extends Task {
-
+    //Add variable for eventTask
     String timeSlot;
 
     public eventTask(String taskInput, String timing) {

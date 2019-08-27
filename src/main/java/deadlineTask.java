@@ -1,4 +1,5 @@
 public class deadlineTask extends Task {
+    //Add variable for deadline tasks
     String deadline;
 
     public deadlineTask(String inputTask, String endTime) {

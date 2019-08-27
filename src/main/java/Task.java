@@ -10,11 +10,16 @@ public class Task {
         type = null;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    //return the String of having completed the current task
+    //Change the completed variable
     public String taskComplete() {
         completed = true;
         String firstLine = "Nice! I've marked this task as done:\n";
         String secondLine = "      " + this;
-
         return firstLine+secondLine;
     }
 

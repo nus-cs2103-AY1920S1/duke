@@ -41,6 +41,7 @@ public class Duke {
                 int number = Integer.parseInt(numberAsString);
                 spacer(myTaskList.taskDone(number-1));
             } else {
+                //Adding is handled in tasklist
                 myTaskList.addTasks(userInput);
             }
             userInput = myInputReader.nextLine();

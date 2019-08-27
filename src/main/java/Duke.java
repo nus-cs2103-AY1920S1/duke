@@ -8,151 +8,54 @@ import java.util.LinkedList;
 import java.io.File;
 
 public class Duke {
+    
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+
+    public Duke(String filePath){
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try{
+            tasks = new TaskList(storage.printFileContents());
+        } catch (FileNotFoundException e){
+
+        }
+
+    }
 
     //write to file when there is a change in state
 
-    static void writeFile(String filePath, LinkedList<Task> li) throws FileNotFoundException{
-        PrintWriter outputStream = new PrintWriter(filePath);
-        for(int i = 0; i < li.size(); i++){
-            outputStream.println(li.get(i).save());
-        }
-        outputStream.close();
-        //System.out.println("File saved");
-    }
-
-    //read exsiting file
-    static void printFileContents(String filePath, LinkedList<Task> li) throws FileNotFoundException{
-        File f = new File(filePath);
-        Scanner scan = new Scanner(f);
-        while(scan.hasNext()){
-            String[] what = scan.nextLine().split("\\|");
-            // 0 is the task type
-            // 1 is the done level
-            // 2 is the description
-            // 3 is the deadline if it has
-            // for(int i = 0; i < what.length; i++){
-            //     System.out.println(what[i]);
-            // }
-            String taskType = what[0];
-            int doner = Integer.parseInt(what[1]);
-            Task newTask = null;
-            if (taskType.equals("T")){
-                newTask =  new ToDo(what[2], doner);
-                
-            } else if(taskType.equals("D")){
-                newTask = new Deadline(what[2], dateTimeConversion(what[3]), doner);
-
-            } else if (taskType.equals("E")){
-                newTask = new Event(what[2], dateTimeConversion(what[3]), doner);
-            }
-            li.add(newTask);
-        };
-    }
-
-    //print the line for fromatting
-    static Date dateTimeConversion(String dateTime){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
-        String dateInString = dateTime;
-        try {
-            Date date = formatter.parse(dateInString);
-            return date;
-        } catch (ParseException e){
-            System.out.println("Not valid date and time");
-            Date date = null;
-            return date;
-        }
-    }
-
-    static void printline(){
-        String line =  "\t____________________________________________________________";
-        System.out.println(line);
-    }
-
-    //print new line for formatting
-    static void printnewline(){
-        System.out.println("\n");
-    }
-
-    //gives confirmation that an task input is taken
-    static void takeInput(Task t, int i){
-        printline();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + t);
-        System.out.println("\tNow you have " + i + " tasks in the list");
-        printline();
-    }
-
-    //prints out the list of task on hand
-    static void printList(LinkedList<Task> li){
-        printline();
-        System.out.println("\tHere are the tasks in your list:");
-        for(int i = 0; i < li.size(); i++){
-            int j = i+1;
-            System.out.println("\t" + j + ". " + li.get(i));
-        }
-        printline();
-    }
-
-    //completion of task confirmation
-    static void printDone(Task task){
-        printline();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + task);
-        printline();
-    }
-
-    //completion of removal of task
-    static void printDelete(Task task, int i){
-        printline();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have " + i + " tasks in the list");
-        printline();
-    }
-    
-    
-    
-    public static void main(String[] args) {
+    public void run(){
         Scanner scan = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String name = "Duke";
-        printline();
-        System.out.println("\tHello, I'm " + name);
-        System.out.println("\tWhat can I do for you?");
-        printline();
+        
+        ui.showWelcome();
 
         //LinkedList used to store all the String given by the user;
-        LinkedList<Task> li = new LinkedList<Task>();
+        // LinkedList<Task> li = new LinkedList<Task>();
 
         //read the existing task from the file and create the tasks to put
         //into the list. 
 
-        try{
-            String fileName = "data/duke.txt";
-            printFileContents(fileName, li);
-
-        } catch(FileNotFoundException e){
-            //System.out.println("File not found");
-        }
+        // try{
+        //     storage.printFileContents(li);
+        // } catch(FileNotFoundException e){
+        //     //System.out.println("File not found");
+        // }
 
         while(true){
-            printnewline();
+            ui.printnewline();
             String echo = scan.nextLine();
-            String[] split = echo.split(" ");
+            Parser split = new Parser(echo);
             String error = "";
 
-            String firstWord = split[0];
+            String firstWord = split.getType();
 
             if(firstWord.equals("bye")){
                 // if bye, then end the program
-                printline();
+                ui.printline();
                 System.out.println("\tBye. Hope to see you again soon!");
-                printline();
+                ui.printline();
                 
                 
                 break;
@@ -160,41 +63,39 @@ public class Duke {
             } else if(firstWord.equals("list")){
                 //if list, print the list of tasks
 
-                printList(li);
+                tasks.printList();
 
             } else if(firstWord.equals("done")){
                 //if done, change the task status and tell them what they have completed
-                int taskNum = Integer.parseInt(split[1]);
+                int taskNum = Integer.parseInt(split.getDesc().get(0));
                 //scan.nextLine();
                 //System.out.println(taskNum);
                 
                 int taskNumb = taskNum - 1;
                 
-                if (taskNumb >= li.size()){
+                if (taskNumb >= tasks.size()){
                     error = "taskDoNotExist";
-                } else if (li.get(taskNumb).getIsDone()) {
+                } else if (tasks.getTask(taskNumb).getIsDone()) {
                     //System.out.println("im here");
                     error = "taskAlreadyCompleted";
                 } else {
-                    Task change = li.get(taskNumb);
+                    Task change = tasks.getTask(taskNumb);
                     change.completed();
-                    printDone(change);
+                    ui.printDone(change);
                 }
 
             } else if (firstWord.equals("delete")){
-                int taskNum = Integer.parseInt(split[1]);
+                int taskNum = Integer.parseInt(split.getDesc().get(0));
                 int taskNumb = taskNum - 1;
                 
-                printDelete(li.get(taskNumb), li.size() - 1);
-                li.remove(taskNumb);
+                ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
+                tasks.remove(taskNumb);
 
             } else {
                 String actual =  "";
                 Task newTask = null;
-                LinkedList<String> copy = new LinkedList<>();
-                for(int i = 1; i < split.length; i++){
-                    copy.add(split[i]);
-                }
+                LinkedList<String> copy = split.getDesc();
+
                 if (firstWord.equals("todo")){
                     actual =  String.join(" ", copy);
                     if(actual.isEmpty()){
@@ -223,7 +124,7 @@ public class Duke {
                                 error = "emptyDeadline";
                             } else {
                                 //System.out.println(task);
-                                newTask = new Deadline(task, dateTimeConversion(time));
+                                newTask = new Deadline(task, storage.dateTimeConversion(time));
                             }
                         }
 
@@ -250,7 +151,7 @@ public class Duke {
                                 error = "emptyEvent";
                             } else {
                                 //System.out.println(task);
-                                newTask = new Event(task, dateTimeConversion(time));
+                                newTask = new Event(task, storage.dateTimeConversion(time));
                             }
                         }
 
@@ -261,7 +162,7 @@ public class Duke {
                 if (!error.isEmpty() || newTask == null){
                     
                     AException ee =  new AException();
-                    printline();
+                    ui.printline();
                     if (error.equals("emptyToDo")){
                         ee.emptyToDoException();
                     } else if (error.equals("emptyDeadline")){
@@ -276,11 +177,11 @@ public class Duke {
                         ee.dontUnderstand();
                     }
 
-                    printline();
+                    ui.printline();
                     error = "";
                 } else {
-                    li.add(newTask);
-                    takeInput(newTask, li.size());
+                    tasks.add(newTask);
+                    ui.takeInput(newTask, tasks.size());
                     
                 }
 
@@ -288,23 +189,25 @@ public class Duke {
 
             if(!error.isEmpty()){
                 AException ee2 =  new AException();
-                printline();
+                ui.printline();
                 if(error.equals("taskDoNotExist")){
                     ee2.exceedListSize();
                 } else if(error.equals("taskAlreadyCompleted")){
                     ee2.taskAlreadyCompleted();
                 }
-                printline();
+                ui.printline();
             }
 
-            String fileName = "data/duke.txt";
             try{
-                writeFile(fileName, li);
+                storage.writeFile(tasks.getList());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
-
-
+    }
+    
+    
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 }

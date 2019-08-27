@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,8 +25,7 @@ public class Duke {
                     Task currentTask = tasks.get(i);
                     System.out.println(currentItemNumber + "." + currentTask);
                 }
-            }
-            else {
+            } else {
                 String[] words = userinput.split(" ");
 
                 // Done
@@ -64,8 +66,10 @@ public class Duke {
                             String remainingWords = userinput.replaceFirst("deadline ", "");
                             String[] remainingWords2 = remainingWords.split(" /by ", 2);
 
+                            LocalDateTime localDateTime = changeToDateTimeFormat(remainingWords2[1]);
+
                             // Add new task to list
-                            Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1]);
+                            Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1], localDateTime);
                             tasks.add(newDeadline);
                         }
                         // event
@@ -74,8 +78,10 @@ public class Duke {
                             String remainingWords = userinput.replaceFirst("event ", "");
                             String[] remainingWords2 = remainingWords.split(" /at ", 2);
 
+                            LocalDateTime localDateTime = changeToDateTimeFormat(remainingWords2[1]);
+
                             // Add new task to list
-                            Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1]);
+                            Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1], localDateTime);
                             tasks.add(newEvent);
                         }
                         // default
@@ -87,8 +93,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(tasks.size() - 1));
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                    }
-                    catch (DukeException e) {
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -99,5 +104,17 @@ public class Duke {
 
         // At this point userinput equals "bye"
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    /* Change format to LocalDateTime format given String time of 2/12/2019 1800 format */
+    public static LocalDateTime changeToDateTimeFormat(String dateTime) {
+        String date = dateTime.split(" ")[0];
+        String time = dateTime.split(" ")[1];
+        LocalDate localDate = LocalDate.of(Integer.parseInt(date.split("/")[2]),
+                Integer.parseInt(date.split("/")[1]),
+                Integer.parseInt(date.split("/")[0]));
+
+        LocalTime localTime = LocalTime.of(Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2, 4)));
+        return LocalDateTime.of(localDate, localTime);
     }
 }

@@ -18,7 +18,7 @@ public class Task {
         return (isDone ? "+" : "-");
     }
 
-    void done() {
+    void markDone() {
         isDone = true;
     }
 

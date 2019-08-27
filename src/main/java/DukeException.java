@@ -1,11 +1,13 @@
 class DukeException extends Exception{
-    DukeException() { }
+    private String message = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
-    void errorAction() {
-        System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    DukeException() {}
+
+    DukeException(String message) {
+        this.message = "\t☹ OOPS!!! The description of a " + message + " cannot be empty.";
     }
 
-    void incompleteAction(String s) {
-        System.out.println("\t☹ OOPS!!! The description of a " + s + " cannot be empty.");
+    public String getMessage() {
+        return message;
     }
 }

@@ -1,6 +1,13 @@
+import java.util.ArrayList;
+
 public class Duke {
     private static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
+    private ArrayList<String> tasks;
 
+    public Duke() {
+        tasks = new ArrayList<>();
+    }
+    
     private String makeSpace(int n) {
         StringBuilder str = new StringBuilder();
 
@@ -33,7 +40,16 @@ public class Duke {
 
     public void evaluate(String action) {
         System.out.println(HORIZONTAL_LINE);
-        System.out.println(makeSpace(5) + action);
+
+        if (action.equals("list")) {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("%s%d. %s\n", makeSpace(5), i + 1, tasks.get(i));
+            }
+        } else {
+            System.out.printf("%sadded: %s\n", makeSpace(5), action);
+            tasks.add(action);
+        }
+        
         System.out.println(HORIZONTAL_LINE);
     }
 }

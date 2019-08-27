@@ -1,4 +1,3 @@
-
 import java.io.FileNotFoundException;
 
 public class ListCommand extends Command {

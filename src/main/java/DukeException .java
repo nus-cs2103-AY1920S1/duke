@@ -1,7 +1,7 @@
-class DukeException  extends Exception {
+class DukeException extends Exception {
     String msg;
 
-    public DukeException (String msg) {
+    public DukeException(String msg) {
         this.msg = msg;
     }
 

@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    // Defer use of Shadow until a later stage
 }
 
 dependencies {
@@ -14,6 +13,9 @@ checkstyle {
 }
 
 test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
     useJUnitPlatform()
 }
 

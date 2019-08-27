@@ -20,5 +20,8 @@ public abstract class ByeCommand implements Command {
 		updateListeners();
 	}
 
+	/**
+	 * Listeners to update when this Command is run.
+	 */
 	public abstract void updateListeners();
 }

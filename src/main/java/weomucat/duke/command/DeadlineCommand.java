@@ -26,5 +26,10 @@ public abstract class DeadlineCommand implements Command {
 		updateListeners(task);
 	}
 
+	/**
+	 * Listeners to update when this Command is run.
+	 * @param task deadline task this Command produces
+	 * @throws DukeException If there is anything wrong with processing.
+	 */
 	public abstract void updateListeners(Task task) throws DukeException;
 }

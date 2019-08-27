@@ -13,6 +13,9 @@ import weomucat.duke.task.listener.ListTaskListener;
 
 import java.util.ArrayList;
 
+/**
+ * A TaskList manages the addition, deletion, marking as done and listing of tasks.
+ */
 public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListener, DoneTaskCommandListener, ListTaskCommandListener {
 	private TaskListTasks tasks;
 	private ArrayList<AddTaskListener> addTaskListeners;
@@ -25,6 +28,10 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		init();
 	}
 
+	/**
+	 * Initialize a TaskList from an existing TaskListTasks.
+	 * @param tasks an existing list of tasks
+	 */
 	public TaskList(TaskListTasks tasks) {
 		this.tasks = tasks;
 		init();
@@ -37,22 +44,47 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		this.listTaskListeners = new ArrayList<>();
 	}
 
+	/**
+	 * Add a AddTaskListener to the TaskList.
+	 * When addTask is called, this listener will be notified.
+	 * @param listener addTask listener
+	 */
 	public void newAddTaskListener(AddTaskListener listener) {
 		this.addTaskListeners.add(listener);
 	}
 
+	/**
+	 * Add a DeleteTaskListener to the TaskList.
+	 * When deleteTask is called, this listener will be notified.
+	 * @param listener deleteTask listener
+	 */
 	public void newDeleteTaskListener(DeleteTaskListener listener) {
 		this.deleteTaskListeners.add(listener);
 	}
 
+	/**
+	 * Add a DoneTaskListener to the TaskList.
+	 * When doneTask is called, this listener will be notified.
+	 * @param listener doneTask listener
+	 */
 	public void newDoneTaskListener(DoneTaskListener listener) {
 		this.doneTaskListeners.add(listener);
 	}
 
+	/**
+	 * Add a ListTaskListener to the TaskList.
+	 * When listTask is called, this listener will be notified.
+	 * @param listener listTask listener
+	 */
 	public void newListTaskListener(ListTaskListener listener) {
 		this.listTaskListeners.add(listener);
 	}
 
+	/**
+	 * Add a task to the task list.
+	 * @param task the task to add
+	 * @throws DukeException If any listeners throw a DukeException.
+	 */
 	public void addTask(Task task) throws DukeException {
 		// Add task to Tasks
 		this.tasks.add(task);
@@ -63,6 +95,10 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		}
 	}
 
+	/**
+	 * Delete a task from the task list.
+	 * @throws DukeException If the index is invalid or any listeners throw a DukeException.
+	 */
 	public void deleteTask(int i) throws DukeException {
 		try {
 			// Get task from tasks
@@ -80,6 +116,10 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		}
 	}
 
+	/**
+	 * Mark a task as done in the task list.
+	 * @throws DukeException If the index is invalid or any listeners throw a DukeException.
+	 */
 	public void doneTask(int i) throws DukeException {
 		try {
 			// Get task from tasks
@@ -97,6 +137,9 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		}
 	}
 
+	/**
+	 * Notify listeners to list tasks.
+	 */
 	public void listTask() {
 		// Update ListTaskListeners
 		for (ListTaskListener listener : listTaskListeners) {

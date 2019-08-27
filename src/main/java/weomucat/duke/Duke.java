@@ -7,6 +7,9 @@ import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.TaskList;
 import weomucat.duke.ui.Ui;
 
+/**
+ * Duke is a personal assistant chatbot that is able to remember tasks.
+ */
 public class Duke implements ByeCommandListener {
 	private static final String LOGO = " ____        _        \n"
 			+ "	|  _ \\ _   _| | _____ \n"
@@ -28,6 +31,9 @@ public class Duke implements ByeCommandListener {
 		new Duke("data/tasks").run();
 	}
 
+	/**
+	 * @param taskListPath Relative path of taskList database.
+	 */
 	public Duke(String taskListPath) {
 		this.controller = new Controller();
 		this.taskList = new TaskList();

@@ -28,5 +28,10 @@ public abstract class DoneCommand implements Command {
 		updateListeners(this.index);
 	}
 
+	/**
+	 * Listeners to update when this Command is run.
+	 * @param i index of task to mark as done
+	 * @throws DukeException If there is anything wrong with processing.
+	 */
 	public abstract void updateListeners(int i) throws DukeException;
 }

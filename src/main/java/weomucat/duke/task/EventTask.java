@@ -2,9 +2,17 @@ package weomucat.duke.task;
 
 import weomucat.duke.exception.InvalidParameterException;
 
+/**
+ * An event is a special task that has a location.
+ */
 public class EventTask extends Task {
 	private String at;
 
+	/**
+	 * @param description a description of the event
+	 * @param at location of the event
+	 * @throws InvalidParameterException If the description is empty or at is empty.
+	 */
 	public EventTask(String description, String at) throws InvalidParameterException {
 		super(description);
 

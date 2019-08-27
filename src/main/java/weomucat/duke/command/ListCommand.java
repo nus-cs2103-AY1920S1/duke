@@ -20,5 +20,9 @@ public abstract class ListCommand implements Command {
 		updateListeners();
 	}
 
+	/**
+	 * Listeners to update when this Command is run.
+	 * @throws DukeException If there is anything wrong with processing.
+	 */
 	public abstract void updateListeners() throws DukeException;
 }

@@ -13,6 +13,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Ui is responsible for receiving input from the user, and displaying output to the user.
+ */
 public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener, ListTaskListener {
 	private static final String SAY_INDENTATION = "\t";
 	private static final String SAY_HORIZONTAL_LINE = "============================================================";
@@ -20,15 +23,27 @@ public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener
 	private ArrayList<UserInputListener> userInputListeners;
 	private Scanner scanner;
 
+	/**
+	 * @param inputStream The stream which user input is from
+	 */
 	public Ui(InputStream inputStream) {
 		this.userInputListeners = new ArrayList<>();
 		this.scanner = new Scanner(inputStream);
 	}
 
+	/**
+	 * Add a UserInputListener to the Controller.
+	 * When user input is received, this listener will be notified.
+	 * @param listener user input listener
+	 */
 	public void newUserInputListener(UserInputListener listener) {
 		this.userInputListeners.add(listener);
 	}
 
+	/**
+	 * Get the next line of user input from the {@link InputStream}.
+	 * @throws DukeException If any listener throws a DukeException
+	 */
 	public void nextUserInput() throws DukeException {
 		String userInput = this.scanner.nextLine();
 		for (UserInputListener listener : userInputListeners) {
@@ -36,6 +51,10 @@ public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener
 		}
 	}
 
+	/**
+	 * Displays a nice message to the user.
+	 * @param lines use varargs for multiline messages.
+	 */
 	public void displayMessage(String... lines) {
 		System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
 		for (String line : lines) {
@@ -44,6 +63,10 @@ public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener
 		System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
 	}
 
+	/**
+	 * Displays an error message to the user.
+	 * @param lines use varargs for multiline messages.
+	 */
 	public void displayError(String... lines) {
 		lines[0] = "\u2639 OOPS!!! " + lines[0];
 		displayMessage(lines);

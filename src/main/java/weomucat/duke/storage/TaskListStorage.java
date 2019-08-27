@@ -10,6 +10,10 @@ import weomucat.duke.task.listener.DoneTaskListener;
 
 import java.io.*;
 
+/**
+ * TaskListStorage is responsible for serializing TaskListTasks and deserializing TaskListTasks,
+ * before saving to disk and loading from disk respectively.
+ */
 public class TaskListStorage extends Storage<TaskListTasks> implements AddTaskListener, DeleteTaskListener, DoneTaskListener {
 	public TaskListStorage(String path) {
 		super(path);

@@ -28,5 +28,10 @@ public abstract class DeleteCommand implements Command {
 		updateListeners(this.index);
 	}
 
+	/**
+	 * Listeners to update when this Command is run.
+	 * @param i index of task to delete
+	 * @throws DukeException If there is anything wrong with processing.
+	 */
 	public abstract void updateListeners(int i) throws DukeException;
 }

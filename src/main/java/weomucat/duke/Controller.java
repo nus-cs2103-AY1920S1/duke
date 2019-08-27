@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 /**
  * https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+ * A Controller accepts user input and converts it to commands for the model or view.
  */
 public class Controller implements UserInputListener {
 	private static final String COMMAND_DEADLINE = "deadline";
@@ -95,22 +96,47 @@ public class Controller implements UserInputListener {
 		});
 	}
 
+	/**
+	 * Add a AddTaskCommandListener to the Controller.
+	 * When a AddTaskCommand is received, this listener will be notified.
+	 * @param listener AddTaskCommand listener
+	 */
 	public void newAddTaskCommandListener(AddTaskCommandListener listener) {
 		this.addTaskCommandListeners.add(listener);
 	}
 
+	/**
+	 * Add a DeleteTaskCommandListener to the Controller.
+	 * When a DeleteTaskCommand is received, this listener will be notified.
+	 * @param listener DeleteTaskCommand listener
+	 */
 	public void newDeleteTaskCommandListener(DeleteTaskCommandListener listener) {
 		this.deleteTaskCommandListeners.add(listener);
 	}
 
+	/**
+	 * Add a DoneTaskCommandListener to the Controller.
+	 * When a DoneTaskCommand is received, this listener will be notified.
+	 * @param listener DoneTaskCommand listener
+	 */
 	public void newDoneTaskCommandListener(DoneTaskCommandListener listener) {
 		this.doneTaskCommandListeners.add(listener);
 	}
 
+	/**
+	 * Add a ListTaskCommandListener to the Controller.
+	 * When a ListTaskCommand is received, this listener will be notified.
+	 * @param listener ListTaskCommand listener
+	 */
 	public void newListTaskCommandListener(ListTaskCommandListener listener) {
 		this.listTaskCommandListeners.add(listener);
 	}
 
+	/**
+	 * Add a ByeCommandListener to the Controller.
+	 * When a ByeCommand is received, this listener will be notified.
+	 * @param listener ByeCommand listener
+	 */
 	public void newByeCommandListener(ByeCommandListener listener) {
 		this.byeCommandListeners.add(listener);
 	}

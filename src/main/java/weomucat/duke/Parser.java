@@ -5,11 +5,20 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+/**
+ * A Parser is responsible for deciphering user input into:
+ * - Command
+ * - Body (i.e default parameter)
+ * - Parameters
+ */
 public class Parser {
 	private String command;
 	private String body;
 	private String[] tokens;
 
+	/**
+	 * @param input User input to decipher.
+	 */
 	public Parser(String input) {
 		// Split input by whitespace.
 		this.tokens = input.trim().split(" ");
@@ -19,14 +28,26 @@ public class Parser {
 		this.body = String.join(" ", tokens).trim();
 	}
 
+	/**
+	 * @return Deciphered command
+	 */
 	public String getCommand() {
 		return command;
 	}
 
+	/**
+	 * If the command expects parameters, run this after parseParameters.
+	 * @return Deciphered body
+	 */
 	public String getBody() {
 		return body;
 	}
 
+	/**
+	 * Parse a list of parameters which the command uses.
+	 * @param parameters The list of parameters
+	 * @return A HashMap of (parameter name, parameter value)
+	 */
 	public HashMap<String, String> parseParameters(String... parameters) {
 		LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
 

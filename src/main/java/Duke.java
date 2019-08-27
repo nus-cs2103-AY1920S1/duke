@@ -392,7 +392,7 @@ public class Duke {
                 printAddMessage(toDo);
             } else if (input.startsWith("deadline")) {
                 String[] splitBySlash = input.split("/");
-                String inputDateTime = splitBySlash[1];
+                String inputDateTime = processDateTime(splitBySlash);
                 String inputDescription = processInputDescription(splitBySlash[0]);
                 Deadline deadline = new Deadline(inputDescription, inputDateTime);
                 taskList.add(deadline);
@@ -400,7 +400,7 @@ public class Duke {
                 printAddMessage(deadline);
             } else {
                 String[] splitBySlash = input.split("/");
-                String inputDateTime = splitBySlash[1];
+                String inputDateTime = processDateTime(splitBySlash);
                 String inputDescription = processInputDescription(splitBySlash[0]);
                 Event event = new Event(inputDescription, inputDateTime);
                 taskList.add(event);
@@ -408,6 +408,21 @@ public class Duke {
                 printAddMessage(event);
             }
 
+    }
+
+    private static String processDateTime(String[] splitBySlash) {
+        String day = splitBySlash[1];
+        String month = splitBySlash[2];
+
+        String[] splitYearTime = splitBySlash[3].split(" ");
+
+        String year = splitYearTime[0];
+        String time = splitYearTime[1];
+
+        DateTime dateTime = new DateTime(day, month, year, time);
+        dateTime.format();
+
+        return dateTime.toString();
     }
 
     /**

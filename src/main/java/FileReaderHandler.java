@@ -1,5 +1,8 @@
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.text.ParseException;
-import java.util.List;
 
 public class FileReaderHandler {
     TaskList tasks;
@@ -32,7 +35,6 @@ public class FileReaderHandler {
                     } catch (ParseException e) {
                         System.out.println(e.getMessage() + ". Please enter date from file in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM");
                     }
-
                     break;
             }
         } catch (DukeException e) {

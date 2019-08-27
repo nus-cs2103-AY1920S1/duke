@@ -1,3 +1,5 @@
+package duke.task;
+
 public enum TypeOfTask {
     TODO, DEADLINE, EVENT;
 

@@ -1,0 +1,6 @@
+Todo | T | borrow books
+Todo | T | borrow books
+Todo | F | 123
+Deadline | F | return book (by: 18/01/2019 2030)
+Event | F | project meeting (at: 18/01/2019 2030 - 18/01/2019 2100)
+Todo | F | borrow books

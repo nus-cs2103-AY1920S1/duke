@@ -1,45 +1,46 @@
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
     private List<Task> taskList;
-    private OutputUtilities outputUtilities;
+    private UI ui;
 
-    public TaskList(LocalStorage storage) {
+    public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
-        outputUtilities = new OutputUtilities(this, storage);
+        ui = new UI(this, storage);
     }
 
-    public TaskList(List taskList, OutputUtilities ou) {
+    public TaskList(List taskList, UI ui) {
         this.taskList = taskList;
-        this.outputUtilities = ou;
+        this.ui = ui;
     }
-
 
 
     public void addTask(Task t, boolean printMessage) throws DukeException {
         if (t.getTaskName().isBlank()) throw new EmptyTodoTextException("The description of a todo cannot be empty");
         taskList.add(t);
-        if (printMessage) outputUtilities.printAddTaskMessage(t);
+        if (printMessage) ui.printAddTaskMessage(t);
     }
 
 
     public void printTasks() {
-       outputUtilities.printTasks();
+       ui.printTasks();
     }
 
-    public void markTaskAsCompleted(int taskNumber, boolean printMessage) throws DukeException {
+    public void markTaskAsCompleted(int taskNumber, boolean printMessage) throws TaskDoesNotExistException {
         if (taskNumber < 1 || taskNumber > taskList.size()) throw new TaskDoesNotExistException("Task not found");
 
         Task t = taskList.get(taskNumber - 1);
         t.markAsCompleted();
-        if (printMessage) outputUtilities.printMarkTaskAsCompletedMessage(t);
+        if (printMessage) ui.printMarkTaskAsCompletedMessage(t);
     }
 
     public void deleteTask(int taskNumber, boolean printMessage) {
         Task t = taskList.get(taskNumber - 1);
         taskList.remove(t);
-        if (printMessage) outputUtilities.printDeleteTaskMessage(t);
+        if (printMessage) ui.printDeleteTaskMessage(t);
     }
 
     public List<Task> getList() {

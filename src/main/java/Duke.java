@@ -5,23 +5,29 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        LocalStorage storage = new LocalStorage(filePath);
+        Storage storage = new Storage(filePath);
         TaskList tasks = new TaskList(storage);
-        CommandHandler commandHandler = new CommandHandler(tasks, storage);
-        OutputUtilities outputUtilities = new OutputUtilities(tasks, storage);
+        UI ui = new UI(tasks, storage);
 
-        outputUtilities.sayHi();
+        ui.sayHi();
 
 
-        while (true) {
-            String input = sc.nextLine();
-            String[] parts = input.split("\\s");
-            String cmd = parts[0];
-            String text = input.substring(cmd.length()).stripLeading();
-            commandHandler.executeCommand(cmd, text);
-            if (cmd.equals("bye")) System.exit(0);
+        boolean isExit = false;
+
+        while (!isExit) {
+            String fullCommand = sc.nextLine();
+            try {
+                UI.printLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                System.out.println("\t ☹ OOPS!!! " + e.getMessage());
+            } finally {
+                UI.printLine();
+            }
+
         }
-
 
 
     }

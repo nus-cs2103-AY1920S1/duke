@@ -1,22 +1,23 @@
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-public class OutputUtilities {
+public class UI {
 
     private TaskList tasks;
     private List<Task> taskList;
-    private LocalStorage storage;
+    private Storage storage;
 
-    public OutputUtilities(TaskList tasks, LocalStorage storage) {
+    public UI(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.taskList = tasks.getList();
         this.storage = storage;
     }
 
-
-    public static void sayBye() {
+    public void sayBye() {
         System.out.println("\t Bye. Hope to see you again soon!");
     }
 
@@ -38,7 +39,7 @@ public class OutputUtilities {
                 printLine();
             } catch (IOException ioe) {
                 System.out.println("\t File creation was not successful. " + ioe);
-                System.out.println("Exiting system.");
+                System.out.println("\t Exiting system.");
                 printLine();
                 System.exit(-1);
             }

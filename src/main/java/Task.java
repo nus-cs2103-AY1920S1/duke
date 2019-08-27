@@ -40,18 +40,17 @@ public class Task {
     public static void save(Task[] arr) {
         String file2 = "DukeList.txt";
         StringBuilder sb = new StringBuilder();
-
-        int x = 0;
-        while (arr[x+1] != null) {
+        if (arr[0] != null) {
+            int x = 0;
+            while (arr[x + 1] != null) {
+                sb.append(arr[x].toFormattedString());
+                sb.append("\n");
+                x++;
+            }
             sb.append(arr[x].toFormattedString());
-            sb.append("\n");
-            x++;
-        }
-        sb.append(arr[x].toFormattedString());
-
+        } else {}
         try {
             writeToFile(file2, sb.toString());
-
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }

@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -16,7 +17,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        int x = 0;
+        int numoftasks;
+        numoftasks = initialiseNumOfTasks(tasks);
+
 
         while (!input.equals("bye")) {
             try {
@@ -36,23 +39,36 @@ public class Duke {
                         input = sc.nextLine();
                         break;
                     case "todo":
-                        tasks[x] = new ToDo(input.substring(5));
-                        x++;
-                        echo(tasks[x - 1], x);
+                        String tododescription = input.substring(5);
+                        tasks[numoftasks] = new ToDo(tododescription);
+                        numoftasks++;
+                        echo(tasks[numoftasks - 1], numoftasks);
                         Task.save(tasks);
                         input = sc.nextLine();
                         break;
                     case "event":
-                        tasks[x] = new Event(input.split(" /at ")[0].substring(6), input.split(" /at ")[1]);
-                        x++;
-                        echo(tasks[x - 1], x);
+                        String eventdescription = input.split(" /at ")[0].substring(6);
+                        String at = input.split(" /at ")[1];
+                        if (at.contains("/") && at.contains(" ")) {
+                            at = DateReader.readDate(new DateReader(at));
+                        } else {}
+
+                        tasks[numoftasks] = new Event(eventdescription, at);
+                        numoftasks++;
+                        echo(tasks[numoftasks - 1], numoftasks);
                         Task.save(tasks);
                         input = sc.nextLine();
                         break;
                     case "deadline":
-                        tasks[x] = new Deadline(input.split(" /by ")[0].substring(9), input.split(" /by ")[1]);
-                        x++;
-                        echo(tasks[x - 1], x);
+                        String deadlinedescription = input.split(" /by ")[0].substring(9);
+                        String by = input.split(" /by ")[1];
+                        if (by.contains("/") && by.contains(" ")) {
+                            by = DateReader.readDate(new DateReader(by));
+                        } else {}
+
+                        tasks[numoftasks] = new Deadline(deadlinedescription, by);
+                        numoftasks++;
+                        echo(tasks[numoftasks - 1], numoftasks);
                         Task.save(tasks);
                         input = sc.nextLine();
                         break;
@@ -60,7 +76,7 @@ public class Duke {
                         ArrayList<Task> taskarraylist = new ArrayList<Task>(Arrays.asList(tasks));
                         int indextodel = Integer.parseInt(input.substring(7));
                         Task removed = taskarraylist.remove(indextodel - 1);
-                        printDeleted(removed, --x);
+                        printDeleted(removed, --numoftasks);
                         tasks = new Task[100];
                         for (int i = 0; i < taskarraylist.size(); i++) {
                             tasks[i] = taskarraylist.get(i);
@@ -161,12 +177,23 @@ public class Duke {
         }
     }
 
-
     public static void readSavedList(Task[] tasks) {
         try {
             readFileContents("DukeList.txt", tasks);
         } catch (FileNotFoundException e) {
         }
+    }
+
+    public static int initialiseNumOfTasks(Task[] arr) {
+        int no = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != null) {
+                no++;
+            } else {
+                break;
+            }
+        }
+        return no;
     }
 
 }

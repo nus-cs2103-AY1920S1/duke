@@ -49,13 +49,33 @@ public class Ui {
     }
 
     /**
-     * Prints the list of items in the order as stored by the program.
+     * Prints the whole list of items in the order as stored by the program.
+     * @param listItems The list of all the items in the task list.
      */
     protected void printList(ArrayList<Task> listItems) {
         if (listItems.isEmpty()) {
             printResponse("You currently have no tasks!");
         } else {
             StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+            for (int i = 1; i <= listItems.size(); i++) {
+                sb.append("\n  ")
+                        .append(i)
+                        .append(". ")
+                        .append(listItems.get(i - 1));
+            }
+            printResponse(sb.toString());
+        }
+    }
+
+    /**
+     * Prints the list of items stored by the program that matched the keyword given by the user.
+     * @param listItems The list of matched items in the task list.
+     */
+    protected void printMatchList(ArrayList<Task> listItems) {
+        if (listItems.isEmpty()) {
+            printResponse("Sorry, there are no matching tasks!");
+        } else {
+            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
             for (int i = 1; i <= listItems.size(); i++) {
                 sb.append("\n  ")
                         .append(i)

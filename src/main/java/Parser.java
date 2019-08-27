@@ -25,6 +25,12 @@ public class Parser {
                 ui.printBye();
             } else if (command.equals("list")) {
                 ui.printList(taskList.getListItems());
+            } else if (commandArray[0].equals("find")) {
+                if (commandArray.length == 1) {
+                    throw new DukeException("Please provide a keyword "
+                            + "for us to filter the list of tasks with!");
+                }
+                taskList.find(command.replaceFirst("find ", ""));
             } else if (commandArray[0].equals("done")) {
                 if (commandArray.length == 1) {
                     throw new DukeException("Please specify a task ID to set as done!");

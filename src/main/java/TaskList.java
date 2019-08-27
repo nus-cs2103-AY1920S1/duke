@@ -68,4 +68,18 @@ public class TaskList {
         storage.updateSaveFile(listItems);
         ui.taskListDelete(task.toString(), listItems.size());
     }
+
+    /**
+     * Searches the list for tasks that match the user specified keyword.
+     * @param keyword The keyword specified by the user.
+     */
+    protected void find(String keyword) {
+        ArrayList<Task> matchList = new ArrayList<>();
+        for (Task task : listItems) {
+            if (task.details.contains(keyword)) {
+                matchList.add(task);
+            }
+        }
+        ui.printMatchList(matchList);
+    }
 }

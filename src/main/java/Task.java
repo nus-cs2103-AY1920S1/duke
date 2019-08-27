@@ -1,3 +1,6 @@
+/**
+ * A base class that Deadline, Event, and ToDo inherit from
+ */
 public class Task {
     String description;
     boolean isDone;

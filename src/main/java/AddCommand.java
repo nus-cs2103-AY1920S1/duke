@@ -1,3 +1,6 @@
+/**
+ * AddCommands represent the addition of Tasks to the TaskList.
+ */
 public class AddCommand extends Command {
     private Task userTask;
     public AddCommand(Task userTask) {
@@ -6,6 +9,12 @@ public class AddCommand extends Command {
         this.userTask = userTask;
     }
 
+    /**
+     * Adds a task to the TaskList, displays messages to user, and saves tasks to the hard disk
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(userTask);
         Integer numberOfTasks = tasks.getNumberOfTasks();

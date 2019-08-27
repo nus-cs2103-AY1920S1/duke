@@ -1,4 +1,14 @@
+/**
+ * Parser deals with the logic of parsing user inputs.
+ */
 public class Parser {
+
+    /**
+     * Parses user input and returns the relevant command to be executed in the main message
+     * @param command
+     * @return Command to be executed in main message
+     * @throws DukeException
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();

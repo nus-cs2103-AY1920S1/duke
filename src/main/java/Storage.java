@@ -1,3 +1,7 @@
+/**
+ * Storage deals with loading tasks from a file and saving tasks to the file
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +16,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    //Returns an Arraylist with tasks saved in hard disk
+    /**
+     * Loads tasks from specified file
+     * @return ArrayList containing tasks saved in specified file
+     */
     public ArrayList<Task> load() {
         try {
             File taskFile = new File(filePath);
@@ -54,7 +61,10 @@ public class Storage {
         return convertedTask;
     }
 
-    //Writes a task to the file each time the task list changes
+    /**
+     * Writes tasks to the file
+     * @param taskList
+     */
     public void writeTaskToFile(TaskList taskList) {
         try {
             FileWriter taskFile = new FileWriter(filePath);

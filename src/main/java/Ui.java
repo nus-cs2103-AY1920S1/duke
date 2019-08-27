@@ -1,3 +1,8 @@
+/**
+ * The Ui class is in charge of interactions with user, such as reading user commands and displaying
+ * formatted messages to the user.
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

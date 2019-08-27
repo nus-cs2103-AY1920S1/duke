@@ -1,3 +1,7 @@
+/**
+ * TaskLists represent the task list, and is in charge of addition and deletion of tasks.
+ */
+
 import java.util.ArrayList;
 
 public class TaskList {

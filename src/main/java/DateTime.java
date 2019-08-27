@@ -1,3 +1,6 @@
+/**
+ * DateTime represents dates specified in Deadlines and Event Tasks.
+ */
 public class DateTime {
     private static final String[] MONTHS_OF_YEAR = {"January", "February", "March", "April", "May",
             "June", "July", "August", "September", "October", "November", "December"};
@@ -33,7 +36,12 @@ public class DateTime {
         return rawForm;
     }
 
-    //Adds the "st", "nd", "rd" ordinals based on numerical value of day
+    /**
+     * Adds the "st", "nd", "rd" ordinals based on numerical value of day
+     * @param day
+     * @return String with an ordinal appended to the day, eg '13th'
+     */
+
     public String appendOrdinal(Integer day) {
         if (day >= 11 && day <= 13) {
             return day.toString() + "th";
@@ -48,7 +56,12 @@ public class DateTime {
         }
     }
 
-    //Converts 24H timing to 12H timing
+    /**
+     * Converts 24H timing to 12H timing
+     * @param hours
+     * @param minutes
+     * @return a String representing 12H timing
+     */
     public String to12HourTime(Integer hours, Integer minutes) {
         String hoursString;
         String minutesString;
@@ -70,6 +83,7 @@ public class DateTime {
 
         return String.format("%s%s%s", hoursString, minutesString, noonString);
     }
+
     @Override
     public String toString() {
         return String.format("%s of %s %s, %s",

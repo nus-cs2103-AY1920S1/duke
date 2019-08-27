@@ -41,11 +41,15 @@ public class Duke {
     }
 }
 
+class DukeException extends Exception {
+
+}
+
 class Task {
     protected String description;
     protected boolean isDone;
 
-    protected String typeOfTask; 
+    protected String typeOfTask;
 
     public Task() {}
     public Task(String description) {
@@ -146,7 +150,6 @@ class User {
             j = j.replaceAll("\\s+", "");
         }
         j = j.toLowerCase();
-        System.out.println("type: [" + j + "]");
 
         switch (j) {
         case "event":
@@ -180,18 +183,17 @@ class User {
         String j = this.getCurrentInput();
         String description = "";
         String date = "";
+        String parseMiddleString = "";
 
         switch (taskType) {
         case DEADLINE:
-            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1); //+1/-1 to remove spaces
+            description = parseMiddleString; //+1/-1 to remove spaces
             date = j.substring((j.indexOf("/") + 1));
             userTasks.add(new Deadline(description, date));
             break;
         case EVENT:
-            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1); //+1/-1 to remove spaces
-            System.out.println("des: [" + description + "]");
+            description = parseMiddleString; //+1/-1 to remove spaces
             date = j.substring((j.indexOf("/") + 1));
-            System.out.println("date: [" + date + "]");
             userTasks.add(new Event(description, date));
             break;
         case TODO:

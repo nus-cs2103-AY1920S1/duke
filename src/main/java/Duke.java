@@ -32,7 +32,7 @@ public class Duke {
 
             try {
 
-                if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) { // Changing implementation
+                if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) {
 
                     output = underscore + "     Here are the tasks in your list:\n";
                     for (int i = 0; i < tasks.size(); i++) {

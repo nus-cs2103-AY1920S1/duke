@@ -1,19 +1,23 @@
-public class Task {
-    String description;
-    Boolean status;
+public abstract class Task {
+    protected String description;
+    protected Boolean done;
 
     public Task(String description) {
         this.description = description;
-        this.status = false;
+        this.done = false;
     }
 
     public void doTask() throws DukeException{
-        if (this.status) {
+        if (this.done) {
             throw new DukeException("The task specified has already been done.");
         } else {
-            this.status = true;
+            this.done = true;
             this.printDone();
         }
+    }
+
+    public void markDone() {
+        this.done = true;
     }
 
     private void printDone() {
@@ -24,8 +28,10 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return status ? "[\u2713]" : "[\u2718]";
+        return done ? "[\u2713]" : "[\u2718]";
     }
+
+    protected abstract String formatToWrite();
 
     @Override
     public String toString() {

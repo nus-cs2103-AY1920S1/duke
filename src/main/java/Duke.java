@@ -10,8 +10,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?"); // greet user
+        Scanner scanner = new Scanner(System.in); // reads user input
         while (true) {
-            Scanner scanner = new Scanner(System.in); // reads user input
             String line = scanner.nextLine();
             if (line.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");

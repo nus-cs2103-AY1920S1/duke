@@ -1,8 +1,9 @@
-import duke.ui.UI;
+import duke.commands.Command;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.parser.Parser;
-import duke.commands.Command;
+import duke.ui.UI;
+
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -18,7 +19,8 @@ public class Duke {
 
     /**
      * Initialise duke with file path. This file path will be used for storage.
-     * @param filePath
+     *
+     * @param filePath File Path
      */
     public Duke(String filePath) {
         ui = new UI();
@@ -29,6 +31,13 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    /**
+     * Main method.
+     */
+    public static void main(String[] args) {
+        new Duke("../data/duke.txt").run();
     }
 
     /**
@@ -51,12 +60,5 @@ public class Duke {
             }
         }
         sc.close();
-    }
-
-    /**
-     * Main method.
-     */
-    public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
     }
 }

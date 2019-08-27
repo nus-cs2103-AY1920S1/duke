@@ -1,20 +1,22 @@
 package duke.commands;
 
-import duke.ui.UI;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
+import duke.ui.UI;
+
 import java.io.IOException;
 
 /**
- * Deadline command
+ * Deadline command.
  */
 public class DeadlineCommand extends Command {
     Deadline dl;
 
     /**
      * Initialise with deadline task.
-     * @param dl
+     *
+     * @param dl deadline
      */
     public DeadlineCommand(Deadline dl) {
         this.dl = dl;
@@ -22,9 +24,10 @@ public class DeadlineCommand extends Command {
 
     /**
      * Adds deadline to Task List and saves it in Storage.
-     * @param tasks
-     * @param ui
-     * @param storage
+     *
+     * @param tasks   tasks
+     * @param ui      ui
+     * @param storage storage
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
@@ -37,7 +40,8 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Does not exit
+     * Does not exit.
+     *
      * @return false
      */
     public boolean isExit() {

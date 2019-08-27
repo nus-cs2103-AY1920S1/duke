@@ -1,9 +1,10 @@
 package duke.tasklist;
 
-import duke.tasks.Task;
-import duke.tasks.ToDo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -16,7 +17,8 @@ public class TaskList {
 
     /**
      * Initialises with given list of tasks.
-     * @param tl
+     *
+     * @param tl to do list
      */
     public TaskList(List<Task> tl) {
         tasks = tl;
@@ -87,6 +89,7 @@ public class TaskList {
 
     /**
      * Get Task size.
+     *
      * @return task size
      */
     public int getTasksSize() {
@@ -94,7 +97,8 @@ public class TaskList {
     }
 
     /**
-     * Get tasks as a string
+     * Get tasks as a string.
+     *
      * @return tasks
      */
     public String getTasks() {
@@ -107,6 +111,11 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Finds tasks based on keyword.
+     * @param kw keyword
+     * @return tasks
+     */
     public String find(String kw) {
         StringJoiner result = new StringJoiner("\n");
         for (int i = 0; i < tasks.size(); i++) {

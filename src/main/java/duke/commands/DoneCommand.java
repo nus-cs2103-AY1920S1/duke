@@ -1,33 +1,36 @@
 package duke.commands;
 
-import duke.ui.UI;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.ui.UI;
+
 import java.io.IOException;
 
 /**
- * Done command
+ * Done command.
  */
 public class DoneCommand extends Command {
-    int i;
+    int index;
 
     /**
      * Initialises with index of task to be set done.
-     * @param i
+     *
+     * @param i index
      */
     public DoneCommand(int i) {
-        this.i = i;
+        this.index = i;
     }
 
     /**
      * Updates task in index as done and updates Storage.
-     * @param tasks
-     * @param ui
-     * @param storage
+     *
+     * @param tasks   tasks
+     * @param ui      ui
+     * @param storage storage
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
-            String taskMessage = tasks.done(i);
+            String taskMessage = tasks.done(index);
             ui.showDoneMessage(taskMessage);
             storage.save(tasks.getTasks());
         } catch (IOException e) {
@@ -36,7 +39,8 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Does not exit
+     * Does not exit.
+     *
      * @return false
      */
     public boolean isExit() {

@@ -1,4 +1,4 @@
-1.[T][?] read book
-2.[D][?] do homework (by: Mon, 2 Dec 2019 18:00:00)
-3.[D][?] do homework (by: Mon, 2 Dec 2019 18:00:00)
-4.[E][?] project meeting (at: Sun, 15 Dec 2019 18:00:00)
+1.[T][✘] read book
+2.[D][✓] do homework (by: Mon, 2 Dec 2019 18:00:00)
+3.[D][✘] do homework (by: Mon, 2 Dec 2019 18:00:00)
+4.[E][✘] project meeting (at: Sun, 15 Dec 2019 18:00:00)

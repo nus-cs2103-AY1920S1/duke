@@ -1,11 +1,14 @@
 package duke.parser;
 
 import duke.commands.*;
-import duke.tasks.*;
-import java.lang.IllegalArgumentException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.text.ParseException;
 
 /**
  * Parser breaks down input string into relevant data structures to be used.
@@ -18,10 +21,11 @@ public class Parser {
 
     /**
      * Parses full command string and outputs relevant command.
-     * @param fullCommand
+     *
+     * @param fullCommand Full Command
      * @return Command
-     * @throws IllegalArgumentException
-     * @throws ParseException
+     * @throws IllegalArgumentException Command is not valid
+     * @throws ParseException Parsing error
      */
     public static Command parse(String fullCommand) throws IllegalArgumentException, ParseException {
         String task;
@@ -29,7 +33,6 @@ public class Parser {
         Date date;
         String format = "dd/MM/yyyy HHmm";
         SimpleDateFormat readFormat = new SimpleDateFormat(format);
-        ;
         Command command;
 
         String[] arr = fullCommand.split(" ", 2);
@@ -78,17 +81,19 @@ public class Parser {
 
     /**
      * Parses full task string and returns a task instance.
-     * @param fullTask
+     *
+     * @param fullTask Full Task
      * @return task
-     * @throws ParseException
+     * @throws ParseException Parsing Error
      */
     //TODO: task initialised hard coded
-    public static Task parseTask(String fullTask) throws ParseException{
-        Task t = new Task("");
+    public static Task parseTask(String fullTask) throws ParseException {
+        Task t;
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
         char taskType = fullTask.charAt(3);
         boolean done = (fullTask.charAt(6) + "").equals("\u2713");
-        String task, dateString;
+        String task;
+        String dateString;
         Date date;
         switch (taskType) {
         case 'T':
@@ -106,6 +111,9 @@ public class Parser {
             dateString = fullTask.split(" ", 2)[1].split("\\(at:")[1].trim().replace(")", "");
             date = sdf.parse(dateString); // remove trailing bracket
             t = new Event(task, date);
+            break;
+        default:
+            t = new Task("");
         }
         return t;
     }

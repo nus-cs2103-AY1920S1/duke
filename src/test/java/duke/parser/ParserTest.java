@@ -2,16 +2,14 @@ package duke.parser;
 
 import duke.commands.Command;
 import duke.commands.ListCommand;
-import duke.tasks.Task;
 import duke.tasks.Event;
-
-import org.junit.jupiter.api.Test;
+import duke.tasks.Task;
 import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests Parser class.

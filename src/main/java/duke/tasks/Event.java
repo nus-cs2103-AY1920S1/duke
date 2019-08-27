@@ -12,8 +12,8 @@ public class Event extends Task {
     /**
      * Initialises Event with task and date.
      *
-     * @param task
-     * @param date
+     * @param task task
+     * @param date date
      */
     public Event(String task, Date date) {
         super(task);
@@ -23,9 +23,9 @@ public class Event extends Task {
     /**
      * Initialises Event with task, date, and status.
      *
-     * @param task
-     * @param done
-     * @param date
+     * @param task task
+     * @param done done
+     * @param date date
      */
     Event(String task, Boolean done, Date date) {
         super(task, done);

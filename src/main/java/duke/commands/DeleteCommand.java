@@ -1,33 +1,36 @@
 package duke.commands;
 
-import duke.ui.UI;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
+import duke.ui.UI;
+
 import java.io.IOException;
 
 /**
- * Delete command
+ * Delete command.
  */
 public class DeleteCommand extends Command {
-    int i;
+    int index;
 
     /**
      * Initialises with index of task to be deleted.
-     * @param i
+     *
+     * @param index index
      */
-    public DeleteCommand(int i) {
-        this.i = i;
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     /**
      * Deletes task and updates Storage.
-     * @param tasks
-     * @param ui
-     * @param storage
+     *
+     * @param tasks   tasks
+     * @param ui      ui
+     * @param storage storage
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
-            String taskMessage = tasks.delete(i);
+            String taskMessage = tasks.delete(index);
             ui.showDeleteMessage(taskMessage, tasks.getTasksSize());
             storage.save(tasks.getTasks());
         } catch (IOException e) {
@@ -36,7 +39,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Does not exit
+     * Does not exit.
+     *
      * @return false
      */
     public boolean isExit() {

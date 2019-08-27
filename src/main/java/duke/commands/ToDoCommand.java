@@ -1,20 +1,22 @@
 package duke.commands;
 
-import duke.ui.UI;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.ToDo;
+import duke.ui.UI;
+
 import java.io.IOException;
 
 /**
- * To Do command
+ * To Do command.
  */
 public class ToDoCommand extends Command {
     ToDo td;
 
     /**
-     * Initialise with To Do task
-     * @param td
+     * Initialise with To Do task.
+     *
+     * @param td To Do
      */
     public ToDoCommand(ToDo td) {
         this.td = td;
@@ -22,9 +24,10 @@ public class ToDoCommand extends Command {
 
     /**
      * Adds To Do to Task List and saves it in Storage.
-     * @param tasks
-     * @param ui
-     * @param storage
+     *
+     * @param tasks   tasks
+     * @param ui      ui
+     * @param storage storage
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
@@ -37,7 +40,8 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Does not exit
+     * Does not exit.
+     *
      * @return false
      */
     public boolean isExit() {

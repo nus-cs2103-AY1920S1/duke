@@ -10,7 +10,7 @@ public class Task {
     /**
      * Initialises Task.
      *
-     * @param task
+     * @param task task
      */
     public Task(String task) {
         this.task = task;
@@ -20,7 +20,7 @@ public class Task {
     /**
      * Initialises Task with specified status.
      *
-     * @param task
+     * @param task task
      */
     public Task(String task, Boolean done) {
         this.task = task;
@@ -29,7 +29,8 @@ public class Task {
 
     /**
      * Set status.
-     * @param status
+     *
+     * @param status status
      */
     public void setDone(boolean status) {
         this.done = status;

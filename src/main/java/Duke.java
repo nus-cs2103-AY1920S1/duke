@@ -22,7 +22,7 @@ public class Duke {
             String input = sc.nextLine();
             String[] tokens = input.split(" ");
             if (tokens[0].equals("bye")) {
-                printEnd("Bye. Hope to see you again soon!");
+                printOneLine("Bye. Hope to see you again soon!");
                 break;
             } else if (tokens[0].equals("list")) {
                 printNumberList(lst);
@@ -30,19 +30,21 @@ public class Duke {
                 try {
                     doTask(tokens[1]);
                 } catch (NumberFormatException error) {
-                    printInput(List.of("☹ Invalid input, must be an integer!!"));
+                    printOneLine(new DukeException("Must be integer",DukeExceptionType.NOTINTEGER).getMessage());
+
                 } catch (IllegalArgumentException error2) {
-                    printInput(List.of(error2.getMessage()));
+                    printOneLine(new DukeException(error2.getMessage(),DukeExceptionType.GENERALMISTAKE).getMessage());
                 } catch (IndexOutOfBoundsException error3) {
-                    printInput(List.of("☹ No such task"));
+                    printOneLine(new DukeException("No such task",DukeExceptionType.MISSINGTASK).getMessage());
                 }
             } else if (tokens[0].equals("delete")) {
                 try {
                     deleteTask(tokens[1]);
                 } catch (NumberFormatException error) {
-                    printInput(List.of("☹ Invalid input must be an integer"));
+                    printOneLine(new DukeException("Must be integer",DukeExceptionType.NOTINTEGER).getMessage());
                 } catch (IndexOutOfBoundsException error3) {
-                    printInput(List.of("☹ No such task"));
+                    printOneLine(new DukeException("No such task",DukeExceptionType.MISSINGTASK).getMessage());
+
                 }
             } else {
                 createTask(tokens);
@@ -84,7 +86,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void printEnd(String input) {
+    public static void printOneLine(String input) {
         System.out.println(horizontalLine);
         System.out.println(String.format("     %s",input));
         System.out.println(horizontalLine);
@@ -123,7 +125,7 @@ public class Duke {
                 checkValidLength(tokens);
                 task = ToDo.createToDo(tokens);
             } catch (IllegalArgumentException error2){
-                printInput(List.of(error2.getMessage()));
+                printOneLine(new DukeException(error2.getMessage(),DukeExceptionType.GENERALMISTAKE).getMessage());
             }
         } else if (tokens[0].equals("deadline")) {
             try {
@@ -134,7 +136,7 @@ public class Duke {
                     task = Deadline.createDeadline(tokens);
                 }
             } catch (IllegalArgumentException error2){
-                printInput(List.of(error2.getMessage()));
+                printOneLine(new DukeException(error2.getMessage(),DukeExceptionType.GENERALMISTAKE).getMessage());
             }
         } else if (tokens[0].equals("event")) {
             try {
@@ -145,10 +147,10 @@ public class Duke {
                     task = Event.createEvent(tokens);
                 }
             } catch (IllegalArgumentException error2){
-                printInput(List.of(error2.getMessage()));
+                printOneLine(new DukeException(error2.getMessage(),DukeExceptionType.GENERALMISTAKE).getMessage());
             }
         } else {
-            printInput(List.of("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            printOneLine(new DukeException("Command doesn't exist",DukeExceptionType.INVALIDCOMMAND).getMessage());
         }
 
         if (task != null) {

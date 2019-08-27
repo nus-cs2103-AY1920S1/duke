@@ -6,6 +6,10 @@ public class Event extends Task{
         this.timeFrame = timeFrame;
     }
 
+    public String getTimeFrame() {
+        return timeFrame;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + timeFrame + ")";

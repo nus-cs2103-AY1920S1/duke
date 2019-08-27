@@ -5,7 +5,6 @@ public class Parser {
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.startsWith("done")) {
-            //TODO Implement DukeException TaskNotFoundException
             int taskNumber = Character.getNumericValue(command.charAt(5)) - 1;
             return new DoneCommand(taskNumber);
         } else if (command.startsWith("delete")) {

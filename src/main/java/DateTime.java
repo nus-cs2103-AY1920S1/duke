@@ -35,7 +35,9 @@ public class DateTime {
 
     //Adds the "st", "nd", "rd" ordinals based on numerical value of day
     public String appendOrdinal(Integer day) {
-        if (day % 10 == 1) {
+        if (day >= 11 && day <= 13) {
+            return day.toString() + "th";
+        } else if (day % 10 == 1) {
             return day.toString() + "st";
         } else if (day % 10 == 2) {
             return day.toString() + "nd";

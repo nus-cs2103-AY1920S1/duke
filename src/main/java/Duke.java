@@ -1,14 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.io.File;
-import java.io.FileWriter;
-
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
-
-
 public class Duke {
     private TaskList tasks;
     private Storage storage;

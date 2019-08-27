@@ -2,11 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
+    protected static ArrayList<Task> listOfTasks;
     protected static Scanner sc;
 
     public static void main(String[] args) {
         sc = new Scanner(System.in);
+        listOfTasks = SaveManager.loadTasks();
 
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
@@ -18,21 +19,26 @@ public class Duke {
                 switch (input) {
                 case "todo":
                     handleTodo();
+                    SaveManager.saveTasks(listOfTasks);
                     break;
                 case "deadline":
                     handleDeadline();
+                    SaveManager.saveTasks(listOfTasks);
                     break;
                 case "event":
                     handleEvent();
+                    SaveManager.saveTasks(listOfTasks);
                     break;
                 case "list":
                     handleList();
                     break;
                 case "done":
                     handleDone();
+                    SaveManager.saveTasks(listOfTasks);
                     break;
                 case "delete":
                     handleDelete();
+                    SaveManager.saveTasks(listOfTasks);
                     break;
                 case "bye":
                     isRunning = false;
@@ -40,6 +46,7 @@ public class Duke {
                 default:
                     throw new DukeException("Oops! You entered an invalid command.");
                 }
+
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }

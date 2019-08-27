@@ -37,6 +37,7 @@ public class ByeCommand implements Command {
             }
         }
 
+        sayGoodbye();
         DukeInput.close();
         return Optional.empty();
     }

@@ -29,6 +29,24 @@ public class Event extends Task {
     }
 
     /**
+     * Returns date of the event task.
+     *
+     * @return Date as <code>Date</code> class.
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
+    /**
+     * Returns time of the event task.
+     *
+     * @return Time as <code>Date</code> class.
+     */
+    public Date getTime() {
+        return this.time;
+    }
+
+    /**
      * Returns string representation of the event task with its description, date and time.
      *
      * @return String with the type of [task] [tick or cross] description (at:date time).

@@ -222,7 +222,7 @@ public class Parser {
         }
         if (Parser.isDeleteCommand(command)) {
             return new DeleteCommand(command);
-        } else if (!Parser.isListCommand(command) && !Parser.isMarkDone(command)) {
+        } else if (!Parser.isListCommand(command) && !Parser.isMarkDone(command) && !Parser.isFindCommand(command)) {
             if (Parser.isTodo(command)) {
                return new TodoCommand(command);
             } else if (Parser.isEvent(command)) {
@@ -239,8 +239,30 @@ public class Parser {
         } else if (Parser.isListCommand(command)) {
             //listing tasks out
             return new ListCommand(command);
+        } else if (Parser.isFindCommand(command)) {
+            return new FindCommand(command);
         } else {
             throw new DukeException(ui.noSuchCommand());
         }
+    }
+
+    /**
+     * Identifies if the command intended to be a find command to find a task.
+     *
+     * @param command String of the command user input.
+     * @return Boolean if the command is intended to be a find command.
+     */
+    public static boolean isFindCommand(String command) {
+        return (command.length() >= 4 && command.substring(0, 4).equals("find"));
+    }
+
+    /**
+     * Returns the keyword found in the command to find a task in the task list.
+     *
+     * @param command String of the command user input.
+     * @return String of the keyword.
+     */
+    public static String getKeyword(String command) {
+        return command.substring(5);
     }
 }

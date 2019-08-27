@@ -29,6 +29,24 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns date of the deadline task.
+     *
+     * @return Date as <code>Date</code> class.
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
+    /**
+     * Returns time of the deadline task.
+     *
+     * @return Time as <code>Date</code> class.
+     */
+    public Date getTime() {
+        return this.time;
+    }
+
+    /**
      * Returns string representation of the deadline task.
      *
      * @return String with the type of [task] [tick or cross] description (by:date time).

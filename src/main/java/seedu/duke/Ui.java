@@ -339,4 +339,42 @@ public class Ui {
                 + "______________________________________________";
         System.out.println(line);
     }
+
+    /**
+     * Prints all the tasks matching keyword with the information of each task.
+     *
+     * @param tasks TaskList of all the tasks matching keyword.
+     */
+    public void printAllMatchingTasks(TaskList tasks) {
+        String listMsg = "Here are the matching tasks in your list:";
+        System.out.println(listMsg);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String taskMsg = (i + 1) + ". " + task;
+            System.out.println(taskMsg);
+        }
+        System.out.println();
+    }
+
+    /**
+     * Checks the exception for find commands.
+     * Throws DukeException when the command is intended to find a task but is
+     * incorrectly inputted by the user.
+     *
+     * @param command String of command that user input.
+     * @throws DukeException If there is a incorrectly inputted user command
+     * that is intended to find a task with a keyword.
+     */
+    public void checkErrorForFindCommand(String command) throws DukeException {
+        if (command.contains(" ")) {
+            //throw exception for no task number and there is just trailing whitespaces
+            String res = command.replace(" ", "");
+            if (res.length() == 4) {
+                throw new DukeException("\u2639 OOPS!!! Please input the keyword for me to search in the list.\n");
+            }
+        } else if (command.length() == 4) {
+            //throw exception for no task number
+            throw new DukeException("\u2639 OOPS!!! Please input the keyword for me to search in the list.\n");
+        }
+    }
 }

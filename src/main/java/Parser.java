@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
@@ -56,6 +57,38 @@ public class Parser {
                     array.set(i, t3);
                 }
             }
+        }
+    }
+
+    public void callFind(String word, ArrayList<TaskList> array) {
+        ArrayList<TaskList> arr = new ArrayList<TaskList>();
+        String arr5[] = word.split(" ");
+        String searchWord = arr5[1];
+        int size = array.size();
+
+        for(int i = 0; i < size; i++) {
+            TaskList t = array.get(i);
+            String taskWord = t.getTaskName();
+            String type = t.getType();
+            if(taskWord.contains(searchWord)) {
+                if(type.equals("todo")) {
+                    System.out.println("here");
+                    TaskList addTask = new Todo(i + 1, t.getTaskCheck(),
+                            taskWord, type);
+                    arr.add(addTask);
+                } else if(type.equals("event")) {
+                    TaskList addTask = new Event(i + 1, t.getTaskCheck(),
+                            taskWord, type, t.getAB());
+                    arr.add(addTask);
+                } else if(type.equals("deadline")) {
+                    TaskList addTask = new Deadline(i + 1, t.getTaskCheck(),
+                            taskWord, type, t.getAB());
+                    arr.add(addTask);
+                }
+            }
+        }
+        for(TaskList tL : arr) {
+            System.out.println(tL);
         }
     }
 }

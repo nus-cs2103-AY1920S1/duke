@@ -57,20 +57,20 @@ public class Ui {
      * This method is called to tell the user that a task is successfully added to the task list.
      * @param t The task just have been added.
      */
-    public void showAddMessage(Task t) {
+    public void showAddMessage(Task t, int totalTaskNumber) {
         System.out.println("     Got it. I have added this task:");
         System.out.println("       " + t.taskInfo());
-        System.out.println("     You have now " + Task.getTotalNumber() + " tasks in the list.");
+        System.out.println("     You have now " + totalTaskNumber + " tasks in the list.");
     }
 
     /**
      * This method is to tell the user that a task is successfully deleted from the task list.
      * @param t The task just have been deleted.
      */
-    public void showDeleteMessage(Task t) {
+    public void showDeleteMessage(Task t, int totaltaskNumber) {
         System.out.println("     Noted, Noted. I've removed this task: ");
         System.out.println("       " + t.taskInfo());
-        System.out.println("     Now you have " + Task.getTotalNumber() + " tasks in the list");
+        System.out.println("     Now you have " + totaltaskNumber + " tasks in the list");
     }
 
     /**

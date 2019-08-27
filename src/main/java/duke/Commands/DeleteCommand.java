@@ -34,7 +34,9 @@ public class DeleteCommand extends Command{
         if (position > tl.getTotalNumber() || position < 1) {
             throw new DukeException("There is no such task in the list. Please input a valid task number.");
         }
-        ui.showDeleteMessage(tl.deleteTask(position));
+        Task deletedTask = tl.deleteTask(position);
+        int totalTaskNumber = tl.getTotalNumber();
+        ui.showDeleteMessage(deletedTask, totalTaskNumber);
     }
 
     /**

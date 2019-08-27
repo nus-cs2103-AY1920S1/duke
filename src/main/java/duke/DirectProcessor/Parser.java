@@ -1,6 +1,7 @@
 package duke.DirectProcessor;
 
 import duke.Commands.*;
+import duke.DukeException;
 
 /**
  * This is a class that recognizes the user's input and calls the corresponding command.
@@ -13,8 +14,9 @@ public class Parser {
      * It recognizes the user input and call the corresponding method.
      * @param s The user's input as a string.
      * @return The recognized command.
+     * @throws DukeException If the command is incomplete.
      */
-    public static Command parse(String s) {
+    public static Command parse(String s) throws DukeException {
         String[] splitInput = splitInput(s);
 
         // Call list command
@@ -78,10 +80,22 @@ public class Parser {
         }
 
         // Call finish command
-        else if (splitInput[0].equals("done")) return new FinishCommand(Integer.parseInt(splitInput[1]));
+        else if (splitInput[0].equals("done")) {
+            try {
+                return new FinishCommand(Integer.parseInt(splitInput[1]));
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Please specify which task is finished by its order in the task list.");
+            }
+        }
 
         // Call delete command
-        else if (splitInput[0].equals("delete")) return new DeleteCommand(Integer.parseInt(splitInput[1]));
+        else if (splitInput[0].equals("delete")) {
+            try {
+                return new DeleteCommand(Integer.parseInt(splitInput[1]));
+            } catch(IndexOutOfBoundsException e) {
+                throw new DukeException("Plase specify which task needs to be deleted by its order in the task list.");
+            }
+        }
 
         else if (splitInput[0].equals("find")) {
             String target = "";

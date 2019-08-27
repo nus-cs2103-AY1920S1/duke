@@ -57,7 +57,7 @@ public class AddCommand extends Command {
             toAdd = new Deadline(taskName, taskTime);
         }
         tl.addTask(toAdd);
-        ui.showAddMessage(toAdd);
+        ui.showAddMessage(toAdd, tl.getTotalNumber());
     }
 
     /**

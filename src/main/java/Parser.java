@@ -18,7 +18,6 @@ public class Parser {
             int num = Integer.parseInt(input[1]);
             return new DeleteCommand(num);
         } else {
-            Task t;
             if (input[1].equals("")) {
                 throw new DukeException("The description of a " + input[0] + " cannot be empty.");
             }
@@ -40,6 +39,7 @@ public class Parser {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             return new AddCommand(t);
+
         }
     }
 }

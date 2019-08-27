@@ -9,10 +9,10 @@ public class Parser {
         // ADD TODO, DEADLINE, EVENT TASKS
         if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
             try {
-                String command;
-                String remaining;
-                String item;
-                String date;
+                String command = "";
+                String remaining = "";
+                String item = "";
+                String date = "";
                 Task task = null;
 
                 //Check input is valid
@@ -51,6 +51,22 @@ public class Parser {
                     break;
                 }
 
+            } catch (DukeException de) {
+            } catch (Exception e) {
+                new DukeException("Something went wrong. Please try again.");
+            }
+        } else if (input.contains("find")) { // Find an item
+            try {
+                String command = "";
+                String remaining = "";
+                if (input.indexOf(" ") == -1 || (input.indexOf(" ") + 1) == -1) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                } else {
+                    command = input.substring(0, input.indexOf(" "));
+                    remaining = input.substring(input.indexOf(" ") + 1);
+                }
+
+                return new FindCommand(remaining);
             } catch (DukeException de) {
             } catch (Exception e) {
                 new DukeException("Something went wrong. Please try again.");

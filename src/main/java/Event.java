@@ -2,6 +2,12 @@ public class Event extends Task {
     //3.[E][✗] project meeting (at: Aug 6th 2-4pm)
     private String at;
 
+    /**
+     * Event constructor.
+     *
+     * @param description Description of Event.
+     * @param at Venue of Event.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;

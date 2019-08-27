@@ -8,6 +8,13 @@ public abstract class Task {
     }
 
     /**
+     * Indicate that the task is done.
+     */
+    protected void setDone() {
+        this.isDone = true;
+    }
+
+    /**
      * Creates the type of task to be added to the list based on user's command.
      * @param command The entire line of command input by the user into the program.
      * @return A Task object that follows the specifications of the input.
@@ -26,7 +33,7 @@ public abstract class Task {
             } else if (details.equals("")) {
                 throw new DukeException("The description of an event cannot be empty.");
             } else {
-                return new EventTask(commandArray[0], commandArray[1]);
+                return new EventTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
             }
         } else if (taskType.equals("deadline")) {
             commandArray = command.split(" /by ");
@@ -37,18 +44,11 @@ public abstract class Task {
             } else if (details.equals("")) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
-                return new DeadlineTask(commandArray[0], commandArray[1]);
+                return new DeadlineTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
             }
         } else {
             return new ToDoTask(command);
         }
-    }
-
-    /**
-     * Indicate that the task is done.
-     */
-    protected void setDone() {
-        this.isDone = true;
     }
 
     /**

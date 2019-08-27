@@ -1,14 +1,13 @@
-public class DeadlineTask extends Task {
+import java.util.Calendar;
 
-    String deadline;
+public class DeadlineTask extends TimedTask {
 
-    public DeadlineTask(String details, String deadline) {
-        super(details);
-        this.deadline = deadline;
+    public DeadlineTask(String details, Calendar deadline) {
+        super(details, deadline);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "( by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormat.format(date.getTime()) + ")";
     }
 }

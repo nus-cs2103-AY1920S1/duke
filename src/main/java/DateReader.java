@@ -4,16 +4,26 @@ public class DateReader {
     public DateReader(String date) {
         this.date = date;
     }
-
-
-
-    public static String readDate(DateReader dr) {
+    
+    public static String readDate(DateReader dr) throws DateDoesNotExistException {
     	String[] arr = dr.date.split("/");
 
     	String dd = arr[0];
     	String mm = arr[1];
     	String yy = arr[2].split(" ")[0];
         String time = arr[2].split(" ")[1];
+
+        if (Integer.parseInt(dd) > 31 || Integer.parseInt(dd) < 1) {
+            throw new DateDoesNotExistException("Day does not exist!");
+        }
+
+		if (Integer.parseInt(mm) > 12 || Integer.parseInt(mm) < 1) {
+			throw new DateDoesNotExistException("Month does not exist!");
+		}
+
+		if (Integer.parseInt(time) < 0 || Integer.parseInt(time)%100 > 59) {
+			throw new DateDoesNotExistException("Time does not exist!");
+		}
 
     	switch (dd) {
     	case "1":
@@ -79,17 +89,16 @@ public class DateReader {
     	case "12":
     		mm = "December";
     		break;
-    	
     	}
 
-        int newtime;
-        if (time.equals("1200") || time.equals("0000")) {
-            newtime = 12;
+        String timeinampm;
+        if (time.equals("1200") || time.equals("0000") || time.substring(0, 2).equals("12")) {
+            timeinampm = "12";
         } else {
-            newtime = (Integer.parseInt(time)/100)%12;
+            timeinampm = Integer.toString((Integer.parseInt(time)/100)%12);
         }
 
-        String dateandtime = dd + " of " + mm + " " + yy + " " + newtime;
+        String dateandtime = dd + " of " + mm + " " + yy + ", " + timeinampm;
 
         if (!time.substring(2).equals("00")) {
             dateandtime += time.substring(2);

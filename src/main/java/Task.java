@@ -11,7 +11,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         if (isDone) {
             return "\u2713";
         } else {
@@ -41,7 +41,7 @@ public class Task {
         taskList.add(task);
     }
 
-    public void done() {
+    private void done() {
         this.isDone = true;
     }
 
@@ -119,7 +119,7 @@ public class Task {
         taskList.remove(num - 1);
     }
 
-    public static void printLine() {
+    private static void printLine() {
         StringBuilder line = new StringBuilder();
 
         for (int i = 0; i < 60; i++) {
@@ -131,7 +131,7 @@ public class Task {
         System.out.println(stringLine);
     }
 
-    public static void printIndent() {
+    private static void printIndent() {
         System.out.print("    ");
     }
 

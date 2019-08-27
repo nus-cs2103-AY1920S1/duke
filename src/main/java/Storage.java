@@ -1,5 +1,3 @@
-package duke;
-
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;

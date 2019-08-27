@@ -1,5 +1,3 @@
-package duke;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -12,6 +10,14 @@ public class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Gets the description
+     * @return The description.
+     */
+    public String getDesc() {
+        return this.description;
     }
 
     /**

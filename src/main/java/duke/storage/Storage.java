@@ -3,12 +3,12 @@ package duke.storage;
 import duke.command.DukeInvalidArgumentException;
 import duke.ui.Ui;
 import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
 import duke.task.TodoTask;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskUtil;
-import duke.task.TaskList;
-import duke.task.TaskType;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -93,27 +93,27 @@ public class Storage {
             try {
                 inputs = StorageParser.parseJsonLine(input);
 
-                taskType = getTaskType(inputs.get(StorageKey.type));
-                isTaskDone = getDoneStatus(inputs.get(StorageKey.done));
-                taskDescription = getDescription(inputs.get(StorageKey.description));
-                taskTiming = inputs.get(StorageKey.time);
+                taskType = getTaskType(inputs.get(StorageKey.TYPE));
+                isTaskDone = getDoneStatus(inputs.get(StorageKey.DONE));
+                taskDescription = getDescription(inputs.get(StorageKey.DESCRIPTION));
+                taskTiming = inputs.get(StorageKey.TIME);
 
                 Task taskToAdd;
 
                 switch (taskType) {
-                case todo:
+                case TODO:
                     taskToAdd = new TodoTask(taskDescription);
                     break;
-                case deadline:
+                case DEADLINE:
                     taskToAdd = new DeadlineTask(taskDescription, taskTiming);
                     break;
-                case event:
+                case EVENT:
                     taskToAdd = new EventTask(taskDescription, taskTiming);
                     break;
                 default:
                     throw new DukeTaskFileParseException(
                             "Unhandled taskType encountered",
-                            " \u2639 Oops! I am not trained to handle this type of Tasks...\n");
+                            " ☹  Oops! I am not trained to handle this type of Tasks...\n");
                 }
 
                 taskToAdd.setDone(isTaskDone);
@@ -141,16 +141,16 @@ public class Storage {
             for (Task task : tasks.getAllTasks()) {
                 String jsonLineStart = String.format(
                         "{ %s: %s, %s: %s, %s: %s",
-                        StorageKey.type.toString(), task.getTaskType().toString(),
-                        StorageKey.done.toString(), ((Boolean) task.isDone()).toString(),
-                        StorageKey.description.toString(), task.getDescription());
+                        StorageKey.TYPE.toString(), task.getTaskType().toString(),
+                        StorageKey.DONE.toString(), ((Boolean) task.isDone()).toString(),
+                        StorageKey.DESCRIPTION.toString(), task.getDescription());
 
                 fileWriter.write(jsonLineStart);
 
                 if (task.getTiming() != null) {
                     fileWriter.write(
                             String.format(", %s: %s",
-                                    StorageKey.time.toString(),
+                                    StorageKey.TIME.toString(),
                                     task.getTiming()));
                 }
 
@@ -160,7 +160,7 @@ public class Storage {
         } catch (IOException ex) {
             throw new DukeFileWriteException(
                     ex.getMessage(),
-                    " \u2639 OOPS!!! I failed to write the task data to disk!");
+                    " ☹  OOPS!!! I failed to write the task data to disk!");
         }
     }
 
@@ -173,11 +173,11 @@ public class Storage {
      */
     private TaskType getTaskType(String input) throws DukeTaskFileParseException {
         try {
-            return TaskType.valueOf(input);
+            return TaskType.valueOf(input.toUpperCase());
         } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",
-                    " \u2639 Oops! I encountered an invalid task type value while\n"
+                    " ☹  Oops! I encountered an invalid task type value while\n"
                             + "   reading your file.");
         }
     }
@@ -201,7 +201,7 @@ public class Storage {
 
         throw new DukeTaskFileParseException(
                 "Invalid done status number encountered while parsing task file",
-                " \u2639 Oops! I encountered an invalid or missing done value\n"
+                " ☹  Oops! I encountered an invalid or missing done value\n"
                         + "   while reading your file.");
     }
 
@@ -221,7 +221,7 @@ public class Storage {
         } catch (DukeInvalidArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task description encountered when parsing task file",
-                    " \u2639 Oops! I encountered an empty description while\n"
+                    " ☹  Oops! I encountered an empty description while\n"
                             + "   reading your file.");
         }
     }
@@ -273,7 +273,7 @@ public class Storage {
      */
     private void printNoStorageMsg() {
         ui.printLineDivider();
-        ui.printMsgLine(" \u2639 Oops! I failed to find a "
+        ui.printMsgLine(" ☹  Oops! I failed to find a "
                 + dirName
                 + "   directory upwards\n"
                 + "   and could not create one!");

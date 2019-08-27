@@ -20,7 +20,7 @@ class DoneCommand extends WritableCommand {
      */
     public DoneCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.done;
+        commandType = Commands.DONE;
     }
 
     /**
@@ -53,7 +53,7 @@ class DoneCommand extends WritableCommand {
         if (commandArgs.length > 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after done command",
-                    " \u2639 OOPS!!! There shouldn't be so many arguments!");
+                    " ☹  OOPS!!! There shouldn't be so many arguments!");
         }
 
         try {
@@ -63,17 +63,17 @@ class DoneCommand extends WritableCommand {
             if (task.isDone()) {
                 throw new DukeInvalidArgumentException(
                         "User specified task is already marked as done",
-                        " \u2639 OOPS!!! The task you gave me was already marked as done!");
+                        " ☹  OOPS!!! The task you gave me was already marked as done!");
             }
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
-                    " \u2639 OOPS!!! The task number you gave me wasn't a valid number,\n"
+                    " ☹  OOPS!!! The task number you gave me wasn't a valid number,\n"
                             + " or you didn't give me one at all!");
         } catch (IndexOutOfBoundsException | NullPointerException ex) {
             throw new DukeInvalidArgumentException(
                     "User number supplied was out of list bounds",
-                    " \u2639 OOPS!!! The task number you gave me wasn't within your\n"
+                    " ☹  OOPS!!! The task number you gave me wasn't within your\n"
                             + " current list!");
         }
     }

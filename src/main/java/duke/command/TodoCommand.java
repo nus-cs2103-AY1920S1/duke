@@ -19,7 +19,7 @@ class TodoCommand extends AddTaskCommand {
      */
     public TodoCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.todo;
+        commandType = Commands.TODO;
     }
 
     /**

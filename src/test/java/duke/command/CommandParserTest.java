@@ -52,8 +52,8 @@ class CommandParserTest {
     }
 
     private String generateRandomString(int maxChars) {
-        final int MIN_ASCII_CHAR = 33;
-        final int MAX_ASCII_CHAR = 126;
+        final int minAsciiChar = 33;
+        final int maxAsciiChar = 126;
 
         if (maxChars < 0) {
             throw new IllegalArgumentException(
@@ -66,8 +66,8 @@ class CommandParserTest {
         for (int i = 0; i < length; i++) {
             string.append(
                     (char) (
-                            Math.random() * (MAX_ASCII_CHAR - MIN_ASCII_CHAR)
-                            + MIN_ASCII_CHAR));
+                            Math.random() * (maxAsciiChar - minAsciiChar)
+                            + minAsciiChar));
         }
 
         return string.toString();

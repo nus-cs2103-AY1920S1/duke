@@ -22,7 +22,7 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String description, String deadlineDate) throws DukeInvalidArgumentException {
         super(description, deadlineDate);
-        this.taskType = TaskType.deadline;
+        this.taskType = TaskType.DEADLINE;
         initDates(deadlineDate);
     }
 
@@ -61,7 +61,7 @@ public class DeadlineTask extends Task {
         if (deadlineDate == null) {
             throw new DukeInvalidArgumentException(
                     "Null reference provided to task constructor",
-                    "\u2639 OOPS!!! The timing for this task cannot be empty!");
+                    "☹  OOPS!!! The timing for this task cannot be empty!");
         }
 
         this.deadlineDate = TaskUtil.getDateFromString(deadlineDate);

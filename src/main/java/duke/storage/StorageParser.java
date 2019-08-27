@@ -44,14 +44,15 @@ abstract class StorageParser {
             case '}':
                 isKey = true;
                 try {
-                    StorageKey key = StorageKey.valueOf(currentKey.toString().trim());
+                    StorageKey key = StorageKey.valueOf(
+                            currentKey.toString().toUpperCase().trim());
                     lineMap.put(key, currentValue.toString().trim());
                     currentKey = new StringBuilder();
                     currentValue = new StringBuilder();
                 } catch (IllegalArgumentException ex) {
                     throw new DukeTaskFileParseException(
                             "Invalid key found in storage file (line will be skipped)",
-                            " \u2639 OOPS!!! I found an invalid storage key in your storage file,\n"
+                            " ☹  OOPS!!! I found an invalid storage key in your storage file,\n"
                                     + " I'll skip that line!\n"
                                     + String.format("   Invalid Key: \'%s\'", currentKey.toString()));
                 }
@@ -83,7 +84,7 @@ abstract class StorageParser {
         if (!hasOpeningBracket) {
             throw new DukeTaskFileParseException(
                     "Missing opening bracket while parsing file line.",
-                    " \u2639 OOPS!!! I found line without an opening bracket in your storage file,\n"
+                    " ☹  OOPS!!! I found line without an opening bracket in your storage file,\n"
                             + " I'll skip that line!\n");
         }
 
@@ -92,7 +93,7 @@ abstract class StorageParser {
         if (!hasClosingBracket) {
             throw new DukeTaskFileParseException(
                     "Missing closing bracket while parsing file line.",
-                    " \u2639 OOPS!!! I found a line without an closing bracket in your storage file,\n"
+                    " ☹  OOPS!!! I found a line without an closing bracket in your storage file,\n"
                             + " I'll skip that line!\n");
         }
     }

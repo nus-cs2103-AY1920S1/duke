@@ -17,7 +17,7 @@ class ListCommand extends Command {
      */
     public ListCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.list;
+        commandType = Commands.LIST;
     }
 
     /**
@@ -51,7 +51,7 @@ class ListCommand extends Command {
         if (commandArgs.length > 0) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after list command",
-                    " \u2639 OOPS!!! There shouldn't be anything following 'list',\n"
+                    " ☹  OOPS!!! There shouldn't be anything following 'list',\n"
                             + " did you meant to do something else?");
         }
     }

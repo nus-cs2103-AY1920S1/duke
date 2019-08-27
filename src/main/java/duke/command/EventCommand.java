@@ -21,7 +21,7 @@ class EventCommand extends AddTaskCommand {
      */
     public EventCommand(String[] commandArgs) {
         super(commandArgs);
-        commandType = Commands.event;
+        commandType = Commands.EVENT;
     }
 
     /**
@@ -42,7 +42,7 @@ class EventCommand extends AddTaskCommand {
         if (atIndex == -1) {
             throw new DukeInvalidArgumentException(
                     "Missing /at delimiter for event command",
-                    " \u2639 OOPS!!! I dont know what is your event timing!\n"
+                    " ☹  OOPS!!! I dont know what is your event timing!\n"
                             + " You should add a time with\n"
                             + " \'event <description> /at <time>\'");
         }

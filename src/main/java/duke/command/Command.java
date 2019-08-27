@@ -9,7 +9,7 @@ import duke.storage.Storage;
  * Abstraction of an executable command.
  * Validates the inputs provided then runs it.
  */
-abstract public class Command {
+public abstract class Command {
     /** Commands enum type of the command. */
     public Commands commandType;
 

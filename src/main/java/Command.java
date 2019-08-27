@@ -21,31 +21,34 @@ public class Command {
             break;
         case "todo":
             String taskname = ui.readLine().trim();
-            ui.checkValidity(taskname);
-            Task t = new Todo(taskname);
-            storage.addTodo(taskname);
-            tasks.add(t);
-            ui.printAdd(t);
+            if (ui.checkValidity(taskname)) {
+                Task t = new Todo(taskname);
+                storage.addTodo(taskname);
+                tasks.add(t);
+                ui.printAdd(t);
+            }
             break;
         case "deadline":
             String deadline = ui.readLine().trim();
-            ui.checkValidity(deadline);
-            String[] arrDeadline = deadline.split("/by");
-            String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
-            Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
-            storage.addDeadline(deadline);
-            tasks.add(taskDeadline);
-            ui.printAdd(taskDeadline);
+            if (ui.checkValidity(deadline)) {
+                String[] arrDeadline = deadline.split("/by");
+                String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
+                Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
+                storage.addDeadline(deadline);
+                tasks.add(taskDeadline);
+                ui.printAdd(taskDeadline);
+            }
             break;
         case "event":
             String event = ui.readLine().trim();
-            ui.checkValidity(event);
-            String[] arrEvent = event.split("/at");
-            String time = Parser.convertDateAndTime(arrEvent[1].trim());
-            Task taskEvent = new Event(arrEvent[0].trim(), time);
-            storage.addEvent(event);
-            tasks.add(taskEvent);
-            ui.printAdd(taskEvent);
+            if (ui.checkValidity(event)) {
+                String[] arrEvent = event.split("/at");
+                String time = Parser.convertDateAndTime(arrEvent[1].trim());
+                Task taskEvent = new Event(arrEvent[0].trim(), time);
+                storage.addEvent(event);
+                tasks.add(taskEvent);
+                ui.printAdd(taskEvent);
+            }
             break;
         case "delete":
             int deletionNumber = ui.readNumber();

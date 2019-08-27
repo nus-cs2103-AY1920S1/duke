@@ -46,14 +46,17 @@ public class Ui {
         System.out.println("Now you have " + TaskList.size() + " " + (TaskList.size() == 1 ? "task" : "tasks") + " in the list.");
     }
 
-    public void checkValidity(String taskname) {
+    public boolean checkValidity(String taskname) {
+        boolean flag = true;
         try {
             if (taskname.equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            flag = false;
         }
+        return flag;
     }
 
     public void printDone(int number, TaskList tasks) {

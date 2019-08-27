@@ -1,13 +1,22 @@
 package exception;
 
+/**
+ * Represents all exception unique to Duke
+ */
 public class DukeException extends Exception{
 
     protected String type;
 
+    /**
+     * @param input the error type
+     */
     public DukeException(String input) {
         this.type = input;
     }
 
+    /**
+     * @return error message
+     */
     @Override
     public String getMessage() {
         switch(this.type) {

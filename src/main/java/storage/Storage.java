@@ -11,13 +11,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents the file used to store task list
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * @param filePath represents the file where task list is stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the file where task list is stored
+     *
+     * @return list of task if the file is found
+     * @throws FileNotFoundException when no task list file is found
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
@@ -56,6 +68,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves task list in designated file path
+     *
+     * @param tasks is the task list
+     * @throws IOException if designated file path is not found
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         for (Task task : tasks.getTasks()) {

@@ -1,14 +1,24 @@
 package task;
 
+/**
+ * Represents a task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * @param description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * @param description of the task
+     * @param isDone true if task is completed. Else false
+     */
     public Task(String description, boolean isDone) {
         this(description);
         this.isDone = isDone;

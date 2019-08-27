@@ -8,13 +8,28 @@ import ui.Ui;
 
 import java.util.Date;
 
+/**
+ * Represent an event to be added
+ */
 public class EventCommand extends Command {
     private String[] arguments;
 
+    /**
+     * @param arguments contains description and date of event
+     */
     public EventCommand(String[] arguments) {
         this.arguments = arguments;
     }
 
+    /**
+     * Adds event to task list
+     * Print messages to notify users event has
+     * been added to task list
+     *
+     * @param tasks contains task list
+     * @param ui deals with interaction with users
+     * @param storage deals with loading and saving of task list
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

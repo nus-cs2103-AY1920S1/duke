@@ -2,15 +2,27 @@ package task;
 
 import java.util.Date;
 
+/**
+ * Represents a deadline
+ */
 public class Deadline extends Task {
 
     protected Date by;
 
+    /**
+     * @param description of deadline
+     * @param by is the due date of deadline
+     */
     public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * @param description of deadline
+     * @param by is the due date of deadline
+     * @param isDone true if deadline is completed. Else false
+     */
     public Deadline(String description, Date by, boolean isDone) {
         super(description, isDone);
         this.by = by;

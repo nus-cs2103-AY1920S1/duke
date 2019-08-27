@@ -122,6 +122,7 @@ public class Duke {
 
                     String doneMessage = "Nice! I've marked this task as done: \n\t\t";
                     System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
+                    
                 } else if (cmd == Command.ECHO) {
                     // Read any remaining lines
                     String echoInput = sc.nextLine().trim();

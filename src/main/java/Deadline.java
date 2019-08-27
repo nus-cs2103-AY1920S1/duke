@@ -5,7 +5,7 @@ import java.util.Date;
  * In addition to the information in the base Task object, also contains a Date object representing the task deadline.
  */
 public class Deadline extends Task {
-    protected Date by;
+    private Date by;
 
     /**
      * Constructor for Deadline. Assumes it is undone.
@@ -28,6 +28,10 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, Date by) {
         super(description, isDone);
         this.by = by;
+    }
+
+    public Date getByDate() {
+        return by;
     }
 
     /**

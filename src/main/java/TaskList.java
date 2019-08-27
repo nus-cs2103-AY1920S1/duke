@@ -6,7 +6,7 @@ import java.util.Iterator;
  * Provides methods for adding, deleting, and marking as done each task.
  */
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for task list. Initialises with an existing list of tasks.
@@ -31,6 +31,10 @@ public class TaskList {
      */
     public int getSize() {
         return tasks.size();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**

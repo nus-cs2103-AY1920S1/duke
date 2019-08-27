@@ -6,7 +6,7 @@ import java.util.Date;
  * also contains a Date object representing when the event occurs.
  */
 public class Event extends Task {
-    protected Date at;
+    private Date at;
 
     /**
      * Constructor for Event. Assumes it is undone.
@@ -29,6 +29,10 @@ public class Event extends Task {
     public Event(String description, boolean isDone, Date at) {
         super(description, isDone);
         this.at = at;
+    }
+
+    public Date getAtDate() {
+        return at;
     }
 
     /**

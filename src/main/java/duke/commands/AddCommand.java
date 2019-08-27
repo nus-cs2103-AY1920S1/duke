@@ -63,7 +63,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * This method creates a ToDo object and adds it into memory.
+     * This method creates a TD object and adds it into memory.
      * @param a a String of information containing details for the To Do task
      * @exception IOException is thrown when there is an error saving the data in the hard disk
      */

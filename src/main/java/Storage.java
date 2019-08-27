@@ -7,20 +7,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.List;
+import java.util.ArrayList;
 
-class DukeFileHandler {
-    private static File dataFile = new File("data/duke.txt");
+class Storage {
+    private static File dataFile;
+
+    Storage(String filePath) {
+        dataFile = new File(filePath);
+    }
 
     /**
-     * Reads tasks from a (valid) data file and adds them to the given list.
-     * Any existing tasks in the list are removed.
-     * @param taskList          List of tasks to be filled.
-     * @throws DukeException    If lines cannot be read from the file.
+     * Loads tasks from a (valid) data file, adds them to a new list, then
+     * returns that list.
+     * @throws DukeException    If tasks cannot be loaded from file
+     * @return                  List of tasks that were loaded from file
      */
-    static void readTasksFromFile(List<Task> taskList) throws DukeException {
+    List<Task> load() throws DukeException {
+        List<Task> taskList = new ArrayList<>();
         try {
             Scanner fileScanner = new Scanner(dataFile);
-            taskList.clear();
             while (fileScanner.hasNext()) {
                 String task = fileScanner.nextLine();
                 String[] details = task.split(" \\| ");
@@ -32,25 +37,24 @@ class DukeFileHandler {
                 } else if (details[0].equals("D")) {
                     taskList.add(new Deadline(details[2], details[3], isDone));
                 } else {
-                    throw new DukeException(
-                            "I could not retrieve your previous tasks.");
+                    taskList.add(new Task("Task could not be parsed."));
+                    // TODO: Find better way to handle parsing error.
                 }
             }
+            return taskList;
         } catch (FileNotFoundException e) {
-            // do nothing. Duke continues with an empty list.
+            throw new DukeException("No such file was found.");
         }
     }
 
     /**
      * Writes the tasks in the given list to an external data file.
-     * @param taskList          List of tasks to be written.
+     * @param tasks             List of tasks to be written.
      * @throws IOException      If file cannot be found, etc.
      */
-    static void writeToFile(List<Task> taskList) throws IOException {
+    void writeToFile(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(dataFile);
-        for (Task task : taskList) {
-            fileWriter.append(task.formatAsData() + "\n");
-        }
+        fileWriter.write(tasks.toString());
         fileWriter.close();
     }
 }

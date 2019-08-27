@@ -22,7 +22,7 @@ class Event extends Task {
      * @param date  Valid date string, as specified in DukeFormatter.DATE_FORMATS.
      */
     private void parse(String date) {
-        for (SimpleDateFormat format : DukeFormatter.DATE_FORMATS) {
+        for (SimpleDateFormat format : TextUi.DATE_FORMATS) {
             if (time != null) {
                 break;
             }

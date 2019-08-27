@@ -1,6 +1,12 @@
 import java.util.List;
 
 class DukeFormatter {
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     private static final String HORIZONTAL_LINE =
             "____________________________________________________________";
 
@@ -49,5 +55,14 @@ class DukeFormatter {
             print(i + "." + list.get(i - 1).toString());
         }
         printBorder();
+     }
+
+    /**
+     * Prints a welcome message that consists of the Duke logo and a greeting.
+     */
+    static void printWelcomeMessage() {
+         prettyPrint(LOGO + "\n"
+                 + "Hello! I'm Duke\n"
+                 + "What can I do for you?");
      }
 }

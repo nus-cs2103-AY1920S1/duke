@@ -5,6 +5,7 @@ import duke.task.Task;
 import duke.task.TaskEnum;
 
 public class Parser {
+
     /**
      * Returns a command object that represents the command entered.
      *
@@ -38,7 +39,8 @@ public class Parser {
                         throw new DukeException("Please ensure that /by and the date is included");
                     } else {
                         item = remaining.substring(0, remaining.indexOf("/by") - 1);
-                        date = remaining.substring(remaining.indexOf("/by") + 4, remaining.length());
+                        date = remaining
+                            .substring(remaining.indexOf("/by") + 4, remaining.length());
                     }
 
                     return new AddCommand(item, date, TaskEnum.DEADLINE);
@@ -48,7 +50,8 @@ public class Parser {
                         throw new DukeException("Please ensure that /at and the date is included");
                     } else {
                         item = remaining.substring(0, remaining.indexOf("/at") - 1);
-                        date = remaining.substring(remaining.indexOf("/at") + 4, remaining.length());
+                        date = remaining
+                            .substring(remaining.indexOf("/at") + 4, remaining.length());
                     }
 
                     return new AddCommand(item, date, TaskEnum.EVENT);
@@ -79,14 +82,14 @@ public class Parser {
             }
         } else if (input.contains("done")) { // Mark item as complete
             int taskNo = Integer.parseInt(
-                    input.replace("done", "")
-                            .replace(" ", "")); //Removing 'done' and empty spaces
+                input.replace("done", "")
+                    .replace(" ", "")); //Removing 'done' and empty spaces
 
             return new DoneCommand(taskNo);
         } else if (input.contains("delete")) { // Delete item
             int taskNo = Integer.parseInt(
-                    input.replace("delete", "")
-                            .replace(" ", "")); //Removing 'delete' and empty spaces
+                input.replace("delete", "")
+                    .replace(" ", "")); //Removing 'delete' and empty spaces
 
             return new DeleteCommand(taskNo);
         } else if (input.equals("list")) { // List items

@@ -9,11 +9,12 @@ public class ExitCommand extends Command {
     /**
      * Executes the current command.
      *
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param ui       Ui object.
+     * @param storage  Storage object.
      * @param taskList TaskList object.
      */
-    public void execute(Ui ui, Storage storage, TaskList taskList) {}
+    public void execute(Ui ui, Storage storage, TaskList taskList) {
+    }
 
     /**
      * Returns if commands should continue being read.
@@ -21,7 +22,7 @@ public class ExitCommand extends Command {
      * @return Boolean value if commands should continue being read.
      */
     @Override
-    public boolean shouldContinue(){
+    public boolean shouldContinue() {
         return false;
     }
 }

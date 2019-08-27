@@ -1,6 +1,7 @@
 package duke.task;
 
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -9,7 +10,7 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -26,7 +27,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
@@ -35,7 +36,7 @@ public class Task {
      *
      * @return State of task.
      */
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return isDone;
     }
 
@@ -44,12 +45,12 @@ public class Task {
      *
      * @return Description of task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 }

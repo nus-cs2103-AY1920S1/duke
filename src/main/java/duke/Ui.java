@@ -9,7 +9,7 @@ public class Ui {
     /**
      * Creates a new Ui object.
      */
-    public Ui(){
+    public Ui() {
         printOutput("Hello! I'm Duke\nWhat can i do for you?");
     }
 
@@ -18,14 +18,14 @@ public class Ui {
      *
      * @return Command read from the console.
      */
-    public String readCommand(){
+    public String readCommand() {
         return sc.nextLine();
     }
 
     /**
      * Prints the exit string to the console.
      */
-    public void printExit(){
+    public void printExit() {
         printOutput("Bye. Hope to see you again soon!");
     }
 
@@ -34,23 +34,23 @@ public class Ui {
      *
      * @param s Message to be included in the output.
      */
-    public void printOutput(String s){
+    public void printOutput(String s) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    " + s.replace("\n","\n    "));
+        System.out.println("    " + s.replace("\n", "\n    "));
         System.out.println("    ____________________________________________________________");
     }
 
     /**
      * Prints the string specified to the console.
      *
-     * @param s Message to be included in the output.
+     * @param s           Message to be included in the output.
      * @param taskMessage Task Message to be included in the output.
-     * @param listSize Size of the list.
+     * @param listSize    Size of the list.
      */
-    public void printOutput(String s, String taskMessage, int listSize){
+    public void printOutput(String s, String taskMessage, int listSize) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + taskMessage);
-        System.out.println("    " + s.replace("\n","\n    "));
+        System.out.println("    " + s.replace("\n", "\n    "));
         System.out.println("    " + "Now you have " + listSize + " tasks in the list.");
         System.out.println("    ____________________________________________________________");
     }

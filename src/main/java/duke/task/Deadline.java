@@ -12,13 +12,14 @@ public class Deadline extends Task {
      * Creates a Deadline object.
      *
      * @param description Description of task.
-     * @param by Date of task.
+     * @param by          Date of task.
      */
-    public Deadline(String description, String by){
+    public Deadline(String description, String by) {
         super(description);
 
         this.by = LocalDateTime.parse(by,
-                    DateTimeFormatter.ofPattern("[d/MM/yyyy HHmm][dd/M/yyyy HHmm][d/M/yyyy HHmm][dd/MM/yyyy HHmm]"));
+            DateTimeFormatter
+                .ofPattern("[d/MM/yyyy HHmm][dd/M/yyyy HHmm][d/M/yyyy HHmm][dd/MM/yyyy HHmm]"));
 
     }
 
@@ -27,12 +28,13 @@ public class Deadline extends Task {
      *
      * @return Original date string.
      */
-    public String getDate(){
+    public String getDate() {
         return by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' HHmm", Locale.US)) + ")";
+        return "[D]" + super.toString() + " (by: " + by
+            .format(DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' HHmm", Locale.US)) + ")";
     }
 }

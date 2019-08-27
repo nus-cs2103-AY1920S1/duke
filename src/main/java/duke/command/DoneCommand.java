@@ -14,15 +14,15 @@ public class DoneCommand extends Command {
      *
      * @param taskNo Task Number of task.
      */
-    public DoneCommand(int taskNo){
+    public DoneCommand(int taskNo) {
         this.taskNo = taskNo;
     }
 
     /**
      * Executes the current command.
      *
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param ui       Ui object.
+     * @param storage  Storage object.
      * @param taskList TaskList object.
      */
     public void execute(Ui ui, Storage storage, TaskList taskList) {

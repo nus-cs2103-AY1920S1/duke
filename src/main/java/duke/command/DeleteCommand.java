@@ -14,15 +14,15 @@ public class DeleteCommand extends Command {
      *
      * @param taskNo Task Number of task.
      */
-    public DeleteCommand(int taskNo){
+    public DeleteCommand(int taskNo) {
         this.taskNo = taskNo;
     }
 
     /**
      * Executes the current command.
      *
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param ui       Ui object.
+     * @param storage  Storage object.
      * @param taskList TaskList object.
      */
     public void execute(Ui ui, Storage storage, TaskList taskList) {
@@ -30,8 +30,8 @@ public class DeleteCommand extends Command {
 
         if (task != null) {
             ui.printOutput("  " + task,
-                    "Noted. I've removed this task: ",
-                    taskList.getTaskList().size());
+                "Noted. I've removed this task: ",
+                taskList.getTaskList().size());
             storage.save(taskList.getTaskList());
         }
     }

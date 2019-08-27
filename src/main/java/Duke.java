@@ -49,7 +49,6 @@ public class Duke {
      * Main method.
      */
     public static void main(String[] args) {
-//        Duke d = new Duke();
         new Duke("../data/duke.txt").run();
     }
 }

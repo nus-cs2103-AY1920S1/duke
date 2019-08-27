@@ -1,9 +1,13 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.lang.Exception;
 import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 //import java.io.FileWriter;
 
 enum Command {
@@ -19,7 +23,12 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        File dukeInput = new File("data/Duke.txt");
+        Path filePath = Paths.get("data/Duke.txt");
+        File dukeInput = new File(filePath.toString());
+
+        boolean isListChanged = false;
+        Task changedItem = null;
+        Command changedCommand;
 
         map.put("T", "TODO");
         map.put("E", "EVENT");
@@ -72,6 +81,9 @@ public class Duke {
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
 
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
+
                 } else if (cmd == Command.EVENT) {
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
@@ -91,6 +103,9 @@ public class Duke {
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
+
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
 
                 } else if (cmd == Command.DEADLINE) {
                     String input = sc.nextLine().trim();
@@ -113,6 +128,9 @@ public class Duke {
 
                     System.out.println(processText(tempPrint));
 
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
+
                 } else if (cmd == Command.DONE) {
                     // Cannot perform done in zero list
                     if (listCounter == 0) {
@@ -134,6 +152,9 @@ public class Duke {
                     String doneMessage = "Nice! I've marked this task as done: \n\t\t";
                     System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
 
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
+
                 } else if (cmd == Command.ECHO) {
                     // Read any remaining lines
                     String echoInput = sc.nextLine().trim();
@@ -148,6 +169,9 @@ public class Duke {
 
                     String processedInput = Duke.processText(echoInput);
                     System.out.println(processedInput);
+
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
 
                 } else if (cmd == Command.DELETE) {
                     // Incorrect format for delete
@@ -168,6 +192,17 @@ public class Duke {
                     String tempPrint = "Noted. I've removed this task:\n\t\t" +
                             deletedTask.getItemInfo() + "\n\tNow you have " + listCounter + " tasks in the list.";
                     System.out.println(processText(tempPrint));
+
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
+                }
+
+                // Save changed list to hard disk, if changed
+                if(isListChanged){
+                    isListChanged = false;
+                    FileWriter fw = new FileWriter(dukeInput, true);
+                    fw.write(processWriteTest(changedItem, cmd));
+                    fw.close();
                 }
 
             } catch (CommandNotRecognizedException c) {
@@ -189,8 +224,22 @@ public class Duke {
             } catch (InvalidNumberException n) {
                 System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
 
+            } catch (IOException o){
+                System.out.println("File IO exception");
             }
         }
+    }
+
+    private static String processWriteTest(Task t, Command changedCommand){
+        char commandFirstChar = changedCommand.toString().charAt(0);
+        int isDone = t.getIsDone() ? 1: 0;
+        String itemDescription = t.getTaskItem();
+        String timeDate = "";
+        if(changedCommand.name().equals("EVENT") || changedCommand.name().equals("DEADLINE")){
+            if(t instanceof Deadline) timeDate = ((Deadline)t).getTimeDate();
+            else if (t instanceof Event) timeDate = ((Event)t).getTimeDate();
+        }
+        return "\r\n" + commandFirstChar + " | " + isDone + " | " + itemDescription + " | " + timeDate;
     }
 
     // Process input file data from hard disk
@@ -296,6 +345,10 @@ class Task {
         this.taskItem = taskItem.trim();
     }
 
+    public boolean getIsDone(){
+        return isDone;
+    }
+
     public void setDone() {
         isDone = true;
     }
@@ -343,17 +396,17 @@ class Deadline extends Task {
         else return "[D][" + CROSS + "]";
     }
 
-    public String getDeadline() {
-        return this.deadline;
-    }
-
     @Override
     public String getItemInfo() {
         if (!isDeadlineProcessed) {
             deadline = deadline.substring(3);
             isDeadlineProcessed = true;
         }
-        return getStatusIcon() + " " + getTaskItem() + " (by: " + getDeadline() + ")";
+        return getStatusIcon() + " " + getTaskItem() + " (by: " + getTimeDate() + ")";
+    }
+
+    public String getTimeDate(){
+        return deadline;
     }
 }
 
@@ -385,6 +438,10 @@ class Event extends Task {
             isTimingProcessed = true;
         }
         return getStatusIcon() + " " + getTaskItem() + " (at: " + getTiming() + ")";
+    }
+
+    public String getTimeDate(){
+        return timing;
     }
 
 }

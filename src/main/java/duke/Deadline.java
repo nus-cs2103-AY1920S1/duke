@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
  */
 public class Deadline extends Task {
     private Date date;
-    private String description;
 
     public Deadline(String description) {
         super(description);

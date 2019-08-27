@@ -1,2 +1,3 @@
-[D][✓]  return book Mon Dec 02 18:00:00 SGT 2019nullnullnullnull
 [T][✓] read book
+[E][✓] read book Thu Jun 13 13:10:00 SGT 2019
+[D][✘] read book Thu Jun 13 13:10:00 SGT 2019

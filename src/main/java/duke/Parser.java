@@ -73,6 +73,12 @@ public class Parser {
                 throw new DukeException(ex.getMessage());
             }
             return new AddCommand(event);
+        case "find":
+            String word = arr[1];
+            if (word.isEmpty()) {
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what to find :-(");
+            }
+            return new FindCommand(word);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

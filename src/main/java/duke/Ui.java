@@ -63,6 +63,13 @@ public class Ui {
     }
 
     /**
+     * Prints find command message.
+     */
+    void printFindMessage() {
+        System.out.println("Here are the matching tasks in your list:\n");
+    }
+
+    /**
      * Prints delete command message.
      */
     void printDeleteMessage(Task task, TaskList tasks) {

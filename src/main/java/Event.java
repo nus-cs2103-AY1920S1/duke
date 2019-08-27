@@ -7,18 +7,11 @@ public class Event extends Task {
 
     protected Event(String description, String at) throws DukeException {
         super(description);
-
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            Date date = formatter.parse(at);
-            this.at = date;
-        } catch (ParseException e) {
-            throw new DukeException("Failed to parse date.");
-        }
+        this.at = Utilities.dateParser(at);
     }
-    protected Event(String description, boolean isDone, String at) {
+    protected Event(String description, boolean isDone, String at) throws DukeException {
         super(description, isDone);
-        this.at = at;
+        this.at = Utilities.dateParser(at);
     }
 
     @Override

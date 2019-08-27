@@ -7,6 +7,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setIsDone(String value) {
+        this.isDone = Boolean.valueOf(value);
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
@@ -15,8 +19,13 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public String toDataFormat() {
+        return (isDone ? "1"
+                    : "0") + " | " + this.description;
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

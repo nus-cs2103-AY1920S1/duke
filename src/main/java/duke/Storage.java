@@ -19,14 +19,14 @@ import exceptions.DukeException;
  */
 public class Storage {
 
-    /** The path of the file to be read from and written to */
+    /** The path of the file to be read from and written to. */
     private String filePath;
 
     /**
      * The Storage constructor takes the path of the
      * file to be read from as input.
      *
-     * @param filePath
+     * @param filePath The path of the file to be read from and written to.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -52,7 +52,7 @@ public class Storage {
             String s = sc.nextLine();
             String line = s.substring(8);
             if (s.charAt(0) == 'T') {
-                taskLst.add(new ToDo(line, s.charAt(4) == '1' ? true: false));
+                taskLst.add(new ToDo(line, s.charAt(4) == '1' ? true : false));
             } else if (s.charAt(0) == 'D') {
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '|') {

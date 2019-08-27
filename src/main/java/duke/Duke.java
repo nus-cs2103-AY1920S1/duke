@@ -12,11 +12,11 @@ import commands.Command;
  */
 public class Duke {
 
-    /** the Storage object that reads from and writes to the file */
+    /** the Storage object that reads from and writes to the file. */
     private Storage storage;
-    /** the TaskList object storing all recorded Tasks */
+    /** the TaskList object storing all recorded Tasks. */
     private TaskList tasks;
-    /** the Ui object dealing with user interaction */
+    /** the Ui object dealing with user interaction. */
     private Ui ui;
 
     /**

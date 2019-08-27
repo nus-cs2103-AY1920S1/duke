@@ -6,9 +6,9 @@ package tasks;
  * These Tasks are one of 3 types: ToDo, Deadline or Event task.
  */
 public abstract class Task {
-    /** The description of the task */
+    /** The description of the task. */
     protected String description;
-    /** Boolean representing the state of the task, if it is completed */
+    /** Boolean representing the state of the task, if it is completed. */
     protected boolean isDone;
 
     /**

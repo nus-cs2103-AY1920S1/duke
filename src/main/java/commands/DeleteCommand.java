@@ -41,9 +41,9 @@ public class DeleteCommand extends Command {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         int delTaskIndex = sc.nextInt() - 1;
         Task deletedTask = taskLst.remove(delTaskIndex);
-        System.out.printf("     Noted. I've removed this task:\n" +
-                        "       %s\n     Now you have %d tasks in the list.\n"
-                , deletedTask, taskLst.size());
+        System.out.printf("     Noted. I've removed this task:\n"
+                        + "       %s\n     Now you have %d tasks in the list.\n",
+                deletedTask, taskLst.size());
     }
 
 }

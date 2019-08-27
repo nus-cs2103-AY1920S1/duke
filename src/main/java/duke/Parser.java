@@ -2,7 +2,14 @@ package duke;
 
 import java.util.Scanner;
 
-import commands.*;
+import commands.Command;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ExitCommand;
+import commands.ListCommand;
+import commands.FindCommand;
+
 import exceptions.DukeException;
 
 /**
@@ -42,8 +49,8 @@ public class Parser {
                 || command.startsWith("event")) {
             return new AddCommand(fullCommand);
         } else {
-            throw new DukeException("     \u2639 OOPS!!! I'm sorry, " +
-                    "but I don't know what that means :-(");
+            throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");
         }
     }
 

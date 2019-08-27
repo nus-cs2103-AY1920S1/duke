@@ -15,9 +15,9 @@ import exceptions.DukeException;
  */
 public abstract class Command {
 
-    /** Boolean representing whether this command should trigger termination of the program */
+    /** Boolean representing whether this command should trigger termination of the program. */
     protected boolean isExit;
-    /** String containing the full line of text retrieved from user input */
+    /** String containing the full line of text retrieved from user input. */
     protected String fullCommand;
 
     /**

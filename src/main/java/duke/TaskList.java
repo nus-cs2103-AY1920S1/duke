@@ -7,7 +7,7 @@ import tasks.Task;
  * TaskList class stores the list of Tasks.
  */
 public class TaskList {
-    /** The list of Tasks */
+    /** The list of Tasks. */
     private ArrayList<Task> taskLst;
 
     /**

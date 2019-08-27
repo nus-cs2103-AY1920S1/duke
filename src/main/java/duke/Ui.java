@@ -10,18 +10,18 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /** Scanner object that redirects the input to user input */
+    /** Scanner object that redirects the input to user input. */
     private Scanner scanner = new Scanner(System.in);
-    /** Horizontal line to be used extensively in printed messages and responses */
-    private String hLine = "    ____________________________________________________________";
+    /** Horizontal line to be used extensively in printed messages and responses. */
+    private String hrzLine = "    ____________________________________________________________";
 
     /**
      * Prints a welcome message.
      */
     public void showWelcome() {
-        System.out.println(hLine);
+        System.out.println(hrzLine);
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        System.out.printf("%s\n\n", hLine);
+        System.out.printf("%s\n\n", hrzLine);
     }
 
     /**
@@ -37,14 +37,14 @@ public class Ui {
      * Prints the Opening Line.
      */
     public void showOpeningLine() {
-        System.out.println(hLine);
+        System.out.println(hrzLine);
     }
 
     /**
      * Prints the Closing Line.
      */
     public void showClosingLine() {
-        System.out.printf("%s\n\n", hLine);
+        System.out.printf("%s\n\n", hrzLine);
     }
 
     /**
@@ -63,9 +63,9 @@ public class Ui {
      * @param err String containing the message of the exception.
      */
     public void showLoadingError(String err) {
-        System.out.println(hLine);
+        System.out.println(hrzLine);
         System.out.printf("     %s\n", err);
-        System.out.printf("%s\n\n", hLine);
+        System.out.printf("%s\n\n", hrzLine);
     }
 
     /**

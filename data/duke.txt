@@ -1,4 +1,3 @@
-T | 1 | run fil
 T | 0 | play bball
 T | 1 | gradle
 E | 1 | live | 12 December 2022, 1AM

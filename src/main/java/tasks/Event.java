@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** LocalDateTime storing the time at which the event will occur */
+    /** LocalDateTime storing the time at which the event will occur. */
     protected LocalDateTime at;
 
     /**
@@ -29,7 +29,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha")) + ")";
-}
+    }
 
     /**
      * Returns a string that is of the appropriate format

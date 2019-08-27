@@ -41,8 +41,8 @@ public class DoneCommand extends Command {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         int taskDoneIndex = sc.nextInt() - 1;
         taskLst.get(taskDoneIndex).setDone();
-        System.out.printf("     Nice! I've marked this task as done:\n       %s\n"
-                , taskLst.get(taskDoneIndex));
+        System.out.printf("     Nice! I've marked this task as done:\n       %s\n",
+                taskLst.get(taskDoneIndex));
     }
 
 }

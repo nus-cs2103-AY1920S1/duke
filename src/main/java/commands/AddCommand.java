@@ -49,8 +49,8 @@ public class AddCommand extends Command {
         if (fullCommand.startsWith("todo")) {
             // Add a ToDo task
             if (!sc.hasNextLine()) {
-                throw new DukeException("     \u2639 OOPS!!! " +
-                        "The description of a todo cannot be empty.");
+                throw new DukeException("     \u2639 OOPS!!! "
+                        + "The description of a todo cannot be empty.");
             }
             taskLst.add(new ToDo(sc.nextLine().substring(1), false));
         } else if (fullCommand.startsWith("deadline")) {
@@ -89,12 +89,12 @@ public class AddCommand extends Command {
                     LocalDateTime.parse(at, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")),
                     false));
         } else {
-            throw new DukeException("     \u2639 OOPS!!! I'm sorry, " +
-                    "but I don't know what that means :-(");
+            throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");
         }
-        System.out.printf("     Got it. I've added this task:\n       %s\n" +
-                        "     Now you have %d tasks in the list.\n",
-        taskLst.get(taskLst.size() - 1), taskLst.size());
+        System.out.printf("     Got it. I've added this task:\n       %s\n"
+                        + "     Now you have %d tasks in the list.\n",
+            taskLst.get(taskLst.size() - 1), taskLst.size());
     }
 
 }

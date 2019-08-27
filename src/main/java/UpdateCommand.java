@@ -10,8 +10,9 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.markNumberedTaskAsDone(position);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task task = taskList.markNumberedTaskAsDone(position);
+        ui.notifyMarkedAsDone(task);
         storage.writeListToFile(taskList);
 
     }

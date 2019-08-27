@@ -3,30 +3,34 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasksList;
 
+    public TaskList() {
+        this.tasksList = new ArrayList<>();
+    }
+
     public TaskList(ArrayList<Task> tasksList) {
         this.tasksList = tasksList;
     }
 
     public void addItem(Task task) {
         tasksList.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("\t" + task);
-        System.out.printf("Now you have %d tasks in the list.\n", tasksList.size());
     }
 
-    public void markNumberedTaskAsDone(int number) {
-        getTaskAtIndex(number - 1).markAsDone();
+    public int size() {
+        return tasksList.size();
+    }
+
+    public Task markNumberedTaskAsDone(int number) {
+        Task task = getTaskAtIndex(number - 1);
+        task.markAsDone();
+        return task;
     }
 
     public ArrayList<Task> getTasksList() {
         return tasksList;
     }
 
-    public void deleteTaskAtNumber(int position) {
-        Task task = tasksList.remove(position - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("\t" + task);
-        System.out.printf("Now you have %d tasks in the list.\n", tasksList.size());
+    public Task deleteTaskAtNumber(int position) {
+        return tasksList.remove(position - 1);
     }
 
     public Task getTaskAtIndex(int position) {

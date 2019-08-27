@@ -16,7 +16,7 @@ public class CreateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         boolean isAdd = true;
         Task task = new Task(description);
         switch (directive) {
@@ -34,9 +34,10 @@ public class CreateCommand extends Command {
         }
         if (isAdd) {
             taskList.addItem(task);
+            ui.notifyTaskAdded(task, taskList.size());
             storage.addTaskToFile(task);
             return;
         }
-        ui.printLine("Create Error");
+        throw new DukeException("Error Executing Create Command");
     }
 }

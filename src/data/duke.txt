@@ -1,12 +1,1 @@
-T | - | go the gym 
-T | - | go to school 
-T | - | run 
-T | - | test 
-T | - | testing 
-T | - | laugh 
-D | - | check for lion | 2am
-D | - | go to school | 22nd of December 2000, 1.00pm
-E | + | run marathon | on /at 2pm - 4pm
-E | - | run home | 2400 to 12 00
-E | - | run marathon | on /at 2
-E | - | run marathon | 2am
+T | - | go the gym

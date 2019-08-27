@@ -9,8 +9,16 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.deleteTaskAtNumber(position);
-        storage.writeListToFile(taskList);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task task = taskList.deleteTaskAtNumber(position);
+            ui.notifyTaskDeleted(task, taskList.size());
+            storage.writeListToFile(taskList);
+        }
+        catch (Exception ex) {
+            throw new DukeException(ex.getMessage());
+        }
     }
+
+
 }

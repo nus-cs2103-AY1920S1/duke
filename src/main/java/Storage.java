@@ -13,14 +13,14 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws DukeException {
         planner = new File(filePath);
         setPlannerPermissions(planner);
         ArrayList<Task> tasksList = createTasksList(planner);
         return tasksList;
     }
 
-    public ArrayList<Task> createTasksList(File file) {
+    public ArrayList<Task> createTasksList(File file) throws DukeException {
         ArrayList<Task> tasksList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -41,14 +41,13 @@ public class Storage {
                     setDoneFlag(task, taskDetails[1].trim());
                     break;
                 default:
-                    System.out.println("Error parsing the planner");
-                    return null;
+                    throw new DukeException("Storage File not in correct format");
                 }
                 tasksList.add(task);
             }
         }
         catch (FileNotFoundException ex) {
-            System.out.println(ex);
+            throw new DukeException(ex.getMessage());
         }
         finally {
             return tasksList;
@@ -67,18 +66,18 @@ public class Storage {
         planner.setWritable(true);
     }
 
-    public void writeStringToFile(String textToAdd) {
+    public void writeStringToFile(String textToAdd) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner); //creates FileWriter in overwrite mode
             fw.write(textToAdd + "\n");
             fw.close();
         }
         catch (IOException ex) {
-            System.out.println(ex);
+            throw new DukeException(ex.getMessage());
         }
     }
 
-    public void writeListToFile(TaskList taskList) {
+    public void writeListToFile(TaskList taskList) throws DukeException {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> tasks = taskList.getTasksList();
         for (Task task : tasks) {
@@ -88,14 +87,14 @@ public class Storage {
         writeStringToFile(sb.toString().trim());
     }
 
-    public void addTaskToFile(Task task) {
+    public void addTaskToFile(Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner, true); // create a FileWriter in append mode
             fw.write(task + "\n");
             fw.close();
         }
         catch (IOException ex) {
-            System.out.println(ex);
+            throw new DukeException(ex.getMessage());
         }
     }
 }

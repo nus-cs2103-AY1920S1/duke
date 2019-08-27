@@ -1,6 +1,5 @@
-import java.text.SimpleDateFormat;
-
 public class Deadline extends Task {
+
     protected String by;
 
     public Deadline(String description, String by) {
@@ -86,14 +85,6 @@ public class Deadline extends Task {
         default:
             return "Invalid Date";
          }
-    }
-
-
-    @Override
-    public void markAsDone() {
-        isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("\t" + this);
     }
 
     @Override

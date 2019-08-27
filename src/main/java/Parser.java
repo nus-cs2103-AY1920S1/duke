@@ -1,8 +1,6 @@
-import java.util.Scanner;
-
 public class Parser {
 
-    public static Command parse(String command) {
+    public static Command parse(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         String directive = commandArr[0];
         if (directive.equals("list")) {
@@ -17,8 +15,7 @@ public class Parser {
             return new DeleteCommand("delete", position);
         } else if (isTask(directive)) {
             if (commandArr.length < 2) {
-                System.out.printf("☹ OOPS!!! The description of a %s cannot be empty.\n", directive);
-                return null;
+                throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", directive));
             }
             if (directive.equals("todo")) {
                 return new CreateCommand(directive, commandArr[1]);
@@ -31,13 +28,11 @@ public class Parser {
                             : taskDetails.substring(taskDetails.lastIndexOf("at") + 3).trim();
                     return new CreateCommand(directive, description, addOns);
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    System.out.println("Invalid event input");
-                    return null;
+                    throw new DukeException("Invalid event input");
                 }
             }
         }
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        return null;
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     private static boolean isTask(String directive) {

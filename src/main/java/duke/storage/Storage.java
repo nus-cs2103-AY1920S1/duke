@@ -1,3 +1,9 @@
+package duke.storage;
+
+import duke.DukeException;
+import duke.parser.Task;
+import duke.ui.UiText;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,19 +13,30 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Files {
-    private static File f = new File("../data/duke.txt");
 
-    public static void printFileContents() throws FileNotFoundException {
-        Scanner sc = new Scanner(f);
+
+
+public class Storage {
+    private static File file;
+    private UiText ui = new UiText();
+
+    public Storage(String filePath) {
+        this.file = new File(filePath);
+        System.out.println((file.exists()));
+        System.out.println(file.canRead());
+        System.out.println(file.getPath());
+    }
+
+    public void printFileContents() throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
-            System.out.println(sc.nextLine());
+            ui.printlnMsg(sc.nextLine());
         }
     }
 
-    public static ArrayList<Task> convertToArrayList() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> arr = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(f)))
+        try (BufferedReader br = new BufferedReader(new FileReader(file)))
         {
 
             String sCurrentLine;
@@ -41,14 +58,14 @@ public class Files {
 //        fw.close();
 //    }
 
-    public static void appendToFile(String text) throws IOException {
-        FileWriter fw = new FileWriter(f, true);
+    public void appendToFile(String text) throws IOException {
+        FileWriter fw = new FileWriter(file, true);
         fw.write(text);
         fw.close();
     }
 
-    public static void updateFile(ArrayList<Task> tasks) throws IOException {
-        FileWriter writer = new FileWriter(f);
+    public void updateFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter writer = new FileWriter(file);
         for (Task task : tasks) {
             String input = "";
 

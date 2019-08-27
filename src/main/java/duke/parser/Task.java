@@ -1,3 +1,5 @@
+package duke.parser;
+
 import java.util.Date;
 
 public class Task {

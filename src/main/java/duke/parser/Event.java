@@ -1,7 +1,9 @@
-import java.text.SimpleDateFormat;
+package duke.parser;
+
 import java.util.Date;
 
-public class Event extends Task{
+
+public class Event extends Task {
     public Event(String description, String at) {
         super(description.trim());
         super.tag = "[E]";

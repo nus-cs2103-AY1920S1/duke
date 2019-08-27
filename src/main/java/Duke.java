@@ -74,6 +74,9 @@ public class Duke {
             NumberFormatException {
         String[] parsedStr = input.split(" ", 2);
         String command = parsedStr[0];
+        String parameter;
+        int taskIndex;
+
         switch (command) {
             case "list":
                 this.printList();
@@ -83,12 +86,21 @@ public class Duke {
                     throw new DukeException("I'm not psychic! You need"
                             + " to tell me which task you completed!");
                 }
-                String secondWord = input.split(" ")[1];
-                int taskIndex = Integer.parseInt(secondWord);
+                parameter = input.split(" ")[1];
+                taskIndex = Integer.parseInt(parameter);
                 this.markTaskAsDone(taskIndex);
                 break;
             case "bye":
                 throw new DukeShutDownException("User has requested shutdown.");
+            case "delete":
+                if (parsedStr.length < 2) {
+                    throw new DukeException("I'm not psychic! You need"
+                            + " to tell me which task you want to delete!");
+                }
+                parameter = input.split(" ")[1];
+                taskIndex = Integer.parseInt(parameter);
+                this.deleteTask(taskIndex);
+                break;
             case "todo":
             case "event":
             case "deadline":
@@ -107,13 +119,30 @@ public class Duke {
         }
     }
 
+    private boolean indexIsInvalid(int taskIndex) {
+        return taskIndex <= 0 || taskIndex > this.list.size();
+    }
+
+    private void deleteTask(int taskIndex) throws DukeException {
+        if (indexIsInvalid(taskIndex)) {
+            throw new DukeException("Hey! There's no such task!");
+        }
+        taskIndex--;
+        Task removedTask = this.list.remove(taskIndex);
+        this.formattedPrintln("Noted. I've removed this task:\n  "
+                + removedTask
+                + "\nNow you have "
+                + this.list.size()
+                + " task(s) in the list.");
+    }
+
     /*
      * Retrieve a task from the list and mark it as
      * completed.
      * @param taskIndex index of task. uses 1-indexing as per list display.
      */
     private void markTaskAsDone(int taskIndex) throws DukeException {
-        if (taskIndex < 0 || taskIndex > this.list.size()) {
+        if (indexIsInvalid(taskIndex)) {
             throw new DukeException("Hey! There's no such task!");
         }
         taskIndex--; // convert to zero-indexing

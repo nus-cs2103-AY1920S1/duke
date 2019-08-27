@@ -1,17 +1,22 @@
 import java.util.StringJoiner;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private String at;
+    private LocalDateTime at;
 
     Event(String description, String at) {
         super(description);
-        this.at = at;
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        this.at = LocalDateTime.parse(at, inputFormat);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d MMMM Y hh:mma");
+        return "[E]" + super.toString() + " (at: " + at.format(outputFormat) + ")";
     }
 
     @Override
@@ -35,4 +40,5 @@ public class Event extends Task {
         }
         return event;
     }
+
 }

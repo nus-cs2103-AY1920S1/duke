@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -14,6 +14,10 @@ public class TaskList {
 
     public int getSize() {
         return tasks.size();
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public void displayAllTasks() {

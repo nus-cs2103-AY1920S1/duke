@@ -1,7 +1,7 @@
 import java.util.Date;
 
 public class Deadline extends Task {
-    protected Date by;
+    private Date by;
 
     public Deadline(String description, Date by) {
         super(description);
@@ -11,6 +11,10 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, Date by) {
         super(description, isDone);
         this.by = by;
+    }
+
+    public Date getByDate() {
+        return by;
     }
 
     @Override

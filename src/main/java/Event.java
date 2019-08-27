@@ -1,7 +1,7 @@
 import java.util.Date;
 
 public class Event extends Task {
-    protected Date at;
+    private Date at;
 
     public Event(String description, Date at) {
         super(description);
@@ -11,6 +11,10 @@ public class Event extends Task {
     public Event(String description, boolean isDone, Date at) {
         super(description, isDone);
         this.at = at;
+    }
+
+    public Date getAtDate() {
+        return at;
     }
 
     @Override

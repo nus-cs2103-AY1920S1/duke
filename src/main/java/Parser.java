@@ -62,8 +62,8 @@ public class Parser {
             try {
                 fw = new FileWriter("tasks.txt");
                 String dataStr = "";
-                for (Task task : taskList.tasks) {
-                    String isDone = task.isDone
+                for (Task task : taskList.getTasks()) {
+                    String isDone = task.getIsDone()
                             ? "1"
                             : "0";
                     dataStr += task.toStorageString() + System.lineSeparator();

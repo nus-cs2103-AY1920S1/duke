@@ -27,7 +27,7 @@ public class AddCommand extends Command {
                         + "\n     \u2639 OOPS!!! The description of a todo cannot be empty.\n"
                         + ui.separationLine + "\n");
             }
-            ToDo todo = new ToDo(userInput.replace("todo ", ""), 0);
+            Todo todo = new Todo(userInput.replace("todo ", ""), 0);
             tasks.addToList(todo);
             String writeStringT = todo.getType() + " " + 0 + " " + todo.getDescription() + "\n";
             storage.writeToFile(filePath, writeStringT, true);
@@ -36,10 +36,8 @@ public class AddCommand extends Command {
         case "deadline":
             if (!userInput.contains(" /by ")) {
                 // Exception for invalid deadline format
-                throw new DukeException(ui.separationLine
-                        + "\n     \u2639 OOPS!!! For deadline please use the format\n"
-                        + "               \"deadline description /by end time\"\n"
-                        + ui.separationLine + "\n");
+                throw new DukeException(ui.separationLine + "\n     \u2639 OOPS!!! For deadline please use the format\n"
+                        + "               \"deadline description /by end time\"\n" + ui.separationLine + "\n");
             }
             String[] splitStringD = userInput.split(" /by ");
             Date inputDateD = Parser.convertToDate(splitStringD[1], Parser.dateFormats);
@@ -56,10 +54,8 @@ public class AddCommand extends Command {
         case "event":
             if (!userInput.contains(" /at ")) {
                 // Exception for invalid deadline format
-                throw new DukeException(ui.separationLine
-                        + "\n     \u2639 OOPS!!! For event please use the format\n"
-                        + "               \"event description /at period\"\n"
-                        + ui.separationLine + "\n");
+                throw new DukeException(ui.separationLine + "\n     \u2639 OOPS!!! For event please use the format\n"
+                        + "               \"event description /at period\"\n" + ui.separationLine + "\n");
             }
             String[] splitStringE = userInput.split(" /at ");
             Date inputDateE = Parser.convertToDate(splitStringE[1], Parser.dateFormats);

@@ -29,7 +29,7 @@ public class Storage {
             String[] remainingSplit = remaining.split(" \\| ");
             switch (type) {
             case "T":
-                tasks.add(new ToDo(remaining, isDone));
+                tasks.add(new Todo(remaining, isDone));
                 break;
             case "D":
                 tasks.add(new Deadline(remainingSplit[0], isDone, remainingSplit[1]));

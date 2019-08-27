@@ -1,0 +1,31 @@
+todo FIRST
+deadline SECOND /by 20/12/2019 1800
+deadline THIRD /by 20/12/2019 0600 PM
+deadline FOURTH /by 20/12/2019 18:00
+deadline FIFTH /by 20/12/2019 next week
+event SIXTH /at 10/12/2019 0600
+event SEVENTH /at 10/12/2019 06:00
+event EIGHTH /at 10/12/2019 6 PM
+list
+done 2
+done 6
+delete 5
+delete 7
+todo
+deadline dsafdsf/by dafdsf
+event dhfgaf /atsgringsfg
+done 3 5 6
+done
+done -1
+done 100
+delete 4 6 6
+delete -1
+delete 100
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+delete 1
+list
+bye

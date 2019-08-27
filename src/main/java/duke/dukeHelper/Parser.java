@@ -1,5 +1,6 @@
 package duke.dukeHelper;
 
+import duke.DukeException;
 import duke.dukeCommand.*;
 
 import java.text.ParseException;
@@ -11,7 +12,6 @@ public class Parser {
     public static String filePath;
     public static ArrayList<SimpleDateFormat> dateFormats = new ArrayList<>() {
         {
-
             add(new SimpleDateFormat("dd/M/yyyy HH:mm"));
             add(new SimpleDateFormat("dd-M-yyyy HH:mm"));
             add(new SimpleDateFormat("dd.M.yyyy HH:mm"));
@@ -64,10 +64,9 @@ public class Parser {
         default:
             // Exception if invalid instruction
             Ui ui = new Ui();
-            ui.printError(ui.separationLine
+            throw new DukeException(ui.separationLine
                     + "\n     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + ui.separationLine + "\n");
-            return null;
         }
     }
 

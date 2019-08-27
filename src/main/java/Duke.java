@@ -1,8 +1,11 @@
 import java.util.Scanner;
+import java.io.IOException;
 import java.lang.StringBuilder;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static final String DEFAULT_FILEPATH = "./data/duke.txt";
+    
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,8 +17,17 @@ public class Duke {
         Duke.print(intro);
 
         Scanner sc = new Scanner(System.in);
+        Storage fileMgr = new Storage(DEFAULT_FILEPATH);
         boolean isRunning = true;
-        TaskList tasks = new TaskList();
+        TaskList tasks;
+
+        // Attempt to re-construct TaskList from data in file
+        try {
+            tasks = fileMgr.readTaskList();
+        } catch (DukeException e) {
+            Duke.print(String.format("%s\n\nInitialised with empty TaskList", e.toString()));
+            tasks = new TaskList();
+        }
 
         while (isRunning && sc.hasNextLine()) {
             String command = sc.nextLine().trim();
@@ -31,7 +43,7 @@ public class Duke {
                     break;
                 // Otherwise attempt to parse the command string with the TaskList
                 default:
-                    Duke.print(Parser.parse(tasks, command));
+                    Duke.print(Parser.parse(tasks, command, fileMgr));
                     break;
                 }
             } catch (DukeException e) {
@@ -51,8 +63,8 @@ public class Duke {
      */
     public static void print(String message) {
         StringBuilder result = new StringBuilder();
-
-        String bar = "________________________________________________";
+        
+        String bar = "____________________________________________________";
         String divider = String.format("    %s%s\n", bar, bar);
         result.append(divider)
               .append("\n");

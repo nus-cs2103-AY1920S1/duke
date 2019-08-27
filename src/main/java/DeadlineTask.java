@@ -1,13 +1,22 @@
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
     protected String byDeadline;
 
-    public Deadline(String description, String byDeadline) {
+    public DeadlineTask(String description, String byDeadline) {
         super(description);
         this.byDeadline = byDeadline;
     }
 
     public String getDeadline() {
         return this.byDeadline;
+    }
+
+    public String toEncodedString() {
+        return String.format(
+            "D | %d | %s | %s",
+            this.isComplete ? 1 : 0,
+            this.description,
+            this.byDeadline
+        );
     }
 
     @Override

@@ -1,6 +1,10 @@
-public class Todo extends Task {
-    public Todo(String description) {
+public class TodoTask extends Task {
+    public TodoTask(String description) {
         super(description);
+    }
+
+    public String toEncodedString() {
+        return String.format("T | %d | %s", this.isComplete ? 1 : 0, this.description);
     }
 
     @Override

@@ -13,6 +13,8 @@ public class Parser {
                 return new ExitCommand();
             case "list":
                 return new ListCommand();
+            case "find":
+                return new FindCommand(next);
             case "done":
                 return new DoneCommand(next);
             case "deadline":

@@ -7,20 +7,19 @@ import duke.Ui;
 
 import java.util.InputMismatchException;
 
-public class DeleteCommand extends Command {
-    private String index;
-
+public class DeleteCommand extends InputCommand {
     public DeleteCommand(String index) {
-        this.index = index.trim();
+        super(index);
     }
+
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
+            String index = getString();
             if (index.split(" ").length > 1) {
                 throw new InputMismatchException();
             }
-
             int del = Integer.parseInt(index);
             if (taskList.getNumTasks() > del) {
                 throw new IndexOutOfBoundsException();

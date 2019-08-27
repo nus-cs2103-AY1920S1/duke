@@ -1,10 +1,18 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A class to test the {@link FileReading} class
+ */
+
 public class FileReadingTest {
+
+    /**
+     * Utilise {@link ModifyTaskListTest} to create a 'duke'.txt file
+     * and then read the file and compare data.
+     */
 
     @Test
     public void fileReadTest() throws IOException {

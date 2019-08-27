@@ -1,6 +1,10 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A list of accepted date formats by me to parse user inputs through to recognise dates
+ */
+
 public class DateParser {
 
     private static SimpleDateFormat formatter1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -19,6 +23,17 @@ public class DateParser {
     private static SimpleDateFormat formatter14 = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
     private static SimpleDateFormat formatter15 = new SimpleDateFormat("dd/MMM/yyyy HHmm");
     private static SimpleDateFormat formatter16 = new SimpleDateFormat("dd/MMM/yyyy");
+
+    /**
+     * Returns a Date object to the caller class by parsing through all listed formats.
+     * It ignores all wrong format exceptions until the final one
+     * where it returns a null value to signify an inability to match the String
+     * given to any date format.
+     * <p>
+     *
+     * @param date the string given by the user which might contain a date.
+     * @return either a Date object or null value.
+     */
 
     public static Date dateParser (String date) {
 

@@ -1,9 +1,18 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+/**
+ * A class to test the {@link ModifyTaskList} class
+ */
+
 public class ModifyTaskListTest {
+
+    /**
+     * Adds and modifies Tasks to in Task array list
+     * and compares the details of the Tasks to the expected output strings.
+     */
 
     @Test
     public void modifyTest() throws IOException {

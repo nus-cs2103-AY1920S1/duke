@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * The main class for Duke.
+ */
+
 public class Duke {
 
     public enum Action {

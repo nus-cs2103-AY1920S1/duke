@@ -42,19 +42,19 @@ public class Storage {
             while ((currLine = bufferedReader.readLine()) != null) {
                 String[] formatted_text = currLine.split("\\|");
                 Task t;
-                switch (formatted_text[0]) {
-                    case "T":
-                        t = new ToDo(formatted_text[2]);
-                        break;
-                    case "D":
-                        t = new Deadline(formatted_text[2], formatted_text[3]);
-                        break;
-                    case "E":
-                        t = new Event(formatted_text[2], formatted_text[3]);
-                        break;
-                    default:
-                        t = new Task("");
-                        break;
+                switch ( formatted_text[0] ) {
+                case "T":
+                    t = new ToDo(formatted_text[2]);
+                    break;
+                case "D":
+                    t = new Deadline(formatted_text[2], formatted_text[3]);
+                    break;
+                case "E":
+                    t = new Event(formatted_text[2], formatted_text[3]);
+                    break;
+                default:
+                    t = new Task("");
+                    break;
                 }
                 if (formatted_text[1].equals("1")) {
                     t.markAsDone();

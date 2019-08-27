@@ -8,7 +8,8 @@ public abstract class Command {
 
     /**
      * Executes the command.
-     *  @param tasks   The TaskList containing all existing tasks.
+     *
+     * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      */

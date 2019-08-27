@@ -18,7 +18,8 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the Done Command and marks the task as done.
-     *  @param tasks   The TaskList containing all existing tasks.
+     *
+     * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      */

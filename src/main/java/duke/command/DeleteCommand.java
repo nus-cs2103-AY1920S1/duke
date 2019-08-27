@@ -18,7 +18,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the Delete Command and removes the task from the Linked List and file.
-     *  @param tasks   The TaskList containing all existing tasks.
+     *
+     * @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      */

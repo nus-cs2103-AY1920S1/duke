@@ -14,7 +14,7 @@ public class Task {
     public Task(String description) throws IllegalDescriptionException {
         if (description.isEmpty()) {
             throw new IllegalDescriptionException("The description of a "
-                    + getClass().getName().toLowerCase() + " cannot be empty.");
+                    + getClass().getSimpleName().toLowerCase() + " cannot be empty.");
         }
         this.description = description;
         this.isDone = false;
@@ -41,7 +41,7 @@ public class Task {
      *         status, description.
      */
     public String toStringForFile() {
-        return String.format("%s | %d | %s", getClass().getName().substring(0,1), isDone ? 1 : 0, description);
+        return String.format("%s | %d | %s", getClass().getSimpleName().substring(0,1), isDone ? 1 : 0, description);
     }
 
     /**

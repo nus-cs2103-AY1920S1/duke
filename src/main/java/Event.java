@@ -10,11 +10,11 @@ public class Event extends Task {
 
     @Override
     public String toDataString() {
-        return "E | " + super.toDataString() + " | " + this.at;
+        return "E | " + super.toDataString() + " | " + DukeDateTimeFormatter.standardFormat(this.at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DukeDateTimeFormatter.format(at) + ")";
+        return "[E]" + super.toString() + " (at: " + DukeDateTimeFormatter.prettyFormat(at) + ")";
     }
 }

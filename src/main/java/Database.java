@@ -52,7 +52,7 @@ public class Database {
             }
             sc.close();
             return taskList;
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             return new ArrayList<Task>();
         }
     }

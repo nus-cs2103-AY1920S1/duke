@@ -64,4 +64,14 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    public ArrayList<Task> find(String toFind) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getDescription().contains(toFind)) {
+                filteredTasks.add(t);
+            }
+        }
+        return filteredTasks;
+    }
 }

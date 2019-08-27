@@ -1,12 +1,8 @@
 import myduke.command.Command;
 import myduke.command.CommandParser;
 import myduke.core.Ui;
-
 import myduke.core.StorageManager;
-import myduke.exception.DukeException;
 import myduke.task.TaskList;
-
-import java.util.Scanner;
 
 public class Duke {
 

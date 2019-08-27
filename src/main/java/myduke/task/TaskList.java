@@ -1,8 +1,8 @@
 package myduke.task;
 
-import myduke.exception.DukeInvalidCommandException;
-
 import java.util.ArrayList;
+
+import myduke.exception.DukeInvalidCommandException;
 
 /**
  * Manages a list of tasks.

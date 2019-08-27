@@ -8,6 +8,7 @@ enum Command{
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
+
     private static ArrayList<Task> list = new ArrayList<>();
     private static int listCounter = 0;
 
@@ -58,6 +59,7 @@ public class Duke {
                         if (i != listCounter - 1) printList = printList + "\n";
                     }
                     System.out.println(processText(printList));
+
                 } else if (cmd == Command.TODO){
                     String toDoItem = sc.nextLine().trim();
                     // Implies only word "deadline"
@@ -70,6 +72,7 @@ public class Duke {
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
+
                 } else if (cmd == Command.EVENT){
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
@@ -194,9 +197,25 @@ public class Duke {
     }
 }
 
+class TimeDate{
+    private int time;
+    private int day;
+    private int month;
+    private int year;
+
+    public TimeDate(){
+        time = 0;
+        day = 0;
+        month = 0;
+        year = 0;
+    }
+
+
+}
+
 class Task{
-    protected static final String TICK = "\u2713";
-    protected static final String CROSS = "\u2718";
+    protected static final String ICON_TICK = "\u2713";
+    protected static final String ICON_CROSS = "\u2718";
 
     protected boolean isDone;
     protected String taskItem;
@@ -217,8 +236,8 @@ class Task{
     }
 
     public String getStatusIcon(){
-        if(isDone) return "[" + TICK + "]";
-        else return "[" + CROSS + "]";
+        if(isDone) return "[" + ICON_TICK + "]";
+        else return "[" + ICON_CROSS + "]";
     }
 
     public String getTaskItem(){
@@ -238,8 +257,8 @@ class ToDo extends Task{
 
     @Override
     public String getStatusIcon(){
-        if(isDone) return "[T][" + TICK + "]";
-        else return "[T][" + CROSS + "]";
+        if(isDone) return "[T][" + ICON_TICK + "]";
+        else return "[T][" + ICON_CROSS + "]";
     }
 }
 
@@ -255,8 +274,8 @@ class Deadline extends Task{
 
     @Override
     public String getStatusIcon() {
-        if (isDone) return "[D][" + TICK + "]";
-        else return "[D][" + CROSS + "]";
+        if (isDone) return "[D][" + ICON_TICK + "]";
+        else return "[D][" + ICON_CROSS + "]";
     }
 
     public String getDeadline(){
@@ -285,8 +304,8 @@ class Event extends Task {
 
     @Override
     public String getStatusIcon() {
-        if (isDone) return "[E][" + TICK + "]";
-        else return "[E][" + CROSS + "]";
+        if (isDone) return "[E][" + ICON_TICK + "]";
+        else return "[E][" + ICON_CROSS + "]";
     }
 
     public String getTiming() {

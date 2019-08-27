@@ -1,14 +1,16 @@
+package duke.task;
+
 public abstract class Task {
 
-    protected Status completed;
-    protected String taskName;
+    Status completed;
+    String taskName;
 
-    public Task(String taskName) {
+    Task(String taskName) {
         this.completed = Status.INCOMPLETE;
         this.taskName = taskName;
     }
 
-    public Task(Status status, String taskName) {
+    Task(Status status, String taskName) {
         this.completed = status;
         this.taskName = taskName;
     }

@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import duke.command.*;
 
 public class Duke {
 
@@ -7,7 +8,7 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
-    public void run() {
+    private void run() {
         ui.printIntro();
 
         Scanner scanner = new Scanner(System.in);
@@ -72,7 +73,7 @@ public class Duke {
         }
     }
 
-    public Duke (String filepath) {
+    private Duke(String filepath) {
         storage = new Storage(filepath);
         taskList = new TaskList(storage);
         ui = new Ui();

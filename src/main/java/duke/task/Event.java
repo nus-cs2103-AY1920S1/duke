@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected LocalDateTime time;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private LocalDateTime time;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Event(String taskName, LocalDateTime time) {
         super(taskName);

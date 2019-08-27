@@ -1,3 +1,5 @@
+package duke.command;
+
 public class Ui {
 
     private static String divider = "\t____________________________________________________________\n";

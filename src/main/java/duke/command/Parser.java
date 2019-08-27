@@ -1,3 +1,5 @@
+package duke.command;
+
 import java.util.Arrays;
 
 public class Parser {
@@ -5,7 +7,7 @@ public class Parser {
         return input.split(" ");
     }
 
-    public static String joinStrings (String[] strings) {
+    static String joinStrings(String[] strings) {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < strings.length; i++) {
             if (i == strings.length - 1) {
@@ -17,7 +19,7 @@ public class Parser {
         return s.toString();
     }
 
-    public static String[] splitByIdentifier(String[] params, String identifier) {
+    static String[] splitByIdentifier(String[] params, String identifier) {
         int split = 0;
         for (int i = 0; i < params.length; i++) {
             if (params[i].equals(identifier)) {

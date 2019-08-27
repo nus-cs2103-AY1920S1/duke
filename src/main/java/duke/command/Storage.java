@@ -1,3 +1,5 @@
+package duke.command;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -6,17 +8,18 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import duke.task.*;
 
 public class Storage {
 
-    protected String fileName;
+    private String fileName;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
-    public ArrayList<Task> loadFromFile() {
+    ArrayList<Task> loadFromFile() {
 
         try {
             File file = new File(fileName);
@@ -52,7 +55,7 @@ public class Storage {
         }
     }
 
-    public void saveToFile(ArrayList<Task> taskList) throws IOException {
+    void saveToFile(ArrayList<Task> taskList) throws IOException {
 
         File f = new File(fileName);
         if(!f.exists()) {

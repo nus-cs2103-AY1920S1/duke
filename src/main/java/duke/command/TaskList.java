@@ -1,8 +1,10 @@
+package duke.command;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import duke.task.*;
 
 public class TaskList {
     private static String tasklist_header = "\t Here are the tasks in your list:\n";
@@ -10,9 +12,9 @@ public class TaskList {
     private static String task_added_message = "\t Got it. I've added this task:\n";
     private static String delete_message = "\t Noted. I've removed this task:\n";
 
-    ArrayList<Task> taskList;
-    Storage storage;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private ArrayList<Task> taskList;
+    private Storage storage;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public TaskList(Storage storage) {
         this.storage = storage;
@@ -25,7 +27,7 @@ public class TaskList {
         }
         StringBuilder s = new StringBuilder(tasklist_header);
         for (int i = 0; i < taskList.size(); i++) {
-            s.append("\t " + (i+1) + ".").append(taskList.get(i));
+            s.append("\t ").append(i + 1).append(".").append(taskList.get(i));
         }
 
         return s.toString();

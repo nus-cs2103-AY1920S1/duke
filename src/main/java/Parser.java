@@ -5,10 +5,11 @@ public class Parser {
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (command.startsWith("done")) {
-            int taskNumber = Character.getNumericValue(command.charAt(5)) - 1;
+            int taskNumber = Integer.parseInt(command.substring(5)) - 1;
             return new DoneCommand(taskNumber);
         } else if (command.startsWith("delete")) {
-            int taskNumber = Character.getNumericValue(command.charAt(7)) - 1;
+            int taskNumber = Integer.parseInt(command.substring(7)) - 1;
+            System.out.println(taskNumber);
             return new DeleteCommand(taskNumber);
         } else {
             Task userTask;

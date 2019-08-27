@@ -8,9 +8,8 @@ public class DeleteCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToDelete = tasks.getTask(taskNumber);
-        Integer numberOfTasks = tasks.getNumberOfTasks();
-
         tasks.delete(taskNumber);
+        Integer numberOfTasks = tasks.getNumberOfTasks();
 
         ui.showDeleteMessage();
         ui.showTask(taskToDelete);

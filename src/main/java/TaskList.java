@@ -4,10 +4,7 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
-        this.taskList = new ArrayList<Task>();
-        for (Task taskToCopy : taskList) {
-            (this.taskList).add(taskToCopy);
-        }
+        this.taskList = taskList;
     }
 
     public ArrayList<Task> getTaskList() {
@@ -26,6 +23,9 @@ public class TaskList {
     }
 
     public void delete(Integer taskNumber) {
-        taskList.remove(taskNumber);
+        taskList.remove(taskNumber.intValue());
+        for (Task task : taskList) {
+            System.out.println(task);
+        }
     }
 }

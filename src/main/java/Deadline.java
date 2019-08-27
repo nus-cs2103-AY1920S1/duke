@@ -1,24 +1,25 @@
 import java.util.Date;
 
-public class Deadline extends Task {
+class Deadline extends Task {
     private Date by;
 
-    protected Deadline(String description, String by) throws DukeException {
+    Deadline(String description, Date by) {
         super(description);
-        this.by = Utilities.dateParser(by);
+        this.by = by;
     }
-    protected Deadline(String description, boolean isDone, String by) throws DukeException {
+
+    Deadline(String description, boolean isDone, Date by) {
         super(description, isDone);
-        this.by = Utilities.fullDateParser(by);
+        this.by = by;
     }
 
     @Override
-    public String toSaveFormat() {
-        return String.format("D | %s | %s", super.toSaveFormat(), this.by);
+    String toSaveFormat() {
+        return String.format("D | %s | %s", super.toSaveFormat(), Duke.dateFormatter.format(this.by));
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format("[D]%s (by: %s)", super.toString(), Duke.dateFormatter.format(this.by));
     }
 }

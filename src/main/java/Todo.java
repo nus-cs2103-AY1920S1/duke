@@ -1,13 +1,14 @@
-public class Todo extends Task {
-    protected Todo(String description) {
+class Todo extends Task {
+    Todo(String description) {
         super(description);
     }
-    protected Todo(String description, boolean isDone) {
+
+    Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
     @Override
-    public String toSaveFormat() {
+    String toSaveFormat() {
         return String.format("T | %s", super.toSaveFormat());
     }
 

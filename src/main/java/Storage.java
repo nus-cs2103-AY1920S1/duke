@@ -1,91 +1,49 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Storage {
-    private ArrayList<Task> tasks = new ArrayList<Task>();
-    private String saveFilePath;
+class Storage {
+    private String filePath;
 
-    public Storage(String saveFilePath) {
-        this.saveFilePath = saveFilePath;
-        this.readSaveData();
+    Storage(String filePath) {
+        this.filePath = String.format("%s/%s", System.getProperty("user.dir"), filePath);
     }
 
-    protected ArrayList<Task> getTasks() {
-        return this.tasks;
-    }
+    ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
 
-    protected int getTaskCount() {
-        return this.tasks.size();
-    }
-
-    protected boolean addTask(Task task) {
-        return this.tasks.add(task);
-    }
-
-    private void readSaveData() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.saveFilePath));
+            BufferedReader reader = new BufferedReader(new FileReader(this.filePath));
 
-            String rawTask = reader.readLine();
-            while (rawTask != null) {
-                String[] tokens = rawTask.split(" \\| ");
-                String taskType = tokens[0];
-                boolean isDone = tokens[1].equals("1");
-
-                Task task;
-
-                switch (taskType) {
-                case "T": {
-                    task = new Todo(tokens[2], isDone);
-                    this.addTask(task);
-                    break;
-                }
-
-                case "D": {
-                    task = new Deadline(tokens[2], isDone, tokens[3]);
-                    this.addTask(task);
-                    break;
-                }
-
-                case "E": {
-                    task = new Event(tokens[2], isDone, tokens[3]);
-                    this.addTask(task);
-                    break;
-                }
-
-                default: {
-                    System.out.println("Error: Invalid task type.");
-                }
-                }
-
-                rawTask = reader.readLine();
+            String input = reader.readLine();
+            while (input != null) {
+                Task task = Parser.parseSavedTask(input);
+                tasks.add(task);
+                input = reader.readLine();
             }
         } catch (IOException e) {
-            System.out.println("Error: Failed to read save file.");
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private String getSaveData() {
-        StringBuilder saveData = new StringBuilder();
-
-        for (Task t : this.tasks) {
-            saveData.append(String.format("%s%n", t.toSaveFormat()));
+            throw new DukeException("Failed to read save file.");
         }
 
-        return saveData.toString();
+        return tasks;
     }
 
-    public void writeSaveData() {
+    void persist(ArrayList<Task> tasks) throws DukeException {
+        StringBuilder output = new StringBuilder();
+        for (Task t : tasks) {
+            output.append(String.format("%s%n", t.toSaveFormat()));
+        }
+
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.saveFilePath));
-            String saveData = this.getSaveData();
-            writer.write(saveData);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));
+            writer.write(output.toString());
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error: Failed to write to save file.");
+            throw new DukeException("Failed to write save file.");
         }
+
     }
 }

@@ -1,26 +1,25 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Event extends Task {
+class Event extends Task {
     private Date at;
 
-    protected Event(String description, String at) throws DukeException {
+    Event(String description, Date at) {
         super(description);
-        this.at = Utilities.dateParser(at);
+        this.at = at;
     }
-    protected Event(String description, boolean isDone, String at) throws DukeException {
+
+    Event(String description, boolean isDone, Date at) {
         super(description, isDone);
-        this.at = Utilities.fullDateParser(at);
+        this.at = at;
     }
 
     @Override
-    public String toSaveFormat() {
-        return String.format("E | %s | %s", super.toSaveFormat(), this.at);
+    String toSaveFormat() {
+        return String.format("E | %s | %s", super.toSaveFormat(), Duke.dateFormatter.format(this.at));
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        return String.format("[E]%s (by: %s)", super.toString(), Duke.dateFormatter.format(this.at));
     }
 }

@@ -26,6 +26,9 @@ import static duke.task.TaskType.TODO;
 import static duke.task.TaskType.DEADLINE;
 import static duke.task.TaskType.EVENT;
 
+/**
+ * Stores and retrieves persisting task information from the hard disk.
+ */
 public class Storage {
     private Path path;
 
@@ -33,6 +36,12 @@ public class Storage {
         this.path = Paths.get(uri);
     }
 
+    /**
+     * Reads task data from the hard disk.
+     *
+     * @return the task list containing all tasks read from disk.
+     * @throws DukeIoException if some error occurs while reading the tasks.
+     */
     public TaskList readFromDisk() throws DukeIoException {
         Charset charset = Charset.forName("ISO-8859-1");
         TaskList taskList = new TaskList();
@@ -60,6 +69,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes task data to the hard disk.
+     *
+     * @param taskList the task list containing all tasks to write to disk.
+     * @return the task list written to disk.
+     * @throws DukeException if some error occurs while writing the tasks.
+     */
     public TaskList writeToDisk(TaskList taskList) throws DukeException {
         Charset charset = Charset.forName("ISO-8859-1");
         ArrayList<Task> tasks = taskList.getTaskList();

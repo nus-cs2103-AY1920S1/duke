@@ -34,22 +34,44 @@ public class Ui {
         this.out = out;
     }
 
+    /**
+     * Prints out a divider.
+     */
     public void showLine() {
         showToUser(DIVIDER);
     }
 
+    /**
+     * Prints out a specified error message.
+     *
+     * @param e the error to print.
+     */
     public void showError(DukeException e) {
         showToUser(e.getMessage());
     }
 
+    /**
+     * Prints out a welcome message.
+     */
     public void showWelcomeMessage() {
         showToUser(DIVIDER, WELCOME_MESSAGE, DIVIDER);
     }
 
+    /**
+     * Reads a full command from the next line of input.
+     *
+     * @return the full command read.
+     */
     public String readCommand() {
         return in.nextLine();
     }
 
+    /**
+     * Prints out the message indicating a task has been added.
+     *
+     * @param task the task added.
+     * @param taskCount the number of tasks currently in the task list.
+     */
     public void showAddMessage(Task task, long taskCount) {
         showToUser(ADD_MESSAGE,
                 task.toString(),
@@ -58,11 +80,22 @@ public class Ui {
                     : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
+    /**
+     * Prints out the message indicating a task has been marked done.
+     *
+     * @param task the task marked done.
+     */
     public void showDoneMessage(Task task) {
         showToUser(DONE_MESSAGE,
                 task.toString());
     }
 
+    /**
+     * Prints out the message indicating a task has been deleted.
+     *
+     * @param task the deleted task.
+     * @param taskCount the number of tasks remaining in the task list.
+     */
     public void showDeleteMessage(Task task, long taskCount) {
         showToUser(DELETE_MESSAGE,
                 task.toString(),
@@ -71,11 +104,21 @@ public class Ui {
                     : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
+    /**
+     * Prints out the list of results from a keyword search.
+     *
+     * @param searchList the task list of results.
+     */
     public void showSearchList(TaskList searchList) {
         showToUser(SEARCH_MESSAGE);
         showTaskList(searchList);
     }
 
+    /**
+     * Prints out a task list.
+     *
+     * @param taskList the task list to print.
+     */
     public void showTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
         for (int i = 0; i < tasks.size(); i++) {
@@ -86,10 +129,18 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the exit message.
+     */
     public void showExitMessage() {
         showToUser(EXIT_MESSAGE);
     }
 
+    /**
+     * Prints out a sequence of messages with prefix added to each line.
+     *
+     * @param messages the sequence of messages to print.
+     */
     private void showToUser(String... messages) {
         for (String line: messages) {
             out.println(PREFIX + line);

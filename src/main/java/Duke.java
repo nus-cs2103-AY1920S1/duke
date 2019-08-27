@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,11 +37,13 @@ public class Duke {
                     pointer++;
                 } else if (keywords[0].equals("deadline")) {
                     String[] temp = parseTaskTime(keywords, "deadline");
-                    System.out.println(deadline(temp[0].strip(), temp[1].strip()));
+                    Calendar dateTime = parseTime(temp[1].strip());
+                    System.out.println(deadline(temp[0].strip(), dateTime));
                     pointer++;
                 } else if (keywords[0].equals("event")) {
                     String[] temp = parseTaskTime(keywords, "event");
-                    System.out.println(event(temp[0].strip(), temp[1].strip()));
+                    Calendar dateTime = parseTime(temp[1].strip());
+                    System.out.println(event(temp[0].strip(), dateTime));
                     pointer++;
                 } else if (keywords[0].equals("delete")) {
                     System.out.println(deleteTask(Integer.parseInt(keywords[1])));
@@ -90,12 +93,12 @@ public class Duke {
         return taskWrap(taskList.get(pointer), "add");
     }
 
-    public static String deadline(String string, String by) {
+    public static String deadline(String string, Calendar by) {
         taskList.add(new Deadline(string, by));
         return taskWrap(taskList.get(pointer), "add");
     }
 
-    public static String event(String string, String at) {
+    public static String event(String string, Calendar at) {
         taskList.add(new Event(string, at));
         return taskWrap(taskList.get(pointer), "add");
     }
@@ -128,7 +131,7 @@ public class Duke {
     public static String[] parseTaskTime(String[] keywords, String dateTimeType) throws DukeException {
        if (keywords.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a " + dateTimeType + " cannot be empty.");
-        } else {
+       } else {
             String temp = "";
             String date = "";
             boolean flag = false;
@@ -173,7 +176,30 @@ public class Duke {
                 }
             }
             return new String[] {temp, date};
+       }
+    }
+
+    public static Calendar parseTime(String dateTime) throws DukeException {
+        //regex retrieved from the regex library: http://regexlib.com/REDetails.aspx?regexp_id=17
+        String[] keywords = dateTime.split(" ");
+        Calendar.Builder date = new Calendar.Builder();
+        for (int i = 0; i < keywords.length; i++) {
+            if (keywords[i].matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
+                String[] dayMonthYear = keywords[i].split("/");
+                int day = Integer.parseInt(dayMonthYear[0]);
+                int month = Integer.parseInt(dayMonthYear[1]);
+                int year = Integer.parseInt(dayMonthYear[2]);
+                date.setDate(year, month - 1, day);
+            } else if (keywords[i].matches("^\\d{4}$")) {
+                int twentyFourHrTime = Integer.parseInt(keywords[i]);
+                int hour = twentyFourHrTime / 100;
+                int minute = twentyFourHrTime % 100;
+                date.setTimeOfDay(hour, minute, 0);
+            } else {
+                throw new DukeException("Not a valid time format!!");
+            }
         }
+        return date.build();
     }
 
     public static String deleteTask(int pointer) throws DukeException {

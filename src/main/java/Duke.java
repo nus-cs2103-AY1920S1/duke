@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
         ArrayList<Task> list = new ArrayList<>(100);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
         while (run) {
             try {
@@ -108,7 +111,7 @@ public class Duke {
                         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
                             throw new DukeException("The description of a deadline cannot be empty.");
                         }
-                        Task current = new Deadline(details[0], details[1]);
+                        Task current = new Deadline(details[0], LocalDateTime.parse(details[1], formatter));
                         list.add(current);
                         String s = task_added_message + "\t   " + current + totalNoOfTasks(list);
                         print(s);
@@ -124,7 +127,7 @@ public class Duke {
                         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
                             throw new DukeException("The description of an event cannot be empty.");
                         }
-                        Task current = new Event(details[0], details[1]);
+                        Task current = new Event(details[0], LocalDateTime.parse(details[1], formatter));
                         list.add(current);
                         String s = task_added_message + "\t   " + current + totalNoOfTasks(list);
                         print(s);

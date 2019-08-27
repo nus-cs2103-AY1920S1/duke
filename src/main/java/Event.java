@@ -1,8 +1,10 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
 
-    protected String time;
+    protected LocalDateTime time;
 
-    public Event(String taskName, String time) {
+    public Event(String taskName, LocalDateTime time) {
         super(taskName);
         this.time = time;
     }

@@ -18,12 +18,11 @@ public class DateTimeHelper {
             .appendOptional(DateTimeFormatter.ofPattern("d.MM.yyyy HHmm"))
             .toFormatter();
 
-    static DateTimeFormatter OUTPUTFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    static DateTimeFormatter OUTPUTFORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     public static LocalDateTime formatInput(String inputDateTime) throws DukeException {
         try {
             LocalDateTime ldt = LocalDateTime.parse(inputDateTime, INPUTFORMATTER);
-            System.out.println(ldt.toString());
             return ldt;
         } catch (Exception e) {
             throw new DukeException("OOPS! Please make sure that date " +

@@ -2,10 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 import java.time.LocalDateTime;
->>>>>>> branch-Level-8
+
 
 public class Duke {
     private ArrayList<Task> textEntered;

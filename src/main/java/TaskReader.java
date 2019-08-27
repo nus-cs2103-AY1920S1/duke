@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.time.LocalDateTime;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -26,11 +27,13 @@ public class TaskReader {
                     this.checkIfDone(t,inputsplit[1]);
                     retrievedTask.add(t);
                 } else if (inputsplit[0].equalsIgnoreCase("[D]")) {
-                    Deadline d = new Deadline(inputsplit[2], inputsplit[3]);
+                    LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
+                    Deadline d = new Deadline(inputsplit[2], ldt);
                     this.checkIfDone(d,inputsplit[1]);
                     retrievedTask.add(d);
                 } else {
-                    Event e = new Event(inputsplit[2], inputsplit[3]);
+                    LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
+                    Event e = new Event(inputsplit[2], ldt);
                     this.checkIfDone(e,inputsplit[1]);
                     retrievedTask.add(e);
                 }

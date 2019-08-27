@@ -18,6 +18,10 @@ public class Task{
         this.isDone = true;
     }
 
+    public boolean getIsDone(){
+        return this.isDone;
+    }
+
     //get the tick or cross
     public String getStatusIcon(){
         return (isDone ? "\u2713" : "\u2718");
@@ -26,6 +30,6 @@ public class Task{
     @Override
     public String toString(){
         String status = getStatusIcon();
-        return ("[" + status + "]" + description);
+        return ("[" + status + "] " + description);
     }
 }

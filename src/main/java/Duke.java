@@ -61,49 +61,66 @@ public class Duke {
         LinkedList<Task> li = new LinkedList<Task>();
         while(true){
             printnewline();
-            String echo = scan.next();
+            String echo = scan.nextLine();
+            String[] split = echo.split(" ");
+            String error = "";
+            boolean donezo = false;
 
-            if(echo.equals("bye")){
+            String firstWord = split[0];
+
+            if(firstWord.equals("bye")){
                 // if bye, then end the program
                 printline();
                 System.out.println("\tBye. Hope to see you again soon!");
                 printline();
                 break;
 
-            } else if(echo.equals("list")){
+            } else if(firstWord.equals("list")){
                 //if list, print the list of tasks
-                scan.nextLine();
+
                 printList(li);
 
-            } else if(echo.equals("done")){
+            } else if(firstWord.equals("done")){
                 //if done, change the task status and tell them what they have completed
-                int taskNum = scan.nextInt();
+                int taskNum = Integer.parseInt(split[1]);
                 //scan.nextLine();
                 //System.out.println(taskNum);
+                
                 int taskNumb = taskNum - 1;
-                Task change = li.get(taskNumb);
-                change.completed();
-                printDone(change);
+                
+                if (taskNumb >= li.size()){
+                    error = "taskDoNotExist";
+                } else if (li.get(taskNumb).getIsDone()) {
+                    //System.out.println("im here");
+                    error = "taskAlreadyCompleted";
+                } else {
+                    Task change = li.get(taskNumb);
+                    change.completed();
+                    printDone(change);
+                }
 
-            } else if (echo.equals("delete")){
-                int taskNum = scan.nextInt();
+            } else if (firstWord.equals("delete")){
+                int taskNum = Integer.parseInt(split[1]);
                 int taskNumb = taskNum - 1;
                 
                 printDelete(li.get(taskNumb), li.size() - 1);
                 li.remove(taskNumb);
 
-            }else {
-                Task newTask = null;
+            } else {
                 String actual =  "";
-                String error = "";
-                if (echo.equals("todo")){
-                    actual =  scan.nextLine();
+                Task newTask = null;
+                LinkedList<String> copy = new LinkedList<>();
+                for(int i = 1; i < split.length; i++){
+                    copy.add(split[i]);
+                }
+                if (firstWord.equals("todo")){
+                    actual =  String.join(" ", copy);
                     if(actual.isEmpty()){
                         error = "emptyToDo";
                     }
                     newTask =  new ToDo(actual);
-                } else if (echo.equals("deadline")){
-                    String help = scan.nextLine();
+                } else if (firstWord.equals("deadline")){
+                    String help = String.join(" ", copy);
 
                     String task = "";
                     String time = "";
@@ -129,8 +146,8 @@ public class Duke {
 
                     }
  
-                } else if(echo.equals("event")){
-                    String help = scan.nextLine();
+                } else if(firstWord.equals("event")){
+                    String help = String.join(" ", copy);
 
                     String task = "";
                     String time = "";
@@ -159,6 +176,7 @@ public class Duke {
 
                 //handle all errors
                 if (!error.isEmpty() || newTask == null){
+                    
                     AException ee =  new AException();
                     printline();
                     if (error.equals("emptyToDo")){
@@ -176,10 +194,23 @@ public class Duke {
                     }
 
                     printline();
+                    error = "";
                 } else {
                     li.add(newTask);
                     takeInput(newTask, li.size());
                 }
+
+            }
+
+            if(!error.isEmpty()){
+                AException ee2 =  new AException();
+                printline();
+                if(error.equals("taskDoNotExist")){
+                    ee2.exceedListSize();
+                } else if(error.equals("taskAlreadyCompleted")){
+                    ee2.taskAlreadyCompleted();
+                }
+                printline();
             }
         }
 

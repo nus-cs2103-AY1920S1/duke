@@ -23,4 +23,12 @@ public class AException{
     public void dontUnderstand(){
         System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+
+    public void exceedListSize(){
+        System.out.println("\t☹ OOPS!!! Task do not exist in list");
+    }
+
+    public void taskAlreadyCompleted(){
+        System.out.println("\t☹ OOPS!!! Task has alreaduy been completed!");
+    }
 }

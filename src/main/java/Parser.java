@@ -101,6 +101,11 @@ public class Parser {
         this.taskNum = Integer.valueOf(description);
         this.taskNumChanged = true;
 
+      } else if (command.equals("find")) {
+
+        this.command = command;
+        this.taskDescription = description;
+
       } else {
         throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");
       }
@@ -298,6 +303,10 @@ public class Parser {
     } else if (command.equals("list")) {
 
       taskList.printTasks();
+
+    } else if (command.equals("find")) {
+
+      taskList.printFoundTasks(taskDescription);
 
     } else {
       throw new DukeException("OOPS! I'm sorry, I don't know what that means! :(");

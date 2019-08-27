@@ -41,6 +41,26 @@ public class TaskList {
     System.out.println("\t____________________________________________________________\n");
   }
 
+  public void printFoundTasks(String keyword) {
+
+    int count = 1;
+
+    System.out.println("\t____________________________________________________________");
+    System.out.println("\n\tHere are the matching tasks in your list: ");
+
+    for (int i = 0; i < taskList.size(); i++) {
+      String taskDescription = taskList.get(i).getDescription();
+
+      // Prints the task, only if it contains the keyword
+      if (taskDescription.contains(keyword)) {
+        System.out.println("\n\t" + count + ". " + taskList.get(i).toString());
+        count++;
+      }
+    }
+
+    System.out.println("\t____________________________________________________________\n");
+  }
+
   public void setTaskList(ArrayList<Task> tasks) {
     this.taskList = tasks;
   }

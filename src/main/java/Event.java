@@ -5,6 +5,15 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
+    protected Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return String.format("E | %s | %s", super.toSaveFormat(), this.at);
+    }
 
     @Override
     public String toString() {

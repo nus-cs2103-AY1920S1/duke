@@ -5,6 +5,10 @@ public class Task {
     protected Task(String description) {
         this.description = description;
     }
+    protected Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
 
     protected void markAsDone() {
         this.isDone = true;
@@ -12,6 +16,10 @@ public class Task {
 
     private String getStatusIcon() {
         return this.isDone ? "\u2713" : "\u2718"; // return tick or X symbols
+    }
+
+    public String toSaveFormat() {
+        return String.format("%d | %s", this.isDone ? 1 : 0, this.description);
     }
 
     @Override

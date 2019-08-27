@@ -1,15 +1,18 @@
 package task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskListController {
     private List<Task> tasks;
     private TaskListView view;
 
-    public TaskListController() {
-        tasks = new ArrayList<>();
+    public TaskListController(List<Task> tasks) {
+        this.tasks = tasks;
         view = new TaskListView();
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     public void addTask(Task task) {

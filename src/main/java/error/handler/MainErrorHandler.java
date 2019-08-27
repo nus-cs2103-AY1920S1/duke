@@ -1,5 +1,6 @@
 package error.handler;
 
+import error.ConfigurationException;
 import error.TaskException;
 import error.UnknownCommandException;
 import util.DukeMessage;
@@ -17,8 +18,13 @@ public class MainErrorHandler {
     public void handle(Exception e) {
         if (e instanceof TaskException) {
             taskExceptionHandler.handle((TaskException) e);
-        } else if (e instanceof UnknownCommandException){
+        } else if (e instanceof UnknownCommandException) {
             DukeOutput.printMessage(UNKNOWN_COMMAND_ERROR_MESSAGE);
+        } else if (e instanceof ConfigurationException) {
+            DukeMessage errorMessage = new DukeMessage("ERROR unable to configure app due to: ")
+                    .newLine()
+                    .append(e.getMessage());
+            DukeOutput.printMessage(errorMessage);
         } else {
             DukeOutput.printMessage(GENERIC_ERROR_MESSAGE);
         }

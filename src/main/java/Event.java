@@ -1,14 +1,19 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private String eventDate;
+    private String eventDateString;
+    private LocalDateTime eventDate;
 
     public Event(String description, String eventDate) {
         super(description);
-        this.eventDate = makeEventDate(eventDate);
+        this.eventDateString = makeEventDate(eventDate);
+        this.eventDate = storeAsDateTime(eventDateString);
     }
 
     public Event(String description, String eventDate, boolean status) {
         super(description);
-        this.eventDate = makeEventDate(eventDate);
+        this.eventDateString = makeEventDate(eventDate);
+        this.eventDate = storeAsDateTime(eventDateString);
         this.isDone = status;
     }
 
@@ -44,14 +49,14 @@ public class Event extends Task {
 
         fileFormat.append(this.description);
         fileFormat.append("~");
-        fileFormat.append(this.eventDate);
+        fileFormat.append(this.eventDateString);
 
         return fileFormat.toString();
     }
 
     @Override
     public String toString() {
-        String task = "[E][" + this.getStatusIcon() + "] " + this.description + " (" + eventDate + ")";
+        String task = "[E][" + this.getStatusIcon() + "] " + this.description + " (" + eventDateString + ")";
         return task;
     }
 }

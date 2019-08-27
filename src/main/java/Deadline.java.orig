@@ -7,14 +7,12 @@ public class Deadline extends Task {
     public Deadline(String description, String deadline) {
         super(description);
 
-        this.deadlineString = makeDeadline(deadline);
-        this.deadlineDate = storeAsDateTime(deadlineString);
+        this.deadline = makeDeadline(deadline);
     }
 
     public Deadline(String description, String deadline, boolean status) {
         super(description);
-        this.deadlineString = makeDeadline(deadline);
-        this.deadlineDate = storeAsDateTime(deadlineString);
+        this.deadline = makeDeadline(deadline);
         this.isDone = status;
     }
 
@@ -32,6 +30,7 @@ public class Deadline extends Task {
             temp.append(deadlineArr[i]);
         }
 
+<<<<<<< HEAD
         return temp.toString();
     }
 
@@ -49,9 +48,13 @@ public class Deadline extends Task {
 
         fileFormat.append(this.description);
         fileFormat.append("~");
-        fileFormat.append(this.deadlineString);
+        fileFormat.append(this.deadline);
 
         return fileFormat.toString();
+=======
+        this.deadlineString = temp.toString();
+        this.deadlineDate = storeAsDateTime(deadlineString);
+>>>>>>> branch-level-8
     }
 
     @Override

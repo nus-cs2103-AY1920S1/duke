@@ -59,7 +59,7 @@ public class Duke {
                     fileUpdater.update();
                     input = sc.nextLine();
 
-                } else if (inputArr.length == 1){
+                } else if (inputArr.length == 1) {
 
                     throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
 
@@ -80,6 +80,7 @@ public class Duke {
                     Task.addTask(newDeadline);
 
                     fileUpdater.update();
+
                     input = sc.nextLine();
 
                 } else {

@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 public class Duke {
     private static Scanner sc;
+    private static Storage storage;
+    private static Ui ui;
     private static ArrayList<Task> tasks;
     public static String horizontalLine =
             "    ____________________________________________________________";
 
     public static void main(String[] args) {
-        Storage storage = new Storage("data/duke.txt");
+        storage = new Storage("data/duke.txt");
+        ui = new Ui();
         sc = new Scanner(System.in);
-        String input;
 
         try {
             tasks = storage.getTasks();
@@ -21,10 +23,10 @@ public class Duke {
             System.err.println(e);
         }
 
-        printGreeting();
+        ui.printGreeting();
 
         while (sc.hasNext()) {
-            input = sc.nextLine();
+            String input = sc.nextLine();
 
             if (input.equals("bye")) {
                 try {
@@ -33,7 +35,7 @@ public class Duke {
                     System.err.println(e);
                 }
 
-                printExit();
+                ui.printExit();
                 break;
             }
 
@@ -45,7 +47,7 @@ public class Duke {
             try {
                 switch (command) {
                 case "list":
-                    printTasks();
+                    ui.printTasks(tasks);
                     break;
                 case "done":
                     handleDone(Integer.parseInt(inputArr[1]) - 1);
@@ -96,36 +98,6 @@ public class Duke {
         }
     }
 
-    private static void printGreeting() {
-        // Greet
-        System.out.println(horizontalLine);
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println(horizontalLine);
-        System.out.println();
-    }
-
-    private static void printTasks() {
-        System.out.println(horizontalLine);
-        System.out.println("     Here are the tasks in your list:");
-
-        int id = 1;
-        for (Task task : tasks) {
-            System.out.println("     " + id + ". " + task);
-            id++;
-        }
-
-        System.out.println(horizontalLine);
-        System.out.println();
-    }
-
-    private static void printExit() {
-        // Exit
-        System.out.println(horizontalLine);
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println(horizontalLine);
-    }
-
     private static void handleDone(int taskIndex) throws DukeException {
         if (taskIndex >= tasks.size()) {
             throw new DukeException("Task not found!");
@@ -133,12 +105,7 @@ public class Duke {
 
         Task task = tasks.get(taskIndex);
         task.markAsDone();
-
-        System.out.println(horizontalLine);
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + task);
-        System.out.println(horizontalLine);
-        System.out.println();
+        ui.printMarkTaskAsDone(task);
     }
 
     private static void handleDelete(int taskIndex) throws DukeException {
@@ -147,24 +114,13 @@ public class Duke {
         }
 
         Task task = tasks.remove(taskIndex);
-
-        System.out.println(horizontalLine);
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + task);
-        System.out.println(horizontalLine);
-        System.out.println();
+        ui.printDeleteTask(task);
     }
 
 
     private static void handleAddTask(Task task) {
         tasks.add(task);
 
-        System.out.println(horizontalLine);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + task);
-        System.out.println("     Now you have " + tasks.size()
-                + " tasks in the list.");
-        System.out.println(horizontalLine);
-        System.out.println();
+        ui.printAddTask(task, tasks.size());
     }
 }

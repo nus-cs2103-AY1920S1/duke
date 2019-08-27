@@ -13,6 +13,12 @@ public class Parser {
     );
     private static final Pattern COMMAND_PARSER = Pattern.compile("\\A(?<command>\\S+)(?: (?<args>.+))?\\z");
 
+    /**
+     * Parses the given command input to extract the intended command and the arguments for that command.
+     *
+     * @param command The string representing a desired command.
+     * @return A Command-implementing object that can be later executed.
+     */
     public static Command parse(String command) {
         switch (command) {
         case "bye":

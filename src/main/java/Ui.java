@@ -62,6 +62,8 @@ public class Ui {
             list = parser.parseEvent(str, list);
         } else if (strArr[0].equals("delete")) {
             list = parser.parseDelete(str, list);
+        } else if (strArr[0].equals("find")) {
+            showMatchingTask(parser.parseFind(str, list));
         } else {
             throw new DukeException("OOPS!!! I,m sorry, but I don't know what that means :-(");
         }
@@ -85,5 +87,15 @@ public class Ui {
         System.out.println("\tNoted! I've removed this task:");
         System.out.println("\t" + t);
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+    }
+
+    public void showMatchingTask(TaskList tasks) {
+        System.out.println("\tHere are the matching tasks in your list:");
+
+        int i = 1;
+        for (Task t : tasks.getList()) {
+            System.out.println("\t" + i + ". " + t);
+            i++;
+        }
     }
 }

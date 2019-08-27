@@ -1,2 +1,8 @@
-[D][✘] assignment (by: 27-Aug-2019 06:00PM)
-[E][✘] meeting (at: 28-Aug-2019 05:30PM)
+[E][✓] splashdown (at: 28-Aug-2019 06:00PM)
+[T][✓] individual project
+[E][✓] lunch (at: 26-Aug-2019 12:00PM)
+[D][✓] tutorial (by: 26-Aug-2019 10:00AM)
+[T][✓] JUnit testing
+[D][✘] lab (by: 08-Feb-2021 12:00PM)
+[T][✘] read book
+[T][✘] return book

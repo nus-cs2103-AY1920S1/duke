@@ -139,7 +139,7 @@ class Duke {
             } else if (!hasDescription && !hasEventDate && !command[i].equals("")) {
                 hasDescription = true;
             }
-            task[index].append(command[i] + " ");
+            task[index].append(command[i]).append(" ");
         }
         if (!hasDescription && !hasEventDate) {
             throw new DukeIllegalArgumentException(ERROR_MISSING_DESCRIPTION_AND_DATE);

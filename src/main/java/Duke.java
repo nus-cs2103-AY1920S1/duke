@@ -12,7 +12,6 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-        System.out.println("[debug] size: " + tasks.size());
     }
 
     public void run() {
@@ -21,7 +20,6 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                System.out.println("[debug] fullCommand: " + "|" + fullCommand + "|");
 
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);

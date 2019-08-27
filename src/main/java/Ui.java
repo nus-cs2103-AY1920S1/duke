@@ -17,12 +17,12 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println(oneLine);
+        System.out.print(oneLine);
     }
 
 
     public void showError(String message) {
-        System.out.println(" " + message);
+        System.out.println(" " + frontSpace + message);
     }
 
     public void showWelcome() {

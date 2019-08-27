@@ -36,6 +36,9 @@ public abstract class CommandParser {
         case LIST:
             command = new ListCommand(inputs);
             break;
+        case FIND:
+            command = new FindCommand(commandString, inputs);
+            break;
         case DONE:
             command = new DoneCommand(inputs);
             break;
@@ -52,7 +55,12 @@ public abstract class CommandParser {
             command = new EventCommand(inputs);
             break;
         default:
-            //covered in try catch above with enums
+            //covered in try catch above with enums, only cause will be no implementation
+            throw new DukeInvalidCommandException(
+                    String.format(
+                            "Encountered unimplemented or uncovered command type %s",
+                            commandType.toString()),
+                    " ☹  OOPS!!! I'm sorry, but I haven't implemented it :-(");
         }
 
         return command;

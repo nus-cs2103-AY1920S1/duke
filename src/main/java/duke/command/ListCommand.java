@@ -15,7 +15,7 @@ class ListCommand extends Command {
      *
      * @param commandArgs String array of arguments.
      */
-    public ListCommand(String[] commandArgs) {
+    ListCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.LIST;
     }

@@ -6,6 +6,7 @@ package duke.command;
 public enum Commands {
     LIST,
     BYE,
+    FIND,
     DONE,
     DELETE,
     TODO,

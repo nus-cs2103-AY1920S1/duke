@@ -10,6 +10,7 @@ import duke.tasklist.TaskList;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
+import java.util.LinkedList;
 
 class Parser {
     static void parse(String act, Storage storage) throws FileNotFoundException,
@@ -88,8 +89,27 @@ class Parser {
                                 + "\nNow you have " + (TaskList.taskList.size()) + " tasks in the list.");
                         storage.saveData();
                         break;
+                    case find:
+                        String keyword = Ui.sc.nextLine();
+                        boolean isFound = false;
+                        LinkedList<Task> foundList = new LinkedList<>();
+                        for(Task task :TaskList.taskList) {
+                            if(task.toString().contains(keyword)) {
+                                foundList.add(task);
+                                isFound = true;
+                            }
+                        }
+                        if (isFound) {
+                            System.out.println("Here are the matching tasks in your list:\n");
+                            for (int i = 0; i < foundList.size(); i++) {
+                                System.out.println(1 + i + "." + foundList.get(i).toString());
+                            }
+                        } else {
+                            System.out.println("Keyword not found ;_;");
+                        }
+                        break;
                 }
-            } catch(IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 throw new DukeIllegalActionException();
             }
 
@@ -97,5 +117,5 @@ class Parser {
 }
 
 enum Action {
-    list, bye, done, todo, deadline, event, delete
+    list, bye, done, todo, deadline, event, delete, find
 }

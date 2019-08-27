@@ -3,7 +3,6 @@ import command.ListenCommand;
 import command.GreetCommand;
 import error.ConfigurationException;
 import error.handler.MainErrorHandler;
-import org.xml.sax.ErrorHandler;
 import task.Task;
 import task.TaskListController;
 import util.DukeMessage;

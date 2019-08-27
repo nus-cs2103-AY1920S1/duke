@@ -2,9 +2,10 @@ package task;
 
 import task.tasks.TaskKeyword;
 
+import java.io.Serializable;
 import java.util.Optional;
 
-public abstract class Task {
+public abstract class Task implements Serializable {
     private String description;
     private boolean done;
     private TaskKeyword keyword;

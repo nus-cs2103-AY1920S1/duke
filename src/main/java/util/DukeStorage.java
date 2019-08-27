@@ -3,10 +3,7 @@ package util;
 import error.ConfigurationException;
 import task.Task;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -60,7 +57,59 @@ public class DukeStorage {
         }
     }
 
-    private void loadTaskData() {
-        tasks = new ArrayList<>();
+    private void loadTaskData() throws ConfigurationException {
+        if (!new File(storageFilePath).exists()) {
+            DukeMessage storageFileNotFoundMessage = new DukeMessage("Storage file not found at ")
+                    .append(storageFilePath)
+                    .newLine()
+                    .append("Creating file...");
+            DukeOutput.printMessage(storageFileNotFoundMessage);
+
+            writeTaskData(new ArrayList<>());
+        }
+
+        try {
+            FileInputStream taskDataInputStream = new FileInputStream(storageFilePath);
+            ObjectInputStream taskListInputStream = new ObjectInputStream(taskDataInputStream);
+
+            DukeMessage readingTaskDataMessage = new DukeMessage("Storage file found")
+                    .newLine()
+                    .append("Reading task data...");
+            DukeOutput.printMessage(readingTaskDataMessage);
+
+            tasks = (List) taskListInputStream.readObject();
+
+            DukeMessage taskDataReadSuccessMessage = new DukeMessage("Successfully read task data");
+            DukeOutput.printMessage(taskDataReadSuccessMessage);
+
+            taskListInputStream.close();
+            taskDataInputStream.close();
+        } catch (FileNotFoundException e) {
+            throw new ConfigurationException("Unable to access storage file");
+        } catch (IOException e) {
+            throw new ConfigurationException("Unable to read storage file");
+        } catch (ClassNotFoundException e) {
+            throw new ConfigurationException("Storage file corrupted");
+        }
+    }
+
+    public void writeTaskData(List<Task> tasks) throws ConfigurationException {
+        if (singletonDukeStorage == null) {
+            throw new ConfigurationException("DukeStorage not initialized");
+        }
+
+        try {
+            FileOutputStream taskDataOutputStream = new FileOutputStream(storageFilePath);
+            ObjectOutputStream taskListOutputStream = new ObjectOutputStream(taskDataOutputStream);
+
+            taskListOutputStream.writeObject(tasks);
+
+            taskDataOutputStream.close();
+            taskListOutputStream.close();
+        } catch (FileNotFoundException e) {
+            throw new ConfigurationException("Unable to access storage file");
+        } catch (IOException e) {
+            throw new ConfigurationException("Unable to write to storage file");
+        }
     }
 }

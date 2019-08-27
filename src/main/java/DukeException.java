@@ -26,3 +26,10 @@ class IncorrectInfoInputException extends DukeException {
         super("Please have one \"" + subCommand + "\" provided." );
     }
 }
+
+// When no existing data in hard disk
+class DukeDataException extends DukeException {
+    public DukeDataException() {
+        super("Dang it! No data in hard disk yet.");
+    }
+}

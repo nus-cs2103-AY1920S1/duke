@@ -1,15 +1,22 @@
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+
 public class Duke {
     private ArrayList<Task> taskList;
+    private DukeData dukeData;
     // Constructor
-    public Duke() {
-        taskList = new ArrayList<Task>();
+    public Duke() throws DukeException {
+        // Get data from hard disk if available
+        dukeData = new DukeData();
+        taskList = dukeData.getIsExist() ?
+                dukeData.toArrayList() : new ArrayList<Task>();
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -26,9 +33,10 @@ public class Duke {
     }
 
     private boolean inProgram;
-    private void run() throws DukeException {
+    private void run() throws DukeException, IOException {
         // Initialise Scanner object
         Scanner input = new Scanner(System.in);
+
         Task newTask;
         String taskDescription;
         // More general than taskDescription, includes "/by", "/at" info
@@ -42,19 +50,19 @@ public class Duke {
             );
             // Identify command by first word
             switch (userInputArr.get(0)) {
-            case ("bye"):
+            case "bye":
                 displaySentence("Bye. Hope to see you again soon!");
-                //Exit program
+                // Exit program
                 inProgram = false;
                 break;
-            case ("list"):
+            case "list":
                 if (taskList.isEmpty()) {
                     displaySentence("You have no tasks yet!");
                 } else {
                     displayTasks();
                 }
                 break;
-            case ("todo"):
+            case "todo":
                 // Empty description
                 if (userInputArr.size() == 1) {
                     throw new EmptyDescriptionException("todo");
@@ -63,17 +71,16 @@ public class Duke {
                     taskDescription = String.join(" ",
                             userInputArr.subList(1, userInputArr.size()));
                     newTask = new ToDo(taskDescription);
-                    taskList.add(newTask);
-                    addTaskResponse(newTask);
+                    addTask(newTask);
                 }
                 break;
-            case ("deadline"):
+            case "deadline":
                 addTaskWithSubcommand("deadline", userInputArr);
                 break;
-            case ("event"):
+            case "event":
                 addTaskWithSubcommand("event",userInputArr);
                 break;
-            case ("done"):
+            case "done":
                 // Empty/no list index of task provided
                 if (userInputArr.size() == 1 || userInputArr.size() > 2) {
                     throw new DukeException("Please put the list index of the " +
@@ -87,14 +94,13 @@ public class Duke {
                             throw new DukeException("Integer is not within range of tasks.");
                         }
                         Task doneTask = taskList.get(doneIdx-1);
-                        doneTask.markDone();
-                        markDoneResponse(doneTask);
+                        markDoneTask(doneTask);
                     } catch (NumberFormatException e) {
                         throw new DukeException("Please enter a valid integer after \"Done\".");
                     }
                 }
                 break;
-            case ("delete"):
+            case "delete":
                 // Empty/no list index of task provided
                 if (userInputArr.size() == 1 || userInputArr.size() > 2) {
                     throw new DukeException("Please put the list index of the " +
@@ -108,8 +114,7 @@ public class Duke {
                             throw new DukeException("Integer is not within range of tasks.");
                         }
                         Task deletedTask = taskList.get(deleteIdx-1);
-                        taskList.remove(deleteIdx-1);
-                        deleteTaskResponse(deletedTask);
+                        deleteTask(deletedTask);
                     } catch (NumberFormatException e) {
                         throw new DukeException("Please enter a valid integer after \"delete\".");
                     }
@@ -127,7 +132,7 @@ public class Duke {
 
     // For commands with subcommands
     // (deadline/by, event/at)
-    private void addTaskWithSubcommand(String command, ArrayList<String> userInputArr) throws DukeException {
+    private void addTaskWithSubcommand(String command, ArrayList<String> userInputArr) throws DukeException, IOException {
         String subCommand = command.equals("deadline") ? "/by" : "/at";
         // Empty Description
         // (only "deadline" or "deadline /by") or (only "event" or "deadline /at")
@@ -144,7 +149,6 @@ public class Duke {
                 throw new EmptyDescriptionException(subCommand);
             } else {
                 // Splice words after first-word command and before "/by" or "/at"
-                // NOTE: .subList(startIdx, endIdx) where endIdx is NOT inclusive
                 String taskDescription = String.join(" ",
                         userInputArr.subList(1, firstByIdx));
                 // Description for '/by', '/at'
@@ -153,46 +157,66 @@ public class Duke {
                 Task newTask = command.equals("deadline") ?
                         new Deadline(taskDescription, subCommandDescription) :
                         new Event(taskDescription, subCommandDescription);
-                taskList.add(newTask);
-                addTaskResponse(newTask);
+                addTask(newTask);
             }
         }
+    }
+
+    // Adds task and saves changes in hard disk
+    private void addTask(Task newTask) throws IOException {
+        taskList.add(newTask);
+        dukeData.saveData(taskList);
+        addTaskResponse(newTask);
+    }
+
+    // Deletes task and saves changes in hard disk
+    private void deleteTask(Task deletedTask) throws IOException {
+        taskList.add(deletedTask);
+        dukeData.saveData(taskList);
+        deleteTaskResponse(deletedTask);
+    }
+
+    // Marks task as done and saves changes in hard disk
+    private void markDoneTask(Task doneTask) throws IOException {
+        doneTask.markDone();
+        dukeData.saveData(taskList);
+        markDoneResponse(doneTask);
     }
 
     ////////////////////
     // PRINT METHODS //
     //////////////////
 
-    private String indentString = "    ";
-    private String borderString = "-----";
+    private String indentStr = "    ";
+    private String borderStr = "-----";
 
     private String indentResponse(String response) {
-        return indentString + response;
+        return indentStr + response;
     }
 
     // Sandwich text between -----s
     private void displaySentence(String response) {
-        System.out.println(borderString);
+        System.out.println(borderStr);
         System.out.println(indentResponse(response));
-        System.out.println(borderString);
+        System.out.println(borderStr);
     }
 
-    // List out added tasks ('list')
+    // List out added tasks (list)
     private void displayTasks() {
-        System.out.println(borderString);
-        System.out.println(indentString + "Here are the tasks in your list:");
+        System.out.println(borderStr);
+        System.out.println(indentStr + "Here are the tasks in your list:");
         for (Task task : taskList) {
-            //Format: 1. [T/D/E][v/x] task-description (by/at: ...)
-            System.out.println(indentString +
+            // Format: 1. [T/D/E][v/x] task-description (by/at: ...)
+            System.out.println(indentStr +
                     (taskList.indexOf(task)+1) + "." +
                     task.toString());
         }
-        System.out.println(borderString);
+        System.out.println(borderStr);
     }
 
-    // Acknowledgement receipt for commands which adds, deletes tasks
+    // Acknowledgement response for commands which adds, deletes tasks
     private void addTaskResponse(Task task) {
-        this.modifyTaskListResponse("Got it. I've adde this task:", task);
+        this.modifyTaskListResponse("Got it. I've added this task:", task);
     }
 
     private void deleteTaskResponse(Task task) {
@@ -201,21 +225,21 @@ public class Duke {
 
     // During additions and deletions to list
     private void modifyTaskListResponse(String message, Task task) {
-        System.out.println(borderString);
+        System.out.println(borderStr);
         System.out.println(indentResponse(message));
         System.out.println(indentResponse("  " + task.toString()));
         System.out.println(indentResponse(
                 "Now you have " + taskList.size() +
                         (taskList.size() == 1? " task":" tasks") +
                         " in the list."));
-        System.out.println(borderString);
+        System.out.println(borderStr);
     }
 
     private void markDoneResponse(Task doneTask) {
-        System.out.println(borderString);
+        System.out.println(borderStr);
         System.out.println(indentResponse("Nice! I've marked this task as done:"));
         System.out.println(indentResponse("  " + doneTask.toString()));
-        System.out.println(borderString);
+        System.out.println(borderStr);
     }
 
 }

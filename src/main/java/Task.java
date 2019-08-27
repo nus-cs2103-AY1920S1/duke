@@ -22,7 +22,6 @@ public abstract class Task {
         }
     }
 
-
     public String perfectDescription(String description){
         String[] temp = description.split(" ");
         String result = "";

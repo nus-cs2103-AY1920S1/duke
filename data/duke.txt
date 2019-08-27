@@ -1,2 +1,4 @@
-T|0|task 1 
-E|0|ad |01/03/2019 0900 
+T | 1 | asd 
+T | 0 | oags 
+T | 1 | asdd dsas fsda 
+T | 0 | asd 

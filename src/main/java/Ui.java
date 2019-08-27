@@ -2,9 +2,8 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner;
-    private static String oneLine = "____________________________________________________________\n";
-    private static String frontSpace = "    ";
-
+    private static String oneLine = "    ____________________________________________________________\n";
+    public static String frontSpace = "    ";
 
     public Ui() {
         scanner = new Scanner(System.in);
@@ -18,25 +17,19 @@ public class Ui {
     }
 
     public void showLine() {
-        addFrontSpace();
-        System.out.println(onrLine)
+        System.out.println(oneLine);
     }
 
-    public void addFrontSpace() {
-        oneLine += frontSpace;
-    }
 
     public void showError(String message) {
         System.out.println(" " + message);
     }
 
-    public void showGreet() {
-        showLine();
+    public void showWelcome() {
         String greet = "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n";
-        greet = frontSpace + upperLine + greet + frontSpace + lowerLine;
+        greet = oneLine + greet + oneLine;
         System.out.println(greet);
-        showLine();
     }
 
     public void showLoadingError() {

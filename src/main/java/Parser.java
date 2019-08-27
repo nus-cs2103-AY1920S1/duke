@@ -11,6 +11,9 @@ public class Parser {
             int taskNumber = Integer.parseInt(command.substring(7)) - 1;
             System.out.println(taskNumber);
             return new DeleteCommand(taskNumber);
+        } else if (command.startsWith("find")) {
+            String searchDescription = command.replaceFirst("find ", "");
+            return new SearchCommand(searchDescription);
         } else {
             Task userTask;
 

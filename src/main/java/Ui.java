@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Ui {
@@ -53,6 +54,15 @@ public class Ui {
         for (Task taskToShow : taskList) {
             System.out.println(TABS + index.toString() + "." + taskToShow.toString());
             index++;
+        }
+    }
+
+    public void showSearchResults(HashMap<Integer, Task> taskList) {
+        System.out.println(TABS + "Here are the matching tasks in your list:");
+
+        for (Integer index : taskList.keySet()) {
+            Task currentTask = taskList.get(index);
+            System.out.println(TABS + index.toString() + "." + currentTask.toString());
         }
     }
 

@@ -1,3 +1,7 @@
+/**
+ * An abstract Task class to create more specific tasks.
+ */
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -13,8 +17,12 @@ public abstract class Task {
 
     public abstract boolean getStatus();
 
+    /**
+     * Returns a tick or cross based on have the task been done
+     * @return tick or cross
+     */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public String getDescription() {

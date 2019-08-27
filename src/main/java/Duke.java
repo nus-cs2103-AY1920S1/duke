@@ -24,7 +24,7 @@ public class Duke {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public void run() {
         ui.greet();
 

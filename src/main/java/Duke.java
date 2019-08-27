@@ -1,3 +1,11 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,12 +21,41 @@ public class Duke {
         Greet();
         Detecting();
     }
+
     public static void Greet(){
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
-    public static void Detecting() throws DukeException {
+
+    public static void Detecting() {
         Scanner sc = new Scanner(System.in);
+        Path file = Paths.get("save.txt");
         List<Task> tasks = new LinkedList<>();
+        try {
+            Scanner fileSc = new Scanner(file).useDelimiter("\\||\\n");
+            while (fileSc.hasNext()) {
+                String line = fileSc.nextLine();
+                String[] lineBreakUp = line.split(" \\| ");
+                switch (lineBreakUp[0]) {
+                    case "T":
+                        tasks.add(new toDo(lineBreakUp[2], lineBreakUp[1].equals("1")));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(lineBreakUp[2], lineBreakUp[3], lineBreakUp[1].equals("1")));
+                        break;
+                    case "E":
+                        tasks.add(new Event(lineBreakUp[2], lineBreakUp[3], lineBreakUp[1].equals("1")));
+                        break;
+                    default:
+                        System.out.println("wrong input from file");
+                }
+            }
+        } catch (IOException exp) {
+            System.out.println("ioExeption caught!");
+        }
+        System.out.println("Here are your current tasks:");
+        for (Task t : tasks) {
+            System.out.println(t);
+        }
         while(true) {
             String cmd = sc.nextLine();
             Scanner cmdSc = new Scanner(cmd);
@@ -109,6 +146,21 @@ public class Duke {
                         }
                 }
             }
+        }
+        Save(tasks);
+    }
+
+    private static void Save(List<Task> tasks) {
+        Path file = Paths.get("save.txt");
+        try {
+            List<String> lines = new LinkedList<>();
+            for (Task t : tasks) {
+                System.out.println("Saving " + t);
+                lines.add(t.toSave());
+            }
+            Files.write(file, lines, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            System.out.println("error when saving");
         }
     }
 }

@@ -1,5 +1,5 @@
 T|0|read book
-D|0|return book|6 June 2019 14 0
-E|0|project meeting|6 Aug 2019 14 0 16 0
+D|0|return book|6 June 2019 14 00
+E|0|project meeting|6 Aug 2019 14 00 16 00
 T|0|join sports club
-E|0|project meeting |3 oct 2019 18 0 19 0
+E|0|project meeting |3 oct 2019 18 00 19 00

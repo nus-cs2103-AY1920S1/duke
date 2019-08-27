@@ -1,5 +1,8 @@
 import customexceptions.*;
+import tasks.Deadline;
+import tasks.Event;
 import tasks.TaskList;
+import tasks.ToDo;
 
 public class Parser {
     public static void parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
@@ -10,7 +13,7 @@ public class Parser {
             String details = deadlineDetails.substring(index+4);
             Deadline deadline = new Deadline(name, details);
             if (details.length() == 0) {
-                throw new DeadlineDetailsEmptyException("OOPS!!! Deadline details cannot be empty");
+                throw new DeadlineDetailsEmptyException("OOPS!!! tasks.Deadline details cannot be empty");
             }
             t.addTask(deadline);
             ui.showAdded();
@@ -29,7 +32,7 @@ public class Parser {
             String details = eventDetails.substring(index+3);
             Event event = new Event(name, details);
             if (details.length() == 0) {
-                throw new EventDetailsEmptyException("OOPS!!! Event details cannot be empty.");
+                throw new EventDetailsEmptyException("OOPS!!! tasks.Event details cannot be empty.");
             }
             t.addTask(event);
             ui.showAdded();

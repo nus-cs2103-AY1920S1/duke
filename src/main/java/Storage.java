@@ -1,6 +1,5 @@
 import customexceptions.DukeException;
-import tasks.Task;
-import tasks.TaskList;
+import tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,23 +1,23 @@
-package duke.init;
+package duke.data.tasks;
 
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
- * Implements an event task.
+ * Implements a deadline task.
  * @author lyskevin
  */
-public class Event extends Task {
+public class Deadline extends Task {
 
     private Date dateAndTime;
     private SimpleDateFormat dateFormat;
 
     /**
-     * Constructs an event task with the specified description.
+     * Constructs a deadline task with the specified description.
      * @param description The specified description.
      */
-    public Event(String description, String dateAndTime) throws ParseException {
+    public Deadline(String description, String dateAndTime) throws ParseException {
         super(description);
         try {
             dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -29,11 +29,11 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an event task with the specified description and isDone status.
+     * Constructs a deadline task with the specified description and isDone status.
      * @param description The specified description.
      * @param isDone The specified isDone status.
      */
-    public Event(String description, boolean isDone, String dateAndTime) throws ParseException {
+    public Deadline(String description, boolean isDone, String dateAndTime) throws ParseException {
         super(description, isDone);
         try {
             dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -45,28 +45,28 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of this event task's date and time.
-     * @return The String representation of this event task's date and time.
+     * Returns the String representation of this deadline task's date.
+     * @return The String representation of this deadline task's date.
      */
     public String getDateAndTime() {
         return dateFormat.format(dateAndTime);
     }
 
     /**
-     * Returns the String representation of this event task's type.
-     * @return The String representation of this event task's type.
+     * Returns the String representation of this deadline task's type.
+     * @return The String representation of this deadline task's type.
      */
     public String getType() {
-        return "event";
+        return "deadline";
     }
 
     /**
-     * Returns the string representation of this event task.
-     * @return The string representation of this event task.
+     * Returns the string representation of this deadline task.
+     * @return The string representation of this deadline task.
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), dateFormat.format(dateAndTime));
+        return String.format("[D]%s (by: %s)", super.toString(), dateFormat.format(dateAndTime));
     }
 
 }

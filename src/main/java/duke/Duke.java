@@ -1,4 +1,4 @@
-package duke.init;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,8 +8,11 @@ import java.lang.StringBuilder;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-//
+import duke.data.tasks.Deadline;
+import duke.data.tasks.Event;
+import duke.data.tasks.Task;
+import duke.data.tasks.Todo;
+import duke.exceptions.DukeException;
 
 /**
  * Implements the Duke chatbot.

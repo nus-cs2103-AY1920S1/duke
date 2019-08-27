@@ -1,4 +1,4 @@
-package duke.init;
+package duke.data.tasks;
 
 /**
  * Implements a task.

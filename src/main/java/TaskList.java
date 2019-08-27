@@ -87,6 +87,12 @@ public class TaskList {
         return dukeTxt;
     }
 
+    public Task doneTask(int index){
+        Task currTask = tasksArr.get(index);
+        currTask.done();
+        return currTask;
+    }
+
     public void addTask(Task task){
         tasksArr.add(task);
     }
@@ -96,7 +102,7 @@ public class TaskList {
     }
 
     public String listDetails () {
-        return "Now you have " + tasksArr.size() + "tasks in the list.";
+        return "Now you have " + tasksArr.size() + " tasks in the list.";
     }
 
     @Override

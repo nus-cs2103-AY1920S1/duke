@@ -11,7 +11,6 @@ public class Deadline extends Task {
         try {
             date = format.parse(endDate);
         } catch( Exception e ){
-            System.out.println("Invalid date format");
         }
     }
 

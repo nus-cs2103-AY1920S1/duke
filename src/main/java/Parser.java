@@ -10,7 +10,10 @@ public class Parser {
             return new AddTaskCommand(fullCommand);
         } else if (fullCommand.equals("list")) {
             return new ListTaskCommand();
-        } else {
+        } else if(fullCommand.contains("done")){
+            return parseDoneCommand(fullCommand);
+        }
+        else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
@@ -18,6 +21,11 @@ public class Parser {
     static Command parseDeleteCommand(String string){
         int index = Integer.parseInt(string.split("delete ")[1]);
         return new DeleteTaskCommand(index);
+    }
+
+    static Command parseDoneCommand(String string){
+        int index = Integer.parseInt(string.split("done ")[1]);
+        return new DoneTaskCommand(index);
     }
 
 }

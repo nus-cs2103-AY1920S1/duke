@@ -13,49 +13,69 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
+/**
+ * This is a class to make sense of the user commands and allow Duke to take different actions
+ * depending on the commands received.
+ */
 class Parser {
 
     private String[] action;
 
+    /**
+     * Constructor of the Parser class.
+     *
+     * @param action A string array contains split commands.
+     */
     Parser(String[] action) {
         this.action = action;
     }
 
+    /**
+     * To make amendments according to the first index of array which is the command type.
+     *
+     * @throws DukeIllegalDescriptionException To deal with the illegal and invalid inputs from users.
+     */
     void parse() throws DukeIllegalDescriptionException {
         switch (Command.valueOf(action[0])) {
-            case bye:
-                commandBye();
-                break;
-            case list:
-                commandList();
-                break;
-            case done:
-                commandDone();
-                break;
-            case todo:
-                commandTodo();
-                break;
-            case deadline:
-                commandDeadline();
-                break;
-            case event:
-                commandEvent();
-                break;
-            case delete:
-                commandDelete();
-                break;
-            case find:
-                commandFind();
-                break;
+        case bye:
+            commandBye();
+            break;
+        case list:
+            commandList();
+            break;
+        case done:
+            commandDone();
+            break;
+        case todo:
+            commandTodo();
+            break;
+        case deadline:
+            commandDeadline();
+            break;
+        case event:
+            commandEvent();
+            break;
+        case delete:
+            commandDelete();
+            break;
+        case find:
+            commandFind();
+            break;
         }
 
     }
 
+    /**
+     * Action taken when the command is bye.
+     */
     private void commandBye() {
         System.out.println("Bye. Hope to see you again soon!");
         Ui.setFlag();
     }
 
+    /**
+     * Action taken when the command is list.
+     */
     private void commandList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < TaskList.getList().size(); ++i) {
@@ -63,6 +83,9 @@ class Parser {
         }
     }
 
+    /**
+     * Action taken when the command is done.
+     */
     private void commandDone() {
         Storage storage = new Storage();
         int num = Integer.parseInt(action[1]);
@@ -80,6 +103,11 @@ class Parser {
         }
     }
 
+    /**
+     * Action taken when the command is to_do.
+     *
+     * @throws DukeIllegalDescriptionException To deal with the illegal input after to_do command such as no input.
+     */
     private void commandTodo() throws DukeIllegalDescriptionException {
         try {
             Ui ui = new Ui();
@@ -95,6 +123,12 @@ class Parser {
         }
     }
 
+    /**
+     * Action taken when the command is deadline.
+     *
+     * @throws DukeIllegalDescriptionException To deal with the illegal input after deadline such as
+     *                                         without stating /by time.
+     */
     private void commandDeadline() throws DukeIllegalDescriptionException {
         try {
             Ui ui = new Ui();
@@ -116,6 +150,12 @@ class Parser {
         }
     }
 
+    /**
+     * Action taken when the command is event.
+     *
+     * @throws DukeIllegalDescriptionException To deal with the illegal input after event such as
+     *                                         without stating /at time.
+     */
     private void commandEvent() throws DukeIllegalDescriptionException {
         try {
             Ui ui = new Ui();
@@ -143,6 +183,9 @@ class Parser {
         }
     }
 
+    /**
+     * Action taken when the command is delete.
+     */
     private void commandDelete() {
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -175,6 +218,10 @@ class Parser {
         }
     }
 
+
+    /**
+     * To represent the commands users can input.
+     */
     enum Command {
         bye, list, done, todo, deadline, event, delete, find
     }

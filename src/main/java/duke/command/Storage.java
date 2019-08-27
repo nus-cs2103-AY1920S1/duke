@@ -17,23 +17,43 @@ import java.io.BufferedWriter;
 
 import java.util.ArrayList;
 
+/**
+ * This class is used to save the tasks in the hard disk once there is a change made to the list and load the file
+ * from the hard disk once the Duke is initiated.
+ */
 public class Storage {
 
     private static String filePath;
     private ArrayList<Task> store = new ArrayList<>();
 
+    /**
+     * Constructor of the class, assigned the string value to the variable.
+     *
+     * @param filePath A string to represent the filepath in the hard disk.
+     */
     public Storage(String filePath) {
         Storage.filePath = filePath;
     }
 
+    /**
+     * Another constructor of the class.
+     */
     public Storage() {
 
     }
 
+    /**
+     * To get the filepath of the class.
+     *
+     * @return The load and store location.
+     */
     public String getFilePath() {
         return filePath;
     }
 
+    /**
+     * To create a new folder in the directory if the specific folder is not existed.
+     */
     public void createFolder() {
         String folderPath = "/Users/auxin/duke/data";
         File newFolder = new File(folderPath);
@@ -42,6 +62,9 @@ public class Storage {
         }
     }
 
+    /**
+     * To create a new file in the directory if the specific file is not existed.
+     */
     public void createFile() {
         try {
             File file = new File(filePath);
@@ -53,6 +76,12 @@ public class Storage {
         }
     }
 
+    /**
+     * To load the file information from the hard disk.
+     *
+     * @return A list contains tasks loaded from the file.
+     * @throws DukeException To deal with the potential loading error.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(filePath);
@@ -97,6 +126,13 @@ public class Storage {
         }
     }
 
+    /**
+     * To make the change to the file.
+     *
+     * @param filePath     The store location of the file.
+     * @param textToAppend The change of text made to the file.
+     * @param flag         To determine whether overwrite the original file or just append on it.
+     */
     void appendToFile(String filePath, String textToAppend, boolean flag) {
         try {
             FileWriter fw = new FileWriter(filePath, flag);

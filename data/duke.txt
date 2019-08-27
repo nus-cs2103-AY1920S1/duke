@@ -1,3 +1,0 @@
-E | 0 | meet batman | 12 December 2020, 1200
-E | 0 | meet catwoman | 12 December 2020, 1209
-E | 0 | meet lionking | 13 December 2020, 1215

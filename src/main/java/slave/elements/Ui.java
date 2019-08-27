@@ -9,20 +9,20 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         String message = "Hello! I'm Slave! Your very own productivity application.\n" +
                 "     What can I do for you? Type 'help' for commands!";
         System.out.println(Formatter.formatMessage(message));
     }
 
-    public void showByeMessage(){
+    public void showByeMessage() {
         String message = "Bye! Thanks for using me! Will be right here when you need me.";
         System.out.println(Formatter.formatMessage(message));
     }
 
-    public void showHelpMessage(){
+    public void showHelpMessage() {
         String message = "Commands:\n" +
                 "     todo <task description> : To add task to list\n" +
                 "     event <task description> /at <date> : To add event to list\n" +
@@ -37,21 +37,21 @@ public class Ui {
         System.out.println(Formatter.formatMessage(message));
     }
 
-    public void showErrorMessage(DukeException e){
+    public void showErrorMessage(DukeException e) {
         System.out.println(Formatter.formatMessage(e.getMessage()));
     }
 
-    public String readCommand(){
+    public String readCommand() {
         return scanner.nextLine();
     }
 
-    public void printClearCommand(){
+    public void printClearCommand() {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Clearing List..."));
         Formatter.printLine();
     }
 
-    public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList){
+    public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + deadlineTask));
@@ -59,7 +59,7 @@ public class Ui {
         Formatter.printLine();
     }
 
-    public void printAddEventCommand(Event eventTask, TaskList taskList){
+    public void printAddEventCommand(Event eventTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + eventTask));
@@ -67,7 +67,7 @@ public class Ui {
         Formatter.printLine();
     }
 
-    public void printAddToDoCommand(ToDo toDoTask, TaskList taskList){
+    public void printAddToDoCommand(ToDo toDoTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + toDoTask));
@@ -83,14 +83,14 @@ public class Ui {
         Formatter.printLine();
     }
 
-    public void printDoneCommand(Task task, TaskList taskList){
+    public void printDoneCommand(Task task, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Nice! I've marked this task as done:"));
         System.out.println(Formatter.indentLine("  " + task));
         Formatter.printLine();
     }
 
-    public void printListCommand(TaskList taskList){
+    public void printListCommand(TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Here are the tasks in your list:"));
         for (Task task: taskList.getList()){

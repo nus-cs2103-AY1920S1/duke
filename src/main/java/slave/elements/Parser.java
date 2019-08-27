@@ -1,11 +1,25 @@
 package slave.elements;
 
-import slave.command.*;
-import slave.exception.*;
+import slave.command.Command;
+import slave.command.AddDeadlineCommand;
+import slave.command.AddEventCommand;
+import slave.command.AddToDoCommand;
+import slave.command.ClearCommand;
+import slave.command.DeleteCommand;
+import slave.command.DoneCommand;
+import slave.command.ExitCommand;
+import slave.command.HelpCommand;
+import slave.command.ListCommand;
+import slave.command.NullCommand;
+
+import slave.exception.DukeException;
+import slave.exception.MissingDateException;
+import slave.exception.MissingDescriptionException;
+import slave.exception.MissingTaskException;
 
 public class Parser {
 
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split(" ");
         String firstWord = tokens[0];
         switch(firstWord){
@@ -31,18 +45,20 @@ public class Parser {
             String[] deadlineSplit = fullCommand.split(" /by ");
             String deadlineDesc = deadlineSplit[0].substring(9);
             String deadlineDate = deadlineSplit[deadlineSplit.length - 1];
-            if (isDate(deadlineDate)){
+
+            if (isDate(deadlineDate)) {
                 String[] dateSplitter = deadlineDate.split(" ");
                 Date validDeadlineDate = new Date(dateSplitter[0], dateSplitter[1]);
                 return new AddDeadlineCommand(deadlineDesc, validDeadlineDate);
             }
+
             return new AddDeadlineCommand(deadlineDesc, deadlineDate);
         case "event":
             checkValidity("event", fullCommand, tokens);
             String[] eventSplit = fullCommand.split(" /at ");
             String eventDesc = eventSplit[0].substring(6);
             String eventDate = eventSplit[eventSplit.length - 1];
-            if (isDate(eventDate)){
+            if (isDate(eventDate)) {
                 String[] eventSplitter = eventDate.split(" ");
                 Date validEventDate = new Date(eventSplitter[0], eventSplitter[1]);
                 return new AddEventCommand(eventDesc, validEventDate);
@@ -53,40 +69,40 @@ public class Parser {
         }
     }
 
-    public static boolean isDate(String dateDescription){
+    public static boolean isDate(String dateDescription) {
         String[] dateSplit = dateDescription.split(" ");
-        if (dateSplit.length != 2){
+        if (dateSplit.length != 2) {
             return false;
-        } else if (!dateSplit[0].contains("/")){
+        } else if (!dateSplit[0].contains("/")) {
             return false;
         }
         return true;
     }
 
-    public static void checkValidity(String check, String input, String[] tokens) throws DukeException{
-        switch(check){
+    public static void checkValidity(String check, String input, String[] tokens) throws DukeException {
+        switch(check) {
         case "deadline":
-            if (tokens.length <= 1){
+            if (tokens.length <= 1) {
                 throw new MissingDescriptionException();
-            } else if (!input.contains(" /by ")){
+            } else if (!input.contains(" /by ")) {
                 throw new MissingDateException();
             }
             return;
         case "event":
-            if (tokens.length <= 1){
+            if (tokens.length <= 1) {
                 throw new MissingDescriptionException();
-            } else if (!input.contains(" /at ")){
+            } else if (!input.contains(" /at ")) {
                 throw new MissingDateException();
             }
             return;
         case "todo":
-            if (tokens.length <= 1){
+            if (tokens.length <= 1) {
                 throw new MissingDescriptionException();
             }
             return;
         case "done":
         case "delete":
-            if (tokens.length <= 1){
+            if (tokens.length <= 1) {
                 throw new MissingTaskException();
             }
             return;

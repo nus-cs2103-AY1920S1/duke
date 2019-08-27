@@ -1,6 +1,7 @@
 package slave.elements;
 
 import slave.exception.DukeException;
+
 import slave.task.Task;
 
 import java.util.ArrayList;
@@ -8,14 +9,14 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> taskList;
-    protected Storage storage;
+    private Storage storage;
 
-    public TaskList(Storage storage){
+    public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
         this.storage = storage;
     }
 
-    public TaskList(ArrayList<Task> list, Storage storage){
+    public TaskList(ArrayList<Task> list, Storage storage) {
         this.taskList = list;
         this.storage = storage;
     }
@@ -25,11 +26,11 @@ public class TaskList {
         this.storage.addTask(task);
     }
 
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return this.taskList;
     }
 
-    public Task getTaskByIndex(int index){
+    public Task getTaskByIndex(int index) {
         return this.taskList.get(index - 1);
     }
 
@@ -57,7 +58,7 @@ public class TaskList {
         this.storage.clearStorage();
     }
 
-    private void reorderIndex(int index){
+    private void reorderIndex(int index) {
         if (this.taskList.size() == 0){
             return;
         }

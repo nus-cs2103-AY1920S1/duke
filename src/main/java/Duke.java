@@ -44,7 +44,6 @@ public class Duke {
                    String numberAsString = numTasks[1];
                    int number = Integer.parseInt(numberAsString);
                    spacer(myTaskList.taskDone(number - 1));
-
                } else {
                    //Adding is handled in tasklist
                    myTaskList.addTasks(userInput);
@@ -53,6 +52,11 @@ public class Duke {
                String separator = "    ____________________________________________________________";
                System.out.println(separator);
                System.out.println("    " + err.getMessage());
+               System.out.println(separator + "\n");
+           } catch (incompleteInputException otherErr) {
+               String separator = "    ____________________________________________________________";
+               System.out.println(separator);
+               System.out.println("    " + otherErr.getMessage());
                System.out.println(separator + "\n");
            }
            finally {

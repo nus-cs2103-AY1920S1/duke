@@ -22,30 +22,35 @@ public class TaskList {
 
 
     //Add and print the added notes
-    public void addTasks(String addedTask) throws DukeException {
+    public void addTasks(String addedTask) throws DukeException, incompleteInputException {
         Task temp;
-        if(addedTask.contains("todo")&&(addedTask.length()>4)) {
+        if(addedTask.contains("todo")&&(addedTask.length()>5)) {
             String replaced = addedTask.replace("todo ","");
             temp = new todoTask(replaced);
             myTaskList.add(temp);
             spacerForTasks(temp);
-        } else if(addedTask.contains("deadline")&&(addedTask.length()>8)) {
+        } else if(addedTask.contains("deadline")&&(addedTask.length()>9)&&addedTask.contains("/")) {
             String replaced = addedTask.replace("deadline ","");
             String[] deadLines = replaced.split("/");
             String endTime = deadLines[1].replace("by ", "");
             temp = new deadlineTask(deadLines[0],endTime);
             myTaskList.add(temp);
             spacerForTasks(temp);
-        } else if (addedTask.contains("event")&&(addedTask.length()>5)) {
+        } else if (addedTask.contains("event")&&(addedTask.length()>6)&&addedTask.contains("/")) {
             String replaced = addedTask.replace("event ","");
             String[] events = replaced.split("/");
             String eventTime = events[1].replace("at ", "");
             temp = new eventTask(events[0],eventTime);
             myTaskList.add(temp);
             spacerForTasks(temp);
-        }
-        else {
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if(addedTask.contains("todo")) {
+            throw new incompleteInputException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+        } else if(addedTask.contains("deadline")&&(!(addedTask.contains("/")))) {
+            throw new incompleteInputException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+        } else if (addedTask.contains("event")&&(!(addedTask.contains("/")))) {
+            throw new incompleteInputException("\u2639 OOPS!!! The description of an event cannot be empty.");
+        } else {
+            throw new DukeException();
         }
         }
 
@@ -53,8 +58,10 @@ public class TaskList {
     //Retrieve the task, complete it and return the formatted String
     //"Nice! I've marked..."
     public String taskDone(int index) {
+
         return myTaskList.get(index).taskComplete();
     }
+
 
     //Print all tasks upon "list"
     public void printTasks() {

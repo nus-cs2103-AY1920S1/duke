@@ -1,6 +1,5 @@
 /*
  * Task.java
- * Level-6
  * CS2103T
  * @author Gabriel Ong
  *

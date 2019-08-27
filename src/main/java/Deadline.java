@@ -1,6 +1,5 @@
 /*
  * Deadline.java
- * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -8,8 +7,13 @@
  *
  */
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
+    protected static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Deadline(String description) throws DukeException {
         super(description);
@@ -17,15 +21,18 @@ public class Deadline extends Task {
 
         try {
             this.description = splitDescription[0];
-            this.by = splitDescription[1];
+            this.by = LocalDateTime.parse(splitDescription[1], dateFormatter);
         }
         catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please enter a deadline using \"/by\".");
+        }
+        catch (DateTimeParseException e) {
+            throw new DukeException("Please enter a date with the format dd/MM/yyyy HHmm.\n" + e.getMessage());
         }
     }
 
     @Override
     public String toString() {
-        return "[D]"+ super.toString() + " (by: " + by + ")";
+        return "[D]"+ super.toString() + " (by: " + by.format(dateFormatter) + ")";
     }
 }

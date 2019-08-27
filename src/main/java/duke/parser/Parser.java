@@ -5,6 +5,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.exception.IllegalCommandException;
@@ -67,7 +68,7 @@ public class Parser {
                 }
                 cmd = new EventCommand(description.substring(0, sep).strip(),
                                 parseDate(description.substring(sep + 3).strip()));
-            } else if(type.equals(FindCommand.COMMAND_WORD)) {
+            } else if (type.equals(FindCommand.COMMAND_WORD)) {
                 cmd = new FindCommand(description);
             } else {
                 throw new IllegalCommandException(

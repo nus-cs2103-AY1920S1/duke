@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * A class representing a find command.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     private String keyword;
 
@@ -21,7 +21,7 @@ public class FindCommand extends Command{
      * @throws IllegalDescriptionException If the keyword is empty.
      */
     public FindCommand(String keyword) throws IllegalDescriptionException {
-        if(keyword.isEmpty()) {
+        if (keyword.isEmpty()) {
             throw new IllegalDescriptionException("The keyword cannot be empty.");
         }
         this.keyword = keyword.toLowerCase();
@@ -33,11 +33,11 @@ public class FindCommand extends Command{
      * @param ui an user interface to show messages.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui){
+    public void execute(TaskList tasks, Ui ui) {
         List<Task> taskList = tasks.getTasks();
         List<Task> matchingTasks = new ArrayList<>();
-        for(Task task: taskList) {
-            if(task.toString().toLowerCase().indexOf(keyword) != -1) {
+        for (Task task: taskList) {
+            if (task.toString().toLowerCase().indexOf(keyword) != -1) {
                 matchingTasks.add(task);
             }
         }

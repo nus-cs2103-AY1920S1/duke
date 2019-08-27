@@ -10,6 +10,7 @@ public abstract class TimedTask extends Task {
 
     Calendar date;
     SimpleDateFormat dateFormat;
+    SimpleDateFormat fileDateFormat;
 
     /**
      * Constructor for the TimedTask object.
@@ -31,6 +32,7 @@ public abstract class TimedTask extends Task {
         DateFormatSymbols symbols = new DateFormatSymbols(Locale.getDefault());
         symbols.setAmPmStrings(new String[] { "am", "pm" });
         this.dateFormat.setDateFormatSymbols(symbols);
+        this.fileDateFormat = new SimpleDateFormat("d/M/yyyy kkm");
     }
 
     /**

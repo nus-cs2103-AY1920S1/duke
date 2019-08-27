@@ -34,6 +34,8 @@ public class TaskList {
             ps.println("Error occurred while loading file: \n" + e + "\nExiting program...");
             ps.close();
             System.exit(1);
+        } catch (DukeException e) {
+            ps.println("Error occurred while loading file: \n" + e + "\nExiting program...");
         }
     }
 

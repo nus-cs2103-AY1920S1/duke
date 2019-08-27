@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ui {
@@ -105,6 +107,38 @@ public class Ui {
         } else {
             System.out.println("     Now you have " + numOfTasksLeft + " tasks in the list.");
         }
+        showLine();
+    }
+
+    /**
+     * find and print any tasks containing the keyword.
+     * @param keyword the word to find for.
+     * @param taskList the list of tasks to look at.
+     */
+    public static void printFound(String keyword, TaskList taskList) {
+        Task[] tasks = taskList.getTasks();
+        ArrayList<Task> taskArrayList = new ArrayList<>(Arrays.asList(tasks));
+
+        showLine();
+
+        StringBuilder matchedTasks = new StringBuilder();
+        int counter = 1;
+        int index = 0;
+        while (tasks[index] != null && index < 100) {
+            if (tasks[index].getDescription().contains(keyword)) {
+                matchedTasks.append("     " + counter + ". " + tasks[index].toString());
+                matchedTasks.append("\n");
+                counter++;
+            } else {}
+            index++;
+        }
+        if (matchedTasks.toString().equals("")) {
+            System.out.println("     There are no matching tasks in your list.");
+        } else {
+            System.out.println("     Here are the matching tasks in your list:");
+        }
+        System.out.print(matchedTasks);
+
         showLine();
     }
 

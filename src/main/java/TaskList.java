@@ -27,12 +27,12 @@ public class TaskList {
      * @return The deleted task.
      */
     public static Task delete(int indextodel) {
-        ArrayList<Task> taskarraylist = new ArrayList<>(Arrays.asList(tasks));
-        Task removed = taskarraylist.remove(indextodel - 1);
+        ArrayList<Task> taskArrayList = new ArrayList<>(Arrays.asList(tasks));
+        Task removed = taskArrayList.remove(indextodel - 1);
 
         tasks = new Task[100];
-        for (int i = 0; i < taskarraylist.size(); i++) {
-            tasks[i] = taskarraylist.get(i);
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            tasks[i] = taskArrayList.get(i);
         }
         TaskList.updateTasks(tasks);
 

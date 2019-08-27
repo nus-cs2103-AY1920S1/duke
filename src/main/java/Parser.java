@@ -86,6 +86,12 @@ public class Parser {
                                 input = ui.readCommand();
                             }
                             break;
+                        case "find":
+                            String keyword = input.substring(5);
+                            ui.printFound(keyword, taskList);
+
+                            input = ui.readCommand();
+                            break;
                         default:
                             throw new UnknownInputException("☹ OOPS!!! I'm sorry, " +
                                     "but I don't know what that means :-(");

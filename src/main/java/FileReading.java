@@ -44,6 +44,7 @@ public class FileReading {
         String desc;
         String time = "";
         Scanner s = new Scanner(f);
+
         while (s.hasNextLine()) {
             fullLine = s.nextLine();
             String[] strArr = fullLine.split(" @ ");

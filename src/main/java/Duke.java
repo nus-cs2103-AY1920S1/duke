@@ -28,13 +28,13 @@ public class Duke {
             System.out.println("Oops. something went wrong with the duke.txt file");
         }
 
-        ui.greeting();
+        ui.sayGreeting();
 
         while (!input.equals("bye")) {
             input = scan.nextLine();
-            inputParser.actionDeterminer(input);
+            inputParser.determineAction(input);
         }
 
-        ui.goodbye();
+        ui.sayGoodbye();
     }
 }

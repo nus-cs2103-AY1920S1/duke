@@ -27,7 +27,7 @@ public class InputParser {
      * @see ModifyTaskList
      */
 
-    protected void actionDeterminer (String input) throws IOException {
+    protected void determineAction(String input) throws IOException {
 
         int taskNumber;
         String by;

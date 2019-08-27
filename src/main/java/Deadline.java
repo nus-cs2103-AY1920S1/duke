@@ -19,7 +19,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.date = DateParser.dateParser(by);
+        this.date = DateParser.parseDate(by);
         if (date != null) { this.by = date.toString(); }
     }
 

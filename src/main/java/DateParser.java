@@ -35,76 +35,60 @@ public class DateParser {
      * @return either a Date object or null value.
      */
 
-    public static Date dateParser (String date) {
+    public static Date parseDate(String date) {
 
         try {
             return formatter1.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }
         try {
             return formatter2.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter3.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter4.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter5.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter6.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter7.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }
         try {
             return formatter8.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }
         try {
             return formatter9.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter10.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter11.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter12.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter13.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter14.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }
         try {
             return formatter15.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
         }try {
             return formatter16.parse(date);
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
             return null;
         }
     }

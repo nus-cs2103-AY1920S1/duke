@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
@@ -24,9 +25,7 @@ public class Storage {
         ArrayList<Task> oldList = new ArrayList<>();
         while (s.hasNextLine()) {
             String task = s.nextLine();
-            System.out.println(task);
             String[] splitTask = task.split("\\|");
-            System.out.println(Arrays.toString(splitTask));
             switch(splitTask[0]) {
                 case "T":
                     ToDos todo = new ToDos(splitTask[2], formatter);
@@ -35,7 +34,8 @@ public class Storage {
                     break;
                 case "D":
                     try {
-                        Deadlines dl = new Deadlines(splitTask[2], formatter, formatter.parse(splitTask[3]));
+                        Date date = formatter.parse(splitTask[3]);
+                        Deadlines dl = new Deadlines(splitTask[2], formatter, date);
                         dl.done = isDone(Integer.parseInt(splitTask[1]));
                         oldList.add(dl);
                     } catch (ParseException e) {
@@ -44,7 +44,9 @@ public class Storage {
                     break;
                 case "E":
                     try {
-                        Events event = new Events(splitTask[2], formatter, formatter.parse(splitTask[3]));
+                        System.out.println(splitTask[3]);
+                        Date date = formatter.parse(splitTask[3]);
+                        Events event = new Events(splitTask[2], formatter, date);
                         event.done = isDone(Integer.parseInt(splitTask[1]));
                         oldList.add(event);
                     } catch (ParseException e) {

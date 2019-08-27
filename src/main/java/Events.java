@@ -29,7 +29,7 @@ public class Events extends Task {
         } else {
             output += "0|";
         }
-        output += this.name + "|" + this.time;
+        output += this.name + "|" + formatter.format(this.date);
         return output;
     }
 }

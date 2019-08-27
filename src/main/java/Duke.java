@@ -10,8 +10,8 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath, formatter);
         formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        storage = new Storage(filePath, formatter);
         try {
             listManager = new ListManager(storage.load(), formatter);
         } catch (FileNotFoundException e) {

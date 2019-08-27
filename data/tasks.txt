@@ -1,2 +1,3 @@
-T|0| hi there
-E|1|hi there | 2359
+T|0| hey there
+D|1|hi there |23/05/0019 2359
+E|0|yo |13/11/1219 2100

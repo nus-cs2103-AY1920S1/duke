@@ -5,43 +5,43 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(String s) throws DukeException {
         String[] lines = s.split("\n");
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
         for (String line : lines) {
             addTask(Task.fromImportFormat(line));
         }
     }
 
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
     public ArrayList<Task> getTaskList() {
-        return list;
+        return tasks;
     }
 
     public Task getTask(int taskNum) throws DukeException {
         try {
-            return list.get(taskNum - 1);
+            return tasks.get(taskNum - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index is out of bounds.");
         }
     }
 
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     public void deleteTask(int taskNum) throws DukeException {
         try {
-            list.remove(taskNum - 1);
+            tasks.remove(taskNum - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Index is out of bounds.");
         }
@@ -50,10 +50,10 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder myBuilder = new StringBuilder();
-        for (int i = 1; i <= list.size(); i++) {
-            Task myTask = list.get(i - 1);
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task myTask = tasks.get(i - 1);
             myBuilder.append(i + "." + myTask);
-            if (i < list.size()) {
+            if (i < tasks.size()) {
                 myBuilder.append("\n");
             }
         }

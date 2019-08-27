@@ -51,6 +51,7 @@ public class MessageGenerator {
     }
 
     public void printList(List<String> list) {
+        System.out.println(list.isEmpty());
         formatter.printFormat(listTasks(), list);
     }
 

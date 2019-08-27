@@ -1,70 +1,33 @@
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Storage {
 
-    Formatter formatter = new Formatter();
-    List<Task> taskList = new ArrayList<>();
-    MessageGenerator msgGenerator = new MessageGenerator();
+    Scanner sc;
 
-    public Storage() {
-        //placeholder value in task
-        taskList.add(null);
-    }
-
-    public int noTasks() {
-        return taskList.size() - 1;
-    }
-
-    public void addTask(Task task) {
-        taskList.add(task);
-        msgGenerator.printAdd(task, noTasks());
-    }
-
-    public void removeTask(int taskNo) {
-        msgGenerator.printRemove(taskList.get(taskNo), noTasks()-1);
-        taskList.remove(taskNo);
-    }
-
-    public List<String> listify() {
-        List<String> list = new ArrayList<String>();
-        for (Task task: taskList) {
-            if (task != null) {
-                list.add(task.toString());
-            }
-        }
-        return list;
-    }
-
-    public void printList() {
-        msgGenerator.printList(listify());
-    }
-
-    public boolean invalidTaskNo(int taskNo) {
-        return taskNo >= taskList.size();
-    }
-
-    public void setDone(int taskNo) {
+    public Storage (String filePath) {
+        File f = new File(filePath);
         try {
-            if (invalidTaskNo(taskNo)) {
-                throw new InvalidItemException();
+            if (!f.exists()) {
+                throw new FileNotFoundException();
             }
-            taskList.get(taskNo).setDone();
-            msgGenerator.printDone(taskList.get(taskNo));
-        } catch (DukeException e) {
-            e.printError();
+            sc = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
         }
     }
 
-    public void deleteTask(int taskNo) {
-        try {
-            if (invalidTaskNo(taskNo)) {
-                throw new InvalidItemException();
-            }
-            removeTask(taskNo);
-        } catch (DukeException e) {
-            e.printError();
+    public List<String> processInput() {
+        List<String> inputs = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            inputs.add(sc.nextLine());
         }
+        return inputs;
     }
 
 }

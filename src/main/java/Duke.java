@@ -1,14 +1,32 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         // Greet user
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
+        System.out.println("This is your current list of tasks");
+        // Get data from duke.txt
+        ArrayList<Task> tasks = getDataFromFile();
+        if (tasks.size() == 0) {
+            System.out.println("You do not have any stored tasks");
+        }
+        else {
+            for (int i = 0; i < tasks.size(); i++) {
+                int currentItemNumber = i + 1;
+                Task currentTask = tasks.get(i);
+                System.out.println(currentItemNumber + "." + currentTask);
+            }
+        }
         // Ask initial user input
         String userinput = scanner.nextLine();
 
@@ -31,7 +49,7 @@ public class Duke {
                     int itemId = Integer.parseInt(words[1]);
                     Task currentTask = tasks.get(itemId - 1);
                     currentTask.setDone(true);
-                    System.out.println("Nice! I've marked this task as done:\n[✓] " + currentTask.getName());
+                    System.out.println("Nice! I've marked this task as done:\n[1] " + currentTask.getName());
                 }
                 // Delete
                 else if (words[0].equals("delete")) {
@@ -98,6 +116,84 @@ public class Duke {
         }
 
         // At this point userinput equals "bye"
+        // Save data to file
+        saveDataToFile(tasks);
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static ArrayList<Task> getDataFromFile() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            File file = new File("data/duke.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String currentLine = sc.nextLine();
+                String[] words = currentLine.split("\\|");
+                boolean isDone;
+                if (words[1].equals("1")) {
+                    isDone = true;
+                }
+                else {
+                    isDone = false;
+                }
+                if (words[0].equals("T")) {
+                    tasks.add(new Todo(words[2], isDone));
+                }
+                else if (words[0].equals("D")) {
+                    tasks.add(new Deadline(words[2], isDone, words[3]));
+                }
+                else if (words[0].equals("E")) {
+                    tasks.add(new Event(words[2], isDone, words[3]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file to get data from.");
+        }
+        return tasks;
+    }
+    private static void saveDataToFile(ArrayList<Task> tasks) {
+        try {
+            PrintWriter out = new PrintWriter(new File("data/duke.txt"));
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currentTask = tasks.get(i);
+                if(currentTask instanceof Todo) {
+                    out.print("T|");
+                    if (currentTask.hasDone()) {
+                        out.print("1|");
+                    }
+                    else {
+                        out.print("0|");
+                    }
+                    out.println(currentTask.getName());
+                }
+                else if (currentTask instanceof Deadline) {
+                    out.print("D|");
+                    if (currentTask.hasDone()) {
+                        out.print("1|");
+                    }
+                    else {
+                        out.print("0|");
+                    }
+                    out.print(currentTask.getName());
+                    out.print("|");
+                    out.println(((Deadline) currentTask).getTime());
+                }
+                else if(currentTask instanceof Event) {
+                    out.print("E|");
+                    if (currentTask.hasDone()) {
+                        out.print("1|");
+                    }
+                    else {
+                        out.print("0|");
+                    }
+                    out.print(currentTask.getName());
+                    out.print("|");
+                    out.println(((Deadline) currentTask).getTime());
+                }
+            }
+            out.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No such file to save data to.");
+        }
     }
 }

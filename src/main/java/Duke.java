@@ -1,17 +1,27 @@
 import java.util.Scanner;
 
+/**
+ * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke with given filePath to load Tasks in the file.
+     * @param filePath The file that saves the Tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Runs the Duke.
+     */
     public void run() {
         ui.showWelcome();
         ui.showLine();

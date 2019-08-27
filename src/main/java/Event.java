@@ -3,10 +3,19 @@ import java.time.LocalTime;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event.
+ */
 public class Event extends Task {
     private Date date;
     private LocalTime time;
 
+    /**
+     * Creates a new Event with given description, date and time.
+     * @param description The description of Event.
+     * @param date The date of Event.
+     * @param time The time of Event.
+     */
     public Event(String description, Date date, LocalTime time) {
         super(description);
         this.date = date;
@@ -40,6 +49,6 @@ public class Event extends Task {
         }
 
         Event other = (Event) o;
-        return this.description == ((Event) o).description;
+        return this.description == other.description;
     }
 }

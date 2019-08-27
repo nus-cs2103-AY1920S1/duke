@@ -1,3 +1,6 @@
+/**
+ * Represents user interface that deals with interactions with user.
+ */
 public class Ui {
 
     public void showWelcome() {
@@ -18,6 +21,10 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Print out the TaskList in order.
+     * @param TaskList The list of task.
+     */
     public void showTaskList(TaskList TaskList) {
         System.out.println("\tHere are the tasks in your list:");
 
@@ -32,6 +39,13 @@ public class Ui {
         System.out.println("\t____________________________________________________________________");
     }
 
+    /**
+     * Takes in Command, parse it and returns the changed list.
+     * @param str The String of command.
+     * @param list The list of task.
+     * @return The list of task.
+     * @throws Exception If command is missing input.
+     */
     public TaskList input(String str, TaskList list) throws Exception {
         String[] strArr = str.split(" ");
         Parser parser = new Parser();

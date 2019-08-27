@@ -1,3 +1,6 @@
+/**
+ * Represents a Todo to be completed.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -19,6 +22,6 @@ public class Todo extends Task {
         }
 
         Todo other = (Todo) o;
-        return this.description == ((Todo) o).description;
+        return this.description == other.description;
     }
 }

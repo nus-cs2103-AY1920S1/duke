@@ -10,10 +10,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage point for data that is input by the user.
+ */
 public class Storage {
     public File planner;
     public String filePath;
 
+    /**
+     * Constructor for Storage object.
+     * @param filePath path of the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -25,6 +32,12 @@ public class Storage {
         return taskArrayList;
     }
 
+    /**
+     * Create a task list by reading the text file.
+     * @param file Text file.
+     * @return taskArrayList. Array list of tasks.
+     * @throws DukeException if there is an error reading the file.
+     */
     public ArrayList<Task> createTaskList(File file) throws DukeException {
         ArrayList<Task> taskArrayList = new ArrayList<>();
         try {
@@ -58,18 +71,32 @@ public class Storage {
         }
     }
 
+    /**
+     * Sets the tasks to done accordingly
+     * @param task Task.
+     * @param flag Flag to check if task is done.
+     */
     public void setDoneFlag(Task task, String flag) {
         if (flag.equals("+")) {
             task.changeSign();
         }
     }
 
+    /**
+     * Giving permissions to edit the file.
+     * @param planner Planner.
+     */
     private void setPlannerPermissions(File planner) {
         planner.setExecutable(true);
         planner.setReadable(true);
         planner.setWritable(true);
     }
 
+    /**
+     * Update the file with tasks from task list.
+     * @param taskList task list.
+     * @throws DukeException if there is an error with writing on the file.
+     */
     public void writeListToFile(TaskList taskList) throws DukeException {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> tasks = taskList.getCommandList();
@@ -80,6 +107,11 @@ public class Storage {
         writeStringToFile(sb.toString().trim());
     }
 
+    /**
+     * Updates the file with individual strings.
+     * @param text String to update the file with.
+     * @throws DukeException if there is an error with writing on the file.
+     */
     public void writeStringToFile(String text) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner);

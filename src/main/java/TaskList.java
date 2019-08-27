@@ -1,8 +1,11 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 	protected static ArrayList<Task> tasks;
@@ -95,6 +98,20 @@ public class TaskList {
 		System.out.println(tasks.get(index));
 	}
 	
+	public void findTask(String input) {
+		String keyword = input.substring(5);
+		ArrayList<Task> filtered = copy(this.tasks);
+		System.out.println("Here are the matching tasks in your list.");
+		filtered.stream().filter(p -> p.description.contains(keyword)).forEach(System.out::println);
+	}
+	
+	public ArrayList<Task> copy(ArrayList<Task> tasks) {
+		ArrayList<Task> duplicate = new ArrayList<>();
+		for (int i = 0; i < tasks.size(); i++) {
+			duplicate.add(tasks.get(i));
+		}
+		return duplicate;
+	}
 	public static void printOut(Task task) {
 		System.out.println("Got it. I've added this task:");
 		System.out.println(task);

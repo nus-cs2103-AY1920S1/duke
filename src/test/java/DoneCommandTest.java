@@ -6,7 +6,7 @@ import java.util.List;
 class DoneCommandTest extends CommandTest {
 
     @Test
-    void doValidMarkDone() {
+    void execute_validParams_taskMarkedAsDone() {
         List<Task> actualTasks = mutableTaskListOf(
                 new Todo("initially not done todo", false)
         );
@@ -27,21 +27,21 @@ class DoneCommandTest extends CommandTest {
     }
 
     @Test
-    void doMarkDoneMissingIndex() {
+    void execute_missingTaskNumber_exceptionThrown() {
         Assertions.assertThrows(NumberFormatException.class, () -> {
             new DoneCommand("");
         });
     }
 
     @Test
-    void doMarkDoneNonNumericIndex() {
+    void execute_nonNumericTaskNumber_exceptionThrown() {
         Assertions.assertThrows(NumberFormatException.class, () -> {
             new DoneCommand("garbage input");
         });
     }
 
     @Test
-    void doMarkDoneInvalidIndex() {
+    void execute_noTaskForGivenTaskNumber_exceptionThrown() {
         command = new DoneCommand("1");
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             command.execute(mutableTaskListOf(), ui, store);
@@ -49,7 +49,7 @@ class DoneCommandTest extends CommandTest {
     }
 
     @Test
-    void doMarkDoneOutOfRangeIndex() {
+    void execute_outOfRangeTaskNumber_exceptionThrown() {
         command = new DoneCommand("0");
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             command.execute(mutableTaskListOf(), ui, store);
@@ -57,7 +57,7 @@ class DoneCommandTest extends CommandTest {
     }
 
     @Test
-    void doMarkDoneOutOfNegativeIndex() {
+    void execute_negativeTaskNumber_exceptionThrown() {
         command = new DoneCommand("-1");
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             command.execute(mutableTaskListOf(), ui, store);

@@ -7,7 +7,7 @@ import java.util.List;
 
 class AddEventTaskCommandTest extends CommandTest {
     @Test
-    void addValidEvent() {
+    void execute_validParams_newEventAdded() {
         List<Task> expectedTasks = List.of(
                 new Event("an event to attend", false, LocalDateTime.of(2019, 8, 6, 14, 0))
         );
@@ -31,35 +31,35 @@ class AddEventTaskCommandTest extends CommandTest {
     }
 
     @Test
-    void addEventMissingArgs() {
+    void execute_missingParams_exceptionThrown() {
         Assertions.assertThrows(EmptyTaskDescriptionException.class, () -> {
             new AddEventTaskCommand("");
         });
     }
 
     @Test
-    void addEventMissingDescription() {
+    void execute_missingDescription_exceptionThrown() {
         Assertions.assertThrows(EmptyTaskDescriptionException.class, () -> {
             new AddEventTaskCommand("/at 6/8/2019 1400");
         });
     }
 
     @Test
-    void addEventMissingDateTime() {
+    void execute_missingDateTime_exceptionThrown() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddEventTaskCommand("an event to attend");
         });
     }
 
     @Test
-    void addEventBlankDateTime() {
+    void execute_blankDateTime_exceptionThrown() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddEventTaskCommand("an event to attend /at");
         });
     }
 
     @Test
-    void addEventUnexpectedDateFormat() {
+    void execute_incorrectDateTimeFormat_exceptionThrown() {
         Assertions.assertThrows(DateTimeParseException.class, () -> {
             new AddEventTaskCommand("an event to attend /at 12/31/2019 1400");
         });

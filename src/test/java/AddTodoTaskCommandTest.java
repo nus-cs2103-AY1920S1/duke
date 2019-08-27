@@ -6,7 +6,7 @@ import java.util.List;
 class AddTodoTaskCommandTest extends CommandTest {
 
     @Test
-    void addValidTodo() {
+    void execute_validParams_newTodoAdded() {
         List<Task> expectedTasks = List.of(
                 new Todo("a thing that needs to be done", false)
         );
@@ -30,7 +30,7 @@ class AddTodoTaskCommandTest extends CommandTest {
     }
 
     @Test
-    void addTodoMissingDescription() {
+    void execute_missingParams_exceptionThrown() {
         Assertions.assertThrows(EmptyTaskDescriptionException.class, () -> {
             new AddTodoTaskCommand("");
         });

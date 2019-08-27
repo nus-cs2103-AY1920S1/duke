@@ -4,7 +4,7 @@ import java.util.List;
 
 class ListCommandTest extends CommandTest {
     @Test
-    void listTasks() {
+    void execute_nonEmptyTaskList_tasksDisplayed() {
         List<Task> tasks = List.of(new Todo("a thing that really needs to be done", false));
         command = new ListCommand();
         command.execute(tasks, ui, store);
@@ -18,7 +18,7 @@ class ListCommandTest extends CommandTest {
     }
 
     @Test
-    void listEmptyTaskList() {
+    void execute_emptyTaskList_noTasksDisplayed() {
         List<Task> emptyTaskList = List.of();
         command = new ListCommand();
         command.execute(emptyTaskList, ui, store);

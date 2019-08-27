@@ -5,7 +5,7 @@ import java.util.List;
 
 class DeleteCommandTest extends CommandTest {
     @Test
-    void doValidDelete() {
+    void execute_validParams_taskDeleted() {
         List<Task> expectedTasks = List.of(new Todo("a thing that needs to be done", false));
         List<Task> actualTasks = mutableTaskListOf(
                 new Todo("a todo to be deleted", false),
@@ -30,21 +30,21 @@ class DeleteCommandTest extends CommandTest {
     }
 
     @Test
-    void doDeleteMissingIndex() {
+    void execute_missingTaskNumber_exceptionThrown() {
         Assertions.assertThrows(NumberFormatException.class, () -> {
             new DeleteCommand("");
         });
     }
 
     @Test
-    void doDeleteNonNumericIndex() {
+    void execute_nonNumericTaskNumber_exceptionThrown() {
         Assertions.assertThrows(NumberFormatException.class, () -> {
             new DeleteCommand("garbage input");
         });
     }
 
     @Test
-    void doDeleteInvalidIndex() {
+    void execute_noTaskForGivenTaskNumber_exceptionThrown() {
         command = new DeleteCommand("1");
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             command.execute(mutableTaskListOf(), ui, store);
@@ -52,7 +52,7 @@ class DeleteCommandTest extends CommandTest {
     }
 
     @Test
-    void doDeleteOutOfRangeIndex() {
+    void execute_outOfRangeTaskNumber_exceptionThrown() {
         command = new DeleteCommand("0");
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             command.execute(mutableTaskListOf(), ui, store);
@@ -60,7 +60,7 @@ class DeleteCommandTest extends CommandTest {
     }
 
     @Test
-    void doDeleteOutOfNegativeIndex() {
+    void execute_negativeTaskNumber_exceptionThrown() {
         command = new DeleteCommand("-1");
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
             command.execute(mutableTaskListOf(), ui, store);

@@ -5,7 +5,7 @@ import java.util.List;
 
 class FindTaskCommandTest extends CommandTest {
     @Test
-    void findTask() {
+    void execute_matchingKeyword_matchingTasksDisplayed() {
         List<Task> actualTasks = List.of(
                 new Todo("not done todo", false),
                 new Todo("done todo", true),
@@ -35,7 +35,7 @@ class FindTaskCommandTest extends CommandTest {
     }
 
     @Test
-    void findTaskNonMatchingKeyword() {
+    void execute_nonMatchingKeyword_noTasksDisplayed() {
         List<Task> actualTasks = List.of(
                 new Todo("not done todo", false),
                 new Todo("done todo", true),
@@ -61,7 +61,7 @@ class FindTaskCommandTest extends CommandTest {
     }
 
     @Test
-    void findTaskEmptyTaskList() {
+    void execute_emptyTaskList_noTasksDisplayed() {
         List<Task> actualTasks = List.of();
         String expectedDisplay = "\t____________________________________________________________\n"
                 + "\tHere are the matching tasks in your list:\n"
@@ -76,7 +76,7 @@ class FindTaskCommandTest extends CommandTest {
     }
 
     @Test
-    void findTaskBlankKeyword() {
+    void execute_blankKeyword_allTasksDisplayed() {
         List<Task> actualTasks = List.of(
                 new Todo("not done todo", false),
                 new Todo("done todo", true),

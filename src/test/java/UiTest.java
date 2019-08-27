@@ -72,25 +72,25 @@ class UiTest {
     }
 
     @Test
-    void printHorizontalLine() {
+    void printHorizontalLine_horizontalLineDisplayed() {
         ui.printHorizontalLine();
         Assertions.assertEquals(HORIZONTAL_LINE, mockedSysOut.toString());
     }
 
     @Test
-    void println() {
+    void println_newLineDisplayed() {
         ui.println();
         Assertions.assertEquals("\n", mockedSysOut.toString());
     }
 
     @Test
-    void printlnContent() {
+    void printlnContent_contentDisplayed() {
         ui.println("Here's some text");
         Assertions.assertEquals("\tHere's some text\n", mockedSysOut.toString());
     }
 
     @Test
-    void printBlock() {
+    void printBlock_blockOfContentDisplayed() {
         String expected = HORIZONTAL_LINE
                 + "\tHere's some text\n"
                 + HORIZONTAL_LINE;
@@ -99,14 +99,14 @@ class UiTest {
     }
 
     @Test
-    void stringJoinerContent() {
+    void createStringJoiner_singleLineOfContent_oneContentLineDisplayed() {
         String expected = "Here's some text";
         String actual = Ui.createStringJoiner("Here's some text").toString();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void stringJoinerMultilineContent() {
+    void createStringJoiner_multilineContent_multipleContentLinesDisplayed() {
         String expected = "Here's some text\nHere's more text";
         String actual = Ui.createStringJoiner("Here's some text").add("Here's more text").toString();
         Assertions.assertEquals(expected, actual);
@@ -114,7 +114,7 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void formatTask(Task t, String expectedTaskString) {
+    void formatTask_taskImplementingInstance_userFriendlyTaskString(Task t, String expectedTaskString) {
         Assertions.assertEquals(expectedTaskString, Ui.formatTask(t));
     }
 
@@ -130,7 +130,7 @@ class UiTest {
     }
 
     @Test
-    void displayLoadingError() {
+    void displayLoadingError_simpleException_userFriendlyLoadingErrorMessageDisplayed() {
         String expected = HORIZONTAL_LINE
                 + "\t ☹ OOPS!!! Couldn't load previously saved Tasks."
                 + "\n\tDuke will start with an empty Task list."
@@ -144,7 +144,7 @@ class UiTest {
     }
 
     @Test
-    void displayLoadingErrorWithCause() {
+    void displayLoadingError_nestedException_userFriendlyLoadingErrorMessageWithInnerCauseDisplayed() {
         String expected = HORIZONTAL_LINE
                 + "\t ☹ OOPS!!! Couldn't load previously saved Tasks."
                 + "\n\tDuke will start with an empty Task list."
@@ -161,7 +161,7 @@ class UiTest {
 
 
     @Test
-    void displayErrorException() {
+    void displayError_simpleDukeException_userFriendlyErrorMessageDisplayed() {
         String expected = HORIZONTAL_LINE
                 + "\t ☹ OOPS!!! egads!"
                 + "\n" + HORIZONTAL_LINE
@@ -172,7 +172,7 @@ class UiTest {
     }
 
     @Test
-    void displayErrorString() {
+    void displayError_errorMessageString_userFriendlyErrorMessageDisplayed() {
         String expected = HORIZONTAL_LINE
                 + "\t ☹ OOPS!!! egads!"
                 + "\n" + HORIZONTAL_LINE
@@ -182,7 +182,7 @@ class UiTest {
     }
 
     @Test
-    void displayTasks() {
+    void displayTasks_mixedTaskTypeListWithoutTitle_userFriendlyListOfTasksDisplayed() {
         String expected = HORIZONTAL_LINE;
         List<Task> tasks = new ArrayList<>();
         int idx = 1;
@@ -202,7 +202,7 @@ class UiTest {
     }
 
     @Test
-    void displayTasksWithTitle() {
+    void displayTasks_mixedTaskTypeListWithTitle_titleThenUserFriendlyListOfTasksDisplayed() {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n";
         List<Task> tasks = new ArrayList<>();
@@ -224,7 +224,7 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void displaySuccessfullyDoneTask(Task t, String expectedTaskString) {
+    void displaySuccessfullyDoneTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(Task t, String expectedTaskString) {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n"
                 + "\t  " + expectedTaskString + "\n"
@@ -236,7 +236,7 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void displaySuccessfullyRemovedTask(Task t, String expectedTaskString) {
+    void displaySuccessfullyRemovedTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(Task t, String expectedTaskString) {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n"
                 + "\t  " + expectedTaskString + "\n"
@@ -249,7 +249,7 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void displaySuccessfullyAddedTask(Task t, String expectedTaskString) {
+    void displaySuccessfullyAddedTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(Task t, String expectedTaskString) {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n"
                 + "\t  " + expectedTaskString + "\n"

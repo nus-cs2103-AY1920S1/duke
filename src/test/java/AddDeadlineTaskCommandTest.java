@@ -7,7 +7,7 @@ import java.util.List;
 
 class AddDeadlineTaskCommandTest extends CommandTest {
     @Test
-    void addValidDeadline() {
+    void execute_validParams_newDeadlineAdded() {
         List<Task> expectedTasks = List.of(
                 new Deadline("a deadline to meet", false, LocalDateTime.of(2019, 6, 6, 0, 0))
         );
@@ -32,35 +32,35 @@ class AddDeadlineTaskCommandTest extends CommandTest {
 
 
     @Test
-    void addDeadlineMissingArgs() {
+    void execute_missingParams_exceptionThrown() {
         Assertions.assertThrows(EmptyTaskDescriptionException.class, () -> {
             new AddDeadlineTaskCommand("");
         });
     }
 
     @Test
-    void addDeadlineMissingDescription() {
+    void execute_missingDescription_exceptionThrown() {
         Assertions.assertThrows(EmptyTaskDescriptionException.class, () -> {
             new AddDeadlineTaskCommand("/by 6/6/2019 0000");
         });
     }
 
     @Test
-    void addDeadlineMissingDateTime() {
+    void execute_missingDateTime_exceptionThrown() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddDeadlineTaskCommand("a deadline to meet");
         });
     }
 
     @Test
-    void addDeadlineBlankDateTime() {
+    void execute_blankDateTime_exceptionThrown() {
         Assertions.assertThrows(Throwable.class, () -> {
             new AddDeadlineTaskCommand("a deadline to meet /by");
         });
     }
 
     @Test
-    void addDeadlineUnexpectedDateFormat() {
+    void execute_incorrectDateTimeFormat_exceptionThrown() {
         Assertions.assertThrows(DateTimeParseException.class, () -> {
             new AddDeadlineTaskCommand("a deadline to meet /by 12/31/2019 0000");
         });

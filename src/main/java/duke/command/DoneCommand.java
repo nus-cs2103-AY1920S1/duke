@@ -1,7 +1,16 @@
-public class DeleteCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.common.Message;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.UserInterface;
+
+public class DoneCommand extends Command {
     private int index;
 
-    public DeleteCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 
@@ -10,9 +19,8 @@ public class DeleteCommand extends Command {
         if (index <= 0 || index > taskList.size()) {
             throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
         }
-        Task task = taskList.delete(index);
+        Task task = taskList.markDone(index);
         storage.save(taskList.getSimplifiedTaskRepresentations());
-        ui.showDeletion(task);
-        ui.showTaskSize(taskList);
+        ui.showMarkDone(task);
     }
 }

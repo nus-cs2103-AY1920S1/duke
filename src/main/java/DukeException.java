@@ -1,6 +1,5 @@
 public class DukeException extends Exception {
 
-    private String border = "    ____________________________________________________________";
     private String s;
 
     public DukeException(String s) {
@@ -8,8 +7,4 @@ public class DukeException extends Exception {
         this.s = s;
     }
 
-    @Override
-    public String toString() {
-        return border + "\n" + s + "\n" + border;
-    }
 }

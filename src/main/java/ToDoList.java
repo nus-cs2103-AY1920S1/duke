@@ -102,7 +102,7 @@ public class ToDoList {
 
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
-        String border = "    ____________________________________________________________";
+        Ui ui = new Ui();
 
         File f = new File("./todoList.txt");
         if (!f.exists()) {
@@ -110,60 +110,34 @@ public class ToDoList {
         }
         ArrayList<Task> arr = fileInitialization(f);
 
-        int counter = arr.size();
-
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                System.out.println(border);
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < counter; i++) {
-                    System.out.println("     " + (i + 1) + "." + arr.get(i));
-                }
-                System.out.println(border);
+                ui.printList(arr);
             } else {
                 String[] temp = input.split(" ");
                 if (temp.length == 0) {
-                    System.out.println(border);
-                    System.out.println("     Please input something :(.");
-                    System.out.println(border);
+                    ui.printMessage("Please input something :(");
                 } else if (temp[0].equals("done")) {
                     try {
-                        int done = Integer.parseInt(temp[1]) - 1;
-                        arr.get(done).markAsDone();
-                        System.out.println(border);
-                        System.out.println("     Nice! I've marked this task as done: ");
-                        System.out.println("       " + arr.get(done));
-                        System.out.println(border);
+                        int index = Integer.parseInt(temp[1]) - 1;
+                        ui.printDone(arr, index);
                         arrayToFile(f, arr);
-
                     } catch (NullPointerException e) {
-                        System.out.println(border);
-                        System.out.println("     Please input a valid task number.");
-                        System.out.println(border);
+                        ui.printError("Please input a valid task number.");
                     }
 
                 } else if (temp[0].equals("delete")) { //command to delete task
                     try {
-                        Task toRemove = arr.get(Integer.parseInt(temp[1]) - 1);
-                        counter--;
-                        System.out.println(border);
-                        System.out.println("     Noted. I've removed this task:");
-                        System.out.println("       " + toRemove);
-                        System.out.printf("     Now you have %s tasks in the list.\n", counter);
-                        System.out.println(border);
-                        arr.remove(Integer.parseInt(temp[1]) - 1);
+                        Task toRemove = arr.remove(Integer.parseInt(temp[1]) - 1);
+                        ui.printRemove(arr, toRemove);
                         arrayToFile(f, arr);
 
                     } catch (NullPointerException e) {
-                        System.out.println(border);
-                        System.out.println("     Please input a valid task number to delete.");
-                        System.out.println(border);
+                        ui.printError("Please input a valid task number to delete.");
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println(border);
-                        System.out.println("     Please input a valid task number to delete.");
-                        System.out.println(border);
+                        ui.printError("Please input a valid task number to delete.");
                     }
                 } else { //command to add task to list
 
@@ -185,7 +159,7 @@ public class ToDoList {
                             break;
                         case "todo":
                             if (temp.length < 2) {
-                                throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
+                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                             }
                             addToDo(input, arr, false);
                             added = true;
@@ -194,29 +168,19 @@ public class ToDoList {
                         }
 
                         if (added) {
-                            counter++;
-                            System.out.println(border);
-                            System.out.println("     Got it. I've added this task: ");
-                            System.out.println("       " + arr.get(counter - 1));
-                            System.out.printf("     Now you have %s tasks in the list.\n", counter);
-                            System.out.println(border);
+                            ui.printAdd(arr);
                         } else {
-                            throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
+
                     } catch (DukeException e) {
-                        System.out.println(e);
+                        ui.printError(e.getMessage());
                     } catch (StringIndexOutOfBoundsException e) {
-                        System.out.println(border);
-                        System.out.println("     Please input a task and date.");
-                        System.out.println(border);
+                        ui.printError("Please input a task and date.");
                     } catch (IndexOutOfBoundsException e) {
-                        System.out.println(border);
-                        System.out.println("     Please input a valid date and time.");
-                        System.out.println(border);
+                        ui.printError("Please input a valid date and time.");
                     } catch (NumberFormatException e) {
-                        System.out.println(border);
-                        System.out.println("     Please input a valid date and time.");
-                        System.out.println(border);
+                        ui.printError("Please input a valid date and time.");
                     }
 
                 }
@@ -225,7 +189,7 @@ public class ToDoList {
             input = sc.nextLine();
         }
         if (input.equals("bye")) {
-            System.out.println(border + "\n" + "     Bye. Hope to see you again soon!" + "\n" + border);
+            ui.printBye();
         }
     }
 }

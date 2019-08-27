@@ -1,10 +1,13 @@
+import customexceptions.*;
+import tasks.TaskList;
+
 public class Parser {
-    public static void parseDeadline(String input, TaskList t,Ui ui,Storage s) throws DukeException {
+    public static void parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         String deadlineDetails = input.substring(9);
         try {
             int index = deadlineDetails.indexOf("/");
             String name = deadlineDetails.substring(0,index);
-            String details = deadlineDetails.substring(index+1);
+            String details = deadlineDetails.substring(index+4);
             Deadline deadline = new Deadline(name, details);
             if (details.length() == 0) {
                 throw new DeadlineDetailsEmptyException("OOPS!!! Deadline details cannot be empty");
@@ -23,7 +26,7 @@ public class Parser {
         try {
             int index = eventDetails.indexOf("/");
             String name = eventDetails.substring(0,index);
-            String details = eventDetails.substring(index+1);
+            String details = eventDetails.substring(index+3);
             Event event = new Event(name, details);
             if (details.length() == 0) {
                 throw new EventDetailsEmptyException("OOPS!!! Event details cannot be empty.");
@@ -52,7 +55,7 @@ public class Parser {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
         if (number > t.getCommandList().size() + 1) {
-            throw new TaskNotFoundException("OOPS!!! Task number is incorrect");
+            throw new TaskNotFoundException("OOPS!!! tasks.Task number is incorrect");
         }
         t.getCommandList().get(number - 1).complete();
         s.writeListToFile(t);
@@ -62,7 +65,7 @@ public class Parser {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
         if (number > t.getCommandList().size() + 1) {
-            throw new TaskNotFoundException("OOPS!!! Task number is incorrect");
+            throw new TaskNotFoundException("OOPS!!! tasks.Task number is incorrect");
         }
         ui.showDeleted();
         System.out.println(t.getCommandList().get(number - 1));

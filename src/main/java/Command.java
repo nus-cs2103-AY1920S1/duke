@@ -1,3 +1,7 @@
+import customexceptions.DukeException;
+import customexceptions.IncorrectInputException;
+import tasks.TaskList;
+
 public class Command {
     private String input;
 
@@ -5,7 +9,7 @@ public class Command {
         this.input = input;
     }
 
-    public void execute(Ui ui, TaskList t,Storage s) throws DukeException {
+    public void execute(Ui ui, TaskList t, Storage s) throws DukeException {
         if (input.length() <= 3) {
             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else {

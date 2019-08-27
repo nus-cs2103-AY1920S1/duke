@@ -1,3 +1,6 @@
+import customexceptions.DukeException;
+import tasks.Task;
+
 public class Event extends Task {
     private String eventTime;
     private String dateTime;
@@ -6,16 +9,10 @@ public class Event extends Task {
         super(name);
     }
 
-    public Event(String name, String eT) throws DukeException{
+    public Event(String name, String eT) throws DukeException {
         super(name);
         this.eventTime = eT;
-        this.dateTime = formatDateTime(eT.substring(2).trim());
-
-    }
-    public void formatEventTime(String eT) throws DukeException {
-        String format = eT.substring(0,2) + ":" + eT.substring(2);
-        this.eventTime = format;
-        this.dateTime = formatDateTime(eT.substring(2).trim());
+        this.dateTime = formatDateTime(eT.trim());
     }
 
 

@@ -1,4 +1,7 @@
-public class Deadline extends Task   {
+import customexceptions.DukeException;
+import tasks.Task;
+
+public class Deadline extends Task {
     private String deadlineTime;
     private String dateTime;
 
@@ -6,15 +9,14 @@ public class Deadline extends Task   {
         super(name);
     }
 
-    public Deadline(String name, String dT) throws DukeException{
+    public Deadline(String name, String dT) throws DukeException {
         super(name);
         this.deadlineTime = dT;
-        this.dateTime = formatDateTime(dT.substring(3).trim());
+        this.dateTime = formatDateTime(dT.trim());
     }
 
     public String toString() {
         return "D|" + super.toString().trim() + "|" + dateTime.trim();
-
     }
 
 

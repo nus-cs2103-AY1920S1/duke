@@ -5,6 +5,9 @@ import duke.exception.*;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+/**
+ * Main Driver class housing the infinite loop.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -21,6 +24,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The main loop for Duke.
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;

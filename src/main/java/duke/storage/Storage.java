@@ -19,6 +19,9 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
 import static duke.task.TaskType.*;
 
+/**
+ * Handles writing all tasks from Duke and reading all tasks from the hard disk.
+ */
 public class Storage {
     private Path path;
 
@@ -26,6 +29,12 @@ public class Storage {
         this.path = Paths.get(uri);
     }
 
+    /**
+     * Reads all tasks from the file in the specified path.
+     *
+     * @return a TaskList instance containing the read tasks.
+     * @throws DukeIOException when an error occurs trying to read from the file.
+     */
     public TaskList readFromDisk() throws DukeIOException {
         Charset charset = Charset.forName("ISO-8859-1");
         TaskList taskList = new TaskList();
@@ -53,6 +62,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes all tasks in the given TaskList into a text file in the specified path.
+     *
+     * @param taskList the TaskList to write to the hard disk.
+     * @return the TaskList that was written to the hard disk.
+     * @throws DukeException when an error occurs trying to write to the file.
+     */
     public TaskList writeToDisk(TaskList taskList) throws DukeException {
         Charset charset = Charset.forName("ISO-8859-1");
         ArrayList<Task> tasks = taskList.getTaskList();

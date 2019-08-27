@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task to be done at some specified time.
+ */
 public class Event extends Task {
     private String period;
 

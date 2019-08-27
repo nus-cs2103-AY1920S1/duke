@@ -9,6 +9,13 @@ public class ListCommand extends Command {
         super(isExit);
     }
 
+    /**
+     * Lists all tasks in Duke's TaskList.
+     *
+     * @param taskList the TaskList instance Duke is referencing.
+     * @param ui the Ui instance handling user-facing interaction.
+     * @param storage the Storage instance dealing with hard disk reading/writing.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showTaskList(taskList);

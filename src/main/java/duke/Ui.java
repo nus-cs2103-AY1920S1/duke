@@ -33,22 +33,44 @@ public class Ui {
         this.out = out;
     }
 
+    /**
+     * Prints a prefixed divider.
+     */
     public void showLine() {
         showToUser(DIVIDER);
     }
 
+    /**
+     * Prints a prefixed error message.
+     *
+     * @param e the error to display.
+     */
     public void showError(DukeException e) {
         showToUser(e.getMessage());
     }
 
+    /**
+     * Prints Duke's welcome message.
+     */
     public void showWelcomeMessage() {
         showToUser(DIVIDER, WELCOME_MESSAGE, DIVIDER);
     }
 
+    /**
+     * Reads the next line of input.
+     *
+     * @return the next line of input.
+     */
     public String readCommand() {
         return in.nextLine();
     }
 
+    /**
+     * Prints the message when a new task is added.
+     *
+     * @param task the new task added.
+     * @param taskCount the number of tasks currently in the task list.
+     */
     public void showAddMessage(Task task, long taskCount) {
         showToUser(ADD_MESSAGE,
                 task.toString(),
@@ -57,11 +79,22 @@ public class Ui {
                     : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
+    /**
+     * Prints the message when a task is marked as complete.
+     *
+     * @param task the task marked as complete.
+     */
     public void showDoneMessage(Task task) {
         showToUser(DONE_MESSAGE,
                 task.toString());
     }
 
+    /**
+     * Prints the message when a task is deleted.
+     *
+     * @param task the deleted task.
+     * @param taskCount the number of tasks remaining in the task list.
+     */
     public void showDeleteMessage(Task task, long taskCount) {
         showToUser(DELETE_MESSAGE,
                 task.toString(),
@@ -70,6 +103,11 @@ public class Ui {
                     : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
+    /**
+     * Prints the task list in order.
+     *
+     * @param taskList the task list to print.
+     */
     public void showTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTaskList();
         for (int i = 0; i < tasks.size(); i++) {
@@ -80,10 +118,18 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints Duke's exit message.
+     */
     public void showExitMessage() {
         showToUser(EXIT_MESSAGE);
     }
 
+    /**
+     * Convenience method to print a variable sequence of strings.
+     *
+     * @param messages the sequence of strings to print.
+     */
     private void showToUser(String... messages) {
         for (String line: messages) {
             out.println(PREFIX + line);

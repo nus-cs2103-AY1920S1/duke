@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +15,13 @@ public class Duke {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
+        try {
+            history = DataManager.load();
+        } catch (FileNotFoundException ignore) {
+        } catch (DukeException | IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         Scanner sc = new Scanner(System.in);
         String intro = "Hello! I'm Duke\n"
                 + "What can I do for you?";
@@ -28,6 +37,11 @@ public class Duke {
                 output = e.getMessage();
             }
             System.out.println(output);
+            try {
+                DataManager.save(history);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         String endMessage = "Bye. Hope to see you again soon!";

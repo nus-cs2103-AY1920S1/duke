@@ -8,13 +8,28 @@ import ui.Ui;
 
 import java.util.Date;
 
+/**
+ * Represents a deadline task to added.
+ */
 public class DeadlineCommand extends Command {
     private String[] arguments;
 
+    /**
+     * @param arguments contains description and date of deadline.
+     */
     public DeadlineCommand(String[] arguments) {
         this.arguments = arguments;
     }
 
+    /**
+     * Adds deadline to task list
+     * Prints messages to notify users deadline has been
+     * added to task list
+     *
+     * @param tasks contains task list
+     * @param ui deals with interaction with users
+     * @param storage deals with loading and saving of task list
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {

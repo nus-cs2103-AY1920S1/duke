@@ -10,11 +10,22 @@ import ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction
+ * with users.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Loads task list from hard disk if file is found.
+     * Else create an empty task list.
+     *
+     * @param filePath directory where task list is stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +37,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints welcome message
+     * Collects input from users
+     * Prints exit message
+     * Saves task list into hard disk
+     */
     private void run() {
         ui.showWelcome();
         boolean canEnd = false;

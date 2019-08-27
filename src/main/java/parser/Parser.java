@@ -5,7 +5,17 @@ import exception.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Deals with making sense of user command
+ */
 public class Parser {
+    /**
+     * Parses user input into command for execution
+     *
+     * @param userInput String of input of user
+     * @return the command based on user input
+     * @throws DukeException if user input is invalid
+     */
     public Command parse(String userInput) throws DukeException {
         String[] separatedInputs = userInput.trim().split("\\s+");
         switch (separatedInputs[0].toLowerCase()) {

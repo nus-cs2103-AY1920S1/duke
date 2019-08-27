@@ -63,6 +63,7 @@ public class TaskList {
 	}
 
 	public ArrayList<Task> search(String keyword) {
+		//searches the string representation of the class
 		ArrayList<Task> results = new ArrayList<>();
 		for (Task t : this.taskList) {
 			if (t.toString().contains(keyword)) {

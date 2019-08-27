@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -24,34 +25,34 @@ public class Duke {
 
         printMessage(" " + logo + "\n\t Hello! I'm Duke" + "\n" + "\t What can I do for you?");
 
-        try{
+        try {
 
             taskList = readFromHardDisk(inputFile);
 
-            while(sc.hasNext()) {
-                try{
+            while (sc.hasNext()) {
+                try {
                     String[] inputs = sc.nextLine().split(" ");
                     String name = "";
-                    String time = "";
+                    String[] time;
 
-                    if(inputs[0].equals("bye")) {
+                    if (inputs[0].equals("bye")) {
 
                         writeToHardDisk(taskList, filePath);
 
                         sc.close();
                         printMessage("Bye. Hope to see you again soon!");
                         return;
-                    } else if(inputs[0].equals("list")) {
+                    } else if (inputs[0].equals("list")) {
                         printTaskList(taskList);
-                    } else if(inputs[0].equals("done")) {
+                    } else if (inputs[0].equals("done")) {
 
-                        if(inputs.length < 2) {
+                        if (inputs.length < 2) {
                             throw new DukeException("The task Number cannot be empty.");
                         }
 
                         int index = Integer.parseInt(inputs[1]) - 1;
 
-                        if(index >= taskList.size() || index < 0) {
+                        if (index >= taskList.size() || index < 0) {
                             throw new DukeException("Invalid task number!");
                         }
 
@@ -59,15 +60,15 @@ public class Duke {
                         printMessage("Nice! I've marked this task as done:"
                                 + "\n\t   " + taskList.get(index).toString());
 
+
                         writeToHardDisk(taskList, filePath);
 
-                    } else if(inputs[0].equals("todo")){
-
-                        if(inputs.length < 2) {
+                    } else if (inputs[0].equals("todo")) {
+                        if (inputs.length < 2) {
                             throw new DukeException("The description of a todo cannot be empty.");
                         }
 
-                        for(int i = 1; i < inputs.length; i++) {
+                        for (int i = 1; i < inputs.length; i++) {
                             name = name + inputs[i] + " ";
                         }
                         name = name.substring(0, name.length() - 1);
@@ -78,11 +79,11 @@ public class Duke {
                                 + "\n\t Now you have " + taskList.size() + " tasks in the list.");
 
                         writeToHardDisk(taskList, filePath);
-                    } else if(inputs[0].equals("deadline") || inputs[0].equals("event")) {
+                    } else if (inputs[0].equals("deadline") || inputs[0].equals("event")) {
                         String inputType = inputs[0];
 
-                        if(inputs.length < 2) {
-                            if(inputType.equals("deadline")) {
+                        if (inputs.length < 2) {
+                            if (inputType.equals("deadline")) {
                                 throw new DukeException("The description of a deadline cannot be empty.");
                             } else {
                                 throw new DukeException("The description of an event cannot be empty.");
@@ -92,7 +93,7 @@ public class Duke {
                         inputs = fetchString(inputs);
 
                         if (inputs[1].equals("")) {
-                            if(inputType.equals("deadline")) {
+                            if (inputType.equals("deadline")) {
                                 throw new DukeException("The end time of a deadline cannot be empty.");
                             } else {
                                 throw new DukeException("The time of an event cannot be empty.");
@@ -100,29 +101,31 @@ public class Duke {
                         }
 
                         name = inputs[0].substring(0, inputs[0].length() - 1);
-                        time = inputs[1].substring(0, inputs[1].length() - 1);
+
+                        LocalDateTime dateAndTime = getDateAndTimeFromString(inputs[1].substring(0, inputs[1].length() - 1));
 
                         Task newTask;
 
                         if (inputType.equals("deadline")) {
-                            newTask = new Deadline(name, time);
+                            newTask = new Deadline(name, dateAndTime);
                         } else {
-                            newTask = new Event(name, time);
+                            newTask = new Event(name, dateAndTime);
                         }
                         taskList.add(newTask);
                         printMessage("Got it. I've added this task: " +
                                 "\n\t   " + newTask.toString()
                                 + "\n\t Now you have " + taskList.size() + " tasks in the list.");
 
+
                         writeToHardDisk(taskList, filePath);
-                    } else if(inputs[0].equals("delete")) {
-                        if(inputs.length < 2) {
+                    } else if (inputs[0].equals("delete")) {
+                        if (inputs.length < 2) {
                             throw new DukeException("The task Number cannot be empty.");
                         }
 
                         int index = Integer.parseInt(inputs[1]) - 1;
 
-                        if(index >= taskList.size() || index < 0) {
+                        if (index >= taskList.size() || index < 0) {
                             throw new DukeException("Invalid task number!");
                         }
 
@@ -136,20 +139,20 @@ public class Duke {
 
                         writeToHardDisk(taskList, filePath);
 
-                    } else if(inputs[0].equals("dir")) {
+                    } else if (inputs[0].equals("dir")) {
                         System.out.println(System.getProperty("user.dir"));
                     } else {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
-                } catch(DukeException de) {
+                } catch (DukeException de) {
                     System.err.println(de.toString() + "\n");
                 }
             }
-        } catch(FileNotFoundException ioe) {
+        } catch (FileNotFoundException ioe) {
             System.err.println("\t____________________________________________________________");
             System.err.println("\t Error: Input Text File not Found! Program Exiting...");
             System.err.println("\t____________________________________________________________");
-        }  catch (UnsupportedEncodingException uee) {
+        } catch (UnsupportedEncodingException uee) {
             System.err.println("\t____________________________________________________________");
             System.err.println("\t Error: Unable to write to file! Program Exiting...");
             System.err.println("\t____________________________________________________________");
@@ -166,7 +169,7 @@ public class Duke {
     public static void printTaskList(List<Task> taskList) {
         System.out.println("\t____________________________________________________________");
         System.out.println("\t Here are the tasks in your list:");
-        for(int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             System.out.println("\t" + " " + (i + 1) + ". " + taskList.get(i));
         }
         System.out.println("\t____________________________________________________________");
@@ -178,7 +181,7 @@ public class Duke {
 
         int index = 1;
 
-        while(index < arr.length && !(arr[index].charAt(0) == '/')) {
+        while (index < arr.length && !(arr[index].charAt(0) == '/')) {
             result[0] = result[0] + arr[index] + " ";
             index++;
         }
@@ -186,7 +189,7 @@ public class Duke {
         //Skip the /at or /by
         index++;
 
-        while(index < arr.length) {
+        while (index < arr.length) {
             result[1] = result[1] + arr[index] + " ";
             index++;
         }
@@ -195,11 +198,11 @@ public class Duke {
 
     }
 
-    public static void writeToHardDisk(List<Task> taskList, String filePath) throws FileNotFoundException, UnsupportedEncodingException{
+    public static void writeToHardDisk(List<Task> taskList, String filePath) throws FileNotFoundException, UnsupportedEncodingException {
 
         PrintWriter fileWriter = new PrintWriter(filePath, "UTF-8");
 
-        for(Task T : taskList) {
+        for (Task T : taskList) {
             fileWriter.println(T.toIndicationInsideFile());
         }
 
@@ -211,12 +214,12 @@ public class Duke {
 
         Scanner txtSC = new Scanner(inputFile);
 
-        while(txtSC.hasNext()) {
+        while (txtSC.hasNext()) {
             String[] historicalInputs = txtSC.nextLine().split("\\|");
             boolean oldDone;
             Task oldTask = null;
 
-            if(historicalInputs[1].charAt(1) == '1') {
+            if (historicalInputs[1].charAt(1) == '1') {
                 oldDone = true;
             } else {
                 oldDone = false;
@@ -227,10 +230,12 @@ public class Duke {
                     oldTask = new Todo(historicalInputs[2].substring(1), oldDone);
                     break;
                 case 'D':
-                    oldTask = new Deadline(historicalInputs[2].substring(1, historicalInputs[2].length() - 1), historicalInputs[3].substring(1), oldDone);
+                    String[] time = historicalInputs[3].substring(1).split(" ");
+                    oldTask = new Deadline(historicalInputs[2].substring(1, historicalInputs[2].length() - 1), getDateAndTimeFromString(historicalInputs[3].substring(1)), oldDone);
+
                     break;
                 case 'E':
-                    oldTask = new Event(historicalInputs[2].substring(1, historicalInputs[2].length() - 1), historicalInputs[3].substring(1), oldDone);
+                    oldTask = new Event(historicalInputs[2].substring(1, historicalInputs[2].length() - 1), getDateAndTimeFromString(historicalInputs[3].substring(1)), oldDone);
                     break;
             }
 
@@ -240,5 +245,18 @@ public class Duke {
         txtSC.close();
 
         return taskList;
+    }
+
+    public static LocalDateTime getDateAndTimeFromString(String inputs) {
+        String[] time = inputs.split(" ");
+        String[] dateInString = time[0].split("\\/");
+
+        LocalDateTime dateAndTime = LocalDateTime.of(Integer.parseInt(dateInString[2]),
+                Integer.parseInt(dateInString[1]),
+                Integer.parseInt(dateInString[0]),
+                Integer.parseInt(time[1]) / 100,
+                Integer.parseInt(time[1]) % 100);
+
+        return dateAndTime;
     }
 }

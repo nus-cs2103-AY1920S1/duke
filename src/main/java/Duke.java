@@ -1,10 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +17,7 @@ public class Duke {
         System.out.println("This is your current list of tasks");
         // Get data from duke.txt
         ArrayList<Task> tasks = getDataFromFile();
+        /*ArrayList<Task> tasks = new ArrayList<>();*/
         if (tasks.size() == 0) {
             System.out.println("You do not have any stored tasks");
         }
@@ -40,8 +41,7 @@ public class Duke {
                     Task currentTask = tasks.get(i);
                     System.out.println(currentItemNumber + "." + currentTask);
                 }
-            }
-            else {
+            } else {
                 String[] words = userinput.split(" ");
 
                 // Done
@@ -82,8 +82,10 @@ public class Duke {
                             String remainingWords = userinput.replaceFirst("deadline ", "");
                             String[] remainingWords2 = remainingWords.split(" /by ", 2);
 
+                            LocalDateTime localDateTime = changeToDateTimeFormat(remainingWords2[1]);
+
                             // Add new task to list
-                            Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1]);
+                            Deadline newDeadline = new Deadline(remainingWords2[0], false, remainingWords2[1], localDateTime);
                             tasks.add(newDeadline);
                         }
                         // event
@@ -92,8 +94,10 @@ public class Duke {
                             String remainingWords = userinput.replaceFirst("event ", "");
                             String[] remainingWords2 = remainingWords.split(" /at ", 2);
 
+                            LocalDateTime localDateTime = changeToDateTimeFormat(remainingWords2[1]);
+
                             // Add new task to list
-                            Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1]);
+                            Event newEvent = new Event(remainingWords2[0], false, remainingWords2[1], localDateTime);
                             tasks.add(newEvent);
                         }
                         // default
@@ -105,8 +109,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(tasks.size() - 1));
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                    }
-                    catch (DukeException e) {
+                    } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 }
@@ -140,10 +143,14 @@ public class Duke {
                     tasks.add(new Todo(words[2], isDone));
                 }
                 else if (words[0].equals("D")) {
-                    tasks.add(new Deadline(words[2], isDone, words[3]));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime formatDateTime = LocalDateTime.parse(words[3], formatter);
+                    tasks.add(new Deadline(words[2], isDone, words[3], formatDateTime));
                 }
                 else if (words[0].equals("E")) {
-                    tasks.add(new Event(words[2], isDone, words[3]));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime formatDateTime = LocalDateTime.parse(words[3], formatter);
+                    tasks.add(new Event(words[2], isDone, words[3], formatDateTime));
                 }
             }
         } catch (FileNotFoundException e) {
@@ -156,44 +163,53 @@ public class Duke {
             PrintWriter out = new PrintWriter(new File("data/duke.txt"));
             for (int i = 0; i < tasks.size(); i++) {
                 Task currentTask = tasks.get(i);
-                if(currentTask instanceof Todo) {
+                if (currentTask instanceof Todo) {
                     out.print("T|");
                     if (currentTask.hasDone()) {
                         out.print("1|");
-                    }
-                    else {
+                    } else {
                         out.print("0|");
                     }
                     out.println(currentTask.getName());
-                }
-                else if (currentTask instanceof Deadline) {
+                } else if (currentTask instanceof Deadline) {
                     out.print("D|");
                     if (currentTask.hasDone()) {
                         out.print("1|");
-                    }
-                    else {
+                    } else {
                         out.print("0|");
                     }
                     out.print(currentTask.getName());
                     out.print("|");
-                    out.println(((Deadline) currentTask).getTime());
-                }
-                else if(currentTask instanceof Event) {
+                    String recordingDateTimeString = ((Deadline) currentTask).getLocalDateTime().toString().replace("T", " ");
+                    out.println(recordingDateTimeString);
+                } else if (currentTask instanceof Event) {
                     out.print("E|");
                     if (currentTask.hasDone()) {
                         out.print("1|");
-                    }
-                    else {
+                    } else {
                         out.print("0|");
                     }
                     out.print(currentTask.getName());
                     out.print("|");
-                    out.println(((Deadline) currentTask).getTime());
+                    String recordingDateTimeString = ((Event) currentTask).getLocalDateTime().toString().replace("T", " ");
+                    out.println(recordingDateTimeString);
                 }
             }
             out.close();
         } catch (FileNotFoundException e) {
             System.out.println("No such file to save data to.");
         }
+    }
+
+    /* Change format to LocalDateTime format given String time of 2/12/2019 1800 format */
+    public static LocalDateTime changeToDateTimeFormat(String dateTime) {
+        String date = dateTime.split(" ")[0];
+        String time = dateTime.split(" ")[1];
+        LocalDate localDate = LocalDate.of(Integer.parseInt(date.split("/")[2]),
+                Integer.parseInt(date.split("/")[1]),
+                Integer.parseInt(date.split("/")[0]));
+
+        LocalTime localTime = LocalTime.of(Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2, 4)));
+        return LocalDateTime.of(localDate, localTime);
     }
 }

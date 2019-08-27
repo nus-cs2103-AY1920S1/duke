@@ -1,8 +1,17 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
     private String time;
-    public Event(String name, boolean isDone, String time) {
+    private LocalDateTime localDateTime;
+
+    public Event(String name, boolean isDone, String time, LocalDateTime localDateTime) {
         super(name, isDone);
         this.time = time;
+        this.localDateTime = localDateTime;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
     public String getTime() {
@@ -11,6 +20,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + getName() + " (at: " + time  + ")";
+        return "[E][" + getStatusIcon() + "] " + getName() + " (at: " + localDateTime.toString()  + ")";
     }
 }

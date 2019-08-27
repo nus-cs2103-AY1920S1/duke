@@ -1,8 +1,14 @@
 package duke.init;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+//
 
 /**
  * Implements the Duke chatbot.
@@ -11,31 +17,72 @@ import java.util.Scanner;
 public class Duke {
 
     private static final int BORDER_LENGTH = 80;
-    private static final ArrayList<Task> storedTasks = new ArrayList<>();
+    private static final ArrayList<Task> STORED_TASKS = new ArrayList<>();
+    private static final File DATA_FILE = new File("../../../../../data/duke.txt");
+    private static final Scanner INPUT_SCANNER = new Scanner(System.in);
 
     /**
      * Runs the Duke chatbot.
      * @param args Command line arguments (unused).
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+        // Read data from file into arraylist
+        readDataFromHardDisk();
+
+        // Greet user
         printHorizontalBorder();
         greet();
         printHorizontalBorder();
         System.out.println();
-        String input = scanner.nextLine();
+
+        // Process input
+        String input = INPUT_SCANNER.nextLine();
         String command = input.split(" ")[0];
         while (!command.equals("bye")) {
             printHorizontalBorder();
             process(input);
             printHorizontalBorder();
             System.out.println();
-            input = scanner.nextLine();
+            input = INPUT_SCANNER.nextLine();
+            command = input.split(" ")[0];
         }
+
+        // Say bye to user
         printHorizontalBorder();
         sayBye();
         printHorizontalBorder();
-        scanner.close();
+        INPUT_SCANNER.close();
+
+        // Save data to file
+        saveDataToHardDisk();
+    }
+
+    /**
+     * Reads data from the hard disk into the list of stored tasks
+     */
+    private static void readDataFromHardDisk() {
+        try {
+            Scanner fileScanner = new Scanner(DATA_FILE);
+            while (fileScanner.hasNextLine()) {
+                String[] taskInformation = fileScanner.nextLine().split(" \\| ");
+                String taskType = taskInformation[0];
+                boolean isDone = taskInformation[1].equals("1") ? true : false;
+                String description = taskInformation[2];
+                Task task;
+                if (taskType.equals("T")) {
+                    task = new Todo(description, isDone);
+                } else if (taskType.equals("D")) {
+                    task = new Deadline(description, isDone, taskInformation[3]);
+                } else {
+                    task = new Event(description, isDone, taskInformation[3]);
+                }
+                STORED_TASKS.add(task);
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("The given data file could not be found");
+        }
     }
 
     /**
@@ -77,7 +124,7 @@ public class Duke {
             storeEvent(input);
             break;
         default:
-            System.out.println("\u2639 OOPS!!! I'm sorry, but I don't"
+            System.out.println("\t\u2639 OOPS!!! I'm sorry, but I don't"
                     + " know what that means :-(");
             break;
         }
@@ -87,12 +134,12 @@ public class Duke {
      * Lists stored text.
      */
     private static void listStoredTasks() {
-        if (storedTasks.size() == 0) {
+        if (STORED_TASKS.size() == 0) {
             System.out.println("\tYou have 0 tasks in the list.");
         } else {
             System.out.println("\tHere are the tasks in your list:");
-            for (int i = 0; i < storedTasks.size(); i++) {
-                System.out.format("\t%d.%s\n", i + 1, storedTasks.get(i));
+            for (int i = 0; i < STORED_TASKS.size(); i++) {
+                System.out.format("\t%d.%s\n", i + 1, STORED_TASKS.get(i));
             }
         }
     }
@@ -108,11 +155,11 @@ public class Duke {
                 throw new DukeException();
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
-            Task task = storedTasks.remove(taskNumber - 1);
+            Task task = STORED_TASKS.remove(taskNumber - 1);
             System.out.println("\tNoted. I've removed this task: ");
             System.out.println("\t\t" + task);
             System.out.format("\tNow you have %d task(s) in the list.\n",
-                    storedTasks.size());
+                    STORED_TASKS.size());
         } catch (NumberFormatException
                 | ArrayIndexOutOfBoundsException
                 | DukeException e) {
@@ -128,11 +175,11 @@ public class Duke {
      * @param task The specified task.
      */
     private static void storeTask(Task task) {
-        storedTasks.add(task);
+        STORED_TASKS.add(task);
         System.out.println("\tGot it. I've added this task: ");
         System.out.println("\t\t" + task);
         System.out.format("\tNow you have %d task(s) in the list.\n",
-                storedTasks.size());
+                STORED_TASKS.size());
     }
 
     /**
@@ -186,6 +233,33 @@ public class Duke {
     }
 
     /**
+     * Saves data from the stored tasks list into the hard disk.
+     */
+    private static void saveDataToHardDisk() {
+        try {
+            FileWriter fileWriter = new FileWriter(DATA_FILE);
+            for (int i = 0; i < STORED_TASKS.size(); i++) {
+                String dataLine;
+                Task task = STORED_TASKS.get(i);
+                String status = task.isDone() ? "1" : "0";
+                if (task.getType().equals("todo")) {
+                    dataLine = String.format("T | %s | %s\n", status, task.getDescription());
+                } else if (task.getType().equals("deadline")) {
+                    dataLine = String.format("D | %s | %s | %s\n", status,
+                            task.getDescription(), ((Deadline) task).getDate());
+                } else {
+                    dataLine = String.format("E | %s | %s | %s\n", status,
+                            task.getDescription(), ((Event) task).getDateAndTime());
+                }
+                fileWriter.write(dataLine);
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Data could not be saved.");
+        }
+    }
+
+    /**
      * Sets a task as done based on the specified input.
      * @param input The specified input.
      */
@@ -196,7 +270,7 @@ public class Duke {
                 throw new DukeException();
             }
             int taskNumber = Integer.parseInt(inputWords[1]);
-            Task task = storedTasks.get(taskNumber - 1);
+            Task task = STORED_TASKS.get(taskNumber - 1);
             task.setAsDone();
             System.out.println("\tNice! I've marked this task as done:");
             System.out.println("\t" + task);

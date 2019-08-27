@@ -2,13 +2,8 @@
  * This class deals with making sense of the user command. Commands are processed individually and specifically.
  */
 package duke.managers;
+import duke.commands.*;
 import duke.exceptions.DukeException;
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
 
 public class Parser {
 
@@ -27,6 +22,8 @@ public class Parser {
         String key = comm[0];
         if (key.equals("delete")) {
             return new DeleteCommand(Integer.parseInt(comm[1]));
+        } else if (key.equals("find")) {
+            return new FindCommand(comm[1]) ;
         } else if (key.equals("done")) {
             return new DoneCommand(Integer.parseInt(comm[1]));
         } else if (key.equals("list")) {

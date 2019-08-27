@@ -17,15 +17,15 @@ public class Task {
      * This method is used for the purpose of unit testing.
      * @return String that represents whether the task has been marked as done
      */
+    /*
     public String getStatusIcon() {
         return (isDone ? "Done" : "X");
     }
+     */
 
-    /*
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
-    */
 
     /**
      * This method changes the task to be done when the task has yet to be done.
@@ -56,5 +56,9 @@ public class Task {
      */
     public String format() {
         return "";
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

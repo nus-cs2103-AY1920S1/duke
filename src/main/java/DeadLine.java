@@ -2,6 +2,7 @@ public class DeadLine extends Task {
 
   protected String by;
 
+  // Constructor
   public DeadLine(String description, String by) {
     super(description);
     this.by = by;

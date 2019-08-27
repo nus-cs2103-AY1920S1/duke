@@ -1,7 +1,8 @@
 public class Event extends Task {
 
-  protected String timing;
+  private String timing;
 
+  // Constructor
   public Event(String description, String timing) {
     super(description);
     this.timing = timing;

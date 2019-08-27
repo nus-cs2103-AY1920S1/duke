@@ -5,7 +5,7 @@ import weomucat.duke.command.listener.DeleteTaskCommandListener;
 import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.exception.DukeException;
-import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.exception.InvalidTaskIndexException;
 import weomucat.duke.task.listener.AddTaskListener;
 import weomucat.duke.task.listener.DeleteTaskListener;
 import weomucat.duke.task.listener.DoneTaskListener;
@@ -53,8 +53,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		this.listTaskListeners.add(listener);
 	}
 
-	@Override
-	public void addTaskCommandUpdate(Task task) throws DukeException {
+	public void addTask(Task task) throws DukeException {
 		// Add task to Tasks
 		this.tasks.add(task);
 
@@ -64,8 +63,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 		}
 	}
 
-	@Override
-	public void deleteTaskCommandUpdate(int i) throws DukeException {
+	public void deleteTask(int i) throws DukeException {
 		try {
 			// Get task from tasks
 			Task task = this.tasks.get(i);
@@ -78,12 +76,11 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 				listener.deleteTaskUpdate(this.tasks, task);
 			}
 		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidParameterException("That is not a valid index of a task.");
+			throw new InvalidTaskIndexException();
 		}
 	}
 
-	@Override
-	public void doneTaskCommandUpdate(int i) throws DukeException {
+	public void doneTask(int i) throws DukeException {
 		try {
 			// Get task from tasks
 			Task task = this.tasks.get(i);
@@ -96,15 +93,34 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 				listener.doneTaskUpdate(this.tasks, task);
 			}
 		} catch (IndexOutOfBoundsException e) {
-			throw new InvalidParameterException("That is not a valid index of a task.");
+			throw new InvalidTaskIndexException();
 		}
 	}
 
-	@Override
-	public void listTaskCommandUpdate() {
+	public void listTask() {
 		// Update ListTaskListeners
 		for (ListTaskListener listener : listTaskListeners) {
 			listener.listTaskUpdate(this.tasks);
 		}
+	}
+
+	@Override
+	public void addTaskCommandUpdate(Task task) throws DukeException {
+		addTask(task);
+	}
+
+	@Override
+	public void deleteTaskCommandUpdate(int i) throws DukeException {
+		deleteTask(i);
+	}
+
+	@Override
+	public void doneTaskCommandUpdate(int i) throws DukeException {
+		doneTask(i);
+	}
+
+	@Override
+	public void listTaskCommandUpdate() {
+		listTask();
 	}
 }

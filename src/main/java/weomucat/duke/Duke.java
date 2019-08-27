@@ -18,6 +18,8 @@ public class Duke implements ByeCommandListener {
 	public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
 
 	private boolean running;
+
+	private Controller controller;
 	private TaskList taskList;
 	private TaskListStorage storage;
 	private Ui ui;
@@ -27,32 +29,12 @@ public class Duke implements ByeCommandListener {
 	}
 
 	public Duke(String taskListPath) {
-		/* Initialize */
-
-		Controller controller = new Controller();
+		this.controller = new Controller();
 		this.taskList = new TaskList();
 		this.storage = new TaskListStorage(taskListPath);
 
 		// Read from user input from stdin.
 		this.ui = new Ui(System.in);
-
-		// Set up event listeners
-		this.ui.newUserInputListener(controller);
-
-		controller.newAddTaskCommandListener(this.taskList);
-		controller.newDeleteTaskCommandListener(this.taskList);
-		controller.newDoneTaskCommandListener(this.taskList);
-		controller.newListTaskCommandListener(this.taskList);
-		controller.newByeCommandListener(this);
-
-		taskList.newAddTaskListener(this.storage);
-		taskList.newDeleteTaskListener(this.storage);
-		taskList.newDoneTaskListener(this.storage);
-
-		taskList.newAddTaskListener(this.ui);
-		taskList.newDeleteTaskListener(this.ui);
-		taskList.newDoneTaskListener(this.ui);
-		taskList.newListTaskListener(this.ui);
 	}
 
 	private void run() {
@@ -65,6 +47,24 @@ public class Duke implements ByeCommandListener {
 				this.ui.displayError(e.getMessage());
 			}
 		}
+
+		// Set up event listeners
+		this.ui.newUserInputListener(this.controller);
+
+		this.controller.newAddTaskCommandListener(this.taskList);
+		this.controller.newDeleteTaskCommandListener(this.taskList);
+		this.controller.newDoneTaskCommandListener(this.taskList);
+		this.controller.newListTaskCommandListener(this.taskList);
+		this.controller.newByeCommandListener(this);
+
+		this.taskList.newAddTaskListener(this.storage);
+		this.taskList.newDeleteTaskListener(this.storage);
+		this.taskList.newDoneTaskListener(this.storage);
+
+		this.taskList.newAddTaskListener(this.ui);
+		this.taskList.newDeleteTaskListener(this.ui);
+		this.taskList.newDoneTaskListener(this.ui);
+		this.taskList.newListTaskListener(this.ui);
 
 		// Greet user
 		this.ui.displayMessage(LOGO, "Hello! I'm Duke", "What can I do for you?");

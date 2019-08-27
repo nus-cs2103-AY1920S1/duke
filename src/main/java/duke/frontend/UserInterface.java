@@ -10,12 +10,15 @@ import duke.command.AddTaskCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.ShowListCommand;
 import duke.command.ExitCommand;
+import duke.command.SearchCommand;
 import duke.DukeException;
 import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 import duke.tasklist.ToDo;
 import duke.tasklist.Deadline;
 import duke.tasklist.Event;
+
+import java.util.ArrayList;
 
 public class UserInterface {
     private boolean acceptingInput;
@@ -110,6 +113,8 @@ public class UserInterface {
             case "ExitCommand":
                 executeCommand((ExitCommand) c);
                 break;
+            case "SearchCommand":
+                executeCommand((SearchCommand) c);
             default:
                 break;
                 // throw new DukeException("This command is not supported");
@@ -162,6 +167,20 @@ public class UserInterface {
                 .addLine(task.toString())
                 .addLine("Now you have ", Integer.toString(taskList.size()), " task(s) in your list.");
         storage.save(taskList);
+    }
+
+    public void executeCommand(SearchCommand command) {
+        ArrayList<Task> results = taskList.search(command.parameters[0]);
+        if (results.size() > 0) {
+            int count = 0;
+            standardOutput.addLine("Here are the matching tasks in your list:");
+            for (Task task : taskList.search(command.parameters[0])) {
+                count++;
+                standardOutput.addLine(Integer.toString(count), ". ", task.toString());
+            }
+        } else {
+            standardOutput.addLine("There are no matching tasks in your list");
+        }
     }
 
     public void executeCommand(ShowListCommand command) throws DukeException {

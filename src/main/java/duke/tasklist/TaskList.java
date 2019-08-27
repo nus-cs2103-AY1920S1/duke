@@ -61,4 +61,14 @@ public class TaskList {
 			throw new DukeIncorrectParameterTypeException("Integer", id);
 		}
 	}
+
+	public ArrayList<Task> search(String keyword) {
+		ArrayList<Task> results = new ArrayList<>();
+		for (Task t : this.taskList) {
+			if (t.toString().contains(keyword)) {
+				results.add(t);
+			}
+		}
+		return results;
+	}
 }

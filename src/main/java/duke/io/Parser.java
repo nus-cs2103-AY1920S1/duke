@@ -93,6 +93,9 @@ public class Parser {
             case "done":
                 type = Type.COMPLETE;
                 break;
+            case "find":
+                type = Type.SEARCH;
+                break;
             default:
                 throw new DukeUnknownCommandException();
         }
@@ -145,6 +148,8 @@ public class Parser {
                 return new DeleteTaskCommand(parameters[0]);
             case COMPLETE:
                 return new CompleteTaskCommand(parameters[0]);
+            case SEARCH:
+                return new SearchCommand(parameters[0]);
             case ADD_TODO:
             case ADD_DEADLINE:
             case ADD_EVENT:

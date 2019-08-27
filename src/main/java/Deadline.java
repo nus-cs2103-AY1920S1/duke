@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private String by;
+
     public Deadline(String info, String type, String by) {
         /**
          *  overrides original constructor
@@ -8,8 +8,7 @@ public class Deadline extends Task {
          * @params String deadline do by date
          * @return none
          */
-        super(info,type);
-        this.by = by;
+        super(info,type,by);
     }
     @Override
     public String printTask() {

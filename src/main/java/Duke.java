@@ -1,15 +1,20 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+
 
 /*
  TO DO:
- ADD FUNC DESCRIPS
  ADD EXCEPTION SUPPORT
  */
 public class Duke {
     // define arraylist to store tasks
     private ArrayList<Task> taskArr = new ArrayList<>();
-
+    //private static final String FILEPATH = "C:\\Users\\Seb\\duke\\storage\\duke.txt";
+    //private WriteFile data = new WriteFile(FILEPATH,false);
     public Duke() {
         /**
          *  prints Intro message in between 2 solid lines
@@ -57,7 +62,7 @@ public class Duke {
             System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
             return;
         }
-        ToDo newToDo = new ToDo(taskInfo,"T");
+        ToDo newToDo = new ToDo(taskInfo,"T","");
         taskArr.add(newToDo);
         System.out.println("Got it. I've added this task:");
         System.out.print(" " + newToDo.printTask() + "\n");
@@ -203,3 +208,55 @@ public class Duke {
         d.run();
     }
 }
+
+/*
+String line = "";
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = new FileReader(FILEPATH);
+            // always need to wrap file reader in buffer reader
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while((line = bufferedReader.readLine()) != null) {
+                store(line);
+            }
+            // close file
+            bufferedReader.close();
+        } catch(FileNotFoundException ex) {
+            System.out.println("I can't see");
+        } catch(IOException ex) {
+            System.out.println("That sign will stop me, cos I can't read!");
+        }
+        private void store(String task) {
+        // converts tasks in string from storage to taskarr
+        Scanner stringSc = new Scanner(task);
+
+        String type = stringSc.next();
+        stringSc.next();
+        int isDone = stringSc.nextInt();
+        stringSc.next();
+        String info = stringSc.next();
+
+        if (type == "D") {
+            // take up empty input
+            stringSc.next();
+            String by = stringSc.next();
+            Deadline newTask = new Deadline(info,"D",by);
+            taskArr.add(newTask);
+        } else if (type == "E") {
+            stringSc.next();
+            String by = stringSc.next();
+            Event newTask = new Event(info,"E",by);
+            taskArr.add(newTask);
+        } else {
+            ToDo newTask = new ToDo(info, "T","");
+            taskArr.add(newTask);
+        }
+    }
+    private void save() {
+        data.setAppend(true);
+        String mainTxt = "";
+        for (Task t: taskArr) {
+
+        }
+    }
+ */

@@ -1,5 +1,4 @@
 public class Event extends Task {
-    private String by;
     public Event(String info, String type, String by) {
         /**
          *  overrides original constructor
@@ -8,8 +7,7 @@ public class Event extends Task {
          * @params String by: when event actually is
          * @return none
          */
-        super(info,type);
-        this.by = by;
+        super(info,type,by);
     }
     @Override
     public String printTask() {

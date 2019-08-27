@@ -2,11 +2,12 @@ public class Task {
 
     // all class variables private
 
-    private String taskInfo;
-    private boolean isDone;
-    private String taskType;
+    protected String taskInfo;
+    protected boolean isDone;
+    protected String taskType;
+    protected String by;
 
-    public Task(String info, String type) {
+    public Task(String info, String type,String by) {
         /**
          *  constructor, saves info of task
          *  @params String info: task information
@@ -16,6 +17,7 @@ public class Task {
         this.taskInfo = info;
         this.isDone = false;
         this.taskType = type;
+        this.by = by;
     }
     // getters
     public String getTaskInfo() {
@@ -49,6 +51,9 @@ public class Task {
         s += "[" + getStatus() + "] ";
         s += getTaskInfo();
         return s;
+    }
+    public String getBy() {
+        return by;
     }
     // setters
     public void markDone() {

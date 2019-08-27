@@ -8,10 +8,19 @@ import java.util.ArrayList;
 class Storage {
     private String filePath;
 
+    /**
+     * Creates a new Storage instance.
+     * @param filePath Relative path of the save file
+     */
     Storage(String filePath) {
         this.filePath = String.format("%s/%s", System.getProperty("user.dir"), filePath);
     }
 
+    /**
+     * Loads tasks from a save file into an ArrayList.
+     * @return ArrayList with all tasks from the save file
+     * @throws DukeException File I/O failure
+     */
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -31,6 +40,11 @@ class Storage {
         return tasks;
     }
 
+    /**
+     * Writes all tasks to the save file.
+     * @param tasks ArrayList of all tasks
+     * @throws DukeException File I/O failure
+     */
     void persist(ArrayList<Task> tasks) throws DukeException {
         StringBuilder output = new StringBuilder();
         for (Task t : tasks) {

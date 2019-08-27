@@ -2,10 +2,20 @@ import java.text.ParseException;
 import java.util.Date;
 
 class Parser {
+    /**
+     * Extracts the command from an input string.
+     * @param input Input string
+     * @return Command extracted
+     */
     static String extractCommand(String input) {
         return input.split(" ", 2)[0];
     }
 
+    /**
+     * Extracts the item's id from an input string.
+     * @param input Input string
+     * @return id extracted
+     */
     static String extractId(String input) {
         return input.split(" ", 2)[1];
     }
@@ -44,6 +54,12 @@ class Parser {
         }
     }
 
+    /**
+     * Parses a saved task string into a task.
+     * @param input Saved task string
+     * @return Task
+     * @throws DukeException Parsing failure
+     */
     static Task parseSavedTask(String input) throws DukeException {
         String[] tokens = input.split(" \\| ");
 

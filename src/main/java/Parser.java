@@ -233,6 +233,7 @@ public class Parser {
       System.out.println("\n\tBye. Hope to see you again soon!");
       System.out.println("\t____________________________________________________________\n");
       return;
+
     } else if (command.equals("list")) {
       taskList.printTasks();
     } else {

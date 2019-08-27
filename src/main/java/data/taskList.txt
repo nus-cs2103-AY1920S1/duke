@@ -8,3 +8,4 @@ delete 2
 event project meeting  /at  27/08/2019 1430
 todo sign book
 done 2
+deadline submit CS2103T  /by  25/08/2019 2359

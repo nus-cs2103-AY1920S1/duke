@@ -1,3 +1,6 @@
+package duke;
+
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,6 +20,7 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
     private TaskList tasks;
+    private Storage storage;
 
     // Messages
     private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
@@ -38,14 +42,10 @@ public class Duke {
     private static final String ERROR_MISSING_DEADLINE = "The deadline must be present. e.g. task /by Monday";
     private static final String ERROR_MISSING_EVENT_TIME = "The event time must be present. e.g. meeting /at Monday";
     private static final String ERROR_TOO_MANY_ARGUMENTS = "There are too many arguments for this command.";
-    private static final String ERROR_FAILED_SAVE        = "Failed to save file.";
-    private static final String ERROR_FAILED_TO_READ     = "Failed to read save data. Creating new task list.";
-    private static final String ERROR_FAILED_TO_FIND     = "Failed to find save data. Creating new task list.";
     private static final String ERROR_WRONG_DATE_FORMAT  = "The date time provided is in the wrong format. " +
             "Expected d/m/yyyy hh:mm.";
 
     // Constants
-    private static final String SAVE_LOCATION = "tasks.txt";
     private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
 
     /**
@@ -53,8 +53,18 @@ public class Duke {
      * @param args Setup arguments
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        new Duke("tasks.txt").run();
+    }
+
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = storage.load();
+            printFormatted(String.format("Loaded from %s", storage.getFilePath()));
+        } catch (DukeException ex) {
+            printFormatted(ex.getMessage());
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -65,7 +75,6 @@ public class Duke {
         sayGreeting();
         String input;
         Scanner sc = new Scanner(System.in);
-        loadTasks();
 
         do {
             input = sc.nextLine();
@@ -102,7 +111,7 @@ public class Duke {
                 default:
                     throw new DukeException(ERROR_INVALID_INPUT);
                 }
-                saveTasks();
+                storage.save(tasks);
             } catch (DukeException ex) {
                 printFormatted(ex.getMessage());
             }
@@ -239,75 +248,6 @@ public class Duke {
         tasks.remove(id - 1);
         printFormatted(String.format(MESSAGE_DELETE, task.toString(), tasks.size(),
                 tasks.size() != 1 ? "tasks" : "task"));
-    }
-
-    /**
-     * Saves tasks onto disk.
-     * Tasks will be saved in the following format: T | 1 | read book.
-     * Save location is determined by constant SAVE_LOCATION
-     */
-    private void saveTasks() throws DukeException {
-        try {
-            FileWriter fw = new FileWriter(SAVE_LOCATION);
-            for (Task task : tasks) {
-                if (task instanceof Deadline) {
-                    fw.append(String.format("D | %d | %s | %s\n",
-                            task.isDone() ? 1 : 0,
-                            task.getDescription(),
-                            ((Deadline) task).getDeadline()));
-                } else if (task instanceof Event) {
-                    fw.append(String.format("E | %d | %s | %s\n",
-                            task.isDone() ? 1 : 0,
-                            task.getDescription(),
-                            ((Event) task).getTime()));
-                } else {
-                    fw.append(String.format("T | %d | %s\n",
-                            task.isDone() ? 1 : 0,
-                            task.getDescription()));
-                }
-            }
-            fw.close();
-        } catch (IOException ex) {
-            throw new DukeException(ERROR_FAILED_SAVE);
-        }
-    }
-
-    private void loadTasks() {
-        try {
-            File f = new File(SAVE_LOCATION);
-            Scanner sc = new Scanner(f);
-
-            while (sc.hasNext()) {
-                String[] input = sc.nextLine().split(" [|] ");
-                Task task;
-                switch (input[0]) {
-                case "T":
-                    task = new Todo(input[2], input[1].equals("1"));
-                    break;
-                case "D":
-                    task = new Deadline(input[2], LocalDateTime.parse(input[3], DATE_TIME_FORMATTER),
-                            input[1].equals("1"));
-                    break;
-                case "E":
-                    task = new Event(input[2], LocalDateTime.parse(input[3], DATE_TIME_FORMATTER),
-                            input[1].equals("1"));
-                    break;
-                default:
-                    throw new DukeException(ERROR_FAILED_TO_READ);
-                }
-                tasks.add(task);
-            }
-
-            printFormatted(String.format("Loaded tasks from %s", f.getAbsolutePath()));
-        } catch (FileNotFoundException ex) {
-            printFormatted(ERROR_FAILED_TO_FIND);
-        } catch (DukeException ex) {
-            tasks = new TaskList();
-            printFormatted(ex.getMessage());
-        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
-            tasks = new TaskList();
-            printFormatted(ERROR_FAILED_TO_READ);
-        }
     }
 
     /**

@@ -50,9 +50,39 @@ public class Duke {
         } else if (command.equals("done")) {
             int taskNumber = userInput.nextInt();
             markTaskAsDone(taskNumber - 1);
+        } else if (command.equals("todo")) {
+            String details = userInput.nextLine().strip();
+            makeNewTodo(details);
+        } else if (command.equals("deadline")) {
+            userInput.useDelimiter(" by ");
+
+            String taskDescription = userInput.next().strip();
+            String[] dateTime = userInput.next().split(" ");
+
+            if (dateTime.length == 1) {
+                makeNewDeadline(taskDescription, dateTime[0], "");
+            } else if (dateTime.length == 2) {
+                makeNewDeadline(taskDescription, dateTime[0], dateTime[1]);
+            } else if (dateTime.length == 3) {
+                makeNewDeadline(taskDescription, dateTime[0] + " " + dateTime[1], dateTime[2]);
+            } else {
+                return;
+            }
+        }  else if (command.equals("event")) {
+            userInput.useDelimiter(" at ");
+
+            String taskDescription = userInput.next().strip();
+            String[] dateTime = userInput.next().split(" ");
+
+            if (dateTime.length == 2) {
+                makeNewEvent(taskDescription, dateTime[0], dateTime[1]);
+            } else if (dateTime.length == 3) {
+                makeNewEvent(taskDescription, dateTime[0] + " " + dateTime[1], dateTime[2]);
+            } else {
+                return;
+            }
         } else {
-            System.out.printf("%sadded: %s\n", makeSpace(5), instruction);
-            tasks.add(new Task(instruction));
+            return;
         }
         
         System.out.println(HORIZONTAL_LINE);
@@ -71,5 +101,32 @@ public class Duke {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("%s%d. %s\n", makeSpace(7), i + 1, tasks.get(i));
         }
+    }
+
+    private void makeNewTodo(String description) {
+        ToDo currentTodo = new ToDo(description);
+        tasks.add(currentTodo);
+
+        System.out.printf("%sGot it! I've added this task:\n", makeSpace(5));
+        System.out.printf("%s%s\n\n", makeSpace(7), currentTodo);
+        System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
+    }
+
+    private void makeNewDeadline(String desc, String date, String time) {
+        Deadline currentDeadline = new Deadline(desc, date, time);
+        tasks.add(currentDeadline);
+
+        System.out.printf("%sGot it! I've added this task:\n", makeSpace(5));
+        System.out.printf("%s%s\n\n", makeSpace(7), currentDeadline);
+        System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
+    }
+
+    private void makeNewEvent(String desc, String date, String time) {
+        Event currentEvent = new Event(desc, date, time);
+        tasks.add(currentEvent);
+
+        System.out.printf("%sGot it! I've added this task:\n", makeSpace(5));
+        System.out.printf("%s%s\n\n", makeSpace(7), currentEvent);
+        System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 }

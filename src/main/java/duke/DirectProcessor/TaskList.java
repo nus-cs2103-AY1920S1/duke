@@ -31,6 +31,14 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskList) { this.taskList = taskList; }
 
     /**
+     * This methods return how many tasks are there in this task list.
+     * @return the number of tasks in the task list.
+     */
+    public int getTotalNumber() {
+        return taskList.size();
+    }
+
+    /**
      * This method adds a given task t to the task list.
      * @param t The task to be added.
      */
@@ -47,7 +55,6 @@ public class TaskList {
     public Task deleteTask(int position) {
         Task toReturn = taskList.get(position - 1);
         taskList.remove(position - 1);
-        Task.reduceTotalNumber();
         return toReturn;
     }
 

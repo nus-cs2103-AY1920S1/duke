@@ -14,9 +14,6 @@ public abstract class Task {
     /** The task name */
     private String taskName;
 
-    /** The total number of tasks existing */
-    private static int taskNumbers = 0;
-
     /**
      * General constructor, initialize a task, the finished instance is false and set the taskName.
      * @param taskName The task name.
@@ -28,7 +25,6 @@ public abstract class Task {
         }
         this.taskName = taskName;
         this.finished = false;
-        taskNumbers++;
     }
 
     /**
@@ -60,21 +56,6 @@ public abstract class Task {
      */
     public boolean match(String s) {
         return taskName.contains(s);
-    }
-
-    /**
-     * Get the total number of the tasks existing, which is the number of tasks in the task list.
-     * @return
-     */
-    public static int getTotalNumber() {
-        return taskNumbers;
-    }
-
-    /**
-     * Minus the total number by 1 after each deletion of a task.
-     */
-    public static void reduceTotalNumber() {
-        taskNumbers--;
     }
 
     /**

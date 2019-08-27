@@ -3,17 +3,14 @@ package weomucat.duke.ui;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
-import weomucat.duke.task.listener.AddTaskListener;
-import weomucat.duke.task.listener.DeleteTaskListener;
-import weomucat.duke.task.listener.DoneTaskListener;
-import weomucat.duke.task.listener.ListTaskListener;
+import weomucat.duke.task.listener.*;
 import weomucat.duke.ui.listener.UserInputListener;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener, ListTaskListener {
+public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener, FindTaskListener, ListTaskListener {
 	private static final String SAY_INDENTATION = "\t";
 	private static final String SAY_HORIZONTAL_LINE = "============================================================";
 
@@ -69,18 +66,34 @@ public class Ui implements AddTaskListener, DeleteTaskListener, DoneTaskListener
 	}
 
 	@Override
-	public void listTaskUpdate(TaskListTasks tasks) {
-		ArrayList<String> out = new ArrayList<>();
-		out.add("Here are the tasks in your list:");
+	public void findTaskUpdate(TaskListTasks tasks) {
+		ArrayList<String> result = new ArrayList<>();
+		result.add("Here are the matching tasks in your list:");
 
 		for (int i = 0; i < tasks.size(); i++) {
 			// Get task from tasks
 			Task task = tasks.get(i);
 
 			// Format task with no. in front
-			out.add(String.format("%d. %s", i + 1, task));
+			result.add(String.format("%d. %s", i + 1, task));
 		}
 
-		displayMessage(out.toArray(new String[0]));
+		displayMessage(result.toArray(new String[0]));
+	}
+
+	@Override
+	public void listTaskUpdate(TaskListTasks tasks) {
+		ArrayList<String> result = new ArrayList<>();
+		result.add("Here are the tasks in your list:");
+
+		for (int i = 0; i < tasks.size(); i++) {
+			// Get task from tasks
+			Task task = tasks.get(i);
+
+			// Format task with no. in front
+			result.add(String.format("%d. %s", i + 1, task));
+		}
+
+		displayMessage(result.toArray(new String[0]));
 	}
 }

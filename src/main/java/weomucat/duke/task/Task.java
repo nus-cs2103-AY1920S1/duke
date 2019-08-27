@@ -14,6 +14,13 @@ public abstract class Task implements Serializable {
 		this.done = done;
 	}
 
+	/**
+	 * @return description of this Task
+	 */
+	public String getDescription() {
+		return description;
+	}
+
 	@Override
 	public String toString() {
 		String done_icon = this.done ? "[\u2713]" : "[\u2718]";

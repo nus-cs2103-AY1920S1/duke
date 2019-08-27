@@ -54,6 +54,7 @@ public class Duke implements ByeCommandListener {
 		this.controller.newAddTaskCommandListener(this.taskList);
 		this.controller.newDeleteTaskCommandListener(this.taskList);
 		this.controller.newDoneTaskCommandListener(this.taskList);
+		this.controller.newFindTaskCommandListener(this.taskList);
 		this.controller.newListTaskCommandListener(this.taskList);
 		this.controller.newByeCommandListener(this);
 
@@ -64,6 +65,7 @@ public class Duke implements ByeCommandListener {
 		this.taskList.newAddTaskListener(this.ui);
 		this.taskList.newDeleteTaskListener(this.ui);
 		this.taskList.newDoneTaskListener(this.ui);
+		this.taskList.newFindTaskListener(this.ui);
 		this.taskList.newListTaskListener(this.ui);
 
 		// Greet user

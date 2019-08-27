@@ -1,8 +1,9 @@
 package DukePkg;
+
 public class Task {
     private boolean done_ = false;
-    private String task_ = "";
-    public String type = "";
+
+    protected String task_ = "";
 
     public Task(String task) {
         task_ = task;
@@ -31,5 +32,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getSymbol() + "] " + task_;
+    }
+    public boolean equals(Object obj) {
+        Task o = (Task) obj;
+        return (this.task_.equals(o.task_));
     }
 }

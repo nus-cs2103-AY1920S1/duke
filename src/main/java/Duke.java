@@ -159,10 +159,11 @@ public class Duke {
     }
 
     public static void handleDeadline() {
-        String[] separateTaskDate = userInput.split("/");
+        String[] separateTaskDate = userInput.split("/", 2);
         String taskName = ((separateTaskDate[0].split(" ", 2))[1]).strip();
         String date = ((separateTaskDate[1].split(" ", 2))[1]).strip();
-        Deadline d = new Deadline(taskName, date);
+        DateTime dt = new DateTime(date);
+        Deadline d = new Deadline(taskName, dt.toString());
         tasks.add(d);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
@@ -173,10 +174,11 @@ public class Duke {
     }
 
     public static void handleEvent() {
-        String[] separateTaskDate = userInput.split("/");
+        String[] separateTaskDate = userInput.split("/", 2);
         String taskName = ((separateTaskDate[0].split(" ", 2))[1]).strip();
         String date = ((separateTaskDate[1].split(" ", 2))[1]).strip();
-        Event e = new Event(taskName, date);
+        DateTime dt = new DateTime(date);
+        Event e = new Event(taskName, dt.toString());
         tasks.add(e);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +

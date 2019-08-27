@@ -1,13 +1,8 @@
 package duke.command;
-
-import duke.ui.DukeUi;
-
+import duke.ui.DukeUI;
 import duke.tasklist.TaskList;
-
 import duke.storagedata.StorageData;
-
 import duke.exception.DukeTaskDoneException;
-
 public class DoneCommand extends Command {
     private int taskNumber;
 
@@ -16,7 +11,7 @@ public class DoneCommand extends Command {
         this.taskNumber = Integer.valueOf(details);
     }
 
-    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
         try {
             tasks.done(this.taskNumber);
             ui.printTaskDoneMessage(tasks, this.taskNumber);

@@ -1,28 +1,22 @@
 package duke.command;
-
-import duke.ui.DukeUi;
-
+import duke.ui.DukeUI;
 import duke.tasklist.TaskList;
-
 import duke.storagedata.StorageData;
-
-import duke.task.ToDo;
-
+import duke.task.Todo;
 import duke.exception.DukeEmptyDescriptionException;
-
-public class ToDoCommand extends Command{
-    public ToDoCommand(String details) throws DukeEmptyDescriptionException{
+public class TodoCommand extends Command{
+    public TodoCommand(String details) throws DukeEmptyDescriptionException{
         super(details);
         if(details.isEmpty()) {
             throw new DukeEmptyDescriptionException("todo");
         }
     }
 
-    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
         String details = this.getDetails();
-        ToDo current = new ToDo(details);
+        Todo current = new Todo(details);
         tasks.add(current);
         storage.addTodoData(details);
-        ui.printAddToDoMessage(current, tasks.size());
+        ui.printAddTodoMessage(current, tasks.size());
     }
 }

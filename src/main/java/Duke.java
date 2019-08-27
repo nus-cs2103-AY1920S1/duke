@@ -1,31 +1,25 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
-
-import duke.ui.DukeUi;
-
+import duke.ui.DukeUI;
 import duke.tasklist.TaskList;
-
 import duke.storagedata.StorageData;
-
 import duke.command.Command;
-
 import duke.parser.Parser;
-
 import duke.exception.*;
 
 public class Duke {
-    private DukeUi dukeUI;
+    private DukeUI dukeUI;
     private StorageData storage;
     private TaskList tasks;
 
     public Duke(String filePath) {
-        this.dukeUI = new DukeUi();
+        this.dukeUI = new DukeUI();
         this.storage = new StorageData(new File(filePath));
         try {
             this.tasks = new TaskList(this.storage.load());
@@ -37,7 +31,7 @@ public class Duke {
     public void run() {
         Scanner input = new Scanner(System.in);
         dukeUI.printWelcomeMessage();
-        while (input.hasNextLine()) {
+        while(input.hasNextLine()) {
             try {
                 Command c = Parser.parseCommand(input.nextLine());
                 c.execute(this.tasks, this.dukeUI, this.storage);

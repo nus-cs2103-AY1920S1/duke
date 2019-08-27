@@ -31,7 +31,7 @@ public class FindCommand extends Command {
      * storing into a temp arraylist and then printing it to user interface
      * @param taskList list containing current tasks
      * @param ui user interface
-     * @throws DukeException
+     * @throws DukeException throws if searched term isn't in any of the task descriptions
      */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {

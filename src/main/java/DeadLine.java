@@ -10,4 +10,8 @@ public class DeadLine extends Task {
 	public String toString() {
 		return "[D]" + super.toString() + " (by: " + endDate + ")";
 	}
+
+	public String getArchivalText() {
+		return ("D" + " | " + super.getDoneStatusAsInt() + " | "  + super.getTaskName() + " | " + endDate);
+	}
 }

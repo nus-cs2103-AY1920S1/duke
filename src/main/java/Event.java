@@ -10,4 +10,8 @@ public class Event extends Task {
 	public String toString() {
 		return "[E]" + super.toString() + " (at: " + eventDate + ")";
 	}
+
+	public String getArchivalText() {
+		return ("E" + " | " + super.getDoneStatusAsInt() + " | "  + super.getTaskName() + " | " + eventDate);
+	}
 }

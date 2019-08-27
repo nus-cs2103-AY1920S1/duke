@@ -8,11 +8,11 @@ class Parser {
         switch (command) {
         case "todo":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         Task task = new Todo(inputs[1]);
                         tasks.add(task);
-                        Storage.saveTasks(tasks);
+                        storage.saveTasks(tasks);
                         echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Todo task description cannot be blank.");
@@ -21,7 +21,7 @@ class Parser {
             };
         case "deadline":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -29,7 +29,7 @@ class Parser {
 
                         Task task = new Deadline(desc, by);
                         tasks.add(task);
-                        Storage.saveTasks(tasks);
+                        storage.saveTasks(tasks);
                         echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
@@ -38,7 +38,7 @@ class Parser {
             };
         case "event":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -46,7 +46,7 @@ class Parser {
 
                         Task task = new Event(desc, at);
                         tasks.add(task);
-                        Storage.saveTasks(tasks);
+                        storage.saveTasks(tasks);
                         echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Event task description or start time cannot be blank.");
@@ -55,7 +55,7 @@ class Parser {
             };
         case "list":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     if (tasks.isEmpty()) {
                         throw new DukeException("Oops! You have no tasks yet.");
                     }
@@ -68,12 +68,12 @@ class Parser {
             };
         case "done":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskDone = tasks.get(taskNumber - 1);
                         taskDone.markAsDone();
-                        Storage.saveTasks(tasks);
+                        storage.saveTasks(tasks);
 
                         ui.printLine("Nice! I've marked this task as done:");
                         ui.printLine(String.format("%s\n", taskDone));
@@ -84,11 +84,11 @@ class Parser {
             };
         case "delete":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskRemoved = tasks.remove(taskNumber - 1);
-                        Storage.saveTasks(tasks);
+                        storage.saveTasks(tasks);
 
                         ui.printLine("Got it. I've removed this task:");
                         ui.printLine(String.format("%s\n", taskRemoved));
@@ -102,7 +102,7 @@ class Parser {
             };
         case "bye":
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
                 }
 
                 public boolean isExit() {
@@ -111,7 +111,7 @@ class Parser {
             };
         default:
             return new Command() {
-                public void execute(ArrayList<Task> tasks, Ui ui) throws DukeException {
+                public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
                     throw new DukeException("Oops! You entered an invalid command.");
                 }
             };

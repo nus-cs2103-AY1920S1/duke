@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Storage {
-    private static File file = new File("data/duke.txt");
+    private File file;
 
-    protected static void saveTasks(ArrayList<Task> tasks) {
+    protected Storage(String pathname) {
+        this.file = new File(pathname);
+    }
+
+    protected void saveTasks(ArrayList<Task> tasks) {
         try {
             if (!file.exists()) {
                 File directory = new File(file.getParent());
@@ -41,7 +45,7 @@ class Storage {
 
     }
 
-    protected static ArrayList<Task> loadTasks() {
+    protected ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);

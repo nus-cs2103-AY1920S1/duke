@@ -1,12 +1,19 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
+    static ArrayList<Task> taskArrayList = new ArrayList<>();
+
     public static void start() throws DukeException {
         String input;
         int pos;
-        ArrayList<Task> arr = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String divider = "_____________________________________________________";
         while(sc.hasNext()) {
@@ -17,15 +24,14 @@ public class Duke {
                         System.out.println(divider);
                         System.out.println("Bye. Hope to see you again soon!");
                         System.out.println(divider);
-
                         return;
 
                     case ("list"):
                         System.out.println(divider);
                         System.out.println("Here are the tasks in your list:");
 
-                        for (int i = 0; i < arr.size(); i++) {
-                            System.out.println(i + 1 + "." + arr.get(i));
+                        for (int i = 0; i < taskArrayList.size(); i++) {
+                            System.out.println(i + 1 + "." + taskArrayList.get(i));
                         }
                         System.out.println(divider);
                         break;
@@ -33,9 +39,10 @@ public class Duke {
                     case ("done"):
                         System.out.println(divider);
                         pos = sc.nextInt();
-                        arr.get(pos - 1).markAsDone();
+                        taskArrayList.get(pos - 1).markAsDone();
+                        writeData();
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(arr.get(pos - 1));
+                        System.out.println(taskArrayList.get(pos - 1));
                         System.out.println(divider);
                         break;
 
@@ -47,10 +54,10 @@ public class Duke {
                             throw new DukeException("☹OOPS!!! The Description of a todo cannot be empty");
                         }
                         Todo t = new Todo(remaining.substring(0));
-                        arr.add(t);
+                        taskArrayList.add(t);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(t);
-                        System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                        System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
                         System.out.println(divider);
                         break;
 
@@ -66,10 +73,11 @@ public class Duke {
                             }
                             else {
                                 Event m = new Event(description, time);
-                                arr.add(m);
+                                taskArrayList.add(m);
+                                writeData();
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(m);
-                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                                System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
                                 System.out.println(divider);
                             }
                         }
@@ -82,20 +90,21 @@ public class Duke {
                     case ("deadline") :
                         System.out.println(divider);
                         String remainingStuff2 = sc.nextLine();
-                        int endies = remainingStuff2.indexOf('/');
-                        if (endies > 0) {
+                        int end2 = remainingStuff2.indexOf('/');
+                        if (end2 > 0) {
 
                             String description2 = remainingStuff2.substring(1, remainingStuff2.indexOf('/'));
-                            String timezies = remainingStuff2.substring(endies + 4).trim();
-                            if (timezies.isEmpty()) {
+                            String time2 = remainingStuff2.substring(end2 + 4).trim();
+                            if (time2.isEmpty()) {
                                 throw new DukeException("☹OOPS!!! Wrong format'");
                             }
                             else {
-                                Deadline k = new Deadline(description2, timezies);
-                                arr.add(k);
+                                Deadline k = new Deadline(description2, time2);
+                                taskArrayList.add(k);
+                                writeData();
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(k);
-                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                                System.out.println("Now you have " + taskArrayList.size() + " tasks in the list.");
                                 System.out.println(divider);
                             }
                         }
@@ -107,9 +116,10 @@ public class Duke {
                     case ("delete") :
                         int position = sc.nextInt();
                         System.out.println("Noted. I've removed this task.");
-                        System.out.println(arr.get(position-1));
-                        arr.remove(position-1);
-                        System.out.println("Now you have " + arr.size() + " tasks in the list");
+                        System.out.println(taskArrayList.get(position-1));
+                        taskArrayList.remove(position-1);
+                        writeData();
+                        System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
                         break;
 
                     default:
@@ -117,8 +127,67 @@ public class Duke {
                         throw new DukeException("☹OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException dx) {
-                System.out.println(dx);
+                System.out.println(dx.getMessage());
             }
+        }
+    }
+
+    static void readData() {
+        try {
+            FileReader fileReader = new FileReader("/Users/lawnce/Desktop/duke/data/duke.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line = null;
+            try {
+                while ((line = bufferedReader.readLine()) != null) {
+                    taskArrayList.add(createTask(line));
+                }
+                bufferedReader.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    static void writeData() {
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/Users/lawnce/Desktop/duke/data/duke.txt"));
+            for (Task task : taskArrayList) {
+                bufferedWriter.write(task.getData());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    static Task createTask(String text) {
+        String[] splitWords = text.split("\\|");
+        if (splitWords[0].equals("T")) {
+            String todoText = splitWords[2].substring(1); //substring to remove space
+            Todo todo = new Todo(todoText);
+            if (splitWords[1].equals("1")) {
+                todo.markAsDone();
+            }
+            return todo;
+        } else if (splitWords[0].equals("D")) {
+            String deadlineText = splitWords[2].substring(1); //substring to remove space
+            String deadlineTime = splitWords[3].substring(1); //substring to remove space
+            Deadline deadline = new Deadline(deadlineText, deadlineTime);
+            if (splitWords[1].equals("1")) {
+                deadline.markAsDone();
+            }
+            return deadline;
+        } else { //event scenario
+            String eventText = splitWords[2].substring(1); //substring to remove space
+            String eventTime = splitWords[3].substring(1); //substring to remove space
+            Event event = new Event(eventText, eventTime);
+            if (splitWords[1].equals("1")) {
+                event.markAsDone();
+            }
+            return event;
         }
     }
 
@@ -133,6 +202,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you");
         System.out.println("_____________________________________________________");
+        readData();
         Duke.start();
     }
 }

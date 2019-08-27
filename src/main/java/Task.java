@@ -7,8 +7,20 @@ public class Task {
         this.status = false;
     }
 
-    public void doTask() {
-        this.status = true;
+    public void doTask() throws DukeException{
+        if (this.status) {
+            throw new DukeException("The task specified has already been done.");
+        } else {
+            this.status = true;
+            this.printDone();
+        }
+    }
+
+    private void printDone() {
+        System.out.println("\t____________________________________________________________");
+        System.out.println("\t Nice! I've marked this task as done: ");
+        System.out.printf("\t   %s\n", this.toString());
+        System.out.println("\t____________________________________________________________");
     }
 
     public String getStatusIcon() {

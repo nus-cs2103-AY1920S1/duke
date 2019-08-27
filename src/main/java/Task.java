@@ -12,11 +12,11 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? "1" : "0";
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), description);
+        return String.format("[%s]%s", this.getStatusIcon(), description);
     }
 }

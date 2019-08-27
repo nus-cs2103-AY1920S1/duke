@@ -14,7 +14,7 @@ public class Duke {
         TaskList list = new TaskList();
         String command = "";
 
-        while (true) {
+        while (sc.hasNextLine()) {
             try {
                 command = sc.next();
                 String errorMsg = String.format("The description of a %s cannot be empty.", command);
@@ -25,12 +25,18 @@ public class Duke {
                         break;
 
                     case "done":
-                        int taskNum = Integer.parseInt(sc.nextLine().trim());
                         int sizeOfList = list.getNumOfTasks();
-                        if (taskNum > sizeOfList || taskNum < 1) {
-                            throw new InvalidDescriptionException(errorMsg);
+                        String number = sc.nextLine().trim();
+
+                        if (number.matches("^\\d+")) {
+                            int taskNum = Integer.parseInt(number);
+                            if (taskNum > sizeOfList || taskNum < 1) {
+                                throw new InvalidDescriptionException(errorMsg);
+                            } else {
+                                list.tickTask(taskNum);
+                            }
                         } else {
-                            list.tickTask(taskNum);
+                            throw new InvalidDescriptionException(errorMsg);
                         }
                         break;
 
@@ -80,6 +86,11 @@ public class Duke {
                 }
             } catch (Exception e) {
                 System.out.println(e);
+            }
+            if (sc.hasNext()) {
+                continue;
+            } else {
+                break;
             }
         }
     }

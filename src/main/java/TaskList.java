@@ -39,7 +39,7 @@ public class TaskList {
     public void printTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= xs.size(); i++) {
-            System.out.println(i + ". " + xs.get(i - 1));
+            System.out.println(i + "." + xs.get(i - 1));
         }
     }
 }

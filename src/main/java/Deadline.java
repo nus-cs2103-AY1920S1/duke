@@ -13,6 +13,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.toString() + ")";
+        return "[D]" + super.toString() + " (by: " + new SimpleDateFormat("yyyy/MM/dd hh:mm").format(by) + ")";
     }
 }

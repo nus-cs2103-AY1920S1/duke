@@ -13,6 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (at: " + at.toString() + ")";
+        return "[D]" + super.toString() + " (at: " + new SimpleDateFormat("yyyy/MM/dd hh:mm").format(at) + ")";
     }
 }

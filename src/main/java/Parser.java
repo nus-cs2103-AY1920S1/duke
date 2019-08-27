@@ -17,31 +17,30 @@ public class Parser {
             return new DeleteCommand(num);
         } else {
 
-                Task t;
-                //String desc = sc.nextLine();
-                if (input[1].equals("")) {
-                    throw new DukeException("The description of a " + input[0]+ " cannot be empty.");
+            Task t;
+            //String desc = sc.nextLine();
+            if (input[1].equals("")) {
+                throw new DukeException("The description of a " + input[0] + " cannot be empty.");
+            }
+            switch (input[0]) {
+                case "todo":
+                    t = new Todo(input[1].trim());
+                    break;
+                case "deadline": {
+                    String[] str = input[1].trim().split("/");
+                    t = new Deadline(str[0], str[1].substring(3));
+                    break;
                 }
-                switch (input[0]) {
-                    case "todo":
-                        t = new Todo(input[1].trim());
-                        break;
-                    case "deadline": {
-                        String[] str = input[1].trim().split("/");
-                        t = new Deadline(str[0], str[1].substring(3));
-                        break;
-                    }
-                    case "event": {
-                        String[] str = input[1].trim().split("/", 2);
-                        t = new Event(str[0], str[1].substring(3));
-                        break;
-                    }
-                    default:
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                case "event": {
+                    String[] str = input[1].trim().split("/", 2);
+                    t = new Event(str[0], str[1].substring(3));
+                    break;
                 }
-                return new AddCommand(t);
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+            return new AddCommand(t);
 
         }
-
     }
 }

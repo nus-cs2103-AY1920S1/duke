@@ -1,10 +1,13 @@
-public class Events extends Task {
-    private String at;
+import java.time.LocalDateTime;
 
-    public Events(boolean done, String description, String at) {
+public class Events extends Task {
+    private LocalDateTime start;
+    private LocalDateTime end;
+
+    public Events(boolean done, String description, LocalDateTime start, LocalDateTime end) {
         super(done, description);
-        this.at = at;
-    }
+        this.start = start;
+        this.end = end;
 
     @Override
     public String toFileString() {
@@ -27,7 +30,7 @@ public class Events extends Task {
             sb.append("[✗] ");
         }
         sb.append(description);
-        sb.append(" (at: " + at + ")");
+        sb.append(" (" + Parser.printDate(start) + " - " + Parser.printDate(end) + ")");
         return sb.toString();
     }
 }

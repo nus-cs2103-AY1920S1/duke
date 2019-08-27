@@ -1,7 +1,9 @@
-public class Deadlines extends Task {
-    private String deadline;
+import java.time.LocalDateTime;
 
-    public Deadlines(boolean done, String description, String deadline) {
+public class Deadlines extends Task{
+    private LocalDateTime deadline ;
+
+    public Deadlines(boolean done, String description, LocalDateTime deadline) {
         super(done, description);
         this.deadline = deadline;
     }
@@ -27,7 +29,7 @@ public class Deadlines extends Task {
             sb.append("[✗] ");
         }
         sb.append(description);
-        sb.append(" (by: " + deadline + ")");
+        sb.append(" (by: " + Parser.printDate(deadline) + ")");
         return sb.toString();
     }
 }

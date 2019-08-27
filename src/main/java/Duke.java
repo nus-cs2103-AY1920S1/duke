@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -52,18 +53,22 @@ public class Duke {
         String[] splitStr;
         if (command.equals("todo")) {
             return new ToDo(false, str);
-        } else if (command.equals("deadline")) {
+        } else if (command.equals("deadline")) { //eg input: deadline return book /by 2/12/2019 1800
             splitStr = str.split("/by");
             if (splitStr.length == 1) {
                 throw new DukeException("Invalid format. Please use 'by:' to state your deadline");
             }
-            return new Deadlines(false, splitStr[0].trim(), splitStr[1].trim());
-        } else if (command.equals("event")) {
+            LocalDateTime dt = Parser.parseDateTime(splitStr[1].trim());
+            return new Deadlines(false, splitStr[0].trim(), dt);
+        } else if (command.equals("event")) { //eg input: event proj meeting /at 2/12/2019 1800 - 2/12/2019 1800
             splitStr = str.split("/at");
             if (splitStr.length == 1) {
                 throw new DukeException("Invalid format. Please use 'at:' to state your deadline");
             }
-            return new Events(false, splitStr[0].trim(), splitStr[1].trim());
+            String[] dateString = splitStr[1].trim().split(" - "); //e.g. 2/12/2019 1800 - 2/12/2019 1800
+            LocalDateTime start = Parser.parseDateTime(dateString[0]);
+            LocalDateTime end = Parser.parseDateTime(dateString[1]);
+            return new Events(false, splitStr[0].trim(), start, end);
         } else {
             return null;
         }

@@ -10,6 +10,6 @@ public class Deadline extends DukePkg.Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

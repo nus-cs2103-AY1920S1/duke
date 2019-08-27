@@ -34,6 +34,10 @@ public abstract class Command {
         return new ByeCommand();
     }
 
+    public static Command addFindCommand(String details) {
+        return new FindCommand(details);
+    }
+
     public Command(String details) {
         this.details = details;
     }

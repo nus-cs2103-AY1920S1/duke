@@ -55,4 +55,19 @@ public class DukeUI {
         System.out.println(current.toString());
         System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
     }
+
+    /**
+     * Prints out tasks that contains the keyWord specified
+     * @param task TaskList that contains tasks to check from.
+     * @param keyWord keyWord to check if task description contains the keyWord.
+     */
+    public void printKeyWordTasks(TaskList task, String keyWord) {
+        System.out.println("Here are the matching tasks in your list:");
+        for(int i = 0; i < task.size(); i++) {
+            Task current = task.get(i);
+            if(current.getDescription().contains(keyWord)) {
+                System.out.println(current.toString());
+            }
+        }
+    }
 }

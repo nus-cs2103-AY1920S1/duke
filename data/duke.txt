@@ -1,0 +1,3 @@
+event,meeting,true,Friday
+deadline,hw,true,Thursday
+todo,readbooks,false,null

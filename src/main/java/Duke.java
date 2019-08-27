@@ -1,5 +1,7 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -13,6 +15,9 @@ public class Duke {
         final String lineSpace = "_______________________________\n";
         String startMessage = lineSpace + "Hello! I'm Duke\nWhat can I do for you?\n" + lineSpace;
         System.out.println(startMessage);
+        //Time
+        final String timePattern = "d MMMM yyyy, h:mma";
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(timePattern);
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList();
         String taskName;
@@ -52,7 +57,9 @@ public class Duke {
                         if (userWords.length == 1) {
                             throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty or is wrongly typed.");
                         }
-                        task = new Deadline(userWords[0].trim(), userWords[1].trim());
+                        LocalDateTime dateObj = LocalDateTime.parse(userWords[1].trim(), DateTimeFormatter.ofPattern("d/MM/yyyy Hmm"));
+                        String date = dateObj.format(dateTimeFormat);
+                        task = new Deadline(userWords[0].trim(), date);
                         list.add(task);
                         System.out.println(lineSpace + "Got it. I've added this task:\n" + task
                                 + "\nNow you have " + list.size() + " tasks in the list.\n" + lineSpace);

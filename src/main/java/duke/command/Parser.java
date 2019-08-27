@@ -7,7 +7,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -23,27 +22,27 @@ class Parser {
 
     void parse() throws DukeIllegalDescriptionException {
         switch (Command.valueOf(action[0])) {
-            case bye:
-                commandBye();
-                break;
-            case list:
-                commandList();
-                break;
-            case done:
-                commandDone();
-                break;
-            case todo:
-                commandTodo();
-                break;
-            case deadline:
-                commandDeadline();
-                break;
-            case event:
-                commandEvent();
-                break;
-            case delete:
-                commandDelete();
-                break;
+        case bye:
+            commandBye();
+            break;
+        case list:
+            commandList();
+            break;
+        case done:
+            commandDone();
+            break;
+        case todo:
+            commandTodo();
+            break;
+        case deadline:
+            commandDeadline();
+            break;
+        case event:
+            commandEvent();
+            break;
+        case delete:
+            commandDelete();
+            break;
         }
 
     }

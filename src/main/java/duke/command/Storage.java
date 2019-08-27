@@ -64,31 +64,31 @@ public class Storage {
                 String isDone = arr[1];
                 String action = arr[2];
                 switch (type) {
-                    case "T":
-                        Task todo = new Todo(action);
-                        if (isDone.equals("\u2713")) {
-                            todo.markAsDone();
-                        }
-                        store.add(todo);
-                        break;
-                    case "D":
-                        String by = arr[3];
-                        Task deadline = new Deadline(action, by);
-                        if (isDone.equals("\u2713")) {
-                            deadline.markAsDone();
-                        }
-                        store.add(deadline);
-                        break;
-                    case "E":
-                        String at = arr[3];
-                        Task event = new Event(action, at);
-                        if (isDone.equals("\u2713")) {
-                            event.markAsDone();
-                        }
-                        store.add(event);
-                        break;
-                    default:
-                        break;
+                case "T":
+                    Task todo = new Todo(action);
+                    if (isDone.equals("\u2713")) {
+                        todo.markAsDone();
+                    }
+                    store.add(todo);
+                    break;
+                case "D":
+                    String by = arr[3];
+                    Task deadline = new Deadline(action, by);
+                    if (isDone.equals("\u2713")) {
+                        deadline.markAsDone();
+                    }
+                    store.add(deadline);
+                    break;
+                case "E":
+                    String at = arr[3];
+                    Task event = new Event(action, at);
+                    if (isDone.equals("\u2713")) {
+                        event.markAsDone();
+                    }
+                    store.add(event);
+                    break;
+                default:
+                    break;
                 }
             }
             return store;

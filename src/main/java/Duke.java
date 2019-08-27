@@ -22,10 +22,10 @@ public class Duke {
 
     public void run() {
         ui.initMessage();
-        while(true){
-            try{
+        while (true) {
+            try {
                 ui.readUserInput();
-            } catch(IllegalStateException e) {
+            } catch (IllegalStateException e) {
                 break;
             }
         }

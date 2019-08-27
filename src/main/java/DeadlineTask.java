@@ -1,3 +1,6 @@
+/**
+ * Object representing a Deadline Task.
+ */
 public class DeadlineTask extends Task {
 
     String deadline;
@@ -8,7 +11,13 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    protected String toFileString() {
+        int done = isDone ? 1 : 0;
+        return "D" + " | " + done + " | " + details + " | " + deadline;
+    }
+
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + "( by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 }

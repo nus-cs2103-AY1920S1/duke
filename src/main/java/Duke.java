@@ -2,6 +2,9 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Main driver class for the Duke program.
+ */
 public class Duke {
 
     static TaskList taskList = new TaskList();
@@ -16,6 +19,7 @@ public class Duke {
     public static void main(String[] args) {
         welcomeMessage();
         String command = "";
+        taskList.load();
 
         while (!command.equals("bye")) {
             try {

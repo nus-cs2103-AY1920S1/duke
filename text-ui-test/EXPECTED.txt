@@ -7,11 +7,26 @@ Hello from
 
 What can I do for you?
 
-		nothing
+		buy bread
 
-		nothing la
+		buy fish
 
-		what is this
+		clear thrash
+
+		[?] buy bread
+
+		[?] buy fish
+
+		[?] clear thrash
+
+		Nice, I've marked this item as done
+		[?] buy bread
+
+		[?] buy bread
+
+		[?] buy fish
+
+		[?] clear thrash
 
 		Bye. Hope to see you again soon!
 

@@ -1,4 +1,7 @@
-nothing
-nothing la
-what is this
+buy bread
+buy fish
+clear thrash
+list
+done 1
+list
 bye

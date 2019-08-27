@@ -5,6 +5,8 @@ import java.io.Serializable;
  * A class representing a list of <code>Tasks</code>
  */
 public class TaskList implements Serializable {
+    private static final long serialVersionUID = 163417L;
+    
     private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
@@ -22,14 +24,7 @@ public class TaskList implements Serializable {
     public Task deleteAt(int index) throws DukeException {
         int realIndex = index - 1;
 
-        if(realIndex < 0) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_LIST_INDEX_SMALL));
-        }
-
-        if(realIndex >= tasks.size()) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(
-                String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
-        }
+        checkIndexExists(realIndex);
 
         Task deletedTask = tasks.get(realIndex);
         tasks.remove(realIndex);
@@ -51,14 +46,7 @@ public class TaskList implements Serializable {
     public Task markAsDone(int index) throws DukeException {
         int realIndex = index - 1;
 
-        if(realIndex < 0) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_LIST_INDEX_SMALL));
-        }
-
-        if(realIndex >= tasks.size()) {
-            throw new DukeException(DukeTextFormatter.makeFormattedText(
-                String.format(DukeUi.ERROR_LIST_INDEX_BIG, index)));
-        }
+        checkIndexExists(realIndex);
 
         tasks.set(realIndex, tasks.get(realIndex).getTaskMarkedAsDone());
         return tasks.get(realIndex);
@@ -78,6 +66,11 @@ public class TaskList implements Serializable {
         return tasks.size();
     }
 
+    /**
+     * @param searchTerm The term to match for in the description
+     * @return The <code>String</code> representation of a list of tasks whose description contains the 
+     * <code>searchTerm</code>
+     */
     public String getMatchingTasksAsString (String searchTerm) {
         StringBuilder sb = new StringBuilder();
         int iterator = 1;
@@ -89,8 +82,9 @@ public class TaskList implements Serializable {
             }
         }
 
+        //If there's no matches found, feedback to the user
         String retval = sb.toString();
-        if(retval.equals("")) {
+        if(retval.isEmpty()) {
             retval = DukeUi.FEEDBACK_FIND_NOTHING;
         }
 
@@ -112,5 +106,16 @@ public class TaskList implements Serializable {
         }
 
         return sb.toString();
+    }
+
+    private void checkIndexExists(int realIndex) throws DukeException {
+        if(realIndex < 0) {
+            throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_LIST_INDEX_SMALL));
+        }
+
+        if(realIndex >= tasks.size()) {
+            throw new DukeException(DukeTextFormatter.makeFormattedText(
+                String.format(DukeUi.ERROR_LIST_INDEX_BIG, realIndex + 1)));
+        }
     }
 }

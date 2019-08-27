@@ -7,7 +7,8 @@ import java.time.LocalTime;
  * A static class that generates Tasks based on the user's input.
  */
 public class TextToTaskTranslator {
-    //A Pattern for the format "dd/mm/yyyy" or "d/m/yy" (Day and Month have either 1 or 2 digits, Year has either 2 or 4 digits)
+    /*A Pattern for the format "dd/mm/yyyy" or "d/m/yy"
+      (Day and Month have either 1 or 2 digits, Year has either 2 or 4 digits)*/
     private static final Pattern DATE_FORMAT_PATTERN = Pattern.compile("\\b\\d{1,2}\\/\\d{1,2}\\/(\\d{2}|\\d{4})\\b");
 
     //A Pattern for the format "hhmm". Will not clash with the 4 digits for year in DATE_FORMAT_PATTERN
@@ -16,7 +17,7 @@ public class TextToTaskTranslator {
     private static final int [] DAYS_EACH_MONTH = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
     private static final String [] NAMES_EACH_MONTH 
         = { "January", "Februrary", "March", "April", "May", "June", 
-            "July", "August",  "September", "October", "November", "December"};
+            "July", "August",  "September", "October", "November", "December" };
 
     /**
      * Generates a <code>ToDoTask</code> from the user's input.
@@ -108,6 +109,8 @@ public class TextToTaskTranslator {
         }
     }
     
+    /*Translates DD/MM/YYYY into a LocalDate. Days and months can also be input with 1 digit, while the year can
+      be input with 2 digits*/
     private static LocalDate extractDateFromString(String timeSpecifications) throws DukeException {
         Matcher dateFormatMatcher = DATE_FORMAT_PATTERN.matcher(timeSpecifications);
         LocalDate deadlineDate = null;
@@ -132,6 +135,7 @@ public class TextToTaskTranslator {
         return deadlineDate;
     }
 
+    //Translates military time (HHMM) into a LocalTime
     private static LocalTime extractTimeFromString(String timeSpecifications) throws DukeException {
         Matcher timeFormatMatcher = TIME_FORMAT_PATTERN.matcher(timeSpecifications);
         LocalTime deadlineTime = null;
@@ -149,6 +153,7 @@ public class TextToTaskTranslator {
         return deadlineTime;
     }
 
+    //Throws an exception if the input date cannot exist
     private static void checkDateCorrect (int day, int month) throws DukeException {
         if(day == 0) {
             throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_DAY_ZERO));
@@ -168,6 +173,7 @@ public class TextToTaskTranslator {
         }
     }
 
+    //Throws an exception if the input time cannot exist
     private static void checkTimeCorrect (int hour, int minute) throws DukeException {
         //Checks for the hour
         if(hour < 0 || hour > 23) {
@@ -180,12 +186,14 @@ public class TextToTaskTranslator {
         }
     }
 
+    //Throws an Exception if the would-be Task doesn't have a description
     private static void checkDescriptionExists(String description) throws DukeException {
         if(description.equals("")) {
             throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_NO_DESCRIPTION));
         }
     }
     
+    //Throws an Exception if the would-be Task doesn't have a description
     private static void checkDescriptionExists (String [] splitString) throws DukeException {
         if(splitString.length == 0){
             throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_NO_DESCRIPTION));

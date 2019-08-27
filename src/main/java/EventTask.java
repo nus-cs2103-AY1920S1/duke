@@ -3,6 +3,8 @@
  * and end.
  */
 public class EventTask extends Task {
+    private static final long serialVersionUID = 119905L;
+    
     private final DukeDuration eventDuration;
 
     /**

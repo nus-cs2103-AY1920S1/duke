@@ -11,13 +11,13 @@ public class UserInputProcessor {
      */
     public static DukeReply processUserInput(String userInputString, TaskList tasks) throws DukeException {
         switch(identifyUserInputType(userInputString)){
-        case Bye: //Duke will close down
+        case Bye:
             return processByeCase();
             //Fallthrough
-        case List: //Duke will return the full list of Tasks
+        case List:
             return processListCase(tasks);
             //Fallthrough
-        case Done: //Duke will mark one Task for completion
+        case Done:
             return processDoneCase(userInputString, tasks);
             //Fallthrough
         case Delete:
@@ -29,19 +29,19 @@ public class UserInputProcessor {
         case Find:
             return processFindCase(userInputString, tasks);
             //Fallthrough
-        case ToDo: //Duke will record a ToDo Task
+        case ToDo:
             return processToDoCase(userInputString, tasks);
             //Fallthrough
-        case Deadline: //Duke will record a Deadline Task
+        case Deadline:
             return processDeadlineCase(userInputString, tasks);
             //Fallthrough
-        case Event: //Duke will record an Event Task
+        case Event:
             return processEventCase(userInputString, tasks);
             //Fallthrough
-        case Invalid: //Something went wrong
+        case Invalid:
             throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_UNDECIPHERABLE_MESSAGE));
             //Fallthrough
-        default: //Something went wrong
+        default:
             throw new DukeException(DukeTextFormatter.makeFormattedText(DukeUi.ERROR_UNDECIPHERABLE_MESSAGE));
             //Fallthrough
         }
@@ -77,10 +77,12 @@ public class UserInputProcessor {
         Bye, List, Done, Delete, Nuke, Find, ToDo, Deadline, Event, Invalid
     };
 
+    //Duke will shut down
     private static DukeReply processByeCase () {
         return new DukeReply(true, false, DukeTextFormatter.makeFormattedText(DukeUi.GREET_BYE));
     }
 
+    //Duke will pull up the Tasklist
     private static DukeReply processListCase(TaskList tasks) {
         if (tasks.isEmpty()) {
             return new DukeReply(false, false, DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_EMPTY_LIST));
@@ -89,6 +91,7 @@ public class UserInputProcessor {
         }
     }
 
+    //Duke will try to mark a Task as done
     private static DukeReply processDoneCase(String userInputString, TaskList tasks) throws DukeException {
         String indexString = "";
 
@@ -109,9 +112,9 @@ public class UserInputProcessor {
             throw new DukeException(DukeTextFormatter.makeFormattedText(
                 String.format(DukeUi.ERROR_NOT_NUMBER, indexString)));
         }
-        
     }
 
+    //Duke will try to delete one Task from the list
     private static DukeReply processDeleteCase(String userInputString, TaskList tasks) throws DukeException {
         String indexString = "";
 
@@ -120,7 +123,7 @@ public class UserInputProcessor {
 
             if(splitString.length == 1) {
                 throw new DukeException(DukeTextFormatter.makeFormattedText(
-                    String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "done")));
+                    String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "delete")));
             }
             indexString = splitString[1];
             int userSpecifiedIndex = Integer.parseInt(splitString[1]);
@@ -134,16 +137,20 @@ public class UserInputProcessor {
         }
     }
 
+    //Duke will delete all Tasks from the list
     private static DukeReply processNukeCase(String userInputString, TaskList tasks) {
         tasks.deleteAllTasks();
         return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(DukeUi.FEEDBACK_NUKE));
     }
 
+    //Duke will pull up all the Tasks that match the searchTerm
     private static DukeReply processFindCase(String userInputString, TaskList tasks) {
         String searchTerm = userInputString.substring(4).trim();
-        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(String.format(DukeUi.FEEDBACK_FIND, tasks.getMatchingTasksAsString(searchTerm))));
+        return new DukeReply(false, true, DukeTextFormatter.makeFormattedText(
+            String.format(DukeUi.FEEDBACK_FIND, tasks.getMatchingTasksAsString(searchTerm))));
     }
 
+    //Duke will create and add a new ToDoTask to the list
     private static DukeReply processToDoCase(String userInputString, TaskList tasks) throws DukeException {
         Task newlyAddedTask = TextToTaskTranslator.translateToDoTask(userInputString);
         tasks.add(newlyAddedTask);
@@ -151,6 +158,7 @@ public class UserInputProcessor {
             String.format(DukeUi.FEEDBACK_TASK_ADDED, newlyAddedTask.toString(), tasks.size())));
     }
 
+    //Duke will create and add a new DeadlineTask to the list
     private static DukeReply processDeadlineCase(String userInputString, TaskList tasks) throws DukeException {
         Task newlyAddedTask = TextToTaskTranslator.translateDeadlineTask(userInputString);
         tasks.add(newlyAddedTask);
@@ -158,6 +166,7 @@ public class UserInputProcessor {
             String.format(DukeUi.FEEDBACK_TASK_ADDED, newlyAddedTask.toString(), tasks.size())));
     }
 
+    //Duke will create and add a new EventTask to the list
     private static DukeReply processEventCase(String userInputString, TaskList tasks) throws DukeException {
         Task newlyAddedTask = TextToTaskTranslator.translateEventTask(userInputString);
         tasks.add(newlyAddedTask);

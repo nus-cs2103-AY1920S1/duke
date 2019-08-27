@@ -2,6 +2,8 @@
  * A class representing a basic <code>Task</code>.
  */
 public class ToDoTask extends Task {
+    private static final long serialVersionUID = 137301L;
+    
     /**
      * Creates an instance of a <code>ToDoTask</code>. The completion status is set to <code>false</code> by default.
      * 

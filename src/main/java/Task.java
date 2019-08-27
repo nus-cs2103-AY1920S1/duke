@@ -4,6 +4,8 @@ import java.io.Serializable;
  * An abstract class representing a task that can be recorded by Duke. Contains a description and a completion status.
  */
 public abstract class Task implements Serializable {
+    private static final long serialVersionUID = 122462L;
+    
     static protected final char UNICODE_TICK = (char) 0x2713;
     static protected final char UNICODE_CROSS = (char) 0x2718;
     static protected final String TO_STRING_FORMAT = "[%c][%c] %s";
@@ -28,6 +30,10 @@ public abstract class Task implements Serializable {
         return isDone ? UNICODE_TICK : UNICODE_CROSS;
     }
 
+    /**
+     * @return <code>true</code> if the description contains the <code>searchTerm</code> and <code>false</code>
+     * otherwise
+     */
     protected boolean descriptionContainsTerm(String searchTerm) {
         return description.contains(searchTerm);
     }

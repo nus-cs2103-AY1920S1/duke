@@ -6,6 +6,8 @@ import java.time.LocalTime;
  * A class that represents a date and time to be used by <code>Task</code> objects.
  */
 public class DukeDateTime implements Serializable {
+    private static final long serialVersionUID = 171594L;
+
     private final LocalDate date;
     private final LocalTime time;
 
@@ -45,6 +47,7 @@ public class DukeDateTime implements Serializable {
             StringBuilder sb = new StringBuilder();
             boolean dateExists = false;
 
+            //Prints the date
             if(date != null) {
                 String dateString = date.toString();
                 sb.append(dateString.substring(8, 10));
@@ -56,6 +59,7 @@ public class DukeDateTime implements Serializable {
                 dateExists = true;
             }
 
+            //Prints the time
             if(time != null) {
                 if(dateExists) {
                     sb.append(" ");

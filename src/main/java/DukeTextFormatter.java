@@ -1,5 +1,5 @@
 /**
- * A static class that handles text formatting for Duke's responses to the user.
+ * A class that handles text formatting for Duke's responses to the user.
  */
 public class DukeTextFormatter {
     private static final String BAR = "____________________________________________________________\n";

@@ -3,6 +3,8 @@
  * should be completed by.
  */
 public class DeadlineTask extends Task {
+    private static final long serialVersionUID = 104430L;
+    
     private final DukeDateTime deadlineTime;
 
     /**

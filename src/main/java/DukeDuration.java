@@ -4,6 +4,8 @@ import java.io.Serializable;
  * A class that represents a duration in time to be used by <code>Task</code> classes.
  */
 public class DukeDuration implements Serializable {
+    private static final long serialVersionUID = 233556L;
+
     private final DukeDateTime startDateTime;
     private final DukeDateTime endDateTime;
 
@@ -33,10 +35,12 @@ public class DukeDuration implements Serializable {
         } else {
             StringBuilder sb = new StringBuilder();
 
+            //Prints the date and time when the event will start
             if(!startDateTime.isEmpty()) {
                 sb.append(startDateTime.toString());
             }
 
+            //Prints the date and time when the event will end
             if(!endDateTime.isEmpty()) {
                 sb.append(" to ");
                 sb.append(endDateTime.toString());

@@ -14,6 +14,10 @@ public class Task {
         return this.isDone ? "\u2713" : "\u2718"; // return tick or X symbols
     }
 
+    public String toSaveFormat() {
+        return String.format("%d | %s", this.isDone ? 1 : 0, this.description);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     private String description;
     private boolean isDone;
@@ -11,7 +13,7 @@ public class Task {
         return (isDone ? "Y" : "N"); //return tick or X symbols
     }
 
-    void setDone() {
+    public void setDone() {
         this.isDone = true;
     }
 

@@ -1,12 +1,16 @@
+package duke.tasklist;
+
+import duke.task.Task;
+
 import java.util.LinkedList;
 
-class TaskList extends LinkedList<Task> {
-    static LinkedList<Task> taskList;
-    TaskList() {
+public class TaskList extends LinkedList<Task> {
+    public static LinkedList<Task> taskList;
+    public TaskList() {
         taskList = new LinkedList<>();
     }
 
-    TaskList(LinkedList<Task> tasks) {
+    public TaskList(LinkedList<Task> tasks) {
         taskList = new LinkedList<>(tasks);
     }
 

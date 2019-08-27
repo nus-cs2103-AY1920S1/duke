@@ -1,16 +1,24 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+
 import java.io.*;
 import java.text.ParseException;
 import java.util.LinkedList;
 
-class Storage {
+public class Storage {
     private static String basePath = new File("").getAbsolutePath();
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    LinkedList<Task> load() throws IOException {
+    public LinkedList<Task> load() throws IOException {
         LinkedList<Task> tasks = new LinkedList<>();
         try {
             FileReader in = new FileReader(new File(basePath + filePath));

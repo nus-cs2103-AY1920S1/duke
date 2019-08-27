@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeIllegalDescriptionException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 

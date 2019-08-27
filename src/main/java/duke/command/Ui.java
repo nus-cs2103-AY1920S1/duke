@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exception.DukeIllegalDescriptionException;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -15,17 +19,17 @@ public class Ui {
 
     private Storage storage;
 
-    Ui(Storage storage) {
+    public Ui(Storage storage) {
         this.storage = storage;
     }
 
     static Scanner sc = new Scanner(System.in);
 
-    void showLoadingError() {
-        System.out.println("Task list not retrieved.");
+    public void showLoadingError() {
+        System.out.println("duke.task.Task list not retrieved.");
     }
 
-    void readUserInput() {
+    public void readUserInput() {
         while(sc.hasNext()) {
             String act = sc.next();
                 try {

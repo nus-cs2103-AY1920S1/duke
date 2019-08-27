@@ -1,9 +1,8 @@
+import duke.command.Storage;
+import duke.command.Ui;
+import duke.tasklist.TaskList;
+
 import java.io.*;
-
-import java.text.ParseException;
-
-import java.util.Scanner;
-import java.util.LinkedList;
 
 public class Duke {
     private Storage storage;
@@ -23,7 +22,14 @@ public class Duke {
 
     public void run() {
         ui.initMessage();
-        ui.readUserInput();
+        while(true){
+            try{
+                ui.readUserInput();
+            } catch(IllegalStateException e) {
+                break;
+            }
+        }
+
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,9 @@
+package myduke.task;
+
 import java.util.Scanner;
+import myduke.exception.DukeException;
+import myduke.exception.DukeEmptyDescriptionException;
+import myduke.task.parameters.DukeDateTime;
 
 public class Deadline extends Task {
     protected final DukeDateTime byDate;

@@ -1,4 +1,8 @@
+package myduke.task;
+
 import java.util.Scanner;
+import myduke.exception.DukeException;
+import myduke.exception.DukeEmptyDescriptionException;
 
 public class ToDo extends Task {
     public ToDo(String description) {

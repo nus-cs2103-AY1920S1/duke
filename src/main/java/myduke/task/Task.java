@@ -1,3 +1,4 @@
+package myduke.task;
 
 public abstract class Task {
     protected final String description;

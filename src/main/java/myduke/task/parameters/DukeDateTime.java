@@ -1,11 +1,12 @@
+package myduke.task.parameters;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DukeDateTime {
-
-    private static final String DATETIMEFORMAT = "dd/M/yy HHmm";
-    private static final String PRINTDATETIMEFORMAT = "dd MMM yyyy hh:mm a";
+    private static final String DATETIME_FORMAT = "dd/M/yy HHmm";
+    private static final String PRINT_DATETIME_FORMAT = "dd MMM yyyy hh:mm a";
 
     private String dateTimeString;
     private Date localDateTime;
@@ -18,8 +19,8 @@ public class DukeDateTime {
      */
     public DukeDateTime(String dateTimeString) {
         this.dateTimeString = dateTimeString;
-        this.localDateFormatter = new SimpleDateFormat(DATETIMEFORMAT);
-        this.localDatePrintFormatter = new SimpleDateFormat(PRINTDATETIMEFORMAT);
+        this.localDateFormatter = new SimpleDateFormat(DATETIME_FORMAT);
+        this.localDatePrintFormatter = new SimpleDateFormat(PRINT_DATETIME_FORMAT);
         this.localDateTime = null;
 
         try {
@@ -34,7 +35,7 @@ public class DukeDateTime {
     }
 
     /**
-     * Determine whether the object is a valid DateTime Object.
+     * Determines whether the object is a valid DateTime Object.
      * @return A boolean determining whether the object is a valid DateTime Object
      */
     public boolean isValidDateTimeObject() {

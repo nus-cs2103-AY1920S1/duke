@@ -1,248 +1,62 @@
-import java.util.ArrayList;
-import java.util.List;
+import myduke.command.Command;
+import myduke.command.CommandParser;
+import myduke.core.Ui;
+
+import myduke.core.StorageManager;
+import myduke.exception.DukeException;
+import myduke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Duke {
 
     //Constants
-    private static final String MESSAGE_PADDING  = "     ";
-    private static final String MESSAGE_BOUNDARY = "    ____________________________________________________________";
-    private static final String MESSAGE_SAD_FACE = "\u2639";
+    private static final String DATABASE_LOCATION = System.getProperty("user.dir") + "/data/duke.csv";
 
     //Class Variables
-    private final List<Task> taskList;
+    private StorageManager storage;
+    private TaskList tasks;
+    private Ui ui;
 
     /**
      * Constructor for the class Duke.
      */
     //Constructor
     public Duke() {
-        this.taskList = new ArrayList<>();
+        ui = new Ui();
+        tasks = new TaskList();
+        storage = new StorageManager(DATABASE_LOCATION, tasks, ui::log);
     }
-
-    //#region [Print Response Helper Functions]
-    /**
-     * Prints a single response.
-     * @param responseHeader A message to the user.
-     */
-    private void printResponse(String responseHeader) {
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.print(MESSAGE_PADDING);
-
-        System.out.println(responseHeader);
-
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.println();
-    }
-
-    /**
-     * Prints a response and list the given tasks.
-     * @param responseHeader A message to the user.
-     * @param listOfTasks The list of tasks to be displayed to the user.
-     */
-    private void printResponse(String responseHeader, List<Task> listOfTasks) {
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.print(MESSAGE_PADDING);
-        System.out.println(responseHeader);
-
-        if (listOfTasks != null) {
-            int indexOfTask = 0;
-            for (Task currentTask : listOfTasks) {
-
-                indexOfTask += 1;
-                System.out.print(MESSAGE_PADDING);
-                System.out.print(String.format("%d.", indexOfTask));
-                System.out.println(currentTask);
-            }
-        }
-
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.println();
-    }
-
-    /**
-     * Prints a single response and list a specified task.
-     * @param responseHeader A message to the user.
-     * @param refTask The task to be displayed to the user.
-     * @param displayNumOfTasks Display number of task(s) in task list
-     */
-    private void printResponseSingleTask(String responseHeader, Task refTask, boolean displayNumOfTasks) {
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.print(MESSAGE_PADDING);
-        System.out.println(responseHeader);
-
-        System.out.print(MESSAGE_PADDING);
-        System.out.print("  ");
-        System.out.println(refTask);
-
-        if (displayNumOfTasks) {
-            System.out.print(MESSAGE_PADDING);
-            System.out.println(String.format(
-                    "Now you have %d task%s in the list.",
-                    this.taskList.size(),
-                    (this.taskList.size() > 1) ? "s" : ""));
-        }
-
-        //Print Boundary
-        System.out.println(MESSAGE_BOUNDARY);
-        System.out.println();
-    }
-    //#endregion [Print Response Helper Functions]
-
-    /**
-     * Marks a specified task as done.
-     * @param in The query to process.
-     * @return The task that was marked as done.
-     * @throws DukeException representing any checked exceptions
-     */
-    //#region [Business Logic]
-    private Task markTaskAsDone(Scanner in) throws DukeException {
-
-        if (!in.hasNextInt()) {
-            throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
-        }
-
-        int taskIndexRef = in.nextInt();
-        if (in.hasNext()) {
-            throw new DukeIllegalArgumentException("Too many arguments for the 'mark as done' command");
-        }
-
-        if (0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
-            Task taskRef = this.taskList.get(taskIndexRef - 1);
-            taskRef.markAsDone();
-            return taskRef;
-        }
-
-        throw new DukeInvalidCommandException("No such task was found");
-    }
-
-    /**
-     * Deletes the specified task.
-     * @param in The query to process.
-     * @return The task that was deleted.
-     * @throws DukeException representing any checked exceptions
-     */
-    //#region [Business Logic]
-    private Task deleteTask(Scanner in) throws DukeException {
-
-        if (!in.hasNextInt()) {
-            throw new DukeIllegalArgumentException("Task reference number needs to be an integer");
-        }
-
-        int taskIndexRef = in.nextInt();
-        if (in.hasNext()) {
-            throw new DukeIllegalArgumentException("Too many arguments for the 'delete task' command");
-        }
-
-        if (0 < taskIndexRef && taskIndexRef <= this.taskList.size()) {
-            Task taskRef = this.taskList.get(taskIndexRef - 1);
-            this.taskList.remove(taskIndexRef - 1);
-            return taskRef;
-        }
-
-        throw new DukeInvalidCommandException("No such task was found");
-    }
-
-    /**
-     * Executes the user's query and finds the appropriate response.
-     * @param query A query from the user.
-     * @return A boolean representing whether Duke should continue the chat.
-     */
-    private boolean giveResponse(String query) {
-
-        boolean shouldContinueChat = true;
-        Scanner in = new Scanner(query);
-
-        Task newTask = null;
-        try {
-            if (!in.hasNext()) {
-                throw new DukeException("Query should not be empty");
-            }
-
-            //Try to parse User's query
-            String command = in.next();
-            switch (command) {
-            case "todo":
-                newTask = ToDo.parse(in);
-                break;
-
-            case "deadline":
-                newTask = Deadline.parse(in);
-                break;
-
-            case "event":
-                newTask = Event.parse(in);
-                break;
-
-            case "list":
-                printResponse("Here are the tasks in your list:", this.taskList);
-                break;
-
-            case "done":
-                Task completedTask = markTaskAsDone(in);
-                printResponseSingleTask("Nice! I've marked this task as done:",
-                    completedTask, false);
-                break;
-
-            case "delete":
-                Task deletedTask = deleteTask(in);
-                printResponseSingleTask("Noted. I've removed this task:",
-                    deletedTask, true);
-                break;
-
-            case "bye":
-                shouldContinueChat = false;
-                printResponse("Bye. Hope to see you again soon!");
-                break;
-
-            default:
-                throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
-            }
-        } catch (DukeException ex) {
-            //Info user that an error occurred
-            printResponse(MESSAGE_SAD_FACE + " OOPS!!! " + ex.getMessage());
-        } finally {
-            //Clean up
-            in.close();
-        }
-
-        //If a new Task is created, handle it here
-        if (newTask != null) {
-            taskList.add(newTask);
-            printResponseSingleTask("Got it. I've added this task:", newTask, true);
-        }
-
-        return shouldContinueChat;
-    }
-    //#endregion [Business Logic]
-
 
     /**
      * To run Duke's program.
      */
     public void spin() {
-        boolean continueChat;
-        FileReaderWriter.tryReadFromDataBase(this.taskList);
 
-        Scanner myScanner = new Scanner(System.in);  // Create a Scanner object
-        printResponse("Hello! I'm Duke\n" + MESSAGE_PADDING + "What can I do for you?");
+        storage.tryLoadFromDataBase();
 
+        ui.init();
+        ui.welcomeUser();
+
+        boolean continueChat = true;
         do {
             //Get query from user
-            String userQuery = myScanner.nextLine();
+            String userQuery = ui.waitForQuery();
 
             //Find and give Response
-            continueChat = giveResponse(userQuery);
+            try {
+                Command cmd = CommandParser.create(userQuery);
+                cmd.execute(tasks, ui, storage);
+                continueChat = !cmd.shouldExit();
+            } catch (Exception ex) {
+                ui.logError(ex.getMessage());
+            }
 
         } while (continueChat);
-        myScanner.close();
 
-        FileReaderWriter.tryWriteToFile(this.taskList);
+        ui.sayGoodBye();
+        ui.shutdown();
+        storage.tryWriteToFile();
     }
 
 

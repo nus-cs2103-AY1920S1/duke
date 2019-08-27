@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
 
+/**
+ * Tests Parser class.
+ */
 public class ParserTest {
     private Parser p;
 
@@ -21,15 +24,25 @@ public class ParserTest {
         p = new Parser();
     }
 
+    /**
+     * Parses list command correctly.
+     *
+     * @throws ParseException
+     */
     @Test
     public void parse_listCommand() throws ParseException {
         String input = "list";
         parseAndAssertCommandType(input, ListCommand.class);
     }
 
+    /**
+     * Parses task string correctly.
+     *
+     * @throws ParseException
+     */
     @Test
-    public void parse_task() throws ParseException{
-        String input ="4.[E][\u2718] project meeting (at: Sun, 15 Dec 2019 18:00:00)";
+    public void parse_task() throws ParseException {
+        String input = "4.[E][\u2718] project meeting (at: Sun, 15 Dec 2019 18:00:00)";
         parseTaskAndAssertTaskType(input, Event.class);
     }
 
@@ -44,6 +57,14 @@ public class ParserTest {
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
     }
 
+    /**
+     * Parses task and asserts the class of the returned task.
+     *
+     * @param input
+     * @param expectedCommandClass
+     * @param <T>
+     * @throws ParseException
+     */
     private <T extends Task> void parseTaskAndAssertTaskType(String input, Class<T> expectedCommandClass) throws ParseException {
         Task result = p.parseTask(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));

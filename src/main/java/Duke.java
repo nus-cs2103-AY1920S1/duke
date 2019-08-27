@@ -7,11 +7,19 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.Scanner;
 
+/**
+ * The one and only Duke!
+ * (Essentially a to do list...)
+ */
 public class Duke {
     private TaskList tasks;
     private UI ui;
     private Storage storage;
 
+    /**
+     * Initialise duke with file path. This file path will be used for storage.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);

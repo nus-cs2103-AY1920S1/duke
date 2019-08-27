@@ -1,11 +1,25 @@
 package duke.tasks;
 
+/**
+ * To Do task.
+ */
 public class ToDo extends Task {
 
+    /**
+     * Initialises To Do with specified task.
+     *
+     * @param task
+     */
     public ToDo(String task) {
         super(task);
     }
 
+    /**
+     * Initialises To Do with specified task and its status.
+     *
+     * @param task
+     * @param done
+     */
     public ToDo(String task, Boolean done) {
         super(task, done);
     }

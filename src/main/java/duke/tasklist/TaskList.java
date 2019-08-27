@@ -8,13 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+/**
+ * Task List.
+ */
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * Initialises with given list of tasks.
+     * @param tl
+     */
     public TaskList(List<Task> tl) {
         tasks = tl;
     }
 
+    /**
+     * Initialises with empty list of task.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
@@ -75,10 +85,18 @@ public class TaskList {
         return tasks.get(tasks.size() - 1).toString();
     }
 
+    /**
+     * Get Task size.
+     * @return task size
+     */
     public int getTasksSize() {
         return tasks.size();
     }
 
+    /**
+     * Get tasks as a string
+     * @return tasks
+     */
     public String getTasks() {
         StringJoiner result = new StringJoiner("\n");
         for (int i = 0; i < tasks.size(); i++) {

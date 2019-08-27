@@ -5,13 +5,26 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import java.io.IOException;
 
+/**
+ * Delete command
+ */
 public class DeleteCommand extends Command {
     int i;
 
+    /**
+     * Initialises with index of task to be deleted.
+     * @param i
+     */
     public DeleteCommand(int i) {
         this.i = i;
     }
 
+    /**
+     * Deletes task and updates Storage.
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.delete(i);
@@ -22,6 +35,10 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Does not exit
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }

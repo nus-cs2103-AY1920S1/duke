@@ -5,17 +5,25 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import java.io.IOException;
 
+/**
+ * Delete command
+ */
 public class IllegalCommand extends Command {
 
+    /**
+     * Shows illegal command
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        try {
-            ui.showIllegalCommandMessage();
-            storage.save(tasks.getTasks());
-        } catch (IOException e) {
-            ui.showMessage(e.getMessage());
-        }
+        ui.showIllegalCommandMessage();
     }
 
+    /**
+     * Does not exit
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }

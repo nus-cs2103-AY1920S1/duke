@@ -8,15 +8,21 @@ import java.util.Date;
 import java.text.ParseException;
 
 /**
- * Parser has one method: parse.
- * Parsing breaks down the input full command string, and outputs its associated command.
- * Parsing detects and reports any syntax errors with the full command.
+ * Parser breaks down input string into relevant data structures to be used.
+ * Parser detects and reports any syntax errors.
  */
 public class Parser {
     private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
 
+    /**
+     * Parses full command string and outputs relevant command.
+     * @param fullCommand
+     * @return Command
+     * @throws IllegalArgumentException
+     * @throws ParseException
+     */
     public static Command parse(String fullCommand) throws IllegalArgumentException, ParseException {
         String task;
         int i;
@@ -69,9 +75,9 @@ public class Parser {
 
     /**
      * Parses full task string and returns a task instance.
-     *
      * @param fullTask
-     * @return Task
+     * @return task
+     * @throws ParseException
      */
     //TODO: task initialised hard coded
     public static Task parseTask(String fullTask) throws ParseException{

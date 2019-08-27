@@ -2,7 +2,11 @@ package duke.ui;
 
 import java.util.StringJoiner;
 
+/**
+ * Prints messages for client.
+ */
 public class UI {
+
     public void showWelcomeMessage() {
         StringJoiner sj = new StringJoiner("\n");
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -59,6 +63,11 @@ public class UI {
         System.out.println(message);
     }
 
+    /**
+     * Pads message with horizontal lines.
+     * @param message
+     * @return padded message
+     */
     public String padMessage(String message) {
         StringJoiner result = new StringJoiner("\n");
         result.add("____________________________________________________________");

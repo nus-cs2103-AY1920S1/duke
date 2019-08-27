@@ -6,13 +6,26 @@ import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import java.io.IOException;
 
+/**
+ * Deadline command
+ */
 public class DeadlineCommand extends Command {
     Deadline dl;
 
+    /**
+     * Initialise with deadline task.
+     * @param dl
+     */
     public DeadlineCommand(Deadline dl) {
         this.dl = dl;
     }
 
+    /**
+     * Adds deadline to Task List and saves it in Storage.
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         try {
             String taskMessage = tasks.addDeadline(dl);
@@ -23,6 +36,10 @@ public class DeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Does not exit
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }

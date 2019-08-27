@@ -52,7 +52,7 @@ public class DukeDatabase {
      * Returns all the tasks stored in the database.
      * @return a list of all the tasks stored in the database.
      */
-    public List<Task> getAllTasks() {
+    public TaskList getAllTasks() {
         LinkedList<Task> tasksList = new LinkedList<>();
 
         try {
@@ -73,7 +73,7 @@ public class DukeDatabase {
            System.out.println("Cannot find database file!");
         }
 
-        return tasksList;
+        return new TaskList(tasksList);
     }
 
     /**
@@ -114,7 +114,7 @@ public class DukeDatabase {
      * Used at the end of program(Duke) to update the database file.
      * @param tasks a list of tasks as updated at the point when the program ends.
      */
-    protected void update(List<Task> tasks) {
+    protected void update(TaskList tasks) {
         // Extract all the data summaries of the tasks and append them into a single string.
         StringBuilder bldr = new StringBuilder(150);
         tasks.forEach(t -> {

@@ -18,7 +18,8 @@ class Parser {
         int i;
         Date date;
         String format = "dd/MM/yyyy HHmm";
-        SimpleDateFormat readFormat = new SimpleDateFormat(format);;
+        SimpleDateFormat readFormat = new SimpleDateFormat(format);
+        ;
         Command command;
 
         String[] arr = fullCommand.split(" ", 2);
@@ -60,5 +61,39 @@ class Parser {
             command = new IllegalCommand();
         }
         return command;
+    }
+
+    /**
+     * Parses full task string and returns a task instance.
+     *
+     * @param fullTask
+     * @return Task
+     */
+    //TODO: task initialised hard coded
+    public static Task parseTask(String fullTask) throws ParseException{
+        Task t = new Task("");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+        char taskType = fullTask.charAt(3);
+        boolean done = (fullTask.charAt(6) + "").equals("\u2713");
+        String task, dateString;
+        Date date;
+        switch (taskType) {
+        case 'T':
+            task = fullTask.split(" ", 2)[1];
+            t = new ToDo(task, done);
+            break;
+        case 'D':
+            task = fullTask.split(" ", 2)[1].split("\\(by:")[0].trim();
+            dateString = fullTask.split(" ", 2)[1].split("\\(by:")[1].trim().replace(")", "");
+            date = sdf.parse(dateString); // remove trailing bracket
+            t = new Deadline(task, date);
+            break;
+        case 'E':
+            task = fullTask.split(" ", 2)[1].split("\\(at:")[0].trim();
+            dateString = fullTask.split(" ", 2)[1].split("\\(at:")[1].trim().replace(")", "");
+            date = sdf.parse(dateString); // remove trailing bracket
+            t = new Event(task, date);
+        }
+        return t;
     }
 }

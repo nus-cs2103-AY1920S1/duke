@@ -48,6 +48,11 @@ class UI {
         showMessage(illegalCommandMessage);
     }
 
+    public void showLoadingError() {
+        String loadingError = "\u2639 OOPS!!! I'm sorry, but file was not loaded :-(\n";
+        showMessage(padMessage(loadingError));
+    }
+
     public void showMessage(String message) {
         System.out.println(message);
     }

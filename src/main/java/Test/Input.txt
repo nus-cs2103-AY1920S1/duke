@@ -1,6 +1,5 @@
+list
 todo read book
-todo borrow book
-deadline return book /by 5/12/2019 0800
 deadline do homework /by 2/12/2019 1800
 event project meeting /at 15/12/2019 1800
 list

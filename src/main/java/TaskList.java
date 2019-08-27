@@ -5,6 +5,10 @@ import java.util.StringJoiner;
 public class TaskList {
     private List<Task> tasks;
 
+    public TaskList(List<Task> tl) {
+        tasks = tl;
+    }
+
     public TaskList() {
         tasks = new ArrayList<>();
     }

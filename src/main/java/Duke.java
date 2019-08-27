@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -22,6 +24,17 @@ public class Duke {
     private UI ui;
     private Storage storage;
 
+    public Duke(String filePath) {
+        ui = new UI();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException | ParseException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
     /**
      * Driver method.
      */
@@ -29,9 +42,9 @@ public class Duke {
         Command command;
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
-        tasks = new TaskList();
-        ui = new UI();
-        storage = new Storage("./Data/duke.txt");
+//        tasks = new TaskList();
+//        ui = new UI();
+//        storage = new Storage("./Data/duke.txt");
 
         ui.showWelcomeMessage();
 
@@ -51,8 +64,7 @@ public class Duke {
      * Main method.
      */
     public static void main(String[] args) {
-        Duke d = new Duke();
-        // Duke d = new Duke("Data/duke.txt");
-        d.run();
+//        Duke d = new Duke();
+        new Duke("Data/duke.txt").run();
     }
 }

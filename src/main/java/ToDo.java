@@ -4,6 +4,10 @@ class ToDo extends Task {
         super(task);
     }
 
+    ToDo(String task, Boolean done) {
+        super(task, done);
+    }
+
     @Override
     public String toString() {
         String iconForDone = done ? "\u2713" : "\u2718";

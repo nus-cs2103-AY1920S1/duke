@@ -9,6 +9,11 @@ class Deadline extends Task {
         this.date = date;
     }
 
+    Deadline(String task, Boolean done, Date date) {
+        super(task, done);
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");

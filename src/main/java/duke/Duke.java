@@ -6,6 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.util.Scanner;
 
@@ -23,8 +24,6 @@ public class Duke {
     private Storage storage;
 
     // Messages
-    private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String MESSAGE_BYE      = "Bye. Hope to see you again soon!";
     private static final String MESSAGE_ADD      = "Got it. I've added this task:\n  %s\n"
             + "Now you have %d %s in the list.";
     private static final String MESSAGE_LIST     = "Here are the tasks in your list:\n";
@@ -60,9 +59,9 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
-            printFormatted(String.format("Loaded from %s", storage.getFilePath()));
+            Ui.printIndented(String.format("Loaded from %s", storage.getFilePath()));
         } catch (DukeException ex) {
-            printFormatted(ex.getMessage());
+            Ui.printIndented(ex.getMessage());
             tasks = new TaskList();
         }
     }
@@ -72,12 +71,13 @@ public class Duke {
      * Handles command management.
      */
     private void run() {
-        sayGreeting();
+        Ui.sayGreeting();
         String input;
         Scanner sc = new Scanner(System.in);
 
         do {
             input = sc.nextLine();
+            Ui.printDivider();
             String[] line = input.split(" ", 2);
             try {
                 switch (line[0]) {
@@ -107,48 +107,21 @@ public class Duke {
                     if (line.length != 1) {
                         throw new DukeException(ERROR_TOO_MANY_ARGUMENTS);
                     }
+                    Ui.sayBye();
                     break;
                 default:
                     throw new DukeException(ERROR_INVALID_INPUT);
                 }
                 storage.save(tasks);
             } catch (DukeException ex) {
-                printFormatted(ex.getMessage());
+                Ui.printIndented(ex.getMessage());
+            } finally {
+                Ui.printDivider();
             }
         } while (!input.equals("bye"));
-
-        sayBye();
     }
 
-    /**
-     * Prints the greeting message for starting Duke.
-     */
-    private void sayGreeting() {
-        printFormatted(MESSAGE_GREETING);
-    }
 
-    /**
-     * Prints the bye message for exiting Duke.
-     */
-    private void sayBye() {
-        printFormatted(MESSAGE_BYE);
-    }
-
-    /**
-     * Prints output in a standardised format.
-     * @param output String to be printed by Duke.
-     */
-    private void printFormatted(String output) {
-        String horLine = "\t____________________________________________________________";
-        String[] lines = output.split("\n");
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%s\n", horLine));
-        for (String line : lines) {
-            stringBuilder.append(String.format("\t %s\n", line));
-        }
-        stringBuilder.append(String.format("%s\n", horLine));
-        System.out.println(stringBuilder);
-    }
 
     /**
      * Adds task to task list.
@@ -174,7 +147,6 @@ public class Duke {
             String[] desc = description.split(" /at ");
             LocalDateTime time;
             try {
-                System.out.println(desc[1]);
                 time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
             } catch (DateTimeParseException ex) {
                 throw new DukeException(ERROR_WRONG_DATE_FORMAT);
@@ -208,7 +180,7 @@ public class Duke {
             task = new Todo(description);
         }
         tasks.add(task);
-        printFormatted(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
+        Ui.printIndented(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
                 tasks.size() != 1 ? "tasks" : "task"));
     }
 
@@ -219,14 +191,14 @@ public class Duke {
         StringBuilder lines = new StringBuilder();
         if (tasks.isEmpty()) {
             lines.append(MESSAGE_NO_TASKS);
-            printFormatted(lines.toString());
+            Ui.printIndented(lines.toString());
             return;
         }
         lines.append(MESSAGE_LIST);
         for (int i = 0; i < tasks.size(); i++) {
             lines.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
-        printFormatted(lines.toString());
+        Ui.printIndented(lines.toString());
     }
 
     /**
@@ -236,7 +208,7 @@ public class Duke {
     private void doTask(int id) {
         Task task = tasks.get(id - 1);
         task.markAsDone();
-        printFormatted(String.format(MESSAGE_DONE, task.toString()));
+        Ui.printIndented(String.format(MESSAGE_DONE, task.toString()));
     }
 
     /**
@@ -246,7 +218,7 @@ public class Duke {
     private void deleteTask(int id) {
         Task task = tasks.get(id - 1);
         tasks.remove(id - 1);
-        printFormatted(String.format(MESSAGE_DELETE, task.toString(), tasks.size(),
+        Ui.printIndented(String.format(MESSAGE_DELETE, task.toString(), tasks.size(),
                 tasks.size() != 1 ? "tasks" : "task"));
     }
 

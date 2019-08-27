@@ -4,6 +4,7 @@ import duke.task.Task;
 
 import java.util.LinkedList;
 
+
 public class TaskList extends LinkedList<Task> {
     public static LinkedList<Task> taskList;
     public TaskList() {

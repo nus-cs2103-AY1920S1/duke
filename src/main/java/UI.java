@@ -52,11 +52,7 @@ class UI {
         System.out.println(message);
     }
 
-    public void readLine() {
-
-    }
-
-    private String padMessage(String message) {
+    public String padMessage(String message) {
         StringJoiner result = new StringJoiner("\n");
         result.add("____________________________________________________________");
         result.add(message);

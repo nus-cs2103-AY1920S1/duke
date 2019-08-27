@@ -5,14 +5,14 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * A class representing a add command.
+ * A class representing an add command.
  */
 public class AddCommand extends Command{
     private Task task;
 
     /**
-     * Class constructor specifying the task.
-     * @param task
+     * Class constructor specifying the task to be added.
+     * @param task the task to be added.
      */
     public AddCommand(Task task) {
         this.task = task;

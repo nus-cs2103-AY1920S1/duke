@@ -18,9 +18,9 @@ public class Ui {
     private static final String PREFIX = "    ";
     private static final String DIVIDER = "____________________________________________________________";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
-    private static final String ADD_MESSAGE = "Got it. I've added this duke.task:";
-    private static final String DELETE_MESSAGE = "Noted. I've removed this duke.task:";
-    private static final String DONE_MESSAGE = "Nice! I've marked this duke.task as done:";
+    private static final String ADD_MESSAGE = "Got it. I've added this task:";
+    private static final String DELETE_MESSAGE = "Noted. I've removed this task:";
+    private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     private Scanner in;
@@ -40,11 +40,11 @@ public class Ui {
     }
 
     public void showError(DukeException e) {
-        out.println(e.getMessage());
+        showToUser(e.getMessage());
     }
 
     public void showWelcomeMessage() {
-        showToUser(WELCOME_MESSAGE);
+        showToUser(DIVIDER, WELCOME_MESSAGE, DIVIDER);
     }
 
     public String readCommand() {
@@ -55,8 +55,8 @@ public class Ui {
         showToUser(ADD_MESSAGE,
                 task.toString(),
                 (taskCount == 1
-                    ?"Now you have 1 task in the list"
-                    : String.format("Now you have %d tasks in the list", taskCount)));
+                    ?"Now you have 1 task in the list."
+                    : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
     public void showDoneMessage(Task task) {
@@ -68,8 +68,8 @@ public class Ui {
         showToUser(DELETE_MESSAGE,
                 task.toString(),
                 (taskCount == 1
-                    ? "Now you have 1 task in the list"
-                    : String.format("Now you have %d tasks in the list", taskCount)));
+                    ? "Now you have 1 task in the list."
+                    : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
     public void showTaskList(TaskList taskList) {

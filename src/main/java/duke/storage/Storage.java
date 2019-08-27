@@ -44,7 +44,7 @@ public class Storage {
                 } else if (code.equals("E")) {
                     taskList.add(TaskFactory.getTask(EVENT, taskArgs, isDone));
                 } else {
-                    throw new IOException("Attempting to read unknown duke.task from disk!");
+                    throw new IOException("Attempting to read unknown task from disk!");
                 }
             }
         } catch (IOException e) {
@@ -68,14 +68,14 @@ public class Storage {
                         bw.newLine();
                     } else if (task instanceof Deadline) {
                         String deadline = ((Deadline) task).getDeadline();
-                        bw.write(String.format("D | %d | %s | %s", isDone, desc, deadline));
+                        bw.write(String.format("D | %d | %s | /by | %s", isDone, desc, deadline));
                         bw.newLine();
                     } else if (task instanceof Event) {
                         String period = ((Event) task).getPeriod();
-                        bw.write(String.format("E | %d | %s | %s", isDone, desc, period));
+                        bw.write(String.format("E | %d | %s | /at | %s", isDone, desc, period));
                         bw.newLine();
                     } else {
-                        throw new IOException("Attempting to write unknown duke.task to disk!");
+                        throw new IOException("Attempting to write unknown task to disk!");
                     }
                 }
             }

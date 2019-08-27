@@ -14,10 +14,6 @@ import static duke.task.TaskType.*;
 public class Parser {
     public static Command parse(String command) throws DukeException {
         // remove trailing/leading whitespace and split by whitespace(s)
-        if (command.strip().split("[ ]+").length <= 1) {
-            throw new DukeUnknownInputException("Parser: No arguments specified after command.");
-        }
-
         command = command.strip();
         String[] commands = command.split("[ ]+");
         String[] args = Arrays.copyOfRange(commands, 1, commands.length);

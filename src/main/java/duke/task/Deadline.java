@@ -7,19 +7,11 @@ public class Deadline extends Task {
     private String deadline;
 
     public Deadline(String description, String deadline) throws DukeUnknownInputException {
-        super(description);
-        // enforce example format 2/12/2019 1800
-        if (deadline.split(" ").length != 2
-                || deadline.split(" ")[0].split("/").length != 3
-                || Integer.valueOf(deadline.split(" ")[1]) < 0
-                || Integer.valueOf(deadline.split(" ")[1]) > 2400) {
-            throw new DukeUnknownInputException("Unknown deadline String format passed :(");
-        }
-        this.deadline = deadline;
+        this(description, deadline, false);
     }
 
     public Deadline(String description, String deadline, boolean isDone) {
-        super(description, false);
+        super(description, isDone);
         this.deadline = deadline;
     }
 

@@ -1,6 +1,6 @@
-package duke.dukeHelper;
+package duke.helper;
 
-import duke.dukeTask.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;

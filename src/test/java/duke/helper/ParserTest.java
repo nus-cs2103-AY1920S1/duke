@@ -1,4 +1,4 @@
-package duke.dukeHelper;
+package duke.helper;
 
 import duke.DukeException;
 import org.junit.jupiter.api.Test;

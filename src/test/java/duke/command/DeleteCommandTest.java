@@ -1,11 +1,11 @@
-package duke.dukeCommand;
+package duke.command;
 
 import duke.DukeException;
-import duke.dukeHelper.Storage;
-import duke.dukeHelper.Ui;
-import duke.dukeTask.Task;
-import duke.dukeTask.TaskList;
-import duke.dukeTask.Todo;
+import duke.helper.Storage;
+import duke.helper.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

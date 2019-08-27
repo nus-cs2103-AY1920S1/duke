@@ -1,10 +1,10 @@
 package duke;
 
-import duke.dukeCommand.Command;
-import duke.dukeHelper.Parser;
-import duke.dukeHelper.Storage;
-import duke.dukeHelper.Ui;
-import duke.dukeTask.TaskList;
+import duke.command.Command;
+import duke.helper.Parser;
+import duke.helper.Storage;
+import duke.helper.Ui;
+import duke.task.TaskList;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke("D:/Users/USER/Documents/0. NUS/NUS Y2S1/CS2103T/Individual Project/duke/data/duke.txt").run();
     }
 
     public void run() {

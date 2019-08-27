@@ -1,8 +1,8 @@
-package duke.dukeCommand;
+package duke.command;
 
-import duke.dukeHelper.Storage;
-import duke.dukeHelper.Ui;
-import duke.dukeTask.TaskList;
+import duke.helper.Storage;
+import duke.helper.Ui;
+import duke.task.TaskList;
 
 public abstract class Command {
     protected String filePath;

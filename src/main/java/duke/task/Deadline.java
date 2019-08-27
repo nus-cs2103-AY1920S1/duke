@@ -1,4 +1,4 @@
-package duke.dukeTask;
+package duke.task;
 
 public class Deadline extends Task {
     private String endTime;

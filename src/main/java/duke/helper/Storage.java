@@ -1,7 +1,9 @@
-package duke.dukeHelper;
+package duke.helper;
 
-import duke.dukeTask.Deadline;
-import duke.dukeTask.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;

@@ -1,7 +1,12 @@
-package duke.dukeHelper;
+package duke.helper;
 
 import duke.DukeException;
-import duke.dukeCommand.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,7 +70,7 @@ public class Parser {
             // Exception if invalid instruction
             Ui ui = new Ui();
             throw new DukeException(ui.separationLine
-                    + "\n     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "\n     :( OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + ui.separationLine + "\n");
         }
     }
@@ -79,7 +84,9 @@ public class Parser {
             } catch (ParseException pe) {
                 // Continue checking for matching date format
             }
-            if (date != null) break;
+            if (date != null) {
+                break;
+            }
         }
         return date;
     }

@@ -1,8 +1,8 @@
-package duke.dukeCommand;
+package duke.command;
 
-import duke.dukeHelper.Storage;
-import duke.dukeHelper.Ui;
-import duke.dukeTask.*;
+import duke.helper.Storage;
+import duke.helper.Ui;
+import duke.task.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

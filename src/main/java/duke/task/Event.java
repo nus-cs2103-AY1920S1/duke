@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
@@ -13,8 +15,8 @@ public class Event extends Task {
     }
 
     /**
-     * Returns time of Event.
-     * @return Time of Event.
+     * Returns time of duke.task.Event.
+     * @return Time of duke.task.Event.
      */
     public String getTime() {
         return DATE_TIME_FORMATTER.format(this.at);

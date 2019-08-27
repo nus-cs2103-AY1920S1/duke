@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
@@ -17,7 +19,7 @@ public abstract class Task {
 
     /**
      * Gets task status.
-     * @return Task status.
+     * @return duke.task.Task status.
      */
     public boolean isDone() {
         return this.isDone;
@@ -25,7 +27,7 @@ public abstract class Task {
 
     /**
      * Returns task description.
-     * @return Task description.
+     * @return duke.task.Task description.
      */
     public String getDescription() {
         return this.description;

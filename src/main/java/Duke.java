@@ -1,5 +1,10 @@
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.TaskList;
+
 import java.util.Scanner;
-import java.util.ArrayList;
 
 import java.io.IOException;
 import java.io.FileWriter;
@@ -11,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private TaskList tasks;
 
     // Messages
     private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
@@ -193,9 +198,9 @@ public class Duke {
         default:
             task = new Todo(description);
         }
-        this.tasks.add(task);
-        printFormatted(String.format(MESSAGE_ADD,  task.toString(), this.tasks.size(),
-                this.tasks.size() != 1 ? "tasks" : "task"));
+        tasks.add(task);
+        printFormatted(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
+                tasks.size() != 1 ? "tasks" : "task"));
     }
 
     /**
@@ -203,14 +208,14 @@ public class Duke {
      */
     private void printTasks() {
         StringBuilder lines = new StringBuilder();
-        if (this.tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             lines.append(MESSAGE_NO_TASKS);
             printFormatted(lines.toString());
             return;
         }
         lines.append(MESSAGE_LIST);
-        for (int i = 0; i < this.tasks.size(); i++) {
-            lines.append(String.format("%d. %s\n", i + 1, this.tasks.get(i).toString()));
+        for (int i = 0; i < tasks.size(); i++) {
+            lines.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
         printFormatted(lines.toString());
     }
@@ -220,7 +225,7 @@ public class Duke {
      * @param id Id of task to mark completed.
      */
     private void doTask(int id) {
-        Task task = this.tasks.get(id - 1);
+        Task task = tasks.get(id - 1);
         task.markAsDone();
         printFormatted(String.format(MESSAGE_DONE, task.toString()));
     }
@@ -230,10 +235,10 @@ public class Duke {
      * @param id Id of task to delete.
      */
     private void deleteTask(int id) {
-        Task task = this.tasks.get(id - 1);
-        this.tasks.remove(id - 1);
-        printFormatted(String.format(MESSAGE_DELETE, task.toString(), this.tasks.size(),
-                this.tasks.size() != 1 ? "tasks" : "task"));
+        Task task = tasks.get(id - 1);
+        tasks.remove(id - 1);
+        printFormatted(String.format(MESSAGE_DELETE, task.toString(), tasks.size(),
+                tasks.size() != 1 ? "tasks" : "task"));
     }
 
     /**
@@ -244,7 +249,7 @@ public class Duke {
     private void saveTasks() throws DukeException {
         try {
             FileWriter fw = new FileWriter(SAVE_LOCATION);
-            for (Task task : this.tasks) {
+            for (Task task : tasks) {
                 if (task instanceof Deadline) {
                     fw.append(String.format("D | %d | %s | %s\n",
                             task.isDone() ? 1 : 0,
@@ -290,17 +295,17 @@ public class Duke {
                 default:
                     throw new DukeException(ERROR_FAILED_TO_READ);
                 }
-                this.tasks.add(task);
+                tasks.add(task);
             }
 
             printFormatted(String.format("Loaded tasks from %s", f.getAbsolutePath()));
         } catch (FileNotFoundException ex) {
             printFormatted(ERROR_FAILED_TO_FIND);
         } catch (DukeException ex) {
-            this.tasks = new ArrayList<>();
+            tasks = new TaskList();
             printFormatted(ex.getMessage());
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
-            this.tasks = new ArrayList<>();
+            tasks = new TaskList();
             printFormatted(ERROR_FAILED_TO_READ);
         }
     }
@@ -321,7 +326,7 @@ public class Duke {
         } catch (NumberFormatException ex) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
-        if (taskId < 1 || taskId > this.tasks.size()) {
+        if (taskId < 1 || taskId > tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
         return taskId;

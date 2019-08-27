@@ -18,10 +18,10 @@ public class Ui {
         System.out.println(indent(wrapWithHorizontalLines(endMessage)));
     }
 
-    public void showTasks(List<Task> tasks) {
+    public void showTasks(TaskList taskList) {
         StringJoiner sj = new StringJoiner("\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            sj.add((i + 1) + ". " + tasks.get(i));
+        for (int i = 0; i < taskList.getTasks().size(); i++) {
+            sj.add((i + 1) + ". " + taskList.getTasks().get(i));
         }
         System.out.println(indent(wrapWithHorizontalLines(sj.toString())));
     }

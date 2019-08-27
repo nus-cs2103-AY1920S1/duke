@@ -4,34 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
-    private static List<Task> tasks = new ArrayList<>();
+    private static TaskList taskList = new TaskList();
     private Ui ui;
 
-    /**
-     * Entry Point of entire Program.
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
+    public Duke(String filePath) {
+        ui = new Ui();
         try {
-            tasks = Storage.load();
+            taskList = Storage.load();
         } catch (FileNotFoundException ignore) {
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    public void run() {
         Ui ui = new Ui();
         ui.showWelcome();
 
         String input;
         while (!(input = ui.readCommand()).equals("bye")) {
-            String output;
             try {
-                handleInput(input, ui);
+                handleInput(input);
             } catch (DukeException e) {
-                output = e.getMessage();
+                System.out.println(e.getMessage());
             }
             try {
-                Storage.save(tasks);
+                Storage.save(taskList);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -39,18 +37,21 @@ public class Duke {
         ui.showBye();
     }
 
+    public static void main(String[] args) {
+        new Duke("/home/yuan/cs2103t/duke/data").run();
+    }
+
     /**
      * Is called for each line of input.
      * @param input Input string.
      * @throws DukeException When input argument wrong format.
      */
-    private static void handleInput(String input, Ui ui) throws DukeException {
-        String output;
+    private void handleInput(String input) throws DukeException {
         String[] splitInput = input.split(" ");
         String command = splitInput[0];
         switch (command) {
         case "list":
-            ui.showTasks(tasks);
+            ui.showTasks(taskList);
             break;
         case "done":
             Task taskToMarkAsDone;
@@ -61,7 +62,7 @@ public class Duke {
                 throw new DukeException("Argument passed to done must be a valid integer");
             }
             try {
-                taskToMarkAsDone = tasks.get(selectedIndex);
+                taskToMarkAsDone = taskList.getIndex(selectedIndex);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Selected task number does not exist.");
             }
@@ -77,12 +78,12 @@ public class Duke {
                 throw new DukeException("Argument passed to delete must be a valid integer");
             }
             try {
-                taskToDelete = tasks.get(deleteIndex);
+                taskToDelete = taskList.getIndex(deleteIndex);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("Selected task number does not exist.");
             }
-            tasks.remove(deleteIndex);
-            ui.showDeleteTask(taskToDelete, tasks.size());
+            taskList.deleteTaskAt(deleteIndex);
+            ui.showDeleteTask(taskToDelete, taskList.numberOfTasks());
             break;
         case "deadline":
             int byIndex = input.indexOf(" /by ");
@@ -92,8 +93,8 @@ public class Duke {
             String deadlineDescription =  input.substring(9, byIndex);
             String by = input.substring(byIndex + 5);
             Deadline deadline = new Deadline(deadlineDescription, by);
-            tasks.add(deadline);
-            ui.showAddTask(deadline, tasks.size());
+            taskList.addTask(deadline);
+            ui.showAddTask(deadline, taskList.numberOfTasks());
             break;
         case "event":
             int atIndex = input.indexOf(" /at ");
@@ -103,8 +104,8 @@ public class Duke {
             String eventDescription =  input.substring(6, atIndex);
             String at = input.substring(atIndex + 5);
             Event event = new Event(eventDescription, at);
-            tasks.add(event);
-            ui.showAddTask(event, tasks.size());
+            taskList.addTask(event);
+            ui.showAddTask(event, taskList.numberOfTasks());
             break;
         case "todo":
             String todoDescription;
@@ -114,8 +115,8 @@ public class Duke {
                 throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
             }
             Todo todo = new Todo(todoDescription);
-            tasks.add(todo);
-            ui.showAddTask(todo, tasks.size());
+            taskList.addTask(todo);
+            ui.showAddTask(todo, taskList.numberOfTasks());
             break;
         default:
             ui.showGenericError();

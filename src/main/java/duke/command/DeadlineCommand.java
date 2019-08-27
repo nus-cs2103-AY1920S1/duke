@@ -5,9 +5,20 @@ import duke.ui.DukeUI;
 import duke.tasklist.TaskList;
 import duke.storagedata.StorageData;
 import duke.task.Deadline;
+
+/**
+ * Represents a Deadline which contains a description of the deadline and when the deadline is due.
+ */
 public class DeadlineCommand extends Command{
     private String description;
     private String byWhen;
+
+    /**
+     * Instantiates a Deadline Object
+     * @param details contains both the description of the deadline and when the deadline is due.
+     * @throws DukeEmptyDescriptionException when details is an empty string.
+     * @throws DukeMissingDescriptionException when details contains missing information or is in a wrong format.
+     */
     public DeadlineCommand(String details) throws DukeEmptyDescriptionException, DukeMissingDescriptionException {
         super(details);
         if(details.isEmpty()) {
@@ -30,6 +41,13 @@ public class DeadlineCommand extends Command{
         }
     }
 
+    /**
+     * Adds the Deadline Object to the TaskList of the Duke Object.
+     * Stores the Deadline in the StorageData and prints out a message to confirm that it has been added.
+     * @param tasks TaskList of Duke Object
+     * @param ui DukeUI of Duke Object
+     * @param storage StorageData of Duke Object
+     */
     public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
         String details = this.getDetails();
         Deadline current = new Deadline(this.description, this.byWhen);

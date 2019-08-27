@@ -1,6 +1,11 @@
 package duke.ui;
 import duke.task.*;
 import duke.tasklist.TaskList;
+
+/**
+ * Represents the User Interface of the Duke App.
+ * Lists the messages that are printed out when a corresponding command is executed.
+ */
 public class DukeUI {
     public DukeUI() {
 

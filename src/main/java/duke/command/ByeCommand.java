@@ -2,11 +2,22 @@ package duke.command;
 import duke.tasklist.TaskList;
 import duke.ui.DukeUI;
 import duke.storagedata.StorageData;
+
+/**
+ * Represents a Command object where the user input is "bye.
+ */
 public class ByeCommand extends Command {
     public ByeCommand() {
         super();
     }
 
+    /**
+     * Prints message that is for shutting down of the Duke app.
+     * Terminates program afterwards.
+     * @param tasks TaskList of Duke Object.
+     * @param ui DukeUI of Duke Object.
+     * @param storage StorageData of Duke Object.
+     */
     public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
         ui.printByeMessage();
         System.exit(0);

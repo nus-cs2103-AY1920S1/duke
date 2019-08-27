@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,6 +22,39 @@ public class Duke {
                 "     What can I do for you?\n" +
                 "    ____________________________________________________________\n";
         System.out.println(logo + '\n' + greetMsg);
+    }
+
+    public static void loadData() throws FileNotFoundException {
+        File f = new File("data/duke.txt");
+        Scanner sc = new Scanner(f);
+        while(sc.hasNextLine()) {
+            String s = sc.nextLine();
+            String[] data = s.split(" \\| ");
+            String command = data[0];
+            if (command.equals("T")) {
+                Todo t = new Todo(data[2]);
+                if (Integer.parseInt(data[1]) == 1) t.setDone();
+                tasks.add(t);
+            } else if (command.equals("D")) {
+                Deadline d = new Deadline(data[2], data[3]);
+                if (Integer.parseInt(data[1]) == 1) d.setDone();
+                tasks.add(d);
+            } else {
+                Event e = new Event(data[2], data[3]);
+                if (Integer.parseInt(data[1]) == 1) e.setDone();
+                tasks.add(e);
+            }
+        }
+    }
+
+    public static void startDuke() {
+        printGreeting();
+        tasks = new ArrayList<>();
+        try {
+            loadData();
+        } catch (FileNotFoundException ex) {
+
+        }
     }
 
     public static void handleBye() {
@@ -54,6 +91,16 @@ public class Duke {
         }
     }
 
+    public static void handleBadCommand() throws DukeException {
+        try {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "    ____________________________________________________________\n");
+        } catch(DukeException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
     public static void handleDone() throws DukeException {
         try {
             if (inputStringArr.length > 1) {
@@ -76,6 +123,7 @@ public class Duke {
                                 "     Nice! I've marked this task as done: \n" +
                                 "       [" + '+' + "] " + t + '\n' +
                                 "    ____________________________________________________________\n");
+                        rewriteFile();
                     }
                 }
             } else {
@@ -99,6 +147,7 @@ public class Duke {
                         "       [T]" + "[ ]" + ' ' + t+ '\n' +
                         "     Now you have " + tasks.size() + " tasks in the list.\n" +
                         "    ____________________________________________________________\n");
+                appendToFile("T | 0 | " + taskName + '\n');
             } else {
                 throw new DukeException("    ____________________________________________________________\n" +
                         "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
@@ -117,9 +166,10 @@ public class Duke {
         tasks.add(d);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                "       [D][ ] " + d + " (by: " + d.getDate() + ")\n" +
+                "       [D][ ] " + d + " (by: " + date + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");
+        appendToFile("D | 0 | " + taskName + " | " + date + '\n');
     }
 
     public static void handleEvent() {
@@ -130,9 +180,10 @@ public class Duke {
         tasks.add(e);
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                "       [E][ ] " + e + " (at: " + e.getDate() + ")\n" +
+                "       [E][ ] " + e + " (at: " + date + ")\n" +
                 "     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");
+        appendToFile("E | 0 | " + taskName + " | " + date + '\n');
     }
 
     public static void handleDelete() {
@@ -150,43 +201,86 @@ public class Duke {
         }
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");
+        rewriteFile();
     }
 
-    public static void handleBadCommand() throws DukeException {
+    private static void appendToFile(String textToAppend) {
         try {
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "    ____________________________________________________________\n");
-        } catch(DukeException ex) {
-            System.err.println(ex.getMessage());
+            FileWriter fw = new FileWriter("../data/duke.txt", true); // create a FileWriter in append mode
+            fw.write(textToAppend);
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println("Something went wrong: " + ex.getMessage());
+        }
+    }
+
+    private static void rewriteFile() {
+        try {
+            FileWriter fw = new FileWriter("../data/duke.txt");
+            String textToWrite = "";
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                String type = t.getType();
+                if (type.equals("todo")) {
+                    String s = "T | ";
+                    if (t.getStatus()) {
+                        s += "1";
+                    } else {
+                        s += "0";
+                    }
+                    s += " | " + t + '\n';
+                    textToWrite += s;
+                } else if (type.equals("event")) {
+                    String s = "E | ";
+                    if (t.getStatus()) {
+                        s += "1";
+                    } else {
+                        s += "0";
+                    }
+                    s += " | " + t + " | " + t.getDate() + '\n';
+                    textToWrite += s;
+                } else {
+                    String s = "D | ";
+                    if (t.getStatus()) {
+                        s += "1";
+                    } else {
+                        s += "0";
+                    }
+                    s += " | " + t + " | " + t.getDate() + '\n';
+                    textToWrite += s;
+                }
+            }
+            fw.write(textToWrite);
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println("Something went wrong: " + ex.getMessage());
         }
     }
 
     public static void main(String[] args) {
-            printGreeting();
-            tasks = new ArrayList<>();
-            Scanner sc = new Scanner(System.in);
-            while (sc.hasNextLine()) {
-                userInput = sc.nextLine();
-                inputStringArr = userInput.split(" ");
-                String command = inputStringArr[0];
-                if (command.equals("bye")) {
-                    handleBye();
-                } else if (command.equals("list")) {
-                    handleList();
-                } else if (command.equals("done")) {
-                    handleDone();
-                } else if (command.equals("todo")) {
-                    handleTodo();
-                } else if (command.equals("deadline")) {
-                    handleDeadline();
-                } else if (command.equals("event")) {
-                    handleEvent();
-                } else if (command.equals("delete")) {
-                    handleDelete();
-                } else {
-                    handleBadCommand();
-                }
+        startDuke();
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            userInput = sc.nextLine();
+            inputStringArr = userInput.split(" ");
+            String command = inputStringArr[0];
+            if (command.equals("bye")) {
+                handleBye();
+            } else if (command.equals("list")) {
+                handleList();
+            } else if (command.equals("done")) {
+                handleDone();
+            } else if (command.equals("todo")) {
+                handleTodo();
+            } else if (command.equals("deadline")) {
+                handleDeadline();
+            } else if (command.equals("event")) {
+                handleEvent();
+            } else if (command.equals("delete")) {
+                handleDelete();
+            } else {
+                handleBadCommand();
             }
+        }
     }
 }

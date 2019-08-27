@@ -1,10 +1,12 @@
+package duke.parser;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
 
-class Parser {
+public class Parser {
     public static Command parse(String input) {
         String[] inputs = input.trim().split(" ", 2);
         String command = inputs[0];

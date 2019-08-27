@@ -1,54 +1,109 @@
+import textfiles.ReadFile;
+import textfiles.WriteFile;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringJoiner;
-import java.util.Arrays;
-import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean run = true;
         ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<String> textArr;
+        String file_name = "../../../data/duke.txt";
 
         greet();
+        try {
+            ReadFile file = new ReadFile(file_name);
+            textArr = file.OpenFile();
+
+            for (int i = 0; i < textArr.size(); i++) {
+                String[] str = textArr.get(i).split(" \\| ");
+                Task task;
+
+                if (str[0].equals("T")) {
+                    task = new ToDo(str[2]);
+                } else if (str[0].equals("D")) {
+                    task = new Deadline(str[2], str[3]);
+                } else {
+                    task = new Event(str[2], str[3]);
+                }
+
+                if (str[1].equals("\u2713")) {
+                    task.markAsDone();
+                }
+
+                System.out.println("     " + (i + 1) + "." + task.toString());
+
+                taskList.add(task);
+            }
+
+            printLine();
+            System.out.println();
+        } catch (IOException e) {
+            ioErrorMessage();
+            return;
+        }
+
         while (run && sc.hasNext()) {
             String command = sc.nextLine();
             String[] commandArr = command.split(" ");
 
             try {
                 checkCommand(commandArr);
+                WriteFile data = new WriteFile(file_name, true);
                 switch (commandArr[0]) {
                     case "list":
                         printArray(taskList);
                         break;
 
                     case "done":
-                        Task currTask = taskList.get(Integer.parseInt(commandArr[1]) - 1);
+                        int indexDone = Integer.parseInt(commandArr[1]) - 1;
+                        Task currTask = taskList.get(indexDone);
                         currTask.markAsDone();
                         taskComplete(currTask);
+                        replaceNthLine(file_name, indexDone, currTask);
                         break;
 
                     case "delete":
-                        deleteComplete(taskList.size(), taskList.get(Integer.parseInt(commandArr[1]) - 1));
-                        taskList.remove(Integer.parseInt(commandArr[1]) - 1);
+                        int index = Integer.parseInt(commandArr[1]) - 1;
+                        deleteComplete(taskList.size(), taskList.get(index));
+                        taskList.remove(index);
+                        removeNthLine(file_name, index);
                         break;
 
                     case "todo":
-                        Task todo = new ToDo(getDescription(commandArr));
+                        String todoDescription = getDescription(commandArr);
+                        Task todo = new ToDo(todoDescription);
                         taskList.add(todo);
+                        data.writeToFile("T | \u2718 | " + todoDescription);
                         printTask(todo, taskList.size());
                         break;
 
                     case "event":
+                        String eventDescription = getDescription(commandArr);
                         String eventTime = getTime(commandArr);
-                        Task event = new Event(getDescription(commandArr), eventTime);
+                        Task event = new Event(eventDescription, eventTime);
                         taskList.add(event);
+                        data.writeToFile("E | \u2718 | " + eventDescription + " | " + eventTime);
                         printTask(event, taskList.size());
                         break;
 
                     case "deadline":
+                        String deadlineDescription = getDescription(commandArr);
                         String deadlineTime = getTime(commandArr);
-                        Task deadline = new Deadline(getDescription(commandArr), deadlineTime);
+                        Task deadline = new Deadline(deadlineDescription, deadlineTime);
                         taskList.add(deadline);
+                        data.writeToFile("D | \u2718 | " + deadlineDescription + " | " + deadlineTime);
                         printTask(deadline, taskList.size());
                         break;
 
@@ -66,13 +121,84 @@ public class Duke {
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             } catch (IndexOutOfBoundsException ex) {
-                indexErrorMessage(commandArr[1], taskList.size());
+                indexErrorMessage(taskList.size());
             } catch (NumberFormatException ex) {
                 numberErrorMessage();
+            } catch (IOException ex) {
+                ioErrorMessage();
             }
         }
 
         sc.close();
+    }
+
+    private static void removeNthLine(String f, int toRemove) throws IOException {
+
+        File tmp = File.createTempFile("tmp", ".txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(tmp));
+
+        for (int i = 0; i < toRemove; i++)
+            bw.write(String.format("%s%n", br.readLine()));
+
+        br.readLine();
+
+        String l;
+        while (null != (l = br.readLine()))
+            bw.write(String.format("%s%n", l));
+
+        br.close();
+        bw.close();
+
+        File oldFile = new File(f);
+        if (oldFile.delete()) {
+            //noinspection ResultOfMethodCallIgnored
+            tmp.renameTo(oldFile);
+        }
+    }
+
+    private static void replaceNthLine(String f, int toReplace, Task currTask) throws IOException {
+
+        File tmp = File.createTempFile("tmp", ".txt");
+
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(tmp));
+
+        for (int i = 0; i < toReplace; i++) {
+            bw.write(String.format("%s%n", br.readLine()));
+        }
+
+        if (currTask instanceof ToDo) {
+            bw.write("T | " + "\u2713" + " | " + currTask.getDescription() + "\n");
+        } else if (currTask instanceof Deadline) {
+            bw.write("D | " + "\u2713" + " | " + currTask.getDescription()
+                + " | " + ((Deadline) currTask).getBy() + "\n");
+        } else {
+            bw.write("E | " + "\u2713" + " | " + currTask.getDescription()
+                    + " | " + ((Event) currTask).getAt() + "\n");
+        }
+
+        br.readLine();
+
+        String l;
+        while (null != (l = br.readLine()))
+            bw.write(String.format("%s%n", l));
+
+        br.close();
+        bw.close();
+
+        File oldFile = new File(f);
+        if (oldFile.delete())
+            //noinspection ResultOfMethodCallIgnored
+            tmp.renameTo(oldFile);
+    }
+
+    private static void ioErrorMessage() {
+        printLine();
+        System.out.println("     Sorry there is no text file to read or write data.");
+        printLine();
+        System.out.println();
     }
 
     private static void deleteComplete(int size, Task currTask) {
@@ -90,9 +216,9 @@ public class Duke {
                 "    ____________________________________________________________\n");
     }
 
-    private static void indexErrorMessage(String index, int len) {
+    private static void indexErrorMessage(int len) {
         System.out.println("    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! Index " + index + " out of bounds for task list of length " + len + "\n" +
+                "     ☹ OOPS!!! Index out of bounds for task list of length " + len + "\n" +
                 "    ____________________________________________________________\n");
     }
 
@@ -127,7 +253,11 @@ public class Duke {
             description.add(commandArr[i]);
         }
 
-        if (description.toString().equals("")) {
+        if (index == -1) {
+            throw new DukeException("    ____________________________________________________________\n" +
+                    "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n" +
+                    "    ____________________________________________________________\n");
+        } else if (description.toString().equals("")) {
             throw new DukeException("    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! The description of a " + commandArr[0] + " cannot be empty.\n" +
                     "    ____________________________________________________________\n");
@@ -149,7 +279,7 @@ public class Duke {
             timing.add(commandArr[i]);
         }
 
-        if (index == -1) {
+        if (index == -1 || timing.toString().equals("")) {
             throw new DukeException("    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n" +
                     "    ____________________________________________________________\n");
@@ -195,7 +325,8 @@ public class Duke {
         System.out.println(logo);
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         printLine();
-        System.out.println();
+        printLine();
+        System.out.println("     Here are the tasks that you have now:");
     }
 
     // Echo commands entered by users

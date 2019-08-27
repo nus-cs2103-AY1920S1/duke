@@ -1,6 +1,17 @@
 package duke.io;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.CompleteTaskCommand;
+import duke.command.ShowListCommand;
+import duke.command.ExitCommand;
+import duke.command.Type;
+
+import duke.command.DukeMissingCommandException;
+import duke.command.DukeUnknownCommandException;
+import duke.command.DukeMissingParameterException;
+
 import duke.DukeException;
 
 import java.util.Iterator;
@@ -10,17 +21,19 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 
 public class Parser {
-
-        public static String parseDateTime(String dateTimeString) throws DukeException {
+    public static String parseDateTime(String dateTimeString) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime dateAndTime = LocalDateTime.parse(dateTimeString, formatter);
+
             int day = dateAndTime.getDayOfMonth();
             String month = dateAndTime.getMonth().toString();
             int year = dateAndTime.getYear();
             int hour = dateAndTime.getHour();
             int minute = dateAndTime.getMinute();
+
             StringBuffer dateTime = new StringBuffer();
+
             dateTime.append(getIntegerOrdinal(day));
             dateTime.append(" of ");
             dateTime.append(month);
@@ -37,8 +50,9 @@ public class Parser {
             } else {
                 dateTime.append("pm");
             }
+
             return dateTime.toString();
-        } catch (DateTimeParseException ex) {
+        } catch (DateTimeParseException exception) {
             throw new DukeException(dateTimeString + " is not in dd/MM/yyyy HHmm format.");
         }
     }
@@ -71,7 +85,7 @@ public class Parser {
         }
         // is the command valid
 
-        Type type;
+        Type commandType;
 
         switch (split[0]) {
             case "list":
@@ -79,53 +93,61 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             case "todo":
-                type = Type.ADD_TODO;
+                commandType = Type.ADD_TODO;
                 break;
             case "event":
-                type = Type.ADD_EVENT;
+                commandType = Type.ADD_EVENT;
                 break;
             case "deadline":
-                type = Type.ADD_DEADLINE;
+                commandType = Type.ADD_DEADLINE;
                 break;
             case "delete":
-                type = Type.DELETE;
+                commandType = Type.DELETE;
                 break;
             case "done":
-                type = Type.COMPLETE;
+                commandType = Type.COMPLETE;
                 break;
             default:
                 throw new DukeUnknownCommandException();
         }
 
         // if the command requires further parameters
-        String[] parameters = new String[type.parametersExpected];
+        String[] parametersProvided = new String[Type.getNumberOfParametersExpectedFor(commandType)];
+
+
+        Iterator<String> delimiterIterator = Type.getDelimitersFor(commandType).iterator();
+
+        String nextDelimiter;
         boolean first = true;
         int parameterCount = 0;
-        String nextDelim;
-        Iterator<String> delims = type.delimiters.iterator();
-        if (delims.hasNext()) {
-            nextDelim = delims.next();
+
+        if (delimiterIterator.hasNext()) {
+            nextDelimiter = delimiterIterator.next();
         } else {
-            nextDelim = " ";
+            nextDelimiter = " ";
             // since split by whitespaces there will not be a word that is " "
         }
+
         StringBuffer currentParameter = new StringBuffer();
 
         for (int i = 1; i <= split.length; i++) {
-            if (i == split.length || split[i].equals(nextDelim)) {
+            if (i == split.length || split[i].equals(nextDelimiter)) {
                 String parameter = currentParameter.toString().trim();
+
                 if (parameter.length() > 0) {
-                    parameters[parameterCount] = parameter;
+                    parametersProvided[parameterCount] = parameter;
                 } else {
-                    parameters[parameterCount] = null;
+                    parametersProvided[parameterCount] = null;
                 }
-                if (i < split.length && split[i].equals(nextDelim)) {
-                    if (delims.hasNext()) {
-                        nextDelim = delims.next();
+
+                if (i < split.length && split[i].equals(nextDelimiter)) {
+                    if (delimiterIterator.hasNext()) {
+                        nextDelimiter = delimiterIterator.next();
                     } else {
-                        nextDelim = " ";
+                        nextDelimiter = " ";
                     }
                 }
+
                 currentParameter = new StringBuffer();
                 parameterCount++;
             } else {
@@ -134,24 +156,25 @@ public class Parser {
             }
         }
 
-        for (String param : parameters) {
-            if (param == null) {
-                throw new DukeMissingParameterException(type, parameters);
+        for (String parameter : parametersProvided) {
+            if (parameter == null) {
+                throw new DukeMissingParameterException(commandType, parametersProvided);
             }
         }
 
-        switch (type) {
+        switch (commandType) {
 			case DELETE:
-                return new DeleteTaskCommand(parameters[0]);
+                return new DeleteTaskCommand(parametersProvided[0]);
             case COMPLETE:
-                return new CompleteTaskCommand(parameters[0]);
+                return new CompleteTaskCommand(parametersProvided[0]);
             case ADD_TODO:
+                //Fallthrough
             case ADD_DEADLINE:
+                //Fallthrough
             case ADD_EVENT:
-                return new AddTaskCommand(type, parameters);
+                return new AddTaskCommand(commandType, parametersProvided);
             default:
                 return null; //unreachable
         }
-
     }
 }

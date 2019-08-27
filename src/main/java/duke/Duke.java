@@ -3,8 +3,7 @@ package duke;
 import duke.frontend.UserInterface;
 
 public class Duke {
-
-	public UserInterface userInterface;
+	private UserInterface userInterface;
 
 	public void run() {
 		// initialize user inferface with input source
@@ -16,7 +15,7 @@ public class Duke {
 			userInterface.displayError(ex);
 		}
 		// query UI if it can accept user input
-		while (userInterface.isAcceptingInput()) {
+		while (userInterface.canAcceptInput()) {
 			try {
 			    // try to read input and then try to execute it
 				userInterface.executeCommand(userInterface.readInput());

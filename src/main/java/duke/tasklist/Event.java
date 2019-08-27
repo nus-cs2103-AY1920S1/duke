@@ -27,8 +27,7 @@ public class Event extends Task {
 
 	@Override
 	public String toString() {
-		return new StringBuilder("[E]")
-				.append(super.toString())
+		return new StringBuilder("[E]").append(super.toString())
 				.append(" (at: ")
 				.append(time)
 				.append(")")

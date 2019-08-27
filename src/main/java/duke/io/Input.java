@@ -11,7 +11,7 @@ public class Input {
     private BufferedReader bufferedReader;
 
     public Input(InputStream inputStream) {
-        this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
     }
 
     public String get() throws DukeException {

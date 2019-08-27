@@ -8,6 +8,6 @@ public class TodoCommandTest {
         TodoCommand c = new TodoCommand("todo test this method");
         TaskList t = new TaskList();
         c.execute(t, new Ui(), new Storage("testPath"));
-        assertEquals(t.getIndex(0).toString(), "[T][✘] test this method");
+        assertEquals(t.getTaskAtIndex(0).toString(), "[T][✘] test this method");
     }
 }

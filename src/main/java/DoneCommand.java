@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
             throw new DukeException("Argument passed to done must be a valid integer");
         }
         try {
-            taskToMarkAsDone = tasks.getIndex(selectedIndex);
+            taskToMarkAsDone = tasks.getTaskAtIndex(selectedIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Selected task number does not exist.");
         }

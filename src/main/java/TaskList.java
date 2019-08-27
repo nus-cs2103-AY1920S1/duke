@@ -21,7 +21,7 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public Task getIndex(int index) {
+    public Task getTaskAtIndex(int index) {
         return tasks.get(index);
     }
 

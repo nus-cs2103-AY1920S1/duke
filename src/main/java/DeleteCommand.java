@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("Argument passed to delete must be a valid integer");
         }
         try {
-            taskToDelete = tasks.getIndex(deleteIndex);
+            taskToDelete = tasks.getTaskAtIndex(deleteIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Selected task number does not exist.");
         }

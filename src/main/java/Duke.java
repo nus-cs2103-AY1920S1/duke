@@ -1,11 +1,17 @@
 import java.time.LocalDateTime;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
     private List<Task> taskList = new ArrayList<>();
+    private String taskListPath = "./src/main/data/taskList.txt";
 
     String lineWrap(String input) {
         StringBuilder sb = new StringBuilder();
@@ -46,14 +52,14 @@ public class Duke {
     private Task createTask(String str, String command) throws DukeException { //command is either todo, deadline or event
         String[] splitStr;
         if (command.equals("todo")) {
-            return new ToDo(str);
+            return new ToDo(false, str);
         } else if (command.equals("deadline")) { //eg input: deadline return book /by 2/12/2019 1800
             splitStr = str.split("/by");
             if (splitStr.length == 1) {
                 throw new DukeException("Invalid format. Please use 'by:' to state your deadline");
             }
             LocalDateTime dt = Parser.parseDateTime(splitStr[1].trim());
-            return new Deadlines(splitStr[0].trim(), dt);
+            return new Deadlines(false, splitStr[0].trim(), dt);
         } else if (command.equals("event")) { //eg input: event proj meeting /at 2/12/2019 1800 - 2/12/2019 1800
             splitStr = str.split("/at");
             if (splitStr.length == 1) {
@@ -62,7 +68,7 @@ public class Duke {
             String[] dateString = splitStr[1].trim().split(" - "); //e.g. 2/12/2019 1800 - 2/12/2019 1800
             LocalDateTime start = Parser.parseDateTime(dateString[0]);
             LocalDateTime end = Parser.parseDateTime(dateString[1]);
-            return new Events(splitStr[0].trim(), start, end);
+            return new Events(false, splitStr[0].trim(), start, end);
         } else {
             return null;
         }
@@ -116,22 +122,49 @@ public class Duke {
         } else if (command.equals("done")) {
             int taskInt = parseTaskInt(inputSplit[1]);
             System.out.println(lineWrap(markTask(taskInt)));
+            fileManager.updateFile(taskList, taskListPath);
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             if (inputSplit.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
             }
             Task task = createTask(inputSplit[1], command);
             System.out.println(lineWrap(addTask(task)));
+            fileManager.updateFile(taskList, taskListPath);
         } else if (command.equals("delete")) {
             int taskInt = parseTaskInt(inputSplit[1]);
             System.out.println(lineWrap(deleteTask(taskInt)));
+            fileManager.updateFile(taskList, taskListPath);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
+    private void loadFile(String filePath) {
+        try {
+            File f = new File(filePath); //hardCoded file directory
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                String[] strArr = line.split(Pattern.quote(" | "));
+                Task task = fileManager.createTask(strArr);
+                taskList.add(task);
+            }
+            System.out.println(lineWrap("Data is loaded from data/taskList.txt"));
+        } catch (FileNotFoundException e) {
+            System.out.println(lineWrap("File not found, data not loaded!\nCreating new file taskList.txt"));
+            File f = new File(filePath);
+            try {
+                f.createNewFile(); //creates new text file
+            } catch (IOException ioE) {
+                System.out.println(lineWrap(ioE.getMessage()));
+            }
+        }
+
+    }
+
     void start() {
         System.out.println(greet());
+        loadFile(taskListPath);
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] inputSplit = input.split(" ", 2); //split into command and remaining sentence
@@ -149,4 +182,6 @@ public class Duke {
             }
         }
     }
+
+
 }

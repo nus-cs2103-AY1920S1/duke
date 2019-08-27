@@ -4,10 +4,21 @@ public class Events extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
-    public Events(String description, LocalDateTime start, LocalDateTime end) {
-        super(description);
+    public Events(boolean done, String description, LocalDateTime start, LocalDateTime end) {
+        super(done, description);
         this.start = start;
         this.end = end;
+
+    @Override
+    public String toFileString() {
+        StringBuilder sb = new StringBuilder("D | ");
+        if (isDone) {
+            sb.append("1 | ");
+        } else {
+            sb.append("0 | ");
+        }
+        sb.append(description + " | " + at);
+        return sb.toString();
     }
 
     @Override

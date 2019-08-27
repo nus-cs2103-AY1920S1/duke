@@ -2,15 +2,17 @@ package slave.command;
 
 import slave.elements.TaskList;
 import slave.elements.Ui;
+
 import slave.exception.DukeException;
 import slave.exception.TaskNotFoundException;
+
 import slave.task.Task;
 
 public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
-    public DeleteCommand(int index){
+    public DeleteCommand(int index) {
         this.commandType = CommandType.DELETE;
         this.index = index;
     }

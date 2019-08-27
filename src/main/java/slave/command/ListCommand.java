@@ -5,7 +5,7 @@ import slave.elements.Ui;
 
 public class ListCommand extends Command {
 
-    public ListCommand(){
+    public ListCommand() {
         this.commandType = CommandType.LIST;
     }
 

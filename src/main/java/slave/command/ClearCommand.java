@@ -2,11 +2,12 @@ package slave.command;
 
 import slave.elements.TaskList;
 import slave.elements.Ui;
+
 import slave.exception.DukeException;
 
 public class ClearCommand extends Command {
 
-    public ClearCommand(){
+    public ClearCommand() {
         this.commandType = CommandType.CLEAR;
     }
 

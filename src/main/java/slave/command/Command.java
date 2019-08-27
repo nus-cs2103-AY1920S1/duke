@@ -2,9 +2,11 @@ package slave.command;
 
 import slave.elements.TaskList;
 import slave.elements.Ui;
+
 import slave.exception.DukeException;
 
 public abstract class Command {
+
     CommandType commandType;
 
     public CommandType getCommandType() {
@@ -12,5 +14,4 @@ public abstract class Command {
     }
 
     public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
-
 }

@@ -3,16 +3,17 @@ package slave.command;
 import slave.elements.Date;
 import slave.elements.Ui;
 import slave.elements.TaskList;
+
 import slave.exception.DukeException;
+
 import slave.task.Event;
 
-public class AddEventCommand extends Command{
+public class AddEventCommand extends Command {
 
-    String task;
-    String date;
-    Event eventTask;
+    private String task;
+    private String date;
 
-    public AddEventCommand(String task, String date){
+    public AddEventCommand(String task, String date) {
         this.commandType = CommandType.ADDEVENT;
         this.task = task;
         this.date = date;
@@ -26,8 +27,8 @@ public class AddEventCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
-        this.eventTask = new Event(this.task, taskList.getSize() + 1, this.date);
-        taskList.addToList(this.eventTask);
+        Event eventTask = new Event(this.task, taskList.getSize() + 1, this.date);
+        taskList.addToList(eventTask);
         ui.printAddEventCommand(eventTask, taskList);
     }
 }

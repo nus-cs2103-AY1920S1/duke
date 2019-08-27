@@ -2,16 +2,18 @@ package slave.command;
 
 import slave.elements.TaskList;
 import slave.elements.Ui;
+
 import slave.exception.DukeException;
 import slave.exception.TaskAlreadyDoneException;
 import slave.exception.TaskNotFoundException;
+
 import slave.task.Task;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
-    int index;
+    private int index;
 
-    public DoneCommand(int index){
+    public DoneCommand(int index) {
         this.commandType = CommandType.DONE;
         this.index = index;
     }
@@ -21,10 +23,10 @@ public class DoneCommand extends Command{
         try {
             taskList.getTaskByIndex(this.index);
         } catch (IndexOutOfBoundsException error) {
-            throw new TaskNotFoundException("Task " + this.index );
+            throw new TaskNotFoundException("Task " + this.index);
         }
-        if (taskList.getTaskByIndex(this.index).getIsDone()){
-            throw new TaskAlreadyDoneException("Task " + this.index );
+        if (taskList.getTaskByIndex(this.index).getIsDone()) {
+            throw new TaskAlreadyDoneException("Task " + this.index);
         }
         taskList.setDoneInList(this.index);
         Task task = taskList.getTaskByIndex(this.index);

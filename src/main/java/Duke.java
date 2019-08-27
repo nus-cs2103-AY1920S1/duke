@@ -1,7 +1,25 @@
 import java.util.Scanner;
+
+import java.text.ParseException;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 public class Duke {
+
+    static Date dateTimeConversion(String dateTime){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
+        String dateInString = dateTime;
+        try {
+            Date date = formatter.parse(dateInString);
+            return date;
+        } catch (ParseException e){
+            System.out.println("Not valid date and time");
+            Date date = null;
+            return date;
+        }
+    }
     static void printline(){
         String line =  "\t____________________________________________________________";
         System.out.println(line);
@@ -135,12 +153,13 @@ public class Duke {
                             error = "emptyBy";
                         } else {
                             time = help.substring(slashInt +3);
+                            
                             task = help.substring(0, slashInt);
                             if (task.equals(" ")){
                                 error = "emptyDeadline";
                             } else {
                                 //System.out.println(task);
-                                newTask = new Deadline(task, time);
+                                newTask = new Deadline(task, dateTimeConversion(time));
                             }
                         }
 

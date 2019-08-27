@@ -1,5 +1,7 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import slave.elements.*;
+import slave.command.*;
+import slave.exception.*;
+import slave.task.*;
 
 public class Duke {
 

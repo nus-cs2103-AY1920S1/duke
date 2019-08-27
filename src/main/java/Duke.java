@@ -1,4 +1,5 @@
-import java.text.ParseException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,9 +25,6 @@ public class Duke {
 
         if (oneLine.length == 2 && !oneLine[1].isBlank()) {
             System.out.println(frontSpace + " Got it. I've added this task: ");
-            //todo with description
-            //deadline may not have /by
-            //event may not have /at
             if (firstWord.equals("todo")) {
                 myList.add(new Todo(oneLine[1].trim()));
             } else if (firstWord.equals("deadline")) {
@@ -65,7 +63,6 @@ public class Duke {
             return false;
         }
     }
-
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
@@ -121,7 +118,7 @@ public class Duke {
             } else {
                 throw new TaskNotExistException("task does not exist");
             }
-        }else if (oneLine.length == 2 && oneLine[1].trim().split(" ").length != 1) {
+        } else if (oneLine.length == 2 && oneLine[1].trim().split(" ").length != 1) {
             throw new ExtraDescriptionException("There is extra description for delete");
         } else {
             throw new InvalidNumberException("the description should be a number");
@@ -135,8 +132,12 @@ public class Duke {
         if (oneLine.length == 1 || oneLine[1].isBlank()) {
             String title = " Here are the tasks in your list:\n";
             System.out.print(frontSpace + title);
-            for (int i = 0; i < idx; i++) {
-                System.out.println(frontSpace + " " + (i + 1) + ". " + myList.get(i));
+            for (int i = 0; i < myList.size(); i++) {
+                if((i+1)<10){
+                    System.out.println(frontSpace + " " + (i + 1) + ". " + myList.get(i));
+                }else{
+                    System.out.println(frontSpace + " " + (i + 1) + "." + myList.get(i));
+                }
             }
         } else {
             throw new ExtraDescriptionException("There is extra description for list");
@@ -155,11 +156,28 @@ public class Duke {
         System.out.println(frontSpace + lowerLine);
     }
 
+    public static void tryToReadFile() {
+        try{
+            ReadAndWrite.readFile(myList);
+        }catch (Exception e){
+            System.out.println(frontSpace + " duke.txt has problem");
+        }
+    }
+
+    public static void tryToWriteFile() {
+        try{
+            ReadAndWrite.writeFile(myList);
+        }catch (Exception e){
+            System.out.println(frontSpace + " duke.txt has problem");
+        }
+    }
+
     public static void main(String[] args) {
         String greet = "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n";
         greet = frontSpace + upperLine + greet + frontSpace + lowerLine;
         System.out.println(greet);
+        tryToReadFile();
         while (true) {
             try {
                 String cmd = sc.nextLine();
@@ -173,15 +191,17 @@ public class Duke {
                     listFeature();
                 } else if (firstWord.equals("done")) {
                     doneFeature();
+                    tryToWriteFile();
                 } else if (firstWord.equals("delete")) {
                     deleteFeature();
+                    tryToWriteFile();
                 } else if (firstWord.equals("todo") || firstWord.equals("deadline")
                         || firstWord.equals("event")) {
                     childFeature();
+                    tryToWriteFile();
                 } else {
                     //situation of firstWord is invalid
                     System.out.print(frontSpace + upperLine);
-
                     throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {

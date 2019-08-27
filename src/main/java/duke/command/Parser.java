@@ -44,6 +44,9 @@ class Parser {
             case delete:
                 commandDelete();
                 break;
+            case find:
+                commandFind();
+                break;
         }
 
     }
@@ -157,7 +160,22 @@ class Parser {
         }
     }
 
+    /**
+     * To find the list that contains the keyword inputted by the users and print them out by sequence.
+     */
+    private void commandFind() {
+        String keyword = action[1];
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+        for (Task task : TaskList.getList()) {
+            if (task.toString().contains(keyword)) {
+                System.out.println(count + "." + task);
+                count++;
+            }
+        }
+    }
+
     enum Command {
-        bye, list, done, todo, deadline, event, delete
+        bye, list, done, todo, deadline, event, delete, find
     }
 }

@@ -7,15 +7,28 @@ import slave.exception.TaskAlreadyDoneException;
 import slave.exception.TaskNotFoundException;
 import slave.task.Task;
 
+/**
+ * Command which represents a done action on a particular task
+ */
 public class DoneCommand extends Command{
 
     int index;
 
+    /**
+     * Constructor for done command
+     * @param index The index of the task that is going to be marked done
+     */
     public DoneCommand(int index){
         this.commandType = CommandType.DONE;
         this.index = index;
     }
 
+    /**
+     * Executes by marking a particular task as done and prints to the user
+     * @param taskList list containing current tasks
+     * @param ui user interface
+     * @throws DukeException For tasks that cannot be found or have already been done
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         try {

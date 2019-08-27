@@ -6,7 +6,7 @@ public class TaskList {
     public TaskList() {
         myTaskList = new ArrayList<>();
     }
-
+    //Format for printing the "adding"
     private void spacerForTasks(String input) {
         String separator = "    ____________________________________________________________";
         String addingTask = "    added:";
@@ -16,12 +16,12 @@ public class TaskList {
         System.out.println(converted);
         System.out.println(separator + "\n");
     }
-
+    //Add and print the added notes
     public void addTasks(String addedTask)  {
         myTaskList.add(addedTask);
         spacerForTasks(addedTask);
         }
-
+    //Print all tasks upon "list"
     public void printTasks() {
         String separator = "    ____________________________________________________________";
         System.out.println(separator);

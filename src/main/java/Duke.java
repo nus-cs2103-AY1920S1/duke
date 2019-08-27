@@ -24,20 +24,26 @@ public class Duke {
         //Print my welcome message
         spacer(start);
 
+        //Create TaskList for Duke
+        TaskList myTaskList = new TaskList();
+
+
         Scanner myInputReader = new Scanner(System.in);
         String userInput = myInputReader.nextLine();
 
 
         while (!userInput.equalsIgnoreCase("bye")) {
-            spacer(userInput);
-            userInput = myInputReader.nextLine();
+            if (userInput.equalsIgnoreCase("list")) {
+                myTaskList.printTasks();
+            } else {
+                myTaskList.addTasks(userInput);
             }
+            userInput = myInputReader.nextLine();
+
+        }
+
         //Print my ending message
         spacer(end);
-
     }
-
-
-
     }
 

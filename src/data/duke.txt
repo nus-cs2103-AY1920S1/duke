@@ -1,6 +1,5 @@
-T | - | r 
 E | - | ada ad | a ad
-E | - | todo | do
 D | - | 242eeda | 2e qd
 D | - | aa a | a/at 232 das
 D | - | 232 ca a | 242 23 24 2
+D | - | go home | 2am

@@ -111,6 +111,24 @@ public class InputParser {
             modifyTaskList.changeTaskList(taskList, taskNumber - 1, Duke.Action.REMOVE);
             break;
 
+        case "find":
+            try {
+                desc = input.split(" ")[1];
+                int findCounter = 0;
+                System.out.println("Here are the matching tasks in your list:");
+                for (int a = 0; a < taskList.size(); a++) {
+                    if (taskList.get(a).description.contains(desc)){
+                        findCounter++;
+                        System.out.println(findCounter + ". " + taskList.get(a).toString());
+                    }
+                }
+                System.out.println();
+                break;
+            } catch (IndexOutOfBoundsException err) {
+                System.out.println("OOPS!!! Incorrect format for the 'find' command.\n");
+                break;
+            }
+
         default:
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means\n");
             break;

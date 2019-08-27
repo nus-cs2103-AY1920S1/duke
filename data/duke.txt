@@ -1,5 +1,5 @@
 [T][✓] read
-[D][✘] walk to park (by: 21st January )
+[D][✘] walk to park (by: )
 [D][✓] walk to park (by: 23rd November 2019, 11:59pm)
 [D][✘] play basketball alone (by: 12th March 2019, 04:13am)
 [E][✘] swim away (at: 23rd November 2019, 02:41am-2:51pm)
@@ -7,3 +7,5 @@
 [D][✘] run park (by: 12th December 2019, 5:04pm)
 [E][✘] run park (at: 12th December 2019, 12:31pm)
 [E][✘] run park (at: 31st December 2019, 12:31pm)
+[T][✘] run
+[D][✓] sleep (by: 12th November 2019, 6:31pm)

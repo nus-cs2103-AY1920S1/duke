@@ -227,10 +227,10 @@ public class Duke {
                     oldTask = new Todo(historicalInputs[2].substring(1), oldDone);
                     break;
                 case 'D':
-                    oldTask = new Deadline(historicalInputs[2].substring(1), historicalInputs[3].substring(1), oldDone);
+                    oldTask = new Deadline(historicalInputs[2].substring(1, historicalInputs[2].length() - 1), historicalInputs[3].substring(1), oldDone);
                     break;
                 case 'E':
-                    oldTask = new Event(historicalInputs[2].substring(1), historicalInputs[3].substring(1), oldDone);
+                    oldTask = new Event(historicalInputs[2].substring(1, historicalInputs[2].length() - 1), historicalInputs[3].substring(1), oldDone);
                     break;
             }
 

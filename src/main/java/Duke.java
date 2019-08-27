@@ -26,7 +26,6 @@ public class Duke {
             System.out.println(exp);
         }
         fw.close();
-
     }
 
     private static void updateFile(ArrayList<Task> list) throws IOException {

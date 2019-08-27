@@ -39,7 +39,7 @@ public class Parser {
         }
     }
 
-    private static Date dateFormatter(String date) throws DukeException {
+    public static Date dateFormatter(String date) throws DukeException {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date parseDate = formatter.parse(date);
@@ -83,7 +83,7 @@ public class Parser {
                 case "deadline": {
                     try {
                         deadlineCheck(task, command);
-                        Task deadline = new Deadline(command.substring(9, command.indexOf("/by")),
+                        Task deadline = new Deadline(command.substring(9, command.indexOf("/by") - 1),
                                 dateFormatter(command.substring(command.indexOf("/by") + 4)));
                         return new AddCommand(deadline);
                     } catch (DukeException e) {
@@ -94,7 +94,7 @@ public class Parser {
                 case "event": {
                     try {
                         eventCheck(task, command);
-                        Task event = new Event(command.substring(9, command.indexOf("/at")),
+                        Task event = new Event(command.substring(6, command.indexOf("/at") - 1),
                                 dateFormatter(command.substring(command.indexOf("/at") + 4)));
                         return new AddCommand(event);
                     } catch (DukeException e) {

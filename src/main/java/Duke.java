@@ -1,6 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.nio.file.Files;
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.exception.DukeException;

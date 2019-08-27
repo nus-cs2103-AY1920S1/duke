@@ -15,7 +15,7 @@ public class Ui {
         System.out.println("________________________________");
     }
 
-    public String readCommand() {
+    public String readCommand() throws DukeException{
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }

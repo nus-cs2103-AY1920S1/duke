@@ -1,7 +1,10 @@
-public class Event extends Task {
-    String by;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Event(String description, String by) {
+public class Event extends Task {
+    Date by;
+
+    public Event(String description, Date by) {
         super(description);
         this.by = by;
     }
@@ -9,14 +12,14 @@ public class Event extends Task {
     @Override
     protected String formatToWrite() {
         if (this.done) {
-            return String.format("E | %d | %s | %s", 1, this.description, this.by);
+            return String.format("E | %d | %s | %s", 1, this.description, new SimpleDateFormat("dd/MM/yyyy HHmm").format(this.by));
         } else {
-            return String.format("E | %d | %s | %s", 0, this.description, this.by);
+            return String.format("E | %d | %s | %s", 0, this.description, new SimpleDateFormat("dd/MM/yyyy HHmm").format(this.by));
         }
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.by);
+        return String.format("[E]%s (at: %s)", super.toString(), new SimpleDateFormat("dd/MM/yyyy HHmm").format(this.by));
     }
 }

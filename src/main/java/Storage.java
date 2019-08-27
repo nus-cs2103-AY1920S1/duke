@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectOutputStream;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 public class Storage {
     private static String path;
 
-    public static void setPath(String path){
+    public static void setPath(String path) {
         Storage.path = path;
     }
 

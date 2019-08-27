@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;

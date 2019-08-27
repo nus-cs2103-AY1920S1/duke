@@ -1,6 +1,11 @@
+package duke;
+
 import java.util.Scanner;
+
 public class Parser {
-    public static boolean handleCommand(String in, Scanner sc) throws DukeException {
+
+    public static boolean handleCommand(String in, Scanner sc)
+        throws DukeException {
         switch (in) {
             case "bye":
                 System.out.println("Bye!");

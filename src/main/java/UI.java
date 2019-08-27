@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class UI {
@@ -7,9 +9,9 @@ public class UI {
         sc = new Scanner(System.in);
     }
 
-    public void showLoadingError(Exception e){
-        System.out.println(e); 
-        System.out.println(e.getCause());  
+    public void showLoadingError(Exception e) {
+        System.out.println(e);
+        System.out.println(e.getCause());
     }
 
     public void run() {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner input;
+    private final Scanner input;
     public Ui() {
         input = new Scanner(System.in);
     }
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     public void showDukeError(DukeException e) {
-        System.out.println(e);
+        System.out.println(e.getMessage());
     }
 
     public String readCommand() throws UnrecognizedException {

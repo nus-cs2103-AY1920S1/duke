@@ -6,18 +6,18 @@ import dukepkg.exceptions.FormatException;
 import java.io.IOException;
 
 public class DoneCommand extends Command {
-    int index;
+    private final int index;
     public DoneCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
-        Parser.validateModifyExistingTaskCommandIndex(index, tasklist.tasks.size());
-        tasklist.tasks.get(index).markDone();
-        ui.showTaskDonePrompt(tasklist.tasks.get(index));
+        Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
+        TaskList.tasks.get(index).markDone();
+        ui.showTaskDonePrompt(TaskList.tasks.get(index));
         try {
-            storage.saveList(tasklist.tasks);
+            Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
             ui.showSavingError(e);
         }

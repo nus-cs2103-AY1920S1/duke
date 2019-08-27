@@ -4,23 +4,21 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<String> modifyingCommands = new ArrayList<>(){{add("done"); add("delete"); add("todo");add("deadline");add("event");}};
     public static ArrayList<Task> tasks;
     private static Ui ui;
     private static Storage storage;
-    private static Parser parser;
-    public TaskList(Storage storage, Ui ui, Parser parser) {
-        tasks = new ArrayList<Task>();
-        this.storage = storage;
-        this.ui = ui;
-        this.parser = parser;
+
+    public TaskList(Storage storage, Ui ui) {
+        tasks = new ArrayList<>();
+        TaskList.storage = storage;
+        TaskList.ui = ui;
     }
 
     public void loadTaskHistory() {
         try {
-            tasks = storage.loadList();
+            tasks = Storage.loadList();
         } catch (FileNotFoundException e) {
-            ui.showLoadingError(e);
+            Ui.showLoadingError(e);
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Storage {
     private static String filePath;
     public Storage(String filePath) {
-        this.filePath = filePath;
+        Storage.filePath = filePath;
     }
     public static ArrayList<Task> loadList() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Storage {
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String line = s.nextLine();
-            String arr[] = line.split(" # ");
+            String[] arr = line.split(" # ");
             Task t;
             if (arr.length == 3) {
                 t = new Todo(arr[2]);

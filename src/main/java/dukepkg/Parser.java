@@ -9,37 +9,38 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+@SuppressWarnings("ALL")
 public class Parser {
     Scanner input;
     public Parser() {
 
     }
 
-    public String getAction(String[] arr) {
+    private String getAction(String[] arr) {
         return arr[0];
     }
 
-    public String[] parseCommand(String command) {
+    private String[] parseCommand(String command) {
         return command.split(" ", 2);
     }
 
-    public void validateList(String[] arr) throws FormatException {
+    private void validateList(String[] arr) throws FormatException {
         if (arr.length > 1) {
             throw new FormatException("☹ OOPS!!! The list command should just be \"list\".");
         }
     }
 
-    public void validateBye(String[] arr) throws FormatException {
+    private void validateBye(String[] arr) throws FormatException {
         if (arr.length > 1) {
             throw new FormatException("☹ OOPS!!! The bye command should just be \"bye\".");
         }
     }
 
-    public void unrecognizedAction() throws UnrecognizedException {
+    private void unrecognizedAction() throws UnrecognizedException {
         throw new UnrecognizedException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public void validateModifyExistingTaskCommandFormat(String[] arr) throws FormatException {
+    private void validateModifyExistingTaskCommandFormat(String[] arr) throws FormatException {
         if (arr.length == 1 || arr.length > 2) {
             throw new FormatException("☹ OOPS!!! The " + arr[0] + " command should be " + arr[0] + " + task No.");
         }
@@ -54,14 +55,14 @@ public class Parser {
         }
     }
 
-    public void validateAddTaskCommandLength(String[] arr) throws FormatException {
+    private void validateAddTaskCommandLength(String[] arr) throws FormatException {
         if (arr.length == 1) {
             throw new FormatException("☹ OOPS!!! The description of a " + arr[0] + " cannot be empty.");
         }
     }
 
     public static void validateDeadlineFormat(String[] arr) throws FormatException {
-        String ddl[] = arr[1].trim().split("/by", 2);
+        String[] ddl = arr[1].trim().split("/by", 2);
         if(ddl.length < 2) {
             throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be deadline description /by time.");
         } else if(arr[1].trim().matches("/by.*")) {
@@ -71,10 +72,12 @@ public class Parser {
         }
     }
 
+    @SuppressWarnings("Annotator")
     public static Task standardizeDeadlineTime(String[] arr) {
-        String ddl[] = arr[1].trim().split("/by", 2);
+        String[] ddl = arr[1].trim().split("/by", 2);
         Task t;
-        String date_time[] = ddl[1].trim().split(" ");
+        String[] date_time = ddl[1].trim().split(" ");
+        //noinspection Annotator
         if(date_time.length > 1 && date_time[0].matches("^((((([1-9])|(0[1-9])|(1\\d)|(2[0-8]))/(([1-9])|(0[1-9])|(1[0-2])))|((31/(((0[13578])|([13578]))|(1[02])))|((29|30)/(((0[1,3-9])|([1,3-9]))|(1[0-2])))))/((20[0-9][0-9]))|(((([1-9])|(0[1-9])|(1\\d)|(2[0-8]))/(([1-9])|(0[1-9])|(1[0-2])))|((31/(((0[13578])|([13578]))|(1[02])))|((29|30)/(((0[1,3-9])|([1,3-9]))|(1[0-2])))))/((19[0-9][0-9]))|(29/(02|2)/20(([02468][048])|([13579][26])))|(29/(02|2)/19(([02468][048])|([13579][26]))))$")  && date_time[1].matches("^(0[0-9]|1[0-9]|2[0-3]|[0-9])[0-5][0-9]$")) {
             String time = formatTime(ddl[1].trim());
             t = new Deadline(ddl[0].trim(), time);
@@ -85,7 +88,7 @@ public class Parser {
     }
 
     public static void validateEventFormat(String[] arr) throws FormatException {
-        String evt[] = arr[1].trim().split("/at", 2);
+        String[] evt = arr[1].trim().split("/at", 2);
         if(evt.length < 2) {
             throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be event description /at time.");
         } else if(arr[1].trim().matches("/at.*")) {
@@ -97,8 +100,8 @@ public class Parser {
 
     public static Task standardizeEventTime(String[] arr) {
         Task t;
-        String evt[] = arr[1].trim().split("/at", 2);
-        String date_time[] = evt[1].trim().split(" ");
+        String[] evt = arr[1].trim().split("/at", 2);
+        String[] date_time = evt[1].trim().split(" ");
         if(date_time.length > 1 && date_time[0].matches("^((((([1-9])|(0[1-9])|(1\\d)|(2[0-8]))/(([1-9])|(0[1-9])|(1[0-2])))|((31/(((0[13578])|([13578]))|(1[02])))|((29|30)/(((0[1,3-9])|([1,3-9]))|(1[0-2])))))/((20[0-9][0-9]))|(((([1-9])|(0[1-9])|(1\\d)|(2[0-8]))/(([1-9])|(0[1-9])|(1[0-2])))|((31/(((0[13578])|([13578]))|(1[02])))|((29|30)/(((0[1,3-9])|([1,3-9]))|(1[0-2])))))/((19[0-9][0-9]))|(29/(02|2)/20(([02468][048])|([13579][26])))|(29/(02|2)/19(([02468][048])|([13579][26]))))$")  && date_time[1].matches("^(0[0-9]|1[0-9]|2[0-3]|[0-9])[0-5][0-9]$")) {
             String time = formatTime(evt[1].trim());
             t = new Event(evt[0].trim(), time);
@@ -118,8 +121,8 @@ public class Parser {
     }
 
     static String formatTime(String input) {
-        String date_time[] = input.split(" ");
-        String date[] = date_time[0].split("/");
+        String[] date_time = input.split(" ");
+        String[] date = date_time[0].split("/");
         int day = Integer.parseInt(date[0]);
         int month_int = Integer.parseInt(date[1]);
         String month_enum = Month.convertIntToString(month_int);
@@ -135,7 +138,7 @@ public class Parser {
     }
 
     public Command constructCommand(String command) throws DukeException {
-        String arr[] = parseCommand(command);
+        String[] arr = parseCommand(command);
         String action = getAction(arr);
             switch(action) {
                 case "list":
@@ -161,11 +164,11 @@ public class Parser {
 
     public enum Month {
         JANUARY(1), FEBRUARY(2), MARCH(3), APRIL(4), MAY(5), JUNE(6), JULY(7), AUGUST(8), SEPTEMBER(9), OCTOBER(10), NOVEMBER(11), DECEMBER(12);
-        public final int id;
+        final int id;
         Month(int id) {
             this.id = id;
         }
-        public static String convertIntToString(int iMonth) {
+        static String convertIntToString(int iMonth) {
             for(Month month : Month.values()) {
                 if(month.id == iMonth) {
                     return month.toString();

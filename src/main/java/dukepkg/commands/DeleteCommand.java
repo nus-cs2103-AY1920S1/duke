@@ -6,19 +6,19 @@ import dukepkg.exceptions.FormatException;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
-    int index;
+    private final int index;
     public DeleteCommand(int index) {
         this.index = index;
     }
 
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
-        Parser.validateModifyExistingTaskCommandIndex(index, tasklist.tasks.size());
-        Task t = tasklist.tasks.get(index);
-        tasklist.tasks.remove(index);
-        ui.showTaskDeletedPrompt(t, tasklist.tasks.size());
+        Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
+        Task t = TaskList.tasks.get(index);
+        TaskList.tasks.remove(index);
+        ui.showTaskDeletedPrompt(t, TaskList.tasks.size());
         try {
-            storage.saveList(tasklist.tasks);
+            Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
             ui.showSavingError(e);
         }

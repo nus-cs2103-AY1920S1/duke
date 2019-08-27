@@ -6,19 +6,19 @@ import dukepkg.exceptions.FormatException;
 import java.io.IOException;
 
 public class AddTaskCommand extends Command {
-    Task t;
-    public AddTaskCommand(Task t) {
+    private final Task t;
+    AddTaskCommand(Task t) {
         this.t = t;
     }
 
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
-        Parser.checkDuplicate(tasklist.tasks, t);
+        Parser.checkDuplicate(TaskList.tasks, t);
         tasklist.addTask(t);
 
-        ui.showAddedTaskPrompt(tasklist.tasks, t);
+        ui.showAddedTaskPrompt(TaskList.tasks, t);
         try {
-            storage.saveList(tasklist.tasks);
+            Storage.saveList(TaskList.tasks);
         } catch (IOException e) {
             ui.showSavingError(e);
         }

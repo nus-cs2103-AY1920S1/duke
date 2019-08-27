@@ -1,7 +1,7 @@
 package dukepkg;
 
 public class Event extends dukepkg.Task {
-    protected String at;
+    private final String at;
     public static final String type = "E";
 
     public Event(String task, String at) {

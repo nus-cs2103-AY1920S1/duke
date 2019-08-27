@@ -1,7 +1,7 @@
 package dukepkg;
 
 public class Deadline extends dukepkg.Task{
-    protected String by;
+    private final String by;
     public static final String type = "D";
 
     public Deadline(String task, String by) {

@@ -3,9 +3,9 @@ package dukepkg;
 public class Task {
     private boolean done_ = false;
 
-    protected String task_ = "";
+    private String task_ = "";
 
-    public Task(String task) {
+    Task(String task) {
         task_ = task;
     }
 
@@ -21,7 +21,7 @@ public class Task {
         done_ = true;
     }
 
-    public String getSymbol() {
+    private String getSymbol() {
         if(isDone()) {
             return "\u2713";
         } else {

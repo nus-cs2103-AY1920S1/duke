@@ -8,6 +8,6 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) {
-        ui.showTaskList(tasklist.tasks);
+        ui.showTaskList(TaskList.tasks);
     }
 }

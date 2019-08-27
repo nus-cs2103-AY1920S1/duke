@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public abstract class Task {
 
@@ -45,6 +46,11 @@ public abstract class Task {
     }
 
     protected LocalDateTime parseDateTime(String dateTime) {
+        // Check whether already in the right format
+        try {
+            return LocalDateTime.parse(dateTime);
+        }
+        catch (DateTimeParseException e) {}
         String[] parsedDateTime = dateTime.split(" ");
         String[] parsedDate = parsedDateTime[0].split("\\/");
         return LocalDateTime.of(

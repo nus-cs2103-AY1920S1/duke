@@ -1,2 +1,3 @@
-T | 1 | blah
-D | 1 | fdsafdsa | 2/12/2019 1800
+T | 1 | fdslfakdsj
+E | 1 | fairfield | /at | 2/12/2019 1800
+D | 0 | fdslfsdajfdsa | /by | 2/12/2019 1800

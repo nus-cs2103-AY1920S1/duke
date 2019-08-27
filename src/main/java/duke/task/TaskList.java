@@ -1,6 +1,6 @@
-package task;
+package duke.task;
 
-import exception.DukeIndexOutOfBoundsException;
+import duke.exception.DukeIndexOutOfBoundsException;
 
 import java.util.ArrayList;
 
@@ -19,21 +19,21 @@ public class TaskList {
 
     public Task delete(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
+            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such duke.task index.");
         }
         return tasks.remove(idx);
     }
 
     public Task get(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
+            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such duke.task index.");
         }
         return tasks.get(idx);
     }
 
     public Task markAsDone(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
+            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such duke.task index.");
         }
         Task task = tasks.get(idx);
         task.markAsDone();

@@ -1,7 +1,8 @@
-package memory;
+package duke.storage;
 
-import task.*;
-import time.DateTime;
+import duke.exception.DukeException;
+import duke.exception.DukeIOException;
+import duke.task.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,16 +17,16 @@ import java.util.Arrays;
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
-import static task.TaskType.*;
+import static duke.task.TaskType.*;
 
-public class Memory {
+public class Storage {
     private Path path;
 
-    public Memory(String uri) {
+    public Storage(String uri) {
         this.path = Paths.get(uri);
     }
 
-    public TaskList readFromDisk() {
+    public TaskList readFromDisk() throws DukeIOException {
         Charset charset = Charset.forName("ISO-8859-1");
         TaskList taskList = new TaskList();
         try {
@@ -47,12 +48,12 @@ public class Memory {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new DukeIOException(e.getMessage());
         }
         return taskList;
     }
 
-    public TaskList writeToDisk(TaskList taskList) {
+    public TaskList writeToDisk(TaskList taskList) throws DukeException {
         Charset charset = Charset.forName("ISO-8859-1");
         ArrayList<Task> tasks = taskList.getTaskList();
         try {
@@ -67,11 +68,11 @@ public class Memory {
                         bw.newLine();
                     } else if (task instanceof Deadline) {
                         String deadline = ((Deadline) task).getDeadline();
-                        bw.write(String.format("D | %d | %s | %s", isDone, desc, deadline));
+                        bw.write(String.format("D | %d | %s | /by | %s", isDone, desc, deadline));
                         bw.newLine();
                     } else if (task instanceof Event) {
                         String period = ((Event) task).getPeriod();
-                        bw.write(String.format("E | %d | %s | %s", isDone, desc, period));
+                        bw.write(String.format("E | %d | %s | /at | %s", isDone, desc, period));
                         bw.newLine();
                     } else {
                         throw new IOException("Attempting to write unknown task to disk!");
@@ -80,7 +81,7 @@ public class Memory {
             }
             bw.close();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new DukeIOException(e.getMessage());
         }
         return taskList;
     }

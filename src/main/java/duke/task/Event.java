@@ -1,11 +1,10 @@
-package task;
+package duke.task;
 
 public class Event extends Task {
     private String period;
 
     public Event(String description, String period) {
-        super(description);
-        this.period = period;
+        this(description, period, false);
     }
 
     public Event(String description, String period, boolean isDone) {

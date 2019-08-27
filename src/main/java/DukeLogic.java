@@ -48,6 +48,7 @@ class DukeLogic {
         } else if (!input.equals("list")){
             throw new DukeException("I don't know what that means... :(");
         }
+        // TODO: Check "event" and "deadline" for valid date format
     }
 
     /**

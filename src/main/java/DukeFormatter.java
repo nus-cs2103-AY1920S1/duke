@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 class DukeFormatter {
     private static final String LOGO = " ____        _        \n"
@@ -11,6 +13,23 @@ class DukeFormatter {
             "____________________________________________________________";
 
     private static final String INDENT = "    ";
+
+    /**
+     * An array of date formats that Duke can parse. A valid date can take any
+     * of the following formats:
+     * 1. dd-MM-yyyy
+     * 2. hh:mm
+     * 3. dd-MM-yyyy hh:mm
+     * 4. EEE, dd MMM yy, hh:mm
+     */
+    static final SimpleDateFormat[] DATE_FORMATS = {
+            new SimpleDateFormat("dd-MM-yy"),
+            new SimpleDateFormat("dd-MM-yyyy"),
+            new SimpleDateFormat("hh:mm"),
+            new SimpleDateFormat("dd-MM-yy hh:mm"),
+            new SimpleDateFormat("EEE"),
+            new SimpleDateFormat("EEE, dd MMM yy, hh:mm")
+    };
 
     /**
      * Prints a horizontal line of width 60 characters.

@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
 
-    protected List<Task> taskList;
+    private List<Task> taskList;
 
-    protected TaskList() {
+    TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     // Index starts from 1
-    protected void markAsDoneTaskAt(int index) throws DukeIllegalIndexException {
+    void markAsDoneTaskAt(int index) throws DukeIllegalIndexException {
         try {
             this.taskList.get(index - 1).markAsDone();
         } catch (IndexOutOfBoundsException e) {
@@ -29,12 +29,12 @@ public class TaskList {
     }
 
     // Add task to the back of list and return added Task object
-    protected void addTask(Task task) {
+    void addTask(Task task) {
         this.taskList.add(task);
     }
 
     // Index starts from 1
-    protected Task getTaskAt(int index) throws DukeIllegalIndexException {
+    Task getTaskAt(int index) throws DukeIllegalIndexException {
         try {
             return this.taskList.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -42,11 +42,11 @@ public class TaskList {
         }
     }
 
-    protected int getSize() {
+    int getSize() {
         return this.taskList.size();
     }
 
-    protected Task deleteTaskAt(int index) throws DukeIllegalIndexException {
+    Task deleteTaskAt(int index) throws DukeIllegalIndexException {
         try {
             return this.taskList.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {

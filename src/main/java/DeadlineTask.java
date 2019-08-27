@@ -1,14 +1,18 @@
-public class DeadlineTask extends Task {
+class DeadlineTask extends Task {
 
     private String dueDate;
 
-    protected DeadlineTask(String description, String dueDate) {
+    DeadlineTask(String description, String dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
+    String getDueDate() {
+        return this.dueDate;
+    }
+
     @Override
-    protected String getStatus() {
+    String getStatus() {
         return String.format("[D]%s (by: %s)", super.getStatus(), this.dueDate);
     }
 

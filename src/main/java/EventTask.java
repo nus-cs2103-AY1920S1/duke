@@ -1,14 +1,18 @@
-public class EventTask extends Task {
+class EventTask extends Task {
 
     private String time;
 
-    protected EventTask(String description, String time) {
+    EventTask(String description, String time) {
         super(description);
         this.time = time;
     }
 
+    String getTime() {
+        return this.time;
+    }
+
     @Override
-    protected String getStatus() {
+    String getStatus() {
         return String.format("[E]%s (at: %s)", super.getStatus(), this.time);
     }
 

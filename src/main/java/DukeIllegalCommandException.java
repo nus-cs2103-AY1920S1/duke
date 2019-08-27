@@ -1,8 +1,8 @@
-public class DukeIllegalCommandException extends Exception {
+class DukeIllegalCommandException extends Exception {
 
     private String message;
 
-    protected DukeIllegalCommandException(String message) {
+    DukeIllegalCommandException(String message) {
         this.message = message;
     }
 

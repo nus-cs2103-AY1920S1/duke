@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class DateTime {
     private String date;
     private String time;
@@ -7,7 +9,7 @@ public class DateTime {
         this.time = time;
     }
 
-    public DateTime(String dateTime) {
+    public DateTime(String dateTime) throws InvalidInputException {
         String[] splitDateAndTime = dateTime.split(" ");
         String[] splitDate = splitDateAndTime[0].split("/");
         String day = splitDate[0];
@@ -58,8 +60,11 @@ public class DateTime {
         case "11":
             month = "November";
             break;
-        default:
+        case "12":
             month = "December";
+            break;
+        default:
+            throw new InvalidInputException("☹ OOPS!!! The Date/Time field is invalid");
         }
 
         this.date = day + " " + month + " " + year;

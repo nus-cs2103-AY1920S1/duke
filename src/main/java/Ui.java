@@ -71,6 +71,7 @@ public class Ui {
 
                 try {
                     Parser.handleInput("by", by);
+                    addTaskToTaskList(new Deadline(description, new DateTime(by)));
                 } catch (DukeException ex) {
                     System.out.println(ex.getMessage());
                     userInput = input.nextLine();
@@ -80,12 +81,13 @@ public class Ui {
                     userInput = input.nextLine();
                     continue;
                 }
-                addTaskToTaskList(new Deadline(description, new DateTime(by)));
+
             } else if (userInput.startsWith("event")) {
                 String description = userInput.substring(6, userInput.indexOf('/') - 1);
                 String at = userInput.substring(10 + description.length()).trim();
                 try {
                     Parser.handleInput("at", at);
+                    addTaskToTaskList(new Event(description, new DateTime(at)));
                 } catch (DukeException ex) {
                     System.out.println(ex.getMessage());
                     userInput = input.nextLine();
@@ -95,7 +97,6 @@ public class Ui {
                     userInput = input.nextLine();
                     continue;
                 }
-                addTaskToTaskList(new Event(description, new DateTime(at)));
             }
             try {
                 Storage.save();

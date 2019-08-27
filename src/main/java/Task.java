@@ -19,4 +19,6 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String getSaveString();
 }

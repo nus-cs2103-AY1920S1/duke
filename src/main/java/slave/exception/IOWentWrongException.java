@@ -2,7 +2,7 @@ package slave.exception;
 
 public class IOWentWrongException extends DukeException {
 
-    public IOWentWrongException(){
+    public IOWentWrongException() {
         super("Something went wrong with the IO commands");
     }
 }

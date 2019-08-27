@@ -50,12 +50,24 @@ public class Storage {
                 break;
 
             case "D":
-                Deadline deadline = new Deadline(tokens[2], tokens[1], tokens[3]);
+                Deadline deadline;
+                try {
+                    deadline = new Deadline(tokens[2], tokens[1], tokens[3]);
+                } catch (DukeException e) {
+                    e.printMessage();
+                    break;
+                }
                 taskList.add(deadline);
                 break;
 
             case "E":
-                Event event = new Event(tokens[2], tokens[1], tokens[3]);
+                Event event;
+                try {
+                    event = new Event(tokens[2], tokens[1], tokens[3]);
+                } catch (DukeException e) {
+                    e.printMessage();
+                    break;
+                }
                 taskList.add(event);
                 break;
 

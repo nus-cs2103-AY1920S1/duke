@@ -18,9 +18,13 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String task, String done, String by) {
+    public Deadline(String task, String done, String by) throws DukeException {
         super(task);
-        this.by = by;
+        try {
+            this.by = dateFormatter.parse(by);
+        } catch (ParseException e) {
+            throw new DukeWrongDateFormatException();
+        }
         if (done.equals("1")) {
             super.markAsDone();
         }

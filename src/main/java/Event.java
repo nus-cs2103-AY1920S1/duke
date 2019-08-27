@@ -18,9 +18,13 @@ public class Event extends Task {
         }
     }
 
-    public Event(String task, String done, String at) {
+    public Event(String task, String done, String at) throws DukeException {
         super(task);
-        this.at = at;
+        try {
+            this.at = dateFormatter.parse(at);
+        } catch (ParseException e) {
+            throw new DukeWrongDateFormatException();
+        }
         if (done.equals("1")) {
             super.markAsDone();
         }

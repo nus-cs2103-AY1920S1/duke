@@ -11,10 +11,10 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class AddCommand extends Command {
-    String commandName;
-    String argument;
-    String optionName;
-    String optionArgument;
+    private String commandName;
+    private String argument;
+    private String optionName;
+    private String optionArgument;
 
     /**
      * Constructs a command to add a task.

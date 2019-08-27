@@ -7,7 +7,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
-    int argument;
+    private int argument;
 
     /**
      * Constructs a command to mark a task as done.

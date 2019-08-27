@@ -7,7 +7,7 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    int argument;
+    private int argument;
 
     /**
      * Constructs a command to delete a task.

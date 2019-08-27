@@ -11,6 +11,13 @@ import duke.task.Todo;
 import duke.ui.Ui;
 
 public class Parser {
+
+    /**
+     * Parses the given input, and returns a Duke Command.
+     * 
+     * @param input a String object.
+     * @return a Duke Command.
+     */
     public static Command parse(String input) {
         String[] inputs = input.trim().split(" ", 2);
         String command = inputs[0];

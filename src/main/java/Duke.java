@@ -17,10 +17,11 @@ public class Duke {
         try {
             while (!state.toExit) {
                 String input = scanner.nextLine();
-                Stream.of(Response.values()).reduce(
-                        false,
-                        (matched, r) -> matched || r.call(input, state),
-                        Boolean::logicalAnd);
+                for (Response r : Response.values()) {
+                    if (r.call(input, state)) {
+                        break;
+                    }
+                }
             }
         } catch (NoSuchElementException ignored) {
         }

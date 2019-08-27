@@ -154,18 +154,6 @@ public class Duke {
                 // Description for '/by', '/at'
                 String subCommandDescription = String.join(" ",
                         userInputArr.subList(firstByIdx+1, userInputArr.size()));
-                // If deadline /by is of correct format
-                if (isValidDateTimeFormat(subCommandDescription)) {
-                    try {
-                        SimpleDateFormat displayFormat = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
-                        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                        Date date = inputFormat.parse(subCommandDescription);
-                        // Output: 2nd of December 2019, 6pm
-                        subCommandDescription = displayFormat.format(date);
-                    } catch (ParseException e) {
-                        throw new DukeException("Unable to recognise date-time provided.");
-                    }
-                }
                 Task newTask = command.equals("deadline") ?
                         new Deadline(taskDescription, subCommandDescription) :
                         new Event(taskDescription, subCommandDescription);
@@ -173,10 +161,6 @@ public class Duke {
             }
         }
     }
-
-    //////////////////////
-    // MODIFY TASK LIST //
-    //////////////////////
 
     // Adds task and saves changes in hard disk
     private void addTask(Task newTask) throws IOException {
@@ -202,22 +186,6 @@ public class Duke {
     /////////////////////
     // HELPER METHODS //
     ///////////////////
-
-    // Returns true if string is of format 2/12/2019 1800
-    private boolean isValidDateTimeFormat(String str) {
-        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyy hhmm");
-        try {
-            /*str.matches("([1-9]|[1-2][0-9]|3[0-1])/" +
-                    "([1-9]|1[0-2])/" +
-                    "([0-9]{4})" +
-                    "\\s[0-2][0-9]([0-5]{2})")
-             */
-            inputFormat.parse(str);
-            return true;
-        } catch (ParseException e) {
-            return false;
-        }
-    }
 
     // Splits a string by given regex pattern to AL
     // E.g. "A B C" to [A, B, C]

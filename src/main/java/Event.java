@@ -23,7 +23,7 @@ public class Event extends Task {
     }
 
     public String getStringAt() {
-        return at.getDayOfMonth() + "/" + at.getMonthValue() + "/" + at.getYear() + " " + at.getHour() + at.getMinute();
+        return at.getDayOfMonth() + "/" + at.getMonthValue() + "/" + at.getYear() + " " + String.format("%02d", at.getHour()) + String.format("%02d", at.getMinute());
     }
 
     @Override

@@ -185,13 +185,11 @@ public class Duke {
                     String remove_command = command.replaceFirst("deadline ", "");
                     String[] splited = remove_command.split(" /by ");
                     Deadline curr_task = new Deadline(splited[0], splited[1]);
-                    System.out.println("Debug: " + curr_task.getName());
                     duke.add(curr_task);
                 } else if (command.startsWith("event ")) {
                     String remove_command = command.replaceFirst("event ", "");
                     String[] splited = remove_command.split(" /at ");
                     Event curr_task = new Event(splited[0], splited[1]);
-                    System.out.println("Debug: " + curr_task.getName());
                     duke.add(curr_task);
                 } else if (command.startsWith("delete ")) {
                     String[] splited = command.split(" ");

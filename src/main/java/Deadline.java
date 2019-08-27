@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     public String getStringBy() {
-        return by.getDayOfMonth() + "/" + by.getMonthValue() + "/" + by.getYear() + " " + by.getHour() + by.getMinute();
+        return by.getDayOfMonth() + "/" + by.getMonthValue() + "/" + by.getYear() + " " + String.format("%02d", by.getHour()) + String.format("%02d", by.getMinute());
     }
 
     @Override

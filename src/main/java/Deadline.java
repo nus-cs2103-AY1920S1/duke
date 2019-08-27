@@ -1,6 +1,5 @@
 /*
  * Deadline.java
- * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -8,7 +7,9 @@
  *
  */
 
-public class Deadline extends Task {
+import java.io.Serializable;
+
+public class Deadline extends Task implements Serializable {
     protected String by;
 
     public Deadline(String description) throws DukeException {

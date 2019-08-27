@@ -1,6 +1,5 @@
 /*
  * Duke.java
- * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -10,6 +9,7 @@
  *
  */
 
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -18,10 +18,27 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
+        File saveDirectory = new File("." + File.separator + "data");
+        saveDirectory.mkdirs();
+        File saveFile = new File("." + File.separator + "data"
+                + File.separator + "list.bin");
         greetHello();
 
-        String input;
+        try {
+            if (!saveFile.createNewFile()) {
+                // Load list from file
+                FileInputStream load = new FileInputStream(saveFile);
+                ObjectInputStream loadList = new ObjectInputStream(load);
+                list = (ArrayList<Task>) loadList.readObject();
+                loadList.close();
+            }
+        } catch (Exception e) {
+            printOutput(e.getMessage());
+            System.exit(1);
+        }
 
+
+        String input;
         // Run input loop
         while (!(input = sc.nextLine()).equals("bye")) {
 
@@ -46,6 +63,17 @@ public class Duke {
             catch (DukeException e) {
                 printOutput(e.getMessage());
             }
+        }
+
+        //Save file before exiting
+        try {
+            FileOutputStream save = new FileOutputStream(saveFile);
+            ObjectOutputStream saveList = new ObjectOutputStream(save);
+            saveList.writeObject(list);
+            saveList.close();
+        } catch (Exception e) {
+            printOutput(e.getMessage());
+            System.exit(1);
         }
 
         greetBye();

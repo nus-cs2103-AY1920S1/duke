@@ -1,6 +1,5 @@
 /*
  * To-do.java
- * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -8,7 +7,9 @@
  *
  */
 
-public class Todo extends Task {
+import java.io.Serializable;
+
+public class Todo extends Task implements Serializable {
 
     public Todo(String description) {
         super(description);

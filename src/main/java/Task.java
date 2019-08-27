@@ -1,6 +1,5 @@
 /*
  * Task.java
- * Level-6
  * CS2103T
  * @author Gabriel Ong
  *
@@ -8,7 +7,9 @@
  *
  */
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 

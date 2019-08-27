@@ -15,16 +15,26 @@ public class Ui {
     //Class variables
     private Scanner primaryScanner;
 
+    /**
+     * Initialises the scanner to read queries from the console.
+     */
     public void init() {
         if (primaryScanner == null) {
             primaryScanner = new Scanner(System.in);  // Create a Scanner object
         }
     }
 
+    /**
+     * Waits for a user query.
+     * @return the user query.
+     */
     public String waitForQuery() {
         return primaryScanner.nextLine();
     }
 
+    /**
+     * Shuts down the scanner used to read queries from the console.
+     */
     public void shutdown() {
         if (primaryScanner != null) {
             primaryScanner.close();
@@ -104,26 +114,49 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Greets the user.
+     */
     public void welcomeUser() {
         printResponse("Hello! I'm Duke\n" + MESSAGE_PADDING + "What can I do for you?");
     }
 
+    /**
+     * Bids farewell to the user.
+     */
     public void sayGoodBye() {
         printResponse("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints an informational-level message to the console.
+     * @param message an informational-level message.
+     */
     public void logInfo(String message) {
         printResponse("[INFO]: " + message);
     }
 
+    /**
+     * Prints a warning-level message to the console.
+     * @param message a warning-level message.
+     */
     public void logWarn(String message) {
         printResponse("[WARNING]: " + message);
     }
 
+    /**
+     * Prints an error-level message to the console.
+     * @param message an error-level message.
+     */
     public void logError(String message) {
         printResponse(String.format("%c OOPS!!! %s", MESSAGE_SAD_FACE, message));
     }
 
+    /**
+     * Prints the message to the console.
+     * @param message a message.
+     * @param level severity of the message.
+     */
     public void log(String message, LoggerMessageType level) {
         switch (level) {
         case LOGGER_MESSAGE_INFO:

@@ -18,7 +18,7 @@ public abstract class Command {
 
     /**
      * Indicates if the program should exit.
-     * @return {@code true} if exit condition is met, otherwise {@code false}.
+     * @return A boolean indicating whether the exit condition has been met.
      */
     public boolean shouldExit() {
         return false;

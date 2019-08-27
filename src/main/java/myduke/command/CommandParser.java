@@ -5,6 +5,13 @@ import myduke.exception.DukeInvalidCommandException;
 import myduke.type.TaskType;
 
 public class CommandParser {
+
+    /**
+     * Creates the relevant command based on the user's query.
+     * @param query The query of the user.
+     * @return The appropriate Command.
+     * @throws DukeException if no commands matches the query.
+     */
     public static Command create(String query) throws DukeException {
 
         String[] parts = query.trim().split(" ", 2);

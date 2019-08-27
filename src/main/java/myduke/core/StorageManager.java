@@ -25,6 +25,12 @@ public class StorageManager {
     private List<Task> taskList;
     private BiConsumer<String, LoggerMessageType> loggerConsumer;
 
+    /**
+     * Constructor of Storage Manager.
+     * @param fileLocation Location of Database file.
+     * @param taskList A List of tasks to complete.
+     * @param logger A BiConsumer to perform logging.
+     */
     public StorageManager(String fileLocation, List<Task> taskList, BiConsumer<String, LoggerMessageType> logger) {
         this.dataBaseLocation = fileLocation;
         this.taskList = taskList;

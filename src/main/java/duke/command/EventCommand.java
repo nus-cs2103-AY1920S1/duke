@@ -1,3 +1,10 @@
+package duke.command;
+import duke.ui.DukeUI;
+import duke.tasklist.TaskList;
+import duke.storagedata.StorageData;
+import duke.task.Event;
+import duke.exception.DukeMissingDescriptionException;
+import duke.exception.DukeEmptyDescriptionException;
 public class EventCommand extends Command{
     private String description;
     private String duringWhen;

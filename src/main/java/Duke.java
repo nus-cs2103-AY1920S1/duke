@@ -6,6 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
+import duke.ui.DukeUI;
+import duke.tasklist.TaskList;
+import duke.storagedata.StorageData;
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.exception.*;
 
 public class Duke {
     private DukeUI dukeUI;

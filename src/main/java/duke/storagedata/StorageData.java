@@ -1,7 +1,9 @@
+package duke.storagedata;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import duke.task.*;
 
 public class StorageData {
     private File data;

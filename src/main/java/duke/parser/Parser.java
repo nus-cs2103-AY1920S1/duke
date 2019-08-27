@@ -1,3 +1,6 @@
+package duke.parser;
+import duke.command.Command;
+import duke.exception.*;
 import java.util.Scanner;
 public class Parser {
     public static Command parseCommand(String fullLine) throws DukeWrongInputException, DukeEmptyDescriptionException, DukeMissingDescriptionException {

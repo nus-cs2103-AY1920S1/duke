@@ -17,7 +17,7 @@ public class Duke {
 
         while (run) {
             try {
-                String[] userInput = Parser.parseUserInput(scanner.next());
+                String[] userInput = Parser.parseUserInput(scanner.nextLine());
                 String command = userInput[0];
                 String[] params = Arrays.copyOfRange(userInput, 1, userInput.length);
 

@@ -1,9 +1,17 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class Event extends Task {
-    private String at;
+    private Date at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        try {
+            this.at = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
+        } catch(ParseException ex) {
+            System.out.print(ex);
+        }
     }
 
     @Override

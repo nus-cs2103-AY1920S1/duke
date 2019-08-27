@@ -73,6 +73,15 @@ public class Parser {
         // Call delete command
         else if (splitInput[0].equals("delete")) return new DeleteCommand(Integer.parseInt(splitInput[1]));
 
+        else if (splitInput[0].equals("find")) {
+            String target = "";
+            for (int i = 1; i < splitInput.length; i++) {
+                target = target + splitInput[i];
+                if (i != splitInput.length - 1) target = target + " ";
+            }
+            return new FindCommand(target);
+        }
+
         else return new FakeCommand();
     }
 

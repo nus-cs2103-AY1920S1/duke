@@ -13,7 +13,7 @@ public class TaskTest {
     public void todoTaskInfoTest() {
         try {
             Task t = new Todo("Eat Dinner");
-            assertEquals("[T][\u2715] Eat Dinner",t.task_info());
+            assertEquals("[T][\u2715] Eat Dinner",t.taskInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -23,7 +23,7 @@ public class TaskTest {
     public void todoRecordInfoTest() {
         try {
             Task t = new Todo("Eat Dinner");
-            assertEquals("T|0|Eat Dinner",t.record_info());
+            assertEquals("T|0|Eat Dinner",t.recordInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -33,8 +33,8 @@ public class TaskTest {
     public void todoFinishTest1() {
         try {
             Task t = new Todo("Eat Dinner");
-            t.set_as_finish();
-            assertEquals("[T][\u2713] Eat Dinner",t.task_info());
+            t.setAsFinish();
+            assertEquals("[T][\u2713] Eat Dinner",t.taskInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -44,8 +44,8 @@ public class TaskTest {
     public void todoFinishTest2() {
         try {
             Task t = new Todo("Eat Dinner");
-            t.set_as_finish();
-            assertEquals("T|1|Eat Dinner",t.record_info());
+            t.setAsFinish();
+            assertEquals("T|1|Eat Dinner",t.recordInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -65,7 +65,7 @@ public class TaskTest {
     public void deadlineTaskInfoTest() {
         try {
             Task t = new Deadline("Eat dinner", "12/08/2019 18:00:00");
-            assertEquals("[D][\u2715] Eat dinner (by: 12/08/2019 18:00:00)", t.task_info());
+            assertEquals("[D][\u2715] Eat dinner (by: 12/08/2019 18:00:00)", t.taskInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -75,7 +75,7 @@ public class TaskTest {
     void deadlineRecordInfoTest() {
         try {
             Task t = new Deadline("Eat dinner", "12/08/2019 18:00:00");
-            assertEquals("D|0|Eat dinner|12/08/2019 18:00:00", t.record_info());
+            assertEquals("D|0|Eat dinner|12/08/2019 18:00:00", t.recordInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -85,8 +85,8 @@ public class TaskTest {
     void deadlineFinishTest1() {
         try {
             Task t = new Deadline("Eat dinner", "12/08/2019 18:00:00");
-            t.set_as_finish();
-            assertEquals("[D][\u2713] Eat dinner (by: 12/08/2019 18:00:00)", t.task_info());
+            t.setAsFinish();
+            assertEquals("[D][\u2713] Eat dinner (by: 12/08/2019 18:00:00)", t.taskInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -96,8 +96,8 @@ public class TaskTest {
     void deadlineFinishTest2() {
         try {
             Task t = new Deadline("Eat dinner", "12/08/2019 18:00:00");
-            t.set_as_finish();
-            assertEquals("D|1|Eat dinner|12/08/2019 18:00:00", t.record_info());
+            t.setAsFinish();
+            assertEquals("D|1|Eat dinner|12/08/2019 18:00:00", t.recordInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -127,7 +127,7 @@ public class TaskTest {
     void eventTaskInfoTest() {
         try {
             Task t = new Event("Eat dinner", "12/08/2019 18:00:00");
-            assertEquals("[E][\u2715] Eat dinner (at: 12/08/2019 18:00:00)", t.task_info());
+            assertEquals("[E][\u2715] Eat dinner (at: 12/08/2019 18:00:00)", t.taskInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -137,7 +137,7 @@ public class TaskTest {
     void eventRecordInfoTest() {
         try {
             Task t = new Event("Eat dinner", "12/08/2019 18:00:00");
-            assertEquals("E|0|Eat dinner|12/08/2019 18:00:00", t.record_info());
+            assertEquals("E|0|Eat dinner|12/08/2019 18:00:00", t.recordInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -147,8 +147,8 @@ public class TaskTest {
     void eventFinishTest1() {
         try {
             Task t = new Event("Eat dinner", "12/08/2019 18:00:00");
-            t.set_as_finish();
-            assertEquals("[E][\u2713] Eat dinner (at: 12/08/2019 18:00:00)", t.task_info());
+            t.setAsFinish();
+            assertEquals("[E][\u2713] Eat dinner (at: 12/08/2019 18:00:00)", t.taskInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }
@@ -158,8 +158,8 @@ public class TaskTest {
     void eventFinishTest2() {
         try {
             Task t = new Event("Eat dinner", "12/08/2019 18:00:00");
-            t.set_as_finish();
-            assertEquals("E|1|Eat dinner|12/08/2019 18:00:00", t.record_info());
+            t.setAsFinish();
+            assertEquals("E|1|Eat dinner|12/08/2019 18:00:00", t.recordInfo());
         } catch (DukeException e) {
             assertEquals(1, 2);
         }

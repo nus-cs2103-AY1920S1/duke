@@ -57,6 +57,13 @@ public class Ui {
         System.out.println("       " + t.taskInfo());
     }
 
+    public void showFindMessage(ArrayList<String> tl) {
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < tl.size(); i++) {
+            System.out.println("       " + tl.get(i));
+        }
+    }
+
     public void showExitMessage() {
         System.out.println("     Bye. Hope to see you again soon!");
     }

@@ -34,6 +34,18 @@ public class TaskList {
         return taskList.get(position - 1);
     }
 
+    public ArrayList<String> listMatchTask(String s) {
+        ArrayList<String> toReturn = new ArrayList<>();
+        int frontier = 1;
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).match(s)) {
+                toReturn.add((frontier) + "." + taskList.get(i).taskInfo());
+                frontier++;
+            }
+        }
+        return toReturn;
+    }
+
     public ArrayList<String> listAllTask() {
         ArrayList<String> toReturn = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {

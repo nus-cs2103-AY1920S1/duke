@@ -1,7 +1,4 @@
-import duke.Commands.AddCommand;
-import duke.Commands.DeleteCommand;
-import duke.Commands.FakeCommand;
-import duke.Commands.FinishCommand;
+import duke.Commands.*;
 import duke.DirectProcessor.TaskList;
 import duke.DirectProcessor.Ui;
 import duke.DukeException;
@@ -141,6 +138,30 @@ public class CommandTest {
                     check.get(0));
             assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
             assertEquals("3.[T][\u2713] Eat dinner", check.get(2));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            assertEquals(1, 2);
+        }
+    }
+
+    @Test
+    public void findCommandTest() {
+        AddCommand ac1 = new AddCommand("D",
+                "Software Engineering project", "19/08/2019 00:00:00");
+        AddCommand ac2 = new AddCommand("E",
+                "Drink beer", "19/08/2019 20:00:00");
+        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        FinishCommand fc = new FinishCommand(3);
+        FindCommand fdc = new FindCommand("dinner");
+        try {
+            ac1.execute(tl, ui);
+            ac2.execute(tl, ui);
+            ac3.execute(tl, ui);
+            fc.execute(tl, ui);
+            fdc.execute(tl, ui);
+            ArrayList<String> check = tl.listMatchTask("dinner");
+            assertEquals("1.[T][\u2713] Eat dinner", check.get(0));
+            assertEquals(1, check.size());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             assertEquals(1, 2);

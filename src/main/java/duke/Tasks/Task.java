@@ -25,6 +25,10 @@ public abstract class Task {
         return taskName;
     }
 
+    public boolean match(String s) {
+        return taskName.contains(s);
+    }
+
     public static int getTotalNumber() {
         return taskNumbers;
     }

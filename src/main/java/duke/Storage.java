@@ -84,7 +84,6 @@ public class Storage {
 		} catch (FileNotFoundException exception) {
 			throw new DukeException("\u2639 OOPS!!! Please specify a valid file path.");
 		}
-
 	}
 
 	/**

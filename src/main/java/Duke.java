@@ -28,12 +28,14 @@ public class Duke {
         boolean isRunning = true;
         while (isRunning && this.ui.hasCommand()) {
             String command = this.ui.readCommand();
-            // Terminate the bot if the 'bye' command is issued
-            if (command.equals("bye")) {
-                isRunning = false;
-            } else {
-                // Otherwise, parse the full command string
-                this.ui.print(Parser.parse(command, tasks, fileMgr));
+            
+            // Parse the command to return a Command object
+            try {
+                Command c = Parser.parse(command);
+                this.ui.print(c.execute(tasks, fileMgr));
+                isRunning = !c.willTerminate();
+            } catch (DukeException e) {
+                this.ui.print(e.toString());
             }
         }
     }

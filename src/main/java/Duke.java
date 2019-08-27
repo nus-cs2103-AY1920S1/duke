@@ -41,6 +41,7 @@ public class Duke {
                 if(cmd == Command.BYE){
                     System.out.println(processText(goodbye));
                     break;
+
                 } else if (cmd == Command.LIST){
                     // Error Handling: ListEmpty
                     if(listCounter == 0){
@@ -58,6 +59,7 @@ public class Duke {
                         if (i != listCounter - 1) printList = printList + "\n";
                     }
                     System.out.println(processText(printList));
+
                 } else if (cmd == Command.TODO){
                     String toDoItem = sc.nextLine().trim();
                     // Implies only word "deadline"
@@ -70,6 +72,7 @@ public class Duke {
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
+
                 } else if (cmd == Command.EVENT){
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
@@ -89,6 +92,7 @@ public class Duke {
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
+
                 } else if (cmd == Command.DEADLINE){
                     String input = sc.nextLine().trim();
                     String[] tokenList = input.split("/");
@@ -109,6 +113,7 @@ public class Duke {
                     String tempPrint = addedTaskText();
 
                     System.out.println(processText(tempPrint));
+
                 } else if (cmd == Command.DONE){
                     // Cannot perform done in zero list
                     if(listCounter == 0){
@@ -129,6 +134,7 @@ public class Duke {
 
                     String doneMessage = "Nice! I've marked this task as done: \n\t\t";
                     System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
+
                 } else if (cmd == Command.ECHO){
                     // Read any remaining lines
                     String echoInput = sc.nextLine().trim();
@@ -168,16 +174,22 @@ public class Duke {
             } catch (CommandNotRecognizedException c) {
                 // Clear buffer of scanner
                 String i = sc.nextLine();
-
                 System.out.println(processText("\u263A OOPS!!! I'm sorry, but I don't know what that means :-("));
+
             } catch (EmptyCommandField e){
-                System.out.println(processText("\u263A The description of " + e.getMessage() + " cannot be empty."));
+                System.out.println(processText("\u263A The description of "
+                        + e.getMessage() + " cannot be empty."));
+
             } catch (EmptyListException l){
                 System.out.println(processText("\u263A List is empty! " + l.getMessage()));
+
             } catch (CommandFieldFormatException f){
-                System.out.println(processText("\u263A Description format is incorrect for " + f.getMessage() + "."));
+                System.out.println(processText("\u263A Description format is incorrect for "
+                        + f.getMessage() + "."));
+
             } catch (InvalidNumberException n){
                 System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
+                
             }
         }
     }

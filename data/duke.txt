@@ -1,3 +1,8 @@
-T | 0 | borrow book
-T | 0 | running
-E | 0 | meeting | 10pm
+T | 1 | borrow book
+E | 1 | meeting | 21/3/2019 0000-1200
+D | 1 | return books | 22/3/2019 2330
+D | 1 | return books | 31/5/2019 0900
+E | 0 | meeting | 22/7/2018 0900-1830
+D | 0 | homework | 28/8/2019 1900
+D | 0 | work | today
+D | 0 | work | 1/1/2013 0800

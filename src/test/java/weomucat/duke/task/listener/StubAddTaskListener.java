@@ -3,23 +3,23 @@ package weomucat.duke.task.listener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
-import weomucat.duke.task.listener.AddTaskListener;
 
 public class StubAddTaskListener implements AddTaskListener {
-	private Task task;
-	private TaskListTasks tasks;
 
-	@Override
-	public void addTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
-		this.task = task;
-		this.tasks = tasks;
-	}
+  private Task task;
+  private TaskListTasks tasks;
 
-	public Task getTask() {
-		return this.task;
-	}
+  @Override
+  public void addTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
+    this.task = task;
+    this.tasks = tasks;
+  }
 
-	public TaskListTasks getTasks() {
-		return this.tasks;
-	}
+  public Task getTask() {
+    return this.task;
+  }
+
+  public TaskListTasks getTasks() {
+    return this.tasks;
+  }
 }

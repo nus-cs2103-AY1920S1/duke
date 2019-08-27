@@ -8,83 +8,84 @@ import weomucat.duke.task.TaskList;
 import weomucat.duke.ui.Ui;
 
 public class Duke implements ByeCommandListener {
-	private static final String LOGO = " ____        _        \n"
-			+ "	|  _ \\ _   _| | _____ \n"
-			+ "	| | | | | | | |/ / _ \\\n"
-			+ "	| |_| | |_| |   <  __/\n"
-			+ "	|____/ \\__,_|_|\\_\\___|\n";
 
-	public static final String DATETIME_PARSE_PATTERN = "dd/MM/yy HHmm";
-	public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
+  private static final String LOGO = " ____        _        \n"
+      + "	|  _ \\ _   _| | _____ \n"
+      + "	| | | | | | | |/ / _ \\\n"
+      + "	| |_| | |_| |   <  __/\n"
+      + "	|____/ \\__,_|_|\\_\\___|\n";
 
-	private boolean running;
+  public static final String DATETIME_PARSE_PATTERN = "dd/MM/yy HHmm";
+  public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
 
-	private Controller controller;
-	private TaskList taskList;
-	private TaskListStorage storage;
-	private Ui ui;
+  private boolean running;
 
-	public static void main(String[] args) {
-		new Duke("data/tasks").run();
-	}
+  private Controller controller;
+  private TaskList taskList;
+  private TaskListStorage storage;
+  private Ui ui;
 
-	public Duke(String taskListPath) {
-		this.controller = new Controller();
-		this.taskList = new TaskList();
-		this.storage = new TaskListStorage(taskListPath);
+  public static void main(String[] args) {
+    new Duke("data/tasks").run();
+  }
 
-		// Read from user input from stdin.
-		this.ui = new Ui(System.in);
-	}
+  public Duke(String taskListPath) {
+    this.controller = new Controller();
+    this.taskList = new TaskList();
+    this.storage = new TaskListStorage(taskListPath);
 
-	private void run() {
-		// Try to initialize TaskList from disk if database exists.
-		if (this.storage.exists()) {
-			try {
-				this.taskList = new TaskList(this.storage.load());
-				this.ui.displayMessage("Loaded tasks from disk.");
-			} catch (StorageException e) {
-				this.ui.displayError(e.getMessage());
-			}
-		}
+    // Read from user input from stdin.
+    this.ui = new Ui(System.in);
+  }
 
-		// Set up event listeners
-		this.ui.newUserInputListener(this.controller);
+  private void run() {
+    // Try to initialize TaskList from disk if database exists.
+    if (this.storage.exists()) {
+      try {
+        this.taskList = new TaskList(this.storage.load());
+        this.ui.displayMessage("Loaded tasks from disk.");
+      } catch (StorageException e) {
+        this.ui.displayError(e.getMessage());
+      }
+    }
 
-		this.controller.newAddTaskCommandListener(this.taskList);
-		this.controller.newDeleteTaskCommandListener(this.taskList);
-		this.controller.newDoneTaskCommandListener(this.taskList);
-		this.controller.newListTaskCommandListener(this.taskList);
-		this.controller.newByeCommandListener(this);
+    // Set up event listeners
+    this.ui.newUserInputListener(this.controller);
 
-		this.taskList.newAddTaskListener(this.storage);
-		this.taskList.newDeleteTaskListener(this.storage);
-		this.taskList.newDoneTaskListener(this.storage);
+    this.controller.newAddTaskCommandListener(this.taskList);
+    this.controller.newDeleteTaskCommandListener(this.taskList);
+    this.controller.newDoneTaskCommandListener(this.taskList);
+    this.controller.newListTaskCommandListener(this.taskList);
+    this.controller.newByeCommandListener(this);
 
-		this.taskList.newAddTaskListener(this.ui);
-		this.taskList.newDeleteTaskListener(this.ui);
-		this.taskList.newDoneTaskListener(this.ui);
-		this.taskList.newListTaskListener(this.ui);
+    this.taskList.newAddTaskListener(this.storage);
+    this.taskList.newDeleteTaskListener(this.storage);
+    this.taskList.newDoneTaskListener(this.storage);
 
-		// Greet user
-		this.ui.displayMessage(LOGO, "Hello! I'm Duke", "What can I do for you?");
+    this.taskList.newAddTaskListener(this.ui);
+    this.taskList.newDeleteTaskListener(this.ui);
+    this.taskList.newDoneTaskListener(this.ui);
+    this.taskList.newListTaskListener(this.ui);
 
-		this.running = true;
-		while (this.running) {
-			try {
-				// Handle next user input
-				this.ui.nextUserInput();
-			} catch (DukeException e) {
-				this.ui.displayError(e.getMessage());
-			}
-		}
+    // Greet user
+    this.ui.displayMessage(LOGO, "Hello! I'm Duke", "What can I do for you?");
 
-		// Farewell user
-		this.ui.displayMessage("Bye. Hope to see you again soon!");
-	}
+    this.running = true;
+    while (this.running) {
+      try {
+        // Handle next user input
+        this.ui.nextUserInput();
+      } catch (DukeException e) {
+        this.ui.displayError(e.getMessage());
+      }
+    }
 
-	@Override
-	public void byeCommandUpdate() {
-		this.running = false;
-	}
+    // Farewell user
+    this.ui.displayMessage("Bye. Hope to see you again soon!");
+  }
+
+  @Override
+  public void byeCommandUpdate() {
+    this.running = false;
+  }
 }

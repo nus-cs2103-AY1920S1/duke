@@ -1,21 +1,21 @@
 package weomucat.duke.storage;
 
+import java.io.File;
 import weomucat.duke.exception.StorageException;
 
-import java.io.File;
-
 public abstract class Storage<T> {
-	protected String path;
 
-	public Storage(String path) {
-		this.path = path;
-	}
+  protected String path;
 
-	public boolean exists() {
-		return new File(path).exists();
-	}
+  public Storage(String path) {
+    this.path = path;
+  }
 
-	abstract void save(T t) throws StorageException;
+  public boolean exists() {
+    return new File(path).exists();
+  }
 
-	abstract T load() throws StorageException;
+  abstract void save(T t) throws StorageException;
+
+  abstract T load() throws StorageException;
 }

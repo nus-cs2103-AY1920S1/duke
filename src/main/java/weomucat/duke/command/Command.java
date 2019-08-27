@@ -1,16 +1,16 @@
 package weomucat.duke.command;
 
+import java.util.HashMap;
 import weomucat.duke.exception.DukeException;
 
-import java.util.HashMap;
-
 public interface Command {
-	String PARAMETER_AT = "/at";
-	String PARAMETER_BY = "/by";
 
-	String[] getParameterOptions();
+  String PARAMETER_AT = "/at";
+  String PARAMETER_BY = "/by";
 
-	void setParameters(String body, HashMap<String, String> parameters) throws DukeException;
+  String[] getParameterOptions();
 
-	void run() throws DukeException;
+  void setParameters(String body, HashMap<String, String> parameters) throws DukeException;
+
+  void run() throws DukeException;
 }

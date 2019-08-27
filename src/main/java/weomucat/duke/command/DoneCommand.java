@@ -1,32 +1,32 @@
 package weomucat.duke.command;
 
+import java.util.HashMap;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
 
-import java.util.HashMap;
-
 public abstract class DoneCommand implements Command {
-	private int index;
 
-	@Override
-	public String[] getParameterOptions() {
-		return new String[0];
-	}
+  private int index;
 
-	@Override
-	public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
-		// Get index of task
-		try {
-			this.index = Integer.parseInt(body) - 1;
-		} catch (NumberFormatException e) {
-			throw new InvalidParameterException("The index is not a valid number.");
-		}
-	}
+  @Override
+  public String[] getParameterOptions() {
+    return new String[0];
+  }
 
-	@Override
-	public void run() throws DukeException {
-		updateListeners(this.index);
-	}
+  @Override
+  public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
+    // Get index of task
+    try {
+      this.index = Integer.parseInt(body) - 1;
+    } catch (NumberFormatException e) {
+      throw new InvalidParameterException("The index is not a valid number.");
+    }
+  }
 
-	public abstract void updateListeners(int i) throws DukeException;
+  @Override
+  public void run() throws DukeException {
+    updateListeners(this.index);
+  }
+
+  public abstract void updateListeners(int i) throws DukeException;
 }

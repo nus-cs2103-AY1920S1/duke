@@ -7,15 +7,10 @@ public class Deadline extends Task   {
 
     public Deadline(String name, String dT) {
         super(name);
-        formatDeadlineTime(dT);
-    }
-
-    public void formatDeadlineTime(String dT) {
-        String format = dT.substring(0,2) + ":" + dT.substring(2);
-        this.deadlineTime = format;
+        this.deadlineTime = dT;
     }
 
     public String toString() {
-        return "[D]" + super.toString() + "(" + deadlineTime + ")";
+        return "D|" + super.toString().trim() + "|" + deadlineTime.trim();
     }
 }

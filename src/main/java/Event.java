@@ -7,14 +7,11 @@ public class Event extends Task {
 
     public Event(String name, String eT) {
         super(name);
-        formatEventTime(eT);
-    }
-    public void formatEventTime(String eT) {
-        String format = eT.substring(0,2) + ":" + eT.substring(2);
-        this.eventTime = format;
+        this.eventTime = eT;
     }
 
+
     public String toString() {
-        return "[E]" + super.toString() + "(" + eventTime + ")";
+        return "E|" + super.toString().trim() + "|" + eventTime.trim();
     }
 }

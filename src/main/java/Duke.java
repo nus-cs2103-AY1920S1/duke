@@ -43,7 +43,7 @@ public class Duke {
                 break;
             } else {
                 try {
-                    Command cmd = parser.parseCommand(command, tasks, ui);
+                    Command cmd = parser.parseCommand(command);
                     cmd.execute(tasks, ui);
                 } catch (Exception e) {
                     ui.showParsingError(e);

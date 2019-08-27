@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -82,6 +83,19 @@ public class Ui {
         printBlock("Got it. I've added this task:", "  " + task,
                 String.format("Now you have %d task%s in the list.",
                         taskListSize, taskListSize > 1 ? "s" : ""));
+    }
+
+    /**
+     * Shows all tasks that matches a keyword typed by the user.
+     * @param taskList a list tasks that matches a keyword.
+     */
+    public void showMatchingTasks(List<Task> taskList) {
+        String[] text = new String[taskList.size() + 1];
+        text[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < taskList.size(); i++) {
+            text[i + 1] = (i + 1) + "." + taskList.get(i);
+        }
+        printBlock(text);
     }
 
     /**

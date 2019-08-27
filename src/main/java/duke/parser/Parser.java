@@ -3,9 +3,6 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDescriptionException;
-import duke.exception.IllegalIndexOfTaskException;
-import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 
@@ -24,15 +21,12 @@ public class Parser {
     /**
      * Returns the command by parsing the command string that typed by the user.
      * @param command the command typed by the user
-     * @param taskList a list stores all the tasks
-     * @param ui user interface to show messages
      * @return the command by parsing the command string that typed by the user.
      * @throws IllegalDescriptionException If the description of the task is illegal.
      * @throws IllegalCommandException If the command is illegal.
-     * @throws IllegalIndexOfTaskException If the index provided is illegal.
      */
-    public Command parseCommand(String command, TaskList taskList, Ui ui)
-            throws IllegalIndexOfTaskException, IllegalDescriptionException, IllegalCommandException {
+    public Command parseCommand(String command)
+            throws IllegalDescriptionException, IllegalCommandException {
         Command cmd;
         if (command.equals(ListCommand.COMMAND_WORD)) {
             cmd = new ListCommand();
@@ -66,6 +60,8 @@ public class Parser {
                 }
                 cmd = new EventCommand(description.substring(0, sep).strip(),
                                 parseDate(description.substring(sep + 3).strip()));
+            } else if(type.equals(FindCommand.COMMAND_WORD)) {
+                cmd = new FindCommand(description);
             } else {
                 throw new IllegalCommandException(
                         "I'm sorry, but I don't know what that means :-(");

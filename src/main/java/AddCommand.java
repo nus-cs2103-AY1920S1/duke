@@ -18,7 +18,6 @@ public class AddCommand extends Command {
 		this.commandType = command;
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Execute the saving of tasks into TaskList and printing out a confirmation or error message through Ui object
 	 * @param tasks represents all the tasks the user has input in memory
@@ -26,12 +25,8 @@ public class AddCommand extends Command {
 	 * @param storage represents the storage object to read and write to the archival file. Not used in this method
 	 * @throws DukeException throws Exception for invalid formatting of user commands
 	 */
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-		if(!inFullCommandScanner.hasNext()) {
-=======
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 		if (!inFullCommandScanner.hasNext()) {
->>>>>>> A-CodingStandard
 			throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
 		} else {
 			if (commandType.equals("todo")) {

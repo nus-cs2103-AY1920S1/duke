@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 /**
  * Represents the command to list all tasks in memory and their respective details
  */
-=======
->>>>>>> A-CodingStandard
 public class ListCommand extends Command {
 	/**
 	 * just a default constructor for the list command object

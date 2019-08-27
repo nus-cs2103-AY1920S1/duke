@@ -3,17 +3,8 @@ package duke;
 import duke.command.*;
 import duke.exception.DukeException;
 
-/**
- * Represents a parser that reads and parses raw command strings.
- */
 public class Parser {
 
-	/**
-	 * Parses raw commands and returns a type of <code>Command</code> correspondingly.
-	 * @param rawCommandDetails Details of the command provided by user.
-	 * @return A type of <code>Command</code> that corresponds to the raw command.
-	 * @throws DukeException If the raw commands are invalid, in the wrong format or are lacking required information.
-	 */
 	static Command parse(String rawCommandDetails) throws DukeException {
 		String commandDetails = rawCommandDetails.replaceAll("\\s+", " ");;
 		if (commandDetails.equals("bye")) {

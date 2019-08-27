@@ -4,9 +4,6 @@ import duke.exception.DukeException;
 
 import java.time.Month;
 
-/**
- * Represents a date. A <code>Date</code> object corresponds to a time represented by a day, month and year.
- */
 public class Date {
 
 	protected String rawDate;
@@ -15,11 +12,6 @@ public class Date {
 	protected Month month;
 	protected boolean isNull = true;
 
-	/**
-	 * Constructor for <code>Date</code>.
-	 * @param rawDate Unprocessed date.
-	 * @throws DukeException If provided date is invalid.
-	 */
 	public Date(String rawDate) throws DukeException {
 		this.rawDate = rawDate;
 		if (rawDate != null) {
@@ -28,10 +20,6 @@ public class Date {
 		}
 	}
 
-	/**
-	 * Extracts information about the day, month and year from the raw date.
-	 * @throws DukeException If date is in the wrong format or invalid.
-	 */
 	protected void processDate() throws DukeException {
 		String[] dateComponents = rawDate.split("/");
 		if (dateComponents.length < 3) {
@@ -54,11 +42,6 @@ public class Date {
 		}
 	}
 
-	/**
-	 * Checks if provided month is valid.
-	 * @param inputMonthNum Number corresponding to specific month. E.g. 1 for January, 2 for February, etc.
-	 * @return True if 1 <= inputMonthNum <= 12
-	 */
 	protected boolean isValidMonth(int inputMonthNum) {
 		if (inputMonthNum < 1 || inputMonthNum > 12) {
 			return false;
@@ -67,13 +50,6 @@ public class Date {
 		}
 	}
 
-	/**
-	 * Checks if provided day is valid.
-	 * @param inputDay Number corresponding to specific day
-	 * @param inputMonthNum Number corresponding to specific month. E.g. 1 for January, 2 for February, etc.
-	 * @param inputYear Number corresponding to year.
-	 * @return True if day is valid for the given month and year.
-	 */
 	protected boolean isValidDay(int inputDay, int inputMonthNum, int inputYear) {
 		switch (inputMonthNum) {
 		case 1:
@@ -100,11 +76,6 @@ public class Date {
 		}
 	}
 
-	/**
-	 * Checks if the provided year is a leap year.
-	 * @param inputYear Number corresponding to year.
-	 * @return True if the year is a leap year.
-	 */
 	protected boolean isLeapYear(int inputYear) {
 		if (inputYear % 400 == 0) {
 			return true;
@@ -117,18 +88,10 @@ public class Date {
 		}
 	}
 
-	/**
-	 * Checks if the provided raw date is null.
-	 * @return True if null was the input to the constructor.
-	 */
 	public boolean isNull() {
 		return isNull;
 	}
 
-	/**
-	 * Returns the provided raw date.
-	 * @return The raw date.
-	 */
 	public String getRawDate() {
 		return rawDate;
 	}

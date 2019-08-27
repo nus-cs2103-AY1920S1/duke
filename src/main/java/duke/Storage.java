@@ -15,29 +15,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Represents a storage in the hard disk.
- * A <code>Storage</code> object corresponds to a specific file path that dictates the file that information about the
- * tasks in the <code>TaskList</code> should be loaded from and written to every time a change occurs.
- */
 public class Storage {
 
 	protected String filePath;
 
-	/**
-	 * Constructor for <code>Storage</code>.
-	 * @param filePath Path to file that should be written to and loaded from.
-	 */
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
-	/**
-	 * Loads the tasks from the file given by the file path.
-	 * Stores and returns the tasks within an <code>ArrayList</code>.
-	 * @return An <code>ArrayList</code> containing every <code>Task</code> written in the file.
-	 * @throws DukeException If the file path is invalid.
-	 */
 	public ArrayList<Task> load() throws DukeException {
 		try {
 			ArrayList<Task> tasks = new ArrayList<Task>();
@@ -87,11 +72,6 @@ public class Storage {
 
 	}
 
-	/**
-	 * Writes the tasks in the <code>TaskList</code> to the file given by the file path.
-	 * @param taskList <code>TaskList</code> containing all the tasks.
-	 * @throws DukeException If the file cannot be written to.
-	 */
 	public void writeToFile(TaskList taskList) throws DukeException {
 		try {
 			FileWriter writer = new FileWriter(filePath);

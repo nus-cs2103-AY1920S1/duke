@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
 
@@ -24,6 +29,12 @@ public class Duke {
     private static final String ERROR_MISSING_DEADLINE = "The deadline must be present. e.g. task /by Monday";
     private static final String ERROR_MISSING_EVENT_TIME = "The event time must be present. e.g. meeting /at Monday";
     private static final String ERROR_TOO_MANY_ARGUMENTS = "There are too many arguments for this command.";
+    private static final String ERROR_FAILED_SAVE        = "Failed to save file.";
+    private static final String ERROR_FAILED_TO_READ     = "Failed to read save data. Creating new task list.";
+    private static final String ERROR_FAILED_TO_FIND     = "Failed to find save data. Creating new task list.";
+
+    // Constants
+    private static final String SAVE_LOCATION = "tasks.txt";
 
     /**
      * Setups Duke.
@@ -42,6 +53,7 @@ public class Duke {
         sayGreeting();
         String input;
         Scanner sc = new Scanner(System.in);
+        loadTasks();
 
         do {
             input = sc.nextLine();
@@ -78,6 +90,7 @@ public class Duke {
                 default:
                     throw new DukeException(ERROR_INVALID_INPUT);
                 }
+                saveTasks();
             } catch (DukeException ex) {
                 printFormatted(ex.getMessage());
             }
@@ -201,6 +214,73 @@ public class Duke {
         this.tasks.remove(id - 1);
         printFormatted(String.format(MESSAGE_DELETE, task.toString(), this.tasks.size(),
                 this.tasks.size() != 1 ? "tasks" : "task"));
+    }
+
+    /**
+     * Saves tasks onto disk.
+     * Tasks will be saved in the following format: T | 1 | read book.
+     * Save location is determined by constant SAVE_LOCATION
+     */
+    private void saveTasks() throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(SAVE_LOCATION);
+            for (Task task : this.tasks) {
+                if (task instanceof Deadline) {
+                    fw.append(String.format("D | %d | %s | %s\n",
+                            task.isDone() ? 1 : 0,
+                            task.getDescription(),
+                            ((Deadline) task).getDeadline()));
+                } else if (task instanceof Event) {
+                    fw.append(String.format("E | %d | %s | %s\n",
+                            task.isDone() ? 1 : 0,
+                            task.getDescription(),
+                            ((Event) task).getTime()));
+                } else {
+                    fw.append(String.format("T | %d | %s\n",
+                            task.isDone() ? 1 : 0,
+                            task.getDescription()));
+                }
+            }
+            fw.close();
+        } catch (IOException ex) {
+            throw new DukeException(ERROR_FAILED_SAVE);
+        }
+    }
+
+    private void loadTasks() {
+        try {
+            File f = new File(SAVE_LOCATION);
+            Scanner sc = new Scanner(f);
+
+            while (sc.hasNext()) {
+                String[] input = sc.nextLine().split(" [|] ");
+                Task task;
+                switch (input[0]) {
+                case "T":
+                    task = new Todo(input[2], input[1].equals("1"));
+                    break;
+                case "D":
+                    task = new Deadline(input[2], input[3], input[1].equals("1"));
+                    break;
+                case "E":
+                    task = new Event(input[2], input[3], input[1].equals("1"));
+                    break;
+                default:
+                    throw new DukeException(ERROR_FAILED_TO_READ);
+                }
+                this.tasks.add(task);
+            }
+
+            printFormatted(String.format("Loaded tasks from %s", f.getAbsolutePath()));
+        } catch (FileNotFoundException ex) {
+            printFormatted(ERROR_FAILED_TO_FIND);
+        } catch (DukeException ex) {
+            this.tasks = new ArrayList<>();
+            printFormatted(ex.getMessage());
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            this.tasks = new ArrayList<>();
+            printFormatted(ERROR_FAILED_TO_READ);
+        }
     }
 
     /**

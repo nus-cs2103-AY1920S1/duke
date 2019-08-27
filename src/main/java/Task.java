@@ -3,7 +3,28 @@ public abstract class Task {
     protected String description;
     
     public Task(String description) {
+        this(description, false);
+    }
+
+    public Task(String description, boolean isDone) {
         this.description = description;
+        this.isDone = isDone;
+    }
+
+    /**
+     * Gets task status.
+     * @return Task status.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
+     * Returns task description.
+     * @return Task description.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

@@ -8,6 +8,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toSave() {
+        return "D | " + super.getBinaryStatus() + " | " + super.description + " | " + time;
+    }
+
+    @Override
     public String toString() {
         return "[D][" + super.getStatusIcon() + "] " + super.description + " (by: " + time + ")";
     }

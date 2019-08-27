@@ -1,14 +1,13 @@
 package duke;
 
 import duke.task.Task;
-import java.util.Scanner;
 
 public class Ui {
 
-    private final Scanner scanner;
+    private final MainWindow mainWindow;
 
-    public Ui() {
-        this.scanner = new Scanner(System.in);
+    public Ui(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
     }
 
     /**
@@ -16,17 +15,15 @@ public class Ui {
      * Often used in the beginning of the program.
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Hello! I'm Duke");
+        builder.append("\n");
+        builder.append("What can I do for you?");
+        this.mainWindow.addDukeDialog(builder.toString());
     }
 
     public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    public void showLine() {
-        System.out.println();
+        this.mainWindow.addDukeDialog("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -37,14 +34,27 @@ public class Ui {
      * @param tasks the list of tasks to be shown
      */
     public void showTasks(TaskList tasks) {
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i).toString());
+            builder.append((i + 1) + ". " + tasks.get(i).toString());
+            builder.append("\n");
         }
+        this.mainWindow.addDukeDialog(builder.toString());
     }
 
+    /**
+     * Show notification of successful completion.
+     * This method would notify the user that the task
+     * is being marked as done.
+     *
+     * @param task the task that is completed
+     */
     public void showDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
+        StringBuilder builder = new StringBuilder();
+        builder.append("Nice! I've marked this task as done:");
+        builder.append("\n");
+        builder.append(task.toString());
+        this.mainWindow.addDukeDialog(builder.toString());
     }
 
     /**
@@ -56,9 +66,13 @@ public class Ui {
      * @param tasks the list of tasks left after deletion
      */
     public void showDelete(Task task, TaskList tasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Noted. I've removed this task:");
+        builder.append("\n");
+        builder.append(task.toString());
+        builder.append("\n");
+        builder.append("Now you have " + tasks.size() + " tasks in the list.");
+        this.mainWindow.addDukeDialog(builder.toString());
     }
 
     /**
@@ -70,29 +84,29 @@ public class Ui {
      * @param tasks the list of tasks left after addition
      */
     public void showTaskAdded(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Got it. I've added this task:");
+        builder.append("\n");
+        builder.append(task.toString());
+        builder.append("\n");
+        builder.append("Now you have " + tasks.size() + " tasks in the list.");
+        this.mainWindow.addDukeDialog(builder.toString());
     }
 
     public void showLoadingError() {
-        System.out.println("Sorry, I am not able to load the saved file.");
+        this.mainWindow.addDukeDialog("Sorry, I am not able to load the saved file.");
     }
 
     public void showSaveError() {
-        System.out.println("Sorry, I am not able to save your tasks.");
+        this.mainWindow.addDukeDialog("Sorry, I am not able to save your tasks.");
     }
 
     public void showInvalidCommandError() {
-        System.out.println("Sorry, I do not understand what you mean.");
+        this.mainWindow.addDukeDialog("Sorry, I do not understand what you mean.");
     }
 
     public void showInvalidDateError() {
-        System.out.println("Sorry, I do not understand the date format.");
-    }
-
-    public String readCommand() {
-        return this.scanner.nextLine();
+        this.mainWindow.addDukeDialog("Sorry, I do not understand the date format.");
     }
 
 }

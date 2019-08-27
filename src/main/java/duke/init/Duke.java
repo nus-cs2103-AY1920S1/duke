@@ -58,28 +58,28 @@ public class Duke {
     private static void process(String input) {
         String command = input.split(" ")[0];
         switch (command) {
-            case "list":
-                listStoredTasks();
-                break;
-            case "done":
-                setTaskAsDone(input);
-                break;
-            case "delete":
-                deleteStoredTask(input);
-                break;
-            case "todo":
-                storeTodo(input);
-                break;
-            case "deadline":
-                storeDeadline(input);
-                break;
-            case "event":
-                storeEvent(input);
-                break;
-            default:
-                System.out.println("\u2639 OOPS!!! I'm sorry, but I don't"
-                        + " know what that means :-(");
-                break;
+        case "list":
+            listStoredTasks();
+            break;
+        case "done":
+            setTaskAsDone(input);
+            break;
+        case "delete":
+            deleteStoredTask(input);
+            break;
+        case "todo":
+            storeTodo(input);
+            break;
+        case "deadline":
+            storeDeadline(input);
+            break;
+        case "event":
+            storeEvent(input);
+            break;
+        default:
+            System.out.println("\u2639 OOPS!!! I'm sorry, but I don't"
+                    + " know what that means :-(");
+            break;
         }
     }
 

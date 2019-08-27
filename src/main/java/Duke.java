@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -15,6 +19,17 @@ public class Duke {
             System.out.println("     " + string);
         }
         System.out.println(line);
+    }
+
+    private static String dateTimeConvert(String s) {
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(s);
+            DateFormat df = new SimpleDateFormat("d 'of' MMMMMMMMM yyyy, h:mm a ");
+            return df.format(date).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return s;
     }
 
     private static String getTasks(LinkedList<Task> list) {
@@ -196,7 +211,7 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] deadlineArr = next.split("/by");
-                        Deadline deadlineTask = Deadline.of(deadlineArr[0], deadlineArr[1]);
+                        Deadline deadlineTask = Deadline.of(deadlineArr[0], dateTimeConvert(deadlineArr[1]));
                         lst.addLast(deadlineTask);
                         generateTaskMessage(addString, String.format("%s", deadlineTask), lst);
                     } catch (DukeException e) {
@@ -212,7 +227,7 @@ public class Duke {
                 case "event":
                     try {
                         String[] eventArr = next.split("/at");
-                        Event eventTask = Event.of(eventArr[0], eventArr[1]);
+                        Event eventTask = Event.of(eventArr[0], dateTimeConvert(eventArr[1]));
                         lst.addLast(eventTask);
                         generateTaskMessage(addString, String.format("%s", eventTask), lst);
                     } catch (DukeException e) {

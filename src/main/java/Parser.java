@@ -16,6 +16,9 @@ public class Parser {
                 }
                 String description = stringBuilder.toString().trim();
                 return new AddTaskCommand(instruction, description);
+            case "delete":
+                int indexToDelete = Integer.parseInt(input[1]);
+                return new DeleteCommand(indexToDelete);
             case "list":
                 return new ListCommand();
             case "bye":

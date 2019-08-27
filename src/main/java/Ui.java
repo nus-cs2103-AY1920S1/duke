@@ -44,6 +44,12 @@ public class Ui {
     public void addTask(Task task, int numberOfTasks) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
-        System.out.println("Now you have " + numberOfTasks + " in the list.");
+        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+    }
+
+    public void removeTask(Task task, int numberOfTasks) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
     }
 }

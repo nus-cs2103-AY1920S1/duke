@@ -13,7 +13,7 @@ public class TaskList {
     }
 
     public void deleteTask(int index) {
-        tasks.remove(index-1);
+        tasks.remove(index);
     }
 
     public ArrayList<Task> getTasks() {

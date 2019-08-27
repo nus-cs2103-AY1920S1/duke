@@ -1,5 +1,7 @@
 import java.time.LocalDateTime;
-
+/**
+ * Event extends Task
+ */
 public class Event extends Task {
 
     protected String at;
@@ -15,6 +17,7 @@ public class Event extends Task {
         this.pattern = LocalDateTime.parse(at.trim(), dateTimeFormatter);
         this.at = at;
     }
+
     @Override
     public String getFormatToFile() {
         return String.format("E | %d | %s | %s \n", (isDone ? 1 : 0), description, at);

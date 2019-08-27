@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList class
+ */
 public class TaskList {
     private List<Task> taskList;
 

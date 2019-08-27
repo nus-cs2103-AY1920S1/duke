@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * AddCommand extends Command
+ */
 public class AddCommand extends Command {
     private String[] oneLine;
     private Task task;

@@ -1,3 +1,6 @@
+/**
+ * Parser class
+ */
 public class Parser {
     public static String[] oneLine;
 
@@ -48,30 +51,30 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         Command outCommand = null;
 //        try {
-            String cmd = input;
-            oneLine = cmd.trim().split(" ", 2);
-            String firstWord = oneLine[0];
+        String cmd = input;
+        oneLine = cmd.trim().split(" ", 2);
+        String firstWord = oneLine[0];
 
-            if (firstWord.equals("bye")) {
-                if (oneLine.length != 1) {
-                    throw new ExtraDescriptionException("There is extra description for bye");
-                }
-                outCommand = new ExitCommand();
-            } else if (firstWord.equals("list")) {
-                if (oneLine.length != 1) {
-                    throw new ExtraDescriptionException("There is extra description for list");
-                }
-                outCommand = new ListCommand();
-            } else if (firstWord.equals("done")) {
-                outCommand = doneFeature();
-            } else if (firstWord.equals("delete")) {
-                outCommand = deleteFeature();
-            } else if (firstWord.equals("todo") || firstWord.equals("deadline")
-                    || firstWord.equals("event")) {
-                outCommand = childFeature();
-            } else {
-                throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
+        if (firstWord.equals("bye")) {
+            if (oneLine.length != 1) {
+                throw new ExtraDescriptionException("There is extra description for bye");
             }
+            outCommand = new ExitCommand();
+        } else if (firstWord.equals("list")) {
+            if (oneLine.length != 1) {
+                throw new ExtraDescriptionException("There is extra description for list");
+            }
+            outCommand = new ListCommand();
+        } else if (firstWord.equals("done")) {
+            outCommand = doneFeature();
+        } else if (firstWord.equals("delete")) {
+            outCommand = deleteFeature();
+        } else if (firstWord.equals("todo") || firstWord.equals("deadline")
+                || firstWord.equals("event")) {
+            outCommand = childFeature();
+        } else {
+            throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
+        }
 //        }
 //        catch (DukeException e) {
 //            System.out.println(e);

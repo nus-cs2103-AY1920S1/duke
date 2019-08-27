@@ -63,11 +63,11 @@ public class Storage {
                     task = new Event(description, at);
                     break;
                 default:
-                    throw new DukeException(UserInterface.MESSAGE_ERROR_READING_FROM_FILE);
+                    throw new DukeException(Message.MESSAGE_ERROR_READING_FROM_FILE);
             }
             task.setDone(doneStatus.equals("1"));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(UserInterface.MESSAGE_ERROR_READING_FROM_FILE);
+            throw new DukeException(Message.MESSAGE_ERROR_READING_FROM_FILE);
         }
         return task;
     }
@@ -77,10 +77,10 @@ public class Storage {
         if (storageFile.exists()) {
             return;
         }
-        System.out.println(String.format(UserInterface.MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath));
+        System.out.println(String.format(Message.MESSAGE_ERROR_MISSING_STORAGE_FILE, UserInterface.LINE_PREFIX, filePath));
         try {
             storageFile.createNewFile();
-            System.out.println(String.format("Created new file %1$s", filePath));
+            System.out.println(String.format(Message.MESSAGE_STORAGE_FILE_CREATED, UserInterface.LINE_PREFIX,filePath));
         } catch (IOException ioe) {
             throw new DukeException(String.format("Unable to create new file %1$s. %2$s", filePath, ioe.getMessage()));
         }
@@ -94,7 +94,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException ioe) {
-            throw new DukeException(UserInterface.MESSAGE_ERROR_MISSING_STORAGE_FILE);
+            throw new DukeException(Message.MESSAGE_ERROR_MISSING_STORAGE_FILE);
         }
     }
 
@@ -104,8 +104,7 @@ public class Storage {
             fileWriter.write(simplifiedTaskRepresentation + "\n");
             fileWriter.close();
         } catch (IOException ioe) {
-            throw new DukeException(UserInterface.MESSAGE_ERROR_MISSING_STORAGE_FILE);
+            throw new DukeException(Message.MESSAGE_ERROR_MISSING_STORAGE_FILE);
         }
     }
-
 }

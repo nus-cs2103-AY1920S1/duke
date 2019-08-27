@@ -12,56 +12,63 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        String command = scanner.nextLine();
+
+        while (true) {
+
+            String command = scanner.nextLine();
+
+            String[] words = command.split(" ", 2);
 
 
-
-        while (command.equals("bye") == false) {
-
-            String[] words = command.split(" ",2);
-
-            if (words[0].equals("todo")) {
-
+            switch (words[0]) {
+            case "todo":
                 try {
                     bot.add(command, Bot.TaskType.TODO);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
 
-
-
-            } else if (words[0].equals("deadline")) {
+                continue;
+            case "deadline":
                 try {
                     bot.add(command, Bot.TaskType.DEADLINE);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
-            } else if (words[0].equals("event")) {
+                continue;
+            case "event":
                 try {
                     bot.add(command, Bot.TaskType.EVENT);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
-            } else if (words[0].equals("done")) {
-
+                continue;
+            case "done":
                 bot.done(command);
+                continue;
+            case "delete":
+                bot.delete(command);
+                continue;
+            }
 
-            } else if (command.equals("list")) {
+            switch (command) {
+            case "list":
                 bot.list();
-
-            } else {
+                break;
+            case "bye":
+                bot.bye();
+                return;
+            default:
                 try {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
-
+                break;
             }
 
-            command = scanner.nextLine();
         }
 
-        bot.bye();
 
     }
 }

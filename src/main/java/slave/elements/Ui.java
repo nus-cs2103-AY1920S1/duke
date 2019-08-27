@@ -5,6 +5,8 @@ import slave.task.Deadline;
 import slave.task.Event;
 import slave.task.Task;
 import slave.task.ToDo;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -95,6 +97,17 @@ public class Ui {
         System.out.println(Formatter.indentLine("Here are the tasks in your list:"));
         for (Task task: taskList.getList()){
             System.out.println(Formatter.indentLine(task.getId() + "." + task.toString()));
+        }
+        Formatter.printLine();
+    }
+
+    public void printFindCommand(ArrayList<Task> findList){
+        Formatter.printLine();
+        System.out.println(Formatter.indentLine("Here are the matching tasks in your list:"));
+        int index = 1;
+        for (Task task: findList){
+            System.out.println(Formatter.indentLine(index + ") " + task.getId() + "." + task.toString()));
+            index++;
         }
         Formatter.printLine();
     }

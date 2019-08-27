@@ -17,6 +17,8 @@ public class Parser {
             return new HelpCommand();
         case "clear":
             return new ClearCommand();
+        case "find":
+            return new FindCommand(fullCommand.substring(5));
         case "done":
             checkValidity("done", fullCommand, tokens);
             return new DoneCommand(Integer.parseInt(tokens[1]));

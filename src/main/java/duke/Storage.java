@@ -7,13 +7,27 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Encapsulates a file pointer.
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath  Path to saved data file on hard disk.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads data from hard disk.
+     *
+     * @return Data from hard disk in the form of a List of Tasks.
+     * @throws DukeException  If file is not found.
+     */
     public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         String line;
@@ -32,6 +46,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Updates data in hard disk.
+     *
+     * @param taskList  Task list with modifications from user interaction via the chat bot.
+     * @throws DukeException  If file cannot be updated.
+     */
     public void update(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);

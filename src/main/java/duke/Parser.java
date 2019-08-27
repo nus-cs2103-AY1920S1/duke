@@ -6,7 +6,17 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Encapsulates a parser.
+ */
 public class Parser {
+    /**
+     * Parses user input.
+     *
+     * @param input  User input received by the chat bot.
+     * @return Command described by user input.
+     * @throws DukeException  If description of todo is empty or input format is invalid.
+     */
     public Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ByeCommand();

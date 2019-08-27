@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ class DukeLogic {
     private void process(String input) throws DukeException {
         if (input.equalsIgnoreCase("list")) {
             if (taskList.isEmpty()) {
-                DukeFormatter.prettyPrint("Hooray! You have no tasks yet.");
+                DukeFormatter.prettyPrint("You have no tasks now. Hooray!");
             } else {
                 DukeFormatter.prettyPrint(taskList);
             }
@@ -69,24 +70,43 @@ class DukeLogic {
             selectedTask.markAsDone();
             DukeFormatter.prettyPrint("Nice! I've marked this task as done:"
                     + "\n  " + selectedTask.toString());
+            save();
         } else if (input.startsWith("undo")) {
             int taskIndex = getTaskIndex(input.substring(5));
             Task selectedTask = taskList.get(taskIndex);
             selectedTask.markAsUndone();
             DukeFormatter.prettyPrint("Oh dear. I've marked this task as undone:"
                     + "\n  " + selectedTask.toString());
+            save();
         } else if (input.startsWith("delete")) {
             int taskIndex = getTaskIndex(input.substring(7));
             Task deletedTask = taskList.remove(taskIndex);
             DukeFormatter.prettyPrint("Noted. I've removed this task:"
                     + "\n  " + deletedTask.toString()
                     + "\nNow you have " + taskList.size() + " tasks in the list.");
+            save();
         } else {
             addNewTask(input);
             int numberOfTasks = taskList.size();
             DukeFormatter.prettyPrint("Got it. I've added this task:"
                     + "\n  " + taskList.get(numberOfTasks - 1)
                     + "\nNow you have " + numberOfTasks + " tasks in the list.");
+            save();
+        }
+    }
+
+    /**
+     * Saves the current task list in the file `[root]/data/duke.txt`.
+     */
+    private void save() {
+        try {
+            DukeFileHandler.writeToFile(taskList);
+        } catch (IOException e) {
+            DukeFormatter.prettyPrint(
+                    "Oops! I encountered an error when saving your tasks.\n"
+                            + "    " + e.getMessage() + "\n"
+                            + "If you say bye now, you may not be able to access this\n"
+                            + " list in future.");
         }
     }
 
@@ -148,6 +168,11 @@ class DukeLogic {
      */
      void runApplication() {
         DukeFormatter.printWelcomeMessage();
+        try {
+            DukeFileHandler.readTasksFromFile(taskList);
+        } catch (DukeException e) {
+            DukeFormatter.printErrorMessage(e);
+        }
         while (SCANNER.hasNext()) {
             String userInput = SCANNER.nextLine();
             userInput = userInput.strip();
@@ -159,7 +184,7 @@ class DukeLogic {
                 validate(userInput);
                 process(userInput);
             } catch (DukeException e) {
-                DukeFormatter.prettyPrint("Sorry, " + e.getMessage());
+                DukeFormatter.printErrorMessage(e);
                 // TODO: Add "help" feature: list all supported commands
             }
         }

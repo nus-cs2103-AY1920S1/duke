@@ -8,8 +8,17 @@ class Task {
      *                      be at most 50 characters (for now).
      */
     Task(String description) {
+        this(description, false);
+    }
+
+    /**
+     * Creates a new Task with the given description and isDone status.
+     * @param description   Description of the Task. Description length should
+     *                      be at most 50 characters (for now).
+     */
+    Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -20,6 +29,14 @@ class Task {
     private String getStatusIcon() {
         return isDone ? "+" : " ";
         // return isDone ? "\u2713" : "\u2718"; // return tick or X symbols
+    }
+
+    /**
+     * Returns a String of length 1 that indicates the current Task type.
+     * @return  String indicating Task type
+     */
+    String getType() {
+        return "-";
     }
 
     /**
@@ -34,6 +51,15 @@ class Task {
      */
     void markAsUndone() {
         this.isDone = false;
+    }
+
+    /**
+     * Returns a representation of the current Task in an appropriate
+     * format for data storage.
+     * @return  String representing the current Task.
+     */
+    String formatAsData() {
+        return getType() + " | " + getStatusIcon() + " | " + description;
     }
 
     /**

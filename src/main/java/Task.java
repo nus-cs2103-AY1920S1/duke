@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String desc, boolean isDone){
+        this.description = desc;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -18,6 +23,10 @@ public class Task {
     public String getTask(){
         String output = "[" + getStatusIcon() + "] " + description;
         return output;
+    }
+
+    public String writeFormat(){
+        return "T " + isDone + " " + description;
     }
 
     @Override

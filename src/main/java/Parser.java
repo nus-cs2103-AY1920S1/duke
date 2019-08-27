@@ -1,8 +1,19 @@
 import java.util.Scanner;
 
+/**
+ * Represents the parsing of user commands into actual command objects.
+ * 		Basically a switch for deciding which commands to execute based on the input
+ */
 public class Parser {
 	public Parser() { }
 
+	/**
+	 * parse takes in the user's input as a fullCommand and decideds which command object to initialize based on the
+	 * 		first word of the fullCommand
+	 * @param fullCommand the entire command the user has input into the duke program
+	 * @return returns the corresponding command with the user's input
+	 * @throws DukeException throws exception if the command is not found.
+	 */
 	public static Command parse(String fullCommand) throws DukeException {
 		Scanner inFullCommandScanner = new Scanner(fullCommand);
 		String command = inFullCommandScanner.next();

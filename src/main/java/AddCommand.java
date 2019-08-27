@@ -1,14 +1,30 @@
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+/**
+ * Represents the addition of tasks. Could be one of 3 types of tasks: todo, deadline, event
+ */
 public class AddCommand extends Command {
 	private String commandType;
 
+	/**
+	 * Constructor of AddCommand object
+	 * @param command the command input. Used to distinguish the type of task to create and add
+	 * @param inFullCommandScanner scanner to read the rest of the user's input including the taskDescription and other
+	 *                             details
+	 */
 	public AddCommand(String command, Scanner inFullCommandScanner) {
 		super(inFullCommandScanner);
 		this.commandType = command;
 	}
 
+	/**
+	 * Execute the saving of tasks into TaskList and printing out a confirmation or error message through Ui object
+	 * @param tasks represents all the tasks the user has input in memory
+	 * @param ui represents the UI object used to interact with the user be it reading input or displaying messages
+	 * @param storage represents the storage object to read and write to the archival file. Not used in this method
+	 * @throws DukeException throws Exception for invalid formatting of user commands
+	 */
 	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
 		if(!inFullCommandScanner.hasNext()) {
 			throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");

@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat;
-import java.util.Hashtable;
 import java.util.Scanner;
 
 /**
@@ -10,13 +8,19 @@ import java.util.Scanner;
  * Abstract out as storage.load and constructor for TaskList. --> Requires TaskList to be done...
  * Handle wrong file path or empty file path.
  * Saving tasks (storage.save(TaskList, filePath))
- * <p>
- * <p>
- * ui - Deals with user interaction (readToDo, showWelcome, showBye etc)
+ *
+ * Command class
+ * Parse to return command
+ * c.execute(tasks, ui, storage)
+ * c.isExit();
+ *
+ * Sort directory out...
  */
 
+// TODO: update run method, ui read line
+// TODO: Move exceptions to execute
 public class Duke {
-    private TaskList toDoList;
+    private TaskList tasks;
     private UI ui;
     private final String emptyToDoErrorMessage = "____________________________________________________________\n"
             + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
@@ -26,48 +30,49 @@ public class Duke {
      * Driver method.
      */
     public void run() {
-        Hashtable<String, String> toDo;
+        Command command;
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
-        toDoList = new TaskList();
+        tasks = new TaskList();
         ui = new UI();
 
         ui.showWelcomeMessage();
 
         while (!exit) {
             try {
-                toDo = Parser.parse(sc.nextLine());
-                switch (toDo.get("command")) {
-                case "todo":
-                    System.out.println(toDoList.addToDo(toDo.get("task")));
-                    break;
-                case "deadline":
-                    System.out.println(toDoList.addDeadline(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
-                    break;
-                case "event":
-                    System.out.println(toDoList.addEvent(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
-                    break;
-                case "list":
-                    System.out.println(toDoList.list());
-                    break;
-                case "done":
-                    System.out.println(toDoList.done(Integer.parseInt(toDo.get("index"))));
-                    break;
-                case "delete":
-                    System.out.println(toDoList.delete(Integer.parseInt(toDo.get("index"))));
-                    break;
-                case "save":
-                    toDoList.save(toDo.get("path"));
-                    break;
-                case "bye":
-                    exit = true;
-                    break;
-                }
+                command = Parser.parse(sc.nextLine());
+                command.execute(tasks, ui);
+                exit = command.isExit();
+//                switch (comm.get("command")) {
+//                case "todo":
+//                    System.out.println(tasks.addToDo(toDo.get("task")));
+//                    break;
+//                case "deadline":
+//                    System.out.println(tasks.addDeadline(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
+//                    break;
+//                case "event":
+//                    System.out.println(tasks.addEvent(toDo.get("task"), toDo.get("date"), "dd/MM/yyyy HHmm"));
+//                    break;
+//                case "list":
+//                    System.out.println(tasks.list());
+//                    break;
+//                case "done":
+//                    System.out.println(tasks.done(Integer.parseInt(toDo.get("index"))));
+//                    break;
+//                case "delete":
+//                    System.out.println(tasks.delete(Integer.parseInt(toDo.get("index"))));
+//                    break;
+//                case "save":
+//                    tasks.save(toDo.get("path"));
+//                    break;
+//                case "bye":
+//                    exit = true;
+//                    break;
+//                }
             } catch (Exception e) {
                 ui.showMessage(e.getMessage());
             }
         }
-        ui.showByeMessage();
         sc.close();
     }
 

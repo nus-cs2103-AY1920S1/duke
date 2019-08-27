@@ -8,13 +8,11 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class TaskList {
-    private List<Task> toDoList;
-    private final String doneMessage = "Nice! I've marked this task as done:";
+    private List<Task> tasks;
     private final String addedMessage = "Got it. I've added this task:";
-    private final String deleteMessage = "Noted. I've removed this task: ";
 
     public TaskList() {
-        toDoList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -27,81 +25,73 @@ public class TaskList {
     }
 
     /**
-     * Set index of To Do List as done. (one based numbering)
+     * Sets task at specified index of To Do List as done and returns it (one based numbering).
      *
      * @param i Index
-     * @return Done message as a string
+     * @return Task at specified index.
      */
     public String done(int i) {
-        toDoList.get(i - 1).setDone(true);
-        StringJoiner result = new StringJoiner("\n");
-        result.add(doneMessage);
-        result.add(toDoList.get(i - 1).toString());
-        return padMessage(result.toString());
+        tasks.get(i - 1).setDone(true);
+        return tasks.get(i - 1).toString();
     }
 
     /**
      * Delete index of To Do List. (one based numbering)
      *
      * @param i Index
-     * @return message to print
+     * @return Deleted task
      */
     public String delete(int i) {
-        StringJoiner result = new StringJoiner("\n");
-        result.add(deleteMessage);
-        result.add(toDoList.get(i - 1).toString());
-        toDoList.remove(i - 1);
-        result.add(String.format("Now you have %d tasks in the list.", toDoList.size()));
-        return padMessage(result.toString());
+        String taskMessage = tasks.get(i - 1).toString();
+        tasks.remove(i - 1);
+        return taskMessage;
+//        StringJoiner result = new StringJoiner("\n");
+//        result.add(deleteMessage);
+//        result.add(tasks.get(i - 1).toString());
+//        tasks.remove(i - 1);
+//        result.add(String.format("Now you have %d tasks in the list.", tasks.size()));
+//        return padMessage(result.toString());
     }
 
     /**
      * Appends task to To Do List. (one based numbering)
      *
-     * @param task Task description
+     * @param td ToDo
      * @return message to print
      */
-    public String addToDo(String task) {
-        toDoList.add(new ToDo(task));
-        return addedMessage();
+    public String addToDo(ToDo td) {
+        tasks.add(td);
+        return tasks.get(tasks.size() - 1).toString();
     }
 
     /**
-     * Appends deadline to To Do List. (one based numbering)
+     * Appends and returns deadline to To Do List. (one based numbering).
      *
-     * @param task   Task description
-     * @param date   Deadline
-     * @param format Format to parse date
+     * @param dl deadline
      * @return message to print
      */
-    public String addDeadline(String task, String date, String format) {
-        String message;
-        try {
-            SimpleDateFormat readFormat = new SimpleDateFormat(format);
-            toDoList.add(new Deadline(task, readFormat.parse(date)));
-            message = addedMessage();
-        } catch (ParseException pe) {
-            message = pe.getMessage();
-        }
-        return message;
+    public String addDeadline(Deadline dl) {
+        tasks.add(dl);
+//        message = addedMessage();
+//        try {
+//            SimpleDateFormat readFormat = new SimpleDateFormat(format);
+//            tasks.add(new Deadline(task, readFormat.parse(date)));
+//            message = addedMessage();
+//        } catch (ParseException pe) {
+//            message = pe.getMessage();
+//        }
+        return tasks.get(tasks.size() - 1).toString();
     }
 
     /**
-     * Appends event to To Do List. (one based numbering)
+     * Appends and returns event to To Do List. (one based numbering)
      *
-     * @param task Task description
-     * @param date Date
+     * @param e Event
+     * @return message to print
      */
-    public String addEvent(String task, String date, String format) {
-        String message;
-        try {
-            SimpleDateFormat readFormat = new SimpleDateFormat(format);
-            toDoList.add(new Event(task, readFormat.parse(date)));
-            message = addedMessage();
-        } catch (ParseException pe) {
-            message = pe.getMessage();
-        }
-        return message;
+    public String addEvent(Event e) {
+        tasks.add(e);
+        return tasks.get(tasks.size() - 1).toString();
     }
 
     /**
@@ -115,10 +105,14 @@ public class TaskList {
         fw.close();
     }
 
+    public int getTasksSize() {
+        return tasks.size();
+    }
+
     private String getTasks() {
         StringJoiner result = new StringJoiner("\n");
-        for (int i = 0; i < toDoList.size(); i++) {
-            Task t = toDoList.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
             result.add(String.format("%d.%s", i + 1, t));
         }
 
@@ -128,8 +122,8 @@ public class TaskList {
     private String addedMessage() {
         StringJoiner result = new StringJoiner("\n");
         result.add(addedMessage);
-        result.add(toDoList.get(toDoList.size() - 1).toString());
-        result.add(String.format("Now you have %d tasks in the list.", toDoList.size()));
+        result.add(tasks.get(tasks.size() - 1).toString());
+        result.add(String.format("Now you have %d tasks in the list.", tasks.size()));
         return padMessage(result.toString());
     }
 

@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EmptyCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.task.Task;
 import duke.task.TaskEnum;
 
@@ -61,6 +68,7 @@ public class Parser {
                 }
 
             } catch (DukeException de) {
+                ;
             } catch (Exception e) {
                 new DukeException("Something went wrong. Please try again.");
             }
@@ -77,6 +85,7 @@ public class Parser {
 
                 return new FindCommand(remaining);
             } catch (DukeException de) {
+                ;
             } catch (Exception e) {
                 new DukeException("Something went wrong. Please try again.");
             }

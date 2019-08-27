@@ -8,6 +8,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
+
     String textToFind;
 
     /**
@@ -15,15 +16,15 @@ public class FindCommand extends Command {
      *
      * @param textToFind Text to search for.
      */
-    public FindCommand(String textToFind){
+    public FindCommand(String textToFind) {
         this.textToFind = textToFind;
     }
 
     /**
      * Executes the current command.
      *
-     * @param ui Ui object.
-     * @param storage Storage object.
+     * @param ui       Ui object.
+     * @param storage  Storage object.
      * @param taskList TaskList object.
      */
     public void execute(Ui ui, Storage storage, TaskList taskList) {
@@ -35,7 +36,7 @@ public class FindCommand extends Command {
             //Get tasks
             Task task = taskArrList.get(i);
 
-            if(task.toString().contains(textToFind)) {
+            if (task.toString().contains(textToFind)) {
                 listOutput += (counter) + "." + task + "\n";
                 counter++;
             }

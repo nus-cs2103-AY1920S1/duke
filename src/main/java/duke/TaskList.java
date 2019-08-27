@@ -1,7 +1,10 @@
 package duke;
 
-import duke.task.*;
-
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskEnum;
+import duke.task.Todo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -103,6 +106,7 @@ public class TaskList {
                 throw new DukeException("There are no items in the list.");
             }
         } catch (DukeException de) {
+            ;
         } catch (NumberFormatException nfe) {
             new DukeException("Only numbers are allowed.");
         } catch (IndexOutOfBoundsException ioobe) {
@@ -127,6 +131,7 @@ public class TaskList {
                 return task;
             }
         } catch (DukeException de) {
+            ;
         } catch (NumberFormatException nfe) {
             new DukeException("Only numbers are allowed.");
         } catch (IndexOutOfBoundsException ioobe) {

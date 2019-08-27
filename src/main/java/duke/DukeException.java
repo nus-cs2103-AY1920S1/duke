@@ -3,7 +3,7 @@ package duke;
 public class DukeException extends Exception {
 
     /**
-     * Creates a Duke Exception object
+     * Creates a Duke Exception object.
      *
      * @param message Error message to print.
      */

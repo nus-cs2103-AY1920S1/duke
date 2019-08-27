@@ -1,6 +1,7 @@
 package duke.task;
 
 public class TaskMock extends Task {
+
     public TaskMock(String description) {
         super("description");
     }
@@ -11,7 +12,7 @@ public class TaskMock extends Task {
     }
 
     @Override
-    public String getDescription(){
+    public String getDescription() {
         return "description";
     }
 

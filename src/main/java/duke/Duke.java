@@ -8,6 +8,9 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Create a new Duke object.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
@@ -15,7 +18,7 @@ public class Duke {
     }
 
     /**
-     * Start the program execution
+     * Start the program execution.
      */
     public void run() {
         boolean shouldContinue = true;

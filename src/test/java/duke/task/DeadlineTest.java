@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class DeadlineTest {
 
@@ -15,6 +15,7 @@ class DeadlineTest {
     @Test
     void testToString() {
         Deadline deadline = new Deadline("A description", "20/12/2019 0000");
-        assertEquals("[D][\u2718] A description (by: December 20, 2019 at 0000)", deadline.toString());
+        assertEquals("[D][\u2718] A description (by: December 20, 2019 at 0000)",
+            deadline.toString());
     }
 }

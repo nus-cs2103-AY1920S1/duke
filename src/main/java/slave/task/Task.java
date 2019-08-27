@@ -1,20 +1,22 @@
 package slave.task;
 
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
-    protected int id;
-    protected TaskType type;
 
-    public Task(String description, int id){
+    private String description;
+    private boolean isDone;
+    private int id;
+    TaskType type;
+
+    public Task(String description, int id) {
         this.description = description;
         this.isDone = false;
         this.id = id;
     }
 
-    public void decrementId(){
+    public void decrementId() {
         this.id--;
     }
+
     public int getId() {
         return this.id;
     }
@@ -27,23 +29,23 @@ public abstract class Task {
         return this.description;
     }
 
-    public String getDate(){
+    public String getDate() {
         return "";
     }
 
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return (isDone ? "Done" : "X");
     }
 
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return this.isDone;
     }
 
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
     }
 
-    public String toString(){
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +33,11 @@ public class Duke {
 
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(indent(wrapWithHorizontalLines(endMessage)));
+        try {
+            DataManager.save(history);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

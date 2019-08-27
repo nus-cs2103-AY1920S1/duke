@@ -66,9 +66,9 @@ public class Duke {
                             task = new ToDo(input.substring(input.indexOf(" ") + 1));
                     }
                     else if (input.startsWith("deadline"))
-                        task = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1), input.substring(input.indexOf("/") + 4));
+                        task = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1), DateTime.parse(input.substring(input.indexOf("/") + 4)));
                     else if (input.startsWith("event"))
-                        task = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1), input.substring(input.indexOf("/") + 4));
+                        task = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1), DateTime.parse(input.substring(input.indexOf("/") + 4)));
                     else {
                         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         isError = true;

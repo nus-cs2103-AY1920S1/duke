@@ -24,6 +24,7 @@ public class AddCommand extends Command {
     /**
      * This constructor loads the entire input command into the object for further processing of its details, such as type
      * of task added and other details (e.g. description and time).
+     * @param allDetails a String array containing all the details to create the appropriate task
      */
     public AddCommand(String[] allDetails) {
         this.allDetails = allDetails;

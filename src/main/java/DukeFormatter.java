@@ -23,12 +23,12 @@ class DukeFormatter {
      * 4. EEE, dd MMM yy, hh:mm
      */
     static final SimpleDateFormat[] DATE_FORMATS = {
-            new SimpleDateFormat("dd-MM-yy"),
-            new SimpleDateFormat("dd-MM-yyyy"),
-            new SimpleDateFormat("hh:mm"),
+            new SimpleDateFormat("EEE, dd MMM yy, hh:mm"),
             new SimpleDateFormat("dd-MM-yy hh:mm"),
-            new SimpleDateFormat("EEE"),
-            new SimpleDateFormat("EEE, dd MMM yy, hh:mm")
+            new SimpleDateFormat("dd-MM-yyyy"),
+            new SimpleDateFormat("dd-MM-yy"),
+            new SimpleDateFormat("hh:mm"),
+            new SimpleDateFormat("EEE")
     };
 
     /**

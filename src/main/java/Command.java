@@ -1,11 +1,26 @@
+/**
+ * The Command class makes use of multiple classes to drive the program.
+ */
 public class Command {
 
     private String command;
 
+    /**
+     * Creates a Command object.
+     *
+     * @param command A string representation of the user's command.
+     */
     public Command(String command) {
         this.command = command;
     }
 
+    /**
+     * Responds accordingly to the user's command.
+     *
+     * @param tasks A TaskList object containing the list of tasks.
+     * @param ui An Ui object that helps to interact with the user.
+     * @param storage A Storage object that contains a file with the tasks in it.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (command) {
         case "bye":
@@ -66,6 +81,10 @@ public class Command {
         }
     }
 
+    /**
+     * Gets a boolean true or false depending on the user's command.
+     * @return true if user's command is bye.
+     */
     public boolean isExit() {
         boolean flag = false;
         if (command.equals("bye")) {

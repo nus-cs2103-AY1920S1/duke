@@ -5,14 +5,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A Storage class that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private File file;
 
+    /**
+     * Creates a Storage object.
+     *
+     * @param filePath A string that represents the directory of a file.
+     */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Updates the task in the file to be marked as done.
+     *
+     * @param number An int representing the task number.
+     */
     public void updateDone(int number) {
         try {
             String s = "";
@@ -44,6 +57,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks in the file into an ArrayList of tasks
+     *
+     * @return An ArrayList containing tasks from the file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -86,6 +104,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Add the task of type Todo to the file.
+     *
+     * @param taskname A string representing the task description.
+     */
     public void addTodo(String taskname) {
         try {
             FileWriter append = new FileWriter("data/duke.txt", true);
@@ -100,6 +123,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Add the task of type Deadline to the file.
+     *
+     * @param deadline A string representing the deadline task description.
+     */
     public void addDeadline(String deadline) {
         try {
             String[] arrDeadline = deadline.split("/by");
@@ -117,6 +145,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Add the task of type Event to the file.
+     *
+     * @param event A string representing the task description.
+     */
     public void addEvent(String event) {
         try {
             String[] arrEvent = event.split("/at");
@@ -134,6 +167,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a task from the file.
+     *
+     * @param deletionNumber An int representing the task number of the task to be deleted.
+     */
     public void delete(int deletionNumber) {
         try {
             String s = "";

@@ -4,6 +4,9 @@ public class Duke {
     private UI ui;
     private TaskList tasks;
 
+    /**
+     * Constructor
+     */
     public Duke(String path) {
         ui = new UI();
         Storage.setPath(path);
@@ -15,6 +18,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point for program.
+     */
     public void run() {
         String logo = " ____        _        \n" +
             "|  _ \\ _   _| | _____ \n" +

@@ -9,11 +9,17 @@ public class UI {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Shows error about why file cannot be read.
+     */
     public void showLoadingError(Exception e) {
         System.out.println(e);
         System.out.println(e.getCause());
     }
 
+    /**
+     * Main event loop.
+     */
     public void run() {
         boolean status = true;
         String in;

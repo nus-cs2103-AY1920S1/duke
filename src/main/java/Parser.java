@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public class Parser {
 
+    /**
+     * Handles and parses text commands input by user.
+     * @param in The input from user.
+     * @param sc Scanner object from UI class.
+     * @return false signals that user wants to quit.
+     */
     public static boolean handleCommand(String in, Scanner sc)
         throws DukeException {
         switch (in) {

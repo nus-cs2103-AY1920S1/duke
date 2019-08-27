@@ -28,7 +28,7 @@ public class Duke {
     public void run() {
         ui.greet();
 
-        while(scanner.hasNext()){
+        while (scanner.hasNext()) {
             String command = scanner.nextLine();
 
             try {

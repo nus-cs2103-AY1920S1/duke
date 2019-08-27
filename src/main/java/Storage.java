@@ -13,11 +13,11 @@ public class Storage {
         this.taskList = taskList;
     }
 
-    public void readTask() throws IODukeException{
+    public void readTask() throws IODukeException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = null;
 
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(" \\| ");
                 if (tokens.length < 3) {
                     throw new IODukeException("Please enter date in this format: 2/12/2019 1800");
@@ -26,7 +26,7 @@ public class Storage {
                 Task taskHolder = null;
                 boolean isDone;
                 String description = tokens[2];
-                Date date =null;
+                Date date = null;
                 if (tokens[1].equals("1")) {
                     isDone = true;
                 } else {
@@ -63,12 +63,12 @@ public class Storage {
         }
     }
 
-    public void saveTask() throws IODukeException{
+    public void saveTask() throws IODukeException {
         PrintWriter pr = null;
         try {
             pr = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
 
-            for (int j = 0; j < taskList.getSize(); j ++) {
+            for (int j = 0; j < taskList.getSize(); j++) {
 
                 int statusHolder = 0;
 
@@ -88,7 +88,7 @@ public class Storage {
                 pr.write(store);
 
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new IODukeException("File could not be saved");
         } finally {
             if (pr != null) {
@@ -96,7 +96,6 @@ public class Storage {
             }
         }
     }
-
 
 
 }

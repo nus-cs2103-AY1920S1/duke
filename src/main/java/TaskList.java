@@ -28,7 +28,7 @@ public class TaskList {
         return taskList.size();
     }
 
-    public void addTask(String command) throws DukeException{
+    public void addTask(String command) throws DukeException {
         ui.horizontalLine();
         List<String> commandList = new ArrayList<>(Arrays.asList(command.split(" ")));
         String stringHolder = (commandList.remove(0));

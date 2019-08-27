@@ -8,7 +8,7 @@ public class StorageTest {
     Storage storage = new Storage(taskList, System.getProperty("user.dir") + "/data/duke.txt");
 
     @Test
-    void storage_LoadFromTextFile() throws IODukeException{
+    void storage_LoadFromTextFile() throws IODukeException {
         storage.readTask();
         assertEquals(taskList.getSize(), 2);
     }

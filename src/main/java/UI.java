@@ -1,6 +1,7 @@
 public class UI {
 
-    public UI() {}
+    public UI() {
+    }
 
     public void horizontalLine() {
         System.out.println("____________________________________________________________");
@@ -24,7 +25,7 @@ public class UI {
         horizontalLine();
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println(i+1 + ".[" + taskList.getTask(i).getType() + "]"+ "[" + taskList.getTask(i).getStatusIcon() + "] " + taskList.getTask(i).getDescription() + taskList.getTask(i).getDate());
+            System.out.println(i + 1 + ".[" + taskList.getTask(i).getType() + "]" + "[" + taskList.getTask(i).getStatusIcon() + "] " + taskList.getTask(i).getDescription() + taskList.getTask(i).getDate());
         }
         horizontalLine();
         System.out.println();

@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class DukeIllegalDescriptionException extends Exception{
 
     public DukeIllegalDescriptionException(String cmd) {

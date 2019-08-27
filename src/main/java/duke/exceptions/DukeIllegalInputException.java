@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class DukeIllegalInputException extends Exception{
 
     public DukeIllegalInputException() {

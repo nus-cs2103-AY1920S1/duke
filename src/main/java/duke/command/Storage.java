@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exceptions.DukeException;
+import duke.task.*;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -14,7 +19,7 @@ public class Storage {
 
     }
 
-    public static String getFilePath() {
+    static String getFilePath() {
         return filePath;
     }
 
@@ -81,7 +86,7 @@ public class Storage {
         }
     }
 
-    public void appendToFile(String filePath, String textToAppend, boolean flag) {
+    void appendToFile(String filePath, String textToAppend, boolean flag) {
         try {
             FileWriter fw = new FileWriter(filePath, flag);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -92,7 +97,6 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 
 
 }

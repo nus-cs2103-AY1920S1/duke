@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exceptions.DukeIllegalDescriptionException;
+import duke.exceptions.DukeIllegalInputException;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Scanner;
@@ -9,6 +14,14 @@ public class Ui {
     private static SimpleDateFormat newFormatEvStart = new SimpleDateFormat("EEE MMM dd yyyy HH:mm a", Locale.ENGLISH);
     private static SimpleDateFormat newFormatEvEnd = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
 
+    static void setFlag() {
+        Ui.flag = false;
+    }
+
+    public static boolean getFlag() {
+        return Ui.flag;
+    }
+
     public void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,7 +32,7 @@ public class Ui {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-    public void scan() throws DukeIllegalInputException, DukeIllegalDescriptionException{
+    public void scan() throws DukeIllegalInputException, DukeIllegalDescriptionException {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine(); //Read the command
@@ -36,31 +49,23 @@ public class Ui {
         }
     }
 
-    public void printAddTask() {
+    void printAddTask() {
         System.out.println("Got it. I've added this task:");
     }
 
-    public void printCountTasks() {
+    void printCountTasks() {
         System.out.println("Now you have " + TaskList.getList().size() + " tasks in the list.");
     }
 
-    public static void setFlag(boolean flag) {
-        Ui.flag = flag;
-    }
-
-    public static boolean getFlag() {
-        return Ui.flag;
-    }
-
-    public SimpleDateFormat getNewFormatDeadline() {
+    SimpleDateFormat getNewFormatDeadline() {
         return newFormatDeadline;
     }
 
-    public SimpleDateFormat getNewFormatEvStart() {
+    SimpleDateFormat getNewFormatEvStart() {
         return newFormatEvStart;
     }
 
-    public SimpleDateFormat getNewFormatEvEnd() {
+    SimpleDateFormat getNewFormatEvEnd() {
         return newFormatEvEnd;
     }
 

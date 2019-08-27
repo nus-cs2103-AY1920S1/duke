@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -12,7 +16,7 @@ public class TaskList {
         store = new ArrayList<>();
     }
 
-    public static ArrayList<Task> getList() {
+    static ArrayList<Task> getList() {
         return store;
     }
 }

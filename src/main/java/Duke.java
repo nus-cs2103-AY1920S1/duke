@@ -1,3 +1,10 @@
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeIllegalDescriptionException;
+import duke.exceptions.DukeIllegalInputException;
+
 public class Duke {
 
     private Storage storage;
@@ -12,6 +19,14 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
             create();
+        }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("/Users/auxin/duke/data/Tasks.txt");
+        duke.greet();
+        while (Ui.getFlag()) {
+            duke.run();
         }
     }
 
@@ -31,18 +46,5 @@ public class Duke {
         } catch (DukeIllegalInputException | DukeIllegalDescriptionException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("/Users/auxin/duke/data/Tasks.txt");
-        duke.greet();
-        while (Ui.getFlag()) {
-            duke.run();
-        }
-    }
-
-
-    enum Command {
-        bye, list, done, todo, deadline, event, delete
     }
 }

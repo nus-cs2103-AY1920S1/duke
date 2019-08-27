@@ -1,6 +1,8 @@
-public class Event extends Task{
+package duke.task;
 
-    protected String duration;
+public class Event extends Task {
+
+    private String duration;
 
     public Event(String description, String duration) {
         super(description);

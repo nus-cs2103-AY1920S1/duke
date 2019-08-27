@@ -1,17 +1,22 @@
+package duke.command;
+
+import duke.exceptions.DukeIllegalDescriptionException;
+import duke.task.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Parser {
+class Parser {
 
     private String[] action;
 
-    public Parser(String[] action) {
+    Parser(String[] action) {
         this.action = action;
     }
 
-    public void parse() throws DukeIllegalDescriptionException {
-        switch (Duke.Command.valueOf(action[0])) {
+    void parse() throws DukeIllegalDescriptionException {
+        switch (Command.valueOf(action[0])) {
             case bye:
                 commandBye();
                 break;
@@ -33,13 +38,13 @@ public class Parser {
             case delete:
                 commandDelete();
                 break;
-            }
+        }
 
     }
 
     private void commandBye() {
         System.out.println("Bye. Hope to see you again soon!");
-        Ui.setFlag(false);
+        Ui.setFlag();
     }
 
     private void commandList() {
@@ -49,7 +54,7 @@ public class Parser {
         }
     }
 
-    public void commandDone() {
+    private void commandDone() {
         Storage storage = new Storage();
         int num = Integer.parseInt(action[1]);
         Task newTask = TaskList.getList().get(num - 1);
@@ -66,7 +71,7 @@ public class Parser {
         }
     }
 
-    public void commandTodo() throws DukeIllegalDescriptionException {
+    private void commandTodo() throws DukeIllegalDescriptionException {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
@@ -81,7 +86,7 @@ public class Parser {
         }
     }
 
-    public void commandDeadline() throws DukeIllegalDescriptionException {
+    private void commandDeadline() throws DukeIllegalDescriptionException {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
@@ -102,7 +107,7 @@ public class Parser {
         }
     }
 
-    public void commandEvent() throws DukeIllegalDescriptionException {
+    private void commandEvent() throws DukeIllegalDescriptionException {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
@@ -129,7 +134,7 @@ public class Parser {
         }
     }
 
-    public void commandDelete() {
+    private void commandDelete() {
         Ui ui = new Ui();
         Storage storage = new Storage();
         int delNum = Integer.parseInt(action[1]) - 1;
@@ -144,5 +149,9 @@ public class Parser {
                 isAppendDel = true;
             }
         }
+    }
+
+    enum Command {
+        bye, list, done, todo, deadline, event, delete
     }
 }

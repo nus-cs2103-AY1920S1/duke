@@ -16,11 +16,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-   public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
         planner = new File(filePath);
         setPlannerPermissions(planner);
         ArrayList<Task> taskArrayList = createTaskList(planner);
         return taskArrayList;
+        //loading
     }
 
     public ArrayList<Task> createTaskList(File file) throws DukeException {
@@ -30,17 +31,17 @@ public class Storage {
             while (sc.hasNext()) {
                 String[] taskDetails = sc.nextLine().split("\\|");
                 Task task = null;
-                switch(taskDetails[0].trim()) {
-                    case "T" : 
+                switch (taskDetails[0].trim()) {
+                    case "T":
                         task = new ToDo(taskDetails[2].trim());
                         setDoneFlag(task, taskDetails[1]);
                         break;
-                    case "D" :
+                    case "D":
                         task = new Deadline(taskDetails[2].trim(), taskDetails[3].trim());
                         //System.out.println(task);
                         setDoneFlag(task, taskDetails[1].trim());
                         break;
-                    case "E" :
+                    case "E":
                         task = new Event(taskDetails[2].trim(), taskDetails[3].trim());
                         setDoneFlag(task, taskDetails[1].trim());
                         break;

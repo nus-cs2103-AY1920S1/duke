@@ -54,9 +54,10 @@ public class Duke {
                         if (descriptionT.isBlank()) {
                             throw new IllegalDukeDescriptionException("todo");
                         } else {
-                            texts.add(descriptionT,"T");
+                            Task todo = new Todo(descriptionT);
+                            texts.add(todo);
                             System.out.println("Got it. I've added this task:\n" + "  "
-                                    + "[T]" + texts.getLast() + "\nNow you have " +
+                                    + todo + "\nNow you have " +
                                     texts.getNumber() + " tasks in the list.");
                         }
                         break;
@@ -69,9 +70,10 @@ public class Duke {
                             if (descriptionD.isBlank() || dateD.isBlank()) {
                                 throw new IllegalDukeDescriptionException("deadline");
                             } else {
-                                texts.add(descriptionD + " (by:" + dateD + ")", "D");
+                                Task deadline = new Deadline(descriptionD, dateD);
+                                texts.add(deadline);
                                 System.out.println("Got it. I've added this task:\n" + "  "
-                                        + "[D]" + texts.getLast() + "\nNow you have " +
+                                        + deadline + "\nNow you have " +
                                         texts.getNumber() + " tasks in the list.");
                             }
                         } else {
@@ -89,9 +91,10 @@ public class Duke {
                             if (descriptionE.isBlank() || dateE.isBlank()) {
                                 throw new IllegalDukeDescriptionException("event");
                             } else {
-                                texts.add(descriptionE + " (at:" + dateE + ")", "E");
+                                Task event = new Event(descriptionE, dateE);
+                                texts.add(event);
                                 System.out.println("Got it. I've added this task:\n" + "  "
-                                        + "[E]" + texts.getLast() + "\nNow you have " +
+                                        + event + "\nNow you have " +
                                         texts.getNumber() + " tasks in the list.");
                             }
                         } else {
@@ -102,7 +105,7 @@ public class Duke {
                         int indexD = sc.nextInt() - 1;
                         Task t = texts.remove(indexD);
                         System.out.println("Noted. I've removed this task: \n" +
-                                "  " + t.getStatus() + t.toString() +
+                                "  " + t +
                                 "\nNow you have " + texts.getNumber() + " tasks in the list.");
                 }
             } catch(IllegalArgumentException e) {

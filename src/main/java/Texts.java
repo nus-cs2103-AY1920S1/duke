@@ -3,15 +3,14 @@ import java.util.LinkedList;
 class Texts {
     private LinkedList<Task> texts = new LinkedList<>();
 
-    public void add(String text, String status) {
-        Task task = new Task(text, status);
+    public void add(Task task) {
         texts.add(task);
     }
     public void print() {
         for (int i = 0; i < texts.size(); i++) {
             int index = i + 1;
             Task t = texts.get(i);
-            System.out.println(index + t.getStatus() + t);
+            System.out.println(index + "." + t);
         }
 
 

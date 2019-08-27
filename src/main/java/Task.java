@@ -1,11 +1,11 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String status;
+    //protected String status;
 
-    public Task(String description, String status) {
+    public Task(String description) {
         this.description = description;
-        this.status = status;
+        //this.status = status;
         this.isDone = false;
     }
 
@@ -17,9 +17,9 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getStatus() {
+    /*public String getStatus() {
         return "[" + this.status + "]";
-    }
+    }*/
     @Override
     public String toString() {
         return  "[" + this.getStatusIcon() + "]" + this.description;

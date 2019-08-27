@@ -44,6 +44,12 @@ public class Duke {
                    String numberAsString = numTasks[1];
                    int number = Integer.parseInt(numberAsString);
                    spacer(myTaskList.taskDone(number - 1));
+               }  else if(userInput.contains("delete")) {
+                String[] numTasks = userInput.split(" ");
+                String numberAsString = numTasks[1];
+                int number = Integer.parseInt(numberAsString);
+                myTaskList.deleteTask(number-1);
+
                } else {
                    //Adding is handled in tasklist
                    myTaskList.addTasks(userInput);

@@ -62,6 +62,19 @@ public class TaskList {
         return myTaskList.get(index).taskComplete();
     }
 
+    public void deleteTask(int index) {
+        Task removed = myTaskList.remove(index);
+        String separator = "    ____________________________________________________________";
+        String removingTask = "    Noted. I've removed this task:";
+        String converted = "      "+ removed;
+        String taskTracking = "    Now you have " + myTaskList.size() + " tasks in the list.";
+        System.out.println(separator);
+        System.out.println(removingTask);
+        System.out.println(converted);
+        System.out.println(taskTracking);
+        System.out.println(separator + "\n");
+    }
+
 
     //Print all tasks upon "list"
     public void printTasks() {

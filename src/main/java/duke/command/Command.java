@@ -9,7 +9,7 @@ import duke.storage.Storage;
  * Abstraction of an executable command.
  * Validates the inputs provided then runs it.
  */
-abstract public class Command {
+public abstract class Command {
     public Commands commandType;
     String[] commandArgs;
 
@@ -18,6 +18,7 @@ abstract public class Command {
     }
 
     abstract void run(TaskList tasks, Ui ui, Storage storage);
+
     abstract void validate(TaskList tasks, Ui ui, Storage storage)
             throws DukeInvalidArgumentException;
 

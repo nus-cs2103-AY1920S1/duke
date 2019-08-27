@@ -21,7 +21,7 @@ public class TaskUtil {
         if (description.length() == 0) {
             throw new DukeInvalidArgumentException(
                     "User specified description of task is empty",
-                    " \u2639 OOPS!!! The description of a task cannot be empty.");
+                    " ☹  OOPS!!! The description of a task cannot be empty.");
         }
     }
 
@@ -31,7 +31,7 @@ public class TaskUtil {
         } catch (DateTimeParseException ex) {
             throw new DukeInvalidArgumentException(
                     "Invalid date format inputted by user",
-                    " \u2639 OOPS!!! The format of the timing is invalid!\n"
+                    " ☹  OOPS!!! The format of the timing is invalid!\n"
                             + " Enter your time with " + DATE_FORMAT);
         }
     }
@@ -42,7 +42,7 @@ public class TaskUtil {
         } catch (DateTimeParseException ex) {
             throw new DukeInvalidArgumentException(
                     "Invalid time format inputted by user",
-                    " \u2639 OOPS!!! The format of the timing is invalid!\n"
+                    " ☹  OOPS!!! The format of the timing is invalid!\n"
                             + " Enter your time with " + TIME_FORMAT);
         }
     }

@@ -23,7 +23,7 @@ public abstract class Task {
     }
 
     String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "✓" : "✘");
     }
 
     public TaskType getTaskType() {
@@ -43,5 +43,5 @@ public abstract class Task {
         this.isDone = done;
     }
 
-    abstract public String getStatusText();
+    public abstract String getStatusText();
 }

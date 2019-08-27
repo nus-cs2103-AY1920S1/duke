@@ -20,7 +20,7 @@ class ByeCommand extends Command {
         if (commandArgs.length >= 1) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after bye command",
-                    " \u2639 OOPS!!! There shouldn't be anything following 'bye',\n"
+                    " ☹  OOPS!!! There shouldn't be anything following 'bye',\n"
                             + " are you sure you wanted to exit?");
         }
     }

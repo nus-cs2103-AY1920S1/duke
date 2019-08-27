@@ -2,7 +2,13 @@ package duke.storage;
 
 import duke.command.DukeInvalidArgumentException;
 import duke.ui.Ui;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.TodoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -82,7 +88,7 @@ public class Storage {
                 default:
                     throw new DukeTaskFileParseException(
                             "Unhandled taskType encountered",
-                            " \u2639 Oops! I am not trained to handle this type of Tasks...\n");
+                            " ☹  Oops! I am not trained to handle this type of Tasks...\n");
                 }
 
                 taskToAdd.setDone(isTaskDone);
@@ -122,7 +128,7 @@ public class Storage {
         } catch (IOException ex) {
             throw new DukeFileWriteException(
                     ex.getMessage(),
-                    " \u2639 OOPS!!! I failed to write the task data to disk!");
+                    " ☹  OOPS!!! I failed to write the task data to disk!");
         }
     }
 
@@ -132,7 +138,7 @@ public class Storage {
         } catch (IllegalArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task type encountered while parsing task file",
-                    " \u2639 Oops! I encountered an invalid task type value while\n"
+                    " ☹  Oops! I encountered an invalid task type value while\n"
                             + "   reading your file.");
         }
     }
@@ -148,7 +154,7 @@ public class Storage {
 
         throw new DukeTaskFileParseException(
                 "Invalid done status number encountered while parsing task file",
-                " \u2639 Oops! I encountered an invalid or missing done value\n"
+                " ☹  Oops! I encountered an invalid or missing done value\n"
                         + "   while reading your file.");
     }
 
@@ -159,7 +165,7 @@ public class Storage {
         } catch (DukeInvalidArgumentException | NullPointerException ex) {
             throw new DukeTaskFileParseException(
                     "Invalid task description encountered when parsing task file",
-                    " \u2639 Oops! I encountered an empty description while\n"
+                    " ☹  Oops! I encountered an empty description while\n"
                             + "   reading your file.");
         }
     }
@@ -196,7 +202,7 @@ public class Storage {
 
     private void printNoStorageMsg() {
         ui.printLineDivider();
-        ui.printMsgLine(" \u2639 Oops! I failed to find a "
+        ui.printMsgLine(" ☹  Oops! I failed to find a "
                 + dirName
                 + "   directory upwards\n"
                 + "   and could not create one!");

@@ -27,7 +27,7 @@ class DeleteCommand extends WritableCommand {
         if (commandArgs.length > 2) {
             throw new DukeInvalidArgumentException(
                     "Encountered extraneous arguments after delete command",
-                    " \u2639 OOPS!!! There shouldn't be so many arguments!");
+                    " ☹  OOPS!!! There shouldn't be so many arguments!");
         }
 
         try {
@@ -36,12 +36,12 @@ class DeleteCommand extends WritableCommand {
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException(
                     "Could not parse argument supplied into a list index",
-                    " \u2639 OOPS!!! The task number you gave me wasn't a valid number,\n"
+                    " ☹  OOPS!!! The task number you gave me wasn't a valid number,\n"
                             + " or you didn't give me one at all!");
         } catch (IndexOutOfBoundsException | NullPointerException ex) {
             throw new DukeInvalidArgumentException(
                     "User number supplied was out of list bounds",
-                    " \u2639 OOPS!!! The task number you gave me wasn't within your current list!");
+                    " ☹  OOPS!!! The task number you gave me wasn't within your current list!");
         }
     }
 }

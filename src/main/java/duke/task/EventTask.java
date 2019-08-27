@@ -33,14 +33,14 @@ public class EventTask extends Task {
         if (timing == null) {
             throw new DukeInvalidArgumentException(
                     "Null reference provided to task constructor",
-                    "\u2639 OOPS!!! The timing for this task cannot be empty!");
+                    "☹  OOPS!!! The timing for this task cannot be empty!");
         }
 
         String[] splitTimings = timing.split(" to ");
         if (splitTimings.length != 2) {
             throw new DukeInvalidArgumentException(
                     "Missing to delimiter in event task arguments",
-                    "\u2639 OOPS!!! The format of the timing is invalid!\n"
+                    "☹  OOPS!!! The format of the timing is invalid!\n"
                             + " Enter your time with \"dd/MM/yyyy HHmm to HHmm\"\n"
                             + "  or \"dd/MM/yyyy HHmm to dd/MM/yyyy HHmm\"");
         }
@@ -59,7 +59,7 @@ public class EventTask extends Task {
         if (this.endDate.isBefore(this.startDate)) {
             throw new DukeInvalidArgumentException(
                     "Invalid date format inputted by user",
-                    " \u2639 OOPS!!! The second timing is not after the first one!");
+                    " ☹  OOPS!!! The second timing is not after the first one!");
         }
     }
 }

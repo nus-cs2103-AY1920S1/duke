@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Storage {
     private static final File file = new File("data/duke.txt");
 
-    public static ArrayList<Task> getTasks() throws FileNotFoundException {
+    public static ArrayList<Task> getTasks() throws FileNotFoundException, DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(file);
 

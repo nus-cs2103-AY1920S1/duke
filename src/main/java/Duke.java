@@ -16,6 +16,8 @@ public class Duke {
             tasks = Storage.getTasks();
         } catch (FileNotFoundException e) {
             tasks = new ArrayList<>();
+        } catch (DukeException e) {
+            System.err.println(e);
         }
 
         printGreeting();

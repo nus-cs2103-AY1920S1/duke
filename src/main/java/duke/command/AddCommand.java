@@ -7,12 +7,12 @@ import duke.ui.Ui;
 /**
  * A class representing a add command.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private Task task;
 
     /**
      * Class constructor specifying the task.
-     * @param task
+     * @param task the task to be added.
      */
     public AddCommand(Task task) {
         this.task = task;
@@ -25,7 +25,7 @@ public class AddCommand extends Command{
      * @param ui an user interface to show messages.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui){
+    public void execute(TaskList tasks, Ui ui) {
         tasks.addTask(task);
         ui.showAddedTask(task, tasks.getSize());
     }

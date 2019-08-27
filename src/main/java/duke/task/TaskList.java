@@ -11,6 +11,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
+
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -23,7 +24,7 @@ public class TaskList {
         return tasks.get(index - 1);
     }
 
-    public Task setTaskAtIndexDone(int index) throws IndexOutOfBoundsException{
+    public Task setTaskAtIndexDone(int index) throws IndexOutOfBoundsException {
         tasks.get(index - 1).setDone();
         return tasks.get(index - 1);
     }

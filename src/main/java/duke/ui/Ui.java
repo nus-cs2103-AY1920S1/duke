@@ -32,6 +32,7 @@ public class Ui {
     public String readCommand(Scanner in) {
         return in.nextLine();
     }
+
     /**
      * Greets the user.
      */

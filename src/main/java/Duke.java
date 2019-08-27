@@ -16,18 +16,25 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Class constructor specifying the file path for storage.
+     * @param filePath the file path for storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException| IllegalDescriptionException e) {
+        } catch (FileNotFoundException | IllegalDescriptionException e) {
             ui.showLoadingError(e);
             tasks = new TaskList();
         }
     }
 
+    /**
+     * Runs the app.
+     */
     public void run() {
         ui.greet();
         Scanner in = new Scanner(System.in);

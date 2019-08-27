@@ -6,7 +6,7 @@ import duke.ui.Ui;
 /**
  * A class representing a list command.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     /**

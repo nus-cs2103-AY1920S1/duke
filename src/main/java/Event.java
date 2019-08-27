@@ -8,7 +8,7 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public String getTime() {
+    public Calendar getTime() {
         return time;
     }
 

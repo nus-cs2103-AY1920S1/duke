@@ -45,11 +45,12 @@ public class Duke {
                             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         } else if (input.substring(0, 5).equals("event")) {
                             String eventDetails = input.substring(6);
-                            String[] arr = eventDetails.split("/");
                             try {
-                                Event event = new Event(arr[0], arr[1]);
-
-                                if (arr[1].length() == 0) {
+                                int index = eventDetails.indexOf("/");
+                                String name = eventDetails.substring(0,index);
+                                String details = eventDetails.substring(index+1);
+                                Event event = new Event(name, details);
+                                if (details.length() == 0) {
                                     throw new EventDetailsEmptyException("OOPS!!! Event details cannot be empty.");
                                 }
                                 commandList.add(event);
@@ -71,10 +72,12 @@ public class Duke {
                             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         } else if (input.substring(0, 8).equals("deadline")) {
                             String deadlineDetails = input.substring(9);
-                            String[] arr = deadlineDetails.split("/");
                             try {
-                                Deadline deadline = new Deadline(arr[0], arr[1]);
-                                if (arr[1].length() == 0) {
+                                int index = deadlineDetails.indexOf("/");
+                                String name = deadlineDetails.substring(0,index);
+                                String details = deadlineDetails.substring(index+1);
+                                Deadline deadline = new Deadline(name, details);
+                                if (details.length() == 0) {
                                     throw new DeadlineDetailsEmptyException("OOPS!!! Deadline details cannot be empty");
                                 }
                                 commandList.add(deadline);
@@ -103,4 +106,6 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
 
     }
+
+
 }

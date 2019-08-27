@@ -13,22 +13,22 @@ class StorageParserTest {
 
     @Test
     void parseJsonLine() {
-        String testCase1 = "{ type: deadline, done: false, description: 2103ip, time: 01/12/1997 0000 }";
+        final String testCase1 = "{ type: deadline, done: false, description: 2103ip, time: 01/12/1997 0000 }";
         Map<StorageKey, String> testCase1Expected = new EnumMap<StorageKey, String>(StorageKey.class);
         testCase1Expected.put(StorageKey.TYPE, "deadline");
         testCase1Expected.put(StorageKey.DONE, "false");
         testCase1Expected.put(StorageKey.DESCRIPTION, "2103ip");
         testCase1Expected.put(StorageKey.TIME, "01/12/1997 0000");
 
-        String testCase2 = "{ type: todo, done: true, description: --129n8sk }";
+        final String testCase2 = "{ type: todo, done: true, description: --129n8sk }";
         Map<StorageKey, String> testCase2Expected = new EnumMap<StorageKey, String>(StorageKey.class);
         testCase2Expected.put(StorageKey.TYPE, "todo");
         testCase2Expected.put(StorageKey.DONE, "true");
         testCase2Expected.put(StorageKey.DESCRIPTION, "--129n8sk");
 
-        String testCase3 = "}";
-        String testCase4 = "{ type: todo, invalidkey: true, description: placeholder description }";
-        String testCase5 = "{ type: todo, done: true, description: --129n8sk";
+        final String testCase3 = "}";
+        final String testCase4 = "{ type: todo, invalidkey: true, description: placeholder description }";
+        final String testCase5 = "{ type: todo, done: true, description: --129n8sk";
 
         assertAll("Valid Inputs",
                 () -> parseJsonLine_success(testCase1, testCase1Expected),
@@ -42,9 +42,9 @@ class StorageParserTest {
 
     private void parseJsonLine_success(String jsonLine, Map<StorageKey, String> expectedOutput)
         throws DukeTaskFileParseException {
-            assertEquals(
-                    expectedOutput,
-                    StorageParser.parseJsonLine(jsonLine));
+        assertEquals(
+                expectedOutput,
+                StorageParser.parseJsonLine(jsonLine));
     }
 
     private void parseJsonLine_dukeTaskFileParseException_thrown(String jsonLine) {

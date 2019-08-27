@@ -20,6 +20,15 @@ class Parser {
         return input.split(" ", 2)[1];
     }
 
+    /**
+     * Extracts the query from an input string.
+     * @param input Input string
+     * @return Query extracted
+     */
+    static String extractQuery(String input) {
+        return Parser.extractId(input);
+    }
+
     static Task parseTask(String input) throws DukeException {
         try {
             String[] tokens = input.split(" ", 2);

@@ -65,6 +65,24 @@ class TaskList {
         return this.tasks;
     }
 
+
+    /**
+     * Generates a numbered list of tasks matching a query
+     * @param query Query string
+     * @return Numbered list of matching tasks
+     */
+    String query(String query) {
+        TaskList match = new TaskList();
+
+        for (Task t : this.tasks) {
+            if (t.getDescription().contains(query)) {
+                match.addTask(t);
+            }
+        }
+
+        return match.toString();
+    }
+
     /**
      * Generates numbered list of all tasks in the task list.
      * @return Numbered list of all tasks

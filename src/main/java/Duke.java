@@ -64,6 +64,12 @@ public class Duke {
                     break;
                 }
 
+                case "find": {
+                    String query = Parser.extractQuery(input);
+                    this.ui.showQuery(this.tasks.query(query));
+                    break;
+                }
+
                 case "todo":
                 case "deadline":
                 case "event": {

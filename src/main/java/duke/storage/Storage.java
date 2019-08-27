@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class Storage {
 
-    private final String filepath;
+    private String filepath;
 
     /**
      * Initialises a Storage session.

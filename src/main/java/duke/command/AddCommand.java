@@ -12,6 +12,9 @@ import java.util.Date;
 
 public class AddCommand extends Command {
     private Task t;
+    private String type;
+    private String description;
+    private String time;
 
     /**
      * Initialises an AddCommand.
@@ -24,17 +27,17 @@ public class AddCommand extends Command {
 
         try {
             String[] details;
+            this.description = description[1].trim();
+            this.type = type;
             switch (type) {
                 case "todo":
-                    t = new ToDo(parseDescription(description[1].trim()));
+                    t = new ToDo(parseDescription());
                     break;
                 case "deadline":
-                    details = parseDescription(description[1].trim(), "/by", type);
-                    t = new Deadline(details[0], parseDate(details[1]));
+                    t = new Deadline(parseDescription("/by"), parseDate());
                     break;
                 case "event":
-                    details = parseDescription(description[1].trim(), "/at", type);
-                    t = new Event(details[0], parseDate(details[1]));
+                    t = new Event(parseDescription("/at"), parseDate());
                     break;
                 default:
                     break;
@@ -46,8 +49,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the AddCommand, adds the task to the LinkedList and saves it to the file.
-     *
-     * @param tasks   The TaskList containing all existing tasks.
+     *  @param tasks   The TaskList containing all existing tasks.
      * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      */
@@ -62,7 +64,6 @@ public class AddCommand extends Command {
         }
         storage.appendTaskToFile(t);
         ui.printMessage(sb.toString());
-
     }
 
     /**
@@ -76,26 +77,24 @@ public class AddCommand extends Command {
 
     /**
      * Parses a string and reformats it as a date.
-     * @param s The string to be reformatted.
      * @return The string representation of the new date object.
      */
-    private String parseDate(String s) {
+    public String parseDate() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
-            Date myDate = sdf.parse(s.replaceAll("-", "/"));
+            Date myDate = sdf.parse(time.replaceAll("-", "/"));
             sdf.applyPattern("EEE, d MMM yyyy, hh:mm a");
             return sdf.format(myDate);
         } catch (ParseException e) {
-            return s;
+            return time.trim();
         }
     }
 
     /**
-     * Parses the command description and checks if it is empty/null.
-     * @param description The description to be parsed.
-     * @return The description only if it is not empty/null.
+     * Parses the command description for to-dos and checks if it is empty/null.
+     * @return The parsed description only if it is not empty/null.
      */
-    private String parseDescription(String description) {
+    public String parseDescription() {
         if (description.length() < 1) {
             throw new ArrayIndexOutOfBoundsException();
         } else {
@@ -104,14 +103,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Parses the command description with delimiters and checks if it is in the correct format.
-     * @param description The description to be parsed.
+     * Parses the command description with delimiters for events and deadlines, and checks if it is in the correct format.
      * @param delimiter The delimiter that splits the description.
-     * @param type The type of command for this parsing.
-     * @return The array containing the description and date range.
+     * @return The parsed description.
      * @throws DukeException In the event that the command is in the wrong format.
      */
-    private String[] parseDescription(String description, String delimiter, String type) throws DukeException {
+    public String parseDescription(String delimiter) throws DukeException {
         String[] details = description.split(delimiter);
         if (details.length == 1) {
             if (details[0].length() != 0) {
@@ -119,7 +116,7 @@ public class AddCommand extends Command {
                         type + " ($task_name) " + delimiter + " ($date/day)");
             }
         }
-        return details;
-
+        this.time = details[1];
+        return details[0];
     }
 }

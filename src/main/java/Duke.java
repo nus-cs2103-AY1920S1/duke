@@ -5,7 +5,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 import duke.parser.Parser;
 
-class Duke {
+public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
@@ -13,7 +13,7 @@ class Duke {
     /**
      * Initialise new Duke session.
      */
-    private Duke() {
+    public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
         try {
@@ -27,7 +27,7 @@ class Duke {
     /**
      * Starts the session and parses user input.
      */
-    private void run() {
+    public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class SaveManager {
+class Storage {
     private static File file = new File("data/duke.txt");
 
     protected static void saveTasks(ArrayList<Task> tasks) {

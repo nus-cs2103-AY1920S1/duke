@@ -6,7 +6,7 @@ public class Duke {
 
     public static void main(String[] args) {
         ui = Ui.getInstance();
-        listOfTasks = SaveManager.loadTasks();
+        listOfTasks = Storage.loadTasks();
 
         ui.printLine("Hello! I'm Duke\nWhat can I do for you?");
 

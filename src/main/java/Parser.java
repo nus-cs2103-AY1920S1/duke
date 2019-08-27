@@ -12,7 +12,7 @@ class Parser {
                     try {
                         Task task = new Todo(inputs[1]);
                         tasks.add(task);
-                        SaveManager.saveTasks(tasks);
+                        Storage.saveTasks(tasks);
                         echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Todo task description cannot be blank.");
@@ -29,7 +29,7 @@ class Parser {
 
                         Task task = new Deadline(desc, by);
                         tasks.add(task);
-                        SaveManager.saveTasks(tasks);
+                        Storage.saveTasks(tasks);
                         echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Deadline task description or deadline cannot be blank.");
@@ -46,7 +46,7 @@ class Parser {
 
                         Task task = new Event(desc, at);
                         tasks.add(task);
-                        SaveManager.saveTasks(tasks);
+                        Storage.saveTasks(tasks);
                         echoTaskAdded(task, tasks, ui);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Oops! Event task description or start time cannot be blank.");
@@ -73,7 +73,7 @@ class Parser {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskDone = tasks.get(taskNumber - 1);
                         taskDone.markAsDone();
-                        SaveManager.saveTasks(tasks);
+                        Storage.saveTasks(tasks);
 
                         ui.printLine("Nice! I've marked this task as done:");
                         ui.printLine(String.format("%s\n", taskDone));
@@ -88,7 +88,7 @@ class Parser {
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskRemoved = tasks.remove(taskNumber - 1);
-                        SaveManager.saveTasks(tasks);
+                        Storage.saveTasks(tasks);
 
                         ui.printLine("Got it. I've removed this task:");
                         ui.printLine(String.format("%s\n", taskRemoved));

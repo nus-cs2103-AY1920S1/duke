@@ -35,25 +35,25 @@ public class Storage {
         Scanner s = new Scanner(f);
         ArrayList<Task> tasks = new ArrayList<Task>();
         while (s.hasNext()) {
-            String[] output = s.nextLine().split(" \\| ");
+            String[] outputs = s.nextLine().split(" \\| ");
             boolean isDone;
-            if (output[1].equals("Done")) {
+            if (outputs[1].equals("Done")) {
                 isDone = true;
             }
             else {
                 isDone = false;
             }
             Date date = null;
-            String description = output[2].trim();
-            if (output.length > 3) {
+            String description = outputs[2].trim();
+            if (outputs.length > 3) {
                 try {
                     StringDateConverter converter = new StringDateConverter();
-                    date = converter.convertLongStringToDate(output[3]);
+                    date = converter.convertLongStringToDate(outputs[3]);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
             }
-            switch (output[0].trim()) {
+            switch (outputs[0].trim()) {
             case "T":
                 tasks.add(new ToDo(description, isDone));
                 break;

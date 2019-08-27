@@ -55,14 +55,20 @@ public class Parser {
     private static String getDateTime(String details, String delimiter, String errorMessage) throws DukeException {
         int index = details.indexOf(delimiter);
         String dateTime = details.substring(index + delimiter.length()).trim();
+        if (isDateValid(dateTime)) {
+            return dateTime;
+        } else {
+            throw new DukeException(errorMessage);
+        }
+    }
+
+    private static boolean isDateValid(String dateTime) {
         try {
-            //check if it is a valid date
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             LocalDateTime tempDateTime = LocalDateTime.parse(dateTime, formatter);
-
-            return dateTime;
+            return true;
         } catch (DateTimeParseException e) {
-            throw new DukeException(errorMessage);
+            return false;
         }
     }
 
@@ -70,7 +76,7 @@ public class Parser {
         try {
             return Integer.parseInt(indexStr);
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ Please enter a valid numebr.");
+            throw new DukeException("☹ Please enter a valid number.");
         }
     }
 

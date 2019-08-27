@@ -39,7 +39,11 @@ public class Storage {
         }
     }
 
-    //Parses text file contents to a Task object
+    /**
+     * Parses text file contents to a Task object
+     * @param task String representation of task
+     * @return Task object representing task
+     */
     private Task convertToTask(String task) {
         String[] taskInformation = task.split("\\|");
         String typeOfTask = taskInformation[0];

@@ -8,6 +8,10 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Entry class to program.
+     * @param filePath Path to save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +23,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialize and run program.
+     */
     public void run() {
         Ui ui = new Ui();
         ui.showWelcome();

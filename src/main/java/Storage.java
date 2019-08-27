@@ -14,6 +14,11 @@ public final class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Save data to filePath specified.
+     * @param taskList Tasks to be saved.
+     * @throws IOException When cannot save task data.
+     */
     public void save(TaskList taskList) throws IOException {
         String directoryName = new File(filePath).getParent();
         File directory = new File(directoryName);
@@ -27,6 +32,12 @@ public final class Storage {
         writer.close();
     }
 
+    /**
+     * Load data from filePath specified.
+     * @return TaskList as loaded from file.
+     * @throws DukeException When file format is wrong.
+     * @throws IOException When unable to read file.
+     */
     public TaskList load() throws DukeException, IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         List<Task> tasks = new ArrayList<>();

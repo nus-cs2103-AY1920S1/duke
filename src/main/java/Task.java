@@ -3,16 +3,27 @@ public abstract class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = perfectDescription(description);
         this.isDone = false;
     }
 
     public Task(String description, String done) {
 
-        this.description = description.trim();
+        this.description = perfectDescription(description);
         if (done.trim().equals("1")) {
             this.isDone = true;
         }
+    }
+
+    public String perfectDescription(String description){
+        String[] temp = description.split(" ");
+        String result = "";
+        for(String str: temp){
+            if(!str.equals("")){
+                result += " " + str.trim();
+            }
+        }
+        return result.trim();
     }
 
     public void markAsDone() {

@@ -8,7 +8,7 @@ public class Deadline extends Task {
     }
     public Deadline(String description, String by, String isDone) {
         super(description, isDone);
-        this.by = by;
+        this.by = by.trim();
     }
     @Override
     public String getFormatToFile() {

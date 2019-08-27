@@ -72,7 +72,7 @@ public class Duke {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length == 2 && !oneLine[1].isBlank()
-                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
+            && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
 
             int i = Integer.parseInt(oneLine[1].trim());
             if (i <= myList.size() && i > 0) {
@@ -101,7 +101,7 @@ public class Duke {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length != 1 && !oneLine[1].isBlank()
-                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
+            && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
             int i = Integer.parseInt(oneLine[1].trim());
             if (i <= myList.size() && i > 0) {
                 System.out.println(frontSpace + deleteMessage1);
@@ -127,7 +127,12 @@ public class Duke {
             String title = " Here are the tasks in your list:\n";
             System.out.print(frontSpace + title);
             for (int i = 0; i < myList.size(); i++) {
-                System.out.println(frontSpace + " " + (i + 1) + "." + myList.get(i));
+                if((i+1)<10){
+                    System.out.println(frontSpace + " " + (i + 1) + ". " + myList.get(i));
+                }else{
+                    System.out.println(frontSpace + " " + (i + 1) + "." + myList.get(i));
+
+                }
             }
         } else {
             throw new ExtraDescriptionException("There is extra description for list");
@@ -164,7 +169,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String greet = "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n";
+        + "     What can I do for you?\n";
         greet = frontSpace + upperLine + greet + frontSpace + lowerLine;
         System.out.println(greet);
         tryToReadFile();
@@ -186,7 +191,7 @@ public class Duke {
                     deleteFeature();
                     tryToWriteFile();
                 } else if (firstWord.equals("todo") || firstWord.equals("deadline")
-                        || firstWord.equals("event")) {
+                    || firstWord.equals("event")) {
                     childFeature();
                     tryToWriteFile();
                 } else {

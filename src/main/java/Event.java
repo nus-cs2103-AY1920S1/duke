@@ -9,7 +9,7 @@ public class Event extends Task {
 
     public Event(String description, String at, String isDone) {
         super(description, isDone);
-        this.at = at;
+        this.at = at.trim();
     }
     @Override
     public String getFormatToFile() {

@@ -26,6 +26,7 @@ public class DoneCommand extends Command {
         try {
             Task doneTask = t.tasks.get(pos).markAsDone();
             ui.showDoneTask(doneTask);
+            storage.save(t.tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please input a number that is within the list");
         }

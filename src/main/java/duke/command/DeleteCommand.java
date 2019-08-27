@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
         try {
             Task deletedTask = t.tasks.remove(pos);
             ui.showDeletedTask(deletedTask, t.tasks.size());
+            storage.save(t.tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please input a number that is within the list");
         }

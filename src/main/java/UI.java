@@ -42,4 +42,8 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("[" + task.getStatusIcon() + "] " + task.description);
     }
+
+    public static void outputTaskDetails(Task task) {
+        System.out.println(task.toString());
+    }
 }

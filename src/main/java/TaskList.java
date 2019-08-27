@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>();
+    ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -40,5 +40,13 @@ public class TaskList {
         Task task = tasks.get(index - 1);
         task.markAsDone();
         Ui.outputTaskDone(task);
+    }
+
+    public void findTasks(String keyword) {
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                Ui.outputTaskDetails(task);
+            }
+        }
     }
 }

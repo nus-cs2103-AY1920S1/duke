@@ -35,16 +35,16 @@ public class Parser {
             if (userInput.indexOf("/by") == -1) {
                 throw new DukeException("empty deadline date");
             } else {
-                String[] arguments = userInput.trim().substring(separatedInputs[0].length()).trim().
-                        split("/by");
+                String[] arguments =
+                        userInput.trim().substring(separatedInputs[0].length()).trim().split("/by");
                 return new DeadlineCommand(arguments);
             }
         case "event":
             if (userInput.indexOf("/at") == -1) {
                 throw new DukeException("empty event date");
             } else {
-                String[] arguments = userInput.trim().substring(separatedInputs[0].length()).trim().
-                        split("/at");
+                String[] arguments =
+                        userInput.trim().substring(separatedInputs[0].length()).trim().split("/at");
                 return new EventCommand(arguments);
             }
         default:

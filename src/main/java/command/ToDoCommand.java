@@ -17,7 +17,6 @@ public class ToDoCommand extends Command {
         System.out.println("Got it. I've added this task:");
         tasks.getTasks().add(new ToDo(this.description));
         System.out.println(tasks.getTasks().get(tasks.getTasks().size() - 1));
-        System.out.println("Now you have " + tasks.getTasks().size()
-                + " tasks in the list.");
+        System.out.println("Now you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

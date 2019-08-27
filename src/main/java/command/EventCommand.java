@@ -23,8 +23,7 @@ public class EventCommand extends Command {
             tasks.getTasks().add(new Event(arguments[0], at));
             System.out.println("Got it. I've added this task:");
             System.out.println(tasks.getTasks().get(tasks.getTasks().size() - 1));
-            System.out.println("Now you have " + tasks.getTasks().size()
-                    + " tasks in the list.");
+            System.out.println("Now you have " + tasks.getTasks().size()  + " tasks in the list.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

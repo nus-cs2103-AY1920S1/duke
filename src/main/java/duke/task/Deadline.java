@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulates a task object of type Deadline.
  */

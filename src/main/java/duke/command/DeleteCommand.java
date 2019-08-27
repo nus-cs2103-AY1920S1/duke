@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.component.DukeDatabase;
+import duke.component.TaskList;
+import duke.component.UI;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 public class DeleteCommand extends Command {
     private DeleteType deleteType;
 

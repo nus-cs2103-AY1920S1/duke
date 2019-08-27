@@ -1,3 +1,10 @@
+import duke.command.Command;
+import duke.component.DukeDatabase;
+import duke.component.TaskList;
+import duke.component.UI;
+import duke.component.Parser;
+import duke.exception.DukeException;
+
 /**
  * Encapsulates a product named Duke, a personal assistant chat bot that helps a person to keep track of various things.
  * It can add, delete, and list task entries and mark them as done.

@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Encapsulates a task in real life.
  * It has a title as well as some addition details, depending on the type of the task.
@@ -34,7 +36,7 @@ public abstract class Task {
      * Returns the data summary of this task to record this task in the database.
      * @return the data summary of this task.
      */
-    protected String getSummaryForDatabase() {
+    public String getSummaryForDatabase() {
         int status = isDone ? 1 : 0;
         return String.format("%s | %d | %s", type, status, detailsForDatabase);
     }

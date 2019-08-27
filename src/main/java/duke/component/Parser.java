@@ -1,3 +1,8 @@
+package duke.component;
+
+import duke.command.*;
+import duke.exception.DukeException;
+
 public class Parser {
 
     public Command parse(String input) throws DukeException {

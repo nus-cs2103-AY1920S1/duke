@@ -1,3 +1,5 @@
+package duke.support;
+
 /**
  * This is a functional interface and can be used for a lamda expression that is used for printing messages.
  */

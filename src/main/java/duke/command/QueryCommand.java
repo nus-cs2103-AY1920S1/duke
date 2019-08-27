@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.component.DukeDatabase;
+import duke.component.TaskList;
+import duke.component.UI;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.ListIterator;
 
 public class QueryCommand extends Command {
@@ -12,7 +20,7 @@ public class QueryCommand extends Command {
         this.queryType = queryType;
     }
 
-    public void execute(TaskList tasks, UI ui, DukeDatabase database) throws DukeException{
+    public void execute(TaskList tasks, UI ui, DukeDatabase database) throws DukeException {
         initialise(tasks, ui, database);
 
         if (QueryType.LIST_ALL.equals(queryType)) {

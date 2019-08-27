@@ -1,9 +1,16 @@
+package duke.component;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -114,7 +121,7 @@ public class DukeDatabase {
      * Used at the end of program(Duke) to update the database file.
      * @param tasks a list of tasks as updated at the point when the program ends.
      */
-    protected void update(TaskList tasks) {
+    public void update(TaskList tasks) {
         // Extract all the data summaries of the tasks and append them into a single string.
         StringBuilder bldr = new StringBuilder(150);
         tasks.forEach(t -> {

@@ -1,3 +1,7 @@
+package duke.component;
+
+import duke.support.PrintFunction;
+
 import java.util.Scanner;
 
 public class UI {
@@ -60,7 +64,7 @@ public class UI {
     // Indent a string using the indentation string given and add a newline character at the back.
     // If the length of the string is more than the number of characters allowed in a line
     // (taking the indentation into account), split the string into separate lines.
-    protected String indentAndSplit(String string, String indentation) {
+    public String indentAndSplit(String string, String indentation) {
         int lengthLimit = getLengthLimit(indentation.length());
 
         if (string.length() <= lengthLimit) {

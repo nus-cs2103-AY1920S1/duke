@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.time.LocalTime;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 
 public class Deadline extends Task {
     private Date date;
@@ -30,16 +30,16 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
 
-        if (!(o instanceof Deadline)) {
+        if (!(obj instanceof Deadline)) {
             return false;
         }
 
-        Deadline other = (Deadline) o;
-        return this.description == ((Deadline) o).description;
+        Deadline other = (Deadline) obj;
+        return this.description == other.description;
     }
 }

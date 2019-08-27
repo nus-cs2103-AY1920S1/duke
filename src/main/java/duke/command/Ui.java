@@ -31,15 +31,15 @@ public class Ui {
     }
 
     public void readUserInput() {
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             String act = sc.next();
-                try {
-                    Parser.parse(act, storage);
-                } catch (DukeIllegalDescriptionException | DukeIllegalActionException e) {
-                    System.out.println(e.getMessage());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+            try {
+                Parser.parse(act, storage);
+            } catch (DukeIllegalDescriptionException | DukeIllegalActionException e) {
+                System.out.println(e.getMessage());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
+        }
     }
 }

@@ -11,10 +11,15 @@ public class DoneCommand extends Command {
         return this.index - 1;
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        Task doneTask = tasks.getTask(this.getIndex());
-        tasks.markTaskDone(this.getIndex());
-        ui.showDoneMessage(doneTask);
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        //check if the index is out of bound
+        if (this.getIndex() < tasks.getTaskCount()) {
+            Task doneTask = tasks.getTask(this.getIndex());
+            tasks.markTaskDone(this.getIndex());
+            ui.showDoneMessage(doneTask);
+        } else {
+            throw new DukeException("☹ Index is not within the list. Please enter a index within the list.");
+        }
     }
 
     public boolean isExit() {

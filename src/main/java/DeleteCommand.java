@@ -11,10 +11,15 @@ public class DeleteCommand extends Command {
         return this.index - 1;
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        Task deletedTask = tasks.getTask(this.getIndex());
-        tasks.deleteTask(this.getIndex());
-        ui.showDeleteMessage(deletedTask, tasks);
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        //check if the index is out of bound
+        if (this.getIndex() < tasks.getTaskCount()) {
+            Task deletedTask = tasks.getTask(this.getIndex());
+            tasks.deleteTask(this.getIndex());
+            ui.showDeleteMessage(deletedTask, tasks);
+        } else {
+            throw new DukeException("☹ Index is not within the list. Please enter a index within the list.");
+        }
     }
 
     public boolean isExit() {

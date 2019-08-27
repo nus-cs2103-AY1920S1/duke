@@ -20,8 +20,13 @@ public class TaskList {
         return this.getTaskArr().size();
     }
 
-    public void markTaskDone(int index) {
-        this.getTaskArr().get(index).markAsDone();
+    public void markTaskDone(int index) throws DukeException {
+        Task task = this.getTaskArr().get(index);
+        if (!task.isDone()) {
+            this.getTaskArr().get(index).markAsDone();
+        } else {
+            throw new DukeException("☹ The task is already marked done.");
+        }
     }
 
     public Task getTask(int index) {

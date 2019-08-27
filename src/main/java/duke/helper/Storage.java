@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles reading from and writing to save file on hard disk.
+ */
 public class Storage {
     private String filePath;
 
@@ -18,6 +21,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Produces ArrayList of Tasks containing items listed in save file.
+     *
+     * @return ArrayList of Tasks from file.
+     * @throws IOException If enclosing file directory or file itself does not exist.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File listFile = new File(filePath);
@@ -46,6 +55,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes to save file.
+     *
+     * @param filePath Directory path of save file.
+     * @param textToAdd String to add to save file.
+     * @param isAppend Determines whether String is appended to existing file contents or added to a new file.
+     */
     public void writeToFile(String filePath, String textToAdd, boolean isAppend) {
         try {
             FileWriter fw = isAppend ? new FileWriter(filePath, true) : new FileWriter(filePath);
@@ -56,6 +72,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites save file with a new file.
+     *
+     * @param listOfTasks Tasks used to populate list in new file.
+     */
     public void overwriteFile(ArrayList<Task> listOfTasks) {
         String saveToFile = "";
         for (Task t : listOfTasks) {

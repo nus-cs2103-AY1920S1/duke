@@ -22,9 +22,11 @@ public class DoneCommandTest {
     @Test
     public void executeDone_validInput_success() {
         System.setOut(new PrintStream(outContent));
-        ArrayList<Task> temp = new ArrayList<>() {{
-            add(new Todo("doneTest", 0));
-        }};
+        ArrayList<Task> temp = new ArrayList<>() {
+            {
+                add(new Todo("doneTest", 0));
+            }
+        };
         String expected = separationLine + "\n     Nice! I've marked this task as done:\n       [T][+] doneTest"
                 + "\n" + separationLine + "\n" + System.lineSeparator();
         new DoneCommand("", new String[]{"done", "1"})
@@ -41,7 +43,7 @@ public class DoneCommandTest {
             fail();
         } catch (DukeException de) {
             String correctExpected = separationLine
-                    + "\n     \u2639 OOPS!!! Please specify number of a single task to mark as done.\n"
+                    + "\n     :( OOPS!!! Please specify number of a single task to mark as done.\n"
                     + separationLine + "\n";
             assertEquals(correctExpected, de.getMessage());
         }
@@ -63,7 +65,7 @@ public class DoneCommandTest {
                     .execute(new TaskList(), new Ui(), new Storage(""));
             fail();
         } catch (DukeException de) {
-            String correctExpected = separationLine + "\n     \u2639 OOPS!!! Please specify valid task number.\n"
+            String correctExpected = separationLine + "\n     :( OOPS!!! Please specify valid task number.\n"
                     + separationLine + "\n";
             assertEquals(correctExpected, de.getMessage());
         }

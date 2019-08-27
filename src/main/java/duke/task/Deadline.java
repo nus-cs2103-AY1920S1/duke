@@ -3,6 +3,13 @@ package duke.task;
 public class Deadline extends Task {
     private String endTime;
 
+    /**
+     * Initializes a Deadline object.
+     *
+     * @param description Description of the Deadline.
+     * @param isDone Completion status of the Deadline task.
+     * @param endTime Time that the task must be completed by.
+     */
     public Deadline(String description, int isDone, String endTime) {
         super(description, isDone);
         this.type = "D";

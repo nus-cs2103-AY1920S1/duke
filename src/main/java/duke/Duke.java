@@ -14,6 +14,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initializes Duke object.
+     *
+     * @param filePath Directory path of save file on hard disk.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +35,9 @@ public class Duke {
         new Duke("D:/Users/USER/Documents/0. NUS/NUS Y2S1/CS2103T/Individual Project/duke/data/duke.txt").run();
     }
 
+    /**
+     * Runs the main() method of the Duke driver class.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -37,10 +45,8 @@ public class Duke {
             try {
                 String fullCommand = ui.readLineInput();
                 Command c = Parser.parse(fullCommand);
-                if (c != null) {
-                    c.execute(tasks, ui, storage);
-                    isExit = c.isExit();
-                }
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException de) {
                 ui.printError(de.getMessage());
             }

@@ -32,6 +32,16 @@ public class TaskList {
     return this.list.size();
   }
 
+  public TaskList find(String tofind) {
+    List<Task> newList = new ArrayList<>();
+    for (Task t: this.list) {
+      if (t.getName().contains(tofind)) {
+        newList.add(t);
+      }
+    }
+    return new TaskList(newList);
+  }
+
   public Task get(int index) {
     return this.list.get(index - 1);
   }

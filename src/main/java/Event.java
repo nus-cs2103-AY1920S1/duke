@@ -11,7 +11,7 @@ public class Event extends Task {
     }
     protected Event(String description, boolean isDone, String at) throws DukeException {
         super(description, isDone);
-        this.at = Utilities.dateParser(at);
+        this.at = Utilities.fullDateParser(at);
     }
 
     @Override

@@ -9,7 +9,7 @@ public class Deadline extends Task {
     }
     protected Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description, isDone);
-        this.by = Utilities.dateParser(by);
+        this.by = Utilities.fullDateParser(by);
     }
 
     @Override

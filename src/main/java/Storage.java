@@ -63,6 +63,8 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("Error: Failed to read save file.");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 

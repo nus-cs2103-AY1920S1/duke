@@ -70,5 +70,16 @@ public class Ui {
             System.out.println(i + "." + tasks.getList().get(i - 1));
         }
     }
+
+    public void printFind(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < TaskList.size(); i++) {
+            if (TaskList.getList().get(i).getDescription().contains(keyword)) {
+                System.out.println(count + "." + TaskList.getList().get(i));
+                count++;
+            }
+        }
+    }
 }
 

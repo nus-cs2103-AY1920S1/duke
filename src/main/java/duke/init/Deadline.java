@@ -18,6 +18,32 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructs a deadline task with the specified description and isDone status.
+     * @param description The specified description.
+     * @param isDone The specified isDone status.
+     */
+    public Deadline(String description, boolean isDone, String date) {
+        super(description, isDone);
+        this.date = date;
+    }
+
+    /**
+     * Returns the String representation of this deadline task's date.
+     * @return The String representation od this deadline task's date.
+     */
+    public String getDate() {
+        return date;
+    }
+
+    /**
+     * Returns the String representation of this deadline task's type.
+     * @return The String representation of this deadline task's type.
+     */
+    public String getType() {
+        return "deadline";
+    }
+
+    /**
      * Returns the string representation of this deadline task.
      * @return The string representation of this deadline task.
      */

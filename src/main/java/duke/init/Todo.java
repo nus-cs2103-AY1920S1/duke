@@ -15,6 +15,23 @@ public class Todo extends Task {
     }
 
     /**
+     * Constructs a todo task with the specified description and isDone status.
+     * @param description The specified description.
+     * @param isDone The specified isDone status.
+     */
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+    /**
+     * Returns the String representation of this todo task's type.
+     * @return The String representation of this todo task's type.
+     */
+    public String getType() {
+        return "todo";
+    }
+
+    /**
      * Returns the string representation of this todo task.
      * @return The string representation of this todo task.
      */

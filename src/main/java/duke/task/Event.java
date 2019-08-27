@@ -1,9 +1,11 @@
 package duke.task;
+
 /**
  * Represents a Event that contains the description of the Event and when it occurs.
  */
 public class Event extends Task {
     protected String period;
+
     /**
      * Creates the Event Task Object.
      * @param description contains the description of the Event

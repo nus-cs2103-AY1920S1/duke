@@ -2,23 +2,28 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.command.Command;
+
 import duke.parser.Parser;
-import duke.exception.*;
-/**
- * Represents a Duke App that stores a list of tasks.
- * Users can add three types of tasks: Todo, Deadline or Event.
- * Users can marked tasks as done, or delete them.
- */
+
+import duke.exception.DukeWrongInputException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeMissingDescriptionException;
+
 public class Duke {
-    private DukeUI dukeUI;
+    private DukeUi dukeUI;
     private StorageData storage;
     private TaskList tasks;
 
@@ -27,7 +32,7 @@ public class Duke {
      * @param filePath This is the File that is used to load data from and save into.
      */
     public Duke(String filePath) {
-        this.dukeUI = new DukeUI();
+        this.dukeUI = new DukeUi();
         this.storage = new StorageData(new File(filePath));
         try {
             this.tasks = new TaskList(this.storage.load());

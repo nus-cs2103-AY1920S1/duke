@@ -1,6 +1,6 @@
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.DukeUI;
+import duke.ui.DukeUi;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +12,7 @@ public class TaskListTest {
         test.add(testTask);
         assertEquals(test.size(), 1);
         assertEquals(test.get(1), testTask);
-        test.delete(1, new DukeUI());
+        test.delete(1, new DukeUi());
         assertEquals(test.size(), 0);
     }
 }

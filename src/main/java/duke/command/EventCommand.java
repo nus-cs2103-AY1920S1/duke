@@ -1,8 +1,13 @@
 package duke.command;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.task.Event;
+
 import duke.exception.DukeMissingDescriptionException;
 import duke.exception.DukeEmptyDescriptionException;
 /**
@@ -38,6 +43,7 @@ public class EventCommand extends Command{
             }
         }
     }
+
     /**
      * Adds the Event Object to the TaskList of the Duke Object.
      * Stores the Event in the StorageData and prints out a message to confirm that it has been added.
@@ -45,7 +51,7 @@ public class EventCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         Event current = new Event(this.description, this.duringWhen);
         tasks.add(current);
         storage.addEventData(this.description, this.duringWhen);

@@ -1,7 +1,11 @@
 package duke.command;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.exception.DukeTaskDoneException;
 /**
  * Represents a DoneCommand Object which contains the task number to be deleted.
@@ -22,7 +26,7 @@ public class DoneCommand extends Command {
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         try {
             tasks.done(this.taskNumber);
             ui.printTaskDoneMessage(tasks, this.taskNumber);

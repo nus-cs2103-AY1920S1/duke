@@ -1,8 +1,13 @@
 package duke.command;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.task.Todo;
+
 import duke.exception.DukeEmptyDescriptionException;
 /**
  * Represents a TodoCommand Object which contains a description of the task to be done.
@@ -26,7 +31,7 @@ public class TodoCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         String details = this.getDetails();
         Todo current = new Todo(details);
         tasks.add(current);

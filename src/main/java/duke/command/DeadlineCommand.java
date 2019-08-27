@@ -1,9 +1,14 @@
 package duke.command;
+
 import duke.exception.DukeEmptyDescriptionException;
 import duke.exception.DukeMissingDescriptionException;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.task.Deadline;
 
 /**
@@ -48,7 +53,7 @@ public class DeadlineCommand extends Command{
      * @param ui DukeUI of Duke Object
      * @param storage StorageData of Duke Object
      */
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         String details = this.getDetails();
         Deadline current = new Deadline(this.description, this.byWhen);
         tasks.add(current);

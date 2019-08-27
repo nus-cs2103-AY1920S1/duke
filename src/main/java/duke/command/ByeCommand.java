@@ -1,6 +1,9 @@
 package duke.command;
+
 import duke.tasklist.TaskList;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.storagedata.StorageData;
 
 /**
@@ -18,7 +21,7 @@ public class ByeCommand extends Command {
      * @param ui DukeUI of Duke Object.
      * @param storage StorageData of Duke Object.
      */
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         ui.printByeMessage();
         System.exit(0);
     }

@@ -1,9 +1,20 @@
 package duke.storagedata;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.BufferedReader;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import duke.task.*;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
 
 /**
  * Represents the Storage that contains the File where the data of the Duke App is stored.
@@ -167,35 +178,35 @@ public class StorageData {
         while(fileInput.hasNextLine()) {
             String task = fileInput.next();
             switch(task) {
-                case "T":
-                    String[] contents = fileInput.nextLine().trim().split("-");
-                    Task current = new Todo(contents[2].trim());
-                    if(contents[1].trim().equals("done")) {
-                        current.markAsDone();
-                    }
-                    taskArrayList.add(current);
-                    break;
+            case "T":
+                String[] contents = fileInput.nextLine().trim().split("-");
+                Task current = new Todo(contents[2].trim());
+                if(contents[1].trim().equals("done")) {
+                    current.markAsDone();
+                }
+                taskArrayList.add(current);
+                break;
 
-                case "D":
-                    contents = fileInput.nextLine().trim().split("-");
-                    current = new Deadline(contents[2].trim(), contents[3].trim());
-                    if(contents[1].trim().equals("done")) {
-                        current.markAsDone();
-                    }
-                    taskArrayList.add(current);
-                    break;
+            case "D":
+                contents = fileInput.nextLine().trim().split("-");
+                current = new Deadline(contents[2].trim(), contents[3].trim());
+                if(contents[1].trim().equals("done")) {
+                    current.markAsDone();
+                }
+                taskArrayList.add(current);
+                break;
 
-                case "E":
-                    contents = fileInput.nextLine().trim().split("-");
-                    current = new Event(contents[2].trim(), contents[3].trim());
-                    if(contents[1].trim().equals("done")) {
-                        current.markAsDone();
-                    }
-                    taskArrayList.add(current);
-                    break;
+            case "E":
+                contents = fileInput.nextLine().trim().split("-");
+                current = new Event(contents[2].trim(), contents[3].trim());
+                if(contents[1].trim().equals("done")) {
+                    current.markAsDone();
+                }
+                taskArrayList.add(current);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
         return taskArrayList;

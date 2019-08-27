@@ -1,6 +1,11 @@
 package duke.parser;
+
 import duke.command.Command;
-import duke.exception.*;
+
+import duke.exception.DukeMissingDescriptionException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeWrongInputException;
+
 import java.util.Scanner;
 
 /**
@@ -22,29 +27,29 @@ public class Parser {
         String typeOfCommand = commandScanner.next().trim().toLowerCase();
         String detailsOfCommand = fullLine.substring(typeOfCommand.length()).trim();
         switch(typeOfCommand) {
-            case "todo":
-                return Command.addTodoCommand(detailsOfCommand);
+        case "todo":
+            return Command.addTodoCommand(detailsOfCommand);
 
-            case "deadline":
-                return Command.addDeadlineCommand(detailsOfCommand);
+        case "deadline":
+            return Command.addDeadlineCommand(detailsOfCommand);
 
-            case "event":
-                return Command.addEventCommand(detailsOfCommand);
+        case "event":
+            return Command.addEventCommand(detailsOfCommand);
 
-            case "list":
-                return Command.addListCommand();
+        case "list":
+            return Command.addListCommand();
 
-            case "done":
-                return Command.addDoneCommand(detailsOfCommand);
+        case "done":
+            return Command.addDoneCommand(detailsOfCommand);
 
-            case "delete":
-                return Command.addDeleteCommand(detailsOfCommand);
+        case "delete":
+            return Command.addDeleteCommand(detailsOfCommand);
 
-            case "bye":
-                return Command.addByeCommand();
+        case "bye":
+            return Command.addByeCommand();
 
-            default:
-                throw new DukeWrongInputException();
+        default:
+            throw new DukeWrongInputException();
         }
     }
 }

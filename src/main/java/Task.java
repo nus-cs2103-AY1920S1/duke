@@ -2,13 +2,21 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
         return (isDone ? "+" : "-"); //return tick or X symbols
+    }
+
+    public boolean isTaskDone() {
+        return isDone;
+    }
+
+    public String getTaskDescription() {
+        return this.description;
     }
 
     public void markAsDone() {

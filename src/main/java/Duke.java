@@ -3,10 +3,11 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    protected static ArrayList<Task> list = new ArrayList<>();
+    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
     protected static Scanner sc;
 
     public static void main(String[] args) {
+        listOfTasks = DukeFileManager.loadListOfTasks();
         sc = new Scanner(System.in);
         String command;
         printHello();
@@ -17,14 +18,19 @@ public class Duke {
                     handleListCommand();
                 } else if (command.equals("done")) {
                     handleDoneCommand();
+                    DukeFileManager.saveListOfTasks(listOfTasks);
                 } else if (command.equals("todo")) {
                     handleTodoCommand();
+                    DukeFileManager.saveListOfTasks(listOfTasks);
                 } else if (command.equals("deadline")) {
                     handleDeadlineCommand();
+                    DukeFileManager.saveListOfTasks(listOfTasks);
                 } else if (command.equals("event")) {
                     handleEventCommand();
+                    DukeFileManager.saveListOfTasks(listOfTasks);
                 } else if (command.equals("delete")) {
                     handleDeleteCommand();
+                    DukeFileManager.saveListOfTasks(listOfTasks);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -52,7 +58,7 @@ public class Duke {
         System.out.println("    _____________________________________");
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + newTask);
-        System.out.println("     Now you have " + list.size() + " tasks in the list.");
+        System.out.println("     Now you have " + listOfTasks.size() + " tasks in the list.");
         System.out.println("    _____________________________________\n");
     }
 
@@ -62,8 +68,8 @@ public class Duke {
             if (description.isBlank()) {
                 throw new IllegalArgumentException();
             }
-            Task newTodo = new Todo(description);
-            list.add(newTodo);
+            Task newTodo = new Todo(description, false);
+            listOfTasks.add(newTodo);
             printAddTask(newTodo);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -82,9 +88,9 @@ public class Duke {
 
             System.out.println("    _____________________________________");
             System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < listOfTasks.size(); i++) {
                 int number = i + 1;
-                System.out.println("     " + number + "." + list.get(i));
+                System.out.println("     " + number + "." + listOfTasks.get(i));
             }
             System.out.println("    _____________________________________\n");
         } catch (Exception e) {
@@ -102,8 +108,8 @@ public class Duke {
                 throw new IllegalArgumentException();
             }
 
-            Task newDeadline = new Deadline(taskDescription, taskBy);
-            list.add(newDeadline);
+            Task newDeadline = new Deadline(taskDescription, false, taskBy);
+            listOfTasks.add(newDeadline);
             printAddTask(newDeadline);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! Task description/Task by can not be empty");
@@ -122,8 +128,8 @@ public class Duke {
                 throw new IllegalArgumentException();
             }
 
-            Task newEvent = new Event(taskDescription, taskAt);
-            list.add(newEvent);
+            Task newEvent = new Event(taskDescription, false, taskAt);
+            listOfTasks.add(newEvent);
             printAddTask(newEvent);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! Task description/Task at can not be empty");
@@ -135,10 +141,10 @@ public class Duke {
     public static void handleDoneCommand() throws DukeException {
         try {
             int taskNumber = Integer.parseInt(sc.nextLine().trim()) - 1;
-            list.get(taskNumber).markAsDone();
+            listOfTasks.get(taskNumber).markAsDone();
             System.out.println("    _____________________________________");
             System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("       " + list.get(taskNumber));
+            System.out.println("       " + listOfTasks.get(taskNumber));
             System.out.println("    _____________________________________\n");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The task number you specified is not in the list.");
@@ -150,12 +156,12 @@ public class Duke {
     public static void handleDeleteCommand() throws DukeException {
         try {
             int taskNumber = Integer.parseInt(sc.nextLine().trim()) - 1;
-            Task deletedTask = list.get(taskNumber);
-            list.remove(taskNumber);
+            Task deletedTask = listOfTasks.get(taskNumber);
+            listOfTasks.remove(taskNumber);
             System.out.println("    _____________________________________");
             System.out.println("     Noted. I've removed this task:");
             System.out.println("       " + deletedTask);
-            System.out.println("     Now you have " + list.size() + " tasks in the list.");
+            System.out.println("     Now you have " + listOfTasks.size() + " tasks in the list.");
             System.out.println("    _____________________________________\n");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The task number you specified is not in the list.");

@@ -1,9 +1,15 @@
 package duke.command;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.task.Todo;
+
 import duke.exception.DukeEmptyDescriptionException;
+
 public class TodoCommand extends Command{
     public TodoCommand(String details) throws DukeEmptyDescriptionException{
         super(details);
@@ -12,7 +18,7 @@ public class TodoCommand extends Command{
         }
     }
 
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         String details = this.getDetails();
         Todo current = new Todo(details);
         tasks.add(current);

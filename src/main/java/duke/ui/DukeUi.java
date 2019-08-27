@@ -1,8 +1,14 @@
 package duke.ui;
-import duke.task.*;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+
 import duke.tasklist.TaskList;
-public class DukeUI {
-    public DukeUI() {
+
+public class DukeUi {
+    public DukeUi() {
 
     }
 

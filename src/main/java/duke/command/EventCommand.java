@@ -1,10 +1,16 @@
 package duke.command;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.task.Event;
+
 import duke.exception.DukeMissingDescriptionException;
 import duke.exception.DukeEmptyDescriptionException;
+
 public class EventCommand extends Command{
     private String description;
     private String duringWhen;
@@ -31,7 +37,7 @@ public class EventCommand extends Command{
         }
     }
 
-    public void execute(TaskList tasks, DukeUI ui, StorageData storage) {
+    public void execute(TaskList tasks, DukeUi ui, StorageData storage) {
         Event current = new Event(this.description, this.duringWhen);
         tasks.add(current);
         storage.addEventData(this.description, this.duringWhen);

@@ -1,25 +1,33 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.File;
-import duke.ui.DukeUI;
+
+import duke.ui.DukeUi;
+
 import duke.tasklist.TaskList;
+
 import duke.storagedata.StorageData;
+
 import duke.command.Command;
+
 import duke.parser.Parser;
-import duke.exception.*;
+
+import duke.exception.DukeWrongInputException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeMissingDescriptionException;
 
 public class Duke {
-    private DukeUI dukeUI;
+    private DukeUi dukeUI;
     private StorageData storage;
     private TaskList tasks;
 
     public Duke(String filePath) {
-        this.dukeUI = new DukeUI();
+        this.dukeUI = new DukeUi();
         this.storage = new StorageData(new File(filePath));
         try {
             this.tasks = new TaskList(this.storage.load());

@@ -18,13 +18,7 @@ public class Storage {
                 // Delimiters are "|" and a new line
                 file = new Scanner(new File(filePath)).useDelimiter("[|\\n]");
             }
-            catch (Exception e) {
-//                File file = new File(filePath); // create new file if file does not exist
-//                throw new DukeException("");
-
-//                ui.loadError();
-
-            }
+            catch (Exception e) {}
         }
 
         public String getFilePath() {
@@ -35,11 +29,9 @@ public class Storage {
             ArrayList<Task> list = new ArrayList<>();
             try {
                 if (!file.hasNext()) // Check if file is empty
-                    throw new DukeException("empty file");
+                    throw new DukeException("File is empty.");
             } catch (Exception e) {
-                throw new DukeException("empty file");
-//                ui.loadError();
-//                System.out.println("here");
+                throw new DukeException("File is empty.");
             }
 
             while(file.hasNext()) {

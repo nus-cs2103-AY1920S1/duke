@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 class TaskList {
 
-    public TaskList() {};
-
     protected ArrayList<Task> list;
     protected Ui ui = new Ui();
     protected Parser parser = new Parser();
+
+    public TaskList() {};
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -69,7 +69,7 @@ class TaskList {
 
             case "todo":
                 String description1 = parser.parseToDo(action, input);
-                list.add(new ToDo(description1)); //Remove blank spaces
+                list.add(new ToDo(description1));
                 break;
 
             case "deadline":

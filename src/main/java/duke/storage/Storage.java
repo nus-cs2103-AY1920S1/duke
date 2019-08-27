@@ -11,13 +11,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents a Storage class that handles all reading and writing into file storage for tasks.
+ */
 public class Storage {
   private String filePath;
 
+  /**
+   * Constructor for storage class.
+   * @param filePath filePath of the storage file.
+   */
   public Storage(String filePath) {
     this.filePath = filePath;
   }
 
+  /**
+   * Loads the tasks in storage file into a List<Task>.
+   * @return List<Task> with tasks from storage file.
+   * @throws DukeException if file is not found.
+   */
   public List<Task> load() throws DukeException {
     try {
       List<Task> list = new ArrayList<>();
@@ -32,6 +44,11 @@ public class Storage {
     }
   }
 
+  /**
+   * Method to delete a line from the file.
+   * @param toDelete Line to be deleted.
+   * @throws DukeException if file is not found.
+   */
   public void deleteLine(String toDelete) throws DukeException {
     try {
       List<String> lines = Files.readAllLines(Paths.get(filePath));
@@ -47,6 +64,12 @@ public class Storage {
     }
   }
 
+  /**
+   * Method to replace a line in the storage file.
+   * @param before line to be replaced.
+   * @param after line to replace with.
+   * @throws DukeException if file is not found.
+   */
   public void replaceLine(String before, String after) throws DukeException {
     try {
       List<String> lines = Files.readAllLines(Paths.get(filePath));
@@ -64,6 +87,11 @@ public class Storage {
     }
   }
 
+  /**
+   * Method to store a new task into the storage file.
+   * @param t Task to be written into the file.
+   * @throws DukeException if file is not found.
+   */
   public void addTask(Task t) throws DukeException {
     try {
       Files.write(Paths.get(filePath), Collections.singletonList(t.storageString()), StandardOpenOption.APPEND);

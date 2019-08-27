@@ -18,6 +18,9 @@ public class Ui {
 
     private static final String DIVIDER = "    ____________________________________________________________\n";
 
+    /**
+     * Prints a hello message when program first initializes.
+     */
     public void printHelloMessage() {
         System.out.println("Hello from\n" + LOGO);
         System.out.print(DIVIDER);
@@ -26,6 +29,9 @@ public class Ui {
         System.out.print(DIVIDER);
     }
 
+    /**
+     * Prints a list of actions that can be used.
+     */
     public void printHelpMessage() {
         System.out.print("     List of commands:\n");
         System.out.print("     bye     : Exits from the program\n");
@@ -46,19 +52,33 @@ public class Ui {
                 + "               keyword.\n");
     }
 
+    /**
+     * Prints a message upon exit of the program.
+     */
     public void printByeMessage() {
         System.out.print("     Bye. Hope to see you again soon!\n");
     }
 
+    /**
+     * Prints a divider line for pretty printing.
+     */
     public void printDivider() {
         System.out.print(DIVIDER);
     }
 
-
+    /**
+     * Prints a message to indicate that is no existing task.
+     */
     public void printEmptyTaskListMessage() {
         System.out.print("    You have no task at the moment.\n");
     }
 
+    /**
+     * Prints all the tasks in the given task list.
+     *
+     * @param taskList The list of tasks to be printed.
+     * @param title The preamble to be printed before listing the tasks.
+     */
     public void printTaskList(List<Task> taskList, String title) {
         System.out.print(title);
         for (int i = 0; i < taskList.size(); i++) {
@@ -67,18 +87,40 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a message that the given task is marked as done.
+     *
+     * @param task The task that is marked as done.
+     */
     public void printMarkedAsDoneMessage(Task task) {
         System.out.print("     Nice! I've marked this task as done:\n");
         System.out.printf("       %s\n", task);
     }
 
+    /**
+     * <p>
+     *     Prints a message that the given task has been deleted and then
+     *     prints the total number of tasks remaining.
+     * </p>
+     *
+     * @param task The task that is deleted.
+     * @param taskListSize The total number of tasks remaining in the task list
+     */
     public void printTaskDeletedMessage(Task task, int taskListSize) {
         System.out.print("     Noted. I've removed this task:\n");
         System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list.\n", taskListSize);
     }
 
-
+    /**
+     * <p>
+     *     Prints a message that the given task has been added and then
+     *     prints the total number of tasks currently.
+     * </p>
+     *
+     * @param task The task that has been added.
+     * @param taskListSize The total number of tasks currently in the task list.
+     */
     public void printTaskAddedMessage(Task task, int taskListSize) {
         System.out.print("     Got it. I've added this task:\n");
         System.out.printf("       %s\n", task);

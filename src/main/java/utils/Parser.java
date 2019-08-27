@@ -160,11 +160,9 @@ public class Parser {
      *     a valid index for the tasks in TaskList.
      * </p>
      *
-     * @return <p>
+     * @return
      *     If successful, an Integer representing the task index.
-     *
      *     Else, a null object.
-     * </p>
      *
      */
     public Integer getTaskIdx() {

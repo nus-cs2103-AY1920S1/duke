@@ -1,7 +1,10 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
 
 public class Duke {
 
@@ -31,8 +34,39 @@ public class Duke {
     }
 
     public static String promptEntry() {
-       return sc.next();
+        return sc.next();
     }
+
+    public static String getFormattedDate(String dateAndTime) {
+        String result = dateAndTime;
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(dateAndTime);
+            String day = new SimpleDateFormat("dd").format(date);
+            String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(date);
+            String year = new SimpleDateFormat("yyyy").format(date);
+            String time = new SimpleDateFormat("h:mm a").format(date).toLowerCase();
+            String ordinalIndicator;
+
+            int int_day = Integer.parseInt(day);
+            if (int_day >= 11 && int_day <= 13) {
+                ordinalIndicator = "th";
+            } else if (int_day % 10 == 1) {
+                ordinalIndicator = "st";
+            } else if (int_day % 10 == 2) {
+                ordinalIndicator = "nd";
+            } else if (int_day % 10 == 3) {
+                ordinalIndicator = "rd";
+            } else {
+                ordinalIndicator = "th";
+            }
+
+            result = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+        return result;
+    }
+
 
     public void run() throws IOException {
 
@@ -67,11 +101,12 @@ public class Duke {
                             String description = wholeTask.substring(0, index).trim();
                             //when it is due by
                             String date = wholeTask.substring(index + 4).trim();
+                            String f = getFormattedDate(date);
                             if(description.isEmpty() || date.isEmpty()) {
                                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
                                         " It must be in the format <description> /by <date/time> ");
                             } else {
-                                Deadline newDeadlineTask = new Deadline(description, date);
+                                Deadline newDeadlineTask = new Deadline(description, f);
                                 this.taskList.addTask(newDeadlineTask);
                             }
                         } else {
@@ -88,11 +123,12 @@ public class Duke {
                             String eventDescr = eventAndDate.substring(0, index2).trim();
                             //when it is due by
                             String dateAndTime = eventAndDate.substring(index2 + 4).trim();
+                            String f1 = getFormattedDate(dateAndTime);
                             if(eventDescr.isEmpty() || dateAndTime.isEmpty()) {
                                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
                                         " It must be in the format <description> /at <start and end of specific time> ");
                             } else {
-                                Event newEventTask = new Event(eventDescr, dateAndTime);
+                                Event newEventTask = new Event(eventDescr, f1);
                                 this.taskList.addTask(newEventTask);
                             }
                         } else {

@@ -3,14 +3,27 @@ package tasks;
 import customexceptions.DukeException;
 import tasks.Task;
 
+/**
+ * Represents a deadline that is input by the user
+ */
 public class Deadline extends Task {
     private String deadlineTime;
     private String dateTime;
 
+    /**
+     * Constructor for deadline object.
+     * @param name Name of the task.
+     */
     public Deadline(String name) {
         super(name);
     }
 
+    /**
+     * Constructor for deadline object.
+     * @param name Name of the task.
+     * @param dT Details of the deadline.
+     * @throws DukeException
+     */
     public Deadline(String name, String dT) throws DukeException {
         super(name);
         this.deadlineTime = dT;
@@ -22,6 +35,12 @@ public class Deadline extends Task {
     }
 
 
+    /**
+     * Formats the string given by user to date time.
+     * @param details details of the task.
+     * @return the formatted date time.
+     * @throws DukeException
+     */
     private String formatDateTime(String details) throws DukeException {
         StringBuilder formattedDateTime = new StringBuilder();
         try {

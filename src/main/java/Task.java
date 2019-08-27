@@ -16,6 +16,10 @@ class Task{
         this.status = status;
     }
 
+    public String getMessage(){
+        return message;
+    }
+
     @Override
     public String toString() { 
         String doneString;

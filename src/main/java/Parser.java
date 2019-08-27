@@ -25,7 +25,8 @@ public class Parser{
                 (!inputnoun.equals("todo")) &&
                 (!inputnoun.equals("deadline")) &&
                 (!inputnoun.equals("event")) &&
-                (!inputnoun.equals("delete")) ){
+                (!inputnoun.equals("delete"))&&
+                (!inputnoun.equals("find")) ){
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
 
                 }else if((line.split(" ", 2)).length < 2){
@@ -90,6 +91,12 @@ public class Parser{
                         EventsTask newTask = new EventsTask (false, newTaskName, startingDateTime, endingDateTime);
                         taskList.add(newTask);
                         storage.save();
+
+                    }else if(inputnoun.equals("find")){
+                        Command findCommand = new FindCommand(taskName);
+                        findCommand.execute(taskList);
+
+
 
                     }else{
                         int offset = Integer.parseInt(taskName) - 1;

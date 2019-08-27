@@ -42,6 +42,10 @@ public class TaskList{
         System.out.println(message);
     }
 
+    public ArrayList <Task> getTaskList(){
+        return taskList;
+    }
+
     public void printTaskList(){
         int size = taskList.size();
 

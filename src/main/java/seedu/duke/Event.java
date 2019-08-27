@@ -34,6 +34,7 @@ public class Event extends Task {
      * @return Date as <code>Date</code> class.
      */
     public Date getDate() {
+
         return this.date;
     }
 

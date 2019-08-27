@@ -137,7 +137,7 @@ public class Duke {
         SB.append("//");
         SB.append(deadline.isDone);
         SB.append("//");
-        SB.append(deadline.getBy());
+        SB.append(deadline.getStringBy());
         return SB.toString();
     }
     public String fileUpdateEvent(Event event) {
@@ -147,7 +147,7 @@ public class Duke {
         SB.append("//");
         SB.append(event.isDone);
         SB.append("//");
-        SB.append(event.getAt());
+        SB.append(event.getStringAt());
         return SB.toString();
     }
     public static void main(String[] args) throws DukeException, IOException {

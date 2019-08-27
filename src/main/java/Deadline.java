@@ -1,16 +1,19 @@
 public class Deadline extends Task   {
     private String deadlineTime;
+    private String dateTime;
 
     public Deadline(String name) {
         super(name);
     }
 
-    public Deadline(String name, String dT) {
+    public Deadline(String name, String dT) throws DukeException{
         super(name);
         this.deadlineTime = dT;
+        formatDeadlineTime(dT);
     }
 
     public String toString() {
+<<<<<<< HEAD
         return "D|" + super.toString().trim() + "|" + deadlineTime.trim();
 
     }
@@ -21,6 +24,15 @@ public class Deadline extends Task   {
         this.deadlineTime = format;
         System.out.println(dT.substring(2).trim());
        //this.dateTime = formatDateTime(dT.substring(2).trim());
+=======
+        return "D|" + super.toString().trim() + "|" + dateTime.trim();
+    }
+
+    public void formatDeadlineTime(String dT) throws DukeException {
+        String format = dT.substring(0,2) + ":" + dT.substring(2);
+        this.deadlineTime = format;
+        this.dateTime = formatDateTime(dT.substring(2).trim());
+>>>>>>> master
     }
 
 

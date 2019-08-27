@@ -3,14 +3,27 @@ import java.util.ArrayList;
 class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates a new task list.
+     */
     TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a new task list using an existing ArrayList.
+     * @param tasks ArrayList of tasks
+     */
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Delete a task from the task list.
+     * @param taskId Task ID
+     * @return Task that was deleted
+     * @throws DukeException ID not found
+     */
     Task deleteTask(int taskId) throws DukeException {
         try {
             return this.tasks.remove(taskId - 1);
@@ -19,6 +32,12 @@ class TaskList {
         }
     }
 
+    /**
+     * Mark a task as done.
+     * @param taskId Task ID
+     * @return Task that was marked done
+     * @throws DukeException ID not found
+     */
     Task markDone(int taskId) throws DukeException {
         try {
             Task task = this.tasks.get(taskId - 1);
@@ -29,14 +48,27 @@ class TaskList {
         }
     }
 
+    /**
+     * Add a task to the task list.
+     * @param task Task to be added
+     * @return Flag whether task was successfully added
+     */
     boolean addTask(Task task) {
         return this.tasks.add(task);
     }
 
+    /**
+     * Access underlying ArrayList for export purposes.
+     * @return ArrayList of tasks
+     */
     ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Generates numbered list of all tasks in the task list.
+     * @return Numbered list of all tasks
+     */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();

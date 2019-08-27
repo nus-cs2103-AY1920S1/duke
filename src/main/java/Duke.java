@@ -75,43 +75,33 @@ public class Duke {
 
                 } else if (cmd == Command.EVENT) {
                     String input = sc.nextLine().trim();
-                    String[] tokenList = input.split("/");
 
-                    // Implies only word "event"
-                    if (tokenList.length == 1) {
-                        throw new EmptyCommandField("event");
-                    }
+                    int indexFirstSlash = input.indexOf("/");
+                    if(indexFirstSlash == -1) throw new CommandFieldFormatException("Incorrect command format");
 
-                    // Format for item is incorrect
-                    if (tokenList.length != 2) {
-                        throw new CommandFieldFormatException("event");
-                    }
-
-                    list.add(new Event(tokenList[0], tokenList[1], false));
+                    list.add(new Event(input.substring(0, indexFirstSlash), input.substring(indexFirstSlash + 1),
+                            false));
                     listCounter++;
 
                     String tempPrint = addedTaskText();
                     System.out.println(processText(tempPrint));
+
                 } else if (cmd == Command.DEADLINE) {
+
                     String input = sc.nextLine().trim();
-                    String[] tokenList = input.split("/");
 
-                    // Implies only word "deadline"
-                    if (tokenList.length == 1) {
-                        throw new EmptyCommandField("deadline");
-                    }
+                    //String[] tokenList = input.split(" ");
+                    int indexFirstSlash = input.indexOf("/");
+                    if(indexFirstSlash == -1) throw new CommandFieldFormatException("Incorrect command format");
 
-                    // Format for item is incorrect
-                    if (tokenList.length != 2) {
-                        throw new CommandFieldFormatException("deadline");
-                    }
-
-                    list.add(new Deadline(tokenList[0], tokenList[1], false));
+                    list.add(new Deadline(input.substring(0, indexFirstSlash), input.substring(indexFirstSlash + 1),
+                            false));
                     listCounter++;
 
                     String tempPrint = addedTaskText();
 
                     System.out.println(processText(tempPrint));
+
                 } else if (cmd == Command.DONE) {
                     // Cannot perform done in zero list
                     if (listCounter == 0) {
@@ -182,7 +172,7 @@ public class Duke {
 
             } catch (CommandFieldFormatException f) {
                 System.out.println(processText("\u263A Description format is incorrect for " + f.getMessage() + "."));
-                
+
             } catch (InvalidNumberException n) {
                 System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
             }
@@ -214,6 +204,26 @@ class TimeDate {
         year = 0;
     }
 
+    public TimeDate(int day, int month, int year, int time){
+        this.time = time;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+
+    public String print(){
+        return this.day + "/" + this.month + "/" + this.year + " " +this.time;
+    }
+
+    public boolean isValid(){
+        if(this.time < 0 || this.time >= 2400) return false;
+        else if(this.day <= 0 || this.day > 31) return false;
+        else if (this.month <= 0 || this.month > 12) return false;
+        else if (this.year < 0) return false;
+
+        return true;
+        // yet to handle leap, 31 months etc
+    }
 
 }
 
@@ -267,13 +277,25 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
-    private String deadline;
-    private boolean isDeadlineProcessed;
+    private TimeDate timeDateGiven;
 
     public Deadline(String event, String timing, boolean isDeadlineProcessed) {
-        super(event.trim(), false);
-        this.deadline = timing.trim();
-        this.isDeadlineProcessed = isDeadlineProcessed;
+        super(event.trim(), isDeadlineProcessed);
+
+        try {
+            String[] str = timing.replace("by ", "").replace(" ", "/").split("/");
+            int[] temp = new int[str.length];
+            for(int i = 0; i < str.length; i++){
+                temp[i] = Integer.parseInt(str[i]);
+            }
+
+            timeDateGiven = new TimeDate(temp[0], temp[1], temp[2], temp[3]);
+
+            if(timeDateGiven.isValid()) throw new InvalidTimeDateException();
+
+        } catch(InvalidTimeDateException e){
+            System.out.println("Time and date entered is invalid");
+        }
     }
 
     @Override
@@ -282,28 +304,37 @@ class Deadline extends Task {
         else return "[D][" + ICON_CROSS + "]";
     }
 
-    public String getDeadline() {
-        return this.deadline;
+    public String getDeadline(){
+        return timeDateGiven.print();
     }
+
 
     @Override
     public String getItemInfo() {
-        if (!isDeadlineProcessed) {
-            deadline = deadline.substring(3);
-            isDeadlineProcessed = true;
-        }
         return getStatusIcon() + " " + getTaskItem() + " (by: " + getDeadline() + ")";
     }
 }
 
 class Event extends Task {
-    private String timing;
-    private boolean isTimingProcessed;
+    private TimeDate timeDateGiven;
 
     public Event(String event, String timing, boolean isDone) {
         super(event.trim(), isDone);
-        this.timing = timing;
-        this.isTimingProcessed = false;
+
+        try {
+            String[] str = timing.replace("at ", "").replace(" ", "/").split("/");
+            int[] temp = new int[str.length];
+            for(int i = 0; i < str.length; i++){
+                temp[i] = Integer.parseInt(str[i]);
+            }
+
+            timeDateGiven = new TimeDate(temp[0], temp[1], temp[2], temp[3]);
+
+            if(timeDateGiven.isValid()) throw new InvalidTimeDateException();
+
+        } catch(InvalidTimeDateException e){
+            System.out.println("Time and date entered is invalid");
+        }
     }
 
     @Override
@@ -313,18 +344,17 @@ class Event extends Task {
     }
 
     public String getTiming() {
-        return timing;
+        return timeDateGiven.print();
     }
 
     @Override
     public String getItemInfo() {
-
-        if (!isTimingProcessed) {
-            timing = timing.substring(3);
-            isTimingProcessed = true;
-        }
         return getStatusIcon() + " " + getTaskItem() + " (at: " + getTiming() + ")";
     }
+
+}
+
+class InvalidTimeDateException extends Exception {
 
 }
 

@@ -11,6 +11,10 @@ public class TaskListController {
         view = new TaskListView();
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     public void addTask(Task task) {
         tasks.add(task);
         view.displayNewTask(task, tasks.size());

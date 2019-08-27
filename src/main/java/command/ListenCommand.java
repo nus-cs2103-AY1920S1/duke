@@ -20,7 +20,7 @@ public class ListenCommand implements Command {
 
         switch (command) {
             case "bye":
-                return Optional.of(new ByeCommand());
+                return Optional.of(new ByeCommand(taskListController));
             case "list":
                 return Optional.of(new ListCommand(taskListController));
             case "done":

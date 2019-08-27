@@ -39,22 +39,29 @@ public class DukeStorage {
             InputStream configFileInputStream;
 
             if (new File(configFilePath).exists()) {
+                DukeMessage configFileFoundMessage = new DukeMessage("Config file found...");
+                DukeOutput.printMessage(configFileFoundMessage);
+
                 configFileInputStream = new FileInputStream(configFilePath);
+                Properties configFileProperties = new Properties();
+                configFileProperties.load(configFileInputStream);
+                storageFilePath = configFileProperties.getProperty("storage_path");
             } else {
-                configFileInputStream = DukeStorage.class.getClassLoader()
-                        .getResourceAsStream("config/duke.properties");
+                DukeMessage configFileNotFoundMessage = new DukeMessage("Config file not found")
+                        .newLine()
+                        .append("Using default storage path at ")
+                        .append(getDefaultStoragePath());
+                DukeOutput.printMessage(configFileNotFoundMessage);
+
+                storageFilePath = getDefaultStoragePath();
             }
-
-            DukeMessage foundConfigFileMessage = new DukeMessage("Config file found...");
-            DukeOutput.printMessage(foundConfigFileMessage);
-
-            Properties configFileProperties = new Properties();
-            configFileProperties.load(configFileInputStream);
-            storageFilePath = configFileProperties.getProperty("duke.storage");
-
         } catch (IOException e) {
             throw new ConfigurationException("Unable to read config file");
         }
+    }
+
+    private String getDefaultStoragePath() {
+        return System.getProperty("user.home") + "/bin/duke";
     }
 
     private void loadTaskData() throws ConfigurationException {

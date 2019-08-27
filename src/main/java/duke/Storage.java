@@ -57,16 +57,18 @@ public class Storage {
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '|') {
                         taskLst.add(new Deadline(line.substring(0, i - 1),
-                            LocalDateTime.parse(line.substring(i + 2), DateTimeFormatter.ofPattern("d MMMM yyyy, ha")),
-                                s.charAt(4) == '1' ? true : false));
+                            LocalDateTime.parse(line.substring(i + 2),
+                                DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")),
+                                    s.charAt(4) == '1' ? true : false));
                     }
                 }
             } else if (s.charAt(0) == 'E') {
                 for (int i = 0; i < line.length(); i++) {
                     if (line.charAt(i) == '|') {
                         taskLst.add(new Event(line.substring(0, i - 1),
-                            LocalDateTime.parse(line.substring(i + 2), DateTimeFormatter.ofPattern("d MMMM yyyy, ha")),
-                                s.charAt(4) == '1' ? true : false));
+                            LocalDateTime.parse(line.substring(i + 2),
+                                DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")),
+                                    s.charAt(4) == '1' ? true : false));
                     }
                 }
             } else {

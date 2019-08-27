@@ -31,6 +31,15 @@ public abstract class Command {
     }
 
     /**
+     * Returns String the full command given via user input.
+     *
+     * @return String fullCommand.
+     */
+    public String getFullCommand() {
+        return fullCommand;
+    }
+
+    /**
      * Executes the appropriate set of instructions associated with each command.
      *
      * @param tasks the TaskList object storing all recorded Tasks.

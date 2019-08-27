@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha")) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")) + ")";
     }
 
     /**
@@ -42,6 +42,6 @@ public class Deadline extends Task {
      */
     @Override
     public String fileString() {
-        return "D" + super.fileString() + " | " + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha"));
+        return "D" + super.fileString() + " | " + by.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma"));
     }
 }

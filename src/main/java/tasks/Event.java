@@ -28,7 +28,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha")) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma")) + ")";
     }
 
     /**
@@ -42,7 +42,7 @@ public class Event extends Task {
      */
     @Override
     public String fileString() {
-        return "E" + super.fileString() + " | " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, ha"));
+        return "E" + super.fileString() + " | " + at.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma"));
     }
 
 }

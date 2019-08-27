@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Parser {
     // Command templates
@@ -7,6 +10,9 @@ public class Parser {
     public static final String TODO_TEMPLATE = "todo <description>";
     public static final String DEADLINE_TEMPLATE = "deadline <description> /by <date | time>";
     public static final String EVENT_TEMPLATE = "event <description> /by <date | time>";
+
+    // Date parser
+    public static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public static String parse(TaskList tasks, String command, Storage fileMgr) throws DukeException {
         // Determine the type of command from the first token
@@ -111,8 +117,15 @@ public class Parser {
         if (args.length != 2) {
             throw new DukeIncorrectArgumentsException(2, DEADLINE_TEMPLATE, args.length, command);
         }
-        Task newDeadline = new DeadlineTask(args[0], args[1]);
-        return Parser.parseAddTask(tasks, newDeadline, fileMgr);
+
+        // Attempt to parse the date to construct the Deadline
+        try {
+            Date eventTime = Parser.DATE_PARSER.parse(args[1]);
+            Task newDeadline = new DeadlineTask(args[0], eventTime);
+            return Parser.parseAddTask(tasks, newDeadline, fileMgr);
+        } catch (ParseException e) {
+            throw new DukeInvalidArgumentException("date | time", "Date", command);
+        }
     }
 
     public static String parseEvent(TaskList tasks, String command, Storage fileMgr) throws DukeException {
@@ -128,8 +141,15 @@ public class Parser {
         if (args.length != 2) {
             throw new DukeIncorrectArgumentsException(2, EVENT_TEMPLATE, args.length, command);
         }
-        Task newEvent = new EventTask(args[0], args[1]);
-        return Parser.parseAddTask(tasks, newEvent, fileMgr);
+
+        // Attempt to parse the date to construct the Event
+        try {
+            Date eventTime = Parser.DATE_PARSER.parse(args[1]);
+            Task newEvent = new EventTask(args[0], eventTime);
+            return Parser.parseAddTask(tasks, newEvent, fileMgr);
+        } catch (ParseException e) {
+            throw new DukeInvalidArgumentException("date | time", "Date", command);
+        }
     }
 
     public static String parseAddTask(TaskList tasks, Task task, Storage fileMgr) throws DukeException {

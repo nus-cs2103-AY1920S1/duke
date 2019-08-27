@@ -2,9 +2,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
+    public static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+
     private String filePath;
     private Scanner fileReader;
 
@@ -38,13 +43,23 @@ public class Storage {
             if (tokens.length != 4) {
                 throw new DukeInvalidEncodedTaskException(4, "DeadlineTask", tokens.length, encodedString);
             }
-            task = new DeadlineTask(tokens[2], tokens[3]);
+            try {
+                Date eventTime = Storage.DATE_PARSER.parse(tokens[3]);
+                task = new DeadlineTask(tokens[2], eventTime);
+            } catch (ParseException e) {
+                throw new DukeInvalidEncodedTaskException(4, "DeadlineTask", 4, encodedString);
+            }
             break;
         case "E":
             if (tokens.length != 4) {
                 throw new DukeInvalidEncodedTaskException(4, "EventTask", tokens.length, encodedString);
             }
-            task = new EventTask(tokens[2], tokens[3]);
+            try {
+                Date eventTime = Storage.DATE_PARSER.parse(tokens[3]);
+                task = new EventTask(tokens[2], eventTime);
+            } catch (ParseException e) {
+                throw new DukeInvalidEncodedTaskException(4, "EventTask", 4, encodedString);
+            }
             break;
         default:
             throw new DukeException("Encoded string corresponds to an unrecognised task type", encodedString);

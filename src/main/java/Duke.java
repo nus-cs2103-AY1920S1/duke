@@ -2,6 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 
+/**
+ * <h1>Duke</h1>
+ * The Duke program allows users to manage and organise their to-do, deadlines, and events
+ * all in one application. Users can add their tasks, marking them as done, list the tasks
+ * they have, and even delete them after they are done.
+ */
 public class Duke { // handles all input and output
     final static String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -13,12 +19,21 @@ public class Duke { // handles all input and output
 
     final static ArrayList<Task> _task = new ArrayList<Task>();
 
+    /**
+     * Greets the users, and asks users what they want Duke to do.
+     * @return String Returns a String of Greetings.
+     */
     public static String intro() {
         String intro = String.format("%s%n%s%n Hello! I'm Duke%n What can I do for you?%n%s%n",
                         line, logo, line);
         return intro;
     }
 
+    /**
+     * Lists out all the tasks the user has added, be it ToDo, Deadlines or Events,
+     * in the order of input.
+     * @return String Returns a Strings of all Tasks.
+     */
     public static String list() {
         StringBuilder s = new StringBuilder(line);
         s.append(System.getProperty("line.separator"));
@@ -35,12 +50,21 @@ public class Duke { // handles all input and output
         return s.toString();
     }
 
+    /**
+     * Bids the user GoodBye after the user is done using Duke.
+     * @return String Returns a string of farewell words.
+     */
     public static String bye() {
-        String bye = String.format("%s%n Bye! Hope to see you again soon!%n%s%n",
+        String bye = String.format("%s%n GoodBye! Hope to see you again soon!%n%s%n",
                         line, line);
         return bye;
     }
 
+    /**
+     * Adds a new Task to the list of tasks, and informs the user of the task added.
+     * @param t The Task to be added, which can be a ToDo, Deadline, or Event.
+     * @return String Returns a String of information notifying the user of the added task.
+     */
     public static String newTask(Task t) {
         _task.add(t);
         String added = String.format("%s%n Got it! I've added this task:" +
@@ -49,6 +73,11 @@ public class Duke { // handles all input and output
         return added;
     }
 
+    /**
+     * Marks a Task as done, and notifies the user of the task marked as done.
+     * @param n The task number, in the order of input.
+     * @return String Returns a string to inform user of the task marked as done.
+     */
     public static String done(int n) {
         Task t = _task.get(n - 1);
         t.markAsDone();
@@ -57,6 +86,12 @@ public class Duke { // handles all input and output
         return done;
     }
 
+    /**
+     * Deletes a given Task from the list of all Tasks, then notifies the user of the
+     * Task removed.
+     * @param n The task number, in the order of input.
+     * @return String Returns a string to inform user of the task removed from the list.
+     */
     public static String delete(int n) {
         Task t = _task.get(n - 1);
         _task.remove(n - 1);
@@ -66,6 +101,10 @@ public class Duke { // handles all input and output
         return del;
     }
 
+    /**
+     * This main method handles all input and outputs which the Duke program uses.
+     * @param args Unused.
+     */
     public static void main(String[] args) { // handles all input and output
         Scanner sc = new Scanner(System.in);
         System.out.println(intro());

@@ -35,6 +35,11 @@ public class Duke {
         while (!userInput.equalsIgnoreCase("bye")) {
             if (userInput.equalsIgnoreCase("list")) {
                 myTaskList.printTasks();
+            } else if (userInput.contains("done")) {
+                String[] numTasks = userInput.split(" ");
+                String numberAsString = numTasks[1];
+                int number = Integer.parseInt(numberAsString);
+                spacer(myTaskList.taskDone(number-1));
             } else {
                 myTaskList.addTasks(userInput);
             }

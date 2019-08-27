@@ -19,4 +19,8 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
+
+    public String stringForAppend() {
+        return description;
+    }
 }

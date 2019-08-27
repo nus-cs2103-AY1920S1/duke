@@ -2,6 +2,7 @@ package DukePkg;
 public class Task {
     private boolean done_ = false;
     private String task_ = "";
+    public String type = "";
 
     public Task(String task) {
         task_ = task;

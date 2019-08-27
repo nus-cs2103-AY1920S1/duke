@@ -3,10 +3,13 @@ import DukePkg.Deadline;
 import DukePkg.Event;
 import DukePkg.Todo;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.util.ArrayList;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
 public class Duke {
     public static void main(String[] args) {
         /*String logo = " ____        _        \n"
@@ -20,6 +23,14 @@ public class Duke {
         System.out.println(greeting);
 
         ArrayList<Task> tasks = new ArrayList<Task>();
+        try {
+            tasks = loadList();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
+        ArrayList<String> modifyingCommands = new ArrayList<>(){{add("done"); add("delete"); add("todo");add("deadline");add("event");}};
+
         Scanner input = new Scanner(System.in);
         while(input.hasNextLine()){
             String command = input.nextLine();
@@ -109,11 +120,54 @@ public class Duke {
                     default:
                         throw new UnrecognizedException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                if(modifyingCommands.contains(arr[0])) {
+                    try {
+                        saveList(tasks);
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    }
+                }
             } catch(FormatException e) {
                 System.out.println(e);
             } catch(UnrecognizedException e) {
                 System.out.println(e);
             }
         }
+    }
+
+    static ArrayList<Task> loadList() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        File f = new File("data/duke.txt");
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String arr[] = line.split(" # ");
+            Task t;
+            if (arr.length == 3) {
+                t = new Todo(arr[2]);
+            } else if (arr[0].equals("D")) {
+                t = new Deadline(arr[2], arr[3]);
+            } else {
+                t = new Event(arr[2], arr[3]);
+            }
+            if (Integer.parseInt(arr[1]) == 1) {
+                t.markDone();
+            }
+            tasks.add(t);
+        }
+        return tasks;
+    }
+
+    static void saveList(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter("data/duke.txt", false);
+        for(Task t : tasks) {
+            String s = (t instanceof Todo) ? "T # " : ((t instanceof Event) ? "E # " : "D # ");
+            s += t.isDone() ? "1 # " : "0 # " ;
+            s += t.getTask();
+            s += (t instanceof Todo) ? "" : ((t instanceof Event) ? " # " + ((Event) t).getAt() : " # " + ((Deadline) t).getBy());
+
+            fw.write(s + "\n");
+        }
+        fw.close();
     }
 }

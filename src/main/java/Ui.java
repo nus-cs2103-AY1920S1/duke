@@ -56,6 +56,15 @@ public class Ui {
         System.out.println(indent(wrapWithHorizontalLines(output)));
     }
 
+    public void showFindResult(TaskList tasks) {
+        StringJoiner sj = new StringJoiner("\n");
+        sj.add("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.getTasks().size(); i++) {
+            sj.add((i + 1) + ". " + tasks.getTasks().get(i));
+        }
+        System.out.println(indent(wrapWithHorizontalLines(sj.toString())));
+    }
+
     public void showGenericError() {
         String output = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         System.out.println(indent(wrapWithHorizontalLines(output)));

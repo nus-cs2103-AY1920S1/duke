@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReadFile {
+public class ReadFile extends Storage {
     private String path;
 
     public ReadFile(String path) {

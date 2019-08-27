@@ -7,31 +7,28 @@ import java.util.Date;
 
 public class Deadline extends Task {
 
-    private String midcommand; private String informalDate; private Date formalDate; private boolean isTimeDefined;
+    private String midcommand; private String informalDate; private String formattedDate;
 
-    public Deadline(String command) throws ParseException {
+    public Deadline(String command) throws ParseException, DukeException {
         super(command);
         this.done = false;
         String[]splitteddate = command.split("/",2);
 
         try {
             SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            formalDate = ft.parse(splitteddate[1].substring(3));
-            //System.out.println(formalDate.toString());
-            isTimeDefined = true;
-        }catch(Exception e){
-            informalDate = splitteddate[1].substring(3);
-            isTimeDefined = false;
+            Date formalDate = ft.parse(splitteddate[1].substring(3));
+
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            formattedDate = dateFormat.format(formalDate);
+
+        } catch(Exception e) {
+            throw new DukeException("");
         }
 
         midcommand = splitteddate[0];
     }
 
     public String printer(){
-        if(isTimeDefined){
-            //DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            String formattedDate = dateFormat.format(formalDate);
             if(done){
                 String result = "[D][✓] " + midcommand + "(by: " + formattedDate + ")";
                 return result;
@@ -39,15 +36,26 @@ public class Deadline extends Task {
                 String result = "[D][✗] " + midcommand + "(by: " + formattedDate + ")";
                 return result;
             }
-        }else{
+    }
+
+    public String printToOutput(){
             if(done){
-                String result = "[D][✓] " + midcommand + "(by: " + informalDate.substring(3) + ")";
+                String result = "D | 1 | " + midcommand + " | " + formattedDate;
                 return result;
             }else{
-                String result = "[D][✗] " + midcommand + "(by: " + informalDate.substring(3) + ")";
+                String result = "D | 0 | " + midcommand + " | " + formattedDate;
                 return result;
             }
-        }
+    }
+
+    public static Task outputAsDeadline(String s) throws ParseException, DukeException {
+        String[]segments = s.split("\\|");
+        String taskCommand = segments[2] + "/by: " + segments[3];
+        Deadline newTask = new Deadline(taskCommand);
+        if (segments[1].equals(" 1 ")) {
+            newTask.taskDone();
+        }else{}
+        return newTask;
     }
 
     public void taskDone(){

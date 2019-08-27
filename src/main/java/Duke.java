@@ -1,21 +1,11 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 
 public class Duke {
-
-    /*public static PrintStream outputTo;
-
-    static {
-        try {
-            outputTo = new PrintStream("DukeOutput.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     public static void main(String[] args) throws FileNotFoundException {
         String logo = " ____        _        \n"
@@ -32,6 +22,29 @@ public class Duke {
 
 
         ArrayList<Task>allcoms = new ArrayList<Task>();
+
+        try{
+            BufferedReader br = Files.newBufferedReader(Paths.get("DukeOutput.txt"));
+            String lineToRead;
+            while ((lineToRead = br.readLine()) != null) {
+                if(lineToRead.charAt(0)=='T'){
+                    Task newTask = ToDo.outputAsToDo(lineToRead);
+                    allcoms.add(newTask);
+                }else if(lineToRead.charAt(0)=='D'){
+                    Task newTask = Deadline.outputAsDeadline(lineToRead);
+                    allcoms.add(newTask);
+                }else if(lineToRead.charAt(0)=='E'){
+                    Task newTask = Event.outputAsEvent(lineToRead);
+                    allcoms.add(newTask);
+                }else{}
+            }
+
+        } catch (IOException | ParseException | DukeException e) {
+            System.out.println("No file found");
+        }
+
+
+
         while(true){
             String command = sc.nextLine();
             String[]words = command.split(" ");
@@ -75,7 +88,7 @@ public class Duke {
                             allcoms.add(new ToDo(midcommand));
                             saveToDisk(allcoms);
                         } else {
-                            throw new DukeException("");
+                            throw new Exception();
                         }
                     } else if (splitwords[0].equals("deadline")) {
                         String midcommand = command.trim().substring(9);
@@ -83,7 +96,7 @@ public class Duke {
                             allcoms.add(new Deadline(midcommand));
                             saveToDisk(allcoms);
                         } else {
-                            throw new DukeException("");
+                            throw new Exception();
                         }
                     } else if (splitwords[0].equals("event")) {
                         String midcommand = command.trim().substring(6);
@@ -91,7 +104,7 @@ public class Duke {
                             allcoms.add(new Event(midcommand));
                             saveToDisk(allcoms);
                         } else {
-                            throw new DukeException("");
+                            throw new Exception();
                         }
                     } else {
                         throw new IllegalArgumentException();
@@ -103,6 +116,8 @@ public class Duke {
                                                 + allcoms.size() + " tasks in the list."+ "\n" + line);
                 }catch(IllegalArgumentException e){
                     System.out.println(line + "\n" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-()" + "\n" + line);
+                }catch(DukeException e){
+                    System.out.println(line + "\n" + "☹ OOPS!!! The date format is wrong."+ "\n" + line);
                 }catch(Exception e){
                     System.out.println(line + "\n" + "☹ OOPS!!! The description of a event cannot be empty."+ "\n" + line);
                 }
@@ -124,7 +139,7 @@ public class Duke {
         //outputTo.println("List");
 
         for(int i=1; i<=allcoms.size(); i++){
-            outputTo.println(i + ". " + allcoms.get(i-1).printer());
+            outputTo.println(allcoms.get(i-1).printToOutput());
         }
 
         outputTo.close();

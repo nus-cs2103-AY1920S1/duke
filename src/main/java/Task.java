@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class Task {
     protected String command; protected Boolean done;
     public Task(String command){
@@ -13,6 +15,12 @@ public class Task {
             return result;
         }
     }
+
+    public String printToOutput(){
+        return "";
+    }
+
+    //public static Task outputAsTask(String s) throws ParseException, DukeException {return null;}
 
     public void taskDone(){
         done = true;

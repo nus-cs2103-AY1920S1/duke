@@ -24,6 +24,12 @@ public class Parser {
             int index = Integer.parseInt(words[1]);
             taskList.deleteTask(index);
             storage.saveTask();
+        } else if(command.startsWith("find")) {
+            List<Task> findList;
+            String[] words = command.split("\\s");
+            String findString = words[1];
+            findList = taskList.findTask(taskList, findString);
+            ui.printTaskList(findList);
         } else {
             taskList.addTask(command);
             storage.saveTask();

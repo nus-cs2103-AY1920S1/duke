@@ -132,4 +132,16 @@ public class TaskList {
         ui.horizontalLine();
         System.out.println();
     }
-}
+
+    public List findTask(TaskList taskList, String findString) {
+        List<Task> findList = new ArrayList<>();
+        for (int i = 0; i < taskList.getSize(); i ++) {
+            if (taskList.getTask(i).getDescription().contains(findString)) {
+                findList.add(taskList.getTask(i));
+            }
+        }
+
+        return findList;
+    }
+
+    }

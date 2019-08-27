@@ -6,6 +6,7 @@ import seedu.duke.model.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class Duke{
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static void run() throws DukeException, IOException {
+    private static void run() throws DukeException, IOException, ParseException {
         Scanner sc = new Scanner(System.in);
         DukeController controller = new DukeController();
         File file = controller.initFile();
@@ -87,6 +88,8 @@ public class Duke{
                 System.out.println(e);
             } catch(IOException e) {
                 System.out.println(e);
+            } catch(ParseException e) {
+                System.out.println(e);
             }
             System.out.println("____________________________________________________________");
         }
@@ -94,7 +97,7 @@ public class Duke{
         System.out.println("____________________________________________________________");
     }
 
-    public static void main(String[] args) throws DukeException, IOException{
+    public static void main(String[] args) throws DukeException, IOException, ParseException{
         run();
     }
 }

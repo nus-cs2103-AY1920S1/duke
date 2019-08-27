@@ -8,6 +8,7 @@ import seedu.duke.model.Task;
 import seedu.duke.model.Todo;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class DukeController {
     }
 
     //Future exception implementation required
-    public List<Task> loadTask() throws IOException {
+    public List<Task> loadTask() throws IOException, ParseException {
         FileReader fileReader = new FileReader(FILEPATH);
         BufferedReader reader = new BufferedReader(fileReader);
         List<Task> list = new ArrayList<>();
@@ -65,7 +66,7 @@ public class DukeController {
     }
 
     public void addTask(List<Task> list, String cmd, String desc, String time) throws DukeException,
-            IOException {
+            IOException, ParseException {
         DukeController controller = new DukeController();
 
         if (cmd == null || desc == null || time == null) {
@@ -91,8 +92,8 @@ public class DukeController {
         }
     }
 
-    public void removeTask(List<Task> list, int index) throws TaskListEmptyException, DukeException,
-            IOException{
+    public void removeTask(List<Task> list, int index) throws TaskListEmptyException,
+            DukeException, IOException{
         if (list.isEmpty()) {
             throw new TaskListEmptyException("list is empty");
         } else if (index <= 0 || list.size() < index  + 1) {
@@ -130,7 +131,7 @@ public class DukeController {
         }
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, ParseException{
         DukeController controller = new DukeController();
         List<Task> list = controller.loadTask();
         for (Task t : list) {

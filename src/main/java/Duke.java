@@ -13,6 +13,10 @@ public class Duke {
         System.out.println(line);
     }
 
+    private String dateParser(String date){
+        return "";
+    }
+
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);

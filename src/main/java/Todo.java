@@ -6,6 +6,24 @@ public class Todo extends Task {
         super(task);
     }
 
+    public Todo(String task, String done) {
+        super(task);
+        if (done.equals("1")) {
+            super.markAsDone();
+        }
+    }
+
+    public String toStorageString() {
+        String output = "T|";
+        if (super.isDone) {
+            output = output + "1|";
+        } else {
+            output = output + "0|";
+        }
+        output = output + super.taskName;
+        return output;
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

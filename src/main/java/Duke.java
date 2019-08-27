@@ -3,6 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 import seedu.duke.PrettyPrint;
 import seedu.duke.EventHandler;
+import seedu.duke.Storage;
 
 /**
  * Main class of this project.

@@ -7,10 +7,11 @@ import java.util.Scanner;
 public class EventHandler {
 
     private ArrayList<Task> todoList;
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
+    private Storage storage = new Storage("save.txt");
 
     public EventHandler() {
-        this.todoList = new ArrayList<Task>();
+        this.todoList = storage.load();
     }
 
     public void run(String command) throws DukeException {
@@ -38,6 +39,11 @@ public class EventHandler {
             break;
         default:
             throw new DukeNoSuchCommandException();
+        }
+        try {
+            storage.save(todoList);
+        } catch (DukeSaveFailedException e) {
+            e.printMessage();
         }
     }
 

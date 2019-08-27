@@ -72,7 +72,7 @@ public class Storage {
                 break;
 
             default:
-                PrettyPrint.print("Error reading task from save file.\n");
+                Ui.print("Error reading task from save file.\n");
             }
             try {
                 nextLine = bufferedReader.readLine();

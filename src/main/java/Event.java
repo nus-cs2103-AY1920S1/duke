@@ -7,20 +7,14 @@
  *
  */
 
-<<<<<<< HEAD
 import java.io.Serializable;
-
-public class Event extends Task implements Serializable {
-    protected String at;
-=======
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class Event extends Task implements Serializable {
     protected LocalDateTime at;
     protected static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
->>>>>>> branch-Level-8
 
     public Event(String description) throws DukeException {
         super(description);

@@ -1,8 +1,8 @@
+package tasks;
+
 import customexceptions.*;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.TaskList;
-import tasks.ToDo;
+import tasks.*;
+
 
 public class Parser {
     public static void parseDeadline(String input, TaskList t, Ui ui, Storage s) throws DukeException {
@@ -24,7 +24,7 @@ public class Parser {
         }
     }
 
-    public static void parseEvent(String input, TaskList t,Ui ui,Storage s) throws DukeException {
+    public static void parseEvent(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         String eventDetails = input.substring(6);
         try {
             int index = eventDetails.indexOf("/");
@@ -43,7 +43,7 @@ public class Parser {
         }
     }
 
-    public static void parseToDo(String input, TaskList t,Ui ui,Storage s) throws DukeException {
+    public static void parseToDo(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         if (input.length() == 4) {
             throw new TodoEmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");
         }
@@ -54,7 +54,7 @@ public class Parser {
         System.out.println(todo);
     }
 
-    public static void parseDone(String input, TaskList t,Storage s) throws DukeException {
+    public static void parseDone(String input, TaskList t, Storage s) throws DukeException {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
         if (number > t.getCommandList().size() + 1) {
@@ -64,7 +64,7 @@ public class Parser {
         s.writeListToFile(t);
     }
 
-    public static void parseDelete(String input, TaskList t,Ui ui, Storage s) throws DukeException {
+    public static void parseDelete(String input, TaskList t, Ui ui, Storage s) throws DukeException {
         String[] arr = input.split(" ");
         int number = Integer.parseInt(arr[1]);
         if (number > t.getCommandList().size() + 1) {
@@ -74,6 +74,12 @@ public class Parser {
         System.out.println(t.getCommandList().get(number - 1));
         t.deleteTask(number);
         s.writeListToFile(t);
+    }
+
+    public static void parseFind(String input, TaskList t, Ui ui, Storage s) {
+        String[] arr = input.split(" ");
+        String keyword = arr[1];
+        ui.printMatching(t,keyword);
     }
 }
 

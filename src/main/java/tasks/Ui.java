@@ -1,3 +1,6 @@
+package tasks;
+
+import tasks.Storage;
 import tasks.TaskList;
 
 public class Ui {
@@ -33,5 +36,18 @@ public class Ui {
 
     public void showError(String e) {
         System.out.println(e);
+    }
+
+    public void printMatching(TaskList t, String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int size = t.getCommandList().size();
+        int counter = 1;
+        for (int i = 1; i < size + 1; i++) {
+            if (t.getCommandList().get(i-1).getName().contains(keyword)) {
+                System.out.print(counter + ".");
+                System.out.println(t.getCommandList().get(i - 1));
+                counter++;
+            }
+        }
     }
 }

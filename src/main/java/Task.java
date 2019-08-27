@@ -11,6 +11,13 @@ public abstract class Task {
     }
 
     /**
+     * Indicate that the task is done.
+     */
+    protected void setDone() {
+        this.isDone = true;
+    }
+
+    /**
      * Creates the type of task to be added to the list based on user's command.
      * @param command The entire line of command input by the user into the program.
      * @return A Task object that follows the specifications of the input.
@@ -29,7 +36,7 @@ public abstract class Task {
             } else if (details.equals("")) {
                 throw new DukeException("The description of an event cannot be empty.");
             } else {
-                return new EventTask(commandArray[0], commandArray[1]);
+                return new EventTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
             }
         } else if (taskType.equals("deadline")) {
             commandArray = command.split(" /by ");
@@ -40,7 +47,7 @@ public abstract class Task {
             } else if (details.equals("")) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
-                return new DeadlineTask(commandArray[0], commandArray[1]);
+                return new DeadlineTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
             }
         } else {
             return new ToDoTask(command);
@@ -51,30 +58,24 @@ public abstract class Task {
      * Creates the type of task to be added to the list based on the line in the save file.
      * @param item The entire line of command input by the user into the program.
      * @return A Task object according to the line in the save file.
+     * @throws DukeException Exception thrown if the line does not follow the format for some reason.
      */
-    protected static Task createFromFile(String item) {
-        String[] args = item.split(" \\| ");
-        String taskType = args[0];
-        boolean isAlreadyDone = Integer.parseInt(args[1]) == 1;
-        Task newTask;
-        if (taskType.equals("D")) {
-            newTask = new DeadlineTask(args[2], args[3]);
-        } else if (taskType.equals("E")) {
-            newTask = new EventTask(args[2], args[3]);
-        } else {
-            newTask = new ToDoTask(args[2]);
-        }
-        if (isAlreadyDone) {
-            newTask.setDone();
-        }
-        return newTask;
-    }
-
-    /**
-     * Indicate that the task is done.
-     */
-    protected void setDone() {
-        this.isDone = true;
+    protected static Task createFromFile(String item) throws DukeException {
+            String[] args = item.split(" \\| ");
+            String taskType = args[0];
+            boolean isAlreadyDone = Integer.parseInt(args[1]) == 1;
+            Task newTask;
+            if (taskType.equals("D")) {
+                newTask = new DeadlineTask(args[2], TimedTask.parseDateTime(args[3]));
+            } else if (taskType.equals("E")) {
+                newTask = new EventTask(args[2], TimedTask.parseDateTime(args[3]));
+            } else {
+                newTask = new ToDoTask(args[2]);
+            }
+            if (isAlreadyDone) {
+                newTask.setDone();
+            }
+            return newTask;
     }
 
     /**
@@ -84,6 +85,7 @@ public abstract class Task {
     protected abstract String toFileString();
 
     /**
+
      * String representing the Task object.
      * @return String representation of the Task object.
      */

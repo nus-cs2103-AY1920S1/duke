@@ -1,13 +1,12 @@
+import java.util.Calendar;
+
 /**
  * Object representing an Event task.
  */
-public class EventTask extends Task {
+public class EventTask extends TimedTask {
 
-    String date;
-
-    public EventTask(String details, String date) {
-        super(details);
-        this.date = date;
+    public EventTask(String details, Calendar date) {
+        super(details, date);
     }
 
     @Override
@@ -18,6 +17,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return "[E]" + super.toString() + " (at: " + dateFormat.format(date.getTime()) + ")";
     }
 }

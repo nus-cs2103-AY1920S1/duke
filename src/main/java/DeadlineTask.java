@@ -1,23 +1,22 @@
+import java.util.Calendar;
+
 /**
  * Object representing a Deadline Task.
  */
-public class DeadlineTask extends Task {
+public class DeadlineTask extends TimedTask {
 
-    String deadline;
-
-    public DeadlineTask(String details, String deadline) {
-        super(details);
-        this.deadline = deadline;
+    public DeadlineTask(String details, Calendar deadline) {
+        super(details, deadline);
     }
 
     @Override
     protected String toFileString() {
         int done = isDone ? 1 : 0;
-        return "D" + " | " + done + " | " + details + " | " + deadline;
+        return "D" + " | " + done + " | " + details + " | " + dateFormat.format(date.getTime());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        return "[D]" + super.toString() + " (by: " + dateFormat.format(date.getTime()) + ")";
     }
 }

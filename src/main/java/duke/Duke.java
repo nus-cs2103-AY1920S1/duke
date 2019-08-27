@@ -14,6 +14,9 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
+    /**
+     * Start the program execution
+     */
     public void run(){
         boolean shouldContinue = true;
 

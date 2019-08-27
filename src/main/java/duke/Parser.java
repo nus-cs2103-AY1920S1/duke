@@ -5,6 +5,12 @@ import duke.task.Task;
 import duke.task.TaskEnum;
 
 public class Parser {
+    /**
+     * Returns a command object that represents the command entered.
+     *
+     * @param input Command to be parsed.
+     * @return Command object.
+     */
     public static Command parse(String input) {
         // ADD TODO, DEADLINE, EVENT TASKS
         if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {

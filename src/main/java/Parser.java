@@ -1,5 +1,6 @@
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Parser {
@@ -140,5 +141,24 @@ public class Parser {
 
         return list;
 
+    }
+
+    public TaskList parseFind(String str, TaskList tasks) throws Exception {
+        String[] strArr = str.split(" ");
+
+        if (strArr.length == 1) {
+            throw new DukeException("OOPS!!! Please state the keyword you want to find.");
+        }
+
+        ArrayList<Task> listOfTask = tasks.getList();
+        ArrayList<Task> listOfTaskContainsKeyword = new ArrayList<>();
+
+        for (Task t : listOfTask) {
+            if (t.toString().contains(strArr[1])) {
+                listOfTaskContainsKeyword.add(t);
+            }
+        }
+
+        return new TaskList(listOfTaskContainsKeyword);
     }
 }

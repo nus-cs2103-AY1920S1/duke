@@ -1,10 +1,12 @@
+import java.io.Serializable;
+
 /**
  * An abstract class that represents a human task
  * and keeps track of its completion status.
  * This is the basic Task template that all Task objects
  * must adhere to.
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 

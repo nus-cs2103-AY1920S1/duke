@@ -3,6 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.lang.StringBuilder;
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.IOException;
+
 
 /**
  * CLI Chat assistant that keep tracks of tasks.
@@ -10,6 +17,7 @@ import java.lang.StringBuilder;
  * of CS2103.
  */
 public class Duke {
+    static private String DEFAULT_SAVE_PATH = "../saved/savestate.tmp";
     private List<Task> list; // List of all tasks
 
     /**
@@ -33,7 +41,7 @@ public class Duke {
      * to start the chat assistant driver loop.
      */
     public Duke() {
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     /*
@@ -46,6 +54,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         this.greetHello(); // greet user on startup
+        this.loadFromDisk(); // retrieve saved list, if any
 
         do {
             String input = sc.nextLine();
@@ -62,6 +71,52 @@ public class Duke {
         } while (isNotShutdown);
 
         this.greetGoodbye(); // greet user before exiting
+    }
+
+    /**
+     * Saves the current task list stored in Duke to the disk.
+     *
+     * @return true if successful, false otherwise.
+     */
+    private boolean saveToDisk() {
+        boolean success = false;
+        try {
+            File saveFile = new File(Duke.DEFAULT_SAVE_PATH);
+            saveFile.getParentFile().mkdirs();
+            FileOutputStream fos = new FileOutputStream(saveFile, false);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.list);
+            oos.close();
+            success = true;
+        } catch (IOException e) {
+            this.formattedPrintln("I'm so sorry! I had trouble sync-ing the task list"
+                    + "to the disk!\n"
+                    + "Any changes might not be saved ):");
+        }
+        return success;
+    }
+
+    /** Attempts to load a saved task list from the disk.
+     *
+     * @return true if list was loaded, false otherwise
+     */
+    private boolean loadFromDisk() {
+        boolean success = false;
+        try {
+            File saveFile = new File(Duke.DEFAULT_SAVE_PATH);
+            FileInputStream fis = new FileInputStream(saveFile);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            this.list = (List<Task>) ois.readObject();
+            ois.close();
+            success = true;
+        } catch (IOException e) {
+            ; // no action needs to be done here, return value will indicate failure
+        } catch (ClassNotFoundException e) {
+            this.formattedPrintln("I'm sorry, I couldn't decipher the saved list.\n"
+                    + "It seems to be corrupted...\n"
+                    + "I will have to start a new list!");
+        }
+        return success;
     }
 
     /*
@@ -119,12 +174,26 @@ public class Duke {
         }
     }
 
+    /*
+     * check if the given index (1-indexing) references a valid Task entry
+     * stored in Duke.
+     *
+     * @param taskIndex the index to be checked in a 1-indexed system
+     * @return true if it references a valid task, false otherwise.
+     */
     private boolean indexIsInvalid(int taskIndex) {
         return taskIndex <= 0 || taskIndex > this.list.size();
     }
 
+    /*
+     * Given an index, deletes the corresponding task from the stored list
+     * in Duke.
+     *
+     * @param taskIndex index of task to be deleted.
+     * @throws DukeException if index is invalid or refers to a non-existent task.
+     */
     private void deleteTask(int taskIndex) throws DukeException {
-        if (indexIsInvalid(taskIndex)) {
+        if (this.indexIsInvalid(taskIndex)) {
             throw new DukeException("Hey! There's no such task!");
         }
         taskIndex--;
@@ -134,6 +203,7 @@ public class Duke {
                 + "\nNow you have "
                 + this.list.size()
                 + " task(s) in the list.");
+        this.saveToDisk();
     }
 
     /*
@@ -142,7 +212,7 @@ public class Duke {
      * @param taskIndex index of task. uses 1-indexing as per list display.
      */
     private void markTaskAsDone(int taskIndex) throws DukeException {
-        if (indexIsInvalid(taskIndex)) {
+        if (this.indexIsInvalid(taskIndex)) {
             throw new DukeException("Hey! There's no such task!");
         }
         taskIndex--; // convert to zero-indexing
@@ -150,6 +220,7 @@ public class Duke {
 
         this.formattedPrintln("Nice! I've marked this task as done:\n  "
                 + this.list.get(taskIndex));
+        this.saveToDisk();
     }
 
     /*
@@ -200,6 +271,7 @@ public class Duke {
                 + "\nNow you have "
                 + this.list.size()
                 + " task(s) in the list.");
+        this.saveToDisk();
     }
 
     // Print out all tasks in the current list

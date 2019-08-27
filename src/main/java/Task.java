@@ -1,13 +1,13 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected Type type;
     protected String info;
 
-    public Task(String description, String info) {
-        this.description = description;
-        this.isDone = false;
-        this.info = info;
+    public Task(String description, boolean isDone, String info) {
+        this.description = description.trim();
+        this.isDone = isDone;
+        this.info = info.trim();
     }
 
     public boolean isDone() {
@@ -56,4 +56,6 @@ public class Task {
             return "[" + getSymbol() + "][" + getStatusIcon() + "] " + description + " (" + infos[0] +":  " +  infos[1] + ")";
         }
     }
+
+    public abstract String getFileStringFormat();
 }

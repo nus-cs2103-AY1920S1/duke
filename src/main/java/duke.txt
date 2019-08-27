@@ -1,3 +1,1 @@
-[T][✓] read book
-[E][✘] project meeting  (at: aug 5th)
-[T][✓] join sports club
+[D][✓] homework2 (by: 01/12/2019 1220)

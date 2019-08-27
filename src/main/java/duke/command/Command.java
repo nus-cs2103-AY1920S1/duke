@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.backend.ListManager;
+import duke.backend.Storage;
+import duke.ui.Ui;
+
 public abstract class Command {
 
     String fullCommand;
@@ -7,6 +13,6 @@ public abstract class Command {
         this.fullCommand = fullCommand;
         this.splitCommand = splitCommand;
     }
-    abstract void execute(ListManager listManager, Ui ui, Storage storage);
-    abstract boolean isExit();
+    public abstract void execute(ListManager listManager, Ui ui, Storage storage);
+    public abstract boolean isExit();
 }

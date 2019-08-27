@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.backend.ListManager;
+
 import java.util.Scanner;
 
 public class Ui {

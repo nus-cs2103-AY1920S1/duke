@@ -1,3 +1,7 @@
+package duke.backend;
+
+import duke.task.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -5,7 +9,7 @@ import java.util.Date;
 
 
 public class ListManager {
-    ArrayList<Task> actualList;
+    public ArrayList<Task> actualList;
     SimpleDateFormat formatter;
 
     public ListManager(SimpleDateFormat formatter) {

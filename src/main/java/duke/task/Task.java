@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 
 public abstract class Task {
-    String name;
+    public String name;
     String type;
-    Boolean done;
+    public Boolean done;
     SimpleDateFormat formatter;
 
     public Task(String name, SimpleDateFormat formatter) {

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.backend.ListManager;
+import duke.backend.Storage;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String fullCommand, String[] splitCommand) {

@@ -1,3 +1,7 @@
+package duke.backend;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,7 +15,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    String filePath;
+    public String filePath;
     SimpleDateFormat formatter;
 
     public Storage(String filePath, SimpleDateFormat formatter) {

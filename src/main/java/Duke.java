@@ -1,5 +1,11 @@
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import duke.ui.Ui;
+import duke.backend.Storage;
+import duke.backend.ListManager;
+import duke.command.Command;
+import duke.parser.Parser;
+
 
 public class Duke {
 
@@ -27,7 +33,7 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.inputCommand();
             ui.bar();
-            Command c = Parser.parse(fullCommand);
+                Command c = Parser.parse(fullCommand);
             c.execute(listManager, ui, storage);
             isExit = c.isExit();
             ui.bar();

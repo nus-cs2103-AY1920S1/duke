@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.SimpleDateFormat;
 
 public class ToDos extends Task {

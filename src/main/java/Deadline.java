@@ -1,14 +1,16 @@
-public class Deadline extends Task {
-    protected String by;
+import java.util.Date;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected Date deadlineDate;
+
+    public Deadline(String description, String deadlineDateString) throws DukeException {
         super(description);
-        this.by = by;
+        this.deadlineDate = DateManager.stringToDate(deadlineDateString);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + DateManager.dateToString(deadlineDate) + ")";
     }
 
     @Override

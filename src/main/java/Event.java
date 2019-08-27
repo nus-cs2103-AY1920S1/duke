@@ -1,14 +1,16 @@
-public class Event extends Task {
-    protected String at;
+import java.util.Date;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    protected Date eventDate;
+
+    public Event(String description, String eventDateString) throws DukeException {
         super(description);
-        this.at = at;
+        this.eventDate = DateManager.stringToDate(eventDateString);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + DateManager.dateToString(eventDate) + ")";
     }
 
     @Override

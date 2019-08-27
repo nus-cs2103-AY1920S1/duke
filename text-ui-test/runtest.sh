@@ -12,6 +12,10 @@ then
     rm ACTUAL.TXT
 fi
 
+if [ -e "./tasks.dmp" ]
+then
+    rm ./tasks.dmp
+fi
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src -Xlint:none -d ../bin ../src/main/java/*.java
 then

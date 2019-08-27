@@ -1,12 +1,14 @@
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static ArrayList<Task> tasks = new ArrayList<>();
-    public static int numberOfTasks = 0;
+    public ArrayList<Task> tasks = new ArrayList<>();
+    public Storage storage;
 
     public Duke() {
+        storage = new Storage(tasks);
     }
 
     public void greet() {
@@ -32,37 +34,41 @@ public class Duke {
     }
 
     public void add(Task task) {
-        numberOfTasks++;
         tasks.add(task);
         String outputString = "Got it. I've added this task: \n" + task.toString();
         System.out.println(outputString);
-        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        storage.rewriteData();
     }
 
     public void done(int number) throws IndexOutOfBoundsException {
-        if (number > Duke.numberOfTasks || number <= 0) {
+        if (number > tasks.size() || number <= 0) {
             throw new IndexOutOfBoundsException("The task number does not exist.");
         }
-        Task task = Duke.tasks.get(number - 1);
+        Task task = tasks.get(number - 1);
         task.setDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(task.toString());
+        storage.rewriteData();
     }
     public void delete(int number) throws IndexOutOfBoundsException {
-        if (number > Duke.numberOfTasks || number <= 0) {
+        if (number > tasks.size() || number <= 0) {
             throw new IndexOutOfBoundsException("The task number does not exist.");
         }
-        Task task = Duke.tasks.get(number - 1);
-        tasks.remove(number-1);
-        numberOfTasks--;
+        Task task = tasks.get(number - 1);
+        tasks.remove(number - 1);
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
-        System.out.println("Now you have " + numberOfTasks + " tasks in the list");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+        storage.rewriteData();
     }
+
 
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
+        duke.storage.readData();
+
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
 
@@ -118,5 +124,6 @@ public class Duke {
             command = scanner.nextLine();
         }
         duke.bye();
+
     }
 }

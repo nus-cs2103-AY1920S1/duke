@@ -25,9 +25,12 @@ public class Parser {
         String[] commandArr = command.split(" ");
         String directive = commandArr[0];
         if (directive.equals("list")) {
-            return new ReadCommand();
+            return new ReadCommand(directive);
         } else if (directive.equals("bye")) {
             return new ExitCommand();
+        } else if (directive.equals("find")) {
+            String keyword = command.substring(5);
+            return new ReadCommand(directive, keyword);
         } else if (directive.equals("done")) {
             int position = Integer.valueOf(commandArr[1]);
             return new UpdateCommand("done", position);

@@ -36,7 +36,8 @@ public class Parser {
             return new DeleteCommand("delete", position);
         } else if (isTask(directive)) {
             if (commandArr.length < 2) {
-                throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", directive));
+                String error = "☹ OOPS!!! The description of a %s cannot be empty.";
+                throw new DukeException(String.format(error, directive));
             }
             if (directive.equals("todo")) {
                 return new CreateCommand(directive, commandArr[1]);

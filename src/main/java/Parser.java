@@ -13,6 +13,12 @@ public class Parser {
     // Date parser
     private static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
+    /**
+     *  Parses the given input command <code>String</code> and returns the corresponding <code>Command</code> if valid.
+     *  @param command the input user command as a <code>String</code>.
+     *  @return an executable <code>Command</code> representing the instruction.
+     *  @throws DukeException if an error occurred when attempting to parse the user input
+     */
     public static Command parse(String command) throws DukeException {
         // Parse trivial commands here
         switch (command) {
@@ -52,7 +58,7 @@ public class Parser {
         }
     }
 
-    public static Command parseDone(String command) throws DukeException {
+    private static Command parseDone(String command) throws DukeException {
         String[] tokens = command.split(" ");
         // GUARD: against too few (e.g. done) or too many (e.g. done 5 example) arguments
         if (tokens.length != 2) {
@@ -68,7 +74,7 @@ public class Parser {
         }
     }
 
-    public static Command parseDelete(String command) throws DukeException {
+    private static Command parseDelete(String command) throws DukeException {
         String[] tokens = command.split(" ");
         // GUARD: against too few (e.g. done) or too many (e.g. done 5 example) arguments
         if (tokens.length != 2) {
@@ -84,7 +90,7 @@ public class Parser {
         }
     }
 
-    public static Command parseTodo(String command) throws DukeException {
+    private static Command parseTodo(String command) throws DukeException {
         // GUARD: against empty todo description
         // If the 'todo' command is input with no arguments, trim() removes the trailing spaces
         if (command.equals("todo")) {
@@ -96,7 +102,7 @@ public class Parser {
         return new TodoCommand(command, argString);
     }
 
-    public static Command parseDeadline(String command) throws DukeException {
+    private static Command parseDeadline(String command) throws DukeException {
         // GUARD: against empty deadline description
         // If the 'deadline' command is input with no arguments, trim() removes the trailing spaces
         if (command.equals("deadline")) {
@@ -119,7 +125,7 @@ public class Parser {
         }
     }
 
-    public static Command parseEvent(String command) throws DukeException {
+    private static Command parseEvent(String command) throws DukeException {
         // GUARD: against empty event description
         // If the 'event' command is input with no arguments, trim() removes the trailing spaces
         if (command.equals("event")) {

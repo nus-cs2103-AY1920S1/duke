@@ -7,6 +7,12 @@ public class Duke {
     private Storage fileMgr;
     private TaskList tasks;
 
+    /**
+     *  Constructs a <code>Duke</code> application instance, an interactive task manager.
+     *  @param filePath <code>String</code> containing the relative file path of the file to persist application
+     *                  data to.
+     *  @throws IOException if an error occured during a file I/O operation.
+     */
     public Duke(String filePath) throws IOException {
         this.ui = new Ui();
         
@@ -21,6 +27,9 @@ public class Duke {
         }
     }
 
+    /** 
+     *  Initiates the Duke application instance, allowing users to input commands to interact with the task maanger.
+     */
     public void run() {
         // Show Duke's logo and welcome message
         this.ui.showWelcome();
@@ -40,6 +49,10 @@ public class Duke {
         }
     }
     
+    /**
+     *  Driver main method.
+     *  @param args an array of <code>String</code> arguments.
+     */
     public static void main(String[] args) {
         try {
             new Duke(DEFAULT_FILEPATH).run();

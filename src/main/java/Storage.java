@@ -13,6 +13,11 @@ public class Storage {
     private String filePath;
     private Scanner fileReader;
 
+    /**
+     *  Constructs a <code>Storage</code> object that handles I/O (read-writes) of a <code>TaskList</code> to a file.
+     *  @param filePath <code>String</code> containing the relative file path of the file to read/write to.
+     *  @throws IOException if an error occurred during a filesystem or file I/O operation.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         File file = new File(filePath);
@@ -27,7 +32,7 @@ public class Storage {
         this.fileReader = new Scanner(file);
     }
 
-    public static Task parseEncodedTask(String encodedString) throws DukeException {
+    private static Task parseEncodedTask(String encodedString) throws DukeException {
         // Escape the pipe character as it is a metacharacter in regex
         String[] tokens = encodedString.split(" \\| ");
 
@@ -71,7 +76,12 @@ public class Storage {
         return task;
     }
 
-    // Reads all encoded tasks from the file specified by filePath and returns the TaskList
+    /**
+     *  Reads from a file containing <code>TaskList</code> data, returning a new <code>TaskList</code> object if
+     *  successful.
+     *  @return a new <code>TaskList</code> object with the parsed data from the file.
+     *  @throws DukeException if an error occurred when reading from the file or data was unable to be parsed.
+     */
     public TaskList readTaskList() throws DukeException {
         TaskList tasks = new TaskList();
         while (fileReader.hasNextLine()) {
@@ -80,7 +90,11 @@ public class Storage {
         return tasks;
     }
 
-    // Writes all tasks in the TaskList in an encoded format to the file specified by filePath 
+    /**
+     *  Writes to a file all data of a given <code>TaskList</code> object in an encoded format.
+     *  @param tasks the <code>TaskList</code> object whose data should be persisted to a file.
+     *  @throws IOException if an error occurred when writing to the file.
+     */
     public void writeTaskList(TaskList tasks) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
         int numTasks = tasks.numberOfTasks();

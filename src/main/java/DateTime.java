@@ -110,6 +110,11 @@ public class DateTime {
             }
         }
     }
+
+    public String getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         String[] splitDateTime = dateTime.split(" ");

@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    public LocalDateTime by;
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Deadline(String description, String by) {
@@ -10,7 +12,7 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, DATE_TIME_FORMAT);
     }
 
-    protected Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = LocalDateTime.parse(by);
     }

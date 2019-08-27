@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDateTime at;
+    public LocalDateTime at;
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Event(String description, String at) {
@@ -10,7 +12,7 @@ public class Event extends Task {
         this.at = LocalDateTime.parse(at, DATE_TIME_FORMAT);
     }
 
-    protected Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = LocalDateTime.parse(at);
     }

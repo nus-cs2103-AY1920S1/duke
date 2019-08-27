@@ -1,13 +1,15 @@
-public class Task {
-    protected String description;
-    protected boolean isDone;
+package duke.task;
+
+abstract public class Task {
+    public String description;
+    public boolean isDone;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    protected Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }

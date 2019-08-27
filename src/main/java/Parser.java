@@ -1,3 +1,5 @@
+import duke.task.*;
+
 class Parser {
     public static Command parse(String input) {
         String[] inputs = input.trim().split(" ", 2);

@@ -10,6 +10,8 @@ public abstract class Task {
     }
 
     /**
+     * Gets a user-friendly icon for whether the task is done or not done.
+     *
      * @return A tick symbol when this task is done or a X symbol when this task is not done.
      */
     public String getStatusIcon() {

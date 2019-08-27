@@ -116,12 +116,20 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Convenience method to display the welcome message to the user.
+     */
     public void displayWelcome() {
         printBlock("Hello! I'm Duke"
                 + "\nWhat can I do for you?");
         println();
     }
 
+    /**
+     * Display an error when Duke is unable to read the Tasks stored in a file.
+     *
+     * @param exc The reason for the failed read/parse operation.
+     */
     public void displayLoadingError(Throwable exc) {
         StringJoiner errorMessage = createStringJoiner("Couldn't load previously saved Tasks.");
         errorMessage.add("Duke will start with an empty Task list.");
@@ -134,19 +142,40 @@ public class Ui {
         displayError(errorMessage.toString());
     }
 
+    /**
+     * Convenience method of displaying a DukeException.
+     *
+     * @param exc The DukeException that will be shown to the user.
+     */
     public void displayError(DukeException exc) {
         displayError(exc.getMessage());
     }
 
+    /**
+     * Display the error message to the user.
+     *
+     * @param message The error message that will be shown to the user.
+     */
     public void displayError(String message) {
         printBlock(" ☹ OOPS!!! " + message);
         println();
     }
 
+    /**
+     * Convenience method of displaying a list of tasks to the user.
+     *
+     * @param tasks Tasks to be displayed.
+     */
     public void displayTasks(List<Task> tasks) {
         displayTasks(null, tasks);
     }
 
+    /**
+     * Display a list of tasks to the user with a title.
+     *
+     * @param title The title that is shown before the tasks.
+     * @param tasks Tasks to be displayed.
+     */
     public void displayTasks(String title, List<Task> tasks) {
         StringJoiner taskListDisplay = createStringJoiner(title);
         int listIdx = 1;
@@ -158,12 +187,27 @@ public class Ui {
         printBlock(taskListDisplay.toString());
     }
 
+    /**
+     * Convenience method to inform the user that the
+     * task they had previously selected has been marked done.
+     *
+     * @param title A friendly "marked as done" style message to show to the user.
+     * @param task  The task that was marked as done.
+     */
     public void displaySuccessfullyDoneTask(String title, Task task) {
         StringJoiner successMessage = Ui.createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
         printBlock(successMessage.toString());
     }
 
+    /**
+     * Convenience method to inform the user that
+     * the task they had previously selected has been removed.
+     *
+     * @param title     A friendly "removal successful" style message to show to the user.
+     * @param task      The task that has been removed.
+     * @param tasksLeft The number of tasks the user still has left.
+     */
     public void displaySuccessfullyRemovedTask(String title, Task task, int tasksLeft) {
         StringJoiner successMessage = Ui.createStringJoiner(title);
         successMessage.add("  " + formatTask(task));
@@ -171,6 +215,14 @@ public class Ui {
         printBlock(successMessage.toString());
     }
 
+    /**
+     * Convenience method to inform the user
+     * that they have added a new task to their list.
+     *
+     * @param title     A friendly "task added" style message to show to the user.
+     * @param task      The task that had just been added.
+     * @param tasksLeft The number of tasks the user still has left.
+     */
     public void displaySuccessfullyAddedTask(String title, Task task, int tasksLeft) {
         StringJoiner successMessage = Ui.createStringJoiner(title);
         successMessage.add("  " + formatTask(task));

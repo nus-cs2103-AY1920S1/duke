@@ -17,6 +17,14 @@ public class DateTime {
         this.month = month ;
         this.year = year;
     }
+
+    public int getHour(){
+        return hour;
+    }
+
+    public int getMin(){
+        return minute;
+    }
     
     @Override 
     public String toString(){
@@ -43,6 +51,6 @@ public class DateTime {
     }
 
     public String toFileString(){
-        return date + "/" + month + "/" + year + "/" +hour + "/"+ minute ;
+        return date + " " + month + " " + year + " " +hour + " "+ minute ;
     }
 }

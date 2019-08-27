@@ -23,10 +23,10 @@ class DeadlinesTask extends Task{
     public String toFileFormat(){
         String doneString;
         if(super.status){
-            doneString = "[✓]";
+            doneString = "1";
         }else{
-            doneString = "[X]";
+            doneString = "0";
         }
-        return "T|" +doneString + super.message +"/by "+ endingDateTime.toFileString() + "\n";
+        return "D|" +doneString + "|"+ super.message+ "|" + endingDateTime.toFileString() + "\n";
     }
 }

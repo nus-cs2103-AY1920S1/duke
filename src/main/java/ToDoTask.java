@@ -18,10 +18,10 @@ class ToDoTask extends Task{
     public String toFileFormat(){
         String doneString;
         if(super.status){
-            doneString = "[✓]";
+            doneString = "1";
         }else{
-            doneString = "[X]";
+            doneString = "0";
         }
-        return "T|" +doneString + super.message + "\n";
+        return "T|" +doneString +"|" + super.message + "\n";
     }
 }

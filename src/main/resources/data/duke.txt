@@ -1,3 +1,6 @@
-T|[X]read book
-T|[X]project meeting/at 6/Aug/2019/14/0 6/Aug/2019/16/0
-T|[X]join sports clubT
+T|0|read book
+D|1|return book|6 June 2019 14 0
+E|0|project meeting|6 Aug 2019 14 0 16 0
+T|0|join sports club
+E|0|project meeting |3 oct 2019 18 0 19 0
+D|0|return book |2 aug 2018 18 0

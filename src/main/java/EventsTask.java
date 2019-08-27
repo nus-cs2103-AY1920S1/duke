@@ -25,10 +25,10 @@ class EventsTask extends Task{
     public String toFileFormat(){
         String doneString;
         if(super.status){
-            doneString = "[✓]";
+            doneString = "1";
         }else{
-            doneString = "[X]";
+            doneString = "0";
         }
-        return "T|" +doneString + super.message+ "/at " + startingDateTime.toFileString() +" "+ endingDateTime.toFileString() + "\n";
+        return "E|" +doneString + "|"+ super.message+ "|" + startingDateTime.toFileString() +" "+ endingDateTime.getHour() + " " + endingDateTime.getMin() + "\n";
     }
 }

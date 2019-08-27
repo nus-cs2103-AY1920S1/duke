@@ -3,7 +3,7 @@ package slave.elements;
 /**
  * A class that formats strings to be printed
  */
-public class Formatter {
+class Formatter {
 
     final private static String HORIZONTAL_LINE = "    ____________________________________________________________";
     final private static String INDENTATION = "     ";
@@ -13,17 +13,16 @@ public class Formatter {
      * @param text message to be formatted
      * @return Formatted message
      */
-    public static String formatMessage(String text){
-        String formattedMessage =  HORIZONTAL_LINE + "\n" +
+    static String formatMessage(String text) {
+        return HORIZONTAL_LINE + "\n" +
                 INDENTATION + text + "\n" +
                 HORIZONTAL_LINE + "\n";
-        return formattedMessage;
     }
 
     /**
      * Prints a Line
      */
-    public static void printLine(){
+    static void printLine() {
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -32,7 +31,7 @@ public class Formatter {
      * @param text Text to be indented
      * @return Indented text
      */
-    public static String indentLine(String text){
+    static String indentLine(String text) {
         return INDENTATION + text;
     }
 

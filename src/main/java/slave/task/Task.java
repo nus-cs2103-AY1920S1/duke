@@ -4,17 +4,18 @@ package slave.task;
  * Abstract class which represents a task
  */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
-    protected int id;
-    protected TaskType type;
+
+    private String description;
+    private boolean isDone;
+    private int id;
+    TaskType type;
 
     /**
      * Constructor for task
      * @param description task description
      * @param id task id
      */
-    public Task(String description, int id){
+    public Task(String description, int id) {
         this.description = description;
         this.isDone = false;
         this.id = id;
@@ -23,7 +24,7 @@ public abstract class Task {
     /**
      * Decrement id of task
      */
-    public void decrementId(){
+    public void decrementId() {
         this.id--;
     }
 
@@ -39,7 +40,7 @@ public abstract class Task {
      * getter method for task type
      * @return task type
      */
-    public TaskType getType(){
+    public TaskType getType() {
         return this.type;
     }
 
@@ -47,7 +48,7 @@ public abstract class Task {
      * getter method for task description
      * @return task description
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
@@ -55,7 +56,7 @@ public abstract class Task {
      * getter method for task date
      * @return task date
      */
-    public String getDate(){
+    public String getDate() {
         return "";
     }
 
@@ -63,7 +64,7 @@ public abstract class Task {
      * getter method for appropriate status icon to represent whether a task has been done
      * @return Corresponding status icon
      */
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         return (isDone ? "Done" : "X");
     }
 
@@ -78,7 +79,7 @@ public abstract class Task {
     /**
      * setter method for task to be done
      */
-    public void setDone(){
+    public void setDone() {
         this.isDone = true;
     }
 
@@ -86,7 +87,7 @@ public abstract class Task {
      * Converts task to an appropriate String representation with the status
      * @return formatted string
      */
-    public String toString(){
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 

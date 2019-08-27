@@ -8,7 +8,7 @@ public class MissingTaskException extends DukeException {
     /**
      * Constructor for MissingTaskException
      */
-    public MissingTaskException(){
+    public MissingTaskException() {
         super("Task is missing! Please specify the task!");
     }
 }

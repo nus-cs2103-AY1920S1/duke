@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
     /**
      * Constructor for exit command
      */
-    public ExitCommand(){
+    public ExitCommand() {
         this.commandType = CommandType.EXIT;
     }
 
@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
      * @param ui user interface
      */
     @Override
-    public void execute(TaskList taskList, Ui ui){
+    public void execute(TaskList taskList, Ui ui) {
         ui.showByeMessage();
     }
 }

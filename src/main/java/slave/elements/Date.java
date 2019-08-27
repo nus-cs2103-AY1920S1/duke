@@ -8,28 +8,29 @@ import slave.exception.InvalidDateException;
  */
 public class Date {
 
-    String dateFormat;
-    String time;
-    String timeFormat;
-    String hour;
-    String minute;
+    private String dateFormat;
+    private String time;
+    private String timeFormat;
 
-    int day;
-    int month;
-    int year;
+    private int day;
+    private int month;
+    private int year;
 
     /**
      * Helper Arrays for suffixes and month for each day or hour or month, corresponds to index
      */
-    static String[] timeSuffixes = {"am", "am", "am", "am", "am", "am", "am", "am", "am", "am", "am", "am",
+    private static String[] timeSuffixes = {"am", "am", "am", "am", "am", "am", "am", "am", "am", "am", "am", "am",
             "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm", "pm"};
-    static String[] timeHourSuffixes = {"12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
+
+    private static String[] timeHourSuffixes = {"12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
             "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
-    static String[] daySuffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
+
+    private static String[] daySuffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
             "th", "th", "th", "th", "th", "th", "th", "th", "th", "th",
             "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th",
             "th", "st" };
-    static String[] monthString = { "Placeholder", "January", "February", "March", "April", "May",
+
+    private static String[] monthString = { "Placeholder", "January", "February", "March", "April", "May",
             "June", "July", "August", "September", "October", "November", "December" };
 
     /**
@@ -48,16 +49,20 @@ public class Date {
      * To format the date
      * @throws DukeException throws if the date / time given is invalid
      */
-    void format() throws DukeException {
+    private void format() throws DukeException {
         try {
             String[] splitDate = this.dateFormat.split("/");
+
             this.day = Integer.parseInt(splitDate[0]);
             this.month = Integer.parseInt(splitDate[1]);
             this.year = Integer.parseInt(splitDate[2]);
-            this.hour = time.substring(0, 2);
-            this.minute = time.substring(2);
-            int indexHour = Integer.parseInt(this.hour);
-            this.timeFormat = timeHourSuffixes[indexHour] + "." + this.minute + timeSuffixes[indexHour];
+
+            String hour = time.substring(0, 2);
+            String minute = time.substring(2);
+
+            int indexHour = Integer.parseInt(hour);
+            this.timeFormat = timeHourSuffixes[indexHour] + "." + minute + timeSuffixes[indexHour];
+
         } catch (ArrayIndexOutOfBoundsException e){
             throw new InvalidDateException();
         }
@@ -79,6 +84,4 @@ public class Date {
         }
         return result;
     }
-
-
 }

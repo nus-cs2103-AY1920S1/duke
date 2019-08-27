@@ -11,7 +11,7 @@ public class ListCommand extends Command {
     /**
      * Constructor for list command
      */
-    public ListCommand(){
+    public ListCommand() {
         this.commandType = CommandType.LIST;
     }
 

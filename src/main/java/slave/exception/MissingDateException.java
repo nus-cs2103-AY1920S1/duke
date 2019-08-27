@@ -7,7 +7,7 @@ public class MissingDateException extends DukeException {
     /**
      * Constructor for MissingDateException
      */
-    public MissingDateException(){
+    public MissingDateException() {
         super("Date is missing!");
     }
 }

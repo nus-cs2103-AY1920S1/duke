@@ -1,6 +1,7 @@
 package slave.elements;
 
 import slave.exception.DukeException;
+
 import slave.task.Task;
 
 import java.util.ArrayList;
@@ -11,13 +12,13 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> taskList;
-    protected Storage storage;
+    private Storage storage;
 
     /**
      * Constructor to initialise TaskList
      * @param storage Storage class where data is stored
      */
-    public TaskList(Storage storage){
+    public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
         this.storage = storage;
     }
@@ -27,7 +28,7 @@ public class TaskList {
      * @param list list to initialise with
      * @param storage Storage class where data is stored
      */
-    public TaskList(ArrayList<Task> list, Storage storage){
+    public TaskList(ArrayList<Task> list, Storage storage) {
         this.taskList = list;
         this.storage = storage;
     }
@@ -46,7 +47,7 @@ public class TaskList {
      * Getter method for list
      * @return An arraylist of tasks
      */
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return this.taskList;
     }
 
@@ -55,7 +56,7 @@ public class TaskList {
      * @param index index of task to be retrieved
      * @return Task of the corresponding index
      */
-    public Task getTaskByIndex(int index){
+    public Task getTaskByIndex(int index) {
         return this.taskList.get(index - 1);
     }
 
@@ -105,7 +106,7 @@ public class TaskList {
      * Reorders index of tasks accordingly after deletion/removal, done by decrementing by 1
      * @param index index to start reordering
      */
-    private void reorderIndex(int index){
+    private void reorderIndex(int index) {
         if (this.taskList.size() == 0){
             return;
         }

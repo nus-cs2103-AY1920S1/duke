@@ -10,8 +10,7 @@ public class ToDo extends Task {
      * @param description description of to-do task
      * @param id id of to-do task
      */
-    public ToDo(String description, int id){
-
+    public ToDo(String description, int id) {
         super(description, id);
         this.type = TaskType.TODO;
     }

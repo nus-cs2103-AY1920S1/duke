@@ -8,7 +8,7 @@ public class NoStorageFileDetectedException extends DukeException {
     /**
      * Constructor for NoStorageFileDetectedException
      */
-    public NoStorageFileDetectedException(){
+    public NoStorageFileDetectedException() {
         super("No storage file detected!");
     }
 }

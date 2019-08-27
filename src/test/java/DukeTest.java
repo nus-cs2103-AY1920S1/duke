@@ -11,7 +11,7 @@ import slave.exception.*;
 /**
  * Test method for Duke
  */
-public class DukeTest {
+class DukeTest {
 
     /**
      * Test if the date has been converted properly as intended
@@ -74,42 +74,42 @@ public class DukeTest {
         try {
             Parser.parse(command1);
             c1 = true;
-        } catch (MissingDescriptionException e1) {
+        } catch (MissingDescriptionException ignored) {
         }
         try {
             Parser.parse(command2);
             c2 = true;
-        } catch (MissingDescriptionException e2) {
+        } catch (MissingDescriptionException ignored) {
         }
         try {
             Parser.parse(command3);
             c3 = true;
-        } catch (MissingDescriptionException e3) {
+        } catch (MissingDescriptionException ignored) {
         }
         try {
             Parser.parse(command4);
             c4 = true;
-        } catch (MissingTaskException e4) {
+        } catch (MissingTaskException ignored) {
         }
         try {
             Parser.parse(command5);
             c5 = true;
-        } catch (MissingTaskException e5) {
+        } catch (MissingTaskException ignored) {
         }
         try {
             Parser.parse(command6);
             c6 = true;
-        } catch (MissingDateException e6) {
+        } catch (MissingDateException ignored) {
         }
         try {
             Parser.parse(command7);
             c7 = true;
-        } catch (MissingDateException e7) {
+        } catch (MissingDateException ignored) {
         }
         try {
             Parser.parse(command8);
             c8 = true;
-        } catch (InvalidDateException e8 ) {
+        } catch (InvalidDateException ignored) {
         }
 
         assertFalse(c1);

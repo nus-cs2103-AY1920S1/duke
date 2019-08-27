@@ -2,12 +2,14 @@ package slave.command;
 
 import slave.elements.TaskList;
 import slave.elements.Ui;
+
 import slave.exception.DukeException;
 
 /**
  * abstract class Command that represents an action by the user
  */
 public abstract class Command {
+
     CommandType commandType;
 
     /**
@@ -25,5 +27,4 @@ public abstract class Command {
      * @throws DukeException throws exception with error message in case anything goes wrong
      */
     public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
-
 }

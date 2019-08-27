@@ -2,21 +2,22 @@ package slave.command;
 
 import slave.elements.TaskList;
 import slave.elements.Ui;
+
 import slave.exception.DukeException;
 import slave.exception.InvalidCommandException;
 
 /**
  * A command representing null
  */
-public class NullCommand extends Command{
+public class NullCommand extends Command {
 
-    String command;
 
+    private String command;
     /**
      * Constructor for null command
      * @param command Command that is illegal / invalid
      */
-    public NullCommand(String command){
+    public NullCommand(String command) {
         this.commandType = CommandType.NULL;
         this.command = command;
     }

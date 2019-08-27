@@ -8,7 +8,7 @@ public class MissingDescriptionException extends DukeException {
     /**
      * Constructor for MissingDescriptionException
      */
-    public MissingDescriptionException(){
+    public MissingDescriptionException() {
         super("Task has no description!");
     }
 }

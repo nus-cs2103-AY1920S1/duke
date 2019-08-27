@@ -4,7 +4,9 @@ package slave.task;
  * Class representing a Event task
  */
 public class Event extends Task {
-    protected String at;
+
+
+    private String at;
 
     /**
      * Constructor for Event task
@@ -12,7 +14,7 @@ public class Event extends Task {
      * @param id id of event task
      * @param at event date
      */
-    public Event(String description, int id, String at){
+    public Event(String description, int id, String at) {
         super(description, id);
         this.at = at;
         this.type = TaskType.EVENT;
@@ -23,7 +25,7 @@ public class Event extends Task {
      * @return date of event task
      */
     @Override
-    public String getDate(){
+    public String getDate() {
         return this.at;
     }
 

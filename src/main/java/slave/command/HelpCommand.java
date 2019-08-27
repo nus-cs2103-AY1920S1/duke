@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
     /**
      * Constructor for help command
      */
-    public HelpCommand(){
+    public HelpCommand() {
         this.commandType = CommandType.HELP;
     }
 
@@ -21,7 +21,7 @@ public class HelpCommand extends Command {
      * @param ui user interface
      */
     @Override
-    public void execute(TaskList taskList, Ui ui){
+    public void execute(TaskList taskList, Ui ui) {
         ui.showHelpMessage();
     }
 }

@@ -5,6 +5,7 @@ import slave.task.Deadline;
 import slave.task.Event;
 import slave.task.Task;
 import slave.task.ToDo;
+
 import java.util.Scanner;
 
 /**
@@ -12,12 +13,12 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Prints welcome Message on application start-up
      */
-    public void showWelcomeMessage(){
+    public void showWelcomeMessage() {
         String message = "Hello! I'm Slave! Your very own productivity application.\n" +
                 "     What can I do for you? Type 'help' for commands!";
         System.out.println(Formatter.formatMessage(message));
@@ -26,7 +27,7 @@ public class Ui {
     /**
      * Displays goodbye message when exiting program
      */
-    public void showByeMessage(){
+    public void showByeMessage() {
         String message = "Bye! Thanks for using me! Will be right here when you need me.";
         System.out.println(Formatter.formatMessage(message));
     }
@@ -34,7 +35,7 @@ public class Ui {
     /**
      * Displays help message when prompted
      */
-    public void showHelpMessage(){
+    public void showHelpMessage() {
         String message = "Commands:\n" +
                 "     todo <task description> : To add task to list\n" +
                 "     event <task description> /at <date> : To add event to list\n" +
@@ -68,7 +69,7 @@ public class Ui {
     /**
      * prints clear command message
      */
-    public void printClearCommand(){
+    public void printClearCommand() {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Clearing List..."));
         Formatter.printLine();
@@ -79,7 +80,7 @@ public class Ui {
      * @param deadlineTask deadline task to be added
      * @param taskList current task list
      */
-    public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList){
+    public void printAddDeadlineCommand(Deadline deadlineTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + deadlineTask));
@@ -92,7 +93,7 @@ public class Ui {
      * @param eventTask event task to be added
      * @param taskList current task list
      */
-    public void printAddEventCommand(Event eventTask, TaskList taskList){
+    public void printAddEventCommand(Event eventTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + eventTask));
@@ -100,12 +101,14 @@ public class Ui {
         Formatter.printLine();
     }
 
+
     /**
      * prints add to-do command
      * @param toDoTask to-do task to be added
      * @param taskList current task list
      */
-    public void printAddToDoCommand(ToDo toDoTask, TaskList taskList){
+
+    public void printAddToDoCommand(ToDo toDoTask, TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Got it. I've added this task:"));
         System.out.println(Formatter.indentLine("  " + toDoTask));
@@ -129,9 +132,8 @@ public class Ui {
     /**
      * prints done command
      * @param task task to be set as done
-     * @param taskList current task list
      */
-    public void printDoneCommand(Task task, TaskList taskList){
+    public void printDoneCommand(Task task) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Nice! I've marked this task as done:"));
         System.out.println(Formatter.indentLine("  " + task));
@@ -142,7 +144,7 @@ public class Ui {
      * prints a list of current tasks
      * @param taskList current task list
      */
-    public void printListCommand(TaskList taskList){
+    public void printListCommand(TaskList taskList) {
         Formatter.printLine();
         System.out.println(Formatter.indentLine("Here are the tasks in your list:"));
         for (Task task: taskList.getList()){

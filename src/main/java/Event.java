@@ -16,6 +16,6 @@ public class Event extends Task {
 
     @Override
     public String writeToFile() {
-        return super.writeToFile() + "|" + at.toString();
+        return super.writeToFile() + "|" + at.getRawForm();
     }
 }

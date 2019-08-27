@@ -7,10 +7,12 @@ public class DateTime {
     private Integer year;
     private Integer hours;
     private Integer minutes;
-
+    private String rawForm;
+    
     public DateTime(String date) {
+        rawForm = date;
         String[] dateComponents = date.split(" ");
-
+        
         String dayComponent = dateComponents[0];
         String timeComponent = dateComponents[1];
 
@@ -25,6 +27,10 @@ public class DateTime {
         String minutesString = timeComponent.substring(2);
         this.hours = Integer.parseInt(hoursString);
         this.minutes = Integer.parseInt(minutesString);
+    }
+    
+    public String getRawForm() {
+        return rawForm;
     }
 
     //Adds the "st", "nd", "rd" ordinals based on numerical value of day

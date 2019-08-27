@@ -10,10 +10,22 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
     String textToFind;
 
+    /**
+     * Creates a FindCommand object.
+     *
+     * @param textToFind Text to search for.
+     */
     public FindCommand(String textToFind){
         this.textToFind = textToFind;
     }
 
+    /**
+     * Executes the current command.
+     *
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @param taskList TaskList object.
+     */
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         ArrayList<Task> taskArrList = taskList.getTaskList();
 

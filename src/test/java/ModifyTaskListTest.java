@@ -24,16 +24,16 @@ public class ModifyTaskListTest {
         String expectedOutput2 = "[D][✓] finish Project (by: Sat Apr 20 00:00:00 SGT 2019)";
         String expectedOutput3 = "[E][✘] game event (at: Wed Dec 23 00:00:00 SGT 2020)";
 
-        inputParser.actionDeterminer(input1);
-        inputParser.actionDeterminer(input2);
-        inputParser.actionDeterminer(input3);
-        inputParser.actionDeterminer(input4);
-        inputParser.actionDeterminer(input5);
-        inputParser.actionDeterminer(input6);
-        inputParser.actionDeterminer(input7);
-        inputParser.actionDeterminer(input8);
-        inputParser.actionDeterminer(input9);
-        inputParser.actionDeterminer(input10);
+        inputParser.determineAction(input1);
+        inputParser.determineAction(input2);
+        inputParser.determineAction(input3);
+        inputParser.determineAction(input4);
+        inputParser.determineAction(input5);
+        inputParser.determineAction(input6);
+        inputParser.determineAction(input7);
+        inputParser.determineAction(input8);
+        inputParser.determineAction(input9);
+        inputParser.determineAction(input10);
 
         assertEquals(expectedOutput1, taskList.get(0).toString());
         assertEquals(expectedOutput2, taskList.get(1).toString());

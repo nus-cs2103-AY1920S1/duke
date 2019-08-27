@@ -20,13 +20,13 @@ public class InputParserTest {
         String input6 = "deadline will never surface /by 22/11/2039";
         String input7 = "more random nonsense";
 
-        inputParser.actionDeterminer(input1);
-        inputParser.actionDeterminer(input2);
-        inputParser.actionDeterminer(input3);
-        inputParser.actionDeterminer(input4);
-        inputParser.actionDeterminer(input5);
-        inputParser.actionDeterminer(input6);
-        inputParser.actionDeterminer(input7);
+        inputParser.determineAction(input1);
+        inputParser.determineAction(input2);
+        inputParser.determineAction(input3);
+        inputParser.determineAction(input4);
+        inputParser.determineAction(input5);
+        inputParser.determineAction(input6);
+        inputParser.determineAction(input7);
 
         assertEquals(4, taskList.size());
     }

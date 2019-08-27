@@ -9,6 +9,6 @@ class TodoTest {
     @Test
     void testToString() {
         Todo todo = new Todo("A description");
-        assertEquals("[T][✘] A description", todo.toString());
+        assertEquals("[T][\u2718] A description", todo.toString());
     }
 }

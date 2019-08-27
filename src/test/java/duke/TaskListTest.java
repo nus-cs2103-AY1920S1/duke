@@ -55,7 +55,7 @@ class TaskListTest {
         TaskMock taskMock = new TaskMock("");
         tasks.add(taskMock);
         TaskList taskList = new TaskList(tasks);
-        assertEquals("Here are the tasks in your list:\n1.[✓] description",
+        assertEquals("Here are the tasks in your list:\n1.[\u2713] description",
                 taskList.list());
     }
 }

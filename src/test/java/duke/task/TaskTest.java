@@ -27,6 +27,6 @@ class TaskTest {
     @Test
     void testToString() {
         Task task = new Task("description");
-        assertEquals("[✘] description", task.toString());
+        assertEquals("[\u2718] description", task.toString());
     }
 }

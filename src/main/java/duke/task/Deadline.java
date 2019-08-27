@@ -7,6 +7,13 @@ import java.util.Locale;
 public class Deadline extends Task {
 
     private LocalDateTime by;
+
+    /**
+     * Creates a Deadline object.
+     *
+     * @param description Description of task.
+     * @param by Date of task.
+     */
     public Deadline(String description, String by){
         super(description);
 
@@ -15,6 +22,11 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Returns the original date string.
+     *
+     * @return Original date string.
+     */
     public String getDate(){
         return by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
     }

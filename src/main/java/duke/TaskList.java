@@ -8,16 +8,33 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    protected ArrayList<Task> tasks;
 
+    /**
+     * Creates a Tasklist object.
+     *
+     * @param tasks ArrayList of tasks.
+     */
     public TaskList(ArrayList<Task> tasks){
         this.tasks = tasks;
     }
 
+    /**
+     * Returns the task list as an ArrayList.
+     *
+     * @return ArrayList of tasks.
+     */
     public ArrayList<Task> getTaskList(){
         return this.tasks;
     }
 
+    /**
+     * Adds a new task to the list.
+     *
+     * @param description Description of task.
+     * @param type Type of task.
+     * @return Task that was added to the list.
+     */
     public Task add(String description, TaskEnum type){
         // duke.task.Event and duke.task.Deadline default date is based on the system clock
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
@@ -40,6 +57,14 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Adds a new task to the list.
+     *
+     * @param description Description of task.
+     * @param date Date of task.
+     * @param type Type of task.
+     * @return Task that was added to the list.
+     */
     public Task add(String description, String date, TaskEnum type){
         switch(type){
         case TODO:
@@ -60,6 +85,12 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Delete a task from the list.
+     *
+     * @param taskNo Task number as specified on the list.
+     * @return Task that was deleted.
+     */
     public Task delete(int taskNo){
         try {
             if(tasks.size() > 0){
@@ -78,6 +109,12 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Mark a task as completed.
+     *
+     * @param taskNo Task number as specified on the list.
+     * @return Task that was marked completed.
+     */
     public Task done(int taskNo){
         try {
             Task task = tasks.get(taskNo - 1); //Minus 1 because the displayed list starts at 1
@@ -97,6 +134,11 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Returns list of tasks.
+     *
+     * @return List of tasks
+     */
     public String list(){
         String listOutput = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {

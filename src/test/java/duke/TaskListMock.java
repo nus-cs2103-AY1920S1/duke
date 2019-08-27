@@ -33,6 +33,6 @@ public class TaskListMock extends TaskList {
 
     @Override
     public String list(){
-        return "Here are the tasks in your list:\n1.[✓] description";
+        return "Here are the tasks in your list:\n1.[\u2713] description";
     }
 }

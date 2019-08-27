@@ -7,12 +7,24 @@ import duke.task.Task;
 
 public class DoneCommand extends Command {
 
-    int taskNo;
+    private int taskNo;
 
+    /**
+     * Creates a new DoneCommand object.
+     *
+     * @param taskNo Task Number of task.
+     */
     public DoneCommand(int taskNo){
         this.taskNo = taskNo;
     }
 
+    /**
+     * Executes the current command.
+     *
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @param taskList TaskList object.
+     */
     public void execute(Ui ui, Storage storage, TaskList taskList) {
         Task task = taskList.done(taskNo);
 

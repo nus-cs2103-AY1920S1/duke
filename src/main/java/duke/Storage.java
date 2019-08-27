@@ -14,12 +14,22 @@ import java.util.Scanner;
 
 public class Storage {
 
-    String filePath = ""; // Default is "data/duke.txt"
+    private String filePath = ""; // Default is "data/duke.txt"
 
+    /**
+     * Create a storage object.
+     *
+     * @param filePath Specify the location of the file to be saved and loaded from.
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Save the current list to a specified file path on the hard disk.
+     *
+     * @param tasks List to of tasks to be save.
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             String path = this.filePath;
@@ -50,6 +60,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of tasks from the specified file on the hard disk.
+     *
+     * @return List of tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> storage = new ArrayList<>();
         try {

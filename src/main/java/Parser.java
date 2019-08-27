@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Parser {
     // Command templates
     public static final String DONE_TEMPLATE = "done <id>";
@@ -5,6 +9,9 @@ public class Parser {
     public static final String TODO_TEMPLATE = "todo <description>";
     public static final String DEADLINE_TEMPLATE = "deadline <description> /by <date | time>";
     public static final String EVENT_TEMPLATE = "event <description> /by <date | time>";
+
+    // Date parser
+    public static SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public static String parse(TaskList tasks, String command) throws DukeException {
         // Determine the type of command from the first token
@@ -98,7 +105,14 @@ public class Parser {
         if (args.length != 2) {
             throw new DukeIncorrectArgumentsException(2, DEADLINE_TEMPLATE, args.length, command);
         }
-        return tasks.addTask(new Deadline(args[0], args[1]));
+
+        // Attempt to parse the date to construct the Deadline
+        try {
+            Date eventTime = Parser.dateParser.parse(args[1]);
+            return tasks.addTask(new Deadline(args[0], eventTime));
+        } catch (ParseException e) {
+            throw new DukeInvalidArgumentException("date | time", "Date", command);
+        }
     }
 
     public static String parseEvent(TaskList tasks, String command) throws DukeException {
@@ -114,6 +128,13 @@ public class Parser {
         if (args.length != 2) {
             throw new DukeIncorrectArgumentsException(2, EVENT_TEMPLATE, args.length, command);
         }
-        return tasks.addTask(new Event(args[0], args[1]));
+
+        // Attempt to parse the date to construct the Event
+        try {
+            Date eventTime = Parser.dateParser.parse(args[1]);
+            return tasks.addTask(new Event(args[0], eventTime));
+        } catch (ParseException e) {
+            throw new DukeInvalidArgumentException("date | time", "Date", command);
+        }
     }
 }

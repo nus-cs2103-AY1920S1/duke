@@ -17,6 +17,7 @@ public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
     private static final String ADD_MESSAGE = "Got it. I've added this task:";
+    private static final String SEARCH_MESSAGE = "Here are the matching tasks in your list:";
     private static final String DELETE_MESSAGE = "Noted. I've removed this task:";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
@@ -53,7 +54,7 @@ public class Ui {
         showToUser(ADD_MESSAGE,
                 task.toString(),
                 (taskCount == 1
-                    ?"Now you have 1 task in the list."
+                    ? "Now you have 1 task in the list."
                     : String.format("Now you have %d tasks in the list.", taskCount)));
     }
 
@@ -68,6 +69,11 @@ public class Ui {
                 (taskCount == 1
                     ? "Now you have 1 task in the list."
                     : String.format("Now you have %d tasks in the list.", taskCount)));
+    }
+
+    public void showSearchList(TaskList searchList) {
+        showToUser(SEARCH_MESSAGE);
+        showTaskList(searchList);
     }
 
     public void showTaskList(TaskList taskList) {

@@ -1,8 +1,13 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
-import duke.task.*;
+import duke.exception.DukeIoException;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Todo;
+import duke.task.TaskFactory;
+import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +22,9 @@ import java.util.Arrays;
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
-import static duke.task.TaskType.*;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.DEADLINE;
+import static duke.task.TaskType.EVENT;
 
 public class Storage {
     private Path path;
@@ -26,7 +33,7 @@ public class Storage {
         this.path = Paths.get(uri);
     }
 
-    public TaskList readFromDisk() throws DukeIOException {
+    public TaskList readFromDisk() throws DukeIoException {
         Charset charset = Charset.forName("ISO-8859-1");
         TaskList taskList = new TaskList();
         try {
@@ -48,7 +55,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
         return taskList;
     }
@@ -81,7 +88,7 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
         return taskList;
     }

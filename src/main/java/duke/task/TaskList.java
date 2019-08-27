@@ -19,21 +19,34 @@ public class TaskList {
 
     public Task delete(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such duke.task index.");
+            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
         }
         return tasks.remove(idx);
     }
 
     public Task get(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such duke.task index.");
+            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
         }
         return tasks.get(idx);
     }
 
+    // TODO: the user should be able to edit the returned list items via their printed index.
+    public TaskList find(String keyword) {
+        TaskList newList = new TaskList();
+        for (Task task: this.getTaskList()) {
+            if (task != null) {
+                if(task.getDescription().contains(keyword)) {
+                    newList.add(task);
+                }
+            }
+        }
+        return newList;
+    }
+
     public Task markAsDone(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such duke.task index.");
+            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
         }
         Task task = tasks.get(idx);
         task.markAsDone();

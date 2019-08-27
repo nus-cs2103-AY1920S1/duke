@@ -1,18 +1,45 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-//Test comment
+
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<Task>();
-    /*
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private File state = new File("data/state.txt");
+
+    public void writeFileContents(String filePath) {
+        try {
+            Scanner sc = new Scanner(state);
+            while (sc.hasNextLine()) {
+                parseLine(sc.nextLine());
+            }
+            sc.close();
+        } catch(IOException ex){
+            System.out.println("IO exception caught!");
+        } catch(ParseFileException ex) {
+            System.out.println("Exception while reading contents of state file");
+        }
     }
-    */
+    public void parseLine(String line) throws ParseFileException {
+        if(line.equals("")) {
+            return;
+        }
+        String[] splited = line.split("//");
+        if(splited[0].equals("T")) {
+            ToDo curr_task = new ToDo(splited[1], Boolean.parseBoolean(splited[2]));
+            tasks.add(curr_task);
+        } else if(splited[0].equals("D")) {
+            Deadline curr_task = new Deadline(splited[1], Boolean.parseBoolean(splited[2]), splited[3]);
+            tasks.add(curr_task);
+        } else if(splited[0].equals("E")) {
+            Event curr_task = new Event(splited[1], Boolean.parseBoolean(splited[2]), splited[3]);
+            tasks.add(curr_task);
+        } else {
+            throw new ParseFileException("Exception while reading contents of state file!");
+        }
+    }
     public void introduction() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -21,6 +48,10 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
     public void list() {
+        if(this.tasks.size() == 0) {
+            System.out.println("No tasks!");
+            return;
+        }
         System.out.println("Here are the tasks in your list:");
         for(int i = 1; i <= this.tasks.size(); i++) {
             Task curr_task = this.tasks.get(i-1);
@@ -32,23 +63,102 @@ public class Duke {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + task);
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
+        try {
+            updateState();
+        } catch (IOException ex) {
+            System.out.println("IO exception caught!");
+        } catch(UpdateStateException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     public void done(int task_num) {
         Task curr_task = this.tasks.get(task_num - 1);
         curr_task.setDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("  " + curr_task);
+        try {
+            updateState();
+        } catch (IOException ex) {
+            System.out.println("IO exception caught!");
+        } catch(UpdateStateException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     public void delete(int task_num) {
+        if(task_num > this.tasks.size()) {
+            System.out.println("No task at that number! (Deletion unsuccessful)");
+            return;
+        }
         Task curr_task = this.tasks.get(task_num - 1);
         System.out.println("Noted. I've removed this task: ");
         System.out.println("  " + curr_task);
         this.tasks.remove(task_num - 1);
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
+        try {
+            updateState();
+        } catch (IOException ex) {
+            System.out.println("IO exception caught!");
+        } catch(UpdateStateException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-    public static void main(String[] args) throws DukeException{
-        Scanner sc = new Scanner(System.in);
+    public void updateState() throws IOException, UpdateStateException {
+        FileWriter fw = new FileWriter("data/state.txt");
+        StringBuilder textToAddSB = new StringBuilder();
+        for(Task curr_task:tasks) {
+            if(curr_task instanceof ToDo) {
+                textToAddSB.append(fileUpdateToDo((ToDo) curr_task));
+                textToAddSB.append(System.lineSeparator());
+            } else if(curr_task instanceof Deadline) {
+                textToAddSB.append(fileUpdateDeadline((Deadline) curr_task));
+                textToAddSB.append(System.lineSeparator());
+            } else if(curr_task instanceof Event) {
+                textToAddSB.append(fileUpdateEvent((Event) curr_task));
+                textToAddSB.append(System.lineSeparator());
+            } else {
+                throw new UpdateStateException("Exception while updating state!");
+            }
+        }
+        fw.write(textToAddSB.toString());
+        fw.close();
+    }
+    public String fileUpdateToDo(ToDo todo) {
+        StringBuilder SB =  new StringBuilder();
+        SB.append("T//");
+        SB.append(todo.getName());
+        SB.append("//");
+        SB.append(todo.isDone);
+        return SB.toString();
+    }
+    public String fileUpdateDeadline(Deadline deadline) {
+        StringBuilder SB =  new StringBuilder();
+        SB.append("D//");
+        SB.append(deadline.getName());
+        SB.append("//");
+        SB.append(deadline.isDone);
+        SB.append("//");
+        SB.append(deadline.getBy());
+        return SB.toString();
+    }
+    public String fileUpdateEvent(Event event) {
+        StringBuilder SB =  new StringBuilder();
+        SB.append("E//");
+        SB.append(event.getName());
+        SB.append("//");
+        SB.append(event.isDone);
+        SB.append("//");
+        SB.append(event.getAt());
+        return SB.toString();
+    }
+    public static void main(String[] args) throws DukeException, IOException {
         Duke duke = new Duke();
+        if (duke.state.createNewFile()) {
+            System.out.println("No file detected, state file created!");
+        } else {
+            System.out.println("State file detected, loading state!");
+            duke.writeFileContents("data/state.txt");
+        }
+        Scanner sc = new Scanner(System.in);
         duke.introduction();
         try {
             while(sc.hasNextLine()) {
@@ -72,14 +182,16 @@ public class Duke {
                     ToDo curr_task = new ToDo(command.replaceFirst("todo ", ""));
                     duke.add(curr_task);
                 } else if (command.startsWith("deadline ")) {
-                    String[] splited = command.split(" /by ");
-                    splited[0].replaceFirst("deadline ", "");
+                    String remove_command = command.replaceFirst("deadline ", "");
+                    String[] splited = remove_command.split(" /by ");
                     Deadline curr_task = new Deadline(splited[0], splited[1]);
+                    System.out.println("Debug: " + curr_task.getName());
                     duke.add(curr_task);
                 } else if (command.startsWith("event ")) {
-                    String[] splited = command.split(" /at ");
-                    splited[0].replaceFirst("event ", "");
+                    String remove_command = command.replaceFirst("event ", "");
+                    String[] splited = remove_command.split(" /at ");
                     Event curr_task = new Event(splited[0], splited[1]);
+                    System.out.println("Debug: " + curr_task.getName());
                     duke.add(curr_task);
                 } else if (command.startsWith("delete ")) {
                     String[] splited = command.split(" ");
@@ -92,13 +204,7 @@ public class Duke {
                     throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-        } catch(InvalidInputException ex) {
-            System.out.println(ex.getMessage());
-        } catch(EmptyToDoDescriptionException ex) {
-            System.out.println(ex.getMessage());
-        } catch(DoneParameterException ex) {
-            System.out.println(ex.getMessage());
-        } catch(DeleteParameterException ex) {
+        } catch(InvalidInputException | EmptyToDoDescriptionException | DoneParameterException | DeleteParameterException ex) {
             System.out.println(ex.getMessage());
         }
     }

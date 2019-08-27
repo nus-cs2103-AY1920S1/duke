@@ -1,6 +1,5 @@
 public class Duke {
 	private static final String taskListArchivalPath = "data/duke.txt";
-
 	private Storage storage;
 	private TaskList tasks;
 	private Ui ui;

@@ -15,14 +15,6 @@ public class Ui {
 		System.out.println("Welcome to Duke. What can I do for you today?");
 	}
 
-	public String next() {
-		return scanner.next();
-	}
-
-	public String nextLine() {
-		return scanner.nextLine();
-	}
-
 	public void displayLine(String toShow) {
 		System.out.println(toShow);
 	}

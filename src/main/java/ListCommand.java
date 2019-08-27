@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class ListCommand extends Command {
 	public ListCommand() {
 		super();

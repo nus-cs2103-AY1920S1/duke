@@ -9,8 +9,8 @@ public class AddCommand extends Command {
 		this.commandType = command;
 	}
 
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-		if(!inFullCommandScanner.hasNext()) {
+	public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+		if (!inFullCommandScanner.hasNext()) {
 			throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
 		} else {
 			if (commandType.equals("todo")) {
@@ -22,7 +22,7 @@ public class AddCommand extends Command {
 				StringBuilder deadLineTaskDateTime = new StringBuilder();
 				String currentWord;
 				Boolean reachedDateTimePortion = false;
-				while(inFullCommandScanner.hasNext()) {
+				while (inFullCommandScanner.hasNext()) {
 					currentWord = inFullCommandScanner.next();
 					if (currentWord.equals("/by")) {
 						//set switch to true but do not append
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
 				StringBuilder eventDateTime = new StringBuilder();
 				String currentWord;
 				Boolean reachedDateTimePortion = false;
-				while(inFullCommandScanner.hasNext()) {
+				while (inFullCommandScanner.hasNext()) {
 					currentWord = inFullCommandScanner.next();
 					if (currentWord.equals("/at")) {
 						//set switch to true but do not append

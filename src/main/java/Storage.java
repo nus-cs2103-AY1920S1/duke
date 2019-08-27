@@ -34,19 +34,6 @@ public class Storage {
 		}
 	}
 
-	private static void updateArchivalFile(File file, ArrayList<Task> taskArrayList) {
-		FileWriter fileWriter;
-		try {
-			fileWriter = new FileWriter(file);
-			for (Task task : taskArrayList) {
-				fileWriter.write(task.getArchivalText() + "\n");
-			}
-			fileWriter.close();
-		} catch (IOException ex) {
-			System.out.println(ex.getMessage());
-		}
-	}
-
 	private static ArrayList<Task> readAndUpdateArchivalList(ArrayList<Task> taskArrayList, File file) throws DukeException{
 		Scanner fileScanner;
 		try {

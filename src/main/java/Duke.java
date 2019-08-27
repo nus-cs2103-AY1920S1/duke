@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
@@ -32,6 +33,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        File file = new File("data");
+        file.mkdir();
         new Duke("data/tasks.txt").run();
     }
 }

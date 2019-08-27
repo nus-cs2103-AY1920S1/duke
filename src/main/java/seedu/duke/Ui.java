@@ -300,7 +300,7 @@ public class Ui {
      */
     public void showParseError() {
         System.out.println("\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
-                "and time in 24hr format, separated by a space.\n");
+                "and time in 24hr format or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n");
     }
 
     /**

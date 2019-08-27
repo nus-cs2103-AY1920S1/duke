@@ -32,7 +32,7 @@ public class ParserTest {
     @Test
     public void test1() {
        try {
-           assertEquals("[D][\u2718] abc (by: 24/08/2019 18.00 PM)",
+           assertEquals("[D][\u2718] abc (by: 24 AUGUST 2019 6.00 PM)",
                    Parser.readInFileLine("D | 0 | abc | 24/08/2019 1800").toString());
        } catch (Exception e) {
             assertEquals(1,2);
@@ -42,7 +42,7 @@ public class ParserTest {
     @Test
     public void test2() {
         try {
-            assertEquals("[D][\u2713] abc (by: 24/08/2019 18.00 PM)",
+            assertEquals("[D][\u2713] abc (by: 24 AUGUST 2019 6.00 PM)",
                     (Parser.readInFileLine("D | 1 | abc | 24/08/2019 1800")).toString());
         } catch (Exception e) {
             assertEquals(1,2);
@@ -87,7 +87,7 @@ public class ParserTest {
     @Test
     public void test10() {
         try {
-            assertEquals("[E][\u2718] efgh (at: 24/08/2019 16.00 PM)",
+            assertEquals("[E][\u2718] efgh (at: 24 AUGUST 2019 4.00 PM)",
                     Parser.createEvent("event efgh /at 24/08/2019 1600").toString());
         } catch (Exception e) {
             System.out.println("failed test");
@@ -97,7 +97,7 @@ public class ParserTest {
     @Test
     public void test11() {
         try {
-            assertEquals("[E][\u2718] help (at: 30/08/2019 16.00 PM)",
+            assertEquals("[E][\u2718] help (at: 30 AUGUST 2019 4.00 PM)",
                     Parser.createEvent("event help /at 30/08/2019 1600").toString());
         } catch (Exception e) {
             System.out.println("failed test");
@@ -117,7 +117,7 @@ public class ParserTest {
     @Test
     public void test14() {
         try {
-            assertEquals("[D][\u2718] help (by: 30/08/2019 16.00 PM)",
+            assertEquals("[D][\u2718] help (by: 30 AUGUST 2019 4.00 PM)",
                     Parser.createDeadline("deadline help /by 30/08/2019 1600")
                             .toString());
         } catch (Exception e) {

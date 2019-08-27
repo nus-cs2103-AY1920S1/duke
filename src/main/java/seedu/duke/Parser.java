@@ -12,7 +12,8 @@ import java.util.Date;
 public class Parser {
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected static SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
-
+    protected static SimpleDateFormat dashDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    protected static SimpleDateFormat twelveHrTimeFormat = new SimpleDateFormat("K.mmaa");
     /**
      * Class constructor.
      */
@@ -141,8 +142,17 @@ public class Parser {
     public static Event createEvent(String command) throws ParseException {
         String[] arr = command.split(" /at ", 2);
         String[] dateTimeArr = (arr[1]).split(" ", 2);
-        Date date = dateFormat.parse(dateTimeArr[0]);
-        Date time = timeFormat.parse(dateTimeArr[1]);
+        Date date, time;
+        try {
+             date = dateFormat.parse(dateTimeArr[0]);
+        } catch (ParseException e) {
+            date = dashDateFormat.parse(dateTimeArr[0]);
+        }
+        try {
+            time = timeFormat.parse(dateTimeArr[1]);
+        } catch (ParseException e) {
+            time = twelveHrTimeFormat.parse(dateTimeArr[1]);
+        }
         return new Event(arr[0].substring(6), date, time);
 
     }
@@ -168,8 +178,17 @@ public class Parser {
         String[] arr = command.split(" /by ", 2);
         String[] dateTimeArr = (arr[1]).split(" ", 2);
         //throw error if user never input time or date
-        Date date = dateFormat.parse(dateTimeArr[0]);
-        Date time = timeFormat.parse(dateTimeArr[1]);
+        Date date, time;
+        try {
+            date = dateFormat.parse(dateTimeArr[0]);
+        } catch (ParseException e) {
+            date = dashDateFormat.parse(dateTimeArr[0]);
+        }
+        try {
+            time = timeFormat.parse(dateTimeArr[1]);
+        } catch (ParseException e) {
+            time = twelveHrTimeFormat.parse(dateTimeArr[1]);
+        }
         return new Deadline(arr[0].substring(9), date, time);
     }
 

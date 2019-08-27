@@ -9,8 +9,8 @@ import java.util.Date;
  * object can take in a description, date and time to complete the task by.
  */
 public class Deadline extends Task {
-    protected DateFormat outDateFormat = new SimpleDateFormat( "dd/MM/yyyy");
-    protected DateFormat outTimeFormat = new SimpleDateFormat("H.mm aa");
+    protected DateFormat outDateFormat = new SimpleDateFormat( "dd MMMMM yyyy");
+    protected DateFormat outTimeFormat = new SimpleDateFormat("K.mm aa");
     protected SimpleDateFormat fileDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected SimpleDateFormat fileTimeFormat = new SimpleDateFormat("HHmm");
     protected Date date, time;

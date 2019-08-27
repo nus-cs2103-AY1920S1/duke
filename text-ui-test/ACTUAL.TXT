@@ -16,12 +16,12 @@ Hello from
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][✗] return book (by: June 6th)
+	   [D][✗] return book (by: 2019-12-02T18:00)
 	 Now you have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [E][✗] project meeting (at: Aug 6th 2-4pm)
+	   [E][✗] project meeting (at: 2019-08-06T14:00)
 	 Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
@@ -45,43 +45,43 @@ Hello from
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] read book
-	 2.[D][✗] return book (by: June 6th)
-	 3.[E][✗] project meeting (at: Aug 6th 2-4pm)
+	 2.[D][✗] return book (by: 2019-12-02T18:00)
+	 3.[E][✗] project meeting (at: 2019-08-06T14:00)
 	 4.[T][✓] join sports club
 	 5.[T][✗] borrow book
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [D][✗] return book (by: Sunday)
+	   [D][✗] return book (by: 2019-09-09T12:00)
 	 Now you have 6 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Got it. I've added this task:
-	   [E][✗] project meeting (at: Mon 2-4pm)
+	   [E][✗] project meeting (at: 2019-09-07T14:00)
 	 Now you have 7 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] read book
-	 2.[D][✗] return book (by: June 6th)
-	 3.[E][✗] project meeting (at: Aug 6th 2-4pm)
+	 2.[D][✗] return book (by: 2019-12-02T18:00)
+	 3.[E][✗] project meeting (at: 2019-08-06T14:00)
 	 4.[T][✓] join sports club
 	 5.[T][✗] borrow book
-	 6.[D][✗] return book (by: Sunday)
-	 7.[E][✗] project meeting (at: Mon 2-4pm)
+	 6.[D][✗] return book (by: 2019-09-09T12:00)
+	 7.[E][✗] project meeting (at: 2019-09-07T14:00)
 	____________________________________________________________
 	____________________________________________________________
 	 Noted. I've removed this task:
-	   [D][✗] return book (by: June 6th)
+	   [D][✗] return book (by: 2019-12-02T18:00)
 	____________________________________________________________
 	____________________________________________________________
 	 Here are the tasks in your list:
 	 1.[T][✓] read book
-	 2.[E][✗] project meeting (at: Aug 6th 2-4pm)
+	 2.[E][✗] project meeting (at: 2019-08-06T14:00)
 	 3.[T][✓] join sports club
 	 4.[T][✗] borrow book
-	 5.[D][✗] return book (by: Sunday)
-	 6.[E][✗] project meeting (at: Mon 2-4pm)
+	 5.[D][✗] return book (by: 2019-09-09T12:00)
+	 6.[E][✗] project meeting (at: 2019-09-07T14:00)
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!

@@ -1,5 +1,6 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,6 +12,7 @@ public class Driver {
 
     ArrayList<Task> taskList;
     Persistence persistence;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Driver() {
         persistence = new Persistence("data/duke.txt");
@@ -80,7 +82,7 @@ public class Driver {
         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
-        Task current = new Deadline(details[0], details[1]);
+        Task current = new Deadline(details[0], LocalDateTime.parse(details[1], formatter));
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
         save();
@@ -97,7 +99,7 @@ public class Driver {
         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
-        Task current = new Event(details[0], details[1]);
+        Task current = new Event(details[0], LocalDateTime.parse(details[1], formatter));
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
         save();

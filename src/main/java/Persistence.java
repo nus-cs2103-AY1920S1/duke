@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 public class Persistence {
 
     protected String fileName;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Persistence(String fileName) {
         this.fileName = fileName;
@@ -34,11 +37,11 @@ public class Persistence {
                         break;
 
                     case "D":
-                        taskList.add(new Deadline(status, params[2], params[3]));
+                        taskList.add(new Deadline(status, params[2], LocalDateTime.parse(params[3], formatter)));
                         break;
 
                     case "E":
-                        taskList.add(new Event(status, params[2], params[3]));
+                        taskList.add(new Event(status, params[2], LocalDateTime.parse(params[3], formatter)));
                         break;
                 }
             }

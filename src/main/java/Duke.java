@@ -1,6 +1,13 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.lang.Exception;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 enum Command {
     LIST, BYE, DONE, TODO, DEADLINE, EVENT, DELETE, ECHO;
@@ -12,36 +19,37 @@ public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
     private static int listCounter = 0;
 
+    private static HashMap<String, String> map = new HashMap<>();
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Path filePath = Paths.get("data/Duke.txt");
+        File dukeInput = new File(filePath.toString());
+
+        boolean isListChanged = false;
+        Task changedItem = null;
+        Command changedCommand;
+
+        map.put("T", "TODO");
+        map.put("E", "EVENT");
+        map.put("D", "DEADLINE");
 
         String greeting = "Hello! I'm Duke\nWhat can I do for you?";
         String goodbye = "Bye. Hope to see you again soon!";
 
-        System.out.println(greeting);
+        processInputFile(dukeInput);
 
+        System.out.println(greeting);
         // Start reading input
         while (sc.hasNextLine()) {
             try {
                 String readInput = sc.next();
-
-                // Check if input command exist
-                boolean isExist = false;
-                for (Command c : Command.values()) {
-                    // If exists
-                    if (c.name().equals(readInput.toUpperCase())) {
-                        // Not recognized command
-                        isExist = true;
-                    }
-                }
-                if (!isExist) throw new CommandNotRecognizedException();
-
-                // Command exist
-                Command cmd = Command.valueOf(readInput.toUpperCase());
+                Command cmd = verifyCommandValue(readInput);
 
                 if (cmd == Command.BYE) {
                     System.out.println(processText(goodbye));
                     break;
+
                 } else if (cmd == Command.LIST) {
                     // Error Handling: ListEmpty
                     if (listCounter == 0) {
@@ -122,7 +130,7 @@ public class Duke {
 
                     String doneMessage = "Nice! I've marked this task as done: \n\t\t";
                     System.out.println(processText(doneMessage + list.get(indexDone).getItemInfo()));
-                    
+
                 } else if (cmd == Command.ECHO) {
                     // Read any remaining lines
                     String echoInput = sc.nextLine().trim();
@@ -157,32 +165,134 @@ public class Duke {
                     String tempPrint = "Noted. I've removed this task:\n\t\t" +
                             deletedTask.getItemInfo() + "\n\tNow you have " + listCounter + " tasks in the list.";
                     System.out.println(processText(tempPrint));
+
+                    isListChanged = true;
+                    changedItem = list.get(listCounter - 1);
+                }
+
+                // Save changed list to hard disk, if changed
+                if (isListChanged) {
+                    isListChanged = false;
+                    FileWriter fw = new FileWriter(dukeInput, true);
+                    fw.write(processWriteTest(changedItem, cmd));
+                    fw.close();
                 }
 
             } catch (CommandNotRecognizedException c) {
                 // Clear buffer of scanner
                 String i = sc.nextLine();
-
                 System.out.println(processText("\u263A OOPS!!! I'm sorry, but I don't know what that means :-("));
 
             } catch (EmptyCommandField e) {
-                System.out.println(processText("\u263A The description of " + e.getMessage() + " cannot be empty."));
+
+                System.out.println(processText("\u263A The description of "
+                        + e.getMessage() + " cannot be empty."));
 
             } catch (EmptyListException l) {
                 System.out.println(processText("\u263A List is empty! " + l.getMessage()));
 
             } catch (CommandFieldFormatException f) {
-                System.out.println(processText("\u263A Description format is incorrect for " + f.getMessage() + "."));
+
+                System.out.println(processText("\u263A Description format is incorrect for "
+                        + f.getMessage() + "."));
 
             } catch (InvalidNumberException n) {
                 System.out.println(processText("\u263A Invalid input number. " + n.getMessage()));
+
+            } catch (IOException o) {
+                System.out.println("File IO exception");
             }
+        }
+    }
+
+    private static String processWriteTest(Task t, Command changedCommand) {
+        char commandFirstChar = changedCommand.toString().charAt(0);
+        int isDone = t.getIsDone() ? 1 : 0;
+        String itemDescription = t.getTaskItem();
+        String timeDate = "";
+        if (changedCommand.name().equals("EVENT") || changedCommand.name().equals("DEADLINE")) {
+            if (t instanceof Deadline) timeDate = ((Deadline) t).getTimeDate();
+            else if (t instanceof Event) timeDate = ((Event) t).getTimeDate();
+        }
+        return "\r\n" + commandFirstChar + " | " + isDone + " | " + itemDescription + " | " + timeDate;
+    }
+
+    // Process input file data from hard disk
+    private static void processInputFile(File f) {
+        try {
+            Scanner sc = new Scanner(f);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] lineData = line.split("\\|");
+                for (int i = 0; i < lineData.length; i++) lineData[i] = lineData[i].trim();
+
+                try {
+                    if (lineData.length == 0) throw new CommandFieldFormatException("Empty fields");
+
+                    String commandName = map.get(lineData[0]);
+                    Command cmd = verifyCommandValue(commandName);
+                    boolean isDone = false;
+
+                    if (cmd == Command.TODO) {
+                        if (lineData.length < 3) throw new CommandFieldFormatException("Less that 2 fields");
+
+                        if (lineData[1].equals("1")) isDone = true;
+                        else if (!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+
+                        list.add(new ToDo(lineData[2], isDone));
+                        listCounter++;
+
+                    } else if (cmd == Command.EVENT) {
+                        if (lineData.length < 4) throw new CommandFieldFormatException("Less that 3 fields");
+
+                        if (lineData[1].equals("1")) isDone = true;
+                        else if (!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+
+                        list.add(new Event(lineData[2], lineData[3], isDone));
+                        listCounter++;
+
+                    } else if (cmd == Command.DEADLINE) {
+                        if (lineData.length < 4) throw new CommandFieldFormatException("Less that 2 fields");
+
+                        if (lineData[1].equals("1")) isDone = true;
+                        else if (!lineData[1].equals("0")) throw new CommandFieldFormatException("Incorrect fields");
+
+                        list.add(new Event(lineData[2], lineData[3], isDone));
+                        listCounter++;
+                    }
+
+                } catch (CommandNotRecognizedException e) {
+                    System.out.println("Command not recognized!");
+
+                } catch (CommandFieldFormatException e1) {
+                    System.out.println("Command field format incorrect!");
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
         }
     }
 
     // Add in Indentation and horizontal lines
     private static String processText(String input) {
         return HORIZONTAL_LINE + "\n" + "\t" + input + "\n" + HORIZONTAL_LINE + "\n";
+    }
+
+    private static Command verifyCommandValue(String commandString) throws CommandNotRecognizedException {
+        // Check if input command exist
+        boolean isExist = false;
+        for (Command i : Command.values()) {
+            // If exists
+            if (i.name().equals(commandString.toUpperCase())) {
+                // Not recognized command
+                isExist = true;
+            }
+        }
+        if (!isExist) throw new CommandNotRecognizedException();
+
+        // Command exist
+        return Command.valueOf(commandString.toUpperCase());
     }
 
     private static String addedTaskText() {
@@ -231,7 +341,6 @@ class TimeDate {
 class Task {
     protected static final String ICON_TICK = "\u2713";
     protected static final String ICON_CROSS = "\u2718";
-
     protected boolean isDone;
     protected String taskItem;
 
@@ -257,6 +366,10 @@ class Task {
 
     public String getTaskItem() {
         return taskItem;
+    }
+
+    public boolean getIsDone(){
+        return isDone;
     }
 
     public String getItemInfo() {
@@ -305,14 +418,14 @@ class Deadline extends Task {
         else return "[D][" + ICON_CROSS + "]";
     }
 
-    public String getDeadline(){
+    public String getTimeDate(){
         return timeDateGiven.print();
     }
 
 
     @Override
     public String getItemInfo() {
-        return getStatusIcon() + " " + getTaskItem() + " (by: " + getDeadline() + ")";
+        return getStatusIcon() + " " + getTaskItem() + " (by: " + getTimeDate() + ")";
     }
 }
 
@@ -344,13 +457,13 @@ class Event extends Task {
         else return "[E][" + ICON_CROSS + "]";
     }
 
-    public String getTiming() {
+    public String getTimeDate() {
         return timeDateGiven.print();
     }
 
     @Override
     public String getItemInfo() {
-        return getStatusIcon() + " " + getTaskItem() + " (at: " + getTiming() + ")";
+        return getStatusIcon() + " " + getTaskItem() + " (at: " + getTimeDate() + ")";
     }
 
 }

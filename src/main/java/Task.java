@@ -15,6 +15,14 @@ class Task {
         return this.isDone;
     }
 
+    /**
+     * Getter for description
+     * @return Description
+     */
+    String getDescription() {
+        return this.description;
+    }
+
     void markAsDone() {
         this.isDone = true;
     }

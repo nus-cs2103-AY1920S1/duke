@@ -23,6 +23,10 @@ class Ui {
         print(String.format("Here are your tasks:%n%s", tasks));
     }
 
+    void showQuery(String tasks) {
+        print(String.format("Here are the matching tasks in your list:%n%s", tasks));
+    }
+
     void showTaskDeletion(Task deletedTask) {
         print(String.format("Done! I have deleted the following task: %s", deletedTask.toString()));
     }

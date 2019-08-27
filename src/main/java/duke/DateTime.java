@@ -8,9 +8,9 @@ import java.text.ParseException;
  * Encapsulates date & time.
  */
 public class DateTime {
-    private static String[] suffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th",
-            "th", "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th",
-            "th", "th", "st" };
+    private static String[] suffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+        "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th",
+        "th", "th", "st" };
 
     /**
      * Parses date and time.
@@ -28,8 +28,8 @@ public class DateTime {
         } catch (ParseException e) {
             return input;
         }
-        SimpleDateFormat DayOfMonth = new SimpleDateFormat("d");
-        int day = Integer.parseInt(DayOfMonth.format(dateTime));
+        SimpleDateFormat dayOfMonth = new SimpleDateFormat("d");
+        int day = Integer.parseInt(dayOfMonth.format(dateTime));
         String dayWithSuffix = day + suffixes[day];
         output = outputFormat.format(dateTime);
         return (dayWithSuffix + " of " + output);

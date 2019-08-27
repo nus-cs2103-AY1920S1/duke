@@ -86,12 +86,13 @@ public class Ui {
      * @param task   Task deleted.
      */
     public void showDeleteMessage(int size, Task task) {
-        if (size == 1)
-            output("Noted. I've removed this task: \n" + task + "\n" +  "Now you have "
+        if (size == 1) {
+            output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
                     + size + " task in the list.\n");
-        else
-            output("Noted. I've removed this task: \n" + task + "\n" +  "Now you have "
+        } else {
+            output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
                     + size + " tasks in the list.\n");
+        }
     }
 
     /**
@@ -101,12 +102,13 @@ public class Ui {
      * @param task   Task added.
      */
     public void showAddMessage(int size, Task task) {
-        if (size == 1)
-            output("Got it. I've added this task: \n" + task + "\n" +  "Now you have "
+        if (size == 1) {
+            output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
                     + size + " task in the list.\n");
-        else
-            output("Got it. I've added this task: \n" + task + "\n" +  "Now you have "
+        } else {
+            output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
                     + size + " tasks in the list.\n");
+        }
     }
 
     /**

@@ -1,6 +1,11 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -32,10 +37,11 @@ public class Parser {
             Task task;
             if (input.startsWith("todo")) {
                 input = input.replaceFirst("^todo", "");
-                if (input.substring(input.indexOf(" ") + 1).isEmpty())
+                if (input.substring(input.indexOf(" ") + 1).isEmpty()) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
-                else
+                } else {
                     task = new ToDo(input.substring(input.indexOf(" ") + 1));
+                }
             } else if (input.startsWith("deadline")) {
                 task = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1),
                         DateTime.parse(input.substring(input.indexOf("/") + 4)));

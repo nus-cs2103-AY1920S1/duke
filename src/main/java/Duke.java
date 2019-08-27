@@ -1,118 +1,23 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
     public static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    private TaskList taskList;
+    private UI ui;
 
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        ArrayList<Task> taskList = new ArrayList<>();
-
-        System.out.println("Hello I'm\n" + logo + "\nWhat can I do for you?");
-
-        String command = promptEntry();
-
-
-
-    while (!command.equals("bye")) {
-
-        try {
-        switch (command) {
-
-            case "list":
-                printList(taskList);
-                break;
-
-            case "todo":
-                String task = sc.nextLine().trim();
-                if(!task.isEmpty()) {
-                    ToDo newTodo = new ToDo(task);
-                    addTask(newTodo, taskList);
-                } else {
-                    throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                break;
-
-            case "deadline":
-                String wholeTask = sc.nextLine();
-                int index = wholeTask.indexOf('/');
-                if(index > 0) {
-                    //what the task is
-                    String description = wholeTask.substring(0, index).trim();
-                    //when it is due by
-                    String date = wholeTask.substring(index + 4).trim();
-                    if(description.isEmpty() || date.isEmpty()) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
-                                " It must be in the format <description> /by <date/time> ");
-                    } else {
-                        Deadline newDeadlineTask = new Deadline(description, date);
-                        addTask(newDeadlineTask, taskList);
-                    }
-                } else {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
-                            " It must be in the format <description> /by <date/time> ");
-                }
-                break;
-
-            case "event":
-                String eventAndDate = sc.nextLine();
-                int index2 = eventAndDate.indexOf('/');
-                if(index2 > 0) {
-                    //what the task is
-                    String eventDescr = eventAndDate.substring(0, index2).trim();
-                    //when it is due by
-                    String date2 = eventAndDate.substring(index2 + 4).trim();
-                    if(eventDescr.isEmpty() || date2.isEmpty()) {
-                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
-                                " It must be in the format <description> /at <start and end of specific time> ");
-                    } else {
-                        Event newEventTask = new Event(eventDescr, date2);
-                        addTask(newEventTask, taskList);
-                    }
-                } else {
-                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
-                            " It must be in the format <description> /at <start and end of specific time> ");
-                }
-                break;
-
-            case "delete":
-                int taskToBeDeleted = sc.nextInt() -1;
-                deleteTask(taskToBeDeleted, taskList);
-                break;
-
-            case "done":
-                int taskNumber = sc.nextInt() - 1;
-                completeTask(taskNumber, taskList);
-                break;
-
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
-
-        }
-
-
-    } catch (DukeException e) {
-            System.out.println(e);
-        }
-
-        command = promptEntry();
-
-
-}
-        printCommand("Bye. Hope to see you again soon!");
+    public Duke() {
+        this.ui = new UI();
+        this.taskList = new TaskList();
 
     }
 
+    public static void main(String[] args) {
 
+        new Duke().run();
 
+    }
 
 
     public static void printCommand(String command) {
@@ -123,53 +28,108 @@ public class Duke {
        return sc.next();
     }
 
-    public static void printList(ArrayList<Task> toDoList) {
-        int n = 1;
+    public void run() {
 
-        if(toDoList.isEmpty()){
+        this.ui.welcome();
 
-            System.out.println("List is empty");
+        String command = promptEntry();
 
-        } else {
+        while (!command.equals("bye")) {
 
-            for (Task item : toDoList) {
-                System.out.println(n + "." + item);
-                n++;
+            try {
+                switch (command) {
+
+                    case "list":
+                        this.taskList.printList();
+                        break;
+
+                    case "todo":
+                        String task = sc.nextLine().trim();
+                        if(!task.isEmpty()) {
+                            ToDo newTodo = new ToDo(task);
+                            this.taskList.addTask(newTodo);
+                        } else {
+                            throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        break;
+
+                    case "deadline":
+                        String wholeTask = sc.nextLine();
+                        int index = wholeTask.indexOf('/');
+                        if(index > 0) {
+                            //what the task is
+                            String description = wholeTask.substring(0, index).trim();
+                            //when it is due by
+                            String date = wholeTask.substring(index + 4).trim();
+                            if(description.isEmpty() || date.isEmpty()) {
+                                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
+                                        " It must be in the format <description> /by <date/time> ");
+                            } else {
+                                Deadline newDeadlineTask = new Deadline(description, date);
+                                this.taskList.addTask(newDeadlineTask);
+                            }
+                        } else {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
+                                    " It must be in the format <description> /by <date/time> ");
+                        }
+                        break;
+
+                    case "event":
+                        String eventAndDate = sc.nextLine();
+                        int index2 = eventAndDate.indexOf('/');
+                        if(index2 > 0) {
+                            //what the task is
+                            String eventDescr = eventAndDate.substring(0, index2).trim();
+                            //when it is due by
+                            String date2 = eventAndDate.substring(index2 + 4).trim();
+                            if(eventDescr.isEmpty() || date2.isEmpty()) {
+                                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
+                                        " It must be in the format <description> /at <start and end of specific time> ");
+                            } else {
+                                Event newEventTask = new Event(eventDescr, date2);
+                                this.taskList.addTask(newEventTask);
+                            }
+                        } else {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
+                                    " It must be in the format <description> /at <start and end of specific time> ");
+                        }
+                        break;
+
+                    case "delete":
+                        int taskToBeDeleted = sc.nextInt() -1;
+                        this.taskList.deleteTask(taskToBeDeleted);
+                        break;
+
+                    case "done":
+                        int taskNumber = sc.nextInt() - 1;
+                        this.taskList.completeTask(taskNumber);
+                        break;
+
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+
+                }
+
+
+            } catch (DukeException e) {
+                System.out.println(e);
             }
 
+            command = promptEntry();
+
+
         }
+        this.ui.goodbye();
     }
 
-    public static void completeTask(int taskNumber, ArrayList<Task> list) {
-        Task completed = list.get(taskNumber);
 
-            completed.markAsDone();
-            System.out.println("Nice! I've marked this task as done: \n" + "   " + completed);
 
-    }
 
-    public static void addTask(Task current, ArrayList<Task> list) {
-        list.add(current);
-        if(list.size() >1) {
-            System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list. ");
-        } else {
-            System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list. ");
-        }
-    }
 
-    public static void deleteTask(int current, ArrayList<Task> list) {
-        Task deleted = list.get(current);
-        list.remove(current);
-        if(list.size() > 1) {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list. ");
-        } else {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list. ");
-        }
-    }
+
+
+
 
 
 

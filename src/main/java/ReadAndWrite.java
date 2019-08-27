@@ -23,6 +23,8 @@ public class ReadAndWrite {
                 } else {
                     throw new InvalidCommandException("[duke.txt]: I'm sorry, but I don't know what that means :-(");
                 }
+                Duke.idx++;
+
             } else {
                 throw new InvalidNumberException("[duke.txt]: the description should have 0 or 1");
             }

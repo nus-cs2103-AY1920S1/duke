@@ -11,17 +11,30 @@ public class Task {
 
 
     public Task(String description) {
-        this.description = description;
+        this.description = perfectDescription(description);
         this.isDone = false;
     }
-    public Task(String description, String time) {
-//        LocalDateTime convert = LocalDateTime.parse(time.trim(), dateTimeFormatter);
-//        new Task(description.trim(), convert);
-        this.description = description;
-        pattern = LocalDateTime.parse(time, dateTimeFormatter);
+
+    public Task(String description, String done) {
+
+        this.description = perfectDescription(description);
+        if (done.trim().equals("1")) {
+            this.isDone = true;
+        }
     }
 
-    public void markAsDone(){
+    public String perfectDescription(String description){
+        String[] temp = description.split(" ");
+        String result = "";
+        for(String str: temp){
+            if(!str.equals("")){
+                result += " " + str.trim();
+            }
+        }
+        return result.trim();
+    }
+
+    public void markAsDone() {
         this.isDone = true;
     }
 

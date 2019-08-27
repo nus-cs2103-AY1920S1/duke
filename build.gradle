@@ -2,11 +2,19 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    // Defer use of Shadow and JUnit until a later stage
+    // Defer use of Shadow until a later stage
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
 checkstyle {
     toolVersion = '8.23'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 group 'seedu.duke'

@@ -1,14 +1,40 @@
 import org.w3c.dom.html.HTMLImageElement;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
+
+    //////////////////////////////// AUTO SAVE Method ////////////////////////////////////////////////
+    static void AutoSave(ArrayList<Task> taskList, int no_of_task) throws IOException {
+        System.out.println("System performing autosave");
+        WriteFile data = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\DukesDiary.txt");
+        WriteFile data_append = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\DukesDiary.txt", true);
+
+        for (int i = 0; i < no_of_task; i++) {
+            if(i>0){
+                if(taskList.get(i).type == 'T')
+                    data_append.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description);
+                else
+                    data_append.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description + " | " + taskList.get(i).timeframe);
+            }
+            else{
+                if(taskList.get(i).type == 'T')
+                    data.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description);
+                else
+                    data.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description + " | " + taskList.get(i).timeframe);
+            }
+        }
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -17,7 +43,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can i do for you?\n");
 
-        ///////////////////////  Text File Reading /////////////////////////////////////
+        ////////////////////////////////  Loading Text File  ///////////////////////////////////////////////
         BufferedReader objReader = null;
         ArrayList<Task> taskList = new ArrayList<Task>();
         int no_of_task = 0;
@@ -66,10 +92,9 @@ public class Duke {
                 ex.printStackTrace();
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-        ///////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////  Begin User Input ///////////////////////////////////////////////////////
 
         //ArrayList<Task> taskList = new ArrayList<Task>();
         String userInput;
@@ -95,6 +120,7 @@ public class Duke {
                     System.out.println("Now you have " + no_of_task + " tasks in the list.");
                     Task t = new Task(sub, 'T', 0, "");
                     taskList.add(t);
+                    AutoSave(taskList, no_of_task);
                 }
             } else {
 
@@ -119,6 +145,7 @@ public class Duke {
                                 System.out.println("  [" + "\u2713" + "] " + taskList.get(i - 1).description);
                                 taskList.get(i - 1).changeStatus(1);
                                 System.out.println("New status: " + taskList.get(i - 1).status);
+                                AutoSave(taskList, no_of_task);
                             }
                         }
                     } else {
@@ -134,6 +161,7 @@ public class Duke {
                             Task t = new Task(sub, 'D', 0, timeFrame);
                             taskList.add(t);
                             no_of_task++;
+                            AutoSave(taskList, no_of_task);
                             System.out.println("Got it. I've added this task:");
                             System.out.println("  [ ][ ] " + sub + " (" + timeFrame + ")");
                             System.out.println("Now you have " + no_of_task + " tasks in the list.");
@@ -150,6 +178,7 @@ public class Duke {
                                 Task t = new Task(sub, 'E', 0, timeFrame);
                                 taskList.add(t);
                                 no_of_task++;
+                                AutoSave(taskList, no_of_task);
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println("  [ ][ ] " + sub + " (" + timeFrame + ")");
                                 System.out.println("Now you have " + no_of_task + " tasks in the list.");
@@ -161,6 +190,7 @@ public class Duke {
                                     System.out.println("  [" + t.type + "][" + t.status + "] " + t.description + " (" + t.timeframe + ")");
                                     taskList.remove(index - 1);
                                     no_of_task--;
+                                    AutoSave(taskList, no_of_task);
                                     System.out.println("Now you have " + no_of_task + " tasks in the list.");
                                 } else
                                     System.out.println("OOPS!! I'm sorry, but I don't know what that means.");
@@ -170,7 +200,6 @@ public class Duke {
                 }
             }
         }
-
         /////////////////////////////////////////////////////////////////////////////////////////////////////
     }
         static class Task {
@@ -190,6 +219,26 @@ public class Duke {
                 this.status = status;
             }
         }
+
+        static class WriteFile{
+        String path;
+        boolean append_to_file = false;   //set to false so we don't append but rather erase everything in the file//
+        WriteFile(String file_path){      //constructor1: erases all data
+            path = file_path;
+        }
+        WriteFile(String file_path, boolean append_value){  //constructor2: appends data
+            append_to_file = append_value;
+            path = file_path;
+        }
+        void writeToFile(String textLine) throws IOException{
+            FileWriter write = new FileWriter(path , append_to_file);
+            PrintWriter print_line = new PrintWriter( write );
+            print_line.printf("%s" + "%n", textLine);
+            print_line.close();
+        }
+        }
+
+
 }
 
 //////////////////////////switch case///////////////////////////////////////////

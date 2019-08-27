@@ -1,4 +1,4 @@
-package DukePkg;
+package dukepkg;
 
 public class Task {
     private boolean done_ = false;

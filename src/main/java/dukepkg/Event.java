@@ -1,6 +1,6 @@
-package DukePkg;
+package dukepkg;
 
-public class Event extends DukePkg.Task {
+public class Event extends dukepkg.Task {
     protected String at;
     public static final String type = "E";
 

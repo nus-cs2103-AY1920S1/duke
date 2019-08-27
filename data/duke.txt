@@ -1,2 +1,0 @@
-T # 1 # finish 3230
-E # 0 # 3230 lec # tmr

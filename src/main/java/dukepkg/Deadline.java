@@ -1,6 +1,6 @@
-package DukePkg;
+package dukepkg;
 
-public class Deadline extends DukePkg.Task{
+public class Deadline extends dukepkg.Task{
     protected String by;
     public static final String type = "D";
 

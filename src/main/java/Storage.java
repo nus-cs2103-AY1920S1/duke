@@ -28,25 +28,25 @@ public class Storage {
      * @return The list of tasks.
      */
     public ArrayList<Task> load() {
-        ArrayList<Task> arr = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         try {
             FileReader reader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(reader);
 
-            String s;
+            String str;
 
-            while ((s = bufferedReader.readLine()) != null) {
+            while ((str = bufferedReader.readLine()) != null) {
                 Task t;
-                if (s.charAt(1) == 'T') {
-                    t = new Todo(s.substring(7));
-                    if (s.charAt(4) == '\u2713') {
+                if (str.charAt(1) == 'T') {
+                    t = new Todo(str.substring(7));
+                    if (str.charAt(4) == '\u2713') {//mark task as done
                         t.markAsDone();
                     }
-                    arr.add(t);
-                } else if (s.charAt(1) == 'D') {
-                    int index = s.indexOf(58);
-                    String ss = s.substring(index);
+                    tasks.add(t);
+                } else if (str.charAt(1) == 'D') {
+                    int indexOfBracket = str.indexOf(58);
+                    String ss = str.substring(indexOfBracket);
                     String[] ssArr = ss.split(" ");
 
                     SimpleDateFormat parser = new SimpleDateFormat("dd-MMM-yyyy");
@@ -55,14 +55,14 @@ public class Storage {
                     String strTime = ssArr[2].substring(0, 7);
                     LocalTime time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mma"));
 
-                    t = new Deadline(s.substring(7, index - 4), date, time);
-                    if (s.charAt(4) == '\u2713') {
+                    t = new Deadline(str.substring(7, indexOfBracket - 4), date, time);
+                    if (str.charAt(4) == '\u2713') { //mark task as done
                         t.markAsDone();
                     }
-                    arr.add(t);
+                    tasks.add(t);
                 } else {
-                    int index = s.indexOf(58);
-                    String ss = s.substring(index);
+                    int index = str.indexOf(58);
+                    String ss = str.substring(index);
                     String[] ssArr = ss.split(" ");
 
                     SimpleDateFormat parser = new SimpleDateFormat("dd-MMM-yyyy");
@@ -71,11 +71,11 @@ public class Storage {
                     String strTime = ssArr[2].substring(0, 7);
                     LocalTime time = LocalTime.parse(strTime, DateTimeFormatter.ofPattern("hh:mma"));
 
-                    t = new Event(s.substring(7, index - 4), date, time);
-                    if (s.charAt(4) == '\u2713') {
+                    t = new Event(str.substring(7, index - 4), date, time);
+                    if (str.charAt(4) == '\u2713') { //mark task as done
                         t.markAsDone();
                     }
-                    arr.add(t);
+                    tasks.add(t);
                 }
             }
             reader.close();
@@ -83,19 +83,19 @@ public class Storage {
             e.printStackTrace();
         }
 
-        return arr;
+        return tasks;
     }
 
     /**
      * Save the tasks into the hard drive.
-     * @param arr The list of tasks.
+     * @param tasks The list of tasks.
      */
-    public void save(ArrayList<Task> arr) {
+    public void save(ArrayList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter(fileName, false);
             BufferedWriter bufferedWriter =  new BufferedWriter(writer);
 
-            for (Task t : arr) {
+            for (Task t : tasks) {
                 bufferedWriter.write(t.toString());
                 bufferedWriter.newLine();
             }

@@ -12,16 +12,16 @@ public class Todo extends Task {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
 
-        if (!(o instanceof Todo)) {
+        if (!(obj instanceof Todo)) {
             return false;
         }
 
-        Todo other = (Todo) o;
+        Todo other = (Todo) obj;
         return this.description == other.description;
     }
 }

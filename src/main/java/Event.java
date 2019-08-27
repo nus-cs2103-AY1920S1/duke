@@ -1,7 +1,7 @@
 import java.util.Date;
 import java.time.LocalTime;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
 
 /**
  * Represents an Event.
@@ -39,16 +39,16 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
 
-        if (!(o instanceof Event)) {
+        if (!(obj instanceof Event)) {
             return false;
         }
 
-        Event other = (Event) o;
+        Event other = (Event) obj;
         return this.description == other.description;
     }
 }

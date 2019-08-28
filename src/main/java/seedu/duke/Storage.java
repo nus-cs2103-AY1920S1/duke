@@ -31,32 +31,33 @@ public class Storage {
             findFile();
         } catch (IOException e) {
             Ui.showError(e.getMessage());
-        }
-        File f = new File(filepath);
-        Scanner sc = new Scanner(f);
-        while (sc.hasNext()) {
-            String full = sc.nextLine();
-            String[] arr = full.split(" . ");
-            Task t;
-            String type = arr[0];
-            int done = Integer.parseInt(arr[1]);
-            if (type.equals("T")) {
-                t = new ToDo(arr[2]);
-            } else {
-                long time = Long.parseLong(arr[3]);
-                Date date = new Date(time);
-                if (type.equals("D")) {
-                    t = new Deadline(arr[2], date);
+        } finally {
+            File f = new File(filepath);
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String full = sc.nextLine();
+                String[] arr = full.split(" . ");
+                Task t;
+                String type = arr[0];
+                int done = Integer.parseInt(arr[1]);
+                if (type.equals("T")) {
+                    t = new ToDo(arr[2]);
                 } else {
-                    t = new Event(arr[2], date);
+                    long time = Long.parseLong(arr[3]);
+                    Date date = new Date(time);
+                    if (type.equals("D")) {
+                        t = new Deadline(arr[2], date);
+                    } else {
+                        t = new Event(arr[2], date);
+                    }
                 }
+                if (done == 1) {
+                    t.done();
+                }
+                arrlist.add(t);
             }
-            if (done == 1) {
-                t.done();
-            }
-            arrlist.add(t);
+            return arrlist;
         }
-        return arrlist;
     }
 
     /**

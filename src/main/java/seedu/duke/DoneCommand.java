@@ -29,7 +29,8 @@ public class DoneCommand extends Command {
             s.update(false, "", t);
         } catch (IOException e) {
             u.showError(e.getMessage());
+        } finally {
+            u.doneLine(task.toString());
         }
-        u.doneLine(task.toString());
     }
 }

@@ -68,7 +68,7 @@ class TaskList {
         switch(action) {
 
             case "todo":
-                String description1 = parser.parseToDo(action, input);
+                String description1 = parser.parseDescription(action, input);
                 list.add(new ToDo(description1));
                 break;
 

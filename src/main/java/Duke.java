@@ -88,9 +88,18 @@ public class Duke {
         case DELETE:
             deleteTask(parser.getIndexFromLine(line));
             break;
+        case FIND:
+            findTask(parser.getArg(line, commandText));
+            break;
         default:
             throw new InvalidCommandException(OOPS_STR + INVALID_COMMAND_STR);
         }
+    }
+
+    private void findTask(String searchStr) {
+        ui.displaySearchResults(
+            taskList.search(searchStr)
+        );
     }
 
     private void deleteTask(int index) {

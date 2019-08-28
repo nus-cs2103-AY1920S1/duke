@@ -24,8 +24,10 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<Task>();
         try {
             readFileContents("data/duke.txt", list);
-        } catch (FileNotFoundException | ParseException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File not found");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
         System.out.println("Hello! I'm Duke");

@@ -28,6 +28,7 @@ public class Deadline extends Task {
         this.deadline  = deadline;
     }
 
+    @Override
     /**
      * Returns a String representation of the task.
      * @returna String showing the status and the task name of a Deadline object.

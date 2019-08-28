@@ -81,65 +81,32 @@ public class Parser {
      */
     public boolean checkValidity() throws DukeException {
         switch (getCommandType()) {
-<<<<<<< HEAD
-            case "list":
-                break;
-            case "done": case "delete":
-                // check whether a "done/delete" command contains an integer.
-                if (part.length < 2) {
-                    throw new DukeException("☹ OOPS!!! You need to enter an index.");
-                }
-        case "find":
-            if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! You need to enter a word "
-                        + "for search.");
-            }
-            case "todo":
-                // check whether task description is empty.
-                if (part.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo " +
-                            "cannot be empty.");
-                }
-                break;
-            case "deadline":
-                // check whether task description is empty.
-                if (part.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline " +
-                            "cannot be empty.");
-                }
-                break;
-            case "event":
-                // check whether task description is empty.
-                if (part.length < 2) {
-                    throw new DukeException("☹ OOPS!!! The description of an event " +
-                            "cannot be empty.");
-                }
-                break;
-            default:
-                // random inputs.
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know " +
-                        "what that means :-(");
-=======
         case "list":
             break;
         case "done": case "delete":
             if (part.length < 2) {
                 throw new DukeException("☹ OOPS!!! You need to enter an index.");
             }
+        case "find":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! You need to enter a keyword to search");
+            }
         case "todo":
-            // check task description.
+            // check whether task description is empty.
             if (part.length < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a todo "
                         + "cannot be empty.");
             }
             break;
         case "deadline":
+            // check whether task description is empty.
             if (part.length < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline "
                         + "cannot be empty.");
             }
             break;
         case "event":
+            // check whether task description is empty.
             if (part.length < 2) {
                 throw new DukeException("☹ OOPS!!! The description of an event "
                         + "cannot be empty.");
@@ -148,7 +115,6 @@ public class Parser {
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what "
                     + "that means :-(");
->>>>>>> branch-A-CodingStandard
         }
         return true;
     }

@@ -38,6 +38,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out the tasks with keyword in the list currently.
+     */
     public void findTask(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         int i = 0;
@@ -59,16 +62,12 @@ public class TaskList {
                 + newTask + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-<<<<<<< HEAD
     /**
      * Creates a new Todo object and adds it into the list.
      * @param activityName String of take name.
      * @param isDone true if the task is done, or false otherwise.
      */
     public void addTodo(String activityName, boolean isDone){
-=======
-    public void addTodo(String activityName, boolean isDone) {
->>>>>>> branch-A-CodingStandard
         Task newTask = new Todo(activityName,false);
         addAndPrint(newTask);
     }
@@ -95,13 +94,10 @@ public class TaskList {
         addAndPrint(newTask);
     }
 
-<<<<<<< HEAD
     /**
      * Marks the task of the specified index to "done".
      * @param idx integer that represents the index of the task in the command.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public void doneTask(int idx) {
         list.get(idx - 1).markAsDone();
         System.out.println("Nice! I've marked this task as done: \n  "

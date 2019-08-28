@@ -28,6 +28,7 @@ public class Event extends Task {
         this.time = time;
     }
 
+    @Override
     /**
      * Returns a String representation of the task.
      * @returna String showing the status and the task name of an Event object.

@@ -64,12 +64,9 @@ public class Storage {
         return tasks;
     }
 
-<<<<<<< HEAD
     /**
      * Saves the tasks in the list whenever there is any change.
      */
-=======
->>>>>>> branch-A-CodingStandard
     public void updateFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks.getTaskList()) {

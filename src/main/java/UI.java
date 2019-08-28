@@ -3,10 +3,16 @@ import java.util.Scanner;
 public class UI {
     private Scanner sc;
 
+    /***
+     * Class constructor.
+     */
     public UI() {
         sc = new Scanner(System.in);
     }
 
+    /***
+     * Greet user.
+     */
     public static void greet() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Hello! I'm Duke\n" +
@@ -14,11 +20,18 @@ public class UI {
                 "    ____________________________________________________________");
     }
 
+    /***
+     * Read user input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public void printList(TaskList taskList) {
+    /***
+     * Echo TaskList to user.
+     * @param taskList TaskList to be echoed
+     */
+    public void echoList(TaskList taskList) {
         System.out.println("    ____________________________________________________________");
         if (taskList.getSize() == 0)
             System.out.println("     *** List is Empty ***");
@@ -32,14 +45,23 @@ public class UI {
         System.out.println("    ____________________________________________________________");
     }
 
-    public void echoAddedTask(String input, int taskListSize) {
+    /***
+     * Echo added Task to user.
+     * @param taskToAdd Added Task
+     * @param taskListSize
+     */
+    public void echoAddedTask(Task taskToAdd, int taskListSize) {
         System.out.println("    ____________________________________________________________\n" +
                 "     Got it. I've added this task: \n" +
-                String.format("       %s \n", input) +
+                String.format("       %s \n", taskToAdd.toString()) +
                 String.format("     Now you have %d tasks in the list. \n", taskListSize) +
                 "    ____________________________________________________________");
     }
 
+    /***
+     * Echo completed Task to user.
+     * @param taskToComplete Completed Task
+     */
     public void echoCompletedTask(Task taskToComplete){
         System.out.println(String.format("    ____________________________________________________________\n" +
                         "     Nice! I've marked this task as done: \n" +
@@ -48,6 +70,11 @@ public class UI {
                 taskToComplete.toString()));
     }
 
+    /***
+     * Echo deleted Task to user.
+     * @param taskToDelete Deleted Task
+     * @param taskListSize Number of remaining Tasks in TaskList
+     */
     public void echoDeletedTask(Task taskToDelete, int taskListSize) {
         System.out.println(String.format("    ____________________________________________________________\n" +
                         "     Noted. I've removed this task: \n" +
@@ -57,10 +84,25 @@ public class UI {
                 taskToDelete.toString(), taskListSize));
     }
 
+    /***
+     * Echo Exception to user.
+     * @param e Exception to be echoed
+     */
     public void echoException(Exception e) {
         System.out.println(e.getMessage());
     }
 
+    /***
+     * Echo message to user.
+     * @param msg Message to be echoed
+     */
+    public void echoMessage(String msg) {
+        System.out.println(msg);
+    }
+
+    /***
+     * Show exit message to user.
+     */
     public static void exit() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +

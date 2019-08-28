@@ -28,7 +28,7 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    void displayTaskList(){
+    void displayTaskList() {
         System.out.println("Here are the tasks in your list:");
         int numCommands = 0;
         for (Task i : taskList) {
@@ -37,7 +37,7 @@ public class TaskList {
         }
     }
 
-    void addToDo(Todo newTodo){
+    void addToDo(Todo newTodo) {
         taskList.add(newTodo);
         System.out.println("Got it. I've added this task: ");
         System.out.println(newTodo);

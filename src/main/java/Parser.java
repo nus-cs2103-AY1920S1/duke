@@ -12,6 +12,7 @@ public class Parser {
             "todo .+", // todo
             "deadline .+? /by .+?", // deadline
             "event .+? /at .+?", // event
+            "find .+?", // find
     };
 
     /**

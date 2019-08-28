@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -42,29 +46,43 @@ public class Duke {
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
                             listArr.add(new Task(inputArr[1], "todo"));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
+                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent
+                                    + aftTaskAddMessage, indent);
                             listSize++;
                     } else if(inputArr[0].equals("deadline")) {
-                        if(input.contains(" /by ")) {
+                        try {
                             String deadline = input.split(" /by ")[1];
-                            listArr.add(new Task(inputArr[1].split(" /by ")[0], "deadline", deadline));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                            LocalDateTime deadlineByDateTime = LocalDateTime.parse(deadline, formatter);
+                            listArr.add(new Task(inputArr[1].split(" /by ")[0], "deadline",
+                                    deadlineByDateTime));
+                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent
+                                    + aftTaskAddMessage, indent);
                             listSize++;
-                        } else {
-                            printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by.", indent);
+                        } catch(Exception ex) {
+                            printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by, "
+                                            + "in format 'dd/MM/yyyy HHmm'",
+                                    indent);
                         }
                     } else if(inputArr[0].equals("event")) {
-                        if(input.contains(" /at ")) {
+                        try {
                             String eventDateTime = input.split(" /at ")[1];
-                            listArr.add(new Task(inputArr[1].split(" /at ")[0], "event", eventDateTime));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                            LocalDateTime eventDateTimeByDateTime = LocalDateTime.parse(eventDateTime, formatter);
+                            listArr.add(new Task(inputArr[1].split(" /at ")[0], "event"
+                                    , eventDateTimeByDateTime));
+                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent
+                                    + aftTaskAddMessage, indent);
                             listSize++;
-                        } else {
-                            printIndentedString("☹ OOPS!!! Events require a specific datetime after /at.", indent);
+                        } catch(Exception ex) {
+                            printIndentedString("☹ OOPS!!! Events require a specific datetime after /at, "
+                                            + "in format 'dd/MM/yyyy HHmm'"
+                                    , indent);
                         }
                     }
                 } else {
-                    printIndentedString("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.", indent);
+                    printIndentedString("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty."
+                            , indent);
                 }
             } else {
                 printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", indent);

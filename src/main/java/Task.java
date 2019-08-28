@@ -1,8 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected String taskType;
     protected boolean isDone;
-    protected String dateTime;
+    protected LocalDateTime dateTime;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     public Task(String description, String taskType) {
         this.description = description;
@@ -10,7 +14,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public Task(String description, String taskType, String dateTime) {
+    public Task(String description, String taskType, LocalDateTime dateTime) {
         this.description = description;
         this.taskType = taskType;
         this.isDone = false;
@@ -38,7 +42,7 @@ public class Task {
     }
 
     public String getDateTime() {
-        return dateTime;
+        return dateTime.format(formatter);
     }
 
     public void markAsDone() {

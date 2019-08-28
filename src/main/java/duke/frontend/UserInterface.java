@@ -153,6 +153,7 @@ public class UserInterface {
             break;
         case "SearchCommand":
             executeCommand((SearchCommand) command);
+            break;
         default:
             throw new DukeUnknownCommandException();
         }
@@ -225,13 +226,13 @@ public class UserInterface {
 
         if (results.size() > 0) {
             int count = 0;
-            standardOutput.addLine("Here are the matching tasks in your list:");
+            standardOutput.addLine("Here are the matching task(s) in your list:");
             for (Task task : taskList.search(parameters[0])) {
                 count++;
                 standardOutput.addLine(Integer.toString(count), ". ", task.toString());
             }
         } else {
-            standardOutput.addLine("There are no matching tasks in your list");
+            standardOutput.addLine("There are no matching tasks in your list.");
         }
     }
 

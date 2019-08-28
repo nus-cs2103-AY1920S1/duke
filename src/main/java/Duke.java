@@ -28,8 +28,8 @@ public class Duke {
                 this.ui.printErrorMessage(e);
             }
         }
-
     }
+
     public static void main(String[] args) {
         Duke duke = new Duke("/home/dingyuchen/cs2103/duke/src/main/data/duke.ser");
         duke.run();

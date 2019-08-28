@@ -1,13 +1,29 @@
-import java.io.IOException;
-
+/**
+ * AddCommand class which extends the abstract class Command.
+ * This class handles any addition of tasks into the TaskList class and
+ * subsequently updating the txt file.
+ */
 public class AddCommand extends Command {
 	public String command;
 	
+	/**
+	 * Class constructor
+	 *
+	 * @param command command to add task
+	 */
 	public AddCommand(String command) {
 		this.command = command;
 	}
 	
-	public void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, InvalidInputException, InvalidDescriptionException, IOException {
+	/**
+	 * Method that overrides the abstract method in Command class.
+	 * Adds the tasks requested by the user into TaskList.
+	 * Update the txt file by adding the respective task.
+	 *
+	 * @param tasks ArrayList of Tasks that keep tracks of the Tasks.
+	 * @param storage Handles the reading and writing of the txt file.
+	 */
+	public void execute(TaskList tasks, Storage storage){
 		try {
 			if (command.startsWith("todo")) {
 				System.out.println("in");
@@ -27,12 +43,12 @@ public class AddCommand extends Command {
 		}
 	}
 	
+	/**
+	 * AddCommand does not exit program.
+	 *
+	 * @return False as this command does not end the program.
+	 */
 	public boolean isExit() {
 		return false;
-	}
-	
-	@Override
-	public String toString() {
-		return "AddCommand " + this.command;
 	}
 }

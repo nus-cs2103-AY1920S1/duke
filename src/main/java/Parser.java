@@ -1,7 +1,17 @@
 import java.time.LocalDateTime;
 
 public class Parser {
-
+    /**
+     * Parses user input based on different type of command.
+     * For each case, different parse requirement is needed
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param storage Storage of the project.
+     * @param inputType InputType of the user.
+     * @param userInput The rest of user input after the inputType.
+     * @throws DukeException If user input is not in the format
+     */
     public static void parse(TaskList taskList, Ui ui, Storage storage, String inputType, String userInput) throws DukeException {
         if (inputType.equals("todo")) {
             try {
@@ -91,6 +101,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Converts string to dateTime object in java.
+     *
+     * @param str String that will be converted.
+     * @return Date Time object if str can be converted.
+     * @throws ArrayIndexOutOfBoundsException If string can not be converted
+     */
     public static LocalDateTime dateTimeConverter(String str) throws ArrayIndexOutOfBoundsException{
         String[] dateTime = str.split(" ");
         String[] date = dateTime[0].split("/");

@@ -14,6 +14,12 @@ public class Storage {
         file = new File(filePath);
     }
 
+    /**
+     * Loads a file to populate the list of tasks.
+     * If the file does not exist, a new file will be created
+     *
+     * @return the list of tasks
+     */
     public static ArrayList<Task> load() {
 
         ArrayList<Task> listOfTasks = new ArrayList<>();
@@ -48,6 +54,11 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * Saves current list of tasks to hard drive
+     *
+     * @param listOfTasks List that will be saved to the file
+     */
     public static void save(List<Task> listOfTasks) {
         try {
             FileWriter fw = new FileWriter(file);
@@ -71,7 +82,10 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-
+    /**
+     * Checks if the file exists, if not create a new file
+     *
+     */
     private static void checkFileExist() {
         try {
             String folder = "data";

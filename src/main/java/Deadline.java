@@ -10,6 +10,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * @return string representing date and time in the following format:
+     * 23rd September 2019, 3.01am
+     */
     private String generateDateAndTimeString() {
         String dateAndTime = "" + by.getDayOfMonth();
         int day = by.getDayOfMonth();
@@ -47,11 +51,17 @@ public class Deadline extends Task {
         return dateAndTime;
     }
 
+    /**
+     * @return string that displays the task in a readable format to the user
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + generateDateAndTimeString() + ")";
     }
 
+    /**
+     * @return string for storing in text file
+     */
     @Override
     public String toSaveString() {
         return "D | " + super.toSaveString() + " | " + by;

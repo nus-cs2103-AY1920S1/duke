@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     protected String filePath;
 
@@ -15,6 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Converts lines of Strings in saved text file into tasks which are loaded into an ArrayList<Task>.
+     * @return an ArrayList<Task> containing all the tasks in the saved file.
+     * @throws DukeException if there is an error in loading the file
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<Task>();
         File file = new File(filePath);
@@ -59,6 +67,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Updates the task that is completed in the saved file.
+     * @param taskNum the line number of the task to be updated (marked as done)
+     * @throws IOException if stream to file cannot be written to or closed.
+     */
     public void updateTaskInFile(int taskNum) throws IOException {
         File file =  new File(filePath);
         Scanner scn = new Scanner(file);
@@ -79,6 +92,12 @@ public class Storage {
         fw.write(list.get(list.size() - 1));
         fw.close();
     }
+
+    /**
+     * Adds the task into the end of the text file.
+     * @param textToAdd a line of string which can be saved in an understandable way
+     * @throws IOException if stream to file cannot be written to or closed.
+     */
     public void addToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         File file = new File(filePath);
@@ -90,6 +109,12 @@ public class Storage {
         fw.close();
     }
 
+
+    /**
+     * Deletes the task based on its line number in the text file.
+     * @param taskNum the line number of the task to be deleted
+     * @throws IOException if stream to file cannot be written to or closed.
+     */
     public void deleteFromFile(int taskNum) throws IOException {
         File file =  new File(filePath);
         Scanner scn = new Scanner(file);

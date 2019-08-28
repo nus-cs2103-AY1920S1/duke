@@ -1,5 +1,13 @@
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Parser {
 
+    /**
+     * Returns the appropriate command for later execution of the command
+     * @param fullCommand single line of string from user-input
+     * @return appropriate command based on the user-input
+     */
     public static Command parse(String fullCommand){
         if (fullCommand.equals("bye")) {
             return new ExitCommand();

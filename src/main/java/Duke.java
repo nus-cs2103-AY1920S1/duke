@@ -13,16 +13,16 @@ public class Duke {
                     if (command.equals("list")) {
                         printList(taskList);
                     } else if (parts[0].equals("done")) {
-                        int taskNum = Integer.valueOf(parts[1]);
+                        int taskNum = Integer.parseInt(parts[1]);
                         printReply(taskList.get(taskNum - 1).markAsDone());
                     } else if (parts[0].equals("delete")) {
-                        int taskNum = Integer.valueOf(parts[1]);
+                        int taskNum = Integer.parseInt(parts[1]);
                         removeFromList(taskList, taskNum);
                     } else if (parts[0].equals("todo")) {
                         addToList(new Todo(parts[1]), taskList);
                     } else if (parts[0].equals("deadline")) {
                         String[] subparts = parts[1].split(" /by ");
-                        addToList(new Deadline(subparts[0], subparts[1]), taskList);
+                        addToList(new Deadline(subparts[0], new Date(subparts[1])), taskList);
                     } else if (parts[0].equals("event")) {
                         String[] subparts = parts[1].split(" /at ");
                         addToList(new Event(subparts[0], subparts[1]), taskList);

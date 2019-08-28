@@ -13,10 +13,19 @@ import java.util.Scanner;
 public class Storage {
 	protected String filePath;
 
+	/**
+	 * Constructor.
+	 * @param filePath Path to save file.
+	 */
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Saves memory to file.
+	 * @param tasks Task list.
+	 * @throws DukeException Exceptions.
+	 */
 	public void saveMemory(TaskList tasks) throws DukeException {
 		ArrayList<Task> memory = tasks.getMemory();
 		String dir = System.getProperty("user.dir") + "/savedData.txt";
@@ -32,6 +41,11 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * Loads from save file
+	 * @return Returns array list with saved tasks.
+	 * @throws DukeException Exceptions.
+	 */
 	public ArrayList<Task> load() throws DukeException {
 		ArrayList<Task> TaskList = new ArrayList<>();
 		try {

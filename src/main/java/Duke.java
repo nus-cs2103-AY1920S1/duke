@@ -6,6 +6,10 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor.
+     * @param filePath Path to save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +23,9 @@ public class Duke {
         parser = new Parser();
     }
     
+    /**
+     * Main run method.
+     */
     public void run() {
     	try {
 			storage.load();
@@ -62,6 +69,10 @@ public class Duke {
 		sc.close();
     }
 	
+	/**
+	 * Main method.
+	 * @param args Args.
+	 */
 	public static void main(String[] args) {
 		String dir = System.getProperty("user.dir") + "/savedData.txt";
 		new Duke(dir).run();

@@ -1,10 +1,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DukeDateTimeFormatter {
+public class Formatter {
     private static final DateTimeFormatter prettyFormat = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm");
     private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-
+    
     public static String prettyFormat(LocalDateTime dateTime) {
         return dateTime.format(prettyFormat);
     }

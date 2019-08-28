@@ -5,16 +5,16 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = DukeDateTimeParser.parse(by);
+        this.by = Parser.parse(by);
     }
 
     @Override
     public String toDataString() {
-        return "D | " + super.toDataString() + " | " + DukeDateTimeFormatter.standardFormat(this.by);
+        return "D | " + super.toDataString() + " | " + Formatter.standardFormat(this.by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DukeDateTimeFormatter.prettyFormat(by) + ")";
+        return "[D]" + super.toString() + " (by: " + Formatter.prettyFormat(by) + ")";
     }
 }

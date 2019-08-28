@@ -6,6 +6,7 @@ public class Deadline extends Task {
     public Deadline(String name, String time) {
         super(name);
         this.time = time;
+        //Format date;
     }
 
     @Override

@@ -6,6 +6,7 @@ public class Event extends Task {
     public Event(String name, String time) {
         super(name);
         this.time = time;
+        //Format date;
     }
 
     @Override

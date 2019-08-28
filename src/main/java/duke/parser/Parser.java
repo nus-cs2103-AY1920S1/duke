@@ -35,6 +35,9 @@ public class Parser {
             case "done":
                 type = CommandType.DONE;
                 break;
+            case "find":
+                type = CommandType.FIND;
+                break;
             case "delete":
                 type = CommandType.DELETE;
                 break;

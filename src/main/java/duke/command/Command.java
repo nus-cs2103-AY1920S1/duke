@@ -60,6 +60,9 @@ public class Command {
             case DONE:
                 handleDone(arguments, tasks, ui, storage);
                 break;
+            case FIND:
+                handleFind(arguments, tasks, ui);
+                break;
             case LIST:
                 handleList(tasks, ui);
                 break;
@@ -122,6 +125,22 @@ public class Command {
         }
         Event event = new Event(tokens[0], parseDateTime(tokens[1]));
         handleAddTask(event, tasks, ui, storage);
+    }
+
+    private void handleFind(final String arguments, TaskList tasks, Ui ui) {
+        TaskList matches = new TaskList();
+        for (int i = 0; i < tasks.size(); ++i) {
+            Task task = tasks.getTask(i);
+            if (task.getDescription().contains(arguments)) {
+                matches.addTask(task);
+            }
+        }
+        if (matches.size() == 0) {
+            ui.showMessage("There are no matching tasks in your list");
+        } else {
+            ui.showMessage("Here are the matching tasks in your list:");
+            ui.showMessage(matches.toString());
+        }
     }
 
     private void handleDone(final String arguments, TaskList tasks, Ui ui, Storage storage) throws DukeException {

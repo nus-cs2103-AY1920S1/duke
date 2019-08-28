@@ -1,5 +1,4 @@
 import duke.commands.AddCommand;
-import duke.commands.DoneCommand;
 import duke.exceptions.DateException;
 import duke.exceptions.DukeException;
 import duke.managers.DateTime;
@@ -17,11 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
     DateTime dT = new DateTime();
 
-//    @Test
-//    public void dummyTest() {
-//        assertEquals(2,2);
-//    }
-
     /* this is the naming convention for the features
     @Test
     public void featureUnderTest_testScenario_expectedBehaviour() {
@@ -35,7 +29,7 @@ public class DukeTest {
     }
 
     @Test
-    public void doneCommand_commandGiven_taskMarkedAsDone() throws IOException, DukeException {
+    public void addCommand_commandGiven_taskAddedInRequiredFormat() throws IOException, DukeException {
         String addInstruction = "todo return book";
         String[] details = addInstruction.split(" ");
         AddCommand newAdd = new AddCommand(details);
@@ -46,5 +40,4 @@ public class DukeTest {
         Task addedTask = storage.load().get(0);
         assertEquals("[T][X] return book ", addedTask.toString());
     }
-
 }

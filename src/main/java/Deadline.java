@@ -1,6 +1,6 @@
 public class Deadline extends Task {
-    private String date;
-    private String time;
+    protected String date;
+    protected String time;
 
     public Deadline(String desc, String date, String time) {
         super(desc);

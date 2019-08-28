@@ -18,12 +18,14 @@ public class Duke {
     private Ui ui;
     private DateParser dateParser;
     private Storage storage;
+    private Parser parser;
 
     public void run() {
 
         ui = new Ui();
         dateParser = new DateParser();
         storage = new Storage(dateParser);
+        parser = new Parser();
 
         ui.printGreeting();
 
@@ -55,14 +57,14 @@ public class Duke {
     // to a subfunction to handle the command call.
     public void processInputLine(String line) throws DukeException, ParseException{
 
-        Command command = Command.getFromString(line.split(" ")[0]);
+        Command command = parser.getCommandFromLine(line);
 
         switch (command) {
         case LIST:
             ui.printList(taskList);
             break;
         case DONE:
-            markTaskAsDone(line);
+            markTaskAsDone(parser.getIndexFromLine(line));
             break;
         case DEADLINE:
             addDeadline(line);
@@ -74,16 +76,15 @@ public class Duke {
             addTodo(line);
             break;
         case DELETE:
-            deleteTask(line);
+            deleteTask(parser.getIndexFromLine(line));
             break;
         default:
             throw new InvalidCommandException(OOPS_STR + INVALID_COMMAND_STR);
         }
     }
 
-    public void deleteTask(String line) {
+    public void deleteTask(int index) {
 
-        int index = Integer.parseInt(line.split(" ")[1]) - 1;
         Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
 
@@ -144,9 +145,8 @@ public class Duke {
         return args.trim().split(" ").length > 1;
     }
 
-    public void markTaskAsDone(String line) {
+    public void markTaskAsDone(int index) {
 
-        int index = Integer.parseInt(line.split(" ")[1]) - 1;
         Task doneTask = taskList.get(index);
         doneTask.markAsDone();
 

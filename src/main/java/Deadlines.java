@@ -16,7 +16,7 @@ public class Deadlines extends Task{
         } else {
             sb.append("0 | ");
         }
-        sb.append(description + " | " + deadline);
+        sb.append(description + " | " + Parser.toFileDateTime(deadline));
         return sb.toString();
     }
 

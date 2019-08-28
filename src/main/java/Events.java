@@ -8,16 +8,17 @@ public class Events extends Task {
         super(done, description);
         this.start = start;
         this.end = end;
+    }
 
     @Override
     public String toFileString() {
-        StringBuilder sb = new StringBuilder("D | ");
+        StringBuilder sb = new StringBuilder("E | ");
         if (isDone) {
             sb.append("1 | ");
         } else {
             sb.append("0 | ");
         }
-        sb.append(description + " | " + at);
+        sb.append(description + " | " + Parser.toFileDateTime(start) + " - " + Parser.toFileDateTime(end));
         return sb.toString();
     }
 
@@ -34,3 +35,4 @@ public class Events extends Task {
         return sb.toString();
     }
 }
+

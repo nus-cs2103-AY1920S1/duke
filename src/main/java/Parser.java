@@ -26,9 +26,17 @@ public class Parser {
         return null;
     }
 
+    public static String toFileDateTime(LocalDateTime dateObj) {
+        return dateObj.getDayOfMonth() + "/" + dateObj.getMonthValue() + "/" + dateObj.getYear() + " "
+                + String.format("%02d", dateObj.getHour())
+                + String.format("%02d", dateObj.getMinute());
+    }
+
     public static String printDate(LocalDateTime dateObj) {
         return dateObj.getDayOfMonth() + " " + dateObj.getMonth() +
                 " " + dateObj.getYear() + " " + String.format("%02d", dateObj.getHour())
                 + String.format("%02d", dateObj.getMinute());
     }
+
+
 }

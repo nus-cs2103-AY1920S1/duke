@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class fileManager {
@@ -12,10 +13,15 @@ public class fileManager {
             task = new ToDo(done, textArr[2]);
             break;
         case "D": //deadline
-            task = new Deadlines(done, textArr[2], textArr[3]);
+            LocalDateTime deadline = Parser.parseDateTime(textArr[3]);
+            task = new Deadlines(done, textArr[2], deadline);
             break;
         case "E": //event
-            task = new Events(done, textArr[2], textArr[3]);
+            String[] startEndStr = textArr[3].split(" - ");
+
+            LocalDateTime start = Parser.parseDateTime(startEndStr[0]);
+            LocalDateTime end = Parser.parseDateTime(startEndStr[1]);
+            task = new Events(done, textArr[2], start, end);
             break;
         default:
             break;
@@ -23,13 +29,7 @@ public class fileManager {
         return task;
     }
 
-//    public static void testWrite(String filePath, String text) throws IOException {
-//        FileWriter fw = new FileWriter(filePath, true);
-//        fw.write(text);
-//        fw.close();
-//    }
-
-    public static void updateFile (List<Task> taskList, String filePath) {
+    public static void updateFile(List<Task> taskList, String filePath) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < taskList.size(); i++) {

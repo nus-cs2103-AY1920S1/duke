@@ -1,68 +1,23 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
+import java.util.List;
 
-import java.io.File;
-
-import java.util.Scanner;
-import java.io.FileNotFoundException;
-
-import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.List;
-import java.util.ArrayList;
-
-public class Storage {
-    private static File dataFile;
-
-    public Storage(String filePath) {
-        dataFile = new File(filePath);
-    }
-
+public interface Storage {
     /**
-     * Loads tasks from a (valid) data file, adds them to a new list, then
-     * returns that list.
+     * Loads tasks from external storage to a new list, then returns that list.
      * @return                  List of tasks that were loaded from file
      * @throws DukeException    If tasks cannot be loaded from file
      */
-    public List<Task> load() throws DukeException {
-        List<Task> taskList = new ArrayList<>();
-        try {
-            Scanner fileScanner = new Scanner(dataFile);
-            while (fileScanner.hasNext()) {
-                String task = fileScanner.nextLine();
-                String[] details = task.split(" \\| ");
-                boolean isDone = details[1].equals("+");
-                if (details[0].equals("T")) {
-                    taskList.add(new Todo(details[2], isDone));
-                } else if (details[0].equals("E")) {
-                    taskList.add(new Event(details[2], details[3], isDone));
-                } else if (details[0].equals("D")) {
-                    taskList.add(new Deadline(details[2], details[3], isDone));
-                } else {
-                    taskList.add(new Task("Task could not be parsed."));
-                    // TODO: Find better way to handle parsing error.
-                }
-            }
-            return taskList;
-        } catch (FileNotFoundException e) {
-            throw new DukeException("No such file was found.");
-        }
-    }
+    public List<Task> load() throws DukeException;
 
     /**
-     * Writes the tasks in the given list to an external data file.
+     * Writes the tasks in the given list into external storage.
      * @param tasks             List of tasks to be written.
      * @throws IOException      If file cannot be found, etc.
      */
-    public void writeToFile(TaskList tasks) throws IOException {
-        FileWriter fileWriter = new FileWriter(dataFile);
-        fileWriter.write(tasks.toString());
-        fileWriter.close();
-    }
+    public void writeToFile(TaskList tasks) throws IOException;
 }

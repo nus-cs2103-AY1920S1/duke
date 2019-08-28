@@ -18,7 +18,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new TextUi();
-        storage = new Storage(filePath);
+        storage = new HardDiskStorage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

@@ -41,14 +41,14 @@ public abstract class Task {
      */
     public String getSymbol() {
         switch (type){
-            case TODO:
-                return "T";
-            case DEADLINE:
-                return "D";
-            case EVENT:
-                return "E";
-            default:
-                return "";
+        case TODO:
+            return "T";
+        case DEADLINE:
+            return "D";
+        case EVENT:
+            return "E";
+        default:
+            return "";
         }
     }
 

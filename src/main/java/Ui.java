@@ -15,6 +15,10 @@ public class Ui {
         TaskList.printTasks();
     }
 
+    public static void findTasks(String term) {
+        TaskList.findTasks(term);
+    }
+
     public static void addTaskToTaskList(Task task) {
         TaskList.addTask(task);
         System.out.println("Got it. I've added this task: ");
@@ -54,7 +58,9 @@ public class Ui {
                 continue;
             }
 
-            if (userInput.startsWith("done")) {
+            if (userInput.startsWith("find")) {
+                findTasks(userInputSplit[1]);
+            } else if (userInput.startsWith("done")) {
                 int taskNumber = Integer.parseInt(userInput.substring(5));
                 Task selectedTask = TaskList.getTaskAt(taskNumber);
                 selectedTask.markAsDone();

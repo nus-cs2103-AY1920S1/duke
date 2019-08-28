@@ -14,7 +14,13 @@ public class Duke {
         ArrayList<Task> taskList = storage.load(new ArrayList<Task>());
         Parser p = new Parser(taskList, storage);
         while(scanner.hasNextLine()) {
-            p.parse(scanner.nextLine());
+            String x = scanner.nextLine();
+            p.parse(x);
+            if (x.equals("bye")) {
+                scanner.close();
+                break;
+            }
+
         }
         scanner.close();
     }

@@ -102,6 +102,16 @@ public class Parser {
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("OOPS!!! Index for delete cannot be empty.");
                     }
+                } else if (userCommand.equals("find")) {
+                    String word = inputArr[1];
+                    System.out.println("Here are the matching tasks in your list:");
+                    int count = 1;
+                    for (Task ttt : commands) {
+                        if (ttt.toString().contains(word)) {
+                            System.out.println(count + ". " + ttt);
+                            count++;
+                        }
+                    }
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

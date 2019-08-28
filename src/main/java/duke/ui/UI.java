@@ -32,7 +32,7 @@ public class UI {
     }
 
     /**
-     * Gets an input from user.
+     * Gets input from user.
      *
      * @return input from user.
      */

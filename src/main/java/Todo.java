@@ -4,6 +4,9 @@ public class Todo extends Task {
         super(description);
         taskType = possibleTaskTypes.TODO;
     }
+    public Todo(String description, Boolean isDone){
+        super(description, isDone);
+    }
 
     @Override
     public String toString() {

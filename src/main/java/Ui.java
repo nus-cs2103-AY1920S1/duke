@@ -14,4 +14,8 @@ public class Ui {
                 underscore ;
         System.out.println(logo + intro);
     }
+
+    public void showLoadingError(DukeException e){
+        System.out.println(e.getMessage());
+    }
 }

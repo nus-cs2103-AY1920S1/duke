@@ -35,7 +35,7 @@ public class Duke {
             for (String input: inputsFromFile){
                 // possible input string: "D | 0 | CS2103 Ip  | Wed 2359"
                 String[] words = input.split("\\|") ;
-                Boolean isDone;
+                Boolean isDone = false;
 
 
                 if (words[0].length() < 3 ){
@@ -51,7 +51,7 @@ public class Duke {
 
                         description = words[2].trim();
 
-                        Todo newTodo = new Todo(description);
+                        Todo newTodo = new Todo(description, isDone);
                         tasks.add(newTodo);
 
                     } else if (words[0].contains("E")) {
@@ -59,14 +59,16 @@ public class Duke {
 
                         if (words[1].contains("1")) {
                             isDone = true;
+
                         } else if (words[1].contains("0")) {
                             isDone = false;
+
                         }
 
                         description = words[2].trim();
                         extraDescription = words[3].trim();
 
-                        Event newEvent = new Event(description, extraDescription);
+                        Event newEvent = new Event(description, extraDescription, isDone);
                         tasks.add(newEvent);
 
                     } else if (words[0].contains("D")) {
@@ -74,14 +76,16 @@ public class Duke {
 
                         if (words[1].contains("1")) {
                             isDone = true;
+
                         } else if (words[1].contains("0")) {
                             isDone = false;
+
                         }
 
                         description = words[2].trim();
                         extraDescription = words[3].trim();
 
-                        Deadline newDeadline = new Deadline(description, extraDescription);
+                        Deadline newDeadline = new Deadline(description, extraDescription, isDone);
                         tasks.add(newDeadline);
                     }
                 }
@@ -221,7 +225,7 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e){
-                System.out.println(e.getMessage());
+                ui.showLoadingError(e);
             } catch (StringIndexOutOfBoundsException e){
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){

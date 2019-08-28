@@ -10,6 +10,10 @@ public class TaskList {
         tasks = new ArrayList<Task>();
     }
 
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public void addTask(Task task) {
         tasks.add(task);
     }
@@ -20,6 +24,10 @@ public class TaskList {
 
     public Task removeTask(int index) {
         return tasks.remove(index);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     public int getTasksSize() {

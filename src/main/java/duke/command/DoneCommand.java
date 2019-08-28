@@ -16,6 +16,7 @@ public class DoneCommand implements Command {
             Task doneTask = tasks.getTask(index);
             doneTask.markDone();
             ui.output("Nice! I've marked this task as done: \n" + doneTask.toString());
+            storage.writeToFile(tasks);
         }
         catch (Exception e) {
             throw new DukeException(String.format("OOPS!!! Please input a number between 1 and %d after 'done'",

@@ -1,18 +1,20 @@
 import java.util.LinkedList;
 
-/**
- * To manage a list of task with several methods.
- *
- * @param null basic constructor with empty task.
- * @param tasks the list of current tasks that are loaded from a txt file.
-  */
 public class TaskList {
     private LinkedList<Task> tasks;
 
+    /**
+     * Default constructor. Create an empty task.
+     */
     public TaskList() {
         this.tasks = new LinkedList<Task>();
     }
 
+    /**
+     * To manage a list of task with several methods.
+     *
+     * @param tasks the list of current tasks that are loaded from a txt file.
+     */
     public TaskList(LinkedList<Task> tasks) {
         this.tasks = tasks;
     }

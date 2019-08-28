@@ -34,7 +34,7 @@ public class Duke {
                 Parser.parse(tasks, ui, inputText, storage);
                 inputText = sc.nextLine();
             } catch (Exception err) {
-                System.out.println(err);
+                System.out.println("[Exception]" + err);
             }
         }
 

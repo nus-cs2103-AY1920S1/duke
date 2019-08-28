@@ -19,14 +19,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * Represents local storage of data from Duke application.
+ */
 public class Storage {
+
     private final String filePath;
 
+    /**
+     * Constructor of data storage at a given file.
+     *
+     * @param filePath path of storage file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the Duke application data from this storage file if file exists.
+     * Otherwise, create the missing file using the given file path.
+     *
+     * @return the list of tasks being loaded from storage file.
+     * @throws DukeException if missing file is unable to be created and/or there were errors reading data from file.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -43,6 +58,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Reads data from this storage file. Reads maximum one task per line.
+     *
+     * @param filePath path of storage file.
+     * @return list of lines being read.
+     * @throws FileNotFoundException if specified file is missing.
+     */
     private List<String> readFrom(String filePath) throws FileNotFoundException {
         File file = new File(this.filePath);
         Scanner scanner = new Scanner(file);
@@ -53,6 +75,13 @@ public class Storage {
         return storageLines;
     }
 
+    /**
+     * Creates task from reading and parsing the lines in the storage file.
+     *
+     * @param storageLine lines in the storage file.
+     * @return task.
+     * @throws DukeException if there were errors reading data from file.
+     */
     private Task createTaskFrom(String storageLine) throws DukeException {
         Task task;
         try {
@@ -84,6 +113,12 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Creates the file using the given file path if file is missing.
+     *
+     * @param filePath path of the file.
+     * @throws DukeException if there were errors when creating the file.
+     */
     private static void createFileIfMissing(String filePath) throws DukeException {
         final File storageFile = new File(filePath);
         if (storageFile.exists()) {
@@ -98,6 +133,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the list of simplified task representations to the storage file.
+     *
+     * @param simplifiedTaskRepresentations list of simplified task representations.
+     * @throws DukeException if there were errors converting and/or storing data to file.
+     */
     public void save(List<String> simplifiedTaskRepresentations) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
@@ -110,6 +151,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the simplified task representation to the storage file.
+     *
+     * @param simplifiedTaskRepresentation simplified task representation.
+     * @throws DukeException if there were errors converting and/or storing data to file.
+     */
     public void save(String simplifiedTaskRepresentation) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, true);

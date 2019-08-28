@@ -5,6 +5,10 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
 
+/**
+ * Terminates the program.
+ */
+
 public class ExitCommand extends Command {
 
     @Override

@@ -7,13 +7,24 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
 
+/**
+ * Deletes a task using an index.
+ */
 public class DeleteCommand extends Command {
+
     private int index;
 
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes deletion of a task on user interface.
+     *
+     * @param taskList list of tasks.
+     * @param ui user interface displaying the successful deletion of a task.
+     * @param storage local storage of data.
+     */
     @Override
     public void execute(TaskList taskList, UserInterface ui, Storage storage) throws DukeException {
         if (index <= 0 || index > taskList.size()) {

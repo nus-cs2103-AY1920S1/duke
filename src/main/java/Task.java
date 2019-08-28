@@ -3,22 +3,26 @@ A task class to represent a task object.
 Properties: id, name, done
 */
 public class Task {
-    private String name;
-    private boolean done;
+    protected String name;
+    protected boolean isDone;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
+    }
+
+    public String printForStorage() {
+        return "";
     }
 
     @Override
     public String toString() {
         String str = "";
-        if (this.done) {
+        if (this.isDone) {
             str += "[✓]";
         } else {
             str += "[✗]";

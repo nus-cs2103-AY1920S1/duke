@@ -16,5 +16,4 @@ public class ParserTest {
         assertArrayEquals(new String[]{"return book", "02/12/2019 1800"},
                 Parser.splitByIdentifier(new String[]{"return book", "/by", "02/12/2019 1800"}, "/by"));
     }
-
 }

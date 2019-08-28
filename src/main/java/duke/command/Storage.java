@@ -8,34 +8,17 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.Event;
-import duke.task.ToDo;
-import duke.task.Status;
+import duke.task.*;
 
-/**
- * Storage class. Handles the reading/writing of data to disk.
- */
 public class Storage {
 
-    /** Stores the location of the file to be read/written to. */
     private String fileName;
-    /** Stores the format by which the Date/Time should be read/written as. */
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    /**
-     * Creates a new Storage object.
-     * @param fileName The location of the file to be read/written to.
-     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
-    /**
-     * Loads previously-saved tasks from the file.
-     * @return An ArrayList containing the tasks previously stored.
-     */
     ArrayList<Task> loadFromFile() {
 
         try {
@@ -52,20 +35,17 @@ public class Storage {
                 Status status = (params[1].equals("0") ? Status.INCOMPLETE : Status.COMPLETE);
 
                 switch (params[0]) {
-                case "T":
-                    taskList.add(new ToDo(status, params[2]));
-                    break;
+                    case "T":
+                        taskList.add(new ToDo(status, params[2]));
+                        break;
 
-                case "D":
-                    taskList.add(new Deadline(status, params[2], LocalDateTime.parse(params[3], formatter)));
-                    break;
+                    case "D":
+                        taskList.add(new Deadline(status, params[2], LocalDateTime.parse(params[3], formatter)));
+                        break;
 
-                case "E":
-                    taskList.add(new Event(status, params[2], LocalDateTime.parse(params[3], formatter)));
-                    break;
-
-                default:
-                    break;
+                    case "E":
+                        taskList.add(new Event(status, params[2], LocalDateTime.parse(params[3], formatter)));
+                        break;
                 }
             }
             return taskList;
@@ -75,15 +55,10 @@ public class Storage {
         }
     }
 
-    /**
-     * Saves the tasks to file.
-     * @param taskList The ArrayList of tasks to be written to file.
-     * @throws IOException If it fails to write the file.
-     */
     void saveToFile(ArrayList<Task> taskList) throws IOException {
 
         File f = new File(fileName);
-        if (!f.exists()) {
+        if(!f.exists()) {
             f.getParentFile().mkdirs();
             f.createNewFile();
         }
@@ -92,7 +67,7 @@ public class Storage {
         StringBuilder s = new StringBuilder();
         Task current;
 
-        for (int i = 0; i < taskList.size(); i++) {
+        for(int i = 0; i < taskList.size(); i++) {
             current = taskList.get(i);
 
             if (i == taskList.size() - 1) {

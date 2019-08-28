@@ -7,21 +7,25 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 import java.io.File;
-
-import java.util.Scanner;
 import java.io.FileNotFoundException;
-
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
+/**
+ * An implementation of Storage that stores and loads data on the hard disk.
+ */
 public class HardDiskStorage implements Storage {
+
+    /** File to read and write from. */
     private static File dataFile;
 
     /**
-     * Creates a Storage object that can read and write from a hard disk file.
+     * Creates a Storage object that reads and writes from the given file.
+     *
      * @param filePath  Relative path to data file
      */
     public HardDiskStorage(String filePath) {
@@ -29,10 +33,12 @@ public class HardDiskStorage implements Storage {
     }
 
     /**
-     * Loads tasks from a (valid) data file, adds them to a new list, then
-     * returns that list.
-     * @return                  List of tasks that were loaded from file
-     * @throws DukeException    If tasks cannot be loaded from file
+     * Loads tasks from a data file and returns a list containing the tasks.
+     * If file is not found or cannot be read, a DukeException is thrown.
+     *
+     * @return                  List of tasks from data file
+     * @throws DukeException    If file does not exist, tasks cannot be loaded,
+     *                          etc.
      */
     @Override
     public List<Task> load() throws DukeException {
@@ -61,12 +67,16 @@ public class HardDiskStorage implements Storage {
     }
 
     /**
-     * Writes the tasks in the given list to an external data file.
+     * Stores the tasks in the given list to the hard disk file. If necessary,
+     * a new file and its parent directories are created before storing the
+     * task list.
+     *
      * @param tasks             List of tasks to be written.
-     * @throws IOException      If file cannot be found, etc.
+     * @throws IOException      If file cannot be created, file cannot be
+     *                          written, etc.
      */
     @Override
-    public void writeToFile(TaskList tasks) throws IOException {
+    public void store(TaskList tasks) throws IOException {
         if (!dataFile.exists()) {
             dataFile.getParentFile().mkdirs();
             dataFile.createNewFile();

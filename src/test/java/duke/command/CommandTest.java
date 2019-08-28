@@ -26,7 +26,7 @@ class CommandTest {
         }
 
         @Override
-        public void writeToFile(TaskList tasks) throws IOException {
+        public void store(TaskList tasks) throws IOException {
             if (!this.isWorking) {
                 throw new IOException("write error");
             }

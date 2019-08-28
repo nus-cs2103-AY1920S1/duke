@@ -9,11 +9,17 @@ import duke.command.EventCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
+/**
+ * The Parser class is in charge of handling user-given commands. It ensures
+ * that only valid inputs are processed and produces the relevant Command
+ * objects.
+ */
 public class Parser {
 
     /**
      * Parses the input string and returns a Command corresponding to the
      * required action.
+     *
      * @param input             String representation of the desired command
      * @return                  Command
      * @throws DukeException    If input is invalid, etc.
@@ -43,14 +49,16 @@ public class Parser {
 
     /**
      * Throws an exception if the given input does not have a valid format.
-     * Valid formats are: 1. "list"
-     *                    2. "done [taskIndex]"
-     *                    3. "undo [taskIndex]"
-     *                    4. "todo [description]"
-     *                    5. "deadline [description] /by [time]"
-     *                    6. "event [description] /at [time]"
-     *                    7. "delete [taskIndex]"
-     *                    8. "bye"
+     * Valid formats are:
+     * 1. "list"
+     * 2. "done [taskIndex]"
+     * 3. "undo [taskIndex]"
+     * 4. "todo [description]"
+     * 5. "deadline [description] /by [time]"
+     * 6. "event [description] /at [time]"
+     * 7. "delete [taskIndex]"
+     * 8. "bye"
+     *
      * @param input             Text input to be validated
      * @throws DukeException    An exception with a message describing Duke's
      *                          response to the problem

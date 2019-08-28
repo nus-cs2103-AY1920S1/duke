@@ -1,35 +1,39 @@
 package duke;
 
 import duke.task.TaskList;
-
 import java.util.Scanner;
 
 /**
- * This class handles the user interface – all activities relating to input and
- * output, including format or printing.
+ * This class handles all activities relating to the user interface, including
+ * formatting or displaying input and output.
  */
 public class TextUi {
 
     /* STATIC VARIABLES */
 
+    /** Scanner for user input */
     private static final Scanner scanner = new Scanner(System.in);
 
+    /** Duke logo for display */
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /** Horizontal line of width 60 characters */
     private static final String HORIZONTAL_LINE =
             "____________________________________________________________";
 
+    /** Four space indentation */
     private static final String INDENT = "    ";
 
     /* METHODS TO READ INPUT */
 
     /**
-     * Reads a command from standard input. If user input is terminated,
-     * automatically returns an exit command.
+     * Reads a command from standard input and returns it. If input is
+     * terminated, automatically returns an exit command.
+     *
      * @return  String representing a user-given command
      */
     public String readCommand() {
@@ -40,6 +44,7 @@ public class TextUi {
 
     /**
      * Prints the given text with indentation of five spaces.
+     *
      * @param text      Single line of text to be printed
      */
     // TODO: Wrap text for longer lines
@@ -48,7 +53,7 @@ public class TextUi {
     }
 
     /**
-     * Prints a horizontal line of width 60 characters.
+     * Prints a horizontal line with indentation.
      */
     public void showLine() {
         System.out.println(INDENT + HORIZONTAL_LINE);
@@ -56,8 +61,8 @@ public class TextUi {
 
     /**
      * Prints the items in the given list with their corresponding index
-     * numbers. A horizontal line is printed above and below the list, and
-     * output is indented throughout.
+     * numbers (one-indexed).
+     *
      * @param list      A task list to be printed
      */
     public void showList(TaskList list) {
@@ -67,8 +72,8 @@ public class TextUi {
     }
 
     /**
-     * Prints the given text with a horizontal line above and below the text
-     * and appropriate indentation.
+     * Prints the given text with appropriate indentation.
+     *
      * @param text      Formatted text with appropriate line breaks. Maximum
      *                  width for each line is 58 characters.
      */
@@ -80,15 +85,16 @@ public class TextUi {
     }
 
     /**
-     * Prints an apology followed by details of the given exception.
-     * @param message   Error message from exception that caused the error
+     * Prints an apology followed by the given message.
+     *
+     * @param message   Message from the exception that caused the error
      */
     public void showErrorMessage(String message) {
         showText("Sorry, " + message);
     }
 
     /**
-     * Prints a welcome message that consists of the Duke logo and a greeting.
+     * Prints a welcome message consisting of the Duke logo and a greeting.
      */
     public void showWelcomeMessage() {
         showLine();
@@ -100,7 +106,7 @@ public class TextUi {
     }
 
     /**
-     * Prints a message indicating that tasks could not be loaded from storage.
+     * Prints a message indicating that tasks were not loaded from storage.
      */
     public void showLoadingError() {
         showLine();

@@ -1,8 +1,13 @@
 package duke.task;
 
+/**
+ * A Todo is a basic Task that simply describes what needs to be done.
+ */
 public class Todo extends Task {
+
     /**
      * Creates a new Todo task with the given description.
+     *
      * @param description       Task to be completed.
      */
     public Todo(String description) {
@@ -11,6 +16,7 @@ public class Todo extends Task {
 
     /**
      * Creates a new Todo task with the given description and status.
+     *
      * @param description       Task to be completed.
      * @param isDone            Whether the Task has been completed or not.
      */
@@ -20,6 +26,7 @@ public class Todo extends Task {
 
     /**
      * Returns the letter "T", representing the type Todo.
+     *
      * @return  "T"
      */
     @Override
@@ -30,6 +37,7 @@ public class Todo extends Task {
     /**
      * Returns a string containing the type of Task, done status, and
      * description.
+     *
      * @return  String describing the Todo.
      */
     @Override

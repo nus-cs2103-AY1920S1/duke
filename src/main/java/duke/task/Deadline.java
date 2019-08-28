@@ -2,11 +2,17 @@ package duke.task;
 
 import java.util.Date;
 
+/**
+ * Deadlines are special Tasks that have a due date.
+ */
 public class Deadline extends Task {
+
+    /** Due date of task */
     private Date by;
 
     /**
      * Creates a new Deadline with the given description and due date.
+     *
      * @param description       Task to be completed.
      * @param by                Due date for the Deadline.
      */
@@ -17,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline with the given description, due date and status.
+     *
      * @param description       Task to be completed.
      * @param by                Due date for the Deadline.
      * @param isDone            Whether the Deadline is completed or not.
@@ -28,7 +35,8 @@ public class Deadline extends Task {
 
     /**
      * Returns the letter "D", representing the type Deadline.
-     * @return  "D"
+     *
+     * @return  The letter "D" in a String.
      */
     @Override
     public String getType() {
@@ -38,6 +46,7 @@ public class Deadline extends Task {
     /**
      * Returns a representation of the current Deadline, including its due
      * date or time, in an appropriate format for data storage.
+     *
      * @return  String representing the current Deadline.
      */
     @Override
@@ -49,6 +58,7 @@ public class Deadline extends Task {
     /**
      * Returns a string containing the type of Task, done status, description,
      * and deadline.
+     *
      * @return  String describing the Deadline.
      */
     @Override

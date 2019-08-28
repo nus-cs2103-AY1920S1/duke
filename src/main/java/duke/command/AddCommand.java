@@ -6,13 +6,29 @@ import duke.TextUi;
 import duke.task.TaskList;
 
 /**
- * Wrapper for commands to add tasks. Should not be instantiated.
+ * Abstract class that consolidates common operations for Commands that add
+ * tasks, such as EventCommand and TodoCommand.
  */
-class AddCommand extends Command {
+abstract class AddCommand extends Command {
+
+    /**
+     * Constructs an AddCommand with the given details.
+     *
+     * @param details   Details of task to be added
+     */
     AddCommand(String details) {
         super(details);
     }
 
+    /**
+     * Displays a message indicating the successful addition of a new Task
+     * and attempts to save the task list to storage.
+     *
+     * @param tasks             List of tasks
+     * @param ui                User interface
+     * @param storage           Hard disk storage
+     * @throws DukeException    If an error occurs when saving the new task list
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui, Storage storage) throws
             DukeException {

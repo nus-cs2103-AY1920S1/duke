@@ -22,7 +22,7 @@ class DeadlineCommandTest {
         }
 
         @Override
-        public void writeToFile(TaskList tasks) {
+        public void store(TaskList tasks) {
             // do nothing
         }
     }

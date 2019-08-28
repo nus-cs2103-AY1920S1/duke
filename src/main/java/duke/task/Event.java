@@ -2,13 +2,19 @@ package duke.task;
 
 import java.util.Date;
 
+/**
+ * Events are Tasks that have a specific starting time.
+ */
 public class Event extends Task {
+
+    /** Starting time of the event. */
     private Date time;
 
     /**
-     * Creates a new Event with the given description and timing.
+     * Creates a new Event with the given description and start time.
+     *
      * @param description       Description of Event.
-     * @param time              Timing of the Event.
+     * @param time              Starting time of the Event.
      */
     public Event(String description, String time) {
         super(description);
@@ -16,9 +22,10 @@ public class Event extends Task {
     }
 
     /**
-     * Creates a new Event with the given description, timing and status.
+     * Creates a new Event with the given description, start time and status.
+     *
      * @param description       Description of Event.
-     * @param time              Timing of the Event.
+     * @param time              Start time of the Event.
      * @param isDone            Whether the Event is done or not.
      */
     public Event(String description, String time, boolean isDone) {
@@ -28,7 +35,8 @@ public class Event extends Task {
 
     /**
      * Returns the letter "E", representing the type Event.
-     * @return  "E"
+     *
+     * @return  The letter "E"
      */
     @Override
     public String getType() {
@@ -38,6 +46,7 @@ public class Event extends Task {
     /**
      * Returns a representation of the current Event, including its time, in
      * an appropriate format for data storage.
+     *
      * @return  String representing the current Event.
      */
     @Override
@@ -49,6 +58,7 @@ public class Event extends Task {
     /**
      * Returns a string containing the type of Task, done status, description,
      * and time.
+     *
      * @return  String describing the Event.
      */
     @Override

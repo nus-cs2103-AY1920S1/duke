@@ -5,7 +5,7 @@ public class Deadline extends Task {
     String endDate;
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
     Date date;
-    Deadline(String taskName, String endDate){
+    Deadline(String taskName, String endDate) {
         super(taskName);
         this.endDate = endDate;
         try {
@@ -22,7 +22,7 @@ public class Deadline extends Task {
         return this.endDate;
     }
 
-    public String getTaskDetails(){
+    public String getTaskDetails() {
         String doneSymbol;
         if (isDone()) {
             doneSymbol = "✓";

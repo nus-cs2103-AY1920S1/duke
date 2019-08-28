@@ -14,7 +14,7 @@ public class TaskList {
 
     }
 
-    private void populateTaskList(){
+    private void populateTaskList() {
         Stream<String> linesStream = bufferedReader.lines();
         linesStream.forEach(line -> {
             String[] lineSplit = line.split("//");
@@ -87,7 +87,7 @@ public class TaskList {
         return dukeTxt;
     }
 
-    public Task doneTask(int index){
+    public Task doneTask(int index) {
         Task currTask = tasksArr.get(index);
         currTask.done();
         return currTask;
@@ -106,7 +106,7 @@ public class TaskList {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String string = "Here are the tasks in your list:\n";
         for (int i = 0 ; i < tasksArr.size() ; i++ ) {
             string = string + "    " + (i + 1) + ". " + tasksArr.get(i).getTaskDetails() + "\n";

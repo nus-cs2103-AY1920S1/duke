@@ -1,6 +1,6 @@
 public class DoneTaskCommand extends Command {
     int index;
-    DoneTaskCommand(int index){
+    DoneTaskCommand(int index) {
         super(4);
         this.index = index - 1;
     }

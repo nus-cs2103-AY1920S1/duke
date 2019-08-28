@@ -17,7 +17,7 @@ public class Task {
         return taskName;
     }
 
-    public String getTaskDetails(){
+    public String getTaskDetails() {
         String doneSymbol;
         if (isDone) {
             doneSymbol = "✓";

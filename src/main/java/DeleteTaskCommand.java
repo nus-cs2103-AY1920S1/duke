@@ -1,6 +1,6 @@
 public class DeleteTaskCommand extends Command {
     int index;
-    DeleteTaskCommand(int index){
+    DeleteTaskCommand(int index) {
         super(1);
         this.index = index-1;
     }

@@ -1,12 +1,14 @@
 public class Parser {
     Parser(){
     }
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")){
             return new ByeTaskCommand();
         } else if (fullCommand.contains("delete")){
             return parseDeleteCommand(fullCommand);
-        } else if (fullCommand.contains("todo") || fullCommand.contains("event") || fullCommand.contains("deadline")){
+        } else if (fullCommand.contains("todo") ||
+                fullCommand.contains("event") ||
+                fullCommand.contains("deadline")) {
             return new AddTaskCommand(fullCommand);
         } else if (fullCommand.equals("list")) {
             return new ListTaskCommand();
@@ -18,12 +20,12 @@ public class Parser {
         }
     }
 
-    static Command parseDeleteCommand(String string){
+    static Command parseDeleteCommand(String string) {
         int index = Integer.parseInt(string.split("delete ")[1]);
         return new DeleteTaskCommand(index);
     }
 
-    static Command parseDoneCommand(String string){
+    static Command parseDoneCommand(String string) {
         int index = Integer.parseInt(string.split("done ")[1]);
         return new DoneTaskCommand(index);
     }

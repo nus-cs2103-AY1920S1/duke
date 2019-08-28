@@ -6,7 +6,7 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
-    void showWelcome(){
+    void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,19 +15,19 @@ public class Ui {
         System.out.println("Hello from\n" + logo);
     }
 
-    void showLine(){
+    void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
-    String readCommand(){
+    String readCommand() {
         return scanner.nextLine();
     }
 
-    public void printString(String string){
+    public void printString(String string) {
         System.out.println("    " + string);
     }
 
-    void showLoadingError(){
+    void showLoadingError() {
         System.out.println("    Failed to load file");
     }
 

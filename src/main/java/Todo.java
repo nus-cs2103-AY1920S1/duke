@@ -3,7 +3,7 @@ public class Todo extends Task {
         super(taskName);
     }
 
-    public String getTaskDetails(){
+    public String getTaskDetails() {
         String doneSymbol;
         if (isDone()) {
             doneSymbol = "✓";

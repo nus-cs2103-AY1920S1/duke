@@ -1,7 +1,7 @@
 public abstract class Command {
     int actionType; // -1=>null 0=>add 1=>delete 2=>list 3=>exit 4=>done
     Task task;
-    Command(int actionType){
+    Command(int actionType) {
         this.actionType = actionType;
     }
     abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

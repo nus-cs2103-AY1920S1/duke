@@ -13,7 +13,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         Task deletedTask = tasks.deleteTask(targetIndex);
         storage.update(tasks);
         ui.print("Noted. I've removed this task:");

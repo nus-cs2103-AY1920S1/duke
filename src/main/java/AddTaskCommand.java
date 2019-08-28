@@ -13,7 +13,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         tasks.addTask(newTask);
         storage.update(tasks);
         ui.print("Got it. I've added this task:");

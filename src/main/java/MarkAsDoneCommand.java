@@ -8,7 +8,7 @@ public class MarkAsDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         tasks.markTaskAsDone(targetIndex);
         storage.update(tasks);
         ui.print("Nice! I've marked this task as done:");

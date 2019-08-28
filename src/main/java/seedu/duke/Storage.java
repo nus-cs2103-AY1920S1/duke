@@ -8,13 +8,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Handles the storage of Task information in Files.
+ */
 public class Storage {
+    /** String representing the filepath for storage.*/
     protected static String filepath;
 
+    /** Constructor.*/
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads Tasks into the TaskList using information from Files upon starting the application.
+     * @return ArrayList to be used to create a new TaskList.
+     * @throws FileNotFoundException if File is not found.
+     */
     public static ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> arrlist = new ArrayList<>();
         try {
@@ -49,12 +59,23 @@ public class Storage {
         return arrlist;
     }
 
+    /**
+     * Creates a File if the File does not exist.
+     * @throws IOException
+     */
     public static void findFile() throws IOException {
         File f = new File(filepath);
         f.getParentFile().mkdir();
         f.createNewFile();
     }
 
+    /**
+     * Updates and stores information into the Files when TaskList changes or gains new information.
+     * @param append Boolean representing if File can be appended, or must be overwritten.
+     * @param str If appending, it is a String containing the information to be appended.
+     * @param t TaskList.
+     * @throws IOException
+     */
     public static void update(boolean append, String str, TaskList t) throws IOException {
         FileWriter fw;
         if (append == false) {

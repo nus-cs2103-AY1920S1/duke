@@ -1,13 +1,27 @@
 import java.util.Arrays;
 import java.util.Scanner;
-import duke.command.*;
+import duke.command.DukeException;
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
 
+/**
+ * Duke class. Creates a new Ui, TaskList and Storage object, then runs the main method of the program.
+ */
 public class Duke {
 
+    /** Stores the Ui object used to display messages to the user. */
     private Ui ui;
+    /** Stores the TaskList object used to add/delete tasks. */
     private TaskList taskList;
+    /** Stores the Storage object used to read/write from file. */
     private Storage storage;
 
+    /**
+     * This method runs the Duke chat bot. In particular, it prints the intro, and determines which command should
+     * be executed based on the user's input.
+     */
     private void run() {
         ui.printIntro();
 
@@ -51,7 +65,7 @@ public class Duke {
                     break;
 
                 case "todo":
-                    ui.printToUser(taskList.createTodo(params));
+                    ui.printToUser(taskList.createToDo(params));
                     break;
 
                 case "deadline":
@@ -73,12 +87,20 @@ public class Duke {
         }
     }
 
+    /**
+     * This method initialises the Duke class variables by creating a new Storage, TaskList and Ui object.
+     * @param filepath The path to save Duke data to.
+     */
     private Duke(String filepath) {
         storage = new Storage(filepath);
         taskList = new TaskList(storage);
         ui = new Ui();
     }
 
+    /**
+     * Main class. Sets the filepath for the saving of Duke tasks.
+     * @param args Not in use.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

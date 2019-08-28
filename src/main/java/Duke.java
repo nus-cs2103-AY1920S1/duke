@@ -43,6 +43,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints the given list of messages to the standard output
+     * @param messages the list of messages to print
+     */
     private static void printMessage(List<String> messages) {
         System.out.println("    ____________________________________________________________");
         for (String message : messages) {

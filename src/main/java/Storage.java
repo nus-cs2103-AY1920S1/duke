@@ -106,7 +106,9 @@ public class Storage {
         for (int i = 0; i < list.size() - 1; i++) {
             fw.write(list.get(i) + System.lineSeparator());
         }
-        fw.write(list.get(list.size() - 1));
+        if (list.size() > 0) {
+            fw.write(list.get(list.size() - 1));
+        }
         fw.close();
     }
 }

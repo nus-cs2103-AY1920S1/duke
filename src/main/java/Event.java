@@ -1,10 +1,20 @@
-public class Event extends Task {
-    protected String time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    protected Date time;
+
+    public Event(String description, String time) throws DukeException {
         super(description);
         this.type = Type.E;
-        this.time = time;
+        try {
+            SimpleDateFormat formatter =new SimpleDateFormat("dd/MM/yyyy HHmm");
+            this.type = Type.E;
+            this.time = formatter.parse(time);
+        } catch (ParseException e) {
+            throw new DukeException("Time format wrong");
+        }
     }
 
     @Override

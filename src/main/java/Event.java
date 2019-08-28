@@ -29,7 +29,7 @@ public class Event extends Task{
 
     @Override
     public String toSaveString() {
-        String saveString = super.toSaveString() + "@@@" + this.getAtDateTime();
+        String saveString = super.toSaveString() + "@@@" + this.getAtDateTimeString();
         return saveString;
     }
     

@@ -28,7 +28,7 @@ public class Deadline extends Task{
 
     @Override
     public String toSaveString() {
-        String saveString = super.toSaveString() + "@@@" + this.getByDateTime();
+        String saveString = super.toSaveString() + "@@@" + this.getByDateTimeString();
         return saveString;
     }
     

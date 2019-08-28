@@ -1,13 +1,22 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
+
 
 public class FileHandler {
     
-    public static void saveLocationAndName (LinkedList<Task> tasks, String saveLocation, String fileName) throws DukeException {
+    private String saveLocation;
+    private String fileName;
+    
+    public FileHandler (String saveLocation, String fileName) {
+        this.saveLocation = saveLocation;
+        this.fileName = fileName;
+    }
+    
+    public void saveTasks (TaskList tasks) throws DukeException {
         
         String strToAdd;
         String filePath = saveLocation + "/" + fileName;
@@ -16,7 +25,7 @@ public class FileHandler {
         try {
             //Check if dir exists, creates if dir does not exist.
             File dataDir = new File(saveLocation);
-            if (!dataDir.exists()) { new File("../data").mkdirs(); }
+            if (!dataDir.exists()) { dataDir.mkdirs(); }
             //Future: Check if parent dir exists?
 
             //Check if file exists, creates if file does not exist.
@@ -25,7 +34,9 @@ public class FileHandler {
             
             //Initialise FileWriter
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : tasks) { 
+            Task task;
+            for (int i = 0; i < tasks.getTaskListLength(); i++) { 
+                task = tasks.getTask(i);
                 strToAdd = task.toSaveString();
                 fw.write(strToAdd);
                 fw.write(System.lineSeparator());
@@ -36,8 +47,8 @@ public class FileHandler {
         }
     }
     
-    public static LinkedList<Task> loadData (String saveLocation, String fileName) throws DukeException {
-        LinkedList<Task> tasks = new LinkedList<>();
+    public TaskList loadData () throws DukeException {
+        TaskList tasks = new TaskList(new LinkedList<Task>());
         
         File saveFile =  new File(saveLocation + "/" + fileName);
         try {
@@ -74,7 +85,7 @@ public class FileHandler {
                     newTask.markAsDone();
                 }
                 //Append to tasks
-                tasks.add(newTask);
+                tasks.addTask(newTask);
             }
             
             return tasks;

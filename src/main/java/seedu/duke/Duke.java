@@ -13,7 +13,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Duke{
+public class Duke {
     private static String DIRECTORY_PATH = "D:/project/CS2103T/duke/data";
     private static String FILEPATH = DIRECTORY_PATH + "/duke.txt";
 
@@ -35,7 +35,7 @@ public class Duke{
         ui.printLine();
     }
 
-    public static void main(String[] args) throws DukeException, IOException, ParseException{
+    public static void main(String[] args) throws DukeException, IOException, ParseException {
         new Duke().run();
     }
 }

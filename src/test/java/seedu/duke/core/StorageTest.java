@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageTest {
     @Tag("basic")
     @Test
-    void addTask() throws IOException, DukeException, ParseException{
+    void addTask() throws IOException, DukeException, ParseException {
         Storage storage = new Storage();
         assertEquals("E", new Storage().addTask(new ArrayList<Task>(),
                 "event", "project meeting", "28/08/19 12:00").getType());
@@ -23,7 +23,7 @@ public class StorageTest {
 
     @Tag("basic")
     @Test
-    void loadTask() throws IOException, ParseException{
+    void loadTask() throws IOException, ParseException {
         //create a new text file with dummy task values. then load it and then assertEqual with the
         // first element of the list
         List<Task> list = new Storage().loadTask("D:/project/CS2103T/duke/data/duke_test.txt");

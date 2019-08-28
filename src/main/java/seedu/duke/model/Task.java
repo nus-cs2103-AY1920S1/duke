@@ -6,6 +6,9 @@ public class Task {
     protected String errorMsg;
     protected boolean isDone;
 
+    /**
+     * Creates an empty Task object.
+     */
     public Task() {
         this.type = "";
         this.description = "";
@@ -13,6 +16,10 @@ public class Task {
         this.errorMsg = "";
     }
 
+    /**
+     * Creates a Task object with description.
+     * @param description task description.
+     */
     public Task(String description) {
         this.type = "";
         this.description = description;
@@ -35,6 +42,7 @@ public class Task {
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
+
     public boolean getIsDone() {
         return isDone;
     }
@@ -43,7 +51,9 @@ public class Task {
         isDone = done;
     }
 
-    public String getType() { return type; }
+    public String getType() {
+        return type;
+    }
 
     public void markAsDone() {
         setDone(true);

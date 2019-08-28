@@ -1,9 +1,9 @@
 import java.util.List;
 
-public class Done implements Command {
+public class DoneCommand implements Command {
     private final List<Task> tasks;
 
-    Done(List<Task> tasks) {
+    DoneCommand(List<Task> tasks) {
         this.tasks = tasks;
     }
 

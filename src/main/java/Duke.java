@@ -19,9 +19,9 @@ public class Duke {
         parser.register("deadline", Deadline.getCommand(tasks));
         parser.register("event", Event.getCommand(tasks));
         parser.register("list", new ListCommand(tasks));
-        parser.register("done", new Done(tasks));
-        parser.register("delete", new Delete(tasks));
-        parser.register("bye", new Bye());
+        parser.register("done", new DoneCommand(tasks));
+        parser.register("delete", new DeleteCommand(tasks));
+        parser.register("bye", new ByeCommand());
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         while (!exit && input.hasNext()) {

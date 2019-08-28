@@ -1,9 +1,9 @@
 import java.util.List;
 
-class Delete implements Command {
+class DeleteCommand implements Command {
     private final List<Task> tasks;
 
-    Delete(List<Task> tasks) {
+    DeleteCommand(List<Task> tasks) {
         this.tasks = tasks;
     }
 

@@ -1,17 +1,36 @@
 import java.time.LocalDateTime;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
+/**
+ * Task is an object simulating a task, eg events.
+ * This class contains attributes that every task should have
+ * such as whether the task is done or what the description of
+ * the task is. This class also has methods that can change
+ * the attributes of the task, which are common among all
+ * tasks such as doing the task and storing the deadlines
+ * of the task as a Java date.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected static LinkedList<Task> taskList = new LinkedList<>();
 
+    /**
+     * Constructs a Task object.
+     * A task generally constructed with a description what to do.
+     * @param description Description of what the task is about.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Generates the status icon of the task.
+     * Method returns either a tick or a cross icon based
+     * on whether the task is done. Uses unicode.
+     * @return String representing the unicode of the icon.
+     */
     protected String getStatusIcon() {
         if (isDone) {
             return "\u2713";
@@ -24,26 +43,20 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * Changes the value of boolean isDone to True.
+     */
     public void doTask() {
         this.isDone = true;
     }
 
-    public static String formatToFile() {
-        ListIterator<Task> iter = taskList.listIterator();
-        StringBuilder taskListFileFormat = new StringBuilder();
-
-        while (iter.hasNext()) {
-            Task current = iter.next();
-            taskListFileFormat.append(current.toFileFormat());
-
-            if (iter.hasNext()) {
-                taskListFileFormat.append("\n");
-            }
-        }
-
-        return taskListFileFormat.toString();
-    }
-
+    /**
+     * Converts a String to a LocalDateTime object.
+     * This method converts a string of the format "dd/mm/yyyy HHMM"
+     * into a LocalDateTime object. e.g. "2/12/2019 1800"
+     * @param date String of the format given above.
+     * @return LocalDateTime LocalDateTime object representing the date.
+     */
     protected LocalDateTime storeAsDateTime(String date) {
         StringBuilder sb = new StringBuilder();
         String[] temp = date.split(" ");
@@ -89,6 +102,10 @@ public class Task {
         return dateTime;
     }
 
+    /**
+     * Filler method to imitate an interface.
+     * @return String empty string
+     */
     protected String toFileFormat() {
         return "";
     }

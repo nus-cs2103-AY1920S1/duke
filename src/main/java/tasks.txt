@@ -1,4 +1,2 @@
-T~0~read book
-E~0~project meeting~at: 2/12/2019 1800
-D~0~submission~by: 3/3/2019 0900
-T~0~read book
+D~0~submission~by: 2/2/2019 1800
+E~0~project~at: 3/12/2019 0900

@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Duke is the main body of the program. It takes in the
+ * user's input and processes it accordingly.
+ */
 public class Duke {
 
     private Storage storage;

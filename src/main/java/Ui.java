@@ -1,6 +1,10 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+/**
+ * Ui is a class that designed to output the how the program
+ * responds to the user inputs.
+ */
 public class Ui {
     public void showWelcome() {
         printLine();

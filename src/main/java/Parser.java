@@ -1,11 +1,34 @@
+/**
+ * Parser is a class that aids in parsing through the user input
+ * and understanding the commands and executing them accordingly.
+ * Commands are passed into a method and appropriate actions are
+ * taken to create tasks, remove tasks, or add tasks etc.
+ */
 public class Parser {
     private Ui ui;
     private boolean isExit = false;
 
+    /**
+     * Constructs a Parser object.
+     * Parser object is constructed and passed a Ui object to
+     * help with printing the outputs back to the user.
+     * @param ui ui object for user interaction
+     */
     public Parser(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Parses through the user's input and makes changes to the
+     * task list accordingly.
+     * First token of the string is checked to see if it is a valid
+     * instruction. If invalid an IncorrectInputException is thrown.
+     * If a task is given without description a NoDescriptionException
+     * is thrown. Otherwise the task is processed accordingly.
+     * @param input String input from the user.
+     * @param taskList The current list of tasks
+     * @throws DukeException
+     */
     public void parseCommand(String input, TaskList taskList) throws DukeException {
         String[] inputArr = input.split(" ");
         String taskType = inputArr[0];
@@ -73,6 +96,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Extracts the description and date of the task
+     * leaving the command out.
+     * @param inputArr String[] of the whole input by the user
+     * @return String String representing the description and date.
+     */
     public static String getDesc(String[] inputArr) {
         StringBuilder builder = new StringBuilder();
 

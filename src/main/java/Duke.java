@@ -49,6 +49,7 @@ public class Duke {
         if (userInput.hasNext()) {
             command = userInput.next();
         } else {
+            userInput.close();
             throw new VoidDukeCommand();
         }
 
@@ -69,6 +70,7 @@ public class Duke {
                 errorMessage = makeSpace(5) + "The command \"bye\" should not have anything after!\n"
                         + makeSpace(5) + "Do you really intend to quit?";
             } else {
+                userInput.close();
                 return;
             }
 
@@ -181,23 +183,28 @@ public class Duke {
                 errorMessage = makeSpace(5) + "The description of a Event cannot be empty!";
             }
         } else {
+            userInput.close();
             throw new InvalidDukeCommand();
         }
 
         if (errorMessage != null) {
+            userInput.close();
             throw new IncorrectDukeCommand(errorMessage);
         }
-        
+
+        userInput.close();
         System.out.println(HORIZONTAL_LINE);
     }
 
-    private void markTaskAsDone(int taskNumber) {
+    private void markTaskAsDone(int taskNumber) throws IOException {
         if (tasks.get(taskNumber).isDone) {
             System.out.println(makeSpace(5) + "Task has already been marked done!");
             return;
         }
         
         tasks.get(taskNumber).isDone = true;
+        IOHandler ioHandler = new IOHandler();
+        ioHandler.overwriteLocalSave(tasks);
         
         System.out.printf("%sNice! I've marked this task as done:\n", makeSpace(5));
         System.out.printf("%s%s\n", makeSpace(7), tasks.get(taskNumber));
@@ -251,8 +258,11 @@ public class Duke {
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void delete(int taskNumber) {
+    private void delete(int taskNumber) throws IOException {
+        IOHandler ioHandler = new IOHandler();
+        
         Task removedTask = tasks.remove(taskNumber);
+        ioHandler.overwriteLocalSave(tasks);
 
         System.out.println(makeSpace(5) + "Noted. I've removed this task:\n"
                 + makeSpace(7) + removedTask + "\n\n"

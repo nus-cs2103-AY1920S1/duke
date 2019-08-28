@@ -3,7 +3,6 @@ public class Parser {
      * Parser class for reading the input lines and break them down into the command types which is InputType
      */
     public Parser(){
-
     }
 
     /**

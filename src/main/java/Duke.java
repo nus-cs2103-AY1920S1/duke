@@ -50,6 +50,8 @@ public class Duke {
             ui.handleEvent(input, tasks, storage);
         } else if (command.equals("delete")) {
             ui.handleDelete(input, tasks, storage);
+        } else if (command.equals("find")) {
+            ui.handleFind(input, tasks);
         } else {
             ui.handleBadCommand();
         }

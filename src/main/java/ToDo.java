@@ -7,6 +7,9 @@ public class ToDo extends Task {
          * @params String type: type of task
          * @return none
          */
-        super(info,type,by);
+        super(info,"T","");
+        if (!by.equals("")) {
+            System.out.println("Please Use a deadline if you have a data to do this task by.");
+        }
     }
 }

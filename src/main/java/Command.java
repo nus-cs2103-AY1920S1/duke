@@ -1,7 +1,15 @@
+/**
+ * Represent user command.
+ */
+
 public abstract class Command {
 
     protected String command;
 
+    /**
+     * Represents an action taken by the user.
+     * @param command User Action
+     */
     public Command(String command) {
         this.command = command;
     }

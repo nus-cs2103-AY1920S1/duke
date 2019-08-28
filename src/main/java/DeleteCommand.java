@@ -1,7 +1,16 @@
+/**
+ * Represent user command to delete tasks from their task list.
+ */
+
 public class DeleteCommand extends Command {
 
     protected int index;
 
+    /**
+     * Represents an action to delete task using the index in their task list.
+     * @param command Type of task
+     * @param index Task Index on their task list
+     */
     public DeleteCommand(String command, int index) {
         super(command);
         this.index = index;

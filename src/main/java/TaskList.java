@@ -1,9 +1,15 @@
 import java.util.ArrayList;
 
+/**
+ * Manages users' task.
+ */
 public class TaskList {
 
     private ArrayList<Task> taskArr;
 
+    /**
+     * Construct a list to record the tasks.
+     */
     public TaskList() {
         this.taskArr = new ArrayList<Task>();
     }

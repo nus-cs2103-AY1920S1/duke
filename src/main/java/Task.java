@@ -1,7 +1,15 @@
+/**
+ * Represents a task that a user is to do.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Construct a task object that specifics its details.
+     * @param description Description of task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

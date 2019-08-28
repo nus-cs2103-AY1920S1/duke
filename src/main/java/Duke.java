@@ -1,9 +1,17 @@
+/**
+ * A Task Manager that allows users to record their tasks.
+ */
+
 public class Duke {
 
     private UI ui;
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Construct a object to run the whole task manager.
+     * @param filePath Directory of the file for saving and loading
+     */
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);

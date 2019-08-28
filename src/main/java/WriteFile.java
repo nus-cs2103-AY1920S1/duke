@@ -4,10 +4,18 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
+/**
+ * Handles saving of file to specified directory.
+ */
+
 public class WriteFile {
 
     private String filePath;
 
+    /**
+     * Construct a object to specific the location for saving of file.
+     * @param filePath Directory of the file
+     */
     public WriteFile(String filePath) {
         this.filePath = filePath;
     }

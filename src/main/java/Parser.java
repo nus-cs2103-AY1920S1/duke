@@ -2,6 +2,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles the data validation of user commands.
+ */
 public class Parser {
 
     public static Command parse(String input) throws DukeException {

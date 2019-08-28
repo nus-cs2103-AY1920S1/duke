@@ -23,4 +23,8 @@ public abstract class Task {
     }
 
     public abstract String getSaveString();
+
+    public String getDescription() {
+        return description;
+    }
 }

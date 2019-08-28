@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -124,7 +125,7 @@ public class Duke {
         // todo <desc>
         // deadline <desc> /by <time>
         // event desc /at <time>
-        
+
         Scanner wordReader = new Scanner(line);
         String command = wordReader.next();
         try{
@@ -163,7 +164,7 @@ public class Duke {
                 "delete <number>\n" +
                 "done <number>\n");
     }
-    
+
     private void handleDone(String number) {
         // parse the number, mark as done
         try {
@@ -202,45 +203,54 @@ public class Duke {
     }
 
     private void handleEvent(String descAt) {
-        // separate by /at
-        String[] splitted = descAt.split("/at");
-        if (splitted.length < 2) {
-            System.out.println("Please enter a non-empty description and time, in the following format:");
-            System.out.println("event <desc> /at <time>");
-            banner();
-            return;
+        try {
+            // separate by /at
+            String[] splitted = descAt.split("/at");
+            if (splitted.length < 2) {
+                System.out.println("Please enter a non-empty description and time, in the following format:");
+                System.out.println("event <desc> /at <time>");
+                banner();
+                return;
+            }
+
+            String desc = splitted[0];
+            List<String> restAsList = Arrays.asList(
+                    Arrays.copyOfRange(splitted, 1, splitted.length));
+            String at = String.join("/at", restAsList);
+
+            Event e = new Event(desc, at);
+            cache.add(e);
+            printAddConfirmation();
+        } catch (DateTimeParseException e) {
+            System.out.println(e);
+            System.out.println("The datetime format is wrong! Try 'dd/mm/yyyy HHMM' in 24-hour format.");
         }
-
-        String desc = splitted[0];
-        List<String> restAsList = Arrays.asList(
-                Arrays.copyOfRange(splitted, 1, splitted.length));
-        String at = String.join("/at", restAsList);
-
-        Event e = new Event(desc, at);
-        cache.add(e);
-        printAddConfirmation();
     }
 
     private void handleDeadline(String descBy) {
-        // separate by /by
-        String[] splitted = descBy.split("/by");
-        if (splitted.length < 2) {
-            System.out.println("Please enter a non-empty description and time, in the following format:");
-            System.out.println("deadline <desc> /by <time>");
-            banner();
-            return;
+        try {
+            // separate by /by
+            String[] splitted = descBy.split("/by");
+            if (splitted.length < 2) {
+                System.out.println("Please enter a non-empty description and time, in the following format:");
+                System.out.println("deadline <desc> /by <time>");
+                banner();
+                return;
+            }
+
+            String desc = splitted[0];
+            List<String> restAsList = Arrays.asList(
+                    Arrays.copyOfRange(splitted, 1, splitted.length));
+            String by = String.join("/by", restAsList);
+
+            Deadline e = new Deadline(desc, by);
+            cache.add(e);
+            printAddConfirmation();
+        } catch (DateTimeParseException e) {
+            System.out.println("The datetime format is wrong! Try 'dd/mm/yyyy HHMM' in 24-hour format.");
         }
-
-        String desc = splitted[0];
-        List<String> restAsList = Arrays.asList(
-                Arrays.copyOfRange(splitted, 1, splitted.length));
-        String by = String.join("/by", restAsList);
-
-        Deadline e = new Deadline(desc, by);
-        cache.add(e);
-        printAddConfirmation();
     }
-    
+
     private void handleToDo(String desc) {
         cache.add(new ToDo(desc));
         printAddConfirmation();
@@ -252,7 +262,7 @@ public class Duke {
         System.out.printf("Now you have %d tasks in the list.\n", cache.size());
         banner();
     }
-    
+
     private void showList() {
         for (int i=0; i<cache.size(); i++) {
             Task t = cache.get(i);

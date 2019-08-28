@@ -1,16 +1,18 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
 
-    public Deadline(boolean done, String description, String by) {
+    public Deadline(boolean done, String description, String by) throws DateTimeParseException {
         super(description);
-        this.by = by;
+        this.by = parseTime(by.trim());
         this.isDone = done;
     }
 
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
+    public Deadline(String description, String by) throws DateTimeParseException {
+        this(false, description, by);
     }
 
     @Override

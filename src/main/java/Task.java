@@ -1,6 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected static final DateTimeFormatter dtf = 
+        DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
 
     public Task(boolean done, String description) {
         this.description = description;
@@ -31,5 +37,9 @@ public class Task {
 
     public String saveFormat() {
         return String.format("| %d | %s\n", isDone ? 1 : 0, getDesc());
+    }
+
+    public static LocalDateTime parseTime(String time) throws DateTimeParseException {
+        return LocalDateTime.parse(time, dtf);
     }
 }

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.lang.Integer;
+import java.text.ParseException;
 
 /**
  * Encapsulates attributes and behaviour of Duke, a personal assistant chatbot.
@@ -205,9 +206,10 @@ public class Duke {
                 } else if (taskType.equals("EVENT")) {
                     return new Event(taskDescription, taskDateTime);
                 }
-            } catch (IndexOutOfBoundsException exception) {
+            } catch (IndexOutOfBoundsException | ParseException exception) {
                 System.out.println("Looks like your format is incorrect. "
-                        + "Please follow <event type> <description> / <day/date/time>");
+                        + "Please follow <event type> <description> "
+                        + "/ <dd>/<mm>/<yyyy> <hh><mm>");
             }
         }
         return null;

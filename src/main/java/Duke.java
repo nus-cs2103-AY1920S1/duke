@@ -79,8 +79,8 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
 
-                    description = command.substring(9, command.lastIndexOf('/'));
-                    extraDescription = command.substring(4 + command.lastIndexOf('/'));
+                    description = command.substring(9, command.indexOf('/'));
+                    extraDescription = command.substring(4 + command.indexOf('/'));
 
                     Deadline newDeadline = new Deadline(description, extraDescription);
                     tasks.add(newDeadline);

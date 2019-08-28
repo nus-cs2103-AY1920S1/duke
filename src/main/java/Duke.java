@@ -1,4 +1,5 @@
 import duke.command.Command;
+import duke.parser.ParserManager;
 import duke.task.TaskList;
 
 import java.util.Optional;
@@ -6,14 +7,14 @@ import java.util.Scanner;
 
 public class Duke {
     private static TaskList taskList;
-    private static Parser parser;
+    private static ParserManager parserManager;
 
     /**
      * Initialize static variables
      */
     public static void init() {
         taskList = DataStorage.getStoredTaskList();
-        parser = new Parser();
+        parserManager = new ParserManager();
     }
 
     public static void main(String[] args) {
@@ -31,7 +32,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String inputCommand = sc.nextLine().trim();
         while (!inputCommand.toLowerCase().equals("bye")) {
-            Optional<Command> fullCommand = parser.executeCommand(taskList, inputCommand);
+            Optional<Command> fullCommand = parserManager.parseCommand(taskList, inputCommand);
             fullCommand.ifPresent(command -> command.execute(taskList));
             inputCommand = sc.nextLine().trim();
         }

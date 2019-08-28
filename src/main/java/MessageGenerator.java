@@ -35,7 +35,11 @@ public class MessageGenerator {
     }
 
     public String formatTask(Task task) {
-        return  "  " + task.toString();
+        if (task == null) {
+            return "";
+        } else {
+            return "  " + task.toString();
+        }
     }
 
     public void printRemove(Task task, int n) {

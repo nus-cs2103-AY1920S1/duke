@@ -21,6 +21,10 @@ public class TaskList {
         msgGenerator.printAdd(task, noTasks());
     }
 
+    public void loadTask(Task task) {
+        taskList.add(task);
+    }
+
     public void removeTask(int taskNo) {
         msgGenerator.printRemove(taskList.get(taskNo), noTasks()-1);
         taskList.remove(taskNo);

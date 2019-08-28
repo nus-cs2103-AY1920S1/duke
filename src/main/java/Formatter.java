@@ -32,8 +32,10 @@ public class Formatter {
     public void printFormat(List<String> strings) {
         int count = 1;
         for (String string: strings) {
-            System.out.println(format(String.format("%d. %s", count, string)));
-            count++;
+            if (string != null) {
+                System.out.println(format(String.format("%d. %s", count, string)));
+                count++;
+            }
         }
     }
 

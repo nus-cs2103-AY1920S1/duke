@@ -10,17 +10,16 @@ public class Duke {
     public Duke() {
         greeter = new MessageGenerator();
         sc = new Scanner(System.in);
-        ui = new UI("files/tasks.txt");
+        ui = new UI("files/tasks.text");
         isExit = false;
     }
 
     public void run() {
         greeter.greet();
+        ui.processFile();
         while (!isExit) {
             ui.processInput();
-            ui.processCommand();
             isExit = ui.isExit();
-            System.out.println(ui.isExit());
         }
         greeter.bye();
     }

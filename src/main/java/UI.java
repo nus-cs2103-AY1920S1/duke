@@ -1,15 +1,16 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class UI {
 
     Parser parser = new Parser();
     TaskList tasks = new TaskList();
     boolean isExit = false;
-    String fileInput;
     private Storage storage;
     List<Command> commands = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
 
     public UI(String fileInput) {
         storage = new Storage(fileInput);
@@ -23,21 +24,25 @@ public class UI {
         return isExit;
     }
 
-    public void processInput() {
-        List<String> input = storage.processInput();
-        for (String line : input) {
-            commands.add(parser.process(line));
+    public void processFile() {
+        for (Task task: storage.loadTasks().taskList) {
+            tasks.loadTask(task);
         }
     }
 
-    public void processCommand() {
-        loop: for (Command command : commands) {
-            System.out.println(command.command);
+    public void processInput() {
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            processCommand(parser.process(line));
+        }
+    }
+
+    public void processCommand(Command command) {
             try {
                 switch (command.type) {
                     case EXIT:
                         exit();
-                        break loop;
+                        break;
                     case PRINTLIST:
                         tasks.printList();
                         break;
@@ -53,12 +58,14 @@ public class UI {
                     default:
                         throw new InvalidCommandException();
                 }
-                for (String task: tasks.listify()) {
-                    storage.writeToFile(task);
-                }
-            } catch (InvalidCommandException | IOException e) {
-                System.out.println("Something went wrong");
+            } catch (InvalidCommandException e) {
+                e.printError();
             }
+            try {
+                storage.updateTaskList(tasks);
+            } catch (IOException e) {
+                System.out.println("Something went wrong!");
+            }
+
         }
     }
-}

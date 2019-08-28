@@ -6,19 +6,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class TodoTest {
+class TodoTest {
 
     @Test
-    public void markAsDone_notDone_success() throws DukeException {
+    void markAsDone_notDone_success() throws DukeException {
         Task task = new Todo("Description");
-        assertEquals(task.toString(), "[T][✗] Description");
+        assertEquals(task.toString(), "[T][✘] Description");
 
         task.markAsDone();
         assertEquals(task.toString(), "[T][✓] Description");
     }
 
     @Test
-    public void markAsDone_alreadyDone_ExceptionThrown() {
+    void markAsDone_alreadyDone_exceptionThrown() {
         try {
             Task task = new Todo("Description");
             task.markAsDone();

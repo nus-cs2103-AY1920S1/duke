@@ -11,6 +11,7 @@ class ListCommand implements Command {
     @Override
     public List<String> run(String[] words) {
         List<String> messages = new ArrayList<>();
+        messages.add("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             messages.add(i + 1 + "." + tasks.get(i));
         }

@@ -14,6 +14,5 @@ public class DukeTest {
         TodoList todoList = new TodoList();
         todoList.add(new Todo("desc"));
         assertEquals(1, todoList.length());
-        todoList.delete(1);
     }
 }

@@ -1,6 +1,10 @@
 package duke;
 
 import duke.command.Command;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -9,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Main class for Duke app.
  */
-public class Duke {
+public class Duke extends Application {
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     private Storage storage;
@@ -50,6 +54,15 @@ public class Duke {
         } catch (IOException e) {
             ui.showError(e.getMessage());
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**

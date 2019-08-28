@@ -38,6 +38,9 @@ public class Duke {
 
     } // End of main.
 
+    /**
+     * Runs the Duke application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

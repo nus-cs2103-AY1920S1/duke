@@ -16,6 +16,11 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads the user's stored list.
+     * @return An arraylist containing the user's stored list.
+     * @throws DukeException if there is an issue with file access.
+     */
     public ArrayList<Task> load() throws DukeException {
         BufferedReader reader;
         ArrayList<Task> storedTasks = new ArrayList<>(100);
@@ -37,6 +42,12 @@ public class Storage {
         return storedTasks;
     } // End method.
 
+    /**
+     * Converts the stored string to a task.
+     * @param str A string representing a task.
+     * @return A task.
+     * @throws DukeException if the stored data is corrupted.
+     */
     public Task stringToTask(String str) throws DukeException {
         String[] split = str.split("\\|");
         try {
@@ -56,6 +67,11 @@ public class Storage {
         } // End try-catch.
     }
 
+    /**
+     * Writes the user list into a text file.
+     * @param tasks An array list containing the user's list.
+     * @throws DukeException if writing was unsuccessful.
+     */
     public void store(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter filewriter = new FileWriter(filepath, false);

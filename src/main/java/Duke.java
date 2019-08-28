@@ -45,8 +45,6 @@ public class Duke {
         System.out.println(openingMessage);
     }
 
-    // execute command given depending on what command it 
-
     /**
      * Executes the command given by the user. 
      * @param command The command input by the user.

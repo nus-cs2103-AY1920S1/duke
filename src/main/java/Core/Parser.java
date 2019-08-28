@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
+import duke.command.FindCommand;
 import duke.helper.DukeException;
 
 public class Parser {
@@ -21,6 +22,8 @@ public class Parser {
             return new AddCommand(inputCommand);
         } else if (inputsplit[0].equalsIgnoreCase("delete")){
             return new DeleteCommand(inputCommand);
+        } else if (inputsplit[0].equalsIgnoreCase("find")) {
+            return new FindCommand(inputCommand);
         } else if (inputsplit[0].equalsIgnoreCase("bye")){
             return new ExitCommand(inputCommand);
         } else {

@@ -33,5 +33,17 @@ public class TaskList {
         return this.taskArray.remove(num - 1);
     }
 
-
+    public ArrayList<Task> findTask(String inputString) {
+        ArrayList<Task> returnedTaskList = new ArrayList<Task>();
+        for (int i = 0; i < taskArray.size(); i++) {
+            Task t = taskArray.get(i);
+            String[] tSplit = t.getDescription().split(" ");
+            for (int j = 0; j < tSplit.length; j++) {
+                if(tSplit[j].equalsIgnoreCase(inputString)) {
+                    returnedTaskList.add(t);
+                }
+            }
+        }
+        return returnedTaskList;
+    }
 }

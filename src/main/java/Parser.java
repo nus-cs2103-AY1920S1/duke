@@ -29,7 +29,7 @@ public class Parser {
     /**
      * To deals with making sense of the user command.
      *
-     * @param task the TaskList from the txt file.
+     * @param tasks the TaskList from the txt file.
      * @param ui the message for interaction.
      * @param inputText the text that user input.
      * @param storage the location for retrieval and write the updated file.
@@ -102,7 +102,7 @@ public class Parser {
         } catch (DukeException err) {
             System.out.println(err.getMessage());
         } catch (Exception err) {
-            System.out.println(err);
+            System.out.println("[Exception]" + err);
         }
     }
 }

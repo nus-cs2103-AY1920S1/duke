@@ -5,14 +5,14 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-/**
- * To deals with loading tasks from the file and saving tasks in the file.
- *
- * @param filePath the location where the previous list of tasks is being saved.
- */
 public class Storage {
-    public static String filePath = "";
+    private static String filePath = "";
 
+    /**
+     * To deals with loading tasks from the file and saving tasks in the file.
+     *
+     * @param filePath the location where the previous list of tasks is being saved.
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
     }
@@ -70,7 +70,7 @@ public class Storage {
         } catch (FileNotFoundException err) {
             System.out.println("File not found!");
         } catch (DukeException err) {
-            System.out.println(err);
+            System.out.println("[Duke Exception]" + err);
         } catch (IOException err) {
             System.out.println(err);
         }

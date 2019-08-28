@@ -1,9 +1,15 @@
+import java.util.Scanner;
+
 public class Task {
+    protected String type;
     protected String description;
+    protected String date;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String type, String description, String date) {
+        this.type = type;
         this.description = description;
+        this.date = date;
         this.isDone = false;
     }
 
@@ -20,6 +26,9 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("%s %s", this.getStatusIcon(), this.description);
+        return String.format("%s%s %s%s", this.type,
+                this.getStatusIcon(),
+                this.description,
+                this.date);
     }
 }

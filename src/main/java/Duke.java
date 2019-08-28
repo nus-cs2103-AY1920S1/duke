@@ -56,7 +56,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println("\t" + task);
                 } else {
-                    String[] arr = word.split("/"); // separates the the description
+                    String[] arr = word.split("/", 2); // separates the the description
                     String[] typeArray = arr[0].split(" ", 2); // separate the task type
 
                     Task task;

@@ -6,16 +6,20 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-public class DukeFileManager {
+public class Storage {
 
-    private static File file = new File("data/duke.txt");
+    private static File file;
 
-    public static ArrayList<Task> loadListOfTasks() {
+    public Storage(String filePath) {
+        file = new File(filePath);
+    }
+
+    public static ArrayList<Task> load() {
 
         ArrayList<Task> listOfTasks = new ArrayList<>();
 
         try{
-            DukeFileManager.checkFileExist();
+            checkFileExist();
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String[] task = sc.nextLine().split("\\|");
@@ -25,12 +29,12 @@ public class DukeFileManager {
                     boolean isTaskDone = task[1].trim().equals("1") ? true : false;
                     String taskDescription = task[2].trim();
                     String taskBy = task[3].trim();
-                    listOfTasks.add(new Deadline(taskDescription, isTaskDone, taskBy));
+                    listOfTasks.add(new Deadline(taskDescription, isTaskDone, Parser.dateTimeConverter(taskBy)));
                 } else if (taskType.equals("E")) {
                     boolean isTaskDone = task[1].trim().equals("1") ? true : false;
                     String taskDescription = task[2].trim();
                     String taskAt = task[3].trim();
-                    listOfTasks.add(new Event(taskDescription, isTaskDone, taskAt));
+                    listOfTasks.add(new Event(taskDescription, isTaskDone, Parser.dateTimeConverter(taskAt)));
                 } else {
                     boolean isTaskDone = task[1].trim().equals("1") ? true : false;
                     String taskDescription = task[2].trim();
@@ -40,16 +44,17 @@ public class DukeFileManager {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
+
         return listOfTasks;
     }
 
-    public static void saveListOfTasks(List<Task> listOfTasks) {
+    public static void save(List<Task> listOfTasks) {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : listOfTasks) {
                 if (task instanceof Deadline) {
                     String taskToAdd = String.format("D | %s | %s | %s\n", task.isTaskDone() ? "1" : "0",
-                            task.getTaskDescription(), ((Deadline) task).getBy());
+                        task.getTaskDescription(), ((Deadline) task).getBy());
                     fw.write(taskToAdd);
                 } else if (task instanceof Event) {
                     String taskToAdd = String.format("E | %s | %s | %s\n", task.isTaskDone() ? "1" : "0",
@@ -82,4 +87,5 @@ public class DukeFileManager {
             System.out.println(e.getMessage());
         }
     }
+
 }

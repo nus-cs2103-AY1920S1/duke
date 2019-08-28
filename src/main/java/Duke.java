@@ -1,188 +1,34 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.lang.ArrayIndexOutOfBoundsException;
-
 public class Duke {
 
-    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
-    protected static Scanner sc;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void main(String[] args) {
-        listOfTasks = DukeFileManager.loadListOfTasks();
-        sc = new Scanner(System.in);
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
+    }
+
+    public void run() {
+        ui.printHello();
         String command;
-        printHello();
 
-        while (!( command = sc.next()).equals("bye")) {
+        while (!(command = ui.getNext()).equals("bye")) {
             try {
-                if (command.equals("list")) {
-                    handleListCommand();
-                } else if (command.equals("done")) {
-                    handleDoneCommand();
-                    DukeFileManager.saveListOfTasks(listOfTasks);
-                } else if (command.equals("todo")) {
-                    handleTodoCommand();
-                    DukeFileManager.saveListOfTasks(listOfTasks);
-                } else if (command.equals("deadline")) {
-                    handleDeadlineCommand();
-                    DukeFileManager.saveListOfTasks(listOfTasks);
-                } else if (command.equals("event")) {
-                    handleEventCommand();
-                    DukeFileManager.saveListOfTasks(listOfTasks);
-                } else if (command.equals("delete")) {
-                    handleDeleteCommand();
-                    DukeFileManager.saveListOfTasks(listOfTasks);
-                } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
+                Parser.parse(tasks, ui, storage, command, ui.getNextLine());
             } catch (DukeException e) {
                 System.out.println("    _____________________________________");
                 System.out.println("     " + e.getMessage());
                 System.out.println("    _____________________________________\n");
             }
         }
-        printBye();
-    }
-    public static void printHello() {
-        System.out.println("    _____________________________________");
-        System.out.println("     Hello! I'm Duke\n     What can I do for you?");
-        System.out.println("    _____________________________________\n");
+
+        storage.save(tasks.getListOfTasks());
+        ui.printBye();
     }
 
-    public static void printBye() {
-        System.out.println("    _____________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    _____________________________________");
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
-
-    public static void printAddTask(Task newTask) {
-        System.out.println("    _____________________________________");
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + newTask);
-        System.out.println("     Now you have " + listOfTasks.size() + " tasks in the list.");
-        System.out.println("    _____________________________________\n");
-    }
-
-    public static void handleTodoCommand() throws DukeException {
-        try {
-            String description = sc.nextLine().trim();
-            if (description.isBlank()) {
-                throw new IllegalArgumentException();
-            }
-            Task newTodo = new Todo(description, false);
-            listOfTasks.add(newTodo);
-            printAddTask(newTodo);
-        } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: todo [task description]");
-        }
-    }
-
-    public static void handleListCommand() throws DukeException {
-        try {
-            String statement = sc.nextLine();
-
-            if (!statement.isBlank()) {
-                throw new Exception();
-            }
-
-            System.out.println("    _____________________________________");
-            System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < listOfTasks.size(); i++) {
-                int number = i + 1;
-                System.out.println("     " + number + "." + listOfTasks.get(i));
-            }
-            System.out.println("    _____________________________________\n");
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: list");
-        }
-    }
-
-    public static void handleDeadlineCommand() throws DukeException {
-        try {
-            String[] statement = sc.nextLine().split("/by");
-            String taskDescription = statement[0].trim();
-            String taskBy = statement[1].trim();
-
-            if (taskDescription.isBlank() || taskBy.isBlank()) {
-                throw new IllegalArgumentException();
-            }
-
-            Task newDeadline = new Deadline(taskDescription, false, dateTimeConverter(taskBy));
-            listOfTasks.add(newDeadline);
-            printAddTask(newDeadline);
-
-        } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! Task description/Task by can not be empty");
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: deadline [task description] /by [dd/mm/yyyy HHmm]");
-        }
-    }
-
-    public static void handleEventCommand() throws DukeException {
-        try {
-            String[] statement = sc.nextLine().split("/at");
-            String taskDescription = statement[0].trim();
-            String taskAt = statement[1].trim();
-
-            if (taskDescription.isBlank() || taskAt.isBlank()) {
-                throw new IllegalArgumentException();
-            }
-
-
-            Task newEvent = new Event(taskDescription, false, dateTimeConverter(taskAt));
-            listOfTasks.add(newEvent);
-            printAddTask(newEvent);
-
-        } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! Task description/Task at can not be empty");
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: event [task description] /at [dd/mm/yyyy HHmm]");
-        }
-    }
-
-    private static LocalDateTime dateTimeConverter(String str) throws ArrayIndexOutOfBoundsException{
-            String[] dateTime = str.split(" ");
-            String[] date = dateTime[0].split("/");
-            String time = dateTime[1];
-            return LocalDateTime.of(Integer.parseInt(date[2]),
-                    Integer.parseInt(date[1]), Integer.parseInt(date[0]),
-                            Integer.parseInt(time.substring(0, 2)), Integer.parseInt(time.substring(2)));
-
-    }
-
-    public static void handleDoneCommand() throws DukeException {
-        try {
-            int taskNumber = Integer.parseInt(sc.nextLine().trim()) - 1;
-            listOfTasks.get(taskNumber).markAsDone();
-            System.out.println("    _____________________________________");
-            System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("       " + listOfTasks.get(taskNumber));
-            System.out.println("    _____________________________________\n");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The task number you specified is not in the list.");
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: done [task number]");
-        }
-    }
-
-    public static void handleDeleteCommand() throws DukeException {
-        try {
-            int taskNumber = Integer.parseInt(sc.nextLine().trim()) - 1;
-            Task deletedTask = listOfTasks.get(taskNumber);
-            listOfTasks.remove(taskNumber);
-            System.out.println("    _____________________________________");
-            System.out.println("     Noted. I've removed this task:");
-            System.out.println("       " + deletedTask);
-            System.out.println("     Now you have " + listOfTasks.size() + " tasks in the list.");
-            System.out.println("    _____________________________________\n");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! The task number you specified is not in the list.");
-        } catch (Exception e) {
-            throw new DukeException("OOPS!!! Your input format is wrong. Use: delete [task number]");
-        }
-    }
-
 }

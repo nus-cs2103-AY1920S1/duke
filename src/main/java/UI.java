@@ -90,4 +90,20 @@ public class UI {
         System.out.println("    " + errMsg);
     }
 
+    /**
+     * Displays tasks which contain the given keyword.
+     * @param toFind refers to the keyword to be found.
+     * @param tasks refers to the list of tasks.
+     */
+    public void showFoundItems(String toFind, TaskList tasks) {
+        System.out.println("    Here are the matching tasks in your list: ");
+        int counter = 1;
+        for (int i = 0; i < tasks.getListSize(); i++) {
+            if(tasks.getItemAtIndex(i).getDescription().contains(toFind)) {
+                System.out.println("    " + counter + ". " + tasks.getItemAtIndex(i));
+                counter++;
+            }
+        }
+    }
+
 }

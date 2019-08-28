@@ -12,7 +12,8 @@ public class Parser {
         String instruction = "";
         String date = "";
 
-        if(commandType.equals("todo") || commandType.equals("delete") || commandType.equals("done")) {
+        if(commandType.equals("todo") || commandType.equals("delete") || commandType.equals("done")
+                || commandType.equals("find")) {
             instruction = command.substring(command.indexOf(" ") + 1);
         } else if(commandType.equals("deadline") || commandType.equals("event")) {
             if(command.contains("/")) {

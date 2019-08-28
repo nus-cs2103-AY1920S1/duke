@@ -5,6 +5,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String storageString() {
+        return "T/" + status + "/" + description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

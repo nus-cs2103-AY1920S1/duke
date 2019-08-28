@@ -11,10 +11,6 @@ public class TaskList {
         this.taskList = tasks;
     }
 
-    public Task get(int i){
-        return taskList.get(i);
-    }
-
     public void removeTask(int i){
         taskList.remove(i);
     }

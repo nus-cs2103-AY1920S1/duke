@@ -41,7 +41,7 @@ public class Duke {
                     }
                 } else if (input.substring(0, 4).equals("done")) {
                     int do_Index = Integer.parseInt(input.substring(5)) - 1;
-                    Task chosen_Task = tasks.taskList.get(do_Index);
+                    Task chosen_Task = tasks.getTask(do_Index);
                     chosen_Task.markAsDone();
                     try {
                         storage.updateTaskInFile(do_Index + 1);
@@ -53,7 +53,7 @@ public class Duke {
                             chosen_Task.toString());
                 } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
                     int delete_Index = Integer.parseInt(input.substring(7)) - 1;
-                    Task chosen_Task = tasks.get(delete_Index);
+                    Task chosen_Task = tasks.getTask(delete_Index);
                     tasks.removeTask(delete_Index);
                     try {
                         storage.deleteFromFile(delete_Index + 1);
@@ -116,6 +116,5 @@ public class Duke {
             input = scn.nextLine();
         }
         ui.showClosing();
-
     }
 }

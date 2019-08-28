@@ -10,7 +10,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    private String generateDateAndTimeString() {
+    protected String generateDateAndTimeString() {
         String dateAndTime = "" + at.getDayOfMonth();
         int day = at.getDayOfMonth();
 

@@ -1,9 +1,11 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import java.io.FileNotFoundException;
 
 // Deals with loading and saving tasks from and in the file
@@ -42,7 +44,7 @@ public class Storage {
                         Arrays.asList(input.nextLine().split(" \\| "))
                 );
                 taskType = taskData.get(0);
-                isTaskDone = taskData.get(1).equals("1") ? true : false;
+                isTaskDone = taskData.get(1).equals("1"); // 1 is done, 0 is not done
                 switch (taskType) {
                 case "T":
                     currTask = new ToDo(taskData.get(2));
@@ -74,7 +76,7 @@ public class Storage {
                     currTask.getTaskType() + separatorStr +
                             (currTask.isDone()? 1 : 0) + separatorStr +
                             currTask.getDescription() +
-                            (currTask.getTaskType().equals("T")?
+                            (currTask.getTaskType().equals("T") ?
                                     "" : separatorStr + currTask.getSubDescription())
             );
             fw.write("\n");

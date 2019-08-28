@@ -4,9 +4,9 @@ import java.util.ArrayList;
 // Deals with interactions with the user
 public class Ui {
 
-    private Scanner s;
+    private Scanner scanner;
     public Ui() {
-        s = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     ///////////////
@@ -21,7 +21,7 @@ public class Ui {
 
     // Returns line of text user enters
     public String readUserInput() {
-        return s.nextLine();
+        return scanner.nextLine();
     }
 
     //////////////////////

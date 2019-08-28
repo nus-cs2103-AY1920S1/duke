@@ -5,12 +5,12 @@ import java.util.Date;
 public class Deadline extends Task{
     private Date deadlineBy;
 
-    Deadline(String taskDetails, Date deadlineBy) {
+    public Deadline(String taskDetails, Date deadlineBy) {
         super(taskDetails);
         this.deadlineBy = deadlineBy;
     }
 
-    String saveInfo() {
+    public String saveInfo() {
         return "deadline" + " " + taskDetails + " /by " + TaskList.inputDateFormat.format(deadlineBy) + System.getProperty("line.separator")
                 + completed;
     }

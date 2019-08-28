@@ -1,6 +1,6 @@
 package duke.task;
 
-abstract class Task {
+public abstract class Task {
     String taskDetails;
     boolean completed;
     Task(String taskDetails) {
@@ -13,6 +13,10 @@ abstract class Task {
     }
 
     abstract String saveInfo();
+
+    public boolean isCompleted() {
+        return this.completed;
+    }
 
     @Override
     public String toString() {

@@ -16,7 +16,8 @@ public class Deadline extends TaskList {
      * @param type Deadline type
      * @param b due date for task
      */
-    public Deadline(int taskNumber, String taskCheck, String taskName, String type, DateTime b) {
+    public Deadline(int taskNumber, String taskCheck, 
+                    String taskName, String type, DateTime b) {
         super(taskNumber, taskCheck, taskName, type);
         by = b;
     }
@@ -40,7 +41,10 @@ public class Deadline extends TaskList {
      */
     @Override
     public String toString() {
-        return Integer.toString(getTaskNumber()) + ".[D]" + getTaskCheck() + getTaskName() + "by "+ by;
+        return Integer.toString(getTaskNumber()) + ".[D]"
+                + getTaskCheck() + " " + getTaskName() + by;
+        return Integer.toString(getTaskNumber()) + ".[D]" + 
+           getTaskCheck() + getTaskName() + "by "+ by;
     }
 
 }

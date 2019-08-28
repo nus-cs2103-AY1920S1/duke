@@ -19,6 +19,7 @@ abstract class TaskList {
         type = t;
     }
 
+
     public abstract DateTime getAB();
 
     /**
@@ -28,9 +29,11 @@ abstract class TaskList {
      * @return the task number
      */
 
+
     public int getTaskNumber() {
         return taskNumber;
     }
+
 
     /**
      * <p>
@@ -50,10 +53,12 @@ abstract class TaskList {
      * @return task's name
      */
 
+
     public String getTaskName() {
         return taskName;
     }
 
+  
     /**
      * <p>
      *     getTyoe is used to retrieve the type of task given
@@ -71,6 +76,7 @@ abstract class TaskList {
      * </p>
      */
 
+
     public void changeTaskCheck() {
         taskCheck = "[✓]";
     }
@@ -81,12 +87,14 @@ abstract class TaskList {
      * </p>
      * @param a the list of task
      */
+
     static void printList(ArrayList<TaskList> a) {
         System.out.println("Here are the tasks in your list:");
         for (TaskList t : a) {
             System.out.println(t);
         }
     }
+
 
     /**
      * <p>
@@ -95,6 +103,7 @@ abstract class TaskList {
      * @param i the completed task's number
      * @param a the list of task
      */
+
     static void markAsDone(int i, ArrayList<TaskList> a) {
         System.out.println("Nice! I've marked this task as done:");
         TaskList t = a.get(i - 1);
@@ -102,6 +111,18 @@ abstract class TaskList {
         String getType = t.getType();
         TaskList doneTask;
         if(getType.equals("todo")) {
+
+            doneTask = new Todo(i, "[✓]", currentTask,
+                    getType);
+            a.set(i - 1, doneTask);
+        } else if (getType.equals("event")) {
+            doneTask = new Event(i, "[✓]", currentTask,
+                    getType, t.getAB());
+            a.set(i - 1, doneTask);
+        } else {
+            doneTask = new Deadline(i, "[✓]", currentTask,
+                    getType, t.getAB());
+
             doneTask = new Todo(i, "[✓]", currentTask, getType);
             a.set(i - 1, doneTask);
         } else if (getType.equals("event")) {
@@ -109,6 +130,7 @@ abstract class TaskList {
             a.set(i - 1, doneTask);
         } else {
             doneTask = new Deadline(i, "[✓]", currentTask, getType, t.getAB());
+
             a.set(i - 1, doneTask);
         }
         System.out.println("[✓] " + currentTask);
@@ -122,12 +144,15 @@ abstract class TaskList {
      * @param a the list of task
      * @param n task number assigned
      */
+
     void addList(TaskList t, ArrayList<TaskList> a, int n) {
         System.out.println("Got it. I've added this task:");
         a.add(t);
         System.out.println(t);
-        System.out.println("Now you have " + Integer.toString(n) + " tasks in the list.");
+        System.out.println("Now you have " + Integer.toString(n) +
+                " tasks in the list.");
     }
+
 
     /**
      * <p>
@@ -136,13 +161,15 @@ abstract class TaskList {
      * @param t TaskList object that is to be removed
      * @param a the list of task
      */
+
     void deleteTask(TaskList t, ArrayList<TaskList> a) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(t);
         int taskNumber = t.getTaskNumber();
         a.remove(taskNumber - 1);
-        System.out.println("Now you have " + Integer.toString(a.size()) + " tasks in the list.");
 
+        System.out.println("Now you have " + Integer.toString(a.size()) +
+                " tasks in the list.");
     }
 
     /**

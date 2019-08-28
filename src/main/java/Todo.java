@@ -13,7 +13,8 @@ public class Todo extends TaskList {
      * @param taskName task name
      * @param type to-do type of task
      */
-    public Todo(int taskNumber, String taskCheck, String taskName, String type) {
+    public Todo(int taskNumber, String taskCheck, 
+                String taskName, String type) {
         super(taskNumber, taskCheck, taskName, type);
     }
 
@@ -36,6 +37,7 @@ public class Todo extends TaskList {
      */
     @Override
     public String toString() {
-        return  Integer.toString(getTaskNumber()) + ".[T]" + getTaskCheck() + " " + getTaskName();
+        return  Integer.toString(getTaskNumber()) + ".[T]" +
+                getTaskCheck() + " " + getTaskName();
     }
 }

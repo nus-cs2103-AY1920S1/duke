@@ -8,7 +8,7 @@ import java.text.ParseException;
  * A deadline differs from other tasks because it has a due date.
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 2
+ * @version CS2103 AY19/20 Sem 1 iP Week 3
  */
 public class Deadline extends Task {
     /** The date by which task is due */
@@ -20,11 +20,14 @@ public class Deadline extends Task {
     /**
      * Creates a deadline with a description and due date.
      *
-     * @param description string representing the description of the deadline.
-     * @param dueDate string representing date by which deadline is due.
+     * @param description string representing the description of the deadline
+     * @param dueDate string representing date by which deadline is due
+     * @param isDone flag indicating whether task has been done or not
+     * @throws ParseException if the date/time is entered in the wrong format
      */
-    public Deadline(String description, String dueDate) throws ParseException {
-        super(description);
+    public Deadline(String description, String dueDate, boolean isDone)
+            throws ParseException {
+        super(description, isDone);
         this.dueDate = dueDate;
         this.byWhen = this.toDate();
     }
@@ -35,16 +38,17 @@ public class Deadline extends Task {
      * @return string representing this deadline.
      */
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + dueDate + ")";
+        return "D-" + super.toString() + "-" + dueDate;
     }
 
+    /**
+     * Converts string representation of date/time into an actual date/time
+     * object.
+     *
+     * @return the parsed date and time information
+     * @throws ParseException if the date/time is entered in the wrong format
+     */
     public Date toDate() throws ParseException {
-        try {
-            return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.dueDate);
-        } catch (ParseException exception) {
-            System.out.println("Looks like you entered the incorrect Date/Time "
-                    + "format. Please follow <dd>/<mm>/<yyyy> <hhmm>");
-        }
-        return null;
+        return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.dueDate);
     }
 }

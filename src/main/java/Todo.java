@@ -13,9 +13,10 @@ public class Todo extends Task {
      * Create a todo with a description.
      *
      * @param description string representing description of this todo.
+     * @param isDone flag indicating whether task has been done or not
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     /**
@@ -24,6 +25,6 @@ public class Todo extends Task {
      * @return string representing this todo.
      */
     public String toString() {
-        return "[T]" + super.toString();
+        return "T-" + super.toString();
     }
 }

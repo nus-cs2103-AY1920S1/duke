@@ -5,7 +5,7 @@
  * been provided. The task status can also be updated when a task is done.
  *
  * @author atharvjoshi
- * @version CS2103 AY19/20 Sem 1 iP Week 2
+ * @version CS2103 AY19/20 Sem 1 iP Week 3
  */
 
 public class Task {
@@ -18,21 +18,22 @@ public class Task {
     /**
      * Creates a task with a description and a status.
      *
-     * @param description string representing the description of this task.
+     * @param description string representing the description of this task
+     * @param isDone flag indicating whether task has been done or not
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
-     * Retrieves the unicode icon indicating task status.
+     * Retrieves the icon indicating task status.
      *
-     * @return tick mark if task is done or cross mark if task is not done.
+     * @return "Y" if task is done or "N" if task is not done.
      */
     private String getTaskStatusIcon() {
         return (this.isDone ? "Y" : "N"); // return Y or N
-        // return (this.isDone ? "\u2713" : "\u2718"); // return tick or X symbols
+        // return (this.isDone ? "\u2713" : "\u2718"); // return tick or X
     }
 
     /**
@@ -59,6 +60,6 @@ public class Task {
      * @return string representing this task.
      */
     public String toString() {
-        return "[" + this.getTaskStatusIcon() + "] " + this.description;
+        return this.getTaskStatusIcon() + "-" + this.description;
     }
 }

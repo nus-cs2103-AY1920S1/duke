@@ -1,11 +1,18 @@
 package duke.parser;
 
-import duke.command.*;
-
+import duke.command.ByeCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.EventCommand;
+import duke.command.TodoCommand;
+import duke.command.DeadlineCommand;
+import duke.command.Command;
 import duke.dukeexception.DukeException;
 
 /**
- * Class to handle parsing of user input
+ * Class to handle parsing of user input.
  */
 public class Parser {
 
@@ -15,7 +22,7 @@ public class Parser {
      * @param toParse User input String to be parsed.
      * @return Command that is to be executed.
      * @throws DukeException if input String toParse is not recognized
-     * or in the wrong format.
+     *     or in the wrong format.
      */
     public static Command parse(String toParse) throws DukeException {
         String[] tokens = toParse.split(" ");

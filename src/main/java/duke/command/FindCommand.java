@@ -49,7 +49,7 @@ public class FindCommand extends Command {
                 }
             }
             if (isMatching) {
-               matchingTasks.addTask(currTask);
+                matchingTasks.addTask(currTask);
             }
         }
         if (matchingTasks.size() != 0) {

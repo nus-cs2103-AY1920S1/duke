@@ -7,7 +7,7 @@ import duke.dukeexception.DukeException;
 
 public class StorageTest {
     @Test
-    public void load_invalidFilePath_exceptionThrown(){
+    public void load_invalidFilePath_exceptionThrown() {
         try {
             new Storage("data/wrongFile.txt").load();
             fail();

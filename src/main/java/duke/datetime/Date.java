@@ -1,7 +1,7 @@
 package duke.datetime;
 
 /**
- * Represents a date in the format Day/Month/Year
+ * Represents a date in the format Day/Month/Year.
  */
 public class Date {
     private int day;

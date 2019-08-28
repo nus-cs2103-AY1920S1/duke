@@ -32,14 +32,14 @@ public class Ui {
     }
 
     /**
-    * Prints the total number of tasks that the user has so far
+    * Prints the total number of tasks that the user has so far.
     */
     public void printNumTasks() {
         System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
     }
 
     /**
-    * Prints the Duke logo and greeting message
+    * Prints the Duke logo and greeting message.
     */
     public void printLogoAndGreet() {
         String logo = " ____        _        \n"
@@ -144,8 +144,8 @@ public class Ui {
         System.out.println(MATCHING);
         System.out.println(taskList.toString());
     }
+
     /**
-     *
      * Prints message indicating no matching tasks.
      */
     public void printNoMatching() {

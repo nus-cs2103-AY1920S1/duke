@@ -36,7 +36,7 @@ public class Timing {
     }
 
     /**
-     * Returns string representation of this timing in 12-hour clock format
+     * Returns string representation of this timing in 12-hour clock format.
      *
      * @return 12-hour clock representation of this timing
      */

@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * Class constructor that specifies description of the
-     * To-do task
+     * To-do task.
      *
      * @param description Description of To-do.
      */
@@ -18,7 +18,7 @@ public class Todo extends Task {
 
     /**
      * Class constructor that specifies description of the
-     * To-do task and completion of status
+     * To-do task and completion of status.
      *
      * @param description Description of To-do.
      * @param done Completion status of To-do

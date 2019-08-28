@@ -7,7 +7,7 @@ public abstract class Task {
     private String description;
     private boolean isDone;
 
-    /** Total number of tasks tracked by Duke */
+    /** Total number of tasks tracked by Duke. */
     public static int totalTasks = 0;
 
     /**
@@ -41,7 +41,7 @@ public abstract class Task {
      * @return Either tick or X symbols as a String.
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2713" : "\u2718"); // Tick or Cross Symbol
     }
 
     /**

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
-    public void completeTask_success(){
+    public void completeTask_success() {
         Task t = new Todo("Todo1");
         t.setTaskCompleted();
         assertEquals(t.getDoneStatus(), true);

@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      * @param storage Storage object to be called by the command.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        try{
+        try {
             if (toDelete >= taskList.size() || toDelete < 0) {
                 throw new DukeException("☹ OOPS! duke.task.Task "
                         + (toDelete + 1) + " doesn't exist!");

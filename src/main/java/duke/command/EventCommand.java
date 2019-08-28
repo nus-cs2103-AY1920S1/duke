@@ -37,7 +37,6 @@ public class EventCommand extends Command {
     }
 
     /**
-     *
      * Returns false as this is not an exit command.
      *
      * @return False as not exit command.

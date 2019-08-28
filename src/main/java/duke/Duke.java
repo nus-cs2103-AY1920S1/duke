@@ -64,9 +64,9 @@ public class Duke {
     }
 
     /**
-     * Runs the main Duke program
+     * Runs the main Duke program.
      *
-     * @param args Command line arguments
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();

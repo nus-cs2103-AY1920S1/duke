@@ -327,9 +327,6 @@ public class Duke {
         printGreet();
         readInput();
     }
-<<<<<<< HEAD
-}
-=======
 
     /**
      * Main function to start Duke Database.
@@ -342,4 +339,3 @@ public class Duke {
         startDuke();
     }
 }
->>>>>>> branch-Level-7

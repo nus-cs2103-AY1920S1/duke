@@ -6,11 +6,28 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class representing user command to delete task at a specific index.
+ */
 public class DeleteCommand extends Command {
-    int toDelete;
+    private int toDelete;
+
+    /**
+     * Class constructor to initialize index of Task to delete from the List of Tasks.
+     *
+     * @param toDelete Index to Delete at.
+     */
     public DeleteCommand(int toDelete){
         this.toDelete = toDelete;
     }
+
+    /**
+     * Executes the delete command.
+     *
+     * @param taskList List of Tasks to be modified by command.
+     * @param ui Ui object to be called by the command.
+     * @param storage Storage object to be called by the command.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage){
         try{
             if(toDelete >= taskList.size() || toDelete < 0){
@@ -23,10 +40,15 @@ public class DeleteCommand extends Command {
                 storage.setChangedTrue();
             }
         } catch (DukeException de){
-            ui.printTaskError(de.getMessage());
+            ui.printDukeError(de.getMessage());
         }
     }
 
+    /**
+     * Returns false as this is not an exit command.
+     *
+     * @return False as not exit command.
+     */
     public boolean isExit(){
         return false;
     }

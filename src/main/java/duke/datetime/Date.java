@@ -1,7 +1,8 @@
 package duke.datetime;
 
-import java.util.ArrayList;
-
+/**
+ * Represents a date in the format Day/Month/Year
+ */
 public class Date {
     private int day;
     private int month;
@@ -10,6 +11,12 @@ public class Date {
     private static String[] MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August",
         "September", "October", "November", "December"};
 
+    /**
+     * Class constructor that specifies the String to represent as a
+     * Date object.
+     *
+     * @param dateString String to parse into Date.
+     */
     public Date(String dateString){
         this.dateString = dateString;
         String[] tokens = dateString.split("/");
@@ -18,10 +25,20 @@ public class Date {
         this.year = Integer.parseInt(tokens[2]);
     }
 
+    /**
+     * Returns the initial String representation before parsing.
+     *
+     * @return Initial String before it was parsed.
+     */
     public String getDateString(){
         return dateString;
     }
 
+    /**
+     * Returns String representation of the Date object, using the names of the Months.
+     *
+     * @return String representation of this Date object in English.
+     */
     @Override
     public String toString(){
         String toReturn = "";

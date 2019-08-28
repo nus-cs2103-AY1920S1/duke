@@ -3,7 +3,18 @@ package duke.parser;
 import duke.dukeexception.DukeException;
 import duke.command.*;
 
+/**
+ * Class to handle parsing of user input
+ */
 public class Parser {
+    /**
+     * Returns the command that is intended by the user's input String.
+     *
+     * @param toParse User input String to be parsed.
+     * @return Command that is to be executed.
+     * @throws DukeException if input String toParse is not recognized
+     * or in the wrong format.
+     */
     public static Command parse(String toParse) throws DukeException {
         String[] tokens = toParse.split(" ");
         String commandType = tokens[0];

@@ -8,22 +8,46 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ * Represents the internal storage of the computer that the User is loading from
+ * and writing into.
+ */
 public class Storage {
+    /** File path associated with this Storage. */
     private String filePath;
     private boolean storageIsChanged = false;
 
+    /**
+     * Class constructor that specifies the file path to load from and write into.
+     *
+     * @param filePath File Path associated with this Storage object.
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * Marks that there are changes to the file path, and needs over-writing.
+     */
     public void setChangedTrue(){
         storageIsChanged = true;
     }
 
+    /**
+     * Returns a true or false indicating whether storage has been updated.
+     *
+     * @return Status of storage.
+     */
     public boolean storageUpdated(){
         return storageIsChanged;
     }
 
+    /**
+     * Loads the Task data from this Storage's file path into an ArrayList.
+     *
+     * @return ArrayList containing all Tasks from file path.
+     * @throws DukeException If File is corrupted or in wrong format.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> toReturn = new ArrayList<>();
@@ -68,6 +92,12 @@ public class Storage {
 
     }
 
+    /**
+     * Writes the new tasklist data into this Storage's file path.
+     *
+     * @param tasklist List of Tasks to write into file path.
+     * @throws DukeException If writing process fails
+     */
     public void writeToDisk(TaskList tasklist) throws DukeException{
         try {
             FileWriter fw = new FileWriter(filePath);

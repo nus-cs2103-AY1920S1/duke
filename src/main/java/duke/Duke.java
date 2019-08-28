@@ -7,12 +7,19 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
+/**
+ * Class that serves as the main driver for the Duke application.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Class constructor that specifies file path to load storage from.
+     *
+     * @param filepath File path to load storage from.
+     */
     public Duke(String filepath){
         this.ui = new Ui();
         this.storage = new Storage(filepath);
@@ -35,7 +42,7 @@ public class Duke {
                 isDone = c.isExit();
                 c.execute(taskList, ui, storage);
             } catch (DukeException de){
-                ui.printTaskError(de.getMessage());
+                ui.printDukeError(de.getMessage());
             }
             if(!isDone) command = ui.readLine();
 
@@ -54,6 +61,11 @@ public class Duke {
         ui.printGoodbye();
     }
 
+    /**
+     * Runs the main Duke program
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args){
         new Duke("data/duke.txt").run();
     }

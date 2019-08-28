@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,7 +25,7 @@ public class Duke {
             try {
                 process(input, tl);
             } catch (DukeException e) {
-                prettyPrint(e.getMessage());
+                prettyPrint(String.format("☹ OOPS!!! %s", e.getMessage()));
             } catch (Exception e) {
                 prettyPrint("☹ OOPS!!! An unknown error occurred. :(");
             }
@@ -44,52 +47,61 @@ public class Duke {
     // run a process
     private static void process(String input, TaskList tl) throws DukeException {
         String command = input.split(" ")[0];
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         switch (command) {
         case "list":
             tl.listTasks();
             break;
         case "done":
             if (input.split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please enter an index to delete.");
+                throw new DukeException("Please enter an index to delete.");
             }
             tl.taskDone(Integer.parseInt(input.split(" ")[1]));
             break;
         case "todo":
             if (input.split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("The description of a todo cannot be empty.");
             }
             ToDo todo = new ToDo(input.split(" ", 2)[1]);
             tl.addTask(todo);
             break;
         case "deadline":
             if (input.split(" ", 2).length <= 1) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("The description of a deadline cannot be empty.");
             }
             String deadlineStr = input.split(" ", 2)[1];
             if (deadlineStr.split(" /by ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+                throw new DukeException("The date of a deadline cannot be empty.");
             }
             String deadlineName = deadlineStr.split(" /by ")[0];
-            String deadlineDate = deadlineStr.split(" /by ")[1];
-            Deadline deadline = new Deadline(deadlineName, deadlineDate);
-            tl.addTask(deadline);
-            break;
+            try {
+                Date deadlineDate = format.parse(deadlineStr.split(" /by ")[1]);
+                Deadline deadline = new Deadline(deadlineName, deadlineDate);
+                tl.addTask(deadline);
+                break;
+            } catch (ParseException e) {
+                throw new DukeException("Please enter date in the correct format. :(");
+            }
         case "event":
             if (input.split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("The description of an event cannot be empty.");
             }
             String eventStr = input.split(" ", 2)[1];
             if (eventStr.split(" /at ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+                throw new DukeException("The date of an event cannot be empty.");
             }
             String eventName = eventStr.split(" /at ")[0];
-            String eventDate = eventStr.split(" /at ")[1];
-            Event event = new Event(eventName, eventDate);
-            tl.addTask(event);
-            break;
+            try {
+                Date eventDate = format.parse(eventStr.split(" /at ")[1]);
+                Event event = new Event(eventName, eventDate);
+                tl.addTask(event);
+                break;
+            } catch (ParseException e) {
+                throw new DukeException("Please enter date in the correct format. :(");
+            }
         case "delete":
             if (input.split(" ").length <= 1) {
-                throw new DukeException("☹ OOPS!!! Please provide an index to delete.");
+                throw new DukeException("Please provide an index to delete.");
             }
             tl.removeTask(Integer.parseInt(input.split(" ")[1]));
             break;

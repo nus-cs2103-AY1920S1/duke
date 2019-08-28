@@ -12,6 +12,8 @@ public class Parser {
             return new ListTaskCommand();
         } else if(fullCommand.contains("done")){
             return parseDoneCommand(fullCommand);
+        } else if(fullCommand.contains("find")){
+            return new FindTaskCommand(fullCommand.split("find ")[1]);
         }
         else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

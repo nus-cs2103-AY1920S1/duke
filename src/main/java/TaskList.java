@@ -105,6 +105,18 @@ public class TaskList {
         return "Now you have " + tasksArr.size() + " tasks in the list.";
     }
 
+    public ArrayList<Task> find(String keyWord){
+        ArrayList<Task> list = new ArrayList<Task>();
+        for (int i = 0 ; i < tasksArr.size() ; i++){
+            Task currTask = tasksArr.get(i);
+            String currTaskName = currTask.getTaskDetails();
+            if (currTaskName.contains(keyWord)) {
+                list.add(currTask);
+            }
+        }
+        return list;
+    }
+
     @Override
     public String toString(){
         String string = "Here are the tasks in your list:\n";

@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -29,6 +31,14 @@ public class Ui {
 
     void showLoadingError(){
         System.out.println("    Failed to load file");
+    }
+
+    void printList(ArrayList<Task> list) {
+        String string = "Here are the matching tasks in your list:\n";
+        for (int i = 0 ; i < list.size() ; i++ ) {
+            string = string + "    " + (i + 1) + ". " + list.get(i).getTaskDetails() + "\n";
+        }
+        System.out.println(string);
     }
 
     void showError(String string){

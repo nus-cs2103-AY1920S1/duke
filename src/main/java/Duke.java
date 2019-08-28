@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -23,10 +24,12 @@ public class Duke {
             System.out.println("File not found.");
         } catch (IOException e) {
             System.out.print(e);
+        } catch (ParseException e) {
+            System.out.print(e);
         }
     }
 
-    public void run() throws DukeException, FileNotFoundException, IOException {
+    public void run() throws DukeException, FileNotFoundException, IOException, ParseException {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<Task>();
         File taskFile = new File("task.txt");
@@ -64,23 +67,45 @@ public class Duke {
                 if (str.length() == 4) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 } else {
-                    addTodoTaskAndPrintAndUpdateFile(str, list, taskFile);
+                    String message = "Got it. I've added this task:";
+                    Task toDoTask = new Todo(str.substring(5));
+                    list.add(toDoTask);
+                    System.out.println(message);
+                    System.out.println(" " + toDoTask);
+                    System.out.println("Now you have " + list.size() + " tasks in the list");
+                    appendToFile(taskFile, toDoTask);
                 }
             } else if (str.length() >= 8 && str.substring(0, 8).equals("deadline")) {
                 if (str.length() == 8) {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 } else {
-                    addDeadlineTaskAndPrintAndUpdateFile(str, list, taskFile);
+                    String message = "Got it. I've added this task:";
+                    int index = str.indexOf('/') + 1;
+                    String time = str.substring(index + 3);
+                    Task deadlineTask = new Deadline(str.substring(9, index - 2),time);
+                    list.add(deadlineTask);
+                    System.out.println(message);
+                    System.out.println(" " + deadlineTask);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    appendToFile(taskFile, deadlineTask);
                 }
             } else if (str.length() >= 5 && str.substring(0, 5).equals("event")) {
-                addEventTaskAndPrintAndUpdateFile(str, list, taskFile);
+                String message = "Got it. I've added this task:";
+                int index = str.indexOf('/') + 1;
+                String time = str.substring(index + 3);
+                Task eventTask = new Event(str.substring(6, index - 2), time);
+                list.add(eventTask);
+                System.out.println(message);
+                System.out.println(" " + eventTask);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                appendToFile(taskFile, eventTask);
             } else if (str.equals("blah")) {
                 throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
             } else if (str.substring(0, 6).equals("delete")) {
                 Integer index = Integer.valueOf(str.substring(7));
                 System.out.println("Noted. I've removed this task:");
-                System.out.println(list.get(index));
-                list.remove((int)index);
+                System.out.println(list.get(index - 1));
+                list.remove((int)index - 1);
                 System.out.println("Now you have " + list.size() + " tasks in the list");
                 updateFile(taskFile, list);
             }
@@ -88,59 +113,29 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void addDeadlineTaskAndPrintAndUpdateFile(String input, ArrayList<Task> list, File file) throws IOException {
-        String message = "Got it. I've added this task:";
-        int index = input.indexOf('/') + 1;
-        Task deadlineTask = new Task(input.substring(9, index - 2), "deadline");
-        list.add(deadlineTask);
-        String preposition = input.substring(index, index + 2);
-        String time = "(" + preposition + ": " + input.substring(index + 3) + ")";
-        deadlineTask.addTime(time);
-        System.out.println(message);
-        System.out.println(" " + deadlineTask);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
-        appendToFile(file, deadlineTask);
-    }
-
-    public void addTodoTaskAndPrintAndUpdateFile(String input, ArrayList<Task> list, File file) throws IOException {
-        String message = "Got it. I've added this task:";
-        Task toDoTask = new Task(input.substring(5), "todo");
-        list.add(toDoTask);
-        System.out.println(message);
-        System.out.println(" " + toDoTask);
-        System.out.println("Now you have " + list.size() + " tasks in the list");
-        appendToFile(file, toDoTask);
-    }
-
-    public void addEventTaskAndPrintAndUpdateFile(String input, ArrayList<Task> list, File file) throws IOException{
-        String message = "Got it. I've added this task:";
-        int index = input.indexOf('/') + 1;
-        Task eventTask = new Task(input.substring(6, index - 2), "event");
-        list.add(eventTask);
-        String preposition = input.substring(index, index + 2);
-        String time = "(" + preposition + ": " + input.substring(index + 3) + ")";
-        eventTask.addTime(time);
-        System.out.println(message);
-        System.out.println(" " + eventTask);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
-        appendToFile(file, eventTask);
-    }
-
-    public void parseTextToTask(String taskText, ArrayList<Task> list) {
+    public void parseTextToTask(String taskText, ArrayList<Task> list) throws ParseException {
         if (taskText.substring(0, 1).equals("T")) {
-            Task task = new Task(taskText.substring(8), "todo");
+            Task task = new Todo(taskText.substring(8));
             if (taskText.substring(3,4).equals("1")) {
                 task.markAsDone();
             }
             list.add(task);
         } else if (taskText.substring(0, 1).equals("D")) {
-            Task task = new Task(taskText.substring(8), "deadline");
+            String descriptionAndTime = taskText.substring(8);
+            int index = descriptionAndTime.indexOf('|');
+            String description = descriptionAndTime.substring(0, index - 1);
+            String time = descriptionAndTime.substring(index + 2);
+            Task task = new Deadline(description, time);
             if (taskText.substring(3,4).equals("1")) {
                 task.markAsDone();
             }
             list.add(task);
         } else if (taskText.substring(0, 1).equals("E")) {
-            Task task = new Task(taskText.substring(8), "event");
+            String descriptionAndTime = taskText.substring(8);
+            int index = descriptionAndTime.indexOf('|');
+            String description = descriptionAndTime.substring(0, index - 1);
+            String time = descriptionAndTime.substring(index + 2);
+            Task task = new Event(description, time);
             if (taskText.substring(3,4).equals("1")) {
                 task.markAsDone();
             }
@@ -152,10 +147,14 @@ public class Duke {
         FileWriter fw = new FileWriter(file, true);
         String isDone = task.isDone() ? "1" : "0";
         String text = task.getTypeOfTask() + " | " + isDone + " | " + task.getDescription();
-        if (!task.getTime().equals("")) {
-            text = text + " " + task.getTime();
+        if (task.getTypeOfTask().equals("D")) {
+            text = text + " | " + ((Deadline)task).getTime() + System.lineSeparator();
+        } else if (task.getTypeOfTask().equals("E")) {
+            text = text + " | " + ((Event)task).getTime() + System.lineSeparator();
+        } else {
+            text = text + System.lineSeparator();
         }
-        fw.write(text + "\n");
+        fw.write(text);
         fw.close();
     }
 
@@ -165,10 +164,13 @@ public class Duke {
         for(Task task: list) {
             String isDone = task.isDone() ? "1" : "0";
             text = text + task.getTypeOfTask() + " | " + isDone + " | " + task.getDescription();
-            if (!task.getTime().equals("")) {
-                text = text + " " + task.getTime();
+            if (task.getTypeOfTask().equals("D")) {
+                text = text + " | " + ((Deadline)task).getTime() + System.lineSeparator();
+            } else if (task.getTypeOfTask().equals("E")) {
+                text = text + " | " + ((Event)task).getTime() + System.lineSeparator();
+            } else {
+                text = text + System.lineSeparator();
             }
-            text = text + System.lineSeparator();
         }
         writer.write(text);
         writer.close();

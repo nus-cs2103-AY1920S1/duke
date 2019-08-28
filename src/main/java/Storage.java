@@ -79,6 +79,7 @@ public class Storage {
         fw.write(list.get(list.size() - 1));
         fw.close();
     }
+
     public void addToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         File file = new File(filePath);
@@ -95,6 +96,7 @@ public class Storage {
         Scanner scn = new Scanner(file);
         List<String> list = new ArrayList<String>();
         int lineNum = 1;
+
         while (scn.hasNext()) {
             String s = scn.nextLine();
             if (lineNum != taskNum) {
@@ -102,13 +104,16 @@ public class Storage {
             }
             lineNum++;
         }
+
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < list.size() - 1; i++) {
             fw.write(list.get(i) + System.lineSeparator());
         }
+
         if (list.size() > 0) {
             fw.write(list.get(list.size() - 1));
         }
+
         fw.close();
     }
 }

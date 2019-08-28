@@ -1,58 +1,93 @@
+import java.io.FileNotFoundException;
+//import java.io.FileWriter;
+//import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     private static final Scanner S = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         ChatLike cl = new ChatLike(); //ChatLike object to call methods
-        cl.greet();
 
-        while(true) {
+        try {
+            SaveRetrieve.getFileText("../data/duke.txt", cl);
+        } catch (FileNotFoundException exc) {
+            System.out.println("File not found");
+        }
+
+        cl.greet();
+        cl.getResponseDirect();
+
+        while (true) {
             String comm = S.nextLine();
+
             if (comm.equals("bye")) {
                 cl.byeUser();
+                cl.getResponseDirect();
                 break;
-            } else if (comm.equals("list")){
+            } else if (comm.equals("list")) {
                 cl.list();
-            } else if (comm.length() >= 4 && comm.substring(0,4).equals("done")){
-                try {
-                    cl.done(Integer.valueOf(comm.substring(5))); //Sends the list number to be marked as done
+                cl.getResponseDirect();
+            } else if (comm.length() > 4 && comm.substring(0, 4).equals("done")) {
+                if (comm.charAt(4) != ' ') {
+                    try {
+                        cl.add(comm);
+                    } catch (DukeException exc) {
+                        System.out.println(exc.getMessage());
+                    }
+                } else {
+                    try {
+                        cl.done(Integer.parseInt(comm.substring(5)));
+                        try {
+                            SaveRetrieve.writeOnFile("../data/duke.txt", cl.genInfoForFile());
+                        } catch (IOException exc) {
+                            System.out.println("Something went wrong: " + exc.getMessage());
+                        }
+                        cl.getResponseDirect();
+                    } catch (Exception exc) {
+                        System.out.println("    ____________________________________________________________\n     " +
+                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                                "\n    ____________________________________________________________\n");
+                    }
                 }
-                catch(DukeException exc) {
-                    System.out.println(exc.getMessage());
+
+            } else if (comm.length() > 6 && comm.substring(0, 6).equals("delete")) {
+                if (comm.charAt(7) != ' ') {
+                    try {
+                        cl.add(comm);
+                    } catch (DukeException exc) {
+                        System.out.println(exc.getMessage());
+                    }
+                } else {
+                    try {
+                        cl.delete(Integer.parseInt(comm.substring(7)));
+                        try {
+                            SaveRetrieve.writeOnFile("../data/duke.txt", cl.genInfoForFile());
+                        } catch (IOException exc) {
+                            System.out.println("Something went wrong: " + exc.getMessage());
+                        }
+                        cl.getResponseDirect();
+                    } catch (Exception exc) {
+                        System.out.println("    ____________________________________________________________\n     " +
+                                "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
+                                "\n    ____________________________________________________________\n");
+                    }
                 }
-            } else if (comm.length() >= 6 && comm.substring(0,6).equals("delete")) {
-                try {
-                    cl.delete(Integer.valueOf(comm.substring(7))); //Sends the list number to be marked as done
-                } catch (DukeException exc) {
-                    System.out.println(exc.getMessage());
-                }
+
             } else {
                 try {
                     cl.add(comm);
-                }
-                catch(DukeException exc) {
+                    cl.getResponseDirect();
+                } catch (DukeException exc) {
                     System.out.println(exc.getMessage());
+                }
+                try {
+                    SaveRetrieve.writeOnFile("../data/duke.txt", cl.genInfoForFile());
+                } catch (IOException exc) {
+                    System.out.println("Something went wrong: " + exc.getMessage());
                 }
             }
         }
-
-<<<<<<< HEAD
-=======
-        Scanner S = new Scanner(System.in);
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
-        String inp = S.next();
-        while(!(inp.equals("bye"))) {
-            System.out.println("    ____________________________________________________________\n     " + inp +
-                    "\n    ____________________________________________________________");
-            inp = S.next();
-        }
-        System.out.println("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________\n");
->>>>>>> origin/master
     }
 }

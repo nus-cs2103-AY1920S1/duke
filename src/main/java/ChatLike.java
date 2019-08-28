@@ -5,6 +5,63 @@ public class ChatLike {
     private String response;
     private List<Task> taskList = new ArrayList<Task>();
 
+    public void getResponseDirect() {
+        System.out.println(this);
+    }
+
+    public void readFromFile(String str) throws DukeException{
+        String arr[] = str.split(" \\| ");
+        String tasksType = arr[0];
+        int taskInfo = Integer.parseInt(arr[1]);
+        String taskDescr = arr[2];
+        String tasksTime = "";
+
+        if (tasksType.equals("T")) {
+            tasksType = "todo";
+        } else if (tasksType.equals("D")) {
+            tasksType = "deadline";
+            tasksTime = " /by " + arr[3];
+        } else if (tasksType.equals("E")) {
+            tasksType = "event";
+            tasksTime = " /at " + arr[3];
+        }
+
+        try {
+            this.add(tasksType + " " + taskDescr + tasksTime);
+        } catch (DukeException exc) {
+            System.out.println(exc.getMessage());
+        }
+
+        if (taskInfo == 1) {
+            this.done(taskList.size());
+        }
+    }
+
+    public String genInfoForFile() {
+        //Convert details of Task object into a String which will be stored in the file
+        String taskData = "";
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            String currTask;
+
+            if (task.getTimeLabel().equals("")) {
+                currTask = task.getLabel() + " | " + task.getInfo() + " | " + task.getDescription();
+            } else {
+                currTask = task.getLabel() + " | " + task.getInfo() + " | " + task.getDescription() + " | "
+                        + task.getTimeLabel();
+            }
+
+            if (i != taskList.size() - 1) {
+                taskData += currTask + System.lineSeparator();
+            } else {
+                taskData += currTask;
+            }
+        }
+
+        return taskData;
+    }
+
     public void add(String s) throws DukeException{
         String[] arrWords = s.split(" ");
         String tasksType = arrWords[0]; //Type of Task: ToDo, Event, Deadline
@@ -60,13 +117,13 @@ public class ChatLike {
 
     public void byeUser() {
         this.response = "Bye. Hope to see you again soon!";
-        System.out.println(this);
+
     }
 
     public void greet() { //Default starting for Duke
         this.response = "Hello! I'm Duke\n" +
                 "     What can I do for you?";
-        System.out.println(this);
+
     }
 
     public void list() { //Shows the list of events
@@ -77,17 +134,9 @@ public class ChatLike {
                 taskListed += "\n     ";
         }
         this.response = taskListed;
-        System.out.println(this);
+
     }
 
-    /*
-    Apart from the two types exceptions given, I came up with this possible exception
-    In command done <taskNumber>, <taskNumber> should necessarily be less than the taskList size, else an exception is thrown,
-    which I have handled here.
-    Similar with delete <taskNumber>.
-    I figured out that writing only "done" or only "delete" also throws an exception, but it can be rectified in
-    later levels.
-    */
     public void done(int n) throws DukeException{ //Marks a task to be completed by calling method of Task object
         if(n > this.taskList.size()) {
             throw new DukeException("    ____________________________________________________________\n     " +
@@ -96,7 +145,7 @@ public class ChatLike {
         }
         this.taskList.get(n - 1).mark();
         this.response = "Nice! I've marked this task as done:\n       " + this.taskList.get(n - 1);
-        System.out.println(this);
+
     }
 
     public void delete(int n) throws DukeException{ //Marks a task to be completed by calling method of Task object
@@ -110,7 +159,7 @@ public class ChatLike {
 
         this.response = "Noted. I've removed this task:\n       " + taskToBeDel +
                 "\n     Now you have " + taskList.size() + " tasks in the list."; //Shows truncated list
-        System.out.println(this);
+
     }
 
     public String toString() {

@@ -13,8 +13,9 @@ public class Duke {
 
         System.out.println("Hello! I'm Duke" + "\n" + "What can I do for you?"); // greet user
         Scanner scanner = new Scanner(System.in); // reads user input
-        List<Task> toDos = new ArrayList<>(); // instantiate array list of tasks
+        List<Task> tasks = new ArrayList<>(); // instantiate array list of tasks
         while (true) {
+            System.out.println();
             String line = scanner.nextLine();
             if (line.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -22,22 +23,29 @@ public class Duke {
             }
             else if (line.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i < toDos.size() + 1; i++) {
-                    Task currentTask = toDos.get(i - 1);
-                    System.out.println(String.format(i + ".[%s]" + currentTask.getDescription(), currentTask.getStatusIcon()));
+                for (int i = 1; i < tasks.size() + 1; i++) {
+                    Task currentTask = tasks.get(i - 1);
+                    System.out.println(String.format(i + "." + currentTask.toString(), currentTask.getStatusIcon()));
                 }
             }
             else if (line.contains("done")) {
                 int taskIndex = Integer.parseInt(line.replaceAll("\\D+","")) - 1;
-                Task currentTask = toDos.get(taskIndex);
+                Task currentTask = tasks.get(taskIndex);
                 currentTask.setIsDone(); // set current task to done (opposite of current state of isDone)
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(String.format("[%s] " + currentTask.getDescription(), currentTask.getStatusIcon()));
+                System.out.println(String.format(currentTask.toString(), currentTask.getStatusIcon()));
+            }
+            else if (line.contains("todo")) {
+                ToDo newToDo = new ToDo(line);
+                System.out.println("Got it. I've added this task:");
+                tasks.add(newToDo);
+                System.out.println(newToDo.toString());
+                System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
             }
             else {
                 Task newTask = new Task(line);
-                toDos.add(newTask); // add user input to toDos
-                System.out.println("added: " + newTask.getDescription()); // echos user input
+                tasks.add(newTask); // add user input to toDos
+                System.out.println("added: " + newTask.toString()); // echos user input
             }
         }
     }

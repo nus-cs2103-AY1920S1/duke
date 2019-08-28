@@ -18,11 +18,11 @@ public class TaskList {
     }
 
     //Load tasklist with data from hard disk
-    public TaskList(ArrayList<Task> taskList){
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public void displayTaskList(){
+    public void displayTaskList() {
         System.out.println("Here are the tasks in your list:");
         int numCommands = 0;
         for (Task i : taskList) {
@@ -31,7 +31,7 @@ public class TaskList {
         }
     }
 
-    public void addToDo(Todo newTodo){
+    public void addToDo(Todo newTodo) {
         taskList.add(newTodo);
         System.out.println("Got it. I've added this task: ");
         System.out.println(newTodo);

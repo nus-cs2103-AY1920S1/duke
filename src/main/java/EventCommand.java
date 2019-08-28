@@ -6,7 +6,7 @@ public class EventCommand extends Command {
         super(commandDesc);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return false;
     }
 

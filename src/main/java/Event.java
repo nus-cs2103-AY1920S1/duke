@@ -7,13 +7,13 @@ public class Event extends Task {
     Date at;
     String atString;
 
-    public Event(String description, String eventDate){
+    public Event(String description, String eventDate) {
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             this.at = dateFormat.parse(eventDate);
             this.atString = eventDate;
-        } catch (Exception e){
+        } catch (Exception e) {
             this.atString = eventDate;
         }
     }

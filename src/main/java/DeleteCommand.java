@@ -6,7 +6,7 @@ public class DeleteCommand extends Command {
         super(commandDesc);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return false;
     }
 
@@ -20,7 +20,8 @@ public class DeleteCommand extends Command {
             int taskNumber = Integer.parseInt(commandDesc.substring(7).split(" ")[0]);
             //Check if task number is valid
             if (taskNumber > 0 && taskNumber <= tasks.taskList.size()) {
-                storage.deleteFromFile(System.getProperty("user.dir"), tasks.taskList.get(taskNumber - 1).stringForAppend());
+                storage.deleteFromFile(System.getProperty("user.dir"),
+                        tasks.taskList.get(taskNumber - 1).stringForAppend());
                 tasks.deleteTask(taskNumber);
             } else {
                 throw new InvalidTaskNumberDukeException("invalid");

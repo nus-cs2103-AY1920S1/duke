@@ -1,4 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +21,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<Task>();
         File dataFile = new File(filePath);
 
-        if (dataFile.exists()){
+        if (dataFile.exists()) {
             Scanner fileReader = null; // create a Scanner using the File as the source
             try {
                 fileReader = new Scanner(dataFile);
@@ -66,10 +72,10 @@ public class Storage {
 
         String currentLine;
 
-        while((currentLine = reader.readLine()) != null) {
+        while ((currentLine = reader.readLine()) != null) {
             // trim newline when comparing with lineToRemove
             String trimmedLine = currentLine.trim();
-            if(!trimmedLine.equals(line)) {
+            if (!trimmedLine.equals(line)) {
                 writer.write(currentLine + System.getProperty("line.separator"));
             }
         }
@@ -89,22 +95,21 @@ public class Storage {
 
         String currentLine;
 
-        while((currentLine = reader.readLine()) != null) {
+        while ((currentLine = reader.readLine()) != null) {
             // trim newline when comparing with lineToRemove
             String trimmedLine = currentLine.trim();
-            if(!trimmedLine.equals(line)) {
+            if (!trimmedLine.equals(line)) {
                 writer.write(currentLine + System.getProperty("line.separator"));
             } else {
                 String newLine = "";
                 String[] splittedParts = line.split("\\|");
-                for (int j = 0; j < splittedParts.length; j++){
-                    if (j != 0){
+                for (int j = 0; j < splittedParts.length; j++) {
+                    if (j != 0) {
                         newLine += "|";
                     }
-                    if (j == 1){
+                    if (j == 1) {
                         newLine += " \u2713 ";
-                    }
-                    else{
+                    } else {
                         newLine += splittedParts[j];
                     }
                 }

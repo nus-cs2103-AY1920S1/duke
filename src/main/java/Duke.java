@@ -7,42 +7,35 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     public Duke() throws FileNotFoundException {
+        ui = new Ui();
         this.storage = new Storage("../duke.txt");
         this.tasks = new TaskList(storage.load());
     }
 
-    public static void main(String[] args) throws DukeException, FileNotFoundException{
+    public void run() throws DukeException, FileNotFoundException{
         Scanner sc = new Scanner(System.in);
-        Duke test = new Duke();
-        ArrayList<Task> store = test.tasks.list;
+        ArrayList<Task> store = this.tasks.list;
 
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         try {
             while(true) {
                 String next = sc.next();
                 if (next.equals("list")) {
-                    if (store.size() == 0) {
-                        throw new DukeException("☹ OOPS!!! Your list is still empty!");
-                    }
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < store.size(); i++) {
-                        int taskNumber = i + 1;
-                        String taskString = Integer.toString(taskNumber);
-                        System.out.println(taskString + ".[" + store.get(i).getStatusIcon() + "] " + store.get(i).toString());
-                    }
+                   ui.list(store);
                 } else if (next.equals("done")) {
                     int taskNo = sc.nextInt();
                     if (taskNo > store.size()) {
                         throw new DukeException("☹ OOPS!!! No such item in the list!");
                     }
                     store.get(taskNo-1).markAsDone();
-                    test.storage.write(test.tasks);
+                    this.storage.write(this.tasks);
                     System.out.println("Nice! I've marked this task as done: ");
                     System.out.println("  " + store.get(taskNo-1).toString());
                 } else if (next.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                    ui.bye();
                     break;
                 } else if (next.equals("todo") || next.equals("deadline") || next.equals("event")){
                     Task newTask;
@@ -68,7 +61,7 @@ public class Duke {
                         newTask = new Event(remainder.substring(0,position).trim(), formattedDate);
                     }
                     store.add(newTask);
-                    test.storage.write(test.tasks);
+                    this.storage.write(this.tasks);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + newTask.toString());
                     String size = Integer.toString(store.size());
@@ -81,7 +74,7 @@ public class Duke {
                     System.out.println("Noted. I've removed this task: ");
                     System.out.println("  " + store.get(taskNo-1).toString());
                     store.remove(taskNo-1);
-                    test.storage.write(test.tasks);
+                    this.storage.write(this.tasks);
                     String size = Integer.toString(store.size());
                     System.out.println("Now you have " + size + " tasks in the list.");
                 } else {
@@ -90,7 +83,14 @@ public class Duke {
             }
         } catch(DukeException err) {
             System.out.println(err.getMessage());
+        } finally {
+            sc.close();
         }
 
+    }
+
+    public static void main(String[] args) throws DukeException, FileNotFoundException {
+        Duke dukeObject = new Duke();
+        dukeObject.run(); 
     }
 }

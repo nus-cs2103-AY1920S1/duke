@@ -5,14 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
 	static ArrayList<Task> memory;
 	static String line = "____________________________________________________________";
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		memory = new ArrayList<>();
 		
 		loadSave();
@@ -76,7 +79,9 @@ public class Duke {
 		try {
 			String[] eventInput = rawInput.substring(6).split("/at");
 			String description = eventInput[0].trim();
-			String at = eventInput[1].trim();
+			String atRaw = eventInput[1].trim();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+			Date at = sdf.parse(atRaw);
 			Task newTask = new Event(description, at);
 			memory.add(newTask);
 			
@@ -97,6 +102,11 @@ public class Duke {
 			System.out.println(" ☹ OOPS!!! The timing of a event cannot be empty.");
 			System.out.println(line);
 			System.out.println();
+		} catch (ParseException e) {
+			System.out.println(line);
+			System.out.println(" ☹ OOPS!!! The timing of the event is invalid.");
+			System.out.println(line);
+			System.out.println();
 		}
 	}
 
@@ -104,7 +114,9 @@ public class Duke {
 		try {
 			String[] deadlineInput = rawInput.substring(9).split("/by");
 			String description = deadlineInput[0].trim();
-			String by = deadlineInput[1].trim();
+			String byRaw = deadlineInput[1].trim();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+			Date by = sdf.parse(byRaw);
 			Task newTask = new Deadline(description, by);
 			memory.add(newTask);
 			
@@ -123,6 +135,11 @@ public class Duke {
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println(line);
 			System.out.println(" ☹ OOPS!!! The timing of a deadline cannot be empty.");
+			System.out.println(line);
+			System.out.println();
+		} catch (ParseException e) {
+			System.out.println(line);
+			System.out.println(" ☹ OOPS!!! The timing of the event is invalid.");
 			System.out.println(line);
 			System.out.println();
 		}
@@ -197,7 +214,7 @@ public class Duke {
 		out.close();
 	}
 
-	private static void loadSave() throws IOException {
+	private static void loadSave() throws IOException, ParseException {
 		String dir = System.getProperty("user.dir") + "/savedData.txt";
 		
 		try {
@@ -214,13 +231,17 @@ public class Duke {
 					} else if (procInput.toLowerCase().startsWith("deadline")) {
 						String[] deadlineInput = procInput.substring(9).split("/by");
 						String description = deadlineInput[0].trim();
-						String by = deadlineInput[1].trim();
+						String byRaw = deadlineInput[1].trim();
+						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+						Date by = sdf.parse(byRaw);
 						Task newTask = new Deadline(description, by);
 						memory.add(newTask);
 					} else if (procInput.toLowerCase().startsWith("event")) {
 						String[] eventInput = procInput.substring(6).split("/at");
 						String description = eventInput[0].trim();
-						String at = eventInput[1].trim();
+						String atRaw = eventInput[1].trim();
+						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+						Date at = sdf.parse(atRaw);
 						Task newTask = new Event(description, at);
 						memory.add(newTask);
 					}
@@ -232,13 +253,17 @@ public class Duke {
 				} else if (rawInput.toLowerCase().startsWith("deadline")) {
 					String[] deadlineInput = rawInput.substring(9).split("/by");
 					String description = deadlineInput[0].trim();
-					String by = deadlineInput[1].trim();
+					String byRaw = deadlineInput[1].trim();
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+					Date by = sdf.parse(byRaw);
 					Task newTask = new Deadline(description, by);
 					memory.add(newTask);
 				} else if (rawInput.toLowerCase().startsWith("event")) {
 					String[] eventInput = rawInput.substring(6).split("/at");
 					String description = eventInput[0].trim();
-					String at = eventInput[1].trim();
+					String atRaw = eventInput[1].trim();
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+					Date at = sdf.parse(atRaw);
 					Task newTask = new Event(description, at);
 					memory.add(newTask);
 				}

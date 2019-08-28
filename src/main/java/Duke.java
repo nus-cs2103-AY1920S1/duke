@@ -1,12 +1,21 @@
 import java.io.File;
 import java.util.Scanner;
 
+/**
+ * Driver class which contains the main method of the program. Also encapsulates Duke,
+ * a to-do list. Each Duke object has a storage file, a list of tasks, and a user
+ * interface.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor.
+     * @param filePath file path of text file used to load and store tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the application. A scanner is instantiated to read standard input.
+     */
     public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
@@ -32,6 +44,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method, the program's entry point. A Duke object is instantiated to call run(), an instance method.
+     * @param args  an array of command-line arguments for the application
+     */
     public static void main(String[] args) {
         File file = new File("data");
         file.mkdir();

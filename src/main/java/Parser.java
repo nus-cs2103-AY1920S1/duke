@@ -19,6 +19,9 @@ public class Parser {
             case "delete":
                 int indexToDelete = Integer.parseInt(input[1]);
                 return new DeleteCommand(indexToDelete);
+            case "done":
+                int indexToDone = Integer.parseInt(input[1]);
+                return new DoneCommand(indexToDone);
             case "list":
                 return new ListCommand();
             case "bye":

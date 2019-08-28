@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class ByeCommand extends Command {
 
     public ByeCommand() {
@@ -5,7 +7,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
         super.execute(tasks, ui, storage);
         ui.bye();
     }

@@ -10,7 +10,6 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-            ui.list(tasks.getTasks());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -19,19 +18,20 @@ public class Duke {
 
     public void run() {
         ui.showWelcome();
+        ui.list(tasks.getTasks());
         boolean isExit = false;
         while(!isExit) {
-            //try {
+            try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            //} catch (DukeException e) {
-            //    ui.showError(e.getMessage());
-            //} finally {
-            //    ui.showLine();
-            //}
+            } catch (Exception e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
         }
         try {
             storage.save();

@@ -12,12 +12,18 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
     }
 
     public String readCommand() {
         System.out.print("Enter command: ");
         String fullCommand = in.nextLine();
         return fullCommand;
+    }
+
+    public void done(Task task) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + task.toString());
     }
 
     public void showLine() {

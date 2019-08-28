@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class DeleteCommand extends Command {
 
     private int indexToDelete;
@@ -7,7 +9,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
         super.execute(tasks, ui, storage);
         Task task = tasks.getTasks().get(indexToDelete);
         tasks.deleteTask(indexToDelete);

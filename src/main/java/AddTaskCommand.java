@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class AddTaskCommand extends Command {
 
     private String instruction;
@@ -9,7 +11,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException {
 
         Task task;
         String[] words = description.split(" ");

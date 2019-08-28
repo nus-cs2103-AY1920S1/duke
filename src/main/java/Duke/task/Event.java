@@ -1,3 +1,5 @@
+package Duke.task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class Event extends Task {
     }
 
     @Override
-    protected String formatToWrite() {
+    public String formatToWrite() {
         if (this.done) {
             return String.format("E | %d | %s | %s", 1, this.description, new SimpleDateFormat("dd/MM/yyyy HHmm").format(this.by));
         } else {

@@ -1,10 +1,12 @@
+package Duke.task;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
 
     @Override
-    protected String formatToWrite() {
+    public String formatToWrite() {
         if (this.done) {
             return String.format("T | %d | %s", 1, this.description);
         } else {

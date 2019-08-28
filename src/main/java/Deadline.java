@@ -8,6 +8,16 @@ class Deadline extends Task {
         this.date = date;
     }
 
+    // get task type
+    public TaskType getType() {
+        return TaskType.DEADLINE;
+    }
+
+    // get task date
+    public String getDate() {
+        return this.date;
+    }
+
     @Override
     public String toString() {
         String doneStr = this.done ? "✓" : "✗";

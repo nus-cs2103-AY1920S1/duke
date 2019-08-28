@@ -1,3 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,19 +23,23 @@ public class Duke {
         prettyPrint(welcomeStr);
 
         // run the tasks till user says bye
-        TaskList tl = new TaskList();
-        String input = sc.nextLine();
-        while (!input.equalsIgnoreCase("bye")) {
-            try {
-                process(input, tl);
-            } catch (DukeException e) {
-                prettyPrint(e.getMessage());
-            } catch (Exception e) {
-                prettyPrint("☹ OOPS!!! An unknown error occurred. :(");
+        try {
+            TaskList tl = readTasksFromFile();
+            String input = sc.nextLine();
+            while (!input.equalsIgnoreCase("bye")) {
+                try {
+                    process(input, tl);
+                } catch (DukeException e) {
+                    prettyPrint(e.getMessage());
+                } catch (Exception e) {
+                    prettyPrint("☹ OOPS!!! An unknown error occurred. :(");
+                }
+                input = sc.nextLine();
             }
-            input = sc.nextLine();
+            sc.close();
+        } catch (DukeException e) {
+            prettyPrint(e.getMessage());
         }
-        sc.close();
         
         // Print exit string
         prettyPrint(endStr);
@@ -39,6 +50,85 @@ public class Duke {
         System.out.println("    --------------------------------------------------");
         System.out.println("     " + str);
         System.out.println("    --------------------------------------------------");
+    }
+
+    // function to read tasks from a file
+    private static TaskList readTasksFromFile() throws DukeException {
+        TaskList tl = new TaskList();
+        Path path = Paths.get("data/duke.txt");
+        try {
+            List<String> tasks = Files.readAllLines(path);
+            for (String task : tasks) {
+                tl.addTaskWithoutMessage(readTask(task));
+            }
+            tl.listTasks();
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! Was not able to read the file. :(");
+        }
+
+        return tl;
+    }
+
+    // function to write tasks to a file
+    private static void writeTasksToFile(TaskList tl) throws DukeException {
+        try {
+            Path path = Paths.get("data/duke.txt");
+            BufferedWriter writer = Files.newBufferedWriter(path, Charset.forName("UTF-8"));
+            for (Task task : tl.getTasks()) {
+                writer.write(writeTask(task) + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! Was not able to write to the file. :(");
+        }
+    }
+
+    // function to read tasks from a single line
+    private static Task readTask(String task) {
+        String[] taskParams = task.split(" - ");
+        Task returnTask = null;
+        switch (taskParams[0]) {
+        case "T":
+            ToDo todo = new ToDo(taskParams[2]);
+            if (Integer.parseInt(taskParams[1]) == 1) {
+                todo.markDone();
+            }
+            returnTask = todo;
+            break;
+        case "E":
+            Event event = new Event(taskParams[2], taskParams[3]);
+            if (Integer.parseInt(taskParams[1]) == 1) {
+                event.markDone();
+            }
+            returnTask = event;
+            break;
+        case "D":
+            Deadline dl = new Deadline(taskParams[2], taskParams[3]);
+            if (Integer.parseInt(taskParams[1]) == 1) {
+                dl.markDone();
+            }
+            returnTask = dl;
+            break;
+        }
+        return returnTask;
+    }
+
+    // generate string to represent task
+    private static String writeTask(Task task) {
+        String taskStr = "";
+        String doneStr = task.isTaskDone() ? "1" : "0";
+        switch (task.getType()) {
+            case TODO:
+                taskStr = String.format("T - %s - %s", doneStr, task.getName());
+                break;
+            case EVENT:
+                taskStr = String.format("E - %s - %s - %s", doneStr, task.getName(), task.getDate());
+                break;
+            case DEADLINE:
+                taskStr = String.format("D - %s - %s - %s", doneStr, task.getName(), task.getDate());
+                break;
+        }
+        return taskStr;
     }
 
     // run a process
@@ -53,6 +143,7 @@ public class Duke {
                 throw new DukeException("☹ OOPS!!! Please enter an index to delete.");
             }
             tl.taskDone(Integer.parseInt(input.split(" ")[1]));
+            writeTasksToFile(tl);
             break;
         case "todo":
             if (input.split(" ").length <= 1) {
@@ -60,6 +151,7 @@ public class Duke {
             }
             ToDo todo = new ToDo(input.split(" ", 2)[1]);
             tl.addTask(todo);
+            writeTasksToFile(tl);
             break;
         case "deadline":
             if (input.split(" ", 2).length <= 1) {
@@ -73,6 +165,7 @@ public class Duke {
             String deadlineDate = deadlineStr.split(" /by ")[1];
             Deadline deadline = new Deadline(deadlineName, deadlineDate);
             tl.addTask(deadline);
+            writeTasksToFile(tl);
             break;
         case "event":
             if (input.split(" ").length <= 1) {
@@ -86,12 +179,14 @@ public class Duke {
             String eventDate = eventStr.split(" /at ")[1];
             Event event = new Event(eventName, eventDate);
             tl.addTask(event);
+            writeTasksToFile(tl);
             break;
         case "delete":
             if (input.split(" ").length <= 1) {
                 throw new DukeException("☹ OOPS!!! Please provide an index to delete.");
             }
             tl.removeTask(Integer.parseInt(input.split(" ")[1]));
+            writeTasksToFile(tl);
             break;
         default:
             prettyPrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -38,7 +38,7 @@ public class Storage {
                     int index = description.indexOf('|');
                     String deadlineName = description.substring(0, index);
                     String by = description.substring(index + 1).trim();
-                    Deadline newDeadline = new Deadline(deadlineName, by);
+                    Deadline newDeadline = new Deadline(deadlineName, by.trim());
                     if (isDone == 1) {
                         newDeadline.markAsDone();
                     }

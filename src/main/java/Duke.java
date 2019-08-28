@@ -57,23 +57,15 @@ public class Duke {
                         if (position == -1) {
                             throw new DukeException("☹ OOPS!!! Not a valid deadline command");
                         }
-<<<<<<< HEAD
                         String formattedDate = Parser.getFormattedDate(remainder.substring(position+3));
-                        newTask = new Deadline(remainder.substring(0,position), formattedDate);
-=======
-                        newTask = new Deadline(remainder.substring(0,position).trim(), remainder.substring(position+3).trim());
->>>>>>> branch-Level-7
+                        newTask = new Deadline(remainder.substring(0,position).trim(), formattedDate);
                     } else {
                         int position = remainder.indexOf("/");
                         if (position == -1) {
                             throw new DukeException("☹ OOPS!!! Not a valid event command");
                         }
-<<<<<<< HEAD
                         String formattedDate = Parser.getFormattedDate(remainder.substring(position+3));
-                        newTask = new Event(remainder.substring(0,position), formattedDate);
-=======
-                        newTask = new Event(remainder.substring(0,position).trim(), remainder.substring(position+3).trim());
->>>>>>> branch-Level-7
+                        newTask = new Event(remainder.substring(0,position).trim(), formattedDate);
                     }
                     store.add(newTask);
                     test.storage.write(test.tasks);

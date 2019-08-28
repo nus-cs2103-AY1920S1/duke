@@ -9,7 +9,7 @@ public class Parser {
     }
 
     public static String getFormattedDate(String dateAndTime) {
-        String date = dateAndTime;
+        String parsedDate = "";
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(dateAndTime);
             String day = new SimpleDateFormat("dd").format(date);
@@ -31,11 +31,11 @@ public class Parser {
                 postfix = "th";
             }
 
-            date = int_day + postfix + " of " + month + " " + year + ", " + time;
+            parsedDate = int_day + postfix + " of " + month + " " + year + ", " + time;
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
-        return date;
+        return parsedDate;
     }
 
 

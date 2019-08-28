@@ -21,6 +21,6 @@ public class Event extends Task {
             completion = "0";
         }
 
-        return "E|" + completion + "|" + this.description + "|" + this.at;
+        return "E | " + completion + " | " + this.description + " | " + this.at;
     }
 }

@@ -14,14 +14,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void create() throws IOException {
-        Path path = Paths.get(this.filePath);
-        try {
-            Files.createFile(path);
-        } catch (FileAlreadyExistsException ex) {
-        }
-    }
-
     //load file contents into arraylist
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
@@ -31,37 +23,37 @@ public class Storage {
         while(sc.hasNext()) {
             String current = sc.nextLine();
             char type = current.charAt(0);
-            String isDone = ("" + current.charAt(4));
-            String des = current.substring(8).trim();
+            int isDone = Character.getNumericValue(current.charAt(4));
+            String description = current.substring(8).trim();
             switch(type) {
                 case 'T':
-                    Todo newT = new Todo(des);
-                    if (Boolean.parseBoolean(isDone)) {
-                        newT.markAsDone();
+                    Todo newTask = new Todo(description);
+                    if (isDone == 1) {
+                        newTask.markAsDone();
                     }
-                    list.add(newT);
+                    list.add(newTask);
                     break;
 
                 case 'D':
-                    int index = des.indexOf('|');
-                    String taskName = des.substring(0, index).trim();
-                    String date = des.substring(index + 1).trim();
-                    Deadline newD = new Deadline(taskName, date);
-                    if (Boolean.parseBoolean(isDone)) {
-                        newD.markAsDone();
+                    int index = description.indexOf('|');
+                    String deadlineName = description.substring(0, index);
+                    String by = description.substring(index + 1).trim();
+                    Deadline newDeadline = new Deadline(deadlineName, by);
+                    if (isDone == 1) {
+                        newDeadline.markAsDone();
                     }
-                    list.add(newD);
+                    list.add(newDeadline);
                     break;
 
                 case 'E':
-                    int index1 = des.indexOf('|');
-                    String taskName1 = des.substring(0, index1).trim();
-                    String date1 = des.substring(index1 + 1).trim();
-                    Event newE = new Event(taskName1, date1);
-                    if (Boolean.parseBoolean(isDone)) {
-                        newE.markAsDone();
+                    int index1 = description.indexOf('|');
+                    String eventName = description.substring(0, index1).trim();
+                    String at = description.substring(index1 + 1).trim();
+                    Event newEvent = new Event(eventName, at.trim());
+                    if (isDone == 1) {
+                        newEvent.markAsDone();
                     }
-                    list.add(newE);
+                    list.add(newEvent);
                     break;
 
                 default:
@@ -79,14 +71,13 @@ public class Storage {
     //write arraylist contents to file
     public void write(TaskList taskList) {
         try {
-            FileWriter fileWriter = new FileWriter(this.filePath);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            BufferedWriter bWrite = new BufferedWriter(new FileWriter(this.filePath));
             for (Task task: taskList.list) {
                 String taskData = task.getStatus();
-                bufferedWriter.write(taskData);
-                bufferedWriter.newLine();
+                bWrite.write(taskData);
+                bWrite.newLine();
             }
-            bufferedWriter.close();
+            bWrite.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

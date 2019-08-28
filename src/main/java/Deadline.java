@@ -21,6 +21,6 @@ public class Deadline extends Task {
             completion = "0";
         }
 
-        return "D|" + completion + "|" + this.description + "|" + this.by;
+        return "D | " + completion + " | " + this.description + " | " + this.by;
     }
 }

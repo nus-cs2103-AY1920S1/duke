@@ -56,13 +56,13 @@ public class Duke {
                         if (position == -1) {
                             throw new DukeException("☹ OOPS!!! Not a valid deadline command");
                         }
-                        newTask = new Deadline(remainder.substring(0,position), remainder.substring(position+3));
+                        newTask = new Deadline(remainder.substring(0,position).trim(), remainder.substring(position+3).trim());
                     } else {
                         int position = remainder.indexOf("/");
                         if (position == -1) {
                             throw new DukeException("☹ OOPS!!! Not a valid event command");
                         }
-                        newTask = new Event(remainder.substring(0,position), remainder.substring(position+3));
+                        newTask = new Event(remainder.substring(0,position).trim(), remainder.substring(position+3).trim());
                     }
                     store.add(newTask);
                     test.storage.write(test.tasks);

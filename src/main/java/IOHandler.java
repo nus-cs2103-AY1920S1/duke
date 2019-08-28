@@ -1,7 +1,10 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class IOHandler {
     private String saveFileName;
@@ -33,5 +36,27 @@ public class IOHandler {
         }
 
         printWriter.close();
+    }
+
+    ArrayList<Task> readSaveFile() throws IOException {
+        File saveFile = new File(saveFileName);
+        ArrayList<Task> listOfExistingTasks = new ArrayList<>();
+
+        if (saveFile.exists()) {
+            Scanner sc = new Scanner(saveFile);
+            Parser parser = new Parser();
+
+            while (sc.hasNextLine()) {
+                String stringTask = sc.nextLine();
+                Task task = parser.readTextAsTask(stringTask);
+                listOfExistingTasks.add(task);
+            }
+
+            sc.close();
+        } else {
+            saveFile.createNewFile();
+        }
+
+        return listOfExistingTasks;
     }
 }

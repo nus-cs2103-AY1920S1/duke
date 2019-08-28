@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
 
 enum Command {
     BYE     ("bye"),
@@ -79,6 +81,9 @@ public class Duke {
             catch (DukeException e) {
                 printWithLongLines(e.getMessage());
             }
+            catch (ParseException e) {
+                printWithLongLines("Required date format: " + DateParser.DATE_FORMAT);
+            }
 
             line = input.nextLine();
         }
@@ -90,7 +95,7 @@ public class Duke {
 
     // Processes a single line of input by identifying the command that was given, then delegating it
     // to a subfunction to handle the command call.
-    public static void processInputLine(String line) throws DukeException {
+    public static void processInputLine(String line) throws DukeException, ParseException{
 
         Command command = Command.getFromString(line.split(" ")[0]);
 
@@ -133,11 +138,11 @@ public class Duke {
         );
     }
 
-    public static void addDeadline(String line) throws EmptyDescriptionException {
+    public static void addDeadline(String line) throws EmptyDescriptionException, ParseException {
         
         if (verifyArgsNotEmpty(line)) {
             String[] deadlineArgs = line.split(Command.DEADLINE.toString())[1].split(BY_DELIM);
-            Task newDeadline = new Deadline(deadlineArgs[0].trim(), deadlineArgs[1].trim());
+            Task newDeadline = new Deadline(deadlineArgs[0].trim(), parseDate(deadlineArgs[1].trim()));
             addTask(newDeadline);
         }
         else {
@@ -150,11 +155,11 @@ public class Duke {
         }
     }
 
-    public static void addEvent(String line) throws EmptyDescriptionException {
+    public static void addEvent(String line) throws EmptyDescriptionException, ParseException {
 
         if (verifyArgsNotEmpty(line)) {
             String[] eventArgs = line.split(Command.EVENT.toString())[1].split(AT_DELIM);
-            Task newEvent = new Event(eventArgs[0].trim(), eventArgs[1].trim());
+            Task newEvent = new Event(eventArgs[0].trim(), parseDate(eventArgs[1].trim()));
             addTask(newEvent);
         }
         else {
@@ -264,11 +269,11 @@ public class Duke {
                     break;
                 case 'E':
                     String eLine = line.substring(2, line.length());
-                    taskList.add(new Event(eLine.split("/")[0], eLine.split("/")[1]));
+                    taskList.add(new Event(eLine.split("/")[0], parseDate(eLine.split("/")[1])));
                     break;
                 case 'D':
                     String dLine = line.substring(2, line.length());
-                    taskList.add(new Deadline(dLine.split("/")[0], dLine.split("/")[1]));
+                    taskList.add(new Deadline(dLine.split("/")[0], parseDate(dLine.split("/")[1])));
                     break;
                 default:
                     break;
@@ -286,6 +291,9 @@ public class Duke {
             System.out.println("Data file not found, starting with empty task list");
         }
         catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -308,5 +316,9 @@ public class Duke {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Date parseDate(String dateStr) throws ParseException {
+        return DateParser.parse(dateStr);
     }
 }

@@ -36,6 +36,14 @@ public abstract class Task {
         return this.completed;
     }
 
+    /**
+     * A getter for task details.
+     *
+     * @return the task details.
+     */
+    public String getTaskDetails() {
+        return this.taskDetails;
+    }
     @Override
     public String toString() {
         if (completed) {

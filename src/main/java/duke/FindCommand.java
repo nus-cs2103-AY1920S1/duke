@@ -1,10 +1,12 @@
+package duke;
+
 public class FindCommand extends Command {
     FindCommand(String fullCommand) {
         super(fullCommand);
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         String searchString;
         try {
             searchString = fullCommand.substring(5);

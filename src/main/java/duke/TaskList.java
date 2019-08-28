@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +37,7 @@ public class TaskList {
 
     /**
      * Delete task at index.
-     * @param index Task index to be deleted, zero-indexed.
+     * @param index Duke.Duke.Task index to be deleted, zero-indexed.
      */
     public void deleteTaskAt(int index) {
         this.tasks.remove(index);
@@ -43,7 +45,7 @@ public class TaskList {
 
     /**
      * Add task.
-     * @param task Task to be added.
+     * @param task Duke.Duke.Task to be added.
      */
     public void addTask(Task task) {
         this.tasks.add(task);

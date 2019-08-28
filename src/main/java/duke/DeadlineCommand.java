@@ -1,3 +1,5 @@
+package duke;
+
 public class DeadlineCommand extends Command {
 
     DeadlineCommand(String fullCommand) {
@@ -5,10 +7,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         int byIndex = fullCommand.indexOf(" /by ");
         if (byIndex < 0) {
-            throw new DukeException("Command deadline requires an argument /by, followed by deadline date");
+            throw new DukeException("Duke.Duke.Command deadline requires an argument /by, followed by deadline date");
         }
         String deadlineDescription =  fullCommand.substring(9, byIndex);
         String by = fullCommand.substring(byIndex + 5);

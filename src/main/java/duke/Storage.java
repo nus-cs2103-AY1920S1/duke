@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -34,7 +36,7 @@ public final class Storage {
 
     /**
      * Load data from filePath specified.
-     * @return TaskList as loaded from file.
+     * @return Duke.Duke.TaskList as loaded from file.
      * @throws DukeException When file format is wrong.
      * @throws IOException When unable to read file.
      */

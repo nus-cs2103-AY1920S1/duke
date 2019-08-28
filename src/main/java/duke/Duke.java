@@ -1,7 +1,7 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Duke {
     private static TaskList tasks = new TaskList();
@@ -18,7 +18,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (FileNotFoundException ignore) {
-            // Make use of default created empty TaskList if no save file is found
+            // Make use of default created empty Duke.Duke.TaskList if no save file is found
             ui.showSaveFileNotFoundError();
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
@@ -36,7 +36,7 @@ public class Duke {
         while (!(input = ui.readCommand()).equals("bye")) {
             try {
                 Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }

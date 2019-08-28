@@ -1,9 +1,11 @@
+package duke;
+
 import java.util.StringJoiner;
 
 public class Todo extends Task {
 
     /**
-     * Todo Constructor.
+     * Duke.Duke.Todo Constructor.
      * @param description Description of todo.
      */
     public Todo(String description) {
@@ -27,7 +29,7 @@ public class Todo extends Task {
     /**
      * Transform string representation of todo back to object.
      * @param saveString String representation of todo.
-     * @return Todo object constructed from saved data.
+     * @return Duke.Duke.Todo object constructed from saved data.
      */
     public static Todo parseSaveString(String saveString) {
         String[] saveStringArr = saveString.split("\\|");

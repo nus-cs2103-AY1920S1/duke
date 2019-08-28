@@ -1,4 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -163,14 +167,29 @@ public class Duke {
 
         String achieve = result[0].trim();
         String timeline = result[1].trim();
-        task.add(new Deadline(achieve, timeline));
-        printLine();
-        System.out.println(INDENT_COMMENT + "Got it. I've added this task: ");
-        System.out.println(INDENT_TASK + task.get(itemNo));
-        itemNo++;
-        System.out.println(INDENT_COMMENT + "Now you have " + itemNo + " tasks in the list.");
-        printLine();
-        System.out.println("");
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        DateFormat outputformat = new SimpleDateFormat("d MMMM yyyy',' h:mm a");
+        Date date = null;
+        String formatted_Date = null;
+        try {
+            date= df.parse(timeline);
+            formatted_Date = outputformat.format(date);
+            task.add(new Deadline(achieve, formatted_Date));
+            printLine();
+            System.out.println(INDENT_COMMENT + "Got it. I've added this task: ");
+            System.out.println(INDENT_TASK + task.get(itemNo));
+            itemNo++;
+            System.out.println(INDENT_COMMENT + "Now you have " + itemNo + " tasks in the list.");
+            printLine();
+            System.out.println("");
+        } catch (ParseException pe) {
+            printLine();
+            System.out.println(INDENT_COMMENT + "Invalid Data and Time Format.");
+            printLine();
+            System.out.println("");
+
+        }
     }
 
     public static void commandEvent(String data) throws DukeException {
@@ -186,14 +205,27 @@ public class Duke {
 
         String achieve = result[0].trim();
         String timeline = result[1].trim();
-        task.add(new Event(achieve, timeline));
-        printLine();
-        System.out.println(INDENT_COMMENT + "Got it. I've added this task: ");
-        System.out.println(INDENT_TASK + task.get(itemNo));
-        itemNo++;
-        System.out.println(INDENT_COMMENT + "Now you have " + itemNo + " tasks in the list.");
-        printLine();
-        System.out.println("");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        DateFormat outputformat = new SimpleDateFormat("d MMMM yyyy',' h:mm a");
+        Date date = null;
+        String formatted_Date = null;
+        try {
+            date= df.parse(timeline);
+            formatted_Date = outputformat.format(date);
+            task.add(new Event(achieve, formatted_Date));
+            printLine();
+            System.out.println(INDENT_COMMENT + "Got it. I've added this task: ");
+            System.out.println(INDENT_TASK + task.get(itemNo));
+            itemNo++;
+            System.out.println(INDENT_COMMENT + "Now you have " + itemNo + " tasks in the list.");
+            printLine();
+            System.out.println("");
+        } catch (ParseException pe) {
+            printLine();
+            System.out.println(INDENT_COMMENT + "Invalid Data and Time Format.");
+            printLine();
+            System.out.println("");
+        }
     }
 
     public static void bye() {

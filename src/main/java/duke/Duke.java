@@ -12,13 +12,17 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Setups Duke.
+     * Sets up Duke.
      * @param args Setup arguments
      */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
 
+    /**
+     * Starts Duke.
+     * @param filePath File path of the tasks data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

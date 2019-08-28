@@ -12,6 +12,11 @@ public abstract class Task {
         this(description, false);
     }
 
+    /**
+     * Constructs a Task object.
+     * @param description Description of task.
+     * @param isDone Whether a task is done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -19,7 +24,7 @@ public abstract class Task {
 
     /**
      * Gets task status.
-     * @return duke.task.Task status.
+     * @return Task status.
      */
     public boolean isDone() {
         return this.isDone;
@@ -27,7 +32,7 @@ public abstract class Task {
 
     /**
      * Returns task description.
-     * @return duke.task.Task description.
+     * @return Task description.
      */
     public String getDescription() {
         return this.description;
@@ -55,6 +60,10 @@ public abstract class Task {
         return this.isDone ? "✓" : "✘";
     }
 
+    /**
+     * Returns a String representing the task, of format "[✘] task".
+     * @return String representing the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);

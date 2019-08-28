@@ -25,11 +25,24 @@ public class AddCommand extends Command {
 
     private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
 
+    /**
+     * Constructs an Add command.
+     *
+     * @param type Type of task to add.
+     * @param description Description of task to add.
+     */
     public AddCommand(String type, String description) {
         this.type = type;
         this.description = description;
     }
 
+    /**
+     * Executes Add command to add a task to the given TaskList.
+     *
+     * @param tasks Current TaskList.
+     * @param storage Current Storage.
+     * @throws DukeException If invalid input.
+     */
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         Task task;
         switch (type) {

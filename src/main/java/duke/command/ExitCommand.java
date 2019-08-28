@@ -6,6 +6,13 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class ExitCommand extends Command {
+    /**
+     * Executes Exit command to close Duke.
+     *
+     * @param tasks Current TaskList.
+     * @param storage Current Storage.
+     * @throws DukeException Never.
+     */
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         Ui.sayBye();
     }

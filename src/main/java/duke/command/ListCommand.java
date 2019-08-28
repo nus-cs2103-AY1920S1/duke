@@ -9,6 +9,13 @@ public class ListCommand extends Command {
     private static final String MESSAGE_LIST     = "Here are the tasks in your list:\n";
     private static final String MESSAGE_NO_TASKS = "You have no tasks in your list yet!";
 
+    /**
+     * Executes List command to list all tasks in given TaskList.
+     *
+     * @param tasks Current TaskList.
+     * @param storage Current Storage.
+     * @throws DukeException Never.
+     */
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         StringBuilder lines = new StringBuilder();
         if (tasks.isEmpty()) {

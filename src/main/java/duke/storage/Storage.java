@@ -23,14 +23,27 @@ public class Storage {
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("EEE, d MMM uuuu, hh.mma");
 
+    /**
+     * Constructs a Storage object that contains the file at the given filePath.
+     * @param filePath Path of file to save tasks in.
+     */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Returns a String representing the file's absolute path.
+     * @return String representing the file's absolute path.
+     */
     public String getFilePath() {
         return file.getAbsolutePath();
     }
 
+    /**
+     * Returns a TaskList with all the tasks in the given file.
+     * @return TaskList with all the tasks in the given file.
+     * @throws DukeException If invalid input.
+     */
     public TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
         try {
@@ -66,6 +79,7 @@ public class Storage {
     /**
      * Saves tasks onto disk.
      * Tasks will be saved in the following format: T | 1 | read book.
+     * @throws DukeException If failed to save.
      */
     public void save(TaskList tasks) throws DukeException {
         try {

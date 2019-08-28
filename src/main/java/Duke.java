@@ -1,4 +1,7 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,8 +12,12 @@ public class Duke {
         String command = input.nextLine().trim(); //trim leading/trailing whitespace
         TaskList taskList = new TaskList();
 
+        // Trying out LocalDateTime, DateTimeFormatter
+        //LocalDateTime current = LocalDateTime.of(2019, 12, 2, 18, 0);
+        //System.out.println(current);
+
         while (!command.equals("bye")) {
-            // Block for 'list'
+            // When command is 'list'
             if (command.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 taskList.printAllTasks();
@@ -19,7 +26,7 @@ public class Duke {
             } else if (command.contains("done")) {
                 String[] sentence = command.split(" ");
 
-                // Block for 'done'
+                // When command is 'done'
                 try {
                     if (sentence[0].equals("done")) { // Check if the first word is done
                         int completedTaskIndex = Integer.parseInt(sentence[1]);
@@ -42,7 +49,7 @@ public class Duke {
             } else if (command.contains("delete")) {
                 String[] sentence = command.split(" ");
 
-                // Block for 'delete'
+                // When command is 'delete'
                 try {
                     if (sentence[0].equals("delete")) {
                         int taskIndex = Integer.parseInt(sentence[1]);
@@ -87,6 +94,25 @@ public class Duke {
         System.out.println(farewell);
     }
 
+    private static String formatDateTime(String deadline) {
+        // Split to individual components
+        deadline = deadline.trim();
+        System.out.println(deadline);
+        String[] dd = deadline.split(" ");
+        String[] date = dd[0].split("/");
+        String time = dd[1];
+        System.out.println(time);
+        int hours = Integer.valueOf(time.substring(0,2));
+        int minutes = Integer.valueOf(time.substring(2));
+
+        LocalDateTime actualDateTime = LocalDateTime.of(Integer.valueOf(date[2]), Integer.valueOf(date[1]),
+                Integer.valueOf(date[0]), hours, minutes);
+        // maybe error here
+        DateTimeFormatter dtf=  DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm a");
+        String formatted = " " + dtf.format(actualDateTime);
+        return formatted;
+    }
+
     private static Task generateNewTask(String task) throws DukeException {
         try {
             String type = task.substring(0, task.indexOf(' '));
@@ -102,11 +128,13 @@ public class Duke {
                 if (type.equals("deadline")) {
                     String[] sentence = taskDescription.split("/by");
                     String description = sentence[0];
-                    String deadline = sentence[1];
+                    String deadline = formatDateTime(sentence[1]);
+
                     newTask = new Deadline(description, deadline);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new MissingDateTimeException("DateTime missing. Please set a deadline. (Eg. deadline read book /by Sunday)");
+                throw new MissingDateTimeException("DateTime missing."
+                        + "Please set a deadline. (Eg. deadline read book /by Sunday)");
             }
 
             try {
@@ -114,6 +142,7 @@ public class Duke {
                     String[] sentence = taskDescription.split("/at");
                     String description = sentence[0];
                     String time = sentence[1];
+                    System.out.println(time);
                     newTask = new Event(description, time);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {

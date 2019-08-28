@@ -16,7 +16,8 @@ public class AddCommand implements Command {
     private TaskKeyword taskKeyword;
     private String arguments;
 
-    public AddCommand(String keyword, String arguments, TaskListController taskListController) throws UnknownCommandException {
+    public AddCommand(String keyword, String arguments, TaskListController taskListController) throws
+            UnknownCommandException {
         this.taskListController = taskListController;
         this.taskKeyword = parseKeyword(keyword);
         this.arguments = arguments;

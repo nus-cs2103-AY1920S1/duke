@@ -1,7 +1,1 @@
-T | 1 | read book
-
-T | 1 | join sports club
-
-D | 0 | homework | 2nd of August 2019, 12.15pm
-
-D | 0 | wash dishes | 28th of August 2019, 1.30pm
+T | 0 | food

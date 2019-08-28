@@ -13,7 +13,7 @@ public class Deadline extends Task {
                             Integer.parseInt(date[2]), Integer.parseInt(dateAndTime[1]));
     }
 
-    public Date getBy() {
+    public Date getDate() {
         return date;
     }
 

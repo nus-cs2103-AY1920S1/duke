@@ -12,7 +12,7 @@ public class Event extends Task {
                 Integer.parseInt(date[2]), Integer.parseInt(dateAndTime[1]));
     }
 
-    public Date getAt() {
+    public Date getDate() {
         return date;
     }
 

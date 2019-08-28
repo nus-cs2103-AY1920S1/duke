@@ -16,4 +16,8 @@ public class PrintCommand implements Command {
     public String getDate() {
         return "";
     };
+
+    public String getKeyword() {
+        return "error";
+    }
 }

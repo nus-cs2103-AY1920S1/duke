@@ -1,9 +1,8 @@
 package duke.ui;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 import duke.todo.Task;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Ui {
     private Scanner sc = new Scanner(System.in);
@@ -53,6 +52,10 @@ public class Ui {
                 "      " + task +
                 "\n    Now you have " + numOfTasks +
                 " task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
+    }
+
+    public static void reportFound(String tasksFound) {
+        printFormattedText(tasksFound);
     }
 
     public static void bye() {

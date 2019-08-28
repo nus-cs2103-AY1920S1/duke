@@ -1,18 +1,17 @@
 package duke.command;
 
-public class DeleteCommand implements Command {
-    private int index;
+public class FindCommand implements Command {
+    private String keyword;
 
-    public DeleteCommand(int index) {
-        this.index = index;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
-
     public String getTaskType() {
-        return "delete";
+        return "find";
     };
 
     public int getIndex() {
-        return index;
+        return 0;
     };
 
     public String getTask() {
@@ -24,6 +23,6 @@ public class DeleteCommand implements Command {
     };
 
     public String getKeyword() {
-        return "error";
-    }
+        return keyword;
+    };
 }

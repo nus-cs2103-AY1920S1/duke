@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 
 public class Parser {
 
@@ -33,6 +34,8 @@ public class Parser {
             return new DeadlineCommand(input.substring(5));
         case "event":
             return new EventCommand(input.substring(5));
+            case "find":
+                return new FindCommand(input.substring(5));
         default:
             throw new DukeException("     \u2639 OOPS!!! I'm sorry, " +
                    "but I don't know what that means :-(");

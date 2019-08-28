@@ -23,4 +23,8 @@ public class TodoCommand implements Command {
     public String getDate() {
         return "error";
     }
+
+    public String getKeyword() {
+        return "error";
+    }
 }

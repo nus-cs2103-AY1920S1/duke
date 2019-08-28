@@ -5,4 +5,5 @@ public interface Command {
     public int getIndex();
     public String getTask();
     public String getDate();
+    public String getKeyword();
 }

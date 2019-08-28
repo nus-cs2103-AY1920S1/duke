@@ -58,7 +58,6 @@ public class Storage {
     public void writeBackToFile(String formattedList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            System.out.println(formattedList);
             fileWriter.write(formattedList);
             fileWriter.close();
         } catch (IOException e) {

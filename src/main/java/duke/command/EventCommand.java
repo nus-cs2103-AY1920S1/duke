@@ -26,4 +26,8 @@ public class EventCommand implements Command {
     public String getDate() {
         return eventDate;
     }
+
+    public String getKeyword() {
+        return "error";
+    }
 }

@@ -40,14 +40,11 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String result = "\t____________________________________________________________" +
-                            "\n\t Here are the tasks in your list:";
+        String result = "";
 
         for (int i = 0; i < taskList.size(); i++) {
             result = result + "\n\t" + " " + (i + 1) + ". " + taskList.get(i);
         }
-
-        result = result + "\n\t____________________________________________________________\n";
 
         return result;
     }

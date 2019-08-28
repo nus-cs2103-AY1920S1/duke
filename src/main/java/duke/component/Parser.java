@@ -118,6 +118,12 @@ public class Parser {
             int index = Integer.parseInt(inputs[1]) - 1;
 
             return new DeleteCommand(index);
+        } else if (inputs[0].equals("find")) {
+            if (inputs.length < 2) {
+                throw new DukeException("The keyword cannot be empty.");
+            }
+
+            return new FindCommand(inputs[1]);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

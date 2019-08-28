@@ -64,4 +64,20 @@ public class Ui {
         System.err.println("\t____________________________________________________________");
         System.err.println();
     }
+
+    public static void printTaskList(TaskList taskList) {
+        System.out.println("\t____________________________________________________________" +
+                "\n\t Here are the tasks in your list:");
+        System.out.println(taskList.toString());
+        System.out.println("\t____________________________________________________________");
+        System.out.println();
+    }
+
+    public static void printFoundTaskList(TaskList taskList) {
+        System.out.println("\t____________________________________________________________" +
+                "\n\t Here are the matching tasks in your list:");
+        System.out.println(taskList.toString());
+        System.out.println("\t____________________________________________________________");
+        System.out.println();
+    }
 }

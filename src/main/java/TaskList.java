@@ -31,4 +31,14 @@ public class TaskList {
         return currTask;
     }
 
+    public ArrayList<Task> searchTasks(String command) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(command)) {
+                results.add(task);
+            } // else ignore
+        }
+        return results;
+    }
+
 }

@@ -1,16 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
 
 public class DukeCLI {
     private TaskList taskList;
     private UI ui;
     private Storage storage = new Storage(new File("data/tasks.txt"));
 
-    // Main function
+    /***
+     * Main function for Duke CLI application.
+     */
     public void run() {
         // Instantiating fields
         ui = new UI();
@@ -19,8 +17,9 @@ public class DukeCLI {
         // Try to load data
         try {
             taskList.loadData(storage.getTaskList());
+            ui.echoMessage("    *** EXISTING FILE LOADED ***");
         } catch (FileNotFoundException e) {
-            ui.echoException(new DukeException("    *** NO EXISTING FILE FOUND ***", true));
+            ui.echoMessage("    *** NO EXISTING FILE FOUND ***");
         } catch (DukeException e) {
             ui.echoException(e);
         }
@@ -39,13 +38,12 @@ public class DukeCLI {
                 if(c.isExit)
                     isByeBye = true;
             } catch(IndexOutOfBoundsException e) {
-                ui.echoException(new DukeException("Index Out of Bounds Exception Caught", false));
+                ui.echoException(new DukeException("Index Out of Bounds Exception Caught"));
             } catch (DukeException e) {
                 ui.echoException(e);
             } catch(Exception e) {
-                ui.echoException((new DukeException(e.getMessage(), false)));
+                ui.echoException((new DukeException(e.getMessage())));
             }
         }
     }
-
 }

@@ -5,6 +5,10 @@ import duke.tasks.TaskList;
 
 import java.io.FileNotFoundException;
 
+/**
+ * The main class for Duke.
+ * Duke is a chat bot with simple task list features.
+ */
 public class Duke {
     private static final String FILE_PATH = "data/duke.txt";
     private static final String TASK_LOAD_ERR = "Error loading files, starting a new list...";

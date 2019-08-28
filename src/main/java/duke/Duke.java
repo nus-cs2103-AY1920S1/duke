@@ -122,7 +122,7 @@ public class Duke {
                 "     What can I do for you?";
         System.out.println(greeting);
 
-        while (true) {
+        while (sc.hasNext()) {
             String line = sc.nextLine();
             if (line.equals("bye")) {
                 System.out.println("     Bye. Hope to see you again soon!");
@@ -151,7 +151,7 @@ public class Duke {
                         handleEvent(line);
                         break;
                     default:
-                        throw new DukeException("Oops! I don't understand your commmand.");
+                        throw new DukeException("Oops! I don't understand your command.");
                 }
             } catch (DukeException e) {
                 System.out.println("     " + e.getMessage());

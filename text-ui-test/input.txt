@@ -1,0 +1,18 @@
+todo borrow book
+deadline CS2103 iP /by today
+event birthday party /at tmr 6pm-8pm
+list
+done 2
+list
+blah
+todo
+deadline presentation
+deadline /by this week
+event watch movie
+event /at 12 Sept
+done 12
+done nani
+delete 1
+delete 10
+list
+bye

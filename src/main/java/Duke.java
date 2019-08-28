@@ -5,12 +5,15 @@ import java.util.List;
 
 public class Duke {
     private static List<Task> tasks;
+    private static Ui ui;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\\\___|\n";
 
         System.out.println("Hello from\n" + logo);
+
+        ui = new Ui();
 
         Scanner sc = new Scanner(System.in);
 
@@ -20,7 +23,7 @@ public class Duke {
 
         int counter = 0;
 
-        greeting();
+        ui.welcomeMessage();
 
         while (sc.hasNextLine()) {
             try {
@@ -58,7 +61,7 @@ public class Duke {
                     break;
 
                 case "list":
-                    printList();
+                    ui.printList(tasks);
                     break;
 
                 case "done":
@@ -75,33 +78,21 @@ public class Duke {
 
                 case "bye":
                     storage.writeToFile();
-                    handleExit();
+                    ui.exitMessage();
                     return;
 
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                addBorder(e.getMessage());
+                ui.showErrors(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) { // incase of empty input
-                addBorder("Input cannot be empty!");
+                ui.showErrors("Input cannot be empty!");
             } catch (ParseException e) {
-                addBorder("Please enter the date in the format dd-MMM-yyyy HH:mm");
+                ui.showErrors("Please enter the date in the format dd-MMM-yyyy HH:mm");
             }
         }
         sc.close();
-    }
-
-    public static void addBorder (String input){
-
-        String border = "____________________________________________________________";
-
-        System.out.println(border + "\n\n" + input + "\n" + border + "\n");
-    }
-
-
-    public static void greeting() {
-        addBorder("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     public static void checkCommand(String[] commandArr, String keyword) throws DukeException {
@@ -144,7 +135,7 @@ public class Duke {
         int taskNum = tasks.size();
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
                 + " tasks in the list.";
-        addBorder(feedback);
+        ui.addBorder(feedback);
     }
 
     public static void handleDone (int taskId) throws DukeException {
@@ -155,7 +146,7 @@ public class Duke {
             Task doneTask = tasks.get(taskId - 1);
             doneTask.markAsDone();
             str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
-            addBorder(str);
+            ui.addBorder(str);
         }
     }
 
@@ -167,25 +158,11 @@ public class Duke {
             Task toDelete = tasks.remove(taskId - 1);
             str = "Noted. I've removed this task:\n" + " " + toDelete.toString() + "\nNow you have " + tasks.size()
                     + " tasks in the list.";
-            addBorder(str);
+            ui.addBorder(str);
         }
     }
 
-    public static void handleExit () {
-        addBorder("Bye. Hope to see you again soon!");
-    }
 
-    public static void printList () {
-        String str = "Here are the tasks in your list:\n";
 
-        for (int i = 1; i < tasks.size() + 1; i++) {
-            if (i == tasks.size()) {
-                str += i + "." + tasks.get(i - 1);
-            } else {
-                str += i + "." + tasks.get(i - 1) + "\n";
-            }
-        }
 
-        addBorder(str);
-    }
 }

@@ -28,7 +28,6 @@ public class Ui {
      * @throws IOException
      */
     public void executeInstructions(String inputInstruction, String inputCommand, Storage storage, TaskList currentTaskList) throws IOException {
-
         if (inputCommand.equals("list")) {
             System.out.println("__________________________________");
             System.out.println("Here are the tasks in your list:");

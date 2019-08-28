@@ -32,7 +32,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     /**
-     * Returns if this is an exiting command.
+     * Returns whether this is an exiting command.
      * @return Whether this command exits the application
      */
     @Override

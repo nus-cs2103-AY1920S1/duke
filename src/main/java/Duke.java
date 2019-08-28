@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 /**
- * Drives the Duke bot
+ * Drives the Duke bot.
  * This is the main driver class and entry point.
  */
 public class Duke {

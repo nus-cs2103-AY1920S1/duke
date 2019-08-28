@@ -73,6 +73,14 @@ public class TaskList {
     }
 
     /**
+     * Clears all existing item in the list.
+     *
+     */
+    public void clearAll() {
+        list.clear();
+    }
+
+    /**
      * Removes task by its given task number.
      *
      * @param index Task number of the task to be removed.

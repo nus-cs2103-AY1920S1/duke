@@ -34,11 +34,9 @@ public class Storage {
                     default:
                         throw new DukeException("Failed to load tasks.");
                 }
-
                 if (data[1].equals("1")) {
                     task.markAsDone();
                 }
-
                 tasks.add(task);
             }
             scanner.close();

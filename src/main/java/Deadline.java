@@ -3,7 +3,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-
     private LocalDate by_date;
     private LocalTime by_time;
 

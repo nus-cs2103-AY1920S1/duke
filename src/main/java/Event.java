@@ -3,7 +3,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-
     private LocalDate start_date;
     private LocalTime start_time;
     private LocalDate end_date;

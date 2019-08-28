@@ -76,12 +76,12 @@ public class UI {
     public void showDeleteMessage(Task deletedTask, TaskList tasks) {
         printWithInden("Noted. I've removed this task:");
         printWithInden("  " + deletedTask);
-        printWithInden("Now you have " + tasks.getTaskCount() +" tasks in the list.");
+        printWithInden("Now you have " + tasks.getTaskCount() + " tasks in the list.");
     }
 
     public void showAddMessage(Task addedTask, TaskList tasks) {
         printWithInden("Got it. I've added this task:");
         printWithInden("  " + addedTask);
-        printWithInden("Now you have " + tasks.getTaskCount() +" tasks in the list.");
+        printWithInden("Now you have " + tasks.getTaskCount() + " tasks in the list.");
     }
 }

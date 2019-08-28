@@ -19,4 +19,8 @@ public class Task {
     public void markAsDone() {
     	isDone = true;
     }
+    
+    public String toSave() {
+		return null;
+	}
 }

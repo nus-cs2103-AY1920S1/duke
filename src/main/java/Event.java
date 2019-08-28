@@ -5,11 +5,16 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        this.at = DukeDateFormatter.parse(at);
+        this.at = Parser.parseDate(at);
+    }
+
+    public Event(String description, Date at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
     }
 
     public String encode() {
-        return "event," + super.description + "," + super.isDone + "," + DukeDateFormatter.format(at);
+        return "event," + super.description + "," + super.isDone + "," + Parser.format(at);
     }
 
     @Override

@@ -52,6 +52,7 @@ public abstract class Task {
     public boolean isCompleted() {
         return this.completed;
     }
+    public TaskType getTaskType() { return this.taskType; }
     //setter mtds
     public void setCompleted() {
         this.completed = true;
@@ -61,9 +62,9 @@ public abstract class Task {
     public String toString() {
         String checked;
         if (this.completed) {
-            checked = "\u2713";
+            checked = tick;
         } else {
-            checked = "\u2717";
+            checked = cross;
         }
         return String.format("[%s][%s]%s", this.taskType, checked, this.description);
     }

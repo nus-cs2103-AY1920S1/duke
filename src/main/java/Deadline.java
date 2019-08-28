@@ -46,4 +46,9 @@ public class Deadline extends Task {
         Task.taskList.add(newTask);
         return newTask;
     }
+
+    @Override
+    public String getDescription() {
+        return String.format("%s | %s", this.description, this.notesInBrackets);
+    }
 }

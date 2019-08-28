@@ -18,6 +18,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + span + ")";
+        return "[E]" +"[" + this.getStatusIcon() + "] " + this.description +  " (at: " + span + ")" + "\n";
     }
 }

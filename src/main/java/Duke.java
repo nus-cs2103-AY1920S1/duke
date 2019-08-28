@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -8,7 +12,17 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         Listener listener = new Listener();
-        Sheet sheet = new Sheet();
-        listener.start(sheet);
+        try {
+            Sheet sheet = new Sheet(readTasks());
+            listener.start(sheet);
+        } catch (IOException e) {
+            System.out.println(Formatter.INDENT + "oops, something went wrong");
+        }
+    }
+
+    public static File readTasks() throws IOException {
+         File f = new File(myPaths.TASKLIST);
+         f.createNewFile();
+         return f;
     }
 }

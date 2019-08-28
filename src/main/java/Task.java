@@ -24,9 +24,20 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public static Task toTask(String s) {
+        switch (s.charAt(1)) {
+        case 'T': return new Todo(s.substring(7));
+        case 'E': return new Event(s.substring(7, s.lastIndexOf('(') - 1),
+                s.substring(s.lastIndexOf('(' ) + 5, s.length() - 1));
+        case 'D': return new Deadline(s.substring(7, s.lastIndexOf('(') - 1),
+                s.substring(s.lastIndexOf('(' ) + 5, s.length() - 1));
+        default: return new Task(s.substring(7));
+        }
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description + "\n";
     }
 
     //...

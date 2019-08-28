@@ -57,7 +57,13 @@ public class Duke {
                             if (cmdSc.hasNext()) {
                                 String tskBy = cmdSc.nextLine();
                                 Scanner ddlSc = new Scanner(tskBy).useDelimiter("\\s*/by\\s*");
-                                tasks.add(new Deadline(ddlSc.next(), ddlSc.next()));
+                                String ddlTsk = ddlSc.next();
+                                String ddlBy = ddlSc.next();
+                                if (Date.isDate(ddlBy)) {
+                                    tasks.add(new Deadline(ddlTsk, new Date(ddlBy)));
+                                } else {
+                                    tasks.add(new Deadline(ddlTsk, ddlBy));
+                                }
                                 System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
                                 System.out.println("Now you have " + tasks.size() + " tasks in the list");
                             } else {
@@ -74,7 +80,13 @@ public class Duke {
                             if (cmdSc.hasNext()) {
                                 String tskAt = cmdSc.nextLine();
                                 Scanner evtSc = new Scanner(tskAt).useDelimiter("\\s*/at\\s*");
-                                tasks.add(new Event(evtSc.next(), evtSc.next()));
+                                String evtTsk = evtSc.next();
+                                String evtAt = evtSc.next();
+                                if (Date.isDate(evtAt)) {
+                                    tasks.add(new Event(evtTsk, new Date(evtAt)));
+                                } else {
+                                    tasks.add(new Event(evtTsk, evtAt));
+                                }
                                 System.out.println("Got it. I've added this task:\n  " + tasks.get(tasks.size() - 1));
                                 System.out.println("Now you have " + tasks.size() + " tasks in the list");
                             } else {

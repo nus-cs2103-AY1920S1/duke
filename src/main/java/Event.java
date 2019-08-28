@@ -14,6 +14,12 @@ public class Event extends Task {
         this.endPeriod = this.formatter.parse(periods[1]);
     }
 
+    Event(String description, Date startPeriod, Date endPeriod) {
+        super(description);
+        this.startPeriod = startPeriod;
+        this.endPeriod = endPeriod;
+    }
+
     @Override
     String saveFormat() {
         return "E|" + super.saveFormat();

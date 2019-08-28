@@ -1,9 +1,13 @@
 import java.io.*;
 
 class Storage {
-    private static final String fileName = "/home/dingyuchen/cs2103/duke/src/main/data/duke.ser";
+    private final String fileName;
 
-    static void save(TodoList todoList) {
+    Storage(String s) {
+        this.fileName = s;
+    }
+
+    void save(TodoList todoList) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -15,7 +19,7 @@ class Storage {
 
     }
 
-    static TodoList load() {
+    TodoList load() {
         TodoList todoList = new TodoList();
         try {
             FileInputStream fileInputStream = new FileInputStream(fileName);
@@ -37,7 +41,6 @@ class Storage {
 //        Task task = null;
 //        switch (args[0]) {
 //            case "T":
-//                task = new Todo(args[1]);
 //                if (Boolean.parseBoolean(args[2])) task.markAsDone();
 //                break;
 //            case "D":

@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.main.*;
+
 public class ByeCommand implements Command {
     public ByeCommand() {
     }

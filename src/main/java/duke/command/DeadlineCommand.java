@@ -1,17 +1,22 @@
-public class EventCommand implements Command {
+package duke.command;
+
+import duke.main.*;
+import duke.task.*;
+
+public class DeadlineCommand implements Command {
     private String task;
     private String time;
 
-    public EventCommand(String task, String time) {
+    public DeadlineCommand(String task, String time) {
         this.task = task;
         this.time = time;
     }
 
     public void execute(Storage storage, Ui ui, TaskList tasks) {
-        Event ev = new Event(task, time);
-        tasks.addTask(ev);
+        Deadline dl = new Deadline(task, time);
+        tasks.addTask(dl);
         ui.output(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
-                ev.toString(), tasks.getTasksSize()));
+                dl.toString(), tasks.getTasksSize()));
     }
 
     public boolean isRunning() {

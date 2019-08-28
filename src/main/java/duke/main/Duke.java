@@ -1,3 +1,7 @@
+package duke.main;
+
+import duke.command.*;
+import duke.exception.DukeException;
 
 public class Duke {
     private Storage storage;
@@ -7,7 +11,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        //storage = new Storage(filePath);
+        storage = new Storage(filePath);
         tasks = new TaskList();
         parser = new Parser();
     }

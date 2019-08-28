@@ -1,3 +1,5 @@
+package duke.main;
+
 import java.io.FileWriter;
 
 public class Storage {

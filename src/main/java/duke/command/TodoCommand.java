@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.main.*;
+import duke.task.*;
+
 public class TodoCommand implements Command {
     private String task;
 

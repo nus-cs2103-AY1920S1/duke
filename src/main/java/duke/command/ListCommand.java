@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.main.*;
+
 public class ListCommand implements Command {
     public ListCommand() {
     }

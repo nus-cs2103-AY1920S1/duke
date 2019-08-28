@@ -20,7 +20,7 @@ public class Duke {
             String inputCommand = Parser.getInputCommand(inputInstruction);
             if (inputCommand.equals("bye")) {
                 System.out.println("___________________________________");
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println("Bye. Hope to see you again soon!!");
                 System.out.println("___________________________________");
                 break;
             } else {

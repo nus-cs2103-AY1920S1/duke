@@ -14,6 +14,7 @@ public class Storage {
     public String load() throws DukeException {
         try {
             File f = new File(filePath);
+            f.createNewFile();
             Scanner sc = new Scanner(f);
             StringBuilder sb = new StringBuilder(sc.nextLine());
 
@@ -21,7 +22,7 @@ public class Storage {
                 sb.append("\n" + sc.nextLine());
             }
             return sb.toString();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new DukeException("File not found");
         }
     }

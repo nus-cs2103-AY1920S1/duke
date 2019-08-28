@@ -24,6 +24,7 @@ public class DeadlineTask extends Task {
         super(description, deadlineDate);
         this.taskType = TaskType.DEADLINE;
         initDates(deadlineDate);
+        TaskUtil.validateTaskDescription(description);
     }
 
     /**

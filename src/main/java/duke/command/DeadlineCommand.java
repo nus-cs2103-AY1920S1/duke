@@ -54,7 +54,6 @@ class DeadlineCommand extends AddTaskCommand {
                 Arrays.copyOfRange(commandArgs, byIndex + 1, commandArgs.length),
                 " ");
 
-        TaskUtil.validateTaskDescription(description);
 
         taskToAdd = new DeadlineTask(description, timing);
     }

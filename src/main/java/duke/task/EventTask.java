@@ -27,6 +27,7 @@ public class EventTask extends Task {
         super(description, timing);
         this.taskType = TaskType.EVENT;
         initDates(timing);
+        TaskUtil.validateTaskDescription(description);
     }
 
     /**
@@ -80,12 +81,13 @@ public class EventTask extends Task {
 
         this.startDate = TaskUtil.getDateFromString(splitTimings[0]);
 
-        if (splitTimings[1].length() <= 4) {
+        try {
             LocalTime endTime = TaskUtil.getTimeFromString(splitTimings[1]);
             this.endDate = this.startDate
                     .plusHours(endTime.getHour() - this.startDate.getHour())
                     .plusMinutes(endTime.getMinute() - this.startDate.getMinute());
-        } else {
+        } catch (DukeInvalidArgumentException ex) {
+            //not a timing, but a date time.
             this.endDate = TaskUtil.getDateFromString(splitTimings[1]);
         }
 

@@ -1,7 +1,6 @@
 package duke.command;
 
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
@@ -13,7 +12,7 @@ import java.util.stream.Stream;
 
 class CommandParserTest {
     @TestFactory
-    Stream<DynamicTest> parseCommand_success() throws DukeInvalidCommandException {
+    Stream<DynamicTest> parseCommand_success() {
         return Arrays.stream(Commands.values())
                 .map(commandType ->
                         dynamicTest(
@@ -24,7 +23,7 @@ class CommandParserTest {
     }
 
     @TestFactory
-    Stream<DynamicTest> parseCommand_success_trailing_random() throws DukeInvalidCommandException {
+    Stream<DynamicTest> parseCommand_success_trailing_random() {
         return Arrays.stream(Commands.values())
                 .map(commandType ->
                         dynamicTest(
@@ -38,7 +37,7 @@ class CommandParserTest {
     }
 
     @TestFactory
-    Stream<DynamicTest> parseCommand_invalid_leading_whitespace() throws DukeInvalidCommandException {
+    Stream<DynamicTest> parseCommand_invalid_leading_whitespace() {
         return Arrays.stream(Commands.values())
                 .map(commandType ->
                         dynamicTest(

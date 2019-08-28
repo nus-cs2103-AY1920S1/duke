@@ -35,7 +35,6 @@ class TodoCommand extends AddTaskCommand {
     @Override
     void validate(TaskList tasks, Ui ui, Storage storage) throws DukeInvalidArgumentException {
         String description = DukeUtil.concatStrings(commandArgs, " ");
-        TaskUtil.validateTaskDescription(description);
         taskToAdd = new TodoTask(description);
     }
 }

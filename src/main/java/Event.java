@@ -4,7 +4,7 @@ public class Event extends Task{
         super(description, info);
         super.type = Type.EVENT;
         String[] infos = info.split(" ", 2);
-        this.at = infos[1] ;
+        this.at =  super.checkDate(infos[1]);
     }
 
     @Override
@@ -12,4 +12,5 @@ public class Event extends Task{
 
         return "[E][" + getStatusIcon() + "] " + description + " (at: " + at + ")";
     }
+
 }

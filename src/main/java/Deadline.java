@@ -5,7 +5,7 @@ public class Deadline extends Task{
         super(description, info);
         super.type = Type.DEADLINE;
         String[] infos = info.split(" ", 2);
-        by =  infos[1];
+        by =  super.checkDate(infos[1]);
     }
 
     @Override

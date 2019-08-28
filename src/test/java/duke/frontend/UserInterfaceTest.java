@@ -1,4 +1,3 @@
-import duke.DukeException;
 import org.junit.jupiter.api.Test;
 import duke.io.Parser;
 import duke.command.DukeMissingCommandException;
@@ -14,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Class to test functionality of certain methods in the UserInterface class
  */
 public class UserInterfaceTest {
-
     UserInterface ui = new UserInterface();
 
     /**
@@ -23,11 +21,9 @@ public class UserInterfaceTest {
      */
     @Test
     public void executeCommand_incorrectArgumentType_exceptionThrown() {
-        assertThrows(
-                DukeIncorrectParameterTypeException.class,
+        assertThrows(DukeIncorrectParameterTypeException.class,
                 () -> ui.executeCommand(new DeleteTaskCommand("a")));
-        assertThrows(
-                DukeIncorrectParameterTypeException.class,
+        assertThrows(DukeIncorrectParameterTypeException.class,
                 () -> ui.executeCommand(new CompleteTaskCommand("a")));
     }
 
@@ -36,8 +32,7 @@ public class UserInterfaceTest {
      */
     @Test
     public void executeCommand_noInput_exceptionThrown() {
-        assertThrows(
-                DukeMissingCommandException.class,
+        assertThrows(DukeMissingCommandException.class,
                 () -> ui.executeCommand(Parser.parseAsCommand("")));
     }
 

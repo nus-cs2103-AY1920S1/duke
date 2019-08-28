@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * Enumeration of the type of commands which can be entered into the user interface to manipulate the task list
  */
 public enum Type {
-    UNUSED(0),
     EXIT(0),
     LIST(0),
     DELETE(1, "task number"),
@@ -17,19 +16,30 @@ public enum Type {
 
     Type(int parametersExpected, String... parameterNamesAndDelimiters) {
         this.parametersExpected = parametersExpected;
-        this.parameters = new ArrayList<String>();
-        this.delimiters = new ArrayList<String>();
+        parameters = new ArrayList<String>();
+        delimiters = new ArrayList<String>();
         for (int i = 0; i < parameterNamesAndDelimiters.length; i++) {
             if (i < parametersExpected) {
-                this.parameters.add(parameterNamesAndDelimiters[i]);
+                parameters.add(parameterNamesAndDelimiters[i]);
             } else {
-                this.delimiters.add(parameterNamesAndDelimiters[i]);
+                delimiters.add(parameterNamesAndDelimiters[i]);
             }
         }
     }
 
-    public final int parametersExpected;
-    public ArrayList<String> parameters;
-    public ArrayList<String> delimiters;
+    private int parametersExpected;
+    private ArrayList<String> parameters;
+    private ArrayList<String> delimiters;
 
+    public static int getNumberOfParametersExpectedFor(Type type) {
+        return type.parametersExpected;
+    }
+
+    public static ArrayList<String> getParametersFor(Type type) {
+        return new ArrayList<String>(type.parameters);
+    }
+
+    public static ArrayList<String> getDelimitersFor(Type type) {
+        return new ArrayList<String>(type.delimiters);
+    }
 }

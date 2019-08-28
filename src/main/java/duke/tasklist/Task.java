@@ -43,8 +43,7 @@ public class Task {
 	 */
 	@Override
 	public String toString() {
-		return new StringBuilder("[")
-				.append((taskCompletionStatus ? "✓" : "✗"))
+		return new StringBuilder("[").append((taskCompletionStatus ? "✓" : "✗"))
 				.append("] ")
 				.append(taskDescription)
 				.toString();

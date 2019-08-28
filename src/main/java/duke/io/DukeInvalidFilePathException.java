@@ -12,6 +12,7 @@ public class DukeInvalidFilePathException extends DukeException {
      * @param path The file path of the file which is missing, or is a directory
      */
     public DukeInvalidFilePathException(String path) {
-        super("Your task list cannot be saved/loaded because the following is not a valid file path:\n", path);
+        super("Your task list cannot be saved/loaded because the following is not a valid file path:\n",
+                path);
     }
 }

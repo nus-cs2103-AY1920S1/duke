@@ -18,7 +18,7 @@ public class Input {
      * @param inputStream The input stream where the which needs to be read from
      */
     public Input(InputStream inputStream) {
-        this.bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
     }
 
     /**
@@ -28,8 +28,7 @@ public class Input {
      */
     public String get() throws DukeException {
         try {
-            String userInput = bufferedReader.readLine();
-            return userInput;
+            return bufferedReader.readLine();
         } catch (IOException ex) {
             throw new DukeException("Input error");
         }

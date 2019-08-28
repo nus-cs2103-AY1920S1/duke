@@ -1,9 +1,6 @@
-4
-T
-1
-b
+7
 D
-0
+1
 somethin
 something
 E
@@ -11,5 +8,20 @@ E
 somewhere
 12th of DECEMBER 1212, 12:12pm
 T
+1
+a
+T
 0
 a
+D
+0
+b
+a
+E
+0
+c
+d
+D
+0
+a
+12th of DECEMBER 1212, 12:12pm

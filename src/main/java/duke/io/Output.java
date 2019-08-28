@@ -1,6 +1,7 @@
 package duke.io;
 
 import java.util.ArrayList;
+
 import java.io.PrintStream;
 
 /**
@@ -35,24 +36,24 @@ public class Output {
 		this.printStream = printStream;
 
 	    // no header, footer, or leftborder by default
-		this.headerLines = new String[]{};
-		this.footerLines = new String[]{};
-		this.leftBorder = "";
+		headerLines = new String[]{};
+		footerLines = new String[]{};
+		leftBorder = "";
 
 		// indent width 0 by default
-		this.leftIndentWidth = 0;
+		leftIndentWidth = 0;
 
 		// all true by default, no need to toggle boolean when the header footer etc are set
-		this.printHeaderOn = true;
-		this.printFooterOn = true;
-		this.printLeftBorderOn = true;
-		this.printIndentOn = true;
+		printHeaderOn = true;
+		printFooterOn = true;
+		printLeftBorderOn = true;
+		printIndentOn = true;
 
 		// text wrapping off by default
-		this.wrapOn = false;
+		wrapOn = false;
 
 		// empty buffer
-		this.outputLines = new ArrayList<String>();
+		outputLines = new ArrayList<String>();
 	}
 
 	/**
@@ -175,7 +176,7 @@ public class Output {
 	/**
 	 * Clears the messages stored in the output handler without displaying it
 	 */
-	public void flush() {
+	public void clear() {
 		outputLines = new ArrayList<String>();
 	}
 
@@ -222,7 +223,7 @@ public class Output {
 		}
 
 		//clears the buffer so other output can be added without wrong output
-		flush();
+		clear();
 
 		// prints footer appended to leftborder if enabled
 		if (printFooterOn) {
@@ -233,30 +234,36 @@ public class Output {
 				printStream.println(footer);
 			}
 		}
+
 		printStream.println();
 	}
 
 	// helper method to calculate the max width of output. minimum output width 1 otherwise infinite loops
 	private int outputWidth() {
 		int width = 1;
+
 		for (String line : headerLines) {
 			width = Math.max(width, line.length());
 		}
+
 		for (String line : footerLines) {
 			width = Math.max(width, line.length());
 		}
+
 		return width;
 	}
 
 	// helper method to wrap overlength strings
 	private static ArrayList<String> wrap(int width, String unwrapped) {
 		ArrayList<String> wrapped = new ArrayList<>();
+
 		String remaining = unwrapped;
 		while (remaining.length() > width) {
 			wrapped.add(remaining.substring(0, width));
 			remaining = remaining.substring(width);
 		}
 		wrapped.add(remaining);
+
 		return wrapped;
 	}
 
@@ -268,6 +275,7 @@ public class Output {
 				result.add(lineSplit);
 			}
 		}
+
 		return result;
 	}
 }

@@ -1,9 +1,18 @@
 import org.junit.jupiter.api.Test;
-import duke.io.Parser;
-import duke.DukeException;
-import duke.command.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.io.Parser;
+
+import duke.DukeException;
+
+import duke.command.AddTaskCommand;
+import duke.command.ShowListCommand;
+import duke.command.ExitCommand;
+import duke.command.DukeMissingParameterException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Class to test certain functionality of the Parser class
@@ -16,9 +25,12 @@ public class DukeParserTest {
     @Test
     public void parseDateTime_validInput_success() {
         try {
-            assertEquals("12th of DECEMBER 1212, 12:12pm", Parser.parseDateTime("12/12/1212 1212"));
-            assertEquals("12th of DECEMBER 1212, 12:12am", Parser.parseDateTime("12/12/1212 0012"));
-            assertEquals("23rd of JANUARY 2019, 11pm", Parser.parseDateTime("23/01/2019 2300"));
+            assertEquals("12th of DECEMBER 1212, 12:12pm",
+                    Parser.parseDateTime("12/12/1212 1212"));
+            assertEquals("12th of DECEMBER 1212, 12:12am",
+                    Parser.parseDateTime("12/12/1212 0012"));
+            assertEquals("23rd of JANUARY 2019, 11pm",
+                    Parser.parseDateTime("23/01/2019 2300"));
         } catch (DukeException e) {
             fail("Should not have thrown exception");
         }
@@ -40,7 +52,7 @@ public class DukeParserTest {
      * expected format
      */
     @Test
-    public void parseDateTime_validLookingInvalidInput_exceptionThrown() {
+    public void parseDateTime_validLookingInvaliButdInput_exceptionThrown() {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("12/00/1212 1212"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("12/13/1212 1212"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("99/12/1212 1212"));

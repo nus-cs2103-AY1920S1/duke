@@ -45,8 +45,7 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String toString() {
-		return new StringBuilder("[D]")
-				.append(super.toString())
+		return new StringBuilder("[D]").append(super.toString())
 				.append(" (by: ")
 				.append(time)
 				.append(")")

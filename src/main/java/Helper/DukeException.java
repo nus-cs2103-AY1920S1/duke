@@ -8,7 +8,7 @@ public class DukeException extends Exception {
      *
      * @param errormsg String which contains error.
      */
-    public DukeException(String errormsg){
+    public DukeException(String errormsg) {
         String modifiedMsg = "\u2639 " + errormsg;
         this.message = modifiedMsg;
     }
@@ -18,7 +18,7 @@ public class DukeException extends Exception {
      *
      * @return the error message for the Exception.
      */
-    public String getMessage(){
+    public String getMessage() {
         return this.message;
     }
 }

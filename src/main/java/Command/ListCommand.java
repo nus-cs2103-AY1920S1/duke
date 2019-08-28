@@ -12,7 +12,7 @@ public class ListCommand extends Command {
      *
      * @param inputCommand String that is parsed from the Parser.
      */
-    public ListCommand(String inputCommand){
+    public ListCommand(String inputCommand) {
         super(inputCommand);
     }
 

@@ -27,7 +27,7 @@ public class ToDo extends Task {
      *
      * @return the description of the task to be placed into Storage class.
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

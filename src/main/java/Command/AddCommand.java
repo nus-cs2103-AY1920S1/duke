@@ -18,7 +18,7 @@ public class AddCommand extends Command {
      *
      * @param inputCommand String that is parsed from the Parser.
      */
-    public AddCommand(String inputCommand){
+    public AddCommand(String inputCommand) {
         super(inputCommand);
     }
 
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputsplit = this.inputCommand.split(" ", 2);
         String typeTask = inputsplit[0];
-        if(inputsplit.length <= 1 ){
+        if (inputsplit.length <= 1) {
             throw new DukeException("OOPS!!! The description of a " + typeTask + " cannot be empty.");
         }
         Task taskToAdd;

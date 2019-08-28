@@ -21,15 +21,15 @@ public class TaskList {
         this.taskArray = new ArrayList<Task>();
     }
 
-    public int getSize(){
+    public int getSize() {
         return taskArray.size();
     }
 
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return this.taskArray;
     }
 
-    public Task getTask(int num){
+    public Task getTask(int num) {
         return taskArray.get(num - 1);
     }
 
@@ -37,7 +37,7 @@ public class TaskList {
         this.taskArray.add(t);
     }
 
-    public Task removeTask(int num){
+    public Task removeTask(int num) {
         return this.taskArray.remove(num - 1);
     }
 

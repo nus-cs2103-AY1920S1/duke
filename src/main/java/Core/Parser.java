@@ -24,12 +24,13 @@ public class Parser {
             return new ListCommand(inputCommand);
         } else if (inputsplit[0].equalsIgnoreCase("done")) {
             return new DoneCommand(inputCommand);
-        } else if (inputsplit[0].equalsIgnoreCase("todo") || inputsplit[0].equalsIgnoreCase("deadline") ||
+        } else if (inputsplit[0].equalsIgnoreCase("todo") ||
+                inputsplit[0].equalsIgnoreCase("deadline") ||
                 inputsplit[0].equalsIgnoreCase("event")) {
             return new AddCommand(inputCommand);
-        } else if (inputsplit[0].equalsIgnoreCase("delete")){
+        } else if (inputsplit[0].equalsIgnoreCase("delete")) {
             return new DeleteCommand(inputCommand);
-        } else if (inputsplit[0].equalsIgnoreCase("bye")){
+        } else if (inputsplit[0].equalsIgnoreCase("bye")) {
             return new ExitCommand(inputCommand);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

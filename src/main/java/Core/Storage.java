@@ -50,9 +50,9 @@ public class Storage {
      *
      * @param taskEntered ArrayList of Tasks obtained from the TaskList class.
      */
-    public String writeFromArray(ArrayList<Task> taskEntered){
+    public String writeFromArray(ArrayList<Task> taskEntered) {
         StringBuffer toWrite = new StringBuffer("");
-        for(int i = 0; i < taskEntered.size() ; i++){
+        for (int i = 0; i < taskEntered.size(); i++) {
             Task t = taskEntered.get(i);
             String s;
             if (t.getType().equalsIgnoreCase("[T]")) {
@@ -111,8 +111,8 @@ public class Storage {
     /**
      * Called by outputFileContents and checks the string which is retrieved from duke.txt if the task is Done.
      */
-     public void checkIfDone(Task t, String booleanValue){
-        if(booleanValue.equalsIgnoreCase("True") ){
+    public void checkIfDone(Task t, String booleanValue) {
+        if(booleanValue.equalsIgnoreCase("True")) {
             t.markIsDone();
         }
     }

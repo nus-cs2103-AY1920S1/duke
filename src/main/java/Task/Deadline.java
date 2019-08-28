@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
-    final String TASK_TYPE = "[D]";
+    final String taskType = "[D]";
     protected LocalDateTime deadlineTime;
 
     /**
@@ -24,7 +24,7 @@ public class Deadline extends Task {
      *
      * @return the description of the task to be placed into Storage class.
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description + "|" + DateTimeHelper.formatOutput(this.deadlineTime);
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      * @return the symbol for type of task, "[D]".
      */
     public String getType() {
-        return TASK_TYPE;
+        return taskType;
     }
 
     /**
@@ -44,6 +44,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return TASK_TYPE + super.getStatusIcon() + " " + super.toString() + " (by: " + DateTimeHelper.formatOutput(deadlineTime)  + ")";
+        return taskType + super.getStatusIcon() + " " + super.toString()
+                + " (by: " + DateTimeHelper.formatOutput(deadlineTime)  + ")";
     }
 }

@@ -15,7 +15,7 @@ public abstract class Command {
      * @param inputCommand String that is parsed from the Parser.
      * shouldExit is the boolean that will stop the for loop and exit the program.
      */
-    public Command(String inputCommand){
+    public Command(String inputCommand) {
         this.inputCommand = inputCommand;
         this.shouldExit = false;
     }
@@ -26,7 +26,7 @@ public abstract class Command {
      *
      * @return shouldExit is the boolean that will stop the for loop and exit the program.
      */
-    public boolean shouldExit(){
+    public boolean shouldExit() {
         return this.shouldExit;
     }
 

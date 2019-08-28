@@ -9,6 +9,7 @@ public class Parser {
             "todo .+", // todo
             "deadline .+? /by .+?", // deadline
             "event .+? /at .+?", // event
+            "find .+?", // find
     };
     public static String[] returnArgs(String input) {
         Scanner sc = new Scanner(input).useDelimiter("(?<= )");

@@ -81,6 +81,9 @@ public class Duke implements Serializable {
             switch (commandArgs[0]){
             case "bye":
                 return EXIT;
+            case "find":
+                find(commandArgs);
+                break;
             case "list":
                 listList(commandArgs);
                 break;
@@ -105,6 +108,15 @@ public class Duke implements Serializable {
             ui.flush();
         }
         return CONTINUE;
+    }
+
+    private void find(String[] args) throws DukeException, IOException {
+        if (args.length != 2){
+            throw new DukeException("\u2639 OOPS!!! Done function needs exactly one argument.");
+        }
+        TaskList<Task> shortList = new TaskList<>(todoList);
+        shortList.removeIf((x) -> !x.getName().matches(".*" + args[1] + ".*"));
+        printList(shortList);
     }
 
     // input expected: "delete n"
@@ -161,9 +173,13 @@ public class Duke implements Serializable {
     // input not checked
     // prints out list of tasks to out stream
     private void listList(String[] args) throws IOException {
+        printList(todoList);
+    }
+
+    private void printList(TaskList<Task> tl) throws IOException {
         ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
         int counter = 1;
-        for (Task item : todoList) {
+        for (Task item : tl) {
             ui.write(String.format("%s %d.%s\n", INDENT, counter++, item));
         }
         if (counter == 1) {

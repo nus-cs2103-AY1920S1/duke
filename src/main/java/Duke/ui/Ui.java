@@ -68,4 +68,16 @@ public class Ui {
         System.out.printf("\t   %s\n", completed.toString());
         System.out.println("\t____________________________________________________________");
     }
+
+    public void showFound(TaskList taskList) {
+        ArrayList<Task> list = taskList.getTaskList();
+        int count = 1;
+        showLine();
+        System.out.println("\t Here are the matching tasks in your list:");
+        for(Task task: list) {
+            System.out.printf("\t %d. %s\n", count, task);
+            count++;
+        }
+        showLine();
+    }
 }

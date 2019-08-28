@@ -62,6 +62,9 @@ public class Parser {
                 case "delete":
                     ui.showDeletedTask(taskList.deleteTask(input), taskList);
                     break;
+                case "find":
+                    ui.showFound(taskList.findTask(input));
+                    break;
                 default:
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }

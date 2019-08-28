@@ -2,14 +2,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Iterator;
 
+
+
 enum TaskType {
     TODO,
     EVENT,
     DEADLINE,
     LIST,
     DONE,
-    BYE
+    BYE,
 }
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -17,7 +20,22 @@ public class Duke {
         Scanner input = new Scanner(System.in);
 
         do {
-            user.setCurrentInput(input.nextLine());
+            boolean validInput = false;
+            do {
+                try {
+                    user.setCurrentInput(input.nextLine());
+                    String str = user.getCurrentInput();
+                    if (str.isEmpty()) {
+                        throw new DukeException();
+                    } else {
+                        validInput = true;
+                    }
+
+                } catch (DukeException err) {
+
+                }
+            } while (!validInput);
+
             user.setTaskType();
             TaskType taskType = user.getTaskType();
 
@@ -42,6 +60,10 @@ public class Duke {
 }
 
 class DukeException extends Exception {
+    public DukeException() {
+
+    }
+
 
 }
 
@@ -183,17 +205,16 @@ class User {
         String j = this.getCurrentInput();
         String description = "";
         String date = "";
-        String parseMiddleString = "";
 
         switch (taskType) {
         case DEADLINE:
-            description = parseMiddleString; //+1/-1 to remove spaces
-            date = j.substring((j.indexOf("/") + 1));
+            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1); ; //+1/-1 to remove spaces
+            date = j.substring((j.indexOf("/") + 4));
             userTasks.add(new Deadline(description, date));
             break;
         case EVENT:
-            description = parseMiddleString; //+1/-1 to remove spaces
-            date = j.substring((j.indexOf("/") + 1));
+            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1); ; //+1/-1 to remove spaces
+            date = j.substring((j.indexOf("/") + 4));
             userTasks.add(new Event(description, date));
             break;
         case TODO:

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 
 
 public class Parser {
-    static Command parse(String command) throws DukeException, ParseException {
+    public static Command parse(String command) throws DukeException, ParseException {
         String[] task = command.split(" ", 2);
         int taskSize = task.length;
 

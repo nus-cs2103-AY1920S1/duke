@@ -12,6 +12,10 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         //add task into the task list
         tasks.add(task);

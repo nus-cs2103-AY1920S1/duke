@@ -16,7 +16,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    private String stringDate() {
+    public String stringDate() {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm").format(by);
     }
 

@@ -22,7 +22,7 @@ repositories {
 
 //Gradle set-up
 application {
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
 }
 
 //Checkstyle setup

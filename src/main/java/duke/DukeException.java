@@ -1,6 +1,6 @@
 package duke;
 
-class DukeException extends Exception{
+public class DukeException extends Exception{
     private String message = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     DukeException() {}

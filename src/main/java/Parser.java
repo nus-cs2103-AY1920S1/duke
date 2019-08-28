@@ -15,6 +15,7 @@ public class Parser {
             return false;
         }
     }
+
     /**
      * findFeature().
      */
@@ -103,10 +104,6 @@ public class Parser {
         } else {
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
-//        }
-//        catch (DukeException e) {
-//            System.out.println(e);
-//        }
         return outCommand;
     }
 }

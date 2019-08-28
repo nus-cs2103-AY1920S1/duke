@@ -11,8 +11,20 @@ import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.ListCommand;
 
+/**
+ * Represents a <code>Parser</code> that parses user input into a specific 
+ * type of <code>Command</code>. The <code>Parser</code> also parses tasks
+ * related to the command, and checks for illegal instructions.
+ */
 public class Parser {
-
+    /**
+     * Creates a string from a sub array of a string array.
+     * @param words The string array to be processed.
+     * @param start The starting position in the string array.
+     * @param end The ending position in the string array.
+     * @return A string consisting of all the words from the starting position
+     *          to the ending position, separated by spaces.
+     */
     private static String subString(String[] words, int start, int end) {
         StringBuilder sb = new StringBuilder();
         for(int i = start; i < end; i++) {
@@ -21,6 +33,13 @@ public class Parser {
         return sb.toString().trim();
     }
 
+    /**
+     * Finds the index of a given string in a string array.
+     * @param words The string array to be inspected.
+     * @param s The string to be searched.
+     * @return The index of the given string in the string array. Returns -1 if
+     *          the given string does not occur in the array.
+     */
     public static int findIdx(String[] words, String s) {
         for(int i = 0; i < words.length; i++) {
             if(words[i].equals(s))
@@ -29,6 +48,11 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Parses a <code>Task</code> from a string array.
+     * @param words The string array to be parsed.
+     * @return The <code>Task</code> that is parsed from the string array.
+     */
     private static Task parseTask(String[] words) {
         if(words[0].equals("todo")) {
             return new ToDo(subString(words, 1, words.length));
@@ -45,6 +69,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for illegal user input and throws exceptions accordingly.
+     * @param words The string array to be checked.
+     */
     private static void checkIllegalInstruction(String[] words) throws DukeException {
         String fw = words[0];
         if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event")
@@ -63,6 +91,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a line of user instruction into respective <code>Command</code> 
+     * types.
+     * @param s The string that represents user input.
+     * @return A <code>Command</code> that represents the specific type of
+     *          command the user gives.
+     */
     public static Command parse(String s) throws DukeException {
         String[] words = s.split(" ");
         checkIllegalInstruction(words);

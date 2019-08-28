@@ -14,7 +14,14 @@ public class AddTodoCommand extends Command {
     public AddTodoCommand(String[] msg) {
         super(msg);
     }
-
+    /**
+     * Check is the user input format correct.
+     * If is correct then create a Todo task and write into the file.
+     * @param list  TaskList
+     * @param ui    UiText
+     * @param storage   Storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         if(super.command.length == 2 && !super.command[1].trim().equals("")) {

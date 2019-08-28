@@ -10,7 +10,14 @@ public class ListCommand extends Command {
     public ListCommand(String[] msg) {
         super(msg);
     }
-
+    /**
+     * Check is the user input format correct.
+     * If is correct then list all the task in the taskList.
+     * @param list  TaskList
+     * @param ui    UiText
+     * @param storage   Storage
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         if(super.command.length == 1) {

@@ -14,19 +14,28 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 
-
+/**
+ * Loading task from the file and save task to the file.
+ * @author Yang Shuting
+ */
 
 public class Storage {
     private static File file;
     private UiText ui = new UiText();
 
+    /**
+     * Constructor to construct a Storage with given file path.
+     * @param filePath givenFile path to retrive anf storage the tasks.
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
-        System.out.println((file.exists()));
-        System.out.println(file.canRead());
-        System.out.println(file.getPath());
     }
 
+    /**
+     * Print what's the content in the file.
+     *
+     * @throws FileNotFoundException throw exception if the file does not exist
+     */
     public void printFileContents() throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
@@ -34,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * convert the task in the file to arraylist;
+     * @return ArrayList of Task
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> arr = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file)))
@@ -58,12 +72,23 @@ public class Storage {
 //        fw.close();
 //    }
 
+
+    /**
+     * write new task to the existing fille without overwritting the content of the file.
+     * @param text task to converted to String to append to the file.
+     * @throws IOException
+     */
     public void appendToFile(String text) throws IOException {
         FileWriter fw = new FileWriter(file, true);
         fw.write(text);
         fw.close();
     }
 
+    /**
+     * Update the file when is a delete or done command.
+     * @param tasks updated arraylist of Task.
+     * @throws IOException
+     */
     public void updateFile(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(file);
         for (Task task : tasks) {

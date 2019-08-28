@@ -12,6 +12,14 @@ public class DoneCommand extends Command {
     public DoneCommand(String[] msg) {
         super(msg);
     }
+    /**
+     * Check is the user input format correct.
+     * If is correct then mark the task as done and update the taskList and the storage
+     * @param list  TaskList
+     * @param ui    UiText
+     * @param storage   Storage
+     * @throws DukeException
+     */
 
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {

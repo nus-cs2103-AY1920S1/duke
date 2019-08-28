@@ -3,8 +3,16 @@ package duke.parser;
 import duke.DukeException;
 import duke.command.*;
 
-public class Paser {
-
+/**
+ * Parse the user input to valid command.
+ *
+ */
+public class Parser {
+    /**
+     * parse the user input to valid command.
+     * @param input user input
+     * @return Command
+     */
     public static Command parse(String input) {
         String[] msg = input.trim().split(" ", 2);
         if (msg[0].equals("bye")) {

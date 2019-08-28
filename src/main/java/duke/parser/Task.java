@@ -2,6 +2,13 @@ package duke.parser;
 
 import java.util.Date;
 
+/**
+ * Class of task that divided into Deadline, Todo and Event.
+ * @author   Yang Shuting
+ * @see      Deadline
+ * @see      Event
+ * @See      Todo
+ */
 public class Task {
     protected  String description;
     protected boolean isDone;
@@ -11,12 +18,21 @@ public class Task {
     protected Date date;
     protected TaskType taskType;
 
+    /**
+     * Construct a task based on given description.
+     * @param description String with valid information
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         noOfTask++;
 
     }
+
+    /**
+     * Construct Task from a string array that consist the type of fill and all the informationn
+     * @param input
+     */
     public Task(String[] input) {
         String type = input[0].trim();
         if (type.equals("T")) {

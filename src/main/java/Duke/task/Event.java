@@ -3,9 +3,17 @@ package Duke.task;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * An Event task is a Task which the user wishes to be done by a certain deadline.
+ */
 public class Event extends Task {
     Date by;
 
+    /**
+     * Constructs a new Event task.
+     * @param description the description of the event task.
+     * @param by the deadline of the event task.
+     */
     public Event(String description, Date by) {
         super(description);
         this.by = by;

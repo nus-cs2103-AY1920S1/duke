@@ -12,17 +12,32 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A Parser class parses all the user input.
+ */
 public class Parser {
     private Ui ui;
     private TaskList taskList;
     private SimpleDateFormat formatter;
 
+    /**
+     * Constructs a new Parser object to read and process the user's input.
+     * @param taskList the latest TaskList stored in the hard disk.
+     */
     public Parser(TaskList taskList) {
         this.ui = new Ui();
         this.taskList = taskList;
         this.formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
     }
 
+    /**
+     * Returns a TaskList object that will contain all the remaining tasks that
+     * has been entered into duke.
+     * <p>
+     * This method scans the commands passed into duke and processes the commands
+     * accordingly.
+     * @return the TaskList after the Parser processes the commands.
+     */
     public TaskList start() {
         Scanner sc = new Scanner(System.in);
         boolean bye = false;
@@ -69,9 +84,18 @@ public class Parser {
                 System.out.println(e);
             }
         }
+        sc.close();
         return taskList;
     }
 
+    /**
+     * Parses the user's date input to return a Date object.
+     * @param formatter the SimpleDateFormat object containing the format of the date.
+     * @param input the user's date input when they specify the date of a task.
+     * @return a Date object which date has been parsed into the desired format obtained
+     * from the formatter.
+     * @throws DukeException if the user's input is not in the right format.
+     */
     public static Date parseDate(SimpleDateFormat formatter, String input) throws DukeException {
         try {
             return formatter.parse(input);

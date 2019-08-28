@@ -4,25 +4,50 @@ import Duke.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * A TaskList is a list of Tasks that has been entered by the user.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs an empty TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs a TaskList based on a list of Tasks.
+     * @param tasks the Tasks that will populate the TaskList.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets a list of all the Tasks contained within the TaskList.
+     * @return the list of all the Tasks in the TaskList.
+     */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 
+    /**
+     * Gets the number of Tasks that is stored in the TaskList.
+     * @return
+     */
     public int getSize() {
         return this.tasks.size();
     }
 
+    /**
+     * Executes a Task on the TaskList based on the position of the Task in the TaskList.
+     * @param input the position of the Task on the TaskList.
+     * @return the Task that has been executed.
+     * @throws DukeException if the Task cannot be found on the TaskList, if the user did not enter
+     * a Task number or if the user did not specify which Task to be done, an exception is thrown.
+     */
     public Task doTask(String input) throws DukeException {
         if (input.split(" ").length > 1) {
             try {
@@ -42,18 +67,37 @@ public class TaskList {
         }
     }
 
-    public void addTodo(Todo todo) throws DukeException {
+    /**
+     * Adds a Todo Task to the TaskList.
+     * @param todo the Todo Task to be added into the TaskList.
+     */
+    public void addTodo(Todo todo) {
         tasks.add(todo);
     }
 
-    public void addDeadline(Deadline deadline) throws DukeException {
+    /**
+     * Adds a Deadline task to the TaskList.
+     * @param deadline the Deadline Task to be added into the TaskList.
+     */
+    public void addDeadline(Deadline deadline) {
         tasks.add(deadline);
     }
 
-    public void addEvent(Event event) throws DukeException {
+    /**
+     * Adds an Event task to the TaskList.
+     * @param event the Event Task to be added into the TaskList.
+     */
+    public void addEvent(Event event) {
         tasks.add(event);
     }
 
+    /**
+     * A Task is deleted based on the position of the Task on the TaskList.
+     * @param input the position of the Task on the TaskList.
+     * @return the Task that has been deleted from the TaskList.
+     * @throws DukeException if the Task cannot be found on the TaskList, if the user did not enter
+     * a Task number or if the user did not specify which Task to be deleted, an exception is thrown.
+     */
     public Task deleteTask(String input) throws DukeException {
         if (input.split(" ").length > 1) {
             try {

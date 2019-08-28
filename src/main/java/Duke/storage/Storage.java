@@ -12,19 +12,37 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A Storage class loads and writes data into an output file.
+ */
 public class Storage {
     private String filePath;
     private SimpleDateFormat formatter;
 
+    /**
+     * Constructs a new Storage object to read and write to a text file stored
+     * on the hard disk.
+     * @param filePath the file path of the file stored on the hard disk.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
     }
 
+    /**
+     * Returns the file path of the file stored on the hard disk.
+     * @return the file path.
+     */
     public String getFilePath() {
         return filePath;
     }
 
+    /**
+     * Loads the file from the hard disk and reads it's text. The text would then
+     * be converted into Task objects and stored in an ArrayList for duke to process.
+     * @return an ArrayList that contains the tasks stored on the hard disk.
+     * @throws DukeException if the file stated in the file path does not exist.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -70,6 +88,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the TaskList onto the file stored on the hard disk. The TaskList is gone
+     * through and the tasks stored in it are concatenated into a String before it is
+     * written to the file stored on the hard disk.
+     * @param taskList The TaskList that will be written to the file on the hard disk.
+     */
     public void write(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);

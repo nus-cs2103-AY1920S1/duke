@@ -8,6 +8,14 @@ public class Duke {
     private TaskList tasks;
     private UI ui;
 
+    /**
+     * Represents the Main code for the Duke chatbot.
+     * Will load a list of tasks from the .txt file and modify it
+     * as the user keys in new tasks and manipulates existing ones
+     * @param filePath refers to the path of the .txt file
+     * @throws IOException
+     */
+
     public Duke(String filePath) throws IOException {
         ui = new UI();
         storage = new Storage(filePath);
@@ -18,15 +26,11 @@ public class Duke {
                 throw new DukeException("Unable to load data from file");
             }
         } catch (DukeException exp) {
-            ui.showLoadingError(exp.getMessage());
+            ui.showErrorMsg(exp.getMessage());
         } finally {
 
         }
     }
-
-    /**
-     * The duke project.
-     */
 
     public void run() {
 
@@ -197,6 +201,11 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * The Main function for the Duke chatbot
+     * @param args
+     * @throws IOException
+     */
 
     public static void main(String[] args) throws IOException {
         new Duke("../../../data/duke.txt").run();

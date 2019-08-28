@@ -30,14 +30,6 @@ public class Storage {
         return taskArrayList;
     }
 
-    public boolean listPresent() {
-        if (taskArrayList.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public void readData() {
         try {
             FileReader fileReader = new FileReader("/Users/lawnce/Desktop/duke/data/duke.txt");

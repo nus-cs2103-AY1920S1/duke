@@ -25,7 +25,7 @@ public class EventCommand extends Command {
                 throw new DukeException("☹OOPS!!! Wrong format'");
             } else {
                 Event m = new Event(description, makeDate(time));
-                tasks.getTaskArrayList().add(m);
+                tasks.add(m);
                 storage.writeData();
 
                 System.out.println("Got it. I've added this task:");

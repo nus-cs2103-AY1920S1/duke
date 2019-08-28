@@ -21,7 +21,7 @@ public class TodoCommand extends Command {
                 throw new DukeException("☹OOPS!!! The Description of a todo cannot be empty");
             }
             Todo t = new Todo(remaining.substring(0));
-            tasks.getTaskArrayList().add(t);
+            tasks.add(t);
             storage.writeData();
             System.out.println("Got it. I've added this task:");
             System.out.println(t);

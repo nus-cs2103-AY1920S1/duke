@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
                 throw new DukeException("☹OOPS!!! Wrong format'");
             } else {
                 Deadline k = new Deadline(description2, makeDate(time2));
-                tasks.getTaskArrayList().add(k);
+                tasks.add(k);
                 storage.writeData();
                 System.out.println("Got it. I've added this task:");
                 System.out.println(k);

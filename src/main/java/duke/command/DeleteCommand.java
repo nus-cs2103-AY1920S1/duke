@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
         int position = Integer.parseInt(ui.getRemainingWords().trim());
         System.out.println("Noted. I've removed this task.");
         System.out.println(tasks.getTaskArrayList().get(position-1));
-        tasks.getTaskArrayList().remove(position-1);
+        tasks.delete(position-1);
         storage.writeData();
         System.out.println("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list");
     }

@@ -183,7 +183,7 @@ public class Duke {
                                     throw new DukeException(" :( OOPS!!! Invalid date format.");
                                 }
                                 date.set(Integer.parseInt(dateArray[2]),
-                                        Integer.parseInt(dateArray[1]),
+                                        (Integer.parseInt(dateArray[1]) - 1),
                                         Integer.parseInt(dateArray[0]),
                                         hours,
                                         minutes);
@@ -222,7 +222,7 @@ public class Duke {
                                     throw new DukeException(" :( OOPS!!! Invalid date format.");
                                 }
                                 date.set(Integer.parseInt(dateArray[2]),
-                                        Integer.parseInt(dateArray[1]),
+                                        (Integer.parseInt(dateArray[1]) - 1),
                                         Integer.parseInt(dateArray[0]),
                                         hours,
                                         minutes);

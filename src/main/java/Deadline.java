@@ -25,29 +25,29 @@ public class Deadline extends Task {
         }
         String nameOfMonth = "";
         switch (time.get(Calendar.MONTH)) {
-        case 1 : nameOfMonth = "January";
+        case 0 : nameOfMonth = "January";
             break;
-        case 2 : nameOfMonth = "February";
+        case 1 : nameOfMonth = "February";
             break;
-        case 3 : nameOfMonth = "March";
+        case 2 : nameOfMonth = "March";
             break;
-        case 4 : nameOfMonth = "April";
+        case 3 : nameOfMonth = "April";
             break;
-        case 5 : nameOfMonth = "May";
+        case 4 : nameOfMonth = "May";
             break;
-        case 6 : nameOfMonth = "June";
+        case 5 : nameOfMonth = "June";
             break;
-        case 7 : nameOfMonth = "July";
+        case 6 : nameOfMonth = "July";
             break;
-        case 8 : nameOfMonth = "August";
+        case 7 : nameOfMonth = "August";
             break;
-        case 9 : nameOfMonth = "September";
+        case 8 : nameOfMonth = "September";
             break;
-        case 10 : nameOfMonth = "October";
+        case 9 : nameOfMonth = "October";
             break;
-        case 11 : nameOfMonth = "November";
+        case 10 : nameOfMonth = "November";
             break;
-        case 12 : nameOfMonth = "December";
+        case 11 : nameOfMonth = "December";
             break;
         }
         String hoursAndMinutes = "" + time.get(Calendar.HOUR) + ":";

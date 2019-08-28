@@ -1,18 +1,32 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Deals with reading and making sense of the user command.
+ */
 public class Parser {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a new parser instance.
+     *
+     * @param s Storage instance to be used.
+     * @param t TaskList containing task list.
+     * @param u Ui instance to be used.
+     */
     public Parser(Storage s, TaskList t, Ui u) {
         this.storage = s;
         this.tasks = t;
         this.ui = u;
     }
 
+    /**
+     * Reads user input as commands, deciphers commands and carries out the commands correspondingly.
+     * It also instructs Ui to print different messages to interact with users.
+     */
     public void parse() {
         Scanner sc = new Scanner(System.in);
         while (true) {

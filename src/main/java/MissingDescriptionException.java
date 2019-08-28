@@ -4,8 +4,12 @@
  */
 public class MissingDescriptionException extends DukeException {
 
-    public MissingDescriptionException(String message) {
-        super(message);
+    /**
+     * Constructs a new exception with the specified detail message.
+     * @param errorMessage the detail message. It is saved for later retrieval by the Throwable.getMessage() method.
+     */
+    public MissingDescriptionException(String errorMessage) {
+        super(errorMessage);
     }
 
 }

@@ -4,8 +4,12 @@
  */
 public class MissingInputException extends DukeException {
 
-    public MissingInputException(String message) {
-        super(message);
+    /**
+     * Constructs a new exception with the specified detail message.
+     * @param errorMessage the detail message. It is saved for later retrieval by the Throwable.getMessage() method.
+     */
+    public MissingInputException(String errorMessage) {
+        super(errorMessage);
     }
 
 }

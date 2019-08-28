@@ -9,14 +9,26 @@ public class Task {
     protected boolean isDone;
     protected String doneSymbol;
 
+    /**
+     * An empty constructor that creates a Task object.
+     */
     public Task() {}
 
+    /**
+     * Creates a Task object with the specified description.
+     * @param desc Description of the task.
+     */
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;
         setDoneSymbol();
     }
 
+    /**
+     * Creates a Task object with the specified description and isDone status.
+     * @param desc Description of the task.
+     * @param isDone if true, the task is done.
+     */
     public Task(String desc, boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;

@@ -12,14 +12,20 @@ public class Event extends Task {
 
     /**
      * Creates an Event task with the associated description and event day and time.
-     * @param desc Describes the event.
-     * @param when The event day and event time.
+     * @param desc Description of the event.
+     * @param when The event day and time.
      */
     public Event(String desc, String when) {
         super(desc);
         this.when = stringToDateTime(when);
     }
 
+    /**
+     * Creates an Event task with the specified description, isDone status and event day and time.
+     * @param desc Description of the event.
+     * @param isDone if true, the Event task is done.
+     * @param when The event day and time.
+     */
     public Event(String desc, boolean isDone, String when) {
         super(desc, isDone);
         this.when = stringToDateTime(when);
@@ -33,6 +39,11 @@ public class Event extends Task {
         this.when = stringToDateTime(when);
     }
 
+    /**
+     * Converts the specified string to a LocalDateTime object.
+     * @param when The specified event date and time to be converted.
+     * @return The LocalDateTime of the specified event date and time.
+     */
     private LocalDateTime stringToDateTime(String when) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
         return LocalDateTime.parse(when, formatter);

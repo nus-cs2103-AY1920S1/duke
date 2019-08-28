@@ -1,21 +1,19 @@
-import javax.swing.plaf.metal.MetalIconFactory;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents Duke, a personal chatbot assistant.
  */
 public class Duke {
 
-    //private ArrayList<Task> list;
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
 
+    /**
+     * Creates Duke with the specified file path.
+     * @param filePath The path to the tasks list file.
+     */
     public Duke(String filePath) {
-//        this.list = new ArrayList<>();
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -25,45 +23,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke program.
+     */
     public void run() {
         ui.hello();
         ui.takeInUserInput();
     }
 
-//    public ArrayList<Task> getList() {
-//        return this.list;
-//    }
-//
-//    public void setList(ArrayList<Task> list) {
-//        this.list = list;
-//    }
-
     public static void main(String[] args) {
         Duke duke = new Duke("src/main/java/tasklists.txt");
         duke.run();
-//        duke.hello();
-//        try {
-//            duke.readFile();
-//        } catch (FileNotFoundException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        //take in user input and print according to user command
-//        Scanner scanner = new Scanner(System.in);
-//        while (scanner.hasNext()) {
-//            String command = scanner.nextLine();
-//            command = command.trim();
-//            if (command.equals("bye")) { // user wants to exit
-//                duke.printExitMessage();
-//                return; // program terminates
-//            } else {
-//                try {
-//                    duke.execCommand(command);
-//                } catch (InvalidCommandException e) {
-//                    System.out.println("\t" + e.getMessage());
-//                }
-//            }
-//        }
     }
 
     /**

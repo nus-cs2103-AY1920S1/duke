@@ -3,41 +3,63 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a Parser object that deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * An empty constructor for a Parser object.
+     */
     public Parser() {}
 
+    /**
+     * Executes the specified command by the user.
+     * @param command The specified command given by the user.
+     * @throws InvalidCommandException if an invalid or recognisable command is given by the user.
+     * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
+     * deadline or event time and day.
+     * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
+     */
     public void executeCommand(String command) throws InvalidCommandException, MissingInputException,
             MissingDescriptionException {
         String[] commandWords = command.trim().split(" ");
         String commandType = commandWords[0];
         TaskList taskList = new TaskList();
         switch (commandType) {
-            case "list":
+        case "list":
                 taskList.printList();
                 break;
-            case "done":
+        case "done":
                 int taskNumber = Integer.parseInt(commandWords[1]);
                 taskList.markAsDone(taskNumber);
                 break;
-            case "delete":
+        case "delete":
                 int taskNumber2 = Integer.parseInt(commandWords[1]);
                 taskList.deleteTask(taskNumber2);
                 break;
-            case "todo":
-            case "deadline":
-            case "event":
+        case "todo":
+        case "deadline":
+        case "event":
                 addTask(command, commandType);
                 break;
-            case "bye":
+        case "bye":
                 Ui ui = new Ui();
                 ui.exit();
                 break;
-            default:
+        default:
                 throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
+    /**
+     * Adds a task to the task list.
+     * @param command The specified command given by the user.
+     * @param taskType The type of the task that the user wants to add to the tasks list.
+     * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
+     * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
+     * deadline or event time and day.
+     */
     private void addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
         String desc = command.substring(taskType.length()).trim();
         Task task = new Task();

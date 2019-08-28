@@ -7,12 +7,17 @@ public class Todo extends Task {
 
     /**
      * Creates a Todo with the associated description.
-     * @param desc Describes the Todo task.
+     * @param desc Description of the Todo task.
      */
     public Todo(String desc) {
         super(desc);
     }
 
+    /**
+     * Creates a Todo with the associated description.
+     * @param desc Description of the Todo task.
+     * @param isDone if true, the Todo task is done.
+     */
     public Todo(String desc, boolean isDone) {
         super(desc, isDone);
     }

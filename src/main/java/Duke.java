@@ -7,7 +7,13 @@ public class Duke {
     static final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
     public Duke() {
-        tasks = new ArrayList<>();
+        IOHandler ioHandler = new IOHandler();
+
+        try {
+            tasks = ioHandler.readSaveFile();
+        } catch (IOException e) {
+            System.out.println("Something went wrong while reading save file... Continuing...");
+        }
     }
     
     private String makeSpace(int n) {
@@ -28,10 +34,22 @@ public class Duke {
                 + makeSpace(5) + "| |_| | |_| |   <  __/\n"
                 + makeSpace(5) + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String welcomeMessage = String.format("%s\n%sHello! I'm Duke!\n%sWhat can I do for you?", logo, makeSpace(5), 
-                makeSpace(5));
+        String welcomeMessage;
+
+        if (tasks.size() == 0) {
+            welcomeMessage = String.format("%s\n%sHello! I'm Duke!\n%sWhat can I do for you?", logo, makeSpace(5), 
+                    makeSpace(5));
+        } else {
+            welcomeMessage = String.format("%s\n%sHello! Welcome back!\n", logo, makeSpace(5))
+            + String.format("%sCarrying off from where you left behind the last time...", makeSpace(5));
+        }
         
         System.out.printf("%s\n%s\n", welcomeMessage, HORIZONTAL_LINE);
+
+        if (tasks.size() > 0) {
+            listAllTasks();
+            System.out.println(HORIZONTAL_LINE);
+        }
     }
 
     public void exit() {

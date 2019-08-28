@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String toFile(){
-        return "E | " + (isDone?"1":"0") + " | " + this.description + " | " + this.at + "\n";
+        return "E @ " + (isDone?"1":"0") + " @ " + this.description + " @ " + this.at + "\n";
     }
     @Override
     public String toString(){

@@ -12,7 +12,7 @@ public class TaskList extends ArrayList<Task>{
             Scanner sc = new Scanner(f);
             while(sc.hasNext()){
                 String line = sc.nextLine();
-                String[] parts = line.split(" | ", 4);
+                String[] parts = line.split(" @ ");
                 switch(parts[0]){
                     case "T":
                         add(new Todo(parts[2]));

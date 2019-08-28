@@ -8,7 +8,7 @@ public class Deadline extends Task{
 
     @Override
     public String toFile(){
-        return "D | " + (isDone?"1":"0") + " | " + this.description + " | " + this.by + "\n";
+        return "D @ " + (isDone?"1":"0") + " @ " + this.description + " @ " + this.by + "\n";
     }
     @Override
     public String toString(){

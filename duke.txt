@@ -1,3 +1,0 @@
-T/✓/read book
-D/✗/return book / sunday
-T/✗/read book

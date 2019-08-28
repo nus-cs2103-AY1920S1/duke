@@ -86,6 +86,18 @@ public class Command {
                 TaskLine = ui.readCommand();
                 break;
 
+            case FIND :
+                String keyword = TaskLine.substring(5);
+                TaskList findList = new TaskList();
+                for (int i = 0; i < taskList.size(); i++) {
+                    if (taskList.get(i).getDescription().contains(keyword)) {
+                        findList.add(taskList.get(i));
+                    }
+                }
+                ui.printFind(findList);
+                TaskLine = ui.readCommand();
+                break;
+
             default :
                 ui.printIDK();
                 TaskLine = ui.readCommand();

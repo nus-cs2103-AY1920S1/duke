@@ -6,6 +6,7 @@ public enum InputType {
     BYE,
     DONE,
     DELETE,
+    FIND,
     ERROR;
 
     @Override

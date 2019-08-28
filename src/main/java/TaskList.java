@@ -1,3 +1,7 @@
+/**
+ * Class to represent the arraylist containing the tasks.
+ */
+
 import java.util.ArrayList;
 
 public class TaskList {

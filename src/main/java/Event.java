@@ -1,3 +1,7 @@
+/**
+ * Event class to represent a task that occurs on a certain date.
+ */
+
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;

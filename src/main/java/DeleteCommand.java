@@ -1,3 +1,7 @@
+/**
+ * Represents a command to remove a task from the arraylist.
+ */
+
 public class DeleteCommand extends Command {
     private int taskNumber;
 

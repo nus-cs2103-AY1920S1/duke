@@ -1,3 +1,7 @@
+/**
+ * Represents the command to add a task into the arraylist.
+ */
+
 import java.text.ParseException;
 
 public class AddCommand extends Command {

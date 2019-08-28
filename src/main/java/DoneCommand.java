@@ -1,3 +1,7 @@
+/**
+ * Represents a command that ticks off a task.
+ */
+
 public class DoneCommand extends Command {
     private int taskNumber;
 

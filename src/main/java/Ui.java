@@ -1,6 +1,14 @@
+/**
+ * A class to handle User Interactions.
+ */
+
 import java.util.Scanner;
 
 public class Ui {
+
+    /**
+     * A method that prints out the introduction when Duke first initialises.
+     */
 
     public void showWelcome() {
         String logo = " ____        _        \n"

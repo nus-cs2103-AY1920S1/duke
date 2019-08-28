@@ -1,3 +1,4 @@
+package duke;
 /*
  * Task.java
  * CS2103T

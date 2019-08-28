@@ -1,9 +1,11 @@
+package duke;
+
 /*
- * Deadline.java
+ * Event.java
  * CS2103T
  * @author Gabriel Ong
  *
- * This class represents a Deadline Task.
+ * This class represents a Event Task.
  *
  */
 
@@ -12,20 +14,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task implements Serializable {
-    protected LocalDateTime by;
+public class Event extends Task implements Serializable {
+    protected LocalDateTime at;
     protected static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public Deadline(String description) throws DukeException {
+    public Event(String description) throws DukeException {
         super(description);
-        String[] splitDescription = description.split(" /by ", 2);
-
+        String[] splitDescription = description.split(" /at ", 2);
         try {
             this.description = splitDescription[0];
-            this.by = LocalDateTime.parse(splitDescription[1], dateFormatter);
+            this.at = LocalDateTime.parse(splitDescription[1], dateFormatter);
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please enter a deadline using \"/by\".");
+            throw new DukeException("Please enter a deadline using \"/at\".");
         }
         catch (DateTimeParseException e) {
             throw new DukeException("Please enter a date with the format dd/MM/yyyy HHmm.\n" + e.getMessage());
@@ -34,6 +35,6 @@ public class Deadline extends Task implements Serializable {
 
     @Override
     public String toString() {
-        return "[D]"+ super.toString() + " (by: " + by.format(dateFormatter) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(dateFormatter) + ")";
     }
 }

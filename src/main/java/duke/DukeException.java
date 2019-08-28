@@ -1,3 +1,5 @@
+package duke;
+
 /*
  * DukeException.java
  * CS2103T

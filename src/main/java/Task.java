@@ -1,6 +1,14 @@
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDateTime pattern;
+    public DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    protected final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+
 
     public Task(String description) {
         this.description = perfectDescription(description);
@@ -8,12 +16,12 @@ public abstract class Task {
     }
 
     public Task(String description, String done) {
-
         this.description = perfectDescription(description);
         if (done.trim().equals("1")) {
             this.isDone = true;
         }
     }
+
 
     public String perfectDescription(String description){
         String[] temp = description.split(" ");
@@ -35,6 +43,10 @@ public abstract class Task {
     }
 
     public abstract String getFormatToFile();
+
+    public String getTime() {
+        return  pattern.format(formatter2);
+    }
 
     @Override
     public String toString() {

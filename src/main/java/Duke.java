@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,14 +25,11 @@ public class Duke {
 
         if (oneLine.length == 2 && !oneLine[1].isBlank()) {
             System.out.println(frontSpace + " Got it. I've added this task: ");
-            //todo with description
-            //deadline may not have /by
-            //event may not have /at
             if (firstWord.equals("todo")) {
                 myList.add(new Todo(oneLine[1].trim()));
             } else if (firstWord.equals("deadline")) {
                 timeDate = oneLine[1].trim().split(" /by ");
-                if (timeDate.length == 2) {
+                if (timeDate.length == 2 && isValidTime(timeDate[1].trim())) {
                     description = timeDate[0].trim();
                     time_date = timeDate[1].trim();
                     myList.add(new Deadline(description, time_date));
@@ -39,7 +38,7 @@ public class Duke {
                 }
             } else {
                 timeDate = oneLine[1].trim().split(" /at ");
-                if (timeDate.length == 2) {
+                if (timeDate.length == 2 && isValidTime(timeDate[1].trim())) {
                     description = timeDate[0].trim();
                     time_date = timeDate[1].trim();
                     myList.add(new Event(description, time_date));
@@ -55,7 +54,15 @@ public class Duke {
         System.out.println(frontSpace + " Now you have " + myList.size() + " tasks in the list.");
         System.out.println(frontSpace + lowerLine);
     }
-
+    public static boolean isValidTime(String str) {
+        try {
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            LocalDateTime localDate1 = LocalDateTime.parse(str, formatter1);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     public static boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);
@@ -130,7 +137,6 @@ public class Duke {
                     System.out.println(frontSpace + " " + (i + 1) + ". " + myList.get(i));
                 }else{
                     System.out.println(frontSpace + " " + (i + 1) + "." + myList.get(i));
-
                 }
             }
         } else {

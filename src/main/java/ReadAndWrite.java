@@ -24,7 +24,6 @@ public class ReadAndWrite {
                     throw new InvalidCommandException("[duke.txt]: I'm sorry, but I don't know what that means :-(");
                 }
                 Duke.idx++;
-
             } else {
                 throw new InvalidNumberException("[duke.txt]: the description should have 0 or 1");
             }
@@ -40,7 +39,6 @@ public class ReadAndWrite {
             Scanner sc = new Scanner(txtFile);
             while (sc.hasNextLine()) {
                 oneLine = sc.nextLine().split("\\|");
-
                 putToList();
             }
         } catch (FileNotFoundException e) {

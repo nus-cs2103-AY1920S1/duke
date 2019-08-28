@@ -48,7 +48,7 @@ public class DukeFile {
      * @return arrayList of tasks
      * @throws FileNotFoundException
      */
-    public ArrayList<Task> getFileContents() throws FileNotFoundException {
+    public ArrayList<Task> getFileContents() throws FileNotFoundException, DukeException {
 //        File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(file); // create a Scanner using the File as the source
         ArrayList<Task> taskList = new ArrayList<Task>();
@@ -59,7 +59,7 @@ public class DukeFile {
         return taskList;
     }
 
-    public Task decodeTask(String taskString) {
+    public Task decodeTask(String taskString) throws DukeException {
         String[] taskArr = taskString.split(" \\| ");
         Task task;
         switch (taskArr[0]) {
@@ -70,7 +70,7 @@ public class DukeFile {
             task = new Deadline(taskArr[2], taskArr[3]);
             break;
         case "E" :
-            task = new Event(taskArr[2], taskArr[3]);
+            task = new Event(taskArr[2], DateTimeHandler.getDateTimeRange(taskArr[4]), taskArr[4]);
             break;
         default:
             task = new Task();

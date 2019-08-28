@@ -5,4 +5,5 @@ public class EventException extends TaskException {
         this.time = time;
         this.type = "event";
     }
+
 }

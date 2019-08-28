@@ -8,6 +8,7 @@ import duke.tasklist.Tasklist;
 import duke.ui.Ui;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -35,7 +36,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../data/tasks.txt").run();
+        new Duke("./data/tasks.txt").run();
 
     } // End of main.
 
@@ -49,6 +50,9 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
+            } catch (NoSuchElementException e) {
+                ui.showError(e.getMessage());
+                return;
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             }

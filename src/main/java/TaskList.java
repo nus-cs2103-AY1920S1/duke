@@ -1,7 +1,9 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
+/**
+ * Represents a Task List
+ * @param <T>
+ */
 public class TaskList<T> extends ArrayList<T> implements Serializable {
 }

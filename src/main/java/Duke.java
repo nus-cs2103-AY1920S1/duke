@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * Represents a duke chatbot
+ */
 public class Duke implements Serializable {
     // constants
     private static final String INDENT = "    ";
@@ -21,6 +24,12 @@ public class Duke implements Serializable {
         new Duke(System.in, System.out, "data/duke.txt").run();
     }
 
+    /**
+     * Create a duke with provided parameters
+     * @param inStream input stream
+     * @param outStream output stream
+     * @param saveLocation relative file save location
+     */
     // takes in a input stream and output stream
     public Duke(InputStream inStream, OutputStream outStream, String saveLocation) {
         this.ui = Ui.newUi(inStream, outStream);
@@ -29,9 +38,10 @@ public class Duke implements Serializable {
         this.storage = Storage.newStorage(saveLocation);
     }
 
-    // runs duke
-    // returns 0 on successful
-    // returns 1 on ioexception / unsuccessful
+    /**
+     * Runs duke
+     * @return 1 if exit with error, zero otherwise
+     */
     public int run() {
         int returnCode = 0;
         try {
@@ -48,6 +58,10 @@ public class Duke implements Serializable {
         return returnCode;
     }
 
+    /**
+     * Prints bye message
+     * @throws IOException if stream fed to Duke is not valid
+     */
     // prints out bye message to out stream
     private void bye() throws IOException {
         ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
@@ -56,6 +70,10 @@ public class Duke implements Serializable {
         ui.flush();
     }
 
+    /**
+     * Main loop of the program
+     * @throws IOException if stream fed to Duke is not valid
+     */
     // main update loop where processinput is continuously called
     private void mainLoop() throws IOException {
         int code;
@@ -67,6 +85,11 @@ public class Duke implements Serializable {
         } while (code == CONTINUE);
     }
 
+    /**
+     * Main loop logic
+     * @return CONTINUE if continue main loop, EXIT if exiting main loop
+     * @throws IOException if stream fed to Duke is not valid
+     */
     // main logic
     // returns EXIT if signalling to exit main loop
     // returns CONTINUE if to continue with loop
@@ -107,6 +130,12 @@ public class Duke implements Serializable {
         return CONTINUE;
     }
 
+    /**
+     * Delete task with args
+     * @param args args
+     * @throws IOException if stream fed to Duke is not valid
+     * @throws DukeException
+     */
     // input expected: "delete n"
     // deletes task n
     // throws duke exception if there is no task n
@@ -133,6 +162,13 @@ public class Duke implements Serializable {
         storage.save(todoList);
     }
 
+
+    /**
+     * Do task with args
+     * @param args args
+     * @throws IOException if stream fed to Duke is not valid
+     * @throws DukeException
+     */
     // input expected: "done n"
     // marks task n as done
     // throws duke exception if there is no task n
@@ -157,6 +193,11 @@ public class Duke implements Serializable {
         storage.save(todoList);
     }
 
+    /**
+     * List to do list
+     * @param args
+     * @throws IOException if stream fed to Duke is not valid
+     */
     // input expected: "list"
     // input not checked
     // prints out list of tasks to out stream
@@ -174,6 +215,12 @@ public class Duke implements Serializable {
     }
 
 
+    /**
+     * Add a todo, deadline or event according to args
+     * @param args args
+     * @throws IOException if stream fed to Duke is not valid
+     * @throws DukeException
+     */
     private void addToList(String[] args) throws IOException, DukeException {
         switch (args[0]) {
         case "todo":
@@ -210,6 +257,11 @@ public class Duke implements Serializable {
         storage.save(todoList);
     }
 
+    /**
+     * Echo command.
+     * @param command
+     * @throws IOException if stream fed to Duke is not valid
+     */
     private void echo(String command) throws IOException {
         ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
         ui.write(String.format("%s%s\n", INDENT, command));
@@ -217,6 +269,10 @@ public class Duke implements Serializable {
         ui.flush();
     }
 
+    /**
+     * Print greet message.
+     * @throws IOException if stream fed to Duke is not valid
+     */
     private void greet() throws IOException {
         ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
         ui.write(String.format("%s Hello! I'm Duke\n", INDENT));

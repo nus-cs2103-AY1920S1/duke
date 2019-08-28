@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Parser class for parsing strings into arguments.
+ */
 public class Parser {
     public static String[] checkRegex = {
             "bye", // bye
@@ -10,6 +13,12 @@ public class Parser {
             "deadline .+? /by .+?", // deadline
             "event .+? /at .+?", // event
     };
+
+    /**
+     * Parse string into arguments
+     * @param input String
+     * @return arguments
+     */
     public static String[] returnArgs(String input) {
         Scanner sc = new Scanner(input).useDelimiter("(?<= )");
         List<String> ar = new ArrayList<>();
@@ -33,6 +42,14 @@ public class Parser {
         ar.toArray(rtv);
         return rtv;
     }
+
+    /**
+     * Check if command is valid
+     * @param input command
+     * @return if command is valid
+     * @throws DukeException
+     */
+    @Deprecated
     public static boolean checkValidCommand(String input) throws DukeException {
         for(String regex: checkRegex){
             if(input.matches(regex)){

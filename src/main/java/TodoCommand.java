@@ -1,3 +1,9 @@
+/**
+ * This is a class for command dealing with additions of new todo tasks.
+ * @author Choong Yong Xin
+ */
+
+
 import java.io.IOException;
 
 public class TodoCommand extends Command {

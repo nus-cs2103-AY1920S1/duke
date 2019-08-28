@@ -1,3 +1,8 @@
+/**
+ * This is the main class for Project Duke.
+ * @author Choong Yong Xin
+ */
+
 import java.io.IOException;
 
 public class Duke {

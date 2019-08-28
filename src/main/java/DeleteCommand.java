@@ -1,3 +1,8 @@
+/**
+ * This is a class for command dealing with deletions of any tasks.
+ * @author Choong Yong Xin
+ */
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {

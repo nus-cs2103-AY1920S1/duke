@@ -1,3 +1,8 @@
+/**
+ * This is a class for deadline tasks.
+ * @author Choong Yong Xin
+ */
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,11 +23,21 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns string for task display.
+     *
+     * @return Display string
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadLine + ")";
     }
 
+    /**
+     * Returns string for file writing.
+     *
+     * @return String to be saved.
+     */
     @Override
     public String stringForAppend() {
         return "D | " + super.getStatusIcon() + " | " + description + " | " + deadLine;

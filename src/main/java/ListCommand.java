@@ -1,3 +1,8 @@
+/**
+ * This is a class for list command.
+ * @author Choong Yong Xin
+ */
+
 public class ListCommand extends Command {
 
     ListCommand(String commandDesc) {

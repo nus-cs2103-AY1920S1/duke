@@ -1,3 +1,8 @@
+/**
+ * This is a class which makes sense and differentiates the commands.
+ * @author Choong Yong Xin
+ */
+
 public class Parser {
     private String command;
 

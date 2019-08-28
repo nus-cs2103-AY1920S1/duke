@@ -1,3 +1,8 @@
+/**
+ * This is a class for command dealing with additions of new deadline tasks.
+ * @author Choong Yong Xin
+ */
+
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {

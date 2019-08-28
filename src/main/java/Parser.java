@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 public class Parser {
 
     String time;
-    String name;
+    String desc;
     boolean timing;
-    boolean firstInName;
+    boolean firstInDescription;
     boolean firstInTime;
     Task task = null;
     static int count = 0;
@@ -66,41 +63,37 @@ public class Parser {
         return Integer.parseInt(description[1]);
     }
 
-    public Task createNewTask(int taskNo, String info, String...arr) {
-        time = "";
-        name = "";
-        timing = false;
-        firstInName = true;
-        firstInTime = true;
+    public Task createNewTask(int taskNo, String eventType, String...arr) {
+        firstInDescription = true;
+        Date date = null;
+        Time time = null;
         for (int i = 1; i < arr.length; i++) {
-            if (arr[i].startsWith("/")) {
-                timing = true;
+            if (firstInDescription) {
+                desc += arr[i];
+                firstInDescription = false;
+            } else if (arr[i].startsWith("/")) {
+                break;
             } else {
-                if (firstInName) {
-                    name = arr[i];
-                    firstInName = false;
-                } else if (timing && firstInTime) {
-                    time = arr[i];
-                    firstInTime = false;
-                } else if (timing) {
-                    time += " " + arr[i];
-                } else {
-                    name += " " + arr[i];
-                }
+                desc += " " + arr[i];
             }
         }
-        switch (info) {
+        switch (eventType) {
             case "todo":
-                task = new Todo(taskNo, name, "T");
-                break;
-            case "deadline":
-                task = new Deadline(taskNo, name, time, "D");
+                task = new Todo(taskNo, desc, "T");
                 break;
             case "event":
-                task = new Event(taskNo, name, time, "E");
+                date = Date.processDate(arr[arr.length-2]);
+                time = Time.processTime(arr[arr.length-1]);
+                task = new Event(taskNo, desc, date, time, "E");
+                break;
+            case "deadline":
+                date = Date.processDate(arr[arr.length-2]);
+                time = Time.processTime(arr[arr.length-1]);
+                task = new Deadline(taskNo, desc, date, time, "D");
                 break;
         }
         return task;
     }
+
 
 }

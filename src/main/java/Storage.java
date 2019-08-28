@@ -37,6 +37,8 @@ public class Storage {
                 int num = Integer.parseInt(details[1]);
                 boolean done = false;
                 done = (num == 1);
+                Date date = null;
+                Time time = null;
                 counter++;
                 try {
                     switch (details[0]) {
@@ -44,10 +46,14 @@ public class Storage {
                             tasks.loadTask(new Todo(counter, details[2], "T", done));
                             break;
                         case "D":
-                            tasks.loadTask(new Deadline(counter, details[2], details[3], "D", done));
+                            date = Date.processDate(details[3]);
+                            time = Time.processTime(details[4]);
+                            tasks.loadTask(new Deadline(counter, details[2], date, time, "D", done));
                             break;
                         case "E":
-                            tasks.loadTask(new Event(counter, details[2], details[3], "E", done));
+                            date = Date.processDate(details[3]);
+                            time = Time.processTime(details[4]);
+                            tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
                             break;
                         default:
                             throw new InvalidInputException();

@@ -1,6 +1,8 @@
-public class Task {
-    protected String description;
-    protected boolean isDone;
+import java.io.Serializable;
+
+public class Task implements Serializable {
+    private String description;
+    private boolean isDone;
 
     Task(String description) {
         this.description = description;
@@ -9,6 +11,10 @@ public class Task {
 
     void markAsDone() {
         isDone = true;
+    }
+
+    String saveFormat() {
+        return String.format("%s|%s", this.description, this.isDone);
     }
 
     private String getStatusIcon() {

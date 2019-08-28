@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-public class TodoList {
+public class TodoList implements Serializable {
     private ArrayList<Task> list;
 
     TodoList() {
@@ -28,6 +29,8 @@ public class TodoList {
 
     @Override
     public String toString() {
+        if (this.list.size() == 0) return "";
+
         StringBuilder sb = new StringBuilder();
         ListIterator<Task> listIterator = this.list.listIterator();
         while(listIterator.hasNext()) {

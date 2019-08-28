@@ -2,6 +2,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
+    private TodoList tasks = new TodoList();
+
     private void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,7 +14,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
         String[] next = scanner.nextLine().trim().split(" ");
-        TodoList todolist = new TodoList();
+        TodoList todolist = Storage.load();
 
         while (!next[0].equals("bye")) {
             try {
@@ -71,6 +73,7 @@ public class Duke {
                 next = scanner.nextLine().trim().split(" ");
             }
         }
+        Storage.save(todolist);
         System.out.println(reply("Bye. Hope to see you again soon!"));
     }
     public static void main(String[] args) {
@@ -79,6 +82,6 @@ public class Duke {
     }
 
     private static String reply(String string) {
-        return "---------------------------\n" + string + "\n---------------------------";
+        return "______________________\n" + string + "\n______________________";
     }
 }

@@ -1,18 +1,21 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
     protected LocalDateTime parsedBy;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime parsedBy) {
         super(description, TaskType.DEADLINE);
-        this.parsedBy = parseDateTime(by);
+        this.parsedBy = parsedBy;
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, LocalDateTime parsedBy) {
         super(description, TaskType.DEADLINE, isDone);
-        this.parsedBy = parseDateTime(by);
+        this.parsedBy = parsedBy;
     }
+
+
 
     @Override
     public String serialise() {

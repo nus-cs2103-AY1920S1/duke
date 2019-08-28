@@ -7,81 +7,45 @@ import java.util.Scanner;
 
 public class DukeCLI {
     private TaskList taskList;
+    private UI ui;
+    private Storage storage = new Storage(new File("data/tasks.txt"));
+
     // Main function
     public void run() {
-        greet();
-        // Check whether file exists, else create file
+        // Instantiating fields
+        ui = new UI();
         taskList = new TaskList();
 
         // Try to load data
-        taskList.loadData();
+        try {
+            taskList.loadData(storage.getTaskList());
+        } catch (FileNotFoundException e) {
+            ui.echoException(new DukeException("    *** NO EXISTING FILE FOUND ***", true));
+        } catch (DukeException e) {
+            ui.echoException(e);
+        }
+
+        // Greet User
+        ui.greet();
 
         // User input
-        Scanner sc = new Scanner(System.in);
-        String input = sc.next(); // Initial Input
+        boolean isByeBye = false;
         // Try is inside while loop so that user can continue to enter commands despite invalid commands
-        while (!input.equals("bye")) {
+        while (!isByeBye) {
             try {
-                switch (input) {
-                    case "list":
-                        taskList.printList();
-                        sc.nextLine();
-                        break;
-                    case "done":
-                        taskList.completeTask(sc.nextInt());
-                        break;
-                    case "delete":
-                        taskList.deleteTask(sc.nextInt());
-                        break;
-                    case "todo":
-                        taskList.createTodo(sc.nextLine().trim());
-                        break;
-                    case "deadline":
-                        taskList.createDeadline(sc.nextLine().trim());
-                        break;
-                    case "event":
-                        taskList.createEvent(sc.nextLine().trim());
-                        break;
-                    default:
-                        sc.nextLine();
-                        handleDefault();
-                }
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Input Mismatch Exception caught");
-                sc.nextLine();
-            }
-            catch (IndexOutOfBoundsException e) {
-                System.out.println(String.format("Index Out of Bounds Exception: %s", e.getMessage()));
-            }
-            catch(DukeException e) {
-                System.out.println(e.getMessage());
-            }
-            catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
-            finally {
-                input = sc.next();
+                String inputCommand = ui.readCommand(); // Initial Input
+                Command c = Parser.parseCommand(inputCommand);
+                c.execute(storage, taskList, ui);
+                if(c.isExit)
+                    isByeBye = true;
+            } catch(IndexOutOfBoundsException e) {
+                ui.echoException(new DukeException("Index Out of Bounds Exception Caught", false));
+            } catch (DukeException e) {
+                ui.echoException(e);
+            } catch(Exception e) {
+                ui.echoException((new DukeException(e.getMessage(), false)));
             }
         }
-        exit();
     }
 
-    // Helper Functions
-    private void greet() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________");
-    }
-
-    private void handleDefault() {
-        System.out.println(new DukeException().getMessage());
-    }
-
-    private void exit() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________");
-    }
 }

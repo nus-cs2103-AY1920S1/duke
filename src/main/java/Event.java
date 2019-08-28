@@ -4,14 +4,14 @@ public class Event extends Task {
 
     protected LocalDateTime parsedAt;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime parsedAt) {
         super(description, TaskType.EVENT);
-        this.parsedAt = parseDateTime(at);
+        this.parsedAt = parsedAt;
     }
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDateTime parsedAt) {
         super(description, TaskType.EVENT, isDone);
-        this.parsedAt = parseDateTime(at);
+        this.parsedAt = parsedAt;
     }
 
     @Override

@@ -1,14 +1,11 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        TaskList tasks = new TaskList();
         String filePath = "C:\\duke\\data\\tasklist.txt";
 
         printReply("Hello! I'm Duke\n\t What can I do for you?");
@@ -19,21 +16,21 @@ public class Duke {
                 try {
                     String[] parts = command.split(" ", 2);
                     if (command.equals("list")) {
-                        printList(taskList);
+                        printList(tasks);
                     } else if (parts[0].equals("done")) {
                         int taskNum = Integer.parseInt(parts[1]);
-                        printReply(taskList.get(taskNum - 1).markAsDone());
+                        printReply(tasks.get(taskNum - 1).markAsDone());
                     } else if (parts[0].equals("delete")) {
                         int taskNum = Integer.parseInt(parts[1]);
-                        removeFromList(taskList, taskNum);
+                        removeFromList(tasks, taskNum);
                     } else if (parts[0].equals("todo")) {
-                        addToList(new Todo(parts[1]), taskList, fw);
+                        addToList(new Todo(parts[1]), tasks, fw);
                     } else if (parts[0].equals("deadline")) {
                         String[] subparts = parts[1].split(" /by ");
-                        addToList(new Deadline(subparts[0], new Date(subparts[1])), taskList, fw);
+                        addToList(new Deadline(subparts[0], new Date(subparts[1])), tasks, fw);
                     } else if (parts[0].equals("event")) {
                         String[] subparts = parts[1].split(" /at ");
-                        addToList(new Event(subparts[0], new Date(subparts[1])), taskList, fw);
+                        addToList(new Event(subparts[0], new Date(subparts[1])), tasks, fw);
                     } else {
                         throw new DukeException("");
                     }
@@ -55,7 +52,7 @@ public class Duke {
         System.out.println("\t_______________________________________________________________\n\t " + reply
                        + "\n\t_______________________________________________________________");
     }
-    public static void addToList(Task task, ArrayList<Task> taskList, FileWriter fw){
+    public static void addToList(Task task, TaskList taskList, FileWriter fw){
         taskList.add(task);
         String reply = "Got it. I've added this task:\n\t  " + task + "\n\t Now you have " + taskList.size()
                 + ((taskList.size() == 1)?" task":" tasks") + " in the list.";
@@ -66,7 +63,7 @@ public class Duke {
         }catch(IOException e){}
 
     }
-    public static void printList(ArrayList<Task> taskList){
+    public static void printList(TaskList taskList){
         String reply = "Here are the tasks in your list:\n\t ";
         for(int i=0; i<taskList.size(); i++) {
             reply += (i + 1) + "." + taskList.get(i);
@@ -75,7 +72,7 @@ public class Duke {
         }
         printReply(reply);
     }
-    public static void removeFromList(ArrayList<Task> taskList, int taskIndex) throws DukeException{
+    public static void removeFromList(TaskList taskList, int taskIndex) throws DukeException{
         if(taskIndex > taskList.size()) throw new DukeException("");
         String reply = "Noted. I've removed this task:\n\t  " + taskList.remove(taskIndex-1) + "\n\t Now you have " + taskList.size()
                 + ((taskList.size() == 1)?" task":" tasks") + " in the list.";

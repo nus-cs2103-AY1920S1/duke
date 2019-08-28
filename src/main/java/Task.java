@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /** Class to represent a task. */
 abstract class Task {
     protected String name;
@@ -19,11 +21,13 @@ abstract class Task {
     }
 
     // check if task is done
-    public boolean isTaskDone() { return this.done; }
+    public boolean isTaskDone() {
+        return this.done;
+    }
 
     // get task type
     public abstract TaskType getType();
 
     // get task date
-    public abstract String getDate();
+    public abstract Date getDate();
 }

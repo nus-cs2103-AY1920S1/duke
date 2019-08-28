@@ -1,3 +1,5 @@
+import java.util.Date;
+
 /** Task to represent a To-do. */
 class ToDo extends Task {
 
@@ -11,7 +13,7 @@ class ToDo extends Task {
     }
 
     // a to-do event has no date
-    public String getDate() {
+    public Date getDate() {
         return null;
     }
 

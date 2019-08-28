@@ -102,7 +102,6 @@ public class DukeStorage {
         } catch (FileNotFoundException e) {
             throw new ConfigurationException("Unable to access storage file");
         } catch (IOException e) {
-            e.printStackTrace();
             throw new ConfigurationException("Unable to read storage file");
         } catch (ClassNotFoundException e) {
             throw new ConfigurationException("Storage file corrupted");

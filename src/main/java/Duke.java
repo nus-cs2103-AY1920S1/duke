@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Queue;
 
 public class Duke {
-    private final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
+    private static final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
 
     private Queue<Command> commands;
     private TaskListController taskListController;
-    private DukeMessage GENERIC_ERROR_MESSAGE = new DukeMessage("☹ OOPS!!! Something unexpected happened!!!");
+    private static final DukeMessage GENERIC_ERROR_MESSAGE =
+            new DukeMessage("☹ OOPS!!! Something unexpected happened!!!");
 
     private void run() {
         initialize();
@@ -27,7 +28,7 @@ public class Duke {
 
             try {
                 next.execute().ifPresent(command -> commands.offer(command));
-            } catch(Exception e) {
+            } catch (Exception e) {
                 DukeOutput.printMessage(GENERIC_ERROR_MESSAGE);
                 commands.offer(new ListenCommand(taskListController));
             }
@@ -44,7 +45,7 @@ public class Duke {
             DukeStorage.initializeDukeStorage(CUSTOM_CONFIG_FILE_PATH);
             List<Task> taskData = DukeStorage.getInstance().getTaskData();
             taskListController = new TaskListController(taskData);
-        } catch(ConfigurationException e) {
+        } catch (ConfigurationException e) {
             DukeMessage configErrorMessage = new DukeMessage(e.getMessage());
             DukeOutput.printMessage(configErrorMessage);
             return;

@@ -32,16 +32,16 @@ public class ByeCommand implements Command {
                 String forceCloseSelection = DukeInput.readUserInput();
 
                 switch (forceCloseSelection) {
-                    case "Y":
-                        sayGoodbye();
-                        forceClosedSelectionMade = true;
-                        return Optional.empty();
-                    case "N":
-                        forceClosedSelectionMade = true;
-                        return Optional.of(new ListenCommand(taskListController));
-                    default:
-                        DukeMessage invalidSelectionMessage = new DukeMessage("☹ OOPS!!! Please select Y/N");
-                        DukeOutput.printMessage(invalidSelectionMessage);
+                case "Y":
+                    sayGoodbye();
+                    forceClosedSelectionMade = true;
+                    return Optional.empty();
+                case "N":
+                    forceClosedSelectionMade = true;
+                    return Optional.of(new ListenCommand(taskListController));
+                default:
+                    DukeMessage invalidSelectionMessage = new DukeMessage("☹ OOPS!!! Please select Y/N");
+                    DukeOutput.printMessage(invalidSelectionMessage);
                 }
             }
         }

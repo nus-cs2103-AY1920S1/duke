@@ -22,23 +22,23 @@ public class ListenCommand implements Command {
         String arguments = getArguments(userInput);
 
         switch (command) {
-            case "bye":
-                return Optional.of(new ByeCommand(taskListController));
-            case "list":
-                return Optional.of(new ListCommand(taskListController));
-            case "done":
-                return Optional.of(new DoneCommand(taskListController, arguments));
-            case "delete":
-                return Optional.of(new DeleteCommand(taskListController, arguments));
-            case "find":
-                return Optional.of(new FindCommand(taskListController, arguments));
-            default:
-                try {
-                    return Optional.of(new AddCommand(taskListController, command, arguments));
-                } catch (UnknownCommandException e) {
-                    DukeOutput.printMessage(new DukeMessage(e.getMessage()));
-                    return Optional.of(new ListenCommand(taskListController));
-                }
+        case "bye":
+            return Optional.of(new ByeCommand(taskListController));
+        case "list":
+            return Optional.of(new ListCommand(taskListController));
+        case "done":
+            return Optional.of(new DoneCommand(taskListController, arguments));
+        case "delete":
+            return Optional.of(new DeleteCommand(taskListController, arguments));
+        case "find":
+            return Optional.of(new FindCommand(taskListController, arguments));
+        default:
+            try {
+                return Optional.of(new AddCommand(taskListController, command, arguments));
+            } catch (UnknownCommandException e) {
+                DukeOutput.printMessage(new DukeMessage(e.getMessage()));
+                return Optional.of(new ListenCommand(taskListController));
+            }
         }
     }
 

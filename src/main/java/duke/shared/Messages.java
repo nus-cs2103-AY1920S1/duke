@@ -16,17 +16,17 @@ public class Messages {
     public static final String LIST_SIZE_FORMAT = COMMAND_INDENTATION + "Now you have %d tasks in the list.";
 
     public static final String DESCRIPTION_MISSING_EXCEPTION = COMMAND_INDENTATION
-            + "☹OOPS!!! The description of a %s cannot be empty.";
+            + "☹ OOPS!!! The description of a %s cannot be empty.";
     public static final String UNKNOWN_COMMAND_EXCEPTION = COMMAND_INDENTATION
-            + "☹OOPS!!! I'm sorry, but I don't know what that means :-(";
+            + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String DESCRIPTION_FORMAT_EXCEPTION = COMMAND_INDENTATION
-            + "☹OOPS!!! The description need to be %s.";
+            + "☹ OOPS!!! The description need to be %s.";
     public static final String SUBDESCRIPTION_MISSING_EXCEPTION = COMMAND_INDENTATION
-            + "☹OOPS!!! The description of a %s cannot be empty.";
+            + "☹ OOPS!!! The description of a %s cannot be empty.";
     public static final String NO_SUBDESCRIPTION_EXCEPTION = COMMAND_INDENTATION
-            + "☹OOPS!!! \"%s\" cannot be found in the command";
+            + "☹ OOPS!!! \"%s\" cannot be found in the command";
     public static final String INVALID_SIZE_EXCEPTION = COMMAND_INDENTATION
-            + "☹OOPS!!! Invalid task number";
+            + "☹ OOPS!!! Invalid task number";
     public static final String DATETIME_PARSE_EXCEPTION = COMMAND_INDENTATION
-            + "☹The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
+            + "☹ The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
 }

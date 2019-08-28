@@ -1,7 +1,7 @@
 package task.tasks;
 
 import task.Task;
-import util.SerializableFunction;
+import util.SerializableTaskProducer;
 
 import java.io.Serializable;
 
@@ -11,9 +11,9 @@ public enum TaskKeyword implements Serializable {
     DEADLINE("deadline", Deadline::new);
 
     public final String keyword;
-    public final SerializableFunction<String, Task> taskProducer;
+    public final SerializableTaskProducer taskProducer;
 
-    TaskKeyword(String keyword, SerializableFunction<String, Task> taskProducer) {
+    TaskKeyword(String keyword, SerializableTaskProducer taskProducer) {
         this.keyword = keyword;
         this.taskProducer = taskProducer;
     }

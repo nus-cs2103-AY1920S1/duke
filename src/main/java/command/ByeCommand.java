@@ -22,18 +22,27 @@ public class ByeCommand implements Command {
         try {
             DukeStorage.getInstance().writeTaskData(taskListController.getTasks());
         } catch (ConfigurationException e) {
-            DukeMessage fileWriteErrorMessage = new DukeMessage("Unable to save task data. Close Duke anyway? (Y/N)");
+            DukeMessage fileWriteErrorMessage =
+                    new DukeMessage("☹ OOPS!!! Unable to save task data. Close Duke anyway? (Y/N)");
             DukeOutput.printMessage(fileWriteErrorMessage);
 
-            String closeSelection = DukeInput.readUserInput();
-            switch (closeSelection) {
-                case "Y":
-                    sayGoodbye();
-                    return Optional.empty();
-                case "N":
-                    return Optional.of(new ListenCommand(taskListController));
-                default:
-                    throw new UnknownCommandException();
+            boolean forceClosedSelectionMade = false;
+
+            while (!forceClosedSelectionMade) {
+                String forceCloseSelection = DukeInput.readUserInput();
+
+                switch (forceCloseSelection) {
+                    case "Y":
+                        sayGoodbye();
+                        forceClosedSelectionMade = true;
+                        return Optional.empty();
+                    case "N":
+                        forceClosedSelectionMade = true;
+                        return Optional.of(new ListenCommand(taskListController));
+                    default:
+                        DukeMessage invalidSelectionMessage = new DukeMessage("☹ OOPS!!! Please select Y/N");
+                        DukeOutput.printMessage(invalidSelectionMessage);
+                }
             }
         }
 

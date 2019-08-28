@@ -2,7 +2,6 @@ import command.Command;
 import command.ListenCommand;
 import command.GreetCommand;
 import error.ConfigurationException;
-import error.handler.MainErrorHandler;
 import task.Task;
 import task.TaskListController;
 import util.DukeMessage;
@@ -18,7 +17,7 @@ public class Duke {
 
     private Queue<Command> commands;
     private TaskListController taskListController;
-    private MainErrorHandler errorHandler;
+    private DukeMessage GENERIC_ERROR_MESSAGE = new DukeMessage("☹ OOPS!!! Something unexpected happened!!!");
 
     private void run() {
         initialize();
@@ -29,7 +28,7 @@ public class Duke {
             try {
                 next.execute().ifPresent(command -> commands.offer(command));
             } catch(Exception e) {
-                errorHandler.handle(e);
+                DukeOutput.printMessage(GENERIC_ERROR_MESSAGE);
                 commands.offer(new ListenCommand(taskListController));
             }
         }
@@ -40,7 +39,6 @@ public class Duke {
         DukeOutput.printMessage(initializeMessage);
 
         commands = new LinkedList<>();
-        errorHandler = new MainErrorHandler();
 
         try {
             DukeStorage.initializeDukeStorage(CUSTOM_CONFIG_FILE_PATH);

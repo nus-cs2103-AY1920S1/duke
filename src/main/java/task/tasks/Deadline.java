@@ -1,13 +1,16 @@
 package task.tasks;
 
+import error.task.UnknownDateTimeException;
 import task.Task;
+import util.DukeDateTime;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class Deadline extends Task {
-    private String by;
+    private LocalDateTime by;
 
-    public Deadline(String arguments) {
+    Deadline(String arguments) throws UnknownDateTimeException {
         super(getDescription(arguments), TaskKeyword.DEADLINE);
         this.by = getTiming(arguments);
     }
@@ -19,14 +22,16 @@ public class Deadline extends Task {
 
     @Override
     protected Optional<String> getTaskExtraDetails() {
-        return Optional.of(String.format("by: %s", by));
+        String byString = DukeDateTime.getString(by);
+        return Optional.of(String.format("by: %s", byString));
     }
 
     private static String getDescription(String arguments) {
         return arguments.split(" /by ")[0];
     }
 
-    private static String getTiming(String arguments) {
-        return arguments.split(" /by ")[1];
+    private LocalDateTime getTiming(String arguments) throws UnknownDateTimeException {
+        String dateTime = arguments.split(" /by ")[1];
+        return DukeDateTime.parseDateTime(dateTime);
     }
 }

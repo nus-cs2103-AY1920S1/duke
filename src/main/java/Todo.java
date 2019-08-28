@@ -1,3 +1,7 @@
+/**
+ * subclass of task
+ * handles todo task
+ * */
 public class Todo extends Task {
 
     public Todo (String description) {

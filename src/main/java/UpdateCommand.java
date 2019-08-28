@@ -1,3 +1,7 @@
+/**
+ * subclass of command
+ * operation to update tasks: done commands
+ * */
 public class UpdateCommand extends Command {
     protected String command;
     protected int pos;

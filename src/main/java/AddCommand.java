@@ -1,5 +1,9 @@
 import java.io.*;
 
+/**
+ * subclass of command
+ * execute adding tasks operations: todo, event, deadline
+ * */
 public class AddCommand extends Command {
     protected String command;
     protected Task task;

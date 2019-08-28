@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * abstract class for command
+ * */
 public abstract class Command {
     protected String command;
 

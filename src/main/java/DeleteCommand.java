@@ -1,3 +1,7 @@
+/**
+ * subclass of command
+ * execute delete tasks operations
+ * */
 public class DeleteCommand extends Command {
     protected String command;
     protected int pos;

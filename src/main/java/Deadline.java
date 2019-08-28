@@ -1,3 +1,7 @@
+/**
+ * subclass of task
+ * handles deadline type task of a specific time
+ * */
 public class Deadline extends Task {
     protected String by;
 

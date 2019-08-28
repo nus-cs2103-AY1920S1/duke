@@ -1,3 +1,7 @@
+/**
+ * subclass of task
+ * handles event type tasks with a specific time period
+ * */
 public class Event extends Task {
     protected String time;
 

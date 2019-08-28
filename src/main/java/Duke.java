@@ -1,3 +1,6 @@
+/**
+ * main class
+ * */
 public class Duke {
 
     private Storage storage;

@@ -1,13 +1,42 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static void saveToFile(File file, String content) throws IOException {
+        FileWriter fw = new FileWriter(file);
+        fw.write(content);
+        fw.close();
+    }
+
+    public static void loadPreviousTasks(File file, TaskList taskList) throws IOException, DukeException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        String str = "";
+        while ((str = br.readLine()) != null) {
+            Task task = generateNewTask(str);
+            taskList.addTask(task);
+        }
+    }
+
     public static void main(String[] args) {
         String greetings = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greetings);
 
+        TaskList taskList = new TaskList();
+        File file = new File("../../../data/duke.txt");
+
+        System.out.println("Here is the list of tasks from where you've left off: ");
+        try {
+            loadPreviousTasks(file, taskList);
+            taskList.printAllTasks();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         Scanner input = new Scanner(System.in);
         String command = input.nextLine().trim(); //trim leading/trailing whitespace
-        TaskList taskList = new TaskList();
+
 
         while (!command.equals("bye")) {
             // Block for 'list'
@@ -72,6 +101,7 @@ public class Duke {
                     if (!command.isEmpty()) {
                         Task newTask = generateNewTask(command);
                         taskList.addTask(newTask);
+                        try {saveToFile(file, taskList.toString());} catch(IOException e) {System.out.println("file error");}
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + newTask.toString());
                         System.out.println("Now you have " + taskList.numTasks + " tasks in the list.");

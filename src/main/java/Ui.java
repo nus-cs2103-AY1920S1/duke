@@ -34,16 +34,6 @@ public class Ui {
             } else if (word.contains("delete")) {
                 p.callDelete(word, array);
             }
-
-            try {
-                PrintWriter savingAdd = new PrintWriter("/Users/hualun/Desktop/test.txt");
-                for(TaskList task: array) {
-                    savingAdd.println(task);
-                }
-                savingAdd.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
             System.out.println("What can I do for you?");
         }

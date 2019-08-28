@@ -7,13 +7,16 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
-    int toDelete;
-    public DeleteCommand(int toDelete){
+
+    private int toDelete;
+
+    public DeleteCommand(int toDelete) {
         this.toDelete = toDelete;
     }
-    public void execute(TaskList taskList, Ui ui, Storage storage){
-        try{
-            if(toDelete >= taskList.size() || toDelete < 0){
+
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        try {
+            if (toDelete >= taskList.size() || toDelete < 0) {
                 throw new DukeException("☹ OOPS! duke.task.Task " + (toDelete + 1) + " doesn't exist!");
             } else {
                 Task curr = taskList.get(toDelete);
@@ -22,12 +25,12 @@ public class DeleteCommand extends Command {
                 ui.printNumTasks();
                 storage.setChangedTrue();
             }
-        } catch (DukeException de){
+        } catch (DukeException de) {
             ui.printTaskError(de.getMessage());
         }
     }
 
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

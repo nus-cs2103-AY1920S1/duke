@@ -1,12 +1,13 @@
 package duke.task;
+
 import duke.datetime.Date;
 import duke.datetime.Timing;
 
 public class Event extends Task {
-    Date date;
-    Timing timing;
+    private Date date;
+    private Timing timing;
 
-    public Event(String description,String date, String timing, int done){
+    public Event(String description,String date, String timing, int done) {
         super(description, done);
         this.date = new Date(date);
         this.timing = new Timing(timing);
@@ -17,11 +18,11 @@ public class Event extends Task {
         return date;
     }
 
-    public Timing getTiming(){
+    public Timing getTiming() {
         return timing;
     }
 
-    public Event(String description, String date, String timing){
+    public Event(String description, String date, String timing) {
         super(description);
         this.date = new Date(date);
         this.timing = new Timing(timing);
@@ -30,6 +31,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.toString() + ", " + timing.toString() + ")";
+        return "[E]" + super.toString() + " (at: "
+                + date.toString() + ", " + timing.toString() + ")";
     }
 }

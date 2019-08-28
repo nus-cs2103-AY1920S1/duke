@@ -2,80 +2,79 @@ package duke.ui;
 
 import duke.task.Task;
 import duke.task.TaskList;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ui {
-    private final static String greet = "Hello! I'm duke.Duke\nWhat can I do for you?";
-    private final static String goodbye = "Bye. Hope to see you again!";
-    private final static String niceAdded = "Nice! I've marked this task as done:";
-    private final static String gotIt = "Got it. I've added this task:";
-    private final static String deleted = "Noted. I've removed this task:";
-    private final static String tasks = "Here are your tasks in your list:";
+    private static final String GREET = "Hello! I'm duke.Duke\nWhat can I do for you?";
+    private static final String GOODBYE = "Bye. Hope to see you again!";
+    private static final String NICE_ADDED = "Nice! I've marked this task as done:";
+    private static final String GOT_IT = "Got it. I've added this task:";
+    private static final String DELETED = "Noted. I've removed this task:";
+    private static final String TASKS = "Here are your tasks in your list:";
     private BufferedReader userInput;
 
-     public Ui(){
+    public Ui() {
         this.userInput = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public void printNumTasks(){
+    public void printNumTasks() {
         System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
     }
 
-    public void printLogoAndGreet(){
+    public void printLogoAndGreet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(greet);
+        System.out.println(GREET);
     }
 
-    public void printGoodbye(){
-        System.out.println(goodbye);
+    public void printGoodbye() {
+        System.out.println(GOODBYE);
     }
 
-    public void printNice(Task doneTask){
-        System.out.println(niceAdded);
+    public void printNice(Task doneTask) {
+        System.out.println(NICE_ADDED);
         System.out.println(doneTask);
     }
 
-    public void printGotIt(Task newTask){
-        System.out.println(gotIt);
+    public void printGotIt(Task newTask) {
+        System.out.println(GOT_IT);
         System.out.println(" " + newTask.toString());
     }
 
-    public void printDeleted(Task deletedTask){
-        System.out.println(deleted);
+    public void printDeleted(Task deletedTask) {
+        System.out.println(DELETED);
         System.out.println(deletedTask);
     }
 
     public String readLine() {
         try {
             return userInput.readLine();
-        } catch (Exception e){
+        } catch (Exception e) {
             showReadingError();
             return null;
         }
     }
 
-    private void showReadingError(){
+    private void showReadingError() {
         System.err.println("Error reading user input");
     }
 
-    private void showCloseInputError(){
+    private void showCloseInputError() {
         System.err.println("Error close user input stream");
     }
 
-    public void printTasks(TaskList tasklist){
-        System.out.println(tasks);
+    public void printTasks(TaskList tasklist) {
+        System.out.println(TASKS);
         System.out.println(tasklist.toString());
     }
 
-    public void closeInput(){
+    public void closeInput() {
         try {
             userInput.close();
         } catch (IOException e) {
@@ -83,23 +82,23 @@ public class Ui {
         }
     }
 
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.err.println("Error loading from specified file path");
     }
 
-    public void showWritingError(){
+    public void showWritingError() {
         System.err.println("Error writing to specified file path");
     }
 
-    public void printWritingChanges(){
+    public void printWritingChanges() {
         System.out.println("Writing new changes to disk...");
     }
 
-    public void printDoneWriting(){
+    public void printDoneWriting() {
         System.out.println("Writing done!");
     }
 
-    public void printTaskError(String errorMessage){
+    public void printTaskError(String errorMessage) {
         System.err.println(errorMessage);
     }
 }

@@ -5,29 +5,33 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasksList;
 
-    public TaskList(){
+    public TaskList() {
         this.tasksList = new ArrayList<Task>();
     }
 
-    public TaskList(ArrayList<Task> tasksList){
+    public TaskList(ArrayList<Task> tasksList) {
         this.tasksList = tasksList;
     }
-    public void addTask(Task t){
+
+    public void addTask(Task t) {
         tasksList.add(t);
     }
-    public void deleteTask(int index){
+
+    public void deleteTask(int index) {
         tasksList.remove(index);
         Task.totalTasks--;
     }
-    public Task get(int index){
+
+    public Task get(int index) {
         return tasksList.get(index);
     }
 
-    public int size(){
+    public int size() {
         return tasksList.size();
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         String toReturn = "";
         int size = tasksList.size();
         for (int i = 0; i < size; i++) {

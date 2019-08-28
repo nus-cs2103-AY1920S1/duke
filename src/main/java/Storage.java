@@ -46,13 +46,13 @@ public class Storage {
                             tasks.loadTask(new Todo(counter, details[2], "T", done));
                             break;
                         case "D":
-                            date = Date.processDate(details[3]);
-                            time = Time.processTime(details[4]);
+                            date = Date.processDate(details[3].split(" ")[0]);
+                            time = Time.processTime(details[3].split(" ")[1]);
                             tasks.loadTask(new Deadline(counter, details[2], date, time, "D", done));
                             break;
                         case "E":
-                            date = Date.processDate(details[3]);
-                            time = Time.processTime(details[4]);
+                            date = Date.processDate(details[3].split(" ")[0]);
+                            time = Time.processTime(details[3].split(" ")[1]);
                             tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
                             break;
                         default:

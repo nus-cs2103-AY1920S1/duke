@@ -2,13 +2,28 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents Storage used to save/load data from Duke to disk.
+ */
 public class Storage {
+    /**
+     * Represents file path of storage.
+     */
     private String filePath;
 
+    /**
+     * Constructor of Storage. Save/load file to input path.
+     * @param filePath File path to save/load file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads TaskList data from disk.
+     * @return TaskList loaded from disk.
+     * @throws LoadingErrorDukeException If no file found.
+     */
     public List<Task> loadList() throws LoadingErrorDukeException{
         List<Task> loadedList = new ArrayList<>();
         try {
@@ -31,6 +46,10 @@ public class Storage {
         return loadedList;
     }
 
+    /**
+     * Saves TaskList data from Duke to disk.
+     * @param tasks Takes Tasks from TaskList and saves to disk.
+     */
     public void saveList(TaskList tasks) {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
@@ -50,6 +69,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Abstraction used to create tasks from String in data.
+     * @param inputArray String from reader.
+     * @return Task created from String.
+     * @throws InvalidTaskDukeException If input is invalid.
+     * @throws EmptyTaskDukeException If task is invalid.
+     */
     private static Task createTaskFromInput(String[] inputArray) throws InvalidTaskDukeException, EmptyTaskDukeException {
         Task createdTask = null;
         switch(inputArray[0]) {
@@ -73,6 +99,11 @@ public class Storage {
         return createdTask;
     }
 
+    /**
+     * Abstraction used to generate String line from Task to save to disk.
+     * @param task Task from TaskList.
+     * @return String output of Task for saving to disk.
+     */
     private static String generateLineFromTask(Task task) {
         StringBuilder stringBuilder = new StringBuilder();
 

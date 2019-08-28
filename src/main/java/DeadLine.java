@@ -1,11 +1,11 @@
-public class DeadLine extends Task{
-    private String time;
+public class DeadLine extends Task {
+
     public DeadLine(String s, String t) {
-        super(s);
-        this.time = t;
+        super(s, t);
+        this.label = "D";
     }
 
     public String toString() {
-        return "[D]" + this.getStatusIcon() + this.description + " (by: " + this.time + ")";
+        return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (by: " + this.time + ")";
     }
 }

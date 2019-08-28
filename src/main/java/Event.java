@@ -1,11 +1,11 @@
 public class Event extends Task {
-    private String time;
+
     public Event(String s, String t) {
-        super(s);
-        this.time = t;
+        super(s, t);
+        this.label = "E";
     }
 
     public String toString() {
-        return "[E]" + this.getStatusIcon() + this.description + " (at: " + this.time + ")";
+        return "[" + this.label + "]" + this.getStatusIcon() + this.description + " (at: " + this.time + ")";
     }
 }

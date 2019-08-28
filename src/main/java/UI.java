@@ -1,10 +1,17 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UI {
-    //dialog
-    public UI() {
+    protected Scanner sc;
 
+    public UI() {
+        this.sc = sc;
     }
+
+    public String readCommand() {
+        sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+
     public void printGreeting() {
         String logo = "   _     _      _     _      _     _       _     _      _     _      _     _      _     _   \n" +
                 "  (c).-.(c)    (c).-.(c)    (c).-.(c)     (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)  \n" +
@@ -40,11 +47,12 @@ public class UI {
         System.out.println("____________________________________________________________\n");
     }
 
-    public void printList(ArrayList<Task> TaskList) {
+    public void printList(TaskList taskList) {
         System.out.println("____________________________________________________________\n" +
                 "Here are the tasks in your list:");
         int count = 1;
-        for (Task t : TaskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
             System.out.println(count + "." + t.toString());
             count++;
         }

@@ -3,13 +3,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 public class Storage {
 
-    protected ArrayList<Task> taskList;
+    protected TaskList taskList;
 
-    public Storage(ArrayList<Task> taskList){
+    public Storage(TaskList taskList){
         this.taskList = taskList;
     }
 
@@ -51,7 +50,8 @@ public class Storage {
 
     public void UpdateFile() throws IOException {
         try (PrintStream out = new PrintStream(new FileOutputStream("TaskList.txt"))) {
-            for (Task t : taskList) {
+            for (int i = 0; i < taskList.size(); i++) {
+                Task t = taskList.get(i);
                 if (t.getType().equals("todo")) {
                     out.print(t.getType() + "`" + t.getStatusIcon() + "`" + t.getDescription() + "`" + "\n" );
                 } else {

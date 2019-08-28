@@ -1,6 +1,8 @@
-package duke;
+package duke.command;
 
-import duke.command.Command;
+import duke.Storage;
+import duke.TaskList;
+import duke.UI;
 
 public class ListCommand extends Command {
     public ListCommand(String taskInformation) {

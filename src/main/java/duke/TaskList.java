@@ -15,7 +15,7 @@ public class TaskList {
 
     public TaskList(Storage storage) {
         this.taskList = new ArrayList<>();
-        ui = new UI(this, storage);
+        this.ui = new UI(this, storage);
     }
 
     public TaskList(List taskList, UI ui) {
@@ -24,12 +24,11 @@ public class TaskList {
     }
 
 
-    public void addTask(Task t, boolean printMessage) throws DukeException {
+    public void addTask(Task t, boolean printMessage) throws EmptyTodoTextException {
         if (t.getTaskName().isBlank()) throw new EmptyTodoTextException("The description of a todo cannot be empty");
         taskList.add(t);
         if (printMessage) ui.printAddTaskMessage(t);
     }
-
 
     public void printTasks() {
        ui.printTasks();
@@ -43,7 +42,9 @@ public class TaskList {
         if (printMessage) ui.printMarkTaskAsCompletedMessage(t);
     }
 
-    public void deleteTask(int taskNumber, boolean printMessage) {
+    public void deleteTask(int taskNumber, boolean printMessage) throws TaskDoesNotExistException {
+        if (taskNumber > taskList.size()) throw new TaskDoesNotExistException("Task not found");
+
         Task t = taskList.get(taskNumber - 1);
         taskList.remove(t);
         if (printMessage) ui.printDeleteTaskMessage(t);
@@ -52,9 +53,6 @@ public class TaskList {
     public List<Task> getList() {
         return taskList;
     }
-
-
-
 
 
 }

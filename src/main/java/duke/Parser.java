@@ -18,6 +18,8 @@ public class Parser {
                     return new ListCommand(commandInformation);
                 case "done":
                     return new MarkAsDoneCommand(commandInformation);
+                case "delete":
+                    return new DeleteTaskCommand(commandInformation);
                 case "todo":
                     return new CreateTodoCommand(commandInformation);
                 case "deadline":

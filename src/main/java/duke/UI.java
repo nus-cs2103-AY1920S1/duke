@@ -19,11 +19,12 @@ public class UI {
         this.storage = storage;
     }
 
+
     public void sayBye() {
         System.out.println("\t Bye. Hope to see you again soon!");
     }
 
-   public void sayHi() {
+    public void sayHi() {
         System.out.println("\t Hello! I'm Duke.");
 
         try {
@@ -49,10 +50,10 @@ public class UI {
         }
         printTasks();
         printLine();
-   }
+    }
 
 
-   public static void printLine() {
+    public static void printLine() {
         System.out.println("\t_______________________________");
     }
 
@@ -80,7 +81,7 @@ public class UI {
 
     public void printMarkTaskAsCompletedMessage(Task t) {
         System.out.println("\t Nice! I've marked this task as done: \n" +
-                "\t  [✓] " + t.getTaskName() + " " + t.getDetails() );
+                "\t  [✓] " + t.getTaskName() + " " + t.getDetails());
     }
 
     public void printDeleteTaskMessage(Task t) {

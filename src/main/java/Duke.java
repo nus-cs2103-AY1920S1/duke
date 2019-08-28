@@ -2,7 +2,6 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Iterator;
 
 enum TaskType {
     TODO,
@@ -10,7 +9,8 @@ enum TaskType {
     DEADLINE,
     LIST,
     DONE,
-    BYE
+    BYE,
+    DELETE
 }
 
 class UnknownInputException extends Exception {
@@ -37,6 +37,9 @@ class BadInputException extends Exception {
         case DONE:
             i = "done";
             break;
+        case DELETE:
+            i = "delete";
+            break;
         }
         System.out.println("    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! The description of a " + i + " cannot be empty.\n" +
@@ -58,12 +61,10 @@ public class Duke {
                     throw new UnknownInputException();
                 }
                 TaskType taskType = user.getTaskType();
-                if (user.OneWordNotBye()) {             //does not isnclude bye
+                if (user.OneWordNotBye()) {
                     TaskType temp = user.getTaskType();
                     throw new BadInputException(temp);
                 }
-
-                //then, check if there is stuff after the task type.
 
                 switch (taskType) {
                 case TODO:
@@ -76,6 +77,9 @@ public class Duke {
                     break;
                 case LIST:
                     user.printUserInputs();
+                    break;
+                case DELETE:
+                    user.deleteTask();
                     break;
                 case BYE:
                     break;
@@ -227,6 +231,9 @@ class User {
         case "bye":
             this.currentTaskType = TaskType.BYE;
             break;
+        case "delete":
+            this.currentTaskType = TaskType.DELETE;
+            break;
         default:
             return false; //invalid task
         }
@@ -261,10 +268,7 @@ class User {
             break;
         }
 
-        //j = j.replaceAll("\\s+","");
-        this.addTaskCount();
-
-        Iterator<Task> Iterator = userTasks.iterator();
+        this.increaseTaskCount();
 
         int i = 1;
         for (Task task : userTasks) {
@@ -283,7 +287,8 @@ class User {
     public int getTaskCount() {
         return this.numOfTasks;
     }
-    private void addTaskCount() {
+
+    private void increaseTaskCount() {
         this.numOfTasks++;
     }
 
@@ -325,7 +330,7 @@ class User {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
         for (Task temp : userTasks) {
-            System.out.println("    " + count + ".[" + temp.getTaskTypeLetter() + "]"
+            System.out.println("       " + count + ".[" + temp.getTaskTypeLetter() + "]"
                     + "[" + temp.getStatusIcon() + "] " + temp.getDescription());
             count++;
         }
@@ -334,6 +339,31 @@ class User {
 
     public TaskType getTaskType () {
         return this.currentTaskType;
+    }
+
+    public void deleteTask() {
+        /*print task, delete task, decrease task count, then declare new task count. */
+        String j = this.getCurrentInput();
+        int taskNum = Integer.parseInt(j.substring(j.indexOf(" ")+ 1)) - 1;
+        System.out.println("    ____________________________________________________________\n"
+                + "     Noted. I've removed this task: ");
+        int count = 0;
+        for (Task temp : userTasks) {
+            if (count == taskNum) {
+                System.out.println("       " + "[" + temp.getTaskTypeLetter() + "]"
+                        + "[" + temp.getStatusIcon() + "] " + temp.getDescription());
+            }
+            count++;
+        }
+
+        userTasks.remove(taskNum);
+        this.decreaseTaskCount();
+        System.out.println("     Now you have " + this.getTaskCount() + " tasks in the list.\n" +
+                "    ____________________________________________________________");
+    }
+
+    public int getNumOfTasks() {
+        return numOfTasks;
     }
 
     public String getCurrentInput () {

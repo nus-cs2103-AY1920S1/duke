@@ -7,17 +7,15 @@ import seedu.duke.exceptions.EmptyDeadlineDescException;
 import seedu.duke.exceptions.EmptyEventArgException;
 import seedu.duke.exceptions.EmptyEventDescException;
 import seedu.duke.exceptions.EmptyTodoDescException;
+import seedu.duke.exceptions.TaskDoesNotExistException;
 import seedu.duke.exceptions.TaskNotSpecifiedException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.exceptions.TaskDoesNotExistException;
-
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -33,82 +31,82 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
 
-    private static final String INDENT = "     ";
-
-    private Scanner sc;
     private TaskList taskList;
 
-    Parser(Scanner sc, Storage storage) {
-        this.sc = sc;
+    Parser(Storage storage) {
         taskList = new TaskList(storage);
         taskList.addAll(storage.load());
     }
 
     /**
      * Processes the command and execute it.
-     * @param command The command.
-     * @return -1 if command is an exit command, 0 otherwise.
+     * @param input The user input
+     * @return The response. If the program is to be finished, returns null.
      */
-    int process(String command) {
-        if (command.length() == 0) {
-            return 0;
+    String process(String input) {
+        input = input.trim();
+        if (input.length() == 0) {
+            return "Yo say something...";
         }
         try {
+            String[] strs = input.split(" ", 2);
+            String command = strs[0];
+            String arg = "";
+            if (strs.length > 1) { // there are more words
+                arg = strs[1].trim();
+            }
             switch (command) {
             case TODO_COMMAND:
-                addTodo(sc.nextLine());
-                break;
+                return addTodo(arg);
             case DEADLINE_COMMAND:
-                addDeadline(sc.nextLine());
-                break;
+                return addDeadline(arg);
             case EVENT_COMMAND:
-                addEvent(sc.nextLine());
-                break;
+                return addEvent(arg);
             case BYE_COMMAND:
-                return -1;
+                return null;
             case LIST_COMMAND:
-                list();
-                break;
+                return list();
             case DONE_COMMAND:
-                done(sc.nextLine().trim());
-                break;
+                return done(arg);
             case DELETE_COMMAND:
-                delete(sc.nextLine().trim());
-                break;
+                return delete(arg);
             case FIND_COMMAND:
-                find(sc.nextLine().trim());
-                break;
+                return find(arg);
             default:
                 throw new UnknownCommandException();
             }
         } catch (DukeException e) {
-            print(e.toString());
+            return e.toString();
         }
-        return 0;
     }
 
     /**
      * Finds and lists the tasks containing <code>keyword</code>.
      * @param keyword The keyword to find.
+     * @return The response.
      */
-    private void find(String keyword) {
+    private String find(String keyword) {
         List<Task> list = taskList
                 .stream()
                 .filter(x -> x.getDescription().contains(keyword))
                 .collect(Collectors.toList());
-        print("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < list.size(); ++i) {
-            print((i + 1) + ". " + list.get(i));
+            String info = (i + 1) + ". " + list.get(i) + "\n";
+            sb.append(info);
         }
+        return sb.toString();
     }
 
     /**
      * Marks a task as done.
      * @param s The index of the task to be marked as done, represented as a String
+     * @return The response.
      * @throws DukeException If <code>s</code> cannot be parsed to an Integer, or if the integer as an index is not
      *         within the <code>TaskList</code> bound.
      */
-    private void done(String s) throws DukeException {
+    private String done(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
                 throw new TaskNotSpecifiedException();
@@ -117,8 +115,11 @@ public class Parser {
             Task task = taskList.get(i);
             task.markAsDone();
             taskList.notifyChange();
-            print("Nice! I've marked this task as done:");
-            print("  " + task.toString());
+            StringBuilder sb = new StringBuilder();
+            sb.append("Nice! I've marked this task as done:\n");
+            String taskString = "  " + task.toString() + "\n";
+            sb.append(taskString);
+            return sb.toString();
         } catch (NumberFormatException e) {
             throw new ArgumentNotNumberException();
         } catch (IndexOutOfBoundsException e) {
@@ -129,10 +130,11 @@ public class Parser {
     /**
      * Deletes a task.
      * @param s The index of the task to be deleted, represented as a String.
+     * @return The response.
      * @throws DukeException If <code>s</code> cannot be parsed to an Integer, or if the integer as an index is not
      *         within the <code>TaskList</code> bound.
      */
-    private void delete(String s) throws DukeException {
+    private String delete(String s) throws DukeException {
         try {
             if (s.isEmpty()) {
                 throw new TaskNotSpecifiedException();
@@ -140,9 +142,12 @@ public class Parser {
             int i = Integer.parseInt(s);
             Task task = taskList.get(i);
             taskList.remove(i);
-            print("Noted. I've removed this task:");
-            print("  " + task.toString());
-            printListSize();
+            StringBuilder sb = new StringBuilder();
+            sb.append("Noted. I've removed this task:\n");
+            String taskString = "  " + task.toString() + "\n";
+            sb.append(taskString);
+            sb.append(getListSizeMsg());
+            return sb.toString();
         } catch (NumberFormatException e) {
             throw new ArgumentNotNumberException();
         } catch (IndexOutOfBoundsException e) {
@@ -152,36 +157,41 @@ public class Parser {
 
     /**
      * Lists all the tasks.
+     * @return The list.
      */
-    private void list() {
-        print("Here are the tasks in your list:");
+    private String list() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.size(); ++i) {
-            print(i + ". " + taskList.get(i));
+            String info = i + ". " + taskList.get(i) + "\n";
+            sb.append(info);
         }
+        return sb.toString();
     }
 
     /**
      * Adds a Todo to the list of tasks.
      * @param desc The description of the todo
+     * @return The response.
      * @throws DukeException If <code>desc</code> is empty.
      */
-    private void addTodo(String desc) throws DukeException {
+    private String addTodo(String desc) throws DukeException {
         if (desc.isEmpty()) {
             throw new EmptyTodoDescException();
         }
         Task task = new Todo(desc);
         taskList.add(task);
-        printAdded(task);
-
+        return getAddedMsg(task);
     }
 
     /**
      * Adds a Deadline to the list of tasks.
      * @param desc The description of the Deadline
+     * @return The response.
      * @throws DukeException If <code>desc</code> is empty, or does not contain the second argument separated by
      *         the regex "/by"
      */
-    private void addDeadline(String desc) throws DukeException {
+    private String addDeadline(String desc) throws DukeException {
         try {
             if (desc.isEmpty()) {
                 throw new EmptyDeadlineDescException();
@@ -189,7 +199,7 @@ public class Parser {
             String[] strs = desc.split(Deadline.REGEX);
             Task task = new Deadline(strs[0], strs[1]);
             taskList.add(task);
-            printAdded(task);
+            return getAddedMsg(task);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDeadlineArgException();
         }
@@ -198,10 +208,11 @@ public class Parser {
     /**
      * Adds an Event to the list of tasks.
      * @param desc The description of the Deadline
+     * @return The response.
      * @throws DukeException If <code>desc</code> is empty, or does not contain the second argument separated by
      *         the regex "/at"
      */
-    private void addEvent(String desc) throws DukeException {
+    private String addEvent(String desc) throws DukeException {
         try {
             if (desc.isEmpty()) {
                 throw new EmptyEventDescException();
@@ -209,23 +220,20 @@ public class Parser {
             String[] strs = desc.split(Event.REGEX);
             Task task = new Event(strs[0], strs[1]);
             taskList.add(task);
-            printAdded(task);
+            return getAddedMsg(task);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyEventArgException();
         }
     }
 
-    private void printAdded(Task task) {
-        print("Got it. I've added this task: ");
-        print("  " + task);
-        printListSize();
+    private String getAddedMsg(Task task) {
+        String taskString = "  " + task + "\n";
+        return "Got it. I've added this task:\n"
+                + taskString
+                + getListSizeMsg();
     }
 
-    private void print(String s) {
-        System.out.println(INDENT + s);
-    }
-
-    private void printListSize() {
-        print("Now you have " + taskList.size() + " tasks in the list.");
+    private String getListSizeMsg() {
+        return "Now you have " + taskList.size() + " tasks in the list.\n";
     }
 }

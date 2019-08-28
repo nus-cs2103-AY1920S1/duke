@@ -108,6 +108,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds the existing list for tasks that have matching keywords.
+     *
+     * @param keyword that the user wants to find tasks with common word.
+     * @return a list of tasks that have the common keyword.
+     */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> list = new ArrayList<>();
         for(Task current : this.list) {

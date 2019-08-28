@@ -4,13 +4,19 @@ public class Event extends Task{
     public Event(String description, String atDateTime) {
         super(description);
         this.atDateTime = atDateTime;
+        this.taskType = TaskType.EVENT;
     }
 
     public String getAtDateTime() {
         return atDateTime;
     }
 
-
+    @Override
+    public String toSaveString() {
+        String saveString = super.toSaveString() + "@@@" + this.getAtDateTime();
+        return saveString;
+    }
+    
     @Override
     public String toString() {
         String str = "["

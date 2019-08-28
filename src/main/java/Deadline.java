@@ -12,4 +12,9 @@ public class Deadline extends Task{
         return String.format("%s (by: %s)", super.toString(), time);
     }
 
+    @Override
+    public String toFile() {
+        String doneState = isDone ? "1" : "0";
+        return String.format("%s //| %s //| %s //| %s", type, doneState, description, time);
+    }
 }

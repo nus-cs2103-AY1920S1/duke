@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,14 +20,57 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println("____________________________________________________________");
 
-        Scanner scanner = new Scanner(System.in);
+
+
+
         try {
+            File f = new File("data/fruits.txt");
+            if (!f.exists()) {
+                throw new DukeException("File not found.");
+            }
+
+            Scanner readFileScanner = new Scanner(f);
+            while(readFileScanner.hasNext()) {
+                String[] todoTask = readFileScanner.nextLine().split(" \\| ");
+                switch (todoTask[0]) {
+                    case "T":
+                        Task task = new Todo(todoTask[2]);
+                        if (todoTask[1] == "1") {
+                            task.markAsDone();
+                        }
+                        todolist.add(task);
+                        break;
+                    case "D":
+                        Task task = new Deadline(todoTask[2], todoTask[3]);
+                        if (todoTask[1] == "1") {
+                            task.markAsDone();
+                        }
+                        todolist.add(task);
+                        break;
+                    case "E":
+                        Task task = new Event(todoTask[2], todoTask[3]);
+                        if (todoTask[1] == "1") {
+                            task.markAsDone();
+                        }
+                        todolist.add(task);
+                        addTask(task);
+                        break;
+                    default:
+                        throw new DukeException("Something in file go wrong.");
+                }
+            }
+            readFileScanner.close();
+
+
+            Scanner scanner = new Scanner(System.in);
+
             while (scanner.hasNext()) {
                 String request = scanner.nextLine();
 
                 System.out.println("____________________________________________________________");
                 if (request.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
+                    saveFile();
                     System.out.println("____________________________________________________________");
                     return;
                 } else if (request.equals("list")) {
@@ -89,7 +136,7 @@ public class Duke {
                 System.out.println("____________________________________________________________");
             }
 
-        } catch (DukeException exception) {
+        } catch (DukeException | FileNotFoundException exception) {
             System.out.println(exception.toString());
         }
     }
@@ -104,5 +151,22 @@ public class Duke {
         System.out.println("Noted. I've removed this task:");
         System.out.println(String.format("  %s", task.toString()));
         System.out.println(String.format("Now you have %d tasks in the list.", todolist.size()));
+    }
+
+    private static void saveFile() throws DukeException {
+        try {
+            FileWriter fw = new FileWriter("../data/duke.txt");
+            String data = todolist.get(0).toFile();
+            if (todolist.size() > 1) {
+                for (int i = 1; i < todolist.size(); i++) {
+                    data = data + System.lineSeparator() + todolist.get(i).toFile();
+                }
+            }
+            fw.write(data);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("No such file.");
+        }
+
     }
 }

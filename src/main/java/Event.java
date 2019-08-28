@@ -11,4 +11,10 @@ public class Event extends Task {
     public String toString() {
         return String.format("%s (at: %s)", super.toString(), time);
     }
+
+    @Override
+    public String toFile() {
+        String doneState = isDone ? "1" : "0";
+        return String.format("%s //| %s //| %s //| %s", type, doneState, description, time);
+    }
 }

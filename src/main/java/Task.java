@@ -5,7 +5,6 @@ public abstract class Task {
 
         public Task(String description) {
             this.description = description;
-            this.isDone = false;
         }
 
         public String getStatusIcon() {
@@ -19,6 +18,11 @@ public abstract class Task {
         @Override
         public String toString() {
             return String.format("[%s][%s] %s", type, getStatusIcon(), description);
+        }
+
+        public String toFile() {
+            String doneState = isDone ? "1" : "0";
+            return String.format("%s //| %s //| %s", type, doneState, description);
         }
 }
 

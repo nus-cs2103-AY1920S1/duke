@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("./data/duke.txt");
+    private DukeGui duke = new DukeGui("./data/duke.txt");
 
     @Override
     public void start(Stage stage) {

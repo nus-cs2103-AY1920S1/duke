@@ -11,7 +11,7 @@ public class Ui {
     private static final Pattern LINE_START_PATTERN = Pattern.compile("^", Pattern.MULTILINE);
 
     private final Scanner scanner;
-    private final PrintStream output = System.out;
+    protected PrintStream output = System.out;
 
     Ui() {
         scanner = new Scanner(System.in);

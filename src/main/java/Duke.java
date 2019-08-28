@@ -2,9 +2,9 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 public class Duke {
-    private final Storage storage;
-    private final Ui ui;
-    private TaskList tasks;
+    protected Storage storage;
+    protected Ui ui;
+    protected TaskList tasks;
 
     /**
      * Creates a new Duke instance which will load and save Tasks to the provided filePath.
@@ -15,16 +15,10 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(Path.of(filePath));
+        loadStoreFromFile(filePath);
+    }
 
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileIoException | TokenParseError exc) {
-            if (!(exc.getCause() instanceof NoSuchFileException)) {
-                ui.displayLoadingError(exc);
-            }
-            tasks = new TaskList();
-        }
+    protected Duke() {
     }
 
     public static void main(String[] args) {
@@ -36,6 +30,10 @@ public class Duke {
      * executing those commands, and displaying errors if necessary.
      */
     public void run() {
+        if (storage == null) {
+            throw new IllegalStateException("loadStoreFromFile() needs to be called first");
+        }
+
         ui.displayWelcome();
 
         boolean isDone = false;
@@ -48,6 +46,23 @@ public class Duke {
             } catch (DukeException exc) {
                 ui.displayError(exc);
             }
+        }
+    }
+
+    protected void loadStoreFromFile(String filePath) {
+        if (ui == null) {
+            throw new IllegalStateException("ui must be assigned to display loading errors if needed");
+        }
+
+        storage = new Storage(Path.of(filePath));
+
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileIoException | TokenParseError exc) {
+            if (!(exc.getCause() instanceof NoSuchFileException)) {
+                ui.displayLoadingError(exc);
+            }
+            tasks = new TaskList();
         }
     }
 }

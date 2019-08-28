@@ -8,6 +8,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns a string that represents deadline that can be input into the txt file.
+     * This method transforms the task into the specific format for the txt file
+     * @return the data for this task
+     */
     public String getData() {
         return "E" + "|" +
                 (isDone ? "1" : "0") + "| " + description + "| " + this.at;

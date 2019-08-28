@@ -39,6 +39,10 @@ public class TaskList {
         taskArrayList.add(task);
     }
 
+    /**
+     * Returns the taskArrayList that is an attribute of this specific TaskList Object
+     * @return a ArrayList<Task>
+     */
     public ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
     }

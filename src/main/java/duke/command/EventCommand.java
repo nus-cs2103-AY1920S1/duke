@@ -15,6 +15,15 @@ public class EventCommand extends Command {
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
+    /**
+     * Creates new deadline task using a TaskList, Ui and Storage, it will then be added into the taskArrayList that
+     * was loaded into the TaskList as param.
+     * @param tasks the TaskList to be used
+     * @param ui the Ui to be used
+     * @param storage the Storage to be used
+     * @throws DukeException
+     * @throws ParseException if the date is not able to be parsed
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException{
         ui.showLine();
         int end = ui.getRemainingWords().indexOf('/');
@@ -38,6 +47,10 @@ public class EventCommand extends Command {
         }
     }
 
+    /**
+     * Returns true or false regarding whether this method will end the while loop in the duke method run()
+     * @return false or true
+     */
     public boolean isExit() {
         return false;
     }

@@ -30,6 +30,11 @@ public class Storage {
         return taskArrayList;
     }
 
+    /**
+     * Reads the txt file that is read by the FileReader. For every single task in the
+     * file, it adds them into the taskArrayList and updates the list every time the program
+     * is loaded
+     */
     public void readData() {
         try {
             FileReader fileReader = new FileReader("/Users/lawnce/Desktop/duke/data/duke.txt");
@@ -48,6 +53,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes data into the txt file whenever the task list changes
+     */
     public void writeData() {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/Users/lawnce/Desktop/duke/data/duke.txt"));
@@ -61,6 +69,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates specific task based on the command word scanned from user input. Used in the readData()
+     * method to read the txt file and add the lines of String as tasks
+     * @param text user input
+     * @return task that will be added into the taskArrayList
+     */
     public Task createTask(String text) {
         String[] splitWords = text.split("\\|");
         if (splitWords[0].equals("T")) {

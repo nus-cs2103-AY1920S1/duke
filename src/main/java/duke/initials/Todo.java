@@ -6,6 +6,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Returns a string that represents deadline that can be input into the txt file.
+     * This method transforms the task into the specific format for the txt file
+     * @return the data for this task
+     */
     public String getData() {
         return "T" + "|" +
                 (isDone ? "1" : "0") + "| " + description;

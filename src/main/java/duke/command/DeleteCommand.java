@@ -8,6 +8,14 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
 
+    /**
+     * Creates new deadline task using a TaskList, Ui and Storage, it will then be added into the taskArrayList that
+     * was loaded into the TaskList as param.
+     * @param tasks the TaskList to be used
+     * @param ui the Ui to be used
+     * @param storage the Storage to be used
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (ui.getRemainingWords().isEmpty()) {
@@ -21,6 +29,10 @@ public class DeleteCommand extends Command {
         System.out.println("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list");
     }
 
+    /**
+     * Returns true or false regarding whether this method will end the while loop in the duke method run()
+     * @return false or true
+     */
     @Override
     public boolean isExit() {
         return false;

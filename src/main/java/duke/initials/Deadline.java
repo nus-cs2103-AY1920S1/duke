@@ -8,6 +8,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns a string that represents deadline that can be input into the txt file.
+     * This method transforms the task into the specific format for the txt file
+     * @return the data for this task
+     */
     public String getData() {
         return "D" + "|" +
                 (isDone ? "1" : "0") + "| " + description + "| " + this.by;

@@ -1,3 +1,0 @@
-list
-event return book /at 02/12/2019 1900
-bye

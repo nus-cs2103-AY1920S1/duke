@@ -10,4 +10,8 @@ public class UI {
     public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
+    public void showLoadingError() {
+        System.out.println("Error, file not found");
+    }
 }

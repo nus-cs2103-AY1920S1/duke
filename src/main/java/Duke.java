@@ -1,16 +1,22 @@
-import java.io.*;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public ArrayList<Task> tasks = new ArrayList<>();
-    public Storage storage;
-    public UI ui;
+    private ArrayList<Task> tasks;
+    private Storage storage;
+    private UI ui;
 
-    public Duke() {
-        storage = new Storage(tasks);
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         ui = new UI();
+        try {
+            tasks = storage.load();
+        } catch (IOException e) {
+            ui.showLoadingError();
+            tasks = new ArrayList<>();
+        }
     }
 
 
@@ -60,22 +66,23 @@ public class Duke {
 
     public void run() {
         ui.greet();
-        storage.readData();
     }
 
     public void end() {
         ui.bye();
-        storage.readData();
+        storage.rewriteData();
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("C:\\Users\\hooncp\\Desktop\\duke\\data\\daata.txt");
         duke.run();
 
         Scanner scanner = new Scanner(System.in);
-        String command = scanner.nextLine();
-
-        while (!command.equalsIgnoreCase("bye")) {
+        String command = "";
+        if (scanner.hasNextLine()) {
+            command = scanner.nextLine();
+        }
+        while (!command.equals("") && !command.equalsIgnoreCase("bye")) {
             try {
                 if (command.equalsIgnoreCase("list")) {
                     duke.list();
@@ -128,6 +135,5 @@ public class Duke {
             command = scanner.nextLine();
         }
         duke.end();
-
     }
 }

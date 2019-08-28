@@ -2,15 +2,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private String filePath;
 
-    public Storage(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public void readData() {
+    public ArrayList<Task> load() throws IOException{
         try {
-            File file = new File("C:\\Users\\hooncp\\Desktop\\duke\\data\\data.txt");
+            File file = new File(filePath);
             BufferedReader in = new BufferedReader(new FileReader(file));
             String line;
             while ((line = in.readLine()) != null) {
@@ -24,11 +25,13 @@ public class Storage {
                 } else {
                     t = new Event(data[2], data[3], changeStringToBoolean(data[1]));
                 }
-                    tasks.add(t);
+                tasks.add(t);
             }
             in.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        } finally {
+            System.out.println("Attempting to load from: " + filePath);
+            return tasks;
+
         }
     }
 
@@ -38,7 +41,7 @@ public class Storage {
 
     public void rewriteData() {
         try {
-            FileWriter fw = new FileWriter("C:\\Users\\hooncp\\Desktop\\duke\\data\\data.txt");
+            FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks) {
                 fw.write(t.toDataString() + "\n");
             }

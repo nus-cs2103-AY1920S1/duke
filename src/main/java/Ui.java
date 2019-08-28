@@ -1,11 +1,10 @@
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class Ui {
-    public final String indent = "    ";
-    Scanner sc = new Scanner(System.in);
+    private final String indent = "    ";
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Prints welcome message.
@@ -107,6 +106,14 @@ public class Ui {
      */
     public void showGenericError() {
         String output = " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        System.out.println(indent(wrapWithHorizontalLines(output)));
+    }
+
+    /**
+     * Prints message if no save file is detected.
+     */
+    public void showSaveFileNotFoundError() {
+        String output = "Save file not found. Creating new save file...";
         System.out.println(indent(wrapWithHorizontalLines(output)));
     }
 

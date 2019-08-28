@@ -18,6 +18,8 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (FileNotFoundException ignore) {
+            // Make use of default created empty TaskList if no save file is found
+            ui.showSaveFileNotFoundError();
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
@@ -48,6 +50,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("/home/yuan/cs2103t/duke/data/duke.txt").run();
+        new Duke("./data/duke.txt").run();
     }
 }

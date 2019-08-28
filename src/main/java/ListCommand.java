@@ -11,10 +11,10 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Displays the task list
-     * @param tasks
-     * @param ui
-     * @param storage
+     * Displays the task list.
+     * @param tasks a TaskList that stores the list of tasks
+     * @param ui a TaskList that stores the list of tasks
+     * @param storage Storage object to save task changes to text file
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskList = tasks.getTaskList();

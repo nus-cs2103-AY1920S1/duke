@@ -4,6 +4,11 @@
 public class Deadline extends Task {
     DateTime deadline;
 
+    /**
+     * Constructor for Deadline class.
+     * @param description Task description
+     * @param deadline a String representing the deadline
+     */
     public Deadline(String description, String deadline) {
         super(description);
         this.typeOfTask = "[D]";

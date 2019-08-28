@@ -3,6 +3,10 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructor for Duke object.
+     * @param filePath file path of text file that stores tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -13,6 +17,9 @@ public class Duke {
         new Duke("//Users//chowjiaying//Github//2103T-iP//duke//data//duke.txt").run();
     }
 
+    /**
+     * Method that runs the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -10,13 +10,17 @@ public class Ui {
     private static final String LINE = "    ____________________________________________________________";
     private static final String TABS = "     ";
     private Scanner scanner;
+
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints a welcome message.
+     */
     public void showWelcome() {
         System.out.println(LINE);
-        System.out.println(TABS + "Hello! I'm Duke\n"+ TABS +"What can I do for you?");
+        System.out.println(TABS + "Hello! I'm Duke\n" + TABS + "What can I do for you?");
         System.out.println(LINE);
     }
 
@@ -32,11 +36,18 @@ public class Ui {
         System.out.println(TABS + "Noted. I've removed this task: ");
     }
 
+    /**
+     * Prints the addition message when a task is added.
+     */
     public void showAddMessage() {
         System.out.println(TABS + "Got it. I've added this task: ");
     }
 
-    public void showNumberOfTasks(Integer numberOfTasks){
+    /**
+     * Prints the number of tasks in the task list.
+     * @param numberOfTasks number of tasks in task list
+     */
+    public void showNumberOfTasks(Integer numberOfTasks) {
         if (numberOfTasks == 1) {
             System.out.printf("%sNow you have %d task in the list.\n", TABS, numberOfTasks);
         } else {
@@ -52,6 +63,10 @@ public class Ui {
         System.out.println(TABS + "Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays the task list.
+     * @param taskList the task list to be displayed
+     */
     public void showTaskList(ArrayList<Task> taskList) {
         System.out.println(TABS + "Here are the tasks in your list:");
         Integer index = 1;
@@ -61,11 +76,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a DukeException.
+     * @param message exception message to be displayed
+     */
     public void showError(String message) {
         System.out.println(LINE);
         System.out.println(TABS + "☹ OOPS!!! " + message);
         System.out.println(LINE);
     }
+
     public String readCommand() {
         String userCommand = scanner.nextLine();
         return userCommand;

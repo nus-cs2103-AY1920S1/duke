@@ -1,5 +1,5 @@
 /**
- * Storage deals with loading tasks from a file and saving tasks to the file
+ * Storage deals with loading tasks from a file and saving tasks to the file.
  */
 
 import java.io.File;
@@ -17,7 +17,7 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from specified file
+     * Loads tasks from specified file.
      * @return ArrayList containing tasks saved in specified file
      */
     public ArrayList<Task> load() {
@@ -40,7 +40,7 @@ public class Storage {
     }
 
     /**
-     * Parses text file contents to a Task object
+     * Parses text file contents to a Task object.
      * @param task String representation of task
      * @return Task object representing task
      */
@@ -66,8 +66,8 @@ public class Storage {
     }
 
     /**
-     * Writes tasks to the file
-     * @param taskList
+     * Writes tasks to the file.
+     * @param taskList TaskList containing tasks to write to file
      */
     public void writeTaskToFile(TaskList taskList) {
         try {

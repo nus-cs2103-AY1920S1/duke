@@ -3,6 +3,12 @@
  */
 public class Event extends Task {
     DateTime at;
+
+    /**
+     * Constructor for Events.
+     * @param description Event description
+     * @param at String representation of date of event
+     */
     public Event(String description, String at) {
         super(description);
         this.typeOfTask = "[E]";

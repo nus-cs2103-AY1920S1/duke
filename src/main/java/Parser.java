@@ -4,10 +4,10 @@
 public class Parser {
 
     /**
-     * Parses user input and returns the relevant command to be executed in the main message
-     * @param command
+     * Parses user input and returns the relevant command to be executed in the main message.
+     * @param command user command
      * @return Command to be executed in main message
-     * @throws DukeException
+     * @throws DukeException when the user input is not understood
      */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {

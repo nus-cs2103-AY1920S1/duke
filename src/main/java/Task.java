@@ -1,5 +1,5 @@
 /**
- * A base class that Deadline, Event, and ToDo inherit from
+ * A base class that Deadline, Event, and ToDo inherit from.
  */
 public class Task {
     String description;
@@ -12,7 +12,7 @@ public class Task {
     }
 
     /**
-     * Marks the current Task as done
+     * Marks the current Task as done.
      */
     public void markAsDone() {
         isDone = true;

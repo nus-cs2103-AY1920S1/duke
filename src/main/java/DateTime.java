@@ -2,8 +2,8 @@
  * DateTime represents dates specified in Deadlines and Event Tasks.
  */
 public class DateTime {
-    private static final String[] MONTHS_OF_YEAR = {"January", "February", "March", "April", "May",
-            "June", "July", "August", "September", "October", "November", "December"};
+    private static final String[] MONTHS_OF_YEAR = {"January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"};
 
     private Integer day;
     private Integer month;
@@ -12,12 +12,16 @@ public class DateTime {
     private Integer minutes;
     private String rawForm;
 
+    /**
+     * Constructor for a DateTime object.
+     * Parses String representation of date and stores its components.
+     * @param date String representing a date
+     */
     public DateTime(String date) {
         rawForm = date;
         String[] dateComponents = date.split(" ");
         
         String dayComponent = dateComponents[0];
-        String timeComponent = dateComponents[1];
 
         //Parsing the dayComponent, example: 2/05/2019
         String[] componentsOfDate = dayComponent.split("/");
@@ -26,6 +30,7 @@ public class DateTime {
         this.year = Integer.parseInt(componentsOfDate[2]);
 
         //Parsing the timeComponent, example: 1800
+        String timeComponent = dateComponents[1];
         String hoursString = timeComponent.substring(0, 2);
         String minutesString = timeComponent.substring(2);
         this.hours = Integer.parseInt(hoursString);
@@ -37,8 +42,8 @@ public class DateTime {
     }
 
     /**
-     * Adds the "st", "nd", "rd" ordinals based on numerical value of day
-     * @param day
+     * Adds the "st", "nd", "rd" ordinals based on numerical value of day.
+     * @param day a number representing which day of the month it is
      * @return String with an ordinal appended to the day, eg '13th'
      */
 
@@ -57,9 +62,9 @@ public class DateTime {
     }
 
     /**
-     * Converts 24H timing to 12H timing
-     * @param hours
-     * @param minutes
+     * Converts 24H timing to 12H timing.
+     * @param hours Hours of the time
+     * @param minutes minutes of the time
      * @return a String representing 12H timing
      */
     public String to12HourTime(Integer hours, Integer minutes) {

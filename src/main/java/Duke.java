@@ -16,7 +16,6 @@ public class Duke {
     public static String frontSpace = "    ";
 
     public static void childFeature() throws DukeException {
-
         System.out.print(frontSpace + upperLine);
         String description;
         String time_date;
@@ -72,7 +71,7 @@ public class Duke {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length == 2 && !oneLine[1].isBlank()
-            && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
+                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
 
             int i = Integer.parseInt(oneLine[1].trim());
             if (i <= myList.size() && i > 0) {
@@ -101,7 +100,7 @@ public class Duke {
         if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
             throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
         } else if (oneLine.length != 1 && !oneLine[1].isBlank()
-            && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
+                && oneLine[1].trim().split(" ").length == 1 && isNumeric(oneLine[1].trim())) {
             int i = Integer.parseInt(oneLine[1].trim());
             if (i <= myList.size() && i > 0) {
                 System.out.println(frontSpace + deleteMessage1);
@@ -169,7 +168,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String greet = "     Hello! I'm Duke\n"
-        + "     What can I do for you?\n";
+                + "     What can I do for you?\n";
         greet = frontSpace + upperLine + greet + frontSpace + lowerLine;
         System.out.println(greet);
         tryToReadFile();
@@ -191,7 +190,7 @@ public class Duke {
                     deleteFeature();
                     tryToWriteFile();
                 } else if (firstWord.equals("todo") || firstWord.equals("deadline")
-                    || firstWord.equals("event")) {
+                        || firstWord.equals("event")) {
                     childFeature();
                     tryToWriteFile();
                 } else {

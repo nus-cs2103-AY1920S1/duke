@@ -6,8 +6,8 @@ import Duke.ui.Ui;
 
 public class Duke {
     private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    public Storage storage;
+    public TaskList tasks;
 
     public Duke(String filePath) {
         ui = new Ui();

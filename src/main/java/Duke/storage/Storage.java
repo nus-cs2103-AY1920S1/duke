@@ -13,12 +13,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    String filePath;
+    private String filePath;
     private SimpleDateFormat formatter;
 
     public Storage(String filePath) {
         this.filePath = filePath;
         this.formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 
     public ArrayList<Task> load() throws DukeException {

@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -72,6 +73,8 @@ public class Duke {
                 System.out.println("☹ OOPS!!! You need to provide a valid task number :-(");
             } catch (NumberFormatException e) {
                 System.out.println("☹ OOPS!!! You need to provide a valid number :-(");
+            } catch (ParseException e) {
+                System.out.println("Something went wrong! " + e.getMessage());
             }
         }
     }

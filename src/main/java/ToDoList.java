@@ -1,11 +1,15 @@
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 
 class ToDoList {
     private ArrayList<Task> taskList;
+    static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMMM yyyy HH':'mma");
     ToDoList() {
         taskList = new ArrayList<>(100);
     }
-    void addTask(String task, TaskType type) throws EmptyEventDscDukeException, EmptyDeadlineDscDukeException, NoDateDukeException {
+    void addTask(String task, TaskType type) throws ParseException,EmptyEventDscDukeException, EmptyDeadlineDscDukeException, NoDateDukeException {
         Task addedTask;
         String date;
         switch (type) {
@@ -26,9 +30,10 @@ class ToDoList {
                 if (date.equals("")) {
                     throw new NoDateDukeException("No date provided");
                 }
+                date = date.substring(date.indexOf(" ") + 1);
                 addedTask = new Deadline(
                     task.substring(0, task.indexOf('/') - 1),
-                    date
+                    ToDoList.inputDateFormat.parse(date)
                 );
                 taskList.add(addedTask);
                 System.out.println("Got it. I've added this task:");
@@ -45,9 +50,10 @@ class ToDoList {
                 if (date.equals("")) {
                     throw new NoDateDukeException("No date provided");
                 }
+                date = date.substring(date.indexOf(" ") + 1);
                 addedTask = new Event(
                         task.substring(0, task.indexOf('/') - 1),
-                        date
+                        ToDoList.inputDateFormat.parse(date)
                 );
                 taskList.add(addedTask);
                 System.out.println("Got it. I've added this task:");

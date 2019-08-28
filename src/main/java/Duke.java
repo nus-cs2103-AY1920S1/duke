@@ -1,20 +1,23 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+    private static ArrayList<Task> list;
 
+    public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        ArrayList<Task> list = new ArrayList<>();
+        list = new ArrayList<>();
+
+        getFileContents("data/duke.txt");
 
         Scanner sc = new Scanner(System.in);
         String word = sc.nextLine();
@@ -61,7 +64,7 @@ public class Duke {
                         if (typeArray.length < 2  || typeArray[1].trim().equals("")) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
-                        task = new Todo(typeArray[1], "");
+                        task = new Todo(typeArray[1], false, "");
                         list.add(task);
                     } else  if (typeArray[0].equals("deadline")) {
                         if (typeArray.length < 2 || typeArray[1].trim().equals("")) {
@@ -73,7 +76,7 @@ public class Duke {
                         if (!arr[1].startsWith("by ")) {
                             throw new DukeException("Use /by  ");
                         }
-                        task = new Deadline(typeArray[1], arr[1]);
+                        task = new Deadline(typeArray[1], false, arr[1]);
                         list.add(task);
                     } else if (typeArray[0].equals("event")){
                         if (typeArray.length < 2 || typeArray[1].trim().equals("")) {
@@ -85,7 +88,7 @@ public class Duke {
                         if (!arr[1].startsWith("at ")) {
                             throw new DukeException("Use /at  ");
                         }
-                        task = new Event(typeArray[1], arr[1]);
+                        task = new Event(typeArray[1], false, arr[1]);
                         list.add(task);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -93,6 +96,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + task.toString());
                     System.out.println("Now you have " +  list.size()  +  " tasks in the list.");
+
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
@@ -103,6 +107,54 @@ public class Duke {
             }
 
         }
+        updateFile();
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void getFileContents(String filePath) {
+        try {
+            File f = new File(filePath);
+            Scanner s = null;
+            s = new Scanner(f);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] arr  = line.split("[|]");
+                boolean isDone = !arr[1].trim().equals("0");
+                Task task;
+                if  (arr[0].trim().equals("T")) {
+                    task = new Todo(arr[2].trim(), isDone, "");
+                } else if (arr[0].trim().equals("D")) {
+                    task = new Deadline(arr[2].trim(), isDone, arr[3].trim());
+                } else {
+                    task = new Event(arr[2].trim(), isDone, arr[3].trim());
+                }
+                list.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            return;
+        }
+    }
+
+    private static  void  updateFile() {
+        File dir = new File("/Users/joannasara/Desktop/duke/data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        String  fileString = "";
+        for (Task t : list) {
+            fileString += t.getFileStringFormat() + "\n";
+        }
+
+        try {
+            File f = new File("data/duke.txt");
+            System.out.println(f.getAbsolutePath());
+            f.createNewFile();
+            FileWriter fw = new FileWriter("data/duke.txt");
+            fw.write(fileString);
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 }

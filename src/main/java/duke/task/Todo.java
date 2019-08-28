@@ -21,6 +21,6 @@ public class Todo extends Task {
             this.isDone() ? "1" : "0",
             this.getDescription()
         };
-        return String.join(Todo.storageStringSeparator, tokens);
+        return String.join(Todo.STORAGE_STRING_SEPARATOR, tokens);
     }
 }

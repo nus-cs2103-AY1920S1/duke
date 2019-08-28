@@ -63,12 +63,12 @@ public class Storage {
                     break;
                 }
                 case "D": {
-                    LocalDateTime by = LocalDateTime.parse(tokens[3], Task.dateTimeFormatter);
+                    LocalDateTime by = LocalDateTime.parse(tokens[3], Task.DATE_TIME_FORMATTER);
                     task = new Deadline(description, by, isDone);
                     break;
                 }
                 case "E": {
-                    LocalDateTime at = LocalDateTime.parse(tokens[3], Task.dateTimeFormatter);
+                    LocalDateTime at = LocalDateTime.parse(tokens[3], Task.DATE_TIME_FORMATTER);
                     task = new Event(description, at, isDone);
                     break;
                 }

@@ -4,12 +4,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String separator = "-".repeat(60);
+    private static final String SEPARATOR = "-".repeat(60);
     private Scanner scanner = new Scanner(System.in);
 
     private void show(final PrintStream output, final String message) {
@@ -17,7 +17,7 @@ public class Ui {
     }
 
     public void showSeparator() {
-        System.out.println(separator);
+        System.out.println(SEPARATOR);
     }
 
     public void showMessage(final String message) {
@@ -37,7 +37,7 @@ public class Ui {
      */
     public void showWelcome() {
         showSeparator();
-        showMessage("Hello from\n" + logo + "What can I do for you?");
+        showMessage("Hello from\n" + LOGO + "What can I do for you?");
         showSeparator();
         System.out.println();
     }

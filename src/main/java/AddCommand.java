@@ -1,0 +1,32 @@
+import java.io.IOException;
+
+public class AddCommand extends Command {
+    private String type;
+    private String description;
+    private String dateTime;
+
+    public AddCommand(String type, String description, String dateTime) {
+        this.type = type;
+        this.description = description;
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public void execute(MyList taskList, UserInterface ui, Storage storage) throws FileSaveException {
+        Task task;
+        if (type.equals("todo")) {
+            task = new TodoTask(description);
+        } else if (type.equals(("deadline"))) {
+            task = new DeadlineTask(description, dateTime);
+        } else {
+            task = new EventTask(description, dateTime);
+        }
+        taskList.add(task);
+        try {
+            storage.updateList(taskList);
+        } catch (IOException e) {
+            throw new FileSaveException();
+        }
+        ui.printAddTaskMsg(task, taskList);
+    }
+}

@@ -1,13 +1,19 @@
 public class EventTask extends Task {
-    private String startDate;
 
     public EventTask(String description, String startDate) {
         super(description);
-        this.startDate = startDate;
+        this.dateTime = startDate;
+        this.type = "E";
+    }
+
+    public EventTask(String description, String startDate, boolean isDone) {
+        super(description, isDone);
+        this.dateTime = startDate;
+        this.type = "E";
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.startDate);
+        return String.format("[E]%s (at: %s)", super.toString(), this.dateTime);
     }
 }

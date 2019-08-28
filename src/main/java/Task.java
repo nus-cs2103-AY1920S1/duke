@@ -1,10 +1,17 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
+    protected String dateTime;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -15,8 +22,20 @@ public class Task {
         this.isDone = true;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return this.description;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+    public String getDateTime() {
+        return this.dateTime;
     }
 
     @Override

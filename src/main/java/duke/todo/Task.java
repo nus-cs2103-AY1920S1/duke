@@ -1,19 +1,19 @@
-package todo;
+package duke.todo;
 
-class Task {
+public class Task {
     private String description;
     private boolean isDone;
 
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 

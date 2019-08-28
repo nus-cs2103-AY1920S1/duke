@@ -1,4 +1,4 @@
-package todo;
+package duke.todo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +16,7 @@ public class Deadline extends Task {
     @Override
     public String getFormattedTask() {
         return "D | " + super.getDescription() +
-                " /by " + deadline;
+                " /by " + deadline.toString();
     }
     @Override
     public String toString() {

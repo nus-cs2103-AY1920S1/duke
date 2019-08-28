@@ -21,4 +21,10 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + dateTime + ")";
     }
+
+    @Override
+    public String toStorage() {
+        int isDoneInt = isDone ? 1 : 0;
+        return String.format("%d | E | %s | %s", isDoneInt, description, dateTime);
+    }
 }

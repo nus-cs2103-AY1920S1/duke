@@ -1,0 +1,6 @@
+0 | T | pop
+1 | T | rat
+1 | D | die | tomorrow
+1 | E | pule | 5am monday
+0 | E | eat lunch | Monday 5am
+1 | T | caramel

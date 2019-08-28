@@ -22,4 +22,10 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    @Override
+    public String toStorage() {
+        int isDoneInt = isDone ? 1 : 0;
+        return String.format("%d | D | %s | %s", isDoneInt, description, by);
+    }
 }

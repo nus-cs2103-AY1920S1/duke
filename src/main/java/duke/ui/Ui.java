@@ -81,4 +81,8 @@ public class Ui {
         System.out.printf("Now you have %d %s in the list.\n", size, taskWord);
 
     }
+
+    public void showLoadingError() {
+        System.out.println("Error loading savefile.");
+    }
 }

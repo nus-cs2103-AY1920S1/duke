@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -71,7 +72,7 @@ public class CreateCommand extends Command {
     } // End method.
 
     @Override
-    public void execute(Tasklist list, Ui ui) throws DukeException {
+    public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
         return;
     } // End method.
 }

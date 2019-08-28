@@ -32,8 +32,9 @@ public class Task {
         return isDone;
     }
 
-    public void setDone(boolean done) {
+    public Task setDone(boolean done) {
         isDone = done;
+        return this;
     }
 
     public void markAsDone() {
@@ -55,5 +56,9 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), getDescription());
+    }
+
+    public String toStorage() {
+        return description;
     }
 }

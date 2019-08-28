@@ -183,17 +183,16 @@ class User {
         String j = this.getCurrentInput();
         String description = "";
         String date = "";
-        String parseMiddleString = "";
 
         switch (taskType) {
         case DEADLINE:
-            description = parseMiddleString; //+1/-1 to remove spaces
-            date = j.substring((j.indexOf("/") + 1));
+            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1); //should not be done for todo case
+            date = j.substring((j.indexOf("/") + 4));
             userTasks.add(new Deadline(description, date));
             break;
         case EVENT:
-            description = parseMiddleString; //+1/-1 to remove spaces
-            date = j.substring((j.indexOf("/") + 1));
+            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1);
+            date = j.substring((j.indexOf("/") + 4));
             userTasks.add(new Event(description, date));
             break;
         case TODO:
@@ -255,8 +254,8 @@ class User {
             if (count == taskNumber) {
                 task.markIsDone();
                 System.out.println("    ____________________________________________________________\n"
-                        + "     Nice! I've marked this task as done: \n" + "       [" + task.getStatusIcon()
-                        + "] " + task.getDescription() + "\n"
+                        + "     Nice! I've marked this task as done: \n" + "       [" + task.getTaskTypeLetter()
+                        + "][" + task.getStatusIcon() + "] " + task.getDescription() + "\n"
                         + ("    ____________________________________________________________\n"));
             }
             count++;
@@ -266,6 +265,7 @@ class User {
     public void printUserInputs () { //catch empty list?
         int count = 1;
         System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the tasks in your list:");
         for (Task temp : userTasks) {
             System.out.println("    " + count + ".[" + temp.getTaskTypeLetter() + "]"
                     + "[" + temp.getStatusIcon() + "] " + temp.getDescription());

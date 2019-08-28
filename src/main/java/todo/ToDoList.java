@@ -59,8 +59,9 @@ public class ToDoList {
 
     public String addTask(String taskType, String taskDetail) {
         int numOfTasks = counter++ + 1;
-        String[] inputTask = taskDetail.split("/");
-        String description = inputTask[0];
+        String[] inputTask = taskDetail.split("/by|/at");
+        System.out.println(inputTask[1].trim());
+        String description = inputTask[0].trim();
         Task newTask = new Task("");
 
         switch (taskType) {

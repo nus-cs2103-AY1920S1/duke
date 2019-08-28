@@ -1,12 +1,16 @@
 package todo;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private String date;
+    private LocalDateTime date;
+    private DateTimeFormatter formatter;
 
     public Event(String description, String date) {
         super(description);
 
-        this.date = date;
+        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        this.date = LocalDateTime.parse(date, formatter);
     }
 
     @Override
@@ -18,6 +22,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + getStatusIcon() + this.getDescription() +
-                " (on: " + date + ")";
+                " (on: " + date.format(formatter) + ")";
     }
 }

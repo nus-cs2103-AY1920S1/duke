@@ -32,29 +32,29 @@ public class Parser {
         }
 
         switch (command) {
-            case "list":
-                return new ListCommand("", "list");
+        case "list":
+            return new ListCommand("", "list");
 
-            case "done":
-                return new DoneCommand(rest, "done");
+        case "done":
+            return new DoneCommand(rest, "done");
 
-            case "todo":
-                return new TodoCommand(rest, "todo");
+        case "todo":
+            return new TodoCommand(rest, "todo");
 
-            case "deadline":
-                return new DeadlineCommand(rest, "deadline");
+        case "deadline":
+            return new DeadlineCommand(rest, "deadline");
 
-            case "event":
-                return new EventCommand(rest, "event");
+        case "event":
+            return new EventCommand(rest, "event");
 
-            case "bye":
-                return new ExitCommand("", "bye");
+        case "bye":
+            return new ExitCommand("", "bye");
 
-            case "delete":
-                return new DeleteCommand(rest, "delete");
+        case "delete":
+            return new DeleteCommand(rest, "delete");
 
-            default:
-                throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "I'm sorry, but I don't know what that means :-(");
+        default:
+            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "I'm sorry, but I don't know what that means :-(");
         }
     }
 }

@@ -5,14 +5,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Allows Duke to load and store tasks.
+     *
+     * @param filePath Location of task list to load from and store to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task list from the previous session form the hard disk, if any.
+     *
+     * @return ArrayList of task that has been loaded from previous session.
+     * @throws FileNotFoundException If there was no previous session.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
@@ -46,12 +60,22 @@ public class Storage {
         return loadedTaskList;
     }
 
+    /**
+     * Stores the task list in the hard disk.
+     *
+     * @throws IOException If hard disk cannot be found in the given file path.
+     */
     public void store() throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(getSavedListString());
         fw.close();
     }
 
+    /**
+     * Formats the task list to be stored.
+     *
+     * @return All tasks in the list in a simplified format.
+     */
     public static String getSavedListString() {
         String allTasks = "";
         for (int i = 0; i < TaskList.myTasks.size(); i++) {

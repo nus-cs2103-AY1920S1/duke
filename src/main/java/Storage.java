@@ -1,5 +1,8 @@
 import java.io.*;
 
+/**
+ * Storing of the task list in a text file which is accessible for future running of the code
+ */
 public class Storage {
 
     protected TaskList taskList;
@@ -9,6 +12,10 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /**
+     * Loading in the file to the chatbot to digest
+     * @throws IOException
+     */
     public void LoadFile() throws IOException {
         try {
             CheckFile();
@@ -51,6 +58,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Updating the file and saving it remotely for future references
+     * @throws IOException
+     */
     public void UpdateFile() throws IOException {
         try (PrintStream out = new PrintStream(new FileOutputStream(taskListText))) {
             for (int i = 0; i < taskList.size(); i++) {
@@ -64,6 +75,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Checking if the file already exist or not. If file does not exist, it creates an empty file
+     * @throws IOException
+     */
     public void CheckFile() throws IOException {
         File tmpDir = new File("TaskList.txt");
         if (!tmpDir.exists()) {

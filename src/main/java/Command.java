@@ -1,11 +1,22 @@
 import java.io.IOException;
 
+/**
+ * Handles the different kind of Commands user may have on the chatbot
+ * Generally it is the #Intent of user
+ */
 public class Command {
 
     public Command() {
-
     }
 
+    /**
+     * Running the commands given by user
+     * @param taskList Keep track of all the tasks users have
+     * @param ui Handles the replies given (Dialogue)
+     * @param storage Storing the text files and updating it
+     * @throws DukeException Exception cases
+     * @throws IOException Unexpected exception cases
+     */
     public void execute(TaskList taskList, UI ui,Storage storage) throws DukeException, IOException {
         storage.LoadFile();
         ui.printGreeting();

@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Printing of the dialogues
+ */
 public class UI {
     protected Scanner sc;
 
@@ -39,7 +42,7 @@ public class UI {
 
     public void printIDK() {
         System.out.println("____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+                "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
                 "____________________________________________________________");
     }
 
@@ -86,27 +89,27 @@ public class UI {
         switch (taskType) {
         case "todo" :
             throw new DukeException("____________________________________________________________\n" +
-                    "     ☹ Hey! Description of a todo cannot be empty :(\n" +
+                    "     Hey! Description of a todo cannot be empty :(\n" +
                     "____________________________________________________________");
         case "event" :
             throw new DukeException("____________________________________________________________\n" +
-                    "     ☹ Hey! Description of a event cannot be empty :(\n" +
+                    "     Hey! Description of a event cannot be empty :(\n" +
                     "____________________________________________________________");
         case "deadline" :
             throw new DukeException("____________________________________________________________\n" +
-                    "     ☹ Hey! Description of a deadline cannot be empty :(\n" +
+                    "     Hey! Description of a deadline cannot be empty :(\n" +
                     "____________________________________________________________");
         case "done" :
             throw new DukeException("____________________________________________________________\n" +
-                    "     ☹ Hey! Description of a done cannot be empty :(\n" +
+                    "     Hey! Description of a done cannot be empty :(\n" +
                     "____________________________________________________________");
         case "delete" :
             throw new DukeException("____________________________________________________________\n" +
-                    "     ☹ Hey! Description of a delete cannot be empty :(\n" +
+                    "     Hey! Description of a delete cannot be empty :(\n" +
                     "____________________________________________________________");
         default :
             throw new DukeException("____________________________________________________________\n" +
-                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+                    "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
                     "____________________________________________________________");
         }
     }

@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Ui {
     // Strings that Duke will output
@@ -52,7 +51,7 @@ public class Ui {
         );
     }
 
-    public static void printList(ArrayList<Task> taskList) {
+    public static void printList(TaskList taskList) {
         String wholeList = LIST_STR + "\n";
         
         for (int i = 0; i < taskList.size(); i++) {

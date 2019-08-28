@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -15,7 +14,7 @@ public class Duke {
 
     public static final int MAX_TASKS = 100;
 
-    private static ArrayList<Task> taskList;
+    private static TaskList taskList;
 
     public static void main(String[] args) {
 

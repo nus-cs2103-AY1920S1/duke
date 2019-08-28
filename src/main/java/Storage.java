@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.text.ParseException;
 
 public class Storage {
@@ -12,10 +11,10 @@ public class Storage {
     public static final String USER_NAME = System.getProperty("user.name");
     private static String filePath = "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat"; 
 
-	public static ArrayList<Task> readDataFile() {
+	public static TaskList readDataFile() {
 
         Scanner inStream;
-        ArrayList<Task> taskList = new ArrayList<Task>(Duke.MAX_TASKS);
+        TaskList taskList = new TaskList(Duke.MAX_TASKS);
 
         try {
             inStream = new Scanner(new FileInputStream(filePath));
@@ -57,10 +56,10 @@ public class Storage {
             e.printStackTrace();
         }
 
-        return new ArrayList<Task>(Duke.MAX_TASKS);
+        return new TaskList(Duke.MAX_TASKS);
     }
 
-    public static void writeDataFile(ArrayList<Task> taskList) {
+    public static void writeDataFile(TaskList taskList) {
         
         PrintWriter outStream;
 

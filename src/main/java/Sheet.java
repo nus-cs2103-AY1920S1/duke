@@ -28,6 +28,7 @@ public class Sheet {
         System.out.printf(Formatter.LINE);
     }
 
+
     public void delete(int index) throws IOException{
         Path p = Paths.get(myPaths.TASKLIST);
         List<String> lst = Files.readAllLines(Paths.get(myPaths.TASKLIST));
@@ -35,6 +36,7 @@ public class Sheet {
                 + lst.get(index - 1) + "\n");
         lst.remove(index - 1);
         Files.write(p, lst);
+
         this.numOfTask--;
         this.count();
         System.out.printf(Formatter.LINE);
@@ -78,7 +80,7 @@ public class Sheet {
         Path p = Paths.get(myPaths.TASKLIST);
         List<String> lst = Files.readAllLines(Paths.get(myPaths.TASKLIST));
         String target = lst.get(num - 1);
-        String doneTask = Task.toTask(target).finish().toString().trim();
+        String doneTask = Task.markStringDone(target);
         lst.set(num - 1, doneTask);
         System.out.printf(Formatter.LINE + Formatter.INDENT + Formatter.DONE + Formatter.INDENT +
                 doneTask + "\n" + Formatter.LINE);

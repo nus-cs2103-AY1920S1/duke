@@ -1,23 +1,26 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime deadline;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
     }
-    public Deadline(String description, String by, boolean done) {
+    public Deadline(String description, LocalDateTime deadline, boolean done) {
         super(description, done);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     @Override
     public Deadline finish() {
-        return new Deadline(description,by,true);
+        return new Deadline(description, this.deadline,true);
     }
 
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + by + ")" + "\n";
+        TimeManager tm = new TimeManager();
+        return "[D]" + "[" + this.getStatusIcon() + "] " + this.description + " (by: " + tm.printTime(deadline) + ")\n";
     }
 }

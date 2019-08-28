@@ -10,6 +10,7 @@ public class Listener {
     public void start(Sheet sheet) {
 
         Scanner sc = new Scanner(System.in);
+        TimeManager tm = new TimeManager();
         this.sheet = sheet;
 
         System.out.print(Formatter.WELCOME);
@@ -74,29 +75,39 @@ public class Listener {
                                     "☹ OOPS!!! The deadline cannot be empty."
                             );
                         }
-                        Task dlTask = new Deadline(description, by);
+                        if (description.isBlank()) {
+                            throw new MissingDescriptionException(
+                                    "☹ Oh! Did you forget to add the task?");
+                        }
+                        Task dlTask = new Deadline(description, tm.getTime(by));
                         this.sheet.add(dlTask);
                     } catch (MissingDescriptionException dl) {
                         System.out.printf(dl.toString());
-                    } finally {
-
+                    } catch (IllegalTimeFormatException itef){
+                        System.out.printf(itef.toString());
                     }
                 } else if (command.equals("event")) {
                     try {
                         String next;
                         String description = "";
-                        while (!(next = sc.next()).equals("/at")) {
+                        while (!(next = sc.next()).equals("/from")) {
                             description += " " + next;
                         }
-                        String span = sc.nextLine().trim();
-                        if (span.isBlank()) {
-                            throw new MissingDescriptionException("☹ OOPS!!! The event time cannot be empty.");
+
+                        String[] span = sc.nextLine().trim().split("to");
+                        if (span.length < 2) {
+                            throw new MissingDescriptionException("☹ OOPS!!! The event span is incomplete.");
                         }
-                        Task eventTask = new Event(description, span);
+                        if (description.isBlank()) {
+                            throw new MissingDescriptionException(
+                                    "☹ Oh! Did you forget to add the task?");
+                        }
+                        Task eventTask = new Event(description, tm.getTime(span[0]), tm.getTime(span[1]));
                         this.sheet.add(eventTask);
                     } catch (MissingDescriptionException mde) {
                         System.out.printf(mde.toString());
-                    } finally {
+                    } catch (IllegalTimeFormatException itef){
+                        System.out.printf(itef.toString());
                     }
                 } else {
                     try {

@@ -14,6 +14,13 @@ public class Storage {
         file = new File(filePath);
     }
 
+    /**
+     * Reads the file with the given filePath and saves it as a LinkedList<String> to be
+     * processed by the TaskList. Creates the relevant directory and files if none are present.
+     *
+     * @return LinkedList<String> which contains the list of tasks in the saved format
+     * @throws DukeException
+     */
     public LinkedList<String> load() throws DukeException {
         LinkedList<String> lst = new LinkedList<>();
 
@@ -32,6 +39,13 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Saves the LinkedList<String> element by element separated by a lineSeparator
+     * into the given filePath.
+     *
+     * @param lst The LinkedList<String> to be saved
+     * @throws DukeException
+     */
     public void save(LinkedList<String> lst) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);

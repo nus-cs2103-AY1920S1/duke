@@ -104,7 +104,7 @@ public class Parser {
         } catch (DukeException err) {
             System.out.println(err.getMessage());
         } catch (Exception err) {
-            System.out.println(err);
+            System.out.println("[Exception] " + err);
         }
     }
 }

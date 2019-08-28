@@ -1,10 +1,15 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
-public class DukeTest {
+class DukeTest {
     @Test
-    public void dummyTest(){
-        assertEquals(2, 2);
+    void main() throws Exception {
+        final InputStream original = System.in;
+        final FileInputStream fips = new FileInputStream(new File("../../test_data/duke.txt"));
+        System.setIn(fips);
+        System.setIn(original);
     }
 }

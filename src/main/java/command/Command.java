@@ -1,3 +1,10 @@
+package main.java.command;
+
+import main.java.TaskList;
+import main.java.Ui;
+import main.java.Storage;
+import main.java.exception.DukeException;
+
 public abstract class Command {
     protected boolean isExit = false;
 

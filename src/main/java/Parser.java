@@ -1,3 +1,13 @@
+package main.java;
+
+import main.java.command.Command;
+import main.java.command.ExitCommand;
+import main.java.command.IndexCommand;
+import main.java.command.CompleteCommand;
+import main.java.command.AddCommand;
+import main.java.command.DeleteCommand;
+import main.java.exception.DukeException;
+
 public class Parser {
 
     public static Command parse(String command) throws DukeException {

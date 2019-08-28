@@ -1,3 +1,14 @@
+package main.java.command;
+
+import main.java.TaskList;
+import main.java.Ui;
+import main.java.Storage;
+import main.java.exception.DukeException;
+import main.java.task.Task;
+import main.java.task.Todo;
+import main.java.task.Deadline;
+import main.java.task.Event;
+
 public class AddCommand extends Command {
     private String taskType;
     private String taskParams;

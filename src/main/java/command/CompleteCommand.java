@@ -1,3 +1,11 @@
+package main.java.command;
+
+import main.java.TaskList;
+import main.java.Ui;
+import main.java.Storage;
+import main.java.task.Task;
+import main.java.exception.DukeException;
+
 public class CompleteCommand extends Command {
     private int taskId;
 

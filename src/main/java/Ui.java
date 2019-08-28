@@ -1,7 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -51,11 +47,14 @@ public class Ui {
                     int listNum = i + 1;
                     Task t = tasks.get(i);
                     if (t.getType().equals("todo")) {
-                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t.toString());
+                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                                + t.toString());
                     } else if (t.getType().equals("event")) {
-                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t.toString() + " (at: " + t.getDate() + ")");
+                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                                + t.toString() + " (at: " + t.getDate() + ")");
                     } else {
-                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t.toString() + " (by: " + t.getDate() + ")");
+                        System.out.println("    " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                                + t.toString() + " (by: " + t.getDate() + ")");
                     }
                 }
                 System.out.println("    ____________________________________________________________\n");
@@ -174,9 +173,11 @@ public class Ui {
         if (t.getType().equals("todo")) {
             System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t);
         } else if (t.getType().equals("event")) {
-            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + " (at: " + t.getDate() + ")");
+            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + " (at: "
+                    + t.getDate() + ")");
         } else {
-            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + " (by: " + t.getDate() + ")");
+            System.out.println("       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + " (by: "
+                    + t.getDate() + ")");
         }
         System.out.println("     Now you have " + tasks.size() + " tasks in the list.\n" +
                 "    ____________________________________________________________\n");

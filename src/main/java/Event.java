@@ -2,8 +2,8 @@ public class Event extends Task {
     String type;
     String date;
 
-    public Event(String task_name, String date) {
-        super(task_name);
+    public Event(String taskName, String date) {
+        super(taskName);
         type = "event";
         this.date = date;
     }

@@ -1,8 +1,8 @@
 public class Todo extends Task {
     String type;
 
-    public Todo(String task_name) {
-        super(task_name);
+    public Todo(String taskName) {
+        super(taskName);
         type = "todo";
     }
 

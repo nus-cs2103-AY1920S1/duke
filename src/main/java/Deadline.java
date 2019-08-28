@@ -2,8 +2,8 @@ public class Deadline extends Task {
     String type;
     String date;
 
-    public Deadline(String task_name, String date) {
-        super(task_name);
+    public Deadline(String taskName, String date) {
+        super(taskName);
         type = "deadline";
         this.date = date;
     }

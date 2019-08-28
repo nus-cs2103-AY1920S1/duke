@@ -1,14 +1,6 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
-
-    private static String userInput;
-    private static String[] inputStringArr;
 
     private Storage storage;
     private TaskList tasks;

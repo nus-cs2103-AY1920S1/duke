@@ -22,11 +22,11 @@ public class TaskList {
 
     public void addAndPrint(Task newTask) {
         list.add(newTask);
-        System.out.println("Got it. I've added this task: \n  " +
-                newTask + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task: \n  "
+                + newTask + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    public void addTodo(String activityName, boolean isDone){
+    public void addTodo(String activityName, boolean isDone) {
         Task newTask = new Todo(activityName,false);
         addAndPrint(newTask);
     }
@@ -41,16 +41,16 @@ public class TaskList {
         addAndPrint(newTask);
     }
 
-    public void doneTask(int idx){
+    public void doneTask(int idx) {
         list.get(idx - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done: \n  " +
-                list.get(idx - 1));
+        System.out.println("Nice! I've marked this task as done: \n  "
+                + list.get(idx - 1));
     }
 
     public void deleteTask(int idx) {
         Task removed = list.remove(idx - 1);
-        System.out.println("Noted. I've removed this task: \n  " +
-                removed + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task: \n  " + removed
+                + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     public ArrayList<Task> getTaskList() {

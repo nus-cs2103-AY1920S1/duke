@@ -29,21 +29,20 @@ public class Storage {
                 isDone = false;
             }
             switch (part[0]) {
-                case "T":
-                    tasks.add(new Todo(part[2], isDone));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(part[2], isDone, part[3]));
-                    break;
-                case "E":
-                    tasks.add(new Event(part[2], isDone, part[3]));
-                    break;
+            case "T":
+                tasks.add(new Todo(part[2], isDone));
+                break;
+            case "D":
+                tasks.add(new Deadline(part[2], isDone, part[3]));
+                break;
+            case "E":
+                tasks.add(new Event(part[2], isDone, part[3]));
+                break;
             }
         }
         return tasks;
     }
 
-    // To save the tasks in the list whenever there is any change.
     public void updateFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks.getTaskList()) {

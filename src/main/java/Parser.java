@@ -1,3 +1,8 @@
+import Task.Deadline;
+import Task.Task;
+import Task.Todo;
+import Task.Event;
+
 import java.text.ParseException;
 
 public class Parser {

@@ -1,3 +1,8 @@
+import Task.Deadline;
+import Task.Event;
+import Task.Task;
+import Task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,7 +29,7 @@ public class Storage {
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
             String c = task.getClass().toString();
-            if (c.equals("class Todo")) {
+            if (c.equals("class Task.Todo")) {
                 String description = task.getDescription();
                 Boolean isDone = task.getStatus();
                 int done = 0;
@@ -32,7 +37,7 @@ public class Storage {
                     done = 1;
                 }
                 result += "todo" + ">>" + done + ">>" + description + "\n";
-            } else if (c.equals("class Deadline")) {
+            } else if (c.equals("class Task.Deadline")) {
                 Deadline deadline = (Deadline) task;
                 String description = deadline.getDescription();
                 Boolean isDone = deadline.getStatus();
@@ -42,7 +47,7 @@ public class Storage {
                     done = 1;
                 }
                 result += "deadline" + ">>" + done + ">>" + description + ">>" + by + "\n";
-            } else if (c.equals("class Event")) {
+            } else if (c.equals("class Task.Event")) {
                 Event event = (Event) task;
                 String description = event.getDescription();
                 Boolean isDone = event.getStatus();
@@ -98,6 +103,4 @@ public class Storage {
         }
         return list;
     }
-
-
 }

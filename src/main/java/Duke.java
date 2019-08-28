@@ -50,6 +50,4 @@ public class Duke {
         String sDate = sdf.format(date);
         return sDate;
     }
-
-
 }

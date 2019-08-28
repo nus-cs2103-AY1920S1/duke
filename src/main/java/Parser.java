@@ -29,7 +29,7 @@ public class Parser {
     /**
      * Parse the description from the input as a String.
      * For Event or Deadline Tasks, important to split substrings into
-     * description and date/time, while for Todo Tasks, not required.
+     * description and date/time, while for Todo Tasks and "find" command not required.
      *
      * @param input  The entire user input with action and task full description
      * @param action The designated user action,
@@ -41,7 +41,7 @@ public class Parser {
         //Split task and date or time
         String[] parts = substring.split("\\/..");
         String description;
-        if (action.equals("todo"))
+        if (action.equals("todo") || action.equals("find"))
             return substring; //no date or time
         else
             description = parts[0].trim(); // Remove blank spaces

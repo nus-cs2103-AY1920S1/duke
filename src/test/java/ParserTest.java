@@ -17,7 +17,7 @@ class ParserTest {
 
     @Test
     void parseToDo() {
-        String desToDo = parser.parseToDo("todo", inputToDo);
+        String desToDo = parser.parse("todo", inputToDo);
         assertEquals("go for classes", desToDo);
     }
 

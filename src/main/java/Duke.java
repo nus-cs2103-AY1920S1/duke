@@ -96,7 +96,14 @@ public class Duke {
                     System.out.println(err.getMessage());
                 }
 
-            } else {
+            } else if (input.contains("find")){
+                String keyword = parser.parseDescription("find", input);
+                ui.matchingList();
+                tasks.getList(keyword);
+            }
+
+
+            else {
                 // Do not fit any commands
                 try {
                     throw new DukeException(ui.invalidCommand());

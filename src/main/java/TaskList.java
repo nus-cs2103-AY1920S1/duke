@@ -29,6 +29,21 @@ class TaskList {
         }
     }
 
+    public void getList(String action) {
+        int size = this.list.size();
+        int index = 1;
+        for (int i = 0; i < size; i++) {
+            if (list.get(i).toString().contains(action)) {
+                System.out.print("     " + (index) + ".");
+                System.out.println(list.get(i));
+                index += 1;
+            }
+        }
+        if (index == 1) { // Index did not increment, no match found
+            ui.noMatch();
+        }
+    }
+
     public void setDone(String input) {
         // Assumption: fixed format - remove first 4 characters to get index. i.e. "done"
         String value = input.substring(4);
@@ -68,7 +83,7 @@ class TaskList {
         switch (action) {
 
         case "todo":
-                String description1 = parser.parseToDo(action, input);
+            String description1 = parser.parseDescription(action, input);
             list.add(new ToDo(description1));
             break;
 

@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
 
@@ -31,59 +32,61 @@ public class Duke {
 
                 switch (commandArr[0].toLowerCase()) {
 
-                    case "todo":
-                        String name = "";
-                        checkCommand(commandArr, "todo");
-                        for (i = 1; i < commandArr.length; i++) {
-                            name += commandArr[i] + " ";
-                        }
-                        addTask(new Todo(name.trim()), tasks);
-                        storage.writeToFile();
-                        counter++;
-                        break;
+                case "todo":
+                    String name = "";
+                    checkCommand(commandArr, "todo");
+                    for (i = 1; i < commandArr.length; i++) {
+                        name += commandArr[i] + " ";
+                    }
+                    addTask(new Todo(name.trim()));
+                    storage.writeToFile();
+                    counter++;
+                    break;
 
-                    case "deadline":
-                        keywords = splitCommands(commandArr, "/by", "deadline");
-                        addTask(new Deadline(keywords[0], keywords[1]), tasks);
-                        storage.writeToFile();
-                        counter++;
-                        break;
+                case "deadline":
+                    keywords = splitCommands(commandArr, "/by", "deadline");
+                    addTask(new Deadline(keywords[0], new StringToDate(keywords[1])));
+                    storage.writeToFile();
+                    counter++;
+                    break;
 
-                    case "event":
-                        keywords = splitCommands(commandArr, "/at", "event");
-                        addTask(new Event(keywords[0], keywords[1]), tasks);
-                        storage.writeToFile();
-                        counter++;
-                        break;
+                case "event":
+                    keywords = splitCommands(commandArr, "/at", "event");
+                    addTask(new Event(keywords[0], new StringToDate(keywords[1])));
+                    storage.writeToFile();
+                    counter++;
+                    break;
 
-                    case "list":
-                        printList();
-                        break;
+                case "list":
+                    printList();
+                    break;
 
-                    case "done":
-                        taskId = Integer.parseInt(commandArr[1]);
-                        handleDone(taskId);
-                        storage.writeToFile();
-                        break;
+                case "done":
+                    taskId = Integer.parseInt(commandArr[1]);
+                    handleDone(taskId);
+                    storage.writeToFile();
+                    break;
 
-                    case "delete":
-                        taskId = Integer.parseInt(commandArr[1]);
-                        handleDelete(taskId);
-                        storage.writeToFile();
-                        break;
+                case "delete":
+                    taskId = Integer.parseInt(commandArr[1]);
+                    handleDelete(taskId);
+                    storage.writeToFile();
+                    break;
 
-                    case "bye":
-                        storage.writeToFile();
-                        handleExit();
-                        return;
+                case "bye":
+                    storage.writeToFile();
+                    handleExit();
+                    return;
 
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 addBorder(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) { // incase of empty input
                 addBorder("Input cannot be empty!");
+            } catch (ParseException e) {
+                addBorder("Please enter the date in the format dd-MMM-yyyy HH:mm");
             }
         }
         sc.close();
@@ -101,8 +104,7 @@ public class Duke {
         addBorder("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
-
-    public static void checkCommand (String[]commandArr, String keyword) throws DukeException {
+    public static void checkCommand(String[] commandArr, String keyword) throws DukeException {
         if (commandArr.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a " + keyword + " cannot be empty.");
         }
@@ -137,7 +139,7 @@ public class Duke {
         }
     }
 
-    public static void addTask (Task task, List<Task> tasks) {
+    public static void addTask(Task task) {
         tasks.add(task);
         int taskNum = tasks.size();
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum

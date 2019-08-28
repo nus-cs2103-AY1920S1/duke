@@ -1,8 +1,8 @@
 
 public class Deadline extends Task {
-    private String time;
+    private StringToDate time;
 
-    public Deadline(String name, String time) {
+    public Deadline(String name, StringToDate time) {
         super(name);
         this.time = time;
     }
@@ -23,6 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.time + ")";
+        return "[D]" + super.toString() + " (by: " + this.time.toString() + ")";
     }
 }

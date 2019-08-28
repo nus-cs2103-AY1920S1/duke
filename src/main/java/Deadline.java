@@ -1,10 +1,20 @@
-public class Deadline extends Task{
-    protected String time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public Deadline(String description, String time) {
+public class Deadline extends Task{
+    protected Date time;
+
+    public Deadline(String description, String time) throws DukeException {
         super(description);
         this.type = Type.D;
-        this.time = time;
+        try {
+            SimpleDateFormat formatter =new SimpleDateFormat("dd/MM/yyyy HHmm");
+            this.time = formatter.parse(time);
+        } catch (ParseException e) {
+            throw new DukeException("Time format wrong");
+        }
+
     }
 
     @Override

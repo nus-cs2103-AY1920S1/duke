@@ -8,9 +8,7 @@ import java.util.Scanner;
  * welcome messages and prmopts.
  */
 public class Ui {
-    /**
-     * A <code>Scanner</code> used to read user input.
-     */
+    /** A <code>Scanner</code> used to read user input. */
     private Scanner sc;
 
     /**
@@ -43,6 +41,7 @@ public class Ui {
 
     /**
      * Reads one line of user instruction.
+     *
      * @return A string that represents the user instruction.
      */
     public String readCommand() {
@@ -59,6 +58,7 @@ public class Ui {
     /**
      * Shows that a <code>Task</code> has been added, and displays the number 
      * of current tasks in the list.
+     *
      * @param t The <code>Task</code> that is added to the list.
      * @param size The number of tasks stored in the <code>TaskList</code>.
      */
@@ -69,6 +69,7 @@ public class Ui {
 
     /**
      * Shows that a <code>Task</code> has been marked as done.
+     *
      * @param t The <code>Task</code> that is marked as done.
      */
     public void markedAsDone(Task t) {
@@ -78,6 +79,7 @@ public class Ui {
     /**
      * Shows that a <code>Task</code> has been removed, and displays the number 
      * of current tasks in the list.
+     *
      * @param t The <code>Task</code> that is deleted from the list.
      */
     public void removedTask(Task t, int size) {
@@ -87,6 +89,7 @@ public class Ui {
 
     /**
      * Displays all tasks currently stored in the list.
+     *
      * @param tasks The <code>TaskList</code> used to store tasks.
      */
     public void printTasks(TaskList tasks) {
@@ -100,12 +103,20 @@ public class Ui {
 
     /**
      * Shows content of an error.
+     *
      * @param s A string that represents the content of the error.
      */
     public void showError(String s) {
         System.out.println(s);
     }
 
+    /**
+     * Shows search results for finding a keyword in the task list. Displays
+     * all tasks that contain the keyword.
+     *
+     * @param tasks The <code>TaskList</code> where keyword is searched.
+     * @param keyword A string representation of the keyword.
+     */
     public void printSearchResults(TaskList tasks, String keyword) {
         int idx = 1;
         System.out.println("Here are the matching tasks in your list:");

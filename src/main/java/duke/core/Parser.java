@@ -20,6 +20,7 @@ import duke.task.Event;
 public class Parser {
     /**
      * Creates a string from a sub array of a string array.
+     *
      * @param words The string array to be processed.
      * @param start The starting position in the string array.
      * @param end The ending position in the string array.
@@ -36,6 +37,7 @@ public class Parser {
 
     /**
      * Finds the index of a given string in a string array.
+     *
      * @param words The string array to be inspected.
      * @param s The string to be searched.
      * @return The index of the given string in the string array. Returns -1 if
@@ -52,6 +54,7 @@ public class Parser {
 
     /**
      * Parses a <code>Task</code> from a string array.
+     *
      * @param words The string array to be parsed.
      * @return The <code>Task</code> that is parsed from the string array.
      */
@@ -73,6 +76,7 @@ public class Parser {
 
     /**
      * Checks for illegal user input and throws exceptions accordingly.
+     *
      * @param words The string array to be checked.
      */
     private static void checkIllegalInstruction(String[] words) throws DukeException {
@@ -99,6 +103,7 @@ public class Parser {
     /**
      * Parses a line of user instruction into respective <code>Command</code> 
      * types.
+     *
      * @param s The string that represents user input.
      * @return A <code>Command</code> that represents the specific type of
      *          command the user gives.

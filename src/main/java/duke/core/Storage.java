@@ -16,13 +16,12 @@ import java.io.IOException;
  * a file and saving tasks in the file.
  */
 public class Storage {
-    /**
-     * A string that represents the file path in local hard disk.
-     */
+    /** A string that represents the file path in local hard disk. */
     private String filePath;
 
     /**
      * Constructs a <code>Storage</code> object with a specific file path.
+     *
      * @param filePath A string that represents the path of the file to be
      *          loaded and modified.
      */
@@ -33,6 +32,7 @@ public class Storage {
     /**
      * Loads tasks from the file into a <code>ArrayList</code> of 
      * <code>Task</code>.
+     *
      * @return A <code>ArrayList</code> of tasks as recorded in the file.
      * @throws DukeException If file is not found.
      */
@@ -74,6 +74,7 @@ public class Storage {
 
     /**
      * Saves tasks from a <code>TaskList</code> to the local file.
+     *
      * @param tasks The <code>TaskList</code> storing tasks.
      * @throws DukeException If writing to the local file failed.
      */

@@ -24,6 +24,7 @@ public class TaskList {
     /**
      * Overloaded constructor that constructs a new <code>TaskList</code> from
      * a given <code>ArrayList</code> of <code>Task</code>.
+     *
      * @param tasks An existing <code>ArrayList</code> of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -33,6 +34,7 @@ public class TaskList {
     /**
      * Returns the <code>ArrayList</code> of tasks associated with this
      * <code>TaskList</code>.
+     *
      * @return The <code>ArrayList</code> of tasks associated with this
      * <code>TaskList</code>.
      */
@@ -42,6 +44,7 @@ public class TaskList {
 
     /**
      * Returns the <code>Task</code> in the list with the given index.
+     *
      * @param i The index of the <code>Task</code>.
      * @return The <code>Task</code> in the list with this specific index.
      */
@@ -51,6 +54,7 @@ public class TaskList {
 
     /**
      * Adds a <code>Task</code> to the list.
+     *
      * @param t The <code>Task</code> to be added to the list.
      */
     public void addTask(Task t) {
@@ -59,6 +63,7 @@ public class TaskList {
 
     /**
      * Removes the <code>Task</code> with the given index from the list.
+     *
      * @param i The index of the <code>Task</code> to be deleted.
      */
     public void removeTask(int i) {
@@ -67,6 +72,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks stored in the list.
+     *
      * @return An integer representing the number of tasks in the list.
      */
     public int getSize() {

@@ -6,19 +6,16 @@ package duke.task;
  * tasks.
  */
 public abstract class Task {
-    /**
-     * A String that represents the specific content of the task.
-     */
+    /** A String that represents the specific content of the task. */
     private String description;
 
-    /**
-     * A boolean that represents the status of completion of the task.
-     */
+    /** A boolean that represents the status of completion of the task. */
     private boolean isDone;
 
     /**
      * Initialises the minimum fields required to setup a <code>Task</code>.
      * All new tasks are uncompleted by default.
+     *
      * @param description A string that represents the specific activity
      *                  associated with the task.
      */
@@ -29,6 +26,7 @@ public abstract class Task {
 
     /**
      * Returns an icon that represents the status of the task.
+     *
      * @return Tick if completed, cross if uncompleted.
      */
     protected String getStatusIcon() {
@@ -37,6 +35,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return A string that represents the specific activity associated with
      *          the task.
      */
@@ -53,6 +52,7 @@ public abstract class Task {
 
     /**
      * Formats the task in a pecific format for clear display and storage.
+     *
      * @return A string representatio of the task to be stored in a local file.
      */
     public abstract String format();
@@ -60,7 +60,8 @@ public abstract class Task {
     /**
      * Overrides the <code>toString()</code> method in <code>Object</code>
      * class to output a string representation of the task.
-     *  @return A string representation of the task that displays the status 
+     *
+     * @return A string representation of the task that displays the status
      *          and description of the task.
      */
     @Override

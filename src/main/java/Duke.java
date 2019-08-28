@@ -22,14 +22,13 @@ public class Duke {
      */
     private TaskList tasks;
 
-    /**
-     * A <code>Ui</code> object that deals with interactions with the user.
-     */
+    /** A <code>Ui</code> object that deals with interactions with the user. */
     private Ui ui;
 
     /**
      * Constructs a <code>Duke</code> object with a specific file path.
      * Initializes user interaction system and loads tasks from the file.
+     *
      * @param filePath A string that represents the path of the local file
      *          used for storing tasks.
      */
@@ -69,6 +68,7 @@ public class Duke {
     /**
      * Kickstarts the <code>Duke</code> program by passing in a specific file
      * path.
+     *
      * @param args The command line arguments.
      */
     public static void main(String[] args) {

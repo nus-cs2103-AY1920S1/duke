@@ -24,10 +24,6 @@ public class Duke {
         }
     }
 
-    /**
-     * The duke project.
-     */
-
     public void run() {
 
         ui.showGreeting();
@@ -57,14 +53,10 @@ public class Duke {
                                     storage.update(tasks.getList());
                                 } catch (Exception exp) {
                                     ui.showErrorMsg(exp.getMessage());
-                                } finally {
-
                                 }
                             }
                         } catch (DukeException exp) {
                             ui.showErrorMsg(exp.getMessage());
-                        } finally {
-
                         }
 
                     } else if (c.getCommandType().equals("delete")) {
@@ -80,14 +72,10 @@ public class Duke {
                                     storage.update(tasks.getList());
                                 } catch (Exception exp) {
                                     ui.showErrorMsg(exp.getMessage());
-                                } finally {
-
                                 }
                             }
                         } catch (DukeException exp) {
                             ui.showErrorMsg(exp.getMessage());
-                        } finally {
-
                         }
 
                     } else if (c.getCommandType().equals("deadline") || c.getCommandType().equals("todo") || c.getCommandType().equals("event")) {
@@ -105,21 +93,15 @@ public class Duke {
                                     } catch (java.text.ParseException exp) {
                                         exp.printStackTrace();
                                         break;
-                                    } finally {
-
                                     }
                                     try {
                                         storage.append(tasks.getLastItem());
                                     } catch (Exception exp) {
                                         ui.showErrorMsg(exp.getMessage());
-                                    } finally {
-
                                     }
                                 }
                             } catch (DukeException exp) {
                                 ui.showErrorMsg(exp.getMessage());
-                            } finally {
-
                             }
                         } else if (c.getCommandType().equals("todo")) {
                             try {
@@ -150,22 +132,16 @@ public class Duke {
                                     } catch (java.text.ParseException exp) {
                                         exp.printStackTrace();
                                         break;
-                                    } finally {
-
                                     }
                                     try {
                                         storage.append(tasks.getLastItem());
                                     } catch (Exception exp) {
                                         ui.showErrorMsg(exp.getMessage());
-                                    } finally {
-
                                     }
 
                                 }
                             } catch (DukeException exp) {
                                 ui.showErrorMsg(exp.getMessage());
-                            } finally {
-
                             }
                         }
 
@@ -178,8 +154,6 @@ public class Duke {
                     }
                 } catch (DukeException exp) {
                     ui.showErrorMsg(exp.getMessage());
-                } finally {
-
                 }
 
                 ui.showLine();

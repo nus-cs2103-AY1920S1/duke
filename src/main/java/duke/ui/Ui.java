@@ -10,13 +10,14 @@ import java.io.InputStreamReader;
  * Class that serves as UI, handles all user inputs and outputs.
  */
 public class Ui {
+
     /** Messages that will be printed by the Ui object. */
-    private final static String greet = "Hello! I'm Duke\nWhat can I do for you?";
-    private final static String goodbye = "Bye. Hope to see you again!";
-    private final static String niceAdded = "Nice! I've marked this task as done:";
-    private final static String gotIt = "Got it. I've added this task:";
-    private final static String deleted = "Noted. I've removed this task:";
-    private final static String tasks = "Here are your tasks in your list:";
+    private static final String GREET = "Hello! I'm duke.Duke\nWhat can I do for you?";
+    private static final String GOODBYE = "Bye. Hope to see you again!";
+    private static final String NICE_ADDED = "Nice! I've marked this task as done:";
+    private static final String GOT_IT = "Got it. I've added this task:";
+    private static final String DELETED = "Noted. I've removed this task:";
+    private static final String TASKS = "Here are your tasks in your list:";
     /** Object to scan user input. */
     private BufferedReader userInput;
 
@@ -24,35 +25,35 @@ public class Ui {
      * Class constructor to create new Ui object and initialize BufferedReader
      * to scan user input.
      */
-    public Ui(){
+    public Ui() {
         this.userInput = new BufferedReader(new InputStreamReader(System.in));
     }
 
     /**
-     * Prints the total number of tasks that the user has so far
-     */
-    public void printNumTasks(){
+    * Prints the total number of tasks that the user has so far
+    */
+    public void printNumTasks() {
         System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
     }
 
     /**
-     * Prints the Duke logo and greeting message
-     */
-    public void printLogoAndGreet(){
+    * Prints the Duke logo and greeting message
+    */
+    public void printLogoAndGreet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(greet);
+        System.out.println(GREET);
     }
 
     /**
      * Prints the Duke goodbye message.
      */
-    public void printGoodbye(){
-        System.out.println(goodbye);
+    public void printGoodbye() {
+        System.out.println(GOODBYE);
     }
 
     /**
@@ -60,8 +61,8 @@ public class Ui {
      *
      * @param doneTask Task that has just been completed.
      */
-    public void printNice(Task doneTask){
-        System.out.println(niceAdded);
+    public void printNice(Task doneTask) {
+        System.out.println(NICE_ADDED);
         System.out.println(doneTask);
     }
 
@@ -70,8 +71,8 @@ public class Ui {
      *
      * @param newTask New Task that has just been added.
      */
-    public void printGotIt(Task newTask){
-        System.out.println(gotIt);
+    public void printGotIt(Task newTask) {
+        System.out.println(GOT_IT);
         System.out.println(" " + newTask.toString());
     }
 
@@ -80,8 +81,8 @@ public class Ui {
      *
      * @param deletedTask Task that has been deleted.
      */
-    public void printDeleted(Task deletedTask){
-        System.out.println(deleted);
+    public void printDeleted(Task deletedTask) {
+        System.out.println(DELETED);
         System.out.println(deletedTask);
     }
 
@@ -93,7 +94,7 @@ public class Ui {
     public String readLine() {
         try {
             return userInput.readLine();
-        } catch (Exception e){
+        } catch (Exception e) {
             showReadingError();
             return null;
         }
@@ -102,14 +103,14 @@ public class Ui {
     /**
      * Prints an error message when reading input fails.
      */
-    private void showReadingError(){
+    private void showReadingError() {
         System.err.println("Error reading user input");
     }
 
     /**
      * Prints an error message when closing input stream fails.
      */
-    private void showCloseInputError(){
+    private void showCloseInputError() {
         System.err.println("Error close user input stream");
     }
 
@@ -118,15 +119,15 @@ public class Ui {
      *
      * @param tasklist TaskList containing all Tasks to print.
      */
-    public void printTasks(TaskList tasklist){
-        System.out.println(tasks);
+    public void printTasks(TaskList tasklist) {
+        System.out.println(TASKS);
         System.out.println(tasklist.toString());
     }
 
     /**
      * Closes user input stream.
      */
-    public void closeInput(){
+    public void closeInput() {
         try {
             userInput.close();
         } catch (IOException e) {
@@ -137,28 +138,28 @@ public class Ui {
     /**
      * Prints an error message when loading from Storage fails.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.err.println("Error loading from specified file path");
     }
 
     /**
      * Prints an error message when writing to file path fails.
      */
-    public void showWritingError(){
+    public void showWritingError() {
         System.err.println("Error writing to specified file path");
     }
 
     /**
      * Prints message indicating writing process started.
      */
-    public void printWritingChanges(){
+    public void printWritingChanges() {
         System.out.println("Writing new changes to disk...");
     }
 
     /**
      * Prints message indicating successful writing to file path.
      */
-    public void printDoneWriting(){
+    public void printDoneWriting() {
         System.out.println("Writing done!");
     }
 
@@ -167,7 +168,7 @@ public class Ui {
      *
      * @param errorMessage Error Message to be printed.
      */
-    public void printDukeError(String errorMessage){
+    public void printDukeError(String errorMessage) {
         System.err.println(errorMessage);
     }
 }

@@ -11,7 +11,7 @@ public class TaskList {
     /**
      * Class constructor that initializes an empty list of tasks.
      */
-    public TaskList(){
+    public TaskList() {
         this.tasksList = new ArrayList<>();
     }
 
@@ -19,7 +19,7 @@ public class TaskList {
      * Class constructor that specifies the list of tasks this TaskList represents.
      * @param tasksList ArrayList of tasks to be represented.
      */
-    public TaskList(ArrayList<Task> tasksList){
+    public TaskList(ArrayList<Task> tasksList) {
         this.tasksList = tasksList;
     }
 
@@ -28,7 +28,7 @@ public class TaskList {
      *
      * @param t Task to add.
      */
-    public void addTask(Task t){
+    public void addTask(Task t) {
         tasksList.add(t);
     }
 
@@ -37,17 +37,18 @@ public class TaskList {
      *
      * @param index Index to delete at.
      */
-    public void deleteTask(int index){
+    public void deleteTask(int index) {
         tasksList.remove(index);
         Task.totalTasks--;
     }
+
 
     /**
      * Returns a Task at a specific index of the TaskList.
      * @param index Index of task to get.
      * @return Task at specific index.
      */
-    public Task get(int index){
+    public Task get(int index) {
         return tasksList.get(index);
     }
 
@@ -56,7 +57,7 @@ public class TaskList {
      *
      * @return Size of TaskList.
      */
-    public int size(){
+    public int size() {
         return tasksList.size();
     }
 
@@ -66,7 +67,7 @@ public class TaskList {
      * @return String representation for every task in the list.
      */
     @Override
-    public String toString(){
+    public String toString() {
         String toReturn = "";
         int size = tasksList.size();
         for (int i = 0; i < size; i++) {

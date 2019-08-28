@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * Class representing user command to delete task at a specific index.
  */
 public class DeleteCommand extends Command {
+
     private int toDelete;
 
     /**
@@ -17,7 +18,7 @@ public class DeleteCommand extends Command {
      *
      * @param toDelete Index to Delete at.
      */
-    public DeleteCommand(int toDelete){
+    public DeleteCommand(int toDelete) {
         this.toDelete = toDelete;
     }
 
@@ -28,10 +29,11 @@ public class DeleteCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try{
-            if(toDelete >= taskList.size() || toDelete < 0){
-                throw new DukeException("☹ OOPS! duke.task.Task " + (toDelete + 1) + " doesn't exist!");
+            if (toDelete >= taskList.size() || toDelete < 0) {
+                throw new DukeException("☹ OOPS! duke.task.Task "
+                        + (toDelete + 1) + " doesn't exist!");
             } else {
                 Task curr = taskList.get(toDelete);
                 ui.printDeleted(curr);
@@ -39,7 +41,7 @@ public class DeleteCommand extends Command {
                 ui.printNumTasks();
                 storage.setChangedTrue();
             }
-        } catch (DukeException de){
+        } catch (DukeException de) {
             ui.printDukeError(de.getMessage());
         }
     }
@@ -49,7 +51,7 @@ public class DeleteCommand extends Command {
      *
      * @return False as not exit command.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

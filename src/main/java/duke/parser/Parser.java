@@ -1,7 +1,15 @@
 package duke.parser;
 
+import duke.command.Command;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.command.EventCommand;
+
 import duke.dukeexception.DukeException;
-import duke.command.*;
 
 /**
  * Class to handle parsing of user input
@@ -15,32 +23,33 @@ public class Parser {
      * @throws DukeException if input String toParse is not recognized
      * or in the wrong format.
      */
+
     public static Command parse(String toParse) throws DukeException {
         String[] tokens = toParse.split(" ");
         String commandType = tokens[0];
-        Command cToReturn = null;
+        Command commandToReturn;
         String dateString = "";
         String timeString = "";
         String toAdd = "";
         switch (commandType) {
         case "list":
-            cToReturn = new ListCommand();
+            commandToReturn = new ListCommand();
             break;
         case "done":
             //"done" logic
-            if(tokens.length < 2){
+            if (tokens.length < 2) {
                 throw new DukeException("☹ OOPS!!! Please specify task to complete");
             }
             int toComplete = Integer.parseInt(tokens[1]) - 1;
-            cToReturn = new DoneCommand(toComplete);
+            commandToReturn = new DoneCommand(toComplete);
             break;
         case "delete":
             //"delete" logic
-            if(tokens.length < 2){
+            if (tokens.length < 2) {
                 throw new DukeException("☹ OOPS!!! Please specify task to delete");
             }
             int toDelete = Integer.parseInt(toParse.split(" ")[1]) - 1;
-            cToReturn = new DeleteCommand(toDelete);
+            commandToReturn = new DeleteCommand(toDelete);
             break;
         case "todo":
             //toodo logic
@@ -50,7 +59,7 @@ public class Parser {
             for (int j = 1; j < tokens.length; j++) {
                 toAdd = toAdd + tokens[j] + " ";
             }
-            cToReturn = new TodoCommand(toAdd.trim());
+            commandToReturn = new TodoCommand(toAdd.trim());
             break;
         case "deadline":
             //"deadline" logic
@@ -59,15 +68,17 @@ public class Parser {
             }
             boolean dateFlag = false;
             //Check if both date and time are specified
-            if(toParse.split("/by")[1].trim().split(" ").length != 2){
-                throw new DukeException("☹ OOPS!!! duke.datetime.Date and duke.datetime.Timing not specified correctly!");
+            if (toParse.split("/by")[1].trim().split(" ").length != 2) {
+                throw new DukeException("☹ OOPS!!! duke.datetime.Date and "
+                        + "duke.datetime.Timing not specified correctly!");
             }
             for (int m = 1; m < tokens.length; m++) {
                 if (tokens[m].equals("/by")) {
                     dateFlag = true;
                 } else {
-                    if (dateFlag == false) toAdd = toAdd + tokens[m] + " ";
-                    else {
+                    if (dateFlag == false) {
+                        toAdd = toAdd + tokens[m] + " ";
+                    } else {
                         if (m == tokens.length - 1) {
                             timeString = tokens[m];
                         } else {
@@ -76,24 +87,27 @@ public class Parser {
                     }
                 }
             }
-            cToReturn = new DeadlineCommand(toAdd.trim(), dateString.trim(), timeString.trim());
+            commandToReturn = new DeadlineCommand(toAdd.trim(), dateString.trim(), timeString.trim());
             break;
         case "event":
             //"event" logic
-            if(tokens.length == 1){
+            if (tokens.length == 1) {
                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             }
             boolean timeFlag = false;
             //Check if both date and time are specified
-            if(toParse.split("/at")[1].trim().split(" ").length != 2){
-                throw new DukeException("☹ OOPS!!! duke.datetime.Date and duke.datetime.Timing not specified correctly!");
+            if (toParse.split("/at")[1].trim().split(" ").length != 2) {
+                throw new DukeException("☹ OOPS!!! duke.datetime.Date and"
+                        + " duke.datetime.Timing not specified correctly!");
             }
             for (int z = 1; z < tokens.length; z++) {
-                if (tokens[z].equals("/at")) timeFlag = true;
-                else {
-                    if (timeFlag == false) toAdd = toAdd + tokens[z] + " ";
-                    else{
-                        if(z == tokens.length - 1){
+                if (tokens[z].equals("/at")) {
+                    timeFlag = true;
+                } else {
+                    if (timeFlag == false) {
+                        toAdd = toAdd + tokens[z] + " ";
+                    } else {
+                        if (z == tokens.length - 1) {
                             timeString = tokens[z];
                         } else {
                             dateString = tokens[z];
@@ -101,15 +115,15 @@ public class Parser {
                     }
                 }
             }
-            cToReturn = new EventCommand(toAdd.trim(), dateString.trim(), timeString.trim());
+            commandToReturn = new EventCommand(toAdd.trim(), dateString.trim(), timeString.trim());
             break;
         case "bye":
-            cToReturn = new ByeCommand();
+            commandToReturn = new ByeCommand();
             break;
         default:
             //unrecognized command
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return cToReturn;
+        return commandToReturn;
     }
 }

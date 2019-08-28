@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      *
      * @return False as not exit command.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 
@@ -25,7 +25,7 @@ public class ListCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printTasks(taskList);
     }
 }

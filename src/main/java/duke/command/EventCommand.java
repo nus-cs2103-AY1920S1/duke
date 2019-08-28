@@ -19,7 +19,7 @@ public class EventCommand extends Command {
      * @param date Date of Event to attend.
      * @param timing Timing of Event to attend.
      */
-    public EventCommand(String description, String date, String timing){
+    public EventCommand(String description, String date, String timing) {
         this.newTask = new Event(description, date, timing);
     }
 
@@ -30,7 +30,7 @@ public class EventCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printGotIt(newTask);
         taskList.addTask(newTask);
         ui.printNumTasks();
@@ -42,7 +42,7 @@ public class EventCommand extends Command {
      *
      * @return False as not exit command.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

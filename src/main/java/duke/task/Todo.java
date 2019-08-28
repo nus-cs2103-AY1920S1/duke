@@ -4,13 +4,14 @@ package duke.task;
  * Represents an actual to-do task that is to be done by the User.
  */
 public class Todo extends Task {
+
     /**
      * Class constructor that specifies description of the
      * To-do task
      *
      * @param description Description of To-do.
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
         Task.totalTasks++;
     }
@@ -22,7 +23,7 @@ public class Todo extends Task {
      * @param description Description of To-do.
      * @param done Completion status of To-do
      */
-    public Todo(String description, int done){
+    public Todo(String description, int done) {
         super(description, done);
         Task.totalTasks++;
     }
@@ -34,7 +35,7 @@ public class Todo extends Task {
      * @return String representation of To-do.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

@@ -19,7 +19,7 @@ public class DeadlineCommand extends Command {
      * @param date Date of Deadline to be completed by.
      * @param timing Timing of Deadline to be completed by.
      */
-    public DeadlineCommand(String description, String date, String timing){
+    public DeadlineCommand(String description, String date, String timing) {
         this.newTask = new Deadline(description, date, timing);
     }
 
@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printGotIt(newTask);
         taskList.addTask(newTask);
         ui.printNumTasks();
@@ -42,7 +42,7 @@ public class DeadlineCommand extends Command {
      *
      * @return False as not exit command.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

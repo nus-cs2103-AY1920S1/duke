@@ -8,7 +8,8 @@ public class Date {
     private int month;
     private int year;
     private String dateString;
-    private static String[] MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August",
+    private static String[] MONTHS = {"January", "February", "March", "April",
+        "May", "June", "July", "August",
         "September", "October", "November", "December"};
 
     /**
@@ -17,7 +18,7 @@ public class Date {
      *
      * @param dateString String to parse into Date.
      */
-    public Date(String dateString){
+    public Date(String dateString) {
         this.dateString = dateString;
         String[] tokens = dateString.split("/");
         this.day = Integer.parseInt(tokens[0]);
@@ -30,7 +31,7 @@ public class Date {
      *
      * @return Initial String before it was parsed.
      */
-    public String getDateString(){
+    public String getDateString() {
         return dateString;
     }
 
@@ -40,18 +41,18 @@ public class Date {
      * @return String representation of this Date object in English.
      */
     @Override
-    public String toString(){
-        String toReturn = "";
-        if(day % 10 == 2 && day != 12){
+    public String toString() {
+        String toReturn;
+        if (day % 10 == 2 && day != 12) {
             toReturn = day + "nd";
-        } else if(day % 10 == 3 && day != 13){
+        } else if (day % 10 == 3 && day != 13) {
             toReturn = day + "rd";
-        } else if(day % 10 == 1 && day != 11){
+        } else if (day % 10 == 1 && day != 11) {
             toReturn = day + "st";
         } else {
             toReturn = day + "th";
         }
-        toReturn = toReturn + " of " + MONTHS[month-1] + " " + year;
+        toReturn = toReturn + " of " + MONTHS[month - 1] + " " + year;
         return toReturn;
     }
 

@@ -20,7 +20,7 @@ public class Timing {
         this.minute = timeInt % 100;
         this.hour = timeInt / 100;
 
-        if(this.hour >= 12){
+        if (this.hour >= 12) {
             meridiemFlag = true; //means it is PM not AM
         }
     }
@@ -30,7 +30,8 @@ public class Timing {
      *
      * @return Initial string representation of the timing.
      */
-    public String getTimeString(){
+
+    public String getTimeString() {
         return timeString;
     }
 
@@ -40,9 +41,9 @@ public class Timing {
      * @return 12-hour clock representation of this timing
      */
     @Override
-    public String toString(){
-        String toReturn = (hour == 0 || hour == 12) ? "12" : hour%12 + "";
-        if(minute != 0){
+    public String toString() {
+        String toReturn = (hour == 0 || hour == 12) ? "12" : hour % 12 + "";
+        if (minute != 0) {
             toReturn = toReturn + "." + minute;
         }
         String meridiem = meridiemFlag ? "pm" : "am";

@@ -6,6 +6,7 @@ package duke.task;
 public abstract class Task {
     private String description;
     private boolean isDone;
+
     /** Total number of tasks tracked by Duke */
     public static int totalTasks = 0;
 
@@ -28,8 +29,10 @@ public abstract class Task {
      */
     public Task(String description, int done) {
         this.description = description;
-        this.isDone = done == 1;
-
+        this.isDone = false;
+        if (done == 1) {
+            this.isDone = true;
+        }
     }
 
     /**
@@ -44,7 +47,7 @@ public abstract class Task {
     /**
      * Marks the Task as completed.
      */
-    public void completeTask(){
+    public void setTaskCompleted() {
         isDone = true;
     }
 
@@ -53,7 +56,7 @@ public abstract class Task {
      *
      * @return Completion status of Task
      */
-    public boolean getDoneStatus(){
+    public boolean getDoneStatus() {
         return isDone;
     }
 
@@ -62,7 +65,7 @@ public abstract class Task {
      *
      * @return Description of Task.
      */
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
@@ -73,7 +76,7 @@ public abstract class Task {
      * @return String representation of Task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + getStatusIcon() + "]" + " " + description;
     }
 

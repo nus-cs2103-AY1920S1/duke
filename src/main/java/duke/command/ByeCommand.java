@@ -8,12 +8,13 @@ import duke.ui.Ui;
  * Class to represent command to exit Duke.
  */
 public class ByeCommand extends Command {
+
     /**
      * Returns true because this is an exit command.
      *
      * @return True indicating this is a command to exit Duke.
      */
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 
@@ -24,7 +25,7 @@ public class ByeCommand extends Command {
      * @param ui Ui object to be called by the command.
      * @param storage Storage object to be called by the command.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
 
     }
 }

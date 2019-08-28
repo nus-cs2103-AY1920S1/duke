@@ -12,6 +12,12 @@ then
     rm ACTUAL.TXT
 fi
 
+if [ -e "./Data" ]
+then
+    rm -r Data
+fi
+
+
 # compile the code into the bin folder, terminates if error occurred
 if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/Duke.java
 then

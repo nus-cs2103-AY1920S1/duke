@@ -4,11 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
-    private enum Commands {
-        bye,
-        list,
-        done,
-        delete,
+    private enum EventTypes {
         todo,
         event,
         deadline,
@@ -31,6 +27,7 @@ public class Duke {
         System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
         straightLine();
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -47,62 +44,52 @@ public class Duke {
             try {
                 String input = sc.nextLine().trim();
                 straightLine();
-                String command = input.split(" ")[0]; //the first word of the user input
-                Commands commandEnum;
-                try {
-                    commandEnum = Commands.valueOf(command.toLowerCase());
-                } catch(IllegalArgumentException err) {
-                    throw new InvalidCommandDukeException(command);
-                }
-
+                String command = input.split(" ")[0].toLowerCase(); //the first word of the user input
                 String description = input.substring(command.length()).trim();
-                switch (commandEnum) {
-                case bye:
+
+                switch (command) {
+                case "bye":
                     System.out.println("    Bye! See you again soon!!");
                     straightLine();
                     shouldStop = true;
                     break;
-                case list:
+                case "list":
                     System.out.println("    Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println("      " + (i + 1) + "." + tasks.get(i).toString());
                     }
                     straightLine();
                     break;
-                case done:
-                    {
-                        try {
-                            int taskNumber = Integer.parseInt(description) - 1;
-                            tasks.get(taskNumber).complete();
-                            System.out.println("    Nice! I've marked this task as done:");
-                            System.out.println("      " + tasks.get(taskNumber).toString());
-                            straightLine();
-                        } catch (IndexOutOfBoundsException | NumberFormatException err) {
-                            throw new InvalidDescriptionDukeException(command, description);
-                        }
+                case "done":
+                    try {
+                        int taskNumber = Integer.parseInt(description) - 1;
+                        tasks.get(taskNumber).complete();
+                        System.out.println("    Nice! I've marked this task as done:");
+                        System.out.println("      " + tasks.get(taskNumber).toString());
+                        straightLine();
+                    } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                        throw new InvalidDescriptionDukeException(command, description);
                     }
                     break;
-                case delete:
-                    {
-                        try {
-                            int taskNumber = Integer.parseInt(description) - 1;
-                            System.out.println("    Noted. I've removed this task:");
-                            System.out.println("      " + tasks.get(taskNumber).toString());
-                            tasks.remove(taskNumber);
-                            System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
-                            straightLine();
-                        } catch (IndexOutOfBoundsException | NumberFormatException err) {
-                            throw new InvalidDescriptionDukeException(command, description);
-                        }
+                case "delete":
+                    try {
+                        int taskNumber = Integer.parseInt(description) - 1;
+                        System.out.println("    Noted. I've removed this task:");
+                        System.out.println("      " + tasks.get(taskNumber).toString());
+                        tasks.remove(taskNumber);
+                        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                        straightLine();
+                    } catch (IndexOutOfBoundsException | NumberFormatException err) {
+                        throw new InvalidDescriptionDukeException(command, description);
                     }
                     break;
-                case todo:
+                case "todo":
                     addTask(new ToDoTask(description));
                     break;
-                case event:
+                case "event":
                     addTask(new EventsTask(description));
                     break;
-                case deadline:
+                case "deadline":
                     addTask(new DeadlinesTask(description));
                     break;
                 default:

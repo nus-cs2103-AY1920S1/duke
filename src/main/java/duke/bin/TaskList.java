@@ -1,14 +1,20 @@
-package bin;
+package duke.bin;
 
-import bin.task.Task;
+import duke.bin.task.Task;
 
 import java.util.ArrayList;
 
-public class DataStorage {
+public class TaskList {
     private ArrayList<Task> textStorage = new ArrayList<>();
 
     public void store(Task task) {
         textStorage.add(task);
+    }
+
+    public void store(ArrayList<Task> tasks) {
+        for (Task task : tasks) {
+            textStorage.add(task);
+        }
     }
 
     public int getSize() {

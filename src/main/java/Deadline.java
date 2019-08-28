@@ -25,13 +25,4 @@ public class Deadline extends Task {
     		return "deadline " + super.description + " /by " + byString;
     	}
     }
-
-    @Override
-    public String toSave() {
-    	if (super.isDone) {
-    		return "donedeadline " + super.description + " /by " + by;
-    	} else {
-    		return "deadline " + super.description + " /by " + by;
-    	}
-    }
 }

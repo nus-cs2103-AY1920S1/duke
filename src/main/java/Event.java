@@ -24,12 +24,4 @@ public class Event extends Task {
     		return "event " + super.description + " /at " + atString;
     	}
     }
-    
-    public String toSave() {
-    	if (super.isDone) {
-    		return "doneevent " + super.description + " /at " + at;
-    	} else {
-    		return "event " + super.description + " /at " + at;
-    	}
-    }
 }

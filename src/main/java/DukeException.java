@@ -19,6 +19,8 @@ public class DukeException extends Exception{
             return ":( OPPS!!! Invalid input format for deadline.";
         } else if (exceptionType.equals("event")) {
             return ":( OPPS!!! Invalid input format for event";
+        } else if (exceptionType.equals("find")) {
+            return ":( OOPS!!! No such keyword in the list!";
         } else {
             return ":( OOPS!!! I'm sorry, but I don't know what that means :-(";
         }

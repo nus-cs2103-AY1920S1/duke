@@ -31,6 +31,6 @@ public class Task {
     }
 
     public String save() {
-        return (isDone ? 0 : 1) + description;
+        return (isDone ? 1 : 0) + description;
     }
 }

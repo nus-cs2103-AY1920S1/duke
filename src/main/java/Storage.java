@@ -10,6 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class Storage {
 	protected String filePath;
 

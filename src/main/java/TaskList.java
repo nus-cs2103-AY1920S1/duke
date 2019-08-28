@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class TaskList {
 	private ArrayList<Task> memory;
 	

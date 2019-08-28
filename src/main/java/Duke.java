@@ -1,10 +1,14 @@
 import java.util.Scanner;
 
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class Duke {
 	private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+	private TaskList tasks;
+	private Ui ui;
+	private Parser parser;
 
     /**
      * Constructor.

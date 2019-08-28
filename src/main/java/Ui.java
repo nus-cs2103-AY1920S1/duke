@@ -1,3 +1,7 @@
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class Ui {
 	static String line = "____________________________________________________________";
 	private TaskList tasks;

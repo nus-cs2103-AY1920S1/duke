@@ -1,3 +1,7 @@
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

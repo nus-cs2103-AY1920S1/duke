@@ -2,8 +2,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 class ParserTest {
 
+	/**
+	 * Parser Test.
+	 */
 	@Test
 	void test() {
 		Parser parser = new Parser();

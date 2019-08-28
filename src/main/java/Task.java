@@ -1,3 +1,7 @@
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class Task {
 	static String line = "____________________________________________________________";
     protected String description;

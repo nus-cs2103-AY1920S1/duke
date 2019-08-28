@@ -1,6 +1,10 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class Deadline extends Task {
 	protected Date by;
 

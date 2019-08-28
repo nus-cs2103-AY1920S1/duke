@@ -1,14 +1,15 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Deadline extends Task {
     private String time;
 
-    private Deadline(String description, String time) {
+    Deadline(String description, String time) {
         super(description);
         this.time = time;
     }
 
-    static Command getCommand(List<Task> tasks) {
+    static Command getCommand(List<Task> tasks, Storage storage) {
         return words -> {
             List<String> wordList = List.of(words);
             int separator = wordList.indexOf("/by");
@@ -23,9 +24,19 @@ public class Deadline extends Task {
             String time = String.join(" ", wordList.subList(separator + 1, words.length));
             Task task = new Deadline(description, time);
             tasks.add(task);
+            storage.store(tasks);
             return List.of("Got it. I've added this task:", "  " + task,
                     "Now you have " + tasks.size() + " tasks in the list.");
         };
+    }
+
+    @Override
+    List<String> getSaveList() {
+        List<String> list = new ArrayList<>();
+        list.add("D");
+        list.addAll(super.getSaveList());
+        list.add(time);
+        return list;
     }
 
     @Override

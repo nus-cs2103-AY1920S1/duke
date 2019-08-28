@@ -74,27 +74,28 @@ public class Duke {
                                     de = DukeEnum.EVENT;
                                     break;
                                 }
-                                boolean desc = false;
-                                boolean time = false;
+                                boolean hasDescription = false;
+                                boolean hasTime = false;
                                 try {
                                     if (de.equals(DukeEnum.TODO)) {
                                         String todoDesc = inputArr[1];
-                                        desc = true;
+                                        hasDescription = true;
                                         task = new Todo(todoDesc);
-                                    } else if (de.equals(DukeEnum.DEADLINE)) {
-                                        String deadlineDesc = inputArr[1];
-                                        desc = true;
-                                        String[] deadlineArr = deadlineDesc.split(" /", 2);
-                                        String at = deadlineArr[1];
-                                        time = true;
-                                        task = new Deadline(deadlineArr[0], at.split(" ", 2)[1]);
-                                    } else if (de.equals(DukeEnum.EVENT)) {
-                                        String evenDesc = inputArr[1];
-                                        desc = true;
-                                        String[] eventArr = evenDesc.split(" /", 2);
-                                        String by = eventArr[1];
-                                        time = true;
-                                        task = new Event(eventArr[0], by.split(" ", 2)[1]);
+                                    } else if (de.equals(DukeEnum.DEADLINE) || de.equals(DukeEnum.EVENT)) {
+                                        String description = inputArr[1];
+                                        hasDescription = true;
+                                        String[] taskArr = description.split(" /", 2);
+                                        String atBy = taskArr[1];
+                                        hasTime = true;
+                                        if(de.equals(DukeEnum.DEADLINE)){
+                                            String byString = atBy.split(" ", 2)[1];
+                                            String dt = DateTimeHandler.getDateTime(byString);
+                                            task = new Deadline(taskArr[0], dt);
+                                        } else {
+                                            String atString = atBy.split(" ", 2)[1];
+                                            DateTimeRangeHelper dt = DateTimeHandler.getDateTimeRange(atString);
+                                            task = new Event(taskArr[0], dt, atString);
+                                        }
                                     }
 
                                     lst.add(task);
@@ -102,11 +103,11 @@ public class Duke {
                                     System.out.println(gotIt);
                                 } catch (ArrayIndexOutOfBoundsException ex) {
                                     if (de.equals(DukeEnum.TODO)) {
-                                        throw new TodoException("", desc);
+                                        throw new TodoException("", hasDescription);
                                     } else if (de.equals(DukeEnum.DEADLINE)) {
-                                        throw new DeadlineException("", desc, time);
+                                        throw new DeadlineException("", hasDescription, hasTime);
                                     } else {
-                                        throw new EventException("", desc, time);
+                                        throw new EventException("", hasDescription, hasTime);
                                     }
                                 }
 
@@ -122,8 +123,7 @@ public class Duke {
                     System.out.println("\\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception ex) {
             System.out.println("\\u2639 OOPS!!! I'm sorry, but I could not load your saved task list ");
         }
 

@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ public class Duke {
     private List<Task> list; // List of all tasks
 
     /**
-     * Main function to test Duke code.
+     * Drives the main code to start up Duke. It is the CLI entry
+     * point.
      *
      * @param args command line arguments. Not used.
      */
@@ -36,7 +38,7 @@ public class Duke {
         duke.start();
     }
 
-    /** Basic constructor for the Duke class.
+    /**
      * Returns a Duke object, which can be used
      * to start the chat assistant driver loop.
      */
@@ -56,20 +58,24 @@ public class Duke {
         this.greetHello(); // greet user on startup
         this.loadFromDisk(); // retrieve saved list, if any
 
-        do {
+        do { // main loop and exception handler
             String input = sc.nextLine();
                 try {
-                    this.parseInstruction(input);
+                    this.parseInstruction(input); // send it off to be parsed
                 } catch (DukeShutDownException e) {
                     isNotShutdown = false; // sets flag to end loop
                 } catch (NumberFormatException e) {
                     this.formattedPrintln("You need to provide me " +
-                            "with a valid task index!");
+                            "with a valid task index! (That means integer numbers only!)");
+                } catch (ParseException e) {
+                    this.formattedPrintln(("I couldn't decipher the date and time"
+                            + " that you gave me...\n"
+                            + "Please write it in <dd/mm/yyyy HHmm> format for me to"
+                            + "\nunderstand!"));
                 } catch (DukeException e) {
                     this.formattedPrintln(e.getMessage());
                 }
         } while (isNotShutdown);
-
         this.greetGoodbye(); // greet user before exiting
     }
 
@@ -126,7 +132,7 @@ public class Duke {
       @param input string input by the user.
      */
     private void parseInstruction(String input) throws DukeException,
-            NumberFormatException {
+            NumberFormatException, ParseException {
         String[] parsedStr = input.split(" ", 2);
         String command = parsedStr[0];
         String parameter;
@@ -230,7 +236,8 @@ public class Duke {
      @param eventType the type of task to be created
      @param parameters the parameters for describing the task
     */
-    private void addToList(String taskType, String parameters) throws DukeException {
+    private void addToList(String taskType, String parameters) throws DukeException,
+            ParseException {
         Task task;
         String description;
         String[] splitStr;
@@ -243,21 +250,23 @@ public class Duke {
             case "event":
                 splitStr = parameters.split(" /at ", 2);
                 if (splitStr.length < 2) {
-                    throw new DukeException("You need to specify a time"
-                            + " to create an event task!");
+                    throw new DukeException("You need to specify both time and description to\n"
+                            + "create an event task!");
                 }
                 description = splitStr[0];
-                String at = splitStr[1];
+                String at_str = splitStr[1];
+                DateTime at = DateTime.parseString(at_str);
                 task = new Event(description, at);
                 break;
             case "deadline":
                 splitStr = parameters.split(" /by ", 2);
                 if (splitStr.length < 2) {
-                    throw new DukeException("You need to specify a time"
-                            + " to create an deadline task!");
+                    throw new DukeException("You need to specify both time and description to\n"
+                            + "create an deadline task!");
                 }
                 description = splitStr[0];
-                String by = splitStr[1];
+                String by_str = splitStr[1];
+                DateTime by = DateTime.parseString(by_str);
                 task = new Deadline(description, by);
                 break;
             default:
@@ -267,7 +276,7 @@ public class Duke {
         }
         this.list.add(task);
         this.formattedPrintln("Got it. I've added this task:\n  "
-                + task.toString()
+                + task
                 + "\nNow you have "
                 + this.list.size()
                 + " task(s) in the list.");

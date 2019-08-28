@@ -5,18 +5,38 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-//"/users/junhup/desktop/duke/src/main/java/duke.txt"
+/**
+ * Storage class deals with loading tasks from the file and
+ * saving tasks into the file.
+ */
 public class Storage {
 	protected String filePath;
 	
+	/**
+	 * Class constructor
+	 *
+	 * @param filePath the path of the file that is used to load and save the task into.
+	 * @throws IOException if the required filePath cannot be found.
+	 */
 	public Storage(String filePath) throws IOException {
 		this.filePath = filePath;
 	}
 	
+	/**
+	 * This method loads the saved tasks list from the saved file into the program.
+	 *
+	 * @return the array list of tasks that keep tracks of the tasks.
+	 */
 	public ArrayList<Task> load() {
 		return this.readStored();
 	}
 	
+	/**
+	 * This method stores the to do task keyed in by the user into the file.
+	 *
+	 * @param input the description of the to do task
+	 * @throws EmptyDescriptionException if the description is empty for the to do task.
+	 */
 	public void storeTodo(String input) throws EmptyDescriptionException {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true));
@@ -35,6 +55,14 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * This method stores the deadline task keyed in by the user into the file.
+	 *
+	 * @param input the description of the deadline task
+	 * @throws EmptyDescriptionException if the description is empty for the deadline task.
+	 * @throws InvalidDescriptionException if the format of the deadline keyed in by the user is wrong.
+	 * @throws ParseException if the date format for the deadline keyed in by the user is wrong.
+	 */
 	public void storeDeadline(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException{
 		try {
 			FileWriter fw = new FileWriter(this.filePath, true);
@@ -63,6 +91,14 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * This method stores the event task keyed in by the user into the file.
+	 *
+	 * @param input the description of the event task
+	 * @throws EmptyDescriptionException if the description is empty for the event task.
+	 * @throws InvalidDescriptionException if the format of the event keyed in by the user is wrong.
+	 * @throws ParseException if the date format for the event keyed in by the user is wrong.
+	 */
 	public void storeEvent(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException{
 		try {
 			if (input.contains("/at")) {
@@ -90,7 +126,14 @@ public class Storage {
 		}
 	}
 	
-	public void updateDelete(String input) throws IOException{
+	/**
+	 * This method deletes the task as requested by the user input in the file. It rewrites
+	 * everything from the saved file and writes from the updated task list in the program.
+	 *
+	 * @param input the command given by the user input which includes the index of the
+	 *              array list that user wants to delete.
+	 */
+	public void updateDelete(String input){
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filePath));
 			String[] inputs = input.split(" ");
@@ -119,6 +162,13 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * This method completes the task as requested by the user input in the file. It rewrites
+	 * everything from the saved file and writes from the updated task list in the program.
+	 *
+	 * @param input the command given by the user input which includes the index of the
+	 *              array list that user wants to complete.
+	 */
 	public void updateComplete(String input) {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -151,6 +201,11 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * This method reads the tasks that has been saved in the file and load the tasks into the program.
+	 *
+	 * @return a array list of tasks.
+	 */
 	public ArrayList<Task> readStored(){
 		ArrayList<Task> tasks = new ArrayList<>();
 		try {
@@ -161,6 +216,13 @@ public class Storage {
 		return tasks;
 	}
 	
+	/**
+	 * This method works together with readStored() method and makes sense of the data stored in the saved file
+	 * and load the tasks into the program.
+	 *
+	 * @param tasksList the task list to store the tasks from the saved file.
+	 * @throws ParseException if the data from the saved file does not follow a certain format.
+	 */
 	public void readData(ArrayList<Task> tasksList) throws ParseException{
 		String inputLine = null;
 		try {
@@ -182,6 +244,12 @@ public class Storage {
 		}
 	}
 	
+	/**
+	 * This method adds the saved to do task from the file into the program task list.
+	 *
+	 * @param input description of the to do task.
+	 * @param tasksList task list in which the to do task will be added into.
+	 */
 	public void addStoredTodo(String[] input, ArrayList<Task> tasksList) {
 		Todo todo = new Todo(input[2]);
 		if (Integer.parseInt(input[1]) == 1) {
@@ -190,6 +258,13 @@ public class Storage {
 		tasksList.add(todo);
 	}
 	
+	/**
+	 * This method adds the saved deadline task from the file into the program task list.
+	 *
+	 * @param input description and deadline date of the deadline task.
+	 * @param tasksList task list in which the deadline task will be added into.
+	 * @throws ParseException if saved data does not follow the required format.
+	 */
 	public void addStoredDeadline(String[] input, ArrayList<Task> tasksList) throws ParseException{
 		Deadline deadline = new Deadline(input[2], convertStringToDate(input[3]));
 		if (Integer.parseInt(input[1]) == 1) {
@@ -198,6 +273,13 @@ public class Storage {
 		tasksList.add(deadline);
 	}
 	
+	/**
+	 * This method adds the saved event task from the file into the program task list.
+	 *
+	 * @param input description and event date of the event task.
+	 * @param tasksList task list in which the event task will be added into.
+	 * @throws ParseException if saved data does not follow the required format.
+	 */
 	public void addStoredEvent(String[] input, ArrayList<Task> tasksList) throws ParseException{
 		Event event = new Event(input[2], convertStringToDate(input[3]));
 		if (Integer.parseInt(input[1]) == 1) {
@@ -206,6 +288,13 @@ public class Storage {
 		tasksList.add(event);
 	}
 	
+	/**
+	 * Method which converts the user input date into a Date instead of a String value.
+	 *
+	 * @param input a string input to be converted into the date following a fixed format.
+	 * @return Date value which has been converted from a string.
+	 * @throws ParseException if user did not key in the date as the requested format.
+	 */
 	public Date convertStringToDate(String input) throws ParseException {
 		Date result = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(input);
 		return result;

@@ -1,21 +1,40 @@
-import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * TaskList class contains the task list, and has operations to
+ * add/delete the tasks in the list.
+ */
 public class TaskList {
 	protected static ArrayList<Task> tasks;
 	
+	/**
+	 * Class constructor
+	 *
+	 * @param tasks an array list of tasks.
+	 * @throws DukeException which includes any exceptions when operating on the task list.
+	 */
 	public TaskList(ArrayList<Task> tasks) throws DukeException {
 		this.tasks = tasks;
 	}
 	
+	/**
+	 * This method retrieves the task list.
+	 *
+	 * @return the array list of tasks that keep tracks of the tasks.
+	 */
 	public ArrayList<Task> getTasks() {
 		return this.tasks;
 	}
 	
-	public void addTodo(String input) throws EmptyDescriptionException {
+	/**
+	 * Add the to do task into the task list.
+	 *
+	 * @param input description of the to do task to be added into the task list.
+	 */
+	public void addTodo(String input){
 		try {
 			if (!input.substring(4).isEmpty()) {
 				String description = input.substring(4);
@@ -30,7 +49,12 @@ public class TaskList {
 		}
 	}
 	
-	public void addDeadline(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException {
+	/**
+	 * Add the deadline task into the task list.
+	 *
+	 * @param input description of the deadline task together with the deadline date to be added into the task list.
+	 */
+	public void addDeadline(String input){
 		try {
 			if (input.contains("/by")) {
 				int index = input.lastIndexOf("/by");
@@ -54,7 +78,12 @@ public class TaskList {
 		}
 	}
 	
-	public void addEvent(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException {
+	/**
+	 * Add the event task into the task list.
+	 *
+	 * @param input description of the event task together with the event date to be added into the task list.
+	 */
+	public void addEvent(String input) {
 		try {
 			if (input.contains("/at")) {
 				int index = input.lastIndexOf("/at");
@@ -78,6 +107,13 @@ public class TaskList {
 		}
 	}
 	
+	/**
+	 * Deletes the task as requested by the user input and removes this task from the
+	 * task list.
+	 *
+	 * @param input command of the user input which includes the index of the task that
+	 *              user wants to delete.
+	 */
 	public void deleteTask(String input) {
 		String[] inputs = input.split(" ");
 		int index = Integer.parseInt(inputs[1]) - 1;
@@ -87,7 +123,13 @@ public class TaskList {
 		System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 	}
 	
-	public void completeTask(String input) throws IOException {
+	/**
+	 * Completes the task as requested by the user input.
+	 *
+	 * @param input command of the user input which includes the index of the task that
+	 *              user wants to complete
+	 */
+	public void completeTask(String input){
 		String[] inputs = input.split(" ");
 		int index = Integer.parseInt(inputs[1]) - 1;
 		tasks.get(index).complete();
@@ -95,12 +137,25 @@ public class TaskList {
 		System.out.println(tasks.get(index));
 	}
 	
+	/**
+	 * Static method which prints out the addition of task message each time
+	 * a task is successfully added into the task list.
+	 *
+	 * @param task that has been successfully added into the task list.
+	 */
 	public static void printOut(Task task) {
 		System.out.println("Got it. I've added this task:");
 		System.out.println(task);
 		System.out.println("Now you have " + tasks.size() + " tasks in the list.");
 	}
 	
+	/**
+	 * Static method which converts the user input date into a Date instead of a String value.
+	 *
+	 * @param input a string input to be converted into the date following a fixed format.
+	 * @return Date value which has been converted from a string.
+	 * @throws ParseException if user did not key in the date as the requested format.
+	 */
 	public static Date convertStringToDate(String input) throws ParseException {
 		Date result = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(input);
 		return result;

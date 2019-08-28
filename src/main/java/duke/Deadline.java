@@ -1,20 +1,26 @@
 package duke;
 
-class Deadline extends Task {
-    private String by;
+import java.time.LocalDateTime;
 
-    Deadline(final String description, final String by, final boolean isDone) {
+class Deadline extends Task {
+    private LocalDateTime by;
+
+    Deadline(final String description, final LocalDateTime by, final boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
-    Deadline(final String description, final String by) {
+    Deadline(final String description, final LocalDateTime by) {
         this(description, by, false);
+    }
+
+    String getByString() {
+        return Task.dateTimeFormatter.format(this.by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + getByString() + ")";
     }
 
     @Override
@@ -23,7 +29,7 @@ class Deadline extends Task {
             "D",
             this.isDone() ? "1" : "0",
             this.getDescription(),
-            this.by
+            this.getByString()
         };
         return String.join(Todo.storageStringSeparator, tokens);
     }

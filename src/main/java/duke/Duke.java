@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Duke {
@@ -58,7 +59,7 @@ public class Duke {
         } else if (splitArgs.length == 1) {
             throw new DukeException("Error: Deadline cannot be empty");
         }
-        Deadline deadline = new Deadline(splitArgs[0], splitArgs[1]);
+        Deadline deadline = new Deadline(splitArgs[0], LocalDateTime.parse(splitArgs[1], Task.dateTimeFormatter));
         handleAddTask(deadline);
     }
 
@@ -70,7 +71,7 @@ public class Duke {
         } else if (splitArgs.length == 1) {
             throw new DukeException("Error: Event time cannot be empty");
         }
-        Event event = new Event(splitArgs[0], splitArgs[1]);
+        Event event = new Event(splitArgs[0], LocalDateTime.parse(splitArgs[1], Task.dateTimeFormatter));
         handleAddTask(event);
     }
 

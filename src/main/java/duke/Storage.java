@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 class Storage {
@@ -44,12 +45,12 @@ class Storage {
                     break;
                 }
                 case "D": {
-                    String by = tokens[3];
+                    LocalDateTime by = LocalDateTime.parse(tokens[3], Task.dateTimeFormatter);
                     task = new Deadline(description, by, isDone);
                     break;
                 }
                 case "E": {
-                    String at = tokens[3];
+                    LocalDateTime at = LocalDateTime.parse(tokens[3], Task.dateTimeFormatter);
                     task = new Event(description, at, isDone);
                     break;
                 }

@@ -1,4 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,6 +32,9 @@ public class Command {
     }
 
     public static Command NewCommand(String instruction) throws CommandException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d/MM/YYYY HHmm");
+        Date date;
+
         String[] command = instruction.split(" ");
         switch (command[0]) {
         case "list":
@@ -57,7 +63,14 @@ public class Command {
             if (deadlineDetails.size() != 2) {
                 throw new CommandException("☹ OOPS!!! Something is wrong with your input.");
             }
-            return new Command(CommandType.ADD, new Deadline(deadlineDetails.get(0), deadlineDetails.get(1)));
+
+            try {
+                date = dateFormat.parse(deadlineDetails.get(1));
+            } catch (ParseException e) {
+                throw new CommandException("☹ OOPS!!! Please check the date format.");
+            }
+
+            return new Command(CommandType.ADD, new Deadline(deadlineDetails.get(0), date));
 
         case "event":
             List<String> eventDetails = Stream.of(String.join(" ", Arrays.copyOfRange(command, 1, command.length))
@@ -66,7 +79,13 @@ public class Command {
             if (eventDetails.size() != 2) {
                 throw new CommandException("☹ OOPS!!! Something is wrong with your input.");
             }
-            return new Command(CommandType.ADD, new Event(eventDetails.get(0), eventDetails.get(1)));
+            try {
+                date = dateFormat.parse(eventDetails.get(1));
+            } catch (ParseException e) {
+                throw new CommandException("☹ OOPS!!! Please check the date format.");
+            }
+
+            return new Command(CommandType.ADD, new Event(eventDetails.get(0), date));
 
         default:
             throw new CommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

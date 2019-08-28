@@ -13,7 +13,7 @@ public class Duke {
     //private TaskList tasks;
     private Ui ui;
 
-    /////////////////////////// Date & Time Converter: returns the converted format as a string ////////////////////////
+    /////////////////////////// Date & Time Converter: returns the converted format as a string //////////////////////////
     static String Convert(String timeframe){
 
           int in = timeframe.indexOf('/');                           //find first instance of '/'

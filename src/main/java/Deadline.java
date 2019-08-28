@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 
 public class Deadline extends Task {
@@ -11,11 +10,10 @@ public class Deadline extends Task {
 
     static Command getCommand(List<Task> tasks) {
         return words -> {
-            int separator = List.of(words).indexOf("/by");
-            String[] descriptionArr = Arrays.copyOfRange(words, 1, separator);
-            String[] timeArr = Arrays.copyOfRange(words, separator + 1, words.length);
-            String description = String.join(" ", descriptionArr);
-            String time = String.join(" ", timeArr);
+            List<String> wordList = List.of(words);
+            int separator = wordList.indexOf("/by");
+            String description = String.join(" ", wordList.subList(1, separator));
+            String time = String.join(" ", wordList.subList(separator + 1, words.length));
             Task task = new Deadline(description, time);
             tasks.add(task);
             return List.of("Got it. I've added this task:", "  " + task,

@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Task {
 
     // all class variables private
@@ -5,7 +9,8 @@ public class Task {
     protected String taskInfo;
     protected boolean isDone;
     protected String taskType;
-    protected String by;
+    protected Date by;
+    protected String byString;
 
     public Task(String info, String type,String by) {
         /**
@@ -17,7 +22,10 @@ public class Task {
         this.taskInfo = info;
         this.isDone = false;
         this.taskType = type;
-        this.by = by;
+        if (!by.equals("")) {
+            this.by = convertToDate(by);
+        }
+        this.byString = by;
     }
     // getters
     public String getTaskInfo() {
@@ -53,7 +61,11 @@ public class Task {
         return s;
     }
     public String getBy() {
-        return by;
+        if (byString.equals("")) {
+            return "";
+        } else {
+            return by.toString();
+        }
     }
     // setters
     public void markDone() {
@@ -64,6 +76,15 @@ public class Task {
          * @returns none
          */
         this.isDone = true;
+    }
+    private Date convertToDate(String by) {
+        Date date1 = null;
+        try {
+            date1 = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
+        } catch (ParseException p) {
+            System.out.println("Use the correct format: dd/MM/yyyy HHmm");
+        }
+        return date1;
     }
 
 

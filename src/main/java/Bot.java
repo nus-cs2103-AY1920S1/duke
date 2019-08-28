@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 public class Bot {
     private String response;
@@ -54,6 +59,18 @@ public class Bot {
         return taskFile;
     }
 
+    private static String getOrdinal(int n) {
+      if (n >= 11 && n <= 13) {
+          return n + "th";
+      }
+      switch (n % 10) {
+      case 1:  return n + "st of";
+      case 2:  return n + "nd of";
+      case 3:  return n + "rd of";
+	  default: return n + "th of";
+      }
+    }
+
     public void add(String s) throws DukeException {
         String[] arr = s.split(" ");
         String taskType = arr[0];
@@ -86,7 +103,22 @@ public class Bot {
             throw new DukeException(
                     "    ____________________________________________________________\n     " +
                             "\u2639" + " OOPS!!! The time of a " + taskType + " cannot be empty." +
-                            "\n    ____________________________________________________________\n");
+                            "\n    ____________________________________________________________\n");					 
+        try { 
+	        Date date=new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime);
+	        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+	    taskTime = formatter.format(date);
+	    String[] array = taskTime.split(" ");
+	    array[0] = getOrdinal(Integer.valueOf(array[0]));
+	    array[array.length - 1] = array[array.length - 1].toLowerCase();
+	    taskTime = "";
+	    for(int i = 0; i < array.length; i++){
+	    taskTime += " " + array[i];
+	    }
+	    taskTime = taskTime.trim();
+	    } catch (ParseException e) {
+         taskTime = taskTime;
+        }
 
         //creat task and add to tasks list
         Task task;

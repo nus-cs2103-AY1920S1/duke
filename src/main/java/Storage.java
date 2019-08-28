@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Database {
+public class Storage {
     private File file;
-
-    public Database(String location) {
+    
+    public Storage(String location) {
         this.file = new File(location);
     }
 

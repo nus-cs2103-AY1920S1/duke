@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class Task {
     private String description;
     private boolean isDone = false;
-    private static Database db = new Database("./data/duke.txt");
-    private static ArrayList<Task> taskList = db.load();
+    private static Storage storage = new Storage("./data/duke.txt");
+    private static ArrayList<Task> taskList = storage.load();
 
     public Task(String description) {
         this.description = description;
@@ -32,7 +32,7 @@ public class Task {
     }
 
     private static void updateDatabase() throws DukeException {
-        db.store(taskList);
+        storage.store(taskList);
     }
 
     public static void addNewTask(Task task) throws DukeException {

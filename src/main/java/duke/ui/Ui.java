@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
+ * Contains methods that interfaces with the user.
  */
 public class Ui {
 

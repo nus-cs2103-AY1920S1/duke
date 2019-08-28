@@ -27,6 +27,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
 run{
     standardInput = System.in
 }

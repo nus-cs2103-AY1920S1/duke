@@ -14,7 +14,6 @@ public class Main {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 System.out.println(Duke.HORIZONTAL_LINE);        
-
             } 
 
             instruction = sc.nextLine();

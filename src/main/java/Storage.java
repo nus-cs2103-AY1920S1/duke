@@ -11,8 +11,6 @@ public class Storage {
 
     public void LoadFile() throws IOException {
         try {
-
-
             CheckFile();
             taskListText = new File("TaskList.txt");
             BufferedReader TasksFile = new BufferedReader(new FileReader(taskListText));

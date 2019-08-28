@@ -16,7 +16,7 @@ public class Duke {
         String line= "    ____________________________________________________________";
         System.out.println(line);
     }
-
+    
     public static Task storedTextToTask(String taskString){
         String[] commands = taskString.split("\\s{1}\\|\\s{1}");
         Task taskToAdd = null;

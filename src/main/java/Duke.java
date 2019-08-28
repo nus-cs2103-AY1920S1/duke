@@ -1,15 +1,11 @@
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
@@ -84,6 +80,9 @@ public class Duke {
                 System.err.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.err.println("Input must be an integer.");
+            } catch (ParseException e) {
+                System.err.println("ParseException: " + e.getMessage());
+                System.err.println("Please use the format: dd/MM/yyyy hhmm");
             } catch (Exception e) {
                 System.err.println("Something is wrong");
             } finally {

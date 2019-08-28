@@ -13,6 +13,15 @@ public class TaskList {
         return numOfTasks;
     }
 
+    public ArrayList<Task> getTaskList() {
+        return xs;
+    }
+
+    public void addPreviousTask(Task t) {
+        numOfTasks++;
+        xs.add(t);
+    }
+
     public void addTask(Task t) {
         numOfTasks++;
         xs.add(t);

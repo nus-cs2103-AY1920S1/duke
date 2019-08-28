@@ -10,28 +10,34 @@ public class Event extends Task {
 
 
 	public String getVenue() {
-		return at;
+
+		return checkTime(at);
 	}
 
 	public String checkTime(String time) {
 		DateAndTime eventDateTime = new DateAndTime();
 		String[] timeAndDate = time.split(" ");
 		String formatDeadline = "";
-		System.out.println(timeAndDate.length);
 		for(int i = 0; i < timeAndDate.length; i++) {
 			String[] date = timeAndDate[i].split("/");
 			if(date.length == 3) {
-				formatDeadline += eventDateTime.formatDate(timeAndDate[i]);
-			} else if(timeAndDate[i].length() == 4) {
-				formatDeadline += eventDateTime.formatTime(timeAndDate[i]);
-			} else {
-				formatDeadline += timeAndDate[i];
-			}
-			if((timeAndDate.length - 1) != i) {
-				formatDeadline += ", ";
-			} else {
+				if (i == 0) {
+					formatDeadline += eventDateTime.formatDate(timeAndDate[i] + ", ");
+				} else {
+					formatDeadline += ", " + eventDateTime.formatDate(timeAndDate[i]);
+				}
 
+			} else if(timeAndDate[i].length() == 4) {
+				if( i == 0) {
+					formatDeadline += eventDateTime.formatTime(timeAndDate[i]);
+				} else {
+					formatDeadline += " " + eventDateTime.formatTime(timeAndDate[i]);
+				}
+
+			} else {
+				formatDeadline += timeAndDate[i] + " ";
 			}
+
 		}
 
 		return formatDeadline;

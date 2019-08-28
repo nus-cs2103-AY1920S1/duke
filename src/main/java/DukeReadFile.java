@@ -61,6 +61,7 @@ public class DukeReadFile {
 	}
 
 	public static ArrayList<Task> myTask() {
+
 		return ct;
 	}
 }

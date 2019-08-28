@@ -41,9 +41,21 @@ public class DateAndTime {
 				throw new DukeException("Wrong time");
 			}
 			if(twelveMin == 0) {
-				formattedTime = twelveHour + "pm";
+				if(twentyFourTime < 1200) {
+					formattedTime = twelveHour + "am";
+				} else{
+					formattedTime = twelveHour + "pm";
+				}
+
 			} else {
-				formattedTime = twelveHour + ":" + twelveMin + "pm";
+				if (twelveHour == 0 && twentyFourTime < 1200) {
+					twelveHour = 12;
+					formattedTime = twelveHour + ":" + twelveMin + "am";
+				} else {
+					twelveHour = 12;
+					formattedTime = twelveHour + ":" + twelveMin + "pm";
+				}
+
 			}
 		} catch (NumberFormatException e) {
 			isString = true;
@@ -63,13 +75,28 @@ public class DateAndTime {
 	public String formatDay(int day) {
 		String dayFormat = "";
 
-		if(day > 31) {
-			dayFormat = day + "st";
+		if(day % 10 == 1) {
+			if (day == 11) {
+				dayFormat = day + "th";
+			} else {
+				dayFormat = day + "st";
+			}
+
 		} else if (day % 10 == 2) {
-			dayFormat = day + "nd";
+			if (day == 12) {
+				dayFormat = day + "th";
+			} else {
+				dayFormat = day + "nd";
+			}
+
 		} else if (day % 10 == 3) {
-			dayFormat = day + "rd";
-		} else if (day % 10 == 1) {
+			if (day == 13) {
+				dayFormat = day + "th";
+			} else {
+				dayFormat = day + "rd";
+			}
+
+		} else if (day > 31) {
 			try {
 				throw new DukeException("wrong day!");
 			} catch (DukeException e) {

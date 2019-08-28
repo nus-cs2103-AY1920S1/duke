@@ -1,3 +1,4 @@
-T/1/chinese homework
-D/0/project/this thursday
-E/1/lucas birthday/his house
+D/0/project/2nd of March 2011, , 12:30pmat , home
+D/0/proj/tonight , 2nd of March 201112:30pm 
+D/0/proj/tonight , 2nd of March 2011 12:30pm
+E/0/bday/12:30pm, 2nd of March 2011my house 

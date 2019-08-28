@@ -31,6 +31,7 @@ public class DateAndTime {
 	}
 
 	public String formatTime(String time) {
+		boolean isString = false;
 		String formattedTime = "";
 		try {
 			int twentyFourTime = Integer.parseInt(time);
@@ -45,9 +46,14 @@ public class DateAndTime {
 				formattedTime = twelveHour + ":" + twelveMin + "pm";
 			}
 		} catch (NumberFormatException e) {
-			System.out.println(border + "\n" + e + "\n" + border);
+			isString = true;
 		} catch (DukeException e) {
 			System.out.println(border + "\n" + e + "\n" + border);
+
+		} finally {
+			if (isString) {
+				formattedTime = time;
+			}
 		}
 
 		return formattedTime;

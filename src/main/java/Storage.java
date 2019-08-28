@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class TaskManager {
+public class Storage {
     String filePath;
 
-    public TaskManager() {
+    public Storage() {
     filePath ="data/loggedData.txt";
     }
     //import tasks from database

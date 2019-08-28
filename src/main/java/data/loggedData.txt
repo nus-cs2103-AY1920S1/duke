@@ -1,2 +1,4 @@
-T,true,BEBEB
 D,false,reddd ,02/01/1997 1200
+T,false,sex
+D,true,read book ,12/12/2020 1500
+E,false,cock suck ,01/01/2020 1400

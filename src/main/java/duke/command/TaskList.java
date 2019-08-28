@@ -3,28 +3,49 @@ package duke.command;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Status;
 import duke.task.Task;
 import duke.task.ToDo;
 
+
+/**
+ * TaskList class. Manages all input, output and display related commands affecting the task list.
+ */
 public class TaskList {
+
+    /** Header line for list operation. */
     private static String tasklist_header = "\t Here are the tasks in your list:\n";
+    /** Done message. */
     private static String done_message = "\t Nice! I've marked this task as done:\n";
+    /** Task added successfully message. */
     private static String task_added_message = "\t Got it. I've added this task:\n";
+    /** Task deleted successfully message. */
     private static String delete_message = "\t Noted. I've removed this task:\n";
 
+    /** Stores the ArrayList of tasks. */
     private ArrayList<Task> taskList;
+    /** Stores the storage object used to read/write to file. */
     private Storage storage;
+    /** Stores the DateTimeFormatter object used to specify the format of date/time objects when printed. */
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Creates a new TaskList object.
+     * @param storage The storage object previously created to read/write from file.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         taskList = storage.loadFromFile();
     }
 
+    /**
+     * Lists all tasks.
+     * @return A string containing the list of tasks.
+     * @throws DukeException If no tasks are available.
+     */
     public String list() throws DukeException {
         if (taskList.isEmpty()) {
             throw new DukeException("There are no tasks to display.");
@@ -37,6 +58,12 @@ public class TaskList {
         return s.toString();
     }
 
+    /**
+     * Marks a task as done.
+     * @param index The index number of the task to be marked done (starting from 1).
+     * @return A string with the confirmation message that the task was successfully deleted.
+     * @throws DukeException If the task at index does not currently exist.
+     */
     public String markAsDone(int index) throws DukeException {
         Task current;
         try {
@@ -53,6 +80,12 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Deletes a task.
+     * @param index The index number of the task to be marked done (starting from 1).
+     * @return A string with the confirmation message that the task was successfully deleted.
+     * @throws DukeException If the task at index does not currently exist.
+     */
     public String delete(int index) throws DukeException {
         Task current;
         try {
@@ -65,7 +98,13 @@ public class TaskList {
         return s;
     }
 
-    public String createTodo(String[] params) throws DukeException {
+    /**
+     * Creates a new ToDo task.
+     * @param params The parameters (description) for the ToDo task.
+     * @return A string with the confirmation that the task was successfully added.
+     * @throws DukeException If the description is empty.
+     */
+    public String createToDo(String[] params) throws DukeException {
         String task = Parser.joinStrings(params);
         if (task.isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -77,6 +116,12 @@ public class TaskList {
         return s;
     }
 
+    /**
+     * Creates a new Deadline task.
+     * @param params The parameters (description, due by date) for the Deadline task.
+     * @return A string with the confirmation that the task was successfully added.
+     * @throws DukeException If the description or due by date is empty or in the wrong format.
+     */
     public String createDeadline(String[] params) throws DukeException {
         if (Parser.joinStrings(params).isEmpty()) {
             throw new DukeException("The description and due date of a deadline cannot be empty.");
@@ -87,13 +132,24 @@ public class TaskList {
         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
-        Task current = new Deadline(details[0], LocalDateTime.parse(details[1], formatter));
+        Task current;
+        try {
+            current = new Deadline(details[0], LocalDateTime.parse(details[1], formatter));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("You need to specify a due date in the format dd/MM/yyyy HHmm");
+        }
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
         save();
         return s;
     }
 
+    /**
+     * Creates a new Event task.
+     * @param params The parameters (description, due by date) for the Event task.
+     * @return A string with the confirmation that the task was successfully added.
+     * @throws DukeException If the description or due by date is empty or in the wrong format.
+     */
     public String createEvent(String[] params) throws DukeException {
         if (Parser.joinStrings(params).isEmpty()) {
             throw new DukeException("The description and due date of an event cannot be empty.");
@@ -104,18 +160,30 @@ public class TaskList {
         } else if (details[0].isEmpty() && !details[1].isEmpty()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
-        Task current = new Event(details[0], LocalDateTime.parse(details[1], formatter));
+        Task current;
+        try {
+            current = new Event(details[0], LocalDateTime.parse(details[1], formatter));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("You need to specify a due date in the format dd/MM/yyyy HHmm");
+        }
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
         save();
         return s;
     }
 
+    /**
+     * Prints a string with the total number of tasks currently stored.
+     * @return A string describing the total number tasks currently stored.
+     */
     private String totalNoOfTasks() {
         int noOfTasks = taskList.size();
         return "\t Now you have " + (noOfTasks) + (noOfTasks == 1 ? " task" : " tasks") + " in the list.\n";
     }
 
+    /**
+     * Tells the Storage object to save the tasks to file.
+     */
     private void save() {
         try {
             storage.saveToFile(taskList);

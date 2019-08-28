@@ -14,15 +14,28 @@ import duke.task.Status;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * Storage class. Handles the reading/writing of data to disk.
+ */
 public class Storage {
 
+    /** Stores the location of the file to be read/written to. */
     private String fileName;
+    /** Stores the format by which the Date/Time should be read/written as. */
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+    /**
+     * Creates a new Storage object.
+     * @param fileName The location of the file to be read/written to.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Loads previously-saved tasks from the file.
+     * @return An ArrayList containing the tasks previously stored.
+     */
     ArrayList<Task> loadFromFile() {
 
         try {
@@ -46,11 +59,13 @@ public class Storage {
                 case "D":
                     taskList.add(new Deadline(status, params[2], LocalDateTime.parse(params[3], formatter)));
                     break;
+
                 case "E":
                     taskList.add(new Event(status, params[2], LocalDateTime.parse(params[3], formatter)));
                     break;
-                default:
 
+                default:
+                    break;
                 }
             }
             return taskList;
@@ -60,6 +75,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks to file.
+     * @param taskList The ArrayList of tasks to be written to file.
+     * @throws IOException If it fails to write the file.
+     */
     void saveToFile(ArrayList<Task> taskList) throws IOException {
 
         File f = new File(fileName);

@@ -15,7 +15,7 @@ public class TaskListTest {
             assertEquals("\t Got it. I've added this task:\n" +
                     "\t   [T][✗] read book\n" +
                     "\t Now you have 2 tasks in the list.\n",
-                    taskList.createTodo(new String[] {"read book"}));
+                    taskList.createToDo(new String[] {"read book"}));
         } catch (Exception e) {
             fail();
         }
@@ -28,7 +28,7 @@ public class TaskListTest {
             assertEquals("\t Got it. I've added this task:\n" +
                     "\t   [T][✗] read book\n" +
                     "\t Now you have 2 tasks in the list.\n",
-                    taskList.createTodo(new String[]{}));
+                    taskList.createToDo(new String[]{}));
             fail();
         } catch (DukeException e) {
             assertEquals("\t ☹ OOPS!!! The description of a todo cannot be empty.\n", e.toString());

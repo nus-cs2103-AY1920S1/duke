@@ -44,7 +44,9 @@ public class Task {
      * Getter method which gives the description of the task.
      * @return the outline of the task.
      */
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
     /**
      * Formats the string of the current task.

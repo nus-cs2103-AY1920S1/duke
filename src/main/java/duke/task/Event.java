@@ -25,7 +25,9 @@ public class Event extends Task {
      * Getter method which gets the timing the event will start.
      * @return the timing when the event will start.
      */
-    public String getAt() { return at; }
+    public String getAt() {
+        return at;
+    }
 
     /**
      * Formats the event task into a String.

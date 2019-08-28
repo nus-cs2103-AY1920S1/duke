@@ -25,7 +25,9 @@ public class Deadline extends Task {
      * Getter method to give the deadline of the specific task.
      * @return the deadline of the specific task.
      */
-    public String getBy() { return by; }
+    public String getBy() {
+        return by;
+    }
 
     /**
      * Format the deadline task into a string.

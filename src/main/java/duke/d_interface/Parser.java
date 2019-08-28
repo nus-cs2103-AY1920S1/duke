@@ -13,14 +13,16 @@ public class Parser {
      */
     public void checkCommand(String[] commandArr) throws DukeException {
         if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete")) {
-            throw new DukeException("    ____________________________________________________________\n" +
+            throw new DukeException(
+                    "    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                     "    ____________________________________________________________\n");
         }
 
         if (commandArr[0].matches("list|bye")) {
             if (commandArr.length > 1) {
-                throw new DukeException("    ____________________________________________________________\n" +
+                throw new DukeException(
+                        "    ____________________________________________________________\n" +
                         "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                         "    ____________________________________________________________\n");
             }
@@ -35,8 +37,8 @@ public class Parser {
      */
     public String checkTime(String time) throws DukeException {
         String[] timeArr = time.split(" ");
-        String[] month = {"NIL", "January", "February", "March", "April",
-                "May", "June", "July", "August", "September", "October", "November", "December"};
+        String[] month = {"NIL", "January", "February", "March", "April", "May",
+                "June", "July", "August", "September", "October", "November", "December"};
         StringJoiner sj = new StringJoiner(" ");
 
         for (String str : timeArr) {
@@ -61,7 +63,8 @@ public class Parser {
                     sj.add(month[monthCurr]);
                     sj.add(year + ",");
                 } else {
-                    throw new DukeException("    ____________________________________________________________\n" +
+                    throw new DukeException(
+                            "    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! Please type in a valid date: DD/MM/YYYY\n" +
                             "    ____________________________________________________________\n");
                 }
@@ -80,7 +83,8 @@ public class Parser {
                         sj.add(String.format("%d:%02dam", hour, min));
                     }
                 } else {
-                    throw new DukeException("    ____________________________________________________________\n" +
+                    throw new DukeException(
+                            "    ____________________________________________________________\n" +
                             "     ☹ OOPS!!! Please type in a valid 24hrs timing\n" +
                             "    ____________________________________________________________\n");
                 }

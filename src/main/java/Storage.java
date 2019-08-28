@@ -88,46 +88,46 @@ public class Storage {
         Task task;
 
         switch (data[0].trim()) {
-            case "T":
-                task = new Todo(data[2].trim());
-                try {
-                    if (Integer.parseInt(data[1].trim()) == 1) {
-                        task.markAsDone();
-                    }
-                } catch (NumberFormatException ex) {
-                    ui.showLine();
-                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+        case "T":
+            task = new Todo(data[2].trim());
+            try {
+                if (Integer.parseInt(data[1].trim()) == 1) {
+                    task.markAsDone();
                 }
-                break;
+            } catch (NumberFormatException ex) {
+                ui.showLine();
+                System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+            }
+            break;
 
-            case "D":
-                task = new Deadline(data[2].trim(), data[3].trim());
+        case "D":
+            task = new Deadline(data[2].trim(), data[3].trim());
 
-                try {
-                    if (Integer.parseInt(data[1].trim()) == 1) {
-                        task.markAsDone();
-                    }
-                } catch (NumberFormatException ex) {
-                    ui.showLine();
-                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+            try {
+                if (Integer.parseInt(data[1].trim()) == 1) {
+                    task.markAsDone();
                 }
-                break;
+            } catch (NumberFormatException ex) {
+                ui.showLine();
+                System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+            }
+            break;
 
-            case "E":
-                task = new Event(data[2].trim(), data[3].trim());
+        case "E":
+            task = new Event(data[2].trim(), data[3].trim());
 
-                try {
-                    if (Integer.parseInt(data[1].trim()) == 1) {
-                        task.markAsDone();
-                    }
-                } catch (NumberFormatException ex) {
-                    ui.showLine();
-                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+            try {
+                if (Integer.parseInt(data[1].trim()) == 1) {
+                    task.markAsDone();
                 }
-                break;
+            } catch (NumberFormatException ex) {
+                ui.showLine();
+                System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+            }
+            break;
 
-            default:
-                throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in reading data");
+        default:
+            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in reading data");
         }
 
         return task;

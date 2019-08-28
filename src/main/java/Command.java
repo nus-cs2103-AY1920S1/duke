@@ -1,5 +1,4 @@
 public abstract class Command {
-
     /** Task enter by user */
     protected String input;
 

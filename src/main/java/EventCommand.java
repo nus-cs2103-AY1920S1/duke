@@ -50,7 +50,7 @@ public class EventCommand extends Command {
         try {
             date= df.parse(timeline);
             formatted_Date = outputformat.format(date);
-            tasks.getTask().add(new Deadline(achieve, formatted_Date));
+            tasks.getTask().add(new Event(achieve, formatted_Date));
             System.out.println(ui.INDENT_COMMENT + "Got it. I've added this task: ");
             System.out.println(ui.INDENT_TASK + tasks.getTask().get(tasks.getItemNo()));
             tasks.setItemNo(tasks.getItemNo() + 1);

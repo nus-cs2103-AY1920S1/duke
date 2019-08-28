@@ -53,6 +53,6 @@ public class Ui {
      * @param message Message to get error message.
      */
     public void showError(String message) {
-        System.out.println(INDENT_COMMENT + "\u2639 OOPS !!! " + "I'm sorry, but I don't know what that means :-(");
+        System.out.println(message);
     }
 }

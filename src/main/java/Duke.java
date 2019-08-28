@@ -71,9 +71,8 @@ public class Duke {
                     break;
                 case done:
                     {
-                        int taskNumber;
                         try {
-                            taskNumber = Integer.parseInt(description) - 1;
+                            int taskNumber = Integer.parseInt(description) - 1;
                             tasks.get(taskNumber).complete();
                             System.out.println("    Nice! I've marked this task as done:");
                             System.out.println("      " + tasks.get(taskNumber).toString());
@@ -85,9 +84,8 @@ public class Duke {
                     break;
                 case delete:
                     {
-                        int taskNumber;
                         try {
-                            taskNumber = Integer.parseInt(description) - 1;
+                            int taskNumber = Integer.parseInt(description) - 1;
                             System.out.println("    Noted. I've removed this task:");
                             System.out.println("      " + tasks.get(taskNumber).toString());
                             tasks.remove(taskNumber);

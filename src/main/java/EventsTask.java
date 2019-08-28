@@ -1,17 +1,15 @@
 public class EventsTask extends Task {
     String taskName;
-    String taskTime;
+    String taskDesc;
 
     public EventsTask(String task) {
         super(task);
-        String[] taskSplit = task.split("/");
+        String[] taskSplit = task.split("/at");
         if(taskSplit.length < 2) {
-            throw new EmptyDescriptionDukeException("event");
+            throw new EmptyDescriptionDukeException("event", "/at");
         }
         taskName = taskSplit[0].trim();
-        String taskTimeOriginal = taskSplit[1];
-        int firstWordLength = taskTimeOriginal.split(" ")[0].length();
-        taskTime = taskTimeOriginal.split(" ")[0] + ": " + taskTimeOriginal.substring(firstWordLength).trim();
+        taskDesc = taskSplit[1];
     }
 
     @Override
@@ -22,7 +20,7 @@ public class EventsTask extends Task {
         } else {
             output += "[✗]";
         }
-        output += " " + this.taskName + " (" + this.taskTime + ")";
+        output += " " + this.taskName + " (At: " + this.taskDesc + ")";
         return output;
     }
 }

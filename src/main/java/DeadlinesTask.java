@@ -1,17 +1,15 @@
 public class DeadlinesTask extends Task {
     String taskName;
-    String taskTime;
+    String taskDesc;
 
     public DeadlinesTask(String task) {
         super(task);
-        String[] taskSplit = task.split("/");
+        String[] taskSplit = task.split("/by");
         if(taskSplit.length < 2) {
-            throw new EmptyDescriptionDukeException("deadline");
+            throw new EmptyDescriptionDukeException("deadline", "/by");
         }
         taskName = taskSplit[0].trim();
-        String taskTimeOriginal = taskSplit[1];
-        int firstWordLength = taskTimeOriginal.split(" ")[0].length();
-        taskTime = taskTimeOriginal.split(" ")[0] + ": " + taskTimeOriginal.substring(firstWordLength).trim();
+        taskDesc = taskSplit[1];
     }
 
     @Override
@@ -22,7 +20,7 @@ public class DeadlinesTask extends Task {
         } else {
             output += "[✗]";
         }
-        output += " " + this.taskName + " (" + this.taskTime + ")";
+        output += " " + this.taskName + " (By: " + this.taskDesc + ")";
         return output;
     }
 }

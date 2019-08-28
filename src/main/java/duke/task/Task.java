@@ -29,6 +29,6 @@ public abstract class Task {
         return "[" + (this.completed == Status.COMPLETE ? "✓" : "✗") + "] " + taskName;
     }
 
-    abstract public String toSaveString();
+    public abstract String toSaveString();
 
 }

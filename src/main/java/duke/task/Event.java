@@ -24,8 +24,8 @@ public class Event extends Task {
     }
 
     public String toSaveString() {
-        return "E|" + (super.completed == Status.INCOMPLETE ? "0" : "1") + "|" + taskName + "|" +
-                time.format(formatter);
+        return "E|" + (super.completed == Status.INCOMPLETE ? "0" : "1") + "|" + taskName + "|"
+                + time.format(formatter);
     }
 
 }

@@ -1,6 +1,10 @@
 import java.util.Arrays;
 import java.util.Scanner;
-import duke.command.*;
+import duke.command.DukeException;
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
 
 public class Duke {
 

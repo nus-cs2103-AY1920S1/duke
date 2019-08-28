@@ -1,21 +1,16 @@
-import java.text.ParseException;
-import java.util.Scanner;
-import java.util.List;
-
-
 public class Duke {
     private Storage storage;
     private Ui ui;
-    private List<Task> tasks;
+    private TaskList tasks;
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("/home/abhinav/Desktop/2103T/duke/data/duke.txt");
         duke.run();
     }
 
-    public Duke() {
-        storage = new Storage();
-        tasks = storage.readFromFile();
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.readFromFile());
         ui = new Ui();
     }
 

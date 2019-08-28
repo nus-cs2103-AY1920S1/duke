@@ -1,6 +1,5 @@
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -55,14 +54,14 @@ public class Ui {
      * Show user the list of tasks they have.
      * @param tasks ArrayList of tasks.
      */
-    public void printList (List<Task> tasks) {
+    public void printList (TaskList tasks) {
         String str = "Here are the tasks in your list:\n";
 
-        for (int i = 1; i < tasks.size() + 1; i++) {
-            if (i == tasks.size()) {
-                str += i + "." + tasks.get(i - 1);
+        for (int i = 1; i < tasks.getSize() + 1; i++) {
+            if (i == tasks.getSize()) {
+                str += i + "." + tasks.getTask(i - 1);
             } else {
-                str += i + "." + tasks.get(i - 1) + "\n";
+                str += i + "." + tasks.getTask(i - 1) + "\n";
             }
         }
 

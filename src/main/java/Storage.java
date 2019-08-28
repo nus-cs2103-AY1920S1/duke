@@ -9,9 +9,16 @@ import java.io.IOException;
 
 /* Concerned with reading from and writing to the data file */
 public class Storage {
-    private String filePath =  "/home/abhinav/Desktop/2103T/duke/data/duke.txt";
-    private File file = new File(filePath);
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
+    private File file;
+    private String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        this.file = new File(filePath);
+        this.tasks = new ArrayList<>();
+
+    }
 
     /* Takes the current data and populates the task list */
     public List<Task> readFromFile() {

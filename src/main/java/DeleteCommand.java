@@ -8,13 +8,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> tasks, Ui ui, Storage storage) throws DukeException {
-        String str = "";
-        if (taskId > tasks.size()) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String str;
+        if (taskId > tasks.getSize()) {
             throw new DukeException("Please choose a task within the list");
         } else {
-            Task toDelete = tasks.remove(taskId - 1);
-            str = "Noted. I've removed this task:\n" + " " + toDelete.toString() + "\nNow you have " + tasks.size()
+            Task toDelete = tasks.deleteTask(taskId - 1);
+            str = "Noted. I've removed this task:\n" + " " + toDelete.toString() + "\nNow you have " + tasks.getSize()
                     + " tasks in the list.";
             ui.addBorder(str);
         }

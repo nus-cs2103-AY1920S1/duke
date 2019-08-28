@@ -135,6 +135,11 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints the list of tasks which has descriptions
+     * matching that of a target String.
+     * @param taskList List of matching tasks
+     */
     public void showFoundTasks(LinkedList<Task> taskList) {
         ListIterator<Task> iter = taskList.listIterator();
         Task current;

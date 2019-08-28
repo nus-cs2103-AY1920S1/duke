@@ -87,6 +87,25 @@ public class TaskList {
         }
     }
 
+    public static void printSearchResults(ArrayList<Task> searchResults) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < searchResults.size(); i++) {
+            System.out.println("     " + (i + 1) + "." + searchResults.get(i));
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void handleFind(String searchTerm) {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        for (Task task : myTasks) {
+            if (task.description.contains(searchTerm)) {
+                searchResults.add(task);
+            }
+        }
+        printSearchResults(searchResults);
+    }
+
     /**
      * Prints out a message informing user that the task has been deleted.
      *

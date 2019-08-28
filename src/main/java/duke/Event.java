@@ -1,15 +1,17 @@
 package duke;
 
-class Event extends Task {
-    private String at;
+import java.time.LocalDateTime;
 
-    Event(final String description, final String at) {
+class Event extends Task {
+    private LocalDateTime at;
+
+    Event(final String description, final LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + Task.dateTimeFormatter.format(this.at) + ")";
     }
 }

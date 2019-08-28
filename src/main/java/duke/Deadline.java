@@ -1,15 +1,17 @@
 package duke;
 
-class Deadline extends Task {
-    private String by;
+import java.time.LocalDateTime;
 
-    Deadline(final String description, final String by) {
+class Deadline extends Task {
+    private LocalDateTime by;
+
+    Deadline(final String description, final LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + Task.dateTimeFormatter.format(this.by) + ")";
     }
 }

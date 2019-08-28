@@ -5,7 +5,10 @@ import duke.Storage;
 import duke.TextUi;
 import duke.task.TaskList;
 
-public class AddCommand extends Command {
+/**
+ * Wrapper for commands to add tasks. Should not be instantiated.
+ */
+class AddCommand extends Command {
     AddCommand(String details) {
         super(details);
     }

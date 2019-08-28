@@ -10,16 +10,37 @@ import java.io.IOException;
 public abstract class Command {
     protected String details;
     protected boolean isExit;
+    protected boolean isDone;
 
     Command(String details) {
         this.details = details;
         this.isExit = false;
+        this.isDone = false;
+    }
+
+    /**
+     * Returns the details associated with this command.
+     * @return  Command details
+     */
+    public String getDetails() {
+        return details;
     }
 
     public boolean isExit() {
         return isExit;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Executes the current command using the given resources.
+     * @param tasks             List of tasks
+     * @param ui                User interface
+     * @param storage           Hard disk storage
+     * @throws DukeException    If command details are invalid, etc.
+     */
     public abstract void execute(TaskList tasks, TextUi ui, Storage storage) throws
             DukeException;
 
@@ -32,7 +53,7 @@ public abstract class Command {
             storage.writeToFile(tasks);
         } catch (IOException e) {
             throw new DukeException(
-                    "Oops! I encountered an error when saving your tasks.\n"
+                    "oops! I encountered an error when saving your tasks.\n"
                             + "    " + e.getMessage() + "\n"
                             + "If you say bye now, you may not be able to access this\n"
                             + " list in future.");

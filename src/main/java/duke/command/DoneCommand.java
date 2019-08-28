@@ -8,8 +8,6 @@ import duke.task.TaskList;
 
 public class DoneCommand extends Command {
 
-    private boolean isDone;
-
     public DoneCommand(String details, boolean isDone) {
         super(details);
         this.isDone = isDone;

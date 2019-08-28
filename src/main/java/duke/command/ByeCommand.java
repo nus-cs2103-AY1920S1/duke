@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TextUi;
 import duke.task.TaskList;
@@ -13,9 +12,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, TextUi ui, Storage storage) throws
-            DukeException {
-        save(tasks, storage);
+    public void execute(TaskList tasks, TextUi ui, Storage storage) {
         ui.showText("Bye. Hope to see you again soon!");
     }
 }

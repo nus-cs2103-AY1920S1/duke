@@ -51,6 +51,13 @@ public class TaskList {
         return taskList.isEmpty();
     }
 
+    /**
+     * Searches for the target String in every task's description.
+     * Loops through the list of tasks tries to match the target String
+     * a substring in the task description.
+     * @param target Target string to search for
+     * @return LinkedList<Task> of matching tasks
+     */
     public LinkedList<Task> searchFor(String target) {
         ListIterator<Task> iter = taskList.listIterator();
         LinkedList<Task> tasksFound = new LinkedList<>();

@@ -10,6 +10,12 @@ import duke.exception.DukeException;
 
 public class Parser {
 
+    /**
+     * Parses user input and returns an executable <code>Command</code> object.
+     * @param command The raw user input
+     * @return An executable <code>Command</code> object
+     * @throws DukeException when the command is unknown
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();

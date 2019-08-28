@@ -5,22 +5,28 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDate start_date;
-    private LocalTime start_time;
-    private LocalDate end_date;
-    private LocalTime end_time;
+    private LocalDate startDate;
+    private LocalTime startTime;
+    private LocalDate endDate;
+    private LocalTime endTime;
 
+    /**
+     * Constructs an <code>Event</code> Object to represent an event.
+     *
+     * @param description The description of the event item
+     * @param at The duration of the event (including date and time of both start and end)
+     */
     public Event(String description, String at) {
         super(description);
         String[] dateTimeArr = at.split(" ");
-        this.start_date = parseDate(dateTimeArr[0]);
-        this.start_time = parseTime(dateTimeArr[1]);
+        this.startDate = parseDate(dateTimeArr[0]);
+        this.startTime = parseTime(dateTimeArr[1]);
         if (dateTimeArr.length == 3) {
-            this.end_date = parseDate(dateTimeArr[0]);
-            this.end_time = parseTime(dateTimeArr[2]);
+            this.endDate = parseDate(dateTimeArr[0]);
+            this.endTime = parseTime(dateTimeArr[2]);
         } else {
-            this.end_date = parseDate(dateTimeArr[2]);
-            this.end_time = parseTime(dateTimeArr[3]);
+            this.endDate = parseDate(dateTimeArr[2]);
+            this.endTime = parseTime(dateTimeArr[3]);
         }
     }
 
@@ -38,13 +44,13 @@ public class Event extends Task {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");
 
-        if (start_date.equals(end_date)) {
-            return String.format("%s, %s - %s", dateFormatter.format(start_date),
-                    timeFormatter.format(start_time), timeFormatter.format(end_time));
+        if (startDate.equals(endDate)) {
+            return String.format("%s, %s - %s", dateFormatter.format(startDate),
+                    timeFormatter.format(startTime), timeFormatter.format(endTime));
         } else {
-            return String.format("%s, %s - %s, %s", dateFormatter.format(start_date),
-                    timeFormatter.format(start_time), dateFormatter.format(end_date),
-                    timeFormatter.format(end_time));
+            return String.format("%s, %s - %s, %s", dateFormatter.format(startDate),
+                    timeFormatter.format(startTime), dateFormatter.format(endDate),
+                    timeFormatter.format(endTime));
         }
     }
 
@@ -52,9 +58,9 @@ public class Event extends Task {
     public String serialize() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        return String.format("E | %d | %s | %s %s %s %s", getStatusCode(), description ,
-                dateFormatter.format(start_date), timeFormatter.format(start_time),
-                dateFormatter.format(end_date), timeFormatter.format(end_time));
+        return String.format("E | %d | %s | %s %s %s %s", getStatusCode(), description,
+                dateFormatter.format(startDate), timeFormatter.format(startTime),
+                dateFormatter.format(endDate), timeFormatter.format(endTime));
     }
 
     @Override

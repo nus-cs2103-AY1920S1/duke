@@ -19,6 +19,13 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Retrieves the requested <code>Task</code> object from the list.
+     *
+     * @param taskId The 1-based index of the task to be fetched
+     * @return The requested <code>Task</code> Object
+     * @throws DukeException when invalid taskId is passed in
+     */
     public Task get(int taskId) throws DukeException {
         try {
             return tasks.get(taskId - 1);
@@ -32,6 +39,13 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Removes the requested <code>Task</code> object from the list.
+     *
+     * @param taskId The 1-based index of the task to be removed
+     * @return The removed <code>Task</code> object
+     * @throws DukeException when invalid taskId is passed in
+     */
     public Task remove(int taskId) throws DukeException {
         Task task = get(taskId);
         tasks.remove(task);

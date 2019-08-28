@@ -19,6 +19,10 @@ public abstract class Task {
         return isDone ? 1 : 0;
     }
 
+    /**
+     * Sets the status of the task as done.
+     * @throws DukeException when the task has already been marked as done before
+     */
     public void markAsDone() throws DukeException {
         if (isDone) {
             throw new DukeException("This task was marked as done before.");

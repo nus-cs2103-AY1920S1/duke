@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 public class Ui {
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -9,7 +8,7 @@ public class Ui {
     String line = "________________________________________";
     String indent = "    ";
 
-    public Ui () {
+    public Ui() {
     }
 
     public void showLoadingError() {

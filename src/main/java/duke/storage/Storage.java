@@ -2,9 +2,9 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.tasks.Event;
 
 import java.io.*;
 import java.util.LinkedList;

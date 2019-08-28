@@ -58,9 +58,13 @@ public class AddCommand extends Command {
         tasks.allTasks.add(t);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + t);
         if (tasks.allTasks.size() == 1) {
-            sb.append("\nNow you have ").append(tasks.allTasks.size()).append(" task in the list.");
+            sb.append("\nNow you have ")
+              .append(tasks.allTasks.size())
+              .append(" task in the list.");
         } else {
-            sb.append("\nNow you have ").append(tasks.allTasks.size()).append(" tasks in the list.");
+            sb.append("\nNow you have ")
+              .append(tasks.allTasks.size())
+              .append(" tasks in the list.");
         }
         storage.appendTaskToFile(t);
         ui.printMessage(sb.toString());

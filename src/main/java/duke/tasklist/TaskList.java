@@ -20,6 +20,9 @@ public class TaskList {
         this.taskArrayList = taskArrayList;
     }
 
+    /**
+     * Constructs an instance of TaskList with no params
+     */
     public TaskList() {
     }
 

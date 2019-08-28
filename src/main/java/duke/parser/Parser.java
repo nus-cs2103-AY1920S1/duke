@@ -18,29 +18,29 @@ public class Parser {
 
     public static Command parse(String command) throws DukeException {
             switch (command) {
-                case ("list"):
-                    return new ListCommand();
+            case ("list"):
+                return new ListCommand();
 
-                case ("bye"):
-                    return new ExitCommand();
+            case ("bye"):
+                return new ExitCommand();
 
-                case ("done"):
-                    return new DoneCommand();
+            case ("done"):
+                return new DoneCommand();
 
-                case ("delete"):
-                    return new DeleteCommand();
+            case ("delete"):
+                return new DeleteCommand();
 
-                case ("deadline"):
-                    return new DeadlineCommand();
+            case ("deadline"):
+                return new DeadlineCommand();
 
-                case ("todo"):
-                    return new TodoCommand();
+            case ("todo"):
+                return new TodoCommand();
 
-                case ("event"):
-                    return new EventCommand();
+            case ("event"):
+                return new EventCommand();
 
-                default:
-                    throw new DukeException("☹OOPS!!! I'm sorry, but I don't know what that means :-(");
+            default:
+                throw new DukeException("☹OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
 }

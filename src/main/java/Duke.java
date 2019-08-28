@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,92 +7,95 @@ public class Duke {
      */
     public static void main(String[] args) {
      
+        // constants and required objects
         Scanner sc = new Scanner(System.in);
+        final String welcomeStr = "Hello! I'm Duke :)\n     What can I do for you?";
+        final String endStr = "Bye. Hope to see you again soon!";
 
         // Print initial welcome string
-        prettyPrint("Hello! I'm Duke :)\n     What can I do for you?");
+        prettyPrint(welcomeStr);
 
-        // initialize a TaskList
+        // run the tasks till user says bye
         TaskList tl = new TaskList();
-
-        // Run till user types "bye"
         String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                tl.listTasks();
-            } else {
-                String command = input.split(" ")[0];
-                switch (command) {
-                case "list":
-                    tl.listTasks();
-                    break;
-                case "done":
-                    try {
-                        int index = Integer.parseInt(input.split(" ")[1]);
-                        tl.taskDone(index);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        prettyPrint("☹ OOPS!!! Please enter an index to delete.");
-                    } finally {
-                        break;
-                    }
-                case "todo":
-                    try {
-                        ToDo todo = new ToDo(input.split(" ", 2)[1]);
-                        tl.addTask(todo);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        prettyPrint("☹ OOPS!!! The description of a todo cannot be empty.");
-                    } finally {
-                        break;
-                    }
-                case "deadline":
-                    try {
-                        String deadlineStr = input.split(" ", 2)[1];
-                        String deadlineName = deadlineStr.split(" /by ")[0];
-                        String deadlineDate = deadlineStr.split(" /by ")[1];
-                        Deadline deadline = new Deadline(deadlineName, deadlineDate);
-                        tl.addTask(deadline);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        prettyPrint("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    } finally {
-                        break;
-                    }
-                case "event":
-                    try {
-                        String eventStr = input.split(" ", 2)[1];
-                        String eventName = eventStr.split(" /at ")[0];
-                        String eventDate = eventStr.split(" /at ")[1];
-                        Event event = new Event(eventName, eventDate);
-                        tl.addTask(event);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        prettyPrint("☹ OOPS!!! The description of an event cannot be empty.");
-                    } finally {
-                        break;
-                    }
-                case "delete":
-                    try {
-                        int index = Integer.parseInt(input.split(" ")[1]);
-                        tl.removeTask(index);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        prettyPrint("☹ OOPS!!! Please provide an index to delete.");
-                    } finally {
-                        break;
-                    }
-                default:
-                    prettyPrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    break;
-                }
+        while (!input.equalsIgnoreCase("bye")) {
+            try {
+                process(input, tl);
+            } catch (DukeException e) {
+                prettyPrint(e.getMessage());
+            } catch (Exception e) {
+                prettyPrint("☹ OOPS!!! An unknown error occurred. :(");
             }
             input = sc.nextLine();
         }
-
+        sc.close();
+        
         // Print exit string
-        prettyPrint("Bye. Hope to see you again soon!");
+        prettyPrint(endStr);
     }
 
     // pretty print a string
-    static void prettyPrint(String str) {
+    private static void prettyPrint(String str) {
         System.out.println("    --------------------------------------------------");
         System.out.println("     " + str);
         System.out.println("    --------------------------------------------------");
+    }
+
+    // run a process
+    private static void process(String input, TaskList tl) throws DukeException {
+        String command = input.split(" ")[0];
+        switch (command) {
+        case "list":
+            tl.listTasks();
+            break;
+        case "done":
+            if (input.split(" ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! Please enter an index to delete.");
+            }
+            tl.taskDone(Integer.parseInt(input.split(" ")[1]));
+            break;
+        case "todo":
+            if (input.split(" ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            ToDo todo = new ToDo(input.split(" ", 2)[1]);
+            tl.addTask(todo);
+            break;
+        case "deadline":
+            if (input.split(" ", 2).length <= 1) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+            String deadlineStr = input.split(" ", 2)[1];
+            if (deadlineStr.split(" /by ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+            }
+            String deadlineName = deadlineStr.split(" /by ")[0];
+            String deadlineDate = deadlineStr.split(" /by ")[1];
+            Deadline deadline = new Deadline(deadlineName, deadlineDate);
+            tl.addTask(deadline);
+            break;
+        case "event":
+            if (input.split(" ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            }
+            String eventStr = input.split(" ", 2)[1];
+            if (eventStr.split(" /at ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+            }
+            String eventName = eventStr.split(" /at ")[0];
+            String eventDate = eventStr.split(" /at ")[1];
+            Event event = new Event(eventName, eventDate);
+            tl.addTask(event);
+            break;
+        case "delete":
+            if (input.split(" ").length <= 1) {
+                throw new DukeException("☹ OOPS!!! Please provide an index to delete.");
+            }
+            tl.removeTask(Integer.parseInt(input.split(" ")[1]));
+            break;
+        default:
+            prettyPrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        }
     }
 }

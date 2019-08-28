@@ -1,14 +1,17 @@
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.NoSuchElementException;
 
 public class Duke implements Serializable {
     // constants
-    private static final String INDENT = "    ";
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String PRINT_INDENT = "    ";
+    private static final String PRINT_HORIZONTAL_LINE = "____________________________________________________________";
 
     // main loop behavior constants
-    private static final int CONTINUE = 1;
-    private static final int EXIT = 2;
+    private static final int STATE_CONTINUE = 1;
+    private static final int STATE_EXIT = 2;
 
     // class members
     // data members
@@ -50,9 +53,9 @@ public class Duke implements Serializable {
 
     // prints out bye message to out stream
     private void bye() throws IOException {
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-        ui.write(String.format("%s Bye. Hope to see you again soon!\n", INDENT));
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+        ui.write(String.format("%s Bye. Hope to see you again soon!\n", PRINT_INDENT));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
@@ -61,10 +64,10 @@ public class Duke implements Serializable {
         int code;
         do {
             code = processInput();
-            if (code == EXIT) {
+            if (code == STATE_EXIT) {
                 bye();
             }
-        } while (code == CONTINUE);
+        } while (code == STATE_CONTINUE);
     }
 
     // main logic
@@ -74,13 +77,13 @@ public class Duke implements Serializable {
         String command = ui.readLine();
         if (command == null) {
             // EOF
-            return EXIT;
+            return STATE_EXIT;
         }
         try {
             String[] commandArgs = Parser.returnArgs(command);
             switch (commandArgs[0]){
             case "bye":
-                return EXIT;
+                return STATE_EXIT;
             case "list":
                 listList(commandArgs);
                 break;
@@ -99,12 +102,12 @@ public class Duke implements Serializable {
                 throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException e) {
-            ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-            ui.write(String.format("%s %s\n", INDENT, e.getMessage()));
-            ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+            ui.write(String.format("%s %s\n", PRINT_INDENT, e.getMessage()));
+            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
             ui.flush();
         }
-        return CONTINUE;
+        return STATE_CONTINUE;
     }
 
     // input expected: "delete n"
@@ -121,11 +124,11 @@ public class Duke implements Serializable {
         Task removedTask;
         try {
             removedTask = todoList.remove(thingToDo - 1);
-            ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-            ui.write(String.format("%s Noted. I've removed this task: \n", INDENT));
-            ui.write(String.format("%s   %s\n", INDENT, removedTask));
-            ui.write(String.format("%s  Now you have %d tasks in the list.\n", INDENT, todoList.size()));
-            ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+            ui.write(String.format("%s Noted. I've removed this task: \n", PRINT_INDENT));
+            ui.write(String.format("%s   %s\n", PRINT_INDENT, removedTask));
+            ui.write(String.format("%s  Now you have %d tasks in the list.\n", PRINT_INDENT, todoList.size()));
+            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
             ui.flush();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("\u2639 OOPS!!! There is no task %d.", thingToDo));
@@ -149,10 +152,10 @@ public class Duke implements Serializable {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("\u2639 OOPS!!! There is no task %d.", thingToDo));
         }
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-        ui.write(String.format("%s Nice! I've marked this task as done: \n", INDENT));
-        ui.write(String.format("%s   %s\n", INDENT, todoList.get(thingToDo - 1)));
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+        ui.write(String.format("%s Nice! I've marked this task as done: \n", PRINT_INDENT));
+        ui.write(String.format("%s   %s\n", PRINT_INDENT, todoList.get(thingToDo - 1)));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
         storage.save(todoList);
     }
@@ -161,15 +164,15 @@ public class Duke implements Serializable {
     // input not checked
     // prints out list of tasks to out stream
     private void listList(String[] args) throws IOException {
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         int counter = 1;
         for (Task item : todoList) {
-            ui.write(String.format("%s %d.%s\n", INDENT, counter++, item));
+            ui.write(String.format("%s %d.%s\n", PRINT_INDENT, counter++, item));
         }
         if (counter == 1) {
-            ui.write(String.format("%s Such empty, much wow\n", INDENT));
+            ui.write(String.format("%s Such empty, much wow\n", PRINT_INDENT));
         }
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
@@ -201,27 +204,27 @@ public class Duke implements Serializable {
             }
             break;
         }
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-        ui.write(String.format("%s Got it. I've added this task: \n", INDENT));
-        ui.write(String.format("%s   %s\n", INDENT, todoList.get(todoList.size() - 1)));
-        ui.write(String.format("%s  Now you have %d tasks in the list.\n", INDENT, todoList.size()));
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+        ui.write(String.format("%s Got it. I've added this task: \n", PRINT_INDENT));
+        ui.write(String.format("%s   %s\n", PRINT_INDENT, todoList.get(todoList.size() - 1)));
+        ui.write(String.format("%s  Now you have %d tasks in the list.\n", PRINT_INDENT, todoList.size()));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
         storage.save(todoList);
     }
 
     private void echo(String command) throws IOException {
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-        ui.write(String.format("%s%s\n", INDENT, command));
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, command));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
     private void greet() throws IOException {
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
-        ui.write(String.format("%s Hello! I'm Duke\n", INDENT));
-        ui.write(String.format("%s What can I do for you?\n", INDENT));
-        ui.write(String.format("%s%s\n", INDENT, HORIZONTAL_LINE));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
+        ui.write(String.format("%s Hello! I'm Duke\n", PRINT_INDENT));
+        ui.write(String.format("%s What can I do for you?\n", PRINT_INDENT));
+        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 

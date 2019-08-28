@@ -4,3 +4,7 @@ D | 0 |  binch  | dead |
 E | 0 |  why  | yeet | 
 T | 0 |  fkoff |  | 
 T | 0 |  yeet |  | 
+D | 0 | binch | dead | 
+E | 0 | why | yeet | 
+T | 0 | fkoff |  | 
+T | 0 | yeet |  | 

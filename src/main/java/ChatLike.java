@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class ChatLike {
     private String response;
@@ -62,6 +65,22 @@ public class ChatLike {
         return taskData;
     }
 
+    private static String getTimeFormat(int n) {
+        if (n >= 11 && n <= 13) {
+            return n + "th";
+        }
+        switch (n % 10) {
+        case 1:
+            return n + "st of";
+        case 2:
+            return n + "nd of";
+        case 3:
+            return n + "rd of";
+        default:
+            return n + "th of";
+        }
+    }
+
     public void add(String s) throws DukeException{
         String[] arrWords = s.split(" ");
         String tasksType = arrWords[0]; //Type of Task: ToDo, Event, Deadline
@@ -96,7 +115,23 @@ public class ChatLike {
                             "\u2639" + " OOPS!!! The time of a " + tasksType + " cannot be empty." +
                             "\n    ____________________________________________________________\n");
 
-        Task task;
+        try {
+            Date date = new SimpleDateFormat("d/MM/yyyy HHmm").parse(tasksTime);
+            SimpleDateFormat fmtr = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+            tasksTime = fmtr.format(date);
+            String arr[] = tasksTime.split(" ");
+            arr[0] = getTimeFormat(Integer.valueOf(arr[0]));
+            arr[arr.length - 1] = arr[arr.length - 1].toLowerCase();
+            tasksTime = "";
+            for(int i = 0; i < arr.length; i++){
+                tasksTime += " " + arr[i];
+            }
+            tasksTime = tasksTime.trim();
+        } catch (ParseException e) {
+            tasksTime = tasksTime;
+        }
+
+        Task task; //To be added in the taskList
         if (tasksType.equals("todo")) {
             task = new ToDo(tasksDescr);
             taskList.add(task);
@@ -148,7 +183,7 @@ public class ChatLike {
 
     }
 
-    public void delete(int n) throws DukeException{ //Marks a task to be completed by calling method of Task object
+    public void delete(int n) throws DukeException{ //Deletes a task by calling method of Task object
         if(n > this.taskList.size()) {
             throw new DukeException("    ____________________________________________________________\n     " +
                     "\u2639" + " OOPS!!! I'm sorry, but you do not have a task at that position to delete :-(" +

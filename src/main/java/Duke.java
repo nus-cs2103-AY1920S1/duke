@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.io.IOException;
+
 public class Duke {
 
     private Storage storage;
@@ -19,13 +22,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(ui);
 
+        ui.showWelcome();
         String input = sc.nextLine();
 
         while (true) {
             try {
 
-                Parser.parseCommand(input);
-                if ()
+                parser.parseCommand(input, tasks);
+                storage.update(tasks);
+
+                if (parser.isExit()) {
+                    break;
+                }
                 input = sc.nextLine();
 
             } catch (DukeException e) {
@@ -38,11 +46,11 @@ public class Duke {
             }
         }
 
-        exit();
-    }
+        ui.showGoodbye();
     }
 
+
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("tasks.txt").run();
     }
 }

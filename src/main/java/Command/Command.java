@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.core.Ui;
+import duke.core.Storage;
+import duke.helper.DukeException;
+import duke.task.TaskList;
+
 public abstract class Command {
     protected String inputCommand;
     protected boolean shouldExit;

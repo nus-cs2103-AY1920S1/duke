@@ -1,3 +1,13 @@
+package duke.core;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.helper.DukeException;
+
 public class Parser {
 
     public static Command parse(String inputCommand) throws DukeException {

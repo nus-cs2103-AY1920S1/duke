@@ -1,3 +1,11 @@
+package duke.core;
+
+import duke.helper.DateTimeHelper;
+import duke.helper.DukeException;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

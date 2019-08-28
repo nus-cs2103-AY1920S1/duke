@@ -30,6 +30,11 @@ public class Parser {
             AddDeadlineCommand addDeadline = new AddDeadlineCommand();
             addDeadline.setInputDeadline(input);
             return addDeadline;
+        } else if (inputSplit[0].equals("find")) {
+            String keyword = input.substring(5);
+            FindCommand find = new FindCommand();
+            find.setKeyword(keyword);
+            return find;
         } else {
             return new UnrecognisedInputCommand();
         }

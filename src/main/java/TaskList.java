@@ -69,6 +69,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> generateMatchingList(String keyword) {
+        ArrayList<Task> outputList = new ArrayList<>();
+        for (int i = 0; i < dukeTaskList.size(); i++) {
+            if (dukeTaskList.get(i).toString().contains(keyword)) {
+                outputList.add(dukeTaskList.get(i));
+            }
+        }
+        return outputList;
+    }
+
 }
 
 

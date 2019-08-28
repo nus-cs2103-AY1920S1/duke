@@ -24,6 +24,7 @@ public class TaskList {
     private static String task_added_message = "\t Got it. I've added this task:\n";
     /** Task deleted successfully message. */
     private static String delete_message = "\t Noted. I've removed this task:\n";
+    private static String matching_message = "\tHere are the matching tasks in your list:\n";
 
     /** Stores the ArrayList of tasks. */
     private ArrayList<Task> taskList;
@@ -170,6 +171,26 @@ public class TaskList {
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
         save();
         return s;
+    }
+
+    /**
+     * Finds all the tasks matching a certain keyword.
+     * @param params A string array of the keyword(s) to search for
+     * @return A string representing all the tasks matching the keyword
+     * @throws DukeException If no search keyword is provided.
+     */
+    public String findEvent(String[] params) throws DukeException {
+        String searchKey = Parser.joinStrings(params);
+        if (searchKey.isEmpty()) {
+            throw new DukeException("You must specify a keyword to search by.");
+        }
+        StringBuilder s = new StringBuilder(matching_message);
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).toString().contains(searchKey)) {
+                s.append("\t ").append(i + 1).append(".").append(taskList.get(i));
+            }
+        }
+        return s.toString();
     }
 
     /**

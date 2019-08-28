@@ -20,6 +20,10 @@ public class Task {
         isDone = true;
     }
 
+    public String toFile() {
+        return "T|" + getStatusIcon() + "|" + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

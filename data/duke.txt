@@ -1,0 +1,3 @@
+T|N|Do assignment
+E|Y|Attend party|July 10th
+D|N|Return book|tomorrow

@@ -4,6 +4,14 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         LinkedList<Task> taskList = new LinkedList<>();
+        taskList = DukeFileEditor.loadFile();
+
+//        taskList.add(new Todo("buset"));
+//        DukeFileEditor.writeFile(taskList);
+
+//        for (Task t1: taskList) {
+//            System.out.println(t1);
+//        }
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -31,6 +39,7 @@ public class Duke {
                     int index = Integer.parseInt(inputText.split(" ")[1]);
                     Task selectedTask = taskList.get(index - 1);
                     selectedTask.markAsDone();
+                    DukeFileEditor.writeFile(taskList);
 
                     System.out.println("[" + selectedTask.getStatusIcon() + "] " + selectedTask.getDescription());
                 } else if (actionKey.equals("delete")) { // delete a specific plan
@@ -38,6 +47,8 @@ public class Duke {
                     System.out.println("Noted. I've removed this task: ");
                     System.out.println(taskList.get(index - 1));
                     taskList.remove(index - 1);
+                    DukeFileEditor.writeFile(taskList);
+
                     System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                 } else { // to handle addition of a specific type of plan
                     if (actionKey.equals("deadline")) {
@@ -54,6 +65,7 @@ public class Duke {
                         Deadline newDeadline = new Deadline(contentList[0], contentList[1]);
                         System.out.println(newDeadline);
                         taskList.add(newDeadline);
+                        DukeFileEditor.writeFile(taskList);
                     } else if (actionKey.equals("event")) {
                         if (keyList.length <= 1) {
                             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -68,6 +80,7 @@ public class Duke {
                         Event newEvent = new Event(contentList[0], contentList[1]);
                         System.out.println(newEvent);
                         taskList.add(newEvent);
+                        DukeFileEditor.writeFile(taskList);
                     } else if (actionKey.equals("todo")) {
                         if (keyList.length <= 1) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -77,6 +90,7 @@ public class Duke {
                         Todo newTodo = new Todo(inputText.split(" ", 2)[1]);
                         System.out.println(newTodo);
                         taskList.add(newTodo);
+                        DukeFileEditor.writeFile(taskList);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -95,5 +109,3 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
-
-

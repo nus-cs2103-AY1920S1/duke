@@ -7,11 +7,19 @@ import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
 
+/**
+ * A task management application.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a {@link Duke}.
+     *
+     * @param pathname Storage file path.
+     */
     public Duke(String pathname) {
         ui = new Ui();
         storage = new Storage(pathname);
@@ -22,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the {@link Duke} application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

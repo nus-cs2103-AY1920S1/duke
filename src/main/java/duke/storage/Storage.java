@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * Represents a storage system to add and save data as .txt files.
+ */
 public class Storage {
     private File file;
 
@@ -22,6 +25,12 @@ public class Storage {
         this.file = new File(pathname);
     }
 
+    /**
+     * Loads the data from the storage.
+     *
+     * @return List of tasks.
+     * @throws DukeException If the loading of the data failed.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -72,6 +81,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the data into the storage.
+     *
+     * @param data Data to be saved.
+     * @throws DukeException If the data failed to save.
+     */
     public void save(String data) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
@@ -82,6 +97,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends the data into the storage.
+     *
+     * @param data Data to be appended.
+     * @throws DukeException If the data failed to be appended.
+     */
     public void append(String data) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file, true);

@@ -6,7 +6,18 @@ import duke.util.DateUtil;
 
 import java.util.Date;
 
+/**
+ * Represents a parser that parses strings and creates commands.
+ */
 public class Parser {
+
+    /**
+     * Parses the command contained in a {@link String} and returns a {@link Command} that represents it.
+     *
+     * @param fullCommand {@link String} containing the command.
+     * @return {@link Command} representing the command.
+     * @throws DukeException if the command has parser errors.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] arr = fullCommand.trim().split(" ", 2);
         String commandWord = arr[0];

@@ -3,6 +3,9 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a {@link Command} to add a {@link Task}.
+ */
 public class AddCommand extends Command {
 
     private final Task toAdd;

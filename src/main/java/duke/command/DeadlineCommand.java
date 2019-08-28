@@ -4,6 +4,9 @@ import duke.task.Deadline;
 
 import java.util.Date;
 
+/**
+ * Represents a {@link Command} to add a {@link Deadline}.
+ */
 public class DeadlineCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "deadline";

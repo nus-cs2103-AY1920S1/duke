@@ -4,6 +4,9 @@ import duke.util.DateUtil;
 
 import java.util.Date;
 
+/**
+ * Represents a {@link Task} that has a deadline.
+ */
 public class Deadline extends Task {
     protected Date by;
 

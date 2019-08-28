@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.task.Task;
 
+/**
+ * Represents a {@link Command} to display a list of {@link Task}.
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";

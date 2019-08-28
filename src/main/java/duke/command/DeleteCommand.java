@@ -3,6 +3,9 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a {@link Command} to delete a {@link Task}.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";

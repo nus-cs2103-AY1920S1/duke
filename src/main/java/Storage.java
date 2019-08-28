@@ -2,7 +2,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+/**
+ * Represents a Storage Class which is used to handle all
+ * file handling task - writing, deleting, updating.
+ */
 
 public class Storage {
 

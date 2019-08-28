@@ -1,6 +1,13 @@
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 
+
+/**
+ * Represents a TaskList Class which represented the entire
+ * list of task that the user have entered into the program.
+ * The TaskList class handles all the manipulating of the List.
+ */
+
 public class TaskList {
     private ArrayList<Task> listOfTask;
 

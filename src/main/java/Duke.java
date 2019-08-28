@@ -1,9 +1,12 @@
 import java.util.Scanner;
-import java.text.ParseException;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.nio.file.Files;
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.parser.Parser;
 
 public class Duke {
     private Storage storage;
@@ -43,16 +46,6 @@ public class Duke {
             this.storage.saveToFile(this.tasks.getAllTasks());
         } catch (DukeException e) {
             System.err.println("Something went wrong: " + e.getMessage());
-        }
-    }
-
-    public static Date dateFormatter(String date) throws DukeException {
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            Date parseDate = formatter.parse(date);
-            return parseDate;
-        } catch (ParseException e) {
-            throw new DukeException("Something went wrong: " + e.getMessage());
         }
     }
 

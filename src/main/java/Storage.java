@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,15 +10,17 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import duke.exception.*;
+import duke.task.*;
 
-class Storage {
+public class Storage {
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> loadFromFile() throws DukeException {
+    public ArrayList<Task> loadFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>(100);
         try {
             File f = new File(this.filePath);
@@ -76,7 +80,7 @@ class Storage {
         }
     }
 
-    void saveToFile(ArrayList<Task> listOfInputs) throws DukeException {
+    public void saveToFile(ArrayList<Task> listOfInputs) throws DukeException {
         try {
             File f = new File(this.filePath);
             f.getParentFile().mkdirs();

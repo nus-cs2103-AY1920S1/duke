@@ -5,17 +5,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DukeFile {
+public class Storage {
 
     private String filePath = "";
     private File file;
 
-    public DukeFile(String filePath) throws IOException {
+    public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
         if(!file.exists()) {
             file.getParentFile().mkdirs();
-            file.createNewFile();
+            try {
+                file.createNewFile();
+            } catch (IOException ex) {
+
+            }
         }
     }
 
@@ -35,26 +39,33 @@ public class DukeFile {
      * @param taskListToAdd
      * @throws IOException
      */
-    public void writeToFile(ArrayList<Task> taskListToAdd) throws IOException {
+    public void writeToFile(ArrayList<Task> taskListToAdd) throws DukeException {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < taskListToAdd.size(); i++) {
             sb.append(taskListToAdd.get(i).toStringFile() + "\n");
         }
-        writeToFile(sb.toString());
+        try {
+            writeToFile(sb.toString());
+        } catch (IOException ex) {
+            throw new DukeException("I could not save your task");
+        }
     }
 
     /**
      * Get the file content
      * @return arrayList of tasks
-     * @throws FileNotFoundException
+     * @throws DukeException
      */
-    public ArrayList<Task> getFileContents() throws FileNotFoundException, DukeException {
-//        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(file); // create a Scanner using the File as the source
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<Task>();
-        while (s.hasNext()) {
-            Task task = decodeTask(s.nextLine());
-            taskList.add(task);
+        try {
+            Scanner s = new Scanner(file);
+            while (s.hasNext()) {
+                Task task = decodeTask(s.nextLine());
+                taskList.add(task);
+            }
+        } catch (FileNotFoundException ex) {
+
         }
         return taskList;
     }

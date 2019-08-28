@@ -1,5 +1,9 @@
 public enum DukeEnum {
     TODO,
     DEADLINE,
-    EVENT
+    EVENT,
+    LIST,
+    BYE,
+    DELETE,
+    DONE
 }

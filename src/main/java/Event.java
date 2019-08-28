@@ -22,6 +22,19 @@ public class Event extends Task {
         }
     }
 
+    public Event(String description) throws DukeException {
+        super(description);
+        String[] descArr = description.split(" /at ", 2);
+        this.description = descArr[0];
+        DateTimeRangeHelper helper = DateTimeHandler.getDateTimeRange(descArr[1]);
+        this.startTime = helper.getStartTime();
+        this.endTime = helper.getEndTime();
+        this.date = helper.getDate();
+        this.text = helper.getText();
+        this.at = descArr[1];
+
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + text + ")";

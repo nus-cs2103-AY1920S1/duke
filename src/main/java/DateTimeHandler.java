@@ -33,23 +33,27 @@ class DateTimeHandler {
         return st;
     }
 
-    public static DateTimeRangeHelper getDateTimeRange(String s) {
+    public static DateTimeRangeHelper getDateTimeRange(String s) throws DukeException {
+        try {
+            String[] sArr = s.split("-");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(sArr[0], formatter);
+            DateTimeFormatter dukeFormatter = new DateTimeFormatterBuilder()
+                    .appendText(ChronoField.DAY_OF_MONTH, ordNo)
+                    .appendPattern(" 'of' MMMM yyyy, h")
+                    .toFormatter();
 
-        String[] sArr = s.split("-");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        LocalDateTime dateTime = LocalDateTime.parse(sArr[0], formatter);
-        DateTimeFormatter dukeFormatter = new DateTimeFormatterBuilder()
-                .appendText(ChronoField.DAY_OF_MONTH, ordNo)
-                .appendPattern(" 'of' MMMM yyyy, h")
-                .toFormatter();
+            DateTimeFormatter toFormatter = DateTimeFormatter.ofPattern("HHmm");
+            LocalTime toTime = LocalTime.parse(sArr[1], toFormatter);
+            DateTimeFormatter toTimeFormatter = DateTimeFormatter.ofPattern("ha");
 
-        DateTimeFormatter toFormatter = DateTimeFormatter.ofPattern("HHmm");
-        LocalTime toTime = LocalTime.parse(sArr[1], toFormatter);
-        DateTimeFormatter toTimeFormatter = DateTimeFormatter.ofPattern("ha");
+            String st = dateTime.format(dukeFormatter) + "-" + toTime.format(toTimeFormatter);
 
-        String st = dateTime.format(dukeFormatter) + "-" + toTime.format(toTimeFormatter);
+            return new DateTimeRangeHelper(dateTime.toLocalTime(), toTime, dateTime.toLocalDate(), st);
 
-        return new DateTimeRangeHelper(dateTime.toLocalTime(), toTime, dateTime.toLocalDate(), st);
+        } catch (Exception ex) {
+            throw new DukeException("I don't think that was a valid event");
+        }
 
     }
 

@@ -7,6 +7,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String command) {
+        super(command);
+        String[] commandArr = command.split(" /", 2);
+        this.description = commandArr[0];
+        String byString = commandArr[1].split(" ", 2)[1]; //remove the "by"
+        this.by = DateTimeHandler.getDateTime(byString);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

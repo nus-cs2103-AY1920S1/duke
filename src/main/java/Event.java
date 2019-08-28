@@ -49,7 +49,7 @@ public class Event extends Task {
      * @return the parsed date and time information
      * @throws ParseException if the date/time is entered in the wrong format
      */
-    public Date toDate() throws ParseException {
+    private Date toDate() throws ParseException {
         return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.dateTime);
     }
 }

@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     public void displayList(ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
-            String itemDisplay = itemIndex + "." + list.get(i).toString();
+            String itemDisplay = itemIndex + "." + list.get(i).getDescription();
             System.out.println(itemDisplay);
         }
     }

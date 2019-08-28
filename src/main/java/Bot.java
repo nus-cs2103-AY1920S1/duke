@@ -24,6 +24,8 @@ public class Bot {
 
         if (words.length == 1) throw emptyDescription;
 
+        Task task = null;
+
         String description;
 
         switch (taskType) {
@@ -32,8 +34,10 @@ public class Bot {
 
             if (description.isBlank()) throw emptyDescription;
 
-            list.add(new Todo(description));
+            task = new Todo(description);
+
             break;
+
         case DEADLINE:
             String[] split = words[1].split(" /by ", 2);
 
@@ -44,8 +48,10 @@ public class Bot {
 
             if (description.isBlank() || by.isBlank()) throw emptyDescription;
 
-            list.add(new Deadline(description, by));
+            task = new Deadline(description, by);
+
             break;
+
         case EVENT:
             split = words[1].split(" /at ", 2);
 
@@ -56,9 +62,12 @@ public class Bot {
 
             if (description.isBlank() || at.isBlank()) throw emptyDescription;
 
-            list.add(new Event(description, at));
+            task = new Event(description, at);
+
             break;
         }
+
+        list.add(task);
 
         System.out.println("Got it. I've added this task:");
 

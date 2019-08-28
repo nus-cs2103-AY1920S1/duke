@@ -1,12 +1,22 @@
 public class AddTaskCommand extends Command {
     Task currTask;
     String taskDetailsString;
+
+    /**
+     * Constructor of AddTaskCommand.
+     * @param taskDetailsString the full input of the user for add task command
+     * @throws DukeException
+     */
     AddTaskCommand(String taskDetailsString) throws DukeException{
         super(0);
         this.taskDetailsString = taskDetailsString;
         getTask();
     }
 
+    /**
+     * Helper function that maps the input to the relevant task
+     * @throws DukeException
+     */
     private void getTask() throws DukeException{
         //Task Details is all the details for the task
         try {
@@ -37,6 +47,13 @@ public class AddTaskCommand extends Command {
         }
     }
 
+    /**
+     * This method does all the necessary actions needed. Printing the messages, adding the tasks to the list
+     * and getting the list details
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage){
         ui.printString("Got it. I've added this task:");
         tasks.addTask(currTask);

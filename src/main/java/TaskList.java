@@ -14,6 +14,10 @@ public class TaskList {
 
     }
 
+    /**
+     * Use the Buffered File provided in the constructor to read the file and populate the list with the stored
+     * tasks
+     */
     private void populateTaskList(){
         Stream<String> linesStream = bufferedReader.lines();
         linesStream.forEach(line -> {
@@ -50,6 +54,10 @@ public class TaskList {
         });
     }
 
+    /**
+     * Get the string representation of the full list to write to the file and store the data
+     * @return string
+     */
     public String taskListString () {
         String dukeTxt = "";
         while(!tasksArr.isEmpty()){
@@ -87,20 +95,38 @@ public class TaskList {
         return dukeTxt;
     }
 
+    /**
+     * Make a particular task in the list done
+     * @param index the index in the list
+     * @return  the Task that was made done
+     */
     public Task doneTask(int index){
         Task currTask = tasksArr.get(index);
         currTask.done();
         return currTask;
     }
 
+    /**
+     * Add task to the list
+     * @param task
+     */
     public void addTask(Task task){
         tasksArr.add(task);
     }
 
+    /**
+     * delete a certain task in the list
+     * @param i index
+     * @return the task deleted
+     */
     public Task deleteTask(int i){
         return tasksArr.remove(i);
     }
 
+    /**
+     * the general information of the list
+     * @return String
+     */
     public String listDetails () {
         return "Now you have " + tasksArr.size() + " tasks in the list.";
     }
@@ -117,6 +143,10 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * The string shown to the clients for the information in the list
+     * @return the String representation of the list
+     */
     @Override
     public String toString(){
         String string = "Here are the tasks in your list:\n";

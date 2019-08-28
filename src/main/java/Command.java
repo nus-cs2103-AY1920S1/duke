@@ -3,20 +3,23 @@ public class Command {
     private boolean isExit;
     private String description;
 
-    public Command (DukeEnum de, String description) {
+    public Command(DukeEnum de, String description) {
         this.de = de;
-        if(de.equals(DukeEnum.BYE)){
-            isExit = true;
-        } else {
-            isExit = false;
-        }
+        isExit = de.equals(DukeEnum.BYE);
         this.description = description;
     }
 
-    public boolean isExit(){
+    public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * Execute the command accordingly 
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (de) {
         case LIST:

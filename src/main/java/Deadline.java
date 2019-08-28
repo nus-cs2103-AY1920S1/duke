@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toStringFile(){
+    public String toStringFile() {
         return "D | " + ((isDone) ? "1" : "0") + " | " + description + " | " + by;
     }
 }

@@ -12,7 +12,7 @@ public class TaskException extends DukeException {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if(!desc && !time){
+        if (!desc && !time) {
             sb.append("description & specific time/date ");
         } else {
             if (!desc) {

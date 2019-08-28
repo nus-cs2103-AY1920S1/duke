@@ -8,6 +8,7 @@ import java.util.Map;
 
 class DateTimeHandler {
     public static Map<Long, String> ordNo;
+
     static {
         ordNo = new HashMap<>(42);
         ordNo.put(1L, "1st");
@@ -17,10 +18,16 @@ class DateTimeHandler {
         ordNo.put(22L, "22nd");
         ordNo.put(23L, "23rd");
         ordNo.put(31L, "31st");
-        for(long d = 1; d <=31; d++){
+        for (long d = 1; d <= 31; d++) {
             ordNo.putIfAbsent(d, d + "th");
         }
     }
+
+    /**
+     * Transform dd/MM/yyyy HHmm into an ordinal date format
+     * @param s
+     * @return
+     */
     public static String getDateTime(String s) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(s, formatter);
@@ -33,6 +40,12 @@ class DateTimeHandler {
         return st;
     }
 
+    /**
+     * Transform dd/MM/yyyy HHmm-HHmm into an ordinal date format
+     * @param s
+     * @return
+     * @throws DukeException
+     */
     public static DateTimeRangeHelper getDateTimeRange(String s) throws DukeException {
         try {
             String[] sArr = s.split("-");

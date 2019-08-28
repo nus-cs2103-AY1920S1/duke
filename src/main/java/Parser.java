@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -85,6 +86,19 @@ public class Parser {
                 throw new DukeException("OOPS!!! The task number you specified is not in the list.");
             } catch (Exception e) {
                 throw new DukeException("OOPS!!! Your input format is wrong. Use: delete [task number]");
+            }
+        } else if (inputType.equals("find")) {
+            try {
+                String keyword = userInput.trim();
+                ArrayList<Task> filterTasks = new ArrayList<>();
+                for (Task task : taskList.getListOfTasks()) {
+                    if (task.getTaskDescription().contains(keyword)) {
+                        filterTasks.add(task);
+                    }
+                }
+                ui.printFindTasks(filterTasks);
+            } catch (Exception e) {
+                throw new DukeException("OOPS!!! Your input format is wrong. Use: find [task description]");
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

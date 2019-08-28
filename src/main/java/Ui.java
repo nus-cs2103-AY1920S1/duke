@@ -14,7 +14,8 @@ public class Ui {
 
     /**
      * Reads the next input given by the user.
-     * @return
+     *
+     * @return The line of user input.
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -23,7 +24,8 @@ public class Ui {
 
     /**
      * Shows the error message of an exception.
-     * @param msg
+     *
+     * @param msg The exception's error message.
      */
     public void showError(String msg) {
         System.out.println(msg);
@@ -38,6 +40,7 @@ public class Ui {
 
     /**
      * Prints messages directed at the user.
+     *
      * @param msg The message to be outputted to the console.
      */
     public void print(String msg) {

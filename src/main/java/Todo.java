@@ -5,6 +5,7 @@ public class Todo extends Task {
 
     /**
      * Formats the task such that it can be outputted in a readable form for the user.
+     *
      * @return The description of the task.
      */
     @Override

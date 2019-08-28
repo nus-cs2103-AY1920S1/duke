@@ -5,6 +5,7 @@ public class Parser {
 
     /**
      * Parses the user command.
+     *
      * @param fullCommand The input given by the user.
      * @return A Command that varies based on the user input.
      * @throws DukeException If the user input is invalid.

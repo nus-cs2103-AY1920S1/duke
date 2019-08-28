@@ -12,6 +12,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Returns a boolean value signalling whether the program should exit.
+     *
      * @return A boolean value indicating whether the program should exit.
      */
     @Override
@@ -21,6 +22,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Executes the command to delete a task from the task list.
+     *
      * @param tasks The task list.
      * @param ui The ui that handles user output.
      * @param storage The storage that handles saving and loading the task list.

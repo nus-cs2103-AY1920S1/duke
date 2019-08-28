@@ -6,15 +6,27 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a parser that will be used to parse each line of input
+ */
 public class Parser {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructs a Parser
+     * @param taskList taskList to which the parsed Tasks would be saved
+     * @param ui ui for input and output
+     */
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }
 
+    /**
+     * Parses the inputted string into a Task
+     * @param  str string to be parsed
+     */
     public void parseLine(String str) throws DukeException, NumberFormatException{
         if (str.equals("list")) {
             ui.printList();

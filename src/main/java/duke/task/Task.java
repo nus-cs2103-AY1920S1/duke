@@ -5,6 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a task. A <code>Task</code> object contains a description,
+ * a  boolean representing whether or not the task has been done and additional information.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -12,16 +16,29 @@ public abstract class Task {
     protected String info;
     protected Date date;
 
+    /**
+     * Constructs a new Task.
+     * @param description description of the task
+     * @param isDone whether or not the task has been done
+     */
     public Task(String description, boolean isDone, String info) {
         this.description = description.trim();
         this.isDone = isDone;
         this.info = info.trim();
     }
 
+    /**
+     * Returns a boolean representing whether or not the task is done.
+     * @return true if the task is done, false otherwise
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Returns a string which is the first character of each task type
+     * @return a "T", "D", or "E"
+     */
     public String getSymbol() {
         switch (type){
             case TODO:
@@ -35,22 +52,10 @@ public abstract class Task {
         }
     }
 
-    public Type getType() {
-        return type;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public String getDescription() {
-        return  description;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
+    /**
+     * Returns a boolean representing whether or not the task is done.
+     * @return true if the task is done, false otherwise
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -59,6 +64,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Overrides toString method
+     * @return a String in the to-be-displayed format
+     */
     @Override
     public String toString() {
         if (info.equals("")) {
@@ -69,8 +78,16 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns a String in the format for file saving. An abstract method to be implemented in child classes.
+     */
     public abstract String getFileStringFormat();
 
+    /**
+     * Checks if the string is in date format dd/MM/yyyy HHmm and returns the parsed form of the  date.
+     * @param str the task's info String
+     * @return true if the task is done, false otherwise
+     */
     public String checkDate(String str)  {
         try {
             DateFormat parser = new SimpleDateFormat("dd/MM/yyyy HHmm");

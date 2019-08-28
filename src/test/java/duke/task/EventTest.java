@@ -5,7 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests Event class
+ */
 class EventTest {
+    /**
+     * Tests if Event.toString outputs the correct String
+     */
     @Test
     public void eventDateDetection_validDate_success() {
         Event event = new Event("A new event", false, "by 12/10/2019 2100");

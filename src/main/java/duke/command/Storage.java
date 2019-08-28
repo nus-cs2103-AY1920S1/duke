@@ -12,13 +12,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Saves file to the specified filePath
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage.
+     * @param filePath a String that represents the filepath to save this program's output
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the saved file and adds the tasks to TaskList
+     * @return the list of tasks parsed from the saved file
+     */
     public ArrayList<Task> load() throws FileNotFoundException{
         ArrayList<Task> list = new ArrayList<>();
         File f = new File(filePath);
@@ -40,6 +51,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Updates the file in the corresponding filePath
+     * @param arr an ArrayList<Task> to update the file in the corresponding filePath
+     */
     public static  void  updateFile(ArrayList<Task> arr) {
         File dir = new File("/Users/joannasara/Desktop/duke/data");
         if (!dir.exists()) {

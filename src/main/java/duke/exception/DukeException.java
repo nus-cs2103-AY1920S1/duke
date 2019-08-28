@@ -1,22 +1,14 @@
 package duke.exception;
 
+/**
+ * Exception for this program
+ */
 public class DukeException extends Exception {
-    public DukeException() {
-    }
-
+    /**
+     * Creates an exception with the specified message
+     * @param message a String that is used as the error message
+     */
     public DukeException(String message) {
         super(message);
-    }
-
-    public DukeException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public DukeException(Throwable cause) {
-        super(cause);
-    }
-
-    public DukeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

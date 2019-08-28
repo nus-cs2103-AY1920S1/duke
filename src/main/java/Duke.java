@@ -33,12 +33,18 @@ public class Duke {
                     break;
                 case "done":
                     value = Integer.parseInt(input.substring(input.length() - 1));
+                    if (value < 0 || value > tasks.size()) {
+                        throw new NumberFormatException();
+                    }
                     tasks.get(value - 1).setDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(value - 1));
                     break;
                 case "delete":
                     value = Integer.parseInt(input.substring(input.length() - 1));
+                    if (value < 0 || value > tasks.size()) {
+                        throw new NumberFormatException();
+                    }
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(tasks.get(value - 1));
                     tasks.remove(value - 1);
@@ -55,9 +61,8 @@ public class Duke {
                 System.out.println("OOPS!!! The details of an Event/Deadline cannot be empty! :(");
             } catch (UnsupportedOperationException ex) {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means! :(");
-            } catch (Exception ex) {
-                System.out.println("OOPS!!! Something broke. Terminating now :(");
-                hi = false;
+            } catch (NumberFormatException ex) {
+                System.out.println("Please only complete/delete tasks on the list!");
             }
         }
         sc.close();
@@ -73,7 +78,7 @@ public class Duke {
         String[] desc = input.split("/");
         String[] temp = desc[1].split(" ");
         desc[1] = desc[1].replace(temp[0], "");
-        desc[1] = " (" + temp[0] + ": " + desc[1] + ")";
+        //desc[1] = " (" + temp[0] + ": " + desc[1] + ")";
         return desc;
     }
 
@@ -88,7 +93,7 @@ public class Duke {
         input = input.replace(task, "");
         switch (task) {
         case "todo":
-            return new Todo(input, "");
+            return new Todo(input);
         case "deadline":
             String[] dead = process(input);
             return new Deadline(dead[0], dead[1]);

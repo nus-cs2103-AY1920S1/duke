@@ -2,15 +2,15 @@
  * Represents an Event Task
  */
 public class Event extends Task {
-    protected String details;
+    private String details;
 
-    public Event(String description, String details) {
+    Event(String description, String details) {
         super(description);
         this.details = details;
     }
 
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + this.description + " " + this.details;
+        return "[E][" + getStatusIcon() + "] " + this.description + " (at: " + this.details + ")";
     }
 }

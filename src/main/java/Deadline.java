@@ -2,15 +2,15 @@
  * Represents a Deadline Task
  */
 public class Deadline extends Task {
-    protected String details;
+    private String details;
 
-    public Deadline(String description, String details) {
+    Deadline(String description, String details) {
         super(description);
         this.details = details;
     }
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + this.description + " " + this.details;
+        return "[D][" + getStatusIcon() + "] " + this.description + " (by: " + this.details + ")";
     }
 }

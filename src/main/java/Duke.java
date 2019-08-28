@@ -4,7 +4,11 @@ import java.util.ArrayList;
 public class Duke {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
-    private enum EventTypes {
+    private enum Commands {
+        bye,
+        list,
+        done,
+        delete,
         todo,
         event,
         deadline,
@@ -44,23 +48,30 @@ public class Duke {
             try {
                 String input = sc.nextLine().trim();
                 straightLine();
-                String command = input.split(" ")[0].toLowerCase(); //the first word of the user input
+                String command = input.split(" ")[0]; //the first word of the user input
+                Commands commandEnum;
+                try {
+                    commandEnum = Commands.valueOf(command.toLowerCase());
+                } catch (IllegalArgumentException err) {
+                    throw new InvalidCommandDukeException(command);
+                }
+
                 String description = input.substring(command.length()).trim();
 
-                switch (command) {
-                case "bye":
+                switch (commandEnum) {
+                case bye:
                     System.out.println("    Bye! See you again soon!!");
                     straightLine();
                     shouldStop = true;
                     break;
-                case "list":
+                case list:
                     System.out.println("    Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println("      " + (i + 1) + "." + tasks.get(i).toString());
                     }
                     straightLine();
                     break;
-                case "done":
+                case done:
                     try {
                         int taskNumber = Integer.parseInt(description) - 1;
                         tasks.get(taskNumber).complete();
@@ -71,7 +82,7 @@ public class Duke {
                         throw new InvalidDescriptionDukeException(command, description);
                     }
                     break;
-                case "delete":
+                case delete:
                     try {
                         int taskNumber = Integer.parseInt(description) - 1;
                         System.out.println("    Noted. I've removed this task:");
@@ -83,13 +94,13 @@ public class Duke {
                         throw new InvalidDescriptionDukeException(command, description);
                     }
                     break;
-                case "todo":
+                case todo:
                     addTask(new ToDoTask(description));
                     break;
-                case "event":
+                case event:
                     addTask(new EventsTask(description));
                     break;
-                case "deadline":
+                case deadline:
                     addTask(new DeadlinesTask(description));
                     break;
                 default:

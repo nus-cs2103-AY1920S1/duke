@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList; 
-import java.util.List; 
 
 public class Duke {
     void logo(){
@@ -22,10 +21,10 @@ public class Duke {
         String line = "    ____________________________________________________________";
         return line + "\n" + str + "\n" + line;
     }
-    static void handleList(ArrayList ls){
+    static void handleList(ArrayList<Task> ls){
         String output = ""; 
         for(int i = 0; i < ls.size(); i++){
-            output = output + "     " +  (i+1) + ": " + ls.get(i);
+            output = output + "     " +  (i+1) + ": " + ls.get(i).getListItem();
             if(i < ls.size() - 1){
                 output = output + "\n";
             }
@@ -33,22 +32,30 @@ public class Duke {
         System.out.println(addDoubleLine(output));
     }
     static void handleInput(){
-        ArrayList <String> list = new ArrayList<String>();
+        ArrayList <Task> list = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()){
-            String check = sc.nextLine();
+            String line = sc.nextLine();
+            String[] splited = line.split(" ");
+            String check = splited[0];
+
             if (check.equals("bye")) {
                 System.out.println(
                     addDoubleLine(
-                    "Bye. Hope to see you again soon!"
+                    "     Bye. Hope to see you again soon!"
                     )
                 );
                 System.exit(0);
             }else if(check.equals("list")){
                 handleList(list);
+            }else if(check.equals("done")){
+                String taskNum = splited[1];
+                Task current = list.get(Integer.parseInt(taskNum) - 1);
+                current.markAsDone();
+                System.out.println(addDoubleLine("     Nice! I've marked this task as done:\n" + "    " + current.getListItem()));
             }else{
-                list.add(check);
-                System.out.println(addDoubleLine("added: " + check));
+                list.add(new Task(line));
+                System.out.println(addDoubleLine("     added: " + line));
             }
         }
     }

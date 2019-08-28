@@ -44,6 +44,9 @@ public abstract class Task {
         isDone = true;
     }
 
+    protected boolean checkMatch(String keyword) {
+        return description.contains(keyword);
+    }
 
     @Override
     public String toString() {

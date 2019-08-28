@@ -41,6 +41,14 @@ public class TaskList {
         return taskList.remove(index);
     }
 
+    public List<Task> getMatchingTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task k : taskList) {
+            if (k.checkMatch(keyword))
+                matchingTasks.add(k);
+        }
+        return matchingTasks;
+    }
 
     public Task completeTask(int entryNumber) throws IndexOutOfBoundsException{
         Task taskToComplete = this.getTask(entryNumber - 1);

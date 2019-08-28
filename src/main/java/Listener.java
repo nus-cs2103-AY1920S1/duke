@@ -12,17 +12,14 @@ public class Listener {
 
         System.out.print(Formatter.WELCOME);
 
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             String command = sc.next();
             if (command.equals("bye")) {
                 System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.GOODBYE + "\n" + Formatter.LINE);
                 break;
             } else if (command.equals("list")) {
                 this.sheet.showList();
-            } else if (command.equals("delete")|| command.equals("done"))) {
-                int index = sc.nextInt();
-                this.sheet.delete(index);
-            } else if (command.equals("done")) {
+            } else if (command.equals("delete") || command.equals("done")) {
                 try {
                     int index = sc.nextInt();
                     if (index > this.sheet.numOfTask) {
@@ -36,14 +33,18 @@ public class Listener {
                     if (index < 1) {
                         throw new TaskNotFoundException("☹ OOPS!!! Do we have non-positive tasks?");
                     }
-                    this.sheet.markAsDone(index);
-                } catch (TaskNotFoundException tfe){
+                    if (command.equals("done")) {
+                        this.sheet.markAsDone(index);
+                    } else {
+                        this.sheet.delete(index);
+                    }
+                } catch (TaskNotFoundException tfe) {
                     System.out.printf(tfe.toString());
                 } catch (InputMismatchException ime) {
                     System.out.printf(
                             Formatter.LINE + Formatter.INDENT +
                                     "☹ OOPS!!! I cannot recognise that task index. :-(" + "\n"
-                                    + Formatter.LINE );
+                                    + Formatter.LINE);
                     sc.nextLine();
                 }
             } else if (command.equals("todo")){

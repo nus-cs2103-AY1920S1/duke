@@ -15,9 +15,10 @@ public class Event extends Task {
         this.pattern = LocalDateTime.parse(at.trim(), dateTimeFormatter);
         this.at = at;
     }
+
     @Override
     public String getFormatToFile() {
-        return String.format("E | %d | %s | %s \n", (isDone ? 1 : 0), description, at);
+        return String.format("E | %d | %s | %s \n", (isDone ? 1 : 0), description, at.trim());
     }
 
     @Override

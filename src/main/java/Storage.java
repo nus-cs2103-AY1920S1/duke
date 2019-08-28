@@ -48,7 +48,7 @@ public class Storage {
         } catch (Exception e) {
             System.out.println("[duke.txt]: duke.txt not found");
         }
-            return myList;
+        return myList;
     }
 
     public void save(TaskList tasks) throws Exception {

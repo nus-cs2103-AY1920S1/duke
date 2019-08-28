@@ -22,11 +22,11 @@ public abstract class Task {
         }
     }
 
-    public String perfectDescription(String description){
+    public String perfectDescription(String description) {
         String[] temp = description.split(" ");
         String result = "";
-        for(String str: temp){
-            if(!str.equals("")){
+        for (String str : temp) {
+            if (!str.equals("")) {
                 result += " " + str.trim();
             }
         }
@@ -44,7 +44,7 @@ public abstract class Task {
     public abstract String getFormatToFile();
 
     public String getTime() {
-        return  pattern.format(formatter2);
+        return pattern.format(formatter2);
     }
 
     @Override

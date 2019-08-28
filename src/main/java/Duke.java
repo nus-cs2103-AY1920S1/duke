@@ -40,4 +40,6 @@ public class Duke {
         new Duke("F:\\CS2103\\duke\\data\\duke.txt").run();
     }
 
+    public TaskList getTaskList() { return taskList; }
+
 }

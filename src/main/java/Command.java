@@ -16,6 +16,22 @@ public class Command {
     public boolean toContinueProgram() {
         return isStillInProgram;
     }
+
+    public void print() {
+        System.out.println("Command: " + command);
+        System.out.println("Program continues after execution: " + isStillInProgram);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        // Not even the same class
+        if (!(o instanceof Command)) { return false; }
+        Command c = (Command) o;
+        return c.command == command &&
+                c.isStillInProgram == isStillInProgram;
+    }
+
 }
 
 class AddCommand extends Command {
@@ -35,6 +51,22 @@ class AddCommand extends Command {
         storage.save(taskList.getTaskArr());
         ui.showAddTaskMessage(newTask, taskList.getTaskArr());
     }
+
+    public void print() {
+        super.print();
+        System.out.println("Command description: " + description);
+        System.out.println("Has subcommand: " + hasSubCommand);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        // Not even the same class
+        if (!(o instanceof AddCommand)) { return false; }
+        AddCommand c = (AddCommand) o;
+        return c.description == description &&
+                c.hasSubCommand == hasSubCommand;
+    }
 }
 
 class SubCommand extends AddCommand {
@@ -53,6 +85,22 @@ class SubCommand extends AddCommand {
         taskList.addTask(newTask);
         storage.save(taskList.getTaskArr());
         ui.showAddTaskMessage(newTask, taskList.getTaskArr());
+    }
+
+    public void print() {
+        super.print();
+        System.out.println("Subcommand: " + subCommand);
+        System.out.println("Subcommand description: " + subDescription);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        // Not even the same class
+        if (!(o instanceof SubCommand)) { return false; }
+        SubCommand c = (SubCommand) o;
+        return c.subCommand == subCommand &&
+                c.subDescription == subDescription;
     }
 
 }
@@ -83,6 +131,20 @@ class DeleteCommand extends Command {
         storage.save(taskList.getTaskArr());
         ui.showDeleteTaskMessage(deletedTask, taskList.getTaskArr());
     }
+
+    public void print() {
+        super.print();
+        System.out.println("Index of task to delete: " + deleteIdx);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        // Not even the same class
+        if (!(o instanceof DeleteCommand)) { return false; }
+        DeleteCommand c = (DeleteCommand) o;
+        return c.deleteIdx == deleteIdx;
+    }
 }
 
 class DoneCommand extends Command {
@@ -96,6 +158,20 @@ class DoneCommand extends Command {
         Task doneTask = taskList.markTaskDone(doneIdx);
         storage.save(taskList.getTaskArr());
         ui.showMarkTaskDoneMessage(doneTask);
+    }
+
+    public void print() {
+        super.print();
+        System.out.println("Index of task to mark done: " + doneIdx);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) { return true; }
+        // Not even the same class
+        if (!(o instanceof DoneCommand)) { return false; }
+        DoneCommand c = (DoneCommand) o;
+        return c.doneIdx == doneIdx;
     }
 }
 

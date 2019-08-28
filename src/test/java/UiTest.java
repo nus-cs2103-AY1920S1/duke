@@ -4,44 +4,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UiTest {
 
-    @Test
-    void readUserInput() {
+    // NOTE: Seems like you can't really test methods which return void?
+//    @Test
+//    void showGoodbye() {
+//        assertEquals("    Bye. Hope to see you again soon!",
+//                new Ui().showGoodbye());
+//    }
 
-    }
-
-    @Test
-    void showGreetings() {
-
-    }
-
-    @Test
-    void showGoodbye() {
-
-    }
-
-    @Test
-    void showTasks() {
-
-    }
-
-    @Test
-    void showAddTaskMessage() {
-
-    }
-
-    @Test
-    void showDeleteTaskMessage() {
-
-    }
-
-    @Test
-    void showMarkTaskDoneMessage() {
-
-    }
-
-    @Test
-    void showMessage() {
-
-    }
+//    @Test
+//    void showTasks() {
+//
+//    }
+//
+//    @Test
+//    void showAddTaskMessage() {
+//
+//    }
+//
+//    @Test
+//    void showDeleteTaskMessage() {
+//
+//    }
+//
+//    @Test
+//    void showMarkTaskDoneMessage() {
+//
+//    }
+//
+//    @Test
+//    void showMessage() {
+//
+//    }
 
 }

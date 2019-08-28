@@ -5,6 +5,9 @@ public class Parser {
         String next = arr[0];
         Command c;
         switch (next) {
+            case "find":
+                c = new FindCommand(arr[1]);
+                break;
             case "bye":
                 c = new ExitCommand();
                 break;

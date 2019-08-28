@@ -1,4 +1,1 @@
-T @ 1 @ jump
-T @ 0 @ go lecture
-E @ 0 @ project @ 2/4/2019 1800
-T @ 0 @ play basketball
+D @ 0 @ art project @ 04/04/2009 1600

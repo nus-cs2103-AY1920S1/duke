@@ -9,7 +9,12 @@ public class DoneCommand extends Command {
     boolean isExit() {
         return false;
     }
-
+    /**
+     * execute() will mark Task in TaskList as done.
+     * @param tasks is the TaskList
+     * @param ui is the Ui
+     * @param storage is the Storage
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToMarkAsDone = tasks.getTask(this.idxToMarkAsDone);

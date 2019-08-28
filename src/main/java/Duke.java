@@ -49,6 +49,9 @@ public class Duke {
         this.closeDuke();
     }
 
+    /**
+     * closeDuke() will write data to data file and print goodbye
+     */
     private void closeDuke() {
         this.storage.save(this.tasks.getTaskList());
         this.ui.printGoodbye();

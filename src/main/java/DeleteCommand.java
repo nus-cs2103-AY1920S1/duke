@@ -11,6 +11,12 @@ public class DeleteCommand extends Command {
         return false;
     }
 
+    /**
+     * execute() will remove Task from TaskList.
+     * @param tasks is the TaskList
+     * @param ui is the Ui
+     * @param storage is the Storage
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToBeRemoved = tasks.getTask(idxToBeRemoved);

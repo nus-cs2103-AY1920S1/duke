@@ -11,6 +11,12 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * execute() will add newTask to the TaskList.
+     * @param tasks is the TaskList
+     * @param ui is the Ui
+     * @param storage is the Storage
+     */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(newTaskToBeAdded);

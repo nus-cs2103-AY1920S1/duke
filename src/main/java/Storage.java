@@ -9,6 +9,10 @@ import java.io.PrintWriter;
 public class Storage {
     String filePath;
 
+    /**
+     * Storage constructor.
+     * @param filePath is the data file path
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }

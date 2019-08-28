@@ -31,6 +31,13 @@ public class Parser {
         }
     }
 
+    /**
+     * handleNewTask() will create appropriate Task based on keyword.
+     * @param keyword is the different Tasks
+     * @param cmd is the full command String
+     * @return the appropriate Task
+     * @throws InputMismatchException when user does not type correct input
+     */
     private static Task handleNewTask(String keyword, String cmd) throws InputMismatchException {
         String date = "";
         String time = "";

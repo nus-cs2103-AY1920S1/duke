@@ -120,7 +120,7 @@ public class Parser {
             if (subsequent.startsWith("[1]")) {
                 isDone = true;
             } else if (subsequent.startsWith("[0]")) {
-               isDone = false;
+                isDone = false;
             } else throw new IncorrectFileFormatException();
 
             // Move to after cross/tick and space

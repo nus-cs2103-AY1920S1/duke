@@ -5,10 +5,10 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private int taskNumberDone;
 
-    public DoneCommand(String command, Task pending, int taskNumberDone){
+    public DoneCommand(String command, Task pending, int taskNumberDone) {
         super(command, pending);
 
         this.taskNumberDone = taskNumberDone;

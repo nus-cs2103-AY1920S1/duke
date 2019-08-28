@@ -7,9 +7,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
-    public ListCommand(String command){
+    public ListCommand(String command) {
         super(command, new Task());
     }
 

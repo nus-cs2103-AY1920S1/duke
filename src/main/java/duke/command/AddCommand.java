@@ -7,9 +7,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
-    public AddCommand(String command, Task pendingTask){
+    public AddCommand(String command, Task pendingTask) {
         super(command, pendingTask);
 
     }

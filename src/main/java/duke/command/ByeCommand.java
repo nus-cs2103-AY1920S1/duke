@@ -5,9 +5,9 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
-    public ByeCommand(String command, Task pending){
+    public ByeCommand(String command, Task pending) {
         super(command, pending);
     }
 

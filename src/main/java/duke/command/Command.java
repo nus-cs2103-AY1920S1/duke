@@ -9,25 +9,25 @@ import java.io.IOException;
 
 
 // General Command class
-public abstract class Command{
+public abstract class Command {
     private COMMAND_TYPE commandType;
     private Task pendingTask;
 
     // Init new command object
-    public Command(String command, Task pendingTask){
+    public Command(String command, Task pendingTask) {
         // Exception handling
         // IllegalArgumentException - if the specified enum type has no constant with the specified name, or the specified class object does not represent an enum type
         // NullPointerException - if enumType or name is null
 
         try {
             this.commandType = COMMAND_TYPE.valueOf(command.toUpperCase());
-        } catch(IllegalArgumentException i){
+        } catch (IllegalArgumentException i) {
             throw new IllegalArgumentException();
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             throw new NullPointerException();
         }
 
-        if(pendingTask == null) throw new NullPointerException();
+        if (pendingTask == null) throw new NullPointerException();
         else this.pendingTask = pendingTask;
     }
 
@@ -35,11 +35,11 @@ public abstract class Command{
 
     public abstract boolean isExit();
 
-    public Task getPendingTask(){
+    public Task getPendingTask() {
         return pendingTask;
     }
 
-    public COMMAND_TYPE getCommandType(){
+    public COMMAND_TYPE getCommandType() {
         return commandType;
     }
 

@@ -2,7 +2,7 @@ package duke.command;
 
 public class CommandNotFoundException extends Exception {
 
-    public CommandNotFoundException(){
+    public CommandNotFoundException() {
         super();
     }
 

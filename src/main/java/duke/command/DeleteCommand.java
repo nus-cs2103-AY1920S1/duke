@@ -8,7 +8,7 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
     private int taskNumberToDelete;
 
-    public DeleteCommand(String command, Task pending, int taskNumberToDelete){
+    public DeleteCommand(String command, Task pending, int taskNumberToDelete) {
         super(command, pending);
         this.taskNumberToDelete = taskNumberToDelete;
     }

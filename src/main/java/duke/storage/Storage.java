@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
+
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -65,10 +66,10 @@ public class Storage {
         return listTask;
     }
 
-    public void save(ArrayList<String> l){
+    public void save(ArrayList<String> l) {
         try {
             FileWriter fw = new FileWriter(printFilePath);
-            for(int i = 0; i < l.size(); i++) {
+            for (int i = 0; i < l.size(); i++) {
                 fw.write(l.get(i) + System.lineSeparator());
             }
             fw.close();

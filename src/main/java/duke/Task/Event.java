@@ -5,11 +5,11 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Event extends Task{
+public class Event extends Task {
     private Date givenTime;
     private SimpleDateFormat df;
 
-    public Event(String taskDescription, boolean isDone, String givenTime){
+    public Event(String taskDescription, boolean isDone, String givenTime) {
         super(taskDescription, isDone);
 
         try {
@@ -18,12 +18,12 @@ public class Event extends Task{
             System.out.println(this.givenTime);
 
             //System.out.println(this.givenTime);
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             throw new NullPointerException();
         }
     }
 
-    public Event(char taskType, String taskDescription, boolean isDone, String givenTime){
+    public Event(char taskType, String taskDescription, boolean isDone, String givenTime) {
         super(taskType, taskDescription, isDone);
 
         try {
@@ -31,13 +31,13 @@ public class Event extends Task{
             this.givenTime = df.parse(givenTime, new ParsePosition(0));
 
             //System.out.println(this.givenTime);
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             throw new NullPointerException();
         }
     }
 
     @Override
-    public String printTask(){
+    public String printTask() {
         return "[" + getFirstCharTask() +
                 "][" + getIcon() + "] " + getTaskDescription() + " (at: " + getGivenTime() + ")";
     }
@@ -46,7 +46,7 @@ public class Event extends Task{
         this.givenTime = df.parse(time);
     }
 
-    public String getGivenTime(){
+    public String getGivenTime() {
         return df.format(givenTime);
     }
 }

@@ -1,0 +1,4 @@
+[T] | [✘] | wake up
+[D] | [✓] | eat breakfast | by: 10am
+[E] | [✓] | meeting | at: 2pm
+[T] | [✘] | eat

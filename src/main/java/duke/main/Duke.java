@@ -12,7 +12,12 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList();
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.displayError(e.getMessage());
+            tasks = new TaskList();
+        }
         parser = new Parser();
     }
 

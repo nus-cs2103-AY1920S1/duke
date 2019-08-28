@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.main.*;
 import duke.task.*;
 
@@ -12,11 +13,12 @@ public class DeadlineCommand implements Command {
         this.time = time;
     }
 
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
-        Deadline dl = new Deadline(task, time);
+    public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
+        Deadline dl = new Deadline(task, time, false);
         tasks.addTask(dl);
         ui.output(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
                 dl.toString(), tasks.getTasksSize()));
+        storage.appendToFile(dl);
     }
 
     public boolean isRunning() {

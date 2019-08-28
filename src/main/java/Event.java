@@ -3,7 +3,8 @@ public class Event extends Task {
     protected String at;
 
     public Event(String description, String at) {
-        super(description, at);
+        super(description);
+        this.at = at.trim();
     }
 
     public Event(String description, String at, String isDone) {
@@ -17,6 +18,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getTime() + ")";
+        return "[E]" + super.toString() + " (at:" + at + ")";
     }
 }

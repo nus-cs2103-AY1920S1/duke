@@ -1,14 +1,6 @@
-import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected LocalDateTime pattern;
-    protected final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    protected final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-
 
     public Task(String description) {
         this.description = perfectDescription(description);
@@ -42,9 +34,7 @@ public class Task {
         return (isDone ? "V" : "X"); //return tick or X symbols
     }
 
-    public String getTime() {
-        return  pattern.format(formatter2);
-    }
+    public abstract String getFormatToFile();
 
     @Override
     public String toString() {

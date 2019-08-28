@@ -161,7 +161,7 @@ public class UserInterface {
     }
 
     private void executeCommand(AddTaskCommand command) throws DukeException {
-        String[] parameters = Command.getParametersUsed(command);
+        String[] parameters = Command.getArgumentsUsed(command);
         Task task;
 
         switch (Command.getTypeOf(command)) {
@@ -199,7 +199,7 @@ public class UserInterface {
 
 
     private void executeCommand(CompleteTaskCommand command) throws DukeException {
-        String[] parameters = Command.getParametersUsed(command);
+        String[] parameters = Command.getArgumentsUsed(command);
         Task task = taskList.complete(parameters[0]);
 
         standardOutput.addLine("Got it! I've marked this task as done:")
@@ -209,7 +209,7 @@ public class UserInterface {
     }
 
     private void executeCommand(DeleteTaskCommand command) throws DukeException {
-        String[] parameters = Command.getParametersUsed(command);
+        String[] parameters = Command.getArgumentsUsed(command);
         Task task = taskList.delete(parameters[0]);
 
         standardOutput.addLine("Got it! I've removed this task from the list:")

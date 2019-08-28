@@ -31,14 +31,32 @@ public enum Type {
     private ArrayList<String> parameters;
     private ArrayList<String> delimiters;
 
+    /**
+     * Returns the number of parameters expected for the command of the Type provided
+     *
+     * @param type The type of the command for which the number of parameters expected is needed
+     * @return The number of parameters expected
+     */
     public static int getNumberOfParametersExpectedFor(Type type) {
         return type.parametersExpected;
     }
 
+    /**
+     * Returns an ArrayList of the names of the parameters of the for the Type of command
+     *
+     * @param type The Type of command which the names of the parameters is required from
+     * @return An ArrayList of the parameter names
+     */
     public static ArrayList<String> getParametersFor(Type type) {
         return new ArrayList<String>(type.parameters);
     }
 
+    /**
+     * Returns the delimiters used to separate multiple arguments for commands of the Type provided
+     *
+     * @param type The Type of command
+     * @return An ArrayList of the delimiters
+     */
     public static ArrayList<String> getDelimitersFor(Type type) {
         return new ArrayList<String>(type.delimiters);
     }

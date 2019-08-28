@@ -19,11 +19,23 @@ public abstract class Command {
         this.parameters = parameters;
     }
 
+    /**
+     * Returns the enumerated type of the command
+     *
+     * @param command The command of which the enumerated type is needed from
+     * @return The enumerated Type of the command
+     */
     public static Type getTypeOf(Command command) {
         return command.type;
     }
 
-    public static String[] getParametersUsed(Command command) {
+    /**
+     * Returns the arguments provided with the command
+     *
+     * @param command The command of which the arguments provided is needed from
+     * @return The arguments provided to the command
+     */
+    public static String[] getArgumentsUsed(Command command) {
         return command.parameters;
     }
 }

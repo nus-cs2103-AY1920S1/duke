@@ -14,7 +14,6 @@ public class DukeIncorrectParameterTypeException extends DukeException {
      * @param typeExpected The expected type of the argument
      * @param argument     The argument which is of the wrong type
      */
-
     public DukeIncorrectParameterTypeException(String typeExpected, String argument) {
         super("The following cannot be converted to ", typeExpected, ":\n", argument);
     }

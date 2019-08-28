@@ -1,12 +1,16 @@
 package duke.tasklist;
 
 /**
- * Class representing a task which can be added to a task list
+ * Abstract class representing a task which can be added to a task list
  */
-public class Task {
-    public boolean taskCompletionStatus;
+public abstract class Task {
+    boolean taskCompletionStatus;
     private String taskDescription;
 
+    /**
+     * Default constructor for classes which extend from Task
+     * @param description The description of the task
+     */
     public Task(String description) {
         taskCompletionStatus = false;
         taskDescription = description;

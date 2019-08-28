@@ -45,9 +45,8 @@ public class Duke {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 } else {
                     String message = "Got it. I've added this task:";
-                    Task toDoTask = new Task(str.substring(5));
+                    Task toDoTask = new Todo(str.substring(5));
                     list.add(toDoTask);
-                    toDoTask.setTypeOfTask("todo");
                     System.out.println(message);
                     System.out.println(" " + toDoTask);
                     System.out.println("Now you have " + list.size() + " tasks in the list");
@@ -58,12 +57,9 @@ public class Duke {
                 } else {
                     String message = "Got it. I've added this task:";
                     int index = str.indexOf('/') + 1;
-                    Task deadlineTask = new Task(str.substring(9, index - 2));
+                    String time = str.substring(index + 3);
+                    Task deadlineTask = new Deadline(str.substring(9, index - 2),time);
                     list.add(deadlineTask);
-                    deadlineTask.setTypeOfTask("deadline");
-                    String preposition = str.substring(index, index + 2);
-                    String time = "(" + preposition + ": " + str.substring(index + 3) + ")";
-                    deadlineTask.addTime(time);
                     System.out.println(message);
                     System.out.println(" " + deadlineTask);
                     System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -71,12 +67,9 @@ public class Duke {
             } else if (str.length() >= 5 && str.substring(0, 5).equals("event")) {
                 String message = "Got it. I've added this task:";
                 int index = str.indexOf('/') + 1;
-                Task eventTask = new Task(str.substring(6, index - 2));
+                String time = str.substring(index + 3);
+                Task eventTask = new Event(str.substring(6, index - 2), time);
                 list.add(eventTask);
-                eventTask.setTypeOfTask("event");
-                String preposition = str.substring(index, index + 2);
-                String time = "(" + preposition + ": " + str.substring(index + 3) + ")";
-                eventTask.addTime(time);
                 System.out.println(message);
                 System.out.println(" " + eventTask);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -85,8 +78,8 @@ public class Duke {
             } else if (str.substring(0, 6).equals("delete")) {
                 Integer index = Integer.valueOf(str.substring(7));
                 System.out.println("Noted. I've removed this task:");
-                System.out.println(list.get(index));
-                list.remove((int)index);
+                System.out.println(list.get(index - 1));
+                list.remove((int)index - 1);
                 System.out.println("Now you have " + list.size() + " tasks in the list");
             } else {
                 System.out.println("added: " + str);

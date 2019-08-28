@@ -35,6 +35,20 @@ public class TaskList {
 			counter++;
 		}
 	}
+	
+	/**
+	 * Lists tasks with keyword in them.
+	 * @param keyword Keyword.
+	 */
+	public void keywordList(final String keyword) {
+		int counter = 1;
+		for (Task t : memory) {
+			if (t.getDesc().contains(keyword)) {
+				System.out.println(" " + counter + "." + t.showTask());
+				counter++;
+			}
+		}
+	}
 
 	/**
 	 * Lists the newest task in memory.

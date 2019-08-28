@@ -59,6 +59,8 @@ public class Duke {
 					break;
 				} else if (command.equals("list")) {
 					ui.printList();
+				} else if (command.equals("find")) {
+					ui.printFind(parser.processFind(rawInput));
 				} else if (command.equals("done")) {
 					int index = parser.processDone(rawInput);
 					tasks.doneTask(index);

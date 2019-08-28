@@ -18,7 +18,7 @@ public class Storage {
 	/**
 	 * Path to save file.
 	 */
-	protected String filePath;
+	private String filePath;
 
 	/**
 	 * Constructor.
@@ -36,15 +36,24 @@ public class Storage {
 	public void saveMemory(final TaskList tasks) throws DukeException {
 		ArrayList<Task> memory = tasks.getMemory();
 		String dir = System.getProperty("user.dir") + "/savedData.txt";
+		BufferedWriter out;
+		try {
+			out = new BufferedWriter(new FileWriter(dir));
+		} catch (IOException e1) {
+			throw new DukeException("Error saving data.");
+		}
 		for (Task t : memory) {
 			try {
-				BufferedWriter out = new BufferedWriter(new FileWriter(dir));
 				out.write(t.toSave() + "\n");
-				out.flush();
-				out.close();
 			} catch (IOException e) {
 				throw new DukeException("Error saving data.");
 			}
+		}
+		try {
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			throw new DukeException("Error saving data.");
 		}
 	}
 

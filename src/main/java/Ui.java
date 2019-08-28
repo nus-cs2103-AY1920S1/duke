@@ -115,4 +115,15 @@ public class Ui {
 		}
 		System.out.println(line + "\n");
 	}
+	
+	/**
+	 * Displays list of tasks containing keyword.
+	 * @param keyword Keyword.
+	 */
+	public void printFind(final String keyword) {
+		System.out.println(line);
+		System.out.println(" " + "Here are the matching tasks in your list:");
+		tasks.keywordList(keyword);
+		System.out.println(line + "\n");
+	}
 }

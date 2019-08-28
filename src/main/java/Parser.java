@@ -21,6 +21,8 @@ public class Parser {
 			return "todo";
 		} else if (rawInput.toLowerCase().startsWith("done")) {
 			return "done";
+		} else if (rawInput.toLowerCase().startsWith("find")) {
+			return "find";
 		} else if (rawInput.toLowerCase().startsWith("event")) {
 			return "event";
 		} else if (rawInput.toLowerCase().startsWith("delete")) {
@@ -99,7 +101,7 @@ public class Parser {
 	 */
 	public String eventDesc(final String rawInput) throws DukeException {
 		try {
-			return rawInput.substring(9).split("/at")[0].trim();
+			return rawInput.substring(5).split("/at")[0].trim();
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new DukeException("The description of an event cannot be empty.");
 		}
@@ -133,6 +135,20 @@ public class Parser {
 			return rawInput.substring(5);
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new DukeException("The description of a todo cannot be empty.");
+		}
+	}
+
+	/**
+	 * Returns keyword for find operation.
+	 * @param rawInput Raw user input.
+	 * @return Find keyword.
+	 * @throws DukeException Exceptions.
+	 */
+	public String processFind(final String rawInput) throws DukeException {
+		try {
+			return rawInput.substring(5);
+		} catch (StringIndexOutOfBoundsException e) {
+			throw new DukeException("The keyword for find cannot be empty.");
 		}
 	}
 }

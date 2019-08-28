@@ -2,10 +2,14 @@ public class deadlineTask extends Task {
     //Add variable for deadline tasks
     String deadline;
 
-    public deadlineTask(String inputTask, String endTime) {
-        super(inputTask);
+    public deadlineTask(String inputTask, boolean complete, String endTime) {
+        super(inputTask,complete);
         type = "D";
         deadline = endTime;
+    }
+
+    public String getTime() {
+        return deadline;
     }
 
     @Override

@@ -4,7 +4,12 @@ public class TaskList {
     ArrayList<Task> myTaskList;
 
     public TaskList() {
+
         myTaskList = new ArrayList<>();
+    }
+
+    public ArrayList<Task> getList() {
+        return myTaskList;
     }
 
     //Format for printing the "adding"
@@ -26,21 +31,21 @@ public class TaskList {
         Task temp;
         if(addedTask.contains("todo")&&(addedTask.length()>5)) {
             String replaced = addedTask.replace("todo ","");
-            temp = new todoTask(replaced);
+            temp = new todoTask(replaced,false);
             myTaskList.add(temp);
             spacerForTasks(temp);
         } else if(addedTask.contains("deadline")&&(addedTask.length()>9)&&addedTask.contains("/")) {
             String replaced = addedTask.replace("deadline ","");
             String[] deadLines = replaced.split("/");
             String endTime = deadLines[1].replace("by ", "");
-            temp = new deadlineTask(deadLines[0],endTime);
+            temp = new deadlineTask(deadLines[0],false,endTime);
             myTaskList.add(temp);
             spacerForTasks(temp);
         } else if (addedTask.contains("event")&&(addedTask.length()>6)&&addedTask.contains("/")) {
             String replaced = addedTask.replace("event ","");
             String[] events = replaced.split("/");
             String eventTime = events[1].replace("at ", "");
-            temp = new eventTask(events[0],eventTime);
+            temp = new eventTask(events[0],false,eventTime);
             myTaskList.add(temp);
             spacerForTasks(temp);
         } else if(addedTask.contains("todo")) {

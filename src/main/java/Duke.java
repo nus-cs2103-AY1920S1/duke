@@ -9,7 +9,8 @@ import java.text.ParseException;
  * commands 'list', 'bye' 'done <task index>', 'delete <task index>' or storage
  * requests beginning with the type of task to be stored. Duke supports three
  * types of tasks - todos, deadlines, and events. Deadlines and events need to
- * be supplied with additional date or time information. The input format for
+ * be supplied with additional date or time information, which is parsed by
+ * Duke using Java's SimpleDateFormat library. The input format for
  * todos is 'todo <task description>' and that for deadlines and events is
  * '<task type> <task description> / <day/month/year hh:mm>'. Deviating from this
  * input format results in Duke supplying error messages to the user.

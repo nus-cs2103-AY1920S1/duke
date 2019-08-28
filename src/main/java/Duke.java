@@ -1,3 +1,8 @@
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
+
 import java.io.IOException;
 
 public class Duke {

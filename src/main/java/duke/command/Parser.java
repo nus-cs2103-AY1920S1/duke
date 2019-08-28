@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.text.ParseException;
 
 public class Parser {

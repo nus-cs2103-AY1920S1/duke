@@ -13,6 +13,11 @@ public class AddCommand extends Command {
 
     private Task task;
 
+    /**
+     * Creates a command to add a given task to the storage file.
+     *
+     * @param task task to be added.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }

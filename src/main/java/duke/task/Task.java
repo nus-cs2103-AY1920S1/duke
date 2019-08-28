@@ -34,6 +34,10 @@ public abstract class Task {
      */
     public abstract String getSimplifiedRepresentation();
 
+    /**
+     * Returns a string representation of this task.
+     * @return string representation.
+     */
     @Override
     public String toString() {
         return (isDone ? "[\u2713] " : "[\u2718] ") + this.taskName;

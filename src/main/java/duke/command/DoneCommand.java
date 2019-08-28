@@ -8,13 +8,18 @@ import duke.task.TaskList;
 import duke.ui.UserInterface;
 
 /**
- * Marks a task as done using an index.
+ * Marks a task in the storage file as done using an index.
  */
 
 public class DoneCommand extends Command {
 
     private int index;
 
+    /**
+     * Creates a command to mark a given task as done using an index.
+     *
+     * @param index index of the task to be marked as done.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }

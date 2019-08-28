@@ -11,6 +11,7 @@ import java.util.Scanner;
  * Text User Interface of the application.
  */
 public class UserInterface {
+
     private static final Scanner SCANNER = new Scanner(System.in);
     public static final String LINE = "____________________________________________________________";
     public static final String LINE_PREFIX = "     ";
@@ -39,18 +40,24 @@ public class UserInterface {
     }
 
     /**
-     * Shows the given line to the user.
+     * Shows the given input line to the user.
      *
-     * @param line given line to be shown.
+     * @param inputLine given input line to be shown.
      */
-    public void showToUser(String line) {
-        System.out.println(LINE_PREFIX + line);
+    public void showToUser(String inputLine) {
+        System.out.println(LINE_PREFIX + inputLine);
     }
 
+    /**
+     * Shows a horizontal line to the user.
+     */
     public void showLine() {
         showToUser(LINE);
     }
 
+    /**
+     * Shows the welcome message to the user.
+     */
     public void showWelcomeMessage() {
         showToUser(String.format(Message.MESSAGE_WELCOME, LINE_PREFIX, LINE));
     }
@@ -114,6 +121,10 @@ public class UserInterface {
         showToUser(String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size()));
     }
 
+    /**
+     * Shows the exception message to the user.
+     * @param message exception message.
+     */
     public void showExceptionMessage(String message) {
         showToUser("☹ OOPS!!! " + message);
     }

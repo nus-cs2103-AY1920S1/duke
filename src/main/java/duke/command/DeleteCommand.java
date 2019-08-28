@@ -8,12 +8,17 @@ import duke.task.TaskList;
 import duke.ui.UserInterface;
 
 /**
- * Deletes a task using an index.
+ * Deletes a task from the storage file.
  */
 public class DeleteCommand extends Command {
 
     private int index;
 
+    /**
+     * Creates a command to delete a given task using an index.
+     *
+     * @param index index of the task to be deleted.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

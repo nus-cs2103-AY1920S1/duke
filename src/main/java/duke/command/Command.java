@@ -10,6 +10,9 @@ import duke.ui.UserInterface;
  */
 public abstract class Command {
 
+    /**
+     * @return false by default.
+     */
     public boolean isTerminated() {
         return false;
     }

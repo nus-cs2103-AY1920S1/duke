@@ -23,6 +23,10 @@ public class Todo extends Task {
         return "T | " + (super.isDone ? 1 : 0) + " | " + super.taskName;
     }
 
+    /**
+     * Returns a string representation of this to-do.
+     * @return string representation.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

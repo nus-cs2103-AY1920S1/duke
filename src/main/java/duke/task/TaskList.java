@@ -6,6 +6,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * TaskList contains an array-list of tasks. It keeps tracks
+ * of all the tasks and is the gateway for all modifications
+ * between Duke and the tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -15,7 +20,17 @@ public class TaskList {
         taskList = new ArrayList<>(100);
     }
 
-    private void addTask(String task, TaskType type, boolean printText) throws ParseException, EmptyEventDscDukeException, EmptyDeadlineDscDukeException, NoDateDukeException {
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param task  a string of the task information
+     * @param type the type of task this is.
+     * @param printText an option to print out statements or not.
+     * @throws ParseException  If there is an error in the string and cause an error in parsing.
+     * @throws DukeException If there are mistakes in the input in task.
+     */
+    private void addTask(String task, TaskType type, boolean printText) throws ParseException, DukeException {
         Task addedTask;
         String date;
         switch (type) {
@@ -78,6 +93,11 @@ public class TaskList {
             printTotalTasks();
         }
     }
+
+    /**
+     * Prints out all the tasks currently in this task list.
+     *
+     */
     private void listAllTasks() {
         int total = taskList.size();
         System.out.println("Here are the tasks in your list:");
@@ -85,6 +105,13 @@ public class TaskList {
             System.out.println((i + 1) + ". " + taskList.get(i));
         }
     }
+
+    /**
+     * Marks a task as completed by changing its
+     * completed field to true.
+     *
+     * @param taskIndex the index of the task.
+     */
     public void checkTask(int taskIndex) {
         Task t = taskList.get(taskIndex);
         t.taskDone();
@@ -92,10 +119,20 @@ public class TaskList {
         System.out.println(t);
     }
 
+    /**
+     * A getter for the arraylist of tasks.
+     *
+     * @return an arraylist of all the tasks in the task list.
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Deletes a task in task list.
+     *
+     * @throws InvalidTaskIndexDukeException If task index given is out of range.
+     */
     private void deleteTask(int taskIndex) throws InvalidTaskIndexDukeException {
         if (taskIndex < 0 || taskIndex > taskList.size() - 1) {
             throw new InvalidTaskIndexDukeException(taskIndex + " exceeds the range of taskList.");
@@ -106,6 +143,11 @@ public class TaskList {
         printTotalTasks();
     }
 
+    /**
+     * Returns a string of information of all tasks in the task list.
+     *
+     * @return a string containing information of ALL tasks in the task list.
+     */
     public String saveInfo() {
         StringBuilder info = new StringBuilder();
         boolean isFirstIteration = true;
@@ -121,10 +163,22 @@ public class TaskList {
         return info.toString();
     }
 
+    /**
+     * Prints the total number of task in the task list.
+     */
     private void printTotalTasks() {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    /**
+     * Parses a user input and performs action based on the input.
+     *
+     * @param input the input from user to duke.
+     * @param printText a boolean to control the printing of what happened.
+     * @return a boolean to tell whether Duke should continue waiting for more commands.
+     * @throws DukeException If there are mistakes in the input.
+     * @throws ParseException If there are errors in the string of input that prevents parsing.
+     */
     public boolean parseInput(String input, boolean printText) throws DukeException, ParseException {
         String[] splitInput = input.split(" ");
         boolean dukeIsOn = true;

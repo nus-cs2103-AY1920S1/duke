@@ -32,10 +32,10 @@ public class Duke {
                         + indent + "   " + listArr.get(listPointer - 1), indent);
             } else if(inputArr[0].equals("delete")) {
                 listPointer = Integer.parseInt(inputArr[1]);
-                listArr.remove(listPointer - 1);
                 printIndentedString("Noted. I've removed this task: \n"
                         + indent + "   " + listArr.get(listPointer - 1) + "\n" + indent +
                         "Now you have " + listArr.size() + " tasks in the list.", indent);
+                listArr.remove(listPointer - 1);
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
                 String befTaskAddMessage = "Got it. I've added this task: \n" + indent + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";

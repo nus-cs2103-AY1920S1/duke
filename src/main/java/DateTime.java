@@ -43,11 +43,11 @@ public class DateTime {
      * Formats the day into proper representation.
      */
     private void formatDay() {
-        if(day.equals("1") || day.equals("21") || day.equals("31")) {
+        if(day.equals("01") || day.equals("1") || day.equals("21") || day.equals("31")) {
             day += "st";
-        } else if(day.equals("2") || day.equals("22")) {
+        } else if(day.equals("02") || day.equals("2") || day.equals("22")) {
             day += "nd";
-        } else if(day.equals("3") || day.equals("23")) {
+        } else if(day.equals("03") || day.equals("3") || day.equals("23")) {
             day += "rd";
         } else {
             day += "th";

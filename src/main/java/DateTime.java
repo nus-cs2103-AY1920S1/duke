@@ -1,3 +1,6 @@
+/**
+ * Enables Duke to understand date and times.
+ */
 public class DateTime {
 
     private int year;
@@ -5,6 +8,14 @@ public class DateTime {
     private int day;
     private int time;
 
+    /**
+     * How Duke understands date and times.
+     *
+     * @param year 4-digit integer.
+     * @param month Integer value of the month.
+     * @param day Integer value of the day of the month.
+     * @param time 4-digit integer number (time in 24 hour format).
+     */
     public DateTime(int year, int month, int day, int time) {
         this.year = year;
         this.month = month;
@@ -12,6 +23,12 @@ public class DateTime {
         this.time = time;
     }
 
+    /**
+     * Creates a DateTime object by splitting up the date and time given in a string.
+     *
+     * @param dateTimeString Date and time given in the format DD/MM/YYYY HHMM.
+     * @return DateTime object created.
+     */
     public static DateTime create(String dateTimeString) {
         String[] currArray = dateTimeString.split("\\s+", 2);
         String dateString = currArray[0];
@@ -20,6 +37,11 @@ public class DateTime {
         return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
     }
 
+    /**
+     * Formats the date with suffix based on the number of the day.
+     *
+     * @return Date with suffix -st, -nd, -rd and -th when appropriate.
+     */
     private String getDate() {
         if (day % 10 == 1) {
             return day + "st";
@@ -32,6 +54,11 @@ public class DateTime {
         }
     }
 
+    /**
+     * Formats the month based on the number of the month.
+     *
+     * @return Month name in string format.
+     */
     private String getMonth() {
         String monthString = "";
         switch (month) {
@@ -75,6 +102,11 @@ public class DateTime {
         return monthString;
     }
 
+    /**
+     * Formats the 24-hour time into 12-hour time format.
+     *
+     * @return 12-hour time in string format.
+     */
     private String getTime() {
         int hour;
         int minute;

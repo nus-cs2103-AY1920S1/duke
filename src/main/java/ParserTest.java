@@ -1,4 +1,4 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
  * @version 0.1
  */
 class ParserTest {
-
 	/**
 	 * Parser Test.
 	 */

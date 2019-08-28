@@ -4,14 +4,20 @@
  */
 public class Task {
 	static String line = "____________________________________________________________";
-    protected String description;
-    protected boolean isDone;
+    /**
+     * Description.
+     */
+    private String description;
+    /**
+     * Done state.
+     */
+    private boolean isDone;
 
     /**
      * Constructor.
      * @param description Description.
      */
-    public Task(String description) {
+    public Task(final String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -21,9 +27,9 @@ public class Task {
      * @return Status Icon.
      */
     public String getStatusIcon() {
-    	return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    	return (isDone ? "\u2713" : "\u2718");
     }
-    
+
     /**
      * Shows task.
      * @return Task in string format.
@@ -31,14 +37,14 @@ public class Task {
     public String showTask() {
     	return "[" + getStatusIcon() + "] " + description;
     }
-    
+
     /**
      * Marks task as done.
      */
     public void markAsDone() {
     	isDone = true;
     }
-    
+
     /**
      * Shows task as its saving format.
      * @return Task in string format for saving purposes.
@@ -46,4 +52,20 @@ public class Task {
     public String toSave() {
 		return null;
 	}
+
+    /**
+     * Description.
+     * @return Description.
+     */
+    public String getDesc() {
+    	return this.description;
+    }
+
+    /**
+     * Is done.
+     * @return Is done.
+     */
+    public boolean getDone() {
+    	return this.isDone;
+    }
 }

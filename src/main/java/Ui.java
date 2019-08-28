@@ -4,8 +4,11 @@
  */
 public class Ui {
 	static String line = "____________________________________________________________";
+	/**
+	 * Pointer to tasklist object.
+	 */
 	private TaskList tasks;
-	
+
 	/**
 	 * Error from unidentified command.
 	 */
@@ -14,17 +17,17 @@ public class Ui {
 		System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 		System.out.println(line + "\n");
 	}
-	
+
 	/**
 	 * Shows thrown exception.
 	 * @param e Exception
 	 */
-	public void showException(Exception e) {
+	public void showException(final Exception e) {
 		System.out.println(line);
 		System.out.println(" ☹ OOPS!!! " + e.toString());
 		System.out.println(line + "\n");
 	}
-	
+
 	/**
 	 * Shows logo and intro.
 	 */
@@ -63,7 +66,7 @@ public class Ui {
 	 * Sets pointer to Duke tasklist.
 	 * @param tasks Tasklist.
 	 */
-	public void setTaskList(TaskList tasks) {
+	public void setTaskList(final TaskList tasks) {
 		this.tasks = tasks;
 	}
 
@@ -71,26 +74,31 @@ public class Ui {
 	 * Shows done task.
 	 * @param index Index of done task.
 	 */
-	public void printDone(int index) {
+	public void printDone(final int index) {
 		System.out.println(line);
 		System.out.println(" " + "Nice! I've marked this task as done:");
 		System.out.println("   " + tasks.getMemory().get(index).showTask());
 		System.out.println(line + "\n");
 	}
-	
+
 	/**
 	 * Shows deleted task.
 	 * @param t Deleted task.
 	 */
-	public void printDeleted(Task t) {
+	public void printDeleted(final Task t) {
 		System.out.println(line);
 		System.out.println(" " + "Noted. I've removed this task:");
 		System.out.println("   " + t.showTask());
-		if (tasks.getMemory().size() == 1) System.out.println(" " + "Now you have 1 task in your list");
-		else System.out.println(" " + "Now you have " + tasks.getMemory().size() + " tasks in your list.");
+		if (tasks.getMemory().size() == 1) {
+			System.out.println(" " + "Now you have 1 task in your list");
+		} else {
+			System.out.print(" " + "Now you have ");
+			System.out.print(tasks.getMemory().size());
+			System.out.println(" tasks in your list.");
+		}
 		System.out.println(line + "\n");
 	}
-	
+
 	/**
 	 * Shows added task.
 	 */
@@ -98,8 +106,13 @@ public class Ui {
 		System.out.println(line);
 		System.out.println(" " + "Got it. I've added this task:");
 		System.out.println("   " + tasks.listLatest());
-		if (tasks.getMemory().size() == 1) System.out.println(" " + "Now you have 1 task in your list");
-		else System.out.println(" " + "Now you have " + tasks.getMemory().size() + " tasks in your list.");
+		if (tasks.getMemory().size() == 1) {
+			System.out.println(" " + "Now you have 1 task in your list");
+		} else {
+			System.out.print(" " + "Now you have ");
+			System.out.print(tasks.getMemory().size());
+			System.out.println(" tasks in your list.");
+		}
 		System.out.println(line + "\n");
 	}
 }

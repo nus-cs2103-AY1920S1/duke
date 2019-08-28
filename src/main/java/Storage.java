@@ -15,13 +15,16 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class Storage {
+	/**
+	 * Path to save file.
+	 */
 	protected String filePath;
 
 	/**
 	 * Constructor.
 	 * @param filePath Path to save file.
 	 */
-	public Storage(String filePath) {
+	public Storage(final String filePath) {
 		this.filePath = filePath;
 	}
 
@@ -30,7 +33,7 @@ public class Storage {
 	 * @param tasks Task list.
 	 * @throws DukeException Exceptions.
 	 */
-	public void saveMemory(TaskList tasks) throws DukeException {
+	public void saveMemory(final TaskList tasks) throws DukeException {
 		ArrayList<Task> memory = tasks.getMemory();
 		String dir = System.getProperty("user.dir") + "/savedData.txt";
 		for (Task t : memory) {
@@ -44,14 +47,14 @@ public class Storage {
 			}
 		}
 	}
-	
+
 	/**
-	 * Loads from save file
+	 * Loads from save file.
 	 * @return Returns array list with saved tasks.
 	 * @throws DukeException Exceptions.
 	 */
 	public ArrayList<Task> load() throws DukeException {
-		ArrayList<Task> TaskList = new ArrayList<>();
+		ArrayList<Task> taskList = new ArrayList<>();
 		try {
 			FileInputStream test = new FileInputStream(filePath);
 			Scanner sc = new Scanner(test);
@@ -60,27 +63,27 @@ public class Storage {
 				if (rawInput.toLowerCase().startsWith("done")) {
 					String procInput = rawInput.substring(4);
 					if (procInput.toLowerCase().startsWith("todo")) {
-						TaskList.add(new Todo(procInput.substring(5)));
+						taskList.add(new Todo(procInput.substring(5)));
 					} else if (procInput.toLowerCase().startsWith("deadline")) {
 						String[] deadlineInput = procInput.substring(9).split("/by");
 						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-						TaskList.add(new Deadline(deadlineInput[0].trim(), sdf.parse(deadlineInput[1].trim())));
+						taskList.add(new Deadline(deadlineInput[0].trim(), sdf.parse(deadlineInput[1].trim())));
 					} else if (procInput.toLowerCase().startsWith("event")) {
 						String[] eventInput = procInput.substring(6).split("/at");
 						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-						TaskList.add(new Event(eventInput[0].trim(), sdf.parse(eventInput[1].trim())));
+						taskList.add(new Event(eventInput[0].trim(), sdf.parse(eventInput[1].trim())));
 					}
-					TaskList.get(TaskList.size() - 1).markAsDone();
+					taskList.get(taskList.size() - 1).markAsDone();
 				} else if (rawInput.toLowerCase().startsWith("todo")) {
-					TaskList.add(new Todo(rawInput.substring(5)));
+					taskList.add(new Todo(rawInput.substring(5)));
 				} else if (rawInput.toLowerCase().startsWith("deadline")) {
 					String[] deadlineInput = rawInput.substring(9).split("/by");
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-					TaskList.add(new Deadline(deadlineInput[0].trim(), sdf.parse(deadlineInput[1].trim())));
+					taskList.add(new Deadline(deadlineInput[0].trim(), sdf.parse(deadlineInput[1].trim())));
 				} else if (rawInput.toLowerCase().startsWith("event")) {
 					String[] eventInput = rawInput.substring(6).split("/at");
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-					TaskList.add(new Event(eventInput[0].trim(), sdf.parse(eventInput[1].trim())));
+					taskList.add(new Event(eventInput[0].trim(), sdf.parse(eventInput[1].trim())));
 				}
 			}
 			sc.close();
@@ -97,6 +100,6 @@ public class Storage {
 		} catch (ParseException e) {
 			throw new DukeException("Save file timings corrupted");
 		}
-		return TaskList;
+		return taskList;
 	}
 }

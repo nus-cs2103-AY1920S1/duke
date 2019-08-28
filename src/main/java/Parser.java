@@ -7,13 +7,12 @@ import java.util.Date;
  * @version 0.1
  */
 public class Parser {
-	
 	/**
 	 * Retrieve command from user input.
 	 * @param rawInput Raw input from user.
 	 * @return The command found in rawInput.
 	 */
-	public String getCommand(String rawInput) {
+	public String getCommand(final String rawInput) {
 		if (rawInput.toLowerCase().equals("bye")) {
 			return "bye";
 		} else if (rawInput.toLowerCase().equals("list")) {
@@ -39,49 +38,49 @@ public class Parser {
 	 * @return Index of task that is done.
 	 * @throws DukeException Exceptions.
 	 */
-	public int processDone(String rawInput) throws DukeException {
+	public int processDone(final String rawInput) throws DukeException {
 		try {
 			return Integer.parseInt(rawInput.split(" ")[1]) - 1;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException("Please indicate which task is done.");
 		}
 	}
-	
+
 	/**
 	 * Process data from delete command.
 	 * @param rawInput Raw user input.
 	 * @return Index of task that is deleted.
 	 * @throws DukeException Exceptions;
 	 */
-	public int processDelete(String rawInput) throws DukeException {
+	public int processDelete(final String rawInput) throws DukeException {
 		try {
 			return Integer.parseInt(rawInput.split(" ")[1]) - 1;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException("Please indicate which task to delete.");
 		}
 	}
-	
+
 	/**
 	 * Process description of deadline task.
 	 * @param rawInput Raw user input.
 	 * @return Description of deadline.
 	 * @throws DukeException Exceptions.
 	 */
-	public String deadlineDesc(String rawInput) throws DukeException {
+	public String deadlineDesc(final String rawInput) throws DukeException {
 		try {
 			return rawInput.substring(9).split("/by")[0].trim();
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new DukeException("The description of a deadline cannot be empty.");
 		}
 	}
-	
+
 	/**
 	 * Process time of deadline task.
 	 * @param rawInput Raw user input.
 	 * @return Time of deadline.
 	 * @throws DukeException Exceptions.
 	 */
-	public Date deadlineTime(String rawInput) throws DukeException {
+	public Date deadlineTime(final String rawInput) throws DukeException {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
 			return sdf.parse(rawInput.substring(9).split("/by")[1].trim());
@@ -91,28 +90,28 @@ public class Parser {
 			throw new DukeException("The timing of the event is invalid.");
 		}
 	}
-	
+
 	/**
 	 * Process description of event task.
 	 * @param rawInput Raw user input.
 	 * @return Description of event.
 	 * @throws DukeException Exceptions.
 	 */
-	public String eventDesc(String rawInput) throws DukeException {
+	public String eventDesc(final String rawInput) throws DukeException {
 		try {
 			return rawInput.substring(9).split("/at")[0].trim();
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new DukeException("The description of an event cannot be empty.");
 		}
 	}
-	
+
 	/**
 	 * Process time of event task.
 	 * @param rawInput Raw user input.
 	 * @return Time of event.
 	 * @throws DukeException Exceptions.
 	 */
-	public Date eventTime(String rawInput) throws DukeException {
+	public Date eventTime(final String rawInput) throws DukeException {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
 			return sdf.parse(rawInput.substring(9).split("/at")[1].trim());
@@ -129,7 +128,7 @@ public class Parser {
 	 * @return Description of to-do.
 	 * @throws DukeException Exceptions.
 	 */
-	public String todoDesc(String rawInput) throws DukeException {
+	public String todoDesc(final String rawInput) throws DukeException {
 		try {
 			return rawInput.substring(5);
 		} catch (StringIndexOutOfBoundsException e) {

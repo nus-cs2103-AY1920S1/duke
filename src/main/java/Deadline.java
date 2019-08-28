@@ -6,14 +6,17 @@ import java.util.Date;
  * @version 0.1
  */
 public class Deadline extends Task {
-	protected Date by;
+	/**
+	 * By time of deadline.
+	 */
+	private Date by;
 
-    /** 
+    /**
      * Constructor.
      * @param description Description.
      * @param by By time.
      */
-    public Deadline(String description, Date by) {
+    public Deadline(final String description, final Date by) {
         super(description);
         this.by = by;
     }
@@ -33,10 +36,18 @@ public class Deadline extends Task {
     public String toSave() {
     	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
     	String byString = sdf.format(by);
-    	if (super.isDone) {
-    		return "donedeadline " + super.description + " /by " + byString;
+    	if (super.getDone()) {
+    		return "donedeadline " + super.getDesc() + " /by " + byString;
     	} else {
-    		return "deadline " + super.description + " /by " + byString;
+    		return "deadline " + super.getDesc() + " /by " + byString;
     	}
+    }
+
+    /**
+     * Returns by time.
+     * @return By time.
+     */
+    public Date getBy() {
+    	return this.by;
     }
 }

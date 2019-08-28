@@ -6,22 +6,25 @@ import java.util.Date;
  * @version 0.1
  */
 public class TaskList {
+	/**
+	 * Array list for memory.
+	 */
 	private ArrayList<Task> memory;
-	
+
 	/** Constructor.
 	 * @param inputMemory Previous memory.
 	 */
-	public TaskList(ArrayList<Task> inputMemory) {
+	public TaskList(final ArrayList<Task> inputMemory) {
 		memory = inputMemory;
 	}
-	
+
 	/**
 	 * Constructor.
 	 */
 	public TaskList() {
 		memory = new ArrayList<>();
 	}
-	
+
 	/**
 	 * Lists out tasks in memory.
 	 */
@@ -32,7 +35,7 @@ public class TaskList {
 			counter++;
 		}
 	}
-	
+
 	/**
 	 * Lists the newest task in memory.
 	 * @return Newest task.
@@ -40,13 +43,13 @@ public class TaskList {
 	public String listLatest() {
 		return memory.get(memory.size() - 1).showTask();
 	}
-	
+
 	/**
 	 * Adds deadline task.
 	 * @param desc Description of deadline.
 	 * @param by By time of deadline.
 	 */
-	public void addDeadline(String desc, Date by) {
+	public void addDeadline(final String desc, final Date by) {
 		Task newTask = new Deadline(desc, by);
 		memory.add(newTask);
 	}
@@ -54,9 +57,9 @@ public class TaskList {
 	/**
 	 * Adds event task.
 	 * @param desc Description of event.
-	 * @param by At time of event.
+	 * @param at At time of event.
 	 */
-	public void addEvent(String desc, Date at) {
+	public void addEvent(final String desc, final Date at) {
 		Task newTask = new Event(desc, at);
 		memory.add(newTask);
 	}
@@ -65,7 +68,7 @@ public class TaskList {
 	 * Adds to-do task.
 	 * @param desc Description of to-do.
 	 */
-	public void addTodo(String desc) {
+	public void addTodo(final String desc) {
 		Task newTask = new Todo(desc);
 		memory.add(newTask);
 	}
@@ -76,7 +79,7 @@ public class TaskList {
 	 * @return Deleted task.
 	 * @throws DukeException Exceptions.
 	 */
-	public Task deleteTask(int index) throws DukeException {
+	public Task deleteTask(final int index) throws DukeException {
 		try {
 			Task removed = memory.get(index);
 			memory.remove(index);
@@ -91,14 +94,14 @@ public class TaskList {
 	 * @param index Index of done task.
 	 * @throws DukeException Exception.
 	 */
-	public void doneTask(int index) throws DukeException {
+	public void doneTask(final int index) throws DukeException {
 		try {
 			memory.get(index).markAsDone();
 			System.out.println("   " + memory.get(index).showTask());
 		} catch (IndexOutOfBoundsException e) {
 			throw new DukeException("Indicated task does not exist.");
 		}
-		
+
 	}
 
 	/**

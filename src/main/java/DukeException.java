@@ -7,10 +7,10 @@ public class DukeException extends Exception {
 	 * Constructor.
 	 * @param message Exception message.
 	 */
-	public DukeException(String message) {
+	public DukeException(final String message) {
 		super(message);
 	}
-	
+
 	/**
 	 * Removes "DukeException: " from start of message.
 	 */

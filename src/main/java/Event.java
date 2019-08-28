@@ -5,15 +5,22 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author bakwxh
+ * @version 0.1
+ */
 public class Event extends Task {
-	protected Date at;
+	/**
+	 * At time.
+	 */
+	private Date at;
 
     /**
      * Constructor.
      * @param description Description.
      * @param at At time.
      */
-    public Event(String description, Date at) {
+    public Event(final String description, final Date at) {
         super(description);
         this.at = at;
     }
@@ -25,17 +32,26 @@ public class Event extends Task {
     public String showTask() {
         return "[E]" + super.showTask() + " (at: " + at.toString() + ")";
     }
-    
+
+    /**
+     * Returns at time.
+     * @return At time.
+     */
+    public Date getAt() {
+    	return this.at;
+    }
+
     /**
      * Shows task as its saving format.
+     * @return Task as its saving format.
      */
     public String toSave() {
     	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
     	String atString = sdf.format(at);
-    	if (super.isDone) {
-    		return "doneevent " + super.description + " /at " + atString;
+    	if (super.getDone()) {
+    		return "doneevent " + super.getDesc() + " /at " + atString;
     	} else {
-    		return "event " + super.description + " /at " + atString;
+    		return "event " + super.getDesc() + " /at " + atString;
     	}
     }
 }

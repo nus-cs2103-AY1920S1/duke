@@ -48,7 +48,9 @@ public class Task_List {
                     } catch (NullPointerException | IndexOutOfBoundsException e) {
                         throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Index out of bounds.\n" + (new Border()));
                     } catch (NumberFormatException e) {
-                        throw new DukeException((new Border()) + "\n     ☹ OOPS!!! Please enter a single integer index of task to delete.\n" + (new Border()));
+                        throw new DukeException((new Border()) +
+                                "\n     ☹ OOPS!!! Please enter a single integer for index of task to delete.\n"
+                                + (new Border()));
                     }
                 } catch (DukeException e){
                     System.out.println(e.getMessage());
@@ -93,7 +95,7 @@ public class Task_List {
 
     private void check_Decription(String[] word_Arr, String task_Type) throws DukeException{
         if (word_Arr.length < 2) {
-            throw new DukeException("     ☹ OOPS!!! The description of a " + task_Type + " cannot be empty.\\n\" + (new Border())");
+            throw new DukeException((new Border()) + "\n     ☹ OOPS!!! The description of a " + task_Type + " cannot be empty.\n" + (new Border()));
         }
     }
 

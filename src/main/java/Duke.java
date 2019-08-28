@@ -15,8 +15,8 @@ public class Duke {
                 "     ____________________________________________________________\n");
 
         Scanner sc = new Scanner(System.in);
-        String data[] = new String[100];
-        int counter = 0;
+        ArrayList<String> data = new ArrayList<String>();
+        ArrayList<String> done = new ArrayList<String>();
 
         do{
             String input = sc.nextLine();
@@ -29,19 +29,35 @@ public class Duke {
             } else if(input.equals("list")) {
                 int i;
                 System.out.println("     ____________________________________________________________\n");
-                for(i = 1; i <= counter; i++){
-                    System.out.println("     " + i + ". " + data[i - 1]);
+                for(i = 0; i < data.size(); i++){
+                    System.out.println("     " + (i + 1) + ". [" + done.get(i) + "] " + data.get(i));
                 }
                 System.out.println("     ____________________________________________________________");
+
+            } else if(input.startsWith("done")) {
+                String[] sp = input.split(" ", 2);
+                int index = Integer.parseInt(sp[1]);
+
+                done.set(index - 1, "✓");
+
+                System.out.println("     ____________________________________________________________");
+
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("     [" + done.get(index - 1) + "] " + data.get(index - 1));
+
+                System.out.println("     ____________________________________________________________");
+
+
 
             } else {
                 System.out.println("     ____________________________________________________________\n" +
                         "     added: " + input + "\n" +
                         "     ____________________________________________________________");
 
-                data[counter] = input;
-                counter ++;
+                data.add(input);
+                done.add("✗");
             }
+
         } while(true);
     }
 }

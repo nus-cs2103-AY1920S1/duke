@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public class Task {
     protected String description;
@@ -9,6 +9,10 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.taskType = possibleTaskTypes.DEFAULT;
+    }
+
+    public String getTask(){
+        return this.description;
     }
 
     public Task(String description, Boolean isDone){

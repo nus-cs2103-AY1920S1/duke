@@ -1,5 +1,12 @@
 package duke;
 
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -56,7 +63,7 @@ public class Duke {
                     tasks.get(taskNum).setDone();
 
                     output = underscore + "     Nice! I've marked this task as done:\n" +
-                            "       [" + tasks.get(taskNum).getStatusIcon() + "] " + tasks.get(taskNum).description +
+                            "       [" + tasks.get(taskNum).getStatusIcon() + "] " + tasks.get(taskNum).getTask() +
                             "\n" + underscore;
 
                     System.out.println(output);
@@ -128,7 +135,7 @@ public class Duke {
                     taskNum--; // ArrayList index == taskNum - 1
 
                     if (taskNum >= tasks.size()){
-                        throw new DukeException("duke.Task no. " + (taskNum+1) + " does not exist");
+                        throw new DukeException("duke.task.Task no. " + (taskNum+1) + " does not exist");
                     }
 
                     Task taskToDelete = tasks.get(taskNum);

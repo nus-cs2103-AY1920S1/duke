@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.storage.Storage;
 
 public class TaskList {
 

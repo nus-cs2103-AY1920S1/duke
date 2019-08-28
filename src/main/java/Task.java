@@ -8,6 +8,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     protected String format_description() {
         String item = description.split("/")[0];
         String tag = description.split("/")[1];

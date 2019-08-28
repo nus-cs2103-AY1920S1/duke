@@ -1,9 +1,12 @@
+import java.io.*;
 import java.util.Scanner;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Duke {
 
     private static String line = "    ____________________________________________________________";
+
+    private static String path = "data.txt";
 
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -36,11 +39,67 @@ public class Duke {
         format_print(s);
     }
 
-    public static void main(String[] args) {
+    private static void write(ArrayList<Task> tasks) {
+        try(FileWriter fileWriter = new FileWriter(path, false)) {
+            StringBuilder content = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                String type = t instanceof Deadline ? "D"
+                        : t instanceof Event ? "E" : "T";
+                String isDone = t.isDone ? "1" : "0";
+                String taskData = type + "@" + isDone + "@" + t.description;
+                content.append(taskData).append("\n");
+            }
+            fileWriter.write(content.toString());
+        } catch (IOException e) {
+            format_print("Cannot write tasks to file " + path);
+        }
+    }
+
+    private static ArrayList<Task> read() {
+        ArrayList<Task> list = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("@");
+                Task newTask;
+                boolean isDone = parts[1].equals("1");
+                switch (parts[0]) {
+                    case "T":
+                        newTask = new Todo(parts[2], isDone);
+                        break;
+                    case "E":
+                        newTask = new Event(parts[2], isDone);
+                        break;
+                    case "D":
+                        newTask = new Deadline(parts[2], isDone);
+                        break;
+                    default:
+                        newTask = new Task("");
+                }
+                list.add(newTask);
+            }
+        } catch (FileNotFoundException e) {
+            format_print("Cannot read tasks from file " + path);
+        } catch (IOException e) {
+            format_print("Cannot read tasks from file " + path);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) throws IOException {
         // initialize objects
         Scanner sc = new Scanner(System.in);
         // String[] list = new String[100];
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = read();
+
+        // create data file if it doesn't exist
+        File file = new File(path);
+        if (file.createNewFile()) {
+            format_print("File has been created");
+        } else {
+            format_print("File already exists");
+        }
 
         // greetings
         String[] greetings = {"Hello! I'm Duke", "What can I do for you?"};
@@ -77,6 +136,7 @@ public class Duke {
                     } catch (NumberFormatException ex) {
                         throw new DukeException("Task number should be integer.");
                     }
+                    write(tasks);
                 } else if (s.split(" ")[0].equals("delete")) { // delete a specific task
                     try {
                         int num = Integer.parseInt(s.split(" ")[1]);
@@ -103,6 +163,7 @@ public class Duke {
                     } catch (NumberFormatException ex) {
                         throw new DukeException("Task number should be integer.");
                     }
+                    write(tasks);
                 } else { // add new task
                     if (s.split(" ").length == 1) {
                         String type = s.split(" ")[0];
@@ -148,6 +209,7 @@ public class Duke {
                         System.out.println(format("Now you have "  + tasks.size() + " tasks in the list."));}
                     System.out.println(line);
                 }
+                write(tasks);
             } catch (DukeException ex) {
                 format_print(ex.getMessage());
             }

@@ -1,9 +1,10 @@
-public class DukeException extends RuntimeException{
+public class DukeException extends RuntimeException {
     String message;
     public DukeException(String message) {
         super(message);
         this.message = message;
     }
+
     @Override
     public String toString() {
         String output = "    ------------------------------------------------------------\n"
@@ -11,4 +12,5 @@ public class DukeException extends RuntimeException{
                         + "    ------------------------------------------------------------";
         return output;
     }
+
 }

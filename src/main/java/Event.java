@@ -6,8 +6,13 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String encode() {
+        return "event," + super.description + "," + super.isDone + "," + at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at:" + at + ")";
     }
+
 }

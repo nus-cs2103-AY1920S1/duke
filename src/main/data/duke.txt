@@ -1,4 +1,2 @@
-T | 0 | a
-T | 0 | b
-T | 0 | c
-T | 1 | 2
+E | 0 | project meeting | Aug 6th 2-4pm
+T | 1 | join sports club

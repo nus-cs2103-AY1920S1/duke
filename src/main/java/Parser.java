@@ -1,8 +1,11 @@
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Parser {
 
-    public Parser() {
-
-    }
+    public Parser() {}
 
     public void executeCommand(String command) throws InvalidCommandException, MissingInputException,
             MissingDescriptionException {

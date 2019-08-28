@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a Task in the list.
  */
@@ -44,7 +46,7 @@ public class Task {
     /**
      * Marks a task as done, and changes the doneSymbol to a check mark.
      */
-    protected void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
         setDoneSymbol();
     }

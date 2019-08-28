@@ -1,11 +1,11 @@
 import java.util.ArrayList;
+import duke.task.Task;
 
 public class TaskList {
 
     private static ArrayList<Task> taskList;
 
-    public TaskList() {
-    }
+    public TaskList() {}
 
     public TaskList(ArrayList<Task> taskList) {
         TaskList.taskList = taskList;
@@ -28,11 +28,6 @@ public class TaskList {
         Task taskDone = taskList.get(taskNo - 1);
         taskDone.markAsDone();
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
-    }
-
-    public void deleteTask(Task task) {
-        taskList.remove(task);
-        printDeletedTask(task);
     }
 
     public void deleteTask(int taskNumber) {

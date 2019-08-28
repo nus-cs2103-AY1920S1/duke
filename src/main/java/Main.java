@@ -23,8 +23,13 @@ public class Main {
         System.out.println(format(command));
     }
 
-    static Todo createTodo(String input) {
-        String description = input.substring(1);
+    static Todo createTodo(String input) throws DukeException {
+        String description = input.length() == 0
+                ? input
+                : input.substring(1);
+        if(description.equals("")) {
+            throw new DukeException("? OOPS!!! The description of a todo cannot be empty.");
+        }
         return new Todo(description);
     }
 
@@ -36,7 +41,9 @@ public class Main {
             stringBuffer.append(" " + temp);
             temp = scanner.next();
         }
-        String description = stringBuffer.toString().substring(1);
+        String description = stringBuffer.length() == 0
+                ? stringBuffer.toString()
+                : stringBuffer.toString().substring(1);
         String date = scanner.nextLine();
         scanner.close();
         return new Deadline(description, date);
@@ -50,7 +57,9 @@ public class Main {
             stringBuffer.append(" " + temp);
             temp = scanner.next();
         }
-        String description = stringBuffer.toString().substring(1);
+        String description = stringBuffer.length() == 0
+                ? stringBuffer.toString()
+                : stringBuffer.toString().substring(1);
         String date = scanner.nextLine();
         scanner.close();
         return new Event(description, date);
@@ -97,8 +106,13 @@ public class Main {
                         + list.get(itemId).toString());
                 break;
             case "todo":
-                Task t = createTodo(scanner.nextLine());
-                addToList(t, list);
+                Task t = null;
+                try {
+                    t = createTodo(scanner.nextLine());
+                    addToList(t, list);
+                } catch(DukeException e) {
+                    response("? OOPS!!! The description of a todo cannot be empty.");
+                }
                 break;
             case "deadline":
                 t = createDeadline(scanner.nextLine());
@@ -109,7 +123,8 @@ public class Main {
                 addToList(t, list);
                 break;
             default:
-
+                scanner.nextLine();
+                response("? OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
             }
         }

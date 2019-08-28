@@ -30,6 +30,10 @@ public class Parser {
         }
     }
 
+    public boolean isNotByeCommand(String line) {
+        return !line.equals(Command.BYE.toString());
+    }
+
     public String getArg(String line, String command) {
         try {
             return line.split(command)[1];

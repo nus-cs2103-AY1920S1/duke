@@ -4,14 +4,17 @@ import java.text.ParseException;
 
 public class DateParser {
 
-    public static final String DATE_FORMAT = "dd-MM-yy HHmm";
-    private final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
+    private final SimpleDateFormat formatter;
+
+    public DateParser (String format) {
+        formatter = new SimpleDateFormat(format);
+    }
 
     public Date parse(String str) throws ParseException {
-        return DATE_FORMATTER.parse(str);
+        return formatter.parse(str);
     }
 
     public String format(Date d) {
-        return DATE_FORMATTER.format(d);
+        return formatter.format(d);
     }
 }

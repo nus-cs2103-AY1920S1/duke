@@ -12,6 +12,10 @@ public class Duke {
     public static final String BY_DELIM = "/by";
     public static final String AT_DELIM = "/at";
 
+    public static final String DATE_FORMAT = "dd-MM-yy HHmm";
+
+    public final String USER_NAME = System.getProperty("user.name");
+
     public static final int MAX_TASKS = 100;
 
     private TaskList taskList;
@@ -23,19 +27,17 @@ public class Duke {
     public void run() {
 
         ui = new Ui();
-        dateParser = new DateParser();
-        storage = new Storage(dateParser);
+        dateParser = new DateParser(DATE_FORMAT);
+        storage = new Storage(dateParser, "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat");
         parser = new Parser();
 
         ui.printGreeting();
-
         taskList = storage.readDataFile();
 
         String line = ui.nextLine();
 
         // Keep reading input until the bye command is received.
-        while (!line.equals(Command.BYE.toString())) {
-
+        while (parser.isNotByeCommand(line)) {
             try {
                 processInputLine(line);
             }
@@ -43,7 +45,7 @@ public class Duke {
                 ui.printException(e);
             }
             catch (ParseException e) {
-                ui.adviseDateFormat(DateParser.DATE_FORMAT);
+                ui.adviseDateFormat(DATE_FORMAT);
             }
 
             line = ui.nextLine();
@@ -94,7 +96,7 @@ public class Duke {
 
     public void addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
         if (desc.length() != 0) {
-            Task newDeadline = new Deadline(desc, parseDate(date));
+            Task newDeadline = new Deadline(desc, dateParser.parse(date));
             addTask(newDeadline);
         }
         else {
@@ -104,7 +106,7 @@ public class Duke {
 
     public void addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
         if (desc.length() != 0) {
-            Task newEvent = new Event(desc, parseDate(date));
+            Task newEvent = new Event(desc, dateParser.parse(date));
             addTask(newEvent);
         }
         else {
@@ -113,7 +115,6 @@ public class Duke {
     }
 
     public void addTodo(String desc) throws EmptyDescriptionException {
-
         if (desc.length() != 0) {
             Task newTodo = new Todo(desc); 
             addTask(newTodo);
@@ -132,26 +133,15 @@ public class Duke {
         );
     }
 
-    public boolean verifyArgsNotEmpty(String args) {
-        return args.trim().split(" ").length > 1;
-    }
-
     public void markTaskAsDone(int index) {
-
         Task doneTask = taskList.get(index);
         doneTask.markAsDone();
-
         ui.ackDone(doneTask);
     }
 
     public void addTask(Task newTask) {
         taskList.add(newTask);
-        
         ui.ackAddition(newTask, taskList.size());
-    }
-
-    public Date parseDate(String dateStr) throws ParseException {
-        return dateParser.parse(dateStr);
     }
     
     public static void main(String[] args) {

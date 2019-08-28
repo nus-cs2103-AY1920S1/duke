@@ -8,12 +8,12 @@ import java.text.ParseException;
 
 public class Storage {
 
-    public final String USER_NAME = System.getProperty("user.name");
-    private String filePath = "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat"; 
+    private String filePath;
     private DateParser dateParser;
 
-    public Storage (DateParser dateParser) {
+    public Storage (DateParser dateParser, String filePath) {
         this.dateParser = dateParser;
+        this.filePath = filePath;
     }
 
 	public TaskList readDataFile() {

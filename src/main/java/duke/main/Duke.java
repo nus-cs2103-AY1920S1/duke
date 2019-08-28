@@ -1,3 +1,10 @@
+package duke.main;
+
+import duke.exception.*;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.UI;
+
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 

@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.util.Date;
 
-class Event extends Task{
+public class Event extends Task{
     private Date eventAt;
     Event(String taskDetails, Date eventAt) {
         super(taskDetails);

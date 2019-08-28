@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.util.Date;
 
-class Deadline extends Task{
+public class Deadline extends Task{
     private Date deadlineBy;
 
     Deadline(String taskDetails, Date deadlineBy) {

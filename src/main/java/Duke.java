@@ -1,3 +1,8 @@
+/**
+ * This is the main class, Duke.
+ * @author Hua Lun
+ */
+
 import java.io.PrintWriter;
 import java.util.*;
 public class Duke {

@@ -1,8 +1,19 @@
+/**
+ * This is the Ui class. It makes sense of what the input is.
+ */
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Ui {
-
+    /**
+     * <p>
+     *     run is used to start up duke.
+     * </p>
+     * @param sc input command
+     * @param array the list of task
+     * @param num start with 1 for first task
+     */
     public void run(Scanner sc, ArrayList<TaskList> array, int num) {
         Parser p = new Parser();
         while (sc.hasNext()) {

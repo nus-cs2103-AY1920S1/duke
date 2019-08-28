@@ -54,7 +54,6 @@ class EventCommand extends AddTaskCommand {
                 Arrays.copyOfRange(commandArgs, atIndex + 1, commandArgs.length),
                 " ");
 
-        TaskUtil.validateTaskDescription(description);
 
         taskToAdd = new EventTask(description, timing);
     }

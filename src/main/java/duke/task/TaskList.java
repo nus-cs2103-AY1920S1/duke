@@ -59,8 +59,9 @@ public class TaskList {
      * @return The associated deleted task.
      */
     public Task deleteTaskByIndex(int index) {
+        Task removedTask = tasks.remove(index);
         size--;
-        return tasks.remove(index);
+        return removedTask;
     }
 
     /**
@@ -71,7 +72,7 @@ public class TaskList {
      * @param task The task to add.
      */
     public void addTask(Task task) {
-        size++;
         tasks.add(task);
+        size++;
     }
 }

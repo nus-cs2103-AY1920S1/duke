@@ -5,3 +5,4 @@
 { type: todo, done: false, description: a todo }
 { type: event, done: true, description: an event, time: 26/8/2019 1100 to 1200 }
 { type: deadline, done: true, description: a deadline, time: 30/8/2019 2359 }
+{ type: deadline, done: false, description: another deadline, time: 1/1/1111 1000 }

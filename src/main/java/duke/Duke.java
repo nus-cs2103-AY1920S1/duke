@@ -5,6 +5,7 @@ import java.util.Scanner;
 import duke.command.Command;
 import duke.command.CommandParser;
 import duke.command.Commands;
+import duke.storage.DukeFileWriteException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;

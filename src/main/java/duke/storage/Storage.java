@@ -275,7 +275,7 @@ public class Storage {
         ui.printLineDivider();
         ui.printMsgLine(" ☹  Oops! I failed to find a "
                 + dirName
-                + "   directory upwards\n"
+                + " directory upwards\n"
                 + "   and could not create one!");
         ui.printMsgLine(
                 " You can still run the application, but note your data\n"

@@ -35,7 +35,7 @@ class DukeUtilTest {
                 .range(2, 30)
                 .filter(x -> IntStream
                     .range(2, x)
-                    .noneMatch(y -> (double) x / y ==  x / y))
+                    .noneMatch(y -> (double) x / (double) y ==  x / y))
                 .mapToObj(primeNum -> primeNum + "")
                 .toArray(size -> new String[15]);
 

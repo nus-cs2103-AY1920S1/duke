@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (target < 0 || target >= taskList.getTotalTask()) {
             throw new DukeException("The task number is invalid!");
         }

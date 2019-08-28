@@ -6,8 +6,6 @@ import duck.task.Task;
 import duck.task.Todo;
 
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
 
 public class ObjectsForTest {
     public static final String todoTaskInfo = "T|false|Sleep early";

@@ -1,7 +1,6 @@
 import duck.command.Command;
 import duck.util.*;
 
-
 import java.io.FileNotFoundException;
 
 public class Duke {
@@ -13,6 +12,10 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+    }
+
+    public static void main(String[] args) {
+        new Duke("/Users/xiaoyu/duke/data/duke.txt").run();
     }
 
     public TaskList getTaskList() {
@@ -52,9 +55,5 @@ public class Duke {
             }
         }
         ui.showGoodbye();
-    }
-
-    public static void main(String[] args) {
-        new Duke("/Users/xiaoyu/duke/data/duke.txt").run();
     }
 }

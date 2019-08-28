@@ -3,13 +3,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String typeOfTask = "";
+    protected String time = "";
 
-    public Task(String description) {
+    public Task(String description, String typeOfTask) {
         this.description = description;
-        this.isDone = false;
-    }
-
-    public void setTypeOfTask(String typeOfTask) {
         if (typeOfTask.equals("todo")) {
             this.typeOfTask = "T";
         } else if (typeOfTask.equals("event")) {
@@ -17,6 +14,7 @@ public class Task {
         } else {
             this.typeOfTask = "D";
         }
+        this.isDone = false;
     }
 
     public String getTypeOfTask() {
@@ -31,18 +29,25 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
 
-    public void addTime(String description) {
-        this.description = new String(this.description + " " + description);
+    public void addTime(String time) {
+        this.time = time;
     }
 
+    public String getTime() {
+        return this.time;
+    }
 
     public String toString() {
-        if (this.typeOfTask.equals("")) {
-            return "[" + this.getStatusIcon() + "] " + this.description;
+        if (!this.time.equals("")) {
+            return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] " + this.description + " " + this.time;
         } else {
             return "[" + this.typeOfTask + "]" + "[" + this.getStatusIcon() + "] " + this.description;
         }

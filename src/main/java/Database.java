@@ -33,17 +33,17 @@ public class Database {
                 String[] description = sc.nextLine().split(" \\| ");
                 Task task;
                 switch (description[0]) {
-                    case "T":
-                        task = new ToDo(description[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(description[2], description[3]);
-                        break;
-                    case "E":
-                        task = new Event(description[2], description[3]);
-                        break;
-                    default:
-                        throw new IOException();
+                case "T":
+                    task = new ToDo(description[2]);
+                    break;
+                case "D":
+                    task = new Deadline(description[2], description[3]);
+                    break;
+                case "E":
+                    task = new Event(description[2], description[3]);
+                    break;
+                default:
+                    throw new IOException();
                 }
                 if (description[1].equals("1")) {
                     task.markAsDone();

@@ -12,9 +12,9 @@ public class Task {
 
     private String getStatusIcon() {
         if (this.isDone) {
-            return "[\u2713] ";
+            return "[✓] ";
         } else {
-            return "[\u2718] ";
+            return "[✗] ";
         }
     }
 

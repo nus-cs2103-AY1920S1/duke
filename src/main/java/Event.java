@@ -8,7 +8,7 @@
  * @version CS2103 AY19/20 Sem 1 iP Week 2
  */
 public class Event extends Task {
-    /** The date or time at which event is slated to occur */
+    /** String representing date or time at which event is slated to occur */
     private String dateTime;
 
     /**
@@ -27,6 +27,6 @@ public class Event extends Task {
      * @return string representing this event.
      */
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + dateTime + ")";
+        return "[E]" + super.toString() + "(at: " + dateTime + ")";
     }
 }

@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -16,9 +17,9 @@ public class Main {
      * @param args command(s) from the user
      */
     public static void main(String[] args) {
-        // create an instance of Duke and let Duke greet the user
-        Duke duke = new Duke();
-        duke.greet();
+        // create an instance of Duke with the file containing the task list
+        Duke duke = new Duke("../../../data/duke.txt");
+        duke.start();
 
         // scan for commands from the over and send them to Duke for processing
         Scanner scanner = new Scanner(System.in);

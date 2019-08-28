@@ -21,10 +21,18 @@ import java.util.ArrayList;
 public class Storage {
 
     private File f;
+    private String filePath;
 
-    public Storage(String filePath) {
+
+    public Storage(String filePath) throws IOException {
 
         f = new File(filePath);
+        if (! f.exists()) {
+            f.getParentFile().mkdir();
+            f.createNewFile();
+        }
+        this.filePath = filePath;
+
 
     }
 
@@ -70,7 +78,7 @@ public class Storage {
      */
     public void writeListToFile(TaskList taskList) throws IOException {
         ArrayList<Task> arr = taskList.getArr();
-        FileWriter fw = new FileWriter("resources/duke.txt");
+        FileWriter fw = new FileWriter(filePath);
         StringBuilder sb = new StringBuilder();
 
         for (Task entry : arr) {

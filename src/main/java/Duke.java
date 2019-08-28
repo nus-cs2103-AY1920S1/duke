@@ -7,7 +7,6 @@ import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  *
@@ -27,7 +26,7 @@ public class Duke {
      * @throws FileNotFoundException
      */
 
-    public Duke(String filePath) throws FileNotFoundException {
+    public Duke(String filePath) throws FileNotFoundException, IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -65,15 +64,19 @@ public class Duke {
      */
 
     public static void main(String[] args) throws DukeException,IOException {
-        Class dukeClass = Duke.class;
+        /*Class dukeClass = Duke.class;
         ClassLoader loader = dukeClass.getClassLoader();
-        URL myURL = loader.getResource("/resources/duke.txt");
-        String path = myURL.getPath();
+        URL myURL = loader.getResource("resources/duke.txt");
 
-        path = path.replaceAll("%20", " ");
+        String path;
+
+        if (myURL.getPath() != null) {
+            path = myURL.getPath();
+            path = path.replaceAll("%20", " ");
+        }*/
 
 
-        Duke duke = new Duke(path);
+        Duke duke = new Duke("resources/duke.txt");
         duke.run();
     }
 

@@ -14,7 +14,7 @@ public class Command {
     }
 
     /**
-     * Execute the command accordingly 
+     * Executes the command accordingly
      * @param tasks
      * @param ui
      * @param storage

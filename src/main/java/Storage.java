@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * Write to file specified in filepath
+     * Writes a text to the txt file specified in filepath
      *
      * @param textToAdd
      * @throws IOException
@@ -36,6 +36,7 @@ public class Storage {
     }
 
     /**
+     * Writes an arraylist of tasks to the txt file specified in filepath
      * @param taskListToAdd
      * @throws IOException
      */
@@ -52,7 +53,7 @@ public class Storage {
     }
 
     /**
-     * Get the file content
+     * Gets the file content
      * @return arrayList of tasks
      * @throws DukeException
      */
@@ -71,7 +72,7 @@ public class Storage {
     }
 
     /**
-     * Read in the txt file data and create task objects accordingly
+     * Reads in the txt file data and create task objects accordingly
      * @param taskString
      * @return
      * @throws DukeException
@@ -97,7 +98,7 @@ public class Storage {
     }
 
     /**
-     * Return true if 1 or else false
+     * Returns true if 1 or else false
      * @param s
      * @return
      */

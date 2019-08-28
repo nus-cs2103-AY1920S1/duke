@@ -11,15 +11,18 @@ public class Task {
     }
 
     /**
-     * Get the status icon
+     * Gets the status icon
+     *
      * @return tick or cross symbol
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone)
+                ? "\u2713"
+                : "\u2718";
     }
 
     /**
-     * Set the isDone variable to true
+     * Sets the isDone variable to true
      */
     public void done() {
         isDone = true;
@@ -31,8 +34,9 @@ public class Task {
     }
 
     /**
-     * Form a formatted sentence to be saved into a txt file later
-     * @return string
+     * Returns a formatted sentence to be saved into a txt file later
+     *
+     * @return string: Formatted sentence
      */
     public String toStringFile() {
         return ((isDone) ? "1" : "0") + " | " + description;

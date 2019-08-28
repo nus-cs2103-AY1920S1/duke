@@ -12,6 +12,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns all the tasks
+     * @return all tasks in ArrayList form
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
@@ -34,14 +38,29 @@ public class TaskList {
         return sb.toString().trim();
     }
 
+    /**
+     * Sets the task to be done
+     * @param i: index of the task
+     */
     public void done(int i) {
         tasks.get(i).done();
     }
 
+    /**
+     * Returns the task with the specified index
+     * @param i: index of the task
+     * @return: Specified task
+     */
     public Task getTask(int i) {
         return tasks.get(i);
     }
 
+    /**
+     * Deletes the task with the specified index
+     * @param i: index of the task
+     * @return: Deleted task
+     * @throws DukeException
+     */
     public Task deleteTask(int i) throws DukeException {
         try {
             return tasks.remove(i);
@@ -50,6 +69,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the number of tasks in the task list
+     * @return: Number of tasks in the task list
+     */
     public int getSize() {
         return tasks.size();
     }

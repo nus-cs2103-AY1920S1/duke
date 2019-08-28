@@ -1,8 +1,8 @@
 public class Parser {
     /**
-     * Parse user input into enums and separate the details accordingly
+     * Parses user input into enums and separate the details accordingly
      * @param fullCommand
-     * @return
+     * @return a Command object
      * @throws DukeException
      */
     public static Command parse(String fullCommand) throws DukeException {

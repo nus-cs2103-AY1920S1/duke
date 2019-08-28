@@ -18,7 +18,7 @@ public class Duke {
     }
 
     /**
-     * Run the main program
+     * Runs the main program
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);

@@ -5,4 +5,10 @@ public class Parser {
         return inputCommand;
     }
 
+    public static int getTaskNum(String inputInstruction) {
+        String[] taskNumString = inputInstruction.split(" ");
+        int taskNum = Integer.parseInt(taskNumString[1]);
+        return taskNum;
+    }
+
 }

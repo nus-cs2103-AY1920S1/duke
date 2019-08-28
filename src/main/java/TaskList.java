@@ -2,39 +2,39 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 
 public class TaskList {
-    private static ArrayList<Task> taskList;
+    private ArrayList<Task> listOfTask;
 
     public TaskList() {
-        taskList = new ArrayList<>();
+        listOfTask = new ArrayList<>();
     }
 
-    public static void listTask() {
-        if (taskList.size() == 0) {
+    public void listTask() {
+        if (listOfTask.size() == 0) {
             System.out.println("List is Empty");
         } else {
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(i + 1 + "." + taskList.get(i));
+            for (int i = 0; i < listOfTask.size(); i++) {
+                System.out.println(i + 1 + "." + listOfTask.get(i));
             }
         }
     }
 
-    public static Task getTask(int index) {
-        return taskList.get(index);
+    public Task getTask(int index) {
+        return listOfTask.get(index);
     }
 
-    public static ArrayList<Task> getList() {
-        return taskList;
+    public ArrayList<Task> getEntireList() {
+        return listOfTask;
     }
 
     public void addTask(Task newTask) {
-        taskList.add(newTask);
+        listOfTask.add(newTask);
     }
 
     public int noOfTask() {
-        return taskList.size();
+        return listOfTask.size();
     }
 
     public void removeTask(int index) {
-        taskList.remove(index);
+        listOfTask.remove(index);
     }
 }

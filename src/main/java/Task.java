@@ -13,6 +13,7 @@ public class Task {
 
     /**
      * Constructs a Task object with a specific description of a task that has to be completed.
+     *
      * @param description This is a brief description of the task.
      */
     public Task(String description) {
@@ -24,7 +25,8 @@ public class Task {
     }
 
     /**
-     *Returns the status of the Task with a tick or cross icon if the task is done or incomplete respectively.
+     * Returns the status of the Task with a tick or cross icon if the task is done or incomplete respectively.
+     *
      * @return a tick or cross icon
      */
     public String getStatusIcon() {
@@ -40,6 +42,7 @@ public class Task {
 
     /**
      * Returns the number of Task objects that exist. This is a getter method.
+     *
      * @return the number of Task objects that have been created.
      */
     public static int getTaskCount() {
@@ -54,25 +57,40 @@ public class Task {
         taskCount -= 1;
     }
 
+    /**
+     * Get the type of task. This is a getter method.
+     *
+     * @return The type of task.
+     */
     public String getTypeOfTask() {
         return this.typeOfTask;
     }
 
+    /**
+     * Provides the description of the task. This is a getter.
+     *
+     * @return The description of the task object.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Checks if the task is completed.
+     *
+     * @return Boolean that indicates if the task is done.
+     */
     public Boolean isDone() {
         return this.isDone;
     }
 
     /**
      * Convert to standard string format
+     *
      * @return a message that reflects the type and description of the Task.
      */
     public String toString() {
         String statusIcon = this.getStatusIcon();
-        return  ("[" + typeOfTask + "]" + "[" + statusIcon + "] "
-                + description);
+        return ("[" + typeOfTask + "]" + "[" + statusIcon + "] " + description);
     }
 }

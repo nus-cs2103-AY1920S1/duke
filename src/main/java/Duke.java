@@ -20,6 +20,14 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Construct a Duke object, the Task manager bot.
+     *
+     * @param filePath This holds the filepath to the local storage where
+     *                 a list of task is permanently stored until cleared.
+     *                 The file path can be in the format of a text file.
+     */
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,16 +36,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("/Users/TuanDingWei/Desktop/NUS_Academia" +
-                "/CS2103/Individual_project/Duke/local/Tasks.txt").run();
+        new Duke("/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt").run();
     }
 
     /**
-     * Contains most of the operations of the Task bot.
+     * Contains most of the operations of the Task Manager bot.
      */
     protected void run() {
-        String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" +
-                "/CS2103/Individual_project/Duke/local/Tasks.txt";
+        String filePath = "/Users/TuanDingWei/Desktop/NUS_Academia" + "/CS2103/Individual_project/Duke/local/Tasks.txt";
 
         Scanner sc = new Scanner(System.in);
         String input;
@@ -93,6 +99,13 @@ public class Duke {
         ui.sayYourGoodBye();
     }
 
+    /**
+     * Converts user input in the form of String to the format of Date.
+     * The Task Manager has the ability to read dates instead of taking dates as String.
+     *
+     * @param input The date/ time input in the form of String. It should follow either dd/MM/yyyy HHmm or HHmm format.
+     * @return Date format of the input String.
+     */
     private static Date convertStringToDate(String input) {
         Date date = new Date();
         try {
@@ -111,10 +124,22 @@ public class Duke {
         return date;
     }
 
-    public static String createTask(String userCommand, String due,
-                                    String taskDescription, Storage storage,
-                                    Ui ui, TaskList tasks) throws EmptyToDoDescriptionException,
-                                    EmptyDescriptionException, UnknownCommandException {
+    /**
+     * Performs the operation of creating a Task (Todo, Deadline, Task).
+     * It also writes the list of tasks to the local storage.
+     *
+     * @param userCommand     Indicates the instruction (done, delete, etc) to the bot.
+     * @param due             Provides the due date/ time of the task.
+     * @param taskDescription Reflects the description of a task.
+     * @param storage         The local storage for the Tasks as a Storage object.
+     * @param ui              The User Interface object that performs all interactions with the user.
+     * @param tasks           The list of Task that are temporary stored with the bot.
+     * @return Gives a feedback to the user on the operation has performed after a command is given.
+     * @throws EmptyToDoDescriptionException Indicates an empty description that should not be left empty for Todo.
+     * @throws EmptyDescriptionException     Indicates an empty description that should not be left empty.
+     * @throws UnknownCommandException       Indicates the inability of the bot to read the command that is given by the user.
+     */
+    public static String createTask(String userCommand, String due, String taskDescription, Storage storage, Ui ui, TaskList tasks) throws EmptyToDoDescriptionException, EmptyDescriptionException, UnknownCommandException {
 
         Task t;
         String typeOfTask = "";

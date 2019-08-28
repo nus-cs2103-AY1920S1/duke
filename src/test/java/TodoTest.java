@@ -1,13 +1,11 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Encapsulates an TodoTest object that contains the operation to test the createTask operation
+ * in creating a correct Todo task. It includes storing the Todo object in a temporary list and the local storage.
+ */
 public class TodoTest {
     @Test
     public void TodoTest() {

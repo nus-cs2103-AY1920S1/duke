@@ -23,12 +23,23 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Getter function that returns the due date of the Event
+     * in the format of a String.
+     *
+     * @return The due date of the deadline.
+     */
     public String getDueInString() {
         SimpleDateFormat startFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
         SimpleDateFormat endFormat = new SimpleDateFormat(" - HHmm");
         return startFormat.format(start) + endFormat.format(end);
     }
 
+    /**
+     * Convert Event object to String format.
+     *
+     * @return The String format of the Event.
+     */
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();

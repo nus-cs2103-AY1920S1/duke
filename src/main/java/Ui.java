@@ -1,3 +1,7 @@
+/**
+ * Encapsulates the User Interface operations. It is responsible of all interaction with the user.
+ */
+
 public class Ui {
 
     public void welcome() {

@@ -2,19 +2,24 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
-import java.nio.file.Paths;
 import java.io.PrintWriter;
 
+/**
+ * Encapsulates the Storage object that is responsible of writing existing Tasks to the local storage.
+ */
 public class Storage {
     String filePath;
 
+    /**
+     * Constructs the Storage object.
+     * @param filePath Provides the filepath to the local text file as the local storage.
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -75,6 +80,13 @@ public class Storage {
         return taskStorage;
     }
 
+    /**
+     * Converts user input in the form of String to the format of Date.
+     * The Task Manager has the ability to read dates instead of taking dates as String.
+     *
+     * @param input The date/ time input in the form of String. It should follow either dd/MM/yyyy HHmm or HHmm format.
+     * @return Date format of the input String.
+     */
     private static Date convertStringToDate(String input) {
         Date date = new Date();
         try {
@@ -155,6 +167,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Clear all data written in the local text file.
+     */
     public void clear() {
         try {
             FileWriter fwOb = new FileWriter(filePath, false);

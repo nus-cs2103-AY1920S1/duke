@@ -2,6 +2,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Encapsulates an EventTest object that contains the operation to test the createTask operation
+ * in creating a correct Event. It includes storing the Event object in a temporary list and the local storage.
+ */
 public class EventTest {
     @Test
     public void EventTest() {

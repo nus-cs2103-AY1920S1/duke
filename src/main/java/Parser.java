@@ -1,8 +1,16 @@
+/**
+ * Encapsulates the Parser object that is responsible of interpreting user commands.
+ */
+
 public class Parser {
     String userCommand;
     String due;
     String taskDescription;
 
+    /**
+     * Constructs the Parser object and performs the interpretation of user commands.
+     * @param input This is the input String of the user command.
+     */
     Parser(String input) {
         String[] dueSplit = input.split("/", 2);
         String due = "dummy";

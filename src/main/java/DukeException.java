@@ -6,6 +6,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructs a DukeException object.
+     *
      * @param message This contains the message of the error.
      *                The message of the error will be shown to the user when thrown.
      */
@@ -21,6 +22,7 @@ class EmptyToDoDescriptionException extends DukeException {
     /**
      * Constructs a new exception that takes in a message.
      * This message should be specific to warn the user that Todo description should not be empty.
+     *
      * @param message This is the message that will be displayed users to advise them to add a description.
      */
     public EmptyToDoDescriptionException(String message) {
@@ -37,6 +39,7 @@ class UnknownCommandException extends DukeException {
      * Constructs a new exception that takes in a message.
      * This message should be specific to warn the user that the command is unknown to the bot.
      * A registered command should be used instead.
+     *
      * @param message This is the message that will be displayed users to advise them to use an appropriate command.
      */
     public UnknownCommandException(String message) {
@@ -51,6 +54,7 @@ class EmptyDescriptionException extends DukeException {
     /**
      * Constructs a new exception that takes in a message.
      * This message should be specific to warn the user that description should not be empty.
+     *
      * @param message This is the message that will be displayed users to advise them to add a description.
      */
     public EmptyDescriptionException(String message) {
@@ -65,6 +69,7 @@ class EmptyDueDateException extends DukeException {
     /**
      * Constructs a new exception that takes in a message.
      * This message should be specific to warn the user that a due date should be specified.
+     *
      * @param message This is the message that will be displayed users to advise them to add a due date.
      */
     public EmptyDueDateException(String message) {
@@ -80,6 +85,7 @@ class IndexDoesNotExistException extends DukeException {
     /**
      * Constructs a new exception that takes in a message.
      * This message should be specific to warn the user that the index used is not within the list.
+     *
      * @param message This is the message that will be displayed users to advise them to use an
      *                index that is within the perimeter of the list.
      */

@@ -1,12 +1,12 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    protected String at;
-    protected LocalDateTime dateTime;
+    private String at;
+    private LocalDateTime dateTime;
 
     public Event(String description, String at) {
         super(description);
@@ -18,8 +18,9 @@ public class Event extends Task {
         }
     }
 
+    @Override
     public String format() {
-        return "E | " + this.getStatusIcon() + " | " + this.description + " | " + this.at;
+        return "E | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.at;
     }
 
     @Override

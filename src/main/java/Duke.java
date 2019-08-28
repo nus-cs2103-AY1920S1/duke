@@ -1,16 +1,16 @@
+import duke.command.Command;
+import duke.core.DukeException;
+import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
-import duke.core.Parser;
-import duke.core.DukeException;
-import duke.command.Command;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -21,7 +21,7 @@ public class Duke {
         }
     }
 
-    public void run(){
+    private void run(){
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

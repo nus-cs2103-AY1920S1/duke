@@ -1,12 +1,12 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDateTime dateTime;
+    private String by;
+    private LocalDateTime dateTime;
 
     public Deadline(String description, String by) {
         super(description);
@@ -18,8 +18,9 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
     public String format() {
-        return "D | " + this.getStatusIcon() + " | " + this.description + " | " + this.by;
+        return "D | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.by;
     }
 
     @Override

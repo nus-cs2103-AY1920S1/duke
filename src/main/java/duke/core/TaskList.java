@@ -1,7 +1,7 @@
 package duke.core;
 
-import java.util.ArrayList;
 import duke.task.Task;
+import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -14,7 +14,7 @@ public class TaskList {
         this.tasks = tasks;
     }
     
-    public ArrayList<Task> getList() {
+    ArrayList<Task> getList() {
         return this.tasks;
     }
 

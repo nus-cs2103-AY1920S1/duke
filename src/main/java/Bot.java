@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Bot {
 
@@ -18,7 +22,7 @@ public class Bot {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void add (String command, TaskType taskType) throws DukeException {
+    public Task add (String command, TaskType taskType) throws DukeException {
 
         String[] words = command.split(" ",2);
 
@@ -65,6 +69,8 @@ public class Bot {
         System.out.println(list.get(list.size() - 1));
 
         System.out.printf("Now you have %d tasks in the list.\n", list.size());
+
+        return list.get(list.size() - 1);
     }
 
     public void done (String command) throws DukeException {
@@ -111,5 +117,53 @@ public class Bot {
 
         System.out.printf("Now you have %d tasks in the list.\n", list.size());
 
+    }
+
+    public void retrieve () throws FileNotFoundException {
+        File f = new File(FileWriterClass.DUKE_TXT_PATH); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String text = s.nextLine();
+
+            System.out.println(text);
+
+            String[] split = text.split(" \\| ");
+
+            System.out.println(Arrays.toString(split));
+
+            String description = split[2];
+
+            Task t = null;
+
+            switch (split[0]) {
+            case "T":
+                t = new Todo(description);
+                break;
+            case "D":
+                t = new Deadline(description, split[3]);
+                break;
+            case "E":
+                t = new Event(description, split[3]);
+                break;
+            }
+
+            boolean isDone = split[1].equals("1");
+
+            if (t != null) {
+                t.isDone = isDone;
+                list.add(t);
+            }
+        }
+    }
+
+    public void save () throws IOException {
+
+        String s = "";
+
+        for (Task t : list) {
+            s += t.saveFormat() + System.lineSeparator();
+        }
+
+        FileWriterClass.writeToFile(FileWriterClass.DUKE_TXT_PATH, s);
     }
 }

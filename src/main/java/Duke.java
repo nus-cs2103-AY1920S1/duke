@@ -1,14 +1,24 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+
+    public static void main(String[] args) throws DukeException, IOException {
 
         Bot bot = new Bot();
 
         bot.greeting();
 
+
+        try {
+            bot.retrieve();
+        } catch (FileNotFoundException e) {
+            FileWriterClass.makeDirectory(FileWriterClass.DATA_FOLDER_PATH);
+        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -22,9 +32,11 @@ public class Duke {
 
             switch (words[0]) {
             case "todo":
+
                 try {
                     bot.add(command, Bot.TaskType.TODO);
-                } catch (DukeException e) {
+                    bot.save();
+                } catch (DukeException | IOException e) {
                     System.out.println(e.getMessage());
                 }
 
@@ -32,22 +44,26 @@ public class Duke {
             case "deadline":
                 try {
                     bot.add(command, Bot.TaskType.DEADLINE);
-                } catch (DukeException e) {
+                    bot.save();
+                } catch (DukeException | IOException e) {
                     System.out.println(e.getMessage());
                 }
                 continue;
             case "event":
                 try {
                     bot.add(command, Bot.TaskType.EVENT);
-                } catch (DukeException e) {
+                    bot.save();
+                } catch (DukeException | IOException e) {
                     System.out.println(e.getMessage());
                 }
                 continue;
             case "done":
                 bot.done(command);
+                bot.save();
                 continue;
             case "delete":
                 bot.delete(command);
+                bot.save();
                 continue;
             }
 

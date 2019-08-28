@@ -77,11 +77,9 @@ class TaskListTest {
     void toStringTest() {
         taskList = new TaskList();
         taskList.add(new Todo("read book"));
-        String expected = "\t____________________________________________________________" +
-                "\n\t Here are the tasks in your list:";
+        String expected = "";
 
         expected = expected + "\n\t 1. " + taskList.getAtIndex(0).toString();
-        expected = expected + "\n\t____________________________________________________________\n";
 
         assertEquals(expected, taskList.toString());
     }

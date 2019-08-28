@@ -102,4 +102,28 @@ public class Ui {
         System.err.println("\t____________________________________________________________");
         System.err.println();
     }
+
+    /**
+     * Prints a certain task list with Duke format.
+     * @param taskList to be printed on display.
+     */
+    public static void printTaskList(TaskList taskList) {
+        System.out.print("\t____________________________________________________________"
+                + "\n\t Here are the tasks in your list:");
+        System.out.println(taskList.toString());
+        System.out.println("\t____________________________________________________________");
+        System.out.println();
+    }
+
+    /**
+     * Printst a certain task list with match cases in Duke format.
+     * @param taskList to be printed on display.
+     */
+    public static void printFoundTaskList(TaskList taskList) {
+        System.out.print("\t____________________________________________________________"
+                + "\n\t Here are the matching tasks in your list:");
+        System.out.println(taskList.toString());
+        System.out.println("\t____________________________________________________________");
+        System.out.println();
+    }
 }

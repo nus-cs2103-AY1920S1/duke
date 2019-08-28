@@ -1,3 +1,11 @@
+import duke.command.Command;
+
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.io.FileNotFoundException;
 
 public class Duke {
@@ -37,5 +45,7 @@ public class Duke {
                 ui.printError(e);
             }
         }
+
+        ui.printExit();
     }
 }

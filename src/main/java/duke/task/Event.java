@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.util.DateManager;
+import duke.util.DukeException;
+
 import java.util.Date;
 
 public class Event extends Task {

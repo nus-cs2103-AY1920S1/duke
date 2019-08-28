@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 public class DoneCommand extends Command {
     public DoneCommand(String taskId) {
         super(taskId);

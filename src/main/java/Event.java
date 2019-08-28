@@ -1,20 +1,39 @@
+import java.util.Date;
 public class Event extends TaskList {
-    private String at;
+    private DateTime at;
 
-    public Event(int taskNumber, String taskCheck,
-                 String taskName, String type, String t) {
-
+    /**
+     * <p>
+     *     This is the Event constructor.
+     * </p>
+     */
+  
+    public Event(int taskNumber, String taskCheck, 
+                 String taskName, String type, DateTime t) {
         super(taskNumber, taskCheck, taskName, type);
         at = t;
     }
 
-    public String getAB() {
+    /**
+     * <p>
+     *     getAB is used to retrieve event date
+     * </p>
+     * @return event date
+     */
+
+    public DateTime getAB() {
         return at;
     }
 
+    /**
+     * <p>
+     *     Event toString to print out event tasks
+     * </p>
+     * @return Event task information
+     */
     @Override
     public String toString() {
-        return Integer.toString(getTaskNumber()) + ".[E]" +
-                getTaskCheck() + " " + getTaskName() + at;
+        return Integer.toString(getTaskNumber()) + ".[E]" + 
+          getTaskCheck() + getTaskName() + "at " + at;
     }
 }

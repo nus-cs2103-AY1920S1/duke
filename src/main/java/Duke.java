@@ -1,3 +1,9 @@
+/**
+ * This is the main class, Duke.
+ * @author Hua Lun
+ */
+
+import java.io.PrintWriter;
 import java.util.*;
 public class Duke {
     public static void main(String[] args) {
@@ -15,5 +21,6 @@ public class Duke {
         int num = 1;
 
         ui.run(sc, array, num);
+
     }
 }

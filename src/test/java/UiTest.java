@@ -224,7 +224,8 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void displaySuccessfullyDoneTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(Task t, String expectedTaskString) {
+    void displaySuccessfullyDoneTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(
+            Task t, String expectedTaskString) {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n"
                 + "\t  " + expectedTaskString + "\n"
@@ -236,7 +237,8 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void displaySuccessfullyRemovedTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(Task t, String expectedTaskString) {
+    void displaySuccessfullyRemovedTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(
+            Task t, String expectedTaskString) {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n"
                 + "\t  " + expectedTaskString + "\n"
@@ -249,7 +251,8 @@ class UiTest {
 
     @ParameterizedTest
     @MethodSource("getTasksWithExpectedStringDisplays")
-    void displaySuccessfullyAddedTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(Task t, String expectedTaskString) {
+    void displaySuccessfullyAddedTask_taskImplementingInstance_userFriendlyTaskStringDisplayed(
+            Task t, String expectedTaskString) {
         String expected = HORIZONTAL_LINE
                 + "\tHere's a title!\n"
                 + "\t  " + expectedTaskString + "\n"

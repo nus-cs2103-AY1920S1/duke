@@ -18,7 +18,7 @@ class FindTaskCommandTest extends CommandTest {
                 new Event("short date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
                 new Event("long date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0))
         );
-        String expectedDisplay = "\t____________________________________________________________\n"
+        final String expectedDisplay = "\t____________________________________________________________\n"
                 + "\tHere are the matching tasks in your list:\n"
                 + "\t1.[D][✘] short date format deadline (by: 6/6/2019 0000)\n"
                 + "\t2.[D][✘] long date format deadline (by: 6/6/2019 0000)\n"
@@ -48,7 +48,7 @@ class FindTaskCommandTest extends CommandTest {
                 new Event("short date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
                 new Event("long date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0))
         );
-        String expectedDisplay = "\t____________________________________________________________\n"
+        final String expectedDisplay = "\t____________________________________________________________\n"
                 + "\tHere are the matching tasks in your list:\n"
                 + "\t____________________________________________________________\n";
 
@@ -63,7 +63,7 @@ class FindTaskCommandTest extends CommandTest {
     @Test
     void execute_emptyTaskList_noTasksDisplayed() {
         List<Task> actualTasks = List.of();
-        String expectedDisplay = "\t____________________________________________________________\n"
+        final String expectedDisplay = "\t____________________________________________________________\n"
                 + "\tHere are the matching tasks in your list:\n"
                 + "\t____________________________________________________________\n";
 
@@ -89,7 +89,7 @@ class FindTaskCommandTest extends CommandTest {
                 new Event("short date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0)),
                 new Event("long date format event", false, LocalDateTime.of(2019, 8, 6, 14, 0))
         );
-        String expectedDisplay = "\t____________________________________________________________\n"
+        final String expectedDisplay = "\t____________________________________________________________\n"
                 + "\tHere are the matching tasks in your list:\n"
                 + "\t1.[T][✘] not done todo\n"
                 + "\t2.[T][✓] done todo\n"

@@ -69,7 +69,15 @@ public abstract class Task {
     }
 
     /***
-     * Override toString method
+     * Check whether Task description contains given keyword.
+     * @param keyword Keyword to match
+     */
+    protected boolean checkMatch(String keyword) {
+        return description.contains(keyword);
+    }
+
+    /***
+     * Override toString method.
      */
     @Override
     public String toString() {

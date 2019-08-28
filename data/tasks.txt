@@ -1,1 +1,4 @@
 T | 0 | asdasd
+T | 0 | read book
+T | 0 | cook
+T | 0 | read movies

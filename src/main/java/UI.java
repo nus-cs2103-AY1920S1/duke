@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -40,6 +41,24 @@ public class UI {
             for (int i = 0; i < taskList.getSize(); i++) {
                 System.out.println(String.format("     %d.%s",
                         i + 1, taskList.getTask(i).toString()));
+            }
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    /***
+     * Echo matching Tasks to user.
+     * @param matchingTasks Matching Tasks
+     */
+    public void echoMatchingTasks(List<Task> matchingTasks) {
+        System.out.println("    ____________________________________________________________");
+        if (matchingTasks.size() == 0)
+            System.out.println("     *** List is Empty ***");
+        else {
+            System.out.println("     Here are the matching tasks in your list: ");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println(String.format("     %d.%s",
+                        i + 1, matchingTasks.get(i).toString()));
             }
         }
         System.out.println("    ____________________________________________________________");

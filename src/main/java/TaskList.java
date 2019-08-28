@@ -51,6 +51,19 @@ public class TaskList {
     }
 
     /***
+     * Return matching Tasks from TaskList.
+     * @param keyword Keyword to be matched
+     */
+    public List<Task> getMatchingTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task k : taskList) {
+            if (k.checkMatch(keyword))
+                matchingTasks.add(k);
+        }
+        return matchingTasks;
+    }
+
+    /***
      * Mark a specific Task as complete.
      * @param entryNumber Entry number of Task to be marked as complete (Starting from 1 onwards)
      * @throws IndexOutOfBoundsException

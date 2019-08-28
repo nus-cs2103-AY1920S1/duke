@@ -10,6 +10,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Ui ui = new Ui();
+        ui.showWelcome();
         String underscore = "    ____________________________________________________________" + "\n" ;
 
         // Creates and initialises variables

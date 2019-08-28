@@ -13,7 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 ACTUAL.TXT
-DateTime.class
-Deadline.class
-Duke.class
 *.class

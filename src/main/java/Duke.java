@@ -228,14 +228,6 @@ public class Duke {
         }
     }
 
-    public static void bye() {
-        printLine();
-        System.out.println(INDENT_COMMENT + "Bye. Hope to see you again soon!");
-        printLine();
-        System.out.println("");
-        System.exit(0);
-    }
-
     public static void delete(String data) throws DukeException {
         try {
             if (data.isEmpty()) {
@@ -277,8 +269,6 @@ public class Duke {
         System.out.println("");
         System.exit(0);
     }
-
-
 
     public static void main(String[] args) {
         printGreet();

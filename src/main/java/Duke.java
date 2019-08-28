@@ -1,3 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -6,13 +10,18 @@ public class Duke {
     private static ArrayList<Task> list = new ArrayList<>();
 
     public static void main(String[] args) {
+        try {
+            loadFile();
+        } catch (IOException ex) {
+            System.out.println("File not found.");
+        }
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
         boolean continues = true;
         String description = sc.nextLine();
-        int counter = 0;
 
         while (!description.equals("bye")) {
             try {
@@ -22,38 +31,76 @@ public class Duke {
                     String command = part[0]; // to extract the first word of input description.
                     switch (command) {
                         case "list":
-                            showList(counter);
+                            showList();
                             break;
                         case "done":
                             int indexToMark = Integer.parseInt(part[1]);
                             list.get(indexToMark - 1).markAsDone();
                             System.out.println("Nice! I've marked this task as done: \n  " +
                                     list.get(indexToMark - 1));
+                            updateFile();
                             break;
                         case "delete":
                             int indexToDelete = Integer.parseInt(part[1]);
                             Task removed = list.remove(indexToDelete - 1);
-                            counter--;
                             System.out.println("Noted. I've removed this task: \n  " +
-                                    removed + "\nNow you have " + counter + " tasks in the list.");
+                                    removed + "\nNow you have " + list.size() + " tasks in the list.");
+                            updateFile();
                             break;
                         case "todo":
                         case "deadline":
                         case "event":
-                            addTask(description, counter, command);
-                            counter++;
+                            boolean isDone = false;
+                            addTask(description, command, isDone);
+                            updateFile();
                             break;
                     }
                 }
-            } catch (DukeException ex) {
+            } catch (DukeException | IOException ex) {
                 System.out.println(ex.getMessage());
             }
             description = sc.nextLine();
         }
 
-        if (description.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-            sc.close(); //exit the program
+        System.out.println("Bye. Hope to see you again soon!");
+        sc.close(); //exit the program
+    }
+
+    // To load the data from hard disk each time when Duke starts up.
+    public static void loadFile() throws IOException{
+        FileReader fr = new FileReader("duke.txt");
+
+        Scanner s = new Scanner(fr);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] part = line.split("/");
+            String status = part[1];
+            boolean isDone;
+            if (status.equals("✓")) {
+                isDone = true;
+            } else {
+                isDone = false;
+            }
+            switch (part[0]) {
+                case "T":
+                    list.add(new Todo(part[2], isDone));
+                    break;
+                case "D":
+                    list.add(new Deadline(part[2], isDone, part[3]));
+                    break;
+                case "E":
+                    list.add(new Event(part[2], isDone, part[3]));
+                    break;
+            }
+        }
+    }
+
+    // To save the tasks in the list whenever there is any change.
+    public static void updateFile() throws IOException {
+        FileWriter fw = new FileWriter("duke.txt");
+        for (Task task : list) {
+            fw.write(task.storageFormat() + "\n");
+            fw.flush();
         }
     }
 
@@ -92,40 +139,40 @@ public class Duke {
 
 
     // To print out the items stored in the list.
-    public static void showList(int counter) {
+    public static void showList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < counter; i++) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println((i+1) + ". " + list.get(i));
         }
     }
 
     // To add a new task into the list array.
-    public static void addTask(String description, int counter, String command) {
+    public static void addTask(String description, String command, boolean isDone) {
         Task newTask;
         switch(command)
         {
             case "todo":
                 String[] activity = description.split("todo");
-                newTask = new Todo(activity[1]);
+                newTask = new Todo(activity[1], isDone);
                 break;
             case "deadline":
                 String[] details = description.split("deadline");
                 String[] activity1 = details[1].split("/");
                 String[] time = activity1[1].split("by");
-                newTask = new Deadline(activity1[0], time[1]);
+                newTask = new Deadline(activity1[0], isDone, time[1]);
                 break;
             case "event":
                 String[] details2 = description.split("event");
                 String[] activity2 = details2[1].split("/");
                 String[] time2 = activity2[1].split("at");
-                newTask = new Event(activity2[0], time2[1]);
+                newTask = new Event(activity2[0], isDone, time2[1]);
                 break;
             default:
-                newTask = new Task(command);
+                newTask = new Task(command, isDone);
         }
 
         list.add(newTask);
         System.out.println("Got it. I've added this task: \n  " +
-                newTask + "\nNow you have " + (counter + 1) + " tasks in the list.");
+                newTask + "\nNow you have " + list.size() + " tasks in the list.");
     }
 }

@@ -110,7 +110,14 @@ public class Duke {
                     if (!command.isEmpty()) {
                         Task newTask = generateNewTask(command);
                         taskList.addTask(newTask);
-                        try {storage.saveToFile(taskList.toString());} catch(IOException e) {System.out.println("file error");}
+
+                        // Save the new list to storage
+                        try {
+                            storage.saveToFile(taskList.toString());
+                        } catch(IOException e) {
+                            System.out.println("file error");
+                        }
+
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + newTask.toString());
                         System.out.println("Now you have " + taskList.numTasks + " tasks in the list.");
@@ -178,7 +185,8 @@ public class Duke {
                     newTask = new Event(description, time);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new MissingDateTimeException("Event time period missing. Please set a start and end time. (Eg. event dance /at Mon 2-4pm)");
+                throw new MissingDateTimeException("Event time period missing."
+                        + "Please set a start and end time. (Eg. event dance /at Mon 2-4pm)");
             }
 
             return newTask;

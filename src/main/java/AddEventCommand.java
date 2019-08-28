@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a user command to add an event to the task list.
+ */
 public class AddEventCommand extends Command {
 
     String inputEvent = "";
@@ -6,6 +9,13 @@ public class AddEventCommand extends Command {
         this.inputEvent = inputEvent;
     }
 
+    /**
+     * Overridden method. Executes the add event command.
+     * @param tasks list of tasks
+     * @param ui user interface
+     * @param storage storage file
+     * @throws DukeException exception specific to Duke application
+     */
     @Override
     public void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (inputEvent.trim().length() == 5) {
@@ -22,6 +32,11 @@ public class AddEventCommand extends Command {
         }
     }
 
+    /**
+     * Returns the index of the slash symbol in an input string.
+     * @param inputString input string
+     * @return index of slash symbol
+     */
     public int slashLocator(String inputString) {
         return inputString.indexOf("/");
     }

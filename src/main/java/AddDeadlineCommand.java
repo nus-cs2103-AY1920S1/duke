@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a user command to add a deadline to the task list.
+ */
 public class AddDeadlineCommand extends Command {
 
     String inputDeadline = "";
@@ -6,6 +9,13 @@ public class AddDeadlineCommand extends Command {
         this.inputDeadline = inputDeadline;
     }
 
+    /**
+     * Overridden method. Executes the add deadline command.
+     * @param tasks list of tasks
+     * @param ui user interface
+     * @param storage storage file
+     * @throws DukeException exception specific to Duke application
+     */
     @Override
     public void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (inputDeadline.trim().length() == 8) {
@@ -22,6 +32,11 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Returns the index of the slash symbol in an input string.
+     * @param inputString input string
+     * @return index of slash symbol
+     */
     public int slashLocator(String inputString) {
         return inputString.indexOf("/");
     }

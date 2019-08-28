@@ -6,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the storage for the application.
+ * Each storage has a file path which reveals
+ * the file path of the text file used to load and save all tasks.
+ */
 public class Storage {
 
     private String filePath = "";
@@ -14,6 +19,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the previously curated task list.
+     * @return previously curated task list
+     * @throws DukeException exception specific to Duke application
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> outputList = new ArrayList<>();
         try {
@@ -54,12 +64,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes text to the storage text file.
+     * @param textToAdd text to write onto the storage text file
+     * @throws IOException input/output exception
+     */
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Updates the storage text file based on the changes made on the task list.
+     * @param list input list, such as task list itself
+     */
     public void updateChanges(ArrayList<Task> list) {
 
         StringBuilder sb = new StringBuilder();

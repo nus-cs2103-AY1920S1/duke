@@ -1,5 +1,13 @@
+/**
+ * Encapsulates a parser that parses input.
+ */
 public class Parser {
 
+    /**
+     * Static method. Parses the user input into relevant commands which are then returned.
+     * @param input user input
+     * @return relevant command parsed from user input
+     */
     public static Command parse (String input) {
         String[] inputSplit = input.split(" ");
         if (input.equals("bye")) {

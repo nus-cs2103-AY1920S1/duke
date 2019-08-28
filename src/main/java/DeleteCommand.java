@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a user command to delete a task from the task list.
+ */
 public class DeleteCommand extends Command {
 
     int indexToRemove = -1;
@@ -6,6 +9,12 @@ public class DeleteCommand extends Command {
         this.indexToRemove = indexToRemove;
     }
 
+    /**
+     * Overridden method. Executes the delete command.
+     * @param tasks list of tasks
+     * @param ui user interface
+     * @param storage storage file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task toBeRemoved = tasks.getTask(indexToRemove);

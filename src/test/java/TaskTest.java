@@ -2,8 +2,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test class to test Task class.
+ */
 public class TaskTest {
 
+    /**
+     * Test method to test getStatusIcon()
+     */
     @Test
     public void testGetStatusIcon() {
         Task t = new Task("read book");
@@ -11,6 +17,9 @@ public class TaskTest {
         assertEquals(expected, t.getStatusIcon());
     }
 
+    /**
+     * Test method to test getDescription()
+     */
     @Test
     public void testGetDescription() {
         Task t = new Task("cook dinner");
@@ -18,6 +27,9 @@ public class TaskTest {
         assertEquals(expected, t.getDescription());
     }
 
+    /**
+     * Test method to test markAsDone()
+     */
     @Test
     public void testMarkAsDone() {
         Task t = new Task("clean room");

@@ -1,3 +1,6 @@
+/**
+ * Encapsulates a user command to mark a task from the task list as done.
+ */
 public class DoneCommand extends Command {
 
     int indexToMarkDone = -1;
@@ -6,6 +9,12 @@ public class DoneCommand extends Command {
         this.indexToMarkDone = indexToMarkDone;
     }
 
+    /**
+     * Overridden method. Executes the done command.
+     * @param tasks list of tasks
+     * @param ui user interface
+     * @param storage storage file
+     */
     @Override
     public void execute (TaskList tasks, Ui ui, Storage storage) {
         Task toBeMarkDone = tasks.getTask(indexToMarkDone);

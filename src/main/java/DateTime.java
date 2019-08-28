@@ -36,7 +36,7 @@ public class DateTime {
         String monthString = "";
         switch (month) {
         case 1:
-            monthString = "Janurary";
+            monthString = "January";
             break;
         case 2:
             monthString = "February";

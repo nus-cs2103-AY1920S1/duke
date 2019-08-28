@@ -5,8 +5,8 @@ package duke.task;
  */
 public class Task {
     // Instance variables
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
     // Constructors
     public Task(String description) {
@@ -24,10 +24,6 @@ public class Task {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public boolean isDone() {
         return isDone;
     }
@@ -43,7 +39,7 @@ public class Task {
 
     /**
      * dot. Provided in the CS2103T task description.
-     * @return
+     * @return a graphic representation of 1/0.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols

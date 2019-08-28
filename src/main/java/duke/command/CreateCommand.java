@@ -12,7 +12,7 @@ import duke.ui.Ui;
 public class CreateCommand extends Command {
 
     public static Task createTodo(String details) throws DukeException {
-        Task todo = null;
+        Task todo;
         try {
             String params = details.trim();
             if (params.isEmpty()) {
@@ -30,7 +30,7 @@ public class CreateCommand extends Command {
     } // End method.
 
     public static Task createDeadline(String details) throws DukeException {
-        Task deadline = null;
+        Task deadline;
         try {
             String params = details.trim();
             String[] paramsArr = params.split("/by");
@@ -51,7 +51,7 @@ public class CreateCommand extends Command {
     } // End method.
 
     public static Task createEvent(String details) throws DukeException {
-        Task event = null;
+        Task event;
         try {
             String params = details.trim();
             String[] paramsArr = params.split("/at");
@@ -73,6 +73,5 @@ public class CreateCommand extends Command {
 
     @Override
     public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
-        return;
-    } // End method.
+    }
 }

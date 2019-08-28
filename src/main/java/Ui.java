@@ -37,17 +37,21 @@ public class Ui {
         showMessage("Bye. Hope to see you again soon!");
     }
 
-    public void showTasks(TaskList taskList) {
+    public void showAllTasks(TaskList taskList) {
         ArrayList<Task> taskArr = taskList.getTaskArr();
         System.out.println(BORDER_STR);
         System.out.println(INDENT_STR + "Here are the tasks in your list:");
+        showTasksInList(taskArr);
+        System.out.println(BORDER_STR);
+    }
+
+    public void showTasksInList(ArrayList<Task> taskArr) {
         for (Task task : taskArr) {
             // Format: 1. [T/D/E][v/x] task-description (by/at: ...)
             System.out.println(INDENT_STR +
                     (taskArr.indexOf(task)+1) + "." +
                     task.toString());
         }
-        System.out.println(BORDER_STR);
     }
 
     public void showAddTaskMessage(Task addedTask, ArrayList<Task> taskArr) {
@@ -58,6 +62,13 @@ public class Ui {
     public void showDeleteTaskMessage(Task deletedTask, ArrayList<Task> taskArr) {
         modifiedTaskListMessage("Noted. I've removed this task:",
                 deletedTask, taskArr);
+    }
+
+    public void showMatchingKeywordTasks(ArrayList<Task> taskArr) {
+        System.out.println(BORDER_STR);
+        System.out.println(INDENT_STR + "Here are the matching tasks in your list:");
+        showTasksInList(taskArr);
+        System.out.println(BORDER_STR);
     }
 
     public void showMarkTaskDoneMessage(Task doneTask) {

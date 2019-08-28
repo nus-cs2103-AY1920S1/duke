@@ -31,6 +31,17 @@ public class Parser {
                         taskDescription, false);
             }
             break;
+        case "find":
+            // Empty description
+            if (userInputArr.size() == 1) {
+                throw new EmptyDescriptionException("find");
+            } else {
+                // Splice back the description
+                String findDescription = String.join(" ",
+                        userInputArr.subList(1, userInputArr.size()));
+                currCommand = new FindCommand(findDescription);
+            }
+            break;
         case "deadline":
             currCommand = parseSubCommand("deadline", "/by", userInputArr);
             break;

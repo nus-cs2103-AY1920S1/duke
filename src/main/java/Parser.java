@@ -13,8 +13,10 @@ public class Parser {
 
         if (keyword.equalsIgnoreCase("bye")) {
             return new ExitCommand();
-        }
-        if (keyword.equalsIgnoreCase("list")) {
+        } else if (keyword.equalsIgnoreCase("find")) {
+            String taskToFind = cmdList[1];
+            return new FindCommand(taskToFind);
+        } else if (keyword.equalsIgnoreCase("list")) {
             return new ListCommand();
 
         } else if (keyword.equalsIgnoreCase("done")) {

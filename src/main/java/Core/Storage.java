@@ -40,7 +40,7 @@ public class Storage {
             taskWrite.write(s);
             taskWrite.close();
         } catch(IOException e) {
-            throw new DukeException("OOPS!!! Error occured when loading file.")
+            throw new DukeException("OOPS!!! Error occured when loading file.");
         }
     }
 

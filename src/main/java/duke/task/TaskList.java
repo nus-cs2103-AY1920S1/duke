@@ -164,6 +164,24 @@ public class TaskList {
                 }
                 this.deleteTask(Integer.parseInt(splitInput[1]) - 1);
                 break;
+            case "find":
+                if (input.length() <= 4) {
+                    throw new DukeException("no keyword to search for.");
+                }
+                String searchKey = input.substring(5);
+                ArrayList<Task> matchedList = new ArrayList<>();
+                for (Task t : taskList) {
+                    String dsc = t.getTaskDetails();
+                    if (dsc.indexOf(searchKey) != -1) {
+                        matchedList.add(t);
+                    }
+                }
+                int lenOfMatchedList = matchedList.size();
+                System.out.println("Here are the matching tasks in your list");
+                for (int i = 1; i <= lenOfMatchedList; i++) {
+                    System.out.println(i + ". " + matchedList.get(i-1));
+                }
+                break;
             default:
                 throw(new UnknownCmdDukeException(splitInput[0] + " is not a known command."));
         }

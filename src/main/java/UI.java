@@ -16,7 +16,6 @@ public class UI {
     /**
      * Displays greeting on start of the program.
      */
-
     public void showGreeting() {
         System.out.println(logo);
         showLine();
@@ -28,7 +27,6 @@ public class UI {
      /**
      * Displays goodbye message on exit.
      */
-
     public void showGoodbye() {
         System.out.println(line);
         System.out.println("    Bye. Hope to see you again soon!");
@@ -39,7 +37,6 @@ public class UI {
      * Displays all the items in the tasklist
      * @param tasks refers to the tasklist
      */
-
     public void showTasksInList(TaskList tasks) {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < tasks.getListSize(); i++) {
@@ -51,7 +48,6 @@ public class UI {
      * Displays message on marking a task as done.
      * @param task refers to the task marked as done
      */
-
     public void showTaskIsDoneMsg(Task task) {
         System.out.println("    Nice! I've marked this task as done: ");
         System.out.println("     " + task);
@@ -62,7 +58,6 @@ public class UI {
      * @param task refers to the task deleted.
      * @param taskListSize refers to the size of the tasklist after deletion.
      */
-
     public void showTaskDeletedMsg(Task task, int taskListSize) {
         System.out.println("    Noted. I've removed this task:");
         System.out.println("     " + task);
@@ -74,7 +69,6 @@ public class UI {
      * @param task refers to the task added to the list.
      * @param taskListSize refers to the size of the tasklist after the addition
      */
-
     public void showTaskAddedMsg(Task task, int taskListSize) {
         System.out.println("    Got it. I've added this task:");
         System.out.println("     " + task);
@@ -85,7 +79,6 @@ public class UI {
      * Displays message on encoutering an error.
      * @param errMsg refers to the error message to be shown to the user.
      */
-
     public void showErrorMsg(String errMsg) {
         System.out.println("    " + errMsg);
     }

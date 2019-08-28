@@ -15,7 +15,6 @@ public class Duke {
      * @param filePath refers to the path of the .txt file
      * @throws IOException
      */
-
     public Duke(String filePath) throws IOException {
         ui = new UI();
         storage = new Storage(filePath);
@@ -186,7 +185,6 @@ public class Duke {
      * @param args
      * @throws IOException
      */
-
     public static void main(String[] args) throws IOException {
         new Duke("../../../data/duke.txt").run();
     }

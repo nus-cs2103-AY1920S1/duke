@@ -27,21 +27,34 @@ public class Ui {
         scanner.close();
     }
 
+    public void showIndexMsg(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            showNoTasksMsg();
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            showTaskList(tasks);
+        }
+    }
+
+    public void showFindMsg(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            showNoTasksMsg();
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+        }
+        showTaskList(tasks);
+    }
+
     /**
      * Prints a list of tasks.
      *
      * @param tasks A list of tasks to be printed
      */
     public void showTaskList(TaskList tasks) {
-        if (tasks.isEmpty()) {
-            showNoTasksMsg();
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            ArrayList<Task> allTasks = tasks.getTasks();
-            for (int i = 1; i <= allTasks.size(); i++) {
-                Task task = allTasks.get(i - 1);
-                System.out.printf("%d.%s\n", i, task);
-            }
+        ArrayList<Task> all_tasks = tasks.getTasks();
+        for (int i = 1; i <= all_tasks.size(); i++) {
+            Task task = all_tasks.get(i - 1);
+            System.out.printf("%d.%s\n", i, task);
         }
     }
 
@@ -53,7 +66,7 @@ public class Ui {
     /**
      * Prints a message upon successful addition of a task to the list.
      *
-     * @param task The task added to the list
+     * @param task  The task added to the list
      * @param tasks The list of tasks after the addition
      */
     public void showTaskAdditionMsg(Task task, TaskList tasks) {
@@ -65,7 +78,7 @@ public class Ui {
     /**
      * Prints a message upon successful deletion of a task from the list.
      *
-     * @param task The task removed from the list
+     * @param task  The task removed from the list
      * @param tasks The list of tasks after the deletion
      */
     public void showTaskDeletionMsg(Task task, TaskList tasks) {

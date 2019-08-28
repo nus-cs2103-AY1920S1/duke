@@ -6,6 +6,7 @@ import duke.command.IndexCommand;
 import duke.command.CompleteCommand;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -37,6 +38,9 @@ public class Parser {
         } else if (command.matches("^delete\\s+\\d+$")) {
             int taskId = Integer.parseInt(command.split("\\s+")[1]);
             return new DeleteCommand(taskId);
+        } else if (command.startsWith("find ")) {
+            String keyWord = command.substring(5).trim();
+            return new FindCommand(keyWord);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

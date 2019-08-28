@@ -12,11 +12,7 @@ public class Deadline extends Task {
     }
 
     public String getBy() {
-        return by;
-    }
-
-    public void setBy(String newBy) {
-        this.by = newBy;
+        return by.format(dateTimeFormatter);
     }
 
     @Override

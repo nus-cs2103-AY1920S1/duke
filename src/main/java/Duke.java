@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
-    protected static LocalDateTime convertDateAndTime(String rawTimestamp) throws DukeException {
+    public static LocalDateTime convertDateAndTime(String rawTimestamp) throws DukeException {
         String[] dateTime = rawTimestamp.split(" ");
         String[] datePortion = dateTime[0].split("/");
         String timePortion = dateTime[1];

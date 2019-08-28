@@ -12,11 +12,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return at;
-    }
-
-    public void setAt(String newAt) {
-        this.at = newAt;
+        return at.format(dateTimeFormatter);
     }
 
     @Override

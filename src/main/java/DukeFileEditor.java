@@ -33,14 +33,14 @@ public class DukeFileEditor {
 
                     loadedTasks.add(newTodo);
                 } else if (actionTask.equals("D")) {
-                    Deadline newDeadline = new Deadline(taskDescription, taskArray[3]);
+                    Deadline newDeadline = new Deadline(taskDescription, Duke.convertDateAndTime(taskArray[3]));
                     if (isDone) {
                         newDeadline.markAsDone();
                     }
 
                     loadedTasks.add(newDeadline);
                 } else if (actionTask.equals("E")) {
-                    Event newEvent = new Event(taskDescription, taskArray[3]);
+                    Event newEvent = new Event(taskDescription, Duke.convertDateAndTime(taskArray[3]));
                     if (isDone) {
                         newEvent.markAsDone();
                     }

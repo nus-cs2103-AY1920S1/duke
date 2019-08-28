@@ -7,6 +7,31 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+
+    private Storage storage;
+    private ArrayList<Task> tasks;
+    private Ui ui;
+
+    public void run(){
+        // Variable initialization
+        String underscore = "    ____________________________________________________________" + "\n" ;
+        String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
+
+        ui.showWelcome();
+
+        try {
+            this.tasks = this.storage.load();
+        } catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+        
+    }
+
+    public Duke(String filePath){
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
+
     public static void main(String[] args) {
 
         Ui ui = new Ui();

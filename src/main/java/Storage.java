@@ -19,8 +19,8 @@ public class Storage { private String filepath;
         File f = new File(filepath);
         String data = "";
 
+        // If the file does not exist, create a new text file
         if (f.exists() == false){
-
             try {
                 // Need to create a new empty text file as file doesn't exist
                 Files.write(Paths.get(filepath), data.getBytes());
@@ -38,7 +38,7 @@ public class Storage { private String filepath;
     }
 
     public void clearFileBeforeSaving() throws IOException{
-        // Overwrites text file
+        // Overwrites text file and adds headers before saving tasks
         FileWriter fw = new FileWriter(filepath, false);
         fw.write("event type | isDone | description | extra description" + System.lineSeparator());
         fw.close();
@@ -63,7 +63,6 @@ public class Storage { private String filepath;
             String[] words = input.split("\\|") ;
             Boolean isDone = false;
 
-
             if (words[0].length() < 3 ){
 
                 if (words[0].contains("T")) { // Will avoid header
@@ -74,7 +73,6 @@ public class Storage { private String filepath;
                     } else if (words[1].contains("0")) {
                         isDone = false;
                     }
-
                     description = words[2].trim();
 
                     Todo newTodo = new Todo(description, isDone);
@@ -85,12 +83,9 @@ public class Storage { private String filepath;
 
                     if (words[1].contains("1")) {
                         isDone = true;
-
                     } else if (words[1].contains("0")) {
                         isDone = false;
-
                     }
-
                     description = words[2].trim();
                     extraDescription = words[3].trim();
 
@@ -102,12 +97,9 @@ public class Storage { private String filepath;
 
                     if (words[1].contains("1")) {
                         isDone = true;
-
                     } else if (words[1].contains("0")) {
                         isDone = false;
-
                     }
-
                     description = words[2].trim();
                     extraDescription = words[3].trim();
 

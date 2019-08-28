@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TaskList {
     private ArrayList<Task> xs;
@@ -9,6 +10,37 @@ public class TaskList {
         numOfTasks = 0;
     }
 
+    public TaskList(String currentList) {
+        xs = new ArrayList<Task>();
+        numOfTasks = 0;
+        integrateList(xs, currentList);
+    }
+
+    private void integrateList (ArrayList<Task> list, String content) {
+        Scanner s = new Scanner(content);
+        while (s.hasNextLine()) {
+            String text = s.nextLine();
+            String[] itemArr = text.split(" [|] ");
+            switch (itemArr[0]) {
+            case "T":
+                xs.add(new ToDos(itemArr[2], itemArr[1]));
+                numOfTasks++;
+                break;
+
+            case "D":
+                xs.add(new Deadlines(itemArr[2], itemArr[1], itemArr[3]));
+                numOfTasks++;
+                break;
+
+            case "E":
+                xs.add(new Event(itemArr[2], itemArr[1], itemArr[3]));
+                numOfTasks++;
+                break;
+            }
+        }
+        s.close();
+    }
+
     public int getNumOfTasks() {
         return numOfTasks;
     }
@@ -17,38 +49,29 @@ public class TaskList {
         return xs;
     }
 
-    public void addPreviousTask(Task t) {
+    public String addTask(Task t) {
         numOfTasks++;
         xs.add(t);
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.\n", t, numOfTasks);
     }
 
-    public void addTask(Task t) {
-        numOfTasks++;
-        xs.add(t);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t);
-        System.out.printf("Now you have %d tasks in the list.\n", numOfTasks);
-    }
-
-    public void tickTask(int num) {
+    public String tickTask(int num) {
         xs.get(num - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(xs.get(num - 1));
+        return String.format("Nice! I've marked this task as done:\n%s\n", xs.get(num - 1));
     }
 
-    public void removeTask(int num) {
+    public String removeTask(int num) {
         numOfTasks--;
         Task t = xs.get(num - 1);
         xs.remove(num - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t);
-        System.out.printf("Now you have %d tasks in the list.\n", numOfTasks);
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.\n", t, numOfTasks);
     }
 
-    public void printTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String printTasks() {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
         for (int i = 1; i <= xs.size(); i++) {
-            System.out.println(i + "." + xs.get(i - 1));
+            sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
         }
+        return sb.toString();
     }
 }

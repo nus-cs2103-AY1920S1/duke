@@ -1,15 +1,37 @@
-import java.util.Scanner;
-
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        DukeManager manager = new DukeManager();
-        manager.startManager();
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        this.ui = new Ui();
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError(e);
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+
+        while(!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch(DukeException e) {
+                ui.showError(e);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("data\\duke.txt");
+        duke.run();
     }
 }

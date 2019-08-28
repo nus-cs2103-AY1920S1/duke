@@ -5,8 +5,7 @@ public class DukeException extends Exception {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
+    public String getMessage() {
         return String.format("☹ OOPS!!! %s", message);
     }
 }

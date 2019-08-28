@@ -1,8 +1,30 @@
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ui {
 
-    public Ui() {};
+    private final Scanner in;
+
+    private final PrintStream out;
+
+    public Ui() {
+        this(System.in, System.out);
+    }
+
+    public Ui(InputStream in, PrintStream out) {
+        this.in = new Scanner(in);
+        this.out = out;
+    }
+
+    /**
+     * Read a command from the user.
+     */
+    public String readCommand() {
+        String fullInputLine = in.nextLine();
+        return fullInputLine;
+    }
 
     /**
      * Add a border to all inputs.
@@ -12,7 +34,7 @@ public class Ui {
 
         String border = "____________________________________________________________";
 
-        System.out.println(border + "\n\n" + input + "\n" + border + "\n");
+        out.println(border + "\n\n" + input + "\n" + border + "\n");
     }
 
     /**

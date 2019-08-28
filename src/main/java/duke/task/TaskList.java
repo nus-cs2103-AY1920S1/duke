@@ -26,8 +26,8 @@ public class TaskList {
         return tasks.get(id);
     }
 
-    public void delete(int id) {
-        tasks.remove(id);
+    public Task delete(int id) {
+        return tasks.remove(id);
     }
 
     public String stringify() {

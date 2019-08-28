@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.IncorrectCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.exception.DukeException;
 import duke.util.DateUtil;
 
@@ -13,29 +21,29 @@ public class Parser {
 
         try {
             switch (commandWord) {
-                case DeadlineCommand.COMMAND_WORD:
-                    return prepareDeadline(arr[1]);
+            case DeadlineCommand.COMMAND_WORD:
+                return prepareDeadline(arr[1]);
 
-                case EventCommand.COMMAND_WORD:
-                    return prepareEvent(arr[1]);
+            case EventCommand.COMMAND_WORD:
+                return prepareEvent(arr[1]);
 
-                case ToDoCommand.COMMAND_WORD:
-                    return prepareToDo(arr[1]);
+            case ToDoCommand.COMMAND_WORD:
+                return prepareToDo(arr[1]);
 
-                case DeleteCommand.COMMAND_WORD:
-                    return prepareDelete(arr[1]);
+            case DeleteCommand.COMMAND_WORD:
+                return prepareDelete(arr[1]);
 
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-                case DoneCommand.COMMAND_WORD:
-                    return prepareDone(arr[1]);
+            case DoneCommand.COMMAND_WORD:
+                return prepareDone(arr[1]);
 
-                case ByeCommand.COMMAND_WORD:
-                    return new ByeCommand();
+            case ByeCommand.COMMAND_WORD:
+                return new ByeCommand();
 
-                default:
-                    return prepareIncorrect();
+            default:
+                return prepareIncorrect();
             }
         } catch (IndexOutOfBoundsException e) {
             return prepareIncorrect();

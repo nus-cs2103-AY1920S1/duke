@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
@@ -22,6 +22,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -36,10 +40,6 @@ public class Duke {
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }
 

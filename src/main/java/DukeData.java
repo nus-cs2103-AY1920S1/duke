@@ -21,7 +21,7 @@ public class DukeData {
         _count++;
 
         // create a new File in the data file
-        File dir = new File("/data");
+        File dir = new File("/Users/StudyBuddy/Desktop/CS2103/iP/duke/src/main/data");
         try {
             if (!dir.exists()) {
                 dir.mkdir();
@@ -55,6 +55,7 @@ public class DukeData {
     public void addTask(int index, Task t) throws IOException {
         this._bw.write(index + ". " + t.toData());
         this._bw.newLine();
+        this._bw.flush();
     }
 
     /**
@@ -64,18 +65,18 @@ public class DukeData {
      */
     public void removeTask(int index) throws IOException {
         ArrayList<String> updateData = new ArrayList<>();
-        FileReader fr = new FileReader(this._saveFile);
-        BufferedReader br = new BufferedReader(fr);
+        char indX = (char) (index + '0');
+        BufferedReader br = new BufferedReader(
+                new FileReader(this._saveFile));
 
         // add all lines into temp array except the one to be removed
         String line = br.readLine();
         while (line != null) {
-            if (line.charAt(0) != (char) index) {
+            if (line.charAt(0) != indX) {
                 updateData.add(line);
             }
             line = br.readLine();
         }
-        fr.close();
         br.close();
 
         // now we replace the file with the new updated data
@@ -85,9 +86,9 @@ public class DukeData {
             updatedBW.write(s);
             updatedBW.newLine();
         }
-        this._bw = updatedBW;
         updatedBW.flush();
-        updatedBW.close();
+        this._fw = updatedFW;
+        this._bw = updatedBW;
     }
 
     /**
@@ -101,21 +102,21 @@ public class DukeData {
     public void taskDone(int index, Task t)
             throws IOException, FileNotFoundException {
         ArrayList<String> updateData = new ArrayList<>();
-        FileReader fr = new FileReader(this._saveFile);
-        BufferedReader br = new BufferedReader(fr);
+        char indX = (char) (index + '0');
+        BufferedReader br = new BufferedReader(
+                new FileReader(this._saveFile));
 
         // add all lines into the temp array,
         // and edit the line which has task marked as done
         String line = br.readLine();
         while (line != null) {
-            if (line.charAt(0) != (char) index) {
+            if (line.charAt(0) != indX) {
                 updateData.add(line);
             } else { // add the corrected data line
-                updateData.add(t.toData());
+                updateData.add(indX + ". " + t.toData());
             }
             line = br.readLine();
         }
-        fr.close();
         br.close();
 
         // now we replace the file with the new updated data
@@ -125,9 +126,9 @@ public class DukeData {
             updatedBW.write(s);
             updatedBW.newLine();
         }
-        this._bw = updatedBW;
         updatedBW.flush();
-        updatedBW.close();
+        this._bw = updatedBW;
+        this._fw = updatedFW;
     }
 
     /**
@@ -147,6 +148,7 @@ public class DukeData {
         String line = out.readLine();
         while (line != null)  {
             System.out.println(line);
+            line = out.readLine();
         }
         out.close();
     }

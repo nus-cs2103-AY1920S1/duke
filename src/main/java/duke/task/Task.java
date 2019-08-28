@@ -17,6 +17,14 @@ public abstract class Task {
     protected Date date;
 
     /**
+     * Empty constructor for Task
+     */
+    public Task() {
+
+    }
+
+
+    /**
      * Constructs a new Task.
      * @param description description of the task
      * @param isDone whether or not the task has been done

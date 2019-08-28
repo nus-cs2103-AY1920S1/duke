@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.core.DukeException;
+import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
-import duke.core.Storage;
-import duke.core.DukeException;
 
 /**
  * Represents a command inputted by user. <code>Command</code> is an abstract
@@ -21,12 +21,12 @@ public abstract class Command {
      * @throws DukeException If an exception occurs during execution of the 
      *      command.
      */
-    protected abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Indicates whether this command tells Duke to exit. 
      * @return A boolean. True if the command tells Duke to exit, false 
      *          otherwise.      
      */
-    protected abstract boolean isExit();
+    public abstract boolean isExit();
 }

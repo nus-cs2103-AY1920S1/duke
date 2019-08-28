@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.core.DukeException;
+import duke.core.Storage;
 import duke.task.Task;
 import duke.core.TaskList;
 import duke.core.Ui;
-import duke.core.Storage;
-import duke.core.DukeException;
 
 /**
  * Represents a command to mark a task as done. The <code>DoneCommand</code> 

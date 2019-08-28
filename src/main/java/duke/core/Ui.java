@@ -1,7 +1,7 @@
 package duke.core;
 
-import java.util.Scanner;
 import duke.task.Task;
+import java.util.Scanner;
 
 /**
  * Represents a system that deals with user interaction, for example, printing 
@@ -26,10 +26,10 @@ public class Ui {
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }

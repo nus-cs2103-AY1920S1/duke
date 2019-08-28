@@ -1,7 +1,7 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -12,13 +12,13 @@ public class Event extends Task {
     /**
      * A string that represents the time of the event, as inputted by user.
      */
-    protected String at;
+    private String at;
 
     /**
      * A <code>LocalDateTime</code> object that represents the date and time
      * when the event occurs.
      */
-    protected LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructs a <code>Event</code> object. Date and time are parsed and 
@@ -43,8 +43,9 @@ public class Event extends Task {
      * Returns a string representatio of the task to be stored in a local file.
      * @return A string in a specific format for clear display in a local file.
      */
+    @Override
     public String format() {
-        return "E | " + this.getStatusIcon() + " | " + this.description + " | " + this.at;
+        return "E | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.at;
     }
 
     /**

@@ -1,15 +1,15 @@
 package duke.core;
 
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
 
 /**
  * Represents a <code>Parser</code> that parses user input into a specific 
@@ -27,7 +27,7 @@ public class Parser {
      */
     private static String subString(String[] words, int start, int end) {
         StringBuilder sb = new StringBuilder();
-        for(int i = start; i < end; i++) {
+        for (int i = start; i < end; i++) {
             sb.append(words[i] + " ");
         }
         return sb.toString().trim();
@@ -40,10 +40,11 @@ public class Parser {
      * @return The index of the given string in the string array. Returns -1 if
      *          the given string does not occur in the array.
      */
-    public static int findIdx(String[] words, String s) {
-        for(int i = 0; i < words.length; i++) {
-            if(words[i].equals(s))
+    private static int findIdx(String[] words, String s) {
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals(s)) {
                 return i;
+            }
         }
         return -1;
     }
@@ -54,7 +55,7 @@ public class Parser {
      * @return The <code>Task</code> that is parsed from the string array.
      */
     private static Task parseTask(String[] words) {
-        if(words[0].equals("todo")) {
+        if (words[0].equals("todo")) {
             return new ToDo(subString(words, 1, words.length));
         } else if (words[0].equals("deadline")) {
             int i = findIdx(words, "/by");
@@ -78,14 +79,14 @@ public class Parser {
         if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event")
                     || fw.equals("delete") || fw.equals("list") || fw.equals("bye"))) {
             throw new DukeException(" \u2639  OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
+        }
         if ((fw.equals("todo") || fw.equals("deadline") || fw.equals("event")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
         }
         if ((fw.equals("deadline") && findIdx(words, "/by") == -1) || 
                 (fw.equals("event") && findIdx(words, "/at") == -1)) {
             throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
-                }
+        }
         if ((fw.equals("done") || fw.equals("delete")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
         }
@@ -101,19 +102,19 @@ public class Parser {
     public static Command parse(String s) throws DukeException {
         String[] words = s.split(" ");
         checkIllegalInstruction(words);
-        if (words[0].equals("bye")) {
+        switch (words[0]) {
+        case "bye":
             return new ExitCommand();
-        } else if (words[0].equals("done")) {
+        case "done":
             return new DoneCommand(Integer.parseInt(words[1]));
-        } else if (words[0].equals("delete")) {
+        case "delete":
             return new DeleteCommand(Integer.parseInt(words[1]));
-        } else if (words[0].equals("list")) {
+        case "list":
             return new ListCommand();
-        } else {
+        default:
             Task t = parseTask(words);
             return new AddCommand(t);
         }
     }
-
 }
 

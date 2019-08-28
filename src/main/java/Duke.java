@@ -1,9 +1,9 @@
+import duke.command.Command;
+import duke.core.DukeException;
+import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
-import duke.core.Parser;
-import duke.core.DukeException;
-import duke.command.Command;
 
 /**
  * Represents <code>Duke</code>, a Personal Assistant Chatbot that helps a 
@@ -33,7 +33,7 @@ public class Duke {
      * @param filePath A string that represents the path of the local file
      *          used for storing tasks.
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -48,7 +48,7 @@ public class Duke {
      * Runs the <code>Duke</code> program that continuously reads, parses and 
      * executes user input until a "bye" message is received.
      */
-    public void run(){
+    private void run(){
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {

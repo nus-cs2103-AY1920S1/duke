@@ -1,7 +1,7 @@
 package duke.core;
 
-import java.util.ArrayList;
 import duke.task.Task;
+import java.util.ArrayList;
 
 /**
  * Represents a list of <code>Task</code> that can perform operations such as 
@@ -36,7 +36,7 @@ public class TaskList {
      * @return The <code>ArrayList</code> of tasks associated with this
      * <code>TaskList</code>.
      */
-    public ArrayList<Task> getList() {
+    ArrayList<Task> getList() {
         return this.tasks;
     }
 

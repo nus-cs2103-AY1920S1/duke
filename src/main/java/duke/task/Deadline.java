@@ -1,7 +1,7 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -12,13 +12,13 @@ public class Deadline extends Task {
     /**
      * A string that represents the deadline of the task, as inputted by user.
      */
-    protected String by;
+    private String by;
 
     /**
      * A <code>LocalDateTime</code> object that represents the date and time
      * when the task is due.
      */
-    protected LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructs a <code>Deadline</code> object. Date and time are parsed and 
@@ -43,8 +43,9 @@ public class Deadline extends Task {
      * Returns a string representatio of the task to be stored in a local file.
      * @return A string in a specific format for clear display in a local file.
      */
+    @Override
     public String format() {
-        return "D | " + this.getStatusIcon() + " | " + this.description + " | " + this.by;
+        return "D | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.by;
     }
 
     /**

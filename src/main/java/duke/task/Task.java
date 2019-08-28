@@ -9,12 +9,12 @@ public abstract class Task {
     /**
      * A String that represents the specific content of the task.
      */
-    protected String description;
+    private String description;
 
     /**
      * A boolean that represents the status of completion of the task.
      */
-    protected boolean isDone;
+    private boolean isDone;
 
     /**
      * Initialises the minimum fields required to setup a <code>Task</code>.
@@ -31,7 +31,7 @@ public abstract class Task {
      * Returns an icon that represents the status of the task.
      * @return Tick if completed, cross if uncompleted.
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -40,7 +40,7 @@ public abstract class Task {
      * @return A string that represents the specific activity associated with
      *          the task.
      */
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 

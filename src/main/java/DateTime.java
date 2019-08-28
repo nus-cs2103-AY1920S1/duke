@@ -1,5 +1,3 @@
-import java.text.ParseException;
-
 public class DateTime {
     private String date;
     private String time;

@@ -1,7 +1,6 @@
 import java.io.IOException;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

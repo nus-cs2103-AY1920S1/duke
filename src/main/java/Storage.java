@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.text.ParseException;
 
 public class Storage {
-	
+
     public static final String USER_NAME = System.getProperty("user.name");
     private static String filePath = "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat"; 
 

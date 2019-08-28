@@ -1,37 +1,29 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.text.ParseException;
 import java.util.Date;
 
 public class Duke {
-
-    public static final int MAX_TASKS = 100;
-
-    // Strings that Duke will output
-    public static final String LONG_LINE = "____________________________________________________________";
-    public static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final String BYE_STR = "Bye. Hope to see you again soon!";
-    public static final String LIST_STR = "Here are the tasks in your list:";
-    public static final String DONE_STR = "Nice! I've marked this task as done:";
+    
     public static final String OOPS_STR = "OOPS!!! ";
     public static final String INVALID_COMMAND_STR = "I'm sorry, but I don't know what that means :-(";
     public static final String EMPTY_DESCRIPTION_STR_1 = "The description of a ";
     public static final String EMPTY_DESCRIPTION_STR_2 = " cannot be empty.";
-
+    
     // Delimiters
     public static final String BY_DELIM = "/by";
     public static final String AT_DELIM = "/at";
+
+    public static final int MAX_TASKS = 100;
 
     private static ArrayList<Task> taskList;
 
     public static void main(String[] args) {
 
-        printGreeting();
+        Ui.printGreeting();
 
         taskList = Storage.readDataFile();
 
-        Scanner input = new Scanner(System.in);
-        String line = input.nextLine();
+        String line = Ui.nextLine();
 
         // Keep reading input until the bye command is received.
         while (!line.equals(Command.BYE.toString())) {
@@ -40,18 +32,17 @@ public class Duke {
                 processInputLine(line);
             }
             catch (DukeException e) {
-                printWithLongLines(e.getMessage());
+                Ui.printException(e);
             }
             catch (ParseException e) {
-                printWithLongLines("Required date format: " + DateParser.DATE_FORMAT);
+                Ui.adviseDateFormat(DateParser.DATE_FORMAT);
             }
 
-            line = input.nextLine();
+            line = Ui.nextLine();
         }
 
-        input.close();
         Storage.writeDataFile(taskList);
-        printGoodbye();
+        Ui.printGoodbye();
     }
 
     // Processes a single line of input by identifying the command that was given, then delegating it
@@ -62,7 +53,7 @@ public class Duke {
 
         switch (command) {
         case LIST:
-            printList();
+            Ui.printList(taskList);
             break;
         case DONE:
             markTaskAsDone(line);
@@ -90,13 +81,7 @@ public class Duke {
         Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
 
-        printWithLongLines(
-            "Noted. I've removed this task:\n"
-            + taskToDelete
-            + "\nNow you have " 
-            + taskList.size()
-            + " tasks in the list."
-        );
+        Ui.ackDeletion(taskToDelete, taskList.size());
     }
 
     public static void addDeadline(String line) throws EmptyDescriptionException, ParseException {
@@ -159,58 +144,13 @@ public class Duke {
         Task doneTask = taskList.get(index);
         doneTask.markAsDone();
 
-        printWithLongLines(
-            DONE_STR
-            + "\n"
-            + doneTask
-        );
-    }
-
-    public static void printList() {
-        String wholeList = LIST_STR + "\n";
-        
-        for (int i = 0; i < taskList.size(); i++) {
-            wholeList += String.valueOf(i + 1)
-                + "."
-                + taskList.get(i);
-            
-            if (i < taskList.size() - 1) {
-                wholeList += "\n";
-            }
-        }
-
-        printWithLongLines(wholeList);
+        Ui.ackDone(doneTask);
     }
 
     public static void addTask(Task newTask) {
         taskList.add(newTask);
         
-        printWithLongLines(
-            "Got it. I've added this task:\n"
-            + newTask
-            + "\nNow you have " 
-            + taskList.size()
-            + " tasks in the list."
-        );
-    }
-
-    public static void printGoodbye() {
-        printWithLongLines(BYE_STR);
-    }
-
-    public static void printGreeting() {
-        printWithLongLines(GREETING);
-    }
-
-    public static void printWithLongLines(String stringToPrint) {
-        System.out.println(
-            LONG_LINE
-            + "\n"
-            + stringToPrint
-            + "\n"
-            + LONG_LINE
-            + "\n"
-        );
+        Ui.ackAddition(newTask, taskList.size());
     }
 
     public static Date parseDate(String dateStr) throws ParseException {

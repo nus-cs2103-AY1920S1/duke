@@ -41,7 +41,7 @@ public class Duke {
         scan.close();
     }
 
-    public static void taskDone(int i, ArrayList<Task> list, File file) throws Exception {
+    public static void taskDone(int i, ArrayList<Task> list, File file) throws DukeException, IOException {
         try {
             list.get(i - 1).markAsDone();
             writeToFile(file, list);

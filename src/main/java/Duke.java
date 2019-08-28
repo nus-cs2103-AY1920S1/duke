@@ -54,10 +54,30 @@ public class Duke {
                 done.set(index - 1, "✓");
 
                 System.out.println("     ____________________________________________________________");
-
-                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("     Nice! I've marked this task as done:");
                 System.out.println("     [" + done.get(index - 1) + "] " + data.get(index - 1));
+                System.out.println("     ____________________________________________________________");
 
+            } else if(input.startsWith("delete")){
+                String[] sp = input.split(" ", 2);
+                int index = Integer.parseInt(sp[1]);
+
+                System.out.println("     ____________________________________________________________");
+                System.out.println("     Noted. I've removed this task:");
+                System.out.print("       [" + type.get(index - 1) + "][" + done.get(index - 1) + "] " + data.get(index - 1));
+                if(type.get(index - 1).equals("D")){
+                    System.out.print(" (by: " + details.get(index - 1) + ")");
+                } else if (type.get(index - 1).equals("E")){
+                    System.out.print(" (at: " + details.get(index - 1) + ")");
+                }
+                System.out.println();
+
+                data.remove(index - 1);
+                type.remove(index - 1);
+                done.remove(index - 1);
+                details.remove(index - 1);
+
+                System.out.println("     You now have " + data.size() + " tasks in this list");
                 System.out.println("     ____________________________________________________________");
 
 
@@ -104,7 +124,7 @@ public class Duke {
 
                 System.out.println("     ____________________________________________________________");
                 System.out.println("     Got it. I've added this task:");
-                System.out.println("        [D][✗] " + sp2[0] + "(by: " + sp2[1] + ")");
+                System.out.println("        [D][✗] " + sp2[0] + " (by: " + sp2[1] + ")");
                 System.out.println("     Now you have " + data.size() + " tasks in this list");
                 System.out.println("     ____________________________________________________________");
 
@@ -127,7 +147,7 @@ public class Duke {
 
                 System.out.println("     ____________________________________________________________");
                 System.out.println("     Got it. I've added this task:");
-                System.out.println("        [E][✗] " + sp2[0] + "(at: " + sp2[1] + ")");
+                System.out.println("        [E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
                 System.out.println("     Now you have " + data.size() + " tasks in this list");
                 System.out.println("     ____________________________________________________________");
             } else {

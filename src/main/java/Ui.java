@@ -135,6 +135,30 @@ public class Ui {
         printLine();
     }
 
+    public void showFoundTasks(LinkedList<Task> taskList) {
+        ListIterator<Task> iter = taskList.listIterator();
+        Task current;
+        int count = 1;
+
+        printLine();
+
+        if (taskList.isEmpty()) {
+            printIndent();
+            System.out.println("There are no matching tasks in your list.");
+        } else {
+            printIndent();
+            System.out.println("Here are the matching tasks in your list:");
+        }
+
+        while(iter.hasNext()) {
+            current = iter.next();
+            printIndent();
+            System.out.println(count + "." + current.toString());
+        }
+
+        printLine();
+    }
+
     public void showException(DukeException e) {
         printLine();
 

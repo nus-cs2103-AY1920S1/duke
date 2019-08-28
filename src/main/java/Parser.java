@@ -44,6 +44,8 @@ public class Parser {
 
             ui.printTaskList(taskList);
 
+        } else if (taskDesc.isEmpty()) {
+            throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
         } else if (taskType.equals("done")) {
 
             int taskNum = Integer.parseInt(taskDesc);
@@ -64,9 +66,9 @@ public class Parser {
 
             ui.showTaskDeleted(task, taskList);
 
-        } else if (inputArr.length == 1) {
+        } else if (taskType.equals("find")) {
 
-            throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
+            ui.showFoundTasks(taskList.searchFor(taskDesc));
 
         } else if (taskType.equals("todo")) {
 
@@ -124,7 +126,8 @@ public class Parser {
                 input.equals("list") ||
                 input.equals("done") ||
                 input.equals("bye") ||
-                input.equals("delete")) {
+                input.equals("delete") ||
+                input.equals("find")) {
             return true;
         } else {
             return false;

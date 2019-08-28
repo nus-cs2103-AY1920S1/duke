@@ -1,6 +1,6 @@
-package duke.task;
+package seedu.duke;
 
-import duke.storage.Storage;
+import seedu.duke.storage.Storage;
 
 public class TaskList {
 

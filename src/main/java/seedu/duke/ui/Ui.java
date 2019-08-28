@@ -1,6 +1,6 @@
-package duke.ui;
+package seedu.duke.ui;
 
-import duke.DukeException;
+import seedu.duke.DukeException;
 
 public class Ui {
 
@@ -21,7 +21,7 @@ public class Ui {
 
         String underscore = "    ____________________________________________________________" + "\n" ;
         String intro = underscore +
-                "      Hello! I'm duke.Duke " + "\n" +
+                "      Hello! I'm seedu.duke.Duke " + "\n" +
                 "      What can I do for you?" + "\n" +
                 underscore ;
         System.out.println(logo + intro);

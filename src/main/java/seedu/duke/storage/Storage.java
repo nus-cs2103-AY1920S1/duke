@@ -1,9 +1,9 @@
-package duke.storage;
+package seedu.duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -73,7 +73,7 @@ public class Storage { private String filepath;
             if (words[0].length() < 3 ){
 
                 if (words[0].contains("T")) { // Will avoid header
-                    // Create a duke.task.Todo class
+                    // Create a seedu.duke.task.Todo class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -86,7 +86,7 @@ public class Storage { private String filepath;
                     tasks.add(newTodo);
 
                 } else if (words[0].contains("E")) {
-                    // Create an duke.task.Event class
+                    // Create an seedu.duke.task.Event class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -100,7 +100,7 @@ public class Storage { private String filepath;
                     tasks.add(newEvent);
 
                 } else if (words[0].contains("D")) {
-                    // Create a duke.task.Deadline class
+                    // Create a seedu.duke.task.Deadline class
 
                     if (words[1].contains("1")) {
                         isDone = true;

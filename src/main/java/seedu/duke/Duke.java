@@ -1,11 +1,11 @@
-package duke;
+package seedu.duke;
 
-import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.ui.Ui;
+import seedu.duke.storage.Storage;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
+import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -135,7 +135,7 @@ public class Duke {
                     taskNum--; // ArrayList index == taskNum - 1
 
                     if (taskNum >= tasks.size()){
-                        throw new DukeException("duke.task.Task no. " + (taskNum+1) + " does not exist");
+                        throw new DukeException("seedu.duke.task.Task no. " + (taskNum+1) + " does not exist");
                     }
 
                     Task taskToDelete = tasks.get(taskNum);
@@ -183,7 +183,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
+        new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\seedu.duke\\data\\tasks.txt").run();
     }
 
     enum possibleTasks{

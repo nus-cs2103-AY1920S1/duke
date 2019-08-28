@@ -13,7 +13,7 @@ import duke.database.Storage;
  * @author TeoShyanJie
  *
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     /**
      * DoneCommand class constructor.
      * @param input The input task enter by user.
@@ -46,9 +46,11 @@ public class DoneCommand extends Command{
         try {
             if (data.isEmpty()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException(ui.INDENT_COMMENT
+                            + "\u2639 OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Index of task are needed.");
+                    throw new DukeException(ui.INDENT_COMMENT
+                            + "\u2639 OOPS !!! " + "Index of task are needed.");
                 }
             }
 
@@ -56,9 +58,11 @@ public class DoneCommand extends Command{
 
             if (item > tasks.getItemNo()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException(ui.INDENT_COMMENT
+                            + "\u2639 OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Number enter can only be less than or equal number of task.");
+                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                            + "Number enter can only be less than or equal number of task.");
                 }
             }
 
@@ -67,7 +71,8 @@ public class DoneCommand extends Command{
             t.markAsDone();
             System.out.println(ui.INDENT_TASK + t);
         } catch (NumberFormatException ex) {
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Only Integer is allowed after done.");
+            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                    + "Only Integer is allowed after done.");
         }
     }
 }

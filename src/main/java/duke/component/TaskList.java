@@ -13,10 +13,10 @@ import java.util.List;
  *
  */
 public class TaskList {
-    /** Array list of task */
+    /** Array list of task. */
     public List<Task> task;
 
-    /** Total number of task */
+    /** Total number of task. */
     public int itemNo;
 
     /**

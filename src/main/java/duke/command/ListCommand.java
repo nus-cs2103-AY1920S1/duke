@@ -42,7 +42,8 @@ public class ListCommand extends Command {
      */
     public static void list(TaskList tasks, Ui ui) throws DukeException {
         if (tasks.getItemNo() == 0) {
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+            throw new DukeException(ui.INDENT_COMMENT
+                    + "\u2639 OOPS !!! " + "The task list are currently empty.");
         }
         int index = 1;
         System.out.println(ui.INDENT_COMMENT + "Here are the tasks in your list:");

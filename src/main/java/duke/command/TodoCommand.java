@@ -44,12 +44,14 @@ public class TodoCommand extends Command {
      */
     public void todo(String data, TaskList tasks, Ui ui) throws DukeException {
         if (data.isEmpty()) {
-            throw new DukeException(ui.INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a todo cannot be empty.");
+            throw new DukeException(ui.INDENT_COMMENT
+                    + "\u2639 OOPS !!! " + "The description of a todo cannot be empty.");
         }
         tasks.getTask().add(new Todo(data));
         System.out.println(ui.INDENT_COMMENT + "Got it. I've added this task: ");
         System.out.println(ui.INDENT_TASK + tasks.getTask().get(tasks.getItemNo()));
         tasks.setItemNo(tasks.getItemNo() + 1);
-        System.out.println(ui.INDENT_COMMENT + "Now you have " + tasks.getItemNo() + " tasks in the list.");
+        System.out.println(ui.INDENT_COMMENT + "Now you have "
+                + tasks.getItemNo() + " tasks in the list.");
     }
 }

@@ -23,10 +23,10 @@ import java.util.Scanner;
  *
  */
 public class Storage {
-    /** Declaration of file as File type */
+    /** Declaration of file as File type. */
     public File file;
 
-    /** Ui of the Duke Program */
+    /** Ui of the Duke Program. */
     private Ui ui;
 
     /**
@@ -57,7 +57,8 @@ public class Storage {
             file.createNewFile();
         } catch (IOException e) {
             ui.showLine();
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is not able to be created");
+            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                    + "File is not able to be created");
             ui.showLine();
             System.out.println("");
         }
@@ -77,14 +78,16 @@ public class Storage {
                     list.add(getEachTask(input.nextLine()));
                 } catch (DukeException e) {
                     ui.showLine();
-                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is empty");
+                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                            + "File is empty");
                     ui.showLine();
                     System.out.println("");
                 }
             }
         } catch (FileNotFoundException e) {
             ui.showLine();
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is not available");
+            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                    + "File is not available");
             ui.showLine();
             System.out.println("");
         }
@@ -112,7 +115,8 @@ public class Storage {
                 }
             } catch (NumberFormatException ex) {
                 ui.showLine();
-                System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+                System.out.println(ui.INDENT_COMMENT
+                        + "\u2639 OOPS !!! " + "Error in Database Data");
             }
             break;
 
@@ -125,7 +129,8 @@ public class Storage {
                 }
             } catch (NumberFormatException ex) {
                 ui.showLine();
-                System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+                System.out.println(ui.INDENT_COMMENT
+                        + "\u2639 OOPS !!! " + "Error in Database Data");
             }
             break;
 
@@ -138,12 +143,14 @@ public class Storage {
                 }
             } catch (NumberFormatException ex) {
                 ui.showLine();
-                System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+                System.out.println(ui.INDENT_COMMENT
+                        + "\u2639 OOPS !!! " + "Error in Database Data");
             }
             break;
 
         default:
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in reading data");
+            throw new DukeException(ui.INDENT_COMMENT
+                    + "\u2639 OOPS !!! " + "Error in reading data");
         }
 
         return task;
@@ -161,7 +168,7 @@ public class Storage {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
 
-            for(Task item: task) {
+            for (Task item: task) {
                 StringBuilder save = new StringBuilder();
 
                 String temp = item.toString();

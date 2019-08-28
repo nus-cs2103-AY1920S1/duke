@@ -61,7 +61,8 @@ public class Parser {
             return new DeleteCommand(rest, "delete");
 
         default:
-            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                    + "I'm sorry, but I don't know what that means :-(");
         }
     }
 }

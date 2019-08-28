@@ -13,13 +13,13 @@ import duke.exception.DukeException;
  *
  */
 public class Duke {
-    /** Database of the Duke Program */
+    /** Database of the Duke Program. */
     private Storage storage;
 
-    /** List of task */
+    /** List of task. */
     private TaskList tasks;
 
-    /** Ui of the Duke Program */
+    /** Ui of the Duke Program. */
     private Ui ui;
 
     /**

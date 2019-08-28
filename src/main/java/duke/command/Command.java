@@ -13,13 +13,13 @@ import duke.database.Storage;
  *
  */
 public abstract class Command {
-    /** Task enter by user */
+    /** Task enter by user. */
     protected String input;
 
-    /** The type of task enter by user */
+    /** The type of task enter by user. */
     protected String type;
 
-    /** The exit status */
+    /** The exit status. */
     protected boolean exit = false;
 
     /**

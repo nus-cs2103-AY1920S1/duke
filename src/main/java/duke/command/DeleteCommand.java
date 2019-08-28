@@ -39,15 +39,18 @@ public class DeleteCommand extends Command {
      * @param data Task enter by user.
      * @param tasks List of task.
      * @param ui The ui of Duke Program.
-     * @throws DukeException If the list of task is empty or if the task to delete is not in the list.
+     * @throws DukeException If the list of task is empty
+     *     or if the task to delete is not in the list.
      */
     public void delete(String data, TaskList tasks, Ui ui) throws DukeException {
         try {
             if (data.isEmpty()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException(ui.INDENT_COMMENT
+                            + "\u2639 OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Index of task are needed.");
+                    throw new DukeException(ui.INDENT_COMMENT
+                            + "\u2639 OOPS !!! " + "Index of task are needed.");
                 }
             }
 
@@ -55,17 +58,21 @@ public class DeleteCommand extends Command {
 
             if (item > tasks.getItemNo()) {
                 if (tasks.getItemNo() == 0) {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
+                    throw new DukeException(ui.INDENT_COMMENT
+                            + "\u2639 OOPS !!! " + "The task list are currently empty.");
                 } else {
-                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Number enter can only be less than or equal number of task.");
+                    throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! "
+                            + "Number enter can only be less than or equal number of task.");
                 }
             }
             System.out.println(ui.INDENT_COMMENT + "Noted. I've removed this task: ");
             System.out.println(ui.INDENT_TASK + tasks.getTask().remove(--item));
             tasks.setItemNo(tasks.getItemNo() - 1);
-            System.out.println(ui.INDENT_COMMENT + "Now you have " + tasks.getItemNo() + " tasks in the list.");
+            System.out.println(ui.INDENT_COMMENT + "Now you have "
+                    + tasks.getItemNo() + " tasks in the list.");
         } catch (NumberFormatException ex) {
-            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Only Integer is allowed after done.");
+            System.out.println(ui.INDENT_COMMENT
+                    + "\u2639 OOPS !!! " + "Only Integer is allowed after done.");
         }
     }
 }

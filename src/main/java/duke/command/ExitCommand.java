@@ -13,7 +13,7 @@ import duke.database.Storage;
  * @author TeoShyanJie
  *
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * ExitCommand class constructor.
      * @param input The input task enter by user.
@@ -28,7 +28,7 @@ public class ExitCommand extends Command{
      * @param tasks List of task enter.
      * @param ui Ui of Duke Program.
      * @param storage Database of the Duke Program.
-     * @throws DukeException
+     * @throws DukeException If bye method is not able to execute.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

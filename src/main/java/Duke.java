@@ -102,7 +102,14 @@ public class Duke {
                     System.out.println(err.getMessage());
                 }
 
-            } else {
+            } else if (input.contains("find")){
+                String keyword = parser.parse("find", input);
+                ui.matchingList();
+                tasks.getList(keyword);
+            }
+
+
+            else {
                // Do not fit any commands
                 try {
                     t = new Task(input, 0);

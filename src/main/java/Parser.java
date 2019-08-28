@@ -18,7 +18,7 @@ public class Parser {
         return action;
     }
 
-    public String parseToDo(String action, String input) {
+    public String parse(String action, String input) {
         String description = input.replace(action, "");
         return description.trim();
     }

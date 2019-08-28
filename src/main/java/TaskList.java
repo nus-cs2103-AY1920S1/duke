@@ -6,7 +6,10 @@ class TaskList {
     protected Ui ui = new Ui();
     protected Parser parser = new Parser();
 
-    public TaskList() {};
+    public TaskList() {
+    }
+
+    ;
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -23,8 +26,23 @@ class TaskList {
     public void getList() {
         int size = this.list.size();
         for (int i = 0; i < size; i++) {
-            System.out.print("     " + (i+1) + ".");
+            System.out.print("     " + (i + 1) + ".");
             System.out.println(list.get(i));
+        }
+    }
+
+    public void getList(String action) {
+        int size = this.list.size();
+        int index = 1;
+        for (int i = 0; i < size; i++) {
+            if (list.get(i).toString().contains(action)) {
+                System.out.print("     " + (index) + ".");
+                System.out.println(list.get(i));
+                index += 1;
+            }
+        }
+        if (index == 1) { // Index did not increment, no match found
+            ui.noMatch();
         }
     }
 
@@ -35,9 +53,9 @@ class TaskList {
         // Get integer found in user input
         try {
             int index = Integer.parseInt(value.trim()); //Remove any blank space
-            list.get(index-1).isDone = true;
+            list.get(index - 1).isDone = true;
             ui.completedTask();
-            System.out.println(list.get(index-1));
+            System.out.println(list.get(index - 1));
         } catch (Exception e) {
             ui.invalidEntry();
         }
@@ -51,9 +69,9 @@ class TaskList {
         // Get integer found in user input
         try {
             int index = Integer.parseInt(value.trim()); //Remove any blank space
-            Task delete = list.get(index-1);
+            Task delete = list.get(index - 1);
             // Remove task from list
-            list.remove(index-1); //index start from 0
+            list.remove(index - 1); //index start from 0
             ui.deleteTask();
             System.out.println(delete); //index start from 0
             int n = this.getSize();
@@ -65,25 +83,25 @@ class TaskList {
 
     public void addTask(String action, String input) {
 
-        switch(action) {
+        switch (action) {
 
-            case "todo":
-                String description1 = parser.parseToDo(action, input);
-                list.add(new ToDo(description1));
-                break;
+        case "todo":
+            String description1 = parser.parse(action, input);
+            list.add(new ToDo(description1));
+            break;
 
-            case "deadline":
-                String description2 = parser.parseDescription(action, input);
-                list.add(new Deadline(description2, parser.parseDateTime(action, input)));
-                break;
+        case "deadline":
+            String description2 = parser.parseDescription(action, input);
+            list.add(new Deadline(description2, parser.parseDateTime(action, input)));
+            break;
 
-            case "event":
-                String description3 = parser.parseDescription(action, input);
-                list.add(new Event(description3,parser.parseDateTime(action, input)));
-                break;
+        case "event":
+            String description3 = parser.parseDescription(action, input);
+            list.add(new Event(description3, parser.parseDateTime(action, input)));
+            break;
         }
         int n = this.getSize();
-        System.out.println(this.list.get(n-1));
+        System.out.println(this.list.get(n - 1));
         ui.numTasks(n);
     }
 }

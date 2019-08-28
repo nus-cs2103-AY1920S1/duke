@@ -6,6 +6,8 @@ public class Ui {
     private static final String CREATE_FILE = "     Creating new file.";
     private static final String SHOW_LIST = "     Here are the tasks in your list:";
     private static final String INVALID_LIST_ENTRY = "     List entry does not exist!";
+    private static final String MATCHING_LIST = "     Here are the matching tasks in your list:";
+    private static final String NO_MATCH = "     There is no match in your list!";
     private static final String LOAD_ERROR = "     Error loading file.";
     private static final String SAVE_ERROR = "     Error saving file.";
     private static final String MARK_TASK_COMPLETE = "     Nice! I've marked this task as done: ";
@@ -71,6 +73,12 @@ public class Ui {
     }
     public void separator() {
         System.out.println(SEPARATOR);
+    }
+    public void matchingList() {
+        System.out.println(MATCHING_LIST);
+    }
+    public void noMatch() {
+        System.out.println(NO_MATCH);
     }
 
     public void numTasks(int n) {

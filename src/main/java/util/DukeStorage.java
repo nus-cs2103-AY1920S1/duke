@@ -43,7 +43,7 @@ public class DukeStorage {
 
     /***
      * <p>
-     * Initializes DukeStorrage based on default options if configuration file is not found.
+     * Initializes DukeStorage based on default options if configuration file is not found.
      * </p>
      * @param configFilePath path to optional configuration file.
      * @throws ConfigurationException if configuration and storage file cannot be read.

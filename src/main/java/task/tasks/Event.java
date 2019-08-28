@@ -21,6 +21,7 @@ public class Event extends Task {
      * </p>
      * @param arguments description and time separated by a "/at" separator.
      * @throws UnknownDateTimeException if date and time is given in the incorrect format.
+     * @throws InvalidArgumentsException if arguments do not match required format.
      */
     public Event(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
         super(getDescription(arguments), TaskKeyword.EVENT);

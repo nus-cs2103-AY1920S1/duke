@@ -22,6 +22,7 @@ public class Deadline extends Task {
      * </p>
      * @param arguments description and time separated by a "/by" separator.
      * @throws UnknownDateTimeException if date and time is given in the incorrect format.
+     * @throws InvalidArgumentsException if arguments do not match required format.
      */
     public Deadline(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
         super(getDescription(arguments), TaskKeyword.DEADLINE);

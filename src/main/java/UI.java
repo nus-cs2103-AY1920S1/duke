@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Handles the user interface that the user interact with.
+ */
 public class UI {
 
     public static final String divider = "\t____________________________________________________________";
@@ -8,6 +11,9 @@ public class UI {
 
     private Scanner sc;
 
+    /**
+     * Construct a user interface object for the user to interact.
+     */
     public UI() {
         this.sc = new Scanner(System.in);
     }

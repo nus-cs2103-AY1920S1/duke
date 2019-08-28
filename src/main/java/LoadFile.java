@@ -4,10 +4,18 @@ import java.util.Scanner;
 import java.io.FileReader;
 import java.io.File;
 
+/**
+ * Handles loading of file from specified directory.
+ */
+
 public class LoadFile {
 
     private String filePath;
 
+    /**
+     * Construct a object to specific the location for loading of file.
+     * @param filePath Directory of the file
+     */
     public LoadFile(String filePath) {
         this.filePath = filePath;
     }

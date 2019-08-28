@@ -1,7 +1,16 @@
+/**
+ * Represent user command to mark their task as completed in their task list.
+ */
+
 public class DoneCommand extends Command {
 
     protected int index;
 
+    /**
+     * Represents an action to mark task as done in their task list.
+     * @param command Type of task
+     * @param index Task Index on their task list
+     */
     public DoneCommand(String command, int index) {
         super(command);
         this.index = index;

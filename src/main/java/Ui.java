@@ -1,5 +1,12 @@
 import java.io.IOException;
 
+/**
+ * Represents an Ui class which handles all the display and I/O
+ * that the user will enter. Ui class interacts with the user
+ * and helps to call the other necessary classes to achieve the
+ * user's input instructions.
+ */
+
 public class Ui {
 
     public void initiate() {
@@ -8,6 +15,18 @@ public class Ui {
         System.out.println("___________________________________");
     }
 
+    /**
+     * Runs the Instructions that have been entered by the user
+     * It will process the String inputInstructions, inputCommand that the user
+     * have entered and do the specific instructions using the storage and currentTaskList
+     * object that have been created/passed down.
+     *
+     * @param inputInstruction a String that describes the task
+     * @param inputCommand a String command (Deadline, Event, List etc) that helps the program process the instruction
+     * @param storage a storage object that will be used during the program
+     * @param currentTaskList a taskList object that will be used to store the different task objects
+     * @throws IOException
+     */
     public void executeInstructions(String inputInstruction, String inputCommand, Storage storage, TaskList currentTaskList) throws IOException {
         if (inputCommand.equals("list")) {
             System.out.println("__________________________________");

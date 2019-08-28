@@ -1,3 +1,10 @@
+
+/**
+ * Represents a Task class which basically represents a task
+ * a Task object is represented with a description, a isDone
+ * boolean which shows whether the task is completed.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;

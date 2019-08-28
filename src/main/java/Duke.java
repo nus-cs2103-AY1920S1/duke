@@ -49,7 +49,7 @@ public class Duke {
                             isDone = false;
                         }
 
-                        description = words[2];
+                        description = words[2].trim();
 
                         Todo newTodo = new Todo(description);
                         tasks.add(newTodo);
@@ -63,8 +63,8 @@ public class Duke {
                             isDone = false;
                         }
 
-                        description = words[2];
-                        extraDescription = words[3];
+                        description = words[2].trim();
+                        extraDescription = words[3].trim();
 
                         Event newEvent = new Event(description, extraDescription);
                         tasks.add(newEvent);
@@ -78,8 +78,8 @@ public class Duke {
                             isDone = false;
                         }
 
-                        description = words[2];
-                        extraDescription = words[3];
+                        description = words[2].trim();
+                        extraDescription = words[3].trim();
 
                         Deadline newDeadline = new Deadline(description, extraDescription);
                         tasks.add(newDeadline);

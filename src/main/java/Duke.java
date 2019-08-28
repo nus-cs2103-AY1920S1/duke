@@ -27,6 +27,19 @@ public class Duke {
         }
     }
 
+    private static void handleDelete(String line) throws DukeException {
+        try {
+            String[] input = line.split(" ");
+            Task task = tasks.get(Integer.parseInt(input[1]) - 1);
+            tasks.remove(task);
+            System.out.println("     Noted. I've removed this task: ");
+            System.out.printf("       %s\n", task);
+            System.out.printf("     Now you have %d tasks in the list.\n", tasks.size());
+        } catch (Exception e) {
+            throw new DukeException("Oops! Please enter a valid task number.");
+        }
+    }
+
     private static void handleToDo(String line) throws DukeException {
         String[] input = line.split(" ");
         String description = "";
@@ -122,6 +135,9 @@ public class Duke {
                 switch (input[0]) {
                     case "done":
                         handleDone(line);
+                        break;
+                    case "delete":
+                        handleDelete(line);
                         break;
                     case "todo":
                         handleToDo(line);

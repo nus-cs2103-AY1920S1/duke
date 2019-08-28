@@ -1,28 +1,48 @@
 import java.util.Scanner;
 
+/**
+ * Class to handle interfacing with the user
+ */
 public class Ui {
     // Strings that Duke will output
-    public static final String LONG_LINE = "____________________________________________________________";
-    public static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final String BYE_STR = "Bye. Hope to see you again soon!";
-    public static final String LIST_STR = "Here are the tasks in your list:";
-    public static final String DONE_STR = "Nice! I've marked this task as done:";
+    private static final String LONG_LINE = "____________________________________________________________";
+    private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String BYE_STR = "Bye. Hope to see you again soon!";
+    private static final String LIST_STR = "Here are the tasks in your list:";
+    private static final String DONE_STR = "Nice! I've marked this task as done:";
 
     private Scanner input = new Scanner(System.in);
 
+    /**
+     * Prints a goodbye message to the user, and closes off the input Scanner
+     */
     public void printGoodbye() {
         printWithLongLines(BYE_STR);
         input.close();
     }
 
+    /**
+     * Prints a greeting to the user
+     */
     public void printGreeting() {
         printWithLongLines(GREETING);
     }
 
+    /**
+     * Reads the next line of input from the user
+     * 
+     * @return The next line of input from the user
+     */
     public String nextLine() {
         return input.nextLine();
     }
 
+    /**
+     * Acknowledges the user's deletion of a Task
+     * 
+     * @param deletedTask The Task that was deleted
+     * @param listSize The new size of the TaskList
+     */
     public void ackDeletion(Task deletedTask, int listSize) {
         printWithLongLines(
             "Noted. I've removed this task:\n"
@@ -33,6 +53,11 @@ public class Ui {
         );
     }
 
+    /**
+     * Acknowledges the user's completion of a Task
+     * 
+     * @param doneTask The Task that was done
+     */
     public void ackDone(Task doneTask) {
         printWithLongLines(
             DONE_STR
@@ -41,6 +66,12 @@ public class Ui {
         );
     }
 
+    /**
+     * Acknowledge the addition of a Task
+     * 
+     * @param newTask The Task that was newly added
+     * @param listSize The new size of the TaskList
+     */
     public void ackAddition(Task newTask, int listSize) {
         printWithLongLines(
             "Got it. I've added this task:\n"
@@ -51,6 +82,11 @@ public class Ui {
         );
     }
 
+    /**
+     * Print the provided TaskList to the user
+     * 
+     * @param taskList The TaskList to be printed
+     */
     public void printList(TaskList taskList) {
         String wholeList = LIST_STR + "\n";
         
@@ -67,10 +103,20 @@ public class Ui {
         printWithLongLines(wholeList);
     }
 
+    /**
+     * Advise the user of the required date format.
+     * 
+     * @param format The expected date format
+     */
     public void adviseDateFormat(String format) {
         printWithLongLines("Required date format: " + format);
     }
 
+    /**
+     * Display an Exception's message to the user.
+     * 
+     * @param e The Exception to be displayed
+     */
     public void printException(Exception e) {
         printWithLongLines(e.getMessage());
     }

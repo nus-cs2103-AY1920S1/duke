@@ -18,14 +18,18 @@ public class Storage {
         fw.close();
     }
 
-    public ArrayList<Task> loadPreviousTasks() throws IOException, DukeException {
+    public ArrayList<Task> loadPreviousTasks() throws DukeException {
         ArrayList<Task> loadList = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(file));
 
-        String str = "";
-        while ((str = br.readLine()) != null) {
-            Task task = txtProcessor(str);
-            loadList.add(task);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String str = "";
+            while ((str = br.readLine()) != null) {
+                Task task = txtProcessor(str);
+                loadList.add(task);
+            }
+        } catch (IOException e) {
+            throw new DukeException("File cannot be accessed");
         }
 
         return loadList;
@@ -39,7 +43,7 @@ public class Storage {
         boolean isDone = done.equals("+");
         String desc = line.substring(7);
 
-        Task newTask = new Task("mummy");
+        Task newTask = new Task("dummy");
 
         if (type.equals("T")) {
             newTask = new ToDo(desc);

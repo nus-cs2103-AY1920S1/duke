@@ -1,4 +1,6 @@
 [T][ ] poop
 [D][+] wipe ass (by: 2pm)
-[T][ ] spray perfume
 [D][+] read book (by: 02 Dec 2018, 18:00 PM)
+[T][ ] charge phone
+[D][+] unplug phone (by: 01 Sep 2018, 21:00 PM)
+[E][ ] sell phone (at: 2pm)

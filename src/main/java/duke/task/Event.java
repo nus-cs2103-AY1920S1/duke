@@ -15,7 +15,7 @@ public class Event extends Task {
     }
 
     private String getAtString() {
-        return Task.dateTimeFormatter.format(this.at);
+        return Task.DATE_TIME_FORMATTER.format(this.at);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Event extends Task {
             this.getDescription(),
             this.getAtString()
         };
-        return String.join(Todo.storageStringSeparator, tokens);
+        return String.join(Todo.STORAGE_STRING_SEPARATOR, tokens);
     }
 }

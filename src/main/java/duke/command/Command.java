@@ -59,7 +59,7 @@ public class Command {
 
     private LocalDateTime parseDateTime(final String dateTime) throws DukeException {
         try {
-            return LocalDateTime.parse(dateTime, Task.dateTimeFormatter);
+            return LocalDateTime.parse(dateTime, Task.DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new DukeException("Failed to parse date time: " + e.getMessage());
         }

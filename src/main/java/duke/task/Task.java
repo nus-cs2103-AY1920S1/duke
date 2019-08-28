@@ -3,10 +3,10 @@ package duke.task;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
-    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    static final String STORAGE_STRING_SEPARATOR = " | ";
     private String description;
     private boolean isDone;
-    static final String storageStringSeparator = " | ";
 
     Task(final String description, final boolean isDone) {
         this.description = description;

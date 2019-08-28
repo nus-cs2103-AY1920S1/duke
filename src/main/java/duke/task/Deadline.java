@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     private String getByString() {
-        return Task.dateTimeFormatter.format(this.by);
+        return Task.DATE_TIME_FORMATTER.format(this.by);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Deadline extends Task {
             this.getDescription(),
             this.getByString()
         };
-        return String.join(Todo.storageStringSeparator, tokens);
+        return String.join(Todo.STORAGE_STRING_SEPARATOR, tokens);
     }
 }

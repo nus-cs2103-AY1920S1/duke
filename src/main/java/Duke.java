@@ -43,6 +43,9 @@ public class Duke {
                             tasks.deleteTask(parser.getIndex());
                             storage.updateFile(tasks);
                             break;
+                        case "find":
+                            tasks.findTask(parser.getKeyword());
+                            break;
                         case "todo":
                             tasks.addTodo(parser.getActivityNameWithoutTime(), false);
                             storage.updateFile(tasks);

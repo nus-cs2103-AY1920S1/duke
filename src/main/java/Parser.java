@@ -16,6 +16,10 @@ public class Parser {
         return Integer.parseInt(part[1]);
     }
 
+    public String getKeyword() {
+        return fullCommand.substring(fullCommand.indexOf(" ")+1);
+    }
+
     public String getActivityNameWithoutTime() {
         return fullCommand.substring(fullCommand.indexOf(" ")+1);
     }
@@ -42,6 +46,11 @@ public class Parser {
                 if (part.length < 2) {
                     throw new DukeException("☹ OOPS!!! You need to enter an index.");
                 }
+        case "find":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! You need to enter a word "
+                        + "for search.");
+            }
             case "todo":
                 // check task description.
                 if (part.length < 2) {

@@ -20,6 +20,17 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int i = 0;
+        for (Task task : list) {
+            if (task.getTaskName().contains(keyword)) {
+                System.out.println((i+1) + ". " + task);
+                i++;
+            }
+        }
+    }
+
     public void addAndPrint(Task newTask) {
         list.add(newTask);
         System.out.println("Got it. I've added this task: \n  " +

@@ -1,6 +1,7 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 public class Event extends Task {
@@ -19,7 +20,6 @@ public class Event extends Task {
             return "[E][✗]" + taskName + "(at:" + time + ")";
         }
     }
-
 
     public Date convertDateTime() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");

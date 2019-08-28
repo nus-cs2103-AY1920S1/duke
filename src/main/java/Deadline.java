@@ -1,6 +1,7 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 public class Deadline extends Task {
@@ -19,7 +20,6 @@ public class Deadline extends Task {
             return "[D][✗]" + taskName + "(by:" + deadline + ")";
         }
     }
-
 
     public Date convertDateTime() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");

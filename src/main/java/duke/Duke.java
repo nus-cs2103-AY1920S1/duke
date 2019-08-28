@@ -9,7 +9,8 @@ public class Duke {
         + "| |_| | |_| |   <  __/\n"
         + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String separator = "-".repeat(60);
-    private static TaskList taskList = new TaskList();
+    private static Storage storage;
+    private static TaskList taskList;
 
     private static void echo(final String message) {
         System.out.println(separator);
@@ -22,6 +23,14 @@ public class Duke {
         echo("Here are the tasks in your list:\n" + taskList.toString());
     }
 
+    private static void writeToDisks() {
+        try {
+            storage.writeTasks(taskList);
+        } catch (DukeException e) {
+            System.err.println("Warning: " + e.getMessage());
+        }
+    }
+
     private static void handleAddTask(final Task task) throws DukeException {
         if (taskList.addTask(task)) {
             echo("Got it. I've added this task:\n"
@@ -30,6 +39,7 @@ public class Duke {
         } else {
             throw new DukeException("Error: Failed to add task");
         }
+        writeToDisks();
     }
 
     private static void handleTodo(final String arguments) throws DukeException {
@@ -75,6 +85,7 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Error: Task does not exist");
         }
+        writeToDisks();
     }
 
     private static void handleDelete(final String arguments) throws DukeException {
@@ -89,13 +100,20 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Error: Task does not exist");
         }
+        writeToDisks();
     }
 
     public static void main(String[] args) {
         echo("Hello from\n" + logo + "What can I do for you?");
 
-        Scanner scanner = new Scanner(System.in);
+        storage = new Storage("duke.txt");
+        try {
+            taskList = storage.loadTasks();
+        } catch (DukeException e) {
+            System.err.println("Warning: Failed to load tasks from disk. " + e.getMessage());
+        }
 
+        Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine().trim();
             // split has either 1 or 2 elements

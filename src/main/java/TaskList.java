@@ -45,7 +45,7 @@ public class TaskList {
     public void addTask(Task current) {
 
         this.list.add(current);
-        if(list.size() >1) {
+        if (list.size() > 1) {
             System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
                     "Now you have " + list.size() + " tasks in the list. ");
         } else {
@@ -64,7 +64,7 @@ public class TaskList {
 
         Task deleted = list.get(current);
         list.remove(current);
-        if(list.size() > 1) {
+        if (list.size() > 1) {
             System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
                     "Now you have " + list.size() + " tasks in the list. ");
         } else {
@@ -94,7 +94,7 @@ public class TaskList {
     public void printList() {
         int n = 1;
 
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
 
             System.out.println("List is empty");
 
@@ -116,10 +116,10 @@ public class TaskList {
      */
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> list = new ArrayList<>();
-        for(Task current : this.list) {
+        for (Task current : this.list) {
             String taskInString = current.description;
 
-            if(taskInString.toLowerCase().contains(keyword.toLowerCase())){
+            if (taskInString.toLowerCase().contains(keyword.toLowerCase())) {
                 list.add(current);
             }
         }

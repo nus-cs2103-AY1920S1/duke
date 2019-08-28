@@ -24,11 +24,13 @@ public class ToDo extends Task {
     public ToDo(int intDone, String description) {
         super(intDone, description);
         this.identity = 'T';
-        if(intDone==1) {
+
+        if (intDone == 1) {
             this.isDone = true;
         } else {
             this.isDone = false;
         }
+
     }
 
     /**

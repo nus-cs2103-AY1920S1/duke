@@ -31,7 +31,7 @@ public class Event extends Task {
         super(intDone, description);
         this.identity = 'E';
         this.dateAndTime = dateAndTime;
-        if(intDone==1) {
+        if (intDone == 1) {
             this.isDone = true;
         } else {
             this.isDone = false;

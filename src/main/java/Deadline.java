@@ -28,7 +28,7 @@ public class Deadline extends Task {
         super(intDone, description);
         this.identity = 'D';
         this.date = date;
-        if(intDone==1) {
+        if (intDone == 1) {
             this.isDone = true;
         } else {
             this.isDone = false;

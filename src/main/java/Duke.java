@@ -1,14 +1,11 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents Duke, a personal assistant ChatBot that helps a person to keep track of various things.
  */
 public class Duke {
-
-    public static Scanner sc = new Scanner(System.in);
 
     private TaskList taskList;
     private UI ui;
@@ -49,16 +46,15 @@ public class Duke {
      * @throws IOException if there is an issue reading the .txt file to recover the previous list.
      */
     public void run() throws IOException {
-
         this.ui.welcome();
         String command = ui.promptEntry();
         ui.handleCommand(command, this.taskList);
         //after all commands are done, we will save the updated list into the txt file.
         ArrayList<Task> updated = this.taskList.getList();
 
-        if(!updated.isEmpty()) {
+        if (!updated.isEmpty()) {
             for (Task task : updated) {
-                if(storage.isFileEmpty()) {
+                if (storage.isFileEmpty()) {
                         storage.writeToFile(task.toTextFile());
                 } else {
                     storage.appendToFile(task.toTextFile());

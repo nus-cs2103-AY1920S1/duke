@@ -27,7 +27,7 @@ public abstract class Task {
      */
     public Task(int intDone, String description) {
         this.description = description;
-        if(intDone==1) {
+        if (intDone == 1) {
             this.isDone = true;
         } else {
             this.isDone = false;
@@ -40,7 +40,7 @@ public abstract class Task {
      * @return the icon, which is a string value.
      */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return isDone ? "[\u2713]" : "[\u2718]"; //return tick or X symbols
     }
 
     /**

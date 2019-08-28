@@ -9,6 +9,8 @@ public class DukeException extends Exception {
      * @param errorMessage to be printed when an error occurs.
      */
     public DukeException(String errorMessage) {
+
         super(errorMessage);
+
     }
 }

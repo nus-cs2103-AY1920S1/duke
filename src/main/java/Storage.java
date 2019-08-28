@@ -30,12 +30,12 @@ public class Storage {
         File currentFile = new File(this.file);
         Scanner sc = new Scanner(currentFile);
         ArrayList<Task> list = new ArrayList<>();
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             String current = sc.nextLine();
             char type = current.charAt(0);
             int isDone = Integer.parseInt("" + current.charAt(4));
             String des = current.substring(8).trim();
-            switch(type) {
+            switch (type) {
                 case 'T':
                     ToDo newT = new ToDo(isDone, des);
                     list.add(newT);

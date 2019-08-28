@@ -99,14 +99,13 @@ public class UI {
 
             try {
                 switch (command) {
-
                     case "list":
                         taskList.printList();
                         break;
 
                     case "todo":
                         String task = sc.nextLine().trim();
-                        if(!task.isEmpty()) {
+                        if (!task.isEmpty()) {
                             ToDo newTodo = new ToDo(task);
                             taskList.addTask(newTodo);
                         } else {
@@ -117,13 +116,13 @@ public class UI {
                     case "deadline":
                         String wholeTask = sc.nextLine().trim();
                         int index = wholeTask.indexOf('/');
-                        if(index > 0) {
+                        if (index > 0) {
                             //what the task is
                             String description = wholeTask.substring(0, index).trim();
                             //when it is due by
                             String date = wholeTask.substring(index + 4).trim();
                             String f = getFormattedDate(date);
-                            if(description.isEmpty() || date.isEmpty()) {
+                            if (description.isEmpty() || date.isEmpty()) {
                                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty." +
                                         " It must be in the format <description> /by <date/time> ");
                             } else {
@@ -139,13 +138,13 @@ public class UI {
                     case "event":
                         String eventAndDate = sc.nextLine();
                         int index2 = eventAndDate.indexOf('/');
-                        if(index2 > 0) {
+                        if (index2 > 0) {
                             //what the task is
                             String eventDescr = eventAndDate.substring(0, index2).trim();
                             //when it is due by
                             String dateAndTime = eventAndDate.substring(index2 + 4).trim();
                             String f1 = getFormattedDate(dateAndTime);
-                            if(eventDescr.isEmpty() || dateAndTime.isEmpty()) {
+                            if (eventDescr.isEmpty() || dateAndTime.isEmpty()) {
                                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty." +
                                         " It must be in the format <description> /at <start and end of specific time> ");
                             } else {
@@ -173,7 +172,7 @@ public class UI {
                         ArrayList<Task> found = taskList.find(keyword);
                         int n = 1;
 
-                        if(found.isEmpty()){
+                        if (found.isEmpty()){
                             System.out.println("None found");
                         } else {
                             for (Task item : found) {
@@ -185,15 +184,12 @@ public class UI {
 
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
                 }
 
             } catch (DukeException e) {
                 System.out.println(e);
             }
-
             command = promptEntry();
-
         }
         //code exits here when the user enters the command "bye"
     }

@@ -1,3 +1,7 @@
+package duke.component;
+
+import duke.task.Task;
+
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 

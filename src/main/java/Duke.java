@@ -1,3 +1,10 @@
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 

@@ -1,3 +1,2 @@
-T | 1 | readbook
 E | 1 | meeting | 12/12/2020 1500
 E | 1 | party blah blah blah | 13/12/3012 1400

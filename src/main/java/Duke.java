@@ -1,13 +1,13 @@
 public class Duke {
     public dukeBot bot;
 
-    public void run() {
+    public void run() throws EmptyListException {
         // initialize a duke bot to take input and perform actions
         bot = new dukeBot();
         bot.start();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyListException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

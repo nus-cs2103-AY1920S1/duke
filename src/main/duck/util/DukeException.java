@@ -1,8 +1,9 @@
 package duck.util;
 
+/**
+ * This is a customised Exception that belongs to the Duke project.
+ */
 public class DukeException extends Exception {
-
-    private String errorMessage;
 
     public DukeException (String errorMessage) {
         super(errorMessage);

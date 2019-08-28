@@ -6,9 +6,10 @@ import duck.task.Task;
 import duck.task.Todo;
 
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
 
+/**
+ * This is a class that holds static strings and <code>Task</code> objects for testing purpose.
+ */
 public class ObjectsForTest {
     public static final String todoTaskInfo = "T|false|Sleep early";
     public static final String deadlineTaskInfo = "D|false|Sleep|2020-05-31T11:00";

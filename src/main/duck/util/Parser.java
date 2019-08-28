@@ -7,10 +7,43 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This is a class that parsers user's commands(strings) to <code>LocalDateTime</code> objects and executable
+ * <code>Command</code> objects.
+ */
 public class Parser {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
 
+    /**
+     * Parses a given string in a certain format to a <code>LocalDateTime</code> object.
+     * The string must be in the format of "day/month/year hh:mm" to be possibly parsed, for example:
+     * "31/05/2000 15:00".
+     *
+     * @param info                     a string to be parsed into a <code>LocalDateTime</code> object
+     * @return                         a <code>LocalDateTime</code> object corresponds to the  date time information
+     * @throws DateTimeParseException  If the entered string is not in the format of "day/month/year hh:mm"
+     */
+    public static LocalDateTime parseDateTime(String info) throws DateTimeParseException {
+        return LocalDateTime.parse(info,formatter);
+    }
+
+    /**
+     * Parses the user's commands, which are plain strings, to <code>Command</code> objects.
+     * White spaces are allowed for between and around commands and following details. They are generally ignores
+     * but will be included in the description for <code>Task</code> objects. Except <code>ListCommand</code> and
+     * <code>ExitCommand</code>, other commands require addition details. For <code>DoneCommand</code> and
+     * <code>DeleteCommand</code>, a number about the target task should be specified. For <code>AddCommand</code>,
+     * depends on the type of the task, additional information should be provided in a certain format: (1) In order
+     * to add <code>Todo</code> task, description part is needed; (2) In order to add <code>Deadline</code> task,
+     * description and due date time are needed, and these two parts are separated by "/by"; (3) In order to add
+     * <code>Event</code> task, description and duration are needed, and these two parts are separated by "/at".
+     *
+     * @param info             a string containing the type of <code>Command</code> and additional details
+     * @return                 a <code>Command</code> object that obtains necessary details to execute
+     * @throws DukeException   If the given string cannot fit in existing commands, or lacks necessary details, or
+     *                         provides date and time in invalid format
+     */
     public static Command parseCommand(String info) throws DukeException{
 
         String[] infos = info.trim().split("\\s+", 2);
@@ -45,7 +78,7 @@ public class Parser {
                     throw new DukeException ("☹ OOPS!!! The description of a deadline is not enough.");
                 }
                 try {
-                    String[] details = infos[1].split(" /by ");
+                    String[] details = infos[1].split("\\s+/by\\s+");
                     LocalDateTime due = Parser.parseDateTime(details[1]);
                     return new AddCommand("deadline", details[0], due);
                 } catch (DateTimeParseException e) {
@@ -56,7 +89,7 @@ public class Parser {
                     throw new DukeException ("☹ OOPS!!! The description of a event is not enough.");
                 }
                 try {
-                    String[] details = infos[1].split(" /at ");
+                    String[] details = infos[1].split("\\s+/at\\s+");
                     String[] times = details[1].split("-");
                     LocalDateTime startDateTime = Parser.parseDateTime(times[0]);
                     LocalTime time = LocalTime.parse(times[1]);
@@ -70,9 +103,5 @@ public class Parser {
 
         }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
-
-    public static LocalDateTime parseDateTime(String info) throws DateTimeParseException {
-        return LocalDateTime.parse(info,formatter);
     }
 }

@@ -32,6 +32,8 @@ public class Storage {
     }
 
     public void saveList(TaskList tasks) {
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

@@ -1,5 +1,5 @@
 /**
- * ListCommand extends Command
+ * ListCommand extends Command.
  */
 public class ListCommand extends Command {
     @Override

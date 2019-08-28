@@ -10,7 +10,7 @@ public class DukeTest {
 
 
     @Test
-    public void TaskListTest() {
+    public void taskListTest() {
         taskList = new TaskList();
         Task task = new Todo("task1");
         taskList.addTask(task);
@@ -20,7 +20,7 @@ public class DukeTest {
     }
 
     @Test
-    public void ExitTest() {
+    public void exitTest() {
         Command c = new ExitCommand();
         assertEquals(true, c.isExit());
     }

@@ -1,5 +1,5 @@
 /**
- * InvalidNumberException
+ * InvalidNumberException.
  */
 public class InvalidNumberException extends DukeException {
     public InvalidNumberException(String message) {

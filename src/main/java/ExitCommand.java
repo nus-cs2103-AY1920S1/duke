@@ -1,5 +1,5 @@
 /**
- * ExitCommand extends Command
+ * ExitCommand extends Command.
  */
 public class ExitCommand extends Command {
     String message;

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TaskList class
+ * TaskList class.
  */
 public class TaskList {
     private List<Task> taskList;
@@ -19,6 +19,9 @@ public class TaskList {
         taskList.add(task);
     }
 
+    /**
+     * deleteTask(int index).
+     */
     public void deleteTask(int index) throws DukeException {
         if (index < 0 || index >= taskList.size()) {
             throw new DukeException("Task does not exist");
@@ -26,6 +29,9 @@ public class TaskList {
         taskList.remove(index);
     }
 
+    /**
+     * getTask(int index).
+     */
     public Task getTask(int index) throws DukeException {
         if (index < 0 || index >= taskList.size()) {
             throw new DukeException("Task does not exist");

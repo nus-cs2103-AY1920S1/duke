@@ -1,5 +1,5 @@
 /**
- * Duke class
+ * Duke class.
  */
 public class Duke {
     private Storage storage;
@@ -17,6 +17,9 @@ public class Duke {
         }
     }
 
+    /**
+     * run().
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

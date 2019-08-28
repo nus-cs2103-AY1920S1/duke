@@ -1,18 +1,24 @@
 import java.time.LocalDateTime;
 
 /**
- * Event extends Task
+ * Event extends Task.
  */
 public class Event extends Task {
 
     protected String at;
 
+    /**
+     * Event extends Task.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at.trim();
         this.pattern = LocalDateTime.parse(at.trim(), dateTimeFormatter);
     }
 
+    /**
+     * Event extends Task.
+     */
     public Event(String description, String at, String isDone) {
         super(description, isDone);
         this.pattern = LocalDateTime.parse(at.trim(), dateTimeFormatter);

@@ -1,8 +1,10 @@
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.util.Optional;
 import java.util.Scanner;
 
 public class Duke {
-    /* Globals */
     private static TaskList taskList;
     private static Parser parser;
 

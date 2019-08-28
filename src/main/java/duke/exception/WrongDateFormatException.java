@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class WrongDateFormatException extends UnknownCommandException {
     private String date;
 

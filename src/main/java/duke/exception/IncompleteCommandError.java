@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class IncompleteCommandError extends UnknownCommandException {
     private String message;
     private String taskName;

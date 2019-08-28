@@ -1,8 +1,14 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public abstract class Command {
     private Task task;
+
     /**
      * Constructor
-     * @param task - Task given to execute command
+     * @param task - duke.task.Task given to execute command
      */
     public Command(Task task) { this.task = task; }
 

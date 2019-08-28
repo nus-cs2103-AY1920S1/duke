@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,13 +40,12 @@ public class TaskList {
     public void delete(int idx) throws IndexOutOfBoundsException {
         Task task = this.list.get(idx);
         this.list.remove(idx);
-        UI.printSuccessDeleteTaskMessage(task, this.size());
     }
 
     /**
      * Returns task at index idx
      * @param idx - index of task
-     * @return Task at index idx
+     * @return duke.task.Task at index idx
      */
     public Task get(int idx) {
         return this.list.get(idx);

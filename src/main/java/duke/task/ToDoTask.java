@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 public class ToDoTask extends Task {
     private static final String DEFAULT_TODO_ICON = "[T]";
     private static final String TODO_TASK_TYPE = "Todo";

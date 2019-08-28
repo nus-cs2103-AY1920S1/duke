@@ -1,3 +1,7 @@
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskList;
+import duke.task.ToDoTask;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

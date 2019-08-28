@@ -1,3 +1,5 @@
+package duke.task;
+
 public interface ITask {
     String getName();
     void markDone();

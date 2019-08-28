@@ -19,6 +19,12 @@ public class Parser {
             return new MarkAsDoneCommand(Integer.parseInt(fullCommand.substring(5)) - 1);
         } else if (fullCommand.startsWith("delete ")) {
             return new DeleteTaskCommand(Integer.parseInt(fullCommand.substring(7)) - 1);
+        } else if (fullCommand.startsWith("find")) {
+            if (fullCommand.equals("find") || fullCommand.equals("find ")) {
+                throw new EmptyDescriptionException("☹ OOPS!!! The description of a find command cannot be empty.");
+            } else {
+                return new FindTaskCommand(fullCommand.substring(5));
+            }
         } else {
             try {
                 Task newTask;

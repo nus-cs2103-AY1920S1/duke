@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public abstract class Task {
     protected String description;
@@ -34,17 +35,22 @@ public abstract class Task {
      * @param input Input string
      * @throws DukeException
      */
-    static public Task deserialize(String input) throws DukeException{
-        String[] parsedLine = input.split(" \\| ");
-        switch (parsedLine[0]) {
-        case "T":
-            return new Todo(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1);
-        case "D":
-            return new Deadline(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, LocalDateTime.parse(parsedLine[3]));
-        case "E":
-            return new Event(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, LocalDateTime.parse(parsedLine[3]));
-        default:
-            return null;
+    static public Task deserialize(String input) throws DukeException {
+        try {
+            String[] parsedLine = input.split(" \\| ");
+            switch (parsedLine[0]) {
+            case "T":
+                return new Todo(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1);
+            case "D":
+                return new Deadline(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, LocalDateTime.parse(parsedLine[3]));
+            case "E":
+                return new Event(parsedLine[2], Integer.parseInt(parsedLine[1]) == 1, LocalDateTime.parse(parsedLine[3]));
+            default:
+                return null;
+            }
+        }
+        catch (DateTimeParseException e) {
+            throw new DukeException("Invalid File Format");
         }
     }
 

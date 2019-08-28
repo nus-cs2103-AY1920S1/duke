@@ -1,4 +1,4 @@
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     int indexToDelete;
 
     /**
@@ -17,9 +17,8 @@ public class DeleteCommand extends Command{
      * @param ui UI used to interact
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, UI ui) throws IndexOutOfBoundsException{
+    public void execute(Storage storage, TaskList tasks, UI ui) throws IndexOutOfBoundsException {
         ui.echoDeletedTask(tasks.deleteTask(indexToDelete), tasks.getSize());
         storage.writeTaskListToFile(tasks);
     }
-
 }

@@ -22,5 +22,4 @@ public class AddCommand extends Command{
         storage.appendTaskToFile(taskToAdd);
         ui.echoAddedTask(taskToAdd, tasks.getSize());
     }
-
 }

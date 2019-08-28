@@ -1,4 +1,4 @@
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     int indexToComplete;
 
     /**
@@ -20,6 +20,5 @@ public class DoneCommand extends Command{
     public void execute(Storage storage, TaskList tasks, UI ui) throws IndexOutOfBoundsException {
         ui.echoCompletedTask(tasks.completeTask(indexToComplete));
         storage.writeTaskListToFile(tasks);
-
     }
 }

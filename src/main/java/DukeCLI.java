@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class DukeCLI {
     private TaskList taskList;
@@ -10,26 +11,29 @@ public class DukeCLI {
      * Main function for Duke CLI application.
      */
     public void run() {
-        // Instantiating fields
         ui = new UI();
         taskList = new TaskList();
 
-        // Try to load data
+        /** Try to load data */
         try {
             taskList.loadData(storage.getTaskList());
             ui.echoMessage("    *** EXISTING FILE LOADED ***");
         } catch (FileNotFoundException e) {
             ui.echoMessage("    *** NO EXISTING FILE FOUND ***");
+            try {
+                storage.createFile();
+            } catch (IOException e2) {
+                ui.echoException(e2);
+            }
         } catch (DukeException e) {
             ui.echoException(e);
         }
 
-        // Greet User
+        /** Greet User */
         ui.greet();
 
-        // User input
+        /** Interaction with User */
         boolean isByeBye = false;
-        // Try is inside while loop so that user can continue to enter commands despite invalid commands
         while (!isByeBye) {
             try {
                 String inputCommand = ui.readCommand(); // Initial Input

@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,9 +14,8 @@ public class TaskList {
     /***
      * Load data from input list of Tasks.
      * @param loadedTaskList Starting list of Tasks
-     * @throws FileNotFoundException
      */
-    public void loadData(List<Task> loadedTaskList) throws FileNotFoundException{
+    public void loadData(List<Task> loadedTaskList) {
         taskList = loadedTaskList;
     }
 
@@ -40,7 +38,7 @@ public class TaskList {
      * @param index Index of Task to be retrieved
      * @throws IndexOutOfBoundsException
      */
-    public Task getTask(int index) throws IndexOutOfBoundsException{
+    public Task getTask(int index) throws IndexOutOfBoundsException {
         return taskList.get(index);
     }
 
@@ -57,7 +55,7 @@ public class TaskList {
      * @param entryNumber Entry number of Task to be marked as complete (Starting from 1 onwards)
      * @throws IndexOutOfBoundsException
      */
-    public Task completeTask(int entryNumber) throws IndexOutOfBoundsException{
+    public Task completeTask(int entryNumber) throws IndexOutOfBoundsException {
         Task taskToComplete = this.getTask(entryNumber - 1);
         taskToComplete.setDone();
         return taskToComplete;
@@ -68,7 +66,7 @@ public class TaskList {
      * @param entryNumber Entry number of Task to be deleted (Starting from 1 onwards)
      * @throws IndexOutOfBoundsException
      */
-    public Task deleteTask(int entryNumber) throws IndexOutOfBoundsException{
+    public Task deleteTask(int entryNumber) throws IndexOutOfBoundsException {
         return taskList.remove(entryNumber - 1);
     }
 }

@@ -6,6 +6,10 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    /**
+     * Formats the string to how it should be saved in the .txt file
+     * @return String to save in the .txt file
+     */
     @Override
     public String storageString() {
         return "D/" + status + "/" + description + "/" + this.by;

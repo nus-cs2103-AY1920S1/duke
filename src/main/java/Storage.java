@@ -22,6 +22,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads tasks from the .txt file
+     * @param commands
+     * @return the updated array list of tasks
+     */
     public ArrayList<Task> load(ArrayList<Task> commands) {
         try {
             FileReader fr = new FileReader(this.filePath);
@@ -63,6 +68,10 @@ public class Storage {
         return commands;
     }
 
+    /**
+     * Saves the lastest task in the .txt file
+     * @param task t
+     */
     public void save(Task t) {
         try {
             this.fw.append(t.storageString() + System.lineSeparator());
@@ -93,6 +102,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Changes the status of task from not done to done
+     * @param t
+     * @param index
+     */
     public void done(Task t, int index) {
         try {
             FileReader fr = new FileReader(filePath);

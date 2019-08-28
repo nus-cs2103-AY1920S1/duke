@@ -15,7 +15,7 @@ public class Event extends Task {
     /** String representing date or time at which event is slated to occur */
     private String dateTime;
 
-    /** Date / Time converted to Date format */
+    /** Date / Time converted to the Date format */
     private Date when;
 
     /**

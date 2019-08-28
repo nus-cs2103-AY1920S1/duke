@@ -12,10 +12,6 @@ public class Task {
         done = true;
     }
 
-    public String getTaskName() {
-        return taskName;
-    }
-
     public String toString() {
         if (done) {
             return "[✓]" + taskName;

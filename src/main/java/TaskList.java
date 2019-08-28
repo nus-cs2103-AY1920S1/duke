@@ -24,7 +24,7 @@ public class TaskList {
         System.out.println("Here are the matching tasks in your list:");
         int i = 0;
         for (Task task : list) {
-            if (task.getTaskName().contains(keyword)) {
+            if (task.toString().contains(keyword)) {
                 System.out.println((i+1) + ". " + task);
                 i++;
             }

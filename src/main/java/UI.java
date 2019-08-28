@@ -85,6 +85,18 @@ public class UI {
                 "____________________________________________________________");
     }
 
+    public void printFind(TaskList findList) {
+        System.out.println("____________________________________________________________\n" +
+                "Here are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < findList.size(); i++) {
+            Task t = findList.get(i);
+            System.out.println(count + "." + t.toString());
+            count++;
+        }
+        System.out.println("____________________________________________________________\n");
+    }
+
     public void throwInputError(String taskType) throws DukeException {
         switch (taskType) {
         case "todo" :

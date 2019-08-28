@@ -35,6 +35,9 @@ public class Parser {
         case ("delete") :
             return InputType.DELETE;
 
+        case ("find") :
+            return InputType.FIND;
+
         default :
             return InputType.ERROR;
         }

@@ -7,13 +7,13 @@ public class Deadline extends Task {
     Date by;
     String deadLine;
 
-    public Deadline(String description, String deadLine){
+    public Deadline(String description, String deadLine) {
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             this.by = dateFormat.parse(deadLine);
             this.deadLine = deadLine;
-        } catch (Exception e){
+        } catch (Exception e) {
             this.deadLine = deadLine;
         }
     }

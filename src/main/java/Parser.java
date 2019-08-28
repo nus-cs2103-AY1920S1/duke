@@ -7,7 +7,7 @@ public class Parser {
 
     //Makes sense of user input to which command it corresponds to
     static Command parse(String command) throws DukeException {
-        if (command.equals("bye")){
+        if (command.equals("bye")) {
             return new ByeCommand(command);
         } else if (command.equals("list")) {
             return new ListCommand(command);

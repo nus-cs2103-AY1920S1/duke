@@ -1,10 +1,10 @@
 public class ListCommand extends Command {
 
-    ListCommand(String commandDesc){
+    ListCommand(String commandDesc) {
         super(commandDesc);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return false;
     }
 

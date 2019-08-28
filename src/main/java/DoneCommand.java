@@ -6,7 +6,7 @@ public class DoneCommand extends Command {
         super(commandDesc);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return false;
     }
 
@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
             int taskNumber = Integer.parseInt(commandDesc.substring(5).split(" ")[0]);
             //Check if task number is valid
             if (taskNumber > 0 && taskNumber <= tasks.taskList.size()) {
-                storage.editsFile(System.getProperty("user.dir"), tasks.taskList.get(taskNumber-1).stringForAppend());
+                storage.editsFile(System.getProperty("user.dir"), tasks.taskList.get(taskNumber - 1).stringForAppend());
                 tasks.taskList.get(taskNumber - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(tasks.taskList.get(taskNumber - 1));

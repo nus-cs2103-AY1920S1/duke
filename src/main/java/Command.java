@@ -3,7 +3,7 @@ import java.io.IOException;
 abstract class Command {
     String commandDesc;
 
-    Command(String commandDesc){
+    Command(String commandDesc) {
         this.commandDesc = commandDesc;
     }
 

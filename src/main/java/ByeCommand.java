@@ -1,10 +1,10 @@
 public class ByeCommand extends Command {
 
-    ByeCommand(String commandDesc){
+    ByeCommand(String commandDesc) {
         super(commandDesc);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return true;
     }
 

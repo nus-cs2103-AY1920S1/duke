@@ -1,7 +1,3 @@
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Scanner;
-
 //Assumption: reads word by word, additional arguments would be ignored
 // Accepts empty task
 public class Duke {
@@ -18,6 +14,7 @@ public class Duke {
             ui.printException(e.toString());
             taskList = new TaskList();
         }
+
     }
 
     public static void main(String[] args) {

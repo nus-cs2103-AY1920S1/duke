@@ -5,6 +5,9 @@ import myduke.core.Ui;
 import myduke.exception.DukeException;
 import myduke.task.TaskList;
 
+/**
+ * An Abstract class of commands that can be performed on a list of task.
+ */
 public abstract class Command {
 
     /**
@@ -18,7 +21,7 @@ public abstract class Command {
 
     /**
      * Indicates if the program should exit.
-     * @return {@code true} if exit condition is met, otherwise {@code false}.
+     * @return A boolean indicating whether the exit condition has been met.
      */
     public boolean shouldExit() {
         return false;

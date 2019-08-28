@@ -13,6 +13,9 @@ import myduke.task.TaskList;
 import myduke.task.ToDo;
 import myduke.type.TaskType;
 
+/**
+ * Adds a task to a list of tasks.
+ */
 public class AddTaskCommand extends Command {
     private final TaskType type;
     private final String arguments;

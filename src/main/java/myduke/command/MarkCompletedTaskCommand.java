@@ -6,6 +6,9 @@ import myduke.exception.DukeException;
 import myduke.task.Task;
 import myduke.task.TaskList;
 
+/**
+ * Marks a task as completed.
+ */
 public class MarkCompletedTaskCommand extends ModifyListCommand {
     public MarkCompletedTaskCommand(int itemIndex) throws DukeException {
         super(itemIndex);

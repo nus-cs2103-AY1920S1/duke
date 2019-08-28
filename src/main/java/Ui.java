@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Ui {
     // Class attributes
-    final static private String INDENT = "  ";
+    final static private String INDENT = "      ";
 
     // Object attributes
     private Scanner sc;
@@ -12,15 +12,16 @@ public class Ui {
     }
 
     public String getUserCommand() {
+        System.out.println(); // Injects a spacing for future user input
         return sc.nextLine();
     }
 
     public void displayMessage(String message) {
-        System.out.println(this.indentMessage(message));
+        System.out.print(this.indentMessage(message));
     }
 
     public void displayMessage(String message, int extraIndent) {
-        System.out.println(this.indentMessage(message, extraIndent));
+        System.out.print(this.indentMessage(message, extraIndent));
     }
 
     public void displaySingleLine(String message) {
@@ -28,7 +29,7 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________");
     }
 
     public String indentMessage(String s) {

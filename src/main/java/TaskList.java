@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import java.lang.IndexOutOfBoundsException;
 
-public class TaskList {
+public class TaskList implements Serializable {
     private List<Task> list; // List of all tasks
 
     public TaskList() {
@@ -13,6 +14,10 @@ public class TaskList {
 
     public TaskList(List<Task> list) {
         this.list = list;
+    }
+
+    public TaskList(TaskList taskList) {
+        this.list = taskList.list;
     }
 
     /*

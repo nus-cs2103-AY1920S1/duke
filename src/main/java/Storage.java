@@ -22,20 +22,17 @@ public class Storage {
         this.file = new File(filePath);
     }
 
-    /** Attempts to load a saved task list from the disk.
-     *
-     * @return List<Task> object successful, null otherwise
-     */
-    public List<Task> loadFromDisk() throws DukeException {
-        List<Task> list = null;
+    public TaskList loadFromDisk() throws DukeException {
+        TaskList list = null;
         boolean success = false;
         try {
             FileInputStream fis = new FileInputStream(this.file);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (List<Task>) ois.readObject();
+            list = (TaskList) ois.readObject();
             ois.close();
             success = true;
         } catch (IOException e) {
+            System.out.println(e);
             ; // no action needs to be done here, return value will indicate failure
         } catch (ClassNotFoundException e) {
             throw new DukeException("I'm sorry, I couldn't decipher the saved list.\n"
@@ -45,11 +42,7 @@ public class Storage {
         return list;
     }
 
-    /**
-     * Saves the current task list stored in Duke to the disk.
-     *
-     */
-    public void saveToDisk(List<Task> list) throws DukeException{
+    public void saveToDisk(TaskList list) throws DukeException{
         boolean success = false;
         try {
             this.file.getParentFile().mkdirs();

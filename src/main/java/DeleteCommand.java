@@ -7,8 +7,11 @@ public class DeleteCommand extends Command {
 
     public void execute() throws DukeException {
         Task task = this.taskList.delete(taskId);
-        task.markAsDone();
-        this.ui.displaySingleLine("Nice! I've marked this task as done:");
+        this.ui.displaySingleLine("Noted. I've removed this task:");
         this.ui.displayMessage(task.toString(), 2);
+        this.ui.displaySingleLine("\nNow you have "
+                + this.taskList.getSize()
+                + " task(s) in the list.");
+        this.storage.saveToDisk(this.taskList);
     }
 }

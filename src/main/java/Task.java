@@ -1,8 +1,6 @@
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.ListIterator;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Task {
     protected String description;
@@ -91,7 +89,7 @@ public class Task {
         return dateTime;
     }
 
-    public String toFileFormat() {
+    protected String toFileFormat() {
         return "";
     }
 

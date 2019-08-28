@@ -24,7 +24,7 @@ public class Parser {
         } else if (taskType.equals("done")) {
 
             int taskNum = Integer.parseInt(taskDesc);
-            Task task = taskList.getTask(taskNum - 1);
+            Task task = taskList.getTask(taskNum);
 
             if (task.isDone()) {
                 ui.showTaskAlreadyDone(task);
@@ -37,7 +37,7 @@ public class Parser {
 
             int taskNum = Integer.parseInt(taskDesc);
             Task task = taskList.getTask(taskNum);
-            taskList.deleteTask(taskNum - 1);
+            taskList.deleteTask(taskNum);
 
             ui.showTaskDeleted(task, taskList);
 

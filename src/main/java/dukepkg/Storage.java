@@ -7,11 +7,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage object used to save and retrieve task list data.
+ */
 public class Storage {
     private static String filePath;
+
+    /**
+     * Instantiates a new Storage object.
+     *
+     * @param filePath the file path used to store the task list data.
+     */
     public Storage(String filePath) {
         Storage.filePath = filePath;
     }
+
+    /**
+     * Load task list.
+     *
+     * @return the task list from history.
+     * @throws FileNotFoundException if the file does not exist.
+     */
     public static ArrayList<Task> loadList() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -35,7 +51,13 @@ public class Storage {
         return tasks;
     }
 
-   public static void saveList(ArrayList<Task> tasks) throws IOException {
+    /**
+     * Saves update of task list.
+     *
+     * @param tasks the updated task list
+     * @throws IOException if cannot write to the file.
+     */
+    public static void saveList(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath, false);
         for (Task t : tasks) {
             String s = (t instanceof Todo) ? "T # " : ((t instanceof Event) ? "E # " : "D # ");

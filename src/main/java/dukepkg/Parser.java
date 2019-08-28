@@ -9,9 +9,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * The Parser used to make sense of the command.
+ */
 @SuppressWarnings("ALL")
 public class Parser {
+    /**
+     * The Scanner used to take in inputs.
+     */
     Scanner input;
+
+    /**
+     * Instantiates a new Parser.
+     */
     public Parser() {
 
     }
@@ -49,6 +59,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Check whether the index used to modify existing tasks is out of range of the tasklist length.
+     *
+     * @param index      the index of the task in the list
+     * @param listLength the list length
+     * @throws FormatException if the index is out of range.
+     */
     public static void validateModifyExistingTaskCommandIndex(int index, int listLength) throws FormatException {
         if(index >= listLength || index < 0) {
             throw new FormatException("☹ OOPS!!! The task No. you refer to is non-existent. Try another one.");
@@ -61,6 +78,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Validate deadline format.
+     *
+     * @param arr the user input line.
+     * @throws FormatException thrown if deadline task format is wrong.
+     */
     public static void validateDeadlineFormat(String[] arr) throws FormatException {
         String[] ddl = arr[1].trim().split("/by", 2);
         if(ddl.length < 2) {
@@ -72,6 +95,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Standardize time for the deadline task.
+     *
+     * @param arr the user input line.
+     * @return the Deadline task created after time format is standardized.
+     */
     @SuppressWarnings("Annotator")
     public static Task standardizeDeadlineTime(String[] arr) {
         String[] ddl = arr[1].trim().split("/by", 2);
@@ -87,6 +116,12 @@ public class Parser {
         return t;
     }
 
+    /**
+     * Validate event format.
+     *
+     * @param arr the user input line.
+     * @throws FormatException if user input has wrong format for event tasks.
+     */
     public static void validateEventFormat(String[] arr) throws FormatException {
         String[] evt = arr[1].trim().split("/at", 2);
         if(evt.length < 2) {
@@ -98,6 +133,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Standardize event time task.
+     *
+     * @param arr the user input line
+     * @return the event task created after time format is standardized
+     */
     public static Task standardizeEventTime(String[] arr) {
         Task t;
         String[] evt = arr[1].trim().split("/at", 2);
@@ -111,6 +152,13 @@ public class Parser {
         return t;
     }
 
+    /**
+     * Check if the new task is a duplicate of one already saved in tasklist.
+     *
+     * @param tasks the tasks alreday saved in the tasklist.
+     * @param t     the new task that is to be added.
+     * @throws FormatException when the new task is a duplicate.
+     */
     public static void checkDuplicate(ArrayList<Task> tasks, Task t) throws FormatException {
         for(Task existing_t : tasks) {
             if(existing_t.equals(t)) {
@@ -120,6 +168,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Format time string from DD/MM/YYYY TTTT to word form, such as 9th of Sempterber, 2019, 6pm.
+     *
+     * @param input the previous time format
+     * @return the standardized time format
+     */
     static String formatTime(String input) {
         String[] date_time = input.split(" ");
         String[] date = date_time[0].split("/");
@@ -137,6 +191,13 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Construct user command object based on input line.
+     *
+     * @param command the user input line.
+     * @return the command constructed
+     * @throws DukeException if the user input has wrong format or is not even recognizeable.
+     */
     public Command constructCommand(String command) throws DukeException {
         String[] arr = parseCommand(command);
         String action = getAction(arr);
@@ -162,12 +223,72 @@ public class Parser {
             }
     }
 
+    /**
+     * The enum Month.
+     */
     public enum Month {
-        JANUARY(1), FEBRUARY(2), MARCH(3), APRIL(4), MAY(5), JUNE(6), JULY(7), AUGUST(8), SEPTEMBER(9), OCTOBER(10), NOVEMBER(11), DECEMBER(12);
+        /**
+         * January month.
+         */
+        JANUARY(1),
+        /**
+         * February month.
+         */
+        FEBRUARY(2),
+        /**
+         * March month.
+         */
+        MARCH(3),
+        /**
+         * April month.
+         */
+        APRIL(4),
+        /**
+         * May month.
+         */
+        MAY(5),
+        /**
+         * June month.
+         */
+        JUNE(6),
+        /**
+         * July month.
+         */
+        JULY(7),
+        /**
+         * August month.
+         */
+        AUGUST(8),
+        /**
+         * September month.
+         */
+        SEPTEMBER(9),
+        /**
+         * October month.
+         */
+        OCTOBER(10),
+        /**
+         * November month.
+         */
+        NOVEMBER(11),
+        /**
+         * December month.
+         */
+        DECEMBER(12);
+        /**
+         * The months expressed in integers.
+         */
         final int id;
         Month(int id) {
             this.id = id;
         }
+
+        /**
+         * Convert the expression format of month from int to string.
+         *
+         * @param iMonth the month expressed in integers.
+         * @return the month expressed in string.
+         */
         static String convertIntToString(int iMonth) {
             for(Month month : Month.values()) {
                 if(month.id == iMonth) {

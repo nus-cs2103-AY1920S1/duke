@@ -3,6 +3,9 @@ package dukepkg;
 import dukepkg.commands.Command;
 import dukepkg.exceptions.DukeException;
 
+/**
+ * Duke, the task bot class.
+ */
 public class Duke {
     private static Storage storage;
     private static Ui ui;
@@ -31,6 +34,12 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

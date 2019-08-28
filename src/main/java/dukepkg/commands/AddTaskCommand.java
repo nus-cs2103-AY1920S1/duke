@@ -5,8 +5,17 @@ import dukepkg.exceptions.FormatException;
 
 import java.io.IOException;
 
+/**
+ * The type of command used to add tasks.
+ */
 public class AddTaskCommand extends Command {
     private final Task t;
+
+    /**
+     * Instantiates a new Add task command.
+     *
+     * @param t the task that is going to be added by the command.
+     */
     AddTaskCommand(Task t) {
         this.t = t;
     }

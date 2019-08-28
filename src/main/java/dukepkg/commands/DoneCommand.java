@@ -5,8 +5,17 @@ import dukepkg.exceptions.FormatException;
 
 import java.io.IOException;
 
+/**
+ * The command used to mark a task as finished.
+ */
 public class DoneCommand extends Command {
     private final int index;
+
+    /**
+     * Instantiates a new Done command.
+     *
+     * @param index the index of the task that is going to be marked as finished in the tasklist.
+     */
     public DoneCommand(int index) {
         this.index = index;
     }

@@ -4,6 +4,9 @@ import dukepkg.Storage;
 import dukepkg.TaskList;
 import dukepkg.Ui;
 
+/**
+ * The command used to cast contents of the tasklist onto the screen.
+ */
 public class ListCommand extends Command {
 
     @Override

@@ -5,8 +5,17 @@ import dukepkg.exceptions.FormatException;
 
 import java.io.IOException;
 
+/**
+ * The command used to delete tasks.
+ */
 public class DeleteCommand extends Command {
     private final int index;
+
+    /**
+     * Instantiates a new Delete command.
+     *
+     * @param index the index of the task that is going to be deleted in the tasklist.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
@@ -14,8 +23,8 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
         Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
+        tasklist.deleteTask(index);
         Task t = TaskList.tasks.get(index);
-        TaskList.tasks.remove(index);
         ui.showTaskDeletedPrompt(t, TaskList.tasks.size());
         try {
             Storage.saveList(TaskList.tasks);

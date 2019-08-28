@@ -5,6 +5,9 @@ import dukepkg.Storage;
 import dukepkg.TaskList;
 import dukepkg.Ui;
 
+/**
+ * The command used to terminate the programme.
+ */
 public class ByeCommand extends Command {
 
     @Override

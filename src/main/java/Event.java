@@ -1,15 +1,21 @@
 public class Event extends Task {
-    private String date;
-    private String time;
+    protected String unformattedDateTime;
+    protected String formattedDateTime;
 
-    public Event(String desc, String date, String time) {
+    public Event(String desc, String dateTime) {
         super(desc);
-        this.date = date;
-        this.time = time;
+        unformattedDateTime = dateTime;
+
+        Parser parser = new Parser();
+        this.formattedDateTime = parser.convertStringToTime(dateTime, "event");
     }
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s %s)", getStatusIcon(), description, date, time);
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description, formattedDateTime);
+    }
+
+    public String toText() {
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description, unformattedDateTime);
     }
 }

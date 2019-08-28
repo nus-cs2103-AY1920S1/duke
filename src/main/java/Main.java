@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class Main {
     static String format(String command) {
-        return "    ____________________________________________________________\n" +
-                indent(command) +
-                "    ____________________________________________________________\n";
+        return "    ____________________________________________________________\n"
+                + indent(command)
+                + "    ____________________________________________________________\n";
     }
 
     static String indent(String command) {
@@ -23,27 +23,46 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        response("Hello! I'm Duke\n" +
-                "What can I do for you?");
-        String[] list = new String[100];
+
+        response("Hello! I'm Duke\n"
+                + "What can I do for you?");
+
+        Task[] list = new Task[100];
         int len = 0;
-        while(true) {
-            String in = sc.nextLine();
-            if(in.equals("bye")) {
+
+        Scanner sc = new Scanner(System.in);
+        boolean isRunning = true;
+        while(isRunning) {
+            String in = sc.next();
+            switch (in) {
+            case "bye":
                 response("Bye. Hope to see you again soon!");
+                isRunning = false;
                 break;
-            } else if(in.equals("list")) {
+            case "list":
                 StringBuffer listBuffer = new StringBuffer();
                 for(int i = 0; i < len; i++) {
-                    listBuffer.append((i + 1) + ". " + list[i] + "\n");
+                    listBuffer.append((i + 1)
+                            + "."
+                            + list[i].toString()
+                            + "\n");
                 }
                 response(listBuffer.toString());
-            } else {
-                response("added: " + in);
-                list[len] = in;
+                break;
+            case "done":
+                int item = sc.nextInt() - 1;
+                list[item].markAsDone();
+                response("Nice! I've marked this task as done: \n  "
+                        + list[item].toString());
+                break;
+            default:
+                String description = in + sc.nextLine();
+                response("added: " + description);
+                list[len] = new Task(in);
                 len++;
+                break;
             }
         }
+        sc.close();
     }
 }

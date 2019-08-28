@@ -241,4 +241,28 @@ public class Ui {
                 "    ____________________________________________________________\n");
         storage.rewriteFile(tasks);
     }
+
+    public static void handleFind(String input, TaskList tasks) {
+        String[] inputStringArr = input.split(" ", 2);
+        String searchTerm = inputStringArr[1];
+        System.out.println("    ____________________________________________________________\n" +
+                "     Here are the matching tasks in your list:");
+        int listNum = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            String taskName = t.toString();
+            if (taskName.contains(searchTerm)) {
+                if (t.getType().equals("todo")) {
+                    System.out.println("     " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t);
+                } else if (t.getType().equals("event")) {
+                    System.out.println("     " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                            + t + " " + "(at: " + t.getDate() + ")");
+                } else {
+                    System.out.println("     " + listNum + "." + t.getTypeIcon() + '[' + t.getStatusIcon() + "] "
+                            + t + " (by: " + t.getDate() + ")");
+                }
+            }
+        }
+        System.out.println("    ____________________________________________________________");
+    }
 }

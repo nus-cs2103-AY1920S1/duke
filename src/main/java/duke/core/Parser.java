@@ -9,6 +9,7 @@ import duke.command.AddCommand;
 import duke.command.ExitCommand;
 import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 public class Parser {
@@ -48,7 +49,7 @@ public class Parser {
     private static void checkIllegalInstruction(String[] words) throws DukeException {
         String fw = words[0];
         if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event")
-                    || fw.equals("delete") || fw.equals("list") || fw.equals("bye"))) {
+                    || fw.equals("delete") || fw.equals("list") || fw.equals("bye") || fw.equals("find"))) {
             throw new DukeException(" \u2639  OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
         if ((fw.equals("todo") || fw.equals("deadline") || fw.equals("event")) && words.length < 2) {
@@ -60,6 +61,9 @@ public class Parser {
                 }
         if ((fw.equals("done") || fw.equals("delete")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
+        }
+        if (fw.equals("find") && words.length < 2) {
+            throw new DukeException(" \u2639  OOPS!!! The keyword of a " + fw + " cannot be empty.");
         }
     }
 
@@ -74,7 +78,9 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(words[1]));
         } else if (words[0].equals("list")) {
             return new ListCommand();
-        } else {
+        } else if (words[0].equals("find")) {
+            return new FindCommand(words[1]);
+        }  else {
             Task t = parseTask(words);
             return new AddCommand(t);
         }

@@ -14,40 +14,48 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List loadTasks() throws DukeException { //need to handle exception here
-        List<String[]> tasks = new ArrayList<>();
+    public List<Task> loadTasks() throws FileNotFoundException, DukeException {
+        List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
-        try {
-            Scanner sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String task = sc.nextLine();
-                String[] arr = task.split(" \\| ");
-                tasks.add(arr);
+        Scanner sc = new Scanner(f);
+        if (f.length() == 0) {
+            throw new DukeException();
+        }
+        while (sc.hasNext()) {
+            String input = sc.nextLine();
+            String[] task = input.split(" \\| ");
+            switch (task[0]) {
+            case "T":
+                tasks.add(new ToDo(task[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(task[2], task[3]));
+                break;
+            case "E":
+                tasks.add(new Event(task[2], task[3]));
+                break;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); //CHANGE THIS
+            if (task[1].equals("1")) {
+                tasks.get(tasks.size() - 1).setDone();
+            }
         }
         return tasks;
     }
 
-    public void saveTasks(TaskList tasks) {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            for (Task task : tasks.getList()) {
-                if (task instanceof Deadline) {
-                    Deadline d = (Deadline) task;
-                    fw.write("D | " + d.isDone() + " | " + d.getDescription() + " | " + d.getBy() + "\n");
-                } else if (task instanceof Event) {
-                    Event e = (Event) task;
-                    fw.write("E | " + e.isDone() + " | " + e.getDescription() + " | " + e.getAt() + "\n");
-                } else if (task instanceof ToDo) {
-                    ToDo t = (ToDo) task;
-                    fw.write("T | " + t.isDone() + " | " + t.getDescription() + "\n");
-                }
+    public void saveTasks(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : tasks.getList()) {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                fw.write("D | " + d.isDone() + " | " + d.getDescription() + " | " + d.getBy() + "\n");
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
+                fw.write("E | " + e.isDone() + " | " + e.getDescription() + " | " + e.getAt() + "\n");
+            } else if (task instanceof ToDo) {
+                ToDo t = (ToDo) task;
+                fw.write("T | " + t.isDone() + " | " + t.getDescription() + "\n");
             }
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace(); // CHANGE THIS
         }
+        fw.close();
     }
 }

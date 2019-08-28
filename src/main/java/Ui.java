@@ -1,9 +1,12 @@
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
 public class Ui {
 
     private Scanner sc;
+    private TaskList taskList;
+    private Storage storage;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -16,44 +19,72 @@ public class Ui {
         System.out.println("    Hello from\n" + logo + "    Hello! I'm Duke\n    What can I do for you?");
     }
 
-    public void scan(TaskList tasks, Storage storage) {
+    public void scan(TaskList taskList, Storage storage) throws IOException {
+        this.taskList = taskList;
+        this.storage = storage;
         String input = sc.nextLine();
-        Parser p;
         String[] task = input.split(" ");
         while (!task[0].equals("bye")) {
-            p = new Parser(input);
             try {
-                task = p.parse();
-                switch (task[0]) {
-                case "delete":
-                    tasks.delete(Integer.parseInt(task[1]));
-                    break;
-                case "done":
-                    tasks.markAsDone(Integer.parseInt(task[1]));
-                    break;
-                case "list":
-                    tasks.printList();
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    tasks.addToList(task);
-                    break;
-                }
+                handleInput(task, input);
             } catch (IllegalArgumentException e) {
-                System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } catch (DukeException e) {
-                System.out.println("    ☹ OOPS!!! The description of a " + task[0] + " cannot be empty.");
-            } catch (ParseException e) {
-                System.out.println("    ☹ OOPS!!! The description of a " + task[0] + " does not follow the specified format."); // CHANGE THIS
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("    ☹ OOPS!!! The description of a " + task[0] + " does not follow the specified format.");
+                print("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (IndexOutOfBoundsException e) {
+                print("    ☹ OOPS!!! I'm sorry, but task number " + task[1] + " does not exist.");
+            } finally {
+                storage.saveTasks(taskList);
+                input = sc.nextLine();
+                task = input.split(" ");
             }
-            storage.saveTasks(tasks);
-            input = sc.nextLine();
-            task = input.split(" ");
         }
         System.out.println("    Bye. Hope to see you again soon!");
     }
 
+    private void handleInput(String[] task, String input) throws IllegalArgumentException, IndexOutOfBoundsException {
+        switch (task[0]) {
+        case "delete":
+            Task deletedTask = taskList.delete(Integer.parseInt(task[1]));
+            print("    Noted. I've removed this task:");
+            System.out.println("        " + deletedTask);
+            print("    Now you have " + taskList.getListSize() + " tasks in the list.");
+            break;
+        case "done":
+            Task doneTask = taskList.markAsDone(Integer.parseInt(task[1]));
+            print("    Nice! I've marked this task as done:");
+            System.out.println("    " + doneTask);
+            break;
+        case "list":
+            print("    Here are the tasks in your list:");
+            taskList.printList();
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            handleTasks(task[0], input);
+            break;
+        default:
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void handleTasks(String taskType, String t) {
+        Parser p = new Parser(t);
+        try {
+            Task parsedTask = p.parse();
+            taskList.addToList(parsedTask);
+            System.out.println("    Got it. I've added this task:");
+            System.out.println("        " + parsedTask);
+            System.out.println("    Now you have " + taskList.getListSize() + " tasks in the list.");
+        } catch (DukeException e) {
+            print("    ☹ OOPS!!! The description of a " + taskType + " cannot be empty."); // check in parser
+        } catch (ParseException e) {
+            print("    ☹ OOPS!!! The date/time of a " + taskType + " does not follow the specified format of dd/MM/yyyy HHmm.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            print("    ☹ OOPS!!! The description of a " + taskType + " does not follow the specified format.");
+        }
+    }
+
+    private void print(String s) {
+        System.out.println(s);
+    }
 }

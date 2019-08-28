@@ -29,7 +29,7 @@ public class Parser {
     /**
      * To deals with making sense of the user command.
      *
-     * @param task the TaskList from the txt file.
+     * @param tasks the TaskList from the txt file.
      * @param ui the message for interaction.
      * @param inputText the text that user input.
      * @param storage the location for retrieval and write the updated file.
@@ -49,12 +49,14 @@ public class Parser {
 
                 storage.writeFile(tasks.getListOfTasks());
             } else if (actionKey.equals("delete")) { // delete a specific plan
-
                 int index = Integer.parseInt(keyList[1]);
                 ui.printTaskDelete(tasks.getListOfTasks(), index);
                 tasks.deleteTask(index - 1);
 
                 storage.writeFile(tasks.getListOfTasks());
+            } else if (actionKey.equals("find")) {
+                String textToSearch = keyList[1];
+                ui.searchTaskKeyword(tasks, textToSearch);
             } else { // to handle addition of a specific type of plan
                 if (actionKey.equals("deadline")) {
                     if (keyList.length <= 1) {

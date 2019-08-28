@@ -32,6 +32,11 @@ public class AddEventCommand extends Command {
         }
     }
 
+    /**
+     * Returns the index of the slash symbol in an input string.
+     * @param inputString input string
+     * @return index of slash symbol
+     */
     public int slashLocator(String inputString) {
         return inputString.indexOf("/");
     }

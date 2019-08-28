@@ -13,7 +13,7 @@ public class DateClass {
         try {
             date = format.parse(string);
         } catch (ParseException e) {
-            System.out.println(e.getMessage());
+            
         }
 
         return date;

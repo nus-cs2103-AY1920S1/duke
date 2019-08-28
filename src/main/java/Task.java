@@ -41,4 +41,8 @@ public class Task {
     public String toStringFile() {
         return ((isDone) ? "1" : "0") + " | " + description;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }

@@ -76,4 +76,23 @@ public class TaskList {
     public int getSize() {
         return tasks.size();
     }
+
+    public String findTask(String description) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for(int i = 0; i < tasks.size(); i++){
+            if(tasks.get(i).getDescription().contains(description)){
+                filteredTasks.add(tasks.get(i));
+            }
+        }
+        if (filteredTasks.size() > 0) {
+            sb.append("Here are the matching tasks in your list:\n");
+            for (int i = 0; i < filteredTasks.size(); i++) {
+                sb.append(i + 1 + ". " + filteredTasks.get(i) + "\n");
+            }
+        } else {
+            sb.append("Looks like there is no task matching to \"" + description + "\"");
+        }
+        return sb.toString().trim();
+    }
 }

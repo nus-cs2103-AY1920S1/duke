@@ -5,5 +5,6 @@ public enum DukeEnum {
     LIST,
     BYE,
     DELETE,
-    DONE
+    DONE,
+    FIND
 }

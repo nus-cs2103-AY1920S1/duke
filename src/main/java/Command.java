@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
+import java.io.IOException;
 
-public class Command {
+public abstract class Command {
+    public abstract boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException;
 }

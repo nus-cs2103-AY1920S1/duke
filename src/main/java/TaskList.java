@@ -31,7 +31,7 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String result = "\n\t____________________________________________________________" +
+        String result = "\t____________________________________________________________" +
                             "\n\t Here are the tasks in your list:";
 
         for (int i = 0; i < taskList.size(); i++) {

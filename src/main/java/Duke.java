@@ -50,6 +50,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException, ParseException{
-        new Duke("duke.txt").run();
+        new Duke("gradlduke.txt").run();
     }
 }

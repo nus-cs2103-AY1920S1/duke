@@ -1,10 +1,12 @@
 package duke.io;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
 import java.io.PrintStream;
 
+/**
+ * Class which acts as the buffer where output is stored before it needs to be displayed, and responsible for
+ * formatting the output to be displayed.
+ */
 public class Output {
 	// formatting fields
 	private String[] headerLines;
@@ -25,6 +27,10 @@ public class Output {
 	//output destination
 	private PrintStream printStream;
 
+	/**
+	 * Constructs the output formatter and buffer
+	 * @param printStream The print stream which prints the output
+	 */
 	public Output(PrintStream printStream) {
 		this.printStream = printStream;
 
@@ -49,22 +55,43 @@ public class Output {
 		this.outputLines = new ArrayList<String>();
 	}
 
+	/**
+	 * Sets the headers for the output
+	 * @param headerLines The headers for the output, from top to bottom, if any
+	 */
 	public void setHeader(String... headerLines) {
 		this.headerLines = headerLines;
 	}
 
+	/**
+	 * Sets the footers for the output
+	 * @param footerLines The footers for the output, from top to bottom, if any
+	 */
 	public void setFooter(String... footerLines) {
 		this.footerLines = footerLines;
 	}
 
+	/**
+	 * Sets the left border of the output
+	 * @param leftBorder The string be be appended to each line of the output message, if any
+	 */
 	public void setLeftBorder(String leftBorder) {
 		this.leftBorder = leftBorder;
 	}
 
+	/**
+	 * Sets the number of spaces to indent the message of each line of output
+	 * @param count The number of spaces to indent the message by
+	 */
 	public void setLeftIndent(int count) {
 		this.leftIndentWidth = count;
 	}
 
+	/**
+	 * Adds a line to the output message
+	 * @param lineSegments The segments of the string meant to be displayed on the same line, if not wrapped
+	 * @return The output handler which the line was added to
+	 */
 	public Output addLine(String... lineSegments) {
 		// string concatenation behind the scenes
 		StringBuffer line = new StringBuffer();
@@ -75,33 +102,87 @@ public class Output {
 		return this;
 	}
 
-	public void setHeaderOn(boolean on) {
-		printHeaderOn = on;
+	/**
+	 * Enables displaying of the headers set for the output handler, if any
+	 */
+	public void setHeaderOn() {
+		printHeaderOn = true;
 	}
 
-	public void setFooterOn(boolean on) {
-		printFooterOn = on;
+	/**
+	 * Disables displaying of the headers set for the output handler, if any
+	 */
+	public void setHeaderOff() {
+		printFooterOn = false;
 	}
 
-	public void setLeftBorderOn(boolean on) {
-		printLeftBorderOn = on;
+	/**
+	 * Enables displaying of the footers set for the output handler, if any
+	 */
+	public void setFooterOn() {
+		printFooterOn = true;
 	}
 
-	public void setIndentOn(boolean on) {
-		printIndentOn = on;
+	/**
+	 * Disables displaying of the footers set for the output handler, if any
+	 */
+	public void setFooterOff() {
+		printFooterOn = false;
 	}
 
-	public void setWrapOn(boolean on) {
-		wrapOn = on;
+	/**
+	 * Enables displaying of the left border set for the output handler, if any
+	 */
+	public void setLeftBorderOn() {
+		printLeftBorderOn = true;
 	}
 
-	// clear output buffer
+	/**
+	 * Disables displaying of the left border set for the output handler, if any
+	 */
+	public void setLeftBorderOff() {
+		printLeftBorderOn = false;
+	}
+
+	/**
+	 * Enables displaying of the indentation set for the output handler, if any
+	 */
+	public void setIndentOn() {
+		printIndentOn = true;
+	}
+
+	/**
+	 * Disables displaying of the indentation set for the output handler, if any
+	 */
+	public void setIndentOff() {
+		printIndentOn = false;
+	}
+
+	/**
+	 * Enables wrapping of the output message if it would go past the header/footer for the output handler, if any
+	 */
+	public void setWrapOn() {
+		wrapOn = true;
+	}
+
+	/**
+	 * Disables wrapping of the output message if it would go past the header/footer for the output handler, if any
+	 */
+	public void setWrapOff() {
+		wrapOn = false;
+	}
+
+	/**
+	 * Clears the messages stored in the output handler without displaying it
+	 */
 	public void flush() {
 		outputLines = new ArrayList<String>();
 	}
 
 
-	// prints the output buffer to printstream
+	/**
+	 * Instructs the print stream of the output handler to print the messages stored in the buffer
+	 */
 	public void print() {
 		// prints header if enabled
 		if (printHeaderOn) {

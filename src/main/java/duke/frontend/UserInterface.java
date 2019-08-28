@@ -17,6 +17,9 @@ import duke.tasklist.ToDo;
 import duke.tasklist.Deadline;
 import duke.tasklist.Event;
 
+/**
+ * The user interface which the user interacts with duke, and maipulate the task list
+ */
 public class UserInterface {
     private boolean acceptingInput;
     private TaskList taskList;
@@ -25,6 +28,9 @@ public class UserInterface {
     private Output standardOutput;
     private Output errorOutput;
 
+    /**
+     * Constructs the user interface for Duke
+     */
     public UserInterface() {
         // setup input and output
         input = new Input(System.in);
@@ -35,16 +41,15 @@ public class UserInterface {
         errorOutput.setFooter(lineBreak2);
         errorOutput.setLeftBorder("ERROR ");
         errorOutput.setLeftIndent(1);
-        errorOutput.setWrapOn(true);
+        errorOutput.setWrapOn();
 
         standardOutput = new Output(System.out);
         standardOutput.setHeader(lineBreak1);
         standardOutput.setFooter(lineBreak2);
         standardOutput.setLeftBorder("      ");
         standardOutput.setLeftIndent(1);
-        standardOutput.setWrapOn(true);
+        standardOutput.setWrapOn();
 
-        // storage = new Storage("SaveFiles");
         storage = new Storage("DukeSave01.txt");
 
         // load default exisiting task list if any
@@ -53,6 +58,10 @@ public class UserInterface {
         acceptingInput = true;
     }
 
+    /**
+     * Intructs the output to display the logo, and welcome message of duke, and to load the previously saved task list.
+     * @throws DukeException
+     */
     public void start() throws DukeException {
         Output logo = new Output(System.out);
         logo.addLine(" ____        _        ")
@@ -70,14 +79,25 @@ public class UserInterface {
         taskList = storage.load();
     }
 
+    /**
+     * Returns the boolean representing whether or not the user interface is accepting user input
+     * @return
+     */
     public boolean isAcceptingInput() {
         return acceptingInput;
     }
 
+    /**
+     * Displays the content in the standard output buffer
+     */
     public void displayOutput() {
         standardOutput.print();
     }
 
+    /**
+     * Displays the error message when an exception in the user interface occurs and an exception is thrown
+     * @param ex The exception which was thrown when an error occurred
+     */
     public void displayError(DukeException ex) {
         //flushes standard output otherwise future output may be wrong
         standardOutput.flush();
@@ -87,11 +107,20 @@ public class UserInterface {
         errorOutput.print();
     }
 
+    /**
+     * Reads the input from console and return the command it is parsed as.
+     * @return The command the input is parsed as if it can be parsed
+     * @throws DukeException The exception thrown when the input cannot be properly parsed as a command
+     */
     public Command readInput() throws DukeException {
         return Parser.parseAsCommand(input.get());
     }
 
-    // methods that enable parsed commands to instruct duke
+    /**
+     * Executes the command in the environment of the user interface
+     * @param c The command to be executed
+     * @throws DukeException The exception thrown when a command cannot be executed
+     */
     public void executeCommand(Command c) throws DukeException {
         // all commands passed to this method have all required parameter non-empty
         switch (c.getClass().getSimpleName()) {
@@ -116,7 +145,7 @@ public class UserInterface {
         }
     }
 
-    public void executeCommand(AddTaskCommand command) throws DukeException {
+    private void executeCommand(AddTaskCommand command) throws DukeException {
         Task task;
         switch (command.type) {
             case ADD_TODO:
@@ -147,7 +176,7 @@ public class UserInterface {
         storage.save(taskList);
     }
     
-    public void executeCommand(CompleteTaskCommand command) throws DukeException {
+    private void executeCommand(CompleteTaskCommand command) throws DukeException {
         Task task = taskList.complete(command.parameters[0]);
         standardOutput
                 .addLine("Got it! I've marked this task as done:")
@@ -155,7 +184,7 @@ public class UserInterface {
         storage.save(taskList);
     }
 
-    public void executeCommand(DeleteTaskCommand command) throws DukeException {
+    private void executeCommand(DeleteTaskCommand command) throws DukeException {
         Task task = taskList.delete(command.parameters[0]);
         standardOutput
                 .addLine("Got it! I've removed this task from the list:")
@@ -164,7 +193,7 @@ public class UserInterface {
         storage.save(taskList);
     }
 
-    public void executeCommand(ShowListCommand command) throws DukeException {
+    private void executeCommand(ShowListCommand command) throws DukeException {
         if (taskList.size() == 0) {
             standardOutput.addLine("Your list is empty!");
         } else {
@@ -181,7 +210,7 @@ public class UserInterface {
         return Integer.toString(number).length();
     }
 
-    public void executeCommand(ExitCommand command) throws DukeException {
+    private void executeCommand(ExitCommand command) throws DukeException {
         storage.save(taskList);
         acceptingInput = false;
         standardOutput.addLine("Goodbye! Hope to see you again!");

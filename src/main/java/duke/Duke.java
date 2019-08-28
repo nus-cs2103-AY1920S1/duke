@@ -2,11 +2,14 @@ package duke;
 
 import duke.frontend.UserInterface;
 
+/**
+ * The driver class to run user interface of Duke
+ */
 public class Duke {
 
 	public UserInterface userInterface;
 
-	public void run() {
+	private void run() {
 		// initialize user inferface with input source
 		userInterface = new UserInterface();
 		// start

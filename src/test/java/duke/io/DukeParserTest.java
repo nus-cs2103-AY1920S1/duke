@@ -5,8 +5,14 @@ import duke.command.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class to test certain functionality of the Parser class
+ */
 public class DukeParserTest {
 
+    /**
+     * Test that the parseDateTime method can output the properly formatted date and time when a valid input is given
+     */
     @Test
     public void parseDateTime_validInput_success() {
         try {
@@ -17,6 +23,10 @@ public class DukeParserTest {
             fail("Should not have thrown exception");
         }
     }
+
+    /**
+     * Test that the parseDateTime method throws an exception when it tries to parse and format an invalid input
+     */
     @Test
     public void parseDateTime_invalidInput_exceptionThrown() {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("1212"));
@@ -25,6 +35,10 @@ public class DukeParserTest {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("never"));
     }
 
+    /**
+     * Test that the parseDateTime method throws an exception when the input looks valid but cannot be formatted to the
+     * expected format
+     */
     @Test
     public void parseDateTime_validLookingInvalidInput_exceptionThrown() {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("12/00/1212 1212"));
@@ -34,6 +48,10 @@ public class DukeParserTest {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("12/12/0000 1212"));
     }
 
+    /**
+     * Test that the parseAsCommand method throws a DukeMissingParameterException when the it tries to parse a input
+     * as a command, but the required arguments are not provided
+     */
     @Test
     public void parseAsCommand_missingParameter_exceptionThrown() {
         //task commands
@@ -52,6 +70,10 @@ public class DukeParserTest {
         assertThrows(DukeMissingParameterException.class, () -> Parser.parseAsCommand("delete "));
     }
 
+    /**
+     * Test that the parseAsCommand method properly ignores redundant input when attempting to parse commands
+     * which require 0 arguments.
+     */
     @Test
     public void parseAsCommand_redundantArgumentForNoArgumentCommands_success() {
         try {
@@ -64,6 +86,9 @@ public class DukeParserTest {
         }
     }
 
+    /**
+     * Test that the parseAsCommand method properly returns an AddTaskCommand when the input is valid
+     */
     @Test
     public void parseAsCommand_nonParseableTimeForDeadlineOrEvent_success() {
         try {

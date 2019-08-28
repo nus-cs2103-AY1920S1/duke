@@ -2,6 +2,9 @@ package duke.command;
 
 import java.util.ArrayList;
 
+/**
+ * Enumeration of the type of commands which can be entered into the user interface to manipulate the task list
+ */
 public enum Type {
     UNUSED(0),
     EXIT(0),

@@ -15,19 +15,29 @@ public class Duke {
     private static Parser parser;
     private static TaskList tasks;
 
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        parser = new Parser(ui);
+
+        try {
+            tasks = new TaskList(storage.loadTasksFromFile());
+        } catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND");
+            tasks = new TaskList();
+        }
+    }
 
     public static void main(String[] args) {
-        storage = new Storage("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt");
-        ui = new Ui();
-        parser = new Parser();
+        new Duke("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt").run();
+    }
 
-        startDuke();
+    private void run() {
         ui.greet();
         ui.getUserInput(parser);
     }
 
-
-    private static void exitDuke() {
+    public static void exitDuke() {
         String toSave = tasks.convertTasksToString();
         try {
             storage.writeToFile(toSave);
@@ -37,14 +47,7 @@ public class Duke {
         }
     }
 
-    private static void startDuke() {
-        try {
-            tasks = new TaskList(storage.loadTasksFromFile());
-        } catch (FileNotFoundException e) {
-            System.out.println("FILE NOT FOUND");
-            tasks = new TaskList(new ArrayList<>());
-        }
+    public static TaskList getTasks() {
+        return tasks;
     }
-
-
 }

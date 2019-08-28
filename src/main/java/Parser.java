@@ -1,10 +1,18 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Parser {
     public static final String LINE = "    ____________________________________________________________\n";
+    private Ui ui;
+
+    public Parser(Ui ui) {
+        this.ui = ui;
+    }
 
     public void parse(String userInput) {
         String addTaskMessage = "     Got it. I've added this task: ";
+        TaskList taskList = Duke.getTasks();
+        ArrayList<Task> tasks = taskList.getTasks();
 
         String firstWord = userInput.split("\\s")[0];
         switch (firstWord) {
@@ -13,7 +21,7 @@ public class Parser {
                         + "     Bye. Hope to see you again soon!\n"
                         + LINE;
                 System.out.print(farewellMessage);
-                exitDuke();
+                Duke.exitDuke();
                 break;
             case "list":
                 System.out.print(LINE);
@@ -23,7 +31,7 @@ public class Parser {
                     System.out.println("     " + Integer.toString(i + 1) + "." + currentTask.getTypeIcon() + currentTask.getStatusIcon() + " " + currentTask);
                 }
                 System.out.print(LINE);
-                getUserInput();
+                ui.getUserInput(this);
                 break;
             case "done":
                 try {
@@ -34,12 +42,12 @@ public class Parser {
                     System.out.println("     Nice! I've marked this task as done: ");
                     System.out.println("       " + taskDone.getTypeIcon() + taskDone.getStatusIcon() + " " + taskDone);
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! The task you want to mark as done doesn't exist.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 }
                 break;
             case "todo":
@@ -55,12 +63,12 @@ public class Parser {
                     System.out.println("       [T][✗] " + newTaskTodo);
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 }
                 break;
             case "deadline":
@@ -82,17 +90,17 @@ public class Parser {
                     System.out.println("       [D][✗] " + newTaskDeadline);
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (DukeException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! "  + e);
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 }
                 break;
             case "event":
@@ -114,17 +122,17 @@ public class Parser {
                     System.out.println("       [E][✗] " + newTaskEvent);
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! The description of an event cannot be empty.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (DukeException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! " + e);
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 }
                 break;
             case "delete":
@@ -136,12 +144,12 @@ public class Parser {
                     System.out.println("       " + taskRemoved.getTypeIcon() + taskRemoved.getStatusIcon() + " " + taskRemoved);
                     System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! The task you want to delete doesn't exist.");
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 }
                 break;
             default:
@@ -151,7 +159,7 @@ public class Parser {
                     System.out.print(LINE);
                     System.out.println("     ☹ OOPS!!! " + e);
                     System.out.print(LINE);
-                    getUserInput();
+                    ui.getUserInput(this);
                 }
         }
     }

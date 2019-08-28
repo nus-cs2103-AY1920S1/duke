@@ -1,282 +1,145 @@
-import java.util.Calendar;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 
 public class Duke {
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAdd);
-        fw.close();
+    private Ui UI;
+    private TaskList tasks;
+    private Storage storage;
+
+    public Duke(String filePath) {
+         UI = new Ui();
+         storage = new Storage(filePath);
+         try {
+             tasks = new TaskList(storage.load());
+         } catch (IOException de) {
+             UI.showLoadingError();
+             tasks = new TaskList();
+         } catch (DukeException de) {
+             UI.showException(de);
+         }
     }
 
-    private static void rewriteFile(String filePath, ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        String textToAdd = "";
-        for (Task t : tasks) {
-            String type = "";
-            if (t instanceof Event) {
-                type = "E";
-            } else if (t instanceof ToDo) {
-                type = "T";
-            } else if (t instanceof Deadline) {
-                type = "D";
-            }
-            textToAdd += "[" + type + "] -- " + "[" + t.getStatusIcon() + "] -- " + t.getDescription();
-            if (t instanceof Event) {
-                Calendar time = ((Event) t).getTime();
-                textToAdd += " -- " + time.get(Calendar.DAY_OF_MONTH) + "/" +
-                time.get(Calendar.MONTH) + "/" + time.get(Calendar.YEAR) + " ";
-                if (time.get(Calendar.HOUR_OF_DAY) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += time.get(Calendar.HOUR_OF_DAY);
-                if (time.get(Calendar.MINUTE) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += time.get(Calendar.MINUTE);
-            }
-            if (t instanceof Deadline) {
-                Calendar time = ((Deadline) t).getTime();
-                textToAdd += " -- " + time.get(Calendar.DAY_OF_MONTH) + "/" +
-                        time.get(Calendar.MONTH) + "/" + time.get(Calendar.YEAR) + " ";
-                if (time.get(Calendar.HOUR_OF_DAY) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += time.get(Calendar.HOUR_OF_DAY);
-                if (time.get(Calendar.MINUTE) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += time.get(Calendar.MINUTE);
-            }
-            textToAdd += "\n";
-        }
-        fw.write(textToAdd);
-        fw.close();
-    }
-    public static void main(String[] args){
+    public void run(){
         Scanner sc = new Scanner(System.in);
-        //hr is horizontal row
-        String hr = "______________________________________________________________________";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(hr);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println(hr);
-        ArrayList<Task> arr = new ArrayList<>();
-        try {
-            File f = new File("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
-                    "dukerepo/data/history.txt");
-            Scanner reader = new Scanner(f);
-            while(reader.hasNextLine()) {
-                String s = reader.nextLine();
-                String[] tempArray = s.split(" -- ");
-                Task t;
-                if (tempArray[0].equals("[E]") || tempArray[0].equals("[D]")) {
-                    String dateTime = tempArray[3];
-                    Calendar dateAndTime = Calendar.getInstance();
-                    String[] date = dateTime.split(" ")[0].split("/");
-                    int time = Integer.parseInt(dateTime.split(" ")[1]);
-                    int hours = time / 100;
-                    int minutes = time % 100;
-                    dateAndTime.set(Integer.parseInt(date[2]),
-                            Integer.parseInt(date[1]),
-                            Integer.parseInt(date[0]),
-                            hours,
-                            minutes);
-                    if (tempArray[0].equals("[D]")) {
-                        t = new Deadline(tempArray[2], dateAndTime);
-                    } else {
-                        t = new Event(tempArray[2], dateAndTime);
-                    }
-                } else if (tempArray[0].equals("[T]")) {
-                    t = new ToDo(tempArray[2]);
-                } else {
-                    throw new DukeException("Not a valid Task type");
-                }
-                if (tempArray[1].equals("[+]")) {
-                    t.markAsDone();
-                }
-                arr.add(t);
-            }
-        } catch (IOException | DukeException e) {
-            System.err.println(e.getMessage());
-        }
+        UI.showWelcome();
         while(true) {
             String command = sc.nextLine();
-            System.out.println(hr);
-            String[] commandWords = command.split(" ");
-            String order = commandWords[0];
-            if (order.equals("done")){
-                int index = Integer.parseInt(commandWords[1]) - 1;
-                try {
-                    if (index >= arr.size() || index < 0) {
-                        throw new DukeException(" :( OOPS!!! Requested task number is not available");
-                    }
-                    Task temp = arr.get(index);
-                    temp.markAsDone();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  " + temp);
-                    rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
-                            "dukerepo/data/history.txt",
-                            arr);
-                } catch (DukeException | IOException de) {
-                    System.err.println(de.getMessage());
-                } catch (NumberFormatException nfe) {
-                    System.err.println(" :( OOPS!!! Invalid format. Enter number of task to be marked as done.");
-                } finally {
-                    System.out.println(hr);
-                }
-            } else if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(hr);
-                break;
-            } else if(command.equals("list")) {
-                for(int i = 0; i < arr.size(); i++) {
-                    Task temp = arr.get(i);
-                    System.out.println((i + 1) + ". " + temp);
-                }
-                System.out.println(hr);
-            } else {
-                if (order.equals("todo")) {
+            UI.printLine();
+            Parser commandAnalyzer = new Parser(command);
+            if (commandAnalyzer.isValid()) {
+                if (commandAnalyzer.getType().equals("done")) {
+                    int index = Integer.parseInt(commandAnalyzer.getList().get(0)) - 1;
                     try {
-                        if (commandWords.length == 1) {
-                            throw new DukeException(" :( OOPS!!! The description of a todo cannot be empty.");
-                        } else {
-                            Task temp = new ToDo(command.split("todo ")[1]);
-                            arr.add(temp);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println(" " + temp);
-                            System.out.println("Now you have " + arr.size() + " tasks in the list.");
+                        if (index >= tasks.size() || index < 0) {
+                            throw new DukeException(" :( OOPS!!! Requested task number is not available");
                         }
-                        rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
-                                "dukerepo/data/history.txt",
-                                arr);
+                        Task temp = tasks.get(index);
+                        temp.markAsDone();
+                        UI.showTaskDone(temp);
+                        storage.update(tasks);
                     } catch (DukeException | IOException de) {
-                        System.err.println(de.getMessage());
-                    } finally {
-                        System.out.println(hr);
-                    }
-                } else if (order.equals("deadline")) {
-                    try {
-                        if (commandWords.length == 1) {
-                            throw new DukeException(" :( OOPS!!! The description of a deadline cannot be empty.");
-                        } else {
-                            if (command.split("/by").length == 1) {
-                                throw new DukeException(" :( OOPS!!! A deadline must have a time.");
-                            } else {
-                                String instruction = command.split("deadline ")[1];
-                                String[] details = instruction.split(" /by ");
-                                String[] dateAndTime = details[1].split(" ");
-                                Calendar date = Calendar.getInstance();
-                                String[] dateArray = dateAndTime[0].split("/");
-                                int time = Integer.parseInt(dateAndTime[1]);
-                                int hours = time / 100;
-                                int minutes = time % 100;
-                                if (dateArray.length != 3) {
-                                    throw new DukeException(" :( OOPS!!! Invalid date format.");
-                                }
-                                date.set(Integer.parseInt(dateArray[2]),
-                                        (Integer.parseInt(dateArray[1]) - 1),
-                                        Integer.parseInt(dateArray[0]),
-                                        hours,
-                                        minutes);
-                                Task temp = new Deadline(details[0], date);
-                                arr.add(temp);
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(" " + temp);
-                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                            }
-                            rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
-                                    "dukerepo/data/history.txt",
-                                    arr);
-                        }
-                    } catch (DukeException | IOException de) {
-                        System.err.println(de.getMessage());
-                    } finally {
-                        System.out.println(hr);
-                    }
-                } else if (order.equals("event")){
-                    try {
-                        if (commandWords.length == 1) {
-                            throw new DukeException(" :( OOPS!!! The description of a event cannot be empty.");
-                        } else {
-                            if (command.split("/at").length == 1) {
-                                throw new DukeException(" :( OOPS!!! An event must have a time.");
-                            } else {
-                                String instruction = command.split("event ")[1];
-                                String[] details = instruction.split(" /at ");
-                                String[] dateAndTime = details[1].split(" ");
-                                Calendar date = Calendar.getInstance();
-                                String[] dateArray = dateAndTime[0].split("/");
-                                int time = Integer.parseInt(dateAndTime[1]);
-                                int hours = time / 100;
-                                int minutes = time % 100;
-                                if (dateArray.length != 3) {
-                                    throw new DukeException(" :( OOPS!!! Invalid date format.");
-                                }
-                                date.set(Integer.parseInt(dateArray[2]),
-                                        (Integer.parseInt(dateArray[1]) - 1),
-                                        Integer.parseInt(dateArray[0]),
-                                        hours,
-                                        minutes);
-                                Task temp = new Event(details[0], date);
-                                arr.add(temp);
-                                System.out.println("Got it. I've added this task:");
-                                System.out.println(" " + temp);
-                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                            }
-                            rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
-                                    "dukerepo/data/history.txt",
-                                    arr);
-                        }
-                    } catch (DukeException | IOException de) {
-                        System.err.println(de.getMessage());
-                    } finally {
-                        System.out.println(hr);
-                    }
-                } else if (order.equals("delete")) {
-                    try {
-                        if (commandWords.length == 1) {
-                            throw new DukeException(" :( OOPS!!! Provided task number does not exist.");
-                        } else {
-                            int index = Integer.parseInt(commandWords[1]) - 1;
-                            if (index >= arr.size() || index < 0) {
-                                throw new DukeException(" :( OOPS!!! Task to be deleted is not available");
-                            } else {
-                                Task temp = arr.remove(index);
-                                System.out.println("Noted. I've removed this task:");
-                                System.out.println(" " + temp);
-                                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                            }
-                        }
-                        rewriteFile("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/" +
-                                "dukerepo/data/history.txt",
-                                arr);
-                    } catch (DukeException | IOException de) {
-                        System.err.println(de.getMessage());
+                        UI.showException(de);
                     } catch (NumberFormatException nfe) {
-                        System.err.println(" :( OOPS!!! Invalid format. Enter number of task to be deleted");
+                        UI.showNumberFormatError("done");
                     } finally {
-                        System.out.println(hr);
+                        UI.printLine();
+                    }
+                } else if (command.equals("bye")) {
+                    UI.showGoodBye();
+                    break;
+                } else if (command.equals("list")) {
+                    UI.showTasks(tasks);
+                    UI.printLine();
+                } else {
+                    if (commandAnalyzer.getType().equals("todo")) {
+                        try {
+                            if (commandAnalyzer.getList().size() == 0) {
+                                throw new DukeException(" :( OOPS!!! The description of a todo cannot be empty.");
+                            } else {
+                                Task temp = new ToDo(commandAnalyzer);
+                                tasks.add(temp);
+                                UI.showTaskCreated(temp, tasks.size()); //change arr to TaskList
+                            }
+                            storage.update(tasks);
+                        } catch (DukeException | IOException de) {
+                            UI.showException(de);
+                        } finally {
+                            UI.printLine();
+                        }
+                    } else if (commandAnalyzer.getType().equals("deadline")) {
+                        try {
+                            if (commandAnalyzer.getList().size() == 0) {
+                                throw new DukeException(" :( OOPS!!! The description of a deadline cannot be empty.");
+                            } else {
+                                if (command.split("/by").length == 1) {
+                                    throw new DukeException(" :( OOPS!!! A deadline must have a time.");
+                                } else {
+                                    Task temp = new Deadline(commandAnalyzer);
+                                    tasks.add(temp);
+                                    UI.showTaskCreated(temp, tasks.size());
+                                }
+                                storage.update(tasks);
+                            }
+                        } catch (DukeException | IOException de) {
+                            UI.showException(de);
+                        } finally {
+                            UI.printLine();
+                        }
+                    } else if (commandAnalyzer.getType().equals("event")) {
+                        try {
+                            if (commandAnalyzer.getList().size() == 0) {
+                                throw new DukeException(" :( OOPS!!! The description of a event cannot be empty.");
+                            } else {
+                                if (command.split("/at").length == 1) {
+                                    throw new DukeException(" :( OOPS!!! An event must have a time.");
+                                } else {
+                                    Task temp = new Event(commandAnalyzer);
+                                    tasks.add(temp);
+                                    UI.showTaskCreated(temp, tasks.size());
+                                }
+                                storage.update(tasks);
+                            }
+                        } catch (DukeException | IOException de) {
+                            UI.showException(de);
+                        } finally {
+                            UI.printLine();
+                        }
+                    } else if (commandAnalyzer.getType().equals("delete")) {
+                        try {
+                            if (commandAnalyzer.getList().size() == 0) {
+                                throw new DukeException(" :( OOPS!!! Provided task number does not exist.");
+                            } else {
+                                int index = Integer.parseInt(commandAnalyzer.getList().get(0)) - 1;
+                                if (index >= tasks.size() || index < 0) {
+                                    throw new DukeException(" :( OOPS!!! Task to be deleted is not available");
+                                } else {
+                                    Task temp = tasks.remove(index);
+                                    UI.showTaskDeleted(temp, tasks.size());
+                                }
+                            }
+                            storage.update(tasks);
+                        } catch (DukeException | IOException de) {
+                            UI.showException(de);
+                        } catch (NumberFormatException nfe) {
+                            UI.showNumberFormatError("delete");
+                        } finally {
+                            UI.printLine();
+                        }
                     }
                 }
-                else {
-                    try {
-                        throw new DukeException(" :( OOPS!!! I'm sorry but I don't know what that means :-(");
-                    } catch (DukeException de) {
-                        System.err.println(de.getMessage());
-                    } finally {
-                        System.out.println(hr);
-                    }
+            } else {
+                try {
+                    throw new DukeException(" :( OOPS!!! I'm sorry but I don't know what that means :-(");
+                } catch (DukeException de) {
+                    UI.showException(de);
+                } finally {
+                    UI.printLine();
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt").run();
     }
 }

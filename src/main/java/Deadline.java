@@ -1,9 +1,14 @@
-public class Deadline extends Task {
-    private String by;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    Deadline(String description, String by) {
+public class Deadline extends Task {
+    private Date by;
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+
+    Deadline(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
+        this.by = this.formatter.parse(by);
     }
 
     @Override

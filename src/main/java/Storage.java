@@ -18,6 +18,13 @@ public class Storage {
     }
 
     /***
+     * Create Storage File
+     */
+    public void createFile() throws IOException {
+        taskFile.createNewFile();
+    }
+
+    /***
      * Write input TaskList into local storage
      * @param list TaskList to be written to local storage
      */

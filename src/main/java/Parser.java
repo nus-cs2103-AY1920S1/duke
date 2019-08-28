@@ -36,7 +36,7 @@ public class Parser {
      * @param command
      * @throws DukeException
      */
-    public static Command parseCommand(String command) throws DukeException{
+    public static Command parseCommand(String command) throws DukeException {
         String[] splitCommand = command.split(" ", 2);
         switch (splitCommand[0]) {
         case "bye":

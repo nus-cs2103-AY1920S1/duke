@@ -1,4 +1,4 @@
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /***
      * Class constructor.

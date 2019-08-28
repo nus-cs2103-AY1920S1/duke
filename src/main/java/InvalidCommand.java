@@ -1,4 +1,4 @@
-public class InvalidCommand extends Command{
+public class InvalidCommand extends Command {
 
     /***
      * Class constructor.

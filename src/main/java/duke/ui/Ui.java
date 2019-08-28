@@ -3,6 +3,8 @@ package duke.ui;
 import duke.task.Task;
 import duke.tasklist.Tasklist;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -39,6 +41,19 @@ public class Ui {
             numEntry++;
         } // End for loop.
     } // End method.
+
+    private static void listEntries(ArrayList<Task> tasks) {
+        int numEntry = 1;
+        for (Task task : tasks) {
+            System.out.printf("%d. %s\n", numEntry, task.toString());
+            numEntry++;
+        } // End for loop.
+    } // End method.
+
+    public void listFindMatches(ArrayList<Task> list) {
+        System.out.println("Here are the matching tasks in your list:");
+        listEntries(list);
+    }
 
     public void invalidCommand() {
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means. "

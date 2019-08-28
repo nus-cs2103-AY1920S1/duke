@@ -28,6 +28,8 @@ public class Parser {
                 return AddCommand.createAddCommand(task);
             case DONE:
                 return new DoneCommand(details);
+            case FIND:
+                return new FindCommand(details);
             case DELETE:
                 return new DeleteCommand(details);
             default:

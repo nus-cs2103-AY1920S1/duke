@@ -1,17 +1,3 @@
-import java.io.IOException;
-import java.security.spec.RSAOtherPrimeInfo;
-import java.util.Arrays;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-
-import static java.lang.String.format;
-
 /**
  * Duke class.
  */
@@ -37,7 +23,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Boots the Duke program.
+     */
     private void run() {
         boolean isExit = false;
         ui.printStatement("Hello! I'm Duke", "What can I do for you?");

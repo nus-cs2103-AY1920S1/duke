@@ -7,7 +7,7 @@ public class Ui {
     private String line;
     Scanner sc;
 
-    public Ui(){
+    public Ui() {
         this.sc = new Scanner(System.in);
         this.line = "\t____________________________________________________________\n";
     }

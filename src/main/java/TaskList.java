@@ -22,7 +22,7 @@ public class TaskList {
         return list.size();
     }
 
-    public ArrayList<Task> getlist() {
+    public ArrayList<Task> getList() {
         return this.list;
     }
 

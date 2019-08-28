@@ -8,6 +8,14 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Constructor class for Deadline object.
+     *
+     * @param description Description of the Deadline.
+     * @param date Due date of Deadline in the format dd/MM/yyyy.
+     * @param time Time format of deadline in the format HHmm.
+     * @throws DateTimeParseException Exception in the event that format of date or time is incorrect.
+     */
     public Deadline(String description, String date, String time) throws DateTimeParseException {
         super(description);
         this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));

@@ -27,38 +27,38 @@ public class Storage {
         String cmd = arr[0];
         boolean isDone = Integer.parseInt(arr[1]) != 0;
         switch (cmd) {
-            case "T":
-                Task todo = new Todo(arr[2]);
-                if (isDone) {
-                    todo.markAsDone();
-                }
-                list.add(todo);
-                break;
-            case "D":
-                String[] datetime = arr[3].split(" ", 2);
-                Task deadline = new Deadline(arr[2], datetime[0], datetime[1]);
-                if (isDone) {
-                    deadline.markAsDone();
-                }
-                list.add(deadline);
-                break;
-            case "E":
-                Task event = new Event(arr[2], arr[3]);
-                if (isDone) {
-                    event.markAsDone();
-                }
-                list.add(event);
-                break;
-            default:
-                throw new DukeException("Invalid Task Type");
+        case "T":
+            Task todo = new Todo(arr[2]);
+            if (isDone) {
+                todo.markAsDone();
+            }
+            list.add(todo);
+            break;
+        case "D":
+            String[] datetime = arr[3].split(" ", 2);
+            Task deadline = new Deadline(arr[2], datetime[0], datetime[1]);
+            if (isDone) {
+                deadline.markAsDone();
+            }
+            list.add(deadline);
+            break;
+        case "E":
+            Task event = new Event(arr[2], arr[3]);
+            if (isDone) {
+                event.markAsDone();
+            }
+            list.add(event);
+            break;
+        default:
+            throw new DukeException("Invalid Task Type");
         }
     }
 
     /**
      * Initial seeding of the data from hard drive memory.
      *
-     * @throws DukeException DukeException class.
      * @return seeded ArrayList.
+     * @throws DukeException DukeException class.
      */
     public ArrayList<Task> load() throws DukeException {
 
@@ -92,7 +92,7 @@ public class Storage {
      */
     public void updateData(TaskList tasklist) throws DukeException {
         try {
-            ArrayList<Task> list = tasklist.getlist();
+            ArrayList<Task> list = tasklist.getList();
             FileWriter fw = new FileWriter(this.filepath);
             for (Task task : list) {
                 String data = String.format("%s\n", task.fileFormat());

@@ -18,7 +18,7 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 

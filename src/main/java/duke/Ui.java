@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -57,6 +58,16 @@ public class Ui {
      */
     public void showError(String s) {
         printStandard(s);
+    }
+
+    /**
+     * Prints all matching tasks to the keyword
+     */
+    public void showMatches(ArrayList<String> matches) {
+        printStandard("Here are the matching tasks in your list:");
+        for (int i = 0; i < matches.size(); ++i) {
+            printStandard(String.format("%d.%s", i + 1, matches.get(i).trim()));
+        }
     }
 
     /**

@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TaskList {
@@ -49,6 +51,17 @@ public class TaskList {
 
     public int getNumTasks() {
         return lst.size();
+    }
+
+    public ArrayList<String> findTask(String keyword) {
+        ArrayList<String> matches = new ArrayList<>();
+        for (Task task : lst) {
+            String description = task.getDescription();
+            if (description.contains(keyword)) {
+                matches.add(task.toString());
+            }
+        }
+        return matches;
     }
 
     public void addTask(Task task) {

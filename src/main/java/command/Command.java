@@ -1,6 +1,10 @@
+package command;
+
 import java.time.format.DateTimeParseException;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import task.*;
+import duke.*;
 
 import static java.lang.String.format;
 
@@ -17,8 +21,8 @@ public class Command {
      * Executes the given line instruction passed into the object.
      *
      * @param tasklist Tasklist object containing the data structure.
-     * @param ui Ui object responsible for interface response.
-     * @param storage Storage object to make changes to hard drive data.
+     * @param ui duke.Ui object responsible for interface response.
+     * @param storage duke.Storage object to make changes to hard drive data.
      */
     public void execute(TaskList tasklist, Ui ui, Storage storage) {
         String[] arr = line.split(" ", 2);

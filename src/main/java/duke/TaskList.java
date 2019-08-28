@@ -1,7 +1,10 @@
+package duke;
+
 import java.util.ArrayList;
+import task.Task;
 
 /**
- * TaskList class that abstract the ArrayList Task object.
+ * duke.TaskList class that abstract the ArrayList Task object.
  */
 public class TaskList {
     private ArrayList<Task> list;

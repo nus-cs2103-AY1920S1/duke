@@ -1,3 +1,8 @@
+package duke;
+
+import duke.DukeException;
+import task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +14,7 @@ public class Storage {
     private String filepath;
 
     /**
-     * Storage constructor.
+     * duke.Storage constructor.
      *
      * @param filepath path of data file.
      */
@@ -58,7 +63,7 @@ public class Storage {
      * Initial seeding of the data from hard drive memory.
      *
      * @return seeded ArrayList.
-     * @throws DukeException DukeException class.
+     * @throws DukeException duke.DukeException class.
      */
     public ArrayList<Task> load() throws DukeException {
 
@@ -88,7 +93,7 @@ public class Storage {
      * Method to override the hard drive memory with the given list.
      *
      * @param tasklist given tasklist.
-     * @throws DukeException custom DukeException.
+     * @throws DukeException custom duke.DukeException.
      */
     public void updateData(TaskList tasklist) throws DukeException {
         try {

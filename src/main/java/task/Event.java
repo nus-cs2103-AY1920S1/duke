@@ -1,3 +1,5 @@
+package task;
+
 public class Event extends Task {
     //3.[E][✗] project meeting (at: Aug 6th 2-4pm)
     private String at;

@@ -1,3 +1,9 @@
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import command.Command;
+
 /**
  * Duke class.
  */
@@ -39,7 +45,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke d = new Duke("./data/list.txt");
+        Duke d = new Duke("list.txt");
         d.run();
     }
 }

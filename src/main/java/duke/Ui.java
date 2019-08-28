@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -13,9 +17,9 @@ public class Ui {
     }
 
     /**
-     * Error printer if DukeException is encountered.
+     * Error printer if duke.DukeException is encountered.
      *
-     * @param e Caught DukeException.
+     * @param e Caught duke.DukeException.
      */
     public void showLoadingError(DukeException e) {
         System.out.println(this.line + format("\t %s\n", e) + this.line);

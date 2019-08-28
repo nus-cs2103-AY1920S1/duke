@@ -17,7 +17,7 @@ public class Duke {
     public static ArrayList<Task> storedTasks = new ArrayList<>();
 
     //main
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Duke.greet();
         readInput();
     }
@@ -26,7 +26,7 @@ public class Duke {
     public static void readInput() throws IncorrectTaskNameException, EmptyTodoDescriptionException,
             EmptyEventDescriptionException, EmptyDeadlineDescriptionException {
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()){
+        while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             //break before storing task if input = bye, add done to number
             if (input.equals("bye")){
@@ -36,17 +36,24 @@ public class Duke {
                 int itemIndex = Integer.parseInt(input.substring(5)) - 1;
                 // close if item number don't exist
                 if ((itemIndex + 1) > Duke.storedTasks.size()){
-                    System.out.println("failed to find item, closing now.");
+                    System.out.println("failed to done item, closing now.");
                     Duke.exit();
                     break;
                 } else {
                     Duke.done(itemIndex);
                 }
                 continue;
-            }
-            //store task if input != "bye"
-            if (input.equals("list")){
+            }  else if (input.equals("list")){
                 Duke.showList();
+            } else if((input.length() > 5) && input.substring(0, 7).equals("delete ")) {
+                int itemIndex = Integer.parseInt(input.substring(7)) - 1;
+                if ((itemIndex + 1) > Duke.storedTasks.size()){
+                    System.out.println("failed to delete item, closing now.");
+                    Duke.exit();
+                    break;
+                } else {
+                    Duke.delete(itemIndex);
+                }
             } else {
                 // just to catch wrong input
                 try{
@@ -98,22 +105,23 @@ public class Duke {
         }
     }
 
-    public static void greet(){
+    public static void greet() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
-    public static void echo(String input){
+    public static void echo(String input) {
         System.out.println(input);
     }
 
-    public static void done(int itemNum){
+    public static void done(int itemNum) {
         Duke.storedTasks.get(itemNum).doneJob();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + Duke.storedTasks.get(itemNum));
+        System.out.println("Now you have " + Duke.storedTasks.size() + " in the list.");
     }
 
-    public static void showList(){
+    public static void showList() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < Duke.storedTasks.size(); i++){
             System.out.print((i + 1) + ".");
@@ -122,7 +130,14 @@ public class Duke {
         }
     }
 
-    public static void exit(){
+    public static void delete(int itemNum) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + Duke.storedTasks.get(itemNum));
+        Duke.storedTasks.remove(itemNum);
+        System.out.println("Now you have " + Duke.storedTasks.size() + " in the list.");
+    }
+
+    public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 }

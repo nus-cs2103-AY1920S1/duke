@@ -1,3 +1,8 @@
+/**
+ * The Storage class deals with storing tasks from the task list
+ * and loading tasks from the hard drive.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,10 +15,22 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for class Storage.
+     *
+     * @param filePath File path for accessing the hard drive.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a list of tasks to load into the task list.
+     *
+     * @return tasks List of tasks.
+     * @throws FileNotFoundException If file to load tasks from cannot be found.
+     * @throws DukeException If file is empty.
+     */
     public List<Task> loadTasks() throws FileNotFoundException, DukeException {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
@@ -42,6 +59,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the tasks from the task list to the hard drive.
+     *
+     * @param tasks Task list to save.
+     * @throws IOException Throws if an unpredicted error occurs.
+     */
     public void saveTasks(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks.getList()) {

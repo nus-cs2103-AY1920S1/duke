@@ -1,3 +1,8 @@
+/**
+ * The Parser class takes in a string, parses it to the required
+ * date and time format before returning it.
+ */
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,10 +11,22 @@ public class Parser {
 
     private String str;
 
+    /**
+     * Constructor for Parser class.
+     *
+     * @param str String that needs to be parsed.
+     */
     public Parser(String str) {
         this.str = str;
     }
 
+    /**
+     * Returns a Task with a formatted date and time.
+     *
+     * @return parsedTask Task that has been formatted.
+     * @throws DukeException If task is empty.
+     * @throws ParseException If date or time of task does not follow the format.
+     */
     public Task parse() throws DukeException, ParseException {
         Task parsedTask = null;
         String[] wordArray = str.split(" ");

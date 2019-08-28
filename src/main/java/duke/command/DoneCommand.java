@@ -13,10 +13,22 @@ public class DoneCommand extends Command {
 
     private static final String ERROR_INVALID_TASK_ID = "The id of the task must be a number. e.g. done 1";
 
+    /**
+     * Constructs a Done command.
+     *
+     * @param taskId Id of task to mark as done.
+     */
     public DoneCommand(int taskId) {
         this.taskId = taskId;
     }
 
+    /**
+     * Executes Done command to mark a task from the given TaskList as done.
+     *
+     * @param tasks Current TaskList.
+     * @param storage Current Storage.
+     * @throws DukeException If invalid id.
+     */
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (taskId < 1 || taskId > tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);

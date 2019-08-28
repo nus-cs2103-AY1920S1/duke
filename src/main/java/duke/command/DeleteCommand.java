@@ -14,10 +14,22 @@ public class DeleteCommand extends Command {
 
     private static final String ERROR_INVALID_TASK_ID = "The id of the task must be a number. e.g. done 1";
 
+    /**
+     * Constructs a Delete command.
+     *
+     * @param taskId Id of task to delete.
+     */
     public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
 
+    /**
+     * Executes Delete command to delete a task from the given TaskList.
+     *
+     * @param tasks Current TaskList.
+     * @param storage Current Storage.
+     * @throws DukeException If invalid id.
+     */
     public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (taskId < 1 || taskId > tasks.size()) {
             throw new DukeException(ERROR_INVALID_TASK_ID);

@@ -12,6 +12,13 @@ public class Parser {
     private static final String ERROR_INVALID_TASK_ID = "The id of the task must be a number. e.g. done 1";
     private static final String ERROR_TOO_MANY_ARGUMENTS = "There are too many arguments for this command.";
 
+    /**
+     * Returns a Command object depending on the command inputted by the User.
+     *
+     * @param fullCommand User input.
+     * @return Command object depending on given input.
+     * @throws DukeException If invalid input.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] line = fullCommand.split(" ", 2);
         switch (line[0]) {

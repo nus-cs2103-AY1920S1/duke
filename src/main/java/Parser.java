@@ -15,6 +15,18 @@ public class Parser {
             return false;
         }
     }
+    /**
+     * findFeature().
+     */
+    public static FindCommand findFeature() throws DukeException {
+        if (oneLine.length == 1 || (oneLine.length == 2 && oneLine[1].isBlank())) {
+            throw new DukeException("The description of a " + oneLine[0].trim() + " cannot be empty.");
+        } else if (oneLine.length == 2 && !oneLine[1].isBlank()) {
+            return new FindCommand(oneLine);
+        } else {
+            throw new InvalidNumberException("the description should be a number");
+        }
+    }
 
     /**
      * doneFeature().
@@ -79,6 +91,8 @@ public class Parser {
                 throw new ExtraDescriptionException("There is extra description for list");
             }
             outCommand = new ListCommand();
+        } else if (firstWord.equals("find")) {
+            outCommand = findFeature();
         } else if (firstWord.equals("done")) {
             outCommand = doneFeature();
         } else if (firstWord.equals("delete")) {
@@ -89,6 +103,10 @@ public class Parser {
         } else {
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
+//        }
+//        catch (DukeException e) {
+//            System.out.println(e);
+//        }
         return outCommand;
     }
 }

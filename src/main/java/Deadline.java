@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String getFormatToFile() {
-        return String.format("D | %d | %s | %s \n", (isDone ? 1 : 0), description, by);
+        return String.format("D | %d | %s | %s \n", (isDone ? 1 : 0), description, by.trim());
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Event extends Task {
 
     @Override
     public String getFormatToFile() {
-        return String.format("E | %d | %s | %s \n", (isDone ? 1 : 0), description, at);
+        return String.format("E | %d | %s | %s \n", (isDone ? 1 : 0), description, at.trim());
     }
 
     @Override

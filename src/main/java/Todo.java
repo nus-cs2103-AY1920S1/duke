@@ -13,7 +13,7 @@ public class Todo extends Task {
 
     @Override
     public String getFormatToFile() {
-        return String.format("T | %d | %s \n", (isDone ? 1 : 0), description);
+        return String.format("T | %d | %s \n", (isDone ? 1 : 0), description.trim());
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 public abstract class Task implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
     private String description;
     private boolean done;
     private TaskKeyword keyword;

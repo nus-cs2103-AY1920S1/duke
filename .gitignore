@@ -13,4 +13,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/data/
+# Save File
+data/

@@ -89,7 +89,7 @@ public class Duke {
                     if (arguments.length != 2) {
                         throw new DukeException(" ☹ OOPS!!! Deadlines must have exactly one deadline");
                     }
-                    addTask(new Deadline(arguments[0].trim(), arguments[1].trim()));
+                    addTask(new Deadline(arguments[0].trim(), DateTimeHelper.convertDateToString(arguments[1].trim())));
                 } else if (s.startsWith("event")) {
                     try {
                         s = s.substring(6);
@@ -101,7 +101,7 @@ public class Duke {
                     if (arguments.length != 2) {
                         throw new DukeException(" ☹ OOPS!!! Events must have exactly one time");
                     }
-                    addTask(new Event(arguments[0].trim(), arguments[1].trim()));
+                    addTask(new Event(arguments[0].trim(), DateTimeHelper.convertDateToString(arguments[1].trim())));
                 } else if (s.matches("delete ([1-9]|[1-9][0-9]|100)")) {
                     int deleteIndex = Integer.parseInt(s.substring(7));
                     delete(deleteIndex - 1);

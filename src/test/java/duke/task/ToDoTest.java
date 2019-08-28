@@ -12,6 +12,6 @@ public class ToDoTest {
 
     @Test
     public void testToString() {
-        assertEquals("[T] homework", (new ToDo("homework").toString()));
+        assertEquals("[T][✘] homework", (new ToDo("homework").toString()));
     }
 }

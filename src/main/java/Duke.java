@@ -4,7 +4,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialise Duke.
+     * Initialise Duke with stated filePath.
      *
      * @param filePath filePath to read and save list data.
      */
@@ -22,7 +22,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
-
 
     /**
      * Main loop of Duke.

@@ -1,9 +1,15 @@
 public class DoneCommand extends Command {
     private int index;
 
-    public DoneCommand(String command) throws IndexFormatDukeException {
+    /**
+     * Command for TaskList to set Task at index as done.
+     *
+     * @param indexString Index String
+     * @throws IndexFormatDukeException On unable to parse string
+     */
+    public DoneCommand(String indexString) throws IndexFormatDukeException {
         try {
-            index = Integer.parseInt(command.trim());
+            index = Integer.parseInt(indexString.trim());
         } catch (NumberFormatException e) {
             throw new IndexFormatDukeException();
         }
@@ -12,6 +18,11 @@ public class DoneCommand extends Command {
     /**
      * Executes done command which set task, of index parsed by constructor, from TaskList as done.
      * Then Storage rewrite using TaskList.
+     *
+     * @param tasks   TaskList
+     * @param ui      Ui
+     * @param storage Storage
+     * @throws DukeException On index out of bound or problems with Storage writing
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.setDone(index);

@@ -2,7 +2,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     private Storage storage;
@@ -10,32 +12,33 @@ public class DukeTest {
     private TaskList tasks;
 
     private StringBuilder tests = new StringBuilder()
-            .append("todo borrow book\n")
-            .append("list\n")
-            .append("deadline D1 Project Assignment /by 2dect1900\n")
-            .append("done 0\n")
-            .append("done 3\n")
-            .append("event music festival\n")
-            .append("bye\n");
+        .append("todo borrow book\n")
+        .append("list\n")
+        .append("deadline D1 Project Assignment /by 2dect1900\n")
+        .append("done 0\n")
+        .append("done 3\n")
+        .append("event music festival\n")
+        .append("bye\n");
+
     private String[] expected = {
-            "Got it. I've added this task:\n" +
-                    "  [T][\u2718] borrow book\n" +
-                    "Now you have 1 tasks in the list.\n",
+        "Got it. I've added this task:\n"
+            + "  [T][✘] borrow book\n"
+            + "Now you have 1 tasks in the list.\n",
 
-            "Here are the tasks in your list:\n" +
-                    "1.[T][\u2718] borrow book\n",
+        "Here are the tasks in your list:\n"
+            + "1.[T][✘] borrow book\n",
 
-            "Got it. I've added this task:\n" +
-                    "  [D][\u2718] D1 Project Assignment (by: December 2 2019, 7:00 PM)\n" +
-                    "Now you have 2 tasks in the list.\n",
+        "Got it. I've added this task:\n"
+            + "  [D][✘] D1 Project Assignment (by: December 2 2019, 7:00 PM)\n"
+            + "Now you have 2 tasks in the list.\n",
 
-            "Index given is out of bound.\nUse from 1 to last index of list only.\n",
+        "Index given is out of bound.\nUse from 1 to last index of list only.\n",
 
-            "Index given is out of bound.\nUse from 1 to last index of list only.\n",
+        "Index given is out of bound.\nUse from 1 to last index of list only.\n",
 
-            "\u2639 OOPS!!! The time of a event cannot be empty.\n",
+        "☹ OOPS!!! The time of a event cannot be empty.\n",
 
-            "Bye. Hope to see you again soon!\n"
+        "Bye. Hope to see you again soon!\n"
     };
 
     @Test
@@ -55,14 +58,15 @@ public class DukeTest {
     @Test
     public void runTest() {
         System.setIn(new ByteArrayInputStream(tests.toString().getBytes()));
-        boolean isExit = false;
+
         int i = 0;
 
         ui = new TestUi();
         storage = new TestStorage();
         tasks = new TaskList();
-
         ui.showWelcome();
+
+        boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
@@ -77,32 +81,4 @@ public class DukeTest {
             }
         }
     }
-}
-
-class TestUi extends Ui {
-    private String output;
-
-    @Override
-    public void show(String str) {
-        if (!str.endsWith("\n"))
-            str += '\n';
-        output = str;
-        super.show(str);
-    }
-
-    @Override
-    public String toString() {
-        String buf = output;
-        output = "";
-        return buf;
-    }
-}
-
-class TestStorage extends Storage {
-    public TestStorage() {
-        super("");
-    }
-
-    @Override
-    public void rewrite(String content) {}
 }

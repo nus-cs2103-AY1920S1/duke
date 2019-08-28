@@ -7,17 +7,16 @@ public class Storage {
     private String filePath;
 
     /**
-     * Initialise filePath for continuous referencing
+     * Initialise filePath for continuous referencing.
      *
-     * @param filePath
+     * @param filePath filePath to save file
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-
     /**
-     * Try to load raw data from filePath and parse into ArrayList of Tasks
+     * Try to load raw data from filePath and parse into ArrayList of Tasks.
      *
      * @return ArrayList of Tasks
      * @throws LoadFileFailDukeException if file or raw data can't be loaded
@@ -34,12 +33,11 @@ public class Storage {
         }
     }
 
-
     /**
      * Try to rewrite entire file defined by filePath.
      *
      * @param content data to be written over into file at filePath
-     * @throws WriteFileFailDukeException if directory does not exists or something unexpected happens
+     * @throws WriteFileFailDukeException if directory does not exists or unable to write to file
      */
     public void rewrite(String content) throws WriteFileFailDukeException {
         try {

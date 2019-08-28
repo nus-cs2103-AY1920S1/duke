@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     public Task getLast() {
-        return this.arr.get(arr.size()-1);
+        return this.arr.get(arr.size() - 1);
     }
 
     public int getSize() {
@@ -47,6 +47,11 @@ public class TaskList {
         return this.arr.get(index);
     }
 
+    /**
+     * Returns new array of matching words Tasks.
+     * @param findText the text that contains the words to be found.
+     * @return a new ArrayList filled with Tasks.
+     */
     public ArrayList<Task> getMatchingWordsList(String findText) {
 
         ArrayList<Task> matchingWordsList = new ArrayList<>();

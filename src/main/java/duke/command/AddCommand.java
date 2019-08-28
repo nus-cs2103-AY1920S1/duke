@@ -8,12 +8,16 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * Add Command
+ * Add Command Object.
  */
 public class AddCommand extends Command {
 
     public Task taskToAdd;
 
+    /**
+     * Constructor for AddCommand object.
+     * @param t is the Task to be added.
+     */
     public AddCommand(Task t) {
         super(false);
         this.taskToAdd = t;

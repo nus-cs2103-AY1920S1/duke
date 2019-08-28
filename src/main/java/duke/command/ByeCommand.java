@@ -5,7 +5,7 @@ import duke.logic.TaskList;
 import duke.ui.Ui;
 
 /**
- * Bye Command
+ * Bye Command Object.
  */
 
 public class ByeCommand extends Command {

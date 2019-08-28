@@ -20,16 +20,20 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private File f;
+    private File file;
     private String filePath;
 
-
+    /**
+     * Constructor for storage.
+     * @param filePath name of file path.
+     * @throws IOException when file does not open.
+     */
     public Storage(String filePath) throws IOException {
 
-        f = new File(filePath);
-        if (! f.exists()) {
-            f.getParentFile().mkdir();
-            f.createNewFile();
+        file = new File(filePath);
+        if (! file.exists()) {
+            file.getParentFile().mkdir();
+            file.createNewFile();
         }
         this.filePath = filePath;
 
@@ -39,13 +43,13 @@ public class Storage {
     /**
      * Loads the ArrayList of Task(s) from duke.txt.
      * @return ArrayList of Task(s)
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException when file is not found.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
 
         ArrayList<Task> arr = new ArrayList<>();
 
-        Scanner sc = new Scanner(f);
+        Scanner sc = new Scanner(file);
         while (sc.hasNext()) {
             String line = sc.nextLine();
 
@@ -63,7 +67,7 @@ public class Storage {
 
             //Mark the last task as done.
             if (stringArr[1].trim().equals("1")) {
-                arr.get(arr.size()-1).markAsDone();
+                arr.get(arr.size() - 1).markAsDone();
             }
 
         }
@@ -73,8 +77,8 @@ public class Storage {
 
     /**
      * Writes taskList to duke.txt.
-     * @param taskList
-     * @throws IOException
+     * @param taskList that is to be written to file.
+     * @throws IOException when file does not exist.
      */
     public void writeListToFile(TaskList taskList) throws IOException {
         ArrayList<Task> arr = taskList.getArr();
@@ -85,13 +89,13 @@ public class Storage {
 
             if (entry instanceof Deadline) {
                 sb.append(String.format("D | %s | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName(), ((Deadline) entry).getDateTime() ));
+                        entry.getTaskName(), ((Deadline) entry).getDateTime()));
             } else if (entry instanceof Event) {
                 sb.append(String.format("E | %s | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName(), ((Event) entry).getDateTime() ));
+                        entry.getTaskName(), ((Event) entry).getDateTime()));
             } else if (entry instanceof ToDo) {
                 sb.append(String.format("T | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getTaskName() ));
+                        entry.getTaskName()));
             }
 
             sb.append(System.lineSeparator());

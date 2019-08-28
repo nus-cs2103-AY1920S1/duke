@@ -9,10 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- *
  * Main class.
- *
- *
  */
 public class Duke {
 
@@ -22,11 +19,11 @@ public class Duke {
 
     /**
      * Constructor for Duke.
-     * @param filePath
-     * @throws FileNotFoundException
+     * @param filePath String of the file path that is passed.
+     * @throws FileNotFoundException when Storage finds that the File does not exist.
      */
 
-    public Duke(String filePath) throws FileNotFoundException, IOException {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -34,11 +31,10 @@ public class Duke {
 
     /**
      * Run the whole program for main class.
-     * @throws IOException
-     * @throws DukeException
+     * @throws IOException when file cannot be found.
      */
 
-    public void run() throws IOException, DukeException {
+    public void run() throws IOException {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -58,24 +54,11 @@ public class Duke {
 
     /**
      *  Creates new Duke object and runs it.
-     * @param args
-     * @throws DukeException
-     * @throws IOException
+     * @param args Main method.
+     * @throws IOException when resources/duke.txt cannot be found.
      */
 
-    public static void main(String[] args) throws DukeException,IOException {
-        /*Class dukeClass = Duke.class;
-        ClassLoader loader = dukeClass.getClassLoader();
-        URL myURL = loader.getResource("resources/duke.txt");
-
-        String path;
-
-        if (myURL.getPath() != null) {
-            path = myURL.getPath();
-            path = path.replaceAll("%20", " ");
-        }*/
-
-
+    public static void main(String[] args) throws IOException {
         Duke duke = new Duke("resources/duke.txt");
         duke.run();
     }

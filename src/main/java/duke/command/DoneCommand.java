@@ -13,9 +13,13 @@ public class DoneCommand extends Command {
 
     private int index;
 
+    /**
+     * Constructor for DoneCommand object.
+     * @param num is the taskNumber that needs to be done.
+     */
     public DoneCommand(int num) {
         super(false);
-        this.index = num-1;
+        this.index = num - 1;
 
     }
 

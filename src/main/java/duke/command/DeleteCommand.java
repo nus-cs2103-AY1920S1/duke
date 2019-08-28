@@ -14,9 +14,13 @@ public class DeleteCommand extends Command {
 
     private int index;
 
+    /**
+     * Constructor for DeleteCommand object.
+     * @param num is the taskNumber that needs to be deleted.
+     */
     public DeleteCommand(int num) {
         super(false);
-        this.index = num-1;
+        this.index = num - 1;
 
     }
 

@@ -29,7 +29,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (at: %s)",
-                this.getType() ,isDone ? "\u2713": "\u2718",
-                this.taskName, this.getDateTime() );
+                this.getType(), isDone ? "\u2713" : "\u2718",
+                this.taskName, this.getDateTime());
     }
 }

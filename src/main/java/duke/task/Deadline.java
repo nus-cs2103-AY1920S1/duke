@@ -29,7 +29,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)",
-                this.getType() ,isDone ? "\u2713": "\u2718",
+                this.getType(), isDone ? "\u2713" : "\u2718",
                 this.taskName, getDateTime());
     }
 }

@@ -20,6 +20,6 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         ArrayList<Task> matchingWordsArr = taskList.getMatchingWordsList(findText);
-        ui.showFoundTasks(matchingWordsArr);
+        ui.showMatchingTasks(matchingWordsArr);
     }
 }

@@ -1,6 +1,13 @@
 package duke.logic;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.Command;
+import duke.command.ListCommand;
+import duke.command.ByeCommand;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -17,9 +24,9 @@ public class Parser {
 
     /**
      * Returns the correct command from given String command.
-     * @param command
+     * @param command is the String that needs to be parsed.
      * @return approriate command.
-     * @throws DukeException
+     * @throws DukeException when command is invalid.
      */
     public static Command parse(String command) throws DukeException {
 
@@ -63,20 +70,29 @@ public class Parser {
         } else if (command.split(" ")[0].equals("find")) {
             int spaceIndex = command.indexOf(" ");
 
-            return new FindCommand(command.substring(spaceIndex+1));
+            return new FindCommand(command.substring(spaceIndex + 1));
         }
 
         return new ListCommand();
-
-
-
     }
 
+
+    /**
+     * Returns a new ToDo object.
+     * @param taskName for initializing ToDo instance.
+     * @return new ToDo instance.
+     */
     public static ToDo getToDo(String taskName) {
         return new ToDo(taskName);
 
     }
 
+    /**
+     * Returns a new Deadline object.
+     * @param taskName for initializing Deadline instance.
+     * @param datetime to be parsed into suitable LocalDateTime object.
+     * @return new Deadline instance.
+     */
     public static Deadline getDeadline(String taskName, String datetime) {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
@@ -85,6 +101,12 @@ public class Parser {
 
     }
 
+    /**
+     * Returns a new Event object.
+     * @param taskName for initializing Event instance.
+     * @param datetime to be parsed into suitable LocalDateTime object.
+     * @return new Event instance.
+     */
     public static Event getEvent(String taskName, String datetime) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
         LocalDateTime dateTimeObj =  LocalDateTime.parse(datetime, dtf);
@@ -94,15 +116,12 @@ public class Parser {
 
     private static boolean isCommandValid(String str) throws DukeException {
 
-
-        if (! (str.split(" ")[0].equals("list") ||
-                str.split(" ")[0].equals("todo") ||
-                str.split(" ")[0].equals("deadline") ||
-                str.split(" ")[0].equals("event") ||
-                str.split(" ")[0].equals("delete") ||
-                str.split(" ")[0].equals("find")
-        )) {
-
+        if (! (str.split(" ")[0].equals("list")
+            || str.split(" ")[0].equals("todo")
+            || str.split(" ")[0].equals("deadline")
+            || str.split(" ")[0].equals("event")
+            || str.split(" ")[0].equals("delete")
+            || str.split(" ")[0].equals("find"))) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         } else if (! str.split(" ")[0].equals("list") && str.split(" ").length == 1) {
@@ -121,11 +140,11 @@ public class Parser {
         } else if (str.split(" ")[0].equals("event") && str.split(" ")[1].equals("/at")) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
 
-        } else if (str.split(" ")[0].equals("delete") &&  ! isNumeric(str.split(" ")[1])) {
+        } else if (str.split(" ")[0].equals("delete") && ! isNumeric(str.split(" ")[1])) {
             throw new DukeException("OOPS!!! The index of the array has to be specified.");
 
         } else if (str.split(" ")[0].equals("delete") && isNumeric(str.split(" ")[1])
-                && (Integer.parseInt(str.split(" ")[1]) <= 0 )) {
+                && (Integer.parseInt(str.split(" ")[1]) <= 0)) {
             throw new DukeException("OOPS!!! Index out of bounds. It is larger or smaller than size of list.");
 
         } else if (str.split(" ")[0].equals("delete") && str.split(" ").length > 2) {

@@ -17,7 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.getType() ,isDone ? "\u2713": "\u2718", taskName );
+        return String.format("[%s][%s] %s", this.getType(), isDone ? "\u2713" : "\u2718", taskName);
     }
 
     public void markAsDone() {

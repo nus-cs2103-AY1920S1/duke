@@ -33,7 +33,7 @@ public class Ui {
 
     /**
      * Prints out the last task in taskList.
-     * @param taskList
+     * @param taskList that contains the last task.
      */
     public void showAddedTask(TaskList taskList) {
         System.out.println("Got it. I've added this task: ");
@@ -43,7 +43,7 @@ public class Ui {
 
     /**
      * Prints out the entire taskList.
-     * @param taskList
+     * @param taskList that contains all the tasks.
      */
     public void showTaskList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
@@ -51,25 +51,28 @@ public class Ui {
         ArrayList<Task> arr = taskList.getArr();
         int index  = 1;
         for (Task task : arr) {
-            System.out.println(String.format("%d. %s", index , task.toString()));
+            System.out.println(String.format("%d. %s", index, task.toString()));
             index++;
         }
     }
 
-
-    public void showFoundTasks(ArrayList<Task> arr) {
+    /**
+     * Prints out all the tasks that matches.
+     * @param arr that contains found tasks.
+     */
+    public void showMatchingTasks(ArrayList<Task> arr) {
         System.out.println("Here are the matching tasks in your list:");
         int index  = 1;
         for (Task task : arr) {
-            System.out.println(String.format("%d. %s", index , task.toString()));
+            System.out.println(String.format("%d. %s", index, task.toString()));
             index++;
         }
     }
 
     /**
      * Prints out the task that is recently deleted.
-     * @param taskList
-     * @param t
+     * @param taskList that contains size of array.
+     * @param t shows that task that is deleted.
      */
     public void showDeletedTask(TaskList taskList, Task t) {
         System.out.println("Noted. I've removed this task: ");
@@ -87,7 +90,7 @@ public class Ui {
 
     /**
      * Prints error message.
-     * @param errorMsg
+     * @param errorMsg error message String.
      */
     public void showError(String errorMsg) {
         System.out.println(errorMsg);
@@ -95,7 +98,7 @@ public class Ui {
 
     /**
      * Prints out the Task t marked as done.
-     * @param  t
+     * @param  t Task to be marked as done.
      */
     public void showDoneTask(Task t) {
         System.out.println("Nice! I've marked this task as done");

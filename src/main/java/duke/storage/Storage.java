@@ -18,6 +18,11 @@ import java.util.Scanner;
 public class Storage {
     private File file;
 
+    /**
+     * Constructs a Storage object to save tasks to a data file.
+     *
+     * @param fileName the filename of the date file to save tasks
+     */
     public Storage(final String fileName) {
         Path dataDir = getDataDir();
         this.file = dataDir.resolve(fileName).toFile();
@@ -26,6 +31,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the data file.
+     *
+     * @return tasks loaded from the date file
+     * @throws DukeException if data file is not found
+     */
     public TaskList loadTasks() throws DukeException {
         TaskList tasks = new TaskList();
         if (!this.file.isFile()) {
@@ -70,6 +81,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Write tasks to data file.
+     *
+     * @param tasks The tasks to write to the data file
+     * @throws DukeException if the data file cannot be written
+     */
     public void writeTasks(final TaskList tasks) throws DukeException {
         try {
             FileWriter writer = new FileWriter(this.file, false);

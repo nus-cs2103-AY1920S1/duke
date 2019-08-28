@@ -1,13 +1,14 @@
 import java.io.IOException;
 
 public class AddCommand extends Command {
-	public String command;
+	protected String command;
 	
 	public AddCommand(String command) {
 		this.command = command;
 	}
 	
-	public void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, InvalidInputException, InvalidDescriptionException, IOException {
+	public void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, InvalidInputException,
+			InvalidDescriptionException,  IOException {
 		try {
 			if (command.startsWith("todo")) {
 				System.out.println("in");

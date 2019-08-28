@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-//"/users/junhup/desktop/duke/src/main/java/duke.txt"
 public class Storage {
 	protected String filePath;
 	
@@ -35,7 +34,8 @@ public class Storage {
 		}
 	}
 	
-	public void storeDeadline(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException{
+	public void storeDeadline(String input) throws EmptyDescriptionException, InvalidDescriptionException,
+			ParseException {
 		try {
 			FileWriter fw = new FileWriter(this.filePath, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -63,7 +63,7 @@ public class Storage {
 		}
 	}
 	
-	public void storeEvent(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException{
+	public void storeEvent(String input) throws EmptyDescriptionException, InvalidDescriptionException, ParseException {
 		try {
 			if (input.contains("/at")) {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true));
@@ -90,7 +90,7 @@ public class Storage {
 		}
 	}
 	
-	public void updateDelete(String input) throws IOException{
+	public void updateDelete(String input) throws IOException {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(filePath));
 			String[] inputs = input.split(" ");
@@ -156,7 +156,8 @@ public class Storage {
 		try {
 			this.readData(tasks);
 		} catch (ParseException e) {
-			System.out.println("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: 02/08/2019 14:30\n");
+			System.out.println("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: " +
+					"02/08/2019 14:30\n");
 		}
 		return tasks;
 	}
@@ -190,7 +191,7 @@ public class Storage {
 		tasksList.add(todo);
 	}
 	
-	public void addStoredDeadline(String[] input, ArrayList<Task> tasksList) throws ParseException{
+	public void addStoredDeadline(String[] input, ArrayList<Task> tasksList) throws ParseException {
 		Deadline deadline = new Deadline(input[2], convertStringToDate(input[3]));
 		if (Integer.parseInt(input[1]) == 1) {
 			deadline.complete();
@@ -198,7 +199,7 @@ public class Storage {
 		tasksList.add(deadline);
 	}
 	
-	public void addStoredEvent(String[] input, ArrayList<Task> tasksList) throws ParseException{
+	public void addStoredEvent(String[] input, ArrayList<Task> tasksList) throws ParseException {
 		Event event = new Event(input[2], convertStringToDate(input[3]));
 		if (Integer.parseInt(input[1]) == 1) {
 			event.complete();

@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.IOException;
 
 public class DeleteCommand extends Command {
 	protected String command;

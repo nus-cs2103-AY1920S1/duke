@@ -83,6 +83,10 @@ public class Duke {
                         taskList.printTask(event, taskList.size());
                         break;
 
+                    case "find":
+                        taskList.searchKeyword(commandArr);
+                        break;
+
                     case "deadline":
                         String deadlineDescription = taskList.getDescription(commandArr);
                         String deadlineTime = taskList.getTime(commandArr);

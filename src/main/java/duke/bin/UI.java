@@ -1,9 +1,9 @@
-package bin;
+package duke.bin;
 
-import bin.task.Deadline;
-import bin.task.Event;
-import bin.task.Task;
-import bin.task.ToDo;
+import duke.bin.task.Deadline;
+import duke.bin.task.Event;
+import duke.bin.task.Task;
+import duke.bin.task.ToDo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -89,7 +89,8 @@ public class UI {
                     if (moreThanOne) {
                         String[] spl = words[1].split(" /by ", 2);
                         String time = spl.length > 1 ? spl[1]: "NA";
-                        temp = new Deadline(spl[0], time);
+                        Time t = new Time(time);
+                        temp = new Deadline(spl[0], t);
                         dataStorage.store(temp);
                         wrapper(temp.toString(), "Got it. I've added this task:",
                                 "Now you have " + dataStorage.getSize() + " tasks in the list.");
@@ -102,7 +103,8 @@ public class UI {
                     if (moreThanOne) {
                     String[] split = words[1].split(" /at ", 2);
                     String time = split.length > 1 ? split[1]: "NA";
-                    temp = new Event(split[0], time);
+                    Time t = new Time(time);
+                    temp = new Event(split[0], t);
                     dataStorage.store(temp);
                     wrapper(temp.toString(), "Got it. I've added this task:",
                             "Now you have " + dataStorage.getSize() + " tasks in the list.");

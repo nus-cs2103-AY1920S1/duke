@@ -1,6 +1,6 @@
-package bin;
+package duke.bin;
 
-import bin.task.Task;
+import duke.bin.task.Task;
 
 import java.util.ArrayList;
 

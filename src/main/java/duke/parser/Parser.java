@@ -13,29 +13,32 @@ public class Parser {
 
         try {
             switch (commandWord) {
-                case DeadlineCommand.COMMAND_WORD:
-                    return prepareDeadline(arr[1]);
+            case DeadlineCommand.COMMAND_WORD:
+                return prepareDeadline(arr[1]);
 
-                case EventCommand.COMMAND_WORD:
-                    return prepareEvent(arr[1]);
+            case EventCommand.COMMAND_WORD:
+                return prepareEvent(arr[1]);
 
-                case ToDoCommand.COMMAND_WORD:
-                    return prepareToDo(arr[1]);
+            case ToDoCommand.COMMAND_WORD:
+                return prepareToDo(arr[1]);
 
-                case DeleteCommand.COMMAND_WORD:
-                    return prepareDelete(arr[1]);
+            case DeleteCommand.COMMAND_WORD:
+                return prepareDelete(arr[1]);
 
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-                case DoneCommand.COMMAND_WORD:
-                    return prepareDone(arr[1]);
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(arr[1]);
 
-                case ByeCommand.COMMAND_WORD:
-                    return new ByeCommand();
+            case DoneCommand.COMMAND_WORD:
+                return prepareDone(arr[1]);
 
-                default:
-                    return prepareIncorrect();
+            case ByeCommand.COMMAND_WORD:
+                return new ByeCommand();
+
+            default:
+                return prepareIncorrect();
             }
         } catch (IndexOutOfBoundsException e) {
             return prepareIncorrect();
@@ -72,6 +75,10 @@ public class Parser {
     private static Command prepareDelete(String args) {
         int id = Integer.parseInt(args) - 1;
         return new DeleteCommand(id);
+    }
+
+    private static Command prepareFind(String args) {
+        return new FindCommand(args);
     }
 
     private static Command prepareDone(String args) {

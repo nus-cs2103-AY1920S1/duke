@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private List<Task> tasks;
@@ -38,5 +39,17 @@ public class TaskList {
             sb.append(task.stringify());
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns a new {@link TaskList} with {@link Task}s that contains the keyword.
+     *
+     * @param keyword the string to search for.
+     * @return a new {@link TaskList} with the filtered copy.
+     */
+    public TaskList find(String keyword) {
+        return new TaskList(tasks.stream()
+                .filter(task -> task.description.contains(keyword))
+                .collect(Collectors.toList()));
     }
 }

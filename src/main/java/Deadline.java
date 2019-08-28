@@ -22,8 +22,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("d MMMM yyyy, hmma");
-        String date = formatter.format(this.date);
-        return "[D]" + super.toString() + " (by: " + this.date + ")";
+        String formattedDate = formatter.format(this.date);
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Deadline extends Task {
         if (this.isDone) {
             return "D @ 1 @ " + this.description + " @ " + this.by;
         } else {
-            return "TD @ 0 @ " + this.description + " @ " + this.by;
+            return "D @ 0 @ " + this.description + " @ " + this.by;
         }
     }
 }

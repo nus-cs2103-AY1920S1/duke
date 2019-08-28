@@ -1,2 +1,4 @@
-T @ 0 @ sleep
-T @ 0 @ borrow book
+T @ 1 @ jump
+T @ 0 @ go lecture
+E @ 0 @ project @ 2/4/2019 1800
+T @ 0 @ play basketball

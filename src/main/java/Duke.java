@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -124,7 +125,8 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         } else if (deadlineCommand.length == 1) {
                             throw new DukeException("☹ OOPS!!! Please specify when the deadline is.");
-                        }                        String deadlineDescript = deadlineCommand[0].substring(9);
+                        }
+                        String deadlineDescript = deadlineCommand[0].substring(9);
                         String by = deadlineCommand[1].substring(1);
                         Task deadlineTask = new Deadline(deadlineDescript, by);
                         list.add(deadlineTask);

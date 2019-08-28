@@ -11,4 +11,12 @@ public class Event extends Task {
     public String showTask() {
         return "[E]" + super.showTask() + " (at: " + at + ")";
     }
+    
+    public String toSave() {
+    	if (super.isDone) {
+    		return "doneevent " + super.description + " /at " + at;
+    	} else {
+    		return "event " + super.description + " /at " + at;
+    	}
+    }
 }

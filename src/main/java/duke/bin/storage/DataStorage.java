@@ -1,6 +1,7 @@
 package duke.bin.storage;
 
 import duke.bin.DukeException;
+import duke.bin.Time;
 import duke.bin.task.Deadline;
 import duke.bin.task.Event;
 import duke.bin.task.Task;
@@ -9,6 +10,7 @@ import duke.bin.task.ToDo;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class DataStorage {
     private String filePath;
@@ -44,30 +46,36 @@ public class DataStorage {
     }
 
     private Task parseString(String s) throws DukeException {
-        String type = s.substring(1, 2);
-        String status = s.substring(4, 5);
-        String[] spl = s.split(" ", 2);
-        Task temp;
+        try {
+            String type = s.substring(1, 2);
+            String status = s.substring(4, 5);
+            String[] spl = s.split(" ", 2);
+            Task temp;
 
-        switch(type) {
-        case "T":
-            temp = new ToDo(spl[1]);
-            break;
-        case "E":
-            String[] nameAndDesc = spl[1].split(" \\(at: ");
-            String description = nameAndDesc[1].substring(0, nameAndDesc[1].length() - 1);
-            temp = new Event(nameAndDesc[0], description);
-            break;
-        case "D":
-            String[] nameAndDescr = spl[1].split(" \\(by: ");
-            String desc = nameAndDescr[1].substring(0, nameAndDescr[1].length() - 1);
-            temp = new Deadline(nameAndDescr[0], desc);
-            break;
-        default:
-            temp = null;
-            throw new DukeException("Something went wrong");
+            switch(type) {
+            case "T":
+                temp = new ToDo(spl[1]);
+                break;
+            case "E":
+                String[] nameAndDesc = spl[1].split(" \\(at: ");
+                String time = nameAndDesc[1].substring(0, nameAndDesc[1].length() - 1);
+                Time t = new Time(time);
+                temp = new Event(nameAndDesc[0], t);
+                break;
+            case "D":
+                String[] nameAndDescr = spl[1].split(" \\(by: ");
+                String desc = nameAndDescr[1].substring(0, nameAndDescr[1].length() - 1);
+                Time t2 = new Time(desc);
+                temp = new Deadline(nameAndDescr[0], t2);
+                break;
+            default:
+                temp = null;
+                throw new DukeException("Something went wrong with the save file.");
+            }
+            return temp;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops something when wrong with the save file.");
         }
-        return temp;
     }
 
     public ArrayList<Task> readFromFile() throws IOException, DukeException {

@@ -1,11 +1,13 @@
 package duke.bin.task;
 
-public class Deadline extends Task {
-    protected String description;
+import duke.bin.Time;
 
-    public Deadline(String task, String description) {
+public class Deadline extends Task {
+    protected Time time;
+
+    public Deadline(String task, Time time) {
         super(task);
-        this.description = description;
+        this.time = time;
     }
 
     public String getType() {
@@ -14,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + description + ")";
+        return "[D]" + super.toString() + " (by: " + time + ")";
     }
 }
 

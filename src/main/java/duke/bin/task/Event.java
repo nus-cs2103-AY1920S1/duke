@@ -1,11 +1,13 @@
 package duke.bin.task;
 
-public class Event extends Task {
-    protected String description;
+import duke.bin.Time;
 
-    public Event(String task, String description) {
+public class Event extends Task {
+    protected Time time;
+
+    public Event(String task, Time time) {
         super(task);
-        this.description = description;
+        this.time = time;
     }
 
     public String getType() {
@@ -14,6 +16,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + description + ")";
+        return "[E]" + super.toString() + " (at: " + time + ")";
     }
 }

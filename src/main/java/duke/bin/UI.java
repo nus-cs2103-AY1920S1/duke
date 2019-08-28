@@ -93,8 +93,12 @@ public class UI {
                 case "deadline":
                     if (moreThanOne) {
                         String[] spl = words[1].split(" /by ", 2);
-                        String time = spl.length > 1 ? spl[1]: "NA";
-                        temp = new Deadline(spl[0], time);
+                        if (spl.length <= 1) {
+                            throw new DukeException("I'm sorry, you forgot to put a time for your deadline.");
+                        }
+                        String time = spl[1];
+                        Time t = new Time(time);
+                        temp = new Deadline(spl[0], t);
                         taskList.store(temp);
                         wrapper(temp.toString(), "Got it. I've added this task:",
                                 "Now you have " + taskList.getSize() + " tasks in the list.");
@@ -106,8 +110,12 @@ public class UI {
                 case "event":
                     if (moreThanOne) {
                     String[] split = words[1].split(" /at ", 2);
-                    String time = split.length > 1 ? split[1]: "NA";
-                    temp = new Event(split[0], time);
+                    if (split.length <= 1) {
+                        throw new DukeException("I'm sorry, you forgot to put a time for your event.");
+                    }
+                    String time = split[1];
+                    Time t = new Time(time);
+                    temp = new Event(split[0], t);
                     taskList.store(temp);
                     wrapper(temp.toString(), "Got it. I've added this task:",
                             "Now you have " + taskList.getSize() + " tasks in the list.");
@@ -132,11 +140,10 @@ public class UI {
     private void loadDataFromStorage() {
         try {
             taskList.store(storage.readFromFile());
-//            System.out.print(storage.readFromFile().toArray());
         } catch (DukeException d) {
-            //yet to implement.
+            wrapper(d.getMessage());
         } catch (IOException e) {
-            //same.
+            wrapper(e.getMessage());
         }
     }
 
@@ -144,7 +151,7 @@ public class UI {
         try {
             storage.write(taskList.getList());
         } catch (IOException e) {
-            //yet to implement.
+            wrapper(e.getMessage());
         }
     }
 

@@ -25,22 +25,24 @@ public class Duke {
                     }
                     commands.add(t);
                     System.out.println(counter + ". " + t);
+                    counter++;
                 } else if (data[0].equals("D")) {
-                    Deadline d = new Deadline(data[2], data[3]);
+                    Deadline d = new Deadline(data[2], new DateTime(data[3]));
                     if (data[1].equals("1")) {
                         d.markAsDone();
                     }
                     commands.add(d);
                     System.out.println(counter + ". " + d);
+                    counter++;
                 } else if (data[0].equals("E")){
-                    Event e = new Event(data[2], data[3]);
+                    Event e = new Event(data[2], new DateTime(data[3]));
                     if (data[1].equals("1")) {
                         e.markAsDone();
                     }
                     commands.add(e);
                     System.out.println(counter + ". " + e);
+                    counter++;
                 }
-                counter++;
             }
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();

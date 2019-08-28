@@ -21,24 +21,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        String day;
-        if(this.day == 1) {
-            day = "1st";
-        } else if (this.day == 2) {
-            day = "2nd";
-        } else if (this.day == 3) {
-            day = "3rd";
-        } else if (this.day % 10 == 1) {
-            day = this.day + "st";
-        } else if (this.day % 10 == 2) {
-            day = this.day + "nd";
-        } else if (this.day % 10 == 3) {
-            day = this.day + "rd";
-        } else {
-            day = this.day + "th";
-        }
-
-        return day + " of " + months[this.month - 1] + ", " + this.time + "hrs";
+        return months[this.month - 1] + " " + this.day + ", " + this.time + "hrs";
 
     }
 

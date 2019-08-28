@@ -1,5 +1,12 @@
 public class Parser {
 
+    /**
+     * Returns the command given by the user.
+     * Accepts the string command given and create a new Comment object
+     * depending on the command type.
+     * @param command refers to the input by the user
+     * @return a new Command object
+     */
     public Command parse(String command) {
         String commandType = command.split(" ")[0];
         String instruction = "";

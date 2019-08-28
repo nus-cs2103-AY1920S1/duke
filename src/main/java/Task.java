@@ -29,4 +29,8 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public String save() {
+        return (isDone ? 0 : 1) + description;
+    }
 }

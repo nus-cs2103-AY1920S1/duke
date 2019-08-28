@@ -114,11 +114,9 @@ public class Parser {
         // if the command requires further parameters
         String[] parametersProvided = new String[Type.getNumberOfParametersExpectedFor(commandType)];
 
-
         Iterator<String> delimiterIterator = Type.getDelimitersFor(commandType).iterator();
 
         String nextDelimiter;
-        boolean first = true;
         int parameterCount = 0;
 
         if (delimiterIterator.hasNext()) {

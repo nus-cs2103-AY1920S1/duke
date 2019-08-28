@@ -58,6 +58,7 @@ public class UserInterface {
         isAcceptingInput = true;
     }
 
+    // helper method for determining width threshold for text wrapping in output
     private static int getWidth(int number) {
         return Integer.toString(number).length();
     }
@@ -124,7 +125,7 @@ public class UserInterface {
         }
     }
 
-    public void executeCommand(AddTaskCommand command) throws DukeException {
+    private void executeCommand(AddTaskCommand command) throws DukeException {
         String[] parameters = Command.getParametersUsed(command);
         Task task;
 
@@ -161,7 +162,7 @@ public class UserInterface {
         storage.save(taskList);
     }
 
-    public void executeCommand(CompleteTaskCommand command) throws DukeException {
+    private void executeCommand(CompleteTaskCommand command) throws DukeException {
         String[] parameters = Command.getParametersUsed(command);
         Task task = taskList.complete(parameters[0]);
 
@@ -171,7 +172,7 @@ public class UserInterface {
         storage.save(taskList);
     }
 
-    public void executeCommand(DeleteTaskCommand command) throws DukeException {
+    private void executeCommand(DeleteTaskCommand command) throws DukeException {
         String[] parameters = Command.getParametersUsed(command);
         Task task = taskList.delete(parameters[0]);
 
@@ -184,7 +185,7 @@ public class UserInterface {
         storage.save(taskList);
     }
 
-    public void executeCommand(ShowListCommand command) throws DukeException {
+    private void executeCommand(ShowListCommand command) throws DukeException {
         if (taskList.size() == 0) {
             standardOutput.addLine("Your list is empty!");
         } else {
@@ -199,7 +200,7 @@ public class UserInterface {
         }
     }
 
-    public void executeCommand(ExitCommand command) throws DukeException {
+    private void executeCommand(ExitCommand command) throws DukeException {
         isAcceptingInput = false;
         storage.save(taskList);
         standardOutput.addLine("Goodbye! Hope to see you again!");

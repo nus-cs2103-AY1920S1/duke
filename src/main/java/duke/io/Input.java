@@ -16,8 +16,7 @@ public class Input {
 
     public String get() throws DukeException {
         try {
-            String userInput = bufferedReader.readLine();
-            return userInput;
+            return bufferedReader.readLine();
         } catch (IOException ex) {
             throw new DukeException("Input error");
         }

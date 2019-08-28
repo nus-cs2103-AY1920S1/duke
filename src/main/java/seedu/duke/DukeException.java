@@ -13,5 +13,4 @@ public class DukeException extends Exception {
         super(errorMessage);
     }
 
-
 }

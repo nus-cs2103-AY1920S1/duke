@@ -61,22 +61,5 @@ public class TaskList {
     public int getSize() {
         return taskList.size();
     }
-
-    /**
-     * Loops through the list of tasks to find the tasks containing the keywords.
-     *
-     * @param keyword the keyword that need to be matched
-     * @return an arraylist tasks containing the keywords
-     */
-    public ArrayList<Task> findMatching(String keyword) {
-        ArrayList<Task> matchingList = new ArrayList<>();
-
-        for (int i = 0; i < taskList.size(); i++) {
-            if(taskList.get(i).getDescription().contains(keyword)) {
-                matchingList.add(taskList.get(i));
-            }
-        }
-        return matchingList;
-    }
-
+    
 }

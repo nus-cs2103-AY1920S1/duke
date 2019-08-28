@@ -46,4 +46,5 @@ public class Event extends Task {
     public String writeToFile() {
         return ("E " + super.writeToFile() + " | " + dateFormat.format(dateTime));
     }
+
 }

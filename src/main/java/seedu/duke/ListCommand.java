@@ -22,4 +22,5 @@ public class ListCommand extends Command {
     public void execute(TaskList list, Ui ui, Storage storage) {
         ui.printList(list);
     }
+
 }

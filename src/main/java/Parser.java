@@ -13,8 +13,8 @@ public class Parser {
             try {
                 Task newTask;
                 if (fullCommand.equals("deadline") || fullCommand.equals("event") || fullCommand.equals("todo")) {
-                    throw new EmptyDescriptionException("☹ OOPS!!! The description of a " +
-                            fullCommand + " cannot be empty.");
+                    throw new EmptyDescriptionException("☹ OOPS!!! The description of a "
+                            + fullCommand + " cannot be empty.");
                 } else if (fullCommand.startsWith("deadline")) {
                     String[] phrases = fullCommand.substring(9).split(" /by ");
                     newTask = new Deadline(phrases[0], phrases[1]);

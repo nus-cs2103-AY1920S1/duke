@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.Serializable;
 
 public abstract class Task implements Serializable {
     protected String taskDescription;

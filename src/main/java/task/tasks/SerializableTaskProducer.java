@@ -1,11 +1,16 @@
-package util;
+package task.tasks;
 
 import error.UnknownCommandException;
 import error.task.TaskCreationException;
-import task.Task;
 
 import java.io.Serializable;
 
+/***
+ * <p>
+ * Functional interface that returns a task.
+ * Serializable to be written to storage.
+ * </p>
+ */
 @FunctionalInterface
 public interface SerializableTaskProducer extends Serializable {
     static final long serialVersionUID = 6529685098267157192L;

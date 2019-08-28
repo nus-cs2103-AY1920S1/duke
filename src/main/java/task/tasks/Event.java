@@ -1,17 +1,27 @@
 package task.tasks;
 
-import error.UnknownCommandException;
 import error.task.InvalidArgumentsException;
 import error.task.UnknownDateTimeException;
-import task.Task;
 import util.DukeDateTime;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/***
+ * <p>
+ * Task that needs to be done at a specified time.
+ * </p>
+ */
 public class Event extends Task {
     private LocalDateTime at;
 
+    /***
+     * <p>
+     * Event constructor.
+     * </p>
+     * @param arguments description and time separated by a "/at" separator.
+     * @throws UnknownDateTimeException if date and time is given in the incorrect format.
+     */
     public Event(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
         super(getDescription(arguments), TaskKeyword.EVENT);
         this.at = getTiming(arguments);
@@ -37,7 +47,7 @@ public class Event extends Task {
             String dateTime = arguments.split(" /at ")[1];
             return DukeDateTime.parseDateTime(dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidArgumentsException("\"at");
+            throw new InvalidArgumentsException("\"/at\"");
         }
     }
 }

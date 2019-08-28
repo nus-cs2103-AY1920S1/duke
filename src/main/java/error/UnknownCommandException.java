@@ -6,6 +6,7 @@ public class UnknownCommandException extends Exception {
     public UnknownCommandException() {
         details = null;
     }
+
     public UnknownCommandException(String details) {
         this.details = details;
     }

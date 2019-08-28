@@ -2,7 +2,7 @@ package command;
 
 import error.task.TaskCreationException;
 import error.UnknownCommandException;
-import task.Task;
+import task.tasks.Task;
 import task.TaskListController;
 import task.tasks.TaskKeyword;
 import util.DukeMessage;
@@ -11,17 +11,37 @@ import util.DukeOutput;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/***
+ * <p>
+ * Command to add tasks.
+ * </p>
+ */
 public class AddCommand implements Command {
     private TaskListController taskListController;
     private TaskKeyword taskKeyword;
     private String arguments;
 
-    AddCommand(TaskListController taskListController, String keyword, String arguments) throws UnknownCommandException {
+    /***
+     * <p>
+     * AddCommand constructor.
+     * </p>
+     * @param keyword identifier for task types.
+     * @param arguments corresponding arguments for task type.
+     * @param taskListController controller for task list to be added to.
+     * @throws UnknownCommandException if keyword does not correspond to existing task.
+     */
+    AddCommand(String keyword, String arguments, TaskListController taskListController) throws UnknownCommandException {
         this.taskListController = taskListController;
         this.taskKeyword = parseKeyword(keyword);
         this.arguments = arguments;
     }
 
+    /***
+     * <p>
+     * Adds task to memory.
+     * </p>
+     * @return listen command.
+     */
     @Override
     public Optional<Command> execute() {
         try {

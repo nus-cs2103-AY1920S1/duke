@@ -10,13 +10,29 @@ import util.DukeStorage;
 
 import java.util.Optional;
 
+/***
+ * <p>
+ * Command to exit the application.
+ * </p>
+ */
 public class ByeCommand implements Command {
     private TaskListController taskListController;
 
+    /***
+     * <p>
+     * ByeCommand constructor.
+     * </p>
+     * @param taskListController controller for task list to which new tasks will be saved to.
+     */
     ByeCommand(TaskListController taskListController) {
         this.taskListController = taskListController;
     }
 
+    /***
+     * <p>
+     * Attempts to write new tasks to storage. If unsuccessful, verifies with user if program should close.
+     * </p>
+     */
     @Override
     public Optional<Command> execute() {
         try {

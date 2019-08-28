@@ -2,7 +2,7 @@ import command.Command;
 import command.ListenCommand;
 import command.GreetCommand;
 import error.ConfigurationException;
-import task.Task;
+import task.tasks.Task;
 import task.TaskListController;
 import util.DukeMessage;
 import util.DukeOutput;
@@ -12,6 +12,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/***
+ * <p>
+ * Main driver class for Duke program.
+ * </p>
+ */
 public class Duke {
     private static final String CUSTOM_CONFIG_FILE_PATH = System.getProperty("user.home") + "/bin/duke.config";
 

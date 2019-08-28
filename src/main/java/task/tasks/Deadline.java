@@ -3,15 +3,26 @@ package task.tasks;
 import error.UnknownCommandException;
 import error.task.InvalidArgumentsException;
 import error.task.UnknownDateTimeException;
-import task.Task;
 import util.DukeDateTime;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/***
+ * <p>
+ * Task that needs to be completed by a specified date.
+ * </p>
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /***
+     * <p>
+     * Deadline constructor.
+     * </p>
+     * @param arguments description and time separated by a "/by" separator.
+     * @throws UnknownDateTimeException if date and time is given in the incorrect format.
+     */
     public Deadline(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
         super(getDescription(arguments), TaskKeyword.DEADLINE);
         this.by = getTiming(arguments);
@@ -37,7 +48,7 @@ public class Deadline extends Task {
             String dateTime = arguments.split(" /by ")[1];
             return DukeDateTime.parseDateTime(dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new InvalidArgumentsException("/by");
+            throw new InvalidArgumentsException("\"/by\"");
         }
     }
 }

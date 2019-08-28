@@ -5,6 +5,12 @@ import java.util.Optional;
 import util.DukeMessage;
 import util.DukeOutput;
 
+
+/***
+ * <p>
+ * Command to greet user upon program start up.
+ * </p>
+ */
 public class GreetCommand implements Command {
     private static final String DUKE_LOGO =
             " ____        _        \n"
@@ -18,6 +24,12 @@ public class GreetCommand implements Command {
                     + "Hello! I'm Duke\n"
                     + "What can I do for you?";
 
+    /***
+     * <p>
+     * Greets user.
+     * </p>
+     * @return null.
+     */
     @Override
     public Optional<Command> execute() {
         DukeMessage greetingMessage = new DukeMessage(GREETING);

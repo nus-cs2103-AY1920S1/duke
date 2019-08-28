@@ -6,9 +6,11 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+
 checkstyle {
     toolVersion = '8.23'
 }
+
 
 group 'seedu.duke'
 version '0.1.0'
@@ -23,7 +25,8 @@ application {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.0'
 }
 
 run {
@@ -31,7 +34,9 @@ run {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeTags 'basic'
+    }
 }
 
 shadowJar {

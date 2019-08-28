@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -6,8 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 /**
- *  CS2103 Week 2 iP Deliverable, To-do List
+ *  CS2103 iP Deliverable, Duke
  *  @author Ahmed Bahajjaj
  */
 public class Duke {
@@ -122,6 +125,11 @@ public class Duke {
         }
     }
 
+    private static Date getDate(String details) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        return format.parse(details);
+    }
+
     /**
      * Processes Input Event/Deadline to Description & Details
      * @param input Task String (without command)
@@ -132,7 +140,6 @@ public class Duke {
         String[] desc = input.split("/");
         String[] temp = desc[1].split(" ");
         desc[1] = desc[1].replace(temp[0], "");
-        //desc[1] = " (" + temp[0] + ": " + desc[1] + ")";
         return desc;
     }
 

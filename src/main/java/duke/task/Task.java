@@ -52,6 +52,11 @@ public abstract class Task {
      */
     public abstract String getSaveString();
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return Description of task.
+     */
     public String getDescription() {
         return description;
     }

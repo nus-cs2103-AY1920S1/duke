@@ -125,6 +125,11 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints out searched tasks.
+     *
+     * @param tasksWithKeyword List of tasks with description containing the user search keyword.
+     */
     public void printFoundTasks(TaskList tasksWithKeyword) {
         System.out.println(horizontalLine);
         if (tasksWithKeyword.size() > 0) {

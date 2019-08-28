@@ -45,6 +45,7 @@ public class Storage {
             for (Task t : tasks) {
                 fw.write(t.toDataString() + "\n");
             }
+            System.out.println("Saving data to: " + filePath);
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());

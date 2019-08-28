@@ -20,6 +20,15 @@ public class Event extends Task{
 
     @Override
     public String toDataString() {
-        return "E | " + super.toDataString() + " | " + at;
+        String[] dateTimeSplit = at.toString().split("T");
+
+        String date = dateTimeSplit[0];
+        String time = dateTimeSplit[1];
+
+        String[] dateSplit = date.split("-");
+        String[] timeSplit = time.split(":");
+        String dataAt = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0] + " "
+                + timeSplit[0] + timeSplit[1];
+        return "E | " + super.toDataString() + " | " + dataAt;
     }
 }

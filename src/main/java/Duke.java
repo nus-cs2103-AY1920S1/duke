@@ -6,6 +6,7 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private UI ui;
+    private boolean isExit;
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -22,9 +23,14 @@ public class Duke {
         ui.greet();
         String command = ui.readCommand();
 
-        while (!command.equals("") && !command.equalsIgnoreCase("bye")) {
+        while (!isExit) {
             try {
-                if (command.equalsIgnoreCase("list")) {
+                if (command.equalsIgnoreCase("bye")) {
+                    end();
+                    isExit = true;
+                } else if (command.equals("")) {
+                    isExit = true;
+                } else if (command.equalsIgnoreCase("list")) {
                     taskList.list();
                 } else {
                     String[] commandSplit = command.split(" ");
@@ -84,6 +90,5 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("C:\\Users\\hooncp\\Desktop\\duke\\data\\data.txt");
         duke.run();
-        duke.end();
     }
 }

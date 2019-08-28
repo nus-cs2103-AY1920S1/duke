@@ -1,5 +1,4 @@
-todo return book
-todo return books
+event sad /at 02/12/2019 1800
 list
 delete 1
 bye

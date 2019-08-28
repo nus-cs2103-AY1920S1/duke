@@ -21,6 +21,15 @@ public class Deadline extends Task {
 
     @Override
     public String toDataString() {
-        return "D | " + super.toDataString() + " | " + by;
+        String[] dateTimeSplit = by.toString().split("T");
+
+        String date = dateTimeSplit[0];
+        String time = dateTimeSplit[1];
+
+        String[] dateSplit = date.split("-");
+        String[] timeSplit = time.split(":");
+        String dataBy = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0] + " "
+                + timeSplit[0] + timeSplit[1];
+        return "D | " + super.toDataString() + " | " + dataBy;
     }
 }

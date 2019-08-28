@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -165,6 +166,21 @@ public class UI {
                     case "done":
                         int taskNumber = sc.nextInt() - 1;
                         taskList.completeTask(taskNumber);
+                        break;
+
+                    case "find":
+                        String keyword = sc.nextLine().trim();
+                        ArrayList<Task> found = taskList.find(keyword);
+                        int n = 1;
+
+                        if(found.isEmpty()){
+                            System.out.println("None found");
+                        } else {
+                            for (Task item : found) {
+                                System.out.println(n + "." + item);
+                                n++;
+                            }
+                        }
                         break;
 
                     default:

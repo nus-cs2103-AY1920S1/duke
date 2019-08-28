@@ -1,5 +1,11 @@
 import java.util.LinkedList;
 
+/**
+ * To manage a list of task with several methods.
+ *
+ * @param null basic constructor with empty task.
+ * @param tasks the list of current tasks that are loaded from a txt file.
+  */
 public class TaskList {
     private LinkedList<Task> tasks;
 

@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * To deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @param filePath the location where the previous list of tasks is being saved.
+ */
 public class Storage {
     public static String filePath = "";
 
@@ -12,7 +17,15 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public LinkedList<Task> load () {
+    /**
+     * Load the list of task from collection of words/Strings.
+     *
+     * @return LinkedList of Task.
+     * @throws FileNotFoundException if no file detected.
+     * @throws DukeException if there is logic error or bad input.
+     * @throws IOException file corrupted.
+     */
+    public LinkedList<Task> load() {
         File file = new File(filePath);
         LinkedList<Task> loadedTasks = new LinkedList<>();
 
@@ -65,6 +78,13 @@ public class Storage {
         return loadedTasks;
     }
 
+    /**
+     * Write and save the file every time there is an update/actions.
+     *
+     * @param updatedTask the file that is updated as a result of an action.
+     * @throws FileNotFoundException if no file detected.
+     * @throws IOException file corrupted.
+     */
     public static void writeFile (LinkedList<Task> updatedTask) {
         File file = new File(filePath);
         boolean isFileExists = file.exists();

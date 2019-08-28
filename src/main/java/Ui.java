@@ -1,9 +1,9 @@
 import java.util.LinkedList;
 
+/**
+ * To deals with interactions with the user.
+ */
 public class Ui {
-    public Ui () {
-    }
-
     public void welcomeMessage() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -17,6 +17,7 @@ public class Ui {
         System.out.println("File loaded unsuccessful");
     }
 
+    // Printing the list of task from a taskList
     public void printList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         int counter = 1;

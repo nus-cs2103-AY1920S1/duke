@@ -5,6 +5,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Setting up several classes ready to be called.
+     *
+     * @param filePath the location of the file where the task is stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +22,7 @@ public class Duke {
         }
     }
 
+    // run the program
     public void run() {
         ui.welcomeMessage();
 
@@ -35,6 +41,7 @@ public class Duke {
         ui.exitMessage();
     }
 
+    // Program starts here
     public static void main(String[] args) {
         new Duke("C:/Users/User/Desktop/duke.txt").run();
     }

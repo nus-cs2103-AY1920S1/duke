@@ -1,6 +1,13 @@
 import java.time.LocalDateTime;
 
 public class Parser {
+    /**
+     * Convert a String into a LocalDateTime that is understood by the computer.
+     *
+     * @param rawTimestamp time and date in string format.
+     * @return LocalDateTime with desired format.
+     * @throws DukeException if there is logic error or bad input.
+     */
     public static LocalDateTime convertDateAndTime(String rawTimestamp) throws DukeException {
         String[] dateTime = rawTimestamp.split(" ");
         String[] datePortion = dateTime[0].split("/");
@@ -19,6 +26,14 @@ public class Parser {
         }
     }
 
+    /**
+     * To deals with making sense of the user command.
+     *
+     * @param task the TaskList from the txt file.
+     * @param ui the message for interaction.
+     * @param inputText the text that user input.
+     * @param storage the location for retrieval and write the updated file.
+     */
     public static void parse(TaskList tasks, Ui ui, String inputText, Storage storage) {
         String[] keyList = inputText.split(" ", 2);
         String actionKey = keyList[0];

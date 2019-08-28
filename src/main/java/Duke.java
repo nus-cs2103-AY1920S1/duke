@@ -1,3 +1,10 @@
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
+import duke.core.Parser;
+import duke.core.DukeException;
+import duke.command.Command;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;

@@ -5,10 +5,10 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class Delete extends Command {
+public class DeleteCommand extends Command {
     private int taskNumberToDelete;
 
-    public Delete(String command, Task pending, int taskNumberToDelete){
+    public DeleteCommand(String command, Task pending, int taskNumberToDelete){
         super(command, pending);
         this.taskNumberToDelete = taskNumberToDelete;
     }
@@ -16,8 +16,8 @@ public class Delete extends Command {
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) {
         Task t = list.deleteTask(taskNumberToDelete - 1);
-        storage.save();
-        ui.showDeletedTask();
+        storage.save(list.printList());
+        ui.showDeletedTask(t, list.getTaskCount());
     }
 
     @Override

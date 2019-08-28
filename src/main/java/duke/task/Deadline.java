@@ -5,14 +5,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDate by_date;
-    private LocalTime by_time;
+    private LocalDate byDate;
+    private LocalTime byTime;
 
+    /**
+     * Constructs a <code>Deadline</code> Object to represent a task with a deadline.
+     *
+     * @param description The description of the deadline item
+     * @param by The deadline containing date and time
+     */
     public Deadline(String description, String by) {
         super(description);
         String[] dateTimeArr = by.split(" ");
-        this.by_date = parseDate(dateTimeArr[0]);
-        this.by_time = parseTime(dateTimeArr[1]);
+        this.byDate = parseDate(dateTimeArr[0]);
+        this.byTime = parseTime(dateTimeArr[1]);
     }
 
     private LocalDate parseDate(String dateString) {
@@ -28,15 +34,15 @@ public class Deadline extends Task {
     private String formatBy() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("EEE, d MMMM yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");
-        return String.format("%s, %s", dateFormatter.format(by_date), timeFormatter.format(by_time));
+        return String.format("%s, %s", dateFormatter.format(byDate), timeFormatter.format(byTime));
     }
 
     @Override
     public String serialize() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-        return String.format("D | %d | %s | %s %s", getStatusCode(), description ,
-                dateFormatter.format(by_date), timeFormatter.format(by_time));
+        return String.format("D | %d | %s | %s %s", getStatusCode(), description,
+                dateFormatter.format(byDate), timeFormatter.format(byTime));
     }
 
     @Override

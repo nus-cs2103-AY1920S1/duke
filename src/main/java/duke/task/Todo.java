@@ -4,6 +4,12 @@ import duke.exception.DukeException;
 
 public class Todo extends Task {
 
+    /**
+     * Constructs a <code>Todo</code> Object to represent a todo.
+     *
+     * @param description The description of the todo item
+     * @throws DukeException when the description is empty
+     */
     public Todo(String description) throws DukeException {
         super(description);
         if (description.isBlank()) {

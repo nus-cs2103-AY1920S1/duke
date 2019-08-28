@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.task.Task;
 
 public class Ui {
@@ -17,8 +18,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         showLine();
     }
 
@@ -27,14 +27,19 @@ public class Ui {
         scanner.close();
     }
 
+    /**
+     * Prints a list of tasks.
+     *
+     * @param tasks A list of tasks to be printed
+     */
     public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
         } else {
             System.out.println("Here are the tasks in your list:");
-            ArrayList<Task> all_tasks = tasks.getTasks();
-            for (int i = 1; i <= all_tasks.size(); i++) {
-                Task task = all_tasks.get(i - 1);
+            ArrayList<Task> allTasks = tasks.getTasks();
+            for (int i = 1; i <= allTasks.size(); i++) {
+                Task task = allTasks.get(i - 1);
                 System.out.printf("%d.%s\n", i, task);
             }
         }
@@ -45,12 +50,24 @@ public class Ui {
         showSingleTask(task);
     }
 
+    /**
+     * Prints a message upon successful addition of a task to the list.
+     *
+     * @param task The task added to the list
+     * @param tasks The list of tasks after the addition
+     */
     public void showTaskAdditionMsg(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task:");
         showSingleTask(task);
         showTaskTotal(tasks);
     }
 
+    /**
+     * Prints a message upon successful deletion of a task from the list.
+     *
+     * @param task The task removed from the list
+     * @param tasks The list of tasks after the deletion
+     */
     public void showTaskDeletionMsg(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:");
         showSingleTask(task);
@@ -62,7 +79,7 @@ public class Ui {
     }
 
     public void showError(String message) {
-        System.out.printf("\u2639 OOPS!!! %s\n", message);
+        System.out.printf("\u2639 OOPS!!! %s\n", message); //show frowning face
     }
 
     public void showLine() {

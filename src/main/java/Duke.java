@@ -55,9 +55,10 @@ public class Duke {
 
     // Processes a single line of input by identifying the command that was given, then delegating it
     // to a subfunction to handle the command call.
-    public void processInputLine(String line) throws DukeException, ParseException{
+    public void processInputLine(String line) throws DukeException, ParseException {
 
         Command command = parser.getCommandFromLine(line);
+        String commandText = command.toString();
 
         switch (command) {
         case LIST:
@@ -67,13 +68,13 @@ public class Duke {
             markTaskAsDone(parser.getIndexFromLine(line));
             break;
         case DEADLINE:
-            addDeadline(line);
+            addDeadline(parser.getBeforeDelim(line, commandText, BY_DELIM), parser.getAfterDelim(line, commandText, BY_DELIM));
             break;
         case EVENT:
-            addEvent(line);
+            addEvent(parser.getBeforeDelim(line, commandText, AT_DELIM), parser.getAfterDelim(line, commandText, AT_DELIM));
             break;
         case TODO:
-            addTodo(line);
+            addTodo(parser.getArg(line, commandText));
             break;
         case DELETE:
             deleteTask(parser.getIndexFromLine(line));
@@ -91,54 +92,44 @@ public class Duke {
         ui.ackDeletion(taskToDelete, taskList.size());
     }
 
-    public void addDeadline(String line) throws EmptyDescriptionException, ParseException {
-        
-        if (verifyArgsNotEmpty(line)) {
-            String[] deadlineArgs = line.split(Command.DEADLINE.toString())[1].split(BY_DELIM);
-            Task newDeadline = new Deadline(deadlineArgs[0].trim(), parseDate(deadlineArgs[1].trim()));
+    public void addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
+        if (desc.length() != 0) {
+            Task newDeadline = new Deadline(desc, parseDate(date));
             addTask(newDeadline);
         }
         else {
-            throw new EmptyDescriptionException(
-                OOPS_STR
-                + EMPTY_DESCRIPTION_STR_1
-                + Command.DEADLINE.toString()
-                + EMPTY_DESCRIPTION_STR_2
-            );
+            throwEmptyDescriptionException(Command.DEADLINE);
         }
     }
 
-    public void addEvent(String line) throws EmptyDescriptionException, ParseException {
-
-        if (verifyArgsNotEmpty(line)) {
-            String[] eventArgs = line.split(Command.EVENT.toString())[1].split(AT_DELIM);
-            Task newEvent = new Event(eventArgs[0].trim(), parseDate(eventArgs[1].trim()));
+    public void addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
+        if (desc.length() != 0) {
+            Task newEvent = new Event(desc, parseDate(date));
             addTask(newEvent);
         }
         else {
-            throw new EmptyDescriptionException(
-                OOPS_STR
-                + EMPTY_DESCRIPTION_STR_1
-                + Command.EVENT.toString()
-                + EMPTY_DESCRIPTION_STR_2
-            );
+            throwEmptyDescriptionException(Command.EVENT);
         }
     }
-    public void addTodo(String line) throws EmptyDescriptionException {
 
-        if (verifyArgsNotEmpty(line)) {
-            String todoArg = line.split(Command.TODO.toString())[1];
-            Task newTodo = new Todo(todoArg); 
+    public void addTodo(String desc) throws EmptyDescriptionException {
+
+        if (desc.length() != 0) {
+            Task newTodo = new Todo(desc); 
             addTask(newTodo);
         }
         else {
-            throw new EmptyDescriptionException(
-                OOPS_STR 
-                + EMPTY_DESCRIPTION_STR_1
-                + Command.TODO.toString()
-                + EMPTY_DESCRIPTION_STR_2
-            );
+            throwEmptyDescriptionException(Command.TODO);
         }
+    }
+
+    public void throwEmptyDescriptionException(Command cmd) throws EmptyDescriptionException {
+        throw new EmptyDescriptionException(
+            OOPS_STR 
+            + EMPTY_DESCRIPTION_STR_1
+            + cmd.toString()
+            + EMPTY_DESCRIPTION_STR_2
+        );
     }
 
     public boolean verifyArgsNotEmpty(String args) {

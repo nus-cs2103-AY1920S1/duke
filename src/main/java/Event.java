@@ -1,3 +1,7 @@
+/**
+ * Creates an event which will be added to the task list
+ * for reminders.
+ */
 public class Event extends Task {
 
 	protected String at;
@@ -9,11 +13,21 @@ public class Event extends Task {
 	}
 
 
+	/**
+	 * Returns the formatted date and/or time of the event.
+	 * @return Formatted string of the date and/or time.
+	 */
 	public String getVenue() {
 
 		return checkTime(at);
 	}
 
+	/**
+	 * Formats the date and/or time of the event to the
+	 * specified format.
+	 * @param time Date/time of the event.
+	 * @return The formatted time/date.
+	 */
 	public String checkTime(String time) {
 		DateAndTime eventDateTime = new DateAndTime();
 		String[] timeAndDate = time.split(" ");
@@ -43,6 +57,11 @@ public class Event extends Task {
 		return formatDeadline;
 	}
 
+	/**
+	 * Returns a string with the event symbol [E] as well as the
+	 * description and date/time of the event.
+	 * @return String of the event and date/time.
+	 */
 	@Override
 	public String toString() {
 

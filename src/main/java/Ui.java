@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Stores the text when and exception messages.
+ */
 public class Ui {
 	Scanner scanner;
 	String BORDER = "____________________________________________________________";
@@ -21,6 +24,10 @@ public class Ui {
 		scanner = new Scanner(System.in);
 	}
 
+	/**
+	 * Returns the input by the user.
+	 * @return Input of user.
+	 */
 	public String getInput () {
 
 		input = scanner.nextLine();

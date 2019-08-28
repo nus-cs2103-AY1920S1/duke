@@ -1,3 +1,6 @@
+/**
+ * Creates a todo task which will be added to the task list.
+ */
 public class Todo extends Task {
 
 	public Todo (String description) {
@@ -5,6 +8,10 @@ public class Todo extends Task {
 		super(description);
 	}
 
+	/**
+	 * Returns a string with the todo symbol [T] together with the description.
+	 * @return Description of the task.
+	 */
 	@Override
 	public String toString() {
 

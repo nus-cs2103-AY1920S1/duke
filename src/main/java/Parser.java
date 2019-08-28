@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Deals with making sense of the user command
+ * and formats the input by the user to a specified format.
+ */
 public class Parser {
 
 	Ui ui;
@@ -19,6 +23,11 @@ public class Parser {
 		isEndLoop = false;
 	}
 
+	/**
+	 * Main bullk of the program where evaluation of the input
+	 * by the user takes place.
+	 * @param input Input of the tasks of the user.
+	 */
 	public void evaluate(String input) {
 		int counter = 0;
 		if (input.equals("bye")) {
@@ -215,6 +224,11 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Returns a boolean true when the user has entered
+	 * an input 'bye'.
+	 * @return Boolean
+	 */
 	public boolean isExit() {
 			return isEndLoop;
 		}

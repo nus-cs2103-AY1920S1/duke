@@ -3,6 +3,11 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * The individual project portion for CS2103T which act as a task list
+ * manager where you are able to input deadlines, events or things that needs
+ * to be done.
+ */
 public class Duke {
 
     DukeReadFile rf;
@@ -25,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Execution of the task list manager
+     */
     public void run() {
         System.out.println(ui.INTRO);
         boolean isExit = false;
@@ -36,11 +44,22 @@ public class Duke {
 
         }
     }
+
+    /**
+     * Main method to execute the Duke's program.
+     * @param args
+     */
     public static void main(String[] args) {
 
         new Duke("data/duke.txt").run();
     }
 
+    /**
+     * Converting current tasks in the list to a string
+     * in order to write onto a text document.
+     * @param currentTask Tasks that are on the list.
+     * @return String of the task on the list.
+     */
     public static String writeFile(ArrayList<Task> currentTask) {
         String writeTask = "";
 

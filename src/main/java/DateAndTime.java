@@ -1,3 +1,7 @@
+/**
+ * Conversion for date and time from dd/mm/yyyy to [date] of [month] [year] format
+ * and 24 hour to 12 hour format respectively.
+ */
 public class DateAndTime {
 
 	protected String date;
@@ -9,6 +13,12 @@ public class DateAndTime {
 		time = "";
 	}
 
+	/**
+	 * Changing the format of the date from dd/mm/yyyy to
+	 * [date] of [month] [year]
+	 * @param date Date of the deadline or event.
+	 * @return Formatted date.
+	 */
 	public String formatDate (String date) {
 		String formattedDate = "";
 
@@ -30,6 +40,12 @@ public class DateAndTime {
 		return formattedDate;
 	}
 
+	/**
+	 * Changing the format of time from 24-hour clock
+	 * to 12-hour clock.
+	 * @param time Time of the deadline or event.
+	 * @return Formatted time.
+	 */
 	public String formatTime(String time) {
 		boolean isString = false;
 		String formattedTime = "";
@@ -72,6 +88,11 @@ public class DateAndTime {
 
 	}
 
+	/**
+	 * Formatting of the date.
+	 * @param day day of the date.
+	 * @return Formatted day.
+	 */
 	public String formatDay(int day) {
 		String dayFormat = "";
 
@@ -110,6 +131,11 @@ public class DateAndTime {
 		return dayFormat;
 	}
 
+	/**
+	 *Formatting of the month from number form to the name of the month.
+	 * @param month
+	 * @return Formatted month.
+	 */
 	public String formatMonth(String month) {
 
 		String translatedMonth = "";

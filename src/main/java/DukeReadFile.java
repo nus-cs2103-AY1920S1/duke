@@ -3,6 +3,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads the tasks that were saved in a text document
+ * when the program starts up.
+ */
 public class DukeReadFile {
 
 	protected static String filePath;
@@ -15,6 +19,12 @@ public class DukeReadFile {
 		this.filePath = filePath;
 	}
 
+	/**
+	 * Creates a file object to read the data saved in a text
+	 * document and loading the tasks to be included in the task
+	 * list when the program starts up.
+	 * @throws FileNotFoundException
+	 */
 	public static void readFileContent() throws FileNotFoundException {
 		File savedTask = new File(filePath);
 		Scanner scanner = new Scanner(savedTask);
@@ -60,6 +70,12 @@ public class DukeReadFile {
 		}
 	}
 
+
+	/**
+	 * Returns an arraylist of the tasks that were loaded
+	 * from the text file.
+	 * @return
+	 */
 	public static ArrayList<Task> myTask() {
 
 		return ct;

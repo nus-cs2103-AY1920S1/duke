@@ -1,11 +1,8 @@
 import java.util.List;
 
-public class Event extends Task {
-    private String time;
-
+public class Event extends TimeTask {
     private Event(String description, String time) {
-        super(description);
-        this.time = time;
+        super(description, time);
     }
 
     static Command getCommand(List<Task> tasks) {
@@ -30,6 +27,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + getTimeString() + ")";
     }
 }

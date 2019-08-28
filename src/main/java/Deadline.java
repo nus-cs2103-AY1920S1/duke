@@ -1,11 +1,8 @@
 import java.util.List;
 
-public class Deadline extends Task {
-    private String time;
-
+public class Deadline extends TimeTask {
     private Deadline(String description, String time) {
-        super(description);
-        this.time = time;
+        super(description, time);
     }
 
     static Command getCommand(List<Task> tasks) {
@@ -30,6 +27,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + time + ")";
+        return "[D]" + super.toString() + " (by: " + getTimeString() + ")";
     }
 }

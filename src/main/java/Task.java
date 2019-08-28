@@ -8,7 +8,7 @@ public class Task {
     }
 
     String getStatusIcon() {
-        return isDone ? "x" : " ";
+        return isDone ? "\u2713" : "\u2717";
     }
 
     @Override

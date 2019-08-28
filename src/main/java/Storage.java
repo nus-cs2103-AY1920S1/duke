@@ -2,10 +2,16 @@ import javax.annotation.processing.Filer;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
-public class FileHandle {
-    public static void appendToFile(String filepath, List<Task> tasks) {
+public class Storage {
+    private String filepath;
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+    public void updateFile(TaskList taskList) {
+        List<Task> tasks = taskList.getTaskList();
         try {
             Path p = Paths.get(filepath);
             FileWriter fr = new FileWriter(p.toRealPath().toString());
@@ -30,7 +36,8 @@ public class FileHandle {
         }
     }
 
-    public static void readIntoTasksListFromFile(String filepath) {
+    public List<Task> load() {
+        List<Task> tasks = new ArrayList<>();
         try {
             Path p = Paths.get(filepath);
             BufferedReader br = new BufferedReader(
@@ -53,11 +60,11 @@ public class FileHandle {
                     datetime = term + sections[3];
                 }
 
-                Task task = Task.createTask(taskType, description + datetime);
+                Task task = TaskList.createTask(taskType, description + datetime);
                 if (completed) {
                     task.setCompleted();
                 }
-                //when i create, they auto add to list and ++ count
+                tasks.add(task);
 
                 line = br.readLine();
             }
@@ -66,6 +73,7 @@ public class FileHandle {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return tasks;
     }
 
     private static int boolToInt(boolean b) {

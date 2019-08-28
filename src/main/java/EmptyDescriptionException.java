@@ -1,4 +1,4 @@
-public class EmptyDescriptionException extends IllegalArgumentException {
+public class EmptyDescriptionException extends DukeException {
     private String type;
     public EmptyDescriptionException(String msg) {
         super(msg);

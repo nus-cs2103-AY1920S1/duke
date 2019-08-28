@@ -3,9 +3,9 @@ public enum TaskType {
 
     public static TaskType convertToTaskType(String typeString) {
         switch (typeString.toUpperCase()) {
-        case "T": return T;
-        case "D": return D;
-        case "E": return E;
+        case "T": case "TODO": return T;
+        case "D": case "DEADLINE": return D;
+        case "E": case "EVENT": return E;
         default: return null;
         }
     }

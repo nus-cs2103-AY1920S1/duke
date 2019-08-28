@@ -11,9 +11,8 @@ public class Deadline extends Task {
     private Date date;
 
     private Deadline() {}
-    private Deadline(String descr, boolean completed, int id) throws IncorrectTaskFormatException{
+    private Deadline(String descr, boolean completed) throws IncorrectTaskFormatException{
         super.completed = completed;
-        super.id = id;
         super.taskType = TaskType.D;
 
         setupDetails(descr);
@@ -57,9 +56,7 @@ public class Deadline extends Task {
         if (descr.equals(""))
             throw new EmptyDescriptionException("a deadline");
 
-        Task.totalNumOfTasks++;
-        Deadline newTask = new Deadline(descr.trim(), false, Task.totalNumOfTasks);
-        Task.taskList.add(newTask);
+        Deadline newTask = new Deadline(descr.trim(), false);
         return newTask;
     }
 

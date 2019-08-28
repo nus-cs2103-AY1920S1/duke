@@ -1,4 +1,4 @@
-public class InvalidKeywordException extends IllegalArgumentException {
+public class InvalidKeywordException extends DukeException {
     public InvalidKeywordException(String msg) {
         super(msg);
     }

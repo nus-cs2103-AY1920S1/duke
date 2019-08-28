@@ -1,4 +1,4 @@
-public class IncorrectTaskFormatException extends IllegalArgumentException {
+public class IncorrectTaskFormatException extends DukeException {
     private String keyword2;
     public IncorrectTaskFormatException(String msg) {
         super(msg);

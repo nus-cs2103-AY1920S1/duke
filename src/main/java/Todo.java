@@ -1,10 +1,9 @@
 public class Todo extends Task {
 
     private Todo() {}
-    private Todo(String descr, boolean completed, int id) {
+    private Todo(String descr, boolean completed) {
         super.description = descr;
         super.completed = completed;
-        super.id = id;
         super.taskType = TaskType.T;
     }
 
@@ -12,9 +11,7 @@ public class Todo extends Task {
         if (descr.equals(""))
             throw new EmptyDescriptionException("a todo");
 
-        Task.totalNumOfTasks++;
-        Todo newTask = new Todo(descr.trim(), false, Task.totalNumOfTasks);
-        Task.taskList.add(newTask);
+        Todo newTask = new Todo(descr.trim(), false);
         return newTask;
     }
 }

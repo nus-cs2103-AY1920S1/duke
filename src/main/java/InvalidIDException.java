@@ -1,4 +1,4 @@
-public class InvalidIDException extends IllegalArgumentException {
+public class InvalidIDException extends DukeException {
     private String id;
     public InvalidIDException(String msg) {
         super(msg);

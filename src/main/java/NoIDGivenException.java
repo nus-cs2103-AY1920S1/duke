@@ -1,4 +1,4 @@
-public class NoIDGivenException extends IllegalArgumentException {
+public class NoIDGivenException extends DukeException {
     private String cmd;
     public NoIDGivenException(String msg) {
         super(msg);

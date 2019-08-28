@@ -7,9 +7,8 @@ public class Event extends Task {
     private String datetime;
 
     private Event() {}
-    private Event(String descr, boolean completed, int id) throws IncorrectTaskFormatException {
+    private Event(String descr, boolean completed) throws IncorrectTaskFormatException {
         super.completed = completed;
-        super.id = id;
         super.taskType = TaskType.E;
 
         setupDetails(descr);
@@ -41,9 +40,7 @@ public class Event extends Task {
         if (descr.equals(""))
             throw new EmptyDescriptionException("an event");
 
-        Task.totalNumOfTasks++;
-        Event newTask = new Event(descr.trim(), false, Task.totalNumOfTasks);
-        Task.taskList.add(newTask);
+        Event newTask = new Event(descr.trim(), false);
         return newTask;
     }
 

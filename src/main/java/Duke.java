@@ -10,20 +10,18 @@ public class Duke {
 
     public static void main(String[] args) {
         String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|\n";
+                    + "    |  _ \\ _   _| | _____ \n"
+                    + "    | | | | | | | |/ / _ \\\n"
+                    + "    | |_| | |_| |   <  __/\n"
+                    + "    |____/ \\__,_|_|\\_\\___|\n";
 
         // Prints out greeting of the chatbot.
         printLine();
         printIndent();
-        System.out.println("Hello! I'm\n" + logo + "\n" + "    What can I do for you?");
+        System.out.println("Hello! My name is \n" + logo + "\n" + "    What can I do for you?");
         printLine();
 
         Scanner scan = new Scanner(System.in);
-        // String array to store text entered by user.
-        //String[] list = new String[100];
 
         while (scan.hasNext()) {
             try {
@@ -41,15 +39,21 @@ public class Duke {
 
                     if (splittedText[0].equals("done")) {
                         int num = text.indexOf(" ");
-                        printDone(Integer.parseInt(text.substring(num + 1, num + 2)));
-                        tasking[num] = arrayList.get(num - 1);
+                        int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
+                        if (taskNumber > 0 && taskNumber <= arrayList.size()) {
+                            printDone(taskNumber);
+                            tasking[num] = arrayList.get((taskNumber - 1));
+                        } else {
+                            throw new DukeException("☹ OOPS!!! There is no such task number in your list of tasks!! " +
+                                    "Please enter a valid number!");
+                        }
                     } else if (splittedText[0].equals("delete")) {
                         int num = text.indexOf(" ");
                         Task.printRemove();
                         printDelete(Integer.parseInt(text.substring(num + 1, num + 2)));
                         Task.printNumOfTasks();
-                        // delete tasking[Integer.parseInt(text.substring(num + 1, num + 2))]
-                        arrayList.remove(Integer.parseInt(text.substring(num + 1, num + 2)));
+
+                        arrayList.remove((Integer.parseInt(text.substring(num + 1, num + 2))) - 1);
                     } else {
                         Task.printGI();
                         printIndent();
@@ -68,7 +72,8 @@ public class Duke {
                             arrayList.add(task);
 
 
-                        } else if (splittedText[0].equals("deadline")) {
+                        } else if (splittedText[0].equals("deadline") &&
+                                text.contains("/") && text.contains("by")) { // what if there is deadline
                             int num = text.indexOf("/");
                             int num1 = text.indexOf(" ");
                             Task task = new Deadline(text.substring(num1, num - 1), text.substring(num + 4));
@@ -78,30 +83,30 @@ public class Duke {
                             arrayList.add(task);
 
 
-                        } else if (splittedText[0].equals("event")) {
+                        } else if (splittedText[0].equals("event") &&
+                                text.contains("/") && text.contains("at")) { // what if there is no date
                             int num = text.indexOf("/");
                             int num1 = text.indexOf(" ");
-                            Task task = new Event(text.substring(num1, num - 1), text.substring(num + 4));
+                            Task task = new Event(text.substring(num1, num - 1),
+                                    text.substring(num + 4));
                             System.out.println("  " + task.toString());
                             Task.printNumOfTasks();
                             tasking[counter] = task;
                             arrayList.add(task);
                         }
-
-                        //counter++;
-                        //arrayList.add(task);
                     }
-                    //tasking[counter] = task;
-
                 } else {
                     printLine();
                     printIndent();
                     if (text.equals("todo")) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. It must be in proper format (i.e. todo clean table).");
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. " +
+                                "It must be in proper format (i.e. todo clean table).");
                     } else if (text.equals("deadline")) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. It must be in proper format (i.e. deadline return book /by 23 Aug).");
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. " +
+                                "It must be in proper format (i.e. deadline return book /by 23 Aug).");
                     } else if (text.equals("event")) {
-                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. It must be in proper format (i.e. event Don's birthday /at 15 Jan 3pm).");
+                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. " +
+                                "It must be in proper format (i.e. event Don's birthday /at 15 Jan 3pm).");
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -171,7 +176,7 @@ public class Duke {
         } else {
             for (int i = 1; i <= counter; i++) {
                 printIndent();
-                System.out.println(i + "." + tasking[i].toString());
+                System.out.println(i + "." + arrayList.get(i-1).toString());
             }
         }
         printLine();

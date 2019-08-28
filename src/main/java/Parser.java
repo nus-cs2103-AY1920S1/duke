@@ -15,7 +15,11 @@ public class Parser {
      * @throws ParseException occurs when user input date is invalid
      */
     public static void handleInput(String type, String userInput) throws EmptyFieldException, InvalidInputException, ParseException {
-        if (type.equals("done")) {
+        if (type.equals("find")) {
+            if (userInput.substring(5).isBlank()) {
+                throw new EmptyFieldException("☹ OOPS!!! You have to type something that you want to find");
+            }
+        } else if (type.equals("done")) {
             if (userInput.substring(4).isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! The task number cannot be empty.");
             }

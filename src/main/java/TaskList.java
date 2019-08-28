@@ -58,4 +58,21 @@ public class TaskList {
             }
         }
     }
+
+    public static void findTasks(String term) {
+        ArrayList<Task> searchedTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(term)) {
+                searchedTasks.add(task);
+            }
+        }
+        if (searchedTasks.isEmpty()) {
+            System.out.println("There is no tasks");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < searchedTasks.size(); i++) {
+                System.out.println((i + 1) + "." + searchedTasks.get(i));
+            }
+        }
+    }
 }

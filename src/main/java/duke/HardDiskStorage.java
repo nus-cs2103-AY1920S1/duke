@@ -67,6 +67,10 @@ public class HardDiskStorage implements Storage {
      */
     @Override
     public void writeToFile(TaskList tasks) throws IOException {
+        if (!dataFile.exists()) {
+            dataFile.getParentFile().mkdirs();
+            dataFile.createNewFile();
+        }
         FileWriter fileWriter = new FileWriter(dataFile);
         fileWriter.write(tasks.toString());
         fileWriter.close();

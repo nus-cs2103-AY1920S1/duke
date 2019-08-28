@@ -105,6 +105,5 @@ public class TextUi {
     public void showLoadingError() {
         showLine();
         showText("Sorry, I could not retrieve your previous tasks.");
-        showLine();
     }
 }

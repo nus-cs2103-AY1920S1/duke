@@ -49,12 +49,14 @@ public class Parser {
 
                 storage.writeFile(tasks.getListOfTasks());
             } else if (actionKey.equals("delete")) { // delete a specific plan
-
                 int index = Integer.parseInt(keyList[1]);
                 ui.printTaskDelete(tasks.getListOfTasks(), index);
                 tasks.deleteTask(index - 1);
 
                 storage.writeFile(tasks.getListOfTasks());
+            } else if (actionKey.equals("find")) {
+                String textToSearch = keyList[1];
+                ui.searchTaskKeyword(tasks, textToSearch);
             } else { // to handle addition of a specific type of plan
                 if (actionKey.equals("deadline")) {
                     if (keyList.length <= 1) {

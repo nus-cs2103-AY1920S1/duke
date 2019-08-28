@@ -28,6 +28,18 @@ public class Ui {
         }
     }
 
+    public void searchTaskKeyword(TaskList taskList, String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int counter = 1;
+
+        for (Task subTask : taskList.getListOfTasks()) {
+            if (subTask.getDescription().contains(keyword)) {
+                System.out.println(counter + ". " + subTask);
+                counter++;
+            }
+        }
+    }
+
     public void printTaskDone(Task selectedTask) {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("[" + selectedTask.getStatusIcon() + "] " + selectedTask.getDescription());

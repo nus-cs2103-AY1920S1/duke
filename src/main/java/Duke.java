@@ -4,40 +4,118 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+
 public class Duke {
     public static void main(String[] args) {
+        // System.out.println("Hello from\n" + logo);
+        Duke d = new Duke();
+        d.loadTasks();
+        d.greeting();
+        d.listen();
+    }
+
+    private static final String SAVE_LOCATION = new String("data.txt");
+
+    private Duke() {}
+
+    private void greeting() {
         String logo =
             " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
-        Duke d = new Duke();
-        d.greeting();
-        d.listen();
-    }
-
-    private Duke() {}
-
-    private void greeting() {
+        System.out.println(logo);
         System.out.println("Hello! I'm Duke");
     }
 
     private ArrayList<Task> cache = new ArrayList<>();
+
     private void listen() {
         Scanner listener = new Scanner(System.in);
         while(listener.hasNext()) {
             String line = listener.nextLine();
             if (line.equals("bye")) {
                 System.out.println("Bye. Hope to see you again!");
+                saveTasks();
                 break;
             } else if (line.equals("list")) {
                 showList();
             } else {
                 handleTask(line);                
             }
+            saveTasks();
         }
+        listener.close();
+    }
+    
+    private void loadTasks() {
+        // load tasks from SAVE_LOCATION into the arraylist of tasks, cache.
+        try {
+            Scanner sc = new Scanner(new FileReader(SAVE_LOCATION));
+            while (sc.hasNext()) {
+                System.out.println("reading...");
+                try {
+                    Task t = parseTask(sc.nextLine());
+                    cache.add(t);
+                } catch (InvalidFormatException e) {
+                    System.out.println(e.message);
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Wow. First time to Duke?");
+            return;
+        } 
+        System.out.println(cache);
+    }
+
+    private Task parseTask(String line) throws InvalidFormatException {
+        // format: " [T|D|E] | [0|1] | desc | [by|at] "
+        String[] parts = line.split("\\|");
+        for(int i=0; i< parts.length; i++) {
+            parts[i] = parts[i].trim();
+        }
+        System.out.printf("length of splitted is %d \n", parts.length);
+        if (parts.length < 3 || parts.length > 4) throw new InvalidFormatException(line);
+        String type = parts[0];
+        boolean done = parts[1].equals("1");
+        String desc = parts[2];
+        Task t = new Task(done, desc);
+        switch (type) {
+            case "T":
+                t = new ToDo(done, desc);
+                break;
+            case "D":
+                t = new Deadline(done, desc, parts[3]);
+                break;
+            case "E":
+                t = new Event(done, desc, parts[3]);
+        }
+        return t;
+    }
+
+    private void saveTasks() {
+        // horrible design: rewrite the file at SAVE_LOCATION with the cache
+        try {
+            FileWriter fw = new FileWriter(SAVE_LOCATION);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Task t: cache) {
+                bw.write(t.saveFormat());
+            }
+
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Oh no!! Couldn't save for some reason.");
+            e.printStackTrace();
+        }
+
     }
 
     private void handleTask(String line) {

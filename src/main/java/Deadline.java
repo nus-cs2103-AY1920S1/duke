@@ -2,6 +2,12 @@ public class Deadline extends Task {
 
     protected String by;
 
+    public Deadline(boolean done, String description, String by) {
+        super(description);
+        this.by = by;
+        this.isDone = done;
+    }
+
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -10,5 +16,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    public String saveFormat() {
+        return String.format(" D | %d | %s | %s\n", isDone ? 1 : 0, getDesc(), by);
     }
 }

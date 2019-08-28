@@ -1,13 +1,18 @@
-public class Event extends Task {
-    protected String at;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    protected Date at;
+
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + at + ")";
+        SimpleDateFormat properFormat = new SimpleDateFormat("dd 'of' MMMM yyyy, hh:mm a");
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + properFormat.format(this.at)
+                + ")";
     }
 }

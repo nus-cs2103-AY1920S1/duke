@@ -106,6 +106,17 @@ public class Ui {
         System.out.println(s);
     }
 
+    public void printSearchResults(TaskList tasks, String keyword) {
+        int idx = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task t : tasks.getList()) {
+            if (t.toString().contains(keyword)) {
+                System.out.println(idx + "." + t);
+                idx++;
+            }
+        }
+    }
+
     /**
      * Shows bye message to user.
      */

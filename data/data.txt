@@ -1,13 +1,1 @@
-T | 0 | return booksaa
-T | 0 | return book
-T | 0 | CS2103 LAB
-T | 0 | borrow book
-T | 0 | borrow book
-T | 0 | return book
-T | 0 | CS2103 LAB
-T | 0 | borrow book
-T | 0 | borrow book
-T | 0 | return book
-T | 0 | CS2103 LAB
-T | 0 | borrow book
-T | 0 | borrow book
+T | 0 | return books

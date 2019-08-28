@@ -7,6 +7,10 @@ public class TaskList {
         this.taskStorage = listOfTask;
     }
 
+    public TaskList() {
+        this.taskStorage = new ArrayList<Task>();
+    }
+
     public Task get(int pos) {
         return taskStorage.get(pos);
     }

@@ -19,17 +19,15 @@ public class Ui {
         System.out.println();
     }
 
-    public void newTaskAdded(Task task, int taskCount) {
+    public String newTaskAdded(Task task, int taskCount) {
         if (taskCount > 1) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println("    " + task);
-            System.out.println("Now you have " + taskCount
-                    + " tasks in the list." + "\n");
+            return ("Got it. I've added this task:\n" + "    "
+                    + task + "\n" + "Now you have " + taskCount
+                    + " tasks in the list.\n");
         } else {
-            System.out.println("Got it. I've added this task:");
-            System.out.println("    " + task);
-            System.out.println("Now you have " + taskCount
-                    + " task in the list." + "\n");
+            return ("Got it. I've added this task:\n" + "    "
+                    + task + "\n" + "Now you have " + taskCount
+                    + " task in the list.\n");
         }
     }
 

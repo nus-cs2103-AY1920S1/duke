@@ -2,12 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
+import java.nio.file.Paths;
+import java.io.PrintWriter;
 
 public class Storage {
     String filePath;
@@ -149,6 +152,18 @@ public class Storage {
             fw.close();
         } catch (IOException ioe) {
             ioe.printStackTrace();
+        }
+    }
+
+    public void clear() {
+        try {
+            FileWriter fwOb = new FileWriter(filePath, false);
+            PrintWriter pwOb = new PrintWriter(fwOb, false);
+            pwOb.flush();
+            pwOb.close();
+            fwOb.close();
+        } catch (IOException e) {
+            System.out.println("There seems to be a problem clearing this file.");
         }
     }
 }

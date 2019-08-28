@@ -1,6 +1,6 @@
-package bin.task;
+package duke.bin.task;
 
-public class Task {
+public abstract class Task {
     protected boolean isDone;
     protected String name;
 
@@ -14,13 +14,15 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
     }
 
     public Task completed() {
         isDone = true;
         return this;
     }
+
+    public abstract String getType();
 
     @Override
     public String toString() {

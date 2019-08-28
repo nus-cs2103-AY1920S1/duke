@@ -1,4 +1,4 @@
-package bin.task;
+package duke.bin.task;
 
 public class Deadline extends Task {
     protected String description;
@@ -6,6 +6,10 @@ public class Deadline extends Task {
     public Deadline(String task, String description) {
         super(task);
         this.description = description;
+    }
+
+    public String getType() {
+        return "D";
     }
 
     @Override

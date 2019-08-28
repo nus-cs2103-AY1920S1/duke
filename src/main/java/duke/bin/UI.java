@@ -1,18 +1,23 @@
-package bin;
+package duke.bin;
 
-import bin.task.Deadline;
-import bin.task.Event;
-import bin.task.Task;
-import bin.task.ToDo;
+import duke.bin.storage.DataStorage;
+import duke.bin.task.Deadline;
+import duke.bin.task.Event;
+import duke.bin.task.Task;
+import duke.bin.task.ToDo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
-    private DataStorage dataStorage;
+    private TaskList taskList;
+    private DataStorage storage;
 
     public UI () {
-        dataStorage = new DataStorage();
+        storage = new DataStorage("data/save.txt");
+        taskList = new TaskList();
+        loadDataFromStorage();
     }
 
     public void run () {
@@ -43,7 +48,7 @@ public class UI {
                     return;
 
                 case "list":
-                    ArrayList<Task> list = dataStorage.getList();
+                    ArrayList<Task> list = taskList.getList();
                     if (list.isEmpty())
                         throw new DukeException("Oh looks like there's nothing in your list so far.");
                     wrapList(list);
@@ -53,7 +58,7 @@ public class UI {
                     if (moreThanOne) {
                         String secondWord = words[1];
                         int index = Integer.parseInt(secondWord);
-                        wrapper(dataStorage.markAsDone(index).toString(),
+                        wrapper(taskList.markAsDone(index).toString(),
                                 "Nice! I've marked this task as done:");
                     }
                     else {
@@ -65,9 +70,9 @@ public class UI {
                     if (moreThanOne) {
                         String secondWord = words[1];
                         int index = Integer.parseInt(secondWord);
-                        wrapper(dataStorage.delete(index).toString(),
+                        wrapper(taskList.delete(index).toString(),
                                 "Noted. I've removed this task:",
-                                 "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                                 "Now you have " + taskList.getSize() + " tasks in the list.");
                     }
                     else {
                         throw new DukeException("I'm sorry, you didn't specify which index of the list you want to delete.");
@@ -77,9 +82,9 @@ public class UI {
                 case "todo":
                     if (moreThanOne) {
                         temp = new ToDo(words[1]);
-                        dataStorage.store(temp);
+                        taskList.store(temp);
                         wrapper(temp.toString(), "Got it. I've added this task:",
-                                "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                                "Now you have " + taskList.getSize() + " tasks in the list.");
                     } else {
                         throw new DukeException("I'm sorry, the description of your ToDo cannot be empty.");
                     }
@@ -90,9 +95,9 @@ public class UI {
                         String[] spl = words[1].split(" /by ", 2);
                         String time = spl.length > 1 ? spl[1]: "NA";
                         temp = new Deadline(spl[0], time);
-                        dataStorage.store(temp);
+                        taskList.store(temp);
                         wrapper(temp.toString(), "Got it. I've added this task:",
-                                "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                                "Now you have " + taskList.getSize() + " tasks in the list.");
                     } else {
                         throw new DukeException("I'm sorry, the description of your DeadLine cannot be empty.");
                     }
@@ -103,9 +108,9 @@ public class UI {
                     String[] split = words[1].split(" /at ", 2);
                     String time = split.length > 1 ? split[1]: "NA";
                     temp = new Event(split[0], time);
-                    dataStorage.store(temp);
+                    taskList.store(temp);
                     wrapper(temp.toString(), "Got it. I've added this task:",
-                            "Now you have " + dataStorage.getSize() + " tasks in the list.");
+                            "Now you have " + taskList.getSize() + " tasks in the list.");
                     } else {
                         throw new DukeException("I'm sorry, the description of your Event cannot be empty.");
                     }
@@ -119,6 +124,27 @@ public class UI {
             } catch (NumberFormatException e) {
                 wrapper("I'm sorry please give a number instead.");
             }
+
+            updateStorage();
+        }
+    }
+
+    private void loadDataFromStorage() {
+        try {
+            taskList.store(storage.readFromFile());
+//            System.out.print(storage.readFromFile().toArray());
+        } catch (DukeException d) {
+            //yet to implement.
+        } catch (IOException e) {
+            //same.
+        }
+    }
+
+    private void updateStorage() {
+        try {
+            storage.write(taskList.getList());
+        } catch (IOException e) {
+            //yet to implement.
         }
     }
 

@@ -1,4 +1,6 @@
-import bin.UI;
+package duke;
+
+import duke.bin.UI;
 
 public class Duke {
 

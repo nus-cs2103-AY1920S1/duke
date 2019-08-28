@@ -1,4 +1,4 @@
-package bin.task;
+package duke.bin.task;
 
 public class Event extends Task {
     protected String description;
@@ -6,6 +6,10 @@ public class Event extends Task {
     public Event(String task, String description) {
         super(task);
         this.description = description;
+    }
+
+    public String getType() {
+        return "E";
     }
 
     @Override

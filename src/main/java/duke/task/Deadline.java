@@ -38,7 +38,7 @@ public class Deadline extends Task {
     public Deadline(String[] input) throws InvalidTaskException {
         super(input[2]);
         isDone = input[1].equals("1");
-        dueDate = input[3];
+        dueDate = LocalDateTime.parse(input[3], dueDateFormat);
         validate();
     }
 
@@ -80,7 +80,7 @@ public class Deadline extends Task {
      * @return a nicely formatted string that displays the status and details of a deadline.
      */
     public String getInfo() {
-        return "[D]" + super.getInfo() + "(by: " + getStringifiedDueDate() + ")";
+        return "[D]" + super.getInfo() + "(by: " + getPrettyDueDate() + ")";
     }
 
     /**

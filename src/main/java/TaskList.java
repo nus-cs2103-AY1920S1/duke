@@ -99,8 +99,8 @@ public class TaskList {
             System.out.println(t);
             System.out.println("Now you have " + dukeTaskList.size() + " tasks in the list.");
         } catch (Exception e) {
-            System.out.println("Task not added to list because the input format for date and time is unrecognised. " +
-                    "Please enter date and time in dd/MM/yyyy HHmm format.");
+            System.out.println("Task not added to list because the input format for date and time is unrecognised. "
+                    + "Please enter date and time in dd/MM/yyyy HHmm format.");
         }
     }
 

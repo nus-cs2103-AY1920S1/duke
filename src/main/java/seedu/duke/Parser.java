@@ -1,35 +1,47 @@
 package seedu.duke;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+/**
+ * Parser is a class that deals with making sense of the user's commands.
+ */
 public class Parser {
 
     private static int indexOfByAt = 0;
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    private DateFormat printFormat = new SimpleDateFormat("dd/MM/yyyy HH.mm aa");
     private static Date dateTime;
 
+    /**
+     * Constructor of the Parser class
+     */
     public Parser() {
         indexOfByAt = 0;
         dateTime = null;
     }
 
+    /**
+     * Parses the string containing the date and time into a Date of the format "dd/MM/yyyy HHmm".
+     *
+     * @param str the string containing the date and time
+     * @return the Date of the format "dd/MM/yyyy HHmm"
+     * @throws ParseException exception thrown when the string is of a wrong format
+     */
     public static Date dateParse(String str) throws ParseException {
         return dateFormat.parse(str);
     }
 
-    public String formatDate(Date d) {
-        return dateFormat.format(d);
-    }
-
-    public String formatPrint(Date d) {
-        return printFormat.format(d);
-    }
-
+    /**
+     * Takes in a command in the form of a string and direct it to an appropriate command.
+     *
+     * @param command the command that the user input
+     * @param ui the Ui object being used
+     * @return the Command object that the user input correspond to
+     * @throws DukeException exception thrown when the timestamp or description is missing, or when input is invalid
+     * @throws ParseException exception thrown when the timestamp is of incorrect format
+     */
     public static Command parse(String command, Ui ui) throws DukeException, ParseException {
         if (command.equals("bye")) {
             return new ExitCommand();
@@ -57,6 +69,9 @@ public class Parser {
                 return new DoneCommand(Integer.parseInt(detailsArray[1]) - 1);
             case "list":
                 return new ListCommand();
+            case "find":
+                return new FindCommand(String.join(" ",
+                        Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
             default:
                 throw new InvalidInputException(ui.invalidInputMsg());
             }
@@ -64,8 +79,14 @@ public class Parser {
     }
 
 
+    /**
+     * Updates the indexOfByAt variable and the dateTime variable according to the array
+     *
+     * @param detailsArray the array containing the description of the command
+     * @throws ParseException if the timestamp is of incorrect format
+     * @throws MissingTimeStampException if the timestamp is missing, or "/by" or "/at" is missing
+     */
     public static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
-        //Date dateTime = null;
         if (detailsArray[0].equals("deadline")) {
             for (int i = 0; i < detailsArray.length; i++) {
                 if (detailsArray[i].equals("/by")) {
@@ -89,10 +110,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the dateTime variable of the command.
+     *
+     * @return the dateTime variable of the command
+     */
     public Date getDateTime() {
         return this.dateTime;
     }
 
+    /**
+     * Returns the indexOfByAt variable of the command.
+     *
+     * @return the indexOfByAt variable of the command
+     */
     public int getIndexOfByAt() {
         return this.indexOfByAt;
     }

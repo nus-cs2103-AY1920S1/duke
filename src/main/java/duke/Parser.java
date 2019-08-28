@@ -2,12 +2,21 @@ package duke;
 
 import duke.commands.*;
 
+/**
+ * Handles all input parsing for Duke.
+ */
 public class Parser {
     private static final String EMPTY_TODO_STRING = "The description of a todo cannot be empty.";
     private static final String EMPTY_EVENT_STRING = "The description of a event cannot be empty.";
     private static final String EMPTY_DEADLINE_STRING = "The description of a deadline cannot be empty.";
     private static final String UNKNOWN_COMMAND_STRING = "I'm sorry, but I don't know what that means :-(";
 
+    /**
+     * Takes in an input String and returns an appropriate Command
+     * @param input User input string
+     * @return The corresponding Command object
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException {
         String[] args = input.split(" ");
         return create(input, args);

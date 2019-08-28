@@ -22,8 +22,4 @@ public class DeadlineCommand extends Command {
         storage.appendToFile(list);
     }
 
-    public String getCommand() {
-        return this.command;
-    }
-
 }

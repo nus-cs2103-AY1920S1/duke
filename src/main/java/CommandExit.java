@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class CommandExit extends Command {
 
     private String string;

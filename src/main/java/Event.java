@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class Event extends Task {
 
     protected Date date;

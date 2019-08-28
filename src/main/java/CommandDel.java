@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class CommandDel extends Command {
 
     private int position;

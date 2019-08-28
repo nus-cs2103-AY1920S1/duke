@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class CommandList extends Command {
 
     private String string;

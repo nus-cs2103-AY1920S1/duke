@@ -1,9 +1,15 @@
+//package mypackage;
+
 public class CommandAdd extends Command {
 
     private String description;
     private String type;
     private Date date;
     private Task task;
+
+    public Task getTask() {
+        return task;
+    }
 
     public CommandAdd(String str) {
         this.type = str.split(" ", 2)[0];
@@ -38,6 +44,7 @@ public class CommandAdd extends Command {
             this.task = temp;
             this.date = temp.getDate();
         }
+        this.string = type + description + date;
     }
 
     @Override
@@ -50,4 +57,10 @@ public class CommandAdd extends Command {
         ui.printString("Now you have " + tasks.getNoOfTasks() + " tasks in the list.");
         storage.save(tasks.getList(), tasks.getNoOfTasks());
     }
+
+    @Override
+    public String toString() {
+        return this.string;
+    }
+
 }

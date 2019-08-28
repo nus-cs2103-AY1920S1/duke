@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class Deadline extends Task {
 
     protected Date date;

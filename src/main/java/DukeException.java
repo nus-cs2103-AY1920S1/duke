@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class DukeException extends Exception{
     public String description;
     public DukeException (String description) {

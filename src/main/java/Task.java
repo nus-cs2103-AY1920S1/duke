@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class Task {
     protected String description;
     protected boolean isDone;

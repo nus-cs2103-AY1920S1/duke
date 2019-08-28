@@ -1,3 +1,5 @@
+//package mypackage;
+
 public class CommandDone extends Command {
 
     private int position;

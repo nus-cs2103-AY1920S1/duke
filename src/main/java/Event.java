@@ -8,7 +8,7 @@ class Event extends Task{
     }
 
     String saveInfo() {
-        return "event" + " " + taskDetails + " /" + eventAt + System.getProperty("line.separator")
+        return "event" + " " + taskDetails + " /at " + ToDoList.inputDateFormat.format(eventAt) + System.getProperty("line.separator")
                 + completed;
     }
 

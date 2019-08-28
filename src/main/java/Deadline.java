@@ -9,7 +9,7 @@ class Deadline extends Task{
     }
 
     String saveInfo() {
-        return "deadline" + " " + taskDetails + " /" + deadlineBy + System.getProperty("line.separator")
+        return "deadline" + " " + taskDetails + " /by " + ToDoList.inputDateFormat.format(deadlineBy) + System.getProperty("line.separator")
                 + completed;
     }
 

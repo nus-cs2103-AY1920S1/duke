@@ -11,7 +11,7 @@ class ToDoList {
     private ArrayList<Task> taskList;
     private String filePath;
     static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMMM yyyy HH':'mma");
+    static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMMM yyyy hh':'mma");
 
     ToDoList(String filePath) {
         taskList = new ArrayList<>(100);

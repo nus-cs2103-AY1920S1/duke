@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -33,19 +34,19 @@ public class Duke {
                     for (i = 1; i < commandArr.length; i++) {
                         name += commandArr[i] + " ";
                     }
-                    handleTodo(name.trim(), counter);
+                    addTask(new Todo(name.trim()));
                     counter++;
                     break;
 
                 case "deadline":
                     keywords = splitCommands(commandArr, "/by", "deadline");
-                    handleDeadline(keywords[0], keywords[1], counter);
+                    addTask(new Deadline(keywords[0], new StringToDate(keywords[1])));
                     counter++;
                     break;
 
                 case "event":
                     keywords = splitCommands(commandArr, "/at", "event");
-                    handleEvent(keywords[0], keywords[1], counter);
+                    addTask(new Event(keywords[0], new StringToDate(keywords[1])));
                     counter++;
                     break;
 
@@ -74,6 +75,8 @@ public class Duke {
                 addBorder(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) { // incase of empty input
                 addBorder("Input cannot be empty!");
+            } catch (ParseException e) {
+                addBorder("Please enter the date in the format dd-MMM-yyyy HH:mm");
             }
         }
 
@@ -132,18 +135,6 @@ public class Duke {
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
                 + " tasks in the list.";
         addBorder(feedback);
-    }
-
-    public static void handleTodo(String name, int index) {
-        addTask(new Todo(name));
-    }
-
-    public static void handleDeadline(String name, String time, int index) {
-        addTask(new Deadline(name, time));
-    }
-
-    public static void handleEvent(String name, String time, int index) {
-        addTask(new Event(name, time));
     }
 
     public static void handleDone(int taskId) throws DukeException {

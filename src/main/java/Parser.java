@@ -13,25 +13,25 @@ public class Parser {
         String next = arr[0];
         Command c;
         switch (next) {
-            case "find":
-                c = new FindCommand(arr[1]);
-                break;
-            case "bye":
-                c = new ExitCommand();
-                break;
-            case "list":
-                c = new ListCommand();
-                break;
-            case "done":
-                c = new DoneCommand(Integer.parseInt(arr[1]) - 1);
-                break;
-            case "delete":
-                c = new DeleteCommand(Integer.parseInt(arr[1]) - 1);
-                break;
-            default:
-                    c = new AddCommand(arr);
-                    break;
-                }
-                return c;
+        case "find":
+            c = new FindCommand(arr[1]);
+            break;
+        case "bye":
+            c = new ExitCommand();
+            break;
+        case "list":
+            c = new ListCommand();
+            break;
+        case "done":
+            c = new DoneCommand(Integer.parseInt(arr[1]) - 1);
+            break;
+        case "delete":
+            c = new DeleteCommand(Integer.parseInt(arr[1]) - 1);
+            break;
+        default:
+            c = new AddCommand(arr);
+            break;
+            }
+            return c;
     }
 }

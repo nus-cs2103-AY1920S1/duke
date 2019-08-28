@@ -1,3 +1,5 @@
+//did not account for inputs with space before taskType. "   todo" smart
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Iterator;
@@ -11,38 +13,84 @@ enum TaskType {
     BYE
 }
 
+class UnknownInputException extends Exception {
+    public UnknownInputException() {
+        System.out.println("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                "    ____________________________________________________________");
+    }
+}
+
+class BadInputException extends Exception {
+    public BadInputException(TaskType temp) {
+        String i = "";
+        switch(temp) {
+        case TODO:
+            i = "todo";
+            break;
+        case EVENT:
+            i = "event";
+            break;
+        case DEADLINE:
+            i = "deadline";
+            break;
+        case DONE:
+            i = "done";
+            break;
+        }
+        System.out.println("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! The description of a " + i + " cannot be empty.\n" +
+                "    ____________________________________________________________\n");
+    }
+}
+
 public class Duke {
     public static void main(String[] args) {
         User user = new User();
         Scanner input = new Scanner(System.in);
 
-        do {
-            user.setCurrentInput(input.nextLine());
-            user.setTaskType();
-            TaskType taskType = user.getTaskType();
 
-            switch(taskType) {
-            case TODO:
-            case EVENT:
-            case DEADLINE:
-                user.addTask();
-                break;
-            case DONE:
-                user.setTaskDone();
-                break;
-            case LIST:
-                user.printUserInputs();
-                break;
-            case BYE: default:
-                break; //do nothing
+        boolean inputErrors = false;
+        do {
+            try {
+                user.setCurrentInput(input.nextLine());
+                if (!user.setTaskType()) {
+                    throw new UnknownInputException();
+                }
+                TaskType taskType = user.getTaskType();
+                if (user.OneWordNotBye()) {             //does not isnclude bye
+                    TaskType temp = user.getTaskType();
+                    throw new BadInputException(temp);
+                }
+
+                //then, check if there is stuff after the task type.
+
+                switch (taskType) {
+                case TODO:
+                case EVENT:
+                case DEADLINE:
+                    user.addTask();
+                    break;
+                case DONE:
+                    user.setTaskDone();
+                    break;
+                case LIST:
+                    user.printUserInputs();
+                    break;
+                case BYE:
+                    break;
+                default:
+                    break; //do nothing
+                }
+                inputErrors = true;
+            } catch (UnknownInputException err) {
+                inputErrors = false;
+            } catch (BadInputException err) {
+                inputErrors = false;
             }
-        } while (!user.inputIsBye());
+        } while (!user.inputIsBye() || !inputErrors); //only exit program, when user inputs bye. otherwise keep trying
         user.sayByeToUser();
     }
-}
-
-class DukeException extends Exception {
-
 }
 
 class Task {
@@ -139,11 +187,20 @@ class User {
 
     }
 
+    public boolean OneWordNotBye() {
+        String s = this.getCurrentInput();
+        if (s.equalsIgnoreCase("bye") || s.equalsIgnoreCase("list")) { //bye should not be checked
+            return false;
+        } else {
+            return (s.length() > 0 && s.split("\\s+").length == 1);
+        }
+    }
+
     public void setCurrentInput(String currentInput) {
         this.currentInput = currentInput;
     }
 
-    public void setTaskType() {
+    public boolean setTaskType() {
         String j = this.currentInput;
         if (j.contains(" ")) {
             j = j.substring(0, j.indexOf(" "));
@@ -171,8 +228,9 @@ class User {
             this.currentTaskType = TaskType.BYE;
             break;
         default:
-            break;
+            return false; //invalid task
         }
+        return true;
     }
 
     public void addTask() { //addTask/event.deadline

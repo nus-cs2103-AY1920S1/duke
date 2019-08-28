@@ -1,3 +1,8 @@
+/**
+ * This is a class for command where tasks are marked as done.
+ * @author Choong Yong Xin
+ */
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {

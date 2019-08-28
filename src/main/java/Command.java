@@ -1,3 +1,8 @@
+/**
+ * This is an abstract class for command inputs.
+ * @author Choong Yong Xin
+ */
+
 import java.io.IOException;
 
 abstract class Command {

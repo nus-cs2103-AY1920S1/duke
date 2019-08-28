@@ -1,3 +1,9 @@
+/**
+ * This is a class to deal with writing and loading from hard disk.
+ * @author Choong Yong Xin
+ */
+
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;

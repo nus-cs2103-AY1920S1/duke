@@ -1,3 +1,8 @@
+/**
+ * This is a class for ui which deals with user interactions.
+ * @author Choong Yong Xin
+ */
+
 import java.util.Scanner;
 
 public class Ui {

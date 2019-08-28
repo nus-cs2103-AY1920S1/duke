@@ -1,3 +1,9 @@
+/**
+ * This is a class which keeps track of the list of tasks.
+ * @author Choong Yong Xin
+ */
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +28,7 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public void displayTaskList(){
+    void displayTaskList(){
         System.out.println("Here are the tasks in your list:");
         int numCommands = 0;
         for (Task i : taskList) {
@@ -31,14 +37,14 @@ public class TaskList {
         }
     }
 
-    public void addToDo(Todo newTodo){
+    void addToDo(Todo newTodo){
         taskList.add(newTodo);
         System.out.println("Got it. I've added this task: ");
         System.out.println(newTodo);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public void addDeadline(Deadline newDeadline) {
+    void addDeadline(Deadline newDeadline) {
         taskList.add(newDeadline);
         System.out.println("Got it. I've added this task: ");
         System.out.println(newDeadline);
@@ -52,7 +58,7 @@ public class TaskList {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public void deleteTask(int taskNumber) {
+    void deleteTask(int taskNumber) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(taskList.get(taskNumber - 1));
         taskList.remove(taskNumber - 1);

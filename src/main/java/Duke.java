@@ -12,6 +12,11 @@ public class Duke {
     private ArrayList<Task> tasks;
     private Ui ui;
 
+    public Duke(String filePath){
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
+
     public void run(){
         // Variable initialization
         String underscore = "    ____________________________________________________________" + "\n" ;
@@ -24,47 +29,16 @@ public class Duke {
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
-        
-    }
-
-    public Duke(String filePath){
-        ui = new Ui();
-        storage = new Storage(filePath);
-    }
-
-    public static void main(String[] args) {
-
-        Ui ui = new Ui();
-        ui.showWelcome();
-        String underscore = "    ____________________________________________________________" + "\n" ;
-
-        // Creates and initialises variables
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
-
-        // Hard code the txt file location
-        String filepath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
-        //String filepath = "data/tasks.txt";
-
-        // Creates the Storage class and reads / creates txt file
-        Storage storage = new Storage(filepath);
-
-        try {
-            tasks = storage.load();
-        } catch (FileNotFoundException e){
-            System.out.println(e.getMessage());
-        }
 
         // Creates scanner object to handle input
         Scanner in = new Scanner(System.in);
-        String command = in.nextLine().trim();
+        String inputLine = in.nextLine().trim();
 
         while ( true ){
-
-            taskType = command.split(" ")[0]; // taskType contains the first word of the command input string
-
+            taskType = inputLine.split(" ")[0]; // taskType contains the first word of the command input string
             try {
 
+                // LIST case
                 if (taskType.equals(possibleTasks.LIST.toString().toLowerCase())) {
 
                     output = underscore + "     Here are the tasks in your list:\n";
@@ -75,9 +49,10 @@ public class Duke {
 
                     System.out.println(output);
 
+                    // DONE case
                 } else if (taskType.equals(possibleTasks.DONE.toString().toLowerCase())) {
 
-                    taskNum = Integer.parseInt(command.substring(5)); // NTS: check for index outofbounds
+                    taskNum = Integer.parseInt(inputLine.substring(5)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
                     tasks.get(taskNum).setDone();
 
@@ -87,13 +62,14 @@ public class Duke {
 
                     System.out.println(output);
 
+                    // TODO case
                 } else if (taskType.equals(possibleTasks.TODO.toString().toLowerCase())) {
 
-                    if (command.length() < 5){
+                    if (inputLine.length() < 5){
                         throw new DukeException ("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
 
-                    description = command.substring(5);
+                    description = inputLine.substring(5);
 
                     Todo newTodo = new Todo(description);
                     tasks.add(newTodo);
@@ -103,18 +79,18 @@ public class Duke {
                             tasks.size() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
-                    //storage.writeToFile( newTodo.toSaveString());
 
+                    // DEADLINE case
                 } else if (taskType.equals(possibleTasks.DEADLINE.toString().toLowerCase())) {
 
-                    if ( ( command.length() < 9 )){ // Input is only "deadline"
+                    if ( ( inputLine.length() < 9 )){ // Input is only "deadline"
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-                    } else if ( (command.lastIndexOf('/') < 1) || (  4+command.lastIndexOf('/') > command.length()   ) )  {
+                    } else if ( (inputLine.lastIndexOf('/') < 1) || (  4+inputLine.lastIndexOf('/') > inputLine.length()   ) )  {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
 
-                    description = command.substring(9, command.indexOf('/'));
-                    extraDescription = command.substring(4 + command.indexOf('/'));
+                    description = inputLine.substring(9, inputLine.indexOf('/'));
+                    extraDescription = inputLine.substring(4 + inputLine.indexOf('/'));
 
                     Deadline newDeadline = new Deadline(description, extraDescription);
                     tasks.add(newDeadline);
@@ -124,18 +100,18 @@ public class Duke {
                             tasks.size() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
-                    //storage.writeToFile(newDeadline.toSaveString());
 
+                    // EVENT case
                 } else if (taskType.equals(possibleTasks.EVENT.toString().toLowerCase())) {
 
-                    if ( ( command.length() < 6 )){ // Input is only "event"
+                    if ( ( inputLine.length() < 6 )){ // Input is only "event"
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-                    } else if ( (command.lastIndexOf('/') < 1) || (  4+command.lastIndexOf('/') > command.length()   ) )  {
+                    } else if ( (inputLine.lastIndexOf('/') < 1) || (  4+inputLine.lastIndexOf('/') > inputLine.length()   ) )  {
                         throw new DukeException("☹ OOPS!!! The time period of an event cannot be empty.");
                     }
 
-                    description = command.substring(6, command.lastIndexOf('/'));
-                    extraDescription = command.substring(4 + command.lastIndexOf('/'));
+                    description = inputLine.substring(6, inputLine.lastIndexOf('/'));
+                    extraDescription = inputLine.substring(4 + inputLine.lastIndexOf('/'));
 
                     Event newEvent = new Event(description, extraDescription);
                     tasks.add(newEvent);
@@ -145,11 +121,11 @@ public class Duke {
                             tasks.size() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
-                    //storage.writeToFile(newEvent.toSaveString() );
 
+                    // DELETE case
                 } else if (taskType.equals(possibleTasks.DELETE.toString().toLowerCase())){
 
-                    taskNum = Integer.parseInt(command.substring(7)); // NTS: check for index outofbounds
+                    taskNum = Integer.parseInt(inputLine.substring(7)); // NTS: check for index outofbounds
                     taskNum--; // ArrayList index == taskNum - 1
 
                     if (taskNum >= tasks.size()){
@@ -166,7 +142,7 @@ public class Duke {
                     System.out.println(output);
                     taskToDelete = null;
 
-
+                    //BYE case
                 } else if (taskType.equals(possibleTasks.BYE.toString().toLowerCase())){
 
                     // Prints goodbye sequence
@@ -194,11 +170,16 @@ public class Duke {
                 System.out.println(e.getCause());
             }
 
-            command = in.nextLine().trim();
+            inputLine = in.nextLine().trim();
             output = "";
         }
 
     }
+
+    public static void main(String[] args) {
+        new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
+    }
+
     enum possibleTasks{
         BYE,
         LIST,

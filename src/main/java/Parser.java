@@ -14,32 +14,39 @@ public class Parser {
         String cmd = inputArr[0];
         Command nextCommand = new ExitCommand(cmd);
 
-        if (cmd.equals("list")) {
-            nextCommand = new ShowCommand(cmd);
-        } else if (cmd.equals("todo")) {
-            String desc = inputArr[1].trim();
-            nextCommand = new AddCommand(cmd, desc);
-        } else if (cmd.equals("deadline")) {
-            String errorMessage = "☹ Incorrect format. Eg. deadline Do Project /by 29/8/2019 1800";
-            String desc = getDesc(inputArr[1], " /by ", errorMessage);
-            String dateTime = getDateTime(inputArr[1], " /by ", errorMessage);
-            nextCommand = new AddCommand(cmd, desc, dateTime);
-        } else if (cmd.equals("event")) {
-            String errorMessage = "☹ Incorrect format. Eg. event Talk Show /at 29/8/2019 1800";
-            String desc = getDesc(inputArr[1], " /at ", errorMessage);
-            String dateTime = getDateTime(inputArr[1], " /at ", errorMessage);
-            nextCommand = new AddCommand(cmd, desc, dateTime);
-        } else if (cmd.equals("done")) {
-            int index = getIndex(inputArr[1]);
-            nextCommand = new DoneCommand(cmd, index);
-        } else if (cmd.equals("delete")) {
-            int index = getIndex(inputArr[1]);
-            nextCommand = new DeleteCommand(cmd, index);
-        } else if (cmd.equals("bye")) {
-            //go with default command
-        } else {
-            //if command can't be recognised
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        try {
+            if (cmd.equals("list")) {
+                nextCommand = new ShowCommand(cmd);
+            } else if (cmd.equals("find")) {
+                String desc = inputArr[1].trim();
+                nextCommand = new FindCommand(cmd, desc);
+            } else if (cmd.equals("todo")) {
+                String desc = inputArr[1].trim();
+                nextCommand = new AddCommand(cmd, desc);
+            } else if (cmd.equals("deadline")) {
+                String errorMessage = "☹ Incorrect format. Eg. deadline Do Project /by 29/8/2019 1800";
+                String desc = getDesc(inputArr[1], " /by ", errorMessage);
+                String dateTime = getDateTime(inputArr[1], " /by ", errorMessage);
+                nextCommand = new AddCommand(cmd, desc, dateTime);
+            } else if (cmd.equals("event")) {
+                String errorMessage = "☹ Incorrect format. Eg. event Talk Show /at 29/8/2019 1800";
+                String desc = getDesc(inputArr[1], " /at ", errorMessage);
+                String dateTime = getDateTime(inputArr[1], " /at ", errorMessage);
+                nextCommand = new AddCommand(cmd, desc, dateTime);
+            } else if (cmd.equals("done")) {
+                int index = getIndex(inputArr[1]);
+                nextCommand = new DoneCommand(cmd, index);
+            } else if (cmd.equals("delete")) {
+                int index = getIndex(inputArr[1]);
+                nextCommand = new DeleteCommand(cmd, index);
+            } else if (cmd.equals("bye")) {
+                //go with default command
+            } else {
+                //if command can't be recognised
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ Incorrect input fields.");
         }
 
         return nextCommand;

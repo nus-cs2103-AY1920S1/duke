@@ -41,11 +41,13 @@ public class Tasklist {
         }
 
         if (index == -1) {
-            throw new DukeException("    ____________________________________________________________\n" +
+            throw new DukeException(
+                    "    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n" +
                     "    ____________________________________________________________\n");
         } else if (description.toString().equals("")) {
-            throw new DukeException("    ____________________________________________________________\n" +
+            throw new DukeException(
+                    "    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! The description of a " + commandArr[0] + " cannot be empty.\n" +
                     "    ____________________________________________________________\n");
         }
@@ -67,7 +69,8 @@ public class Tasklist {
         }
 
         if (index == -1 || timing.toString().equals("")) {
-            throw new DukeException("    ____________________________________________________________\n" +
+            throw new DukeException(
+                    "    ____________________________________________________________\n" +
                     "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n" +
                     "    ____________________________________________________________\n");
         }
@@ -140,5 +143,30 @@ public class Tasklist {
 
     private static void printLine() {
         System.out.println("    ____________________________________________________________");
+    }
+
+    /**
+     * Filters out the task list and gives the tasks which matches the keyword.
+     * @param commandArr Input that the user gave in order to filter out the keyword.
+     */
+    public void searchKeyword(String[] commandArr) {
+        StringJoiner sj = new StringJoiner(" ");
+        for (int i = 1; i < commandArr.length; i++) {
+            sj.add(commandArr[i]);
+        }
+
+        String phrase = sj.toString();
+
+        printLine();
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            if (currTask.getDescription().contains(phrase)) {
+                System.out.println("     "  + currTask.toString() +
+                        " {List index: " + (i + 1) + "}");
+            }
+        }
+        printLine();
+        System.out.println();
     }
 }

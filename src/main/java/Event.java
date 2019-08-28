@@ -7,7 +7,7 @@ public class Event extends Task {
     Date at;
     String atString;
 
-    public Event(String description, String eventDate) throws DukeException {
+    public Event(String description, String eventDate){
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");

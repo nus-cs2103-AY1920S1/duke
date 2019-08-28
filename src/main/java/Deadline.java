@@ -7,7 +7,7 @@ public class Deadline extends Task {
     Date by;
     String deadLine;
 
-    public Deadline(String description, String deadLine) throws DukeException {
+    public Deadline(String description, String deadLine){
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");

@@ -13,7 +13,7 @@ public class TaskManager {
     public TaskManager() {
     filePath ="data/loggedData.txt";
     }
-
+    //import tasks from database
     protected void loadTasks(TaskList myList) throws FileNotFoundException {
         ArrayList<Task> myTasksStore = myList.getList();
         File f = new File(filePath); // create a File for the given file path
@@ -31,7 +31,7 @@ public class TaskManager {
         }
         s.close();
     }
-
+    //Write new tasks at the end of the process
     protected void updateTasks(TaskList myList) throws IOException {
         ArrayList<Task> myTasksStore = myList.getList();
         FileWriter fw = new FileWriter(filePath);

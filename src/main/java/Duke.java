@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,6 +28,15 @@ public class Duke {
 
         //Create TaskList for Duke
         TaskList myTaskList = new TaskList();
+        TaskManager myTaskManager = new TaskManager();
+        //Copy tasks from .txt file to my taskList
+        try {
+            myTaskManager.loadTasks(myTaskList);
+        }
+
+        catch (FileNotFoundException err) {
+            System.out.println(err);
+        }
 
 
         Scanner myInputReader = new Scanner(System.in);
@@ -71,8 +82,17 @@ public class Duke {
 
         }
 
+
         //Print my ending message
         spacer(end);
+        //Update the .txt file with the new changes
+        try {
+            myTaskManager.updateTasks(myTaskList);
+        }
+        catch (IOException err) {
+            System.out.println(err);
+
+        }
     }
     }
 

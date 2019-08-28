@@ -57,7 +57,8 @@ public class Duke {
                 try {
                     if (sentence[0].equals("done")) { // Check if the first word is done
                         int completedTaskIndex = Integer.parseInt(sentence[1]);
-                        taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
+                        taskList.markAsDone(completedTaskIndex);
+                        // If it wasn't marked before, this would print out a notification saying it is now marked.
 
                         // Save new list to storage
                         try {

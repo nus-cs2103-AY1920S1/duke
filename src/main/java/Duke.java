@@ -1,3 +1,8 @@
+import com.sun.javafx.logging.JFRInputEvent;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -18,13 +23,82 @@ public class Duke {
                        underscore ;
         System.out.println(intro);
 
-        // Creates an ArrayList of Task objects
+        // Creates and initialises variables
         ArrayList<Task> tasks = new ArrayList<Task>();
+        String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
+
+        // Hard code the txt file location
+        String filepath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\duke.txt";
+
+        // Creates the Storage class and reads / creates txt file
+        Storage storage = new Storage(filepath);
+        try {
+            // Creates the storage class
+            storage.createFile(filepath);
+
+            // Reads any data from the txt file into the tasks ArrayList
+            Scanner scanner = new Scanner(new File(filepath));
+            ArrayList<String> inputsFromFile = new ArrayList<>();
+            while (scanner.hasNextLine()){
+                inputsFromFile.add(scanner.nextLine());
+            }
+            for (String input: inputsFromFile){
+                // possible input string: "D | 0 | CS2103 Ip  | Wed 2359"
+                String[] words = input.split("\\|") ;
+                Boolean isDone;
+
+                if (words[0].contains("T")){
+                    // Create a Todo class
+
+                    if (words[1].contains("1")){
+                        isDone = true;
+                    } else if (words[1].contains("0")){
+                        isDone = false;
+                    }
+
+                    description = words[2];
+
+                    Todo newTodo = new Todo(description);
+                    tasks.add(newTodo);
+
+                } else if (words[0].contains("E")){
+                    // Create an Event class
+
+                    if (words[1].contains("1")){
+                        isDone = true;
+                    } else if (words[1].contains("0")){
+                        isDone = false;
+                    }
+
+                    description = words[2];
+                    extraDescription = words[3];
+
+                    Event newEvent = new Event(description, extraDescription);
+                    tasks.add(newEvent);
+
+                } else if (words[0].contains("D")){
+                    // Create a Deadline class
+
+                    if (words[1].contains("1")){
+                        isDone = true;
+                    } else if (words[1].contains("0")){
+                        isDone = false;
+                    }
+
+                    description = words[2];
+                    extraDescription = words[3];
+
+                    Deadline newDeadline = new Deadline(description, extraDescription);
+                    tasks.add(newDeadline);
+                }
+            }
+        } catch (IOException e){
+            System.out.println(e.getMessage());
+        }
 
         // Creates scanner object to handle input
         Scanner in = new Scanner(System.in);
         String command = in.nextLine().trim();
-        String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
 
         while ( true ){
 
@@ -70,6 +144,7 @@ public class Duke {
                             tasks.size() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
+                    //storage.writeToFile( newTodo.toSaveString());
 
                 } else if (taskType.equals(possibleTasks.DEADLINE.toString().toLowerCase())) {
 
@@ -90,6 +165,7 @@ public class Duke {
                             tasks.size() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
+                    //storage.writeToFile(newDeadline.toSaveString());
 
                 } else if (taskType.equals(possibleTasks.EVENT.toString().toLowerCase())) {
 
@@ -100,7 +176,6 @@ public class Duke {
                     }
 
                     description = command.substring(6, command.lastIndexOf('/'));
-                    System.out.println(command.lastIndexOf('/'));
                     extraDescription = command.substring(4 + command.lastIndexOf('/'));
 
                     Event newEvent = new Event(description, extraDescription);
@@ -111,6 +186,7 @@ public class Duke {
                             tasks.size() + " tasks in the list.\n" + underscore;
 
                     System.out.println(output);
+                    //storage.writeToFile(newEvent.toSaveString() );
 
                 } else if (taskType.equals(possibleTasks.DELETE.toString().toLowerCase())){
 
@@ -138,6 +214,11 @@ public class Duke {
                     output = underscore + "\n" + "     " + "Bye. Hope to see you again soon!" + "\n" + underscore + "\n";
                     System.out.print(output);
 
+                    // Saves the task arraylist to the txt file
+                    for ( Task task:tasks){
+                        storage.writeToFile(task.toSaveString());
+                    }
+
                     break;
 
                 } else { // An invalid task command is given
@@ -149,6 +230,8 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e){
                 System.out.println(e.getMessage());
+            } catch (IOException e){
+                System.out.println(e.getCause());
             }
 
             command = in.nextLine().trim();

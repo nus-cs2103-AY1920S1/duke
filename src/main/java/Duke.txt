@@ -1,2 +1,4 @@
-T | 0 |  read
 E | 1 |  project  |  12/12/1222 12:00
+T | 0 |  work
+D | 1 |  finish work  |  11/11/1111 11:11
+E | 0 |  working  |  11/11/1222 12:22

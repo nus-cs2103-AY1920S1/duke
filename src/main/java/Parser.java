@@ -7,6 +7,8 @@ public class Parser {
 			return new DoneCommand(fullCommand);
 		} else if (fullCommand.startsWith("delete")) {
 			return new DeleteCommand(fullCommand);
+		} else if (fullCommand.startsWith("find")) {
+			return new FindCommand(fullCommand);
 		} else if (fullCommand.equals("bye")) {
 			return new ByeCommand(fullCommand);
 		}

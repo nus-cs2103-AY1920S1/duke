@@ -21,7 +21,7 @@ public class Task {
         setDoneSymbol();
     }
 
-    public String getTask() {
+    public String getDesc() {
         return this.desc;
     }
 

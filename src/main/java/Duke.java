@@ -17,7 +17,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Keeps track of the list of tasks the user have.
+ */
 public class Duke {
+    /**
+     *  Main method which decides the course of action base on the
+     *  commands users give.
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         Parser parser = new Parser();

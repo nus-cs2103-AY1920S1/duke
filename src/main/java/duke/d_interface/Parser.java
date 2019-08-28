@@ -2,7 +2,15 @@ package duke.d_interface;
 
 import java.util.StringJoiner;
 
+/**
+ * Validates the input commands from the user.
+ */
 public class Parser {
+    /**
+     * Validates the input that the user gave to Duke.
+     * @param commandArr Input that the user gave to Duke.
+     * @throws DukeException Exception thrown when an invalid command is given.
+     */
     public void checkCommand(String[] commandArr) throws DukeException {
         if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete")) {
             throw new DukeException("    ____________________________________________________________\n" +
@@ -19,6 +27,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates the timing of the task given by the user.
+     * @param time Timing of the specific task.
+     * @return Formatted timing of the date and time.
+     * @throws DukeException Exception thrown when an invalid date or timing is given.
+     */
     public String checkTime(String time) throws DukeException {
         String[] timeArr = time.split(" ");
         String[] month = {"NIL", "January", "February", "March", "April",
@@ -77,6 +91,11 @@ public class Parser {
         return sj.toString();
     }
 
+    /**
+     * Checks whether the timing of the task given by the user is valid.
+     * @param str Takes in the timing of the event or deadline task.
+     * @return boolean result on whether the timing is in the valid format.
+     */
     private boolean validateTime(String str) {
         boolean result = true;
         int hour = Integer.parseInt(str.substring(0, 2));
@@ -93,6 +112,11 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Checks whether the date of the task given by the user is valid.
+     * @param str Takes in the date of thee event or deadline task.
+     * @return boolean result on whether the date is in the valid format.
+     */
     private boolean validateDate(String str) {
         String[] date = str.split("/");
         int day = Integer.parseInt(date[0]);

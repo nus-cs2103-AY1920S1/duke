@@ -21,6 +21,8 @@ public class Parser {
             return new DeleteCommand(str.substring(lastIndex));
         case "done":
             return new DoneCommand(str.substring(lastIndex));
+        case "find":
+            return new FindCommand(str.substring(lastIndex));
         case "list":
             return new ListCommand();
         case "deadline":

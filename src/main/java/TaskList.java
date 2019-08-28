@@ -86,4 +86,26 @@ public class TaskList {
             throw new IndexOutOfBoundsDukeException();
         }
     }
+
+
+    /**
+     * Find all tasks with positive match to given string, then output a UiString of List of Tasks for display.
+     *
+     * @param str String to match
+     * @return UiString to be displayed
+     */
+    public String findAllIncludesAsUiString(String str) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        int i = 1;
+        Iterator<Task> it = ls.iterator();
+        while (it.hasNext()) {
+            String taskString = it.next().toString();
+            if (taskString.contains(str)) {
+                sb.append(i++)
+                    .append(".")
+                    .append(taskString);
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class DukeFileEditor {
-    public static final String FILE_PATH = "C:/Users/User/Desktop/duke.txt";
-    public static File file = new File(FILE_PATH);
+public class Storage {
+    public static String filePath = "";
 
-    public static LinkedList<Task> loadFile () {
+    public Storage (String filePath) {
+        this.filePath = filePath;
+    }
+
+    public LinkedList<Task> load () {
+        File file = new File(filePath);
         LinkedList<Task> loadedTasks = new LinkedList<>();
 
         try {
@@ -33,14 +37,14 @@ public class DukeFileEditor {
 
                     loadedTasks.add(newTodo);
                 } else if (actionTask.equals("D")) {
-                    Deadline newDeadline = new Deadline(taskDescription, Duke.convertDateAndTime(taskArray[3]));
+                    Deadline newDeadline = new Deadline(taskDescription, Parser.convertDateAndTime(taskArray[3]));
                     if (isDone) {
                         newDeadline.markAsDone();
                     }
 
                     loadedTasks.add(newDeadline);
                 } else if (actionTask.equals("E")) {
-                    Event newEvent = new Event(taskDescription, Duke.convertDateAndTime(taskArray[3]));
+                    Event newEvent = new Event(taskDescription, Parser.convertDateAndTime(taskArray[3]));
                     if (isDone) {
                         newEvent.markAsDone();
                     }
@@ -62,12 +66,15 @@ public class DukeFileEditor {
     }
 
     public static void writeFile (LinkedList<Task> updatedTask) {
+        File file = new File(filePath);
+        boolean isFileExists = file.exists();
+
         try {
-            if (!file.exists()) {
+            if (!isFileExists) {
                 file.createNewFile();
             }
 
-            FileWriter fw = new FileWriter(FILE_PATH);
+            FileWriter fw = new FileWriter(filePath);
             for (Task subTask: updatedTask) {
                 if (subTask instanceof Todo) {
                     String newTodo = "T | " +

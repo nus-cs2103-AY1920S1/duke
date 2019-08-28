@@ -8,6 +8,10 @@ import duke.ui.UI;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
+/**
+ * Duke is an application that keeps track of your
+ * to-do tasks, deadlines and events.
+ */
 public class Duke {
     private UI ui;
     private Storage storage;
@@ -24,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * This is where the Duke application starts to run.
+     */
     public void run() {
         ui.welcomeMsg();
         boolean dukeIsOn = true;

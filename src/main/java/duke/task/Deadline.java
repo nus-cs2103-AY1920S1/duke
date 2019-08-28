@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.Date;
 
+/**
+ * Deadline is a task that has to be completed by a certain date.
+ */
 public class Deadline extends Task{
     private Date deadlineBy;
 
@@ -10,6 +13,12 @@ public class Deadline extends Task{
         this.deadlineBy = deadlineBy;
     }
 
+    /**
+     * Returns a string of a task that can contain
+     * its description, time and completion status.
+     *
+     * @return string that contains information about a task.
+     */
     public String saveInfo() {
         return "deadline" + " " + taskDetails + " /by " + TaskList.inputDateFormat.format(deadlineBy) + System.getProperty("line.separator")
                 + completed;

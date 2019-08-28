@@ -3,7 +3,14 @@ package util;
 import error.ConfigurationException;
 import task.Task;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -64,6 +71,7 @@ public class DukeStorage {
         return System.getProperty("user.home") + "/bin/duke";
     }
 
+    @SuppressWarnings("unchecked")
     private void loadTaskData() throws ConfigurationException {
         if (!new File(storageFilePath).exists()) {
             DukeMessage storageFileNotFoundMessage = new DukeMessage("Storage file not found at ")

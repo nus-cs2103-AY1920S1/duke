@@ -29,6 +29,10 @@ public abstract class Task implements Serializable {
         this.done = done;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public final String getTaskMessage() {
         String message = String.format("[%s][%s] %s",
                 getTaskStringCode(),

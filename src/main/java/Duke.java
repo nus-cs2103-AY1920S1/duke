@@ -7,7 +7,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
-    private Duke(String s) {
+    Duke(String s) {
         storage = new Storage(s);
         ui = new Ui();
         tasks = storage.load();

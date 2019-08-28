@@ -39,6 +39,11 @@ public class Parser {
                 throw new DukeException(ERROR_TOO_MANY_ARGUMENTS);
             }
             return new ListCommand();
+        case "find":
+            if (line.length == 1) {
+                throw new DukeException(ERROR_MISSING_DESCRIPTION);
+            }
+            return new FindCommand(line[1]);
         case "done":
             return new DoneCommand(getId(line));
         case "delete":

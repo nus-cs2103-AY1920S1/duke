@@ -1,5 +1,7 @@
 package task.tasks;
 
+import error.UnknownCommandException;
+import error.task.InvalidArgumentsException;
 import error.task.UnknownDateTimeException;
 import task.Task;
 import util.DukeDateTime;
@@ -10,7 +12,7 @@ import java.util.Optional;
 public class Event extends Task {
     private LocalDateTime at;
 
-    Event(String arguments) throws UnknownDateTimeException {
+    public Event(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
         super(getDescription(arguments), TaskKeyword.EVENT);
         this.at = getTiming(arguments);
     }
@@ -30,8 +32,12 @@ public class Event extends Task {
         return arguments.split(" /at ")[0];
     }
 
-    private LocalDateTime getTiming(String arguments) throws UnknownDateTimeException {
-        String dateTime = arguments.split(" /at ")[1];
-        return DukeDateTime.parseDateTime(dateTime);
+    private LocalDateTime getTiming(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
+        try {
+            String dateTime = arguments.split(" /at ")[1];
+            return DukeDateTime.parseDateTime(dateTime);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidArgumentsException("\"at");
+        }
     }
 }

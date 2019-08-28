@@ -3,7 +3,6 @@ package duke.initials;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected String date;
 
     public Task(String description) {
         this.description = description;

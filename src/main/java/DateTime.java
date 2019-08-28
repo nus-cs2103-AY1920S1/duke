@@ -34,7 +34,8 @@ public class DateTime {
         String dateString = currArray[0];
         String timeString = currArray[1];
         String[] dateArray = dateString.split("/", 3);
-        return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
+        return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]),
+                Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
     }
 
     /**

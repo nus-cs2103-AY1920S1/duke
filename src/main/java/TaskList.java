@@ -59,7 +59,8 @@ public class TaskList {
             try {
                 storage.store();
             } catch (IOException e) {
-                System.out.println("    ____________________________________________________________\n     OOPS!!! " + e.getMessage() + "\n    ____________________________________________________________\n\n");
+                System.out.println("    ____________________________________________________________\n     OOPS!!! "
+                        + e.getMessage() + "\n    ____________________________________________________________\n\n");
             }
         } catch (DukeException error) {
             System.err.println(error.getMessage());
@@ -74,7 +75,9 @@ public class TaskList {
      */
     public static void checkDone(String[] currArray) throws DukeException {
         if (currArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! Please specify a task number! :-)\n" + "    ____________________________________________________________" + "\n");
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! Please specify a task number! :-)\n"
+                    + "    ____________________________________________________________" + "\n");
         }
         int currStep = Integer.parseInt(currArray[1]);
         if (currStep == 0 || currStep > myTasks.size()) {
@@ -103,7 +106,8 @@ public class TaskList {
         try {
             storage.store();
         } catch (IOException e) {
-            System.out.println("    ____________________________________________________________\n     OOPS!!! " + e.getMessage() + "\n    ____________________________________________________________\n\n");
+            System.out.println("    ____________________________________________________________\n     OOPS!!! "
+                    + e.getMessage() + "\n    ____________________________________________________________\n\n");
         }
     }
 
@@ -133,7 +137,8 @@ public class TaskList {
             try {
                 storage.store();
             } catch (IOException e) {
-                System.out.println("    ____________________________________________________________\n     OOPS!!! " + e.getMessage() + "\n    ____________________________________________________________\n\n");
+                System.out.println("    ____________________________________________________________\n     OOPS!!! "
+                        + e.getMessage() + "\n    ____________________________________________________________\n\n");
             }
         } else if (extractCommand[0].equals("deadline")) {
             String[] currArray = extractCommand[1].split(" /by ", 2);
@@ -145,7 +150,8 @@ public class TaskList {
                 try {
                     storage.store();
                 } catch (IOException e) {
-                    System.out.println("    ____________________________________________________________\n     OOPS!!! " + e.getMessage() + "\n    ____________________________________________________________\n\n");
+                    System.out.println("    ____________________________________________________________\n     OOPS!!! "
+                            + e.getMessage() + "\n    ____________________________________________________________\n\n");
                 }
             } catch (DukeException error) {
                 System.err.println(error.getMessage());
@@ -160,7 +166,8 @@ public class TaskList {
                 try {
                     storage.store();
                 } catch (IOException e) {
-                    System.out.println("    ____________________________________________________________\n     OOPS!!! " + e.getMessage() + "\n    ____________________________________________________________\n\n");
+                    System.out.println("    ____________________________________________________________\n     OOPS!!! "
+                            + e.getMessage() + "\n    ____________________________________________________________\n\n");
                 }
             } catch (DukeException error) {
                 System.err.println(error.getMessage());
@@ -190,7 +197,9 @@ public class TaskList {
      */
     public static void checkTime(String[] currArray, String taskType) throws DukeException {
         if (currArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! Your " + taskType + " needs a specific date/time! Please re-enter your " + taskType + " :-)\n" + "    ____________________________________________________________" + "\n");
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! Your " + taskType + " needs a specific date/time! Please re-enter your "
+                    + taskType + " :-)\n" + "    ____________________________________________________________" + "\n");
         }
     }
 }

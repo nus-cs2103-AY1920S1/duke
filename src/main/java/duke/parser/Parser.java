@@ -4,16 +4,17 @@ import duke.dukeexception.DukeException;
 import duke.command.*;
 
 public class Parser {
+
     public static Command parse(String toParse) throws DukeException {
         String[] tokens = toParse.split(" ");
         String commandType = tokens[0];
-        Command cToReturn = null;
+        Command commandToReturn = null;
         String dateString = "";
         String timeString = "";
         String toAdd = "";
         switch (commandType) {
         case "list":
-            cToReturn = new ListCommand();
+            commandToReturn = new ListCommand();
             break;
         case "done":
             //"done" logic
@@ -21,7 +22,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please specify task to complete");
             }
             int toComplete = Integer.parseInt(tokens[1]) - 1;
-            cToReturn = new DoneCommand(toComplete);
+            commandToReturn = new DoneCommand(toComplete);
             break;
         case "delete":
             //"delete" logic
@@ -29,7 +30,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Please specify task to delete");
             }
             int toDelete = Integer.parseInt(toParse.split(" ")[1]) - 1;
-            cToReturn = new DeleteCommand(toDelete);
+            commandToReturn = new DeleteCommand(toDelete);
             break;
         case "todo":
             //toodo logic
@@ -39,7 +40,7 @@ public class Parser {
             for (int j = 1; j < tokens.length; j++) {
                 toAdd = toAdd + tokens[j] + " ";
             }
-            cToReturn = new TodoCommand(toAdd.trim());
+            commandToReturn = new TodoCommand(toAdd.trim());
             break;
         case "deadline":
             //"deadline" logic
@@ -65,7 +66,7 @@ public class Parser {
                     }
                 }
             }
-            cToReturn = new DeadlineCommand(toAdd.trim(), dateString.trim(), timeString.trim());
+            commandToReturn = new DeadlineCommand(toAdd.trim(), dateString.trim(), timeString.trim());
             break;
         case "event":
             //"event" logic
@@ -90,15 +91,22 @@ public class Parser {
                     }
                 }
             }
-            cToReturn = new EventCommand(toAdd.trim(), dateString.trim(), timeString.trim());
+            commandToReturn = new EventCommand(toAdd.trim(), dateString.trim(), timeString.trim());
             break;
         case "bye":
-            cToReturn = new ByeCommand();
+            commandToReturn = new ByeCommand();
+            break;
+        case "find":
+            if (toParse.split(" ").length < 2) {
+                throw new DukeException("Cannot perform search with no keyword!");
+            }
+            String keyword = toParse.split("find")[1].strip();
+            commandToReturn = new FindCommand(keyword);
             break;
         default:
             //unrecognized command
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return cToReturn;
+        return commandToReturn;
     }
 }

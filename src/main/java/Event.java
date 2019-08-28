@@ -1,3 +1,7 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 /**
  * Encapsulates a event-type task handled by Duke.
  *
@@ -11,14 +15,18 @@ public class Event extends Task {
     /** String representing date or time at which event is slated to occur */
     private String dateTime;
 
+    /** Date / Time converted to Date format */
+    private Date when;
+
     /**
      * Creates an event with a description and date/time information.
      * @param description string representing description of event.
      * @param dateTime string representing when the event will occur.
      */
-    public Event(String description, String dateTime) {
+    public Event(String description, String dateTime) throws ParseException {
         super(description);
         this.dateTime = dateTime;
+        this.when = this.toDate();
     }
 
     /**
@@ -28,5 +36,15 @@ public class Event extends Task {
      */
     public String toString() {
         return "[E]" + super.toString() + "(at: " + dateTime + ")";
+    }
+
+    public Date toDate() throws ParseException {
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.dateTime);
+        } catch (ParseException exception) {
+            System.out.println("Looks like you entered the incorrect Date/Time "
+                    + "format. Please follow <dd>/<mm>/<yyyy> <hhmm>");
+        }
+        return null;
     }
 }

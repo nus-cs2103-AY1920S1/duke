@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.lang.Integer;
+<<<<<<< HEAD
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.StringBuilder;
+=======
+import java.text.ParseException;
+>>>>>>> branch-Level-8
 
 /**
  * Encapsulates attributes and behaviour of Duke, a personal assistant chatbot.
@@ -217,9 +221,16 @@ public class Duke {
                 } else if (taskType.equals("EVENT")) {
                     return new Event(taskDescription, taskDateTime);
                 }
+<<<<<<< HEAD
             } catch (IndexOutOfBoundsException exceptionOne) {
                 System.out.println("Looks like your format is incorrect. "
                         + "Please follow <event type> <description> / <dd/mm/yyyy> <hhmm>");
+=======
+            } catch (IndexOutOfBoundsException | ParseException exception) {
+                System.out.println("Looks like your format is incorrect. "
+                        + "Please follow <event type> <description> "
+                        + "/ <dd>/<mm>/<yyyy> <hh><mm>");
+>>>>>>> branch-Level-8
             }
         }
         return null;

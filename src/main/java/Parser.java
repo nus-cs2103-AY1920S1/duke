@@ -17,6 +17,9 @@ public class Parser {
             } else if (fullcommand.startsWith("delete")) { //DELETE
                 command = fullcommand.replaceFirst("delete", "").trim();
                 return new DeleteCommand(command);
+            } else if (fullcommand.startsWith("find")) { //FIND
+                command = fullcommand.replaceFirst("find", "").trim();
+                return new FindCommand(command);
             } else if (fullcommand.startsWith("todo")) { //ADD: TODO
                 command = fullcommand.replaceFirst("todo", "").trim();
                 return new AddCommand("T", command);

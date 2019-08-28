@@ -72,6 +72,16 @@ public class Ui {
         }
     }
 
+    // print matching tasks from search result
+    public void printMatches(ArrayList<Task> results) {
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < results.size(); i++) {
+            int num = i + 1;
+            Task currTask = results.get(i);
+            System.out.println("     " + num + ". " + currTask.toString());
+        }
+    }
+
     // get user input
     public String readCommand() {
         Scanner sc = new Scanner(System.in);

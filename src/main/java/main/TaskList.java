@@ -1,3 +1,7 @@
+package main;
+
+import task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList{
@@ -16,23 +20,23 @@ public class TaskList{
         return this.tasks;
     }
 
-    Task addTask(Task newTask) {
+    public Task addTask(Task newTask) {
         tasks.add(newTask);
         return newTask;
     }
 
-    Task deleteTask(int taskNum) {
+    public Task deleteTask(int taskNum) {
         Task removedTask = this.tasks.remove(taskNum-1);
         return removedTask;
     }
 
-    Task finishTask(int taskNum) {
+    public Task finishTask(int taskNum) {
         Task completedTask = this.tasks.get(taskNum-1);
         completedTask.finishTask();
         return completedTask;
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 
@@ -41,11 +45,11 @@ public class TaskList{
      * @param taskID is the ACTUAL task ID, with index starting from 1
      * @return Task Object with the corresponding task ID.
      */
-    Task getTask(int taskID) {
+    public Task getTask(int taskID) {
         return tasks.get(taskID-1);
     }
 
-    void clearAll() {
+    public void clearAll() {
         this.tasks.clear();
     }
     /*

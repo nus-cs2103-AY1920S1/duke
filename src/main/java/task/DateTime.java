@@ -1,3 +1,7 @@
+package task;
+
+import main.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,7 +13,7 @@ public class DateTime {
         this.dateTime = dateTime;
     }
 
-    DateTime(String rawDateTimeFormat) throws DukeException {
+    public DateTime(String rawDateTimeFormat) throws DukeException {
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             this.dateTime = LocalDateTime.parse(rawDateTimeFormat, formatter);

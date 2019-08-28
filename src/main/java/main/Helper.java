@@ -1,3 +1,5 @@
+package main;
+
 public class Helper {
 
     private static int NUMBER_OF_COMMANDS = 9;
@@ -17,7 +19,7 @@ public class Helper {
         arr[9] = "clear";
     }
 
-    String[] getCommands() {
+    public String[] getCommands() {
         return arr;
     }
 

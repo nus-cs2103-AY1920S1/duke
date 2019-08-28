@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 /**
@@ -14,7 +16,7 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    String readCommand() throws DukeException {
+    public String readCommand() throws DukeException {
         String fullCommand = sc.nextLine().trim();
         if (fullCommand.equals("")) {
             throw new DukeException("Please enter a command. Type 'help' for a list of all valid commands.");
@@ -23,7 +25,7 @@ public class Ui {
         return fullCommand;
     }
 
-    void showLine() {
+    public void showLine() {
         System.out.println(DIVIDER);
     }
 
@@ -42,7 +44,7 @@ public class Ui {
         dukeEcho(message);
     }
 
-    void dukeEcho(String... messages){
+    public void dukeEcho(String... messages){
         for (String msg : messages) {
             System.out.println(BLANKSPACE + msg);
         }

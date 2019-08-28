@@ -1,3 +1,5 @@
+package task;
+
 /**
  * Represents a Task object
  */
@@ -22,8 +24,8 @@ public class Task {
         return "[" + status + "] " + this.name;
     }
 
-    void finishTask() { this.isComplete = true; }
-    String publishTask() {
+    public void finishTask() { this.isComplete = true; }
+    public String publishTask() {
         String status = this.isComplete ? "1" : "0";
         return status + " | " + this.name;
     }

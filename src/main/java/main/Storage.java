@@ -1,9 +1,13 @@
+package main;
+
+import main.TaskList;
+import task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -61,7 +65,7 @@ public class Storage {
             throw new DukeException("Invalid task status found.");
         }
 
-        boolean isComplete = status==0 ? false : true;
+        boolean isComplete = status != 0;
 
         Task newTask;
         DateTime dateTime;
@@ -88,7 +92,7 @@ public class Storage {
         return newTask;
     }
 
-    void save(TaskList tasks) throws DukeException {
+    public void save(TaskList tasks) throws DukeException {
         try {
             new FileWriter(filePath); //create new file
             for (Task task : tasks.getTasks()) {
@@ -105,7 +109,7 @@ public class Storage {
         fw.close();
     }
 
-    void clearAll() throws DukeException {
+    public void clearAll() throws DukeException {
         try {
             new FileWriter(filePath); //create new file
         } catch (IOException e) {

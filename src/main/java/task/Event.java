@@ -1,15 +1,19 @@
+package task;
+
+import task.DateTime;
+
 /**
  * Represents a Task with type Event
  */
 public class Event extends Task {
     private DateTime dateTime;
 
-    Event(String name, DateTime dateTime){
+    public Event(String name, DateTime dateTime){
         super(name);
         this.dateTime = dateTime;
     }
 
-    Event(String name, boolean isComplete, DateTime dateTime) {
+    public Event(String name, boolean isComplete, DateTime dateTime) {
         super(name, isComplete);
         this.dateTime = dateTime;
     }
@@ -20,7 +24,7 @@ public class Event extends Task {
     }
 
     @Override
-    String publishTask() {
+    public String publishTask() {
         return "E | " + super.publishTask() + " | " + this.dateTime;
     }
 }

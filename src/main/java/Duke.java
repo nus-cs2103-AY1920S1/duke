@@ -1,7 +1,5 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import command.Command;
+import main.*;
 
 /**
  * Main class
@@ -14,7 +12,7 @@ public class Duke {
     private Ui ui;
 
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {

@@ -1,12 +1,14 @@
+package task;
+
 /**
  * Represents a Task with type Todo
  */
 public class ToDo extends Task {
-    ToDo(String name) {
+    public ToDo(String name) {
         super(name);
     }
 
-    ToDo(String name, boolean isComplete) {
+    public ToDo(String name, boolean isComplete) {
         super(name, isComplete);
     }
 
@@ -16,7 +18,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    String publishTask() {
+    public String publishTask() {
         return "T | " + super.publishTask();
     }
 }

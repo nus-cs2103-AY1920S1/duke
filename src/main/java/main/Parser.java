@@ -1,3 +1,8 @@
+package main;
+
+import command.*;
+import command.Command;
+
 /**
  * deals with making sense of the user command
  */

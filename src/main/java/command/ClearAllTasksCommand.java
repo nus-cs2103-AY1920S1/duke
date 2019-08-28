@@ -1,3 +1,11 @@
+package command;
+
+import command.Command;
+import main.DukeException;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
+
 public class ClearAllTasksCommand extends Command {
     public ClearAllTasksCommand() {
         super();

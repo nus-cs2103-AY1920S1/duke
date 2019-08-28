@@ -1,4 +1,12 @@
-public class AddCommand extends Command{
+package command;
+
+import main.DukeException;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
+import task.*;
+
+public class AddCommand extends Command {
 
     private String taskType;
     private String taskName;

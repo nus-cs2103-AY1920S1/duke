@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
 
     private String deadline;
@@ -15,6 +20,20 @@ public class Deadline extends Task {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public Date convertDateTime() {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date converted;
+        try {
+            converted = formatter.parse(deadline);
+        } catch  (ParseException e) {
+            return null;
+        }
+        return converted;
+    }
+
+>>>>>>> branch-Level-8
     public String storageFormat() {
         if (done) {
             return "D/✓/" + taskName + "/" + deadline;

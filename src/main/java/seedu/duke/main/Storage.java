@@ -21,15 +21,15 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split(" | ");
                 switch (task[0]) {
-                    case "[T]":
-                        tasks.add(new Todo(task[2], (task[1].equals("\u2713") ? true : false)));
-                        break;
-                    case "[D]":
-                        tasks.add(new Deadline(task[2], task[3].substring(4), (task[1].equals("\u2713") ? true : false)));
-                        break;
-                    case "[E]":
-                        tasks.add(new Event(task[2], task[3].substring(4), (task[1].equals("\u2713") ? true : false)));
-                        break;
+                case "[T]":
+                    tasks.add(new Todo(task[2], (task[1].equals("\u2713") ? true : false)));
+                    break;
+                case "[D]":
+                    tasks.add(new Deadline(task[2], task[3].substring(4), (task[1].equals("\u2713") ? true : false)));
+                    break;
+                case "[E]":
+                    tasks.add(new Event(task[2], task[3].substring(4), (task[1].equals("\u2713") ? true : false)));
+                    break;
                 }
             }
             return tasks;

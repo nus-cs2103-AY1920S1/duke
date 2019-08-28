@@ -1,8 +1,17 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class Deadline extends Task {
-    private String by;
+    private Date by;
+
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        try {
+            this.by = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
+        } catch (ParseException ex) {
+            System.out.print(ex);
+        }
     }
 
     public String encode() {

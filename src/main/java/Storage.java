@@ -79,15 +79,15 @@ public class Storage {
     private static Task createTaskFromInput(String[] inputArray) throws InvalidTaskDukeException, EmptyTaskDukeException {
         Task createdTask = null;
         switch(inputArray[0]) {
-            case "T":
-                createdTask = new ToDo(inputArray[2]);
-                break;
-            case "D":
-                createdTask = new Deadline(inputArray[2], inputArray[3]);
-                break;
-            case "E":
-                createdTask = new Event(inputArray[2], inputArray[3]);
-                break;
+        case "T":
+            createdTask = new ToDo(inputArray[2]);
+            break;
+        case "D":
+            createdTask = new Deadline(inputArray[2], inputArray[3]);
+            break;
+        case "E":
+            createdTask = new Event(inputArray[2], inputArray[3]);
+            break;
         }
         if (createdTask != null) {
             if (inputArray[1].equals("1")) {

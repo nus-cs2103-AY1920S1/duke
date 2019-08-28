@@ -24,11 +24,9 @@ public class Ui {
      * Shows welcome message.
      */
     public void showWelcome() {
-        System.out.println(
-                "    ____________________________________________________________\n" +
-                        "     Hello! I'm Duke\n" +
-                        "     What can I do for you?\n" +
-                        "    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n" +
+                "     Hello! I'm Duke\n" + "     What can I do for you?\n" +
+                "    ____________________________________________________________\n");
     }
 
     /**
@@ -73,7 +71,8 @@ public class Ui {
         } else if (e instanceof EmptyTaskDukeException) {
             System.out.println(String.format("     ☹ OOPS!!! The description of a %s cannot be empty.", e.getMessage()));
         } else if (e instanceof InvalidTaskDukeException) {
-            System.out.println(String.format("     ☹ OOPS!!! Invalid input! Make sure your %s has a description and /at or /by.", e.getMessage()));
+            System.out.println(String.format(
+                    "     ☹ OOPS!!! Invalid input! Make sure your %s has a description and /at or /by.", e.getMessage()));
         } else {
             System.out.println(e.getMessage()); // for undeclared exceptions
         }

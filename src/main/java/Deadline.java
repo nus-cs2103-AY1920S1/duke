@@ -1,8 +1,8 @@
 /**
  * Represents a Deadline task.
  */
-
 public class Deadline extends Task {
+
     /**
      * Represents due date (byWhen) of the Deadline.
      */

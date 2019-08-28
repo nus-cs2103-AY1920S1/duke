@@ -20,21 +20,16 @@ public class Parser {
             switch (toProcess) {
             case "list":
                 return new PrintListCommand();
-
             case "bye":
                 return new ExitCommand();
-
             case "done":
                 return new DoneCommand(scanner.nextInt());
-
             case "delete":
                 return new DeleteCommand(scanner.nextInt());
-
             case "todo":
             case "deadline":
             case "event":
                 return createAddCommand(fullCommand);
-
             default:
                 throw new InvalidInputDukeException();
             }
@@ -60,7 +55,6 @@ public class Parser {
         case "todo":
             taskToAdd = new ToDo(theTask);
             break;
-
         case "deadline":
             String taskByWhen[];
             if (theTask == null) {
@@ -72,7 +66,6 @@ public class Parser {
             String byWhen = taskByWhen[1];
             taskToAdd = new Deadline(deadlineTask, byWhen);
             break;
-
         case "event":
             String taskAtTime[];
             if (theTask == null) {
@@ -84,7 +77,6 @@ public class Parser {
             String atTime = taskAtTime[1];
             taskToAdd = new Event(eventTask, atTime);
             break;
-
         default:
             break;
         }

@@ -1,8 +1,8 @@
 /**
  * Represents a command that handles requests in Duke.
  */
-
 public abstract class Command {
+
     /**
      * Constructor of Command.
      */
@@ -18,8 +18,8 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Checks if Duke should continue running after command.
-     * @return
+     * Checks if Duke should carry on running after command
+     * @return True if not ExitCommand.
      */
     public abstract boolean isRunning();
 }

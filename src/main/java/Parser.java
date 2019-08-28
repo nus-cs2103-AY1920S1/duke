@@ -26,6 +26,9 @@ public class Parser {
                 return new ListCommand();
             case "bye":
                 return new ByeCommand();
+            case "find":
+                String word = input[1];
+                return new FindCommand(word);
             default:
                 return new Command();
         }

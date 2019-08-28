@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Manages everything related to the UI.
+ */
 public class Ui {
     private Scanner scanner;
     private static String oneLine = "    ____________________________________________________________\n";
@@ -9,6 +12,9 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * used to readComand
+     */
     public String readCommand() {
         if (scanner.hasNextLine()) {
             return scanner.nextLine();

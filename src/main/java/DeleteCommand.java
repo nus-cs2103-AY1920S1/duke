@@ -1,3 +1,6 @@
+/**
+ * DeleteCommand extends Command
+ */
 public class DeleteCommand extends Command {
     private String[] oneLine;
     String deleteMessage1;

@@ -1,3 +1,6 @@
+/**
+ * Parser class
+ */
 public class Parser {
     public static String[] oneLine;
 

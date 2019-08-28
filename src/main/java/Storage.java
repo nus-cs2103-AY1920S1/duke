@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class
+ */
 public class Storage {
     private String filePath;
     public static String[] oneLine;
@@ -48,7 +51,7 @@ public class Storage {
         } catch (Exception e) {
             System.out.println("[duke.txt]: duke.txt not found");
         }
-            return myList;
+        return myList;
     }
 
     public void save(TaskList tasks) throws Exception {

@@ -1,5 +1,8 @@
 import java.time.LocalDateTime;
 
+/**
+ * Deadline extends Task
+ */
 public class Deadline extends Task {
 
     protected String by;
@@ -10,6 +13,7 @@ public class Deadline extends Task {
         this.pattern = LocalDateTime.parse(by.trim(), dateTimeFormatter);
 
     }
+
     public Deadline(String description, String by, String isDone) {
         super(description, isDone);
         this.by = by;

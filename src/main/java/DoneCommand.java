@@ -1,3 +1,6 @@
+/**
+ * DoneCommand extends Command
+ */
 public class DoneCommand extends Command {
     private String[] oneLine;
 

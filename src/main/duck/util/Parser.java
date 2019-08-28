@@ -16,33 +16,32 @@ public class Parser {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
 
     /**
-     * Parses a given string in a certain format to a <code>LocalDateTime</code> object.
-     * The string must be in the format of "day/month/year hh:mm" to be possibly parsed, for example:
-     * "31/05/2000 15:00".
+     * Parses a given string in a certain format to a <code>LocalDateTime</code> object. The string must be in the
+     * format of "day/month/year hh:mm" to be possibly parsed, for example: "31/05/2000 15:00".
      *
-     * @param info                     a string to be parsed into a <code>LocalDateTime</code> object
-     * @return                         a <code>LocalDateTime</code> object corresponds to the  date time information
-     * @throws DateTimeParseException  If the entered string is not in the format of "day/month/year hh:mm"
+     * @param info a string to be parsed into a <code>LocalDateTime</code> object
+     * @return a <code>LocalDateTime</code> object corresponds to the  date time information
+     * @throws DateTimeParseException If the entered string is not in the format of "day/month/year hh:mm"
      */
     public static LocalDateTime parseDateTime(String info) throws DateTimeParseException {
-        return LocalDateTime.parse(info,formatter);
+        return LocalDateTime.parse(info, formatter);
     }
 
     /**
-     * Parses the user's commands, which are plain strings, to <code>Command</code> objects.
-     * White spaces are allowed for between and around commands and following details. They are generally ignores
-     * but will be included in the description for <code>Task</code> objects. Except <code>ListCommand</code> and
+     * Parses the user's commands, which are plain strings, to <code>Command</code> objects. White spaces are allowed
+     * for between and around commands and following details. They are generally ignores but will be included in the
+     * description for <code>Task</code> objects. Except <code>ListCommand</code> and
      * <code>ExitCommand</code>, other commands require addition details. For <code>DoneCommand</code> and
      * <code>DeleteCommand</code>, a number about the target task should be specified. For <code>AddCommand</code>,
-     * depends on the type of the task, additional information should be provided in a certain format: (1) In order
-     * to add <code>Todo</code> task, description part is needed; (2) In order to add <code>Deadline</code> task,
+     * depends on the type of the task, additional information should be provided in a certain format: (1) In order to
+     * add <code>Todo</code> task, description part is needed; (2) In order to add <code>Deadline</code> task,
      * description and due date time are needed, and these two parts are separated by "/by"; (3) In order to add
      * <code>Event</code> task, description and duration are needed, and these two parts are separated by "/at".
      *
-     * @param info             a string containing the type of <code>Command</code> and additional details
-     * @return                 a <code>Command</code> object that obtains necessary details to execute
-     * @throws DukeException   If the given string cannot fit in existing commands, or lacks necessary details, or
-     *                         provides date and time in invalid format
+     * @param info a string containing the type of <code>Command</code> and additional details
+     * @return a <code>Command</code> object that obtains necessary details to execute
+     * @throws DukeException If the given string cannot fit in existing commands, or lacks necessary details, or
+     *                       provides date and time in invalid format
      */
     public static Command parseCommand(String info) throws DukeException {
 
@@ -75,7 +74,7 @@ public class Parser {
                 return new AddCommand("todo", infos[1]);
             case "deadline":
                 if (!infos[1].contains(" /by ")) {
-                    throw new DukeException ("☹ OOPS!!! The description of a deadline is not enough.");
+                    throw new DukeException("☹ OOPS!!! The description of a deadline is not enough.");
                 }
                 try {
                     String[] details = infos[1].split(" /by ");
@@ -86,7 +85,7 @@ public class Parser {
                 }
             case "event":
                 if (!infos[1].contains(" /at ")) {
-                    throw new DukeException ("☹ OOPS!!! The description of a event is not enough.");
+                    throw new DukeException("☹ OOPS!!! The description of a event is not enough.");
                 }
                 try {
                     String[] details = infos[1].split(" /at ");

@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Task is the base base class for all tasks.
- * A Task object encapsulates the information about the description and status (done or not). It is possible to create
- * specific task objects from strings in the storage using <code>from</code>.
+ * Task is the base base class for all tasks. A Task object encapsulates the information about the description and
+ * status (done or not). It is possible to create specific task objects from strings in the storage using
+ * <code>from</code>.
  *
- * @author  Zhnag Xiaoyu
+ * @author Zhnag Xiaoyu
  */
 public class Task {
 
@@ -19,10 +19,10 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * This is a class constructor specifying the description for a task.
-     * The <code>isDone</code> status is set to be <code>false</code>.
+     * This is a class constructor specifying the description for a task. The <code>isDone</code> status is set to be
+     * <code>false</code>.
      *
-     * @param description    a string containing the detail for this task
+     * @param description a string containing the detail for this task
      */
     Task(String description) {
         this.description = description;
@@ -32,8 +32,8 @@ public class Task {
     /**
      * This is a class constructor specifying the description for a task and whether the task is done.
      *
-     * @param description    a string containing the detail for this task
-     * @param isDone         a boolean indicating whether this task is done
+     * @param description a string containing the detail for this task
+     * @param isDone      a boolean indicating whether this task is done
      */
     Task(String description, boolean isDone) {
         this.description = description;
@@ -45,9 +45,9 @@ public class Task {
      * the hard disk. Task types can be <code>Todo</code>, <code>Deadline</code>, and <code>Event</code>, indicated by
      * the first letter of the stored string value.
      *
-     * @param taskInfo    a string in a certain format that stores information about a task in the hard disk
-     * @return            a specific <code>Task</code> object, namely, <code>Todo</code>, <code>Deadline</code>,
-     *                    or <code>Event</code>,
+     * @param taskInfo a string in a certain format that stores information about a task in the hard disk
+     * @return a specific <code>Task</code> object, namely, <code>Todo</code>, <code>Deadline</code>, or
+     * <code>Event</code>,
      */
     static public Task from(String taskInfo) {
         String[] taskInfos = taskInfo.split("\\|");
@@ -94,9 +94,9 @@ public class Task {
     /**
      * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
      *
-     * @param obj  the object to be compared
-     * @return     <code>true</code> if the specifications for two tasks are all the same;
-     *             <code>false</code> otherwise.
+     * @param obj the object to be compared
+     * @return <code>true</code> if the specifications for two tasks are all the same;
+     * <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

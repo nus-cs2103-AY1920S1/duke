@@ -12,12 +12,11 @@ public class Event extends Task {
     private LocalTime endTime;
 
     /**
-     * {@inheritDoc}
-     * This is a class constructor specifying the description, start time and end time for the task.
-     * The <code>isDone</code> status is set to be <code>false</code> by default.
+     * {@inheritDoc} This is a class constructor specifying the description, start time and end time for the task. The
+     * <code>isDone</code> status is set to be <code>false</code> by default.
      *
-     * @param startDateTime  a <code>LocalDateTime</code> object to specify the start date and time of this event
-     * @param endTime        a <code>LocalTime</code> object to specify the end time of this event
+     * @param startDateTime a <code>LocalDateTime</code> object to specify the start date and time of this event
+     * @param endTime       a <code>LocalTime</code> object to specify the end time of this event
      */
     public Event(String description, LocalDateTime startDateTime, LocalTime endTime) {
         super(description);
@@ -26,12 +25,11 @@ public class Event extends Task {
     }
 
     /**
-     * {@inheritDoc}
-     * This is a class constructor specifying the description, start time, end time, and <code>isDone</code> status of
-     * the task.
+     * {@inheritDoc} This is a class constructor specifying the description, start time, end time, and
+     * <code>isDone</code> status of the task.
      *
-     * @param startDateTime  a <code>LocalDateTime</code> object to specify the start date and time of this event
-     * @param endTime        a <code>LocalTime</code> object to specify the end time of this event
+     * @param startDateTime a <code>LocalDateTime</code> object to specify the start date and time of this event
+     * @param endTime       a <code>LocalTime</code> object to specify the end time of this event
      */
     public Event(String description, LocalDateTime startDateTime, LocalTime endTime, boolean isDone) {
         super(description, isDone);
@@ -49,8 +47,9 @@ public class Event extends Task {
 
     /**
      * {@inheritDoc}
+     *
      * @return a string representing this todo in the format of a tag "[E]" at the start, followed by the description,
-     *         the start date time, and the end time.
+     * the start date time, and the end time.
      */
     @Override
     public String toString() {
@@ -58,8 +57,7 @@ public class Event extends Task {
     }
 
     /**
-     * {@inheritDoc}
-     * Compares two <code>Todo</code> objects by their descriptions, <code>isDone</code> status,
+     * {@inheritDoc} Compares two <code>Todo</code> objects by their descriptions, <code>isDone</code> status,
      * <code>startDateTime</code>, and <code>endTime</code>.
      */
     @Override

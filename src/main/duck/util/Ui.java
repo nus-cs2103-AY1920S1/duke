@@ -2,15 +2,15 @@ package duck.util;
 
 import duck.task.Task;
 
+import java.util.Scanner;
+
 /**
- * This class handles the interactions with users.
- * Two main features are (1) reading users' inputs from the console; (2) showing users the results responding to their
- * commands. Many strings are pre-defined in certain formats. Pre-defined string messages are <code>showWelcome</code>,
+ * This class handles the interactions with users. Two main features are (1) reading users' inputs from the console; (2)
+ * showing users the results responding to their commands. Many strings are pre-defined in certain formats. Pre-defined
+ * string messages are <code>showWelcome</code>,
  * <code>showGoodbye</code>, <code>showSavingError</code>, <code>showLoadingError</code>, <code>showNoTask</code>. The
  * rest needs to take in some parameter(s) to show according responses.
  */
-import java.util.Scanner;
-
 public class Ui {
     private static final String indentation = "     ";
     private static final String separator = "    ____________________________________________________________\n";

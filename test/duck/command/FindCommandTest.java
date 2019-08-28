@@ -1,9 +1,5 @@
 package duck.command;
 
-<<<<<<< HEAD
-=======
-import duck.util.DukeException;
->>>>>>> branch-A-JavaDoc
 import duck.util.Storage;
 import duck.util.TaskList;
 import duck.util.Ui;
@@ -16,10 +12,6 @@ import java.util.Arrays;
 
 import static duck.util.ObjectsForTest.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-<<<<<<< HEAD
-=======
-import static org.junit.jupiter.api.Assertions.fail;
->>>>>>> branch-A-JavaDoc
 
 class FindCommandTest {
 
@@ -33,10 +25,7 @@ class FindCommandTest {
 
     @Test
     void execute_normal() {
-<<<<<<< HEAD
-=======
-        try {
->>>>>>> branch-A-JavaDoc
+
             ByteArrayOutputStream out1 = new ByteArrayOutputStream();
             ByteArrayOutputStream out2 = new ByteArrayOutputStream();
 
@@ -53,12 +42,6 @@ class FindCommandTest {
             String expectedResult = out2.toString();
 
             assertEquals(expectedResult, actualResult);
-<<<<<<< HEAD
-=======
-        } catch (DukeException e) {
-            fail();
-        }
->>>>>>> branch-A-JavaDoc
     }
 
     @Test
@@ -70,28 +53,15 @@ class FindCommandTest {
         TaskList fullList = new TaskList();
         TaskList resultList = new TaskList();
 
-<<<<<<< HEAD
-=======
-        try {
->>>>>>> branch-A-JavaDoc
-            System.setOut(new PrintStream(out1));
-            new FindCommand("early").execute(fullList, ui, new Storage(filePath));
-            String actualResult = out1.toString();
+        System.setOut(new PrintStream(out1));
+        new FindCommand("early").execute(fullList, ui, new Storage(filePath));
+        String actualResult = out1.toString();
 
-            System.setOut(new PrintStream(out2));
-            ui.showFullList(resultList);
-            String expectedResult = out2.toString();
+        System.setOut(new PrintStream(out2));
+        ui.showFullList(resultList);
+        String expectedResult = out2.toString();
 
-            assertEquals(expectedResult, actualResult);
-<<<<<<< HEAD
-
+        assertEquals(expectedResult, actualResult);
     }
 }
-=======
-        } catch (DukeException e) {
-            fail();
-        }
 
-    }
-}
->>>>>>> branch-A-JavaDoc

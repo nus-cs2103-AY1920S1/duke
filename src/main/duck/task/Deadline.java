@@ -10,11 +10,10 @@ public class Deadline extends Task {
     private LocalDateTime dueDateTime;
 
     /**
-     * {@inheritDoc}
-     * This is a class constructor specifying the description and the due dateTime.
-     * The <code>isDone</code> status is set to be <code>false</code> by default.
+     * {@inheritDoc} This is a class constructor specifying the description and the due dateTime. The
+     * <code>isDone</code> status is set to be <code>false</code> by default.
      *
-     * @param dueDateTime    a <code>LocalDateTime</code> object to specify the due date and time
+     * @param dueDateTime a <code>LocalDateTime</code> object to specify the due date and time
      */
     public Deadline(String description, LocalDateTime dueDateTime) {
         super(description);
@@ -22,10 +21,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
-     * This is a class constructor specifying the description, the due dateTime ane the <code>isDone</code> status.
+     * {@inheritDoc} This is a class constructor specifying the description, the due dateTime ane the
+     * <code>isDone</code> status.
      *
-     * @param dueDateTime    a <code>LocalDateTime</code> object to specify the due date and time
+     * @param dueDateTime a <code>LocalDateTime</code> object to specify the due date and time
      */
     public Deadline(String description, LocalDateTime dueDateTime, boolean isDone) {
         super(description, isDone);
@@ -38,8 +37,9 @@ public class Deadline extends Task {
 
     /**
      * {@inheritDoc}
+     *
      * @return a string representing this todo in the format of a tag "[D]" at the start, followed by the description
-     *         and the due date time
+     * and the due date time
      */
     @Override
     public String toString() {
@@ -47,8 +47,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
-     * Compares two <code>Todo</code> objects by their descriptions, <code>isDone</code> status,
+     * {@inheritDoc} Compares two <code>Todo</code> objects by their descriptions, <code>isDone</code> status,
      * <code>dueDateTime</code>.
      */
     @Override

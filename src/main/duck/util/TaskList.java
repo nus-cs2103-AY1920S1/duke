@@ -35,7 +35,7 @@ public class TaskList {
     /**
      * Copies all the tasks from another task list to this task list.
      *
-     * @param another    a <code>TaskList</code> object containing some tasks
+     * @param another a <code>TaskList</code> object containing some tasks
      */
     public void addAll(TaskList another) {
         for (int i = 0; i < another.getTotalTask(); i++) {
@@ -50,9 +50,9 @@ public class TaskList {
     /**
      * Compares two task list by sequentially comparing each task.
      *
-     * @param obj  a <code>TaskList</code> object to be compared
-     * @return     <code>true</code> if this task list has same tasks in the same order as another task list;
-     *             <code>false</code> otherwise.
+     * @param obj a <code>TaskList</code> object to be compared
+     * @return <code>true</code> if this task list has same tasks in the same order as another task list;
+     * <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {

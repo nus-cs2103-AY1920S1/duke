@@ -21,6 +21,7 @@ public class Todo extends Task {
 
     /**
      * {@inheritDoc}
+     *
      * @return a string representing this todo in the format of a tag "[T]" at the start, followed by the description
      */
     @Override
@@ -29,8 +30,7 @@ public class Todo extends Task {
     }
 
     /**
-     * {@inheritDoc}
-     * Compares two <code>Todo</code> objects by their descriptions and <code>isDone</code> status.
+     * {@inheritDoc} Compares two <code>Todo</code> objects by their descriptions and <code>isDone</code> status.
      */
     @Override
     public boolean equals(Object obj) {

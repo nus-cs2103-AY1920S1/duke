@@ -15,6 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage will initialise the save file and obtain the data within
+ * else it will create a new file and allow user to update it.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class Storage {
     /** Declaration of file as File type */
     public File file;

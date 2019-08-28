@@ -11,6 +11,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This Event Command class get the input of the task description
+ * and execute the event method to add the task description Date
+ * and Time.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class EventCommand extends Command {
     /**
      * Constructor of the EventCommand class.
@@ -36,7 +44,9 @@ public class EventCommand extends Command {
     /**
      * "event" command to enter event description and event time.
      * @param data event description and time of event.
-     * @throws DukeException If description and time of event is empty.
+     * @param tasks List of task store in arraylist.
+     * @param ui Ui of Duke Program.
+     * @throws DukeException If data is empty and event time is not entered.
      */
     public static void event(String data, TaskList tasks, Ui ui) throws DukeException {
         if (data.isEmpty()) {

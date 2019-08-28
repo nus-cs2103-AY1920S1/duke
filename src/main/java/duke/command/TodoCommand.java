@@ -6,6 +6,13 @@ import duke.component.Ui;
 import duke.database.Storage;
 import duke.task.Todo;
 
+/**
+ * This To-do Command class get the input of the task description
+ * and execute the to-do method to add task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class TodoCommand extends Command {
     /**
      * TodoCommand Constructor.
@@ -31,6 +38,8 @@ public class TodoCommand extends Command {
     /**
      * "to-do" command to enter the task description.
      * @param data to-do command and description of task.
+     * @param tasks List of task save in arraylist.
+     * @param ui Ui of Duke Program.
      * @throws DukeException If description of data is empty.
      */
     public void todo(String data, TaskList tasks, Ui ui) throws DukeException {

@@ -5,6 +5,13 @@ import duke.component.TaskList;
 import duke.component.Ui;
 import duke.database.Storage;
 
+/**
+ * This Delete Command class get the input of the task description
+ * and execute the delete method to delete task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class DeleteCommand extends Command {
     /**
      * DeleteCommand class constructor.

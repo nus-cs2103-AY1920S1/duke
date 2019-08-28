@@ -5,6 +5,13 @@ import duke.component.TaskList;
 import duke.component.Ui;
 import duke.database.Storage;
 
+/**
+ * This List Command class get the input of the task description
+ * and execute the list method and list all the task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class ListCommand extends Command {
     /**
      * ListCommand constructor.
@@ -29,6 +36,8 @@ public class ListCommand extends Command {
 
     /**
      * "list" command to list all the task.
+     * @param tasks List of task saved in arraylist.
+     * @param ui Ui of Duke Programn.
      * @throws DukeException if number of items = 0.
      */
     public static void list(TaskList tasks, Ui ui) throws DukeException {

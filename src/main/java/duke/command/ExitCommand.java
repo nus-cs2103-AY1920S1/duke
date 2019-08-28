@@ -5,6 +5,14 @@ import duke.component.TaskList;
 import duke.component.Ui;
 import duke.database.Storage;
 
+/**
+ * This Exit Command class get the input of the task description
+ * and execute the bye method and update the text file with task
+ * saved.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class ExitCommand extends Command{
     /**
      * ExitCommand class constructor.
@@ -29,8 +37,11 @@ public class ExitCommand extends Command{
     }
 
     /**
-     * "bye" command to exit Duke Program.
-     * @throws DukeException If update of file fails.
+     * "bye" to exit the Duke Program.
+     * @param tasks List of task.
+     * @param ui Ui of Duke Program.
+     * @param storage Database of the Duke Program.
+     * @throws DukeException If update file fail when exiting Duke Program.
      */
     public static void bye(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         System.out.println(ui.INDENT_COMMENT + "Bye. Hope to see you again soon!");

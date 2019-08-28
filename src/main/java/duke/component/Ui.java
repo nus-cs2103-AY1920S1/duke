@@ -2,6 +2,13 @@ package duke.component;
 
 import java.util.Scanner;
 
+/**
+ * Ui class show the preset indentation, welcome message
+ * and error message to user.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class Ui {
     /** Indentation for comment */
     public final String INDENT_COMMENT = "    ";

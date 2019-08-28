@@ -11,6 +11,13 @@ import duke.command.DeleteCommand;
 import duke.exception.DukeException;
 import duke.component.Ui;
 
+/**
+ * Parser class will parse the input from user and
+ * check for the type of task enter.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class Parser {
     /**
      * Parse method to parse command enter by user.

@@ -11,6 +11,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This Deadline Command class get the input of the task description
+ * and execute the deadline method to add deadline for task.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class DeadlineCommand extends Command {
     /**
      * Constructor of DeadlineCommand class.
@@ -36,6 +43,8 @@ public class DeadlineCommand extends Command {
     /**
      * "deadline" command to enter deadline description and deadline time.
      * @param data deadline description and deadline of task.
+     * @param tasks Task arraylist that contain list of task.
+     * @param ui Ui of Duke Program.
      * @throws DukeException If description and time of deadline is empty.
      */
     public static void deadline(String data, TaskList tasks, Ui ui) throws DukeException {

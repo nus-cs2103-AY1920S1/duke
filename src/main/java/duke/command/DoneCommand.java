@@ -6,6 +6,13 @@ import duke.component.Ui;
 import duke.task.Task;
 import duke.database.Storage;
 
+/**
+ * This Done Command class get the input of the task description
+ * and execute the done method to mark task as done.
+ *
+ * @author TeoShyanJie
+ *
+ */
 public class DoneCommand extends Command{
     /**
      * DoneCommand class constructor.
@@ -28,9 +35,11 @@ public class DoneCommand extends Command{
         done(super.input, tasks, ui);
     }
 
-    /*
+    /**
      * "done" command to check the finish task.
      * @param data Command and item index of the task.
+     * @param tasks Task array that contains list of tasks.
+     * @param ui Ui of Duke Program.
      * @throws DukeException if number of items = 0 and index enter > total number of task.
      */
     public static void done(String data, TaskList tasks, Ui ui) throws DukeException {

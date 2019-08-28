@@ -2,11 +2,6 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Represents a Deadline Task which extends the Task Class
- * a Deadline Task object is represented by a String description and
- * a LocalDateTime which tells when the deadline task is due.
- */
 public class Deadline extends Task{
     protected LocalDateTime by;
     protected DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");

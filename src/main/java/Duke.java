@@ -1,56 +1,56 @@
-import java.util.Scanner;
-
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
+    private Ui ui;
 
     private Duke(String filePath) {
+        this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
+            ui.showLoadingError();
             this.tasks = new TaskList();
-            System.out.println(e.getMessage() + "An empty list is created");
         }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("../data/duke.txt");
+        new Duke("../data/duke.txt").run();
 
-        // Greet
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?\n";
-        System.out.println(greeting);
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextLine()) {
-            String command = scanner.nextLine().trim();
+    private void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            String command = ui.readCommand();
             // Exit
             if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                ui.showExit();
+                isExit = true;
                 break;
             }
             try {
-                duke.run(command);
+                execute(command);
             } catch (DukeException e) {
-                System.out.println(e);
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
-            // Empty line separator at the end of the command response
-            System.out.println();
         }
-        scanner.close();
 
-        // Save task list
+        // Save task list before exit
         try {
-            duke.storage.save(duke.tasks);
+            storage.save(tasks);
         } catch (DukeException e) {
-            System.out.println(e);
+            ui.showError(e.getMessage());
         }
     }
 
-    private void run(String command) throws DukeException {
+    private void execute(String command) throws DukeException {
         if (command.equals("list")) {
-            showTasks();
+            ui.showTaskList(tasks);
         } else if (command.matches("^done\\s+\\d+$")) {
             int taskId = Integer.parseInt(command.split("\\s+")[1]);
             completeTask(taskId);
@@ -64,23 +64,10 @@ public class Duke {
         }
     }
 
-    private void showTasks() throws DukeException {
-        if (tasks.isEmpty()) {
-            System.out.println("There are currently no tasks in your list.");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 1; i <= tasks.size(); i++) {
-                Task task = tasks.get(i);
-                System.out.printf("%d.%s\n", i, task);
-            }
-        }
-    }
-
     private void completeTask(int taskId) throws DukeException {
         Task task = tasks.get(taskId);
         task.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("  %s\n", task);
+        ui.showTaskCompletionMsg(task);
     }
 
     private void addTask(String command) throws DukeException {
@@ -126,17 +113,11 @@ public class Duke {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(newTask);
-        System.out.println("Got it. I've added this task:");
-        System.out.printf("  %s\n", newTask);
-        int total = tasks.size();
-        System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+        ui.showTaskAdditionMsg(newTask, tasks);
     }
 
     private void deleteTask(int taskId) throws DukeException {
         Task task = tasks.remove(taskId);
-        System.out.println("Noted. I've removed this task:");
-        System.out.printf("  %s\n", task);
-        int total = tasks.size();
-        System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
+        ui.showTaskDeletionMsg(task, tasks);
     }
 }

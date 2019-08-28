@@ -5,24 +5,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage object where the information will be stored in.
+ */
 public class Storage {
 
     private String file;
 
     /**
-     * Constructor of a storage object.
-     * @param filepath
+     * Constructor of a storage object, initiating the file we are storing the information into.
+     *
+     * @param filepath the string value of the filepath of the duke.txt file.
      */
-
     public Storage(String filepath) {
         this.file = filepath;
     }
 
     /**
      * This method will print the contents of the Storage object (file).
-     * @throws FileNotFoundException
+     *
+     * @throws FileNotFoundException if the file is not found based on the filepath.
      */
-
     public ArrayList<Task> readFileContents() throws FileNotFoundException {
         File currentFile = new File(this.file);
         Scanner sc = new Scanner(currentFile);
@@ -62,21 +65,21 @@ public class Storage {
 
     /**
      * Checks if the file is empty. If it is empty, method will return true.
-     * @return
+     *
+     * @return a boolean on whether the file is empty or not.
      */
-
     public boolean isFileEmpty() {
         File file = new File(this.file);
         return 0 == file.length();
     }
 
     /**
+     * Writes to the duke.txt file and saves the information there. This method will overwrite the information
+     * on the current Duke.txt file.
      *
      * @param toAdd string pushed to the file.
-     * @throws IOException
-     * This method rewrites the whole text file.
+     * @throws IOException if there is an issue writing to the file.
      */
-
     public void writeToFile(String toAdd) throws IOException {
         FileWriter fw = new FileWriter(this.file);
         fw.write(toAdd);
@@ -84,10 +87,10 @@ public class Storage {
     }
 
     /**
+     * Appends to the duke.txt file and does not overwrite the current information on the Duke.txt file.
      *
      * @param toAppend string to be appended to the list.
-     * @throws IOException
-     * This method instead of rewriting the entire text file, it adds on.
+     * @throws IOException if there is an error writing to the file.
      */
     public void appendToFile(String toAppend) throws IOException {
         FileWriter fw = new FileWriter(this.file, true);

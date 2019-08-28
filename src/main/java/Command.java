@@ -67,6 +67,9 @@ public class Command {
             String noted = "Noted. I've removed this task:\n\t" + task + "\nNow you have " + tasks.getSize() + " tasks in the list.";
             ui.setText(noted);
             break;
+        case FIND:
+            ui.setText(tasks.findTask(description).toString());
+            break;
         }
     }
 }

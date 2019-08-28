@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.command.*;
+import duke.command.FindCommand;
 
 public class Parser {
 
@@ -17,6 +18,8 @@ public class Parser {
             return new ExitCommand(fullCommand, splitCommand);
         } else if (splitCommand[0].equals("delete")) {
             return new DeleteCommand(fullCommand, splitCommand);
+        } else if (splitCommand[0].equals("find")) {
+            return new FindCommand(fullCommand, splitCommand);
         } else {
             throw new IllegalArgumentException("Invalid Command");
         }

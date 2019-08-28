@@ -87,4 +87,26 @@ public class ListManager {
         System.out.println("\t  " + removed);
         System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
     }
+
+    public void find(String query) {
+        if (this.actualList.isEmpty()) {
+            System.out.println("\tYou have nothing on your to-do list!");
+        } else {
+            ArrayList<Task> tempList = new ArrayList<>();
+            for (int i = 0; i < actualList.size(); i++) {
+                if (actualList.get(i).name.contains(query) == true) {
+                    tempList.add(actualList.get(i));
+                }
+            }
+            if (tempList.isEmpty()) {
+                System.out.println("\tSorry no tasks matched your query!");
+            } else {
+                for (int j = 0; j < tempList.size(); j++) {
+                    System.out.print('\t');
+                    System.out.print(j+1 + ".");
+                    System.out.println(tempList.get(j));
+                }
+            }
+        }
+    }
 }

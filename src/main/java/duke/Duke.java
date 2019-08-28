@@ -45,7 +45,7 @@ public class Duke {
         }
     }
 
-    public static void main (String[] args){
+    public static void main(String[] args) {
         new Duke(DEFAULT_STORAGE_FILEPATH).run();
     }
 }

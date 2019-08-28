@@ -1,7 +1,5 @@
 package duke.storage;
 
-import static duke.common.Message.*;
-
 import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -19,6 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static duke.common.Message.MESSAGE_ERROR_CREATING_STORAGE_FILE;
+import static duke.common.Message.MESSAGE_ERROR_MISSING_STORAGE_FILE;
+import static duke.common.Message.MESSAGE_ERROR_READING_FROM_FILE;
+import static duke.common.Message.MESSAGE_STORAGE_FILE_CREATED;
 
 public class Storage {
     private final String filePath;
@@ -61,21 +63,21 @@ public class Storage {
             String doneStatus = taskPart[1].strip();
             String description = taskPart[2].strip();
             switch (typeOfTask) {
-                case "T":
-                    task = new Todo(description);
-                    break;
-                case "D":
-                    LocalDateTime by = LocalDateTime.parse(taskPart[3].strip(),
-                            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-                    task = new Deadline(description, by);
-                    break;
-                case "E":
-                    LocalDateTime at = LocalDateTime.parse(taskPart[3].strip(),
-                            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-                    task = new Event(description, at);
-                    break;
-                default:
-                    throw new DukeException(MESSAGE_ERROR_READING_FROM_FILE);
+            case "T":
+                task = new Todo(description);
+                break;
+            case "D":
+                LocalDateTime by = LocalDateTime.parse(taskPart[3].strip(),
+                        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                task = new Deadline(description, by);
+                break;
+            case "E":
+                LocalDateTime at = LocalDateTime.parse(taskPart[3].strip(),
+                        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                task = new Event(description, at);
+                break;
+            default:
+                throw new DukeException(MESSAGE_ERROR_READING_FROM_FILE);
             }
             task.setDone(doneStatus.equals("1"));
         } catch (ArrayIndexOutOfBoundsException e) {

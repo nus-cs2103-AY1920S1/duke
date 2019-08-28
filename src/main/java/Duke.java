@@ -1,6 +1,9 @@
 import java.text.ParseException;
 import java.util.Date;
 
+/**
+ * Main class of the application
+ */
 public class Duke {
     
     public static final String OOPS_STR = "OOPS!!! ";
@@ -24,7 +27,7 @@ public class Duke {
     private Storage storage;
     private Parser parser;
 
-    public void run() {
+    private void run() {
 
         ui = new Ui();
         dateParser = new DateParser(DATE_FORMAT);
@@ -57,7 +60,7 @@ public class Duke {
 
     // Processes a single line of input by identifying the command that was given, then delegating it
     // to a subfunction to handle the command call.
-    public void processInputLine(String line) throws DukeException, ParseException {
+    private void processInputLine(String line) throws DukeException, ParseException {
 
         Command command = parser.getCommandFromLine(line);
         String commandText = command.toString();
@@ -86,7 +89,7 @@ public class Duke {
         }
     }
 
-    public void deleteTask(int index) {
+    private void deleteTask(int index) {
 
         Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
@@ -94,7 +97,7 @@ public class Duke {
         ui.ackDeletion(taskToDelete, taskList.size());
     }
 
-    public void addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
+    private void addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
         if (desc.length() != 0) {
             Task newDeadline = new Deadline(desc, dateParser.parse(date));
             addTask(newDeadline);
@@ -104,7 +107,7 @@ public class Duke {
         }
     }
 
-    public void addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
+    private void addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
         if (desc.length() != 0) {
             Task newEvent = new Event(desc, dateParser.parse(date));
             addTask(newEvent);
@@ -114,7 +117,7 @@ public class Duke {
         }
     }
 
-    public void addTodo(String desc) throws EmptyDescriptionException {
+    private void addTodo(String desc) throws EmptyDescriptionException {
         if (desc.length() != 0) {
             Task newTodo = new Todo(desc); 
             addTask(newTodo);
@@ -124,7 +127,7 @@ public class Duke {
         }
     }
 
-    public void throwEmptyDescriptionException(Command cmd) throws EmptyDescriptionException {
+    private void throwEmptyDescriptionException(Command cmd) throws EmptyDescriptionException {
         throw new EmptyDescriptionException(
             OOPS_STR 
             + EMPTY_DESCRIPTION_STR_1
@@ -133,13 +136,13 @@ public class Duke {
         );
     }
 
-    public void markTaskAsDone(int index) {
+    private void markTaskAsDone(int index) {
         Task doneTask = taskList.get(index);
         doneTask.markAsDone();
         ui.ackDone(doneTask);
     }
 
-    public void addTask(Task newTask) {
+    private void addTask(Task newTask) {
         taskList.add(newTask);
         ui.ackAddition(newTask, taskList.size());
     }

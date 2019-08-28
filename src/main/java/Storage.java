@@ -6,16 +6,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * Class to handle interfacing with the data file
+ */
 public class Storage {
 
     private String filePath;
     private DateParser dateParser;
 
+    /**
+     * 
+     * @param dateParser DateParser object to handle the dates within the file
+     * @param filePath Path of the data file
+     */
     public Storage (DateParser dateParser, String filePath) {
         this.dateParser = dateParser;
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the tasks from the data file; returns them in a TaskList object
+     * 
+     * @return TaskList representation of the contents of the data file
+     */
 	public TaskList readDataFile() {
 
         Scanner inStream;
@@ -61,6 +74,11 @@ public class Storage {
         return new TaskList(Duke.MAX_TASKS);
     }
 
+    /**
+     * Writes the provided TaskList to the data file.
+     * 
+     * @param taskList The TaskList to be written
+     */
     public void writeDataFile(TaskList taskList) {
         
         PrintWriter outStream;

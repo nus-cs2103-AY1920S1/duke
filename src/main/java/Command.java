@@ -1,3 +1,7 @@
+/**
+ * Enumerator class for all recognized command types.
+ */
+
 enum Command {
     BYE     ("bye"),
     DONE    ("done"),
@@ -13,10 +17,22 @@ enum Command {
         this.commandText = commandText;
     }
 
+    /**
+     * Returns a string representation of the command.
+     * 
+     * @return A string representing the command
+     */
     public String toString() {
         return commandText;
     }
 
+    /**
+     * Attempts to match an input string to a valid command, which is returned.
+     * 
+     * @param commandText String representation of the command
+     * @return Command that matches the string, if exists
+     * @throws InvalidCommandException
+     */
     public static Command getFromString(String commandText) throws InvalidCommandException {
         Command[] allCommands = Command.values();
 

@@ -98,5 +98,4 @@ public class Ui {
             System.out.println("Buffered Reader could not close properly.");
         }
     }
-
 }

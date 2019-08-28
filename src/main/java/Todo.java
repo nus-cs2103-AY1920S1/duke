@@ -24,8 +24,8 @@ public class Todo extends TaskList {
      * @return nil
      */
 
-    public String getAB() {
-        return "-";
+    public DateTime getAB() {
+        return null;
     }
 
     /**

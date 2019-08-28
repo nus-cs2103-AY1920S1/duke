@@ -3,6 +3,7 @@
  * @author Hua Lun
  */
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 abstract class TaskList {
@@ -18,7 +19,7 @@ abstract class TaskList {
         type = t;
     }
 
-    public abstract String getAB();
+    public abstract DateTime getAB();
 
     /**
      * <p>
@@ -141,6 +142,7 @@ abstract class TaskList {
         int taskNumber = t.getTaskNumber();
         a.remove(taskNumber - 1);
         System.out.println("Now you have " + Integer.toString(a.size()) + " tasks in the list.");
+
     }
 
     /**

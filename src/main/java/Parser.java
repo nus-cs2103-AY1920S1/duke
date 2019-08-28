@@ -3,6 +3,7 @@
  * @author Hua Lun
  */
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
@@ -64,8 +65,9 @@ public class Parser {
      */
 
     public void callEvent(String word, int num, ArrayList<TaskList> array) {
-        String arr2[] = word.split("/");
-        TaskList eventT = new Event(num, "[✗]", arr2[0], "event", arr2[1]);
+        String arr2[] = word.split("/at");
+        DateTime dT1 = new DateTime(arr2[1]);
+        TaskList eventT = new Event(num, "[✗]", arr2[0], "event", dT1);
         eventT.addList(eventT, array, num);
     }
 
@@ -78,8 +80,10 @@ public class Parser {
      * @param array the list of task
      */
     public void callDeadline(String word, int num, ArrayList<TaskList> array) {
-        String arr3[] = word.split("/");
-        TaskList deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", arr3[1]);
+        String arr3[] = word.split("/by");
+        String list[] = arr3[1].split(" ");
+        DateTime dT2 = new DateTime(arr3[1]);
+        TaskList deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", dT2);
         deadlineT.addList(deadlineT, array, num);
     }
 
@@ -113,6 +117,38 @@ public class Parser {
                     array.set(i, t3);
                 }
             }
+        }
+    }
+
+    public void callFind(String word, ArrayList<TaskList> array) {
+        ArrayList<TaskList> arr = new ArrayList<TaskList>();
+        String arr5[] = word.split(" ");
+        String searchWord = arr5[1];
+        int size = array.size();
+
+        for(int i = 0; i < size; i++) {
+            TaskList t = array.get(i);
+            String taskWord = t.getTaskName();
+            String type = t.getType();
+            if(taskWord.contains(searchWord)) {
+                if(type.equals("todo")) {
+                    System.out.println("here");
+                    TaskList addTask = new Todo(i + 1, t.getTaskCheck(),
+                            taskWord, type);
+                    arr.add(addTask);
+                } else if(type.equals("event")) {
+                    TaskList addTask = new Event(i + 1, t.getTaskCheck(),
+                            taskWord, type, t.getAB());
+                    arr.add(addTask);
+                } else if(type.equals("deadline")) {
+                    TaskList addTask = new Deadline(i + 1, t.getTaskCheck(),
+                            taskWord, type, t.getAB());
+                    arr.add(addTask);
+                }
+            }
+        }
+        for(TaskList tL : arr) {
+            System.out.println(tL);
         }
     }
 }

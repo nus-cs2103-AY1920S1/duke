@@ -2,9 +2,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -73,13 +76,19 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                         }
                         int i = input.indexOf('/');
-                        tasks.add(new Event(input.substring(6, i - 1), input.substring(i + 4)));
+                        String dateAndTime = input.substring(i + 4);
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, format);
+                        tasks.add(new Event(input.substring(6, i - 1), dateTime));
                     } else if (input.substring(0, 8).equals("deadline")) {
                         if (input.length() == 8) {
                             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
                         int i = input.indexOf('/');
-                        tasks.add(new Deadline(input.substring(9, i - 1), input.substring(i + 4)));
+                        String dateAndTime = input.substring(i + 4);
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, format);
+                        tasks.add(new Deadline(input.substring(9, i - 1), dateTime));
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -100,6 +109,11 @@ public class Duke {
             } catch (StringIndexOutOfBoundsException ex) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+            catch (DateTimeParseException ex) {
+                System.out.println("Invalid date and time format\n"
+                        + "Please enter date and time as 'dd/MM/yyyy HHmm'");
+            }
+
             input = scn.nextLine();
         }
 
@@ -123,15 +137,17 @@ public class Duke {
             } else {
                 int i = taskString.lastIndexOf("|");
                 String desc = taskString.substring(8, i - 1);
-                String time = taskString.substring(i + 2);
+                String time = taskString.substring(i + 2, i + 12) + taskString.substring(i + 13);
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm");
+                LocalDateTime dateTime = LocalDateTime.parse(time, format);
                 if (taskType.equals("D")) {
-                    Deadline task = new Deadline(desc, time);
+                    Deadline task = new Deadline(desc, dateTime);
                     if (isDone.equals("1")) {
                         task.markAsDone();
                     }
                     list.add(task);
                 } else {
-                    Event task = new Event(desc, time);
+                    Event task = new Event(desc, dateTime);
                     if (isDone.equals("1")) {
                         task.markAsDone();
                     }
@@ -190,4 +206,5 @@ public class Duke {
         }
         fw.close();
     }
+
 }

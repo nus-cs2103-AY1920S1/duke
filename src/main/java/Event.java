@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Event extends Task {
-    private String time;
-
+public class Event extends TimeTask {
     Event(String description, String time) {
-        super(description);
-        this.time = time;
+        super(description, time);
     }
 
     static Command getCommand(List<Task> tasks, Storage storage) {
@@ -35,12 +32,12 @@ public class Event extends Task {
         List<String> list = new ArrayList<>();
         list.add("E");
         list.addAll(super.getSaveList());
-        list.add(time);
+        list.add(getSaveTimeString());
         return list;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " (at: " + getTimeString() + ")";
     }
 }

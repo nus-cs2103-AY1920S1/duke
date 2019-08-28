@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +21,34 @@ public class Duke {
     public void setList(ArrayList<Task> list) {
         this.list = list;
     }
-    
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.hello();
+        try {
+            duke.readFile("src/main/java/tasklists.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //take in user input and print according to user command
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String command = scanner.nextLine();
+            command = command.trim();
+            if (command.equals("bye")) { // user wants to exit
+                duke.printExitMessage();
+                return; // program terminates
+            } else {
+                try {
+                    duke.execCommand(command);
+                } catch (InvalidCommandException e) {
+                    System.out.println("\t" + e.getMessage());
+                }
+            }
+        }
+    }
+
     /**
      * Prints out all the tasks in a numbered list.
      */
@@ -104,10 +133,10 @@ public class Duke {
             throw new MissingDescriptionException("☹ OOPS!!! The description of " + taskType + " cannot be empty.");
         }
         switch (taskType) {
-            case ("todo"):
+        case ("todo"):
                 task = new Todo(desc);
                 break;
-            case ("deadline"):
+        case ("deadline"):
                 if (!desc.contains("/by")) {
                     throw new MissingInputException("☹ OOPS!!! The deadline cannot be found because /by is missing");
                 }
@@ -124,7 +153,7 @@ public class Duke {
                 }
                 task = new Deadline(desc, deadline);
                 break;
-            case ("event"):
+        case ("event"):
                 if (!desc.contains("/at")) {
                     throw new MissingInputException("☹ OOPS!!! The event date and time cannot be found because /at is missing");
                 }
@@ -140,6 +169,8 @@ public class Duke {
                     throw new MissingInputException("☹ OOPS!!! The event date and time cannot be found after /at");
                 }
                 task = new Event(desc, when);
+                break;
+        default:
                 break;
         }
         this.list.add(task);
@@ -172,26 +203,31 @@ public class Duke {
         System.out.println("\tBye. Hope to see you again soon!");
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.hello();
-
-        //take in user input and print according to user command
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            String command = scanner.nextLine();
-            command = command.trim();
-            if (command.equals("bye")) { // user wants to exit
-                duke.printExitMessage();
-                return; // program terminates
-            } else {
-                try {
-                    duke.execCommand(command);
-                } catch (InvalidCommandException e) {
-                    System.out.println("\t" + e.getMessage());
-                }
+    private void readFile(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String line = sc.nextLine(); // eg. T|0|read book
+            String[] taskDetails = line.split(",");
+            String taskType = taskDetails[0];
+            int booleanInt = Integer.parseInt(taskDetails[1]);
+            switch (taskType) {
+            case "T":
+                Todo todo = new Todo(taskDetails[2], booleanInt == 0);
+                this.list.add(todo);
+                break;
+            case "D":
+                Deadline deadline = new Deadline(taskDetails[2], booleanInt == 0, taskDetails[3]);
+                this.list.add(deadline);
+                break;
+            case "E":
+                Event event = new Event(taskDetails[2], booleanInt == 0, taskDetails[3]);
+                this.list.add(event);
+                break;
+            default:
+                break;
             }
         }
-    }
 
+    }
 }

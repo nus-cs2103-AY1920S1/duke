@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Event task.
  */
 public class Event extends Task {
 
-    private String when;
+    private LocalDateTime when;
 
     /**
      * Creates an Event task with the associated description and event day and time.
@@ -12,19 +15,30 @@ public class Event extends Task {
      */
     public Event(String desc, String when) {
         super(desc);
-        this.when = when;
+        this.when = stringToDateTime(when);
     }
 
-    public String getWhen() {
+    public Event(String desc, boolean isDone, String when) {
+        super(desc, isDone);
+        this.when = stringToDateTime(when);
+    }
+
+    public LocalDateTime getWhen() {
         return this.when;
     }
 
     public void setWhen(String when) {
-        this.when = when;
+        this.when = stringToDateTime(when);
+    }
+
+    private LocalDateTime stringToDateTime(String when) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+        return LocalDateTime.parse(when, formatter);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)", "E", super.getDoneSymbol(), this.desc, this.when);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+        return String.format("[%s][%s] %s (at: %s)", "E", super.getDoneSymbol(), this.desc, this.when.format(formatter));
     }
 }

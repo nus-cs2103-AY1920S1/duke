@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Deadline task.
  */
 public class Deadline extends Task {
 
-    private String deadline;
+    private LocalDateTime deadline;
 
     /**
      * Creates a Deadline task with the associated description and deadline.
@@ -12,20 +15,31 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String deadline) {
         super(desc);
-        this.deadline = deadline;
+        this.deadline = stringToDateTime(deadline);
     }
 
-    public String getDeadline() {
+    public Deadline(String desc, boolean isDone, String deadline) {
+        super(desc, isDone);
+        this.deadline = stringToDateTime(deadline);
+    }
+
+    public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
     public void setDeadline(String deadline) {
-        this.deadline = deadline;
+        this.deadline = stringToDateTime(deadline);
+    }
+
+    private LocalDateTime stringToDateTime(String deadline) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+        return LocalDateTime.parse(deadline, formatter);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", "D", super.getDoneSymbol(), this.desc, this.deadline);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+        return String.format("[%s][%s] %s (by: %s)", "D", super.getDoneSymbol(), this.desc, this.deadline.format(formatter));
     }
 
 }

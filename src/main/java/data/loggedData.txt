@@ -1,2 +1,2 @@
-T,true,sex
-E,false,bb,bb
+T,true,BEBEB
+D,false,reddd ,02/01/1997 1200

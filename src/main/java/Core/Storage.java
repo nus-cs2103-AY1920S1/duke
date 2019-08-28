@@ -17,7 +17,6 @@ public class Storage {
     final String FILE_NAME = "C:\\Users\\dandf\\Pictures\\CS2103-Duke\\duke/data/duke.txt";
     final String DIRECTORY_NAME = "C:\\Users\\dandf\\Pictures\\CS2103-Duke\\duke/data";
 
-    //first checks if data]
     public void writeToFile(ArrayList<Task> taskEntered) {
         try {
             File taskStorage = new File(FILE_NAME);
@@ -35,9 +34,9 @@ public class Storage {
         }
     }
 
-    public String writeFromArray(ArrayList<Task> taskEntered){
+    public String writeFromArray(ArrayList<Task> taskEntered) {
         StringBuffer toWrite = new StringBuffer("");
-        for(int i = 0; i < taskEntered.size() ; i++){
+        for (int i = 0; i < taskEntered.size(); i++) {
             Task t = taskEntered.get(i);
             String s;
             if (t.getType().equalsIgnoreCase("[T]")) {
@@ -85,8 +84,8 @@ public class Storage {
         }
     }
 
-    public void checkIfDone(Task t, String booleanValue){
-        if(booleanValue.equalsIgnoreCase("True") ){
+    public void checkIfDone(Task t, String booleanValue) {
+        if(booleanValue.equalsIgnoreCase("True")) {
             t.markIsDone();
         }
     }

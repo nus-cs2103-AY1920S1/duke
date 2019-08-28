@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
         super(inputCommand);
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         this.shouldExit = true;
         ui.printBye();
     }

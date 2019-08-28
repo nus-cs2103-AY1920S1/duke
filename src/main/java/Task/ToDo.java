@@ -12,7 +12,7 @@ public class ToDo extends Task {
         return TASK_TYPE;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

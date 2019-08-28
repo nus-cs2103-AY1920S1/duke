@@ -9,12 +9,12 @@ public abstract class Command {
     protected String inputCommand;
     protected boolean shouldExit;
 
-    public Command(String inputCommand){
+    public Command(String inputCommand) {
         this.inputCommand = inputCommand;
         this.shouldExit = false;
     }
 
-    public boolean shouldExit(){
+    public boolean shouldExit() {
         return this.shouldExit;
     }
 

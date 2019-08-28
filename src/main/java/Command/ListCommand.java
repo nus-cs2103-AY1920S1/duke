@@ -7,7 +7,7 @@ import duke.task.TaskList;
 
 public class ListCommand extends Command {
 
-    public ListCommand(String inputCommand){
+    public ListCommand(String inputCommand) {
         super(inputCommand);
     }
 

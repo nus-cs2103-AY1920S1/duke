@@ -27,8 +27,8 @@ public class DateTimeHelper {
             LocalDateTime ldt = LocalDateTime.parse(inputDateTime, INPUTFORMATTER);
             return ldt;
         } catch (Exception e) {
-            throw new DukeException("OOPS! Please make sure that date " +
-                    "keyed in is of format Year(yyyy)/Month(mm)/Date(dd) Hour(hh)Minute(mm), eg 2019-09-14 1800");
+            throw new DukeException("OOPS! Please make sure that date "
+                    + "keyed in is of format Year(yyyy)/Month(mm)/Date(dd) Hour(hh)Minute(mm), eg 2019-09-14 1800");
         }
     }
 

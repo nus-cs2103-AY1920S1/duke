@@ -45,7 +45,7 @@ public class Duke {
         while (!userInput.equals("bye")) {
             try {
                 if (userInput.equals("list")) {
-                    displayList();
+                    displayList(tasks);
                 } else if (checkIsInputEquals(userInput, "done ")) {
                     Task task = tasks
                             .get(Integer.parseInt(userInput.substring("done ".length())) - 1);
@@ -60,6 +60,15 @@ public class Duke {
                 } else if (checkIsInputEquals(userInput, "delete ")) {
                     int taskIndex = Integer.parseInt(userInput.substring("delete ".length())) - 1;
                     deleteAndDisplayTask(taskIndex);
+                } else if (checkIsInputEquals(userInput, "find ")) {
+                    String keyword = userInput.substring("find ".length());
+                    ArrayList<Task> matchingTasks = new ArrayList<>(100);
+                    for (Task task : tasks) {
+                        if (task.getInfo().contains(keyword)) {
+                            matchingTasks.add(task);
+                        }
+                    }
+                    displayList(matchingTasks);
                 } else {
                     dukeReply("I don't know what that means, sorry!");
                 }
@@ -96,7 +105,7 @@ public class Duke {
     /**
      * Displays the contents of current task list.
      */
-    private static void displayList() {
+    private static void displayList(ArrayList<Task> tasks) {
         String finalOutput = "";
         boolean first = true;
         for (int i = 0; i < tasks.size(); i++) {

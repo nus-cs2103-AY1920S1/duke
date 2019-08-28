@@ -5,15 +5,30 @@ import java.time.LocalDateTime;
 public class AddCommand extends Command {
     private String fullCommand;
 
+    /**
+     * @param fullCommand String which is the full line that the user inputs
+     */
     public AddCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * returns whether the command is an ExitCommand
+     * @return whether the command is an ExitCommand
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Adds and determines the type of given task to the saved task-list and prints
+     * a confirmation if the addition of the new task is successful
+     * @param tasks TaskList containing the user's saved tasks
+     * @param ui Ui object to handle the user input
+     * @param storage storage object to determine where the executed results are stored
+     * @throws DukeException if user input is invalid
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (fullCommand.substring(0, 4).equals("todo")) {

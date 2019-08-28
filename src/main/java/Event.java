@@ -10,6 +10,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * @return string representing date and time in the following format:
+     * 23rd September 2019, 3.01am
+     */
     protected String generateDateAndTimeString() {
         String dateAndTime = "" + at.getDayOfMonth();
         int day = at.getDayOfMonth();
@@ -47,11 +51,17 @@ public class Event extends Task {
         return dateAndTime;
     }
 
+    /**
+     * @return string that displays the task in a readable format to the user
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + generateDateAndTimeString() + ")";
     }
 
+    /**
+     * @return string for storing in text file
+     */
     @Override
     public String toSaveString() {
         return "E | " + super.toSaveString() + " | " + at;

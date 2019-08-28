@@ -1,10 +1,17 @@
 import java.io.IOException;
 
+/**
+ * Duke is a task manager programme with the following capabilities:
+ * addition of tasks, listing of tasks, deletion of tasks and marking tasks as done.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * @param filePath the file path of the saved tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +27,9 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Runs the programme continuously until the user inputs "bye"
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

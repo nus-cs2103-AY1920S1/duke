@@ -1,27 +1,28 @@
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Duke {
-
+    private Storage storage;
     private TaskList tasks;
     private UI ui;
-    private String filePath;
 
     public Duke(String filePath){
-        this.ui = new UI();
-        this.filePath = filePath;
-        this.tasks = new TaskList();
+        ui = new UI();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        }catch (DukeException e){
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
     }
 
     public void run(){
         ui.showWelcome();
         String command = ui.readCommand();
-        new Parser().parse(command, ui, tasks, filePath);
+        new Parser().parse(command, ui, tasks, storage.path);
         ui.showGoodByeMessage();
     }
 
     public static void main(String[] args) {
-        TaskList tasks = new TaskList();
         new Duke("C:\\duke\\data\\tasklist.txt").run();
     }
 }

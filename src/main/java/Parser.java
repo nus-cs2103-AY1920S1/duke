@@ -20,10 +20,10 @@ public class Parser {
                         addToList(new Todo(parts[1]), tasks, fw, ui);
                     } else if (parts[0].equals("deadline")) {
                         String[] subparts = parts[1].split(" /by ");
-                        addToList(new Deadline(subparts[0], new Date(subparts[1])), tasks, fw, ui);
+                        addToList(new Deadline(subparts[0], (subparts[1])), tasks, fw, ui);
                     } else if (parts[0].equals("event")) {
                         String[] subparts = parts[1].split(" /at ");
-                        addToList(new Event(subparts[0], new Date(subparts[1])), tasks, fw, ui);
+                        addToList(new Event(subparts[0], (subparts[1])), tasks, fw, ui);
                     } else {
                         throw new DukeException("");
                     }

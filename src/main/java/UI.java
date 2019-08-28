@@ -28,6 +28,10 @@ public class UI {
         printReply("Bye. Hope to see you again soon.");
     }
 
+    public void showLoadingError(){
+        printReply("No file found.");
+    }
+
     public void printReply(String reply){
         System.out.println("\t" + REPLY_WRAPPER + "\n\t" + reply + "\n\t" + REPLY_WRAPPER);
     }

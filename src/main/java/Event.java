@@ -1,10 +1,12 @@
 public class Event extends Task {
-    protected Date at;
+    protected String at;
+    protected Date date;
 
-    public Event(String description, Date at){
+    public Event(String description, String at){
         super(description);
         this.at = at;
     }
+
 
     @Override
     public String toFile(){

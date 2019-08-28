@@ -1,8 +1,9 @@
 import java.text.ParseException;
 
-/** Custom sub-class of ParseException to denote the
+/** Custom sub-class of ParseException to denote a
  * specific parsing issue with dates instead of just
- * general text.
+ * general text. This is for future-proofing when we might
+ * actually have to parse general text next time.
  */
 public class DateParseException extends ParseException {
 

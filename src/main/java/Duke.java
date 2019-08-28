@@ -14,7 +14,8 @@ public class Duke {
     private List<Task> list; // List of all tasks
 
     /**
-     * Main function to test Duke code.
+     * Drives the main code to start up Duke. It is the CLI entry
+     * point.
      *
      * @param args command line arguments. Not used.
      */
@@ -29,7 +30,7 @@ public class Duke {
         duke.start();
     }
 
-    /** Basic constructor for the Duke class.
+    /**
      * Returns a Duke object, which can be used
      * to start the chat assistant driver loop.
      */
@@ -48,24 +49,24 @@ public class Duke {
 
         this.greetHello(); // greet user on startup
 
-        do {
+        do { // main loop and exception handler
             String input = sc.nextLine();
                 try {
-                    this.parseInstruction(input);
+                    this.parseInstruction(input); // send it off to be parsed
                 } catch (DukeShutDownException e) {
                     isNotShutdown = false; // sets flag to end loop
                 } catch (NumberFormatException e) {
                     this.formattedPrintln("You need to provide me " +
-                            "with a valid task index!");
+                            "with a valid task index! (That means integer numbers only!)");
                 } catch (ParseException e) {
                     this.formattedPrintln(("I couldn't decipher the date and time"
-                            + "you gave me...\n"
-                            + "Please write it in dd/mm/yyyy HHmm format!"));
+                            + " that you gave me...\n"
+                            + "Please write it in <dd/mm/yyyy HHmm> format for me to"
+                            + "\nunderstand!"));
                 } catch (DukeException e) {
                     this.formattedPrintln(e.getMessage());
                 }
         } while (isNotShutdown);
-
         this.greetGoodbye(); // greet user before exiting
     }
 
@@ -178,8 +179,8 @@ public class Duke {
             case "event":
                 splitStr = parameters.split(" /at ", 2);
                 if (splitStr.length < 2) {
-                    throw new DukeException("You need to specify a time"
-                            + " to create an event task!");
+                    throw new DukeException("You need to specify both time and description to\n"
+                            + "create an event task!");
                 }
                 description = splitStr[0];
                 String at_str = splitStr[1];
@@ -189,8 +190,8 @@ public class Duke {
             case "deadline":
                 splitStr = parameters.split(" /by ", 2);
                 if (splitStr.length < 2) {
-                    throw new DukeException("You need to specify a time"
-                            + " to create an deadline task!");
+                    throw new DukeException("You need to specify both time and description to\n"
+                            + "create an deadline task!");
                 }
                 description = splitStr[0];
                 String by_str = splitStr[1];
@@ -204,7 +205,7 @@ public class Duke {
         }
         this.list.add(task);
         this.formattedPrintln("Got it. I've added this task:\n  "
-                + task.toString()
+                + task
                 + "\nNow you have "
                 + this.list.size()
                 + " task(s) in the list.");

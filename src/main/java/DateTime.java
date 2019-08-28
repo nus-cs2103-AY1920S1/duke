@@ -12,7 +12,8 @@ public class DateTime implements Serializable {
     private Date dateTime;
 
     /**
-     * Static method for parsing a "dd/MM/yy HHmm" string based on
+     * Returns a DateTime object whose parameters are initialized by parsing through
+     * an input String with format "dd/MM/yy HHmm". Parsing is done through
      * java.text.SimpleDateFormat. Upon success, returns a DateTime
      * object. More templates will be added in the future to increase
      * the versatility of the parsing.
@@ -40,7 +41,7 @@ public class DateTime implements Serializable {
      */
     @Override
     public String toString() {
-        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy, hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
         return format.format(this.dateTime);
     }
 }

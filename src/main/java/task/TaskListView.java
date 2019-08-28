@@ -7,22 +7,37 @@ import java.util.List;
 
 class TaskListView {
     public void displayAllTasks(List<Task> tasks) {
-        DukeMessage taskList = new DukeMessage("Here are the tasks in your list:")
-                .newLine();
+        DukeMessage taskList = new DukeMessage("Here are the tasks in your list:");
+
+        appendTasks(taskList, tasks);
+
+        DukeOutput.printMessage(taskList);
+    }
+
+    public void displayMatchingTasks(List<Task> tasks) {
+        DukeMessage taskList = new DukeMessage("Here are the matching tasks in your list:");
+
+        appendTasks(taskList, tasks);
+
+        DukeOutput.printMessage(taskList);
+    }
+
+    private DukeMessage appendTasks(DukeMessage message, List<Task> tasks) {
+        message.newLine();
 
         if (!tasks.isEmpty()) {
-            taskList.append("1.")
+            message.append("1.")
                     .append(formatTaskMessage(tasks.get(0)));
         }
 
         for (int i = 1; i < tasks.size(); i++) {
-            taskList.newLine()
+            message.newLine()
                     .append(i + 1)
                     .append(".")
                     .append(formatTaskMessage(tasks.get(i)));
         }
 
-        DukeOutput.printMessage(taskList);
+        return message;
     }
 
     private DukeMessage formatTaskMessage(Task task) {

@@ -1,6 +1,7 @@
 package task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskListController {
     private List<Task> tasks;
@@ -34,5 +35,12 @@ public class TaskListController {
         tasks.remove(index);
         view.displayTaskDeleted(deletedTask, tasks.size());
 
+    }
+
+    public void findTasks(String parameter) {
+        List<Task> matchingTasks = tasks.stream()
+                .filter(task -> task.getDescription().contains(parameter))
+                .collect(Collectors.toList());
+        view.displayMatchingTasks(matchingTasks);
     }
 }

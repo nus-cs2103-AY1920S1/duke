@@ -30,9 +30,11 @@ public class ListenCommand implements Command {
                 return Optional.of(new DoneCommand(taskListController, arguments));
             case "delete":
                 return Optional.of(new DeleteCommand(taskListController, arguments));
+            case "find":
+                return Optional.of(new FindCommand(taskListController, arguments));
             default:
                 try {
-                    return Optional.of(new AddCommand(command, arguments, taskListController));
+                    return Optional.of(new AddCommand(taskListController, command, arguments));
                 } catch (UnknownCommandException e) {
                     DukeOutput.printMessage(new DukeMessage(e.getMessage()));
                     return Optional.of(new ListenCommand(taskListController));

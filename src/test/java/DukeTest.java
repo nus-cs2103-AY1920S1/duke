@@ -5,14 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DukeTest {
     @Test
-    public void parserTest() {
+    void parserTest() {
         assertThrows(DukeException.class, () -> Parser.parse(new String[]{"gibberish"}));
     }
 
     @Test
-    public void addTaskTest() {
+    void addTaskTest() {
         TodoList todoList = new TodoList();
         todoList.add(new Todo("desc"));
         assertEquals(1, todoList.length());
+        todoList.delete(1);
     }
 }

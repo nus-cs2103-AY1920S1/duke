@@ -1,25 +1,26 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
-
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.exception.DukeException;
+import java.util.Scanner;
 
 public class Storage {
     private String filePath;
 
     /**
-     * Constructs a <code>Storage</code> object using filePath.
+     * Deals with loading tasks from the given file and saving tasks in the same file.
      *
-     * @param filePath The filePath where the data is stored
+     * @param filePath The file path where the file is stored. It can be
+     *                 either relative or absolute.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -28,8 +29,9 @@ public class Storage {
     /**
      * Loads the existing tasks from the data file.
      *
-     * @return An ArrayList of tasks which are stored in the data file
-     * @throws DukeException when the file does not exit
+     * @return An ArrayList of tasks which are stored as serialized string in the data file
+     * @throws DukeException if the file does not exit or the data in the file
+     *                       does not follow the correct format (i.e the serialized form of task objects)
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -39,7 +41,6 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String[] data = scanner.nextLine().split(" \\| ");
                 Task task;
-
                 switch (data[0]) {
                 case "T":
                     task = new Todo(data[2]);
@@ -66,10 +67,11 @@ public class Storage {
     }
 
     /**
-     * Save the current tasks in the list to the data file.
+     * Converts the current tasks in the list to serialized form and
+     * save the each task to the file.
      *
-     * @param tasks The TaskList to be saved to the destined filePath
-     * @throws DukeException when writing to file fails
+     * @param tasks The list of tasks to be saved to the destined file
+     * @throws DukeException if file writing fails
      */
     public void save(TaskList tasks) throws DukeException {
         try {

@@ -1,12 +1,20 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
-
 public class Ui {
     private Scanner scanner;
+
+    private static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
+    private static final String MESSAGE_INDEX = "Here are the tasks in your list:";
+    private static final String MESSAGE_FIND = "Here are the matching tasks in your list:";
+    private static final String MESSAGE_ADD = "Got it. I've added this task:";
+    private static final String MESSAGE_DELETE = "Noted. I've removed this task:";
+    private static final String MESSAGE_DONE = "Nice! I've marked this task as done:";
 
     public Ui() {
         this.scanner = new Scanner(System.in);
@@ -18,29 +26,39 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println(MESSAGE_WELCOME);
         showLine();
     }
 
     public void showExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(MESSAGE_EXIT);
         scanner.close();
     }
 
+    /**
+     * Prints the list containing all tasks.
+     *
+     * @param tasks All the tasks in the list
+     */
     public void showIndexMsg(TaskList tasks) {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
         } else {
-            System.out.println("Here are the tasks in your list:");
+            System.out.println(MESSAGE_INDEX);
             showTaskList(tasks);
         }
     }
 
+    /**
+     * Prints the list containing all tasks matching keyword.
+     *
+     * @param tasks Filtered tasks.
+     */
     public void showFindMsg(TaskList tasks) {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            System.out.println(MESSAGE_FIND);
         }
         showTaskList(tasks);
     }
@@ -51,15 +69,15 @@ public class Ui {
      * @param tasks A list of tasks to be printed
      */
     public void showTaskList(TaskList tasks) {
-        ArrayList<Task> all_tasks = tasks.getTasks();
-        for (int i = 1; i <= all_tasks.size(); i++) {
-            Task task = all_tasks.get(i - 1);
+        ArrayList<Task> allTasks = tasks.getTasks();
+        for (int i = 1; i <= allTasks.size(); i++) {
+            Task task = allTasks.get(i - 1);
             System.out.printf("%d.%s\n", i, task);
         }
     }
 
     public void showTaskCompletionMsg(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(MESSAGE_DONE);
         showSingleTask(task);
     }
 
@@ -70,7 +88,7 @@ public class Ui {
      * @param tasks The list of tasks after the addition
      */
     public void showTaskAdditionMsg(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
+        System.out.println(MESSAGE_ADD);
         showSingleTask(task);
         showTaskTotal(tasks);
     }
@@ -82,7 +100,7 @@ public class Ui {
      * @param tasks The list of tasks after the deletion
      */
     public void showTaskDeletionMsg(Task task, TaskList tasks) {
-        System.out.println("Noted. I've removed this task:");
+        System.out.println(MESSAGE_DELETE);
         showSingleTask(task);
         showTaskTotal(tasks);
     }
@@ -96,6 +114,7 @@ public class Ui {
     }
 
     public void showLine() {
+        // A platform independent line separator.
         System.out.print(System.lineSeparator());
     }
 

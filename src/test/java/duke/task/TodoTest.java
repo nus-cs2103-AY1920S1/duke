@@ -7,6 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class TodoTest {
+    @Test
+    void constructorTest_emptyDescription_exceptionThrown() {
+        try {
+            Task task = new Todo("");
+            fail();
+        } catch (Exception e) {
+            assertEquals("The description of a todo cannot be empty.", e.getMessage());
+        }
+    }
 
     @Test
     void markAsDone_notDone_success() throws DukeException {
@@ -27,5 +36,11 @@ class TodoTest {
         } catch (Exception e) {
             assertEquals("This task was marked as done before.", e.getMessage());
         }
+    }
+
+    @Test
+    void serialize() throws DukeException {
+        Task task = new Todo("Description");
+        assertEquals("T | 0 | Description", task.serialize());
     }
 }

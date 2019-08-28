@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.parser.CommandParser;
 
 public class Duke {
     private Storage storage;
@@ -29,7 +30,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
+                Command c = CommandParser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {

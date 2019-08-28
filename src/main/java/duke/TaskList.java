@@ -1,8 +1,9 @@
 package duke;
 
-import java.util.ArrayList;
-import duke.task.Task;
 import duke.exception.DukeException;
+import duke.task.Task;
+
+import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -20,11 +21,11 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the requested <code>Task</code> object from the list.
+     * Retrieves the requested task from the list.
      *
      * @param taskId The 1-based index of the task to be fetched
-     * @return The requested <code>Task</code> Object
-     * @throws DukeException when invalid taskId is passed in
+     * @return The requested task
+     * @throws DukeException if invalid taskId is passed in
      */
     public Task get(int taskId) throws DukeException {
         try {
@@ -40,11 +41,11 @@ public class TaskList {
     }
 
     /**
-     * Removes the requested <code>Task</code> object from the list.
+     * Removes the requested task from the list.
      *
      * @param taskId The 1-based index of the task to be removed
-     * @return The removed <code>Task</code> object
-     * @throws DukeException when invalid taskId is passed in
+     * @return The removed task
+     * @throws DukeException if invalid taskId is passed in
      */
     public Task remove(int taskId) throws DukeException {
         Task task = get(taskId);
@@ -60,6 +61,13 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
+    /**
+     * Filters the current list of tasks and returns a new task list
+     * which only contains tasks with keyword appearing in its description.
+     *
+     * @param keyWord The keyword to be used for filtering the list of tasks
+     * @return a TaskList with all the tasks containing the keyWord
+     */
     public TaskList filter(String keyWord) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task task : tasks) {

@@ -24,8 +24,9 @@ public abstract class Task {
     }
 
     /**
-     * Sets the status of the task as done.
-     * @throws DukeException when the task has already been marked as done before
+     * Sets the status of the task to be completed.
+     *
+     * @throws DukeException if the task has already been marked as done before
      */
     public void markAsDone() throws DukeException {
         if (isDone) {

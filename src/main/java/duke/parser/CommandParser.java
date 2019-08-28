@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import duke.command.Command;
 import duke.command.ExitCommand;
@@ -9,13 +9,14 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.exception.DukeException;
 
-public class Parser {
+public class CommandParser {
 
     /**
-     * Parses user input and returns an executable <code>Command</code> object.
-     * @param command The raw user input
+     * Parses raw input from user and returns its corresponding <code>Command</code> object.
+     *
+     * @param command The raw input from user
      * @return An executable <code>Command</code> object
-     * @throws DukeException when the command is unknown
+     * @throws DukeException if the command is undefined
      */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {

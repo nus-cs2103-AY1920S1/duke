@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
 
@@ -40,69 +43,18 @@ public class Duke {
     }
 
     public static void add_event(String str, Scanner sc, ArrayList<Task> list, File file) throws Exception {
-        // info splits the string into description and datetime if available
-        String[] info = str.split("/");
-
-        // description is the description of whichever item it is
-        String[] description = info[0].split(" ");
-
+        String[] parsedString = parseUserInput(str);
         Task task;
         try {
-            switch (description[0]) {
+            switch (parsedString[0]) {
             case "todo":
-                description[0] = "";
-                // if description has length 1 it means that only the type of item is there but no description
-                if (description.length == 1) {
-                    throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
-                }
-                task = new ToDo(String.join(" ", description).trim());
+                task = new ToDo(parsedString[1]);
                 break;
             case "deadline":
-                //take away the deadline from the content
-                description[0] = "";
-                // if description has length 1 it means that only the type of item is there but no description
-                if (description.length == 1) {
-                    throw new DukeException("\u2639 OOPS!!! The description of a deadline item cannot be empty.");
-                }
-                // if it is a deadline event but no slash the info will be just 1 string after split
-                if (info.length == 1) {
-                    throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this deadline item.");
-                }
-                // split the by date
-                String[] datetime = info[1].split(" ");
-                // make sure they have a by before datetime
-                if (!datetime[0].equals("by")) {
-                    throw new DukeException("\u2639 OOPS!!! Please follow the format to use /by before datetime");
-                }
-                // make sure datetime is present
-                if (datetime.length <= 1) {
-                    throw new DukeException("\u2639 OOPS!!! Please include datetime following the format /by datetime");
-                }
-
-                task = new Deadline(String.join(" ", description).trim(), info[1]);
+                task = new Deadline(parsedString[1], parsedString[2]);
                 break;
             case "event":
-                description[0] = "";
-                // if description has length 1 it means that only the type of item is there but no description
-                if (description.length == 1) {
-                    throw new DukeException("\u2639 OOPS!!! The description of aa event cannot be empty.");
-                }
-                // if it is an event but no slash the info will be just 1 string after split
-                if (info.length == 1) {
-                    throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this event");
-                }
-                // split the by date
-                datetime = info[1].split(" ");
-                // make sure they have a by before datetime
-                if (!datetime[0].equals("by")) {
-                    throw new DukeException("\u2639 OOPS!!! Please follow the format to use /by before datetime");
-                }
-                // make sure datetime is present
-                if (datetime.length <= 1) {
-                    throw new DukeException("\u2639 OOPS!!! Please include datetime following the format /by datetime");
-                }
-
-                task = new Event(String.join(" ", description).trim(), info[1]);
+                task = new Event(parsedString[1], parsedString[2]);
                 break;
             default:
                 // if the user type anything besides the three types of item
@@ -184,6 +136,7 @@ public class Duke {
         return sb.toString();
     }
 
+    // this method parse string from txt file and creates task objects when duke is initiated
     public static Task parseTaskString(String str) {
         String[] strs = str.split("\\|");
         switch (strs[0]) {
@@ -194,7 +147,6 @@ public class Duke {
             }
             return todo;
         case ("Deadline"):
-            System.out.println(Arrays.toString(strs));
             Task deadline = new Deadline(strs[2], strs[3]);
             if (strs[1].equals("1")) {
                 deadline.done = true;
@@ -211,6 +163,46 @@ public class Duke {
         }
     }
 
+    // this method takes in string from user and decide which type it is and respective information
+    // needed to create an object
+    // return a string arr of length 3, index 0 is type of task, index 1 is content of task, index 2 is datetime
+    // of task if the task requires datetime if not it will be empty string
+    public static String[] parseUserInput(String str) throws Exception {
+        String[] result = new String[3];
+        // info splits the string into description and datetime if available
+        String[] info = str.split(" ", 2);
+
+        // if info has length 1 it means that only the type of item is there but no description
+        if (info.length == 1) {
+            throw new DukeException("\u2639 OOPS!!! The description of a task cannot be empty.");
+        }
+        if (info[0].equals("todo")) {
+            result[0] = "todo";
+            result[1] = info[1];
+            result[2] = "nil";
+        } else if (info[0].equals("deadline")) {
+            String[] dateTimeArr = info[1].split("/by");
+            // if it is a deadline event but no slash the info will be just 1 string after split
+            if (dateTimeArr.length <= 1) {
+                throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this task.");
+            }
+            result[0] = "deadline";
+            result[1] = dateTimeArr[0];
+            result[2] = dateTimeArr[1];
+        } else if (info[0].equals("event")) {
+            String[] dateTimeArr = info[1].split("/by");
+            // if it is a deadline event but no slash the info will be just 1 string after split
+            if (dateTimeArr.length <= 1) {
+                throw new DukeException("\u2639 OOPS!!! You need a /by to separate out the date time for this task.");
+            }
+            result[0] = "event";
+            result[1] = dateTimeArr[0];
+            result[2] = dateTimeArr[1];
+        } else {
+            throw new DukeException("There is an unknown error parsing your message");
+        }
+        return result;
+    }
 
 }
 
@@ -251,44 +243,59 @@ class ToDo extends Task {
 }
 
 class Deadline extends Task {
-    String deadline = "";
+    Date deadline;
+    static SimpleDateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    //static SimpleDateFormat outputFormatter = new SimpleDateFormat("dd of MMM yyyy, hh a");
 
     public Deadline(String content, String deadline) {
         super(content);
-        String[] tmp = deadline.split(" ");
-        tmp[0] = "";
-        this.deadline = String.join(" ", tmp).trim();
+        Date date = new Date();
+        try {
+            date = inputFormatter.parse(deadline);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.deadline = date;
     }
 
     @Override
     public String getTime() {
-        return this.deadline;
+        return inputFormatter.format(deadline);
     }
 
     @Override
     public String toString() {
-        return done ? String.format("[D][%c] %s (by: %s)", tick, content, deadline) : String.format("[D][%c] %s (by: %s)", cross, content, deadline);
+        return done ? String.format("[D][%c] %s (by: %s)", tick, content, getTime()) : String.format("[D][%c] %s (by: %s)", cross, content, getTime());
     }
 }
 
 class Event extends Task {
-    String time = "";
+    Date time;
+    static SimpleDateFormat inputFormatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    //static SimpleDateFormat outputFormatter = new SimpleDateFormat("dd of MMM yyyy, hh a");
 
     public Event(String content, String time) {
         super(content);
-        String[] tmp = time.split(" ");
-        tmp[0] = "";
-        this.time = String.join(" ", tmp).trim();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Date date = new Date();
+        try {
+            date = formatter.parse(time);
+            System.out.println(date);
+            System.out.println(formatter.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.time = date;
     }
 
     @Override
     public String getTime() {
-        return this.time;
+        return inputFormatter.format(time);
     }
 
     @Override
     public String toString() {
-        return done ? String.format("[E][%c] %s (by: %s)", tick, content, time) : String.format("[E][%c] %s (by: %s)", cross, content, time);
+        return done ? String.format("[E][%c] %s (by: %s)", tick, content, getTime()) : String.format("[E][%c] %s (by: %s)", cross, content, getTime());
     }
 }
 

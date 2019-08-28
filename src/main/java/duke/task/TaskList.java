@@ -17,6 +17,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Deletes a task from the task list.
+     *
+     * @param index index of the task to be deleted
+     * @return the deleted task
+     */
     public Task deleteTask(final int index) {
         Task task = getTask(index);
         tasks.remove(index);
@@ -39,6 +45,11 @@ public class TaskList {
         return ret.toString();
     }
 
+    /**
+     * Converts this TaskList into a String suitable for storage in the data file.
+     *
+     * @return the converted String
+     */
     public String toStorageString() {
         StringBuilder ret = new StringBuilder();
         for (Task task : tasks) {

@@ -4,6 +4,12 @@ import duke.command.Command;
 import duke.command.CommandType;
 
 public class Parser {
+    /**
+     * Parses input to construct a Command.
+     *
+     * @param input the input String to parse
+     * @return the constructed Command
+     */
     public static Command parse(final String input) {
         String[] split = input.trim().split("\\s+", 2);
         String command = split[0].toLowerCase();

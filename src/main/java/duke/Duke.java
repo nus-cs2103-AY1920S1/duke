@@ -2,9 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.parser.Parser;
 import duke.ui.Ui;
 
 public class Duke {
@@ -16,6 +16,11 @@ public class Duke {
         storage = new Storage("duke.txt");
         tasks = new TaskList();
         ui = new Ui();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
     }
 
     private void run() {
@@ -45,10 +50,5 @@ public class Duke {
                 ui.showSeparator();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }

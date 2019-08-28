@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.Deadline;
 import duke.exception.DukeException;
-import duke.task.Event;
 import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -17,16 +17,35 @@ public class Command {
     private String arguments;
     private boolean isExit;
 
+    /**
+     * Constructs a command.
+     *
+     * @param type      Type of the command
+     * @param arguments arguments of the command
+     */
     public Command(final CommandType type, final String arguments) {
         this.type = type;
         this.arguments = arguments;
         this.isExit = false;
     }
 
+    /**
+     * Returns true if the command signals exit.
+     *
+     * @return true if the command signals exit
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Executes this command.
+     *
+     * @param tasks   the existing tasks
+     * @param ui      the current Ui
+     * @param storage the data file
+     * @throws DukeException the command cannot be executed
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
             case TODO:

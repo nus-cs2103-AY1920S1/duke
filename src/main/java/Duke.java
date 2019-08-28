@@ -4,11 +4,10 @@ import java.io.File;
 
 public class Duke {
     // String Constants used for Duke output
-    private static final String SEPARATOR = "    ____________________________________________________________";
     private Storage storage;
     private TaskList tasks;
     private Ui ui = new Ui();
-    int size;
+    private int size;
 
     public Duke(String filePath) {
         try {
@@ -48,12 +47,6 @@ public class Duke {
         // Create new user interface object
         Ui ui = new Ui();
 
-        // Set index of number of task
-        int n;
-
-        // Null task for exception
-        Task t = null;
-
         // Read command-line input with Scanner
         Scanner scanner = new Scanner(System.in);
 
@@ -73,32 +66,27 @@ public class Duke {
 
             if (input.equals("list")) {
                 ui.showList();
-                tasks.getList();
-            }
-            else if (input.contains("done")) {
+                tasks.printList();
+            } else if (input.contains("done")) {
 
                 try {
                     //Mark task as done
-                    tasks.doneTask(input);
-                }
-                catch (NullPointerException err){
+                    tasks.setDone(input);
+                } catch (NullPointerException err) {
                     ui.invalidEntry();
                     continue;
-                    }
+                }
 
             } else if (input.contains("delete")) {
 
                 try {
                     //Mark task as done
                     tasks.deleteTask(input);
-                }
-                catch (NullPointerException err){
+                } catch (NullPointerException err) {
                     ui.invalidEntry();
                     continue;
                 }
-            }
-
-            else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+            } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
 
                 try {
                     String action = parser.parseAction(input);
@@ -109,11 +97,10 @@ public class Duke {
                 }
 
             } else {
-               // Do not fit any commands
+                // Do not fit any commands
                 try {
-                    t = new Task(input, 0);
-                }
-                catch (DukeException err) {
+                    throw new DukeException(ui.invalidCommand());
+                } catch (DukeException err) {
                     System.out.println(err.getMessage());
                     ui.separator();
                     System.out.println("");
@@ -121,13 +108,12 @@ public class Duke {
                 }
             }
 
-            System.out.println(SEPARATOR);
+            ui.separator();
             System.out.println();
 
             try {
                 storage.saveFile(tasks, this.storage.getFilePath());
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 ui.saveError();
             }
         }

@@ -8,6 +8,7 @@ class Deadline extends Task {
 
     protected String by;
     protected Date dateTime;
+
     // List of acceptable date formats (for this case, just choosing two common patterns)
     protected List<String> dateFormats = Arrays.asList("dd/MM/yyyy HHmm", "dd-MM-yyyy HHmm");
 
@@ -26,7 +27,8 @@ class Deadline extends Task {
             SimpleDateFormat dateTime = new SimpleDateFormat(pattern);
             try {
                 this.dateTime = dateTime.parse(by);
-            } catch (ParseException e) {}
+            } catch (ParseException e) {
+            }
         }
     }
 
@@ -38,5 +40,7 @@ class Deadline extends Task {
             return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
-    public String toSave() { return "D | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.by; }
+    public String toSave() {
+        return "D | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.by;
+    }
 }

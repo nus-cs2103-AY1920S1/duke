@@ -54,7 +54,7 @@ class TaskListTest {
         PrintStream sout = System.out;
         System.setOut(ps);
 
-        tasks.getList();
+        tasks.printList();
 
         System.out.flush();
         System.setOut(sout);
@@ -73,7 +73,7 @@ class TaskListTest {
         String done = "[D][✓] return book (by: June 6th)";
 
         assertEquals(notDone, two.toString()); // Before marked as done
-        tasks.doneTask("done 2");
+        tasks.setDone("done 2");
         assertEquals(done, two.toString()); // Marked as done
     }
 

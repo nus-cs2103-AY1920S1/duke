@@ -1,9 +1,7 @@
 public class Parser {
 
-    public Parser() {};
-
-    protected String action;
-    protected Ui ui = new Ui();
+    public Parser() {
+    }
 
     /**
      * Parse the input to return the user action as a String.
@@ -22,7 +20,7 @@ public class Parser {
         if (substrings.length == 0) {
             throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-("); //no valid command given
         } else if (substrings.length == 1) {
-            throw new DukeException("    ☹ OOPS!!! The description of a "+ action +" cannot be empty."); //empty description
+            throw new DukeException("    ☹ OOPS!!! The description of a " + action + " cannot be empty."); //empty description
         }
 
         return action;

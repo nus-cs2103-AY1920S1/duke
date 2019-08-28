@@ -261,11 +261,47 @@ public class Duke {
                 System.out.println("        [E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
                 System.out.println("     Now you have " + data.size() + " tasks in this list");
                 System.out.println("     ____________________________________________________________");
+
+            } else if(input.startsWith("find")) {
+
+                String[] sp = input.split(" ", 2);
+
+                if(sp.length < 2){
+                    System.out.println("     ____________________________________________________________");
+                    System.out.println("     OOPS!!! The description of a find cannot be empty.");
+                    System.out.println("     ____________________________________________________________");
+                    continue;
+                }
+
+                ArrayList<Integer> indexes = new ArrayList<Integer>();
+                int i;
+                for(i = 0; i < data.size(); i++) {
+                    if(data.get(i).contains(sp[1])) {
+                        indexes.add(i);
+                    }
+                }
+                System.out.println("     ____________________________________________________________\n");
+
+                for(i = 0; i < indexes.size(); i++) {
+                    System.out.print("     ");
+                    System.out.print((i + 1) + ". ");
+                    System.out.print("[" + type.get(indexes.get(i)) + "]");
+                    System.out.print("[" + done.get(indexes.get(i)) + "]");
+                    System.out.print(" " + data.get(indexes.get(i)));
+                    if(type.get(indexes.get(i)).equals("D")){
+                        System.out.print(" (by: " + details.get(indexes.get(i)) + ")");
+                    } else if(type.get(i).equals("E")){
+                        System.out.print(" (at: " + details.get(indexes.get(i)) + ")");
+                    }
+                    System.out.println();
+                    System.out.println("     ____________________________________________________________");
+                }
+
+
             } else {
                     System.out.println("     ____________________________________________________________\n" +
                             "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                             "     ____________________________________________________________");
-
             }
 
         } while(true);

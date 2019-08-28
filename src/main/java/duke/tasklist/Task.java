@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Default constructor for classes which extend from Task
+     *
      * @param description The description of the task
      */
     public Task(String description) {

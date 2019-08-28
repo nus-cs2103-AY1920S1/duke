@@ -6,6 +6,7 @@ import duke.command.DeleteTaskCommand;
 import duke.command.CompleteTaskCommand;
 import duke.command.ShowListCommand;
 import duke.command.ExitCommand;
+import duke.command.SearchCommand;
 import duke.command.Type;
 
 import duke.command.DukeMissingCommandException;
@@ -128,6 +129,9 @@ public class Parser {
         case "done":
             commandType = Type.COMPLETE;
             break;
+        case "find":
+            commandType = Type.SEARCH;
+            break;
         default:
             throw new DukeUnknownCommandException();
         }
@@ -186,6 +190,8 @@ public class Parser {
             return new DeleteTaskCommand(parametersProvided[0]);
         case COMPLETE:
             return new CompleteTaskCommand(parametersProvided[0]);
+        case SEARCH:
+            return new SearchCommand(parametersProvided[0]);
         case ADD_TODO:
             //Fallthrough
         case ADD_DEADLINE:

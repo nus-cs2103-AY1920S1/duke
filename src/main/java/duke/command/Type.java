@@ -10,6 +10,7 @@ public enum Type {
     LIST(0),
     DELETE(1, "task number"),
     COMPLETE(1, "task number"),
+    SEARCH(1, "keyword"),
     ADD_TODO(1, "description"),
     ADD_DEADLINE(2, "description", "time", "/by"),
     ADD_EVENT(2, "description", "time", "/at");

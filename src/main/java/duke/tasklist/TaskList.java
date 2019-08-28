@@ -118,4 +118,21 @@ public class TaskList {
             throw new DukeIncorrectParameterTypeException("Integer", id);
         }
     }
+
+    /**
+     * Returns the Tasks which contain the keyword provided
+     *
+     * @param keyword The keyword to search for in the task list
+     * @return An ArrayList containing the tasks which contain the keyword
+     */
+    public ArrayList<Task> search(String keyword) {
+        //searches the string representation of the class
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task t : this.taskList) {
+            if (t.toString().contains(keyword)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
 }

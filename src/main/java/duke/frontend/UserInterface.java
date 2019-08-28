@@ -1,16 +1,10 @@
 package duke.frontend;
 
+import duke.command.*;
 import duke.io.Input;
 import duke.io.Output;
 import duke.io.Parser;
 import duke.io.Storage;
-
-import duke.command.Command;
-import duke.command.CompleteTaskCommand;
-import duke.command.AddTaskCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.ShowListCommand;
-import duke.command.ExitCommand;
 
 import duke.DukeException;
 
@@ -20,8 +14,10 @@ import duke.tasklist.ToDo;
 import duke.tasklist.Deadline;
 import duke.tasklist.Event;
 
+import java.util.ArrayList;
+
 /**
- * The user interface which the user used to interacts with duke, and manipulate the task list
+ * The user interface which the user uses to interacts with duke, and manipulate the task list
  */
 public class UserInterface {
     private boolean isAcceptingInput;
@@ -155,8 +151,10 @@ public class UserInterface {
         case "ExitCommand":
             executeCommand((ExitCommand) command);
             break;
+        case "SearchCommand":
+            executeCommand((SearchCommand) command);
         default:
-            break;
+            throw new DukeUnknownCommandException();
         }
     }
 
@@ -221,7 +219,23 @@ public class UserInterface {
         storage.save(taskList);
     }
 
-    private void executeCommand(ShowListCommand command) throws DukeException {
+    private void executeCommand(SearchCommand command) {
+        String[] parameters = Command.getArgumentsUsed(command);
+        ArrayList<Task> results = taskList.search(parameters[0]);
+
+        if (results.size() > 0) {
+            int count = 0;
+            standardOutput.addLine("Here are the matching tasks in your list:");
+            for (Task task : taskList.search(parameters[0])) {
+                count++;
+                standardOutput.addLine(Integer.toString(count), ". ", task.toString());
+            }
+        } else {
+            standardOutput.addLine("There are no matching tasks in your list");
+        }
+    }
+
+    private void executeCommand(ShowListCommand command) {
         if (taskList.size() == 0) {
             standardOutput.addLine("Your list is empty!");
         } else {

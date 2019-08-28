@@ -9,10 +9,6 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public boolean hasInput() {
-        return sc.hasNext();
-    }
-
     public String readInput() {
         return sc.nextLine();
     }

@@ -14,8 +14,7 @@ public class TodoCommand extends Command {
     void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         try {
             /*Check if description is empty (does not check when user input
-              multiple spaces as the description.
-            */
+              multiple spaces as the description.)*/
             if (!commandDesc.substring(5).equals((""))) {
                 Todo newTodo = new Todo(commandDesc.substring(5));
                 storage.appendToFile(System.getProperty("user.dir") + "/data/tasks.txt", newTodo.stringForAppend());

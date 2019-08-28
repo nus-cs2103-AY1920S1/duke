@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -38,7 +39,7 @@ public class Duke {
                         break;
                     }
                     default:
-                        Task task;
+                        Task task = null;
                         switch (next[0]) {
                             case "todo":
                                 String[] desc = Arrays.copyOfRange(next, 1, next.length);
@@ -50,20 +51,29 @@ public class Duke {
                                 String[] details = String.join(" ", next).split("/by");
                                 if (details.length == 1)
                                     throw new DukeException("OOPS!!! The deadline of a deadline cannot be empty.");
-                                task = new Deadline(details[0].trim(), details[1].trim());
+                                try {
+                                    task = new Deadline(details[0].trim(), details[1].trim());
+                                } catch (ParseException e) {
+                                    System.out.println("Date must have proper format!");
+                                }
                                 break;
                             }
                             case "event": {
                                 String[] details = String.join(" ", next).split("/at");
                                 if (details.length == 1)
                                     throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
-                                task = new Event(details[0].trim(), details[1].trim());
+                                try {
+                                    task = new Event(details[0].trim(), details[1].trim());
+                                } catch (ParseException e) {
+                                    System.out.println("Both dates must have proper format!");
+                                }
                                 break;
                             }
                             default:
                                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
-                        todolist.add(task);
+                        if (task != null)
+                            todolist.add(task);
                         System.out.println(reply("Got it. I've added this task: \n  " + task + "\nNow you have " + todolist.length() + " tasks in the list."));
                         break;
                 }

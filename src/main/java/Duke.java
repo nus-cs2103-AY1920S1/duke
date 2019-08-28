@@ -13,47 +13,12 @@ enum TaskType {
     DELETE
 }
 
-class UnknownInputException extends Exception {
-    public UnknownInputException() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                "    ____________________________________________________________");
-    }
-}
-
-class BadInputException extends Exception {
-    public BadInputException(TaskType temp) {
-        String i = "";
-        switch(temp) {
-        case TODO:
-            i = "todo";
-            break;
-        case EVENT:
-            i = "event";
-            break;
-        case DEADLINE:
-            i = "deadline";
-            break;
-        case DONE:
-            i = "done";
-            break;
-        case DELETE:
-            i = "delete";
-            break;
-        }
-        System.out.println("    ____________________________________________________________\n" +
-                "     ☹ OOPS!!! The description of a " + i + " cannot be empty.\n" +
-                "    ____________________________________________________________\n");
-    }
-}
-
 public class Duke {
     public static void main(String[] args) {
         User user = new User();
         Scanner input = new Scanner(System.in);
 
-
-        boolean inputErrors = false;
+        boolean inputErrors;
         do {
             try {
                 user.setCurrentInput(input.nextLine());
@@ -61,9 +26,8 @@ public class Duke {
                     throw new UnknownInputException();
                 }
                 TaskType taskType = user.getTaskType();
-                if (user.OneWordNotBye()) {
-                    TaskType temp = user.getTaskType();
-                    throw new BadInputException(temp);
+                if (user.oneWordNotBye()) {
+                    throw new BadInputException(taskType);
                 }
 
                 switch (taskType) {
@@ -81,18 +45,17 @@ public class Duke {
                 case DELETE:
                     user.deleteTask();
                     break;
-                case BYE:
+                case BYE: //do nothing and wait to exit loop
                     break;
                 default:
-                    break; //do nothing
+                    break;
                 }
                 inputErrors = true;
-            } catch (UnknownInputException err) {
-                inputErrors = false;
-            } catch (BadInputException err) {
+            } catch (UnknownInputException | BadInputException err) {
                 inputErrors = false;
             }
         } while (!user.inputIsBye() || !inputErrors); //only exit program, when user inputs bye. otherwise keep trying
+
         user.sayByeToUser();
     }
 }
@@ -116,10 +79,6 @@ class Task {
 
     public void markIsDone() {
         this.isDone = true;
-    }
-
-    public void setDescription(String userInput) {
-        this.description = userInput;
     }
 
     public String getDescription() {
@@ -191,20 +150,24 @@ class User {
 
     }
 
-    public boolean OneWordNotBye() {
+    boolean oneWordNotBye() {
         String s = this.getCurrentInput();
-        if (s.equalsIgnoreCase("bye") || s.equalsIgnoreCase("list")) { //bye should not be checked
+        if (s.equalsIgnoreCase("bye") || s.equalsIgnoreCase("list")) { //bye and list should not be checked
             return false;
         } else {
             return (s.length() > 0 && s.split("\\s+").length == 1);
         }
     }
 
-    public void setCurrentInput(String currentInput) {
+    void setCurrentInput(String currentInput) {
         this.currentInput = currentInput;
     }
 
-    public boolean setTaskType() {
+    String getCurrentInput () {
+        return this.currentInput;
+    }
+
+    boolean setTaskType() {
         String j = this.currentInput;
         if (j.contains(" ")) {
             j = j.substring(0, j.indexOf(" "));
@@ -240,7 +203,7 @@ class User {
         return true;
     }
 
-    public void addTask() { //addTask/event.deadline
+    void addTask() { //addTask/event.deadline
         //todo: first space to last char
         //event/deadline: first space to "/", after "/" to last char
         TaskType taskType = this.getTaskType(); //used just for switchcase.
@@ -251,7 +214,7 @@ class User {
 
         switch (taskType) {
         case DEADLINE:
-            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1); //should not be done for todo case
+            description = j.substring(j.indexOf(" ") + 1, j.indexOf("/") - 1);
             date = j.substring((j.indexOf("/") + 4));
             userTasks.add(new Deadline(description, date));
             break;
@@ -288,6 +251,10 @@ class User {
         return this.numOfTasks;
     }
 
+    public TaskType getTaskType () {
+        return this.currentTaskType;
+    }
+
     private void increaseTaskCount() {
         this.numOfTasks++;
     }
@@ -298,7 +265,28 @@ class User {
         }
     }
 
-    public boolean inputIsBye () {
+    public void deleteTask() {
+        /*print task, delete task, decrease task count, then declare new task count. */
+        String j = this.getCurrentInput();
+        int taskNum = Integer.parseInt(j.substring(j.indexOf(" ")+ 1)) - 1;
+        System.out.println("    ____________________________________________________________\n"
+                + "     Noted. I've removed this task: ");
+        int count = 0;
+        for (Task temp : userTasks) {
+            if (count == taskNum) {
+                System.out.println("       " + "[" + temp.getTaskTypeLetter() + "]"
+                        + "[" + temp.getStatusIcon() + "] " + temp.getDescription());
+            }
+            count++;
+        }
+
+        userTasks.remove(taskNum);
+        this.decreaseTaskCount();
+        System.out.println("     Now you have " + this.getTaskCount() + " tasks in the list.\n" +
+                "    ____________________________________________________________");
+    }
+
+    public boolean inputIsBye() {
         String EXIT_COMMAND = "bye";
         return this.currentInput.equalsIgnoreCase(EXIT_COMMAND);
     }
@@ -337,41 +325,43 @@ class User {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public TaskType getTaskType () {
-        return this.currentTaskType;
-    }
-
-    public void deleteTask() {
-        /*print task, delete task, decrease task count, then declare new task count. */
-        String j = this.getCurrentInput();
-        int taskNum = Integer.parseInt(j.substring(j.indexOf(" ")+ 1)) - 1;
-        System.out.println("    ____________________________________________________________\n"
-                + "     Noted. I've removed this task: ");
-        int count = 0;
-        for (Task temp : userTasks) {
-            if (count == taskNum) {
-                System.out.println("       " + "[" + temp.getTaskTypeLetter() + "]"
-                        + "[" + temp.getStatusIcon() + "] " + temp.getDescription());
-            }
-            count++;
-        }
-
-        userTasks.remove(taskNum);
-        this.decreaseTaskCount();
-        System.out.println("     Now you have " + this.getTaskCount() + " tasks in the list.\n" +
-                "    ____________________________________________________________");
-    }
-
-    public int getNumOfTasks() {
-        return numOfTasks;
-    }
-
-    public String getCurrentInput () {
-        return this.currentInput;
-    }
     public void sayByeToUser () {
         System.out.println("    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________\n");
+    }
+}
+
+class UnknownInputException extends Exception {
+    public UnknownInputException() {
+        System.out.println("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                "    ____________________________________________________________");
+    }
+}
+
+class BadInputException extends Exception {
+    public BadInputException(TaskType temp) {
+        String i = "";
+        switch(temp) {
+        case TODO:
+            i = "todo";
+            break;
+        case EVENT:
+            i = "event";
+            break;
+        case DEADLINE:
+            i = "deadline";
+            break;
+        case DONE:
+            i = "done";
+            break;
+        case DELETE:
+            i = "delete";
+            break;
+        }
+        System.out.println("    ____________________________________________________________\n" +
+                "     ☹ OOPS!!! The description of a " + i + " cannot be empty.\n" +
+                "    ____________________________________________________________\n");
     }
 }

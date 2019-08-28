@@ -1,0 +1,50 @@
+    --------------------------------------------------
+     Hello! I'm Duke :)
+     What can I do for you?
+    --------------------------------------------------
+    --------------------------------------------------
+     Got it. I've added this task:
+       [T][✗] borrow book
+     Now you have 1 tasks in the list.
+    --------------------------------------------------
+    --------------------------------------------------
+     Got it. I've added this task:
+       [E][✗] concert (at: Mon 2PM)
+     Now you have 2 tasks in the list.
+    --------------------------------------------------
+    --------------------------------------------------
+     Got it. I've added this task:
+       [D][✗] return book (by: Sun 2PM)
+     Now you have 3 tasks in the list.
+    --------------------------------------------------
+    --------------------------------------------------
+     Nice! I've marked this task as done:
+     [T][✓] borrow book
+    --------------------------------------------------
+    --------------------------------------------------
+     Here are the tasks in your list:
+     1. [T][✓] borrow book
+     2. [E][✗] concert (at: Mon 2PM)
+     3. [D][✗] return book (by: Sun 2PM)
+
+    --------------------------------------------------
+    --------------------------------------------------
+     Got it. I've added this task:
+       [T][✗] read book
+     Now you have 4 tasks in the list.
+    --------------------------------------------------
+    --------------------------------------------------
+     Noted. I've removed this task:
+     [T][✓] borrow book
+     Now you have 3 tasks in the list.
+    --------------------------------------------------
+    --------------------------------------------------
+     Here are the tasks in your list:
+     1. [E][✗] concert (at: Mon 2PM)
+     2. [D][✗] return book (by: Sun 2PM)
+     3. [T][✗] read book
+
+    --------------------------------------------------
+    --------------------------------------------------
+     Bye. Hope to see you again soon!
+    --------------------------------------------------

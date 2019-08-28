@@ -27,18 +27,22 @@ public class DataStorage {
         this.filePath = filePath;
     }
 
-    public void write(ArrayList<Task> taskList) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        boolean isFirst = true;
-        for (Task task : taskList) {
-            if (isFirst) {
-                isFirst = false;
-                fw.write(parseTask(task));
-            } else {
-                fw.write(newLine + parseTask(task));
+    public void write(ArrayList<Task> taskList) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            boolean isFirst = true;
+            for (Task task : taskList) {
+                if (isFirst) {
+                    isFirst = false;
+                    fw.write(parseTask(task));
+                } else {
+                    fw.write(newLine + parseTask(task));
+                }
             }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Oops something when wrong with saving the data.");
         }
-        fw.close();
     }
 
     private String parseTask(Task t) {
@@ -78,7 +82,16 @@ public class DataStorage {
         }
     }
 
-    public ArrayList<Task> readFromFile() throws IOException, DukeException {
+    public ArrayList<Task> load() throws DukeException {
+        try {
+            readFromFile();
+        } catch (IOException e) {
+            throw new DukeException("Oops something when wrong with loading your tasks. So sorry.");
+        }
+        return tasks;
+    }
+
+    private void readFromFile() throws IOException, DukeException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         try {
             String line;
@@ -88,6 +101,5 @@ public class DataStorage {
         } finally {
             br.close();
         }
-        return tasks;
     }
 }

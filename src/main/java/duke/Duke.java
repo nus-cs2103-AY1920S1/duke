@@ -1,11 +1,46 @@
 package duke;
 
+import duke.bin.DukeException;
+import duke.bin.Parser;
+import duke.bin.TaskList;
 import duke.bin.UI;
+import duke.bin.storage.DataStorage;
 
 public class Duke {
+    private DataStorage storage;
+    private TaskList tasks;
+    private UI ui;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        ui = new UI();
+        storage = new DataStorage(filePath);
+        try {
+            tasks = new TaskList();
+            tasks.store(storage.load());
+        } catch (DukeException e) {
+            ui.showError(e);
+            tasks = new TaskList();
+        }
+        parser = new Parser(tasks, storage, ui);
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                parser.parse(fullCommand);
+                isExit = parser.isExit();
+            } catch (DukeException e) {
+                ui.showError(e);
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        UI ui = new UI();
-        ui.run();
+        new Duke("data/save.txt").run();
     }
+
 }

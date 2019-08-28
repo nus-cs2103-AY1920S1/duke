@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * TaskList represents a list of tasks.
@@ -48,5 +49,23 @@ public class TaskList {
 
     public boolean isEmpty() {
         return taskList.isEmpty();
+    }
+
+    public LinkedList<Task> searchFor(String target) {
+        ListIterator<Task> iter = taskList.listIterator();
+        LinkedList<Task> tasksFound = new LinkedList<>();
+        Task current;
+
+        while (iter.hasNext()) {
+            current = iter.next();
+            String description = current.getDesc();
+
+            if (description.contains(target)) {
+                tasksFound.add(current);
+            }
+        }
+
+        return tasksFound;
+
     }
 }

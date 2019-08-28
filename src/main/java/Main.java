@@ -28,7 +28,7 @@ public class Main {
                 ? input
                 : input.substring(1);
         if(description.equals("")) {
-            throw new DukeException("? OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         return new Todo(description);
     }
@@ -72,7 +72,7 @@ public class Main {
                 + "Now you have " + list.size() +" tasks in the list.");
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         response("Hello! I'm Duke\n"
                 + "What can I do for you?");
 
@@ -105,13 +105,20 @@ public class Main {
                 response("Nice! I've marked this task as done: \n  "
                         + list.get(itemId).toString());
                 break;
+            case "delete":
+                itemId = scanner.nextInt() - 1;
+                Task item = list.remove(itemId);
+                response("Noted. I've removed this task:  \n  "
+                        + item.toString() + "\n"
+                        + "Now you have " + list.size() +" tasks in the list.");
+                break;
             case "todo":
                 Task t = null;
                 try {
                     t = createTodo(scanner.nextLine());
                     addToList(t, list);
                 } catch(DukeException e) {
-                    response("? OOPS!!! The description of a todo cannot be empty.");
+                    response("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 break;
             case "deadline":
@@ -124,7 +131,7 @@ public class Main {
                 break;
             default:
                 scanner.nextLine();
-                response("? OOPS!!! I'm sorry, but I don't know what that means :-(");
+                response("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
             }
         }

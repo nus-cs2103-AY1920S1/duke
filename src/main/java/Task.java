@@ -26,7 +26,7 @@ public class Task {
     }
 
     public String toString() {
-        return String.format("%s%s %s%s", this.type,
+        return String.format("[%s][%s] %s%s", this.type,
                 this.getStatusIcon(),
                 this.description,
                 this.date);

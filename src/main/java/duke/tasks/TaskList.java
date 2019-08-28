@@ -69,6 +69,16 @@ public class TaskList {
         doneTask.markDone();
     }
 
+    public ArrayList<Task> getMatchingTasks(String searchTerm) {
+        ArrayList<Task> al = new ArrayList<>();
+        for (Task task : tasks) {
+            if(task.contains(searchTerm)) {
+                al.add(task);
+            }
+        }
+        return al;
+    }
+
     @Override
     public String toString() {
         int size = tasks.size();

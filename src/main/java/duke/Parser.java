@@ -33,6 +33,8 @@ public class Parser {
             return DoneCommand.create(input, args);
         case "delete":
             return DeleteCommand.create(input, args);
+        case "find":
+            return FindCommand.create(input, args);
         case "todo":
             if (numArgs == 1) {
                 throw new DukeException(EMPTY_TODO_STRING);
@@ -50,6 +52,33 @@ public class Parser {
             return new AddCommand(input);
         default:
             throw new DukeException(UNKNOWN_COMMAND_STRING);
+            case "bye":
+                return ByeCommand.create(input, args);
+            case "list":
+                return ListCommand.create(input, args);
+            case "done":
+                return DoneCommand.create(input, args);
+            case "delete":
+                return DeleteCommand.create(input, args);
+        case "find":
+                return FindCommand.create(input, args);
+            case "todo":
+                if (numArgs == 1) {
+                    throw new DukeException(EMPTY_TODO_STRING);
+                }
+                return new AddCommand(input);
+            case "event":
+                if (numArgs == 1) {
+                    throw new DukeException(EMPTY_EVENT_STRING);
+                }
+                return new AddCommand(input);
+            case "deadline":
+                if (numArgs == 1) {
+                    throw new DukeException(EMPTY_DEADLINE_STRING);
+                }
+                return new AddCommand(input);
+            default:
+                throw new DukeException(UNKNOWN_COMMAND_STRING);
         }
     }
 }

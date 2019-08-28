@@ -69,6 +69,9 @@ public class Parser {
                 return new DoneCommand(Integer.parseInt(detailsArray[1]) - 1);
             case "list":
                 return new ListCommand();
+            case "find":
+                return new FindCommand(String.join(" ",
+                        Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
             default:
                 throw new InvalidInputException(ui.invalidInputMsg());
             }

@@ -19,7 +19,7 @@ public class Task {
     }
 
     public String toFile(){
-        return null;
+        return "";
     }
 
     public String toString(){

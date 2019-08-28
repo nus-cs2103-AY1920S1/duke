@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -11,9 +11,12 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String getStatus();
 
     @Override
     public String toString() {

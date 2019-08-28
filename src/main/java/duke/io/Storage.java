@@ -13,14 +13,26 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.BufferedReader;
 
+/**
+ * File handler responsible for reading/writing from/to files in order to load/save the task list in between sessions.
+ */
 public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructs an instance of the file handler
+     * @param path The path to the file in the src/main/resource/SaveFiles/ directory
+     */
     public Storage(String path) {
         this.filePath = "src/main/resources/SaveFiles/".concat(path);
     }
 
+    /**
+     * Returns the task list from the data stored in the file at the file path provided during initialization
+     * @return The task list from data stored in the file
+     * @throws DukeException Exception thrown when error occurs when trying to recreate the task list
+     */
     public TaskList load() throws DukeException {
         // read file path
         BufferedReader file;
@@ -87,6 +99,11 @@ public class Storage {
         return new Event(complete, file.readLine(), file.readLine());
     }
 
+    /**
+     * Writes/Saves the task list into the file path provided during initialization
+     * @param taskList The task list to be saved at the file path
+     * @throws DukeException Exception thrown when error occurs when trying to save the task list
+     */
     public void save(TaskList taskList) throws DukeException {
         FileWriter file;
         try {

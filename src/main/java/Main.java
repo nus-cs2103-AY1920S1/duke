@@ -19,6 +19,7 @@ public class Main {
             instruction = sc.nextLine();
         }
 
+        sc.close();
         duke.exit();
     }
 }

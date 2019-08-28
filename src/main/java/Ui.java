@@ -102,6 +102,18 @@ public class Ui {
                 System.out.println(e);
                 System.out.println("___________________________________");
             }
+        } else if (inputCommand.equals("find")) {
+            try {
+                String subInput = inputInstruction.substring(5);
+                System.out.println("__________________________________");
+                System.out.println("Here are the tasks in your list:");
+                currentTaskList.findTask(subInput);
+                System.out.println("___________________________________");
+            } catch (Exception e) {
+                System.out.println("___________________________________");
+                System.out.println(e);
+                System.out.println("___________________________________");
+            }
         } else {
             try {
                 throw new DukeException("invalid");

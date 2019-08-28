@@ -37,4 +37,25 @@ public class TaskList {
     public void removeTask(int index) {
         listOfTask.remove(index);
     }
+
+    public void findTask(String taskKeyWord) throws DukeException {
+        if (listOfTask.size() == 0) {
+            System.out.println("List is Empty");
+        } else {
+            ArrayList<Task> tempTaskList = new ArrayList<>();
+            for (int i = 0; i < listOfTask.size(); i++) {
+                Task currentTask = listOfTask.get(i);
+                if (currentTask.toString().contains(taskKeyWord)) {
+                    tempTaskList.add(currentTask);
+                }
+            }
+            if (tempTaskList.isEmpty()) {
+                throw new DukeException("find");
+            } else {
+                for (int i = 0; i < tempTaskList.size(); i++) {
+                    System.out.println(i + 1 + "." + tempTaskList.get(i));
+                }
+            }
+        }
+    }
 }

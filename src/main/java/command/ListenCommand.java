@@ -1,7 +1,10 @@
 package command;
 
+import error.UnknownCommandException;
 import task.TaskListController;
 import util.DukeInput;
+import util.DukeMessage;
+import util.DukeOutput;
 
 import java.util.Optional;
 
@@ -28,7 +31,12 @@ public class ListenCommand implements Command {
             case "delete":
                 return Optional.of(new DeleteCommand(taskListController, arguments));
             default:
-                return Optional.of(new AddCommand(command, arguments, taskListController));
+                try {
+                    return Optional.of(new AddCommand(command, arguments, taskListController));
+                } catch (UnknownCommandException e) {
+                    DukeOutput.printMessage(new DukeMessage(e.getMessage()));
+                    return Optional.of(new ListenCommand(taskListController));
+                }
         }
     }
 
@@ -44,4 +52,6 @@ public class ListenCommand implements Command {
             return "";
         }
     }
+
+
 }

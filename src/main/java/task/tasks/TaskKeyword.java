@@ -1,18 +1,19 @@
 package task.tasks;
 
 import task.Task;
+import util.SerializableTaskProducer;
 
 import java.util.function.Function;
 
 public enum TaskKeyword {
-    TODO("todo", (String arguments) -> new ToDo(arguments)),
-    EVENT("event", (String arguments) -> new Event(arguments)),
-    DEADLINE("deadline", (String arguments) -> new Deadline(arguments));
+    TODO("todo", ToDo::new),
+    EVENT("event", Event::new),
+    DEADLINE("deadline", Deadline::new);
 
     public final String keyword;
-    public final Function<String, Task> taskProducer;
+    public final SerializableTaskProducer taskProducer;
 
-    TaskKeyword(String keyword, Function<String, Task> taskProducer) {
+    TaskKeyword(String keyword, SerializableTaskProducer taskProducer) {
         this.keyword = keyword;
         this.taskProducer = taskProducer;
     }

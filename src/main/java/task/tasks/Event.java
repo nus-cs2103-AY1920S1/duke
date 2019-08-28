@@ -1,13 +1,16 @@
 package task.tasks;
 
+import error.task.UnknownDateTimeException;
 import task.Task;
+import util.DukeDateTime;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class Event extends Task {
-    private String at;
+    private LocalDateTime at;
 
-    public Event(String arguments) {
+    Event(String arguments) throws UnknownDateTimeException {
         super(getDescription(arguments), TaskKeyword.EVENT);
         this.at = getTiming(arguments);
     }
@@ -19,14 +22,16 @@ public class Event extends Task {
 
     @Override
     protected Optional<String> getTaskExtraDetails() {
-        return Optional.of(String.format("at: %s", at));
+        String atString = DukeDateTime.getString(at);
+        return Optional.of(String.format("at: %s", atString));
     }
 
     private static String getDescription(String arguments) {
         return arguments.split(" /at ")[0];
     }
 
-    private static String getTiming(String arguments) {
-        return arguments.split(" /at ")[1];
+    private LocalDateTime getTiming(String arguments) throws UnknownDateTimeException {
+        String dateTime = arguments.split(" /at ")[1];
+        return DukeDateTime.parseDateTime(dateTime);
     }
 }

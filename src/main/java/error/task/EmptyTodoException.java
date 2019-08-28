@@ -1,6 +1,6 @@
-package error;
+package error.task;
 
-public class EmptyTodoException extends TaskException {
+public class EmptyTodoException extends TaskCreationException {
 
     @Override
     public String getTaskErrorMessage() {

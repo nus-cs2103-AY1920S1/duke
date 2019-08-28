@@ -1,30 +1,41 @@
 package command;
 
+import error.task.TaskCreationException;
 import error.UnknownCommandException;
 import task.Task;
 import task.TaskListController;
 import task.tasks.TaskKeyword;
+import util.DukeMessage;
+import util.DukeOutput;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
 public class AddCommand implements Command {
-    private Task task;
     private TaskListController taskListController;
+    private TaskKeyword taskKeyword;
+    private String arguments;
 
-    public AddCommand(String keyword, String arguments, TaskListController taskListController) {
+    public AddCommand(String keyword, String arguments, TaskListController taskListController) throws UnknownCommandException {
         this.taskListController = taskListController;
-        this.task = parseTaskType(keyword).taskProducer.apply(arguments);
+        this.taskKeyword = parseKeyword(keyword);
+        this.arguments = arguments;
     }
 
     @Override
     public Optional<Command> execute() {
-        taskListController.addTask(task);
+        try {
+            Task task = taskKeyword.taskProducer.getTask(arguments);
+            taskListController.addTask(task);
+        } catch (TaskCreationException e) {
+            DukeOutput.printMessage(new DukeMessage(e.getTaskErrorMessage()));
+            return Optional.of(new ListenCommand(taskListController));
+        }
 
         return Optional.of(new ListenCommand(taskListController));
     }
 
-    private TaskKeyword parseTaskType(String keyword) {
+    private TaskKeyword parseKeyword(String keyword) throws UnknownCommandException {
         return Stream.of(TaskKeyword.values())
                 .filter(taskKeyWord -> taskKeyWord.keyword.equals(keyword))
                 .findFirst()

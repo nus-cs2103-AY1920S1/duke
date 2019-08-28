@@ -1,9 +1,18 @@
 package task;
 
+/**
+ * Task which belongs to a list.
+ *
+ */
 public abstract class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Constructor of Task.
+     *
+     * @param description description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

@@ -1,11 +1,12 @@
+import command.Command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import command.Command;
+import duke.Parser;
 
 /**
- * Duke class.
+ * Main Duke class.
  */
 public class Duke {
     private String line;
@@ -36,11 +37,15 @@ public class Duke {
         boolean isExit = false;
         ui.printStatement("Hello! I'm Duke", "What can I do for you?");
         while (!isExit) {
-            String fullCommand = ui.readCommand();
-            // !sc.hasNext("bye")
-            Command c = new Command(fullCommand);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
+            try {
+                String fullCommand = ui.readCommand();
+                // !sc.hasNext("bye")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showLoadingError(e);
+            }
         }
     }
 

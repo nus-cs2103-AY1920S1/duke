@@ -1,17 +1,22 @@
 package task;
 
+import duke.DukeException;
+
+/**
+ * Task which has a place.
+ *
+ */
 public class Event extends Task {
-    //3.[E][✗] project meeting (at: Aug 6th 2-4pm)
     private String at;
 
     /**
      * Event constructor.
      *
-     * @param description Description of Event.
-     * @param at Venue of Event.
+     * @param desc Description containing description and venue of event.
+     * @param at Place of the event.
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String desc, String at) {
+        super(desc);
         this.at = at;
     }
 

@@ -1,7 +1,16 @@
 package task;
 
+/**
+ * Task that has a description of "todo".
+ *
+ */
 public class Todo extends Task {
 
+    /**
+     * Constructor for Todo Task.
+     *
+     * @param description Description of todo Task.
+     */
     public Todo(String description) {
         super(description);
     }

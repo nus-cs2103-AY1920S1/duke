@@ -1,7 +1,9 @@
 package duke;
 
-import duke.DukeException;
-import task.*;
+import task.Deadline;
+import task.Task;
+import task.Todo;
+import task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to manage hard drive data.
+ *
+ */
 public class Storage {
     private String filepath;
 

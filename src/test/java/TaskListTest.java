@@ -1,5 +1,7 @@
 import duke.TaskList;
 import org.junit.jupiter.api.Test;
+import task.Task;
+import task.Todo;
 
 import java.util.ArrayList;
 
@@ -9,11 +11,12 @@ class TaskListTest {
 
     @Test
     void taskListTest() {
+        Task todo = new Todo("Todo Description");
         TaskList tasklist = new TaskList(new ArrayList<>());
         assertEquals(0, tasklist.getTaskSize());
-        tasklist.addTask(new Todo("Todo Description"));
+        tasklist.addTask(todo);
         assertEquals(1, tasklist.getTaskSize());
-        assertEquals(tasklist.getList().get(0), tasklist.getTaskByIndex(1));
+        assertEquals(todo, tasklist.getTaskByIndex(1));
         tasklist.removeTaskByIndex(1);
         assertEquals(0, tasklist.getTaskSize());
     }

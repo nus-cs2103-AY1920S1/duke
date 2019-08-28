@@ -7,10 +7,17 @@ import java.util.stream.Stream;
 
 import static java.lang.String.format;
 
+/**
+ * Ui class for user interaction and to manage interface.
+ *
+ */
 public class Ui {
     private String line;
     Scanner sc;
 
+    /**
+     * Ui Constructor.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
         this.line = "\t____________________________________________________________\n";
@@ -25,6 +32,11 @@ public class Ui {
         System.out.println(this.line + format("\t %s\n", e) + this.line);
     }
 
+    /**
+     * Scans for the next line command.
+     *
+     * @return next line input.
+     */
     public String readCommand() {
         String s = sc.nextLine();
         return s;

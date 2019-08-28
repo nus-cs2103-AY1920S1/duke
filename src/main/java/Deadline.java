@@ -9,8 +9,18 @@ public class Deadline extends Task {
         this.details = details;
     }
 
+    Deadline(String description, String details, boolean done) {
+        super(description, done);
+        this.details = details;
+    }
+
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + this.description + " (by: " + this.details + ")";
+    }
+
+    @Override
+    String store(){
+        return "D|" + getStatus() + "|" + this.description + "|" + this.details;
     }
 }

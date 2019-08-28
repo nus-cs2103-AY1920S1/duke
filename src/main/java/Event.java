@@ -9,8 +9,18 @@ public class Event extends Task {
         this.details = details;
     }
 
+    Event(String description, String details, boolean done) {
+        super(description, done);
+        this.details = details;
+    }
+
     @Override
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + this.description + " (at: " + this.details + ")";
+    }
+
+    @Override
+    String store(){
+        return "E|" + getStatus() + "|" + this.description + "|" + this.details;
     }
 }

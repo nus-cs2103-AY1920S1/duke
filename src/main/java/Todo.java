@@ -2,19 +2,22 @@
  * Represents a To-do Task
  */
 public class Todo extends Task {
-    private String details;
 
     Todo(String description) {
         super(description);
     }
 
-    Todo(String description, String details) {
-        super(description);
-        this.details = details;
+    Todo(String description, boolean done) {
+        super(description, done);
     }
 
     @Override
     public String toString() {
         return "[T][" + getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    String store(){
+        return "T|" + getStatus() + "|" + this.description;
     }
 }

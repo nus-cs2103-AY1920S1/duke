@@ -14,11 +14,11 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for Duke Object
-     * @param filePath path to the text file located on the hard disk
-     * @throws FileNotFoundException
+     * Constructor for Duke Object.
+     * @param filePath path to the text file located on the hard disk.
+     * @throws FileNotFoundException while input text file cannot be found.
      */
-    public Duke(String filePath) throws FileNotFoundException{
+    public Duke(String filePath) throws FileNotFoundException {
 
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,17 +28,17 @@ public class Duke {
 
 
     /**
-     * Runs Duke Program
+     * Runs Duke Program.
      */
     public void run() {
+
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
             try {
-
                 Command newCommand = Parser.retrieveCommandFromString(sc.nextLine());
                 newCommand.executeCommand(taskList, storage, ui);
-                if(newCommand instanceof ExitCommand) {
+                if (newCommand instanceof ExitCommand) {
                     return;
                 }
 
@@ -49,16 +49,16 @@ public class Duke {
     }
 
     /**
-     * Runs the created Duke object by appending location of text file inside the constructor
-     * @param args
+     * Runs the created Duke object by appending location of text file inside the constructor.
+     * @param args arguments passing to main method
      */
     public static void main(String[] args) {
-        try{
+
+        try {
             new Duke(System.getProperty("user.dir") + "\\data\\Duke.txt").run();
-        } catch(Exception e) {
+        } catch (Exception e) {
             Ui.printErrorMessage(e);
             return;
         }
-
     }
 }

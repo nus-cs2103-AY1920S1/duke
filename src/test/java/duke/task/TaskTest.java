@@ -2,17 +2,17 @@ package duke.task;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test class for testing Task class
+ * Test class for testing Task class.
  */
 class TaskTest {
 
     Task task;
 
     /**
-     * Tests getCompletedStatus method of Task class
+     * Tests getCompletedStatus method of Task class.
      */
     @Test
     void getCompletedStatusTest() {
@@ -23,7 +23,7 @@ class TaskTest {
     }
 
     /**
-     * Tests changeToCompletedStatus method of Task class
+     * Tests changeToCompletedStatus method of Task class.
      */
     @Test
     void changeToCompletedStatusTest() {
@@ -32,7 +32,7 @@ class TaskTest {
     }
 
     /**
-     * Tests getDescription method of Task class
+     * Tests getDescription method of Task class.
      */
     @Test
     void getDescriptionTest() {
@@ -41,7 +41,7 @@ class TaskTest {
     }
 
     /**
-     * Tests toIndicationInsideFile method of Task class
+     * Tests toIndicationInsideFile method of Task class.
      */
     @Test
     void toIndicationInsideFileTest() {

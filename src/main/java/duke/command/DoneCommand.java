@@ -9,15 +9,15 @@ import duke.component.Ui;
 import java.io.IOException;
 
 /**
- * Command Class for changing status of task to completed
+ * Command Class for changing status of task to completed.
  */
 public class DoneCommand extends Command {
 
     private int index;
 
     /**
-     * Constructor for DoneCommand Object
-     * @param index index of the task whose status will be changed
+     * Constructor for DoneCommand Object.
+     * @param index index of the task whose status will be changed.
      */
     public DoneCommand(int index) {
         this.index = index;
@@ -25,16 +25,18 @@ public class DoneCommand extends Command {
 
 
     /**
-     * Executes the operation of changing the status of task to be completed
-     * @param taskList list of tasks
-     * @param storage storage to store inside hard disk
-     * @param ui ui for user interaction
-     * @return boolean indication of successful or unsuccessful running of command
-     * @throws DukeException
-     * @throws IOException
+     * Executes the operation of changing the status of task to be completed.
+     * @param taskList list of tasks.
+     * @param storage storage to store inside hard disk.
+     * @param ui ui for user interaction.
+     * @return boolean indication of successful or unsuccessful running of command.
+     * @throws DukeException when index is invalid.
+     * @throws IOException when error occurs while writing to hard disk.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+            throws DukeException, IOException {
+
         if (index >= taskList.getSize() || index < 0) {
             throw new DukeException("Invalid task number!");
         }

@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Test Class for testing TaskList class
+ * Test Class for testing TaskList class.
  */
 class TaskListTest {
 
     private  TaskList taskList;
 
     /**
-     * Tests add method of TaskList class
+     * Tests add method of TaskList class.
      */
     @Test
     void addTest() {
@@ -27,8 +27,8 @@ class TaskListTest {
     }
 
     /**
-     * Tests deleteAt method of TaskList class
-     * @throws DukeException
+     * Tests deleteAt method of TaskList class.
+     * @throws DukeException if index is out of bound
      */
     @Test
     void deleteAtTest() throws DukeException {
@@ -39,7 +39,7 @@ class TaskListTest {
     }
 
     /**
-     * Tests getAtIndex method of TaskList class
+     * Tests getAtIndex method of TaskList class.
      */
     @Test
     void getAtIndexTest() {
@@ -49,7 +49,7 @@ class TaskListTest {
     }
 
     /**
-     * Tests getSize method of TaskList class
+     * Tests getSize method of TaskList class.
      */
     @Test
     void getSizeTest() {
@@ -60,7 +60,7 @@ class TaskListTest {
     }
 
     /**
-     * Tests replace method of TaskList class
+     * Tests replace method of TaskList class.
      */
     @Test
     void replaceTest() {
@@ -71,10 +71,10 @@ class TaskListTest {
     }
 
     /**
-     * Test ToString method of TaskList class
+     * Test ToString method of TaskList class.
      */
     @Test
-    void ToStringTest() {
+    void toStringTest() {
         taskList = new TaskList();
         taskList.add(new Todo("read book"));
         String expected = "\t____________________________________________________________" +

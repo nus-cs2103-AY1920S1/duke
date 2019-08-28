@@ -9,31 +9,32 @@ import duke.task.Task;
 import java.io.IOException;
 
 /**
- * Command Class for adding tasks
+ * Command Class for adding tasks.
  */
 public class AddCommand extends Command {
 
     private Task newTask;
 
     /**
-     * Constructor for AddCommand Object
-     * @param task task to be added
+     * Constructor for AddCommand Object.
+     * @param task task to be added.
      */
     public AddCommand(Task task) {
         this.newTask = task;
     }
 
     /**
-     * Executes the operation of adding task into the task list
-     * @param taskList the list of tasks to be added to
-     * @param storage the storage to store inside hard disk
-     * @param ui the ui for user interaction
-     * @return boolean indication of successful or unsuccessful running of command
-     * @throws DukeException
-     * @throws IOException
+     * Executes the operation of adding task into the task list.
+     * @param taskList the list of tasks to be added to.
+     * @param storage the storage to store inside hard disk.
+     * @param ui the ui for user interaction.
+     * @return boolean indication of successful or unsuccessful running of command.
+     * @throws IOException when error occurs while writing to hard disk.
      */
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+            throws IOException {
+
         taskList.add(newTask);
 
         ui.printAddedAcknowledgement(newTask, taskList.getSize());

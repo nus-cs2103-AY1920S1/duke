@@ -7,9 +7,9 @@ public class Event extends Task {
     private LocalDateTime time;
 
     /**
-     * Constructor for Event Object with default done status
-     * @param description the description of the event
-     * @param time the time of the event
+     * Constructor for Event Object with default done status.
+     * @param description the description of the event.
+     * @param time the time of the event.
      */
     public Event(String description, LocalDateTime time) {
         super(description, false);
@@ -17,10 +17,10 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for Event Object with certain done status
-     * @param description the description of the event
-     * @param time  the time of the event
-     * @param done the status of the event
+     * Constructor for Event Object with certain done status.
+     * @param description the description of the event.
+     * @param time  the time of the event.
+     * @param done the status of the event.
      */
     public Event(String description, LocalDateTime time, boolean done) {
         super(description, done);
@@ -29,8 +29,8 @@ public class Event extends Task {
 
 
     /**
-     * Changes the status of the event to 'completed'
-     * @return a new event object with 'completed' status
+     * Changes the status of the event to 'completed'.
+     * @return a new event object with 'completed' status.
      */
     @Override
     public Event changeToCompletedStatus() {
@@ -38,15 +38,15 @@ public class Event extends Task {
     }
 
     /**
-     * Returns formatted and user readable form of the task
-     * @return formatted and user readable form of the task in String
+     * Returns formatted and user readable form of the task.
+     * @return formatted and user readable form of the task in String.
      */
     @Override
     public String toString() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
-        if(done) {
+        if (done) {
             s = s + "[E][✓]";
         } else {
             s = s + "[E][✗]";
@@ -57,20 +57,21 @@ public class Event extends Task {
 
 
     /**
-     * Returns formatted form of the task to be stored in inside a text file
-     * @return formatted form of the task to be stored in inside a text file
+     * Returns formatted form of the task to be stored in inside a text file.
+     * @return formatted form of the task to be stored in inside a text file.
      */
     public String toIndicationInsideFile() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String s = "E | ";
 
-        if(done) {
+        if (done) {
             s = s + "1 | ";
         } else {
             s = s + "0 | ";
         }
 
-        return s + description + " | " + time.format(formatter) + " " + (time.getHour() * 100 + time.getMinute());
+        return s + description + " | " + time.format(formatter)
+                + " " + (time.getHour() * 100 + time.getMinute());
     }
 }

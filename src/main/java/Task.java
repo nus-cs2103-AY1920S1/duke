@@ -4,15 +4,17 @@ public class Task {
     String type;
 
 
-    public Task(String taskInput) {
+    public Task(String taskInput, boolean complete) {
         name = taskInput;
-        completed = false;
+        completed = complete;
         type = null;
     }
 
     public String getName() {
         return name;
     }
+    public String getType() { return type;}
+    public boolean getDoneStatus() { return completed;}
 
     //return the String of having completed the current task
     //Change the completed variable

@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Contains information on a user input
@@ -11,10 +10,10 @@ import java.util.List;
 
 public class Command {
     protected String command; // list, done, bye, todo, deadline, event
-    protected boolean isStillInProgram; // Whether command terminates program or not
+    protected boolean isFinished; // Whether command terminates program or not
     public Command(String commandWord) {
         this.command = commandWord;
-        this.isStillInProgram = true;
+        this.isFinished = false;
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
@@ -26,12 +25,12 @@ public class Command {
      * @return Whether program should still continue after command executed
      */
     public boolean toContinueProgram() {
-        return isStillInProgram;
+        return !isFinished;
     }
 
     public void print() {
         System.out.println("Command: " + command);
-        System.out.println("Program continues after execution: " + isStillInProgram);
+        System.out.println("Program continues after execution: " + isFinished);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class Command {
         if (!(o instanceof Command)) { return false; }
         Command c = (Command) o;
         return c.command == command &&
-                c.isStillInProgram == isStillInProgram;
+                c.isFinished == isFinished;
     }
 
 }
@@ -198,7 +197,7 @@ class DoneCommand extends Command {
 class ExitCommand extends Command {
     public ExitCommand() {
         super("bye");
-        this.isStillInProgram = false;
+        this.isFinished = true;
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {

@@ -1,6 +1,7 @@
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import java.text.ParseException;
 
 /**
  * Represents a task (something that needs to be done)

@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    private Scanner s;
+    private Scanner scanner;
     public Ui() {
-        s = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     ///////////////
@@ -29,7 +29,7 @@ public class Ui {
      * @return User input as string
      */
     public String readUserInput() {
-        return s.nextLine();
+        return scanner.nextLine();
     }
 
     //////////////////////

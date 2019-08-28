@@ -15,6 +15,9 @@ public class TaskList {
         listOfTask = new ArrayList<>();
     }
 
+    /**
+     * Displays all the task that is currently in the TaskList.
+     */
     public void listTask() {
         if (listOfTask.size() == 0) {
             System.out.println("List is Empty");
@@ -45,6 +48,13 @@ public class TaskList {
         listOfTask.remove(index);
     }
 
+    /**
+     * Displays all task that corresponds to the user's input keyword.
+     * looks through the current Tasklist to identity all task that corresponds to
+     * the keyword and displays them.
+     * @param taskKeyWord user input keyword that they want
+     * @throws DukeException throws custom exception if input invalid
+     */
     public void findTask(String taskKeyWord) throws DukeException {
         if (listOfTask.size() == 0) {
             System.out.println("List is Empty");

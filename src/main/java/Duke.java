@@ -27,7 +27,7 @@ public class Duke {
     /**
      * Runs the entire program. Kick starts the entire computer duke Program
      *
-     * @throws IOException
+     * @throws IOException throws exception if user input invalid
      */
     public void run() throws IOException {
         ui.initiate();

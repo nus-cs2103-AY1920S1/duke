@@ -10,17 +10,25 @@ public class Task {
     protected boolean isDone;
     public static int total = 0;
 
+    /**
+     * Constructor for Task object. Takes in task description
+     * @param description user input task name, details
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
         total++;
     }
 
+    /**
+     * Gets the status of a task, whether it is done or not.
+     * @return String tick symbol
+     */
     public String getStatusIcon() {
-        if(isDone) {
-            return "\u2713";
+        if (isDone) {
+            return "o";
         } else {
-            return "\u2718";
+            return "x";
         }
     }
 

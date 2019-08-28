@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * a Deadline Task object is represented by a String description and
  * a LocalDateTime which tells when the deadline task is due.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime by;
     protected DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 

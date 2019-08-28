@@ -9,6 +9,9 @@ import java.io.IOException;
 
 public class Ui {
 
+    /**
+     * Runs the start of the Ui, by introducing Duke.
+     */
     public void initiate() {
         System.out.println("___________________________________");
         System.out.println("Hello! I'm Duke\nWhat can i do for you?");
@@ -25,9 +28,10 @@ public class Ui {
      * @param inputCommand a String command (Deadline, Event, List etc) that helps the program process the instruction
      * @param storage a storage object that will be used during the program
      * @param currentTaskList a taskList object that will be used to store the different task objects
-     * @throws IOException
+     * @throws IOException throws exception if user input is invalid
      */
-    public void executeInstructions(String inputInstruction, String inputCommand, Storage storage, TaskList currentTaskList) throws IOException {
+    public void executeInstructions(String inputInstruction, String inputCommand,
+                                    Storage storage, TaskList currentTaskList) throws IOException {
         if (inputCommand.equals("list")) {
             System.out.println("__________________________________");
             System.out.println("Here are the tasks in your list:");
@@ -62,7 +66,8 @@ public class Ui {
             }
         } else if (inputCommand.equals("deadline")) {
             try {
-                if (!inputInstruction.contains("/by") || inputInstruction.length() == 8 || inputInstruction.length() == 9) {
+                if (!inputInstruction.contains("/by") || inputInstruction.length() == 8
+                        || inputInstruction.length() == 9) {
                     throw new DukeException("deadline");
                 }
                 String subInput1 = inputInstruction.substring(9, inputInstruction.lastIndexOf("/by") - 1);
@@ -81,7 +86,8 @@ public class Ui {
             }
         } else if (inputCommand.equals("event")) {
             try {
-                if (!inputInstruction.contains("/at") || inputInstruction.length() == 5 || inputInstruction.length() == 6) {
+                if (!inputInstruction.contains("/at") || inputInstruction.length() == 5
+                        || inputInstruction.length() == 6) {
                     throw new DukeException("event");
                 }
                 String subInput1 = inputInstruction.substring(6, inputInstruction.lastIndexOf("/at"));
@@ -109,8 +115,7 @@ public class Ui {
                 }
                 Task currentTask = currentTaskList.getTask(taskNum - 1);
                 currentTaskList.removeTask(taskNum - 1);
-                System.out.println("___________________________________");
-                System.out.println("Noted. I've removed this task:");
+                System.out.println("___________________________________\n" + "Noted. I've removed this task:");
                 System.out.println(currentTask);
                 Task.total--;
                 System.out.println("Now you have " + Task.total + " tasks in the list.");

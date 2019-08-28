@@ -18,14 +18,25 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes a user input String into a text file.
+     * @param inputString Should be the string format of the input task by users
+     * @throws IOException returns exception if invalid input is entered
+     */
     public void writeToFile(String inputString) throws IOException {
         FileWriter fw = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt", true);
         fw.write(inputString);
         fw.close();
     }
 
+    /**
+     * Updates the existing text file with all the Task which are currently in the list.
+     * @param inputTaskList takes in an arraylist (taskList) and updates the text file with all the new task
+     * @throws IOException throws exception when user input is invalid
+     */
     public void updateTaskToFile(ArrayList<Task> inputTaskList) throws IOException {
-        FileWriter fileWriter = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main\\java\\duke.txt", false);
+        FileWriter fileWriter = new FileWriter("D:\\NUS Computer Science\\CS2103T\\duke\\src\\main"
+                + "\\java\\duke.txt", false);
         for (int i = 0; i < inputTaskList.size(); i++) {
             fileWriter.write(inputTaskList.get(i) + System.getProperty("line.separator"));
         }

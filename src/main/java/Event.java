@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
  * a LocalDateTime which tells when the Event task is at.
  */
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime at;
     protected DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
-    public Event(String description, String at){
+    public Event(String description, String at) {
         super(description);
         this.at = LocalDateTime.parse(at, format1);
     }

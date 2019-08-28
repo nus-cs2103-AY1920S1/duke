@@ -4,7 +4,7 @@
  * custom exceptions that might be needed in the program.
  */
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     protected String exceptionType;
 
@@ -12,6 +12,7 @@ public class DukeException extends Exception{
         this.exceptionType = exceptionType;
     }
 
+    @Override
     public String toString() {
         if (exceptionType.equals("done")) {
             return ":( OOPS!!! The index of a done cannot be empty.";

@@ -29,6 +29,8 @@ public class Parser {
             return new AddEventCommand(msg);
         } else if (msg[0].equals("delete")) {
             return new DeleteCommand(msg);
+        } else if (msg[0].equals("find")) {
+            return new FindCommand(msg);
         } else {
             return new InvalidCommand();
         }

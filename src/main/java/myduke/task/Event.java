@@ -6,6 +6,9 @@ import myduke.exception.DukeException;
 import myduke.exception.DukeEmptyDescriptionException;
 import myduke.task.parameters.DukeDateTime;
 
+/**
+ * A Task representing an Event.
+ */
 public class Event extends Task {
     protected final DukeDateTime at;
 

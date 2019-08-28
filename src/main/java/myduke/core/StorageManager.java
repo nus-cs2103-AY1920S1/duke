@@ -16,7 +16,9 @@ import myduke.task.Task;
 import myduke.task.ToDo;
 import myduke.type.LoggerMessageType;
 
-
+/**
+ * Manages the Storage of Data Base Files.
+ */
 public class StorageManager {
     private static final String CsvDelimiter = "\\s\\|\\s";
 

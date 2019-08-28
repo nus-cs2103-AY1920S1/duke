@@ -6,6 +6,9 @@ import myduke.exception.DukeException;
 import myduke.exception.DukeEmptyDescriptionException;
 import myduke.task.parameters.DukeDateTime;
 
+/**
+ * A Task representing a Deadline.
+ */
 public class Deadline extends Task {
     protected final DukeDateTime byDate;
 

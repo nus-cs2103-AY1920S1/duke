@@ -6,6 +6,9 @@ import myduke.exception.DukeException;
 import myduke.task.Task;
 import myduke.task.TaskList;
 
+/**
+ * Deletes a task from a list of tasks.
+ */
 public class DeleteCommand extends ModifyListCommand {
     public DeleteCommand(int itemIndex) throws DukeException {
         super(itemIndex);

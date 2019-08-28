@@ -4,6 +4,9 @@ import myduke.exception.DukeException;
 import myduke.exception.DukeInvalidCommandException;
 import myduke.type.TaskType;
 
+/**
+ * Parses a query into its respective command.
+ */
 public class CommandParser {
 
     /**

@@ -3,6 +3,9 @@ package myduke.command;
 import myduke.exception.DukeException;
 import myduke.exception.DukeInvalidCommandException;
 
+/**
+ * An abstract class for commands that can modify a given list of tasks.
+ */
 public abstract class ModifyListCommand extends Command {
     protected final int itemIndex;
 

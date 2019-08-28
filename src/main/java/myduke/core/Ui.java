@@ -6,6 +6,9 @@ import java.util.Scanner;
 import myduke.task.Task;
 import myduke.type.LoggerMessageType;
 
+/**
+ * Handles all user interactions.
+ */
 public class Ui {
     //Constants
     private static final String MESSAGE_PADDING  = "     ";

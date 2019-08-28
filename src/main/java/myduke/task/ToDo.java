@@ -5,6 +5,9 @@ import java.util.Scanner;
 import myduke.exception.DukeException;
 import myduke.exception.DukeEmptyDescriptionException;
 
+/**
+ * A Task representing a ToDo Task.
+ */
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);

@@ -1,5 +1,8 @@
 package myduke.task;
 
+/**
+ * An abstract class to represent a Task.
+ */
 public abstract class Task {
     protected final String description;
     protected boolean isDone;

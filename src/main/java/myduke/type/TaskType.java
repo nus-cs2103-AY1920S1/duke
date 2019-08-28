@@ -1,7 +1,7 @@
 package myduke.type;
 
 /**
- * Available types of task.
+ * Types of tasks.
  */
 public enum TaskType {
     /** A todo task. */

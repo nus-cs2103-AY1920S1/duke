@@ -5,6 +5,9 @@ import myduke.core.Ui;
 import myduke.exception.DukeException;
 import myduke.task.TaskList;
 
+/**
+ * An Abstract class of commands that can be performed on a list of task.
+ */
 public abstract class Command {
 
     /**

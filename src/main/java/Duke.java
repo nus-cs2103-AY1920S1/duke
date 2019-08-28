@@ -4,6 +4,9 @@ import myduke.core.Ui;
 import myduke.core.StorageManager;
 import myduke.task.TaskList;
 
+/**
+ * Main class of Duke.
+ */
 public class Duke {
 
     //Constants

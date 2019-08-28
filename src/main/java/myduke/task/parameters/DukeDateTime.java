@@ -4,10 +4,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A Wrapper class to represent a DateTime.
+ */
 public class DukeDateTime {
+    //Accepted Date Time format
     private static final String DATETIME_FORMAT = "dd/M/yy HHmm";
     private static final String PRINT_DATETIME_FORMAT = "dd MMM yyyy hh:mm a";
 
+    //Class variable
     private String dateTimeString;
     private Date localDateTime;
     private SimpleDateFormat localDateFormatter;

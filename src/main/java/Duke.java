@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,7 +40,7 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    public void evaluate(String instruction) {
+    public void evaluate(String instruction) throws VoidDukeCommand, IncorrectDukeCommand, IOException {
         System.out.println(HORIZONTAL_LINE);
 
         Scanner userInput = new Scanner(instruction);
@@ -57,7 +58,7 @@ public class Duke {
 
             if (userInput.hasNext()) {
                 errorMessage = makeSpace(5) + "The command \"list\" should not have anything after!\n"
-                            + makeSpace(5) + "Please remove any trailing white spaces/additional words!";
+                        + makeSpace(5) + "Please remove any additional words!";
             } else {
                 listAllTasks();
             }
@@ -130,8 +131,11 @@ public class Duke {
                             makeNewDeadline(taskDescription, dateTime[0], "");
                         } else if (dateTime.length == 2) {
                             makeNewDeadline(taskDescription, dateTime[0], dateTime[1]);
+                        } else if (dateTime.length == 3) {
+                            makeNewEvent(taskDescription, dateTime[0] + " " + dateTime[1], dateTime[2]);
                         } else {
-                            return;
+                            errorMessage = makeSpace(5) + "Sorry but there seems to be too much information in the\n"
+                                    + makeSpace(5) + "Date & Time field of your deadline...\uD83D\uDE25";
                         }
                     }
                 } else {
@@ -162,8 +166,11 @@ public class Duke {
                             makeNewEvent(taskDescription, dateTime[0], "");
                         } else if (dateTime.length == 2) {
                             makeNewEvent(taskDescription, dateTime[0], dateTime[1]);
+                        } else if (dateTime.length == 3) {
+                            makeNewEvent(taskDescription, dateTime[0] + " " + dateTime[1], dateTime[2]);
                         } else {
-                            return;
+                            errorMessage = makeSpace(5) + "Sorry but there seems to be too much information in the\n"
+                                    + makeSpace(5) + "Date & Time field of your event...\uD83D\uDE25";
                         }
                     }
                 } else {
@@ -208,27 +215,36 @@ public class Duke {
         }
     }
 
-    private void makeNewTodo(String description) {
+    private void makeNewTodo(String description) throws IOException {
+        IOHandler ioHandler = new IOHandler();
         ToDo currentTodo = new ToDo(description);
+
         tasks.add(currentTodo);
+        ioHandler.addToLocalSave(currentTodo);
 
         System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
         System.out.printf("%s%s\n\n", makeSpace(7), currentTodo);
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void makeNewDeadline(String desc, String date, String time) {
+    private void makeNewDeadline(String desc, String date, String time) throws IOException {
+        IOHandler ioHandler = new IOHandler();
         Deadline currentDeadline = new Deadline(desc, date, time);
+
         tasks.add(currentDeadline);
+        ioHandler.addToLocalSave(currentDeadline);
 
         System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
         System.out.printf("%s%s\n\n", makeSpace(7), currentDeadline);
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void makeNewEvent(String desc, String date, String time) {
+    private void makeNewEvent(String desc, String date, String time) throws IOException {
+        IOHandler ioHandler = new IOHandler();
         Event currentEvent = new Event(desc, date, time);
+
         tasks.add(currentEvent);
+        ioHandler.addToLocalSave(currentEvent);
 
         System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
         System.out.printf("%s%s\n\n", makeSpace(7), currentEvent);

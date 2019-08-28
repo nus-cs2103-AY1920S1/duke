@@ -1,3 +1,9 @@
+package duke;
+
+
+import duke.exception.DukeException;
+import duke.exception.EmptyTodoTextException;
+import duke.exception.TaskDoesNotExistException;
 import duke.task.Task;
 
 import java.util.ArrayList;

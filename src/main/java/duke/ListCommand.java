@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 public class ListCommand extends Command {
     public ListCommand(String taskInformation) {
         super(taskInformation);

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.UI;
+import duke.exception.InvalidCommandException;
+
 public class InvalidCommand extends Command {
 
     public InvalidCommand() { }

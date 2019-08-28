@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.UI;
+import duke.exception.TaskDoesNotExistException;
+
 public class MarkAsDoneCommand extends Command {
     public MarkAsDoneCommand(String taskInformation) {
         super(taskInformation);

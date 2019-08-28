@@ -60,7 +60,7 @@ public class Storage {
             String[] dd = desc.split("at:");
             String deadline = dd[1].substring(0, dd[1].length() - 1);
             String description = dd[0].substring(0, dd[0].length() - 1);
-            newTask = new Deadline(description, deadline);
+            newTask = new Event(description, deadline);
         }
 
         if (isDone) {

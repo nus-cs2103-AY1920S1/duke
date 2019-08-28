@@ -26,7 +26,6 @@ public class Duke {
         ui.showList(taskList);
 
         // STOPPED HERE
-        Scanner input = new Scanner(System.in);
         String command = ui.readCommand();
 
         while (!command.equals("bye")) {
@@ -34,7 +33,7 @@ public class Duke {
             if (command.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 taskList.printAllTasks();
-                command = input.nextLine().trim();
+                command = ui.readCommand();
 
             } else if (command.contains("done")) {
                 String[] sentence = command.split(" ");
@@ -66,7 +65,7 @@ public class Duke {
                     ui.showErrorMessage(e);
                 }
 
-                command = input.nextLine().trim();
+                command = ui.readCommand();
 
             } else if (command.contains("delete")) {
                 String[] sentence = command.split(" ");
@@ -99,7 +98,8 @@ public class Duke {
                     ui.showErrorMessage(e);
                 }
 
-                command = input.nextLine().trim();
+                command = ui.readCommand();
+
 
             } else {
                 // Generate new task
@@ -121,7 +121,7 @@ public class Duke {
                 } catch (DukeException err) {
                     ui.showErrorMessage(err);
                 }
-                command = input.nextLine().trim();
+                command = ui.readCommand();
             }
         }
         // When command is bye

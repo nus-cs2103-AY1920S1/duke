@@ -44,7 +44,6 @@ public class DataStorage {
     }
 
     private Task parseString(String s) throws DukeException {
-        System.out.println("debug :" + s);
         String type = s.substring(1, 2);
         String status = s.substring(4, 5);
         String[] spl = s.split(" ", 2);
@@ -60,7 +59,7 @@ public class DataStorage {
             temp = new Event(nameAndDesc[0], description);
             break;
         case "D":
-            String[] nameAndDescr = spl[1].split(" \\(at: ");
+            String[] nameAndDescr = spl[1].split(" \\(by: ");
             String desc = nameAndDescr[1].substring(0, nameAndDescr[1].length() - 1);
             temp = new Deadline(nameAndDescr[0], desc);
             break;

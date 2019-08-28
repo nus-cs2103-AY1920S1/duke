@@ -1,12 +1,15 @@
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.stream.IntStream;
-import java.io.File;
+import java.text.ParseException;
 
 public class Duke {
 
@@ -134,6 +137,9 @@ public class Duke {
                 System.err.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.err.println("Input must be an integer.");
+            } catch (ParseException e) {
+                System.err.println("ParseException: " + e.getMessage());
+                System.err.println("Please use the format: dd/MM/yyyy hhmm");
             } catch (Exception e) {
                 System.err.println("Something is wrong");
             } finally {

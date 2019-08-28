@@ -1,0 +1,4 @@
+T | 1 | study
+D | 1 | homework | monday
+E | 1 | event | 13/09/2045 0000
+T | 0 | wash dishes

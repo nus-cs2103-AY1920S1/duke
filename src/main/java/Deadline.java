@@ -1,10 +1,17 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
 
     protected String by;
+    protected Date date;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws ParseException {
         super(description);
         this.by = by;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
+        this.date = formatter.parse(by);
     }
 
     public Deadline(String description, boolean isDone, String by) {
@@ -28,5 +35,13 @@ public class Deadline extends Task {
 
     public void setBy(String by) {
         this.by = by;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -1,2 +1,2 @@
-E | 1 | meeting | 12/12/2020 1500
-E | 1 | party blah blah blah | 13/12/3012 1400
+E | 1 | meeting | 12/12/2012 1800
+D | 1 | return book | 20/11/2019 1600

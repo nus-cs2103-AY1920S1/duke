@@ -14,16 +14,16 @@ public class Task {
         this.done = done;
     }
 
+    public boolean isCompleted() {
+        return done;
+    }
+
     public Task changeToCompletedStatus() {
         return new Task(this.name, true);
     }
 
-    public String getName() {
+    public String getDescription() {
         return name;
-    }
-
-    public void setDone() {
-        this.done = true;
     }
 
     public String toIndicationInsideFile() {
@@ -32,7 +32,7 @@ public class Task {
         if(done) {
             s = s + "1 | ";
         } else {
-            s = s + "1 | ";
+            s = s + "0 | ";
         }
 
         return s + name;

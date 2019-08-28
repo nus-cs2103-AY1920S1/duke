@@ -3,10 +3,14 @@ package duke.component;
 import duke.component.DukeException;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
     private List<Task> taskList;
+
+    public TaskList() { this.taskList = new ArrayList<>(); }
+
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }

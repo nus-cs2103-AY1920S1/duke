@@ -1,12 +1,12 @@
-package main.java;
+package duke;
 
-import main.java.command.Command;
-import main.java.command.ExitCommand;
-import main.java.command.IndexCommand;
-import main.java.command.CompleteCommand;
-import main.java.command.AddCommand;
-import main.java.command.DeleteCommand;
-import main.java.exception.DukeException;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.IndexCommand;
+import duke.command.CompleteCommand;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.exception.DukeException;
 
 public class Parser {
 

@@ -1,9 +1,9 @@
-package main.java.command;
+package duke.command;
 
-import main.java.TaskList;
-import main.java.Ui;
-import main.java.Storage;
-import main.java.exception.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.exception.DukeException;
 
 public abstract class Command {
     protected boolean isExit = false;

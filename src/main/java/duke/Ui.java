@@ -1,8 +1,8 @@
-package main.java;
+package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import main.java.task.Task;
+import duke.task.Task;
 
 public class Ui {
     private Scanner scanner;

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Implements an event task.
- * @author lyskevin
+ * @author Lim Yong Shen, Kevin
  */
 public class Event extends Task {
 
@@ -42,6 +42,15 @@ public class Event extends Task {
         } catch (ParseException e) {
             throw e;
         }
+    }
+
+    /**
+     * Returns this event task's command String (the command used to create this event task).
+     * @return This event task's command String.
+     */
+    @Override
+    public String getCommandString() {
+        return String.format("event %s /at %s", description, dateFormat.format(dateAndTime));
     }
 
     /**

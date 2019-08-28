@@ -2,7 +2,7 @@ package duke.data.tasks;
 
 /**
  * Implements a task.
- * @author lyskevin
+ * @author Lim Yong Shen, Kevin
  */
 public abstract class Task {
 
@@ -35,6 +35,12 @@ public abstract class Task {
     public boolean isDone() {
         return isDone;
     }
+
+    /**
+     * Returns this task's command String (the command used to create this task).
+     * @return This task's command String.
+     */
+    public abstract String getCommandString();
 
     /**
      * Returns this task's description.

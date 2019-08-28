@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Implements a deadline task.
- * @author lyskevin
+ * @author Lim Yong Shen, Kevin
  */
 public class Deadline extends Task {
 
@@ -42,6 +42,15 @@ public class Deadline extends Task {
         } catch (ParseException e) {
             throw e;
         }
+    }
+
+    /**
+     * Returns this deadline task's command String (the command used to create this deadline task).
+     * @return This deadline task's command String.
+     */
+    @Override
+    public String getCommandString() {
+        return String.format("deadline %s /by %s", description, dateFormat.format(dateAndTime));
     }
 
     /**

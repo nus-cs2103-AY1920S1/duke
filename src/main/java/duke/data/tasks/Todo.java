@@ -2,7 +2,7 @@ package duke.data.tasks;
 
 /**
  * Implements a todo task.
- * @author lyskevin
+ * @author Lim Yong Shen, Kevin
  */
 public class Todo extends Task {
 
@@ -21,6 +21,15 @@ public class Todo extends Task {
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
+    }
+
+    /**
+     * Returns this todo task's command String (the command used to create this todo task).
+     * @return This todo task's command String.
+     */
+    @Override
+    public String getCommandString() {
+        return String.format("todo %s", description);
     }
 
     /**

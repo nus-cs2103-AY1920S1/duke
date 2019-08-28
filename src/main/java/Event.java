@@ -2,12 +2,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is a form of task
+ */
 public class Event extends Task {
 
     protected LocalDate myDate;
     protected LocalTime myTime;
     protected DateTimeFormatter myFormatDate;
 
+    /**
+     * A task which has a starting date (at when)
+     * @param description the information of the given task
+     * @param date the starting date of the task
+     */
     public Event(String description, String date) {
         super(description);
         this.date = date;

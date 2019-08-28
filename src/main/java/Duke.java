@@ -297,20 +297,13 @@ public class Duke {
     }
 
     /**
-     * To start the Database of Duke Program.
-     */
-    public static void startDatabase() {
-        Database.initialise();
-        task = Database.getSavedTask();
-        itemNo = task.size();
-        startDuke();
-    }
-
-    /**
      * Main function to start Duke Database.
      * @param args Arguments enter by user.
      */
     public static void main(String[] args) {
-        startDatabase();
+        Database.initialise();
+        task = Database.getSavedTask();
+        itemNo = task.size();
+        startDuke();
     }
 }

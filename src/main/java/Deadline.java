@@ -14,9 +14,12 @@ public class Deadline extends Task {
         this.date = formatter.parse(by);
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    // Constructor for reading file
+    public Deadline(String description, boolean isDone, String by) throws ParseException {
         super(description, isDone);
         this.by = by;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
+        this.date = formatter.parse(by);
     }
 
     @Override

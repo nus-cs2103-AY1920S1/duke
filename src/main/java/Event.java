@@ -14,9 +14,12 @@ public class Event extends Task {
         this.date = formatter.parse(at);
     }
 
-    public Event(String description, boolean isDone, String at) {
+    // Constructor for reading file
+    public Event(String description, boolean isDone, String at) throws ParseException {
         super(description, isDone);
         this.at = at;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
+        this.date = formatter.parse(at);
     }
 
     @Override

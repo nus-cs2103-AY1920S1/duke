@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -42,6 +43,8 @@ public class Parser {
             return new DeadlineCommand(command.substring(9));
         } else if (command.equals("list")) {
             return new ListCommand();
+        } else if (command.startsWith("find")) {
+            return new FindCommand(command.substring(5));
         } else { // input is "bye"
             return new ByeCommand();
         }
@@ -57,7 +60,8 @@ public class Parser {
      * 5. "deadline [description] /by [time]"
      * 6. "event [description] /at [time]"
      * 7. "delete [taskIndex]"
-     * 8. "bye"
+     * 8. "find [description]"
+     * 9. "bye"
      *
      * @param input             Text input to be validated
      * @throws DukeException    An exception with a message describing Duke's
@@ -87,6 +91,10 @@ public class Parser {
                 throw new DukeException("I didn't catch what you need to do.");
             } else if (!input.contains(" /by ")) {
                 throw new DukeException("what's the deadline for this?");
+            }
+        } else if (input.startsWith("find")) {
+            if (input.length() < 6) {
+                throw new DukeException("I need something to find!");
             }
         } else if (!input.equals("list") && !input.equals("bye")) {
             throw new DukeException("I don't know what that means... :(");

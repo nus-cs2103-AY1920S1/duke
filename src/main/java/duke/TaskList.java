@@ -18,27 +18,27 @@ public class TaskList {
             int done = Integer.parseInt(arr[1].trim());
             String desc = arr[2];
             switch (task) {
-                case "D":
-                    Deadline deadline = Deadline.of(desc, arr[3]);
-                    if (done == 1) {
-                        deadline.markAsDone();
-                    }
-                    lst.addLast(deadline);
-                    break;
-                case "T":
-                    Todo todo = Todo.of(desc);
-                    if (done == 1) {
-                        todo.markAsDone();
-                    }
-                    lst.addLast(todo);
-                    break;
-                case "E":
-                    Event event = Event.of(desc, arr[3]);
-                    if (done == 1) {
-                        event.markAsDone();
-                    }
-                    lst.addLast(event);
-                    break;
+            case "D":
+                Deadline deadline = Deadline.of(desc, arr[3]);
+                if (done == 1) {
+                    deadline.markAsDone();
+                }
+                lst.addLast(deadline);
+                break;
+            case "T":
+                Todo todo = Todo.of(desc);
+                if (done == 1) {
+                    todo.markAsDone();
+                }
+                lst.addLast(todo);
+                break;
+            case "E":
+                Event event = Event.of(desc, arr[3]);
+                if (done == 1) {
+                    event.markAsDone();
+                }
+                lst.addLast(event);
+                break;
             }
         }
     }

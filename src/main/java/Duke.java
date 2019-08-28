@@ -1,44 +1,7 @@
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.PrintWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
-
-enum Command {
-    BYE     ("bye"),
-    DONE    ("done"),
-    LIST    ("list"),
-    TODO    ("todo"),
-    EVENT   ("event"),
-    DEADLINE("deadline"),
-    DELETE  ("delete");
-
-    private String commandText;
-
-    Command (String commandText) {
-        this.commandText = commandText;
-    }
-
-    public String toString() {
-        return commandText;
-    }
-
-    public static Command getFromString(String commandText) throws InvalidCommandException {
-        Command[] allCommands = Command.values();
-
-        for (Command cmd : allCommands) {
-            if (commandText.equals(cmd.toString())) {
-                return cmd;
-            }
-        }
-
-        throw new InvalidCommandException(Duke.OOPS_STR + Duke.INVALID_COMMAND_STR);
-    }
-}
 
 public class Duke {
 
@@ -54,20 +17,18 @@ public class Duke {
     public static final String INVALID_COMMAND_STR = "I'm sorry, but I don't know what that means :-(";
     public static final String EMPTY_DESCRIPTION_STR_1 = "The description of a ";
     public static final String EMPTY_DESCRIPTION_STR_2 = " cannot be empty.";
-    public static final String USER_NAME = System.getProperty("user.name");
 
     // Delimiters
     public static final String BY_DELIM = "/by";
     public static final String AT_DELIM = "/at";
 
     private static ArrayList<Task> taskList;
-    private static String filePath = "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat"; 
 
     public static void main(String[] args) {
 
         printGreeting();
 
-        taskList = readDataFile(filePath);
+        taskList = Storage.readDataFile();
 
         Scanner input = new Scanner(System.in);
         String line = input.nextLine();
@@ -89,7 +50,7 @@ public class Duke {
         }
 
         input.close();
-        writeDataFile(taskList, filePath);
+        Storage.writeDataFile(taskList);
         printGoodbye();
     }
 
@@ -250,72 +211,6 @@ public class Duke {
             + LONG_LINE
             + "\n"
         );
-    }
-
-    public static ArrayList<Task> readDataFile(String filePath) {
-
-        Scanner inStream;
-        ArrayList<Task> taskList = new ArrayList<Task>(MAX_TASKS);
-
-        try {
-            inStream = new Scanner(new FileInputStream(filePath));
-
-            while (inStream.hasNextLine()) {
-                String line = inStream.nextLine();
-
-                switch (line.charAt(0)) {
-                case 'T':
-                    taskList.add(new Todo(line.substring(2, line.length())));
-                    break;
-                case 'E':
-                    String eLine = line.substring(2, line.length());
-                    taskList.add(new Event(eLine.split("/")[0], parseDate(eLine.split("/")[1])));
-                    break;
-                case 'D':
-                    String dLine = line.substring(2, line.length());
-                    taskList.add(new Deadline(dLine.split("/")[0], parseDate(dLine.split("/")[1])));
-                    break;
-                default:
-                    break;
-                }
-
-                if (line.charAt(1) == '1') {
-                    taskList.get(taskList.size() - 1).markAsDone();
-                }
-            }
-
-            inStream.close();
-            return taskList;
-        }
-        catch (FileNotFoundException e) {
-            System.out.println("Data file not found, starting with empty task list");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<Task>(MAX_TASKS);
-    }
-
-    public static void writeDataFile(ArrayList<Task> taskList, String filePath) {
-        
-        PrintWriter outStream;
-
-        try {
-            outStream = new PrintWriter(new FileOutputStream(filePath));
-
-            for (Task t : taskList) {
-                outStream.println(t.save());
-            }
-
-            outStream.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static Date parseDate(String dateStr) throws ParseException {

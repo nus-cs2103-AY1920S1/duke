@@ -1,9 +1,10 @@
 public class Helper {
 
-    private static int NUMBER_OF_COMMANDS = 8;
+    private static int NUMBER_OF_COMMANDS = 9;
+    String[] arr;
 
-    public static void printAllowableInputFormats() {
-        String[] arr = new String[NUMBER_OF_COMMANDS+1];
+    public Helper() {
+        arr = new String[NUMBER_OF_COMMANDS+1];
         arr[0] = "Here are the list of commands and their allowable input formats";
         arr[1] = "bye";
         arr[2] = "list";
@@ -13,6 +14,12 @@ public class Helper {
         arr[6] = "event <task name> / dd/MM/yyyy HHmm";
         arr[7] = "deadline <task name> / dd/MM/yyyy HHmm";
         arr[8] = "help";
-        Duke.dukeEcho(arr);
+        arr[9] = "clear";
     }
+
+    String[] getCommands() {
+        return arr;
+    }
+
+
 }

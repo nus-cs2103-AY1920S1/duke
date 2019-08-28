@@ -11,6 +11,11 @@ public class Task {
         this.isComplete = false;
     }
 
+    Task(String name, boolean isComplete) {
+        this.name = name;
+        this.isComplete = isComplete;
+    }
+
     @Override
     public String toString() {
         String status = this.isComplete ? "✓" : "✗";

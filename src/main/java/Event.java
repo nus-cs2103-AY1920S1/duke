@@ -4,10 +4,14 @@
 public class Event extends Task {
     private DateTime dateTime;
 
-    Event(String name, String dateTime) throws DukeException {
+    Event(String name, DateTime dateTime){
         super(name);
-        //String[] arr = dateTime.trim().split(" ", 2);
-        this.dateTime = new DateTime(dateTime.trim());
+        this.dateTime = dateTime;
+    }
+
+    Event(String name, boolean isComplete, DateTime dateTime) {
+        super(name, isComplete);
+        this.dateTime = dateTime;
     }
 
     @Override

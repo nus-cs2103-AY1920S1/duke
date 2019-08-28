@@ -4,10 +4,14 @@
 public class Deadline extends Task {
     private DateTime dateTime;
 
-    Deadline(String name, String dateTime) throws DukeException {
+    Deadline(String name, DateTime dateTime) {
         super(name);
-        //String[] arr = dateTime.trim().split(" ", 2);
-        this.dateTime = new DateTime(dateTime.trim());
+        this.dateTime = dateTime;
+    }
+
+    Deadline(String name, boolean isComplete, DateTime dateTime) {
+        super(name, isComplete);
+        this.dateTime = dateTime;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package com.tysng.duke.domain;
+
 public class Todo extends Task {
     public Todo(String taskName) {
         super(taskName);

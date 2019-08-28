@@ -1,7 +1,15 @@
+package com.tysng.duke.storage;
+
+import com.tysng.duke.domain.Deadline;
+import com.tysng.duke.domain.Event;
+import com.tysng.duke.domain.Task;
+import com.tysng.duke.domain.Todo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,6 +18,7 @@ import java.util.stream.Stream;
 public class Storage {
     private final static String FILENAME = "duke.txt";
     private static Path DATA_FOLDER = Path.of(".", "data");
+    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy"); // TODO
 
     private Path storageFilePath;
 
@@ -57,18 +66,18 @@ public class Storage {
         if (input instanceof Todo) {
             return String.format("%s | %d | %s",
                     "T",
-                    input.isCompleted ? 1 : 0,
+                    input.isCompleted() ? 1 : 0,
                     input.getTaskName());
         } else if (input instanceof Deadline) {
             return String.format("%s | %d | %s | %s",
                     "D",
-                    input.isCompleted ? 1 : 0,
+                    input.isCompleted() ? 1 : 0,
                     input.getTaskName(),
                     ((Deadline) input).getBy());
         } else if (input instanceof Event) {
             return String.format("%s | %d | %s | %s",
                     "E",
-                    input.isCompleted ? 1 : 0,
+                    input.isCompleted() ? 1 : 0,
                     input.getTaskName(),
                     ((Event) input).getAt());
         }
@@ -84,10 +93,10 @@ public class Storage {
                 task = new Todo(data.get(2));
                 break;
             case "D":
-                task = new Deadline(data.get(2), data.get(3));
+                task = new Deadline(data.get(2), DATE_FORMAT.parse(data.get(3)));
                 break;
             case "E":
-                task = new Event(data.get(2), data.get(3));
+                task = new Event(data.get(2), DATE_FORMAT.parse(data.get(3)));
                 break;
             default:
                 throw new ParseException(data.get(0) + " is not an acceptable argument", 0);

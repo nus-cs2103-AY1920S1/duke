@@ -1,3 +1,5 @@
+package com.tysng.duke.domain;
+
 import java.util.Date;
 
 public class Deadline extends Task {
@@ -8,7 +10,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String getBy() {
+    public Date getBy() {
         return by;
     }
 

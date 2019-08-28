@@ -1,3 +1,5 @@
+package com.tysng.duke.domain;
+
 public abstract class Task {
     protected boolean isCompleted;
     protected String taskName;

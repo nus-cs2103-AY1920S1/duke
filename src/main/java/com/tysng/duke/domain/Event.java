@@ -1,3 +1,5 @@
+package com.tysng.duke.domain;
+
 import java.util.Date;
 
 public class Event extends Task {
@@ -8,7 +10,7 @@ public class Event extends Task {
         this.at = at;
     }
 
-    public String getAt() {
+    public Date getAt() {
         return at;
     }
 

@@ -1,3 +1,7 @@
+package com.tysng.duke.ui;
+
+import com.tysng.duke.domain.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

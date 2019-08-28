@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group 'seedu.duke'
+group 'com.tysng'
 version '0.1.0'
 
 repositories {
@@ -11,7 +11,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "com.tysng.duke.Main"
 }
 
 run {

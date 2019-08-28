@@ -97,7 +97,7 @@ public class Duke {
                                 String[] taskDeadLine = dL.split(" /by ");
                                 String taskD = taskDeadLine[0];
                                 String by = taskDeadLine[1];
-                                Task tt = new Deadline(taskD, by);
+                                Task tt = new Deadline(taskD, new DateTime(by));
                                 commands.add(tt);
                                 System.out.println("Got it. I've added this task:\n  " + tt
                                         + "\nNow you have " + commands.size() + " tasks in the list.");
@@ -115,7 +115,7 @@ public class Duke {
                                 String[] taskEvent = eEvent.split(" /at ");
                                 String taskE = taskEvent[0];
                                 String at = taskEvent[1];
-                                Task ee = new Event(taskE, at);
+                                Task ee = new Event(taskE, new DateTime(at));
                                 commands.add(ee);
                                 System.out.println("Got it. I've added this task:\n  " + ee
                                         + "\nNow you have " + commands.size() + " tasks in the list.");

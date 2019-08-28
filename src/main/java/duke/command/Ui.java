@@ -1,19 +1,20 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
     private static TaskList taskList;
-    private static Storage storage;
-    private static Parser parser;
 
     public Ui() {
     }
 
     public void start(Parser parser, Storage storage, TaskList taskList) {
-        this.parser = parser;
-        this.storage = storage;
         this.taskList = taskList;
 
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);

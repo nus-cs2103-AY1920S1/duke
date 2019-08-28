@@ -3,15 +3,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    /** Indentation for comment */
     public static final String INDENT_COMMENT = "    ";
+
+    /** Indentation for task description */
     public static final String INDENT_TASK = "      ";
+
+    /** Array list of task */
     public static List<Task> task = new ArrayList<>();
+
+    /** Total number of task */
     public static int itemNo = 0;
 
+    /**
+     * Print the horizontal line.
+     */
     public static void printLine() {
         System.out.println("   ________________________________________________________________________");
     }
 
+    /**
+     * Print the greet of the duke program.
+     */
     public static void printGreet() {
         printLine();
         String logo = "     ____        _        \n"
@@ -26,6 +39,9 @@ public class Duke {
         System.out.println("");
     }
 
+    /**
+     * Read the user input to Duke.
+     */
     public static void readInput() {
         Scanner input = new Scanner(System.in);
 
@@ -85,6 +101,10 @@ public class Duke {
         }
     }
 
+    /**
+     * "list" command to list all the task.
+     * @throws DukeException if number of items = 0.
+     */
     public static void commandList() throws DukeException {
         if (itemNo == 0) {
             throw new DukeException(INDENT_COMMENT + "\u2639 OOPS !!! " + "The task list are currently empty.");
@@ -99,6 +119,11 @@ public class Duke {
         System.out.println("");
     }
 
+    /**
+     * "done" command to check the finish task.
+     * @param data Command and item index of the task.
+     * @throws DukeException if number of items = 0 and index enter > total number of task.
+     */
     public static void commandDone(String data) throws DukeException {
         try {
 
@@ -135,6 +160,11 @@ public class Duke {
         }
     }
 
+    /**
+     * "to-do" command to enter the task description.
+     * @param data to-do command and description of task.
+     * @throws DukeException If description of data is empty.
+     */
     public static void commandTodo(String data) throws DukeException {
         if (data.isEmpty()) {
             throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a todo cannot be empty.");
@@ -150,6 +180,11 @@ public class Duke {
         System.out.println("");
     }
 
+    /**
+     * "deadline" command to enter deadline description and deadline time.
+     * @param data deadline description and deadline of task.
+     * @throws DukeException If description and time of deadline is empty.
+     */
     public static void commandDeadline(String data) throws DukeException {
         if (data.isEmpty()) {
             throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of a deadline cannot be empty.");
@@ -173,6 +208,11 @@ public class Duke {
         System.out.println("");
     }
 
+    /**
+     * "event" command to enter event description and event time.
+     * @param data event description and time of event.
+     * @throws DukeException If description and time of event is empty.
+     */
     public static void commandEvent(String data) throws DukeException {
         if (data.isEmpty()) {
             throw new DukeException(INDENT_COMMENT +"\u2639 OOPS !!! " + "The description of an event cannot be empty.");
@@ -196,14 +236,24 @@ public class Duke {
         System.out.println("");
     }
 
-    public static void bye() {
+    /**
+     * "bye" command to exit Duke Program.
+     * @throws DukeException If update of file fails.
+     */
+    public static void bye() throws DukeException {
         printLine();
         System.out.println(INDENT_COMMENT + "Bye. Hope to see you again soon!");
         printLine();
         System.out.println("");
+        Database.updateFile(task);
         System.exit(0);
     }
 
+    /**
+     * "delete" command to delete task in Duke Program.
+     * @param data delete command and task index.
+     * @throws DukeException If list of items is zero.
+     */
     public static void delete(String data) throws DukeException {
         try {
             if (data.isEmpty()) {
@@ -238,8 +288,29 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * To start the Duke program.
+     */
+    public static void startDuke() {
         printGreet();
         readInput();
+    }
+
+    /**
+     * To start the Database of Duke Program.
+     */
+    public static void startDatabase() {
+        Database.initialise();
+        task = Database.getSavedTask();
+        itemNo = task.size();
+        startDuke();
+    }
+
+    /**
+     * Main function to start Duke Database.
+     * @param args Arguments enter by user.
+     */
+    public static void main(String[] args) {
+        startDatabase();
     }
 }

@@ -1,3 +1,9 @@
+
+/**
+ * Represents a DukeException class which handles all the possible
+ * custom exceptions that might be needed in the program.
+ */
+
 public class DukeException extends Exception{
 
     protected String exceptionType;

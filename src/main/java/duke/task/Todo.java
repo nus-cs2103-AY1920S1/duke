@@ -23,7 +23,7 @@ public class Todo extends Task {
      * @return  "T"
      */
     @Override
-    String getType() {
+    public String getType() {
         return "T";
     }
 

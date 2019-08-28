@@ -81,7 +81,7 @@ public class Task {
      * Returns a String of length 1 that indicates the current Task type.
      * @return  String indicating Task type
      */
-    String getType() {
+    public String getType() {
         return "-";
     }
 

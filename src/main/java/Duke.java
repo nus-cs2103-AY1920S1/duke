@@ -2,6 +2,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
 import java.nio.file.*;
+<<<<<<< HEAD
+=======
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+>>>>>>> branch-Level-8
 
 public class Duke {
     public static String liner = "    ____________________________________________________________";
@@ -93,7 +99,7 @@ public class Duke {
                         throw new DukeException(liner + "\n       OOPS!!! The deadline must have a specified date/time.\n" + liner);
                     }
                     //
-                    Task newTask = new Deadline(arr[0].trim(), arr[1].trim());
+                    Task newTask = new Deadline(arr[0].trim(), datetimeformat(arr[1].trim()));
                     tasks.add(newTask);
                     saveChangesTXT(newTask, "D");
                     printAddTask(newTask, tasks.size());
@@ -121,6 +127,39 @@ public class Duke {
         System.out.println(liner + "\n     Bye. Hope to see you again soon!\n" + liner);
     }
 
+<<<<<<< HEAD
+=======
+    // format date and time
+    public static String datetimeformat(String input) throws DukeException {
+        try {
+            System.out.println(input);
+            LocalDateTime datetime = LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm")); //convert to ISO_LOCAL_DATE_TIME
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(" MMMM yyyy, ha");
+            return getSuffix(datetime.getDayOfMonth()).concat(datetime.format(format));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format: dd/mm/yyyy HHmm only!");
+        }
+    }
+
+    // get day suffix for date formatter
+    public static String getSuffix(int day) {
+        switch (day) {
+            case 1:
+            case 21:
+            case 31:
+                return day + "st";
+            case 2:
+            case 22:
+                return day + "nd";
+            case 3:
+            case 23:
+                return day + "rd";
+            default:
+                return day + "th";
+        }
+    }
+
+>>>>>>> branch-Level-8
     // add new tasks information
     public static void saveChangesTXT(Task task, String type) {
         try {

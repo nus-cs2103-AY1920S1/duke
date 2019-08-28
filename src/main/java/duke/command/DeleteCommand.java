@@ -37,4 +37,8 @@ public class DeleteCommand implements Command {
     public String getDate() {
         return "";
     };
+
+    public String getKeyword() {
+        return "error";
+    }
 }

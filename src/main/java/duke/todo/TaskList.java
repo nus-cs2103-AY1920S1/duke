@@ -120,6 +120,32 @@ public class TaskList {
         return counter;
     }
 
+    public String findTask(String keyword) {
+        ArrayList<Task> tasksFound = new ArrayList<>();
+
+        for (Task task : taskList) {
+            if (task.getDescription().contains(keyword)) {
+                tasksFound.add(task);
+            }
+        }
+
+        StringBuilder output = new StringBuilder();
+        int index;
+        Task currentTask;
+
+        output.append("    Here are the matching tasks in your list:\n");
+        for (int i = 0 ; i < counter; i++) {
+            currentTask = tasksFound.get(i);
+            index = i + 1;
+            output.append("    ");
+            output.append(index);
+            output.append(". ");
+            output.append(currentTask);
+            if (i < counter - 1) output.append('\n');
+        }
+        return output.toString();
+    }
+
     /**
      * Adds a todo task based on the input detail and
      * returns the task.

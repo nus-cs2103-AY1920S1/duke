@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class todoTest {
-
+/*
     @Test
     public void test_getFormattedTask() {
         Todo todo = new Todo("borrow books");
@@ -17,4 +17,5 @@ public class todoTest {
         Todo todo = new Todo("borrow books");
         assertEquals("[T][✘] borrow books", todo.toString());
     }
+ */
 }

@@ -42,4 +42,8 @@ public class DeadlineCommand implements Command {
     public String getTask() {
         return task;
     }
+
+    public String getKeyword() {
+        return "error";
+    }
 }

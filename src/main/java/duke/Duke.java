@@ -70,6 +70,8 @@ public class Duke {
                         Task addedEvent = tasks.addTask("E", command.getTask(), command.getDate());
                         ui.reportAdd(addedEvent, tasks.getNumOfTasks());
                         break;
+                    case "find":
+                        ui.reportFound(tasks.findTask(command.getKeyword()));
                     default:
                         throw new DukeException("     \u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

@@ -1,13 +1,13 @@
 package duke.command;
 
-public class PrintCommand implements Command {
-    /**
-     * Returns the task type.
-     *
-     * @return List.
-     */
+public class FindCommand implements Command {
+    private String keyword;
+
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
+    }
     public String getTaskType() {
-        return "list";
+        return "find";
     };
 
     public int getIndex() {
@@ -23,6 +23,6 @@ public class PrintCommand implements Command {
     };
 
     public String getKeyword() {
-        return "error";
-    }
+        return keyword;
+    };
 }

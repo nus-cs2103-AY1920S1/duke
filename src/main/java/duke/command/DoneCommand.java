@@ -38,4 +38,8 @@ public class DoneCommand implements Command {
     public String getDate() {
         return "error";
     }
+
+    public String getKeyword() {
+        return "error";
+    }
 }

@@ -13,6 +13,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs Duke object with filePath input from which
+     * the data of the existing is stored.
+     *
+     * @param filePath File path for input.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

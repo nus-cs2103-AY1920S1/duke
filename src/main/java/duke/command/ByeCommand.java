@@ -1,6 +1,11 @@
 package duke.command;
 
 public class ByeCommand implements Command {
+    /**
+     * Returns task type.
+     *
+     * @return Bye.
+     */
     public String getTaskType() {
         return "bye";
     }

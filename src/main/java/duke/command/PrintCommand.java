@@ -1,6 +1,11 @@
 package duke.command;
 
 public class PrintCommand implements Command {
+    /**
+     * Returns the task type.
+     *
+     * @return List.
+     */
     public String getTaskType() {
         return "list";
     };

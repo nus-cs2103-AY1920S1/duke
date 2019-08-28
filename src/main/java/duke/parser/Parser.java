@@ -12,6 +12,17 @@ import duke.command.EventCommand;
 
 public class Parser {
 
+    /**
+     * Parses the input string and generates Command object
+     * based on the input task type and relevant details.
+     *
+     * Throws DukeException when the input does not fit into
+     * any type.
+     *
+     * @param input Input string.
+     * @return Command generated.
+     * @throws DukeException
+     */
     public Command parse(String input) throws DukeException {
         String taskType = input.split(" ")[0];
         int index;

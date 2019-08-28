@@ -13,11 +13,23 @@ public class Deadline extends Task {
         this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
+    /**
+     * Returns a string of the currently deadline with formatting,
+     * intended for saving usage.
+     *
+     * @return Formatted string of this deadline.
+     */
     @Override
     public String getFormattedTask() {
         return "D | " + super.getDescription() +
                 " /by " + deadline.toString();
     }
+
+    /**
+     * Returns a string of this deadline for display usage.
+     *
+     * @return Formatted string of this deadline for display.
+     */
     @Override
     public String toString() {
         return "[D]" + getStatusIcon() + this.getDescription() +

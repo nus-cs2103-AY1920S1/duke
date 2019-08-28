@@ -6,6 +6,7 @@ public class Task {
      * Represents the task managed by the chatbot.
      * @param description refers to the details of the task given by the user.
      */
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -15,6 +16,7 @@ public class Task {
      * Returns the details of the task
      * @return String description
      */
+
     public String getDescription() {
         return description;
     }
@@ -23,6 +25,7 @@ public class Task {
      * Returns whether a task is marked complete
      * @return boolean isDone
      */
+
     public boolean getIsDone() {
         return isDone;
     }
@@ -32,6 +35,7 @@ public class Task {
      * If the task is complete, a tick is returned otherwise a cross is returned.
      * @return String symbol
      */
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -39,6 +43,7 @@ public class Task {
     /**
      * Marks the task as done
      */
+
     public void markAsDone() {
         isDone = true;
     }
@@ -47,6 +52,7 @@ public class Task {
      * Stringified representation of the task
      * @return String task
      */
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

@@ -9,6 +9,7 @@ public class Command {
      * @param instruction refers to the instructions for the particular commmand type
      * @param date represents the time by which the task should be complete
      */
+
     public Command(String commandType, String instruction, String date) {
         this.commandType = commandType;
         this.instruction = instruction;
@@ -19,6 +20,7 @@ public class Command {
      * Returns the type of the command.
      * @return String commandType
      */
+
     public String getCommandType() {
         return commandType;
     }
@@ -27,6 +29,7 @@ public class Command {
      * Returns instruction of the task.
      * @return String instruction
      */
+
     public String getInstruction() {
         return instruction;
     }
@@ -35,6 +38,7 @@ public class Command {
      * Returns the data by which the task must be completed.
      * @return String date
      */
+
     public String getDate() {
         return date;
     }

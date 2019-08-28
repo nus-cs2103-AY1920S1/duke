@@ -8,6 +8,7 @@ public class Event extends Task {
      * @param description refers to the details of the event
      * @param at refers to the date when the event is happening
      */
+
     public Event(String description, Date at) {
         super(description);
         this.at = at;
@@ -17,6 +18,7 @@ public class Event extends Task {
      * Returns the event date
      * @return Date at
      */
+
     public Date getAt() {
         return at;
     }
@@ -25,6 +27,7 @@ public class Event extends Task {
      * Returns the stringified form the Event task
      * @return String event
      */
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

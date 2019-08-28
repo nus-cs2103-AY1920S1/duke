@@ -8,6 +8,5 @@ public class ToDo extends Task {
          * @return none
          */
         super(info,type,by);
-        this.by = by;
     }
 }

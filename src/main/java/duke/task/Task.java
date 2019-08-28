@@ -51,4 +51,8 @@ public abstract class Task {
      * @return Formatted string to be saved in storage file.
      */
     public abstract String getSaveString();
+
+    public String getDescription() {
+        return description;
+    }
 }

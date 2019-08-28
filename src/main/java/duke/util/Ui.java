@@ -124,4 +124,22 @@ public class Ui {
         System.out.println(horizontalLine);
         System.out.println();
     }
+
+    public void printFoundTasks(TaskList tasksWithKeyword) {
+        System.out.println(horizontalLine);
+        if (tasksWithKeyword.size() > 0) {
+            System.out.println("     Here are the matching tasks in your list:");
+
+            int id = 1;
+            for (Task task : tasksWithKeyword) {
+                System.out.println("     " + id + ". " + task);
+                id++;
+            }
+
+        } else {
+            System.out.println("     Sorry, there are no matching tasks in your list!");
+        }
+        System.out.println(horizontalLine);
+        System.out.println();
+    }
 }

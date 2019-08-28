@@ -5,6 +5,7 @@ import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 import duke.task.Event;
@@ -64,6 +65,12 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(
                         "Please follow the format:\n     event <description> /at <DD/MM/YYYY HHMM>");
+            }
+        case "find":
+            try {
+                return new FindCommand(inputArr[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please specify what you are searching for!");
             }
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

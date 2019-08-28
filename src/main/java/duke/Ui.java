@@ -14,7 +14,10 @@ public class Ui {
     }
 
     public String readLine() {
-        return scanner.nextLine().trim();
+        String input = "";
+        if(scanner.hasNextLine())
+            input = scanner.nextLine().trim();
+        return input;
     }
 
     public void greet() {

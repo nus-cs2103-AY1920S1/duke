@@ -59,7 +59,7 @@ public class TaskList {
             taskList.get(indexSetDone).setIsDone();
             t = taskList.get(indexSetDone);
         } catch (IndexOutOfBoundsException o) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index out of Bound");
         }
         return t;
     }

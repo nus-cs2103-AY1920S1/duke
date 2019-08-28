@@ -15,7 +15,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList list, Ui ui, Storage storage){
         Task temp = getPendingTask();
         list.addNewTask(temp);
         list.increaseTaskCount();

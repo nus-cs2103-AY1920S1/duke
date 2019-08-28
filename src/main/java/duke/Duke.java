@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
@@ -38,7 +37,7 @@ public class Duke {
         }
     }
 
-    private void run() {
+    public void run() {
         ui.showWelcome();
 
         boolean isExit = false;

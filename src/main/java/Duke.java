@@ -64,6 +64,14 @@ public class Duke {
 
             } else if(input.startsWith("todo")) {
                 String[] sp = input.split(" ", 2);
+
+                if(sp.length < 2){
+                    System.out.println("     ____________________________________________________________");
+                    System.out.println("     OOPS! The description of a todo cannot be empty.");
+                    System.out.println("     ____________________________________________________________");
+                    continue;
+                }
+
                 data.add(sp[1]);
                 details.add("NULL");
                 done.add("✗");
@@ -79,6 +87,13 @@ public class Duke {
 
             } else if(input.startsWith("deadline")) {
                 String[] sp = input.split(" ", 2);
+
+                if(sp.length < 2){
+                    System.out.println("     ____________________________________________________________");
+                    System.out.println("     OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println("     ____________________________________________________________");
+                    continue;
+                }
 
                 String[] sp2 = sp[1].split(" /by ", 2);
 
@@ -96,6 +111,13 @@ public class Duke {
             } else if(input.startsWith("event")) {
                 String[] sp = input.split(" ", 2);
 
+                if(sp.length < 2){
+                    System.out.println("     ____________________________________________________________");
+                    System.out.println("     OOPS!!! The description of a event cannot be empty.");
+                    System.out.println("     ____________________________________________________________");
+                    continue;
+                }
+
                 String[] sp2 = sp[1].split(" /at ", 2);
 
                 data.add(sp2[0]);
@@ -110,7 +132,7 @@ public class Duke {
                 System.out.println("     ____________________________________________________________");
             } else {
                     System.out.println("     ____________________________________________________________\n" +
-                            "     INVALID COMMAND\n" +
+                            "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                             "     ____________________________________________________________");
 
             }

@@ -24,6 +24,8 @@ public class Parser {
                 return DoneCommand.create(input, args);
             case "delete":
                 return DeleteCommand.create(input, args);
+        case "find":
+                return FindCommand.create(input, args);
             case "todo":
                 if (numArgs == 1) {
                     throw new DukeException(EMPTY_TODO_STRING);

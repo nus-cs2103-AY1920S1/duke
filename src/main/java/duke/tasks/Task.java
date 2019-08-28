@@ -19,6 +19,11 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public boolean contains(String searchTerm) {
+        String regex = "(.*)" + searchTerm + "(.*)";
+        return description.matches(regex);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s]%s", getStatusIcon(), description);

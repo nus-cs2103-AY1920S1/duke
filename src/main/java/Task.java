@@ -20,7 +20,6 @@ public class Task {
         return "";
     }
 
-    //public static Task outputAsTask(String s) throws ParseException, DukeException {return null;}
 
     public void taskDone(){
         done = true;

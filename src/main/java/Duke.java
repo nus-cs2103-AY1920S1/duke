@@ -1,13 +1,25 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) throws Exception {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+
+            tasks = new TaskList(storage.load());
+
+        } catch (DukeException e) {
+            ui.showLoadingError();
+           tasks = new TaskList();
+        }
+    }
+
+    public void run() throws FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,130 +30,14 @@ public class Duke {
         String line = "____________________________________________________________";
         System.out.println(line + "\n" + "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n" + line);
 
-        Scanner sc = new Scanner(System.in);
-
-
-        ArrayList<Task>allcoms = new ArrayList<Task>();
-
-        try{
-            BufferedReader br = Files.newBufferedReader(Paths.get("DukeOutput.txt"));
-            String lineToRead;
-            while ((lineToRead = br.readLine()) != null) {
-                if(lineToRead.charAt(0)=='T'){
-                    Task newTask = ToDo.outputAsToDo(lineToRead);
-                    allcoms.add(newTask);
-                }else if(lineToRead.charAt(0)=='D'){
-                    Task newTask = Deadline.outputAsDeadline(lineToRead);
-                    allcoms.add(newTask);
-                }else if(lineToRead.charAt(0)=='E'){
-                    Task newTask = Event.outputAsEvent(lineToRead);
-                    allcoms.add(newTask);
-                }else{}
-            }
-
-        } catch (IOException | ParseException | DukeException e) {
-            System.out.println("No file found");
-        }
-
-
-
-        while(true){
-            String command = sc.nextLine();
-            String[]words = command.split(" ");
-            if(command.equals("bye")){
-                System.out.println(line + "\n" + "Bye. Hope to see you again soon!" + "\n" + line);
-                break;
-            }else if((words.length==2)&&(words[0].equals("done"))&&(isNumeric(words[1]))){
-                try {
-                    int val = Integer.parseInt(words[1]);
-                    allcoms.get(val - 1).taskDone();
-                    System.out.println(line + "\n" + "Nice! I've marked this task as done: \n" +
-                            allcoms.get(val - 1).printer() + "\n" + line);
-                    saveToDisk(allcoms);
-                }catch(Exception e){
-                    System.out.println("Error, you have entered an invalid number");
-                }
-            }else if((words.length==2)&&(words[0].equals("delete"))&&(isNumeric(words[1]))){
-                try {
-                    int val = Integer.parseInt(words[1]);
-                    System.out.println(line + "\n" + "Noted. I've removed this task:"+ "\n" +
-                            allcoms.get(val - 1).printer() + "\n"+ "Now you have "
-                            + (allcoms.size()-1) + " tasks in the list."+ "\n" + line);
-                    allcoms.remove(val - 1);
-                    saveToDisk(allcoms);
-                }catch(Exception e){
-                    System.out.println("Error, you have entered an invalid number");
-                }
-            }else if(command.equals("list")){
-                System.out.println(line);
-                for(int i=1; i<=allcoms.size(); i++){
-                    System.out.println(i + ". " + allcoms.get(i-1).printer());
-                }
-                //saveToDisk(allcoms);
-                System.out.println(line);
-            }else{
-                String[]splitwords = command.trim().split("\\s");
-                try {
-                    if (splitwords[0].equals("todo")) {
-                        String midcommand = command.trim().substring(5);
-                        if (midcommand.length() != 0) {
-                            allcoms.add(new ToDo(midcommand));
-                            saveToDisk(allcoms);
-                        } else {
-                            throw new Exception();
-                        }
-                    } else if (splitwords[0].equals("deadline")) {
-                        String midcommand = command.trim().substring(9);
-                        if (midcommand.length() != 0) {
-                            allcoms.add(new Deadline(midcommand));
-                            saveToDisk(allcoms);
-                        } else {
-                            throw new Exception();
-                        }
-                    } else if (splitwords[0].equals("event")) {
-                        String midcommand = command.trim().substring(6);
-                        if (midcommand.length() != 0) {
-                            allcoms.add(new Event(midcommand));
-                            saveToDisk(allcoms);
-                        } else {
-                            throw new Exception();
-                        }
-                    } else {
-                        throw new IllegalArgumentException();
-                    }
-
-                /*allcoms.add(new Task(command));*/
-                System.out.println(line + "\n" + "Got it. I've added this task:" + "\n" +
-                                            allcoms.get(allcoms.size()-1).printer() + "\n" + "Now you have "
-                                                + allcoms.size() + " tasks in the list."+ "\n" + line);
-                }catch(IllegalArgumentException e){
-                    System.out.println(line + "\n" + "☹ OOPS!!! I'm sorry, but I don't know what that means :-()" + "\n" + line);
-                }catch(DukeException e){
-                    System.out.println(line + "\n" + "☹ OOPS!!! The date format is wrong."+ "\n" + line);
-                }catch(Exception e){
-                    System.out.println(line + "\n" + "☹ OOPS!!! The description of a event cannot be empty."+ "\n" + line);
-                }
-            }
-        }
-        sc.close();
-    }
-    public static boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch(NumberFormatException e){
-            return false;
-        }
+        ui.run(tasks, storage);
     }
 
-    public static void saveToDisk(ArrayList<Task>allcoms) throws FileNotFoundException {
-        PrintStream outputTo = new PrintStream("DukeOutput.txt");
-        //outputTo.println("List");
 
-        for(int i=1; i<=allcoms.size(); i++){
-            outputTo.println(allcoms.get(i-1).printToOutput());
-        }
 
-        outputTo.close();
+    public static void main(String[] args) throws Exception {
+
+        new Duke("DukeOutput.txt").run();
+
     }
 }

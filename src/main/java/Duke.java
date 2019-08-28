@@ -1,9 +1,4 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This is the main class of the Duke application. The Duke application is an interface of a

@@ -6,7 +6,7 @@ public class Task {
     /**
      * Name of task.
      */
-    protected String task_name;
+    protected String taskName;
 
     /**
      * Boolean indicating whether task has been completed.
@@ -16,10 +16,10 @@ public class Task {
 
     /**
      * Class constructor assigning name and isDone attribute to the object.
-     * @param task_name The name of the deadline task
+     * @param taskName The name of the deadline task
      */
-    public Task(String task_name) {
-        this.task_name = task_name;
+    public Task(String taskName) {
+        this.taskName = taskName;
         this.isDone = false;
     }
 
@@ -76,6 +76,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return task_name;
+        return taskName;
     }
 }

@@ -1,6 +1,3 @@
-import java.io.FileWriter;
-import java.io.IOException;
-
 /**
  * The Parser class is used to decode user input. The parser class then retrieves the appropriate
  * command.

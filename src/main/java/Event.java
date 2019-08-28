@@ -16,11 +16,11 @@ public class Event extends Task {
 
     /**
      * Class constructor assigning name, type and date to the object.
-     * @param task_name The name of the event
+     * @param taskName The name of the event
      * @param date The date of the event
      */
-    public Event(String task_name, String date) {
-        super(task_name);
+    public Event(String taskName, String date) {
+        super(taskName);
         type = "event";
         this.date = date;
     }

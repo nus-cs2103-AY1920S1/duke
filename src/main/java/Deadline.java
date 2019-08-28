@@ -16,11 +16,11 @@ public class Deadline extends Task {
 
     /**
      * Class constructor assigning name, type and date to the object.
-     * @param task_name The name of the deadline task
+     * @param taskName The name of the deadline task
      * @param date The date the task is due
      */
-    public Deadline(String task_name, String date) {
-        super(task_name);
+    public Deadline(String taskName, String date) {
+        super(taskName);
         type = "deadline";
         this.date = date;
     }

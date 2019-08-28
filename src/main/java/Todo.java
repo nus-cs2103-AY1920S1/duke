@@ -11,10 +11,10 @@ public class Todo extends Task {
 
     /**
      * Class constructor assigning name and type to the object.
-     * @param task_name Name of todo task.
+     * @param taskName Name of todo task.
      */
-    public Todo(String task_name) {
-        super(task_name);
+    public Todo(String taskName) {
+        super(taskName);
         type = "todo";
     }
 

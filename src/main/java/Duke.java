@@ -1,14 +1,9 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         Integer num; //number in list which is done
         Task currTask; //refers to current task in list
         String currEvent;
@@ -70,6 +65,8 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println("☹ OOPS!!! The task done must be a number.");
+            } catch (ParseException e) {
+                e.printStackTrace();
             } finally {
                 line = sc.nextLine();
             }

@@ -4,6 +4,10 @@ public class Deadline extends Task {
         super(description);
     }
 
+    public Deadline(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + super.format_description();
     }

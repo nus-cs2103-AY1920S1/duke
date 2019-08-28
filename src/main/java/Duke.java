@@ -25,7 +25,7 @@ public class Duke {
                         addToList(new Deadline(subparts[0], new Date(subparts[1])), taskList);
                     } else if (parts[0].equals("event")) {
                         String[] subparts = parts[1].split(" /at ");
-                        addToList(new Event(subparts[0], subparts[1]), taskList);
+                        addToList(new Event(subparts[0], new Date(subparts[1])), taskList);
                     } else
                         throw new DukeException("");
                 }catch(DukeException e){

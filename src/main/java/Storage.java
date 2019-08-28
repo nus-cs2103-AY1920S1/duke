@@ -5,14 +5,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
 
+    /**
+     * Path of .txt file where tasks are stored persistently.
+     */
     String filePath;
 
+    /**
+     * Class constructor that assigns filepath to the object.
+     * @param filePath Path of .txt file where tasks are stored persistently
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * This method loads the stored task list from a previous session.
+     * @return ArrayList List of tasks
+     * @throws FileNotFoundException On wrong filepath used
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
@@ -38,6 +53,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * This method appends new tasks to the end of the file.
+     * @param textToAppend New task to be added to end of the file
+     */
     public void appendToFile(String textToAppend) {
         try {
             FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
@@ -48,6 +67,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method rewrites all data in the file. This is used when we have to edit existing data
+     * in the file.
+     * @param tasks List of tasks
+     */
     public void rewriteFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);

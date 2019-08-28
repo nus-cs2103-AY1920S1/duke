@@ -41,9 +41,9 @@ public class Storage {
      * To get the project root and path to create the txt file or check if text file is available.
      */
     public void initialise() {
-        String project_root = new File(System.getProperty("user.dir")).getParentFile().getPath();
+        String projectRoot = new File(System.getProperty("user.dir")).getParentFile().getPath();
         StringBuilder path = new StringBuilder();
-        path.append(project_root);
+        path.append(projectRoot);
 
         File directory = new File(path + "/data");
 

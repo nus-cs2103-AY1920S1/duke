@@ -34,7 +34,9 @@ public class Parser {
         validCommands.add("bye");
         validCommands.add("delete");
         if (!validCommands.contains(command)) {
-            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    ____________________________________________________________\n" + "\n");
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________\n" + "\n");
         }
     }
 
@@ -44,7 +46,9 @@ public class Parser {
         taskTypes.add("deadline");
         taskTypes.add("event");
         if (taskTypes.contains(currArray[0]) && currArray.length == 1) {
-            throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! The description of a " + currArray[0] + " cannot be empty.\n" + "    ____________________________________________________________\n" +"\n");
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "     OOPS!!! The description of a " + currArray[0] + " cannot be empty.\n"
+                    + "    ____________________________________________________________\n" +"\n");
         }
     }
 }

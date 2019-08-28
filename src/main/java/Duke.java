@@ -75,6 +75,8 @@ public class Duke {
                     taskDone.markAsDone();
                     storage.updateLocalFile(tasks.get());
                     ui.doneAnnouncement(taskDone);
+                } else if (userCommand.equals("find")) {
+                    tasks.keywordSearch(taskDescription);
                 } else if (userCommand.equals("delete")) {
                     int target = Integer.valueOf(taskDescription);
                     Task taskDelete;

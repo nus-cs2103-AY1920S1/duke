@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Encapsulates the User Interface operations. It is responsible of all interaction with the user.
  */
@@ -58,5 +60,14 @@ public class Ui {
             return ("Now you have " + taskCount
                     + " task in the list." + "\n");
         }
+    }
+
+    public void announceMatchingTask(ArrayList<Task> taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= taskList.size(); i++) {
+            Task evaluatingTask = taskList.get(i - 1);
+            System.out.println(i + "." + evaluatingTask.toString());
+        }
+        System.out.println();
     }
 }

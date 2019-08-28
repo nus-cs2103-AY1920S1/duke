@@ -114,7 +114,7 @@ public class Duke {
             tasks = new TaskList();
         }*/
     }
-    /////////////////////////////// End of Duke constructor ////////////////////////////////////////
+    /////////////////////////////// End of Duke constructor //////////////////////////////////////////
 
 
     //////////////////////////////////// start of run //////////////////////////////////////////////
@@ -137,7 +137,7 @@ public class Duke {
 
             if (userInput.contains("todo")) {
                 no_of_task++;
-                String sub = userInput.substring(5);
+                String sub = userInput.substring(5);        //get task description
                 if (sub.isEmpty()) {
                     System.out.println("OOPS!! The description of a todo cannot be empty.");
                 } else {

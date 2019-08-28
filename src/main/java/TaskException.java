@@ -22,6 +22,6 @@ public class TaskException extends DukeException {
                 sb.append("specific time/date ");
             }
         }
-        return "☹ OOPS!!! The " + sb.toString() + "of a " + type + " cannot be empty.";
+        return "\\u2639 OOPS!!! The " + sb.toString() + "of a " + type + " cannot be empty.";
     }
 }

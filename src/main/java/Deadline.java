@@ -1,5 +1,8 @@
+import java.text.ParseException;
+
 public class Deadline extends Task {
     private String date;
+    private DateTime _dateTime;
 
     /**
      * Creates a Deadline object, which is also a Task.
@@ -8,7 +11,12 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String date) {
         super(desc);
-        this.date = date;
+        try {
+            this._dateTime = new DateTime(date);
+            this.date = this._dateTime.getDateTime();
+        } catch (ParseException e) {
+            System.err.println("Cant parse Date: " + date);
+        }
     }
 
     /**

@@ -6,21 +6,18 @@ import java.util.Scanner;
 // Accepts empty task
 public class Duke {
     private MyList taskList;
-    //private Storage storage;
+    private Storage storage;
     private UserInterface ui;
 
     public Duke(String directory) {
-        //storage = new Storage(directory);
+        storage = new Storage(directory);
         ui = new UserInterface();
-        /*
         try {
             taskList = storage.loadList();
         } catch (DukeException e) {
             ui.printException(e.toString());
             taskList = new TaskList();
         }
-
-         */
     }
 
     public static void main(String[] args) {
@@ -37,7 +34,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.printLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                //c.execute(taskList, ui, storage);
+                c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printException(e.toString());

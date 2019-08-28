@@ -1,0 +1,5 @@
+T | 1 | meet parents
+D | 0 | return book | Sunday
+E | 1 | project meeting | Mon 2-4pm
+T | 0 | finish todo list
+D | 0 | return book | Sunday

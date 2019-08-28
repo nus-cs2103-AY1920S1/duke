@@ -20,8 +20,7 @@ public class Deadline extends Task {
         }
     }
 
-<<<<<<< HEAD
-=======
+
     public Date convertDateTime() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date converted;
@@ -33,7 +32,6 @@ public class Deadline extends Task {
         return converted;
     }
 
->>>>>>> branch-Level-8
     public String storageFormat() {
         if (done) {
             return "D/✓/" + taskName + "/" + deadline;

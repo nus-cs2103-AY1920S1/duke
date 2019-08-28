@@ -20,8 +20,6 @@ public class Event extends Task {
         }
     }
 
-<<<<<<< HEAD
-=======
 
     public Date convertDateTime() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -34,7 +32,6 @@ public class Event extends Task {
         return converted;
     }
 
->>>>>>> branch-Level-8
     public String storageFormat() {
         if (done) {
             return "E/✓/" + taskName + "/" + time;

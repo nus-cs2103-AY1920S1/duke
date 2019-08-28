@@ -17,7 +17,10 @@ public class Duke {
         }
     }
 
-    public void run(){
+    /**
+     * Run the main program
+     */
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.showGreeting();
         boolean isExit = false;

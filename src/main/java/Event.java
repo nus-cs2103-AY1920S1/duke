@@ -9,17 +9,13 @@ public class Event extends Task {
     protected String text;
     protected String at;
 
-    public Event(String description, DateTimeRangeHelper helper, String at) throws EventException {
+    public Event(String description, DateTimeRangeHelper helper, String at) {
         super(description);
-        try {
-            this.startTime = helper.getStartTime();
-            this.endTime = helper.getEndTime();
-            this.date = helper.getDate();
-            this.text = helper.getText();
-            this.at = at;
-        } catch (Exception ex) {
-
-        }
+        this.startTime = helper.getStartTime();
+        this.endTime = helper.getEndTime();
+        this.date = helper.getDate();
+        this.text = helper.getText();
+        this.at = at;
     }
 
     public Event(String description) throws DukeException {

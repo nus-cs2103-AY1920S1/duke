@@ -13,7 +13,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.getParentFile().mkdirs();
             try {
                 file.createNewFile();
@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Write to file specified in filepath
+     *
      * @param textToAdd
      * @throws IOException
      */
@@ -35,13 +36,12 @@ public class Storage {
     }
 
     /**
-     *
      * @param taskListToAdd
      * @throws IOException
      */
     public void writeToFile(ArrayList<Task> taskListToAdd) throws DukeException {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < taskListToAdd.size(); i++) {
+        for (int i = 0; i < taskListToAdd.size(); i++) {
             sb.append(taskListToAdd.get(i).toStringFile() + "\n");
         }
         try {
@@ -70,17 +70,23 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Read in the txt file data and create task objects accordingly
+     * @param taskString
+     * @return
+     * @throws DukeException
+     */
     public Task decodeTask(String taskString) throws DukeException {
         String[] taskArr = taskString.split(" \\| ");
         Task task;
         switch (taskArr[0]) {
-        case "T" :
+        case "T":
             task = new Todo(taskArr[2]);
             break;
-        case "D" :
+        case "D":
             task = new Deadline(taskArr[2], taskArr[3]);
             break;
-        case "E" :
+        case "E":
             task = new Event(taskArr[2], DateTimeHandler.getDateTimeRange(taskArr[4]), taskArr[4]);
             break;
         default:
@@ -90,6 +96,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Return true if 1 or else false
+     * @param s
+     * @return
+     */
     public boolean decodeIsDone(String s) {
         return s.equals("1");
     }

@@ -10,7 +10,7 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toStringFile(){
+    public String toStringFile() {
         return "T | " + ((isDone) ? "1" : "0") + " | " + description;
     }
 }

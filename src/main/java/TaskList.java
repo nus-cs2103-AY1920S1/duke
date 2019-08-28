@@ -3,11 +3,12 @@ import java.util.ArrayList;
 public class TaskList {
 
     ArrayList<Task> tasks;
+
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public TaskList(){
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
@@ -20,15 +21,15 @@ public class TaskList {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        if(tasks.size() > 0) {
+        if (tasks.size() > 0) {
             sb.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 sb.append(i + 1 + ". " + tasks.get(i) + "\n");
             }
         } else {
-            sb.append("It looks like you have no tasks!");
+            sb.append("Looks like you have no tasks!");
         }
         return sb.toString().trim();
     }
@@ -37,7 +38,7 @@ public class TaskList {
         tasks.get(i).done();
     }
 
-    public Task getTask(int i ) {
+    public Task getTask(int i) {
         return tasks.get(i);
     }
 
@@ -45,11 +46,11 @@ public class TaskList {
         try {
             return tasks.remove(i);
         } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("I don't think that task exists");
+            throw new DukeException("that task does not exists");
         }
     }
 
-    public int getSize(){
+    public int getSize() {
         return tasks.size();
     }
 }

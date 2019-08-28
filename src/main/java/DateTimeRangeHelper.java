@@ -14,19 +14,19 @@ public class DateTimeRangeHelper {
         displayText = text;
     }
 
-    public LocalTime getStartTime(){
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public LocalTime getEndTime(){
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return date;
     }
 
-    public String getText(){
+    public String getText() {
         return displayText;
     }
 }

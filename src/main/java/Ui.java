@@ -4,14 +4,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with interactions with the user.
+ */
 public class Ui {
 
+    /**
+     * Scanner object to read user input.
+     */
     Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints greeting message to user on application launch.
+     */
     public void printGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,11 +34,18 @@ public class Ui {
         System.out.println(logo + '\n' + greetMsg);
     }
 
+    /**
+     * Reads user input.
+     * @return
+     */
     public String getUserInput() {
         String userInput = sc.nextLine();
         return userInput;
     }
 
+    /**
+     * Prints exit message and exists the application.
+     */
     public static void handleBye() {
         System.out.println("    ____________________________________________________________\n" +
                 "     Bye. Hope to see you again soon!\n" +
@@ -37,6 +53,12 @@ public class Ui {
         System.exit(0);
     }
 
+    /**
+     * Prints out current lists of tasks.
+     * @param input User input
+     * @param tasks List of tasks
+     * @throws DukeException When list command is not input correctly
+     */
     public static void handleList(String input, TaskList tasks) throws DukeException {
         String[] inputStringArr = input.split(" ");
         try {
@@ -65,6 +87,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Print error message when user input does not match any valid command.
+     * @throws DukeException When user input does not match any valid command
+     */
     public static void handleBadCommand() throws DukeException {
         try {
             throw new DukeException("    ____________________________________________________________\n" +
@@ -75,6 +101,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Print message that a task has been marked as completed.
+     * @param input User input
+     * @param tasks List of tasks
+     * @param storage Update tasks stored persistently
+     * @throws DukeException
+     */
     public static void handleDone(String input, TaskList tasks, Storage storage) throws DukeException {
         String[] inputStringArr = input.split(" ");
         try {
@@ -111,6 +144,13 @@ public class Ui {
         }
     }
 
+    /**
+     * When user adds a Todo class task.
+     * @param input User input
+     * @param tasks List of tasks
+     * @param storage Update tasks stored persistently
+     * @throws DukeException When task description given by user is empty
+     */
     public static void handleTodo(String input, TaskList tasks, Storage storage) throws DukeException {
         String[] inputStringArr = input.split(" ");
         try {
@@ -134,6 +174,12 @@ public class Ui {
         }
     }
 
+    /**
+     * When user adds a Deadline class task.
+     * @param input User input
+     * @param tasks List of tasks
+     * @param storage Update tasks stored persistently
+     */
     public static void handleDeadline(String input, TaskList tasks, Storage storage) {
         String[] separateTaskDate = input.split("/", 2);
         String taskName = ((separateTaskDate[0].split(" ", 2))[1]).strip();
@@ -149,6 +195,12 @@ public class Ui {
         storage.appendToFile("D | 0 | " + taskName + " | " + date + '\n');
     }
 
+    /**
+     * When user adds an Event class task.
+     * @param input User input
+     * @param tasks List of tasks
+     * @param storage Update tasks stored persistently
+     */
     public static void handleEvent(String input, TaskList tasks, Storage storage) {
         String[] separateTaskDate = input.split("/", 2);
         String taskName = ((separateTaskDate[0].split(" ", 2))[1]).strip();
@@ -164,6 +216,12 @@ public class Ui {
         storage.appendToFile("E | 0 | " + taskName + " | " + date + '\n');
     }
 
+    /**
+     * When user deletes a task from the task list.
+     * @param input User input
+     * @param tasks List of tasks
+     * @param storage Update tasks stored persistently
+     */
     public static void handleDelete(String input, TaskList tasks, Storage storage) {
         String[] inputStringArr = input.split(" ");
         int taskNum = Integer.parseInt(inputStringArr[1]);

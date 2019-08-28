@@ -18,6 +18,8 @@ public class Ui {
     private static final String GOT_IT = "Got it. I've added this task:";
     private static final String DELETED = "Noted. I've removed this task:";
     private static final String TASKS = "Here are your tasks in your list:";
+    private static final String MATCHING = "Here are your matching tasks in your list";
+    private static final String NO_MATCHING = "There are no matching tasks!";
     /** Object to scan user input. */
     private BufferedReader userInput;
 
@@ -133,6 +135,21 @@ public class Ui {
         } catch (IOException e) {
             showCloseInputError();
         }
+    }
+
+    /**
+     * Prints all matching tasks.
+     */
+    public void printMatching(TaskList taskList) {
+        System.out.println(MATCHING);
+        System.out.println(taskList.toString());
+    }
+    /**
+     *
+     * Prints message indicating no matching tasks.
+     */
+    public void printNoMatching() {
+        System.out.println(NO_MATCHING);
     }
 
     /**

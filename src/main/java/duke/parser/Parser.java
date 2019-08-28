@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.ByeCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
-import duke.command.EventCommand;
+import duke.command.*;
 
 import duke.dukeexception.DukeException;
 
@@ -15,6 +8,7 @@ import duke.dukeexception.DukeException;
  * Class to handle parsing of user input
  */
 public class Parser {
+
     /**
      * Returns the command that is intended by the user's input String.
      *
@@ -23,7 +17,6 @@ public class Parser {
      * @throws DukeException if input String toParse is not recognized
      * or in the wrong format.
      */
-
     public static Command parse(String toParse) throws DukeException {
         String[] tokens = toParse.split(" ");
         String commandType = tokens[0];
@@ -119,6 +112,13 @@ public class Parser {
             break;
         case "bye":
             commandToReturn = new ByeCommand();
+            break;
+        case "find":
+            if (toParse.split(" ").length < 2) {
+                throw new DukeException("Cannot perform search with no keyword!");
+            }
+            String keyword = toParse.split("find")[1].strip();
+            commandToReturn = new FindCommand(keyword);
             break;
         default:
             //unrecognized command

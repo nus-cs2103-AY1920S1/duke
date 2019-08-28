@@ -48,6 +48,8 @@ public class Duke {
                 try {
                     if (echo.equals("list")) {
                         ui.showTasksInList(tasks);
+                    } else if (c.getCommandType().equals("find")) {
+                      ui.showFoundItems(c.getInstruction(), tasks);
                     } else if (c.getCommandType().equals("done")) {
                         try {
                             if(c.getInstruction().equals("")) {

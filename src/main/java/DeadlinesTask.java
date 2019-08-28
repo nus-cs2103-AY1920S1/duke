@@ -1,14 +1,28 @@
+/**
+ * Represents a specific type of task - Tasks with deadlines
+ *
+ */
 class DeadlinesTask extends Task{
     
-    // Note that the endingDateTime may have null values for
-    // its time 
     DateTime endingDateTime;
 
+    /**
+     * Constructor for DeadlinesTask class
+     *
+     * @param status indicates whether task is complete
+     * @param message indicates what to do for the task
+     * @param endingDateTime deadline of the task
+     */
     public DeadlinesTask (Boolean status, String message, DateTime endingDateTime){
         super(status, message, "[D]");
         this.endingDateTime = endingDateTime;
     }
 
+    /**
+     * String representation of the DeadlineTask
+     *
+     * @return string representation
+     */
     @Override
     public String toString() { 
         String doneString;
@@ -20,6 +34,11 @@ class DeadlinesTask extends Task{
         return  super.type + doneString + " " + super.message + " (by: " +endingDateTime + ")";
     }
 
+    /**
+     * Returns the string representation needed for storage
+     *
+     * @return string format needed for storage
+     */
     public String toFileFormat(){
         String doneString;
         if(super.status){

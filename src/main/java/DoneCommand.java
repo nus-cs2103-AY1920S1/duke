@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
         storage.writeFile(tasks.getList());
     }
 
-/   public int getTaskNumber() {
+   public int getTaskNumber() {
         return taskNumber;
     }
 

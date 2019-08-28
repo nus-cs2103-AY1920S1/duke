@@ -13,7 +13,7 @@ public class Todo extends Task {
             throw new EmptyDescriptionException("a todo");
 
         Task.totalNumOfTasks++;
-        Todo newTask = new Todo(descr, false, Task.totalNumOfTasks);
+        Todo newTask = new Todo(descr.trim(), false, Task.totalNumOfTasks);
         Task.taskList.add(newTask);
         return newTask;
     }

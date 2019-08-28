@@ -118,6 +118,9 @@ public class Duke {
 
         dukeRespond("Hello! I'm Duke", "What can I do for you?");
 
+        //read data from file first
+        FileHandle.readIntoTasksListFromFile(dataFilepath);
+
         //start listening for user input
         Scanner sc = new Scanner(System.in);
         String userCmd = sc.nextLine();

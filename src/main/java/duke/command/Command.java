@@ -1,24 +1,33 @@
-package duke;
+package duke.command;
+
+import duke.task.Deadline;
+import duke.exception.DukeException;
+import duke.task.Event;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-class Command {
+public class Command {
     private CommandType type;
     private String arguments;
     private boolean isExit;
 
-    Command(final CommandType type, final String arguments) {
+    public Command(final CommandType type, final String arguments) {
         this.type = type;
         this.arguments = arguments;
         this.isExit = false;
     }
 
-    boolean isExit() {
+    public boolean isExit() {
         return this.isExit;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.type) {
             case TODO:
                 handleTodo(arguments, tasks, ui, storage);
@@ -59,17 +68,17 @@ class Command {
     private void handleAddTask(final Task task, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.addTask(task)) {
             storage.writeTasks(tasks);
-            ui.showMessage("Got it. I've added this task:");
+            ui.showMessage("Got it. I've added this duke.task:");
             ui.showMessage("  " + task.toString());
             ui.showMessage("Now you have " + tasks.size() + " tasks in the list");
         } else {
-            throw new DukeException("Error: Failed to add task");
+            throw new DukeException("Error: Failed to add duke.task");
         }
     }
 
     private void handleTodo(final String arguments, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isBlank()) {
-            throw new DukeException("The description of a task cannot be empty");
+            throw new DukeException("The description of a duke.task cannot be empty");
         }
         handleAddTask(new Todo(arguments), tasks, ui, storage);
     }
@@ -77,7 +86,7 @@ class Command {
     private void handleDeadline(final String arguments, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] tokens = arguments.split("\\s*/by\\s*", 2);
         if (tokens[0].isBlank()) {
-            throw new DukeException("The description of a task cannot be empty");
+            throw new DukeException("The description of a duke.task cannot be empty");
         } else if (tokens.length == 1) {
             throw new DukeException("Deadline cannot be empty");
         }
@@ -88,7 +97,7 @@ class Command {
     private void handleEvent(final String arguments, TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] tokens = arguments.split("\\s*/at\\s*", 2);
         if (tokens[0].isBlank()) {
-            throw new DukeException("The description of a task cannot be empty");
+            throw new DukeException("The description of a duke.task cannot be empty");
         } else if (tokens.length == 1) {
             throw new DukeException("Event time cannot be empty");
         }
@@ -102,10 +111,10 @@ class Command {
             Task task = tasks.getTask(taskNumber);
             task.markAsDone();
             storage.writeTasks(tasks);
-            ui.showMessage("Nice! I've marked this task as done:");
+            ui.showMessage("Nice! I've marked this duke.task as done:");
             ui.showMessage("  " + task);
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number format");
+            throw new DukeException("Invalid duke.task number format");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist");
         }
@@ -116,11 +125,11 @@ class Command {
             int taskNumber = Integer.parseInt(arguments) - 1;
             Task task = tasks.deleteTask(taskNumber);
             storage.writeTasks(tasks);
-            ui.showMessage("Noted. I've removed this task:");
+            ui.showMessage("Noted. I've removed this duke.task:");
             ui.showMessage("  " + task);
             ui.showMessage("Now you have " + tasks.size() + " tasks in the list");
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number format");
+            throw new DukeException("Invalid duke.task number format");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist");
         }

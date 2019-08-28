@@ -1,31 +1,31 @@
-package duke;
+package duke.task;
 
 import java.time.format.DateTimeFormatter;
 
-abstract class Task {
-    static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+public abstract class Task {
+    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private String description;
     private boolean isDone;
-    protected static final String storageStringSeparator = " | ";
+    static final String storageStringSeparator = " | ";
 
     Task(final String description, final boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
     }
 
-    boolean isDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
-    void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -34,5 +34,5 @@ abstract class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
-    abstract String toStorageString();
+    public abstract String toStorageString();
 }

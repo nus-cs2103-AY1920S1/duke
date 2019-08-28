@@ -1,10 +1,10 @@
-package duke;
+package duke.parser;
 
-import java.util.HashMap;
-import java.util.Map;
+import duke.command.Command;
+import duke.command.CommandType;
 
-class Parser {
-    static Command parse(final String input) {
+public class Parser {
+    public static Command parse(final String input) {
         String[] split = input.trim().split("\\s+", 2);
         String command = split[0].toLowerCase();
         // If split.length == 1, there are no arguments

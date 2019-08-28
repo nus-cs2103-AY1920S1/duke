@@ -1,5 +1,5 @@
-package duke;
+package duke.command;
 
-enum CommandType {
+public enum CommandType {
     TODO, EVENT, DEADLINE, DELETE, DONE, LIST, BYE, UNKNOWN
 }

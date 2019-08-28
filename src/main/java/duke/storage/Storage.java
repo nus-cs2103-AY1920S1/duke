@@ -1,4 +1,11 @@
-package duke;
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,10 +15,10 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-class Storage {
+public class Storage {
     private File file;
 
-    Storage(final String fileName) {
+    public Storage(final String fileName) {
         Path dataDir = getDataDir();
         this.file = dataDir.resolve(fileName).toFile();
         if (!this.file.exists()) {
@@ -19,7 +26,7 @@ class Storage {
         }
     }
 
-    TaskList loadTasks() throws DukeException {
+    public TaskList loadTasks() throws DukeException {
         TaskList tasks = new TaskList();
         if (!this.file.isFile()) {
             return tasks;
@@ -63,13 +70,13 @@ class Storage {
         return tasks;
     }
 
-    void writeTasks(final TaskList tasks) throws DukeException {
+    public void writeTasks(final TaskList tasks) throws DukeException {
         try {
             FileWriter writer = new FileWriter(this.file, false);
             writer.write(tasks.toStorageString());
             writer.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to update task list on disk. " + e.getMessage());
+            throw new DukeException("Failed to update duke.task list on disk. " + e.getMessage());
         }
     }
 

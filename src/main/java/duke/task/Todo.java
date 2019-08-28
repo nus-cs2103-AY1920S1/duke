@@ -1,11 +1,11 @@
-package duke;
+package duke.task;
 
-class Todo extends Task {
-    Todo(final String description, final boolean isDone) {
+public class Todo extends Task {
+    public Todo(final String description, final boolean isDone) {
         super(description, isDone);
     }
 
-    Todo(final String description) {
+    public Todo(final String description) {
         this(description, false);
     }
 
@@ -15,7 +15,7 @@ class Todo extends Task {
     }
 
     @Override
-    String toStorageString() {
+    public String toStorageString() {
         String[] tokens = new String[]{
             "T",
             this.isDone() ? "1" : "0",

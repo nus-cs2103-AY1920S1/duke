@@ -1,29 +1,29 @@
-package duke;
+package duke.task;
 
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
     private ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    boolean addTask(final Task task) {
+    public boolean addTask(final Task task) {
         return tasks.add(task);
     }
 
-    Task getTask(final int index) {
+    public Task getTask(final int index) {
         return tasks.get(index);
     }
 
-    Task deleteTask(final int index) {
+    public Task deleteTask(final int index) {
         Task task = getTask(index);
         tasks.remove(index);
         return task;
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 
@@ -39,7 +39,7 @@ class TaskList {
         return ret.toString();
     }
 
-    String toStorageString() {
+    public String toStorageString() {
         StringBuilder ret = new StringBuilder();
         for (Task task : tasks) {
             ret.append(task.toStorageString())

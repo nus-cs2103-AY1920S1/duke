@@ -14,15 +14,22 @@ public class Duke {
 
     public static final int MAX_TASKS = 100;
 
-    private static TaskList taskList;
+    private TaskList taskList;
+    private Ui ui;
+    private DateParser dateParser;
+    private Storage storage;
 
-    public static void main(String[] args) {
+    public void run() {
 
-        Ui.printGreeting();
+        ui = new Ui();
+        dateParser = new DateParser();
+        storage = new Storage(dateParser);
 
-        taskList = Storage.readDataFile();
+        ui.printGreeting();
 
-        String line = Ui.nextLine();
+        taskList = storage.readDataFile();
+
+        String line = ui.nextLine();
 
         // Keep reading input until the bye command is received.
         while (!line.equals(Command.BYE.toString())) {
@@ -31,28 +38,28 @@ public class Duke {
                 processInputLine(line);
             }
             catch (DukeException e) {
-                Ui.printException(e);
+                ui.printException(e);
             }
             catch (ParseException e) {
-                Ui.adviseDateFormat(DateParser.DATE_FORMAT);
+                ui.adviseDateFormat(DateParser.DATE_FORMAT);
             }
 
-            line = Ui.nextLine();
+            line = ui.nextLine();
         }
 
-        Storage.writeDataFile(taskList);
-        Ui.printGoodbye();
+        storage.writeDataFile(taskList);
+        ui.printGoodbye();
     }
 
     // Processes a single line of input by identifying the command that was given, then delegating it
     // to a subfunction to handle the command call.
-    public static void processInputLine(String line) throws DukeException, ParseException{
+    public void processInputLine(String line) throws DukeException, ParseException{
 
         Command command = Command.getFromString(line.split(" ")[0]);
 
         switch (command) {
         case LIST:
-            Ui.printList(taskList);
+            ui.printList(taskList);
             break;
         case DONE:
             markTaskAsDone(line);
@@ -74,16 +81,16 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(String line) {
+    public void deleteTask(String line) {
 
         int index = Integer.parseInt(line.split(" ")[1]) - 1;
         Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
 
-        Ui.ackDeletion(taskToDelete, taskList.size());
+        ui.ackDeletion(taskToDelete, taskList.size());
     }
 
-    public static void addDeadline(String line) throws EmptyDescriptionException, ParseException {
+    public void addDeadline(String line) throws EmptyDescriptionException, ParseException {
         
         if (verifyArgsNotEmpty(line)) {
             String[] deadlineArgs = line.split(Command.DEADLINE.toString())[1].split(BY_DELIM);
@@ -100,7 +107,7 @@ public class Duke {
         }
     }
 
-    public static void addEvent(String line) throws EmptyDescriptionException, ParseException {
+    public void addEvent(String line) throws EmptyDescriptionException, ParseException {
 
         if (verifyArgsNotEmpty(line)) {
             String[] eventArgs = line.split(Command.EVENT.toString())[1].split(AT_DELIM);
@@ -116,7 +123,7 @@ public class Duke {
             );
         }
     }
-    public static void addTodo(String line) throws EmptyDescriptionException {
+    public void addTodo(String line) throws EmptyDescriptionException {
 
         if (verifyArgsNotEmpty(line)) {
             String todoArg = line.split(Command.TODO.toString())[1];
@@ -133,26 +140,32 @@ public class Duke {
         }
     }
 
-    public static boolean verifyArgsNotEmpty(String args) {
+    public boolean verifyArgsNotEmpty(String args) {
         return args.trim().split(" ").length > 1;
     }
 
-    public static void markTaskAsDone(String line) {
+    public void markTaskAsDone(String line) {
 
         int index = Integer.parseInt(line.split(" ")[1]) - 1;
         Task doneTask = taskList.get(index);
         doneTask.markAsDone();
 
-        Ui.ackDone(doneTask);
+        ui.ackDone(doneTask);
     }
 
-    public static void addTask(Task newTask) {
+    public void addTask(Task newTask) {
         taskList.add(newTask);
         
-        Ui.ackAddition(newTask, taskList.size());
+        ui.ackAddition(newTask, taskList.size());
     }
 
-    public static Date parseDate(String dateStr) throws ParseException {
-        return DateParser.parse(dateStr);
+    public Date parseDate(String dateStr) throws ParseException {
+        return dateParser.parse(dateStr);
     }
+    
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
 }

@@ -8,22 +8,22 @@ public class Ui {
     public static final String LIST_STR = "Here are the tasks in your list:";
     public static final String DONE_STR = "Nice! I've marked this task as done:";
 
-    private static Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
 
-    public static void printGoodbye() {
+    public void printGoodbye() {
         printWithLongLines(BYE_STR);
         input.close();
     }
 
-    public static void printGreeting() {
+    public void printGreeting() {
         printWithLongLines(GREETING);
     }
 
-    public static String nextLine() {
+    public String nextLine() {
         return input.nextLine();
     }
 
-    public static void ackDeletion(Task deletedTask, int listSize) {
+    public void ackDeletion(Task deletedTask, int listSize) {
         printWithLongLines(
             "Noted. I've removed this task:\n"
             + deletedTask
@@ -33,7 +33,7 @@ public class Ui {
         );
     }
 
-    public static void ackDone(Task doneTask) {
+    public void ackDone(Task doneTask) {
         printWithLongLines(
             DONE_STR
             + "\n"
@@ -41,7 +41,7 @@ public class Ui {
         );
     }
 
-    public static void ackAddition(Task newTask, int listSize) {
+    public void ackAddition(Task newTask, int listSize) {
         printWithLongLines(
             "Got it. I've added this task:\n"
             + newTask
@@ -51,7 +51,7 @@ public class Ui {
         );
     }
 
-    public static void printList(TaskList taskList) {
+    public void printList(TaskList taskList) {
         String wholeList = LIST_STR + "\n";
         
         for (int i = 0; i < taskList.size(); i++) {
@@ -67,15 +67,15 @@ public class Ui {
         printWithLongLines(wholeList);
     }
 
-    public static void adviseDateFormat(String format) {
+    public void adviseDateFormat(String format) {
         printWithLongLines("Required date format: " + format);
     }
 
-    public static void printException(Exception e) {
+    public void printException(Exception e) {
         printWithLongLines(e.getMessage());
     }
 
-    private static void printWithLongLines(String stringToPrint) {
+    private void printWithLongLines(String stringToPrint) {
         System.out.println(
             LONG_LINE
             + "\n"

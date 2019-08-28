@@ -15,8 +15,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
-    @Override
-    public String save() {
-        return "E" + super.save() + "/" + DateParser.format(at);
+    public Date getAt() {
+        return this.at;
     }
 }

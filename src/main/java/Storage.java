@@ -8,10 +8,15 @@ import java.text.ParseException;
 
 public class Storage {
 
-    public static final String USER_NAME = System.getProperty("user.name");
-    private static String filePath = "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat"; 
+    public final String USER_NAME = System.getProperty("user.name");
+    private String filePath = "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat"; 
+    private DateParser dateParser;
 
-	public static TaskList readDataFile() {
+    public Storage (DateParser dateParser) {
+        this.dateParser = dateParser;
+    }
+
+	public TaskList readDataFile() {
 
         Scanner inStream;
         TaskList taskList = new TaskList(Duke.MAX_TASKS);
@@ -28,11 +33,11 @@ public class Storage {
                     break;
                 case 'E':
                     String eLine = line.substring(2, line.length());
-                    taskList.add(new Event(eLine.split("/")[0], DateParser.parse(eLine.split("/")[1])));
+                    taskList.add(new Event(eLine.split("/")[0], dateParser.parse(eLine.split("/")[1])));
                     break;
                 case 'D':
                     String dLine = line.substring(2, line.length());
-                    taskList.add(new Deadline(dLine.split("/")[0], DateParser.parse(dLine.split("/")[1])));
+                    taskList.add(new Deadline(dLine.split("/")[0], dateParser.parse(dLine.split("/")[1])));
                     break;
                 default:
                     break;
@@ -59,7 +64,7 @@ public class Storage {
         return new TaskList(Duke.MAX_TASKS);
     }
 
-    public static void writeDataFile(TaskList taskList) {
+    public void writeDataFile(TaskList taskList) {
         
         PrintWriter outStream;
 
@@ -67,7 +72,7 @@ public class Storage {
             outStream = new PrintWriter(new FileOutputStream(filePath));
 
             for (Task t : taskList) {
-                outStream.println(t.save());
+                outStream.println(saveTask(t));
             }
 
             outStream.close();
@@ -75,5 +80,32 @@ public class Storage {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String saveTask(Task t) {
+
+        String doneChar = (t.isDone ? "1" : "0");
+        String classChar;
+        String timeStr;
+
+        if (t instanceof Todo) {
+            classChar = "T";
+        } else if (t instanceof Event) {
+            classChar = "E";
+        } else if (t instanceof Deadline) {
+            classChar = "D";
+        } else {
+            classChar = " ";
+        }
+
+        if (t instanceof Event) {
+            timeStr = "/" + dateParser.format(((Event)t).getAt());
+        } else if (t instanceof Deadline) {
+            timeStr = "/" + dateParser.format(((Deadline)t).getBy());
+        } else {
+            timeStr = "";
+        }
+
+        return classChar + doneChar + t.getDescription() + timeStr;
     }
 }

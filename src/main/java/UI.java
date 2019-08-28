@@ -22,6 +22,10 @@ public class UI {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    public void printMessage(String random) {
+        System.out.println(random);
+    }
+
     public void showLoadingError() {
         System.out.println("Error, file not found");
     }

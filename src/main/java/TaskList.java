@@ -13,7 +13,6 @@ public class TaskList {
             throw new IllegalArgumentException("Nothing found in list");
         }
         int number = 1;
-        System.out.println("Here are the tasks in your list:");
         for (Task task : tasks) {
             String outputString = number + ". " + task.toString();
             System.out.println(outputString);
@@ -23,8 +22,6 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
-        String outputString = "Got it. I've added this task: \n" + task.toString();
-        System.out.println(outputString);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
@@ -34,7 +31,6 @@ public class TaskList {
         }
         Task task = tasks.get(number - 1);
         task.setDone();
-        System.out.println("Nice! I've marked this task as done: ");
         System.out.println(task.toString());
     }
 

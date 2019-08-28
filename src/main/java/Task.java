@@ -11,9 +11,8 @@ public class Task {
         isDone = false;
     }
 
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return (isDone ? "Y" : "N");
-        //return (isDone ? "\u2713" : "\u2718");
     }
 
     public void markAsDone() {

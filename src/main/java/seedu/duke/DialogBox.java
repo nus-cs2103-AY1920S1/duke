@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -22,7 +25,7 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -46,6 +49,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        dialog.setTextAlignment(TextAlignment.LEFT);
         setAlignment(Pos.TOP_LEFT);
     }
 
@@ -56,7 +60,8 @@ public class DialogBox extends HBox {
      * @return The <code>DialogBox</code>.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db =  new DialogBox(text, img);
+        return db;
     }
 
     /**

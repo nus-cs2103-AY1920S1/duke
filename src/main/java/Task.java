@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected int num;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.num = 0;
     }
 
     public String getStatusIcon() {
@@ -13,6 +15,13 @@ public class Task {
 
     public void setStatusIcon(boolean b) {
         isDone = b;
+        if (isDone) {
+            num = 1;
+        }
+    }
+
+    public String format() {
+        return "|" + num + "|" + description;
     }
 
     public String toString() {

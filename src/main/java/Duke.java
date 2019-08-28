@@ -1,22 +1,37 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+    public static void main(String[] args) throws IOException {
+
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File f = new File("data/duke.txt");
+        f.createNewFile();
+        Scanner s = new Scanner(f);
+
         Integer num; //number in list which is done
         Task currTask; //refers to current task in list
         String currEvent;
         ArrayList<Task> list = new ArrayList<Task>();
+        try {
+            readFileContents("data/duke.txt", list);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
         String line = sc.nextLine();
+
         while (!line.equals("bye")) {
             try {
                 String desc = ""; //current task being added
@@ -74,6 +89,54 @@ public class Duke {
                 line = sc.nextLine();
             }
         }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            sb.append(task.format()).append("\n");
+        }
+        writeToFile("data/duke.txt", sb.toString());
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void readFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            boolean checkDone;
+            String currLine = s.nextLine();
+            String[] currWords= currLine.split("[|]", 4);
+            if (currWords[1].equals("1")) {
+                checkDone = true;
+            } else {
+                checkDone = false;
+            }
+
+            if (currWords[0].equals("T")) {
+                Task addedTask = new ToDos(currWords[2]);
+                addedTask.setStatusIcon(checkDone);
+                list.add(addedTask);
+            } else if (currWords[0].equals("D")) {
+                Task addedTask = new Deadline(currWords[2], currWords[3]);
+                addedTask.setStatusIcon(checkDone);
+                list.add(addedTask);
+            } else if (currWords[0].equals("E")) {
+                Task addedTask = new Event(currWords[2], currWords[3]);
+                addedTask.setStatusIcon(checkDone);
+                list.add(addedTask);
+            }
+        }
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 }

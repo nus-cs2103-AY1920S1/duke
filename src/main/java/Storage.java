@@ -44,7 +44,11 @@ public class Storage {
                             boolean flag = false;
                             for (int i = 2; i < keywords.length; i++) {
                                 if (flag) {
-                                    time = time + " " + keywords[i];
+                                    if (keywords[i].equals(")")) {
+                                        break;
+                                    } else {
+                                        time = time + " " + keywords[i];
+                                    }
                                 } else if (keywords[i].equals("(by:")) {
                                     flag = true;
                                 } else {
@@ -63,7 +67,11 @@ public class Storage {
                             boolean flag = false;
                             for (int i = 2; i < keywords.length; i++) {
                                 if (flag) {
-                                    time = time + " " + keywords[i];
+                                    if (keywords[i].equals(")")) {
+                                        break;
+                                    } else {
+                                        time = time + " " + keywords[i];
+                                    }
                                 } else if (keywords[i].equals("(at:")) {
                                     flag = true;
                                 } else {
@@ -90,9 +98,9 @@ public class Storage {
     public void writeToFile(ArrayList<Task> taskList) throws IOException {
         writer = new FileWriter(file);
         try {
-            String temp = taskList.remove(0).toString();
-            while (!taskList.isEmpty()) {
-                temp = temp + "\n" + taskList.remove(0).toString();
+            String temp = taskList.get(0).toString();
+            for (int i = 1; i < taskList.size(); i++) {
+                temp = temp + "\n" + taskList.get(0).toString();
             }
             writer.write(temp);
         } catch (IndexOutOfBoundsException ex) {

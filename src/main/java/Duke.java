@@ -54,23 +54,28 @@ public class Duke {
                     outputList(taskList);
                 } else if (keywords[0].equals("done")) {
                     System.out.println(doneTask(Integer.parseInt(keywords[1])));
+                    writeHandler();
                 } else if (keywords[0].equals("todo")) {
                     String temp = parseTodo(keywords);
                     System.out.println(todo(temp.strip()));
                     pointer++;
+                    writeHandler();
                 } else if (keywords[0].equals("deadline")) {
                     String[] temp = parseTaskTime(keywords, "deadline");
                     Calendar dateTime = parseTime(temp[1].strip());
                     System.out.println(deadline(temp[0].strip(), dateTime));
                     pointer++;
+                    writeHandler();
                 } else if (keywords[0].equals("event")) {
                     String[] temp = parseTaskTime(keywords, "event");
                     Calendar dateTime = parseTime(temp[1].strip());
                     System.out.println(event(temp[0].strip(), dateTime));
                     pointer++;
+                    writeHandler();
                 } else if (keywords[0].equals("delete")) {
                     System.out.println(deleteTask(Integer.parseInt(keywords[1])));
                     pointer--;
+                    writeHandler();
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -83,11 +88,7 @@ public class Duke {
         }
 
         System.out.println(upperBorder + "Bye. Hope to see you again soon!\n" + lowerBorder);
-        try {
-            storageHandler.writeToFile(taskList);
-        } catch (IOException ex) {
-            System.out.println("Your file could not be written. :(");
-        }
+
 
         sc.close();
 
@@ -235,6 +236,14 @@ public class Duke {
             return taskWrap(taskList.remove(pointer - 1), "delete");
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
+        }
+    }
+
+    public static void writeHandler() {
+        try {
+            storageHandler.writeToFile(taskList);
+        } catch (IOException ex) {
+            System.out.println("Your file could not be written. :(");
         }
     }
 

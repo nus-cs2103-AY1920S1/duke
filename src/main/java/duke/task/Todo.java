@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents the Duke.Task.Todo object
+ * Represents the Duke.Task.Todo object.
  * One Duke.Task.Todo object per Duke.Task.Todo.
  */
 public class Todo extends Task {

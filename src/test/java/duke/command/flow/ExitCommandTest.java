@@ -1,8 +1,8 @@
-package dukebot.command.flow;
+package duke.command.flow;
 
-import dukebot.storage.Storage;
-import dukebot.task.TaskList;
-import dukebot.ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

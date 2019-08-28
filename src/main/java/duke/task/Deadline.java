@@ -15,7 +15,8 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskName() {
-        return super.getTaskName() + " (by: " + deadlineTime + ")";
+        return super.getTaskName()
+                + " (by: " + Command.DATE_FORMAT.format(deadlineTime) + ")";
     }
 
     @Override
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String toDelimitedString() {
-        return String.format("%c | %c | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(), Command.DATE_FORMAT.format(this.deadlineTime));
+        return String.format("%c | %c | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(),
+                Command.DATE_FORMAT.format(this.deadlineTime));
     }
 }

@@ -7,10 +7,20 @@ import duke.command.flow.ExitCommand;
 import duke.command.list.ListCommand;
 import duke.command.update.DeleteTaskCommand;
 import duke.command.update.MakeDoneCommand;
-import duke.exception.*;
+import duke.exception.DukeException;
+import duke.exception.DukeTodoException;
+import duke.exception.DukeDeadlineException;
+import duke.exception.DukeEventException;
+import duke.exception.DukeUnknownCommandException;
 
 public class Parser {
 
+    /**
+     * Parses a given user input.
+     * @param input Given user input
+     * @return Command object
+     * @throws DukeException If the inputs are incorrect in any way
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("list")) {
             return new ListCommand();

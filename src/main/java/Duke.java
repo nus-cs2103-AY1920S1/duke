@@ -19,20 +19,30 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructs the Duke Object.
+     * @param filePath Path to the data text file
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException fnfe) {
             tasks = new TaskList();
             ui.exposeError("File not found at " + filePath + ", starting with a clean slate.");
-        } catch (IOException|ParseException e) {
+        } catch (IOException | ParseException e) {
             tasks = new TaskList();
             ui.exposeError("Unable to read file at " + filePath + ", starting with a clean slade");
         }
+
     }
 
+
+    /**
+     * Runs the logic of Duke.
+     */
     public void run() {
 
         this.ui.printWelcomeMsg();
@@ -51,6 +61,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke instance.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         Duke dukeInstance = new Duke("data/duke.txt");
         dukeInstance.run();

@@ -6,11 +6,17 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    private Date eventTimeTo;
     private Date eventTimeFrom;
+    private Date eventTimeTo;
 
 
-    public Event(String eventName, Date eventTimeTo, Date eventTimeFrom) {
+    /**
+     * Constructs the Event object.
+     * @param eventName Name of event
+     * @param eventTimeFrom Starting Date and Time of event
+     * @param eventTimeTo Ending Date and Time of event
+     */
+    public Event(String eventName, Date eventTimeFrom, Date eventTimeTo) {
         super(eventName);
         this.eventTimeFrom = eventTimeFrom;
         this.eventTimeTo = eventTimeTo;
@@ -18,7 +24,9 @@ public class Event extends Task {
 
     @Override
     public String getTaskName() {
-        return super.getTaskName() + " (at: " + eventTimeFrom + " - " + eventTimeTo + ")";
+        return super.getTaskName()
+                + " (at: " + Command.DATE_FORMAT.format(eventTimeFrom) + " - "
+                + Command.DATE_FORMAT.format(eventTimeTo) + ")";
     }
 
     @Override

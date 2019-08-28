@@ -1,4 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -37,11 +39,11 @@ public class Duke {
                 } else if (input.matches("deadline\\s+.+")) {
                     String taskDetails = input.replaceAll("deadline\\s+", "");
                     String[] details = taskDetails.split("\\s+/by\\s+");
-                    taskList.add(new Deadline(details[0], details[1]));
+                    taskList.add(new Deadline(details[0], dateConversion(details[1])));
                 } else if (input.matches("event\\s+.+")) {
                     String taskDetails = input.replaceAll("event\\s+", "");
                     String[] details = taskDetails.split("\\s+/at\\s+");
-                    taskList.add(new Event(details[0], details[1]));
+                    taskList.add(new Event(details[0], dateConversion(details[1])));
                 } else {
                     try {
                         if (input.equals("todo") || input.equals("deadline") || input.equals("event")
@@ -80,5 +82,19 @@ public class Duke {
         if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
         }
+    }
+    public static String dateConversion(String s) {
+        SimpleDateFormat numDateTime = new SimpleDateFormat("d/M/y HHmm");
+        SimpleDateFormat textDateTime = new SimpleDateFormat("d MMMM y, h.mm a");
+        try {
+            if (s.matches("\\d+/\\d+/\\d+\\s+\\d+")) {
+                Date d = numDateTime.parse(s);
+                s = textDateTime.format(d);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return s;
     }
 }

@@ -1,10 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    protected String at;
+    protected LocalDateTime at;
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DateTimeParseException {
         super(description);
-        this.at = at;
+        this.at = parseTime(at.trim());
     }
 
     @Override

@@ -3,6 +3,10 @@ public class Todo extends Task {
         super(taskName);
     }
 
+    /**
+     * the details for the todo task
+     * @return string
+     */
     public String getTaskDetails(){
         String doneSymbol;
         if (isDone()) {

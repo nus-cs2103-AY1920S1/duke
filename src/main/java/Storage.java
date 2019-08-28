@@ -12,6 +12,11 @@ public class Storage {
     BufferedReader bufferedReader;
     FileReader fileReader;
 
+    /**
+     * This function will load the file
+     * @return the buffered file for TaskList usage
+     * @throws DukeException
+     */
     BufferedReader load() throws DukeException{
         try {
             fileReader = new FileReader(filePath);
@@ -22,6 +27,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the file
+     * @param input string of the text to write in the file
+     * @throws DukeException
+     */
     void write(String input) throws DukeException{
         try {
             FileWriter fileWriter = new FileWriter(filePath);

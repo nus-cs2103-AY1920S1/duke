@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+/**
+ * Driver class for the Duke iP.
+ * Duke manages a task list that allows users to add, track and delete various types of tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -16,6 +20,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     * The method loops until the user inputs 'bye', which then closes the program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -31,6 +39,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method of the driver class.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.tmp").run();
     }

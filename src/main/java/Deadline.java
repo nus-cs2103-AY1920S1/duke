@@ -1,6 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the deadline task given by the user.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -10,6 +13,10 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, formatter);
     }
 
+    /**
+     * Formats the task such that it can be outputted in a readable form for the user.
+     * @return The description of the task.
+     */
     @Override
     public String toString() {
         String mark = (isDone ? "✓" : "✗");

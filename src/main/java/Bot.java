@@ -125,11 +125,7 @@ public class Bot {
         while (s.hasNext()) {
             String text = s.nextLine();
 
-            System.out.println(text);
-
             String[] split = text.split(" \\| ");
-
-            System.out.println(Arrays.toString(split));
 
             String description = split[2];
 

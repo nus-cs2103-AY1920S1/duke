@@ -85,7 +85,7 @@ public class Ui {
                     throw new DukeException("delete");
                 }
                 int taskNum = Parser.getTaskNum(inputInstruction);
-                if (taskNum > currentTaskList.noOfTask()) {
+                if (taskNum > currentTaskList.getNoOfTask()) {
                     throw new DukeException("index");
                 }
                 Task currentTask = currentTaskList.getTask(taskNum - 1);

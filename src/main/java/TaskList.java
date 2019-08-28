@@ -30,7 +30,7 @@ public class TaskList {
         listOfTask.add(newTask);
     }
 
-    public int noOfTask() {
+    public int getNoOfTask() {
         return listOfTask.size();
     }
 

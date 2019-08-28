@@ -1,8 +1,15 @@
 package duke.command;
 
 import duke.DukeException;
+
 import duke.storage.Storage;
-import duke.task.*;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import duke.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -13,7 +20,7 @@ public class AddCommand extends Command {
     private String type;
     private String description;
 
-    private static final String MESSAGE_ADD      = "Got it. I've added this task:\n  %s\n"
+    private static final String MESSAGE_ADD = "Got it. I've added this task:\n  %s\n"
             + "Now you have %d %s in the list.";
 
     private static final String ERROR_MISSING_DESCRIPTION = "The description cannot be empty.";
@@ -23,7 +30,7 @@ public class AddCommand extends Command {
     private static final String ERROR_WRONG_DATE_FORMAT  = "The date time provided is in the wrong format. "
             + "Expected d/m/yyyy hh:mm.";
 
-    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
 
     public AddCommand(String type, String description) {
         this.type = type;

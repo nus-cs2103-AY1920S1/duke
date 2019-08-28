@@ -1,8 +1,13 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.command.*;
-import duke.task.TaskList;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
 
 public class Parser {
 

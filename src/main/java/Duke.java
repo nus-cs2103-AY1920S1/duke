@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static String divider = "    " + "-".repeat(61);
+    private static String dataFilepath = "./data/tasks.txt";
 
     private static void listData() {
         String[] taskStrings = new String[Task.totalNumOfTasks + 1];
@@ -117,9 +118,14 @@ public class Duke {
 
         dukeRespond("Hello! I'm Duke", "What can I do for you?");
 
+        //read data from file first
+        FileHandle.readIntoTasksListFromFile(dataFilepath);
+
         //start listening for user input
         Scanner sc = new Scanner(System.in);
         String userCmd = sc.nextLine();
+
+        boolean resaveData = false;
 
         while (!userCmd.equalsIgnoreCase("bye") &&
             !userCmd.equalsIgnoreCase("exit")) {
@@ -134,15 +140,19 @@ public class Duke {
                         break;
                     case "done":
                         markDone(userCmd);
+                        resaveData = true;
                         break;
                     case "delete":
                         deleteTask(userCmd);
+                        resaveData = true;
                         break;
                     default:
                         addData(userCmd);
+                        resaveData = true;
                         break;
                     }
 
+                    FileHandle.appendToFile(dataFilepath, Task.taskList);
                 //}
             } catch (IllegalArgumentException e) {
                 dukeRespond(e.toString());

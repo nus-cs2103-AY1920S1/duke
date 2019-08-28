@@ -4,6 +4,7 @@ public class Event extends Task {
     //Deadlines can have (notes)
     private String description;
     private String notesInBrackets;
+    private String datetime;
 
     private Event() {}
     private Event(String descr, boolean completed, int id) throws IncorrectTaskFormatException {
@@ -19,20 +20,21 @@ public class Event extends Task {
         if (tmp.length < 2)
             throw new IncorrectTaskFormatException("at");
 
-        this.description = tmp[0];
+        this.description = tmp[0].trim();
         Scanner tmp2 = new Scanner(tmp[1]);
-        String term = tmp2.next();
+        String term = tmp2.next().trim();
         String datetime = "";
         if (tmp2.hasNext())
-            datetime = tmp2.nextLine();
+            datetime = tmp2.nextLine().trim();
         tmp2.close();
 
         if (datetime.equals(""))
             throw new IncorrectTaskFormatException("at");
 
-        this.notesInBrackets = String.format("%s:%s", term, datetime);
+        this.notesInBrackets = String.format("%s: %s", term, datetime);
 
-        super.description = String.format("%s(%s)", this.description, this.notesInBrackets);
+        super.description = String.format("%s (%s)", this.description, this.notesInBrackets);
+        this.datetime = datetime;
     }
 
     public static Event create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {
@@ -40,8 +42,13 @@ public class Event extends Task {
             throw new EmptyDescriptionException("an event");
 
         Task.totalNumOfTasks++;
-        Event newTask = new Event(descr, false, Task.totalNumOfTasks);
+        Event newTask = new Event(descr.trim(), false, Task.totalNumOfTasks);
         Task.taskList.add(newTask);
         return newTask;
+    }
+
+    @Override
+    public String getDescription() {
+        return String.format("%s | %s", this.description, this.datetime);
     }
 }

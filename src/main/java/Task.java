@@ -14,34 +14,6 @@ public abstract class Task {
 
     protected TaskType taskType;
 
-    /*
-    //constructors
-    private Task() {
-        this.description = "";
-        this.completed = false;
-        this.id = 0;
-        this.taskType = "";
-    }
-
-    private Task(String description, boolean completed, int id) {
-        this.description = description;
-        this.completed = completed;
-        this.id = id;
-    }
-
-    //methods
-    public static Optional<Task> createTask(String description, boolean completed) {
-        if (description.equals("")) {
-            return Optional.empty();
-        } else {
-            totalNumOfTasks++;
-            Task newTask = new Task(description, false, totalNumOfTasks);
-            taskList.add(newTask);
-            return Optional.of(newTask);
-        }
-    }
-     */
-
     //getter mtds
     public String getDescription() {
         return this.description;
@@ -52,19 +24,39 @@ public abstract class Task {
     public boolean isCompleted() {
         return this.completed;
     }
+    public TaskType getTaskType() { return this.taskType; }
     //setter mtds
     public void setCompleted() {
         this.completed = true;
     }
 
+
+    public static Task createTask(TaskType taskType, String description) {
+        Task t = null;
+        switch (taskType) {
+            case T:
+            t = Todo.create(description);
+            break;
+            case D:
+            t = Deadline.create(description);
+            break;
+            case E:
+            t = Event.create(description);
+            break;
+            default:
+        }
+        return t;
+    }
+
+
     @Override
     public String toString() {
         String checked;
         if (this.completed) {
-            checked = "\u2713";
+            checked = tick;
         } else {
-            checked = "\u2717";
+            checked = cross;
         }
-        return String.format("[%s][%s]%s", this.taskType, checked, this.description);
+        return String.format("[%s][%s] %s", this.taskType, checked, this.description);
     }
 }

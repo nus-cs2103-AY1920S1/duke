@@ -3,52 +3,52 @@ What can I do for you?
 
 Here are the tasks in your list:
 1.[T][✓] join sports club
-2.[D][✘] oral presentation preparation (by: September 18th)
-3.[E][✘] coding workshop (at: Oct 11th 10-11am)
+2.[D][✘] oral presentation preparation (by: Wed, 18 September 2019, 02:00PM)
+3.[E][✘] coding workshop (at: 11 October 2019, 10:00AM - 11:00AM)
 
 Got it. I've added this task:
   [T][✘] read book
 Now you have 4 tasks in the list.
 
 Got it. I've added this task:
-  [D][✘] return book (by: June 6th)
+  [D][✘] return book (by: Thu, 6 June 2019, 08:00AM)
 Now you have 5 tasks in the list.
 
 Got it. I've added this task:
-  [E][✘] project meeting (at: Aug 6th 2-4pm)
+  [E][✘] project meeting (at: 6 August 2019, 02:00PM - 04:00PM)
 Now you have 6 tasks in the list.
 
 Here are the tasks in your list:
 1.[T][✓] join sports club
-2.[D][✘] oral presentation preparation (by: September 18th)
-3.[E][✘] coding workshop (at: Oct 11th 10-11am)
+2.[D][✘] oral presentation preparation (by: Wed, 18 September 2019, 02:00PM)
+3.[E][✘] coding workshop (at: 11 October 2019, 10:00AM - 11:00AM)
 4.[T][✘] read book
-5.[D][✘] return book (by: June 6th)
-6.[E][✘] project meeting (at: Aug 6th 2-4pm)
+5.[D][✘] return book (by: Thu, 6 June 2019, 08:00AM)
+6.[E][✘] project meeting (at: 6 August 2019, 02:00PM - 04:00PM)
 
 Nice! I've marked this task as done:
-  [D][✓] return book (by: June 6th)
+  [D][✓] return book (by: Thu, 6 June 2019, 08:00AM)
 
 Here are the tasks in your list:
 1.[T][✓] join sports club
-2.[D][✘] oral presentation preparation (by: September 18th)
-3.[E][✘] coding workshop (at: Oct 11th 10-11am)
+2.[D][✘] oral presentation preparation (by: Wed, 18 September 2019, 02:00PM)
+3.[E][✘] coding workshop (at: 11 October 2019, 10:00AM - 11:00AM)
 4.[T][✘] read book
-5.[D][✓] return book (by: June 6th)
-6.[E][✘] project meeting (at: Aug 6th 2-4pm)
+5.[D][✓] return book (by: Thu, 6 June 2019, 08:00AM)
+6.[E][✘] project meeting (at: 6 August 2019, 02:00PM - 04:00PM)
 
 ☹ OOPS!!! Task No.8 is not present in your list. Please enter a valid task ID.
 
 Noted. I've removed this task:
-  [D][✓] return book (by: June 6th)
+  [D][✓] return book (by: Thu, 6 June 2019, 08:00AM)
 Now you have 5 tasks in the list.
 
 Here are the tasks in your list:
 1.[T][✓] join sports club
-2.[D][✘] oral presentation preparation (by: September 18th)
-3.[E][✘] coding workshop (at: Oct 11th 10-11am)
+2.[D][✘] oral presentation preparation (by: Wed, 18 September 2019, 02:00PM)
+3.[E][✘] coding workshop (at: 11 October 2019, 10:00AM - 11:00AM)
 4.[T][✘] read book
-5.[E][✘] project meeting (at: Aug 6th 2-4pm)
+5.[E][✘] project meeting (at: 6 August 2019, 02:00PM - 04:00PM)
 
 ☹ OOPS!!! Task No.8 is not present in your list. Please enter a valid task ID.
 

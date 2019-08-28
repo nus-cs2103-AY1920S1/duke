@@ -7,6 +7,12 @@ import duke.task.Task;
 
 public class Parser {
 
+    /**
+     * Parses the user command and returns the appropriate command object.
+     * @param command A string containing user input.
+     * @return A command object.
+     * @throws DukeException throws an exception if user gave illegal input.
+     */
     public static Command parse(String[] command) throws DukeException {
         try {
             CommandList commandCode = CommandList.valueOf(command[0].toUpperCase());

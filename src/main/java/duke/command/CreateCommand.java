@@ -10,7 +10,12 @@ import duke.tasklist.Tasklist;
 import duke.ui.Ui;
 
 public class CreateCommand extends Command {
-
+    /**
+     * Creates a todo object with the given parameters.
+     * @param details Details of the todo.
+     * @return The todo task.
+     * @throws DukeException throws a duke exception.
+     */
     public static Task createTodo(String details) throws DukeException {
         Task todo = null;
         try {
@@ -29,6 +34,12 @@ public class CreateCommand extends Command {
         } // End catch.
     } // End method.
 
+    /**
+     * Creates a deadline object with the given parameters.
+     * @param details Details of the deadline.
+     * @return The deadline task.
+     * @throws DukeException throws a duke exception.
+     */
     public static Task createDeadline(String details) throws DukeException {
         Task deadline = null;
         try {
@@ -50,6 +61,12 @@ public class CreateCommand extends Command {
         } // End catch.
     } // End method.
 
+    /**
+     * Creates an event object with the given parameters.
+     * @param details Details of the event.
+     * @return The event task.
+     * @throws DukeException throws a duke exception.
+     */
     public static Task createEvent(String details) throws DukeException {
         Task event = null;
         try {

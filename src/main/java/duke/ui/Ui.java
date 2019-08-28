@@ -17,12 +17,19 @@ public class Ui {
         System.out.println(greetingText);
     }
 
+    /**
+     * Outputs farewell message.
+     */
     public void showFarewell() {
         String farewellText = "Bye <3 Hope to see you again soon!";
         System.out.println(farewellText);
         sc.close(); // Close the scanner.
     }
 
+    /**
+     * Outputs the user's current list of tasks.
+     * @param tasks Represents the user's current list.
+     */
     public void showList(Tasklist tasks) {
         String listText = "Here are the tasks in your list:";
         System.out.println(listText);
@@ -45,12 +52,21 @@ public class Ui {
                 + "I sure need more sleep...");
     } // End method.
 
+    /**
+     * Reads the user's command.
+     * @return the user's command.
+     */
     public String[] readCommand() {
         String command = sc.next();
         String details = sc.nextLine();
         return new String[] {command, details};
     }
 
+    /**
+     * Tells the user that a task was added and the current amount of tasks in the list.
+     * @param desc Description of the task added.
+     * @param size The current size of the list.
+     */
     public void addTaskDialogue(String desc, int size) {
         String addText = "Got it. I've added this task:";
         String taskWord = size <= 1 ? "task" : "tasks"; // Ensure correct grammar.
@@ -66,12 +82,21 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Tell the user that the task has been marked as done.
+     * @param message String representation of the task that was marked as done.
+     */
     public void showDone(String message) {
         String doneText = "Nice! I've marked this task as done: ";
         System.out.println(doneText);
         System.out.println("  " + message);
     }
 
+    /**
+     * Inform user that a task was deleted.
+     * @param message Represents the deleted task.
+     * @param size The current size of the list after deletion.
+     */
     public void showDeleted(String message, int size) {
         String removeText = "Noted. I've removed this task:";
         String taskWord = size <= 1 ? "task" : "tasks"; // Ensure correct grammar.

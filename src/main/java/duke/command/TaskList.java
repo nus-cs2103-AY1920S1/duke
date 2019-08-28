@@ -22,4 +22,12 @@ public class TaskList {
     public Task delete(int index) {
         return list.remove(index);
     }
+
+    public ArrayList<Task> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Task> list) {
+        this.list = list;
+    }
 }

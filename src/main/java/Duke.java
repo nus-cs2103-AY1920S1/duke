@@ -1,15 +1,11 @@
-import java.io.File;
+import task.TaskList;
+
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Scanner;
 
 public class Duke {
     public static final String LINE = "    ____________________________________________________________\n";
-    // private static ArrayList<Task> tasks;
+    // private static ArrayList<task.Task> tasks;
     private static Storage storage;
     private static Ui ui;
     private static Parser parser;

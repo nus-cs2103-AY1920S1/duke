@@ -26,6 +26,8 @@ public class Parser {
             return new EventCommand(command);
         } else if (command.length() >= 6 && command.substring(0, 6).equals("delete")) {
             return new DeleteCommand(command);
+        } else if (command.length() >= 4 && command.substring(0, 4).equals("find")) {
+            return new FindCommand(command);
         } else {
             throw new InvalidCommandDukeException();
         }

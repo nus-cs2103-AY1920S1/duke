@@ -8,7 +8,7 @@ class Event extends Task{
     }
 
     String saveInfo() {
-        return "event" + " " + taskDetails + " /at " + ToDoList.inputDateFormat.format(eventAt) + System.getProperty("line.separator")
+        return "event" + " " + taskDetails + " /at " + TaskList.inputDateFormat.format(eventAt) + System.getProperty("line.separator")
                 + completed;
     }
 
@@ -22,7 +22,7 @@ class Event extends Task{
         }
         sb.append(taskDetails);
         sb.append (" (");
-        sb.append(ToDoList.outputDateFormat.format(eventAt));
+        sb.append(TaskList.outputDateFormat.format(eventAt));
         sb.append(")");
         return sb.toString();
     }

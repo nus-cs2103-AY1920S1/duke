@@ -1,5 +1,5 @@
 /**
- * Class to handle parsing of user input
+ * Class to handle parsing of user input.
  */
 public class Parser {
 
@@ -8,7 +8,7 @@ public class Parser {
      * 
      * @param line The line input by the user
      * @return Command object representing the command that was present in the line
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException If there is no valid Command in the line
      */
     public Command getCommandFromLine(String line) throws InvalidCommandException {
         return Command.getFromString(line.split(" ")[0]);
@@ -23,8 +23,7 @@ public class Parser {
     public int getIndexFromLine(String line) {
         try {
             return Integer.parseInt(line.split(" ")[1]) - 1;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return -1;
         }
     }
@@ -40,8 +39,7 @@ public class Parser {
     public String getBeforeDelim(String line, String command, String delim) {
         try {
             return line.split(command)[1].split(delim)[0].trim();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return "";
         }
     }
@@ -57,8 +55,7 @@ public class Parser {
     public String getAfterDelim(String line, String command, String delim) {
         try {
             return line.split(command)[1].split(delim)[1].trim();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return "";
         }
     }
@@ -83,8 +80,7 @@ public class Parser {
     public String getArg(String line, String command) {
         try {
             return line.split(command)[1];
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return "";
         }
     }

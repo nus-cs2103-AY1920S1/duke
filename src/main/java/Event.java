@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Class representation of events in the list.
  */
-public class Event extends Task {	
+public class Event extends Task {
     protected Date at;
 
     /**
@@ -20,6 +20,8 @@ public class Event extends Task {
     }
 
     /**
+     * Returns a String representation of this Event.
+     * 
      * @return String representation of this Event
      */
     @Override

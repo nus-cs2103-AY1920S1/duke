@@ -10,19 +10,20 @@ public class DateParser {
     private final SimpleDateFormat formatter;
 
     /**
+     * Constructs a DateParser with a given date format.
      * 
      * @param format String that represents the expected format of the Date
      */
-    public DateParser (String format) {
+    public DateParser(String format) {
         formatter = new SimpleDateFormat(format);
     }
 
     /**
-     * Parses a String into a Date object
+     * Parses a String into a Date object.
      * 
      * @param str String representation of the Date
      * @return Date parsed from String (if valid format)
-     * @throws ParseException
+     * @throws ParseException If the String cannot be parsed into a Date object according to given format
      */
     public Date parse(String str) throws ParseException {
         return formatter.parse(str);

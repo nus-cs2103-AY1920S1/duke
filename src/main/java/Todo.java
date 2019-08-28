@@ -3,19 +3,23 @@
 /**
  * Class representation of a Todo in the list.
  */
-public class Todo extends Task {	
-	/**
-	 * @param description A string description of this Todo
-	 */
-	public Todo(String description) {
-		super(description);
-	}
+public class Todo extends Task {
+    /**
+     * Constructs a Todo with a description.
+     * 
+     * @param description A string description of this Todo
+     */
+    public Todo(String description) {
+        super(description);
+    }
 
-	/**
-	 * @return A string representation of this Todo
-	 */
-	@Override
-	public String toString() {
-		return "[T]" + super.toString();
-	}
+    @Override
+    /**
+     * Returns a String representation of this Todo
+     * 
+     * @return A string representation of this Todo
+     */
+    public String toString() {
+        return "[T]" + super.toString();
+    }
 }

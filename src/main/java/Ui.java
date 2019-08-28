@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Class to handle interfacing with the user
+ * Class to handle interfacing with the user.
  */
 public class Ui {
     // Strings that Duke will output
@@ -14,7 +14,7 @@ public class Ui {
     private Scanner input = new Scanner(System.in);
 
     /**
-     * Prints a goodbye message to the user, and closes off the input Scanner
+     * Prints a goodbye message to the user, and closes off the input Scanner.
      */
     public void printGoodbye() {
         printWithLongLines(BYE_STR);
@@ -22,14 +22,14 @@ public class Ui {
     }
 
     /**
-     * Prints a greeting to the user
+     * Prints a greeting to the user.
      */
     public void printGreeting() {
         printWithLongLines(GREETING);
     }
 
     /**
-     * Reads the next line of input from the user
+     * Reads the next line of input from the user.
      * 
      * @return The next line of input from the user
      */
@@ -38,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Acknowledges the user's deletion of a Task
+     * Acknowledges the user's deletion of a Task.
      * 
      * @param deletedTask The Task that was deleted
      * @param listSize The new size of the TaskList
@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * Acknowledges the user's completion of a Task
+     * Acknowledges the user's completion of a Task.
      * 
      * @param doneTask The Task that was done
      */
@@ -67,7 +67,7 @@ public class Ui {
     }
 
     /**
-     * Acknowledge the addition of a Task
+     * Acknowledge the addition of a Task.
      * 
      * @param newTask The Task that was newly added
      * @param listSize The new size of the TaskList
@@ -83,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Print the provided TaskList to the user
+     * Print the provided TaskList to the user.
      * 
      * @param taskList The TaskList to be printed
      */

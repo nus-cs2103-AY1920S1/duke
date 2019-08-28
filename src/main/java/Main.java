@@ -33,8 +33,17 @@ public class Main {
             if(in.equals("bye")) {
                 response("Bye. Hope to see you again soon!");
                 break;
+            } else if(in.equals("list")) {
+                StringBuffer listBuffer = new StringBuffer();
+                for(int i = 0; i < len; i++) {
+                    listBuffer.append((i + 1) + ". " + list[i] + "\n");
+                }
+                response(listBuffer.toString());
+            } else {
+                response("added: " + in);
+                list[len] = in;
+                len++;
             }
-            response(in);
         }
     }
 }

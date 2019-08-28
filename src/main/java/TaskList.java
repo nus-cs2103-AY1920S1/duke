@@ -58,4 +58,15 @@ public class TaskList {
         taskList.remove(taskNumber - 1);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
+
+    void findTasks (String taskName) {
+        System.out.println("Here are the matching tasks in your list");
+        int numCommands = 0;
+        for (Task i : taskList) {
+            numCommands += 1;
+            if (i.description.toLowerCase().contains(taskName.toLowerCase())) {
+                System.out.println(numCommands + "." + i);
+            }
+        }
+    }
 }

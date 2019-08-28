@@ -20,6 +20,7 @@ public class Duke {
             taskList = new TaskList(storage.loadPreviousTasks());
         } catch (DukeException e) {
             ui.showLoadingError();
+            storage = new Storage("duke.txt");
             taskList = new TaskList();
         }
     }
@@ -29,7 +30,7 @@ public class Duke {
      * @param args String array
      */
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("duke.txt").run();
     }
 
     /**

@@ -1,21 +1,20 @@
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 public class Deadline extends Task {
     private Date by;
 
     public Deadline(String description, String by) {
         super(description);
-        try {
-            this.by = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
-        } catch (ParseException ex) {
-            System.out.print(ex);
-        }
+        this.by = DukeDateFormatter.parse(by);
+    }
+
+    public Deadline(String description, Date by) {
+        super(description);
+        this.by = by;
     }
 
     public String encode() {
-        return "deadline," + super.description + "," + super.isDone + "," + by;
+        return "deadline," + super.description + "," + super.isDone + "," + DukeDateFormatter.format(by);
     }
 
     @Override

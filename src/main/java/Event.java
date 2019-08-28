@@ -1,21 +1,15 @@
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 public class Event extends Task {
     private Date at;
 
     public Event(String description, String at) {
         super(description);
-        try {
-            this.at = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
-        } catch(ParseException ex) {
-            System.out.print(ex);
-        }
+        this.at = DukeDateFormatter.parse(at);
     }
 
     public String encode() {
-        return "event," + super.description + "," + super.isDone + "," + at;
+        return "event," + super.description + "," + super.isDone + "," + DukeDateFormatter.format(at);
     }
 
     @Override

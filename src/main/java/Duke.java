@@ -50,7 +50,8 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The command format is invalid.");
                         }
                         int num = Integer.parseInt(parser.inputArr[1]);
-                        this.tasks.getTask(num - 1).markAsDone();
+                        Task task = this.tasks.getTask(num - 1);
+                        task.markAsDone();
                         this.ui.showDoneResponse();
                         this.ui.printLine();
                     } catch (IndexOutOfBoundsException e) {

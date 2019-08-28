@@ -2,3 +2,5 @@
 [T][✘] hi
 [T][✘] yes
 [T][✘] no
+[T][✘] hi
+[T][✘] hello

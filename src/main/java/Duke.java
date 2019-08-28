@@ -1,3 +1,6 @@
+/**
+ * Duke class.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -14,6 +17,9 @@ public class Duke {
         }
     }
 
+    /**
+     * run().
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

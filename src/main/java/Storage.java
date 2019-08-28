@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class.
+ */
 public class Storage {
     private String filePath;
     public static String[] oneLine;
@@ -16,6 +19,9 @@ public class Storage {
         txtFile = new File(filePath);
     }
 
+    /**
+     * putToList().
+     */
     public void putToList() {
         try {
             String firstWord = oneLine[0].trim();
@@ -38,6 +44,9 @@ public class Storage {
         }
     }
 
+    /**
+     * load().
+     */
     public List<Task> load() throws DukeException {
         try {
             Scanner sc = new Scanner(txtFile);
@@ -48,9 +57,12 @@ public class Storage {
         } catch (Exception e) {
             System.out.println("[duke.txt]: duke.txt not found");
         }
-            return myList;
+        return myList;
     }
 
+    /**
+     * save(TaskList tasks).
+     */
     public void save(TaskList tasks) throws Exception {
         try {
             PrintWriter pr = new PrintWriter(filePath);

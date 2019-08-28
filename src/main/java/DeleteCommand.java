@@ -1,3 +1,6 @@
+/**
+ * DeleteCommand extends Command.
+ */
 public class DeleteCommand extends Command {
     private String[] oneLine;
     String deleteMessage1;
@@ -16,9 +19,9 @@ public class DeleteCommand extends Command {
         int i = Integer.parseInt(oneLine[1].trim());
         if (i <= tasksSize && i > 0) {
             System.out.println(Ui.frontSpace + deleteMessage1);
-            Task delete_task = tasks.getTaskList().get(i - 1);
+            Task deleteTask = tasks.getTaskList().get(i - 1);
             tasks.getTaskList().remove(i - 1);
-            System.out.println(Ui.frontSpace + "   " + delete_task);
+            System.out.println(Ui.frontSpace + "   " + deleteTask);
         } else {
             throw new TaskNotExistException("task does not exist");
         }

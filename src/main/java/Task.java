@@ -2,6 +2,10 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * abstract class Task.
+ */
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -15,6 +19,9 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Task(String description, String done).
+     */
     public Task(String description, String done) {
         this.description = perfectDescription(description);
         if (done.trim().equals("1")) {
@@ -22,11 +29,14 @@ public abstract class Task {
         }
     }
 
-    public String perfectDescription(String description){
+    /**
+     * perfectDescription.
+     */
+    public String perfectDescription(String description) {
         String[] temp = description.split(" ");
         String result = "";
-        for(String str: temp){
-            if(!str.equals("")){
+        for (String str : temp) {
+            if (!str.equals("")) {
                 result += " " + str.trim();
             }
         }
@@ -44,12 +54,11 @@ public abstract class Task {
     public abstract String getFormatToFile();
 
     public String getTime() {
-        return  pattern.format(formatter2);
+        return pattern.format(formatter2);
     }
 
     @Override
     public String toString() {
-//       System.out.println("debug: " + getStatusIcon());
         return "[" + getStatusIcon() + "] " + description;
     }
 }

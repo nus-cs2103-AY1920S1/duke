@@ -1,8 +1,15 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,13 +19,59 @@ public class Duke {
         String indent = "    ";
         ArrayList<Task> list = new ArrayList<>();
 
+        File file = new File("C:/Users/dalis/Documents/GitHub/duke/data/tasks.txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+        // load tasks
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String read;
+        while ( (read = reader.readLine()) != null) {
+            System.out.println(read);
+            String type = read.substring(1, 2);
+            String status = read.substring(4, 5);
+            String info = read.substring(7);
+
+            Task task;
+            if (type.equals("T")) {
+                task = new ToDo(info.trim());
+                if (status.equals("\u2713")) {
+                    task.markAsDone();
+                }
+                list.add(task);
+            } else if (type.equals("E")){
+                String[] infoArr = info.split("(:at)");
+                String description = infoArr[0].trim();
+                String at = infoArr[1].substring(1, infoArr[1].length());
+                task = new Event(description, at);
+                if (status.equals("\u2713")) {
+                    task.markAsDone();
+                }
+                list.add(task);
+            } else if (type.equals("D")) {
+                String[] infoArr = info.split("(:by)");
+                String description = infoArr[0].trim();
+                String by = infoArr[1].substring(1, infoArr[1].length());
+                task = new Deadline(description, by);
+                if (status.equals("\u2713")) {
+                    task.markAsDone();
+                }
+                list.add(task);
+            }
+
+            read = reader.readLine();
+        }
+        reader.close();
+
+        // print welcome message and logo
         System.out.println("Hello from\n" + logo);
         System.out.println(indent + line);
         System.out.println(indent + "Hello! I'm Duke.\n" + indent + "What can I do for you today?");
         System.out.println(indent + line);
 
+        // setting up for chat
         Scanner sc = new Scanner(System.in);
         boolean chat = true;
+
         while(chat) {
             String input = sc.nextLine();
             input = input.trim();
@@ -29,6 +82,15 @@ public class Duke {
             switch (command) {
                 case "bye":
                     System.out.println(indent + "Bye! Hope to see you again soon.");
+                    // save the new list of tasks
+                    for (int i = 0; i < list.size(); i++) {
+                        Task task = list.get(i);
+                        if (i > 0) {
+                            writer.newLine();
+                        }
+                        writer.write(task.toString());
+                    }
+                    writer.close();
                     chat = false;
                     break;
                 case "list":
@@ -39,6 +101,7 @@ public class Duke {
                         for (int i = 0; i < list.size(); i++) {
                             int k = i + 1;
                             Task task = list.get(i);
+                            writer.write(task.toString());
                             System.out.println(indent + k + ". " + task);
                         }
                     }
@@ -71,10 +134,12 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! The command format is invalid.");
                         }
                         int num = Integer.parseInt(inputArr[1]);
-                        Task task = list.remove(num - 1);
+                        Task deletedTask = list.remove(num - 1);
                         System.out.println(indent + "Noted. I've removed the following task:");
-                        System.out.println(indent + indent + task);
+                        System.out.println(indent + indent + deletedTask);
                         System.out.println(indent + "Now you have " + list.size() + " task(s) in the list.");
+
+
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println(indent + "☹ OOPS!!! This task number does not exist.");
                     } catch (NumberFormatException e) {
@@ -88,9 +153,9 @@ public class Duke {
                         if (input.equals("todo")) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                         } else {
-                            Task task = new ToDo(input);
-                            list.add(task);
-                            printAddedTask(task, list);
+                            Task toDoTask = new ToDo(input);
+                            list.add(toDoTask);
+                            printAddedTask(toDoTask, list);
                         }
                     } catch (DukeException de) {
                         System.out.println(indent + de);

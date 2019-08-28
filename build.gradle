@@ -12,7 +12,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
 }
 
 checkstyle {

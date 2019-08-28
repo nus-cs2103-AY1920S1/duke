@@ -1,5 +1,5 @@
-import java.io.FileWriter;
-import java.io.IOException;
+package seedu.duke;
+
 import java.util.ArrayList;
 
 public class TaskList {

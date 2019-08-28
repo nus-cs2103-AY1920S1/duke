@@ -1,8 +1,11 @@
+package seedu.duke;
+
 public class DeleteCommand extends Command {
     protected static int delete;
 
     public DeleteCommand(int d) {
         delete = d;
+        type = "delete";
     }
 
     @Override

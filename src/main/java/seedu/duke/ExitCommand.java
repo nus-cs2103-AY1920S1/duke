@@ -1,8 +1,11 @@
+package seedu.duke;
+
 public class ExitCommand extends Command{
 
     public ExitCommand() {
         super();
         isExit = true;
+        type = "exit";
     }
 
     @Override

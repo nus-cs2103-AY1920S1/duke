@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {
@@ -5,6 +7,7 @@ public class DoneCommand extends Command {
 
     public DoneCommand(int d) {
         done = d;
+        type = "done";
     }
 
     @Override

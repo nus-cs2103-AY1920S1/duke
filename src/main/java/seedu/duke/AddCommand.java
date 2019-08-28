@@ -1,3 +1,5 @@
+package seedu.duke;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,6 +11,7 @@ public class AddCommand extends Command {
     public AddCommand(String s, String det) {
         title = s;
         details = det;
+        type = "add";
     }
 
     @Override

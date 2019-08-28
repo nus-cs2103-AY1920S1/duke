@@ -1,20 +1,11 @@
-import java.io.File;
+package seedu.duke;
+
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
 
 public class Duke {
     private static Storage storage;
     private static TaskList tasks;
     private static Ui ui;
-
-    protected static String filepath = "data/duke.txt";
-    static int idleCount;
-    static ArrayList<Task> list;
 
     public Duke(String filepath) {
         ui = new Ui();

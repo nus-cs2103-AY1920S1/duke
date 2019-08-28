@@ -12,6 +12,13 @@ public class Deadline extends Task {
         return words -> {
             List<String> wordList = List.of(words);
             int separator = wordList.indexOf("/by");
+            if (separator == -1) {
+                throw new DukeException("A deadline must have a time.");
+            } else if (separator == 1) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            } else if (separator == words.length - 1) {
+                throw new DukeException("The time of a deadline cannot be empty.");
+            }
             String description = String.join(" ", wordList.subList(1, separator));
             String time = String.join(" ", wordList.subList(separator + 1, words.length));
             Task task = new Deadline(description, time);

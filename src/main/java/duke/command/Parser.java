@@ -4,13 +4,15 @@ import duke.command.add.AddDeadlineCommand;
 import duke.command.add.AddEventCommand;
 import duke.command.add.AddTodoCommand;
 import duke.command.flow.ExitCommand;
+import duke.command.list.FindCommand;
 import duke.command.list.ListCommand;
 import duke.command.update.DeleteTaskCommand;
 import duke.command.update.MakeDoneCommand;
-import duke.exception.DukeException;
-import duke.exception.DukeTodoException;
 import duke.exception.DukeDeadlineException;
 import duke.exception.DukeEventException;
+import duke.exception.DukeException;
+import duke.exception.DukeFindException;
+import duke.exception.DukeTodoException;
 import duke.exception.DukeUnknownCommandException;
 
 public class Parser {
@@ -24,6 +26,20 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.matches("find.*")) {
+            if (input.equals("find")) {
+                throw new DukeFindException(DukeFindException.EMPTY_DETAILS_ERROR_MSG);
+            } else if (input.charAt(4) == ' ') {
+                String detail = input.substring(5);
+                if (detail.length() < 1) {
+                    throw new DukeFindException(DukeFindException.EMPTY_DETAILS_ERROR_MSG);
+                } else {
+                    return new FindCommand(detail);
+                }
+            } else {
+                throw new DukeUnknownCommandException();
+            }
+
         } else if (input.matches("todo.*")) {
             if (input.equals("todo")) {
                 throw new DukeTodoException();

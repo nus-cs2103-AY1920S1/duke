@@ -9,6 +9,10 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Executes done command which set task, of index parsed by constructor, from TaskList as done.
+     * Then Storage rewrite using TaskList.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.setDone(index);
         storage.rewrite(tasks.getSerialized());

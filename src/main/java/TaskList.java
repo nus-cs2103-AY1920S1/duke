@@ -20,7 +20,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         Iterator<Task> it = ls.iterator();
         while (it.hasNext()) {
-            sb.append(it.next().toFileString())
+            sb.append(it.next().serialized())
                     .append((char) 30);
         }
         if (sb.length() > 0)

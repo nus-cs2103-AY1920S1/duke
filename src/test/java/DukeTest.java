@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DukeTest{
+public class DukeTest {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -39,7 +39,7 @@ public class DukeTest{
     };
 
     @Test
-    public void fixedTest(){
+    public void fixedTest() {
         assertThrows(IndexFormatDukeException.class, () -> Parser.parse("done 3k"));
         assertThrows(IndexFormatDukeException.class, () -> Parser.parse("  delete   1.0 "));
         assertDoesNotThrow(() -> Parser.parse(" list 0"));
@@ -79,10 +79,11 @@ public class DukeTest{
     }
 }
 
-class TestUi extends Ui{
+class TestUi extends Ui {
     private String output;
+
     @Override
-    public void show(String str){
+    public void show(String str) {
         if (!str.endsWith("\n"))
             str += '\n';
         output = str;
@@ -97,10 +98,11 @@ class TestUi extends Ui{
     }
 }
 
-class TestStorage extends Storage{
-    public TestStorage(){
+class TestStorage extends Storage {
+    public TestStorage() {
         super("");
     }
+
     @Override
     public void rewrite(String content) {}
 }

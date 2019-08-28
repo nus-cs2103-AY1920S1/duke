@@ -1,5 +1,12 @@
 public class Parser {
 
+    /**
+     * Looks at first token, determine & construct Command sub-classes as per parsed.
+     *
+     * @param str Expects string to be parse as Command.
+     * @return Command object as per parsed.
+     * @throws DukeException if command can't be parsed.
+     */
     public static Command parse(String str) throws DukeException {
         str = str.trim();
         int lastIndex = str.indexOf(' ');

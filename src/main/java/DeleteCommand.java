@@ -9,6 +9,10 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Executes delete command which remove task, of index parsed by constructor, from TaskList.
+     * Then Storage rewrite using TaskList.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.remove(index);
         storage.rewrite(tasks.getSerialized());

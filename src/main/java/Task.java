@@ -41,6 +41,12 @@ public class Task {
 
     // Mainly for use in saving data to hard disk
     public String getTaskType() { return "?"; }
+
+    // Returns true if description or subdescription contains keyword
+    // NOTE: case-sensitive!!!
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 }
 
 class ToDo extends Task {
@@ -79,6 +85,10 @@ class Deadline extends Task {
     }
     public String getTaskType() { return "D"; }
 
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword) || subDescription.contains(keyword);
+    }
+
     /**
      * Returns whether description for /by is of
      * recognised date-time format
@@ -86,8 +96,7 @@ class Deadline extends Task {
      * Which can then be converted to format: 2 December 2019 6:00 pm
      * @param str
      * @return Whether description for /by can be converted
-     */
-    private boolean isValidDateTimeFormat(String str) {
+     */    private boolean isValidDateTimeFormat(String str) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyy hhmm");
         try {
             /*str.matches("([1-9]|[1-2][0-9]|3[0-1])/" +
@@ -114,5 +123,8 @@ class Event extends Task {
         return "[E]" + super.toString() + " (at: " + subDescription + ")";
     }
     public String getTaskType() { return "E"; }
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword) || subDescription.contains(keyword);
+    }
 
 }

@@ -3,6 +3,11 @@ class TodoTask  extends Task{
         super(taskDetails);
     }
 
+    String saveInfo() {
+        return "todo" + " " + taskDetails + System.getProperty("line.separator")
+                + completed;
+    }
+
     @Override
     public String toString() {
         if (this.completed) {

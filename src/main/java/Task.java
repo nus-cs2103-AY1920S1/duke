@@ -10,6 +10,8 @@ abstract class Task {
         this.completed = true;
     }
 
+    abstract String saveInfo();
+
     @Override
     public String toString() {
         if (completed) {

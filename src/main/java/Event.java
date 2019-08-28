@@ -5,6 +5,11 @@ class Event extends Task{
         this.eventAt = eventAt;
     }
 
+    String saveInfo() {
+        return "event" + " " + taskDetails + " /" + eventAt + System.getProperty("line.separator")
+                + completed;
+    }
+
     @Override
     public String toString() {
         if (this.completed) {

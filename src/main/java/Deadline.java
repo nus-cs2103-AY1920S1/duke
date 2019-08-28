@@ -5,6 +5,11 @@ class Deadline extends Task{
         this.deadlineBy = deadlineBy;
     }
 
+    String saveInfo() {
+        return "deadline" + " " + taskDetails + " /" + deadlineBy + System.getProperty("line.separator")
+                + completed;
+    }
+
     @Override
     public String toString() {
         if (this.completed) {

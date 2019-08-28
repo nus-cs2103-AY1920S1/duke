@@ -3,6 +3,9 @@
 /out/
 /*.iml
 
+#data files
+/data/
+
 # java classes
 *.class
 

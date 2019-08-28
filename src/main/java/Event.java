@@ -9,7 +9,7 @@ public class Event extends Task{
 
     public Event(String description, String eventDate) throws DukeException{
         super(description);
-        this.eventDate = eventDate;
+        this.eventDate = parseDate(eventDate);
         if(this.getTaskDescription().equals("")){
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         }
@@ -34,6 +34,6 @@ public class Event extends Task{
 
     public String getTaskStatus(){
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()
-                + "(at:" + this.getEventDate() + ")" ); 
+                + "(at: " + this.getEventDate() + ")" );
     }
 }

@@ -54,9 +54,6 @@ public class Storage {
         catch (FileNotFoundException e) {
             System.out.println("Data file not found, starting with empty task list");
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
         catch (ParseException e) {
             e.printStackTrace();
         }

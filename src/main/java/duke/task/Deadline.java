@@ -26,7 +26,7 @@ public class Deadline extends Task {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
-        if(done) {
+        if (done) {
             s = s + "[D][✓]";
         } else {
             s = s + "[D][✗]";
@@ -40,12 +40,13 @@ public class Deadline extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String s = "D | ";
 
-        if(done) {
+        if (done) {
             s = s + "1 | ";
         } else {
             s = s + "0 | ";
         }
 
-        return s + name + " | " + deadLine.format(formatter) + " " + (deadLine.getHour() * 100 + deadLine.getMinute());
+        return s + name + " | " + deadLine.format(formatter) + " "
+                + (deadLine.getHour() * 100 + deadLine.getMinute());
     }
 }

@@ -16,7 +16,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+            throws DukeException, IOException {
+
         Task deletedTask = taskList.deleteAt(index);
 
         ui.printRemovedAcknowledgement(deletedTask, taskList.getSize());

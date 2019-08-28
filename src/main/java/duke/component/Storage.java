@@ -27,7 +27,7 @@ public class Storage {
         Scanner txtSC = new Scanner(inputFile);
 
         while (txtSC.hasNext()) {
-            String[] historicalInputs = Parser.breakDownString(txtSC.nextLine(),"\\|");
+            String[] historicalInputs = Parser.breakDownString(txtSC.nextLine(), "\\|");
             boolean taskIsCompleted;
             Task oldTask = null;
 
@@ -44,16 +44,17 @@ public class Storage {
                 case 'D':
                     String[] time = historicalInputs[3].substring(1).split(" ");
                     oldTask = new Deadline(
-                                            historicalInputs[2].substring(1, historicalInputs[2].length() - 1),
-                                            Parser.getDateAndTimeFromString(historicalInputs[3].substring(1)),
-                                            taskIsCompleted);
+                            historicalInputs[2].substring(1, historicalInputs[2].length() - 1),
+                            Parser.getDateAndTimeFromString(historicalInputs[3].substring(1)),
+                            taskIsCompleted);
                     break;
                 case 'E':
                     oldTask = new Event(
-                                        historicalInputs[2].substring(1, historicalInputs[2].length() - 1),
-                                        Parser.getDateAndTimeFromString(historicalInputs[3].substring(1)),
-                                        taskIsCompleted);
+                            historicalInputs[2].substring(1, historicalInputs[2].length() - 1),
+                            Parser.getDateAndTimeFromString(historicalInputs[3].substring(1)),
+                            taskIsCompleted);
                     break;
+                default:
             }
 
             taskList.add(oldTask);
@@ -67,7 +68,7 @@ public class Storage {
     public void save(TaskList taskList) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter fileWriter = new PrintWriter(filePath, "UTF-8");
 
-        for(int i = 0; i < taskList.getSize(); i++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             fileWriter.println(taskList.getAtIndex(i).toIndicationInsideFile());
         }
 

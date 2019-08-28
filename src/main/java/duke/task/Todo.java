@@ -18,7 +18,7 @@ public class Todo extends Task {
     @Override
     public String toString() {
         String s = "";
-        if(done) {
+        if (done) {
             s = s + "[T][✓]";
         } else {
             s = s + "[T][✗]";
@@ -30,7 +30,7 @@ public class Todo extends Task {
     public String toIndicationInsideFile() {
         String s = "T | ";
 
-        if(done) {
+        if (done) {
             s = s + "1 | ";
         } else {
             s = s + "0 | ";

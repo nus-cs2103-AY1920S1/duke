@@ -26,7 +26,7 @@ public class Event extends Task {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy, E, h:mm a");
         String s = "";
-        if(done) {
+        if (done) {
             s = s + "[E][✓]";
         } else {
             s = s + "[E][✗]";
@@ -40,12 +40,13 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String s = "E | ";
 
-        if(done) {
+        if (done) {
             s = s + "1 | ";
         } else {
             s = s + "0 | ";
         }
 
-        return s + name + " | " + time.format(formatter) + " " + (time.getHour() * 100 + time.getMinute());
+        return s + name + " | " + time.format(formatter)
+                + " " + (time.getHour() * 100 + time.getMinute());
     }
 }

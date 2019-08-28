@@ -17,7 +17,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+            throws DukeException, IOException {
+
         taskList.add(newTask);
 
         ui.printAddedAcknowledgement(newTask, taskList.getSize());

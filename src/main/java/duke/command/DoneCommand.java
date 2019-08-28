@@ -17,7 +17,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+    public boolean executeCommand(TaskList taskList, Storage storage, Ui ui)
+            throws DukeException, IOException {
+
         if (index >= taskList.getSize() || index < 0) {
             throw new DukeException("Invalid task number!");
         }

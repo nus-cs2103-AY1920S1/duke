@@ -9,7 +9,9 @@ import java.util.List;
 public class TaskList {
     private List<Task> taskList;
 
-    public TaskList() { this.taskList = new ArrayList<>(); }
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
 
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
@@ -41,7 +43,7 @@ public class TaskList {
     @Override
     public String toString() {
         String result = "\t____________________________________________________________" +
-                            "\n\t Here are the tasks in your list:";
+                "\n\t Here are the tasks in your list:";
 
         for (int i = 0; i < taskList.size(); i++) {
             result = result + "\n\t" + " " + (i + 1) + ". " + taskList.get(i);

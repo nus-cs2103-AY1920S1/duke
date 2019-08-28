@@ -1,7 +1,12 @@
 package duke.component;
 
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ViewListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -10,7 +15,7 @@ import duke.task.Task;
 import java.time.LocalDateTime;
 
 public class Parser {
-    public static LocalDateTime getDateAndTimeFromString(String inputs){
+    public static LocalDateTime getDateAndTimeFromString(String inputs) {
         String[] time = inputs.split(" ");
         String[] dateInString = time[0].split("\\/");
 
@@ -54,17 +59,15 @@ public class Parser {
 
         if (inputs[0].equals("bye")) {
             return new ExitCommand();
-        } else if(inputs[0].equals("list")) {
+        } else if (inputs[0].equals("list")) {
             return new ViewListCommand();
-        } else if(inputs[0].equals("done")) {
+        } else if (inputs[0].equals("done")) {
             if (inputs.length < 2) {
                 throw new DukeException("The task Number cannot be empty.");
             }
-
             int index = Integer.parseInt(inputs[1]) - 1;
-
             return new DoneCommand(index);
-        } else if(inputs[0].equals("todo")) {
+        } else if (inputs[0].equals("todo")) {
             if (inputs.length < 2) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
@@ -76,7 +79,7 @@ public class Parser {
             Todo newTask = new Todo(name);
 
             return new AddCommand(newTask);
-        } else if(inputs[0].equals("deadline") || inputs[0].equals("event")) {
+        } else if (inputs[0].equals("deadline") || inputs[0].equals("event")) {
             String inputType = inputs[0];
 
             if (inputs.length < 2) {
@@ -99,7 +102,8 @@ public class Parser {
 
             name = inputs[0].substring(0, inputs[0].length() - 1);
 
-            LocalDateTime dateAndTime = Parser.getDateAndTimeFromString(inputs[1].substring(0, inputs[1].length() - 1));
+            LocalDateTime dateAndTime = Parser.getDateAndTimeFromString(
+                                            inputs[1].substring(0, inputs[1].length() - 1));
 
             Task newTask;
 
@@ -110,7 +114,7 @@ public class Parser {
             }
 
             return new AddCommand(newTask);
-        } else if(inputs[0].equals("delete")) {
+        } else if (inputs[0].equals("delete")) {
             if (inputs.length < 2) {
                 throw new DukeException("The task Number cannot be empty.");
             }

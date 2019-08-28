@@ -41,9 +41,9 @@ public class Ui {
     }
 
     public static void printErrorMessage(Exception e) {
-        if(e instanceof FileNotFoundException) {
+        if (e instanceof FileNotFoundException) {
             printErrorWithFormat("Error: Input Text File not Found! Program Exiting...");
-        } else if(e instanceof UnsupportedEncodingException) {
+        } else if (e instanceof UnsupportedEncodingException) {
             printErrorWithFormat("Error: Unable to write to file! Program Exiting...");
         } else {
             printErrorWithFormat(e.toString());

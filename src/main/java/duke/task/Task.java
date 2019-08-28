@@ -29,7 +29,7 @@ public class Task {
     public String toIndicationInsideFile() {
         String s = "T | ";
 
-        if(done) {
+        if (done) {
             s = s + "1 | ";
         } else {
             s = s + "0 | ";

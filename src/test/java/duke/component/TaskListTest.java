@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskListTest {
 
@@ -52,7 +52,7 @@ class TaskListTest {
     }
 
     @Test
-    void ToStringTest() {
+    void toStringTest() {
         taskList = new TaskList();
         taskList.add(new Todo("read book"));
         String expected = "\t____________________________________________________________" +

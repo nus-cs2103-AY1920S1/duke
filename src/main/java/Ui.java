@@ -10,6 +10,7 @@ public class Ui {
     private static final String BYE_STR = "Bye. Hope to see you again soon!";
     private static final String LIST_STR = "Here are the tasks in your list:";
     private static final String DONE_STR = "Nice! I've marked this task as done:";
+    private static final String SEARCH_STR = "Here are the matching tasks in your list:";
 
     private Scanner input = new Scanner(System.in);
 
@@ -88,19 +89,11 @@ public class Ui {
      * @param taskList The TaskList to be printed
      */
     public void printList(TaskList taskList) {
-        String wholeList = LIST_STR + "\n";
-        
-        for (int i = 0; i < taskList.size(); i++) {
-            wholeList += String.valueOf(i + 1)
-                + "."
-                + taskList.get(i);
-            
-            if (i < taskList.size() - 1) {
-                wholeList += "\n";
-            }
-        }
+        printListWithPreamble(taskList, LIST_STR);
+    }
 
-        printWithLongLines(wholeList);
+    public void displaySearchResults(TaskList taskList) {
+        printListWithPreamble(taskList, SEARCH_STR);
     }
 
     /**
@@ -130,5 +123,22 @@ public class Ui {
             + LONG_LINE
             + "\n"
         );
+    }
+
+    private void printListWithPreamble(TaskList taskList, String preamble) {
+        String wholeList = preamble + "\n";
+        
+        for (int i = 0; i < taskList.size(); i++) {
+            wholeList += String.valueOf(i + 1)
+                + "."
+                + taskList.get(i);
+            
+            if (i < taskList.size() - 1) {
+                wholeList += "\n";
+            }
+        }
+
+        printWithLongLines(wholeList);
+    
     }
 }

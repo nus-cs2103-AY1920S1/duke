@@ -9,7 +9,8 @@ enum Command {
     TODO("todo"),
     EVENT("event"),
     DEADLINE("deadline"),
-    DELETE("delete");
+    DELETE("delete"),
+    FIND("find");
 
     private String commandText;
 

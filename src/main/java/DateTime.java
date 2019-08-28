@@ -20,10 +20,9 @@ public class DateTime {
     public DateTime(String date) {
         rawForm = date;
         String[] dateComponents = date.split(" ");
-        
-        String dayComponent = dateComponents[0];
 
         //Parsing the dayComponent, example: 2/05/2019
+        String dayComponent = dateComponents[0];
         String[] componentsOfDate = dayComponent.split("/");
         this.day = Integer.parseInt(componentsOfDate[0]);
         this.month = Integer.parseInt(componentsOfDate[1]);

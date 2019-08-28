@@ -90,6 +90,4 @@ public class Ui {
         String userCommand = scanner.nextLine();
         return userCommand;
     }
-
-
 }

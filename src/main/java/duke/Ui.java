@@ -10,6 +10,9 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints welcome message during startup
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,6 +27,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Prints farewell message when "bye" is entered
+     */
     public void showExit() {
         printStandard("Bye. Hope to see you again soon!");
     }
@@ -32,39 +38,63 @@ public class Ui {
 
     }
 
+    /**
+     * Prints the standard line output for visual differentiation between user input and system output
+     */
     public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Reads a line of user input via a Scanner variable whenever the "enter" key is pressed
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints the error message of the DukeException being thrown
+     */
     public void showError(String s) {
         printStandard(s);
     }
 
+    /**
+     * Prints the most recent task that was added
+     */
     public void showAddedTask(String task, int lstSize) {
         printStandard("Got it. I've added this task:");
         printStandard(task);
         showTaskSize(lstSize);
     }
 
+    /**
+     * Prints the most recent task that was deleted
+     */
     public void showDeletedTask(String task, int lstSize) {
         printStandard("Noted. I've removed this task:");
         printStandard(task);
         showTaskSize(lstSize);
     }
 
+    /**
+     * Prints the most recent task that was marked as done
+     */
     public void showDoneTask(String task) {
         printStandard("Nice! I've marked this task as done:");
         printStandard(task);
     }
 
+    /**
+     * Prints the task list size for both add & delete
+     */
     private void showTaskSize(int size) {
         printStandard(String.format("Now you have %d tasks in the list.", size));
     }
 
+    /**
+     * Prints all the tasks in the TaskList and numbers them
+     */
     public void showAllTasks(LinkedList<String> taskLst) {
         printStandard("Here are the tasks in your list:");
         for (String task : taskLst) {
@@ -72,6 +102,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Converts and prints any given String into the correct output format
+     */
     private void printStandard(String string) {
         System.out.println("     " + string);
     }

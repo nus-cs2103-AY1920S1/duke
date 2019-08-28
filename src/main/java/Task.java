@@ -30,11 +30,13 @@ public abstract class Task {
         //Concat item and two Separators
         //Future: Google best separator to use? or how to save files with delimiters??
         //https://stackoverflow.com/questions/6319551/whats-the-best-separator-delimiter-characters-for-a-plaintext-db-file
+        //Future: Throw DukeException in input if delimiter is found in input. To disallow use of delimiter in input
+        
         String saveString;
         //Get the three items
-        saveString = this.getTaskType().toString();
+        saveString = this.getTaskType().name();
         saveString = saveString + "@@@";
-        saveString = this.getIsDone().toString();
+        saveString = saveString + this.getIsDone().toString();
         saveString = saveString + "@@@";
         saveString = saveString + this.getDescription();
         

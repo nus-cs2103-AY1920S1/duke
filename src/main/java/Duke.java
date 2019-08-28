@@ -19,6 +19,14 @@ public class Duke {
 
         System.out.print(dividerLine + "  Hello from\n" + logo);
 
+        //Try to load old data.
+        try {
+            tasks = FileHandler.loadData("../data", "save1.txt");    
+        } catch (DukeException e) {
+            //Does nothing for now
+        }
+        
+        
         //Take in input
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();

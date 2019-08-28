@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class FileHandler {
     
@@ -31,6 +33,54 @@ public class FileHandler {
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Save Failed: " + e.getMessage());
+        }
+    }
+    
+    public static LinkedList<Task> loadData (String saveLocation, String fileName) throws DukeException {
+        LinkedList<Task> tasks = new LinkedList<>();
+        
+        File saveFile =  new File(saveLocation + "/" + fileName);
+        try {
+            //Read line by line
+            Scanner s = new Scanner(saveFile); // create a Scanner using the File as the source
+            String taskString;
+            String[] taskArr;
+            Task newTask;
+            
+            while (s.hasNext()) {
+                taskString = (s.nextLine());
+                
+                //Splits string based on "@@@" delimiter
+                taskArr = taskString.split("@@@");
+                
+                //Instantiates class using appropriate constructor
+                switch(taskArr[0]) {
+                case "TODO":
+                    newTask = new Todo(taskArr[2]);
+                    break;
+                case "DEADLINE":
+                    newTask = new Deadline(taskArr[2], taskArr[3]);
+                    break; 
+                case "EVENT":
+                    newTask = new Event(taskArr[2], taskArr[3]);
+                    break;
+                default:
+                    newTask = new Todo("Error Task");
+                    break;
+                }
+                
+                //Marks task as done if saveFile indicates that it is done
+                if(taskArr[1].equals("true")) {
+                    newTask.markAsDone();
+                }
+                //Append to tasks
+                tasks.add(newTask);
+            }
+            
+            return tasks;
+        } catch (FileNotFoundException e) {
+            //If file does not exist, throw DukeException File not Found
+            throw new DukeException("Save File does not exist.");
         }
     }
 }

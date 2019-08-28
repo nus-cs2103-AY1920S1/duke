@@ -1,6 +1,8 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
+import java.util.stream.Collectors;
 
 public class TodoList implements Serializable {
     private ArrayList<Task> list;
@@ -43,5 +45,11 @@ public class TodoList implements Serializable {
         }
         sb.delete(sb.length() - 1, sb.length());
         return sb.toString();
+    }
+
+    List<Task> find(String description) {
+        return  this.list.stream()
+                .filter(task -> task.toString().contains(description))
+                .collect(Collectors.toList());
     }
 }

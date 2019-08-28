@@ -17,6 +17,7 @@ class Parser {
         keywords.add("deadline");
         keywords.add("list");
         keywords.add("delete");
+        keywords.add("find");
     }
 
     static Command parse(String[] args) throws DukeException {
@@ -28,6 +29,8 @@ class Parser {
             return new DeleteCommand(Integer.parseInt(args[1]));
         case "bye":
             return new ExitCommand();
+        case "find":
+            return new FindCommand(getArguments(args));
         case "list":
             return new ListCommand();
         case "done":
@@ -35,6 +38,10 @@ class Parser {
         default:
             return new AddCommand(parseTask(args));
         }
+    }
+
+    private static String getArguments(String[] args) {
+        return String.join(" ", Arrays.copyOfRange(args, 1, args.length));
     }
 
     private static Task parseTask(String[] args) {

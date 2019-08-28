@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Duke {
@@ -19,6 +22,32 @@ public class Duke {
         ArrayList<String> done = new ArrayList<String>();
         ArrayList<String> type = new ArrayList<String>();
         ArrayList<String> details = new ArrayList<String>();
+
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("savefile.txt"));
+
+            String line = br.readLine();
+            String[] arr = line.split("/");
+
+            data = new ArrayList<>(Arrays.asList(arr));
+
+            line = br.readLine();
+            arr = line.split("/");
+            done = new ArrayList<>(Arrays.asList(arr));
+
+            line = br.readLine();
+            arr = line.split("/");
+            type = new ArrayList<>(Arrays.asList(arr));
+
+            line = br.readLine();
+            arr = line.split("/");
+            details = new ArrayList<>(Arrays.asList(arr));
+
+
+        } catch (Exception E){
+
+        }
+
 
         do{
             String input = sc.nextLine();
@@ -46,6 +75,45 @@ public class Duke {
                     System.out.println();
                 }
                 System.out.println("     ____________________________________________________________");
+
+                try{
+                    PrintWriter writer = new PrintWriter("savefile.txt", "UTF-8");
+                    for(i = 0; i < data.size(); i++){
+                        writer.print(data.get(i));
+                        if(i < data.size() - 1){
+                            writer.print("/");
+                        }
+                    }
+                    writer.println();
+
+                    for(i = 0; i < done.size(); i++){
+                        writer.print(done.get(i));
+                        if(i < done.size() - 1){
+                            writer.print("/");
+                        }
+                    }
+                    writer.println();
+
+                    for(i = 0; i < type.size(); i++){
+                        writer.print(type.get(i));
+                        if(i < type.size() - 1){
+                            writer.print("/");
+                        }
+                    }
+                    writer.println();
+
+                    for(i = 0; i < details.size(); i++){
+                        writer.print(details.get(i));
+                        if(i < details.size() - 1){
+                            writer.print("/");
+                        }
+                    }
+                    writer.println();
+                    writer.close();
+
+                } catch(Exception E){
+                    System.out.println("Saving failed!");
+                }
 
             } else if(input.startsWith("done")) {
                 String[] sp = input.split(" ", 2);

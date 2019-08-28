@@ -22,6 +22,7 @@ public class HardDiskStorage implements Storage {
 
     /**
      * Creates a Storage object that can read and write from a hard disk file.
+     *
      * @param filePath  Relative path to data file
      */
     public HardDiskStorage(String filePath) {
@@ -31,6 +32,7 @@ public class HardDiskStorage implements Storage {
     /**
      * Loads tasks from a (valid) data file, adds them to a new list, then
      * returns that list.
+     *
      * @return                  List of tasks that were loaded from file
      * @throws DukeException    If tasks cannot be loaded from file
      */
@@ -62,6 +64,7 @@ public class HardDiskStorage implements Storage {
 
     /**
      * Writes the tasks in the given list to an external data file.
+     *
      * @param tasks             List of tasks to be written.
      * @throws IOException      If file cannot be found, etc.
      */

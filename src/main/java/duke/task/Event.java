@@ -7,6 +7,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the given description and timing.
+     *
      * @param description       Description of Event.
      * @param time              Timing of the Event.
      */
@@ -17,6 +18,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the given description, timing and status.
+     *
      * @param description       Description of Event.
      * @param time              Timing of the Event.
      * @param isDone            Whether the Event is done or not.
@@ -28,6 +30,7 @@ public class Event extends Task {
 
     /**
      * Returns the letter "E", representing the type Event.
+     *
      * @return  "E"
      */
     @Override
@@ -38,6 +41,7 @@ public class Event extends Task {
     /**
      * Returns a representation of the current Event, including its time, in
      * an appropriate format for data storage.
+     *
      * @return  String representing the current Event.
      */
     @Override
@@ -49,6 +53,7 @@ public class Event extends Task {
     /**
      * Returns a string containing the type of Task, done status, description,
      * and time.
+     *
      * @return  String describing the Event.
      */
     @Override

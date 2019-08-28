@@ -30,6 +30,7 @@ public class Task {
 
     /**
      * Creates a new undone Task with the given description.
+     *
      * @param description   Description of the Task. Description length should
      *                      be at most 50 characters (for now).
      */
@@ -39,6 +40,7 @@ public class Task {
 
     /**
      * Creates a new Task with the given description and isDone status.
+     *
      * @param description   Description of the Task. Description length should
      *                      be at most 50 characters (for now).
      */
@@ -52,6 +54,7 @@ public class Task {
      * If the input format is invalid (does not match any of the date formats
      * specified in Task.DATE_FORMATS), returns the Date representing the
      * current instant.
+     *
      * @param date      String representing a date
      * @return Date     Date corresponding to the given date String, or the
      *                  current instant
@@ -70,6 +73,7 @@ public class Task {
     /**
      * Returns a tick or X symbol according to the isDone status of the
      * current task.
+     *
      * @return  A tick symbol if the Task is done, and an X symbol otherwise.
      */
     private String getStatusIcon() {
@@ -79,6 +83,7 @@ public class Task {
 
     /**
      * Returns a String of length 1 that indicates the current Task type.
+     *
      * @return  String indicating Task type
      */
     public String getType() {
@@ -102,6 +107,7 @@ public class Task {
     /**
      * Returns a representation of the current Task in an appropriate
      * format for data storage.
+     *
      * @return  String representing the current Task.
      */
     public String formatAsData() {
@@ -111,6 +117,7 @@ public class Task {
     /**
      * Returns the description of the Task along with an indication of its
      * isDone status.
+     *
      * @return  String containing the status and description of the current
      *          Task.
      */

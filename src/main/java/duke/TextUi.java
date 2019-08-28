@@ -30,6 +30,7 @@ public class TextUi {
     /**
      * Reads a command from standard input. If user input is terminated,
      * automatically returns an exit command.
+     *
      * @return  String representing a user-given command
      */
     public String readCommand() {
@@ -40,6 +41,7 @@ public class TextUi {
 
     /**
      * Prints the given text with indentation of five spaces.
+     *
      * @param text      Single line of text to be printed
      */
     // TODO: Wrap text for longer lines
@@ -58,6 +60,7 @@ public class TextUi {
      * Prints the items in the given list with their corresponding index
      * numbers. A horizontal line is printed above and below the list, and
      * output is indented throughout.
+     *
      * @param list      A task list to be printed
      */
     public void showList(TaskList list) {
@@ -69,6 +72,7 @@ public class TextUi {
     /**
      * Prints the given text with a horizontal line above and below the text
      * and appropriate indentation.
+     *
      * @param text      Formatted text with appropriate line breaks. Maximum
      *                  width for each line is 58 characters.
      */
@@ -81,6 +85,7 @@ public class TextUi {
 
     /**
      * Prints an apology followed by details of the given exception.
+     *
      * @param message   Error message from exception that caused the error
      */
     public void showErrorMessage(String message) {

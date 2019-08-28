@@ -14,6 +14,7 @@ public class Duke {
 
     /**
      * Initialises Duke by setting up user interface, storage, and tasks.
+     *
      * @param filePath  Path to data file
      */
     public Duke(String filePath) {
@@ -32,7 +33,7 @@ public class Duke {
      *
      * <p>Duke begins by printing a welcome message. Subsequently, it repeatedly
      * scans for user input, then validates and processes it accordingly. The
-     * function returns when the command to exit ("bye") is received.</p>
+     * function returns when the command to exit ("bye") is received.
      */
     public void run() {
         ui.showWelcomeMessage();
@@ -55,6 +56,7 @@ public class Duke {
 
     /**
      * Initialises and runs the Duke application.
+     *
      * @param args  Standard arguments
      */
     public static void main(String[] args) {

@@ -14,6 +14,7 @@ public class Parser {
     /**
      * Parses the input string and returns a Command corresponding to the
      * required action.
+     *
      * @param input             String representation of the desired command
      * @return                  Command
      * @throws DukeException    If input is invalid, etc.
@@ -51,6 +52,7 @@ public class Parser {
      *                    6. "event [description] /at [time]"
      *                    7. "delete [taskIndex]"
      *                    8. "bye"
+     *
      * @param input             Text input to be validated
      * @throws DukeException    An exception with a message describing Duke's
      *                          response to the problem

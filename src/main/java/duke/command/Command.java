@@ -20,6 +20,7 @@ public abstract class Command {
 
     /**
      * Returns the details associated with this command.
+     *
      * @return  Command details
      */
     public String getDetails() {
@@ -36,6 +37,7 @@ public abstract class Command {
 
     /**
      * Executes the current command using the given resources.
+     *
      * @param tasks             List of tasks
      * @param ui                User interface
      * @param storage           Hard disk storage
@@ -46,6 +48,7 @@ public abstract class Command {
 
     /**
      * Saves the current task list in the file `[root]/data/duke.txt`.
+     *
      * @throws DukeException    If file does not get written properly
      */
     void save(TaskList tasks, Storage storage) throws DukeException {
@@ -64,6 +67,7 @@ public abstract class Command {
      * Returns the taskList index of the task with the given number if such a
      * task exists, and throws an exception otherwise. Note that taskList is
      * zero-indexed, whereas the input number is one-indexed.
+     *
      * @param number            String that should contain a number
      * @param numberOfTasks     Number of tasks in the list currently
      * @return                  The requested task index

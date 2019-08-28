@@ -3,9 +3,9 @@ public class Task {
     protected String taskName;
     protected boolean done;
 
-    public Task(String taskName) {
+    public Task(String taskName, boolean done) {
         this.taskName = taskName;
-        this.done = false;
+        this.done = done;
     }
 
     public void markAsDone() {
@@ -18,6 +18,9 @@ public class Task {
         } else {
             return "[✗]" + taskName;
         }
+    }
+    public String storageFormat() {
+        return "";
     }
 }
 

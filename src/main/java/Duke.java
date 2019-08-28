@@ -35,17 +35,31 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(String.format(currentTask.toString(), currentTask.getStatusIcon()));
             }
-            else if (line.contains("todo")) {
-                ToDo newToDo = new ToDo(line);
-                System.out.println("Got it. I've added this task:");
-                tasks.add(newToDo);
-                System.out.println(newToDo.toString());
-                System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
-            }
             else {
-                Task newTask = new Task(line);
-                tasks.add(newTask); // add user input to toDos
-                System.out.println("added: " + newTask.toString()); // echos user input
+                Task newTask = null;
+                if (line.contains("todo")) { // task is a todo
+                    String newLine = line.substring(4);
+                    newTask = new ToDo(newLine);
+                }
+                else if (line.contains("deadline")) { // task is a deadline
+                    int index = line.indexOf("/by "); // index of end of '\by ', which is ' '
+                    String description = line.substring(8, index - 1); // from ' ' after 'deadline' to ' ' before '/by'
+                    String by = line.substring(index + 4, line.length()); // from ' ' after '\by' to end of input
+                    newTask = new Deadline(description, by);
+                }
+                else if (line.contains("event")){ // task is an event
+                    int index = line.indexOf("/at ");
+                    String description = line.substring(5, index - 1); // from ' ' after 'event' to ' ' before '/at'
+                    String at = line.substring(index + 4, line.length()); // from ' ' after '\at' to end of input
+                    newTask = new Event(description, at);
+                }
+                else { // normal statement
+                    newTask = new Task(line);
+                }
+                tasks.add(newTask);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(newTask.toString());
+                System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
             }
         }
     }

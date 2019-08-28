@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 abstract class TaskList {
@@ -69,6 +70,16 @@ abstract class TaskList {
         a.add(t);
         System.out.println(t);
         System.out.println("Now you have " + Integer.toString(n) + " tasks in the list.");
+
+        try {
+            PrintWriter savingAdd = new PrintWriter("/Users/hualun/Desktop/test.txt");
+            for(TaskList task: a) {
+                savingAdd.println(task);
+            }
+            savingAdd.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //to delete task
@@ -78,6 +89,16 @@ abstract class TaskList {
         int taskNumber = t.getTaskNumber();
         a.remove(taskNumber - 1);
         System.out.println("Now you have " + Integer.toString(a.size()) + " tasks in the list.");
+
+        try {
+            PrintWriter savingDelete = new PrintWriter("/Users/hualun/Desktop/test.txt");
+            for(TaskList task: a) {
+                savingDelete.println(task);
+            }
+            savingDelete.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

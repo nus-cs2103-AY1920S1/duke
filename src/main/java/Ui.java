@@ -77,11 +77,6 @@ public class Ui {
         }
     }
 
-
-    /**
-     * Displays a DukeException.
-     * @param message exception message to be displayed
-     */
     public void showSearchResults(HashMap<Integer, Task> taskList) {
         System.out.println(TABS + "Here are the matching tasks in your list:");
 
@@ -91,6 +86,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a DukeException.
+     * @param message exception message to be displayed
+     */
     public void showError(String message) {
         System.out.println(LINE);
         System.out.println(TABS + "☹ OOPS!!! " + message);

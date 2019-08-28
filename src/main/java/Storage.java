@@ -6,7 +6,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-// Deals with loading and saving tasks from and in the file
+/**
+ * Object responsible for loading and saving tasks
+ * from a text file saved in the hard disk.
+ */
 public class Storage {
 
     // Format of file
@@ -24,8 +27,13 @@ public class Storage {
         isExists = f.exists();
     }
 
-    // Converts contents of file to ArrayList
-    // If no such file, return empty AL
+    /**
+     * Reads in data from text file, converts contents
+     * to tasks.
+     * If no such file, returns an empty AL
+     * @return ArrayList of Task objects/List of tasks
+     * @throws DukeException If text file is not found at given filepath
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<Task>();
         try {
@@ -63,7 +71,11 @@ public class Storage {
         return taskArr;
     }
 
-    // Save updated AL to file in hard disk
+    /**
+     * Saves given updated list of tasks to text file in hard disk
+     * @param taskList
+     * @throws IOException
+     */
     public void save(ArrayList<Task> taskList) throws IOException {
         // Note: Overwrites file if currently exists
         FileWriter fw = new FileWriter(fp);
@@ -82,7 +94,10 @@ public class Storage {
         fw.close();
     }
 
-    // Returns whether file in hard disk exists
+    /**
+     * Getter method for class attribute
+     * @return Whether file in given filepath exists
+     */
     public boolean doesFileExist() { return isExists; }
 
 }

@@ -1,7 +1,14 @@
 import java.io.IOException;
 import java.util.List;
 
-// Contains information on a user input
+/**
+ * Contains information on a user input
+ * Represents a command. A <code>Command</code>
+ * corresponds to a main command word (e.g. <code>list</code>, <code>deadline</code> etc.)
+ * and details required for it to be execute (e.g. description of event, index of task to be
+ * deleted from list, details of subcommands like <code>/by</code>)
+ */
+
 public class Command {
     protected String command; // list, done, bye, todo, deadline, event
     protected boolean isStillInProgram; // Whether command terminates program or not
@@ -13,6 +20,11 @@ public class Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
     }
 
+    /**
+     * All commands return true except for
+     * <code>exit</code> which terminates program
+     * @return Whether program should still continue after command executed
+     */
     public boolean toContinueProgram() {
         return isStillInProgram;
     }
@@ -44,7 +56,15 @@ class AddCommand extends Command {
         this.hasSubCommand = hasSubCommand;
     }
 
-    // Only todo
+    /**
+     * Executes commands <code>todo</code>
+     * Adds ToDo task to list, saves new list to txt file, shows user message
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws IOException
+     * @throws DukeException If no description of ToDo task provided
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         Task newTask = new ToDo(description);
         taskList.addTask(newTask);

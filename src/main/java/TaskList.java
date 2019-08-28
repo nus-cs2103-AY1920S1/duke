@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-// Contains the task list
+/**
+ * Mainly contains the ArrayList of tasks
+ * Supports operations to modify this AL
+ */
 public class TaskList {
 
     private ArrayList<Task> taskArr;
@@ -21,19 +24,35 @@ public class TaskList {
     // OPERATIONS //
     ///////////////
 
-    // Adds task and saves changes in hard disk
+    /**
+     * Adds new task to list.
+     * Number of tasks in list increases by one.
+     * @param newTask
+     * @return Task that was added
+     * @throws IOException
+     */
     public Task addTask(Task newTask) throws IOException {
         taskArr.add(newTask);
         return newTask;
     }
 
-    // Marks task of given list idx as done
+    /**
+     * Marks task at given list index as done
+     * @param doneIdx
+     * @return Task that was marked done
+     */
     public Task markTaskDone(int doneIdx) {
         Task doneTask = taskArr.get(doneIdx-1);
         doneTask.markDone();
         return doneTask;
     }
 
+    /**
+     * Removes task at given list index.
+     * Number of tasks in list decreases by one.
+     * @param deleteIdx
+     * @return
+     */
     public Task deleteTask(int deleteIdx) {
         Task deletedTask = taskArr.get(deleteIdx-1);
         taskArr.remove(deletedTask);

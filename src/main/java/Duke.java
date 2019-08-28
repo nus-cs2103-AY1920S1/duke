@@ -1,5 +1,11 @@
 import java.io.IOException;
 
+/**
+ * A program named Duke.
+ * Something like a Personal Assistant Chatbot that helps
+ * a person keep track of various things, except it can only
+ * understand archaic text commands of a specific structure.
+ */
 public class Duke {
 
     private Storage storage;

@@ -1,7 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-// Deals with interactions with the user
+/**
+ * Deals with interaction with the user.
+ * Mainly printing to console appropriate messages and information (program status)
+ * of specified format and indentation, according to situation.
+ * Also responsible for reading in user inputs.
+ */
 public class Ui {
 
     private Scanner s;
@@ -19,7 +24,10 @@ public class Ui {
     // USER INPUTS //
     ////////////////
 
-    // Returns line of text user enters
+    /**
+     * Returns text that user has entered in console
+     * @return User input as string
+     */
     public String readUserInput() {
         return s.nextLine();
     }
@@ -37,6 +45,12 @@ public class Ui {
         showMessage("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints out information of tasks currently in list.
+     * Includes their order, done or not, description etc.
+     * Presents each task in a new line.
+     * @param taskList
+     */
     public void showTasks(TaskList taskList) {
         ArrayList<Task> taskArr = taskList.getTaskArr();
         System.out.println(BORDER_STR);
@@ -87,7 +101,10 @@ public class Ui {
         return INDENT_STR + message;
     }
 
-    // Sandwich text between -----s
+    /**
+     * Sandwiches text between -----s
+     * @param message
+     */
     public void showMessage(String message) {
         System.out.println(BORDER_STR);
         System.out.println(indentMessage(message));

@@ -32,24 +32,17 @@ public class JsonWriter implements AutoCloseable {
 			}
 		}
 
-
-		public void writeObject(Object value) {
+		public <T> void writeValue(T value) {
 			if(value == null) {
 				this.writeNull();
-			} else if(value instanceof Number) {
-				this.writeNumber(((Number) value).doubleValue());
-			} else if(value instanceof Boolean) {
-				this.writeBoolean((boolean) value);
-			} else if(value instanceof List) {
-				List<?> ls = (List<?>) value;
-				this.writeValues(ls.iterator(), ValueContext::writeObject);
-			} else if(value instanceof Map) {
-				Map<?,?> map = (Map<?,?>) value;
-				this.writeDict(map, ValueContext::writeObject);
-			} else {
-				String str = value.toString();
-				this.writeString(str);
+				return;
 			}
+			this.writeValue(value, value.getClass());
+		}
+
+		public <T> void writeValue(T value, Class<? extends T> clazz) {
+			BiConsumer<ValueContext, T> coder = Registry.getEncoder(clazz);
+			coder.accept(this, value);
 		}
 
 		public <T> void writeValues(Iterator<T> it, BiConsumer<ValueContext,T> coder) {
@@ -83,6 +76,11 @@ public class JsonWriter implements AutoCloseable {
 	public void writeValue(Consumer<ValueContext> coder) {
 		coder.accept(this.valueContext);
 	}
+
+	public <T> void writeValue(T value) {
+		this.valueContext.writeValue(value);
+	}
+
 
 	private static String escapeString(String unescaped) {
 		StringBuilder sb = new StringBuilder();

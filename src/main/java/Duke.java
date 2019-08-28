@@ -34,20 +34,20 @@ public class Duke {
 
         Task newTask;
         switch (kw.toLowerCase()) {
-            case "deadline":
-                newTask = Deadline.create(descr);
-                break;
-            case "event":
-                newTask = Event.create(descr);
-                break;
-            case "todo":
-                newTask = Todo.create(descr);
-                break;
-            default:
-                //dukeRespond("Accidentally pressed enter?",
-                //        "nvm you can continue with your next cmd! :D");
-                //return;
-                throw new InvalidKeywordException("");
+        case "deadline":
+            newTask = Deadline.create(descr);
+            break;
+        case "event":
+            newTask = Event.create(descr);
+            break;
+        case "todo":
+            newTask = Todo.create(descr);
+            break;
+        default:
+            //dukeRespond("Accidentally pressed enter?",
+            //        "nvm you can continue with your next cmd! :D");
+            //return;
+            throw new InvalidKeywordException("");
         }
         dukeRespond("Got it. I've added this task:",
                 "  " + newTask.toString(),
@@ -129,18 +129,18 @@ public class Duke {
                 //    listData();
                 //} else{
                     switch (userCmd.split(" ")[0].toLowerCase()) {
-                        case "list":
-                            listData();
-                            break;
-                        case "done":
-                            markDone(userCmd);
-                            break;
-                        case "delete":
-                            deleteTask(userCmd);
-                            break;
-                        default:
-                            addData(userCmd);
-                            break;
+                    case "list":
+                        listData();
+                        break;
+                    case "done":
+                        markDone(userCmd);
+                        break;
+                    case "delete":
+                        deleteTask(userCmd);
+                        break;
+                    default:
+                        addData(userCmd);
+                        break;
                     }
 
                 //}

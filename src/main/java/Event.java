@@ -2,7 +2,6 @@
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Event extends Task {
@@ -12,19 +11,13 @@ public class Event extends Task {
     protected static final String dateFormat = "dd/MM/yyyy HHmm";
     protected SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
-    public Event(String description, Calendar at) {
-        super(description);
-        this.at = at.getTime();
-        dateInString = formatter.format(this.at);
-    }
-
-    public Event(String description, String dateInString) {
+    public Event(String description, String dateInString) throws DukeException {
         super(description);
         this.dateInString = dateInString;
         try {
             at = formatter.parse(dateInString);
         } catch (ParseException ex) {
-            System.out.println(ex.getCause());
+            throw new DukeException("Not a valid time format!!");
         }
     }
 

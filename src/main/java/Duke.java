@@ -1,250 +1,42 @@
-import java.util.Calendar;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
-    private static int pointer;
-    private static final String border = "____________________________________________________________";
-    private static final String upperBorder = border + "\n\n";
-    private static final String lowerBorder = border + "\n";
-    private static ArrayList<Task> taskList;
-    private static String savedPath = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
-    private static Storage storageHandler;
+    private UI ui;
+    private Storage storageHandler;
+    private TaskList taskList;
+    private static final String savedPath = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
 
-    public static void main(String[] args) {
+    public Duke(String savedPath) {
+        ui = new UI();
+        storageHandler = new Storage(savedPath);
+        try {
+            taskList = new TaskList(storageHandler.loadFromFile());
+        } catch (DukeException ex) {
+            ui.cannotLoad();
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.greet();
 
         Scanner sc = new Scanner(System.in);
-        try {
-            storageHandler = new Storage(savedPath);
-            taskList = storageHandler.loadFromFile();
-        } catch (IOException ex) {
-            System.out.println("OOPS!!! Something went wrong with the storage.");
-        } catch (DukeException ex) {
-            System.out.println("It seems your file is corrupted. Do you want to wipe the file? Y/N");
-            String toWipe = sc.next();
-            if (toWipe.equalsIgnoreCase("y")) {
-                taskList = new ArrayList<>();
-                System.out.println("Alright! The file has been wiped!");
-            } else if (toWipe.equalsIgnoreCase("n")) {
-                taskList = new ArrayList<>();
-                System.out.println("Naw, it doesn't work like that. I'm still wiping your file!");
-            }
-        }
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n"
-                + upperBorder + "Hello! I'm Duke\n" + "What can I do for you?\n" + lowerBorder);
-
-        pointer = taskList.size();
-
-        while (true) {
+        String command;
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String str = sc.nextLine();
-                String[] keywords = str.split(" ");
-                if (keywords[0].equals("bye")) {
-                    break;
-                } else if (keywords[0].equals("list")) {
-                    outputList(taskList);
-                } else if (keywords[0].equals("done")) {
-                    System.out.println(doneTask(Integer.parseInt(keywords[1])));
-                    writeHandler();
-                } else if (keywords[0].equals("todo")) {
-                    String temp = parseTodo(keywords);
-                    System.out.println(todo(temp.strip()));
-                    pointer++;
-                    writeHandler();
-                } else if (keywords[0].equals("deadline")) {
-                    String[] temp = parseTaskTime(keywords, "deadline");
-                    Calendar dateTime = parseTime(temp[1].strip());
-                    System.out.println(deadline(temp[0].strip(), dateTime));
-                    pointer++;
-                    writeHandler();
-                } else if (keywords[0].equals("event")) {
-                    String[] temp = parseTaskTime(keywords, "event");
-                    Calendar dateTime = parseTime(temp[1].strip());
-                    System.out.println(event(temp[0].strip(), dateTime));
-                    pointer++;
-                    writeHandler();
-                } else if (keywords[0].equals("delete")) {
-                    System.out.println(deleteTask(Integer.parseInt(keywords[1])));
-                    pointer--;
-                    writeHandler();
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
+                command = sc.nextLine();
+                Command c = Parser.parse(command);
+                c.execute(taskList, ui, storageHandler);
+                isExit = c.isExit();
             } catch (DukeException ex) {
-                System.out.println(upperBorder + ex.getMessage() + "\n" + lowerBorder);
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                System.out.println(upperBorder
-                        + "☹ OOPS!!! I'm sorry, but this task does not exist.\n" + lowerBorder);
+                ui.showError(ex.getMessage());
             }
         }
-
-        System.out.println(upperBorder + "Bye. Hope to see you again soon!\n" + lowerBorder);
-
-
-        sc.close();
-
     }
 
-    // public static String addToList(int pointer, String string) {
-    //     taskList[pointer] = new Task(string);
-    //     return upperBorder + "added: " + string + "\n" + lowerBorder;
-    // }
-
-    public static void outputList(ArrayList<Task> taskList) {
-        System.out.println(border + "\n");
-        for (int i = 1; i < taskList.size() + 1; i++) {
-            System.out.println(i + ". " + taskList.get(i - 1));
-        }
-        System.out.println(lowerBorder);
-    }
-
-    public static String doneTask(int pointer) throws DukeException {
-        try {
-            taskList.get(pointer - 1).setDone();
-            return upperBorder + "Nice! I've marked this task as done:\n"
-                    + taskList.get(pointer - 1) + "\n" + lowerBorder;
-        } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
-        }
-    }
-
-    public static String todo(String string) {
-        taskList.add(new Todo(string));
-        return taskWrap(taskList.get(pointer), "add");
-    }
-
-    public static String deadline(String string, Calendar by) {
-        taskList.add(new Deadline(string, by));
-        return taskWrap(taskList.get(pointer), "add");
-    }
-
-    public static String event(String string, Calendar at) {
-        taskList.add(new Event(string, at));
-        return taskWrap(taskList.get(pointer), "add");
-    }
-
-    public static String taskWrap(Task task, String type) {
-        switch (type) {
-            case "add":
-                return upperBorder + "Got it. I've added this task:\n" + task
-                + "\n" + "Now you have " + (pointer + 1) + " tasks in the list.\n" + lowerBorder;
-
-            case "delete":     
-                return upperBorder + "Noted. I've removed this task:\n" + task
-                + "\n" + "Now you have " + (pointer - 1) + " tasks in the list.\n" + lowerBorder;
-        }
-        return "";
-    }
-
-    public static String parseTodo(String[] keywords) throws DukeException {
-        if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        }else {
-            String temp = "";
-            for (int i = 1; i < keywords.length; i++) {
-                temp = temp + " " + keywords[i];
-            }
-            return temp;
-        }
-    }
-
-    public static String[] parseTaskTime(String[] keywords, String dateTimeType) throws DukeException {
-       if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a " + dateTimeType + " cannot be empty.");
-       } else {
-            String temp = "";
-            String date = "";
-            boolean flag = false;
-            switch (dateTimeType) {
-                case "deadline":
-                for (int i = 1; i < keywords.length; i++) {
-                    if (flag) {
-                        date = date + " " + keywords[i];
-                    } else if (keywords[i].equals("/by")) {
-                        flag = true;
-                    } else {
-                        temp = temp + " " + keywords[i];
-                    }
-                }
-                break;
-
-                case "event":
-                for (int i = 1; i < keywords.length; i++) {
-                    if (flag) {
-                        date = date + " " + keywords[i];
-                    } else if (keywords[i].equals("/at")) {
-                        flag = true;
-                    } else {
-                        temp = temp + " " + keywords[i];
-                    }
-                }
-                break;
-
-                default:
-                break;
-            }
-            if (date.equals("")) {
-                switch (dateTimeType) {
-                    case "deadline":
-                    throw new DukeException("☹ OOPS!!! Your deadline does not have a /by.");
-
-                    case "event":
-                    throw new DukeException("☹ OOPS!!! Your event does not have an /at.");
-
-                    default:
-                    break;
-                }
-            }
-            return new String[] {temp, date};
-       }
-    }
-
-    public static Calendar parseTime(String dateTime) throws DukeException {
-        //regex retrieved from the regex library: http://regexlib.com/REDetails.aspx?regexp_id=17
-        String[] keywords = dateTime.split(" ");
-        Calendar.Builder date = new Calendar.Builder();
-        for (int i = 0; i < keywords.length; i++) {
-            if (keywords[i].matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
-                String[] dayMonthYear = keywords[i].split("/");
-                int day = Integer.parseInt(dayMonthYear[0]);
-                int month = Integer.parseInt(dayMonthYear[1]);
-                int year = Integer.parseInt(dayMonthYear[2]);
-                date.setDate(year, month - 1, day);
-            } else if (keywords[i].matches("^\\d{4}$")) {
-                int twentyFourHrTime = Integer.parseInt(keywords[i]);
-                int hour = twentyFourHrTime / 100;
-                int minute = twentyFourHrTime % 100;
-                date.setTimeOfDay(hour, minute, 0);
-            } else {
-                throw new DukeException("Not a valid time format!!");
-            }
-        }
-        return date.build();
-    }
-
-    public static String deleteTask(int pointer) throws DukeException {
-        try {
-            return taskWrap(taskList.remove(pointer - 1), "delete");
-        } catch (IndexOutOfBoundsException ex) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but this task does not exist.");
-        }
-    }
-
-    public static void writeHandler() {
-        try {
-            storageHandler.writeToFile(taskList);
-        } catch (IOException ex) {
-            System.out.println("Your file could not be written. :(");
-        }
+    public static void main(String[] args) {
+        new Duke(savedPath).run();
     }
 
 }

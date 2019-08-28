@@ -9,15 +9,13 @@ public class Storage {
     private ArrayList<Task> taskList = new ArrayList<Task>();
     private File file;
     private Scanner fileReader;
-    private String savedPath;
     private FileWriter writer;
 
-    public Storage(String savedPath) throws IOException {
-        this.savedPath = savedPath;
+    public Storage(String savedPath) {
         file = new File(savedPath);
     }
 
-    public ArrayList<Task> loadFromFile() throws DukeException, FileNotFoundException {
+    public ArrayList<Task> loadFromFile() throws DukeException {
         try {
             fileReader = new Scanner(file);
             while (fileReader.hasNext()) {
@@ -84,7 +82,7 @@ public class Storage {
                             }
                             taskList.add(temp);
                         } else {
-                            throw new DukeException("OOPS!!! I cannot read your file! :(");
+                            throw new DukeException();
                         }
                 }
             }
@@ -92,15 +90,18 @@ public class Storage {
             return taskList;
         } catch (ArrayIndexOutOfBoundsException ex) {
             throw new DukeException("YOoooUR fILe haS BeEN cORRupTEd.");
+        } catch (FileNotFoundException ex) {
+            throw new DukeException();
         }
     }
 
-    public void writeToFile(ArrayList<Task> taskList) throws IOException {
+    public void writeToFile(TaskList taskList) throws IOException {
         writer = new FileWriter(file);
+        ArrayList<Task> tempList = taskList.getTaskList();
         try {
-            String temp = taskList.get(0).toString();
-            for (int i = 1; i < taskList.size(); i++) {
-                temp = temp + "\n" + taskList.get(0).toString();
+            String temp = tempList.get(0).toString();
+            for (int i = 1; i < tempList.size(); i++) {
+                temp = temp + "\n" + tempList.get(0).toString();
             }
             writer.write(temp);
         } catch (IndexOutOfBoundsException ex) {

@@ -4,6 +4,7 @@ import Task.Todo;
 import Task.Event;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 public class Parser {
     private String command;
@@ -87,6 +88,17 @@ public class Parser {
                 list.addTask(event);
                 ui.taskCreated(event);
                 ui.showNumberOfTasks(list.getList());
+                break;
+            }
+            case "find": {
+                String keyword = taskDetails;
+                ArrayList<Task> filteredList = new ArrayList<>();
+                for (Task item: list.getList()) {
+                    if (item.getDescription().contains(keyword)) {
+                        filteredList.add(item);
+                    }
+                }
+                ui.list(filteredList);
                 break;
             }
             default:

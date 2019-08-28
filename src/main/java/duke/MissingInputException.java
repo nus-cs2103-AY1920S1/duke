@@ -1,4 +1,10 @@
+package duke;
+
+import duke.DukeException;
+
 public class MissingInputException extends DukeException {
+
+    String message = "☹ OOPS!!! ";
 
     public MissingInputException(String taskType) {
         super(taskType);

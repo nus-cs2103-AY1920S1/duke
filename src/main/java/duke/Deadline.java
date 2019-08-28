@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Date;
+
 public class Deadline extends Task {
 
     Date date;

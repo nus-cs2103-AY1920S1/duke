@@ -1,3 +1,5 @@
+package duke;
+
 public class Date {
     int day;
     Month month;

@@ -1,4 +1,10 @@
+package duke;
+
+import duke.DukeException;
+
 public class InvalidItemException extends DukeException {
+
+    String message = "☹ OOPS!!! ";
 
     public InvalidItemException() {
     }

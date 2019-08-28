@@ -1,3 +1,6 @@
+import duke.MessageGenerator;
+import duke.UI;
+
 import java.util.Scanner;
 
 public class Duke {

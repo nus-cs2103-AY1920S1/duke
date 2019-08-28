@@ -58,6 +58,22 @@ public class UI {
         }
     }
 
+    public void showListWithKeyword(TaskList tasks, String keyword) {
+        printWithInden("Here are the matching tasks in your list:");
+        String word = keyword.trim();
+        int count = 1;
+        for (int i = 0; i < tasks.getTaskCount(); i++) {
+            Task task = tasks.getTask(i);
+            String desc = task.getDescription();
+            if (desc.contains(word)) {
+                printWithInden((count) + ". " + tasks.getTask(i));
+                count++;
+            } else {
+                continue;
+            }
+        }
+    }
+
     public void showExitMessage() {
         printWithInden("Bye. Hope to see you again soon!");
     }

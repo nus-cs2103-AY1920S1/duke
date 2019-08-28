@@ -8,6 +8,11 @@ public class TaskList {
         allTasks = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> allTasks) {
+        this.allTasks = allTasks;
+        this.numTasks = allTasks.size();
+    }
+
     public void addTask(Task newTask) {
         numTasks++;
         allTasks.add(newTask);
@@ -27,6 +32,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the Task of the give index from the TaskList
+     * @param index
+     * @return the deleted task
+     */
     public Task deleteTask(int index) {
         Task deletedTask = allTasks.get(index);
         allTasks.remove(index);
@@ -34,4 +44,12 @@ public class TaskList {
         return deletedTask;
     }
 
+    @Override
+    public String toString() {
+        String output = "";
+        for (Task task : allTasks) {
+            output = output + task + System.lineSeparator();
+        }
+        return output;
+    }
 }

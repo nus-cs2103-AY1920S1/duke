@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class Database {
                     task = new Event(description[2], description[3]);
                     break;
                 default:
-                    throw new IOException();
+                    throw new DukeException("☹ OOPS! Task description invalid!");
                 }
                 if (description[1].equals("1")) {
                     task.markAsDone();
@@ -52,7 +53,7 @@ public class Database {
             }
             sc.close();
             return taskList;
-        } catch (DukeException | IOException e) {
+        } catch (DukeException | FileNotFoundException e) {
             return new ArrayList<Task>();
         }
     }

@@ -8,11 +8,22 @@ import duke.util.Ui;
 
 import java.io.FileNotFoundException;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps a person to keep track of various tasks.
+ */
 public class Duke {
+    /** User Interface of Duke that handles input and output to and from the command line. */
     private Ui ui;
+    /** Storage where the Tasks are retrieved from and stored to. */
     private Storage storage;
+    /** List of Tasks Duke is currently tracking. */
     private TaskList tasks;
 
+    /**
+     * Constructor for Duke that instantiates the Ui and Storage classes.
+     *
+     * @param filePath Path to .txt file for Storage of tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +33,10 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+
+    /**
+     * Runs and starts the Duke chatbot program.
+     */
     public void run() {
         try {
             tasks = storage.getTasks();

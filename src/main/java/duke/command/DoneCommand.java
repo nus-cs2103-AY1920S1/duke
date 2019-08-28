@@ -3,6 +3,9 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Represents a {@link Command} to mark a {@link Task} as done.
+ */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";

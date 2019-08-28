@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Represents a {@link Command} to inform the user that he has entered an incorrect command.
+ */
 public class IncorrectCommand extends Command {
 
     @Override

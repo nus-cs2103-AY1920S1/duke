@@ -4,6 +4,9 @@ import duke.util.DateUtil;
 
 import java.util.Date;
 
+/**
+ * Represents an event as a {@link Task}.
+ */
 public class Event extends Task {
     protected Date at;
 

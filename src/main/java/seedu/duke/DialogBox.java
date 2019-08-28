@@ -34,7 +34,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -49,10 +48,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a <code>DialogBox</code> for the User
+     * @param text The text.
+     * @param img The image.
+     * @return The <code>DialogBox</code>.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a <code>DialogBox</code> for the Duke
+     * @param text The text.
+     * @param img The image.
+     * @return The <code>DialogBox</code>.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

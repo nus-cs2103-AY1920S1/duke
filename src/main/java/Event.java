@@ -1,7 +1,19 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Event extends Task {
     private Calendar time;
+
+    public Event(Parser parser) {
+        super(parser.getList().get(0));
+        time = Calendar.getInstance();
+        ArrayList<String> inputArray = parser.getList();
+        time.set(Integer.parseInt(inputArray.get(3)),
+                (Integer.parseInt(inputArray.get(2)) - 1),
+                Integer.parseInt(inputArray.get(1)),
+                Integer.parseInt(inputArray.get(4)),
+                Integer.parseInt(inputArray.get(5)));
+    }
 
     public Event(String des, Calendar time) {
         super(des);
@@ -50,7 +62,7 @@ public class Event extends Task {
         case 11 : nameOfMonth = "December";
             break;
         }
-        String hoursAndMinutes = "" + time.get(Calendar.HOUR) + ":";
+        String hoursAndMinutes = "" + time.get(Calendar.HOUR_OF_DAY) + ":";
         if (time.get(Calendar.MINUTE) < 10) {
             hoursAndMinutes += "0";
         }

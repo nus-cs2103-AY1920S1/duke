@@ -1,4 +1,8 @@
 public class ToDo extends Task{
+    public ToDo(Parser parser) {
+        super(parser.getList().get(0));
+    }
+
     public ToDo(String des) {
         super(des);
     }

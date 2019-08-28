@@ -1,7 +1,19 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Deadline extends Task {
     private Calendar time;
+
+    public Deadline(Parser parser) throws DukeException {
+        super(parser.getList().get(0));
+        time = Calendar.getInstance();
+        ArrayList<String> inputArray = parser.getList();
+        time.set(Integer.parseInt(inputArray.get(3)),
+                (Integer.parseInt(inputArray.get(2)) - 1),
+                Integer.parseInt(inputArray.get(1)),
+                Integer.parseInt(inputArray.get(4)),
+                Integer.parseInt(inputArray.get(5)));
+    }
 
     public Deadline(String des, Calendar time) {
         super(des);
@@ -50,7 +62,7 @@ public class Deadline extends Task {
         case 11 : nameOfMonth = "December";
             break;
         }
-        String hoursAndMinutes = "" + time.get(Calendar.HOUR) + ":";
+        String hoursAndMinutes = "" + time.get(Calendar.HOUR_OF_DAY) + ":";
         if (time.get(Calendar.MINUTE) < 10) {
             hoursAndMinutes += "0";
         }
@@ -68,7 +80,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-
         return "[D]" + super.toString() + " (by: "
                 + this.printTime() +  ")";
     }

@@ -51,7 +51,6 @@ public class Duke {
     public void run() throws IOException {
 
         this.ui.welcome();
-
         String command = ui.promptEntry();
         ui.handleCommand(command, this.taskList);
         //after all commands are done, we will save the updated list into the txt file.

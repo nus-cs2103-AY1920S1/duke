@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Ui {
     private static int idleCount;
     protected static Scanner sc;
-    static String line = "____________________________________________________________";
+    protected static String line = "____________________________________________________________";
 
     public Ui() {
         sc = new Scanner(System.in);

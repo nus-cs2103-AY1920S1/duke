@@ -60,12 +60,22 @@ public class Duke {
         }
         if (type.equals("D")) {
             // take up empty input
-            String by = stringSc.next();
+            String by = "";
+            String curr = stringSc.next();
+            while (!curr.equals("|")) {
+                by = by + " " + curr;
+                curr = stringSc.next();
+            }
             Deadline newTask = new Deadline(mainInfo,"D",by);
             taskArr.add(newTask);
         } else if (type.equals("E")) {
 
-            String by = stringSc.next();
+            String by = "";
+            String curr = stringSc.next();
+            while (!curr.equals("|")) {
+                by = by + " " + curr;
+                curr = stringSc.next();
+            }
             Event newTask = new Event(mainInfo,"E",by);
             taskArr.add(newTask);
         } else {
@@ -74,14 +84,13 @@ public class Duke {
         }
     }
     private void save() {
-        data.setAppend(true);
 
         for (Task t: taskArr) {
             String mainTxt = "";
             String type = t.getType();
             String status = (t.getDone() ? "1" : "0");
             String info = t.getTaskInfo();
-            String by = t.getBy();
+            String by = t.getByOrig();
             if (type == "T") {
                 mainTxt = mainTxt + type + " | " + status + " | "
                         + info + " | " + by + " | ";
@@ -90,8 +99,9 @@ public class Duke {
                         + info + " | " + by + " | ";
             }
             data.writeToFile(mainTxt);
-
+            data.setAppend(true);
         }
+        data.setAppend(false);
     }
     private void printLine() {
         /**
@@ -193,7 +203,6 @@ public class Duke {
         doneTask.markDone();
         System.out.print("Nice! I've marked this task as done:\n");
         System.out.println(doneTask.printTask());
-
     }
     private void delete(int taskNum) {
         /**
@@ -206,7 +215,6 @@ public class Duke {
          *  @return none
          */
         Task doneTask = taskArr.get(taskNum-1);
-
         System.out.print("Noted. I've removed this task: \n");
         System.out.println(" " + doneTask.printTask());
         taskArr.remove(taskNum-1);

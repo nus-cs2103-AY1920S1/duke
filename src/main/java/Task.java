@@ -70,6 +70,9 @@ public class Task {
             return by.toString();
         }
     }
+    public String getByOrig() {
+        return byString;
+    }
     // setters
     public void markDone() {
         /**
@@ -86,6 +89,7 @@ public class Task {
             date1 = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
         } catch (ParseException p) {
             System.out.println("Use the correct format: dd/MM/yyyy HHmm");
+            System.out.println(by);
         }
         return date1;
     }

@@ -7,7 +7,7 @@ public class Todo extends Task{
         this.taskType = "T";
     }
     public Todo(String description, boolean isDone) throws DukeException{
-            this(description);
+        this(description);
         this.isDone = isDone;
     }
     public Task markAsDone() throws DukeException{
@@ -19,7 +19,7 @@ public class Todo extends Task{
         return completed;
     }
     public String getTaskStatus(){
-        return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()); 
+        return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription());
     }
 
     public String getStoredTaskStatus(){

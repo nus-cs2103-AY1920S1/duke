@@ -18,18 +18,18 @@ public class Duke {
     }
 
     public static Task storedTextToTask(String taskString){
-        String[] commands = taskString.split("^\\s{2}|\\s{2}$");
+        String[] commands = taskString.split("\\s{1}\\|\\s{1}");
         Task taskToAdd = null;
         try{
             switch (commands[0]) {
-                case "todo":
-                    taskToAdd = new Todo(commands[1], (commands[2].equals("✓")));
+                case "T":
+                    taskToAdd = new Todo(commands[2], (commands[1].equals("✓")));
                     break;
-                case "deadline":
-                    taskToAdd = new Deadline(commands[1], (commands[2].equals("✓")), commands[3]);
+                case "D":
+                    taskToAdd = new Deadline(commands[2], (commands[1].equals("✓")), commands[3]);
                     break;
-                case "event":
-                    taskToAdd = new Event(commands[1], (commands[2].equals("✓")), commands[3]);
+                case "E":
+                    taskToAdd = new Event(commands[2], (commands[1].equals("✓")), commands[3]);
                     break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -47,8 +47,9 @@ public class Duke {
         return t.getStoredTaskStatus();
     }
 
-    public static ArrayList<Task> fileToTaskArray(File f, ArrayList<Task> toDoList) throws FileNotFoundException {
+    public static ArrayList<Task> fileToTaskArray(File f) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(f);
+        ArrayList<Task> toDoList = new ArrayList<>();
         while(fileScanner.hasNext()){
             toDoList.add(storedTextToTask(fileScanner.nextLine()));
         }
@@ -66,8 +67,9 @@ public class Duke {
         File f = new File("data/duke.txt");
         try {
             if (f.exists()) {
-                toDoList.addAll(fileToTaskArray(f, toDoList));
+                toDoList.addAll(fileToTaskArray(f));
             }else{
+                f.getParentFile().mkdirs();
                 f.createNewFile();
             }
         }catch(FileNotFoundException e){

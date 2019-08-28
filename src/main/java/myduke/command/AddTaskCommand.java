@@ -32,6 +32,11 @@ public class AddTaskCommand extends Command {
         ui.printResponse("Got it. I've added this task:", newTask, taskList.size());
     }
 
+    /**
+     * Creates a task element.
+     * @return a task element.
+     * @throws DukeException if type of task or their arguments are invalid.
+     */
     private Task createTask() throws DukeException {
         Scanner in = new Scanner(arguments);
         switch (type) {

@@ -9,21 +9,19 @@ import myduke.command.MarkCompletedTaskCommand;
 import myduke.command.ListCommand;
 import myduke.exception.DukeException;
 import myduke.exception.DukeInvalidCommandException;
-import myduke.exception.DukeEmptyDescriptionException;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CommandParserTest {
     @Test
     void testCommand_EmptyOrInvalid() throws DukeException {
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create(""));
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("   "));
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("Hello"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create(""));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("   "));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("Hello"));
     }
 
     @Test
@@ -32,10 +30,8 @@ class CommandParserTest {
         assertTrue(cmd instanceof TerminateSessionCommand);
         assertTrue(cmd.shouldExit());
 
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("bye 1"));
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("bye hi"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("bye 1"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("bye hi"));
     }
 
     @Test
@@ -44,10 +40,8 @@ class CommandParserTest {
         assertTrue(cmd instanceof ListCommand);
         assertFalse(cmd.shouldExit());
 
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("list 1"));
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("list hi"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("list 1"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("list hi"));
     }
 
     @Test
@@ -55,20 +49,11 @@ class CommandParserTest {
         Command command = CommandParser.create("done 1");
         assertTrue(command instanceof MarkCompletedTaskCommand);
 
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("done -2"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("done 0"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("done 0 A"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("done 0A"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("done"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("done -2"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("done 0"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("done 0 A"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("done 0A"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("done"));
     }
 
     @Test
@@ -76,20 +61,11 @@ class CommandParserTest {
         Command command = CommandParser.create("delete 1");
         assertTrue(command instanceof DeleteCommand);
 
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("delete -2"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("delete 0"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("delete 0 A"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("delete 0A"));
-
-        assertThrows(DukeInvalidCommandException.class,
-                () -> CommandParser.create("delete"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("delete -2"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("delete 0"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("delete 0 A"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("delete 0A"));
+        assertThrows(DukeInvalidCommandException.class, () -> CommandParser.create("delete"));
     }
 
     @Test

@@ -18,6 +18,7 @@ public class DeleteCommand extends ModifyListCommand {
         super(itemIndex);
     }
 
+    @Override
     public void execute(TaskList taskList, Ui ui, StorageManager storage) throws DukeException {
         Task deletedTask = taskList.deleteTask(this.itemIndex);
         ui.printResponse("Noted. I've removed this task:", deletedTask, taskList.size());

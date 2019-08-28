@@ -5,12 +5,14 @@
 import java.util.Date;
 
 /**
- * Class representation of a Date in the list
+ * Class representation of a Date in the list.
  */
 public class Deadline extends Task {
     protected Date by;
 
     /**
+     * Creates a Deadline with a description and a Date by which it must be done.
+     * 
      * @param description A String description of this Deadline
      * @param by Date by which this Deadline must be completed
      */
@@ -20,6 +22,8 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns a String representation of this Deadline.
+     * 
      * @return String representation of this Deadline
      */
     @Override
@@ -28,7 +32,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the date by which this Deadline must be done
+     * Get the date by which this Deadline must be done.
+     * 
      * @return Date by which this Deadline must be done
      */
     public Date getBy() {

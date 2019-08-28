@@ -3,17 +3,17 @@
  */
 
 enum Command {
-    BYE     ("bye"),
-    DONE    ("done"),
-    LIST    ("list"),
-    TODO    ("todo"),
-    EVENT   ("event"),
+    BYE("bye"),
+    DONE("done"),
+    LIST("list"),
+    TODO("todo"),
+    EVENT("event"),
     DEADLINE("deadline"),
-    DELETE  ("delete");
+    DELETE("delete");
 
     private String commandText;
 
-    Command (String commandText) {
+    Command(String commandText) {
         this.commandText = commandText;
     }
 
@@ -31,7 +31,7 @@ enum Command {
      * 
      * @param commandText String representation of the command
      * @return Command that matches the string, if exists
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException If there is no matching Command
      */
     public static Command getFromString(String commandText) throws InvalidCommandException {
         Command[] allCommands = Command.values();

@@ -10,6 +10,8 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Constructs a Task with a description.
+     * 
      * @param description A String representation of this Task
      */
     public Task(String description) {
@@ -18,7 +20,8 @@ public class Task {
     }
 
     /**
-     * Gets the status icon of this Task
+     * Gets the status icon of this Task.
+     * 
      * @return A String containing the status icon of this Task
      */
     public String getStatusIcon() {

@@ -2,7 +2,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 /**
- * Main class of the application
+ * Main class of the application.
  */
 public class Duke {
     
@@ -17,7 +17,7 @@ public class Duke {
 
     public static final String DATE_FORMAT = "dd-MM-yy HHmm";
 
-    public final String USER_NAME = System.getProperty("user.name");
+    public static final String USER_NAME = System.getProperty("user.name");
 
     public static final int MAX_TASKS = 100;
 
@@ -43,11 +43,9 @@ public class Duke {
         while (parser.isNotByeCommand(line)) {
             try {
                 processInputLine(line);
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 ui.printException(e);
-            }
-            catch (ParseException e) {
+            } catch (ParseException e) {
                 ui.adviseDateFormat(DATE_FORMAT);
             }
 
@@ -73,10 +71,16 @@ public class Duke {
             markTaskAsDone(parser.getIndexFromLine(line));
             break;
         case DEADLINE:
-            addDeadline(parser.getBeforeDelim(line, commandText, BY_DELIM), parser.getAfterDelim(line, commandText, BY_DELIM));
+            addDeadline(
+                parser.getBeforeDelim(line, commandText, BY_DELIM),
+                parser.getAfterDelim(line, commandText, BY_DELIM)
+            );
             break;
         case EVENT:
-            addEvent(parser.getBeforeDelim(line, commandText, AT_DELIM), parser.getAfterDelim(line, commandText, AT_DELIM));
+            addEvent(
+                parser.getBeforeDelim(line, commandText, AT_DELIM),
+                parser.getAfterDelim(line, commandText, AT_DELIM)
+            );
             break;
         case TODO:
             addTodo(parser.getArg(line, commandText));
@@ -101,8 +105,7 @@ public class Duke {
         if (desc.length() != 0) {
             Task newDeadline = new Deadline(desc, dateParser.parse(date));
             addTask(newDeadline);
-        }
-        else {
+        } else {
             throwEmptyDescriptionException(Command.DEADLINE);
         }
     }
@@ -111,8 +114,7 @@ public class Duke {
         if (desc.length() != 0) {
             Task newEvent = new Event(desc, dateParser.parse(date));
             addTask(newEvent);
-        }
-        else {
+        } else {
             throwEmptyDescriptionException(Command.EVENT);
         }
     }
@@ -121,8 +123,7 @@ public class Duke {
         if (desc.length() != 0) {
             Task newTodo = new Todo(desc); 
             addTask(newTodo);
-        }
-        else {
+        } else {
             throwEmptyDescriptionException(Command.TODO);
         }
     }

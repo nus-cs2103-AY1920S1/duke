@@ -3,6 +3,7 @@
  */
 public class EmptyDescriptionException extends DukeException {
     /**
+     * Creates an EmptyDescriptionException with a specific message.
      * 
      * @param message Exception message
      */

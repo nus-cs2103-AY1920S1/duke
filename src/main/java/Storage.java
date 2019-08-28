@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 /**
- * Class to handle interfacing with the data file
+ * Class to handle interfacing with the data file.
  */
 public class Storage {
 
@@ -15,21 +15,22 @@ public class Storage {
     private DateParser dateParser;
 
     /**
+     * Constructs a Storage object with a given date parser and a given filepath.
      * 
      * @param dateParser DateParser object to handle the dates within the file
      * @param filePath Path of the data file
      */
-    public Storage (DateParser dateParser, String filePath) {
+    public Storage(DateParser dateParser, String filePath) {
         this.dateParser = dateParser;
         this.filePath = filePath;
     }
 
     /**
-     * Reads the tasks from the data file; returns them in a TaskList object
+     * Reads the tasks from the data file; returns them in a TaskList object.
      * 
      * @return TaskList representation of the contents of the data file
      */
-	public TaskList readDataFile() {
+    public TaskList readDataFile() {
 
         Scanner inStream;
         TaskList taskList = new TaskList(Duke.MAX_TASKS);
@@ -42,16 +43,26 @@ public class Storage {
 
                 switch (line.charAt(0)) {
                 case 'T':
-                    taskList.add(new Todo(line.substring(2, line.length())));
+                    taskList.add(new Todo(
+                        line.substring(2, line.length())
+                    ));
                     break;
+
                 case 'E':
-                    String eLine = line.substring(2, line.length());
-                    taskList.add(new Event(eLine.split("/")[0], dateParser.parse(eLine.split("/")[1])));
+                    String eventLine = line.substring(2, line.length());
+                    taskList.add(new Event(
+                        eventLine.split("/")[0], dateParser.parse(eventLine.split("/")[1])
+                    ));
                     break;
+
                 case 'D':
-                    String dLine = line.substring(2, line.length());
-                    taskList.add(new Deadline(dLine.split("/")[0], dateParser.parse(dLine.split("/")[1])));
+                    String deadlineLine = line.substring(2, line.length());
+                    taskList.add(new Deadline(
+                        deadlineLine.split("/")[0],
+                        dateParser.parse(deadlineLine.split("/")[1])
+                    ));
                     break;
+                    
                 default:
                     break;
                 }
@@ -63,11 +74,9 @@ public class Storage {
 
             inStream.close();
             return taskList;
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("Data file not found, starting with empty task list");
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -91,8 +100,7 @@ public class Storage {
             }
 
             outStream.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

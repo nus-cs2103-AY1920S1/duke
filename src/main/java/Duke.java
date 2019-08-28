@@ -80,7 +80,7 @@ public class Duke {
                         // Save new list to storage
                         try {
                             storage.saveToFile(taskList.toString());
-                        } catch(IOException e) {
+                        } catch (IOException e) {
                             ui.showLoadingError();
                         }
 
@@ -100,6 +100,20 @@ public class Duke {
 
                 command = ui.readCommand();
 
+            } else if (command.contains("find")) {
+                String[] sentence = command.split(" ");
+                String keyword = "";
+
+                try {
+                    if (sentence[0].equals("find")) {
+                        keyword = sentence[1];
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    ui.promptFindKeyword();
+                }
+
+                ui.showSearchList(taskList.searchFor(keyword));
+                command = ui.readCommand();
 
             } else {
                 // Generate new task

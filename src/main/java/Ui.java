@@ -47,6 +47,11 @@ public class Ui {
                 + String.format("\nNow you have %d tasks in the list.", numTasks));
     }
 
+    public void showSearchList(TaskList filteredList) {
+        System.out.println("Here are the matching tasks in your list:");
+        filteredList.printAllTasks();
+    }
+
     public void promptList() {
         System.out.println("OOPS!!! That task is not on the list, please check the list again by calling 'list'.");
     }
@@ -65,5 +70,9 @@ public class Ui {
 
     public void promptDeleteFormat() {
         System.out.println("OOPS!!! Wrong format. Please key in a valid number (Eg 'delete 2')");
+    }
+
+    public void promptFindKeyword() {
+        System.out.println("Please key in a keyword to search for. (Eg 'find book')");
     }
 }

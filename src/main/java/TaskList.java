@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -43,6 +44,17 @@ public class TaskList {
         allTasks.remove(index);
         numTasks--;
         return deletedTask;
+    }
+
+    public TaskList searchFor(String keyword) {
+        ArrayList<Task> relevant = new ArrayList<>();
+
+        for(Task task : allTasks) {
+            if (task.getDescription().contains(keyword)) {
+                relevant.add(task);
+            }
+        }
+        return new TaskList(relevant);
     }
 
     @Override

@@ -67,11 +67,9 @@ public class Parser {
     private static String formatDateTime(String deadline) {
         // Split to individual components
         deadline = deadline.trim();
-        System.out.println(deadline);
         String[] dd = deadline.split(" ");
         String[] date = dd[0].split("/");
         String time = dd[1];
-        System.out.println(time);
         int hours = Integer.valueOf(time.substring(0,2));
         int minutes = Integer.valueOf(time.substring(2));
 

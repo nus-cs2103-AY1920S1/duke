@@ -1,3 +1,7 @@
+/**
+ * Represents a command to print out the tasks in the arraylist.
+ */
+
 public class ListCommand extends Command {
 
     @Override

@@ -1,4 +1,8 @@
-public class Todos extends Task {
+/**
+ * Todos class to represent a task to do in the list.
+ */
+
+1public class Todos extends Task {
 
     public Todos(String description) {
         super(description);

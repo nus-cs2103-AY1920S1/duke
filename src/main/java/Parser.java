@@ -1,5 +1,13 @@
+/**
+ * Parser class to handle user input.
+ */
 public class Parser {
 
+    /**
+     * Parses the input string and determines the type of command given.
+     * @param str The input string supplied to Duke.
+     * @return Returns the corresponding command depending on the first word of the input string.
+     */
     public static Command parse(String str) {
         String[] arr = str.split(" ");
         String next = arr[0];

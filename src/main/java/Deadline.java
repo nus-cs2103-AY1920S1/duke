@@ -1,3 +1,7 @@
+/**
+ * Deadline class to represent a task with a date to be done by.
+ */
+
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;

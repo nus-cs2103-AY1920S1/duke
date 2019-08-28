@@ -1,3 +1,7 @@
+/**
+ * Represents a task which could be something to do, an event or a deadline.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -28,6 +32,11 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    /**
+     * A method to write a task into a file according to the format that it can read.
+     * @return Returns the string format of a task to write into the designated file.
+     */
 
     public String print() {
         return "";

@@ -1,3 +1,7 @@
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,11 +17,16 @@ public class Storage {
         this.file = file;
     }
 
+    /**
+     * Method that reads the designated file and stores the content into an arraylist.
+     * Is called upon when Duke initialises.
+     * @return Returns an arraylist of tasks written in the file given the file path.
+     */
     public ArrayList<Task> load()  {
         ArrayList<Task> list = new ArrayList<>();
         try {
-            File f = new File(file); // create a File for the given file path
-            Scanner sc = new Scanner(f); // create a Scanner using the File as the source
+            File f = new File(file);
+            Scanner sc = new Scanner(f);
             Task t;
             while (sc.hasNext()) {
                 String next = sc.nextLine();
@@ -43,6 +52,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrites the file with the new arraylist of tasks.
+     * @param list arraylist of tasks that are updated after every command given to Duke.
+     */
     public void writeFile(ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter(file);

@@ -14,7 +14,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        Console.print(welcomeMessage);
+        Ui.print(welcomeMessage);
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -23,7 +23,7 @@ public class Duke {
             try {
                 switch (command) {
                 case "bye":
-                    Console.print("Bye! Hope to see you again soon!");
+                    Ui.print("Bye! Hope to see you again soon!");
                     return;
                 case "list":
                     Task.printList();
@@ -90,7 +90,7 @@ public class Duke {
                     throw new DukeException("☹ OOPS! I can't do it!");
                 }
             } catch (DukeException e) {
-                Console.print(e.getMessage());
+                Ui.print(e.getMessage());
             }
         }
 

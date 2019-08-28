@@ -37,12 +37,12 @@ public class Task {
 
     public static void addNewTask(Task task) throws DukeException {
         taskList.add(task);
-        Console.print("Got it! I've added this task:");
-        Console.print(task.toString());
+        Ui.print("Got it! I've added this task:");
+        Ui.print(task.toString());
         if (taskList.size() == 1)  {
-            Console.print("Now you have 1 task in the list!");
+            Ui.print("Now you have 1 task in the list!");
         } else {
-            Console.print("Now you have " + taskList.size() + " tasks in the list!");
+            Ui.print("Now you have " + taskList.size() + " tasks in the list!");
         }
         updateDatabase();
     }
@@ -50,28 +50,28 @@ public class Task {
     public static void doTask(int index) throws DukeException {
         Task task = taskList.get(index - 1);
         task.markAsDone();
-        Console.print("Nice! I've marked this task as done:");
-        Console.print(task.toString());
+        Ui.print("Nice! I've marked this task as done:");
+        Ui.print(task.toString());
         updateDatabase();
     }
 
     public static void deleteTask(int index) throws DukeException {
         Task task = taskList.remove(index - 1);
-        Console.print("Noted! I've removed this task:");
-        Console.print(task.toString());
+        Ui.print("Noted! I've removed this task:");
+        Ui.print(task.toString());
         if (taskList.size() == 1)  {
-            Console.print("Now you have 1 task in the list!");
+            Ui.print("Now you have 1 task in the list!");
         } else {
-            Console.print("Now you have " + taskList.size() + " tasks in the list!");
+            Ui.print("Now you have " + taskList.size() + " tasks in the list!");
         }
         updateDatabase();
     }
 
     public static void printList() {
-        Console.print("Here are the tasks in your list:");
+        Ui.print("Here are the tasks in your list:");
         int counter = 1;
         for (Task task : taskList) {
-            Console.print(counter++ + "." + task);
+            Ui.print(counter++ + "." + task);
         }
     }
 }

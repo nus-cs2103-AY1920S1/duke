@@ -1,3 +1,3 @@
-T|N|Do assignment
-E|Y|Attend party|July 10th
-D|N|Return book|tomorrow
+T|Y|Do assignment
+E|N|Attend party|30/8/2019 1800
+D|N|Return book|31/8/2019 0900

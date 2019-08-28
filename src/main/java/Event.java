@@ -22,7 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toFile() {
-        return "E|" + getStatusIcon() + "|" + description + "|" + date;
+        return "E|" + getStatusIcon() + "|" + description + "|" + getDate();
     }
 
     @Override

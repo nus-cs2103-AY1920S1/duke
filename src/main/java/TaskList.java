@@ -26,6 +26,14 @@ public class TaskList {
     }
 
     /**
+     * Get list from TaskList.
+     * @return List containing Tasks.
+     */
+    public List<Task> getList() {
+        return list;
+    }
+
+    /**
      * Adds Task to TaskList.
      * @param task Task to add.
      */

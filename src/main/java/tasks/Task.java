@@ -1,4 +1,6 @@
-/* 
+package tasks;
+
+/*
 A task class to represent a task object.
 Properties: id, name, done
 */

@@ -1,8 +1,11 @@
+package tasks;
 
-public class Deadline extends Task {
+import utils.StringToDate;
+
+public class Event extends Task {
     private StringToDate time;
 
-    public Deadline(String name, StringToDate time) {
+    public Event(String name, StringToDate time) {
         super(name);
         this.time = time;
     }
@@ -11,7 +14,7 @@ public class Deadline extends Task {
     public String printForStorage() {
         String borderAndSpace = " | ";
         String str = super.printForStorage();
-        str += "D" + borderAndSpace;
+        str += "E" + borderAndSpace;
         if (this.isDone) {
             str += "1" + borderAndSpace;
         } else {
@@ -19,10 +22,10 @@ public class Deadline extends Task {
         }
         str += this.name + borderAndSpace + this.time;
         return str;
-    }
+    } 
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.time.toString() + ")";
+        return "[E]" + super.toString() + " (at: " + this.time.toString() + ")";
     }
 }

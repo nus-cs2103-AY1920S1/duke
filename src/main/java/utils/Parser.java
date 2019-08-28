@@ -1,3 +1,11 @@
+package utils;
+
+import commands.*;
+import tasks.Deadline;
+import exceptions.DukeException;
+import tasks.Event;
+import tasks.Todo;
+
 import java.text.ParseException;
 
 public class Parser {

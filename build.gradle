@@ -25,3 +25,11 @@ run {
     //Fails without this line.
     standardInput = System.in
 }
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}

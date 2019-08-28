@@ -4,13 +4,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
         printMessage(List.of("Hello! I'm Duke", "What can I do for you?"));
 
         List<Task> tasks = new ArrayList<>();
@@ -25,8 +18,7 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         boolean exit = false;
         while (!exit && input.hasNext()) {
-            String line = input.nextLine();
-            String[] words = line.split(" ");
+            String[] words = input.nextLine().split(" ");
             try {
                 Command command = parser.parse(words);
                 printMessage(command.run(words));

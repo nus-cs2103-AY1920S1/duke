@@ -10,6 +10,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getFormattedTask() {
+        return "D | " + super.getDescription() +
+                " /by " + deadline;
+    }
+    @Override
     public String toString() {
         return "[D]" + getStatusIcon() + this.getDescription() +
                 " (by: " + deadline + ")";

@@ -7,17 +7,42 @@ public class ToDoList {
     private List<Task> todoList;
     private int counter;
 
-    public ToDoList() {
+    public ToDoList(ArrayList<String> fileInput) {
         this.todoList = new ArrayList<>();
         this.counter = 0;
+
+        for (String fileEntry : fileInput) {
+            String[] processedEntry = fileEntry.split("|");
+            String taskType = processedEntry[0].trim();
+            String taskDescription = processedEntry[1].trim();
+            this.addTask(taskType, taskDescription);
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder outputString = new StringBuilder();
+
+        for (Task task : todoList) {
+            outputString.append(task + "\n");
+        }
+
+        return outputString.toString();
+    }
+
+    public String outputTasks() {
+        StringBuilder output = new StringBuilder();
+
+        for (Task task : this.todoList) {
+            output.append(task.getFormattedTask() + "\n");
+        }
+        return output.toString();
     }
 
     public String displayList() {
         StringBuilder output = new StringBuilder();
         int index;
         Task currentTask;
-        System.out.println(todoList);
-
 
         output.append("    Here are the tasks in your list:\n");
         for (int i = 0 ; i < counter; i++) {
@@ -39,14 +64,14 @@ public class ToDoList {
         Task newTask = new Task("");
 
         switch (taskType) {
-        case "todo":
+        case "T":
             newTask = new Todo(description);
             break;
-        case "deadline":
+        case "D":
             String deadline = inputTask[1].substring(2);
             newTask = new Deadline(description, deadline);
             break;
-        case "event":
+        case "E":
             String date = inputTask[1].substring(2);
             newTask = new Event(description, date);
             break;

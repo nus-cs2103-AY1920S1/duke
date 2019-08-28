@@ -17,6 +17,10 @@ class Task {
         return description;
     }
 
+    public String getFormattedTask() {
+        return description;
+    };
+
     @Override
     public String toString() {
         return description;

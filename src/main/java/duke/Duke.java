@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
+
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.storage.Storage;
@@ -32,12 +33,12 @@ public class Duke {
             tasks = new TaskList();
         } catch (IncorrectFileFormatException | FileNotFoundException f) {
             ui.showLoadingError();
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             ui.showIndexError();
         }
     }
 
-    private void run(){
+    private void run() {
         ui.showWelcome();
 
         boolean isExit = false;
@@ -52,11 +53,11 @@ public class Duke {
 
                 isExit = c.isExit();
 
-            } catch(IndexOutOfBoundsException o) {
+            } catch (IndexOutOfBoundsException o) {
                 ui.showIndexError();
-            } catch(NullPointerException n) {
+            } catch (NullPointerException n) {
                 ui.showInputError();
-            } catch(CommandNotFoundException c) {
+            } catch (CommandNotFoundException c) {
                 ui.showCommandNotFoundError();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -66,7 +67,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Duke("C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt").run();
     }
 

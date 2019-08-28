@@ -5,6 +5,9 @@ import duck.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is a TaskList class that encapsulates all user's tasks.
+ */
 public class TaskList {
 
     private List<Task> tasks;
@@ -29,6 +32,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Copies all the tasks from another task list to this task list.
+     *
+     * @param another    a <code>TaskList</code> object containing some tasks
+     */
     public void addAll(TaskList another) {
         for (int i = 0; i < another.getTotalTask(); i++) {
             tasks.add(another.getTaskAt(i));
@@ -39,6 +47,13 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    /**
+     * Compares two task list by sequentially comparing each task.
+     *
+     * @param obj  a <code>TaskList</code> object to be compared
+     * @return     <code>true</code> if this task list has same tasks in the same order as another task list;
+     *             <code>false</code> otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskList) {

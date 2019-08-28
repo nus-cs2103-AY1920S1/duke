@@ -1,241 +1,188 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
 import java.text.SimpleDateFormat;
 
 public class Duke {
 
-    private static void appendFile(Task tsk) throws IOException {
-        FileWriter fw = new FileWriter("../../../data/duke.txt", true);
-        String status = tsk.getIsDone() ? "1" : "0";
+    private Storage storage;
+    private TaskList tasks;
+    private UI ui;
 
+    public Duke(String filePath) throws IOException {
+        ui = new UI();
+        storage = new Storage(filePath);
         try {
-            if (tsk instanceof Todo) {
-                fw.write("T, " + status + ", " + tsk.getDescription() + "\n");
-            } else if (tsk instanceof Deadline) {
-                fw.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy() + "\n");
-            } else if (tsk instanceof Event) {
-                fw.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt() + "\n");
+            if(storage.load() != null) {
+                tasks = new TaskList(storage.load());
             } else {
-                throw new DukeException("☹ OOPS! Error in file handling");
+                throw new DukeException("Unable to load data from file");
             }
         } catch (DukeException exp) {
-            System.out.println(exp);
+            ui.showLoadingError(exp.getMessage());
+        } finally {
+
         }
-        fw.close();
-    }
-
-    private static void updateFile(ArrayList<Task> list) throws IOException {
-
-        BufferedWriter bfw = new BufferedWriter(new FileWriter("../../../data/duke.txt"));
-        int counter = 0;
-        while(counter < list.size()) {
-            Task tsk = list.get(counter);
-            String status = tsk.getIsDone() ? "1" : "0";
-            try {
-                if (tsk instanceof Todo) {
-                    bfw.write("T, " + status + ", " + tsk.getDescription());
-                    bfw.newLine();
-                    counter++;
-                } else if (tsk instanceof Deadline) {
-                    bfw.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy());
-                    bfw.newLine();
-                    counter++;
-                } else if (tsk instanceof Event) {
-                    bfw.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt());
-                    bfw.newLine();
-                    counter++;
-                } else {
-                    throw new DukeException("☹ OOPS! Error in file handling");
-                }
-            } catch (DukeException exp) {
-                System.out.println(exp);
-            }
-        }
-        bfw.close();
-    }
-
-    private static ArrayList<Task> fetchDataFromFile() throws IOException {
-        String filePath = "../../../data/duke.txt";
-        File f = new File(filePath);
-        ArrayList<Task> list = new ArrayList<>();
-        Scanner s = new Scanner(f);
-        while(s.hasNextLine()) {
-            String[] task = s.nextLine().replaceAll(", ", ",").split(",");
-            Task tsk;
-            if(task[0].equals("T")) {
-                tsk = new Todo(task[2]);
-            } else if(task[0].equals("D")) {
-                try {
-                    SimpleDateFormat formatter = new SimpleDateFormat("EEEEE MMMMM dd HH:mm:ss z yyyy");
-                    tsk = new Deadline(task[2], formatter.parse(task[3]));
-                } catch (java.text.ParseException exp) {
-                    exp.printStackTrace();
-                    break;
-                }
-            } else {
-                try {
-                    SimpleDateFormat formatter = new SimpleDateFormat("EEEEE MMMMM dd HH:mm:ss z yyyy");
-                    tsk = new Event(task[2], formatter.parse(task[3]));
-                } catch (java.text.ParseException exp) {
-                    exp.printStackTrace();
-                    break;
-                }
-
-            }
-
-            if(task[1].equals("1")) {
-                tsk.markAsDone();
-            }
-            list.add(tsk);
-        }
-        s.close();
-        return list;
     }
 
     /**
      * The duke project.
      */
 
-    public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    public void run() {
 
-        System.out.println(logo);
-
-        String line = "    __________________________________";
-
-        System.out.println(line);
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println(line);
+        ui.showGreeting();
 
         Scanner sc = new Scanner(System.in);
         String echo = "";
-        ArrayList<Task> list = fetchDataFromFile();
+        int tracker = tasks.getListSize();
 
         if (sc.hasNextLine()) {
             echo = sc.nextLine();
             while (!echo.equals("bye")) {
-                String[] echoArr = echo.split(" ");
-                System.out.println(line);
+                Command c = (new Parser()).parse(echo);
+                ui.showLine();
                 try {
                     if (echo.equals("list")) {
-                        System.out.println("    Here are the tasks in your list:");
-                        for (int i = 0; i < list.size(); i++) {
-                            System.out.println("    " + (i + 1) + ". " + list.get(i));
-                        }
-                    } else if (echoArr[0].equals("done")) {
+                        ui.showTasksInList(tasks);
+                    } else if (c.getCommandType().equals("done")) {
                         try {
-                            if(echoArr.length == 1) {
+                            if(c.getInstruction().equals("")) {
                                 throw new DukeException("☹ OOPS!!! Please specify which task is done");
-                            } else if (Integer.parseInt(echoArr[1]) > list.size()) {
-                                throw new DukeException("☹ OOPS!!! Task " + echoArr[1] + " does not exist");
+                            } else if (Integer.parseInt(c.getInstruction()) > tasks.getListSize()) {
+                                throw new DukeException("☹ OOPS!!! Task " + c.getInstruction() + " does not exist");
                             } else {
-                                list.get(Integer.parseInt(echoArr[1]) - 1).markAsDone();
+                                tasks.markAsDone(Integer.parseInt(c.getInstruction()) - 1);
+                                ui.showTaskIsDoneMsg(tasks.getItemAtIndex(Integer.parseInt(c.getInstruction()) - 1));
+                                try {
+                                    storage.update(tasks.getList());
+                                } catch (Exception exp) {
+                                    ui.showErrorMsg(exp.getMessage());
+                                } finally {
 
-                                System.out.println("    Nice! I've marked this task as done: ");
-                                System.out.println("     " + list.get(Integer.parseInt(echoArr[1]) - 1));
-                                updateFile(list);
-
+                                }
                             }
                         } catch (DukeException exp) {
-                            System.out.println("    " + exp.getMessage());
+                            ui.showErrorMsg(exp.getMessage());
+                        } finally {
+
                         }
 
-                    } else if (echoArr[0].equals("delete")) {
+                    } else if (c.getCommandType().equals("delete")) {
                         try {
-                            if(echoArr.length == 1) {
+                            if(c.getInstruction().equals("")) {
                                 throw new DukeException("☹ OOPS!!! Please specify which task is to be deleted");
-                            } else if (Integer.parseInt(echoArr[1]) > list.size()) {
-                                throw new DukeException("☹ OOPS!!! Task " + echoArr[1] + " does not exist");
+                            } else if (Integer.parseInt(c.getInstruction()) > tasks.getListSize()) {
+                                throw new DukeException("☹ OOPS!!! Task " + c.getInstruction() + " does not exist");
                             } else {
-                                Task tsk = list.remove(Integer.parseInt(echoArr[1]) - 1);
-                                System.out.println("    Noted. I've removed this task:");
-                                System.out.println("     " + tsk);
-                                System.out.println("    Now you have " + list.size() + " tasks in the list.");
-                                updateFile(list);
+                                Task tsk = tasks.removeFromList(Integer.parseInt(c.getInstruction()) - 1);
+                                ui.showTaskDeletedMsg(tsk, tasks.getListSize());
+                                try {
+                                    storage.update(tasks.getList());
+                                } catch (Exception exp) {
+                                    ui.showErrorMsg(exp.getMessage());
+                                } finally {
+
+                                }
                             }
                         } catch (DukeException exp) {
-                            System.out.println("    " + exp.getMessage());
+                            ui.showErrorMsg(exp.getMessage());
+                        } finally {
+
                         }
 
-                    } else if (echoArr[0].equals("deadline") || echoArr[0].equals("todo") || echoArr[0].equals("event")) {
-                        if (echoArr[0].equals("deadline")) {
+                    } else if (c.getCommandType().equals("deadline") || c.getCommandType().equals("todo") || c.getCommandType().equals("event")) {
+                        if (c.getCommandType().equals("deadline")) {
                             try {
-                                if (echoArr.length == 1) {
+                                if (c.getInstruction().equals("") || c.getInstruction().equals("deadline")) {
                                     throw new DukeException("☹ OOPS!!! The description of deadline cannot be empty");
                                 } else if (!echo.contains("/by")) {
                                     throw new DukeException("☹ OOPS!!! The deadline must be completed by a certain date");
                                 } else {
                                     try {
                                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                                        list.add(new Deadline(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
-                                                formatter.parse(echo.substring(echo.indexOf("/by") + 4))));
+                                        tasks.addItemToList(new Deadline(c.getInstruction(),
+                                                formatter.parse(c.getDate())));
                                     } catch (java.text.ParseException exp) {
                                         exp.printStackTrace();
                                         break;
-                                    }
+                                    } finally {
 
-                                    appendFile(list.get(list.size() - 1));
+                                    }
+                                    try {
+                                        storage.append(tasks.getLastItem());
+                                    } catch (Exception exp) {
+                                        ui.showErrorMsg(exp.getMessage());
+                                    } finally {
+
+                                    }
                                 }
                             } catch (DukeException exp) {
-                                System.out.println("    " + exp.getMessage());
+                                ui.showErrorMsg(exp.getMessage());
+                            } finally {
+
                             }
-                        } else if (echoArr[0].equals("todo")) {
+                        } else if (c.getCommandType().equals("todo")) {
                             try {
-                                if (echoArr.length == 1) {
-                                    throw new DukeException("☹ OOPS!!! The description of deadline cannot be empty");
+                                if (c.getInstruction().equals("") || c.getInstruction().equals("todo")) {
+                                    throw new DukeException("☹ OOPS!!! The description of todo cannot be empty");
                                 } else {
-                                    list.add(new Todo(echo.substring(echo.indexOf(" ") + 1)));
-                                    appendFile(list.get(list.size() - 1));
+                                    tasks.addItemToList(new Todo(c.getInstruction()));
+                                    try {
+                                        storage.append(tasks.getLastItem());
+                                    } catch (Exception exp) {
+                                        ui.showErrorMsg(exp.getMessage());
+                                    }
                                 }
                             } catch (DukeException exp) {
-                                System.out.println("    " + exp.getMessage());
+                                ui.showErrorMsg(exp.getMessage());
                             }
-                        } else if (echoArr[0].equals("event")) {
+                        } else if (c.getCommandType().equals("event") || c.getInstruction().equals("event")) {
                             try {
-                                if (echoArr.length == 1) {
+                                if (c.getInstruction().equals("")) {
                                     throw new DukeException("☹ OOPS!!! The description of event cannot be empty");
                                 } else if (!echo.contains("/at")) {
                                     throw new DukeException("☹ OOPS!!! The event must be at by a certain date");
                                 } else {
-
                                     try {
                                         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                                        list.add(new Event(echo.substring(echo.indexOf(" ") + 1, echo.indexOf("/") - 1),
-                                                formatter.parse(echo.substring(echo.indexOf("/at") + 4))));
+                                        tasks.addItemToList(new Event(c.getInstruction(),
+                                                formatter.parse(c.getDate())));
                                     } catch (java.text.ParseException exp) {
                                         exp.printStackTrace();
                                         break;
+                                    } finally {
+
+                                    }
+                                    try {
+                                        storage.append(tasks.getLastItem());
+                                    } catch (Exception exp) {
+                                        ui.showErrorMsg(exp.getMessage());
+                                    } finally {
+
                                     }
 
-                                    appendFile(list.get(list.size() - 1));
                                 }
                             } catch (DukeException exp) {
-                                System.out.println("    " + exp.getMessage());
+                                ui.showErrorMsg(exp.getMessage());
+                            } finally {
+
                             }
                         }
 
-                        if (list.size() > 0) {
-                            System.out.println("    Got it. I've added this task:");
-                            System.out.println("     " + list.get(list.size() - 1));
-                            System.out.println("    Now you have " + list.size() + " in the list.");
+                        if (tasks.getListSize() > tracker) {
+                            ui.showTaskAddedMsg(tasks.getLastItem(), tasks.getListSize());
+                            tracker = tasks.getListSize();
                         }
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException exp) {
-                    System.out.println("    " + exp.getMessage());
+                    ui.showErrorMsg(exp.getMessage());
+                } finally {
+
                 }
 
-                System.out.println(line);
+                ui.showLine();
                 if (sc.hasNextLine()) {
                     echo = sc.nextLine();
                 } else {
@@ -245,10 +192,13 @@ public class Duke {
         }
 
         if (echo.equals("bye")) {
-            System.out.println(line);
-            System.out.println("    Bye. Hope to see you again soon!");
-            System.out.println(line);
+            ui.showGoodbye();
         }
         sc.close();
+    }
+
+
+    public static void main(String[] args) throws IOException {
+        new Duke("../../../data/duke.txt").run();
     }
 }

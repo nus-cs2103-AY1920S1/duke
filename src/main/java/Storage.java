@@ -3,6 +3,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Storage of data locally
+ */
 public class Storage {
     File file;
 
@@ -16,6 +19,11 @@ public class Storage {
         this.file.createNewFile();
     }
 
+    /**
+     * Create new storage with filepath location
+     * @param filePath save location
+     * @return new Storage
+     */
     public static Storage newStorage (String filePath){
         try {
             Storage rtv = new Storage(filePath);
@@ -25,6 +33,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Load said object from location
+     * @return object loaded
+     */
     public Object load(){
         Object rtv = null;
         try {
@@ -41,6 +53,11 @@ public class Storage {
         return rtv;
     }
 
+    /**
+     * Save object to location
+     * @param obj object to be saved
+     * @return if successful
+     */
     public boolean save(Object obj) {
         try {
             FileOutputStream fileOut;

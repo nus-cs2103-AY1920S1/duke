@@ -142,8 +142,4 @@ public class TaskList {
         return taskFile;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new TaskList(List.of(new Event("testing", "tomorrow"),
-                new DeadLine("testing2", "tomorrow"), new ToDo("testing3"))).generateInfo());
-    }
 }

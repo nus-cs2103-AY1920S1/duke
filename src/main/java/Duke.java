@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,8 +9,18 @@ public class Duke {
         System.out.println(border + "\nHello! I'm Duke\nWhat can I do for you?\n" + border);
 
         ArrayList<Task> userList = new ArrayList<>();
-         int counter = 0;
+        int counter = 0;
         Scanner scanner = new Scanner(System.in);
+        DukeReadFile rf = new DukeReadFile("data/duke.txt");
+        DukeWriteFile wf = new DukeWriteFile("data/duke.txt");
+        try {
+
+            rf.readFileContent();
+            userList.addAll(rf.myTask());
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
 
         while (true) {
             String input = scanner.nextLine();
@@ -17,6 +29,7 @@ public class Duke {
                 break;
             } else if (input.equals("list")) {
                 int itemNumber = 1;
+                counter = userList.size();
                 if (counter == 0) {
                     System.out.println(border + "\nYou currently have no task!\n" + border);
                 } else {
@@ -43,6 +56,7 @@ public class Duke {
                     userList.get(taskIndex - 1).markAsDone();
                     System.out.println(border + "\nNice! I've marked this task as done:");
                     System.out.println(userList.get(taskIndex - 1).toString() +  "\n" + border);
+                    wf.writeToFile(writeFile(userList));
 
                 } catch (DukeInvalidArgumentException e) {
 
@@ -58,6 +72,9 @@ public class Duke {
                 } catch (NumberFormatException e) {
 
                     System.out.println(border + "\nOOPS!! Please input a task number!\n" + border);
+                } catch (IOException e) {
+
+                    System.out.println(border +"\n" + e + "\n" + border);
                 }
 
             } else if (input.startsWith("deadline")) {
@@ -79,12 +96,17 @@ public class Duke {
                     System.out.println(border + "\nGot it. I've added this task:");
                     System.out.println(newDeadLine.toString());
                     System.out.println("Now you have " + counter + " tasks in the list.\n" + border);
+                    wf.appendToFile("D/" + newDeadLine.getStatus() + "/" +
+                            newDeadLine.getDescription() + "/" +newDeadLine.getDeadline() + "\n");
 
                 } catch (DukeInvalidArgumentException e) {
 
                     System.out.println(border +"\n" + e + "\n" + border);
 
                 } catch (DukeException e) {
+
+                    System.out.println(border + "\n" + e + "\n" + border);
+                } catch (IOException e) {
 
                     System.out.println(border + "\n" + e + "\n" + border);
                 }
@@ -109,12 +131,17 @@ public class Duke {
                     System.out.println(border + "\nGot it. I've added this task:");
                     System.out.println(newEvent.toString());
                     System.out.println("Now you have " + counter + " tasks in the list.\n" + border);
+                    wf.appendToFile("E/" + newEvent.getStatus() + "/" +
+                            newEvent.getDescription() + "/" +newEvent.getVenue() + "\n");
 
                 } catch (DukeInvalidArgumentException e) {
 
                     System.out.println(border +"\n" + e + "\n" + border);
 
                 } catch (DukeException e) {
+
+                    System.out.println(border + "\n" + e + "\n" + border);
+                } catch (IOException e) {
 
                     System.out.println(border + "\n" + e + "\n" + border);
                 }
@@ -125,22 +152,20 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
 
-                    String[] td = input.split(" ");
-                    if (td.length > 2 ) {
-                        throw new DukeInvalidArgumentException("OOPS!! Wrong format! Format: todo [Task]", input);
-                    }
-                    String taskToDo = td[1];
+                    String taskToDo = input.substring(5);
                     Todo newToDo = new Todo(taskToDo);
                     userList.add(newToDo);
                     counter ++;
                     System.out.println(border + "\nGot it. I've added this task:");
                     System.out.println(newToDo.toString());
                     System.out.println("Now you have " + counter + " tasks in the list.\n" + border);
+                    wf.appendToFile("T/" + newToDo.getStatus() + "/" +
+                            newToDo.getDescription() + "\n");
 
-                } catch (DukeInvalidArgumentException e) {
+                } catch (DukeException e) {
                     System.out.println(border + "\n" + e + "\n" + border);
-                }
-                catch (DukeException e) {
+                } catch (IOException e) {
+
                     System.out.println(border + "\n" + e + "\n" + border);
                 }
 
@@ -163,6 +188,7 @@ public class Duke {
 
                     counter --;
                     System.out.println("Now you have " + counter + " tasks in the list.\n" + border);
+                    wf.writeToFile(writeFile(userList));
 
                 } catch (DukeInvalidArgumentException e) {
 
@@ -177,7 +203,13 @@ public class Duke {
                     System.out.println(border + "\nTask number not found! Try again!\n" + border);
 
                 } catch (DukeException e) {
+
                     System.out.println(border + "\n" + e + "\n" + border);
+
+                } catch (IOException e) {
+
+                    System.out.println(border + "\n" + e + "\n" + border);
+
                 }
             } else {
                 try {
@@ -190,5 +222,25 @@ public class Duke {
         }
 
 
+    }
+
+    public static String writeFile(ArrayList<Task> currentTask) {
+        String writeTask = "";
+
+        for(int i = 0; i < currentTask.size(); i++) {
+
+            if (currentTask.get(i) instanceof Todo) {
+                writeTask += "T/" + currentTask.get(i).getStatus() +
+                        "/" + currentTask.get(i).getDescription() + "\n";
+            } else if (currentTask.get(i) instanceof Event) {
+                writeTask += "E/" + currentTask.get(i).getStatus() +
+                        "/" + currentTask.get(i).getDescription() + "/" + ((Event) currentTask.get(i)).getVenue() + "\n";
+            } else {
+                writeTask += "D/" + currentTask.get(i).getStatus() +
+                        "/" + currentTask.get(i).getDescription() + "/" + ((Deadline) currentTask.get(i)).getDeadline() + "\n";
+            }
+        }
+
+        return writeTask;
     }
 }

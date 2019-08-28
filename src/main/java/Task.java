@@ -19,9 +19,18 @@ public class Task {
 		this.isDone = true;
 	}
 
+	public void markNotDone(){
+
+		this.isDone = false;
+	}
+
 	public String getDescription() {
 
 		return this.description;
+	}
+
+	public int getStatus() {
+		return isDone ? 1 : 0;
 	}
 
 	@Override

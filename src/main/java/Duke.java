@@ -1,21 +1,39 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Duke {
 
     protected static Scanner sc;
     protected static ArrayList<Task> taskList;
     protected static boolean byeFlag = false;
+    protected static final String filePath = "data/duke.txt";
 
-    public static void main(String[] args) {
-        taskList = new ArrayList<Task>();
+    public static void main(String[] args) throws IOException {
+        taskList = new ArrayList<>();
         sc = new Scanner(System.in);
+
+        try {
+            readFileContents(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         while (!byeFlag) {
             try {
                 duke();
             } catch (DukeException ex) {
                 System.err.println(ex);
             }
+        }
+
+        try {
+            writeToFile(filePath);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
@@ -119,6 +137,7 @@ public class Duke {
     public static void updateRemove(Task task) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("    " + task);
+
         if (taskList.size() > 1) {
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } else {
@@ -138,10 +157,14 @@ public class Duke {
         }
     }
 
-    public static void done(String position) {
-        int index = Integer.parseInt(position);
-        Task task = taskList.get(index - 1);
-        task.setDone(true);
+    public static void done(String position) throws DukeException {
+        int index = Integer.parseInt(position) - 1;
+        if (index < taskList.size()) {
+            Task task = taskList.get(index);
+            task.setDone(true);
+        } else {
+            throw new DukeException("OOPS!!! The task you want to complete is not in the list!");
+        }
     }
 
     public static Task todo(String action) {
@@ -173,9 +196,50 @@ public class Duke {
             task = taskList.get(index);
             taskList.remove(index);
         } else {
-            throw new DukeException("OOPS!!! The task you want to remove does not exist!");
+            throw new DukeException("OOPS!!! The task you want to remove is not in the list!");
         }
 
         return task;
+    }
+
+    public static void writeToFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task task : taskList) {
+            String text = task.getFileFormat();
+            fw.write(text + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void readFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            readAsObject(s.nextLine());
+        }
+    }
+
+    public static void readAsObject(String item) {
+        char type = item.charAt(0);
+        String[] split = item.split(" \\| ");
+
+        switch (type) {
+            case 'T':
+                todo(split[2]);
+                break;
+            case 'D':
+                deadline(split[2], split[3]);
+                break;
+            case 'E':
+                event(split[2], split[3]);
+                break;
+            default:
+                System.out.println("OOPS!!! There is an invalid task in the file!");
+        }
+
+        if (split[1].equals("+")) {
+            int lastIndex = taskList.size() - 1;
+            (taskList.get(lastIndex)).setDone(true);
+        }
     }
 }

@@ -24,9 +24,9 @@ public class TaskManager {
             if (splitTask[0].equalsIgnoreCase("T")) {
                 myTasksStore.add(new todoTask(splitTask[2], Boolean.parseBoolean(splitTask[1])));
             } else if (splitTask[0].equalsIgnoreCase("D")) {
-                myTasksStore.add(new deadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), splitTask[3]));
+                myTasksStore.add(new deadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
             } else if (splitTask[0].equalsIgnoreCase("E")) {
-                myTasksStore.add(new deadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), splitTask[3]));
+                myTasksStore.add(new deadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
             }
         }
         s.close();
@@ -42,11 +42,11 @@ public class TaskManager {
             } else {
                 if((current.getType()).equalsIgnoreCase("E")) {
                     eventTask event = (eventTask)current;
-                    String task = String.format("%s,%b,%s,%s", event.getType(),event.getDoneStatus(),event.getName(),event.getTime());
+                    String task = String.format("%s,%b,%s,%s", event.getType(),event.getDoneStatus(),event.getName(),TimeFormatter.convertToString(event.getTime()));
                     fw.write(task+ System.lineSeparator());
                 } else {
                     deadlineTask deadline = (deadlineTask)current;
-                    String task = String.format("%s,%b,%s,%s", deadline.getType(),deadline.getDoneStatus(),deadline.getName(),deadline.getTime());
+                    String task = String.format("%s,%b,%s,%s", deadline.getType(),deadline.getDoneStatus(),deadline.getName(),TimeFormatter.convertToString(deadline.getTime()));
                     fw.write(task+System.lineSeparator());
                 }
 

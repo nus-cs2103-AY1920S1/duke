@@ -1,23 +1,25 @@
+import java.util.Date;
+
 public class eventTask extends Task {
     //Add variable for eventTask
-    String timeSlot;
+    Date timeSlot;
 
-    public eventTask(String taskInput, boolean complete, String timing) {
+    public eventTask(String taskInput, boolean complete, Date timing) {
         super(taskInput,complete);
         type = "E";
         timeSlot = timing;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return timeSlot;
     }
 
     @Override
     public String toString() {
         if(completed) {
-            return "[" + type  + "]" + "[\u2713] " + name + "(at: " + timeSlot + ")";
+            return "[" + type  + "]" + "[\u2713] " + name + "(at: " + TimeFormatter.convertToString(timeSlot) + ")";
         } else {
-            return "[" + type + "]" + "[\u2718] " + name + "(at: " + timeSlot + ")";
+            return "[" + type + "]" + "[\u2718] " + name + "(at: " + TimeFormatter.convertToString(timeSlot) + ")";
         }
     }
 }

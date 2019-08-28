@@ -16,7 +16,7 @@ public class TaskList {
     private void spacerForTasks(Task inputTask) {
         String separator = "    ____________________________________________________________";
         String addingTask = "    Got it. I've added this task:";
-        String converted = "        "+ inputTask;
+        String converted = "        "+ inputTask.toString();
         String taskTracking = "    Now you have " + myTaskList.size() + " tasks in the list.";
         System.out.println(separator);
         System.out.println(addingTask);
@@ -36,16 +36,16 @@ public class TaskList {
             spacerForTasks(temp);
         } else if(addedTask.contains("deadline")&&(addedTask.length()>9)&&addedTask.contains("/")) {
             String replaced = addedTask.replace("deadline ","");
-            String[] deadLines = replaced.split("/");
-            String endTime = deadLines[1].replace("by ", "");
-            temp = new deadlineTask(deadLines[0],false,endTime);
+            String[] deadLines = replaced.split("by");
+            String endTime = deadLines[1];
+            temp = new deadlineTask(deadLines[0].replace("/",""),false,TimeFormatter.convertToDate(endTime));
             myTaskList.add(temp);
             spacerForTasks(temp);
         } else if (addedTask.contains("event")&&(addedTask.length()>6)&&addedTask.contains("/")) {
             String replaced = addedTask.replace("event ","");
-            String[] events = replaced.split("/");
-            String eventTime = events[1].replace("at ", "");
-            temp = new eventTask(events[0],false,eventTime);
+            String[] events = replaced.split("at");
+            String eventTime = events[1];
+            temp = new eventTask(events[0].replace("/",""),false,TimeFormatter.convertToDate(eventTime));
             myTaskList.add(temp);
             spacerForTasks(temp);
         } else if(addedTask.contains("todo")) {

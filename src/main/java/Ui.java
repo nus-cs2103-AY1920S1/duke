@@ -12,8 +12,10 @@ public class Ui {
     private static final String ADD_TASK = "     Got it. I've added this task:";
     private static final String REMOVE_TASK = "     Noted. I've removed this task: ";
     private static final String CLOSING_STATEMENT = "     Bye. Hope to see you again soon!";
+    private static final String INVALID_COMMAND = "    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
-    public Ui() {}
+    public Ui() {
+    }
 
     public void openingStatement() {
         System.out.println(SEPARATOR);
@@ -69,6 +71,7 @@ public class Ui {
     public void showList() {
         System.out.println(SHOW_LIST);
     }
+
     public void separator() {
         System.out.println(SEPARATOR);
     }
@@ -77,4 +80,7 @@ public class Ui {
         System.out.println("     Now you have " + (n) + " tasks in the list.");
     }
 
+    public String invalidCommand() {
+        return INVALID_COMMAND;
+    }
 }

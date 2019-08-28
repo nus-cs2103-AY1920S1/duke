@@ -9,10 +9,8 @@ class Task {
 
     // Invalid task throws DukeException
     public Task(String action, int size) throws DukeException {
-        if (size == 0) {
-            throw new DukeException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-("); //no valid command given
-        } else if (size == 1) {
-            throw new DukeException("    ☹ OOPS!!! The description of a "+ action +" cannot be empty."); //empty description
+        if (size == 1) {
+            throw new DukeException("    ☹ OOPS!!! The description of a " + action + " cannot be empty."); //empty description
         }
     }
 
@@ -24,6 +22,8 @@ class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public String toSave() { return (isDone ? "1" : "0") + " | " + this.description; }
+    public String toSave() {
+        return (isDone ? "1" : "0") + " | " + this.description;
+    }
 
 }

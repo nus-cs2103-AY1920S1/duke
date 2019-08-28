@@ -1,24 +1,24 @@
+package task;
+
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    Task() {}
-
     Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
-    protected String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? "+" : "-");
     }
 
-    void markDone() {
+    public void markDone() {
         isDone = true;
     }
 
@@ -28,5 +28,9 @@ public class Task {
 
     public String toFile() {
         return "";
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

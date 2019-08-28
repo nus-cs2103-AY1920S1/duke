@@ -1,5 +1,6 @@
-import commands.Command;
+package duke;
 
+import command.Command;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;

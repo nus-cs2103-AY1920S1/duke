@@ -1,9 +1,11 @@
+package task;
+
 public class Todo extends Task {
-    Todo(String description) {
+    public Todo(String description) {
         super(description);
     }
 
-    Todo (String description, boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
@@ -13,6 +15,6 @@ public class Todo extends Task {
     }
 
     public String toFile() {
-        return "T | " + super.getStatusIcon() + " | " + description;
+        return "T | " + super.getStatusIcon() + " | " + super.getDescription();
     }
 }

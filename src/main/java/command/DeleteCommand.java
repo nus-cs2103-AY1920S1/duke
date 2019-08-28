@@ -1,11 +1,18 @@
-class DeleteCommand extends Command {
+package command;
+
+import task.Task;
+import duke.TaskList;
+import duke.UserInterface;
+import duke.Storage;
+
+public class DeleteCommand extends Command {
     private int index;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
-    void execute(TaskList tasks, UserInterface ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         Task task = tasks.remove(index);
 
         //display successful message and task count

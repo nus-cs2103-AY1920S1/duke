@@ -1,15 +1,17 @@
+package task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task {
-    protected Date by;
+    private Date by;
 
-    Deadline(String description, boolean isDone, Date by) {
+    public Deadline(String description, boolean isDone, Date by) {
         super(description, isDone);
         this.by = by;
     }
 
-    Deadline(String description, Date by) {
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
@@ -24,6 +26,6 @@ public class Deadline extends Task {
     }
 
     public String toFile() {
-        return "D | " + super.getStatusIcon() + " | " + description + " | " + stringDate();
+        return "D | " + super.getStatusIcon() + " | " + super.getDescription() + " | " + stringDate();
     }
 }

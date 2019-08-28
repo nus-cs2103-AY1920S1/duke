@@ -1,11 +1,18 @@
-class AddCommand extends Command {
-    Task task;
+package command;
 
-    AddCommand(Task task) {
+import task.Task;
+import duke.TaskList;
+import duke.UserInterface;
+import duke.Storage;
+
+public class AddCommand extends Command {
+    private Task task;
+
+    public AddCommand(Task task) {
         this.task = task;
     }
 
-    void execute(TaskList tasks, UserInterface ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         //add task into the task list
         tasks.add(task);
 

@@ -1,12 +1,14 @@
+package duke;
+
 import java.util.Scanner;
 
-class UserInterface {
+public class UserInterface {
 
     UserInterface() {}
 
     void showWelcome() {
         showLine();
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("\tHello! I'm duke.Duke\n\tWhat can I do for you?");
         showLine();
     }
 

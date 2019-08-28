@@ -1,9 +1,13 @@
-import commands.*;
+package duke;
+
+import command.*;
+import task.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-class Parser {
+
+public class Parser {
     static Command parse(String command) throws DukeException, ParseException {
         String[] task = command.split(" ", 2);
         int taskSize = task.length;

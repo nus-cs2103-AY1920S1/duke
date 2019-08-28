@@ -1,11 +1,18 @@
-class DoneCommand extends Command {
+package command;
+
+import task.Task;
+import duke.TaskList;
+import duke.UserInterface;
+import duke.Storage;
+
+public class DoneCommand extends Command {
     private int index;
 
-    DoneCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 
-    void execute(TaskList tasks, UserInterface ui, Storage storage) {
+    public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         Task task = tasks.done(index);
 
         //display successful message

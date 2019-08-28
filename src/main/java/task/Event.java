@@ -1,15 +1,17 @@
+package task;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
     protected Date at;
 
-    Event(String description, boolean isDone, Date at) {
+    public Event(String description, boolean isDone, Date at) {
         super(description, isDone);
         this.at = at;
     }
 
-    Event(String description, Date at) {
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
@@ -24,6 +26,6 @@ public class Event extends Task {
     }
 
     public String toFile() {
-        return "E | " + super.getStatusIcon() + " | " + description + " | " + stringDate();
+        return "E | " + super.getStatusIcon() + " | " + super.getDescription() + " | " + stringDate();
     }
 }

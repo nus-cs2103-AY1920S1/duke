@@ -1,6 +1,10 @@
+package duke;
+
+import task.Task;
+
 import java.util.ArrayList;
 
-class TaskList {
+public class TaskList {
     private ArrayList<Task> tasks;
 
     TaskList() {
@@ -11,23 +15,23 @@ class TaskList {
         this.tasks = tasks;
     }
 
-    Task remove(int index) {
+    public Task remove(int index) {
         Task task = tasks.get(index);
         tasks.remove(index);
         return task;
     }
 
-    Task done(int index) {
+    public Task done(int index) {
         Task task = tasks.get(index);
         task.markDone();
         return task;
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         tasks.add(task);
     }
 
-    void list() {
+    public void list() {
         int counter = 1;
 
         //list out all the texts from the user
@@ -38,7 +42,7 @@ class TaskList {
         }
     }
 
-    int getSize() {
+    public int getSize() {
         return tasks.size();
     }
 

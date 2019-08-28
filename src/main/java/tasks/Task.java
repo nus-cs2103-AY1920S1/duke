@@ -1,10 +1,12 @@
+package tasks;
+
 import java.io.Serializable;
 
 
 /**
- * A Task class representing a task with a isDone component.
+ * A tasks.Task class representing a task with a isDone component.
  */
-abstract class Task implements Serializable {
+public abstract class Task implements Serializable {
     String description;
     private boolean isDone;
     private static final long serialVersionUID = 42L;
@@ -18,7 +20,7 @@ abstract class Task implements Serializable {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    void markAsDone() {
         isDone = true;
     }
 

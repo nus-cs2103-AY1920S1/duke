@@ -1,5 +1,9 @@
-import java.util.Date;
-
+import commands.Command;
+import components.Parser;
+import components.Storage;
+import components.Ui;
+import tasks.Task;
+import tasks.TaskList;
 
 public class Duke {
     private Storage storage;
@@ -16,18 +20,6 @@ public class Duke {
         taskList = new TaskList(storage.load());
         ui = new Ui();
     }
-
-
-    /**
-     * Adds a task to the array and saves it to memory.
-     */
-    private void addTask(Task task) {
-        // 1. First add the task to the task list.
-        taskList.addTask(task);
-        // 2. Next, use Storage to save the task list.
-        storage.save(taskList.getArr());
-    }
-
 
     private void run() {
         ui.showWelcome();

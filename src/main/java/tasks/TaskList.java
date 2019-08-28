@@ -1,9 +1,13 @@
+package tasks;
+
+import components.Ui;
+
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> arr;
 
-    ArrayList<Task> getArr() {
+    public ArrayList<Task> getArr() {
         return arr;
     }
 
@@ -17,7 +21,7 @@ public class TaskList {
     /**
      * Initialises a Tasklist with files loaded from storage.
      */
-    TaskList(ArrayList<Task> arr) {
+    public TaskList(ArrayList<Task> arr) {
         this.arr = arr;
     }
 
@@ -26,7 +30,7 @@ public class TaskList {
      *
      * @param task refers to the task to add.
      */
-    void addTask(Task task) {
+    public void addTask(Task task) {
         print("Got it. I've added this task:");
         print(task.toString());
         arr.add(task);
@@ -34,12 +38,12 @@ public class TaskList {
     }
 
     /**
-     * Returns the Task that was removed, or null in the case of an IndexOutOfBoundsException.
+     * Returns the tasks.Task that was removed, or null in the case of an IndexOutOfBoundsException.
      *
      * @param index of the task to be removed.
-     * @return the Task or null
+     * @return the tasks.Task or null
      */
-    Task deleteTask(int index) {
+    public Task deleteTask(int index) {
         try {
             return arr.remove(index);
         } catch (IndexOutOfBoundsException e) {
@@ -52,7 +56,7 @@ public class TaskList {
      * Switch a cross to a tick to mark a task as done.
      * @param index of the task to be marked as done.
      */
-    void markAsDone(int index) {
+    public void markAsDone(int index) {
         try {
             arr.get(index).markAsDone();
             print("Nice! I've marked this task as done:");
@@ -65,7 +69,7 @@ public class TaskList {
     /**
      * Display all tasks on the list.
      */
-    void displayList () {
+    public void displayList() {
         Ui.print("Here are the tasks in your list:");
         int i = 0;
         for (Task t : arr) {

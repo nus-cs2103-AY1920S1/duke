@@ -1,5 +1,11 @@
+package commands;
+
+import components.Storage;
+import components.Ui;
+import tasks.TaskList;
+
 public class PrintUserInputErrorCommand implements Command {
-    String message;
+    private String message;
 
     public PrintUserInputErrorCommand(String message) {
         this.message = message;

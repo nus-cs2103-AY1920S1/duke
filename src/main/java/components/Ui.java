@@ -1,34 +1,37 @@
+package components;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class Ui {
+public class Ui {
     private Scanner scanner;
+
     /**
      * Prints a string.
      */
-    static void print(String str) {
+    public static void print(String str) {
         System.out.println(str);
     }
 
-    Ui() {
+    public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
-    void showWelcome() {
+    public void showWelcome() {
         print("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    void closeUi() {
+    public void closeUi() {
         print("Bye. Hope to see you again soon!");
         scanner.close();
         showLine();
     }
 
-    String readCommand() {
+    public String readCommand() {
         return scanner.nextLine();
     }
 
-    int readIndex() {
+    public int readIndex() {
         try {
             return scanner.nextInt() - 1;
         } catch (InputMismatchException e) {
@@ -37,7 +40,7 @@ class Ui {
         }
     }
 
-    void showLine() {
+    public void showLine() {
         print("_________________________");
     }
 }

@@ -1,32 +1,34 @@
+package tasks;
+
 import java.util.Date;
 
-class TaskBuilder {
+public class TaskBuilder {
     private String description;
     private Date deadline;
     private Date timeframe;
     private TaskType type;
 
-    TaskBuilder type(TaskType t) {
+    public TaskBuilder type(TaskType t) {
         this.type = t;
         return this;
     }
 
-    TaskBuilder description(String d) {
+    public TaskBuilder description(String d) {
         description = d;
         return this;
     }
 
-    TaskBuilder deadline(Date d) {
+    public TaskBuilder deadline(Date d) {
         deadline = d;
         return this;
     }
 
-    TaskBuilder timeframe(Date t) {
+    public TaskBuilder timeframe(Date t) {
         timeframe = t;
         return this;
     }
 
-    Task build() {
+    public Task build() {
         switch (type) {
             case TODO:
                 return new ToDo(description);

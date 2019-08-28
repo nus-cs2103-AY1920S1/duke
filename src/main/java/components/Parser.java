@@ -1,3 +1,7 @@
+package components;
+
+import commands.*;
+
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +18,7 @@ public class Parser {
         return dateFormatter.parse(str, new ParsePosition(0));
     }
 
-    static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) {
         Scanner sc = new Scanner(fullCommand);
         String firstWord = sc.next();
         switch (firstWord) {

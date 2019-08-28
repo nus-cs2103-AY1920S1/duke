@@ -14,7 +14,7 @@ abstract class TaskList {
         type = t;
     }
 
-    public abstract String getAB();
+    public abstract DateTime getAB();
 
     public int getTaskNumber() {
         return taskNumber;

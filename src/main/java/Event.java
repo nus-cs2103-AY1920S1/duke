@@ -1,17 +1,18 @@
+import java.util.Date;
 public class Event extends TaskList {
-    private String at;
+    private DateTime at;
 
-    public Event(int taskNumber, String taskCheck, String taskName, String type, String t) {
+    public Event(int taskNumber, String taskCheck, String taskName, String type, DateTime t) {
         super(taskNumber, taskCheck, taskName, type);
         at = t;
     }
 
-    public String getAB() {
+    public DateTime getAB() {
         return at;
     }
 
     @Override
     public String toString() {
-        return Integer.toString(getTaskNumber()) + ".[E]" + getTaskCheck() + " " + getTaskName() + at;
+        return Integer.toString(getTaskNumber()) + ".[E]" + getTaskCheck() + getTaskName() + "at " + at;
     }
 }

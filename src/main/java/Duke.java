@@ -16,5 +16,6 @@ public class Duke {
         int num = 1;
 
         ui.run(sc, array, num);
+
     }
 }

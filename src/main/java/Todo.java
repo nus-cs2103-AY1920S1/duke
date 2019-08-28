@@ -4,8 +4,8 @@ public class Todo extends TaskList {
         super(taskNumber, taskCheck, taskName, type);
     }
 
-    public String getAB() {
-        return "-";
+    public DateTime getAB() {
+        return null;
     }
 
     @Override

@@ -23,14 +23,17 @@ public class Parser {
     }
 
     public void callEvent(String word, int num, ArrayList<TaskList> array) {
-        String arr2[] = word.split("/");
-        TaskList eventT = new Event(num, "[✗]", arr2[0], "event", arr2[1]);
+        String arr2[] = word.split("/at");
+        DateTime dT1 = new DateTime(arr2[1]);
+        TaskList eventT = new Event(num, "[✗]", arr2[0], "event", dT1);
         eventT.addList(eventT, array, num);
     }
 
     public void callDeadline(String word, int num, ArrayList<TaskList> array) {
-        String arr3[] = word.split("/");
-        TaskList deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", arr3[1]);
+        String arr3[] = word.split("/by");
+        String list[] = arr3[1].split(" ");
+        DateTime dT2 = new DateTime(arr3[1]);
+        TaskList deadlineT = new Deadline(num, "[✗]", arr3[0], "deadline", dT2);
         deadlineT.addList(deadlineT, array, num);
     }
 

@@ -1,7 +1,17 @@
 package seedu.duke;
 
+/**
+ * Handles the parsing of user input
+ */
 public class Parser {
 
+    /**
+     * Parses user input and returns a command corresponding to user input.
+     *
+     * @param str String containing user input.
+     * @return Command corresponding to user input.
+     * @throws DukeException if user input is invalid or does not correspond to any existing command.
+     */
     public static Command parse(String str) throws DukeException {
         String full = str;
         String[] arr = full.split(" ", 2);
@@ -35,6 +45,12 @@ public class Parser {
         return c;
     }
 
+    /**
+     * Parses user input and detects if it corresponds to existing commands.
+     *
+     * @param input String containing user input.
+     * @throws DukeException if user input is invalid.
+     */
     public static void validateInput(String input) throws DukeException {
         String[] array = input.trim().split(" ");
         String first = array[0];

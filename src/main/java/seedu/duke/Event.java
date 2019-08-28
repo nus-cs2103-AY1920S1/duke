@@ -3,24 +3,41 @@ package seedu.duke;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Class for creating Event objects.
+ */
 public class Event extends Task {
+    /** Date representing the Event details (date and time)*/
     protected Date at;
 
+    /** Constructor.*/
     public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Returns String that represents the Event information to be documented in File.
+     * @return String of Event information.
+     */
     @Override
     public String getFullDescription() {
         return description + " . " + at.getTime();
     }
 
+    /**
+     * Returns String representing type of Task object.
+     * @return String representing Event type.
+     */
     @Override
     public String getType() {
         return "E";
     }
 
+    /**
+     * Establishes String representation of object.
+     * @return String representing the object.
+     */
     @Override
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMM yyyy hh:mm a");

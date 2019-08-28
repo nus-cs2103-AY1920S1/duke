@@ -4,16 +4,31 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * Handles adding tasks to the TaskList.
+ */
 public class AddCommand extends Command {
     protected static String title;
     protected static String details;
 
+    /**
+     * Constructor.
+     * @param s String containing Task title.
+     * @param det String containing Task timing.
+     */
     public AddCommand(String s, String det) {
         title = s;
         details = det;
         type = "add";
     }
 
+    /**
+     * Executes the AddCommand and adds a corresponding Task to the TaskList.
+     *
+     * @param t TaskList.
+     * @param u Ui.
+     * @param s Storage.
+     */
     @Override
     public void execute(TaskList t, Ui u, Storage s) {
         Task task = new Task("null");
@@ -42,6 +57,11 @@ public class AddCommand extends Command {
         u.addLine(task.toString(), t.list.size());
     }
 
+    /**
+     * Converts String to Date.
+     * @param str String containing date information.
+     * @return Date of Task.
+     */
     public static Date convertToDate(String str) {
         String[] arr = str.split(" ");
         String date = arr[0];

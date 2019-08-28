@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -7,11 +6,16 @@ import java.io.IOException;
 
 public class Duke {
 
-    private final static ArrayList<Task> ALL_TASKS = new ArrayList<>();
+    private TaskList tasks;
+
+    private Duke() {
+        this.tasks = new TaskList();
+    }
 
     public static void main(String[] args) {
+        Duke duke = new Duke();
         try {
-            importTasks("../data/duke.txt");
+            duke.importTasks("../data/duke.txt");
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
             return;
@@ -36,7 +40,7 @@ public class Duke {
             }
 
             try {
-                run(command);
+                duke.run(command);
             } catch (DukeException e) {
                 System.out.println(e);
             }
@@ -47,13 +51,13 @@ public class Duke {
 
         scanner.close();
         try {
-            exportTasks("../data/duke.txt");
+            duke.exportTasks("../data/duke.txt");
         } catch (IOException e) {
             System.out.println("Failed to save tasks.");
         }
     }
 
-    private static void importTasks(String filePath) throws FileNotFoundException, DukeException {
+    private void importTasks(String filePath) throws FileNotFoundException, DukeException {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()) {
@@ -78,21 +82,21 @@ public class Duke {
                 task.markAsDone();
             }
 
-            ALL_TASKS.add(task);
+            tasks.add(task);
         }
         scanner.close();
     }
 
-    private static void exportTasks(String filePath) throws IOException {
+    private void exportTasks(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task task : ALL_TASKS) {
+        for (Task task : tasks.getTasks()) {
             fw.write(task.serialize());
             fw.write(System.lineSeparator());
         }
         fw.close();
     }
 
-    private static void run(String command) throws DukeException {
+    private void run(String command) throws DukeException {
         if (command.equals("list")) {
             showTasks();
         } else if (command.matches("^done\\s+\\d+$")) {
@@ -108,31 +112,26 @@ public class Duke {
         }
     }
 
-    private static void showTasks() {
-        if (ALL_TASKS.isEmpty()) {
+    private void showTasks() throws DukeException {
+        if (tasks.isEmpty()) {
             System.out.println("There are currently no tasks in your list.");
         } else {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < ALL_TASKS.size(); i++) {
-                Task task = ALL_TASKS.get(i);
-                System.out.printf("%d.%s\n", (i + 1), task);
+            for (int i = 1; i <= tasks.size(); i++) {
+                Task task = tasks.get(i);
+                System.out.printf("%d.%s\n", i, task);
             }
         }
     }
 
-    private static void completeTask(int taskId) throws DukeException {
-        try {
-            Task task = ALL_TASKS.get(taskId - 1);
-            task.markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.printf("  %s\n", task);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(
-                    String.format("Task No.%d is not present in your list. Please enter a valid task ID.", taskId));
-        }
+    private void completeTask(int taskId) throws DukeException {
+        Task task = tasks.get(taskId);
+        task.markAsDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.printf("  %s\n", task);
     }
 
-    private static void addTask(String command) throws DukeException {
+    private void addTask(String command) throws DukeException {
         String[] commandArgs = command.split("\\s+", 2);
         String taskType = commandArgs[0];
 
@@ -174,24 +173,18 @@ public class Duke {
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-        ALL_TASKS.add(newTask);
+        tasks.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.printf("  %s\n", newTask);
-        int total = ALL_TASKS.size();
+        int total = tasks.size();
         System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
     }
 
-    private static void deleteTask(int taskId) throws DukeException {
-        try {
-            Task task = ALL_TASKS.get(taskId - 1);
-            ALL_TASKS.remove(task);
-            System.out.println("Noted. I've removed this task:");
-            System.out.printf("  %s\n", task);
-            int total = ALL_TASKS.size();
-            System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(
-                    String.format("Task No.%d is not present in your list. Please enter a valid task ID.", taskId));
-        }
+    private void deleteTask(int taskId) throws DukeException {
+        Task task = tasks.remove(taskId);
+        System.out.println("Noted. I've removed this task:");
+        System.out.printf("  %s\n", task);
+        int total = tasks.size();
+        System.out.printf("Now you have %d task%s in the list.\n", total, total > 1 ? "s" : "");
     }
 }

@@ -17,6 +17,10 @@ public class Task {
         System.out.println("  " + this.toString());
     }
 
+    public void quietMarkAsDone() {
+        this.isDone = true;
+    }
+
     // Edit this to replace Y N with symbols
     public String getStatusIcon() {
         return (isDone ? "+" : " "); //return "+" if done " " otherwise

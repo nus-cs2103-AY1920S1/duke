@@ -8,6 +8,11 @@ public class TaskList {
         allTasks = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> allTasks) {
+        this.allTasks = allTasks;
+        this.numTasks = allTasks.size();
+    }
+
     public void addTask(Task newTask) {
         numTasks++;
         allTasks.add(newTask);

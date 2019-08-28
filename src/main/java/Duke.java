@@ -3,32 +3,17 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void saveToFile(File file, String content) throws IOException {
-        FileWriter fw = new FileWriter(file);
-        fw.write(content);
-        fw.close();
-    }
-
-    public static void loadPreviousTasks(File file, TaskList taskList) throws IOException, DukeException {
-        BufferedReader br = new BufferedReader(new FileReader(file));
-
-        String str = "";
-        while ((str = br.readLine()) != null) {
-            Task task = generateNewTask(str);
-            taskList.addTask(task);
-        }
-    }
-
     public static void main(String[] args) {
         String greetings = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(greetings);
 
         TaskList taskList = new TaskList();
-        File file = new File("../../../data/duke.txt");
+        String filepath = "../../../data/duke.txt";
+        Storage storage = new Storage(filepath);
 
         System.out.println("Here is the list of tasks from where you've left off: ");
         try {
-            loadPreviousTasks(file, taskList);
+            taskList = new TaskList(storage.loadPreviousTasks());
             taskList.printAllTasks();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -53,9 +38,18 @@ public class Duke {
                     if (sentence[0].equals("done")) { // Check if the first word is done
                         int completedTaskIndex = Integer.parseInt(sentence[1]);
                         taskList.markAsDone(completedTaskIndex); // If it wasn't marked before, this would print out a notification saying it is now marked.
+
+                        // Save new list to storage
+                        try {
+                            storage.saveToFile(taskList.toString());
+                        } catch(IOException e) {
+                            System.out.println("file error");
+                        }
+
                     } else {
                         throw new UnknownTaskTypeException();
                     }
+
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Which task on the list have you completed? (Eg 'done 2')");
                 } catch (IndexOutOfBoundsException e) {
@@ -80,9 +74,18 @@ public class Duke {
                                 + "  "
                                 + deletedTask
                                 + String.format("\nNow you have %d tasks in the list.", taskList.numTasks));
+
+                        // Save new list to storage
+                        try {
+                            storage.saveToFile(taskList.toString());
+                        } catch(IOException e) {
+                            System.out.println("file error");
+                        }
+
                     } else {
                         throw new UnknownTaskTypeException();
                     }
+
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Which task on the list would you like to delete? (Eg. 'delete 2')");
                 } catch (IndexOutOfBoundsException e) {
@@ -101,7 +104,7 @@ public class Duke {
                     if (!command.isEmpty()) {
                         Task newTask = generateNewTask(command);
                         taskList.addTask(newTask);
-                        try {saveToFile(file, taskList.toString());} catch(IOException e) {System.out.println("file error");}
+                        try {storage.saveToFile(taskList.toString());} catch(IOException e) {System.out.println("file error");}
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + newTask.toString());
                         System.out.println("Now you have " + taskList.numTasks + " tasks in the list.");

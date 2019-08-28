@@ -49,10 +49,16 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints the loading error
+     */
     public void showLoadingError() {
-        System.out.println("FIle not founddd");
+        System.out.println("FIle not found");
     }
 
+    /**
+     * Prints the list of Tasks stored in the TaskList
+     */
     public void printList() {
         int i = 1;
         System.out.println("Here are the tasks in your list:");
@@ -86,5 +92,19 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + task.toString());
         System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
+    }
+
+    /**
+     * Prints the list of Tasks stored in the TaskList that contains the user input
+     */
+    public void printMatchingList(String pattern) {
+        int i = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : taskList.getList()) {
+            if (task.toString().contains(pattern) || task.getFileStringFormat().contains(pattern)) {
+                System.out.println(i + ". " + task);
+                i++;
+            }
+        }
     }
 }

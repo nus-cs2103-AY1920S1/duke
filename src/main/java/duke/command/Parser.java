@@ -48,6 +48,9 @@ public class Parser {
                 throw new DukeException("Number must be greater than 0");
             }
             ui.printDone(taskList.markTaskAsDone(i));
+        } else if (str.startsWith("find ")) {
+            String[] arr = str.split(" ", 2);
+            ui.printMatchingList(arr[1]);
         } else {
             String[] arr = str.split("/", 2); // separates the the description
             String[] typeArray = arr[0].split(" ", 2); // separate the task type

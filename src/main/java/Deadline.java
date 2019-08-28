@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private String date;
+    private String _date;
 
     /**
      * Creates a Deadline object, which is also a Task.
@@ -8,7 +8,7 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String date) {
         super(desc);
-        this.date = date;
+        this._date = date;
     }
 
     /**
@@ -17,7 +17,18 @@ public class Deadline extends Task {
      */
     public String toString() {
         String d = String.format("[D][%s]%s(by:%s)",
-                    this.getStatusIcon(), this.description, this.date);
+                    this.getStatusIcon(), this._description, this._date);
         return d;
+    }
+
+    /**
+     * Returns a string representation of the Event object to be saved
+     * into the hard disk file for the Duke program.
+     * @return String Returns a the data representation of the Event Task.
+     */
+    public String toData() {
+        String t = String.format("E | %s | %s | %s",
+                this.getStatusIcon(), this._description, this._date);
+        return t;
     }
 }

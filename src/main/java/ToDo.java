@@ -18,7 +18,18 @@ public class ToDo extends Task {
      */
     public String toString() {
         String t = String.format("[T][%s]%s",
-                this.getStatusIcon(), this.description);
+                this.getStatusIcon(), this._description);
+        return t;
+    }
+
+    /**
+     * Returns a string representation of the ToDo object to be saved
+     * into the hard disk file for the Duke program.
+     * @return String Returns a the data representation of the ToDo Task.
+     */
+    public String toData() {
+        String t = String.format("T | %s | %s",
+                this.getStatusIcon(), this._description);
         return t;
     }
 }

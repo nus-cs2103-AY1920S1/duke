@@ -2,12 +2,12 @@ public class Deadlines extends Task {
 
     protected String by;
 
-    public Deadlines(String name, String by) {
-        super(name);
+    public Deadlines(String name, boolean completionStatus , String by) {
+        super(name,completionStatus);
         this.by = by;
     }
     @Override
-    public String overallStatus() {
-        return "[D]" + currentStatus() + name + "(by:" + by + ")";
+    public String getOverallStatus() {
+        return "[D]" + getCurrentStatus() + name + "(by:" + by + ")";
     }
 }

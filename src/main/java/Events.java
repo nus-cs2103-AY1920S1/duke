@@ -2,12 +2,12 @@ public class Events extends Task{
 
     protected String at;
 
-    public Events(String name,String at) {
-        super(name);
+    public Events(String name,boolean completionStatus,String at) {
+        super(name , completionStatus);
         this.at = at;
     }
     @Override
-    public String overallStatus() {
-        return "[E]" + currentStatus() + name + "(at:" + at + ")";
+    public String getOverallStatus() {
+        return "[E]" + getCurrentStatus() + name + "(at:" + at + ")";
     }
 }

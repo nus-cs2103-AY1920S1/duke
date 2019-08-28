@@ -1,0 +1,3 @@
+public enum CommandType {
+    LIST,COMPLETE,ADDTODO,ADDDEADLINE,ADDEVENT,DELETE
+}

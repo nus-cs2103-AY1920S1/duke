@@ -1,10 +1,16 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
+
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -21,8 +27,8 @@ public class Storage {
     /**
      * Loads tasks from a (valid) data file, adds them to a new list, then
      * returns that list.
-     * @throws DukeException    If tasks cannot be loaded from file
      * @return                  List of tasks that were loaded from file
+     * @throws DukeException    If tasks cannot be loaded from file
      */
     public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();

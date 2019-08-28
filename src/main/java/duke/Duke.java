@@ -12,6 +12,10 @@ public class Duke {
     private TaskList tasks;
     private TextUi ui;
 
+    /**
+     * Initialises Duke by setting up user interface, storage, and tasks.
+     * @param filePath  Path to data file
+     */
     public Duke(String filePath) {
         ui = new TextUi();
         storage = new Storage(filePath);
@@ -26,9 +30,9 @@ public class Duke {
     /**
      * Runs the main application by handling user input.
      *
-     * Duke begins by printing a welcome message. Subsequently, it repeatedly
+     * <p>Duke begins by printing a welcome message. Subsequently, it repeatedly
      * scans for user input, then validates and processes it accordingly. The
-     * function returns when the command to exit ("bye") is received.
+     * function returns when the command to exit ("bye") is received.</p>
      */
     public void run() {
         ui.showWelcomeMessage();

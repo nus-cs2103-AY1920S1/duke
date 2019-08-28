@@ -17,12 +17,12 @@ public class Task {
      * where EEE is the day of week (e.g. Mon, Fri).
      */
     public static final SimpleDateFormat[] DATE_FORMATS = {
-            new SimpleDateFormat("EEE, dd MMM yy, hh:mm"),
-            new SimpleDateFormat("dd-MM-yy hh:mm"),
-            new SimpleDateFormat("dd-MM-yyyy"),
-            new SimpleDateFormat("dd-MM-yy"),
-            new SimpleDateFormat("hh:mm"),
-            new SimpleDateFormat("EEE")
+        new SimpleDateFormat("EEE, dd MMM yy, hh:mm"),
+        new SimpleDateFormat("dd-MM-yy hh:mm"),
+        new SimpleDateFormat("dd-MM-yyyy"),
+        new SimpleDateFormat("dd-MM-yy"),
+        new SimpleDateFormat("hh:mm"),
+        new SimpleDateFormat("EEE")
     };
 
     private String description;

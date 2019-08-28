@@ -31,6 +31,9 @@ public class CommandParser {
         case "delete":
             return new DeleteCommand(arguments);
 
+        case "find":
+            return new FilterTasksCommand(arguments);
+
         case "list":
             if (parts.length != 1) {
                 throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");

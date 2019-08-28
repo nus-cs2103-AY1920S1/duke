@@ -1,6 +1,8 @@
 package myduke.task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import myduke.exception.DukeInvalidCommandException;
 
@@ -47,5 +49,19 @@ public class TaskList extends ArrayList<Task> {
         Task refTask = getTask(index);
         refTask.markAsDone();
         return refTask;
+    }
+
+    /**
+     * Filters the tasks which contains the keyword.
+     * @param keyword the key search term.
+     * @return A list of filtered tasks
+     */
+    public TaskList filterTasks(String keyword) {
+        TaskList newList = new TaskList();
+        this.stream()
+                .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toCollection(() -> newList));
+
+        return newList;
     }
 }

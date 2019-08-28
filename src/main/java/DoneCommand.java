@@ -12,20 +12,20 @@ public class DoneCommand extends Command {
         storage.writeFile(tasks.getList());
     }
 
-    public int getTaskNumber() {
-        return taskNumber;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        } else if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        } else {
-            DoneCommand command = (DoneCommand) obj;
-            return taskNumber == command.getTaskNumber();
-        }
-
-    }
-}
+///   public int getTaskNumber() {
+//        return taskNumber;
+//    }
+//
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj == this) {
+//            return true;
+//        } else if (obj == null || obj.getClass() != this.getClass()) {
+//            return false;
+//        } else {
+//            DoneCommand command = (DoneCommand) obj;
+//            return taskNumber == command.getTaskNumber();
+//        }
+//
+//    }
+//}

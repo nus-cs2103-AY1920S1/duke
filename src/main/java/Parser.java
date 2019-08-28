@@ -1,5 +1,15 @@
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Parses the user command.
+     *
+     * @param fullCommand The input given by the user.
+     * @return A Command that varies based on the user input.
+     * @throws DukeException If the user input is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             return new ExitCommand();

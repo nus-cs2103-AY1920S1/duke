@@ -124,15 +124,9 @@ public class Duke {
                         errorMessage = makeSpace(5) + "The date/time of your deadline cannot be empty!";
                     } else {
                         String taskDescription = contentDateTime[0].strip();
-                        String[] dateTime = contentDateTime[1].strip().split(" ");
+                        String dateTime = contentDateTime[1].strip();
 
-                        if (dateTime.length == 1) {
-                            makeNewDeadline(taskDescription, dateTime[0], "");
-                        } else if (dateTime.length == 2) {
-                            makeNewDeadline(taskDescription, dateTime[0], dateTime[1]);
-                        } else {
-                            return;
-                        }
+                        makeNewDeadline(taskDescription, dateTime);
                     }
                 } else {
                     errorMessage = makeSpace(5) + "Sorry but I can't seem to detect the due date of the deadline!";
@@ -156,22 +150,16 @@ public class Duke {
                         errorMessage = makeSpace(5) + "The date/time of your Event cannot be empty!";
                     } else {
                         String taskDescription = contentDateTime[0].strip();
-                        String[] dateTime = contentDateTime[1].strip().split(" ");
+                        String dateTime = contentDateTime[1].strip();
 
-                        if (dateTime.length == 1) {
-                            makeNewEvent(taskDescription, dateTime[0], "");
-                        } else if (dateTime.length == 2) {
-                            makeNewEvent(taskDescription, dateTime[0], dateTime[1]);
-                        } else {
-                            return;
-                        }
+                        makeNewEvent(taskDescription, dateTime);
                     }
                 } else {
                     errorMessage = makeSpace(5) + "Sorry but I can't seem to detect the Date & Time of the event!";
                 }
 
             } else {
-                errorMessage = makeSpace(5) + "The description of a Event cannot be empty!";
+                errorMessage = makeSpace(5) + "The description of an Event cannot be empty!";
             }
         } else {
             throw new InvalidDukeCommand();
@@ -217,8 +205,8 @@ public class Duke {
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void makeNewDeadline(String desc, String date, String time) {
-        Deadline currentDeadline = new Deadline(desc, date, time);
+    private void makeNewDeadline(String desc, String dateTime) {
+        Deadline currentDeadline = new Deadline(desc, dateTime);
         tasks.add(currentDeadline);
 
         System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));
@@ -226,8 +214,8 @@ public class Duke {
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void makeNewEvent(String desc, String date, String time) {
-        Event currentEvent = new Event(desc, date, time);
+    private void makeNewEvent(String desc, String dateTime) {
+        Event currentEvent = new Event(desc, dateTime);
         tasks.add(currentEvent);
 
         System.out.printf("%sGot it! I've added this task for you \uD83D\uDE09\n", makeSpace(5));

@@ -5,10 +5,14 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class Tasklist {
-    public static ArrayList<Task> tasks;
+    public ArrayList<Task> tasks;
 
     public Tasklist() {
         tasks = new ArrayList<>(100); // Specification said numTasks < 100.
+    }
+
+    public Tasklist(ArrayList<Task> list) {
+        tasks = list;
     }
 
     public void add(Task task) {

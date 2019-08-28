@@ -3,6 +3,7 @@ package duke.command;
 import duke.app.Duke;
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.Tasklist;
 import duke.ui.Ui;
@@ -15,7 +16,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist list, Ui ui) throws DukeException {
+    public void execute(Tasklist list, Ui ui, Storage storage) throws DukeException {
         try {
             String inputEntry = index.trim();
             int entry = Integer.parseInt(inputEntry) - 1;

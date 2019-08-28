@@ -11,7 +11,17 @@ import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.Todo;
 
+/**
+ * Deals with making sense of the user's input and command.
+ */
 public class Parser {
+    /**
+     * Parse and interprets the input from the user.
+     *
+     * @param input Input from the user.
+     * @return Command representing what user's input.
+     * @throws DukeException If input is invalid or not in the proper format.
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ", 2);
         String command = inputArr[0];

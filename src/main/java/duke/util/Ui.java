@@ -4,19 +4,37 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Deals with the interactions with the user, including the input and output to and from the command line.
+ */
 public class Ui {
+    /** Scanner to read in input from the command line. */
     private Scanner sc;
+    /** Horizontal line to be printed before and after each output message. */
     private static final String horizontalLine =
             "    ____________________________________________________________";
 
+    /**
+     * Constructor for Ui that instantiates the Scanner.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Takes in the next line of input from the user in the command line.
+     *
+     * @return The line of input entered by the user.
+     */
     public String readInput() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints out the DukeException's formatted error message.
+     *
+     * @param e The DukeException to be displayed to the user.
+     */
     public void printError(DukeException e) {
         System.out.println(horizontalLine);
         System.out.println("     \u2639 OOPS!!! " + e.getMessage());
@@ -24,6 +42,9 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints out the greeting to the user at the start of the Duke program.
+     */
     public void printGreeting() {
         // Greet
         System.out.println(horizontalLine);
@@ -33,6 +54,9 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints out the goodbye message when the user leaves the Duke program.
+     */
     public void printExit() {
         // Exit
         System.out.println(horizontalLine);
@@ -40,6 +64,12 @@ public class Ui {
         System.out.println(horizontalLine);
     }
 
+    /**
+     * Prints out each Task in the TaskList.
+     * Each Task is prepended with their ID, which is its index + 1.
+     *
+     * @param tasks List of tasks being tracked by Duke.
+     */
     public void printTasks(TaskList tasks) {
         System.out.println(horizontalLine);
         System.out.println("     Here are the tasks in your list:");
@@ -54,6 +84,11 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints out that the task was marked as done.
+     *
+     * @param task Task which was marked as done.
+     */
     public void printMarkTaskAsDone(Task task) {
         System.out.println(horizontalLine);
         System.out.println("     Nice! I've marked this task as done:");
@@ -62,6 +97,11 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints out that the task was deleted.
+     *
+     * @param task Task which was deleted.
+     */
     public void printDeleteTask(Task task) {
         System.out.println(horizontalLine);
         System.out.println("     Noted. I've removed this task:");
@@ -70,6 +110,12 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Prints out that the task was added.
+     *
+     * @param task Task which was added.
+     * @param numOfTasks Number of tasks in the TaskList after task was added.
+     */
     public void printAddTask(Task task, int numOfTasks) {
         System.out.println(horizontalLine);
         System.out.println("     Got it. I've added this task:");

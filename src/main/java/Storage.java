@@ -9,47 +9,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> loadList() throws LoadingErrorDukeException{
-        List<Task> loadedList = new ArrayList<>();
-        try {
-            FileReader fileReader = new FileReader(filePath);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String readerLine = bufferedReader.readLine(); //initialise first line
-
-            while (readerLine != null) {
-                String[] readArray = readerLine.split("\\s\\|\\s");
-                Task task = createTaskFromInput(readArray);
-                loadedList.add(task);
-                readerLine = bufferedReader.readLine();
-            }
-            bufferedReader.close();
-        } catch (FileNotFoundException e) {
-            throw new LoadingErrorDukeException();
-        } catch (IOException | EmptyTaskDukeException | InvalidTaskDukeException e) {
-            e.printStackTrace();
-        }
-        return loadedList;
-    }
-
-    public void saveList(TaskList tasks) {
-        File file = new File(filePath);
-        file.getParentFile().mkdirs();
-        try {
-            FileWriter fileWriter = new FileWriter(filePath);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            while (!tasks.isEmpty()) {
-                Task task = tasks.remove(1);
-                String line = generateLineFromTask(task);
-                bufferedWriter.write(line);
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static Task createTaskFromInput(String[] inputArray) throws InvalidTaskDukeException, EmptyTaskDukeException {
         Task createdTask = null;
         switch(inputArray[0]) {
@@ -113,5 +72,46 @@ public class Storage {
 
         String lineToAdd = stringBuilder.toString();
         return lineToAdd;
+    }
+
+    public List<Task> loadList() throws LoadingErrorDukeException{
+        List<Task> loadedList = new ArrayList<>();
+        try {
+            FileReader fileReader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String readerLine = bufferedReader.readLine(); //initialise first line
+
+            while (readerLine != null) {
+                String[] readArray = readerLine.split("\\s\\|\\s");
+                Task task = createTaskFromInput(readArray);
+                loadedList.add(task);
+                readerLine = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            throw new LoadingErrorDukeException();
+        } catch (IOException | EmptyTaskDukeException | InvalidTaskDukeException e) {
+            e.printStackTrace();
+        }
+        return loadedList;
+    }
+
+    public void saveList(TaskList tasks) {
+        File file = new File(filePath);
+        file.getParentFile().mkdirs();
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            while (!tasks.isEmpty()) {
+                Task task = tasks.remove(1);
+                String line = generateLineFromTask(task);
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

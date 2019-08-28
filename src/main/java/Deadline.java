@@ -1,10 +1,6 @@
 public class Deadline extends Task {
     private String byWhen;
 
-    public String getByWhen() {
-        return byWhen;
-    }
-
     public Deadline(String name, String byWhen) throws EmptyTaskDukeException, InvalidTaskDukeException  {
         super(name);
         if (name == null) {
@@ -14,6 +10,10 @@ public class Deadline extends Task {
             throw new InvalidTaskDukeException("deadline");
         }
         this.byWhen = byWhen;
+    }
+
+    public String getByWhen() {
+        return byWhen;
     }
 
     @Override

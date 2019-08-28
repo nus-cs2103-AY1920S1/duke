@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class DateTime {
     private int day;
     private int month;
@@ -46,42 +44,42 @@ public class DateTime {
         stringBuilder.append(" of ");
 
         switch (this.month) {
-            case 1:
-                stringBuilder.append("January");
-                break;
-            case 2:
-                stringBuilder.append("February");
-                break;
-            case 3:
-                stringBuilder.append("March");
-                break;
-            case 4:
-                stringBuilder.append("April");
-                break;
-            case 5:
-                stringBuilder.append("May");
-                break;
-            case 6:
-                stringBuilder.append("June");
-                break;
-            case 7:
-                stringBuilder.append("July");
-                break;
-            case 8:
-                stringBuilder.append("August");
-                break;
-            case 9:
-                stringBuilder.append("September");
-                break;
-            case 10:
-                stringBuilder.append("October");
-                break;
-            case 11:
-                stringBuilder.append("November");
-                break;
-            case 12:
-                stringBuilder.append("December");
-                break;
+        case 1:
+            stringBuilder.append("January");
+            break;
+        case 2:
+            stringBuilder.append("February");
+            break;
+        case 3:
+            stringBuilder.append("March");
+            break;
+        case 4:
+            stringBuilder.append("April");
+            break;
+        case 5:
+            stringBuilder.append("May");
+            break;
+        case 6:
+            stringBuilder.append("June");
+            break;
+        case 7:
+            stringBuilder.append("July");
+            break;
+        case 8:
+            stringBuilder.append("August");
+            break;
+        case 9:
+            stringBuilder.append("September");
+            break;
+        case 10:
+            stringBuilder.append("October");
+            break;
+        case 11:
+            stringBuilder.append("November");
+            break;
+        case 12:
+            stringBuilder.append("December");
+            break;
         }
 
         stringBuilder.append(String.format(" %d, ", year));

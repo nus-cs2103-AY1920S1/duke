@@ -1,15 +1,22 @@
 package task.tasks;
 
 import error.task.UnknownDateTimeException;
-import task.Task;
 import util.DukeDateTime;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/***
+ * Task that needs to be done at a specified time.
+ */
 public class Event extends Task {
     private LocalDateTime at;
 
+    /***
+     * Event constructor
+     * @param arguments description and time separated by a "/at" separator.
+     * @throws UnknownDateTimeException if date and time is given in the incorrect format.
+     */
     Event(String arguments) throws UnknownDateTimeException {
         super(getDescription(arguments), TaskKeyword.EVENT);
         this.at = getTiming(arguments);

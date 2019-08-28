@@ -1,19 +1,27 @@
 package util;
 
 import error.ConfigurationException;
-import task.Task;
+import task.tasks.Task;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/***
+ * Singleton storage class used to handle reading and writing to storage file in system memory.
+ */
 public class DukeStorage {
     private static DukeStorage singletonDukeStorage;
     private String configFilePath;
     private String storageFilePath;
     private List<Task> tasks;
 
+    /***
+     * Gets DukeStorage singleton instance.
+     * @return DukeStorage singleton.
+     * @throws ConfigurationException if DukeStorage was not initialized.
+     */
     public static DukeStorage getInstance() throws ConfigurationException {
         if (singletonDukeStorage == null) {
             throw new ConfigurationException("DukeStorage not initialized");
@@ -22,6 +30,11 @@ public class DukeStorage {
         }
     }
 
+    /***
+     * Initializes DukeStorrage based on default options if configuration file is not found.
+     * @param configFilePath path to optional configuration file.
+     * @throws ConfigurationException if configuration and storage file cannot be read.
+     */
     public static void initializeDukeStorage(String configFilePath) throws ConfigurationException {
         singletonDukeStorage = new DukeStorage();
         singletonDukeStorage.configFilePath = configFilePath;
@@ -30,6 +43,10 @@ public class DukeStorage {
         singletonDukeStorage.loadTaskData();
     }
 
+    /***
+     * Returns current list of tasks stored in the system.
+     * @return list of Tasks.
+     */
     public List<Task> getTaskData() {
         return tasks;
     }
@@ -100,6 +117,12 @@ public class DukeStorage {
         }
     }
 
+    /***
+     * Write tasks to system memory.
+     * @param tasks list of tasks to be written.
+     * @throws ConfigurationException if DukeStorage was not initialized or storage file
+     * cannot be accessed and written to.
+     */
     public void writeTaskData(List<Task> tasks) throws ConfigurationException {
         if (singletonDukeStorage == null) {
             throw new ConfigurationException("DukeStorage not initialized");

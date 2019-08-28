@@ -1,10 +1,13 @@
 package task.tasks;
 
-import task.Task;
-import util.SerializableTaskProducer;
-
 import java.io.Serializable;
 
+/***
+ * Enum used to encapsulate a task's keyword to be input by the user to perform related commands.
+ * Each Task should have its own corresponding TaskKeyword which has to be passed into Task superclass's constructor.
+ * TaskKeyword should contain a SerializableTaskProducer that is used to procure its corresponding class.
+ * Serializable to be written to storage.
+ */
 public enum TaskKeyword implements Serializable {
     TODO("todo", ToDo::new),
     EVENT("event", Event::new),

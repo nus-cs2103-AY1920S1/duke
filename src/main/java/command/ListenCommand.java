@@ -8,13 +8,24 @@ import util.DukeOutput;
 
 import java.util.Optional;
 
+/***
+ * Command to listen and parse user input.
+ */
 public class ListenCommand implements Command {
     private TaskListController taskListController;
 
+    /***
+     * ListenCommand constructor
+     * @param taskListController controller for task list on which commands are executed.
+     */
     public ListenCommand(TaskListController taskListController) {
         this.taskListController = taskListController;
     }
 
+    /***
+     * Reads and parse user input.
+     * @return corresponding commands.
+     */
     @Override
     public Optional<Command> execute() {
         String userInput = DukeInput.readUserInput();

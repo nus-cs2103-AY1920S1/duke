@@ -6,7 +6,16 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/***
+ * Utility class to handle date and time.
+ */
 public class DukeDateTime {
+    /***
+     * Parses a string into a LocalDateTime object. E.g. 24/02/2022 0315.
+     * @param dateTimeString string to be parsed, must be in the form dd/mm/yyyy HHmm.
+     * @return
+     * @throws UnknownDateTimeException
+     */
     public static LocalDateTime parseDateTime(String dateTimeString) throws UnknownDateTimeException {
         try {
             String[] dateTimeStrings = dateTimeString.split("\\s+");
@@ -40,6 +49,11 @@ public class DukeDateTime {
         }
     }
 
+    /***
+     * Formats LocalDateTime object into string.
+     * @param dateTime LocalDateTime to be formatted.
+     * @return formatted string.
+     */
     public static String getString(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, E, HH:mma");
         return formatter.format(dateTime);

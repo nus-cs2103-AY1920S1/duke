@@ -91,7 +91,7 @@ public abstract class Task {
                 }
                 break;
             case 2:
-                if (day == 11) {
+                if (day == 12) {
                     finalString += "th";
                 } else {
                     finalString += "nd";

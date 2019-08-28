@@ -1,10 +1,10 @@
 public class Task {
 
-    private String name;
+    private String description;
     private boolean doneStatus;
 
-    public Task(String name) {
-        this.name = name;
+    public Task(String description) {
+        this.description = description;
         doneStatus = false;
     }
 
@@ -20,7 +20,7 @@ public class Task {
         } else {
             output += "[✗]";
         }
-        output += name;
+        output += " " + description;
         return output;
     }
 }

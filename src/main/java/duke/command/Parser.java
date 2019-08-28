@@ -26,9 +26,9 @@ public class Parser {
                 split = i;
             }
         }
-        String task_desc = joinStrings(Arrays.copyOfRange(params, 0, split));
-        String task_due = joinStrings(Arrays.copyOfRange(params, split + 1, params.length));
-        return new String[]{task_desc, task_due};
+        String taskDesc = joinStrings(Arrays.copyOfRange(params, 0, split));
+        String taskDue = joinStrings(Arrays.copyOfRange(params, split + 1, params.length));
+        return new String[]{taskDesc, taskDue};
     }
 
 }

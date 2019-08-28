@@ -31,7 +31,7 @@ public class Ui {
         System.err.print(divider);
     }
 
-    private static void print (String s) {
+    private static void print(String s) {
         System.out.print(divider);
         System.out.print(s);
         System.out.print(divider);

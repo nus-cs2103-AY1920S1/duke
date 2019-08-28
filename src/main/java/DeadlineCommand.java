@@ -1,4 +1,6 @@
-package PACKAGE_NAME;
+public class DeadlineCommand extends NewTaskCommand {
 
-public class DeadlineCommand {
+    public DeadlineCommand(String description, DateTime by) {
+        super(new Deadline(description, by));
+    }
 }

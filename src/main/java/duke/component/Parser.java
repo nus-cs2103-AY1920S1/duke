@@ -1,6 +1,5 @@
 package duke.component;
 
-
 import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -9,7 +8,16 @@ import duke.task.Task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Class for translating and interpreting the user input
+ */
 public class Parser {
+
+    /**
+     * Returns data and time form input String
+     * @param inputs input string
+     * @return date and time from input String
+     */
     public static LocalDateTime getDateAndTimeFromString(String inputs){
         String[] time = inputs.split(" ");
         String[] dateInString = time[0].split("\\/");
@@ -23,6 +31,11 @@ public class Parser {
         return dateAndTime;
     }
 
+    /**
+     * Return array of string containing name as first element and time as second element retrieved from unknown array of strings
+     * @param inputs input string
+     * @return array of string containing name as first element and time as second element
+     */
     public static String[] breakDownIntoNameAndTime(String[] inputs) {
         String[] result = {"", ""};
 
@@ -43,10 +56,22 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Returns an array of sub-strings separated by certain string
+     * @param input input string
+     * @param separator to be used for separating string into array of sub-strings
+     * @return array of sub-strings separated by separator
+     */
     public static String[] breakDownString(String input, String separator) {
         return input.split(separator);
     }
 
+    /**
+     * Returns respective command from user input after translating and interpretation
+     * @param input input string
+     * @return respective duke command
+     * @throws DukeException
+     */
     public static Command retrieveCommandFromString(String input) throws DukeException {
         String[] inputs = Parser.breakDownString(input, " ");
         String name = "";

@@ -13,15 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class for storing and retrieving tasks from hard disk
+ */
 public class Storage {
     private String filePath;
     private File inputFile;
 
+    /**
+     * Constructor for storage object
+     * @param filePath path to the location of the file in hard disk
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.inputFile = new File(filePath);
     }
 
+    /**
+     * Loads tasks from storage at hard disk into the program
+     * @return list of tasks loaded with task from hard disk
+     * @throws FileNotFoundException
+     */
     public List<Task> load() throws FileNotFoundException {
         List<Task> taskList = new ArrayList<>();
         Scanner txtSC = new Scanner(inputFile);
@@ -64,6 +76,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves tasks from the program into hard disk
+     * @param taskList list of tasks to be stored into hard disk
+     * @throws FileNotFoundException
+     * @throws UnsupportedEncodingException
+     */
     public void save(TaskList taskList) throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter fileWriter = new PrintWriter(filePath, "UTF-8");
 

@@ -6,21 +6,41 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime time;
 
-    public Event(String name, LocalDateTime time) {
-        super(name, false);
+    /**
+     * Constructor for Event Object with default done status
+     * @param description the description of the event
+     * @param time the time of the event
+     */
+    public Event(String description, LocalDateTime time) {
+        super(description, false);
         this.time = time;
     }
 
-    public Event(String name, LocalDateTime deadLine, boolean done) {
-        super(name, done);
-        this.time = deadLine;
+    /**
+     * Constructor for Event Object with certain done status
+     * @param description the description of the event
+     * @param time  the time of the event
+     * @param done the status of the event
+     */
+    public Event(String description, LocalDateTime time, boolean done) {
+        super(description, done);
+        this.time = time;
     }
 
+
+    /**
+     * Changes the status of the event to 'completed'
+     * @return a new event object with 'completed' status
+     */
     @Override
     public Event changeToCompletedStatus() {
-        return new Event(super.name, this.time, true);
+        return new Event(super.description, this.time, true);
     }
 
+    /**
+     * Returns formatted and user readable form of the task
+     * @return formatted and user readable form of the task in String
+     */
     @Override
     public String toString() {
 
@@ -32,9 +52,14 @@ public class Event extends Task {
             s = s + "[E][✗]";
         }
 
-        return s + " " + name + " (at: " + time.format(formatter) + ")";
+        return s + " " + description + " (at: " + time.format(formatter) + ")";
     }
 
+
+    /**
+     * Returns formatted form of the task to be stored in inside a text file
+     * @return formatted form of the task to be stored in inside a text file
+     */
     public String toIndicationInsideFile() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,6 +71,6 @@ public class Event extends Task {
             s = s + "0 | ";
         }
 
-        return s + name + " | " + time.format(formatter) + " " + (time.getHour() * 100 + time.getMinute());
+        return s + description + " | " + time.format(formatter) + " " + (time.getHour() * 100 + time.getMinute());
     }
 }

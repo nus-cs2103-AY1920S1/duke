@@ -6,21 +6,39 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadLine;
 
-    public Deadline(String name, LocalDateTime deadLine) {
-        super(name, false);
+    /**
+     * Constructor for Deadline object with default done status
+     * @param description the description of the task
+     * @param deadLine the deadline in date and time format
+     */
+    public Deadline(String description, LocalDateTime deadLine) {
+        super(description, false);
         this.deadLine = deadLine;
     }
 
-    public Deadline(String name, LocalDateTime deadLine, boolean done) {
-        super(name, done);
+    /**
+     * Constructor for Deadline object with certain done status
+     * @param description the description of the task
+     * @param deadLine the deadline in date and time format
+     */
+    public Deadline(String description, LocalDateTime deadLine, boolean done) {
+        super(description, done);
         this.deadLine = deadLine;
     }
 
+    /**
+     * Changes the status of the deadline to 'completed'
+     * @return a new deadline object with 'completed' status
+     */
     @Override
     public Deadline changeToCompletedStatus() {
-        return new Deadline(super.name, this.deadLine, true);
+        return new Deadline(super.description, this.deadLine, true);
     }
 
+    /**
+     * Returns formatted and user readable form of the task
+     * @return formatted and user readable form of the task in String
+     */
     @Override
     public String toString() {
 
@@ -32,9 +50,13 @@ public class Deadline extends Task {
             s = s + "[D][✗]";
         }
 
-        return s + " " + name + " (by: " + deadLine.format(formatter) + ")";
+        return s + " " + description + " (by: " + deadLine.format(formatter) + ")";
     }
 
+    /**
+     * Returns formatted form of the task to be stored in inside a text file
+     * @return formatted form of the task to be stored in inside a text file
+     */
     public String toIndicationInsideFile() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -46,6 +68,6 @@ public class Deadline extends Task {
             s = s + "0 | ";
         }
 
-        return s + name + " | " + deadLine.format(formatter) + " " + (deadLine.getHour() * 100 + deadLine.getMinute());
+        return s + description + " | " + deadLine.format(formatter) + " " + (deadLine.getHour() * 100 + deadLine.getMinute());
     }
 }

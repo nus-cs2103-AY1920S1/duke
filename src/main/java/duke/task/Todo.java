@@ -2,19 +2,35 @@ package duke.task;
 
 public class Todo extends Task {
 
-    public Todo(String name) {
-        super(name, false);
+    /**
+     * Constructor for Todo object with default done status
+     * @param description the description of the task
+     */
+    public Todo(String description) {
+        super(description, false);
     }
 
-    public Todo(String name, boolean done) {
-        super(name, done);
+    /**
+     * Constructor for Todo object with certain done status
+     * @param description the description of the task
+     */
+    public Todo(String description, boolean done) {
+        super(description, done);
     }
 
+    /**
+     * Changes the status of the Todo to 'completed'
+     * @return a new Todo object with 'completed' status
+     */
     @Override
     public Todo changeToCompletedStatus() {
-        return new Todo(super.name, true);
+        return new Todo(super.description, true);
     }
 
+    /**
+     * Returns formatted and user readable form of the task
+     * @return formatted and user readable form of the task in String
+     */
     @Override
     public String toString() {
         String s = "";
@@ -24,9 +40,13 @@ public class Todo extends Task {
             s = s + "[T][✗]";
         }
 
-        return s + " " + name;
+        return s + " " + description;
     }
 
+    /**
+     * Returns formatted form of the task to be stored in inside a text file
+     * @return formatted form of the task to be stored in inside a text file
+     */
     public String toIndicationInsideFile() {
         String s = "T | ";
 
@@ -36,6 +56,6 @@ public class Todo extends Task {
             s = s + "0 | ";
         }
 
-        return s + name;
+        return s + description;
     }
 }

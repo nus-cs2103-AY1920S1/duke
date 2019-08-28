@@ -13,6 +13,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for Duke Object
+     * @param filePath path to the text file located on the hard disk
+     * @throws FileNotFoundException
+     */
     public Duke(String filePath) throws FileNotFoundException{
 
         ui = new Ui();
@@ -21,6 +26,10 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
+
+    /**
+     * Runs Duke Program
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
 
@@ -38,6 +47,11 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Runs the created Duke object by appending location of text file inside the constructor
+     * @param args
+     */
     public static void main(String[] args) {
         try{
             new Duke(System.getProperty("user.dir") + "\\data\\Duke.txt").run();

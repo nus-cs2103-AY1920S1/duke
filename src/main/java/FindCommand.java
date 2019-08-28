@@ -2,11 +2,11 @@ import java.io.IOException;
 
 public class FindCommand extends Command {
 
-    FindCommand(String commandDesc){
+    FindCommand(String commandDesc) {
         super(commandDesc);
     }
 
-    boolean isExit(){
+    boolean isExit() {
         return false;
     }
 

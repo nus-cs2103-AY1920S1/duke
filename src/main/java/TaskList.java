@@ -65,7 +65,7 @@ public class TaskList {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    void findTasks (String taskName) {
+    void findTasks(String taskName) {
         System.out.println("Here are the matching tasks in your list");
         int numCommands = 0;
         for (Task i : taskList) {

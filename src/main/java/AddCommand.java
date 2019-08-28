@@ -67,6 +67,5 @@ public class AddCommand extends Command {
         } catch (IOException ex) {
             System.out.println("Cannot save new task in file");
         }
-
     }
 }

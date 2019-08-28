@@ -109,7 +109,6 @@ public class Storage {
         fw.close();
     }
 
-
     /**
      * Deletes the task based on its line number in the text file.
      * @param taskNum the line number of the task to be deleted
@@ -120,6 +119,7 @@ public class Storage {
         Scanner scn = new Scanner(file);
         List<String> list = new ArrayList<String>();
         int lineNum = 1;
+
         while (scn.hasNext()) {
             String s = scn.nextLine();
             if (lineNum != taskNum) {
@@ -127,13 +127,16 @@ public class Storage {
             }
             lineNum++;
         }
+
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < list.size() - 1; i++) {
             fw.write(list.get(i) + System.lineSeparator());
         }
+
         if (list.size() > 0) {
             fw.write(list.get(list.size() - 1));
         }
+
         fw.close();
     }
 }

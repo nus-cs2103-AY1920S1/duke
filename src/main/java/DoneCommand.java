@@ -35,6 +35,5 @@ public class DoneCommand extends Command {
         } catch (IOException ex) {
             System.out.println("Can't update task in the file");
         }
-
     }
 }

@@ -30,7 +30,6 @@ public class TaskList {
         tasks.add(task);
     }
 
-
     /**
      * Retrieves the desired task in the task-list
      * @param i the index of the task to be retrieved

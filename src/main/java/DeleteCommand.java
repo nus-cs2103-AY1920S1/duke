@@ -39,6 +39,5 @@ public class DeleteCommand extends Command {
         } catch (IOException ex) {
             System.out.print("Error when deleting task from saved file");
         }
-
     }
 }

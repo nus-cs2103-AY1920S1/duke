@@ -7,6 +7,7 @@ import command.DeleteCommand;
 import command.DoneCommand;
 import command.ListCommand;
 import command.ByeCommand;
+import command.FindCommand;
 
 /**
  * Parser class to parse a given input command.
@@ -48,6 +49,12 @@ public class Parser {
             break;
         case "bye":
             command = new ByeCommand();
+            break;
+        case "find":
+            if (arr.length < 2) {
+                throw new DukeException("An expression is required to find the task.");
+            }
+            command = new FindCommand(arr[1]);
             break;
         default:
             throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");

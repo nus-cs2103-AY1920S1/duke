@@ -48,7 +48,7 @@ public class TaskList {
      *
      * @return ArrayList representation.
      */
-    protected ArrayList<Task> getList() {
+    public ArrayList<Task> getList() {
         return this.list;
     }
 

@@ -1,23 +1,23 @@
-class Task {
+public class Task {
+    protected String description;
+    protected boolean isDone;
 
-    boolean isDone = false;
-    String taskName;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
 
-    Task(String taskName) {
-        this.taskName = taskName;
+    private String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     public void markAsDone() {
         isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [✓] " + taskName);
     }
 
     @Override
     public String toString() {
-        if (isDone) {
-            return "[✓] " + taskName;
-        }
-        return "[✗] " + taskName;
+        return "[" + getStatusIcon() + "] " + description;
     }
+
 }

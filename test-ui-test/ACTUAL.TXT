@@ -3,14 +3,17 @@ Hello! I'm Duke
 What can I do for you?
 Got it. I've added this task: 
 [T][-] return book
-Now you have 1 tasks in the list.
+Now you have 4 tasks in the list.
 Got it. I've added this task: 
 [T][-] return books
-Now you have 2 tasks in the list.
+Now you have 5 tasks in the list.
 Here are the tasks in your list:
-1. [T][-] return book
-2. [T][-] return books
+1. [T][-] return books
+2. [T][-] return book
+3. [T][-] return books
+4. [T][-] return book
+5. [T][-] return books
 Noted. I've removed this task:
-[T][-] return book
-Now you have 1 tasks in the list
+[T][-] return books
+Now you have 4 tasks in the list
 Bye. Hope to see you again soon!

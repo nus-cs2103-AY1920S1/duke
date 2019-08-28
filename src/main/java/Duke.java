@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
@@ -21,26 +20,12 @@ public class Duke {
 
     public void run() {
         ui.greet();
-    }
+        String command = ui.readCommand();
 
-    public void end() {
-        ui.bye();
-        storage.rewriteData();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("C:\\Users\\hooncp\\Desktop\\duke\\data\\data.txt");
-        duke.run();
-
-        Scanner scanner = new Scanner(System.in);
-        String command = "";
-        if (scanner.hasNextLine()) {
-            command = scanner.nextLine();
-        }
         while (!command.equals("") && !command.equalsIgnoreCase("bye")) {
             try {
                 if (command.equalsIgnoreCase("list")) {
-                    duke.taskList.list();
+                    taskList.list();
                 } else {
                     String[] commandSplit = command.split(" ");
                     String deadline = "deadline";
@@ -48,10 +33,10 @@ public class Duke {
                     String todo = "todo";
                     if (commandSplit[0].equalsIgnoreCase("done")) {
                         int index = Integer.parseInt(commandSplit[1]);
-                        duke.taskList.done(index);
+                        taskList.done(index);
                     } else if (commandSplit[0].equalsIgnoreCase("delete")) {
                         int index = Integer.parseInt(commandSplit[1]);
-                        duke.taskList.delete(index);
+                        taskList.delete(index);
                     } else if (commandSplit[0].equalsIgnoreCase(deadline)) {
                         String details = command.substring(deadline.length()).trim();
                         if (details.length() == 0) {
@@ -60,7 +45,7 @@ public class Duke {
                         String[] detail = details.split(" /by ");
 
                         Task addTask = new Deadline(detail[0], detail[1]);
-                        duke.taskList.add(addTask);
+                        taskList.add(addTask);
                     } else if (commandSplit[0].equalsIgnoreCase(event)) {
                         String details = command.substring(event.length()).trim();
                         if (details.length() == 0) {
@@ -68,14 +53,14 @@ public class Duke {
                         }
                         String[] detail = details.split(" /at ");
                         Task addTask = new Event(detail[0], detail[1]);
-                        duke.taskList.add(addTask);
+                        taskList.add(addTask);
                     } else if (commandSplit[0].equalsIgnoreCase(todo)) {
                         String details = command.substring(todo.length()).trim();
                         if (details.length() == 0) {
                             throw new InputMismatchException("The description of a todo cannot be empty.");
                         }
                         Task addTask = new Todo(details);
-                        duke.taskList.add(addTask);
+                        taskList.add(addTask);
                     } else {
                         throw new InputMismatchException("I'm sorry, but I don't know what that means :-(");
                     }
@@ -87,8 +72,18 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! " + e.getMessage());
             }
-            command = scanner.nextLine();
+            command = ui.readCommand();
         }
+    }
+
+    public void end() {
+        ui.bye();
+        storage.rewriteData();
+    }
+
+    public static void main(String[] args) {
+        Duke duke = new Duke("C:\\Users\\hooncp\\Desktop\\duke\\data\\data.txt");
+        duke.run();
         duke.end();
     }
 }

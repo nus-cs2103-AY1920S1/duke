@@ -1,6 +1,17 @@
+import java.util.Scanner;
+
 public class UI {
+    Scanner scanner = new Scanner(System.in);
 
     public UI() {
+    }
+
+    public String readCommand() {
+        String command = "";
+        if (scanner.hasNextLine()) {
+            command = scanner.nextLine();
+        }
+        return command;
     }
 
     public void greet() {

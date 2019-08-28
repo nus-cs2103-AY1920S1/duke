@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Parser {
 
     public static void parse(String command, TaskList tasks, Storage storage, Ui ui) {
-        String[] currArray = command.split("\\s+");
+        String[] currArray = command.split("\\s+", 2);
         try {
             checkValidCommand(currArray[0]);
             checkEmptyDesc(currArray);
@@ -16,6 +16,8 @@ public class Parser {
                 tasks.printDone(command, storage);
             } else if (currArray[0].equals("delete")) {
                 tasks.handleDelete(command, storage);
+            } else if (currArray[0].equals("find")) {
+                tasks.handleFind(currArray[1]);
             } else {
                 tasks.handleTask(command, storage);
             }
@@ -32,7 +34,7 @@ public class Parser {
         validCommands.add("done");
         validCommands.add("list");
         validCommands.add("bye");
-        validCommands.add("delete");
+        validCommands.add("find");
         if (!validCommands.contains(command)) {
             throw new DukeException("    ____________________________________________________________\n" + "     OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "    ____________________________________________________________\n" + "\n");
         }

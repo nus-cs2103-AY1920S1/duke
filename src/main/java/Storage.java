@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -26,48 +27,52 @@ public class Storage {
         // parse input and create tasks
         assert sc != null;
         while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            String[] savedTask = line.split("\\|");
+            try {
+                String line = sc.nextLine();
+                String[] savedTask = line.split("\\|");
 
-            for (int i = 0; i < savedTask.length; i++) {
-                savedTask[i] = savedTask[i].trim();
-            }
-
-            switch(savedTask[0]) {
-            case "T":
-                name = savedTask[2];
-                done = savedTask[1];
-                Task todo = new Todo(name);
-                if (done.equals("1")) {
-                    todo.markAsDone();
+                for (int i = 0; i < savedTask.length; i++) {
+                    savedTask[i] = savedTask[i].trim();
                 }
-                tasks.add(todo);
-                break;
 
-            case "D":
-                name = savedTask[2];
-                done = savedTask[1];
-                time = savedTask[3];
-                Task deadline = new Deadline(name, time);
-                if (done.equals("1")) {
-                    deadline.markAsDone();
+                switch (savedTask[0]) {
+                    case "T":
+                        name = savedTask[2];
+                        done = savedTask[1];
+                        Task todo = new Todo(name);
+                        if (done.equals("1")) {
+                            todo.markAsDone();
+                        }
+                        tasks.add(todo);
+                        break;
+
+                    case "D":
+                        name = savedTask[2];
+                        done = savedTask[1];
+                        time = savedTask[3];
+                        Task deadline = new Deadline(name, new StringToDate(time));
+                        if (done.equals("1")) {
+                            deadline.markAsDone();
+                        }
+                        tasks.add(deadline);
+                        break;
+
+                    case "E":
+                        name = savedTask[2];
+                        done = savedTask[1];
+                        time = savedTask[3];
+                        Task event = new Event(name, new StringToDate(time));
+                        if (done.equals("1")) {
+                            event.markAsDone();
+                        }
+                        tasks.add(event);
+                        break;
+
+                    default:
+                        break;
                 }
-                tasks.add(deadline);
-                break;
-
-            case "E":
-                name = savedTask[2];
-                done = savedTask[1];
-                time = savedTask[3];
-                Task event = new Event(name, time);
-                if (done.equals("1")) {
-                    event.markAsDone();
-                }
-                tasks.add(event);
-                break;
-
-            default:
-                break;
+            } catch (ParseException e) {
+                System.out.print("Format of date when writing to file is incorrect!");
             }
         }
         sc.close();
@@ -77,7 +82,7 @@ public class Storage {
     /**
      * Takes the current list of task objects and adds them in the correct format to the data file.
      */
-    public void writeToFile() {
+    public void writeToFile() throws DukeException {
         FileWriter fw = null;
         try {
             fw = new FileWriter(filePath);
@@ -96,7 +101,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Oh no got IOE");
+            throw new DukeException("Internal error, work may not be saved!");
         }
     }
 }

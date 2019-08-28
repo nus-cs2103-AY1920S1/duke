@@ -19,7 +19,7 @@ public class ListCommand extends Command {
 
     @Override
     /**
-     * Returns if this is an exiting command.
+     * Returns whether this is an exiting command.
      * @return Whether this command exits the application
      */
     public boolean isExit() {

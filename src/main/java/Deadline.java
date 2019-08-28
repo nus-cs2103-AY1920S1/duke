@@ -1,30 +1,29 @@
 public class Deadline extends Task {
-    protected String date;
-    protected String time;
+    protected String unformattedDateTime;
+    protected String formattedDateTime;
+
+    public Deadline(String desc, String dateTime) {
+        super(desc);
+        unformattedDateTime = dateTime;
+
+        Parser parser = new Parser();
+        formattedDateTime = parser.convertStringToTime(dateTime, "deadline");
+    }
 
     public Deadline(String desc, String dateTime, boolean isDone) {
         super(desc, isDone);
-        date = dateTime;
-        time = "";
-    }
+        unformattedDateTime = dateTime;
 
-    public Deadline(String desc, String date, String time) {
-        super(desc);
-        this.date = date;
-        this.time = time;
-    }
-
-    public Deadline(String desc, String date, String time, boolean isDone) {
-        super(desc, isDone);
-        this.date = date;
-        this.time = time;
+        Parser parser = new Parser();
+        formattedDateTime = parser.convertStringToTime(dateTime, "deadline");
     }
 
     @Override
     public String toString() {
-        if (time.isEmpty()) {
-            return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, date);
-        }
-        return String.format("[D][%s] %s (by: %s %s)", getStatusIcon(), description, date, time);
+        return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, formattedDateTime);
+    }
+
+    public String toText() {
+        return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, unformattedDateTime);
     }
 }

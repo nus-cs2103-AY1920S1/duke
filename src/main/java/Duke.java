@@ -145,18 +145,9 @@ public class Duke {
                         errorMessage = makeSpace(5) + "The date/time of your deadline cannot be empty!";
                     } else {
                         String taskDescription = contentDateTime[0].strip();
-                        String[] dateTime = contentDateTime[1].strip().split(" ");
+                        String dateTime = contentDateTime[1].strip();
 
-                        if (dateTime.length == 1) {
-                            makeNewDeadline(taskDescription, dateTime[0], "");
-                        } else if (dateTime.length == 2) {
-                            makeNewDeadline(taskDescription, dateTime[0], dateTime[1]);
-                        } else if (dateTime.length == 3) {
-                            makeNewEvent(taskDescription, dateTime[0] + " " + dateTime[1], dateTime[2]);
-                        } else {
-                            errorMessage = makeSpace(5) + "Sorry but there seems to be too much information in the\n"
-                                    + makeSpace(5) + "Date & Time field of your deadline...\uD83D\uDE25";
-                        }
+                        makeNewDeadline(taskDescription, dateTime);
                     }
                 } else {
                     errorMessage = makeSpace(5) + "Sorry but I can't seem to detect the due date of the deadline!";
@@ -180,25 +171,16 @@ public class Duke {
                         errorMessage = makeSpace(5) + "The date/time of your Event cannot be empty!";
                     } else {
                         String taskDescription = contentDateTime[0].strip();
-                        String[] dateTime = contentDateTime[1].strip().split(" ");
+                        String dateTime = contentDateTime[1].strip();
 
-                        if (dateTime.length == 1) {
-                            makeNewEvent(taskDescription, dateTime[0], "");
-                        } else if (dateTime.length == 2) {
-                            makeNewEvent(taskDescription, dateTime[0], dateTime[1]);
-                        } else if (dateTime.length == 3) {
-                            makeNewEvent(taskDescription, dateTime[0] + " " + dateTime[1], dateTime[2]);
-                        } else {
-                            errorMessage = makeSpace(5) + "Sorry but there seems to be too much information in the\n"
-                                    + makeSpace(5) + "Date & Time field of your event...\uD83D\uDE25";
-                        }
+                        makeNewEvent(taskDescription, dateTime);
                     }
                 } else {
                     errorMessage = makeSpace(5) + "Sorry but I can't seem to detect the Date & Time of the event!";
                 }
 
             } else {
-                errorMessage = makeSpace(5) + "The description of a Event cannot be empty!";
+                errorMessage = makeSpace(5) + "The description of an Event cannot be empty!";
             }
         } else {
             userInput.close();
@@ -252,10 +234,9 @@ public class Duke {
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void makeNewDeadline(String desc, String date, String time) throws IOException {
+    private void makeNewDeadline(String desc, String dateTime) throws IOException {
         IOHandler ioHandler = new IOHandler();
-        Deadline currentDeadline = new Deadline(desc, date, time);
-
+        Deadline currentDeadline = new Deadline(desc, dateTime);
         tasks.add(currentDeadline);
         ioHandler.addToLocalSave(currentDeadline);
 
@@ -264,10 +245,10 @@ public class Duke {
         System.out.printf("%sNow you have %d task(s) in your list.\n", makeSpace(5), tasks.size());
     }
 
-    private void makeNewEvent(String desc, String date, String time) throws IOException {
+    
+    private void makeNewEvent(String desc, String dateTime) throws IOException {
         IOHandler ioHandler = new IOHandler();
-        Event currentEvent = new Event(desc, date, time);
-
+        Event currentEvent = new Event(desc, dateTime);
         tasks.add(currentEvent);
         ioHandler.addToLocalSave(currentEvent);
 

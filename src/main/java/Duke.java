@@ -1,7 +1,30 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Duke {
+    protected static LocalDateTime convertDateAndTime(String rawTimestamp) throws DukeException {
+        String[] dateTime = rawTimestamp.split(" ");
+        String[] datePortion = dateTime[0].split("/");
+        String timePortion = dateTime[1];
+
+
+        if (dateTime.length == 2) {
+            int date = Integer.parseInt(datePortion[0]);
+            int month = Integer.parseInt(datePortion[1]);
+            int year = Integer.parseInt(datePortion[2]);
+            int hour = Integer.parseInt(timePortion.substring(0, 2));
+            int minute = Integer.parseInt(timePortion) % 100;
+
+            return LocalDateTime.of(year, month, date, hour, minute);
+        } else {
+            throw new DukeException("Date time format invalid");
+        }
+    }
+
     public static void main(String[] args) {
         LinkedList<Task> taskList = new LinkedList<>();
 
@@ -51,7 +74,8 @@ public class Duke {
                         }
 
                         System.out.println("Got it. I've added this task: ");
-                        Deadline newDeadline = new Deadline(contentList[0], contentList[1]);
+                        LocalDateTime convertedTimeStamp = convertDateAndTime(contentList[1]);
+                        Deadline newDeadline = new Deadline(contentList[0], convertedTimeStamp);
                         System.out.println(newDeadline);
                         taskList.add(newDeadline);
                     } else if (actionKey.equals("event")) {
@@ -65,7 +89,8 @@ public class Duke {
                         }
 
                         System.out.println("Got it. I've added this task: ");
-                        Event newEvent = new Event(contentList[0], contentList[1]);
+                        LocalDateTime convertedTimeStamp = convertDateAndTime(contentList[1]);
+                        Event newEvent = new Event(contentList[0], convertedTimeStamp);
                         System.out.println(newEvent);
                         taskList.add(newEvent);
                     } else if (actionKey.equals("todo")) {

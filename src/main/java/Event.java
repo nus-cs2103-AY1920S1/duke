@@ -1,14 +1,18 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    protected String at;
+    protected LocalDateTime at;
+    protected DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     // to manage incoming event list at specific location
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + " (at: " + at + ")";
+        return "[E][" + getStatusIcon() + "] " + description + " (at: " + at.format(dateTimeFormatter) + ")";
     }
 }

@@ -52,6 +52,7 @@ public class Duke {
 
                     // Operate according to the command type.
                     switch (commandType) {
+<<<<<<< HEAD
                         case "list":
                             tasks.showTasks();
                             break;
@@ -80,6 +81,34 @@ public class Duke {
                                     parser.getTime(), false);
                             storage.updateFile(tasks);
                             break;
+=======
+                    case "list":
+                        tasks.showTasks();
+                        break;
+                    case "done":
+                        tasks.doneTask(parser.getIndex());
+                        storage.updateFile(tasks);
+                        break;
+                    case "delete":
+                        tasks.deleteTask(parser.getIndex());
+                        storage.updateFile(tasks);
+                        break;
+                    case "todo":
+                        tasks.addTodo(parser.getActivityNameWithoutTime(),
+                                false);
+                        storage.updateFile(tasks);
+                        break;
+                    case "deadline":
+                        tasks.addDeadline(parser.getActivityNameWithTime(),
+                                parser.getDeadline(), false);
+                        storage.updateFile(tasks);
+                        break;
+                    case "event":
+                        tasks.addEvent(parser.getActivityNameWithTime(),
+                                parser.getTime(), false);
+                        storage.updateFile(tasks);
+                        break;
+>>>>>>> branch-A-CodingStandard
                     }
                 }
             } catch (DukeException | IOException ex) {

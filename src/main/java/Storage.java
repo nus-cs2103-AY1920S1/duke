@@ -50,23 +50,26 @@ public class Storage {
             }
             // Checks the type of task.
             switch (part[0]) {
-                case "T":
-                    tasks.add(new Todo(part[2], isDone));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(part[2], isDone, part[3]));
-                    break;
-                case "E":
-                    tasks.add(new Event(part[2], isDone, part[3]));
-                    break;
+            case "T":
+                tasks.add(new Todo(part[2], isDone));
+                break;
+            case "D":
+                tasks.add(new Deadline(part[2], isDone, part[3]));
+                break;
+            case "E":
+                tasks.add(new Event(part[2], isDone, part[3]));
+                break;
             }
         }
         return tasks;
     }
 
+<<<<<<< HEAD
     /**
      * Saves the tasks in the list whenever there is any change.
      */
+=======
+>>>>>>> branch-A-CodingStandard
     public void updateFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks.getTaskList()) {

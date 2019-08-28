@@ -55,16 +55,20 @@ public class TaskList {
      */
     public void addAndPrint(Task newTask) {
         list.add(newTask);
-        System.out.println("Got it. I've added this task: \n  " +
-                newTask + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task: \n  "
+                + newTask + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
+<<<<<<< HEAD
     /**
      * Creates a new Todo object and adds it into the list.
      * @param activityName String of take name.
      * @param isDone true if the task is done, or false otherwise.
      */
     public void addTodo(String activityName, boolean isDone){
+=======
+    public void addTodo(String activityName, boolean isDone) {
+>>>>>>> branch-A-CodingStandard
         Task newTask = new Todo(activityName,false);
         addAndPrint(newTask);
     }
@@ -91,14 +95,17 @@ public class TaskList {
         addAndPrint(newTask);
     }
 
+<<<<<<< HEAD
     /**
      * Marks the task of the specified index to "done".
      * @param idx integer that represents the index of the task in the command.
      */
+=======
+>>>>>>> branch-A-CodingStandard
     public void doneTask(int idx) {
         list.get(idx - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done: \n  " +
-                list.get(idx - 1));
+        System.out.println("Nice! I've marked this task as done: \n  "
+                + list.get(idx - 1));
     }
 
     /**
@@ -107,8 +114,8 @@ public class TaskList {
      */
     public void deleteTask(int idx) {
         Task removed = list.remove(idx - 1);
-        System.out.println("Noted. I've removed this task: \n  " +
-                removed + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task: \n  " + removed
+                + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     /**

@@ -81,6 +81,7 @@ public class Parser {
      */
     public boolean checkValidity() throws DukeException {
         switch (getCommandType()) {
+<<<<<<< HEAD
             case "list":
                 break;
             case "done": case "delete":
@@ -118,6 +119,36 @@ public class Parser {
                 // random inputs.
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know " +
                         "what that means :-(");
+=======
+        case "list":
+            break;
+        case "done": case "delete":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! You need to enter an index.");
+            }
+        case "todo":
+            // check task description.
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of a todo "
+                        + "cannot be empty.");
+            }
+            break;
+        case "deadline":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline "
+                        + "cannot be empty.");
+            }
+            break;
+        case "event":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of an event "
+                        + "cannot be empty.");
+            }
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what "
+                    + "that means :-(");
+>>>>>>> branch-A-CodingStandard
         }
         return true;
     }

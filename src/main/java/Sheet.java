@@ -15,9 +15,9 @@ public class Sheet {
     }
 
     public void delete(int index) {
-        this.list.remove(index);
         System.out.print(Formatter.LINE + Formatter.INDENT + Formatter.REMOVE + Formatter.INDENT + "  "
                 + this.list.get(index - 1).toString() + "\n");
+        this.list.remove(index - 1);
         this.numOfTask--;
         this.count();
         System.out.printf(Formatter.LINE);

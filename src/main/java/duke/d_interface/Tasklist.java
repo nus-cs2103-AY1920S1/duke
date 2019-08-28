@@ -9,13 +9,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
+/**
+ * Stores the task list of Duke so as to track the list of tasks that the
+ * user currently has.
+ */
 public class Tasklist {
+    /**
+     * This field stores the Array List of tasks that the user has.
+     */
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Adds the task into the task list.
+     * @param task Current task that needs to be added to the task list.
+     */
     public void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Delete specified task in the task list.
+     * @param size Takes in the specified index of the task to be deleted.
+     * @param currTask Specific task to be deleted.
+     */
     public void deleteComplete(int size, Task currTask) {
         printLine();
         System.out.println("     Noted. I've removed this task: \n       " +
@@ -25,6 +41,12 @@ public class Tasklist {
         System.out.println();
     }
 
+    /**
+     * Filter the string command and get the description of the task.
+     * @param commandArr User input for the current task.
+     * @return the description of the current task.
+     * @throws DukeException Exception thrown when the description is empty.
+     */
     public String getDescription(String[] commandArr) throws DukeException {
         StringJoiner description = new StringJoiner(" ");
         int index;
@@ -53,6 +75,12 @@ public class Tasklist {
         return description.toString();
     }
 
+    /**
+     * Filter the string command and get the timing of the task.
+     * @param commandArr User input for the current task.
+     * @return the timing of the current task.
+     * @throws DukeException Exception thrown when the timing is empty.
+     */
     public String getTime(String[] commandArr) throws DukeException {
         StringJoiner timing = new StringJoiner(" ");
         int index;
@@ -75,6 +103,11 @@ public class Tasklist {
         return timing.toString();
     }
 
+    /**
+     * Adds the new task on hand and print out the new task list.
+     * @param task Current task to be added into the task list.
+     * @param size Gives the current size of the task list.
+     */
     public void printTask(Task task, int size) {
         printLine();
         System.out.println("     Got it. I've added this task: \n       " + task);
@@ -83,6 +116,10 @@ public class Tasklist {
         System.out.println();
     }
 
+    /**
+     * Marks the current task as done and print out the command.
+     * @param currTask Current task which has to be marked as done.
+     */
     public void taskComplete(Task currTask) {
         printLine();
         System.out.println("     Nice! I've marked this task as done: \n       " + currTask);
@@ -90,6 +127,10 @@ public class Tasklist {
         System.out.println();
     }
 
+    /**
+     * Print out the current list of tasks on hand when the "list" command is
+     * prompted.
+     */
     public void printArray() {
         printLine();
         System.out.println("     Here are the tasks in your list:");
@@ -100,18 +141,35 @@ public class Tasklist {
         System.out.println();
     }
 
+    /**
+     * Getter method which access the task list and retrieve the desired task.
+     * @param index Index of the specific task needed.
+     * @return the specific task indicated.
+     */
     public Task get(int index) {
         return taskList.get(index);
     }
 
+    /**
+     * Deletes the specific task indicated in the task list.
+     * @param index Index of the specific task to be deleted in the task list.
+     */
     public void remove(int index) {
         taskList.remove(index);
     }
 
+    /**
+     * Getter method which gives the size of the current task list.
+     * @return the size of the task list currently.
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Loads the duke.txt file and print out the current task list in it.
+     * @param textArr String of text from the duke.txt file.
+     */
     public void loadEvents(ArrayList<String> textArr) {
         for (int i = 0; i < textArr.size(); i++) {
             String[] str = textArr.get(i).split(" \\| ");
@@ -138,6 +196,9 @@ public class Tasklist {
         System.out.println();
     }
 
+    /**
+     * Generic line used for indentation purposes.
+     */
     private static void printLine() {
         System.out.println("    ____________________________________________________________");
     }

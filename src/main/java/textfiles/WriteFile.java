@@ -13,15 +13,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Writes duke.txt file in the user local drive and save it whenever
+ * there is any commands which changes the task list in Duke.
+ */
 public class WriteFile extends Storage {
+    /**
+     * This field stores the path to duke.txt file.
+     */
     private String path;
+    /**
+     * This field determines whether the txt file can be overwritten.
+     */
     private boolean append_to_file;
 
+    /**
+     * Constructor for the WriteFile class. Edits and saves any changes on
+     * the task list of Duke and store it in the user's local drive.
+     * @param path File path in which duke.txt is going to be saved at.
+     * @param append_to_file Determines whether the file is editable.
+     */
     public WriteFile(String path, boolean append_to_file) {
         this.path = path;
         this.append_to_file = append_to_file;
     }
 
+    /**
+     * Write any changes made to Duke task list and save it.
+     * @param text Text which describes the task and Duke will update the
+     *             duke.txt file accordingly.
+     * @throws IOException Exception thrown when there is no duke.txt file
+     * to write to.
+     */
     public void writeToFile(String text) throws IOException {
         FileWriter write = new FileWriter(path, append_to_file);
         PrintWriter print_line = new PrintWriter(write);
@@ -31,6 +54,12 @@ public class WriteFile extends Storage {
         print_line.close();
     }
 
+    /**
+     * Remove the specific task from the task list based on index.
+     * @param f Indicates the file name to be renamed into.
+     * @param toRemove Index of the task to be removed.
+     * @throws IOException Exception thrown when there is no duke.txt file.
+     */
     public void removeNthLine(String f, int toRemove) throws IOException {
         File tmp = File.createTempFile("tmp", ".txt");
 
@@ -56,6 +85,14 @@ public class WriteFile extends Storage {
         }
     }
 
+    /**
+     * Edits the current task. Used when the command "done" is called.
+     * @param f Indicates the file name to be renamed into.
+     * @param toReplace Index of the task to be removed.
+     * @param currTask Indicates the current task which needs to be marked
+     *                 as done.
+     * @throws IOException Exception thrown when there is no duke.txt file.
+     */
     public void replaceNthLine(String f, int toReplace, Task currTask) throws IOException {
         File tmp = File.createTempFile("tmp", ".txt");
 

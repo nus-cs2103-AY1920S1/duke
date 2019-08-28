@@ -30,12 +30,12 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " +
-                this.description;
+            this.description;
     }
 
     protected String toFileString() {
         return (char) 31 + (this.isDone ? "1" : "0") + (char) 31 +
-                this.description;
+            this.description;
     }
 
     ;
@@ -46,15 +46,15 @@ public abstract class Task {
         String[] prop = str.split("\\x1f");
         Task t = null;
         switch (prop[0]) {
-            case "D":
-                t = new Deadline(prop[2], prop[3]);
-                break;
-            case "E":
-                t = new Event(prop[2], prop[3]);
-                break;
-            case "T":
-                t = new Todo(prop[2]);
-                break;
+        case "D":
+            t = new Deadline(prop[2], prop[3]);
+            break;
+        case "E":
+            t = new Event(prop[2], prop[3]);
+            break;
+        case "T":
+            t = new Todo(prop[2]);
+            break;
         }
         if (t != null && prop[1].equals("1"))
             t.setDone();
@@ -64,14 +64,14 @@ public abstract class Task {
     protected static DateTimeFormatter inDTF() {
         LocalDateTime dt = LocalDateTime.now();
         return new DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendPattern("[MMMM][MMM][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ ]['T'][HH[':']mm]")
-                .parseDefaulting(ChronoField.HOUR_OF_DAY, dt.getHour())
-                .parseDefaulting(ChronoField.MINUTE_OF_HOUR, dt.getMinute())
-                .parseDefaulting(ChronoField.YEAR_OF_ERA, dt.getYear())
-                .parseDefaulting(MONTH_OF_YEAR, dt.getMonthValue())
-                .parseDefaulting(ChronoField.DAY_OF_MONTH, dt.getDayOfMonth())
-                .toFormatter();
+            .parseCaseInsensitive()
+            .appendPattern("[MMMM][MMM][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ ]['T'][HH[':']mm]")
+            .parseDefaulting(ChronoField.HOUR_OF_DAY, dt.getHour())
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, dt.getMinute())
+            .parseDefaulting(ChronoField.YEAR_OF_ERA, dt.getYear())
+            .parseDefaulting(MONTH_OF_YEAR, dt.getMonthValue())
+            .parseDefaulting(ChronoField.DAY_OF_MONTH, dt.getDayOfMonth())
+            .toFormatter();
     }
 }
 

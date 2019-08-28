@@ -21,7 +21,7 @@ public class TaskList {
         Iterator<Task> it = ls.iterator();
         while (it.hasNext()) {
             sb.append(it.next().toFileString())
-                    .append((char) 30);
+                .append((char) 30);
         }
         if (sb.length() > 0)
             sb.setLength(sb.length() - 1);
@@ -34,8 +34,8 @@ public class TaskList {
         Iterator<Task> it = ls.iterator();
         while (it.hasNext()) {
             sb.append(i++)
-                    .append(".")
-                    .append(it.next());
+                .append(".")
+                .append(it.next());
         }
         return sb.toString();
     }
@@ -60,5 +60,20 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsDukeException();
         }
+    }
+
+    public String findAllIncludesAsUiString(String str) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        int i = 1;
+        Iterator<Task> it = ls.iterator();
+        while (it.hasNext()) {
+            String taskString = it.next().toString();
+            if (taskString.contains(str)) {
+                sb.append(i++)
+                    .append(".")
+                    .append(taskString);
+            }
+        }
+        return sb.toString();
     }
 }

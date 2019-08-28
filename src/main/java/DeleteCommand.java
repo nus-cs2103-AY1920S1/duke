@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
         Task t = tasks.remove(index);
         storage.rewrite(tasks.getSerialized());
         ui.show("Noted. I've removed this task:\n  " +
-                t +
-                "Now you have " + tasks.size() + " tasks in the list.");
+            t +
+            "Now you have " + tasks.size() + " tasks in the list.");
     }
 }

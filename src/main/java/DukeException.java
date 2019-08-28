@@ -7,7 +7,7 @@ public class DukeException extends Exception {
 class EmptyFieldDukeException extends DukeException {
     public EmptyFieldDukeException(String attrib, String task) {
         super("\u2639 OOPS!!! The " + attrib + " of a" +
-                (task.startsWith("a|e|i|o|u") ? "n " + task : ' ' + task) + " cannot be empty.");
+            (task.startsWith("a|e|i|o|u") ? "n " + task : ' ' + task) + " cannot be empty.");
     }
 }
 
@@ -31,15 +31,17 @@ class IndexFormatDukeException extends DukeException {
 
 class DateTimeParseDukeException extends DukeException {
     public DateTimeParseDukeException() {
-        super("DateTime cannot be resolved.\nExpected formats:\n2/12/2019 1800\nT1800\n2 Dec 2019\ndecember2T1300\nAnd other non-ambiguous derivatives.\nLeftmost is taken as day unless it is non-numerical month.\nNon-provided datetime defaults to current system relative.");
+        super("DateTime cannot be resolved.\nExpected formats:\n2/12/2019 1800\nT1800\n2 Dec "
+            + "2019\ndecember2T1300\nAnd other non-ambiguous derivatives.\nLeftmost is taken as day unless it is "
+            + "non-numerical month.\nNon-provided datetime defaults to current system relative.");
     }
 }
 
 class LoadFileFailDukeException extends DukeException {
     public LoadFileFailDukeException(String filePath) {
         super("Oops... " +
-                filePath +
-                " cannot be loaded.\nIt will be automatically overwritten once you have a list.");
+            filePath +
+            " cannot be loaded.\nIt will be automatically overwritten once you have a list.");
     }
 }
 

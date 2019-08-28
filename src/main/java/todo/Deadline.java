@@ -1,17 +1,21 @@
 package todo;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDateTime deadline;
+    private DateTimeFormatter formatter;
 
     public Deadline(String description, String deadline) {
         super(description);
 
-        this.deadline = deadline;
+        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
     @Override
     public String toString() {
         return "[D]" + getStatusIcon() + this.getDescription() +
-                " (by: " + deadline + ")";
+                " (by: " + deadline.format(formatter) + ")";
     }
 }

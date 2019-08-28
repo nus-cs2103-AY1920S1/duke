@@ -46,14 +46,24 @@ public abstract class Command {
     }
 
     /**
+     * Construct a find task command that finds tasks based on keywords.
+     *
+     * @param arr the user input line
+     * @return the find task command
+     */
+    public static Command getFindTaskCommand(String[] arr) {
+        String[] keywords = arr[1].trim().split(" ");
+        return new FindCommand(keywords);
+    }
+
+    /**
      * An abstract method to execute the user command.
      *
      * @param tasklist the TaskList object for adding and deleting tasks.
      * @param ui       the Ui object for raising prompts after executing tasks.
-     * @param storage  the Storage object to save latest changes in the tasklist.
      * @throws FormatException when the user input is incompatible with existing command formats.
      */
-    public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException;
+    public abstract void execute(TaskList tasklist, Ui ui) throws FormatException;
 
     /**
      * Flag of whether the program should terminate.

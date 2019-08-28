@@ -217,10 +217,19 @@ public class Parser {
                 case "event":
                     validateAddTaskCommandLength(arr);
                     return Command.getAddTaskCommand(arr);
+                case "find":
+                    validateFindTaskCommandFormat(arr);
+                    return Command.getFindTaskCommand(arr);
                 default:
                     unrecognizedAction();
                     return new ByeCommand(); // not reachable
             }
+    }
+
+    private void validateFindTaskCommandFormat(String[] arr) throws FormatException {
+        if(arr.length < 2) {
+            throw new FormatException("☹ OOPS!!! Format of " + arr[0] + " should be done keywards.");
+        }
     }
 
     /**

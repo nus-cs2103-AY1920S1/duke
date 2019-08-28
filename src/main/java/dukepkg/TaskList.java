@@ -46,6 +46,11 @@ public class TaskList {
         tasks.add(t);
     }
 
+    /**
+     * Delete a task from the list.
+     *
+     * @param index the list index of the task to be deleted.
+     */
     public void deleteTask(int index) { tasks.remove(index); }
 
 }

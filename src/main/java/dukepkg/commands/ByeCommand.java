@@ -1,7 +1,5 @@
 package dukepkg.commands;
 
-import dukepkg.Storage;
-
 import dukepkg.TaskList;
 import dukepkg.Ui;
 
@@ -11,7 +9,7 @@ import dukepkg.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public void execute(TaskList tasklist, Ui ui) {
         ui.showExitMsg();
         System.exit(0);
     }

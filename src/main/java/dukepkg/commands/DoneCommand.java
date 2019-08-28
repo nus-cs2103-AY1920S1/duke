@@ -14,14 +14,14 @@ public class DoneCommand extends Command {
     /**
      * Instantiates a new Done command.
      *
-     * @param index the index of the task that is going to be marked as finished in the tasklist.
+     * @param index the index of the task that is going to be marked as finished in the task list.
      */
     public DoneCommand(int index) {
         this.index = index;
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
+    public void execute(TaskList tasklist, Ui ui) throws FormatException {
         Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
         TaskList.tasks.get(index).markDone();
         ui.showTaskDonePrompt(TaskList.tasks.get(index));

@@ -7,13 +7,12 @@ import dukepkg.exceptions.DukeException;
  * Duke, the task bot class.
  */
 public class Duke {
-    private static Storage storage;
     private static Ui ui;
     private static TaskList tasklist;
     private static Parser parser;
 
-    private Duke(String filePath) {
-        storage = new Storage(filePath);
+    private Duke() {
+        Storage storage = new Storage("data/tasks.txt");
         ui = new Ui();
         tasklist = new TaskList(storage, ui);
         tasklist.loadTaskHistory();
@@ -27,7 +26,7 @@ public class Duke {
             try {
                 String command = ui.readCommand();
                 Command c = parser.constructCommand(command);
-                c.execute(tasklist, ui, storage);
+                c.execute(tasklist, ui);
                 isExit = c.isExit();
             } catch(DukeException e) {
                 ui.showDukeError(e);
@@ -41,6 +40,6 @@ public class Duke {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 }

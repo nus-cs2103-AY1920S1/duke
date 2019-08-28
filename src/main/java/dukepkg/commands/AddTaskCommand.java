@@ -21,7 +21,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
+    public void execute(TaskList tasklist, Ui ui) throws FormatException {
         Parser.checkDuplicate(TaskList.tasks, t);
         tasklist.addTask(t);
 

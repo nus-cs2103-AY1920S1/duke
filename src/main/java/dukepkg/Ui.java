@@ -21,7 +21,7 @@ public class Ui {
     }
 
     /**
-     * Show loading error of files.
+     * Shows loading error of files.
      *
      * @param e the error message.
      */
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Show task list.
+     * Shows task list.
      *
      * @param tasks the tasks to be displayed.
      */
@@ -44,14 +44,14 @@ public class Ui {
     }
 
     /**
-     * Show exit msg.
+     * Shows exit msg.
      */
     public void showExitMsg() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Show task done prompt.
+     * Shows task done prompt.
      *
      * @param t the task that has been marked as finished.
      */
@@ -62,7 +62,7 @@ public class Ui {
     }
 
     /**
-     * Show task deleted prompt.
+     * Shows task deleted prompt.
      *
      * @param t    the task that has been deleted.
      * @param size the number of the remaining tasks in the list
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Show added task prompt.
+     * Shows added task prompt.
      *
      * @param tasks the tasks list
      * @param t     the task to be added
@@ -88,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Show saving error. Cannot write to file.
+     * Shows saving error. Cannot write to file.
      *
      * @param e the error message.
      */
@@ -97,7 +97,7 @@ public class Ui {
     }
 
     /**
-     * Show greeting to user.
+     * Shows greeting to user.
      */
     public void showGreeting() {
         String greeting = "Hello! I'm Duke\n" +
@@ -106,7 +106,7 @@ public class Ui {
     }
 
     /**
-     * Show error of type duke exception.
+     * Shows error of type duke exception.
      *
      * @param e the error message.
      */
@@ -115,7 +115,7 @@ public class Ui {
     }
 
     /**
-     * Read command from user input.
+     * Reads command from user input.
      *
      * @return the input line from user.
      * @throws UnrecognizedException if there is no input from the user.
@@ -127,6 +127,20 @@ public class Ui {
             throw new UnrecognizedException("☹ OOPS!!! no input.");
             //System.exit(0);
             //return "";
+        }
+    }
+
+    /**
+     * Shows tasks that matches the keywords.
+     *
+     * @param selected the selected tasks
+     */
+    public void showMatchingTask(ArrayList<Task> selected) {
+        System.out.println("Here are the matching tasks in your list: ");
+        int counter = 0;
+        for(Task s : selected) {
+            counter ++;
+            System.out.println(counter + "." + s.toString());
         }
     }
 }

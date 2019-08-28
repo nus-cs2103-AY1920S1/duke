@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage storage) throws FormatException {
+    public void execute(TaskList tasklist, Ui ui) throws FormatException {
         Parser.validateModifyExistingTaskCommandIndex(index, TaskList.tasks.size());
         tasklist.deleteTask(index);
         Task t = TaskList.tasks.get(index);

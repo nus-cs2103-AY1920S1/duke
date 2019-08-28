@@ -6,7 +6,7 @@ package dukepkg;
 public class Task {
     private boolean done_ = false;
 
-    private String task_ = "";
+    private final String task_;
 
     /**
      * Instantiates a new Task.

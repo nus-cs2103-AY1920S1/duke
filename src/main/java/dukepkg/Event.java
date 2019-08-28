@@ -5,6 +5,7 @@ package dukepkg;
  */
 public class Event extends dukepkg.Task {
     private final String at;
+
     /**
      * Instantiates a new Event.
      *

@@ -3,7 +3,7 @@ package dukepkg.commands;
 import dukepkg.Task;
 
 /**
- * The command used to add a event into the tasklist.
+ * The command used to add a event into the task list.
  */
 class EventCommand extends AddTaskCommand {
     /**

@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class Deadline extends Task {
 
     public Deadline(String description) {
@@ -8,8 +10,7 @@ public class Deadline extends Task {
         super(description, isDone);
     }
 
-    public String toString() {
-        return "[D][" + getStatusIcon() + "] " + super.format_description();
+    public String repr() throws ParseException {
+        return "[D][" + getStatusIcon() + "] " + super.formatDescription();
     }
-
 }

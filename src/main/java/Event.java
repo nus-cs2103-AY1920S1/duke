@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class Event extends Task {
 
     public Event(String description) {
@@ -8,8 +10,7 @@ public class Event extends Task {
         super(description, isDone);
     }
 
-    public String toString() {
-        return "[E][" + getStatusIcon() + "] " + format_description();
+    public String repr() throws ParseException {
+        return "[E][" + getStatusIcon() + "] " + super.formatDescription();
     }
-
 }

@@ -8,12 +8,11 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
-    public String toString() {
+    public String repr() {
         return "[T][" + super.getStatusIcon() + "] " + description;
     }
 
     public String done() {
         return "  [T][✓] " + description;
     }
-
 }

@@ -2,6 +2,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a task (something that needs to be done)
+ * Parent class of different types of Task
+ */
 public class Task {
     protected String description;
     protected String subDescription; // For /by, /at
@@ -74,7 +78,14 @@ class Deadline extends Task {
     }
     public String getTaskType() { return "D"; }
 
-    // Returns true if string is of format 2/12/2019 1800
+    /**
+     * Returns whether description for /by is of
+     * recognised date-time format
+     * Format: 2/12/2019 1800
+     * Which can then be converted to format: 2 December 2019 6:00 pm
+     * @param str
+     * @return Whether description for /by can be converted
+     */
     private boolean isValidDateTimeFormat(String str) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyy hhmm");
         try {

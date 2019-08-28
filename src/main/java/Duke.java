@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.lang.Integer;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.StringBuilder;
 
 /**
  * Encapsulates attributes and behaviour of Duke, a personal assistant chatbot.
@@ -79,6 +82,9 @@ public class Duke {
     /** current command being processed by Duke */
     private String currentCommand;
 
+    /** Handler for loading from and writing to hard disk*/
+    private Storage storage;
+
     /**
      * Creates and initialises an instance of Duke.
      * <p>
@@ -86,15 +92,14 @@ public class Duke {
      * active status (listening or not listening), and an empty list of tasks
      * to be added to by the user.
      */
-    public Duke() {
+    public Duke(String filePath) {
         this.logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        this.welcomeMessage = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
+        this.welcomeMessage = "Hello! I'm Duke\n";
 
         this.exitMessage = "Bye. Hope to see you again soon!\n";
 
@@ -102,13 +107,17 @@ public class Duke {
         this.isListening = true;
         // initialise ArrayList to store Tasks
         this.tasks = new ArrayList<Task>();
+        // initialise handler for loading from and writing to hard disk
+        this.storage = new Storage(filePath);
     }
 
     /**
-     * Greets the user with the welcome message.
+     * Starts running Duke by showing a welcome message and the list of tasks
+     * currently being managed by Duke.
      */
-    public void greet() {
+    public void start() {
         System.out.print(welcomeMessage);
+        this.loadListFromFile();
     }
 
     /**
@@ -149,6 +158,8 @@ public class Duke {
     private void exit() {
         this.isListening = false;
         System.out.print(exitMessage);
+        this.loadListFromFile();
+
     }
 
     /**
@@ -196,18 +207,19 @@ public class Duke {
                 // try to obtain the description and date/time information of
                 // the deadline / event. Inform user if the input is in an
                 // incorrect format.
-                String[] splitTaskAttributes = taskAttributes.split("\\/");
+                String[] splitTaskAttributes = taskAttributes.split("\\/", 2);
                 String taskDescription = splitTaskAttributes[0];
                 String taskDateTime = splitTaskAttributes[1].split(" ", 2)[1];
+                System.out.println(taskDateTime);
 
                 if (taskType.equals("DEADLINE")) {
                     return new Deadline(taskDescription, taskDateTime);
                 } else if (taskType.equals("EVENT")) {
                     return new Event(taskDescription, taskDateTime);
                 }
-            } catch (IndexOutOfBoundsException exception) {
+            } catch (IndexOutOfBoundsException exceptionOne) {
                 System.out.println("Looks like your format is incorrect. "
-                        + "Please follow <event type> <description> / <day/date/time>");
+                        + "Please follow <event type> <description> / <dd/mm/yyyy> <hhmm>");
             }
         }
         return null;
@@ -221,7 +233,8 @@ public class Duke {
      * @throws IndexOutOfBoundsException if the user enters a task with an
      *      empty description.
      */
-    private void storeTask(String taskType) throws IndexOutOfBoundsException {
+    private void storeTask(String taskType)
+            throws IndexOutOfBoundsException {
         try {
             // try to get the task attributes from the current command
             // if the task attributes are empty, inform the user
@@ -236,6 +249,8 @@ public class Duke {
                         + "  " + newTask);
                 System.out.format("Now you have %d tasks in the list.\n",
                         this.tasks.size());
+                // write change to file
+                this.updateFile();
             }
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("Please enter a description of the " +
@@ -273,6 +288,10 @@ public class Duke {
                     currentTask.setTaskAsDone(true);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("   " + currentTask);
+
+                    // save changes to file
+                    this.updateFile();
+
                 } else {
                     System.out.println("This task has already been done!");
                 }
@@ -319,6 +338,9 @@ public class Duke {
                 System.out.println("   " + taskToRemove);
                 System.out.format("Now you have %d tasks in the list\n",
                         this.tasks.size());
+
+                // save changes to file
+                this.updateFile();
             } catch (NumberFormatException exceptionOne) {
                 // if the user does not specify an integer in the command
                 System.out.println("Please input an integer which is the " +
@@ -328,6 +350,33 @@ public class Duke {
                 System.out.println("You've specified a 0 index or index "
                         + "that is bigger than the size of your list!");
             }
+        }
+    }
+
+    private void updateFile() {
+        try {
+            if (!this.tasks.isEmpty()) {
+                StringBuilder sb = new StringBuilder();
+                // loop through each task in list and append to string builder.
+                int listSize = this.tasks.size();
+                for (int i = 0; i < listSize; i++) {
+                    Task currentTask = this.tasks.get(i);
+                    sb.append(currentTask.toString());
+                    sb.append("\n");
+                }
+                this.storage.writeToFile(sb.toString());
+            }
+        } catch (IOException exception) {
+            System.out.println("Sorry. I can't save this change :-(");
+        }
+    }
+
+    private void loadListFromFile() {
+        try {
+            this.storage.printFileContents();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Sorry! Duke couldn't find the file specified" +
+                    ". Please try again :-)");
         }
     }
 }

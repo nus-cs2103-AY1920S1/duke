@@ -1,3 +1,12 @@
+package duke.database;
+
+import duke.component.Ui;
+import duke.task.Task;
+import duke.exception.DukeException;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

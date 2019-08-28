@@ -1,3 +1,10 @@
+import duke.component.Ui;
+import duke.component.TaskList;
+import duke.database.Storage;
+import duke.command.Command;
+import duke.component.Parser;
+import duke.exception.DukeException;
+
 public class Duke {
     /** Database of the Duke Program */
     private Storage storage;

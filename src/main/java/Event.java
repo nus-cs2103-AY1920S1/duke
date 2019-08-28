@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
     /** The event deadline of the task */
     protected String at;

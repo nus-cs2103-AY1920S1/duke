@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     /** Description of the task */
     protected String description;

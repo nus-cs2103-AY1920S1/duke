@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.task.Task;
+import duke.database.Storage;
+
 public class DoneCommand extends Command{
     /**
      * DoneCommand class constructor.

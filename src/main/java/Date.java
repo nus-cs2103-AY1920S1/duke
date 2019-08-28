@@ -1,11 +1,37 @@
 //package mypackage;
 
+/**
+ * Represents the date.
+ */
 public class Date {
+
+    /**
+     * The day of the date.
+     */
     private int day;
+
+    /**
+     * The month of the date.
+     */
     private int month;
+
+    /**
+     * The year of the date.
+     */
     private int year;
+
+    /**
+     * The time of the date.
+     */
     private int time;
 
+    /**
+     * Constructs the date.
+     * @param day the day
+     * @param month the month
+     * @param year the year
+     * @param time the time
+     */
     public Date(int day, int month, int year, int time) {
         this.day = day;
         this.month = month;
@@ -13,6 +39,10 @@ public class Date {
         this.time = time;
     }
 
+    /**
+     * Returns the date.
+     * @return the date
+     */
     @Override
     public String toString() {
         String str = "";
@@ -30,30 +60,30 @@ public class Date {
 
         // Month
         switch (month) {
-            case 1: str = str + "January ";
-                break;
-            case 2: str = str + "February ";
-                break;
-            case 3: str = str + "March ";
-                break;
-            case 4: str = str + "April ";
-                break;
-            case 5: str = str + "May ";
-                break;
-            case 6: str = str + "June ";
-                break;
-            case 7: str = str + "July ";
-                break;
-            case 8: str = str + "August ";
-                break;
-            case 9: str = str + "September ";
-                break;
-            case 10: str = str + "October ";
-                break;
-            case 11: str = str + "November ";
-                break;
-            default: str = str + "December ";
-                break;
+        case 1: str = str + "January ";
+            break;
+        case 2: str = str + "February ";
+            break;
+        case 3: str = str + "March ";
+            break;
+        case 4: str = str + "April ";
+            break;
+        case 5: str = str + "May ";
+            break;
+        case 6: str = str + "June ";
+            break;
+        case 7: str = str + "July ";
+            break;
+        case 8: str = str + "August ";
+            break;
+        case 9: str = str + "September ";
+            break;
+        case 10: str = str + "October ";
+            break;
+        case 11: str = str + "November ";
+            break;
+        default: str = str + "December ";
+            break;
         }
 
         // Year

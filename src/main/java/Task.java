@@ -17,7 +17,7 @@ class Task implements Serializable{
         this.isCompleted = false;
     }
     
-    public boolean isCompleted() {
+    public boolean hasCompleted() {
         return this.isCompleted;
     }
 

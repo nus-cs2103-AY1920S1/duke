@@ -12,9 +12,9 @@ public class TaskTest {
     @Test
     public void fieldVariableTest() {
         Task task = new Task("This is a Task.");
-        assertFalse(task.isCompleted());
+        assertFalse(task.hasCompleted());
         task.setCompleted(true);
-        assertTrue(task.isCompleted());
+        assertTrue(task.hasCompleted());
     }
 
     @Test

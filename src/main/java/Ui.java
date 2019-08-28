@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 class Ui {
     private Scanner scanner;
     private PrintStream printer;
+    
 
     public Ui() {
         this.scanner = new Scanner(System.in);

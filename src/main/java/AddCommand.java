@@ -23,7 +23,7 @@ class AddCommand implements Command {
         default :
             uiManager.throwGeneralError();
         }
-        if(task == null) {
+        if (task == null) {
             uiManager.throwGeneralError();
         } else {
             taskList.addTask(task);

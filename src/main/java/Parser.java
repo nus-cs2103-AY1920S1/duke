@@ -20,7 +20,9 @@ class Parser {
         } else if (inputArr.length == 2) {
             switch (action) {
             case TODO :
+                // Fallthrough
             case DEADLINE :
+                // Fallthrough
             case EVENT :
                 return new AddCommand(action, inputArr[1]);
             case DONE :
@@ -38,6 +40,7 @@ class Parser {
     } 
 
     private Action getAction(String action, Ui uiManager) throws DukeException {
+        // Fallthrough are made for the Capitalized versions of the String
         switch (action) {
         case "List" :
         case "list" :

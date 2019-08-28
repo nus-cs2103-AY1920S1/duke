@@ -40,7 +40,7 @@ class Storage {
                 Object ob = in.readObject();
                 fileIn.close();
                 in.close();
-                if(ob instanceof TaskList) {
+                if (ob instanceof TaskList) {
                     return (TaskList) ob;
                 } else {
                     // The Tasks.sav file has wrong type when deserializing. Hence corrupted

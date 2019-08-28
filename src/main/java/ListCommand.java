@@ -3,7 +3,7 @@ class ListCommand implements Command {
 
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
-        if(taskList.listSize() == 0) {
+        if (taskList.listSize() == 0) {
             uiManager.printEmptyList();
         } else {
             uiManager.printListStarter();

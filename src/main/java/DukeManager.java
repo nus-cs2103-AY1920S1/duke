@@ -24,7 +24,7 @@ class DukeManager {
             String input = uiManager.readLine();
             Command command = parseManager.parseToCommand(input, uiManager);
             command.execute(this.uiManager, this.taskList, this.storeManager);
-            if(command instanceof ExitCommand) {
+            if (command instanceof ExitCommand) {
                 isActive = false;
             }
             uiManager.printEmpty();

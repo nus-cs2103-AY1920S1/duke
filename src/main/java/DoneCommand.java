@@ -8,7 +8,7 @@ class DoneCommand implements Command {
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
         Task task = taskList.getTask(this.taskNumber - 1, uiManager);
-        if(task.isCompleted()) {
+        if (task.hasCompleted()) {
             uiManager.printAlreadyCompleted();
         } else {
             task.setCompleted(true);

@@ -15,4 +15,9 @@ public class PrintListCommand extends Command {
     public boolean isRunning() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        return (object instanceof PrintListCommand);
+    }
 }

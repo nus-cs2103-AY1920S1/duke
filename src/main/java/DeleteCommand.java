@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command {
-    int position;
+    private int position;
 
     public DeleteCommand(int position) {
         super();
@@ -13,8 +13,17 @@ public class DeleteCommand extends Command {
         System.out.println(String.format("     Now you have %d tasks in the list.", tasks.size()));
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     @Override
     public boolean isRunning() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return (object instanceof DeleteCommand) && (((DeleteCommand) object).getPosition() == this.position);
     }
 }

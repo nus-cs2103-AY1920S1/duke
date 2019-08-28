@@ -1,16 +1,16 @@
-import duke_interface.Tasklist;
 import textfiles.ReadFile;
 import textfiles.WriteFile;
 import textfiles.Storage;
 
-import duke_interface.DukeException;
-import duke_interface.Parser;
-import duke_interface.Ui;
+import duke.d_interface.DukeException;
+import duke.d_interface.Parser;
+import duke.d_interface.Ui;
+import duke.d_interface.Tasklist;
 
-import duke_task.Task;
-import duke_task.Deadline;
-import duke_task.Event;
-import duke_task.ToDo;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 import java.io.IOException;
 

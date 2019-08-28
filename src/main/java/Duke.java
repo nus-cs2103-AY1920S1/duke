@@ -13,8 +13,11 @@ public class Duke {
     private TaskList tasks;
     private Ui userIF;
 
-    public Duke()
-    {
+    /**
+     * Constructor for Duke which is called in main. Creates a new Ui and Storage. If Storage can't find the file
+     * duke.txt it will throw an exception, in which case a new TaskList will be created that is empty.
+     */
+    public Duke() {
         this.userIF = new Ui();
         this.storage = new Storage();
         try {
@@ -24,10 +27,15 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * First greets the user then enters a loop which includes the Command Pattern, reading the user input
+     * using Ui then calling command.execute().
+     */
     public void run() {
         userIF.printHello();
         boolean isExit = false;

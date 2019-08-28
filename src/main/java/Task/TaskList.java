@@ -5,10 +5,18 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskArray;
 
+    /**
+     * Constructor for TaskList if duke.txt file exists.
+     *
+     * @param taskArray Array of Tasks that is loaded from the duke.txt file.
+     */
     public TaskList(ArrayList<Task> taskArray) {
         this.taskArray = taskArray;
     }
 
+    /**
+     * Constructor for TaskList if duke.txt file does not exists a empty Task array is created.
+     */
     public TaskList() {
         this.taskArray = new ArrayList<Task>();
     }

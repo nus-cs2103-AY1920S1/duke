@@ -14,11 +14,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
+
+    //stores information of the data in the duke.txt file.
     final String FILE_NAME = "C:\\Users\\dandf\\Pictures\\CS2103-Duke\\duke/data/duke.txt";
     final String DIRECTORY_NAME = "C:\\Users\\dandf\\Pictures\\CS2103-Duke\\duke/data";
 
-    //first checks if data]
-    public void writeToFile(ArrayList<Task> taskEntered) {
+    /**
+     * Write the updated contents from TaskList.
+     * First checks if the file or directory exists, if it doesn't create a new empty file.
+     * public method called by Command and it's child classes each time Command.execute is run.
+     *
+     * @param taskEntered ArrayList of Tasks obtained from the TaskList class.
+     * @throws DukeException which occurs if there is problem in loading the duke.txt.
+     */
+    public void writeToFile(ArrayList<Task> taskEntered) throws DukeException {
         try {
             File taskStorage = new File(FILE_NAME);
             File directoryStorage = new File(DIRECTORY_NAME);
@@ -31,10 +40,16 @@ public class Storage {
             taskWrite.write(s);
             taskWrite.close();
         } catch(IOException e) {
-            e.printStackTrace();
+            throw new DukeException("OOPS!!! Error occured when loading file.")
         }
     }
 
+    /**
+     * Uses StringBuffer to append string of tasks obtained from tastEntered into format required to put into duke.txt.
+     * public method called by writeToFile, which is called each time Command.execute is run.
+     *
+     * @param taskEntered ArrayList of Tasks obtained from the TaskList class.
+     */
     public String writeFromArray(ArrayList<Task> taskEntered){
         StringBuffer toWrite = new StringBuffer("");
         for(int i = 0; i < taskEntered.size() ; i++){
@@ -50,6 +65,14 @@ public class Storage {
         return toWrite.toString();
     }
 
+    /**
+     * Understands the string from duke.txt and creates a arraylist of tasks based on the strings in duke.txt.
+     * First checks if the file or directory exists, if it doesn't create a new empty file.
+     * public method called by duke when it first starts up.
+     *
+     * @return ArrayList of Tasks which will be assigned to TaskList class.
+     * @throws DukeException which occurs if there is problem in loading the duke.txt.
+     */
     public ArrayList<Task> outputFileContents() throws DukeException {
         try {
             File taskStorage = new File(FILE_NAME);
@@ -85,7 +108,10 @@ public class Storage {
         }
     }
 
-    public void checkIfDone(Task t, String booleanValue){
+    /**
+     * Called by outputFileContents and checks the string which is retrieved from duke.txt if the task is Done.
+     */
+     public void checkIfDone(Task t, String booleanValue){
         if(booleanValue.equalsIgnoreCase("True") ){
             t.markIsDone();
         }

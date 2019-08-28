@@ -15,7 +15,6 @@ public class Storage {
      * Will load, update, and append the associated .txt file.
      * @param filePath refers to the path of the .txt file
      */
-
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -25,7 +24,6 @@ public class Storage {
      * @return ArrayList of Task specified in the .txt file
      * @throws IOException
      */
-
     public ArrayList<Task> load() throws IOException {
         File f = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
@@ -68,7 +66,6 @@ public class Storage {
      * @param tsk refers to the tasklist
      * @throws IOException
      */
-
     public void append(Task tsk) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         String status = tsk.getIsDone() ? "1" : "0";
@@ -94,7 +91,6 @@ public class Storage {
      * @param list refers to the tasklist
      * @throws IOException
      */
-
     public void update(ArrayList<Task> list) throws IOException {
 
         BufferedWriter bfw = new BufferedWriter(new FileWriter(filePath));

@@ -14,10 +14,12 @@ public class Parser {
     public Parser(){};
 
     public Command process(String line) {
-        String first = line.split(" ")[0];
+        String[] commands = line.split(" ");
+        String first = commands[0];
         try {
             switch (first) {
                 case "bye":
+                    System.out.println("was here");
                     return new Command(CommandType.EXIT);
                 case "list":
                     return new Command(CommandType.PRINTLIST);
@@ -33,8 +35,10 @@ public class Parser {
                     throw new InvalidCommandException();
             }
         } catch (DukeException e) {
+            System.out.println("at error");
             e.printError();
         }
+        System.out.println("here WHICH IS WRONG");
         return new Command();
     }
 
@@ -72,6 +76,7 @@ public class Parser {
         firstInName = true;
         firstInTime = true;
         for (int i = 1; i < arr.length; i++) {
+            System.out.println(arr[i]);
             if (arr[i].startsWith("/")) {
                 timing = true;
             } else {

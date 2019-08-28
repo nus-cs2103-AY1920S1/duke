@@ -18,7 +18,6 @@ public class TaskList {
 
     public void addTask(Task task) {
         taskList.add(task);
-        System.out.println(taskList.isEmpty());
         msgGenerator.printAdd(task, noTasks());
     }
 

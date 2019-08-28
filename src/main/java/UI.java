@@ -1,15 +1,18 @@
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UI {
 
-   // Command command;
     Parser parser = new Parser();
     TaskList tasks = new TaskList();
     boolean isExit = false;
-    String input;
+    String fileInput;
+    private Storage storage;
+    List<Command> commands = new ArrayList<>();
 
-    public UI(String s) {
-        input = s;
+    public UI(String fileInput) {
+        storage = new Storage(fileInput);
     }
 
     public void exit() {
@@ -20,33 +23,42 @@ public class UI {
         return isExit;
     }
 
-   public Command processInput() {
-       return parser.process(input);
-   }
-
-    public void processCommand(Command command) {
-        try {
-        switch (command.type) {
-            case EXIT:
-                exit();
-                break;
-            case PRINTLIST:
-                tasks.printList();
-                break;
-            case ADD:
-                tasks.addTask(parser.createTask(command.command));
-                break;
-            case DELETE:
-                tasks.removeTask(parser.getTaskNo(command.command));
-                break;
-            case DONE:
-                tasks.setDone(parser.getTaskNo(command.command));
-                break;
-            default:
-                throw new InvalidCommandException();
+    public void processInput() {
+        List<String> input = storage.processInput();
+        for (String line : input) {
+            commands.add(parser.process(line));
         }
-    } catch(InvalidCommandException e){
-                e.printError();
+    }
+
+    public void processCommand() {
+        loop: for (Command command : commands) {
+            System.out.println(command.command);
+            try {
+                switch (command.type) {
+                    case EXIT:
+                        exit();
+                        break loop;
+                    case PRINTLIST:
+                        tasks.printList();
+                        break;
+                    case ADD:
+                        tasks.addTask(parser.createTask(command.command));
+                        break;
+                    case DELETE:
+                        tasks.deleteTask(parser.getTaskNo(command.command));
+                        break;
+                    case DONE:
+                        tasks.setDone(parser.getTaskNo(command.command));
+                        break;
+                    default:
+                        throw new InvalidCommandException();
+                }
+                for (String task: tasks.listify()) {
+                    storage.writeToFile(task);
+                }
+            } catch (InvalidCommandException | IOException e) {
+                System.out.println("Something went wrong");
             }
         }
     }
+}

@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,17 +10,20 @@ public class Duke {
     public Duke() {
         greeter = new MessageGenerator();
         sc = new Scanner(System.in);
+        ui = new UI("files/tasks.txt");
         isExit = false;
     }
 
     public void run() {
         greeter.greet();
-        while (sc.hasNextLine() && !isExit) {
-        ui = new UI(sc.nextLine());
-        ui.processCommand(ui.processInput());
-    }
+        while (!isExit) {
+            ui.processInput();
+            ui.processCommand();
+            isExit = ui.isExit();
+            System.out.println(ui.isExit());
+        }
         greeter.bye();
-}
+    }
 
     public static void main(String[] args) {
         new Duke().run();

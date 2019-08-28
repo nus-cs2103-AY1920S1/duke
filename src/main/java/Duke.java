@@ -185,6 +185,49 @@ public class Duke {
 
                 String[] sp2 = sp[1].split(" /by ", 2);
 
+                String[] date = sp2[1].split(" ");
+                String time = date[1];
+                String[] date2 = date[0].split("/");
+
+                String month;
+                if(date2[1].equals(1)){
+                    month = "January";
+                }
+                if(date2[1].equals(2)){
+                    month = "February";
+                }
+                if(date2[1].equals(3)){
+                    month = "March";
+                }
+                if(date2[1].equals(4)){
+                    month = "April";
+                }
+                if(date2[1].equals(5)){
+                    month = "May";
+                }
+                if(date2[1].equals(6)){
+                    month = "June";
+                }
+                if(date2[1].equals(7)){
+                    month = "July";
+                }
+                if(date2[1].equals(8)){
+                    month = "August";
+                }
+                if(date2[1].equals(9)){
+                    month = "September";
+                }
+                if(date2[1].equals(10)){
+                    month = "October";
+                }
+                if(date2[1].equals(1)){
+                    month = "November";
+                }
+                if(date2[1].equals(1)){
+                    month = "December";
+                }
+
+
                 data.add(sp2[0]);
                 details.add(sp2[1]);
                 done.add("✗");

@@ -102,6 +102,10 @@ public class Task {
         return dateTime;
     }
 
+    public String getDesc() {
+        return this.description;
+    }
+
     /**
      * Filler method to imitate an interface.
      * @return String empty string

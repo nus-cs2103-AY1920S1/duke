@@ -1,2 +1,3 @@
-D~0~submission~by: 2/2/2019 1800
-E~0~project~at: 3/12/2019 0900
+T~1~read book
+D~1~return book~by: 12/12/2019 1400
+E~0~project~at: 12/2/2019 1300

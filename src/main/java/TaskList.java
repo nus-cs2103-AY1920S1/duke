@@ -40,7 +40,6 @@ public class TaskList {
         }
         Task task = tasks.get(number - 1);
         tasks.remove(number - 1);
-        System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
     }

@@ -3,6 +3,7 @@ import duke.parser.Task;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UiText {
@@ -71,6 +72,15 @@ public class UiText {
                         + task + "\nNow you have %d tasks in the list.", Task.getNoOfTask()));
     }
 
+    public void findMsg(ArrayList<Task> tasks) {
+        out.println("Here are the matching tasks in your list");
+        int count = 0;
+        for (Task task : tasks) {
+            out.println(++count + "." + task.toString());
+        }
+
+
+    }
     public void unableToWriteFileError() {
         out.println("Unable to write the file");
     }

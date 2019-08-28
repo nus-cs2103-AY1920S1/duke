@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-import duke.parser.Paser;
+import duke.parser.Parser;
 import duke.taskList.TaskList;
 import duke.storage.Storage;
 import duke.ui.UiText;
@@ -35,7 +35,7 @@ public class Duke {
                 try {
                     String fullCommand = ui.readCommand();
                     ui.showLine();
-                    Command c = Paser.parse(fullCommand);
+                    Command c = Parser.parse(fullCommand);
                     c.execute(tasks, ui, storage);
                 } catch (DukeException e) {
                     ui.printlnMsg(e.getMessage());

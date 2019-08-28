@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if(super.command.length == 2) {
+        if (super.command.length == 2) {
             try {
                 int index = Integer.parseInt(super.command[1].trim());
                 if(index > list.getList().size()) {

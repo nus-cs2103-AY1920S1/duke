@@ -3,7 +3,7 @@ package duke.parser;
 import duke.DukeException;
 import duke.command.*;
 
-public class Paser {
+public class Parser {
 
     public static Command parse(String input) {
         String[] msg = input.trim().split(" ", 2);
@@ -21,6 +21,8 @@ public class Paser {
             return new AddEventCommand(msg);
         } else if (msg[0].equals("delete")) {
             return new DeleteCommand(msg);
+        } else if (msg[0].equals("find")) {
+            return new FindCommand(msg);
         } else {
             return new InvalidCommand();
         }

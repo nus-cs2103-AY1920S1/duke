@@ -6,14 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Database {
+public class Storage {
     /** Declaration of file as File type */
-    public static File file;
+    public File file;
+
+    /** Ui of the Duke Program */
+    private Ui ui;
+
+    /**
+     * Storage Constructor.
+     * @param ui Ui of Duke Constructor.
+     */
+    public Storage(Ui ui) {
+        this.ui = ui;
+    }
 
     /**
      * To get the project root and path to create the txt file or check if text file is available.
      */
-    public static void initialise() {
+    public void initialise() {
         String project_root = new File(System.getProperty("user.dir")).getParentFile().getPath();
         StringBuilder path = new StringBuilder();
         path.append(project_root);
@@ -29,9 +40,9 @@ public class Database {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            Duke.printLine();
-            System.out.println(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is not able to be created");
-            Duke.printLine();
+            ui.showLine();
+            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is not able to be created");
+            ui.showLine();
             System.out.println("");
         }
     }
@@ -40,7 +51,7 @@ public class Database {
      * Get the list of task from the text file to a List.
      * @return list of task as List.
      */
-    public static List<Task> getSavedTask() {
+    public List<Task> getSavedTask() {
         List<Task> list = new ArrayList<>();
 
         try {
@@ -49,16 +60,16 @@ public class Database {
                 try {
                     list.add(getEachTask(input.nextLine()));
                 } catch (DukeException e) {
-                    Duke.printLine();
-                    System.out.println(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is empty");
-                    Duke.printLine();
+                    ui.showLine();
+                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is empty");
+                    ui.showLine();
                     System.out.println("");
                 }
             }
         } catch (FileNotFoundException e) {
-            Duke.printLine();
-            System.out.println(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is not available");
-            Duke.printLine();
+            ui.showLine();
+            System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "File is not available");
+            ui.showLine();
             System.out.println("");
         }
 
@@ -71,7 +82,7 @@ public class Database {
      * @return Each line of task save in the text file.
      * @throws DukeException If the status of task is not an Integer.
      */
-    public static Task getEachTask(String input) throws DukeException {
+    public Task getEachTask(String input) throws DukeException {
         String[] data = input.split("\\|");
 
         Task task;
@@ -84,8 +95,8 @@ public class Database {
                         task.markAsDone();
                     }
                 } catch (NumberFormatException ex) {
-                    Duke.printLine();
-                    System.out.println(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+                    ui.showLine();
+                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
                 }
                 break;
 
@@ -97,8 +108,8 @@ public class Database {
                         task.markAsDone();
                     }
                 } catch (NumberFormatException ex) {
-                    Duke.printLine();
-                    System.out.println(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+                    ui.showLine();
+                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
                 }
                 break;
 
@@ -110,13 +121,13 @@ public class Database {
                         task.markAsDone();
                     }
                 } catch (NumberFormatException ex) {
-                    Duke.printLine();
-                    System.out.println(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
+                    ui.showLine();
+                    System.out.println(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in Database Data");
                 }
                 break;
 
             default:
-                throw new DukeException(Duke.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in reading data");
+                throw new DukeException(ui.INDENT_COMMENT + "\u2639 OOPS !!! " + "Error in reading data");
         }
 
         return task;
@@ -127,7 +138,7 @@ public class Database {
      * @param task List of task.
      * @throws DukeException If file is not able to write.
      */
-    public static void updateFile(List<Task> task) throws DukeException {
+    public void updateFile(List<Task> task) throws DukeException {
         file.delete();
 
         try {

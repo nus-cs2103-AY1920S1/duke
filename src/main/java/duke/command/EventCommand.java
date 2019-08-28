@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.exception.DukeException;
 import duke.initials.Event;
 import duke.storage.Storage;
@@ -64,6 +63,7 @@ public class EventCommand extends Command {
         String time = new SimpleDateFormat("h:mma").format(date).toLowerCase();
 
         int int_day = Integer.parseInt(day);
+
         if (int_day >= 11 && int_day <= 13) {
             ordinalIndicator = "th";
         } else if (int_day % 10 == 1) {

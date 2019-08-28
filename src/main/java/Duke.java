@@ -1,65 +1,54 @@
 import java.util.Scanner;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.File;
 import java.io.IOException;
 
 public class Duke {
 
-    private static void writeToFile(String path, String text) throws IOException {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        FileWriter fw = new FileWriter(path);// create a FileWriter for the given file path
-        fw.write(text);
-        fw.close();
-    }
-
-    private static void importFileContents(String path, Bot b) throws FileNotFoundException {
-        File f = new File(path); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String command = s.nextLine();
-            b.read(command);
-        }
-    }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Bot b = new Bot();
-
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            importFileContents("../data/duke.txt", b);
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+    }
 
-        b.greet();
-        b.getResponse();
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+
+        ui.greet();
 
         while (true) {
             String command = sc.nextLine();//read user input
             if (command.equals("bye")) {
-                b.exit();
-                b.getResponse();
+                ui.exit();
                 break;
             } else if (command.equals("list")) {
-                b.list();
-                b.getResponse();
+                ui.list(tasks);
             } else if (command.length() > 4 && command.substring(0, 4).equals("done")) {
                 if (command.charAt(4) != ' ') {
                     try {
-                        b.add(command);
+                        Task task = tasks.add(command);
+                        ui.add(task, tasks);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 } else {
                     try {
-                        b.done(Integer.valueOf(command.substring(5)));
+                        Task task = tasks.done(Integer.valueOf(command.substring(5)));
+                        ui.done(task);
                         try {
-                            writeToFile("../data/duke.txt", b.generateInfo());
+                            storage.writeToFile(tasks.generateInfo());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
-                        b.getResponse();
                     } catch (Exception e) {
                         System.out.println("    ____________________________________________________________\n     " +
                                 "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
@@ -69,19 +58,20 @@ public class Duke {
             } else if (command.length() > 6 && command.substring(0, 6).equals("delete")) {
                 if (command.charAt(4) != ' ') {
                     try {
-                        b.add(command);
+                        Task task = tasks.add(command);
+                        ui.add(task, tasks);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 } else {
                     try {
-                        b.delete(Integer.valueOf(command.substring(7)));
+                        Task task = tasks.delete(Integer.valueOf(command.substring(7)));
+                        ui.delete(task, tasks);
                         try {
-                            writeToFile("../data/duke.txt", b.generateInfo());
+                            storage.writeToFile(tasks.generateInfo());
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
-                        b.getResponse();
                     } catch (Exception e) {
                         System.out.println("    ____________________________________________________________\n     " +
                                 "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(" +
@@ -90,18 +80,21 @@ public class Duke {
                 }
             } else {
                 try {
-                    b.add(command);
-                    b.getResponse();
+                    Task task = tasks.add(command);
+                    ui.add(task, tasks);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 }
                 try {
-                    writeToFile("../data/duke.txt", b.generateInfo());
+                    storage.writeToFile(tasks.generateInfo());
                 } catch (IOException e) {
                     System.out.println("Something went wrong: " + e.getMessage());
                 }
             }
         }
+    }
 
+    public static void main(String[] args) {
+        new Duke("../data/duke.txt").run();
     }
 }

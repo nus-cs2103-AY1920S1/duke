@@ -15,6 +15,26 @@ public class Task {
         this.time = t;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
+    public String getTime() {
+        if (this.time != null) {
+            return time;
+        } else {
+            return "";
+        }
+    }
+
+    public int getStatus() {
+        return this.isDone ? 1 : 0;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     public void mark() {
         if (!isDone) this.isDone = true; //update status of task
     }

@@ -9,6 +9,51 @@ public class Bot {
         System.out.println(this);
     }
 
+    public void read(String s) {
+        String[] arr = s.split(" \\| ");
+        String taskType = arr[0];
+        int taskStatus = Integer.valueOf(arr[1]);
+        String taskDes = arr[2];
+        String taskTime = "";
+        if (taskType.equals("T")) {
+            taskType = "todo";
+        } else if (taskType.equals("D")) {
+            taskType = "deadline";
+            taskTime = " /by " + arr[3];
+        } else if (taskType.equals("E")) {
+            taskType = "event";
+            taskTime = " /at " + arr[3];
+        }
+        try {
+            this.add(taskType + " " + taskDes + taskTime);
+        } catch
+        (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        if (taskStatus == 1) this.done(tasks.size());
+    }
+
+    public String generateInfo() {
+        //convert Task into a String which can be stored in the data file
+        String taskFile = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String current;
+            if (task.getTime().equals("")) {
+                current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription();
+            } else {
+                current = task.getLabel() + " | " + task.getStatus() + " | " + task.getDescription() + " | " + task.getTime();
+            }
+            if (i != tasks.size() - 1) {
+                taskFile += current + System.lineSeparator();
+            } else {
+                taskFile += current;
+            }
+        }
+
+        return taskFile;
+    }
+
     public void add(String s) throws DukeException {
         String[] arr = s.split(" ");
         String taskType = arr[0];

@@ -19,6 +19,11 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
+    public Event(String description, boolean isDone, String eventDate) throws DukeException{
+        this(description, eventDate);
+        this.isDone = isDone;
+    }
+
     public String getEventDate(){
         return this.eventDate;
     }
@@ -36,4 +41,10 @@ public class Event extends Task{
         return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()
                 + "(at:" + this.getEventDate() + ")" ); 
     }
+
+    public String getStoredTaskStatus(){
+        return (this.getTaskType() + " | " + this.getStatusIcon() + " | " + this.getTaskDescription()
+                + " | " + this.getEventDate());
+    }
+
 }

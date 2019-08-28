@@ -6,6 +6,10 @@ public class Todo extends Task{
         }
         this.taskType = "T";
     }
+    public Todo(String description, boolean isDone) throws DukeException{
+        this(description);
+        this.isDone = isDone;
+    }
     public Task markAsDone() throws DukeException{
         if(this.isDone){
             throw new DukeException("☹ OOPS!!! The todo is already marked as done.");
@@ -15,6 +19,10 @@ public class Todo extends Task{
         return completed;
     }
     public String getTaskStatus(){
-        return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription()); 
+        return ("[" + this.getTaskType() + "] " + "[" + this.getStatusIcon() + "]" + this.getTaskDescription());
+    }
+
+    public String getStoredTaskStatus(){
+        return (this.getTaskType() + " | " + this.getStatusIcon() + " | " + this.getTaskDescription());
     }
 }

@@ -17,6 +17,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
+        Storage storage = Storage.initialize();
+        this.taskList = storage.loadTasks();
+
         Scanner sc = new Scanner(System.in);
 
         // start interaction
@@ -48,6 +51,8 @@ public class Duke {
                 }
             } catch (CommandException e) {
                 Response.newException(e).print();
+            } finally {
+                storage.saveTasks(this.taskList);
             }
 
         }

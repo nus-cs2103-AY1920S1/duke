@@ -61,4 +61,14 @@ public class Ui {
         System.out.println("     Now you have " +  taskList.getListOfTasks().size() + " tasks in the list.");
         System.out.println("    _____________________________________\n");
     }
+
+    public void printFindTasks(ArrayList<Task> listOfTasks) {
+        System.out.println("     _____________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            int number = i + 1;
+            System.out.println("     " + number + "." + listOfTasks.get(i));
+        }
+        System.out.println("     _____________________________________\n");
+    }
 }

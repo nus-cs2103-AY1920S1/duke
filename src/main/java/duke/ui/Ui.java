@@ -58,6 +58,15 @@ public class Ui {
         CmdUx.printHBars(sb.toString());
     }
 
+    public static void listSearchResults(ArrayList<Task> tasks, ArrayList<Integer> searchResults) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        for (Integer index : searchResults) {
+            sb.append(index + "." + tasks.get(index).toString() + "\n");
+        }
+        CmdUx.printHBars(sb.toString());
+    }
+
     /**
      * Prints the message upon successfully adding a task to a given list of Task objects.
      * @param tasks Given ArrayList of Task objects, for counting purposes only

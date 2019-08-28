@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.TodoCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.EventCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 import java.text.SimpleDateFormat;
@@ -38,6 +31,9 @@ public class Parser {
 
                 case ("event"):
                     return new EventCommand();
+
+                case ("find") :
+                    return new FindCommand();
 
                 default:
                     throw new DukeException("☹OOPS!!! I'm sorry, but I don't know what that means :-(");

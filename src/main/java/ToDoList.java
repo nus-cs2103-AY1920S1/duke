@@ -4,15 +4,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 class ToDoList {
     private ArrayList<Task> taskList;
     private String filePath;
+    static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMMM yyyy HH':'mma");
+
     ToDoList(String filePath) {
         taskList = new ArrayList<>(100);
         this.filePath = filePath;
     }
-    private void addTask(String task, TaskType type, boolean printText) throws EmptyEventDscDukeException, EmptyDeadlineDscDukeException, NoDateDukeException {
+
+    private void addTask(String task, TaskType type, boolean printText) throws ParseException, EmptyEventDscDukeException, EmptyDeadlineDscDukeException, NoDateDukeException {
         Task addedTask;
         String date;
         switch (type) {
@@ -35,9 +41,10 @@ class ToDoList {
                 if (date.equals("")) {
                     throw new NoDateDukeException("No date provided");
                 }
+                date = date.substring(date.indexOf(" ") + 1);
                 addedTask = new Deadline(
                     task.substring(0, task.indexOf('/') - 1),
-                    date
+                    ToDoList.inputDateFormat.parse(date)
                 );
                 taskList.add(addedTask);
                 if (printText) {
@@ -56,9 +63,10 @@ class ToDoList {
                 if (date.equals("")) {
                     throw new NoDateDukeException("No date provided");
                 }
+                date = date.substring(date.indexOf(" ") + 1);
                 addedTask = new Event(
                         task.substring(0, task.indexOf('/') - 1),
-                        date
+                        ToDoList.inputDateFormat.parse(date)
                 );
                 taskList.add(addedTask);
                 if (printText) {
@@ -116,7 +124,7 @@ class ToDoList {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    boolean parseInput(String input, boolean printText) throws DukeException {
+    boolean parseInput(String input, boolean printText) throws DukeException, ParseException {
         String[] splitInput = input.split(" ");
         boolean dukeIsOn = true;
         switch (splitInput[0]) {
@@ -190,7 +198,7 @@ class ToDoList {
             System.out.println("Loaded saved task list!");
         } catch (FileNotFoundException e) {
             System.out.println("Did not find saved task list!");
-        } catch (DukeException e) {
+        } catch (DukeException | ParseException e) {
             System.out.println("Something went wrong! " + e.getMessage());
         }
 

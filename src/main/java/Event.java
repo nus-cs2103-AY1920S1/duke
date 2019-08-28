@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime atDateTime;
 
     public Event(String description, String atDateTime) throws DukeException {
@@ -13,13 +13,14 @@ public class Event extends Task{
         try {
             this.atDateTime = LocalDateTime.parse(atDateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("DateTime Parsing Failed: DateTime Format should follow \"dd/MM/yyyy HH:mm\" " +
-                    "format." + e.getMessage());
+            throw new DukeException("DateTime Parsing Failed: DateTime Format should follow \"dd/MM/yyyy HH:mm\" " 
+                    + "format." 
+                    + e.getMessage());
         }
     }
 
     public String getAtDateTimeString() {
-        try{
+        try {
             String string = atDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
             return string;
         } catch (DateTimeException e) {

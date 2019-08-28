@@ -3,7 +3,7 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime byDateTime;
 
     public Deadline(String description, String byDateTime) throws DukeException {
@@ -12,13 +12,14 @@ public class Deadline extends Task{
         try {
             this.byDateTime = LocalDateTime.parse(byDateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("DateTime Parsing Failed: DateTime Format should follow \"dd/MM/yyyy HH:mm\" " +
-                    "format." + e.getMessage());
+            throw new DukeException("DateTime Parsing Failed: DateTime Format should follow \"dd/MM/yyyy HH:mm\" " 
+                    + "format." 
+                    + e.getMessage());
         }
     }
 
-    public String getByDateTimeString(){
-        try{
+    public String getByDateTimeString() {
+        try {
             String string = byDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
             return string;
         } catch (DateTimeException e) {

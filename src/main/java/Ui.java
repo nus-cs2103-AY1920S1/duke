@@ -18,7 +18,6 @@ public class Ui {
         drawline();
         System.out.println("     Bye. Hope to see you again soon!");
         drawline();
-
     }
 
 }

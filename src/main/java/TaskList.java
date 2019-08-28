@@ -67,7 +67,4 @@ public class TaskList {
             System.out.println("Error " + "Please enter date and time in right format.");
         }
     }
-
-
-
 }

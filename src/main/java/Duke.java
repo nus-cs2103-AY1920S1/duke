@@ -74,7 +74,6 @@ public class Duke {
                     delete(tasks.getlist(), m-1);
                     break;
 
-
                 default:
                     try{
                         other(s);

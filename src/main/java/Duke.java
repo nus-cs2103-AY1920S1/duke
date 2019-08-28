@@ -5,289 +5,37 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static String TASKS_FILE_NAME = System.getProperty("user.dir") + "\\data\\duke.txt";
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+
+    public Duke(String filepath) {
+        ui = new Ui();
+        storage = new Storage(filepath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        ui.showWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parseCommand(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        String welcomeMessage = "Hello! I'm Duke.\nWhat can I do for you?";
-        String mainMenuMessage = "To input dates and times for deadlines and events, " +
-                "please use the format: 29/03/2019 6:05PM";
-
-        System.out.println(welcomeMessage);
-
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        File tasksFile = new File(TASKS_FILE_NAME);
-        if (tasksFile.exists()) {
-            readTasksFromFile(tasks);
-        }
-
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            System.out.println(mainMenuMessage);
-
-            String input = sc.nextLine();
-            String command = getNthWordFromString(input, 0).toLowerCase();
-
-            if (command.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            }
-
-            try {
-                switch (command) {
-                case "list":
-                    printTasks(tasks);
-                    break;
-                case "done":
-                    markTaskDone(tasks, input);
-                    break;
-                case "delete":
-                    deleteTask(tasks, input);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    addTask(tasks, input);
-                    break;
-                default:
-                    System.out.println("I'm sorry, but I don't know what that means :(");
-                    break;
-                }
-
-            } catch (DukeException e) {
-                System.err.println("" + e);
-            }
-        }
-    }
-
-    private static String getNthWordFromString(String input, int n) {
-        return input.split(" ")[n];
-    }
-
-    private static void printTasks(ArrayList<Task> tasks) {
-        System.out.println("Here are the task(s) in your list:");
-
-        String task;
-        for (int i = 0; i < tasks.size(); i++) {
-            task = String.format("%d.%s", (i + 1), tasks.get(i));
-            System.out.println(task);
-        }
-
-        if (tasks.size() == 0) {
-            System.out.println("There are no tasks in your list right now.");
-        }
-    }
-
-    private static void markTaskDone(ArrayList<Task> tasks, String input) throws DukeException {
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(getNthWordFromString(input, 1));
-            tasks.get(taskNumber - 1).markDone();
-        } catch (Exception e) {
-            throw new DukeException("Invalid task number.");
-        }
-
-        rewriteTasksFile(tasks);
-
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(String.format("  %s", tasks.get(taskNumber - 1)));
-    }
-
-    private static void deleteTask(ArrayList<Task> tasks, String input) throws DukeException {
-        int taskNumber;
-        Task deletedTask;
-        try {
-            taskNumber = Integer.parseInt(getNthWordFromString(input, 1));
-            deletedTask = tasks.remove(taskNumber - 1);
-        } catch (Exception e) {
-            throw new DukeException("Invalid task number.");
-        }
-
-        rewriteTasksFile(tasks);
-
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(String.format("  %s", deletedTask));
-        System.out.println(String.format("Now you have %d task(s) in the list.", tasks.size()));
-    }
-
-    private static void addTask(ArrayList<Task> tasks, String input) throws DukeException {
-        // get task type
-        String type = getNthWordFromString(input, 0);
-        // get task description
-        String description;
-        try {
-            description = input.split(" ", 2)[1];
-        } catch (Exception e) {
-            throw new DukeException("Description of " + type + " cannot be empty.");
-        }
-
-        Task newTask = null;
-
-        // create new task of specified type
-        switch (type) {
-        case "todo":
-            newTask = new ToDo(description);
-            break;
-        case "deadline":
-            String[] descriptionDeadline = description.split(" /by ", 2);
-            if (descriptionDeadline.length < 2) {
-                throw new DukeException("Deadline format incorrect, should be e.g. deadline task /by time");
-            }
-            newTask = new Deadline(descriptionDeadline[0], convertInputDateTime(descriptionDeadline[1]));
-            break;
-        case "event":
-            String[] descriptionTime = description.split(" /at ", 2);
-            if (descriptionTime.length < 2) {
-                throw new DukeException("Event format incorrect, should be e.g. event task /at time");
-            }
-            newTask = new Event(descriptionTime[0], convertInputDateTime(descriptionTime[1]));
-            break;
-        }
-
-        tasks.add(newTask);
-        rewriteTasksFile(tasks);
-
-        String message = String.format(
-                "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
-                newTask, tasks.size()
-        );
-        System.out.println(message);
-    }
-
-    private static void readTasksFromFile(ArrayList<Task> tasks) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(TASKS_FILE_NAME));
-
-            String line = reader.readLine();
-            while (line != null) {
-                Task taskToRead = null;
-
-                // get task type and description
-                String[] lineArray = line.split(" ~ ");
-                String taskType = lineArray[0];
-                String taskDescription;
-
-                switch (taskType) {
-                case "T":
-                    taskDescription = lineArray[2];
-                    taskToRead = new ToDo(taskDescription);
-                    break;
-                case "D":
-                    // get description
-                    taskDescription = lineArray[2].split("by: ")[0];
-                    // remove space and closing bracket
-                    taskDescription = taskDescription.substring(0, taskDescription.length() - 2);
-
-                    // get deadline
-                    String deadline = lineArray[2].split("by: ")[1];
-                    // remove closing bracket
-                    deadline = deadline.substring(0, deadline.length() - 1);
-
-                    // read task with deadline
-                    taskToRead = new Deadline(taskDescription, convertInputDateTime(deadline));
-                    break;
-                case "E":
-                    // get description
-                    taskDescription = lineArray[2].split("at: ")[0];
-                    // remove space and closing bracket
-                    taskDescription = taskDescription.substring(0, taskDescription.length() - 2);
-
-                    // get time
-                    String time = lineArray[2].split("at: ")[1];
-                    // remove closing bracket
-                    time = time.substring(0, time.length() - 1);
-
-                    // read task with deadline
-                    taskToRead = new Event(taskDescription, convertInputDateTime(time));
-                    break;
-                }
-
-                // check if task is marked as done
-                if (lineArray[1].equals("1")) {
-                    taskToRead.markDone();
-                }
-
-                tasks.add(taskToRead);
-
-                // go to next line (task) in file
-                line = reader.readLine();
-            }
-        } catch (IOException|DukeException e) {
-            System.err.println(e + "");
-        } finally {
-            // close reader
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    System.err.println(e + "");
-                }
-            }
-        }
-    }
-
-    private static void rewriteTasksFile(ArrayList<Task> tasks) {
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(TASKS_FILE_NAME));
-            // empty tasks file before rewrite
-            FileWriter overwrite = new FileWriter(TASKS_FILE_NAME);
-            overwrite.close();
-            // write all tasks in virtual list to temp file
-            for (Task task : tasks) {
-                // task string structured as: [D][+] description (by: 2)
-                char type = task.toString().toCharArray()[1];
-                char done = task.toString().toCharArray()[4] == '+' ? '1' : '0';
-                String description = task.toString().split("] ", 2)[1];
-                // write task to file
-                writer.write(String.format("%s ~ %s ~ %s", type, done, description));
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.err.println(e + "");
-        } finally {
-            // close writer
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    System.err.println(e + "");
-                }
-            }
-        }
-    }
-
-    private static LocalDateTime convertInputDateTime(String dateTime) throws DukeException {
-        // ensure that dateTime string is in the format: "12/02/2019 6:05pm"
-        try {
-            // get day of month, month, and year
-            String[] dateArray = dateTime.split(" ")[0].split("/");
-            int dayOfMonth = Integer.parseInt(dateArray[0]);
-            int month = Integer.parseInt(dateArray[1]);
-            int year = Integer.parseInt(dateArray[2]);
-
-            // get minute and hour
-            String time = dateTime.split(" ")[1];
-            int minute = Integer.parseInt(time.split(":")[1].substring(0, 2));
-            int hour = Integer.parseInt(time.split(":")[0]);
-            if (hour <= 0) {
-                throw new DukeException("Hour cannot be less than or equal to 0");
-            }
-            boolean isPastNoon = time.substring(time.length() - 2).equalsIgnoreCase("pm");
-            if (isPastNoon && hour != 12) {
-                // convert to 24 hour format (except for 12pm)
-                hour += 12;
-            } else if (hour == 12) {
-                // edge case: 12am to 12:59am
-                hour = 0;
-            }
-
-            return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
-        } catch (Exception e) {
-            System.err.println(e + "");
-            throw new DukeException("DateTime \"" + dateTime + "\" format incorrect");
-        }
+        new Duke("\\data\\duke.txt").run();
     }
 }

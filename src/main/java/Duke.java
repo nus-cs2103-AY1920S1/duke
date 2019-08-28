@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 public class Duke {
     static String listString = "";
     static ArrayList<Task> listArr = new ArrayList<Task>();
-    static String indent = "    ";
+    static String INDENT = "    ";
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -14,18 +14,18 @@ public class Duke {
         int listPointer;
 
         printIndentedString("Hello! I'm Duke\n" +
-                indent + " " + "What can I do for you?", indent);
+                INDENT + " " + "What can I do for you?", INDENT);
         String input = sc.nextLine();
         String[] inputArr = input.split(" ", 2);
 
         while (!inputArr[0].equals("bye")) {
             if (inputArr[0].equals("list")) {
-                printIndentedString("Here are the tasks in your list:\n" + listString, indent);
+                printIndentedString("Here are the tasks in your list:\n" + listString, INDENT);
             } else if (inputArr[0].equals("done")) {
                 listPointer = Integer.parseInt(inputArr[1]);
                 listArr.get(listPointer - 1).markAsDone();
                 printIndentedString("Nice! I've marked this task as done: \n"
-                        + indent + "   " + listArr.get(listPointer - 1), indent);
+                        + INDENT + "   " + listArr.get(listPointer - 1), INDENT);
                 updateTodoString();
                 updateTodoFile(listString);
             } else if(inputArr[0].equals("delete")) {
@@ -33,17 +33,17 @@ public class Duke {
                 Task deletedTask = listArr.get(listPointer - 1);
                 listArr.remove(listPointer - 1);
                 printIndentedString("Noted. I've removed this task: \n"
-                        + indent + "   " + deletedTask + "\n" + indent +
-                        "Now you have " + listArr.size() + " tasks in the list.", indent);
+                        + INDENT + "   " + deletedTask + "\n" + INDENT +
+                        "Now you have " + listArr.size() + " tasks in the list.", INDENT);
                 updateTodoString();
                 updateTodoFile(listString);
             } else if(inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")){
-                String befTaskAddMessage = "Got it. I've added this task: \n" + indent + "   ";
+                String befTaskAddMessage = "Got it. I've added this task: \n" + INDENT + "   ";
                 String aftTaskAddMessage = "Now you have " + (listSize + 1) + " tasks in the list.";
                 if(inputArr.length > 1) {
                     if(inputArr[0].equals("todo")) {
                             listArr.add(new Task(inputArr[1], "todo"));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
+                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
                             listSize++;
                             updateTodoString();
                             updateTodoFile(listString);
@@ -51,50 +51,50 @@ public class Duke {
                         if(input.contains(" /by ")) {
                             String deadline = input.split(" /by ")[1];
                             listArr.add(new Task(inputArr[1].split(" /by ")[0], "deadline", deadline));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
+                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
                             listSize++;
                             updateTodoString();
                             updateTodoFile(listString);
                         } else {
-                            printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by.", indent);
+                            printIndentedString("☹ OOPS!!! Deadlines require a specific datetime after /by.", INDENT);
                         }
                     } else if(inputArr[0].equals("event")) {
                         if(input.contains(" /at ")) {
                             String eventDateTime = input.split(" /at ")[1];
                             listArr.add(new Task(inputArr[1].split(" /at ")[0], "event", eventDateTime));
-                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + indent + aftTaskAddMessage, indent);
+                            printIndentedString(befTaskAddMessage + listArr.get(listSize) + "\n " + INDENT + aftTaskAddMessage, INDENT);
                             listSize++;
                             updateTodoString();
                             updateTodoFile(listString);
                         } else {
-                            printIndentedString("☹ OOPS!!! Events require a specific datetime after /at.", indent);
+                            printIndentedString("☹ OOPS!!! Events require a specific datetime after /at.", INDENT);
                         }
                     }
                 } else {
-                    printIndentedString("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.", indent);
+                    printIndentedString("☹ OOPS!!! The description of a " + inputArr[0] + " cannot be empty.", INDENT);
                 }
             } else {
-                printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", indent);
+                printIndentedString("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", INDENT);
             }
             input = sc.nextLine();
             inputArr = input.split(" ", 2);
         }
-        printIndentedString("Bye. Hope to see you again soon!", indent);
+        printIndentedString("Bye. Hope to see you again soon!", INDENT);
     }
 
-    public static void printIndentedString(String string, String indent) {
-        System.out.println(indent + "____________________________________________________________");
-        System.out.println(indent + " " + string);
-        System.out.println(indent + "____________________________________________________________");
+    public static void printIndentedString(String string, String INDENT) {
+        System.out.println(INDENT + "____________________________________________________________");
+        System.out.println(INDENT + " " + string);
+        System.out.println(INDENT + "____________________________________________________________");
         System.out.println();
     }
 
     public static void updateTodoString() {
-        listString = "" + indent + " ";
+        listString = "" + INDENT + " ";
         for (int i = 0; i < listArr.size(); i++) {
             listString += (i + 1) + ". " + listArr.get(i);
             if (i != (listArr.size() - 1)) {
-                listString += '\n' + indent + ' ';
+                listString += '\n' + INDENT + ' ';
             }
         }
     }

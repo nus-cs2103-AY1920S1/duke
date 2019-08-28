@@ -19,6 +19,14 @@ public class Duke {
 
         System.out.print(dividerLine + "  Hello from\n" + logo);
 
+        //Try to load old data.
+        try {
+            tasks = FileHandler.loadData("../data", "save1.txt");    
+        } catch (DukeException e) {
+            //Does nothing for now
+        }
+        
+        
         //Take in input
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -28,7 +36,7 @@ public class Duke {
             String[] inputArray = input.split(" ", 2);
 
             String[] cmdArgs = new String[0];
-            Task newTask = new Task("");
+            Task newTask;
 
             //If list print all tasks
             try {
@@ -38,7 +46,7 @@ public class Duke {
     
                         //Print each task
                         Iterator<Task> tasksIterator = tasks.iterator();
-                        Task currTask = new Task("");
+                        Task currTask;
     
                         for (int i = 1; i <= tasks.size(); i++) {
                             currTask = tasksIterator.next();
@@ -63,6 +71,9 @@ public class Duke {
                         Task modifiedTask = tasks.get(taskIndex);
                         modifiedTask.markAsDone();
     
+                        //Saving
+                        FileHandler.saveLocationAndName( tasks, "../data", "save1.txt");
+                        
                         //Printing
                         System.out.print(dividerLine);
     
@@ -79,6 +90,11 @@ public class Duke {
                         }
                         newTask = new Todo(inputArray[1]);
                         tasks.add(newTask);
+
+                        //Saving
+                        FileHandler.saveLocationAndName( tasks, "../data", "save1.txt");
+
+                        //Printing
                         System.out.print(dividerLine
                                 + "  Got it. I've added this task:\n"
                                 + "    "
@@ -97,6 +113,11 @@ public class Duke {
                         cmdArgs = inputArray[1].split(" /at ", 2);
                         newTask = new Event(cmdArgs[0], cmdArgs[1]);
                         tasks.add(newTask);
+
+                        //Saving
+                        FileHandler.saveLocationAndName( tasks, "../data", "save1.txt");
+                        
+                        //Printing
                         System.out.print(dividerLine
                                 + "  Got it. I've added this task:\n"
                                 + "    "
@@ -115,6 +136,11 @@ public class Duke {
                         cmdArgs = inputArray[1].split(" /by ", 2);
                         newTask = new Deadline(cmdArgs[0], cmdArgs[1]);
                         tasks.add(newTask);
+
+                        //Saving
+                        FileHandler.saveLocationAndName( tasks, "../data", "save1.txt");
+                        
+                        //Printing
                         System.out.print(dividerLine
                                 + "  Got it. I've added this task:\n"
                                 + "    "
@@ -133,6 +159,11 @@ public class Duke {
                         }
                         int taskIndexToRemove = Integer.parseInt(inputArray[1]) - 1;
                         Task removedTask = tasks.remove(taskIndexToRemove);
+
+                        //Saving
+                        FileHandler.saveLocationAndName( tasks, "../data", "save1.txt");
+                        
+                        //Printing
                         System.out.print(dividerLine
                                 + "  Noted. I've removed this task:\n"
                                 + "    "

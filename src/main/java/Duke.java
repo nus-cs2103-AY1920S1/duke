@@ -1,99 +1,51 @@
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Duke {
 
+    private Storage storage;
     private TaskList tasks;
 
-    private Duke() {
-        this.tasks = new TaskList();
+    private Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        try {
+            this.tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            this.tasks = new TaskList();
+            System.out.println(e.getMessage() + "An empty list is created");
+        }
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        try {
-            duke.importTasks("../data/duke.txt");
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            return;
-        } catch (DukeException e) {
-            System.out.println(e);
-            return;
-        }
+        Duke duke = new Duke("../data/duke.txt");
 
         // Greet
         String greeting = "Hello! I'm Duke\nWhat can I do for you?\n";
         System.out.println(greeting);
 
         Scanner scanner = new Scanner(System.in);
-
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine().trim();
-
             // Exit
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
-
             try {
                 duke.run(command);
             } catch (DukeException e) {
                 System.out.println(e);
             }
-
             // Empty line separator at the end of the command response
             System.out.println();
         }
-
         scanner.close();
+
+        // Save task list
         try {
-            duke.exportTasks("../data/duke.txt");
-        } catch (IOException e) {
-            System.out.println("Failed to save tasks.");
+            duke.storage.save(duke.tasks);
+        } catch (DukeException e) {
+            System.out.println(e);
         }
-    }
-
-    private void importTasks(String filePath) throws FileNotFoundException, DukeException {
-        File file = new File(filePath);
-        Scanner scanner = new Scanner(file);
-        while (scanner.hasNextLine()) {
-            String[] data = scanner.nextLine().split(" \\| ");
-            Task task;
-
-            switch (data[0]) {
-                case "T":
-                    task = new Todo(data[2]);
-                    break;
-                case "D":
-                    task = new Deadline(data[2], data[3]);
-                    break;
-                case "E":
-                    task = new Event(data[2], data[3]);
-                    break;
-                default:
-                    throw new DukeException("Failed to load tasks.");
-            }
-
-            if (data[1].equals("1")) {
-                task.markAsDone();
-            }
-
-            tasks.add(task);
-        }
-        scanner.close();
-    }
-
-    private void exportTasks(String filePath) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task : tasks.getTasks()) {
-            fw.write(task.serialize());
-            fw.write(System.lineSeparator());
-        }
-        fw.close();
     }
 
     private void run(String command) throws DukeException {

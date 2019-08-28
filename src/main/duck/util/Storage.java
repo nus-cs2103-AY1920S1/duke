@@ -5,12 +5,7 @@ import duck.task.Event;
 import duck.task.Task;
 import duck.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -66,10 +61,10 @@ public class Storage {
         for (int i = 0; i < taskList.getTotalTask(); i++) {
             Task task = taskList.getTaskAt(i);
             if (task instanceof Todo) {
-                content = "T|" + task.getStatus() +  "|" + task.getDescription();
+                content = "T|" + task.getStatus() + "|" + task.getDescription();
             } else if (task instanceof Deadline) {
                 Deadline dl = (Deadline) task;
-                content = "D|" + task.getStatus() +  "|" + dl.getDescription() + "|" + dl.getDueDateTime();
+                content = "D|" + task.getStatus() + "|" + dl.getDescription() + "|" + dl.getDueDateTime();
             } else if (task instanceof Event) {
                 Event e = (Event) task;
                 content = "E|" + e.getStatus() + "|" + e.getDescription() + "|" + e.getStartDateTime() + "|"

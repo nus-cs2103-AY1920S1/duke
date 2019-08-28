@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
      * @throws DukeException  If the specified number for the task does not existed in the current list
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (target < 0 || target >= taskList.getTotalTask()) {
             throw new DukeException("The task number is invalid!");
         }

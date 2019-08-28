@@ -28,6 +28,16 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
+    /**
+     * Starts the program by initialising and run the <code>Duck</code> object.
+     * The file path is "/Users/xiaoyu/duke/data/duke.txt" by default.
+     *
+     * @param args  an array of <code>String</code> read from console
+     */
+    public static void main(String[] args) {
+        new Duke("/Users/xiaoyu/duke/data/duke.txt").run();
+    }
+
     public TaskList getTaskList() {
         return taskList;
     }
@@ -71,15 +81,5 @@ public class Duke {
             }
         }
         ui.showGoodbye();
-    }
-
-    /**
-     * Starts the program by initialising and run the <code>Duck</code> object.
-     * The file path is "/Users/xiaoyu/duke/data/duke.txt" by default.
-     *
-     * @param args  an array of <code>String</code> read from console
-     */
-    public static void main(String[] args) {
-        new Duke("/Users/xiaoyu/duke/data/duke.txt").run();
     }
 }

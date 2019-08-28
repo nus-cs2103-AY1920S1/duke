@@ -69,7 +69,7 @@ public class Task {
         return description;
     }
 
-    public boolean getStatus () {
+    public boolean getStatus() {
         return isDone;
     }
 

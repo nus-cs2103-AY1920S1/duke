@@ -70,7 +70,7 @@ public class AddCommand extends Command {
      * @param storage         the <code>Storage</code> object to load and record data
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
 
         switch (taskType) {

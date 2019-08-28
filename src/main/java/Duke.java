@@ -38,18 +38,21 @@ public class Duke {
                             name += commandArr[i] + " ";
                         }
                         addTask(new Todo(name.trim()), tasks);
+                        storage.writeToFile();
                         counter++;
                         break;
 
                     case "deadline":
                         keywords = splitCommands(commandArr, "/by", "deadline");
                         addTask(new Deadline(keywords[0], keywords[1]), tasks);
+                        storage.writeToFile();
                         counter++;
                         break;
 
                     case "event":
                         keywords = splitCommands(commandArr, "/at", "event");
                         addTask(new Event(keywords[0], keywords[1]), tasks);
+                        storage.writeToFile();
                         counter++;
                         break;
 
@@ -60,11 +63,13 @@ public class Duke {
                     case "done":
                         taskId = Integer.parseInt(commandArr[1]);
                         handleDone(taskId);
+                        storage.writeToFile();
                         break;
 
                     case "delete":
                         taskId = Integer.parseInt(commandArr[1]);
                         handleDelete(taskId);
+                        storage.writeToFile();
                         break;
 
                     case "bye":

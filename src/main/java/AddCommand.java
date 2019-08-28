@@ -4,7 +4,7 @@
  * subsequently updating the txt file.
  */
 public class AddCommand extends Command {
-	public String command;
+	protected String command;
 	
 	/**
 	 * Class constructor

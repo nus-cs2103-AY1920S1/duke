@@ -19,7 +19,8 @@ public abstract class Command {
 	 * @throws InvalidDescriptionException if input does not follow the required format.
 	 * @throws IOException if storage file for tracking the TaskList is not found.
 	 */
-	public abstract void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, InvalidInputException, InvalidDescriptionException, IOException;
+	public abstract void execute(TaskList tasks, Storage storage) throws EmptyDescriptionException,
+			InvalidInputException, InvalidDescriptionException, IOException;
 	
 	/**
 	 * Abstract method that is most applicable to specifically the ByeCommand Class.
@@ -41,9 +42,11 @@ public abstract class Command {
 		} else if (e instanceof EmptyDescriptionException) {
 			System.out.println(String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage()));
 		} else if (e instanceof InvalidDescriptionException) {
-			System.out.println(String.format("OOPS!!! Invalid input! Make sure your %s has a description and required data after /at for Event or /by for Deadline.\n", e.getMessage()));
+			System.out.println(String.format("OOPS!!! Invalid input! Make sure your %s has a description and required" +
+					" data after /at for Event or /by for Deadline.\n", e.getMessage()));
 		} else if (e instanceof ParseException) {
-			System.out.println(String.format("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: 02/08/2019 14:30\n", e.getMessage()));
+			System.out.println(String.format("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm," +
+					" example: 02/08/2019 14:30\n", e.getMessage()));
 		} else {
 			System.out.println(e.getMessage());
 		}

@@ -211,7 +211,8 @@ public class Storage {
 		try {
 			this.readData(tasks);
 		} catch (ParseException e) {
-			System.out.println("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: 02/08/2019 14:30\n");
+			System.out.println("Please write your deadline/event date in this format: dd/MM/yyyy HH:mm, example: " +
+					"02/08/2019 14:30\n");
 		}
 		return tasks;
 	}

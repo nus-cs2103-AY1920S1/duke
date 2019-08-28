@@ -7,6 +7,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String formattedString() {
+        return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, at);
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

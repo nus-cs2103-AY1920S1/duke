@@ -5,6 +5,7 @@ import duke.task.DukeTaskDeadline;
 import duke.task.DukeTaskEvent;
 import duke.task.DukeTaskToDo;
 
+import javax.swing.text.html.Option;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,14 +31,6 @@ public class DukeStorage {
     }
 
     /**
-     * Initializes the BufferedWriter object to prepare for writing to the specified file in {@link #taskFilePath}.
-     * @throws IOException If there are any errors like insufficient permissions, file not found or other file errors.
-     */
-    private void initializeFileOutputStream() throws IOException {
-        taskFileOutputBuffer = new BufferedWriter(new FileWriter(taskFilePath, false));
-    }
-
-    /**
      * Initializes the BufferedReader object to prepare for reading from the specified file in {@link #taskFilePath}. If
      * the data file does not exist, create it along with the necessary folders.
      * @throws IOException File parsing error.
@@ -50,16 +43,11 @@ public class DukeStorage {
     }
 
     /**
-     * Writes a specified List&lt;duke.task.DukeTask&gt; into the specified file in {@link #taskFilePath}.
-     * Each task will be written on a new line.
-     * @param userTasks List&lt;duke.task.DukeTask&gt; to save tasks from, to the file.
-     * @throws IOException File parsing error.
+     * Initializes the BufferedWriter object to prepare for writing to the specified file in {@link #taskFilePath}.
+     * @throws IOException If there are any errors like insufficient permissions, file not found or other file errors.
      */
-    private void writeDukeTasks(List<DukeTask> userTasks) throws IOException {
-        for (DukeTask task : userTasks) {
-            taskFileOutputBuffer.write(processWriteTask(task));
-            taskFileOutputBuffer.newLine();
-        }
+    private void initializeFileOutputStream() throws IOException {
+        taskFileOutputBuffer = new BufferedWriter(new FileWriter(taskFilePath, false));
     }
 
     /**
@@ -73,8 +61,9 @@ public class DukeStorage {
     private List<DukeTask> readDukeTasks(DukeUi ui) throws IOException {
         List<DukeTask> userTasks = new ArrayList<>();
         String line;
-        while ((line = taskFileInputBuffer.readLine()) != null) {
+        while ((line = taskFileInputBuffer.readLine()) != null) { //readLine until EOF
             Optional<DukeTask> readTask = processReadTask(line);
+
             if (!readTask.isEmpty()) {
                 userTasks.add(readTask.get());
             } else {
@@ -85,28 +74,17 @@ public class DukeStorage {
     }
 
     /**
-     * Takes in a {@link duke.task.DukeTask} object and determines how the final String to write to the file should be
-     * formatted.
-     * @param task {@link DukeTask} object to save to file as a String.
-     * @return Formatted String to be written to the file.
+     * Loads the data file and reads it, initializing a List&lt;duke.task.DukeTask&gt; to be returned to the caller.
+     * This List will be populated with {@link duke.task.DukeTask} from the data file.
+     * @param ui Instance of {@link DukeUi} which will show output to the user.
+     * @return Optional&lt;duke.task.DukeTask&gt; which could be Optional.empty() if there are file parsing errors.
+     * @throws IOException File parsing error.
      */
-    private String processWriteTask(DukeTask task) {
-        int taskComplete = task.getTaskIsComplete() ? 1 : 0;
-        String taskConstraint = "";
-        String writtenString = "";
-
-        if (task instanceof DukeTaskDeadline) {
-            taskConstraint = ((DukeTaskDeadline) task).getTaskDeadline();
-        } else if (task instanceof  DukeTaskEvent) {
-            taskConstraint = ((DukeTaskEvent) task).getTaskLocation();
-        }
-
-        writtenString = task.getTaskType() + " | " + taskComplete + " | " + task.getTaskName();
-        if (taskConstraint.length() > 0) {
-            writtenString += " | " + taskConstraint;
-        }
-
-        return writtenString;
+    public List<DukeTask> load(DukeUi ui) throws IOException {
+        initializeFileInputStream();
+        List<DukeTask> retrievedTasks = readDukeTasks(ui);
+        taskFileInputBuffer.close();
+        return retrievedTasks;
     }
 
     /**
@@ -115,9 +93,14 @@ public class DukeStorage {
      * @return Optional&lt;duke.task.DukeTask&gt; which could be Optional.empty() if the String has an unexpected
      *     formatting.
      */
-    private Optional<DukeTask> processReadTask(String line) {
+    private Optional<DukeTask> processReadTask(String line) throws IOException {
         DukeTask task;
         String[] lineTokens = line.split(" \\| ");
+
+        if (lineTokens.length < 3) {
+            throw new IOException();
+        }
+
         String taskType = lineTokens[0];
         boolean isComplete = lineTokens[1].equals("1") ? true : false;
         String taskName = lineTokens[2];
@@ -136,17 +119,28 @@ public class DukeStorage {
     }
 
     /**
-     * Loads the data file and reads it, initializing a List&lt;duke.task.DukeTask&gt; to be returned to the caller.
-     * This List will be populated with {@link duke.task.DukeTask} from the data file.
-     * @param ui Instance of {@link DukeUi} which will show output to the user.
-     * @return Optional&lt;duke.task.DukeTask&gt; which could be Optional.empty() if there are file parsing errors.
-     * @throws IOException File parsing error.
+     * Takes in a {@link duke.task.DukeTask} object and determines how the final String to write to the file should be
+     * formatted.
+     * @param task {@link DukeTask} object to save to file as a String.
+     * @return Formatted String to be written to the file.
      */
-    public List<DukeTask> load(DukeUi ui) throws IOException {
-        initializeFileInputStream();
-        List<DukeTask> retrievedTasks = readDukeTasks(ui);
-        taskFileInputBuffer.close();
-        return retrievedTasks;
+    private String processWriteTask(DukeTask task) {
+        int taskComplete = task.getTaskIsComplete() ? 1 : 0;
+        String taskConstraint = "";
+        String writtenString = "";
+
+        if (task instanceof DukeTaskDeadline) {
+            taskConstraint = ((DukeTaskDeadline) task).getTaskDeadline();
+        } else if (task instanceof DukeTaskEvent) {
+            taskConstraint = ((DukeTaskEvent) task).getTaskLocation();
+        }
+
+        writtenString = task.getTaskType() + " | " + taskComplete + " | " + task.getTaskName();
+        if (taskConstraint.length() > 0) {
+            writtenString += " | " + taskConstraint;
+        }
+
+        return writtenString;
     }
 
     /**
@@ -159,5 +153,18 @@ public class DukeStorage {
         initializeFileOutputStream();
         writeDukeTasks(userTasks);
         taskFileOutputBuffer.close();
+    }
+
+    /**
+     * Writes a specified List&lt;duke.task.DukeTask&gt; into the specified file in {@link #taskFilePath}.
+     * Each task will be written on a new line.
+     * @param userTasks List&lt;duke.task.DukeTask&gt; to save tasks from, to the file.
+     * @throws IOException File parsing error.
+     */
+    private void writeDukeTasks(List<DukeTask> userTasks) throws IOException {
+        for (DukeTask task : userTasks) {
+            taskFileOutputBuffer.write(processWriteTask(task));
+            taskFileOutputBuffer.newLine();
+        }
     }
 }

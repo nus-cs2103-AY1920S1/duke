@@ -25,11 +25,7 @@ public class DukeCommandList extends DukeCommand {
         if (inputTokens[0].toLowerCase().equals("list")) {
             new DukeCommandListAll(inputTokens).execute(tasks, ui, storage);
         } else if (inputTokens[0].toLowerCase().equals("find")) {
-            if (inputTokens.length == 1) {
-                ui.displayEmptySearchTermError();
-            } else {
-                new DukeCommandListFind(inputTokens).execute(tasks, ui, storage);
-            }
+            new DukeCommandListFind(inputTokens).execute(tasks, ui, storage);
         }
     }
 }

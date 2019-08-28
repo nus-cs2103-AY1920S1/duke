@@ -24,7 +24,11 @@ public class DukeCommandListFind extends DukeCommandList {
      */
     @Override
     public void execute(DukeTaskList tasks, DukeUi ui, DukeStorage storage) {
-        String searchTerms = DukeParser.concatStringTokens(inputTokens, 1, (inputTokens.length - 1));
-        tasks.findDukeTasks(searchTerms, ui);
+        if (inputTokens.length == 1) {
+            ui.displayEmptySearchTermError();
+        } else {
+            String searchTerms = DukeParser.concatStringTokens(inputTokens, 1, (inputTokens.length - 1));
+            tasks.findDukeTasks(searchTerms, ui);
+        }
     }
 }

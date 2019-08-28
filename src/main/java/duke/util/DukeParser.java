@@ -21,22 +21,7 @@ public class DukeParser {
     private static final String DUKE_DATETIME_OUTPUT_FORMAT = "MMMM uuuu, h:mma";
 
     private enum DukeCommandEnum {
-        TODO, DEADLINE, EVENT, FIND, LIST, DONE, DELETE, BYE
-    }
-
-    /**
-     * Gets the starting index of the parameter of the supplied flag in the input String array.
-     * @param inputTokens Array of String to check for if the flag exists.
-     * @param flag Exact String to look for.
-     * @return Starting index of the flag's parameter, -1 if flag is not found in the array.
-     */
-    public static int getInputFlagParameterStartingIndex(String[] inputTokens, String flag) {
-        for (int counter = 0; counter < inputTokens.length; counter++) {
-            if (inputTokens[counter].equals(flag)) {
-                return counter + 1;
-            }
-        }
-        return -1;
+        BYE, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO
     }
 
     /**
@@ -63,7 +48,7 @@ public class DukeParser {
      * 1st, 2nd, 3rd, 4th, etc. This LocalDateTime object is then formatted to the format
      * {@link #DUKE_DATETIME_OUTPUT_FORMAT}
      * @param input Date-time String in the format "d/MM/uuuu HHmm". E.g. "2/12/2019 1800".
-     * @return Date-time String in the format: "ddth of MM uuuu, ha". E.g. "2nd of December 2019, 6PM".
+     * @return Date-time String in the format: "ddth of MM uuuu, h:mma". E.g. "2nd of December 2019, 6:00PM".
      * @throws DateTimeParseException If the input String does not match the required format.
      */
     public static String formatDate(String input) throws DateTimeParseException {
@@ -88,6 +73,21 @@ public class DukeParser {
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern(DUKE_DATETIME_INPUT_FORMAT);
         LocalDateTime inputDateTime = LocalDateTime.parse(input, dateTimeFormat);
         return inputDateTime.format(dayOfMonthFormatter);
+    }
+
+    /**
+     * Gets the starting index of the parameter of the supplied flag in the input String array.
+     * @param inputTokens Array of String to check for if the flag exists.
+     * @param flag Exact String to look for.
+     * @return Starting index of the flag's parameter, -1 if flag is not found in the array.
+     */
+    public static int getInputFlagParameterStartingIndex(String[] inputTokens, String flag) {
+        for (int counter = 0; counter < inputTokens.length; counter++) {
+            if (inputTokens[counter].equals(flag)) {
+                return counter + 1;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -128,8 +128,7 @@ public class DukeParser {
             }
         } catch (IllegalArgumentException ex) {
             ui.displayUnknownCommand();
+            return Optional.empty();
         }
-
-        return Optional.empty();
     }
 }

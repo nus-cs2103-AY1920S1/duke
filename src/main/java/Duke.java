@@ -27,6 +27,7 @@ public class Duke {
             tasks = new DukeTaskList(storage.load(ui));
         } catch (NullPointerException | IOException ex) {
             ui.displayFileLoadingError();
+            System.exit(0);
         }
     }
 

@@ -80,49 +80,49 @@ public class DukeUi {
      * Prints the error message for when the task description is missing from a new task.
      */
     public void displayEmptyDescriptionError() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE));
+        displayToUser(DUKE_ERR_EMPTY_DESCRIPTION_MESSAGE);
     }
 
     /**
      * Prints the error message for when the search term is empty from using the "find" command.
      */
     public void displayEmptySearchTermError() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_EMPTY_SEARCH_TERM));
+        displayToUser(DUKE_ERR_EMPTY_SEARCH_TERM);
     }
 
     /**
      * Prints the error message for when the data file failed to load.
      */
     public void displayFileLoadingError() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_FILE_IO_EXCEPTION));
+        displayToUser(DUKE_ERR_FILE_IO_EXCEPTION);
     }
 
     /**
      * Prints the error message for when the user entered a date-time format that is different from the syntax.
      */
     public void displayInvalidDateFormat() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_INVALID_DATE_FORMAT));
+        displayToUser(DUKE_ERR_INVALID_DATE_FORMAT);
     }
 
     /**
      * Prints the error message for when the deadline parameter is missing from a new deadline.
      */
     public void displayMissingDeadlineParam() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_MISSING_DEADLINE_PARAM));
+        displayToUser(DUKE_ERR_MISSING_DEADLINE_PARAM);
     }
 
     /**
      * Prints the error message for when the event parameter is missing from a new event.
      */
     public void displayMissingEventParam() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_MISSING_EVENT_PARAM));
+        displayToUser(DUKE_ERR_MISSING_EVENT_PARAM);
     }
 
     /**
      * Prints the error message for when the index parameter is missing from deleting a task or marking a task as done.
      */
     public void displayMissingIndex() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_MISSING_INDEX));
+        displayToUser(DUKE_ERR_MISSING_INDEX);
     }
 
     /**
@@ -130,7 +130,7 @@ public class DukeUi {
      * out of bounds.
      */
     public void displayTaskIndexOutOfBounds() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_INDEX_OUT_OF_BOUNDS));
+        displayToUser(DUKE_ERR_INDEX_OUT_OF_BOUNDS);
     }
 
     /**
@@ -138,14 +138,14 @@ public class DukeUi {
      * non-numerical.
      */
     public void displayTaskInvalidIndex() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_INVALID_INDEX));
+        displayToUser(DUKE_ERR_INVALID_INDEX);
     }
 
     /**
      * Prints the error message for when an unknown user-input is entered.
      */
     public void displayUnknownCommand() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_UNKNOWN_COMMAND_MESSAGE));
+        displayToUser(DUKE_ERR_UNKNOWN_COMMAND_MESSAGE);
     }
 
     /**
@@ -153,7 +153,7 @@ public class DukeUi {
      * This is usually because the data file is corrupted or in an incorrect format.
      */
     public void displayUnknownTask() {
-        System.out.println(encapsulateOutputWithSeparator(DUKE_ERR_UNKNOWN_TASK));
+        displayToUser(DUKE_ERR_UNKNOWN_TASK);
     }
 
     public String readCommand() {

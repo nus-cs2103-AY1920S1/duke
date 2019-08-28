@@ -3,14 +3,23 @@ package duke;
 abstract class Task {
     private String description;
     private boolean isDone;
+    protected static final String storageStringSeparator = " | ";
 
-    Task(final String description) {
+    Task(final String description, final boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
-    private String getStatusIcon() {
+    String getDescription() {
+        return description;
+    }
+
+    String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or cross symbols
+    }
+
+    boolean isDone() {
+        return this.isDone;
     }
 
     void markAsDone() {
@@ -21,4 +30,6 @@ abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
+
+    abstract String toStorageString();
 }

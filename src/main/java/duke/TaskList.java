@@ -38,4 +38,13 @@ class TaskList {
         }
         return ret.toString();
     }
+
+    String toStorageString() {
+        StringBuilder ret = new StringBuilder();
+        for (Task task : tasks) {
+            ret.append(task.toStorageString())
+                .append("\n");
+        }
+        return ret.toString();
+    }
 }

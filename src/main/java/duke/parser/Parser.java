@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.IncorrectCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
@@ -46,6 +47,9 @@ public class Parser {
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
+
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(arr[1]);
 
             case DoneCommand.COMMAND_WORD:
                 return prepareDone(arr[1]);
@@ -91,6 +95,10 @@ public class Parser {
     private static Command prepareDelete(String args) {
         int id = Integer.parseInt(args) - 1;
         return new DeleteCommand(id);
+    }
+
+    private static Command prepareFind(String args) {
+        return new FindCommand(args);
     }
 
     private static Command prepareDone(String args) {

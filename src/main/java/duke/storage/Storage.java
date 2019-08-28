@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
-    String filepath;
+    private String filepath;
 
     public Storage(String filepath) {
         this.filepath = filepath;
@@ -40,7 +40,7 @@ public class Storage {
     public Task stringToTask(String str) throws DukeException {
         String[] split = str.split("\\|");
         try {
-            boolean isDone = (split[0].trim()).equals("1") ? true : false;
+            boolean isDone = (split[0].trim()).equals("1");
             switch (split[1].trim()) {
             case "T": // Todo.
                 return new Todo(split[2].trim()).setDone(isDone);

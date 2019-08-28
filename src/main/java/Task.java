@@ -1,11 +1,11 @@
 /** Class to represent a task. */
-class Task {
+abstract class Task {
     protected String name;
     protected boolean done;
+    protected TaskType type;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
     }
 
     // mark task as done
@@ -17,4 +17,13 @@ class Task {
     public String getName() {
         return this.name;
     }
+
+    // check if task is done
+    public boolean isTaskDone() { return this.done; }
+
+    // get task type
+    public abstract TaskType getType();
+
+    // get task date
+    public abstract String getDate();
 }

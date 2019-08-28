@@ -18,6 +18,11 @@ class TaskList {
         prettyPrint(sb.toString());
     }
 
+    // add task to list without message
+    public void addTaskWithoutMessage(Task task) {
+        tasks.add(task);
+    }
+
     // list tasks
     public void listTasks() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
@@ -41,6 +46,11 @@ class TaskList {
         sb.append(String.format("     %s\n", this.tasks.remove(index - 1).toString()));
         sb.append(String.format("     Now you have %d tasks in the list.", this.tasks.size()));
         prettyPrint(sb.toString());
+    }
+
+    // return tasks
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     // pretty print a string

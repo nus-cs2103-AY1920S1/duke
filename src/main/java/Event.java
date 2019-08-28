@@ -8,6 +8,14 @@ class Event extends Task {
         this.date = date;
     }
 
+    // get task type
+    public TaskType getType() {
+        return TaskType.EVENT;
+    }
+
+    // get task date
+    public String getDate() { return this.date; }
+
     @Override
     public String toString() {
         String doneStr = this.done ? "✓" : "✗";

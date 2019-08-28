@@ -1,6 +1,5 @@
-import com.sun.javafx.logging.JFRInputEvent;
+package duke;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -129,7 +128,7 @@ public class Duke {
                     taskNum--; // ArrayList index == taskNum - 1
 
                     if (taskNum >= tasks.size()){
-                        throw new DukeException("Task no. " + (taskNum+1) + " does not exist");
+                        throw new DukeException("duke.Task no. " + (taskNum+1) + " does not exist");
                     }
 
                     Task taskToDelete = tasks.get(taskNum);

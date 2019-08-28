@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -66,7 +68,7 @@ public class Storage { private String filepath;
             if (words[0].length() < 3 ){
 
                 if (words[0].contains("T")) { // Will avoid header
-                    // Create a Todo class
+                    // Create a duke.Todo class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -79,7 +81,7 @@ public class Storage { private String filepath;
                     tasks.add(newTodo);
 
                 } else if (words[0].contains("E")) {
-                    // Create an Event class
+                    // Create an duke.Event class
 
                     if (words[1].contains("1")) {
                         isDone = true;
@@ -93,7 +95,7 @@ public class Storage { private String filepath;
                     tasks.add(newEvent);
 
                 } else if (words[0].contains("D")) {
-                    // Create a Deadline class
+                    // Create a duke.Deadline class
 
                     if (words[1].contains("1")) {
                         isDone = true;

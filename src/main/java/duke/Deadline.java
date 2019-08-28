@@ -1,7 +1,4 @@
-import java.text.DateFormatSymbols;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package duke;
 
 public class Deadline extends Task {
 

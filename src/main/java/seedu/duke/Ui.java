@@ -52,7 +52,7 @@ public class Ui {
 
     public static void addLine(String str, int size) {
         System.out.println("Got it. I've added this task:\n " + str +
-                "\n Now you have " + size + " tasks in the list.");
+                "\nNow you have " + size + " tasks in the list.");
     }
 
     public static void exitLine() {
@@ -60,9 +60,24 @@ public class Ui {
     }
 
     public static void list(TaskList tl) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i <= tl.list.size(); i++) {
-            System.out.println(" " + i + ". " + tl.list.get(i - 1).toString());
+        if (tl.list.size() != 0) {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 1; i <= tl.list.size(); i++) {
+                System.out.println(" " + i + ". " + tl.list.get(i - 1).toString());
+            }
+        } else {
+            System.out.println("You have no tasks in your list.");
+        }
+    }
+
+    public static void listMatching(TaskList tl) {
+        if (tl.list.size() != 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= tl.list.size(); i++) {
+                System.out.println(" " + i + ". " + tl.list.get(i - 1).toString());
+            }
+        } else {
+            System.out.println("You have no matching tasks in your list.");
         }
     }
 }

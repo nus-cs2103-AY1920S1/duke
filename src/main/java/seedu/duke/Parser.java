@@ -26,6 +26,10 @@ public class Parser {
             c = new ListCommand();
         }
 
+        else if (s.equals("find")) {
+            c = new FindCommand(arr[1].trim());
+        }
+
         else {
             if (s.equals("bye")) {
                 c = new ExitCommand();
@@ -50,8 +54,8 @@ public class Parser {
                 throw new DukeException("Empty Description", "The description of a " + first + " cannot be empty.");
             }
 
-            //if done or delete are not followed by a number
-            else if (first.equals("done") || first.equals("delete")) {
+            //if done, delete or find are not followed by a number
+            else if (first.equals("done") || first.equals("delete") || first.equals("find")) {
                 throw new DukeException("Missing Task", "Please specify a task.");
             }
 
@@ -61,7 +65,7 @@ public class Parser {
             }
         } else {
             //if it is an invalid input containing multiple words
-            if (!task && !first.equals("done") && !first.equals("delete")) {
+            if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find")) {
                 throw new DukeException("Invalid Input", "I'm sorry, but I don't know what that means :-(");
             }
 

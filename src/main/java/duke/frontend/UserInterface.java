@@ -67,8 +67,10 @@ public class UserInterface {
     private static int getWidth(int number) {
         return Integer.toString(number).length();
     }
+
     /**
      * Returns the boolean representing whether or not the user interface is accepting user input
+     *
      * @return True is the user interface can accept user input, false otherwise
      */
     public boolean canAcceptInput() {
@@ -77,7 +79,8 @@ public class UserInterface {
 
     /**
      * Intructs the output to display the logo, and welcome message of duke, and to load the previously saved task list.
-     * @throws DukeException
+     *
+     * @throws DukeException Exception thrown when error occurs while setting up duke
      */
     public void start() throws DukeException {
         Output logo = new Output(System.out);
@@ -106,6 +109,7 @@ public class UserInterface {
 
     /**
      * Displays the error message when an exception in the user interface occurs and an exception is thrown
+     *
      * @param ex The exception which was thrown when an error occurred
      */
     public void displayError(DukeException ex) {
@@ -119,6 +123,7 @@ public class UserInterface {
 
     /**
      * Reads the input from console and return the command it is parsed as.
+     *
      * @return The command the input is parsed as if it can be parsed
      * @throws DukeException The exception thrown when the input cannot be properly parsed as a command
      */
@@ -128,6 +133,7 @@ public class UserInterface {
 
     /**
      * Executes the command in the environment of the user interface
+     *
      * @param command The command to be executed
      * @throws DukeException The exception thrown when a command cannot be executed
      */
@@ -228,10 +234,6 @@ public class UserInterface {
                         String.format("%0" + getWidth(taskList.size()) + "d", count), ". ", task.toString());
             }
         }
-    }
-
-    private static int width(int number) {
-        return Integer.toString(number).length();
     }
 
     private void executeCommand(ExitCommand command) throws DukeException {

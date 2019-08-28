@@ -1,8 +1,8 @@
 package duke.command;
 
 /**
- *  Abstract class for data structures which to wrap a command, and the arguments for it, which can be
- *  passed to the logic executing these command.
+ * Abstract class for data structures which to wrap a command, and the arguments for it, which can be
+ * passed to the logic executing these command.
  */
 public abstract class Command {
     private final Type type;
@@ -10,7 +10,8 @@ public abstract class Command {
 
     /**
      * Constructs the command
-     * @param type The enumerated type of command
+     *
+     * @param type       The enumerated type of command
      * @param parameters The arguments for the command, if any
      */
     public Command(Type type, String... parameters) {

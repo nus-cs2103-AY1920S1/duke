@@ -15,6 +15,7 @@ public class Input {
 
     /**
      * Constructs the user input handler
+     *
      * @param inputStream The input stream where the which needs to be read from
      */
     public Input(InputStream inputStream) {
@@ -23,6 +24,7 @@ public class Input {
 
     /**
      * Returns the next line in the buffer where the user input is stored into
+     *
      * @return The string representation of the next line in the buffer
      * @throws DukeException Exception to be thrown when the an error occurs when trying to read from the buffer
      */

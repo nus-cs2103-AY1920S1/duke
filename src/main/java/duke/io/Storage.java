@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Constructs an instance of the file handler
+     *
      * @param path The path to the file in the src/main/resource/SaveFiles/ directory
      */
     public Storage(String path) {
@@ -62,6 +63,7 @@ public class Storage {
 
     /**
      * Returns the task list from the data stored in the file at the file path provided during initialization
+     *
      * @return The task list from data stored in the file
      * @throws DukeException Exception thrown when error occurs when trying to recreate the task list
      */
@@ -102,43 +104,26 @@ public class Storage {
     }
 
     private Deadline readAsDeadline(BufferedReader file) throws IOException {
-        boolean isComplete;
-
-        if (file.readLine().equals("0")) {
-            isComplete = false;
-        } else {
-            isComplete = true;
-        }
+        boolean isComplete = !file.readLine().equals("0");
 
         return new Deadline(isComplete, file.readLine(), file.readLine());
     }
 
     private ToDo readAsToDo(BufferedReader file) throws IOException {
-        boolean isComplete;
-
-        if (file.readLine().equals("0")) {
-            isComplete = false;
-        } else {
-            isComplete = true;
-        }
+        boolean isComplete = !file.readLine().equals("0");
 
         return new ToDo(isComplete, file.readLine());
     }
 
     private Event readAsEvent(BufferedReader file) throws IOException {
-        boolean isComplete;
-
-        if (file.readLine().equals("0")) {
-            isComplete = false;
-        } else {
-            isComplete = true;
-        }
+        boolean isComplete = !file.readLine().equals("0");
 
         return new Event(isComplete, file.readLine(), file.readLine());
     }
 
     /**
      * Writes/Saves the task list into the file path provided during initialization
+     *
      * @param taskList The task list to be saved at the file path
      * @throws DukeException Exception thrown when error occurs when trying to save the task list
      */
@@ -173,7 +158,7 @@ public class Storage {
             throw new DukeInvalidFilePathException(filePath);
         } catch (IOException exception) {
             // FileNotFoundException should the only exception, if it is not then:
-            System.err.println(exception);
+            System.err.println(exception.getMessage());
         }
     }
 }

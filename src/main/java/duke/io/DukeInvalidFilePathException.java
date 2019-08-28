@@ -9,6 +9,7 @@ public class DukeInvalidFilePathException extends DukeException {
 
     /**
      * Constructs the exception
+     *
      * @param path The file path of the file which is missing, or is a directory
      */
     public DukeInvalidFilePathException(String path) {

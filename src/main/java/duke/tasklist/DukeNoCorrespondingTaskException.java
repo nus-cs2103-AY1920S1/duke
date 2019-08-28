@@ -9,6 +9,7 @@ import duke.DukeException;
 public class DukeNoCorrespondingTaskException extends DukeException {
     /**
      * Constructs the exception to be thrown
+     *
      * @param number The number that does not match a task number in the task list
      */
     public DukeNoCorrespondingTaskException(int number) {

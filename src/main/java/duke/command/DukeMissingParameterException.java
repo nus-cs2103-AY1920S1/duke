@@ -11,7 +11,8 @@ public class DukeMissingParameterException extends DukeException {
 
     /**
      * Constructor for the exception to be thrown when the necessary arguments for a command are not provided
-     * @param type The type of the command which was not supplied the necessary arguments
+     *
+     * @param type      The type of the command which was not supplied the necessary arguments
      * @param arguments The arguments provided along with the command
      */
     public DukeMissingParameterException(Type type, String[] arguments) {

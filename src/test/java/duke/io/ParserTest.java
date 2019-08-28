@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Class to test certain functionality of the Parser class
  */
-public class DukeParserTest {
+public class ParserTest {
 
     /**
      * Test that the parseDateTime method can output the properly formatted date and time when a valid input is given

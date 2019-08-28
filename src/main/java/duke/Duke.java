@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
+
 import java.io.IOException;
 
 public class Duke {
@@ -24,7 +31,7 @@ public class Duke {
         storage.save(tasks);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 }

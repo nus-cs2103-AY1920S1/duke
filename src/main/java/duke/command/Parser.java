@@ -1,6 +1,13 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class Parser {
 

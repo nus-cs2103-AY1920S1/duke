@@ -26,9 +26,9 @@ public class Task {
      */
     public String getStatusIcon() {
         if (isDone) {
-            return "o";
+            return "O";
         } else {
-            return "x";
+            return "X";
         }
     }
 

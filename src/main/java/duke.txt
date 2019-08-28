@@ -1,3 +1,2 @@
-[T][✓] homework
-[T][✓] read book
-[D][✓] return book (by: 02/03/2019 2000)
+[T][o] homework
+[T][x] submit

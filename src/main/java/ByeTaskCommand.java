@@ -13,7 +13,7 @@ public class ByeTaskCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String taskListString = tasks.taskListString();
         ui.printString("Bye. Hope to see you again soon!");
         try {

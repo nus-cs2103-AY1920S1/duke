@@ -32,7 +32,7 @@ public class Task {
      * Get the full task details
      * @return the string of the task details
      */
-    public String getTaskDetails(){
+    public String getTaskDetails() {
         String doneSymbol;
         if (isDone) {
             doneSymbol = "✓";

@@ -8,10 +8,11 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+
     /**
      * showLogo
      */
-    void showWelcome(){
+    void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -23,7 +24,7 @@ public class Ui {
     /**
      * print line divider
      */
-    void showLine(){
+    void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
@@ -31,7 +32,7 @@ public class Ui {
      * read the line command
      * @return the command type in by the user
      */
-    String readCommand(){
+    String readCommand() {
         return scanner.nextLine();
     }
 
@@ -39,13 +40,14 @@ public class Ui {
      * print a string
      * @param string
      */
-    public void printString(String string){
+    public void printString(String string) {
         System.out.println("    " + string);
     }
 
     /**
      * Show error message
      */
+
     void showLoadingError() {
         System.out.println("    Failed to load file");
     }

@@ -5,7 +5,7 @@ public class DeleteTaskCommand extends Command {
      * The delete task command
      * @param index is the index from the list of the item to delete
      */
-    DeleteTaskCommand(int index){
+    DeleteTaskCommand(int index) {
         super(1);
         this.index = index-1;
     }

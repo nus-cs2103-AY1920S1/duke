@@ -17,7 +17,7 @@ public class Storage {
      * @return the buffered file for TaskList usage
      * @throws DukeException
      */
-    BufferedReader load() throws DukeException{
+    BufferedReader load() throws DukeException {
         try {
             fileReader = new FileReader(filePath);
             bufferedReader = new BufferedReader(fileReader);
@@ -32,7 +32,7 @@ public class Storage {
      * @param input string of the text to write in the file
      * @throws DukeException
      */
-    void write(String input) throws DukeException{
+    void write(String input) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(input);

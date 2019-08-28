@@ -11,7 +11,7 @@ public class Deadline extends Task {
      * @param taskName the name of the task
      * @param endDate the endDate of task if the format is dd/MM/yy HHmm will save as Date object
      */
-    Deadline(String taskName, String endDate){
+    Deadline(String taskName, String endDate) {
         super(taskName);
         this.endDate = endDate;
         try {
@@ -32,7 +32,7 @@ public class Deadline extends Task {
      * get the full details of the task
      * @return a string representation of the task
      */
-    public String getTaskDetails(){
+    public String getTaskDetails() {
         String doneSymbol;
         if (isDone()) {
             doneSymbol = "✓";

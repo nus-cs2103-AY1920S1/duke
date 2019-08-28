@@ -7,7 +7,7 @@ public class Todo extends Task {
      * the details for the todo task
      * @return string
      */
-    public String getTaskDetails(){
+    public String getTaskDetails() {
         String doneSymbol;
         if (isDone()) {
             doneSymbol = "✓";

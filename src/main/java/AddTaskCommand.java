@@ -7,7 +7,7 @@ public class AddTaskCommand extends Command {
      * @param taskDetailsString the full input of the user for add task command
      * @throws DukeException
      */
-    AddTaskCommand(String taskDetailsString) throws DukeException{
+    AddTaskCommand(String taskDetailsString) throws DukeException {
         super(0);
         this.taskDetailsString = taskDetailsString;
         getTask();
@@ -17,7 +17,7 @@ public class AddTaskCommand extends Command {
      * Helper function that maps the input to the relevant task
      * @throws DukeException
      */
-    private void getTask() throws DukeException{
+    private void getTask() throws DukeException {
         //Task Details is all the details for the task
         try {
             String taskCat = taskDetailsString.split(" ")[0];
@@ -54,7 +54,7 @@ public class AddTaskCommand extends Command {
      * @param ui
      * @param storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printString("Got it. I've added this task:");
         tasks.addTask(currTask);
         ui.printString("  " + currTask.getTaskDetails());

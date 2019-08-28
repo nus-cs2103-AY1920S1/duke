@@ -10,6 +10,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Tries to load data from file at filePath.
+     *
+     * @throws LoadFileFailDukeException On unable to read from file or unable to parse data
+     */
     public ArrayList<Task> load() throws LoadFileFailDukeException {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -22,6 +27,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Tries to write into file at filePath.
+     *
+     * @param content String to be written into file
+     * @throws WriteFileFailDukeException On unable to write to file
+     */
     public void rewrite(String content) throws WriteFileFailDukeException {
         try {
             FileWriter fw = new FileWriter(filePath, false);

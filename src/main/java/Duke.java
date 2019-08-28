@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<Task>();
         try {
             readFileContents("data/duke.txt", list);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ParseException e) {
             System.out.println("File not found");
         }
 
@@ -85,6 +86,8 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println("☹ OOPS!!! The task done must be a number.");
+            } catch (ParseException e) {
+                e.printStackTrace();
             } finally {
                 line = sc.nextLine();
             }
@@ -105,7 +108,7 @@ public class Duke {
         fw.close();
     }
 
-    private static void readFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException {
+    private static void readFileContents(String filePath, ArrayList<Task> list) throws FileNotFoundException, ParseException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {

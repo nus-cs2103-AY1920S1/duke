@@ -1,9 +1,13 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Deadline extends Task {
     //Deadlines can have (notes)
     private String description;
     private String notesInBrackets;
+    private Date date;
 
     private Deadline() {}
     private Deadline(String descr, boolean completed, int id) throws IncorrectTaskFormatException{
@@ -14,7 +18,7 @@ public class Deadline extends Task {
         setupDetails(descr);
     }
     private void setupDetails(String input) throws IncorrectTaskFormatException {
-        String[] tmp = input.split("/");
+        String[] tmp = input.split("/by");
         //inputs should only have <=1 '/' characters
         this.description = tmp[0];
 
@@ -22,6 +26,7 @@ public class Deadline extends Task {
             throw new IncorrectTaskFormatException("by");
         }
 
+        /*
         Scanner tmp2 = new Scanner(tmp[1]);
         String term = tmp2.next();
         String date = "";
@@ -29,12 +34,21 @@ public class Deadline extends Task {
             date = tmp2.nextLine();
         }
         tmp2.close();
+         */
+        String term = "by";
+        String date = tmp[1];
 
         if (date.equals(""))
             throw new IncorrectTaskFormatException("by");
         this.notesInBrackets = String.format("%s:%s", term, date);
 
         super.description = String.format("%s(%s)", this.description, this.notesInBrackets);
+
+        try {
+            this.date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Deadline create(String descr) throws EmptyDescriptionException, IncorrectTaskFormatException {

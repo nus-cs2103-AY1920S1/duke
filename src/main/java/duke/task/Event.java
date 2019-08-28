@@ -17,7 +17,7 @@ public class Event extends Task {
      */
     public Event(String desc, String when) {
         super(desc);
-        this.when = stringToDateTime(when);
+        this.when = convertStringToDateTime(when);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Event extends Task {
      */
     public Event(String desc, boolean isDone, String when) {
         super(desc, isDone);
-        this.when = stringToDateTime(when);
+        this.when = convertStringToDateTime(when);
     }
 
     public LocalDateTime getWhen() {
@@ -36,7 +36,7 @@ public class Event extends Task {
     }
 
     public void setWhen(String when) {
-        this.when = stringToDateTime(when);
+        this.when = convertStringToDateTime(when);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Event extends Task {
      * @param when The specified event date and time to be converted.
      * @return The LocalDateTime of the specified event date and time.
      */
-    private LocalDateTime stringToDateTime(String when) {
+    private LocalDateTime convertStringToDateTime(String when) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
         return LocalDateTime.parse(when, formatter);
     }

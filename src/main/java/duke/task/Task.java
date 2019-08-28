@@ -43,8 +43,12 @@ public class Task {
         return this.isDone;
     }
 
-    public void setTask(String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     protected String getDoneSymbol() {

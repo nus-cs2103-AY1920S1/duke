@@ -1,12 +1,13 @@
-import java.util.ArrayList;
 import duke.task.Task;
+
+import java.util.ArrayList;
 
 /**
  * Represents and contains the tasks list and operations surrounding the tasks list.
  */
 public class TaskList {
 
-    private static ArrayList<Task> taskList;
+    private static ArrayList<Task> tasks;
 
     /**
      * An empty constructor to create the TaskList object.
@@ -18,15 +19,15 @@ public class TaskList {
      * @param taskList The specified ArrayList of tasks.
      */
     public TaskList(ArrayList<Task> taskList) {
-        TaskList.taskList = taskList;
+        TaskList.tasks = taskList;
     }
 
     public ArrayList<Task> getTaskList() {
-        return taskList;
+        return tasks;
     }
 
-    public void setTaskList(ArrayList<Task> taskList) {
-        taskList = taskList;
+    public void setTaskList(ArrayList<Task> tasks) {
+        TaskList.tasks = tasks;
     }
 
     /**
@@ -34,7 +35,7 @@ public class TaskList {
      * @param task The specified task to be added.
      */
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
         printAddedTask(task);
     }
 
@@ -43,7 +44,7 @@ public class TaskList {
      * @param taskNo The specified number of the task that is to be marked as done.
      */
     public void markAsDone(int taskNo) {
-        Task taskDone = taskList.get(taskNo - 1);
+        Task taskDone = tasks.get(taskNo - 1);
         taskDone.markAsDone();
         System.out.println("\tNice! I've marked this task as done:\n\t\t" + taskDone.toString());
     }
@@ -53,7 +54,7 @@ public class TaskList {
      * @param taskNumber The specified number of the task to be deleted from the tasks list.
      */
     public void deleteTask(int taskNumber) {
-        Task task = taskList.remove(taskNumber - 1);
+        Task task = tasks.remove(taskNumber - 1);
         printDeletedTask(task);
     }
 
@@ -64,7 +65,7 @@ public class TaskList {
     private void printAddedTask(Task task) {
         System.out.println("\tGot it. I've added this task:");
         System.out.println("\t  " + task.toString());
-        System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
+        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
     }
 
     /**
@@ -74,7 +75,7 @@ public class TaskList {
     private void printDeletedTask(Task task) {
         System.out.println("\tNoted. I've removed this task:");
         System.out.println("\t  " + task.toString());
-        System.out.println(String.format("\tNow you have %d tasks in the list.", taskList.size()));
+        System.out.println(String.format("\tNow you have %d tasks in the list.", tasks.size()));
     }
 
     /**
@@ -82,8 +83,8 @@ public class TaskList {
      */
     public void printList() {
         System.out.println("\tHere are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(String.format("\t%d.%s", i + 1, taskList.get(i)));
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(String.format("\t%d.%s", i + 1, tasks.get(i)));
         }
     }
 

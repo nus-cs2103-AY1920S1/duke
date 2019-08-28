@@ -1,3 +1,7 @@
+import duke.exception.InvalidCommandException;
+import duke.exception.MissingDescriptionException;
+import duke.exception.MissingInputException;
+
 import java.io.IOException;
 import java.util.Scanner;
 

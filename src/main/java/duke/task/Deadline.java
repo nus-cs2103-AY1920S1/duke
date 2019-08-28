@@ -17,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String deadline) {
         super(desc);
-        this.deadline = stringToDateTime(deadline);
+        this.deadline = convertStringToDateTime(deadline);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, boolean isDone, String deadline) {
         super(desc, isDone);
-        this.deadline = stringToDateTime(deadline);
+        this.deadline = convertStringToDateTime(deadline);
     }
 
     public LocalDateTime getDeadline() {
@@ -36,7 +36,7 @@ public class Deadline extends Task {
     }
 
     public void setDeadline(String deadline) {
-        this.deadline = stringToDateTime(deadline);
+        this.deadline = convertStringToDateTime(deadline);
     }
 
     /**
@@ -44,7 +44,7 @@ public class Deadline extends Task {
      * @param deadline The specified deadline to be converted.
      * @return The LocalDateTime of the specified deadline.
      */
-    private LocalDateTime stringToDateTime(String deadline) {
+    private LocalDateTime convertStringToDateTime(String deadline) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         return LocalDateTime.parse(deadline, formatter);
     }

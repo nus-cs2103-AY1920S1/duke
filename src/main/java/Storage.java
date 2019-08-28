@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,6 +50,7 @@ public class Storage {
             String[] taskDetails = line.split(",");
             String taskType = taskDetails[0];
             int booleanInt = Integer.parseInt(taskDetails[1]); // 0 or 1
+
             switch (taskType) {
             case "T":
                 Todo todo = new Todo(taskDetails[2], booleanInt == 0);
@@ -78,6 +81,7 @@ public class Storage {
         ArrayList<Task> tasks = taskList.getTaskList();
         String fileContent = "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+
         for (Task task : tasks) {
             if (task instanceof Todo) {
                 fileContent += "T," + (task.isDone() ? 0 : 1) + "," + task.getDesc();
@@ -92,6 +96,7 @@ public class Storage {
             }
             fileContent += System.lineSeparator();
         }
+
         fw.write(fileContent);
         fw.close();
     }

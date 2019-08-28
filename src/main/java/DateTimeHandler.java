@@ -24,7 +24,7 @@ class DateTimeHandler {
     }
 
     /**
-     * Transform dd/MM/yyyy HHmm into an ordinal date format
+     * Transforms dd/MM/yyyy HHmm into an ordinal date format
      * @param s
      * @return
      */
@@ -41,7 +41,7 @@ class DateTimeHandler {
     }
 
     /**
-     * Transform dd/MM/yyyy HHmm-HHmm into an ordinal date format
+     * Transforms dd/MM/yyyy HHmm-HHmm into an ordinal date format
      * @param s
      * @return
      * @throws DukeException

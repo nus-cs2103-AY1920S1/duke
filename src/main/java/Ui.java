@@ -10,7 +10,7 @@ public class Ui {
 
 
     /**
-     * Print a greeting message to welcome the user
+     * Prints a greeting message to welcome the user
      */
     public void showGreeting() {
         String logo = " ____        _        \n"
@@ -25,21 +25,21 @@ public class Ui {
     }
 
     /**
-     * Set the displayText variable to print a goodbye message
+     * Sets the displayText variable to print a goodbye message
      */
     public void showBye() {
         displayText = "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Print an error message when the tasks could not be loaded from the txt file
+     * Prints an error message when the tasks could not be loaded from the txt file
      */
     public void showLoadingError() {
         System.out.println("\\u2639 OOPS!!! I'm sorry, but I could not load your saved task list ");
     }
 
     /**
-     * Read the user input
+     * Reads the user input
      * @return user input
      */
     public String readCommand() {
@@ -47,7 +47,7 @@ public class Ui {
     }
 
     /**
-     * Print any error message
+     * Prints any error message
      * @param message
      */
     public void showError(String message) {
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     /**
-     * Print the saved text and reset the variable
+     * Prints the saved text and reset the variable
      */
     public void showLine() {
         System.out.println(displayText);
@@ -65,7 +65,7 @@ public class Ui {
     }
 
     /**
-     * Set the displayText message that is to be printed when showLine() is called
+     * Sets the displayText message that is to be printed when showLine() is called
      * @param str
      */
     public void setText(String str) {
@@ -73,7 +73,7 @@ public class Ui {
     }
 
     /**
-     * Set the displayText message when a task is saved
+     * Sets the displayText message when a task is saved
      * @param task
      * @param size
      */

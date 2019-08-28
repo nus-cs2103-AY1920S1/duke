@@ -10,6 +10,10 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Parses and handles the output for all the commands
+     * @param command
+     */
     public void parse(String command) {
             String[] inputArr = command.split(" ");
             String userCommand = inputArr[0];

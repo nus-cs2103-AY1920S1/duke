@@ -10,9 +10,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** Formatter used to parse input event date/times. */
-    public static DateTimeFormatter eventDateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    public static DateTimeFormatter eventDateTimeFormat =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     /** Formatter used to prettify due dates. */
-    private static DateTimeFormatter prettifiedDateTimeFormat = DateTimeFormatter.ofPattern("d MMM yy h:mma");
+    private static DateTimeFormatter prettifiedDateTimeFormat =
+            DateTimeFormatter.ofPattern("d MMM yy h:mma");
     /** Start date and time of the event. */
     private LocalDateTime startDateTime;
     /** End date and time of the event. */
@@ -26,7 +28,8 @@ public class Event extends Task {
      * @param endDateTime the end date and time of the event.
      * @throws InvalidTaskException when any of description, start/end date and time are blank.
      */
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) throws InvalidTaskException {
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime)
+            throws InvalidTaskException {
         super(description);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
@@ -37,7 +40,7 @@ public class Event extends Task {
      * Creates an event from the input string array.
      * 
      * @param input string array containing description, isDone, event start and end date/times.
-     * @throws InvalidTaskException when any of description, event start and end date/times are blank.
+     * @throws InvalidTaskException any of description, event start and end date/times are blank.
      */
     public Event(String[] input) throws InvalidTaskException {
         super(input[2]);
@@ -97,7 +100,8 @@ public class Event extends Task {
      * @return a nicely formatted string that displays the status and details of an event.
      */
     public String getInfo() {
-        return "[E]" + super.getInfo() + "(at: " + getPrettyStartDateTime() + "-" + getPrettyEndDateTime() + ")";
+        return "[E]" + super.getInfo() + "(at: " + getPrettyStartDateTime() + "-" +
+                getPrettyEndDateTime() + ")";
     }
 
     /**

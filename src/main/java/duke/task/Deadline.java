@@ -12,7 +12,8 @@ public class Deadline extends Task {
     /** Formatter used to parse input due dates. */
     public static DateTimeFormatter dueDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     /** Formatter used to prettify due dates. */
-    private static DateTimeFormatter prettifiedDateTimeFormat = DateTimeFormatter.ofPattern("d MMM yy h:mma");
+    private static DateTimeFormatter prettifiedDateTimeFormat = 
+            DateTimeFormatter.ofPattern("d MMM yy h:mma");
     /** Date time that a deadline has to be completed by. */
     private LocalDateTime dueDate;
 

@@ -47,7 +47,8 @@ public class Duke {
                 if (userInput.equals("list")) {
                     displayList();
                 } else if (checkIsInputEquals(userInput, "done ")) {
-                    Task task = tasks.get(Integer.parseInt(userInput.substring("done ".length())) - 1);
+                    Task task = tasks
+                            .get(Integer.parseInt(userInput.substring("done ".length())) - 1);
                     task.markAsDone();
                     dukeReply("Successfully marked the following task as done:\n" + task.getInfo());
                 } else if (checkIsInputEquals(userInput, "todo ")) {
@@ -114,14 +115,15 @@ public class Duke {
      * @param task the input task.
      */
     private static void displayAddedTask(Task task) {
-        dukeReply("Got it. I've added this task:\n  " + task.getInfo() + "\nNow you have " + tasks.size() + " tasks in the list.");
+        dukeReply("Got it. I've added this task:\n  " + task.getInfo() + "\nNow you have " +
+                tasks.size() + " tasks in the list.");
     }
 
     /**
      * Adds and subsequently displays a new todo created from the user input.
      * 
      * @param userInput string representing the todo the user intends to create.
-     * @throws InvalidTaskException when there are insufficient or incorrect parameters to initialize a todo.
+     * @throws InvalidTaskException when there are insufficient parameters to initialize a todo.
      */
     private static void addAndDisplayNewTodo(String userInput) throws InvalidTaskException {
         Todo newTodo = new Todo(userInput.substring("todo ".length()));
@@ -134,12 +136,13 @@ public class Duke {
      * Adds and subsequently displays a new deadline created from the user input.
      * 
      * @param userInput string representing the deadline the user intends to create.
-     * @throws InvalidTaskException when there are insufficient or incorrect parameters to initialize a deadline.
+     * @throws InvalidTaskException when there are insufficient parameters to initialize a deadline.
      */
     private static void addAndDisplayNewDeadline(String userInput) throws InvalidTaskException {
         String[] descriptionAndDate = userInput.substring("deadline ".length()).split("/by ", 2);
         String description = descriptionAndDate[0];
-        LocalDateTime dueDate = LocalDateTime.parse(descriptionAndDate[1].trim(), Deadline.dueDateFormat);
+        LocalDateTime dueDate = LocalDateTime
+                .parse(descriptionAndDate[1].trim(), Deadline.dueDateFormat);
         Deadline newDeadline = new Deadline(description, dueDate);
         tasks.add(newDeadline);
         storageHandler.save(tasks);
@@ -150,14 +153,16 @@ public class Duke {
      * Adds and subsequently displays a new event created from the user input.
      * 
      * @param userInput string representing the event the user intends to create.
-     * @throws InvalidTaskException when there are insufficient or incorrect parameters to initialize a event.
+     * @throws InvalidTaskException when there are insufficient parameters to initialize a event.
      */
     private static void addAndDisplayNewEvent(String userInput) throws InvalidTaskException {
         String[] descriptionAndDateTimes = userInput.substring("event ".length()).split("/at ", 2);
         String[] startAndEndDateTimes = descriptionAndDateTimes[1].split("-", 2);
         String description = descriptionAndDateTimes[0];
-        LocalDateTime startDateTime = LocalDateTime.parse(startAndEndDateTimes[0].trim(), Event.eventDateTimeFormat);
-        LocalDateTime endDateTime = LocalDateTime.parse(startAndEndDateTimes[1].trim(), Event.eventDateTimeFormat);
+        LocalDateTime startDateTime = LocalDateTime
+                .parse(startAndEndDateTimes[0].trim(), Event.eventDateTimeFormat);
+        LocalDateTime endDateTime = LocalDateTime
+                .parse(startAndEndDateTimes[1].trim(), Event.eventDateTimeFormat);
 
         Event newEvent = new Event(description, startDateTime, endDateTime);
         tasks.add(newEvent);
@@ -174,7 +179,8 @@ public class Duke {
         Task task = tasks.get(taskIndex);
         tasks.remove(taskIndex);
         storageHandler.save(tasks);
-        dukeReply("I have removed the following task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
+        dukeReply("I have removed the following task:\n  " + task + "\nNow you have " +
+                tasks.size() + " tasks in the list.");
     }
 
     /**

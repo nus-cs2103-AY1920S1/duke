@@ -119,9 +119,12 @@ public class Storage {
             if (task instanceof Todo) {
                 parsedTask = "T|" + (task.getIsDone() ? "1|" : "0|") + task.getDescription();
             } else if (task instanceof Deadline) {
-                parsedTask = "D|" + (task.getIsDone() ? "1|" : "0|") + task.getDescription() + "|" + ((Deadline) task).getStringifiedDueDate();
+                parsedTask = "D|" + (task.getIsDone() ? "1|" : "0|") + task.getDescription() + "|" +
+                        ((Deadline) task).getStringifiedDueDate();
             } else if (task instanceof Event) {
-                parsedTask = "E|" + (task.getIsDone() ? "1|" : "0|") + task.getDescription() + "|" + ((Event) task).getStringifiedStartDateTime() + "|" + ((Event) task).getStringifiedEndDateTime();
+                parsedTask = "E|" + (task.getIsDone() ? "1|" : "0|") + task.getDescription() + "|" +
+                        ((Event) task).getStringifiedStartDateTime() + "|" +
+                                ((Event) task).getStringifiedEndDateTime();
             }
             parsedTasks += "\n" + parsedTask;
         }

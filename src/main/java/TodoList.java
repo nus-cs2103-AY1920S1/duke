@@ -29,11 +29,13 @@ public class TodoList implements Serializable {
 
     @Override
     public String toString() {
-        if (this.list.size() == 0) return "";
+        if (this.list.size() == 0) {
+            return "";
+        }
 
         StringBuilder sb = new StringBuilder();
         ListIterator<Task> listIterator = this.list.listIterator();
-        while(listIterator.hasNext()) {
+        while (listIterator.hasNext()) {
             sb.append(listIterator.nextIndex() + 1);
             sb.append(".");
             sb.append(listIterator.next());

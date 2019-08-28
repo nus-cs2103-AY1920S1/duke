@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
 class Ui {
-    private final String LOGO = " ____        _        \n"
+    private final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String LINE = "______________________________";
+    private final String line = "______________________________";
     private Scanner scanner;
 
     Ui() {
@@ -14,12 +14,12 @@ class Ui {
     }
 
     void welcome() {
-        System.out.println("Hello from\n" + LOGO + "\nWhat can I do for you ?");
+        System.out.println("Hello from\n" + logo + "\nWhat can I do for you ?");
     }
 
-     Command getUserInput() throws DukeException {
+    Command getUserInput() throws DukeException {
         String[] input = this.scanner.nextLine().trim().split(" ");
-         return Parser.parse(input);
+        return Parser.parse(input);
     }
 
     void printResponse(String response) {
@@ -31,6 +31,6 @@ class Ui {
     }
 
     private String encase(String message) {
-        return String.join("\n", new String[]{LINE, message, LINE});
+        return String.join("\n", new String[]{line, message, line});
     }
 }

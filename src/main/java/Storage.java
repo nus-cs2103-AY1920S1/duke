@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileNotFoundException;
 
 class Storage {
     private final String fileName;
@@ -34,27 +39,6 @@ class Storage {
         } catch (ClassNotFoundException e) {
             System.out.println("Classes are not loaded");
         }
-        return  todoList;
+        return todoList;
     }
-
-//    private static Task parse(String[] args) {
-//        Task task = null;
-//        switch (args[0]) {
-//            case "T":
-//                if (Boolean.parseBoolean(args[2])) task.markAsDone();
-//                break;
-//            case "D":
-//                task = new Deadline(args[1], args[2]);
-//                if (Boolean.parseBoolean(args[3])) task.markAsDone();
-//                break;
-//            case "E":
-//                task = new Event(args[1], args[2]);
-//                if (Boolean.parseBoolean(args[3])) task.markAsDone();
-//                break;
-//            default:
-//                System.out.println("Unexpected value: " + args[0]);
-//        }
-//
-//        return  task;
-//    }
 }

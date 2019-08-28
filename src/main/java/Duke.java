@@ -17,7 +17,8 @@ public class Duke {
         String output = ""; String taskType = ""; String description = ""; String extraDescription = ""; int taskNum = -1;
 
         // Hard code the txt file location
-        String filepath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\duke.txt";
+        String filepath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+        //String filepath = "data/tasks.txt";
 
         // Creates the Storage class and reads / creates txt file
         Storage storage = new Storage(filepath);
@@ -36,54 +37,59 @@ public class Duke {
                 String[] words = input.split("\\|") ;
                 Boolean isDone;
 
-                if (words[0].contains("T")){
-                    // Create a Todo class
 
-                    if (words[1].contains("1")){
-                        isDone = true;
-                    } else if (words[1].contains("0")){
-                        isDone = false;
+                if (words[0].length() < 3 ){
+
+                    if (words[0].contains("T")) { // Will avoid header
+                        // Create a Todo class
+
+                        if (words[1].contains("1")) {
+                            isDone = true;
+                        } else if (words[1].contains("0")) {
+                            isDone = false;
+                        }
+
+                        description = words[2];
+
+                        Todo newTodo = new Todo(description);
+                        tasks.add(newTodo);
+
+                    } else if (words[0].contains("E")) {
+                        // Create an Event class
+
+                        if (words[1].contains("1")) {
+                            isDone = true;
+                        } else if (words[1].contains("0")) {
+                            isDone = false;
+                        }
+
+                        description = words[2];
+                        extraDescription = words[3];
+
+                        Event newEvent = new Event(description, extraDescription);
+                        tasks.add(newEvent);
+
+                    } else if (words[0].contains("D")) {
+                        // Create a Deadline class
+
+                        if (words[1].contains("1")) {
+                            isDone = true;
+                        } else if (words[1].contains("0")) {
+                            isDone = false;
+                        }
+
+                        description = words[2];
+                        extraDescription = words[3];
+
+                        Deadline newDeadline = new Deadline(description, extraDescription);
+                        tasks.add(newDeadline);
                     }
-
-                    description = words[2];
-
-                    Todo newTodo = new Todo(description);
-                    tasks.add(newTodo);
-
-                } else if (words[0].contains("E")){
-                    // Create an Event class
-
-                    if (words[1].contains("1")){
-                        isDone = true;
-                    } else if (words[1].contains("0")){
-                        isDone = false;
-                    }
-
-                    description = words[2];
-                    extraDescription = words[3];
-
-                    Event newEvent = new Event(description, extraDescription);
-                    tasks.add(newEvent);
-
-                } else if (words[0].contains("D")){
-                    // Create a Deadline class
-
-                    if (words[1].contains("1")){
-                        isDone = true;
-                    } else if (words[1].contains("0")){
-                        isDone = false;
-                    }
-
-                    description = words[2];
-                    extraDescription = words[3];
-
-                    Deadline newDeadline = new Deadline(description, extraDescription);
-                    tasks.add(newDeadline);
                 }
             }
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
+
 
         // Creates scanner object to handle input
         Scanner in = new Scanner(System.in);
@@ -204,6 +210,7 @@ public class Duke {
                     System.out.print(output);
 
                     // Saves the task arraylist to the txt file
+                    storage.clearFileBeforeSaving();
                     for ( Task task:tasks){
                         storage.writeToFile(task.toSaveString());
                     }

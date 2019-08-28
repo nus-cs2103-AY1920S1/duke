@@ -21,9 +21,8 @@ public class Storage {
         if (f.exists() == false){
 
             try {
-                // Need to create a new empty text file
+                // Need to create a new empty text file as file doesn't exist
                 Files.write(Paths.get(filepath), data.getBytes());
-                System.out.println("File successfully created");
             } catch (IOException e){
                 System.out.println(e.getMessage());
             }
@@ -32,9 +31,17 @@ public class Storage {
 
     public void writeToFile(String text) throws IOException{
         // appends the string to the text file as specified in filepath
-        FileWriter fw = new FileWriter(filepath, false);
+        FileWriter fw = new FileWriter(filepath, true);
         fw.write(text + System.lineSeparator());
         fw.close();
     }
+
+    public void clearFileBeforeSaving() throws IOException{
+        // Overwrites text file
+        FileWriter fw = new FileWriter(filepath, false);
+        fw.write("event type | isDone | description | extra description" + System.lineSeparator());
+        fw.close();
+    }
+
 
 }

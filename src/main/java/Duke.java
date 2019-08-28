@@ -1,11 +1,18 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Represents a Duke Chatbot that is able to keep track of tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Create a new Duke Chatbot with a filepath fot it to access.
+     * @param filePath of the file for Duke to save to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,10 +23,18 @@ public class Duke {
             taskList = new TaskList();
         }
     }
+
+    /**
+     * Main method that starts everything.
+     * @param args String array
+     */
     public static void main(String[] args) {
         new Duke("../../../data/duke.txt").run();
     }
 
+    /**
+     * Runs the Chatbot.
+     */
     public void run() {
         ui.showWelcome();
         System.out.println("Here is the list of tasks from where you've left off: ");

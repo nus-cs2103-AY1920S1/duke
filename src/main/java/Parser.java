@@ -1,12 +1,15 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Reads and processes the commands given to Duke and returns the appropriate action.
+ * Generates either todo, deadline or event tasks.
+ */
 public class Parser {
-
     /**
      * Generates the appropriate task that matches the command.
-     * @param task
-     * @return Task
+     * @param task command to create the task.
+     * @return Task that is generated.
      * @throws DukeException
      */
     public static Task generateNewTask(String task) throws DukeException {
@@ -60,8 +63,8 @@ public class Parser {
     }
 
     /**
-     * Formats the date time from a string.
-     * @param deadline
+     * Formats the date time given as a string.
+     * @param deadline to be formatted.
      * @return String representing the formatted date time.
      */
     private static String formatDateTime(String deadline) {

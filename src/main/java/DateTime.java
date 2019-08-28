@@ -1,12 +1,41 @@
-import java.util.Date;
+/**
+ * Represents Date and Time of an Event or Deadline.
+ */
 
 public class DateTime {
+    /**
+     * Represents day of DateTime.
+     */
     private int day;
+
+    /**
+     * Represents month of DateTime.
+     */
     private int month;
+
+    /**
+     * Represents year of DateTime.
+     */
     private int year;
+
+    /**
+     * Represents hour of DateTime.
+     */
     private int hour;
+
+    /**
+     * Represents minute of DateTime.
+     */
     private int minute;
 
+    /**
+     * Creates DateTime object with input.
+     * @param day Day of DateTime.
+     * @param month Month of DateTime.
+     * @param year Year of DateTime.
+     * @param hour Hour of DateTime.
+     * @param minute Minute of DateTime
+     */
     public DateTime(int day, int month, int year, int hour, int minute) {
         this.day = day;
         this.month = month;
@@ -15,6 +44,11 @@ public class DateTime {
         this.minute = minute;
     }
 
+    /**
+     * Static method that creates a DateTime object with DateTime string.
+     * @param dateTimeString Follows input of DD/MM/YYYY HHMM.
+     * @return DateTime object of specified date and time.
+     */
     public static DateTime create(String dateTimeString) {
         String[] dateTime = dateTimeString.split(" ");
         String[] date = dateTime[0].split("/");
@@ -28,6 +62,10 @@ public class DateTime {
         return new DateTime(day, month, year, hour, minute);
     }
 
+    /**
+     * Returns string representation of DateTime.
+     * @return String representation of DateTime in DDth of MMMM, HH.MM am/pm.
+     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

@@ -17,6 +17,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<String> data = new ArrayList<String>();
         ArrayList<String> done = new ArrayList<String>();
+        ArrayList<String> type = new ArrayList<String>();
+        ArrayList<String> details = new ArrayList<String>();
 
         do{
             String input = sc.nextLine();
@@ -30,7 +32,18 @@ public class Duke {
                 int i;
                 System.out.println("     ____________________________________________________________\n");
                 for(i = 0; i < data.size(); i++){
-                    System.out.println("     " + (i + 1) + ". [" + done.get(i) + "] " + data.get(i));
+                    System.out.print("     "); // + (i + 1) + ". [" + type.get(i) + "][" + done.get(i) + "] " + data.get(i));
+                    System.out.print((i + 1) + ". ");
+                    System.out.print("[" + type.get(i) + "]");
+                    System.out.print("[" + done.get(i) + "]");
+                    System.out.print(" " + data.get(i));
+                    if(type.get(i).equals("D")){
+                        System.out.print(" (by: " + details.get(i) + ")");
+                    } else if(type.get(i).equals("E")){
+                        System.out.print(" (at: " + details.get(i) + ")");
+                    }
+
+                    System.out.println();
                 }
                 System.out.println("     ____________________________________________________________");
 
@@ -49,13 +62,57 @@ public class Duke {
 
 
 
-            } else {
-                System.out.println("     ____________________________________________________________\n" +
-                        "     added: " + input + "\n" +
-                        "     ____________________________________________________________");
-
-                data.add(input);
+            } else if(input.startsWith("todo")) {
+                String[] sp = input.split(" ", 2);
+                data.add(sp[1]);
+                details.add("NULL");
                 done.add("✗");
+                type.add("T");
+
+                System.out.println("     ____________________________________________________________");
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("        [T][✗] " + sp[1]);
+                System.out.println("     Now you have " + data.size() + " tasks in this list");
+                System.out.println("     ____________________________________________________________");
+
+
+
+            } else if(input.startsWith("deadline")) {
+                String[] sp = input.split(" ", 2);
+
+                String[] sp2 = sp[1].split(" /by ", 2);
+
+                data.add(sp2[0]);
+                details.add(sp2[1]);
+                done.add("✗");
+                type.add("D");
+
+                System.out.println("     ____________________________________________________________");
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("        [D][✗] " + sp2[0] + "(by: " + sp2[1] + ")");
+                System.out.println("     Now you have " + data.size() + " tasks in this list");
+                System.out.println("     ____________________________________________________________");
+
+            } else if(input.startsWith("event")) {
+                String[] sp = input.split(" ", 2);
+
+                String[] sp2 = sp[1].split(" /at ", 2);
+
+                data.add(sp2[0]);
+                details.add(sp2[1]);
+                done.add("✗");
+                type.add("E");
+
+                System.out.println("     ____________________________________________________________");
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("        [E][✗] " + sp2[0] + "(at: " + sp2[1] + ")");
+                System.out.println("     Now you have " + data.size() + " tasks in this list");
+                System.out.println("     ____________________________________________________________");
+            } else {
+                    System.out.println("     ____________________________________________________________\n" +
+                            "     INVALID COMMAND\n" +
+                            "     ____________________________________________________________");
+
             }
 
         } while(true);

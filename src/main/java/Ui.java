@@ -124,12 +124,12 @@ public class Ui {
 
         printIndent();
 
-        if (taskList.size() == 2) {
+        if (taskList.size() == 1) {
             System.out.println("Now you have 1 task in your list.");
-        } else if (taskList.size() == 1) {
+        } else if (taskList.isEmpty()) {
             System.out.println("Now you have no tasks in your list.");
         } else {
-            System.out.println("Now you have " + (taskList.size() - 1) + " tasks in your list.");
+            System.out.println("Now you have " + (taskList.size()) + " tasks in your list.");
         }
 
         printLine();

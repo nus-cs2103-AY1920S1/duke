@@ -1,15 +1,17 @@
+import java.util.Date;
+
 public class TodoTask extends Task {
 
     public TodoTask(String description) {
         super(description);
         this.type = "T";
-        this.dateTime = "";
+        this.dateTime = new Date();
     }
 
     public TodoTask(String description, boolean isDone) {
         super(description, isDone);
         this.type = "T";
-        this.dateTime = "";
+        this.dateTime = new Date();
     }
 
     @Override

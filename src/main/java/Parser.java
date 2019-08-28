@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
 
     public static Command parse(String input) throws DukeException {
@@ -44,7 +46,7 @@ public class Parser {
 
             if (arguments[0].equals("todo")) {
                 String description = parseArguments(arguments, 1, arguments.length);
-                return new AddCommand(arguments[0], description, "");
+                return new AddCommand(arguments[0], description, "00/00/0000 0000");
             } else {
                 String description = parseArguments(arguments, 1, index);
                 String dateTime = parseArguments(arguments, index + 1, arguments.length);

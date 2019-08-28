@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat;
+
 public final class Consts {
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -9,4 +11,7 @@ public final class Consts {
     private Consts() {
         throw new AssertionError();
     }
+
+    public static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static final SimpleDateFormat DATE_TIME_OUTPUT_FORMATTER = new SimpleDateFormat("d LLL yyyy h:mm a");
 }

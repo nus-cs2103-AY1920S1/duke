@@ -19,7 +19,7 @@ public class Storage {
         for (Task task : taskList.getList()) {
             StorageItem sI;
             if (task.getType().equals("T")) {
-                sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription(), "");
+                sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription());
             } else {
                 sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription(), task.getDateTime());
             }
@@ -28,7 +28,7 @@ public class Storage {
         fw.close();
     }
 
-    public MyList loadList() throws MissingFileExeception, CorruptedDataException{
+    public MyList loadList() throws MissingFileExeception, CorruptedDataException, WrongDateFormatException{
         MyList taskList = new TaskList();
         File file = new File(directory + filename);
         try {
@@ -44,7 +44,7 @@ public class Storage {
         return taskList;
     }
 
-    private Task dataParser(String data) throws CorruptedDataException {
+    private Task dataParser(String data) throws CorruptedDataException, WrongDateFormatException {
         String[] arguments = data.split(" \\| ");
         boolean isDone;
         if (arguments[1].equals("1")) {

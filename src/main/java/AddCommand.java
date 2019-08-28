@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class AddCommand extends Command {
     private String type;
@@ -12,7 +13,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(MyList taskList, UserInterface ui, Storage storage) throws FileSaveException {
+    public void execute(MyList taskList, UserInterface ui, Storage storage) throws FileSaveException,
+            WrongDateFormatException {
         Task task;
         if (type.equals("todo")) {
             task = new TodoTask(description);

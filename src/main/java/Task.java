@@ -1,8 +1,10 @@
+import java.util.Date;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
-    protected String dateTime;
+    protected Date dateTime;
 
     public Task(String description) {
         this.description = description;
@@ -34,7 +36,7 @@ public abstract class Task {
         return this.isDone;
     }
 
-    public String getDateTime() {
+    public Date getDateTime() {
         return this.dateTime;
     }
 

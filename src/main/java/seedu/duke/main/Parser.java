@@ -8,6 +8,7 @@ public class Parser {
     }
 
     public Command parse(String[] fullCommand) throws DukeException {
+        //Add Find Command
         String command = fullCommand[0];
         String details = fullCommand[1];
         if (command.equals("bye")) {

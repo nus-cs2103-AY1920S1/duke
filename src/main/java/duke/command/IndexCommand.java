@@ -8,6 +8,6 @@ public class IndexCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks);
+        ui.showIndexMsg(tasks);
     }
 }

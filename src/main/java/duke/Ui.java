@@ -27,16 +27,29 @@ public class Ui {
         scanner.close();
     }
 
-    public void showTaskList(TaskList tasks) {
+    public void showIndexMsg(TaskList tasks) {
         if (tasks.isEmpty()) {
             showNoTasksMsg();
         } else {
             System.out.println("Here are the tasks in your list:");
-            ArrayList<Task> all_tasks = tasks.getTasks();
-            for (int i = 1; i <= all_tasks.size(); i++) {
-                Task task = all_tasks.get(i - 1);
-                System.out.printf("%d.%s\n", i, task);
-            }
+        }
+        showTaskList(tasks);
+    }
+
+    public void showFindMsg(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            showNoTasksMsg();
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+        }
+        showTaskList(tasks);
+    }
+
+    public void showTaskList(TaskList tasks) {
+        ArrayList<Task> all_tasks = tasks.getTasks();
+        for (int i = 1; i <= all_tasks.size(); i++) {
+            Task task = all_tasks.get(i - 1);
+            System.out.printf("%d.%s\n", i, task);
         }
     }
 

@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -24,25 +27,37 @@ public class Duke {
 
         while (!input.equals("bye")) {
             String command = getCommand(input);
+            String description;
+            String detail;
+            Date date;
 
             switch (command) {
                 case "list":
                     list();
                     break;
                 case "done":
-                    done(getDescription(input, command));
+                    description = getDescription(input, command);
+                    done(description);
                     break;
                 case "todo":
-                    updateAdd(todo(getDescription(input, command)));
+                    description = getDescription(input, command);
+                    updateAdd(todo(description));
                     break;
                 case "deadline":
-                    updateAdd(deadline(getDescription(input, command), getDetail(input, command)));
+                    description = getDescription(input, command);
+                    detail = getDateAndTime(input, command);
+                    date = understandDateAndTime(detail);
+                    updateAdd(deadline(description, detail, date));
                     break;
                 case "event":
-                    updateAdd(event(getDescription(input, command), getDetail(input, command)));
+                    description = getDescription(input, command);
+                    detail = getDateAndTime(input, command);
+                    date = understandDateAndTime(detail);
+                    updateAdd(event(description, detail, date));
                     break;
                 case "delete":
-                    updateRemove(delete(getDescription(input, command)));
+                    description = getDescription(input, command);
+                    updateRemove(delete(description));
                     break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -88,7 +103,7 @@ public class Duke {
         return action;
     }
 
-    public static String getDetail(String input, String command) throws DukeException {
+    public static String getDateAndTime(String input, String command) throws DukeException {
         String detail = "";
 
         if (input.contains(" ") && input.contains("/")) {
@@ -104,6 +119,19 @@ public class Duke {
         }
 
         return detail;
+    }
+
+    public static Date understandDateAndTime(String input) throws DukeException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        Date date;
+
+        try {
+            date = formatter.parse(input);
+        } catch (ParseException e) {
+            throw new DukeException("OOPS!!! Invalid time and date format.");
+        }
+
+        return date;
     }
 
     public static void updateAdd(Task task) {
@@ -151,15 +179,15 @@ public class Duke {
         return task;
     }
 
-    public static Task deadline(String action, String detail) {
-        Task task = new Deadline(action, detail);
+    public static Task deadline(String action, String detail, Date date) {
+        Task task = new Deadline(action, detail, date);
         taskList.add(task);
 
         return task;
     }
 
-    public static Task event(String action, String detail) {
-        Task task = new Event(action, detail);
+    public static Task event(String action, String detail, Date date) {
+        Task task = new Event(action, detail, date);
         taskList.add(task);
 
         return task;

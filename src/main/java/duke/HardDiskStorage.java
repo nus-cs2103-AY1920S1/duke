@@ -24,7 +24,7 @@ public class HardDiskStorage implements Storage {
     private static File dataFile;
 
     /**
-     * Creates a Storage object that reads and writes from the given file.
+     * Creates a Storage object that can read and write from a hard disk file.
      *
      * @param filePath  Relative path to data file
      */

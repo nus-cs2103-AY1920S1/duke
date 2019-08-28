@@ -1,0 +1,60 @@
+import java.text.ParseException;
+
+public class Parser {
+    TaskList taskList;
+    Ui ui;
+    String line;
+    public Parser(TaskList taskList, Ui ui) {
+        this.taskList = taskList;
+        this.ui = ui;
+    }
+
+    public void process(String line) throws DukeException, ParseException {
+        Integer num; //number in list which is done
+        Task currTask; //refers to current task in list
+        String currEvent;
+        String desc = ""; //current task being added
+        String time = ""; //current time of current task being added
+        String[] words = line.split(" ", 2);
+        currEvent = words[0];
+        if (line.equals("list")) {
+            ui.printList(taskList.list);
+        } else if (words[0].equals("done")) {
+            num = Integer.valueOf(words[1]);
+            currTask = taskList.list.get(num - 1);
+            currTask.setStatusIcon(true);
+            ui.printDone(currTask);
+        } else if (currEvent.equals("todo")) {
+            if (words.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            desc = words[1];
+            currTask = new ToDos(desc);
+            taskList.add(currTask);
+            ui.printAdd(currTask, taskList);
+        } else if (currEvent.equals("deadline")) {
+            if (words.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+            desc = words[1].split(" /by ", 2)[0];
+            time = words[1].split(" /by ", 2)[1];
+            currTask = new Deadline(desc, time);
+            taskList.add(currTask);
+            ui.printAdd(currTask, taskList);
+        } else if (currEvent.equals("event")) {
+            if (words.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            }
+            desc = words[1].split(" /at ", 2)[0];
+            time = words[1].split(" /at ", 2)[1];
+            currTask = new Event(desc, time);
+            taskList.add(currTask);
+            ui.printAdd(currTask, taskList);
+        } else if (words[0].equals("delete")) {
+            currTask = taskList.delete(words[1]);
+            ui.printDelete(currTask, taskList);
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+}

@@ -1,18 +1,33 @@
+/**
+ * TaskList class to store list of tasks
+ */
+
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> taskList;
     private int count;
 
+    /**
+     * Constructor for TaskList object
+     * @param taskList List of tasks
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
         count = taskList.size();
     }
 
+    /**
+     * Returns the tasklist
+     * @return list of tasks
+     */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * Displays the tasklist
+     */
     public void displayList() {
         System.out.println("    Here are the tasks in your list:");
         for (Task t : taskList) {
@@ -20,6 +35,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task item as complete in the list
+     * @param index Index of task in the list
+     * @param ui Ui Object to draw ui components
+     * @throws DukeException if invalid task number is passed to this method
+     */
     public void markItemComplete(int index, Ui ui) throws DukeException {
         if (index <= 0 || index > count) {
             throw new DukeException("Invalid task number!");
@@ -33,6 +54,12 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * Deletes a task item from the list
+     * @param index Index of task in the list
+     * @param ui Ui object to draw ui components
+     * @throws DukeException if invalid task number is passed to this method
+     */
     public void deleteItem(int index, Ui ui) throws DukeException {
 
         if (index <= 0 || index > count) {
@@ -54,18 +81,36 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * Creates a new task from a given input
+     * @param inputParts An array of <code>String</code> split into type of task, name of task and date (if required)
+     * @param ui Ui Object to draw ui components
+     * @throws DukeException if command is invalid
+     */
     public void registerNewTask(String[] inputParts, Ui ui) throws DukeException {
         checkCommandValidity(inputParts[0]);
         Task t = addToList(inputParts[1], inputParts[0]);
         echo(t, ui);
     }
 
+    /**
+     * Checks if a given command is valid
+     * @param type Type of command
+     * @throws DukeException if command is invalid
+     */
     static void checkCommandValidity(String type) throws DukeException {
         if (!type.equals("todo") && !type.equals("deadline") && !type.equals("event")) {
             throw new DukeException("I don't know what that means :(");
         }
     }
 
+    /**
+     * Adds a task item to the tasklist
+     * @param s name of task
+     * @param type type of task
+     * @return Task object to be appended to the tasklist
+     * @throws DukeException if description of task is empty or if format is incorrect
+     */
     public Task addToList(String s, String type) throws DukeException {
         String trimmed = s.replaceAll("^\\s+", "");
         if (trimmed.equals("")) {
@@ -106,6 +151,11 @@ public class TaskList {
         return taskList.get(count - 1);
     }
 
+    /**
+     * Creates fixed date/time format from given string
+     * @param s string to be interpreted as date/time formate
+     * @return string in the fixed format
+     */
     static String createDateAndTime(String s) {
         String[] parts = s.split("\\s+");
         for (int i = 0; i < parts.length; i++) {
@@ -122,10 +172,20 @@ public class TaskList {
         return result.substring(1);
     }
 
+    /**
+     * Checks if the input time is in 24 hour format
+     * @param time input time
+     * @return true if time is 24 hour format, false otherwise
+     */
     static boolean is24hrFormat(String time) {
         return isInteger(time) && time.length() == 4 && Integer.parseInt(time) < 2400;
     }
 
+    /**
+     * Creates a fixed time format
+     * @param time input time
+     * @return fixed time format as a <code>String</code>
+     */
     static String createTime(String time) {
         int hour = Integer.parseInt(time.substring(0, 2));
         String min = time.substring(2, 4);
@@ -135,7 +195,11 @@ public class TaskList {
                 : ((hour == 0) ? 12 : hour);
         return hour + ":" + min + timeOfDay;
     }
-
+    /**
+     * Creates a fixed date format
+     * @param date input time
+     * @return fixed date format as a <code>String</code>
+     */
     static String createDate(String date) {
         String[] parts = date.split("/");
         String[] month = {
@@ -177,6 +241,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Checks if a given string is an integer
+     * @param n input string
+     * @return true if given string is an integer, false otherwise
+     */
     static boolean isInteger(String n) {
         try {
             Integer.parseInt(n);
@@ -186,6 +255,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Echos the task in a fixed format
+     * @param t Task object
+     * @param ui Ui Object to draw ui components
+     */
     public void echo(Task t, Ui ui) {
         ui.drawLine();
         System.out.println("     Got it. I've added this task:");

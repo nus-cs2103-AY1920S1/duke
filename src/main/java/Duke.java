@@ -1,3 +1,7 @@
+/**
+ * Duke Class
+ */
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,10 +12,18 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Main method to run Duke
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("./saved/taskList_history.txt").run();
     }
 
+    /**
+     * Constructor for Duke Object
+     * @param path Storage path to save/read history
+     */
     public Duke(String path) {
         storage = new Storage(path);
         ui = new Ui();
@@ -27,6 +39,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Run method for Duke Object
+     */
     private void run() {
         ui.welcomeMessage();
         Scanner sc = new Scanner(System.in);

@@ -11,13 +11,40 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This class allows the <code>Duke</code> application to understand the user's input
+ * and executes the necessary checks to ensure that tasks are added neatly in
+ * the task list.
+ *
+ * @author Clarence Koh
+ * @version 1.0
+ * @since 29th August 2019
+ */
 public class Parser {
+
+    /**
+     * This method checks the to-do
+     * tasks to ensure that the user input
+     * includes the task to be added into the task list.
+     * @param tasks The user's input string in separated into an array.
+     * @throws DukeException If there is a problem with data processing, loading or saving.
+     */
     private static void todoCheck(String[] tasks) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
+    /**
+     * This method checks the <code>deadline</code>
+     * tasks to ensure that the user input includes the task
+     * to be added into the task list and also the date and time
+     * of the task.
+     *
+     * @param tasks The user's input string in separated into an array.
+     * @param userInput The user's input string.
+     * @throws DukeException If there is a problem with data processing, loading or saving.
+     */
     private static void deadlineCheck(String[] tasks, String userInput) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -29,6 +56,16 @@ public class Parser {
         }
     }
 
+    /**
+     * This method checks the <code>event</code>
+     * tasks to ensure that the user input includes the task
+     * to be added into the task list and the date and time
+     * of the event.
+     *
+     * @param tasks The user's input string in separated into an array.
+     * @param userInput The user's input string.
+     * @throws DukeException If there is a problem with data processing, loading or saving.
+     */
     private static void eventCheck(String[] tasks, String userInput) throws DukeException {
         if (tasks.length <= 1) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
@@ -40,6 +77,13 @@ public class Parser {
         }
     }
 
+    /**
+     * This method when called reformats the date input by the user to a Date object.
+     *
+     * @param date The date string to be reformatted.
+     * @return The <code>Date</code> in a formatted manner.
+     * @throws DukeException If there is a problem with data processing, loading or saving.
+     */
     public static Date dateFormatter(String date) throws DukeException {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -50,6 +94,15 @@ public class Parser {
         }
     }
 
+    /**
+     * This method when called will result in the returning of a <code>Command</code>
+     * which can be executed to result in either a deletion of the task, an addition of
+     * a task or to mark a task as done from the task list.
+     *
+     * @param command The user's input string.
+     * @return A class of command depending on the type of user input.
+     * @throws DukeException If there is a problem with data processing, loading or saving.
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();

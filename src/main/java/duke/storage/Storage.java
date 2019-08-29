@@ -26,7 +26,7 @@ public class Storage {
     public Storage(final String fileName) {
         Path dataDir = getDataDir();
         this.file = dataDir.resolve(fileName).toFile();
-        if (!this.file.exists()) {
+        if (!dataDir.toFile().exists()) {
             dataDir.toFile().mkdirs();
         }
     }

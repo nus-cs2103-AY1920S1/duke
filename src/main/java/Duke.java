@@ -1,6 +1,9 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke {
     static final String logo = " ____        _        \n"
@@ -8,6 +11,8 @@ public class Duke {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+
+    static final String pathToHardDisk = "../../../data/duke.txt";
 
     private static void greet() {
         TaskManager.separator();
@@ -93,7 +98,7 @@ public class Duke {
 
     private static void saveToHardDisk(TaskManager taskManager) {
         try {
-            FileWriter writer = new FileWriter("../../../data/duke.txt");
+            FileWriter writer = new FileWriter(pathToHardDisk);
             writer.write(taskManager.printTasksForHardDisk());
             writer.close();
         } catch (IOException ex) {
@@ -107,7 +112,45 @@ public class Duke {
      * @return an initialized Task Manager
      */
     private static TaskManager initializeTaskManager() {
-        return new TaskManager();
+        try {
+            ArrayList<Task> tasks = new ArrayList<Task>();
+
+            File file = new File(pathToHardDisk);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] datas = line.split(" \\| ");
+
+                Task task;
+                switch (datas[0]) {
+                case "E":
+                    task = new Event(datas[2], datas[3]);
+                    break;
+                case "D":
+                    task = new Deadline(datas[2], datas[3]);
+                    break;
+                case "T":
+                    task = new Todo(datas[2]);
+                    break;
+                default:
+                    throw new DukeException("Unrecognized tasks");
+                }
+
+                if (datas[1].equals("1")) {
+                    task.markAsDone();
+                }
+
+                tasks.add(task);
+            }
+            scanner.close();
+
+            return new TaskManager(tasks);
+        } catch (FileNotFoundException ex) {
+            return new TaskManager();
+        } catch (Exception ex) {
+            System.out.println("Failed to parse duke.txt");
+            return new TaskManager();
+        }
     }
 
     public static void main(String[] args) {

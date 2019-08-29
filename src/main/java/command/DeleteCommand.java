@@ -23,4 +23,9 @@ public class DeleteCommand extends Command {
                 "Now you have " + tasks.size() + " tasks in the list.");
         storage.save(tasks);
     }
+
+    @Override
+    public String toString(){
+        return "Delete " + this.taskID;
+    }
 }

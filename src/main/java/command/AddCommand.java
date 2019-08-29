@@ -50,4 +50,9 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    @Override
+    public String toString() {
+        return "Add " + this.taskType + ": " + this.taskName + " " + this.dateTime.toString();
+    }
+
 }

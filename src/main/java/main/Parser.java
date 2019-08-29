@@ -47,7 +47,7 @@ public class Parser {
         case "event":
         case "deadline":
             try {
-                return new AddCommand(arr[0], arr[1]);
+                return new AddCommand(cmd, arr[1]);
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("The description of the command '" + cmd + "' cannot be empty!");
             }

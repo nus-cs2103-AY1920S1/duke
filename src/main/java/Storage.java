@@ -13,24 +13,48 @@ import duke.task.Task;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Deals with reading and writing tasks to an external file.
+ */
 public class Storage {
 
     private String filePath;
 
-    public Storage(String filePath) throws FileNotFoundException, IOException {
+    /**
+     * Constructs a storage object.
+     *
+     * @param filePath Filepath of the external list of tasks.
+     */
+    public Storage(String filePath) {
         setFilePath(filePath);
     }
 
-    public void setFilePath(String filePath) throws FileNotFoundException, IOException {
+    /**
+     * Sets the filepath to the input path.
+     * @param filePath The path to be used.
+     */
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes the input string to the external file.
+     *
+     * @param content The list of tasks to be written.
+     * @throws IOException If the file doesn't exist.
+     */
     public void writeTasks(String content) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(content);
         fw.close();
     }
 
+    /**
+     * Loads the list of tasks from the external file.
+     *
+     * @return An ArrayList of tasks.
+     * @throws FileNotFoundException If the filepath is incorrect.
+     */
     public ArrayList<Task> loadTasks() throws FileNotFoundException {
         File f = new File(filePath);
         if (!f.exists()) {
@@ -50,6 +74,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Parses the task description from the external file and creates a corresponding task to represent it.
+     *
+     * @param task The task description in the external file.
+     * @return Corresponding task.
+     * @throws DukeException If the task description is incorrect.
+     */
     public Task parseStoredTask(String task) throws DukeException {
         String[] tokens = task.substring(3).split("\\s\\|\\s");
         if (tokens[0].equals("D")) {

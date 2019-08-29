@@ -200,9 +200,9 @@ public class Parser {
                     System.out.print(LINE);
                 }
                 ui.getUserInput(this);
-            } catch (EmptyDescriptionException e) {
+            } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                 System.out.print(LINE);
-                System.out.println("     ☹ OOPS!!! " + e);
+                System.out.println("     ☹ OOPS!!! The description cannot be empty.");
                 System.out.print(LINE);
                 ui.getUserInput(this);
             }

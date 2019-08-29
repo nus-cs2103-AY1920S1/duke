@@ -10,6 +10,9 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TaskFileStorage {
 
@@ -19,15 +22,16 @@ public class TaskFileStorage {
         this.file = new File(path);
 
         if (!file.exists()) {
-            write(new Task[0]);
+            write(new ArrayList<>());
         }
     }
 
-    public Task[] read() throws DukeIOException {
+    public List<Task> read() throws DukeIOException {
         try (FileInputStream fileInputStream = new FileInputStream(file);
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
 
-            return (Task[]) objectInputStream.readObject();
+            Task[] tasks =  (Task[]) objectInputStream.readObject();
+            return new ArrayList<>(Arrays.asList(tasks));
 
         } catch (FileNotFoundException e) {
             throw new DukeIOException("☹ OOPS!!! Invalid file file provided.");
@@ -37,11 +41,11 @@ public class TaskFileStorage {
         }
     }
 
-    public void write(Task[] tasks) throws DukeIOException {
+    public void write(List<Task> tasks) throws DukeIOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(file);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
 
-            objectOutputStream.writeObject(tasks);
+            objectOutputStream.writeObject(tasks.toArray(new Task[0]));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -4,8 +4,6 @@ import weijie.duke.db.TaskFileStorage;
 import weijie.duke.exceptions.DukeIOException;
 import weijie.duke.models.Task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TaskRepo implements IRepository<Task> {
@@ -15,7 +13,7 @@ public class TaskRepo implements IRepository<Task> {
 
     public TaskRepo(TaskFileStorage storage) throws DukeIOException {
         this.storage = storage;
-        this.tasks = new ArrayList<>(Arrays.asList(storage.read()));
+        this.tasks = storage.read();
     }
 
     @Override
@@ -36,13 +34,13 @@ public class TaskRepo implements IRepository<Task> {
     @Override
     public void create(Task entity) throws DukeIOException {
         tasks.add(entity);
-        storage.write(tasks.toArray(new Task[0]));
+        storage.write(tasks);
     }
 
     @Override
     public void update(int id, Task entity) throws DukeIOException {
         tasks.set(id, entity);
-        storage.write(tasks.toArray(new Task[0]));
+        storage.write(tasks);
     }
 
     @Override
